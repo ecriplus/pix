@@ -1,22 +1,28 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as campaignRepository from '../../../campaign/infrastructure/repositories/campaign-repository.js';
 import { CampaignAssessmentParticipation } from '../../domain/models/CampaignAssessmentParticipation.js';
 
-const getByCampaignIdAndCampaignParticipationId = async function ({ campaignId, campaignParticipationId }) {
+const getByCampaignIdAndCampaignParticipationId = async function ({
+  campaignId,
+  campaignParticipationId,
+  shouldBuildProgression = true,
+}) {
   const result = await _fetchCampaignAssessmentAttributesFromCampaignParticipation(campaignId, campaignParticipationId);
 
-  return _buildCampaignAssessmentParticipation(result);
+  return _buildCampaignAssessmentParticipation(result, shouldBuildProgression);
 };
 
 export { getByCampaignIdAndCampaignParticipationId };
 
 async function _fetchCampaignAssessmentAttributesFromCampaignParticipation(campaignId, campaignParticipationId) {
-  const [campaignAssessmentParticipation] = await knex
+  const knexConn = DomainTransaction.getConnection();
+  const [campaignAssessmentParticipation] = await knexConn
     .with('campaignAssessmentParticipation', (qb) => {
       qb.select([
         'campaign-participations.userId',
@@ -43,6 +49,7 @@ async function _fetchCampaignAssessmentAttributesFromCampaignParticipation(campa
         )
         .where({
           'campaign-participations.id': campaignParticipationId,
+          'campaign-participations.campaignId': campaignId,
           'campaign-participations.deletedAt': null,
         });
     })
@@ -63,8 +70,15 @@ function _assessmentRankByCreationDate() {
   ]);
 }
 
-async function _buildCampaignAssessmentParticipation(result) {
-  const { targetedSkillsCount, testedSkillsCount } = await _setSkillsCount(result);
+async function _buildCampaignAssessmentParticipation(result, shouldBuildProgression) {
+  let targetedSkillsCount,
+    testedSkillsCount = null;
+
+  if (shouldBuildProgression) {
+    const userSkills = await _setSkillsCount(result);
+    targetedSkillsCount = userSkills.targetedSkillsCount;
+    testedSkillsCount = userSkills.testedSkillsCount;
+  }
 
   return new CampaignAssessmentParticipation({
     ...result,

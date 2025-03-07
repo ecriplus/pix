@@ -27,11 +27,13 @@ const getByCode = async function (code) {
 };
 
 const get = async function (id) {
-  const campaign = await knex('campaigns').where({ id }).first();
+  const knexConn = DomainTransaction.getConnection();
+
+  const campaign = await knexConn('campaigns').where({ id }).first();
   if (!campaign) {
     throw new NotFoundError(`Not found campaign for ID ${id}`);
   }
-  const featureExternalId = await knex('campaign-features')
+  const featureExternalId = await knexConn('campaign-features')
     .join('features', 'features.id', 'featureId')
     .where({
       campaignId: id,
@@ -49,7 +51,9 @@ const get = async function (id) {
 };
 
 const checkIfUserOrganizationHasAccessToCampaign = async function (campaignId, userId) {
-  const campaign = await knex('campaigns')
+  const knexConn = DomainTransaction.getConnection();
+
+  const campaign = await knexConn('campaigns')
     .innerJoin('memberships', 'memberships.organizationId', 'campaigns.organizationId')
     .innerJoin('organizations', 'organizations.id', 'campaigns.organizationId')
     .where({ 'campaigns.id': campaignId, 'memberships.userId': userId, 'memberships.disabledAt': null })

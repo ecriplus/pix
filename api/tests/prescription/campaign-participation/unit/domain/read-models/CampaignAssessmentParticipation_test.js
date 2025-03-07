@@ -16,6 +16,17 @@ describe('Unit | Domain | Models | CampaignAssessmentParticipation', function ()
 
           expect(campaignAssessmentParticipation.progression).equal(0);
         });
+
+        it('should not compute a progression given no targetedSkillsCount', function () {
+          const testedSkillsCount = 0;
+          const campaignAssessmentParticipation = new CampaignAssessmentParticipation({
+            state: Assessment.states.STARTED,
+            testedSkillsCount,
+            targetedSkillsCount: null,
+          });
+
+          expect(campaignAssessmentParticipation.progression).equal(null);
+        });
       });
 
       context('when testedSkillsCount != 0', function () {

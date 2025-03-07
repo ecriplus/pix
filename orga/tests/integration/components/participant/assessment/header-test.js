@@ -158,16 +158,30 @@ module('Integration | Component | Participant::Assessment::Header', function (ho
     assert.ok(screen.getByText('01 janv. 2020'));
   });
 
-  test('it displays campaign participation progression', async function (assert) {
-    this.participation = { progression: 0.75 };
-    this.campaign = {};
+  module('progression', function () {
+    test('it displays campaign participation progression on type ASSESSMENT', async function (assert) {
+      this.participation = { progression: 0.75 };
+      this.campaign = { isTypeExam: false, isTypeAssessment: true };
 
-    const screen = await render(
-      hbs`<Participant::Assessment::Header @participation={{this.participation}} @campaign={{this.campaign}} />`,
-    );
+      const screen = await render(
+        hbs`<Participant::Assessment::Header @participation={{this.participation}} @campaign={{this.campaign}} />`,
+      );
 
-    assert.ok(screen.getByText(t('pages.assessment-individual-results.progression')));
-    assert.ok(screen.getByText('75 %'));
+      assert.ok(screen.getByText(t('pages.assessment-individual-results.progression')));
+      assert.ok(screen.getByText('75 %'));
+    });
+
+    test('it hide campaign participation progression on type EXAM', async function (assert) {
+      this.participation = { progression: 0.75 };
+      this.campaign = { isTypeExam: true, isTypeAssessment: false };
+
+      const screen = await render(
+        hbs`<Participant::Assessment::Header @participation={{this.participation}} @campaign={{this.campaign}} />`,
+      );
+
+      assert.notOk(screen.queryByText(t('pages.assessment-individual-results.progression')));
+      assert.notOk(screen.queryByText('75 %'));
+    });
   });
 
   module('is shared', function () {

@@ -187,6 +187,31 @@ describe('Integration | Repository | Campaign Assessment Participation', functio
 
           expect(campaignAssessmentParticipation.progression).to.equal(0.5);
         });
+
+        it('not computes the progression given false to shouldBuildProgression params', async function () {
+          //given
+          databaseBuilder.factory.buildAssessment({
+            userId: campaignParticipation.userId,
+            campaignParticipationId,
+            state: Assessment.states.STARTED,
+          });
+          databaseBuilder.factory.buildKnowledgeElement({
+            status: KnowledgeElement.StatusType.VALIDATED,
+            userId: campaignParticipation.userId,
+            skillId: skill1.id,
+            createdAt: new Date('2020-01-01'),
+          });
+          await databaseBuilder.commit();
+          // then
+          const campaignAssessmentParticipation =
+            await campaignAssessmentParticipationRepository.getByCampaignIdAndCampaignParticipationId({
+              campaignId,
+              campaignParticipationId,
+              shouldBuildProgression: false,
+            });
+
+          expect(campaignAssessmentParticipation.progression).to.equal(null);
+        });
       });
     });
 
