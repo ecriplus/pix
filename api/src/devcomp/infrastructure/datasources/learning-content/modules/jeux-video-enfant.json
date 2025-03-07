@@ -70,7 +70,7 @@
             "type": "image",
             "url": "https://images.pix.fr/modulix/ppn3_dragonkingdom.png",
             "alt": "",
-            "alternativeText": "<p>Jeu Craft Dragon’s kingdom</p><ul><li>Epix</li><li>Tag «&nbsp;Consoles&nbsp;»</li><li>Option sélectionnée «&nbsp;Gratuit&nbsp;»<br></li><li>Ajouter au panier</li><li>PEGI 12, peur</li><li>Abonnement requis pour le jeu en ligne</li><li>Achats intra jeux facultatifs</li><li>De 1 à 4 joueurs</li><li>Jeu en ligne facultatif</li></ul>"
+            "alternativeText": "<p>Jeu Craft Dragon’s kingdom</p><ul><li>Epix</li><li>Tag «&nbsp;Consoles&nbsp;»</li><li>€ 18,99<br></li><li>Bouton Obtenir</li><li>PEGI 12, peur</li><li>Abonnement requis pour le jeu en ligne</li><li>Achats intra jeux facultatifs</li><li>Interaction entre les illustrateurs</li><li>Jeu en ligne facultatif</li></ul>"
           }
         },
         {
@@ -176,7 +176,7 @@
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/ppn3_pixelworld.png",
                   "alt": "",
-                  "alternativeText": "<p>Fiche du jeu vidéo Pixel world :</p><ul><li>Pixel world</li><li>Pixel industry</li><li>Action et aventure, Famille et enfants</li><li>3 étoilles, 21,5k</li><li>Bouton Obtenir</li><li>Pictogramme «&nbsp;! &nbsp;»</li></ul>"
+                  "alternativeText": "<p>Fiche du jeu vidéo Pixel world :</p><ul><li>Pixel world</li><li>Pixel industry</li><li>Action et aventure, Famille et enfants</li><li>4,2 étoiles, 23,5k avis</li><li>Bouton Obtenir</li><li>Pictogramme «&nbsp;Pegi !&nbsp;»</li></ul>"
                 },
                 {
                   "id": "10dfb9e3-02de-4f3f-b7d1-aae0d1991f9e",
@@ -222,7 +222,7 @@
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/ppn3_jeu_achats.png",
                   "alt": "",
-                  "alternativeText": ""
+                  "alternativeText": "Capture d'écran d'un jeu vidéo sur smartphone"
                 },
                 {
                   "id": "44c670d6-fdfc-4cdd-8a8b-2304b8fe019b",
@@ -243,7 +243,7 @@
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/ppn3_achats_integres_mentions.png",
                   "alt": "",
-                  "alternativeText": "<p>Pictogramme PEGI Achats intégrés</p>"
+                  "alternativeText": "<p>Images du Pictogramme PEGI Achats intégrés et des différentes mentions : « achats intra-jeu », « achats intra-jeu facultatifs », « inclut des achats intégrés », « achats intra-jeu (y compris divers articles », « achats numériques ».</p>"
                 }
               ]
             },
@@ -295,7 +295,7 @@
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/ppn3_lornitteclan.png",
                   "alt": "",
-                  "alternativeText": "<p>Jeu Lorttnite Clan :&nbsp;</p><ul><li>4 étoiles</li><li>Communauté compétitive</li><li>Commandes rapides à maîtriser</li><li>Pegi 12</li><li>Violence, achats dans le jeu (inclut des éléments aléatoires)</li><li>Jeu de base</li><li>Gratuit</li><li>Boutons : obtenir, ajouter au panier</li></ul>"
+                  "alternativeText": "<p>Jeu Lorttnite Clan :&nbsp;</p><ul><li>4,1 étoiles</li><li>Communauté compétitive</li><li>Commandes rapides à maîtriser</li><li>Pegi 12</li><li>Violence, achats dans le jeu (inclut des éléments aléatoires)</li><li>Jeu de base</li><li>Gratuit</li><li>Boutons : obtenir, ajouter au panier, ajouter à la liste de souhaits</li></ul>"
                 },
                 {
                   "id": "6781d13a-91fb-45b5-ba52-311e290b47a1",
@@ -329,7 +329,7 @@
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/ppn3_boitier_cake.png",
                   "alt": "",
-                  "alternativeText": ""
+                  "alternativeText": "Dos de la boîte d'un jeu vidéo :&nbsp;</p><ul><liMultijoueur local : jusqu'à 8 joueurs</li><li>Jeu en ligne : jusqu'à 12 joueurs</li><li>Attention, chez certaines personnes, l'utilisation de ce jeu nécessite des précautions d'emploi particulières qui sont détaillées dans la notice jointe.</li><li>Online : Le jeu en ligne nécessite un abonnement payant au service Online.</li><li>Ce logiciel peut comporter du placement de produit et de la publicité</li><li>Pictogramme Pegi 3</li><li>Pictogramme Achats intégrés</li><li>Compatible manette pro</li><li>Compatible volant</li><li>Ne jetez pas cette carte de jeu à la poubelle</li></ul> "
                 },
                 {
                   "id": "915d599d-fb2d-4db9-93d8-012943d50001",
