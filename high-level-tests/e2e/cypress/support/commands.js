@@ -71,6 +71,7 @@ Cypress.Commands.add('loginExternalPlatformForTheSecondTime', () => {
     {
       user_id: 1,
       source: 'external',
+      aud: Cypress.env('APP_URL'),
     },
     Cypress.env('AUTH_SECRET'),
     { expiresIn: '1h' }
@@ -81,7 +82,10 @@ Cypress.Commands.add('loginExternalPlatformForTheSecondTime', () => {
 
 Cypress.Commands.add('loginWithAlmostExpiredToken', () => {
   cy.intercept('/api/users/me').as('getCurrentUser');
-  const token = jsonwebtoken.sign({ user_id: 1 }, Cypress.env('AUTH_SECRET'), {
+  const token = jsonwebtoken.sign({
+    user_id: 1,
+    aud: Cypress.env('APP_URL'),
+  }, Cypress.env('AUTH_SECRET'), {
     expiresIn: '4s',
   });
   cy.visitMonPix(`/connexion/gar#${token}`);
