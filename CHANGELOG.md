@@ -1,5 +1,27 @@
 # Pix Changelog
 
+## v5.59.0 (07/03/2025)
+
+
+### :rocket: Amélioration
+- [#11567](https://github.com/1024pix/pix/pull/11567) [FEATURE] Enregistrer le début d'un passage en tant qu'événement (PIX-16812).
+- [#11578](https://github.com/1024pix/pix/pull/11578) [FEATURE] Cacher le bouton "Je retente" lors d'une campagne d'interro (PIX-16496).
+- [#11562](https://github.com/1024pix/pix/pull/11562) [FEATURE] Pouvoir visualiser les résultats d'une campagne d'interro côté PixOrga, à la manière d'une campagne d'évaluation pour le moment (PIX-16829).
+- [#11569](https://github.com/1024pix/pix/pull/11569) [FEATURE] Utiliser le même style pour l'intitulé Réponse correcte et Réponse incorrecte (PIX-16840).
+
+### :building_construction: Tech
+- [#11579](https://github.com/1024pix/pix/pull/11579) [TECH] Améliorer la récupération du timestamp d'une requête (PIX-16871).
+- [#11560](https://github.com/1024pix/pix/pull/11560) [TECH] Permettre de hasher le contenu d'un module (PIX-16810).
+- [#11582](https://github.com/1024pix/pix/pull/11582) [TECH] Déplacer et factoriser de la logique de calcul de certains attributs de l'assessment dans son modèle (PIX-16885).
+- [#11573](https://github.com/1024pix/pix/pull/11573) [TECH] Separer les seeds SCO et GP pour Parcoursup (PIX-16842).
+- [#11556](https://github.com/1024pix/pix/pull/11556) [TECH] :broom: Utilisations de valeurs déjà présente dans le code pour le calcul du niveau de maille (PIX-16718).
+- [#11572](https://github.com/1024pix/pix/pull/11572) [TECH] Déplacer et factoriser le code dédié au calcul du levelup après avoir répondu positivement à une épreuve (PIX-16847).
+
+### :bug: Correction
+- [#11589](https://github.com/1024pix/pix/pull/11589) [BUGFIX]: Afficher correctement les badges sur l'ecran de resultat de Pix orga (PIX-16909).
+- [#11580](https://github.com/1024pix/pix/pull/11580) [BUGFIX] Traduire le text du label de l'icone dans le select de création de campagne (PIX-16831).
+- [#11577](https://github.com/1024pix/pix/pull/11577) [BUGFIX] Remplacement des UUIDs dupliqués des contenus de modules (PIX-16819).
+
 ## v5.58.0 (06/03/2025)
 
 
