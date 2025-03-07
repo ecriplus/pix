@@ -265,7 +265,7 @@ const checkIfEmailIsAvailable = async function (email) {
 };
 
 const isUserExistingByEmail = async function (email) {
-  const existingUser = await knex('users').where('email', email.toLowerCase()).first();
+  const existingUser = await knex('users').whereRaw('LOWER("email") = ?', email.toLowerCase()).first();
   if (!existingUser) throw new UserNotFoundError();
   return true;
 };

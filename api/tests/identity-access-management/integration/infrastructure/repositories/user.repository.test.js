@@ -1816,7 +1816,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   });
 
   describe('#isUserExistingByEmail', function () {
-    const email = 'shi@fu.fr';
+    const email = 'user_account_created_with_SOME_UPPER_CASE_LETTERS@example.net';
 
     beforeEach(function () {
       databaseBuilder.factory.buildUser({ email });
@@ -1824,25 +1824,30 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       return databaseBuilder.commit();
     });
 
-    it('returns true when the user exists by email', async function () {
+    it('finds a user with the exact email', async function () {
       const userExists = await userRepository.isUserExistingByEmail(email);
       expect(userExists).to.be.true;
     });
 
-    it('returns true when the user exists by email (case insensitive)', async function () {
-      // given
-      const uppercaseEmailAlreadyInDb = email.toUpperCase();
+    context('when a user exists but with an email differing by case (case insensitive search)', function () {
+      it('finds the user', async function () {
+        // given
+        const uppercaseEmailAlreadyInDb = email.toUpperCase();
 
-      // when
-      const userExists = await userRepository.isUserExistingByEmail(uppercaseEmailAlreadyInDb);
+        // when
+        const userExists = await userRepository.isUserExistingByEmail(uppercaseEmailAlreadyInDb);
 
-      // then
-      expect(userExists).to.be.true;
+        // then
+        expect(userExists).to.be.true;
+      });
     });
 
-    it('throws an error when the user does not exist by email', async function () {
-      const err = await catchErr(userRepository.isUserExistingByEmail)('none');
-      expect(err).to.be.instanceOf(UserNotFoundError);
+    context('when no user account with a matching email exist', function () {
+      it('throws an error', async function () {
+        const searchedEmail = 'Address_Unknown@example.net';
+        const err = await catchErr(userRepository.isUserExistingByEmail)(searchedEmail);
+        expect(err).to.be.instanceOf(UserNotFoundError);
+      });
     });
   });
 
