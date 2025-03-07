@@ -1,23 +1,45 @@
+import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { ModuleDoesNotExistError } from '../errors.js';
+import { PassageStartedEvent } from '../models/passage-events/passage-events.js';
 
-const createPassage = async function ({ moduleId, userId, moduleRepository, passageRepository, userRepository }) {
-  await _verifyIfModuleExists({ moduleId, moduleRepository });
+const createPassage = withTransaction(async function ({
+  moduleId,
+  occurredAt,
+  userId,
+  moduleRepository,
+  passageRepository,
+  passageEventRepository,
+  userRepository,
+}) {
+  const module = await _getModule({ moduleId, moduleRepository });
   if (userId !== null) {
     await userRepository.get(userId);
   }
-  return passageRepository.save({ moduleId, userId });
-};
 
-async function _verifyIfModuleExists({ moduleId, moduleRepository }) {
+  const passage = await passageRepository.save({ moduleId, userId });
+  await _recordPassageEvent({ module, occurredAt, passage, passageEventRepository });
+
+  return passage;
+});
+
+async function _getModule({ moduleId, moduleRepository }) {
   try {
-    await moduleRepository.getBySlug({ slug: moduleId });
+    return await moduleRepository.getBySlug({ slug: moduleId });
   } catch (e) {
     if (e instanceof NotFoundError) {
       throw new ModuleDoesNotExistError();
     }
     throw e;
   }
+}
+
+async function _recordPassageEvent({ module, occurredAt, passage, passageEventRepository }) {
+  const { id: passageId } = passage;
+  const contentHash = module.version;
+  const passageStartedEvent = new PassageStartedEvent({ contentHash, passageId, occurredAt });
+
+  await passageEventRepository.record(passageStartedEvent);
 }
 
 export { createPassage };

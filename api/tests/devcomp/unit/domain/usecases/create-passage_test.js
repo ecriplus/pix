@@ -1,12 +1,20 @@
 import { ModuleDoesNotExistError } from '../../../../../src/devcomp/domain/errors.js';
+import { Module } from '../../../../../src/devcomp/domain/models/module/Module.js';
+import { Passage } from '../../../../../src/devcomp/domain/models/Passage.js';
+import { PassageStartedEvent } from '../../../../../src/devcomp/domain/models/passage-events/passage-events.js';
 import { createPassage } from '../../../../../src/devcomp/domain/usecases/create-passage.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
+  beforeEach(function () {
+    sinon.stub(DomainTransaction, 'execute').callsFake((lambda) => lambda());
+  });
+
   describe('when module does not exist', function () {
-    it('should throw an ModuleNotExists', async function () {
+    it('should throw a ModuleDoesNotExist error', async function () {
       // given
       const moduleId = Symbol('moduleId');
 
@@ -24,7 +32,7 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
   });
 
   describe('when user does not exist', function () {
-    it('should throw an UserNotExists', async function () {
+    it('should throw an UserNotExists error', async function () {
       // given
       const userId = Symbol('userId');
 
@@ -48,11 +56,35 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
     });
   });
 
-  it('should call passage repository to save the passage', async function () {
+  it('should save the passage and record passage started event', async function () {
     // given
     const moduleId = Symbol('moduleId');
+    const passageId = Symbol('passageId');
     const userId = Symbol('userId');
-    const repositoryResult = Symbol('repository-result');
+
+    const slug = 'les-adresses-email';
+    const title = 'Les adresses email';
+    const isBeta = false;
+    const grains = [Symbol('text')];
+    const transitionTexts = [];
+    const details = Symbol('details');
+    const version = Symbol('version');
+    const module = new Module({ id: moduleId, slug, title, isBeta, grains, details, transitionTexts, version });
+
+    const occurredAt = new Date('2025-01-01');
+    const passageCreatedAt = new Date('2025-03-05');
+    const passage = new Passage({
+      id: passageId,
+      moduleId,
+      userId,
+      createdAt: passageCreatedAt,
+    });
+
+    const passageStartedEvent = new PassageStartedEvent({
+      contentHash: version,
+      occurredAt,
+      passageId,
+    });
 
     const userRepositoryStub = {
       get: sinon.stub(),
@@ -61,17 +93,23 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
     const moduleRepositoryStub = {
       getBySlug: sinon.stub(),
     };
-    moduleRepositoryStub.getBySlug.withArgs({ slug: moduleId }).resolves();
+    moduleRepositoryStub.getBySlug.withArgs({ slug: moduleId }).resolves(module);
     const passageRepositoryStub = {
       save: sinon.stub(),
     };
-    passageRepositoryStub.save.resolves(repositoryResult);
+    passageRepositoryStub.save.resolves(passage);
+
+    const passageEventRepositoryStub = {
+      record: sinon.stub(),
+    };
 
     // when
     const result = await createPassage({
+      occurredAt,
       moduleId,
       userId,
       passageRepository: passageRepositoryStub,
+      passageEventRepository: passageEventRepositoryStub,
       moduleRepository: moduleRepositoryStub,
       userRepository: userRepositoryStub,
     });
@@ -81,6 +119,7 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
       moduleId,
       userId,
     });
-    expect(result).to.equal(repositoryResult);
+    expect(passageEventRepositoryStub.record).to.have.been.calledOnceWith(passageStartedEvent);
+    expect(result).to.equal(passage);
   });
 });
