@@ -53,15 +53,18 @@ export async function saveAndCorrectAnswerForCampaign({
     const targetSkills = await campaignRepository.findSkillsByCampaignParticipationId({
       campaignParticipationId: assessment.campaignParticipationId,
     });
+    answerSaved = await answerRepository.save({ answer: correctedAnswer });
     const knowledgeElementsToAdd = computeKnowledgeElements({
       assessment,
-      answer: correctedAnswer,
+      answer: answerSaved,
       challenge,
       targetSkills,
       knowledgeElementsBefore,
     });
-
-    answerSaved = await answerRepository.saveWithKnowledgeElements(correctedAnswer, knowledgeElementsToAdd);
+    await knowledgeElementRepository.saveForCampaignParticipation({
+      knowledgeElements: knowledgeElementsToAdd,
+      campaignParticipationId: assessment.campaignParticipationId,
+    });
     answerSaved.levelup = await computeLevelUpInformation({
       answerSaved,
       userId,
@@ -75,7 +78,7 @@ export async function saveAndCorrectAnswerForCampaign({
       competenceEvaluationRepository,
     });
   } else if (assessment.isFlash()) {
-    answerSaved = await answerRepository.saveWithKnowledgeElements(correctedAnswer, []);
+    answerSaved = await answerRepository.save({ answer: correctedAnswer });
     answerSaved.levelup = {};
     const flashData = await algorithmDataFetcherService.fetchForFlashLevelEstimation({
       assessment,
