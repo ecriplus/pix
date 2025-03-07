@@ -2,6 +2,7 @@ import { CertificationChallengeLiveAlertStatus } from '../../../../../src/certif
 import { EmptyAnswerError } from '../../../../../src/evaluation/domain/errors.js';
 import * as correctionService from '../../../../../src/evaluation/domain/services/correction-service.js';
 import { saveAndCorrectAnswerForCertification } from '../../../../../src/evaluation/domain/usecases/save-and-correct-answer-for-certification.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import {
   CertificationEndedByFinalizationError,
   CertificationEndedBySupervisorError,
@@ -35,6 +36,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
   let dependencies;
 
   beforeEach(function () {
+    sinon.stub(DomainTransaction, 'execute').callsFake((lambda) => lambda());
     candidate = domainBuilder.certification.evaluation.buildCandidate({
       accessibilityAdjustmentNeeded: true,
     });

@@ -1,3 +1,4 @@
+import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import {
   CertificationEndedByFinalizationError,
   CertificationEndedBySupervisorError,
@@ -6,7 +7,7 @@ import {
 import { ChallengeNotAskedError } from '../../../shared/domain/errors.js';
 import { EmptyAnswerError } from '../errors.js';
 
-export async function saveAndCorrectAnswerForCertification({
+const saveAndCorrectAnswerForCertification = withTransaction(async function ({
   answer,
   userId,
   assessment,
@@ -62,4 +63,6 @@ export async function saveAndCorrectAnswerForCertification({
   answerSaved.levelup = {};
 
   return answerSaved;
-}
+});
+
+export { saveAndCorrectAnswerForCertification };
