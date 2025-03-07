@@ -5,14 +5,23 @@ import { organizationForAdminRepository } from '../../../../../src/organizationa
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { MissingAttributesError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import {
+  catchErr,
+  databaseBuilder,
+  domainBuilder,
+  expect,
+  insertMultipleSendingFeatureForNewOrganization,
+  knex,
+  sinon,
+} from '../../../../test-helper.js';
 
 describe('Integration | Organizational Entities | Infrastructure | Repository | organization-for-admin', function () {
-  let clock;
+  let clock, byDefaultFeatureId;
   const now = new Date('2022-02-02');
 
-  beforeEach(function () {
+  beforeEach(async function () {
     clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    await databaseBuilder.commit();
   });
 
   afterEach(function () {
@@ -424,6 +433,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           creatorLastName: 'Encieux',
           identityProviderForCampaigns: 'genericOidcProviderCode',
           features: {
+            [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true, params: null },
             [ORGANIZATION_FEATURE.LEARNER_IMPORT.key]: { active: false, params: null },
           },
           parentOrganizationId: null,
@@ -485,7 +495,6 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           archivedBy: archivist.id,
           archivedAt,
         });
-        databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT);
 
         await databaseBuilder.commit();
 
@@ -522,9 +531,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           creatorFirstName: superAdminUser.firstName,
           creatorLastName: superAdminUser.lastName,
           identityProviderForCampaigns: null,
-          features: {
-            [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false, params: null },
-          },
+          features: {},
           parentOrganizationId: null,
           parentOrganizationName: null,
         });
@@ -537,6 +544,8 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
     it('saves the given organization', async function () {
       // given
       const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
+      await insertMultipleSendingFeatureForNewOrganization();
+
       await databaseBuilder.commit();
 
       const organization = new OrganizationForAdmin({
@@ -568,6 +577,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         const organizationLearnerImportOndeFormat = databaseBuilder.factory.buildOrganizationLearnerImportFormat({
           name: 'ONDE',
         });
+        byDefaultFeatureId = await insertMultipleSendingFeatureForNewOrganization();
 
         await databaseBuilder.commit();
 
@@ -579,9 +589,11 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
         const savedOrganization = await organizationForAdminRepository.save(organization);
 
-        const savedOrganizationFeatures = await knex('organization-features').where({
-          organizationId: savedOrganization.id,
-        });
+        const savedOrganizationFeatures = await knex('organization-features')
+          .where({
+            organizationId: savedOrganization.id,
+          })
+          .whereNot({ featureId: byDefaultFeatureId });
 
         expect(savedOrganizationFeatures).to.have.lengthOf(3);
         const savedOrganizationFeatureIds = savedOrganizationFeatures.map(
@@ -603,6 +615,10 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
   });
 
   describe('#update', function () {
+    beforeEach(async function () {
+      byDefaultFeatureId = await insertMultipleSendingFeatureForNewOrganization();
+    });
+
     it('updates organization detail', async function () {
       // given
       const parentOrganizationId = databaseBuilder.factory.buildOrganization({ name: 'Parent Organization' }).id;
@@ -627,8 +643,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         name: 'super orga',
         createdBy: userId,
       });
-
-      const featureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT).id;
+      const featureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT).id;
       await databaseBuilder.commit();
 
       // when
@@ -637,13 +652,15 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         documentationUrl: 'https://pix.fr/',
         features: {
           [ORGANIZATION_FEATURE.LEARNER_IMPORT.key]: { active: false },
-          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true },
+          [ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT.key]: { active: true },
         },
       });
       await organizationForAdminRepository.update(organizationToUpdate);
 
       // then
-      const enabledFeatures = await knex('organization-features').where({ organizationId: organization.id });
+      const enabledFeatures = await knex('organization-features')
+        .where({ organizationId: organization.id, featureId })
+        .whereNot({ featureId: byDefaultFeatureId });
       expect(enabledFeatures).to.have.lengthOf(1);
       expect(enabledFeatures[0].featureId).to.equal(featureId);
     });
@@ -656,7 +673,8 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         createdBy: userId,
       });
 
-      const featureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT).id;
+      const featureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT).id;
+
       databaseBuilder.factory.buildOrganizationFeature({ organizationId: organization.id, featureId });
       await databaseBuilder.commit();
 
@@ -665,14 +683,16 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         id: organization.id,
         documentationUrl: 'https://pix.fr/',
         features: {
-          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true },
+          [ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT.key]: { active: true },
         },
       });
 
       await organizationForAdminRepository.update(organizationToUpdate);
 
       // then
-      const enabledFeatures = await knex('organization-features').where({ organizationId: organization.id });
+      const enabledFeatures = await knex('organization-features')
+        .where({ organizationId: organization.id })
+        .whereNot({ featureId: byDefaultFeatureId });
       expect(enabledFeatures).to.have.lengthOf(1);
       expect(enabledFeatures[0].featureId).to.equal(featureId);
     });
@@ -690,9 +710,35 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         createdBy: userId,
       });
 
-      const featureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT).id;
+      const featureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT).id;
       databaseBuilder.factory.buildOrganizationFeature({ organizationId: organization.id, featureId });
       databaseBuilder.factory.buildOrganizationFeature({ organizationId: otherOrganization.id, featureId });
+
+      await databaseBuilder.commit();
+
+      // when
+      const organizationToUpdate = new OrganizationForAdmin({
+        id: organization.id,
+        documentationUrl: 'https://pix.fr/',
+        features: {
+          [ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT.key]: { active: false },
+        },
+      });
+      await organizationForAdminRepository.update(organizationToUpdate);
+
+      //then
+      const enabledFeatures = await knex('organization-features').whereNot({ featureId: byDefaultFeatureId });
+      expect(enabledFeatures).to.have.lengthOf(1);
+      expect(enabledFeatures[0].organizationId).to.equal(otherOrganization.id);
+    });
+
+    it('should disable the "by default" feature for a given organization', async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser({ firstName: 'Anne', lastName: 'Héantie' }).id;
+      const organization = databaseBuilder.factory.buildOrganization({
+        name: 'super orga',
+        createdBy: userId,
+      });
 
       await databaseBuilder.commit();
 
@@ -708,8 +754,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
       //then
       const enabledFeatures = await knex('organization-features');
-      expect(enabledFeatures).to.have.lengthOf(1);
-      expect(enabledFeatures[0].organizationId).to.equal(otherOrganization.id);
+      expect(enabledFeatures).to.have.lengthOf(0);
     });
 
     it('should create data protection officer', async function () {
@@ -750,6 +795,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         name: 'super orga',
         createdBy: userId,
       });
+
       databaseBuilder.factory.buildDataProtectionOfficer.withOrganizationId({
         organizationId: organization.id,
         firstName: 'Tony',
@@ -785,6 +831,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const tagId = databaseBuilder.factory.buildTag({ name: 'myTag' }).id;
       const otherTagId = databaseBuilder.factory.buildTag({ name: 'myOtherTag' }).id;
+
       await databaseBuilder.commit();
       const tagsToAdd = [
         { tagId, organizationId },
