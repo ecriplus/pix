@@ -55,7 +55,7 @@ const getFullById = async function (userId) {
 
 const getByUsernameOrEmailWithRolesAndPassword = async function (username) {
   const userDTO = await knex('users')
-    .where({ email: username.toLowerCase() })
+    .whereRaw('LOWER("email") = ?', username.toLowerCase())
     .orWhere({ username: username.toLowerCase() })
     .first();
 

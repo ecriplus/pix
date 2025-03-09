@@ -43,7 +43,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   const userToInsert = {
     firstName: 'Jojo',
     lastName: 'LaFripouille',
-    email: 'jojo@example.net',
+    email: 'user_name_with_mix_of_lower_AND_UPPER_case_letters@example.net',
     cgu: true,
     locale: 'fr-FR',
     createdAt: creationDate,
@@ -740,7 +740,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(user.id).to.equal(userInDb.id);
         expect(user.firstName).to.equal(userInDb.firstName);
         expect(user.lastName).to.equal(userInDb.lastName);
-        expect(user.email).to.equal(userInDb.email);
+        expect(user.email).to.equal(userInDb.email.toLowerCase());
         expect(user.cgu).to.be.true;
         expect(user.createdAt.toISOString()).to.equal('2019-03-12T19:37:03.000Z');
         expect(user.updatedAt.toISOString()).to.equal('2019-03-12T19:37:03.000Z');
@@ -1120,7 +1120,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
 
         // then
         expect(user.username).to.equal(userInDb.username);
-        expect(user.email).to.equal(userInDb.email);
+        expect(user.email).to.equal(userInDb.email.toLowerCase());
       });
 
       it('throws an error when user not found', async function () {
