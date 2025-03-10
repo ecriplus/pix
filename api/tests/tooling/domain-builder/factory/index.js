@@ -1,3 +1,4 @@
+import { buildV3CertificationAttestation } from '../factory/certification/results/build-v3-certification-attestation.js';
 import { buildEmptyInformationBanner, buildInformationBanner } from './banner/build-banner-information.js';
 import { buildAccountRecoveryDemand } from './build-account-recovery-demand.js';
 import { buildActivity } from './build-activity.js';
@@ -270,6 +271,7 @@ const certification = {
   },
   results: {
     buildGlobalCertificationLevel,
+    buildV3CertificationAttestation,
     parcoursup: {
       buildCertificationResult: parcoursupCertificationResult,
       buildCompetence: parcoursupCompetence,

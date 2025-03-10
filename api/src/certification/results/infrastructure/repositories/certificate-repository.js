@@ -9,7 +9,9 @@ import {
   ResultCompetenceTree,
   ShareableCertificate,
 } from '../../../../shared/domain/models/index.js';
+import { SessionVersion } from '../../../shared/domain/models/SessionVersion.js';
 import { CertificationAttestation } from '../../domain/models/CertificationAttestation.js';
+import { V3CertificationAttestation } from '../../domain/models/V3CertificationAttestation.js';
 import { CertifiedBadge } from '../../domain/read-models/CertifiedBadge.js';
 import * as competenceTreeRepository from './competence-tree-repository.js';
 
@@ -261,6 +263,12 @@ function _toDomainForCertificationAttestation({ certificationCourseDTO, competen
     certificationId: certificationCourseDTO.id,
     assessmentResultId: certificationCourseDTO.assessmentResultId,
   });
+
+  if (SessionVersion.isV3(certificationCourseDTO.version)) {
+    return new V3CertificationAttestation({
+      ...certificationCourseDTO,
+    });
+  }
 
   return new CertificationAttestation({
     ...certificationCourseDTO,
