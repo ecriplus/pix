@@ -50,10 +50,7 @@ describe('Unit | API | KnowledgeElementSnapshots', function () {
         .withArgs({
           campaignParticipationId,
         })
-        .resolves({
-          knowledgeElements,
-          campaignParticipationId,
-        });
+        .resolves(knowledgeElements);
 
       // when
       const result = await knowledgeElementSnapshotsApi.getByParticipation(campaignParticipationId);

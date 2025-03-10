@@ -39,8 +39,11 @@ export async function save(knowledgeElementSnapshotPayload) {
  * @returns {Promise<KnowledgeElementSnapshot|null>}
  */
 export async function getByParticipation(campaignParticipationId) {
-  const knowledgeElementSnapshot = await usecases.getKnowledgeElementSnapshotForParticipation({
+  const knowledgeElements = await usecases.getKnowledgeElementSnapshotForParticipation({
     campaignParticipationId,
   });
-  return new KnowledgeElementSnapshot(knowledgeElementSnapshot);
+  return new KnowledgeElementSnapshot({
+    knowledgeElements,
+    campaignParticipationId,
+  });
 }
