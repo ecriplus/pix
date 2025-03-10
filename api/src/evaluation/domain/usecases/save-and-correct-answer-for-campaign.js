@@ -49,13 +49,19 @@ const saveAndCorrectAnswerForCampaign = withTransaction(async function ({
 
   let answerSaved;
   if (assessment.isSmartRandom()) {
-    const knowledgeElementsBefore = await knowledgeElementRepository.findUniqByUserId({ userId });
+    const knowledgeElementsBefore = await knowledgeElementRepository.findUniqByUserIdForCampaignParticipation({
+      userId,
+      campaignParticipationId: assessment.campaignParticipationId,
+    });
 
     const targetSkills = await campaignRepository.findSkillsByCampaignParticipationId({
       campaignParticipationId: assessment.campaignParticipationId,
     });
+    const campaignId = await campaignRepository.getCampaignIdByCampaignParticipationId(campaignParticipationId);
+    const campaign = await campaignRepository.get(campaignId);
     answerSaved = await answerRepository.save({ answer: correctedAnswer });
     const knowledgeElementsToAdd = computeKnowledgeElements({
+      campaign,
       assessment,
       answer: answerSaved,
       challenge,
@@ -105,10 +111,17 @@ const saveAndCorrectAnswerForCampaign = withTransaction(async function ({
   return answerSaved;
 });
 
-function computeKnowledgeElements({ assessment, answer, challenge, targetSkills, knowledgeElementsBefore }) {
-  const knowledgeElements = knowledgeElementsBefore.filter(
-    (knowledgeElement) => knowledgeElement.assessmentId === assessment.id,
-  );
+function computeKnowledgeElements({ campaign, assessment, answer, challenge, targetSkills, knowledgeElementsBefore }) {
+  let knowledgeElements;
+
+  if (campaign.isExam) {
+    knowledgeElements = knowledgeElementsBefore;
+  } else {
+    knowledgeElements = knowledgeElementsBefore.filter(
+      (knowledgeElement) => knowledgeElement.assessmentId === assessment.id,
+    );
+  }
+
   return KnowledgeElement.createKnowledgeElementsForAnswer({
     answer,
     challenge,
@@ -173,4 +186,5 @@ async function computeLevelUpInformation({
   });
 }
 
+export { saveAndCorrectAnswerForCampaign };
 export { saveAndCorrectAnswerForCampaign };
