@@ -28,7 +28,7 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-automatically', fu
     campaignRepository = { getByCode: sinon.stub() };
     getCampaignStub = campaignRepository.getByCode
       .withArgs(campaignCode)
-      .resolves(domainBuilder.buildCampaign({ organization: { id: organizationId } }));
+      .resolves(domainBuilder.buildCampaign({ organizationId }));
 
     organizationLearnerRepository = {
       reconcileUserByNationalStudentIdAndOrganizationId: sinon.stub(),

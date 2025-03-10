@@ -13,17 +13,17 @@ class Campaign {
     id,
     name,
     code,
+    title,
+    externalIdLabel,
+    externalIdType,
     organizationId,
+    externalIdHelpImageUrl,
+    alternativeTextToExternalIdHelpImage,
     creatorId,
     createdAt,
     targetProfileId,
-    externalIdLabel,
-    externalIdType,
-    title,
     customLandingPageText,
     type,
-    externalIdHelpImageUrl,
-    alternativeTextToExternalIdHelpImage,
     isForAbsoluteNovice,
     customResultPageText,
     customResultPageButtonText,
@@ -38,6 +38,7 @@ class Campaign {
     participationCount,
   } = {}) {
     this.id = id;
+    this.isForAbsoluteNovice = isForAbsoluteNovice;
     this.code = code;
     this.externalIdLabel = externalIdLabel;
     this.externalIdType = externalIdType;
@@ -47,7 +48,6 @@ class Campaign {
     this.externalIdHelpImageUrl = externalIdHelpImageUrl;
     this.alternativeTextToExternalIdHelpImage = alternativeTextToExternalIdHelpImage;
     this.customLandingPageText = customLandingPageText;
-    this.isForAbsoluteNovice = isForAbsoluteNovice;
     this.customResultPageText = customResultPageText;
     this.customResultPageButtonText = customResultPageButtonText;
     this.customResultPageButtonUrl = customResultPageButtonUrl;

@@ -19,39 +19,6 @@ import { catchErr, catchErrSync, domainBuilder, expect, sinon } from '../../../.
 const { TO_SHARE, SHARED, STARTED } = CampaignParticipationStatuses;
 
 describe('Unit | Domain | Models | CampaignParticipation', function () {
-  describe('#getTargetProfileId', function () {
-    it('should return the targetProfileId from campaign associated', function () {
-      // given
-      const campaign = domainBuilder.buildCampaign.ofTypeAssessment();
-      const campaignParticipation = new CampaignParticipation({
-        id: 1,
-        campaign,
-        assessmentId: 1,
-      });
-
-      // when
-      const targetProfileId = campaignParticipation.getTargetProfileId();
-
-      // then
-      expect(targetProfileId).to.equal(campaign.targetProfile.id);
-    });
-
-    it('should return null if has not campaign', function () {
-      // given
-      const campaignParticipation = new CampaignParticipation({
-        id: 1,
-        campaign: null,
-        assessmentId: 1,
-      });
-
-      // when
-      const targetProfileId = campaignParticipation.getTargetProfileId();
-
-      // then
-      expect(targetProfileId).to.equal(null);
-    });
-  });
-
   describe('delete', function () {
     let clock;
     const now = new Date('2021-09-25');
@@ -219,7 +186,7 @@ describe('Unit | Domain | Models | CampaignParticipation', function () {
 
     context('when the campaign is not accessible', function () {
       it('throws an ArchivedCampaignError error', async function () {
-        const campaign = { isAccessible: () => false };
+        const campaign = { isAccessible: false };
         const campaignParticipation = new CampaignParticipation({ campaign });
 
         const error = await catchErr(campaignParticipation.share, campaignParticipation)();

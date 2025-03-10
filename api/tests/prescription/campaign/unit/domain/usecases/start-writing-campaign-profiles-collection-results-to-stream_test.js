@@ -46,7 +46,7 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-profiles-collection
     const organization = domainBuilder.buildOrganization();
     const user = domainBuilder.buildUser();
     domainBuilder.buildMembership({ user, organization });
-    const campaign = domainBuilder.buildCampaign.ofTypeAssessment({ organization });
+    const campaign = domainBuilder.buildCampaign.ofTypeAssessment({ organizationId: organization.id });
     campaignRepository.get.withArgs(campaign.id).resolves(campaign);
     userRepository.getWithMemberships.withArgs(user.id).resolves(user);
 
@@ -77,7 +77,7 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-profiles-collection
     const organization = domainBuilder.buildOrganization();
     const user = domainBuilder.buildUser();
     domainBuilder.buildMembership({ user, organization });
-    const campaign = domainBuilder.buildCampaign.ofTypeProfilesCollection();
+    const campaign = domainBuilder.buildCampaign.ofTypeProfilesCollection({ organizationId: organization.id });
     campaignRepository.get.withArgs(campaign.id).resolves(campaign);
     userRepository.getWithMemberships.withArgs(user.id).resolves(user);
     organizationRepository.get.withArgs(organization.id).resolves(organization);
