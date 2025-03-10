@@ -1,5 +1,5 @@
 import { ltiPlatformRegistrationRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/lti-platform-registration.repository.js';
-import { databaseBuilder, domainBuilder, expect, nock } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Infrastructure | Repository | lti-platform-registration', function () {
   describe('#findByClientId', function () {
@@ -8,21 +8,13 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       const clientId = 'AbCD1234';
       const expectedLtiPlatformRegistration = domainBuilder.identityAccessManagement.buildLtiPlatformRegistration();
 
-      const savedLtiPlatformRegistration = databaseBuilder.factory.buildLtiPlatformRegistration(
-        expectedLtiPlatformRegistration,
-      );
+      databaseBuilder.factory.buildLtiPlatformRegistration(expectedLtiPlatformRegistration);
       await databaseBuilder.commit();
-
-      const platformOpenIdConfigUrl = new URL(savedLtiPlatformRegistration.platformOpenIdConfigUrl);
-      const platformOpenIdConfigCall = nock(platformOpenIdConfigUrl.origin)
-        .get(platformOpenIdConfigUrl.pathname)
-        .reply(200, expectedLtiPlatformRegistration.platformOpenIdConfig);
 
       // when
       const registration = await ltiPlatformRegistrationRepository.findByClientId(clientId);
 
       // then
-      expect(platformOpenIdConfigCall.isDone()).to.be.true;
       expect(registration).to.deepEqualInstance(expectedLtiPlatformRegistration);
     });
 
