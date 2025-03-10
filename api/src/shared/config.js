@@ -300,7 +300,6 @@ const configuration = (function () {
         process.env.FT_ENABLE_NEED_TO_ADJUST_CERTIFICATION_ACCESSIBILITY,
       ),
       isOppsyDisabled: toBoolean(process.env.FT_OPPSY_DISABLED),
-      isPix1dEnabled: toBoolean(process.env.FT_PIX_1D_ENABLED),
       isPixAdminNewSidebarEnabled: toBoolean(process.env.FT_PIX_ADMIN_NEW_SIDEBAR_ENABLED),
       isPixAppNewLayoutEnabled: toBoolean(process.env.FT_PIXAPP_NEW_LAYOUT_ENABLED),
       isPixCompanionEnabled: toBoolean(process.env.FT_PIX_COMPANION_ENABLED),
@@ -517,7 +516,6 @@ const configuration = (function () {
     config.featureToggles.isDirectMetricsEnabled = false;
     config.featureToggles.isNeedToAdjustCertificationAccessibilityEnabled = false;
     config.featureToggles.isOppsyDisabled = false;
-    config.featureToggles.isPix1dEnabled = true;
     config.featureToggles.isPixAppNewLayoutEnabled = true;
     config.featureToggles.isPixCompanionEnabled = false;
     config.featureToggles.isSelfAccountDeletionEnabled = false;

@@ -1,6 +1,5 @@
 import { organizationLearnerController } from '../../../../src/school/application/organization-learner-controller.js';
 import * as moduleUnderTest from '../../../../src/school/application/organization-learner-route.js';
-import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
 import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
 
 describe('Unit | Router | organization-learner-router', function () {
@@ -9,7 +8,6 @@ describe('Unit | Router | organization-learner-router', function () {
       // given
       sinon.stub(organizationLearnerController, 'getById').callsFake((request, h) => h.response('ok'));
 
-      sinon.stub(securityPreHandlers, 'checkPix1dActivated').callsFake((request, h) => h.response());
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
 

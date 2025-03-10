@@ -10,10 +10,7 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/pix1d/schools',
       config: {
-        pre: [
-          { method: securityPreHandlers.checkPix1dActivated },
-          { method: securityPreHandlers.checkSchoolSessionIsActive },
-        ],
+        pre: [{ method: securityPreHandlers.checkSchoolSessionIsActive }],
         auth: false,
         validate: {
           query: Joi.object({
@@ -32,10 +29,7 @@ const register = async function (server) {
       method: 'POST',
       path: '/api/pix1d/schools/{organizationId}/session/activate',
       config: {
-        pre: [
-          { method: securityPreHandlers.checkPix1dActivated },
-          { method: securityPreHandlers.checkUserBelongsToOrganization },
-        ],
+        pre: [{ method: securityPreHandlers.checkUserBelongsToOrganization }],
         validate: {
           params: Joi.object({
             organizationId: identifiersType.organizationId,
@@ -50,10 +44,7 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/pix1d/schools/{organizationId}/divisions',
       config: {
-        pre: [
-          { method: securityPreHandlers.checkPix1dActivated },
-          { method: securityPreHandlers.checkUserBelongsToOrganization },
-        ],
+        pre: [{ method: securityPreHandlers.checkUserBelongsToOrganization }],
         validate: {
           params: Joi.object({
             organizationId: identifiersType.organizationId,
