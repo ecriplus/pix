@@ -7,7 +7,6 @@ import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
-import { ApplicationTransaction } from '../../../../../../src/prescription/shared/infrastructure/ApplicationTransaction.js';
 import { constants } from '../../../../../../src/shared/domain/constants.js';
 import { DomainTransaction, withTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
@@ -54,7 +53,7 @@ describe('Integration | Repository | Campaign Participation', function () {
       campaignParticipation.participantExternalId = 'Laura';
 
       // when
-      await ApplicationTransaction.execute(async () => {
+      await DomainTransaction.execute(async () => {
         await campaignParticipationRepository.updateWithSnapshot(campaignParticipation);
       });
 
@@ -71,7 +70,7 @@ describe('Integration | Repository | Campaign Participation', function () {
       campaignParticipation.sharedAt = new Date();
 
       // when
-      await ApplicationTransaction.execute(async () => {
+      await DomainTransaction.execute(async () => {
         await campaignParticipationRepository.updateWithSnapshot(campaignParticipation);
       });
 
@@ -941,6 +940,22 @@ describe('Integration | Repository | Campaign Participation', function () {
     it('should return true if the user has participations to campaigns of type assement', async function () {
       // given
       const campaign = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.ASSESSMENT });
+      databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaign.id,
+        userId,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await campaignParticipationRepository.hasAssessmentParticipations(userId);
+
+      // then
+      expect(result).to.equal(true);
+    });
+
+    it('should return true if the user has participations to campaigns of type exam', async function () {
+      // given
+      const campaign = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.EXAM });
       databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
         userId,

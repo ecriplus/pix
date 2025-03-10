@@ -165,18 +165,22 @@ const findOneByCampaignIdAndUserId = async function ({ campaignId, userId }) {
 };
 
 const hasAssessmentParticipations = async function (userId) {
-  const { count } = await knex('campaign-participations')
+  const knexConn = DomainTransaction.getConnection();
+
+  const { count } = await knexConn('campaign-participations')
     .count('campaign-participations.id')
     .join('campaigns', 'campaigns.id', 'campaignId')
     .whereNot('campaigns.organizationId', constants.AUTONOMOUS_COURSES_ORGANIZATION_ID)
-    .where('campaigns.type', '=', CampaignTypes.ASSESSMENT)
+    .whereIn('campaigns.type', [CampaignTypes.ASSESSMENT, CampaignTypes.EXAM])
     .andWhere({ userId })
     .first();
   return count > 0;
 };
 
 const getCodeOfLastParticipationToProfilesCollectionCampaignForUser = async function (userId) {
-  const result = await knex('campaign-participations')
+  const knexConn = DomainTransaction.getConnection();
+
+  const result = await knexConn('campaign-participations')
     .select('campaigns.code')
     .join('campaigns', 'campaigns.id', 'campaignId')
     .where({ userId })
