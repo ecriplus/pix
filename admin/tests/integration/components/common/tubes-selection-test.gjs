@@ -190,8 +190,8 @@ module('Integration | Component | Common::TubesSelection', function (hooks) {
         });
 
         // then
-        assert.dom(screen.getByRole('textbox')).hasAttribute('placeholder', 'Pix plus');
-        assert.dom(screen.getByText('2/3 sujet(s) sélectionné(s)')).exists();
+        assert.dom(await screen.findByRole('textbox')).hasAttribute('placeholder', 'Pix plus');
+        assert.dom(await screen.findByText('2/3 sujet(s) sélectionné(s)')).exists();
       });
     });
   });
