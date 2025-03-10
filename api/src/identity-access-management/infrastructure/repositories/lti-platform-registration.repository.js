@@ -15,4 +15,8 @@ export const ltiPlatformRegistrationRepository = {
 
     return new LtiPlatformRegistration(ltiPlatformRegistrationDTO);
   },
+
+  async listActivePublicKeys() {
+    return knex.select('publicKey').from('lti_platform_registrations').where('status', 'active').pluck('publicKey');
+  },
 };
