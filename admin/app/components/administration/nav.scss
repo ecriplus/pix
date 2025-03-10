@@ -43,8 +43,14 @@
   }
 }
 
+
+
 .navbar + section {
   padding: 20px;
   background: var(--pix-neutral-0);
   border-radius: var(--pix-spacing-1x);
+}
+
+section.no-background {
+  background-color:transparent;
 }

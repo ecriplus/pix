@@ -288,7 +288,21 @@
         "parameters": "<u>En lacune</u><br/>Si le RT est en lacune et que l'apprenant n'a pas rempli les conditions d'obtention de ce RT, alors on ne verra le RT sur l'écran de résultats.<br/><br/><u>Certifiable</u><br/>Le RT devient un pré-requis pour une certification."
       }
     },
-    "certification-centers": {
+    "campaign": {
+      "type": {
+        "explanation": {
+          "ASSESSMENT": "Campagne d'évaluation",
+          "EXAM": "exam",
+          "PROFILES_COLLECTION": "Campagne de collecte de profil"
+        },
+        "information": {
+          "ASSESSMENT": "Évaluation",
+          "EXAM": "exam",
+          "PROFILES_COLLECTION": "Collecte de profil"
+        }
+      }
+    },
+        "certification-centers": {
       "membership-item": {
         "actions": {
           "edit-role": "Modifier le rôle"

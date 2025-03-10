@@ -1,0 +1,39 @@
+@use 'pix-design-tokens/breakpoints';
+
+.campaign-type {
+  display: inline-flex;
+  align-items: center;
+
+  &__label {
+    margin-left: var(--pix-spacing-2x);
+  }
+
+  &__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+
+    &--assessment {
+      fill: var(--pix-tertiary-500);
+    }
+
+    &--profile-collection {
+      fill: var(--pix-primary-500);
+    }
+
+    &--exam {
+      fill: var(--pix-secondary-700);
+    }
+
+    &--big {
+      width: 3rem;
+      height: 3rem;
+    }
+
+    @include breakpoints.device-is('mobile') {
+      &--big {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+  }
+}

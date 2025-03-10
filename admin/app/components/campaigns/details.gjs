@@ -5,9 +5,9 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
-import { eq } from 'ember-truth-helpers';
 
 import SafeMarkdownToHtml from '../safe-markdown-to-html';
+import CampaignType from './type';
 
 export default class Details extends Component {
   @service accessControl;
@@ -40,7 +40,7 @@ export default class Details extends Component {
 
       <ul class="campaign__attributes">
         <li>Code : {{@campaign.code}}</li>
-        <li>Type : {{if (eq @campaign.type "ASSESSMENT") "Évaluation" "Collecte de profils"}}</li>
+        <li>Type : <CampaignType @campaignType={{@campaign.type}} /></li>
         <li>Organisation :
           <LinkTo @route="authenticated.organizations.get" @model={{@campaign.organizationId}}>
             {{@campaign.organizationName}}
