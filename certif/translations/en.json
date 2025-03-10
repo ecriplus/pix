@@ -113,6 +113,7 @@
               "ongoing": "Extension not detected"
             }
           },
+          "on-hold": "On hold",
           "ongoing": "In progress",
           "start": "Start"
         },
