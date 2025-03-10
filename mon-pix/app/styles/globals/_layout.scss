@@ -17,8 +17,6 @@ img {
 
 /* App main header */
 .app-main-header {
-  @extend %global-container;
-
   display: flex;
   flex-wrap: wrap;
   gap: var(--pix-spacing-6x);
@@ -92,7 +90,6 @@ img {
 .app-layout {
   z-index: 0;
 
-  .app-main-header,
   .global-page-container,
   #footer {
     padding: 0;
