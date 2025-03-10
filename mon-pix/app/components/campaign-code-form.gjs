@@ -1,4 +1,3 @@
-import PixBackgroundHeader from '@1024pix/pix-ui/components/pix-background-header';
 import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixCode from '@1024pix/pix-ui/components/pix-code';
@@ -85,55 +84,53 @@ export default class CampaignCodeForm extends Component {
   }
 
   <template>
-    <PixBackgroundHeader>
-      <PixBlock class="fill-in-campaign-code__container">
-        <h1 class="fill-in-campaign-code__title">
-          {{this.firstTitle}}
-        </h1>
-        <p id="campaign-code-description" class="fill-in-campaign-code__instruction">{{t
-            "pages.fill-in-campaign-code.description"
-          }}</p>
+    <PixBlock class="fill-in-campaign-code__container">
+      <h1 class="fill-in-campaign-code__title">
+        {{this.firstTitle}}
+      </h1>
+      <p id="campaign-code-description" class="fill-in-campaign-code__instruction">{{t
+          "pages.fill-in-campaign-code.description"
+        }}</p>
 
-        <form class="fill-in-campaign-code__form" autocomplete="off">
-          <PixCode
-            @id="campaign-code"
-            @length="9"
-            @requiredLabel={{t "common.forms.mandatory"}}
-            @screenReaderOnly={{true}}
-            @value={{this.certificateVerificationCode}}
-            @validationStatus={{this.validationStatus}}
-            @errorMessage={{this.validationErrorMessage}}
-            aria-describedby="campaign-code-description"
-            {{on "keyup" this.clearErrorMessage}}
-            {{on "input" this.handleCampaignCodeInput}}
-          >
-            <:label>{{t "pages.fill-in-campaign-code.label"}}</:label>
-          </PixCode>
+      <form class="fill-in-campaign-code__form" autocomplete="off">
+        <PixCode
+          @id="campaign-code"
+          @length="9"
+          @requiredLabel={{t "common.forms.mandatory"}}
+          @screenReaderOnly={{true}}
+          @value={{this.certificateVerificationCode}}
+          @validationStatus={{this.validationStatus}}
+          @errorMessage={{this.validationErrorMessage}}
+          aria-describedby="campaign-code-description"
+          {{on "keyup" this.clearErrorMessage}}
+          {{on "input" this.handleCampaignCodeInput}}
+        >
+          <:label>{{t "pages.fill-in-campaign-code.label"}}</:label>
+        </PixCode>
 
-          {{#if @apiErrorMessage}}
-            <PixNotificationAlert @type="error" @withIcon={{true}}>
-              {{@apiErrorMessage}}
-            </PixNotificationAlert>
-          {{/if}}
-
-          <PixButton @type="submit" @triggerAction={{this.startCampaign}}>
-            {{t "pages.fill-in-campaign-code.start"}}
-          </PixButton>
-        </form>
-
-        {{#if this.showWarningMessage}}
-          <div class="fill-in-campaign-code__warning">
-            <span>{{this.warningMessage}}</span>
-            <a href="#" class="link" {{on "click" this.disconnect}}>
-              {{t "pages.fill-in-campaign-code.warning-message-logout"}}
-            </a>
-          </div>
+        {{#if @apiErrorMessage}}
+          <PixNotificationAlert @type="error" @withIcon={{true}}>
+            {{@apiErrorMessage}}
+          </PixNotificationAlert>
         {{/if}}
 
-      </PixBlock>
-      {{#if this.canDisplayLanguageSwitcher}}
-        <LanguageSwitcher @selectedLanguage={{@selectedLanguage}} @onLanguageChange={{@onLanguageChange}} />
+        <PixButton @type="submit" @triggerAction={{this.startCampaign}}>
+          {{t "pages.fill-in-campaign-code.start"}}
+        </PixButton>
+      </form>
+
+      {{#if this.showWarningMessage}}
+        <div class="fill-in-campaign-code__warning">
+          <span>{{this.warningMessage}}</span>
+          <a href="#" class="link" {{on "click" this.disconnect}}>
+            {{t "pages.fill-in-campaign-code.warning-message-logout"}}
+          </a>
+        </div>
       {{/if}}
-    </PixBackgroundHeader>
+
+    </PixBlock>
+    {{#if this.canDisplayLanguageSwitcher}}
+      <LanguageSwitcher @selectedLanguage={{@selectedLanguage}} @onLanguageChange={{@onLanguageChange}} />
+    {{/if}}
   </template>
 }
