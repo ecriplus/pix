@@ -4,16 +4,18 @@
 {{else}}
   <div class="feedback-panel-v3">
     <h2 class="screen-reader-only">{{t "pages.challenge.parts.feedback-v3"}}</h2>
-    <button
-      class="feedback-panel-v3__open-button
-        {{if this.isToggleFeedbackFormHidden 'feedback-panel-v3__open-button--hidden'}}"
-      {{on "click" this.toggleFeedbackForm}}
-      aria-expanded={{this.isAriaExpanded}}
-      type="button"
-    >
-      <PixIcon @name="flag" @plainIcon={{true}} @ariaHidden={{true}} />
-      {{t "pages.challenge.feedback-panel-v3.actions.open-close"}}
-    </button>
+
+    {{#unless this.isToggleFeedbackFormHidden}}
+      <PixButton
+        @variant="tertiary"
+        @triggerAction={{this.toggleFeedbackForm}}
+        @isDisabled={{not @isEnabled}}
+        aria-expanded={{this.isAriaExpanded}}
+        @iconBefore="flag"
+      >
+        {{t "pages.challenge.feedback-panel-v3.actions.open-close"}}
+      </PixButton>
+    {{/unless}}
 
     {{#if this.shouldBeExpanded}}
       <div class="feedback-panel-v3__view">

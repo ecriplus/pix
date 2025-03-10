@@ -92,6 +92,8 @@ export default class Item extends Component {
       return;
     }
 
+    this.args.onChallengeSubmit();
+
     const answer = await this._findOrCreateAnswer(challenge, assessment);
     answer.setProperties({
       value: answerValue.trim(),
