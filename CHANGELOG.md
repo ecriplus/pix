@@ -1,5 +1,31 @@
 # Pix Changelog
 
+## v5.60.0 (10/03/2025)
+
+
+### :rocket: Amélioration
+- [#11590](https://github.com/1024pix/pix/pull/11590) [FEATURE] Afficher le bouton de gestion du signalement en dehors du menu sur Pix Certif (PIX-16884).
+- [#11545](https://github.com/1024pix/pix/pull/11545) [FEATURE] Utiliser PixTable dans les tableaux d'équipe et de finalisation sur Pix Certif (PIX-16788).
+- [#11605](https://github.com/1024pix/pix/pull/11605) [FEATURE] Màj feedback constat, dont QCM .
+- [#11591](https://github.com/1024pix/pix/pull/11591) [FEATURE] Ne pas afficher les indicateurs de progression, level-up et compteur de question en mode interro (PIX-16490).
+- [#11595](https://github.com/1024pix/pix/pull/11595) [FEATURE] Cacher la progression dans les campagnes de Type EXAM (Pix-16921).
+- [#11583](https://github.com/1024pix/pix/pull/11583) [FEATURE] Supprimer le tag "Autorisé à reprendre" de l'espace surveillant sur Pix Certif (PIX-16875).
+
+### :building_construction: Tech
+- [#11574](https://github.com/1024pix/pix/pull/11574) [TECH] Limiter les 500 en cas de mauvais URL et/ou de mauvaise utilisation de l'API (PIX-16830).
+- [#11596](https://github.com/1024pix/pix/pull/11596) [TECH] Ajouter le dossier de migrations aux codeowners.
+- [#11603](https://github.com/1024pix/pix/pull/11603) [TECH] Séparer la sauvegarde d'une réponse avec la sauvegarde des knowledge-elements correspondants (PIX-16930).
+- [#11601](https://github.com/1024pix/pix/pull/11601) [TECH] Création de la table des enregistrements de plateforme LTI.
+- [#11468](https://github.com/1024pix/pix/pull/11468) [TECH] Refactorer getPlacementProfileWithSnapshotting et generatePlacementProfile.
+
+### :bug: Correction
+- [#11602](https://github.com/1024pix/pix/pull/11602) [BUGFIX] Le `figcaption` des éléments images produisent toujours un espace vide.
+- [#11599](https://github.com/1024pix/pix/pull/11599) [BUGFIX] Quand on retente un QCM, les réponses sélectionnées avant ne sont pas prises en compte (PIX-16822).
+
+### :arrow_up: Montée de version
+- [#11612](https://github.com/1024pix/pix/pull/11612) [BUMP] Update dependency @1024pix/pix-ui to ^54.14.1 (junior).
+- [#11611](https://github.com/1024pix/pix/pull/11611) [BUMP] Update dependency @1024pix/pix-ui to ^54.14.1 (admin).
+
 ## v5.59.0 (07/03/2025)
 
 
