@@ -29,7 +29,7 @@ describe('Unit | Serializer | CSV | campaign-assessment-export', function () {
       };
       stageCollection = {};
       learningContent = { skillNames: [], competences: [], areas: [] };
-      campaign = {};
+      campaign = domainBuilder.prescription.campaign.buildCampaign.ofTypeAssessment({ externalIdLabel: null });
 
       const listSkills1 = domainBuilder.buildSkillCollection({ name: '@web', minLevel: 1, maxLevel: 5 });
       const listSkills2 = domainBuilder.buildSkillCollection({ name: '@url', minLevel: 1, maxLevel: 2 });
@@ -70,6 +70,43 @@ describe('Unit | Serializer | CSV | campaign-assessment-export', function () {
         '"Nom du Participant";' +
         '"Prénom du Participant";' +
         '"% de progression";' +
+        '"Date et heure de début (Europe/Paris)";' +
+        '"Partage (O/N)";' +
+        '"Date et heure du partage (Europe/Paris)";' +
+        '"% maitrise de l\'ensemble des acquis du profil"' +
+        '\n';
+      //when
+      await campaignProfile.export();
+
+      outputStream.end();
+
+      const csv = await csvPromise;
+
+      // then
+      expect(csv).to.equal(expectedHeader);
+    });
+
+    it('should hide progression header on campaign of type Exam', async function () {
+      //given
+      const campaignProfile = new CampaignAssessmentExport({
+        outputStream,
+        organization,
+        campaign: domainBuilder.prescription.campaign.buildCampaign.ofTypeExam({ externalIdLabel: null }),
+        competences,
+        targetProfile,
+        learningContent,
+        stageCollection,
+        translate,
+      });
+
+      const expectedHeader =
+        '\uFEFF"Nom de l\'organisation";' +
+        '"ID Campagne";' +
+        '"Code";' +
+        '"Nom de la campagne";' +
+        '"Parcours";' +
+        '"Nom du Participant";' +
+        '"Prénom du Participant";' +
         '"Date et heure de début (Europe/Paris)";' +
         '"Partage (O/N)";' +
         '"Date et heure du partage (Europe/Paris)";' +

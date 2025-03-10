@@ -5,7 +5,7 @@ const { PassThrough } = stream;
 import dayjs from 'dayjs';
 
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
-import { CampaignExternalIdTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { CampaignExternalIdTypes, CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { CAMPAIGN_FEATURES, ORGANIZATION_FEATURE } from '../../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
@@ -32,19 +32,13 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
       organization = databaseBuilder.factory.buildOrganization({ showSkills: true });
 
       // Profil cible
-      targetProfile = databaseBuilder.factory.buildTargetProfile({ name: '+Profile 1' });
+      targetProfile = databaseBuilder.factory.buildTargetProfile({
+        name: '+Profile 1',
+        organizationId: organization.id,
+      });
       databaseBuilder.factory.buildStage({ targetProfileId: targetProfile.id, threshold: 0 });
       databaseBuilder.factory.buildStage({ targetProfileId: targetProfile.id, threshold: 1 });
       databaseBuilder.factory.buildBadge({ targetProfileId: targetProfile.id });
-
-      // campagne
-      campaign = databaseBuilder.factory.buildCampaign({
-        name: '@Campagne de Test N°1',
-        code: 'AZERTY123',
-        organizationId: organization.id,
-        type: 'ASSESSMENT',
-        targetProfileId: targetProfile.id,
-      });
 
       // participation
       // heure d'hiver UTC+1
@@ -80,705 +74,735 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
       csvPromise = streamToPromise(writableStream);
     });
 
-    context('general context', function () {
-      beforeEach(async function () {
-        now = new Date('1992-07-07');
-        sinon.useFakeTimers({ now, toFake: ['Date'] });
-        const externalIdFeature = databaseBuilder.factory.buildFeature(CAMPAIGN_FEATURES.EXTERNAL_ID);
-        databaseBuilder.factory.buildCampaignFeature({
-          featureId: externalIdFeature.id,
-          campaignId: campaign.id,
-          params: { label: 'Identifiant Pix', type: CampaignExternalIdTypes.STRING },
-        });
-        participant = databaseBuilder.factory.buildUser();
-        organizationLearner = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
-          firstName: '@Jean',
-          lastName: '=Bono',
-          organizationId: organization.id,
-          userId: participant.id,
-        });
-
-        const ke1 = databaseBuilder.factory.buildKnowledgeElement({
-          status: 'validated',
-          skillId: 'recSkillWeb1',
-          competenceId: 'recCompetence1',
-          userId: participant.id,
-          createdAt,
-        });
-
-        databaseBuilder.factory.buildKnowledgeElementSnapshot({
-          userId: participant.id,
-          snappedAt: sharedAt,
-          snapshot: new KnowledgeElementCollection([ke1]).toSnapshot(),
-        });
-
-        ['recSkillWeb1'].forEach((skillId) => {
-          databaseBuilder.factory.buildCampaignSkill({
-            campaignId: campaign.id,
-            skillId: skillId,
+    // eslint-disable-next-line mocha/no-setup-in-describe
+    [
+      // eslint-disable-next-line mocha/no-setup-in-describe
+      { type: CampaignTypes.ASSESSMENT, hideProgression: false },
+      // eslint-disable-next-line mocha/no-setup-in-describe
+      { type: CampaignTypes.EXAM, hideProgression: true },
+    ].forEach(function ({ type, hideProgression }) {
+      context(`campaign of type ${type}`, function () {
+        beforeEach(function () {
+          const user = databaseBuilder.factory.buildUser();
+          // campagne
+          campaign = databaseBuilder.factory.buildCampaign({
+            name: '@Campagne de Test N°1',
+            code: 'AZERTY123',
+            organizationId: organization.id,
+            type,
+            targetProfileId: targetProfile.id,
+            creatorId: user.id,
+            ownerId: user.id,
           });
         });
 
-        await databaseBuilder.commit();
-      });
-      it('should return the correct filename', async function () {
-        // given
+        context('general context', function () {
+          beforeEach(async function () {
+            now = new Date('1992-07-07');
+            sinon.useFakeTimers({ now, toFake: ['Date'] });
+            const externalIdFeature = databaseBuilder.factory.buildFeature(CAMPAIGN_FEATURES.EXTERNAL_ID);
+            databaseBuilder.factory.buildCampaignFeature({
+              featureId: externalIdFeature.id,
+              campaignId: campaign.id,
+              params: { label: 'Identifiant Pix', type: CampaignExternalIdTypes.STRING },
+            });
+            participant = databaseBuilder.factory.buildUser();
+            organizationLearner = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+              firstName: '@Jean',
+              lastName: '=Bono',
+              organizationId: organization.id,
+              userId: participant.id,
+            });
 
-        // when
-        const filename = await usecases.startWritingCampaignAssessmentResultsToStream({
-          campaignId: campaign.id,
-          writableStream,
-          i18n,
-        });
-        await csvPromise;
-        dayjs();
-        const expectedFilename =
-          'Resultats-' +
-          campaign.name +
-          '-' +
-          campaign.id +
-          '-' +
-          dayjs(now).tz('Europe/Berlin').format('YYYY-MM-DD-HHmm') +
-          '.csv';
-        // then
-        expect(filename.fileName).to.equal(expectedFilename);
-      });
-    });
+            const ke1 = databaseBuilder.factory.buildKnowledgeElement({
+              status: 'validated',
+              skillId: 'recSkillWeb1',
+              competenceId: 'recCompetence1',
+              userId: participant.id,
+              createdAt,
+            });
 
-    context('with externalId campaign feature', function () {
-      beforeEach(async function () {
-        const externalIdFeature = databaseBuilder.factory.buildFeature(CAMPAIGN_FEATURES.EXTERNAL_ID);
-        databaseBuilder.factory.buildCampaignFeature({
-          featureId: externalIdFeature.id,
-          campaignId: campaign.id,
-          params: { label: 'Identifiant Pix', type: CampaignExternalIdTypes.STRING },
-        });
-        participant = databaseBuilder.factory.buildUser();
-        organizationLearner = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
-          firstName: '@Jean',
-          lastName: '=Bono',
-          organizationId: organization.id,
-          userId: participant.id,
-        });
+            databaseBuilder.factory.buildKnowledgeElementSnapshot({
+              userId: participant.id,
+              snappedAt: sharedAt,
+              snapshot: new KnowledgeElementCollection([ke1]).toSnapshot(),
+            });
 
-        campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
-          campaignId: campaign.id,
-          organizationLearnerId: organizationLearner.id,
-          userId: participant.id,
-          participantExternalId: 'toto',
-          masteryRate: 0.67,
-          createdAt,
-          sharedAt,
-        });
+            ['recSkillWeb1'].forEach((skillId) => {
+              databaseBuilder.factory.buildCampaignSkill({
+                campaignId: campaign.id,
+                skillId: skillId,
+              });
+            });
 
-        databaseBuilder.factory.buildAssessment({
-          campaignParticipationId: campaignParticipation.id,
-          userId: participant.id,
-          state: Assessment.states.COMPLETED,
-          type: Assessment.types.CAMPAIGN,
-        });
+            await databaseBuilder.commit();
+          });
+          it('should return the correct filename', async function () {
+            // given
 
-        const ke1 = databaseBuilder.factory.buildKnowledgeElement({
-          status: 'validated',
-          skillId: 'recSkillWeb1',
-          competenceId: 'recCompetence1',
-          userId: participant.id,
-          createdAt,
-        });
-        const ke2 = databaseBuilder.factory.buildKnowledgeElement({
-          status: 'validated',
-          skillId: 'recSkillWeb2',
-          competenceId: 'recCompetence1',
-          userId: participant.id,
-          createdAt,
-        });
-        const ke3 = databaseBuilder.factory.buildKnowledgeElement({
-          status: 'invalidated',
-          skillId: 'recSkillWeb3',
-          competenceId: 'recCompetence1',
-          userId: participant.id,
-          createdAt,
-        });
-        databaseBuilder.factory.buildKnowledgeElementSnapshot({
-          userId: participant.id,
-          snappedAt: sharedAt,
-          campaignParticipationId: campaignParticipation.id,
-          snapshot: new KnowledgeElementCollection([ke1, ke2, ke3]).toSnapshot(),
-        });
-
-        ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {
-          databaseBuilder.factory.buildCampaignSkill({
-            campaignId: campaign.id,
-            skillId: skillId,
+            // when
+            const filename = await usecases.startWritingCampaignAssessmentResultsToStream({
+              campaignId: campaign.id,
+              writableStream,
+              i18n,
+            });
+            await csvPromise;
+            dayjs();
+            const expectedFilename =
+              'Resultats-' +
+              campaign.name +
+              '-' +
+              campaign.id +
+              '-' +
+              dayjs(now).tz('Europe/Berlin').format('YYYY-MM-DD-HHmm') +
+              '.csv';
+            // then
+            expect(filename.fileName).to.equal(expectedFilename);
           });
         });
 
-        await databaseBuilder.commit();
-      });
-      it('should return the complete line with participant external id', async function () {
-        // given
-        const csvSecondLine =
-          `"${organization.name}";` +
-          `${campaign.id};` +
-          `"${campaign.code}";` +
-          `"'${campaign.name}";` +
-          `"'${targetProfile.name}";` +
-          `"'${organizationLearner.lastName}";` +
-          `"'${organizationLearner.firstName}";` +
-          `"${campaignParticipation.participantExternalId}";` +
-          '1;' +
-          `"${createdAtFormated}";` +
-          '"Oui";' +
-          `"${sharedAtFormated}";` +
-          '1;' +
-          '"Non";' +
-          '0,67;' +
-          '0,67;' +
-          '3;' +
-          '2;' +
-          '0,67;' +
-          '3;' +
-          '2;' +
-          '"OK";' +
-          '"OK";' +
-          '"KO"';
+        context('with externalId campaign feature', function () {
+          beforeEach(async function () {
+            const externalIdFeature = databaseBuilder.factory.buildFeature(CAMPAIGN_FEATURES.EXTERNAL_ID);
+            databaseBuilder.factory.buildCampaignFeature({
+              featureId: externalIdFeature.id,
+              campaignId: campaign.id,
+              params: { label: 'Identifiant Pix', type: CampaignExternalIdTypes.STRING },
+            });
+            participant = databaseBuilder.factory.buildUser();
+            organizationLearner = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+              firstName: '@Jean',
+              lastName: '=Bono',
+              organizationId: organization.id,
+              userId: participant.id,
+            });
 
-        // when
-        await usecases.startWritingCampaignAssessmentResultsToStream({
-          campaignId: campaign.id,
-          writableStream,
-          i18n,
-        });
-        const csv = await csvPromise;
+            campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+              campaignId: campaign.id,
+              organizationLearnerId: organizationLearner.id,
+              userId: participant.id,
+              participantExternalId: 'toto',
+              masteryRate: 0.67,
+              createdAt,
+              sharedAt,
+            });
 
-        const csvLines = csv.split('\n');
-        const csvFirstLineCells = csvLines[0].split(';');
+            databaseBuilder.factory.buildAssessment({
+              campaignParticipationId: campaignParticipation.id,
+              userId: participant.id,
+              state: Assessment.states.COMPLETED,
+              type: Assessment.types.CAMPAIGN,
+            });
 
-        // then
-        expect(csvFirstLineCells).to.includes('"Identifiant Pix"');
-        expect(csvLines[1]).to.equal(csvSecondLine);
-      });
-    });
+            const ke1 = databaseBuilder.factory.buildKnowledgeElement({
+              status: 'validated',
+              skillId: 'recSkillWeb1',
+              competenceId: 'recCompetence1',
+              userId: participant.id,
+              createdAt,
+            });
+            const ke2 = databaseBuilder.factory.buildKnowledgeElement({
+              status: 'validated',
+              skillId: 'recSkillWeb2',
+              competenceId: 'recCompetence1',
+              userId: participant.id,
+              createdAt,
+            });
+            const ke3 = databaseBuilder.factory.buildKnowledgeElement({
+              status: 'invalidated',
+              skillId: 'recSkillWeb3',
+              competenceId: 'recCompetence1',
+              userId: participant.id,
+              createdAt,
+            });
+            databaseBuilder.factory.buildKnowledgeElementSnapshot({
+              userId: participant.id,
+              snappedAt: sharedAt,
+              campaignParticipationId: campaignParticipation.id,
+              snapshot: new KnowledgeElementCollection([ke1, ke2, ke3]).toSnapshot(),
+            });
 
-    context('extra rows', function () {
-      beforeEach(async function () {
-        // Import Configuration
-        const importConfig = {
-          name: 'MY_TEST_EXPORT',
-          fileType: 'csv',
-          config: {
-            acceptedEncoding: ['utf-8'],
-            unicityColumns: ['my_column1'],
-            validationRules: {
-              formats: [
-                { name: 'my_column1', type: 'string' },
-                { name: 'my_column2', type: 'string' },
-              ],
-            },
-            headers: [
-              { name: 'my_column1', required: true, property: 'lastName' },
-              { name: 'my_column2', required: true, property: 'firstName' },
-              { name: 'hobby', required: true, config: { exportable: true } },
-            ],
-          },
-        };
-        const feature = databaseBuilder.factory.buildFeature({
-          key: ORGANIZATION_FEATURE.LEARNER_IMPORT.key,
-        });
-        const organizationLearnerImportFormatId =
-          databaseBuilder.factory.buildOrganizationLearnerImportFormat(importConfig).id;
+            ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {
+              databaseBuilder.factory.buildCampaignSkill({
+                campaignId: campaign.id,
+                skillId: skillId,
+              });
+            });
 
-        databaseBuilder.factory.buildOrganizationFeature({
-          featureId: feature.id,
-          organizationId: organization.id,
-          params: { organizationLearnerImportFormatId },
-        });
-        participant = databaseBuilder.factory.buildUser();
-        organizationLearner = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
-          firstName: '@Jean',
-          lastName: '=Bono',
-          organizationId: organization.id,
-          userId: participant.id,
-          attributes: { hobby: 'genky', sleep: '8h' },
-        });
+            await databaseBuilder.commit();
+          });
+          it('should return the complete line with participant external id', async function () {
+            // given
+            let csvSecondLine =
+              `"${organization.name}";` +
+              `${campaign.id};` +
+              `"${campaign.code}";` +
+              `"'${campaign.name}";` +
+              `"'${targetProfile.name}";` +
+              `"'${organizationLearner.lastName}";` +
+              `"'${organizationLearner.firstName}";` +
+              `"${campaignParticipation.participantExternalId}";`;
+            if (!hideProgression) csvSecondLine += '1;';
+            csvSecondLine +=
+              `"${createdAtFormated}";` +
+              '"Oui";' +
+              `"${sharedAtFormated}";` +
+              '1;' +
+              '"Non";' +
+              '0,67;' +
+              '0,67;' +
+              '3;' +
+              '2;' +
+              '0,67;' +
+              '3;' +
+              '2;' +
+              '"OK";' +
+              '"OK";' +
+              '"KO"';
 
-        campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
-          campaignId: campaign.id,
-          organizationLearnerId: organizationLearner.id,
-          userId: participant.id,
-          masteryRate: 0.67,
-          createdAt,
-          sharedAt,
-        });
+            // when
+            await usecases.startWritingCampaignAssessmentResultsToStream({
+              campaignId: campaign.id,
+              writableStream,
+              i18n,
+            });
+            const csv = await csvPromise;
 
-        databaseBuilder.factory.buildAssessment({
-          campaignParticipationId: campaignParticipation.id,
-          userId: participant.id,
-          state: Assessment.states.COMPLETED,
-          type: Assessment.types.CAMPAIGN,
-        });
+            const csvLines = csv.split('\n');
+            const csvFirstLineCells = csvLines[0].split(';');
 
-        const ke1 = databaseBuilder.factory.buildKnowledgeElement({
-          status: 'validated',
-          skillId: 'recSkillWeb1',
-          competenceId: 'recCompetence1',
-          userId: participant.id,
-          createdAt,
-        });
-        const ke2 = databaseBuilder.factory.buildKnowledgeElement({
-          status: 'validated',
-          skillId: 'recSkillWeb2',
-          competenceId: 'recCompetence1',
-          userId: participant.id,
-          createdAt,
-        });
-        const ke3 = databaseBuilder.factory.buildKnowledgeElement({
-          status: 'invalidated',
-          skillId: 'recSkillWeb3',
-          competenceId: 'recCompetence1',
-          userId: participant.id,
-          createdAt,
-        });
-        databaseBuilder.factory.buildKnowledgeElementSnapshot({
-          userId: participant.id,
-          snappedAt: sharedAt,
-          campaignParticipationId: campaignParticipation.id,
-          snapshot: new KnowledgeElementCollection([ke1, ke2, ke3]).toSnapshot(),
-        });
-
-        ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {
-          databaseBuilder.factory.buildCampaignSkill({
-            campaignId: campaign.id,
-            skillId: skillId,
+            // then
+            expect(csvFirstLineCells).to.includes('"Identifiant Pix"');
+            expect(csvLines[1]).to.equal(csvSecondLine);
           });
         });
 
-        await databaseBuilder.commit();
-      });
+        context('extra rows', function () {
+          beforeEach(async function () {
+            // Import Configuration
+            const importConfig = {
+              name: 'MY_TEST_EXPORT',
+              fileType: 'csv',
+              config: {
+                acceptedEncoding: ['utf-8'],
+                unicityColumns: ['my_column1'],
+                validationRules: {
+                  formats: [
+                    { name: 'my_column1', type: 'string' },
+                    { name: 'my_column2', type: 'string' },
+                  ],
+                },
+                headers: [
+                  { name: 'my_column1', required: true, property: 'lastName' },
+                  { name: 'my_column2', required: true, property: 'firstName' },
+                  { name: 'hobby', required: true, config: { exportable: true } },
+                ],
+              },
+            };
+            const feature = databaseBuilder.factory.buildFeature({
+              key: ORGANIZATION_FEATURE.LEARNER_IMPORT.key,
+            });
+            const organizationLearnerImportFormatId =
+              databaseBuilder.factory.buildOrganizationLearnerImportFormat(importConfig).id;
 
-      it('should return the complete line', async function () {
-        // given
-        const csvSecondLine =
-          `"${organization.name}";` +
-          `${campaign.id};` +
-          `"${campaign.code}";` +
-          `"'${campaign.name}";` +
-          `"'${targetProfile.name}";` +
-          `"'${organizationLearner.lastName}";` +
-          `"'${organizationLearner.firstName}";` +
-          `"${organizationLearner.attributes.hobby}";` +
-          '1;' +
-          `"${createdAtFormated}";` +
-          '"Oui";' +
-          `"${sharedAtFormated}";` +
-          '1;' +
-          '"Non";' +
-          '0,67;' +
-          '0,67;' +
-          '3;' +
-          '2;' +
-          '0,67;' +
-          '3;' +
-          '2;' +
-          '"OK";' +
-          '"OK";' +
-          '"KO"';
+            databaseBuilder.factory.buildOrganizationFeature({
+              featureId: feature.id,
+              organizationId: organization.id,
+              params: { organizationLearnerImportFormatId },
+            });
+            participant = databaseBuilder.factory.buildUser();
+            organizationLearner = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+              firstName: '@Jean',
+              lastName: '=Bono',
+              organizationId: organization.id,
+              userId: participant.id,
+              attributes: { hobby: 'genky', sleep: '8h' },
+            });
 
-        // when
-        await usecases.startWritingCampaignAssessmentResultsToStream({
-          campaignId: campaign.id,
-          writableStream,
-          i18n,
-        });
-        const csv = await csvPromise;
+            campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+              campaignId: campaign.id,
+              organizationLearnerId: organizationLearner.id,
+              userId: participant.id,
+              masteryRate: 0.67,
+              createdAt,
+              sharedAt,
+            });
 
-        const csvLines = csv.split('\n');
-        const csvFirstLineCells = csvLines[0].split(';');
+            databaseBuilder.factory.buildAssessment({
+              campaignParticipationId: campaignParticipation.id,
+              userId: participant.id,
+              state: Assessment.states.COMPLETED,
+              type: Assessment.types.CAMPAIGN,
+            });
 
-        // then
-        expect(csvFirstLineCells[7]).to.equal('"hobby"');
-        expect(csvLines[1]).to.equal(csvSecondLine);
-      });
-    });
+            const ke1 = databaseBuilder.factory.buildKnowledgeElement({
+              status: 'validated',
+              skillId: 'recSkillWeb1',
+              competenceId: 'recCompetence1',
+              userId: participant.id,
+              createdAt,
+            });
+            const ke2 = databaseBuilder.factory.buildKnowledgeElement({
+              status: 'validated',
+              skillId: 'recSkillWeb2',
+              competenceId: 'recCompetence1',
+              userId: participant.id,
+              createdAt,
+            });
+            const ke3 = databaseBuilder.factory.buildKnowledgeElement({
+              status: 'invalidated',
+              skillId: 'recSkillWeb3',
+              competenceId: 'recCompetence1',
+              userId: participant.id,
+              createdAt,
+            });
+            databaseBuilder.factory.buildKnowledgeElementSnapshot({
+              userId: participant.id,
+              snappedAt: sharedAt,
+              campaignParticipationId: campaignParticipation.id,
+              snapshot: new KnowledgeElementCollection([ke1, ke2, ke3]).toSnapshot(),
+            });
 
-    context('participation shared', function () {
-      beforeEach(async function () {
-        // learner
-        participant = databaseBuilder.factory.buildUser();
-        organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
-          firstName: '@Jean',
-          lastName: '=Bono',
-          organizationId: organization.id,
-          userId: participant.id,
-        });
+            ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {
+              databaseBuilder.factory.buildCampaignSkill({
+                campaignId: campaign.id,
+                skillId: skillId,
+              });
+            });
 
-        campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
-          campaignId: campaign.id,
-          organizationLearnerId: organizationLearner.id,
-          userId: participant.id,
-          masteryRate: 0.67,
-          createdAt,
-          sharedAt,
-        });
+            await databaseBuilder.commit();
+          });
 
-        databaseBuilder.factory.buildAssessment({
-          campaignParticipationId: campaignParticipation.id,
-          userId: participant.id,
-          state: Assessment.states.COMPLETED,
-          type: Assessment.types.CAMPAIGN,
-        });
+          it('should return the complete line', async function () {
+            // given
+            let csvSecondLine =
+              `"${organization.name}";` +
+              `${campaign.id};` +
+              `"${campaign.code}";` +
+              `"'${campaign.name}";` +
+              `"'${targetProfile.name}";` +
+              `"'${organizationLearner.lastName}";` +
+              `"'${organizationLearner.firstName}";` +
+              `"${organizationLearner.attributes.hobby}";`;
+            if (!hideProgression) csvSecondLine += '1;';
+            csvSecondLine +=
+              `"${createdAtFormated}";` +
+              '"Oui";' +
+              `"${sharedAtFormated}";` +
+              '1;' +
+              '"Non";' +
+              '0,67;' +
+              '0,67;' +
+              '3;' +
+              '2;' +
+              '0,67;' +
+              '3;' +
+              '2;' +
+              '"OK";' +
+              '"OK";' +
+              '"KO"';
 
-        const ke1 = databaseBuilder.factory.buildKnowledgeElement({
-          status: 'validated',
-          skillId: 'recSkillWeb1',
-          competenceId: 'recCompetence1',
-          userId: participant.id,
-          createdAt,
-        });
-        const ke2 = databaseBuilder.factory.buildKnowledgeElement({
-          status: 'validated',
-          skillId: 'recSkillWeb2',
-          competenceId: 'recCompetence1',
-          userId: participant.id,
-          createdAt,
-        });
-        const ke3 = databaseBuilder.factory.buildKnowledgeElement({
-          status: 'invalidated',
-          skillId: 'recSkillWeb3',
-          competenceId: 'recCompetence1',
-          userId: participant.id,
-          createdAt,
-        });
-        databaseBuilder.factory.buildKnowledgeElementSnapshot({
-          userId: participant.id,
-          snappedAt: sharedAt,
-          campaignParticipationId: campaignParticipation.id,
-          snapshot: new KnowledgeElementCollection([ke1, ke2, ke3]).toSnapshot(),
-        });
+            // when
+            await usecases.startWritingCampaignAssessmentResultsToStream({
+              campaignId: campaign.id,
+              writableStream,
+              i18n,
+            });
+            const csv = await csvPromise;
 
-        ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {
-          databaseBuilder.factory.buildCampaignSkill({
-            campaignId: campaign.id,
-            skillId: skillId,
+            const csvLines = csv.split('\n');
+            const csvFirstLineCells = csvLines[0].split(';');
+
+            // then
+            expect(csvFirstLineCells[7]).to.equal('"hobby"');
+            expect(csvLines[1]).to.equal(csvSecondLine);
           });
         });
 
-        const badge1 = databaseBuilder.factory.buildBadge({
-          title: 'Mon super badge',
-          targetProfileId: targetProfile.id,
-        });
-        databaseBuilder.factory.buildBadge({
-          title: 'Mon autre super badge',
-          targetProfileId: targetProfile.id,
-        });
+        context('participation shared', function () {
+          beforeEach(async function () {
+            // learner
+            participant = databaseBuilder.factory.buildUser();
+            organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+              firstName: '@Jean',
+              lastName: '=Bono',
+              organizationId: organization.id,
+              userId: participant.id,
+            });
 
-        databaseBuilder.factory.buildBadgeAcquisition({
-          badgeId: badge1.id,
-          userId: participant.id,
-          campaignParticipationId: campaignParticipation.id,
-        });
+            campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+              campaignId: campaign.id,
+              organizationLearnerId: organizationLearner.id,
+              userId: participant.id,
+              masteryRate: 0.67,
+              createdAt,
+              sharedAt,
+            });
 
-        await databaseBuilder.commit();
-      });
+            databaseBuilder.factory.buildAssessment({
+              campaignParticipationId: campaignParticipation.id,
+              userId: participant.id,
+              state: Assessment.states.COMPLETED,
+              type: Assessment.types.CAMPAIGN,
+            });
 
-      it('should return the complete line', async function () {
-        // given
-        const expectedCsvFirstCell = '\uFEFF"Nom de l\'organisation"';
-        const csvSecondLine =
-          `"${organization.name}";` +
-          `${campaign.id};` +
-          `"${campaign.code}";` +
-          `"'${campaign.name}";` +
-          `"'${targetProfile.name}";` +
-          `"'${organizationLearner.lastName}";` +
-          `"'${organizationLearner.firstName}";` +
-          '1;' +
-          `"${createdAtFormated}";` +
-          '"Oui";' +
-          `"${sharedAtFormated}";` +
-          '1;' +
-          '"Non";' +
-          '"Oui";' +
-          '"Non";' +
-          '0,67;' +
-          '0,67;' +
-          '3;' +
-          '2;' +
-          '0,67;' +
-          '3;' +
-          '2;' +
-          '"OK";' +
-          '"OK";' +
-          '"KO"';
+            const ke1 = databaseBuilder.factory.buildKnowledgeElement({
+              status: 'validated',
+              skillId: 'recSkillWeb1',
+              competenceId: 'recCompetence1',
+              userId: participant.id,
+              createdAt,
+            });
+            const ke2 = databaseBuilder.factory.buildKnowledgeElement({
+              status: 'validated',
+              skillId: 'recSkillWeb2',
+              competenceId: 'recCompetence1',
+              userId: participant.id,
+              createdAt,
+            });
+            const ke3 = databaseBuilder.factory.buildKnowledgeElement({
+              status: 'invalidated',
+              skillId: 'recSkillWeb3',
+              competenceId: 'recCompetence1',
+              userId: participant.id,
+              createdAt,
+            });
+            databaseBuilder.factory.buildKnowledgeElementSnapshot({
+              userId: participant.id,
+              snappedAt: sharedAt,
+              campaignParticipationId: campaignParticipation.id,
+              snapshot: new KnowledgeElementCollection([ke1, ke2, ke3]).toSnapshot(),
+            });
 
-        // when
-        await usecases.startWritingCampaignAssessmentResultsToStream({
-          campaignId: campaign.id,
-          writableStream,
-          i18n,
-        });
-        const csv = await csvPromise;
+            ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {
+              databaseBuilder.factory.buildCampaignSkill({
+                campaignId: campaign.id,
+                skillId: skillId,
+              });
+            });
 
-        const csvLines = csv.split('\n');
-        const csvFirstLineCells = csvLines[0].split(';');
+            const badge1 = databaseBuilder.factory.buildBadge({
+              title: 'Mon super badge',
+              targetProfileId: targetProfile.id,
+            });
+            databaseBuilder.factory.buildBadge({
+              title: 'Mon autre super badge',
+              targetProfileId: targetProfile.id,
+            });
 
-        // then
-        expect(csvFirstLineCells[0]).to.equal(expectedCsvFirstCell);
-        expect(csvLines[1]).to.equal(csvSecondLine);
-      });
-    });
+            databaseBuilder.factory.buildBadgeAcquisition({
+              badgeId: badge1.id,
+              userId: participant.id,
+              campaignParticipationId: campaignParticipation.id,
+            });
 
-    context('participation started', function () {
-      beforeEach(async function () {
-        // learner
-        participant = databaseBuilder.factory.buildUser();
-        organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
-          firstName: '@Jean',
-          lastName: '=Bono',
-          organizationId: organization.id,
-          userId: participant.id,
-        });
+            await databaseBuilder.commit();
+          });
 
-        campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
-          campaignId: campaign.id,
-          organizationLearnerId: organizationLearner.id,
-          userId: participant.id,
-          status: CampaignParticipationStatuses.STARTED,
-          createdAt,
-        });
+          it('should return the complete line', async function () {
+            // given
+            const expectedCsvFirstCell = '\uFEFF"Nom de l\'organisation"';
+            let csvSecondLine =
+              `"${organization.name}";` +
+              `${campaign.id};` +
+              `"${campaign.code}";` +
+              `"'${campaign.name}";` +
+              `"'${targetProfile.name}";` +
+              `"'${organizationLearner.lastName}";` +
+              `"'${organizationLearner.firstName}";`;
+            if (!hideProgression) csvSecondLine += '1;';
+            csvSecondLine +=
+              `"${createdAtFormated}";` +
+              '"Oui";' +
+              `"${sharedAtFormated}";` +
+              '1;' +
+              '"Non";' +
+              '"Oui";' +
+              '"Non";' +
+              '0,67;' +
+              '0,67;' +
+              '3;' +
+              '2;' +
+              '0,67;' +
+              '3;' +
+              '2;' +
+              '"OK";' +
+              '"OK";' +
+              '"KO"';
 
-        databaseBuilder.factory.buildAssessment({
-          campaignParticipationId: campaignParticipation.id,
-          userId: participant.id,
-          state: Assessment.states.STARTED,
-          type: Assessment.types.CAMPAIGN,
-        });
+            // when
+            await usecases.startWritingCampaignAssessmentResultsToStream({
+              campaignId: campaign.id,
+              writableStream,
+              i18n,
+            });
+            const csv = await csvPromise;
 
-        databaseBuilder.factory.buildKnowledgeElement({
-          status: 'validated',
-          skillId: 'recSkillWeb1',
-          competenceId: 'recCompetence1',
-          userId: participant.id,
-        });
+            const csvLines = csv.split('\n');
+            const csvFirstLineCells = csvLines[0].split(';');
 
-        ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {
-          databaseBuilder.factory.buildCampaignSkill({
-            campaignId: campaign.id,
-            skillId: skillId,
+            // then
+            expect(csvFirstLineCells[0]).to.equal(expectedCsvFirstCell);
+            expect(csvLines[1]).to.equal(csvSecondLine);
           });
         });
 
-        await databaseBuilder.commit();
-      });
+        context('participation started', function () {
+          beforeEach(async function () {
+            // learner
+            participant = databaseBuilder.factory.buildUser();
+            organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+              firstName: '@Jean',
+              lastName: '=Bono',
+              organizationId: organization.id,
+              userId: participant.id,
+            });
 
-      it('should return a csv line with progression', async function () {
-        // given
-        const expectedCsvFirstCell = '\uFEFF"Nom de l\'organisation"';
-        const csvSecondLine =
-          `"${organization.name}";` +
-          `${campaign.id};` +
-          `"${campaign.code}";` +
-          `"'${campaign.name}";` +
-          `"'${targetProfile.name}";` +
-          `"'${organizationLearner.lastName}";` +
-          `"'${organizationLearner.firstName}";` +
-          '0,333;' +
-          `"${createdAtFormated}";` +
-          '"Non";' +
-          `"NA";` +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA"';
+            campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+              campaignId: campaign.id,
+              organizationLearnerId: organizationLearner.id,
+              userId: participant.id,
+              status: CampaignParticipationStatuses.STARTED,
+              createdAt,
+            });
 
-        // when
-        await usecases.startWritingCampaignAssessmentResultsToStream({
-          campaignId: campaign.id,
-          writableStream,
-          i18n,
-        });
+            databaseBuilder.factory.buildAssessment({
+              campaignParticipationId: campaignParticipation.id,
+              userId: participant.id,
+              state: Assessment.states.STARTED,
+              type: Assessment.types.CAMPAIGN,
+            });
 
-        const csv = await csvPromise;
-        const csvLines = csv.split('\n');
-        const csvFirstLineCells = csvLines[0].split(';');
+            databaseBuilder.factory.buildKnowledgeElement({
+              status: 'validated',
+              skillId: 'recSkillWeb1',
+              competenceId: 'recCompetence1',
+              userId: participant.id,
+            });
 
-        // then
-        expect(csvFirstLineCells[0]).to.equal(expectedCsvFirstCell);
-        expect(csvLines[1]).to.equal(csvSecondLine);
-      });
-    });
+            ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {
+              databaseBuilder.factory.buildCampaignSkill({
+                campaignId: campaign.id,
+                skillId: skillId,
+              });
+            });
 
-    context('multiple participations', function () {
-      let secondCampaignParticipation, secondParticipationDateCreatedAt, secondParticipationCreatedFormated;
-      beforeEach(async function () {
-        secondParticipationDateCreatedAt = new Date('2019-03-05T11:23:00Z');
-        secondParticipationCreatedFormated = '05/03/2019 12:23';
-        // on utilise un nouveau learner
-        participant = databaseBuilder.factory.buildUser();
+            await databaseBuilder.commit();
+          });
 
-        organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
-          firstName: '@Jean',
-          lastName: '=Bono',
-          organizationId: organization.id,
-          userId: participant.id,
-        });
+          it('should return a csv line with progression', async function () {
+            // given
+            const expectedCsvFirstCell = '\uFEFF"Nom de l\'organisation"';
+            let csvSecondLine =
+              `"${organization.name}";` +
+              `${campaign.id};` +
+              `"${campaign.code}";` +
+              `"'${campaign.name}";` +
+              `"'${targetProfile.name}";` +
+              `"'${organizationLearner.lastName}";` +
+              `"'${organizationLearner.firstName}";`;
+            if (!hideProgression) csvSecondLine += '0,333;';
+            csvSecondLine +=
+              `"${createdAtFormated}";` +
+              '"Non";' +
+              `"NA";` +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA"';
 
-        campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
-          campaignId: campaign.id,
-          organizationLearnerId: organizationLearner.id,
-          userId: participant.id,
-          isImproved: true,
-          masteryRate: 0.67,
-          createdAt,
-          sharedAt,
-        });
+            // when
+            await usecases.startWritingCampaignAssessmentResultsToStream({
+              campaignId: campaign.id,
+              writableStream,
+              i18n,
+            });
 
-        databaseBuilder.factory.buildAssessment({
-          campaignParticipationId: campaignParticipation.id,
-          userId: participant.id,
-          state: Assessment.states.COMPLETED,
-          type: Assessment.types.CAMPAIGN,
-        });
+            const csv = await csvPromise;
+            const csvLines = csv.split('\n');
+            const csvFirstLineCells = csvLines[0].split(';');
 
-        // second participation
-        secondCampaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
-          status: CampaignParticipationStatuses.STARTED,
-          campaignId: campaign.id,
-          organizationLearnerId: organizationLearner.id,
-          userId: participant.id,
-          isImproved: false,
-          createdAt: secondParticipationDateCreatedAt,
-        });
-
-        databaseBuilder.factory.buildAssessment({
-          campaignParticipationId: secondCampaignParticipation.id,
-          userId: participant.id,
-          state: Assessment.states.STARTED,
-          type: Assessment.types.CAMPAIGN,
-        });
-
-        const ke1 = databaseBuilder.factory.buildKnowledgeElement({
-          status: 'validated',
-          skillId: 'recSkillWeb1',
-          competenceId: 'recCompetence1',
-          userId: participant.id,
-          createdAt,
-        });
-        const ke2 = databaseBuilder.factory.buildKnowledgeElement({
-          status: 'invalidated',
-          skillId: 'recSkillWeb2',
-          competenceId: 'recCompetence1',
-          userId: participant.id,
-          createdAt,
-        });
-        const ke3 = databaseBuilder.factory.buildKnowledgeElement({
-          status: 'validated',
-          skillId: 'recSkillWeb3',
-          competenceId: 'recCompetence1',
-          userId: participant.id,
-          createdAt,
-        });
-
-        databaseBuilder.factory.buildKnowledgeElement({
-          status: KnowledgeElement.StatusType.RESET,
-          skillId: 'recSkillWeb2',
-          competenceId: 'recCompetence1',
-          userId: participant.id,
-          createdAt: secondParticipationDateCreatedAt,
-        });
-
-        databaseBuilder.factory.buildKnowledgeElementSnapshot({
-          userId: participant.id,
-          snappedAt: sharedAt,
-          campaignParticipationId: campaignParticipation.id,
-          snapshot: new KnowledgeElementCollection([ke1, ke2, ke3]).toSnapshot(),
-        });
-
-        ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {
-          databaseBuilder.factory.buildCampaignSkill({
-            campaignId: campaign.id,
-            skillId: skillId,
+            // then
+            expect(csvFirstLineCells[0]).to.equal(expectedCsvFirstCell);
+            expect(csvLines[1]).to.equal(csvSecondLine);
           });
         });
-        await databaseBuilder.commit();
-      });
-      it('should return 2 lines', async function () {
-        // given
-        const expectedCsvFirstCell = '\uFEFF"Nom de l\'organisation"';
 
-        const csvSecondLine =
-          `"${organization.name}";` +
-          `${campaign.id};` +
-          `"${campaign.code}";` +
-          `"'${campaign.name}";` +
-          `"'${targetProfile.name}";` +
-          `"'${organizationLearner.lastName}";` +
-          `"'${organizationLearner.firstName}";` +
-          '0,667;' +
-          `"${secondParticipationCreatedFormated}";` +
-          '"Non";' +
-          `"NA";` +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA"';
+        context('multiple participations', function () {
+          let secondCampaignParticipation, secondParticipationDateCreatedAt, secondParticipationCreatedFormated;
+          beforeEach(async function () {
+            secondParticipationDateCreatedAt = new Date('2019-03-05T11:23:00Z');
+            secondParticipationCreatedFormated = '05/03/2019 12:23';
+            // on utilise un nouveau learner
+            participant = databaseBuilder.factory.buildUser();
 
-        const csvThirdLine =
-          `"${organization.name}";` +
-          `${campaign.id};` +
-          `"${campaign.code}";` +
-          `"'${campaign.name}";` +
-          `"'${targetProfile.name}";` +
-          `"'${organizationLearner.lastName}";` +
-          `"'${organizationLearner.firstName}";` +
-          '1;' +
-          `"${createdAtFormated}";` +
-          '"Oui";' +
-          `"${sharedAtFormated}";` +
-          '1;' +
-          '"Non";' +
-          '0,67;' +
-          '0,67;' +
-          '3;' +
-          '2;' +
-          '0,67;' +
-          '3;' +
-          '2;' +
-          '"OK";' +
-          '"KO";' +
-          '"OK"';
-        // when
-        await usecases.startWritingCampaignAssessmentResultsToStream({
-          campaignId: campaign.id,
-          writableStream,
-          i18n,
+            organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+              firstName: '@Jean',
+              lastName: '=Bono',
+              organizationId: organization.id,
+              userId: participant.id,
+            });
+
+            campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+              campaignId: campaign.id,
+              organizationLearnerId: organizationLearner.id,
+              userId: participant.id,
+              isImproved: true,
+              masteryRate: 0.67,
+              createdAt,
+              sharedAt,
+            });
+
+            databaseBuilder.factory.buildAssessment({
+              campaignParticipationId: campaignParticipation.id,
+              userId: participant.id,
+              state: Assessment.states.COMPLETED,
+              type: Assessment.types.CAMPAIGN,
+            });
+
+            // second participation
+            secondCampaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+              status: CampaignParticipationStatuses.STARTED,
+              campaignId: campaign.id,
+              organizationLearnerId: organizationLearner.id,
+              userId: participant.id,
+              isImproved: false,
+              createdAt: secondParticipationDateCreatedAt,
+            });
+
+            databaseBuilder.factory.buildAssessment({
+              campaignParticipationId: secondCampaignParticipation.id,
+              userId: participant.id,
+              state: Assessment.states.STARTED,
+              type: Assessment.types.CAMPAIGN,
+            });
+
+            const ke1 = databaseBuilder.factory.buildKnowledgeElement({
+              status: 'validated',
+              skillId: 'recSkillWeb1',
+              competenceId: 'recCompetence1',
+              userId: participant.id,
+              createdAt,
+            });
+            const ke2 = databaseBuilder.factory.buildKnowledgeElement({
+              status: 'invalidated',
+              skillId: 'recSkillWeb2',
+              competenceId: 'recCompetence1',
+              userId: participant.id,
+              createdAt,
+            });
+            const ke3 = databaseBuilder.factory.buildKnowledgeElement({
+              status: 'validated',
+              skillId: 'recSkillWeb3',
+              competenceId: 'recCompetence1',
+              userId: participant.id,
+              createdAt,
+            });
+
+            databaseBuilder.factory.buildKnowledgeElement({
+              status: KnowledgeElement.StatusType.RESET,
+              skillId: 'recSkillWeb2',
+              competenceId: 'recCompetence1',
+              userId: participant.id,
+              createdAt: secondParticipationDateCreatedAt,
+            });
+
+            databaseBuilder.factory.buildKnowledgeElementSnapshot({
+              userId: participant.id,
+              snappedAt: sharedAt,
+              campaignParticipationId: campaignParticipation.id,
+              snapshot: new KnowledgeElementCollection([ke1, ke2, ke3]).toSnapshot(),
+            });
+
+            ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {
+              databaseBuilder.factory.buildCampaignSkill({
+                campaignId: campaign.id,
+                skillId: skillId,
+              });
+            });
+            await databaseBuilder.commit();
+          });
+          it('should return 2 lines', async function () {
+            // given
+            const expectedCsvFirstCell = '\uFEFF"Nom de l\'organisation"';
+
+            let csvSecondLine =
+              `"${organization.name}";` +
+              `${campaign.id};` +
+              `"${campaign.code}";` +
+              `"'${campaign.name}";` +
+              `"'${targetProfile.name}";` +
+              `"'${organizationLearner.lastName}";` +
+              `"'${organizationLearner.firstName}";`;
+            if (!hideProgression) csvSecondLine += '0,667;';
+            csvSecondLine +=
+              `"${secondParticipationCreatedFormated}";` +
+              '"Non";' +
+              `"NA";` +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA";' +
+              '"NA"';
+
+            let csvThirdLine =
+              `"${organization.name}";` +
+              `${campaign.id};` +
+              `"${campaign.code}";` +
+              `"'${campaign.name}";` +
+              `"'${targetProfile.name}";` +
+              `"'${organizationLearner.lastName}";` +
+              `"'${organizationLearner.firstName}";`;
+            if (!hideProgression) csvThirdLine += '1;';
+            csvThirdLine +=
+              `"${createdAtFormated}";` +
+              '"Oui";' +
+              `"${sharedAtFormated}";` +
+              '1;' +
+              '"Non";' +
+              '0,67;' +
+              '0,67;' +
+              '3;' +
+              '2;' +
+              '0,67;' +
+              '3;' +
+              '2;' +
+              '"OK";' +
+              '"KO";' +
+              '"OK"';
+            // when
+            await usecases.startWritingCampaignAssessmentResultsToStream({
+              campaignId: campaign.id,
+              writableStream,
+              i18n,
+            });
+
+            const csv = await csvPromise;
+            const csvLines = csv.split('\n');
+            const csvFirstLineCells = csvLines[0].split(';');
+
+            // then
+            expect(csvLines).to.have.lengthOf(4);
+            expect(csvFirstLineCells[0]).to.equal(expectedCsvFirstCell);
+            expect(csvLines[1]).to.equals(csvSecondLine);
+            expect(csvLines[2]).to.equal(csvThirdLine);
+          });
         });
-
-        const csv = await csvPromise;
-        const csvLines = csv.split('\n');
-        const csvFirstLineCells = csvLines[0].split(';');
-
-        // then
-        expect(csvLines).to.have.lengthOf(4);
-        expect(csvFirstLineCells[0]).to.equal(expectedCsvFirstCell);
-        expect(csvLines[1]).to.equals(csvSecondLine);
-        expect(csvLines[2]).to.equal(csvThirdLine);
       });
     });
   });

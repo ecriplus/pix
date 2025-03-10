@@ -19,7 +19,7 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
 
     beforeEach(function () {
       organization = domainBuilder.buildOrganization({ isManagingStudents: false });
-      campaign = domainBuilder.buildCampaign({ externalIdLabel: null });
+      campaign = domainBuilder.prescription.campaign.buildCampaign.ofTypeAssessment({ externalIdLabel: null });
       targetProfile = domainBuilder.buildTargetProfile();
       learningContent = domainBuilder.buildLearningContent.withSimpleContent();
       areas = learningContent.areas;
@@ -31,105 +31,208 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
     });
 
     describe('common participation case', function () {
-      it('should return shared info, on shared participation', function () {
-        // given
-        const campaignParticipationInfo = domainBuilder.buildCampaignParticipationInfo({
-          createdAt,
-          sharedAt,
+      context('campaign of type EXAM', function () {
+        it('should return shared info, on shared participation', function () {
+          // given
+          const campaignParticipationInfo = domainBuilder.buildCampaignParticipationInfo({
+            createdAt,
+            sharedAt,
+          });
+
+          const campaignAssessmentCsvLine = new CampaignAssessmentResultLine({
+            organization,
+            campaign: domainBuilder.prescription.campaign.buildCampaign.ofTypeExam({ externalIdLabel: null }),
+            campaignParticipationInfo,
+            targetProfile,
+            learningContent,
+            competences,
+            areas,
+            stageCollection,
+            participantKnowledgeElementsByCompetenceId: {
+              [competences[0].id]: [],
+            },
+            translate,
+          });
+
+          // when
+          const csvLine = campaignAssessmentCsvLine.toCsvLine();
+
+          const csvExcpectedLine =
+            `"${organization.name}";` +
+            `${campaign.id};` +
+            `"${campaign.code}";` +
+            `"${campaign.name}";` +
+            `"${targetProfile.name}";` +
+            `"${campaignParticipationInfo.participantLastName}";` +
+            `"${campaignParticipationInfo.participantFirstName}";` +
+            `"${createdAtFormated}";` +
+            '"Oui";' +
+            `"${sharedAtFormated}";` +
+            '1;' +
+            '0;' +
+            '1;' +
+            '0;' +
+            '0;' +
+            '1;' +
+            '0' +
+            '\n';
+
+          // then
+          expect(csvLine).to.equal(csvExcpectedLine);
         });
 
-        const campaignAssessmentCsvLine = new CampaignAssessmentResultLine({
-          organization,
-          campaign,
-          campaignParticipationInfo,
-          targetProfile,
-          learningContent,
-          competences,
-          areas,
-          stageCollection,
-          participantKnowledgeElementsByCompetenceId: {
-            [competences[0].id]: [],
-          },
-          translate,
+        it('should not return shared info, on participation not already shared', function () {
+          // given
+          const campaignParticipationInfo = domainBuilder.buildCampaignParticipationInfo({
+            createdAt,
+            sharedAt: null,
+            isCompleted: false,
+          });
+
+          const campaignAssessmentCsvLine = new CampaignAssessmentResultLine({
+            organization,
+            campaign: domainBuilder.prescription.campaign.buildCampaign.ofTypeExam({ externalIdLabel: null }),
+            campaignParticipationInfo,
+            targetProfile,
+            learningContent,
+            competences,
+            areas,
+            stageCollection,
+            participantKnowledgeElementsByCompetenceId: {
+              [competences[0].id]: [],
+            },
+            translate,
+          });
+
+          // when
+          const csvLine = campaignAssessmentCsvLine.toCsvLine();
+
+          const csvExcpectedLine =
+            `"${organization.name}";` +
+            `${campaign.id};` +
+            `"${campaign.code}";` +
+            `"${campaign.name}";` +
+            `"${targetProfile.name}";` +
+            `"${campaignParticipationInfo.participantLastName}";` +
+            `"${campaignParticipationInfo.participantFirstName}";` +
+            `"${createdAtFormated}";` +
+            '"Non";' +
+            '"NA";' +
+            '"NA";' +
+            '"NA";' +
+            '"NA";' +
+            '"NA";' +
+            '"NA";' +
+            '"NA";' +
+            '"NA"' +
+            '\n';
+
+          // then
+          expect(csvLine).to.equal(csvExcpectedLine);
         });
-
-        // when
-        const csvLine = campaignAssessmentCsvLine.toCsvLine();
-
-        const csvExcpectedLine =
-          `"${organization.name}";` +
-          `${campaign.id};` +
-          `"${campaign.code}";` +
-          `"${campaign.name}";` +
-          `"${targetProfile.name}";` +
-          `"${campaignParticipationInfo.participantLastName}";` +
-          `"${campaignParticipationInfo.participantFirstName}";` +
-          '1;' +
-          `"${createdAtFormated}";` +
-          '"Oui";' +
-          `"${sharedAtFormated}";` +
-          '1;' +
-          '0;' +
-          '1;' +
-          '0;' +
-          '0;' +
-          '1;' +
-          '0' +
-          '\n';
-
-        // then
-        expect(csvLine).to.equal(csvExcpectedLine);
       });
 
-      it('should not return shared info, on participation not already shared', function () {
-        // given
-        const campaignParticipationInfo = domainBuilder.buildCampaignParticipationInfo({
-          createdAt,
-          sharedAt: null,
-          isCompleted: false,
+      context('campaign of type ASSESSMENT', function () {
+        it('should return shared info, on shared participation', function () {
+          // given
+          const campaignParticipationInfo = domainBuilder.buildCampaignParticipationInfo({
+            createdAt,
+            sharedAt,
+          });
+
+          const campaignAssessmentCsvLine = new CampaignAssessmentResultLine({
+            organization,
+            campaign,
+            campaignParticipationInfo,
+            targetProfile,
+            learningContent,
+            competences,
+            areas,
+            stageCollection,
+            participantKnowledgeElementsByCompetenceId: {
+              [competences[0].id]: [],
+            },
+            translate,
+          });
+
+          // when
+          const csvLine = campaignAssessmentCsvLine.toCsvLine();
+
+          const csvExcpectedLine =
+            `"${organization.name}";` +
+            `${campaign.id};` +
+            `"${campaign.code}";` +
+            `"${campaign.name}";` +
+            `"${targetProfile.name}";` +
+            `"${campaignParticipationInfo.participantLastName}";` +
+            `"${campaignParticipationInfo.participantFirstName}";` +
+            '1;' +
+            `"${createdAtFormated}";` +
+            '"Oui";' +
+            `"${sharedAtFormated}";` +
+            '1;' +
+            '0;' +
+            '1;' +
+            '0;' +
+            '0;' +
+            '1;' +
+            '0' +
+            '\n';
+
+          // then
+          expect(csvLine).to.equal(csvExcpectedLine);
         });
 
-        const campaignAssessmentCsvLine = new CampaignAssessmentResultLine({
-          organization,
-          campaign,
-          campaignParticipationInfo,
-          targetProfile,
-          learningContent,
-          competences,
-          areas,
-          stageCollection,
-          participantKnowledgeElementsByCompetenceId: {
-            [competences[0].id]: [],
-          },
-          translate,
+        it('should not return shared info, on participation not already shared', function () {
+          // given
+          const campaignParticipationInfo = domainBuilder.buildCampaignParticipationInfo({
+            createdAt,
+            sharedAt: null,
+            isCompleted: false,
+          });
+
+          const campaignAssessmentCsvLine = new CampaignAssessmentResultLine({
+            organization,
+            campaign,
+            campaignParticipationInfo,
+            targetProfile,
+            learningContent,
+            competences,
+            areas,
+            stageCollection,
+            participantKnowledgeElementsByCompetenceId: {
+              [competences[0].id]: [],
+            },
+            translate,
+          });
+
+          // when
+          const csvLine = campaignAssessmentCsvLine.toCsvLine();
+
+          const csvExcpectedLine =
+            `"${organization.name}";` +
+            `${campaign.id};` +
+            `"${campaign.code}";` +
+            `"${campaign.name}";` +
+            `"${targetProfile.name}";` +
+            `"${campaignParticipationInfo.participantLastName}";` +
+            `"${campaignParticipationInfo.participantFirstName}";` +
+            '0;' +
+            `"${createdAtFormated}";` +
+            '"Non";' +
+            '"NA";' +
+            '"NA";' +
+            '"NA";' +
+            '"NA";' +
+            '"NA";' +
+            '"NA";' +
+            '"NA";' +
+            '"NA"' +
+            '\n';
+
+          // then
+          expect(csvLine).to.equal(csvExcpectedLine);
         });
-
-        // when
-        const csvLine = campaignAssessmentCsvLine.toCsvLine();
-
-        const csvExcpectedLine =
-          `"${organization.name}";` +
-          `${campaign.id};` +
-          `"${campaign.code}";` +
-          `"${campaign.name}";` +
-          `"${targetProfile.name}";` +
-          `"${campaignParticipationInfo.participantLastName}";` +
-          `"${campaignParticipationInfo.participantFirstName}";` +
-          '0;' +
-          `"${createdAtFormated}";` +
-          '"Non";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA";' +
-          '"NA"' +
-          '\n';
-
-        // then
-        expect(csvLine).to.equal(csvExcpectedLine);
       });
 
       context('on additionalInfos info', function () {

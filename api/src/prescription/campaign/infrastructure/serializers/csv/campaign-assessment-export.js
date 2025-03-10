@@ -90,7 +90,7 @@ class CampaignAssessmentExport {
       ...(forSupStudents ? [this.translate('campaign-export.common.participant-student-number')] : []),
       ...(this.campaign.externalIdLabel ? [this.campaign.externalIdLabel] : []),
 
-      this.translate('campaign-export.assessment.progress'),
+      ...(this.campaign.isAssessment ? [this.translate('campaign-export.assessment.progress')] : []),
       this.translate('campaign-export.assessment.started-on'),
       this.translate('campaign-export.assessment.is-shared'),
       this.translate('campaign-export.assessment.shared-on'),
