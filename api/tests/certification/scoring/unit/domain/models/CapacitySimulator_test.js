@@ -1,8 +1,4 @@
-import {
-  CapacitySimulator,
-  findIntervalIndexFromScore,
-} from '../../../../../../src/certification/scoring/domain/models/CapacitySimulator.js';
-import { CertificationAssessmentScoreV3 } from '../../../../../../src/certification/scoring/domain/models/CertificationAssessmentScoreV3.js';
+import { CapacitySimulator } from '../../../../../../src/certification/scoring/domain/models/CapacitySimulator.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | CapacitySimulator', function () {
@@ -222,41 +218,6 @@ describe('Unit | Domain | Models | CapacitySimulator', function () {
             competences: expectedCompetences,
           }),
         );
-      });
-    });
-  });
-
-  describe('#findIntervalIndexFromScore', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
-    [
-      {
-        score: 0,
-        expectedInterval: 0,
-      },
-      {
-        score: 64,
-        expectedInterval: 1,
-      },
-      {
-        score: 200,
-        expectedInterval: 2,
-      },
-      {
-        score: 896,
-        expectedInterval: 7,
-      },
-    ].forEach(({ score, expectedInterval }) => {
-      it(`returns the interval ${expectedInterval} when score is ${score}`, function () {
-        // when
-        const weights = CertificationAssessmentScoreV3.weightsAndCoefficients.map(({ weight }) => weight);
-        const result = findIntervalIndexFromScore({
-          score,
-          weights,
-          scoringIntervalsLength: certificationScoringIntervals.length,
-        });
-
-        // then
-        expect(result).to.equal(expectedInterval);
       });
     });
   });

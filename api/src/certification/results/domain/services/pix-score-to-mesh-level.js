@@ -2,9 +2,8 @@
  * @typedef {import ('../../../shared/domain/models/V3CertificationScoring.js').V3CertificationScoring} V3CertificationScoring
  */
 
-// TODO : bounded context violation
-import { findIntervalIndexFromScore } from '../../../scoring/domain/models/CapacitySimulator.js';
 import { GlobalCertificationLevel } from '../../../shared/domain/models/GlobalCertificationLevel.js';
+import { findIntervalIndexFromScore } from './find-interval-index-from-score.js';
 
 /**
  * @param {Object} params
