@@ -90,7 +90,7 @@ const findUniqByUserIdAndCompetenceId = async function ({ userId, competenceId }
 };
 
 const findUniqByUserIdGroupedByCompetenceId = async function ({ userId, limitDate }) {
-  const knowledgeElements = await this.findUniqByUserId({ userId, limitDate });
+  const knowledgeElements = await findUniqByUserId({ userId, limitDate });
   return _.groupBy(knowledgeElements, 'competenceId');
 };
 
@@ -110,6 +110,28 @@ const findInvalidatedAndDirectByUserId = async function ({ userId }) {
   return invalidatedKnowledgeElements.map(
     (invalidatedKnowledgeElement) => new KnowledgeElement(invalidatedKnowledgeElement),
   );
+};
+
+const findUniqByUserIdForCampaignParticipation = async function ({
+  userId,
+  campaignParticipationId,
+  limitDate,
+  knowledgeElementSnapshotAPI,
+}) {
+  const campaign = await _getAssociatedCampaign(campaignParticipationId);
+  if (!campaign) {
+    return null;
+  }
+  if (campaign.isProfilesCollection || campaign.isAssessment) {
+    return findUniqByUserId({ userId, limitDate });
+  } else if (campaign.isExam) {
+    const snapshot = await knowledgeElementSnapshotAPI.getByParticipation(campaignParticipationId);
+    if (!snapshot.knowledgeElements) {
+      return [];
+    }
+    return snapshot.knowledgeElements.map((ke) => new KnowledgeElement(ke));
+  }
+  return null;
 };
 
 async function _getAssociatedCampaign(campaignParticipationId) {
@@ -134,6 +156,7 @@ export {
   findUniqByUserId,
   findUniqByUserIdAndAssessmentId,
   findUniqByUserIdAndCompetenceId,
+  findUniqByUserIdForCampaignParticipation,
   findUniqByUserIdGroupedByCompetenceId,
   findUniqByUserIds,
   saveForCampaignParticipation,
