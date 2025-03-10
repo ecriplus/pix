@@ -8,14 +8,10 @@
   padding: 32px 16px;
 
   .session-supervising-candidate-list {
-    @include breakpoints.device-is("tablet") {
-      padding: 0 48px;
       margin: auto;
-    }
 
-    @include breakpoints.device-is("desktop") {
-      max-width: 672px;
-      margin: auto;
+    @include breakpoints.device-is("tablet") {
+      max-width: 800px;
     }
 
     &__description {

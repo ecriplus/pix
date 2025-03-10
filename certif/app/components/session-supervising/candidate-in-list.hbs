@@ -1,29 +1,31 @@
 <li class="session-supervising-candidate-in-list">
   <div class="session-supervising-candidate-in-list__candidate-data">
-    <div class="session-supervising-candidate-in-list__status-container">
-      {{#if @candidate.hasStarted}}
-        {{#if @candidate.currentLiveAlert}}
-          <PixTag class="session-supervising-candidate-in-list__status-container--ongoing-alert">
-            {{this.currentLiveAlertLabel}}
-          </PixTag>
-        {{else}}
-          <PixTag class="session-supervising-candidate-in-list__status-container--started">{{t
-              "common.forms.certification-labels.candidate-status.ongoing"
-            }}</PixTag>
+
+    <div class="session-supervising-candidate-in-list__top-information">
+      <div class="session-supervising-candidate-in-list__full-name">
+        {{@candidate.lastName}}
+        {{@candidate.firstName}}
+      </div>
+      <div>
+        {{#if @candidate.hasStarted}}
+          {{#if @candidate.currentLiveAlert}}
+            <PixTag @color="error">
+              {{this.currentLiveAlertLabel}}
+            </PixTag>
+          {{else}}
+            <PixTag @color="success">
+              {{t "common.forms.certification-labels.candidate-status.ongoing"}}
+            </PixTag>
+          {{/if}}
         {{/if}}
-      {{/if}}
-      {{#if @candidate.hasCompleted}}
-        <PixTag class="session-supervising-candidate-in-list__status-container--completed">{{t
-            "common.forms.certification-labels.candidate-status.finished"
-          }}</PixTag>
-      {{/if}}
+        {{#if @candidate.hasCompleted}}
+          <PixTag @color="tertiary">{{t "common.forms.certification-labels.candidate-status.finished"}}</PixTag>
+        {{/if}}
+      </div>
     </div>
-    <div class="session-supervising-candidate-in-list__full-name">
-      {{@candidate.lastName}}
-      {{@candidate.firstName}}
-    </div>
-    <div class="session-supervising-candidate-in-list__details">
-      {{dayjs-format @candidate.birthdate "DD/MM/YYYY"}}
+
+    <div class="session-supervising-candidate-in-list__middle-information">
+      <p>{{dayjs-format @candidate.birthdate "DD/MM/YYYY"}}</p>
       {{#if this.shouldDisplayEnrolledComplementaryCertification}}
         <p class="session-supervising-candidate-in-list-details__enrolment">
           <PixIcon
@@ -37,18 +39,16 @@
           }}
         </p>
       {{/if}}
-
       {{#if this.shouldDisplayNonEligibilityWarning}}
-        <PixNotificationAlert
-          @type="warning"
-          @withIcon={{true}}
-          class="session-supervising-candidate-in-list-details__eligibility"
-        >
+        <PixNotificationAlert @type="warning" @withIcon={{true}}>
           {{t "pages.session-supervising.candidate-in-list.complementary-certification-non-eligibility-warning"}}
         </PixNotificationAlert>
       {{/if}}
-      {{#if @candidate.hasStarted}}
-        <p class="session-supervising-candidate-in-list-details-time">
+    </div>
+
+    {{#if @candidate.hasStarted}}
+      <div class="session-supervising-candidate-in-list__bottom-information">
+        <div class="session-supervising-candidate-in-list-details-time">
           <div class="session-supervising-candidate-in-list-details-time__text">
             <PixIcon
               @name="time"
@@ -72,10 +72,15 @@
               }}
             </PixTag>
           {{/if}}
-        </p>
-      {{/if}}
+        </div>
 
-    </div>
+        {{#if @candidate.hasOngoingChallengeLiveAlert}}
+          <PixButton @triggerAction={{this.askUserToHandleLiveAlert}} @variant="error">
+            {{t "pages.session-supervising.candidate-in-list.resume-test-modal.live-alerts.handle-challenge"}}
+          </PixButton>
+        {{/if}}
+      </div>
+    {{/if}}
     {{#if this.isConfirmButtonToBeDisplayed}}
       <PixButton
         aria-label={{this.authorizationButtonAriaLabel}}
@@ -88,6 +93,7 @@
       </PixButton>
     {{/if}}
   </div>
+
   {{#if this.optionsMenuShouldBeDisplayed}}
     <div class="session-supervising-candidate-in-list__menu">
       <PixIconButton
@@ -102,12 +108,6 @@
         @close={{this.closeMenu}}
         aria-label={{t "pages.session-supervising.candidate-in-list.candidate-options"}}
       >
-        {{#if @candidate.hasOngoingChallengeLiveAlert}}
-          <Dropdown::Item @onClick={{this.askUserToHandleLiveAlert}}>
-            {{t "pages.session-supervising.candidate-in-list.resume-test-modal.live-alerts.handle-challenge"}}
-          </Dropdown::Item>
-        {{/if}}
-
         {{#if @candidate.hasOngoingCompanionLiveAlert}}
           <Dropdown::Item @onClick={{this.askUserToHandleCompanionLiveAlert}}>
             {{t "pages.session-supervising.candidate-in-list.resume-test-modal.live-alerts.handle-companion"}}

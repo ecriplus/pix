@@ -259,10 +259,9 @@ module('Acceptance | Session supervising', function (hooks) {
       const screen = await visit('/connexion-espace-surveillant');
       await fillIn(screen.getByRole('spinbutton', { name: 'Numéro de la session' }), '12345');
       await fillIn(screen.getByLabelText('Mot de passe de la session Exemple : C-12345'), '6789');
-      await click(screen.getByRole('button', { name: 'Surveiller la session' }));
 
       // when
-      await click(screen.getByRole('button', { name: 'Afficher les options du candidat' }));
+      await click(screen.getByRole('button', { name: 'Surveiller la session' }));
 
       // then
       assert.dom(screen.queryByRole('button', { name: 'Gérer le signalement' })).doesNotExist();
@@ -305,7 +304,6 @@ module('Acceptance | Session supervising', function (hooks) {
             await click(screen.getByRole('button', { name: 'Surveiller la session' }));
 
             // when
-            await click(screen.getByRole('button', { name: 'Afficher les options du candidat' }));
             await click(screen.getByRole('button', { name: 'Gérer le signalement' }));
             await click(screen.getByText('Refuser le signalement'));
 
@@ -352,7 +350,6 @@ module('Acceptance | Session supervising', function (hooks) {
             await click(screen.getByRole('button', { name: 'Surveiller la session' }));
 
             // when
-            await click(screen.getByRole('button', { name: 'Afficher les options du candidat' }));
             await click(screen.getByRole('button', { name: 'Gérer le signalement' }));
             await click(screen.getByText('Refuser le signalement'));
             await settled();
@@ -407,7 +404,6 @@ module('Acceptance | Session supervising', function (hooks) {
             await click(screen.getByRole('button', { name: 'Surveiller la session' }));
 
             // when
-            await click(screen.getByRole('button', { name: 'Afficher les options du candidat' }));
             await click(screen.getByRole('button', { name: 'Gérer le signalement' }));
 
             await click(
@@ -466,7 +462,6 @@ module('Acceptance | Session supervising', function (hooks) {
             await click(screen.getByRole('button', { name: 'Surveiller la session' }));
 
             // when
-            await click(screen.getByRole('button', { name: 'Afficher les options du candidat' }));
             await click(screen.getByRole('button', { name: 'Gérer le signalement' }));
             await click(
               screen.getByLabelText(
@@ -517,7 +512,6 @@ module('Acceptance | Session supervising', function (hooks) {
             await click(screen.getByRole('button', { name: 'Surveiller la session' }));
 
             // when
-            await click(screen.getByRole('button', { name: 'Afficher les options du candidat' }));
             await click(screen.getByRole('button', { name: 'Gérer le signalement' }));
             await click(screen.getByLabelText('Le site à visiter est indisponible/en maintenance/inaccessible'));
             await click(screen.getByText('Refuser le signalement'));
@@ -527,7 +521,6 @@ module('Acceptance | Session supervising', function (hooks) {
 
             const visibleCloseButton = closeButtons.filter((element) => isVisible(element))[0];
             await click(visibleCloseButton);
-            await click(screen.getByRole('button', { name: 'Afficher les options du candidat' }));
             await click(screen.getByRole('button', { name: 'Gérer le signalement' }));
             // then
             const checkedRadioButtons = screen.queryAllByRole('radio', { checked: true });
@@ -567,7 +560,6 @@ module('Acceptance | Session supervising', function (hooks) {
             await click(screen.getByRole('button', { name: 'Surveiller la session' }));
 
             // when
-            await click(screen.getByRole('button', { name: 'Afficher les options du candidat' }));
             await click(screen.getByRole('button', { name: 'Gérer le signalement' }));
             await click(screen.getByLabelText('Le site à visiter est indisponible/en maintenance/inaccessible'));
 
