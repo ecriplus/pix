@@ -5,4 +5,10 @@ export default {
     defaultValue: false,
     tags: ['frontend'],
   },
+  isV3CertificationAttestationEnabled: {
+    description: 'Used to enable new certification attestation for V3',
+    type: 'boolean',
+    defaultValue: false,
+    tags: ['team-certification'],
+  },
 };
