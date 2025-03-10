@@ -9,9 +9,12 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Campaigns | details', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  let store;
+
   const toggleEditMode = sinon.stub();
 
   hooks.beforeEach(function () {
+    store = this.owner.lookup('service:store');
     class AccessControlStub extends Service {
       hasAccessToOrganizationActionsScope = true;
     }
@@ -21,7 +24,7 @@ module('Integration | Component | Campaigns | details', function (hooks) {
   module('when campaign type is ASSESSMENT', function () {
     test('should display campaign attributes', async function (assert) {
       // given
-      const campaign = {
+      const campaign = store.createRecord('campaign', {
         type: 'ASSESSMENT',
         code: 'MYCODE',
         creatorFirstName: 'Jon',
@@ -36,7 +39,7 @@ module('Integration | Component | Campaigns | details', function (hooks) {
         customResultPageButtonUrl: 'www.pix.fr',
         createdAt: new Date('2020-02-01'),
         archivedAt: new Date('2020-03-01'),
-      };
+      });
 
       // when
       const screen = await render(
@@ -45,7 +48,7 @@ module('Integration | Component | Campaigns | details', function (hooks) {
 
       // expect
       assert.dom(screen.getByText('Créée le 01/02/2020 par Jon Snow')).exists();
-      assert.dom(screen.getByText('Type : Évaluation')).exists();
+      assert.ok(screen.getByText("Campagne d'évaluation"));
       assert.dom(screen.getByText('Code : MYCODE')).exists();
       assert.dom(screen.getByText('My target profile')).exists();
       assert.dom(screen.getByText('My organization')).exists();
@@ -73,19 +76,33 @@ module('Integration | Component | Campaigns | details', function (hooks) {
     });
   });
 
-  module('when campaign type is COLLECTION_PROFILE ', function () {
+  module('when campaign type is PROFILES_COLLECTION ', function () {
     test('should display profile collection tag', async function (assert) {
       // given
-      const campaign = {
-        type: 'COLLECTION_PROFILE',
-      };
+      const campaign = store.createRecord('campaign', {
+        type: 'PROFILES_COLLECTION',
+        code: 'MYCODE',
+        creatorFirstName: 'Jon',
+        creatorLastName: 'Snow',
+        organizationId: 2,
+        organizationName: 'My organization',
+        targetProfileId: 3,
+        targetProfileName: 'My target profile',
+        customLandingPageText: 'welcome',
+        customResultPageText: 'tadaaa',
+        customResultPageButtonText: 'Click here',
+        customResultPageButtonUrl: 'www.pix.fr',
+        createdAt: new Date('2020-02-01'),
+        archivedAt: new Date('2020-03-01'),
+      });
+
       // when
       const screen = await render(
         <template><Details @campaign={{campaign}} @toggleEditMode={{toggleEditMode}} /></template>,
       );
 
       // then
-      assert.dom(screen.getByText('Type : Collecte de profils')).exists();
+      assert.ok(screen.getByText('Campagne de collecte de profil'));
     });
 
     test('should display the number of shared profiles', async function (assert) {
