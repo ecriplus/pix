@@ -1,10 +1,16 @@
 import { render } from '@1024pix/ember-testing-library';
-import { setupRenderingTest } from 'ember-qunit';
 import CampaignsSection from 'pix-admin/components/organizations/campaigns-section';
 import { module, test } from 'qunit';
 
+import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+
 module('Integration | Component | organizations/campaigns-section', function (hooks) {
-  setupRenderingTest(hooks);
+  setupIntlRenderingTest(hooks);
+  let store;
+
+  hooks.beforeEach(function () {
+    store = this.owner.lookup('service:store');
+  });
 
   module('when there is no campaigns', function () {
     test('it should display aucune campagne', async function (assert) {
@@ -22,7 +28,7 @@ module('Integration | Component | organizations/campaigns-section', function (ho
   module('when there are campaigns', function () {
     test('it should display campaign columns', async function (assert) {
       // given
-      const campaign = {
+      const campaign = store.createRecord('campaign', {
         id: 1,
         name: 'Nom de campagne 1',
         archivedAt: new Date('2021-01-01'),
@@ -33,7 +39,7 @@ module('Integration | Component | organizations/campaigns-section', function (ho
         createdAt: new Date('2021-01-02'),
         creatorLastName: 'K',
         creatorFirstName: 'K',
-      };
+      });
       const campaigns = [campaign];
       campaigns.meta = { rowCount: 1 };
 
@@ -53,7 +59,7 @@ module('Integration | Component | organizations/campaigns-section', function (ho
     });
 
     test('it should display a list of campaigns', async function (assert) {
-      const campaign1 = {
+      const campaign1 = store.createRecord('campaign', {
         id: 1,
         name: 'Nom de campagne 1',
         archivedAt: new Date('2021-01-01'),
@@ -64,19 +70,19 @@ module('Integration | Component | organizations/campaigns-section', function (ho
         creatorFirstName: 'Karam',
         targetProfileId: 1,
         targetProfileName: 'Nom du profil cible',
-      };
-      const campaign2 = {
+      });
+      const campaign2 = store.createRecord('campaign', {
         id: 2,
         name: 'Nom de campagne 2',
         archivedAt: new Date('2021-01-03'),
-        type: 'PROFILE_COLLECTION',
+        type: 'PROFILES_COLLECTION',
         code: '456',
         createdAt: new Date('2021-01-04'),
         creatorLastName: 'JJ',
         creatorFirstName: 'AA',
         targetProfileId: null,
         targetProfileName: null,
-      };
+      });
       const campaigns = [campaign1, campaign2];
       campaigns.meta = { rowCount: 2 };
 
@@ -84,11 +90,11 @@ module('Integration | Component | organizations/campaigns-section', function (ho
       const screen = await render(<template><CampaignsSection @campaigns={{campaigns}} /></template>);
 
       // then
-      assert.strictEqual(screen.getAllByLabelText('campagne').length, 2);
+      assert.strictEqual(screen.getAllByRole('row').length, 3);
     });
 
     test('it should display information of each campaigns', async function (assert) {
-      const campaign1 = {
+      const campaign1 = store.createRecord('campaign', {
         id: 1,
         name: 'Nom de campagne 1',
         archivedAt: new Date('2021-01-01'),
@@ -102,12 +108,12 @@ module('Integration | Component | organizations/campaigns-section', function (ho
         ownerFirstName: 'Amar',
         targetProfileId: 1,
         targetProfileName: 'Nom du profil cible',
-      };
-      const campaign2 = {
+      });
+      const campaign2 = store.createRecord('campaign', {
         id: 2,
         name: 'Nom de campagne 2',
         archivedAt: new Date('2021-01-03'),
-        type: 'PROFILE_COLLECTION',
+        type: 'PROFILES_COLLECTION',
         code: '456',
         createdAt: new Date('2021-01-04'),
         creatorLastName: 'Elizabeth',
@@ -116,7 +122,7 @@ module('Integration | Component | organizations/campaigns-section', function (ho
         ownerFirstName: 'Amer',
         targetProfileId: null,
         targetProfileName: null,
-      };
+      });
       const campaigns = [campaign1, campaign2];
       campaigns.meta = { rowCount: 2 };
 
@@ -126,7 +132,7 @@ module('Integration | Component | organizations/campaigns-section', function (ho
       // then
       assert.dom(screen.getByRole('link', { name: '123' })).exists();
       assert.dom(screen.getByText('123')).exists();
-      assert.dom(screen.getByTitle('Évaluation')).exists();
+      assert.dom(screen.getByTitle("Campagne d'évaluation")).exists();
       assert.dom(screen.getByText('Nom de campagne 1')).exists();
       assert.dom(screen.getByText('Karam King')).exists();
       assert.dom(screen.getByText('Amar Di')).exists();
@@ -137,7 +143,7 @@ module('Integration | Component | organizations/campaigns-section', function (ho
 
       assert.dom(screen.getByRole('link', { name: '456' })).exists();
       assert.dom(screen.getByText('456')).exists();
-      assert.dom(screen.getByTitle('Collecte de profils')).exists();
+      assert.dom(screen.getByTitle('Campagne de collecte de profil')).exists();
       assert.dom(screen.getByText('Nom de campagne 2')).exists();
       assert.dom(screen.getByText('Queen Elizabeth')).exists();
       assert.dom(screen.getByText('Amer Credi')).exists();
@@ -147,7 +153,7 @@ module('Integration | Component | organizations/campaigns-section', function (ho
 
     test('it should display - when there is no archivedAt date', async function (assert) {
       // given
-      const campaign = {
+      const campaign = store.createRecord('campaign', {
         id: 1,
         name: 'Nom de campagne 1',
         archivedAt: null,
@@ -157,7 +163,7 @@ module('Integration | Component | organizations/campaigns-section', function (ho
         createdAt: new Date('2021-01-02'),
         creatorLastName: 'King',
         creatorFirstName: 'Karam',
-      };
+      });
       const campaigns = [campaign];
       campaigns.meta = { rowCount: 1 };
 
@@ -170,7 +176,7 @@ module('Integration | Component | organizations/campaigns-section', function (ho
 
     test('it should display - when there is no deletedAt date', async function (assert) {
       // given
-      const campaign = {
+      const campaign = store.createRecord('campaign', {
         id: 1,
         name: 'Nom de campagne 1',
         archivedAt: new Date('2021-01-02'),
@@ -180,7 +186,7 @@ module('Integration | Component | organizations/campaigns-section', function (ho
         createdAt: new Date('2021-01-02'),
         creatorLastName: 'King',
         creatorFirstName: 'Karam',
-      };
+      });
       const campaigns = [campaign];
       campaigns.meta = { rowCount: 1 };
 

@@ -1,104 +1,78 @@
-import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { LinkTo } from '@ember/routing';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
-import { eq } from 'ember-truth-helpers';
+import { or } from 'ember-truth-helpers';
+
+import CampaignType from '../campaigns/type';
 
 <template>
-  <section class="page-section">
-    <header class="page-section__header">
-      <h2 class="page-section__title">Liste des campagnes</h2>
-    </header>
-    <div class="content-text content-text--small">
-      <div class="table-admin">
-        <table>
-          <thead>
-            <tr>
-              <th class="table__column--medium">Code</th>
-              <th>Nom</th>
-              <th class="table__column--small">Type</th>
-              <th>Profil cible</th>
-              <th class="table__column--medium">Créée le</th>
-              <th>Créée par</th>
-              <th>Propriétaire</th>
-              <th class="table__column--medium">Archivée le</th>
-              <th class="table__column--medium">Supprimée le</th>
-            </tr>
-          </thead>
+  <section class="no-background">
+    <PixTable @data={{@campaigns}} @caption="Liste des campagnes de l'organisation" class="table">
+      <:columns as |campaign context|>
+        <PixTableColumn @context={{context}}>
+          <:header>Code</:header>
+          <:cell><LinkTo @route="authenticated.campaigns.campaign" @model={{campaign.id}}>
+              {{campaign.code}}
+            </LinkTo></:cell>
+        </PixTableColumn>
+        <PixTableColumn @context={{context}}>
+          <:header>Nom</:header>
+          <:cell>{{campaign.name}}</:cell>
+        </PixTableColumn>
+        <PixTableColumn @context={{context}}>
+          <:header>Type</:header>
+          <:cell><CampaignType @campaignType={{campaign.type}} @hideLabel={{true}} /></:cell>
+        </PixTableColumn>
+        <PixTableColumn @context={{context}}>
+          <:header>Profil cible</:header>
+          <:cell>
+            {{#if (or campaign.isTypeAssessment campaign.isTypeExam)}}
+              <LinkTo @route="authenticated.target-profiles.target-profile.details" @model={{campaign.targetProfileId}}>
+                {{campaign.targetProfileName}}
+              </LinkTo>
+            {{else}}
+              -
+            {{/if}}
+          </:cell>
+        </PixTableColumn>
+        <PixTableColumn @context={{context}}>
+          <:header>Créée le</:header>
+          <:cell>{{dayjsFormat campaign.createdAt "DD/MM/YYYY"}}</:cell>
+        </PixTableColumn>
+        <PixTableColumn @context={{context}}>
+          <:header>Créée par</:header>
+          <:cell>{{campaign.creatorFirstName}} {{campaign.creatorLastName}}</:cell>
+        </PixTableColumn>
+        <PixTableColumn @context={{context}}>
+          <:header>Propriétaire</:header>
+          <:cell>{{campaign.ownerFirstName}} {{campaign.ownerLastName}}</:cell>
+        </PixTableColumn>
+        <PixTableColumn @context={{context}}>
+          <:header>Archivée le</:header>
+          <:cell>{{#if campaign.archivedAt}}
+              {{dayjsFormat campaign.archivedAt "DD/MM/YYYY"}}
+            {{else}}
+              -
+            {{/if}}</:cell>
+        </PixTableColumn>
+        <PixTableColumn @context={{context}}>
+          <:header>Supprimée le</:header>
+          <:cell>{{#if campaign.deletedAt}}
+              {{dayjsFormat campaign.deletedAt "DD/MM/YYYY"}}
+            {{else}}
+              -
+            {{/if}}</:cell>
+        </PixTableColumn>
+      </:columns>
+    </PixTable>
+    {{#unless @campaigns}}
+      <div class="table__empty">Aucune campagne</div>
+    {{/unless}}
 
-          {{#if @campaigns}}
-            <tbody>
-              {{#each @campaigns as |campaign|}}
-                <tr aria-label="campagne">
-                  <td>
-                    <LinkTo @route="authenticated.campaigns.campaign" @model={{campaign.id}}>
-                      {{campaign.code}}
-                    </LinkTo>
-                  </td>
-                  <td class="table__cell--name">{{campaign.name}}</td>
-                  <td>
-                    {{#if (eq campaign.type "ASSESSMENT")}}
-                      <div title="Évaluation">
-                        <PixIcon
-                          @name="speed"
-                          @plainIcon={{true}}
-                          @ariaHidden={{true}}
-                          class="campaign-type__icon-assessment"
-                        />
-                      </div>
-                    {{else}}
-                      <div title="Collecte de profils">
-                        <PixIcon
-                          @name="profileShare"
-                          @plainIcon={{true}}
-                          @ariaHidden={{true}}
-                          class="campaign-type__icon-profile-collection"
-                        />
-                      </div>
-                    {{/if}}
-                  </td>
-                  <td>
-                    {{#if (eq campaign.type "ASSESSMENT")}}
-                      <LinkTo
-                        @route="authenticated.target-profiles.target-profile.details"
-                        @model={{campaign.targetProfileId}}
-                      >
-                        {{campaign.targetProfileName}}
-                      </LinkTo>
-                    {{else}}
-                      -
-                    {{/if}}
-                  </td>
-                  <td>{{dayjsFormat campaign.createdAt "DD/MM/YYYY"}}</td>
-                  <td>{{campaign.creatorFirstName}} {{campaign.creatorLastName}}</td>
-                  <td>{{campaign.ownerFirstName}} {{campaign.ownerLastName}}</td>
-                  <td>
-                    {{#if campaign.archivedAt}}
-                      {{dayjsFormat campaign.archivedAt "DD/MM/YYYY"}}
-                    {{else}}
-                      -
-                    {{/if}}
-                  </td>
-                  <td>
-                    {{#if campaign.deletedAt}}
-                      {{dayjsFormat campaign.deletedAt "DD/MM/YYYY"}}
-                    {{else}}
-                      -
-                    {{/if}}
-                  </td>
-                </tr>
-              {{/each}}
-            </tbody>
-          {{/if}}
-        </table>
-
-        {{#unless @campaigns}}
-          <div class="table__empty">Aucune campagne</div>
-        {{/unless}}
-      </div>
-      {{#if @campaigns}}
-        <PixPagination @pagination={{@campaigns.meta}} />
-      {{/if}}
-    </div>
+    {{#if @campaigns}}
+      <PixPagination @pagination={{@campaigns.meta}} />
+    {{/if}}
   </section>
 </template>
