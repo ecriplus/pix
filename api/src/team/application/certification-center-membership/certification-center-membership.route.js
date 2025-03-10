@@ -52,4 +52,22 @@ export const certificationCenterMembershipRoute = [
       tags: ['api', 'certification-center-membership'],
     },
   },
+  {
+    method: 'POST',
+    path: '/api/certif/certification-centers/{certificationCenterId}/update-referer',
+    config: {
+      handler: certificationCenterMembershipController.updateReferer,
+      pre: [
+        {
+          method: securityPreHandlers.checkUserIsAdminOfCertificationCenter,
+          assign: 'isAdminOfCertificationCenter',
+        },
+      ],
+      notes: [
+        "- **Cette route est restreinte aux utilisateurs ayant les droits d'accès**\n" +
+          "- Mise à jour du status de référent d'un membre d'un espace pix-certif\n",
+      ],
+      tags: ['api', 'certification-center-membership'],
+    },
+  },
 ];

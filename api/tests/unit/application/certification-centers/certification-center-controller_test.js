@@ -1,5 +1,5 @@
-import { certificationCenterController } from '../../../../lib/application/certification-centers/certification-center-controller.js';
-import { usecases } from '../../../../lib/domain/usecases/index.js';
+import { certificationCenterMembershipController } from '../../../../src/team/application/certification-center-membership/certification-center-membership.controller.js';
+import { usecases } from '../../../../src/team/domain/usecases/index.js';
 import { expect, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Controller | certifications-center-controller', function () {
@@ -21,7 +21,7 @@ describe('Unit | Controller | certifications-center-controller', function () {
       sinon.stub(usecases, 'updateCertificationCenterReferer').resolves();
 
       // when
-      const response = await certificationCenterController.updateReferer(request, hFake);
+      const response = await certificationCenterMembershipController.updateReferer(request, hFake);
 
       // then
       expect(usecases.updateCertificationCenterReferer).calledWith({

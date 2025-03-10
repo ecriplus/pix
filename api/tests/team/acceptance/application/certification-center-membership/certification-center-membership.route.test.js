@@ -47,6 +47,7 @@ describe('Acceptance | Team | Application | Routes | certification-center-member
     context('Success cases', function () {
       it('returns a 200 HTTP status code with the updated certification center membership', async function () {
         // given
+        server = await createServer();
         const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
         const user = databaseBuilder.factory.buildUser();
         const certificationCenterMembership = databaseBuilder.factory.buildCertificationCenterMembership({
@@ -95,6 +96,50 @@ describe('Acceptance | Team | Application | Routes | certification-center-member
         };
         expect(_.omit(response.result, 'included')).to.deep.equal(expectedUpdatedCertificationCenterMembership);
       });
+    });
+  });
+
+  describe('POST /api/certif/certification-centers/{certificationCenterId}/update-referer', function () {
+    it('should return 204 HTTP status', async function () {
+      // given
+      server = await createServer();
+      const userId = databaseBuilder.factory.buildUser().id;
+      const certificationCenterMemberId = databaseBuilder.factory.buildUser().id;
+      const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+      databaseBuilder.factory.buildCertificationCenterMembership({
+        userId,
+        certificationCenterId,
+        isReferer: false,
+      });
+      databaseBuilder.factory.buildCertificationCenterMembership({
+        userId: certificationCenterMemberId,
+        certificationCenterId,
+        isReferer: false,
+        role: 'ADMIN',
+      });
+      await databaseBuilder.commit();
+
+      const payload = {
+        data: {
+          attributes: {
+            isReferer: true,
+            userId,
+          },
+        },
+      };
+
+      const options = {
+        method: 'POST',
+        url: `/api/certif/certification-centers/${certificationCenterId}/update-referer`,
+        payload,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: certificationCenterMemberId }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(204);
     });
   });
 });
