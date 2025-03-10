@@ -22,7 +22,7 @@ import { UserDetailsForAdmin } from '../../domain/models/UserDetailsForAdmin.js'
 import { UserLogin } from '../../domain/models/UserLogin.js';
 
 const getByEmail = async function (email) {
-  const foundUser = await knex.from('users').whereRaw('LOWER("email") = ?', email.toLowerCase()).first();
+  const foundUser = await knex.from('users').whereILike('email', email).first();
   if (!foundUser) {
     throw new UserNotFoundError(`User not found for email ${email}`);
   }
@@ -55,7 +55,7 @@ const getFullById = async function (userId) {
 
 const getByUsernameOrEmailWithRolesAndPassword = async function (username) {
   const userDTO = await knex('users')
-    .where({ email: username.toLowerCase() })
+    .whereILike('email', username)
     .orWhere({ username: username.toLowerCase() })
     .first();
 
@@ -257,7 +257,7 @@ const updateWithEmailConfirmed = function ({ id, userAttributes }) {
 };
 
 const checkIfEmailIsAvailable = async function (email) {
-  const existingUserEmail = await knex('users').whereRaw('LOWER("email") = ?', email.toLowerCase()).first();
+  const existingUserEmail = await knex('users').whereILike('email', email).first();
 
   if (existingUserEmail) throw new InvalidOrAlreadyUsedEmailError();
 
@@ -265,7 +265,7 @@ const checkIfEmailIsAvailable = async function (email) {
 };
 
 const isUserExistingByEmail = async function (email) {
-  const existingUser = await knex('users').where('email', email.toLowerCase()).first();
+  const existingUser = await knex('users').whereILike('email', email).first();
   if (!existingUser) throw new UserNotFoundError();
   return true;
 };
@@ -390,7 +390,7 @@ const findByExternalIdentifier = async function ({ externalIdentityId, identityP
 };
 
 const findAnotherUserByEmail = async function (userId, email) {
-  const anotherUsers = await knex('users').whereNot('id', userId).where({ email: email.toLowerCase() });
+  const anotherUsers = await knex('users').whereNot('id', userId).whereILike('email', email);
 
   return anotherUsers.map((anotherUser) => new User(anotherUser));
 };
