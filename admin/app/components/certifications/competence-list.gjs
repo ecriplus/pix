@@ -1,3 +1,5 @@
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { concat, fn, get } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
@@ -82,28 +84,40 @@ export default class CertificationCompetenceList extends Component {
         </div>
       {{/each}}
     {{else}}
-      <table aria-label="{{t 'pages.certifications.certification.result.table.label'}}" class="table-admin">
-        <thead>
-          <tr>
-            <th scope="col">{{t "pages.certifications.certification.result.table.headers.competence"}}</th>
-            {{#if @shouldDisplayPixScore}}
-              <th scope="col">{{t "pages.certifications.certification.result.table.headers.score"}}</th>
-            {{/if}}
-            <th scope="col">{{t "pages.certifications.certification.result.table.headers.level"}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each @competences as |competence|}}
-            <tr>
-              <th scope="row">{{competence.index}}</th>
-              {{#if @shouldDisplayPixScore}}
-                <td>{{competence.score}}</td>
-              {{/if}}
-              <td>{{competence.level}}</td>
-            </tr>
-          {{/each}}
-        </tbody>
-      </table>
+      <PixTable
+        @variant="primary"
+        @caption={{t "pages.certifications.certification.result.table.label"}}
+        @data={{@competences}}
+      >
+        <:columns as |competence context|>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.certifications.certification.result.table.headers.competence"}}
+            </:header>
+            <:cell>
+              {{competence.index}}
+            </:cell>
+          </PixTableColumn>
+          {{#if @shouldDisplayPixScore}}
+            <PixTableColumn @context={{context}}>
+              <:header>
+                {{t "pages.certifications.certification.result.table.headers.score"}}
+              </:header>
+              <:cell>
+                {{competence.score}}
+              </:cell>
+            </PixTableColumn>
+          {{/if}}
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.certifications.certification.result.table.headers.level"}}
+            </:header>
+            <:cell>
+              {{competence.level}}
+            </:cell>
+          </PixTableColumn>
+        </:columns>
+      </PixTable>
     {{/if}}
   </template>
 }

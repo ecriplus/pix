@@ -28,15 +28,15 @@ module('Integration | Component | certifications/competence-list', function (hoo
     assert.dom(within(rows[0]).getByRole('columnheader', { name: 'Score' })).exists();
     assert.dom(within(rows[0]).getByRole('columnheader', { name: 'Niveau' })).exists();
 
-    assert.dom(within(rows[1]).getByRole('rowheader', { name: '1.1' })).exists();
+    assert.dom(within(rows[1]).getByRole('cell', { name: '1.1' })).exists();
     assert.dom(within(rows[1]).getByRole('cell', { name: '30' })).exists();
     assert.dom(within(rows[1]).getByRole('cell', { name: '3' })).exists();
 
-    assert.dom(within(rows[2]).getByRole('rowheader', { name: '2.1' })).exists();
+    assert.dom(within(rows[2]).getByRole('cell', { name: '2.1' })).exists();
     assert.dom(within(rows[2]).getByRole('cell', { name: '20' })).exists();
     assert.dom(within(rows[2]).getByRole('cell', { name: '2' })).exists();
 
-    assert.dom(within(rows[3]).getByRole('rowheader', { name: '5.2' })).exists();
+    assert.dom(within(rows[3]).getByRole('cell', { name: '5.2' })).exists();
     assert.dom(within(rows[3]).getByRole('cell', { name: '10' })).exists();
     assert.dom(within(rows[3]).getByRole('cell', { name: '1' })).exists();
   });
@@ -57,7 +57,7 @@ module('Integration | Component | certifications/competence-list', function (hoo
     assert.dom(within(table).getByRole('columnheader', { name: 'Compétence' })).exists();
     assert.dom(within(table).getByRole('columnheader', { name: 'Score' })).exists();
     assert.dom(within(table).getByRole('columnheader', { name: 'Niveau' })).exists();
-    assert.dom(within(rows[1]).getByRole('rowheader', { name: '1.1' })).exists();
+    assert.dom(within(rows[1]).getByRole('cell', { name: '1.1' })).exists();
     assert.dom(within(rows[1]).getByRole('cell', { name: '30' })).exists();
     assert.dom(within(rows[1]).getByRole('cell', { name: '3' })).exists();
   });
@@ -120,7 +120,7 @@ module('Integration | Component | certifications/competence-list', function (hoo
       assert.dom(within(rows[0]).getByRole('columnheader', { name: 'Compétence' })).exists();
       assert.dom(within(rows[0]).getByRole('columnheader', { name: 'Niveau' })).exists();
 
-      assert.dom(within(rows[1]).getByRole('rowheader', { name: '1.1' })).exists();
+      assert.dom(within(rows[1]).getByRole('cell', { name: '1.1' })).exists();
       assert.dom(within(rows[1]).getByRole('cell', { name: '3' })).exists();
 
       assert.dom(screen.queryByText('Score')).doesNotExist();
