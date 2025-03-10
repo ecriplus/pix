@@ -57,7 +57,9 @@ const saveAndCorrectAnswerForCampaign = withTransaction(async function ({
     const targetSkills = await campaignRepository.findSkillsByCampaignParticipationId({
       campaignParticipationId: assessment.campaignParticipationId,
     });
-    const campaignId = await campaignRepository.getCampaignIdByCampaignParticipationId(campaignParticipationId);
+    const campaignId = await campaignRepository.getCampaignIdByCampaignParticipationId(
+      assessment.campaignParticipationId,
+    );
     const campaign = await campaignRepository.get(campaignId);
     answerSaved = await answerRepository.save({ answer: correctedAnswer });
     const knowledgeElementsToAdd = computeKnowledgeElements({
@@ -171,10 +173,16 @@ async function computeLevelUpInformation({
   const knowledgeElementsForCompetenceBefore = knowledgeElementsBefore.filter(
     (knowledgeElement) => knowledgeElement.competenceId === competenceId,
   );
+  const knowledgeElementsAddedForCompetence = knowledgeElementsAdded.filter(
+    (knowledgeElement) => knowledgeElement.competenceId === competenceId,
+  );
   const knowledgeElementsForCompetenceAfter = [
-    ...knowledgeElementsAdded.filter((knowledgeElement) => knowledgeElement.competenceId === competenceId),
+    ...knowledgeElementsAddedForCompetence,
     ...knowledgeElementsForCompetenceBefore,
   ];
+  const uniqKnowledgeElementsForCompetenceAfter = knowledgeElementsForCompetenceAfter.filter(
+    (ke, index) => knowledgeElementsForCompetenceAfter.findIndex(({ skillId }) => skillId === ke.skillId) === index,
+  );
   return scorecardService.computeLevelUpInformation({
     answer: answerSaved,
     userId,
@@ -182,9 +190,8 @@ async function computeLevelUpInformation({
     competence,
     competenceEvaluationForCompetence,
     knowledgeElementsForCompetenceBefore,
-    knowledgeElementsForCompetenceAfter,
+    knowledgeElementsForCompetenceAfter: uniqKnowledgeElementsForCompetenceAfter,
   });
 }
 
-export { saveAndCorrectAnswerForCampaign };
 export { saveAndCorrectAnswerForCampaign };
