@@ -1,4 +1,5 @@
 import { getCurrentUser } from '../../../../../src/identity-access-management/domain/usecases/get-current-user.usecase.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | get-current-user', function () {
@@ -7,6 +8,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | get-current-use
   let userRecommendedTrainingRepository;
 
   beforeEach(function () {
+    sinon.stub(DomainTransaction, 'execute').callsFake((lambda) => lambda());
     userRepository = { get: sinon.stub() };
     campaignParticipationRepository = {
       hasAssessmentParticipations: sinon.stub(),

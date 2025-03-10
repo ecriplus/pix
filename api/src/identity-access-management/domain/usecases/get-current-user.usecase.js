@@ -1,3 +1,4 @@
+import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { UserWithActivity } from '../read-models/UserWithActivity.js';
 
 /**
@@ -9,7 +10,7 @@ import { UserWithActivity } from '../read-models/UserWithActivity.js';
  * }} params
  * @return {Promise<UserWithActivity>}
  */
-export const getCurrentUser = async function ({
+export const getCurrentUser = withTransaction(async function ({
   authenticatedUserId,
   userRepository,
   campaignParticipationRepository,
@@ -20,8 +21,10 @@ export const getCurrentUser = async function ({
     campaignParticipationRepository.getCodeOfLastParticipationToProfilesCollectionCampaignForUser(authenticatedUserId),
     userRecommendedTrainingRepository.hasRecommendedTrainings({ userId: authenticatedUserId }),
   ]);
+
   const user = await userRepository.get(authenticatedUserId);
   const shouldSeeDataProtectionPolicyInformationBanner = user.shouldSeeDataProtectionPolicyInformationBanner;
+
   return new UserWithActivity({
     user,
     hasAssessmentParticipations,
@@ -29,4 +32,4 @@ export const getCurrentUser = async function ({
     hasRecommendedTrainings,
     shouldSeeDataProtectionPolicyInformationBanner,
   });
-};
+});
