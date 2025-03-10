@@ -165,7 +165,6 @@ module('Unit | Component | register-form', function (hooks) {
         sinon.assert.calledWith(sessionService.authenticate, 'authenticator:oauth2', {
           login: component.username,
           password: component.password,
-          scope: 'mon-pix',
         });
         sinon.assert.called(createdDependentUser.save);
 

@@ -87,7 +87,6 @@ module('Integration | Component | routes/register-form', function (hooks) {
       sinon.assert.calledWith(sessionService.authenticate, 'authenticator:oauth2', {
         login: 'shi@fu.me',
         password: 'Mypassword1',
-        scope: 'mon-pix',
       });
       assert.ok(true);
     });
@@ -107,7 +106,6 @@ module('Integration | Component | routes/register-form', function (hooks) {
       sinon.assert.calledWith(sessionService.authenticate, 'authenticator:oauth2', {
         login: 'pix.pix1010',
         password: 'Mypassword1',
-        scope: 'mon-pix',
       });
       assert.ok(true);
     });

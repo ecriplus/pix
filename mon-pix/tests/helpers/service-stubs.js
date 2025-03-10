@@ -32,7 +32,7 @@ export function stubSessionService(owner, sessionData = {}) {
 
       if (isAuthenticated) {
         this.data = {
-          authenticated: { user_id: userId, source, access_token: 'access_token!', scope: 'mon-pix' },
+          authenticated: { user_id: userId, source, access_token: 'access_token!' },
         };
       } else {
         this.data = {};

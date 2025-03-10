@@ -27,7 +27,6 @@ module('Unit | Authenticator | oidc', function (hooks) {
           identity_provider: identityProviderCode,
           code: code,
           state,
-          target: 'admin',
         },
       },
     });

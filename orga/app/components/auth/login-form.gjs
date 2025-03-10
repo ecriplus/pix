@@ -112,11 +112,9 @@ export default class LoginForm extends Component {
   }
 
   async _authenticate(password, email) {
-    const scope = ENV.APP.AUTHENTICATION.SCOPE;
-
     this.errorMessage = null;
     try {
-      await this.session.authenticate('authenticator:oauth2', email, password, scope);
+      await this.session.authenticate('authenticator:oauth2', email, password);
     } catch (responseError) {
       this._handleApiError(responseError);
     } finally {

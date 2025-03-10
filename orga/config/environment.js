@@ -100,9 +100,6 @@ module.exports = function (environment) {
       APP_VERSION: process.env.SOURCE_VERSION || 'development',
       SURVEY_LINK: process.env.SURVEY_ORGA_LINK || null,
       SURVEY_BANNER_ENABLED: _isFeatureEnabled(process.env.SURVEY_ORGA_BANNER_ENABLED),
-      AUTHENTICATION: {
-        SCOPE: 'pix-orga',
-      },
     },
 
     fontawesome: {

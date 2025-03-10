@@ -69,9 +69,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
       await clickByName(loginLabel);
 
       // then
-      assert.ok(
-        sessionService.authenticate.calledWith('authenticator:oauth2', 'pix@example.net', 'JeMeLoggue1024', 'pix-orga'),
-      );
+      assert.ok(sessionService.authenticate.calledWith('authenticator:oauth2', 'pix@example.net', 'JeMeLoggue1024'));
     });
   });
 
@@ -91,9 +89,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
       await clickByName(loginLabel);
 
       // then
-      assert.ok(
-        sessionService.authenticate.calledWith('authenticator:oauth2', 'pix@example.net', 'JeMeLoggue1024', 'pix-orga'),
-      );
+      assert.ok(sessionService.authenticate.calledWith('authenticator:oauth2', 'pix@example.net', 'JeMeLoggue1024'));
     });
 
     test('should not call authenticate session when form is invalid', async function (assert) {
@@ -136,9 +132,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
       await clickByName(loginLabel);
 
       // then
-      assert.ok(
-        sessionService.authenticate.calledWith('authenticator:oauth2', 'pix@example.net', 'JeMeLoggue1024', 'pix-orga'),
-      );
+      assert.ok(sessionService.authenticate.calledWith('authenticator:oauth2', 'pix@example.net', 'JeMeLoggue1024'));
     });
 
     test('should accept organization invitation when form is valid', async function (assert) {

@@ -26,7 +26,6 @@ export default class OidcAuthenticator extends BaseAuthenticator {
         identity_provider: identityProvider.code,
         code,
         state: state,
-        target: 'admin',
       };
 
       if (this.session.isAuthenticated) {

@@ -44,34 +44,30 @@ const authentication = {
 };
 
 async function validateUser(decodedAccessToken, { request, revokedUserAccessRepository }) {
-  // Only tokens including user_id are User Access Tokens.
-  // This is why applications Access Tokens are not subject to audience validation for now.
   const userId = decodedAccessToken.user_id;
   if (!userId) {
     return { isValid: false };
   }
 
-  if (config.featureToggles.isUserTokenAudConfinementEnabled) {
-    const revokedUserAccess = await revokedUserAccessRepository.findByUserId(userId);
-    if (revokedUserAccess.isAccessTokenRevoked(decodedAccessToken)) {
-      monitoringTools.logWarnWithCorrelationIds({
-        message: 'Revoked user AccessToken usage',
-        decodedAccessToken,
-      });
+  const revokedUserAccess = await revokedUserAccessRepository.findByUserId(userId);
+  if (revokedUserAccess.isAccessTokenRevoked(decodedAccessToken)) {
+    monitoringTools.logWarnWithCorrelationIds({
+      message: 'Revoked user AccessToken usage',
+      decodedAccessToken,
+    });
 
-      return { isValid: false };
-    }
+    return { isValid: false };
+  }
 
-    const audience = getForwardedOrigin(request.headers);
-    if (decodedAccessToken.aud !== audience) {
-      monitoringTools.logWarnWithCorrelationIds({
-        message: 'User AccessToken audience mismatch',
-        audience,
-        decodedAccessToken,
-      });
+  const audience = getForwardedOrigin(request.headers);
+  if (decodedAccessToken.aud !== audience) {
+    monitoringTools.logWarnWithCorrelationIds({
+      message: 'User AccessToken audience mismatch',
+      audience,
+      decodedAccessToken,
+    });
 
-      return { isValid: false };
-    }
+    return { isValid: false };
   }
 
   return { isValid: true, credentials: { userId: decodedAccessToken.user_id } };

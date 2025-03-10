@@ -80,11 +80,10 @@ module('Integration | Component | Auth::ToggableLoginForm', function (hooks) {
   module('When there is a valid invitation and user is not member of certification center yet', function (hooks) {
     const acceptCertificationCenterInvitationStub = sinon.stub();
     hooks.beforeEach(function () {
-      SessionStub.prototype.authenticate = function (authenticator, email, password, scope) {
+      SessionStub.prototype.authenticate = function (authenticator, email, password) {
         this.authenticator = authenticator;
         this.email = email;
         this.password = password;
-        this.scope = scope;
         return resolve();
       };
 
@@ -170,11 +169,10 @@ module('Integration | Component | Auth::ToggableLoginForm', function (hooks) {
               accept: acceptCertificationCenterInvitationStub,
             });
 
-            SessionStub.prototype.authenticate = function (authenticator, email, password, scope) {
+            SessionStub.prototype.authenticate = function (authenticator, email, password) {
               this.authenticator = authenticator;
               this.email = email;
               this.password = password;
-              this.scope = scope;
               return resolve();
             };
 
@@ -199,7 +197,6 @@ module('Integration | Component | Auth::ToggableLoginForm', function (hooks) {
             assert.strictEqual(sessionServiceObserver.authenticator, 'authenticator:oauth2');
             assert.strictEqual(sessionServiceObserver.email, 'pix@example.net');
             assert.strictEqual(sessionServiceObserver.password, 'JeMeLoggue1024');
-            assert.strictEqual(sessionServiceObserver.scope, 'pix-certif');
           });
         });
       });

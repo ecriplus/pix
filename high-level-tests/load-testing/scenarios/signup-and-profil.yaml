@@ -37,7 +37,7 @@ scenarios:
           url: "/api/token"
           headers:
             content-type: "application/x-www-form-urlencoded"
-          body: "grant_type=password&scope=mon-pix&username={{ email }}&password={{ password }}"
+          body: "grant_type=password&username={{ email }}&password={{ password }}"
           capture:
             - json: "$.access_token"
               as: "accessToken"

@@ -37,9 +37,8 @@ export default class Login extends Component {
     event.preventDefault();
     const email = this.email ? this.email.trim() : '';
     const password = this.password;
-    const scope = ENV.APP.AUTHENTICATION.SCOPE;
     try {
-      await this.session.authenticate('authenticator:oauth2', email, password, scope);
+      await this.session.authenticate('authenticator:oauth2', email, password);
     } catch (responseError) {
       this.isErrorMessagePresent = true;
       this._handleApiError(responseError);
