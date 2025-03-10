@@ -1,51 +1,28 @@
 import { CERTIFICATION_CENTER_MEMBERSHIP_ROLES } from '../../../../src/shared/domain/models/CertificationCenterMembership.js';
 import { CertificationCenter } from '../../../../src/shared/domain/models/index.js';
-import {
-  CLEA_COMPLEMENTARY_CERTIFICATION_ID,
-  PIX_DROIT_COMPLEMENTARY_CERTIFICATION_ID,
-  PIX_EDU_1ER_DEGRE_COMPLEMENTARY_CERTIFICATION_ID,
-} from '../common/complementary-certification-builder.js';
-import { COLLEGE_TAG, FEATURE_CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE_ID } from '../common/constants.js';
+import { FEATURE_CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE_ID } from '../common/constants.js';
 import * as tooling from '../common/tooling/index.js';
 import { acceptPixOrgaTermsOfService } from '../common/tooling/legal-documents.js';
+import {
+  CERTIFIABLE_SUCCESS_USER_ID,
+  complementaryCertificationIds,
+  PRO_ADMIN_CERTIFICATION_CENTER_USER_ID,
+  PRO_CERTIFICATION_CENTER_ID,
+  PRO_EXTERNAL_ID,
+  PRO_MEMBER_CERTIFICATION_CENTER_USER_ID,
+  PRO_ORGANIZATION_ID,
+  PRO_ORGANIZATION_USER_ID,
+  PRO_PILOT_CERTIFICATION_CENTER_ID,
+  V3_CERTIFICATION_CENTER_ID,
+  V3_CERTIFICATION_CENTER_USER_ID,
+  V3_PRO_PILOT_EXTERNAL_ID,
+} from './constants.js';
 import { createCompetenceScoringConfiguration } from './create-competence-scoring-configuration.js';
+import { scoOrganizationManaginAgriStudentsWithFregata } from './create-sco-organization-managing-agri-student-with-fregata.js';
 import { createScoringConfiguration } from './create-scoring-configuration.js';
 
-const TEAM_CERTIFICATION_OFFSET_ID = 7000;
-// IDS
-/// USERS
-const TEAM_CERTIFICATION_OFFSET_ID_USERS = TEAM_CERTIFICATION_OFFSET_ID + 100;
-const SCO_CERTIFICATION_MANAGING_STUDENTS_ORGANIZATION_USER_ID = TEAM_CERTIFICATION_OFFSET_ID_USERS;
-const SCO_CERTIFICATION_MANAGING_STUDENTS_CERTIFICATION_CENTER_USER_ID = TEAM_CERTIFICATION_OFFSET_ID_USERS + 1;
-const PRO_ADMIN_CERTIFICATION_CENTER_USER_ID = TEAM_CERTIFICATION_OFFSET_ID_USERS + 2;
-const PRO_ORGANIZATION_USER_ID = TEAM_CERTIFICATION_OFFSET_ID_USERS + 3;
-const V3_CERTIFICATION_CENTER_USER_ID = TEAM_CERTIFICATION_OFFSET_ID_USERS + 4;
-const CERTIFIABLE_SUCCESS_USER_ID = TEAM_CERTIFICATION_OFFSET_ID_USERS + 5;
-const PRO_MEMBER_CERTIFICATION_CENTER_USER_ID = TEAM_CERTIFICATION_OFFSET_ID_USERS + 6;
-/// ORGAS
-const TEAM_CERTIFICATION_OFFSET_ID_ORGAS = TEAM_CERTIFICATION_OFFSET_ID + 200;
-const SCO_MANAGING_STUDENTS_ORGANIZATION_ID = TEAM_CERTIFICATION_OFFSET_ID_ORGAS;
-const PRO_ORGANIZATION_ID = TEAM_CERTIFICATION_OFFSET_ID_ORGAS + 1;
-/// CERTIFICATION CENTERS
-const TEAM_CERTIFICATION_OFFSET_ID_CENTERS = TEAM_CERTIFICATION_OFFSET_ID + 300;
-const SCO_CERTIFICATION_CENTER_ID = TEAM_CERTIFICATION_OFFSET_ID_CENTERS + 1;
-const PRO_CERTIFICATION_CENTER_ID = TEAM_CERTIFICATION_OFFSET_ID_CENTERS + 2;
-const V3_CERTIFICATION_CENTER_ID = TEAM_CERTIFICATION_OFFSET_ID_CENTERS + 3;
-const PRO_PILOT_CERTIFICATION_CENTER_ID = TEAM_CERTIFICATION_OFFSET_ID_CENTERS + 4;
-/// EXTERNAL IDS
-const CERTIFICATION_SCO_MANAGING_STUDENTS_EXTERNAL_ID = 'CERTIFICATION_SCO_MANAGING_STUDENTS_EXTERNAL_ID';
-const PRO_EXTERNAL_ID = 'PRO_EXTERNAL_ID';
-const V3_PRO_PILOT_EXTERNAL_ID = 'V3_PRO_PILOT_EXTERNAL_ID';
-// SESSION IDS
-const complementaryCertificationIds = [
-  CLEA_COMPLEMENTARY_CERTIFICATION_ID,
-  PIX_DROIT_COMPLEMENTARY_CERTIFICATION_ID,
-  PIX_EDU_1ER_DEGRE_COMPLEMENTARY_CERTIFICATION_ID,
-];
-
 async function teamCertificationDataBuilder({ databaseBuilder }) {
-  await _createScoOrganization({ databaseBuilder });
-  await _createScoCertificationCenter({ databaseBuilder });
+  await scoOrganizationManaginAgriStudentsWithFregata({ databaseBuilder });
   await _createProOrganization({ databaseBuilder });
   await _createProCertificationCenter({ databaseBuilder });
   _createV3CertificationConfiguration({ databaseBuilder });
@@ -57,36 +34,6 @@ async function teamCertificationDataBuilder({ databaseBuilder }) {
 }
 
 export { teamCertificationDataBuilder };
-
-async function _createScoCertificationCenter({ databaseBuilder }) {
-  databaseBuilder.factory.buildUser.withRawPassword({
-    id: SCO_CERTIFICATION_MANAGING_STUDENTS_CERTIFICATION_CENTER_USER_ID,
-    firstName: 'Centre de certif SCO managing student',
-    lastName: 'Certification',
-    email: 'certif-sco-v3@example.net',
-    cgu: true,
-    lang: 'fr',
-    lastTermsOfServiceValidatedAt: new Date(),
-    mustValidateTermsOfService: false,
-    pixCertifTermsOfServiceAccepted: false,
-    hasSeenAssessmentInstructions: false,
-  });
-
-  acceptPixOrgaTermsOfService(databaseBuilder, SCO_CERTIFICATION_MANAGING_STUDENTS_CERTIFICATION_CENTER_USER_ID);
-
-  await tooling.certificationCenter.createCertificationCenter({
-    databaseBuilder,
-    certificationCenterId: SCO_CERTIFICATION_CENTER_ID,
-    name: 'Centre de certification sco managing students',
-    type: CertificationCenter.types.SCO,
-    externalId: CERTIFICATION_SCO_MANAGING_STUDENTS_EXTERNAL_ID,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    members: [{ id: SCO_CERTIFICATION_MANAGING_STUDENTS_CERTIFICATION_CENTER_USER_ID }],
-    complementaryCertificationIds: [],
-    isV3Pilot: true,
-  });
-}
 
 function _createV3CertificationConfiguration({ databaseBuilder }) {
   databaseBuilder.factory.buildFlashAlgorithmConfiguration({
@@ -187,37 +134,6 @@ async function _createProCertificationCenter({ databaseBuilder }) {
       { id: PRO_MEMBER_CERTIFICATION_CENTER_USER_ID, role: CERTIFICATION_CENTER_MEMBERSHIP_ROLES.MEMBER },
     ],
     complementaryCertificationIds,
-  });
-}
-
-async function _createScoOrganization({ databaseBuilder }) {
-  databaseBuilder.factory.buildUser.withRawPassword({
-    id: SCO_CERTIFICATION_MANAGING_STUDENTS_ORGANIZATION_USER_ID,
-    firstName: 'Orga SCO managing Student',
-    lastName: 'Certification',
-    email: 'orga-sco-managing-students@example.net',
-    cgu: true,
-    lang: 'fr',
-    lastTermsOfServiceValidatedAt: new Date(),
-    mustValidateTermsOfService: false,
-    pixCertifTermsOfServiceAccepted: false,
-    hasSeenAssessmentInstructions: false,
-  });
-
-  acceptPixOrgaTermsOfService(databaseBuilder, SCO_CERTIFICATION_MANAGING_STUDENTS_ORGANIZATION_USER_ID);
-
-  await tooling.organization.createOrganization({
-    databaseBuilder,
-    organizationId: SCO_MANAGING_STUDENTS_ORGANIZATION_ID,
-    type: 'SCO',
-    name: 'Orga team Certification',
-    isManagingStudents: true,
-    externalId: CERTIFICATION_SCO_MANAGING_STUDENTS_EXTERNAL_ID,
-    adminIds: [SCO_CERTIFICATION_MANAGING_STUDENTS_ORGANIZATION_USER_ID],
-    configOrganization: {
-      learnerCount: 8,
-    },
-    tagIds: [COLLEGE_TAG.id],
   });
 }
 
