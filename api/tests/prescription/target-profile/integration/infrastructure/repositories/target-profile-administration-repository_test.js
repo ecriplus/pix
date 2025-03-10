@@ -738,9 +738,12 @@ describe('Integration | Repository | Target-profile', function () {
       await targetProfileAdministrationRepository.update(targetProfile);
 
       // then
-      const { name } = await knex('target-profiles').select('name').where('id', targetProfile.id).first();
+      const { name, internalName } = await knex('target-profiles')
+        .select('name', 'internalName')
+        .where('id', targetProfile.id)
+        .first();
       expect(name).to.equal(targetProfile.name);
-      expect(name).to.equal(targetProfile.name);
+      expect(internalName).to.equal(targetProfile.internalName);
     });
 
     it('should update the target profile description', async function () {
