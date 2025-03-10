@@ -9,6 +9,7 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
+  insertMultipleSendingFeatureForNewOrganization,
   insertUserWithRoleSuperAdmin,
   knex,
   sinon,
@@ -24,6 +25,7 @@ describe('Acceptance | Application | organization-controller', function () {
   beforeEach(async function () {
     server = await createServer();
     await insertUserWithRoleSuperAdmin();
+    await insertMultipleSendingFeatureForNewOrganization();
   });
 
   describe('POST /api/admin/organizations', function () {

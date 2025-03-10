@@ -19,12 +19,18 @@ import { Membership } from '../../../../src/shared/domain/models/Membership.js';
 import * as organizationRepository from '../../../../src/shared/infrastructure/repositories/organization-repository.js';
 import { organizationInvitationService } from '../../../../src/team/domain/services/organization-invitation.service.js';
 import { organizationInvitationRepository } from '../../../../src/team/infrastructure/repositories/organization-invitation.repository.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../test-helper.js';
+import {
+  catchErr,
+  databaseBuilder,
+  expect,
+  insertMultipleSendingFeatureForNewOrganization,
+  knex,
+} from '../../../test-helper.js';
 
 const { omit } = lodash;
 
 describe('Integration | UseCases | create-organizations-with-tags-and-target-profiles', function () {
-  let missionFeature, oralizationFeature, importStudentsFeature, ondeImportFormat, userId;
+  let missionFeature, oralizationFeature, importStudentsFeature, ondeImportFormat, userId, byDefaultFeatureId;
 
   beforeEach(async function () {
     databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY);
@@ -34,6 +40,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
     ondeImportFormat = databaseBuilder.factory.buildOrganizationLearnerImportFormat({
       name: ORGANIZATION_FEATURE.LEARNER_IMPORT.FORMAT.ONDE,
     });
+    byDefaultFeatureId = await insertMultipleSendingFeatureForNewOrganization();
 
     userId = databaseBuilder.factory.buildUser().id;
     await databaseBuilder.commit();
@@ -739,7 +746,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
       });
 
       // then
-      const savedOrganizationFeatures = await knex('organization-features');
+      const savedOrganizationFeatures = await knex('organization-features').whereNot({ featureId: byDefaultFeatureId });
       expect(savedOrganizationFeatures).to.have.lengthOf(3);
       const organizationId = createdOrganizations[0].id;
       expect(

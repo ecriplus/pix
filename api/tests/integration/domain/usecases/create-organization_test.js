@@ -4,12 +4,13 @@ import { OrganizationForAdmin } from '../../../../src/organizational-entities/do
 import * as dataProtectionOfficerRepository from '../../../../src/organizational-entities/infrastructure/repositories/data-protection-officer.repository.js';
 import { organizationForAdminRepository } from '../../../../src/organizational-entities/infrastructure/repositories/organization-for-admin.repository.js';
 import * as schoolRepository from '../../../../src/school/infrastructure/repositories/school-repository.js';
-import { databaseBuilder, expect } from '../../../test-helper.js';
+import { databaseBuilder, expect, insertMultipleSendingFeatureForNewOrganization } from '../../../test-helper.js';
 
 describe('Integration | UseCases | create-organization', function () {
   it('returns newly created organization', async function () {
     // given
     const superAdminUserId = databaseBuilder.factory.buildUser().id;
+    await insertMultipleSendingFeatureForNewOrganization();
     await databaseBuilder.commit();
 
     const organization = new OrganizationForAdmin({

@@ -7,6 +7,7 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
+  insertMultipleSendingFeatureForNewOrganization,
   insertUserWithRoleSuperAdmin,
   knex,
 } from '../../../../test-helper.js';
@@ -19,6 +20,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
   beforeEach(async function () {
     admin = await insertUserWithRoleSuperAdmin();
+    await insertMultipleSendingFeatureForNewOrganization();
     await databaseBuilder.commit();
 
     server = await createServer();
@@ -65,7 +67,6 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         });
         const tag = databaseBuilder.factory.buildTag({ id: 7, name: 'AEFE' });
         databaseBuilder.factory.buildOrganizationTag({ tagId: tag.id, organizationId: organization.id });
-        databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT);
         await databaseBuilder.commit();
 
         // when
