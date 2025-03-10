@@ -24,6 +24,17 @@ export default class Campaign extends Model {
   @attr('number') totalParticipationsCount;
   @attr('boolean') isTypeProfilesCollection;
   @attr('boolean') isForAbsoluteNovice;
-  @attr('boolean') isTypeAssessment;
   @attr('boolean') multipleSendings;
+
+  get isProfilesCollection() {
+    return this.type === 'PROFILES_COLLECTION';
+  }
+
+  get isTypeAssessment() {
+    return this.type === 'ASSESSMENT';
+  }
+
+  get isTypeExam() {
+    return this.type === 'EXAM';
+  }
 }

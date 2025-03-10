@@ -280,6 +280,20 @@
         "parameters": "<u>Always visible</u><br/>If the badge is always visible and the learner has not fulfilled the obtaining conditions, then the badge will not be seen on the results screen.<br/><br/><u>Certifiable</u><br/>The badge becomes a prerequisite for certification."
       }
     },
+    "campaign": {
+      "type": {
+        "explanation": {
+          "ASSESSMENT": "Campaign of type assessment",
+          "EXAM": "exam",
+          "PROFILES_COLLECTION": "Campaign of type profiles collection"
+        },
+        "information": {
+          "ASSESSMENT": "Assessment",
+          "EXAM": "exam",
+          "PROFILES_COLLECTION": "Profiles collection"
+        }
+      }
+    },
     "certification-centers": {
       "membership-item": {
         "actions": {
