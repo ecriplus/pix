@@ -45,7 +45,9 @@ async function startPgBoss() {
   pgBoss.on('wip', (data) => {
     logger.info({ event: 'pg-boss-wip' }, data);
   });
-  await pgBoss.start();
+  if (config.pgBoss.connexionPoolMaxSize !== 0) {
+    await pgBoss.start();
+  }
   return pgBoss;
 }
 
