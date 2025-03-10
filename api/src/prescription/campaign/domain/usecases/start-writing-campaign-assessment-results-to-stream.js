@@ -56,7 +56,7 @@ const startWritingCampaignAssessmentResultsToStream = async function ({
   const campaign = await campaignRepository.get(campaignId);
   const translate = i18n.__;
 
-  if (!campaign.isAssessment) {
+  if (!campaign.isAssessment && !campaign.isExam) {
     throw new CampaignTypeError();
   }
 
