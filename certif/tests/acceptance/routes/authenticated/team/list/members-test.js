@@ -44,11 +44,15 @@ module('Acceptance | Routes | Team | List | Members', function (hooks) {
       const screen = await visit(`/equipe/membres`);
 
       // when
-      await clickByName(t('pages.team.members.actions.manage'));
       await clickByName(t('pages.team.members.actions.edit-role'));
-      await clickByName(t('pages.team.members.actions.select-role.label'));
+      await screen.findByRole('dialog');
+      await clickByName(t('pages.team.members.modals.change-member-role.select-role.label'));
       await screen.findByRole('listbox');
-      await click(screen.getByRole('option', { name: t('pages.team.members.actions.select-role.options.admin') }));
+      await click(
+        screen.getByRole('option', {
+          name: t('pages.team.members.modals.change-member-role.select-role.options.admin'),
+        }),
+      );
       await clickByName(t('pages.team.members.actions.save'));
       const rows = await screen.findAllByRole('row');
 
@@ -60,7 +64,6 @@ module('Acceptance | Routes | Team | List | Members', function (hooks) {
     test('deletes a member', async function (assert) {
       // given
       const screen = await visit('/equipe/membres');
-      await clickByName(t('pages.team.members.actions.manage'));
       await clickByName(t('pages.team.members.actions.remove-membership'));
       await screen.findByRole('dialog');
 

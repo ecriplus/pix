@@ -11,20 +11,9 @@ export default class MembersList extends Component {
 
   @tracked isLeaveCertificationCenterModalOpen = false;
   @tracked isRemoveMemberModalOpen = false;
+  @tracked isChangeMemberRoleModalOpen = false;
   @tracked removingMember;
-
-  get shouldDisplayRefererColumn() {
-    return this.args.hasCleaHabilitation;
-  }
-
-  get shouldDisplayManagingColumn() {
-    return this.currentUser.isAdminOfCurrentCertificationCenter;
-  }
-
-  get isMultipleAdminsAvailable() {
-    const adminMembers = this.args.members?.filter((member) => member.isAdmin);
-    return adminMembers.length > 1;
-  }
+  @tracked member;
 
   @action
   openLeaveCertificationCenterModal() {
@@ -38,6 +27,12 @@ export default class MembersList extends Component {
   }
 
   @action
+  openChangeMemberRoleModal(member) {
+    this.member = member;
+    this.isChangeMemberRoleModalOpen = true;
+  }
+
+  @action
   closeLeaveCertificationCenterModal() {
     this.isLeaveCertificationCenterModalOpen = false;
   }
@@ -46,6 +41,11 @@ export default class MembersList extends Component {
   closeRemoveMemberModal() {
     this.isRemoveMemberModalOpen = false;
     this.removingMember = undefined;
+  }
+
+  @action
+  closeChangeMemberRoleModal() {
+    this.isChangeMemberRoleModalOpen = false;
   }
 
   @action
@@ -84,6 +84,24 @@ export default class MembersList extends Component {
       });
     } finally {
       this.closeRemoveMemberModal();
+    }
+  }
+
+  @action
+  async changeMemberRole(role) {
+    try {
+      this.member.role = role;
+      await this.member.save();
+      this.pixToast.sendSuccessNotification({
+        message: this.intl.t('pages.team.members.notifications.change-member-role.success'),
+      });
+      this.isChangeMemberRoleModalOpen = false;
+    } catch (_) {
+      this.member.rollbackAttributes();
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t('pages.team.members.notifications.change-member-role.error'),
+      });
+      this.isChangeMemberRoleModalOpen = false;
     }
   }
 }

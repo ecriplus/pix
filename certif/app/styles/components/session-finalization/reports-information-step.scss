@@ -1,30 +1,8 @@
-.session-finalization-reports-information-step {
-  font-size: 0.8125rem;
+.session-finalization-reports {
+  margin-top: var(--pix-spacing-4x);
 
-  &__title-completed {
-    padding: 20px 0 20px 24px;
-
-    &--hidden {
-      display: none;
-    }
-  }
-
-  &__title-uncompleted {
-    padding: 20px 0 20px 24px;
-  }
-
-  table {
-    table-layout: initial;
-
-    th {
-      width: 10%;
-    }
-
-    th:nth-child(1),
-    th:nth-child(2),
-    th:nth-child(4) {
-      width: 20%;
-    }
+  &__information {
+    margin: var(--pix-spacing-2x);
   }
 
   &__checker {

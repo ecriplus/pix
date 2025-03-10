@@ -1,6 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import { t } from 'ember-intl/test-support';
 import { certificationIssueReportCategories } from 'pix-certif/models/certification-issue-report';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -105,7 +106,7 @@ module('Integration | Component | SessionFinalization::CompletedReportsInformati
     assert
       .dom(
         screen.getByRole('table', {
-          name: 'Certification(s) terminée(s) Liste des candidats qui ont fini leur test de certification, triée par nom de naissance, avec un lien pour ajouter un ou plusieurs signalements le cas échéant.',
+          name: t('pages.session-finalization.reporting.completed-reports-information.extra-information'),
         }),
       )
       .exists();

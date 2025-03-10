@@ -10,230 +10,158 @@ import { waitForDialog, waitForDialogClose } from '../../helpers/wait-for';
 
 module('Integration | Component | MembersList', function (hooks) {
   setupIntlRenderingTest(hooks);
-
   let store;
   let currentUser;
 
   hooks.beforeEach(function () {
     store = this.owner.lookup('service:store');
     currentUser = this.owner.lookup('service:current-user');
+    sinon.stub(currentUser, 'isAdminOfCurrentCertificationCenter').value(true);
+    sinon.stub(currentUser, 'currentAllowedCertificationCenterAccess').value({ name: 'Certif NextGen' });
   });
 
   hooks.afterEach(function () {
     sinon.restore();
   });
 
-  module('when there are members in certification center', function () {
-    test('it displays column headers for last name, first name, role, actions and lists the team members', async function (assert) {
+  module('For edit role button', function () {
+    test('displays a modal', async function (assert) {
       // given
-      const memberWithAdminRole = store.createRecord('member', {
-        firstName: 'Satoru',
-        lastName: 'Gojô',
+      const connectedUserWithAdminRole = store.createRecord('member', {
+        id: '1',
+        firstName: 'Jacques',
+        lastName: 'Ouzi',
         role: 'ADMIN',
       });
       const memberWithMemberRole = store.createRecord('member', {
-        firstName: 'Itadori',
-        lastName: 'Yuji',
+        id: '3',
+        firstName: 'Franck',
+        lastName: 'Ofone',
         role: 'MEMBER',
       });
-      const members = [memberWithAdminRole, memberWithMemberRole];
+      const members = [connectedUserWithAdminRole, memberWithMemberRole];
 
-      sinon.stub(currentUser, 'certificationPointOfContact').value({ id: memberWithAdminRole.id });
-      sinon.stub(currentUser, 'isAdminOfCurrentCertificationCenter').get(() => true);
+      sinon.stub(currentUser, 'certificationPointOfContact').value({ id: connectedUserWithAdminRole.id });
       this.set('members', members);
+      const screen = await render(hbs`<MembersList @members={{this.members}} />`);
+      const table = screen.getByRole('table', { name: t('pages.team.table.caption') });
 
       // when
+      await click(within(table).getByRole('button', { name: t('pages.team.members.actions.edit-role') }));
+      await waitForDialog();
+
+      // then
+      assert
+        .dom(screen.getByRole('heading', { level: 1, name: t('pages.team.members.modals.change-member-role.title') }))
+        .exists();
+    });
+  });
+
+  module('For remove member button', function () {
+    test('displays a modal', async function (assert) {
+      // given
+      const connectedUserWithAdminRole = store.createRecord('member', {
+        id: '1',
+        firstName: 'Jacques',
+        lastName: 'Ouzi',
+        role: 'ADMIN',
+      });
+      const memberWithMemberRole = store.createRecord('member', {
+        id: '3',
+        firstName: 'Franck',
+        lastName: 'Ofone',
+        role: 'MEMBER',
+      });
+      const members = [connectedUserWithAdminRole, memberWithMemberRole];
+      sinon.stub(currentUser, 'certificationPointOfContact').value({ id: connectedUserWithAdminRole.id });
+      this.set('members', members);
       const screen = await render(hbs`<MembersList @members={{this.members}} />`);
 
-      // then
-      assert.dom(screen.getByRole('columnheader', { name: t('common.labels.candidate.lastname') })).exists();
-      assert.dom(screen.getByRole('columnheader', { name: t('common.labels.candidate.firstname') })).exists();
-      assert.dom(screen.getByRole('columnheader', { name: t('common.labels.candidate.role') })).exists();
-      assert.dom(screen.getByRole('columnheader', { name: t('pages.team.table-headers.actions') })).exists();
-      assert.strictEqual(members.length, 2);
+      // when
+      await click(screen.getByRole('button', { name: t('pages.team.members.actions.remove-membership') }));
+      await waitForDialog();
 
-      const table = screen.getByRole('table');
-      const rows = await within(table).findAllByRole('row');
-      assert.dom(within(rows[1]).getByRole('cell', { name: 'Gojô' })).exists();
-      assert.dom(within(rows[2]).getByRole('cell', { name: 'Itadori' })).exists();
+      // then
+      assert
+        .dom(screen.getByRole('heading', { level: 1, name: t('pages.team.members.remove-membership-modal.title') }))
+        .exists();
     });
   });
 
-  module('when certification center is habilitated CléA', function () {
-    test('it shows the referer column', async function (assert) {
-      // given
-      const certifMember1 = store.createRecord('member', { firstName: 'Maria', lastName: 'Carré', isReferer: false });
-      const certifMember2 = store.createRecord('member', { firstName: 'John', lastName: 'Williams', isReferer: true });
-      const members = [certifMember1, certifMember2];
+  module('For leaving centre button', function (hooks) {
+    hooks.beforeEach(function () {
+      const connectedUserWithAdminRole = store.createRecord('member', {
+        id: '1',
+        firstName: 'Jacques',
+        lastName: 'Ouzi',
+        role: 'ADMIN',
+      });
+      const memberWithAdminRole = store.createRecord('member', {
+        id: '2',
+        firstName: 'Annie',
+        lastName: 'Versaire',
+        role: 'ADMIN',
+      });
+      const members = [connectedUserWithAdminRole, memberWithAdminRole];
 
-      sinon.stub(currentUser, 'certificationPointOfContact').value({ id: certifMember1.id });
+      sinon.stub(currentUser, 'certificationPointOfContact').value({ id: connectedUserWithAdminRole.id });
       this.set('members', members);
-      this.set('hasCleaHabilitation', true);
+    });
+
+    test('displays a modal', async function (assert) {
+      // given
+      const screen = await render(hbs`<MembersList @members={{this.members}} />`);
 
       // when
-      const screen = await render(
-        hbs`<MembersList @members={{this.members}} @hasCleaHabilitation={{this.hasCleaHabilitation}} />`,
-      );
-      // then
-      assert.dom(screen.getByRole('columnheader', { name: t('pages.team.referer') })).exists();
-    });
-  });
-
-  module('when a member is referer', function () {
-    test('it shows the referer tag', async function (assert) {
-      // given
-      const certifMember1 = store.createRecord('member', { firstName: 'Maria', lastName: 'Carré', isReferer: false });
-      const certifMember2 = store.createRecord('member', { firstName: 'John', lastName: 'Williams', isReferer: true });
-      const members = [certifMember1, certifMember2];
-
-      sinon.stub(currentUser, 'certificationPointOfContact').value({ id: certifMember1.id });
-      this.set('members', members);
-      this.set('hasCleaHabilitation', true);
-
-      // when
-      const screen = await render(
-        hbs`<MembersList @members={{this.members}} @hasCleaHabilitation={{this.hasCleaHabilitation}} />`,
-      );
+      await clickByName('Quitter cet espace Pix Certif');
+      await waitForDialog();
 
       // then
-
-      assert.dom(screen.getByRole('cell', { name: t('pages.team.pix-referer') })).exists();
+      assert.dom(screen.getByRole('heading', { level: 1, name: 'Quitter cet espace Pix Certif' })).exists();
+      assert.dom(screen.getByText('Certif NextGen')).exists();
     });
-  });
 
-  module('when there is no referer', function () {
-    test('it does not show the referer tag', async function (assert) {
-      // given
-      const certifMember1 = store.createRecord('member', { firstName: 'Maria', lastName: 'Carré', isReferer: false });
-      const members = [certifMember1];
+    module('when leave certification center modal is displayed', function () {
+      module('when clicking on "Annuler" button', function () {
+        test('closes the modal', async function (assert) {
+          // given
+          const screen = await render(hbs`<MembersList @members={{this.members}} />`);
 
-      sinon.stub(currentUser, 'certificationPointOfContact').value({ id: certifMember1.id });
-      this.set('members', members);
-      this.set('hasCleaHabilitation', true);
+          await clickByName('Quitter cet espace Pix Certif');
+          await waitForDialog();
 
-      // when
-      const screen = await render(
-        hbs`<MembersList @members={{this.members}} @hasCleaHabilitation={{this.hasCleaHabilitation}} />`,
-      );
+          // when
+          await clickByName('Annuler');
+          await waitForDialogClose();
 
-      // then
-      assert.dom(screen.queryByRole('cell', { name: t('pages.team.pix-referer') })).doesNotExist();
-    });
-  });
-
-  module('when certification center is not habilitated CléA', function () {
-    test('it does not show the referer column', async function (assert) {
-      // given
-      const certifMember1 = store.createRecord('member', { firstName: 'Maria', lastName: 'Carré', isReferer: false });
-      const members = [certifMember1];
-
-      sinon.stub(currentUser, 'certificationPointOfContact').value({ id: certifMember1.id });
-      this.set('members', members);
-      this.set('hasCleaHabilitation', false);
-
-      // when
-      const screen = await render(
-        hbs`<MembersList @members={{this.members}} @hasCleaHabilitation={{this.hasCleaHabilitation}} />`,
-      );
-
-      // then
-      assert.dom(screen.queryByRole('columnheader', { name: t('pages.team.referer') })).doesNotExist();
-    });
-  });
-
-  module('when the connected user is not the only admin of the certification center', function () {
-    module('when clicking on "Quitter cet espace Pix Certif"', function (hooks) {
-      hooks.beforeEach(function () {
-        const connectedUserWithAdminRole = store.createRecord('member', {
-          id: '1',
-          firstName: 'Jacques',
-          lastName: 'Ouzi',
-          role: 'ADMIN',
+          // then
+          assert.dom(screen.queryByRole('heading', { level: 1, name: 'Quitter cet espace Pix Certif' })).doesNotExist();
         });
-        const memberWithAdminRole = store.createRecord('member', {
-          id: '2',
-          firstName: 'Annie',
-          lastName: 'Versaire',
-          role: 'ADMIN',
-        });
-        const memberWithMemberRole = store.createRecord('member', {
-          id: '3',
-          firstName: 'Franck',
-          lastName: 'Ofone',
-          role: 'MEMBER',
-        });
-        const members = [connectedUserWithAdminRole, memberWithAdminRole, memberWithMemberRole];
-
-        sinon.stub(currentUser, 'certificationPointOfContact').value({ id: connectedUserWithAdminRole.id });
-        sinon.stub(currentUser, 'isAdminOfCurrentCertificationCenter').value(true);
-        sinon.stub(currentUser, 'currentAllowedCertificationCenterAccess').value({ name: 'Certif NextGen' });
-
-        this.set('members', members);
       });
 
-      test('displays a modal', async function (assert) {
-        // given
-        const screen = await render(hbs`<MembersList @members={{this.members}} />`);
+      module('when clicking on "Confirmer" button', function () {
+        test('calls "onLeaveCertificationCenter" event handler and closes the modal', async function (assert) {
+          // given
+          const onLeaveCertificationCenter = sinon.stub();
+          this.set('onLeaveCertificationCenter', onLeaveCertificationCenter);
+          const session = this.owner.lookup('service:session');
+          sinon.stub(session, 'waitBeforeInvalidation');
 
-        await click(screen.getAllByRole('button', { name: 'Gérer' })[0]);
+          const screen = await render(
+            hbs`<MembersList @members={{this.members}} @onLeaveCertificationCenter={{this.onLeaveCertificationCenter}} />`,
+          );
 
-        // when
-        await clickByName('Quitter cet espace Pix Certif');
-        await waitForDialog();
+          await clickByName('Quitter cet espace Pix Certif');
+          await waitForDialog();
 
-        // then
-        assert.dom(screen.getByRole('heading', { level: 1, name: 'Quitter cet espace Pix Certif' })).exists();
-        assert.dom(screen.getByText('Certif NextGen')).exists();
-      });
+          // when
+          await clickByName('Confirmer');
+          await waitForDialogClose();
 
-      module('when leave certification center modal is displayed', function () {
-        module('when clicking on "Annuler" button', function () {
-          test('closes the modal', async function (assert) {
-            // given
-            const screen = await render(hbs`<MembersList @members={{this.members}} />`);
-
-            await click(screen.getAllByRole('button', { name: 'Gérer' })[0]);
-            await clickByName('Quitter cet espace Pix Certif');
-            await waitForDialog();
-
-            // when
-            await clickByName('Annuler');
-            await waitForDialogClose();
-
-            // then
-            assert
-              .dom(screen.queryByRole('heading', { level: 1, name: 'Quitter cet espace Pix Certif' }))
-              .doesNotExist();
-          });
-        });
-
-        module('when clicking on "Confirmer" button', function () {
-          test('calls "onLeaveCertificationCenter" event handler and closes the modal', async function (assert) {
-            // given
-            const onLeaveCertificationCenter = sinon.stub();
-            this.set('onLeaveCertificationCenter', onLeaveCertificationCenter);
-            const session = this.owner.lookup('service:session');
-            sinon.stub(session, 'waitBeforeInvalidation');
-
-            const screen = await render(
-              hbs`<MembersList @members={{this.members}} @onLeaveCertificationCenter={{this.onLeaveCertificationCenter}} />`,
-            );
-
-            await click(screen.getAllByRole('button', { name: 'Gérer' })[0]);
-            await clickByName('Quitter cet espace Pix Certif');
-            await waitForDialog();
-
-            // when
-            await clickByName('Confirmer');
-            await waitForDialogClose();
-
-            // then
-            sinon.assert.called(session.waitBeforeInvalidation);
-            assert
-              .dom(screen.queryByRole('heading', { level: 1, name: 'Quitter cet espace Pix Certif' }))
-              .doesNotExist();
-            assert.true(onLeaveCertificationCenter.calledOnce);
-          });
+          // then
+          sinon.assert.called(session.waitBeforeInvalidation);
+          assert.dom(screen.queryByRole('heading', { level: 1, name: 'Quitter cet espace Pix Certif' })).doesNotExist();
+          assert.true(onLeaveCertificationCenter.calledOnce);
         });
       });
     });

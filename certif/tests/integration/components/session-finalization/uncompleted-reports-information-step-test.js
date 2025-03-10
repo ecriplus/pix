@@ -1,6 +1,7 @@
 import { render as renderScreen } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import { t } from 'ember-intl/test-support';
 import { certificationIssueReportCategories } from 'pix-certif/models/certification-issue-report';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -214,7 +215,7 @@ module('Integration | Component | SessionFinalization::UncompletedReportsInforma
     assert
       .dom(
         screen.getByRole('table', {
-          name: "Ces candidats n'ont pas fini leur test de certification ou le surveillant a mis fin à leur test Liste des candidats qui n’ont pas fini leur test de certification, triée par nom de naissance, avec un lien pour ajouter un ou plusieurs signalements le cas échéant et une liste déroulante permettant de sélectionner la raison de l’abandon.",
+          name: t('pages.session-finalization.reporting.uncompleted-reports-information.extra-information'),
         }),
       )
       .exists();

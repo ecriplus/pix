@@ -257,8 +257,8 @@ module('Acceptance | authenticated | team', function (hooks) {
               const screen = await visitScreen('/equipe');
 
               // then
-              const row = within(await screen.findByRole('row', { name: 'Membres du centre de certification' }));
-              const pixRefererCell = within(row.getByRole('cell', { name: 'Référent CléA Numérique' }));
+              const table = within(await screen.findByRole('table', { name: t('pages.team.table.caption') }));
+              const pixRefererCell = within(table.getByRole('cell', { name: 'Référent CléA Numérique' }));
               assert
                 .dom(
                   pixRefererCell.getByText(
@@ -368,7 +368,6 @@ module('Acceptance | authenticated | team', function (hooks) {
 
           const screen = await visitScreen('/equipe');
 
-          await click(screen.getAllByRole('button', { name: 'Gérer' })[0]);
           await clickByName('Quitter cet espace Pix Certif');
           await waitForDialog();
 
@@ -402,7 +401,6 @@ module('Acceptance | authenticated | team', function (hooks) {
 
             const screen = await visitScreen('/equipe');
 
-            await click(screen.getAllByRole('button', { name: 'Gérer' })[0]);
             await clickByName('Quitter cet espace Pix Certif');
             await waitForDialog();
 
