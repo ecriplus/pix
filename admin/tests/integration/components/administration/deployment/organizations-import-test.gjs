@@ -24,7 +24,7 @@ module('Integration | Component |  administration/organizations-import', functio
   });
 
   module('when import succeeds', function () {
-    test.skip('it displays a success notification', async function (assert) {
+    test('it displays a success notification', async function (assert) {
       // given
       const file = new Blob(['foo'], { type: `valid-file` });
       class NotificationsStub extends Service {
@@ -39,10 +39,10 @@ module('Integration | Component |  administration/organizations-import', functio
       await triggerEvent(input, 'change', { files: [file] });
 
       // then
-      assert.ok(true);
-      sinon.assert.calledWith(
-        notificationSuccessStub,
-        t('components.administration.organizations-import.notifications.success'),
+      assert.true(
+        notificationSuccessStub.calledWith({
+          message: t('components.administration.organizations-import.notifications.success'),
+        }),
       );
     });
   });
