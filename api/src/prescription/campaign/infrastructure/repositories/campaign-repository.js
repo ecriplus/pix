@@ -58,14 +58,20 @@ const checkIfUserOrganizationHasAccessToCampaign = async function (campaignId, u
   return Boolean(campaign);
 };
 
-const getCampaignIdByCampaignParticipationId = async function (campaignParticipationId) {
+const getByCampaignParticipationId = async function (campaignParticipationId) {
   const knexConn = DomainTransaction.getConnection();
   const campaign = await knexConn('campaigns')
-    .select('campaigns.id')
+    .select('campaigns.*')
     .join('campaign-participations', 'campaign-participations.campaignId', 'campaigns.id')
     .where({ 'campaign-participations.id': campaignParticipationId })
     .first();
 
+  if (!campaign) return null;
+  return new Campaign(campaign);
+};
+
+const getCampaignIdByCampaignParticipationId = async function (campaignParticipationId) {
+  const campaign = await getByCampaignParticipationId(campaignParticipationId);
   if (!campaign) return null;
   return campaign.id;
 };
@@ -121,6 +127,7 @@ export {
   findSkillsByCampaignParticipationId,
   findTubes,
   get,
+  getByCampaignParticipationId,
   getByCode,
   getCampaignIdByCampaignParticipationId,
 };
