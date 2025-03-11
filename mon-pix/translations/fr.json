@@ -342,6 +342,11 @@
       "tutorials": "Mes tutos"
     },
     "mobile-button-title": "Ouvrir le menu",
+    "nav-bar": {
+      "aria-label": "navigation principale",
+      "close": "Fermer la navigation",
+      "open": "Ouvrir la navigation"
+    },
     "not-logged": {
       "sign-in": "Se connecter",
       "sign-up": "S'inscrire"
