@@ -15,7 +15,7 @@ import * as assessmentRepository from '../../../shared/infrastructure/repositori
 import * as badgeForCalculationRepository from '../../../shared/infrastructure/repositories/badge-for-calculation-repository.js';
 import * as challengeRepository from '../../../shared/infrastructure/repositories/challenge-repository.js';
 import * as competenceRepository from '../../../shared/infrastructure/repositories/competence-repository.js';
-import * as knowledgeElementRepository from '../../../shared/infrastructure/repositories/knowledge-element-repository.js';
+import { repositories as injectedSharedRepositories } from '../../../shared/infrastructure/repositories/index.js';
 import * as skillRepository from '../../../shared/infrastructure/repositories/skill-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
@@ -65,7 +65,7 @@ const dependencies = {
   feedbackRepository,
   flashAssessmentResultRepository,
   flashAlgorithmService,
-  knowledgeElementRepository,
+  knowledgeElementRepository: injectedSharedRepositories.knowledgeElementRepository,
   skillRepository,
   stageCollectionForTargetProfileRepository,
   stageAcquisitionRepository,
