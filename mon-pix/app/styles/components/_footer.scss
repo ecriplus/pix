@@ -28,6 +28,10 @@
     height: 54px;
   }
 
+  img[alt="pix"] {
+    height: 48px;
+  }
+
   .copyrights {
     @extend %pix-body-xs;
 
