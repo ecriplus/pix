@@ -51,19 +51,43 @@ const batchSave = async function ({ knowledgeElements }) {
   return savedKnowledgeElements.map((ke) => new KnowledgeElement(ke));
 };
 
-const saveForCampaignParticipation = async function ({ knowledgeElements, campaignParticipationId, campaignsAPI }) {
+const saveForCampaignParticipation = async function ({
+  knowledgeElements,
+  campaignParticipationId,
+  campaignsAPI,
+  knowledgeElementSnapshotAPI,
+}) {
   const knexConn = DomainTransaction.getConnection();
   const campaign = await campaignsAPI.getByCampaignParticipationId(campaignParticipationId);
   if (!campaign) {
     return [];
   }
-  if (campaign.isAssessment || campaign.isExam) {
+  if (campaign.isAssessment) {
     const knowledgeElementsToSave = knowledgeElements.map((ke) => _.omit(ke, ['id', 'createdAt']));
     const savedKnowledgeElements = await knex
       .batchInsert(tableName, knowledgeElementsToSave)
       .transacting(knexConn.isTransaction ? knexConn : null)
       .returning('*');
     return savedKnowledgeElements.map((ke) => new KnowledgeElement(ke));
+  } else if (campaign.isExam) {
+    const currentSnapshot = await knowledgeElementSnapshotAPI.getByParticipation(campaignParticipationId);
+    const createdAt = new Date();
+    const previousKnowledgeElements = currentSnapshot.knowledgeElements ?? [];
+    await knowledgeElementSnapshotAPI.save({
+      userId: knowledgeElements[0].userId,
+      knowledgeElements: previousKnowledgeElements.concat(
+        knowledgeElements.map(
+          (ke) =>
+            new KnowledgeElement({
+              ...ke,
+              createdAt,
+            }),
+        ),
+      ),
+      campaignParticipationId,
+    });
+    const updatedSnapshot = await knowledgeElementSnapshotAPI.getByParticipation(campaignParticipationId);
+    return updatedSnapshot.knowledgeElements.map((ke) => new KnowledgeElement(ke));
   }
   return [];
 };

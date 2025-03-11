@@ -1,11 +1,13 @@
 import _ from 'lodash';
 
+import * as knowledgeElementSnapshotAPI from '../../../../../src/prescription/campaign/application/api/knowledge-element-snapshots-api.js';
+import { KnowledgeElementSnapshot } from '../../../../../src/prescription/campaign/application/api/models/KnowledgeElementSnapshot.js';
 import { CampaignTypes } from '../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { Assessment, KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
 import { repositories } from '../../../../../src/shared/infrastructure/repositories/index.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Repository | knowledgeElementRepository', function () {
   describe('#batchSave', function () {
@@ -68,6 +70,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
           assessmentId,
           answerId: answerId1,
           competenceId: 'recABC',
+          skillId: 'nouvelAcquis1',
         }),
       );
       knowledgeElementsToSave.push(
@@ -76,6 +79,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
           assessmentId,
           answerId: answerId2,
           competenceId: 'recABC',
+          skillId: 'nouvelAcquis2',
         }),
       );
 
@@ -163,33 +167,133 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
         });
       });
       context('when campaign is of type EXAM', function () {
-        it('should save all the knowledgeElements in table "knowledge-elements"', async function () {
-          // given
-          const campaignId = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.EXAM }).id;
-          const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
-            campaignId,
-          }).id;
-          await databaseBuilder.commit();
+        let clock;
 
-          // when
-          const savedKnowledgeElements = await repositories.knowledgeElementRepository.saveForCampaignParticipation({
-            knowledgeElements: knowledgeElementsToSave,
-            campaignParticipationId,
+        beforeEach(function () {
+          clock = sinon.useFakeTimers(new Date('2021-10-29'));
+        });
+
+        afterEach(function () {
+          clock.restore();
+        });
+        context('when a snapshot for this participation already exists', function () {
+          it('should save the knowledge elements through an updated snapshot', async function () {
+            // given
+            const userId = databaseBuilder.factory.buildUser().id;
+            const campaignId = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.EXAM }).id;
+            const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+              campaignId,
+              userId,
+            }).id;
+            const knowledgeElement1 = domainBuilder.buildKnowledgeElement({
+              userId,
+              createdAt: new Date('2019-03-01'),
+              skillId: 'acquis1',
+            });
+            const knowledgeElement2 = domainBuilder.buildKnowledgeElement({
+              userId,
+              createdAt: new Date('2019-03-01'),
+              skillId: 'acquis2',
+            });
+            const knowledgeElementsBefore = new KnowledgeElementCollection([knowledgeElement1, knowledgeElement2]);
+            databaseBuilder.factory.buildKnowledgeElementSnapshot({
+              userId,
+              snappedAt: new Date('2019-01-01'),
+              campaignParticipationId,
+              snapshot: knowledgeElementsBefore.toSnapshot(),
+            });
+            await databaseBuilder.commit();
+
+            // when
+            await repositories.knowledgeElementRepository.saveForCampaignParticipation({
+              knowledgeElements: knowledgeElementsToSave,
+              campaignParticipationId,
+            });
+
+            // then
+            const [{ count }] = await knex('knowledge-elements').count();
+            expect(count).to.equal(0);
+            const snapshotForParticipation =
+              await knowledgeElementSnapshotAPI.getByParticipation(campaignParticipationId);
+            expect(snapshotForParticipation).to.deepEqualInstance(
+              new KnowledgeElementSnapshot({
+                campaignParticipationId,
+                knowledgeElements: [
+                  new KnowledgeElement({
+                    ...knowledgeElementsToSave[0],
+                    assessmentId: undefined,
+                    userId: undefined,
+                    id: undefined,
+                    createdAt: new Date(),
+                  }),
+                  new KnowledgeElement({
+                    ...knowledgeElementsToSave[1],
+                    assessmentId: undefined,
+                    userId: undefined,
+                    id: undefined,
+                    createdAt: new Date(),
+                  }),
+                  new KnowledgeElement({
+                    ...knowledgeElement1,
+                    assessmentId: undefined,
+                    userId: undefined,
+                    id: undefined,
+                  }),
+                  new KnowledgeElement({
+                    ...knowledgeElement2,
+                    assessmentId: undefined,
+                    userId: undefined,
+                    id: undefined,
+                  }),
+                ],
+              }),
+            );
           });
+        });
+        context('when there is no snapshot for this participation', function () {
+          it('should save the knowledge elements through a new snapshot', async function () {
+            // given
+            const userId = databaseBuilder.factory.buildUser().id;
+            const campaignId = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.EXAM }).id;
+            const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+              campaignId,
+              userId,
+            }).id;
+            await databaseBuilder.commit();
 
-          // then
-          const [{ count }] = await knex('knowledge-elements').count();
-          expect(count).to.equal(2);
-          expect(savedKnowledgeElements).to.have.lengthOf(2);
-          expect(savedKnowledgeElements[0]).to.deepEqualInstanceOmitting(knowledgeElementsToSave[0], [
-            'createdAt',
-            'id',
-          ]);
-          expect(savedKnowledgeElements[1]).to.deepEqualInstanceOmitting(knowledgeElementsToSave[1], [
-            'createdAt',
-            'id',
-          ]);
-          expect(savedKnowledgeElements[0].createdAt).to.deep.equal(savedKnowledgeElements[1].createdAt);
+            // when
+            await repositories.knowledgeElementRepository.saveForCampaignParticipation({
+              knowledgeElements: knowledgeElementsToSave,
+              campaignParticipationId,
+            });
+
+            // then
+            const [{ count }] = await knex('knowledge-elements').count();
+            expect(count).to.equal(0);
+            const snapshotForParticipation =
+              await knowledgeElementSnapshotAPI.getByParticipation(campaignParticipationId);
+            expect(snapshotForParticipation).to.deepEqualInstance(
+              new KnowledgeElementSnapshot({
+                campaignParticipationId,
+                knowledgeElements: [
+                  new KnowledgeElement({
+                    ...knowledgeElementsToSave[0],
+                    assessmentId: undefined,
+                    userId: undefined,
+                    id: undefined,
+                    createdAt: new Date(),
+                  }),
+                  new KnowledgeElement({
+                    ...knowledgeElementsToSave[1],
+                    assessmentId: undefined,
+                    userId: undefined,
+                    id: undefined,
+                    createdAt: new Date(),
+                  }),
+                ],
+              }),
+            );
+          });
         });
       });
     });
