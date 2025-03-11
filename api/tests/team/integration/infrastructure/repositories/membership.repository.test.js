@@ -884,4 +884,23 @@ describe('Integration | Team | Infrastructure | Repository | membership-reposito
       });
     });
   });
+
+  describe('#updateLastAccessedAt', function () {
+    it('updates the lastAccessedAt field of the membership', async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser().id;
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      databaseBuilder.factory.buildMembership({ userId, organizationId });
+
+      await databaseBuilder.commit();
+
+      // when
+      await membershipRepository.updateLastAccessedAt({ userId, organizationId, lastAccessedAt: now });
+
+      // then
+      const updatedMembership = await knex('memberships').where({ userId, organizationId }).first();
+      expect(updatedMembership.lastAccessedAt).to.deep.equal(now);
+      expect(updatedMembership.updatedAt).to.deep.equal(now);
+    });
+  });
 });

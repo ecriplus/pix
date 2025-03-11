@@ -177,6 +177,14 @@ export const disableMembershipsByUserId = async function ({ userId, updatedByUse
     .update({ disabledAt: new Date(), updatedAt: new Date(), updatedByUserId });
 };
 
+export const updateLastAccessedAt = async function ({ userId, organizationId, lastAccessedAt }) {
+  const knexConnection = DomainTransaction.getConnection();
+
+  await knexConnection(MEMBERSHIPS_TABLE)
+    .where({ userId, organizationId })
+    .update({ lastAccessedAt, updatedAt: new Date() });
+};
+
 const toDomain = (membershipData, userData = null, organizationData = null, organizationTags = null) => {
   const membership = new Membership(membershipData);
   if (userData) membership.user = new User(userData);

@@ -59,12 +59,25 @@ const findPaginatedFilteredMemberships = async function (request) {
   return membershipSerializer.serialize(memberships, pagination);
 };
 
+async function updateLastAccessedAt(request, h, dependencies = { requestResponseUtils }) {
+  const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+  const organizationId = request.params.organizationId;
+
+  await usecases.updateMembershipLastAccessedAt({
+    userId,
+    organizationId,
+  });
+
+  return h.response().code(204);
+}
+
 const membershipController = {
   create,
   disable,
   disableOwnOrganizationMembership,
   findPaginatedFilteredMemberships,
   update,
+  updateLastAccessedAt,
 };
 
 export { membershipController };

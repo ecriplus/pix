@@ -406,4 +406,41 @@ describe('Acceptance | Team | Application | Route | membership', function () {
       });
     });
   });
+
+  describe('PATCH /api/organizations/{id}/me', function () {
+    context('when user is one of the members of the organization', function () {
+      it('updates user membership lastAccessedAt', async function () {
+        // given
+        const organizationId = databaseBuilder.factory.buildOrganization().id;
+        const organizationMemberUserId = databaseBuilder.factory.buildUser().id;
+        databaseBuilder.factory.buildMembership({
+          userId: organizationMemberUserId,
+          organizationId,
+          organizationRole: Membership.roles.MEMBER,
+        });
+
+        await databaseBuilder.commit();
+
+        const options = {
+          method: 'PATCH',
+          url: `/api/organizations/${organizationId}/me`,
+          payload: {},
+          headers: generateAuthenticatedUserRequestHeaders({ userId: organizationMemberUserId }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        const membership = await databaseBuilder.knex
+          .select()
+          .from('memberships')
+          .where({ userId: organizationMemberUserId, organizationId })
+          .first();
+        expect(membership.lastAccessedAt).to.be.a('date');
+        expect(membership.lastAccessedAt).to.deep.equal(membership.updatedAt);
+        expect(response.statusCode).to.equal(204);
+      });
+    });
+  });
 });

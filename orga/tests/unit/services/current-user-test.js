@@ -3,6 +3,7 @@ import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import { reject, resolve } from 'rsvp';
+import sinon from 'sinon';
 
 module('Unit | Service | current-user', function (hooks) {
   setupTest(hooks);
@@ -35,7 +36,7 @@ module('Unit | Service | current-user', function (hooks) {
     test('should load the current user', async function (assert) {
       // given
       const organization = Object.create({ id: 9 });
-      const memberships = [Object.create({ organization })];
+      const memberships = [Object.create({ organization, save: sinon.stub().resolves() })];
 
       connectedUser.userOrgaSettings = Object.create({ user: connectedUser, organization });
       connectedUser.memberships = memberships;
@@ -53,8 +54,8 @@ module('Unit | Service | current-user', function (hooks) {
       const firstOrganization = Object.create({ id: 9 });
       const secondOrganization = Object.create({ id: 10 });
       const memberships = [
-        Object.create({ organization: firstOrganization }),
-        Object.create({ organization: secondOrganization }),
+        Object.create({ organization: firstOrganization, save: sinon.stub().resolves() }),
+        Object.create({ organization: secondOrganization, save: sinon.stub().resolves() }),
       ];
 
       connectedUser.userOrgaSettings = Object.create({ user: connectedUser, organization: firstOrganization });
@@ -65,6 +66,23 @@ module('Unit | Service | current-user', function (hooks) {
 
       // then
       assert.strictEqual(currentUserService.memberships, memberships);
+    });
+
+    test('saves the membership with updateLastAccessedAt option', async function (assert) {
+      // given
+      const organization = Object.create({ id: 9 });
+      const membership = Object.create({ organization, save: sinon.stub().resolves() });
+      connectedUser.userOrgaSettings = Object.create({ user: connectedUser, organization });
+      connectedUser.memberships = [membership];
+
+      // when
+      await currentUserService.load();
+
+      // then
+      sinon.assert.calledWith(membership.save, {
+        adapterOptions: { updateLastAccessedAt: true, organizationId: organization.id },
+      });
+      assert.ok(true);
     });
 
     test('should load the organization', async function (assert) {
