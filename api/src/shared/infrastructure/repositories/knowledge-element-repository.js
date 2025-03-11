@@ -1,11 +1,9 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../db/knex-database-connection.js';
-import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import { KnowledgeElementCollection } from '../../../prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { KnowledgeElement } from '../../domain/models/KnowledgeElement.js';
-import { logger } from '../utils/logger.js';
 
 const tableName = 'knowledge-elements';
 
@@ -53,9 +51,9 @@ const batchSave = async function ({ knowledgeElements }) {
   return savedKnowledgeElements.map((ke) => new KnowledgeElement(ke));
 };
 
-const saveForCampaignParticipation = async function ({ knowledgeElements, campaignParticipationId }) {
+const saveForCampaignParticipation = async function ({ knowledgeElements, campaignParticipationId, campaignsAPI }) {
   const knexConn = DomainTransaction.getConnection();
-  const campaign = await _getAssociatedCampaign(campaignParticipationId);
+  const campaign = await campaignsAPI.getByCampaignParticipationId(campaignParticipationId);
   if (!campaign) {
     return [];
   }
@@ -117,8 +115,9 @@ const findUniqByUserIdForCampaignParticipation = async function ({
   campaignParticipationId,
   limitDate,
   knowledgeElementSnapshotAPI,
+  campaignsAPI,
 }) {
-  const campaign = await _getAssociatedCampaign(campaignParticipationId);
+  const campaign = await campaignsAPI.getByCampaignParticipationId(campaignParticipationId);
   if (!campaign) {
     return null;
   }
@@ -133,21 +132,6 @@ const findUniqByUserIdForCampaignParticipation = async function ({
   }
   return null;
 };
-
-async function _getAssociatedCampaign(campaignParticipationId) {
-  let campaign = null;
-  if (!campaignParticipationId) {
-    return campaign;
-  }
-  try {
-    const campaignId = await campaignRepository.getCampaignIdByCampaignParticipationId(campaignParticipationId);
-    campaign = await campaignRepository.get(campaignId);
-  } catch (err) {
-    logger.error(err);
-    return null;
-  }
-  return campaign;
-}
 
 export {
   batchSave,
