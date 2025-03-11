@@ -17,7 +17,7 @@ module('Acceptance | Target Profile Insights', function (hooks) {
       const stageCollection = server.create('stage-collection', { id: 1, stages: [stage] });
       server.create('target-profile', {
         id: 1,
-        name: 'Profil cible extra croustillant',
+        internalName: 'Profil cible extra croustillant',
         badges: [badge],
         stageCollection,
       });
@@ -86,7 +86,7 @@ module('Acceptance | Target Profile Insights', function (hooks) {
       stageCollection = server.create('stage-collection', { id: 1, stages: [] });
       targetProfile = server.create('target-profile', {
         id: 1,
-        name: 'Profil cible extra croustillant',
+        internalName: 'Profil cible extra croustillant',
         stageCollection,
       });
       await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
