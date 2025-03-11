@@ -1,5 +1,5 @@
-import { certificationCenterMembershipController } from '../../../../lib/application/certification-center-memberships/certification-center-membership-controller.js';
-import { usecases } from '../../../../lib/domain/usecases/index.js';
+import { certificationCenterMembershipController } from '../../../../src/team/application/certification-center-membership/certification-center-membership.controller.js';
+import { usecases } from '../../../../src/team/domain/usecases/index.js';
 import { expect, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Application | certification-center-memberships | certification-center-membership-controller', function () {

@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import { ForbiddenError } from '../../../shared/application/http-errors.js';
 import * as certificationCenterMembershipSerializer from '../../../shared/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
@@ -9,7 +8,7 @@ const disableFromPixCertif = async function (request, h, dependencies = { reques
   const certificationCenterMembershipId = request.params.certificationCenterMembershipId;
   const currentUserId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
 
-  await libUsecases.disableCertificationCenterMembershipFromPixCertif({
+  await usecases.disableCertificationCenterMembershipFromPixCertif({
     certificationCenterMembershipId,
     updatedByUserId: currentUserId,
   });
