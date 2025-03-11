@@ -7,7 +7,7 @@ import { KnowledgeElementCollection } from '../../../../../src/prescription/shar
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { Assessment, KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
 import { repositories } from '../../../../../src/shared/infrastructure/repositories/index.js';
-import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Repository | knowledgeElementRepository', function () {
   describe('#batchSave', function () {
@@ -87,9 +87,9 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
     });
 
     context('when campaign participation is invalid', function () {
-      it('should return an empty array without saving anything when campaign participation does not refer to existing entities', async function () {
+      it('should throw an Error without saving anything when campaign participation does not refer to existing entities', async function () {
         // when
-        const res = await repositories.knowledgeElementRepository.saveForCampaignParticipation({
+        const err = await catchErr(repositories.knowledgeElementRepository.saveForCampaignParticipation)({
           knowledgeElements: knowledgeElementsToSave,
           campaignParticipationId: 456,
         });
@@ -97,12 +97,13 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
         // then
         const [{ count }] = await knex('knowledge-elements').count();
         expect(count).to.equal(0);
-        expect(res).to.deep.equal([]);
+        expect(err).to.be.instanceOf(Error);
+        expect(err.message).to.equal('Invalid campaign participation 456');
       });
 
-      it('should return an empty array without saving anything when campaign participation is not defined', async function () {
+      it('should throw an Error without saving anything when campaign participation is not defined', async function () {
         // when
-        const res = await repositories.knowledgeElementRepository.saveForCampaignParticipation({
+        const err = await catchErr(repositories.knowledgeElementRepository.saveForCampaignParticipation)({
           knowledgeElements: knowledgeElementsToSave,
           campaignParticipationId: null,
         });
@@ -110,13 +111,14 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
         // then
         const [{ count }] = await knex('knowledge-elements').count();
         expect(count).to.equal(0);
-        expect(res).to.deep.equal([]);
+        expect(err).to.be.instanceOf(Error);
+        expect(err.message).to.equal('Invalid campaign participation null');
       });
     });
 
     context('when campaign participation is valid', function () {
       context('when campaign is of type PROFILES_COLLECTION', function () {
-        it('should not save anything in DB and return an empty array', async function () {
+        it('should not save anything in DB and throw an error', async function () {
           // given
           const campaignId = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.PROFILES_COLLECTION }).id;
           const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
@@ -125,7 +127,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
           await databaseBuilder.commit();
 
           // when
-          const savedKnowledgeElements = await repositories.knowledgeElementRepository.saveForCampaignParticipation({
+          const err = await catchErr(repositories.knowledgeElementRepository.saveForCampaignParticipation)({
             knowledgeElements: knowledgeElementsToSave,
             campaignParticipationId,
           });
@@ -133,7 +135,8 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
           // then
           const [{ count }] = await knex('knowledge-elements').count();
           expect(count).to.equal(0);
-          expect(savedKnowledgeElements).to.deep.equal([]);
+          expect(err).to.be.instanceOf(Error);
+          expect(err.message).to.equal('Saving knowledge-elements for campaign of type undefined not implemented');
         });
       });
       context('when campaign is of type ASSESSMENT', function () {
@@ -146,24 +149,20 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
           await databaseBuilder.commit();
 
           // when
-          const savedKnowledgeElements = await repositories.knowledgeElementRepository.saveForCampaignParticipation({
+          await repositories.knowledgeElementRepository.saveForCampaignParticipation({
             knowledgeElements: knowledgeElementsToSave,
             campaignParticipationId,
           });
 
           // then
-          const [{ count }] = await knex('knowledge-elements').count();
-          expect(count).to.equal(2);
-          expect(savedKnowledgeElements).to.have.lengthOf(2);
-          expect(savedKnowledgeElements[0]).to.deepEqualInstanceOmitting(knowledgeElementsToSave[0], [
-            'createdAt',
-            'id',
-          ]);
-          expect(savedKnowledgeElements[1]).to.deepEqualInstanceOmitting(knowledgeElementsToSave[1], [
-            'createdAt',
-            'id',
-          ]);
-          expect(savedKnowledgeElements[0].createdAt).to.deep.equal(savedKnowledgeElements[1].createdAt);
+          const keFromDB = await knex('knowledge-elements').orderBy('skillId');
+          expect(keFromDB.length).to.equal(2);
+          expect(_.omit(keFromDB[0], ['createdAt', 'id'])).to.deep.equal(
+            _.omit(knowledgeElementsToSave[0], ['createdAt', 'id']),
+          );
+          expect(_.omit(keFromDB[1], ['createdAt', 'id'])).to.deep.equal(
+            _.omit(knowledgeElementsToSave[1], ['createdAt', 'id']),
+          );
         });
       });
       context('when campaign is of type EXAM', function () {

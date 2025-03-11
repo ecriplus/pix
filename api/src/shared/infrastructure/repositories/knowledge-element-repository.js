@@ -60,15 +60,15 @@ const saveForCampaignParticipation = async function ({
   const knexConn = DomainTransaction.getConnection();
   const campaign = await campaignsAPI.getByCampaignParticipationId(campaignParticipationId);
   if (!campaign) {
-    return [];
+    throw new Error(`Invalid campaign participation ${campaignParticipationId}`);
   }
   if (campaign.isAssessment) {
     const knowledgeElementsToSave = knowledgeElements.map((ke) => _.omit(ke, ['id', 'createdAt']));
-    const savedKnowledgeElements = await knex
+    await knex
       .batchInsert(tableName, knowledgeElementsToSave)
       .transacting(knexConn.isTransaction ? knexConn : null)
       .returning('*');
-    return savedKnowledgeElements.map((ke) => new KnowledgeElement(ke));
+    return;
   } else if (campaign.isExam) {
     const currentSnapshot = await knowledgeElementSnapshotAPI.getByParticipation(campaignParticipationId);
     const createdAt = new Date();
@@ -86,10 +86,9 @@ const saveForCampaignParticipation = async function ({
       ),
       campaignParticipationId,
     });
-    const updatedSnapshot = await knowledgeElementSnapshotAPI.getByParticipation(campaignParticipationId);
-    return updatedSnapshot.knowledgeElements.map((ke) => new KnowledgeElement(ke));
+    return;
   }
-  return [];
+  throw new Error(`Saving knowledge-elements for campaign of type ${campaign.type} not implemented`);
 };
 
 const findUniqByUserId = function ({ userId, limitDate, skillIds }) {
