@@ -1,8 +1,20 @@
+import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import { ForbiddenError } from '../../../shared/application/http-errors.js';
 import * as certificationCenterMembershipSerializer from '../../../shared/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { certificationCenterMembershipRepository } from '../../infrastructure/repositories/certification-center-membership.repository.js';
+
+const disableFromPixCertif = async function (request, h, dependencies = { requestResponseUtils }) {
+  const certificationCenterMembershipId = request.params.certificationCenterMembershipId;
+  const currentUserId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+
+  await libUsecases.disableCertificationCenterMembershipFromPixCertif({
+    certificationCenterMembershipId,
+    updatedByUserId: currentUserId,
+  });
+  return h.response().code(204);
+};
 
 const findCertificationCenterMemberships = async function (
   request,
@@ -72,6 +84,7 @@ const updateLastAccessedAt = async function (request, h, dependencies = { reques
 };
 
 const certificationCenterMembershipController = {
+  disableFromPixCertif,
   findCertificationCenterMemberships,
   updateFromPixCertif,
   updateReferer,

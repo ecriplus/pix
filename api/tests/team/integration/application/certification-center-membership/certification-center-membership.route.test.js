@@ -166,4 +166,32 @@ describe('Integration | Team | Application | Certification Center Membership | A
       });
     });
   });
+
+  describe('DELETE /api/certification-center-memberships/{id}', function () {
+    context('when user does not have a valid role', function () {
+      it('returns a 403 HTTP status code', async function () {
+        const userWithoutRole = databaseBuilder.factory.buildUser();
+        const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
+        const user = databaseBuilder.factory.buildUser();
+        const certificationCenterMembership = databaseBuilder.factory.buildCertificationCenterMembership({
+          certificationCenterId: certificationCenter.id,
+          userId: user.id,
+        });
+
+        const request = {
+          method: 'DELETE',
+          url: `/api/certification-center-memberships/${certificationCenterMembership.id}`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId: userWithoutRole.id }),
+        };
+
+        await databaseBuilder.commit();
+
+        // when
+        const { statusCode } = await server.inject(request);
+
+        // then
+        expect(statusCode).to.equal(403);
+      });
+    });
+  });
 });
