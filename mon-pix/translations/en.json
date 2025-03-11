@@ -267,6 +267,22 @@
         },
         "subtitle": "One moment, please! I'll be as quick as I can.",
         "title": "Calculate your current score..."
+      },
+      "start-landing-page": {
+        "steps": {
+          "step1": {
+            "description": "Answer questions adapted to your level",
+            "title": "Pass test"
+          },
+          "step2": {
+            "description": "Discover your strengths and areas for improvement",
+            "title": "Discover your score"
+          },
+          "step3": {
+            "description": "Access training tailored to your results",
+            "title": "Make progress"
+          }
+        }
       }
     },
     "invited": {

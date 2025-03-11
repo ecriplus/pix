@@ -273,6 +273,22 @@
         },
         "subtitle": "¡Un momento, por favor! Seré tan rápido como pueda.",
         "title": "Calcular su puntuación actual..."
+      },
+      "start-landing-page": {
+        "steps": {
+          "step1": {
+            "description": "Answer questions adapted to your level",
+            "title": "Pass test"
+          },
+          "step2": {
+            "description": "Discover your strengths and areas for improvement",
+            "title": "Discover your score"
+          },
+          "step3": {
+            "description": "Access training tailored to your results",
+            "title": "Make progress"
+          }
+        }
       }
     },
     "invited": {

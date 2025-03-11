@@ -267,6 +267,22 @@
         },
         "subtitle": "Un instant, s’il vous plaît ! Je vais faire au plus vite.",
         "title": "Calcul de votre score en cours..."
+      },
+      "start-landing-page": {
+        "steps": {
+          "step1": {
+            "description": "Répondez à des questions qui s'adaptent à votre niveau",
+            "title": "Passez le test"
+          },
+          "step2": {
+            "description": "Découvrez vos forces et axes de progression",
+            "title": "Découvrez votre score"
+          },
+          "step3": {
+            "description": "Accédez à des formations adaptées à vos résultats",
+            "title": "Progressez"
+          }
+        }
       }
     },
     "invited": {
