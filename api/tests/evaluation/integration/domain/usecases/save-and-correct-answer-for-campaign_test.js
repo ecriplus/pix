@@ -8,7 +8,7 @@ import { PIX_COUNT_BY_LEVEL } from '../../../../../src/shared/domain/constants.j
 import { AnswerStatus, Assessment, KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
 import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
-describe('Integration | Usecase | Save and correct answer for campaign', function () {
+describe('Evaluation | Integration | Usecase | Save and correct answer for campaign', function () {
   const skillIds = ['monAcquisA_Id', 'monAcquisB_Id', 'monAcquisC_Id'];
 
   context('for campaign of type assessment with method smart_random', function () {

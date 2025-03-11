@@ -60,6 +60,7 @@ const getNextChallenge = async function (
   h,
   dependencies = {
     usecases,
+    evaluationUsecases,
     assessmentRepository,
     certificationVersionRepository,
     repositories,
@@ -241,7 +242,7 @@ async function _getChallengeByAssessmentType({ assessment, request, dependencies
   }
 
   if (assessment.isForCampaign()) {
-    return dependencies.usecases.getNextChallengeForCampaignAssessment({ assessment, locale });
+    return dependencies.evaluationUsecases.getNextChallengeForCampaignAssessment({ assessment, locale });
   }
 
   if (assessment.isCompetenceEvaluation()) {

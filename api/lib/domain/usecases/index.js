@@ -3,10 +3,8 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import * as flashAlgorithmService from '../../../src/certification/flash-certification/domain/services/algorithm-methods/flash.js';
 import * as certificationChallengeLiveAlertRepository from '../../../src/certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
 import * as certificationCompanionAlertRepository from '../../../src/certification/shared/infrastructure/repositories/certification-companion-alert-repository.js';
-import * as flashAlgorithmConfigurationRepository from '../../../src/certification/shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as algorithmDataFetcherService from '../../../src/evaluation/domain/services/algorithm-methods/data-fetcher.js';
 import * as smartRandom from '../../../src/evaluation/domain/services/algorithm-methods/smart-random.js';
 // Used with vicious ...arguments
@@ -68,7 +66,6 @@ import { certificationCenterMembershipRepository } from '../../../src/team/infra
 import * as membershipRepository from '../../../src/team/infrastructure/repositories/membership.repository.js';
 import { organizationInvitationRepository } from '../../../src/team/infrastructure/repositories/organization-invitation.repository.js';
 import * as obfuscationService from '../../domain/services/obfuscation-service.js';
-import * as flashAssessmentResultRepository from '../../infrastructure/repositories/flash-assessment-result-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
 import { certificationCompletedJobRepository } from '../../infrastructure/repositories/jobs/certification-completed-job-repository.js';
 import * as organizationMemberIdentityRepository from '../../infrastructure/repositories/organization-member-identity-repository.js';
@@ -129,9 +126,6 @@ const dependencies = {
   dataProtectionOfficerRepository,
   emailRepository,
   emailValidationDemandRepository,
-  flashAlgorithmConfigurationRepository,
-  flashAlgorithmService,
-  flashAssessmentResultRepository,
   frameworkRepository,
   userToCreateRepository,
   knowledgeElementRepository,

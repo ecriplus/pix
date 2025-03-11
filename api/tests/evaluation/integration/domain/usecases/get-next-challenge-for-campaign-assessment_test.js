@@ -1,11 +1,11 @@
-import { getNextChallengeForCampaignAssessment } from '../../../../lib/domain/usecases/get-next-challenge-for-campaign-assessment.js';
-import * as algorithmDataFetcherService from '../../../../src/evaluation/domain/services/algorithm-methods/data-fetcher.js';
-import { LOCALE } from '../../../../src/shared/domain/constants.js';
-import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+import * as algorithmDataFetcherService from '../../../../../src/evaluation/domain/services/algorithm-methods/data-fetcher.js';
+import { getNextChallengeForCampaignAssessment } from '../../../../../src/evaluation/domain/usecases/get-next-challenge-for-campaign-assessment.js';
+import { LOCALE } from '../../../../../src/shared/domain/constants.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 const { FRENCH_SPOKEN } = LOCALE;
 
-describe('Integration | Domain | Use Cases | get-next-challenge-for-campaign-assessment', function () {
+describe('Evaluation | Integration | Domain | Use Cases | get-next-challenge-for-campaign-assessment', function () {
   describe('#getNextChallengeForCampaignAssessment : case for SMART RANDOM', function () {
     let userId,
       assessmentId,
@@ -28,7 +28,7 @@ describe('Integration | Domain | Use Cases | get-next-challenge-for-campaign-ass
       challengeWeb21,
       challengeWeb22,
       possibleSkillsForNextChallenge,
-      smartRandom,
+      smartRandomService,
       locale;
 
     beforeEach(async function () {
@@ -78,7 +78,7 @@ describe('Integration | Domain | Use Cases | get-next-challenge-for-campaign-ass
       locale = FRENCH_SPOKEN;
       possibleSkillsForNextChallenge = [web2, url2, search2];
 
-      smartRandom = {
+      smartRandomService = {
         getPossibleSkillsForNextChallenge: sinon.stub().returns({
           hasAssessmentEnded: false,
           possibleSkillsForNextChallenge,
@@ -95,7 +95,7 @@ describe('Integration | Domain | Use Cases | get-next-challenge-for-campaign-ass
         improvementService,
         pickChallengeService,
         locale,
-        smartRandom,
+        smartRandomService,
         algorithmDataFetcherService,
       });
     });
@@ -132,7 +132,7 @@ describe('Integration | Domain | Use Cases | get-next-challenge-for-campaign-ass
 
     it('should have fetched the next challenge with only most recent knowledge elements', function () {
       const allAnswers = [lastAnswer];
-      expect(smartRandom.getPossibleSkillsForNextChallenge).to.have.been.calledWithExactly({
+      expect(smartRandomService.getPossibleSkillsForNextChallenge).to.have.been.calledWithExactly({
         allAnswers,
         lastAnswer,
         challenges,
