@@ -1,5 +1,16 @@
 export class Campaign {
-  constructor({ id, code, name, title, createdAt, archivedAt, customLandingPageText }) {
+  constructor({
+    id,
+    code,
+    name,
+    title,
+    createdAt,
+    archivedAt,
+    customLandingPageText,
+    isExam,
+    isAssessment,
+    isProfilesCollection,
+  }) {
     this.id = id;
     this.code = code;
     this.name = name;
@@ -7,5 +18,8 @@ export class Campaign {
     this.createdAt = createdAt;
     this.archivedAt = archivedAt;
     this.customLandingPageText = customLandingPageText;
+    this.isExam = isExam;
+    this.isAssessment = isAssessment;
+    this.isProfilesCollection = isProfilesCollection;
   }
 }

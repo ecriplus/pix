@@ -104,8 +104,52 @@ describe('Unit | API | Campaigns', function () {
       expect(result.title).to.equal(campaignInformation.title);
       expect(result.createdAt).to.equal(campaignInformation.createdAt);
       expect(result.archivedAt).to.equal(campaignInformation.archivedAt);
+      expect(result.archivedAt).to.equal(campaignInformation.archivedAt);
       expect(result.customLandingPageText).to.equal(campaignInformation.customLandingPageText);
       expect(result).not.to.be.instanceOf(Campaign);
+    });
+  });
+
+  describe('#getByCampaignParticipationId', function () {
+    it('should return campaign informations', async function () {
+      const campaignParticipationId = 123;
+      const campaignInformation = domainBuilder.buildCampaign({
+        id: '777',
+        code: 'SOMETHING',
+        name: 'Godzilla',
+        title: 'is Biohazard',
+        customLandingPageText: 'Pika pika pikaCHUUUUUUUUUUUUUUUUUU',
+        createdAt: new Date('2020-01-01'),
+        archivedAt: new Date('2023-01-01'),
+      });
+
+      const getCampaignOfCampaignParticipationStub = sinon.stub(usecases, 'getCampaignOfCampaignParticipation');
+      getCampaignOfCampaignParticipationStub.withArgs({ campaignParticipationId: 123 }).resolves(campaignInformation);
+
+      // when
+      const result = await campaignApi.getByCampaignParticipationId(campaignParticipationId);
+
+      // then
+      expect(result.id).to.equal(campaignInformation.id);
+      expect(result.code).to.equal(campaignInformation.code);
+      expect(result.name).to.equal(campaignInformation.name);
+      expect(result.title).to.equal(campaignInformation.title);
+      expect(result.createdAt).to.equal(campaignInformation.createdAt);
+      expect(result.archivedAt).to.equal(campaignInformation.archivedAt);
+      expect(result.isExam).to.equal(campaignInformation.isExam);
+      expect(result.isAssessment).to.equal(campaignInformation.isAssessment);
+      expect(result.isProfilesCollection).to.equal(campaignInformation.isProfilesCollection);
+      expect(result.customLandingPageText).to.equal(campaignInformation.customLandingPageText);
+      expect(result).not.to.be.instanceOf(Campaign);
+    });
+
+    it('should return null when entities does not exist', async function () {
+      const getCampaignOfCampaignParticipationStub = sinon.stub(usecases, 'getCampaignOfCampaignParticipation');
+      getCampaignOfCampaignParticipationStub.withArgs({ campaignParticipationId: 456 }).resolves(null);
+
+      const result = await campaignApi.getByCampaignParticipationId(456);
+
+      expect(result).to.be.null;
     });
   });
 
