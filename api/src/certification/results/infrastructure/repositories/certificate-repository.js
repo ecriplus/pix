@@ -9,6 +9,7 @@ import {
   ResultCompetenceTree,
   ShareableCertificate,
 } from '../../../../shared/domain/models/index.js';
+import { featureToggles } from '../../../../shared/infrastructure/feature-toggles/index.js';
 import { SessionVersion } from '../../../shared/domain/models/SessionVersion.js';
 import { CertificationAttestation } from '../../domain/models/CertificationAttestation.js';
 import { V3CertificationAttestation } from '../../domain/models/V3CertificationAttestation.js';
@@ -44,12 +45,14 @@ const findByDivisionForScoIsManagingStudentsOrganization = async function ({ org
 
   const mostRecentCertificationsPerOrganizationLearner =
     _filterMostRecentCertificationCoursePerOrganizationLearner(certificationCourseDTOs);
-  return _(mostRecentCertificationsPerOrganizationLearner)
-    .orderBy(['lastName', 'firstName'], ['asc', 'asc'])
-    .map((certificationCourseDTO) => {
-      return _toDomainForCertificationAttestation({ certificationCourseDTO, competenceTree, certifiedBadges: [] });
-    })
-    .value();
+  return Promise.all(
+    _(mostRecentCertificationsPerOrganizationLearner)
+      .orderBy(['lastName', 'firstName'], ['asc', 'asc'])
+      .map((certificationCourseDTO) => {
+        return _toDomainForCertificationAttestation({ certificationCourseDTO, competenceTree, certifiedBadges: [] });
+      })
+      .value(),
+  );
 };
 
 const getCertificationAttestation = async function ({ certificationCourseId }) {
@@ -252,7 +255,7 @@ function _filterMostRecentCertificationCoursePerOrganizationLearner(DTOs) {
   return mostRecent;
 }
 
-function _toDomainForCertificationAttestation({ certificationCourseDTO, competenceTree, certifiedBadges }) {
+async function _toDomainForCertificationAttestation({ certificationCourseDTO, competenceTree, certifiedBadges }) {
   const competenceMarks = _.compact(certificationCourseDTO.competenceMarks).map(
     (competenceMark) => new CompetenceMark({ ...competenceMark }),
   );
@@ -264,7 +267,10 @@ function _toDomainForCertificationAttestation({ certificationCourseDTO, competen
     assessmentResultId: certificationCourseDTO.assessmentResultId,
   });
 
-  if (SessionVersion.isV3(certificationCourseDTO.version)) {
+  if (
+    SessionVersion.isV3(certificationCourseDTO.version) &&
+    (await featureToggles.get('isV3CertificationAttestationEnabled'))
+  ) {
     return new V3CertificationAttestation({
       ...certificationCourseDTO,
     });

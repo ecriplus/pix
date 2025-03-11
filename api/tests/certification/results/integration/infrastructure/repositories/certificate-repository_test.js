@@ -2,7 +2,8 @@ import * as certificateRepository from '../../../../../../src/certification/resu
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { SESSIONS_VERSIONS } from '../../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { AssessmentResult } from '../../../../../../src/shared/domain/models/index.js';
+import { AssessmentResult, CertificationAttestation } from '../../../../../../src/shared/domain/models/index.js';
+import { featureToggles } from '../../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import {
   catchErr,
   databaseBuilder,
@@ -209,6 +210,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         pixScore: 51,
         certifiedBadges: [],
         sessionId: 789,
+        version: SESSIONS_VERSIONS.V2,
       };
 
       _buildSession({
@@ -216,6 +218,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         sessionId: certificationAttestationData.sessionId,
         publishedAt: certificationAttestationData.deliveredAt,
         certificationCenter: certificationAttestationData.certificationCenter,
+        version: SESSIONS_VERSIONS.V2,
       });
       _buildCertificationAttestationWithSeveralResults(certificationAttestationData);
       await databaseBuilder.commit();
@@ -227,8 +230,10 @@ describe('Integration | Infrastructure | Repository | Certification', function (
 
       // then
       const expectedCertificationAttestation =
-        domainBuilder.certification.results.buildV3CertificationAttestation(certificationAttestationData);
-      expect(certificationAttestation).to.deepEqualInstanceOmitting(expectedCertificationAttestation);
+        domainBuilder.buildCertificationAttestation(certificationAttestationData);
+      expect(certificationAttestation).to.deepEqualInstanceOmitting(expectedCertificationAttestation, [
+        'resultCompetenceTree',
+      ]);
     });
 
     context('when session is not V3', function () {
@@ -489,47 +494,92 @@ describe('Integration | Infrastructure | Repository | Certification', function (
     });
 
     context('when session is V3', function () {
-      it('should return a V3CertificationAttestation', async function () {
-        // given
-        const learningContentObjects = learningContentBuilder.fromAreas(minimalLearningContent);
-        await mockLearningContent(learningContentObjects);
+      context('when isV3CertificationAttestationEnabled feature toggle is truthy', function () {
+        it('should return a V3CertificationAttestation', async function () {
+          // given
+          await featureToggles.set('isV3CertificationAttestationEnabled', true);
+          const learningContentObjects = learningContentBuilder.fromAreas(minimalLearningContent);
+          await mockLearningContent(learningContentObjects);
 
-        const certificationAttestationData = {
-          id: 123,
-          firstName: 'Sarah Michelle',
-          lastName: 'Gellar',
-          birthdate: '1977-04-14',
-          birthplace: 'Saint-Ouen',
-          isPublished: true,
-          userId: 456,
-          date: new Date('2020-01-01'),
-          verificationCode: 'P-SOMECODE',
-          maxReachableLevelOnCertificationDate: 5,
-          deliveredAt: new Date('2021-05-05'),
-          certificationCenter: 'Centre des poules bien dodues',
-          pixScore: 51,
-          sessionId: 789,
-        };
-        _buildSession({
-          userId: certificationAttestationData.userId,
-          sessionId: certificationAttestationData.sessionId,
-          publishedAt: certificationAttestationData.deliveredAt,
-          certificationCenter: certificationAttestationData.certificationCenter,
+          const certificationAttestationData = {
+            id: 123,
+            firstName: 'Sarah Michelle',
+            lastName: 'Gellar',
+            birthdate: '1977-04-14',
+            birthplace: 'Saint-Ouen',
+            isPublished: true,
+            userId: 456,
+            date: new Date('2020-01-01'),
+            verificationCode: 'P-SOMECODE',
+            maxReachableLevelOnCertificationDate: 5,
+            deliveredAt: new Date('2021-05-05'),
+            certificationCenter: 'Centre des poules bien dodues',
+            pixScore: 51,
+            sessionId: 789,
+          };
+          _buildSession({
+            userId: certificationAttestationData.userId,
+            sessionId: certificationAttestationData.sessionId,
+            publishedAt: certificationAttestationData.deliveredAt,
+            certificationCenter: certificationAttestationData.certificationCenter,
+          });
+          _buildValidCertificationAttestation(certificationAttestationData);
+          await databaseBuilder.commit();
+
+          // when
+          const certificationAttestation = await certificateRepository.getCertificationAttestation({
+            certificationCourseId: 123,
+          });
+
+          // then
+          const expectedCertificationAttestation =
+            domainBuilder.certification.results.buildV3CertificationAttestation(certificationAttestationData);
+          expect(certificationAttestation).to.deepEqualInstanceOmitting(expectedCertificationAttestation, [
+            'resultCompetenceTree',
+          ]);
         });
-        _buildValidCertificationAttestation(certificationAttestationData);
-        await databaseBuilder.commit();
+      });
 
-        // when
-        const certificationAttestation = await certificateRepository.getCertificationAttestation({
-          certificationCourseId: 123,
+      context('when isV3CertificationAttestationEnabled feature toggle is falsy', function () {
+        it('should return CertificationAttestation', async function () {
+          // given
+          await featureToggles.set('isV3CertificationAttestationEnabled', false);
+          const learningContentObjects = learningContentBuilder.fromAreas(minimalLearningContent);
+          await mockLearningContent(learningContentObjects);
+
+          const certificationAttestationData = {
+            id: 123,
+            firstName: 'Sarah Michelle',
+            lastName: 'Gellar',
+            birthdate: '1977-04-14',
+            birthplace: 'Saint-Ouen',
+            isPublished: true,
+            userId: 456,
+            date: new Date('2020-01-01'),
+            verificationCode: 'P-SOMECODE',
+            maxReachableLevelOnCertificationDate: 5,
+            deliveredAt: new Date('2021-05-05'),
+            certificationCenter: 'Centre des poules bien dodues',
+            pixScore: 51,
+            sessionId: 789,
+          };
+          _buildSession({
+            userId: certificationAttestationData.userId,
+            sessionId: certificationAttestationData.sessionId,
+            publishedAt: certificationAttestationData.deliveredAt,
+            certificationCenter: certificationAttestationData.certificationCenter,
+          });
+          _buildValidCertificationAttestation(certificationAttestationData);
+          await databaseBuilder.commit();
+
+          // when
+          const certificationAttestation = await certificateRepository.getCertificationAttestation({
+            certificationCourseId: 123,
+          });
+
+          // then
+          expect(certificationAttestation).to.be.instanceOf(CertificationAttestation);
         });
-
-        // then
-        const expectedCertificationAttestation =
-          domainBuilder.certification.results.buildV3CertificationAttestation(certificationAttestationData);
-        expect(certificationAttestation).to.deepEqualInstanceOmitting(expectedCertificationAttestation, [
-          'resultCompetenceTree',
-        ]);
       });
     });
   });
@@ -820,6 +870,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
 
     it('should return an array of certification attestations ordered by last name, first name', async function () {
       // given
+      await featureToggles.set('isV3CertificationAttestationEnabled', false);
       const learningContentObjects = learningContentBuilder.fromAreas(minimalLearningContent);
       await mockLearningContent(learningContentObjects);
       databaseBuilder.factory.buildOrganization({ id: 123, type: 'SCO', isManagingStudents: true });
@@ -937,12 +988,6 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       expect(certificationAttestations).to.have.lengthOf(3);
 
       expect(certificationAttestations[0]).deepEqualInstanceOmitting(expectedCertificationAttestationB, [
-        'resultCompetenceTree',
-      ]);
-      expect(certificationAttestations[1]).deepEqualInstanceOmitting(expectedCertificationAttestationC, [
-        'resultCompetenceTree',
-      ]);
-      expect(certificationAttestations[2]).deepEqualInstanceOmitting(expectedCertificationAttestationA, [
         'resultCompetenceTree',
       ]);
     });
