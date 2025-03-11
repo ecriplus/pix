@@ -1,4 +1,3 @@
-import { CERTIFICATION_CENTER_MEMBERSHIP_ROLES } from '../../../../src/shared/domain/models/CertificationCenterMembership.js';
 import { CertificationCenter } from '../../../../src/shared/domain/models/index.js';
 import { FEATURE_CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE_ID } from '../common/constants.js';
 import * as tooling from '../common/tooling/index.js';
@@ -6,25 +5,19 @@ import { acceptPixOrgaTermsOfService } from '../common/tooling/legal-documents.j
 import {
   CERTIFIABLE_SUCCESS_USER_ID,
   complementaryCertificationIds,
-  PRO_ADMIN_CERTIFICATION_CENTER_USER_ID,
-  PRO_CERTIFICATION_CENTER_ID,
-  PRO_EXTERNAL_ID,
-  PRO_MEMBER_CERTIFICATION_CENTER_USER_ID,
-  PRO_ORGANIZATION_ID,
-  PRO_ORGANIZATION_USER_ID,
   PRO_PILOT_CERTIFICATION_CENTER_ID,
   V3_CERTIFICATION_CENTER_ID,
   V3_CERTIFICATION_CENTER_USER_ID,
   V3_PRO_PILOT_EXTERNAL_ID,
 } from './constants.js';
 import { createCompetenceScoringConfiguration } from './create-competence-scoring-configuration.js';
+import { proOrganizationWithCertifCenter } from './create-pro-organization-with-certif-center.js';
 import { scoOrganizationManaginAgriStudentsWithFregata } from './create-sco-organization-managing-agri-student-with-fregata.js';
 import { createScoringConfiguration } from './create-scoring-configuration.js';
 
 async function teamCertificationDataBuilder({ databaseBuilder }) {
   await scoOrganizationManaginAgriStudentsWithFregata({ databaseBuilder });
-  await _createProOrganization({ databaseBuilder });
-  await _createProCertificationCenter({ databaseBuilder });
+  await proOrganizationWithCertifCenter({ databaseBuilder });
   _createV3CertificationConfiguration({ databaseBuilder });
   createCompetenceScoringConfiguration({ databaseBuilder });
   createScoringConfiguration({ databaseBuilder });
@@ -87,83 +80,6 @@ async function _createV3PilotCertificationCenter({ databaseBuilder }) {
     isV3Pilot: true,
     complementaryCertificationIds,
     featureIds: [FEATURE_CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE_ID],
-  });
-}
-
-async function _createProCertificationCenter({ databaseBuilder }) {
-  databaseBuilder.factory.buildUser.withRawPassword({
-    id: PRO_ADMIN_CERTIFICATION_CENTER_USER_ID,
-    firstName: 'PRO',
-    lastName: 'ADMIN',
-    email: 'certif-pro@example.net',
-    cgu: true,
-    lang: 'fr',
-    lastTermsOfServiceValidatedAt: new Date(),
-    mustValidateTermsOfService: false,
-    pixCertifTermsOfServiceAccepted: false,
-    hasSeenAssessmentInstructions: false,
-  });
-
-  acceptPixOrgaTermsOfService(databaseBuilder, PRO_ADMIN_CERTIFICATION_CENTER_USER_ID);
-
-  databaseBuilder.factory.buildUser.withRawPassword({
-    id: PRO_MEMBER_CERTIFICATION_CENTER_USER_ID,
-    firstName: 'PRO',
-    lastName: 'MEMBER',
-    email: 'certif-pro-member@example.net',
-    cgu: true,
-    lang: 'fr',
-    lastTermsOfServiceValidatedAt: new Date(),
-    mustValidateTermsOfService: false,
-    pixCertifTermsOfServiceAccepted: false,
-    hasSeenAssessmentInstructions: false,
-  });
-
-  acceptPixOrgaTermsOfService(databaseBuilder, PRO_MEMBER_CERTIFICATION_CENTER_USER_ID);
-
-  await tooling.certificationCenter.createCertificationCenter({
-    databaseBuilder,
-    certificationCenterId: PRO_CERTIFICATION_CENTER_ID,
-    name: 'Centre de certification pro',
-    type: CertificationCenter.types.PRO,
-    externalId: PRO_EXTERNAL_ID,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    members: [
-      { id: PRO_ADMIN_CERTIFICATION_CENTER_USER_ID, role: CERTIFICATION_CENTER_MEMBERSHIP_ROLES.ADMIN },
-      { id: PRO_MEMBER_CERTIFICATION_CENTER_USER_ID, role: CERTIFICATION_CENTER_MEMBERSHIP_ROLES.MEMBER },
-    ],
-    complementaryCertificationIds,
-  });
-}
-
-async function _createProOrganization({ databaseBuilder }) {
-  databaseBuilder.factory.buildUser.withRawPassword({
-    id: PRO_ORGANIZATION_USER_ID,
-    firstName: 'Orga Pro',
-    lastName: 'Certification',
-    email: 'orga-pro@example.net',
-    cgu: true,
-    lang: 'fr',
-    lastTermsOfServiceValidatedAt: new Date(),
-    mustValidateTermsOfService: false,
-    pixCertifTermsOfServiceAccepted: false,
-    hasSeenAssessmentInstructions: false,
-  });
-
-  acceptPixOrgaTermsOfService(databaseBuilder, PRO_ORGANIZATION_USER_ID);
-
-  await tooling.organization.createOrganization({
-    databaseBuilder,
-    organizationId: PRO_ORGANIZATION_ID,
-    type: 'PRO',
-    name: 'Orga team Certification',
-    isManagingStudents: false,
-    externalId: PRO_EXTERNAL_ID,
-    adminIds: [PRO_ORGANIZATION_USER_ID],
-    configOrganization: {
-      learnerCount: 8,
-    },
   });
 }
 
