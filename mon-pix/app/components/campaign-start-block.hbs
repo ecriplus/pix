@@ -25,6 +25,9 @@
         class="campaign-landing-page__start-button"
         @loading-color="white"
       >{{this.buttonText}}</PixButton>
+      {{#if @campaign.isAssessment}}
+        <CampaignLandingPageDetails />
+      {{/if}}
       <p class="campaign-landing-page-start__legal">{{this.legalText}}</p>
     </div>
   </form>
