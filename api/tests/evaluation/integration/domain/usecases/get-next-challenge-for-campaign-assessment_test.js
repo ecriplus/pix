@@ -1,157 +1,77 @@
-import * as algorithmDataFetcherService from '../../../../../src/evaluation/domain/services/algorithm-methods/data-fetcher.js';
-import { getNextChallengeForCampaignAssessment } from '../../../../../src/evaluation/domain/usecases/get-next-challenge-for-campaign-assessment.js';
-import { LOCALE } from '../../../../../src/shared/domain/constants.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
-
-const { FRENCH_SPOKEN } = LOCALE;
+import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
+import { CampaignTypes } from '../../../../../src/prescription/shared/domain/constants.js';
+import { Assessment, KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Evaluation | Integration | Domain | Use Cases | get-next-challenge-for-campaign-assessment', function () {
-  describe('#getNextChallengeForCampaignAssessment : case for SMART RANDOM', function () {
-    let userId,
-      assessmentId,
-      campaignParticipationId,
-      assessment,
-      lastAnswer,
-      answerRepository,
-      challengeRepository,
-      campaignRepository,
-      challenges,
-      knowledgeElementRepository,
-      recentKnowledgeElements,
-      campaignParticipationRepository,
-      isRetrying,
-      targetProfile,
-      skills,
-      actualNextChallenge,
-      improvementService,
-      pickChallengeService,
-      challengeWeb21,
-      challengeWeb22,
-      possibleSkillsForNextChallenge,
-      smartRandomService,
-      locale;
-
-    beforeEach(async function () {
-      userId = 'dummyUserId';
-      assessmentId = 21;
-      campaignParticipationId = 456;
-      lastAnswer = null;
-
-      answerRepository = { findByAssessment: sinon.stub().resolves([lastAnswer]) };
-      challenges = [];
-      challengeRepository = { findOperativeBySkills: sinon.stub().resolves(challenges) };
-      assessment = domainBuilder.buildAssessment.ofTypeCampaign({
-        id: assessmentId,
+  context('for a campaign of type assessment with method smart_random', function () {
+    const skillIds = ['acquisTube1Niveau1', 'acquisTube1Niveau2'];
+    it('should return the next challenge for the participant according to the user profile', async function () {
+      // given
+      const locale = 'fr';
+      const userId = databaseBuilder.factory.buildUser().id;
+      const campaignId = databaseBuilder.factory.buildCampaign({
+        type: CampaignTypes.ASSESSMENT,
+      }).id;
+      skillIds.map((skillId) =>
+        databaseBuilder.factory.buildCampaignSkill({
+          campaignId,
+          skillId,
+        }),
+      );
+      const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId,
+        sharedAt: null,
+      }).id;
+      const assessmentDB = databaseBuilder.factory.buildAssessment({
         userId,
         campaignParticipationId,
-        isImproving: false,
+        type: Assessment.types.CAMPAIGN,
       });
-      skills = [];
-      targetProfile = { skills };
-      campaignRepository = { findSkillsByCampaignParticipationId: sinon.stub().resolves(skills) };
-      improvementService = { filterKnowledgeElementsIfImproving: sinon.stub().returns(recentKnowledgeElements) };
-      pickChallengeService = { pickChallenge: sinon.stub().resolves(challengeWeb22) };
+      const challengeData = [];
+      skillIds.map((skillId, index) => {
+        databaseBuilder.factory.learningContent.buildSkill({
+          id: skillId,
+          tubeId: 'tube1Id',
+          status: 'actif',
+          level: index + 1,
+        });
+        challengeData.push(
+          databaseBuilder.factory.learningContent.buildChallenge({
+            id: `challengeFor_${skillId}`,
+            tubeId: 'tube1Id',
+            status: 'validé',
+            locales: [locale],
+            skillId,
+          }),
+        );
+      });
+      const answerId = databaseBuilder.factory.buildAnswer({
+        userId,
+        assessmentId: assessmentDB.id,
+        challengeId: challengeData[0].id,
+      }).id;
+      databaseBuilder.factory.buildKnowledgeElement({
+        answerId,
+        assessmentId: assessmentDB.id,
+        userId,
+        skillId: skillIds[0],
+        status: KnowledgeElement.StatusType.VALIDATED,
+        source: KnowledgeElement.SourceType.DIRECT,
+        competenceId: 'maCompetenceId',
+        createdAt: new Date('2020-01-01'),
+      });
+      await databaseBuilder.commit();
 
-      recentKnowledgeElements = [
-        { createdAt: 4, skillId: 'url2' },
-        { createdAt: 2, skillId: 'web1' },
-      ];
-      knowledgeElementRepository = { findUniqByUserId: sinon.stub().resolves(recentKnowledgeElements) };
-
-      isRetrying = false;
-      campaignParticipationRepository = { isRetrying: sinon.stub().resolves(isRetrying) };
-      const web2 = domainBuilder.buildSkill({ name: '@web2' });
-      challengeWeb21 = domainBuilder.buildChallenge({ id: 'challenge_web2_1' });
-      challengeWeb22 = domainBuilder.buildChallenge({ id: 'challenge_web2_2' });
-      web2.challenges = [challengeWeb21, challengeWeb22];
-      const url2 = domainBuilder.buildSkill({ name: '@url2' });
-      url2.challenges = [
-        domainBuilder.buildChallenge({ id: 'challenge_url2_1' }),
-        domainBuilder.buildChallenge({ id: 'challenge_url2_2' }),
-      ];
-      const search2 = domainBuilder.buildSkill({ name: '@search2' });
-      search2.challenges = [
-        domainBuilder.buildChallenge({ id: 'challenge_search2_1' }),
-        domainBuilder.buildChallenge({ id: 'challenge_search2_2' }),
-      ];
-
-      locale = FRENCH_SPOKEN;
-      possibleSkillsForNextChallenge = [web2, url2, search2];
-
-      smartRandomService = {
-        getPossibleSkillsForNextChallenge: sinon.stub().returns({
-          hasAssessmentEnded: false,
-          possibleSkillsForNextChallenge,
-        }),
-      };
-
-      actualNextChallenge = await getNextChallengeForCampaignAssessment({
+      // when
+      const assessment = domainBuilder.buildAssessment(assessmentDB);
+      const challenge = await evaluationUsecases.getNextChallengeForCampaignAssessment({
         assessment,
-        answerRepository,
-        challengeRepository,
-        knowledgeElementRepository,
-        campaignParticipationRepository,
-        campaignRepository,
-        improvementService,
-        pickChallengeService,
-        locale,
-        smartRandomService,
-        algorithmDataFetcherService,
-      });
-    });
-
-    it('should have fetched the answers', function () {
-      expect(answerRepository.findByAssessment).to.have.been.calledWithExactly(assessmentId);
-    });
-
-    it('should have filter the knowledge elements with an assessment improving', function () {
-      // given
-      const expectedAssessment = assessment;
-      expectedAssessment.isImproving = true;
-
-      expect(improvementService.filterKnowledgeElementsIfImproving).to.have.been.calledWithExactly({
-        knowledgeElements: recentKnowledgeElements,
-        assessment: expectedAssessment,
-        isRetrying,
-      });
-    });
-
-    it('should have fetched the target profile', function () {
-      expect(campaignRepository.findSkillsByCampaignParticipationId).to.have.been.calledWithExactly({
-        campaignParticipationId,
-      });
-    });
-
-    it('should have fetched the most recent knowledge elements', function () {
-      expect(knowledgeElementRepository.findUniqByUserId).to.have.been.calledWithExactly({ userId });
-    });
-
-    it('should have fetched the challenges', function () {
-      expect(challengeRepository.findOperativeBySkills).to.have.been.calledWithExactly(skills, locale);
-    });
-
-    it('should have fetched the next challenge with only most recent knowledge elements', function () {
-      const allAnswers = [lastAnswer];
-      expect(smartRandomService.getPossibleSkillsForNextChallenge).to.have.been.calledWithExactly({
-        allAnswers,
-        lastAnswer,
-        challenges,
-        targetSkills: targetProfile.skills,
-        knowledgeElements: recentKnowledgeElements,
         locale,
       });
-    });
 
-    it('should have returned the next challenge', function () {
-      expect(actualNextChallenge.id).to.equal(challengeWeb22.id);
-    });
-
-    it('should have pick challenge with skills, randomSeed and locale', function () {
-      expect(pickChallengeService.pickChallenge).to.have.been.calledWithExactly({
-        skills: possibleSkillsForNextChallenge,
-        randomSeed: assessmentId,
-        locale,
-      });
+      // then
+      expect(challenge.id).to.equal(challengeData[1].id);
     });
   });
 });
