@@ -1,7 +1,7 @@
 import { LtiPlatformRegistration } from '../../../../../src/identity-access-management/domain/models/LtiPlatformRegistration.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
 
-const defaultKeyPair = await cryptoService.generateRSAJSONWebKeyPair({ modulusLength: 512 });
+const defaultKeyPair = await cryptoService.generateJSONWebKeyPair({ modulusLength: 2048 });
 defaultKeyPair.encryptedPrivateKey = await cryptoService.encrypt(JSON.stringify(defaultKeyPair.privateKey));
 
 function getDefaultToolConfig(clientId) {

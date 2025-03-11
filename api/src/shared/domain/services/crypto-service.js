@@ -2,11 +2,11 @@ import crypto from 'node:crypto';
 import util from 'node:util';
 
 import bcrypt from 'bcrypt';
+import * as jose from 'jose';
 
 import { config } from '../../../../src/shared/config.js';
 import { PasswordNotMatching } from '../../../identity-access-management/domain/errors.js';
 
-const generateKeyPair = util.promisify(crypto.generateKeyPair);
 const randomBytes = util.promisify(crypto.randomBytes);
 const scrypt = util.promisify(crypto.scrypt);
 
@@ -87,22 +87,21 @@ const decrypt = async function (phcText) {
   return decrypted.toString();
 };
 
-async function generateRSAJSONWebKeyPair({ modulusLength = 4096 } = {}) {
-  const keyPair = await generateKeyPair('rsa', {
-    modulusLength,
-    publicKeyEncoding: {
-      type: 'pkcs1',
-      format: 'jwk',
-    },
-    privateKeyEncoding: {
-      type: 'pkcs1',
-      format: 'jwk',
-    },
-  });
+/**
+ * Generates Key pair as a JsonWebKey (JWK).
+ *
+ * @param alg JWA Algorithm Identifier to be used with the generated key pair. @see https://www.rfc-editor.org/rfc/rfc7518.html
+ * @param modulusLength Key size in bits. JOSE requires 2048 bits or larger.
+ * @returns {Promise<{publicKey: object, privateKey: object}>} The extractable key pair.
+ */
+async function generateJSONWebKeyPair({ alg = 'RS256', modulusLength = 4096 } = {}) {
+  const { publicKey, privateKey } = await jose.generateKeyPair(alg, { extractable: true, modulusLength });
   const kid = crypto.randomUUID();
+  const jwkPublicKey = await jose.exportJWK(publicKey);
+  const jwkPrivateKey = await jose.exportJWK(privateKey);
   return {
-    publicKey: { ...keyPair.publicKey, kid },
-    privateKey: { ...keyPair.privateKey, kid },
+    publicKey: { ...jwkPublicKey, kid },
+    privateKey: { ...jwkPrivateKey, kid },
   };
 }
 
@@ -114,7 +113,7 @@ async function generateRSAJSONWebKeyPair({ modulusLength = 4096 } = {}) {
  * @property {function} encrypt
  * @property {function} hashPassword
  * @property {function} hashPasswordSync
- * @property {function} generateRSAJSONWebKeyPair
+ * @property {function} generateJSONWebKeyPair
  * @property {RegExp} phcRegexp
  */
 const cryptoService = {
@@ -125,7 +124,7 @@ const cryptoService = {
   hashPassword,
   hashPasswordSync,
   phcRegexp,
-  generateRSAJSONWebKeyPair,
+  generateJSONWebKeyPair,
 };
 
 export { cryptoService };

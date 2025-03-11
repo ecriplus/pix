@@ -83,14 +83,14 @@ describe('Unit | Shared | Domain | Services | Crypto', function () {
     });
   });
 
-  describe('#generateRSAJSONWebKeyPair', function () {
+  describe('#generateJSONWebKeyPair', function () {
     it('should generate a new JSON Web Key pair', async function () {
       // given
-      const modulusLength = 512;
+      const modulusLength = 2048;
 
       // when
-      const keyPair = await cryptoService.generateRSAJSONWebKeyPair({ modulusLength });
-      const newKeyPair = await cryptoService.generateRSAJSONWebKeyPair({ modulusLength });
+      const keyPair = await cryptoService.generateJSONWebKeyPair({ modulusLength });
+      const newKeyPair = await cryptoService.generateJSONWebKeyPair({ modulusLength });
 
       // then
       expect(keyPair.publicKey).to.be.instanceOf(Object);
@@ -101,6 +101,7 @@ describe('Unit | Shared | Domain | Services | Crypto', function () {
       expect(keyPair.privateKey).to.have.property('kty', 'RSA');
       expect(keyPair.privateKey).to.have.property('kid');
       expect(keyPair.privateKey.kid).to.be.a('string');
+      expect(keyPair.privateKey.kid).to.equal(keyPair.publicKey.kid);
 
       expect(omit(newKeyPair.publicKey, 'kid')).to.not.deep.equal(omit(keyPair.publicKey, 'kid'));
       expect(omit(newKeyPair.privateKey, 'kid')).to.not.deep.equal(omit(keyPair.privateKey, 'kid'));

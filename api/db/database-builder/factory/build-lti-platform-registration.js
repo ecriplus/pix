@@ -1,7 +1,7 @@
 import { cryptoService } from '../../../src/shared/domain/services/crypto-service.js';
 import { databaseBuffer } from '../database-buffer.js';
 
-const defaultKeyPair = await cryptoService.generateRSAJSONWebKeyPair({ modulusLength: 512 });
+const defaultKeyPair = await cryptoService.generateJSONWebKeyPair({ modulusLength: 2048 });
 defaultKeyPair.encryptedPrivateKey = await cryptoService.encrypt(JSON.stringify(defaultKeyPair.privateKey));
 
 export function buildLtiPlatformRegistration({

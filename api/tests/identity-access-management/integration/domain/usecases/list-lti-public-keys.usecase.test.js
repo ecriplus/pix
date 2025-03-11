@@ -4,12 +4,12 @@ import { databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | Domain | Usecases | ListLtiPublicKeys', function () {
   it('should return LTI public keys', async function () {
-    const keyPair1 = await cryptoService.generateRSAJSONWebKeyPair({ modulusLength: 512 });
+    const keyPair1 = await cryptoService.generateJSONWebKeyPair({ modulusLength: 2048 });
     databaseBuilder.factory.buildLtiPlatformRegistration({
       clientId: 'client1',
       publicKey: keyPair1.publicKey,
     });
-    const keyPair2 = await cryptoService.generateRSAJSONWebKeyPair({ modulusLength: 512 });
+    const keyPair2 = await cryptoService.generateJSONWebKeyPair({ modulusLength: 2048 });
     databaseBuilder.factory.buildLtiPlatformRegistration({
       clientId: 'client2',
       publicKey: keyPair2.publicKey,

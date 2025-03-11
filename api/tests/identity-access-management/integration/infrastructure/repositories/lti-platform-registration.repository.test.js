@@ -38,12 +38,12 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         clientId: 'client1',
         status: 'pending',
       });
-      const keyPair1 = await cryptoService.generateRSAJSONWebKeyPair({ modulusLength: 512 });
+      const keyPair1 = await cryptoService.generateJSONWebKeyPair({ modulusLength: 2048 });
       databaseBuilder.factory.buildLtiPlatformRegistration({
         clientId: 'client2',
         publicKey: keyPair1.publicKey,
       });
-      const keyPair2 = await cryptoService.generateRSAJSONWebKeyPair({ modulusLength: 512 });
+      const keyPair2 = await cryptoService.generateJSONWebKeyPair({ modulusLength: 2048 });
       databaseBuilder.factory.buildLtiPlatformRegistration({
         clientId: 'client3',
         publicKey: keyPair2.publicKey,
