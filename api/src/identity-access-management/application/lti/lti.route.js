@@ -1,3 +1,5 @@
+import Joi from 'joi';
+
 import { ltiController } from './lti.controller.js';
 
 export const ltiRoutes = [
@@ -9,6 +11,23 @@ export const ltiRoutes = [
       cache: false,
       handler: (request, h) => ltiController.listPublicKeys(request, h),
       notes: ['Cette route renvoie une liste contenant les public keys des plateformes actives'],
+      tags: ['identity-access-management', 'api', 'lti'],
+    },
+  },
+  {
+    method: 'GET',
+    path: '/api/lti/registration',
+    options: {
+      auth: false,
+      cache: false,
+      validate: {
+        query: Joi.object({
+          openid_configuration: Joi.string().uri().required(),
+          registration_token: Joi.string().required(),
+        }).required(),
+      },
+      handler: (request, h) => ltiController.register(request, h),
+      notes: ["Cette route réalise une demande d'enregistrement d'une plateforme."],
       tags: ['identity-access-management', 'api', 'lti'],
     },
   },
