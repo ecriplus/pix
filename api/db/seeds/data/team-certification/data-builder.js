@@ -13,11 +13,13 @@ import {
 import { createCompetenceScoringConfiguration } from './create-competence-scoring-configuration.js';
 import { proOrganizationWithCertifCenter } from './create-pro-organization-with-certif-center.js';
 import { scoOrganizationManaginAgriStudentsWithFregata } from './create-sco-organization-managing-agri-student-with-fregata.js';
+import { scoOrganizationNotManagingStudents } from './create-sco-organization-not-managing-students.js';
 import { createScoringConfiguration } from './create-scoring-configuration.js';
 
 async function teamCertificationDataBuilder({ databaseBuilder }) {
   await scoOrganizationManaginAgriStudentsWithFregata({ databaseBuilder });
   await proOrganizationWithCertifCenter({ databaseBuilder });
+  await scoOrganizationNotManagingStudents({ databaseBuilder });
   _createV3CertificationConfiguration({ databaseBuilder });
   createCompetenceScoringConfiguration({ databaseBuilder });
   createScoringConfiguration({ databaseBuilder });
