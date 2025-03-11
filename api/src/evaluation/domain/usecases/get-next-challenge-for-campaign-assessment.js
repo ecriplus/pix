@@ -13,6 +13,10 @@ const getNextChallengeForCampaignAssessment = async function ({
   algorithmDataFetcherService,
   smartRandomService,
   flashAlgorithmService,
+  campaignRepository,
+  knowledgeElementRepository,
+  campaignParticipationRepository,
+  improvementService,
 }) {
   let algoResult;
 
@@ -44,8 +48,25 @@ const getNextChallengeForCampaignAssessment = async function ({
 
     return pickChallengeService.chooseNextChallenge(assessment.id)({ possibleChallenges });
   } else {
-    const inputValues = await algorithmDataFetcherService.fetchForCampaigns(...arguments);
-    algoResult = smartRandomService.getPossibleSkillsForNextChallenge({ ...inputValues, locale });
+    const { allAnswers, lastAnswer, targetSkills, challenges, knowledgeElements } =
+      await algorithmDataFetcherService.fetchForCampaigns({
+        assessment,
+        locale,
+        answerRepository,
+        campaignRepository,
+        challengeRepository,
+        knowledgeElementRepository,
+        campaignParticipationRepository,
+        improvementService,
+      });
+    algoResult = smartRandomService.getPossibleSkillsForNextChallenge({
+      knowledgeElements,
+      challenges,
+      targetSkills,
+      lastAnswer,
+      allAnswers,
+      locale,
+    });
 
     if (algoResult.hasAssessmentEnded) {
       throw new AssessmentEndedError();
