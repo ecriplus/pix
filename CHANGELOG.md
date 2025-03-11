@@ -1,5 +1,32 @@
 # Pix Changelog
 
+## v5.61.0 (11/03/2025)
+
+
+### :rocket: Amélioration
+- [#11561](https://github.com/1024pix/pix/pull/11561) [FEATURE] Enregistrer l'accès d'un utilisateur à une organisation (PIX-16628).
+- [#11551](https://github.com/1024pix/pix/pull/11551) [FEATURE] Avoir l'envoi multiple activé par défaut à la création d'une organisation (PIX-16684).
+- [#11565](https://github.com/1024pix/pix/pull/11565) [FEATURE] Améliorer les déclenchements d'action de l'écran d'épreuve (PIX-16784).
+- [#11568](https://github.com/1024pix/pix/pull/11568) [FEATURE] Module PPN3 ajout images définitives.
+- [#11608](https://github.com/1024pix/pix/pull/11608) [FEATURE] Afficher le type de campagne dans PixAdmin (PIX-16495).
+- [#11607](https://github.com/1024pix/pix/pull/11607) [FEATURE] Autoriser l'affichage des campagnes de type EXAM sur le dashboard d'un utilisateur (PIX-16821).
+- [#11592](https://github.com/1024pix/pix/pull/11592) [FEATURE] Créer le tag "En attente" lors d'un signalement d'épreuve ou d'extension sur Pix Certif (PIX-16913).
+
+### :building_construction: Tech
+- [#11539](https://github.com/1024pix/pix/pull/11539) [TECH] Suppression du FT_USER_TOKEN_AUD_CONFINEMENT_ENABLED et du reste du code legacy sur scope et target (PIX-16531).
+- [#11563](https://github.com/1024pix/pix/pull/11563) [TECH] :recycle: Extraction d'un service à partir d'un modèle plus plus de clarté.
+- [#11604](https://github.com/1024pix/pix/pull/11604) [TECH] Migrer la route de mise à jour du référent Pix Certif (Pix-16938).
+- [#11614](https://github.com/1024pix/pix/pull/11614) [TECH] Créer le FT pour les attestations PDF V3 avec le nouveau système (PIX-16957).
+
+### :bug: Correction
+- [#11588](https://github.com/1024pix/pix/pull/11588) [BUGFIX] Utiliser la bonne variante blanche du logo République FR (PIX-16881).
+- [#11615](https://github.com/1024pix/pix/pull/11615) [BUGFIX] Corriger un test flaky sur PixAdmin (PIX-16958).
+- [#11610](https://github.com/1024pix/pix/pull/11610) [BUGFIX] Pour les demandes de réinitialisation de mot de passe, rendre la recherche des comptes vraiment insensible à la casse (PIX-16896).
+
+### :arrow_up: Montée de version
+- [#11623](https://github.com/1024pix/pix/pull/11623) [BUMP] Update dependency @1024pix/pix-ui to ^54.14.1 (orga).
+- [#11622](https://github.com/1024pix/pix/pull/11622) [BUMP] Update dependency @1024pix/pix-ui to ^54.14.1 (mon-pix).
+
 ## v5.60.0 (10/03/2025)
 
 
