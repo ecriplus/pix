@@ -25,11 +25,10 @@
   align-items: center;
 
   img {
-    height: 54px;
-  }
-
-  img[alt="pix"] {
-    height: 48px;
+    height: 3.375rem;
+    &__pix-logo {
+      height: 3rem;
+    }
   }
 
   .copyrights {
