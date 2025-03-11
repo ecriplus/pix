@@ -24,10 +24,11 @@ describe('Unit | API | KnowledgeElementSnapshots', function () {
       };
 
       const saveSnapshotStub = sinon.stub(usecases, 'saveKnowledgeElementSnapshotForParticipation');
+      saveSnapshotStub.rejects('I was not called with the expected args.');
       saveSnapshotStub
         .withArgs({
           userId: snapshotPayload.userId,
-          snappedAt: Date.now(),
+          snappedAt: new Date(),
           knowledgeElementCollection: new KnowledgeElementCollection(snapshotPayload.knowledgeElements),
           campaignParticipationId: snapshotPayload.campaignParticipationId,
         })

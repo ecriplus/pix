@@ -24,7 +24,7 @@ export async function save(knowledgeElementSnapshotPayload) {
   await usecases.saveKnowledgeElementSnapshotForParticipation({
     userId: knowledgeElementSnapshotPayload.userId,
     snappedAt: new Date(),
-    KnowledgeElementCollection: new KnowledgeElementCollection(knowledgeElementSnapshotPayload.knowledgeElements),
+    knowledgeElementCollection: new KnowledgeElementCollection(knowledgeElementSnapshotPayload.knowledgeElements),
     campaignParticipationId: knowledgeElementSnapshotPayload.campaignParticipationId,
   });
 
