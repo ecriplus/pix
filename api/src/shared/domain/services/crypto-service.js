@@ -2,6 +2,7 @@ import crypto from 'node:crypto';
 import util from 'node:util';
 
 import bcrypt from 'bcrypt';
+import * as jose from 'jose';
 
 import { config } from '../../../../src/shared/config.js';
 import { PasswordNotMatching } from '../../../identity-access-management/domain/errors.js';
@@ -87,6 +88,24 @@ const decrypt = async function (phcText) {
 };
 
 /**
+ * Generates Key pair as a JsonWebKey (JWK).
+ *
+ * @param alg JWA Algorithm Identifier to be used with the generated key pair. @see https://www.rfc-editor.org/rfc/rfc7518.html
+ * @param modulusLength Key size in bits. JOSE requires 2048 bits or larger.
+ * @returns {Promise<{publicKey: object, privateKey: object}>} The extractable key pair.
+ */
+async function generateJSONWebKeyPair({ alg = 'RS256', modulusLength = 4096 } = {}) {
+  const { publicKey, privateKey } = await jose.generateKeyPair(alg, { extractable: true, modulusLength });
+  const kid = crypto.randomUUID();
+  const jwkPublicKey = await jose.exportJWK(publicKey);
+  const jwkPrivateKey = await jose.exportJWK(privateKey);
+  return {
+    publicKey: { ...jwkPublicKey, kid },
+    privateKey: { ...jwkPrivateKey, kid },
+  };
+}
+
+/**
  * @typedef {Object} CryptoService
  * @property {function} randomBytes
  * @property {function} checkPassword
@@ -94,8 +113,18 @@ const decrypt = async function (phcText) {
  * @property {function} encrypt
  * @property {function} hashPassword
  * @property {function} hashPasswordSync
+ * @property {function} generateJSONWebKeyPair
  * @property {RegExp} phcRegexp
  */
-const cryptoService = { randomBytes, checkPassword, decrypt, encrypt, hashPassword, hashPasswordSync, phcRegexp };
+const cryptoService = {
+  randomBytes,
+  checkPassword,
+  decrypt,
+  encrypt,
+  hashPassword,
+  hashPasswordSync,
+  phcRegexp,
+  generateJSONWebKeyPair,
+};
 
 export { cryptoService };

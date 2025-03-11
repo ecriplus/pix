@@ -35,6 +35,7 @@ import { garAnonymizedBatchEventsLoggingJobRepository } from '../../infrastructu
 import { userAnonymizedEventLoggingJobRepository } from '../../infrastructure/repositories/jobs/user-anonymized-event-logging-job-repository.js';
 import { lastUserApplicationConnectionsRepository } from '../../infrastructure/repositories/last-user-application-connections.repository.js';
 import { legalDocumentApiRepository } from '../../infrastructure/repositories/legal-document-api.repository.js';
+import { ltiPlatformRegistrationRepository } from '../../infrastructure/repositories/lti-platform-registration.repository.js';
 import { oidcProviderRepository } from '../../infrastructure/repositories/oidc-provider-repository.js';
 import * as privacyUsersApiRepository from '../../infrastructure/repositories/privacy-users-api.repository.js';
 import { refreshTokenRepository } from '../../infrastructure/repositories/refresh-token.repository.js';
@@ -67,6 +68,7 @@ const repositories = {
   eventLoggingJobRepository,
   lastUserApplicationConnectionsRepository,
   legalDocumentApiRepository,
+  ltiPlatformRegistrationRepository,
   membershipRepository,
   oidcProviderRepository,
   organizationLearnerRepository,
