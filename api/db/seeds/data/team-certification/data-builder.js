@@ -11,6 +11,7 @@ import {
   V3_PRO_PILOT_EXTERNAL_ID,
 } from './constants.js';
 import { createCompetenceScoringConfiguration } from './create-competence-scoring-configuration.js';
+import { createIssueReportCategories } from './create-issue-report-categories.js';
 import { proOrganizationWithCertifCenter } from './create-pro-organization-with-certif-center.js';
 import { scoOrganizationManaginAgriStudentsWithFregata } from './create-sco-organization-managing-agri-student-with-fregata.js';
 import { scoOrganizationNotManagingStudents } from './create-sco-organization-not-managing-students.js';
@@ -25,7 +26,7 @@ async function teamCertificationDataBuilder({ databaseBuilder }) {
   createScoringConfiguration({ databaseBuilder });
   await _createV3PilotCertificationCenter({ databaseBuilder });
   await _createSuccessCertifiableUser({ databaseBuilder });
-  await _createIssueReportCategories({ databaseBuilder });
+  await createIssueReportCategories({ databaseBuilder });
 }
 
 export { teamCertificationDataBuilder };
@@ -105,127 +106,5 @@ async function _createSuccessCertifiableUser({ databaseBuilder }) {
   await tooling.profile.createPerfectProfile({
     databaseBuilder,
     userId,
-  });
-}
-
-async function _createIssueReportCategories({ databaseBuilder }) {
-  const candidateInformationChangeId = databaseBuilder.factory.buildIssueReportCategory({
-    name: 'CANDIDATE_INFORMATIONS_CHANGES',
-    isDeprecated: false,
-    isImpactful: false,
-  }).id;
-
-  databaseBuilder.factory.buildIssueReportCategory({
-    name: 'NAME_OR_BIRTHDATE',
-    isDeprecated: false,
-    isImpactful: true,
-    issueReportCategoryId: candidateInformationChangeId,
-  });
-
-  databaseBuilder.factory.buildIssueReportCategory({
-    name: 'EXTRA_TIME_PERCENTAGE',
-    isDeprecated: false,
-    isImpactful: false,
-    issueReportCategoryId: candidateInformationChangeId,
-  });
-
-  databaseBuilder.factory.buildIssueReportCategory({
-    name: 'SIGNATURE_ISSUE',
-    isDeprecated: false,
-    isImpactful: false,
-  });
-
-  databaseBuilder.factory.buildIssueReportCategory({
-    name: 'FRAUD',
-    isDeprecated: false,
-    isImpactful: true,
-  });
-
-  databaseBuilder.factory.buildIssueReportCategory({
-    name: 'NON_BLOCKING_CANDIDATE_ISSUE',
-    isDeprecated: false,
-    isImpactful: false,
-  });
-
-  databaseBuilder.factory.buildIssueReportCategory({
-    name: 'NON_BLOCKING_TECHNICAL_ISSUE',
-    isDeprecated: false,
-    isImpactful: false,
-  });
-
-  const inChallengeId = databaseBuilder.factory.buildIssueReportCategory({
-    name: 'IN_CHALLENGE',
-    isDeprecated: false,
-    isImpactful: false,
-  }).id;
-
-  databaseBuilder.factory.buildIssueReportCategory({
-    name: 'IMAGE_NOT_DISPLAYING',
-    isDeprecated: false,
-    isImpactful: true,
-    issueReportCategoryId: inChallengeId,
-  });
-
-  databaseBuilder.factory.buildIssueReportCategory({
-    name: 'EMBED_NOT_WORKING',
-    isDeprecated: false,
-    isImpactful: true,
-    issueReportCategoryId: inChallengeId,
-  });
-
-  databaseBuilder.factory.buildIssueReportCategory({
-    name: 'FILE_NOT_OPENING',
-    isDeprecated: false,
-    isImpactful: true,
-    issueReportCategoryId: inChallengeId,
-  });
-
-  databaseBuilder.factory.buildIssueReportCategory({
-    name: 'WEBSITE_UNAVAILABLE',
-    isDeprecated: false,
-    isImpactful: true,
-    issueReportCategoryId: inChallengeId,
-  });
-
-  databaseBuilder.factory.buildIssueReportCategory({
-    name: 'WEBSITE_BLOCKED',
-    isDeprecated: false,
-    isImpactful: true,
-    issueReportCategoryId: inChallengeId,
-  });
-
-  databaseBuilder.factory.buildIssueReportCategory({
-    name: 'EXTRA_TIME_EXCEEDED',
-    isDeprecated: false,
-    isImpactful: true,
-    issueReportCategoryId: inChallengeId,
-  });
-
-  databaseBuilder.factory.buildIssueReportCategory({
-    name: 'SOFTWARE_NOT_WORKING',
-    isDeprecated: false,
-    isImpactful: true,
-    issueReportCategoryId: inChallengeId,
-  });
-
-  databaseBuilder.factory.buildIssueReportCategory({
-    name: 'UNINTENTIONAL_FOCUS_OUT',
-    isDeprecated: false,
-    isImpactful: true,
-    issueReportCategoryId: inChallengeId,
-  });
-
-  databaseBuilder.factory.buildIssueReportCategory({
-    name: 'SKIP_ON_OOPS',
-    isDeprecated: false,
-    isImpactful: true,
-    issueReportCategoryId: inChallengeId,
-  });
-
-  databaseBuilder.factory.buildIssueReportCategory({
-    name: 'ACCESSIBILITY_ISSUE',
-    isDeprecated: false,
-    isImpactful: true,
-    issueReportCategoryId: inChallengeId,
   });
 }
