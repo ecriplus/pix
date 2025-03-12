@@ -52,7 +52,7 @@ function buildCampaign({
     participationCount,
   });
 }
-
+buildCampaign.ofTypeExam = (input) => buildCampaign({ ...input, type: CampaignTypes.EXAM });
 buildCampaign.ofTypeAssessment = (input) => buildCampaign({ ...input, type: CampaignTypes.ASSESSMENT });
 buildCampaign.ofTypeProfilesCollection = (input) =>
   buildCampaign({ ...input, type: CampaignTypes.PROFILES_COLLECTION });

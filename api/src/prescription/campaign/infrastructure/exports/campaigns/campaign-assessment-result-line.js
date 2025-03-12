@@ -120,11 +120,15 @@ class CampaignAssessmentResultLine {
       ...this._group,
       ...this._studentNumber,
       ...(this.campaign.externalIdLabel ? [this.campaignParticipationInfo.participantExternalId] : []),
-      this.campaignParticipationService.progress(
-        this.campaignParticipationInfo.isCompleted,
-        this.targetedKnowledgeElementsCount,
-        this.learningContent.skills.length,
-      ),
+      ...(this.campaign.isAssessment
+        ? [
+            this.campaignParticipationService.progress(
+              this.campaignParticipationInfo.isCompleted,
+              this.targetedKnowledgeElementsCount,
+              this.learningContent.skills.length,
+            ),
+          ]
+        : []),
       dayjs.utc(this.campaignParticipationInfo.createdAt).tz('Europe/Paris').format('DD/MM/YYYY HH:mm'),
       this._makeYesNoColumns(this.campaignParticipationInfo.isShared),
       this.campaignParticipationInfo.isShared
