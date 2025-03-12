@@ -1,247 +1,247 @@
 {
-    "slug": "utiliser-souris-ordinateur-2",
-    "title": "Utiliser une souris d'ordinateur - 2",
-    "isBeta": false,
-    "details": {
-      "image": "https://images.pix.fr/modulix/placeholder-details.svg",
-      "description": "<p>La souris est composée de trois boutons : le bouton gauche, la molette et le bouton droit. Le bouton gauche permet de faire un clic gauche, c’est le plus utilisé. Mais il existe d’autres façons d’utiliser la souris.<br><br> Dans ce module, vous apprendrez à faire d’autres clics et à utiliser les deux autres boutons de la souris. 🖱️</p>",
-      "duration": 10,
-      "level": "Débutant",
-      "objectives": [
-        "<p>Connaître l'utilité des principaux boutons de la souris</p>",
-        "<p>Utiliser la molette de la souris</p>",
-        "<p>Effectuer ses premiers clics droit et double-clics</p>"
-      ],
-      "tabletSupport": "obstructed"
-    },
-    "transitionTexts": [
-      {
-        "grainId": "9953bee8-bf21-45a7-9522-4d74700b4828",
-        "content": "<p>La souris permet d’interagir avec l’ordinateur de différentes façons. Le pointeur se déplace à l’écran quand la souris glisse sur la table. Le bouton gauche permet de faire un clic gauche.&nbsp; <br><br>Découvrez dans ce module comment utiliser la molette, le double-clic et le clic droit.</p>"
-      },
-      {
-        "grainId": "2ad4df3c-5afe-4c8e-8316-77f05ecb7641",
-        "content": "<p><strong>Bravo !</strong> 🎉 <br>Vous êtes prêt. Commençons par la molette.</p>"
-      },
-      {
-        "grainId": "48d4b5d0-7457-4071-ae6d-43dc4717ae86",
-        "content": "<p>À vous de jouer. 🕹️ </p><p>Vous allez vous entraîner à utiliser la molette de votre souris.</p>"
-      },
-      {
-        "grainId": "6ebfb036-f99b-4dc4-805c-f8bf7b3c76a3",
-        "content": "<p>Passez à la pratique sur une page entière. 👇 </p><p>Après cette activité, vous saurez vous déplacer dans le module grâce à la molette, vous êtes prêts ?</p>"
-      },
-      {
-        "grainId": "45d3d731-5abf-4384-afc7-12dcd8d37365",
-        "content": "<p>Félicitations !&nbsp; Vous êtes désormais autonome avec la molette ! 🎉<br>Découvrez maintenant un nouveau type de clic&nbsp;: le double-clic.</p>"
-      },
-      {
-        "grainId": "f7b7e135-b49a-41e0-88fc-1cf4c45bbc0f",
-        "content": "<p>Place à la pratique ! Entraînez-vous au double-clic dans l’activité suivante.👇</p>"
-      },
-      {
-        "grainId": "c3b07818-2cfb-4aaa-afdd-0444de95be3f",
-        "content": "<p>On utilise souvent le double-clic pour ouvrir des dossiers sur son ordinateur. 📁 <br>À vous d’essayer !</p>"
-      },
-      {
-        "grainId": "9227a9d5-929d-4a5f-b85b-1649695d058c",
-        "content": "<p>Maintenant que vous savez faire un clic, un double-clic et utiliser la molette, découvrez le dernier bouton de la souris : le bouton droit.</p>"
-      },
-      {
-        "grainId": "22ff7ef7-cf2d-4f35-80cd-af15becebbfc",
-        "content": "<p>Avant de faire apparaître la liste d’actions, commencez par faire vos premiers clics droits. 👇</p>"
-      },
-      {
-        "grainId": "9217d594-0915-4f2e-9d27-5faef1b473d3",
-        "content": "<p>Vous savez désormais alterner les clics droit et clics gauche. 👍<br>À vous maintenant d’utiliser les clics droit et gauche sur une liste d’action.</p>"
-      },
-      {
-        "grainId": "e01d9903-a264-4276-8032-3ccb1cb271bc",
-        "content": "<p>Bravo ! 🎉 Vous savez utiliser le clic droit de la souris.</p>"
-      }
+  "slug": "utiliser-souris-ordinateur-2",
+  "title": "Utiliser une souris d'ordinateur - 2",
+  "isBeta": false,
+  "details": {
+    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
+    "description": "<p>La souris est composée de trois boutons : le bouton gauche, la molette et le bouton droit. Le bouton gauche permet de faire un clic gauche, c’est le plus utilisé. Mais il existe d’autres façons d’utiliser la souris.<br><br> Dans ce module, vous apprendrez à faire d’autres clics et à utiliser les deux autres boutons de la souris. 🖱️</p>",
+    "duration": 10,
+    "level": "Débutant",
+    "objectives": [
+      "<p>Connaître l'utilité des principaux boutons de la souris</p>",
+      "<p>Utiliser la molette de la souris</p>",
+      "<p>Effectuer ses premiers clics droit et double-clics</p>"
     ],
-    "grains": [
-      {
-        "id": "9953bee8-bf21-45a7-9522-4d74700b4828",
-        "type": "activity",
-        "title": "Introduction clic gauche",
-        "components": [
-          {
-            "type": "element",
-            "element": {
-              "id": "7724ff4d-de21-4fe3-9eab-5c9e6a18a010",
-              "type": "text",
-              "content": "<p>Pour commencer, faites un clic gauche sur « Continuer» 👇</p>"
-            }
+    "tabletSupport": "obstructed"
+  },
+  "transitionTexts": [
+    {
+      "grainId": "9953bee8-bf21-45a7-9522-4d74700b4828",
+      "content": "<p>La souris permet d’interagir avec l’ordinateur de différentes façons. Le pointeur se déplace à l’écran quand la souris glisse sur la table. Le bouton gauche permet de faire un clic gauche.&nbsp; <br><br>Découvrez dans ce module comment utiliser la molette, le double-clic et le clic droit.</p>"
+    },
+    {
+      "grainId": "2ad4df3c-5afe-4c8e-8316-77f05ecb7641",
+      "content": "<p><strong>Bravo !</strong> 🎉 <br>Vous êtes prêt. Commençons par la molette.</p>"
+    },
+    {
+      "grainId": "48d4b5d0-7457-4071-ae6d-43dc4717ae86",
+      "content": "<p>À vous de jouer. 🕹️ </p><p>Vous allez vous entraîner à utiliser la molette de votre souris.</p>"
+    },
+    {
+      "grainId": "6ebfb036-f99b-4dc4-805c-f8bf7b3c76a3",
+      "content": "<p>Passez à la pratique sur une page entière. 👇 </p><p>Après cette activité, vous saurez vous déplacer dans le module grâce à la molette, vous êtes prêts ?</p>"
+    },
+    {
+      "grainId": "45d3d731-5abf-4384-afc7-12dcd8d37365",
+      "content": "<p>Félicitations !&nbsp; Vous êtes désormais autonome avec la molette ! 🎉<br>Découvrez maintenant un nouveau type de clic&nbsp;: le double-clic.</p>"
+    },
+    {
+      "grainId": "f7b7e135-b49a-41e0-88fc-1cf4c45bbc0f",
+      "content": "<p>Place à la pratique ! Entraînez-vous au double-clic dans l’activité suivante.👇</p>"
+    },
+    {
+      "grainId": "c3b07818-2cfb-4aaa-afdd-0444de95be3f",
+      "content": "<p>On utilise souvent le double-clic pour ouvrir des dossiers sur son ordinateur. 📁 <br>À vous d’essayer !</p>"
+    },
+    {
+      "grainId": "9227a9d5-929d-4a5f-b85b-1649695d058c",
+      "content": "<p>Maintenant que vous savez faire un clic, un double-clic et utiliser la molette, découvrez le dernier bouton de la souris : le bouton droit.</p>"
+    },
+    {
+      "grainId": "22ff7ef7-cf2d-4f35-80cd-af15becebbfc",
+      "content": "<p>Avant de faire apparaître la liste d’actions, commencez par faire vos premiers clics droits. 👇</p>"
+    },
+    {
+      "grainId": "9217d594-0915-4f2e-9d27-5faef1b473d3",
+      "content": "<p>Vous savez désormais alterner les clics droit et clics gauche. 👍<br>À vous maintenant d’utiliser les clics droit et gauche sur une liste d’action.</p>"
+    },
+    {
+      "grainId": "e01d9903-a264-4276-8032-3ccb1cb271bc",
+      "content": "<p>Bravo ! 🎉 Vous savez utiliser le clic droit de la souris.</p>"
+    }
+  ],
+  "grains": [
+    {
+      "id": "9953bee8-bf21-45a7-9522-4d74700b4828",
+      "type": "activity",
+      "title": "Introduction clic gauche",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "7724ff4d-de21-4fe3-9eab-5c9e6a18a010",
+            "type": "text",
+            "content": "<p>Pour commencer, faites un clic gauche sur « Continuer» 👇</p>"
           }
-        ]
-      },
-      {
-        "id": "2ad4df3c-5afe-4c8e-8316-77f05ecb7641",
-        "type": "lesson",
-        "title": "La molette de la souris",
-        "components": [
-          {
-            "type": "element",
-            "element": {
-              "id": "6b8d384f-c15e-4abd-b392-bff1e17aee7a",
-              "type": "text",
-              "content": "<p>La molette est le bouton central de la souris. Elle sert à faire défiler une page à l'écran vers le bas, ou vers le haut.</p><details><summary><strong>Si jamais votre souris n'a pas de molette</strong></summary>Rapprochez-vous de la personne qui vous accompagne pour découvrir comment cela fonctionne sur votre souris. </details><p><br>Pour faire défiler la page, il faut faire rouler la molette avec votre doigt de haut en bas, ou de bas en haut.</p>"
-            }
-          },
-          {
-            "type": "element",
-            "element": {
-              "id": "0d588342-d473-4fd7-b995-f127177b493d",
-              "type": "image",
-              "url": "https://i.imgur.com/17Ab5i5.gif",
-              "alt": "",
-              "alternativeText": ""
-            }
-          },
-          {
-            "type": "element",
-            "element": {
-              "id": "695d7b72-e982-4e45-a8dd-deac2ae73c59",
-              "type": "text",
-              "content": "<p>Dans l'exemple ci-dessus : la molette roule vers le bas, donc on descend dans la page. </p><p>C’est comme si nos yeux descendaient sur une page de journal papier. 📰</p>"
-            }
+        }
+      ]
+    },
+    {
+      "id": "2ad4df3c-5afe-4c8e-8316-77f05ecb7641",
+      "type": "lesson",
+      "title": "La molette de la souris",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "6b8d384f-c15e-4abd-b392-bff1e17aee7a",
+            "type": "text",
+            "content": "<p>La molette est le bouton central de la souris. Elle sert à faire défiler une page à l'écran vers le bas, ou vers le haut.</p><details><summary><strong>Si jamais votre souris n'a pas de molette</strong></summary>Rapprochez-vous de la personne qui vous accompagne pour découvrir comment cela fonctionne sur votre souris. </details><p><br>Pour faire défiler la page, il faut faire rouler la molette avec votre doigt de haut en bas, ou de bas en haut.</p>"
           }
-        ]
-      },
-      {
-        "id": "48d4b5d0-7457-4071-ae6d-43dc4717ae86",
-        "type": "activity",
-        "title": "La molette de la souris",
-        "components": [
-          {
-            "type": "stepper",
-            "steps": [
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "0d588342-d473-4fd7-b995-f127177b493d",
+            "type": "image",
+            "url": "https://i.imgur.com/17Ab5i5.gif",
+            "alt": "",
+            "alternativeText": ""
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "695d7b72-e982-4e45-a8dd-deac2ae73c59",
+            "type": "text",
+            "content": "<p>Dans l'exemple ci-dessus : la molette roule vers le bas, donc on descend dans la page. </p><p>C’est comme si nos yeux descendaient sur une page de journal papier. 📰</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "48d4b5d0-7457-4071-ae6d-43dc4717ae86",
+      "type": "activity",
+      "title": "La molette de la souris",
+      "components": [
+        {
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "5173f727-635c-4ad9-8651-0b379e0b538e",
+                  "type": "text",
+                  "content": "<p><span aria-hidden=\"true\">👉</span> Dans la zone ci-dessous, utilisez la molette pour découvir toute l'image. Vous devrez ensuite répondre à une question&nbsp;:</p><ul> <li>Étape 1: Placez le pointeur sur l'image</li> <li>Étape 2 : Faites rouler la molette de votre souris vers le haut et vers le bas.</li> <li>Étape 3 : Déplacez l'image jusqu'à trouver le balcon le plus bas de l'immeuble.</li> </ul>"
+                },
+                {
+                  "id": "7aac23e0-6642-4ca4-928f-50e074dabc77",
+                  "type": "text",
+                  "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-molette2image/test image scroll-02-02.jpg\" width=\"680\" height=\"340\"></iframe>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "6c768c45-998a-4769-8dcf-18f72a15bab8",
+                  "type": "qcu",
+                  "instruction": "<p>Dans l'image ci-dessus, que fait la personne sur le balcon le plus bas ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>Elle se détend au soleil.</p>",
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><br>Ce personnage n'est pas sur le balcon le plus bas. Vous pouvez utiliser la molette pour descendre encore plus bas dans l'image.</p>"
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>Elle arrose ses plantes.</p>",
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse !</span><br>Vous avez réussi à descendre dans toute l'image jusqu'au dernier balcon.<span aria-hidden=\"true\">🏢 </span></p>"
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>Elle étend son linge.</p>",
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><br>Cette activité est celle du personnage du premier balcon de l'immeuble. Utilisez la molette de votre souris quand votre pointeur est sur l'image. Faites défiler l'image pour découvrir les autres fenêtres et balcons de l'immeuble.</p>"
+                    }
+                  ],
+                  "solution": "2"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6ebfb036-f99b-4dc4-805c-f8bf7b3c76a3",
+      "type": "activity",
+      "title": "Utilisation de la molette dans le module",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "f8226449-d41d-4650-aa7a-001fbc5773a8",
+            "type": "text",
+            "content": "<p>Dans cette activité, vous allez devoir retrouver un mot dans le module. Le mot à trouver se trouve avant le symbole « 📰 ». <br><br> Voici les étapes que vous allez suivre :&nbsp; </p><ul><li>Faire rouler la molette pour remonter jusqu'à la leçon en bleu.</li><li>Trouver le mot qui se trouve avant le symbole « 📰 ».</li><li>Faire rouler la molette pour redescendre ici.</li><li>Répondre à la question.</li></ul>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "dda12023-7164-4f7b-ac7c-dfcef120aca7",
+            "type": "qcu",
+            "instruction": "<p>Quel est le mot juste avant ce symbole «📰» ?</p>",
+            "proposals": [
               {
-                "elements": [
-                  {
-                    "id": "5173f727-635c-4ad9-8651-0b379e0b538e",
-                    "type": "text",
-                    "content": "<p><span aria-hidden=\"true\">👉</span> Dans la zone ci-dessous, utilisez la molette pour découvir toute l'image. Vous devrez ensuite répondre à une question&nbsp;:</p><ul> <li>Étape 1: Placez le pointeur sur l'image</li> <li>Étape 2 : Faites rouler la molette de votre souris vers le haut et vers le bas.</li> <li>Étape 3 : Déplacez l'image jusqu'à trouver le balcon le plus bas de l'immeuble.</li> </ul>"
-                  },
-                  {
-                    "id": "7aac23e0-6642-4ca4-928f-50e074dabc77",
-                    "type": "text",
-                    "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-molette2image/test image scroll-02-02.jpg\" width=\"680\" height=\"340\"></iframe>"
-                  }
-                ]
+                "id": "1",
+                "content": "<p>journal</p>",
+                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Pour remonter dans le module, faites rouler la molette doucement vers le haut et cherchez un encadré bleu clair.&nbsp; Le symbole que vous cherchez se trouve sous l’image.</p>"
               },
               {
-                "elements": [
-                    {
-                        "id": "6c768c45-998a-4769-8dcf-18f72a15bab8",
-                        "type": "qcu",
-                        "instruction": "<p>Dans l'image ci-dessus, que fait la personne sur le balcon le plus bas ?</p>",
-                        "proposals": [
-                          {
-                            "id": "1",
-                            "content": "<p>Elle se détend au soleil.</p>",
-                            "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><br>Ce personnage n'est pas sur le balcon le plus bas. Vous pouvez utiliser la molette pour descendre encore plus bas dans l'image.</p>"
-                          },
-                          {
-                            "id": "2",
-                            "content": "<p>Elle arrose ses plantes.</p>",
-                            "feedback": "<p><span class=\"feedback__state\">Bonne réponse !</span><br>Vous avez réussi à descendre dans toute l'image jusqu'au dernier balcon.<span aria-hidden=\"true\">🏢 </span></p>"
-                          },
-                          {
-                            "id": "3",
-                            "content": "<p>Elle étend son linge.</p>",
-                            "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><br>Cette activité est celle du personnage du premier balcon de l'immeuble. Utilisez la molette de votre souris quand votre pointeur est sur l'image. Faites défiler l'image pour découvrir les autres fenêtres et balcons de l'immeuble.</p>"
-                          }
-                        ],
-                        "solution": "2"
-                      }
-                ]
+                "id": "2",
+                "content": "<p>papier</p>",
+                "feedback": "<p><span class=\"feedback__state\">Bonne réponse !</span> </p><p>Vous avez parcouru le module de haut en bas. À tout moment, vous pouvez utiliser la molette pour relire quelque chose, revoir une vidéo, etc.</p>"
+              },
+              {
+                "id": "3",
+                "content": "<p>page</p>",
+                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Pour remonter dans le module, faites rouler la molette doucement vers le haut et cherchez un encadré bleu clair.&nbsp; Le symbole que vous cherchez se trouve sous l’image.</p>"
               }
-            ]
+            ],
+            "solution": "2"
           }
-        ]
-      },
-      {
-        "id": "6ebfb036-f99b-4dc4-805c-f8bf7b3c76a3",
-        "type": "activity",
-        "title": "Utilisation de la molette dans le module",
-        "components": [
-          {
-            "type": "element",
-            "element": {
-              "id": "f8226449-d41d-4650-aa7a-001fbc5773a8",
-              "type": "text",
-              "content": "<p>Dans cette activité, vous allez devoir retrouver un mot dans le module. Le mot à trouver se trouve avant le symbole « 📰 ». <br><br> Voici les étapes que vous allez suivre :&nbsp; </p><ul><li>Faire rouler la molette pour remonter jusqu'à la leçon en bleu.</li><li>Trouver le mot qui se trouve avant le symbole « 📰 ».</li><li>Faire rouler la molette pour redescendre ici.</li><li>Répondre à la question.</li></ul>"
-            }
-          },
-          {
-            "type": "element",
-            "element": {
-              "id": "dda12023-7164-4f7b-ac7c-dfcef120aca7",
-              "type": "qcu",
-              "instruction": "<p>Quel est le mot juste avant ce symbole «📰» ?</p>",
-              "proposals": [
-                {
-                  "id": "1",
-                  "content": "<p>journal</p>",
-                  "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Pour remonter dans le module, faites rouler la molette doucement vers le haut et cherchez un encadré bleu clair.&nbsp; Le symbole que vous cherchez se trouve sous l’image.</p>"
-                },
-                {
-                  "id": "2",
-                  "content": "<p>papier</p>",
-                  "feedback": "<p><span class=\"feedback__state\">Bonne réponse !</span> </p><p>Vous avez parcouru le module de haut en bas. À tout moment, vous pouvez utiliser la molette pour relire quelque chose, revoir une vidéo, etc.</p>"
-                },
-                {
-                  "id": "3",
-                  "content": "<p>page</p>",
-                  "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Pour remonter dans le module, faites rouler la molette doucement vers le haut et cherchez un encadré bleu clair.&nbsp; Le symbole que vous cherchez se trouve sous l’image.</p>"
-                }
-              ],
-              "solution": "2"
-            }
+        }
+      ]
+    },
+    {
+      "id": "45d3d731-5abf-4384-afc7-12dcd8d37365",
+      "type": "lesson",
+      "title": "Le double-clic en vidéo",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "5a8f1986-8a81-4b66-ae0f-d0e58b73ce69",
+            "type": "text",
+            "content": "<p>Pour faire un double-clic, il faut appuyer rapidement deux fois de suite sur le bouton gauche.</p>"
           }
-        ]
-      },
-      {
-        "id": "45d3d731-5abf-4384-afc7-12dcd8d37365",
-        "type": "lesson",
-        "title": "Le double-clic en vidéo",
-        "components": [
-          {
-            "type": "element",
-            "element": {
-              "id": "5a8f1986-8a81-4b66-ae0f-d0e58b73ce69",
-              "type": "text",
-              "content": "<p>Pour faire un double-clic, il faut appuyer rapidement deux fois de suite sur le bouton gauche.</p>"
-            }
-          },
-          {
-            "type": "element",
-            "element": {
-              "id": "fc75b4ab-d92d-4ae9-8387-8bb3d683a99c",
-              "type": "image",
-              "url": "https://i.imgur.com/Vm7UCzY.gif",
-              "alt": "",
-              "alternativeText": ""
-            }
-          },
-          {
-            "type": "element",
-            "element": {
-              "id": "d73107b1-d15b-4f4b-af1e-9745d5c61a43",
-              "type": "separator"
-            }
-          },
-          {
-            "type": "element",
-            "element": {
-              "id": "ec8094d6-53e4-4305-948a-74ed1d0fd443",
-              "type": "text",
-              "content": "<p>📺 Dans la vidéo ci-dessous, vous allez voir comment faire un double-clic et à quoi il sert. <br>Après cette vidéo, ce sera à vous de faire des doubles-clics.</p>"
-            }
-          },
-          {
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "fc75b4ab-d92d-4ae9-8387-8bb3d683a99c",
+            "type": "image",
+            "url": "https://i.imgur.com/Vm7UCzY.gif",
+            "alt": "",
+            "alternativeText": ""
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "d73107b1-d15b-4f4b-af1e-9745d5c61a43",
+            "type": "separator"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "ec8094d6-53e4-4305-948a-74ed1d0fd443",
+            "type": "text",
+            "content": "<p>📺 Dans la vidéo ci-dessous, vous allez voir comment faire un double-clic et à quoi il sert. <br>Après cette vidéo, ce sera à vous de faire des doubles-clics.</p>"
+          }
+        },
+        {
           "type": "element",
           "element": {
             "id": "daced261-0ad6-43e1-b826-d43d89ca926b",
@@ -252,118 +252,118 @@
             "subtitles": "",
             "transcription": ""
           }
-         }
-        ]
-      },
-      {
-        "id": "f7b7e135-b49a-41e0-88fc-1cf4c45bbc0f",
-        "type": "activity",
-        "title": "Premiers doubles-clics",
-        "components": [
-          {
-            "type": "element",
-            "element": {
-              "id": "aa057bdd-af4f-4ed1-985e-c98158db7f9d",
-              "type": "text",
-              "content": "<p>👉 <strong>Faites un double-clic sur chaque élément qui apparaît ci-dessous.</strong></p>"
-            }
-          },
-          {
-            "type": "element",
-            "element": {
-              "id": "be1b5866-6475-4bed-a775-e07be73f156e",
-              "type": "text",
-              "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clic-1erdoublesclics/index.html\" width=\"100%\" height=\"394\"></iframe>"
-            }
+        }
+      ]
+    },
+    {
+      "id": "f7b7e135-b49a-41e0-88fc-1cf4c45bbc0f",
+      "type": "activity",
+      "title": "Premiers doubles-clics",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "aa057bdd-af4f-4ed1-985e-c98158db7f9d",
+            "type": "text",
+            "content": "<p>👉 <strong>Faites un double-clic sur chaque élément qui apparaît ci-dessous.</strong></p>"
           }
-        ]
-      },
-      {
-        "id": "c3b07818-2cfb-4aaa-afdd-0444de95be3f",
-        "type": "activity",
-        "title": "Utilisation du double-clic",
-        "components": [
-          {
-            "type": "element",
-            "element": {
-              "id": "3528708a-ba19-49c2-97a2-08be8f961124",
-              "type": "text",
-              "content": "<p><strong>Dans la zone ci-dessous, ouvrez les dossiers en suivant cet ordre :</strong> </p><ul><li>Photos,</li><li>Album,</li><li>Famille,</li><li>80 ans Mamie.</li></ul>"
-            }
-          },
-          {
-            "type": "element",
-            "element": {
-              "id": "ba879c50-b4ed-487c-b1a8-f7220c2ad2f9",
-              "type": "embed",
-              "isCompletionRequired": false,
-              "title": "Simulateur gestionnaire de fichier",
-              "url": "https://epreuves.pix.fr/filemanager-visu/filemanager-visu.html?mode=example&lang=fr",
-              "instruction": "Quand vous avez terminé, répondez à la question qui suit.",
-              "height": 400
-            }
-          },
-          {
-            "type": "element",
-            "element": {
-              "id": "e2e63f1e-7260-4404-9a09-614c24236fc2",
-              "type": "qcu",
-              "instruction": "<p>Dans le dossier «80 ans Mamie», combien est-ce qu'il y a de photos ?</p>",
-              "proposals": [
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "be1b5866-6475-4bed-a775-e07be73f156e",
+            "type": "text",
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clic-1erdoublesclics/index.html\" width=\"100%\" height=\"394\"></iframe>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c3b07818-2cfb-4aaa-afdd-0444de95be3f",
+      "type": "activity",
+      "title": "Utilisation du double-clic",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "3528708a-ba19-49c2-97a2-08be8f961124",
+            "type": "text",
+            "content": "<p><strong>Dans la zone ci-dessous, ouvrez les dossiers en suivant cet ordre :</strong> </p><ul><li>Photos,</li><li>Album,</li><li>Famille,</li><li>80 ans Mamie.</li></ul>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "ba879c50-b4ed-487c-b1a8-f7220c2ad2f9",
+            "type": "embed",
+            "isCompletionRequired": false,
+            "title": "Simulateur gestionnaire de fichier",
+            "url": "https://epreuves.pix.fr/filemanager-visu/filemanager-visu.html?mode=example&lang=fr",
+            "instruction": "Quand vous avez terminé, répondez à la question qui suit.",
+            "height": 400
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "e2e63f1e-7260-4404-9a09-614c24236fc2",
+            "type": "qcu",
+            "instruction": "<p>Dans le dossier «80 ans Mamie», combien est-ce qu'il y a de photos ?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>4</p>"
+              },
+              {
+                "id": "2",
+                "content": "<p>5</p>"
+              },
+              {
+                "id": "3",
+                "content": "<p>6</p>"
+              }
+            ],
+            "feedbacks": {
+              "valid": "<p><span class=\"feedback__state\">Bonne réponse.</span></p><p>Il y a bien 4 photos dans le dossier «&nbsp;80 ans Mamie&nbsp;». Bravo ! Vous avez fait 4 doubles-clics et réussi à naviguer dans un explorateur de fichiers.</p>",
+              "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p><strong>Vous avez répondu au questionnaire, mais vous n'avez pas cliqué sur la bonne réponse.</strong><br>Si vous n'avez pas trouvé le dossier «&nbsp;80 ans Mamie&nbsp;» :</p><ul><li>Cliquez sur «&nbsp;Réinitialiser&nbsp;» ci-dessus</li> <li>Suivez les étapes qui vous sont données. Vous devriez effectuer 4 doubles-clics.</li><li>Comptez ensuite le nombre de fichiers qui s'appellent «&nbsp;Photo&nbsp;».</li></ul>"
+            },
+            "solution": "1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "9227a9d5-929d-4a5f-b85b-1649695d058c",
+      "type": "lesson",
+      "title": "Le clic droit",
+      "components": [
+        {
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
                 {
-                  "id": "1",
-                  "content": "<p>4</p>"
+                  "id": "f986b4fa-fa9d-45ae-8ccd-ca4e834f050d",
+                  "type": "text",
+                  "content": "<p>Le bouton droit permet de faire des <strong>clics droit</strong>. <br>Le clic droit sert à afficher une liste d'actions à l'écran. <br>Par exemple, avec un dossier, on a le choix de supprimer le dossier, de renommer le dossier, etc.</p>"
                 },
                 {
-                  "id": "2",
-                  "content": "<p>5</p>"
-                },
-                {
-                  "id": "3",
-                  "content": "<p>6</p>"
+                  "id": "d3a9fae5-986c-4710-b53f-6775474bab4c",
+                  "type": "image",
+                  "url": "https://i.imgur.com/aNtakNA.gif",
+                  "alt": "",
+                  "alternativeText": ""
                 }
-              ],
-              "feedbacks": {
-                "valid": "<p><span class=\"feedback__state\">Bonne réponse.</span></p><p>Il y a bien 4 photos dans le dossier «&nbsp;80 ans Mamie&nbsp;». Bravo ! Vous avez fait 4 doubles-clics et réussi à naviguer dans un explorateur de fichiers.</p>",
-                "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p><strong>Vous avez répondu au questionnaire, mais vous n'avez pas cliqué sur la bonne réponse.</strong><br>Si vous n'avez pas trouvé le dossier «&nbsp;80 ans Mamie&nbsp;» :</p><ul><li>Cliquez sur «&nbsp;Réinitialiser&nbsp;» ci-dessus</li> <li>Suivez les étapes qui vous sont données. Vous devriez effectuer 4 doubles-clics.</li><li>Comptez ensuite le nombre de fichiers qui s'appellent «&nbsp;Photo&nbsp;».</li></ul>"
-              },
-              "solution": "1"
-            }
-          }
-        ]
-      },
-      {
-        "id": "9227a9d5-929d-4a5f-b85b-1649695d058c",
-        "type": "lesson",
-        "title": "Le clic droit",
-        "components": [
-          {
-            "type": "stepper",
-            "steps": [
-              {
-                "elements": [
-                  {
-                    "id": "f986b4fa-fa9d-45ae-8ccd-ca4e834f050d",
-                    "type": "text",
-                    "content": "<p>Le bouton droit permet de faire des <strong>clics droit</strong>. <br>Le clic droit sert à afficher une liste d'actions à l'écran. <br>Par exemple, avec un dossier, on a le choix de supprimer le dossier, de renommer le dossier, etc.</p>"
-                  },
-                  {
-                    "id": "d3a9fae5-986c-4710-b53f-6775474bab4c",
-                    "type": "image",
-                    "url": "https://i.imgur.com/aNtakNA.gif",
-                    "alt": "",
-                    "alternativeText": ""
-                  }
-                ]
-              },
-              {
-                "elements": [
-                  {
-                    "id": "21323d29-5fb9-4374-b25e-8c83e011605b",
-                    "type": "text",
-                    "content": "<p>📺 Découvrez en vidéo comment faire un clic droit et comment utiliser la liste d’actions. <br> Après la vidéo, vous pourrez vous entraîner à faire des clics droit.</p>"
-                  },
-                  {
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "21323d29-5fb9-4374-b25e-8c83e011605b",
+                  "type": "text",
+                  "content": "<p>📺 Découvrez en vidéo comment faire un clic droit et comment utiliser la liste d’actions. <br> Après la vidéo, vous pourrez vous entraîner à faire des clics droit.</p>"
+                },
+                {
                   "id": "e1ba101d-f98c-4938-938f-31e1362a4db3",
                   "type": "video",
                   "title": "Utiliser le clic droit de la souris",
@@ -371,76 +371,76 @@
                   "poster": "https://i.imgur.com/Fxj4UcZ.jpeg",
                   "subtitles": "",
                   "transcription": ""
-                  }
-                ]
-              }
-            ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "22ff7ef7-cf2d-4f35-80cd-af15becebbfc",
+      "type": "activity",
+      "title": "Premiers clics droits",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "fc26348a-dea8-4010-bfa6-efd0252b9516",
+            "type": "text",
+            "content": "<p><strong>Dans la zone ci-dessous, entraînez-vous à faire un clic droit puis un clic gauche à la suite.</strong></p><p><br></p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-clicdroitpuisgauche/index.html\" width=\"100%\" height=\"394\"></iframe>"
           }
-        ]
-      },
-      {
-        "id": "22ff7ef7-cf2d-4f35-80cd-af15becebbfc",
-        "type": "activity",
-        "title": "Premiers clics droits",
-        "components": [
-          {
-            "type": "element",
-            "element": {
-              "id": "fc26348a-dea8-4010-bfa6-efd0252b9516",
-              "type": "text",
-              "content": "<p><strong>Dans la zone ci-dessous, entraînez-vous à faire un clic droit puis un clic gauche à la suite.</strong></p><p><br></p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-clicdroitpuisgauche/index.html\" width=\"100%\" height=\"394\"></iframe>"
-            }
+        }
+      ]
+    },
+    {
+      "id": "9217d594-0915-4f2e-9d27-5faef1b473d3",
+      "type": "activity",
+      "title": "Utiliser le clic droit",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "84a56ef8-1645-4204-8124-ae748c04c621",
+            "type": "embed",
+            "isCompletionRequired": false,
+            "title": "Gestionnaire de fichiers - supprimer photos",
+            "url": "https://epreuves.pix.fr/filemanager-module/filemanager-module.html?lang=fr",
+            "instruction": "<p>Dans l’espace ci-dessous, ouvrez le dossier « Photos ».<br>Sur le fichier «photo1», faites un clic droit pour afficher la liste d’action, et cliquez sur «&nbsp;Supprimer&nbsp;».<br>Refaites la même chose sur «photo2» puis sur «photo3».</p>",
+            "height": 400
           }
-        ]
-      },
-      {
-        "id": "9217d594-0915-4f2e-9d27-5faef1b473d3",
-        "type": "activity",
-        "title": "Utiliser le clic droit",
-        "components": [
-          {
-            "type": "element",
-            "element": {
-              "id": "84a56ef8-1645-4204-8124-ae748c04c621",
-              "type": "embed",
-              "isCompletionRequired": false,
-              "title": "Gestionnaire de fichiers - supprimer photos",
-              "url": "https://epreuves.pix.fr/filemanager-module/filemanager-module.html?lang=fr",
-              "instruction": "<p>Dans l’espace ci-dessous, ouvrez le dossier « Photos ».<br>Sur le fichier «photo1», faites un clic droit pour afficher la liste d’action, et cliquez sur «&nbsp;Supprimer&nbsp;».<br>Refaites la même chose sur «photo2» puis sur «photo3».</p>",
-              "height": 400
-            }
+        }
+      ]
+    },
+    {
+      "id": "e01d9903-a264-4276-8032-3ccb1cb271bc",
+      "type": "summary",
+      "title": "Récap les 3 boutons de la souris",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "fe6818f4-ad9d-4b5e-bc58-b18cd1d6cee8",
+            "type": "text",
+            "content": "<p>Récapitulons tout ce que vous venez de voir dans ce module. <br></p><p><strong>Dans l'image ci-dessous, déplacez votre pointeur sur le dessin de la souris.</strong> <br>Pour chaque bouton, suivez les consignes.</p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-recap3boutonsbleu/index.html\" width=\"100%\" height=\"394\"></iframe>"
           }
-        ]
-      },
-      {
-        "id": "e01d9903-a264-4276-8032-3ccb1cb271bc",
-        "type": "summary",
-        "title": "Récap les 3 boutons de la souris",
-        "components": [
-          {
-            "type": "element",
-            "element": {
-              "id": "fe6818f4-ad9d-4b5e-bc58-b18cd1d6cee8",
-              "type": "text",
-              "content": "<p>Récapitulons tout ce que vous venez de voir dans ce module. <br></p><p><strong>Dans l'image ci-dessous, déplacez votre pointeur sur le dessin de la souris.</strong> <br>Pour chaque bouton, suivez les consignes.</p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-recap3boutonsbleu/index.html\" width=\"100%\" height=\"394\"></iframe>"
-            }
-          },
-          {
-            "type": "element",
-            "element": {
-              "id": "4c19606d-9edc-4b67-953b-065e64ec046c",
-              "type": "separator"
-            }
-          },
-          {
-            "type": "element",
-            "element": {
-              "id": "3dbb4032-7150-447e-ac8c-00c1302bcc84",
-              "type": "text",
-              "content": "<p>📌 Les points à retenir : <br>  </p><ul><li>▶️ Le bouton gauche permet de faire des clics gauche et des doubles-clics pour déclencher des actions (ouvrir, faire apparaître, sélectionner, etc).</li><li>📋 Le bouton droit permet d’afficher une liste d’actions possibles.</li><li>⬆️ La molette permet de monter ou de descendre dans une page.</li></ul><p><br><span aria-hidden=\"true\">📝</span> Vous pouvez maintenant <a href=\"https://cloud.pix.fr/s/P2KogTyf3QzN9YE\" target=\"_blank\">Ouvrir votre fiche de synthèse</a>.</p>"
-            }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "4c19606d-9edc-4b67-953b-065e64ec046c",
+            "type": "separator"
           }
-        ]
-      }
-    ]
-  }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "3dbb4032-7150-447e-ac8c-00c1302bcc84",
+            "type": "text",
+            "content": "<p>📌 Les points à retenir : <br>  </p><ul><li>▶️ Le bouton gauche permet de faire des clics gauche et des doubles-clics pour déclencher des actions (ouvrir, faire apparaître, sélectionner, etc).</li><li>📋 Le bouton droit permet d’afficher une liste d’actions possibles.</li><li>⬆️ La molette permet de monter ou de descendre dans une page.</li></ul><p><br><span aria-hidden=\"true\">📝</span> Vous pouvez maintenant <a href=\"https://cloud.pix.fr/s/P2KogTyf3QzN9YE\" target=\"_blank\">Ouvrir votre fiche de synthèse</a>.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
