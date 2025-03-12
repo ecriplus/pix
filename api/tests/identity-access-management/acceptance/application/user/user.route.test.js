@@ -7,6 +7,7 @@ import * as userRepository from '../../../../../src/identity-access-management/i
 import { userEmailRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/user-email.repository.js';
 import { config } from '../../../../../src/shared/config.js';
 import { constants } from '../../../../../src/shared/domain/constants.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import {
   createServer,
   databaseBuilder,
@@ -185,8 +186,18 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         status: 'TO_SHARE',
         userId: user.id,
       });
-      databaseBuilder.factory.buildCampaignParticipation({
+      databaseBuilder.factory.buildAssessment({
+        campaignParticipationId: campaignParticipationId,
+        type: Assessment.types.CAMPAIGN,
+        userId: user.id,
+      });
+      const participation = databaseBuilder.factory.buildCampaignParticipation({
         campaignId: assessmentCampaign.id,
+        userId: user.id,
+      });
+      databaseBuilder.factory.buildAssessment({
+        campaignParticipationId: participation.id,
+        type: Assessment.types.CAMPAIGN,
         userId: user.id,
       });
       const { id: trainingId } = databaseBuilder.factory.buildTraining();

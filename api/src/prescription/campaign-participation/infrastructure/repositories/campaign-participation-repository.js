@@ -165,15 +165,27 @@ const findOneByCampaignIdAndUserId = async function ({ campaignId, userId }) {
 };
 
 const hasAssessmentParticipations = async function (userId) {
-  const knexConn = DomainTransaction.getConnection();
-
-  const { count } = await knexConn('campaign-participations')
-    .count('campaign-participations.id')
-    .join('campaigns', 'campaigns.id', 'campaignId')
-    .whereNot('campaigns.organizationId', constants.AUTONOMOUS_COURSES_ORGANIZATION_ID)
-    .whereIn('campaigns.type', [CampaignTypes.ASSESSMENT, CampaignTypes.EXAM])
-    .andWhere({ userId })
+  const { count } = await knex('assessments')
+    .count('assessments.id')
+    .leftJoin('campaign-participations', 'campaignParticipationId', 'campaign-participations.id')
+    .leftJoin('campaigns', 'campaigns.id', 'campaignId')
+    .where('assessments.type', '=', Assessment.types.CAMPAIGN)
+    .where({ 'assessments.userId': userId })
+    .where(function () {
+      this.whereNot('campaigns.organizationId', constants.AUTONOMOUS_COURSES_ORGANIZATION_ID).orWhereNull(
+        'campaigns.organizationId',
+      );
+    })
+    .where(function () {
+      this.where('campaigns.isForAbsoluteNovice', false).orWhereNull('campaigns.organizationId');
+    })
+    .where(function () {
+      this.whereIn('campaigns.type', [CampaignTypes.ASSESSMENT, CampaignTypes.EXAM]).orWhereNull(
+        'campaigns.organizationId',
+      );
+    })
     .first();
+
   return count > 0;
 };
 

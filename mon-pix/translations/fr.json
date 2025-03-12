@@ -569,10 +569,12 @@
         "started-at": "Commencé le {date}",
         "tag": {
           "completed": "À envoyer",
+          "deleted": "Inactif",
           "disabled": "Inactif",
           "finished": "Terminé",
           "started": "En cours"
         },
+        "text-deleted": "Parcours désactivé par votre organisation.'<br>'Vous ne pouvez plus agir sur ce parcours.",
         "text-disabled": "Parcours désactivé par votre organisation.'<br>'Vous ne pouvez plus envoyer vos résultats."
       },
       "title": "Parcours"
@@ -2126,6 +2128,14 @@
       "title": "Mon compte"
     },
     "user-tests": {
+      "anonymised-participations": {
+        "course": "Parcours",
+        "states": {
+          "completed": "terminé",
+          "started": "commencé"
+        },
+        "title": "Parcours désactivés"
+      },
       "description": "Retrouvez ici les parcours d’évaluation que vous avez commencés ou terminés.",
       "title": "Parcours"
     },

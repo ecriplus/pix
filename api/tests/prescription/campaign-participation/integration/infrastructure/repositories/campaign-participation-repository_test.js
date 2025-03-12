@@ -940,8 +940,14 @@ describe('Integration | Repository | Campaign Participation', function () {
     it('should return true if the user has participations to campaigns of type assement', async function () {
       // given
       const campaign = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.ASSESSMENT });
-      databaseBuilder.factory.buildCampaignParticipation({
+      const participation = databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
+        userId,
+      });
+      databaseBuilder.factory.buildAssessment({
+        campaignParticipationId: participation.id,
+        type: Assessment.types.CAMPAIGN,
+        createdAt: participation.createdAt,
         userId,
       });
       await databaseBuilder.commit();
@@ -956,8 +962,14 @@ describe('Integration | Repository | Campaign Participation', function () {
     it('should return true if the user has participations to campaigns of type exam', async function () {
       // given
       const campaign = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.EXAM });
-      databaseBuilder.factory.buildCampaignParticipation({
+      const participation = databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
+        userId,
+      });
+      databaseBuilder.factory.buildAssessment({
+        campaignParticipationId: participation.id,
+        type: Assessment.types.CAMPAIGN,
+        createdAt: participation.createdAt,
         userId,
       });
       await databaseBuilder.commit();
@@ -973,9 +985,15 @@ describe('Integration | Repository | Campaign Participation', function () {
       // given
       const otherUser = databaseBuilder.factory.buildUser();
       const campaign = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.ASSESSMENT });
-      databaseBuilder.factory.buildCampaignParticipation({
+      const participation = databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
         userId: otherUser.id,
+      });
+      databaseBuilder.factory.buildAssessment({
+        campaignParticipationId: participation.id,
+        createdAt: participation.createdAt,
+        userId: otherUser.id,
+        type: Assessment.types.CAMPAIGN,
       });
       await databaseBuilder.commit();
 
@@ -1022,6 +1040,23 @@ describe('Integration | Repository | Campaign Participation', function () {
 
       // then
       expect(result).to.equal(false);
+    });
+
+    it('should return true if the user has only anonymised participations', async function () {
+      // given
+      databaseBuilder.factory.campaignParticipationOverviewFactory.buildDeletedAndAnonymised({
+        userId,
+        createdAt: new Date('2020-02-19'),
+        assessmentCreatedAt: new Date('2020-02-19'),
+        campaignSkills: [],
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await campaignParticipationRepository.hasAssessmentParticipations(userId);
+
+      // then
+      expect(result).to.equal(true);
     });
   });
 

@@ -4,6 +4,7 @@ import { buildAssessment } from './build-assessment.js';
 import { buildCampaign } from './build-campaign.js';
 import { buildCampaignParticipation } from './build-campaign-participation.js';
 import { buildCampaignSkill } from './build-campaign-skill.js';
+import { buildOrganizationLearner } from './build-organization-learner.js';
 import { buildUser } from './build-user.js';
 
 const { STARTED, SHARED, TO_SHARE } = CampaignParticipationStatuses;
@@ -166,4 +167,40 @@ const buildDeleted = function ({
   return campaignParticipation;
 };
 
-export { build, buildArchived, buildDeleted, buildEnded, buildOnGoing, buildToShare };
+const buildDeletedAndAnonymised = function ({
+  userId,
+  createdAt,
+  sharedAt,
+  assessmentCreatedAt,
+  assessmentUpdatedAt,
+  deletedAt = new Date('1998-07-01'),
+  deletedBy = buildUser().id,
+  campaignSkills,
+} = {}) {
+  const campaign = buildCampaign();
+  campaignSkills.forEach((skill) => buildCampaignSkill({ campaignId: campaign.id, skillId: skill }));
+  const learner = buildOrganizationLearner({ userId, campaignId: campaign.id });
+
+  const campaignParticipation = buildCampaignParticipation({
+    organizationLearnerId: learner.id,
+    campaignId: campaign.id,
+    createdAt: createdAt,
+    sharedAt: sharedAt || createdAt,
+    deletedAt,
+    deletedBy,
+    status: SHARED,
+  });
+
+  const assessment = buildAssessment({
+    userId,
+    campaignParticipationId: null,
+    createdAt: assessmentCreatedAt,
+    updatedAt: assessmentUpdatedAt || assessmentCreatedAt,
+    type: Assessment.types.CAMPAIGN,
+    state: Assessment.states.COMPLETED,
+  });
+
+  return { assessment, campaignParticipation };
+};
+
+export { build, buildArchived, buildDeleted, buildDeletedAndAnonymised, buildEnded, buildOnGoing, buildToShare };

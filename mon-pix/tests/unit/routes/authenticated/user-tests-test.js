@@ -13,8 +13,11 @@ module('Unit | Route | User-Tests', function (hooks) {
       const currentUserStub = Service.create({ user: { id: '1' } });
       const store = this.owner.lookup('service:store');
       sinon.stub(store, 'query');
+      sinon.stub(store, 'findAll');
 
-      const campaignParticipationOverviews = [EmberObject.create({ id: '10' })];
+      const campaignParticipationOverviews = [{ id: '10' }];
+      const anonymisedCampaignAssessments = [{ id: '12' }];
+
       store.query
         .withArgs('campaign-participation-overview', {
           userId: '1',
@@ -24,6 +27,8 @@ module('Unit | Route | User-Tests', function (hooks) {
         })
         .returns(campaignParticipationOverviews);
 
+      store.findAll.withArgs('anonymised-campaign-assessment').returns(anonymisedCampaignAssessments);
+
       const route = this.owner.lookup('route:authenticated/user-tests');
       route.set('currentUser', currentUserStub);
       route.set('store', store);
@@ -32,7 +37,7 @@ module('Unit | Route | User-Tests', function (hooks) {
       const model = await route.model();
 
       // then
-      assert.deepEqual(model, campaignParticipationOverviews);
+      assert.deepEqual(model, [...campaignParticipationOverviews, ...anonymisedCampaignAssessments]);
     });
   });
 

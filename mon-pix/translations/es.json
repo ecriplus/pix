@@ -564,10 +564,12 @@
         "started-at": "Empezado el {date}",
         "tag": {
           "completed": "Para enviar",
+          "deleted": "Inactivo",
           "disabled": "Inactivo",
           "finished": "Finalizado",
           "started": "En curso"
         },
+        "text-deleted": "Test desactivado por tu organización.'<br>'Ya no puedes actuar sobre este test.",
         "text-disabled": "Test desactivado por tu organización.'<br>'Ya no puedes enviar tus resultados."
       },
       "title": "Test"

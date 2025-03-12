@@ -260,6 +260,32 @@ const register = async function (server) {
     },
     {
       method: 'GET',
+      path: '/api/users/{userId}/anonymised-campaign-assessments',
+      config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkRequestedUserIsAuthenticatedUser,
+            assign: 'requestedUserIsAuthenticatedUser',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            userId: identifiersType.userId,
+          }),
+        },
+        handler: campaignParticipationController.getAnonymisedCampaignAssessments,
+        notes: [
+          '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
+            '- Récupération des assessment du type campagnes qui ne sont plus liés à des participations\n' +
+            '- L’id demandé doit correspondre à celui de l’utilisateur authentifié' +
+            '- Les assessments sont triés par ordre inverse de création' +
+            '  (les plus récentes en premier)',
+        ],
+        tags: ['api'],
+      },
+    },
+    {
+      method: 'GET',
       path: '/api/users/{userId}/campaigns/{campaignId}/campaign-participations',
       config: {
         validate: {

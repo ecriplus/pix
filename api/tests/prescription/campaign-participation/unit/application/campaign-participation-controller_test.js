@@ -6,6 +6,49 @@ import { expect, hFake, sinon } from '../../../../test-helper.js';
 
 const { FRENCH_SPOKEN } = LOCALE;
 describe('Unit | Application | Controller | Campaign-Participation', function () {
+  describe('#getAnonymisedCampaignAssessments', function () {
+    const userId = '1';
+    let dependencies;
+
+    beforeEach(function () {
+      const anonymisedCampaignAssessmentSerializer = {
+        serialize: sinon.stub(),
+      };
+      sinon.stub(usecases, 'findUserAnonymisedCampaignAssessments');
+      dependencies = {
+        anonymisedCampaignAssessmentSerializer,
+      };
+    });
+
+    it('should return serialized anonymised campaign assessments', async function () {
+      // given
+      const request = {
+        auth: {
+          credentials: {
+            userId: userId,
+          },
+        },
+        params: {
+          id: userId,
+        },
+      };
+      const serializeSymbol = Symbol('serialize');
+      usecases.findUserAnonymisedCampaignAssessments.withArgs({ userId }).resolves([]);
+      dependencies.anonymisedCampaignAssessmentSerializer.serialize.withArgs([]).returns(serializeSymbol);
+
+      // when
+      const response = await campaignParticipationController.getAnonymisedCampaignAssessments(
+        request,
+        hFake,
+        dependencies,
+      );
+
+      // then
+      expect(response).to.equal(serializeSymbol);
+      expect(dependencies.anonymisedCampaignAssessmentSerializer.serialize).to.have.been.calledOnce;
+    });
+  });
+
   describe('#getCampaignParticipationOverviews', function () {
     const userId = '1';
     let dependencies;

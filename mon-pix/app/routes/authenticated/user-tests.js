@@ -8,7 +8,7 @@ export default class UserTestsRoute extends Route {
   @service store;
   @service router;
 
-  model() {
+  async model() {
     const user = this.currentUser.user;
     const maximumDisplayed = 100;
     const queryParams = {
@@ -17,8 +17,13 @@ export default class UserTestsRoute extends Route {
       'page[size]': maximumDisplayed,
       'filter[states]': ['ONGOING', 'TO_SHARE', 'ENDED', 'DISABLED'],
     };
+    const campaignParticipationOverviews = await this.store.query('campaign-participation-overview', queryParams);
 
-    return this.store.query('campaign-participation-overview', queryParams);
+    const anonymisedCampaignAssessments = await this.store.findAll('anonymised-campaign-assessment', {
+      adapterOptions: { userId: user.id },
+    });
+
+    return campaignParticipationOverviews.concat(anonymisedCampaignAssessments);
   }
 
   redirect(model) {
