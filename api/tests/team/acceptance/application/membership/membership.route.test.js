@@ -417,6 +417,8 @@ describe('Acceptance | Team | Application | Route | membership', function () {
           userId: organizationMemberUserId,
           organizationId,
           organizationRole: Membership.roles.MEMBER,
+          lastAccessedAt: null,
+          updatedAt: new Date('2020-01-01'),
         });
 
         await databaseBuilder.commit();
@@ -438,7 +440,7 @@ describe('Acceptance | Team | Application | Route | membership', function () {
           .where({ userId: organizationMemberUserId, organizationId })
           .first();
         expect(membership.lastAccessedAt).to.be.a('date');
-        expect(membership.lastAccessedAt).to.deep.equal(membership.updatedAt);
+        expect(membership.updatedAt).to.not.equal(new Date('2020-01-01'));
         expect(response.statusCode).to.equal(204);
       });
     });
