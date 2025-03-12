@@ -1,8 +1,9 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import { t } from 'ember-intl';
 import capitalize from 'lodash/capitalize';
 
 <template>
-  <section class="panel empty-state">
+  <PixBlock class="empty-state">
     <img src="{{this.rootURL}}/images/empty-state-activity.svg" alt="" role="none" />
 
     <div class="empty-state__text">
@@ -12,5 +13,5 @@ import capitalize from 'lodash/capitalize';
           organizationLearnerLastName=(capitalize @lastName)
         }}</p>
     </div>
-  </section>
+  </PixBlock>
 </template>
