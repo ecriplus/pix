@@ -1,7 +1,7 @@
-import { disableCertificationCenterMembershipFromPixCertif } from '../../../../lib/domain/usecases/disable-certification-center-membership-from-pix-certif.js';
-import { ForbiddenError } from '../../../../src/shared/application/http-errors.js';
-import { NotFoundError } from '../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { ForbiddenError } from '../../../../../src/shared/application/http-errors.js';
+import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { disableCertificationCenterMembershipFromPixCertif } from '../../../../../src/team/domain/usecases/disable-certification-center-membership-from-pix-certif.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | disable-certification-center-membership', function () {
   let certificationCenterMembershipRepository;

@@ -4,6 +4,17 @@ import { requestResponseUtils } from '../../../shared/infrastructure/utils/reque
 import { usecases } from '../../domain/usecases/index.js';
 import { certificationCenterMembershipRepository } from '../../infrastructure/repositories/certification-center-membership.repository.js';
 
+const disableFromPixCertif = async function (request, h, dependencies = { requestResponseUtils }) {
+  const certificationCenterMembershipId = request.params.certificationCenterMembershipId;
+  const currentUserId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+
+  await usecases.disableCertificationCenterMembershipFromPixCertif({
+    certificationCenterMembershipId,
+    updatedByUserId: currentUserId,
+  });
+  return h.response().code(204);
+};
+
 const findCertificationCenterMemberships = async function (
   request,
   h,
@@ -72,6 +83,7 @@ const updateLastAccessedAt = async function (request, h, dependencies = { reques
 };
 
 const certificationCenterMembershipController = {
+  disableFromPixCertif,
   findCertificationCenterMemberships,
   updateFromPixCertif,
   updateReferer,

@@ -143,6 +143,47 @@ describe('Acceptance | Team | Application | Routes | certification-center-member
     });
   });
 
+  describe('DELETE /api/certification-center-memberships/{id}', function () {
+    let certificationCenter;
+    let certificationCenterMembership;
+    let user;
+
+    beforeEach(async function () {
+      certificationCenter = databaseBuilder.factory.buildCertificationCenter();
+      user = databaseBuilder.factory.buildUser();
+      certificationCenterMembership = databaseBuilder.factory.buildCertificationCenterMembership({
+        certificationCenterId: certificationCenter.id,
+        userId: user.id,
+      });
+      await databaseBuilder.commit();
+    });
+
+    context('when parameters are valid', function () {
+      it('returns a 204 HTTP status code', async function () {
+        server = await createServer();
+
+        const pixCertifAdminUser = databaseBuilder.factory.buildUser.withCertificationCenterMembership({
+          role: 'ADMIN',
+          certificationCenterId: certificationCenter.id,
+        });
+
+        const request = {
+          method: 'DELETE',
+          url: `/api/certification-center-memberships/${certificationCenterMembership.id}`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId: pixCertifAdminUser.id }),
+        };
+
+        await databaseBuilder.commit();
+
+        // when
+        const { statusCode } = await server.inject(request);
+
+        // then
+        expect(statusCode).to.equal(204);
+      });
+    });
+  });
+
   describe('PATCH /api/certification-centers/{certificationCenterId}/certification-center-memberships/me', function () {
     context('When user is member of the certification center', function () {
       it('updates user certification center membership lastAccessedAt', async function () {
