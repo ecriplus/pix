@@ -1,6 +1,7 @@
 import * as serializer from '../../../../../../../src/prescription/campaign-participation/infrastructure/serializers/jsonapi/participant-result-serializer.js';
 import {
   CampaignParticipationStatuses,
+  CampaignTypes,
   KnowledgeElement,
 } from '../../../../../../../src/shared/domain/models/index.js';
 import { AssessmentResult } from '../../../../../../../src/shared/domain/read-models/participant-results/AssessmentResult.js';
@@ -96,6 +97,7 @@ describe('Unit | Serializer | JSON API | participant-result-serializer', functio
         reachedStage,
         stages,
         isCampaignMultipleSendings,
+        campaignType: CampaignTypes.ASSESSMENT,
         isOrganizationLearnerActive,
         isCampaignArchived,
         isTargetProfileResetAllowed,
@@ -107,7 +109,6 @@ describe('Unit | Serializer | JSON API | participant-result-serializer', functio
             'can-improve': false,
             'can-reset': true,
             'can-retry': true,
-
             'is-completed': true,
             'is-disabled': false,
             'is-shared': true,

@@ -895,6 +895,36 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
       });
     });
 
+    context('when campaign type is not assessement', function () {
+      it('returns false', function () {
+        const isCampaignMultipleSendings = true;
+        const isOrganizationLearnerActive = true;
+        const isTargetProfileResetAllowed = true;
+        const isCampaignArchived = false;
+        const participationResults = {
+          knowledgeElements: [],
+          acquiredBadgeIds: [],
+          masteryRate: '0.34',
+          sharedAt: new Date('2020-01-01T05:06:07Z'),
+          status: CampaignParticipationStatuses.SHARED,
+          isDeleted: false,
+        };
+        const assessmentResult = new AssessmentResult({
+          participationResults,
+          competences: [],
+          stages: [],
+          badgeResultsDTO: [],
+          campaignType: CampaignTypes.EXAM,
+          isTargetProfileResetAllowed,
+          isCampaignMultipleSendings,
+          isOrganizationLearnerActive,
+          isCampaignArchived,
+        });
+
+        expect(assessmentResult.canReset).to.be.false;
+      });
+    });
+
     it('returns true', function () {
       const isCampaignMultipleSendings = true;
       const isOrganizationLearnerActive = true;
@@ -917,6 +947,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
         isCampaignMultipleSendings,
         isOrganizationLearnerActive,
         isCampaignArchived,
+        campaignType: CampaignTypes.ASSESSMENT,
       });
 
       expect(assessmentResult.canReset).to.be.true;
