@@ -2,9 +2,9 @@ import { knex } from '../../../../../db/knex-database-connection.js';
 import { CAMPAIGN_FEATURES } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
-import { Campaign } from '../../../../shared/domain/models/Campaign.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 import * as tubeRepository from '../../../../shared/infrastructure/repositories/tube-repository.js';
+import { Campaign } from '../../domain/models/Campaign.js';
 
 const areKnowledgeElementsResettable = async function ({ id }) {
   const knexConn = DomainTransaction.getConnection();
@@ -23,7 +23,7 @@ const areKnowledgeElementsResettable = async function ({ id }) {
 const getByCode = async function (code) {
   const campaign = await knex('campaigns').first().where({ code });
   if (!campaign) return null;
-  return new Campaign({ ...campaign, organization: { id: campaign.organizationId } });
+  return new Campaign(campaign);
 };
 
 const get = async function (id) {
@@ -44,9 +44,6 @@ const get = async function (id) {
   return new Campaign({
     ...campaign,
     ...{ externalIdLabel: featureExternalId?.params?.label, externalIdType: featureExternalId?.params?.type },
-    organization: { id: campaign.organizationId },
-    targetProfile: { id: campaign.targetProfileId },
-    creator: { id: campaign.creatorId },
   });
 };
 

@@ -55,7 +55,6 @@ import { AuthenticationSessionContent } from './AuthenticationSessionContent.js'
 import { BadgeCriterionForCalculation } from './BadgeCriterionForCalculation.js';
 import { BadgeDetails } from './BadgeDetails.js';
 import { BadgeForCalculation } from './BadgeForCalculation.js';
-import { Campaign } from './Campaign.js';
 import { CampaignLearningContent } from './CampaignLearningContent.js';
 import { CampaignParticipationResult } from './CampaignParticipationResult.js';
 import { CertifiableBadgeAcquisition } from './CertifiableBadgeAcquisition.js';
@@ -124,7 +123,6 @@ export {
   BadgeCriterionForCalculation,
   BadgeDetails,
   BadgeForCalculation,
-  Campaign,
   CampaignCreator,
   CampaignForCreation,
   CampaignLearningContent,

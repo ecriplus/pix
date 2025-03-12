@@ -20,7 +20,7 @@ describe('Unit | UseCase | find-association-between-user-and-organization-learne
   beforeEach(function () {
     userId = domainBuilder.buildUser().id;
     organization = domainBuilder.buildOrganization();
-    campaign = domainBuilder.buildCampaign({ organization });
+    campaign = domainBuilder.buildCampaign({ organizationId: organization.id });
     organizationLearner = domainBuilder.buildOrganizationLearner({ organization, userId });
     campaignRepository = { getByCode: sinon.stub() };
     getCampaignStub = campaignRepository.getByCode.throws('unexpected call');

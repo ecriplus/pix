@@ -70,9 +70,7 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
   context('When no organizationLearner found', function () {
     it('should throw a Not Found error', async function () {
       // given
-      campaignRepository.getByCode
-        .withArgs(campaignCode)
-        .resolves(domainBuilder.buildCampaign({ organization: { id: organizationId } }));
+      campaignRepository.getByCode.withArgs(campaignCode).resolves(domainBuilder.buildCampaign({ organizationId }));
       userReconciliationService.findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo.throws(
         new NotFoundError('Error message'),
       );
@@ -95,9 +93,7 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
   context('When student has already a reconciled account', function () {
     it('should return a OrganizationLearnerAlreadyLinkedToUser error', async function () {
       // given
-      campaignRepository.getByCode
-        .withArgs(campaignCode)
-        .resolves(domainBuilder.buildCampaign({ organization: { id: organizationId } }));
+      campaignRepository.getByCode.withArgs(campaignCode).resolves(domainBuilder.buildCampaign({ organizationId }));
       userReconciliationService.findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo.resolves(
         organizationLearner,
       );
@@ -133,9 +129,7 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
 
       const exceptedErrorMessage =
         'Un autre étudiant est déjà réconcilié dans la même organisation et avec le même compte utilisateur';
-      campaignRepository.getByCode
-        .withArgs(campaignCode)
-        .resolves(domainBuilder.buildCampaign({ organization: { id: organizationId } }));
+      campaignRepository.getByCode.withArgs(campaignCode).resolves(domainBuilder.buildCampaign({ organizationId }));
       userReconciliationService.findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo.resolves(
         organizationLearner,
       );

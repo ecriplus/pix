@@ -154,8 +154,8 @@ describe('Unit | Domain | UseCase | send-shared-participation-results-to-pole-em
         createdAt: new Date('2020-01-01'),
         archivedAt: new Date('2020-02-01'),
         type: 'ASSESSMENT',
-        targetProfile: { id: 'targetProfileId1' },
-        organization: { id: organizationId },
+        targetProfileId: 'targetProfileId1',
+        organizationId,
       });
       campaignParticipationRepository.get.withArgs(campaignParticipationId).resolves(
         domainBuilder.buildCampaignParticipation({
@@ -231,7 +231,7 @@ describe('Unit | Domain | UseCase | send-shared-participation-results-to-pole-em
       const campaign = domainBuilder.buildCampaign({
         id: campaignId,
         type: 'ASSESSMENT',
-        organization: { id: organizationId },
+        organizationId,
       });
       campaignParticipationRepository.get.withArgs(campaignParticipationId).resolves(
         domainBuilder.buildCampaignParticipation({

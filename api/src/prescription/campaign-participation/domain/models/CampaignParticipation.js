@@ -6,7 +6,7 @@ import {
   CantImproveCampaignParticipationError,
 } from '../../../../../src/shared/domain/errors.js';
 import { ArchivedCampaignError } from '../../../campaign/domain/errors.js';
-import { CampaignParticipationStatuses, CampaignTypes } from '../../../shared/domain/constants.js';
+import { CampaignParticipationStatuses } from '../../../shared/domain/constants.js';
 import { CampaignParticiationInvalidStatus, CampaignParticipationDeletedError } from '../errors.js';
 
 class CampaignParticipation {
@@ -67,10 +67,6 @@ class CampaignParticipation {
     return _.maxBy(this.assessments, 'createdAt');
   }
 
-  getTargetProfileId() {
-    return _.get(this, 'campaign.targetProfileId', null);
-  }
-
   get campaignId() {
     return _.get(this, 'campaign.id', null);
   }
@@ -96,8 +92,7 @@ class CampaignParticipation {
       throw new CampaignParticiationInvalidStatus(this.id, CampaignParticipationStatuses.TO_SHARE);
     }
 
-    //TODO: rewrite when we have only one model for Campaign, for now now tests are based on Campaign.js from api context
-    if (this.campaign.type === CampaignTypes.PROFILES_COLLECTION) {
+    if (this.campaign.isProfilesCollection) {
       throw new CantImproveCampaignParticipationError();
     }
   }
@@ -110,14 +105,13 @@ class CampaignParticipation {
     if (this.isShared) {
       throw new AlreadySharedCampaignParticipationError();
     }
-    if (!this.campaign.isAccessible()) {
+    if (!this.campaign.isAccessible) {
       throw new ArchivedCampaignError('Cannot share results on an archived campaign.');
     }
     if (this.isDeleted) {
       throw new CampaignParticipationDeletedError('Cannot share results on a deleted participation.');
     }
-    //TODO: rewrite when we have only one model for Campaign, for now tests are based on Campaign.js from api context
-    if (this.campaign.type === CampaignTypes.ASSESSMENT && lastAssessmentNotCompleted(this)) {
+    if (this.campaign.isAssessment && lastAssessmentNotCompleted(this)) {
       throw new AssessmentNotCompletedError();
     }
   }

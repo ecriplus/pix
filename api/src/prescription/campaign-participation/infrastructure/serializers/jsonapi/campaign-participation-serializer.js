@@ -2,7 +2,7 @@ import jsonapiSerializer from 'jsonapi-serializer';
 
 const { Serializer, Deserializer } = jsonapiSerializer;
 
-import { Campaign } from '../../../../../shared/domain/models/Campaign.js';
+import { Campaign } from '../../../../campaign/domain/models/Campaign.js';
 import { CampaignParticipation } from '../../../domain/models/CampaignParticipation.js';
 
 const serialize = function (campaignParticipation) {
