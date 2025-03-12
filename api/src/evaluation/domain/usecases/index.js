@@ -34,9 +34,12 @@ import * as algorithmDataFetcherService from '../services/algorithm-methods/data
 import * as smartRandomService from '../services/algorithm-methods/smart-random.js';
 import * as correctionService from '../services/correction-service.js';
 import { getCompetenceLevel } from '../services/get-competence-level.js';
+import * as getMasteryPercentageService from '../services/get-mastery-percentage-service.js';
 import * as improvementService from '../services/improvement-service.js';
 import { pickChallengeService } from '../services/pick-challenge-service.js';
 import * as scorecardService from '../services/scorecard-service.js';
+import * as convertLevelStagesIntoThresholdsService from '../services/stages/convert-level-stages-into-thresholds-service.js';
+import * as getNewAcquiredStagesService from '../services/stages/get-new-acquired-stages-service.js';
 
 const path = dirname(fileURLToPath(import.meta.url));
 
@@ -81,6 +84,9 @@ const dependencies = {
   targetProfileAdministrationRepository,
   targetProfileRepository,
   userRepository: repositories.userRepository,
+  getNewAcquiredStagesService,
+  convertLevelStagesIntoThresholdsService,
+  getMasteryPercentageService,
 };
 
 const evaluationUsecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);

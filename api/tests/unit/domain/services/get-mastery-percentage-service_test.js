@@ -1,4 +1,4 @@
-import { getMasteryPercentage } from '../../../../lib/domain/services/get-mastery-percentage-service.js';
+import { getMasteryPercentage } from '../../../../src/evaluation/domain/services/get-mastery-percentage-service.js';
 import { KnowledgeElement } from '../../../../src/shared/domain/models/index.js';
 import { expect } from '../../../test-helper.js';
 import { domainBuilder } from '../../../tooling/domain-builder/domain-builder.js';

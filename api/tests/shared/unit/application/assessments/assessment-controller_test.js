@@ -76,7 +76,7 @@ describe('Unit | Controller | assessment-controller', function () {
       sinon.stub(usecases, 'completeAssessment');
       sinon.stub(evaluationUsecases, 'handleBadgeAcquisition');
       sinon.stub(devcompUsecases, 'handleTrainingRecommendation');
-      sinon.stub(usecases, 'handleStageAcquisition');
+      sinon.stub(evaluationUsecases, 'handleStageAcquisition');
       sinon.stub(questUsecases, 'rewardUser');
       usecases.completeAssessment.resolves(assessment);
       evaluationUsecases.handleBadgeAcquisition.resolves();

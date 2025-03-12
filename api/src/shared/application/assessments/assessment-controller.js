@@ -97,7 +97,7 @@ const completeAssessment = async function (request) {
   await DomainTransaction.execute(async () => {
     const assessment = await usecases.completeAssessment({ assessmentId, locale });
     await evaluationUsecases.handleBadgeAcquisition({ assessment });
-    await usecases.handleStageAcquisition({ assessment });
+    await evaluationUsecases.handleStageAcquisition({ assessment });
     if (assessment.userId && config.featureToggles.isQuestEnabled) {
       await questUsecases.rewardUser({ userId: assessment.userId });
     }

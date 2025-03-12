@@ -1,13 +1,3 @@
-import * as defaultConvertLevelStagesIntoThresholdsService from '../../../../src/evaluation/domain/services/stages/convert-level-stages-into-thresholds-service.js';
-import * as defaultGetNewAcquiredStagesService from '../../../../src/evaluation/domain/services/stages/get-new-acquired-stages-service.js';
-import * as defaultStageAcquisitionRepository from '../../../../src/evaluation/infrastructure/repositories/stage-acquisition-repository.js';
-import * as defaultStageRepository from '../../../../src/evaluation/infrastructure/repositories/stage-repository.js';
-import * as defaultCampaignRepository from '../../../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
-import * as defaultCampaignParticipationRepository from '../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
-import * as defaultKnowledgeElementRepositoryRepository from '../../../../src/shared/infrastructure/repositories/knowledge-element-repository.js';
-import * as defaultSkillRepository from '../../../../src/shared/infrastructure/repositories/skill-repository.js';
-import * as defaultGetMasteryPercentageService from '../../services/get-mastery-percentage-service.js';
-
 /**
  * @param {Assessment} assessment
  * @param stageRepository
@@ -25,15 +15,15 @@ import * as defaultGetMasteryPercentageService from '../../services/get-mastery-
  */
 const handleStageAcquisition = async function ({
   assessment,
-  stageRepository = defaultStageRepository,
-  skillRepository = defaultSkillRepository,
-  campaignRepository = defaultCampaignRepository,
-  stageAcquisitionRepository = defaultStageAcquisitionRepository,
-  knowledgeElementRepository = defaultKnowledgeElementRepositoryRepository,
-  campaignParticipationRepository = defaultCampaignParticipationRepository,
-  getNewAcquiredStagesService = defaultGetNewAcquiredStagesService,
-  getMasteryPercentageService = defaultGetMasteryPercentageService,
-  convertLevelStagesIntoThresholdsService = defaultConvertLevelStagesIntoThresholdsService,
+  stageRepository,
+  skillRepository,
+  campaignRepository,
+  stageAcquisitionRepository,
+  knowledgeElementRepository,
+  campaignParticipationRepository,
+  getNewAcquiredStagesService,
+  getMasteryPercentageService,
+  convertLevelStagesIntoThresholdsService,
 }) {
   if (!assessment.isForCampaign()) return;
 
@@ -54,8 +44,9 @@ const handleStageAcquisition = async function ({
   }
 
   const [knowledgeElements, campaignSkillsIds] = await Promise.all([
-    knowledgeElementRepository.findUniqByUserId({
+    knowledgeElementRepository.findUniqByUserIdForCampaignParticipation({
       userId: assessment.userId,
+      campaignParticipationId: assessment.campaignParticipationId,
     }),
     campaignRepository.findSkillIdsByCampaignParticipationId({
       campaignParticipationId: assessment.campaignParticipationId,
