@@ -70,4 +70,27 @@ export const certificationCenterMembershipRoute = [
       tags: ['api', 'certification-center-membership'],
     },
   },
+  {
+    method: 'PATCH',
+    path: '/api/certification-centers/{certificationCenterId}/certification-center-memberships/me',
+    config: {
+      pre: [
+        {
+          method: (request, h) => securityPreHandlers.checkUserIsMemberOfCertificationCenter(request, h),
+          assign: 'isMemberOfCertificationCenter',
+        },
+      ],
+      validate: {
+        params: Joi.object({
+          certificationCenterId: identifiersType.certificationCenterId,
+        }),
+      },
+      handler: (request, h) => certificationCenterMembershipController.updateLastAccessedAt(request, h),
+      tags: ['api', 'certification-center-membership'],
+      notes: [
+        "Cette route est restreinte aux membres authentifiés d'un centre de certification",
+        'Elle permet de mettre à jour la dernière date d’accès d’un utilisateur à un centre de certification.',
+      ],
+    },
+  },
 ];

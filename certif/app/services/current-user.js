@@ -23,7 +23,7 @@ export default class CurrentUserService extends Service {
         this.currentCertificationCenterMembership = this._findCertificationCenterMembershipByCertificationCenterId(
           this.currentAllowedCertificationCenterAccess?.id,
         );
-
+        await this._updateCurrentUserAccessToCertificationCenter();
         this.isAdminOfCurrentCertificationCenter = this.currentCertificationCenterMembership?.isAdmin;
       } catch (error) {
         this.certificationPointOfContact = null;
@@ -45,7 +45,7 @@ export default class CurrentUserService extends Service {
     }
   }
 
-  updateCurrentCertificationCenter(certificationCenterId) {
+  async updateCurrentCertificationCenter(certificationCenterId) {
     if (this.currentAllowedCertificationCenterAccess.id !== String(certificationCenterId)) {
       this.currentAllowedCertificationCenterAccess =
         this.certificationPointOfContact.allowedCertificationCenterAccesses.find(
@@ -55,6 +55,7 @@ export default class CurrentUserService extends Service {
       this.currentCertificationCenterMembership =
         this._findCertificationCenterMembershipByCertificationCenterId(certificationCenterId);
       this.isAdminOfCurrentCertificationCenter = this.currentCertificationCenterMembership?.isAdmin;
+      await this._updateCurrentUserAccessToCertificationCenter();
     }
   }
 
@@ -62,5 +63,16 @@ export default class CurrentUserService extends Service {
     return this.certificationPointOfContact.certificationCenterMemberships.find(
       ({ certificationCenterId: id }) => id === Number(certificationCenterId),
     );
+  }
+
+  async _updateCurrentUserAccessToCertificationCenter() {
+    if (this.currentCertificationCenterMembership) {
+      await this.currentCertificationCenterMembership.save({
+        adapterOptions: {
+          updateLastAccessedAt: true,
+          certificationCenterId: this.currentCertificationCenterMembership.certificationCenterId,
+        },
+      });
+    }
   }
 }

@@ -21,6 +21,7 @@ const buildCertificationCenterMembership = function ({
   role = 'MEMBER',
   updatedByUserId = 1,
   updatedAt,
+  lastAccessedAt,
 } = {}) {
   const certificationCenterMembership = new CertificationCenterMembership({
     id,
@@ -32,6 +33,7 @@ const buildCertificationCenterMembership = function ({
     role,
     updatedByUserId,
     updatedAt,
+    lastAccessedAt,
   });
   if (!updatedAt) {
     certificationCenterMembership.updatedAt = disabledAt || createdAt;

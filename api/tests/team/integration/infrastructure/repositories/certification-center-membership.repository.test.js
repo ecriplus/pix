@@ -1050,6 +1050,37 @@ describe('Integration | Team | Infrastructure | Repository | Certification Cente
     });
   });
 
+  describe('#updateLastAccessedAt', function () {
+    it('updates last user access to a certification center', async function () {
+      // given
+      const now = new Date('2021-01-02');
+
+      const userId = databaseBuilder.factory.buildUser().id;
+      const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+      const certificationCenterMembership = databaseBuilder.factory.buildCertificationCenterMembership({
+        userId,
+        certificationCenterId,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      await certificationCenterMembershipRepository.updateLastAccessedAt({
+        lastAccessedAt: now,
+        userId,
+        certificationCenterId,
+      });
+
+      // then
+      const foundCertificationCenterMembership = await knex('certification-center-memberships')
+        .where({ id: certificationCenterMembership.id })
+        .first();
+
+      expect(foundCertificationCenterMembership.lastAccessedAt).to.deep.equal(now);
+      expect(foundCertificationCenterMembership.updatedAt).to.deep.equal(now);
+    });
+  });
+
   describe('#findById', function () {
     it('returns certification center membership', async function () {
       // given

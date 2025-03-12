@@ -14,6 +14,7 @@ class CertificationCenterMembership {
     role,
     updatedByUserId,
     updatedAt,
+    lastAccessedAt,
   } = {}) {
     this.id = id;
     this.certificationCenter = certificationCenter;
@@ -24,6 +25,7 @@ class CertificationCenterMembership {
     this.role = role;
     this.updatedByUserId = updatedByUserId;
     this.updatedAt = updatedAt;
+    this.lastAccessedAt = lastAccessedAt;
   }
 
   get hasAdminRole() {
