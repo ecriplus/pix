@@ -1,5 +1,10 @@
 # Pix Changelog
 
+## v5.61.1 (12/03/2025)
+
+### :bug: Correction
+- [#11643](https://github.com/1024pix/pix/pull/11643) Revert "[BUGFIX] Pour les demandes de réinitialisation de mot de passe, rendre la recherche des comptes vraiment insensible à la casse (PIX-16896)"
+
 ## v5.61.0 (11/03/2025)
 
 
