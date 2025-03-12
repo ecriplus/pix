@@ -60,7 +60,7 @@
     "lint:orga": "cd orga && npm run lint",
     "lint:junior": "cd junior && npm run lint",
     "lint:scripts": "eslint --ignore-pattern **/compose.yaml scripts",
-    "lint:yaml": "eslint --ignore-pattern compose.yaml",
+    "lint:yaml": "eslint --fix .circleci/*.yml .github/**/*.yaml",
     "lint:docs": "find ./docs -type f -name '*.md' | xargs -L1 markdown-link-check --quiet --config ./docs/link--check-config.json ",
     "local:add-optional-checks": "husky",
     "local:remove-optional-checks": "git config --unset core.hooksPath",
@@ -99,8 +99,8 @@
   "devDependencies": {
     "@1024pix/eslint-plugin": "^2.1.0",
     "@babel/eslint-parser": "^7.18.2",
-    "eslint": "^9.0.0",
     "@eslint/compat": "^1.0.1",
+    "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-chai-expect": "^3.0.0",
     "eslint-plugin-i18n-json": "^4.0.0",
@@ -110,9 +110,10 @@
     "eslint-plugin-n": "^17.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-unicorn": "^56.0.0",
-    "typescript-eslint": "^8.24.0",
     "husky": "^9.0.0",
-    "lint-staged": "^15.0.0"
+    "lint-staged": "^15.0.0",
+    "prettier-plugin-ember-template-tag": "^2.0.4",
+    "typescript-eslint": "^8.24.0"
   },
   "peerDependencies": {
     "markdown-link-check": "^3.8.6"

@@ -12,17 +12,17 @@ config:
       name: Sustained load
 
 scenarios:
-  - name: "Inscription et page Profil"
+  - name: Inscription et page Profil
     flow:
-      - function: "setupSignupFormData"
+      - function: setupSignupFormData
 
-      ### ---------------------- ###
-      ### From page /inscription ###
-      ### ---------------------- ###
+      # ## ---------------------- ###
+      # ## From page /inscription ###
+      # ## ---------------------- ###
 
       # Submit user form
       - post:
-          url: "/api/users"
+          url: /api/users
           json:
             data:
               attributes:
@@ -34,19 +34,19 @@ scenarios:
 
       # Authenticate user
       - post:
-          url: "/api/token"
+          url: /api/token
           headers:
-            content-type: "application/x-www-form-urlencoded"
+            content-type: application/x-www-form-urlencoded
           body: "grant_type=password&username={{ email }}&password={{ password }}"
           capture:
-            - json: "$.access_token"
-              as: "accessToken"
-            - json: "$.user_id"
-              as: "userId"
+            - json: $.access_token
+              as: accessToken
+            - json: $.user_id
+              as: userId
 
       # Get user data
       - get:
-          url: "/api/users/me"
+          url: /api/users/me
           headers:
             Authorization: "Bearer {{ accessToken }}"
 
