@@ -14,7 +14,7 @@ module(
     test('displays a title, a description and a message', async function (assert) {
       // given
       this.set('campaign', {});
-      this.set('campaignParticipationResult', {});
+      this.set('campaignParticipationResult', { canRetry: true, canReset: false });
 
       // when
       const screen = await render(
@@ -67,7 +67,7 @@ module(
       hooks.beforeEach(async function () {
         // given
         this.set('campaign', { code: 'CODECAMPAIGN', targetProfileName: 'targetProfileName' });
-        this.set('campaignParticipationResult', { canRetry: false, canReset: true });
+        this.set('campaignParticipationResult', { canRetry: true, canReset: true });
 
         // when
         screen = await render(
@@ -80,9 +80,7 @@ module(
 
       test('it should display a reset button', async function (assert) {
         // then
-        assert
-          .dom(screen.queryByRole('link', { name: t('pages.skill-review.hero.retry.actions.retry') }))
-          .doesNotExist();
+        assert.dom(screen.getByRole('link', { name: t('pages.skill-review.hero.retry.actions.retry') })).exists();
         assert.dom(screen.getByRole('button', { name: t('pages.skill-review.hero.retry.actions.reset') })).exists();
       });
 
