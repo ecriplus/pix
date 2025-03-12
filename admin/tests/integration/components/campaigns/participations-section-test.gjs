@@ -34,7 +34,7 @@ module('Integration | Component | Campaigns | participations-section', function 
     const screen = await render(<template><ParticipationsSection @participations={{participations}} /></template>);
 
     // then
-    assert.strictEqual(screen.getAllByLabelText('participation').length, 2);
+    assert.strictEqual(screen.getAllByRole('row').length, 3);
   });
 
   test('it should display participantExternalId column if externalIdLabel is set', async function (assert) {
