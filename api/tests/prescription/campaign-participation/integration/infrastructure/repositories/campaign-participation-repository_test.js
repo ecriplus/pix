@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import * as knowledgeElementSnapshotAPI from '../../../../../../src/prescription/campaign/application/api/knowledge-element-snapshots-api.js';
 import { CampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipation.js';
 import { AvailableCampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/read-models/AvailableCampaignParticipation.js';
 import * as campaignParticipationRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
@@ -7,116 +8,195 @@ import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { constants } from '../../../../../../src/shared/domain/constants.js';
 import { DomainTransaction, withTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
 const { STARTED, SHARED, TO_SHARE } = CampaignParticipationStatuses;
 
 describe('Integration | Repository | Campaign Participation', function () {
   describe('#updateWithSnapshot', function () {
-    let clock;
-    let campaignParticipation;
-    let ke;
-    const frozenTime = new Date('1987-09-01T00:00:00Z');
+    context('when campaign is of type ASSESSMENT', function () {
+      let clock;
+      let campaignParticipation;
+      let ke;
+      const frozenTime = new Date('1987-09-01T00:00:00Z');
 
-    beforeEach(async function () {
-      campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
-        status: STARTED,
-        sharedAt: null,
+      beforeEach(async function () {
+        const campaignId = databaseBuilder.factory.buildCampaign({
+          type: CampaignTypes.ASSESSMENT,
+        }).id;
+        campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId,
+          status: STARTED,
+          sharedAt: null,
+        });
+
+        ke = databaseBuilder.factory.buildKnowledgeElement({
+          userId: campaignParticipation.userId,
+          createdAt: new Date('1985-09-01T00:00:00Z'),
+        });
+        clock = sinon.useFakeTimers({ now: frozenTime, toFake: ['Date'] });
+
+        await databaseBuilder.commit();
       });
 
-      ke = databaseBuilder.factory.buildKnowledgeElement({
-        userId: campaignParticipation.userId,
-        createdAt: new Date('1985-09-01T00:00:00Z'),
-      });
-      clock = sinon.useFakeTimers({ now: frozenTime, toFake: ['Date'] });
-
-      await databaseBuilder.commit();
-    });
-
-    afterEach(function () {
-      clock.restore();
-    });
-
-    it('persists the campaign-participation changes', async function () {
-      // given
-      campaignParticipation.campaign = {};
-      campaignParticipation.assessments = [];
-      campaignParticipation.user = {};
-      campaignParticipation.assessmentId = {};
-      campaignParticipation.isShared = true;
-      campaignParticipation.sharedAt = new Date('2020-01-02');
-      campaignParticipation.status = SHARED;
-      campaignParticipation.participantExternalId = 'Laura';
-
-      // when
-      await DomainTransaction.execute(async () => {
-        await campaignParticipationRepository.updateWithSnapshot(campaignParticipation);
+      afterEach(function () {
+        clock.restore();
       });
 
-      const updatedCampaignParticipation = await knex('campaign-participations')
-        .where({ id: campaignParticipation.id })
-        .first();
-      // then
-      expect(updatedCampaignParticipation.status).to.equals(SHARED);
-      expect(updatedCampaignParticipation.participantExternalId).to.equals('Laura');
-    });
+      it('persists the campaign-participation changes', async function () {
+        // given
+        campaignParticipation.campaign = {};
+        campaignParticipation.assessments = [];
+        campaignParticipation.user = {};
+        campaignParticipation.assessmentId = {};
+        campaignParticipation.isShared = true;
+        campaignParticipation.sharedAt = new Date('2020-01-02');
+        campaignParticipation.status = SHARED;
+        campaignParticipation.participantExternalId = 'Laura';
 
-    it('should save a snapshot', async function () {
-      // given
-      campaignParticipation.sharedAt = new Date();
+        // when
+        await DomainTransaction.execute(async () => {
+          await campaignParticipationRepository.updateWithSnapshot(campaignParticipation);
+        });
 
-      // when
-      await DomainTransaction.execute(async () => {
-        await campaignParticipationRepository.updateWithSnapshot(campaignParticipation);
+        const updatedCampaignParticipation = await knex('campaign-participations')
+          .where({ id: campaignParticipation.id })
+          .first();
+        // then
+        expect(updatedCampaignParticipation.status).to.equals(SHARED);
+        expect(updatedCampaignParticipation.participantExternalId).to.equals('Laura');
       });
 
-      // then
-      const snapshotInDB = await knex.pluck('snapshot').from('knowledge-element-snapshots');
-      expect(snapshotInDB).to.have.lengthOf(1);
-      expect(snapshotInDB).to.deep.equal([
-        [
-          {
-            answerId: ke.answerId,
-            competenceId: ke.competenceId,
-            createdAt: ke.createdAt.toISOString(),
-            earnedPix: 2,
-            skillId: ke.skillId,
-            source: ke.source,
-            status: ke.status,
-          },
-        ],
-      ]);
-    });
-
-    context('when there is a transaction', function () {
-      it('should save a snapshot using a transaction', async function () {
+      it('should save a snapshot', async function () {
+        // given
         campaignParticipation.sharedAt = new Date();
 
-        await withTransaction(async () => campaignParticipationRepository.updateWithSnapshot(campaignParticipation))();
+        // when
+        await DomainTransaction.execute(async () => {
+          await campaignParticipationRepository.updateWithSnapshot(campaignParticipation);
+        });
 
-        const snapshotInDB = await knex.select('id').from('knowledge-element-snapshots');
+        // then
+        const snapshotInDB = await knex.pluck('snapshot').from('knowledge-element-snapshots');
         expect(snapshotInDB).to.have.lengthOf(1);
+        expect(snapshotInDB).to.deep.equal([
+          [
+            {
+              answerId: ke.answerId,
+              competenceId: ke.competenceId,
+              createdAt: ke.createdAt.toISOString(),
+              earnedPix: 2,
+              skillId: ke.skillId,
+              source: ke.source,
+              status: ke.status,
+            },
+          ],
+        ]);
       });
 
-      it('does not save a snapshot when there is an error', async function () {
+      context('when there is a transaction', function () {
+        it('should save a snapshot using a transaction', async function () {
+          campaignParticipation.sharedAt = new Date();
+
+          await withTransaction(async () =>
+            campaignParticipationRepository.updateWithSnapshot(campaignParticipation),
+          )();
+
+          const snapshotInDB = await knex.select('id').from('knowledge-element-snapshots');
+          expect(snapshotInDB).to.have.lengthOf(1);
+        });
+
+        it('does not save a snapshot when there is an error', async function () {
+          campaignParticipation.sharedAt = new Date();
+
+          try {
+            await withTransaction(async () => {
+              await campaignParticipationRepository.updateWithSnapshot(campaignParticipation);
+              throw new Error();
+            })();
+            // eslint-disable-next-line no-empty
+          } catch {}
+
+          const snapshotInDB = await knex.select('id').from('knowledge-element-snapshots');
+          const participations = await knex.select('sharedAt').from('campaign-participations');
+          expect(participations.sharedAt).to.be.undefined;
+          expect(snapshotInDB).to.be.empty;
+        });
+      });
+    });
+
+    context('when campaign is of type EXAM', function () {
+      let campaignParticipation;
+
+      beforeEach(async function () {
+        const userId = databaseBuilder.factory.buildUser().id;
+        const campaignId = databaseBuilder.factory.buildCampaign({
+          type: CampaignTypes.EXAM,
+        }).id;
+        campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId,
+          userId,
+          status: STARTED,
+          sharedAt: null,
+        });
+        const knowledgeElement1 = domainBuilder.buildKnowledgeElement({
+          userId,
+          createdAt: new Date('2019-03-01'),
+          skillId: 'acquis1',
+        });
+        const knowledgeElement2 = domainBuilder.buildKnowledgeElement({
+          userId,
+          createdAt: new Date('2019-03-01'),
+          skillId: 'acquis2',
+        });
+        const knowledgeElementsBefore = new KnowledgeElementCollection([knowledgeElement1, knowledgeElement2]);
+        databaseBuilder.factory.buildKnowledgeElementSnapshot({
+          userId,
+          snappedAt: new Date('2019-01-01'),
+          campaignParticipationId: campaignParticipation.id,
+          snapshot: knowledgeElementsBefore.toSnapshot(),
+        });
+        await databaseBuilder.commit();
+      });
+
+      it('persists the campaign-participation changes', async function () {
+        // given
+        campaignParticipation.campaign = {};
+        campaignParticipation.assessments = [];
+        campaignParticipation.user = {};
+        campaignParticipation.assessmentId = {};
+        campaignParticipation.isShared = true;
+        campaignParticipation.sharedAt = new Date('2020-01-02');
+        campaignParticipation.status = SHARED;
+        campaignParticipation.participantExternalId = 'Laura';
+
+        // when
+        await campaignParticipationRepository.updateWithSnapshot(campaignParticipation);
+
+        // then
+        const updatedCampaignParticipation = await knex('campaign-participations')
+          .where({ id: campaignParticipation.id })
+          .first();
+        expect(updatedCampaignParticipation.status).to.equals(SHARED);
+        expect(updatedCampaignParticipation.participantExternalId).to.equals('Laura');
+      });
+
+      it('should left existing snapshot untouched', async function () {
+        // given
         campaignParticipation.sharedAt = new Date();
+        const snapshotBefore = await knowledgeElementSnapshotAPI.getByParticipation(campaignParticipation.id);
 
-        try {
-          await withTransaction(async () => {
-            await campaignParticipationRepository.updateWithSnapshot(campaignParticipation);
-            throw new Error();
-          })();
-          // eslint-disable-next-line no-empty
-        } catch {}
+        // when
+        await campaignParticipationRepository.updateWithSnapshot(campaignParticipation);
 
-        const snapshotInDB = await knex.select('id').from('knowledge-element-snapshots');
-        const participations = await knex.select('sharedAt').from('campaign-participations');
-        expect(participations.sharedAt).to.be.undefined;
-        expect(snapshotInDB).to.be.empty;
+        // then
+        const snapshotAfter = await knowledgeElementSnapshotAPI.getByParticipation(campaignParticipation.id);
+        expect(snapshotBefore).to.deepEqualInstance(snapshotAfter);
       });
     });
   });

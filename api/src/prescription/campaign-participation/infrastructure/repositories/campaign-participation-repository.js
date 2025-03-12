@@ -29,8 +29,11 @@ const CAMPAIGN_PARTICIPATION_ATTRIBUTES = [
 ];
 
 const updateWithSnapshot = async function (campaignParticipation) {
-  await this.update(campaignParticipation);
-
+  await update(campaignParticipation);
+  const campaign = await campaignRepository.getByCampaignParticipationId(campaignParticipation.id);
+  if (campaign.isExam) {
+    return;
+  }
   const knowledgeElements = await knowledgeElementRepository.findUniqByUserId({
     userId: campaignParticipation.userId,
     limitDate: campaignParticipation.sharedAt,
