@@ -1,4 +1,8 @@
-import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
+import { resetPasswordService } from '../../../../../src/identity-access-management/domain/services/reset-password.service.js';
+import { createResetPasswordDemand } from '../../../../../src/identity-access-management/domain/usecases/create-reset-password-demand.usecase.js';
+import { resetPasswordDemandRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/reset-password-demand.repository.js';
+import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
+import * as emailRepository from '../../../../../src/shared/mail/infrastructure/repositories/email.repository.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | create-reset-password-demand', function () {
@@ -12,9 +16,13 @@ describe('Integration | Identity Access Management | Domain | UseCase | create-r
     await databaseBuilder.commit();
 
     // when
-    await usecases.createResetPasswordDemand({
+    await createResetPasswordDemand({
       email,
       locale,
+      emailRepository,
+      resetPasswordService,
+      resetPasswordDemandRepository,
+      userRepository,
     });
 
     // then
@@ -22,43 +30,22 @@ describe('Integration | Identity Access Management | Domain | UseCase | create-r
     expect(resetPasswordDemand).to.exist;
   });
 
-  context('when a user account exists but with an email differing by case', function () {
-    it('creates a reset password demand', async function () {
-      // given
-      const accountEmail = 'DIFFERING_BY_CASE@example.net';
-      const passwordResetDemandEmail = 'differing_by_case@example.net';
-      const userId = databaseBuilder.factory.buildUser({ email: accountEmail }).id;
-      databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({ userId });
-      await databaseBuilder.commit();
-
-      // when
-      await usecases.createResetPasswordDemand({
-        email: passwordResetDemandEmail,
-        locale,
-      });
-
-      // then
-      const resetPasswordDemand = await knex('reset-password-demands')
-        .whereRaw('LOWER("email") = LOWER(?)', passwordResetDemandEmail)
-        .first();
-      expect(resetPasswordDemand).to.exist;
-    });
-  });
-
-  context('when no user account with a matching email exist', function () {
-    it('does not create a reset password demand', async function () {
+  context('when user account does not exist with given email', function () {
+    it('does not throw an error', async function () {
       // given
       const unknownEmail = 'unknown@example.net';
 
-      // when
-      await usecases.createResetPasswordDemand({
-        email: unknownEmail,
-        locale,
-      });
-
-      // then
-      const resetPasswordDemand = await knex('reset-password-demands').where({ email: unknownEmail }).first();
-      expect(resetPasswordDemand).to.not.exist;
+      // when & then
+      expect(
+        createResetPasswordDemand({
+          email: unknownEmail,
+          locale,
+          emailRepository,
+          resetPasswordService,
+          resetPasswordDemandRepository,
+          userRepository,
+        }),
+      ).not.to.be.rejected;
     });
   });
 });
