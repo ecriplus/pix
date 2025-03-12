@@ -55,7 +55,7 @@ const getFullById = async function (userId) {
 
 const getByUsernameOrEmailWithRolesAndPassword = async function (username) {
   const userDTO = await knex('users')
-    .where({ email: username.toLowerCase() })
+    .whereRaw('LOWER("email") = ?', username.toLowerCase())
     .orWhere({ username: username.toLowerCase() })
     .first();
 
@@ -265,7 +265,7 @@ const checkIfEmailIsAvailable = async function (email) {
 };
 
 const isUserExistingByEmail = async function (email) {
-  const existingUser = await knex('users').where('email', email.toLowerCase()).first();
+  const existingUser = await knex('users').whereRaw('LOWER("email") = ?', email.toLowerCase()).first();
   if (!existingUser) throw new UserNotFoundError();
   return true;
 };
@@ -390,7 +390,7 @@ const findByExternalIdentifier = async function ({ externalIdentityId, identityP
 };
 
 const findAnotherUserByEmail = async function (userId, email) {
-  const anotherUsers = await knex('users').whereNot('id', userId).where({ email: email.toLowerCase() });
+  const anotherUsers = await knex('users').whereNot('id', userId).whereRaw('LOWER("email") = ?', email.toLowerCase());
 
   return anotherUsers.map((anotherUser) => new User(anotherUser));
 };
