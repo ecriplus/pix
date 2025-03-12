@@ -18,11 +18,11 @@ export default class Footer extends Component {
         {{#if this.currentDomain.isFranceDomain}}
           <img
             src="/images/logo/logo-de-la-republique-francaise.svg"
-            class="footer__logos__french-republic-logo"
+            class="footer__logos--french-republic-logo"
             alt="{{t 'common.french-republic'}}"
           />
         {{/if}}
-        <img src="/images/pix-logo.svg" class="footer__logos__pix-logo" alt={{t "common.pix"}} />
+        <img src="/images/pix-logo.svg" class="footer__logos--pix-logo" alt={{t "common.pix"}} />
         <div class="copyrights">
           <span>{{t "navigation.copyrights"}} {{this.currentYear}} {{t "navigation.pix"}}</span>
         </div>

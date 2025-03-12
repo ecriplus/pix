@@ -24,14 +24,12 @@
   gap: 1em;
   align-items: center;
 
-  img {
-    &__french-republic-logo {
-      height: 3.375rem;
-    }
+  &--french-republic-logo {
+    height: 3.375rem;
+  }
 
-    &__pix-logo {
-      height: 3rem;
-    }
+  &--pix-logo {
+    height: 3rem;
   }
 
   .copyrights {
