@@ -1,34 +1,34 @@
 import { getCertificationAttestation } from '../../../../../../src/certification/results/domain/usecases/get-certification-attestation.js';
-import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
+import { UnauthorizedError } from '../../../../../../src/shared/application/http-errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | get-certification-attestation', function () {
-  let certificateRepository;
+  let certificateRepository, certificationCourseRepository;
 
   beforeEach(function () {
     certificateRepository = { getCertificationAttestation: sinon.stub() };
+    certificationCourseRepository = { get: sinon.stub() };
   });
 
   context('when the user is not owner of the certification attestation', function () {
-    it('should throw an error if user is not the owner of the certificationAttestation', async function () {
+    it('should throw an error', async function () {
       // given
-      const certificationAttestation = domainBuilder.buildCertificationAttestation({
+      const certificationCourse = domainBuilder.buildCertificationCourse({
         id: 123,
-        userId: 456,
+        userId: 567,
       });
-      certificateRepository.getCertificationAttestation
-        .withArgs({ certificationCourseId: 123 })
-        .resolves(certificationAttestation);
+      certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
 
       // when
       const error = await catchErr(getCertificationAttestation)({
         certificationCourseId: 123,
         userId: 789,
         certificateRepository,
+        certificationCourseRepository,
       });
 
       // then
-      expect(error).to.be.instanceOf(NotFoundError);
+      expect(error).to.be.instanceOf(UnauthorizedError);
     });
   });
 
@@ -41,6 +41,11 @@ describe('Unit | UseCase | get-certification-attestation', function () {
         userId: 456,
         resultCompetenceTree,
       });
+      const certificationCourse = domainBuilder.buildCertificationCourse({
+        id: 123,
+        userId: 456,
+      });
+      certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
       certificateRepository.getCertificationAttestation
         .withArgs({ certificationCourseId: 123 })
         .resolves(certificationAttestation);
@@ -50,6 +55,7 @@ describe('Unit | UseCase | get-certification-attestation', function () {
         certificationCourseId: 123,
         userId: 456,
         certificateRepository,
+        certificationCourseRepository,
       });
 
       // then
