@@ -1,9 +1,9 @@
-import { config } from '../../../src/shared/config.js';
+import { config } from '../../../shared/config.js';
 import {
   ApplicationScopeNotAllowedError,
   ApplicationWithInvalidClientIdError,
   ApplicationWithInvalidClientSecretError,
-} from '../../../src/shared/domain/errors.js';
+} from '../../../shared/domain/errors.js';
 
 const { authentication } = config;
 

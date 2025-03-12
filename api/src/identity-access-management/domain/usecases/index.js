@@ -29,6 +29,7 @@ import * as membershipRepository from '../../../team/infrastructure/repositories
 import { accountRecoveryDemandRepository } from '../../infrastructure/repositories/account-recovery-demand.repository.js';
 import * as authenticationMethodRepository from '../../infrastructure/repositories/authentication-method.repository.js';
 import * as certificationPointOfContactRepository from '../../infrastructure/repositories/certification-point-of-contact.repository.js';
+import { clientApplicationRepository } from '../../infrastructure/repositories/client-application.repository.js';
 import { emailValidationDemandRepository } from '../../infrastructure/repositories/email-validation-demand.repository.js';
 import { eventLoggingJobRepository } from '../../infrastructure/repositories/jobs/event-logging-job.repository.js';
 import { garAnonymizedBatchEventsLoggingJobRepository } from '../../infrastructure/repositories/jobs/gar-anonymized-batch-events-logging-job-repository.js';
@@ -64,6 +65,7 @@ const repositories = {
   certificationCenterMembershipRepository,
   certificationPointOfContactRepository,
   emailValidationDemandRepository,
+  clientApplicationRepository,
   emailRepository,
   eventLoggingJobRepository,
   lastUserApplicationConnectionsRepository,

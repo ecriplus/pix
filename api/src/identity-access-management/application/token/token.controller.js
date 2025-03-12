@@ -81,4 +81,21 @@ const revokeToken = async function (request, h) {
   return h.response().code(204);
 };
 
-export const tokenController = { authenticateAnonymousUser, createToken, revokeToken };
+const authenticateApplication = async function (request, h) {
+  const { client_id: clientId, client_secret: clientSecret, scope } = request.payload;
+
+  const accessToken = await usecases.authenticateApplication({ clientId, clientSecret, scope });
+
+  return h
+    .response({
+      token_type: 'bearer',
+      access_token: accessToken,
+      client_id: clientId,
+    })
+    .code(200)
+    .header('Content-Type', 'application/json;charset=UTF-8')
+    .header('Cache-Control', 'no-store')
+    .header('Pragma', 'no-cache');
+};
+
+export const tokenController = { authenticateAnonymousUser, createToken, revokeToken, authenticateApplication };

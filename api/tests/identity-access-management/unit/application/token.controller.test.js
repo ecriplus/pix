@@ -189,4 +189,52 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
       expect(response).to.be.null;
     });
   });
+
+  describe('#authenticateApplication', function () {
+    it('returns an OAuth 2 token response', async function () {
+      // given
+      const access_token = 'jwt.access.token';
+      const client_id = Symbol('clientId');
+      const client_secret = Symbol('clientSecret');
+      const scope = Symbol('scope');
+
+      const request = {
+        headers: {
+          'content-type': 'application/x-www-form-urlencoded',
+        },
+        payload: {
+          grant_type: 'password',
+          client_id,
+          client_secret,
+          scope,
+        },
+      };
+      const tokenServiceStub = { extractUserId: sinon.stub() };
+      tokenServiceStub.extractUserId.returns(client_id);
+
+      const dependencies = { tokenService: tokenServiceStub };
+
+      sinon
+        .stub(usecases, 'authenticateApplication')
+        .withArgs({ clientId: client_id, clientSecret: client_secret, scope })
+        .resolves(access_token);
+
+      // when
+      const response = await tokenController.authenticateApplication(request, hFake, dependencies);
+
+      // then
+      const expectedResponseSource = {
+        token_type: 'bearer',
+        access_token,
+        client_id,
+      };
+      expect(response.source).to.deep.equal(expectedResponseSource);
+      expect(response.statusCode).to.equal(200);
+      expect(response.headers).to.deep.equal({
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Cache-Control': 'no-store',
+        Pragma: 'no-cache',
+      });
+    });
+  });
 });
