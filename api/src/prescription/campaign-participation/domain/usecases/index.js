@@ -17,7 +17,7 @@ import * as areaRepository from '../../../../shared/infrastructure/repositories/
 import * as assessmentRepository from '../../../../shared/infrastructure/repositories/assessment-repository.js';
 import * as badgeForCalculationRepository from '../../../../shared/infrastructure/repositories/badge-for-calculation-repository.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
-import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
+import { repositories as injectedSharedRepositories } from '../../../../shared/infrastructure/repositories/index.js';
 import * as organizationLearnerRepository from '../../../../shared/infrastructure/repositories/organization-learner-repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
@@ -105,7 +105,7 @@ const dependencies = {
   compareStagesAndAcquiredStages,
   competenceEvaluationRepository,
   competenceRepository,
-  knowledgeElementRepository,
+  knowledgeElementRepository: injectedSharedRepositories.knowledgeElementRepository,
   learningContentRepository,
   organizationLearnerRepository,
   organizationRepository,

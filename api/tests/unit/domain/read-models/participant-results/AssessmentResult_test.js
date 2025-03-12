@@ -8,74 +8,175 @@ import { AssessmentResult } from '../../../../../src/shared/domain/read-models/p
 import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', function () {
-  it('computes the number of skills, the number of skill tested and the number of skill validated', function () {
-    const competences = [
-      {
-        competence: domainBuilder.buildCompetence({
-          id: 'rec1',
-          name: 'C1',
-          index: '1.1',
-        }),
-        area: domainBuilder.buildArea({
-          name: 'Domaine1',
-          color: 'Couleur1',
-        }),
-        targetedSkillIds: ['skill1', 'skill2'],
-      },
-      {
-        competence: domainBuilder.buildCompetence({
-          id: 'rec2',
-          name: 'C2',
-          index: '2.1',
-        }),
-        area: domainBuilder.buildArea({
-          name: 'Domaine2',
-          color: 'Couleur2',
-        }),
-        targetedSkillIds: ['skill3', 'skill4'],
-      },
-    ];
+  describe('#constructor', function () {
+    it('computes the number of skills, the number of skill tested and the number of skill validated', function () {
+      const competences = [
+        {
+          competence: domainBuilder.buildCompetence({
+            id: 'rec1',
+            name: 'C1',
+            index: '1.1',
+          }),
+          area: domainBuilder.buildArea({
+            name: 'Domaine1',
+            color: 'Couleur1',
+          }),
+          targetedSkillIds: ['skill1', 'skill2'],
+        },
+        {
+          competence: domainBuilder.buildCompetence({
+            id: 'rec2',
+            name: 'C2',
+            index: '2.1',
+          }),
+          area: domainBuilder.buildArea({
+            name: 'Domaine2',
+            color: 'Couleur2',
+          }),
+          targetedSkillIds: ['skill3', 'skill4'],
+        },
+      ];
 
-    const knowledgeElements = [
-      domainBuilder.buildKnowledgeElement({ skillId: 'skill1', status: KnowledgeElement.StatusType.VALIDATED }),
-      domainBuilder.buildKnowledgeElement({ skillId: 'skill2', status: KnowledgeElement.StatusType.INVALIDATED }),
-      domainBuilder.buildKnowledgeElement({ skillId: 'skill4', status: KnowledgeElement.StatusType.VALIDATED }),
-    ];
-    const participationResults = {
-      campaignParticipationId: 12,
-      isCompleted: true,
-      knowledgeElements,
-      acquiredBadgeIds: [],
-      sharedAt: new Date(),
-      status: CampaignParticipationStatuses.SHARED,
-      participantExternalId: 'greg@lafleche.fr',
-    };
+      const knowledgeElements = [
+        domainBuilder.buildKnowledgeElement({ skillId: 'skill1', status: KnowledgeElement.StatusType.VALIDATED }),
+        domainBuilder.buildKnowledgeElement({ skillId: 'skill2', status: KnowledgeElement.StatusType.INVALIDATED }),
+        domainBuilder.buildKnowledgeElement({ skillId: 'skill4', status: KnowledgeElement.StatusType.VALIDATED }),
+      ];
+      const participationResults = {
+        campaignParticipationId: 12,
+        isCompleted: true,
+        knowledgeElements,
+        acquiredBadgeIds: [],
+        sharedAt: new Date(),
+        status: CampaignParticipationStatuses.SHARED,
+        participantExternalId: 'greg@lafleche.fr',
+      };
 
-    const assessmentResult = new AssessmentResult({
-      participationResults,
-      competences,
-      stages: [],
-      badgeResultsDTO: [],
-      isCampaignMultipleSendings: false,
-      isOrganizationLearnerActive: false,
-      isCampaignArchived: false,
+      const assessmentResult = new AssessmentResult({
+        participationResults,
+        competences,
+        stages: [],
+        badgeResultsDTO: [],
+        isCampaignMultipleSendings: false,
+        isOrganizationLearnerActive: false,
+        isCampaignArchived: false,
+      });
+
+      expect(assessmentResult).to.deep.include({
+        id: 12,
+        totalSkillsCount: 4,
+        testedSkillsCount: 3,
+        validatedSkillsCount: 2,
+        isCompleted: true,
+        isShared: true,
+        participantExternalId: 'greg@lafleche.fr',
+      });
     });
 
-    expect(assessmentResult).to.deep.include({
-      id: 12,
-      totalSkillsCount: 4,
-      testedSkillsCount: 3,
-      validatedSkillsCount: 2,
-      isCompleted: true,
-      isShared: true,
-      participantExternalId: 'greg@lafleche.fr',
-    });
-  });
+    describe('masteryPercentage computation', function () {
+      context('when the participation is not shared', function () {
+        context('when there are assessed competences', function () {
+          it('computes the mastery rate using knowledge elements', function () {
+            const competences = [
+              {
+                competence: domainBuilder.buildCompetence({
+                  id: 'rec1',
+                  name: 'C1',
+                  index: '1.1',
+                }),
+                area: domainBuilder.buildArea({
+                  name: 'Domaine1',
+                  color: 'Couleur1',
+                }),
+                targetedSkillIds: ['skill1', 'skill2', 'skill3'],
+              },
+              {
+                competence: domainBuilder.buildCompetence({
+                  id: 'rec2',
+                  name: 'C2',
+                  index: '2.1',
+                }),
+                area: domainBuilder.buildArea({
+                  name: 'Domaine2',
+                  color: 'Couleur2',
+                }),
+                targetedSkillIds: ['skill4', 'skill5', 'skill6'],
+              },
+            ];
 
-  describe('masteryPercentage computation', function () {
-    context('when the participation is not shared', function () {
-      context('when there are assessed competences', function () {
-        it('computes the mastery rate using knowledge elements', function () {
+            const knowledgeElements = [
+              domainBuilder.buildKnowledgeElement({ skillId: 'skill1', status: KnowledgeElement.StatusType.VALIDATED }),
+              domainBuilder.buildKnowledgeElement({
+                skillId: 'skill2',
+                status: KnowledgeElement.StatusType.INVALIDATED,
+              }),
+              domainBuilder.buildKnowledgeElement({ skillId: 'skill3', status: KnowledgeElement.StatusType.VALIDATED }),
+              domainBuilder.buildKnowledgeElement({ skillId: 'skill4', status: KnowledgeElement.StatusType.VALIDATED }),
+              domainBuilder.buildKnowledgeElement({ skillId: 'skill5', status: KnowledgeElement.StatusType.VALIDATED }),
+            ];
+            const participationResults = {
+              campaignParticipationId: 12,
+              isCompleted: true,
+              knowledgeElements,
+              acquiredBadgeIds: [],
+              sharedAt: null,
+              status: CampaignParticipationStatuses.TO_SHARE,
+            };
+
+            const assessmentResult = new AssessmentResult({
+              participationResults,
+              competences,
+              stages: [],
+              badgeResultsDTO: [],
+              isCampaignMultipleSendings: false,
+              isOrganizationLearnerActive: false,
+              isCampaignArchived: false,
+            });
+
+            expect(assessmentResult.masteryRate).to.equal(0.67);
+          });
+        });
+
+        context('when there is no assessed competences', function () {
+          it('returns 0', function () {
+            const competences = [];
+
+            const knowledgeElements = [
+              domainBuilder.buildKnowledgeElement({ skillId: 'skill1', status: KnowledgeElement.StatusType.VALIDATED }),
+              domainBuilder.buildKnowledgeElement({
+                skillId: 'skill2',
+                status: KnowledgeElement.StatusType.INVALIDATED,
+              }),
+              domainBuilder.buildKnowledgeElement({ skillId: 'skill3', status: KnowledgeElement.StatusType.VALIDATED }),
+              domainBuilder.buildKnowledgeElement({ skillId: 'skill4', status: KnowledgeElement.StatusType.VALIDATED }),
+              domainBuilder.buildKnowledgeElement({ skillId: 'skill5', status: KnowledgeElement.StatusType.VALIDATED }),
+            ];
+            const participationResults = {
+              campaignParticipationId: 12,
+              isCompleted: true,
+              knowledgeElements,
+              acquiredBadgeIds: [],
+              sharedAt: null,
+              status: CampaignParticipationStatuses.TO_SHARE,
+            };
+
+            const assessmentResult = new AssessmentResult({
+              participationResults,
+              competences,
+              stages: [],
+              badgeResultsDTO: [],
+              isCampaignMultipleSendings: false,
+              isOrganizationLearnerActive: false,
+              isCampaignArchived: false,
+            });
+
+            expect(assessmentResult.masteryRate).to.equal(0);
+          });
+        });
+      });
+
+      context('when the participation is shared', function () {
+        it('return the mastery rate of the participation', function () {
           const competences = [
             {
               competence: domainBuilder.buildCompetence({
@@ -87,36 +188,18 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
                 name: 'Domaine1',
                 color: 'Couleur1',
               }),
-              targetedSkillIds: ['skill1', 'skill2', 'skill3'],
-            },
-            {
-              competence: domainBuilder.buildCompetence({
-                id: 'rec2',
-                name: 'C2',
-                index: '2.1',
-              }),
-              area: domainBuilder.buildArea({
-                name: 'Domaine2',
-                color: 'Couleur2',
-              }),
-              targetedSkillIds: ['skill4', 'skill5', 'skill6'],
+              targetedSkillIds: ['skill1', 'skill2', 'skill2'],
             },
           ];
 
-          const knowledgeElements = [
-            domainBuilder.buildKnowledgeElement({ skillId: 'skill1', status: KnowledgeElement.StatusType.VALIDATED }),
-            domainBuilder.buildKnowledgeElement({ skillId: 'skill2', status: KnowledgeElement.StatusType.INVALIDATED }),
-            domainBuilder.buildKnowledgeElement({ skillId: 'skill3', status: KnowledgeElement.StatusType.VALIDATED }),
-            domainBuilder.buildKnowledgeElement({ skillId: 'skill4', status: KnowledgeElement.StatusType.VALIDATED }),
-            domainBuilder.buildKnowledgeElement({ skillId: 'skill5', status: KnowledgeElement.StatusType.VALIDATED }),
-          ];
           const participationResults = {
             campaignParticipationId: 12,
             isCompleted: true,
-            knowledgeElements,
+            knowledgeElements: [],
             acquiredBadgeIds: [],
-            sharedAt: null,
-            status: CampaignParticipationStatuses.TO_SHARE,
+            sharedAt: new Date('2021-09-25'),
+            status: CampaignParticipationStatuses.SHARED,
+            masteryRate: 0.5,
           };
 
           const assessmentResult = new AssessmentResult({
@@ -128,142 +211,12 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
             isOrganizationLearnerActive: false,
             isCampaignArchived: false,
           });
-
-          expect(assessmentResult.masteryRate).to.equal(0.67);
-        });
-      });
-
-      context('when there is no assessed competences', function () {
-        it('returns 0', function () {
-          const competences = [];
-
-          const knowledgeElements = [
-            domainBuilder.buildKnowledgeElement({ skillId: 'skill1', status: KnowledgeElement.StatusType.VALIDATED }),
-            domainBuilder.buildKnowledgeElement({ skillId: 'skill2', status: KnowledgeElement.StatusType.INVALIDATED }),
-            domainBuilder.buildKnowledgeElement({ skillId: 'skill3', status: KnowledgeElement.StatusType.VALIDATED }),
-            domainBuilder.buildKnowledgeElement({ skillId: 'skill4', status: KnowledgeElement.StatusType.VALIDATED }),
-            domainBuilder.buildKnowledgeElement({ skillId: 'skill5', status: KnowledgeElement.StatusType.VALIDATED }),
-          ];
-          const participationResults = {
-            campaignParticipationId: 12,
-            isCompleted: true,
-            knowledgeElements,
-            acquiredBadgeIds: [],
-            sharedAt: null,
-            status: CampaignParticipationStatuses.TO_SHARE,
-          };
-
-          const assessmentResult = new AssessmentResult({
-            participationResults,
-            competences,
-            stages: [],
-            badgeResultsDTO: [],
-            isCampaignMultipleSendings: false,
-            isOrganizationLearnerActive: false,
-            isCampaignArchived: false,
-          });
-
-          expect(assessmentResult.masteryRate).to.equal(0);
+          expect(assessmentResult.masteryRate).to.equal(0.5);
         });
       });
     });
 
-    context('when the participation is shared', function () {
-      it('return the mastery rate of the participation', function () {
-        const competences = [
-          {
-            competence: domainBuilder.buildCompetence({
-              id: 'rec1',
-              name: 'C1',
-              index: '1.1',
-            }),
-            area: domainBuilder.buildArea({
-              name: 'Domaine1',
-              color: 'Couleur1',
-            }),
-            targetedSkillIds: ['skill1', 'skill2', 'skill2'],
-          },
-        ];
-
-        const participationResults = {
-          campaignParticipationId: 12,
-          isCompleted: true,
-          knowledgeElements: [],
-          acquiredBadgeIds: [],
-          sharedAt: new Date('2021-09-25'),
-          status: CampaignParticipationStatuses.SHARED,
-          masteryRate: 0.5,
-        };
-
-        const assessmentResult = new AssessmentResult({
-          participationResults,
-          competences,
-          stages: [],
-          badgeResultsDTO: [],
-          isCampaignMultipleSendings: false,
-          isOrganizationLearnerActive: false,
-          isCampaignArchived: false,
-        });
-        expect(assessmentResult.masteryRate).to.equal(0.5);
-      });
-    });
-  });
-
-  it('computes the result by competences', function () {
-    const competences = [
-      {
-        competence: domainBuilder.buildCompetence({
-          id: 'rec1',
-          name: 'C1',
-          index: '1.1',
-        }),
-        area: domainBuilder.buildArea({
-          name: 'Domaine1',
-          color: 'Couleur1',
-        }),
-        targetedSkillIds: ['skill1', 'skill2', 'skill3'],
-      },
-      {
-        competence: domainBuilder.buildCompetence({
-          id: 'rec2',
-          name: 'C2',
-          index: '2.1',
-        }),
-        area: domainBuilder.buildArea({
-          name: 'Domaine2',
-          color: 'Couleur2',
-        }),
-        targetedSkillIds: ['skill4'],
-      },
-    ];
-
-    const knowledgeElements = [
-      domainBuilder.buildKnowledgeElement({ skillId: 'skill1', status: KnowledgeElement.StatusType.VALIDATED }),
-      domainBuilder.buildKnowledgeElement({ skillId: 'skill2', status: KnowledgeElement.StatusType.INVALIDATED }),
-      domainBuilder.buildKnowledgeElement({ skillId: 'skill4', status: KnowledgeElement.StatusType.VALIDATED }),
-    ];
-
-    const participationResults = { knowledgeElements, acquiredBadgeIds: [] };
-
-    const assessmentResult = new AssessmentResult({
-      participationResults,
-      competences,
-      stages: [],
-      badgeResultsDTO: [],
-      isCampaignMultipleSendings: false,
-      isOrganizationLearnerActive: false,
-      isCampaignArchived: false,
-    });
-
-    const competenceResults1 = assessmentResult.competenceResults.find(({ id }) => competences[0].competence.id === id);
-    const competenceResults2 = assessmentResult.competenceResults.find(({ id }) => competences[1].competence.id === id);
-
-    expect(competenceResults1).to.deep.include({ name: 'C1', masteryPercentage: 33 });
-    expect(competenceResults2).to.deep.include({ name: 'C2', masteryPercentage: 100 });
-  });
-
-  describe('when the target profile has stages', function () {
-    it('gives the competence reached stage', function () {
+    it('computes the result by competences', function () {
       const competences = [
         {
           competence: domainBuilder.buildCompetence({
@@ -281,124 +234,183 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
           competence: domainBuilder.buildCompetence({
             id: 'rec2',
             name: 'C2',
-            index: '1.2',
+            index: '2.1',
           }),
           area: domainBuilder.buildArea({
             name: 'Domaine2',
-            color: 'Couleur3',
+            color: 'Couleur2',
           }),
-          targetedSkillIds: ['skill4', 'skill5', 'skill6'],
+          targetedSkillIds: ['skill4'],
         },
       ];
 
       const knowledgeElements = [
         domainBuilder.buildKnowledgeElement({ skillId: 'skill1', status: KnowledgeElement.StatusType.VALIDATED }),
         domainBuilder.buildKnowledgeElement({ skillId: 'skill2', status: KnowledgeElement.StatusType.INVALIDATED }),
-        domainBuilder.buildKnowledgeElement({ skillId: 'skill3', status: KnowledgeElement.StatusType.VALIDATED }),
         domainBuilder.buildKnowledgeElement({ skillId: 'skill4', status: KnowledgeElement.StatusType.VALIDATED }),
-        domainBuilder.buildKnowledgeElement({ skillId: 'skill5', status: KnowledgeElement.StatusType.VALIDATED }),
-        domainBuilder.buildKnowledgeElement({ skillId: 'skill6', status: KnowledgeElement.StatusType.VALIDATED }),
       ];
-      const participationResults = { knowledgeElements, acquiredBadgeIds: [], masteryRate: '0.80' };
 
-      const stages = [
-        {
-          id: 1,
-          title: 'Stage0',
-          message: 'message0',
-          threshold: 0,
-          prescriberDescription: 'yolo',
-          prescriberTitle: 'coucou',
-        },
-        {
-          id: 2,
-          title: 'Stage1',
-          message: 'message1',
-          threshold: 35,
-          prescriberDescription: 'yolo',
-          prescriberTitle: 'coucou',
-        },
-        {
-          id: 3,
-          title: 'Stage2',
-          message: 'message2',
-          threshold: 60,
-          prescriberDescription: 'yolo',
-          prescriberTitle: 'coucou',
-        },
-        {
-          id: 4,
-          title: 'Stage3',
-          message: 'message3',
-          threshold: 90,
-          prescriberDescription: 'yolo',
-          prescriberTitle: 'coucou',
-        },
-      ];
+      const participationResults = { knowledgeElements, acquiredBadgeIds: [] };
 
       const assessmentResult = new AssessmentResult({
         participationResults,
-        stages,
-        badgeResultsDTO: [],
         competences,
-        isCampaignMultipleSendings: false,
-        isOrganizationLearnerActive: false,
-      });
-
-      expect(assessmentResult.competenceResults[0].reachedStage).to.equal(3);
-      expect(assessmentResult.competenceResults[1].reachedStage).to.equal(4);
-    });
-  });
-
-  describe('when the target profile has badges', function () {
-    it('computes results for each badge', function () {
-      const competences = [
-        {
-          competence: domainBuilder.buildCompetence({
-            id: 'rec1',
-            name: 'C1',
-            index: '1.1',
-          }),
-          area: domainBuilder.buildArea({
-            name: 'Domaine1',
-            color: 'Couleur1',
-          }),
-          targetedSkillIds: ['skill1', 'skill2', 'skill3'],
-        },
-      ];
-      const participationResults = { knowledgeElements: [], acquiredBadgeIds: [1] };
-
-      const badgeResultsDTO = [
-        {
-          id: 2,
-          title: 'Badge Blue',
-          message: 'Badge Blue Message',
-          altMessage: 'Badge Blue Alt Message',
-          key: 'Blue',
-          imageUrl: 'blue.svg',
-        },
-        {
-          id: 1,
-          title: 'Badge Yellow',
-          message: 'Yellow Message',
-          altMessage: 'Yellow Alt Message',
-          key: 'YELLOW',
-          imageUrl: 'yellow.svg',
-        },
-      ];
-
-      const assessmentResult = new AssessmentResult({
-        participationResults,
         stages: [],
-        badgeResultsDTO,
-        competences,
+        badgeResultsDTO: [],
         isCampaignMultipleSendings: false,
         isOrganizationLearnerActive: false,
+        isCampaignArchived: false,
       });
-      const badgeResult1 = assessmentResult.badgeResults.find(({ id }) => id === 1);
-      const badgeResult2 = assessmentResult.badgeResults.find(({ id }) => id === 2);
-      expect(badgeResult1).to.deep.include({ title: 'Badge Yellow', isAcquired: true });
-      expect(badgeResult2).to.deep.include({ title: 'Badge Blue', isAcquired: false });
+
+      const competenceResults1 = assessmentResult.competenceResults.find(
+        ({ id }) => competences[0].competence.id === id,
+      );
+      const competenceResults2 = assessmentResult.competenceResults.find(
+        ({ id }) => competences[1].competence.id === id,
+      );
+
+      expect(competenceResults1).to.deep.include({ name: 'C1', masteryPercentage: 33 });
+      expect(competenceResults2).to.deep.include({ name: 'C2', masteryPercentage: 100 });
+    });
+
+    describe('when the target profile has stages', function () {
+      it('gives the competence reached stage', function () {
+        const competences = [
+          {
+            competence: domainBuilder.buildCompetence({
+              id: 'rec1',
+              name: 'C1',
+              index: '1.1',
+            }),
+            area: domainBuilder.buildArea({
+              name: 'Domaine1',
+              color: 'Couleur1',
+            }),
+            targetedSkillIds: ['skill1', 'skill2', 'skill3'],
+          },
+          {
+            competence: domainBuilder.buildCompetence({
+              id: 'rec2',
+              name: 'C2',
+              index: '1.2',
+            }),
+            area: domainBuilder.buildArea({
+              name: 'Domaine2',
+              color: 'Couleur3',
+            }),
+            targetedSkillIds: ['skill4', 'skill5', 'skill6'],
+          },
+        ];
+
+        const knowledgeElements = [
+          domainBuilder.buildKnowledgeElement({ skillId: 'skill1', status: KnowledgeElement.StatusType.VALIDATED }),
+          domainBuilder.buildKnowledgeElement({ skillId: 'skill2', status: KnowledgeElement.StatusType.INVALIDATED }),
+          domainBuilder.buildKnowledgeElement({ skillId: 'skill3', status: KnowledgeElement.StatusType.VALIDATED }),
+          domainBuilder.buildKnowledgeElement({ skillId: 'skill4', status: KnowledgeElement.StatusType.VALIDATED }),
+          domainBuilder.buildKnowledgeElement({ skillId: 'skill5', status: KnowledgeElement.StatusType.VALIDATED }),
+          domainBuilder.buildKnowledgeElement({ skillId: 'skill6', status: KnowledgeElement.StatusType.VALIDATED }),
+        ];
+        const participationResults = { knowledgeElements, acquiredBadgeIds: [], masteryRate: '0.80' };
+
+        const stages = [
+          {
+            id: 1,
+            title: 'Stage0',
+            message: 'message0',
+            threshold: 0,
+            prescriberDescription: 'yolo',
+            prescriberTitle: 'coucou',
+          },
+          {
+            id: 2,
+            title: 'Stage1',
+            message: 'message1',
+            threshold: 35,
+            prescriberDescription: 'yolo',
+            prescriberTitle: 'coucou',
+          },
+          {
+            id: 3,
+            title: 'Stage2',
+            message: 'message2',
+            threshold: 60,
+            prescriberDescription: 'yolo',
+            prescriberTitle: 'coucou',
+          },
+          {
+            id: 4,
+            title: 'Stage3',
+            message: 'message3',
+            threshold: 90,
+            prescriberDescription: 'yolo',
+            prescriberTitle: 'coucou',
+          },
+        ];
+
+        const assessmentResult = new AssessmentResult({
+          participationResults,
+          stages,
+          badgeResultsDTO: [],
+          competences,
+          isCampaignMultipleSendings: false,
+          isOrganizationLearnerActive: false,
+        });
+
+        expect(assessmentResult.competenceResults[0].reachedStage).to.equal(3);
+        expect(assessmentResult.competenceResults[1].reachedStage).to.equal(4);
+      });
+    });
+
+    describe('when the target profile has badges', function () {
+      it('computes results for each badge', function () {
+        const competences = [
+          {
+            competence: domainBuilder.buildCompetence({
+              id: 'rec1',
+              name: 'C1',
+              index: '1.1',
+            }),
+            area: domainBuilder.buildArea({
+              name: 'Domaine1',
+              color: 'Couleur1',
+            }),
+            targetedSkillIds: ['skill1', 'skill2', 'skill3'],
+          },
+        ];
+        const participationResults = { knowledgeElements: [], acquiredBadgeIds: [1] };
+
+        const badgeResultsDTO = [
+          {
+            id: 2,
+            title: 'Badge Blue',
+            message: 'Badge Blue Message',
+            altMessage: 'Badge Blue Alt Message',
+            key: 'Blue',
+            imageUrl: 'blue.svg',
+          },
+          {
+            id: 1,
+            title: 'Badge Yellow',
+            message: 'Yellow Message',
+            altMessage: 'Yellow Alt Message',
+            key: 'YELLOW',
+            imageUrl: 'yellow.svg',
+          },
+        ];
+
+        const assessmentResult = new AssessmentResult({
+          participationResults,
+          stages: [],
+          badgeResultsDTO,
+          competences,
+          isCampaignMultipleSendings: false,
+          isOrganizationLearnerActive: false,
+        });
+        const badgeResult1 = assessmentResult.badgeResults.find(({ id }) => id === 1);
+        const badgeResult2 = assessmentResult.badgeResults.find(({ id }) => id === 2);
+        expect(badgeResult1).to.deep.include({ title: 'Badge Yellow', isAcquired: true });
+        expect(badgeResult2).to.deep.include({ title: 'Badge Blue', isAcquired: false });
+      });
     });
   });
 

@@ -12,7 +12,7 @@ import * as answerRepository from '../../../../shared/infrastructure/repositorie
 import * as areaRepository from '../../../../shared/infrastructure/repositories/area-repository.js';
 import * as challengeRepository from '../../../../shared/infrastructure/repositories/challenge-repository.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
-import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
+import { repositories as sharedInjectedRepositories } from '../../../../shared/infrastructure/repositories/index.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 import * as campaignRepository from '../../../campaign/infrastructure/repositories/campaign-repository.js';
 
@@ -20,6 +20,7 @@ import * as campaignRepository from '../../../campaign/infrastructure/repositori
  *
  * @param {number} userId
  * @param {number} campaignId
+ * @param {number} campaignParticipationId
  * @param {[Badge]} badges
  * @param {{
  *  totalStage: number,
@@ -32,7 +33,7 @@ import * as campaignRepository from '../../../campaign/infrastructure/repositori
  *
  * @returns {Promise<AssessmentResult>}
  */
-const getByUserIdAndCampaignId = async function ({ userId, campaignId, badges, reachedStage, stages, locale }) {
+const get = async function ({ userId, campaignId, badges, reachedStage, stages, locale }) {
   const participationResults = await _getParticipationResults(userId, campaignId, locale);
   let flashScoringResults;
   if (participationResults.isFlash) {
@@ -88,7 +89,7 @@ async function _getParticipationResults(userId, campaignId) {
     isDeleted,
   } = await _getParticipationAttributes(userId, campaignId);
 
-  const knowledgeElements = await _findTargetedKnowledgeElements(campaignId, userId, sharedAt);
+  const knowledgeElements = await _findTargetedKnowledgeElements(campaignId, userId, campaignParticipationId, sharedAt);
 
   const acquiredBadgeIds = await _getAcquiredBadgeIds(userId, campaignParticipationId);
 
@@ -199,9 +200,14 @@ async function _getParticipationAttributes(userId, campaignId) {
   };
 }
 
-async function _findTargetedKnowledgeElements(campaignId, userId, sharedAt) {
+async function _findTargetedKnowledgeElements(campaignId, userId, campaignParticipationId, sharedAt) {
   const skillIds = await campaignRepository.findSkillIds({ campaignId });
-  const knowledgeElements = await knowledgeElementRepository.findUniqByUserId({ userId, limitDate: sharedAt });
+  const knowledgeElements =
+    await sharedInjectedRepositories.knowledgeElementRepository.findUniqByUserIdForCampaignParticipation({
+      userId,
+      campaignParticipationId,
+      limitDate: sharedAt,
+    });
   return knowledgeElements.filter(({ skillId }) => skillIds.includes(skillId));
 }
 
@@ -277,4 +283,4 @@ async function getCampaignParticipationStatus({ userId, campaignId }) {
   return participationStatus.status;
 }
 
-export { getByUserIdAndCampaignId, getCampaignParticipationStatus };
+export { get, getCampaignParticipationStatus };
