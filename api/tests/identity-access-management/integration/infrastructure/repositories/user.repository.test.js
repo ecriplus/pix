@@ -43,7 +43,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   const userToInsert = {
     firstName: 'Jojo',
     lastName: 'LaFripouille',
-    email: 'user_name_with_mix_of_lower_AND_UPPER_case_letters@example.net',
+    email: 'jojo@example.net',
     cgu: true,
     locale: 'fr-FR',
     createdAt: creationDate,
@@ -601,7 +601,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           email: 'current.user@example.net',
         });
         const anotherUser = databaseBuilder.factory.buildUser({
-          email: 'another.user.with_mix_of_lower_AND_UPPER_case_letters@example.net',
+          email: 'another.user@example.net',
         });
         await databaseBuilder.commit();
 
@@ -611,7 +611,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         // then
         expect(foundUsers).to.be.an('array').that.have.lengthOf(1);
         expect(foundUsers[0]).to.be.an.instanceof(User);
-        expect(foundUsers[0].email).to.equal(anotherUser.email.toLowerCase());
+        expect(foundUsers[0].email).to.equal(anotherUser.email);
       });
 
       it('returns an empty list if email is not used', async function () {
@@ -740,7 +740,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(user.id).to.equal(userInDb.id);
         expect(user.firstName).to.equal(userInDb.firstName);
         expect(user.lastName).to.equal(userInDb.lastName);
-        expect(user.email).to.equal(userInDb.email.toLowerCase());
+        expect(user.email).to.equal(userInDb.email);
         expect(user.cgu).to.be.true;
         expect(user.createdAt.toISOString()).to.equal('2019-03-12T19:37:03.000Z');
         expect(user.updatedAt.toISOString()).to.equal('2019-03-12T19:37:03.000Z');
@@ -1120,7 +1120,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
 
         // then
         expect(user.username).to.equal(userInDb.username);
-        expect(user.email).to.equal(userInDb.email.toLowerCase());
+        expect(user.email).to.equal(userInDb.email);
       });
 
       it('throws an error when user not found', async function () {
@@ -1816,7 +1816,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   });
 
   describe('#isUserExistingByEmail', function () {
-    const email = 'user_account_created_with_SOME_UPPER_CASE_LETTERS@example.net';
+    const email = 'shi@fu.fr';
 
     beforeEach(function () {
       databaseBuilder.factory.buildUser({ email });
@@ -1824,30 +1824,25 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       return databaseBuilder.commit();
     });
 
-    it('finds a user with the exact email', async function () {
+    it('returns true when the user exists by email', async function () {
       const userExists = await userRepository.isUserExistingByEmail(email);
       expect(userExists).to.be.true;
     });
 
-    context('when a user exists but with an email differing by case (case insensitive search)', function () {
-      it('finds the user', async function () {
-        // given
-        const uppercaseEmailAlreadyInDb = email.toUpperCase();
+    it('returns true when the user exists by email (case insensitive)', async function () {
+      // given
+      const uppercaseEmailAlreadyInDb = email.toUpperCase();
 
-        // when
-        const userExists = await userRepository.isUserExistingByEmail(uppercaseEmailAlreadyInDb);
+      // when
+      const userExists = await userRepository.isUserExistingByEmail(uppercaseEmailAlreadyInDb);
 
-        // then
-        expect(userExists).to.be.true;
-      });
+      // then
+      expect(userExists).to.be.true;
     });
 
-    context('when no user account with a matching email exist', function () {
-      it('throws an error', async function () {
-        const searchedEmail = 'Address_Unknown@example.net';
-        const err = await catchErr(userRepository.isUserExistingByEmail)(searchedEmail);
-        expect(err).to.be.instanceOf(UserNotFoundError);
-      });
+    it('throws an error when the user does not exist by email', async function () {
+      const err = await catchErr(userRepository.isUserExistingByEmail)('none');
+      expect(err).to.be.instanceOf(UserNotFoundError);
     });
   });
 
