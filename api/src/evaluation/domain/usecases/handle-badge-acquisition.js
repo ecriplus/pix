@@ -15,8 +15,9 @@ const handleBadgeAcquisition = async function ({
     if (_.isEmpty(associatedBadges)) {
       return;
     }
-    const knowledgeElements = await knowledgeElementRepository.findUniqByUserId({
+    const knowledgeElements = await knowledgeElementRepository.findUniqByUserIdForCampaignParticipation({
       userId: assessment.userId,
+      campaignParticipationId,
     });
 
     const obtainedBadgesByUser = associatedBadges.filter((badge) => badge.shouldBeObtained(knowledgeElements));

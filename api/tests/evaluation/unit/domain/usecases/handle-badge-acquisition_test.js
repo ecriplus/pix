@@ -7,7 +7,7 @@ describe('Unit | UseCase | handle-badge-acquisition', function () {
 
   beforeEach(function () {
     badgeForCalculationRepository = { findByCampaignParticipationId: sinon.stub() };
-    knowledgeElementRepository = { findUniqByUserId: sinon.stub() };
+    knowledgeElementRepository = { findUniqByUserIdForCampaignParticipation: sinon.stub() };
     badgeAcquisitionRepository = { createOrUpdate: sinon.stub() };
     args = {
       badgeForCalculationRepository,
@@ -20,7 +20,7 @@ describe('Unit | UseCase | handle-badge-acquisition', function () {
     it('should not attempt to create any badge acquisition', async function () {
       // given
       badgeForCalculationRepository.findByCampaignParticipationId.rejects('I should not be called');
-      knowledgeElementRepository.findUniqByUserId.rejects('I should not be called');
+      knowledgeElementRepository.findUniqByUserIdForCampaignParticipation.rejects('I should not be called');
       const assessmentCertification = domainBuilder.buildAssessment.ofTypeCertification();
       const assessmentCompetenceEvaluation = domainBuilder.buildAssessment.ofTypeCompetenceEvaluation();
 
@@ -46,7 +46,7 @@ describe('Unit | UseCase | handle-badge-acquisition', function () {
       it('should not attempt to create any badge acquisition', async function () {
         // given
         badgeForCalculationRepository.findByCampaignParticipationId.withArgs({ campaignParticipationId }).resolves([]);
-        knowledgeElementRepository.findUniqByUserId.rejects('I should not be called');
+        knowledgeElementRepository.findUniqByUserIdForCampaignParticipation.rejects('I should not be called');
 
         // when
         await handleBadgeAcquisition(args);
@@ -70,8 +70,8 @@ describe('Unit | UseCase | handle-badge-acquisition', function () {
         badgeForCalculationRepository.findByCampaignParticipationId
           .withArgs({ campaignParticipationId })
           .resolves([badgeObtained1, badgeNotObtained2, badgeObtained3]);
-        knowledgeElementRepository.findUniqByUserId
-          .withArgs({ userId })
+        knowledgeElementRepository.findUniqByUserIdForCampaignParticipation
+          .withArgs({ userId, campaignParticipationId })
           .resolves([domainBuilder.buildKnowledgeElement()]);
 
         // when
