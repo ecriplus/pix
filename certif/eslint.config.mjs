@@ -50,6 +50,7 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.node,
+        server: true,
       },
       parser: babelParser,
       parserOptions: {

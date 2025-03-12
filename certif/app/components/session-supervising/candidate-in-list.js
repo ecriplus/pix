@@ -163,7 +163,7 @@ export default class CandidateInList extends Component {
       await adapter.dismissLiveAlert(this.args.sessionId, this.args.candidate.userId);
       this.isLiveAlertValidated = false;
       this.displayedModal = Modals.HandledLiveAlertSuccess;
-    } catch (error) {
+    } catch {
       const errorMessage = this.intl.t(
         'pages.session-supervising.candidate-in-list.handle-live-alert-modal.error-handling.miscellaneous',
       );
@@ -209,7 +209,7 @@ export default class CandidateInList extends Component {
           htmlSafe: true,
         }),
       });
-    } catch (error) {
+    } catch {
       this.pixToast.sendErrorNotification({
         message: this.intl.t(
           'pages.session-supervising.candidate-in-list.handle-live-alert-modal.error-handling.miscellaneous',
@@ -265,7 +265,7 @@ export default class CandidateInList extends Component {
           lastName: this.args.candidate.lastName,
         }),
       });
-    } catch (error) {
+    } catch {
       this.pixToast.sendErrorNotification({
         message: this.intl.t('pages.session-supervising.candidate-in-list.test-end-modal.error', {
           firstName: this.args.candidate.firstName,
