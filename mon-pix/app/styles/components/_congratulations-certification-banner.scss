@@ -20,23 +20,11 @@
   }
 }
 
-.congratulations-banner__icon {
-  position: absolute;
-  top: var(--pix-spacing-2x);
-  right: var(--pix-spacing-2x);
-  color: var(--pix-neutral-0);
-
-  &:hover,
-  &:active {
-    color: var(--pix-certif-500);
-  }
-}
-
 .congratulations-banner__message {
   margin: var(--pix-spacing-6x) 0;
   text-align: center;
 
-  @extend %pix-title-s;
+  @extend %pix-title-m;
 
   @include breakpoints.device-is('tablet') {
     margin: var(--pix-spacing-1x) 0 var(--pix-spacing-6x) 0;
@@ -97,10 +85,8 @@
 .congratulations-banner__links {
   display: flex;
   flex-direction: column;
+  gap: var(--pix-spacing-2x);
   align-items: center;
-  justify-content: space-around;
-  width: 80%;
-  margin-top: 24px;
 
   @include breakpoints.device-is('tablet') {
     flex-direction: row;
@@ -113,15 +99,12 @@
   gap: var(--pix-spacing-2x);
   align-items: center;
   justify-content: center;
-  width: 100%;
-  margin-bottom: 12px;
   padding: var(--pix-spacing-1x) var(--pix-spacing-4x);
-  font-weight: var(--pix-font-medium);
-  line-height: 2rem;
-  border: 1px solid var(--pix-neutral-20);
-  border-radius: 4px;
+  font-weight: var(--pix-font-bold);
+  border: 2px solid var(--pix-neutral-0);
+  border-radius: 50px;
 
-  @extend %pix-body-s;
+  @extend %pix-body-m;
 
   @include breakpoints.device-is('tablet') {
     width: 45%;
