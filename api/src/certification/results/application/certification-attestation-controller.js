@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 
+import { V3CertificationAttestation } from '../domain/models/V3CertificationAttestation.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as certificationAttestationPdf from '../infrastructure/utils/pdf/certification-attestation-pdf.js';
 
@@ -13,6 +14,10 @@ const getPDFAttestation = async function (request, h, dependencies = { certifica
     userId,
     certificationCourseId,
   });
+
+  if (attestation instanceof V3CertificationAttestation) {
+    return h.response().code(200);
+  }
 
   const { buffer, fileName } = await dependencies.certificationAttestationPdf.getCertificationAttestationsPdfBuffer({
     certificates: [attestation],
@@ -36,6 +41,11 @@ const getCertificationPDFAttestationsForSession = async function (
   const attestations = await usecases.getCertificationAttestationsForSession({
     sessionId,
   });
+
+  if (attestations.every((attestation) => attestation instanceof V3CertificationAttestation)) {
+    return h.response().code(200);
+  }
+
   const i18n = request.i18n;
 
   const { buffer } = await dependencies.certificationAttestationPdf.getCertificationAttestationsPdfBuffer({
@@ -64,6 +74,10 @@ const downloadCertificationAttestationsForDivision = async function (
     organizationId,
     division,
   });
+
+  if (attestations.every((attestation) => attestation instanceof V3CertificationAttestation)) {
+    return h.response().code(200);
+  }
 
   const { buffer } = await dependencies.certificationAttestationPdf.getCertificationAttestationsPdfBuffer({
     certificates: attestations,
