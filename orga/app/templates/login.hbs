@@ -1,7 +1,7 @@
 {{page-title (t "pages.login.title")}}
 <main class="login-page">
   <div>
-    <section class="login-page__container">
+    <PixBlock class="login-page__container">
       <header class="login-page__header">
         <img src="/pix-orga-color.svg" alt="Pix Orga" />
         <Ui::PageTitle @centerTitle={{true}}>
@@ -17,7 +17,7 @@
         @hasInvitationAlreadyBeenAccepted={{this.hasInvitationAlreadyBeenAccepted}}
         @isInvitationCancelled={{this.isInvitationCancelled}}
       />
-    </section>
+    </PixBlock>
 
     {{#if this.isInternationalDomain}}
       <LanguageSwitcher @selectedLanguage={{this.selectedLanguage}} @onLanguageChange={{this.onLanguageChange}} />

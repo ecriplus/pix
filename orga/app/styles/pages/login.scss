@@ -25,12 +25,9 @@
   &__container {
     margin-bottom: var(--pix-spacing-4x);
     padding: var(--pix-spacing-10x) 60px;
-    background-color: var(--pix-neutral-0);
-    border-radius: 10px;
 
     @include breakpoints.device-is('mobile') {
       padding: var(--pix-spacing-10x) var(--pix-spacing-4x);
-      border-radius: 0px;
     }
   }
 }
