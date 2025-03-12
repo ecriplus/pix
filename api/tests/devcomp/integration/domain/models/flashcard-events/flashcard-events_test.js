@@ -1,4 +1,7 @@
-import { FlashcardsStartedEvent } from '../../../../../../src/devcomp/domain/models/passage-events/flashcard-events.js';
+import {
+  FlashcardsRetriedEvent,
+  FlashcardsStartedEvent,
+} from '../../../../../../src/devcomp/domain/models/passage-events/flashcard-events.js';
 import { DomainError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
 
@@ -39,6 +42,52 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
         // then
         expect(error).to.be.instanceOf(DomainError);
         expect(error.message).to.equal('The elementId is required for a FlashcardsStartedEvent');
+      });
+    });
+  });
+
+  describe('#FlashcardsRetriedEvent', function () {
+    it('should init and keep attributes', function () {
+      // given
+      const id = Symbol('id');
+      const occurredAt = Symbol('date');
+      const createdAt = Symbol('date');
+      const passageId = Symbol('passage');
+      const elementId = Symbol('elementId');
+
+      // when
+      const flashcardsRetriedEvent = new FlashcardsRetriedEvent({
+        id,
+        occurredAt,
+        createdAt,
+        passageId,
+        elementId,
+      });
+
+      // then
+      expect(flashcardsRetriedEvent.id).to.equal(id);
+      expect(flashcardsRetriedEvent.type).to.equal('FLASHCARDS_RETRIED');
+      expect(flashcardsRetriedEvent.occurredAt).to.equal(occurredAt);
+      expect(flashcardsRetriedEvent.createdAt).to.equal(createdAt);
+      expect(flashcardsRetriedEvent.passageId).to.equal(passageId);
+      expect(flashcardsRetriedEvent.elementId).to.equal(elementId);
+      expect(flashcardsRetriedEvent.data).to.deep.equal({ elementId });
+    });
+
+    describe('when elementId is not given', function () {
+      it('should throw an error', function () {
+        // given
+        const id = Symbol('id');
+        const occurredAt = Symbol('date');
+        const createdAt = Symbol('date');
+        const passageId = Symbol('passage');
+
+        // when
+        const error = catchErrSync(() => new FlashcardsRetriedEvent({ id, occurredAt, createdAt, passageId }))();
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal('The elementId is required for a FlashcardsRetriedEvent');
       });
     });
   });

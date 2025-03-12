@@ -16,4 +16,19 @@ class FlashcardsStartedEvent extends PassageEvent {
   }
 }
 
-export { FlashcardsStartedEvent };
+/**
+ * @class FlashcardsRetriedEvent
+ *
+ * A FlashcardsRetriedEvent is generated when a set of Modulix flashcards is retried and saved in DB.
+ */
+class FlashcardsRetriedEvent extends PassageEvent {
+  constructor({ id, occurredAt, createdAt, passageId, elementId }) {
+    super({ id, type: 'FLASHCARDS_RETRIED', occurredAt, createdAt, passageId, data: { elementId } });
+
+    assertNotNullOrUndefined(elementId, 'The elementId is required for a FlashcardsRetriedEvent');
+
+    this.elementId = elementId;
+  }
+}
+
+export { FlashcardsRetriedEvent, FlashcardsStartedEvent };
