@@ -124,6 +124,7 @@ export const findPaginatedFiltered = async function ({ organizationId, filter, p
         organizationRole: membership.organizationRole,
         updatedByUserId: membership.updatedByUserId,
         user: new User(membership),
+        lastAccessedAt: membership.lastAccessedAt,
       }),
   );
 
