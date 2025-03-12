@@ -2,8 +2,7 @@ import { assertNotNullOrUndefined } from '../../../../shared/domain/models/asser
 import { ModuleInstantiationError } from '../../errors.js';
 
 class Module {
-  constructor({ id, slug, title, isBeta, grains, details, transitionTexts = [], version }) {
-    assertNotNullOrUndefined(id, 'The id is required for a module');
+  constructor({ slug, title, isBeta, grains, details, transitionTexts = [], version }) {
     assertNotNullOrUndefined(slug, 'The slug is required for a module');
     assertNotNullOrUndefined(title, 'The title is required for a module');
     assertNotNullOrUndefined(isBeta, 'isBeta value is required for a module');
@@ -12,7 +11,6 @@ class Module {
     assertNotNullOrUndefined(details, 'The details are required for a module');
     this.#assertTransitionTextsLinkedToGrain(transitionTexts, grains);
 
-    this.id = id;
     this.slug = slug;
     this.title = title;
     this.isBeta = isBeta;

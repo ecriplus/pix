@@ -6,12 +6,6 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
     const error = {
       details: [
         {
-          message: '"id" must be a valid GUID',
-          path: ['id'],
-          type: 'string.guid',
-          context: { label: 'id', value: 'f7b3a2-1a3d8f7e9f5d', key: 'id' },
-        },
-        {
           message: '"transitionTexts[0].grainId" must be a valid GUID',
           path: ['transitionTexts', 0, 'grainId'],
           type: 'string.guid',
@@ -49,11 +43,6 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
 
     const expectedLog = `
 ============================================================
-
-Error: "id" must be a valid GUID.
-Valeur concernée à rechercher : "f7b3a2-1a3d8f7e9f5d"
-
-────────────────────────────────────────────────────────────
 
 Error: "transitionTexts[0].grainId" must be a valid GUID.
 Valeur concernée à rechercher : "34d225e8-de8438cfc9"

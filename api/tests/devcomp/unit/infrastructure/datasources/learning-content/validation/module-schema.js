@@ -110,7 +110,6 @@ const grainSchema = Joi.object({
 }).required();
 
 const moduleSchema = Joi.object({
-  id: uuidSchema,
   slug: Joi.string()
     .regex(/^[a-z0-9-]+$/)
     .required(),

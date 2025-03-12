@@ -7,7 +7,6 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
   describe('#constructor', function () {
     it('should create a module and keep attributes', function () {
       // given
-      const id = 1;
       const slug = 'les-adresses-email';
       const title = 'Les adresses email';
       const isBeta = false;
@@ -17,10 +16,9 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
       const version = Symbol('version');
 
       // when
-      const module = new Module({ id, slug, title, isBeta, grains, details, transitionTexts, version });
+      const module = new Module({ slug, title, isBeta, grains, details, transitionTexts, version });
 
       // then
-      expect(module.id).to.equal(id);
       expect(module.slug).to.equal(slug);
       expect(module.title).to.equal(title);
       expect(module.isBeta).to.equal(isBeta);
@@ -30,21 +28,10 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
       expect(module.version).to.deep.equal(version);
     });
 
-    describe('if a module does not have an id', function () {
-      it('should throw an error', function () {
-        // when
-        const error = catchErrSync(() => new Module({}))();
-
-        // then
-        expect(error).to.be.instanceOf(DomainError);
-        expect(error.message).to.equal('The id is required for a module');
-      });
-    });
-
     describe('if a module does not have a slug', function () {
       it('should throw an error', function () {
         // when
-        const error = catchErrSync(() => new Module({ id: 1 }))();
+        const error = catchErrSync(() => new Module({}))();
 
         // then
         expect(error).to.be.instanceOf(DomainError);
@@ -55,7 +42,7 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
     describe('if a module does not have a title', function () {
       it('should throw an error', function () {
         // when
-        const error = catchErrSync(() => new Module({ id: 1, slug: 'my-slug' }))();
+        const error = catchErrSync(() => new Module({ slug: 'my-slug' }))();
 
         // then
         expect(error).to.be.instanceOf(DomainError);
@@ -69,7 +56,6 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
         const error = catchErrSync(
           () =>
             new Module({
-              id: 'id_module_1',
               slug: 'bien-ecrire-son-adresse-mail',
               title: 'Bien écrire son adresse mail',
             }),
@@ -87,7 +73,6 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
         const error = catchErrSync(
           () =>
             new Module({
-              id: 'id_module_1',
               slug: 'bien-ecrire-son-adresse-mail',
               title: 'Bien écrire son adresse mail',
               isBeta: true,
@@ -106,7 +91,6 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
         const error = catchErrSync(
           () =>
             new Module({
-              id: 'id_module_1',
               slug: 'bien-ecrire-son-adresse-mail',
               title: 'Bien écrire son adresse mail',
               isBeta: true,
@@ -126,7 +110,6 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
         const error = catchErrSync(
           () =>
             new Module({
-              id: 'id_module_1',
               slug: 'bien-ecrire-son-adresse-mail',
               title: 'Bien écrire son adresse mail',
               isBeta: true,
