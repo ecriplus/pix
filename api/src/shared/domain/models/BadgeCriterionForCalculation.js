@@ -1,4 +1,4 @@
-import { getMasteryPercentage } from '../../../../lib/domain/services/get-mastery-percentage-service.js';
+import { getMasteryPercentage } from '../../../evaluation/domain/services/get-mastery-percentage-service.js';
 
 export class BadgeCriterionForCalculation {
   constructor({ threshold, skillIds }) {

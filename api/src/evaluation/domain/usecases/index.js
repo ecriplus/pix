@@ -1,7 +1,6 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import * as getMasteryPercentageService from '../../../../lib/domain/services/get-mastery-percentage-service.js';
 import * as flashAssessmentResultRepository from '../../../../lib/infrastructure/repositories/flash-assessment-result-repository.js';
 import * as certificationEvaluationCandidateRepository from '../../../certification/evaluation/infrastructure/repositories/certification-candidate-repository.js';
 import * as flashAlgorithmService from '../../../certification/flash-certification/domain/services/algorithm-methods/flash.js';
@@ -35,6 +34,7 @@ import * as algorithmDataFetcherService from '../services/algorithm-methods/data
 import * as smartRandomService from '../services/algorithm-methods/smart-random.js';
 import * as correctionService from '../services/correction-service.js';
 import { getCompetenceLevel } from '../services/get-competence-level.js';
+import * as getMasteryPercentageService from '../services/get-mastery-percentage-service.js';
 import * as improvementService from '../services/improvement-service.js';
 import { pickChallengeService } from '../services/pick-challenge-service.js';
 import * as scorecardService from '../services/scorecard-service.js';
