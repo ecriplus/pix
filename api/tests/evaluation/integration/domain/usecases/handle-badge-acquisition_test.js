@@ -1,141 +1,97 @@
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
-import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
+import { CampaignTypes } from '../../../../../src/prescription/shared/domain/constants.js';
+import { PIX_COUNT_BY_LEVEL } from '../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import {
-  databaseBuilder,
-  domainBuilder,
-  expect,
-  knex,
-  learningContentBuilder,
-  mockLearningContent,
-} from '../../../../test-helper.js';
+import { SCOPES } from '../../../../../src/shared/domain/models/BadgeDetails.js';
+import { KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
+import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Usecase | Handle Badge Acquisition', function () {
-  let userId, assessment, badgeCompleted;
-
-  describe('#handleBadgeAcquisition', function () {
-    beforeEach(async function () {
-      const listSkill = ['web1', 'web2', 'web3', 'web4'];
-
-      const learningContent = [
-        {
-          id: 'recFrameworkId',
-          name: 'monFramework',
-          areas: [
-            {
-              id: 'recArea1',
-              title_i18n: {
-                fr: 'area1_Title',
-              },
-              color: 'someColor',
-              competences: [
-                {
-                  id: 'competenceId',
-                  name_i18n: {
-                    fr: 'Mener une recherche et une veille d’information',
-                  },
-                  index: '1.1',
-                  tubes: [
-                    {
-                      id: 'recTube0_0',
-                      skills: [
-                        {
-                          id: listSkill[0],
-                          nom: '@web1',
-                          status: 'actif',
-                          challenges: [],
-                        },
-                        {
-                          id: listSkill[1],
-                          nom: '@web2',
-                          status: 'actif',
-                          challenges: [],
-                        },
-                        {
-                          id: listSkill[2],
-                          nom: 'web3',
-                          status: 'actif',
-                          challenges: [],
-                        },
-                        {
-                          id: listSkill[3],
-                          nom: 'web4',
-                          status: 'actif',
-                          challenges: [],
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ];
-
-      userId = databaseBuilder.factory.buildUser().id;
+  context('when campaign is of type ASSESSMENT', function () {
+    it('should compute badge acquisition based on knowledge-elements from user profile', async function () {
+      // given
+      const skillIds = ['acquisA', 'acquisB'];
       const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
-      databaseBuilder.factory.buildKnowledgeElement({ userId, skillId: 'web1', status: 'validated' });
-      databaseBuilder.factory.buildKnowledgeElement({ userId, skillId: 'web2', status: 'validated' });
-      databaseBuilder.factory.buildKnowledgeElement({ userId, skillId: 'web3', status: 'validated' });
-      databaseBuilder.factory.buildKnowledgeElement({ userId, skillId: 'web4', status: 'invalidated' });
-
-      const campaignDTO = databaseBuilder.factory.buildCampaign({ targetProfileId });
-      const campaignId = campaignDTO.id;
-      listSkill.forEach((skillId) => databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId }));
-      const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({ campaignId, userId }).id;
-
-      badgeCompleted = databaseBuilder.factory.buildBadge({
+      const badgeId1 = databaseBuilder.factory.buildBadge({
+        key: 'BADGE_1_KEY',
         targetProfileId,
-        key: 'Badge1',
-      });
-      databaseBuilder.factory.buildBadgeCriterion({
-        scope: 'CampaignParticipation',
-        badgeId: badgeCompleted.id,
-        threshold: 40,
-      });
-
-      const badgeNotCompletedId = databaseBuilder.factory.buildBadge({
-        targetProfileId,
-        key: 'Badge2',
       }).id;
       databaseBuilder.factory.buildBadgeCriterion({
-        scope: 'CampaignParticipation',
-        badgeId: badgeNotCompletedId,
-        threshold: 90,
+        scope: SCOPES.CAMPAIGN_PARTICIPATION,
+        threshold: 20,
+        badgeId: badgeId1,
       });
-
-      assessment = new Assessment({
+      const badgeId2 = databaseBuilder.factory.buildBadge({
+        key: 'BADGE_2_KEY',
+        targetProfileId,
+      }).id;
+      databaseBuilder.factory.buildBadgeCriterion({
+        scope: SCOPES.CAMPAIGN_PARTICIPATION,
+        threshold: 100,
+        badgeId: badgeId2,
+      });
+      const userId = databaseBuilder.factory.buildUser().id;
+      const campaignId = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.ASSESSMENT, targetProfileId }).id;
+      skillIds.map((skillId) =>
+        databaseBuilder.factory.buildCampaignSkill({
+          campaignId,
+          skillId,
+        }),
+      );
+      const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId,
+        userId,
+      }).id;
+      const assessmentDB = databaseBuilder.factory.buildAssessment({
         userId,
         campaignParticipationId,
         type: Assessment.types.CAMPAIGN,
-        campaign: domainBuilder.buildCampaign(campaignDTO),
       });
+      skillIds.map((id, index) =>
+        databaseBuilder.factory.learningContent.buildSkill({
+          id,
+          competenceId: 'maCompetenceId',
+          pixValue: PIX_COUNT_BY_LEVEL,
+          status: 'actif',
+          tubeId: 'monTubeId',
+          level: index + 1,
+        }),
+      );
+      databaseBuilder.factory.buildKnowledgeElement({
+        skillId: skillIds[0],
+        earnedPix: PIX_COUNT_BY_LEVEL,
+        userId,
+        assessmentId: assessmentDB.id,
+        answerId: databaseBuilder.factory.buildAnswer().id,
+        status: KnowledgeElement.StatusType.VALIDATED,
+        source: KnowledgeElement.SourceType.DIRECT,
+        competenceId: 'maCompetenceId',
+        createdAt: new Date('2020-01-01'),
+      });
+      databaseBuilder.factory.buildKnowledgeElement({
+        skillId: skillIds[1],
+        earnedPix: PIX_COUNT_BY_LEVEL,
+        userId,
+        assessmentId: assessmentDB.id,
+        answerId: databaseBuilder.factory.buildAnswer().id,
+        status: KnowledgeElement.StatusType.INVALIDATED,
+        source: KnowledgeElement.SourceType.DIRECT,
+        competenceId: 'maCompetenceId',
+        createdAt: new Date('2020-01-01'),
+      });
+      await databaseBuilder.commit();
 
-      const learningContentObjects = learningContentBuilder(learningContent);
-      await mockLearningContent(learningContentObjects);
+      // when
+      const assessment = domainBuilder.buildAssessment(assessmentDB);
+      await evaluationUsecases.handleBadgeAcquisition({ assessment });
 
-      return databaseBuilder.commit();
-    });
-
-    context('when domain transaction is not committed yet', function () {
-      it('should not affect the database', async function () {
-        await DomainTransaction.execute(async (domainTransaction) => {
-          // when
-          await evaluationUsecases.handleBadgeAcquisition({
-            assessment,
-          });
-
-          // then
-          const transactionBadgeAcquisitions = await domainTransaction
-            .knexTransaction('badge-acquisitions')
-            .select('userId', 'badgeId')
-            .where({ userId });
-          expect(transactionBadgeAcquisitions).to.deep.equal([{ userId, badgeId: badgeCompleted.id }]);
-
-          const realBadgeAcquisitions = await knex('badge-acquisitions').where({ userId });
-          expect(realBadgeAcquisitions).to.have.lengthOf(0);
-        });
+      // then
+      const allBadgeAcquisitionsDB = await knex('badge-acquisitions').select('*').orderBy('badgeId');
+      expect(allBadgeAcquisitionsDB.length).to.equal(1);
+      sinon.assert.match(allBadgeAcquisitionsDB[0], {
+        badgeId: badgeId1,
+        campaignParticipationId,
+        userId,
       });
     });
   });
