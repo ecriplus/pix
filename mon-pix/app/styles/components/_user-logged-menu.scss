@@ -25,12 +25,12 @@
     height: 0.5em;
     border-right: 2px solid currentcolor;
     border-bottom: 2px solid currentcolor;
-    transform: translateY(-80%) rotate(45deg);
+    transform: translateY(-80%) translateX(-2px) rotate(45deg);
     content: '';
   }
 
   &[aria-expanded="true"]::after {
-    transform: translateY(-30%) rotate(-135deg);
+    transform: translateY(-30%) translateX(-2px)  rotate(-135deg);
   }
 }
 
