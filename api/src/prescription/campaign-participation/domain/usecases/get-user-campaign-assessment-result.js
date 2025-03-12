@@ -12,20 +12,24 @@ const getUserCampaignAssessmentResult = async function ({
   stageRepository,
   stageAcquisitionRepository,
   compareStagesAndAcquiredStages,
+  campaignParticipationRepository,
 }) {
   const { SHARED, TO_SHARE } = CampaignParticipationStatuses;
-  const campaignParticipationStatus = await participantResultRepository.getCampaignParticipationStatus({
-    userId,
+  const campaignParticipation = await campaignParticipationRepository.findOneByCampaignIdAndUserId({
     campaignId,
+    userId,
   });
 
-  if (![TO_SHARE, SHARED].includes(campaignParticipationStatus)) {
+  if (![TO_SHARE, SHARED].includes(campaignParticipation.status)) {
     throw new NoCampaignParticipationForUserAndCampaign();
   }
   try {
     const [badges, knowledgeElements] = await Promise.all([
       badgeRepository.findByCampaignId(campaignId),
-      knowledgeElementRepository.findUniqByUserId({ userId }),
+      knowledgeElementRepository.findUniqByUserIdForCampaignParticipation({
+        userId,
+        campaignParticipationId: campaignParticipation.id,
+      }),
     ]);
     const stillValidBadgeIds = await _checkStillValidBadges(
       campaignId,
@@ -53,7 +57,7 @@ const getUserCampaignAssessmentResult = async function ({
 
     const stagesAndAcquiredStagesComparison = compareStagesAndAcquiredStages.compare(stages, acquiredStages);
 
-    return await participantResultRepository.getByUserIdAndCampaignId({
+    return await participantResultRepository.get({
       userId,
       campaignId,
       locale,

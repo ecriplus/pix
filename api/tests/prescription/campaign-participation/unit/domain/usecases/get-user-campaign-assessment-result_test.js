@@ -9,19 +9,25 @@ import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-help
 describe('Unit | UseCase | get-user-campaign-assessment-result', function () {
   const locale = 'locale',
     campaignId = 123,
-    userId = 456;
-  let participantResultRepository, badgeRepository, stageRepository, stageAcquisitionRepository;
+    userId = 456,
+    campaignParticipationId = 789;
+  let participantResultRepository,
+    badgeRepository,
+    stageRepository,
+    stageAcquisitionRepository,
+    knowledgeElementRepository,
+    campaignParticipationRepository,
+    badgeForCalculationRepository;
   let compareStagesAndAcquiredStages;
-  let knowledgeElementRepository, badgeForCalculationRepository;
   let args;
 
   beforeEach(function () {
     badgeForCalculationRepository = { findByCampaignId: sinon.stub() };
-    knowledgeElementRepository = { findUniqByUserId: sinon.stub() };
+    campaignParticipationRepository = { findOneByCampaignIdAndUserId: sinon.stub() };
+    knowledgeElementRepository = { findUniqByUserIdForCampaignParticipation: sinon.stub() };
     badgeRepository = { findByCampaignId: sinon.stub() };
     participantResultRepository = {
-      getByUserIdAndCampaignId: sinon.stub(),
-      getCampaignParticipationStatus: sinon.stub(),
+      get: sinon.stub(),
     };
     stageRepository = { getByCampaignId: sinon.stub() };
     stageAcquisitionRepository = { getByCampaignIdAndUserId: sinon.stub() };
@@ -37,6 +43,7 @@ describe('Unit | UseCase | get-user-campaign-assessment-result', function () {
       stageRepository,
       stageAcquisitionRepository,
       compareStagesAndAcquiredStages,
+      campaignParticipationRepository,
     };
   });
 
@@ -44,9 +51,16 @@ describe('Unit | UseCase | get-user-campaign-assessment-result', function () {
     it('should throw NoCampaignParticipationForUserAndCampaign error', async function () {
       // given
       badgeRepository.findByCampaignId.rejects(new NotFoundError());
-      knowledgeElementRepository.findUniqByUserId.rejects('I should not be called');
+      knowledgeElementRepository.findUniqByUserIdForCampaignParticipation.rejects('I should not be called');
       badgeForCalculationRepository.findByCampaignId.rejects('I should not be called');
-      participantResultRepository.getCampaignParticipationStatus.returns(CampaignParticipationStatuses.STARTED);
+      campaignParticipationRepository.findOneByCampaignIdAndUserId.withArgs({ userId, campaignId }).resolves(
+        domainBuilder.buildCampaignParticipation({
+          id: campaignParticipationId,
+          status: CampaignParticipationStatuses.STARTED,
+          userId,
+          campaignId,
+        }),
+      );
       // when
       const error = await catchErr(getUserCampaignAssessmentResult)(args);
 
@@ -78,13 +92,13 @@ describe('Unit | UseCase | get-user-campaign-assessment-result', function () {
         totalNumberOfStages: 2,
         reachedStage: stage1,
       });
-      knowledgeElementRepository.findUniqByUserId
-        .withArgs({ userId })
+      knowledgeElementRepository.findUniqByUserIdForCampaignParticipation
+        .withArgs({ userId, campaignParticipationId })
         .resolves([domainBuilder.buildKnowledgeElement()]);
       badgeForCalculationRepository.findByCampaignId
         .withArgs({ campaignId })
         .resolves([badgeForCalculationObtained1, badgeForCalculationNotObtained2, badgeForCalculationObtained3]);
-      participantResultRepository.getByUserIdAndCampaignId
+      participantResultRepository.get
         .withArgs({
           userId,
           campaignId,
@@ -114,12 +128,19 @@ describe('Unit | UseCase | get-user-campaign-assessment-result', function () {
           },
         })
         .resolves(expectedCampaignAssessmentResult);
-      participantResultRepository.getCampaignParticipationStatus
+      campaignParticipationRepository.findOneByCampaignIdAndUserId
         .withArgs({
           userId,
           campaignId,
         })
-        .resolves(CampaignParticipationStatuses.SHARED);
+        .resolves(
+          domainBuilder.buildCampaignParticipation({
+            id: campaignParticipationId,
+            status: CampaignParticipationStatuses.SHARED,
+            userId,
+            campaignId,
+          }),
+        );
       // when
       const campaignAssessmentResult = await getUserCampaignAssessmentResult(args);
 
