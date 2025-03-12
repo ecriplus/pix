@@ -1,3 +1,4 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -11,7 +12,7 @@ export default class List extends Component {
   }
 
   <template>
-    <section class="no-participant-panel panel">
+    <PixBlock class="no-participant-panel">
       <img src="{{this.rootURL}}/images/empty-state-participants.svg" alt="" role="none" />
       <p class="content-text">
         {{t "pages.organization-participants.empty-state.message"}}
@@ -23,6 +24,6 @@ export default class List extends Component {
           </LinkTo>
         {{/if}}
       </p>
-    </section>
+    </PixBlock>
   </template>
 }
