@@ -1,0 +1,26 @@
+@use 'pix-design-tokens/typography';
+
+.campaign-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 260px;
+  padding: var(--pix-spacing-2x);
+
+  &__image {
+    max-width: 60px;
+    margin-bottom: var(--pix-spacing-2x);
+  }
+
+  &__title {
+    @extend %pix-title-xs;
+  }
+
+  &__description {
+    @extend %pix-body-s;
+
+    margin-top: var(--pix-spacing-1x);
+    color: var(--pix-neutral-500);
+    text-align: center;
+  }
+}

@@ -12,58 +12,6 @@
       <CampaignStartBlock @campaign={{@model}} @startCampaignParticipation={{this.startCampaignParticipation}} />
     {{/if}}
 
-    {{#if @model.isAssessment}}
-      <div class="campaign-landing-page__details rounded-panel">
-        <h2 class="campaign-landing-page-details__title">
-          {{t "pages.campaign-landing.assessment.details"}}
-        </h2>
-
-        <div class="campaign-landing-page-details__article">
-          <img
-            class="campaign-landing-page-details__article-image"
-            src="/images/illustrations/landing-page/icon-mesurer.svg"
-            alt=""
-          />
-          <div class="campaign-landing-page-details__article-text">
-            <h3 class="campaign-landing-page-details__article-title">
-              {{t "pages.campaign-landing.assessment.evaluate.title"}}
-            </h3>
-            <p>{{t "pages.campaign-landing.assessment.evaluate.description"}}</p>
-          </div>
-        </div>
-
-        <div class="campaign-landing-page-details__article">
-          <img
-            class="campaign-landing-page-details__article-image"
-            src="/images/illustrations/landing-page/icon-conseil.svg"
-            alt=""
-          />
-          <div class="campaign-landing-page-details__article-text">
-            <h3 class="campaign-landing-page-details__article-title">
-              {{t "pages.campaign-landing.assessment.develop.title"}}
-            </h3>
-            <p>{{t "pages.campaign-landing.assessment.develop.description"}}</p>
-          </div>
-
-        </div>
-
-        <div class="campaign-landing-page-details__article">
-          <img
-            class="campaign-landing-page-details__article-image"
-            src="/images/illustrations/landing-page/icon-certif.svg"
-            alt=""
-          />
-          <div class="campaign-landing-page-details__article-text">
-            <h3 class="campaign-landing-page-details__article-title">
-              {{t "pages.campaign-landing.assessment.certify.title"}}
-            </h3>
-            <p>{{t "pages.campaign-landing.assessment.certify.description"}}</p>
-          </div>
-
-        </div>
-      </div>
-    {{/if}}
-
     {{#if this.shouldDisplayLanguageSwitcher}}
       <div>
         <LanguageSwitcher @selectedLanguage={{this.selectedLanguage}} @onLanguageChange={{this.onLanguageChange}} />
