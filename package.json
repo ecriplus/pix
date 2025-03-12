@@ -59,7 +59,7 @@
     "lint:mon-pix": "cd mon-pix && npm run lint",
     "lint:orga": "cd orga && npm run lint",
     "lint:junior": "cd junior && npm run lint",
-    "lint:scripts": "eslint scripts",
+    "lint:scripts": "eslint --ignore-pattern **/compose.yaml scripts",
     "lint:yaml": "eslint --ignore-pattern compose.yaml",
     "lint:docs": "find ./docs -type f -name '*.md' | xargs -L1 markdown-link-check --quiet --config ./docs/link--check-config.json ",
     "local:add-optional-checks": "husky",
@@ -111,7 +111,6 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-unicorn": "^56.0.0",
     "typescript-eslint": "^8.24.0",
-
     "husky": "^9.0.0",
     "lint-staged": "^15.0.0"
   },

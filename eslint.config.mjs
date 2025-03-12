@@ -24,8 +24,10 @@ export default [
   { plugins: { knex: fixupPluginRules(knex) } },
   { plugins: { unicorn } },
   {
-    files: ["eslint.config.mjs"],
-    languageOptions: {},
+    files: ["**/eslint.config.mjs"],
+    languageOptions: {
+      sourceType: "module",
+    },
     rules: {
       "n/no-unpublished-import": "off",
     },
