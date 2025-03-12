@@ -1,3 +1,4 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixProgressBar from '@1024pix/pix-ui/components/pix-progress-bar';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
@@ -112,7 +113,7 @@ export default class Header extends Component {
       </:subtitle>
     </PageTitle>
 
-    <section class="panel panel--header">
+    <PixBlock class="participant-header">
       <header class="panel-header__headline panel-header__headline--with-right-content">
         <h2 class="panel-header-title">{{@campaign.name}}</h2>
         {{#if @campaign.multipleSendings}}
@@ -184,6 +185,6 @@ export default class Header extends Component {
           </ul>
         {{/if}}
       </div>
-    </section>
+    </PixBlock>
   </template>
 }

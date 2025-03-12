@@ -1,3 +1,4 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { service } from '@ember/service';
@@ -64,7 +65,7 @@ export default class Header extends Component {
       </:subtitle>
     </PageTitle>
 
-    <section class="panel panel--header">
+    <PixBlock class="participant-header">
       <header class="panel-header__headline">
         <h2 class="panel-header-title">{{@campaign.name}}</h2>
       </header>
@@ -111,6 +112,6 @@ export default class Header extends Component {
           </ul>
         {{/if}}
       </div>
-    </section>
+    </PixBlock>
   </template>
 }
