@@ -11,7 +11,7 @@ import { t } from 'ember-intl';
 
 export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
   @service metrics;
-
+  @service intl;
   @tracked isResetModalVisible = false;
 
   retryQueryParams = { retry: true };
@@ -71,6 +71,15 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
       'pix-event-action': 'Affichage du bloc RAZ/Repasser un parcours',
       'pix-event-name': "Confirmation de la modale 'Remettre à zéro et tout retenter'",
     });
+  }
+
+  get retryOrResetExplanation() {
+    const { campaignParticipationResult } = this.args;
+
+    if (campaignParticipationResult.canReset && campaignParticipationResult.canRetry) {
+      return this.intl.t('pages.skill-review.reset.notification');
+    }
+    return this.intl.t('pages.skill-review.retry.notification');
   }
 
   <template>
@@ -133,7 +142,7 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
           {{/if}}
         </div>
         <PixNotificationAlert class="evaluation-results-hero-retry__message" @withIcon={{true}}>
-          {{t "pages.skill-review.reset.notifications"}}
+          {{this.retryOrResetExplanation}}
         </PixNotificationAlert>
       </div>
     </div>

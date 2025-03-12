@@ -27,7 +27,7 @@ module(
       // then
       assert.dom(screen.getByText(t('pages.skill-review.hero.retry.title'))).exists();
       assert.dom(screen.getByText(t('pages.skill-review.hero.retry.description'))).exists();
-      assert.dom(screen.getByText(t('pages.skill-review.reset.notifications'))).exists();
+      assert.dom(screen.getByText(t('pages.skill-review.retry.notification'))).exists();
 
       assert.dom(screen.queryByRole('link', { name: t('pages.skill-review.hero.retry.actions.retry') })).doesNotExist();
 
@@ -58,6 +58,7 @@ module(
         assert
           .dom(screen.queryByRole('button', { name: t('pages.skill-review.hero.retry.actions.reset') }))
           .doesNotExist();
+        assert.dom(screen.getByText(t('pages.skill-review.retry.notification'))).exists();
       });
     });
 
@@ -82,6 +83,7 @@ module(
         // then
         assert.dom(screen.getByRole('link', { name: t('pages.skill-review.hero.retry.actions.retry') })).exists();
         assert.dom(screen.getByRole('button', { name: t('pages.skill-review.hero.retry.actions.reset') })).exists();
+        assert.dom(screen.getByText(t('pages.skill-review.reset.notification'))).exists();
       });
 
       test('it should open a modal when user wants to reset the assessment', async function (assert) {
