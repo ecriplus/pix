@@ -1,11 +1,9 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../db/knex-database-connection.js';
-import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import { KnowledgeElementCollection } from '../../../prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { KnowledgeElement } from '../../domain/models/KnowledgeElement.js';
-import { logger } from '../utils/logger.js';
 
 const tableName = 'knowledge-elements';
 
@@ -31,16 +29,16 @@ async function findAssessedByUserIdAndLimitDateQuery({ userId, limitDate, skillI
   return keCollection.latestUniqNonResetKnowledgeElements;
 }
 
-const findUniqByUserIds = function (userIds) {
-  return Promise.all(
-    userIds.map(async (userId) => {
-      const knowledgeElements = await findAssessedByUserIdAndLimitDateQuery({
-        userId,
-      });
+const findUniqByUserIds = async function ({ userIds }) {
+  const results = [];
+  for (const userId of userIds) {
+    const knowledgeElements = await findAssessedByUserIdAndLimitDateQuery({
+      userId,
+    });
 
-      return { userId, knowledgeElements };
-    }),
-  );
+    results.push({ userId, knowledgeElements });
+  }
+  return results;
 };
 
 const batchSave = async function ({ knowledgeElements }) {
@@ -53,21 +51,44 @@ const batchSave = async function ({ knowledgeElements }) {
   return savedKnowledgeElements.map((ke) => new KnowledgeElement(ke));
 };
 
-const saveForCampaignParticipation = async function ({ knowledgeElements, campaignParticipationId }) {
+const saveForCampaignParticipation = async function ({
+  knowledgeElements,
+  campaignParticipationId,
+  campaignsAPI,
+  knowledgeElementSnapshotAPI,
+}) {
   const knexConn = DomainTransaction.getConnection();
-  const campaign = await _getAssociatedCampaign(campaignParticipationId);
+  const campaign = await campaignsAPI.getByCampaignParticipationId(campaignParticipationId);
   if (!campaign) {
-    return [];
+    throw new Error(`Invalid campaign participation ${campaignParticipationId}`);
   }
-  if (campaign.isAssessment || campaign.isExam) {
+  if (campaign.isAssessment) {
     const knowledgeElementsToSave = knowledgeElements.map((ke) => _.omit(ke, ['id', 'createdAt']));
-    const savedKnowledgeElements = await knex
+    await knex
       .batchInsert(tableName, knowledgeElementsToSave)
       .transacting(knexConn.isTransaction ? knexConn : null)
       .returning('*');
-    return savedKnowledgeElements.map((ke) => new KnowledgeElement(ke));
+    return;
+  } else if (campaign.isExam) {
+    const currentSnapshot = await knowledgeElementSnapshotAPI.getByParticipation(campaignParticipationId);
+    const createdAt = new Date();
+    const previousKnowledgeElements = currentSnapshot.knowledgeElements ?? [];
+    await knowledgeElementSnapshotAPI.save({
+      userId: knowledgeElements[0].userId,
+      knowledgeElements: previousKnowledgeElements.concat(
+        knowledgeElements.map(
+          (ke) =>
+            new KnowledgeElement({
+              ...ke,
+              createdAt,
+            }),
+        ),
+      ),
+      campaignParticipationId,
+    });
+    return;
   }
-  return [];
+  throw new Error(`Saving knowledge-elements for campaign of type ${campaign.type} not implemented`);
 };
 
 const findUniqByUserId = function ({ userId, limitDate, skillIds }) {
@@ -90,11 +111,11 @@ const findUniqByUserIdAndCompetenceId = async function ({ userId, competenceId }
 };
 
 const findUniqByUserIdGroupedByCompetenceId = async function ({ userId, limitDate }) {
-  const knowledgeElements = await this.findUniqByUserId({ userId, limitDate });
+  const knowledgeElements = await findUniqByUserId({ userId, limitDate });
   return _.groupBy(knowledgeElements, 'competenceId');
 };
 
-const findInvalidatedAndDirectByUserId = async function (userId) {
+const findInvalidatedAndDirectByUserId = async function ({ userId }) {
   const invalidatedKnowledgeElements = await knex(tableName)
     .where({
       userId,
@@ -112,20 +133,28 @@ const findInvalidatedAndDirectByUserId = async function (userId) {
   );
 };
 
-async function _getAssociatedCampaign(campaignParticipationId) {
-  let campaign = null;
-  if (!campaignParticipationId) {
-    return campaign;
-  }
-  try {
-    const campaignId = await campaignRepository.getCampaignIdByCampaignParticipationId(campaignParticipationId);
-    campaign = await campaignRepository.get(campaignId);
-  } catch (err) {
-    logger.error(err);
+const findUniqByUserIdForCampaignParticipation = async function ({
+  userId,
+  campaignParticipationId,
+  limitDate,
+  knowledgeElementSnapshotAPI,
+  campaignsAPI,
+}) {
+  const campaign = await campaignsAPI.getByCampaignParticipationId(campaignParticipationId);
+  if (!campaign) {
     return null;
   }
-  return campaign;
-}
+  if (campaign.isProfilesCollection || campaign.isAssessment) {
+    return findUniqByUserId({ userId, limitDate });
+  } else if (campaign.isExam) {
+    const snapshot = await knowledgeElementSnapshotAPI.getByParticipation(campaignParticipationId);
+    if (!snapshot.knowledgeElements) {
+      return [];
+    }
+    return snapshot.knowledgeElements.map((ke) => new KnowledgeElement(ke));
+  }
+  return null;
+};
 
 export {
   batchSave,
@@ -134,6 +163,7 @@ export {
   findUniqByUserId,
   findUniqByUserIdAndAssessmentId,
   findUniqByUserIdAndCompetenceId,
+  findUniqByUserIdForCampaignParticipation,
   findUniqByUserIdGroupedByCompetenceId,
   findUniqByUserIds,
   saveForCampaignParticipation,

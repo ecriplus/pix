@@ -196,9 +196,9 @@ class CampaignAssessmentExport {
       const startedParticipations = campaignParticipationInfoChunk.filter(
         ({ isShared, isCompleted }) => !isShared && !isCompleted,
       );
-      const othersKnowledgeElementsByUserIdAndCompetenceId = await knowledgeElementRepository.findUniqByUserIds(
-        startedParticipations.map(({ userId }) => userId),
-      );
+      const othersKnowledgeElementsByUserIdAndCompetenceId = await knowledgeElementRepository.findUniqByUserIds({
+        userIds: startedParticipations.map(({ userId }) => userId),
+      });
       const othersResultInfo = othersKnowledgeElementsByUserIdAndCompetenceId.find(
         (knowledElementForOtherParticipation) =>
           campaignParticipationInfo.userId === knowledElementForOtherParticipation.userId,

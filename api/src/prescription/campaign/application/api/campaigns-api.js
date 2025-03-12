@@ -57,6 +57,19 @@ export const get = async (campaignId) => {
 };
 
 /**
+ * @function
+ * @name getByCampaignParticipationId
+ *
+ * @param {number} campaignParticipationId
+ * @returns {Promise<Campaign|null>}
+ */
+export const getByCampaignParticipationId = async (campaignParticipationId) => {
+  const campaign = await usecases.getCampaignOfCampaignParticipation({ campaignParticipationId });
+  if (!campaign) return null;
+  return new Campaign(campaign);
+};
+
+/**
  * @typedef UpdateCampaignPayload
  * @type {object}
  * @property {number} campaignId

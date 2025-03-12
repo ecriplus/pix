@@ -49,13 +49,21 @@ const saveAndCorrectAnswerForCampaign = withTransaction(async function ({
 
   let answerSaved;
   if (assessment.isSmartRandom()) {
-    const knowledgeElementsBefore = await knowledgeElementRepository.findUniqByUserId({ userId });
+    const knowledgeElementsBefore = await knowledgeElementRepository.findUniqByUserIdForCampaignParticipation({
+      userId,
+      campaignParticipationId: assessment.campaignParticipationId,
+    });
 
     const targetSkills = await campaignRepository.findSkillsByCampaignParticipationId({
       campaignParticipationId: assessment.campaignParticipationId,
     });
+    const campaignId = await campaignRepository.getCampaignIdByCampaignParticipationId(
+      assessment.campaignParticipationId,
+    );
+    const campaign = await campaignRepository.get(campaignId);
     answerSaved = await answerRepository.save({ answer: correctedAnswer });
     const knowledgeElementsToAdd = computeKnowledgeElements({
+      campaign,
       assessment,
       answer: answerSaved,
       challenge,
@@ -105,10 +113,17 @@ const saveAndCorrectAnswerForCampaign = withTransaction(async function ({
   return answerSaved;
 });
 
-function computeKnowledgeElements({ assessment, answer, challenge, targetSkills, knowledgeElementsBefore }) {
-  const knowledgeElements = knowledgeElementsBefore.filter(
-    (knowledgeElement) => knowledgeElement.assessmentId === assessment.id,
-  );
+function computeKnowledgeElements({ campaign, assessment, answer, challenge, targetSkills, knowledgeElementsBefore }) {
+  let knowledgeElements;
+
+  if (campaign.isExam) {
+    knowledgeElements = knowledgeElementsBefore;
+  } else {
+    knowledgeElements = knowledgeElementsBefore.filter(
+      (knowledgeElement) => knowledgeElement.assessmentId === assessment.id,
+    );
+  }
+
   return KnowledgeElement.createKnowledgeElementsForAnswer({
     answer,
     challenge,
@@ -158,10 +173,16 @@ async function computeLevelUpInformation({
   const knowledgeElementsForCompetenceBefore = knowledgeElementsBefore.filter(
     (knowledgeElement) => knowledgeElement.competenceId === competenceId,
   );
+  const knowledgeElementsAddedForCompetence = knowledgeElementsAdded.filter(
+    (knowledgeElement) => knowledgeElement.competenceId === competenceId,
+  );
   const knowledgeElementsForCompetenceAfter = [
-    ...knowledgeElementsAdded.filter((knowledgeElement) => knowledgeElement.competenceId === competenceId),
+    ...knowledgeElementsAddedForCompetence,
     ...knowledgeElementsForCompetenceBefore,
   ];
+  const uniqKnowledgeElementsForCompetenceAfter = knowledgeElementsForCompetenceAfter.filter(
+    (ke, index) => knowledgeElementsForCompetenceAfter.findIndex(({ skillId }) => skillId === ke.skillId) === index,
+  );
   return scorecardService.computeLevelUpInformation({
     answer: answerSaved,
     userId,
@@ -169,7 +190,7 @@ async function computeLevelUpInformation({
     competence,
     competenceEvaluationForCompetence,
     knowledgeElementsForCompetenceBefore,
-    knowledgeElementsForCompetenceAfter,
+    knowledgeElementsForCompetenceAfter: uniqKnowledgeElementsForCompetenceAfter,
   });
 }
 

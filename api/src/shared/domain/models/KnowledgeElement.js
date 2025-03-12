@@ -64,6 +64,12 @@ class KnowledgeElement {
     });
   }
 
+  /*
+  Historiquement, on force la création d'un KE inferré sur un acquis sur lequel l'utilisateur s'est
+  possiblement déjà positionné par le passé (dans le cadre d'un assessment différent) pour :
+  - forcer la réactualisation du nombre de pix rapportés par acquis (un acquis peut changer de pixValue à mesure que le référentiel évolue)
+  - pour gérer les trous dans le référentiel (avant l'arrivée des cappedtubes)
+   */
   static createKnowledgeElementsForAnswer({
     answer,
     challenge,

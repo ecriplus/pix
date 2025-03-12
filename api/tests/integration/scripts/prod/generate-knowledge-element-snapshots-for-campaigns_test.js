@@ -2,7 +2,8 @@ import {
   generateKnowledgeElementSnapshots,
   getEligibleCampaignParticipations,
 } from '../../../../scripts/prod/generate-knowledge-element-snapshots-for-campaigns.js';
-import { databaseBuilder, expect, sinon } from '../../../test-helper.js';
+import { KnowledgeElementCollection } from '../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
+import { databaseBuilder, domainBuilder, expect, sinon } from '../../../test-helper.js';
 
 describe('Integration | Scripts | generate-knowledge-element-snapshots-for-campaigns.js', function () {
   describe('#getEligibleCampaignParticipations', function () {
@@ -57,6 +58,7 @@ describe('Integration | Scripts | generate-knowledge-element-snapshots-for-campa
       // then
       expect(campaignParticipationData).to.have.lengthOf(1);
       expect(campaignParticipationData[0]).to.deep.equal({
+        id: campaignParticipation.id,
         userId: campaignParticipation.userId,
         sharedAt: campaignParticipation.sharedAt,
       });
@@ -81,6 +83,7 @@ describe('Integration | Scripts | generate-knowledge-element-snapshots-for-campa
       // then
       expect(campaignParticipationData).to.have.lengthOf(1);
       expect(campaignParticipationData[0]).to.deep.equal({
+        id: campaignParticipationWithoutSnapshot.id,
         userId: campaignParticipationWithoutSnapshot.userId,
         sharedAt: campaignParticipationWithoutSnapshot.sharedAt,
       });
@@ -109,6 +112,7 @@ describe('Integration | Scripts | generate-knowledge-element-snapshots-for-campa
       // then
       expect(campaignParticipationData).to.have.lengthOf(1);
       expect(campaignParticipationData[0]).to.deep.equal({
+        id: campaignParticipation.id,
         userId: campaignParticipation.userId,
         sharedAt: campaignParticipation.sharedAt,
       });
@@ -132,7 +136,7 @@ describe('Integration | Scripts | generate-knowledge-element-snapshots-for-campa
       // given
       const concurrency = 1;
       const campaignParticipationData = [{ id: 1, userId: 1, sharedAt: new Date('2020-01-01') }];
-      const expectedKnowledgeElements = ['someKnowledgeElements'];
+      const expectedKnowledgeElements = [domainBuilder.buildKnowledgeElement({ userId: 1 })];
       knowledgeElementRepositoryStub.findUniqByUserId
         .withArgs({
           userId: campaignParticipationData[0].userId,
@@ -150,7 +154,7 @@ describe('Integration | Scripts | generate-knowledge-element-snapshots-for-campa
       expect(knowledgeElementSnapshotRepositoryStub.save).to.have.been.calledWithExactly({
         userId: campaignParticipationData[0].userId,
         snappedAt: campaignParticipationData[0].sharedAt,
-        knowledgeElements: expectedKnowledgeElements,
+        snapshot: new KnowledgeElementCollection(expectedKnowledgeElements).toSnapshot(),
         campaignParticipationId: campaignParticipationData[0].id,
       });
     });
