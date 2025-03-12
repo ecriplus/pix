@@ -93,7 +93,7 @@ const serializeForAdmin = function (membership, meta) {
       }
       return record;
     },
-    attributes: ['organization', 'organizationRole', 'user'],
+    attributes: ['organization', 'organizationRole', 'user', 'lastAccessedAt'],
     organization: {
       ref: 'id',
       included: true,

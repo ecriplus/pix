@@ -98,6 +98,7 @@ describe('Acceptance | Team | Admin | Route | membership', function () {
           data: {
             type: 'organization-memberships',
             attributes: {
+              'last-accessed-at': null,
               'organization-role': 'ADMIN',
             },
             relationships: {
@@ -332,6 +333,7 @@ describe('Acceptance | Team | Admin | Route | membership', function () {
       const membershipId = databaseBuilder.factory.buildMembership({
         userId: user.id,
         organizationId: organization.id,
+        lastAccessedAt: new Date('2020-01-01'),
       }).id;
 
       await databaseBuilder.commit();
@@ -350,6 +352,7 @@ describe('Acceptance | Team | Admin | Route | membership', function () {
           {
             attributes: {
               'organization-role': 'MEMBER',
+              'last-accessed-at': new Date('2020-01-01'),
             },
             id: membershipId.toString(),
             relationships: {
