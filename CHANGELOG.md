@@ -1,5 +1,32 @@
 # Pix Changelog
 
+## v5.62.0 (12/03/2025)
+
+
+### :rocket: Amélioration
+- [#11507](https://github.com/1024pix/pix/pull/11507) [FEATURE] affiche les participations anonymisées dans mes parcours  (Pix-14458).
+- [#11621](https://github.com/1024pix/pix/pull/11621) [FEATURE] Supprime le dégradé en haut de le page de saisie du code (pix-16880).
+- [#11639](https://github.com/1024pix/pix/pull/11639) [FEATURE] S'assurer que les UUIDs de modules ne sont pas en doublon dans les PRs de modif de contenu.
+- [#11593](https://github.com/1024pix/pix/pull/11593) [FEATURE] Appliquer les modifications de navigation et de gabarit sur la page "Certification" sur App (PIX-16876).
+- [#11594](https://github.com/1024pix/pix/pull/11594) [FEATURE] Enregistrer l'accès d'un utilisateur à un centre de certification (PIX-16629).
+- [#11619](https://github.com/1024pix/pix/pull/11619) [FEATURE] Exposer les clés publiques des plateformes LTI (PIX-16947).
+- [#11609](https://github.com/1024pix/pix/pull/11609) [FEATURE] Retrouver une plateforme LTI grâce à son clientId (PIX-16940).
+
+### :building_construction: Tech
+- [#11636](https://github.com/1024pix/pix/pull/11636) [TECH] Utiliser le composant PixTable dans la page des participations d'une campagne sur PixAdmin (PIX-16998).
+- [#11598](https://github.com/1024pix/pix/pull/11598) [TECH] Migrer la route POST /api/application/token (PIX-16859).
+- [#11632](https://github.com/1024pix/pix/pull/11632) [TECH] Corriger des tests flacky sur le lastAccessedAt d'une organisation (PIX-16991).
+- [#11620](https://github.com/1024pix/pix/pull/11620) [TECH] Supprimer le double model Campaign (PIX-16997).
+
+### :arrow_up: Montée de version
+- [#11645](https://github.com/1024pix/pix/pull/11645) [BUMP] Update dependency @1024pix/pix-ui to ^54.15.0 (orga).
+- [#11638](https://github.com/1024pix/pix/pull/11638) [BUMP] Update dependency @1024pix/pix-ui to ^54.15.0 (admin).
+- [#11613](https://github.com/1024pix/pix/pull/11613) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.0 (orga).
+- [#11368](https://github.com/1024pix/pix/pull/11368) [BUMP] Update dependency eslint to v9 (load-testing).
+
+### :coffee: Autre
+- [#11643](https://github.com/1024pix/pix/pull/11643) Revert "[BUGFIX] Pour les demandes de réinitialisation de mot de passe, rendre la recherche des comptes vraiment insensible à la casse (PIX-16896)".
+
 ## v5.61.0 (11/03/2025)
 
 
