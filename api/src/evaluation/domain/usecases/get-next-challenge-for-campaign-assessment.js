@@ -1,18 +1,22 @@
-import { FlashAssessmentAlgorithm } from '../../../src/certification/flash-certification/domain/models/FlashAssessmentAlgorithm.js';
-import { FlashAssessmentAlgorithmConfiguration } from '../../../src/certification/shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
-import { AssessmentEndedError } from '../../../src/shared/domain/errors.js';
+import { FlashAssessmentAlgorithm } from '../../../certification/flash-certification/domain/models/FlashAssessmentAlgorithm.js';
+import { FlashAssessmentAlgorithmConfiguration } from '../../../certification/shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
+import { AssessmentEndedError } from '../../../shared/domain/errors.js';
 
 const getNextChallengeForCampaignAssessment = async function ({
+  assessment,
+  locale,
   challengeRepository,
   answerRepository,
   flashAlgorithmConfigurationRepository,
   flashAssessmentResultRepository,
-  assessment,
   pickChallengeService,
-  locale,
   algorithmDataFetcherService,
-  smartRandom,
+  smartRandomService,
   flashAlgorithmService,
+  campaignRepository,
+  knowledgeElementRepository,
+  campaignParticipationRepository,
+  improvementService,
 }) {
   let algoResult;
 
@@ -44,8 +48,25 @@ const getNextChallengeForCampaignAssessment = async function ({
 
     return pickChallengeService.chooseNextChallenge(assessment.id)({ possibleChallenges });
   } else {
-    const inputValues = await algorithmDataFetcherService.fetchForCampaigns(...arguments);
-    algoResult = smartRandom.getPossibleSkillsForNextChallenge({ ...inputValues, locale });
+    const { allAnswers, lastAnswer, targetSkills, challenges, knowledgeElements } =
+      await algorithmDataFetcherService.fetchForCampaigns({
+        assessment,
+        locale,
+        answerRepository,
+        campaignRepository,
+        challengeRepository,
+        knowledgeElementRepository,
+        campaignParticipationRepository,
+        improvementService,
+      });
+    algoResult = smartRandomService.getPossibleSkillsForNextChallenge({
+      knowledgeElements,
+      challenges,
+      targetSkills,
+      lastAnswer,
+      allAnswers,
+      locale,
+    });
 
     if (algoResult.hasAssessmentEnded) {
       throw new AssessmentEndedError();

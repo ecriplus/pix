@@ -21,6 +21,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
         findOperativeBySkills: sinon.stub(),
       };
       knowledgeElementRepository = {
+        findUniqByUserIdForCampaignParticipation: sinon.stub(),
         findUniqByUserId: sinon.stub(),
       };
       campaignParticipationRepository = {
@@ -50,7 +51,9 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
         .withArgs({ campaignParticipationId: assessment.campaignParticipationId })
         .resolves(skills);
       challengeRepository.findOperativeBySkills.withArgs(skills).resolves(challenges);
-      knowledgeElementRepository.findUniqByUserId.withArgs({ userId: assessment.userId }).resolves(knowledgeElements);
+      knowledgeElementRepository.findUniqByUserIdForCampaignParticipation
+        .withArgs({ userId: assessment.userId, campaignParticipationId: assessment.campaignParticipationId })
+        .resolves(knowledgeElements);
       campaignParticipationRepository.isRetrying
         .withArgs({ campaignParticipationId: assessment.campaignParticipationId })
         .resolves(isRetrying);
@@ -112,7 +115,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
       challenges = [domainBuilder.buildChallenge()];
       knowledgeElements = [domainBuilder.buildKnowledgeElement()];
       skills = [domainBuilder.buildSkill()];
-      const assessment = domainBuilder.buildAssessment.ofTypeCampaign();
+      const assessment = domainBuilder.buildAssessment.ofTypeCompetenceEvaluation();
       filteredKnowledgeElements = Symbol('filteredKnowledgeElements');
 
       answerRepository.findByAssessment.withArgs(assessment.id).resolves([answer]);

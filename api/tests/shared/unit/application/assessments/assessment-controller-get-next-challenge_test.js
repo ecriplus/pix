@@ -17,6 +17,7 @@ describe('Unit | Controller | assessment-controller-get-next-challenge', functio
     let dependencies;
     let scoredAsssessment;
     let usecases;
+    let evaluationUsecases;
 
     beforeEach(function () {
       assessmentWithoutScore = domainBuilder.buildAssessment({
@@ -47,16 +48,19 @@ describe('Unit | Controller | assessment-controller-get-next-challenge', functio
       usecases = {
         getAssessment: sinon.stub(),
         getNextChallengeForDemo: sinon.stub(),
-        getNextChallengeForCampaignAssessment: sinon.stub(),
         getNextChallengeForCompetenceEvaluation: sinon.stub(),
         getNextChallengeForPreview: sinon.stub(),
       };
       usecases.getAssessment.resolves(scoredAsssessment);
+      evaluationUsecases = {
+        getNextChallengeForCampaignAssessment: sinon.stub(),
+      };
       certificationChallengeRepository = { getNextNonAnsweredChallengeByCourseId: sinon.stub() };
       certificationVersionRepository = { getByCertificationCourseId: sinon.stub() };
 
       dependencies = {
         usecases,
+        evaluationUsecases,
         certificationChallengeRepository,
         assessmentRepository,
         certificationVersionRepository,
@@ -176,7 +180,7 @@ describe('Unit | Controller | assessment-controller-get-next-challenge', functio
         await assessmentController.getNextChallenge({ params: { id: 1 } }, null, dependencies);
 
         // then
-        expect(usecases.getNextChallengeForCampaignAssessment).to.have.been.calledWithExactly({
+        expect(evaluationUsecases.getNextChallengeForCampaignAssessment).to.have.been.calledWithExactly({
           assessment,
           locale: defaultLocale,
         });
@@ -199,7 +203,7 @@ describe('Unit | Controller | assessment-controller-get-next-challenge', functio
         );
 
         // then
-        expect(usecases.getNextChallengeForCampaignAssessment).to.have.been.calledWithExactly({
+        expect(evaluationUsecases.getNextChallengeForCampaignAssessment).to.have.been.calledWithExactly({
           assessment,
           locale,
         });

@@ -1,11 +1,11 @@
-import { getNextChallengeForCampaignAssessment } from '../../../../lib/domain/usecases/get-next-challenge-for-campaign-assessment.js';
-import * as flash from '../../../../src/certification/flash-certification/domain/services/algorithm-methods/flash.js';
-import { config } from '../../../../src/shared/config.js';
-import { AssessmentEndedError } from '../../../../src/shared/domain/errors.js';
-import { AnswerStatus } from '../../../../src/shared/domain/models/index.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
+import * as flash from '../../../../../src/certification/flash-certification/domain/services/algorithm-methods/flash.js';
+import { getNextChallengeForCampaignAssessment } from '../../../../../src/evaluation/domain/usecases/get-next-challenge-for-campaign-assessment.js';
+import { config } from '../../../../../src/shared/config.js';
+import { AssessmentEndedError } from '../../../../../src/shared/domain/errors.js';
+import { AnswerStatus } from '../../../../../src/shared/domain/models/index.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Domain | Use Cases | get-next-challenge-for-campaign-assessment', function () {
+describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-campaign-assessment', function () {
   describe('#get-next-challenge-for-campaign-assessment', function () {
     let challengeRepository;
     let answerRepository;
@@ -68,7 +68,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge-for-campaign-assessment
           flashAssessmentResultRepository,
           pickChallengeService,
           assessment,
-          smartRandom: smartRandomStub,
+          smartRandomService: smartRandomStub,
           algorithmDataFetcherService: algorithmDataFetcherServiceStub,
           flash,
           locale,

@@ -1,5 +1,7 @@
 import _ from 'lodash';
 
+import { Assessment } from '../../../../shared/domain/models/Assessment.js';
+
 async function fetchForCampaigns({
   assessment,
   answerRepository,
@@ -44,7 +46,15 @@ async function _fetchKnowledgeElements({
   knowledgeElementRepository,
   improvementService,
 }) {
-  const knowledgeElements = await knowledgeElementRepository.findUniqByUserId({ userId: assessment.userId });
+  let knowledgeElements;
+  if (assessment.type === Assessment.types.CAMPAIGN) {
+    knowledgeElements = await knowledgeElementRepository.findUniqByUserIdForCampaignParticipation({
+      userId: assessment.userId,
+      campaignParticipationId: assessment.campaignParticipationId,
+    });
+  } else {
+    knowledgeElements = await knowledgeElementRepository.findUniqByUserId({ userId: assessment.userId });
+  }
   return improvementService.filterKnowledgeElementsIfImproving({ knowledgeElements, assessment, isRetrying });
 }
 

@@ -5,6 +5,7 @@ import * as flashAssessmentResultRepository from '../../../../lib/infrastructure
 import * as certificationEvaluationCandidateRepository from '../../../certification/evaluation/infrastructure/repositories/certification-candidate-repository.js';
 import * as flashAlgorithmService from '../../../certification/flash-certification/domain/services/algorithm-methods/flash.js';
 import * as certificationChallengeLiveAlertRepository from '../../../certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
+import * as flashAlgorithmConfigurationRepository from '../../../certification/shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as campaignParticipationRepository from '../../../prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
 import * as targetProfileAdministrationRepository from '../../../prescription/target-profile/infrastructure/repositories/target-profile-administration-repository.js';
@@ -44,41 +45,42 @@ const usecasesWithoutInjectedDependencies = {
 };
 
 const dependencies = {
-  answerRepository,
+  algorithmDataFetcherService,
   answerJobRepository,
+  answerRepository,
   areaRepository,
   assessmentRepository,
-  badgeAcquisitionRepository,
-  badgeForCalculationRepository,
-  userRepository: repositories.userRepository,
   autonomousCourseRepository: repositories.autonomousCourseRepository,
   autonomousCourseTargetProfileRepository: repositories.autonomousCourseTargetProfileRepository,
-  badgeRepository,
+  badgeAcquisitionRepository,
   badgeCriteriaRepository,
-  certificationEvaluationCandidateRepository,
-  certificationChallengeLiveAlertRepository,
-  campaignRepository,
+  badgeForCalculationRepository,
+  badgeRepository,
   campaignParticipationRepository,
+  campaignRepository,
+  certificationChallengeLiveAlertRepository,
+  certificationEvaluationCandidateRepository,
   challengeRepository,
   competenceEvaluationRepository,
   competenceRepository,
+  correctionService,
   feedbackRepository,
-  flashAssessmentResultRepository,
+  flashAlgorithmConfigurationRepository,
   flashAlgorithmService,
+  flashAssessmentResultRepository,
+  getCompetenceLevel,
+  improvementService,
   knowledgeElementRepository: injectedSharedRepositories.knowledgeElementRepository,
+  pickChallengeService,
+  scorecardService,
   skillRepository,
-  stageCollectionForTargetProfileRepository,
+  smartRandomService,
   stageAcquisitionRepository,
+  stageCollectionForTargetProfileRepository,
   stageRepository,
   targetProfileAdministrationRepository,
   targetProfileRepository,
-  getCompetenceLevel,
-  smartRandomService,
-  improvementService,
-  pickChallengeService,
-  scorecardService,
-  algorithmDataFetcherService,
-  correctionService,
+  userRepository: repositories.userRepository,
 };
 
 const evaluationUsecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
