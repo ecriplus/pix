@@ -1,9 +1,9 @@
-import { STAGE_ACQUISITIONS_TABLE_NAME } from '../../../../db/migrations/20230721114848_create-stage_acquisitions-table.js';
-import { usecases } from '../../../../lib/domain/usecases/index.js';
-import { CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
-import { KnowledgeElementCollection } from '../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
-import { DomainTransaction } from '../../../../src/shared/domain/DomainTransaction.js';
-import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
+import { STAGE_ACQUISITIONS_TABLE_NAME } from '../../../../../db/migrations/20230721114848_create-stage_acquisitions-table.js';
+import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
+import { CampaignTypes } from '../../../../../src/prescription/shared/domain/constants.js';
+import { KnowledgeElementCollection } from '../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
+import { Assessment } from '../../../../../src/shared/domain/models/index.js';
 import {
   databaseBuilder,
   domainBuilder,
@@ -11,9 +11,9 @@ import {
   knex,
   learningContentBuilder,
   mockLearningContent,
-} from '../../../test-helper.js';
+} from '../../../../test-helper.js';
 
-describe('Integration | Usecase | Handle Stage Acquisition', function () {
+describe('Evaluation | Integration | Usecase | Handle Stage Acquisition', function () {
   let userId, assessment, stages, campaignParticipationId, targetProfileId, listSkill, learningContent;
 
   before(async function () {
@@ -135,7 +135,7 @@ describe('Integration | Usecase | Handle Stage Acquisition', function () {
             const stageAcquisitionsBefore = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ userId });
 
             // when
-            await usecases.handleStageAcquisition({
+            await evaluationUsecases.handleStageAcquisition({
               assessment,
             });
 
@@ -160,7 +160,7 @@ describe('Integration | Usecase | Handle Stage Acquisition', function () {
               await databaseBuilder.commit();
 
               // when
-              await usecases.handleStageAcquisition({
+              await evaluationUsecases.handleStageAcquisition({
                 assessment,
               });
 
@@ -206,7 +206,7 @@ describe('Integration | Usecase | Handle Stage Acquisition', function () {
             stages = [databaseBuilder.factory.buildStage({ targetProfileId, threshold: 0 })];
 
             // when
-            await usecases.handleStageAcquisition({
+            await evaluationUsecases.handleStageAcquisition({
               assessment,
             });
 
@@ -230,7 +230,7 @@ describe('Integration | Usecase | Handle Stage Acquisition', function () {
             await databaseBuilder.commit();
 
             // when
-            await usecases.handleStageAcquisition({
+            await evaluationUsecases.handleStageAcquisition({
               assessment,
             });
 
@@ -261,7 +261,7 @@ describe('Integration | Usecase | Handle Stage Acquisition', function () {
           await databaseBuilder.commit();
 
           // when
-          await usecases.handleStageAcquisition({
+          await evaluationUsecases.handleStageAcquisition({
             assessment,
           });
 
@@ -334,7 +334,7 @@ describe('Integration | Usecase | Handle Stage Acquisition', function () {
             const stageAcquisitionsBefore = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ userId });
 
             // when
-            await usecases.handleStageAcquisition({
+            await evaluationUsecases.handleStageAcquisition({
               assessment,
             });
 
@@ -359,7 +359,7 @@ describe('Integration | Usecase | Handle Stage Acquisition', function () {
               await databaseBuilder.commit();
 
               // when
-              await usecases.handleStageAcquisition({
+              await evaluationUsecases.handleStageAcquisition({
                 assessment,
               });
 
@@ -405,7 +405,7 @@ describe('Integration | Usecase | Handle Stage Acquisition', function () {
             stages = [databaseBuilder.factory.buildStage({ targetProfileId, threshold: 0 })];
 
             // when
-            await usecases.handleStageAcquisition({
+            await evaluationUsecases.handleStageAcquisition({
               assessment,
             });
 
@@ -429,7 +429,7 @@ describe('Integration | Usecase | Handle Stage Acquisition', function () {
             await databaseBuilder.commit();
 
             // when
-            await usecases.handleStageAcquisition({
+            await evaluationUsecases.handleStageAcquisition({
               assessment,
             });
 
@@ -468,7 +468,7 @@ describe('Integration | Usecase | Handle Stage Acquisition', function () {
           await databaseBuilder.commit();
 
           // when
-          await usecases.handleStageAcquisition({
+          await evaluationUsecases.handleStageAcquisition({
             assessment,
           });
 

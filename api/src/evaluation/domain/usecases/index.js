@@ -1,6 +1,7 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import * as getMasteryPercentageService from '../../../../lib/domain/services/get-mastery-percentage-service.js';
 import * as flashAssessmentResultRepository from '../../../../lib/infrastructure/repositories/flash-assessment-result-repository.js';
 import * as certificationEvaluationCandidateRepository from '../../../certification/evaluation/infrastructure/repositories/certification-candidate-repository.js';
 import * as flashAlgorithmService from '../../../certification/flash-certification/domain/services/algorithm-methods/flash.js';
@@ -37,6 +38,8 @@ import { getCompetenceLevel } from '../services/get-competence-level.js';
 import * as improvementService from '../services/improvement-service.js';
 import { pickChallengeService } from '../services/pick-challenge-service.js';
 import * as scorecardService from '../services/scorecard-service.js';
+import * as convertLevelStagesIntoThresholdsService from '../services/stages/convert-level-stages-into-thresholds-service.js';
+import * as getNewAcquiredStagesService from '../services/stages/get-new-acquired-stages-service.js';
 
 const path = dirname(fileURLToPath(import.meta.url));
 
@@ -81,6 +84,9 @@ const dependencies = {
   targetProfileAdministrationRepository,
   targetProfileRepository,
   userRepository: repositories.userRepository,
+  getNewAcquiredStagesService,
+  convertLevelStagesIntoThresholdsService,
+  getMasteryPercentageService,
 };
 
 const evaluationUsecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);

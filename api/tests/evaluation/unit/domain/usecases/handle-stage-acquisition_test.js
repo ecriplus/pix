@@ -1,7 +1,7 @@
-import { handleStageAcquisition } from '../../../../lib/domain/usecases/stages/handle-stage-acquisition.js';
-import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { handleStageAcquisition } from '../../../../../src/evaluation/domain/usecases/handle-stage-acquisition.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | UseCase | handleStageAcquisition', function () {
+describe('Evaluation | Unit | UseCase | handleStageAcquisition', function () {
   // Repositories
   let campaignParticipationRepository;
   let stageAcquisitionRepository;
