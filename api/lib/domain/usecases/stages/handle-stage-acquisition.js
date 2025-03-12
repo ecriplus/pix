@@ -54,8 +54,9 @@ const handleStageAcquisition = async function ({
   }
 
   const [knowledgeElements, campaignSkillsIds] = await Promise.all([
-    knowledgeElementRepository.findUniqByUserId({
+    knowledgeElementRepository.findUniqByUserIdForCampaignParticipation({
       userId: assessment.userId,
+      campaignParticipationId: assessment.campaignParticipationId,
     }),
     campaignRepository.findSkillIdsByCampaignParticipationId({
       campaignParticipationId: assessment.campaignParticipationId,

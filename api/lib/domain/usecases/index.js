@@ -50,6 +50,7 @@ import * as challengeRepository from '../../../src/shared/infrastructure/reposit
 import * as competenceRepository from '../../../src/shared/infrastructure/repositories/competence-repository.js';
 import * as courseRepository from '../../../src/shared/infrastructure/repositories/course-repository.js';
 import * as frameworkRepository from '../../../src/shared/infrastructure/repositories/framework-repository.js';
+import { repositories as sharedRepositories } from '../../../src/shared/infrastructure/repositories/index.js';
 import * as knowledgeElementRepository from '../../../src/shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as organizationLearnerRepository from '../../../src/shared/infrastructure/repositories/organization-learner-repository.js';
 import * as organizationRepository from '../../../src/shared/infrastructure/repositories/organization-repository.js';
@@ -128,7 +129,7 @@ const dependencies = {
   emailValidationDemandRepository,
   frameworkRepository,
   userToCreateRepository,
-  knowledgeElementRepository,
+  knowledgeElementRepository: sharedRepositories.knowledgeElementRepository,
   lastUserApplicationConnectionsRepository,
   learningContentConversionService,
   membershipRepository,
