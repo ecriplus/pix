@@ -207,7 +207,7 @@ async function _getTargetProfileAndSkills(targetProfileId, profileType) {
         : competences;
   const [{ id: createdTargetProfileId }] = await knex('target-profiles')
     .returning('id')
-    .insert({ name: 'SomeTargetProfile' });
+    .insert({ name: 'SomeTargetProfile', internalName: 'SomeTargetProfile' });
   for (const competence of competencesInProfile) {
     const skills = await skillRepository.findOperativeByCompetenceId(competence.id);
     const tubeIds = _.uniq(_.map(skills, 'tubeId'));

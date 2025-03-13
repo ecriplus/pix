@@ -12,6 +12,7 @@ describe('Unit | Domain | Models | TargetProfileForCreation', function () {
         description: 'a description',
         imageUrl: 'old url',
         name: 'original name',
+        internalName: 'original internal name',
         tubes: [
           {
             id: 'recTubeId',
@@ -25,6 +26,7 @@ describe('Unit | Domain | Models | TargetProfileForCreation', function () {
 
       // then
       expect(copiedTargetProfile.name).to.equal('[Copie] original name');
+      expect(copiedTargetProfile.internalName).to.equal('[Copie] original internal name');
       expect(copiedTargetProfile.areKnowledgeElementsResettable).to.be.false;
       expect(copiedTargetProfile.category).to.equal('CUSTOM');
       expect(copiedTargetProfile.comment).to.equal('a comment');

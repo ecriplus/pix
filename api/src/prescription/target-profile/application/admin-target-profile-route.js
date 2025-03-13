@@ -61,6 +61,7 @@ const register = async function (server) {
             data: {
               attributes: {
                 name: Joi.string().required(),
+                'internal-name': Joi.string().required(),
                 category: Joi.string().required(),
                 description: Joi.string().allow(null).max(500).required(),
                 comment: Joi.string().allow(null).max(500).required(),
@@ -457,7 +458,7 @@ const register = async function (server) {
           query: Joi.object({
             filter: Joi.object({
               id: Joi.number().integer().empty('').allow(null).optional(),
-              name: Joi.string().empty('').allow(null).optional(),
+              internalName: Joi.string().empty('').allow(null).optional(),
               categories: [filterType.targetProfileCategory, Joi.array().items(filterType.targetProfileCategory)],
             }).default({}),
             page: Joi.object({
@@ -506,6 +507,7 @@ const register = async function (server) {
                 description: Joi.string().allow(null).max(500),
                 'image-url': Joi.string().uri().allow(null),
                 name: Joi.string(),
+                'internal-name': Joi.string(),
                 tubes: Joi.array()
                   .optional()
                   .items(

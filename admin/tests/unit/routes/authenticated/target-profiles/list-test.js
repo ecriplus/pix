@@ -35,7 +35,7 @@ module('Unit | Route | authenticated/target-profiles/list', function (hooks) {
         // when
         await route.model(params);
         expectedQueryArgs.filter = {
-          name: '',
+          internalName: '',
           id: '',
           categories: [],
         };
@@ -49,11 +49,11 @@ module('Unit | Route | authenticated/target-profiles/list', function (hooks) {
     module('when queryParams filters are truthy', function () {
       test('it should call store.query with filters containing trimmed values', async function (assert) {
         // given
-        params.name = ' someName';
+        params.internalName = ' someName';
         params.id = 'someId ';
         params.categories = ['OTHER'];
         expectedQueryArgs.filter = {
-          name: 'someName',
+          internalName: 'someName',
           id: 'someId',
           categories: ['OTHER'],
         };
@@ -74,7 +74,7 @@ module('Unit | Route | authenticated/target-profiles/list', function (hooks) {
       controller = {
         pageNumber: 'somePageNumber',
         pageSize: 'somePageSize',
-        name: 'someName',
+        internalName: 'someName',
         id: 'someId',
         categories: ['OTHER'],
       };
@@ -88,7 +88,7 @@ module('Unit | Route | authenticated/target-profiles/list', function (hooks) {
         // then
         assert.strictEqual(controller.pageNumber, 1);
         assert.strictEqual(controller.pageSize, 10);
-        assert.strictEqual(controller.name, null);
+        assert.strictEqual(controller.internalName, null);
         assert.strictEqual(controller.id, null);
         assert.strictEqual(controller.categories.length, 0);
       });
@@ -102,7 +102,7 @@ module('Unit | Route | authenticated/target-profiles/list', function (hooks) {
         // then
         assert.strictEqual(controller.pageNumber, 'somePageNumber');
         assert.strictEqual(controller.pageSize, 'somePageSize');
-        assert.strictEqual(controller.name, 'someName');
+        assert.strictEqual(controller.internalName, 'someName');
         assert.strictEqual(controller.id, 'someId');
         assert.deepEqual(controller.categories, ['OTHER']);
       });

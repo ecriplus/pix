@@ -29,6 +29,7 @@ const serialize = function ({ targetProfile, filter }) {
     },
     attributes: [
       'name',
+      'internalName',
       'outdated',
       'createdAt',
       'ownerOrganizationId',

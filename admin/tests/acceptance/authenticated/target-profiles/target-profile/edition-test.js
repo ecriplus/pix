@@ -8,7 +8,7 @@ import { module, test } from 'qunit';
 import { createLearningContent } from '../../../../../mirage/helpers/create-learning-content';
 import setupIntl from '../../../../helpers/setup-intl';
 
-module('Acceptance | Target Profile Management', function (hooks) {
+module('Acceptance | Target Profile Edition', function (hooks) {
   setupApplicationTest(hooks);
   setupIntl(hooks);
   setupMirage(hooks);
@@ -37,7 +37,7 @@ module('Acceptance | Target Profile Management', function (hooks) {
   });
 
   test('it should edit target profile informations and selected tubes', async function (assert) {
-    await fillByLabel(/Nom/, 'Un nouveau nom');
+    await fillByLabel(/Nom interne/, 'Un nouveau nom interne');
 
     await fillByLabel(/Référentiel/, 'Pi');
     await click(screen.getByLabelText('Pix + Cuisine'));
@@ -58,7 +58,7 @@ module('Acceptance | Target Profile Management', function (hooks) {
     // then
     assert.dom(screen.getByText('Le profil cible a été modifié avec succès.')).exists();
 
-    assert.strictEqual(screen.getAllByRole('heading', { name: 'Un nouveau nom' }).length, 2);
+    assert.strictEqual(screen.getAllByRole('heading', { name: 'Un nouveau nom interne' }).length, 2);
     assert.dom(screen.getByText('Une nouvelle description')).exists();
 
     await clickByName('area_f2_a1 code · area_f2_a1 title');

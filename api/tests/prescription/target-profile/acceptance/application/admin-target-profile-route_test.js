@@ -76,6 +76,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
             data: {
               attributes: {
                 name: 'CoolPixer',
+                'internal-name': 'CoolPixer internal',
                 description: 'Amazing description',
                 comment: 'Amazing comment',
                 category: 'OTHER',
@@ -113,6 +114,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
             data: {
               attributes: {
                 name: 'nom changé',
+                'internal-name': 'nom changé',
                 category: 'COMPETENCES',
                 description: 'description changée.',
                 comment: 'commentaire changé.',
@@ -182,6 +184,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
       // given
       const targetProfile = databaseBuilder.factory.buildTargetProfile({
         name: 'Savoir tout faire',
+        internalName: 'Savoir tout faire',
         imageUrl: 'https://test',
         isSimplifiedAccess: false,
         createdAt: new Date('2020-01-01'),
@@ -209,6 +212,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
         'image-url': 'https://test',
         'is-simplified-access': false,
         name: 'Savoir tout faire',
+        'internal-name': 'Savoir tout faire',
         outdated: false,
         'owner-organization-id': targetProfile.ownerOrganizationId,
         'max-level': -Infinity,
@@ -881,6 +885,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
           data: {
             attributes: {
               name: 'targetProfileName',
+              'internal-name': 'internalTargetProfileName',
               category: 'OTHER',
               description: 'coucou maman',
               comment: 'coucou papa',

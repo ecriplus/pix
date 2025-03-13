@@ -116,7 +116,9 @@ export default class Badge extends Component {
     <header class="page-header">
       <div>
         <p>
-          <LinkTo @route="authenticated.target-profiles.target-profile.insights">{{@targetProfile.name}}</LinkTo>
+          <LinkTo
+            @route="authenticated.target-profiles.target-profile.insights"
+          >{{@targetProfile.internalName}}</LinkTo>
           <span class="wire">&nbsp;>&nbsp;</span>
           <h1>Résultat thématique {{@badge.id}}</h1>
         </p>

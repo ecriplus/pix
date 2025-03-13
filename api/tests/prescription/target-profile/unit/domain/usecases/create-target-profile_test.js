@@ -48,6 +48,7 @@ describe('Unit | UseCase | create-target-profile', function () {
 
     const expectedTargetProfileForCreation = domainBuilder.buildTargetProfileForCreation({
       name: 'myFirstTargetProfile',
+      internalName: 'myFirstInternalTargetProfile',
       category: categories.SUBJECT,
       description: 'la description',
       comment: 'le commentaire',
@@ -60,6 +61,7 @@ describe('Unit | UseCase | create-target-profile', function () {
     // when
     const targetProfileCreationCommand = {
       name: 'myFirstTargetProfile',
+      internalName: 'myFirstInternalTargetProfile',
       category: categories.SUBJECT,
       description: 'la description',
       comment: 'le commentaire',
@@ -86,6 +88,7 @@ describe('Unit | UseCase | create-target-profile', function () {
 
     const expectedTargetProfileForCreation = domainBuilder.buildTargetProfileForCreation({
       name: 'myFirstTargetProfile',
+      internalName: 'myFirstTargetProfileInternal',
       category: categories.SUBJECT,
       description: 'la description',
       comment: 'le commentaire',
@@ -102,6 +105,7 @@ describe('Unit | UseCase | create-target-profile', function () {
     // when
     const targetProfileCreationCommand = {
       name: 'myFirstTargetProfile',
+      internalName: 'myFirstTargetProfileInternal',
       category: categories.SUBJECT,
       description: 'la description',
       comment: 'le commentaire',

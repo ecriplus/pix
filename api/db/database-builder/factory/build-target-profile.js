@@ -6,6 +6,7 @@ import { buildOrganization } from './build-organization.js';
 const buildTargetProfile = function ({
   id = databaseBuffer.getNextId(),
   name = 'Remplir un tableur',
+  internalName = name || 'Remplir un tableur',
   imageUrl = 'https://images.pix.fr/profil-cible/Illu_GEN.svg',
   isSimplifiedAccess = false,
   ownerOrganizationId,
@@ -22,6 +23,7 @@ const buildTargetProfile = function ({
   const values = {
     id,
     name,
+    internalName,
     imageUrl,
     isSimplifiedAccess,
     ownerOrganizationId,

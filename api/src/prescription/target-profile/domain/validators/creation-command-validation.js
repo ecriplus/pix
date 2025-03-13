@@ -5,6 +5,7 @@ import { schema as base } from './base-validation.js';
 
 const schema = base.keys({
   description: Joi.string().allow(null),
+  internalName: Joi.string(),
   comment: Joi.string().allow(null),
   imageUrl: Joi.string().allow(null),
   ownerOrganizationId: Joi.number().allow(null).default(null),

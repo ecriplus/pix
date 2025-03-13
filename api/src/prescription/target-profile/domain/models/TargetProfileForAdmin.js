@@ -6,6 +6,7 @@ class TargetProfileForAdmin {
   constructor({
     id,
     name,
+    internalName,
     outdated,
     createdAt,
     ownerOrganizationId,
@@ -27,6 +28,7 @@ class TargetProfileForAdmin {
   } = {}) {
     this.id = id;
     this.name = name;
+    this.internalName = internalName;
     this.outdated = outdated;
     this.createdAt = createdAt;
     this.ownerOrganizationId = ownerOrganizationId;
@@ -78,11 +80,13 @@ class TargetProfileForAdmin {
     }
 
     const validCategories = Object.values(categories);
+
     if (!validCategories.includes(attributes.category)) {
       throw new DomainError("La catégorie de profil cible renseignée n'est pas valide");
     }
 
     this.name = attributes.name;
+    this.internalName = attributes.internalName;
     this.imageUrl = attributes.imageUrl;
     this.description = attributes.description;
     this.comment = attributes.comment;

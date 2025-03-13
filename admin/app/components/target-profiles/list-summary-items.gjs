@@ -18,7 +18,7 @@ export default class TargetProfileListSummaryItems extends Component {
   @tracked selectedValues = [];
 
   get isClearFiltersButtonDisabled() {
-    return !this.args.id && !this.args.name && this.args.categories?.length === 0;
+    return !this.args.id && !this.args.internalName && this.args.categories?.length === 0;
   }
 
   get categoryOptions() {
@@ -52,13 +52,14 @@ export default class TargetProfileListSummaryItems extends Component {
 
       <PixInput
         type="text"
-        value={{@name}}
-        placeholder={{t "pages.target-profiles.filters.search-by-name.placeholder"}}
-        oninput={{fn @triggerFiltering "name"}}
+        value={{@internalName}}
+        placeholder={{t "pages.target-profiles.filters.search-by-internal-name.placeholder"}}
+        oninput={{fn @triggerFiltering "internalName"}}
         @screenReaderOnly={{true}}
       >
-        <:label>{{t "pages.target-profiles.filters.search-by-name.name"}}</:label>
+        <:label>{{t "pages.target-profiles.filters.search-by-internal-name.name"}}</:label>
       </PixInput>
+
       <PixMultiSelect
         @id="categories"
         @screenReaderOnly={{true}}
@@ -79,7 +80,7 @@ export default class TargetProfileListSummaryItems extends Component {
           <thead>
             <tr>
               <th class="table__column table__column--id">{{t "common.fields.id"}}</th>
-              <th>{{t "common.fields.name"}}</th>
+              <th>{{t "common.fields.internalName"}}</th>
               <th>{{t "common.fields.target-profile.category.name"}}</th>
               <th class="col-date">{{t "common.fields.createdAt"}}</th>
               <th class="col-status">{{t "common.fields.status"}}</th>
@@ -93,7 +94,7 @@ export default class TargetProfileListSummaryItems extends Component {
                   <td class="table__column table__column--id">{{summary.id}}</td>
                   <td>
                     <LinkTo @route="authenticated.target-profiles.target-profile" @model={{summary.id}}>
-                      {{summary.name}}
+                      {{summary.internalName}}
                     </LinkTo>
                   </td>
                   <td class="table__column table__column--id">{{t summary.translationKeyCategory}}</td>

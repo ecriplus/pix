@@ -16,7 +16,7 @@ module('Integration | Component | TargetProfiles::ListSummaryItems', function (h
     // given
     const summary = {
       id: 123,
-      name: 'Profile Cible',
+      internalName: 'Profile Cible',
       oudated: false,
       isDisabled: true,
       createdAt: new Date('2021-01-01'),

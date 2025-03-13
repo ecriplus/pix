@@ -7,13 +7,13 @@ import config from 'pix-admin/config/environment';
 const DEFAULT_PAGE_NUMBER = 1;
 
 export default class ListController extends Controller {
-  queryParams = ['pageNumber', 'pageSize', 'id', 'name', 'categories'];
+  queryParams = ['pageNumber', 'pageSize', 'id', 'internalName', 'categories'];
   DEBOUNCE_MS = config.pagination.debounce;
 
   @tracked pageNumber = DEFAULT_PAGE_NUMBER;
   @tracked pageSize = 10;
   @tracked id = null;
-  @tracked name = null;
+  @tracked internalName = null;
   @tracked categories = [];
 
   updateFilters(filters) {
@@ -31,7 +31,7 @@ export default class ListController extends Controller {
   @action
   onResetFilter() {
     this.id = null;
-    this.name = null;
+    this.internalName = null;
     this.categories = [];
   }
 }

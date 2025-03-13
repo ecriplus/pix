@@ -22,6 +22,7 @@ module('Acceptance | Target Profile copy', function (hooks) {
     server.create('target-profile', {
       id: 1,
       name: 'nom initial',
+      internalName: 'nom initial interne',
       description: 'description initiale',
       comment: 'commentaire initial',
       category: 'OTHER',
@@ -36,9 +37,12 @@ module('Acceptance | Target Profile copy', function (hooks) {
     // then
     await screen.findByRole('button', { name: 'Valider' });
     await clickByName('Valider');
-    await screen.findByRole('heading', { name: '[Copie] nom initial', level: 1 });
-    assert.dom(screen.getByRole('heading', { name: '[Copie] nom initial', level: 1 })).exists();
-    assert.dom(screen.getByRole('heading', { name: '[Copie] nom initial', level: 2 })).exists();
+
+    await screen.findByRole('heading', { name: '[Copie] nom initial interne', level: 1 });
+
+    assert.dom(screen.getByRole('heading', { name: '[Copie] nom initial interne', level: 1 })).exists();
+    assert.dom(screen.getByRole('heading', { name: '[Copie] nom initial interne', level: 2 })).exists();
+
     await clickByName('1 · areaUn');
     await clickByName('1.1 competenceUn');
     assert.dom(screen.getByText('@tubeNiveauDeux : Mon tube de niveau deux')).exists();

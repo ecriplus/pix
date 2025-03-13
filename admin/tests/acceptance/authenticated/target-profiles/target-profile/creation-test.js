@@ -75,7 +75,8 @@ module('Acceptance | Target profile creation', function (hooks) {
       server.get('/admin/frameworks', (schema) => schema.frameworks.all());
       const screen = await visit('/target-profiles/list');
       await clickByName('Nouveau profil cible');
-      await fillByLabel(/Nom/, 'Un profil cible, et vite !');
+      await fillByLabel(/Nom externe/, 'Un profil cible, et vite !');
+      await fillByLabel(/Nom interne/, 'Un profil cible interne, et vite !');
       await fillByLabel(/Identifiant de l'organisation de référence/, 1);
       await clickByName(/Permettre la remise à zéro des acquis du profil cible/);
 
@@ -96,7 +97,7 @@ module('Acceptance | Target profile creation', function (hooks) {
       assert.dom(screen.getByText('Le profil cible a été créé avec succès.')).exists();
 
       await _unfoldLearningContent();
-      assert.dom(screen.getByRole('heading', { name: 'Un profil cible, et vite !', level: 2 })).exists();
+      assert.dom(screen.getByRole('heading', { name: 'Un profil cible interne, et vite !', level: 2 })).exists();
       let isMobileCompliant = screen.getByTestId('mobile-compliant-tube_f1_a1_c1_th1_tu1').getAttribute('aria-label');
       let isTabletCompliant = screen.getByTestId('tablet-compliant-tube_f1_a1_c1_th1_tu1').getAttribute('aria-label');
       assert.deepEqual(

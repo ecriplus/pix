@@ -21,6 +21,7 @@ export default class TargetProfile extends Model {
   @service session;
 
   @attr('nullable-string') name;
+  @attr('nullable-string') internalName;
   @attr('date') createdAt;
   @attr('nullable-string') imageUrl;
   @attr('boolean') outdated;

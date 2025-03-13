@@ -178,19 +178,21 @@ export default class TargetProfile extends Component {
       <div>
         <LinkTo @route="authenticated.target-profiles.list">Tous les profils cibles</LinkTo>
         <span class="wire">&nbsp;>&nbsp;</span>
-        <h1>{{@model.name}}</h1>
+        <h1>{{@model.internalName}}</h1>
       </div>
     </header>
 
     <main class="page-body">
       <section class="page-section target-profile-section">
         <div class="page-section__header">
-          <h2 class="page-section__title target-profile__title">{{@model.name}}</h2>
+          <h2 class="page-section__title target-profile__title">{{@model.internalName}}</h2>
           <Category @category={{@model.category}} />
         </div>
         <div class="target-profile-section__container">
           <ul>
             <li><span class="bold">ID&#x20;:&#x20;</span>{{@model.id}}</li>
+            <li><span class="bold">Nom interne&#x20;:&#x20;</span>{{@model.internalName}}</li>
+            <li><span class="bold">Nom externe&#x20;:&#x20;</span>{{@model.name}}</li>
             <li><span class="bold">Organisation de référence&#x20;:&#x20;</span><LinkTo
                 @route="authenticated.organizations.get"
                 @model={{@model.ownerOrganizationId}}

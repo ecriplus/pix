@@ -127,6 +127,7 @@ describe('Integration | Repository | Target-profile', function () {
         const targetProfileDB = databaseBuilder.factory.buildTargetProfile({
           id: 1,
           name: 'Mon Super Profil Cible qui déchire',
+          internalName: 'Mon Super Profil Cible qui déchire en interne',
           outdated: false,
           createdAt: new Date('2020-01-01'),
           ownerOrganizationId: 66,
@@ -457,6 +458,7 @@ describe('Integration | Repository | Target-profile', function () {
         const expectedTargetProfile = new TargetProfileForAdmin({
           id: targetProfileDB.id,
           name: targetProfileDB.name,
+          internalName: targetProfileDB.internalName,
           createdAt: targetProfileDB.createdAt,
           outdated: targetProfileDB.outdated,
           ownerOrganizationId: targetProfileDB.ownerOrganizationId,
@@ -611,6 +613,7 @@ describe('Integration | Repository | Target-profile', function () {
         const expectedTargetProfile = new TargetProfileForAdmin({
           id: targetProfileDB.id,
           name: targetProfileDB.name,
+          internalName: targetProfileDB.internalName,
           createdAt: targetProfileDB.createdAt,
           outdated: targetProfileDB.outdated,
           ownerOrganizationId: targetProfileDB.ownerOrganizationId,
@@ -731,11 +734,16 @@ describe('Integration | Repository | Target-profile', function () {
 
       // when
       targetProfile.name = 'Karam';
+      targetProfile.internalName = 'Karam';
       await targetProfileAdministrationRepository.update(targetProfile);
 
       // then
-      const { name } = await knex('target-profiles').select('name').where('id', targetProfile.id).first();
+      const { name, internalName } = await knex('target-profiles')
+        .select('name', 'internalName')
+        .where('id', targetProfile.id)
+        .first();
       expect(name).to.equal(targetProfile.name);
+      expect(internalName).to.equal(targetProfile.internalName);
     });
 
     it('should update the target profile description', async function () {
@@ -1023,8 +1031,8 @@ describe('Integration | Repository | Target-profile', function () {
 
           // then
           const expectedTargetProfileSummaries = [
-            domainBuilder.buildTargetProfileSummaryForAdmin({ id: 10, name: 'B_tp', outdated: false }),
-            domainBuilder.buildTargetProfileSummaryForAdmin({ id: 11, name: 'A_tp', outdated: false }),
+            domainBuilder.buildTargetProfileSummaryForAdmin({ id: 10, internalName: 'B_tp', outdated: false }),
+            domainBuilder.buildTargetProfileSummaryForAdmin({ id: 11, internalName: 'A_tp', outdated: false }),
           ];
           expect(actualTargetProfileSummaries).to.deepEqualArray(expectedTargetProfileSummaries);
         });
@@ -1034,7 +1042,7 @@ describe('Integration | Repository | Target-profile', function () {
           databaseBuilder.factory.buildOrganization({ id: 1 });
           databaseBuilder.factory.buildTargetProfile({
             id: 11,
-            name: 'A_tp',
+            internalName: 'A_tp',
             ownerOrganizationId: 1,
             outdated: false,
           });
@@ -1051,7 +1059,7 @@ describe('Integration | Repository | Target-profile', function () {
 
           // then
           const expectedTargetProfileSummaries = [
-            domainBuilder.buildTargetProfileSummaryForAdmin({ id: 11, name: 'A_tp', outdated: false }),
+            domainBuilder.buildTargetProfileSummaryForAdmin({ id: 11, internalName: 'A_tp', outdated: false }),
           ];
           expect(actualTargetProfileSummaries).to.deepEqualArray(expectedTargetProfileSummaries);
         });
@@ -1062,17 +1070,17 @@ describe('Integration | Repository | Target-profile', function () {
           databaseBuilder.factory.buildOrganization({ id: 2 });
           databaseBuilder.factory.buildTargetProfile({
             id: 11,
-            name: 'A_tp',
+            internalName: 'A_tp',
             outdated: false,
           });
           databaseBuilder.factory.buildTargetProfile({
             id: 10,
-            name: 'B_tp',
+            internalName: 'B_tp',
             outdated: false,
           });
           databaseBuilder.factory.buildTargetProfile({
             id: 12,
-            name: 'Not_Mine',
+            internalName: 'Not_Mine',
             outdated: false,
           });
           databaseBuilder.factory.buildTargetProfileShare({ targetProfileId: 10, organizationId: 1 });
@@ -1087,8 +1095,8 @@ describe('Integration | Repository | Target-profile', function () {
 
           // then
           const expectedTargetProfileSummaries = [
-            domainBuilder.buildTargetProfileSummaryForAdmin({ id: 10, name: 'B_tp', outdated: false }),
-            domainBuilder.buildTargetProfileSummaryForAdmin({ id: 11, name: 'A_tp', outdated: false }),
+            domainBuilder.buildTargetProfileSummaryForAdmin({ id: 10, internalName: 'B_tp', outdated: false }),
+            domainBuilder.buildTargetProfileSummaryForAdmin({ id: 11, internalName: 'A_tp', outdated: false }),
           ];
           expect(actualTargetProfileSummaries).to.deepEqualArray(expectedTargetProfileSummaries);
         });
@@ -1116,8 +1124,8 @@ describe('Integration | Repository | Target-profile', function () {
 
           // then
           const expectedTargetProfileSummaries = [
-            domainBuilder.buildTargetProfileSummaryForAdmin({ id: 10, name: 'B_tp', outdated: false }),
-            domainBuilder.buildTargetProfileSummaryForAdmin({ id: 11, name: 'A_tp', outdated: false }),
+            domainBuilder.buildTargetProfileSummaryForAdmin({ id: 10, internalName: 'B_tp', outdated: false }),
+            domainBuilder.buildTargetProfileSummaryForAdmin({ id: 11, internalName: 'A_tp', outdated: false }),
           ];
           expect(actualTargetProfileSummaries).to.deepEqualArray(expectedTargetProfileSummaries);
         });
@@ -1170,8 +1178,8 @@ describe('Integration | Repository | Target-profile', function () {
 
           // then
           const expectedTargetProfileSummaries = [
-            domainBuilder.buildTargetProfileSummaryForAdmin({ id: 11, name: 'B_tp', outdated: false }),
-            domainBuilder.buildTargetProfileSummaryForAdmin({ id: 12, name: 'C_tp', outdated: false }),
+            domainBuilder.buildTargetProfileSummaryForAdmin({ id: 11, internalName: 'B_tp', outdated: false }),
+            domainBuilder.buildTargetProfileSummaryForAdmin({ id: 12, internalName: 'C_tp', outdated: false }),
           ];
           expect(actualTargetProfileSummaries).to.deepEqualArray(expectedTargetProfileSummaries);
         });

@@ -7,6 +7,10 @@ export default Factory.extend({
     return 'Mon Super Profil Cible Trop Biengggg';
   },
 
+  internalName() {
+    return 'Mon Super Profil Cible interne Trop Biengggg';
+  },
+
   createdAt() {
     return new Date('2020-01-01');
   },

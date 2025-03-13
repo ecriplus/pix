@@ -94,6 +94,7 @@ describe('Unit | Serializer | JSONAPI | target-profile-for-admin-serializer', fu
       const targetProfile = new TargetProfileForAdmin({
         id: 132,
         name: 'Mon Super profil cible',
+        internalName: 'Mon Super profil cible interne',
         outdated: true,
         createdAt: new Date('2021-03-02'),
         ownerOrganizationId: 12,
@@ -197,6 +198,7 @@ describe('Unit | Serializer | JSONAPI | target-profile-for-admin-serializer', fu
             'are-knowledge-elements-resettable': false,
             'max-level': 7,
             name: 'Mon Super profil cible',
+            'internal-name': 'Mon Super profil cible interne',
             outdated: true,
             'owner-organization-id': 12,
             'has-linked-campaign': false,

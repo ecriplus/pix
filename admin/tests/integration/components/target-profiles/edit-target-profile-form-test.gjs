@@ -66,6 +66,7 @@ module('Integration | Component | TargetProfiles::EditTargetProfileForm', functi
       comment: '',
       imageUrl: '',
       name: 'A name',
+      internalName: 'An internal name',
       ownerOrganizationId: 1000,
     };
   });
@@ -93,7 +94,8 @@ module('Integration | Component | TargetProfiles::EditTargetProfileForm', functi
       );
       // then
       assert.dom(screen.getByText(/Information sur le profil cible/)).exists();
-      assert.dom(screen.getByLabelText(/Nom/)).exists();
+      assert.dom(screen.getByLabelText(/Nom interne/)).exists();
+      assert.dom(screen.getByLabelText(/Nom externe/)).exists();
       assert.dom(screen.getByLabelText(/Catégorie/)).exists();
       assert.dom(screen.getByLabelText(/Identifiant de l'organisation de référence/)).exists();
       assert.dom(screen.getByLabelText(/Permettre la remise à zéro des acquis du profil cible/)).exists();

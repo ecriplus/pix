@@ -14,6 +14,7 @@ class TargetProfile {
   constructor({
     id,
     name,
+    internalName,
     imageUrl,
     category,
     isSimplifiedAccess,
@@ -25,6 +26,7 @@ class TargetProfile {
   } = {}) {
     this.id = id;
     this.name = name;
+    this.internalName = internalName;
     this.imageUrl = imageUrl;
     this.category = category;
     this.isSimplifiedAccess = isSimplifiedAccess;

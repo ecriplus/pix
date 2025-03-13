@@ -1,8 +1,9 @@
-{{page-title "Modification du profil cible : " @model.targetProfile.name}}
+{{page-title "Modification du profil cible : " @model.targetProfile.internalName}}
+
 <header class="page-header">
   <div>
     <LinkTo @route="authenticated.target-profiles.target-profile" @model={{@model.targetProfile.id}}>
-      {{@model.targetProfile.name}}
+      {{@model.targetProfile.internalName}}
     </LinkTo>
     <span role="presentation" class="wire">&nbsp;>&nbsp;</span>
     <h1>Modification du profil cible</h1>

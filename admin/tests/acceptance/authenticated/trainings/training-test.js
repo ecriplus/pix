@@ -18,7 +18,7 @@ module('Acceptance | Trainings | Training', function (hooks) {
     let prerequisiteTriggerHeading;
     let goalTriggerHeading;
     let trainingId;
-    let targetProfileName;
+    let targetProfileInternalName;
 
     hooks.beforeEach(async function () {
       triggersTabName = t('pages.trainings.training.triggers.tabName');
@@ -26,7 +26,7 @@ module('Acceptance | Trainings | Training', function (hooks) {
       prerequisiteTriggerHeading = t('pages.trainings.training.triggers.prerequisite.title');
       goalTriggerHeading = t('pages.trainings.training.triggers.goal.title');
       trainingId = 2;
-      targetProfileName = 'Profile Cible 1';
+      targetProfileInternalName = 'Profile Cible 1';
 
       await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
 
@@ -59,7 +59,7 @@ module('Acceptance | Trainings | Training', function (hooks) {
         targetProfileSummaries: [
           server.create('target-profile-summary', {
             id: 1,
-            name: targetProfileName,
+            internalName: targetProfileInternalName,
             outdated: true,
           }),
         ],
@@ -154,7 +154,7 @@ module('Acceptance | Trainings | Training', function (hooks) {
       assert.dom(screen.getByRole('link', { name: targetProfilesTabName })).exists();
       assert.dom(screen.getByRole('link', { name: targetProfilesTabName })).hasClass('active');
       assert.dom(screen.getByRole('heading', { name: targetProfilesTabName })).exists();
-      assert.dom(screen.getByRole('link', { name: targetProfileName })).exists();
+      assert.dom(screen.getByRole('link', { name: targetProfileInternalName })).exists();
       assert.ok(screen.getByText('Obsolète'));
     });
 

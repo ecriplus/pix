@@ -6,7 +6,7 @@ function attachTargetProfiles(schema, request) {
   const params = JSON.parse(request.requestBody);
   const targetProfilesToAttach = params['target-profile-ids'];
   targetProfilesToAttach.forEach((targetProfileId) => {
-    schema.targetProfileSummaries.create({ name: `Profil ${targetProfileId}` });
+    schema.targetProfileSummaries.create({ internalName: `Profil ${targetProfileId}` });
   });
   return new Response(204);
 }
@@ -36,6 +36,7 @@ function copyTargetProfile(schema, request) {
   const { id } = schema.create('target-profile', {
     ...targetProfile.attrs,
     name: '[Copie] ' + targetProfile.attrs.name,
+    internalName: '[Copie] ' + targetProfile.attrs.internalName,
   });
 
   return id;

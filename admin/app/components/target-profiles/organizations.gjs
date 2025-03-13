@@ -182,7 +182,7 @@ export default class Organizations extends Component {
         @triggerFiltering={{@triggerFiltering}}
         @goToOrganizationPage={{@goToOrganizationPage}}
         @detachOrganizations={{@detachOrganizations}}
-        @targetProfileName={{@targetProfile.name}}
+        @targetProfileName={{@targetProfile.internalName}}
         @showDetachColumn={{this.isSuperAdminOrMetier}}
       />
     </section>

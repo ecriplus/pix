@@ -2,6 +2,7 @@ import { TargetProfileForCreation } from '../../../../src/prescription/target-pr
 
 const buildTargetProfileForCreation = function ({
   name = 'Profil cible super cool',
+  internalName = name,
   category = 'some_category',
   description = 'description',
   comment = 'commentaire',
@@ -12,6 +13,7 @@ const buildTargetProfileForCreation = function ({
 } = {}) {
   return new TargetProfileForCreation({
     name,
+    internalName,
     category,
     description,
     comment,

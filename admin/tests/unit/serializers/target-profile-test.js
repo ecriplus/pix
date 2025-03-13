@@ -16,6 +16,7 @@ module('Unit | Serializer | Target Profile', function (hooks) {
           description: 'desc',
           imageUrl: 'some-url',
           name: 'name',
+          internalName: 'internalName',
           ownerOrganizationId: 1,
         };
         const tubes = Symbol('tubes');
@@ -30,6 +31,7 @@ module('Unit | Serializer | Target Profile', function (hooks) {
           description: targetProfileData.description,
           'image-url': targetProfileData.imageUrl,
           name: targetProfileData.name,
+          'internal-name': targetProfileData.internalName,
           'owner-organization-id': String(targetProfileData.ownerOrganizationId),
           tubes,
         });
@@ -47,6 +49,7 @@ module('Unit | Serializer | Target Profile', function (hooks) {
           description: 'desc',
           imageUrl: 'some-url',
           name: 'name',
+          internalName: 'internalName',
           ownerOrganizationId: 1,
         };
 
@@ -60,6 +63,7 @@ module('Unit | Serializer | Target Profile', function (hooks) {
           description: targetProfileData.description,
           'image-url': targetProfileData.imageUrl,
           name: targetProfileData.name,
+          'internal-name': targetProfileData.internalName,
           'owner-organization-id': String(targetProfileData.ownerOrganizationId),
         });
       });
@@ -79,6 +83,7 @@ module('Unit | Serializer | Target Profile', function (hooks) {
           description: 'desc',
           imageUrl: 'some-url',
           name: 'name',
+          internalName: 'internalName',
         };
         const tubes = Symbol('tubes');
 
@@ -95,6 +100,7 @@ module('Unit | Serializer | Target Profile', function (hooks) {
           description: targetProfileData.description,
           'image-url': targetProfileData.imageUrl,
           name: targetProfileData.name,
+          'internal-name': targetProfileData.internalName,
           tubes,
         });
       });
@@ -111,6 +117,7 @@ module('Unit | Serializer | Target Profile', function (hooks) {
           description: 'desc',
           imageUrl: 'some-url',
           name: 'name',
+          internalName: 'internalName',
         };
 
         const record = store.createRecord('target-profile', targetProfileData);
@@ -123,6 +130,7 @@ module('Unit | Serializer | Target Profile', function (hooks) {
           description: targetProfileData.description,
           'image-url': targetProfileData.imageUrl,
           name: targetProfileData.name,
+          'internal-name': targetProfileData.internalName,
         });
       });
     });

@@ -2,7 +2,7 @@ import { TargetProfileSummaryForAdmin } from '../../../../src/prescription/targe
 
 const buildTargetProfileSummaryForAdmin = function ({
   id = 123,
-  name = 'Profil cible super cool',
+  internalName = 'Profil cible super cool interne',
   category,
   outdated = false,
   createdAt,
@@ -11,7 +11,7 @@ const buildTargetProfileSummaryForAdmin = function ({
 } = {}) {
   return new TargetProfileSummaryForAdmin({
     id,
-    name,
+    internalName,
     outdated,
     category,
     createdAt,

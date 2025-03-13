@@ -165,7 +165,7 @@ export default class OrganizationTargetProfilesSectionComponent extends Componen
             <thead>
               <tr>
                 <th class="table__column table__column--id">ID</th>
-                <th>Nom du profil cible</th>
+                <th>Nom interne du profil cible</th>
                 {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
                   <th>Actions</th>
                 {{/if}}
@@ -179,7 +179,7 @@ export default class OrganizationTargetProfilesSectionComponent extends Componen
                     <td class="table__column table__column--id">{{summary.id}}</td>
                     <td headers="target-profile-name">
                       <LinkTo @route="authenticated.target-profiles.target-profile" @model={{summary.id}}>
-                        {{summary.name}}
+                        {{summary.internalName}}
                       </LinkTo>
                     </td>
                     {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
