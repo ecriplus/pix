@@ -45,6 +45,7 @@ function _toDomain(certificationCenterMembershipDTO) {
     updatedAt: certificationCenterMembershipDTO.updatedAt,
     role: certificationCenterMembershipDTO.role,
     lastAccessedAt: certificationCenterMembershipDTO.lastAccessedAt,
+    disabledAt: certificationCenterMembershipDTO.disabledAt,
   });
 }
 
