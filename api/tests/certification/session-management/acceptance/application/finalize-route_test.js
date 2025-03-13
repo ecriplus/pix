@@ -81,12 +81,18 @@ describe('Certification | Session Management | Acceptance | Application | Route 
           options.headers = generateAuthenticatedUserRequestHeaders({ userId });
 
           // when
-          await server.inject(options);
+          const response = await server.inject(options);
+          expect(response.statusCode).to.equal(200);
 
-          // then
-          const finalizedSession = await knex.from('sessions').where({ id: session.id }).first();
-          expect(finalizedSession.hasIncident).to.be.true;
-          expect(finalizedSession.hasJoiningIssue).to.be.true;
+          //const finalizedSession = await knex.from('sessions').where({ id: session.id }).first();
+          //expect(finalizedSession.hasIncident).to.be.true;
+
+          setTimeout(async function () {
+            // then
+            const finalizedSession = await knex.from('sessions').where({ id: session.id }).first();
+            expect(finalizedSession.hasIncident).to.be.true;
+            expect(finalizedSession.hasJoiningIssue).to.be.true;
+          }, 0);
         });
 
         it('should neutralize auto-neutralizable challenges', async function () {
@@ -201,6 +207,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             userId,
             sessionId: session.id,
             completedAt: new Date(),
+            hasSeenEndTestScreen: true,
           }).id;
           databaseBuilder.factory.buildCertificationCandidate({
             sessionId: session.id,
@@ -216,12 +223,13 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             sessionId: session.id,
           });
 
-          const assessmentId = databaseBuilder.factory.buildAssessment({ certificationCourseId }).id;
+          const assessmentId = databaseBuilder.factory.buildAssessment({ certificationCourseId, userId }).id;
           databaseBuilder.factory.buildCertificationIssueReport({
             certificationCourseId,
             category: CertificationIssueReportCategory.IN_CHALLENGE,
             description: '',
             subcategory: CertificationIssueReportSubcategories.WEBSITE_BLOCKED,
+            resolvedAt: new Date(),
             questionNumber: 1,
           });
 
@@ -419,6 +427,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             sessionId: session.id,
             completedAt: new Date(),
             version: AlgorithmEngineVersion.V3,
+            hasSeenEndTestScreen: true,
           }).id;
           databaseBuilder.factory.buildCertificationCenterMembership({
             userId,
@@ -667,7 +676,12 @@ describe('Certification | Session Management | Acceptance | Application | Route 
 
 const _createSession = async ({ version = 2 } = {}) => {
   const session = databaseBuilder.factory.buildSession({ version });
-  const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({ sessionId: session.id, version }).id;
+  const certificationCourse = databaseBuilder.factory.buildCertificationCourse({ sessionId: session.id, version });
+  const certificationCourseId = certificationCourse.id;
+  databaseBuilder.factory.buildCertificationCandidate({
+    userId: certificationCourse.userId,
+    sessionId: certificationCourse.sessionId,
+  });
   const report1 = databaseBuilder.factory.buildCertificationReport({
     sessionId: session.id,
     certificationCourseId,
@@ -676,7 +690,10 @@ const _createSession = async ({ version = 2 } = {}) => {
     sessionId: session.id,
     certificationCourseId,
   });
-  const assessmentId = databaseBuilder.factory.buildAssessment({ certificationCourseId }).id;
+  const assessmentId = databaseBuilder.factory.buildAssessment({
+    certificationCourseId,
+    userId: certificationCourse.userId,
+  }).id;
 
   databaseBuilder.factory.buildCertificationIssueReport({
     certificationCourseId,

@@ -1,3 +1,6 @@
+/**
+ * @typedef {import('./index.js').CertificationRescoringRepository} CertificationRescoringRepository
+ */
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
 import { AutoJuryDone } from '../events/AutoJuryDone.js';
@@ -6,31 +9,38 @@ import { CertificationAssessment } from '../models/CertificationAssessment.js';
 import { CertificationIssueReportResolutionAttempt } from '../models/CertificationIssueReportResolutionAttempt.js';
 import { CertificationIssueReportResolutionStrategies } from '../models/CertificationIssueReportResolutionStrategies.js';
 
+/**
+ * @param {Object} params
+ * @param {CertificationRescoringRepository} params.certificationRescoringRepository
+ */
 export const processAutoJury = async ({
   sessionFinalized,
   certificationIssueReportRepository,
   certificationAssessmentRepository,
   certificationCourseRepository,
   challengeRepository,
+  certificationRescoringRepository,
 }) => {
   const certificationCourses = await certificationCourseRepository.findCertificationCoursesBySessionId({
     sessionId: sessionFinalized.sessionId,
   });
 
   if (_areV3CertificationCourses(certificationCourses)) {
-    return await _handleAutoJuryV3({
+    return _handleAutoJuryV3({
       sessionFinalized,
       certificationCourses,
       certificationAssessmentRepository,
+      certificationRescoringRepository,
     });
   }
 
-  return await _handleAutoJuryV2({
+  return _handleAutoJuryV2({
     sessionFinalized,
     certificationCourses,
     certificationIssueReportRepository,
     challengeRepository,
     certificationAssessmentRepository,
+    certificationRescoringRepository,
   });
 };
 
@@ -40,13 +50,12 @@ async function _handleAutoJuryV2({
   certificationIssueReportRepository,
   challengeRepository,
   certificationAssessmentRepository,
+  certificationRescoringRepository,
 }) {
   const resolutionStrategies = new CertificationIssueReportResolutionStrategies({
     certificationIssueReportRepository,
     challengeRepository,
   });
-
-  const certificationJuryDoneEvents = [];
 
   for (const certificationCourse of certificationCourses) {
     const certificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
@@ -72,12 +81,13 @@ async function _handleAutoJuryV2({
         certificationCourseId: certificationCourse.getId(),
       });
 
-      certificationJuryDoneEvents.push(certificationJuryDoneEvent);
+      await certificationRescoringRepository.execute({
+        event: certificationJuryDoneEvent,
+      });
     }
   }
 
   return {
-    certificationJuryDoneEvents,
     autoJuryDone: new AutoJuryDone({
       sessionId: sessionFinalized.sessionId,
       finalizedAt: sessionFinalized.finalizedAt,
@@ -93,7 +103,16 @@ function _areV3CertificationCourses(certificationCourses) {
   return certificationCourses[0].isV3();
 }
 
-async function _handleAutoJuryV3({ sessionFinalized, certificationCourses, certificationAssessmentRepository }) {
+/**
+ * @param {Object} params
+ * @param {CertificationRescoringRepository} params.certificationRescoringRepository
+ */
+async function _handleAutoJuryV3({
+  sessionFinalized,
+  certificationCourses,
+  certificationAssessmentRepository,
+  certificationRescoringRepository,
+}) {
   const certificationJuryDoneEvents = [];
 
   for (const certificationCourse of certificationCourses) {
@@ -106,7 +125,9 @@ async function _handleAutoJuryV3({ sessionFinalized, certificationCourses, certi
         certificationCourseId: certificationCourse.getId(),
       });
 
-      certificationJuryDoneEvents.push(certificationJuryDoneEvent);
+      await certificationRescoringRepository.execute({
+        event: certificationJuryDoneEvent,
+      });
     }
 
     certificationAssessment.endDueToFinalization();

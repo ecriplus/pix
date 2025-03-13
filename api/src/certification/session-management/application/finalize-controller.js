@@ -14,7 +14,6 @@ const finalize = async function (request, h, dependencies = { certificationRepor
       .map((data) => dependencies.certificationReportSerializer.deserialize({ data })),
   );
 
-  let certificationJuryDoneEvents, autoJuryDone;
   await DomainTransaction.execute(async () => {
     const sessionFinalized = await usecases.finalizeSession({
       sessionId,
@@ -24,12 +23,10 @@ const finalize = async function (request, h, dependencies = { certificationRepor
       certificationReports,
     });
 
-    const events = await usecases.processAutoJury({ sessionFinalized });
-    certificationJuryDoneEvents = events.certificationJuryDoneEvents;
-    autoJuryDone = events.autoJuryDone;
+    const { autoJuryDone } = await usecases.processAutoJury({ sessionFinalized });
+
+    await usecases.registerPublishableSession({ autoJuryDone });
   });
-  await dependencies.events.eventDispatcher.dispatch(certificationJuryDoneEvents);
-  await usecases.registerPublishableSession({ autoJuryDone });
 
   return h.response().code(200);
 };
