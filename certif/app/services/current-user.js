@@ -25,7 +25,7 @@ export default class CurrentUserService extends Service {
         );
         await this._updateCurrentUserAccessToCertificationCenter();
         this.isAdminOfCurrentCertificationCenter = this.currentCertificationCenterMembership?.isAdmin;
-      } catch (error) {
+      } catch {
         this.certificationPointOfContact = null;
         this.currentAllowedCertificationCenterAccess = null;
         this.currentCertificationCenterMembership = null;

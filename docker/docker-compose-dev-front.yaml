@@ -1,34 +1,33 @@
-
 version: '3'
 services:
   orga:
-    build: 
+    build:
       dockerfile: ../docker/dockerfiles/Dockerfile.ember
       context: ../orga
       target: dev
-    volumes: 
+    volumes:
       - ../orga/:/code
       - orga_node_modules:/code/node_modules
     image: pix/orga:dev
     command: npx ember serve --port 80 --proxy http://api:3000
 
   admin:
-    build: 
+    build:
       dockerfile: ../docker/dockerfiles/Dockerfile.ember
       context: ../admin/
       target: dev
-    volumes: 
+    volumes:
       - ../admin/:/code
       - admin_node_modules:/code/node_modules
     image: pix/admin:dev
     command: npx ember serve --port 80 --proxy http://api:3000
 
   certif:
-    build: 
+    build:
       dockerfile: ../docker/dockerfiles/Dockerfile.ember
       context: ../certif/
       target: dev
-    volumes: 
+    volumes:
       - ../certif/:/code
       - certif_node_modules:/code/node_modules
     image: pix/certif:dev
@@ -36,11 +35,11 @@ services:
 
   mon-pix:
     image: pix/mon-pix:dev
-    build: 
+    build:
       dockerfile: ../docker/dockerfiles/Dockerfile.ember
       context: ../mon-pix/
       target: dev
-    volumes: 
+    volumes:
       - ../mon-pix/:/code
       - mon-pix_node_modules:/code/node_modules
     command: npx ember serve --port 80 --proxy http://api:3000

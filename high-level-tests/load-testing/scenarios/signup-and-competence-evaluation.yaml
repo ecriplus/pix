@@ -9,18 +9,18 @@ config:
       name: Ramp up load
 
 scenarios:
-  - name: "Inscription et évaluation"
+  - name: Inscription et évaluation
     flow:
-      - function: "setupSignupFormData"
-      - function: "generateLengthyValue"
+      - function: setupSignupFormData
+      - function: generateLengthyValue
 
-      ### ---------------------- ###
-      ### From page /inscription ###
-      ### ---------------------- ###
+      # ## ---------------------- ###
+      # ## From page /inscription ###
+      # ## ---------------------- ###
 
       # Submit user form
       - post:
-          url: "/api/users"
+          url: /api/users
           json:
             data:
               attributes:
@@ -32,19 +32,19 @@ scenarios:
 
       # Authenticate user
       - post:
-          url: "/api/token"
+          url: /api/token
           headers:
-            content-type: "application/x-www-form-urlencoded"
+            content-type: application/x-www-form-urlencoded
           body: "grant_type=password&username={{ email }}&password={{ password }}"
           capture:
-            - json: "$.access_token"
-              as: "accessToken"
-            - json: "$.user_id"
-              as: "userId"
+            - json: $.access_token
+              as: accessToken
+            - json: $.user_id
+              as: userId
 
       # Get user profile
       - get:
-          url: "/api/users/me"
+          url: /api/users/me
           headers:
             Authorization: "Bearer {{ accessToken }}"
 
@@ -55,7 +55,7 @@ scenarios:
             Authorization: "Bearer {{ accessToken }}"
           capture:
             json: "$.included[?(@.type == 'scorecards')].attributes['competence-id']"
-            as: "competenceId"
+            as: competenceId
           expect:
             - statusCode: 200
             - contentType: json
@@ -66,23 +66,22 @@ scenarios:
           headers:
             Authorization: "Bearer {{ accessToken }}"
 
-      ### ----------------- ###
-      ### From page /compte ###
-      ### ----------------- ###
+      # ## ----------------- ###
+      # ## From page /compte ###
+      # ## ----------------- ###
 
       # Create competence evaluation
       - post:
-          url: "/api/competence-evaluations/start-or-resume"
+          url: /api/competence-evaluations/start-or-resume
           headers:
             Authorization: "Bearer {{ accessToken }}"
           json:
             competenceId: "{{ competenceId }}"
           capture:
-            json: "$.data.relationships.assessment.data.id"
-            as: "assessmentId"
+            json: $.data.relationships.assessment.data.id
+            as: assessmentId
           expect:
             - statusCode: 201
-
 
       # Fetch assessment
       - get:
@@ -96,8 +95,8 @@ scenarios:
           headers:
             Authorization: "Bearer {{ accessToken }}"
           capture:
-            json: "$.data.id"
-            as: "challengeId"
+            json: $.data.id
+            as: challengeId
 
       - loop:
           # Fetch answer (if exists)
@@ -112,13 +111,13 @@ scenarios:
               headers:
                 Authorization: "Bearer {{ accessToken }}"
 
-          ### -------------------------------------------------------------- ###
-          ### From page /assessments/:assessment_id/challenges/:challenge_id ###
-          ### -------------------------------------------------------------- ###
+          # ## -------------------------------------------------------------- ###
+          # ## From page /assessments/:assessment_id/challenges/:challenge_id ###
+          # ## -------------------------------------------------------------- ###
 
           # Submit "skip" answer
           - post:
-              url: "/api/answers"
+              url: /api/answers
               headers:
                 Authorization: "Bearer {{ accessToken }}"
               json:
@@ -128,11 +127,11 @@ scenarios:
                   relationships:
                     assessment:
                       data:
-                        type: "assessments"
+                        type: assessments
                         id: "{{ assessmentId }}"
                     challenge:
                       data:
-                        type: "challenges"
+                        type: challenges
                         id: "{{ challengeId }}"
                   type: answers
 
@@ -147,9 +146,9 @@ scenarios:
               url: "/api/assessments/{{ assessmentId }}/next"
               headers:
                 Authorization: "Bearer {{ accessToken }}"
-              afterResponse: "handleResponseForChallengeId"
+              afterResponse: handleResponseForChallengeId
 
-        whileTrue: "foundNextChallenge"
+        whileTrue: foundNextChallenge
 
       # Fetch assessment
       - get:
@@ -157,13 +156,13 @@ scenarios:
           headers:
             Authorization: "Bearer {{ accessToken }}"
 
-      ### ----------------------------------------------------- ###
-      ### From page /assessment-result, go back to profile page ###
-      ### ----------------------------------------------------- ###
+      # ## ----------------------------------------------------- ###
+      # ## From page /assessment-result, go back to profile page ###
+      # ## ----------------------------------------------------- ###
 
       # Get user profile
       - get:
-          url: "/api/users/me"
+          url: /api/users/me
           headers:
             Authorization: "Bearer {{ accessToken }}"
 
