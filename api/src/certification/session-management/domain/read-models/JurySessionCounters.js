@@ -13,7 +13,7 @@ import {
 
 export class JurySessionCounters {
   /**
-   * Number of certifications that are still on going
+   * Number of certifications that are still ongoing
    * @type {number}
    */
   startedCertifications = 0;
