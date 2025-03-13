@@ -52,7 +52,7 @@ export class JurySessionCounters {
   }
 
   /**
-   * @param {Array<IssueReport>} params.issueReports
+   * @param {Array<IssueReport>} issueReports
    */
   #countImpactfulIssueReport(issueReports) {
     return issueReports.reduce((counter, issueReport) => {
