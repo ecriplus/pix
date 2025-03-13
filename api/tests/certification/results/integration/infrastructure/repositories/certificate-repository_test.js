@@ -979,12 +979,10 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       });
 
       // then
-      const expectedCertificationAttestationA =
-        domainBuilder.buildCertificationAttestation(certificationAttestationDataA);
+      domainBuilder.buildCertificationAttestation(certificationAttestationDataA);
       const expectedCertificationAttestationB =
         domainBuilder.buildCertificationAttestation(certificationAttestationDataB);
-      const expectedCertificationAttestationC =
-        domainBuilder.buildCertificationAttestation(certificationAttestationDataC);
+      domainBuilder.buildCertificationAttestation(certificationAttestationDataC);
       expect(certificationAttestations).to.have.lengthOf(3);
 
       expect(certificationAttestations[0]).deepEqualInstanceOmitting(expectedCertificationAttestationB, [
