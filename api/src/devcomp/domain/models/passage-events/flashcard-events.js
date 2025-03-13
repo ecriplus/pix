@@ -31,6 +31,32 @@ class FlashcardsVersoSeenEvent extends PassageEvent {
     this.cardId = cardId;
   }
 }
+
+/**
+ * @class FlashcardsCardAutoAssessedEvent
+ *
+ * A FlashcardsCardAutoAssessedEvent is generated when an auto-assessment is given and saved in DB.
+ */
+class FlashcardsCardAutoAssessedEvent extends PassageEvent {
+  constructor({ id, occurredAt, createdAt, passageId, elementId, cardId, autoAssessment }) {
+    super({
+      id,
+      type: 'FLASHCARDS_CARD_AUTO_ASSESSED',
+      occurredAt,
+      createdAt,
+      passageId,
+      data: { elementId, cardId, autoAssessment },
+    });
+
+    assertNotNullOrUndefined(elementId, 'The elementId is required for a FlashcardsCardAutoAssessedEvent');
+    assertNotNullOrUndefined(cardId, 'The cardId is required for a FlashcardsCardAutoAssessedEvent');
+    assertNotNullOrUndefined(autoAssessment, 'The autoAssessment is required for a FlashcardsCardAutoAssessedEvent');
+    this.elementId = elementId;
+    this.cardId = cardId;
+    this.autoAssessment = autoAssessment;
+  }
+}
+
 /**
  * @class FlashcardsRetriedEvent
  *
@@ -48,6 +74,7 @@ class FlashcardsRetriedEvent extends PassageEvent {
 
 export { FlashcardsRetriedEvent, FlashcardsStartedEvent };
 export {
+  FlashcardsCardAutoAssessedEvent,
   FlashcardsRetriedEvent,
   FlashcardsStartedEvent,
   FlashcardsVersoSeenEvent,
