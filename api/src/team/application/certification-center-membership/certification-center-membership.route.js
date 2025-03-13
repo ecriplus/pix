@@ -93,18 +93,12 @@ export const certificationCenterMembershipRoute = [
     },
   },
   {
-    method: 'PATCH',
-    path: '/api/certification-centers/{certificationCenterId}/certification-center-memberships/me',
+    method: 'POST',
+    path: '/api/certification-center-memberships/{certificationCenterMembershipId}/access',
     config: {
-      pre: [
-        {
-          method: (request, h) => securityPreHandlers.checkUserIsMemberOfCertificationCenter(request, h),
-          assign: 'isMemberOfCertificationCenter',
-        },
-      ],
       validate: {
         params: Joi.object({
-          certificationCenterId: identifiersType.certificationCenterId,
+          certificationCenterMembershipId: identifiersType.certificationCenterMembershipId,
         }),
       },
       handler: (request, h) => certificationCenterMembershipController.updateLastAccessedAt(request, h),
