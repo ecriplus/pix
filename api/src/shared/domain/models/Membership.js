@@ -6,12 +6,13 @@ const roles = {
 };
 
 class Membership {
-  constructor({ id, organizationRole = roles.MEMBER, updatedByUserId, organization, user } = {}) {
+  constructor({ id, organizationRole = roles.MEMBER, updatedByUserId, organization, user, disabledAt } = {}) {
     this.id = id;
     this.organizationRole = organizationRole;
     this.updatedByUserId = updatedByUserId;
     this.organization = organization;
     this.user = user;
+    this.disabledAt = disabledAt;
   }
 
   get isAdmin() {
