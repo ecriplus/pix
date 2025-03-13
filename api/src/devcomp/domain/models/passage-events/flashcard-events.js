@@ -58,6 +58,30 @@ class FlashcardsCardAutoAssessedEvent extends PassageEvent {
 }
 
 /**
+ * @class FlashcardsRectoReviewedEvent
+ *
+ * A FlashcardsRectoReviewedEvent is generated when a card's question is reviewed and saved in DB.
+ */
+class FlashcardsRectoReviewedEvent extends PassageEvent {
+  constructor({ id, occurredAt, createdAt, passageId, elementId, cardId }) {
+    super({
+      id,
+      type: 'FLASHCARDS_RECTO_REVIEWED',
+      occurredAt,
+      createdAt,
+      passageId,
+      data: { elementId, cardId },
+    });
+
+    assertNotNullOrUndefined(elementId, 'The elementId is required for a FlashcardsRectoReviewedEvent');
+    assertNotNullOrUndefined(cardId, 'The cardId is required for a FlashcardsRectoReviewedEvent');
+
+    this.elementId = elementId;
+    this.cardId = cardId;
+  }
+}
+
+/**
  * @class FlashcardsRetriedEvent
  *
  * A FlashcardsRetriedEvent is generated when a set of Modulix flashcards is retried and saved in DB.
@@ -72,9 +96,9 @@ class FlashcardsRetriedEvent extends PassageEvent {
   }
 }
 
-export { FlashcardsRetriedEvent, FlashcardsStartedEvent };
 export {
   FlashcardsCardAutoAssessedEvent,
+  FlashcardsRectoReviewedEvent,
   FlashcardsRetriedEvent,
   FlashcardsStartedEvent,
   FlashcardsVersoSeenEvent,

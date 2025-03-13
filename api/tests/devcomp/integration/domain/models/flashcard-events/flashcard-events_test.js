@@ -1,5 +1,6 @@
 import {
   FlashcardsCardAutoAssessedEvent,
+  FlashcardsRectoReviewedEvent,
   FlashcardsRetriedEvent,
   FlashcardsStartedEvent,
   FlashcardsVersoSeenEvent,
@@ -188,6 +189,80 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
     });
   });
 
+  describe('#FlashcardsRectoReviewedEvent', function () {
+    it('should init and keep attributes', function () {
+      // given
+      const id = Symbol('id');
+      const occurredAt = Symbol('occurredAt');
+      const createdAt = Symbol('createdAt');
+      const passageId = Symbol('passage');
+      const elementId = Symbol('elementId');
+      const cardId = Symbol('cardId');
+
+      // when
+      const flashcardsCardQuestionReviewedEvent = new FlashcardsRectoReviewedEvent({
+        id,
+        occurredAt,
+        createdAt,
+        passageId,
+        elementId,
+        cardId,
+      });
+
+      // then
+      expect(flashcardsCardQuestionReviewedEvent.id).to.equal(id);
+      expect(flashcardsCardQuestionReviewedEvent.type).to.equal('FLASHCARDS_RECTO_REVIEWED');
+      expect(flashcardsCardQuestionReviewedEvent.occurredAt).to.equal(occurredAt);
+      expect(flashcardsCardQuestionReviewedEvent.createdAt).to.equal(createdAt);
+      expect(flashcardsCardQuestionReviewedEvent.passageId).to.equal(passageId);
+      expect(flashcardsCardQuestionReviewedEvent.elementId).to.equal(elementId);
+      expect(flashcardsCardQuestionReviewedEvent.data).to.deep.equal({ elementId, cardId });
+    });
+
+    describe('when elementId is not given', function () {
+      it('should throw an error', function () {
+        // given
+        const id = Symbol('id');
+        const occurredAt = Symbol('date');
+        const createdAt = Symbol('date');
+        const passageId = Symbol('passage');
+
+        // when
+        const error = catchErrSync(() => new FlashcardsRectoReviewedEvent({ id, occurredAt, createdAt, passageId }))();
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal('The elementId is required for a FlashcardsRectoReviewedEvent');
+      });
+    });
+
+    describe('when cardId is not given', function () {
+      it('should throw an error', function () {
+        // given
+        const id = Symbol('id');
+        const occurredAt = Symbol('date');
+        const createdAt = Symbol('date');
+        const passageId = Symbol('passage');
+        const elementId = Symbol('elementId');
+
+        // when
+        const error = catchErrSync(
+          () => new FlashcardsRectoReviewedEvent({ id, occurredAt, createdAt, passageId, elementId }),
+        )();
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal('The cardId is required for a FlashcardsRectoReviewedEvent');
+      });
+    });
+  });
+
+  describe('#FlashcardsRetriedEvent', function () {
+    it('should init and keep attributes', function () {
+      // given
+      const id = Symbol('id');
+      const occurredAt = Symbol('occurredAt');
+      const createdAt = Symbol('createdAt');
       const passageId = Symbol('passage');
       const elementId = Symbol('elementId');
 
