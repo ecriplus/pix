@@ -541,7 +541,7 @@
       },
       "landing-page-text": {
         "label": "Texte de la page d'accueil",
-        "sublabel": "Ce champs sera affiché aux participants de la campagne."
+        "sublabel": "Ce champ sera affiché aux participants de la campagne."
       },
       "legal-warning": "* En vertu de la loi Informatique et libertés, et en tant que responsable de traitement, soyez attentifs à ne pas demander de donnée particulièrement identifiante ou signifiante si ce n’est pas absolument indispensable. Le numéro de sécurité sociale (NIR) est à proscrire ainsi que toute donnée sensible.",
       "multiple-sendings": {
@@ -596,7 +596,7 @@
       "target-profiles-search-placeholder": "Rechercher par nom",
       "test-title": {
         "label": "Titre du parcours",
-        "sublabel": "Ce champs sera affiché aux participants de la campagne."
+        "sublabel": "Ce champ sera affiché aux participants de la campagne."
       },
       "title": "Création d'une campagne",
       "yes": "Oui"
@@ -616,7 +616,7 @@
       "campaign-name": "Nom de la campagne",
       "landing-page-text": {
         "label": "Texte de la page d'accueil",
-        "sublabel": "Ce champs sera affiché aux participants de la campagne."
+        "sublabel": "Ce champ sera affiché aux participants de la campagne."
       },
       "owner": {
         "info": "Le propriétaire de la campagne ainsi que les administrateurs de cette organisation, sont les seules personnes qui peuvent modifier et archiver cette campagne.",
@@ -626,7 +626,7 @@
       },
       "personalised-test-title": {
         "label": "Titre du parcours",
-        "sublabel": "Ce champs sera affiché aux participants de la campagne."
+        "sublabel": "Ce champ sera affiché aux participants de la campagne."
       },
       "title": "Modification d'une campagne"
     },
