@@ -56,9 +56,9 @@ export class JurySessionCounters {
    */
   #countImpactfulIssueReport(issueReports) {
     const impactfulIssueReports = issueReports.filter((issueReport) => {
-      return this.#isImpactfulIssueReport(issueReport) && this.#isUnresolvedIssueReport(issueReport)
+      return this.#isImpactfulIssueReport(issueReport) && this.#isUnresolvedIssueReport(issueReport);
     });
-    
+
     return impactfulIssueReports.length;
   }
 
