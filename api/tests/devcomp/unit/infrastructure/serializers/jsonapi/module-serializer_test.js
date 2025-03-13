@@ -23,6 +23,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
   describe('#serialize', function () {
     it('should serialize with empty grains list', function () {
       // given
+      const id = 'id';
       const slug = 'bien-ecrire-son-adresse-mail';
       const title = 'Bien écrire son adresse mail';
       const isBeta = true;
@@ -38,7 +39,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
           'Comprendre les fonctions des parties d’une adresse mail',
         ],
       };
-      const moduleFromDomain = new Module({ details, slug, title, grains: [], isBeta });
+      const moduleFromDomain = new Module({ id, details, slug, title, grains: [], isBeta });
       const expectedJson = {
         data: {
           type: 'modules',
@@ -66,6 +67,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
 
     it('should serialize with grains list of components', function () {
       // given
+      const id = 'id';
       const slug = 'bien-ecrire-son-adresse-mail';
       const title = 'Bien écrire son adresse mail';
       const isBeta = true;
@@ -88,6 +90,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
         },
       ];
       const moduleFromDomain = new Module({
+        id,
         slug,
         title,
         isBeta,

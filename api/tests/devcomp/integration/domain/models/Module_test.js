@@ -13,6 +13,7 @@ describe('Integration | Devcomp | Domain | Models | Module', function () {
         title: 'Le format des adresses email',
         components: [{ type: 'element', element: new Text({ id: 'id', content: 'content' }) }],
       });
+      const id = '1';
       const slug = 'les-adresses-email';
       const title = 'Les adresses email';
       const isBeta = true;
@@ -30,7 +31,7 @@ describe('Integration | Devcomp | Domain | Models | Module', function () {
       const details = Symbol('details');
 
       // when
-      const error = catchErrSync(() => new Module({ slug, title, isBeta, grains, transitionTexts, details }))();
+      const error = catchErrSync(() => new Module({ id, slug, title, isBeta, grains, transitionTexts, details }))();
 
       // then
       expect(error).to.be.instanceOf(ModuleInstantiationError);

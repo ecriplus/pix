@@ -227,6 +227,7 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
     it('should throw htmlNotAllowedSchema custom error for title field', async function () {
       // given
       const invalidModule = {
+        id: '6282925d-4775-4bca-b513-4c3009ec5886',
         slug: 'bac-a-sable',
         title: '<h1>Bac à sable</h1>',
         isBeta: true,

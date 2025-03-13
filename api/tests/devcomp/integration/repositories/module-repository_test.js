@@ -124,6 +124,11 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
           const ids = [];
           const duplicateIds = new Set();
           for (const module of modules) {
+            if (ids.includes(module.id)) {
+              duplicateIds.add(module.id);
+            }
+            ids.push(module.id);
+
             for (const grain of module.grains) {
               if (ids.includes(grain.id)) {
                 duplicateIds.add(grain.id);

@@ -69,7 +69,7 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
     const transitionTexts = [];
     const details = Symbol('details');
     const version = Symbol('version');
-    const module = new Module({ slug, title, isBeta, grains, details, transitionTexts, version });
+    const module = new Module({ id: moduleId, slug, title, isBeta, grains, details, transitionTexts, version });
 
     const occurredAt = new Date('2025-01-01');
     const passageCreatedAt = new Date('2025-03-05');

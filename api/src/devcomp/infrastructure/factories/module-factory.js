@@ -30,6 +30,7 @@ export class ModuleFactory {
   static build(moduleData) {
     try {
       return new Module({
+        id: moduleData.id,
         slug: moduleData.slug,
         title: moduleData.title,
         version: moduleData.version,
