@@ -35,16 +35,16 @@ async function get({ userId, campaignId, organizationFeatureAPI }) {
 
   const campaignToStartParticipation = await _getCampaignToStart({
     campaignId,
-
     organizationFeatureAPI,
   });
 
   const organizationLearner = await _getOrganizationLearner(campaignId, userId);
 
-  const previousCampaignParticipationForUser = await _findpreviousCampaignParticipationForUser({
+  const previousCampaignParticipationForUser = await _findPreviousCampaignParticipationForUser({
     campaignId,
     userId,
     isCampaignMultipleSendings: campaignToStartParticipation.multipleSendings,
+    isResetAllowed: campaignToStartParticipation.isAssessment,
   });
 
   return new CampaignParticipant({
@@ -236,7 +236,12 @@ async function _getOrganizationLearner(campaignId, userId) {
   });
 }
 
-async function _findpreviousCampaignParticipationForUser({ campaignId, userId, isCampaignMultipleSendings }) {
+async function _findPreviousCampaignParticipationForUser({
+  campaignId,
+  userId,
+  isCampaignMultipleSendings,
+  isResetAllowed,
+}) {
   const knexConnection = DomainTransaction.getConnection();
   const campaignParticipationAttributes = await knexConnection('campaign-participations')
     .select('id', 'participantExternalId', 'validatedSkillsCount', 'status', 'deletedAt', 'sharedAt')
@@ -256,6 +261,7 @@ async function _findpreviousCampaignParticipationForUser({ campaignId, userId, i
     isDeleted: Boolean(campaignParticipationAttributes.deletedAt),
     sharedAt: campaignParticipationAttributes.sharedAt,
     isCampaignMultipleSendings,
+    isResetAllowed,
     isTargetProfileResetAllowed,
     isOrganizationLearnerActive,
   });

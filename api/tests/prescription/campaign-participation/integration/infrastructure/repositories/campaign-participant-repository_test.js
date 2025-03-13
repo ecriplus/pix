@@ -4,7 +4,11 @@ import { knex } from '../../../../../../db/knex-database-connection.js';
 import { CampaignParticipant } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipant.js';
 import { CampaignToStartParticipation } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignToStartParticipation.js';
 import * as campaignParticipantRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participant-repository.js';
-import { CampaignExternalIdTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
+import {
+  CampaignExternalIdTypes,
+  CampaignParticipationStatuses,
+  CampaignTypes,
+} from '../../../../../../src/prescription/shared/domain/constants.js';
 import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import {
@@ -149,6 +153,70 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
         });
 
         expect(campaignParticipant.previousCampaignParticipationForUser).to.deep.equal(expectedAttributes);
+      });
+
+      context('canReset', function () {
+        let userId, organizationId, targetProfileId;
+        beforeEach(async function () {
+          organizationId = databaseBuilder.factory.buildOrganization({ isManagingStudents: false }).id;
+          userId = databaseBuilder.factory.buildUser().id;
+
+          targetProfileId = databaseBuilder.factory.buildTargetProfile({
+            areKnowledgeElementsResettable: true,
+          }).id;
+
+          await databaseBuilder.commit();
+        });
+
+        it('should return true on campaign of type ASSESSMENT', async function () {
+          const campaign = databaseBuilder.factory.buildCampaign({
+            type: CampaignTypes.ASSESSMENT,
+            organizationId,
+            targetProfileId,
+            multipleSendings: true,
+          });
+          databaseBuilder.factory.buildCampaignParticipation({
+            campaignId: campaign.id,
+            status: CampaignParticipationStatuses.SHARED,
+            sharedAt: new Date('2020-01-01'),
+            userId,
+          });
+
+          await databaseBuilder.commit();
+
+          const campaignParticipant = await campaignParticipantRepository.get({
+            userId,
+            campaignId: campaign.id,
+            organizationFeatureAPI,
+          });
+
+          expect(campaignParticipant.previousCampaignParticipationForUser.canReset).to.be.true;
+        });
+
+        it('should return true on campaign of type EXAM', async function () {
+          const campaign = databaseBuilder.factory.buildCampaign({
+            type: CampaignTypes.EXAM,
+            organizationId,
+            targetProfileId,
+            multipleSendings: true,
+          });
+          databaseBuilder.factory.buildCampaignParticipation({
+            campaignId: campaign.id,
+            status: CampaignParticipationStatuses.SHARED,
+            sharedAt: new Date('2020-01-01'),
+            userId,
+          });
+
+          await databaseBuilder.commit();
+
+          const campaignParticipant = await campaignParticipantRepository.get({
+            userId,
+            campaignId: campaign.id,
+            organizationFeatureAPI,
+          });
+
+          expect(campaignParticipant.previousCampaignParticipationForUser.canReset).to.be.false;
+        });
       });
     });
 

@@ -53,6 +53,7 @@ describe('Unit | Domain | Read-Models | PreviousCampaignParticipation', function
         isDeleted: true,
         isTargetProfileResetAllowed: true,
         isCampaignMultipleSendings: true,
+        isResetAllowed: true,
         isOrganizationLearnerActive: true,
         sharedAt: new Date('2020-01-01T01:02:03Z'),
       };
@@ -142,6 +143,32 @@ describe('Unit | Domain | Read-Models | PreviousCampaignParticipation', function
 
         // when & then
         expect(previousCampaignParticipation.canReset).to.be.false;
+      });
+    });
+
+    describe('isResetAllowed', function () {
+      it('should return true when isResetAllowed is true', function () {
+        // given
+        const isResetAllowed = true;
+        const previousCampaignParticipation = new PreviousCampaignParticipation({
+          ...baseProps,
+          isResetAllowed,
+        });
+
+        // when & then
+        expect(previousCampaignParticipation.canReset).to.be.true;
+      });
+
+      it('should return false when isResetAllowed is false', function () {
+        // given
+        const isResetAllowed = true;
+        const previousCampaignParticipation = new PreviousCampaignParticipation({
+          ...baseProps,
+          isResetAllowed,
+        });
+
+        // when & then
+        expect(previousCampaignParticipation.canReset).to.be.true;
       });
     });
 

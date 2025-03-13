@@ -82,6 +82,7 @@ class AssessmentResult {
       isDisabled: this.isDisabled,
       sharedAt,
       isShared: this.isShared,
+      campaignType,
     });
 
     if (flashScoringResults) {
@@ -144,6 +145,7 @@ class AssessmentResult {
   }
 
   _computeCanReset({
+    campaignType,
     isTargetProfileResetAllowed,
     isOrganizationLearnerActive,
     isCampaignMultipleSendings,
@@ -151,6 +153,10 @@ class AssessmentResult {
     isShared,
     sharedAt,
   }) {
+    if (campaignType !== CampaignTypes.ASSESSMENT) {
+      return false;
+    }
+
     return (
       isShared &&
       isTargetProfileResetAllowed &&
