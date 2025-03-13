@@ -1,5 +1,4 @@
 import Service, { inject as service } from '@ember/service';
-import isEmpty from 'lodash/isEmpty';
 
 // TODO: Manage this through the API
 const FR_FEATURED_IDENTITY_PROVIDER_CODE = 'POLE_EMPLOI';
@@ -43,12 +42,6 @@ export default class OidcIdentityProviders extends Service {
     }
 
     return this.list.some((identityProvider) => !FEATURED_IDENTITY_PROVIDER_CODES.includes(identityProvider.code));
-  }
-
-  isFwbActivated() {
-    const identityProviderSlug = 'fwb';
-    const oidcIdentityProviders = this.list.filter((provider) => provider.id === identityProviderSlug);
-    return !isEmpty(oidcIdentityProviders);
   }
 
   async load() {

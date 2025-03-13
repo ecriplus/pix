@@ -12,4 +12,18 @@ export default class CurrentDomainService extends Service {
   get isFranceDomain() {
     return this.getExtension() === FRANCE_TLD;
   }
+
+  get isLocalhost() {
+    return PixWindow.getLocationHostname() === 'localhost';
+  }
+
+  convertUrlToOrgDomain() {
+    if (!this.isFranceDomain || this.isLocalhost) {
+      return PixWindow.getLocationHref();
+    }
+
+    const url = new URL(PixWindow.getLocationHref());
+    url.hostname = `${url.hostname.split('.fr')[0]}.org`;
+    return url.toString();
+  }
 }
