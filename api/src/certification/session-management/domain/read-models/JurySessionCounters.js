@@ -55,13 +55,11 @@ export class JurySessionCounters {
    * @param {Array<IssueReport>} issueReports
    */
   #countImpactfulIssueReport(issueReports) {
-    return issueReports.reduce((counter, issueReport) => {
-      if (this.#isImpactfulIssueReport(issueReport) && this.#isUnresolvedIssueReport(issueReport)) {
-        return (counter += 1);
-      }
-
-      return counter;
-    }, 0);
+    const impactfulIssueReports = issueReports.filter((issueReport) => {
+      return this.#isImpactfulIssueReport(issueReport) && this.#isUnresolvedIssueReport(issueReport)
+    });
+    
+    return impactfulIssueReports.length;
   }
 
   /**
