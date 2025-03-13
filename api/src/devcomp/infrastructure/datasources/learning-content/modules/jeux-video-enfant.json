@@ -42,11 +42,11 @@
     },
     {
       "grainId": "6e7dad63-ee7e-428b-a25f-08d760b00503",
-      "content": "<p>Franck sait maintenant que Dragon’s Kingdom, le jeu demandé par Marilou n’est pas adapté à son âge.<br>Après discussion avec sa fille de 8 ans, Franck souhaite lui acheter un autre jeu, sur les dragons. 🐲</p>"
+      "content": "<p>Franck sait maintenant que Dragon’s Kingdom, le jeu demandé par Marilou n’est pas adapté à son âge.<br>Après discussion avec sa fille de 8 ans, Franck souhaite lui acheter un autre jeu sur les dragons. 🐲</p>"
     },
     {
       "grainId": "4a349720-15b7-4c86-a431-344410332fd5",
-      "content": "<p>Grâce à vous Franck a choisi un jeu vidéo pour Marilou ! 👏<br>Il peut à présent jouer avec elle, pour l’accompagner dans sa découverte du jeu.</p>"
+      "content": "<p>Grâce à vous, Franck a choisi un jeu vidéo pour Marilou ! 👏<br>Il peut à présent jouer avec elle, pour l’accompagner dans sa découverte du jeu.</p>"
     }
   ],
   "grains": [
@@ -227,7 +227,7 @@
                 {
                   "id": "44c670d6-fdfc-4cdd-8a8b-2304b8fe019b",
                   "type": "text",
-                  "content": "<p>👛 Dans un jeu vidéo (gratuit ou payant), des achats de quelques centimes ou euros peuvent être proposés tout au long de la partie pour obtenir, par exemple : </p><ul><li>de la <strong>monnaie virtuelle</strong>,&nbsp;</li><li>des <strong>bonus </strong>ou des <strong>vies </strong>supplémentaires,</li><li>des améliorations pour les personnages.&nbsp;</li></ul><p>Ces achats en jeu sont appelés des <strong>achats intégrés</strong>.</p><p>⚠️ <strong>Attention</strong> :<br> Même si ce sont des petites sommes d’argent, la facture peut vite grimper ! Et si une carte bancaire est enregistrée sur l’appareil (smartphone, console…), l’achat sera débité automatiquement sans que vous soyez avertis.</p>"
+                  "content": "<p>👛 Dans un jeu vidéo (gratuit ou payant), des achats de quelques centimes ou euros peuvent être proposés tout au long de la partie pour obtenir, par exemple : </p><ul><li>de la <strong>monnaie virtuelle</strong>&nbsp;</li><li>des <strong>bonus </strong>ou des <strong>vies </strong>supplémentaires</li><li>des améliorations pour les personnages&nbsp;</li></ul><p>Ces achats en jeu sont appelés des <strong>achats intégrés</strong>.</p><p>⚠️ <strong>Attention</strong><br> Même si ce sont des petites sommes d’argent, la facture peut vite grimper ! Et si une carte bancaire est enregistrée sur l’appareil (smartphone, console, etc.), l’achat sera débité automatiquement sans que vous soyez averti.</p>"
                 }
               ]
             },
@@ -315,7 +315,7 @@
                     {
                       "id": "3",
                       "content": "<p>Il y a des achats intégrés et des loot boxes dans ce jeu.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! 🎉</span></p><p>La mention&nbsp; «&nbsp;Achats dans le jeu&nbsp;» est complétée par la mention obligatoire «&nbsp;Inclut des contenus aléatoires&nbsp;»</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! 🎉</span></p><p>La mention&nbsp; «&nbsp;Achats dans le jeu&nbsp;» est complétée par la mention obligatoire «&nbsp;Inclut des contenus aléatoires&nbsp;».</p>"
                     }
                   ],
                   "solution": "3"
@@ -389,7 +389,7 @@
                 {
                   "id": "d85a05a1-0c9d-4ce7-ad25-9333eb3a75c3",
                   "type": "text",
-                  "content": "<p><strong>Quels sont les risques ?</strong></p><p>Il est impossible de savoir qui se trouve réellement de l’autre côté de l’écran. Les personnes avec de mauvaises intentions cherchent souvent à : </p><ul><li>manipuler les autres joueurs,</li><li>proposer des rencontres dans la vraie vie,</li><li>pousser à partager des photos ou des informations personnelles.</li></ul><p>⚠️ <strong>Attention</strong><br>Même avec un jeu qui ne permet pas de discuter avec d’autres joueurs, ce risque n’est pas écarté. Certaines consoles permettent de discuter en ligne, tout comme les ordinateurs et les smartphones.</p>"
+                  "content": "<p><h3>Quels sont les risques ?</h3></p><p>Il est impossible de savoir qui se trouve réellement de l’autre côté de l’écran. Les personnes avec de mauvaises intentions cherchent souvent à : </p><ul><li>manipuler les autres joueurs,</li><li>proposer des rencontres dans la vraie vie,</li><li>pousser à partager des photos ou des informations personnelles.</li></ul><p>⚠️ <strong>Attention</strong><br>Même avec un jeu qui ne permet pas de discuter avec d’autres joueurs, ce risque n’est pas écarté. Certaines consoles permettent de discuter en ligne, tout comme les ordinateurs et les smartphones.</p>"
                 }
               ]
             },
@@ -398,7 +398,7 @@
                 {
                   "id": "6b8112ec-45ab-4665-b690-9adf0b6e93ac",
                   "type": "text",
-                  "content": "<p><strong>Comment se protéger ?</strong></p><p>🔎 D’abord, il faut être attentif lors du choix d’un jeu vidéo.&nbsp; Sur les boîtes ou les pages en ligne des jeux, la mention d’interaction entre joueurs peut prendre différentes formes : «&nbsp;<strong>les utilisateurs interagissent</strong>&nbsp;», «&nbsp;<strong>interaction entre les joueurs</strong>&nbsp;», «&nbsp;<strong>interactivité des utilisateurs</strong>&nbsp;»...</p>"
+                  "content": "<p><h3>Comment se protéger ?</h3></p><p>🔎 D’abord, il faut être attentif lors du choix d’un jeu vidéo.&nbsp; Sur les boîtes ou les pages en ligne des jeux, la mention d’interaction entre joueurs peut prendre différentes formes : «&nbsp;<strong>les utilisateurs interagissent</strong>&nbsp;», «&nbsp;<strong>interaction entre les joueurs</strong>&nbsp;», «&nbsp;<strong>interactivité des utilisateurs</strong>&nbsp;»...</p>"
                 },
                 {
                   "id": "9e9b11ab-0ffb-4dc9-917a-f5e336300ce5",
@@ -428,7 +428,7 @@
           "element": {
             "id": "5403d509-05f4-4473-ab7c-18e244aa234c",
             "type": "text",
-            "content": "<p>Il veut lui offrir un jeu : </p><ul><li> sans contenus inadaptés pour son âge selon la signalétique PEGI,</li><li>sans achats intégrés,</li><li>sans possibilité de discuter avec d’autres joueurs dans le jeu.</li></ul><p>👇 Voici les fiches des trois jeux vidéo sur le thème des dragons que Franck a sélectionnés.</p>"
+            "content": "<p>Il veut lui offrir un jeu : </p><ul><li> sans contenus inadaptés pour son âge selon la signalétique PEGI</li><li>sans achats intégrés</li><li>sans possibilité de discuter avec d’autres joueurs dans le jeu</li></ul><p>👇 Voici les fiches des trois jeux vidéo sur le thème des dragons que Franck a sélectionnés.</p>"
           }
         },
         {
@@ -481,7 +481,7 @@
           "element": {
             "id": "7346e1eb-4591-4913-9c39-9d23dfcf7db8",
             "type": "text",
-            "content": "<p><strong>📌&nbsp; Avant de choisir un jeu vidéo pour votre enfant, trois informations clés à vérifier :</strong></p>"
+            "content": "<p><strong>📌&nbsp; Avant de choisir un jeu vidéo pour votre enfant, il y a trois informations clés à vérifier :</strong></p>"
           }
         },
         {
