@@ -673,7 +673,7 @@ describe('Integration | Repository | JurySession', function () {
       });
 
       databaseBuilder.factory.buildCertificationIssueReport({
-        certificationCourseId: certificationCourseWithoutReport.id,
+        certificationCourseId: certificationCourseWithReportNotImpactfulOne.id,
         category: CertificationIssueReportCategory.NON_BLOCKING_CANDIDATE_ISSUE,
       });
 
@@ -711,6 +711,7 @@ describe('Integration | Repository | JurySession', function () {
 
       // then
       expect(jurySessionCounters.issueReports).to.equal(3);
+      expect(jurySessionCounters.impactfullIssueReports).to.equal(1);
     });
 
     it('should count all issue reports with impacts for the candidates', async function () {
