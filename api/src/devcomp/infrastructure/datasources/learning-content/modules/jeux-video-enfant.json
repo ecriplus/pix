@@ -142,7 +142,7 @@
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/ppn3_boitier_alva.png",
                   "alt": "Boîte du jeu vidéo Les chroniques d’Alva détaillée dans l’alternative textuelle",
-                  "alternativeText": "<p>Boîte du jeu vidéo Les chroniques d’Alva :&nbsp;<br></p><ul><li>Illustration d’une elfe, de dos, avec une lance à la main qui regarde un chateau au loin.</li><li>Titre Les chroniques d’Alva </li><li>Pictogramme «&nbsp;12 &nbsp;»</li></ul>"
+                  "alternativeText": "<p>Boîte du jeu vidéo Les chroniques d’Alva :&nbsp;<br></p><ul><li>Illustration d’une elfe, de dos, avec une lance à la main qui regarde un chateau au loin.</li><li>Titre Les chroniques d’Alva </li><li>Pictogramme «&nbsp;PEGI 12 &nbsp;»</li></ul>"
                 },
                 {
                   "id": "1255d0bf-0434-4add-9873-051c841af667",
@@ -329,7 +329,7 @@
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/ppn3_boitier_cake.png",
                   "alt": "Dos de la boîte d’un jeu vidéo détaillée dans l’alterenative textuelle",
-                  "alternativeText": "<p>Dos de la boîte d’un jeu vidéo :&nbsp;</p><ul><li>Présentation du jeu : <ul><li>Courez ! Sautez ! Explorez les mondes des gateaux et aidez Flora la pâtissière à traverser plus de 80 niveaux !</li><li>Nouveau :&nbsp;Saupoudrage scintillant</li><li>Nouveau :&nbsp;Dragée explosive</li><li>Nouveau :&nbsp;Coeur chocolat coulant</li>    </ul></li><li>Caractéristiques :<ul><li>Multijoueur local :&nbsp;jusqu’à 8 joueurs</li><li>Jeu en ligne :&nbsp;jusqu’à 12 joueurs</li><li>Online :&nbsp;Le jeu en ligne nécessite un abonnement payant au service Online.</li><li>Pictogramme Pegi 3</li><li>Pictogramme Achats intégrés</li><li>Compatible manette pro</li><li>Compatible volant</li>    </ul></li><li>Avertissements :&nbsp; <ul><li>Attention, chez certaines personnes, l’utilisation de ce jeu nécessite des précautions d’emploi particulières qui sont détaillées dans la notice jointe.</li><li>Ce logiciel peut comporter du placement de produit et de la publicité</li><li>Ne jetez pas cette carte de jeu à la poubelle</li>    </ul></li></ul>"
+                  "alternativeText": "<p>Dos de la boîte d’un jeu vidéo :&nbsp;</p><ul><li>Présentation du jeu : <ul><li>Courez ! Sautez ! Explorez les mondes des gateaux et aidez Flora la pâtissière à traverser plus de 80 niveaux !</li><li>Nouveau :&nbsp;Saupoudrage scintillant</li><li>Nouveau :&nbsp;Dragée explosive</li><li>Nouveau :&nbsp;Coeur chocolat coulant</li>    </ul></li><li>Caractéristiques :<ul><li>Multijoueur local :&nbsp;jusqu’à 8 joueurs</li><li>Jeu en ligne :&nbsp;jusqu’à 12 joueurs</li><li>Online :&nbsp;Le jeu en ligne nécessite un abonnement payant au service Online.</li><li>Pictogramme Pegi 3</li><li>Pictogramme Achats intégrés</li><li>Compatible manette pro</li><li>Compatible volant</li>    </ul></li><li>Avertissements :&nbsp; <ul><li>Attention, chez certaines personnes, l’utilisation de ce jeu nécessite des précautions d’emploi particulières qui sont détaillées dans la notice jointe.</li><li>Ce logiciel peut comporter du placement de produit et de la publicité.</li><li>Ne jetez pas cette carte de jeu à la poubelle.</li>    </ul></li></ul>"
                 },
                 {
                   "id": "915d599d-fb2d-4db9-93d8-012943d50001",
@@ -491,7 +491,7 @@
             "type": "image",
             "url": "https://images.pix.fr/modulix/ppn3_resume.png",
             "alt": "Infographie détaillée dans l’alternative textuelle",
-            "alternativeText": "<p>Les 3 informations à vérifier :&nbsp;</p><ol>    <li>La recommandation de la signalétique PEGI</li>    <li>la présence d’achats intégrés</li>    <li>la possibilité de discuter avec d’autres joueurs</li></ol>"
+            "alternativeText": "<p>Les 3 informations à vérifier :&nbsp;</p><ol>    <li>la recommandation de la signalétique PEGI</li>    <li>la présence d’achats intégrés</li>    <li>la possibilité de discuter avec d’autres joueurs</li></ol>"
           }
         },
         {
