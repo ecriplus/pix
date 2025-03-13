@@ -42,11 +42,11 @@
     },
     {
       "grainId": "6e7dad63-ee7e-428b-a25f-08d760b00503",
-      "content": "<p>Franck sait maintenant que Dragon’s Kingdom, le jeu demandé par Marilou n’est pas adapté à son âge.<br>Après discussion avec sa fille de 8 ans, Franck souhaite lui acheter un autre jeu, sur les dragons. 🐲</p>"
+      "content": "<p>Franck sait maintenant que Dragon’s Kingdom, le jeu demandé par Marilou n’est pas adapté à son âge.<br>Après discussion avec sa fille de 8 ans, Franck souhaite lui acheter un autre jeu sur les dragons. 🐲</p>"
     },
     {
       "grainId": "4a349720-15b7-4c86-a431-344410332fd5",
-      "content": "<p>Grâce à vous Franck a choisi un jeu vidéo pour Marilou ! 👏<br>Il peut à présent jouer avec elle, pour l’accompagner dans sa découverte du jeu.</p>"
+      "content": "<p>Grâce à vous, Franck a choisi un jeu vidéo pour Marilou ! 👏<br>Il peut à présent jouer avec elle, pour l’accompagner dans sa découverte du jeu.</p>"
     }
   ],
   "grains": [
@@ -69,8 +69,8 @@
             "id": "3fd2025c-f39b-4f28-9243-ac390b7106c2",
             "type": "image",
             "url": "https://images.pix.fr/modulix/ppn3_dragonkingdom.png",
-            "alt": "",
-            "alternativeText": "<p>Jeu Craft Dragon’s kingdom</p><ul><li>Epix</li><li>Tag «&nbsp;Consoles&nbsp;»</li><li>€ 18,99<br></li><li>Bouton Obtenir</li><li>PEGI 12, peur</li><li>Abonnement requis pour le jeu en ligne</li><li>Achats intra jeux facultatifs</li><li>Interaction entre les illustrateurs</li><li>Jeu en ligne facultatif</li></ul>"
+            "alt": "capture d’écran de la page d’installation du jeu vidéo Dragon’s kingdom détaillée dans l’alternative textuelle",
+            "alternativeText": "<p>Jeu Craft Dragon’s kingdom</p><ul><li>Epix</li><li>Étiquette «&nbsp;Consoles&nbsp;»</li><li>18,99€<br></li><li>Bouton «&nbsp;Obtenir&nbsp;»</li><li>PEGI 12, peur</li><li>Abonnement requis pour le jeu en ligne</li><li>Achats intra jeux facultatifs</li><li>Interaction entre les illustrateurs</li><li>Jeu en ligne facultatif</li></ul>"
           }
         },
         {
@@ -141,8 +141,8 @@
                   "id": "c9c01da7-3d63-45a6-a0d2-5d7f80dab582",
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/ppn3_boitier_alva.png",
-                  "alt": "",
-                  "alternativeText": "<p>Boîte du jeu vidéo Les chroniques d’Alva :&nbsp;<br></p><ul><li>Illustration d’une elfe, de dos, avec une lance à la main qui regarde un chateau au loin.</li><li>Titre Les chroniques d’Alva </li><li>Pictogramme «&nbsp;12 &nbsp;»</li></ul>"
+                  "alt": "Boîte du jeu vidéo Les chroniques d’Alva détaillée dans l’alternative textuelle",
+                  "alternativeText": "<p>Boîte du jeu vidéo Les chroniques d’Alva :&nbsp;<br></p><ul><li>Illustration d’une elfe, de dos, avec une lance à la main qui regarde un chateau au loin.</li><li>Titre Les chroniques d’Alva </li><li>Pictogramme «&nbsp;PEGI 12 &nbsp;»</li></ul>"
                 },
                 {
                   "id": "1255d0bf-0434-4add-9873-051c841af667",
@@ -175,8 +175,8 @@
                   "id": "1360e72b-5248-41b0-9dfc-1d85264cb97c",
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/ppn3_pixelworld.png",
-                  "alt": "",
-                  "alternativeText": "<p>Fiche du jeu vidéo Pixel world :</p><ul><li>Pixel world</li><li>Pixel industry</li><li>Action et aventure, Famille et enfants</li><li>4,2 étoiles, 23,5k avis</li><li>Bouton Obtenir</li><li>Pictogramme «&nbsp;Pegi !&nbsp;»</li></ul>"
+                  "alt": "capture d’écran de la page d’installation du Pixel World détaillée dans l’alternative textuelle",
+                  "alternativeText": "<p>Fiche du jeu vidéo Pixel world :</p><ul><li>Pixel world</li><li>Pixel industry</li><li>Action et aventure, Famille et enfants</li><li>4,2 étoiles, 23,5k avis</li><li>Bouton «&nbsp;Obtenir&nbsp;»</li><li>Pictogramme «&nbsp;Pegi !&nbsp;»</li></ul>"
                 },
                 {
                   "id": "10dfb9e3-02de-4f3f-b7d1-aae0d1991f9e",
@@ -222,12 +222,12 @@
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/ppn3_jeu_achats.png",
                   "alt": "",
-                  "alternativeText": "Capture d'écran d'un jeu vidéo sur smartphone"
+                  "alternativeText": ""
                 },
                 {
                   "id": "44c670d6-fdfc-4cdd-8a8b-2304b8fe019b",
                   "type": "text",
-                  "content": "<p>👛 Dans un jeu vidéo (gratuit ou payant), des achats de quelques centimes ou euros peuvent être proposés tout au long de la partie pour obtenir, par exemple : </p><ul><li>de la <strong>monnaie virtuelle</strong>,&nbsp;</li><li>des <strong>bonus </strong>ou des <strong>vies </strong>supplémentaires,</li><li>des améliorations pour les personnages.&nbsp;</li></ul><p>Ces achats en jeu sont appelés des <strong>achats intégrés</strong>.</p><p>⚠️ <strong>Attention</strong> :<br> Même si ce sont des petites sommes d’argent, la facture peut vite grimper ! Et si une carte bancaire est enregistrée sur l’appareil (smartphone, console…), l’achat sera débité automatiquement sans que vous soyez avertis.</p>"
+                  "content": "<p>👛 Dans un jeu vidéo (gratuit ou payant), des achats de quelques centimes ou euros peuvent être proposés tout au long de la partie pour obtenir, par exemple : </p><ul><li>de la <strong>monnaie virtuelle</strong>&nbsp;</li><li>des <strong>bonus </strong>ou des <strong>vies </strong>supplémentaires</li><li>des améliorations pour les personnages&nbsp;</li></ul><p>Ces achats en jeu sont appelés des <strong>achats intégrés</strong>.</p><p>⚠️ <strong>Attention</strong><br> Même si ce sont des petites sommes d’argent, la facture peut vite grimper ! Et si une carte bancaire est enregistrée sur l’appareil (smartphone, console, etc.), l’achat sera débité automatiquement sans que vous soyez averti.</p>"
                 }
               ]
             },
@@ -242,8 +242,8 @@
                   "id": "cfbb169d-45d8-4029-a62b-a2d78d33cfc4",
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/ppn3_achats_integres_mentions.png",
-                  "alt": "",
-                  "alternativeText": "<p>Images du Pictogramme PEGI Achats intégrés et des différentes mentions : « achats intra-jeu », « achats intra-jeu facultatifs », « inclut des achats intégrés », « achats intra-jeu (y compris divers articles », « achats numériques ».</p>"
+                  "alt": "Image du pictogramme PEGI décrite dans l’alternative textuelle",
+                  "alternativeText": "<p>Images du Pictogramme PEGI Achats intégrés et des différentes mentions : «&nbsp;achats intra-jeu&nbsp;», «&nbsp;achats intra-jeu facultatifs&nbsp;», «&nbsp;inclut des achats intégrés&nbsp;», «&nbsp;achats intra-jeu (y compris divers articles&nbsp;», «&nbsp;achats numériques&nbsp;».</p>"
                 }
               ]
             },
@@ -294,8 +294,8 @@
                   "id": "f828c349-7282-4333-a267-b52be3744880",
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/ppn3_lornitteclan.png",
-                  "alt": "",
-                  "alternativeText": "<p>Jeu Lorttnite Clan :&nbsp;</p><ul><li>4,1 étoiles</li><li>Communauté compétitive</li><li>Commandes rapides à maîtriser</li><li>Pegi 12</li><li>Violence, achats dans le jeu (inclut des éléments aléatoires)</li><li>Jeu de base</li><li>Gratuit</li><li>Boutons : obtenir, ajouter au panier, ajouter à la liste de souhaits</li></ul>"
+                  "alt": "capture d’écran de la page d’installation du jeu vidéo Lorttnite Clan détaillée dans l’alternative textuelle",
+                  "alternativeText": "<p>Jeu Lorttnite Clan :&nbsp;</p><ul><li>4,1 étoiles</li><li>Communauté compétitive</li><li>Commandes rapides à maîtriser</li><li> Lien «&nbsp;vue d’ensemble&nbsp;»</li><li>Contenus additionnels</li><li>FAQ</li><li>Pegi 12</li><li>Violence, achats dans le jeu (inclut des éléments aléatoires)</li><li>Jeu de base</li><li>Gratuit</li><li>Boutons :«&nbsp;obtenir&nbsp;», «&nbsp;ajouter au panier&nbsp;», «&nbsp;ajouter à la liste de souhaits&nbsp;»</li></ul>"
                 },
                 {
                   "id": "6781d13a-91fb-45b5-ba52-311e290b47a1",
@@ -315,7 +315,7 @@
                     {
                       "id": "3",
                       "content": "<p>Il y a des achats intégrés et des loot boxes dans ce jeu.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! 🎉</span></p><p>La mention&nbsp; «&nbsp;Achats dans le jeu&nbsp;» est complétée par la mention obligatoire «&nbsp;Inclut des contenus aléatoires&nbsp;»</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! 🎉</span></p><p>La mention&nbsp; «&nbsp;Achats dans le jeu&nbsp;» est complétée par la mention obligatoire «&nbsp;Inclut des contenus aléatoires&nbsp;».</p>"
                     }
                   ],
                   "solution": "3"
@@ -328,8 +328,8 @@
                   "id": "f81697de-5d3f-4275-95cf-57ce22d366c1",
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/ppn3_boitier_cake.png",
-                  "alt": "",
-                  "alternativeText": "<p>Dos de la boîte d'un jeu vidéo :&nbsp;</p><ul><li>Multijoueur local : jusqu'à 8 joueurs</li><li>Jeu en ligne : jusqu'à 12 joueurs</li><li>Attention, chez certaines personnes, l'utilisation de ce jeu nécessite des précautions d'emploi particulières qui sont détaillées dans la notice jointe.</li><li>Online : Le jeu en ligne nécessite un abonnement payant au service Online.</li><li>Ce logiciel peut comporter du placement de produit et de la publicité</li><li>Pictogramme Pegi 3</li><li>Pictogramme Achats intégrés</li><li>Compatible manette pro</li><li>Compatible volant</li><li>Ne jetez pas cette carte de jeu à la poubelle</li></ul> "
+                  "alt": "Dos de la boîte d’un jeu vidéo détaillée dans l’alterenative textuelle",
+                  "alternativeText": "<p>Dos de la boîte d’un jeu vidéo :&nbsp;</p><ul><li>Présentation du jeu : <ul><li>Courez ! Sautez ! Explorez les mondes des gateaux et aidez Flora la pâtissière à traverser plus de 80 niveaux !</li><li>Nouveau :&nbsp;Saupoudrage scintillant</li><li>Nouveau :&nbsp;Dragée explosive</li><li>Nouveau :&nbsp;Coeur chocolat coulant</li>    </ul></li><li>Caractéristiques :<ul><li>Multijoueur local :&nbsp;jusqu’à 8 joueurs</li><li>Jeu en ligne :&nbsp;jusqu’à 12 joueurs</li><li>Online :&nbsp;Le jeu en ligne nécessite un abonnement payant au service Online.</li><li>Pictogramme Pegi 3</li><li>Pictogramme Achats intégrés</li><li>Compatible manette pro</li><li>Compatible volant</li>    </ul></li><li>Avertissements :&nbsp; <ul><li>Attention, chez certaines personnes, l’utilisation de ce jeu nécessite des précautions d’emploi particulières qui sont détaillées dans la notice jointe.</li><li>Ce logiciel peut comporter du placement de produit et de la publicité.</li><li>Ne jetez pas cette carte de jeu à la poubelle.</li>    </ul></li></ul>"
                 },
                 {
                   "id": "915d599d-fb2d-4db9-93d8-012943d50001",
@@ -389,7 +389,7 @@
                 {
                   "id": "d85a05a1-0c9d-4ce7-ad25-9333eb3a75c3",
                   "type": "text",
-                  "content": "<p><strong>Quels sont les risques ?</strong></p><p>Il est impossible de savoir qui se trouve réellement de l’autre côté de l’écran. Les personnes avec de mauvaises intentions cherchent souvent à : </p><ul><li>manipuler les autres joueurs,</li><li>proposer des rencontres dans la vraie vie,</li><li>pousser à partager des photos ou des informations personnelles.</li></ul><p>⚠️ <strong>Attention</strong><br>Même avec un jeu qui ne permet pas de discuter avec d’autres joueurs, ce risque n’est pas écarté. Certaines consoles permettent de discuter en ligne, tout comme les ordinateurs et les smartphones.</p>"
+                  "content": "<h3>Quels sont les risques ?</h3><p>Il est impossible de savoir qui se trouve réellement de l’autre côté de l’écran. Les personnes avec de mauvaises intentions cherchent souvent à : </p><ul><li>manipuler les autres joueurs,</li><li>proposer des rencontres dans la vraie vie,</li><li>pousser à partager des photos ou des informations personnelles.</li></ul><p>⚠️ <strong>Attention</strong><br>Même avec un jeu qui ne permet pas de discuter avec d’autres joueurs, ce risque n’est pas écarté. Certaines consoles permettent de discuter en ligne, tout comme les ordinateurs et les smartphones.</p>"
                 }
               ]
             },
@@ -398,14 +398,14 @@
                 {
                   "id": "6b8112ec-45ab-4665-b690-9adf0b6e93ac",
                   "type": "text",
-                  "content": "<p><strong>Comment se protéger ?</strong></p><p>🔎 D’abord, il faut être attentif lors du choix d’un jeu vidéo.&nbsp; Sur les boîtes ou les pages en ligne des jeux, la mention d’interaction entre joueurs peut prendre différentes formes : «&nbsp;<strong>les utilisateurs interagissent</strong>&nbsp;», «&nbsp;<strong>interaction entre les joueurs</strong>&nbsp;», «&nbsp;<strong>interactivité des utilisateurs</strong>&nbsp;»...</p>"
+                  "content": "<h3>Comment se protéger ?</h3><p>🔎 D’abord, il faut être attentif lors du choix d’un jeu vidéo.&nbsp; Sur les boîtes ou les pages en ligne des jeux, la mention d’interaction entre joueurs peut prendre différentes formes : «&nbsp;<strong>les utilisateurs interagissent</strong>&nbsp;», «&nbsp;<strong>interaction entre les joueurs</strong>&nbsp;», «&nbsp;<strong>interactivité des utilisateurs</strong>&nbsp;»...</p>"
                 },
                 {
                   "id": "9e9b11ab-0ffb-4dc9-917a-f5e336300ce5",
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/ppn3_capture_pegi.png",
-                  "alt": "",
-                  "alternativeText": "<p>Capture d’écran de la fiche d’un jeu vidéo avec la mention&nbsp;«&nbsp;interactivité des utilisateurs&nbsp;»</p>"
+                  "alt": "Capture d’écran de la page d’installation d’un jeu vidéo avec la mention « interactivité des utilisateurs » encadrée",
+                  "alternativeText": ""
                 },
                 {
                   "id": "61751690-1ee8-41ee-86c4-f9903230c9f6",
@@ -428,7 +428,7 @@
           "element": {
             "id": "5403d509-05f4-4473-ab7c-18e244aa234c",
             "type": "text",
-            "content": "<p>Il veut lui offrir un jeu : </p><ul><li> sans contenus inadaptés pour son âge selon la signalétique PEGI,</li><li>sans achats intégrés,</li><li>sans possibilité de discuter avec d’autres joueurs dans le jeu.</li></ul><p>👇 Voici les fiches des trois jeux vidéo sur le thème des dragons que Franck a sélectionnés.</p>"
+            "content": "<p>Il veut lui offrir un jeu : </p><ul><li> sans contenus inadaptés pour son âge selon la signalétique PEGI</li><li>sans achats intégrés</li><li>sans possibilité de discuter avec d’autres joueurs dans le jeu</li></ul><p>👇 Voici les fiches des trois jeux vidéo sur le thème des dragons que Franck a sélectionnés.</p>"
           }
         },
         {
@@ -481,7 +481,7 @@
           "element": {
             "id": "7346e1eb-4591-4913-9c39-9d23dfcf7db8",
             "type": "text",
-            "content": "<p><strong>📌&nbsp; Avant de choisir un jeu vidéo pour votre enfant, trois informations clés à vérifier :</strong></p>"
+            "content": "<p><strong>📌&nbsp; Avant de choisir un jeu vidéo pour votre enfant, il y a trois informations clés à vérifier :</strong></p>"
           }
         },
         {
@@ -490,8 +490,8 @@
             "id": "99f21e69-cdb4-4428-9153-ae857a148ee7",
             "type": "image",
             "url": "https://images.pix.fr/modulix/ppn3_resume.png",
-            "alt": "",
-            "alternativeText": "<p>Les 3 informations à vérifier :&nbsp;</p><ol>    <li>le pictogramme de la signalétique PEGI</li>    <li>la présence d’achats intégrés</li>    <li>la possibilité de discuter avec d’autres joueurs</li></ol>"
+            "alt": "Infographie détaillée dans l’alternative textuelle",
+            "alternativeText": "<p>Les 3 informations à vérifier :&nbsp;</p><ol>    <li>la recommandation de la signalétique PEGI</li>    <li>la présence d’achats intégrés</li>    <li>la possibilité de discuter avec d’autres joueurs</li></ol>"
           }
         },
         {
