@@ -407,25 +407,26 @@ describe('Acceptance | Team | Application | Route | membership', function () {
     });
   });
 
-  describe('PATCH /api/organizations/{id}/me', function () {
+  describe('POST /api/memberships/{id}/access', function () {
     context('when user is one of the members of the organization', function () {
       it('updates user membership lastAccessedAt', async function () {
         // given
         const organizationId = databaseBuilder.factory.buildOrganization().id;
         const organizationMemberUserId = databaseBuilder.factory.buildUser().id;
-        databaseBuilder.factory.buildMembership({
+        const membershipId = databaseBuilder.factory.buildMembership({
           userId: organizationMemberUserId,
           organizationId,
           organizationRole: Membership.roles.MEMBER,
           lastAccessedAt: null,
           updatedAt: new Date('2020-01-01'),
-        });
+          disabledAt: null,
+        }).id;
 
         await databaseBuilder.commit();
 
         const options = {
-          method: 'PATCH',
-          url: `/api/organizations/${organizationId}/me`,
+          method: 'POST',
+          url: `/api/memberships/${membershipId}/access`,
           payload: {},
           headers: generateAuthenticatedUserRequestHeaders({ userId: organizationMemberUserId }),
         };

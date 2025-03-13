@@ -1,3 +1,4 @@
+import { ForbiddenError } from '../../../../../src/shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { InvalidMembershipOrganizationRoleError } from '../../../../../src/shared/domain/errors.js';
 import { Membership } from '../../../../../src/shared/domain/models/index.js';
@@ -322,16 +323,15 @@ describe('Integration | Team | Application | Memberships | membership-controller
 
   describe('#updateLastAccessedAt', function () {
     context('Error case', function () {
-      describe('when user does not belong to organization', function () {
+      describe('when user does not own the membership', function () {
         it('returns an HTTP response with status code 403', async function () {
           // given
-          const organizationId = 1234;
+          const membershipId = 1234;
           const userId = 5678;
-          sinon
-            .stub(securityPreHandlers, 'checkUserBelongsToOrganization')
-            .callsFake((request, h) => h.response().code(403).takeover());
+          sinon.stub(usecases, 'updateMembershipLastAccessedAt').throws(new ForbiddenError());
+
           // when
-          const response = await httpTestServer.request('PATCH', `/api/organizations/${organizationId}/me`, {
+          const response = await httpTestServer.request('POST', `/api/memberships/${membershipId}/access`, {
             auth: { credentials: { userId } },
           });
 
