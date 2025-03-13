@@ -68,7 +68,7 @@ export default class CurrentUserService extends Service {
         await this._setOrganizationProperties(membership);
 
         await membership.save({
-          adapterOptions: { updateLastAccessedAt: true, organizationId: this.organization.id },
+          adapterOptions: { updateLastAccessedAt: true },
         });
       } catch {
         this.prescriber = null;
