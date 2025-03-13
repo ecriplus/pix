@@ -1,5 +1,37 @@
 # Pix Changelog
 
+## v5.63.0 (13/03/2025)
+
+
+### :rocket: Amélioration
+- [#11665](https://github.com/1024pix/pix/pull/11665) [FEATURE] Utiliser le snapshot pour calculer l'obtention de RTs dans le cadre d'une campagne EXAM (PIX-17003).
+- [#11657](https://github.com/1024pix/pix/pull/11657) [FEATURE] Empêcher les campagnes de Type EXAM à pouvoir faire du reset de campagne (Pix-16497).
+- [#11581](https://github.com/1024pix/pix/pull/11581) [FEATURE] Ajouter un nom interne pour les profils cibles (PIX-16685).
+- [#11627](https://github.com/1024pix/pix/pull/11627) [FEATURE] Remplacement du bloc "Durant ce parcours" de la page de début d'évaluation (PIX-16944).
+- [#11633](https://github.com/1024pix/pix/pull/11633) [FEATURE] Changement de taille du logo Pix dans le footer (PIX-16697).
+- [#11654](https://github.com/1024pix/pix/pull/11654) [FEATURE] Utilise le snapshot pour calculer les résultats de fin de campagne d'Exam (PIX-17004).
+- [#11649](https://github.com/1024pix/pix/pull/11649) [FEATURE] Utilise les snapshots dans les campagnes d'EXAM pour acquérir les paliers (PIX-17002).
+- [#11646](https://github.com/1024pix/pix/pull/11646) [FEATURE] Ne pas écraser le snapshot élaboré en cours de participation pour une campagne d'interro lors du partage de résultats (PIX-16777).
+- [#11634](https://github.com/1024pix/pix/pull/11634) [FEATURE] Récupère le prochain challenge en fonction du knowledge element snapshot dans les campagnes d'Exam (PIX-16775).
+- [#11575](https://github.com/1024pix/pix/pull/11575) [FEATURE] Alimenter un KE snapshot au fur et à mesure des réponses apportées lors d'une campagne d'interro (PIX-16775).
+- [#11617](https://github.com/1024pix/pix/pull/11617) [FEATURE] Permettre de télécharger le csv des résultats d'une campagne de type EXAM (PIX-16976).
+
+### :building_construction: Tech
+- [#11631](https://github.com/1024pix/pix/pull/11631) [TECH] Migrer la route de suppression d'un membre de centre de CERTIF (PIX-16994).
+- [#11653](https://github.com/1024pix/pix/pull/11653) [TECH] Mettre à jour le CHANGELOG avec la version v5.61.1.
+- [#11651](https://github.com/1024pix/pix/pull/11651) [TECH] Ne pas pinger `team-devcomp` en cas d'évols du référentiel Modulix (PIX-17006).
+
+### :bug: Correction
+- [#11650](https://github.com/1024pix/pix/pull/11650) [BUGFIX] (Correctif sans ilike) Pour les demandes de réinitialisation de mot de passe, rendre la recherche des comptes vraiment insensible à la casse (PIX-17005).
+
+### :arrow_up: Montée de version
+- [#11658](https://github.com/1024pix/pix/pull/11658) [BUMP] Update dependency @1024pix/pix-ui to ^55.1.0 (orga).
+- [#11652](https://github.com/1024pix/pix/pull/11652) [BUMP] Update dependency @1024pix/pix-ui to v55 (orga).
+- [#11647](https://github.com/1024pix/pix/pull/11647) [BUMP] Update dependency globals to v15.15.0 (admin).
+
+### :coffee: Autre
+- [#11656](https://github.com/1024pix/pix/pull/11656) Revert "[TECH] Ne pas pinger `team-devcomp` en cas d'évols du référentiel Modulix (PIX-17006)".
+
 ## v5.62.0 (12/03/2025)
 
 
