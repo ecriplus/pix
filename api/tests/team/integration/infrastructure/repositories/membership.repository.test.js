@@ -890,15 +890,15 @@ describe('Integration | Team | Infrastructure | Repository | membership-reposito
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization().id;
-      databaseBuilder.factory.buildMembership({ userId, organizationId });
+      const membershipId = databaseBuilder.factory.buildMembership({ userId, organizationId }).id;
 
       await databaseBuilder.commit();
 
       // when
-      await membershipRepository.updateLastAccessedAt({ userId, organizationId, lastAccessedAt: now });
+      await membershipRepository.updateLastAccessedAt({ membershipId, lastAccessedAt: now });
 
       // then
-      const updatedMembership = await knex('memberships').where({ userId, organizationId }).first();
+      const updatedMembership = await knex('memberships').where({ id: membershipId }).first();
       expect(updatedMembership.lastAccessedAt).to.deep.equal(now);
       expect(updatedMembership.updatedAt).to.deep.equal(now);
     });
