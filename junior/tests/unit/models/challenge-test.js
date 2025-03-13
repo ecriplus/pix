@@ -40,56 +40,6 @@ module('Unit | Model | Challenge', function (hooks) {
     });
   });
 
-  module('#isLesson', function () {
-    test('should be true if focused is true', function (assert) {
-      const challenge = store.createRecord('challenge', {
-        focused: true,
-      });
-      assert.true(challenge.isLesson);
-    });
-    test('should be true if noValidationNeeded is true', function (assert) {
-      const challenge = store.createRecord('challenge', {
-        noValidationNeeded: true,
-      });
-      assert.true(challenge.isLesson);
-    });
-    test('should be false if noValidationNeeded & focused are not set', function (assert) {
-      const challenge = store.createRecord('challenge');
-      assert.false(challenge.isLesson);
-    });
-    test('should be false if noValidationNeeded & focused are false', function (assert) {
-      const challenge = store.createRecord('challenge', {
-        focused: false,
-        noValidationNeeded: false,
-      });
-      assert.false(challenge.isLesson);
-    });
-  });
-  module('#isEmbedAutoValidated', function () {
-    test('should be true if timer is set', function (assert) {
-      const challenge = store.createRecord('challenge', {
-        timer: 1,
-      });
-      assert.true(challenge.isEmbedAutoValidated);
-    });
-    test('should be true if hasEmbedInternalValidation is true', function (assert) {
-      const challenge = store.createRecord('challenge', {
-        hasEmbedInternalValidation: true,
-      });
-      assert.true(challenge.isEmbedAutoValidated);
-    });
-    test('should be false if timer & hasEmbedInternalValidation are not set', function (assert) {
-      const challenge = store.createRecord('challenge');
-      assert.false(challenge.isEmbedAutoValidated);
-    });
-    test('should be false hasEmbedInternalValidation is false', function (assert) {
-      const challenge = store.createRecord('challenge', {
-        hasEmbedInternalValidation: false,
-      });
-      assert.false(challenge.isEmbedAutoValidated);
-    });
-  });
-
   module('#hasWebComponent', function () {
     test('should be true when web component name and web component props are fields', function (assert) {
       const challenge = store.createRecord('challenge', {

@@ -53,10 +53,6 @@ export default class Challenge extends Model {
     return !!this.webComponentProps && !!this.webComponentTagName;
   }
 
-  get isLesson() {
-    return !!this.focused || !!this.noValidationNeeded;
-  }
-
   get isQROC() {
     return this.autoReply === false && this.type === 'QROC';
   }
@@ -79,10 +75,6 @@ export default class Challenge extends Model {
 
   get hasType() {
     return !!this.type;
-  }
-
-  get isEmbedAutoValidated() {
-    return (this.timer !== null && this.timer >= 0) || !!this.hasEmbedInternalValidation;
   }
 
   get hasMedia() {

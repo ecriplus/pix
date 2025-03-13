@@ -61,9 +61,9 @@ module('Integration | Component | challenge item', function (hooks) {
     assert.dom('.challenge-content-proposals__qcm-checkboxes').exists();
   });
 
-  test('displays lesson', async function (assert) {
+  test('displays lesson where no validation is needed', async function (assert) {
     const challenge = {
-      isLesson: true,
+      noValidationNeeded: true,
       hasEmbed: true,
       autoReply: false,
       focused: true,
