@@ -432,7 +432,7 @@ function _configureCertificationCenterInvitationRoutes(context) {
     return certificationCenterInvitation;
   });
 
-  context.patch('/certification-centers/:certificationCenterId/certification-center-memberships/me', () => {
+  context.post('/certification-center-memberships/:certificationCenterMembershipId/access', () => {
     return new Response(204);
   });
 

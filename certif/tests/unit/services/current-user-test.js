@@ -58,7 +58,7 @@ module('Unit | Service | current-user', function (hooks) {
       assert.deepEqual(currentUser.currentCertificationCenterMembership, certificationCenterMembershipA);
       assert.true(currentUser.isAdminOfCurrentCertificationCenter);
       sinon.assert.calledWith(certificationCenterMembershipA.save, {
-        adapterOptions: { updateLastAccessedAt: true, certificationCenterId: 789 },
+        adapterOptions: { updateLastAccessedAt: true },
       });
       assert.ok(true);
     });
@@ -213,7 +213,7 @@ module('Unit | Service | current-user', function (hooks) {
       assert.strictEqual(currentUser.currentCertificationCenterMembership, newCertificationCenterMembership);
       assert.true(currentUser.isAdminOfCurrentCertificationCenter);
       sinon.assert.calledWith(newCertificationCenterMembership.save, {
-        adapterOptions: { updateLastAccessedAt: true, certificationCenterId: 222 },
+        adapterOptions: { updateLastAccessedAt: true },
       });
       assert.ok(true);
     });
