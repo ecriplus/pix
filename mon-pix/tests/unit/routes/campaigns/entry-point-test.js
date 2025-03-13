@@ -1,6 +1,7 @@
 import EmberObject from '@ember/object';
 import { setupTest } from 'ember-qunit';
 import ENV from 'mon-pix/config/environment';
+import PixWindow from 'mon-pix/utils/pix-window';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -23,6 +24,10 @@ module('Unit | Route | Entry Point', function (hooks) {
     route.campaignStorage = { set: sinon.stub(), clear: sinon.stub() };
     route.session = { isAuthenticated: false, invalidate: sinon.stub() };
     route.currentUser = { user: {} };
+  });
+
+  hooks.afterEach(function () {
+    sinon.restore();
   });
 
   module('#beforeModel', function () {
@@ -326,5 +331,48 @@ module('Unit | Route | Entry Point', function (hooks) {
         });
       });
     });
+
+    module('FWB campaign redirection', function () {
+      module('when location is FR TLD', function () {
+        test('it redirects to the URL on the ORG TLD', async function (assert) {
+          // given
+          campaign.identityProvider = 'FWB';
+
+          _stubPixWindow('https://app.pix.fr/campaign/NEW_CODE');
+
+          // when
+          await route.afterModel(campaign, transition);
+
+          // then
+          sinon.assert.calledWithExactly(PixWindow.replace, 'https://app.pix.org/campaign/NEW_CODE');
+          assert.ok(true);
+        });
+      });
+
+      module('when location is ORG TLD', function () {
+        test('it does not redirect', async function (assert) {
+          // given
+          campaign.identityProvider = 'FWB';
+
+          _stubPixWindow('https://app.pix.org/campaign/NEW_CODE');
+
+          // when
+          await route.afterModel(campaign, transition);
+
+          // then
+          sinon.assert.notCalled(PixWindow.replace);
+          assert.ok(true);
+        });
+      });
+    });
   });
 });
+
+function _stubPixWindow(url) {
+  const newUrl = new URL(url);
+  sinon.stub(PixWindow, 'getLocationHash').returns(newUrl.hash);
+  sinon.stub(PixWindow, 'getLocationHostname').returns(newUrl.hostname);
+  sinon.stub(PixWindow, 'getLocationHref').returns(newUrl.href);
+  sinon.stub(PixWindow, 'replace');
+  sinon.stub(PixWindow, 'reload');
+}
