@@ -1,6 +1,5 @@
 import Joi from 'joi';
 
-import { securityPreHandlers } from '../../../src/shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../shared/domain/types/identifiers-type.js';
 import { activityAnswerController } from './activity-answer-controller.js';
 
@@ -10,7 +9,6 @@ const register = async function (server) {
       method: 'POST',
       path: '/api/pix1d/activity-answers',
       config: {
-        pre: [{ method: securityPreHandlers.checkPix1dActivated }],
         auth: false,
         validate: {
           payload: Joi.object({

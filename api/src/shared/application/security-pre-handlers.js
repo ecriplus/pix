@@ -21,7 +21,6 @@ import * as checkAuthorizationToManageCampaignUsecase from './usecases/checkAuth
 import * as checkIfUserIsBlockedUseCase from './usecases/checkIfUserIsBlocked.js';
 import * as checkOrganizationHasFeatureUseCase from './usecases/checkOrganizationHasFeature.js';
 import * as checkOrganizationIsScoAndManagingStudentUsecase from './usecases/checkOrganizationIsScoAndManagingStudent.js';
-import * as checkPix1dEnabled from './usecases/checkPix1dEnabled.js';
 import * as checkUserBelongsToLearnersOrganizationUseCase from './usecases/checkUserBelongsToLearnersOrganization.js';
 import * as checkUserBelongsToOrganizationUseCase from './usecases/checkUserBelongsToOrganization.js';
 import * as checkUserBelongsToOrganizationManagingStudentsUseCase from './usecases/checkUserBelongsToOrganizationManagingStudents.js';
@@ -680,13 +679,6 @@ function validateAllAccess(securityChecks) {
   };
 }
 
-async function checkPix1dActivated(request, h, dependencies = { checkPix1dEnabled }) {
-  const isPix1dEnabled = await dependencies.checkPix1dEnabled.execute();
-
-  if (isPix1dEnabled) return h.response(true);
-  return _replyForbiddenError(h);
-}
-
 async function checkUserOwnsCertificationCourse(
   request,
   h,
@@ -800,7 +792,6 @@ const securityPreHandlers = {
   checkCertificationCenterIsNotScoManagingStudents,
   checkIfUserIsBlocked,
   checkOrganizationHasFeature,
-  checkPix1dActivated,
   checkRequestedUserIsAuthenticatedUser,
   checkSchoolSessionIsActive,
   checkUserBelongsToLearnersOrganization,

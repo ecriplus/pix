@@ -10,10 +10,7 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/organizations/{organizationId}/missions/{missionId}/learners',
       config: {
-        pre: [
-          { method: securityPreHandlers.checkUserBelongsToOrganization },
-          { method: securityPreHandlers.checkPix1dActivated },
-        ],
+        pre: [{ method: securityPreHandlers.checkUserBelongsToOrganization }],
         validate: {
           params: Joi.object({
             organizationId: identifiersType.organizationId,

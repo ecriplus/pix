@@ -10,7 +10,6 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/pix1d/missions',
       config: {
-        pre: [{ method: securityPreHandlers.checkPix1dActivated }],
         auth: false,
         handler: missionController.findAllActive,
         tags: ['api', 'pix1d', 'mission'],
@@ -24,10 +23,7 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/organizations/{id}/missions',
       config: {
-        pre: [
-          { method: securityPreHandlers.checkUserBelongsToOrganization },
-          { method: securityPreHandlers.checkPix1dActivated },
-        ],
+        pre: [{ method: securityPreHandlers.checkUserBelongsToOrganization }],
         handler: missionController.findAllActive,
         tags: ['api', 'pix1d', 'mission'],
         notes: [
@@ -40,7 +36,6 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/pix1d/missions/{missionId}',
       config: {
-        pre: [{ method: securityPreHandlers.checkPix1dActivated }],
         auth: false,
         validate: {
           params: Joi.object({
@@ -58,10 +53,7 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/organizations/{id}/missions/{missionId}',
       config: {
-        pre: [
-          { method: securityPreHandlers.checkUserBelongsToOrganization },
-          { method: securityPreHandlers.checkPix1dActivated },
-        ],
+        pre: [{ method: securityPreHandlers.checkUserBelongsToOrganization }],
         validate: {
           params: Joi.object({
             id: identifiersType.organizationId,

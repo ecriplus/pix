@@ -1,6 +1,5 @@
 import Joi from 'joi';
 
-import { securityPreHandlers } from '../../shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../shared/domain/types/identifiers-type.js';
 import { assessmentController } from './assessment-controller.js';
 
@@ -10,7 +9,6 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/pix1d/assessments/{id}/next',
       config: {
-        pre: [{ method: securityPreHandlers.checkPix1dActivated }],
         auth: false,
         validate: {
           params: Joi.object({
@@ -26,7 +24,6 @@ const register = async function (server) {
       method: 'POST',
       path: '/api/pix1d/assessments',
       config: {
-        pre: [{ method: securityPreHandlers.checkPix1dActivated }],
         auth: false,
         handler: assessmentController.create,
         validate: {
@@ -48,7 +45,6 @@ const register = async function (server) {
             id: identifiersType.assessmentId,
           }),
         },
-        pre: [{ method: securityPreHandlers.checkPix1dActivated }],
         handler: assessmentController.getById,
         tags: ['api'],
       },
@@ -57,7 +53,6 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/pix1d/assessments/{id}/current-activity',
       config: {
-        pre: [{ method: securityPreHandlers.checkPix1dActivated }],
         auth: false,
         validate: {
           params: Joi.object({

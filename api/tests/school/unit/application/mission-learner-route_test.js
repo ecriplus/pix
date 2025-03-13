@@ -5,11 +5,10 @@ import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
 
 describe('Unit | Route | mission-learner-route', function () {
   describe('GET /api/organizations/{id}/missions/{missionId}/learners', function () {
-    it('should check user belongs to organization and pix1d is activated', async function () {
+    it('should check user belongs to organization', async function () {
       // given
       const mock = sinon.mock(securityPreHandlers);
       mock.expects('checkUserBelongsToOrganization').once().returns(true);
-      mock.expects('checkPix1dActivated').once().returns(true);
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
 
@@ -23,7 +22,6 @@ describe('Unit | Route | mission-learner-route', function () {
     it('should return 200 if the mission is found', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkUserBelongsToOrganization').callsFake((request, h) => h.response(true));
-      sinon.stub(securityPreHandlers, 'checkPix1dActivated').callsFake((request, h) => h.response(true));
       const findPaginatedMissionLearnersStub = sinon.stub(missionLearnerController, 'findPaginatedMissionLearners');
       findPaginatedMissionLearnersStub.callsFake((request, h) => h.response('ok'));
 
@@ -56,7 +54,6 @@ describe('Unit | Route | mission-learner-route', function () {
     it('should return 400 when the organizationId is not a number', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkUserBelongsToOrganization').callsFake((request, h) => h.response(true));
-      sinon.stub(securityPreHandlers, 'checkPix1dActivated').callsFake((request, h) => h.response(true));
 
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
@@ -71,7 +68,6 @@ describe('Unit | Route | mission-learner-route', function () {
     it('should return 400 when the missionId is not a number', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkUserBelongsToOrganization').callsFake((request, h) => h.response(true));
-      sinon.stub(securityPreHandlers, 'checkPix1dActivated').callsFake((request, h) => h.response(true));
 
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
