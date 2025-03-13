@@ -93,11 +93,8 @@
 
 .campaign-landing-page__start-button {
   align-self: center;
-  margin: 30px 0;
-
-  @include breakpoints.device-is('tablet') {
-    margin: 30px;
-  }
+  margin-top: var(--pix-spacing-6x);
+  margin-bottom: var(--pix-spacing-12x);
 }
 
 .campaign-landing-page__start__warning {

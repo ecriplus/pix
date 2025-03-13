@@ -26,7 +26,7 @@ module('Acceptance | Challenge page banner', function (hooks) {
     test('should display a campaign banner', async function (assert) {
       // when
       const screen = await visit(`campagnes/${campaign.code}`);
-      await click(screen.getByRole('button', { name: 'Je commence' }));
+      await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
       await click(screen.getByRole('button', { name: 'Ignorer' }));
 
       // then
@@ -49,7 +49,7 @@ module('Acceptance | Challenge page banner', function (hooks) {
     test('should be able to leave the campaign', async function (assert) {
       // when
       const screen = await visit(`campagnes/${campaign.code}`);
-      await click(screen.getByRole('button', { name: 'Je commence' }));
+      await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
       await click(screen.getByRole('button', { name: 'Ignorer' }));
       await click(screen.getByRole('button', { name: 'Quitter' }));
       await screen.findByRole('dialog');

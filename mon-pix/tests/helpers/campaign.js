@@ -17,7 +17,7 @@ export async function startCampaignByCodeAndExternalId(campaignCode, externalId 
 
 export async function resumeCampaignOfTypeAssessmentByCode(campaignCode, hasExternalParticipantId) {
   await visit(`/campagnes/${campaignCode}`);
-  await clickByLabel('Je commence');
+  await clickByLabel('Je démarre mon test');
   if (hasExternalParticipantId) {
     await fillIn('#external-id', 'monmail@truc.fr');
     await clickByLabel('Continuer');

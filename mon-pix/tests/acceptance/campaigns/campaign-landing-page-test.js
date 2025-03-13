@@ -33,7 +33,7 @@ module('Acceptance | Campaigns | campaign-landing-page', function (hooks) {
 
             // then
             assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
-            assert.dom(screen.getByRole('button', { name: 'Je commence' })).exists();
+            assert.dom(screen.getByRole('button', { name: 'Je démarre mon test' })).exists();
             assert.dom(screen.queryByRole('button', { name: 'Français' })).doesNotExist();
           });
         });
@@ -47,7 +47,7 @@ module('Acceptance | Campaigns | campaign-landing-page', function (hooks) {
 
             // then
             assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
-            assert.dom(screen.getByRole('button', { name: 'Je commence' })).exists();
+            assert.dom(screen.getByRole('button', { name: 'Je démarre mon test' })).exists();
           });
 
           module('when the user select "English" language', function () {
@@ -60,7 +60,7 @@ module('Acceptance | Campaigns | campaign-landing-page', function (hooks) {
 
               // then
               assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
-              assert.dom(screen.getByRole('button', { name: 'Begin' })).exists();
+              assert.dom(screen.getByRole('button', { name: 'Start my test' })).exists();
             });
           });
         });
@@ -72,7 +72,7 @@ module('Acceptance | Campaigns | campaign-landing-page', function (hooks) {
 
             // then
             assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
-            assert.dom(screen.getByRole('button', { name: 'Begin' })).exists();
+            assert.dom(screen.getByRole('button', { name: 'Start my test' })).exists();
           });
 
           module('when the user select "Français" language', function () {
@@ -85,7 +85,7 @@ module('Acceptance | Campaigns | campaign-landing-page', function (hooks) {
 
               // then
               assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
-              assert.dom(screen.getByRole('button', { name: 'Je commence' })).exists();
+              assert.dom(screen.getByRole('button', { name: 'Je démarre mon test' })).exists();
             });
           });
         });
