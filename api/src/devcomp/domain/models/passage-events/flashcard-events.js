@@ -17,6 +17,21 @@ class FlashcardsStartedEvent extends PassageEvent {
 }
 
 /**
+ * @class FlashcardsVersoSeenEvent
+ *
+ * A FlashcardsVersoSeenEvent is generated when a card's answer is seen and saved in DB.
+ */
+class FlashcardsVersoSeenEvent extends PassageEvent {
+  constructor({ id, occurredAt, createdAt, passageId, elementId, cardId }) {
+    super({ id, type: 'FLASHCARDS_VERSO_SEEN', occurredAt, createdAt, passageId, data: { elementId, cardId } });
+
+    assertNotNullOrUndefined(elementId, 'The elementId is required for a FlashcardsVersoSeenEvent');
+    assertNotNullOrUndefined(cardId, 'The cardId is required for a FlashcardsVersoSeenEvent');
+    this.elementId = elementId;
+    this.cardId = cardId;
+  }
+}
+/**
  * @class FlashcardsRetriedEvent
  *
  * A FlashcardsRetriedEvent is generated when a set of Modulix flashcards is retried and saved in DB.
@@ -32,3 +47,8 @@ class FlashcardsRetriedEvent extends PassageEvent {
 }
 
 export { FlashcardsRetriedEvent, FlashcardsStartedEvent };
+export {
+  FlashcardsRetriedEvent,
+  FlashcardsStartedEvent,
+  FlashcardsVersoSeenEvent,
+};

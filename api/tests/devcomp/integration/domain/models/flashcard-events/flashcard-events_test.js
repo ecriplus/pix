@@ -1,6 +1,7 @@
 import {
   FlashcardsRetriedEvent,
   FlashcardsStartedEvent,
+  FlashcardsVersoSeenEvent,
 } from '../../../../../../src/devcomp/domain/models/passage-events/flashcard-events.js';
 import { DomainError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
@@ -46,12 +47,73 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
     });
   });
 
-  describe('#FlashcardsRetriedEvent', function () {
+  describe('#FlashcardsVersoSeenEvent', function () {
     it('should init and keep attributes', function () {
       // given
       const id = Symbol('id');
-      const occurredAt = Symbol('date');
-      const createdAt = Symbol('date');
+      const occurredAt = Symbol('occurredAt');
+      const createdAt = Symbol('createdAt');
+      const passageId = Symbol('passage');
+      const elementId = Symbol('elementId');
+      const cardId = Symbol('cardId');
+
+      // when
+      const flashcardsCardAnswerSeenEvent = new FlashcardsVersoSeenEvent({
+        id,
+        occurredAt,
+        createdAt,
+        passageId,
+        elementId,
+        cardId,
+      });
+
+      // then
+      expect(flashcardsCardAnswerSeenEvent.id).to.equal(id);
+      expect(flashcardsCardAnswerSeenEvent.type).to.equal('FLASHCARDS_VERSO_SEEN');
+      expect(flashcardsCardAnswerSeenEvent.occurredAt).to.equal(occurredAt);
+      expect(flashcardsCardAnswerSeenEvent.createdAt).to.equal(createdAt);
+      expect(flashcardsCardAnswerSeenEvent.passageId).to.equal(passageId);
+      expect(flashcardsCardAnswerSeenEvent.elementId).to.equal(elementId);
+      expect(flashcardsCardAnswerSeenEvent.data).to.deep.equal({ elementId, cardId });
+    });
+
+    describe('when elementId is not given', function () {
+      it('should throw an error', function () {
+        // given
+        const id = Symbol('id');
+        const occurredAt = Symbol('date');
+        const createdAt = Symbol('date');
+        const passageId = Symbol('passage');
+
+        // when
+        const error = catchErrSync(() => new FlashcardsVersoSeenEvent({ id, occurredAt, createdAt, passageId }))();
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal('The elementId is required for a FlashcardsVersoSeenEvent');
+      });
+    });
+
+    describe('when cardId is not given', function () {
+      it('should throw an error', function () {
+        // given
+        const id = Symbol('id');
+        const occurredAt = Symbol('date');
+        const createdAt = Symbol('date');
+        const passageId = Symbol('passage');
+        const elementId = Symbol('elementId');
+
+        // when
+        const error = catchErrSync(
+          () => new FlashcardsVersoSeenEvent({ id, occurredAt, createdAt, passageId, elementId }),
+        )();
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal('The cardId is required for a FlashcardsVersoSeenEvent');
+      });
+    });
+  });
       const passageId = Symbol('passage');
       const elementId = Symbol('elementId');
 
