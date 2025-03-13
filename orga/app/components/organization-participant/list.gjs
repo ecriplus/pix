@@ -337,8 +337,8 @@ export default class List extends Component {
                 <:cell>
                   <div class="organization-participant__align-element organization-participant__align-element--column">
                     <CertificabilityCell
-                      @certifiableAt={{@participant.certifiableAt}}
-                      @isCertifiable={{@participant.isCertifiable}}
+                      @certifiableAt={{participant.certifiableAt}}
+                      @isCertifiable={{participant.isCertifiable}}
                       @hideCertifiableDate={{@hasComputeOrganizationLearnerCertificabilityEnabled}}
                     />
                   </div>
