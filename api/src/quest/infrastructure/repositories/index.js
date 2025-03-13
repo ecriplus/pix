@@ -1,4 +1,6 @@
 import * as knowledgeElementsApi from '../../../evaluation/application/api/knowledge-elements-api.js';
+import * as skillsApi from '../../../learning-content/application/api/skills-api.js';
+import * as campaignsApi from '../../../prescription/campaign/application/api/campaigns-api.js';
 import * as organizationLearnerWithParticipationApi from '../../../prescription/organization-learner/application/api/organization-learners-with-participations-api.js';
 import * as profileRewardApi from '../../../profile/application/api/profile-reward-api.js';
 import * as rewardApi from '../../../profile/application/api/reward-api.js';
@@ -21,6 +23,8 @@ const repositoriesWithoutInjectedDependencies = {
 const dependencies = {
   organizationLearnerWithParticipationApi,
   knowledgeElementsApi,
+  campaignsApi,
+  skillsApi,
   profileRewardApi,
   profileRewardTemporaryStorage,
   rewardApi,

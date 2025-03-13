@@ -107,6 +107,12 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
           { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillC' },
           { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillD' },
         ],
+        skills: [
+          { id: 'skillA', tubeId: 'tubeA', difficulty: 1 },
+          { id: 'skillB', tubeId: 'tubeA', difficulty: 1 },
+          { id: 'skillC', tubeId: 'tubeA', difficulty: 1 },
+          { id: 'skillD', tubeId: 'tubeA', difficulty: 1 },
+        ],
       });
       const data = new DataForQuest({ success });
 
@@ -141,6 +147,12 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
           { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillC' },
           { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillD' },
         ],
+        skills: [
+          { id: 'skillA', tubeId: 'tubeA', difficulty: 1 },
+          { id: 'skillB', tubeId: 'tubeA', difficulty: 1 },
+          { id: 'skillC', tubeId: 'tubeA', difficulty: 1 },
+          { id: 'skillD', tubeId: 'tubeA', difficulty: 1 },
+        ],
       });
       const data = new DataForQuest({ success });
 
@@ -174,6 +186,12 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
           { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillB' },
           { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillC' },
           { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillD' },
+        ],
+        skills: [
+          { id: 'skillA', tubeId: 'tubeA', difficulty: 1 },
+          { id: 'skillB', tubeId: 'tubeA', difficulty: 1 },
+          { id: 'skillC', tubeId: 'tubeA', difficulty: 1 },
+          { id: 'skillD', tubeId: 'tubeA', difficulty: 1 },
         ],
       });
       const data = new DataForQuest({ success });
