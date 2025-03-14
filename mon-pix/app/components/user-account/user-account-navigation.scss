@@ -1,0 +1,65 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/shadows';
+
+.user-account-navigation {
+  @extend %pix-shadow-sm;
+
+  height: max-content;
+  border-radius: var(--pix-spacing-2x);
+  background-color: var(--pix-neutral-0);
+
+  ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  ul li {
+    border-bottom: 1.5px solid var(--pix-neutral-20);
+    border-radius: var(--pix-spacing-2x);
+
+    &:first-child a {
+      border-radius: var(--pix-spacing-2x) var(--pix-spacing-2x) 0 0;
+    }
+
+    &:last-child a {
+      border-bottom: none;
+      border-radius: 0 0 var(--pix-spacing-2x) var(--pix-spacing-2x);
+    }
+  }
+
+  &__link {
+    @extend %pix-body-m;
+
+    display: flex;
+    align-items: center;
+    padding: var(--pix-spacing-4x);
+    color: var(--pix-neutral-800);
+
+    svg {
+      margin-right: 8px;
+    }
+
+    &:hover {
+      background-color: var(--pix-neutral-20);
+    }
+
+    &:focus-within {
+      background-color: var(--pix-neutral-20);
+    }
+
+    &.active {
+      font-weight: var(--pix-font-medium);
+      background-color: var(--pix-neutral-20);
+    }
+
+    &--important {
+      color: var(--pix-error-500);
+    }
+  }
+
+  @include breakpoints.device-is('mobile') {
+    flex-grow: 1;
+  }
+}
