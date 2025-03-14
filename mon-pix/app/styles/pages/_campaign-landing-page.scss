@@ -3,7 +3,13 @@
 @use 'pix-design-tokens/typography';
 
 .campaign-landing-page__container {
-  margin-bottom: var(--pix-spacing-12x);
+  margin: var(--pix-spacing-2x);
+
+  @include breakpoints.device-is('tablet') {
+    width: 80%;
+    margin-top: var(--pix-spacing-12x);
+    margin-bottom: var(--pix-spacing-12x);
+  }
 }
 
 .campaign-landing-page__container__start {
