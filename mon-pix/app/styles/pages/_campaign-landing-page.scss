@@ -45,7 +45,11 @@
 }
 
 .campaign-landing-page__image {
-  height: 70px;
+  height: 42px;
+
+  @include breakpoints.device-is('tablet') {
+    height: 70px;
+  }
 }
 
 .campaign-landing-page-start {
@@ -56,7 +60,7 @@
   text-align: center;
 
   &__title {
-    @extend %pix-title-l;
+    @extend %pix-title-m;
   }
 
   &__subtitle {
