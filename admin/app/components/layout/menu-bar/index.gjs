@@ -20,6 +20,11 @@ export default class MenuBar extends Component {
     <nav class="menu-bar" aria-label={{t "components.layout.menu-bar.label"}}>
       <ul>
         <MenuBarEntry
+          @path="authenticated.poc-quest"
+          @icon="buildings"
+          @title="POC QUETE"
+        />
+        <MenuBarEntry
           @path="authenticated.organizations"
           @icon="buildings"
           @title={{t "components.layout.menu-bar.entries.organizations"}}

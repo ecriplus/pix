@@ -23,6 +23,8 @@ Router.map(function () {
   // private routes
   this.route('authenticated', { path: '' }, function () {
     // all routes that require the session to be authenticated
+    this.route('poc-quest');
+    this.route('poc-quest-new-or-edit-snippet');
     this.route('organizations', function () {
       this.route('new');
       this.route('list');
