@@ -1,5 +1,40 @@
 # Pix Changelog
 
+## v5.64.0 (14/03/2025)
+
+
+### :rocket: Amélioration
+- [#11644](https://github.com/1024pix/pix/pull/11644) [FEATURE] Gérer la génération des certificats des sessions V3 (PIX-16444).
+- [#11677](https://github.com/1024pix/pix/pull/11677) [FEATURE] Rediriger les campagnes FWB sur le domaine pix.org (PIX-16227) .
+- [#11663](https://github.com/1024pix/pix/pull/11663) [FEATURE] : Modifications des alternatives textuelles module PPN#3.
+- [#11299](https://github.com/1024pix/pix/pull/11299) [FEATURE] Supprimer l'utilisation des propriétés timer et focus des challenges Pix Junior (PIX-16316).
+- [#11672](https://github.com/1024pix/pix/pull/11672) [FEATURE] Ajout d'une description dans les balises meta (PIX-16761).
+- [#11673](https://github.com/1024pix/pix/pull/11673) [FEATURE] Corriger des typos au niveau de la création de campagne (PIX-17014).
+
+### :building_construction: Tech
+- [#11618](https://github.com/1024pix/pix/pull/11618) [TECH] Upgrade audit-logger dependencies.
+- [#11624](https://github.com/1024pix/pix/pull/11624) [TECH] Suppression du feature toggle FT_PIX1D_ENABLED (PIX-16979).
+
+### :bug: Correction
+- [#11587](https://github.com/1024pix/pix/pull/11587) [BUGFIX] Correction des compteurs de la page de résumé de session de certification dans pixAdmin (PIX-16764).
+- [#11662](https://github.com/1024pix/pix/pull/11662) [BUGFIX] Remplacement des UUIDs dupliqués des contenus de modules (PIX-17009).
+- [#11675](https://github.com/1024pix/pix/pull/11675) [BUGFIX] Corriger l'affichage de la certificabilité (PIX-17021).
+- [#11670](https://github.com/1024pix/pix/pull/11670) [BUGFIX] Pix Junior - Suppression du scroll excessif des épreuves avec 2 colonnes (PIX-16760).
+
+### :arrow_up: Montée de version
+- [#11694](https://github.com/1024pix/pix/pull/11694) [BUMP] Update dependency @1024pix/pix-ui to v55 (junior).
+- [#11687](https://github.com/1024pix/pix/pull/11687) [BUMP] Update dependency @1024pix/pix-ui to v55 (admin).
+- [#11689](https://github.com/1024pix/pix/pull/11689) [BUMP] Update dependency ember-page-title to v9 (admin).
+- [#11690](https://github.com/1024pix/pix/pull/11690) [BUMP] Update dependency ember-template-lint to v7 (admin).
+- [#11686](https://github.com/1024pix/pix/pull/11686) [BUMP] Update node.
+- [#11685](https://github.com/1024pix/pix/pull/11685) [BUMP] Update dependency ember-exam to v9.1.0 (orga).
+- [#11684](https://github.com/1024pix/pix/pull/11684) [BUMP] Update dependency ember-exam to v9.1.0 (junior).
+- [#11683](https://github.com/1024pix/pix/pull/11683) [BUMP] Update dependency ember-exam to v9.1.0 (certif).
+- [#11681](https://github.com/1024pix/pix/pull/11681) [BUMP] Update dependency @1024pix/pix-ui to ^55.4.0 (orga).
+- [#11659](https://github.com/1024pix/pix/pull/11659) [BUMP] Update dependency webpack to v5.98.0 (junior).
+- [#11640](https://github.com/1024pix/pix/pull/11640) [BUMP] Update dependency @1024pix/pix-ui to ^54.15.0 (junior).
+- [#11338](https://github.com/1024pix/pix/pull/11338) [BUMP] Update dependency eslint to v9 (dossier racine).
+
 ## v5.63.0 (13/03/2025)
 
 
