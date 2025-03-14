@@ -1,7 +1,6 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import * as flashAssessmentResultRepository from '../../../../lib/infrastructure/repositories/flash-assessment-result-repository.js';
 import * as certificationEvaluationCandidateRepository from '../../../certification/evaluation/infrastructure/repositories/certification-candidate-repository.js';
 import * as flashAlgorithmService from '../../../certification/flash-certification/domain/services/algorithm-methods/flash.js';
 import * as certificationChallengeLiveAlertRepository from '../../../certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
@@ -70,7 +69,6 @@ const dependencies = {
   feedbackRepository,
   flashAlgorithmConfigurationRepository,
   flashAlgorithmService,
-  flashAssessmentResultRepository,
   getCompetenceLevel,
   improvementService,
   knowledgeElementRepository: injectedSharedRepositories.knowledgeElementRepository,

@@ -76,7 +76,6 @@ async function _getParticipationResults(userId, campaignId) {
     participantExternalId,
     masteryRate,
     status,
-    isFlash,
     assessmentId,
     isDeleted,
   } = await _getParticipationAttributes(userId, campaignId);
@@ -97,7 +96,6 @@ async function _getParticipationResults(userId, campaignId) {
     acquiredBadgeIds: acquiredBadgeIds.map(({ badgeId }) => badgeId),
     isDeleted,
     assessmentId,
-    isFlash,
   };
 }
 
@@ -111,7 +109,6 @@ async function _getParticipationAttributes(userId, campaignId) {
       'assessments.createdAt AS assessmentCreatedAt',
       'participantExternalId',
       knex.raw('CAST("masteryRate" AS FLOAT)'),
-      'method',
       'assessments.id AS assessmentId',
       'deletedAt',
     ])
@@ -134,7 +131,6 @@ async function _getParticipationAttributes(userId, campaignId) {
     assessmentCreatedAt,
     participantExternalId,
     masteryRate,
-    method,
     assessmentId,
     deletedAt,
   } = participationAttributes;
@@ -147,7 +143,6 @@ async function _getParticipationAttributes(userId, campaignId) {
     assessmentCreatedAt,
     participantExternalId,
     masteryRate,
-    isFlash: method === Assessment.methods.FLASH,
     assessmentId,
     isDeleted: Boolean(deletedAt),
   };
