@@ -3,12 +3,6 @@
 @use 'pix-design-tokens/shadows';
 
 .user-account-navigation {
-  @extend %pix-shadow-sm;
-
-  height: max-content;
-  border-radius: var(--pix-spacing-2x);
-  background-color: var(--pix-neutral-0);
-
   ul {
     margin: 0;
     padding-left: 0;
@@ -16,16 +10,20 @@
   }
 
   ul li {
-    border-bottom: 1.5px solid var(--pix-neutral-20);
-    border-radius: var(--pix-spacing-2x);
+    border-bottom: 1px solid var(--pix-neutral-20);
 
-    &:first-child a {
-      border-radius: var(--pix-spacing-2x) var(--pix-spacing-2x) 0 0;
+    &:first-child {
+      a {
+        border-radius: var(--pix-spacing-2x) var(--pix-spacing-2x) 0 0;
+      }
     }
 
-    &:last-child a {
+    &:last-child {
       border-bottom: none;
-      border-radius: 0 0 var(--pix-spacing-2x) var(--pix-spacing-2x);
+
+      a {
+        border-radius: 0 0 var(--pix-spacing-2x) var(--pix-spacing-2x);
+      }
     }
   }
 

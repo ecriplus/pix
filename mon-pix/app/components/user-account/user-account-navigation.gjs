@@ -1,4 +1,5 @@
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import { concat } from '@ember/helper';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -12,7 +13,7 @@ export default class UserAccountNavigationSection extends Component {
   }
 
   <template>
-    <nav role="navigation" class="user-account-navigation">
+    <nav role="navigation" class={{concat "user-account-navigation " @class}}>
       <ul>
         <li>
           <LinkTo @route="authenticated.user-account.personal-information" class="user-account-navigation__link">
