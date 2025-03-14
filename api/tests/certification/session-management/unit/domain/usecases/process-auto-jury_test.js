@@ -133,7 +133,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
       });
 
       // when
-      const { autoJuryDone } = await processAutoJury({
+      const autoJuryDone = await processAutoJury({
         sessionFinalized,
         certificationIssueReportRepository,
         certificationAssessmentRepository,
@@ -604,7 +604,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
       });
 
       // when
-      const { autoJuryDone } = await processAutoJury({
+      const autoJuryDone = await processAutoJury({
         sessionFinalized,
         certificationIssueReportRepository,
         certificationAssessmentRepository,
@@ -866,7 +866,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
     });
 
     describe('when certificationCourse is completed', function () {
-      it('should not return a CertificationJuryDone', async function () {
+      it('should not call rescoring', async function () {
         // given
         const certificationAssessment = domainBuilder.buildCertificationAssessment({
           version: 3,
@@ -900,7 +900,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         });
 
         // when
-        const { certificationJuryDoneEvents } = await processAutoJury({
+        await processAutoJury({
           sessionFinalized,
           certificationIssueReportRepository,
           certificationAssessmentRepository,
@@ -909,7 +909,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         });
 
         // then
-        expect(certificationJuryDoneEvents).to.be.empty;
+        expect(certificationRescoringRepository.execute).to.not.have.been.calledOnce;
       });
     });
   });

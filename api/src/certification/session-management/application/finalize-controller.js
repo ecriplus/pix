@@ -23,7 +23,7 @@ const finalize = async function (request, h, dependencies = { certificationRepor
       certificationReports,
     });
 
-    const { autoJuryDone } = await usecases.processAutoJury({ sessionFinalized });
+    const autoJuryDone = await usecases.processAutoJury({ sessionFinalized });
 
     await usecases.registerPublishableSession({ autoJuryDone });
   });

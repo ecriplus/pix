@@ -13,90 +13,87 @@ import { CertificationIssueReportResolutionStrategies } from '../models/Certific
  * @param {Object} params
  * @param {CertificationRescoringRepository} params.certificationRescoringRepository
  */
-export const processAutoJury = async ({
+export async function processAutoJury({
   sessionFinalized,
   certificationIssueReportRepository,
   certificationAssessmentRepository,
   certificationCourseRepository,
   challengeRepository,
   certificationRescoringRepository,
-}) => {
+}) {
   const certificationCourses = await certificationCourseRepository.findCertificationCoursesBySessionId({
     sessionId: sessionFinalized.sessionId,
-  });
-
-  if (_areV3CertificationCourses(certificationCourses)) {
-    return _handleAutoJuryV3({
-      sessionFinalized,
-      certificationCourses,
-      certificationAssessmentRepository,
-      certificationRescoringRepository,
-    });
-  }
-
-  return _handleAutoJuryV2({
-    sessionFinalized,
-    certificationCourses,
-    certificationIssueReportRepository,
-    challengeRepository,
-    certificationAssessmentRepository,
-    certificationRescoringRepository,
-  });
-};
-
-async function _handleAutoJuryV2({
-  sessionFinalized,
-  certificationCourses,
-  certificationIssueReportRepository,
-  challengeRepository,
-  certificationAssessmentRepository,
-  certificationRescoringRepository,
-}) {
-  const resolutionStrategies = new CertificationIssueReportResolutionStrategies({
-    certificationIssueReportRepository,
-    challengeRepository,
   });
 
   for (const certificationCourse of certificationCourses) {
     const certificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
       certificationCourseId: certificationCourse.getId(),
     });
-
-    const hasAutoCompleteAnEffectOnScoring = await _autoCompleteUnfinishedTest({
-      certificationCourse,
-      certificationAssessment,
-      certificationAssessmentRepository,
-    });
-
-    const hasAutoResolutionAnEffectOnScoring = await _autoResolveCertificationIssueReport({
-      certificationCourse,
-      certificationAssessment,
-      certificationIssueReportRepository,
-      certificationAssessmentRepository,
-      resolutionStrategies,
-    });
-
-    if (hasAutoResolutionAnEffectOnScoring || hasAutoCompleteAnEffectOnScoring) {
-      const certificationJuryDoneEvent = new CertificationJuryDone({
-        certificationCourseId: certificationCourse.getId(),
+    if (_areV3CertificationCourses(certificationCourses)) {
+      await _handleAutoJuryV3({
+        certificationAssessment,
+        certificationCourse,
+        certificationAssessmentRepository,
+        certificationRescoringRepository,
+      });
+    } else {
+      const resolutionStrategies = new CertificationIssueReportResolutionStrategies({
+        certificationIssueReportRepository,
+        challengeRepository,
       });
 
-      await certificationRescoringRepository.execute({
-        event: certificationJuryDoneEvent,
+      await _handleAutoJuryV2({
+        certificationAssessment,
+        resolutionStrategies,
+        certificationCourse,
+        certificationIssueReportRepository,
+        certificationAssessmentRepository,
+        certificationRescoringRepository,
       });
     }
   }
 
-  return {
-    autoJuryDone: new AutoJuryDone({
-      sessionId: sessionFinalized.sessionId,
-      finalizedAt: sessionFinalized.finalizedAt,
-      certificationCenterName: sessionFinalized.certificationCenterName,
-      sessionDate: sessionFinalized.sessionDate,
-      sessionTime: sessionFinalized.sessionTime,
-      hasExaminerGlobalComment: sessionFinalized.hasExaminerGlobalComment,
-    }),
-  };
+  return new AutoJuryDone({
+    sessionId: sessionFinalized.sessionId,
+    finalizedAt: sessionFinalized.finalizedAt,
+    certificationCenterName: sessionFinalized.certificationCenterName,
+    sessionDate: sessionFinalized.sessionDate,
+    sessionTime: sessionFinalized.sessionTime,
+    hasExaminerGlobalComment: sessionFinalized.hasExaminerGlobalComment,
+  });
+}
+
+async function _handleAutoJuryV2({
+  certificationCourse,
+  certificationIssueReportRepository,
+  certificationAssessmentRepository,
+  certificationRescoringRepository,
+  resolutionStrategies,
+  certificationAssessment,
+}) {
+  const hasAutoCompleteAnEffectOnScoring = await _autoCompleteUnfinishedTest({
+    certificationCourse,
+    certificationAssessment,
+    certificationAssessmentRepository,
+  });
+
+  const hasAutoResolutionAnEffectOnScoring = await _autoResolveCertificationIssueReport({
+    certificationCourse,
+    certificationAssessment,
+    certificationIssueReportRepository,
+    certificationAssessmentRepository,
+    resolutionStrategies,
+  });
+
+  if (hasAutoResolutionAnEffectOnScoring || hasAutoCompleteAnEffectOnScoring) {
+    const certificationJuryDoneEvent = new CertificationJuryDone({
+      certificationCourseId: certificationCourse.getId(),
+    });
+
+    await certificationRescoringRepository.execute({
+      event: certificationJuryDoneEvent,
+    });
+  }
 }
 
 function _areV3CertificationCourses(certificationCourses) {
@@ -108,44 +105,24 @@ function _areV3CertificationCourses(certificationCourses) {
  * @param {CertificationRescoringRepository} params.certificationRescoringRepository
  */
 async function _handleAutoJuryV3({
-  sessionFinalized,
-  certificationCourses,
+  certificationCourse,
+  certificationAssessment,
   certificationAssessmentRepository,
   certificationRescoringRepository,
 }) {
-  const certificationJuryDoneEvents = [];
-
-  for (const certificationCourse of certificationCourses) {
-    const certificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
+  if (_v3CertificationShouldBeScored(certificationAssessment)) {
+    const certificationJuryDoneEvent = new CertificationJuryDone({
       certificationCourseId: certificationCourse.getId(),
     });
 
-    if (_v3CertificationShouldBeScored(certificationAssessment)) {
-      const certificationJuryDoneEvent = new CertificationJuryDone({
-        certificationCourseId: certificationCourse.getId(),
-      });
-
-      await certificationRescoringRepository.execute({
-        event: certificationJuryDoneEvent,
-      });
-    }
-
-    certificationAssessment.endDueToFinalization();
-
-    await certificationAssessmentRepository.save(certificationAssessment);
+    await certificationRescoringRepository.execute({
+      event: certificationJuryDoneEvent,
+    });
   }
 
-  return {
-    certificationJuryDoneEvents,
-    autoJuryDone: new AutoJuryDone({
-      sessionId: sessionFinalized.sessionId,
-      finalizedAt: sessionFinalized.finalizedAt,
-      certificationCenterName: sessionFinalized.certificationCenterName,
-      sessionDate: sessionFinalized.sessionDate,
-      sessionTime: sessionFinalized.sessionTime,
-      hasExaminerGlobalComment: sessionFinalized.hasExaminerGlobalComment,
-    }),
-  };
+  certificationAssessment.endDueToFinalization();
+
+  await certificationAssessmentRepository.save(certificationAssessment);
 }
 
 function _v3CertificationShouldBeScored(certificationAssessment) {
@@ -186,6 +163,7 @@ async function _autoResolveCertificationIssueReport({
   const certificationIssueReports = await certificationIssueReportRepository.findByCertificationCourseId({
     certificationCourseId: certificationCourse.getId(),
   });
+
   if (certificationIssueReports.length === 0) {
     return null;
   }
