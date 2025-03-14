@@ -92,7 +92,6 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithm | FlashAssessmentAlg
           const remainingAnswersToGive = 1;
           const initialCapacity = config.v3Certification.defaultCandidateCapacity;
           const computedCapacity = 2;
-          config.features.numberOfChallengesForFlashMethod = 20;
           const algorithm = new FlashAssessmentAlgorithm({
             flashAlgorithmImplementation,
             configuration: _getAlgorithmConfig({
@@ -166,7 +165,6 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithm | FlashAssessmentAlg
           const remainingAnswersToGive = 1;
           const initialCapacity = config.v3Certification.defaultCandidateCapacity;
           const computedCapacity = 2;
-          config.features.numberOfChallengesForFlashMethod = 20;
           const algorithm = new FlashAssessmentAlgorithm({
             flashAlgorithmImplementation,
             configuration: _getAlgorithmConfig({
