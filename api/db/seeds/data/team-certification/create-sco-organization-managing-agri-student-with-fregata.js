@@ -18,7 +18,7 @@ export async function scoOrganizationManaginAgriStudentsWithFregata({ databaseBu
 async function _createScoOrganization({ databaseBuilder }) {
   databaseBuilder.factory.buildUser.withRawPassword({
     id: SCO_CERTIFICATION_MANAGING_AGRI_STUDENTS_ORGANIZATION_USER_ID,
-    firstName: 'Orga SCO managing Student',
+    firstName: 'Orga SCO managing agri Student',
     lastName: 'Certification',
     email: 'orga-sco-managing-agri-students@example.net',
     cgu: true,
@@ -49,7 +49,7 @@ async function _createScoOrganization({ databaseBuilder }) {
 async function _createScoCertificationCenter({ databaseBuilder }) {
   databaseBuilder.factory.buildUser.withRawPassword({
     id: SCO_CERTIFICATION_MANAGING_AGRI_STUDENTS_CERTIFICATION_CENTER_USER_ID,
-    firstName: 'Centre de certif SCO managing student',
+    firstName: 'Centre de certif SCO managing agri student',
     lastName: 'Certification',
     email: 'certif-sco-agri-v3@example.net',
     cgu: true,
@@ -65,7 +65,7 @@ async function _createScoCertificationCenter({ databaseBuilder }) {
   await tooling.certificationCenter.createCertificationCenter({
     databaseBuilder,
     certificationCenterId: SCO_CERTIFICATION_AGRI_CENTER_ID,
-    name: 'Centre de certification sco managing students',
+    name: 'Centre de certification sco managing agri students',
     type: CertificationCenter.types.SCO,
     externalId: CERTIFICATION_SCO_MANAGING_AGRI_STUDENTS_EXTERNAL_ID,
     createdAt: new Date(),

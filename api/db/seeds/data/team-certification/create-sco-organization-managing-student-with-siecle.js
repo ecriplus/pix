@@ -18,7 +18,7 @@ export async function scoOrganizationManaginStudentsWithSiecle({ databaseBuilder
 async function _createScoOrganization({ databaseBuilder }) {
   databaseBuilder.factory.buildUser.withRawPassword({
     id: SCO_CERTIFICATION_MANAGING_STUDENTS_ORGANIZATION_USER_ID,
-    firstName: 'Orga SCO managing Student',
+    firstName: 'Orga User SCO managing Student',
     lastName: 'Certification',
     email: 'orga-sco-managing-students@example.net',
     cgu: true,
@@ -35,7 +35,7 @@ async function _createScoOrganization({ databaseBuilder }) {
     databaseBuilder,
     organizationId: SCO_MANAGING_STUDENTS_ORGANIZATION_ID,
     type: 'SCO',
-    name: 'Orga team Certification',
+    name: 'Orga SCO Managing team Certification',
     isManagingStudents: true,
     externalId: CERTIFICATION_SCO_MANAGING_STUDENTS_EXTERNAL_ID,
     adminIds: [SCO_CERTIFICATION_MANAGING_STUDENTS_ORGANIZATION_USER_ID],
@@ -49,7 +49,7 @@ async function _createScoOrganization({ databaseBuilder }) {
 async function _createScoCertificationCenter({ databaseBuilder }) {
   databaseBuilder.factory.buildUser.withRawPassword({
     id: SCO_CERTIFICATION_MANAGING_STUDENTS_CERTIFICATION_CENTER_USER_ID,
-    firstName: 'Centre de certif SCO managing student',
+    firstName: 'Certif User SCO managing student',
     lastName: 'Certification',
     email: 'certif-sco-v3@example.net',
     cgu: true,

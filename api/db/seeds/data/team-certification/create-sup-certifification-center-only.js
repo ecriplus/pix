@@ -6,9 +6,9 @@ import { SUP_CERTIFICATION_CENTER_ID, SUP_EXTERNAL_ID, V3_CERTIFICATION_CENTER_U
 export async function supCertificationCenterOnly({ databaseBuilder }) {
   databaseBuilder.factory.buildUser.withRawPassword({
     id: V3_CERTIFICATION_CENTER_USER_ID,
-    firstName: 'membre certif v3',
+    firstName: 'membre sup certif only',
     lastName: 'Certification',
-    email: 'certifv3@example.net',
+    email: 'sup-center-member@example.net',
     cgu: true,
     lang: 'fr',
     lastTermsOfServiceValidatedAt: new Date(),

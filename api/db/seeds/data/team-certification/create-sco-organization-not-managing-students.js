@@ -18,7 +18,7 @@ export async function scoOrganizationNotManagingStudents({ databaseBuilder }) {
 async function _createScoOrganization({ databaseBuilder }) {
   databaseBuilder.factory.buildUser.withRawPassword({
     id: SCO_CERTIFICATION_NOT_MANAGING_STUDENTS_ORGANIZATION_USER_ID,
-    firstName: 'Orga SCO managing Student',
+    firstName: 'Orga User SCO not managing Student',
     lastName: 'Certification',
     email: 'orga-sco-not-managing-students@example.net',
     cgu: true,
@@ -35,7 +35,7 @@ async function _createScoOrganization({ databaseBuilder }) {
     databaseBuilder,
     organizationId: SCO_NOT_MANAGING_STUDENTS_ORGANIZATION_ID,
     type: 'SCO',
-    name: 'Orga team Certification',
+    name: 'Orga not managing student team Certification',
     isManagingStudents: true,
     externalId: CERTIFICATION_SCO_NOT_MANAGING_STUDENTS_EXTERNAL_ID,
     adminIds: [SCO_CERTIFICATION_NOT_MANAGING_STUDENTS_ORGANIZATION_USER_ID],
@@ -49,7 +49,7 @@ async function _createScoOrganization({ databaseBuilder }) {
 async function _createScoCertificationCenter({ databaseBuilder }) {
   databaseBuilder.factory.buildUser.withRawPassword({
     id: SCO_CERTIFICATION_NOT_MANAGING_STUDENTS_CERTIFICATION_CENTER_USER_ID,
-    firstName: 'Centre de certif SCO managing student',
+    firstName: 'Certif User SCO not managing student',
     lastName: 'Certification',
     email: 'certif-sco-not-managing-v3@example.net',
     cgu: true,
@@ -65,7 +65,7 @@ async function _createScoCertificationCenter({ databaseBuilder }) {
   await tooling.certificationCenter.createCertificationCenter({
     databaseBuilder,
     certificationCenterId: SCO_NOT_MANAGING_CERTIFICATION_CENTER_ID,
-    name: 'Centre de certification sco managing students',
+    name: 'Centre de certification SCO not managing students',
     type: CertificationCenter.types.SCO,
     externalId: CERTIFICATION_SCO_NOT_MANAGING_STUDENTS_EXTERNAL_ID,
     createdAt: new Date(),
