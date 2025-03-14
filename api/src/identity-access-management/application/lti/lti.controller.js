@@ -28,13 +28,21 @@ const registerErrorTemplate = (err) => `<!DOCTYPE html>
 async function register(request, h, dependencies = { registerLtiPlatform: usecases.registerLtiPlatform }) {
   const { openid_configuration: platformConfigurationUrl, registration_token: registrationToken } = request.query;
 
+  const frameAncestors = request.info.referrer;
+
   try {
     await dependencies.registerLtiPlatform({ platformConfigurationUrl, registrationToken });
   } catch (err) {
-    return h.response(registerErrorTemplate(err)).header('Content-Type', 'text/html; charset=utf-8').code(400);
+    return h
+      .response(registerErrorTemplate(err))
+      .header('Content-Type', 'text/html; charset=utf-8')
+      .header('Content-Security-Policy', `frame-ancestors ${frameAncestors}`)
+      .code(400);
   }
-
-  return h.response(registerSuccessTemplate()).header('Content-Type', 'text/html; charset=utf-8');
+  return h
+    .response(registerSuccessTemplate())
+    .header('Content-Type', 'text/html; charset=utf-8')
+    .header('Content-Security-Policy', `frame-ancestors ${frameAncestors}`);
 }
 
 export const ltiController = { listPublicKeys, register };
