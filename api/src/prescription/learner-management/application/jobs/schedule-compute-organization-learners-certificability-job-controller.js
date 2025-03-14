@@ -1,4 +1,4 @@
-import cronParser from 'cron-parser';
+import { CronExpressionParser } from 'cron-parser';
 import dayjs from 'dayjs';
 
 import { ComputeCertificabilityJob } from '../../../../prescription/learner-management/domain/models/ComputeCertificabilityJob.js';
@@ -56,7 +56,7 @@ class ScheduleComputeOrganizationLearnersCertificabilityJobController extends Jo
       fromUserActivityDate = parseStartDate.toDate();
       toUserActivityDate = parseEndDate.toDate();
     } else {
-      const parsedCron = cronParser.parseExpression(cronConfig, { tz: 'Europe/Paris' });
+      const parsedCron = CronExpressionParser.parse(cronConfig, { tz: 'Europe/Paris' });
       toUserActivityDate = parsedCron.prev().toDate();
       fromUserActivityDate = dayjs(toUserActivityDate).subtract(1, 'day').toDate();
     }
