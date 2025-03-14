@@ -68,8 +68,8 @@ const getNextChallengeRoute = {
               .items({
                 id: identifiersType.challengeId,
                 skill: skillValidationObject.required(),
-                timer: Joi.number().integer(),
-                focused: Joi.boolean().optional(),
+                timer: Joi.number().integer().allow(null),
+                focused: Joi.boolean().optional().allow(null),
                 locales: Joi.array()
                   .items(
                     Joi.string().valid(
