@@ -32,7 +32,6 @@ const serialize = function (campaignsToJoin) {
       'customResultPageButtonText',
       'customResultPageButtonUrl',
       'multipleSendings',
-      'isFlash',
       'isMobileCompliant',
       'isTabletCompliant',
     ],
