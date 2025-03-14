@@ -55,7 +55,7 @@ export default class SmartRandomParams extends Component {
     challenges: Joi.array()
       .items({
         id: Joi.string().required(),
-        timer: Joi.number(),
+        timer: Joi.number().allow(null),
         skill: {
           id: Joi.string().required(),
           name: Joi.string().required(),
