@@ -67,14 +67,12 @@ class AssessmentResult {
     this.reachedStage = reachedStage;
     this.canImprove = this._computeCanImprove(knowledgeElements, assessmentCreatedAt, this.isShared, campaignType);
     this.isDisabled = this._computeIsDisabled(isCampaignArchived, isCampaignDeleted, participationResults.isDeleted);
-    this.canRetry = this._computeCanRetry(
+    this.canRetry = this.#computeCanRetry({
       isCampaignMultipleSendings,
       sharedAt,
       isOrganizationLearnerActive,
-      this.masteryRate,
-      this.isDisabled,
-      this.isShared,
-    );
+      campaignType,
+    });
     this.canReset = this._computeCanReset({
       isTargetProfileResetAllowed,
       isCampaignMultipleSendings,
@@ -126,21 +124,14 @@ class AssessmentResult {
     return isImprovementPossible && !isShared;
   }
 
-  _computeCanRetry(
-    isCampaignMultipleSendings,
-    sharedAt,
-    isOrganizationLearnerActive,
-    masteryRate,
-    isDisabled,
-    isShared,
-  ) {
+  #computeCanRetry({ isCampaignMultipleSendings, sharedAt, isOrganizationLearnerActive, campaignType }) {
     return (
-      isShared &&
-      isCampaignMultipleSendings &&
-      this._timeBeforeRetryingPassed(sharedAt) &&
-      masteryRate < MAX_MASTERY_RATE &&
       isOrganizationLearnerActive &&
-      !isDisabled
+      !this.isDisabled &&
+      isCampaignMultipleSendings &&
+      this.isShared &&
+      this._timeBeforeRetryingPassed(sharedAt) &&
+      (this.masteryRate < MAX_MASTERY_RATE || campaignType === CampaignTypes.EXAM)
     );
   }
 
