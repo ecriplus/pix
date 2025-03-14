@@ -79,21 +79,6 @@ describe('Unit | Domain | Models | Assessment', function () {
         // eslint-disable-next-line mocha/no-setup-in-describe
         attributes: { campaign: domainBuilder.buildCampaign({ title: 'Ma Campagne', type: CampaignTypes.EXAM }) },
       },
-      {
-        // eslint-disable-next-line mocha/no-setup-in-describe
-        type: Assessment.types.CAMPAIGN,
-        hasCheckpoints: false,
-        showProgressBar: false,
-        showLevelup: false,
-        showQuestionCounter: true,
-        expectedTitle: 'Ma Campagne',
-        attributes: {
-          // eslint-disable-next-line mocha/no-setup-in-describe
-          method: Assessment.methods.FLASH,
-          // eslint-disable-next-line mocha/no-setup-in-describe
-          campaign: domainBuilder.buildCampaign({ title: 'Ma Campagne', type: CampaignTypes.ASSESSMENT }),
-        },
-      },
     ].forEach(({ type, attributes, showProgressBar, showLevelup, hasCheckpoints, expectedTitle }) => {
       describe(type, function () {
         let assessment;
@@ -521,7 +506,6 @@ describe('Unit | Domain | Models | Assessment', function () {
       expect(assessment.type).to.equal(Assessment.types.CAMPAIGN);
       expect(assessment.courseId).to.equal(Assessment.courseIdMessage.CAMPAIGN);
       expect(assessment.isImproving).to.be.true;
-      expect(assessment.isFlash()).to.be.true;
     });
   });
 

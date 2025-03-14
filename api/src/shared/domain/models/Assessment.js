@@ -129,12 +129,11 @@ class Assessment {
         break;
       }
       case Assessment.types.CAMPAIGN: {
-        const isAssessmentCampaignNoFlash = !this.isFlash() && campaign.isAssessment;
         this.campaignCode = campaign.code;
-        this.showProgressBar = isAssessmentCampaignNoFlash;
-        this.hasCheckpoints = isAssessmentCampaignNoFlash;
-        this.showLevelup = isAssessmentCampaignNoFlash;
-        this.showQuestionCounter = this.isFlash() || campaign.isAssessment;
+        this.showProgressBar = campaign.isAssessment;
+        this.hasCheckpoints = campaign.isAssessment;
+        this.showLevelup = campaign.isAssessment;
+        this.showQuestionCounter = campaign.isAssessment;
         this.title = campaign.title;
         break;
       }
@@ -201,10 +200,6 @@ class Assessment {
 
   hasKnowledgeElements() {
     return this.isCompetenceEvaluation() || (this.isForCampaign() && this.isSmartRandom());
-  }
-
-  isFlash() {
-    return this.method === methods.FLASH;
   }
 
   isSmartRandom() {
