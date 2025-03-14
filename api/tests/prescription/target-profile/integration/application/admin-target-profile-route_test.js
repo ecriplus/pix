@@ -50,9 +50,9 @@ describe('Integration | Application | target-profiles-management | Routes ', fun
       expect(response.statusCode).to.equal(401);
     });
 
-    it('should return a 403 status code when calling route with a user with no admin role', async function () {
+    it('should return a 403 status code when calling route with a user with certif role', async function () {
       // given
-      const userId = databaseBuilder.factory.buildUser().id;
+      const userId = databaseBuilder.factory.buildUser.withRole({ role: 'CERTIF' }).id;
       await databaseBuilder.commit();
 
       // when
@@ -77,6 +77,18 @@ describe('Integration | Application | target-profiles-management | Routes ', fun
     it('should reach handler when calling route with an admin user with role metier', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser.withRole({ role: 'METIER' }).id;
+      await databaseBuilder.commit();
+
+      // when
+      await httpTestServer.request(method, url, payload, null, getHeaders(userId));
+
+      // then
+      expect(targetProfileController.detachOrganizations).to.have.been.calledOnce;
+    });
+
+    it('should reach handler when calling route with an admin user with role support', async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser.withRole({ role: 'SUPPORT' }).id;
       await databaseBuilder.commit();
 
       // when
