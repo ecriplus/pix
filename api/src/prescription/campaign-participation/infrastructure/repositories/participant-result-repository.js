@@ -1,16 +1,11 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
-import * as flashAssessmentResultRepository from '../../../../../lib/infrastructure/repositories/flash-assessment-result-repository.js';
-import * as flash from '../../../../certification/flash-certification/domain/services/algorithm-methods/flash.js';
-import * as dataFetcher from '../../../../evaluation/domain/services/algorithm-methods/data-fetcher.js';
 import { convertLevelStagesIntoThresholds } from '../../../../evaluation/domain/services/stages/convert-level-stages-into-thresholds-service.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/index.js';
 import { AssessmentResult } from '../../../../shared/domain/read-models/participant-results/AssessmentResult.js';
-import * as answerRepository from '../../../../shared/infrastructure/repositories/answer-repository.js';
 import * as areaRepository from '../../../../shared/infrastructure/repositories/area-repository.js';
-import * as challengeRepository from '../../../../shared/infrastructure/repositories/challenge-repository.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
 import { repositories as sharedInjectedRepositories } from '../../../../shared/infrastructure/repositories/index.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
@@ -36,9 +31,6 @@ import * as campaignRepository from '../../../campaign/infrastructure/repositori
 const get = async function ({ userId, campaignId, badges, reachedStage, stages, locale }) {
   const participationResults = await _getParticipationResults(userId, campaignId, locale);
   let flashScoringResults;
-  if (participationResults.isFlash) {
-    flashScoringResults = await _getFlashScoringResults(participationResults.assessmentId, locale);
-  }
   const campaignDTO = await _getCampaignDTO(campaignId);
   const isCampaignMultipleSendings = _isCampaignMultipleSendings(campaignDTO);
   const isCampaignArchived = _isCampaignArchived(campaignDTO);
@@ -107,45 +99,6 @@ async function _getParticipationResults(userId, campaignId) {
     assessmentId,
     isFlash,
   };
-}
-
-async function _getFlashScoringResults(assessmentId, locale) {
-  const { allAnswers, challenges, estimatedLevel } = await dataFetcher.fetchForFlashCampaigns({
-    assessmentId,
-    locale,
-    answerRepository,
-    challengeRepository,
-    flashAssessmentResultRepository,
-  });
-
-  const { pixScore, pixScoreByCompetence } = flash.calculateTotalPixScoreAndScoreByCompetence({
-    allAnswers,
-    challenges,
-    capacity: estimatedLevel,
-  });
-
-  const competences = await competenceRepository.findByRecordIds({
-    competenceIds: pixScoreByCompetence.map(({ competenceId }) => competenceId),
-    locale,
-  });
-
-  const areas = await areaRepository.list({ locale });
-
-  const competencesWithPixScore = _.sortBy(
-    pixScoreByCompetence.map(({ competenceId, pixScore }) => {
-      const competence = competences.find(({ id }) => id === competenceId);
-      const area = areas.find(({ id }) => id === competence.areaId);
-
-      return {
-        competence,
-        area,
-        pixScore,
-      };
-    }),
-    'competence.index',
-  );
-
-  return { estimatedLevel, pixScore, competencesWithPixScore };
 }
 
 async function _getParticipationAttributes(userId, campaignId) {

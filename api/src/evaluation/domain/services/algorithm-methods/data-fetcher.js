@@ -88,17 +88,10 @@ async function fetchForCompetenceEvaluations({
   };
 }
 
-async function fetchForFlashCampaigns({
-  assessmentId,
-  answerRepository,
-  challengeRepository,
-  flashAssessmentResultRepository,
-  locale,
-}) {
+async function fetchForFlashCampaigns({ assessmentId, answerRepository, challengeRepository, locale }) {
   const [allAnswers, challenges, { estimatedLevel } = {}] = await Promise.all([
     answerRepository.findByAssessment(assessmentId),
     challengeRepository.findActiveFlashCompatible({ locale }),
-    flashAssessmentResultRepository.getLatestByAssessmentId(assessmentId),
   ]);
 
   const challengeIds = new Set(challenges.map(({ id }) => id));
