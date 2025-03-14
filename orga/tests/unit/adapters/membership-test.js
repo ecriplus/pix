@@ -49,11 +49,11 @@ module('Unit | Adapter | membership', function (hooks) {
         await adapter.updateRecord(
           {},
           { modelName: 'membership' },
-          { id: 1, adapterOptions: { updateLastAccessedAt: true, organizationId: 1 } },
+          { id: 1, adapterOptions: { updateLastAccessedAt: true } },
         );
 
         // then
-        sinon.assert.calledWith(adapter.ajax, 'http://localhost:3000/api/organizations/1/me', 'PATCH');
+        sinon.assert.calledWith(adapter.ajax, 'http://localhost:3000/api/memberships/1/access', 'POST');
         assert.ok(adapter); /* required because QUnit wants at least one expect (and does not accept Sinon's one) */
       });
     });

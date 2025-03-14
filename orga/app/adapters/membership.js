@@ -19,9 +19,9 @@ export default class MembershipAdapter extends ApplicationAdapter {
     }
 
     if (snapshot.adapterOptions && snapshot.adapterOptions.updateLastAccessedAt) {
-      const url = `${this.host}/${this.namespace}/organizations/${snapshot.adapterOptions.organizationId}/me`;
+      const url = `${this.host}/${this.namespace}/memberships/${snapshot.id}/access`;
 
-      return this.ajax(url, 'PATCH');
+      return this.ajax(url, 'POST');
     }
     return super.updateRecord(...arguments);
   }

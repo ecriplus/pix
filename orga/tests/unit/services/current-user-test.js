@@ -80,7 +80,7 @@ module('Unit | Service | current-user', function (hooks) {
 
       // then
       sinon.assert.calledWith(membership.save, {
-        adapterOptions: { updateLastAccessedAt: true, organizationId: organization.id },
+        adapterOptions: { updateLastAccessedAt: true },
       });
       assert.ok(true);
     });

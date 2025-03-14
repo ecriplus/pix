@@ -72,11 +72,11 @@ const updateReferer = async function (request, h) {
 
 const updateLastAccessedAt = async function (request, h, dependencies = { requestResponseUtils }) {
   const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
-  const certificationCenterId = request.params.certificationCenterId;
+  const certificationCenterMembershipId = request.params.certificationCenterMembershipId;
 
   await usecases.updateCertificationCenterMembershipLastAccessedAt({
     userId,
-    certificationCenterId,
+    certificationCenterMembershipId,
   });
 
   return h.response().code(204);

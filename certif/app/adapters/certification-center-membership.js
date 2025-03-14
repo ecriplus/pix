@@ -5,11 +5,11 @@ export default class CertificationCenterMembershipAdapter extends ApplicationAda
     const { adapterOptions } = snapshot;
 
     if (adapterOptions && adapterOptions.updateLastAccessedAt) {
-      const url = `${this.host}/api/certification-centers/${adapterOptions.certificationCenterId}/certification-center-memberships/me`;
+      const url = `${this.host}/api/certification-center-memberships/${snapshot.id}/access`;
 
       delete adapterOptions.updateLastAccessedAt;
 
-      return this.ajax(url, 'PATCH');
+      return this.ajax(url, 'POST');
     }
 
     return super.updateRecord(...arguments);

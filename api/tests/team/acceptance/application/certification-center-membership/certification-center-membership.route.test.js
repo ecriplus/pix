@@ -193,15 +193,15 @@ describe('Acceptance | Team | Application | Routes | certification-center-member
         const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
 
         const userId = databaseBuilder.factory.buildUser().id;
-        databaseBuilder.factory.buildCertificationCenterMembership({
+        const certificationCenterMembershipId = databaseBuilder.factory.buildCertificationCenterMembership({
           certificationCenterId,
           userId,
-        });
+        }).id;
 
         await databaseBuilder.commit();
         const request = {
-          method: 'PATCH',
-          url: `/api/certification-centers/${certificationCenterId}/certification-center-memberships/me`,
+          method: 'POST',
+          url: `/api/certification-center-memberships/${certificationCenterMembershipId}/access`,
           payload: {},
           headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };

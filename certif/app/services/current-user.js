@@ -70,7 +70,6 @@ export default class CurrentUserService extends Service {
       await this.currentCertificationCenterMembership.save({
         adapterOptions: {
           updateLastAccessedAt: true,
-          certificationCenterId: this.currentCertificationCenterMembership.certificationCenterId,
         },
       });
     }

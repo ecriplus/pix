@@ -1057,23 +1057,22 @@ describe('Integration | Team | Infrastructure | Repository | Certification Cente
 
       const userId = databaseBuilder.factory.buildUser().id;
       const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
-      const certificationCenterMembership = databaseBuilder.factory.buildCertificationCenterMembership({
+      const certificationCenterMembershipId = databaseBuilder.factory.buildCertificationCenterMembership({
         userId,
         certificationCenterId,
-      });
+      }).id;
 
       await databaseBuilder.commit();
 
       // when
       await certificationCenterMembershipRepository.updateLastAccessedAt({
         lastAccessedAt: now,
-        userId,
-        certificationCenterId,
+        certificationCenterMembershipId,
       });
 
       // then
       const foundCertificationCenterMembership = await knex('certification-center-memberships')
-        .where({ id: certificationCenterMembership.id })
+        .where({ id: certificationCenterMembershipId })
         .first();
 
       expect(foundCertificationCenterMembership.lastAccessedAt).to.deep.equal(now);

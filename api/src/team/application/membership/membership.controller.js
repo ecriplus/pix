@@ -61,11 +61,11 @@ const findPaginatedFilteredMemberships = async function (request) {
 
 async function updateLastAccessedAt(request, h, dependencies = { requestResponseUtils }) {
   const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
-  const organizationId = request.params.organizationId;
+  const membershipId = request.params.membershipId;
 
   await usecases.updateMembershipLastAccessedAt({
     userId,
-    organizationId,
+    membershipId,
   });
 
   return h.response().code(204);

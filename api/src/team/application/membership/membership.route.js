@@ -121,18 +121,12 @@ export const membershipRoutes = [
     },
   },
   {
-    method: 'PATCH',
-    path: '/api/organizations/{organizationId}/me',
+    method: 'POST',
+    path: '/api/memberships/{membershipId}/access',
     config: {
-      pre: [
-        {
-          method: (request, h) => securityPreHandlers.checkUserBelongsToOrganization(request, h),
-          assign: 'belongsToOrganization',
-        },
-      ],
       validate: {
         params: Joi.object({
-          organizationId: identifiersType.organizationId,
+          membershipId: identifiersType.membershipId,
         }),
       },
       handler: (request, h) => membershipController.updateLastAccessedAt(request, h),

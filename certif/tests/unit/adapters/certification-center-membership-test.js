@@ -16,16 +16,15 @@ module('Unit | Adapter | certificationCenterMembership', function (hooks) {
     module('when updateLastAccessedAt is true', function () {
       test('should call /api/certification-centers/{certification-center-id}/certification-center-memberships/me', async function (assert) {
         // given
-        const certificationCenterId = 1;
 
         const snapshot = {
+          id: 1,
           adapterOptions: {
             updateLastAccessedAt: true,
-            certificationCenterId,
           },
         };
-        const expectedUrl = `http://localhost:3000/api/certification-centers/${certificationCenterId}/certification-center-memberships/me`;
-        const expectedMethod = 'PATCH';
+        const expectedUrl = `http://localhost:3000/api/certification-center-memberships/1/access`;
+        const expectedMethod = 'POST';
 
         // when
         await adapter.updateRecord(null, null, snapshot);
