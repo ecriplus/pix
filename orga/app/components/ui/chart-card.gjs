@@ -1,9 +1,10 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { t } from 'ember-intl';
 
 <template>
-  <section class="chart-card" ...attributes>
+  <PixBlock class="chart-card" ...attributes>
     <h3 class="chart-card__title">
       {{@title}}
       {{#if @info}}<PixTooltip @isWide={{true}} @position="left">
@@ -16,5 +17,5 @@ import { t } from 'ember-intl';
         </PixTooltip>{{/if}}
     </h3>
     {{yield}}
-  </section>
+  </PixBlock>
 </template>

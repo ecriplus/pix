@@ -1,3 +1,4 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
@@ -170,11 +171,11 @@ export default class Statistics extends Component {
 
       <PixPagination @pagination={{this.pagination}} @locale={{this.currentLocale}} />
     {{else}}
-      <section class="panel empty-state">
+      <PixBlock class="empty-state">
         <div class="empty-state__text">
           <p>{{t "pages.statistics.empty-state"}}</p>
         </div>
-      </section>
+      </PixBlock>
     {{/if}}
   </template>
 }

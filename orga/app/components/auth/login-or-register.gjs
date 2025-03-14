@@ -1,3 +1,4 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import { concat } from '@ember/helper';
 import { action } from '@ember/object';
@@ -41,7 +42,7 @@ export default class LoginOrRegister extends Component {
 
   <template>
     <div class="login-or-register">
-      <div class="panel login-or-register__panel">
+      <PixBlock class="login-or-register__panel">
         <div>
           <img src="/pix-orga-color.svg" alt="" role="none" class="login-or-register-panel__logo" />
         </div>
@@ -99,7 +100,7 @@ export default class LoginOrRegister extends Component {
             </div>
           </div>
         </div>
-      </div>
+      </PixBlock>
       {{#if this.isInternationalDomain}}
         <div class="login-or-register__language-switcher">
           <LanguageSwitcher @selectedLanguage={{this.selectedLanguage}} @onLanguageChange={{this.onLanguageChange}} />

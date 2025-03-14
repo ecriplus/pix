@@ -1,3 +1,4 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
@@ -18,7 +19,7 @@ export default class Acceptation extends Component {
   }
 
   <template>
-    <div class="terms-of-service-acceptation">
+    <PixBlock class="terms-of-service-acceptation">
       {{#if this.isUpdateRequested}}
         <h1 class="pix-title-m">{{t "components.terms-of-service.title.update-requested"}}</h1>
         <p class="pix-body-m">{{t "components.terms-of-service.message.update-requested"}}</p>
@@ -53,6 +54,6 @@ export default class Acceptation extends Component {
           {{t "components.terms-of-service.actions.accept"}}
         </PixButton>
       </div>
-    </div>
+    </PixBlock>
   </template>
 }

@@ -1,3 +1,4 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
@@ -16,7 +17,7 @@ export default class EmptyState extends Component {
   }
 
   <template>
-    <section class="panel empty-state">
+    <PixBlock class="empty-state">
       <img src="{{this.rootURL}}/images/empty-state.svg" alt="" role="none" />
 
       <div class="empty-state__text">
@@ -32,6 +33,6 @@ export default class EmptyState extends Component {
           <p>{{t "pages.campaign.empty-state"}}</p>
         {{/if}}
       </div>
-    </section>
+    </PixBlock>
   </template>
 }

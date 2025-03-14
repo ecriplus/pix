@@ -1,3 +1,4 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
@@ -99,7 +100,7 @@ export default class CampaignView extends Component {
   }
 
   <template>
-    <div class="panel campaign-settings">
+    <PixBlock class="campaign-settings">
       <dl>
         <div class="campaign-settings-row">
           <div class="campaign-settings-content">
@@ -235,6 +236,6 @@ export default class CampaignView extends Component {
           </PixButton>
         </div>
       {{/if}}
-    </div>
+    </PixBlock>
   </template>
 }
