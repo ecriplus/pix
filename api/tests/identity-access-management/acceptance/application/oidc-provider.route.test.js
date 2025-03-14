@@ -2,7 +2,6 @@ import querystring from 'node:querystring';
 
 import jsonwebtoken from 'jsonwebtoken';
 
-import { oidcAuthenticationServiceRegistry } from '../../../../lib/domain/usecases/index.js';
 import { authenticationSessionService } from '../../../../src/identity-access-management/domain/services/authentication-session.service.js';
 import { AuthenticationSessionContent } from '../../../../src/shared/domain/models/index.js';
 import { decodeIfValid } from '../../../../src/shared/domain/services/token-service.js';
@@ -12,15 +11,16 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   knex,
-  sinon,
 } from '../../../test-helper.js';
+import { createMockedTestOidcProvider } from '../../../tooling/openid-client/openid-client-mocks.js';
 
 const UUID_PATTERN = new RegExp(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
 
 describe('Acceptance | Identity Access Management | Application | Route | oidc-provider', function () {
-  let server;
+  let server, openIdClientMock;
 
   beforeEach(async function () {
+    openIdClientMock = await createMockedTestOidcProvider();
     server = await createServer();
   });
 
@@ -81,9 +81,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
   describe('GET /api/oidc/authorization-url', function () {
     it('returns an object which contains the authentication url with an HTTP status code 200', async function () {
       // given
-      const query = querystring.stringify({
-        identity_provider: 'OIDC_EXAMPLE_NET',
-      });
+      const query = querystring.stringify({ identity_provider: 'OIDC_EXAMPLE_NET' });
 
       // when
       const response = await server.inject({
@@ -112,17 +110,10 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
   });
 
   describe('POST /api/oidc/token', function () {
-    let clock, payload, cookies, oidcExampleNetProvider;
+    let payload, cookies;
 
     beforeEach(async function () {
-      clock = sinon.useFakeTimers({
-        now: Date.now(),
-        toFake: ['Date'],
-      });
-
-      const query = querystring.stringify({
-        identity_provider: 'OIDC_EXAMPLE_NET',
-      });
+      const query = querystring.stringify({ identity_provider: 'OIDC_EXAMPLE_NET' });
       const authUrlResponse = await server.inject({
         method: 'GET',
         url: `/api/oidc/authorization-url?${query}`,
@@ -144,58 +135,20 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
           },
         },
       };
-
-      oidcExampleNetProvider = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
-        identityProviderCode: 'OIDC_EXAMPLE_NET',
-      });
-      sinon.stub(oidcExampleNetProvider.client, 'callback');
-    });
-
-    afterEach(async function () {
-      clock.restore();
     });
 
     context('When user does not have an account', function () {
       it('returns status code 401 with authentication key matching session content and error code to validate cgu', async function () {
         // given
-        const idToken = jsonwebtoken.sign(
-          {
-            given_name: 'John',
-            family_name: 'Doe',
-            sub: 'sub',
-          },
-          'secret',
-        );
+        const idToken = jsonwebtoken.sign({ given_name: 'John', family_name: 'Doe', sub: 'sub' }, 'secret');
 
-        const getAccessTokenResponse = {
+        openIdClientMock.authorizationCodeGrant.resolves({
           access_token: 'access_token',
           id_token: idToken,
           expires_in: 60,
           refresh_token: 'refresh_token',
-        };
+        });
 
-        /*
-        Le code ci-dessous a été commenté parce qu'on utilise un fournisseur d'identité
-        non valide d'exemple et l'utilisation de nock n'est pas possible car la librairie
-        openid-client tentera de valider le token reçu avec une configuration de chiffrement
-        d'exemple.
-         */
-        //nock('https://oidc.example.net').post('/ea5ac20c-5076-4806-860a-b0aeb01645d4/oauth2/v2.0/token').reply(200, getAccessTokenResponse);
-        oidcExampleNetProvider.client.callback.resolves(getAccessTokenResponse);
-
-        const sessionContentAndUserInfo = {
-          sessionContent: new AuthenticationSessionContent({
-            accessToken: 'access_token',
-            idToken,
-            expiresIn: 60,
-            refreshToken: 'refresh_token',
-          }),
-          userInfo: {
-            externalIdentityId: 'sub',
-            firstName: 'John',
-            lastName: 'Doe',
-          },
-        };
         const headers = generateAuthenticatedUserRequestHeaders();
         headers.cookie = cookies[0];
 
@@ -219,8 +172,21 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
 
         const authenticationKey = error.meta.authenticationKey;
         expect(authenticationKey).to.exist;
+
         const result = await authenticationSessionService.getByKey(authenticationKey);
-        expect(result).to.deep.equal(sessionContentAndUserInfo);
+        expect(result).to.deep.equal({
+          sessionContent: new AuthenticationSessionContent({
+            accessToken: 'access_token',
+            idToken,
+            expiresIn: 60,
+            refreshToken: 'refresh_token',
+          }),
+          userInfo: {
+            externalIdentityId: 'sub',
+            firstName: 'John',
+            lastName: 'Doe',
+          },
+        });
       });
     });
 
@@ -231,43 +197,25 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
         const lastName = 'Doe';
         const externalIdentifier = 'sub';
 
-        const userId = databaseBuilder.factory.buildUser({
-          firstName,
-          lastName,
-        }).id;
-
+        const userId = databaseBuilder.factory.buildUser({ firstName, lastName }).id;
         databaseBuilder.factory.buildAuthenticationMethod.withIdentityProvider({
           identityProvider: 'OIDC_EXAMPLE_NET',
           externalIdentifier,
-          accessToken: 'access_token',
-          refreshToken: 'refresh_token',
-          expiresIn: 1000,
           userId,
         });
         await databaseBuilder.commit();
 
         const idToken = jsonwebtoken.sign(
-          {
-            given_name: firstName,
-            family_name: lastName,
-            sub: externalIdentifier,
-          },
+          { given_name: firstName, family_name: lastName, sub: externalIdentifier },
           'secret',
         );
-        const getAccessTokenResponse = {
+
+        openIdClientMock.authorizationCodeGrant.resolves({
           access_token: 'access_token',
           id_token: idToken,
           expires_in: 60,
           refresh_token: 'refresh_token',
-        };
-        /*
-        Le code ci-dessous a été commenté parce qu'on utilise un fournisseur d'identité
-        non valide d'exemple et l'utilisation de nock n'est pas possible car la librairie
-        openid-client tentera de valider le token reçu avec une configuration de chiffrement
-        d'exemple.
-         */
-        // const getAccessTokenRequest = nock(settings.poleEmploi.tokenUrl).post('/').reply(200, getAccessTokenResponse);
-        oidcExampleNetProvider.client.callback.resolves(getAccessTokenResponse);
+        });
 
         // when
         const response = await server.inject({
@@ -282,19 +230,11 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
         });
 
         // then
-        /*
-        Le code ci-dessous a été commenté parce qu'on utilise un fournisseur d'identité
-        non valide d'exemple et l'utilisation de nock n'est pas possible car la librairie
-        openid-client tentera de valider le token reçu avec une configuration de chiffrement
-        d'exemple.
-         */
-        // expect(getAccessTokenRequest.isDone()).to.be.true;
-        expect(oidcExampleNetProvider.client.callback).to.have.been.calledOnce;
+        expect(openIdClientMock.authorizationCodeGrant).to.have.been.calledOnce;
         expect(response.result.access_token).to.exist;
+
         const decodedAccessToken = await decodeIfValid(response.result.access_token);
-        expect(decodedAccessToken).to.include({
-          aud: 'https://orga.pix.fr',
-        });
+        expect(decodedAccessToken).to.include({ aud: 'https://orga.pix.fr' });
         expect(response.statusCode).to.equal(200);
         expect(response.result['logout_url_uuid']).to.match(UUID_PATTERN);
       });
@@ -308,43 +248,25 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
           const lastName = 'Doe';
           const externalIdentifier = 'sub';
 
-          const userId = databaseBuilder.factory.buildUser({
-            firstName,
-            lastName,
-          }).id;
-
+          const userId = databaseBuilder.factory.buildUser({ firstName, lastName }).id;
           databaseBuilder.factory.buildAuthenticationMethod.withIdentityProvider({
             identityProvider: 'OIDC_EXAMPLE_NET',
             externalIdentifier,
-            accessToken: 'access_token',
-            refreshToken: 'refresh_token',
-            expiresIn: 1000,
             userId,
           });
           await databaseBuilder.commit();
 
           const idToken = jsonwebtoken.sign(
-            {
-              given_name: firstName,
-              family_name: lastName,
-              sub: externalIdentifier,
-            },
+            { given_name: firstName, family_name: lastName, sub: externalIdentifier },
             'secret',
           );
-          const getAccessTokenResponse = {
+
+          openIdClientMock.authorizationCodeGrant.resolves({
             access_token: 'access_token',
             id_token: idToken,
             expires_in: 60,
             refresh_token: 'refresh_token',
-          };
-          /*
-          Le code ci-dessous a été commenté parce qu'on utilise un fournisseur d'identité
-          non valide d'exemple et l'utilisation de nock n'est pas possible car la librairie
-          openid-client tentera de valider le token reçu avec une configuration de chiffrement
-          d'exemple.
-           */
-          // const getAccessTokenRequest = nock(settings.poleEmploi.tokenUrl).post('/').reply(200, getAccessTokenResponse);
-          oidcExampleNetProvider.client.callback.resolves(getAccessTokenResponse);
+          });
 
           const headers = generateAuthenticatedUserRequestHeaders();
           headers.cookie = cookies[0];
@@ -362,14 +284,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
           });
 
           // then
-          /*
-          Le code ci-dessous a été commenté parce qu'on utilise un fournisseur d'identité
-          non valide d'exemple et l'utilisation de nock n'est pas possible car la librairie
-          openid-client tentera de valider le token reçu avec une configuration de chiffrement
-          d'exemple.
-           */
-          // expect(getAccessTokenRequest.isDone()).to.be.true;
-          expect(oidcExampleNetProvider.client.callback).to.have.been.calledOnce;
+          expect(openIdClientMock.authorizationCodeGrant).to.have.been.calledOnce;
           expect(response.statusCode).to.equal(403);
         });
       });
@@ -381,45 +296,25 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
           const lastName = 'Doe';
           const externalIdentifier = 'sub';
 
-          const userId = databaseBuilder.factory.buildUser.withRole({
-            firstName,
-            lastName,
-            role: 'SUPER_ADMIN',
-          }).id;
-
+          const userId = databaseBuilder.factory.buildUser.withRole({ firstName, lastName, role: 'SUPER_ADMIN' }).id;
           databaseBuilder.factory.buildAuthenticationMethod.withIdentityProvider({
             identityProvider: 'OIDC_EXAMPLE_NET',
             externalIdentifier,
-            accessToken: 'access_token',
-            refreshToken: 'refresh_token',
-            expiresIn: 1000,
             userId,
           });
-
           await databaseBuilder.commit();
 
           const idToken = jsonwebtoken.sign(
-            {
-              given_name: firstName,
-              family_name: lastName,
-              sub: externalIdentifier,
-            },
+            { given_name: firstName, family_name: lastName, sub: externalIdentifier },
             'secret',
           );
-          const getAccessTokenResponse = {
+
+          openIdClientMock.authorizationCodeGrant.resolves({
             access_token: 'access_token',
             id_token: idToken,
             expires_in: 60,
             refresh_token: 'refresh_token',
-          };
-          /*
-          Le code ci-dessous a été commenté parce qu'on utilise un fournisseur d'identité
-          non valide d'exemple et l'utilisation de nock n'est pas possible car la librairie
-          openid-client tentera de valider le token reçu avec une configuration de chiffrement
-          d'exemple.
-           */
-          // const getAccessTokenRequest = nock(settings.poleEmploi.tokenUrl).post('/').reply(200, getAccessTokenResponse);
-          oidcExampleNetProvider.client.callback.resolves(getAccessTokenResponse);
+          });
 
           // when
           const response = await server.inject({
@@ -430,19 +325,11 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
           });
 
           // then
-          /*
-          Le code ci-dessous a été commenté parce qu'on utilise un fournisseur d'identité
-          non valide d'exemple et l'utilisation de nock n'est pas possible car la librairie
-          openid-client tentera de valider le token reçu avec une configuration de chiffrement
-          d'exemple.
-           */
-          // expect(getAccessTokenRequest.isDone()).to.be.true;
-          expect(oidcExampleNetProvider.client.callback).to.have.been.calledOnce;
+          expect(openIdClientMock.authorizationCodeGrant).to.have.been.calledOnce;
           expect(response.result.access_token).to.exist;
+
           const decodedAccessToken = await decodeIfValid(response.result.access_token);
-          expect(decodedAccessToken).to.include({
-            aud: 'https://admin.pix.fr',
-          });
+          expect(decodedAccessToken).to.include({ aud: 'https://admin.pix.fr' });
           expect(response.statusCode).to.equal(200);
         });
       });
@@ -456,18 +343,11 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
       const lastName = 'Glace';
       const externalIdentifier = 'sub';
       const idToken = jsonwebtoken.sign(
-        {
-          given_name: firstName,
-          family_name: lastName,
-          nonce: 'nonce',
-          sub: externalIdentifier,
-        },
+        { given_name: firstName, family_name: lastName, nonce: 'nonce', sub: externalIdentifier },
         'secret',
       );
 
-      const sessionContent = new AuthenticationSessionContent({
-        idToken,
-      });
+      const sessionContent = new AuthenticationSessionContent({ idToken });
       const userAuthenticationKey = await authenticationSessionService.save({
         sessionContent,
         userInfo: {
@@ -504,9 +384,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
       expect(response.statusCode).to.equal(200);
       expect(response.result.access_token).to.exist;
       const decodedAccessToken = await decodeIfValid(response.result.access_token);
-      expect(decodedAccessToken).to.include({
-        aud: 'https://app.pix.fr',
-      });
+      expect(decodedAccessToken).to.include({ aud: 'https://app.pix.fr' });
 
       const createdUser = await knex('users').first();
       expect(createdUser.firstName).to.equal('Brice');
@@ -555,12 +433,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
         await databaseBuilder.commit();
 
         const idToken = jsonwebtoken.sign(
-          {
-            given_name: 'Brice',
-            family_name: 'Glace',
-            nonce: 'nonce',
-            sub: 'some-user-unique-id',
-          },
+          { given_name: 'Brice', family_name: 'Glace', nonce: 'nonce', sub: 'some-user-unique-id' },
           'secret',
         );
         const userAuthenticationKey = await authenticationSessionService.save({
@@ -609,12 +482,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
       await databaseBuilder.commit();
 
       const idToken = jsonwebtoken.sign(
-        {
-          given_name: 'Brice',
-          family_name: 'Glace',
-          nonce: 'nonce',
-          sub: 'some-user-unique-id',
-        },
+        { given_name: 'Brice', family_name: 'Glace', nonce: 'nonce', sub: 'some-user-unique-id' },
         'secret',
       );
       const userAuthenticationKey = await authenticationSessionService.save({
@@ -649,10 +517,9 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
       // then
       expect(response.statusCode).to.equal(200);
       expect(response.result.access_token).to.exist;
+
       const decodedAccessToken = await decodeIfValid(response.result.access_token);
-      expect(decodedAccessToken).to.include({
-        aud: 'https://app.pix.fr',
-      });
+      expect(decodedAccessToken).to.include({ aud: 'https://app.pix.fr' });
       expect(response.result['logout_url_uuid']).to.match(UUID_PATTERN);
     });
   });
