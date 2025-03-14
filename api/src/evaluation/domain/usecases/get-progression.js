@@ -18,10 +18,8 @@ const getProgression = async function ({
 
   if (assessment.isForCampaign()) {
     const campaignParticipation = await campaignParticipationRepository.get(assessment.campaignParticipationId);
-    let skillIds;
-    if (!assessment.isFlash()) {
-      skillIds = await campaignRepository.findSkillIds({ campaignId: campaignParticipation.campaignId });
-    }
+
+    const skillIds = await campaignRepository.findSkillIds({ campaignId: campaignParticipation.campaignId });
     const knowledgeElementsBeforeSharedDate = await knowledgeElementRepository.findUniqByUserId({
       userId,
       limitDate: campaignParticipation.sharedAt,

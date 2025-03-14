@@ -207,52 +207,6 @@ describe('Unit | Domain | Use Cases | get-progression', function () {
           expect(progression).to.deep.equal(expectedProgression);
         });
       });
-
-      context("campaign's method is flash", function () {
-        let flashAssessment;
-        beforeEach(function () {
-          flashAssessment = domainBuilder.buildAssessment.ofTypeCampaign({
-            userId,
-            targetProfile: null,
-            method: 'FLASH',
-            campaignParticipationId: campaignParticipation.id,
-          });
-
-          assessmentRepository.getByAssessmentIdAndUserId
-            .withArgs(flashAssessment.id, userId)
-            .resolves(flashAssessment);
-          campaignParticipationRepository.get
-            .withArgs(flashAssessment.campaignParticipationId)
-            .resolves(campaignParticipation);
-        });
-
-        it('should return the progression associated to the flash assessment', async function () {
-          // given
-          const flashProgressionId = `progression-${flashAssessment.id}`;
-          const expectedProgression = domainBuilder.buildProgression({
-            id: flashProgressionId,
-            skillIds: [],
-            knowledgeElements: [],
-            isProfileCompleted: assessment.isCompleted(),
-          });
-
-          // when
-          const progression = await getProgression({
-            userId,
-            progressionId: flashProgressionId,
-            assessmentRepository,
-            campaignParticipationRepository,
-            competenceEvaluationRepository,
-            knowledgeElementRepository,
-            skillRepository,
-            campaignRepository,
-            improvementService,
-          });
-
-          // then
-          expect(progression).to.deep.equal(expectedProgression);
-        });
-      });
     });
 
     context('when the assessment exists and is competence evaluation', function () {
