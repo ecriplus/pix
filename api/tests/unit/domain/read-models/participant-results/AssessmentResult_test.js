@@ -621,7 +621,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
     );
 
     context('when the mastery rate equals to 1', function () {
-      it('returns false', function () {
+      it('returns false on campaign of type ASSESSMENT', function () {
         const isCampaignMultipleSendings = true;
         const isOrganizationLearnerActive = true;
         const isCampaignArchived = false;
@@ -639,13 +639,40 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
           competences: [],
           stages: [],
           badgeResultsDTO: [],
-
+          campaignType: CampaignTypes.ASSESSMENT,
           isCampaignMultipleSendings,
           isOrganizationLearnerActive,
           isCampaignArchived,
         });
 
         expect(assessmentResult.canRetry).to.be.false;
+      });
+
+      it('returns true on campaign of type EXAM', function () {
+        const isCampaignMultipleSendings = true;
+        const isOrganizationLearnerActive = true;
+        const isCampaignArchived = false;
+        const participationResults = {
+          knowledgeElements: [],
+          acquiredBadgeIds: [],
+          masteryRate: '1',
+          sharedAt: new Date('2020-01-01T05:06:07Z'),
+          status: CampaignParticipationStatuses.SHARED,
+          isDeleted: false,
+        };
+
+        const assessmentResult = new AssessmentResult({
+          participationResults,
+          competences: [],
+          stages: [],
+          badgeResultsDTO: [],
+          campaignType: CampaignTypes.EXAM,
+          isCampaignMultipleSendings,
+          isOrganizationLearnerActive,
+          isCampaignArchived,
+        });
+
+        expect(assessmentResult.canRetry).to.be.true;
       });
     });
 
