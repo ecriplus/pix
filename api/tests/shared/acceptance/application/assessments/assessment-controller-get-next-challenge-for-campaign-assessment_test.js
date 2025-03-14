@@ -77,16 +77,22 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-campai
     const assessmentId = 1;
     const userId = 1234;
 
-    context('When there is still challenges to answer', function () {
+    context('When there still are challenges to answer', function () {
       let clock;
 
       beforeEach(async function () {
         databaseBuilder.factory.buildUser({ id: userId });
-        const campaign = databaseBuilder.factory.buildCampaign({ assessmentMethod: 'FLASH' });
+        const campaign = databaseBuilder.factory.buildCampaign({ assessmentMethod: 'SMART_RANDOM' });
         const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
           userId,
           campaignId: campaign.id,
         });
+
+        databaseBuilder.factory.buildCampaignSkill({
+          campaignId: campaign.id,
+          skillId: skillWeb1Id,
+        });
+
         databaseBuilder.factory.buildAssessment({
           id: assessmentId,
           type: Assessment.types.CAMPAIGN,
@@ -94,7 +100,6 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-campai
           campaignParticipationId: campaignParticipation.id,
           lastQuestionDate: new Date('2020-01-20'),
           state: 'started',
-          method: 'FLASH',
         });
         await databaseBuilder.commit();
 
