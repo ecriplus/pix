@@ -2,7 +2,7 @@ import jsonapiSerializer from 'jsonapi-serializer';
 
 const { Serializer } = jsonapiSerializer;
 
-const serialize = function (jurySessions, hasSupervisorAccess, meta) {
+const serialize = function (jurySessions, meta) {
   return new Serializer('sessions', {
     attributes: [
       'certificationCenterName',
@@ -24,10 +24,13 @@ const serialize = function (jurySessions, hasSupervisorAccess, meta) {
       'juryComment',
       'juryCommentAuthorId',
       'juryCommentedAt',
-      'hasSupervisorAccess',
       'hasJoiningIssue',
       'hasIncident',
       'version',
+      'numberOfStartedCertifications',
+      'numberOfScoringErrors',
+      'totalNumberOfIssueReports',
+      'numberOfImpactfullIssueReports',
       // included
       'assignedCertificationOfficer',
       'juryCommentAuthor',
@@ -57,9 +60,6 @@ const serialize = function (jurySessions, hasSupervisorAccess, meta) {
     transform(jurySession) {
       const transformedJurySession = Object.assign({}, jurySession);
       transformedJurySession.status = jurySession.status;
-      if (hasSupervisorAccess !== undefined) {
-        transformedJurySession.hasSupervisorAccess = hasSupervisorAccess;
-      }
       return transformedJurySession;
     },
     typeForAttribute: function (attribute) {

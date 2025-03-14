@@ -1,6 +1,38 @@
+/**
+ * @typedef {import ('./CertificationOfficer.js').CertificationOfficer} CertificationOfficer
+ * @typedef {import ('../../../shared/domain/models/SessionVersion.js').SESSIONS_VERSIONS} SESSIONS_VERSIONS
+ * @typedef {import ('../read-models/JurySessionCounters.js').JurySessionCounters} JurySessionCounters
+ */
+
 import { SESSION_STATUSES } from '../../../shared/domain/constants.js';
 
 class JurySession {
+  /**
+   * @param {Object} props
+   * @param {number} props.id
+   * @param {string} props.certificationCenterName
+   * @param {string} props.certificationCenterType
+   * @param {number} props.certificationCenterId
+   * @param {string} props.address
+   * @param {string} props.room
+   * @param {string} props.examiner
+   * @param {string} props.date
+   * @param {string} props.time
+   * @param {string} props.accessCode
+   * @param {string} props.description
+   * @param {string} props.examinerGlobalComment
+   * @param {Date} props.finalizedAt
+   * @param {Date} props.resultsSentToPrescriberAt
+   * @param {Date} props.publishedAt
+   * @param {CertificationOfficer} props.assignedCertificationOfficer
+   * @param {string} props.juryComment
+   * @param {Date} props.juryCommentedAt
+   * @param {CertificationOfficer} props.juryCommentAuthor
+   * @param {boolean} props.hasIncident
+   * @param {bollean} props.hasJoiningIssue
+   * @param {SESSIONS_VERSIONS} props.version
+   * @param {JurySessionCounters} props.counters - session statistics
+   */
   constructor({
     id,
     certificationCenterName,
@@ -25,6 +57,7 @@ class JurySession {
     hasIncident,
     hasJoiningIssue,
     version = 2,
+    counters,
   } = {}) {
     this.id = id;
     this.certificationCenterName = certificationCenterName;
@@ -49,6 +82,10 @@ class JurySession {
     this.hasIncident = hasIncident;
     this.hasJoiningIssue = hasJoiningIssue;
     this.version = version;
+    this.numberOfStartedCertifications = counters.startedCertifications;
+    this.numberOfScoringErrors = counters.certificationsWithScoringError;
+    this.totalNumberOfIssueReports = counters.issueReports;
+    this.numberOfImpactfullIssueReports = counters.impactfullIssueReports;
   }
 
   get status() {

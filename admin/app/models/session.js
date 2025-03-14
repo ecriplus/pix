@@ -2,14 +2,7 @@
 import { computed } from '@ember/object';
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import isEmpty from 'lodash/isEmpty';
-import sumBy from 'lodash/sumBy';
 import trim from 'lodash/trim';
-
-function _getNumberOf(juryCertificationSummaries, booleanFct) {
-  return sumBy(juryCertificationSummaries.toArray(), (juryCertificationSummary) =>
-    Number(booleanFct(juryCertificationSummary)),
-  );
-}
 
 export const CREATED = 'created';
 export const FINALIZED = 'finalized';
@@ -41,9 +34,12 @@ export default class Session extends Model {
   @attr() publishedAt;
   @attr() juryComment;
   @attr() juryCommentedAt;
+  @attr() numberOfStartedCertifications;
+  @attr() numberOfScoringErrors;
+  @attr() totalNumberOfIssueReports;
+  @attr() numberOfImpactfullIssueReports;
   @attr('boolean') hasIncident;
   @attr('boolean') hasJoiningIssue;
-  @attr('boolean') hasSupervisorAccess;
   @attr() version;
 
   @hasMany('jury-certification-summary', { async: true, inverse: null }) juryCertificationSummaries;
@@ -69,61 +65,8 @@ export default class Session extends Model {
     return this.publishedAt !== null;
   }
 
-  @computed('juryCertificationSummaries.[]')
-  get countCertificationIssueReports() {
-    const reducer = (totalOfCertificationIssueReports, juryCertificationSummary) => {
-      const numberOfCertificationIssueReports = juryCertificationSummary.numberOfCertificationIssueReports
-        ? juryCertificationSummary.numberOfCertificationIssueReports
-        : 0;
-      return totalOfCertificationIssueReports + numberOfCertificationIssueReports;
-    };
-    return this.hasMany('juryCertificationSummaries').value().reduce(reducer, 0);
-  }
-
-  @computed('juryCertificationSummaries.[]')
-  get countCertificationIssueReportsWithActionRequired() {
-    const reducer = (totalOfCertificationIssueReports, juryCertificationSummary) => {
-      const numberOfCertificationIssueReportsWithRequiredAction =
-        juryCertificationSummary.numberOfCertificationIssueReportsWithRequiredAction
-          ? juryCertificationSummary.numberOfCertificationIssueReportsWithRequiredAction
-          : 0;
-      return totalOfCertificationIssueReports + numberOfCertificationIssueReportsWithRequiredAction;
-    };
-    return this.hasMany('juryCertificationSummaries').value().reduce(reducer, 0);
-  }
-
-  @computed('juryCertificationSummaries.[]')
-  get countNotCheckedEndScreen() {
-    return _getNumberOf(
-      this.hasMany('juryCertificationSummaries').value(),
-      (juryCertificationSummary) => !juryCertificationSummary.hasSeenEndTestScreen,
-    );
-  }
-
-  @computed('juryCertificationSummaries.@each.status')
-  get countStartedAndInErrorCertifications() {
-    return _getNumberOf(
-      this.hasMany('juryCertificationSummaries').value(),
-      (juryCertificationSummary) =>
-        juryCertificationSummary.isCertificationStarted || juryCertificationSummary.isCertificationInError,
-    );
-  }
-
-  @computed('juryCertificationSummaries.@each.isFlaggedAborted')
-  get countCertificationsFlaggedAsAborted() {
-    return _getNumberOf(
-      this.hasMany('juryCertificationSummaries').value(),
-      (juryCertificationSummary) => juryCertificationSummary.isFlaggedAborted,
-    );
-  }
-
   @computed('status')
   get displayStatus() {
     return statusToDisplayName[this.status];
-  }
-
-  @computed('hasSupervisorAccess')
-  get displayHasSeenEndTestScreenColumn() {
-    return !this.hasSupervisorAccess;
   }
 }

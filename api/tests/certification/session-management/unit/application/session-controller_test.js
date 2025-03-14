@@ -90,11 +90,8 @@ describe('Certification | Session Management | Unit | Application | Controller |
         const jurySessionSerializer = { serialize: sinon.stub() };
         const foundJurySession = Symbol('foundSession');
         const serializedJurySession = Symbol('serializedSession');
-        const hasSupervisorAccess = true;
-        usecases.getJurySession
-          .withArgs({ sessionId })
-          .resolves({ jurySession: foundJurySession, hasSupervisorAccess });
-        jurySessionSerializer.serialize.withArgs(foundJurySession, hasSupervisorAccess).resolves(serializedJurySession);
+        usecases.getJurySession.withArgs({ sessionId }).resolves(foundJurySession);
+        jurySessionSerializer.serialize.withArgs(foundJurySession).resolves(serializedJurySession);
 
         // when
         const response = await sessionController.getJurySession(request, hFake, { jurySessionSerializer });

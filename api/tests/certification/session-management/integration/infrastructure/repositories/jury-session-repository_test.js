@@ -1,12 +1,20 @@
 import _ from 'lodash';
 
+import { states } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { CertificationOfficer } from '../../../../../../src/certification/session-management/domain/models/CertificationOfficer.js';
 import {
   JurySession,
   statuses,
 } from '../../../../../../src/certification/session-management/domain/models/JurySession.js';
 import * as jurySessionRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/jury-session-repository.js';
+import {
+  ImpactfulCategories,
+  ImpactfulSubcategories,
+} from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
+import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
+import { CertificationIssueReportCategory } from '../../../../../../src/shared/domain/models/index.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | JurySession', function () {
@@ -584,6 +592,190 @@ describe('Integration | Repository | JurySession', function () {
           });
         });
       });
+    });
+  });
+
+  describe('#getCounters', function () {
+    it('should count certifications still in progress', async function () {
+      // given
+      const currentSession = databaseBuilder.factory.buildSession();
+
+      for (let i = 0; i < 15; i++) {
+        const certificationCourse = databaseBuilder.factory.buildCertificationCourse({ sessionId: currentSession.id });
+        databaseBuilder.factory.buildAssessment({
+          certificationCourseId: certificationCourse.id,
+          type: Assessment.types.CERTIFICATION,
+          state: i % 2 ? states.STARTED : states.COMPLETED,
+        });
+      }
+
+      await databaseBuilder.commit();
+
+      // when
+      const jurySessionCounters = await jurySessionRepository.getCounters({ sessionId: currentSession.id });
+
+      // then
+      expect(jurySessionCounters.startedCertifications).to.equal(7);
+    });
+
+    it('should count certifications with failed scoring', async function () {
+      // given
+      const currentSession = databaseBuilder.factory.buildSession();
+
+      for (let i = 0; i < 6; i++) {
+        const certificationCourse = databaseBuilder.factory.buildCertificationCourse({ sessionId: currentSession.id });
+        const assessment = databaseBuilder.factory.buildAssessment({
+          certificationCourseId: certificationCourse.id,
+          type: Assessment.types.CERTIFICATION,
+          state: states.COMPLETED,
+        });
+
+        const assessmentResult = databaseBuilder.factory.buildAssessmentResult({
+          assessmentId: assessment.id,
+          status: i % 2 ? AssessmentResult.status.ERROR : AssessmentResult.status.VALIDATED,
+        });
+
+        databaseBuilder.factory.buildCertificationCourseLastAssessmentResult({
+          lastAssessmentResultId: assessmentResult.id,
+          certificationCourseId: certificationCourse.id,
+        });
+      }
+
+      await databaseBuilder.commit();
+
+      // when
+      const jurySessionCounters = await jurySessionRepository.getCounters({ sessionId: currentSession.id });
+
+      // then
+      expect(jurySessionCounters.certificationsWithScoringError).to.equal(3);
+    });
+
+    it('should count all issue reports during the session', async function () {
+      // given
+      const currentSession = databaseBuilder.factory.buildSession();
+
+      const certificationCourseWithoutReport = databaseBuilder.factory.buildCertificationCourse({
+        sessionId: currentSession.id,
+      });
+      databaseBuilder.factory.buildAssessment({
+        certificationCourseId: certificationCourseWithoutReport.id,
+        type: Assessment.types.CERTIFICATION,
+        state: states.COMPLETED,
+      });
+
+      const certificationCourseWithReportNotImpactfulOne = databaseBuilder.factory.buildCertificationCourse({
+        sessionId: currentSession.id,
+      });
+      databaseBuilder.factory.buildAssessment({
+        certificationCourseId: certificationCourseWithReportNotImpactfulOne.id,
+        type: Assessment.types.CERTIFICATION,
+        state: states.ENDED_BY_SUPERVISOR,
+      });
+
+      databaseBuilder.factory.buildCertificationIssueReport({
+        certificationCourseId: certificationCourseWithReportNotImpactfulOne.id,
+        category: CertificationIssueReportCategory.NON_BLOCKING_CANDIDATE_ISSUE,
+      });
+
+      const certificationCourseWithReportNotImpactfulTwo = databaseBuilder.factory.buildCertificationCourse({
+        sessionId: currentSession.id,
+      });
+      databaseBuilder.factory.buildAssessment({
+        certificationCourseId: certificationCourseWithReportNotImpactfulTwo.id,
+        type: Assessment.types.CERTIFICATION,
+        state: states.ENDED_BY_SUPERVISOR,
+      });
+
+      databaseBuilder.factory.buildCertificationIssueReport({
+        certificationCourseId: certificationCourseWithReportNotImpactfulTwo.id,
+        category: CertificationIssueReportCategory.NON_BLOCKING_TECHNICAL_ISSUE,
+      });
+
+      const certificationCourseWithImpactfulCategory = databaseBuilder.factory.buildCertificationCourse({
+        sessionId: currentSession.id,
+      });
+      databaseBuilder.factory.buildAssessment({
+        certificationCourseId: certificationCourseWithImpactfulCategory.id,
+        type: Assessment.types.CERTIFICATION,
+        state: states.ENDED_DUE_TO_FINALIZATION,
+      });
+      databaseBuilder.factory.buildCertificationIssueReport({
+        certificationCourseId: certificationCourseWithImpactfulCategory.id,
+        category: ImpactfulCategories[0],
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const jurySessionCounters = await jurySessionRepository.getCounters({ sessionId: currentSession.id });
+
+      // then
+      expect(jurySessionCounters.issueReports).to.equal(3);
+      expect(jurySessionCounters.impactfullIssueReports).to.equal(1);
+    });
+
+    it('should count all issue reports with impacts for the candidates', async function () {
+      // given
+      const currentSession = databaseBuilder.factory.buildSession();
+
+      const certificationCourseWithoutReport = databaseBuilder.factory.buildCertificationCourse({
+        sessionId: currentSession.id,
+      });
+      databaseBuilder.factory.buildAssessment({
+        certificationCourseId: certificationCourseWithoutReport.id,
+        type: Assessment.types.CERTIFICATION,
+        state: states.COMPLETED,
+      });
+
+      const certificationCourseWithReportNotImpactfulOne = databaseBuilder.factory.buildCertificationCourse({
+        sessionId: currentSession.id,
+      });
+      databaseBuilder.factory.buildAssessment({
+        certificationCourseId: certificationCourseWithReportNotImpactfulOne.id,
+        type: Assessment.types.CERTIFICATION,
+        state: states.ENDED_BY_SUPERVISOR,
+      });
+
+      databaseBuilder.factory.buildCertificationIssueReport({
+        certificationCourseId: certificationCourseWithoutReport.id,
+        category: CertificationIssueReportCategory.NON_BLOCKING_CANDIDATE_ISSUE,
+      });
+
+      const certificationCourseWithImpactfulCategory = databaseBuilder.factory.buildCertificationCourse({
+        sessionId: currentSession.id,
+      });
+      databaseBuilder.factory.buildAssessment({
+        certificationCourseId: certificationCourseWithImpactfulCategory.id,
+        type: Assessment.types.CERTIFICATION,
+        state: states.ENDED_DUE_TO_FINALIZATION,
+      });
+      databaseBuilder.factory.buildCertificationIssueReport({
+        certificationCourseId: certificationCourseWithImpactfulCategory.id,
+        category: ImpactfulCategories[0],
+      });
+
+      const certificationCourseWithImpactfulSubCategory = databaseBuilder.factory.buildCertificationCourse({
+        sessionId: currentSession.id,
+      });
+      databaseBuilder.factory.buildAssessment({
+        certificationCourseId: certificationCourseWithImpactfulSubCategory.id,
+        type: Assessment.types.CERTIFICATION,
+        state: states.ENDED_BY_SUPERVISOR,
+      });
+      databaseBuilder.factory.buildCertificationIssueReport({
+        certificationCourseId: certificationCourseWithImpactfulSubCategory.id,
+        subcategory: ImpactfulSubcategories[0],
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const jurySessionCounters = await jurySessionRepository.getCounters({ sessionId: currentSession.id });
+
+      // then
+      // TODO : on est en train de tester ici le read-model, il faut plutot creer le fichier de tests du read model
+      // et ce test restera au vert
+      expect(jurySessionCounters.impactfullIssueReports).to.equal(2);
     });
   });
 

@@ -23,7 +23,7 @@ describe('Certification | Session Management | Unit | Domain | UseCase | get-jur
       jurySessionRepository.get.withArgs({ id: sessionId }).resolves(sessionToFind);
 
       // when
-      const { jurySession: actualSession } = await getJurySession({
+      const actualSession = await getJurySession({
         sessionId,
         jurySessionRepository,
         supervisorAccessRepository,
@@ -31,46 +31,6 @@ describe('Certification | Session Management | Unit | Domain | UseCase | get-jur
 
       // then
       expect(actualSession).to.deepEqualInstance(sessionToFind);
-    });
-  });
-
-  context('when the session has supervisor access', function () {
-    it('should return hasSupervisorAccess to true', async function () {
-      // given
-      const sessionId = 123;
-      const sessionToFind = domainBuilder.buildJurySession({ id: sessionId });
-      jurySessionRepository.get.withArgs({ id: sessionId }).resolves({ session: sessionToFind });
-      supervisorAccessRepository.sessionHasSupervisorAccess.withArgs({ sessionId }).resolves(true);
-
-      // when
-      const { hasSupervisorAccess } = await getJurySession({
-        sessionId,
-        jurySessionRepository,
-        supervisorAccessRepository,
-      });
-
-      // then
-      expect(hasSupervisorAccess).to.be.true;
-    });
-  });
-
-  context('when the session does not have supervisor access', function () {
-    it('should return hasSupervisorAccess to false', async function () {
-      // given
-      const sessionId = 123;
-      const sessionToFind = domainBuilder.buildJurySession({ id: sessionId });
-      jurySessionRepository.get.withArgs({ id: sessionId }).resolves({ session: sessionToFind });
-      supervisorAccessRepository.sessionHasSupervisorAccess.withArgs({ sessionId }).resolves(false);
-
-      // when
-      const { hasSupervisorAccess } = await getJurySession({
-        sessionId,
-        jurySessionRepository,
-        supervisorAccessRepository,
-      });
-
-      // then
-      expect(hasSupervisorAccess).to.be.false;
     });
   });
 
