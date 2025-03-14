@@ -1,7 +1,10 @@
 import Joi from 'joi';
 
 import { config } from '../../../shared/config.js';
+import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
 import { InvalidLtiPlatformRegistrationError } from '../errors.js';
+
+const logger = child('iam:lti', { event: SCOPES.LTI });
 
 function ltiMessage(type) {
   return Joi.object({
@@ -86,22 +89,29 @@ export async function registerLtiPlatform({
     headers: { Accept: 'application/json' },
   });
   if (!getConfigurationResponse.isSuccessful) {
+    logger.warn({ platformConfigurationUrl }, 'Could not fetch platform configuration');
     throw new InvalidLtiPlatformRegistrationError('Could not fetch platform configuration');
   }
 
   const { error: platformConfigurationValidationError } =
     platformOpenIdConfigurationSchema.validate(platformConfiguration);
   if (platformConfigurationValidationError) {
+    logger.warn({ platformConfiguration }, 'Invalid LTI platform configuration.');
     throw new InvalidLtiPlatformRegistrationError('Invalid LTI platform configuration', {
       cause: platformConfigurationValidationError,
     });
   }
 
   if (!config.lti.authorizedPlatforms.includes(platformConfiguration.issuer)) {
+    logger.warn({ issuer: platformConfiguration.issuer }, 'Unauthorized LTI platform issuer.');
     throw new InvalidLtiPlatformRegistrationError('Unauthorized LTI platform issuer');
   }
 
   if (!platformConfigurationUrl.startsWith(platformConfiguration.issuer)) {
+    logger.warn(
+      { issuer: platformConfiguration.issuer, platformConfigurationUrl },
+      'Inconsistent LTI platform configuration URL.',
+    );
     throw new InvalidLtiPlatformRegistrationError('Inconsistent LTI platform configuration URL');
   }
 
@@ -116,6 +126,7 @@ export async function registerLtiPlatform({
     payload: pixToolConfiguration,
   });
   if (!registrationResponse.isSuccessful) {
+    logger.error(registrationResponse, 'Registration with LTI platform failed.');
     throw new InvalidLtiPlatformRegistrationError('Registration with the platform failed');
   }
 
@@ -131,4 +142,9 @@ export async function registerLtiPlatform({
     publicKey,
     status: 'pending',
   });
+
+  logger.info(
+    { client_id: pixToolRegistration.client_id, issuer: platformConfiguration.issuer },
+    'Registration with LTI platform done.',
+  );
 }
