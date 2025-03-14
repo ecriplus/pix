@@ -1,14 +1,20 @@
-import { NotFoundError } from '../../../../shared/domain/errors.js';
+import { UnauthorizedError } from '../../../../shared/application/http-errors.js';
 
-const getCertificationAttestation = async function ({ userId, certificationCourseId, certificateRepository }) {
-  const certificationAttestation = await certificateRepository.getCertificationAttestation({
-    certificationCourseId,
-  });
-  if (certificationAttestation.userId !== userId) {
-    throw new NotFoundError();
+const getCertificationAttestation = async function ({
+  userId,
+  certificationCourseId,
+  certificateRepository,
+  certificationCourseRepository,
+}) {
+  const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
+
+  if (certificationCourse.getUserId() !== userId) {
+    throw new UnauthorizedError();
   }
 
-  return certificationAttestation;
+  return certificateRepository.getCertificationAttestation({
+    certificationCourseId,
+  });
 };
 
 export { getCertificationAttestation };
