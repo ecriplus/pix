@@ -279,12 +279,8 @@
                 "placeholder": "prénom",
                 "ariaLabel": "écrivez le prénom ici",
                 "defaultValue": "",
-                "tolerances": [
-                  "t3"
-                ],
-                "solutions": [
-                  "emma"
-                ]
+                "tolerances": ["t3"],
+                "solutions": ["emma"]
               },
               {
                 "type": "text",
@@ -299,13 +295,8 @@
                 "placeholder": "lot",
                 "ariaLabel": "écrivez le lot ici",
                 "defaultValue": "",
-                "tolerances": [
-                  "t3"
-                ],
-                "solutions": [
-                  "glace",
-                  "glaces"
-                ]
+                "tolerances": ["t3"],
+                "solutions": ["glace", "glaces"]
               }
             ],
             "feedbacks": {
@@ -461,12 +452,8 @@
                 "placeholder": "prénom",
                 "ariaLabel": "écrivez ici le prénom",
                 "defaultValue": "",
-                "tolerances": [
-                  "t3"
-                ],
-                "solutions": [
-                  "inès"
-                ]
+                "tolerances": ["t3"],
+                "solutions": ["inès"]
               },
               {
                 "type": "text",
@@ -481,13 +468,8 @@
                 "placeholder": "trésor",
                 "ariaLabel": "écrivez ici le contenu du trésor",
                 "defaultValue": "",
-                "tolerances": [
-                  "t3"
-                ],
-                "solutions": [
-                  "des bonbons",
-                  "bonbons"
-                ]
+                "tolerances": ["t3"],
+                "solutions": ["des bonbons", "bonbons"]
               }
             ],
             "feedbacks": {

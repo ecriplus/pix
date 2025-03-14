@@ -88,10 +88,7 @@
                 "ariaLabel": "zone de saisie",
                 "defaultValue": "",
                 "tolerances": [],
-                "solutions": [
-                  "voilà le zèbre déçu",
-                  "« voilà le zèbre déçu »"
-                ]
+                "solutions": ["voilà le zèbre déçu", "« voilà le zèbre déçu »"]
               }
             ],
             "feedbacks": {
@@ -317,12 +314,8 @@
                 "placeholder": "recopiez la phrase ",
                 "ariaLabel": "zone de saisie",
                 "defaultValue": "",
-                "tolerances": [
-                  "t1"
-                ],
-                "solutions": [
-                  "Coucou, peux-tu mettre ces 3 pommes à cet endroit ?"
-                ]
+                "tolerances": ["t1"],
+                "solutions": ["Coucou, peux-tu mettre ces 3 pommes à cet endroit ?"]
               }
             ],
             "feedbacks": {
@@ -358,7 +351,7 @@
             "content": "<p>La <strong>touche Alt&nbsp;Gr</strong> permet de faire apparaître les caractères situés en bas à droite des touches. Elle s’utilise de la même manière que la touche majuscule.</p>"
           }
         },
-           {
+        {
           "type": "element",
           "element": {
             "id": "172ad359-9878-4308-940a-5cdf64019769",

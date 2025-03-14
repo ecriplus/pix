@@ -323,9 +323,7 @@
                     "content": "Rayan"
                   }
                 ],
-                "solutions": [
-                  "1"
-                ]
+                "solutions": ["1"]
               },
               {
                 "type": "text",
@@ -357,9 +355,7 @@
                     "content": "Jennifer, Marine, Clément, Rayan"
                   }
                 ],
-                "solutions": [
-                  "3"
-                ]
+                "solutions": ["3"]
               },
               {
                 "type": "text",
@@ -391,9 +387,7 @@
                     "content": "Costumes pour le 27 octobre"
                   }
                 ],
-                "solutions": [
-                  "4"
-                ]
+                "solutions": ["4"]
               }
             ],
             "feedbacks": {

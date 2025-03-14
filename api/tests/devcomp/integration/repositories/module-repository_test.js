@@ -124,6 +124,11 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
           const ids = [];
           const duplicateIds = new Set();
           for (const module of modules) {
+            if (ids.includes(module.id)) {
+              duplicateIds.add(module.id);
+            }
+            ids.push(module.id);
+
             for (const grain of module.grains) {
               if (ids.includes(grain.id)) {
                 duplicateIds.add(grain.id);
@@ -136,6 +141,14 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
                     if (ids.includes(component.element.id)) {
                       duplicateIds.add(component.element.id);
                     }
+                    if (component.element.type === 'flashcards') {
+                      for (const card of component.element.cards) {
+                        if (ids.includes(card.id)) {
+                          duplicateIds.add(card.id);
+                        }
+                        ids.push(card.id);
+                      }
+                    }
                     ids.push(component.element.id);
                     break;
                   case 'stepper':
@@ -143,6 +156,14 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
                       for (const element of step.elements) {
                         if (ids.includes(element.id)) {
                           duplicateIds.add(element.id);
+                        }
+                        if (element.type === 'flashcards') {
+                          for (const card of element.cards) {
+                            if (ids.includes(card.id)) {
+                              duplicateIds.add(card.id);
+                            }
+                            ids.push(card.id);
+                          }
                         }
                         ids.push(element.id);
                       }
