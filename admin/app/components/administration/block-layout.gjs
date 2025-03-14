@@ -7,9 +7,11 @@ import PixBlock from '@1024pix/pix-ui/components/pix-block';
         {{@title}}
       </h2>
     </header>
+
     {{#if @description}}
       <p class="description">{{@description}}</p>
     {{/if}}
-    {{yield}}
+
+    <div class="block-layout__actions">{{yield}}</div>
   </PixBlock>
 </template>

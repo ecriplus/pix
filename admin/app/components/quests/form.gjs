@@ -1,219 +1,226 @@
-import PixInput from '@1024pix/pix-ui/components/pix-input';
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixButton from '@1024pix/pix-ui/components/pix-button';
-import { on } from '@ember/modifier';
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixInput from '@1024pix/pix-ui/components/pix-input';
+import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
 import { fn } from '@ember/helper';
+import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { service } from '@ember/service';
-import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 
 const LOCAL_STORAGE_KEY = 'QUEST_REQUIREMENT_SNIPPETS';
 
 export default class QuestForm extends Component {
-  @tracked questName = '';
-  @tracked questRewardType = '';
-  @tracked questRewardId = '';
-  @tracked questEligibilityRequirementsStr = 'all(one-of(all(MonCousin,OrgaSCO),OrgaAEFE),all(OrgaAEFE,one-of(MonCousin,OrgaAEFE)),one-of(OrgaSCO,all(MonCousin,OrgaSCO)))';
-  @service router;
+  @tracked name = '';
+  @tracked rewardType = 'attestations';
+  @tracked rewardId = '';
+  //@tracked eligibilityRequirementsStr = 'all(one-of(OrgaAEFE,OrgaSCO),all(OrgaAEFE,OrgaSCO,MonCousin),OrgaAEFE)';
+  @tracked eligibilityRequirementsStr = '';
 
-  constructor() {
-    super(...arguments);
-    console.log('constructor questform');
-  }
+  @service router;
+  @service pixToast;
 
   get snippets() {
-    const { objectRequirementsByLabel } = JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY)) ?? { objectRequirementsByLabel: {} };
-    return Object.keys(objectRequirementsByLabel);
+    const snippets = JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY)) ?? {
+      objectRequirementsByLabel: {},
+    };
+    return Object.keys(snippets.objectRequirementsByLabel);
   }
 
   @action
-  onQuestNameChanged(event) {
-    this.questName = event.target.value;
+  updateName(event) {
+    this.name = event.target.value;
   }
 
   @action
-  onQuestRewardTypeChanged(event) {
-    this.questRewardType = event.target.value;
+  updateRewardType(event) {
+    this.rewardType = event.target.value;
   }
 
   @action
-  onQuestRewardIdChanged(event) {
-    this.questRewardId = event.target.value;
+  updateRewardId(event) {
+    this.rewardId = event.target.value;
   }
 
   @action
-  onQuestEligibilityRequirementsChanged(event) {
-    this.questEligibilityRequirementsStr = event.target.value;
+  updateEligibilityRequirements(event) {
+    this.eligibilityRequirementsStr = event.target.value;
   }
 
   @action
-  onSubmitClicked(event) {
-    event.preventDefault();
+  appendToEligibilityRequirements(str) {
+    this.eligibilityRequirementsStr += str;
   }
 
   @action
-  onAddSnippetInEligibilityRequirements(snippetName) {
-    const stock = this.questEligibilityRequirementsStr;
-    this.questEligibilityRequirementsStr = null
-    this.questEligibilityRequirementsStr = stock + snippetName;
-  }
-
-  @action
-  eligibilityRequirementJSONinClipboard() {
-    const { objectRequirementsByLabel } = JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY)) ?? { objectRequirementsByLabel: {} };
-    const obj = this.popToRootToPip(this.questEligibilityRequirementsStr, objectRequirementsByLabel);
-    console.log([obj]);
-    console.log(JSON.stringify([obj]));
-  }
-
-  recursiveToJson(str, objectRequirementsByLabel) {
-    const regexAll = /^all\((.*)\)$/;
-    const regexOneOf = /^one-of\((.*)\)$/;
-    const regexOneOf2 = /^((one-of\((\w*,?)*\)))/;
-    const regexAll2 = /^((all\((\w*,?)*\)))/;
-    const execAll = regexAll.exec(str);
-    const execOneOf = regexOneOf.exec(str);
-    if(execAll?.length > 0) {
-      const indexOfFirstComma = execAll[1].indexOf(',');
-      const before = execAll[1].slice(0, indexOfFirstComma);
-      const after = execAll[1].slice(indexOfFirstComma+1, execAll[1].length);
-      console.log('all');
-      console.log(before);
-      console.log(after);
-      const data = [before, after].map((member) => this.recursiveToJson(member, objectRequirementsByLabel));
-      return {
-        requirement_type: 'compose',
-        comparison: 'all',
-        data,
+  async copyEligibilityRequirementsToClipboard() {
+    try {
+      const snippets = JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY)) ?? {
+        objectRequirementsByLabel: {},
       };
-    }
-    else if(execOneOf?.length > 0) {
-      const indexOfFirstComma = execOneOf[1].indexOf(',');
-      const before = execOneOf[1].slice(0, indexOfFirstComma);
-      const after = execOneOf[1].slice(indexOfFirstComma+1, execOneOf[1].length);
-      console.log('oneof');
-      console.log(before);
-      console.log(after);
-      const data = [before, after].map((member) => this.recursiveToJson(member, objectRequirementsByLabel));
-      return {
-        requirement_type: 'compose',
-        comparison: 'one-of',
-        data,
-      };
-    } else {
-      return objectRequirementsByLabel[str];
+      const eligibilityRequirements = this.popToRootToPip(
+        this.eligibilityRequirementsStr,
+        snippets.objectRequirementsByLabel,
+      );
+      const eligibilityRequirementsJSON = JSON.stringify([eligibilityRequirements]);
+
+      console.log([eligibilityRequirements]);
+      console.log(eligibilityRequirementsJSON);
+      await navigator.clipboard.writeText(eligibilityRequirementsJSON);
+      this.pixToast.sendSuccessNotification({
+        message: 'Votre quête a été copié dans votre presse papier ou presque.',
+      });
+    } catch (error) {
+      console.log(error);
+      this.pixToast.sendErrorNotification({ message: 'Votre quête a une erreur quelque part.' });
     }
   }
 
+  /*
+      On parcourt la chaîne de caractères. Quand on tombe sur un mot qu'on "reconnaît" on fait une action.
+
+      Fonction inspirée des algorithmes d'évaluation d'expression arithmétique, dans notre cas la notation dite "préfixe"
+      On a l'habitude de lire les expressions arithmétiques dans une notation dite "infixe" :
+      x + y ---> x et y sont des opérandes, et le jeton d'opération se trouve au milieu
+      En notation préfixe, ça donne ceci :
+      + x y ---> le jeton d'opération se trouve au début
+      En programmation, cette notation est plus facile à traiter. Il existe notamment une technique connue s'appuyant
+      sur l'utilisation de piles.
+      Plus d'infos : https://zanotti.univ-tln.fr/ALGO/II/Polonaise.html
+      On remarquera que l'expression construite pour les requirements d'éligibilité dans le formulaire ressemble beaucoup à
+      une notation "préfixe" :
+      ALL(ONE-OF(A,B),C) ---> Le jeton d'opération (all ou one-of) se trouve au début, et en arguments
+      on trouve la liste des opérandes.
+   */
   popToRootToPip(str, objectRequirementsByLabel) {
-    const possibleWordsForSnippets = Object.keys(objectRequirementsByLabel);
+    // Dictionnaire des "mots" qui correspondent à des requirements feuilles
+    // qu'on pourrait retrouver dans la formule
+    const snippetNames = Object.keys(objectRequirementsByLabel);
     const composeStack = [];
     let currentWord = '';
-    let root;
-    for(const char of str) {
+    let latestCompletedCompose;
+    for (const char of str) {
       currentWord += char;
-      if(currentWord === ')') {
-        root = composeStack.pop();
+      if (currentWord === ')') {
+        // Le requirement compose en cours est fini
+        // On le sort de la pile et on l'ajoute dans le requirement compose juste en dessous
+        latestCompletedCompose = composeStack.pop();
+        if (composeStack.length > 0) {
+          composeStack.at(-1).data.push(latestCompletedCompose);
+        }
         currentWord = '';
-      } else if(currentWord === ',') {
+      } else if (currentWord === ',') {
+        // à ignorer car on passe à l'opérande suivant
         currentWord = '';
-      } else if(currentWord === 'all(') {
-        const compose = {
+      } else if (currentWord === 'all(') {
+        // Initialiser un requirement compose "all" et ajouter en haut de la pile
+        // Il devient le requirement compose en cours de traitement
+        const composeAll = {
           requirement_type: 'compose',
           comparison: 'all',
           data: [],
         };
-        if(composeStack.length > 0) {
-          composeStack.at(-1).data.push(compose);
-        }
-        composeStack.push(compose);
+        composeStack.push(composeAll);
         currentWord = '';
-      } else if(currentWord === 'one-of(') {
-        const compose = {
+      } else if (currentWord === 'one-of(') {
+        // Initialiser un requirement compose "one-of" et ajouter en haut de la pile
+        // Il devient le requirement compose en cours de traitement
+        const composeOneOf = {
           requirement_type: 'compose',
           comparison: 'one-of',
           data: [],
         };
-        if(composeStack.length > 0) {
-          composeStack.at(-1).data.push(compose);
-        }
-        composeStack.push(compose);
+        composeStack.push(composeOneOf);
         currentWord = '';
-      } else if(possibleWordsForSnippets.includes(currentWord)) {
+      } else if (snippetNames.includes(currentWord)) {
+        // Un opérande ! on l'ajoute au requirement compose en cours
         composeStack.at(-1).data.push(objectRequirementsByLabel[currentWord]);
         currentWord = '';
       }
     }
-    return root;
+    return latestCompletedCompose;
   }
 
   <template>
-    <PixInput
-      @id="questName"
-      onchange={{this.onQuestNameChanged}}
-      required={{true}}
-    >
-      <:label>Nom de la quête</:label>
-    </PixInput>
-    <PixInput
-      @id="rewardType"
-      onchange={{this.onQuestRewardTypeChanged}}
-      required={{true}}
-    >
-      <:label>Type de récompense</:label>
-    </PixInput>
-    <PixInput
-      @id="rewardId"
-      onchange={{this.onQuestRewardIdChanged}}
-      required={{true}}
-    >
-      <:label>ID de récompense</:label>
-    </PixInput>
-    <PixButtonLink
-      @route="authenticated.poc-quest-new-or-edit-snippet"
-      @size="small"
-      @variant="primary"
-    >
-      Ajouter un nouveau snippet de requirement
-    </PixButtonLink>
-    <textarea {{on "keyup" this.onQuestEligibilityRequirementsChanged}} value={{this.questEligibilityRequirementsStr}}></textarea>
-    <ul>
-      <li>
-        <PixButton @size="small" @variant="secondary" @triggerAction={{fn this.onAddSnippetInEligibilityRequirements "all"}}>
-          all
-        </PixButton>
-      </li>
-      <li>
-        <PixButton @size="small" @variant="secondary" @triggerAction={{fn this.onAddSnippetInEligibilityRequirements "one-of"}}>
-          one-of
-        </PixButton>
-      </li>
-      <li>
-        <PixButton @size="small" @variant="secondary" @triggerAction={{fn this.onAddSnippetInEligibilityRequirements "("}}>
-          (
-        </PixButton>
-      </li>
-      <li>
-        <PixButton @size="small" @variant="secondary" @triggerAction={{fn this.onAddSnippetInEligibilityRequirements ")"}}>
-          )
-        </PixButton>
-      </li>
-      <li>
-        <PixButton @size="small" @variant="secondary" @triggerAction={{fn this.onAddSnippetInEligibilityRequirements ","}}>
-          ,
-        </PixButton>
-      </li>
-      {{#each this.snippets as |snippetName|}}
+    <PixBlock @variant="admin" class="quest-button-edition">
+      <h1>Création de la quête</h1>
+      <div class="quest-button-edition__form">
+        <PixInput onchange={{this.updateName}} required={{true}}>
+          <:label>Nom de la quête</:label>
+        </PixInput>
+        <PixInput onchange={{this.updateRewardType}} required={{true}}>
+          <:label>Type de récompense</:label>
+        </PixInput>
+        <PixInput onchange={{this.updateRewardId}} required={{true}}>
+          <:label>ID de récompense</:label>
+        </PixInput>
+      </div>
+
+      <PixTextarea
+        value={{this.eligibilityRequirementsStr}}
+        {{on "change" this.updateEligibilityRequirements}}
+        rows="15"
+      >
+        <:label>Mes requirements d'éligibilité</:label>
+      </PixTextarea>
+    </PixBlock>
+
+    <PixBlock @variant="admin" class="quest-button-edition">
+      <ul class="quest-button-edition__list">
         <li>
-          <PixButton @size="small" @variant="secondary" @triggerAction={{fn this.onAddSnippetInEligibilityRequirements snippetName}}>
-            {{snippetName}}
+          <PixButton
+            @size="small"
+            @variant="secondary"
+            @triggerAction={{fn this.appendToEligibilityRequirements "all("}}
+          >
+            all(
           </PixButton>
         </li>
-      {{/each}}
-    </ul>
-    <PixButton @size="small" @variant="secondary" @triggerAction={{this.eligibilityRequirementJSONinClipboard}}>
-      Mettre le json d'eligibility dans le presse papiers
-    </PixButton>
+        <li>
+          <PixButton
+            @size="small"
+            @variant="secondary"
+            @triggerAction={{fn this.appendToEligibilityRequirements "one-of("}}
+          >
+            one-of(
+          </PixButton>
+        </li>
+        <li>
+          <PixButton @size="small" @variant="secondary" @triggerAction={{fn this.appendToEligibilityRequirements ")"}}>
+            )
+          </PixButton>
+        </li>
+        <li>
+          <PixButton @size="small" @variant="secondary" @triggerAction={{fn this.appendToEligibilityRequirements ","}}>
+            ,
+          </PixButton>
+        </li>
+      </ul>
+      <ul class="quest-button-edition__list">
+        {{#each this.snippets as |snippetName|}}
+          <li>
+            <PixButton
+              @size="small"
+              @variant="secondary"
+              @triggerAction={{fn this.appendToEligibilityRequirements snippetName}}
+            >
+              {{snippetName}}
+            </PixButton>
+          </li>
+        {{/each}}
+      </ul>
+    </PixBlock>
+
+    <div class="quest-button-edition__button">
+      <PixButtonLink @route="authenticated.quest-new-or-edit-snippet" @size="small" @variant="primary">
+        Ajouter un nouveau snippet de requirement
+      </PixButtonLink>
+
+      <PixButton @size="small" @variant="success" @triggerAction={{this.copyEligibilityRequirementsToClipboard}}>
+        Mettre le json des requirements d'éligibilité dans le presse-papiers
+      </PixButton>
+    </div>
   </template>
 }

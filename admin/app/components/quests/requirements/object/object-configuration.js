@@ -1,28 +1,46 @@
 class ObjectConfiguration {
-  constructor({ name, refersToAnArray, fields }) {
+  constructor({ name, refersToAnArray, fieldConfigurations }) {
     this.name = name;
     this.refersToAnArray = refersToAnArray;
-    this.fields = fields;
+    this.fieldConfigurations = fieldConfigurations;
   }
 
-  buildRequirementFromFormValues(comparison, fields) {
-    const data = fields.reduce((data, field) => {
-      if (field.comparison && (field.value || field.value === false)) {
-        data[field.name] = {
-          data: {
-            comparison: field.comparison,
-            value: ['one-of', 'all'].includes(field.comparison) ? field.value.split(',') : field.value,
-          },
-        };
+  buildRequirementFromFormValues(formComparison, formFields) {
+    const data = {};
+    for (const fieldConfiguration of this.fieldConfigurations) {
+      const formField = formFields.find((formField) => formField.name === fieldConfiguration.name);
+      const trimmedFormFieldValue = formField.value ? formField.value.trim() : formField.value;
+      const isFormFieldValid = formField.comparison && trimmedFormFieldValue;
+      if (!isFormFieldValid) {
+        continue;
       }
-      return data;
-    }, {});
+      data[formField.name] = {
+        data: {
+          comparison: formField.comparison,
+          value: ['one-of', 'all'].includes(formField.comparison)
+            ? trimmedFormFieldValue
+                .split(',')
+                .map((value) => castFromStringToType(value.trim(), fieldConfiguration.type))
+            : castFromStringToType(trimmedFormFieldValue, fieldConfiguration.type),
+        },
+      };
+    }
     return {
       requirement_type: this.name,
-      comparison,
+      comparison: formComparison,
       data,
     };
   }
+}
+
+function castFromStringToType(strValue, type) {
+  if (type === FieldConfiguration.TYPES.BOOLEAN) {
+    return strValue.toLowerCase() === 'true';
+  }
+  if (type === FieldConfiguration.TYPES.NUMBER) {
+    return parseInt(strValue);
+  }
+  return strValue;
 }
 
 class FieldConfiguration {
@@ -42,17 +60,18 @@ class FieldConfiguration {
   }
 }
 
-const organizationField_isManagingStudents = new FieldConfiguration({
+const organizationConfigField_isManagingStudents = new FieldConfiguration({
   name: 'isManagingStudents',
   type: FieldConfiguration.TYPES.BOOLEAN,
   refersToAnArray: false,
+  allowedValues: ['true', 'false'],
 });
-const organizationField_tags = new FieldConfiguration({
+const organizationConfigField_tags = new FieldConfiguration({
   name: 'tags',
   type: FieldConfiguration.TYPES.STRING,
   refersToAnArray: true,
 });
-const organizationField_type = new FieldConfiguration({
+const organizationConfigField_type = new FieldConfiguration({
   name: 'type',
   type: FieldConfiguration.TYPES.STRING,
   refersToAnArray: false,
@@ -61,10 +80,14 @@ const organizationField_type = new FieldConfiguration({
 const organizationConfiguration = new ObjectConfiguration({
   name: 'organization',
   refersToAnArray: false,
-  fields: [organizationField_isManagingStudents, organizationField_tags, organizationField_type],
+  fieldConfigurations: [
+    organizationConfigField_isManagingStudents,
+    organizationConfigField_tags,
+    organizationConfigField_type,
+  ],
 });
 
-const organizationLearnerField_MEFCode = new FieldConfiguration({
+const organizationLearnerConfigField_MEFCode = new FieldConfiguration({
   name: 'MEFCode',
   type: FieldConfiguration.TYPES.STRING,
   refersToAnArray: false,
@@ -72,15 +95,15 @@ const organizationLearnerField_MEFCode = new FieldConfiguration({
 const organizationLearnerConfiguration = new ObjectConfiguration({
   name: 'organizationLearner',
   refersToAnArray: false,
-  fields: [organizationLearnerField_MEFCode],
+  fieldConfigurations: [organizationLearnerConfigField_MEFCode],
 });
 
-const campaignParticipationsField_targetProfileId = new FieldConfiguration({
+const campaignParticipationsConfigField_targetProfileId = new FieldConfiguration({
   name: 'targetProfileId',
   type: FieldConfiguration.TYPES.NUMBER,
   refersToAnArray: false,
 });
-const campaignParticipationsField_status = new FieldConfiguration({
+const campaignParticipationsConfigField_status = new FieldConfiguration({
   name: 'status',
   type: FieldConfiguration.TYPES.STRING,
   refersToAnArray: false,
@@ -89,7 +112,7 @@ const campaignParticipationsField_status = new FieldConfiguration({
 const campaignParticipationsConfiguration = new ObjectConfiguration({
   name: 'campaignParticipations',
   refersToAnArray: true,
-  fields: [campaignParticipationsField_targetProfileId, campaignParticipationsField_status],
+  fieldConfigurations: [campaignParticipationsConfigField_targetProfileId, campaignParticipationsConfigField_status],
 });
 
 const objectConfigurations = {

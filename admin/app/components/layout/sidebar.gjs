@@ -112,7 +112,6 @@ export default class Sidebar extends Component {
           </PixNavigationButton>
 
         {{/if}}
-
       </:navElements>
       <:footer>
         <p class="sidebar-footer__full-name">{{this.userFullName}}</p>
