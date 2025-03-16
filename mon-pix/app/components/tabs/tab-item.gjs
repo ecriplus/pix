@@ -4,7 +4,7 @@ import { eq } from 'ember-truth-helpers';
 
 <template>
   <button
-    class="pix-tabs__tab"
+    class="monpix-tabs__tab"
     id="{{@id}}-{{@index}}"
     type="button"
     role="tab"

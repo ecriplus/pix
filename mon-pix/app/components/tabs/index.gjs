@@ -166,11 +166,11 @@ export default class TabsContainer extends Component {
 
   <template>
     {{! template-lint-disable no-invalid-interactive }}
-    <div class="pix-tabs" id={{this.id}} ...attributes {{this.onMount}}>
-      <div class="pix-tabs__tablist" role="tablist" aria-label={{@ariaLabel}} {{on "keyup" this.handleTablistKeyUp}}>
+    <div class="monpix-tabs" id={{this.id}} ...attributes {{this.onMount}}>
+      <div class="monpix-tabs__tablist" role="tablist" aria-label={{@ariaLabel}} {{on "keyup" this.handleTablistKeyUp}}>
         {{#if this.isLeftArrowVisible}}
           <span
-            class="pix-tabs-tablist__scroll-button pix-tabs-tablist__scroll-button--left"
+            class="monpix-tabs-tablist__scroll-button pix-tabs-tablist__scroll-button--left"
             tabindex="-1"
             {{on "click" this.handleLeftArrowButtonClick}}
           />
@@ -183,7 +183,7 @@ export default class TabsContainer extends Component {
         </div>
         {{#if this.isRightArrowVisible}}
           <span
-            class="pix-tabs-tablist__scroll-button pix-tabs-tablist__scroll-button--right"
+            class="monpix-tabs-tablist__scroll-button pix-tabs-tablist__scroll-button--right"
             tabindex="-1"
             {{on "click" this.handleRightArrowButtonClick}}
           />
