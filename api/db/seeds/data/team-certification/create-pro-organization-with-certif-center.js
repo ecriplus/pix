@@ -44,6 +44,7 @@ async function _createProOrganization({ databaseBuilder }) {
     configOrganization: {
       learnerCount: 8,
     },
+    withOrganizationLearners: false,
   });
 }
 

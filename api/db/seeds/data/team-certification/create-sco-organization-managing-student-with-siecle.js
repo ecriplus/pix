@@ -43,6 +43,7 @@ async function _createScoOrganization({ databaseBuilder }) {
       learnerCount: 8,
     },
     tagIds: [COLLEGE_TAG.id],
+    withOrganizationLearners: false,
   });
 }
 
