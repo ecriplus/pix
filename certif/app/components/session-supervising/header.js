@@ -37,7 +37,7 @@ export default class Header extends Component {
     return this.router.replaceWith('login-session-supervisor');
   }
 
-  get InvigilatorDocumentationUrl() {
-    return this.url.InvigilatorDocumentationUrl;
+  get invigilatorDocumentationUrl() {
+    return this.url.invigilatorDocumentationUrl;
   }
 }

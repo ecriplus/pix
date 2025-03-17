@@ -284,16 +284,16 @@ module('Unit | Service | url', function (hooks) {
     });
   });
 
-  module('#pixCompanionDocumentationUrl', function () {
+  module('#invigilatorDocumentationUrl', function () {
     test('should return the pix companion documentation url', function (assert) {
       // given
       const service = this.owner.lookup('service:url');
 
       // when
-      const pixCompanionDocumentationUrl = service.pixCompanionDocumentationUrl;
+      const invigilatorDocumentationUrl = service.invigilatorDocumentationUrl;
 
       // then
-      assert.strictEqual(pixCompanionDocumentationUrl, 'https://cloud.pix.fr/s/fpeEyDpYEkMeqRX');
+      assert.strictEqual(invigilatorDocumentationUrl, 'https://cloud.pix.fr/s/S5LHayrjbM4Zn5f');
     });
   });
 });

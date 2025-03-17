@@ -74,7 +74,7 @@ export default class Url extends Service {
     return 'https://form-eu.123formbuilder.com/41052/form';
   }
 
-  get InvigilatorDocumentationUrl() {
+  get invigilatorDocumentationUrl() {
     return 'https://cloud.pix.fr/s/S5LHayrjbM4Zn5f';
   }
 
