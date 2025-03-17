@@ -1,5 +1,30 @@
 # Pix Changelog
 
+## v5.65.0 (17/03/2025)
+
+
+### :rocket: Amélioration
+- [#11691](https://github.com/1024pix/pix/pull/11691) [FEATURE] Autoriser de repasser une campagne de type EXAM avec un score de  100% (PIX-17029).
+- [#11666](https://github.com/1024pix/pix/pull/11666) [FEATURE] Modifier et rendre conditionnel le wording d'information sur le reset/retry en fin de parcours (PIX-16683).
+- [#11664](https://github.com/1024pix/pix/pull/11664) [FEATURE] Créer les events liés aux flashcards - (PIX-16953) .
+- [#11641](https://github.com/1024pix/pix/pull/11641) [FEATURE] Enregistrer la date de dernière connexion aux orgas & cdc seulement sur les memberships actifs (PIX-16990).
+
+### :building_construction: Tech
+- [#11586](https://github.com/1024pix/pix/pull/11586) [TECH] Mise à jour de openid-client en version 6 (PIX-16870).
+- [#11667](https://github.com/1024pix/pix/pull/11667) [TECH] utilise le composant PixBlock dans orga (Pix-16886).
+
+### :bug: Correction
+- [#11701](https://github.com/1024pix/pix/pull/11701) [BUGFIX]: Réparer Smart Random Simulator (PIX-17038).
+- [#11635](https://github.com/1024pix/pix/pull/11635) [BUGFIX]PixAdmin: Autoriser le profil SUPPORT à détacher un profil cible d'une organisation.
+
+### :arrow_up: Montée de version
+- [#11710](https://github.com/1024pix/pix/pull/11710) [BUMP] Update dependency ember-page-title to v9 (mon-pix).
+- [#11708](https://github.com/1024pix/pix/pull/11708) [BUMP] Update dependency ember-page-title to v9 (junior).
+- [#11706](https://github.com/1024pix/pix/pull/11706) [BUMP] Update dependency eslint-config-prettier to v10 (api).
+- [#11705](https://github.com/1024pix/pix/pull/11705) [BUMP] Update dependency @sentry/ember to v9 (mon-pix).
+- [#11699](https://github.com/1024pix/pix/pull/11699) [BUMP] Update dependency @ember/render-modifiers to v3 (junior).
+- [#11688](https://github.com/1024pix/pix/pull/11688) [BUMP] Update dependency cron-parser to v5 (api).
+
 ## v5.64.0 (14/03/2025)
 
 
