@@ -12,17 +12,17 @@
             <PixTag @color="error">
               {{this.currentLiveAlertLabel}}
             </PixTag>
-            <PixTag @color="secondary">
+            <PixTag @color="yellow">
               {{t "common.forms.certification-labels.candidate-status.on-hold"}}
             </PixTag>
           {{else}}
-            <PixTag @color="success">
+            <PixTag @color="green">
               {{t "common.forms.certification-labels.candidate-status.ongoing"}}
             </PixTag>
           {{/if}}
         {{/if}}
         {{#if @candidate.hasCompleted}}
-          <PixTag @color="tertiary">{{t "common.forms.certification-labels.candidate-status.finished"}}</PixTag>
+          <PixTag @color="blue">{{t "common.forms.certification-labels.candidate-status.finished"}}</PixTag>
         {{/if}}
       </div>
     </div>
@@ -68,7 +68,7 @@
             </span>
           </div>
           {{#if @candidate.extraTimePercentage}}
-            <PixTag @color="neutral">
+            <PixTag @color="grey">
               {{t
                 "pages.session-supervising.candidate-in-list.extratime"
                 extraTimePercentage=(format-percentage @candidate.extraTimePercentage)

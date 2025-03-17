@@ -214,6 +214,10 @@
       "documentation": "Documentation",
       "extra-information": "Navigation principale",
       "logout": "Log out",
+      "menu-labels": {
+        "close": "Close menu",
+        "open": "Open menu"
+      },
       "sessions": {
         "extra-information": "Certification sessions",
         "label": "Sessions"
