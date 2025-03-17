@@ -1,0 +1,57 @@
+import onEscapeAction from '@1024pix/pix-ui/app/modifiers/on-escape-action';
+import trapFocus from '@1024pix/pix-ui/app/modifiers/trap-focus';
+import PixButton from '@1024pix/pix-ui/components/pix-button';
+import { t } from 'ember-intl';
+
+import TrainingCard from '../../../training/card';
+
+<template>
+  <div
+    class="evaluation-sent-results-modal__overlay
+      {{unless @showModal ' evaluation-sent-results-modal__overlay--hidden'}}"
+    {{trapFocus @showModal}}
+    {{onEscapeAction @onCloseButtonClick}}
+  >
+    <div
+      class="evaluation-sent-results-modal"
+      role="dialog"
+      aria-labelledby="evaluation-sent-results-modal-title"
+      aria-describedby="evaluation-sent-results-modal-trainings"
+      aria-modal="true"
+      ...attributes
+    >
+      <div class="evaluation-sent-results-modal__header">
+        <PixButton @variant="tertiary" @iconAfter="close" @triggerAction={{@onCloseButtonClick}} @size="small">
+          {{t "common.actions.close"}}
+        </PixButton>
+      </div>
+      <img
+        src="/images/strike.svg"
+        role="presentation"
+        alt=""
+        width="174"
+        height="137"
+        class="evaluation-sent-results-modal__illustration"
+      />
+      <h1 id="evaluation-sent-results-modal-title" class="evaluation-sent-results-modal__title">
+        {{t "pages.skill-review.tabs.trainings.sent-results-modal.title"}}
+      </h1>
+      <p class="evaluation-sent-results-modal__subtitle">
+        {{t "pages.skill-review.tabs.trainings.sent-results-modal.subtitle"}}
+      </p>
+      <ul id="evaluation-sent-results-modal-trainings" class="evaluation-sent-results-modal__trainings">
+        {{#each @trainings as |training|}}
+          <li>
+            <TrainingCard @training={{training}} />
+          </li>
+        {{/each}}
+      </ul>
+
+      <div class="evaluation-sent-results-modal__footer">
+        <PixButton @variant="secondary" @triggerAction={{@onCloseButtonClick}}>
+          {{t "pages.skill-review.tabs.trainings.sent-results-modal.return-results-action"}}
+        </PixButton>
+      </div>
+    </div>
+  </div>
+</template>
