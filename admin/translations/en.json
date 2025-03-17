@@ -296,6 +296,11 @@
       }
     },
     "certification-centers": {
+      "list-items": {
+        "table": {
+          "caption": "Liste des centres de certification. Contient l'identifiant, le nom et le type du centre ainsi que son Id externe. Des filtres présents à l'extérieur du tableau permettent de trier les informations de ce dernier"
+        }
+      },
       "membership-item": {
         "actions": {
           "edit-role": "Edit role"
