@@ -1,27 +1,12 @@
 .certification-center-invitations {
 
-  &__message {
-    text-align: center;
-  }
-
   &__actions-buttons   {
     display: flex;
     flex-direction: column;
+    gap: var(--pix-spacing-2x);
 
     button {
       width: 13rem;
-      margin:  0.2rem;
-    }
-
-    svg {
-      margin-right: 6px;
-    }
-  }
-
-  &-actions__button {
-
-    svg {
-      margin-right: 6px;
     }
   }
 }

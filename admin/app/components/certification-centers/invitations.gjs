@@ -1,4 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { fn } from '@ember/helper';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -17,56 +19,67 @@ export default class CertificationCenterInvitations extends Component {
       <header class="page-section__header">
         <h2 class="page-section__title">Invitations</h2>
       </header>
-      <div class="content-text content-text--small">
-        <div class="table-admin">
-          {{#if this.sortedCertificationCenterInvitations}}
-            <table>
-              <thead>
-                <tr>
-                  <th>Adresse e-mail</th>
-                  <th>Rôle</th>
-                  <th>Date de dernier envoi</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {{#each this.sortedCertificationCenterInvitations as |invitation|}}
-                  <tr aria-label="Invitation en attente de {{invitation.email}}">
-                    <td>{{invitation.email}}</td>
-                    <td>{{invitation.roleLabel}}</td>
-                    <td>{{dayjsFormat invitation.updatedAt "DD/MM/YYYY [-] HH:mm"}}</td>
-                    <td>
-                      <div class="certification-center-invitations__actions-buttons">
-                        <PixButton
-                          @size="small"
-                          class="certification-center-invitations-actions__button"
-                          aria-label={{t "common.invitations.send-new-label" invitationEmail=invitation.email}}
-                          @triggerAction={{fn @onSendNewCertificationCenterInvitation invitation}}
-                          @iconBefore="refresh"
-                        >
-                          {{t "common.invitations.send-new"}}
-                        </PixButton>
-                        <PixButton
-                          @size="small"
-                          @variant="error"
-                          class="certification-center-invitations-actions__button"
-                          aria-label="Annuler l’invitation de {{invitation.email}}"
-                          @triggerAction={{fn @onCancelCertificationCenterInvitation invitation}}
-                          @iconBefore="delete"
-                        >
-                          Annuler l’invitation
-                        </PixButton>
-                      </div>
-                    </td>
-                  </tr>
-                {{/each}}
-              </tbody>
-            </table>
-          {{else}}
-            <p class="certification-center-invitations__message">Aucune invitation en attente</p>
-          {{/if}}
-        </div>
-      </div>
+
+      {{#if this.sortedCertificationCenterInvitations}}
+        <PixTable
+          @variant="primary"
+          @caption={{t "components.certification-centers.invitations.table.caption"}}
+          @data={{this.sortedCertificationCenterInvitations}}
+        >
+          <:columns as |invitation context|>
+            <PixTableColumn @context={{context}} class="break-word">
+              <:header>
+                Adresse e-mail
+              </:header>
+              <:cell>
+                {{invitation.email}}
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}}>
+              <:header>
+                Rôle
+              </:header>
+              <:cell>
+                {{invitation.roleLabel}}
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}}>
+              <:header>
+                Date de dernier envoi
+              </:header>
+              <:cell>
+                {{dayjsFormat invitation.updatedAt "DD/MM/YYYY [-] HH:mm"}}
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}} class="certification-center-invitations__actions-buttons">
+              <:header>
+                Actions
+              </:header>
+              <:cell>
+                <PixButton
+                  @size="small"
+                  aria-label={{t "common.invitations.send-new-label" invitationEmail=invitation.email}}
+                  @triggerAction={{fn @onSendNewCertificationCenterInvitation invitation}}
+                  @iconBefore="refresh"
+                >
+                  {{t "common.invitations.send-new"}}
+                </PixButton>
+                <PixButton
+                  @size="small"
+                  @variant="error"
+                  aria-label="Annuler l’invitation de {{invitation.email}}"
+                  @triggerAction={{fn @onCancelCertificationCenterInvitation invitation}}
+                  @iconBefore="delete"
+                >
+                  Annuler l’invitation
+                </PixButton>
+              </:cell>
+            </PixTableColumn>
+          </:columns>
+        </PixTable>
+      {{else}}
+        <p class="table__empty">Aucune invitation en attente</p>
+      {{/if}}
     </section>
   </template>
 }

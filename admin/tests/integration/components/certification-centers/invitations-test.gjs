@@ -1,5 +1,6 @@
-import { render } from '@1024pix/ember-testing-library';
+import { render, within } from '@1024pix/ember-testing-library';
 import { setupIntl } from 'ember-intl/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupRenderingTest } from 'ember-qunit';
 import Invitations from 'pix-admin/components/certification-centers/invitations';
 import { module, test } from 'qunit';
@@ -57,13 +58,16 @@ module('Integration | Component | Certification Centers | Invitations', function
       const formattedInvitationUpdatedAt1 = dayjsService.self(invitationUpdatedAt1).format('DD/MM/YYYY [-] HH:mm');
       const formattedInvitationUpdatedAt2 = dayjsService.self(invitationUpdatedAt2).format('DD/MM/YYYY [-] HH:mm');
 
+      const table = screen.getByRole('table', {
+        name: t('components.certification-centers.invitations.table.caption'),
+      });
       assert.dom(screen.getByRole('heading', { name: 'Invitations' })).exists();
-      assert.dom(screen.getByRole('columnheader', { name: 'Adresse e-mail' })).exists();
-      assert.dom(screen.getByRole('columnheader', { name: 'Date de dernier envoi' })).exists();
-      assert.dom(screen.getByRole('cell', { name: 'elo.dela@example.net' })).exists();
-      assert.dom(screen.getByRole('cell', { name: formattedInvitationUpdatedAt1 })).exists();
-      assert.dom(screen.getByRole('cell', { name: 'alain.finis@example.net' })).exists();
-      assert.dom(screen.getByRole('cell', { name: formattedInvitationUpdatedAt2 })).exists();
+      assert.dom(within(table).getByRole('columnheader', { name: 'Adresse e-mail' })).exists();
+      assert.dom(within(table).getByRole('columnheader', { name: 'Date de dernier envoi' })).exists();
+      assert.dom(within(table).getByRole('cell', { name: 'elo.dela@example.net' })).exists();
+      assert.dom(within(table).getByRole('cell', { name: formattedInvitationUpdatedAt1 })).exists();
+      assert.dom(within(table).getByRole('cell', { name: 'alain.finis@example.net' })).exists();
+      assert.dom(within(table).getByRole('cell', { name: formattedInvitationUpdatedAt2 })).exists();
     });
   });
 });

@@ -304,6 +304,11 @@
       }
     },
     "certification-centers": {
+      "invitations": {
+        "table": {
+          "caption": "Liste des invitations envoyées pour rejoindre un centre de certification. Contient une adresse e-mail de l'utilisateur, le rôle que l'on souhaite lui attribuer, la date de dernier envoi de l'invitation et des actions permettent de renvoyer l'invitation ou de la supprimer."
+        }
+      },
       "list-items": {
         "table": {
           "caption": "Liste des centres de certification. Contient l'identifiant, le nom et le type du centre ainsi que son Id externe. Des filtres présents à l'extérieur du tableau permettent de trier les informations de ce dernier"
