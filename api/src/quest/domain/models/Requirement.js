@@ -8,6 +8,7 @@ export const COMPARISONS = {
 export const TYPES = {
   COMPOSE: 'compose',
   SKILL_PROFILE: 'skillProfile',
+  CAPPED_TUBES: 'cappedTubes',
   OBJECT: {
     ORGANIZATION_LEARNER: 'organizationLearner',
     ORGANIZATION: 'organization',
@@ -167,6 +168,48 @@ export class SkillProfileRequirement extends BaseRequirement {
   }
 }
 
+export class CappedTubesRequirement extends BaseRequirement {
+  #cappedTubes;
+  #threshold;
+
+  constructor({ data }) {
+    super({ requirement_type: TYPES.CAPPED_TUBES, comparison: null });
+    this.#cappedTubes = data.cappedTubes;
+    this.#threshold = data.threshold;
+  }
+
+  /**
+   * @returns {Object}
+   */
+  get data() {
+    return {
+      cappedTubes: Object.freeze(this.#cappedTubes),
+      threshold: this.#threshold,
+    };
+  }
+
+  /**
+   * @param {Eligibility|Success} dataInput
+   * @returns {Boolean}
+   */
+  isFulfilled(dataInput) {
+    const masteryPercentage = dataInput.getMasteryPercentageForCappedTubes(this.#cappedTubes);
+    return masteryPercentage >= this.#threshold;
+  }
+
+  /**
+   * @returns {Object}
+   */
+  toDTO() {
+    const superDto = super.toDTO();
+    delete superDto.comparison;
+    return {
+      ...superDto,
+      data: this.data,
+    };
+  }
+}
+
 /**
  * @param {Object} params
  * @param {string} params.requirement_type
@@ -182,6 +225,8 @@ export function buildRequirement({ requirement_type, data, comparison }) {
     return new ObjectRequirement({ requirement_type, data, comparison });
   } else if (requirement_type === TYPES.SKILL_PROFILE) {
     return new SkillProfileRequirement({ data });
+  } else if (requirement_type === TYPES.CAPPED_TUBES) {
+    return new CappedTubesRequirement({ data });
   }
   throw new Error(`Unknown requirement_type "${requirement_type}"`);
 }

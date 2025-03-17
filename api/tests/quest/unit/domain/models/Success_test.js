@@ -59,20 +59,19 @@ describe('Quest | Unit | Domain | Models | Success ', function () {
       });
     });
   });
-  /*
+
   describe('#getMasteryPercentageForCappedTubes', function () {
     context('when no cappedTubes provided', function () {
-      it('should return 0', function () {
+      it('should return 0 when cappedTubes is empty', function () {
         // given
         const cappedTubesEmpty = [];
-        const brokenCappedTubes = null;
         const success = new Success({
           knowledgeElements: [
             { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillA' },
             { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillB' },
             { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillC' },
           ],
-          skills: [
+          campaignSkills: [
             { id: 'skillA', tubeId: 'tubeA', difficulty: 1 },
             { id: 'skillB', tubeId: 'tubeB', difficulty: 1 },
             { id: 'skillC', tubeId: 'tubeC', difficulty: 1 },
@@ -81,56 +80,145 @@ describe('Quest | Unit | Domain | Models | Success ', function () {
 
         // when
         const masteryPercentageEmpty = success.getMasteryPercentageForCappedTubes(cappedTubesEmpty);
-        const masteryPercentageBroken = success.getMasteryPercentageForCappedTubes(brokenCappedTubes);
 
         // then
         expect(masteryPercentageEmpty).to.equal(0);
-        expect(masteryPercentageBroken).to.equal(0);
       });
-    });
-    context('when cappedTubes are provided', function () {
-      it('should return the expected mastery percentage according to knowledge elements by tube in Success model', function () {
+
+      it('should return 0 when cappedTubes is invalid', function () {
         // given
+        const brokenCappedTubes = null;
         const success = new Success({
-          // 1/2 sur tubeA cappé 2
-          // 2/3 sur tubeB cappé 3
-          // au final ça donne 3 / 5 -> 60%
           knowledgeElements: [
-            { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skill1tubeA' },
-            { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skill2tubeA' },
-            { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skill3tubeA' }, // ignoré, hors cap
-            { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skill4tubeA' }, // ignoré, hors cap
-            { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skill1tubeB' },
-            { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skill2tubeB' },
-            { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skill3tubeB' },
-            { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillTubeC' }, // ignoré, hors scope
-            { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillTubeD' }, // ignoré, hors scope
+            { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillA' },
+            { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillB' },
+            { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillC' },
           ],
-          skills: [
-            { id: 'skill1tubeA', tubeId: 'tubeA', difficulty: 1 },
-            { id: 'skill2tubeA', tubeId: 'tubeA', difficulty: 2 },
-            { id: 'skill3tubeA', tubeId: 'tubeA', difficulty: 3 },
-            { id: 'skill4tubeA', tubeId: 'tubeA', difficulty: 4 },
-            { id: 'skill1tubeB', tubeId: 'tubeB', difficulty: 1 },
-            { id: 'skill2tubeB', tubeId: 'tubeB', difficulty: 2 },
-            { id: 'skill3tubeB', tubeId: 'tubeB', difficulty: 3 },
-            { id: 'skillTubeC', tubeId: 'tubeC', difficulty: 1 },
-            { id: 'skillTubeD', tubeId: 'tubeD', difficulty: 1 },
+          campaignSkills: [
+            { id: 'skillA', tubeId: 'tubeA', difficulty: 1 },
+            { id: 'skillB', tubeId: 'tubeB', difficulty: 1 },
+            { id: 'skillC', tubeId: 'tubeC', difficulty: 1 },
           ],
         });
 
         // when
-        const cappedTubes = [
-          { tubeId: 'tubeA', level: 2 },
-          { tubeId: 'tubeB', level: 3 },
-        ];
-        const masteryPercentage = success.getMasteryPercentageForCappedTubes(cappedTubes);
+        const masteryPercentageBroken = success.getMasteryPercentageForCappedTubes(brokenCappedTubes);
 
         // then
-        const expectedMasteryPercentage = 60;
-        expect(masteryPercentage).to.be.equal(expectedMasteryPercentage);
+        expect(masteryPercentageBroken).to.equal(0);
+      });
+    });
+    context('when cappedTubes are provided', function () {
+      context('when there are no dupes in tubeId/difficulty', function () {
+        it('should return the expected mastery percentage according to knowledge elements by tube in Success model', function () {
+          // given
+          const success = new Success({
+            // 1/2 sur tubeA cappé 2
+            // 2/3 sur tubeB cappé 3
+            // au final ça donne 3 / 5 -> 60%
+            knowledgeElements: [
+              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skill1tubeA' },
+              { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skill2tubeA' },
+              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skill3tubeA' }, // ignoré, hors cap
+              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skill4tubeA' }, // ignoré, hors cap
+              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skill1tubeB' },
+              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skill2tubeB' },
+              { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skill3tubeB' },
+              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillTubeC' }, // ignoré, hors scope
+              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillTubeD' }, // ignoré, hors scope
+            ],
+            campaignSkills: [
+              { id: 'skill1tubeA', tubeId: 'tubeA', difficulty: 1 },
+              { id: 'skill2tubeA', tubeId: 'tubeA', difficulty: 2 },
+              { id: 'skill3tubeA', tubeId: 'tubeA', difficulty: 3 },
+              { id: 'skill4tubeA', tubeId: 'tubeA', difficulty: 4 },
+              { id: 'skill1tubeB', tubeId: 'tubeB', difficulty: 1 },
+              { id: 'skill2tubeB', tubeId: 'tubeB', difficulty: 2 },
+              { id: 'skill3tubeB', tubeId: 'tubeB', difficulty: 3 },
+              { id: 'skillTubeC', tubeId: 'tubeC', difficulty: 1 },
+              { id: 'skillTubeD', tubeId: 'tubeD', difficulty: 1 },
+            ],
+          });
+
+          // when
+          const cappedTubes = [
+            { tubeId: 'tubeA', level: 2 },
+            { tubeId: 'tubeB', level: 3 },
+          ];
+          const masteryPercentage = success.getMasteryPercentageForCappedTubes(cappedTubes);
+
+          // then
+          const expectedMasteryPercentage = 60;
+          expect(masteryPercentage).to.be.equal(expectedMasteryPercentage);
+        });
+      });
+      context('when there are several skills for the same tubeId/difficulty', function () {
+        it('should only count as if there were one skill for the same tubeId/difficulty', function () {
+          // given
+          const success = new Success({
+            knowledgeElements: [{ status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skill1_v2' }],
+            campaignSkills: [
+              { id: 'skill1_v1', tubeId: 'tubeA', difficulty: 1 },
+              { id: 'skill1_v2', tubeId: 'tubeA', difficulty: 1 },
+            ],
+          });
+          const cappedTubes = [{ tubeId: 'tubeA', level: 2 }];
+
+          // when
+          const masteryPercentage = success.getMasteryPercentageForCappedTubes(cappedTubes);
+
+          // then
+          expect(masteryPercentage).to.be.equal(100);
+        });
+
+        context('when none of them have been assessed to the user yet', function () {
+          it('should count as if the skill is not validated', function () {});
+        });
+        context('when one of them have been assessed to the user', function () {});
+        context('when some of them have been assessed to the user', function () {});
+        context('when all of them have been assessed to the user', function () {});
+        it('should return the expected mastery percentage according to knowledge elements by tube in Success model', function () {
+          // given
+          const success = new Success({
+            // 1/2 sur tubeA cappé 2
+            // 2/3 sur tubeB cappé 3
+            // au final ça donne 3 / 5 -> 60%
+            knowledgeElements: [
+              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skill1tubeA' },
+              { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skill2tubeA' },
+              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skill3tubeA' }, // ignoré, hors cap
+              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skill4tubeA' }, // ignoré, hors cap
+              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skill1tubeB' },
+              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skill2tubeB' },
+              { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skill3tubeB' },
+              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillTubeC' }, // ignoré, hors scope
+              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillTubeD' }, // ignoré, hors scope
+            ],
+            campaignSkills: [
+              { id: 'skill1tubeA', tubeId: 'tubeA', difficulty: 1 },
+              { id: 'skill2tubeA', tubeId: 'tubeA', difficulty: 2 },
+              { id: 'skill3tubeA', tubeId: 'tubeA', difficulty: 3 },
+              { id: 'skill4tubeA', tubeId: 'tubeA', difficulty: 4 },
+              { id: 'skill1tubeB', tubeId: 'tubeB', difficulty: 1 },
+              { id: 'skill2tubeB', tubeId: 'tubeB', difficulty: 2 },
+              { id: 'skill3tubeB', tubeId: 'tubeB', difficulty: 3 },
+              { id: 'skillTubeC', tubeId: 'tubeC', difficulty: 1 },
+              { id: 'skillTubeD', tubeId: 'tubeD', difficulty: 1 },
+            ],
+          });
+
+          // when
+          const cappedTubes = [
+            { tubeId: 'tubeA', level: 2 },
+            { tubeId: 'tubeB', level: 3 },
+          ];
+          const masteryPercentage = success.getMasteryPercentageForCappedTubes(cappedTubes);
+
+          // then
+          const expectedMasteryPercentage = 60;
+          expect(masteryPercentage).to.be.equal(expectedMasteryPercentage);
+        });
       });
     });
   });
-  */
 });
