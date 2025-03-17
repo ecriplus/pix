@@ -10,7 +10,11 @@ describe('Evaluation | Unit | Application | API | knowledge-elements-api', funct
       // given
       const userId = Symbol('userId');
       const skillIds = Symbol('skillIds');
-      const knowledgeElement = domainBuilder.buildKnowledgeElement({ status: KnowledgeElement.StatusType.VALIDATED });
+      const knowledgeElement = domainBuilder.buildKnowledgeElement({
+        status: KnowledgeElement.StatusType.VALIDATED,
+        createdAt: new Date('2024-10-27'),
+        skillId: 'recSkill1',
+      });
 
       sinon.stub(evaluationUsecases, 'findFilteredMostRecentKnowledgeElementsByUser');
       evaluationUsecases.findFilteredMostRecentKnowledgeElementsByUser
@@ -22,7 +26,9 @@ describe('Evaluation | Unit | Application | API | knowledge-elements-api', funct
 
       // then
       expect(result).to.be.instanceOf(KnowledgeElementDTO);
+      expect(result.skillId).to.equal(knowledgeElement.skillId);
       expect(result.status).to.equal(KnowledgeElement.StatusType.VALIDATED);
+      expect(result.createdAt).to.equal(knowledgeElement.createdAt);
     });
   });
 });
