@@ -30,8 +30,9 @@ const buildMembership = function ({
   organization = _buildOrganization(),
   organizationRole = Membership.roles.MEMBER,
   user = _buildUser(),
+  lastAccessedAt = null,
 } = {}) {
-  const membership = new Membership({ id, organization, organizationRole, user });
+  const membership = new Membership({ id, organization, organizationRole, user, lastAccessedAt });
 
   membership.user.memberships.push(membership);
 

@@ -302,21 +302,22 @@ describe('Integration | Team | Infrastructure | Repository | membership-reposito
     });
 
     context('when there are Memberships in the database', function () {
-      beforeEach(function () {
-        const userId1 = databaseBuilder.factory.buildUser().id;
-        const userId2 = databaseBuilder.factory.buildUser().id;
-        const otherOrganizationId = databaseBuilder.factory.buildOrganization().id;
-        databaseBuilder.factory.buildMembership({ organizationId, userId: userId1 });
-        databaseBuilder.factory.buildMembership({ organizationId, userId: userId2 });
-        databaseBuilder.factory.buildMembership({ organizationId: otherOrganizationId, userId: userId1 });
-        return databaseBuilder.commit();
-      });
-
       it('returns an Array of Memberships', async function () {
         // given
         const filter = {};
         const page = { number: 1, size: 10 };
         const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 1, rowCount: 2 };
+        const userId1 = databaseBuilder.factory.buildUser().id;
+        const userId2 = databaseBuilder.factory.buildUser().id;
+        const otherOrganizationId = databaseBuilder.factory.buildOrganization().id;
+        databaseBuilder.factory.buildMembership({ organizationId, userId: userId1, lastAccessedAt: null });
+        databaseBuilder.factory.buildMembership({
+          organizationId,
+          userId: userId2,
+          lastAccessedAt: new Date('2020-01-01'),
+        });
+        databaseBuilder.factory.buildMembership({ organizationId: otherOrganizationId, userId: userId1 });
+        await databaseBuilder.commit();
 
         // when
         const { models: matchingMemberships, pagination } = await membershipRepository.findPaginatedFiltered({
@@ -329,6 +330,9 @@ describe('Integration | Team | Infrastructure | Repository | membership-reposito
         expect(matchingMemberships).to.exist;
         expect(matchingMemberships).to.have.lengthOf(2);
         expect(matchingMemberships[0]).to.be.an.instanceOf(Membership);
+        expect(matchingMemberships[1]).to.be.an.instanceOf(Membership);
+        expect(matchingMemberships[0].lastAccessedAt).to.be.null;
+        expect(matchingMemberships[1].lastAccessedAt).to.deep.equal(new Date('2020-01-01'));
         expect(pagination).to.deep.equal(expectedPagination);
       });
     });

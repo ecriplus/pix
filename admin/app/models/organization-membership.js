@@ -12,6 +12,7 @@ export default class OrganizationMembership extends Model {
   @attr() organizationName;
   @attr() organizationType;
   @attr() organizationExternalId;
+  @attr() lastAccessedAt;
 
   @belongsTo('organization', { async: true, inverse: 'organizationMemberships' }) organization;
   @belongsTo('user', { async: true, inverse: 'organizationMemberships' }) user;

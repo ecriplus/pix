@@ -36,6 +36,7 @@ export default class OrganizationTeamSection extends Component {
                 <th class="table__column table__column--wide">Prénom</th>
                 <th class="table__column table__column--wide">Nom</th>
                 <th class="table__column table__column--wide">Adresse e-mail</th>
+                <th class="table__column table__column--wide">Dernier accès</th>
                 <th class="table__column">Rôle</th>
                 {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
                   <th class="table__column">Actions</th>
@@ -70,6 +71,7 @@ export default class OrganizationTeamSection extends Component {
                     oninput={{fn @triggerFiltering "email"}}
                   />
                 </td>
+                <td class="table__column"></td>
                 <td class="table__column">
                   <PixSelect
                     class="pix-select-in-table"
