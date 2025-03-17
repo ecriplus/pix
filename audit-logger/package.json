@@ -48,7 +48,7 @@
     "@types/node": "^22.13.10",
     "@types/pg": "^8.11.11",
     "eslint": "^9.22.0",
-    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-chai-expect": "^3.0.0",
     "eslint-plugin-i18n-json": "^4.0.0",
     "eslint-plugin-import-x": "^4.0.0",
