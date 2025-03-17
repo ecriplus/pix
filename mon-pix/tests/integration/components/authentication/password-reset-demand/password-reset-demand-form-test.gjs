@@ -121,7 +121,7 @@ module('Integration | Component | Authentication | PasswordResetDemand | passwor
     });
 
     module('when email value is missing', function () {
-      test('it displays an error message on email', async function (assert) {
+      test('it displays an error message on email and does not execute reset password request', async function (assert) {
         // given
         const screen = await render(<template><PasswordResetDemandForm /></template>);
 
@@ -135,30 +135,6 @@ module('Integration | Component | Authentication | PasswordResetDemand | passwor
         // then
         assert.dom(screen.queryByText(t(I18N_KEYS.emailError))).exists();
         assert.true(window.fetch.notCalled);
-      });
-    });
-
-    // TODO: This test module will need to be removed when the API doesn't leak anymore that an account doesn't exist with a "404 Not Found".
-    module('when there is no corresponding user account', function () {
-      test('it displays a "password reset demand received" info (without any error message to avoid email enumeration)', async function (assert) {
-        // given
-        requestManagerService.request.rejects({ status: 404 });
-
-        const email = 'someone@example.net';
-        const screen = await render(<template><PasswordResetDemandForm /></template>);
-
-        // when
-        await fillByLabel(t(I18N_KEYS.emailInput), email);
-        await click(
-          screen.getByRole('button', {
-            name: t(I18N_KEYS.resetDemandButton),
-          }),
-        );
-
-        // then
-        assert.dom(screen.queryByRole('alert')).doesNotExist();
-
-        assert.dom(screen.queryByRole('heading', { name: t(I18N_KEYS.demandReceivedInfo) })).exists();
       });
     });
 

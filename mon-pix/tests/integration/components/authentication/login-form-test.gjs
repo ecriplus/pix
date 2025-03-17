@@ -24,6 +24,7 @@ module('Integration | Component | Authentication | LoginForm', function (hooks) 
   let routerService;
   let sessionService;
   let urlService;
+  let storageService;
 
   hooks.beforeEach(async function () {
     storeService = this.owner.lookup('service:store');
@@ -32,6 +33,10 @@ module('Integration | Component | Authentication | LoginForm', function (hooks) 
     urlService = this.owner.lookup('service:url');
 
     screen = await render(<template><LoginForm /></template>);
+  });
+  hooks.afterEach(async function () {
+    storageService = this.owner.lookup('service:storage');
+    storageService.clear();
   });
 
   test('it displays all elements of component successfully', async function (assert) {

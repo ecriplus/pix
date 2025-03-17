@@ -10,4 +10,8 @@ export default class Storage extends Service {
   getLogin() {
     return sessionStorage.getItem(SESSIONSTORAGE_LOGIN);
   }
+
+  clear() {
+    return sessionStorage.clear();
+  }
 }
