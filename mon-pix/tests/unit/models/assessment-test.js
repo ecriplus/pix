@@ -175,28 +175,4 @@ module('Unit | Model | Assessment', function (hooks) {
       assert.false(model.isPreview);
     });
   });
-
-  module('#isFlash', function () {
-    test('should return true when the assessment method is FLASH', function (assert) {
-      // given
-      const model = store.createRecord('assessment');
-
-      // when
-      model.method = 'FLASH';
-
-      //then
-      assert.true(model.isFlash);
-    });
-
-    test('should return false when the assessment method is not FLASH', function (assert) {
-      // given
-      const model = store.createRecord('assessment');
-
-      // when
-      model.method = '_';
-
-      //then
-      assert.false(model.isFlash);
-    });
-  });
 });

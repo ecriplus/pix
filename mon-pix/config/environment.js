@@ -94,11 +94,6 @@ module.exports = function (environment) {
         },
       },
       AUTHENTICATED_SOURCE_FROM_GAR: 'external',
-      NUMBER_OF_CHALLENGES_FOR_FLASH_METHOD: _getEnvironmentVariableAsNumber({
-        environmentVariableName: 'NUMBER_OF_CHALLENGES_FOR_FLASH_METHOD',
-        defaultValue: 48,
-        minValue: 1,
-      }),
       COOKIE_LOCALE_LIFESPAN_IN_SECONDS: 31536000, // 1 year in seconds
       AUTONOMOUS_COURSES_ORGANIZATION_ID: parseInt(process.env.AUTONOMOUS_COURSES_ORGANIZATION_ID, 10),
       APP_VERSION: process.env.SOURCE_VERSION || 'development',
