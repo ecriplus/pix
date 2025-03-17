@@ -1,4 +1,5 @@
-import { render } from '@1024pix/ember-testing-library';
+import { render, within } from '@1024pix/ember-testing-library';
+import { t } from 'ember-intl/test-support';
 import MembershipsSection from 'pix-admin/components/certification-centers/memberships-section';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -52,8 +53,14 @@ module('Integration | Component | certification-centers/memberships-section', fu
     );
 
     // then
-    assert.dom(screen.getByLabelText('Informations du membre Jojo La Gringue')).exists();
-    assert.dom(screen.getByLabelText('Informations du membre Froufrou Le froussard')).exists();
+    const table = screen.getByRole('table', {
+      name: t('components.memberships-section.table.caption'),
+    });
+
+    assert.dom(within(table).getByRole('cell', { name: 'Jojo' })).exists();
+    assert.dom(within(table).getByRole('cell', { name: 'La Gringue' })).exists();
+    assert.dom(within(table).getByRole('cell', { name: 'Froufrou' })).exists();
+    assert.dom(within(table).getByRole('cell', { name: 'Le froussard' })).exists();
   });
 
   test('it should display a message when there is no membership', async function (assert) {

@@ -399,6 +399,9 @@
       "roles": {
         "admin": "Administrateur",
         "member": "Membre"
+      },
+      "table": {
+        "caption": "Liste des membres appartenant au centre de certification. Contient son identifiant, nom et prénom, son adresse e-mail, son rôle, son dernier accès et sa date de rattachement à l'espace de certification. Des actions permettent de modifier son rôle ou de le supprimer du centre."
       }
     },
     "organizations": {

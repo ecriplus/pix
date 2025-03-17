@@ -54,17 +54,13 @@ module('Integration | Component |  certification-centers/membership-item', funct
     );
     const expectedCreationDate = dayjs(certificationCenterMembership.createdAt).format('DD-MM-YYYY - HH:mm:ss');
 
-    assert
-      .dom(screen.getByLabelText('Informations du membre Jojo La Gringue'))
-      .containsText(certificationCenterMembership.id);
-    assert.dom(screen.getByLabelText('Informations du membre Jojo La Gringue')).containsText(user.firstName);
-    assert.dom(screen.getByLabelText('Informations du membre Jojo La Gringue')).containsText(user.lastName);
-    assert.dom(screen.getByLabelText('Informations du membre Jojo La Gringue')).containsText(user.email);
-    assert.dom(screen.getByLabelText('Informations du membre Jojo La Gringue')).containsText('Membre');
-    assert
-      .dom(screen.getByLabelText('Informations du membre Jojo La Gringue'))
-      .containsText(expectedLastAccessedAtDate);
-    assert.dom(screen.getByLabelText('Informations du membre Jojo La Gringue')).containsText(expectedCreationDate);
+    assert.dom(screen.getByRole('link', { name: certificationCenterMembership.id })).exists();
+    assert.dom(screen.getByRole('cell', { name: user.firstName })).exists();
+    assert.dom(screen.getByRole('cell', { name: user.lastName })).exists();
+    assert.dom(screen.getByRole('cell', { name: user.email })).exists();
+    assert.dom(screen.getByRole('cell', { name: 'Membre' })).exists();
+    assert.dom(screen.getByRole('cell', { name: expectedLastAccessedAtDate })).exists();
+    assert.dom(screen.getByRole('cell', { name: expectedCreationDate })).exists();
     assert.dom(screen.getByRole('button', { name: 'Modifier le rôle' })).exists();
     assert.dom(screen.getByRole('button', { name: 'Désactiver' })).exists();
   });
