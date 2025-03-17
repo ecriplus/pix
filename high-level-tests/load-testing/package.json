@@ -42,7 +42,7 @@
     "@faker-js/faker": "^9.0.0",
     "chai": "^5.0.0",
     "eslint": "^9.0.0",
-    "js2xmlparser": "^4.0.1",
+    "js2xmlparser": "^5.0.0",
     "mocha": "^11.0.0",
     "sinon": "^19.0.0",
     "sinon-chai": "^4.0.0"
