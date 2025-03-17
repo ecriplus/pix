@@ -200,6 +200,92 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
     });
   });
 
+  describe('#findCampaignParticipationIdsContributingToQuest', function () {
+    it('returns an empty array when there are no campaign participations contributing to quest', function () {
+      const eligibilityRequirements = [
+        {
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          data: {
+            targetProfileId: {
+              data: 1,
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+          },
+          comparison: REQUIREMENT_COMPARISONS.ALL,
+        },
+      ];
+      const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
+      const campaignParticipations = [{ id: 10, targetProfileId: 123 }];
+      const eligibility = new Eligibility({ organization: {}, organizationLearner: {}, campaignParticipations });
+      const dataForQuest = new DataForQuest({ eligibility });
+
+      expect(quest.findCampaignParticipationIdsContributingToQuest(dataForQuest)).to.have.length(0);
+    });
+
+    it('returns an array with one id when there is a campaign participation contributing to quest', function () {
+      const eligibilityRequirements = [
+        {
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          data: {
+            targetProfileId: {
+              data: 123,
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+          },
+          comparison: REQUIREMENT_COMPARISONS.ALL,
+        },
+      ];
+      const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
+      const campaignParticipations = [{ id: 10, targetProfileId: 123 }];
+      const eligibility = new Eligibility({ organization: {}, organizationLearner: {}, campaignParticipations });
+      const dataForQuest = new DataForQuest({ eligibility });
+
+      const result = quest.findCampaignParticipationIdsContributingToQuest(dataForQuest);
+
+      expect(result).to.have.length(1);
+      expect(result[0]).to.equal(10);
+    });
+
+    it('returns an array with only ids of campaign participations contributing to quest', function () {
+      const eligibilityRequirements = [
+        {
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          data: {
+            targetProfileId: {
+              data: 123,
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+          },
+          comparison: REQUIREMENT_COMPARISONS.ALL,
+        },
+        {
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          data: {
+            targetProfileId: {
+              data: 789,
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+          },
+          comparison: REQUIREMENT_COMPARISONS.ALL,
+        },
+      ];
+      const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
+      const campaignParticipations = [
+        { id: 10, targetProfileId: 123 },
+        { id: 100, targetProfileId: 456 },
+        { id: 1000, targetProfileId: 789 },
+      ];
+      const eligibility = new Eligibility({ organization: {}, organizationLearner: {}, campaignParticipations });
+      const dataForQuest = new DataForQuest({ eligibility });
+
+      const result = quest.findCampaignParticipationIdsContributingToQuest(dataForQuest);
+
+      expect(result).to.have.length(2);
+      expect(result[0]).to.equal(10);
+      expect(result[1]).to.equal(1000);
+    });
+  });
+
   describe('#isCampaignParticipationContributingToQuest', function () {
     const organization = { type: 'SCO' };
     const organizationLearner = { id: 123 };
