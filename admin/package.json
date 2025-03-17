@@ -76,7 +76,7 @@
     "ember-eslint-parser": "^0.5.0",
     "ember-exam": "^9.0.0",
     "ember-fetch": "^8.1.2",
-    "ember-file-upload": "^9.1.0",
+    "ember-file-upload": "^9.3.0",
     "ember-flatpickr": "^8.0.0",
     "ember-intl": "^7.0.0",
     "ember-lifeline": "^7.0.0",
@@ -118,7 +118,7 @@
     "showdown": "^2.1.0",
     "sinon": "^19.0.0",
     "stylelint": "^16.0.0",
-    "tracked-built-ins": "^3.1.1",
+    "tracked-built-ins": "^4.0.0",
     "webpack": "^5.88.2",
     "xss": "^1.0.15"
   },
