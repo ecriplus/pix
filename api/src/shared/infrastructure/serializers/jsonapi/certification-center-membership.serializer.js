@@ -10,7 +10,7 @@ const serialize = function (certificationCenterMemberships) {
       record.certificationCenter.sessions = [];
       return record;
     },
-    attributes: ['createdAt', 'certificationCenter', 'user', 'role'],
+    attributes: ['createdAt', 'certificationCenter', 'user', 'role', 'lastAccessedAt'],
     certificationCenter: {
       ref: 'id',
       included: true,
