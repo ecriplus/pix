@@ -57,7 +57,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
         await visit(`/campagnes/${campaign.code}`);
 
         // when
-        await clickByLabel('Je démarre mon test');
+        await clickByLabel('Je commence');
 
         // then
         sinon.assert.called(replaceLocationStub);
@@ -165,7 +165,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
           await clickByLabel(t('pages.fill-in-campaign-code.start'));
 
           // when
-          await clickByLabel('Je démarre mon test');
+          await clickByLabel('Je commence');
 
           // then
           assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/evaluation/didacticiel`);
@@ -193,7 +193,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
           await visit(`/campagnes/${campaign.code}`);
 
           // when
-          await clickByLabel('Je démarre mon test');
+          await clickByLabel('Je commence');
 
           // then
           sinon.assert.called(replaceLocationStub);

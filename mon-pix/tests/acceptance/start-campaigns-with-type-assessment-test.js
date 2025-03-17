@@ -92,7 +92,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
               const screen = await visit(`/campagnes/${campaign.code}?participantExternalId=a73at01r3`);
 
               assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
-              await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+              await click(screen.getByRole('button', { name: 'Je commence' }));
 
               // when
               await click(screen.getByRole('button', { name: 'Se connecter' }));
@@ -169,7 +169,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
 
           // then
           assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
-          assert.dom(screen.getByRole('button', { name: 'Je démarre mon test' })).exists();
+          assert.dom(screen.getByRole('button', { name: 'Je commence' })).exists();
         });
       });
 
@@ -184,7 +184,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
               organizationType: 'SCO',
             });
             const screen = await visit(`/campagnes/${campaign.code}`);
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
             await fillIn(screen.getByRole('textbox', { name: 'Prénom' }), 'Rober');
             await fillIn(screen.getByRole('textbox', { name: 'Nom' }), 'Smith');
             await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '10');
@@ -279,7 +279,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
           const screen = await visit(`campagnes/${campaign.code}`);
 
           // when
-          await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+          await click(screen.getByRole('button', { name: 'Je commence' }));
 
           // then
           assert.ok(currentURL().includes('/didacticiel'));
@@ -293,7 +293,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
           const screen = await visit(`/campagnes/${campaign.code}?participantExternalId=a73at01r3`);
 
           // when
-          await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+          await click(screen.getByRole('button', { name: 'Je commence' }));
 
           // then
           assert.ok(currentURL().includes('/didacticiel'));

@@ -106,7 +106,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
 
               // when
-              await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+              await click(screen.getByRole('button', { name: 'Je commence' }));
 
               // then
               assert.strictEqual(currentURL(), '/inscription');
@@ -143,7 +143,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
                 campaign.code,
               );
               await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
-              await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+              await click(screen.getByRole('button', { name: 'Je commence' }));
               await click(screen.getByRole('button', { name: 'Se connecter' }));
               await _loginUser(screen, prescritUser);
               await click(screen.getByRole('button', { name: 'Se connecter' }));
@@ -169,7 +169,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
                   campaign.code,
                 );
                 await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
-                await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+                await click(screen.getByRole('button', { name: 'Je commence' }));
                 await click(screen.getByRole('button', { name: 'Se connecter' }));
                 await _loginUser(screen, prescritUser);
                 await click(screen.getByRole('button', { name: 'Se connecter' }));
@@ -190,7 +190,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
                 campaign.code,
               );
               await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
-              await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+              await click(screen.getByRole('button', { name: 'Je commence' }));
               await click(screen.getByRole('button', { name: 'Se connecter' }));
               await _loginUser(screen, prescritUser);
               await click(screen.getByRole('button', { name: 'Se connecter' }));
@@ -217,7 +217,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             const screen = await visit(`/campagnes/${campaign.code}`);
 
             // when
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // then
             assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/rejoindre/identification`);
@@ -258,7 +258,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             });
 
             const screen = await visit(`/campagnes/${campaign.code}`);
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // when
             await fillIn(screen.getByLabelText(/Prénom/), prescritUser.firstName);
@@ -290,7 +290,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
           test('should redirect to student sco invited page when connection is done', async function (assert) {
             // given
             const screen = await visit(`/campagnes/${campaign.code}`);
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // then
             assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/rejoindre/identification`);
@@ -307,7 +307,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
           test('should begin campaign participation when fields are filled in and associate button is clicked', async function (assert) {
             // given
             const screen = await visit(`/campagnes/${campaign.code}`);
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // then
             assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/rejoindre/identification`);
@@ -359,7 +359,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             const screen = await visit(`/campagnes/${campaign.code}`);
 
             // when
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // then
             assert.strictEqual(currentURL(), '/inscription');
@@ -368,7 +368,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
           test('should redirect to invited sup student page after login', async function (assert) {
             // given
             const screen = await visit(`/campagnes/${campaign.code}`);
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // when
             await click(screen.getByRole('link', { name: 'Se connecter' }));
@@ -397,7 +397,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
           test('should redirect to tutorial page after starting campaign', async function (assert) {
             // when
             const screen = await visit(`/campagnes/${campaign.code}`);
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
             await fillIn(screen.getByRole('textbox', { name: /Les anonymes/ }), 'vu');
             await click(screen.getByRole('button', { name: 'Continuer' }));
 
@@ -512,7 +512,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
             // when
             const screen = await visit(`/campagnes/${campaign.code}`);
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // then
             assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/evaluation/didacticiel`);
@@ -523,7 +523,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             const screen = await visit(`/campagnes/${campaign.code}`);
 
             //when
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
 
             //then
             assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/prescrit/eleve`);
@@ -532,7 +532,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
           test('should not set any field by default', async function (assert) {
             // when
             const screen = await visit(`/campagnes/${campaign.code}`);
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
 
             //then
             assert.strictEqual(screen.getByRole('textbox', { name: 'Prénom' }).value, '');
@@ -542,7 +542,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
           test('should begin campaign participation when fields are filled in and associate button is clicked', async function (assert) {
             // given
             const screen = await visit(`/campagnes/${campaign.code}`);
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
             await fillIn(screen.getByRole('textbox', { name: 'Prénom' }), 'Robert');
             await fillIn(screen.getByRole('textbox', { name: 'Nom' }), 'Smith');
             await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '10');
@@ -578,7 +578,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             const screen = await visit(`/campagnes/${campaign.code}`);
 
             // when
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
 
             //then
             assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/evaluation/didacticiel`);
@@ -611,7 +611,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
           const screen = await visit(`/campagnes/${campaign.code}`);
 
           // when
-          await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+          await click(screen.getByRole('button', { name: 'Je commence' }));
 
           // then
           assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/prescrit/etudiant`);
@@ -620,7 +620,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
         test('should begin campaign participation when association is done', async function (assert) {
           // given
           const screen = await visit(`/campagnes/${campaign.code}`);
-          await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+          await click(screen.getByRole('button', { name: 'Je commence' }));
 
           // when
           await fillIn(screen.getByRole('textbox', { name: 'Numéro étudiant' }), 'F100');
@@ -698,7 +698,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
         test('should show an error message when user starts the campaign', async function (assert) {
           // when
           const screen = await visit(`/campagnes/${campaign.code}`);
-          await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+          await click(screen.getByRole('button', { name: 'Je commence' }));
 
           // then
           assert.ok(screen.getByText('Oups, la page demandée n’est pas accessible.'));
@@ -732,7 +732,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
         test('should redirect to tutorial page after starting campaign', async function (assert) {
           // when
           const screen = await visit(`/campagnes/${campaign.code}`);
-          await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+          await click(screen.getByRole('button', { name: 'Je commence' }));
           await fillIn(screen.getByRole('textbox', { name: /Les anonymes/ }), 'vu');
           await click(screen.getByRole('button', { name: 'Continuer' }));
 
@@ -757,7 +757,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
           campaign.code,
         );
         await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
-        await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+        await click(screen.getByRole('button', { name: 'Je commence' }));
 
         const currentUserId = session.data.authenticated['user_id'];
 
@@ -811,7 +811,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               campaign.code,
             );
             await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // then
             assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/rejoindre/mediacentre`);
@@ -833,7 +833,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               campaign.code,
             );
             await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
 
             //then
             assert.strictEqual(screen.getByRole('textbox', { name: 'Prénom' }).value, 'JeanPrescrit');
@@ -856,7 +856,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               campaign.code,
             );
             await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // when
             await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '10');
@@ -956,7 +956,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               campaign.code,
             );
             await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
 
             await fillIn(screen.getByLabelText('jour de naissance'), '10');
             await fillIn(screen.getByLabelText('mois de naissance'), '12');
@@ -992,7 +992,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               campaign.code,
             );
             await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
 
             await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '10');
             await fillIn(screen.getByRole('textbox', { name: 'mois de naissance' }), '12');
@@ -1033,7 +1033,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               campaign.code,
             );
             await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
 
             await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '10');
             await fillIn(screen.getByRole('textbox', { name: 'mois de naissance' }), '12');
@@ -1066,7 +1066,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               campaign.code,
             );
             await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
-            await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+            await click(screen.getByRole('button', { name: 'Je commence' }));
 
             await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '10');
             await fillIn(screen.getByRole('textbox', { name: 'mois de naissance' }), '12');
@@ -1128,7 +1128,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
                 campaign.code,
               );
               await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
-              await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+              await click(screen.getByRole('button', { name: 'Je commence' }));
 
               await fillIn(screen.getByLabelText('jour de naissance'), '10');
               await fillIn(screen.getByLabelText('mois de naissance'), '12');

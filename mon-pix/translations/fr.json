@@ -538,7 +538,7 @@
     },
     "campaign-landing": {
       "assessment": {
-        "action": "Je démarre mon test",
+        "action": "Je commence",
         "announcement": "Inscrivez-vous ou connectez-vous sur la plateforme Pix et lancez votre test.",
         "certify": {
           "description": "En fonction de votre situation et dans certaines conditions, vous pouvez accéder à la certification Pix, reconnue par le monde professionnel, qui permet de valoriser vos compétences numériques. Pour plus d’informations, renseignez-vous auprès de l’organisateur du parcours.",
@@ -553,7 +553,7 @@
           "description": "Vous serez amené à effectuer des recherches sur internet, utiliser votre environnement numérique de travail, tester vos connaissances, etc.",
           "title": "Mesurer vos compétences numériques avec des défis ludiques et apprenants qui s'adaptent à votre niveau de maîtrise (via un algorithme adaptatif)."
         },
-        "legal": "En cliquant sur “Je démarre mon test”, les informations relatives à votre avancée dans le parcours seront transmises à l’organisateur du parcours pour lui permettre de vous accompagner. A la fin du parcours, en cliquant sur le bouton “J’envoie mes résultats” vos résultats seront transmis à l’organisateur.",
+        "legal": "En cliquant sur “Je commence”, les informations relatives à votre avancée dans le parcours seront transmises à l’organisateur du parcours pour lui permettre de vous accompagner. A la fin du parcours, en cliquant sur le bouton “J’envoie mes résultats” vos résultats seront transmis à l’organisateur.",
         "title": "Commencez votre parcours Pix",
         "title-with-username": "'<span>'{userFirstName}'</span>','<br>' prêt à évaluer vos compétences numériques ?"
       },

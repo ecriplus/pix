@@ -34,7 +34,7 @@ module('Acceptance | Campaigns | Resume Campaigns with type Assessment', functio
       const screen = await visit(`/campagnes/${campaign.code}`);
 
       // when
-      await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+      await click(screen.getByRole('button', { name: 'Je commence' }));
 
       // then
       assert.ok(currentURL().includes('/inscription'));
@@ -44,7 +44,7 @@ module('Acceptance | Campaigns | Resume Campaigns with type Assessment', functio
       // given
       await invalidateSession();
       const screen = await visit(`/campagnes/${campaign.code}`);
-      await click(screen.getByRole('button', { name: 'Je démarre mon test' }));
+      await click(screen.getByRole('button', { name: 'Je commence' }));
       await click(screen.getByRole('link', { name: 'Se connecter' }));
       await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), studentInfo.email);
       await fillIn(screen.getByLabelText('Mot de passe'), studentInfo.password);

@@ -538,7 +538,7 @@
     },
     "campaign-landing": {
       "assessment": {
-        "action": "Start my test",
+        "action": "Begin",
         "announcement": "Sign up or log in to the Pix platform and start your test.",
         "certify": {
           "description": "Depending on your situation and under certain conditions, you will be able to take the Pix Certification exam. It is recognized in the professional world and allows you to highlight your digital skills. For more information, ask the organizer of this customised test.",
@@ -553,7 +553,7 @@
           "description": "You will have to carry out searches online, use your digital working environment, test your knowledge, etc.",
           "title": "Measure your digital skills with fun and educational challenges that adapt to your level of proficiency  (through an adaptive algorithm)."
         },
-        "legal": "By clicking on “Start my test“, information about your progress will be shared with the organiser so they can assist you if necessary. At the end of your customised test, your results will be shared with your organisation when clicking on “Submit my results“.",
+        "legal": "By clicking on “Begin“, information about your progress will be shared with the organiser so they can assist you if necessary. At the end of your customised test, your results will be shared with your organisation when clicking on “Submit my results“.",
         "title": "Begin your customised test",
         "title-with-username": "'<span>'{userFirstName}'</span>','<br>' ready to assess your digital skills?"
       },

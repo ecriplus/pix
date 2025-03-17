@@ -11,7 +11,7 @@ Fonctionnalité: Campagne d'évaluation
     Lorsque je clique sur "Accéder au parcours"
     Alors je vois la page de "presentation" de la campagne
     Et la page "Presentation campagne evaluation" est correctement affichée
-    Lorsque je clique sur "Je démarre mon test"
+    Lorsque je clique sur "Je commence"
     Et je saisis "khaleesi" dans le champ "Surnom"
     Et je clique sur "Continuer"
     Alors je vois la page de "didacticiel" de la campagne
@@ -34,7 +34,7 @@ Fonctionnalité: Campagne d'évaluation
   Scénario: Je rejoins un parcours prescrit via l'URL sans être connecté
     Étant donné que je vais sur la campagne "WALL" avec l'identifiant "khaleesi"
     Alors je vois la page de "presentation" de la campagne
-    Lorsque je clique sur "Je démarre mon test"
+    Lorsque je clique sur "Je commence"
     Et je clique sur "Se connecter"
     Et je me connecte avec le compte "daenerys.targaryen@pix.fr"
     Alors je vois la page de "didacticiel" de la campagne
@@ -45,7 +45,7 @@ Fonctionnalité: Campagne d'évaluation
     Lorsque je saisis le code "WINTER"
     Et je clique sur "Accéder au parcours"
     Alors je vois la page de "presentation" de la campagne
-    Lorsque je clique sur "Je démarre mon test"
+    Lorsque je clique sur "Je commence"
     Alors je vois la page d'"eleve" de la campagne
     Lorsque je saisis "Daenerys" dans le champ "Prénom"
     Et je saisis "Targaryen" dans le champ "Nom"
@@ -59,7 +59,7 @@ Fonctionnalité: Campagne d'évaluation
     Lorsque je saisis le code "WINTER"
     Et je clique sur "Accéder au parcours"
     Alors je vois la page de "presentation" de la campagne
-    Lorsque je clique sur "Je démarre mon test"
+    Lorsque je clique sur "Je commence"
     Alors je vois la page de "rejoindre" de la campagne
     Lorsque je saisis la date de naissance 23-10-1986
     Et je clique sur "C'est parti !"
