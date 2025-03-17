@@ -64,7 +64,7 @@ export default class QrocmDepSolutionPanel extends Component {
   }
 
   get solutions() {
-    return jsyaml.safeLoad(this.args.solution);
+    return jsyaml.load(this.args.solution);
   }
 
   get inputCount() {
