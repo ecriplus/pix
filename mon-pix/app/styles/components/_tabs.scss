@@ -1,4 +1,4 @@
-.pix-tabs__tablist {
+.monpix-tabs__tablist {
   position: relative;
   max-width: 100%;
   overflow: hidden;
@@ -19,7 +19,7 @@
   }
 }
 
-.pix-tabs__tab {
+.monpix-tabs__tab {
   display: block;
   flex: 1 1 min-content;
   max-width: calc(100% - 4rem);
@@ -50,7 +50,7 @@
   }
 }
 
-.pix-tabs-tablist__scroll-button {
+.monpix-tabs-tablist__scroll-button {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -116,7 +116,7 @@
 }
 
 @media (max-width: 760px) {
-  .pix-tabs__tab {
+  .monpix-tabs__tab {
     padding: 1rem;
     font-size: 0.875rem;
     line-height: 1.25rem;
