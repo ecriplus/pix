@@ -109,7 +109,7 @@
     "eslint-plugin-mocha": "^10.0.5",
     "eslint-plugin-n": "^17.0.0",
     "eslint-plugin-prettier": "^5.0.0",
-    "eslint-plugin-unicorn": "^56.0.0",
+    "eslint-plugin-unicorn": "^57.0.0",
     "husky": "^9.0.0",
     "lint-staged": "^15.0.0",
     "prettier-plugin-ember-template-tag": "^2.0.4",
