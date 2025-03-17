@@ -886,7 +886,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 2,
               masteryPercentage: 100,
               reachedStage: undefined,
-              flashPixScore: undefined,
             });
             expect(competenceResult2).to.deep.equal({
               id: 'rec2',
@@ -901,7 +900,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 1,
               masteryPercentage: 50,
               reachedStage: undefined,
-              flashPixScore: undefined,
             });
           });
         });
@@ -955,7 +953,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 2,
               masteryPercentage: 100,
               reachedStage: 5,
-              flashPixScore: undefined,
             });
             expect(competenceResult2).to.deep.equal({
               id: 'rec2',
@@ -970,7 +967,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 1,
               masteryPercentage: 50,
               reachedStage: 3,
-              flashPixScore: undefined,
             });
           });
         });
@@ -1038,7 +1034,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 2,
               masteryPercentage: 100,
               reachedStage: 5,
-              flashPixScore: undefined,
             });
             expect(competenceResult2).to.deep.equal({
               id: 'rec2',
@@ -1053,7 +1048,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 1,
               masteryPercentage: 50,
               reachedStage: 4,
-              flashPixScore: undefined,
             });
           });
         });
@@ -1288,7 +1282,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 2,
               masteryPercentage: 100,
               reachedStage: undefined,
-              flashPixScore: undefined,
             });
             expect(competenceResult2).to.deep.equal({
               id: 'rec2',
@@ -1303,7 +1296,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 1,
               masteryPercentage: 50,
               reachedStage: undefined,
-              flashPixScore: undefined,
             });
           });
         });
@@ -1357,7 +1349,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 2,
               masteryPercentage: 100,
               reachedStage: 5,
-              flashPixScore: undefined,
             });
             expect(competenceResult2).to.deep.equal({
               id: 'rec2',
@@ -1372,7 +1363,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 1,
               masteryPercentage: 50,
               reachedStage: 3,
-              flashPixScore: undefined,
             });
           });
         });
@@ -1440,7 +1430,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 2,
               masteryPercentage: 100,
               reachedStage: 5,
-              flashPixScore: undefined,
             });
             expect(competenceResult2).to.deep.equal({
               id: 'rec2',
@@ -1455,7 +1444,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 1,
               masteryPercentage: 50,
               reachedStage: 4,
-              flashPixScore: undefined,
             });
           });
         });

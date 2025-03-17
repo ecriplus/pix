@@ -726,7 +726,6 @@ describe('Acceptance | API | Campaign Participations', function () {
               'area-color': JAFFA_COLOR,
               'area-title': 'DomaineNom1',
               'reached-stage': 0,
-              'flash-pix-score': undefined,
             },
           },
           {
@@ -743,7 +742,6 @@ describe('Acceptance | API | Campaign Participations', function () {
               'area-color': EMERALD_COLOR,
               'area-title': 'DomaineNom2',
               'reached-stage': 2,
-              'flash-pix-score': undefined,
             },
           },
           {
@@ -760,7 +758,6 @@ describe('Acceptance | API | Campaign Participations', function () {
               'area-color': EMERALD_COLOR,
               'area-title': 'DomaineNom2',
               'reached-stage': 1,
-              'flash-pix-score': undefined,
             },
           },
           {

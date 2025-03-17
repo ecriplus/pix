@@ -174,7 +174,6 @@ describe('Unit | Serializer | JSON API | participant-result-serializer', functio
               'tested-skills-count': 2,
               'total-skills-count': 2,
               'validated-skills-count': 1,
-              'flash-pix-score': undefined,
             },
             id: 'C1',
             type: 'competenceResults',
@@ -256,8 +255,6 @@ describe('Unit | Serializer | JSON API | participant-result-serializer', functio
         const json = serializer.serialize(assessmentResult);
 
         // then
-        expect(json.data.attributes).to.have.property('estimated-flash-level', -2.4672347856);
-        expect(json.data.attributes).to.have.property('flash-pix-score', 374.3438957781);
         expect(json.included).to.deep.include({
           type: 'competenceResults',
           id: 'rec1',
@@ -271,7 +268,6 @@ describe('Unit | Serializer | JSON API | participant-result-serializer', functio
             'total-skills-count': 1,
             'tested-skills-count': 0,
             'validated-skills-count': 0,
-            'flash-pix-score': 300.3438957781,
             'reached-stage': undefined,
           },
         });
@@ -288,7 +284,6 @@ describe('Unit | Serializer | JSON API | participant-result-serializer', functio
             'total-skills-count': 2,
             'tested-skills-count': 0,
             'validated-skills-count': 0,
-            'flash-pix-score': 74,
             'reached-stage': undefined,
           },
         });

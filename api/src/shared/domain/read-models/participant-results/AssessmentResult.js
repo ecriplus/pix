@@ -84,16 +84,13 @@ class AssessmentResult {
     });
 
     if (flashScoringResults) {
-      this.estimatedFlashLevel = flashScoringResults.estimatedLevel;
-      this.flashPixScore = flashScoringResults.pixScore;
       this.competenceResults = flashScoringResults.competencesWithPixScore.map(
-        ({ competence, area, pixScore }) =>
+        ({ competence, area }) =>
           new CompetenceResult({
             competence,
             area,
             totalSkillsCount: competence.skillIds.length,
             knowledgeElements: [],
-            flashPixScore: pixScore,
           }),
       );
     }
