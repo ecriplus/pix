@@ -1,10 +1,12 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { fn } from '@ember/helper';
-import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
@@ -306,120 +308,124 @@ export default class DetailsV3 extends Component {
       <h2 class="certification-details-v3__title">
         {{t "pages.certifications.certification.details.v3.questions-list.title"}}
       </h2>
-      <div class="content-text content-text--small">
-        <div class="certification-details-v3-table table-admin">
-          <table>
-            <thead>
-              <tr>
-                <th class="table__column--small">
-                  {{t "pages.certifications.certification.details.v3.questions-list.labels.number"}}
-                </th>
-                <th class="certification-details-v3-table__answered-at-column">
-                  {{t "pages.certifications.certification.details.v3.questions-list.labels.answered-at"}}
-                </th>
-                <th class="certification-details-v3-table__answer-status-column">
-                  {{t "pages.certifications.certification.details.v3.questions-list.labels.answer-status"}}
-                </th>
-                <th class="certification-details-v3-table__competence-column">
-                  {{t "pages.certifications.certification.details.v3.questions-list.labels.competence"}}
-                </th>
-                <th class="certification-details-v3-table__skill-column">
-                  {{t "pages.certifications.certification.details.v3.questions-list.labels.skill"}}
-                </th>
-                <th class="certification-details-v3-table__challenge-id-column">
-                  {{t "pages.certifications.certification.details.v3.questions-list.labels.challenge-id"}}
-                </th>
-                <th>{{t "pages.certifications.certification.details.v3.questions-list.labels.actions"}}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each @details.certificationChallengesForAdministration as |certificationChallenge|}}
-                <tr>
-                  <td>{{certificationChallenge.questionNumber}}</td>
-                  <td>
-                    {{#if certificationChallenge.answeredAt}}
-                      <time>
-                        {{dayjsFormat certificationChallenge.answeredAt "HH:mm:ss"}}
-                      </time>
-                    {{else}}
-                      -
-                    {{/if}}
-                  </td>
-                  <td>
-                    {{#if (this.shouldDisplayAnswerStatus certificationChallenge)}}
-                      <PixTag @color={{this.answerStatusColor certificationChallenge.answerStatus}}>
-                        {{t (this.answerStatusLabel certificationChallenge.answerStatus)}}
-                      </PixTag>
-                    {{else}}
-                      -
-                    {{/if}}
-                  </td>
-                  <td>{{certificationChallenge.competenceIndex}} {{certificationChallenge.competenceName}}</td>
-                  <td>{{certificationChallenge.skillName}}</td>
-                  <td class="certification-details-v3-table__challenge-informations-cell">
-                    <a
-                      href={{this.externalUrlForPixEditor certificationChallenge.id}}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={{t
-                        "pages.certifications.certification.details.v3.questions-list.actions.informations.extra-information"
-                      }}
-                    >
-                      {{certificationChallenge.id}}
-                      <PixIcon @name="openNew" />
-                    </a>
-                  </td>
-                  <td class="certification-details-v3-table__challenge-action-cell">
-                    <a
-                      href={{this.externalUrlForPreviewChallenge certificationChallenge.id}}
-                      target="_blank"
-                      title={{t
-                        "pages.certifications.certification.details.v3.questions-list.actions.challenge-preview.label"
-                      }}
-                      aria-label={{t
-                        "pages.certifications.certification.details.v3.questions-list.actions.challenge-preview.extra-information"
-                      }}
-                      rel="noopener noreferrer"
-                    >
-                      <PixIcon @name="eye" @plainIcon={{true}} />
-                    </a>
+      <PixTable
+        @variant="primary"
+        @caption={{t "pages.certifications.certification.details.v3.questions-list.caption"}}
+        @data={{@details.certificationChallengesForAdministration}}
+      >
+        <:columns as |certificationChallenge context|>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.certifications.certification.details.v3.questions-list.labels.number"}}
+            </:header>
+            <:cell>
+              {{certificationChallenge.questionNumber}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.certifications.certification.details.v3.questions-list.labels.answered-at"}}
+            </:header>
+            <:cell>
+              {{#if certificationChallenge.answeredAt}}
+                <time>
+                  {{dayjsFormat certificationChallenge.answeredAt "HH:mm:ss"}}
+                </time>
+              {{else}}
+                -
+              {{/if}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.certifications.certification.details.v3.questions-list.labels.answer-status"}}
+            </:header>
+            <:cell>
+              {{#if (this.shouldDisplayAnswerStatus certificationChallenge)}}
+                <PixTag @color={{this.answerStatusColor certificationChallenge.answerStatus}}>
+                  {{t (this.answerStatusLabel certificationChallenge.answerStatus)}}
+                </PixTag>
+              {{else}}
+                -
+              {{/if}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.certifications.certification.details.v3.questions-list.labels.competence"}}
+            </:header>
+            <:cell>
+              {{certificationChallenge.competenceIndex}}
+              {{certificationChallenge.competenceName}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.certifications.certification.details.v3.questions-list.labels.skill"}}
+            </:header>
+            <:cell>
+              {{certificationChallenge.skillName}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="certification-details-v3-table__challenge-information-cell">
+            <:header>
+              {{t "pages.certifications.certification.details.v3.questions-list.labels.challenge-id"}}
+            </:header>
+            <:cell>
+              <a
+                href={{this.externalUrlForPixEditor certificationChallenge.id}}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={{t
+                  "pages.certifications.certification.details.v3.questions-list.actions.informations.extra-information"
+                }}
+              >
+                {{certificationChallenge.id}}
+                <PixIcon @name="openNew" />
+              </a>
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="certification-details-v3-table__challenge-action-cell">
+            <:header>
+              {{t "pages.certifications.certification.details.v3.questions-list.labels.actions"}}
+            </:header>
+            <:cell>
+              <a
+                href={{this.externalUrlForPreviewChallenge certificationChallenge.id}}
+                target="_blank"
+                title={{t
+                  "pages.certifications.certification.details.v3.questions-list.actions.challenge-preview.label"
+                }}
+                aria-label={{t
+                  "pages.certifications.certification.details.v3.questions-list.actions.challenge-preview.extra-information"
+                }}
+                rel="noopener noreferrer"
+              >
+                <PixIcon @name="eye" @plainIcon={{true}} />
+              </a>
+              {{#if certificationChallenge.validatedLiveAlert}}
+                <PixIconButton
+                  @ariaLabel={{t
+                    "pages.certifications.certification.details.v3.questions-list.actions.display-live-alert.extra-information"
+                  }}
+                  @triggerAction={{fn this.openModal certificationChallenge}}
+                  @iconName="warning"
+                />
+              {{/if}}
 
-                    {{#if certificationChallenge.validatedLiveAlert}}
-                      <button
-                        title={{t
-                          "pages.certifications.certification.details.v3.questions-list.actions.display-live-alert.label"
-                        }}
-                        aria-label={{t
-                          "pages.certifications.certification.details.v3.questions-list.actions.display-live-alert.extra-information"
-                        }}
-                        type="button"
-                        {{on "click" (fn this.openModal certificationChallenge)}}
-                      >
-                        <PixIcon @name="warning" />
-                      </button>
-                    {{/if}}
-
-                    {{#if (this.shouldDisplayAnswerValueIcon certificationChallenge)}}
-                      <button
-                        title={{t
-                          "pages.certifications.certification.details.v3.questions-list.actions.display-answer.label"
-                        }}
-                        aria-label={{t
-                          "pages.certifications.certification.details.v3.questions-list.actions.display-answer.extra-information"
-                        }}
-                        type="button"
-                        {{on "click" (fn this.openModal certificationChallenge)}}
-                      >
-                        <PixIcon @name="chat" />
-                      </button>
-                    {{/if}}
-                  </td>
-                </tr>
-              {{/each}}
-            </tbody>
-          </table>
-        </div>
-      </div>
+              {{#if (this.shouldDisplayAnswerValueIcon certificationChallenge)}}
+                <PixIconButton
+                  @ariaLabel={{t
+                    "pages.certifications.certification.details.v3.questions-list.actions.display-answer.extra-information"
+                  }}
+                  @triggerAction={{fn this.openModal certificationChallenge}}
+                  @iconName="chat"
+                />
+              {{/if}}
+            </:cell>
+          </PixTableColumn>
+        </:columns>
+      </PixTable>
     </section>
 
     <PixModal

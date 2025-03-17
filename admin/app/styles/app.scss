@@ -5,7 +5,6 @@
 @use 'globals/page-details' as *;
 @use 'globals/tables' as *;
 @use 'globals/table-admin' as *;
-@use 'globals/toggle' as *;
 
 /* pages */
 @use 'login' as *;
@@ -70,7 +69,6 @@
 @use 'components/organizations/places' as *;
 @use 'components/organizations/places-lot-creation-form' as *;
 @use 'components/participation-row' as *;
-@use 'components/publish-session-button' as *;
 @use 'components/sessions/jury-comment' as *;
 @use 'components/smart-random-simulator/current-challenge' as *;
 @use 'components/smart-random-simulator/previous-challenges' as *;

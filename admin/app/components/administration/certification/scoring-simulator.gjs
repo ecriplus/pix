@@ -1,7 +1,8 @@
-import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
@@ -118,27 +119,30 @@ export default class ScoringSimulator extends Component {
     </AdministrationBlockLayout>
 
     {{#if this.simulatorReport.data.attributes.competences}}
-      <PixBlock class="scoring-simulator__competences">
-        <table
-          aria-label="{{t 'pages.administration.certification.scoring-simulator.table.label'}}"
-          class="table-admin"
-        >
-          <thead class="scoring-simulator-competences-table__header">
-            <tr>
-              <th scope="col">{{t "pages.administration.certification.scoring-simulator.table.headers.competence"}}</th>
-              <th scope="col">{{t "pages.administration.certification.scoring-simulator.table.headers.level"}}</th>
-            </tr>
-          </thead>
-          <tbody class="scoring-simulator-competences-table__body">
-            {{#each this.simulatorReport.data.attributes.competences as |competence|}}
-              <tr>
-                <th scope="row">{{competence.competenceCode}}</th>
-                <td>{{competence.level}}</td>
-              </tr>
-            {{/each}}
-          </tbody>
-        </table>
-      </PixBlock>
+      <PixTable
+        @variant="primary"
+        @caption={{t "pages.administration.certification.scoring-simulator.table.label"}}
+        @data={{this.simulatorReport.data.attributes.competences}}
+      >
+        <:columns as |competence context|>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.administration.certification.scoring-simulator.table.headers.competence"}}
+            </:header>
+            <:cell>
+              {{competence.competenceCode}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.administration.certification.scoring-simulator.table.headers.level"}}
+            </:header>
+            <:cell>
+              {{competence.level}}
+            </:cell>
+          </PixTableColumn>
+        </:columns>
+      </PixTable>
     {{/if}}
   </template>
 }

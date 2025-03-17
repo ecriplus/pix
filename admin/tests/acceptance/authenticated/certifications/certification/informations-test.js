@@ -101,7 +101,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
       assert.dom(within(table).getByRole('columnheader', { name: 'Compétence' })).exists();
       assert.dom(within(table).getByRole('columnheader', { name: 'Score' })).exists();
       assert.dom(within(table).getByRole('columnheader', { name: 'Niveau' })).exists();
-      assert.dom(within(rows[1]).getByRole('rowheader', { name: '1.1' })).exists();
+      assert.dom(within(rows[1]).getByRole('cell', { name: '1.1' })).exists();
       assert.dom(within(rows[1]).getByRole('cell', { name: '10' })).exists();
       assert.dom(within(rows[1]).getByRole('cell', { name: '4' })).exists();
     });

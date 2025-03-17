@@ -84,7 +84,6 @@ export default class ToBePublishedSessionsList extends Component {
               <:cell>
                 <PixButton
                   @triggerAction={{fn this.showConfirmModal row}}
-                  class="publish-session-button"
                   @size="small"
                   aria-label={{t
                     "pages.sessions.table.to-be-published.cell.publish-button.aria-label"
