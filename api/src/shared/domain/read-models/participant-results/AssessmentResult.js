@@ -23,7 +23,6 @@ class AssessmentResult {
     reachedStage,
     badgeResultsDTO,
     stages,
-    flashScoringResults,
   }) {
     const { knowledgeElements, sharedAt, assessmentCreatedAt } = participationResults;
 
@@ -82,18 +81,6 @@ class AssessmentResult {
       isShared: this.isShared,
       campaignType,
     });
-
-    if (flashScoringResults) {
-      this.competenceResults = flashScoringResults.competencesWithPixScore.map(
-        ({ competence, area }) =>
-          new CompetenceResult({
-            competence,
-            area,
-            totalSkillsCount: competence.skillIds.length,
-            knowledgeElements: [],
-          }),
-      );
-    }
   }
 
   _computeMasteryRate(masteryRate, isShared, totalSkillsCount, validatedSkillsCount) {

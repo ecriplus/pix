@@ -30,7 +30,6 @@ import * as campaignRepository from '../../../campaign/infrastructure/repositori
  */
 const get = async function ({ userId, campaignId, badges, reachedStage, stages, locale }) {
   const participationResults = await _getParticipationResults(userId, campaignId, locale);
-  let flashScoringResults;
   const campaignDTO = await _getCampaignDTO(campaignId);
   const isCampaignMultipleSendings = _isCampaignMultipleSendings(campaignDTO);
   const isCampaignArchived = _isCampaignArchived(campaignDTO);
@@ -62,7 +61,6 @@ const get = async function ({ userId, campaignId, badges, reachedStage, stages, 
     isCampaignArchived,
     isCampaignDeleted,
     campaignType: campaignDTO.type,
-    flashScoringResults,
     isTargetProfileResetAllowed,
   });
 };
