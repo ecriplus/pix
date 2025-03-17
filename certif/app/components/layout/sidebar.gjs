@@ -61,7 +61,11 @@ export default class Sidebar extends Component {
   }
 
   <template>
-    <PixNavigation @navigationAriaLabel={{t 'navigation.sidebar.extra-information'}} @menuLabel='Menu'>
+    <PixNavigation
+      @navigationAriaLabel={{t 'navigation.sidebar.extra-information'}}
+      @openLabel={{t 'navigation.sidebar.menu-labels.open'}}
+      @closeLabel={{t 'navigation.sidebar.menu-labels.close'}}
+    >
       <:brand>
         <LinkTo @route='authenticated'>
           <img src='/certif-logo.svg' alt={{t 'common.home-page'}} />
