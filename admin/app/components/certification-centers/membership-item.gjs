@@ -62,6 +62,11 @@ export default class CertificationCentersMembershipItemComponent extends Compone
           @onRoleSelected={{this.onRoleSelected}}
         />
       </td>
+      <td class="member-information">
+        {{#if @certificationCenterMembership.lastAccessedAt}}
+          {{dayjsFormat @certificationCenterMembership.lastAccessedAt "DD-MM-YYYY - HH:mm:ss"}}
+        {{/if}}
+      </td>
       <td>
         {{dayjsFormat @certificationCenterMembership.createdAt "DD-MM-YYYY - HH:mm:ss"}}
       </td>

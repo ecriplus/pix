@@ -15,12 +15,13 @@ import MembershipItem from './membership-item';
           <thead>
             <tr>
               <th class="table__column table__column--id">ID Utilisateur</th>
-              <th class="table__column table__column--wide">Prénom</th>
-              <th class="table__column table__column--wide">Nom</th>
+              <th class="table__column">Prénom</th>
+              <th class="table__column">Nom</th>
               <th class="table__column table__column--wide">Adresse e-mail</th>
-              <th class="table__column table__column--wide">Rôle</th>
-              <th class="table__column table__column--wide">Date de rattachement</th>
-              <th class="table__column table__column--wide">Actions</th>
+              <th class="table__column table__column--medium">Rôle</th>
+              <th class="table__column">Dernier accès</th>
+              <th class="table__column">Date de rattachement</th>
+              <th class="table__column">Actions</th>
             </tr>
           </thead>
 

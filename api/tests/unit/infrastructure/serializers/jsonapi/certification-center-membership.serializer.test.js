@@ -42,6 +42,7 @@ describe('Unit | Serializer | JSONAPI | certification-center-membership-serializ
             attributes: {
               'created-at': certificationCenterMembership.createdAt,
               role: certificationCenterMembership.role,
+              'last-accessed-at': certificationCenterMembership.lastAccessedAt,
             },
             relationships: {
               'certification-center': {

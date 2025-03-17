@@ -33,6 +33,7 @@ module('Integration | Component |  certification-centers/membership-item', funct
       user,
       role: 'MEMBER',
       createdAt: new Date('2023-09-13T10:47:07Z'),
+      lastAccessedAt: new Date('2023-12-30T15:21:09Z'),
     });
 
     const disableCertificationCenterMembership = sinon.stub();
@@ -48,7 +49,10 @@ module('Integration | Component |  certification-centers/membership-item', funct
     );
 
     // then
-    const expectedDate = dayjs(certificationCenterMembership.createdAt).format('DD-MM-YYYY - HH:mm:ss');
+    const expectedLastAccessedAtDate = dayjs(certificationCenterMembership.lastAccessedAt).format(
+      'DD-MM-YYYY - HH:mm:ss',
+    );
+    const expectedCreationDate = dayjs(certificationCenterMembership.createdAt).format('DD-MM-YYYY - HH:mm:ss');
 
     assert
       .dom(screen.getByLabelText('Informations du membre Jojo La Gringue'))
@@ -57,7 +61,10 @@ module('Integration | Component |  certification-centers/membership-item', funct
     assert.dom(screen.getByLabelText('Informations du membre Jojo La Gringue')).containsText(user.lastName);
     assert.dom(screen.getByLabelText('Informations du membre Jojo La Gringue')).containsText(user.email);
     assert.dom(screen.getByLabelText('Informations du membre Jojo La Gringue')).containsText('Membre');
-    assert.dom(screen.getByLabelText('Informations du membre Jojo La Gringue')).containsText(expectedDate);
+    assert
+      .dom(screen.getByLabelText('Informations du membre Jojo La Gringue'))
+      .containsText(expectedLastAccessedAtDate);
+    assert.dom(screen.getByLabelText('Informations du membre Jojo La Gringue')).containsText(expectedCreationDate);
     assert.dom(screen.getByRole('button', { name: 'Modifier le rôle' })).exists();
     assert.dom(screen.getByRole('button', { name: 'Désactiver' })).exists();
   });
