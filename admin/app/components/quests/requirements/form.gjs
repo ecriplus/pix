@@ -1,6 +1,7 @@
 import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
+import PageTitle from '../../ui/page-title';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -35,8 +36,10 @@ export default class RequirementForm extends Component {
   }
 
   <template>
+    <PageTitle>
+      <:title>Créer ou Éditer un "requirement" de quête</:title>
+    </PageTitle>
     <PixBlock @variant="admin" class="quest-requirement-form">
-      <h1>Créer ou Éditer un "requirement" de quête</h1>
       <PixSelect
         @onChange={{this.updateRequirementType}}
         @value={{this.selectedRequirementType}}

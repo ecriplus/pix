@@ -3,6 +3,7 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
+import PageTitle from '../ui/page-title';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
@@ -144,8 +145,10 @@ export default class QuestForm extends Component {
   }
 
   <template>
+    <PageTitle>
+      <:title>Création de la quête</:title>
+    </PageTitle>
     <PixBlock @variant="admin" class="quest-button-edition">
-      <h1>Création de la quête</h1>
       <div class="quest-button-edition__form">
         <PixInput onchange={{this.updateName}} required={{true}}>
           <:label>Nom de la quête</:label>
