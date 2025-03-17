@@ -63,7 +63,7 @@ export default class MembersTable extends Component {
             <:cell>
               {{#if member.isReferer}}
                 <div class='members-list-item__container'>
-                  <PixTag class='members-list-item__tag' @color='primary'>
+                  <PixTag class='members-list-item__tag' @color='purple'>
                     {{t 'pages.team.pix-referer'}}
                   </PixTag>
                   <PixTooltip class='members-list-item__tooltip' @isWide='true' @position='left'>
