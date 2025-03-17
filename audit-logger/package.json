@@ -54,7 +54,7 @@
     "eslint-plugin-import-x": "^4.0.0",
     "eslint-plugin-mocha": "^10.0.5",
     "eslint-plugin-knex": "^0.2.2",
-    "eslint-plugin-unicorn": "^56.0.0",
+    "eslint-plugin-unicorn": "^57.0.0",
     "eslint-plugin-n": "^17.16.2",
     "eslint-plugin-prettier": "^5.2.3",
     "globals": "^16.0.0",
