@@ -18,6 +18,7 @@ export default class PasswordResetDemandForm extends Component {
   @service requestManager;
   @service storage;
   @service url;
+  @service router;
 
   @tracked globalError = this.errors.hasErrors && this.errors.shift();
   @tracked isLoading = false;
@@ -25,7 +26,7 @@ export default class PasswordResetDemandForm extends Component {
 
   constructor() {
     super(...arguments);
-    this.email = this.storage.getLogin();
+    this.email = this.storage.getLogin() || this.router.currentRoute?.queryParams?.email;
   }
 
   validation = new FormValidation({
