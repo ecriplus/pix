@@ -128,10 +128,16 @@ async function computeLevelUpInformation({
   const knowledgeElementsForCompetenceBefore = knowledgeElementsBefore.filter(
     (knowledgeElement) => knowledgeElement.competenceId === competenceId,
   );
+  const knowledgeElementsAddedForCompetence = knowledgeElementsAdded.filter(
+    (knowledgeElement) => knowledgeElement.competenceId === competenceId,
+  );
   const knowledgeElementsForCompetenceAfter = [
-    ...knowledgeElementsAdded.filter((knowledgeElement) => knowledgeElement.competenceId === competenceId),
+    ...knowledgeElementsAddedForCompetence,
     ...knowledgeElementsForCompetenceBefore,
   ];
+  const uniqKnowledgeElementsForCompetenceAfter = knowledgeElementsForCompetenceAfter.filter(
+    (ke, index) => knowledgeElementsForCompetenceAfter.findIndex(({ skillId }) => skillId === ke.skillId) === index,
+  );
   return scorecardService.computeLevelUpInformation({
     answer: answerSaved,
     userId,
@@ -139,7 +145,7 @@ async function computeLevelUpInformation({
     competence,
     competenceEvaluationForCompetence,
     knowledgeElementsForCompetenceBefore,
-    knowledgeElementsForCompetenceAfter,
+    knowledgeElementsForCompetenceAfter: uniqKnowledgeElementsForCompetenceAfter,
   });
 }
 
