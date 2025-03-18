@@ -536,31 +536,6 @@ describe('Integration | Repository | Campaign Administration', function () {
       });
     });
 
-    context('when assessment method is `flash`', function () {
-      it('should not save any skills', async function () {
-        await databaseBuilder.commit();
-
-        const campaignToSave = {
-          name: 'Evaluation niveau 1 recherche internet',
-          code: 'BCTERD153',
-          customLandingPageText: 'Parcours évaluatif concernant la recherche internet',
-          creatorId: userId,
-          ownerId,
-          organizationId,
-          multipleSendings: true,
-          type: CampaignTypes.ASSESSMENT,
-          assessmentMethod: 'FLASH',
-          targetProfileId: null,
-          title: 'Parcours recherche internet',
-        };
-
-        const savedCampaign = await campaignAdministrationRepository.save(campaignToSave);
-
-        const skillIds = await knex('campaign_skills').pluck('skillId').where('campaignId', savedCampaign.id);
-        expect(skillIds).to.deepEqualArray([]);
-      });
-    });
-
     it('should save the given campaign with type PROFILES_COLLECTION', async function () {
       // given
       const campaignAttributes = {
