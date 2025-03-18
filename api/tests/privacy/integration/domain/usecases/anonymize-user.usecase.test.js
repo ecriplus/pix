@@ -43,7 +43,10 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
     const userId = user.id;
     const anonymizedByUserId = admin.id;
 
-    databaseBuilder.factory.buildCertificationCenterMembership({ userId });
+    databaseBuilder.factory.buildCertificationCenterMembership({
+      userId,
+      lastAccessedAt: new Date('2023-03-23T23:23:23Z'),
+    });
 
     const managingStudentsOrga = databaseBuilder.factory.buildOrganization({ isManagingStudents: true });
     databaseBuilder.factory.buildOrganizationLearner({ userId, organizationId: managingStudentsOrga.id });
@@ -102,6 +105,7 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
       .where({ userId })
       .whereNotNull('disabledAt');
     expect(disabledCertificationCenterMemberships).to.have.lengthOf(1);
+    expect(disabledCertificationCenterMemberships[0].lastAccessedAt.toISOString()).to.equal('2023-03-01T00:00:00.000Z');
 
     const organizationLearners = await knex('organization-learners').where({ userId });
     expect(organizationLearners).to.have.lengthOf(0);

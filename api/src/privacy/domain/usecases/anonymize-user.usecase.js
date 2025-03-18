@@ -62,6 +62,8 @@ const anonymizeUser = withTransaction(async function ({
 
   await _anonymizeLastUserApplicationConnections(lastUserApplicationConnectionsRepository, userId);
 
+  await _anonymizeCertificationCenterMembershipsLastAccessedAt(certificationCenterMembershipRepository, userId);
+
   await _anonymizeUserLogin({ userId, userLoginRepository });
 
   await _anonymizeUser({ user, anonymizedByUserId, userRepository });
@@ -114,6 +116,20 @@ async function _anonymizeLastUserApplicationConnections(lastUserApplicationConne
   for (const lastUserApplicationConnection of lastUserApplicationConnections) {
     const anonymized = lastUserApplicationConnection.anonymize();
     await lastUserApplicationConnectionsRepository.upsert(anonymized);
+  }
+}
+
+async function _anonymizeCertificationCenterMembershipsLastAccessedAt(certificationCenterMembershipRepository, userId) {
+  const userCertificationCenterMemberships = await certificationCenterMembershipRepository.findByUserId(userId);
+
+  for (const certificationCenterMembership of userCertificationCenterMemberships) {
+    const anonymizedCertificationCenterMembershipLastAccessedAt = anonymizeGeneralizeDate(
+      certificationCenterMembership.lastAccessedAt,
+    );
+    await certificationCenterMembershipRepository.updateLastAccessedAt({
+      certificationCenterMembershipId: certificationCenterMembership.id,
+      lastAccessedAt: anonymizedCertificationCenterMembershipLastAccessedAt,
+    });
   }
 }
 
