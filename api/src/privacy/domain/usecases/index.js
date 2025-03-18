@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 
 import * as authenticationMethodRepository from '../../../identity-access-management/infrastructure/repositories/authentication-method.repository.js';
 import { userAnonymizedEventLoggingJobRepository } from '../../../identity-access-management/infrastructure/repositories/jobs/user-anonymized-event-logging-job-repository.js';
+import { lastUserApplicationConnectionsRepository } from '../../../identity-access-management/infrastructure/repositories/last-user-application-connections.repository.js';
 import { refreshTokenRepository } from '../../../identity-access-management/infrastructure/repositories/refresh-token.repository.js';
 import { resetPasswordDemandRepository } from '../../../identity-access-management/infrastructure/repositories/reset-password-demand.repository.js';
 import * as userRepository from '../../../identity-access-management/infrastructure/repositories/user.repository.js';
@@ -24,6 +25,7 @@ const repositories = {
   certificationCenterMembershipRepository,
   learnersApiRepository,
   membershipRepository,
+  lastUserApplicationConnectionsRepository,
   organizationLearnerRepository,
   refreshTokenRepository,
   resetPasswordDemandRepository,

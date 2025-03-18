@@ -26,6 +26,9 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
     disables all user’s certification center memberships,
     disables all user’s student prescriptions,
     anonymizes user login info,
+    anonymizes last user application connections lastLoggedAt,
+    anonymizes membership lastAccessedAt,
+    anonymizes certification center membership lastAccessedAt,
     and anonymizes user`, async function () {
     // given
     const user = databaseBuilder.factory.buildUser({
@@ -46,6 +49,12 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
     databaseBuilder.factory.buildCertificationCenterMembership({
       userId,
       lastAccessedAt: new Date('2023-03-23T23:23:23Z'),
+    });
+
+    databaseBuilder.factory.buildLastUserApplicationConnection({
+      userId,
+      application: 'orga',
+      lastLoggedAt: new Date('2023-03-23T23:23:23Z'),
     });
 
     const managingStudentsOrga = databaseBuilder.factory.buildOrganization({ isManagingStudents: true });
@@ -130,6 +139,9 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
     expect(anonymizedUser.lastTermsOfServiceValidatedAt).to.be.null;
     expect(anonymizedUser.lastPixCertifTermsOfServiceValidatedAt).to.be.null;
     expect(anonymizedUser.lastDataProtectionPolicySeenAt).to.be.null;
+
+    const lastUserApplicationConnection = await knex('last-user-application-connections').where({ userId }).first();
+    expect(lastUserApplicationConnection.lastLoggedAt.toISOString()).to.equal('2023-03-01T00:00:00.000Z');
   });
 
   context('when anonymizedByUserId does not exist', function () {
