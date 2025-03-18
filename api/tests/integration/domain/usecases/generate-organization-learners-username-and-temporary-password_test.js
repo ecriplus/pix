@@ -1,7 +1,3 @@
-import {
-  ORGANIZATION_LEARNER_DOES_NOT_BELONG_TO_ORGANIZATION_CODE,
-  ORGANIZATION_LEARNER_WITHOUT_USERNAME_CODE,
-} from '../../../../lib/domain/constants/generate-organization-learners-username-and-temporary-password-errors.js';
 import * as userReconciliationService from '../../../../lib/domain/services/user-reconciliation-service.js';
 import { generateOrganizationLearnersUsernameAndTemporaryPassword } from '../../../../lib/domain/usecases/generate-organization-learners-username-and-temporary-password.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
@@ -251,7 +247,7 @@ describe('Integration | UseCases | generate organization learners username and t
 
         // then
         expect(error).to.be.instanceOf(UserNotAuthorizedToUpdatePasswordError);
-        expect(error.code).to.equal(ORGANIZATION_LEARNER_DOES_NOT_BELONG_TO_ORGANIZATION_CODE);
+        expect(error.code).to.equal('ORGANIZATION_LEARNER_DOES_NOT_BELONG_TO_ORGANIZATION');
       });
     });
 
@@ -293,7 +289,7 @@ describe('Integration | UseCases | generate organization learners username and t
 
           // then
           expect(error).to.be.instanceOf(UserNotAuthorizedToUpdatePasswordError);
-          expect(error.code).to.equal(ORGANIZATION_LEARNER_WITHOUT_USERNAME_CODE);
+          expect(error.code).to.equal('ORGANIZATION_LEARNER_WITHOUT_USERNAME');
         });
       });
     });
