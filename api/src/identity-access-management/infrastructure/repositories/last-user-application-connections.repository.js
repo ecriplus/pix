@@ -1,4 +1,6 @@
 import { knex } from '../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { LastUserApplicationConnection } from '../../domain/models/LastUserApplicationConnection.js';
 const TABLE_NAME = 'last-user-application-connections';
 
 async function upsert({ userId, application, lastLoggedAt }) {
@@ -8,4 +10,20 @@ async function upsert({ userId, application, lastLoggedAt }) {
     .merge({ lastLoggedAt });
 }
 
-export const lastUserApplicationConnectionsRepository = { upsert };
+async function findByUserId(userId) {
+  const knexConn = DomainTransaction.getConnection();
+  const lastUserApplicationConnections = await knexConn(TABLE_NAME).where({ userId });
+
+  return lastUserApplicationConnections.map(_toDomain);
+}
+
+export const lastUserApplicationConnectionsRepository = { upsert, findByUserId };
+
+function _toDomain(lastUserApplicationConnection) {
+  return new LastUserApplicationConnection({
+    id: lastUserApplicationConnection.id,
+    userId: lastUserApplicationConnection.userId,
+    application: lastUserApplicationConnection.application,
+    lastLoggedAt: lastUserApplicationConnection.lastLoggedAt,
+  });
+}

@@ -70,4 +70,47 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       });
     });
   });
+
+  describe('#findByUserId', function () {
+    it('returns the last user application connections', async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser().id;
+      const lastLoggedAt = new Date();
+
+      await databaseBuilder.factory.buildLastUserApplicationConnection({
+        id: 1,
+        userId,
+        application: 'orga',
+        lastLoggedAt,
+      });
+
+      await databaseBuilder.factory.buildLastUserApplicationConnection({
+        id: 2,
+        userId,
+        application: 'admin',
+        lastLoggedAt,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const lastUserApplicationConnections = await lastUserApplicationConnectionsRepository.findByUserId(userId);
+
+      // then
+      expect(lastUserApplicationConnections).to.have.deep.members([
+        {
+          id: 1,
+          userId,
+          application: 'orga',
+          lastLoggedAt,
+        },
+        {
+          id: 2,
+          userId,
+          application: 'admin',
+          lastLoggedAt,
+        },
+      ]);
+    });
+  });
 });
