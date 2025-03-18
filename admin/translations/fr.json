@@ -442,6 +442,11 @@
           "title": "Fonctionnalités"
         },
         "parent-organization": "Organisation mère"
+      },
+      "list-items": {
+        "table": {
+          "caption": "Liste des organisations. Contient l'identifiant, le nom, de type et l'identifiant externe de l'organisation."
+        }
       }
     },
     "users": {

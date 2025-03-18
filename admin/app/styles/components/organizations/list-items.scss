@@ -1,4 +1,8 @@
-.organization-list {
+.organizations-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-4x);
+
   &__archived-organizations-toggle {
     display: flex;
     justify-content: flex-end;
