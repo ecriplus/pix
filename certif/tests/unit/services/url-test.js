@@ -285,7 +285,7 @@ module('Unit | Service | url', function (hooks) {
   });
 
   module('#invigilatorDocumentationUrl', function () {
-    test('should return the pix companion documentation url', function (assert) {
+    test('should return the invigilator documentation url', function (assert) {
       // given
       const service = this.owner.lookup('service:url');
 

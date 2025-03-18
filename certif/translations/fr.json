@@ -559,7 +559,7 @@
         "information": "Attention, assurez-vous que tous les candidats aient terminé leur test avant de quitter la surveillance. Pour reprendre la surveillance de cette session, vous devrez entrer à nouveau son numéro de session et son mot de passe.",
         "invigilator": "Surveillant(s)",
         "invigilator-documentation": {
-          "link": "Documentation du rôle de surveillant",
+          "link": "Documentation sur la gestion des signalements",
           "message": "Important : Les problèmes techniques liés aux questions doivent uniquement être gérés pendant le test depuis l’interface du candidat et l’Espace Surveillant (ces signalements ne pourront pas être pris en compte a posteriori)."
         },
         "invigilator-kit": {

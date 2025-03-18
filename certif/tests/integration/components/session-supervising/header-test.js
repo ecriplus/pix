@@ -176,7 +176,7 @@ module('Integration | Component | SessionSupervising::Header', function (hooks) 
     assert
       .dom(
         screen.getByRole('link', {
-          name: 'Documentation du rôle de surveillant Ouverture dans une nouvelle fenêtre',
+          name: 'Documentation sur la gestion des signalements Ouverture dans une nouvelle fenêtre',
         }),
       )
       .hasAttribute('href', 'https://cloud.pix.fr/s/S5LHayrjbM4Zn5f');
