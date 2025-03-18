@@ -1,5 +1,6 @@
 import * as targetProfileApi from '../../../../../../src/prescription/target-profile/application/api/target-profile-api.js';
 import { TargetProfile } from '../../../../../../src/prescription/target-profile/application/api/TargetProfile.js';
+import { TargetProfileSkill } from '../../../../../../src/prescription/target-profile/application/api/TargetProfileSkill.js';
 import { TargetProfileForSpecifier } from '../../../../../../src/prescription/target-profile/domain/read-models/TargetProfileForSpecifier.js';
 import { usecases } from '../../../../../../src/prescription/target-profile/domain/usecases/index.js';
 import { catchErr, expect, sinon } from '../../../../../test-helper.js';
@@ -83,6 +84,37 @@ describe('Unit | API | TargetProfile', function () {
 
       // then
       expect(result).to.have.lengthOf(0);
+    });
+  });
+
+  describe('#findSkillsByTargetProfileIds', function () {
+    it('should return empty array if no skill found', async function () {
+      const findSkillsByTargetProfileIdsStub = sinon.stub(usecases, 'findSkillsByTargetProfileIds');
+      findSkillsByTargetProfileIdsStub.rejects();
+      findSkillsByTargetProfileIdsStub.withArgs({ targetProfileIds: ['targetProfileId'] }).resolves([]);
+
+      // when
+      const result = await targetProfileApi.findSkillsByTargetProfileIds(['targetProfileId']);
+
+      // then
+      expect(result).to.have.lengthOf(0);
+    });
+
+    it('should return an array of TargetProfileSkill', async function () {
+      const findSkillsByTargetProfileIdsStub = sinon.stub(usecases, 'findSkillsByTargetProfileIds');
+      findSkillsByTargetProfileIdsStub.rejects();
+      findSkillsByTargetProfileIdsStub
+        .withArgs({ targetProfileIds: ['targetProfileId'] })
+        .resolves([domainBuilder.buildSkill({ id: 'monSkillId', difficulty: 18 })]);
+
+      // when
+      const result = await targetProfileApi.findSkillsByTargetProfileIds(['targetProfileId']);
+
+      // then
+      expect(result).to.have.lengthOf(1);
+      expect(result[0]).instanceOf(TargetProfileSkill);
+      expect(result[0].id).equals('monSkillId');
+      expect(result[0].difficulty).equals(18);
     });
   });
 });
