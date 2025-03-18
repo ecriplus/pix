@@ -25,12 +25,17 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
     disables all user’s organization memberships,
     disables all user’s certification center memberships,
     disables all user’s student prescriptions,
-    anonymizes user login info
+    anonymizes user login info,
     and anonymizes user`, async function () {
     // given
-    const user = databaseBuilder.factory.buildUser.withMembership({
+    const user = databaseBuilder.factory.buildUser({
       createdAt: new Date('2012-12-12T12:12:12Z'),
       updatedAt: new Date('2023-03-23T23:23:23Z'),
+    });
+
+    databaseBuilder.factory.buildMembership({
+      userId: user.id,
+      lastAccessedAt: new Date('2023-03-23T23:23:23Z'),
     });
 
     const admin = databaseBuilder.factory.buildUser.withRole();
@@ -87,6 +92,7 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
     expect(enabledMemberships).to.have.lengthOf(0);
     const disabledMemberships = await knex('memberships').where({ userId }).whereNotNull('disabledAt');
     expect(disabledMemberships).to.have.lengthOf(1);
+    expect(disabledMemberships[0].lastAccessedAt.toISOString()).to.equal('2023-03-01T00:00:00.000Z');
 
     const enabledCertificationCenterMemberships = await knex('certification-center-memberships')
       .where({ userId })
