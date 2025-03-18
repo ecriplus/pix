@@ -66,8 +66,11 @@ const findSkillsByIds = async function ({ targetProfileIds, dependencies = { ski
   const knexConn = DomainTransaction.getConnection();
 
   const cappedTubes = await knexConn('target-profile_tubes')
-    .select('tubeId', 'level')
+    .select('tubeId')
+    .max('level as level')
+    .groupBy('tubeId')
     .whereIn('targetProfileId', targetProfileIds);
+
   const skillData = [];
   for (const cappedTube of cappedTubes) {
     const allLevelSkills = await dependencies.skillRepository.findActiveByTubeId(cappedTube.tubeId);
