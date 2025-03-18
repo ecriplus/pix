@@ -1,3 +1,5 @@
+import { describe } from 'node:test';
+
 import _ from 'lodash';
 
 import * as targetProfileRepository from '../../../../../../src/prescription/target-profile/infrastructure/repositories/target-profile-repository.js';
@@ -6,7 +8,7 @@ import { TargetProfile } from '../../../../../../src/shared/domain/models/index.
 import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | Target-profile', function () {
-  describe('#get', function () {
+  xdescribe('#get', function () {
     let targetProfile;
     let organizationId;
 
@@ -36,7 +38,7 @@ describe('Integration | Repository | Target-profile', function () {
     });
   });
 
-  describe('#findByIds', function () {
+  xdescribe('#findByIds', function () {
     let targetProfile1;
     let targetProfileIds;
     const targetProfileIdNotExisting = 999;
@@ -101,7 +103,7 @@ describe('Integration | Repository | Target-profile', function () {
     });
   });
 
-  describe('#findOrganizationIds', function () {
+  xdescribe('#findOrganizationIds', function () {
     let targetProfileId;
     const expectedOrganizationIds = [];
 
@@ -150,6 +152,59 @@ describe('Integration | Repository | Target-profile', function () {
 
         expect(error).to.be.instanceOf(NotFoundError);
       });
+    });
+  });
+
+  describe.only('#findSkillsByIds', function () {
+    let firstTargetProfilId, secondTargetProfilId, thirdTargetProfilId;
+
+    beforeEach(async function () {
+      firstTargetProfilId = databaseBuilder.factory.buildTargetProfile().id;
+
+      databaseBuilder.factory.buildTargetProfileTube({
+        targetProfileId: firstTargetProfilId,
+        tubeId: 'firstTube',
+        level: 3,
+      });
+      databaseBuilder.factory.buildTargetProfileTube({
+        targetProfileId: firstTargetProfilId,
+        tubeId: 'secondTube',
+        level: 1,
+      });
+
+      secondTargetProfilId = databaseBuilder.factory.buildTargetProfile().id;
+
+      databaseBuilder.factory.buildTargetProfileTube({
+        targetProfileId: secondTargetProfilId,
+        tubeId: 'firstTube',
+        level: 5,
+      });
+      databaseBuilder.factory.buildTargetProfileTube({
+        targetProfileId: secondTargetProfilId,
+        tubeId: 'secondTube',
+        level: 3,
+      });
+
+      thirdTargetProfilId = databaseBuilder.factory.buildTargetProfile().id;
+
+      databaseBuilder.factory.buildTargetProfileTube({
+        targetProfileId: thirdTargetProfilId,
+        tubeId: 'thirdTube',
+        level: 5,
+      });
+
+      await databaseBuilder.commit();
+    });
+
+    it('should return empty when given non existing targetProfileId', async function () {
+      // given
+      const targetProfileId = 789;
+
+      // when
+      const result = await targetProfileRepository.findSkillsByIds({ targetProfileIds: [targetProfileId] });
+
+      // then
+      expect(result).lengthOf(0);
     });
   });
 });

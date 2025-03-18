@@ -4,6 +4,7 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { ObjectValidationError } from '../../../../shared/domain/errors.js';
 import { TargetProfile } from '../../../../shared/domain/models/index.js';
+import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 
 const TARGET_PROFILE_TABLE = 'target-profiles';
 
@@ -38,6 +39,7 @@ const findOrganizationIds = async function (targetProfileId) {
   return targetProfileShares.map((targetProfileShare) => targetProfileShare.organizationId);
 };
 
+// TODO : Add Test on this PLEASE
 const hasTubesWithLevels = async function ({ targetProfileId, tubesWithLevels }) {
   const knexConn = DomainTransaction.getConnection();
   const tubeIds = tubesWithLevels.map(({ id }) => id);
@@ -60,4 +62,20 @@ const hasTubesWithLevels = async function ({ targetProfileId, tubesWithLevels })
   }
 };
 
-export { findByIds, findOrganizationIds, get, hasTubesWithLevels };
+const findSkillsByIds = async function ({ targetProfileIds, dependencies = { skillRepository } }) {
+  const knexConn = DomainTransaction.getConnection();
+
+  const cappedTubes = await knexConn('target-profile_tubes')
+    .select('tubeId', 'level')
+    .whereIn('targetProfileId', targetProfileIds);
+  const skillData = [];
+  for (const cappedTube of cappedTubes) {
+    const allLevelSkills = await dependencies.skillRepository.findActiveByTubeId(cappedTube.tubeId);
+    const rightLevelSkills = allLevelSkills.filter((skill) => skill.difficulty <= cappedTube.level);
+    skillData.push(...rightLevelSkills);
+  }
+
+  return skillData;
+};
+
+export { findByIds, findOrganizationIds, findSkillsByIds, get, hasTubesWithLevels };
