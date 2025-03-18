@@ -18,6 +18,10 @@ function loggerForScriptClass(ScriptClass) {
   return child(`script:${ScriptClass.name}`, { event: ScriptClass.name });
 }
 
+function getProcessArgs() {
+  return hideBin(process.argv);
+}
+
 /**
  * A utility class for running scripts from the command line.
  */
@@ -29,24 +33,26 @@ export class ScriptRunner {
    * @template {typeof import('./script.js').Script} Script
    * @param {string} scriptFileUrl - The file URL of the script being executed.
    * @param {Script} ScriptClass - The script class to be instantiated and executed.
-   * @param {object} [dependencies] - The script runner dependencies (logger, isRunningFromCli)
+   * @param {object} [dependencies] - The script runner dependencies (logger, isRunningFromCli, getProcessArgs)
    */
   static async execute(
     scriptFileUrl,
     ScriptClass,
-    dependencies = { logger: loggerForScriptClass(ScriptClass), isRunningFromCli },
+    dependencies = {
+      logger: loggerForScriptClass(ScriptClass),
+      isRunningFromCli,
+      getProcessArgs,
+    },
   ) {
-    const { logger, isRunningFromCli } = dependencies;
+    const { logger, isRunningFromCli, getProcessArgs } = dependencies;
 
     if (!isRunningFromCli(scriptFileUrl)) return;
 
     const script = new ScriptClass();
     const { description, options = {}, commands = {} } = script.metaInfo;
 
-    const { argv } = process;
-
     try {
-      const yargsCommand = yargs(hideBin(argv)).usage(description).options(options).help().version(false);
+      const yargsCommand = yargs(getProcessArgs()).usage(description).options(options).help().version(false);
       Object.entries(commands).forEach(([name, { description, options }]) =>
         yargsCommand.command(name, description, options),
       );
