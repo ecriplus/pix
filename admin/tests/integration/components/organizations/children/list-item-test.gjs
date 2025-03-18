@@ -19,7 +19,6 @@ module('Integration | Component | organizations/children/list-item', function (h
     const screen = await renderScreen(<template><ListItem @organization={{organization}} /></template>);
 
     // then
-    assert.dom(screen.getByRole('row', { name: 'Collège The Night Watch' })).exists();
     assert.dom(screen.getByRole('cell', { name: '1' })).exists();
     assert.dom(screen.getByRole('cell', { name: 'Collège The Night Watch' })).exists();
     assert.dom(screen.getByRole('cell', { name: 'UA123456' })).exists();

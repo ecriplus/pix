@@ -1,4 +1,5 @@
 import { render as renderScreen } from '@1024pix/ember-testing-library';
+import { t } from 'ember-intl/test-support';
 import List from 'pix-admin/components/organizations/children/list';
 import { module, test } from 'qunit';
 
@@ -26,7 +27,7 @@ module('Integration | Component | organizations/children/list', function (hooks)
     const screen = await renderScreen(<template><List @organizations={{organizations}} /></template>);
 
     // then
-    assert.dom(screen.getByRole('table', { name: 'Liste des organisations filles' })).exists();
+    assert.dom(screen.getByRole('table', { name: t('components.organizations.children-list.table-name') })).exists();
 
     assert.dom(screen.getByRole('columnheader', { name: 'ID' })).exists();
     assert.dom(screen.getByRole('columnheader', { name: 'Nom' })).exists();
@@ -34,7 +35,7 @@ module('Integration | Component | organizations/children/list', function (hooks)
 
     assert.strictEqual((await screen.findAllByRole('row')).length, 3);
 
-    assert.dom(screen.getByRole('row', { name: 'Collège The Night Watch' })).exists();
-    assert.dom(screen.getByRole('row', { name: 'Lycée KingsLanding' })).exists();
+    assert.dom(screen.getByRole('cell', { name: 'Collège The Night Watch' })).exists();
+    assert.dom(screen.getByRole('cell', { name: 'Lycée KingsLanding' })).exists();
   });
 });
