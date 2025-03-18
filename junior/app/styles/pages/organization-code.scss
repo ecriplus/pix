@@ -39,6 +39,11 @@
     padding-top: var(--pix-spacing-4x);
   }
 
+  &__pix-code {
+    border: solid 1px var(--pix-neutral-100);
+    border-radius: var(--pix-spacing-2x);
+  }
+
   &__rotated-bubble {
     align-self: flex-end;
     width: fit-content;
@@ -98,14 +103,5 @@
       height: 112px;
     }
   }
-
 }
 
-.pix-input-code input.pix-input-code__input.school-code__input {
-  width: 55px;
-  height: 55px;
-  padding: 8px;
-  font-weight: bold;
-  font-size: 1.250rem;
-  border-color: var(--pix-primary-500);
-}
