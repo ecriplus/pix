@@ -439,6 +439,11 @@
         "table": {
           "caption": "Liste des organisations. Contient l'identifiant, le nom, de type et l'identifiant externe de l'organisation."
         }
+      },
+      "team-section": {
+        "table": {
+          "caption": "Liste des membres appartenant à l'organisation. Contient son identifiant d'utilisateur, nom et prénom, son adresse e-mail, son rôle et son dernier accès à l'organisation. Des actions permettent de modifier son rôle ou de désactiver."
+        }
       }
     },
     "users": {

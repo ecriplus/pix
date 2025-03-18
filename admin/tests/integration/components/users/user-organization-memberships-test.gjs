@@ -1,12 +1,13 @@
 import { render, within } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
 import Service from '@ember/service';
-import { setupRenderingTest } from 'ember-qunit';
 import UserOrganizationMemberships from 'pix-admin/components/users/user-organization-memberships';
 import { module, test } from 'qunit';
 
+import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+
 module('Integration | Component | users | organization-memberships', function (hooks) {
-  setupRenderingTest(hooks);
+  setupIntlRenderingTest(hooks);
 
   module('When user isn’t member of any organization', function () {
     test('it should display an empty table', async function (assert) {
@@ -67,8 +68,6 @@ module('Integration | Component | users | organization-memberships', function (h
       assert.dom(within(rows[1]).getByRole('cell', { name: 'Collège The Night Watch' })).exists();
       assert.dom(within(rows[1]).getByRole('cell', { name: 'SCO' })).exists();
       assert.dom(within(rows[1]).getByRole('cell', { name: '1237457A' })).exists();
-
-      assert.dom(within(rows[2]).getByRole('cell', { name: '111' })).exists();
 
       assert.dom(within(rows[2]).getByRole('cell', { name: '111' })).exists();
       assert.dom(within(rows[2]).getByRole('cell', { name: '100025' })).exists();

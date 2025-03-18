@@ -1,6 +1,7 @@
-import { clickByName, visit } from '@1024pix/ember-testing-library';
+import { clickByName, visit, within } from '@1024pix/ember-testing-library';
 import { click, currentURL, fillIn } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { module, test } from 'qunit';
@@ -85,8 +86,7 @@ module('Acceptance | Organizations | Memberships management', function (hooks) {
     test('it should list all memberships when all is selected', async function (assert) {
       // when
       const screen = await visit(`/organizations/${organization.id}/team`);
-
-      await click(screen.getByRole('button', { name: 'Rechercher par rôle' }));
+      await click(screen.getByRole('button', { name: 'Rôle' }));
       await screen.findByRole('listbox');
       // then
       assert.dom(screen.getByRole('option', { name: 'Tous' })).exists();
@@ -99,7 +99,7 @@ module('Acceptance | Organizations | Memberships management', function (hooks) {
       // when
       const screen = await visit(`/organizations/${organization.id}/team?organizationRole=ADMIN`);
 
-      await click(screen.getByRole('button', { name: 'Rechercher par rôle' }));
+      await click(screen.getByRole('button', { name: 'Rôle' }));
       await screen.findByRole('listbox');
       // then
       assert.dom(screen.getByRole('option', { name: 'Administrateur' })).exists();
@@ -146,7 +146,9 @@ module('Acceptance | Organizations | Memberships management', function (hooks) {
       await clickByName('Ajouter un membre');
 
       // then
-      assert.strictEqual(screen.getAllByLabelText('Membre').length, 1);
+      const table = screen.getByRole('table', { name: t('components.organizations.team-section.table.caption') });
+      const rows = within(table).getAllByRole('row');
+      assert.strictEqual(rows.length, 2);
       assert
         .dom(screen.getByRole('textbox', { name: "Adresse e-mail de l'utilisateur à ajouter" }))
         .hasValue('denise@example.com');
@@ -166,8 +168,10 @@ module('Acceptance | Organizations | Memberships management', function (hooks) {
       await clickByName('Ajouter un membre');
 
       // then
-      assert.strictEqual(screen.getAllByLabelText('Membre').length, 1);
-      assert.dom(screen.getByText('Erica')).exists();
+      const table = screen.getByRole('table', { name: t('components.organizations.team-section.table.caption') });
+      const rows = within(table).getAllByRole('row');
+      assert.strictEqual(rows.length, 2);
+      assert.dom(within(table).getByRole('cell', { name: 'Erica' })).exists();
       assert
         .dom(screen.getByRole('textbox', { name: "Adresse e-mail de l'utilisateur à ajouter" }))
         .hasValue('unexisting@example.com');

@@ -1,6 +1,7 @@
-import { render } from '@1024pix/ember-testing-library';
+import { render, within } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
 import Service from '@ember/service';
+import { t } from 'ember-intl/test-support';
 import TeamSection from 'pix-admin/components/organizations/team-section';
 import { module, test } from 'qunit';
 
@@ -46,6 +47,8 @@ module('Integration | Component | organizations | team-section', function (hooks
     );
 
     // then
-    assert.strictEqual(screen.getAllByLabelText('Membre').length, 2);
+    const table = screen.getByRole('table', { name: t('components.organizations.team-section.table.caption') });
+    const rows = within(table).getAllByRole('row');
+    assert.strictEqual(rows.length, 3);
   });
 });

@@ -2,6 +2,7 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -77,85 +78,94 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
   }
 
   <template>
-    <td>
-      {{#if this.isEditionMode}}
-        <PixSelect
-          class="pix-select-in-table"
-          @onChange={{this.setRoleSelection}}
-          @value={{this.selectedNewRole}}
-          @options={{this.organizationRoles}}
-          @placeholder="- Rôle -"
-          @screenReaderOnly={{true}}
-        >
-          <:label>Sélectionner un rôle</:label>
-          <:default as |organizationRole|>{{organizationRole.label}}</:default>
-        </PixSelect>
-      {{else}}
-        {{@organizationMembership.roleLabel}}
-      {{/if}}
-    </td>
+    <PixTableColumn @context={{@context}}>
+      <:header>
+        Rôle
+      </:header>
+      <:cell>
+        {{#if this.isEditionMode}}
+          <PixSelect
+            @onChange={{this.setRoleSelection}}
+            @value={{this.selectedNewRole}}
+            @options={{this.organizationRoles}}
+            @placeholder="- Rôle -"
+            @screenReaderOnly={{true}}
+          >
+            <:label>Sélectionner un rôle</:label>
+            <:default as |organizationRole|>{{organizationRole.label}}</:default>
+          </PixSelect>
+        {{else}}
+          {{@organizationMembership.roleLabel}}
+        {{/if}}
+      </:cell>
+    </PixTableColumn>
 
     {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
-      <td>
-        <div class="member-item-actions">
-          {{#if this.isEditionMode}}
-            <div class="member-item-actions__modify">
-              <PixButton @size="small" @triggerAction={{this.updateRoleOfMember}} class="member-item-actions__button">
-                {{t "common.actions.save"}}
-              </PixButton>
+      <PixTableColumn @context={{@context}}>
+        <:header>
+          Actions
+        </:header>
+        <:cell>
+          <div class="member-item-actions">
+            {{#if this.isEditionMode}}
+              <div class="member-item-actions__modify">
+                <PixButton @size="small" @triggerAction={{this.updateRoleOfMember}} class="member-item-actions__button">
+                  {{t "common.actions.save"}}
+                </PixButton>
+                <PixButton
+                  @size="small"
+                  @variant="secondary"
+                  @triggerAction={{this.cancelUpdateRoleOfMember}}
+                  aria-label={{t "common.actions.cancel"}}
+                  class="member-item-actions__button"
+                >
+                  <PixIcon @name="close" @ariaHidden={{true}} />
+                </PixButton>
+              </div>
+            {{else}}
               <PixButton
+                @isDisabled={{@organizationMembership.isSaving}}
                 @size="small"
-                @variant="secondary"
-                @triggerAction={{this.cancelUpdateRoleOfMember}}
-                aria-label={{t "common.actions.cancel"}}
                 class="member-item-actions__button"
+                aria-label="Modifier le rôle"
+                @triggerAction={{this.editRoleOfMember}}
+                @iconBefore="edit"
               >
-                <PixIcon @name="close" @ariaHidden={{true}} />
+                Modifier le rôle
               </PixButton>
-            </div>
-          {{else}}
+            {{/if}}
             <PixButton
-              @isDisabled={{@organizationMembership.isSaving}}
               @size="small"
+              @variant="error"
+              @isDisabled={{@organizationMembership.isSaving}}
               class="member-item-actions__button"
-              aria-label="Modifier le rôle"
-              @triggerAction={{this.editRoleOfMember}}
-              @iconBefore="edit"
+              aria-label="Désactiver l'agent"
+              @triggerAction={{this.toggleDisplayConfirm}}
+              @iconBefore="delete"
             >
-              Modifier le rôle
+              {{t "common.actions.deactivate"}}
             </PixButton>
-          {{/if}}
-          <PixButton
-            @size="small"
-            @variant="error"
-            @isDisabled={{@organizationMembership.isSaving}}
-            class="member-item-actions__button"
-            aria-label="Désactiver l'agent"
-            @triggerAction={{this.toggleDisplayConfirm}}
-            @iconBefore="delete"
-          >
-            {{t "common.actions.deactivate"}}
-          </PixButton>
-        </div>
-
-        <PixModal
-          @title="Désactivation d'un membre"
-          @onCloseButtonClick={{this.toggleDisplayConfirm}}
-          @showModal={{this.displayConfirm}}
-        >
-          <:content>
-            <p>
-              Etes-vous sûr de vouloir désactiver le membre de cette équipe ?
-            </p>
-          </:content>
-          <:footer>
-            <PixButton @variant="secondary" @triggerAction={{this.toggleDisplayConfirm}}>
-              {{t "common.actions.cancel"}}
-            </PixButton>
-            <PixButton @triggerAction={{this.disableOrganizationMembership}}>Confirmer</PixButton>
-          </:footer>
-        </PixModal>
-      </td>
+          </div>
+        </:cell>
+      </PixTableColumn>
     {{/if}}
+
+    <PixModal
+      @title="Désactivation d'un membre"
+      @onCloseButtonClick={{this.toggleDisplayConfirm}}
+      @showModal={{this.displayConfirm}}
+    >
+      <:content>
+        <p>
+          Etes-vous sûr de vouloir désactiver le membre de cette équipe ?
+        </p>
+      </:content>
+      <:footer>
+        <PixButton @variant="secondary" @triggerAction={{this.toggleDisplayConfirm}}>
+          {{t "common.actions.cancel"}}
+        </PixButton>
+        <PixButton @triggerAction={{this.disableOrganizationMembership}}>Confirmer</PixButton>
+      </:footer>
+    </PixModal>
   </template>
 }
