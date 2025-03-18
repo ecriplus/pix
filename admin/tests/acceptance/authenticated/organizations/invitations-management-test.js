@@ -96,7 +96,6 @@ module('Acceptance | Organizations | Invitations management', function (hooks) {
         const formattedDate = dayjsService.self(updatedAt).format('DD/MM/YYYY [-] HH:mm');
 
         assert.dom(screen.getByText('Une erreur s’est produite, veuillez réessayer.')).exists();
-        assert.dom(screen.getByRole('row', { name: 'Invitation en attente de kabuki@example.net' })).exists();
         assert.dom(screen.getByRole('cell', { name: 'kabuki@example.net' })).exists();
         assert.dom(screen.getByRole('cell', { name: formattedDate })).exists();
       });

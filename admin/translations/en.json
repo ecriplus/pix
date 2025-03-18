@@ -435,6 +435,11 @@
         },
         "parent-organization": "Parent organization"
       },
+      "invitations": {
+        "table": {
+          "caption": "Liste des invitations envoyées pour rejoindre une organisation. Contient une adresse e-mail de l'utilisateur, le rôle que l'on souhaite lui attribuer, la date de dernier envoi de l'invitation et des actions permettent de renvoyer l'invitation ou de la supprimer."
+        }
+      },
       "list-items": {
         "table": {
           "caption": "Liste des organisations. Contient l'identifiant, le nom, de type et l'identifiant externe de l'organisation."
