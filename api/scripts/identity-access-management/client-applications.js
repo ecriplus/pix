@@ -1,4 +1,4 @@
-import { knex } from '../../db/knex-database-connection.js';
+import { clientApplicationRepository } from '../../src/identity-access-management/infrastructure/repositories/client-application.repository.js';
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
 import { cryptoService } from '../../src/shared/domain/services/crypto-service.js';
@@ -101,29 +101,23 @@ class ClientApplicationsScript extends Script {
   }
 
   async list() {
-    const clientApplications = await knex
-      .select('name', 'clientId', 'scopes')
-      .from('client_applications')
-      .orderBy('name');
-    console.table(clientApplications);
+    console.table(await clientApplicationRepository.list());
   }
 
   async add({ name, clientId, clientSecret, scope: scopes }, logger) {
     const hashedClientSecret = await cryptoService.hashPassword(clientSecret);
-    await knex
-      .insert({
-        name,
-        clientId,
-        clientSecret: hashedClientSecret,
-        scopes,
-      })
-      .into('client_applications');
+    await clientApplicationRepository.create({
+      name,
+      clientId,
+      clientSecret: hashedClientSecret,
+      scopes,
+    });
     logger.info({ clientName: name, clientId, scopes }, 'client application created');
   }
 
   async remove({ clientId }, logger) {
-    const rows = await knex.delete().from('client_applications').where('clientId', clientId);
-    if (rows) {
+    const removed = await clientApplicationRepository.removeByClientId(clientId);
+    if (removed) {
       logger.info({ clientId }, 'removed one client applications');
     } else {
       logger.error('did not remove any client applications');
@@ -131,72 +125,31 @@ class ClientApplicationsScript extends Script {
   }
 
   async addScope({ clientId, scope: newScopes }, logger) {
-    await knex.transaction(async (trx) => {
-      const clientApplication = await trx
-        .select('scopes')
-        .from('client_applications')
-        .where('clientId', clientId)
-        .forUpdate()
-        .first();
+    const udpated = await clientApplicationRepository.addScopes(clientId, newScopes);
 
-      if (!clientApplication) {
-        logger.error({ clientId }, 'did not find client application');
-        return false;
-      }
-
-      const scopes = new Set(clientApplication.scopes);
-      newScopes.forEach((scope) => scopes.add(scope));
-
-      await trx('client_applications')
-        .update({ scopes: Array.from(scopes), updatedAt: knex.fn.now() })
-        .where('clientId', clientId);
-    });
-
-    logger.info({ clientId, scopes: newScopes }, 'added scopes to client application');
+    if (udpated) {
+      logger.info({ clientId, scopes: newScopes }, 'added scopes to client application');
+    } else {
+      logger.error({ clientId }, 'did not find client application');
+    }
   }
 
   async removeScope({ clientId, scope: scopesToRemove }, logger) {
-    const removed = await knex.transaction(async (trx) => {
-      const clientApplication = await trx
-        .select('scopes')
-        .from('client_applications')
-        .where('clientId', clientId)
-        .forUpdate()
-        .first();
-
-      if (!clientApplication) {
-        logger.error({ clientId }, 'did not find client application');
-        return false;
-      }
-
-      const scopes = new Set(clientApplication.scopes);
-      scopesToRemove.forEach((scope) => scopes.delete(scope));
-
-      if (!scopes.size) {
-        logger.error('cannot remove all scopes on client application');
-        return false;
-      }
-
-      await trx('client_applications')
-        .update({ scopes: Array.from(scopes), updatedAt: knex.fn.now() })
-        .where('clientId', clientId);
-
-      return true;
-    });
+    const removed = await clientApplicationRepository.removeScopes(clientId, scopesToRemove);
 
     if (removed) {
       logger.info({ clientId, scopes: scopesToRemove }, 'removed scopes from client application');
+    } else {
+      logger.error({ clientId }, 'did not find client application');
     }
   }
 
   async setClientSecret({ clientId, clientSecret }, logger) {
     const hashedClientSecret = await cryptoService.hashPassword(clientSecret);
 
-    const rows = await knex('client_applications')
-      .update({ clientSecret: hashedClientSecret, updatedAt: knex.fn.now() })
-      .where('clientId', clientId);
+    const updated = await clientApplicationRepository.setClientSecret(clientId, hashedClientSecret);
 
-    if (rows) {
+    if (updated) {
       logger.info({ clientId }, 'set client secret for client application');
     } else {
       logger.error({ clientId }, 'did not find client application');

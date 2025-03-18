@@ -20,6 +20,12 @@ class InvalidOrAlreadyUsedEmailError extends DomainError {
   }
 }
 
+class MissingClientApplicationScopesError extends DomainError {
+  constructor() {
+    super('Client application must have at least one scope', 'MISSING_CLIENT_APPLICATION_SCOPES');
+  }
+}
+
 class OrganizationLearnerNotBelongToOrganizationIdentityError extends DomainError {
   constructor(message = 'Organization Learner identity does not belong to Organization Identity') {
     super(message);
@@ -93,6 +99,7 @@ export {
   AuthenticationKeyExpired,
   DifferentExternalIdentifierError,
   InvalidOrAlreadyUsedEmailError,
+  MissingClientApplicationScopesError,
   MissingOrInvalidCredentialsError,
   MissingUserAccountError,
   OrganizationLearnerIdentityNotFoundError,
