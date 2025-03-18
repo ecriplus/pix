@@ -38,7 +38,7 @@
     "dev": "ember serve --proxy http://localhost:3000",
     "start": "npm run dev",
     "test": "ember test",
-    "test:ci": "npx ember exam --split=$CIRCLE_NODE_TOTAL --partition=$((1 + CIRCLE_NODE_INDEX))",
+    "test:ci": "npx ember exam --path=./dist --split=$CIRCLE_NODE_TOTAL --partition=$((1 + CIRCLE_NODE_INDEX))",
     "test:lint": "npm test && npm run lint",
     "test:watch": "ember exam --serve --reporter dot"
   },
