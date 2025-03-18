@@ -5,11 +5,16 @@ const {
   preprendTransformerToOptions,
 } = require("@badeball/cypress-cucumber-preprocessor/browserify");
 const { configureVisualRegression } = require("cypress-visual-regression");
+const cypressSplit = require("cypress-split");
 
 const SEQUENCE_RESTART_AT_NUMBER = 10000000;
 
-async function setupNodeEvents(on, config) {
+async function setupNodeEvents(cypressOn, config) {
   config.env.AUTH_SECRET = process.env.AUTH_SECRET;
+
+  const on = require("cypress-on-fix")(cypressOn);
+
+  cypressSplit(on, config);
 
   configureVisualRegression(on);
 
@@ -62,7 +67,7 @@ module.exports = defineConfig({
   video: false,
   blockHosts: ["*stats.pix.fr*", "*analytics.pix.fr*"],
   trashAssetsBeforeRuns: true,
-  projectId: "3cjm89",
+  // projectId: "3cjm89",
   numTestsKeptInMemory: 0,
   viewportWidth: 1500,
   retries: {

@@ -1,0 +1,64 @@
+{
+  "durations": [
+    {
+      "spec": "cypress/integration/pix-app/a11y-authenticated-1.test.js",
+      "duration": 38098
+    },
+    {
+      "spec": "cypress/integration/pix-app/demo.feature",
+      "duration": 9173
+    },
+    {
+      "spec": "cypress/integration/pix-app/signup.feature",
+      "duration": 9532
+    },
+    {
+      "spec": "cypress/integration/pix-app/modulix-a11y.feature",
+      "duration": 12984
+    },
+    {
+      "spec": "cypress/integration/pix-app/a11y-not-authenticated.test.js",
+      "duration": 33985
+    },
+    {
+      "spec": "cypress/integration/pix-app/page-title.feature",
+      "duration": 13040
+    },
+    {
+      "spec": "cypress/integration/pix-app/terms-of-service.feature",
+      "duration": 10645
+    },
+    {
+      "spec": "cypress/integration/pix-app/a11y-authenticated-2.test.js",
+      "duration": 25388
+    },
+    {
+      "spec": "cypress/integration/pix-app/campaign-collect-profiles.feature",
+      "duration": 27402
+    },
+    {
+      "spec": "cypress/integration/pix-app/preview.feature",
+      "duration": 9660
+    },
+    {
+      "spec": "cypress/integration/pix-app/update-password.feature",
+      "duration": 8538
+    },
+    {
+      "spec": "cypress/integration/pix-app/campaign-assessment.feature",
+      "duration": 30124
+    },
+    {
+      "spec": "cypress/integration/pix-app/login-logout-app.feature",
+      "duration": 23011
+    },
+    {
+      "spec": "cypress/integration/pix-app/profile.feature",
+      "duration": 10282
+    },
+    {
+      "spec": "cypress/integration/pix-app/user-dashboard.feature",
+      "duration": 11922
+    }
+  ]
+}
