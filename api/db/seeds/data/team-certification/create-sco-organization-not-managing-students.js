@@ -36,7 +36,7 @@ async function _createScoOrganization({ databaseBuilder }) {
     organizationId: SCO_NOT_MANAGING_STUDENTS_ORGANIZATION_ID,
     type: 'SCO',
     name: 'Orga not managing student team Certification',
-    isManagingStudents: true,
+    isManagingStudents: false,
     externalId: CERTIFICATION_SCO_NOT_MANAGING_STUDENTS_EXTERNAL_ID,
     adminIds: [SCO_CERTIFICATION_NOT_MANAGING_STUDENTS_ORGANIZATION_USER_ID],
     configOrganization: {
