@@ -388,6 +388,21 @@ module('Integration | Component | users | user-overview', function (hooks) {
           assert.dom(screen.getByText('Utilisateur totalement bloqué le : 01/02/2021', { exact: false })).exists();
           assert.dom(screen.queryByText("Utilisateur temporairement bloqué jusqu'au :")).doesNotExist();
         });
+
+        module('when the user has a last global connection', function () {
+          test('displays user last global connection', async function (assert) {
+            // given
+            const store = this.owner.lookup('service:store');
+
+            const user = store.createRecord('user', { lastLoggedAt: new Date('2022-11-28T10:00:00Z') });
+
+            // when
+            const screen = await render(<template><UserOverview @user={{user}} /></template>);
+
+            // then
+            assert.dom(screen.getByText('Date de dernière connexion globale : 28/11/2022')).exists();
+          });
+        });
       });
     });
 
