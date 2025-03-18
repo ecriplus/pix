@@ -67,7 +67,6 @@ module.exports = defineConfig({
   video: false,
   blockHosts: ["*stats.pix.fr*", "*analytics.pix.fr*"],
   trashAssetsBeforeRuns: true,
-  // projectId: "3cjm89",
   numTestsKeptInMemory: 0,
   viewportWidth: 1500,
   retries: {
