@@ -559,8 +559,8 @@
         "information": "Warning, make sure that all the candidates have finished their exam before exiting the invigilation. To resume the invigilation of this session, you will have to enter again it’s session number and it’s password.",
         "invigilator": "Invigilator(s)",
         "invigilator-documentation": {
-          "link": "Invigilator role's documentation",
-          "message": "The Pix Companion extension is now mandatory for all candidates."
+          "link": "Documentation of the invigilator role",
+          "message": "Please note: Any technical problems relating to the questions must only be managed during the test from the candidate interface and the invigilator area (these reports cannot be taken into account afterwards)."
         },
         "invigilator-kit": {
           "extra-information": "Download invigilator’s kit",
