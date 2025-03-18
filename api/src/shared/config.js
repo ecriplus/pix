@@ -361,6 +361,7 @@ const configuration = (function () {
     logOpsMetrics: toBoolean(process.env.LOG_OPS_METRICS),
     lti: {
       authorizedPlatforms: process.env.LTI_AUTHORIZED_PLATFORMS?.split(',') ?? [],
+      jwkModulusLength: 4096,
     },
     mailing: {
       enabled: toBoolean(process.env.MAILING_ENABLED),
@@ -531,6 +532,7 @@ const configuration = (function () {
     config.featureToggles.showExperimentalMissions = false;
 
     config.lti.authorizedPlatforms = ['https://moodle.example.net'];
+    config.lti.jwkModulusLength = 2048;
 
     config.mailing.enabled = false;
     config.mailing.provider = 'brevo';

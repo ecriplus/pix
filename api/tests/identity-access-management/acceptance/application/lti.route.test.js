@@ -16,7 +16,7 @@ describe('Acceptance | Identity Access Management | Route | Admin | lti', functi
     it('returns the list of all active public keys with an HTTP status code 200', async function () {
       // given
       const { publicKey } = databaseBuilder.factory.buildLtiPlatformRegistration();
-      const keyPair2 = await cryptoService.generateJSONWebKeyPair({ modulusLength: 2048 });
+      const keyPair2 = await cryptoService.generateJSONWebKeyPair();
       databaseBuilder.factory.buildLtiPlatformRegistration({
         clientId: 'pending_client',
         status: 'pending',
