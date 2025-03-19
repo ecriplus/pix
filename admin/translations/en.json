@@ -485,6 +485,8 @@
             "center-id": "Center ID",
             "center-name": "Name",
             "center-type": "Type",
+            "last-accessed-at": "Last access",
+            "member-id": "Member ID",
             "role-label": "Role"
           }
         }
