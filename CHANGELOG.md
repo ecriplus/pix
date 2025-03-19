@@ -1,5 +1,23 @@
 # Pix Changelog
 
+## v5.67.0 (19/03/2025)
+
+
+### :rocket: Amélioration
+- [#11755](https://github.com/1024pix/pix/pull/11755) [FEATURE] Supression des colonnes pixOrgaTermsOfServiceAccepted et lastPixOrgaTermsOfServiceValidatedAt de la table users (PIX-16700).
+- [#11737](https://github.com/1024pix/pix/pull/11737) [FEATURE] Supprimer la date de dernière connexion d'une méthode d'authentification après sa réassignation.
+- [#11680](https://github.com/1024pix/pix/pull/11680) [FEATURE] Changement de style des bouton de selection d'une classe (PIX-16977).
+- [#11679](https://github.com/1024pix/pix/pull/11679) [FEATURE] Pix Junior - Adaptation du style du champ de saisie du code (PIX-16762).
+- [#11695](https://github.com/1024pix/pix/pull/11695) [FEATURE] Améliorations visuelles de la page de début de parcours(PIX-16945).
+- [#11671](https://github.com/1024pix/pix/pull/11671) [FEATURE] Initialiser la génération de l'attestation V3 avec PDFKit (PIX-17007).
+- [#11697](https://github.com/1024pix/pix/pull/11697) [FEATURE] Ajout de la page html d'activité inhabituelle pour Baleen (PIX-16320).
+- [#11715](https://github.com/1024pix/pix/pull/11715) [FEATURE] Mise à jour du wording des campagnes de type "EXAM" (Pix-16494).
+- [#11703](https://github.com/1024pix/pix/pull/11703) [FEATURE] Nouveau design du layout pour la page Mon Compte (PIX-16928).
+
+### :building_construction: Tech
+- [#11752](https://github.com/1024pix/pix/pull/11752) [TECH] Supprimer le logo mis par défaut dans les seeds lors de la création de l'organisation (PIX-17072).
+- [#11750](https://github.com/1024pix/pix/pull/11750) [TECH] Correction de flaky sur le test d'acceptance de Account Recovery (PIX-16873).
+
 ## v5.66.0 (18/03/2025)
 
 
