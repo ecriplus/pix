@@ -3,9 +3,14 @@ import uniqBy from 'lodash/uniqBy.js';
 import { KnowledgeElement } from '../../../shared/domain/models/index.js';
 
 export class Success {
-  constructor({ knowledgeElements, campaignSkills }) {
+  constructor({ knowledgeElements, campaignSkills = [], targetProfileSkills = [] }) {
     this.knowledgeElements = knowledgeElements;
     this.campaignSkills = campaignSkills;
+    this.targetProfileSkills = targetProfileSkills;
+  }
+
+  get skills() {
+    return uniqBy([...this.campaignSkills, ...this.targetProfileSkills], 'id');
   }
 
   /**
@@ -34,7 +39,7 @@ export class Success {
     if (!Array.isArray(cappedTubes)) {
       return 0;
     }
-    const uniqCampaignSkills = uniqBy(this.campaignSkills, 'id');
+    const uniqCampaignSkills = this.skills;
     const sortedKEByDateDesc = this.knowledgeElements.sort((keA, keB) => keB.createdAt - keA.createdAt);
     let total = 0;
     let validated = 0;

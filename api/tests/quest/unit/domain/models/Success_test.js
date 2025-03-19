@@ -60,6 +60,70 @@ describe('Quest | Unit | Domain | Models | Success ', function () {
     });
   });
 
+  describe('#skills', function () {
+    it('should return empty array when there are no campaignSkills or targetProfileSkills', function () {
+      const success = new Success({
+        knowledgeElements: [],
+        campaignSkills: [],
+      });
+
+      expect(success.skills).to.have.length(0);
+    });
+
+    it('should return an array when there are campaignSkills', function () {
+      const success = new Success({
+        knowledgeElements: [],
+        campaignSkills: [
+          { id: 'skillA', tubeId: 'tubeA', difficulty: 1 },
+          { id: 'skillB', tubeId: 'tubeB', difficulty: 1 },
+        ],
+      });
+
+      expect(success.skills).to.have.length(2);
+      expect(success.skills).to.have.deep.members([
+        { id: 'skillA', tubeId: 'tubeA', difficulty: 1 },
+        { id: 'skillB', tubeId: 'tubeB', difficulty: 1 },
+      ]);
+    });
+
+    it('should return an array when there are targetProfileSkills', function () {
+      const success = new Success({
+        knowledgeElements: [],
+        targetProfileSkills: [
+          { id: 'skillA', tubeId: 'tubeA', difficulty: 1 },
+          { id: 'skillB', tubeId: 'tubeB', difficulty: 1 },
+        ],
+      });
+
+      expect(success.skills).to.have.length(2);
+      expect(success.skills).to.have.deep.members([
+        { id: 'skillA', tubeId: 'tubeA', difficulty: 1 },
+        { id: 'skillB', tubeId: 'tubeB', difficulty: 1 },
+      ]);
+    });
+
+    it('should return an array when there are campaignSkills and targetProfileSkills', function () {
+      const success = new Success({
+        knowledgeElements: [],
+        targetProfileSkills: [
+          { id: 'skillA', tubeId: 'tubeA', difficulty: 1 },
+          { id: 'skillB', tubeId: 'tubeB', difficulty: 1 },
+        ],
+        campaignSkills: [
+          { id: 'skillA', tubeId: 'tubeA', difficulty: 1 },
+          { id: 'skillC', tubeId: 'tubeC', difficulty: 1 },
+        ],
+      });
+
+      expect(success.skills).to.have.length(3);
+      expect(success.skills).to.have.deep.members([
+        { id: 'skillA', tubeId: 'tubeA', difficulty: 1 },
+        { id: 'skillB', tubeId: 'tubeB', difficulty: 1 },
+        { id: 'skillC', tubeId: 'tubeC', difficulty: 1 },
+      ]);
+    });
+  });
+
   describe('#getMasteryPercentageForCappedTubes', function () {
     context('when no cappedTubes provided', function () {
       it('should return 0 when cappedTubes is empty', function () {
@@ -135,6 +199,9 @@ describe('Quest | Unit | Domain | Models | Success ', function () {
               { id: 'skill1tubeB', tubeId: 'tubeB', difficulty: 1 },
               { id: 'skill2tubeB', tubeId: 'tubeB', difficulty: 2 },
               { id: 'skill3tubeB', tubeId: 'tubeB', difficulty: 3 },
+              { id: 'skillTubeC', tubeId: 'tubeC', difficulty: 1 },
+            ],
+            targetProfileSkills: [
               { id: 'skillTubeC', tubeId: 'tubeC', difficulty: 1 },
               { id: 'skillTubeD', tubeId: 'tubeD', difficulty: 1 },
             ],
