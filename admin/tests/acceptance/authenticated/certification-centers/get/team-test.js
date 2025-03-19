@@ -1,6 +1,7 @@
-import { clickByName, fillByLabel, visit } from '@1024pix/ember-testing-library';
+import { clickByName, fillByLabel, visit, within } from '@1024pix/ember-testing-library';
 import { click, triggerEvent } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { module, test } from 'qunit';
@@ -37,11 +38,17 @@ module('Acceptance | authenticated/certification-centers/get/team', function (ho
     const screen = await visit(`/certification-centers/${certificationCenter.id}`);
 
     // then
-    assert.dom(screen.getByLabelText('Informations du membre Gilles Parbal')).exists();
-    assert.dom(screen.getByRole('link', { name: user1.id })).exists();
+    const table = screen.getByRole('table', {
+      name: t('components.memberships-section.table.caption'),
+    });
 
-    assert.dom(screen.getByLabelText('Informations du membre Eric Hochet')).exists();
-    assert.dom(screen.getByRole('link', { name: user2.id })).exists();
+    assert.dom(within(table).getByRole('cell', { name: 'Gilles' })).exists();
+    assert.dom(within(table).getByRole('cell', { name: 'Parbal' })).exists();
+    assert.dom(within(table).getByRole('link', { name: user1.id })).exists();
+
+    assert.dom(within(table).getByRole('cell', { name: 'Eric' })).exists();
+    assert.dom(within(table).getByRole('cell', { name: 'Hochet' })).exists();
+    assert.dom(within(table).getByRole('link', { name: user2.id })).exists();
   });
 
   test('should be possible to deactivate a certification center membership', async function (assert) {
@@ -165,8 +172,12 @@ module('Acceptance | authenticated/certification-centers/get/team', function (ho
       await clickByName('Ajouter le membre');
 
       // then
-      assert.dom(screen.getByLabelText('Informations du membre Jacques Use')).exists();
-      assert.dom(screen.getByText('test@example.net')).exists();
+      const table = screen.getByRole('table', {
+        name: t('components.memberships-section.table.caption'),
+      });
+      assert.dom(within(table).getByRole('cell', { name: 'Jacques' })).exists();
+      assert.dom(within(table).getByRole('cell', { name: 'Use' })).exists();
+      assert.dom(within(table).getByRole('cell', { name: 'test@example.net' })).exists();
     });
   });
 
@@ -185,9 +196,12 @@ module('Acceptance | authenticated/certification-centers/get/team', function (ho
         role: 'MEMBER',
         user,
       });
+      const screen = await visit(`/certification-centers/${certificationCenter.id}`);
+      const table = screen.getByRole('table', {
+        name: t('components.memberships-section.table.caption'),
+      });
 
       // when
-      const screen = await visit(`/certification-centers/${certificationCenter.id}`);
       await clickByName('Modifier le rôle');
       await click(screen.getByRole('button', { name: 'Sélectionner un rôle' }));
       await screen.findByRole('listbox');
@@ -196,7 +210,8 @@ module('Acceptance | authenticated/certification-centers/get/team', function (ho
 
       // then
       assert.dom(screen.getByText('Le rôle du membre a été modifié.')).exists();
-      assert.dom(screen.getByLabelText('Informations du membre Eric Hochet')).containsText('Administrateur');
+      assert.dom(within(table).getByRole('cell', { name: 'Eric' })).exists();
+      assert.dom(within(table).getByRole('cell', { name: 'Administrateur' })).exists();
     });
   });
 
@@ -215,9 +230,12 @@ module('Acceptance | authenticated/certification-centers/get/team', function (ho
         role: 'MEMBER',
         user,
       });
+      const screen = await visit(`/certification-centers/${certificationCenter.id}`);
+      const table = screen.getByRole('table', {
+        name: t('components.memberships-section.table.caption'),
+      });
 
       // when
-      const screen = await visit(`/certification-centers/${certificationCenter.id}`);
       await clickByName('Modifier le rôle');
       await click(screen.getByRole('button', { name: 'Sélectionner un rôle' }));
       await screen.findByRole('listbox');
@@ -226,7 +244,8 @@ module('Acceptance | authenticated/certification-centers/get/team', function (ho
 
       // then
       assert.dom(screen.getByText("Une erreur est survenue, le rôle du membre n'a pas été modifié.")).exists();
-      assert.dom(screen.getByLabelText('Informations du membre Gilles Parbal')).containsText('Membre');
+      assert.dom(within(table).getByRole('cell', { name: 'Gilles' })).exists();
+      assert.dom(within(table).getByRole('cell', { name: 'Membre' })).exists();
     });
   });
 });

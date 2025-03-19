@@ -1,3 +1,4 @@
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { fn } from '@ember/helper';
 import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
@@ -43,34 +44,60 @@ export default class CertificationCentersMembershipItemComponent extends Compone
   }
 
   <template>
-    <tr
-      aria-label="Informations du membre {{@certificationCenterMembership.user.firstName}} {{@certificationCenterMembership.user.lastName}}"
-    >
-      <td>
+    <PixTableColumn @context={{@context}}>
+      <:header>ID Utilisateur</:header>
+      <:cell>
         <LinkTo @route="authenticated.users.get" @model={{@certificationCenterMembership.user.id}}>
           {{@certificationCenterMembership.user.id}}
         </LinkTo>
-      </td>
-      <td class="member-information">{{@certificationCenterMembership.user.firstName}}</td>
-      <td class="member-information">{{@certificationCenterMembership.user.lastName}}</td>
-      <td class="member-information">{{@certificationCenterMembership.user.email}}</td>
-      <td class="member-information">
+      </:cell>
+    </PixTableColumn>
+    <PixTableColumn @context={{@context}}>
+      <:header>Prénom</:header>
+      <:cell>
+        {{@certificationCenterMembership.user.firstName}}
+      </:cell>
+    </PixTableColumn>
+    <PixTableColumn @context={{@context}}>
+      <:header>Nom</:header>
+      <:cell>
+        {{@certificationCenterMembership.user.lastName}}
+      </:cell>
+    </PixTableColumn>
+    <PixTableColumn @context={{@context}} class="break-word">
+      <:header>Adresse e-mail</:header>
+      <:cell>
+        {{@certificationCenterMembership.user.email}}
+      </:cell>
+    </PixTableColumn>
+    <PixTableColumn @context={{@context}}>
+      <:header>Rôle</:header>
+      <:cell>
         <MembershipItemRole
           @isEditionMode={{this.isEditionMode}}
           @role={{@certificationCenterMembership.role}}
           @roleLabelKey={{@certificationCenterMembership.roleLabelKey}}
           @onRoleSelected={{this.onRoleSelected}}
         />
-      </td>
-      <td class="member-information">
+      </:cell>
+    </PixTableColumn>
+    <PixTableColumn @context={{@context}}>
+      <:header>Dernier accès</:header>
+      <:cell>
         {{#if @certificationCenterMembership.lastAccessedAt}}
           {{dayjsFormat @certificationCenterMembership.lastAccessedAt "DD-MM-YYYY - HH:mm:ss"}}
         {{/if}}
-      </td>
-      <td>
+      </:cell>
+    </PixTableColumn>
+    <PixTableColumn @context={{@context}}>
+      <:header>Date de rattachement</:header>
+      <:cell>
         {{dayjsFormat @certificationCenterMembership.createdAt "DD-MM-YYYY - HH:mm:ss"}}
-      </td>
-      <td>
+      </:cell>
+    </PixTableColumn>
+    <PixTableColumn @context={{@context}}>
+      <:header>Actions</:header>
+      <:cell>
         <MembershipItemActions
           @isEditionMode={{this.isEditionMode}}
           @onDeactivateMembershipButtonClicked={{fn
@@ -81,7 +108,7 @@ export default class CertificationCentersMembershipItemComponent extends Compone
           @onSaveRoleButtonClicked={{this.saveMembershipRole}}
           @onCancelButtonClicked={{this.cancelMembershipRoleEditing}}
         />
-      </td>
-    </tr>
+      </:cell>
+    </PixTableColumn>
   </template>
 }

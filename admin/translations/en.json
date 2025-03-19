@@ -296,6 +296,16 @@
       }
     },
     "certification-centers": {
+      "invitations": {
+        "table": {
+          "caption": "Liste des invitations envoyées pour rejoindre un centre de certification. Contient une adresse e-mail de l'utilisateur, le rôle que l'on souhaite lui attribuer, la date de dernier envoi de l'invitation et des actions permettent de renvoyer l'invitation ou de la supprimer."
+        }
+      },
+      "list-items": {
+        "table": {
+          "caption": "Liste des centres de certification. Contient l'identifiant, le nom et le type du centre ainsi que son Id externe. Des filtres présents à l'extérieur du tableau permettent de trier les informations de ce dernier"
+        }
+      },
       "membership-item": {
         "actions": {
           "edit-role": "Edit role"
@@ -386,6 +396,9 @@
       "roles": {
         "admin": "Administrator",
         "member": "Member"
+      },
+      "table": {
+        "caption": "Liste des membres appartenant au centre de certification. Contient son identifiant, nom et prénom, son adresse e-mail, son rôle, son dernier accès et sa date de rattachement à l'espace de certification. Des actions permettent de modifier son rôle ou de le supprimer du centre."
       }
     },
     "organizations": {

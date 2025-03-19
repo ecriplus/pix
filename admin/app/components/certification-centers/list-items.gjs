@@ -1,5 +1,8 @@
+import PixFilterBanner from '@1024pix/pix-ui/components/pix-filter-banner';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { fn } from '@ember/helper';
 import { LinkTo } from '@ember/routing';
 import Component from '@glimmer/component';
@@ -12,61 +15,70 @@ export default class CertificationCenterListItems extends Component {
   searchedExternalId = this.args.externalId;
 
   <template>
-    <div class="content-text content-text--small">
-      <table class="table-admin">
-        <thead>
-          <tr>
-            <th class="table__column table__column--id"><label for="id">ID</label></th>
-            <th><label for="name">Nom</label></th>
-            <th><label for="type">Type</label></th>
-            <th><label for="externalId">ID externe</label></th>
-          </tr>
-          <tr>
-            <td class="table__column table__column--id">
-              <PixInput id="id" type="text" value={{this.searchedId}} oninput={{fn @triggerFiltering "id"}} />
-            </td>
-            <td>
-              <PixInput id="name" type="text" value={{this.searchedName}} oninput={{fn @triggerFiltering "name"}} />
-            </td>
-            <td>
-              <PixInput id="type" type="text" value={{this.searchedType}} oninput={{fn @triggerFiltering "type"}} />
-            </td>
-            <td>
-              <PixInput
-                id="externalId"
-                type="text"
-                value={{this.searchedExternalId}}
-                oninput={{fn @triggerFiltering "externalId"}}
-              />
-            </td>
-          </tr>
-        </thead>
+    <div class="certification-centers-list">
+      <PixFilterBanner @title={{t "common.filters.title"}}>
+        <PixInput value={{this.searchedId}} oninput={{fn @triggerFiltering "id"}}>
+          <:label>Identifiant</:label>
+        </PixInput>
+        <PixInput value={{this.searchedName}} oninput={{fn @triggerFiltering "name"}}>
+          <:label>Nom</:label>
+        </PixInput>
+        <PixInput value={{this.searchedType}} oninput={{fn @triggerFiltering "type"}}>
+          <:label>Type</:label>
+        </PixInput>
+        <PixInput value={{this.searchedExternalId}} oninput={{fn @triggerFiltering "externalId"}}>
+          <:label>ID externe</:label>
+        </PixInput>
+      </PixFilterBanner>
 
-        {{#if @certificationCenters}}
-          <tbody>
-            {{#each @certificationCenters as |certificationCenter|}}
-              <tr aria-label="Centre de certification {{certificationCenter.name}}">
-                <td class="table__column table__column--id">
-                  <LinkTo @route="authenticated.certification-centers.get" @model={{certificationCenter.id}}>
-                    {{certificationCenter.id}}
-                  </LinkTo>
-                </td>
-                <td>{{certificationCenter.name}}</td>
-                <td>{{certificationCenter.type}}</td>
-                <td class="break-word">{{certificationCenter.externalId}}</td>
-              </tr>
-            {{/each}}
-          </tbody>
-        {{/if}}
-      </table>
+      {{#if @certificationCenters}}
+        <PixTable
+          @variant="primary"
+          @caption={{t "components.certification-centers.list-items.table.caption"}}
+          @data={{@certificationCenters}}
+        >
+          <:columns as |certificationCenter context|>
+            <PixTableColumn @context={{context}}>
+              <:header>
+                ID
+              </:header>
+              <:cell>
+                <LinkTo @route="authenticated.certification-centers.get" @model={{certificationCenter.id}}>
+                  {{certificationCenter.id}}
+                </LinkTo>
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}} class="break-word">
+              <:header>
+                Nom
+              </:header>
+              <:cell>
+                {{certificationCenter.name}}
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}}>
+              <:header>
+                Type
+              </:header>
+              <:cell>
+                {{certificationCenter.type}}
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}} class="break-word">
+              <:header>
+                ID externe
+              </:header>
+              <:cell>
+                {{certificationCenter.externalId}}
+              </:cell>
+            </PixTableColumn>
+          </:columns>
+        </PixTable>
 
-      {{#unless @certificationCenters}}
+        <PixPagination @pagination={{@certificationCenters.meta}} />
+      {{else}}
         <div class="table__empty">{{t "common.tables.empty-result"}}</div>
-      {{/unless}}
+      {{/if}}
     </div>
-
-    {{#if @certificationCenters}}
-      <PixPagination @pagination={{@certificationCenters.meta}} />
-    {{/if}}
   </template>
 }

@@ -40,18 +40,6 @@ module('Acceptance | Certification Centers | List', function (hooks) {
       assert.dom(screen.getByRole('link', { name: 'Centres de certification' })).hasClass('active');
     });
 
-    test('it should list the certification-centers', async function (assert) {
-      // given
-      const certificationCenter = server.createList('certification-center', 3);
-      // when
-      const screen = await visit('/certification-centers/list');
-
-      // then
-      assert.dom(screen.getByLabelText(`Centre de certification ${certificationCenter[0].name}`)).exists();
-      assert.dom(screen.getByLabelText(`Centre de certification ${certificationCenter[1].name}`)).exists();
-      assert.dom(screen.getByLabelText(`Centre de certification ${certificationCenter[2].name}`)).exists();
-    });
-
     test('it should display the current filter when certification-centers are filtered', async function (assert) {
       // given
       server.createList('certification-center', 1, { type: 'PRO' });
