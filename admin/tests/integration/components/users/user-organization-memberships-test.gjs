@@ -52,6 +52,7 @@ module('Integration | Component | users | organization-memberships', function (h
         organizationName: 'Collège The Night Watch',
         organizationType: 'SCO',
         organizationExternalId: '1237457A',
+        lastAccessedAt: new Date('2020-01-01'),
       });
 
       const organizationMemberships = [organizationMembership1, organizationMembership2];
@@ -68,6 +69,7 @@ module('Integration | Component | users | organization-memberships', function (h
       assert.dom(within(rows[1]).getByRole('cell', { name: 'Collège The Night Watch' })).exists();
       assert.dom(within(rows[1]).getByRole('cell', { name: 'SCO' })).exists();
       assert.dom(within(rows[1]).getByRole('cell', { name: '1237457A' })).exists();
+      assert.dom(within(rows[1]).getByRole('cell', { name: '01/01/2020' })).exists();
 
       assert.dom(within(rows[2]).getByRole('cell', { name: '111' })).exists();
       assert.dom(within(rows[2]).getByRole('cell', { name: '100025' })).exists();
