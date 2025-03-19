@@ -36,7 +36,7 @@ export const create = async (userId, organizationId, organizationRole) => {
     const membership = await knexConnection(MEMBERSHIPS_TABLE).where({ id: membershipId }).first();
     const user = await knexConnection(USERS_TABLE).where({ id: membership.userId }).first();
 
-    return toDomain(membership, user);
+    return _toDomain(membership, user);
   } catch (error) {
     if (knexUtils.isUniqConstraintViolated(error)) {
       throw new MembershipCreationError(error.message);
@@ -56,7 +56,7 @@ export const get = async function (membershipId) {
   const user = await knexConnection(USERS_TABLE).where({ id: membership.userId }).first();
   const organisation = await knexConnection(ORGANIZATIONS_TABLE).where({ id: membership.organizationId }).first();
 
-  return toDomain(membership, user, organisation);
+  return _toDomain(membership, user, organisation);
 };
 
 export const findByOrganizationId = async function ({ organizationId }) {
@@ -71,7 +71,7 @@ export const findByOrganizationId = async function ({ organizationId }) {
 
   return memberships.map((membership) => {
     const user = users.find(({ id }) => id === membership.userId);
-    return toDomain(membership, user);
+    return _toDomain(membership, user);
   });
 };
 
@@ -97,7 +97,7 @@ export const findAdminsByOrganizationId = async function ({ organizationId }) {
   return memberships.map((membership) => {
     const userData = { ...membership, id: membership.userId };
     const membershipData = { ...membership, user: userData, id: membership.membershipId };
-    return toDomain(membershipData, userData);
+    return _toDomain(membershipData, userData);
   });
 };
 
@@ -136,7 +136,7 @@ export const findByUserIdAndOrganizationId = async ({ userId, organizationId, in
   const memberships = await knexConnection(MEMBERSHIPS_TABLE).where({ userId, organizationId, disabledAt: null });
 
   if (!includeOrganization) {
-    return memberships.map(toDomain);
+    return memberships.map(_toDomain);
   }
   const membershipOrganizationIds = memberships.map(({ organizationId }) => organizationId);
   const organizations = await knexConnection(ORGANIZATIONS_TABLE).whereIn('id', membershipOrganizationIds);
@@ -146,7 +146,7 @@ export const findByUserIdAndOrganizationId = async ({ userId, organizationId, in
   return memberships.map((membership) => {
     const organization = organizations.find(({ id }) => id === membership.organizationId);
     const organizationTags = organizationsTags.filter(({ organizationId }) => organizationId === organization.id);
-    return toDomain(membership, null, organization, organizationTags);
+    return _toDomain(membership, null, organization, organizationTags);
   });
 };
 
@@ -184,7 +184,15 @@ export const updateLastAccessedAt = async function ({ membershipId, lastAccessed
   await knexConnection(MEMBERSHIPS_TABLE).where({ id: membershipId }).update({ lastAccessedAt, updatedAt: new Date() });
 };
 
-const toDomain = (membershipData, userData = null, organizationData = null, organizationTags = null) => {
+export const findByUserId = async function (userId) {
+  const knexConnection = DomainTransaction.getConnection();
+
+  const memberships = await knexConnection(MEMBERSHIPS_TABLE).where({ userId });
+
+  return memberships.map(_toDomain);
+};
+
+const _toDomain = (membershipData, userData = null, organizationData = null, organizationTags = null) => {
   const membership = new Membership(membershipData);
   if (userData) membership.user = new User(userData);
   if (organizationData) membership.organization = new Organization(organizationData);

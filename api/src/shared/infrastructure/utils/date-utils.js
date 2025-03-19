@@ -38,6 +38,8 @@ function formatDate(params, outputFormat) {
  * @returns {Date} a new Date object
  */
 function anonymizeGeneralizeDate(date) {
+  if (!date) return null;
+
   const newDate = new Date(date);
   newDate.setUTCDate(1);
   newDate.setUTCHours(0, 0, 0, 0);

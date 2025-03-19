@@ -907,4 +907,25 @@ describe('Integration | Team | Infrastructure | Repository | membership-reposito
       expect(updatedMembership.updatedAt).to.deep.equal(now);
     });
   });
+
+  describe('#findByUserId', function () {
+    it('returns all the memberships for a given user ID', async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser().id;
+      const organization1 = databaseBuilder.factory.buildOrganization();
+      const membership1 = databaseBuilder.factory.buildMembership({ userId, organizationId: organization1.id });
+      const organization2 = databaseBuilder.factory.buildOrganization();
+      const membership2 = databaseBuilder.factory.buildMembership({ userId, organizationId: organization2.id });
+
+      await databaseBuilder.commit();
+
+      // when
+      const memberships = await membershipRepository.findByUserId(userId);
+
+      // then
+      expect(memberships).to.have.lengthOf(2);
+      expect(memberships[0].id).to.equal(membership1.id);
+      expect(memberships[1].id).to.equal(membership2.id);
+    });
+  });
 });
