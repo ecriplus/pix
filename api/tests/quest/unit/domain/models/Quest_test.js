@@ -200,6 +200,99 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
     });
   });
 
+  describe('#findTargetProfileIdsWithoutCampaignParticipationContributingToQuest', function () {
+    it('returns an empty array when there is a campaign participation contributing to quest', function () {
+      const eligibilityRequirements = [
+        {
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          data: {
+            targetProfileId: {
+              data: 123,
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+          },
+          comparison: REQUIREMENT_COMPARISONS.ALL,
+        },
+      ];
+      const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
+      const campaignParticipations = [{ id: 10, targetProfileId: 123 }];
+      const eligibility = new Eligibility({ organization: {}, organizationLearner: {}, campaignParticipations });
+      const dataForQuest = new DataForQuest({ eligibility });
+
+      const result = quest.findTargetProfileIdsWithoutCampaignParticipationContributingToQuest(dataForQuest);
+
+      expect(result).to.have.length(0);
+    });
+
+    it('returns an array with a targetProfileId when there are no campaign participations contributing to quest', function () {
+      const eligibilityRequirements = [
+        {
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          data: {
+            targetProfileId: {
+              data: 1,
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+          },
+          comparison: REQUIREMENT_COMPARISONS.ALL,
+        },
+        {
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          data: {
+            status: {
+              data: 'SHARED',
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+          },
+          comparison: REQUIREMENT_COMPARISONS.ALL,
+        },
+      ];
+      const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
+      const campaignParticipations = [{ id: 10, targetProfileId: 789 }];
+      const eligibility = new Eligibility({ organization: {}, organizationLearner: {}, campaignParticipations });
+      const dataForQuest = new DataForQuest({ eligibility });
+
+      const result = quest.findTargetProfileIdsWithoutCampaignParticipationContributingToQuest(dataForQuest);
+
+      expect(result).to.have.length(1);
+      expect(result[0]).to.equal(1);
+    });
+
+    it('returns an array with only target profiles ids without campaign participations contributing to quest', function () {
+      const eligibilityRequirements = [
+        {
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          data: {
+            targetProfileId: {
+              data: 123,
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+          },
+          comparison: REQUIREMENT_COMPARISONS.ALL,
+        },
+        {
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          data: {
+            targetProfileId: {
+              data: 789,
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+          },
+          comparison: REQUIREMENT_COMPARISONS.ALL,
+        },
+      ];
+      const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
+      const campaignParticipations = [{ id: 10, targetProfileId: 123 }];
+      const eligibility = new Eligibility({ organization: {}, organizationLearner: {}, campaignParticipations });
+      const dataForQuest = new DataForQuest({ eligibility });
+
+      const result = quest.findTargetProfileIdsWithoutCampaignParticipationContributingToQuest(dataForQuest);
+
+      expect(result).to.have.length(1);
+      expect(result[0]).to.equal(789);
+    });
+  });
+
   describe('#findCampaignParticipationIdsContributingToQuest', function () {
     it('returns an empty array when there are no campaign participations contributing to quest', function () {
       const eligibilityRequirements = [

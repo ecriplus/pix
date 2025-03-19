@@ -44,6 +44,26 @@ class Quest {
   /**
    * @param {DataForQuest} data
    */
+  findTargetProfileIdsWithoutCampaignParticipationContributingToQuest(data) {
+    const campaignParticipationRequirements = this.#flattenRequirementsByType(
+      this.#eligibilityRequirements.data,
+      REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+    );
+    if (campaignParticipationRequirements.length === 0) return [];
+
+    const targetProfileIds = campaignParticipationRequirements
+      // TODO: requirement.criterion.data.targetProfileId.data would be more explicit
+      .map((requirement) => requirement.data.data?.targetProfileId?.data)
+      .filter(Boolean);
+
+    return targetProfileIds.filter(
+      (targetProfileId) => data.campaignParticipations.findIndex((p) => p.targetProfileId === targetProfileId) === -1,
+    );
+  }
+
+  /**
+   * @param {DataForQuest} data
+   */
   findCampaignParticipationIdsContributingToQuest(data) {
     const campaignParticipationRequirements = this.#flattenRequirementsByType(
       this.#eligibilityRequirements.data,
