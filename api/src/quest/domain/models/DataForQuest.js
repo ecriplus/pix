@@ -52,7 +52,13 @@ export class DataForQuest {
     return this.#success.knowledgeElements;
   }
 
+  // TODO :  stop using this mystical args ?
   getMasteryPercentageForSkills(...args) {
     return this.#success.getMasteryPercentageForSkills(...args);
+  }
+
+  // TODO :  stop using this mystical args ?
+  getMasteryPercentageForCappedTubes(...args) {
+    return this.#success.getMasteryPercentageForCappedTubes(...args);
   }
 }

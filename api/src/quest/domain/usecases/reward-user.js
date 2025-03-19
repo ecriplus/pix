@@ -35,8 +35,9 @@ export const rewardUser = async ({
       if (rewardIds.includes(quest.rewardId)) {
         continue;
       }
-
-      const success = await successRepository.find({ userId });
+      const campaignParticipationIds = quest.findCampaignParticipationIdsContributingToQuest(dataForQuest);
+      const targetProfileIds = quest.findTargetProfileIdsWithoutCampaignParticipationContributingToQuest(dataForQuest);
+      const success = await successRepository.find({ userId, campaignParticipationIds, targetProfileIds });
       dataForQuest.success = success;
       const userHasSucceedQuest = quest.isSuccessful(dataForQuest);
 
