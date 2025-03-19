@@ -161,5 +161,18 @@ describe('Unit | Utils | date-utils', function () {
       expect(anonymizedGeneralizedDate).to.not.equal(someDate);
       expect(anonymizedGeneralizedDate.toISOString()).to.equal('2019-03-01T00:00:00.000Z');
     });
+
+    context('when date is null', function () {
+      it('returns null', function () {
+        // given
+        const aNullDate = null;
+
+        // when
+        const anonymizedGeneralizedDate = anonymizeGeneralizeDate(aNullDate);
+
+        // then
+        expect(anonymizedGeneralizedDate).to.be.null;
+      });
+    });
   });
 });
