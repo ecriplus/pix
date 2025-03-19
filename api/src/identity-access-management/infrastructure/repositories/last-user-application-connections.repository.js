@@ -1,10 +1,10 @@
-import { knex } from '../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { LastUserApplicationConnection } from '../../domain/models/LastUserApplicationConnection.js';
 const TABLE_NAME = 'last-user-application-connections';
 
 async function upsert({ userId, application, lastLoggedAt }) {
-  return knex(TABLE_NAME)
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn(TABLE_NAME)
     .insert({ userId, application, lastLoggedAt })
     .onConflict(['userId', 'application'])
     .merge({ lastLoggedAt });
