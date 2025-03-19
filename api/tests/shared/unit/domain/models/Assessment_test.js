@@ -60,6 +60,8 @@ describe('Unit | Domain | Models | Assessment', function () {
       {
         // eslint-disable-next-line mocha/no-setup-in-describe
         type: Assessment.types.CAMPAIGN,
+        // eslint-disable-next-line mocha/no-setup-in-describe
+        describeInfos: CampaignTypes.ASSESSMENT,
         hasCheckpoints: true,
         showProgressBar: true,
         showLevelup: true,
@@ -71,6 +73,8 @@ describe('Unit | Domain | Models | Assessment', function () {
       {
         // eslint-disable-next-line mocha/no-setup-in-describe
         type: Assessment.types.CAMPAIGN,
+        // eslint-disable-next-line mocha/no-setup-in-describe
+        describeInfos: CampaignTypes.EXAM,
         hasCheckpoints: false,
         showProgressBar: false,
         showLevelup: false,
@@ -79,8 +83,20 @@ describe('Unit | Domain | Models | Assessment', function () {
         // eslint-disable-next-line mocha/no-setup-in-describe
         attributes: { campaign: domainBuilder.buildCampaign({ title: 'Ma Campagne', type: CampaignTypes.EXAM }) },
       },
-    ].forEach(({ type, attributes, showProgressBar, showLevelup, hasCheckpoints, expectedTitle }) => {
-      describe(type, function () {
+      {
+        // eslint-disable-next-line mocha/no-setup-in-describe
+        type: Assessment.types.CAMPAIGN,
+        describeInfos: 'Anonymized assessment',
+        hasCheckpoints: false,
+        showProgressBar: false,
+        expectedTitle: '',
+        showLevelup: false,
+        showQuestionCounter: false,
+
+        attributes: { campaign: null },
+      },
+    ].forEach(({ type, describeInfos, attributes, showProgressBar, showLevelup, hasCheckpoints, expectedTitle }) => {
+      describe(`${type} ${describeInfos}`, function () {
         let assessment;
 
         before(function () {

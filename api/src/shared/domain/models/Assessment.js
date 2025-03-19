@@ -128,12 +128,21 @@ class Assessment {
         break;
       }
       case Assessment.types.CAMPAIGN: {
-        this.campaignCode = campaign.code;
-        this.showProgressBar = campaign.isAssessment;
-        this.hasCheckpoints = campaign.isAssessment;
-        this.showLevelup = campaign.isAssessment;
-        this.showQuestionCounter = campaign.isAssessment;
-        this.title = campaign.title;
+        // if campaign participation is anonymized, assessment of type campaign do not have related campaign
+        if (!campaign) {
+          this.showProgressBar = false;
+          this.hasCheckpoints = false;
+          this.showLevelup = false;
+          this.showQuestionCounter = false;
+          this.title = '';
+        } else {
+          this.campaignCode = campaign.code;
+          this.showProgressBar = campaign.isAssessment;
+          this.hasCheckpoints = campaign.isAssessment;
+          this.showLevelup = campaign.isAssessment;
+          this.showQuestionCounter = campaign.isAssessment;
+          this.title = campaign.title;
+        }
         break;
       }
 
