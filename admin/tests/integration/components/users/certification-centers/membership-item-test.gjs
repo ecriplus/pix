@@ -31,6 +31,7 @@ module('Integration | Component | users | certification-centers | membership-ite
       id: 1,
       certificationCenter,
       role: 'MEMBER',
+      lastAccessedAt: new Date('2020-01-01'),
     });
 
     const disableCertificationCenterMembership = sinon.stub();
@@ -53,6 +54,7 @@ module('Integration | Component | users | certification-centers | membership-ite
     assert.dom(screen.getByRole('cell', { name: certificationCenter.name })).exists();
     assert.dom(screen.getByRole('cell', { name: certificationCenter.type })).exists();
     assert.dom(screen.getByRole('cell', { name: certificationCenter.externalId })).exists();
+    assert.dom(screen.getByRole('cell', { name: '01/01/2020' })).exists();
     assert.dom(screen.getByRole('cell', { name: 'Membre' })).exists();
     assert
       .dom(screen.getByRole('button', { name: 'Modifier le rôle du membre de ce centre de certification' }))
