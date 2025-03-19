@@ -1,8 +1,9 @@
+import dayjs from 'dayjs';
 import { getDocument } from 'pdfjs-dist';
 
 import { generate } from '../../../../../../../src/certification/results/infrastructure/utils/pdf/v3-certification-attestation-pdf.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { expect } from '../../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../../test-helper.js';
 
 describe('Integration | Infrastructure | Utils | Pdf | V3 Certification Attestation Pdf', function () {
   let i18n;
@@ -12,11 +13,11 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certification Attestat
   });
 
   it('should generate a PDF buffer', async function () {
+    // given
+    const certificates = [domainBuilder.certification.results.buildV3CertificationAttestation()];
+
     // when
-    const pdfStream = generate({
-      certificates: [Symbol('attestation')],
-      i18n,
-    });
+    const pdfStream = await generate({ certificates, i18n });
 
     const pdfBuffer = await _convertStreamToBuffer(pdfStream);
 
@@ -26,9 +27,16 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certification Attestat
   });
 
   it('should generate a page for each certificate', async function () {
+    // given
+    const certificates = [
+      domainBuilder.certification.results.buildV3CertificationAttestation(),
+      domainBuilder.certification.results.buildV3CertificationAttestation(),
+      domainBuilder.certification.results.buildV3CertificationAttestation(),
+    ];
+
     // when
     const pdfStream = await generate({
-      certificates: [Symbol('attestation'), Symbol('attestation'), Symbol('attestation')],
+      certificates,
       i18n,
     });
 
@@ -41,8 +49,38 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certification Attestat
   it('should display data content', async function () {
     // given
     const certificates = [
-      { firstName: 'Jane', lastName: 'Doe' },
-      { firstName: 'John', lastName: 'Doe' },
+      domainBuilder.certification.results.buildV3CertificationAttestation({
+        id: 123,
+        firstName: 'Alain',
+        lastName: 'Cendy',
+        birthdate: '1977-04-14',
+        birthplace: 'Saint-Ouen',
+        isPublished: true,
+        userId: 456,
+        date: new Date('2020-01-01'),
+        verificationCode: 'P-SOMECODE',
+        maxReachableLevelOnCertificationDate: 5,
+        deliveredAt: new Date('2021-05-05'),
+        certificationCenter: 'Centre des poules bien dodues',
+        pixScore: 51,
+        sessionId: 789,
+      }),
+      domainBuilder.certification.results.buildV3CertificationAttestation({
+        id: 128,
+        firstName: 'Alain',
+        lastName: 'Terieur',
+        birthdate: '2013-04-14',
+        birthplace: 'Saint-Ouen',
+        isPublished: true,
+        userId: 123,
+        date: new Date('2020-01-01'),
+        verificationCode: 'P-123456BS',
+        maxReachableLevelOnCertificationDate: 5,
+        deliveredAt: new Date('2020-05-05'),
+        certificationCenter: 'Centre des centres',
+        pixScore: 51,
+        sessionId: 789,
+      }),
     ];
 
     // when
@@ -61,8 +99,18 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certification Attestat
     }
 
     expect(pagesContent.length).to.equal(2);
-    expect(pagesContent[0]).to.eql(`${certificates[0].firstName} ${certificates[0].lastName}`);
-    expect(pagesContent[1]).to.eql(`${certificates[1].firstName} ${certificates[1].lastName}`);
+
+    pagesContent.forEach((pageContent, index) => {
+      expect(pageContent).to.include(`Centre de certification : ${certificates[index].certificationCenter}`);
+      expect(pageContent).to.include(`${certificates[index].firstName} ${certificates[index].lastName.toUpperCase()}`);
+      expect(pageContent).to.include(
+        `né(e) le : ${dayjs(certificates[index].birthdate).format('DD/MM/YYYY')} à ${certificates[index].birthplace}`,
+      );
+      expect(pageContent).to.include(`le ${dayjs(certificates[index].deliveredAt).format('DD/MM/YYYY')}`);
+      expect(pageContent).to.include(`${certificates[index].verificationCode}`);
+      expect(pageContent).to.include(`${certificates[index].pixScore}`);
+      expect(pageContent).to.include(`${certificates[index].maxReachableScore}`);
+    });
   });
 });
 
