@@ -10,6 +10,7 @@ const serialize = function (organization) {
       'organizationName',
       'organizationType',
       'organizationExternalId',
+      'lastAccessedAt',
     ],
   }).serialize(organization);
 };
