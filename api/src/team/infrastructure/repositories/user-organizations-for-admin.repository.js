@@ -10,6 +10,7 @@ const findByUserId = async function (userId) {
       organizationName: 'organizations.name',
       organizationType: 'organizations.type',
       organizationExternalId: 'organizations.externalId',
+      lastAccessedAt: 'memberships.lastAccessedAt',
     })
     .innerJoin('organizations', 'organizations.id', 'memberships.organizationId')
     .where('memberships.userId', userId)

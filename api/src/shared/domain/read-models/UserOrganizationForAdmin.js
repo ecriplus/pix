@@ -6,6 +6,7 @@ class UserOrganizationForAdmin {
     organizationName,
     organizationType,
     organizationExternalId,
+    lastAccessedAt,
   } = {}) {
     this.id = id;
     this.organizationRole = organizationRole;
@@ -13,6 +14,7 @@ class UserOrganizationForAdmin {
     this.organizationName = organizationName;
     this.organizationType = organizationType;
     this.organizationExternalId = organizationExternalId;
+    this.lastAccessedAt = lastAccessedAt;
   }
 }
 
