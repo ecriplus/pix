@@ -1,3 +1,6 @@
+/**
+ * @typedef {import('./index.js').CertificationRescoringRepository} CertificationRescoringRepository
+ */
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
 import { AutoJuryDone } from '../events/AutoJuryDone.js';
@@ -6,125 +9,120 @@ import { CertificationAssessment } from '../models/CertificationAssessment.js';
 import { CertificationIssueReportResolutionAttempt } from '../models/CertificationIssueReportResolutionAttempt.js';
 import { CertificationIssueReportResolutionStrategies } from '../models/CertificationIssueReportResolutionStrategies.js';
 
-export const processAutoJury = async ({
+/**
+ * @param {Object} params
+ * @param {CertificationRescoringRepository} params.certificationRescoringRepository
+ */
+export async function processAutoJury({
   sessionFinalized,
   certificationIssueReportRepository,
   certificationAssessmentRepository,
   certificationCourseRepository,
   challengeRepository,
-}) => {
+  certificationRescoringRepository,
+}) {
   const certificationCourses = await certificationCourseRepository.findCertificationCoursesBySessionId({
     sessionId: sessionFinalized.sessionId,
   });
-
-  if (_areV3CertificationCourses(certificationCourses)) {
-    return await _handleAutoJuryV3({
-      sessionFinalized,
-      certificationCourses,
-      certificationAssessmentRepository,
-    });
-  }
-
-  return await _handleAutoJuryV2({
-    sessionFinalized,
-    certificationCourses,
-    certificationIssueReportRepository,
-    challengeRepository,
-    certificationAssessmentRepository,
-  });
-};
-
-async function _handleAutoJuryV2({
-  sessionFinalized,
-  certificationCourses,
-  certificationIssueReportRepository,
-  challengeRepository,
-  certificationAssessmentRepository,
-}) {
-  const resolutionStrategies = new CertificationIssueReportResolutionStrategies({
-    certificationIssueReportRepository,
-    challengeRepository,
-  });
-
-  const certificationJuryDoneEvents = [];
 
   for (const certificationCourse of certificationCourses) {
     const certificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
       certificationCourseId: certificationCourse.getId(),
     });
-
-    const hasAutoCompleteAnEffectOnScoring = await _autoCompleteUnfinishedTest({
-      certificationCourse,
-      certificationAssessment,
-      certificationAssessmentRepository,
-    });
-
-    const hasAutoResolutionAnEffectOnScoring = await _autoResolveCertificationIssueReport({
-      certificationCourse,
-      certificationAssessment,
-      certificationIssueReportRepository,
-      certificationAssessmentRepository,
-      resolutionStrategies,
-    });
-
-    if (hasAutoResolutionAnEffectOnScoring || hasAutoCompleteAnEffectOnScoring) {
-      const certificationJuryDoneEvent = new CertificationJuryDone({
-        certificationCourseId: certificationCourse.getId(),
+    if (_areV3CertificationCourses(certificationCourses)) {
+      await _handleAutoJuryV3({
+        certificationAssessment,
+        certificationCourse,
+        certificationAssessmentRepository,
+        certificationRescoringRepository,
+      });
+    } else {
+      const resolutionStrategies = new CertificationIssueReportResolutionStrategies({
+        certificationIssueReportRepository,
+        challengeRepository,
       });
 
-      certificationJuryDoneEvents.push(certificationJuryDoneEvent);
+      await _handleAutoJuryV2({
+        certificationAssessment,
+        resolutionStrategies,
+        certificationCourse,
+        certificationIssueReportRepository,
+        certificationAssessmentRepository,
+        certificationRescoringRepository,
+      });
     }
   }
 
-  return {
-    certificationJuryDoneEvents,
-    autoJuryDone: new AutoJuryDone({
-      sessionId: sessionFinalized.sessionId,
-      finalizedAt: sessionFinalized.finalizedAt,
-      certificationCenterName: sessionFinalized.certificationCenterName,
-      sessionDate: sessionFinalized.sessionDate,
-      sessionTime: sessionFinalized.sessionTime,
-      hasExaminerGlobalComment: sessionFinalized.hasExaminerGlobalComment,
-    }),
-  };
+  return new AutoJuryDone({
+    sessionId: sessionFinalized.sessionId,
+    finalizedAt: sessionFinalized.finalizedAt,
+    certificationCenterName: sessionFinalized.certificationCenterName,
+    sessionDate: sessionFinalized.sessionDate,
+    sessionTime: sessionFinalized.sessionTime,
+    hasExaminerGlobalComment: sessionFinalized.hasExaminerGlobalComment,
+  });
+}
+
+async function _handleAutoJuryV2({
+  certificationCourse,
+  certificationIssueReportRepository,
+  certificationAssessmentRepository,
+  certificationRescoringRepository,
+  resolutionStrategies,
+  certificationAssessment,
+}) {
+  const hasAutoCompleteAnEffectOnScoring = await _autoCompleteUnfinishedTest({
+    certificationCourse,
+    certificationAssessment,
+    certificationAssessmentRepository,
+  });
+
+  const hasAutoResolutionAnEffectOnScoring = await _autoResolveCertificationIssueReport({
+    certificationCourse,
+    certificationAssessment,
+    certificationIssueReportRepository,
+    certificationAssessmentRepository,
+    resolutionStrategies,
+  });
+
+  if (hasAutoResolutionAnEffectOnScoring || hasAutoCompleteAnEffectOnScoring) {
+    const certificationJuryDoneEvent = new CertificationJuryDone({
+      certificationCourseId: certificationCourse.getId(),
+    });
+
+    await certificationRescoringRepository.execute({
+      event: certificationJuryDoneEvent,
+    });
+  }
 }
 
 function _areV3CertificationCourses(certificationCourses) {
   return certificationCourses[0].isV3();
 }
 
-async function _handleAutoJuryV3({ sessionFinalized, certificationCourses, certificationAssessmentRepository }) {
-  const certificationJuryDoneEvents = [];
-
-  for (const certificationCourse of certificationCourses) {
-    const certificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
+/**
+ * @param {Object} params
+ * @param {CertificationRescoringRepository} params.certificationRescoringRepository
+ */
+async function _handleAutoJuryV3({
+  certificationCourse,
+  certificationAssessment,
+  certificationAssessmentRepository,
+  certificationRescoringRepository,
+}) {
+  if (_v3CertificationShouldBeScored(certificationAssessment)) {
+    const certificationJuryDoneEvent = new CertificationJuryDone({
       certificationCourseId: certificationCourse.getId(),
     });
 
-    if (_v3CertificationShouldBeScored(certificationAssessment)) {
-      const certificationJuryDoneEvent = new CertificationJuryDone({
-        certificationCourseId: certificationCourse.getId(),
-      });
-
-      certificationJuryDoneEvents.push(certificationJuryDoneEvent);
-    }
-
-    certificationAssessment.endDueToFinalization();
-
-    await certificationAssessmentRepository.save(certificationAssessment);
+    await certificationRescoringRepository.execute({
+      event: certificationJuryDoneEvent,
+    });
   }
 
-  return {
-    certificationJuryDoneEvents,
-    autoJuryDone: new AutoJuryDone({
-      sessionId: sessionFinalized.sessionId,
-      finalizedAt: sessionFinalized.finalizedAt,
-      certificationCenterName: sessionFinalized.certificationCenterName,
-      sessionDate: sessionFinalized.sessionDate,
-      sessionTime: sessionFinalized.sessionTime,
-      hasExaminerGlobalComment: sessionFinalized.hasExaminerGlobalComment,
-    }),
-  };
+  certificationAssessment.endDueToFinalization();
+
+  await certificationAssessmentRepository.save(certificationAssessment);
 }
 
 function _v3CertificationShouldBeScored(certificationAssessment) {
@@ -165,6 +163,7 @@ async function _autoResolveCertificationIssueReport({
   const certificationIssueReports = await certificationIssueReportRepository.findByCertificationCourseId({
     certificationCourseId: certificationCourse.getId(),
   });
+
   if (certificationIssueReports.length === 0) {
     return null;
   }

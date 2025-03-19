@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { knex } from '../../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { CertificationIssueReport } from '../../../shared/domain/models/CertificationIssueReport.js';
@@ -37,8 +37,9 @@ const findBySessionIdPaginated = async function ({ page, sessionId }) {
 export { findBySessionId, findBySessionIdPaginated };
 
 async function _getJuryCertificationSummaries(results) {
+  const knexConn = DomainTransaction.getConnection();
   const certificationCourseIds = results.map((row) => row.id);
-  const certificationIssueReportRows = await knex('certification-issue-reports').whereIn(
+  const certificationIssueReportRows = await knexConn('certification-issue-reports').whereIn(
     'certificationCourseId',
     certificationCourseIds,
   );
@@ -48,7 +49,8 @@ async function _getJuryCertificationSummaries(results) {
 }
 
 async function _getByCertificationCourseIds(orderedCertificationCourseIds) {
-  const results = await knex
+  const knexConn = DomainTransaction.getConnection();
+  const results = await knexConn
     .select('certification-courses.*', 'assessment-results.pixScore')
     .select({
       assessmentResultStatus: 'assessment-results.status',
@@ -92,7 +94,8 @@ async function _getByCertificationCourseIds(orderedCertificationCourseIds) {
 }
 
 function _getCertificationCoursesIdBySessionIdQuery(sessionId) {
-  return knex
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn
     .with('impactful-categories', (qb) => {
       qb.select('id').from('issue-report-categories').where({ isImpactful: true });
     })
@@ -103,7 +106,7 @@ function _getCertificationCoursesIdBySessionIdQuery(sessionId) {
         .onNull('certification-issue-reports.resolvedAt')
         .on((qb2) => {
           qb2
-            .onIn('categoryId', knex.select('id').from('impactful-categories'))
+            .onIn('categoryId', knexConn.select('id').from('impactful-categories'))
             .orOnNull('certification-issue-reports.id');
         });
     })
