@@ -39,6 +39,7 @@ import * as schoolRepository from '../../../src/school/infrastructure/repositori
 import { config } from '../../../src/shared/config.js';
 import * as codeGenerator from '../../../src/shared/domain/services/code-generator.js';
 import { cryptoService } from '../../../src/shared/domain/services/crypto-service.js';
+import * as obfuscationService from '../../../src/shared/domain/services/obfuscation-service.js';
 import { tokenService } from '../../../src/shared/domain/services/token-service.js';
 import * as userService from '../../../src/shared/domain/services/user-service.js';
 import * as passwordValidator from '../../../src/shared/domain/validators/password-validator.js';
@@ -65,7 +66,6 @@ import { organizationInvitationService } from '../../../src/team/domain/services
 import { certificationCenterMembershipRepository } from '../../../src/team/infrastructure/repositories/certification-center-membership.repository.js';
 import * as membershipRepository from '../../../src/team/infrastructure/repositories/membership.repository.js';
 import { organizationInvitationRepository } from '../../../src/team/infrastructure/repositories/organization-invitation.repository.js';
-import * as obfuscationService from '../../domain/services/obfuscation-service.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
 import { certificationCompletedJobRepository } from '../../infrastructure/repositories/jobs/certification-completed-job-repository.js';
 import * as organizationMemberIdentityRepository from '../../infrastructure/repositories/organization-member-identity-repository.js';
