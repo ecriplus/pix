@@ -43,8 +43,6 @@ export default class Assessment extends Model {
   @equal('type', 'PREVIEW') isPreview;
   @equal('type', 'CAMPAIGN') isForCampaign;
 
-  @equal('method', 'FLASH') isFlash;
-
   @equal('state', 'aborted') isAborted;
   @equal('state', 'completed') isCompleted;
   @equal('state', 'started') isStarted;

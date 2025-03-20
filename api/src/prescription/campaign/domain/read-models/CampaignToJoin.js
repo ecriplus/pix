@@ -1,4 +1,3 @@
-import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { Campaign } from '../models/Campaign.js';
 
 class CampaignToJoin extends Campaign {
@@ -37,10 +36,6 @@ class CampaignToJoin extends Campaign {
 
   get isReconciliationRequired() {
     return this.isRestricted && Array.isArray(this.reconciliationFields);
-  }
-
-  get isFlash() {
-    return this.assessmentMethod === Assessment.methods.FLASH;
   }
 
   setReconciliationFields(reconciliationFields) {

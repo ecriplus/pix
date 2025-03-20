@@ -12,8 +12,6 @@ export default class CampaignParticipationResult extends Model {
   @attr('boolean') isDisabled;
   @attr('boolean') isShared;
   @attr('string') participantExternalId;
-  @attr('number') estimatedFlashLevel;
-  @attr('number') flashPixScore;
 
   // includes
   @hasMany('campaign-participation-badge', {

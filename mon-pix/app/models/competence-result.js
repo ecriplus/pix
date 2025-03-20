@@ -11,7 +11,6 @@ export default class CompetenceResult extends Model {
   @attr('number') totalSkillsCount;
   @attr('number') testedSkillsCount;
   @attr('number') validatedSkillsCount;
-  @attr('number') flashPixScore;
 
   @attr('number') reachedStage;
 

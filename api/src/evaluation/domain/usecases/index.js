@@ -1,11 +1,8 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import * as flashAssessmentResultRepository from '../../../../lib/infrastructure/repositories/flash-assessment-result-repository.js';
 import * as certificationEvaluationCandidateRepository from '../../../certification/evaluation/infrastructure/repositories/certification-candidate-repository.js';
-import * as flashAlgorithmService from '../../../certification/flash-certification/domain/services/algorithm-methods/flash.js';
 import * as certificationChallengeLiveAlertRepository from '../../../certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
-import * as flashAlgorithmConfigurationRepository from '../../../certification/shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as campaignParticipationRepository from '../../../prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
 import * as targetProfileAdministrationRepository from '../../../prescription/target-profile/infrastructure/repositories/target-profile-administration-repository.js';
@@ -68,9 +65,6 @@ const dependencies = {
   competenceRepository,
   correctionService,
   feedbackRepository,
-  flashAlgorithmConfigurationRepository,
-  flashAlgorithmService,
-  flashAssessmentResultRepository,
   getCompetenceLevel,
   improvementService,
   knowledgeElementRepository: injectedSharedRepositories.knowledgeElementRepository,

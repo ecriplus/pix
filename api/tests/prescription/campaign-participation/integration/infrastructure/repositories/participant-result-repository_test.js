@@ -2,7 +2,6 @@ import * as participantResultRepository from '../../../../../../src/prescription
 import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import {
-  Assessment,
   CampaignParticipationStatuses,
   CampaignTypes,
   KnowledgeElement,
@@ -488,85 +487,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
       });
     });
 
-    context('when campaign is flash', function () {
-      it('returns the estimated flash level and calculated pix score (total and by competence)', async function () {
-        // given
-        const { id: userId } = databaseBuilder.factory.buildUser();
-        const { id: campaignId } = databaseBuilder.factory.buildCampaign({
-          assessmentMethod: Assessment.methods.FLASH,
-        });
-        const { id: campaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation({
-          userId,
-          campaignId,
-        });
-        const { id: assessmentId } = databaseBuilder.factory.buildAssessment({
-          campaignParticipationId,
-          userId,
-          method: Assessment.methods.FLASH,
-        });
-        const answers = [
-          databaseBuilder.factory.buildAnswer({
-            assessmentId,
-            challengeId: 'challenge1',
-            result: 'ok',
-          }),
-        ];
-        const { estimatedLevel } = databaseBuilder.factory.buildFlashAssessmentResult({
-          assessmentId,
-          answerId: answers[0].id,
-        });
-        await databaseBuilder.commit();
-
-        // when
-        const participantResult = await participantResultRepository.get({
-          userId,
-          campaignId,
-          targetProfile,
-          badges: [],
-          locale: 'FR',
-        });
-
-        // then
-        expect(participantResult).to.contain({
-          estimatedFlashLevel: estimatedLevel,
-          flashPixScore: 202,
-        });
-
-        expect(participantResult.competenceResults).to.deep.equal([
-          {
-            id: 'rec1',
-            name: 'comp1Fr',
-            index: '1.1',
-            areaName: 'area1',
-            description: "Teste les qualités de l'utilisateur",
-            areaTitle: 'domaine1',
-            areaColor: 'colorArea1',
-            testedSkillsCount: 0,
-            totalSkillsCount: 2,
-            validatedSkillsCount: 0,
-            masteryPercentage: 0,
-            reachedStage: undefined,
-            flashPixScore: 2,
-          },
-          {
-            id: 'rec2',
-            name: 'comp2Fr',
-            index: '2.1',
-            areaName: 'area2',
-            areaTitle: 'domaine2',
-            description: "Teste les qualités de l'utilisateur",
-            areaColor: 'colorArea2',
-            testedSkillsCount: 0,
-            totalSkillsCount: 3,
-            validatedSkillsCount: 0,
-            masteryPercentage: 0,
-            reachedStage: undefined,
-            flashPixScore: 200,
-          },
-        ]);
-      });
-    });
-
     context('when there are several participations', function () {
       it('use the participation not improved yet', async function () {
         const { id: userId } = databaseBuilder.factory.buildUser();
@@ -966,7 +886,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 2,
               masteryPercentage: 100,
               reachedStage: undefined,
-              flashPixScore: undefined,
             });
             expect(competenceResult2).to.deep.equal({
               id: 'rec2',
@@ -981,7 +900,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 1,
               masteryPercentage: 50,
               reachedStage: undefined,
-              flashPixScore: undefined,
             });
           });
         });
@@ -1035,7 +953,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 2,
               masteryPercentage: 100,
               reachedStage: 5,
-              flashPixScore: undefined,
             });
             expect(competenceResult2).to.deep.equal({
               id: 'rec2',
@@ -1050,7 +967,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 1,
               masteryPercentage: 50,
               reachedStage: 3,
-              flashPixScore: undefined,
             });
           });
         });
@@ -1118,7 +1034,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 2,
               masteryPercentage: 100,
               reachedStage: 5,
-              flashPixScore: undefined,
             });
             expect(competenceResult2).to.deep.equal({
               id: 'rec2',
@@ -1133,7 +1048,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 1,
               masteryPercentage: 50,
               reachedStage: 4,
-              flashPixScore: undefined,
             });
           });
         });
@@ -1368,7 +1282,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 2,
               masteryPercentage: 100,
               reachedStage: undefined,
-              flashPixScore: undefined,
             });
             expect(competenceResult2).to.deep.equal({
               id: 'rec2',
@@ -1383,7 +1296,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 1,
               masteryPercentage: 50,
               reachedStage: undefined,
-              flashPixScore: undefined,
             });
           });
         });
@@ -1437,7 +1349,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 2,
               masteryPercentage: 100,
               reachedStage: 5,
-              flashPixScore: undefined,
             });
             expect(competenceResult2).to.deep.equal({
               id: 'rec2',
@@ -1452,7 +1363,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 1,
               masteryPercentage: 50,
               reachedStage: 3,
-              flashPixScore: undefined,
             });
           });
         });
@@ -1520,7 +1430,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 2,
               masteryPercentage: 100,
               reachedStage: 5,
-              flashPixScore: undefined,
             });
             expect(competenceResult2).to.deep.equal({
               id: 'rec2',
@@ -1535,7 +1444,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
               validatedSkillsCount: 1,
               masteryPercentage: 50,
               reachedStage: 4,
-              flashPixScore: undefined,
             });
           });
         });

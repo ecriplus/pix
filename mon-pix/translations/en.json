@@ -1856,7 +1856,6 @@
       "badges-title": "Your thematic results",
       "details": {
         "caption": "Details of your results in percentage according to competences",
-        "flash-pix-score": "{score, number, ::.} Pix",
         "header-result": "Results",
         "header-skill": "Competences tested",
         "percentage": "{rate, number, ::percent}",
@@ -1866,11 +1865,6 @@
       },
       "disabled-share": "This customised test has been deactivated by the organiser.'<br>'It is no longer possible to submit results.",
       "error": "Oops, an error occurred!",
-      "flash": {
-        "abstract": "Congratulations, you went all the way !",
-        "nonDefinitive": "(non-definitive calculation)",
-        "pixScore": "You got {score, number, ::.} Pix"
-      },
       "hero": {
         "acquired-badges-title": "Awards received",
         "bravo": "Congratulations {name}!",

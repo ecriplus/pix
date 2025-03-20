@@ -1,5 +1,3 @@
-import { FlashAssessmentAlgorithm } from '../../../certification/flash-certification/domain/models/FlashAssessmentAlgorithm.js';
-import { FlashAssessmentAlgorithmConfiguration } from '../../../certification/shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 import { AssessmentEndedError } from '../../../shared/domain/errors.js';
 
 const getNextChallengeForCampaignAssessment = async function ({
@@ -7,87 +5,42 @@ const getNextChallengeForCampaignAssessment = async function ({
   locale,
   challengeRepository,
   answerRepository,
-  flashAlgorithmConfigurationRepository,
-  flashAssessmentResultRepository,
   pickChallengeService,
   algorithmDataFetcherService,
   smartRandomService,
-  flashAlgorithmService,
   campaignRepository,
   knowledgeElementRepository,
   campaignParticipationRepository,
   improvementService,
 }) {
-  let algoResult;
-
-  if (assessment.isFlash()) {
-    const { allAnswers, challenges } = await algorithmDataFetcherService.fetchForFlashCampaigns({
-      assessmentId: assessment.id,
+  const { allAnswers, lastAnswer, targetSkills, challenges, knowledgeElements } =
+    await algorithmDataFetcherService.fetchForCampaigns({
+      assessment,
+      locale,
       answerRepository,
+      campaignRepository,
       challengeRepository,
-      flashAssessmentResultRepository,
-      locale,
+      knowledgeElementRepository,
+      campaignParticipationRepository,
+      improvementService,
     });
+  const algoResult = smartRandomService.getPossibleSkillsForNextChallenge({
+    knowledgeElements,
+    challenges,
+    targetSkills,
+    lastAnswer,
+    allAnswers,
+    locale,
+  });
 
-    const configuration =
-      (await flashAlgorithmConfigurationRepository.getMostRecent()) ?? _createDefaultAlgorithmConfiguration();
-
-    const assessmentAlgorithm = new FlashAssessmentAlgorithm({
-      flashAlgorithmImplementation: flashAlgorithmService,
-      configuration,
-    });
-
-    const possibleChallenges = assessmentAlgorithm.getPossibleNextChallenges({
-      assessmentAnswers: allAnswers,
-      challenges,
-    });
-
-    if (_hasAnsweredToAllChallenges({ possibleChallenges })) {
-      throw new AssessmentEndedError();
-    }
-
-    return pickChallengeService.chooseNextChallenge(assessment.id)({ possibleChallenges });
-  } else {
-    const { allAnswers, lastAnswer, targetSkills, challenges, knowledgeElements } =
-      await algorithmDataFetcherService.fetchForCampaigns({
-        assessment,
-        locale,
-        answerRepository,
-        campaignRepository,
-        challengeRepository,
-        knowledgeElementRepository,
-        campaignParticipationRepository,
-        improvementService,
-      });
-    algoResult = smartRandomService.getPossibleSkillsForNextChallenge({
-      knowledgeElements,
-      challenges,
-      targetSkills,
-      lastAnswer,
-      allAnswers,
-      locale,
-    });
-
-    if (algoResult.hasAssessmentEnded) {
-      throw new AssessmentEndedError();
-    }
-
-    return pickChallengeService.pickChallenge({
-      skills: algoResult.possibleSkillsForNextChallenge,
-      randomSeed: assessment.id,
-      locale,
-    });
+  if (algoResult.hasAssessmentEnded) {
+    throw new AssessmentEndedError();
   }
-};
 
-const _hasAnsweredToAllChallenges = ({ possibleChallenges }) => {
-  return possibleChallenges.length === 0;
-};
-
-const _createDefaultAlgorithmConfiguration = () => {
-  return new FlashAssessmentAlgorithmConfiguration({
-    limitToOneQuestionPerTube: false,
-    enablePassageByAllCompetences: false,
+  return pickChallengeService.pickChallenge({
+    skills: algoResult.possibleSkillsForNextChallenge,
+    randomSeed: assessment.id,
+    locale,
   });
 };
 

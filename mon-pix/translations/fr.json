@@ -1857,7 +1857,6 @@
       "badges-title": "Vos résultats thématiques",
       "details": {
         "caption": "Détails de vos résultats sous forme de pourcentage en fonction des compétences",
-        "flash-pix-score": "{score, number, ::.} Pix",
         "header-result": "Résultats",
         "header-skill": "Compétences testées",
         "percentage": "{rate, number, ::percent}",
@@ -1867,11 +1866,6 @@
       },
       "disabled-share": "Ce parcours a été désactivé par l'organisateur.'<br>'L'envoi des résultats n'est plus possible.",
       "error": "Oups, une erreur est survenue !",
-      "flash": {
-        "abstract": "Bravo, vous êtes allé·e jusqu'au bout !",
-        "nonDefinitive": "(calcul non définitif)",
-        "pixScore": "Vous avez obtenu {score, number, ::.} Pix"
-      },
       "hero": {
         "acquired-badges-title": "Récompenses obtenues",
         "bravo": "Bravo {name} !",

@@ -27,9 +27,6 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
     scorecardService,
     knowledgeElementRepository,
     campaignRepository,
-    flashAssessmentResultRepository,
-    flashAlgorithmService,
-    algorithmDataFetcherService,
     answerJobRepository;
 
   const nowDate = new Date('2021-03-11T11:00:04Z');
@@ -51,9 +48,6 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       get: sinon.stub(),
       getCampaignIdByCampaignParticipationId: sinon.stub(),
     };
-    flashAssessmentResultRepository = { save: sinon.stub() };
-    flashAlgorithmService = { getCapacityAndErrorRate: sinon.stub() };
-    algorithmDataFetcherService = { fetchForFlashLevelEstimation: sinon.stub() };
     knowledgeElementRepository = {
       findUniqByUserIdForCampaignParticipation: sinon.stub(),
       saveForCampaignParticipation: sinon.stub(),
@@ -98,9 +92,6 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       challengeRepository,
       competenceEvaluationRepository,
       campaignRepository,
-      flashAssessmentResultRepository,
-      flashAlgorithmService,
-      algorithmDataFetcherService,
       knowledgeElementRepository,
       scorecardService,
       answerJobRepository,
@@ -293,187 +284,6 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
           answer = domainBuilder.buildAnswer({ value: 'wrong answer' });
           answer.result = AnswerStatus.KO;
           savedAnswer.result = AnswerStatus.KO;
-
-          // when
-          const result = await saveAndCorrectAnswerForCampaign({
-            answer,
-            userId,
-            assessment,
-            locale,
-            ...dependencies,
-          });
-
-          // then
-          expect(scorecardService.computeLevelUpInformation).to.not.have.been.called;
-          expect(result.levelup).to.deep.equal({});
-        });
-      });
-    });
-
-    context('and assessment is a CAMPAIGN with FLASH method', function () {
-      let flashData;
-      const locale = 'fr';
-      const capacity = 1.93274982;
-      const errorRate = 0.9127398127;
-
-      beforeEach(function () {
-        // given
-        assessment.type = Assessment.types.CAMPAIGN;
-        assessment.method = Assessment.methods.FLASH;
-        assessment.campaignParticipationId = 123;
-        flashData = Symbol('flashData');
-        algorithmDataFetcherService.fetchForFlashLevelEstimation.returns(flashData);
-        flashAlgorithmService.getCapacityAndErrorRate.returns({
-          capacity,
-          errorRate,
-        });
-      });
-
-      it('should call the answer repository to save the answer', async function () {
-        // when
-        await saveAndCorrectAnswerForCampaign({
-          answer,
-          userId,
-          assessment,
-          locale,
-          ...dependencies,
-        });
-
-        // then
-        expect(answerRepository.save).to.be.calledWith({ answer: completedAnswer });
-      });
-
-      it('should not call the target profile repository to find target skills', async function () {
-        // when
-        await saveAndCorrectAnswerForCampaign({
-          answer,
-          userId,
-          assessment,
-          locale,
-          ...dependencies,
-        });
-
-        // then
-        expect(campaignRepository.findSkillsByCampaignParticipationId).to.not.have.been.called;
-      });
-
-      it('should call the challenge repository to get the answer challenge', async function () {
-        // when
-        await saveAndCorrectAnswerForCampaign({
-          answer,
-          userId,
-          assessment,
-          locale,
-          ...dependencies,
-        });
-
-        // then
-        const expectedArgument = answer.challengeId;
-        expect(challengeRepository.get).to.have.been.calledWithExactly(expectedArgument);
-      });
-
-      it('should not create the knowledge elements for the answer', async function () {
-        // when
-        await saveAndCorrectAnswerForCampaign({
-          answer,
-          userId,
-          assessment,
-          locale,
-          ...dependencies,
-        });
-
-        // then
-        const answerCreated = domainBuilder.buildAnswer(savedAnswer);
-        answerCreated.id = undefined;
-        expect(KnowledgeElement.createKnowledgeElementsForAnswer).to.not.have.been.called;
-      });
-
-      it('should return the saved answer - with the id', async function () {
-        // when
-        const result = await saveAndCorrectAnswerForCampaign({
-          answer,
-          userId,
-          assessment,
-          locale,
-          ...dependencies,
-        });
-
-        // then
-        const expectedArgument = savedAnswer;
-        expect(result).to.deep.equal(expectedArgument);
-      });
-
-      it('should call the algorithm data fetcher for level estimation', async function () {
-        // when
-        await saveAndCorrectAnswerForCampaign({
-          answer,
-          userId,
-          assessment,
-          locale,
-          ...dependencies,
-        });
-
-        expect(algorithmDataFetcherService.fetchForFlashLevelEstimation).to.have.been.calledWithExactly({
-          assessment,
-          answerRepository,
-          challengeRepository,
-          locale,
-        });
-      });
-
-      it('should call the flash algorithm to estimate level and error rate', async function () {
-        // when
-        await saveAndCorrectAnswerForCampaign({
-          answer,
-          userId,
-          assessment,
-          locale,
-          ...dependencies,
-        });
-
-        expect(flashAlgorithmService.getCapacityAndErrorRate).to.have.been.calledWithExactly(flashData);
-      });
-
-      it('should call the flash assessment result repository to save capacity and errorRate', async function () {
-        // when
-        const { id } = await saveAndCorrectAnswerForCampaign({
-          answer,
-          userId,
-          assessment,
-          locale,
-          ...dependencies,
-        });
-
-        expect(flashAssessmentResultRepository.save).to.have.been.calledWithExactly({
-          answerId: id,
-          capacity,
-          errorRate,
-          assessmentId: assessment.id,
-        });
-      });
-
-      context('when the user responds correctly', function () {
-        it('should not compute the level up', async function () {
-          // when
-          const result = await saveAndCorrectAnswerForCampaign({
-            answer,
-            userId,
-            assessment,
-            locale,
-            ...dependencies,
-          });
-
-          // then
-          expect(scorecardService.computeLevelUpInformation).to.not.have.been.called;
-          expect(result.levelup).to.deep.equal({});
-        });
-      });
-
-      context('when the user responds badly', function () {
-        it('should not compute the level up', async function () {
-          // given
-          answer = domainBuilder.buildAnswer({ value: 'wrong answer' });
-          answer.result = AnswerStatus.KO;
 
           // when
           const result = await saveAndCorrectAnswerForCampaign({

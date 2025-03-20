@@ -20,9 +20,6 @@ const saveAndCorrectAnswerForCampaign = withTransaction(async function ({
   competenceEvaluationRepository,
   knowledgeElementRepository,
   correctionService,
-  flashAlgorithmService,
-  algorithmDataFetcherService,
-  flashAssessmentResultRepository,
   campaignRepository,
 } = {}) {
   if (assessment.userId !== userId) {
@@ -85,24 +82,6 @@ const saveAndCorrectAnswerForCampaign = withTransaction(async function ({
       areaRepository,
       competenceRepository,
       competenceEvaluationRepository,
-    });
-  } else if (assessment.isFlash()) {
-    answerSaved = await answerRepository.save({ answer: correctedAnswer });
-    answerSaved.levelup = {};
-    const flashData = await algorithmDataFetcherService.fetchForFlashLevelEstimation({
-      assessment,
-      answerRepository,
-      challengeRepository,
-      locale,
-    });
-
-    const { capacity, errorRate } = flashAlgorithmService.getCapacityAndErrorRate(flashData);
-
-    await flashAssessmentResultRepository.save({
-      answerId: answerSaved.id,
-      capacity,
-      errorRate,
-      assessmentId: assessment.id,
     });
   }
 

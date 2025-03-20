@@ -2,7 +2,7 @@ import lodash from 'lodash';
 
 import { logger } from '../../../../../shared/infrastructure/utils/logger.js';
 
-const { orderBy, range, sortBy, sortedUniqBy } = lodash;
+const { orderBy, range } = lodash;
 
 const DEFAULT_CAPACITY = 0;
 const START_OF_SAMPLES = -9;
@@ -16,7 +16,6 @@ const ERROR_RATE_CLASS_INTERVAL = 9 / 80;
 const MAX_NUMBER_OF_RETURNED_CHALLENGES = 5;
 
 export {
-  calculateTotalPixScoreAndScoreByCompetence,
   getCapacityAndErrorRate,
   getCapacityAndErrorRateHistory,
   getChallengesForNonAnsweredSkills,
@@ -153,17 +152,6 @@ function getChallengesForNonAnsweredSkills({ allAnswers, challenges }) {
   return challengesForNonAnsweredSkills;
 }
 
-function calculateTotalPixScoreAndScoreByCompetence({ allAnswers, challenges, capacity }) {
-  const succeededChallenges = _getDirectSucceededChallenges({ allAnswers, challenges });
-
-  const inferredChallenges = _getInferredChallenges({
-    challenges: getChallengesForNonAnsweredSkills({ allAnswers, challenges }),
-    capacity,
-  });
-
-  return _sumPixScoreAndScoreByCompetence([...succeededChallenges, ...inferredChallenges]);
-}
-
 function _limitCapacityVariation(previousCapacity, nextCapacity, variationPercent) {
   const hasSmallCapacity = -variationPercent < previousCapacity && previousCapacity < variationPercent;
 
@@ -193,72 +181,12 @@ function _findBestPossibleChallenges(challengesWithReward, capacity) {
   return possibleChallengesWithReward.map(({ challenge }) => challenge);
 }
 
-function _getDirectSucceededChallenges({ allAnswers, challenges }) {
-  const correctAnswers = allAnswers.filter((answer) => answer.isOk());
-  return correctAnswers.map((answer) => _findChallengeForAnswer(challenges, answer));
-}
-
-function _getInferredChallenges({ challenges, capacity }) {
-  const challengesForInferrence = _findChallengesForInferrence(challenges);
-  return challengesForInferrence.filter((challenge) => capacity >= challenge.minimumCapability);
-}
-
-/**
- * Returns a list of challenges containing for each skill
- * the challenge with the lowest minimum capability,
- * prioritizing validated challenges over archived ones.
- *
- * @param {import('../../../../../shared/domain/models/Challenge.js')[]} challenges
- * @returns A list of challenges for scoring inferrence
- */
-function _findChallengesForInferrence(challenges) {
-  return sortedUniqBy(
-    orderBy(challenges, ['skill.id', getChallengePriorityForInferrence, 'minimumCapability']),
-    'skill.id',
-  );
-}
-
-const challengeStatusPriorityForInferrence = ['validé', 'archivé'];
-
-function getChallengePriorityForInferrence(challenge) {
-  const priority = challengeStatusPriorityForInferrence.indexOf(challenge.status);
-  return priority === -1 ? 100 : priority;
-}
-
 function _findChallengeForAnswer(challenges, answer) {
   const challengeAssociatedToAnswer = challenges.find((challenge) => challenge.id === answer.challengeId);
   if (!challengeAssociatedToAnswer) {
     logger.warn({ answer }, 'Cannot find a challenge associated to answer.challengeId');
   }
   return challengeAssociatedToAnswer;
-}
-
-function _sumPixScoreAndScoreByCompetence(challenges) {
-  const scoreBySkillId = {};
-  const scoreByCompetenceId = {};
-
-  for (const challenge of challenges) {
-    const { id: skillId, competenceId, pixValue } = challenge.skill;
-
-    if (scoreBySkillId[skillId]) continue;
-
-    scoreBySkillId[skillId] = pixValue;
-
-    const previousCompetenceScore = scoreByCompetenceId[competenceId] ?? 0;
-
-    scoreByCompetenceId[competenceId] = pixValue + previousCompetenceScore;
-  }
-
-  const pixScore = Object.values(scoreBySkillId).reduce((sum, pixValue) => sum + pixValue, 0);
-  const pixScoreByCompetence = sortBy(
-    Object.entries(scoreByCompetenceId).map(([competenceId, pixScore]) => ({
-      competenceId,
-      pixScore,
-    })),
-    'competenceId',
-  );
-
-  return { pixScore, pixScoreByCompetence };
 }
 
 function getReward({ capacity, discriminant, difficulty }) {

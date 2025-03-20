@@ -88,46 +88,4 @@ async function fetchForCompetenceEvaluations({
   };
 }
 
-async function fetchForFlashCampaigns({
-  assessmentId,
-  answerRepository,
-  challengeRepository,
-  flashAssessmentResultRepository,
-  locale,
-}) {
-  const [allAnswers, challenges, { estimatedLevel } = {}] = await Promise.all([
-    answerRepository.findByAssessment(assessmentId),
-    challengeRepository.findActiveFlashCompatible({ locale }),
-    flashAssessmentResultRepository.getLatestByAssessmentId(assessmentId),
-  ]);
-
-  const challengeIds = new Set(challenges.map(({ id }) => id));
-  const missingChallengeIds = allAnswers
-    .map(({ challengeId }) => challengeId)
-    .filter((challengeId) => !challengeIds.has(challengeId));
-  if (missingChallengeIds.length > 0) {
-    const missingChallenges = await challengeRepository.getMany(missingChallengeIds, locale);
-    challenges.push(...missingChallenges);
-  }
-
-  return {
-    allAnswers,
-    challenges,
-    estimatedLevel,
-  };
-}
-
-async function fetchForFlashLevelEstimation({ assessment, answerRepository, challengeRepository, locale }) {
-  const allAnswers = await answerRepository.findByAssessment(assessment.id);
-  const challenges = await challengeRepository.getMany(
-    allAnswers.map(({ challengeId }) => challengeId),
-    locale,
-  );
-
-  return {
-    allAnswers,
-    challenges,
-  };
-}
-
-export { fetchForCampaigns, fetchForCompetenceEvaluations, fetchForFlashCampaigns, fetchForFlashLevelEstimation };
+export { fetchForCampaigns, fetchForCompetenceEvaluations };

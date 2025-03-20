@@ -24,8 +24,6 @@ describe('Unit | Domain | Read-Models | ParticipantResult | CompetenceResult', f
       domainBuilder.buildKnowledgeElement({ status: KnowledgeElement.StatusType.INVALIDATED }),
     ];
 
-    const flashPixScore = 123.456;
-
     const reachedStage = 1;
 
     const competenceResult = new CompetenceResult({
@@ -33,7 +31,6 @@ describe('Unit | Domain | Read-Models | ParticipantResult | CompetenceResult', f
       area,
       totalSkillsCount,
       knowledgeElements,
-      flashPixScore,
       reachedStage,
     });
 
@@ -49,7 +46,6 @@ describe('Unit | Domain | Read-Models | ParticipantResult | CompetenceResult', f
       totalSkillsCount: 3,
       validatedSkillsCount: 1,
       masteryPercentage: 33,
-      flashPixScore: 123.456,
       reachedStage: 1,
     });
   });
