@@ -8,11 +8,8 @@ export function getQcuSample(nbOfProposals = 3) {
     proposals: Array.from(Array(nbOfProposals)).map((_, i) => ({
       id: `${i + 1}`,
       content: `Proposition ${i + 1}`,
+      feedback: `<p>Correct ! ${i + 1}</p>`,
     })),
-    feedbacks: {
-      valid: '<p>Correct !</p>',
-      invalid: '<p>Incorrect !</p>',
-    },
     solution: '1',
   };
 }
