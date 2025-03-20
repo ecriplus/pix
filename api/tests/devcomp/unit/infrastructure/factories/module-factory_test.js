@@ -646,12 +646,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
                         feedback: "Faux n'est pas la bonne réponse.",
                       },
                     ],
-                    feedbacks: {
-                      valid:
-                        '<p>On peut avoir des chiffres n’importe où dans l’identifiant. On peut aussi utiliser des majuscules.</p>',
-                      invalid:
-                        '<p>On peut avoir des chiffres n’importe où dans l’identifiant. On peut aussi utiliser des majuscules.</p>',
-                    },
+
                     solution: '1',
                   },
                 },
@@ -1277,11 +1272,6 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
                               feedback: "Faux n'est pas la bonne réponse.",
                             },
                           ],
-                          feedbacks: {
-                            valid: '<p>Correct&#8239;! Ces 16 compétences sont rangées dans 5 domaines.</p>',
-                            invalid:
-                              '<p>Incorrect. Retourner voir la vidéo si besoin&nbsp;<span aria-hidden="true">👆</span>!</p>',
-                          },
                           solution: '1',
                         },
                       ],
