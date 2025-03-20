@@ -492,6 +492,11 @@
           }
         }
       },
+      "list-items": {
+        "table": {
+          "caption": "Liste des utilisateurs. Contient le prénom, le nom, l'adresse e-mail et l'identifiant."
+        }
+      },
       "user-detail-personal-information": {
         "actions": {
           "copy-email": "Copier l’adresse e-mail",

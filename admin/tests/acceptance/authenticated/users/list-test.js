@@ -1,6 +1,7 @@
-import { visit } from '@1024pix/ember-testing-library';
+import { visit, within } from '@1024pix/ember-testing-library';
 import { click, currentURL, fillIn } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { module, test } from 'qunit';
@@ -82,10 +83,10 @@ module('Acceptance | authenticated/users | list', function (hooks) {
           const screen = await visit('/users/list?id=123');
 
           // then
+          const table = screen.getByRole('table', { name: t('components.users.list-items.table.caption') });
           assert
-            .dom(screen.getByLabelText("Informations de l'utilisateur Victor MacBernik"))
-            .hasText('123 Victor MacBernik victor@famille-pirate.net victor123');
-          assert.strictEqual(screen.queryAllByLabelText("Informations de l'utilisateur", { exact: false }).length, 1);
+            .dom(within(table).getByRole('row', { name: '123 Victor MacBernik victor@famille-pirate.net victor123' }))
+            .exists();
         });
       });
 
@@ -118,10 +119,8 @@ module('Acceptance | authenticated/users | list', function (hooks) {
           const screen = await visit('/users/list?username=alex.pix1030');
 
           // then
-          assert
-            .dom(screen.getByLabelText("Informations de l'utilisateur Alex Ception"))
-            .hasText('1 Alex Ception alex.pix1030');
-          assert.strictEqual(screen.queryAllByLabelText("Informations de l'utilisateur", { exact: false }).length, 1);
+          const table = screen.getByRole('table', { name: t('components.users.list-items.table.caption') });
+          assert.dom(within(table).getByRole('row', { name: '1 Alex Ception alex.pix1030' })).exists();
         });
       });
 
@@ -155,9 +154,10 @@ module('Acceptance | authenticated/users | list', function (hooks) {
           const screen = await visit('/users/list?username=alex.pix1030');
 
           // then
+          const table = screen.getByRole('table', { name: t('components.users.list-items.table.caption') });
           assert
-            .dom(screen.getByLabelText("Informations de l'utilisateur Alex Ception"))
-            .hasText('1 Alex Ception alex.ception@example.net alex.pix1030');
+            .dom(within(table).getByRole('row', { name: '1 Alex Ception alex.ception@example.net alex.pix1030' }))
+            .exists();
         });
       });
 

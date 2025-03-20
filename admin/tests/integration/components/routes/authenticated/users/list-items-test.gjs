@@ -1,10 +1,12 @@
-import { render } from '@ember/test-helpers';
-import { setupRenderingTest } from 'ember-qunit';
+import { render, within } from '@1024pix/ember-testing-library';
+import { t } from 'ember-intl/test-support';
 import ListItems from 'pix-admin/components/users/list-items';
 import { module, test } from 'qunit';
 
+import setupIntlRenderingTest from '../../../../../helpers/setup-intl-rendering';
+
 module('Integration | Component | routes/authenticated/users | list-items', function (hooks) {
-  setupRenderingTest(hooks);
+  setupIntlRenderingTest(hooks);
 
   const triggerFiltering = () => {};
 
@@ -12,7 +14,7 @@ module('Integration | Component | routes/authenticated/users | list-items', func
     // given
     const users = [
       { id: 1, firstName: 'John', lastName: 'Doe', email: 'john.doe@example.net' },
-      { id: 2, firstName: 'Jane', lastName: 'Doe', email: 'jane.doe@example.org' },
+      { id: 2, firstName: 'Jane', lastName: 'Dae', email: 'jane.dae@example.org' },
       { id: 3, firstName: 'Lola', lastName: 'Lile', email: 'lola.lile@example.net' },
     ];
     users.meta = {
@@ -20,13 +22,18 @@ module('Integration | Component | routes/authenticated/users | list-items', func
     };
 
     // when
-    await render(<template><ListItems @users={{users}} @triggerFiltering={{triggerFiltering}} /></template>);
+    const screen = await render(
+      <template><ListItems @users={{users}} @triggerFiltering={{triggerFiltering}} /></template>,
+    );
 
     // then
-    assert.dom('table tbody tr:first-child td:first-child').hasText('1');
-    assert.dom('table tbody tr:first-child td:nth-child(2)').hasText('John');
-    assert.dom('table tbody tr:first-child td:nth-child(3)').hasText('Doe');
-    assert.dom('table tbody tr:first-child td:nth-child(4)').hasText('john.doe@example.net');
-    assert.dom('table tbody tr').exists({ count: 3 });
+    const table = screen.getByRole('table', { name: t('components.users.list-items.table.caption') });
+    const rows = within(table).getAllByRole('row');
+    assert.dom(within(table).getByRole('cell', { name: 'John' })).exists();
+    assert.dom(within(table).getByRole('cell', { name: 'Doe' })).exists();
+    assert.dom(within(table).getByRole('cell', { name: 'john.doe@example.net' })).exists();
+    assert.dom(within(table).getByRole('cell', { name: '1' })).exists();
+    assert.dom(within(table).getByRole('link', { name: '1' })).exists();
+    assert.strictEqual(rows.length, 4);
   });
 });
