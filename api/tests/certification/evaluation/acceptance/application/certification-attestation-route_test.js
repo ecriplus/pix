@@ -1,6 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import * as url from 'node:url';
 
+import dayjs from 'dayjs';
+
 import { generateCertificateVerificationCode } from '../../../../../src/certification/evaluation/domain/services/verify-certificate-code-service.js';
 import { SESSIONS_VERSIONS } from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { Assessment } from '../../../../../src/shared/domain/models/index.js';
@@ -224,14 +226,16 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
     });
 
     describe('when the session version is V3', function () {
-      it('should return 200 HTTP status code', async function () {
+      it('should return 200 HTTP status code and the certification', async function () {
         // given
         await featureToggles.set('isV3CertificationAttestationEnabled', true);
         const superAdmin = await insertUserWithRoleSuperAdmin();
 
-        await _buildDatabaseCertification({
+        const sessionId = 4567;
+
+        const { session } = await _buildDatabaseCertification({
           userId: superAdmin.id,
-          sessionId: 4567,
+          sessionId,
           sessionVersion: SESSIONS_VERSIONS.V3,
         });
         await databaseBuilder.commit();
@@ -247,6 +251,11 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
 
         // then
         expect(response.statusCode).to.equal(200);
+        expect(response.headers['content-type']).to.equal('application/pdf');
+        expect(response.headers['content-disposition']).to.equal(
+          `attachment; filename=session-${sessionId}-attestation-pix-${dayjs(session.publishedAt).format('YYYYMMDD')}.pdf`,
+        );
+        expect(response.file).not.to.be.null;
       });
     });
   });

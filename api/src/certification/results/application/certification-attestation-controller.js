@@ -52,8 +52,10 @@ const getPDFAttestation = async function (
 const getCertificationPDFAttestationsForSession = async function (
   request,
   h,
-  dependencies = { certificationAttestationPdf },
+  dependencies = { certificationAttestationPdf, v3CertificationAttestationPdf },
 ) {
+  const { i18n } = request;
+
   const sessionId = request.params.sessionId;
   const isFrenchDomainExtension = request.query.isFrenchDomainExtension;
   const attestations = await usecases.getCertificationAttestationsForSession({
@@ -61,10 +63,21 @@ const getCertificationPDFAttestationsForSession = async function (
   });
 
   if (attestations.every((attestation) => attestation instanceof V3CertificationAttestation)) {
-    return h.response().code(200);
-  }
+    const translatedFileName = i18n.__('certification-confirmation.file-name', {
+      deliveredAt: dayjs(attestations[0].deliveredAt).format('YYYYMMDD'),
+    });
 
-  const i18n = request.i18n;
+    return h
+      .response(
+        dependencies.v3CertificationAttestationPdf.generate({
+          certificates: attestations,
+          i18n,
+        }),
+      )
+      .code(200)
+      .header('Content-Disposition', `attachment; filename=session-${sessionId}-${translatedFileName}`)
+      .header('Content-Type', 'application/pdf');
+  }
 
   const { buffer } = await dependencies.certificationAttestationPdf.getCertificationAttestationsPdfBuffer({
     certificates: attestations,

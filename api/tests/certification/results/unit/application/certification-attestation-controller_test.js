@@ -10,7 +10,7 @@ const { FRENCH } = LANGUAGES_CODE;
 
 describe('Certification | Results | Unit | Application | Controller | certification-attestation-controller', function () {
   describe('#getPDFAttestation', function () {
-    describe('when the certification is new v3', function () {
+    describe('when the attestation is for v3', function () {
       it('should return attestation in PDF binary format', async function () {
         // given
         const v3CertificationAttestation = domainBuilder.certification.results.buildV3CertificationAttestation();
@@ -54,7 +54,7 @@ describe('Certification | Results | Unit | Application | Controller | certificat
       });
     });
 
-    describe('when the certification is v2 or previous v3', function () {
+    describe('when the attestation is for v2', function () {
       it('should return attestation in PDF binary format', async function () {
         // given
         const certificationAttestation = domainBuilder.buildCertificationAttestation();
@@ -99,73 +99,124 @@ describe('Certification | Results | Unit | Application | Controller | certificat
   });
 
   describe('#getCertificationPDFAttestationsForSession', function () {
-    it('should return an attestation in PDF binary format', async function () {
-      // given
-      const certificationAttestationPdf = {
-        getCertificationAttestationsPdfBuffer: sinon.stub(),
-      };
-      const session = domainBuilder.certification.sessionManagement.buildSession.finalized({ id: 12 });
-      domainBuilder.buildCertificationCourse({
-        id: 1,
-        sessionId: 12,
-        userId: 1,
-        completedAt: '2020-01-01',
-      });
-      domainBuilder.buildCertificationCourse({
-        id: 2,
-        sessionId: 12,
-        userId: 2,
-        completedAt: '2020-01-01',
-      });
-      domainBuilder.buildCertificationCourse({
-        id: 3,
-        sessionId: 12,
-        userId: 3,
-        completedAt: '2020-01-01',
-      });
-      const certification1 = domainBuilder.buildPrivateCertificateWithCompetenceTree({ id: 1 });
-      const certification2 = domainBuilder.buildPrivateCertificateWithCompetenceTree({ id: 2 });
-      const certification3 = domainBuilder.buildPrivateCertificateWithCompetenceTree({ id: 3 });
-      const attestationPDF = 'binary string';
-      const userId = 1;
-      const i18n = getI18n();
+    describe('when attestations are for a v3 session', function () {
+      it('should return attestation in PDF binary format', async function () {
+        // given
+        const userId = 1;
+        const i18n = getI18n();
 
-      const request = {
-        auth: { credentials: { userId } },
-        params: { sessionId: session.id },
-        query: { isFrenchDomainExtension: true },
-        i18n,
-      };
+        const v3CertificationAttestation = domainBuilder.certification.results.buildV3CertificationAttestation();
+        const session = domainBuilder.certification.sessionManagement.buildSession.finalized({ id: 12 });
+        const generatedPdf = Symbol('Stream');
 
-      sinon
-        .stub(usecases, 'getCertificationAttestationsForSession')
-        .withArgs({
-          sessionId: session.id,
-        })
-        .resolves([certification1, certification2, certification3]);
-
-      certificationAttestationPdf.getCertificationAttestationsPdfBuffer
-        .withArgs({
-          certificates: [certification1, certification2, certification3],
-          isFrenchDomainExtension: true,
+        const request = {
           i18n,
-        })
-        .resolves({ buffer: attestationPDF });
+          auth: { credentials: { userId } },
+          params: { sessionId: session.id },
+          query: { isFrenchDomainExtension: true },
+        };
 
-      // when
-      const response = await certificationAttestationController.getCertificationPDFAttestationsForSession(
-        request,
-        hFake,
-        {
-          certificationAttestationPdf,
-        },
-      );
+        sinon
+          .stub(usecases, 'getCertificationAttestationsForSession')
+          .withArgs({
+            sessionId: session.id,
+          })
+          .resolves([v3CertificationAttestation, v3CertificationAttestation]);
 
-      // then
-      expect(response.source).to.deep.equal(attestationPDF);
-      expect(response.headers['Content-Disposition']).to.contains(
-        'attachment; filename=attestation-pix-session-12.pdf',
-      );
+        const generatePdfStub = {
+          generate: sinon.stub().returns(generatedPdf),
+        };
+
+        // when
+        const response = await certificationAttestationController.getCertificationPDFAttestationsForSession(
+          request,
+          hFake,
+          {
+            v3CertificationAttestationPdf: generatePdfStub,
+          },
+        );
+
+        // then
+        expect(generatePdfStub.generate).calledOnceWithExactly({
+          certificates: [v3CertificationAttestation, v3CertificationAttestation],
+          i18n,
+        });
+        expect(response.source).to.deep.equal(generatedPdf);
+        expect(response.headers['Content-Disposition']).to.contains(
+          `attachment; filename=session-${session.id}-attestation-pix-${dayjs(v3CertificationAttestation.deliveredAt).format('YYYYMMDD')}.pdf`,
+        );
+      });
+    });
+
+    describe('when attestations are for a v2 session', function () {
+      it('should return an attestation in PDF binary format', async function () {
+        // given
+        const certificationAttestationPdf = {
+          getCertificationAttestationsPdfBuffer: sinon.stub(),
+        };
+        const session = domainBuilder.certification.sessionManagement.buildSession.finalized({ id: 12 });
+        domainBuilder.buildCertificationCourse({
+          id: 1,
+          sessionId: 12,
+          userId: 1,
+          completedAt: '2020-01-01',
+        });
+        domainBuilder.buildCertificationCourse({
+          id: 2,
+          sessionId: 12,
+          userId: 2,
+          completedAt: '2020-01-01',
+        });
+        domainBuilder.buildCertificationCourse({
+          id: 3,
+          sessionId: 12,
+          userId: 3,
+          completedAt: '2020-01-01',
+        });
+        const certification1 = domainBuilder.buildPrivateCertificateWithCompetenceTree({ id: 1 });
+        const certification2 = domainBuilder.buildPrivateCertificateWithCompetenceTree({ id: 2 });
+        const certification3 = domainBuilder.buildPrivateCertificateWithCompetenceTree({ id: 3 });
+        const attestationPDF = 'binary string';
+        const userId = 1;
+        const i18n = getI18n();
+
+        const request = {
+          auth: { credentials: { userId } },
+          params: { sessionId: session.id },
+          query: { isFrenchDomainExtension: true },
+          i18n,
+        };
+
+        sinon
+          .stub(usecases, 'getCertificationAttestationsForSession')
+          .withArgs({
+            sessionId: session.id,
+          })
+          .resolves([certification1, certification2, certification3]);
+
+        certificationAttestationPdf.getCertificationAttestationsPdfBuffer
+          .withArgs({
+            certificates: [certification1, certification2, certification3],
+            isFrenchDomainExtension: true,
+            i18n,
+          })
+          .resolves({ buffer: attestationPDF });
+
+        // when
+        const response = await certificationAttestationController.getCertificationPDFAttestationsForSession(
+          request,
+          hFake,
+          {
+            certificationAttestationPdf,
+          },
+        );
+
+        // then
+        expect(response.source).to.deep.equal(attestationPDF);
+        expect(response.headers['Content-Disposition']).to.contains(
+          'attachment; filename=attestation-pix-session-12.pdf',
+        );
+      });
     });
   });
 
