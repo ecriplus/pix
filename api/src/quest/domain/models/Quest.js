@@ -46,7 +46,7 @@ class Quest {
    */
   findTargetProfileIdsWithoutCampaignParticipationContributingToQuest(data) {
     const campaignParticipationRequirements = this.#flattenRequirementsByType(
-      this.#eligibilityRequirements.data,
+      [...this.#eligibilityRequirements.data, ...this.#successRequirements.data],
       REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
     );
     if (campaignParticipationRequirements.length === 0) return [];
@@ -66,7 +66,7 @@ class Quest {
    */
   findCampaignParticipationIdsContributingToQuest(data) {
     const campaignParticipationRequirements = this.#flattenRequirementsByType(
-      this.#eligibilityRequirements.data,
+      [...this.#eligibilityRequirements.data, ...this.#successRequirements.data],
       REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
     );
     const oneOfCampaignParticipationsRequirement = new ComposedRequirement({
@@ -98,7 +98,7 @@ class Quest {
     const scopedData = data.buildDataForQuestScopedByCampaignParticipationId({ campaignParticipationId });
 
     const campaignParticipationRequirements = this.#flattenRequirementsByType(
-      this.#eligibilityRequirements.data,
+      [...this.#eligibilityRequirements.data, ...this.#successRequirements.data],
       REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
     );
 

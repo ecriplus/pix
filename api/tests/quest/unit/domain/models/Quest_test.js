@@ -214,8 +214,23 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
           comparison: REQUIREMENT_COMPARISONS.ALL,
         },
       ];
-      const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
-      const campaignParticipations = [{ id: 10, targetProfileId: 123 }];
+      const successRequirements = [
+        {
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          data: {
+            targetProfileId: {
+              data: 456,
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+          },
+          comparison: REQUIREMENT_COMPARISONS.ALL,
+        },
+      ];
+      const quest = new Quest({ eligibilityRequirements, successRequirements });
+      const campaignParticipations = [
+        { id: 10, targetProfileId: 123 },
+        { id: 10, targetProfileId: 456 },
+      ];
       const eligibility = new Eligibility({ organization: {}, organizationLearner: {}, campaignParticipations });
       const dataForQuest = new DataForQuest({ eligibility });
 
@@ -270,6 +285,8 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
           },
           comparison: REQUIREMENT_COMPARISONS.ALL,
         },
+      ];
+      const successRequirements = [
         {
           requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
           data: {
@@ -281,7 +298,7 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
           comparison: REQUIREMENT_COMPARISONS.ALL,
         },
       ];
-      const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
+      const quest = new Quest({ eligibilityRequirements, successRequirements });
       const campaignParticipations = [{ id: 10, targetProfileId: 123 }];
       const eligibility = new Eligibility({ organization: {}, organizationLearner: {}, campaignParticipations });
       const dataForQuest = new DataForQuest({ eligibility });
@@ -307,7 +324,19 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
           comparison: REQUIREMENT_COMPARISONS.ALL,
         },
       ];
-      const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
+      const successRequirements = [
+        {
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          data: {
+            targetProfileId: {
+              data: 2,
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+          },
+          comparison: REQUIREMENT_COMPARISONS.ALL,
+        },
+      ];
+      const quest = new Quest({ eligibilityRequirements, successRequirements });
       const campaignParticipations = [{ id: 10, targetProfileId: 123 }];
       const eligibility = new Eligibility({ organization: {}, organizationLearner: {}, campaignParticipations });
       const dataForQuest = new DataForQuest({ eligibility });
@@ -351,6 +380,8 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
           },
           comparison: REQUIREMENT_COMPARISONS.ALL,
         },
+      ];
+      const successRequirements = [
         {
           requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
           data: {
@@ -362,7 +393,7 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
           comparison: REQUIREMENT_COMPARISONS.ALL,
         },
       ];
-      const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
+      const quest = new Quest({ eligibilityRequirements, successRequirements });
       const campaignParticipations = [
         { id: 10, targetProfileId: 123 },
         { id: 100, targetProfileId: 456 },
@@ -384,7 +415,7 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
     const organizationLearner = { id: 123 };
 
     context('at least one eligibilityRequirements is type of "campaignParticipations"', function () {
-      it('return false if none of campaignParticipation eligibilityRequirement is valid given campaignParticipationId', function () {
+      it('return false if none of campaignParticipation eligibilityRequirement or successRequirement is valid given campaignParticipationId', function () {
         // given
         const eligibilityRequirements = [
           {
@@ -407,6 +438,8 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
             },
             comparison: REQUIREMENT_COMPARISONS.ALL,
           },
+        ];
+        const successRequirements = [
           {
             requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
             data: {
@@ -418,7 +451,7 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
             comparison: REQUIREMENT_COMPARISONS.ALL,
           },
         ];
-        const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
+        const quest = new Quest({ eligibilityRequirements, successRequirements });
         const campaignParticipations = [
           { id: 10, targetProfileId: 1 },
           { id: 11, targetProfileId: 3 },
@@ -472,6 +505,61 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
           },
         ];
         const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
+        const campaignParticipations = [
+          { id: 10, targetProfileId: 1 },
+          { id: 11, targetProfileId: 3 },
+        ];
+        const eligibility = new Eligibility({ organization, organizationLearner, campaignParticipations });
+        const data = new DataForQuest({ eligibility });
+        const campaignParticipationIdToCheck = 10;
+
+        // when
+        const isContributing = quest.isCampaignParticipationContributingToQuest({
+          data,
+          campaignParticipationId: campaignParticipationIdToCheck,
+        });
+
+        // then
+        expect(isContributing).to.be.true;
+      });
+
+      it('return true if one of campaignParticipation successRequirement is valid given campaignParticipationId', function () {
+        // given
+        const eligibilityRequirements = [
+          {
+            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
+            data: {
+              type: {
+                data: 'SCO',
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+            },
+            comparison: REQUIREMENT_COMPARISONS.ALL,
+          },
+        ];
+        const successRequirements = [
+          {
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+            data: {
+              targetProfileId: {
+                data: 1,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+            },
+            comparison: REQUIREMENT_COMPARISONS.ALL,
+          },
+          {
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+            data: {
+              targetProfileId: {
+                data: 2,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+            },
+            comparison: REQUIREMENT_COMPARISONS.ALL,
+          },
+        ];
+        const quest = new Quest({ eligibilityRequirements, successRequirements });
         const campaignParticipations = [
           { id: 10, targetProfileId: 1 },
           { id: 11, targetProfileId: 3 },
