@@ -1,6 +1,6 @@
 /**
  * @typedef {import('../../domain/read-models/parcoursup/CertificationResult.js').CertificationResult} CertificationResult
- * @typedef {import('../../../shared/domain/models/GlobalCertificationLevel.js').GlobalCertificationLevel} GlobalCertificationLevel
+ * @typedef {import('../../domain/models/v3/GlobalCertificationLevel.js').GlobalCertificationLevel} GlobalCertificationLevel
  */
 
 /**

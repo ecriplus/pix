@@ -1,5 +1,5 @@
-import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
+import { domainBuilder, expect } from '../../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
   let translate;

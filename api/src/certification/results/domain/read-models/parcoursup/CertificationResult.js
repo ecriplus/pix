@@ -1,4 +1,4 @@
-import { GlobalCertificationLevel } from '../../../../shared/domain/models/GlobalCertificationLevel.js';
+import { GlobalCertificationLevel } from '../../models/v3/GlobalCertificationLevel.js';
 
 export class CertificationResult {
   /**

@@ -1,10 +1,10 @@
 /**
- * @typedef {import ('../../../results/domain/models/v3/MeshConfiguration.js').MeshConfiguration} MeshConfiguration
+ * @typedef {import ('./MeshConfiguration.js').MeshConfiguration} MeshConfiguration
  */
 import Joi from 'joi';
 
-import { EntityValidationError } from '../../../../shared/domain/errors.js';
-import { meshConfiguration } from '../../../results/domain/models/v3/MeshConfiguration.js';
+import { EntityValidationError } from '../../../../../shared/domain/errors.js';
+import { meshConfiguration } from './MeshConfiguration.js';
 
 export class GlobalCertificationLevel {
   static #schema = Joi.object({
