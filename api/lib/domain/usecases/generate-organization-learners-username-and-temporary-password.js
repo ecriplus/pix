@@ -1,12 +1,12 @@
 import { OrganizationLearnerIdentities } from '../../../src/identity-access-management/domain/models/OrganizationLearnerIdentities.js';
 import { UserNotAuthorizedToUpdatePasswordError } from '../../../src/shared/domain/errors.js';
 import { OrganizationLearnerPasswordResetDTO } from '../../../src/shared/domain/models/OrganizationLearnerPasswordResetDTO.js';
-import {
-  ORGANIZATION_LEARNER_DOES_NOT_BELONG_TO_ORGANIZATION_CODE,
-  ORGANIZATION_LEARNER_WITHOUT_USERNAME_CODE,
-} from '../constants/generate-organization-learners-username-and-temporary-password-errors.js';
 
-const generateOrganizationLearnersUsernameAndTemporaryPassword = async function ({
+const ORGANIZATION_LEARNER_DOES_NOT_BELONG_TO_ORGANIZATION_CODE =
+  'ORGANIZATION_LEARNER_DOES_NOT_BELONG_TO_ORGANIZATION';
+const ORGANIZATION_LEARNER_WITHOUT_USERNAME_CODE = 'ORGANIZATION_LEARNER_WITHOUT_USERNAME';
+
+export const generateOrganizationLearnersUsernameAndTemporaryPassword = async function ({
   organizationId,
   organizationLearnersId,
   userId,
@@ -155,5 +155,3 @@ function _buildOrganizationLearnerPasswordResetDTOs({ organizationLearnerIdentit
       }),
   );
 }
-
-export { generateOrganizationLearnersUsernameAndTemporaryPassword };

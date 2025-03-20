@@ -1,5 +1,4 @@
 import * as moduleUnderTest from '../../../../lib/application/sco-organization-learners/index.js';
-import { ORGANIZATION_LEARNER_WITHOUT_USERNAME_CODE } from '../../../../lib/domain/constants/generate-organization-learners-username-and-temporary-password-errors.js';
 import { usecases } from '../../../../lib/domain/usecases/index.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
 import {
@@ -243,7 +242,7 @@ describe('Integration | Application | sco-organization-learners | sco-organizati
           const organizationId = 100001;
           const organizationLearnersId = [100002, 100003];
           const message = `User ${userId} does not have permissions to update passwords of students in organization ${organizationId}`;
-          const code = ORGANIZATION_LEARNER_WITHOUT_USERNAME_CODE;
+          const code = 'ORGANIZATION_LEARNER_WITHOUT_USERNAME';
           const expectedErrorResult = {
             code,
             detail: message,
