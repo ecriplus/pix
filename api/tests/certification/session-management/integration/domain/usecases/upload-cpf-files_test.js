@@ -21,6 +21,8 @@ describe('Integration | UseCase | upload-cpf-files', function () {
         this.push(null);
       },
     });
+    // we need to manually read stream otherwise test is hanging
+    readableStream.read();
 
     // when, then
     await uploadCpfFiles({
