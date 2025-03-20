@@ -100,6 +100,7 @@
     "chai-as-promised": "^8.0.0",
     "chai-sorted": "^0.2.0",
     "depcheck": "^1.4.3",
+    "es-module-lexer": "^1.6.0",
     "eslint": "^9.0.0",
     "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-chai-expect": "^3.0.0",
