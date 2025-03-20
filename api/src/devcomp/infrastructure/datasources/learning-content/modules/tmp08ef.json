@@ -229,17 +229,15 @@
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>oui</p>"
+                "content": "<p>oui</p>",
+                "feedback": "<p>Comme vous avez pu le constater, les réponses des deux systèmes d’intelligence artificielle générative ont adopté les contraintes de forme que nous lui avons données dans le prompt. Impressionnant, non ? <span aria-hidden=\"true\">🤯 </span><br></p>"
               },
               {
                 "id": "2",
-                "content": "<p>non</p>"
+                "content": "<p>non</p>",
+                "feedback": "<p>Et si vous essayiez à nouveau ? Avec un simple copier / coller du prompt à la première étape vous devriez pouvoir générer un joli poème !</p>"
               }
             ],
-            "feedbacks": {
-              "valid": "<p>Comme vous avez pu le constater, les réponses des deux systèmes d’intelligence artificielle générative ont adopté les contraintes de forme que nous lui avons données dans le prompt. Impressionnant, non ? <span aria-hidden=\"true\">🤯 </span><br></p>",
-              "invalid": "<p>Et si vous essayiez à nouveau ? Avec un simple copier / coller du prompt à la première étape vous devriez pouvoir générer un joli poème !</p>"
-            },
             "solution": "1"
           }
         }
@@ -426,17 +424,15 @@
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>oui</p>"
+                "content": "<p>oui</p>",
+                "feedback": "<span class=\"feedback__state\">Bravo !</span><span aria-hidden=\"true\">🎉</span><p>N'hésitez pas à vous amuser avec de nouvelles requêtes.</p>"
               },
               {
                 "id": "2",
-                "content": "<p>non</p>"
+                "content": "<p>non</p>",
+                "feedback": "<span class=\"feedback__state\">N'hésitez pas à retenter avec d'autres modèles, certains sont très bien préparés à ce type de manœuvres ... </span>"
               }
             ],
-            "feedbacks": {
-              "valid": "<span class=\"feedback__state\">Bravo !</span><span aria-hidden=\"true\">🎉</span><p>N'hésitez pas à vous amuser avec de nouvelles requêtes.</p>",
-              "invalid": "<span class=\"feedback__state\">N'hésitez pas à retenter avec d'autres modèles, certains sont très bien préparés à ce type de manœuvres ... </span>"
-            },
             "solution": "1"
           }
         },
