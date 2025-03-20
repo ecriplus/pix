@@ -3,7 +3,6 @@ import fs from 'node:fs/promises';
 import { scoOrganizationManagementController } from '../../../../../src/prescription/learner-management/application/sco-organization-management-controller.js';
 import { usecases } from '../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import { OrganizationLearnerParser } from '../../../../../src/prescription/learner-management/infrastructure/serializers/csv/organization-learner-parser.js';
-import { ApplicationTransaction } from '../../../../../src/prescription/shared/infrastructure/ApplicationTransaction.js';
 import { FileValidationError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, expect, hFake, sinon } from '../../../../test-helper.js';
 
@@ -14,7 +13,6 @@ describe('Unit | Application | Organizations | organization-controller', functio
     const payload = { path: 'path-to-file' };
     const format = 'xml';
     let dependencies;
-    let domainTransaction;
 
     const request = {
       auth: { credentials: { userId: connectedUserId } },
@@ -27,12 +25,6 @@ describe('Unit | Application | Organizations | organization-controller', functio
       sinon.stub(fs, 'unlink').resolves();
       sinon.stub(usecases, 'uploadSiecleFile');
       sinon.stub(usecases, 'uploadCsvFile');
-      sinon.stub(ApplicationTransaction, 'execute');
-      sinon.stub(ApplicationTransaction, 'getTransactionAsDomainTransaction');
-
-      domainTransaction = Symbol('domainTransaction');
-      ApplicationTransaction.execute.callsFake((callback) => callback());
-      ApplicationTransaction.getTransactionAsDomainTransaction.returns(domainTransaction);
 
       usecases.uploadSiecleFile.resolves();
       dependencies = { logErrorWithCorrelationIds: sinon.stub(), logWarnWithCorrelationIds: sinon.stub() };
