@@ -1,15 +1,24 @@
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import ENV from 'mon-pix/config/environment';
 
 import EvaluationResultsHero from '../../../campaigns/assessment/results/evaluation-results-hero';
 import EvaluationResultsTabs from '../../../campaigns/assessment/results/evaluation-results-tabs';
+import EvaluationSentResultsModal from '../../../campaigns/assessment/results/evaluation-sent-results-modal';
 import QuitResults from '../../../campaigns/assessment/results/quit-results';
 
 export default class EvaluationResults extends Component {
   @service tabManager;
+  @service featureToggles;
+
+  @tracked showEvaluationResultsModal = false;
+
+  get isModalSentResultEnabled() {
+    return this.featureToggles.featureToggles?.isModalSentResultEnabled;
+  }
 
   get hasTrainings() {
     return Boolean(this.args.model.trainings.length);
@@ -31,6 +40,16 @@ export default class EvaluationResults extends Component {
     });
 
     this.tabManager.setActiveTab(2);
+  }
+
+  @action
+  shareResults() {
+    this.showEvaluationResultsModal = true;
+  }
+
+  @action
+  closeModal() {
+    this.showEvaluationResultsModal = false;
   }
 
   <template>
@@ -60,7 +79,15 @@ export default class EvaluationResults extends Component {
         @questResults={{@model.questResults}}
         @isSharableCampaign={{this.isSharableCampaign}}
         @trainings={{@model.trainings}}
+        @onResultsShared={{this.shareResults}}
       />
+      {{#if this.isModalSentResultEnabled}}
+        <EvaluationSentResultsModal
+          @trainings={{@model.trainings}}
+          @showModal={{this.showEvaluationResultsModal}}
+          @onCloseButtonClick={{this.closeModal}}
+        />
+      {{/if}}
     </main>
   </template>
 }

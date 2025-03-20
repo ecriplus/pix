@@ -1,7 +1,9 @@
 import { render } from '@1024pix/ember-testing-library';
+import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../../../helpers/setup-intl-rendering';
 
@@ -10,6 +12,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
   module('when there are rewards and trainings', function (hooks) {
     let screen;
+    let onResultsSharedStub;
 
     hooks.beforeEach(async function () {
       // given
@@ -18,16 +21,22 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
       const acquiredBadge = store.createRecord('badge', { isAcquired: true });
       this.set('campaignParticipationResult', {
         campaignParticipationBadges: [acquiredBadge],
+        isShared: false,
       });
 
       const training = store.createRecord('training', { duration: { days: 2 } });
       this.set('trainings', [training]);
+
+      onResultsSharedStub = sinon.stub();
+      this.set('onResultsShared', onResultsSharedStub);
 
       // when
       screen = await render(
         hbs`<Campaigns::Assessment::Results::EvaluationResultsTabs
   @campaignParticipationResult={{this.campaignParticipationResult}}
   @trainings={{this.trainings}}
+  @onResultsShared={{this.onResultsShared}}
+  @isSharableCampaign={{true}}
 />`,
       );
     });
@@ -44,6 +53,21 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
     test('it should display the rewards tab first', async function (assert) {
       // then
       assert.dom(screen.getByRole('heading', { name: t('pages.skill-review.tabs.rewards.title') })).isVisible();
+    });
+
+    module('when clicking on shared results button', function () {
+      test('it should call onResultsShared', async function (assert) {
+        // given
+        const campaignParticipationResultService = this.owner.lookup('service:campaign-participation-result');
+        sinon.stub(campaignParticipationResultService, 'share');
+
+        // when
+        await click(screen.queryByRole('tab', { name: 'Formations' }));
+        await click(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') }));
+
+        // then
+        assert.true(onResultsSharedStub.calledOnce);
+      });
     });
   });
 
