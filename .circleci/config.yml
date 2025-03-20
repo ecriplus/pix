@@ -48,6 +48,15 @@ executors:
     docker:
       - image: cimg/node:<<parameters.node-version>>
     resource_class: small
+  node-docker-medium:
+    parameters:
+      node-version:
+        # renovate datasource=node-version depName=node
+        default: 22.14.0
+        type: string
+    docker:
+      - image: cimg/node:<<parameters.node-version>>
+    resource_class: medium
   node-redis-postgres-s3-docker:
     parameters:
       node-version:
@@ -89,7 +98,7 @@ executors:
           POSTGRES_USER: circleci
           POSTGRES_HOST_AUTH_METHOD: trust
       - image: redis:7.2.5-alpine
-    resource_class: medium+
+    resource_class: medium
   node-postgres-docker:
     parameters:
       node-version:
@@ -154,39 +163,39 @@ workflows:
           requires:
             - audit_logger_install
 
-      - mon_pix_install:
+      - mon_pix_install_and_build:
           context: Pix
           requires:
             - checkout
       - mon_pix_lint:
           context: Pix
           requires:
-            - mon_pix_install
+            - mon_pix_install_and_build
       - mon_pix_test:
           context: Pix
           requires:
-            - mon_pix_install
+            - mon_pix_install_and_build
       - e2e_test_mon_pix:
           context: Pix
           requires:
-            - checkout
+            - mon_pix_install_and_build
 
-      - orga_install:
+      - orga_install_and_build:
           context: Pix
           requires:
             - checkout
       - orga_lint:
           context: Pix
           requires:
-            - orga_install
+            - orga_install_and_build
       - orga_test:
           context: Pix
           requires:
-            - orga_install
+            - orga_install_and_build
       - e2e_test_orga:
           context: Pix
           requires:
-            - checkout
+            - orga_install_and_build
 
       - certif_install:
           context: Pix
@@ -385,6 +394,7 @@ jobs:
           path: /home/circleci/test-results
       - store_artifacts:
           path: /home/circleci/test-results
+
   api_integration_test:
     executor:
       name: node-redis-postgres-s3-docker
@@ -428,6 +438,7 @@ jobs:
           path: /home/circleci/test-results
       - store_artifacts:
           path: /home/circleci/test-results
+
   api_acceptance_test:
     executor:
       name: node-redis-postgres-s3-docker
@@ -528,9 +539,9 @@ jobs:
       - store_artifacts:
           path: /home/circleci/test-results
 
-  mon_pix_install:
+  mon_pix_install_and_build:
     executor:
-      name: node-docker
+      name: node-docker-medium
     working_directory: ~/pix/mon-pix
     steps:
       - attach_workspace:
@@ -540,6 +551,12 @@ jobs:
           keys:
             - v7-mon-pix-npm-{{ checksum "cachekey" }}
       - run: npm ci
+      - run:
+          name: Build Pix App
+          command: npm run build
+          environment:
+            BUILD_ENVIRONMENT: development
+            JOBS: 2
       - save_cache:
           key: v7-mon-pix-npm-{{ checksum "cachekey" }}
           paths:
@@ -581,9 +598,9 @@ jobs:
       - store_artifacts:
           path: /home/circleci/test-results/mon_pix
 
-  orga_install:
+  orga_install_and_build:
     executor:
-      name: node-docker
+      name: node-docker-medium
     working_directory: ~/pix/orga
     steps:
       - attach_workspace:
@@ -593,6 +610,12 @@ jobs:
           keys:
             - v7-orga-npm-{{ checksum "cachekey" }}
       - run: npm ci
+      - run:
+          name: Build Pix Orga
+          command: npm run build
+          environment:
+            BUILD_ENVIRONMENT: development
+            JOBS: 2
       - save_cache:
           key: v7-orga-npm-{{ checksum "cachekey" }}
           paths:
@@ -811,11 +834,9 @@ jobs:
           key: v7-e2e-npm-{{ checksum "cachekey" }}
           paths:
             - ~/.npm
-
       - run:
           name: Lint
           command: npm run lint
-
       - run:
           working_directory: ~/pix/api
           command: cat package*.json > cachekey
@@ -826,20 +847,6 @@ jobs:
           name: Install Pix API
           working_directory: ~/pix/api
           command: npm ci
-
-      - run:
-          working_directory: ~/pix/mon-pix
-          command: cat package*.json > cachekey
-      - restore_cache:
-          keys:
-            - v7-mon-pix-npm-{{ checksum "~/pix/mon-pix/cachekey" }}
-      - run:
-          name: Install Pix App
-          environment:
-            JOBS: 1
-          working_directory: ~/pix/mon-pix
-          command: npm ci
-
       - run:
           name: Start Pix API
           working_directory: ~/pix/api
@@ -849,37 +856,29 @@ jobs:
             REDIS_URL: 'redis://localhost:6379'
           background: true
           command: npm start
-
       - run:
           name: Start Pix App
           working_directory: ~/pix/mon-pix
-          environment:
-            JOBS: 1
+          command: npx ember server --path=./dist --proxy=http://localhost:3000
           background: true
-          command: npm start
-
       - run:
           name: Prepare database
           working_directory: ~/pix/api
           environment:
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
           command: npm run db:prepare
-
       - run:
           name: Refresh cache
           environment:
-            JOBS: 1
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
           working_directory: ~/pix/api
           command: npm run cache:refresh
-
       - run:
           name: Prepare datamart
           command: npm run datamart:prepare
           working_directory: ~/pix/api
           environment:
             DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_datamart
-
       - run:
           name: Run tests
           environment:
@@ -905,11 +904,9 @@ jobs:
           key: v7-e2e-npm-{{ checksum "cachekey" }}
           paths:
             - ~/.npm
-
       - run:
           name: Lint
           command: npm run lint
-
       - run:
           working_directory: ~/pix/api
           command: cat package*.json > cachekey
@@ -920,20 +917,6 @@ jobs:
           name: Install Pix API
           working_directory: ~/pix/api
           command: npm ci
-
-      - run:
-          working_directory: ~/pix/orga
-          command: cat package*.json > cachekey
-      - restore_cache:
-          keys:
-            - v7-orga-npm-{{ checksum "~/pix/orga/cachekey" }}
-      - run:
-          name: Install Pix Orga
-          environment:
-            JOBS: 2
-          working_directory: ~/pix/orga
-          command: npm ci
-
       - run:
           name: Start Pix API
           working_directory: ~/pix/api
@@ -943,37 +926,29 @@ jobs:
             REDIS_URL: 'redis://localhost:6379'
           background: true
           command: npm start
-
       - run:
           name: Start Pix Orga
           working_directory: ~/pix/orga
-          environment:
-            JOBS: 2
+          command: npx ember server --path=./dist --proxy=http://localhost:3000
           background: true
-          command: npm start
-
       - run:
           name: Prepare database
           working_directory: ~/pix/api
           environment:
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
           command: npm run db:prepare
-
       - run:
           name: Refresh cache
           environment:
-            JOBS: 1
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
           working_directory: ~/pix/api
           command: npm run cache:refresh
-
       - run:
           name: Prepare datamart
           command: npm run datamart:prepare
           working_directory: ~/pix/api
           environment:
             DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_datamart
-
       - run:
           name: Run tests
           environment:
