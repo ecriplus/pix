@@ -409,17 +409,15 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "vrai"
+                      "content": "vrai",
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse !</span></p><p> Cette souris filaire (qui se branche avec un fil) se branche à un port USB.</p>"
                     },
                     {
                       "id": "2",
-                      "content": "faux"
+                      "content": "faux",
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>C'était vrai. Regardez bien l’extrémité du fil de cette souris. Elle se branche à un port USB.</p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "<p><span class=\"feedback__state\">Bonne réponse !</span></p><p> Cette souris filaire (qui se branche avec un fil) se branche à un port USB.</p>",
-                    "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>C'était vrai. Regardez bien l’extrémité du fil de cette souris. Elle se branche à un port USB.</p>"
-                  },
                   "solution": "1"
                 }
               ]
@@ -440,17 +438,15 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "vrai"
+                      "content": "vrai",
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>C'était faux. Regardez bien l’extrémité du fil de ce casque audio : il est rond. Il ne se branche pas à un port USB, mais à un port jack.</p>"
                     },
                     {
                       "id": "2",
-                      "content": "faux"
+                      "content": "faux",
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse !</span></p><p> Ce casque audio ne se branche pas à un port USB. Il se branche à un port jack.</p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "<p><span class=\"feedback__state\">Bonne réponse !</span></p><p> Ce casque audio ne se branche pas à un port USB. Il se branche à un port jack.</p>",
-                    "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>C'était faux. Regardez bien l’extrémité du fil de ce casque audio : il est rond. Il ne se branche pas à un port USB, mais à un port jack.</p>"
-                  },
                   "solution": "2"
                 }
               ]
@@ -471,17 +467,15 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "vrai"
+                      "content": "vrai",
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse !</span></p><p> Ce symbole peut changer un peu sur des ports USB plus récents.</p>"
                     },
                     {
                       "id": "2",
-                      "content": "faux"
+                      "content": "faux",
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>C'était vraa. Retenez ce symbole, il vous aidera à trouver les branchements USB.</p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "<p><span class=\"feedback__state\">Bonne réponse !</span></p><p> Ce symbole peut changer un peu sur des ports USB plus récents.</p>",
-                    "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>C'était vraa. Retenez ce symbole, il vous aidera à trouver les branchements USB.</p>"
-                  },
                   "solution": "1"
                 }
               ]
@@ -593,17 +587,15 @@
             "proposals": [
               {
                 "id": "1",
-                "content": "oui"
+                "content": "oui",
+                "feedback": "<p>Bravo ! <br>Vous pouvez vérifier votre réponse avec les schémas présentés et demander une vérification par quelqu'un si c'est possible.</p>"
               },
               {
                 "id": "2",
-                "content": "non"
+                "content": "non",
+                "feedback": "<p>Vous pouvez remonter la page et vous&nbsp;aider des schémas présentés, ou demander de l'aide à quelqu'un si c'est possible.<br>Selon l'âge et la marque de votre ordinateur, les ports de connexion de votre ordinateur peuvent varier.</p>"
               }
             ],
-            "feedbacks": {
-              "valid": "<p>Bravo ! <br>Vous pouvez vérifier votre réponse avec les schémas présentés et demander une vérification par quelqu'un si c'est possible.</p>",
-              "invalid": "<p>Vous pouvez remonter la page et vous&nbsp;aider des schémas présentés, ou demander de l'aide à quelqu'un si c'est possible.<br>Selon l'âge et la marque de votre ordinateur, les ports de connexion de votre ordinateur peuvent varier.</p>"
-            },
             "solution": "1"
           }
         }
