@@ -120,8 +120,8 @@ describe('Unit | Devcomp | Infrastructure | Factories | ElementForVerification',
       // given
       const feedbacks = { valid: 'valid', invalid: 'invalid' };
       const proposals = [
-        { id: '1', content: 'toto' },
-        { id: '2', content: 'foo' },
+        { id: '1', content: 'toto', feedback: 'valid' },
+        { id: '2', content: 'foo', feedback: 'invalid' },
       ];
 
       const elementData = {
