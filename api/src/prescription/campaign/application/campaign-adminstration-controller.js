@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 import { usecases } from '../../../../src/prescription/campaign/domain/usecases/index.js';
 import * as checkAdminMemberHasRoleSuperAdminUseCase from '../../../shared/application/usecases/checkAdminMemberHasRoleSuperAdmin.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import * as csvSerializer from '../../../shared/infrastructure/serializers/csv/csv-serializer.js';
 import * as requestResponseUtils from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
@@ -138,9 +139,9 @@ const deleteCampaigns = async function (request, h) {
   const userId = extractUserIdFromRequest(request);
   const { organizationId } = request.params;
   const campaignIds = request.deserializedPayload.map(({ id }) => id);
-
-  await usecases.deleteCampaigns({ userId, organizationId, campaignIds });
-
+  await DomainTransaction.execute(async () => {
+    await usecases.deleteCampaigns({ userId, organizationId, campaignIds });
+  });
   return h.response(null).code(204);
 };
 
