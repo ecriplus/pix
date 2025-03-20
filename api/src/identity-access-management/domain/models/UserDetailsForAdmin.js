@@ -28,6 +28,7 @@ class UserDetailsForAdmin {
       anonymisedByFirstName,
       anonymisedByLastName,
       isPixAgent,
+      lastApplicationConnections,
     } = {},
     dependencies = { localeService },
   ) {
@@ -60,6 +61,7 @@ class UserDetailsForAdmin {
     this.anonymisedByFirstName = anonymisedByFirstName;
     this.anonymisedByLastName = anonymisedByLastName;
     this.isPixAgent = isPixAgent;
+    this.lastApplicationConnections = lastApplicationConnections;
   }
 
   get anonymisedByFullName() {

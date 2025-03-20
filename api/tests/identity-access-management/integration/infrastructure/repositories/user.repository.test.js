@@ -3,6 +3,7 @@ const { each, map, times, pick } = lodash;
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import * as OidcIdentityProviders from '../../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
 import { InvalidOrAlreadyUsedEmailError } from '../../../../../src/identity-access-management/domain/errors.js';
+import { LastUserApplicationConnection } from '../../../../../src/identity-access-management/domain/models/LastUserApplicationConnection.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { UserDetailsForAdmin } from '../../../../../src/identity-access-management/domain/models/UserDetailsForAdmin.js';
 import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
@@ -1155,6 +1156,13 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           lastPixCertifTermsOfServiceValidatedAt: lastLoggedAt,
           emailConfirmedAt,
         });
+
+        const lastUserApplicationConnectionId = databaseBuilder.factory.buildLastUserApplicationConnection({
+          userId: userInDB.id,
+          application: 'orga',
+          lastLoggedAt: new Date('2022-01-01'),
+        }).id;
+
         await databaseBuilder.factory.buildUserLogin({ userId: userInDB.id, lastLoggedAt });
         await databaseBuilder.commit();
 
@@ -1200,6 +1208,14 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(userDetailsForAdmin.emailConfirmedAt).to.deep.equal(emailConfirmedAt);
         expect(userDetailsForAdmin.hasBeenAnonymised).to.be.false;
         expect(userDetailsForAdmin.isPixAgent).to.be.false;
+        expect(userDetailsForAdmin.lastApplicationConnections).to.have.deep.members([
+          new LastUserApplicationConnection({
+            id: lastUserApplicationConnectionId,
+            application: 'orga',
+            userId: userInDB.id,
+            lastLoggedAt: new Date('2022-01-01'),
+          }),
+        ]);
       });
 
       it('returns a UserNotFoundError if no user is found', async function () {
