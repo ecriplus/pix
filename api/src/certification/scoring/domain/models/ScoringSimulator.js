@@ -1,6 +1,6 @@
 import { config } from '../../../../shared/config.js';
 import { COMPETENCES_COUNT, PIX_COUNT_BY_LEVEL } from '../../../../shared/domain/constants.js';
-import { CertificationAssessmentScoreV3 } from './CertificationAssessmentScoreV3.js';
+import { meshConfiguration } from '../../../results/domain/models/v3/MeshConfiguration.js';
 import { Intervals } from './Intervals.js';
 import { ScoringAndCapacitySimulatorReport } from './ScoringAndCapacitySimulatorReport.js';
 
@@ -41,8 +41,9 @@ function _calculateScore({ certificationScoringIntervals, capacity, intervalInde
 
   const intervalMaximum = certificationScoringIntervals.max(intervalIndex);
   const intervalMinimum = certificationScoringIntervals.min(intervalIndex);
-  const intervalWeight = CertificationAssessmentScoreV3.weightsAndCoefficients[intervalIndex].weight;
-  const intervalCoefficient = CertificationAssessmentScoreV3.weightsAndCoefficients[intervalIndex].coefficient;
+  const meshes = Array.from(meshConfiguration.MESH_CONFIGURATION.values());
+  const intervalWeight = meshes[intervalIndex].weight;
+  const intervalCoefficient = meshes[intervalIndex].coefficient;
   const progressionPercentage = 1 - (intervalMaximum - capacity) / (intervalMaximum - intervalMinimum);
   const score = Math.floor(intervalWeight * (intervalCoefficient + progressionPercentage));
 

@@ -9,7 +9,7 @@
  * @param {GlobalCertificationLevel} params.globalMeshLevel
  * @param {Object} params.translate
  */
-const serialize = ({ certificationResult, globalMeshLevel, translate }) => {
+const serialize = ({ certificationResult, translate }) => {
   return {
     organizationUai: certificationResult.organizationUai,
     ine: certificationResult.ine,
@@ -18,7 +18,7 @@ const serialize = ({ certificationResult, globalMeshLevel, translate }) => {
     birthdate: certificationResult.birthdate,
     status: certificationResult.status,
     pixScore: certificationResult.pixScore,
-    globalLevel: globalMeshLevel.getLevelLabel(translate),
+    globalLevel: certificationResult.globalLevel.getLevelLabel(translate),
     certificationDate: certificationResult.certificationDate,
     competences: certificationResult.competences,
   };

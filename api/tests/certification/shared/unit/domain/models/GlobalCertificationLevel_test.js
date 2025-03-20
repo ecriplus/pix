@@ -11,21 +11,21 @@ describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
   describe('#getLevelLabel', function () {
     it('should return the translated comment matching the key', function () {
       // given
-      const globalMeshLevel = domainBuilder.certification.results.buildGlobalCertificationLevel();
+      const globalMeshLevel = domainBuilder.certification.results.buildGlobalCertificationLevel({ score: 128 });
 
       // when
       const translatedLabel = globalMeshLevel.getLevelLabel(translate);
 
       // then
-      expect(translatedLabel).to.equal(translate('certification.global.meshlevel.1'));
+      expect(translatedLabel).to.equal(translate('certification.global.meshlevel.2'));
     });
 
     context('when there is no translation', function () {
       it('should return an empty string', function () {
         // given
-        const aMeshLevelWihoutranslation = 0;
+        const aScoreWihoutranslation = 0;
         const globalMeshLevel = domainBuilder.certification.results.buildGlobalCertificationLevel({
-          meshLevel: aMeshLevelWihoutranslation,
+          score: aScoreWihoutranslation,
         });
 
         // when

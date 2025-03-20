@@ -1,6 +1,15 @@
+/**
+ * @typedef {import ('../../domain/usecases/index.js').CertificateRepository} CertificateRepository
+ * @typedef {import ('../../domain/usecases/index.js').CertificationCourseRepository} CertificationCourseRepository
+ */
 import { UnauthorizedError } from '../../../../shared/application/http-errors.js';
 
-const getCertificationAttestation = async function ({
+/**
+ * @param {Object} params
+ * @param {CertificateRepository} params.certificateRepository
+ * @param {CertificationCourseRepository} params.certificationCourseRepository
+ */
+export const getCertificationAttestation = async function ({
   userId,
   certificationCourseId,
   certificateRepository,
@@ -12,9 +21,5 @@ const getCertificationAttestation = async function ({
     throw new UnauthorizedError();
   }
 
-  return certificateRepository.getCertificationAttestation({
-    certificationCourseId,
-  });
+  return certificateRepository.getCertificationAttestation({ certificationCourseId });
 };
-
-export { getCertificationAttestation };

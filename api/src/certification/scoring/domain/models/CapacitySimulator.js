@@ -1,6 +1,5 @@
 // TODO: bounded context violation
-import { findIntervalIndexFromScore } from '../../../results/domain/services/find-interval-index-from-score.js';
-import { CertificationAssessmentScoreV3 } from './CertificationAssessmentScoreV3.js';
+import { meshConfiguration } from '../../../results/domain/models/v3/MeshConfiguration.js';
 import { Intervals } from './Intervals.js';
 import { ScoringAndCapacitySimulatorReport } from './ScoringAndCapacitySimulatorReport.js';
 
@@ -9,20 +8,14 @@ export class CapacitySimulator {
   static compute({ certificationScoringIntervals, competencesForScoring, score }) {
     const scoringIntervals = new Intervals({ intervals: certificationScoringIntervals });
 
-    const { weightsAndCoefficients } = CertificationAssessmentScoreV3;
-    const weights = weightsAndCoefficients.map(({ weight }) => weight);
-
-    const intervalIndex = findIntervalIndexFromScore({
-      score,
-      weights,
-      scoringIntervalsLength: scoringIntervals.length(),
-    });
+    const meshes = Array.from(meshConfiguration.MESH_CONFIGURATION.values());
+    const intervalIndex = meshConfiguration.findIntervalIndexFromScore({ score });
 
     const intervalMaxValue = scoringIntervals.max(intervalIndex);
     const intervalMinValue = scoringIntervals.min(intervalIndex);
 
-    const intervalWeight = weightsAndCoefficients[intervalIndex].weight;
-    const intervalCoefficient = weightsAndCoefficients[intervalIndex].coefficient;
+    const intervalWeight = meshes[intervalIndex].weight;
+    const intervalCoefficient = meshes[intervalIndex].coefficient;
 
     const capacity =
       (score / intervalWeight - intervalCoefficient) * (intervalMaxValue - intervalMinValue) + intervalMinValue;

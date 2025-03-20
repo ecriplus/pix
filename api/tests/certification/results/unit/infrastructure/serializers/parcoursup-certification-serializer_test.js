@@ -30,20 +30,18 @@ describe('Unit | Serializer | Json | parcoursup-certification-serializer', funct
           }),
         ],
       });
-      const globalMeshLevel = domainBuilder.certification.results.buildGlobalCertificationLevel();
       const translate = getI18n().__;
 
       // when
       const actualCertifiedProfileSerialized = serializer.serialize({
         certificationResult,
-        globalMeshLevel,
         translate,
       });
 
       // then
       return expect(actualCertifiedProfileSerialized).to.deep.equal({
         ...certificationResult,
-        globalLevel: globalMeshLevel.getLevelLabel(translate),
+        globalLevel: certificationResult.globalLevel.getLevelLabel(translate),
       });
     });
   });

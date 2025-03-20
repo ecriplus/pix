@@ -15,7 +15,6 @@ import * as certificationResultRepository from '../../infrastructure/repositorie
 import * as cleaCertifiedCandidateRepository from '../../infrastructure/repositories/clea-certified-candidate-repository.js';
 import * as competenceTreeRepository from '../../infrastructure/repositories/competence-tree-repository.js';
 import * as scoCertificationCandidateRepository from '../../infrastructure/repositories/sco-certification-candidate-repository.js';
-import * as pixScoreToMeshLevelService from '../services/pix-score-to-mesh-level.js';
 
 /**
  * Using {@link https://jsdoc.app/tags-type "Closure Compiler's syntax"} to document injected dependencies
@@ -31,7 +30,6 @@ import * as pixScoreToMeshLevelService from '../services/pix-score-to-mesh-level
  * @typedef {sharedSessionRepository} SharedSessionRepository
  * @typedef {certificationLivretScolaireRepository} CertificationLivretScolaireRepository
  * @typedef {competenceTreeRepository} CompetenceTreeRepository
- * @typedef {pixScoreToMeshLevelService} PixScoreToMeshLevelService
  **/
 
 const dependencies = {
@@ -46,7 +44,6 @@ const dependencies = {
   sharedSessionRepository,
   competenceTreeRepository,
   certificationLivretScolaireRepository,
-  pixScoreToMeshLevelService,
 };
 
 const path = dirname(fileURLToPath(import.meta.url));

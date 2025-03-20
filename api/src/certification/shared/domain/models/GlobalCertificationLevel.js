@@ -1,17 +1,23 @@
+/**
+ * @typedef {import ('../../../results/domain/models/v3/MeshConfiguration.js').MeshConfiguration} MeshConfiguration
+ */
 import Joi from 'joi';
 
 import { EntityValidationError } from '../../../../shared/domain/errors.js';
+import { meshConfiguration } from '../../../results/domain/models/v3/MeshConfiguration.js';
 
 export class GlobalCertificationLevel {
-  static #schema = Joi.object({ meshLevel: Joi.number().required() });
+  static #schema = Joi.object({
+    meshLevel: Joi.number().required(),
+  });
 
   /**
    * @param {Object} props
-   * @param {number} props.meshLevel - interval index
-   * @param {Object} props.translate - translation service
+   * @param {number} props.score - certification score in Pix
+   * @param {MeshConfiguration} props.[configuration] - certification score in Pix
    */
-  constructor({ meshLevel }) {
-    this.meshLevel = meshLevel;
+  constructor({ score, configuration = meshConfiguration }) {
+    this.meshLevel = configuration.findIntervalIndexFromScore({ score });
     this.#validate();
   }
 
