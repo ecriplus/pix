@@ -237,25 +237,25 @@
             "proposals": [
               {
                 "id": "1",
-                "content": "100"
+                "content": "100",
+                "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><p> La réponse est 250.<br>Il y a une représentation inégale entre ces langues&nbsp;: on compte environ 7 millions d’articles en anglais, 2 millions en français et 7 000 en tibétain.</p>"
               },
               {
                 "id": "2",
-                "content": "250"
+                "content": "250",
+                "feedback": "<span class=\"feedback__state\">Bonne réponse&nbsp;! 🎉</span><p> Il y a une représentation inégale entre ces langues&nbsp;: on compte environ 7 millions d’articles en anglais, 2 millions en français et 7 000 en tibétain.</p>"
               },
               {
                 "id": "3",
-                "content": "400"
+                "content": "400",
+                "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><p> La réponse est 250.<br>Il y a une représentation inégale entre ces langues&nbsp;: on compte environ 7 millions d’articles en anglais, 2 millions en français et 7 000 en tibétain.</p>"
               },
               {
                 "id": "4",
-                "content": "700"
+                "content": "700",
+                "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><p> La réponse est 250.<br>Il y a une représentation inégale entre ces langues&nbsp;: on compte environ 7 millions d’articles en anglais, 2 millions en français et 7 000 en tibétain.</p>"
               }
             ],
-            "feedbacks": {
-              "valid": "<span class=\"feedback__state\">Bonne réponse&nbsp;! 🎉</span><p> Il y a une représentation inégale entre ces langues&nbsp;: on compte environ 7 millions d’articles en anglais, 2 millions en français et 7 000 en tibétain.</p>",
-              "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p> La réponse est 250.<br>Il y a une représentation inégale entre ces langues&nbsp;: on compte environ 7 millions d’articles en anglais, 2 millions en français et 7 000 en tibétain.</p>"
-            },
             "solution": "2"
           }
         }
@@ -275,21 +275,20 @@
             "proposals": [
               {
                 "id": "1",
-                "content": "les publicités"
+                "content": "les publicités",
+                "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><p> Dans ce cas, le principe de neutralité ne serait pas respecté. Wikipédia est géré par une association à but non lucratif, financé par des donations d’utilisateurs.</p>"
               },
               {
                 "id": "2",
-                "content": "les abonnements payants"
+                "content": "les abonnements payants",
+                "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><p> Dans ce cas, le principe de neutralité ne serait pas respecté. Wikipédia est géré par une association à but non lucratif, financé par des donations d’utilisateurs.</p>"
               },
               {
                 "id": "3",
-                "content": "les dons"
+                "content": "les dons",
+                "feedback": "<span class=\"feedback__state\">Oui, c'est correct.</span><p> Wikipédia est géré par une association à but non lucratif, financé par des donations d’utilisateurs.</p>"
               }
             ],
-            "feedbacks": {
-              "valid": "<span class=\"feedback__state\">Oui, c'est correct.</span><p> Wikipédia est géré par une association à but non lucratif, financé par des donations d’utilisateurs.</p>",
-              "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p> Dans ce cas, le principe de neutralité ne serait pas respecté. Wikipédia est géré par une association à but non lucratif, financé par des donations d’utilisateurs.</p>"
-            },
             "solution": "3"
           }
         }

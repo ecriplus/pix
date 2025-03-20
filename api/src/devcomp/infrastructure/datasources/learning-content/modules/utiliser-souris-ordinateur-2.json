@@ -313,21 +313,20 @@
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>4</p>"
+                "content": "<p>4</p>",
+                "feedback": "<p><span class=\"feedback__state\">Bonne réponse.</span></p><p>Il y a bien 4 photos dans le dossier «&nbsp;80 ans Mamie&nbsp;». Bravo ! Vous avez fait 4 doubles-clics et réussi à naviguer dans un explorateur de fichiers.</p>"
               },
               {
                 "id": "2",
-                "content": "<p>5</p>"
+                "content": "<p>5</p>",
+                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p><strong>Vous avez répondu au questionnaire, mais vous n'avez pas cliqué sur la bonne réponse.</strong><br>Si vous n'avez pas trouvé le dossier «&nbsp;80 ans Mamie&nbsp;» :</p><ul><li>Cliquez sur «&nbsp;Réinitialiser&nbsp;» ci-dessus</li> <li>Suivez les étapes qui vous sont données. Vous devriez effectuer 4 doubles-clics.</li><li>Comptez ensuite le nombre de fichiers qui s'appellent «&nbsp;Photo&nbsp;».</li></ul>"
               },
               {
                 "id": "3",
-                "content": "<p>6</p>"
+                "content": "<p>6</p>",
+                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p><strong>Vous avez répondu au questionnaire, mais vous n'avez pas cliqué sur la bonne réponse.</strong><br>Si vous n'avez pas trouvé le dossier «&nbsp;80 ans Mamie&nbsp;» :</p><ul><li>Cliquez sur «&nbsp;Réinitialiser&nbsp;» ci-dessus</li> <li>Suivez les étapes qui vous sont données. Vous devriez effectuer 4 doubles-clics.</li><li>Comptez ensuite le nombre de fichiers qui s'appellent «&nbsp;Photo&nbsp;».</li></ul>"
               }
             ],
-            "feedbacks": {
-              "valid": "<p><span class=\"feedback__state\">Bonne réponse.</span></p><p>Il y a bien 4 photos dans le dossier «&nbsp;80 ans Mamie&nbsp;». Bravo ! Vous avez fait 4 doubles-clics et réussi à naviguer dans un explorateur de fichiers.</p>",
-              "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p><strong>Vous avez répondu au questionnaire, mais vous n'avez pas cliqué sur la bonne réponse.</strong><br>Si vous n'avez pas trouvé le dossier «&nbsp;80 ans Mamie&nbsp;» :</p><ul><li>Cliquez sur «&nbsp;Réinitialiser&nbsp;» ci-dessus</li> <li>Suivez les étapes qui vous sont données. Vous devriez effectuer 4 doubles-clics.</li><li>Comptez ensuite le nombre de fichiers qui s'appellent «&nbsp;Photo&nbsp;».</li></ul>"
-            },
             "solution": "1"
           }
         }

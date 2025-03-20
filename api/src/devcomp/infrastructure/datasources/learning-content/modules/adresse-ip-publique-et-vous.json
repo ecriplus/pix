@@ -81,21 +81,20 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "Liège"
+                      "content": "Liège",
+                      "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Avez-vous regardé <strong>en bas de l'image </strong>?</p>"
                     },
                     {
                       "id": "2",
-                      "content": "Marseille"
+                      "content": "Marseille",
+                      "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Avez-vous regardé <strong>en bas de l'image </strong>?</p>"
                     },
                     {
                       "id": "3",
-                      "content": "Toulouse"
+                      "content": "Toulouse",
+                      "feedback": "<span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">✨</span></span>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "<span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">✨</span></span>",
-                    "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Avez-vous regardé <strong>en bas de l'image </strong>?</p>"
-                  },
                   "solution": "3"
                 }
               ]
@@ -109,21 +108,20 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "la marque de son ordinateur"
+                      "content": "la marque de son ordinateur",
+                      "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Avez-vous regardé <strong>en bas de l'image </strong>?</p>"
                     },
                     {
                       "id": "2",
-                      "content": "son adresse IP"
+                      "content": "son adresse IP",
+                      "feedback": "<span class=\"feedback__state\">Bonne réponse !<span aria-hidden=\"true\">✨</span></span>"
                     },
                     {
                       "id": "3",
-                      "content": "son historique de navigation"
+                      "content": "son historique de navigation",
+                      "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Avez-vous regardé <strong>en bas de l'image </strong>?</p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "<span class=\"feedback__state\">Bonne réponse !<span aria-hidden=\"true\">✨</span></span>",
-                    "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Avez-vous regardé <strong>en bas de l'image </strong>?</p>"
-                  },
                   "solution": "2"
                 }
               ]
@@ -217,17 +215,15 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "Vrai"
+                      "content": "Vrai",
+                      "feedback": "<span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span><p>Il s’agit par exemple de l’adresse IP publique de votre box internet si vous êtes chez vous ou celle du réseau de votre employeur au travail.</p>"
                     },
                     {
                       "id": "2",
-                      "content": "Faux"
+                      "content": "Faux",
+                      "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Il s’agit par exemple de l’adresse IP publique de votre box internet si vous êtes chez vous ou celle du réseau de votre employeur au travail.</p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "<span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span><p>Il s’agit par exemple de l’adresse IP publique de votre box internet si vous êtes chez vous ou celle du réseau de votre employeur au travail.</p>",
-                    "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Il s’agit par exemple de l’adresse IP publique de votre box internet si vous êtes chez vous ou celle du réseau de votre employeur au travail.</p>"
-                  },
                   "solution": "1"
                 }
               ]
@@ -241,17 +237,15 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "Vrai"
+                      "content": "Vrai",
+                      "feedback": "<span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span><p>Qui dit même point d'accès internet dit même adresse IP publique.</p>"
                     },
                     {
                       "id": "2",
-                      "content": "Faux"
+                      "content": "Faux",
+                      "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Qui dit même point d'accès internet dit même adresse IP publique.</p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "<span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span><p>Qui dit même point d'accès internet dit même adresse IP publique.</p>",
-                    "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Qui dit même point d'accès internet dit même adresse IP publique.</p>"
-                  },
                   "solution": "1"
                 }
               ]
@@ -265,17 +259,15 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "Vrai"
+                      "content": "Vrai",
+                      "feedback": "<span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span><p>Les adresses IP sont localisées. Elles sont attribuées selon 5 grandes régions du monde.</p>"
                     },
                     {
                       "id": "2",
-                      "content": "Faux"
+                      "content": "Faux",
+                      "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Les adresses IP sont localisées. Elles sont attribuées selon 5 grandes régions du monde.</p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "<span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span><p>Les adresses IP sont localisées. Elles sont attribuées selon 5 grandes régions du monde.</p>",
-                    "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Les adresses IP sont localisées. Elles sont attribuées selon 5 grandes régions du monde.</p>"
-                  },
                   "solution": "1"
                 }
               ]
@@ -289,17 +281,15 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "Vrai"
+                      "content": "Vrai",
+                      "feedback": "<span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span><p>Au mieux, vous pourrez connaître le pays ou la ville où elle se trouve.<br>Par contre, la police peut accéder à plus d'informations, dans un cadre prévu par la loi.</p>"
                     },
                     {
                       "id": "2",
-                      "content": "Faux"
+                      "content": "Faux",
+                      "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Au mieux, vous pourrez connaître le pays ou la ville où elle se trouve.<br>Par contre, la police peut accéder à plus d'informations, dans un cadre prévu par la loi.</p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "<span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span><p>Au mieux, vous pourrez connaître le pays ou la ville où elle se trouve.<br>Par contre, la police peut accéder à plus d'informations, dans un cadre prévu par la loi.</p>",
-                    "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Au mieux, vous pourrez connaître le pays ou la ville où elle se trouve.<br>Par contre, la police peut accéder à plus d'informations, dans un cadre prévu par la loi.</p>"
-                  },
                   "solution": "2"
                 }
               ]
@@ -427,17 +417,15 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "l'adresse IP privée"
+                      "content": "l'adresse IP privée",
+                      "feedback": "<span class=\"feedback__state\">Bonne réponse.&nbsp;<span aria-hidden=\"true\">🎉</span></span><p>Ces échanges se font sur le réseau <strong>local</strong> de Mélanie</p>"
                     },
                     {
                       "id": "2",
-                      "content": "l'adresse IP publique"
+                      "content": "l'adresse IP publique",
+                      "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><p> L'adresse IP publique permet les échanges entre la box internet de Mélanie et les sites qu'elle visite.</p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "<span class=\"feedback__state\">Bonne réponse.&nbsp;<span aria-hidden=\"true\">🎉</span></span><p>Ces échanges se font sur le réseau <strong>local</strong> de Mélanie</p>",
-                    "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p> L'adresse IP publique permet les échanges entre la box internet de Mélanie et les sites qu'elle visite.</p>"
-                  },
                   "solution": "1"
                 }
               ]
@@ -451,17 +439,15 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "l'adresse IP privée"
+                      "content": "l'adresse IP privée",
+                      "feedback": "<span class=\"feedback__state\">Bonne réponse.&nbsp;<span aria-hidden=\"true\">🎉</span></span><p>Cela permet de bien distinguer chacun des appareils de Mélanie</p>"
                     },
                     {
                       "id": "2",
-                      "content": "l'adresse IP publique"
+                      "content": "l'adresse IP publique",
+                      "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><p> L'adresse IP publique est spécifique à la box internet. Chaque appareil qui y est connecté a sa propre adresse IP privée.</p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "<span class=\"feedback__state\">Bonne réponse.&nbsp;<span aria-hidden=\"true\">🎉</span></span><p>Cela permet de bien distinguer chacun des appareils de Mélanie</p>",
-                    "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p> L'adresse IP publique est spécifique à la box internet. Chaque appareil qui y est connecté a sa propre adresse IP privée.</p>"
-                  },
                   "solution": "1"
                 }
               ]
@@ -475,17 +461,15 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "l'adresse IP privée"
+                      "content": "l'adresse IP privée",
+                      "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><p> L'adresse IP <strong>privée</strong> (locale) de Mélanie est visible uniquement par les appareils de son réseau local.</p>"
                     },
                     {
                       "id": "2",
-                      "content": "l'adresse IP publique"
+                      "content": "l'adresse IP publique",
+                      "feedback": "<span class=\"feedback__state\">Bonne réponse.&nbsp;<span aria-hidden=\"true\">🎉</span></span><p>Cette adresse est <strong>publique</strong> donc <strong>visible</strong>.</p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "<span class=\"feedback__state\">Bonne réponse.&nbsp;<span aria-hidden=\"true\">🎉</span></span><p>Cette adresse est <strong>publique</strong> donc <strong>visible</strong>.</p>",
-                    "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p> L'adresse IP <strong>privée</strong> (locale) de Mélanie est visible uniquement par les appareils de son réseau local.</p>"
-                  },
                   "solution": "2"
                 }
               ]
@@ -508,17 +492,15 @@
             "proposals": [
               {
                 "id": "1",
-                "content": "oui"
+                "content": "oui",
+                "feedback": "<p> Pour vérifier votre réponse, suivez le lien vers <a href=\"https://monip.org/\" target=\"_blank\">https://monip.org/</a>.</p>"
               },
               {
                 "id": "2",
-                "content": "non"
+                "content": "non",
+                "feedback": "<p> Suivez le lien vers <a href=\"https://monip.org/\" target=\"_blank\">https://monip.org/</a> pour la trouver.</p>"
               }
             ],
-            "feedbacks": {
-              "valid": "<p> Pour vérifier votre réponse, suivez le lien vers <a href=\"https://monip.org/\" target=\"_blank\">https://monip.org/</a>.</p>",
-              "invalid": "<p> Suivez le lien vers <a href=\"https://monip.org/\" target=\"_blank\">https://monip.org/</a> pour la trouver.</p>"
-            },
             "solution": "1"
           }
         },
