@@ -1,4 +1,7 @@
 .organization-team-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-4x);
 
   &__input {
     min-width: 320px;

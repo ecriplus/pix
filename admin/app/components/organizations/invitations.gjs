@@ -1,4 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { fn } from '@ember/helper';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -18,61 +20,79 @@ export default class OrganizationInvitations extends Component {
       <header class="page-section__header">
         <h2 class="page-section__title">Invitations</h2>
       </header>
-      <div class="content-text content-text--small">
-        <div class="table-admin">
-          {{#if this.sortedInvitations}}
-            <table>
-              <thead>
-                <tr>
-                  <th>Adresse e-mail</th>
-                  <th>Rôle</th>
-                  <th>{{t "common.invitations.invitation-locale"}}</th>
-                  <th>Date de dernier envoi</th>
-                  {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
-                    <th>Actions</th>
-                  {{/if}}
-                </tr>
-              </thead>
-              <tbody>
-                {{#each this.sortedInvitations as |invitation|}}
-                  <tr aria-label="Invitation en attente de {{invitation.email}}">
-                    <td>{{invitation.email}}</td>
-                    <td>{{invitation.roleInFrench}}</td>
-                    <td>{{invitation.lang}}</td>
-                    <td>{{dayjsFormat invitation.updatedAt "DD/MM/YYYY [-] HH:mm"}}</td>
-                    {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
-                      <td>
-                        <div class="organization-invitations__actions-buttons">
-                          <PixButton
-                            @size="small"
-                            aria-label={{t "common.invitations.send-new-label" invitationEmail=invitation.email}}
-                            @triggerAction={{fn @onSendNewInvitation invitation}}
-                            @iconBefore="refresh"
-                          >
-                            {{t "common.invitations.send-new"}}
-                          </PixButton>
-                          <PixButton
-                            @size="small"
-                            @variant="error"
-                            aria-label="Annuler l’invitation de {{invitation.email}}"
-                            @triggerAction={{fn @onCancelOrganizationInvitation invitation}}
-                            @iconBefore="delete"
-                          >
-                            Annuler l’invitation
-                          </PixButton>
-                        </div>
-                      </td>
-                    {{/if}}
-                  </tr>
-                {{/each}}
-              </tbody>
-            </table>
-          {{/if}}
-          {{#unless this.sortedInvitations}}
-            <p class="organization-invitations__message">Aucune invitation en attente</p>
-          {{/unless}}
-        </div>
-      </div>
+
+      {{#if this.sortedInvitations}}
+        <PixTable
+          @variant="primary"
+          @caption={{t "components.organizations.invitations.table.caption"}}
+          @data={{this.sortedInvitations}}
+        >
+          <:columns as |invitation context|>
+            <PixTableColumn @context={{context}} class="break-word">
+              <:header>
+                Adresse e-mail
+              </:header>
+              <:cell>
+                {{invitation.email}}
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}}>
+              <:header>
+                Rôle
+              </:header>
+              <:cell>
+                {{invitation.roleInFrench}}
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}}>
+              <:header>
+                {{t "common.invitations.invitation-locale"}}
+              </:header>
+              <:cell>
+                {{invitation.lang}}
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}}>
+              <:header>
+                Date de dernier envoi
+              </:header>
+              <:cell>
+                {{dayjsFormat invitation.updatedAt "DD/MM/YYYY [-] HH:mm"}}
+              </:cell>
+            </PixTableColumn>
+            {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
+              <PixTableColumn @context={{context}}>
+                <:header>
+                  Actions
+                </:header>
+                <:cell>
+                  <div class="organization-invitations__actions-buttons">
+                    <PixButton
+                      @size="small"
+                      aria-label={{t "common.invitations.send-new-label" invitationEmail=invitation.email}}
+                      @triggerAction={{fn @onSendNewInvitation invitation}}
+                      @iconBefore="refresh"
+                    >
+                      {{t "common.invitations.send-new"}}
+                    </PixButton>
+                    <PixButton
+                      @size="small"
+                      @variant="error"
+                      aria-label="Annuler l’invitation de {{invitation.email}}"
+                      @triggerAction={{fn @onCancelOrganizationInvitation invitation}}
+                      @iconBefore="delete"
+                    >
+                      Annuler l’invitation
+                    </PixButton>
+                  </div>
+                </:cell>
+              </PixTableColumn>
+            {{/if}}
+          </:columns>
+        </PixTable>
+      {{else}}
+        <p class="table__empty">Aucune invitation en attente</p>
+      {{/if}}
     </section>
   </template>
 }

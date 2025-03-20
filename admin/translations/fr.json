@@ -442,6 +442,26 @@
           "title": "Fonctionnalités"
         },
         "parent-organization": "Organisation mère"
+      },
+      "invitations": {
+        "table": {
+          "caption": "Liste des invitations envoyées pour rejoindre une organisation. Contient une adresse e-mail de l'utilisateur, le rôle que l'on souhaite lui attribuer, la date de dernier envoi de l'invitation et des actions permettent de renvoyer l'invitation ou de la supprimer."
+        }
+      },
+      "list-items": {
+        "table": {
+          "caption": "Liste des organisations. Contient l'identifiant, le nom, de type et l'identifiant externe de l'organisation."
+        }
+      },
+      "target-profiles-section": {
+        "table": {
+          "caption": "Liste des profils cibles rattachés à l'organisation. Contient son identifiant et son nom interne. Une action permet de détacher le profil cible quand cela est possible."
+        }
+      },
+      "team-section": {
+        "table": {
+          "caption": "Liste des membres appartenant à l'organisation. Contient son identifiant d'utilisateur, nom et prénom, son adresse e-mail, son rôle et son dernier accès à l'organisation. Des actions permettent de modifier son rôle ou de désactiver."
+        }
       }
     },
     "users": {

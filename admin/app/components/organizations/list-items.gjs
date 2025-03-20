@@ -1,8 +1,11 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixFilterBanner from '@1024pix/pix-ui/components/pix-filter-banner';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { fn } from '@ember/helper';
 import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
@@ -51,83 +54,86 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
   }
 
   <template>
-    <div class="content-text content-text--small">
-      <div class="table-admin">
-        <table>
-          <thead>
-            <tr>
-              <th class="table__column table__column--id"><label for="id">ID</label></th>
-              <th><label for="name">Nom</label></th>
-              <th><label for="type">Type</label></th>
-              <th><label for="externalId">Identifiant externe</label></th>
-              {{#if @showDetachColumn}}
-                <th>Actions</th>
-              {{/if}}
-            </tr>
-            <tr>
-              <td class="table__column table__column--id">
-                <PixInput id="id" type="text" value={{this.searchedId}} oninput={{fn @triggerFiltering "id"}} />
-              </td>
-              <td>
-                <PixInput id="name" type="text" value={{this.searchedName}} oninput={{fn @triggerFiltering "name"}} />
-              </td>
-              <td>
-                <PixSelect
-                  @id="type"
-                  @options={{this.optionType}}
-                  @placeholder="- Type -"
-                  @onChange={{this.filter}}
-                  @value={{@type}}
-                />
-              </td>
-              <td>
-                <PixInput
-                  id="externalId"
-                  type="text"
-                  value={{this.searchedExternalId}}
-                  oninput={{fn @triggerFiltering "externalId"}}
-                />
-              </td>
-              {{#if @showDetachColumn}}
-                <td></td>
-              {{/if}}
-            </tr>
-          </thead>
-
-          {{#if @organizations}}
-            <tbody>
-              {{#each @organizations as |organization|}}
-                <tr aria-label="Organisation {{organization.name}}">
-                  <td class="table__column table__column--id">
-                    <LinkTo @route="authenticated.organizations.get" @model={{organization.id}}>
-                      {{organization.id}}
-                    </LinkTo>
-                  </td>
-                  <td>{{organization.name}}</td>
-                  <td>{{organization.type}}</td>
-                  <td>{{organization.externalId}}</td>
-                  {{#if @showDetachColumn}}
-                    <td>
-                      <PixButton @variant="error" @size="small" @triggerAction={{fn this.openModal organization}}>
-                        Détacher
-                      </PixButton>
-
-                    </td>
-                  {{/if}}
-                </tr>
-              {{/each}}
-            </tbody>
-          {{/if}}
-        </table>
-
-        {{#unless @organizations}}
-          <div class="table__empty">{{t "common.tables.empty-result"}}</div>
-        {{/unless}}
-      </div>
-    </div>
+    <PixFilterBanner @title={{t "common.filters.title"}}>
+      <PixInput value={{this.searchedId}} oninput={{fn @triggerFiltering "id"}}>
+        <:label>Identifiant</:label>
+      </PixInput>
+      <PixInput value={{this.searchedName}} oninput={{fn @triggerFiltering "name"}}>
+        <:label>Nom</:label>
+      </PixInput>
+      <PixSelect
+        @id="type"
+        @hideDefaultOption={{true}}
+        @options={{this.optionType}}
+        @onChange={{this.filter}}
+        @value={{@type}}
+      >
+        <:label>Type</:label>
+      </PixSelect>
+      <PixInput value={{this.searchedExternalId}} oninput={{fn @triggerFiltering "externalId"}}>
+        <:label>Identifiant externe</:label>
+      </PixInput>
+    </PixFilterBanner>
 
     {{#if @organizations}}
+      <PixTable
+        @variant="primary"
+        @caption={{t "components.organizations.list-items.table.caption"}}
+        @data={{@organizations}}
+      >
+        <:columns as |organization context|>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              ID
+            </:header>
+            <:cell>
+              <LinkTo @route="authenticated.organizations.get" @model={{organization.id}}>
+                {{organization.id}}
+              </LinkTo>
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="break-word">
+            <:header>
+              Nom
+            </:header>
+            <:cell>
+              {{organization.name}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              Type
+            </:header>
+            <:cell>
+              {{organization.type}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="break-word">
+            <:header>
+              Identifiant externe
+            </:header>
+            <:cell>
+              {{organization.externalId}}
+            </:cell>
+          </PixTableColumn>
+          {{#if @showDetachColumn}}
+            <PixTableColumn @context={{context}}>
+              <:header>
+                Actions
+              </:header>
+              <:cell>
+                <PixButton @variant="error" @size="small" @triggerAction={{fn this.openModal organization}}>
+                  Détacher
+                </PixButton>
+              </:cell>
+            </PixTableColumn>
+          {{/if}}
+        </:columns>
+      </PixTable>
+
       <PixPagination @pagination={{@organizations.meta}} />
+    {{else}}
+      <div class="table__empty">{{t "common.tables.empty-result"}}</div>
     {{/if}}
 
     <PixModal

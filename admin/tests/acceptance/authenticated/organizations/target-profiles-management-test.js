@@ -1,5 +1,6 @@
 import { clickByName, fillByLabel, visit, within } from '@1024pix/ember-testing-library';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { module, test } from 'qunit';
@@ -22,7 +23,10 @@ module('Acceptance | Organizations | Target profiles management', function (hook
 
     // then
     assert.dom(screen.getByRole('link', { name: 'Tags' })).exists();
-    assert.dom(screen.getByLabelText('Profil cible')).includesText('Profil cible du ghetto');
+    const table = screen.getByRole('table', {
+      name: t('components.organizations.target-profiles-section.table.caption'),
+    });
+    assert.dom(within(table).getByRole('cell', { name: 'Profil cible du ghetto' })).exists();
   });
 
   test('should add a target profile to an organization', async function (assert) {
@@ -38,7 +42,10 @@ module('Acceptance | Organizations | Target profiles management', function (hook
     await clickByName('Valider');
 
     // then
-    assert.dom(await screen.findByLabelText('Profil cible')).includesText('66');
+    const table = await screen.findByRole('table', {
+      name: t('components.organizations.target-profiles-section.table.caption'),
+    });
+    assert.dom(within(table).getByRole('cell', { name: 'Profil 66' })).exists();
     assert.dom(await within(parentInput).findByDisplayValue('')).hasAria('label', 'ID du ou des profil(s) cible(s)');
   });
 

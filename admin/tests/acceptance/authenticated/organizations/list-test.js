@@ -1,6 +1,7 @@
-import { visit } from '@1024pix/ember-testing-library';
+import { visit, within } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { module, test } from 'qunit';
@@ -49,8 +50,9 @@ module('Acceptance | Organizations | List', function (hooks) {
       const screen = await visit('/organizations/list');
 
       // then
-      assert.dom(screen.getByLabelText('Organisation Tic')).exists();
-      assert.dom(screen.getByLabelText('Organisation Tac')).exists();
+      const table = screen.getByRole('table', { name: t('components.organizations.list-items.table.caption') });
+      assert.dom(within(table).getByRole('cell', { name: 'Tic' })).exists();
+      assert.dom(within(table).getByRole('cell', { name: 'Tac' })).exists();
     });
 
     test('it should not show an Actions column', async function (assert) {

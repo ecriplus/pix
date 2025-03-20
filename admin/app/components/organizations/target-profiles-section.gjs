@@ -1,6 +1,8 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
@@ -159,49 +161,50 @@ export default class OrganizationTargetProfilesSectionComponent extends Componen
       <header class="page-section__header">
         <h2 class="page-section__title">Profils cibles</h2>
       </header>
-      <div class="content-text content-text--small">
-        <div class="table-admin">
-          <table>
-            <thead>
-              <tr>
-                <th class="table__column table__column--id">ID</th>
-                <th>Nom interne du profil cible</th>
-                {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
-                  <th>Actions</th>
-                {{/if}}
-              </tr>
-            </thead>
-
-            {{#if @targetProfileSummaries}}
-              <tbody>
-                {{#each this.sortedTargetProfileSummaries as |summary|}}
-                  <tr aria-label="Profil cible">
-                    <td class="table__column table__column--id">{{summary.id}}</td>
-                    <td headers="target-profile-name">
-                      <LinkTo @route="authenticated.target-profiles.target-profile" @model={{summary.id}}>
-                        {{summary.internalName}}
-                      </LinkTo>
-                    </td>
-                    {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
-                      <td>
-                        {{#if (this.canDetachTargetProfile summary)}}
-                          <PixButton @variant="error" @size="small" @triggerAction={{fn this.openModal summary}}>
-                            Détacher
-                          </PixButton>
-                        {{/if}}
-                      </td>
-                    {{/if}}
-                  </tr>
-                {{/each}}
-              </tbody>
+      {{#if @targetProfileSummaries}}
+        <PixTable
+          @variant="primary"
+          @caption={{t "components.organizations.target-profiles-section.table.caption"}}
+          @data={{this.sortedTargetProfileSummaries}}
+        >
+          <:columns as |summary context|>
+            <PixTableColumn @context={{context}}>
+              <:header>
+                ID
+              </:header>
+              <:cell>
+                {{summary.id}}
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}} class="break-word">
+              <:header>
+                Nom interne du profil cible
+              </:header>
+              <:cell>
+                <LinkTo @route="authenticated.target-profiles.target-profile" @model={{summary.id}}>
+                  {{summary.internalName}}
+                </LinkTo>
+              </:cell>
+            </PixTableColumn>
+            {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
+              <PixTableColumn @context={{context}}>
+                <:header>
+                  Actions
+                </:header>
+                <:cell>
+                  {{#if (this.canDetachTargetProfile summary)}}
+                    <PixButton @variant="error" @size="small" @triggerAction={{fn this.openModal summary}}>
+                      Détacher
+                    </PixButton>
+                  {{/if}}
+                </:cell>
+              </PixTableColumn>
             {{/if}}
-          </table>
-
-          {{#unless @targetProfileSummaries}}
-            <div class="table__empty">{{t "common.tables.empty-result"}}</div>
-          {{/unless}}
-        </div>
-      </div>
+          </:columns>
+        </PixTable>
+      {{else}}
+        <div class="table__empty">{{t "common.tables.empty-result"}}</div>
+      {{/if}}
     </section>
 
     <PixModal

@@ -1,4 +1,5 @@
-import { render } from '@ember/test-helpers';
+import { render, within } from '@1024pix/ember-testing-library';
+import { t } from 'ember-intl/test-support';
 import ListItems from 'pix-admin/components/organizations/list-items';
 import { module, test } from 'qunit';
 
@@ -15,28 +16,6 @@ module('Integration | Component | routes/authenticated/organizations | list-item
   const triggerFiltering = function () {};
 
   test('it should display header with id, name, type and externalId', async function (assert) {
-    // when
-    await render(<template><ListItems @triggerFiltering={{triggerFiltering}} /></template>);
-
-    // then
-    assert.dom('table thead tr:first-child th:first-child').hasText('ID');
-    assert.dom('table thead tr:first-child th:nth-child(2)').hasText('Nom');
-    assert.dom('table thead tr:first-child th:nth-child(3)').hasText('Type');
-    assert.dom('table thead tr:first-child th:nth-child(4)').hasText('Identifiant externe');
-  });
-
-  test('if should display search inputs', async function (assert) {
-    // when
-    await render(<template><ListItems @triggerFiltering={{triggerFiltering}} /></template>);
-
-    // then
-    assert.dom('table thead tr:nth-child(2) input#id').exists();
-    assert.dom('table thead tr:nth-child(2) input#name').exists();
-    assert.dom('table thead tr:nth-child(2) button#type').exists();
-    assert.dom('table thead tr:nth-child(2) input#externalId').exists();
-  });
-
-  test('it should display organization list', async function (assert) {
     // given
     const externalId = '1234567A';
     const organizations = [
@@ -49,15 +28,53 @@ module('Integration | Component | routes/authenticated/organizations | list-item
     };
 
     // when
-    await render(
+    const screen = await render(
       <template><ListItems @organizations={{organizations}} @triggerFiltering={{triggerFiltering}} /></template>,
     );
 
     // then
-    assert.dom('table tbody tr:first-child td:first-child').hasText('1');
-    assert.dom('table tbody tr:first-child td:nth-child(2)').hasText('École ACME');
-    assert.dom('table tbody tr:first-child td:nth-child(3)').hasText('SCO');
-    assert.dom('table tbody tr:first-child td:nth-child(4)').hasText(externalId);
-    assert.dom('table tbody tr').exists({ count: 3 });
+    const table = screen.getByRole('table', { name: t('components.organizations.list-items.table.caption') });
+    assert.dom(within(table).getByRole('columnheader', { name: 'ID' })).exists();
+    assert.dom(within(table).getByRole('columnheader', { name: 'Nom' })).exists();
+    assert.dom(within(table).getByRole('columnheader', { name: 'Type' })).exists();
+    assert.dom(within(table).getByRole('columnheader', { name: 'Identifiant externe' })).exists();
+  });
+
+  test('if should display search inputs', async function (assert) {
+    // when
+    const screen = await render(<template><ListItems @triggerFiltering={{triggerFiltering}} /></template>);
+
+    // then
+    assert.dom(screen.getByRole('textbox', { name: 'Identifiant' })).exists();
+    assert.dom(screen.getByRole('textbox', { name: 'Nom' })).exists();
+    assert.dom(screen.getByRole('button', { name: 'Type' })).exists();
+    assert.dom(screen.getByRole('textbox', { name: 'Identifiant externe' })).exists();
+  });
+
+  test('it should display organization list', async function (assert) {
+    // given
+    const externalId = '1234567A';
+    const organizations = [
+      { id: 1, name: 'École ACME', type: 'SCO', externalId: '1234567A' },
+      { id: 2, name: 'Université BROS', type: 'SUP', externalId: '1234567B' },
+      { id: 3, name: 'Entreprise KSSOS', type: 'PRO', externalId: '1234567C' },
+    ];
+    organizations.meta = {
+      rowCount: 3,
+    };
+
+    // when
+    const screen = await render(
+      <template><ListItems @organizations={{organizations}} @triggerFiltering={{triggerFiltering}} /></template>,
+    );
+
+    // then
+    const table = screen.getByRole('table', { name: t('components.organizations.list-items.table.caption') });
+    const rows = within(table).getAllByRole('row');
+    assert.dom(within(table).getByRole('cell', { name: '1' })).exists();
+    assert.dom(within(table).getByRole('cell', { name: 'École ACME' })).exists();
+    assert.dom(within(table).getByRole('cell', { name: 'SCO' })).exists();
+    assert.dom(within(table).getByRole('cell', { name: externalId })).exists();
+    assert.strictEqual(rows.length, 4);
   });
 });

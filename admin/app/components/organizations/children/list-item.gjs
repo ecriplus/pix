@@ -1,13 +1,32 @@
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { LinkTo } from '@ember/routing';
+import { t } from 'ember-intl';
 
 <template>
-  <tr aria-label={{@organization.name}}>
-    <td>
+  <PixTableColumn @context={{@context}}>
+    <:header>
+      {{t "components.organizations.children-list.table-headers.id"}}
+    </:header>
+    <:cell>
       <LinkTo @route="authenticated.organizations.get" @model={{@organization.id}}>
         {{@organization.id}}
       </LinkTo>
-    </td>
-    <td>{{@organization.name}}</td>
-    <td>{{@organization.externalId}}</td>
-  </tr>
+    </:cell>
+  </PixTableColumn>
+  <PixTableColumn @context={{@context}} class="break-word">
+    <:header>
+      {{t "components.organizations.children-list.table-headers.name"}}
+    </:header>
+    <:cell>
+      {{@organization.name}}
+    </:cell>
+  </PixTableColumn>
+  <PixTableColumn @context={{@context}} class="break-word">
+    <:header>
+      {{t "components.organizations.children-list.table-headers.external-id"}}
+    </:header>
+    <:cell>
+      {{@organization.externalId}}
+    </:cell>
+  </PixTableColumn>
 </template>

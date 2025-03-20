@@ -96,13 +96,16 @@ module('Acceptance | Target Profile Organizations', function (hooks) {
       });
 
       test('should be able to add new organization to the target profile', async function (assert) {
+        // given
         const screen = await visit('/target-profiles/1');
         await clickByName('Organisations du profil cible');
 
+        // when
         await fillByLabel('Rattacher une ou plusieurs organisation(s)', '42');
         await clickByName('Valider le rattachement');
 
-        assert.dom(await screen.findByLabelText('Organisation Organization 42')).includesText('42');
+        // then
+        assert.dom(await screen.findByRole('cell', { name: 'Organization 42' })).exists();
       });
 
       test('should be able to attach an organization with given target profile', async function (assert) {
@@ -112,7 +115,7 @@ module('Acceptance | Target Profile Organizations', function (hooks) {
         await fillByLabel("Rattacher les organisations d'un profil cible existant", '43');
         await clickByName('Valider le rattachement à partir de ce profil cible');
 
-        assert.dom(await screen.findByLabelText('Organisation Organization for target profile 43')).exists();
+        assert.dom(await screen.findByRole('cell', { name: 'Organization for target profile 43' })).exists();
       });
     });
   });

@@ -1,3 +1,4 @@
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { LinkTo } from '@ember/routing';
 import Component from '@glimmer/component';
 import dayjs from 'dayjs';
@@ -13,13 +14,48 @@ export default class MemberItem extends Component {
   }
 
   <template>
-    <td><LinkTo @route="authenticated.users.get" @model={{@organizationMembership.user.id}}>
-        {{@organizationMembership.user.id}}
-      </LinkTo></td>
-    <td>{{@organizationMembership.user.firstName}}</td>
-    <td>{{@organizationMembership.user.lastName}}</td>
-    <td>{{@organizationMembership.user.email}}</td>
-    <td>{{this.lastAccessedAt}}</td>
-    <ActionsOnUsersRoleInOrganization @organizationMembership={{@organizationMembership}} />
+    <PixTableColumn @context={{@context}}>
+      <:header>
+        ID user
+      </:header>
+      <:cell>
+        <LinkTo @route="authenticated.users.get" @model={{@organizationMembership.user.id}}>
+          {{@organizationMembership.user.id}}
+        </LinkTo>
+      </:cell>
+    </PixTableColumn>
+    <PixTableColumn @context={{@context}}>
+      <:header>
+        Prénom
+      </:header>
+      <:cell>
+        {{@organizationMembership.user.firstName}}
+      </:cell>
+    </PixTableColumn>
+    <PixTableColumn @context={{@context}}>
+      <:header>
+        Nom
+      </:header>
+      <:cell>
+        {{@organizationMembership.user.lastName}}
+      </:cell>
+    </PixTableColumn>
+    <PixTableColumn @context={{@context}} class="break-word">
+      <:header>
+        Adresse e-mail
+      </:header>
+      <:cell>
+        {{@organizationMembership.user.email}}
+      </:cell>
+    </PixTableColumn>
+    <PixTableColumn @context={{@context}}>
+      <:header>
+        Dernier accès
+      </:header>
+      <:cell>
+        {{this.lastAccessedAt}}
+      </:cell>
+    </PixTableColumn>
+    <ActionsOnUsersRoleInOrganization @organizationMembership={{@organizationMembership}} @context={{@context}} />
   </template>
 }
