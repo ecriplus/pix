@@ -359,6 +359,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
 
         const session = databaseBuilder.factory.buildSession({
           version: SESSIONS_VERSIONS.V3,
+          publishedAt: new Date(),
         });
 
         const candidate = databaseBuilder.factory.buildCertificationCandidate({
@@ -403,6 +404,11 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
 
         // then
         expect(response.statusCode).to.equal(200);
+        expect(response.headers['content-type']).to.equal('application/pdf');
+        expect(response.headers['content-disposition']).to.equal(
+          `attachment; filename=${organizationLearner.division.toLowerCase()}-attestation-pix-${dayjs(session.publishedAt).format('YYYYMMDD')}.pdf`,
+        );
+        expect(response.file).not.to.be.null;
       });
     });
   });

@@ -71,12 +71,24 @@ function toArrayOfFixedLengthStringsConservingWords(str, maxLength) {
   return result.map((str) => str.trim());
 }
 
+function normalizeAndRemoveAccents(str) {
+  return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // Remove accents
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9 -]/g, '') // Remove special characters
+    .replace(/\s+/g, '-') // Replace spaces by dashes
+    .replace(/-+/g, '-'); // Prevent double dashes
+}
+
 export {
   cleanStringAndParseFloat,
   getArrayOfStrings,
   getArrayOfUpperStrings,
   isNumeric,
   normalize,
+  normalizeAndRemoveAccents,
   normalizeAndSortChars,
   splitIntoWordsAndRemoveBackspaces,
   toArrayOfFixedLengthStringsConservingWords,

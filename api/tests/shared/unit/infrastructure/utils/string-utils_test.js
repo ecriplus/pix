@@ -4,6 +4,7 @@ import {
   getArrayOfUpperStrings,
   isNumeric,
   normalize,
+  normalizeAndRemoveAccents,
   normalizeAndSortChars,
   splitIntoWordsAndRemoveBackspaces,
   toArrayOfFixedLengthStringsConservingWords,
@@ -193,6 +194,19 @@ describe('Unit | Shared | infrastructure | Utils | string-utils', function () {
         'la',
         'fonction.',
       ]);
+    });
+  });
+
+  describe('#normalizeAndRemoveAccents', function () {
+    it('should return a string without spaces and special characters', function () {
+      // given
+      const stringToSanitize = "chef-d'œuvre de string -- @ http://www.complexité.fr";
+
+      // when
+      const result = normalizeAndRemoveAccents(stringToSanitize);
+
+      // then
+      expect(result).to.equal('chef-duvre-de-string-httpwwwcomplexitefr');
     });
   });
 });

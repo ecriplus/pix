@@ -232,56 +232,112 @@ describe('Certification | Results | Unit | Application | Controller | certificat
       clock.restore();
     });
 
-    it('should return binary attestations', async function () {
-      // given
-      const certifications = [
-        domainBuilder.buildPrivateCertificateWithCompetenceTree(),
-        domainBuilder.buildPrivateCertificateWithCompetenceTree(),
-      ];
-      const organizationId = domainBuilder.buildOrganization().id;
-      const division = '3b';
-      const attestationsPDF = 'binary string';
-      const userId = 1;
-      const lang = FRENCH;
-      const i18n = getI18n();
+    describe('when attestations are for v3', function () {
+      it('should return division attestations in PDF binary format', async function () {
+        // given
+        const userId = 1;
+        const i18n = getI18n();
 
-      const request = {
-        i18n,
-        auth: { credentials: { userId } },
-        params: { organizationId },
-        query: { division, isFrenchDomainExtension: true, lang },
-      };
+        const v3CertificationAttestation = domainBuilder.certification.results.buildV3CertificationAttestation();
+        const generatedPdf = Symbol('Stream');
 
-      sinon
-        .stub(usecases, 'findCertificationAttestationsForDivision')
-        .withArgs({
-          division,
-          organizationId,
-        })
-        .resolves(certifications);
+        const organizationId = domainBuilder.buildOrganization().id;
+        const division = '3ème b';
 
-      const certificationAttestationPdfStub = {
-        getCertificationAttestationsPdfBuffer: sinon.stub(),
-      };
+        const request = {
+          i18n,
+          auth: { credentials: { userId } },
+          params: { organizationId },
+          query: { division, isFrenchDomainExtension: true, lang: FRENCH },
+        };
 
-      const dependencies = {
-        certificationAttestationPdf: certificationAttestationPdfStub,
-      };
+        sinon
+          .stub(usecases, 'findCertificationAttestationsForDivision')
+          .withArgs({
+            division,
+            organizationId,
+          })
+          .resolves([v3CertificationAttestation, v3CertificationAttestation]);
 
-      certificationAttestationPdfStub.getCertificationAttestationsPdfBuffer
-        .withArgs({ certificates: certifications, isFrenchDomainExtension: true, i18n })
-        .resolves({ buffer: attestationsPDF });
+        const generatePdfStub = {
+          generate: sinon.stub().returns(generatedPdf),
+        };
 
-      // when
-      const response = await certificationAttestationController.downloadCertificationAttestationsForDivision(
-        request,
-        hFake,
-        dependencies,
-      );
+        // when
+        const response = await certificationAttestationController.downloadCertificationAttestationsForDivision(
+          request,
+          hFake,
+          {
+            v3CertificationAttestationPdf: generatePdfStub,
+          },
+        );
 
-      // then
-      expect(response.source).to.deep.equal(attestationsPDF);
-      expect(response.headers['Content-Disposition']).to.contains('attachment; filename=20190101_attestations_3b.pdf');
+        // then
+        expect(generatePdfStub.generate).calledOnceWithExactly({
+          certificates: [v3CertificationAttestation, v3CertificationAttestation],
+          i18n,
+        });
+        expect(response.source).to.deep.equal(generatedPdf);
+        expect(response.headers['Content-Disposition']).to.contains(
+          `attachment; filename=3eme-b-attestation-pix-${dayjs(v3CertificationAttestation.deliveredAt).format('YYYYMMDD')}.pdf`,
+        );
+      });
+    });
+
+    describe('when attestations are for v2', function () {
+      it('should return binary attestations', async function () {
+        // given
+        const certifications = [
+          domainBuilder.buildPrivateCertificateWithCompetenceTree(),
+          domainBuilder.buildPrivateCertificateWithCompetenceTree(),
+        ];
+        const organizationId = domainBuilder.buildOrganization().id;
+        const division = '3b';
+        const attestationsPDF = 'binary string';
+        const userId = 1;
+        const lang = FRENCH;
+        const i18n = getI18n();
+
+        const request = {
+          i18n,
+          auth: { credentials: { userId } },
+          params: { organizationId },
+          query: { division, isFrenchDomainExtension: true, lang },
+        };
+
+        sinon
+          .stub(usecases, 'findCertificationAttestationsForDivision')
+          .withArgs({
+            division,
+            organizationId,
+          })
+          .resolves(certifications);
+
+        const certificationAttestationPdfStub = {
+          getCertificationAttestationsPdfBuffer: sinon.stub(),
+        };
+
+        const dependencies = {
+          certificationAttestationPdf: certificationAttestationPdfStub,
+        };
+
+        certificationAttestationPdfStub.getCertificationAttestationsPdfBuffer
+          .withArgs({ certificates: certifications, isFrenchDomainExtension: true, i18n })
+          .resolves({ buffer: attestationsPDF });
+
+        // when
+        const response = await certificationAttestationController.downloadCertificationAttestationsForDivision(
+          request,
+          hFake,
+          dependencies,
+        );
+
+        // then
+        expect(response.source).to.deep.equal(attestationsPDF);
+        expect(response.headers['Content-Disposition']).to.contains(
+          'attachment; filename=20190101_attestations_3b.pdf',
+        );
+      });
     });
   });
 });
