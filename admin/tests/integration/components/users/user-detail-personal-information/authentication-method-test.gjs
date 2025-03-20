@@ -60,49 +60,6 @@ module('Integration | Component | users | user-detail-personal-information | aut
         });
       });
 
-      module('when last logged date exists', function () {
-        test('should display date of latest connection', async function (assert) {
-          // given
-          const user = { lastLoggedAt: new Date('2022-07-01'), authenticationMethods: [] };
-          this.owner.register('service:access-control', AccessControlStub);
-
-          // when
-          const screen = await render(<template><AuthenticationMethod @user={{user}} /></template>);
-
-          // then
-          assert
-            .dom(
-              screen.getAllByRole('listitem').find((listItem) => {
-                const childrenText = listItem.textContent.trim().split('\n');
-                return (
-                  childrenText[0]?.trim() === 'Date de dernière connexion :' && childrenText[1]?.trim() === '01/07/2022'
-                );
-              }),
-            )
-            .exists();
-        });
-      });
-
-      module('when last logged date does not exist', function () {
-        test('it should only display label', async function (assert) {
-          // given
-          const user = { lastLoggedAt: null, authenticationMethods: [] };
-          this.owner.register('service:access-control', AccessControlStub);
-
-          // when
-          const screen = await render(<template><AuthenticationMethod @user={{user}} /></template>);
-
-          // then
-          assert
-            .dom(
-              screen
-                .getAllByRole('listitem')
-                .find((listItem) => listItem.textContent?.trim() === 'Date de dernière connexion :'),
-            )
-            .exists();
-        });
-      });
-
       module('when user has a PIX authentication method', function () {
         test('it displays user has to change password', async function (assert) {
           // given

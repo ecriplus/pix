@@ -217,10 +217,6 @@ export default class AuthenticationMethod extends Component {
     </header>
 
     <ul class="authentication-method__connexions-information">
-      <li>
-        <strong>Date de dernière connexion :</strong>
-        {{#if @user.lastLoggedAt}}{{dayjsFormat @user.lastLoggedAt "DD/MM/YYYY"}}{{/if}}
-      </li>
       {{#if @user.emailConfirmedAt}}
         <li>
           <strong>Adresse e-mail confirmée le :</strong>
