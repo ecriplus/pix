@@ -497,6 +497,11 @@
           "caption": "Liste des utilisateurs. Contient le prénom, le nom, l'adresse e-mail et l'identifiant."
         }
       },
+      "organization-learner-information": {
+        "table": {
+          "caption": "Liste des informations d'un prescrit. Contient le prénom, le nom, la date de naissance, sa classe ou groupe, le nom de l'organisation auquel prescrit est rattaché, la date de création, la dernière date de mise à jour de ses informations, son état (actif ou inactif). Une action permet le dissocier le prescrit de l'organisation auquel il est rattaché.."
+        }
+      },
       "user-detail-personal-information": {
         "actions": {
           "copy-email": "Copier l’adresse e-mail",
