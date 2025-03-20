@@ -1,5 +1,23 @@
 # Pix Changelog
 
+## v5.68.0 (20/03/2025)
+
+
+### :rocket: Amélioration
+- [#11761](https://github.com/1024pix/pix/pull/11761) [FEATURE] PixTable sur Pix Admin épisode 8 : Organisations (PIX-17091).
+- [#11751](https://github.com/1024pix/pix/pull/11751) [FEATURE] Déplacer le champ "Date de dernière connexion" (PIX-16630).
+- [#11756](https://github.com/1024pix/pix/pull/11756) [FEATURE] Anonymisation (par généralisation) sur les dernières dates de connexion (PIX-16635).
+- [#11736](https://github.com/1024pix/pix/pull/11736) [FEATURE] PixTable sur Pix Admin épisode 7 : Centres de certification (PIX-17063).
+
+### :building_construction: Tech
+- [#11757](https://github.com/1024pix/pix/pull/11757) [TECH] :broom: Rapprochement de constantes dans un usecase.
+- [#11704](https://github.com/1024pix/pix/pull/11704) [TECH] Suppression du code lié aux campagnes FLASH (PIX-16668).
+- [#11676](https://github.com/1024pix/pix/pull/11676) [TECH] Regrouper l'ensemble des actions de finalisation dans une transaction (PIX-17013).
+- [#11616](https://github.com/1024pix/pix/pull/11616) [TECH] :broom: :seedling: Nettoyage des seeds de certification (PIX-16430).
+
+### :bug: Correction
+- [#11759](https://github.com/1024pix/pix/pull/11759) [BUGFIX] La notification de levelup apparaître parfois lors d'une évaluation de compétence alors que le levelup n'est pas justifié (PIX-17085).
+
 ## v5.67.0 (19/03/2025)
 
 
