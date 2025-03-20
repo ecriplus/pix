@@ -588,7 +588,7 @@
               {
                 "id": "1",
                 "content": "oui",
-                "feedback": "<p>Bravo ! <br>Vous pouvez vérifier votre réponse avec les schémas présentés et demander une vérification par quelqu'un si c'est possible.</p>"
+                "feedback": "<span class=\"feedback__state\">Bravo !</span><p>Vous pouvez vérifier votre réponse avec les schémas présentés et demander une vérification par quelqu'un si c'est possible.</p>"
               },
               {
                 "id": "2",
