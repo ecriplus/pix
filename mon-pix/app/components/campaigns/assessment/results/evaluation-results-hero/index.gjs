@@ -53,7 +53,9 @@ export default class EvaluationResultsHero extends Component {
   }
 
   get displayQuestResult() {
-    return this.featureToggles.featureToggles?.isQuestEnabled && this.hasQuestResults;
+    return (
+      this.featureToggles.featureToggles?.isQuestEnabled && !this.currentUser.user.isAnonymous && this.hasQuestResults
+    );
   }
 
   get hasQuestResults() {

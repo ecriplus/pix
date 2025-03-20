@@ -51,87 +51,144 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
   module('display quests results', function () {
     module('isQuestEnabled feature flag', function () {
-      test('it should not display the quest result if the flag is false', async function (assert) {
-        // given
-        class FeatureTogglesStub extends Service {
-          featureToggles = { isQuestEnabled: false };
-        }
-        this.owner.register('service:featureToggles', FeatureTogglesStub);
+      module('user is Anonymous', function () {
+        test('it should not display the quest result if the flag is false', async function (assert) {
+          // given
+          class CurrentUserStub extends Service {
+            user = { isAnonymous: true };
+          }
+          this.owner.register('service:currentUser', CurrentUserStub);
+          class FeatureTogglesStub extends Service {
+            featureToggles = { isQuestEnabled: false };
+          }
+          this.owner.register('service:featureToggles', FeatureTogglesStub);
 
-        this.set('campaign', {
-          customResultPageText: 'My custom result page text',
-          organizationId: 1,
-        });
+          this.set('campaign', {
+            customResultPageText: 'My custom result page text',
+            organizationId: 1,
+          });
 
-        this.set('campaignParticipationResult', {
-          campaignParticipationBadges: [],
-          isShared: false,
-          canImprove: false,
-          masteryRate: 0.75,
-          reachedStage: { acquired: 4, total: 5 },
-        });
+          this.set('campaignParticipationResult', {
+            campaignParticipationBadges: [],
+            isShared: false,
+            canImprove: false,
+            masteryRate: 0.75,
+            reachedStage: { acquired: 4, total: 5 },
+          });
 
-        this.set('questResults', [
-          {
-            obtained: true,
-            profileRewardId: 12,
-            reward: { key: 'SIXTH_GRADE' },
-          },
-        ]);
+          this.set('questResults', [
+            {
+              obtained: true,
+              profileRewardId: 12,
+              reward: { key: 'SIXTH_GRADE' },
+            },
+          ]);
 
-        // when
-        const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
+          // when
+          const screen = await render(
+            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
   @campaign={{this.campaign}}
   @questResults={{this.questResults}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
   @isSharableCampaign={{true}}
 />`,
-        );
+          );
 
-        // then
-        assert.notOk(screen.queryByText(t('components.campaigns.attestation-result.obtained')));
+          // then
+          assert.notOk(screen.queryByText(t('components.campaigns.attestation-result.obtained')));
+        });
       });
 
-      test('it should display the quest result if the flag is true', async function (assert) {
-        // given
-        class FeatureTogglesStub extends Service {
-          featureToggles = { isQuestEnabled: true };
-        }
-        this.owner.register('service:featureToggles', FeatureTogglesStub);
+      module('user is not anonymous', function (hooks) {
+        hooks.beforeEach(function () {
+          class CurrentUserStub extends Service {
+            user = { isAnonymous: false };
+          }
+          this.owner.register('service:currentUser', CurrentUserStub);
 
-        this.set('campaign', {
-          customResultPageText: 'My custom result page text',
-          organizationId: 1,
-        });
+          test('it should not display the quest result if the flag is true', async function (assert) {
+            // given
+            class FeatureTogglesStub extends Service {
+              featureToggles = { isQuestEnabled: true };
+            }
+            this.owner.register('service:featureToggles', FeatureTogglesStub);
 
-        this.set('campaignParticipationResult', {
-          campaignParticipationBadges: [],
-          isShared: false,
-          canImprove: false,
-          masteryRate: 0.75,
-          reachedStage: { acquired: 4, total: 5 },
-        });
-        this.set('questResults', [
-          {
-            obtained: true,
-            profileRewardId: 12,
-            reward: { key: 'SIXTH_GRADE' },
-          },
-        ]);
+            this.set('campaign', {
+              customResultPageText: 'My custom result page text',
+              organizationId: 1,
+            });
 
-        // when
-        const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
+            this.set('campaignParticipationResult', {
+              campaignParticipationBadges: [],
+              isShared: false,
+              canImprove: false,
+              masteryRate: 0.75,
+              reachedStage: { acquired: 4, total: 5 },
+            });
+
+            this.set('questResults', [
+              {
+                obtained: true,
+                profileRewardId: 12,
+                reward: { key: 'SIXTH_GRADE' },
+              },
+            ]);
+
+            // when
+            const screen = await render(
+              hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
   @campaign={{this.campaign}}
   @questResults={{this.questResults}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
   @isSharableCampaign={{true}}
 />`,
-        );
+            );
 
-        // then
-        assert.ok(screen.getByText(t('components.campaigns.attestation-result.obtained')));
+            // then
+            assert.notOk(screen.queryByText(t('components.campaigns.attestation-result.obtained')));
+          });
+
+          test('it should display the quest result if the flag is true', async function (assert) {
+            // given
+            class FeatureTogglesStub extends Service {
+              featureToggles = { isQuestEnabled: true };
+            }
+            this.owner.register('service:featureToggles', FeatureTogglesStub);
+
+            this.set('campaign', {
+              customResultPageText: 'My custom result page text',
+              organizationId: 1,
+            });
+
+            this.set('campaignParticipationResult', {
+              campaignParticipationBadges: [],
+              isShared: false,
+              canImprove: false,
+              masteryRate: 0.75,
+              reachedStage: { acquired: 4, total: 5 },
+            });
+            this.set('questResults', [
+              {
+                obtained: true,
+                profileRewardId: 12,
+                reward: { key: 'SIXTH_GRADE' },
+              },
+            ]);
+
+            // when
+            const screen = await render(
+              hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
+  @campaign={{this.campaign}}
+  @questResults={{this.questResults}}
+  @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{true}}
+/>`,
+            );
+
+            // then
+            assert.ok(screen.getByText(t('components.campaigns.attestation-result.obtained')));
+          });
+        });
       });
     });
   });

@@ -12,17 +12,21 @@ export default class ResultsRoute extends Route {
   }
 
   async model() {
+    let questResults = [];
     const user = this.currentUser.user;
     const { campaignParticipation, campaign } = this.modelFor('campaigns.assessment');
+
     try {
       const campaignParticipationResult = await this.store.queryRecord('campaign-participation-result', {
         campaignId: campaign.id,
         userId: user.id,
       });
 
-      const questResults = await this.store.query('quest-result', {
-        campaignParticipationId: campaignParticipationResult.id,
-      });
+      if (!user.isAnonymous) {
+        questResults = await this.store.query('quest-result', {
+          campaignParticipationId: campaignParticipationResult.id,
+        });
+      }
 
       const trainings = await campaignParticipation.hasMany('trainings').reload();
 
