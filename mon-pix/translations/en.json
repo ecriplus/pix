@@ -1942,6 +1942,11 @@
             "content": "Send us your results to enable the customised test organizer to support you.'<br />'After sharing, you'll have access to these training customised tests!",
             "share-error": "There was an error sending your results. Please try again."
           },
+          "sent-results-modal" : {
+            "return-results-action": "Close and return to results",
+            "subtitle": "Ready to expand your knowledge? \uD83C\uDF93",
+            "title": "Shared results"
+          },
           "tab-label": "Trainings",
           "title": "Want to learn more?"
         }

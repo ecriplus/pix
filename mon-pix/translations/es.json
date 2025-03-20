@@ -2024,6 +2024,11 @@
             "content": "Envía tus resultados para que el organizador del curso pueda apoyarte.'<br />'¡Una vez que hayas compartido tus resultados, tendrás acceso a estos cursos de formación!",
             "share-error": "Se ha producido un error al enviar sus resultados. Por favor, inténtalo de nuevo."
           },
+          "sent-results-modal" : {
+            "return-results-action": "Close and return to results",
+            "subtitle": "Ready to expand your knowledge? \uD83C\uDF93",
+            "title": "Shared results"
+          },
           "tab-label": "Formación",
           "title": "¿Quiere saber más?"
         }

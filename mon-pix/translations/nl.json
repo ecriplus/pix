@@ -2025,6 +2025,11 @@
             "content": "Stuur je resultaten op zodat de cursusorganisator je kan ondersteunen.'<br />'Zodra je je resultaten hebt gedeeld, heb je toegang tot deze trainingen!",
             "share-error": "Er is een fout opgetreden bij het verzenden van uw resultaten. Probeer het opnieuw."
           },
+          "sent-results-modal" : {
+            "return-results-action": "Close and return to results",
+            "subtitle": "Ready to expand your knowledge? \uD83C\uDF93",
+            "title": "Shared results"
+          },
           "tab-label": "Training",
           "title": "Wil je meer weten?"
         }
