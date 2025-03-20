@@ -1,6 +1,5 @@
 import { ORGANIZATION_FEATURE } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { ApplicationTransaction } from '../../../shared/infrastructure/ApplicationTransaction.js';
 import { OrganizationLearnerImportFormat } from '../../domain/models/OrganizationLearnerImportFormat.js';
 
 function _toDomain(data) {
@@ -8,8 +7,7 @@ function _toDomain(data) {
 }
 
 const get = async function (organizationId) {
-  const knex = ApplicationTransaction.getConnection();
-
+  const knex = DomainTransaction.getConnection();
   const configResult = await knex('organization-features')
     .select('params')
     .join('features', function () {
