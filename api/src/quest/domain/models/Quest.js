@@ -54,7 +54,8 @@ class Quest {
     const targetProfileIds = campaignParticipationRequirements
       // TODO: requirement.criterion.data.targetProfileId.data would be more explicit
       .map((requirement) => requirement.data.data?.targetProfileId?.data)
-      .filter(Boolean);
+      .filter(Boolean)
+      .flat();
 
     return targetProfileIds.filter(
       (targetProfileId) => data.campaignParticipations.findIndex((p) => p.targetProfileId === targetProfileId) === -1,

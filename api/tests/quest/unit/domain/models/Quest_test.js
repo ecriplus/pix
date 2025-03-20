@@ -273,13 +273,48 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
       expect(result[0]).to.equal(1);
     });
 
+    it('returns a flatten array with a targetProfileIds when there are arrays in targetProfileId properties', function () {
+      const eligibilityRequirements = [
+        {
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          data: {
+            targetProfileId: {
+              data: [1, 2],
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+          },
+          comparison: REQUIREMENT_COMPARISONS.ALL,
+        },
+        {
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          data: {
+            status: {
+              data: 'SHARED',
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+          },
+          comparison: REQUIREMENT_COMPARISONS.ALL,
+        },
+      ];
+      const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
+      const campaignParticipations = [{ id: 10, targetProfileId: 789 }];
+      const eligibility = new Eligibility({ organization: {}, organizationLearner: {}, campaignParticipations });
+      const dataForQuest = new DataForQuest({ eligibility });
+
+      const result = quest.findTargetProfileIdsWithoutCampaignParticipationContributingToQuest(dataForQuest);
+
+      expect(result).to.have.length(2);
+      expect(result[0]).to.equal(1);
+      expect(result[1]).to.equal(2);
+    });
+
     it('returns an array with only target profiles ids without campaign participations contributing to quest', function () {
       const eligibilityRequirements = [
         {
           requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
           data: {
             targetProfileId: {
-              data: 123,
+              data: [123, 456],
               comparison: CRITERION_COMPARISONS.EQUAL,
             },
           },
@@ -305,8 +340,9 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
 
       const result = quest.findTargetProfileIdsWithoutCampaignParticipationContributingToQuest(dataForQuest);
 
-      expect(result).to.have.length(1);
-      expect(result[0]).to.equal(789);
+      expect(result).to.have.length(2);
+      expect(result[0]).to.equal(456);
+      expect(result[1]).to.equal(789);
     });
   });
 
