@@ -144,6 +144,31 @@
     "yes-or-empty": "(\"yes\" or leave blank)"
   },
   "certification": {
+    "attestation": {
+      "v3": {
+        "main-content": {
+            "birth": "Born on: {birthdate} in {birthplace}",
+          "certification-center": "Certification centre : {certificationCenter}",
+          "delivered-at": {
+            "date": "date of issue: {deliveredAt}",
+            "label": "delivered to"
+          },
+          "signature": "Benjamin Marteau, GIP Pix's Director",
+          "title": "Pix Certification"
+        },
+        "qr-code-content": {
+          "explanation": "To verify the authenticity of this certificate, enter this code on ",
+          "link": {
+            "label": "app.pix.org/verification-certificat",
+            "url": "https://app.pix.org/verification-certificat"
+          }
+        },
+        "score-content": {
+          "global-level": "Global level",
+          "level-explanation": "Your level means:"
+        }
+      }
+    },
     "global": {
       "meshlevel": {
         "1": "Beginner 1",

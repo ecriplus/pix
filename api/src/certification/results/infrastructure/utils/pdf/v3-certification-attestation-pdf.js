@@ -1,5 +1,7 @@
 import PDFDocument from 'pdfkit';
 
+import { GlobalCertificationLevel } from '../../../../shared/domain/models/GlobalCertificationLevel.js';
+import { findIntervalIndexFromScore } from '../../../domain/services/find-interval-index-from-score.js';
 import generateV3AttestationTemplate from './templates/v3-attestation.js';
 
 const generate = ({ certificates, i18n }) => {
@@ -19,7 +21,20 @@ const generate = ({ certificates, i18n }) => {
     if (index > 0) {
       doc.addPage();
     }
-    generateV3AttestationTemplate(doc, certificate);
+
+    // En attendant PIX-17106
+    const globalCertificationLevel = new GlobalCertificationLevel({
+      meshLevel: findIntervalIndexFromScore({
+        score: certificate.pixScore,
+      }),
+    });
+
+    generateV3AttestationTemplate({
+      pdf: doc,
+      data: certificate,
+      translate: i18n.__,
+      globalCertificationLevel,
+    });
   });
 
   doc.end();

@@ -12,6 +12,31 @@
     }
   },
   "certification": {
+    "attestation": {
+      "v3": {
+        "main-content": {
+          "birth": "né(e) le : {birthdate} à {birthplace}",
+          "certification-center": "Centre de certification : {certificationCenter}",
+          "delivered-at": {
+            "date": "le {deliveredAt}",
+            "label": "délivrée à"
+          },
+          "signature": "Benjamin Marteau, directeur du GIP Pix",
+          "title": "Certification Pix"
+        },
+        "qr-code-content": {
+          "explanation": "Pour vérifier l’authenticité de cette attestation, utilisez ce code sur ",
+          "link": {
+            "label": "app.pix.fr/verification-certificat",
+            "url": "https://app.pix.fr/verification-certificat"
+          }
+        },
+        "score-content": {
+          "global-level": "Niveau global",
+          "level-explanation": "Votre niveau signifie que :"
+        }
+      }
+    },
     "global": {
       "meshlevel": {
         "1": "Beginner 1",
