@@ -1,5 +1,4 @@
-const PIX_COUNT_BY_LEVEL = 8;
-const COMPETENCE_COUNT = 16;
+import { COMPETENCES_COUNT, PIX_COUNT_BY_LEVEL } from '../../../../shared/domain/constants.js';
 
 class CertificationAttestation {
   constructor({
@@ -36,7 +35,7 @@ class CertificationAttestation {
     this.verificationCode = verificationCode;
     this.maxReachableLevelOnCertificationDate = maxReachableLevelOnCertificationDate;
     this.version = version;
-    this.maxReachableScore = this.maxReachableLevelOnCertificationDate * PIX_COUNT_BY_LEVEL * COMPETENCE_COUNT;
+    this.maxReachableScore = this.maxReachableLevelOnCertificationDate * PIX_COUNT_BY_LEVEL * COMPETENCES_COUNT;
   }
 
   setResultCompetenceTree(resultCompetenceTree) {

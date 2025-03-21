@@ -1,7 +1,20 @@
-const PIX_COUNT_BY_LEVEL = 8;
-const COMPETENCE_COUNT = 16;
+import { COMPETENCES_COUNT, PIX_COUNT_BY_LEVEL } from '../../../../shared/domain/constants.js';
+import { GlobalCertificationLevel } from './v3/GlobalCertificationLevel.js';
 
-class V3CertificationAttestation {
+export class V3CertificationAttestation {
+  /**
+   * @param {Object} props
+   * @param {number} props.id - certification course id
+   * @param {string} props.firstName
+   * @param {string} props.lastName
+   * @param {Date} props.birthdate
+   * @param {string} props.birthplace
+   * @param {string} props.certificationCenter - center name
+   * @param {string} props.pixScore
+   * @param {GlobalCertificationLevel} props.[globalLevel] - auto calculated
+   * @param {string} props.verificationCode
+   * @param {number} props.maxReachableScore - level maximum at the time of the certification course (certification-courses.maxReachableLevelOnCertificationDate)
+   */
   constructor({
     id,
     firstName,
@@ -22,9 +35,8 @@ class V3CertificationAttestation {
     this.deliveredAt = deliveredAt;
     this.certificationCenter = certificationCenter;
     this.pixScore = pixScore;
+    this.globalLevel = new GlobalCertificationLevel({ score: pixScore });
     this.verificationCode = verificationCode;
-    this.maxReachableScore = maxReachableLevelOnCertificationDate * PIX_COUNT_BY_LEVEL * COMPETENCE_COUNT;
+    this.maxReachableScore = maxReachableLevelOnCertificationDate * PIX_COUNT_BY_LEVEL * COMPETENCES_COUNT;
   }
 }
-
-export { V3CertificationAttestation };
