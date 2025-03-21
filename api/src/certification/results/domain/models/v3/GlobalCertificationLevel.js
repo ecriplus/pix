@@ -8,7 +8,7 @@ import { meshConfiguration } from './MeshConfiguration.js';
 
 export class GlobalCertificationLevel {
   static #schema = Joi.object({
-    meshLevel: Joi.number().required(),
+    meshLevel: Joi.string().required(),
   });
 
   /**
@@ -17,7 +17,7 @@ export class GlobalCertificationLevel {
    * @param {MeshConfiguration} props.[configuration] - certification score in Pix
    */
   constructor({ score, configuration = meshConfiguration }) {
-    this.meshLevel = configuration.findIntervalIndexFromScore({ score });
+    this.meshLevel = configuration.findMeshFromScore({ score }).key;
     this.#validate();
   }
 

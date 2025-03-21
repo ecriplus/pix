@@ -9,7 +9,7 @@ describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
   });
 
   describe('#getLevelLabel', function () {
-    it('should return the translated comment matching the key', function () {
+    it('should return the translated comment matching the LEVEL_BEGINNER_2 level', function () {
       // given
       const globalMeshLevel = domainBuilder.certification.results.buildGlobalCertificationLevel({ score: 128 });
 
@@ -17,7 +17,18 @@ describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
       const translatedLabel = globalMeshLevel.getLevelLabel(translate);
 
       // then
-      expect(translatedLabel).to.equal(translate('certification.global.meshlevel.2'));
+      expect(translatedLabel).to.equal(translate('certification.global.meshlevel.LEVEL_BEGINNER_2'));
+    });
+
+    it('should return the translated comment matching the maximum reachable level', function () {
+      // given
+      const globalMeshLevel = domainBuilder.certification.results.buildGlobalCertificationLevel({ score: 896 });
+
+      // when
+      const translatedLabel = globalMeshLevel.getLevelLabel(translate);
+
+      // then
+      expect(translatedLabel).to.equal(translate('certification.global.meshlevel.LEVEL_EXPERT_7'));
     });
 
     context('when there is no translation', function () {

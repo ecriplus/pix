@@ -39,14 +39,14 @@
     },
     "global": {
       "meshlevel": {
-        "1": "Beginner 1",
-        "2": "Beginner 2",
-        "3": "Zelfstandig 1",
-        "4": "Zelfstandig 2",
-        "5": "Gevorderde 1",
-        "6": "Gevorderde 2",
-        "7": "Expert 1",
-        "8": "Expert 2"
+        "LEVEL_BEGINNER_1": "Beginner 1",
+        "LEVEL_BEGINNER_2": "Beginner 2",
+        "LEVEL_INDEPENDENT_3": "Zelfstandig 1",
+        "LEVEL_INDEPENDENT_4": "Zelfstandig 2",
+        "LEVEL_ADVANCED_5": "Gevorderde 1",
+        "LEVEL_ADVANCED_6": "Gevorderde 2",
+        "LEVEL_EXPERT_7": "Expert 1",
+        "LEVEL_EXPERT_8": "Expert 2"
       }
     }
   },
