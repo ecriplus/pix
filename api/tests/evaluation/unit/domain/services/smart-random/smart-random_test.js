@@ -29,6 +29,7 @@ describe('Integration | Domain | Algorithm-methods | SmartRandom', function () {
     locale,
     web1,
     web2,
+    web2_v2,
     web3,
     web4,
     web5,
@@ -46,6 +47,7 @@ describe('Integration | Domain | Algorithm-methods | SmartRandom', function () {
     cnil2,
     challengeWeb_1,
     challengeWeb_2,
+    challengeWeb_2_v2,
     challengeWeb_2_3,
     challengeWeb_3,
     challengeWeb_4,
@@ -73,6 +75,7 @@ describe('Integration | Domain | Algorithm-methods | SmartRandom', function () {
     // Acquis (skills)
     web1 = domainBuilder.buildSkill({ id: 'rec01', name: '@web1', difficulty: 1 });
     web2 = domainBuilder.buildSkill({ id: 'rec02', name: '@web2', difficulty: 2 });
+    web2_v2 = domainBuilder.buildSkill({ id: 'rec02v2', name: '@web2', difficulty: 2 });
     web3 = domainBuilder.buildSkill({ id: 'rec03', name: '@web3', difficulty: 3 });
     web4 = domainBuilder.buildSkill({ id: 'rec04', name: '@web4', difficulty: 4 });
     web5 = domainBuilder.buildSkill({ id: 'rec05', name: '@web5', difficulty: 5 });
@@ -92,6 +95,7 @@ describe('Integration | Domain | Algorithm-methods | SmartRandom', function () {
     // Challenges
     challengeWeb_1 = domainBuilder.buildChallenge({ id: 'recweb1', skill: web1, locales: ['fr'] });
     challengeWeb_2 = domainBuilder.buildChallenge({ id: 'recweb2', skill: web2, locales: ['fr'] });
+    challengeWeb_2_v2 = domainBuilder.buildChallenge({ id: 'recweb2v2', skill: web2_v2, locales: ['fr'] });
     challengeWeb_2_3 = domainBuilder.buildChallenge({ id: 'recweb23', skill: web3, locales: ['fr'] });
     challengeWeb_3 = domainBuilder.buildChallenge({ id: 'recweb3', skill: web3, locales: ['fr'] });
     challengeWeb_4 = domainBuilder.buildChallenge({ id: 'recweb4', skill: web4, locales: ['fr'] });
@@ -689,6 +693,42 @@ describe('Integration | Domain | Algorithm-methods | SmartRandom', function () {
         expect(possibleSkillsForNextChallenge[0].challenges.length).to.be.equal(1);
         expect(possibleSkillsForNextChallenge[0].id).to.be.equal(web1.id);
         expect(possibleSkillsForNextChallenge[0].challenges[0].id).to.be.equal(challengeWeb_1.id);
+      });
+
+      it('should ask again for a skill, even if user has a knowledge element for another skill of the same tube and same difficulty', function () {
+        // given
+        targetSkills = [web1, web2_v2];
+        challenges = [challengeWeb_1, challengeWeb_2_v2];
+        lastAnswer = domainBuilder.buildAnswer({ challengeId: challengeWeb_1.id, result: AnswerStatus.OK });
+        allAnswers = [lastAnswer];
+        knowledgeElements = [
+          domainBuilder.buildKnowledgeElement({
+            skillId: web1.id,
+            status: KNOWLEDGE_ELEMENT_STATUS.VALIDATED,
+            source: 'direct',
+          }),
+          domainBuilder.buildKnowledgeElement({
+            skillId: web2.id,
+            status: KNOWLEDGE_ELEMENT_STATUS.VALIDATED,
+            source: 'direct',
+          }),
+        ];
+
+        // when
+        const { possibleSkillsForNextChallenge } = SmartRandom.getPossibleSkillsForNextChallenge({
+          targetSkills,
+          challenges,
+          knowledgeElements,
+          allAnswers,
+          lastAnswer,
+          locale,
+        });
+
+        // then
+        expect(possibleSkillsForNextChallenge.length).to.be.equal(1);
+        expect(possibleSkillsForNextChallenge[0].challenges.length).to.be.equal(1);
+        expect(possibleSkillsForNextChallenge[0].id).to.be.equal(web2_v2.id);
+        expect(possibleSkillsForNextChallenge[0].challenges[0].id).to.be.equal(challengeWeb_2_v2.id);
       });
     });
 

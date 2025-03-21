@@ -39,6 +39,88 @@ describe('Integration | Repository | Campaign', function () {
     });
   });
 
+  describe('#findSkillIdsByCampaignParticipationIds', function () {
+    it('should return empty array', async function () {
+      const skillIds = await campaignRepository.findSkillIdsByCampaignParticipationIds({
+        campaignParticipationIds: [123, 456],
+      });
+
+      // then
+      expect(skillIds).to.have.lengthOf(0);
+    });
+
+    it('should return the operative skillIds for the campaign participations', async function () {
+      // given
+      databaseBuilder.factory.learningContent.buildSkill({ id: 'skillId1', status: 'actif' });
+      databaseBuilder.factory.learningContent.buildSkill({ id: 'skillId2', status: 'actif' });
+      databaseBuilder.factory.learningContent.buildSkill({ id: 'skillId3', status: 'archivé' });
+      databaseBuilder.factory.learningContent.buildSkill({ id: 'skillId4', status: 'périmé' });
+
+      const campaignId1 = databaseBuilder.factory.buildCampaign().id;
+      databaseBuilder.factory.buildCampaignSkill({ skillId: 'skillId1', campaignId: campaignId1 });
+      databaseBuilder.factory.buildCampaignSkill({ skillId: 'skillId2', campaignId: campaignId1 });
+      const campaignId2 = databaseBuilder.factory.buildCampaign().id;
+      databaseBuilder.factory.buildCampaignSkill({ skillId: 'skillId1', campaignId: campaignId2 });
+      databaseBuilder.factory.buildCampaignSkill({ skillId: 'skillId3', campaignId: campaignId2 });
+      databaseBuilder.factory.buildCampaignSkill({ skillId: 'skillId4', campaignId: campaignId2 });
+
+      const campaignParticipationIds = [
+        databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaignId1 }).id,
+        databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaignId2 }).id,
+      ];
+      await databaseBuilder.commit();
+
+      // when
+      const skillIds = await campaignRepository.findSkillIdsByCampaignParticipationIds({ campaignParticipationIds });
+
+      // then
+      expect(skillIds).to.have.lengthOf(3);
+      expect(skillIds).to.have.members(['skillId1', 'skillId2', 'skillId3']);
+    });
+  });
+
+  describe('#findSkillIdsByCampaignParticipationId', function () {
+    it('should return empty array', async function () {
+      const skillIds = await campaignRepository.findSkillIdsByCampaignParticipationId({
+        campaignParticipationId: 123,
+      });
+
+      // then
+      expect(skillIds).to.have.lengthOf(0);
+    });
+
+    it('should return the skillIds for the campaign participation', async function () {
+      // given
+      databaseBuilder.factory.learningContent.buildSkill({ id: 'skillId1', status: 'actif' });
+      databaseBuilder.factory.learningContent.buildSkill({ id: 'skillId2', status: 'archivé' });
+      databaseBuilder.factory.learningContent.buildSkill({ id: 'skillId3', status: 'actif' });
+      databaseBuilder.factory.learningContent.buildSkill({ id: 'skillId4', status: 'périmé' });
+
+      const campaignId1 = databaseBuilder.factory.buildCampaign().id;
+      databaseBuilder.factory.buildCampaignSkill({ skillId: 'skillId1', campaignId: campaignId1 });
+      databaseBuilder.factory.buildCampaignSkill({ skillId: 'skillId2', campaignId: campaignId1 });
+      databaseBuilder.factory.buildCampaignSkill({ skillId: 'skillId4', campaignId: campaignId1 });
+      const campaignId2 = databaseBuilder.factory.buildCampaign().id;
+      databaseBuilder.factory.buildCampaignSkill({ skillId: 'skillId1', campaignId: campaignId2 });
+      databaseBuilder.factory.buildCampaignSkill({ skillId: 'skillId3', campaignId: campaignId2 });
+
+      const campaignParticipationIds = [
+        databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaignId1 }).id,
+        databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaignId2 }).id,
+      ];
+      await databaseBuilder.commit();
+
+      // when
+      const skillIds = await campaignRepository.findSkillIdsByCampaignParticipationId({
+        campaignParticipationId: campaignParticipationIds[0],
+      });
+
+      // then
+      expect(skillIds).to.have.lengthOf(2);
+      expect(skillIds).to.have.members(['skillId1', 'skillId2']);
+    });
+  });
+
   describe('#findTubes', function () {
     it('should return the tubes for the campaign', async function () {
       // given

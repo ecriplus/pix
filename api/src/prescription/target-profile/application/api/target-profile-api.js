@@ -1,5 +1,6 @@
 import { usecases } from '../../domain/usecases/index.js';
 import { TargetProfile } from './TargetProfile.js';
+import { TargetProfileSkill } from './TargetProfileSkill.js';
 
 /**
  * @module TargetProfileApi
@@ -29,4 +30,17 @@ export const getById = async (id) => {
   const targetProfileForAdmin = await usecases.getTargetProfileForAdmin({ targetProfileId: id });
 
   return new TargetProfile(targetProfileForAdmin);
+};
+
+/**
+ * @function
+ * @name findSkillByTargetProfileIds
+ *
+ * @param {Array<number>} targetProfilsIds
+ * @returns {Promise<<Array<TargetProfileSkill>>}
+ */
+export const findSkillsByTargetProfileIds = async (targetProfileIds) => {
+  const skillsData = await usecases.findSkillsByTargetProfileIds({ targetProfileIds });
+
+  return skillsData.map((skill) => new TargetProfileSkill(skill));
 };

@@ -137,3 +137,16 @@ export const findAllForOrganization = async (payload) => {
 
   return { models: campaignsList, meta };
 };
+
+/**
+ * @function
+ * @name findCampaignSkillIdsForCampaignParticipations
+ *
+ * @param {Array<Number>} campaignParticipationIds
+ * @returns {Promise<Array<Number>>}
+ */
+export const findCampaignSkillIdsForCampaignParticipations = async (campaignParticipationIds) => {
+  return usecases.findCampaignSkillIdsForCampaignParticipations({
+    campaignParticipationIds,
+  });
+};

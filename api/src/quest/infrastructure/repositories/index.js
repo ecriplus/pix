@@ -1,5 +1,8 @@
 import * as knowledgeElementsApi from '../../../evaluation/application/api/knowledge-elements-api.js';
+import * as skillsApi from '../../../learning-content/application/api/skills-api.js';
+import * as campaignsApi from '../../../prescription/campaign/application/api/campaigns-api.js';
 import * as organizationLearnerWithParticipationApi from '../../../prescription/organization-learner/application/api/organization-learners-with-participations-api.js';
+import * as targetProfilesApi from '../../../prescription/target-profile/application/api/target-profile-api.js';
 import * as profileRewardApi from '../../../profile/application/api/profile-reward-api.js';
 import * as rewardApi from '../../../profile/application/api/reward-api.js';
 import { temporaryStorage } from '../../../shared/infrastructure/key-value-storages/index.js';
@@ -21,7 +24,10 @@ const repositoriesWithoutInjectedDependencies = {
 const dependencies = {
   organizationLearnerWithParticipationApi,
   knowledgeElementsApi,
+  campaignsApi,
+  skillsApi,
   profileRewardApi,
+  targetProfilesApi,
   profileRewardTemporaryStorage,
   rewardApi,
 };

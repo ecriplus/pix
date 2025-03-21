@@ -43,22 +43,72 @@ class Quest {
 
   /**
    * @param {DataForQuest} data
-   * @param {number} campaignParticipationId
+   */
+  findTargetProfileIdsWithoutCampaignParticipationContributingToQuest(data) {
+    const campaignParticipationRequirements = this.#flattenRequirementsByType(
+      [...this.#eligibilityRequirements.data, ...this.#successRequirements.data],
+      REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+    );
+    if (campaignParticipationRequirements.length === 0) return [];
+
+    const targetProfileIds = campaignParticipationRequirements
+      // TODO: requirement.criterion.data.targetProfileId.data would be more explicit
+      .map((requirement) => requirement.data.data?.targetProfileId?.data)
+      .filter(Boolean)
+      .flat();
+
+    return targetProfileIds.filter(
+      (targetProfileId) => data.campaignParticipations.findIndex((p) => p.targetProfileId === targetProfileId) === -1,
+    );
+  }
+
+  /**
+   * @param {DataForQuest} data
+   */
+  findCampaignParticipationIdsContributingToQuest(data) {
+    const campaignParticipationRequirements = this.#flattenRequirementsByType(
+      [...this.#eligibilityRequirements.data, ...this.#successRequirements.data],
+      REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+    );
+    const oneOfCampaignParticipationsRequirement = new ComposedRequirement({
+      data: campaignParticipationRequirements,
+      comparison: REQUIREMENT_COMPARISONS.ONE_OF,
+    });
+    if (campaignParticipationRequirements.length > 0) {
+      return data.campaignParticipations
+        .map((campaignParticipation) => {
+          const scopedData = data.buildDataForQuestScopedByCampaignParticipationId({
+            campaignParticipationId: campaignParticipation.id,
+          });
+          if (oneOfCampaignParticipationsRequirement.isFulfilled(scopedData)) {
+            return campaignParticipation.id;
+          }
+          return null;
+        })
+        .filter(Boolean);
+    }
+    return [];
+  }
+
+  /**
+   * @param {object} params
+   * @param {DataForQuest} params.data
+   * @param {number} params.campaignParticipationId
    */
   isCampaignParticipationContributingToQuest({ data, campaignParticipationId }) {
     const scopedData = data.buildDataForQuestScopedByCampaignParticipationId({ campaignParticipationId });
 
     const campaignParticipationRequirements = this.#flattenRequirementsByType(
-      this.#eligibilityRequirements.data,
+      [...this.#eligibilityRequirements.data, ...this.#successRequirements.data],
       REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
     );
 
     if (campaignParticipationRequirements.length > 0) {
-      const a = new ComposedRequirement({
+      const oneOfCampaignParticipationsRequirement = new ComposedRequirement({
         data: campaignParticipationRequirements,
         comparison: REQUIREMENT_COMPARISONS.ONE_OF,
       });
-      return a.isFulfilled(scopedData);
+      return oneOfCampaignParticipationsRequirement.isFulfilled(scopedData);
     }
 
     return false;

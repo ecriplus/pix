@@ -337,7 +337,15 @@ global.chaiErr = function globalErr(fn, val) {
   throw new AssertionError('Expected an error');
 };
 
-const testErr = new Error('Fake Error');
+const preventStubsToBeCalledUnexpectedly = (stubs) => {
+  for (const stub of stubs) {
+    stub.rejects(
+      new Error(
+        `Unexpected call to stub "${stub.toString()}" (whether because it should not have been called OR called with wrong arguments)`,
+      ),
+    );
+  }
+};
 // eslint-disable-next-line mocha/no-exports
 export {
   catchErr,
@@ -367,9 +375,9 @@ export {
   mockLearningContent,
   nock,
   parseJsonStream,
+  preventStubsToBeCalledUnexpectedly,
   removeTempFile,
   sinon,
   streamToPromise,
-  testErr,
   toStream,
 };

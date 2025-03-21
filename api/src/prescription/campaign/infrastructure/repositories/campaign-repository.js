@@ -76,16 +76,33 @@ const getCampaignIdByCampaignParticipationId = async function (campaignParticipa
   return campaign.id;
 };
 
+async function _findSkillIds(campaignIds) {
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn('campaign_skills').whereIn('campaignId', campaignIds).pluck('skillId');
+}
+
 const findSkillIds = async function ({ campaignId, filterByStatus = 'operative' }) {
   if (filterByStatus === 'all') {
-    return _findSkillIds({ campaignId });
+    return _findSkillIds([campaignId]);
   }
-  const skills = await this.findSkills({ campaignId, filterByStatus });
+  const skills = await findSkills({ campaignId, filterByStatus });
   return skills.map(({ id }) => id);
 };
 
-const findSkills = function ({ campaignId, filterByStatus }) {
-  return _findSkills({ campaignId, filterByStatus });
+async function _findSkills(campaignIds, filterByStatus = 'operative') {
+  const skillIds = await _findSkillIds(campaignIds);
+  switch (filterByStatus) {
+    case 'operative':
+      return skillRepository.findOperativeByIds(skillIds);
+    case 'all':
+      return skillRepository.findByRecordIds(skillIds);
+    default:
+      throw new TypeError(`unknown filterByStatus value "${filterByStatus}", use "operative" or "all"`);
+  }
+}
+
+const findSkills = async function ({ campaignId, filterByStatus }) {
+  return _findSkills([campaignId], filterByStatus);
 };
 
 const findSkillsByCampaignParticipationId = async function ({ campaignParticipationId }) {
@@ -93,12 +110,20 @@ const findSkillsByCampaignParticipationId = async function ({ campaignParticipat
   const [campaignId] = await knexConn('campaign-participations')
     .where({ id: campaignParticipationId })
     .pluck('campaignId');
-  return this.findSkills({ campaignId });
+  return findSkills({ campaignId });
+};
+
+const findSkillIdsByCampaignParticipationIds = async function ({ campaignParticipationIds }) {
+  const knexConn = DomainTransaction.getConnection();
+  const campaignIds = await knexConn('campaign-participations')
+    .whereIn('id', campaignParticipationIds)
+    .pluck('campaignId');
+  const skills = await _findSkills(campaignIds);
+  return [...new Set(skills)].map(({ id }) => id);
 };
 
 const findSkillIdsByCampaignParticipationId = async function ({ campaignParticipationId }) {
-  const skills = await this.findSkillsByCampaignParticipationId({ campaignParticipationId });
-  return skills.map(({ id }) => id);
+  return findSkillIdsByCampaignParticipationIds({ campaignParticipationIds: [campaignParticipationId] });
 };
 
 const findTubes = async function ({ campaignId }) {
@@ -123,6 +148,7 @@ export {
   findAllSkills,
   findSkillIds,
   findSkillIdsByCampaignParticipationId,
+  findSkillIdsByCampaignParticipationIds,
   findSkills,
   findSkillsByCampaignParticipationId,
   findTubes,
@@ -131,20 +157,3 @@ export {
   getByCode,
   getCampaignIdByCampaignParticipationId,
 };
-
-async function _findSkills({ campaignId, filterByStatus = 'operative' }) {
-  const skillIds = await _findSkillIds({ campaignId });
-  switch (filterByStatus) {
-    case 'operative':
-      return skillRepository.findOperativeByIds(skillIds);
-    case 'all':
-      return skillRepository.findByRecordIds(skillIds);
-    default:
-      throw new TypeError(`unknown filterByStatus value "${filterByStatus}", use "operative" or "all"`);
-  }
-}
-
-async function _findSkillIds({ campaignId }) {
-  const knexConn = DomainTransaction.getConnection();
-  return knexConn('campaign_skills').where({ campaignId }).pluck('skillId');
-}

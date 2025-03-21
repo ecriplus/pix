@@ -3,7 +3,7 @@ import _ from 'lodash';
 import * as targetProfileRepository from '../../../../../../src/prescription/target-profile/infrastructure/repositories/target-profile-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { TargetProfile } from '../../../../../../src/shared/domain/models/index.js';
-import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | Target-profile', function () {
   describe('#get', function () {
@@ -150,6 +150,140 @@ describe('Integration | Repository | Target-profile', function () {
 
         expect(error).to.be.instanceOf(NotFoundError);
       });
+    });
+  });
+
+  describe('#findSkillsByIds', function () {
+    let firstTargetProfilId, secondTargetProfilId, thirdTargetProfilId;
+
+    beforeEach(async function () {
+      firstTargetProfilId = databaseBuilder.factory.buildTargetProfile().id;
+
+      databaseBuilder.factory.buildTargetProfileTube({
+        targetProfileId: firstTargetProfilId,
+        tubeId: 'firstTube',
+        level: 3,
+      });
+      databaseBuilder.factory.buildTargetProfileTube({
+        targetProfileId: firstTargetProfilId,
+        tubeId: 'secondTube',
+        level: 1,
+      });
+
+      secondTargetProfilId = databaseBuilder.factory.buildTargetProfile().id;
+
+      databaseBuilder.factory.buildTargetProfileTube({
+        targetProfileId: secondTargetProfilId,
+        tubeId: 'firstTube',
+        level: 5,
+      });
+      databaseBuilder.factory.buildTargetProfileTube({
+        targetProfileId: secondTargetProfilId,
+        tubeId: 'secondTube',
+        level: 3,
+      });
+
+      thirdTargetProfilId = databaseBuilder.factory.buildTargetProfile().id;
+
+      databaseBuilder.factory.buildTargetProfileTube({
+        targetProfileId: thirdTargetProfilId,
+        tubeId: 'thirdTube',
+        level: 5,
+      });
+
+      await databaseBuilder.commit();
+    });
+
+    it('should return empty when given non existing targetProfileId', async function () {
+      // given
+      const targetProfileId = 789;
+
+      // when
+      const result = await targetProfileRepository.findSkillsByIds({ targetProfileIds: [targetProfileId] });
+
+      // then
+      expect(result).lengthOf(0);
+    });
+
+    it('should deduplication skill per tubeId and difficulty', async function () {
+      // given
+      const skillRepositoryStub = { findActiveByTubeId: sinon.stub() };
+      skillRepositoryStub.findActiveByTubeId.rejects();
+
+      skillRepositoryStub.findActiveByTubeId
+        .withArgs('firstTube')
+        .resolves([domainBuilder.buildSkill({ id: 'firstSkill_firstTube', difficulty: 1 })]);
+      skillRepositoryStub.findActiveByTubeId.withArgs('secondTube').resolves([]);
+
+      // when
+      const result = await targetProfileRepository.findSkillsByIds({
+        targetProfileIds: [firstTargetProfilId, secondTargetProfilId],
+        dependencies: {
+          skillRepository: skillRepositoryStub,
+        },
+      });
+
+      // then
+      expect(result).lengthOf(1);
+      expect(result).deep.members([domainBuilder.buildSkill({ id: 'firstSkill_firstTube', difficulty: 1 })]);
+    });
+
+    it('should return skill capped to maximum difficulty', async function () {
+      // given
+      const skillRepositoryStub = { findActiveByTubeId: sinon.stub() };
+      skillRepositoryStub.findActiveByTubeId.rejects();
+
+      skillRepositoryStub.findActiveByTubeId
+        .withArgs('firstTube')
+        .resolves([
+          domainBuilder.buildSkill({ id: 'firstSkill_firstTube', difficulty: 1 }),
+          domainBuilder.buildSkill({ id: 'secondSkill_firstTube', difficulty: 5 }),
+          domainBuilder.buildSkill({ id: 'thirdSkill_firstTube', difficulty: 7 }),
+        ]);
+      skillRepositoryStub.findActiveByTubeId.withArgs('secondTube').resolves([]);
+
+      // when
+      const result = await targetProfileRepository.findSkillsByIds({
+        targetProfileIds: [firstTargetProfilId, secondTargetProfilId],
+        dependencies: {
+          skillRepository: skillRepositoryStub,
+        },
+      });
+
+      // then
+      expect(result).lengthOf(2);
+      expect(result).deep.members([
+        domainBuilder.buildSkill({ id: 'firstSkill_firstTube', difficulty: 1 }),
+        domainBuilder.buildSkill({ id: 'secondSkill_firstTube', difficulty: 5 }),
+      ]);
+    });
+
+    it('should return skill given tubeId', async function () {
+      // given
+      const skillRepositoryStub = { findActiveByTubeId: sinon.stub() };
+      skillRepositoryStub.findActiveByTubeId.rejects();
+
+      skillRepositoryStub.findActiveByTubeId
+        .withArgs('firstTube')
+        .resolves([domainBuilder.buildSkill({ id: 'firstSkill_firstTube', difficulty: 1 })]);
+      skillRepositoryStub.findActiveByTubeId
+        .withArgs('secondTube')
+        .resolves([domainBuilder.buildSkill({ id: 'firstSkill_secondTube', difficulty: 3 })]);
+
+      // when
+      const result = await targetProfileRepository.findSkillsByIds({
+        targetProfileIds: [firstTargetProfilId, secondTargetProfilId],
+        dependencies: {
+          skillRepository: skillRepositoryStub,
+        },
+      });
+
+      // then
+      expect(result).lengthOf(2);
+      expect(result).deep.members([
+        domainBuilder.buildSkill({ id: 'firstSkill_firstTube', difficulty: 1 }),
+        domainBuilder.buildSkill({ id: 'firstSkill_secondTube', difficulty: 3 }),
+      ]);
     });
   });
 });

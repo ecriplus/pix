@@ -3,7 +3,7 @@ import { UserNotAuthorizedToCreateCampaignError } from '../../../../../../src/pr
 import { Campaign } from '../../../../../../src/prescription/campaign/domain/models/Campaign.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
 import { CampaignReport } from '../../../../../../src/shared/domain/read-models/CampaignReport.js';
-import { catchErr, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr, expect, preventStubsToBeCalledUnexpectedly, sinon } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | API | Campaigns', function () {
@@ -186,6 +186,20 @@ describe('Unit | API | Campaigns', function () {
       // then
       expect(result).not.to.be.instanceOf(Campaign);
       expect(result.customLandingPageText).to.equal(campaignInformation.customLandingPageText);
+    });
+  });
+
+  describe('#findCampaignSkillIdsForCampaignPartipicipations', function () {
+    it('should return an array of campaign skill ids for campaign participations', async function () {
+      const skillIds = Symbol('skillIds');
+      const campaignParticipationIds = [123, 456];
+      const usecaseStub = sinon.stub(usecases, 'findCampaignSkillIdsForCampaignParticipations');
+      preventStubsToBeCalledUnexpectedly([usecaseStub]);
+      usecaseStub.withArgs({ campaignParticipationIds }).resolves(skillIds);
+
+      const result = await campaignApi.findCampaignSkillIdsForCampaignParticipations(campaignParticipationIds);
+
+      expect(result).to.equal(skillIds);
     });
   });
 
