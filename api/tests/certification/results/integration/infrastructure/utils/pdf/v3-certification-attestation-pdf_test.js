@@ -110,6 +110,8 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certification Attestat
       expect(pageContent).to.include(`${certificates[index].verificationCode}`);
       expect(pageContent).to.include(`${certificates[index].pixScore}`);
       expect(pageContent).to.include('Indépendant 1');
+      expect(pageContent).to.include('Vous avez des pratiques numériques simples');
+      expect(pageContent).to.include('Vous savez naviguer sur le Web');
       expect(pageContent).to.include(`${certificates[index].maxReachableScore}`);
     });
   });

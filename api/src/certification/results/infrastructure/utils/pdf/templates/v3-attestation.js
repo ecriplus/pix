@@ -122,7 +122,8 @@ const generateV3AttestationTemplate = ({ pdf, data, translate }) => {
       align: 'center',
     });
 
-  const globalLevelLabel = data.globalLevel.getLevelLabel(translate);
+  const globalLevel = data.globalLevel;
+  const globalLevelLabel = globalLevel.getLevelLabel(translate);
   pdf
     .roundedRect(
       650 - (pdf.widthOfString(globalLevelLabel) * 2) / 2,
@@ -140,6 +141,9 @@ const generateV3AttestationTemplate = ({ pdf, data, translate }) => {
       width: pdf.widthOfString(globalLevelLabel) * 2,
       align: 'center',
     });
+
+  const globalLevelSummary = globalLevel.getSummaryLabel(translate);
+  const globalLevelDescription = globalLevel.getDescriptionLabel(translate);
   pdf
     .font('Nunito-Bold')
     .fontSize(11)
@@ -150,11 +154,11 @@ const generateV3AttestationTemplate = ({ pdf, data, translate }) => {
     .moveDown(0.5)
     .font('Roboto-Medium')
     .fontSize(9.5)
-    .text('globalCertificationLevel.getSummaryLabel(translate)') // TODO
+    .text(globalLevelSummary)
     .moveDown(0.5)
     .font('Roboto-Regular')
     .fontSize(9.5)
-    .text('globalCertificationLevel.getDescriptionLabel(translate)'); // TODO
+    .text(globalLevelDescription);
 };
 
 export default generateV3AttestationTemplate;
