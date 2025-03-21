@@ -22,7 +22,19 @@ export class GlobalCertificationLevel {
   }
 
   getLevelLabel(translate) {
-    const translationKey = `certification.global.meshlevel.${this.meshLevel}`;
+    return this.#translate({ translate, key: `${this.meshLevel}.label` });
+  }
+
+  getSummaryLabel(translate) {
+    return this.#translate({ translate, key: `${this.meshLevel}.summary` });
+  }
+
+  getDescriptionLabel(translate) {
+    return this.#translate({ translate, key: `${this.meshLevel}.description` });
+  }
+
+  #translate({ translate, key }) {
+    const translationKey = `certification.global.meshlevel.${key}`;
     const translation = translate(translationKey);
     if (translation === translationKey) {
       return '';

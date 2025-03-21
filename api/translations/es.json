@@ -39,14 +39,46 @@
     },
     "global": {
       "meshlevel": {
-        "LEVEL_BEGINNER_1": "Beginner 1",
-        "LEVEL_BEGINNER_2": "Beginner 2",
-        "LEVEL_INDEPENDENT_3": "Independent 1",
-        "LEVEL_INDEPENDENT_4": "Independent 2",
-        "LEVEL_ADVANCED_5": "Advanced 1",
-        "LEVEL_ADVANCED_6": "Advanced 2",
-        "LEVEL_EXPERT_7": "Expert 1",
-        "LEVEL_EXPERT_8": "Expert 2"
+        "LEVEL_ADVANCED_5": {
+          "label": "Advanced 1",
+          "summary": "",
+          "description": ""
+        },
+        "LEVEL_ADVANCED_6": {
+          "label": "Advanced 2",
+          "summary": "",
+          "description": ""
+        },
+        "LEVEL_BEGINNER_1": {
+          "label": "Beginner 1",
+          "summary": "",
+          "description": ""
+        },
+        "LEVEL_BEGINNER_2": {
+          "label": "Beginner 2",
+          "summary": "",
+          "description": ""
+        },
+        "LEVEL_EXPERT_7": {
+          "label": "Expert 1",
+          "summary": "",
+          "description": ""
+        },
+        "LEVEL_EXPERT_8": {
+          "label": "Expert 2",
+          "summary": "",
+          "description": ""
+        },
+        "LEVEL_INDEPENDENT_3": {
+          "label": "Independent 1",
+          "summary": "",
+          "description": ""
+        },
+        "LEVEL_INDEPENDENT_4": {
+          "label": "Independent 2",
+          "summary": "",
+          "description": ""
+        }
       }
     }
   },
