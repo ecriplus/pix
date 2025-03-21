@@ -77,7 +77,7 @@ const serialize = function (jurySessions, meta) {
 
 const serializeForPaginatedList = function (jurySessionsForPaginatedList, injectedSerialize = serialize) {
   const { jurySessions, pagination } = jurySessionsForPaginatedList;
-  return injectedSerialize(jurySessions, undefined, pagination);
+  return injectedSerialize(jurySessions, pagination);
 };
 
 export { serialize, serializeForPaginatedList };

@@ -15,7 +15,7 @@ describe('Unit | Serializer | JSONAPI | jury-session-serializer', function () {
       serializer.serializeForPaginatedList(parameter, serialize);
 
       // then
-      expect(serialize).to.have.been.calledWithExactly(jurySessions, undefined, pagination);
+      expect(serialize).to.have.been.calledWithExactly(jurySessions, pagination);
     });
   });
 
