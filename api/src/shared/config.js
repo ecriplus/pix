@@ -216,6 +216,8 @@ const configuration = (function () {
       letters: 'BCDFGHJKMPQRTVWXY',
       numbers: '2346789',
     },
+    // Variable d'environnement temporaire pour LTI en attendant la mise à place d'une gateway
+    // Ne pas utiliser pour d'autres usages
     baseUrl: process.env.BASE_URL ?? 'https://api.pix.fr',
     bcryptNumberOfSaltRounds: _getNumber(process.env.BCRYPT_NUMBER_OF_SALT_ROUNDS, 10),
     caching: {

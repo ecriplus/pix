@@ -28,6 +28,7 @@ const registerErrorTemplate = (err) => `<!DOCTYPE html>
 async function register(request, h, dependencies = { registerLtiPlatform: usecases.registerLtiPlatform }) {
   const { openid_configuration: platformConfigurationUrl, registration_token: registrationToken } = request.query;
 
+  // usage temporaire de referrer en attendant la mise en place de la gateway qui permettra l'ajout du header sur toutes les routes LTI
   const frameAncestors = request.info.referrer;
 
   try {
