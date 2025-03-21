@@ -507,6 +507,13 @@
           "caption": "Liste des informations d'un prescrit. Contient le prénom, le nom, la date de naissance, sa classe ou groupe, le nom de l'organisation auquel prescrit est rattaché, la date de création, la dernière date de mise à jour de ses informations, son état (actif ou inactif). Une action permet le dissocier le prescrit de l'organisation auquel il est rattaché.."
         }
       },
+      "organizations": {
+        "memberships": {
+          "table": {
+            "caption": "Liste des organisations dont l'utilisateur est membre. Contient l'identifiant en tant que membre, l'identifiant, le nom, l'identifiant externe et le type de l'organisation, et enfin le rôle du membre. Plusieurs actions permettent de changer le rôle du membre et de le désactiver de l'organisation."
+          }
+        }
+      },
       "user-detail-personal-information": {
         "actions": {
           "copy-email": "Copier l’adresse e-mail",
