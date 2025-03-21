@@ -1,3 +1,4 @@
+import { LastUserApplicationConnection } from '../../../../../../src/identity-access-management/domain/models/LastUserApplicationConnection.js';
 import * as serializer from '../../../../../../src/identity-access-management/infrastructure/serializers/jsonapi/user-details-for-admin.serializer.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
@@ -7,6 +8,7 @@ describe('Unit | Serializer | JSONAPI | user-details-for-admin-serializer', func
       // given
       const now = new Date();
       const userDetailsForAdmin = domainBuilder.buildUserDetailsForAdmin({
+        id: 123,
         createdAt: now,
         lang: 'fr',
         locale: 'fr-FR',
@@ -27,6 +29,14 @@ describe('Unit | Serializer | JSONAPI | user-details-for-admin-serializer', func
           },
         ],
         userLogin: [{ id: 123, failureCount: 8 }],
+        lastApplicationConnections: [
+          new LastUserApplicationConnection({
+            id: 456,
+            application: 'orga',
+            userId: 123,
+            lastLoggedAt: new Date(),
+          }),
+        ],
       });
 
       // when
@@ -75,6 +85,14 @@ describe('Unit | Serializer | JSONAPI | user-details-for-admin-serializer', func
                 {
                   id: `${userDetailsForAdmin.authenticationMethods[0].id}`,
                   type: 'authenticationMethods',
+                },
+              ],
+            },
+            'last-application-connections': {
+              data: [
+                {
+                  id: '456',
+                  type: 'lastApplicationConnections',
                 },
               ],
             },
@@ -131,6 +149,14 @@ describe('Unit | Serializer | JSONAPI | user-details-for-admin-serializer', func
             },
             id: `${userDetailsForAdmin.authenticationMethods[0].id}`,
             type: 'authenticationMethods',
+          },
+          {
+            attributes: {
+              application: 'orga',
+              'last-logged-at': userDetailsForAdmin.lastApplicationConnections[0].lastLoggedAt,
+            },
+            id: '456',
+            type: 'lastApplicationConnections',
           },
           {
             attributes: { 'failure-count': 8 },

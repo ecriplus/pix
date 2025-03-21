@@ -322,6 +322,9 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
               related: `/api/admin/users/${user.id}/participations`,
             },
           },
+          'last-application-connections': {
+            data: [],
+          },
         });
         expect(response.result.included).to.deep.equal([
           {
