@@ -25,6 +25,7 @@ const buildUserDetailsForAdmin = function ({
   hasBeenAnonymised = false,
   hasBeenAnonymisedBy = null,
   isPixAgent = false,
+  lastApplicationConnections,
 } = {}) {
   return new UserDetailsForAdmin({
     id,
@@ -51,6 +52,7 @@ const buildUserDetailsForAdmin = function ({
     hasBeenAnonymised,
     hasBeenAnonymisedBy,
     isPixAgent,
+    lastApplicationConnections,
   });
 };
 
