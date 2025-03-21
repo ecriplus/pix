@@ -8,11 +8,15 @@ describe('Shared | Unit | Application | ScriptRunner', function () {
   let scriptFileUrl;
   let scriptRunStub;
   let ScriptClass;
+  let isRunningFromCli;
   let logger;
+  let getProcessArgs;
 
   beforeEach(function () {
     scriptFileUrl = 'file://script.js';
+    isRunningFromCli = sinon.stub();
     logger = { info: sinon.stub(), error: sinon.stub() };
+    getProcessArgs = sinon.stub();
     scriptRunStub = sinon.stub();
     ScriptClass = class extends Script {
       constructor() {
@@ -20,10 +24,16 @@ describe('Shared | Unit | Application | ScriptRunner', function () {
           description: 'Test script',
           permanent: true,
           options: { verbose: { type: 'boolean', default: false } },
+          commands: {
+            pouet: {
+              description: 'la commande pouet',
+              options: { volume: { type: 'integer', default: 11 } },
+            },
+          },
         });
       }
-      async run(options) {
-        return scriptRunStub(options);
+      async run(...args) {
+        return scriptRunStub(...args);
       }
     };
 
@@ -31,28 +41,61 @@ describe('Shared | Unit | Application | ScriptRunner', function () {
     sinon.stub(learningContentCache, 'quit');
   });
 
-  it('does not run the script if not running from CLI', async function () {
-    await ScriptRunner.execute(scriptFileUrl, ScriptClass, { logger, isRunningFromCli: () => false });
-    expect(logger.info.called).to.be.false;
-    expect(logger.error.called).to.be.false;
+  context('when not running from CLI', function () {
+    beforeEach(function () {
+      isRunningFromCli.returns(false);
+    });
+
+    it('does not run the script', async function () {
+      // given
+
+      // when
+      await ScriptRunner.execute(scriptFileUrl, ScriptClass, { logger, isRunningFromCli, getProcessArgs });
+
+      // then
+      expect(logger.info).not.to.have.been.called;
+      expect(logger.error).not.to.have.been.called;
+    });
   });
 
-  it('parses CLI options and run the script successfully', async function () {
-    await ScriptRunner.execute(scriptFileUrl, ScriptClass, { logger, isRunningFromCli: () => true });
+  context('when running from CLI', function () {
+    beforeEach(function () {
+      isRunningFromCli.returns(true);
+    });
 
-    expect(logger.info.calledWith('Start script')).to.be.true;
-    expect(scriptRunStub).to.have.been.calledWith({ verbose: false });
-    expect(logger.info.calledWith('Script execution successful.')).to.be.true;
-  });
+    it('parses process args and runs the script', async function () {
+      // given
+      scriptRunStub.resolves();
+      getProcessArgs.returns(['--verbose', 'pouet', '--volume', '666']);
 
-  it('handles errors during script execution and log failure', async function () {
-    scriptRunStub.rejects('Error!!!');
+      // when
+      await ScriptRunner.execute(scriptFileUrl, ScriptClass, { logger, isRunningFromCli, getProcessArgs });
 
-    await ScriptRunner.execute(scriptFileUrl, ScriptClass, { logger, isRunningFromCli: () => true });
+      // then
+      expect(logger.info).to.have.been.calledWith('Start script');
+      expect(scriptRunStub).to.have.been.calledWith({
+        command: 'pouet',
+        options: { verbose: true, volume: 666 },
+        logger,
+      });
+      expect(logger.info).to.have.been.calledWith('Script execution successful.');
+    });
 
-    expect(scriptRunStub.calledOnce).to.be.true;
-    expect(logger.error.calledWith('Script execution failed.')).to.be.true;
-    expect(logger.error.calledWithMatch(sinon.match.instanceOf(Error))).to.be.true;
-    expect(process.exitCode).to.equal(1);
+    context('when an error occurs in the script', function () {
+      it('handles errors during script execution and log failure', async function () {
+        // given
+        scriptRunStub.rejects(new Error('Error!!!'));
+        getProcessArgs.returns([]);
+
+        // when
+        await ScriptRunner.execute(scriptFileUrl, ScriptClass, { logger, isRunningFromCli, getProcessArgs });
+
+        // then
+        expect(scriptRunStub).to.have.been.calledOnce;
+        expect(logger.error).to.have.been.calledWith('Script execution failed.');
+        expect(logger.error).to.have.been.calledWithMatch(sinon.match.instanceOf(Error));
+        expect(process.exitCode).to.equal(1);
+      });
+    });
   });
 });

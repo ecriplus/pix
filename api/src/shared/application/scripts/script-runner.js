@@ -18,6 +18,10 @@ function loggerForScriptClass(ScriptClass) {
   return child(`script:${ScriptClass.name}`, { event: ScriptClass.name });
 }
 
+function getProcessArgs() {
+  return hideBin(process.argv);
+}
+
 /**
  * A utility class for running scripts from the command line.
  */
@@ -26,35 +30,49 @@ export class ScriptRunner {
    * Executes the provided script class if running from the command line.
    * Parses command-line arguments and runs the script with the provided options.
    *
+   * @template {typeof import('./script.js').Script} Script
    * @param {string} scriptFileUrl - The file URL of the script being executed.
-   * @param {typeof Script} ScriptClass - The script class to be instantiated and executed.
-   * @param {object} [dependencies] - The script runner dependencies (logger, isRunningFromCli)
+   * @param {Script} ScriptClass - The script class to be instantiated and executed.
+   * @param {object} [dependencies] - The script runner dependencies (logger, isRunningFromCli, getProcessArgs)
    */
   static async execute(
     scriptFileUrl,
     ScriptClass,
-    dependencies = { logger: loggerForScriptClass(ScriptClass), isRunningFromCli },
+    dependencies = {
+      logger: loggerForScriptClass(ScriptClass),
+      isRunningFromCli,
+      getProcessArgs,
+    },
   ) {
-    const { logger, isRunningFromCli } = dependencies;
+    const { logger, isRunningFromCli, getProcessArgs } = dependencies;
 
     if (!isRunningFromCli(scriptFileUrl)) return;
 
     const script = new ScriptClass();
-    const { description, options = {} } = script.metaInfo;
-
-    const { argv } = process;
+    const { description, options = {}, commands = {} } = script.metaInfo;
 
     try {
-      const args = hideBin(argv);
-      const result = await yargs(args).usage(description).options(options).help().version(false).parseAsync();
+      const yargsCommand = yargs(getProcessArgs()).usage(description).options(options).help().version(false);
+      Object.entries(commands).forEach(([name, { description, options }]) =>
+        yargsCommand.command(name, description, options),
+      );
 
-      const parsedOptions = pick(result, Object.keys(options));
+      const result = await yargsCommand.parseAsync();
+
+      let command;
+      if (result._[0] in commands) {
+        command = result._[0];
+      }
+
+      let optionKeys = Object.keys(options);
+      if (commands[command]?.options) {
+        optionKeys = [...optionKeys, ...Object.keys(commands[command].options)];
+      }
+      const parsedOptions = pick(result, optionKeys);
 
       logger.info(`Start script`);
 
-      if (args.length > 0) logger.info(`Arguments: ${args.join(' ')}`);
-
-      await script.run(parsedOptions, logger);
+      await script.run({ command, options: parsedOptions, logger });
 
       logger.info(`Script execution successful.`);
     } catch (error) {

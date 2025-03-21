@@ -56,7 +56,7 @@ describe('Shared | Unit | Application | Script', function () {
 
       // when
       const script = new MyScript();
-      const error = await catchErr(() => script.run({}, logger))();
+      const error = await catchErr(() => script.run({ logger }))();
 
       // then
       expect(error).to.be.instanceof(Error);
@@ -80,7 +80,7 @@ describe('Shared | Unit | Application | Script', function () {
 
       // when
       const script = new MyScript();
-      await script.run({}, logger);
+      await script.run({ logger });
 
       // then
       const loggerInfoArgs = logger.info.getCalls().map((call) => call.args[0]);
@@ -106,7 +106,7 @@ describe('Shared | Unit | Application | Script', function () {
 
       // when
       const script = new MyScript();
-      const error = await catchErr(() => script.run({}, logger))();
+      const error = await catchErr(() => script.run({ logger }))();
 
       // then
       expect(error).to.be.instanceof(Error);
@@ -133,7 +133,7 @@ describe('Shared | Unit | Application | Script', function () {
 
       // when
       const script = new MyScript();
-      await script.run({}, logger);
+      await script.run({ logger });
 
       // then
       const loggerInfoArgs = logger.info.getCalls().map((call) => call.args[0]);
@@ -158,7 +158,7 @@ describe('Shared | Unit | Application | Script', function () {
 
       // when
       const script = new MyScript();
-      const error = await catchErr(() => script.run({}, logger))();
+      const error = await catchErr(() => script.run({ logger }))();
 
       // then
       expect(error).to.be.instanceof(Error);
