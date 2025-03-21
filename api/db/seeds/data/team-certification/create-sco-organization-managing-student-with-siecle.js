@@ -8,11 +8,13 @@ import {
   SCO_CERTIFICATION_MANAGING_STUDENTS_CERTIFICATION_CENTER_USER_ID,
   SCO_CERTIFICATION_MANAGING_STUDENTS_ORGANIZATION_USER_ID,
   SCO_MANAGING_STUDENTS_ORGANIZATION_ID,
+  SCO_PUBLISHED_SESSION,
 } from './constants.js';
 
 export async function scoOrganizationManaginStudentsWithSiecle({ databaseBuilder }) {
   await _createScoOrganization({ databaseBuilder });
   await _createScoCertificationCenter({ databaseBuilder });
+  await _createPublishedScoSession({ databaseBuilder });
 }
 
 async function _createScoOrganization({ databaseBuilder }) {
@@ -43,7 +45,6 @@ async function _createScoOrganization({ databaseBuilder }) {
       learnerCount: 8,
     },
     tagIds: [COLLEGE_TAG.id],
-    withOrganizationLearners: false,
   });
 }
 
@@ -74,5 +75,40 @@ async function _createScoCertificationCenter({ databaseBuilder }) {
     members: [{ id: SCO_CERTIFICATION_MANAGING_STUDENTS_CERTIFICATION_CENTER_USER_ID }],
     complementaryCertificationIds: [],
     isV3Pilot: true,
+  });
+}
+
+async function _createPublishedScoSession({ databaseBuilder }) {
+  const sessionDate = new Date();
+
+  await tooling.session.createPublishedScoSession({
+    databaseBuilder,
+    sessionId: SCO_PUBLISHED_SESSION,
+    certificationCenterId: SCO_CERTIFICATION_CENTER_ID,
+    organizationId: SCO_MANAGING_STUDENTS_ORGANIZATION_ID,
+    accessCode: 'SCOS34',
+    address: '1 rue Certification sco',
+    certificationCenter: 'Centre de certification sco managing students',
+    date: sessionDate,
+    description: 'une description',
+    examiner: 'Un super examinateur',
+    room: '42',
+    time: '12:00',
+    examinerGlobalComment: 'Session sans pb',
+    hasIncident: false,
+    hasJoiningIssue: false,
+    createdAt: sessionDate,
+    finalizedAt: sessionDate,
+    resultsSentToPrescriberAt: sessionDate,
+    publishedAt: sessionDate,
+    assignedCertificationOfficerId: null,
+    juryComment: '',
+    juryCommentAuthorId: null,
+    juryCommentedAt: sessionDate,
+    configSession: {
+      learnersToRegisterCount: 8,
+      maxLevel: 3,
+      sessionDate,
+    },
   });
 }
