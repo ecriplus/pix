@@ -6,6 +6,7 @@ import { setupErrorHandling } from './config/server-setup-error-handling.js';
 import { knex } from './db/knex-database-connection.js';
 import { authentication } from './lib/infrastructure/authentication.js';
 import { identityAccessManagementRoutes } from './src/identity-access-management/application/routes.js';
+import * as organizationRoutes from './src/maddo/application/organizations-routes.js';
 import * as replicationRoutes from './src/maddo/application/replications-routes.js';
 import { Metrics } from './src/monitoring/infrastructure/metrics.js';
 import * as healthcheckRoutes from './src/shared/application/healthcheck/index.js';
@@ -179,7 +180,7 @@ const setupAuthentication = function (server) {
 };
 
 const setupRoutesAndPlugins = async function (server) {
-  const routes = [healthcheckRoutes, ...identityAccessManagementRoutes, replicationRoutes];
+  const routes = [healthcheckRoutes, ...identityAccessManagementRoutes, replicationRoutes, organizationRoutes];
   const routesWithOptions = routes.map((route) => ({
     plugin: route,
     options: { tags: ['maddo'] },

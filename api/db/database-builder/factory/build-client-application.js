@@ -11,6 +11,7 @@ export function buildClientApplication({
   clientId = 'client-id',
   clientSecret = 'super-secret',
   scopes = ['scope1', 'scope2'],
+  jurisdiction = { rules: [{ name: 'tags', value: ['MEDNUM'] }] },
 } = {}) {
   return databaseBuffer.pushInsertable({
     tableName: 'client_applications',
@@ -20,6 +21,7 @@ export function buildClientApplication({
       clientId,
       clientSecret: _getHashedSecret(clientSecret),
       scopes,
+      jurisdiction,
     },
   });
 }
