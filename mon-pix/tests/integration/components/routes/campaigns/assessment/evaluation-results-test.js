@@ -27,12 +27,12 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
       campaignParticipationResult: { campaignParticipationBadges: [], competenceResults: [] },
       trainings: [],
     });
-
-    // when
-    screen = await render(hbs`<Routes::Campaigns::Assessment::EvaluationResults @model={{this.model}} />`);
   });
 
   test('it should display a header', async function (assert) {
+    // when
+    screen = await render(hbs`<Routes::Campaigns::Assessment::EvaluationResults @model={{this.model}} />`);
+
     // then
     assert.dom(screen.getByRole('heading', { name: /Campaign title/ })).exists();
   });
