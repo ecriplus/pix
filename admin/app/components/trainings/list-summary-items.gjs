@@ -1,5 +1,8 @@
+import PixFilterBanner from '@1024pix/pix-ui/components/pix-filter-banner';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { fn } from '@ember/helper';
 import { LinkTo } from '@ember/routing';
 import Component from '@glimmer/component';
@@ -12,89 +15,88 @@ export default class TrainingListSummaryItems extends Component {
   searchedInternalTitle = this.args.internalTitle;
 
   <template>
-    <div class="content-text content-text--small">
-      <div class="table-admin">
-        <table>
-          <caption class="screen-reader-only">{{t "pages.trainings.training.list.caption"}}</caption>
-          <thead>
-            <tr>
-              <th class="table__column table__column--id" id="training-id" scope="col">{{t
-                  "pages.trainings.training.list.id"
-                }}</th>
-              <th id="training-internal-title" scope="col">{{t "pages.trainings.training.list.internalTitle"}}</th>
-              <th id="training-prerequisite-threshold" scope="col" class="col-status">{{t
-                  "pages.trainings.training.list.prerequisite"
-                }}</th>
-              <th id="training-goal-threshold" scope="col" class="col-status">{{t
-                  "pages.trainings.training.list.goalThreshold"
-                }}</th>
-              <th id="training-target-profile-count" scope="col" class="col-status">{{t
-                  "pages.trainings.training.list.targetProfileCount"
-                }}</th>
-              <th id="training-state" scope="col" class="col-status">{{t "pages.trainings.training.list.status"}}</th>
-            </tr>
-            {{#if @triggerFiltering}}
-              <tr>
-                <td class="table__column table__column--id">
-                  <PixInput
-                    type="text"
-                    value={{this.searchedId}}
-                    oninput={{fn @triggerFiltering "id"}}
-                    aria-label="Filtrer les contenus formatifs par un id"
-                  />
-                </td>
-                <td>
-                  <PixInput
-                    type="text"
-                    value={{this.searchedInternalTitle}}
-                    oninput={{fn @triggerFiltering "internalTitle"}}
-                    aria-label="Filtrer les contenus formatifs par un titre"
-                  />
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            {{/if}}
-          </thead>
-
-          {{#if @summaries}}
-            <tbody>
-              {{#each @summaries as |summary|}}
-                <tr aria-label="Contenu formatif">
-                  <td headers="training-id" class="table__column table__column--id">{{summary.id}}</td>
-                  <td headers="training-internal-title">
-                    <LinkTo @route="authenticated.trainings.training" @model={{summary.id}}>
-                      {{summary.internalTitle}}
-                    </LinkTo>
-                  </td>
-                  <td headers="training-prerequisite-threshold">
-                    {{summary.prerequisiteThreshold}}
-                  </td>
-                  <td headers="training-goal-threshold">
-                    {{summary.goalThreshold}}
-                  </td>
-                  <td headers="training-target-profiles-count">
-                    {{summary.targetProfilesCount}}
-                  </td>
-                  <td headers="training-state">
-                    <StateTag @isDisabled={{summary.isDisabled}} />
-                  </td>
-                </tr>
-              {{/each}}
-            </tbody>
-          {{/if}}
-        </table>
-
-        {{#unless @summaries}}
-          <div class="table__empty">{{t "pages.trainings.training.list.noResult"}}</div>
-        {{/unless}}
-      </div>
-    </div>
+    {{#if @triggerFiltering}}
+      <PixFilterBanner @title={{t "common.filters.title"}}>
+        <PixInput
+          type="text"
+          value={{this.searchedId}}
+          oninput={{fn @triggerFiltering "id"}}
+          aria-label="Filtrer les contenus formatifs par un id"
+        >
+          <:label>{{t "pages.trainings.training.list.id"}}</:label>
+        </PixInput>
+        <PixInput
+          type="text"
+          value={{this.searchedInternalTitle}}
+          oninput={{fn @triggerFiltering "internalTitle"}}
+          aria-label="Filtrer les contenus formatifs par un titre"
+        >
+          <:label>{{t "pages.trainings.training.list.internalTitle"}}</:label>
+        </PixInput>
+      </PixFilterBanner>
+    {{/if}}
 
     {{#if @summaries}}
+      <PixTable @data={{@summaries}} @caption={{t "pages.trainings.training.list.caption"}}>
+        <:columns as |summary context|>
+          <PixTableColumn @context={{context}} class="table__column--medium">
+            <:header>
+              {{t "pages.trainings.training.list.id"}}
+            </:header>
+            <:cell>
+              {{summary.id}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="break-word">
+            <:header>
+              {{t "pages.trainings.training.list.internalTitle"}}
+            </:header>
+            <:cell>
+              <LinkTo @route="authenticated.trainings.training" @model={{summary.id}}>
+                {{summary.internalTitle}}
+              </LinkTo>
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="table__column--medium">
+            <:header>
+              {{t "pages.trainings.training.list.prerequisite"}}
+            </:header>
+            <:cell>
+              {{summary.prerequisiteThreshold}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="table__column--medium">
+            <:header>
+              {{t "pages.trainings.training.list.goalThreshold"}}
+            </:header>
+            <:cell>
+              {{summary.goalThreshold}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="table__column--medium">
+            <:header>
+              {{t "pages.trainings.training.list.targetProfileCount"}}
+            </:header>
+            <:cell>
+              {{summary.targetProfilesCount}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="table__column--medium">
+            <:header>
+              {{t "pages.trainings.training.list.status"}}
+            </:header>
+            <:cell>
+              <StateTag @isDisabled={{summary.isDisabled}} />
+            </:cell>
+          </PixTableColumn>
+
+        </:columns>
+      </PixTable>
+
       <PixPagination @pagination={{@summaries.meta.pagination}} />
+
+    {{else}}
+      <div class="table__empty">{{t "pages.trainings.training.list.noResult"}}</div>
     {{/if}}
   </template>
 }

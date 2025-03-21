@@ -70,6 +70,12 @@
   }
 }
 
+.page-with-table {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-4x);
+}
+
 section.no-background {
   padding: 0;
   background-color:transparent;
