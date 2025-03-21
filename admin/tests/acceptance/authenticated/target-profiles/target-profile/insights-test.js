@@ -445,7 +445,7 @@ module('Acceptance | Target Profile Insights', function (hooks) {
         // when
         const screen = await visit('/target-profiles/1');
         await clickByName('Clés de lecture');
-        await clickByName('Voir le détail du résultat thématique tagada');
+        await clickByName('Voir le détail du badge tagada');
 
         // then
         assert.strictEqual(currentURL(), '/target-profiles/1/badges/100');
@@ -493,7 +493,7 @@ module('Acceptance | Target Profile Insights', function (hooks) {
         // when
         const screen = await visit('/target-profiles/1');
         await clickByName('Clés de lecture');
-        await clickByName('Voir le détail du résultat thématique ancien titre');
+        await clickByName('Voir le détail du badge ancien titre');
         await clickByName('Modifier les informations');
         await fillIn(screen.getByLabelText('Titre *', { exact: false }), 'nouveau titre');
         await fillIn(screen.getByLabelText('Clé *', { exact: false }), 'NEW_KEY');
@@ -525,7 +525,7 @@ module('Acceptance | Target Profile Insights', function (hooks) {
         // when
         const screen = await visit('/target-profiles/1');
         await clickByName('Clés de lecture');
-        await clickByName('Voir le détail du résultat thématique tagada');
+        await clickByName('Voir le détail du badge tagada');
         await clickByName('Modifier les informations');
         await fillIn(screen.getByLabelText('Titre *', { exact: false }), 'tsouintsouin');
         await clickByName('Annuler');
@@ -586,11 +586,11 @@ module('Acceptance | Target Profile Insights', function (hooks) {
         // when
         const screen = await visit('/target-profiles/1');
         await clickByName('Clés de lecture');
-        await clickByName('Nouveau résultat thématique');
-        await fillByLabel(/Nom du résultat thématique :/, 'Mon nouveau RT');
+        await clickByName('Nouveau badge');
+        await fillByLabel(/Nom du badge :/, 'Mon nouveau badge');
         await fillIn(screen.getByLabelText("Nom de l'image (svg) *", { exact: false }), 'troll.png');
         await fillByLabel(/Texte alternatif pour l'image :/, 'Je mets du png je fais ce que je veux');
-        await fillByLabel('Message :', 'message de mon RT');
+        await fillByLabel('Message :', 'message de mon badge');
         await fillByLabel(/Clé/, 'MY_BADGE');
         await clickByName('Certifiable');
         await clickByName('Lacunes');
@@ -636,16 +636,16 @@ module('Acceptance | Target Profile Insights', function (hooks) {
         await click(screen.getByRole('option', { name: '3' }));
         await waitForElementToBeRemoved(() => screen.queryByRole('listbox'));
 
-        await clickByName('Enregistrer le RT');
-        await clickByName('Voir le détail du résultat thématique Mon nouveau RT');
+        await clickByName('Enregistrer le badge');
+        await clickByName('Voir le détail du badge Mon nouveau badge');
 
         // then
         assert.strictEqual(currentURL(), '/target-profiles/1/badges/1');
         assert.dom(screen.getByText('1')).exists();
-        assert.dom(screen.getByText('Mon nouveau RT')).exists();
+        assert.dom(screen.getByText('Mon nouveau badge')).exists();
         assert.dom(screen.getByText('troll.png')).exists();
         assert.dom(screen.getByText('MY_BADGE')).exists();
-        assert.dom(screen.getByText('message de mon RT')).exists();
+        assert.dom(screen.getByText('message de mon badge')).exists();
         assert.dom(screen.getByText('Je mets du png je fais ce que je veux')).exists();
         assert.dom(screen.getByText('Certifiable')).exists();
         assert.dom(screen.getByText('Lacunes')).exists();
@@ -672,7 +672,7 @@ module('Acceptance | Target Profile Insights', function (hooks) {
         // when
         const screen = await visit('/target-profiles/1');
         await clickByName('Clés de lecture');
-        await clickByName('Nouveau résultat thématique');
+        await clickByName('Nouveau badge');
         await clickByName('Annuler');
 
         // then
