@@ -79,6 +79,10 @@ server {
 
   root /app/dist/;
 
+  location /robots.txt {
+    try_files <%= ENV['APP'] == 'pix-certif-production' ? '/robots.txt' : '/robots.horsProd.txt' %> =404;
+  }
+
   location = /maintenance_page.html {
     # maintenance page is at the root of the project
     root /app/;
