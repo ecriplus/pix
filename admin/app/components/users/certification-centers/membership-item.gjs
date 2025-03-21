@@ -1,9 +1,11 @@
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { fn } from '@ember/helper';
 import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { t } from 'ember-intl';
 
 import MembershipItemActions from './membership-item-actions';
 import MembershipItemRole from './membership-item-role';
@@ -41,22 +43,56 @@ export default class UsersCertificationCentersMembershipItemComponent extends Co
   }
 
   <template>
-    <tr
-      aria-label="Informations du Centre de certification {{@certificationCenterMembership.certificationCenter.name}}"
-    >
-      <td>{{@certificationCenterMembership.id}}</td>
-      <td class="table__column table__column--id">
+    <PixTableColumn @context={{@context}}>
+      <:header>
+        {{t "components.users.certification-centers.memberships.table-headers.member-id"}}
+      </:header>
+      <:cell>
+        {{@certificationCenterMembership.id}}
+      </:cell>
+    </PixTableColumn>
+    <PixTableColumn @context={{@context}}>
+      <:header>
+        {{t "components.users.certification-centers.memberships.table-headers.center-id"}}
+      </:header>
+      <:cell>
         <LinkTo
           @route="authenticated.certification-centers.get"
           @model={{@certificationCenterMembership.certificationCenter.id}}
         >
           {{@certificationCenterMembership.certificationCenter.id}}
         </LinkTo>
-      </td>
-      <td>{{@certificationCenterMembership.certificationCenter.name}}</td>
-      <td>{{@certificationCenterMembership.certificationCenter.type}}</td>
-      <td>{{@certificationCenterMembership.certificationCenter.externalId}}</td>
-      <td>
+      </:cell>
+    </PixTableColumn>
+    <PixTableColumn @context={{@context}} class="break-word">
+      <:header>
+        {{t "components.users.certification-centers.memberships.table-headers.center-name"}}
+      </:header>
+      <:cell>
+        {{@certificationCenterMembership.certificationCenter.name}}
+      </:cell>
+    </PixTableColumn>
+    <PixTableColumn @context={{@context}}>
+      <:header>
+        {{t "components.users.certification-centers.memberships.table-headers.center-type"}}
+      </:header>
+      <:cell>
+        {{@certificationCenterMembership.certificationCenter.type}}
+      </:cell>
+    </PixTableColumn>
+    <PixTableColumn @context={{@context}} class="break-word">
+      <:header>
+        {{t "components.users.certification-centers.memberships.table-headers.center-external-id"}}
+      </:header>
+      <:cell>
+        {{@certificationCenterMembership.certificationCenter.externalId}}
+      </:cell>
+    </PixTableColumn>
+    <PixTableColumn @context={{@context}}>
+      <:header>
+        {{t "components.users.certification-centers.memberships.table-headers.role-label"}}
+      </:header>
+      <:cell>
         <MembershipItemRole
           @isEditionMode={{this.isEditionMode}}
           @certificationCenterRoles={{this.certificationCenterRoles}}
@@ -64,8 +100,13 @@ export default class UsersCertificationCentersMembershipItemComponent extends Co
           @roleLabelKey={{@certificationCenterMembership.roleLabelKey}}
           @onRoleSelected={{this.onRoleSelected}}
         />
-      </td>
-      <td>
+      </:cell>
+    </PixTableColumn>
+    <PixTableColumn @context={{@context}}>
+      <:header>
+        {{t "components.users.certification-centers.memberships.table-headers.actions-label"}}
+      </:header>
+      <:cell>
         <MembershipItemActions
           @isEditionMode={{this.isEditionMode}}
           @onDeactivateMembershipButtonClicked={{fn
@@ -76,7 +117,7 @@ export default class UsersCertificationCentersMembershipItemComponent extends Co
           @onSaveRoleButtonClicked={{this.saveMembershipRole}}
           @onCancelButtonClicked={{this.cancelMembershipRoleEditing}}
         />
-      </td>
-    </tr>
+      </:cell>
+    </PixTableColumn>
   </template>
 }

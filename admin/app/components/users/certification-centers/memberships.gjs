@@ -1,3 +1,4 @@
+import PixTable from '@1024pix/pix-ui/components/pix-table';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
@@ -12,40 +13,24 @@ export default class Memberships extends Component {
     <header class="page-section__header">
       <h2 class="page-section__title">{{t "components.users.certification-centers.memberships.section-title"}}</h2>
     </header>
-    <div class="content-text content-text--small">
-      <div class="table-admin">
-        <table>
-          <thead>
-            <tr>
-              <th class="table__column table__column--id">{{t
-                  "components.users.certification-centers.memberships.table-headers.member-id"
-                }}</th>
-              <th>{{t "components.users.certification-centers.memberships.table-headers.center-id"}}</th>
-              <th>{{t "components.users.certification-centers.memberships.table-headers.center-name"}}</th>
-              <th>{{t "components.users.certification-centers.memberships.table-headers.center-type"}}</th>
-              <th>{{t "components.users.certification-centers.memberships.table-headers.center-external-id"}}</th>
-              <th>{{t "components.users.certification-centers.memberships.table-headers.role-label"}}</th>
-              <th>{{t "components.users.certification-centers.memberships.table-headers.actions-label"}}</th>
-            </tr>
-          </thead>
 
-          {{#if this.orderedCertificationCenterMemberships}}
-            <tbody>
-              {{#each this.orderedCertificationCenterMemberships as |certificationCenterMembership|}}
-                <MembershipItem
-                  @certificationCenterMembership={{certificationCenterMembership}}
-                  @onCertificationCenterMembershipRoleChange={{@onCertificationCenterMembershipRoleChange}}
-                  @disableCertificationCenterMembership={{@disableCertificationCenterMembership}}
-                />
-              {{/each}}
-            </tbody>
-          {{/if}}
-        </table>
-
-      </div>
-      {{#unless this.orderedCertificationCenterMemberships}}
-        <div class="table__empty">{{t "components.users.certification-centers.memberships.empty-table"}}</div>
-      {{/unless}}
-    </div>
+    {{#if this.orderedCertificationCenterMemberships}}
+      <PixTable
+        @variant="primary"
+        @data={{this.orderedCertificationCenterMemberships}}
+        @caption={{t "components.users.certification-centers.memberships.caption"}}
+      >
+        <:columns as |certificationCenterMembership context|>
+          <MembershipItem
+            @certificationCenterMembership={{certificationCenterMembership}}
+            @context={{context}}
+            @onCertificationCenterMembershipRoleChange={{@onCertificationCenterMembershipRoleChange}}
+            @disableCertificationCenterMembership={{@disableCertificationCenterMembership}}
+          />
+        </:columns>
+      </PixTable>
+    {{else}}
+      <div class="table__empty">{{t "components.users.certification-centers.memberships.empty-table"}}</div>
+    {{/if}}
   </template>
 }
