@@ -46,25 +46,22 @@ export default class TargetProfileListSummaryItems extends Component {
         type="text"
         value={{@id}}
         oninput={{fn @triggerFiltering "id"}}
-        placeholder={{t "pages.target-profiles.filters.search-by-id.placeholder"}}
-        @screenReaderOnly={{true}}
+        aria-label={{t "pages.target-profiles.filters.search-by-id.aria-label"}}
       >
-        <:label>{{t "pages.target-profiles.filters.search-by-id.name"}}</:label>
+        <:label>{{t "pages.target-profiles.filters.search-by-id.label"}}</:label>
       </PixInput>
 
       <PixInput
         type="text"
         value={{@internalName}}
-        placeholder={{t "pages.target-profiles.filters.search-by-internal-name.placeholder"}}
+        aria-label={{t "pages.target-profiles.filters.search-by-internal-name.aria-label"}}
         oninput={{fn @triggerFiltering "internalName"}}
-        @screenReaderOnly={{true}}
       >
-        <:label>{{t "pages.target-profiles.filters.search-by-internal-name.name"}}</:label>
+        <:label>{{t "pages.target-profiles.filters.search-by-internal-name.label"}}</:label>
       </PixInput>
 
       <PixMultiSelect
         @id="categories"
-        @screenReaderOnly={{true}}
         @placeholder={{t "common.filters.target-profile.placeholder"}}
         @onChange={{this.triggerCategoriesFiltering}}
         @values={{@categories}}

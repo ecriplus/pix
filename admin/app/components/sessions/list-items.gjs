@@ -102,51 +102,51 @@ export default class ListItems extends Component {
           type="text"
           value={{this.searchedId}}
           oninput={{fn @triggerFiltering "id"}}
-          placeholder={{t "pages.sessions.list.filters.id.placeholder"}}
-        />
+        >
+          <:label>{{t "pages.sessions.list.filters.id.label"}}</:label>
+        </PixInput>
         <PixInput
           aria-label={{t "pages.sessions.list.filters.certification-name.aria-label"}}
           type="text"
           value={{this.searchedCertificationCenterName}}
           oninput={{fn @triggerFiltering "certificationCenterName"}}
-          placeholder={{t "pages.sessions.table.headers.certification-name"}}
-        />
+        >
+          <:label>{{t "pages.sessions.table.headers.certification-name"}}</:label>
+        </PixInput>
         <PixInput
           aria-label={{t "pages.sessions.list.filters.external-id.aria-label"}}
           type="text"
           value={{this.searchedCertificationCenterExternalId}}
           oninput={{fn @triggerFiltering "certificationCenterExternalId"}}
-          placeholder={{t "pages.sessions.table.headers.external-id"}}
-        />
+        >
+          <:label>{{t "pages.sessions.table.headers.external-id"}}</:label>
+        </PixInput>
         <PixSelect
-          @screenReaderOnly={{true}}
           @options={{this.certificationCenterTypeOptions}}
           @onChange={{this.selectCertificationCenterType}}
           @value={{@certificationCenterType}}
-          @placeholder={{t "pages.sessions.table.headers.type"}}
           @hideDefaultOption={{true}}
+          arial-label={{t "pages.sessions.list.filters.type.aria-label"}}
         >
-          <:label>{{t "pages.sessions.list.filters.type.aria-label"}}</:label>
+          <:label>{{t "pages.sessions.table.headers.type"}}</:label>
         </PixSelect>
         <PixSelect
-          @screenReaderOnly={{true}}
           @options={{this.sessionStatusOptions}}
           @onChange={{this.selectSessionStatus}}
           @value={{@status}}
-          @placeholder={{t "pages.sessions.table.headers.status"}}
           @hideDefaultOption={{true}}
+          aria-label={{t "pages.sessions.list.filters.status.aria-label"}}
         >
-          <:label>{{t "pages.sessions.list.filters.status.aria-label"}}</:label>
+          <:label>{{t "pages.sessions.table.headers.status"}}</:label>
         </PixSelect>
         <PixSelect
-          @screenReaderOnly={{true}}
           @options={{this.sessionVersionOptions}}
           @onChange={{this.selectSessionVersion}}
           @value={{@version}}
-          @placeholder={{t "pages.sessions.list.filters.version.placeholder"}}
           @hideDefaultOption={{true}}
+          aria-label={{t "pages.sessions.list.filters.version.aria-label"}}
         >
-          <:label>{{t "pages.sessions.list.filters.version.aria-label"}}</:label>
+          <:label>{{t "pages.sessions.list.filters.version.label"}}</:label>
         </PixSelect>
       </PixFilterBanner>
 

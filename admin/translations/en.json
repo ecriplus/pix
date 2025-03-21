@@ -879,7 +879,7 @@
           },
           "id": {
             "aria-label": "Filtrer les sessions avec un id",
-            "placeholder": "Identifiant"
+            "label": "Identifiant"
           },
           "status": {
             "aria-label": "Filtrer les sessions en sélectionnant un statut"
@@ -889,7 +889,7 @@
           },
           "version": {
             "aria-label": "Filtrer les sessions par leur version",
-            "placeholder": "Version"
+            "label": "Version"
           }
         },
         "required-actions": {
@@ -966,12 +966,12 @@
         "aria-label": "Target profile filters",
         "count": "{count, plural, =0 {0 target profile} =1 {1 target profile} other {{count} target profiles}}",
         "search-by-id": {
-          "name": "Filter target profiles by ID",
-          "placeholder": "Search by ID"
+          "aria-label": "Filter target profiles by ID",
+          "label": "Identifier"
         },
         "search-by-internal-name": {
-          "name": "Filter target profiles by internal name",
-          "placeholder": "Search by internal name"
+          "aria-label": "Filter target profiles by internal name",
+          "label": "Internal name"
         }
       },
       "resettable-checkbox": {

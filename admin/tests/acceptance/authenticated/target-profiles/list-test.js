@@ -111,7 +111,7 @@ module('Acceptance | Target Profiles | List', function (hooks) {
 
           // then
           assert
-            .dom(screen.getByRole('textbox', { name: t('pages.target-profiles.filters.search-by-id.name') }))
+            .dom(screen.getByRole('textbox', { name: t('pages.target-profiles.filters.search-by-id.aria-label') }))
             .hasValue('123');
         });
       });
