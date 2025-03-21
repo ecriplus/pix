@@ -1,4 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { fn } from '@ember/helper';
 import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
@@ -6,6 +8,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
+import { t } from 'ember-intl';
 
 import ConfirmPopup from '../confirm-popup';
 
@@ -38,69 +41,102 @@ export default class CampaignParticipation extends Component {
       Attention toute modification sur une participation nécessite un accord écrit du prescripteur et du prescrit.
     </p>
 
-    <div class="content-text content-text--small">
-      <table class="table-admin">
-        <thead>
-          <tr>
-            <th>Prescrit</th>
-            <th>Campagne</th>
-            <th>Identifiant externe</th>
-            <th>Date de début</th>
-            <th>Statut</th>
-            <th>Date d'envoi</th>
-            <th>Supprimé le</th>
-            {{#if this.accessControl.hasAccessToUsersActionsScope}}
-              <th>Actions</th>
-            {{/if}}
-          </tr>
-        </thead>
-        <tbody>
-          {{#each @participations as |participation|}}
-            <tr aria-label="Participation">
-              <td>{{participation.organizationLearnerFullName}}</td>
-              <td>
-                <LinkTo @route="authenticated.campaigns.campaign" @model={{participation.campaignId}}>
-                  {{participation.campaignCode}}
-                </LinkTo>
-              </td>
+    {{#if @participations}}
+      <PixTable
+        @variant="primary"
+        @data={{@participations}}
+        @caption={{t "components.users.campaign-participations.table.caption"}}
+      >
+        <:columns as |participation context|>
+          <PixTableColumn @context={{context}} class="break-word">
+            <:header>
+              Prescrit
+            </:header>
+            <:cell>
+              {{participation.organizationLearnerFullName}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="break-word">
+            <:header>
+              Campagne
+            </:header>
+            <:cell>
+              <LinkTo @route="authenticated.campaigns.campaign" @model={{participation.campaignId}}>
+                {{participation.campaignCode}}
+              </LinkTo>
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="break-word">
+            <:header>
+              Identifiant externe
+            </:header>
+            <:cell>
               {{#if participation.participantExternalId}}
-                <td>{{participation.participantExternalId}}</td>
+                {{participation.participantExternalId}}
               {{else}}
-                <td>-</td>
+                -
               {{/if}}
-              <td>{{dayjsFormat participation.createdAt "DD/MM/YYYY"}}</td>
-              <td>{{participation.displayedStatus}}</td>
-              <td>
-                {{if participation.sharedAt (dayjsFormat participation.sharedAt "DD/MM/YYYY") "-"}}
-              </td>
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              Date de début
+            </:header>
+            <:cell>
+              {{dayjsFormat participation.createdAt "DD/MM/YYYY"}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              Statut
+            </:header>
+            <:cell>
+              {{participation.displayedStatus}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              Date d'envoi
+            </:header>
+            <:cell>
+              {{if participation.sharedAt (dayjsFormat participation.sharedAt "DD/MM/YYYY") "-"}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              Supprimé le
+            </:header>
+            <:cell>
               {{#if participation.deletedAt}}
-                <td>
-                  {{dayjsFormat participation.deletedAt "DD/MM/YYYY"}}
-                </td>
+                {{dayjsFormat participation.deletedAt "DD/MM/YYYY"}}
               {{else}}
-                <td>-</td>
+                -
               {{/if}}
-              {{#if this.accessControl.hasAccessToUsersActionsScope}}
-                <td>
-                  {{#unless participation.deletedAt}}
-                    <PixButton
-                      @triggerAction={{fn this.toggleDisplayRemoveParticipationModal participation}}
-                      @size="small"
-                      @variant="error"
-                    >
-                      Supprimer
-                    </PixButton>
-                  {{/unless}}
-                </td>
-              {{/if}}
-            </tr>
-          {{/each}}
-        </tbody>
-      </table>
-      {{#unless @participations}}
-        <div class="table__empty">Aucune participation</div>
-      {{/unless}}
-    </div>
+            </:cell>
+          </PixTableColumn>
+          {{#if this.accessControl.hasAccessToUsersActionsScope}}
+            <PixTableColumn @context={{context}}>
+              <:header>
+                Actions
+              </:header>
+              <:cell>
+                {{#unless participation.deletedAt}}
+                  <PixButton
+                    @triggerAction={{fn this.toggleDisplayRemoveParticipationModal participation}}
+                    @size="small"
+                    @variant="error"
+                  >
+                    Supprimer
+                  </PixButton>
+                {{/unless}}
+              </:cell>
+            </PixTableColumn>
+          {{/if}}
+        </:columns>
+      </PixTable>
+    {{else}}
+      <div class="table__empty">Aucune participation</div>
+    {{/if}}
 
     <ConfirmPopup
       @message="Vous êtes sur le point de supprimer la ou les participation(s) de {{this.participationToDelete.organizationLearnerFullName}} (y compris celles améliorées), celle-ci ne sera plus visible ni comprise dans les statistiques de la campagne de Pix Orga. Le participant pourra terminer son parcours mais ne pourra plus envoyer ses résultats. Il ne pourra pas non plus participer de nouveau à cette campagne."
