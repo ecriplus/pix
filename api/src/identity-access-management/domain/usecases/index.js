@@ -17,6 +17,7 @@ import { tokenService } from '../../../shared/domain/services/token-service.js';
 import * as userService from '../../../shared/domain/services/user-service.js';
 import * as passwordValidator from '../../../shared/domain/validators/password-validator.js';
 import * as userValidator from '../../../shared/domain/validators/user-validator.js';
+import { httpAgent } from '../../../shared/infrastructure/http-agent.js';
 import { adminMemberRepository } from '../../../shared/infrastructure/repositories/admin-member.repository.js';
 import * as organizationLearnerRepository from '../../../shared/infrastructure/repositories/organization-learner-repository.js';
 import * as userLoginRepository from '../../../shared/infrastructure/repositories/user-login-repository.js';
@@ -105,8 +106,11 @@ const validators = {
   passwordValidator,
   userValidator,
 };
+const utils = {
+  httpAgent,
+};
 
-const dependencies = Object.assign({ config, codeUtils }, eventBus, repositories, services, validators);
+const dependencies = Object.assign({ config, codeUtils }, eventBus, repositories, services, validators, utils);
 
 const usecasesWithoutInjectedDependencies = {
   ...(await importNamedExportsFromDirectory({ path: join(path, './'), ignoredFileNames: ['index.js'] })),

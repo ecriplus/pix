@@ -91,11 +91,14 @@ const decrypt = async function (phcText) {
  * Generates Key pair as a JsonWebKey (JWK).
  *
  * @param alg JWA Algorithm Identifier to be used with the generated key pair. @see https://www.rfc-editor.org/rfc/rfc7518.html
- * @param modulusLength Key size in bits. JOSE requires 2048 bits or larger.
  * @returns {Promise<{publicKey: object, privateKey: object}>} The extractable key pair.
  */
-async function generateJSONWebKeyPair({ alg = 'RS256', modulusLength = 4096 } = {}) {
-  const { publicKey, privateKey } = await jose.generateKeyPair(alg, { extractable: true, modulusLength });
+async function generateJSONWebKeyPair({ alg = 'RS256' } = {}) {
+  // Note: JOSE requires 2048 bits or larger for key size.
+  const { publicKey, privateKey } = await jose.generateKeyPair(alg, {
+    extractable: true,
+    modulusLength: config.lti.jwkModulusLength,
+  });
   const kid = crypto.randomUUID();
   const jwkPublicKey = await jose.exportJWK(publicKey);
   const jwkPrivateKey = await jose.exportJWK(privateKey);

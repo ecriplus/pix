@@ -85,12 +85,9 @@ describe('Unit | Shared | Domain | Services | Crypto', function () {
 
   describe('#generateJSONWebKeyPair', function () {
     it('should generate a new JSON Web Key pair', async function () {
-      // given
-      const modulusLength = 2048;
-
       // when
-      const keyPair = await cryptoService.generateJSONWebKeyPair({ modulusLength });
-      const newKeyPair = await cryptoService.generateJSONWebKeyPair({ modulusLength });
+      const keyPair = await cryptoService.generateJSONWebKeyPair();
+      const newKeyPair = await cryptoService.generateJSONWebKeyPair();
 
       // then
       expect(keyPair.publicKey).to.be.instanceOf(Object);

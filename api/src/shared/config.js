@@ -97,6 +97,7 @@ const schema = Joi.object({
   API_DATA_USERNAME: Joi.string().optional(),
   API_DATA_PASSWORD: Joi.string().optional(),
   API_DATA_QUERIES: Joi.string().optional(),
+  BASE_URL: Joi.string().optional(),
   BREVO_ACCOUNT_CREATION_TEMPLATE_ID: Joi.number().optional(),
   BREVO_API_KEY: Joi.string().optional(),
   BREVO_ORGANIZATION_INVITATION_SCO_TEMPLATE_ID: Joi.number().optional(),
@@ -215,6 +216,9 @@ const configuration = (function () {
       letters: 'BCDFGHJKMPQRTVWXY',
       numbers: '2346789',
     },
+    // Variable d'environnement temporaire pour LTI en attendant la mise à place d'une gateway
+    // Ne pas utiliser pour d'autres usages
+    baseUrl: process.env.BASE_URL ?? 'https://api.pix.fr',
     bcryptNumberOfSaltRounds: _getNumber(process.env.BCRYPT_NUMBER_OF_SALT_ROUNDS, 10),
     caching: {
       redisUrl: process.env.REDIS_URL,
@@ -357,6 +361,10 @@ const configuration = (function () {
       emailConnectionWarningPeriod: ms(process.env.EMAIL_CONNECTION_WARNING_PERIOD || '1y'),
     },
     logOpsMetrics: toBoolean(process.env.LOG_OPS_METRICS),
+    lti: {
+      authorizedPlatforms: process.env.LTI_AUTHORIZED_PLATFORMS?.split(',') ?? [],
+      jwkModulusLength: 4096,
+    },
     mailing: {
       enabled: toBoolean(process.env.MAILING_ENABLED),
       provider: process.env.MAILING_PROVIDER || 'mailpit',
@@ -479,6 +487,8 @@ const configuration = (function () {
     config.auditLogger.baseUrl = 'http://audit-logger.local';
     config.auditLogger.clientSecret = 'client-super-secret';
 
+    config.baseUrl = 'https://api.test.pix.fr';
+
     config.oidcExampleNet = {
       clientId: 'client',
       clientSecret: 'secret',
@@ -522,6 +532,9 @@ const configuration = (function () {
     config.featureToggles.isTextToSpeechButtonEnabled = false;
     config.featureToggles.showNewResultPage = false;
     config.featureToggles.showExperimentalMissions = false;
+
+    config.lti.authorizedPlatforms = ['https://moodle.example.net'];
+    config.lti.jwkModulusLength = 2048;
 
     config.mailing.enabled = false;
     config.mailing.provider = 'brevo';

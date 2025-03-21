@@ -19,4 +19,24 @@ export const ltiPlatformRegistrationRepository = {
   async listActivePublicKeys() {
     return knex.select('publicKey').from('lti_platform_registrations').where('status', 'active').pluck('publicKey');
   },
+
+  async save({
+    clientId,
+    platformOrigin,
+    status,
+    toolConfig,
+    encryptedPrivateKey,
+    publicKey,
+    platformOpenIdConfigUrl,
+  }) {
+    return knex('lti_platform_registrations').insert({
+      clientId,
+      platformOrigin,
+      status,
+      toolConfig,
+      encryptedPrivateKey,
+      publicKey,
+      platformOpenIdConfigUrl,
+    });
+  },
 };

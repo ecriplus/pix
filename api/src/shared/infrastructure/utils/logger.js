@@ -48,6 +48,7 @@ export function child(section, bindings, options) {
 
 export const SCOPES = {
   LEARNING_CONTENT: 'learningcontent',
+  LTI: 'lti',
 };
 
 function messageFormatCompact(log, messageKey, _logLevel, { colors }) {
