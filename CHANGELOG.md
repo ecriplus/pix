@@ -1,5 +1,26 @@
 # Pix Changelog
 
+## v5.69.0 (21/03/2025)
+
+
+### :rocket: Amélioration
+- [#11777](https://github.com/1024pix/pix/pull/11777) [FEATURE] Gérer la traduction pour le certificat V3 (PIX-17120).
+- [#11767](https://github.com/1024pix/pix/pull/11767) [FEATURE] Générer une première version complète du certificat v3 (PIX-16443).
+- [#11766](https://github.com/1024pix/pix/pull/11766) [FEATURE] Créer le composant transitoire entre l'envoi de résultats et la page de fin de parcours (PIX-17015).
+
+### :building_construction: Tech
+- [#11760](https://github.com/1024pix/pix/pull/11760) [TECH] optimisations de la CI.
+- [#11682](https://github.com/1024pix/pix/pull/11682) [TECH] Script dev pour identifier les violations de dépendances entre les contextes.
+- [#11768](https://github.com/1024pix/pix/pull/11768) [TECH] Migrer les feedback générique de QCU vers du spécifique (PIX-17114).
+
+### :bug: Correction
+- [#11764](https://github.com/1024pix/pix/pull/11764) [BUGFIX] Réparer un flaky Tubes Selection sur l'admin.
+- [#11762](https://github.com/1024pix/pix/pull/11762) [BUGFIX] Ajuster l'affichage de la page de début de campagne (PIX-17090).
+- [#11763](https://github.com/1024pix/pix/pull/11763) [BUGFIX] Ne plus retourner de 500 sur le reset d'une compétence avec un assessment de type campagne anonymisé (PIX-17092).
+
+### :arrow_up: Montée de version
+- [#11714](https://github.com/1024pix/pix/pull/11714) [BUMP] Update dependency nock to v14 (api).
+
 ## v5.68.0 (20/03/2025)
 
 
