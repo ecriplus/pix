@@ -45,7 +45,7 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
   module('when the campaign has trainings or badges', function () {
     test('it should display a tablist', async function (assert) {
       // given
-      this.model.trainings = [Symbol('training')];
+      this.model.trainings = [{ duration: { days: 1, hours: 1, minutes: 1 } }];
 
       // when
       screen = await render(hbs`<Routes::Campaigns::Assessment::EvaluationResults @model={{this.model}} />`);
