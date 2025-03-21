@@ -296,4 +296,17 @@ module('Unit | Service | url', function (hooks) {
       assert.strictEqual(invigilatorDocumentationUrl, 'https://cloud.pix.fr/s/S5LHayrjbM4Zn5f');
     });
   });
+
+  module('#fraudReportUrl', function () {
+    test('should return the fraud report url', function (assert) {
+      // given
+      const service = this.owner.lookup('service:url');
+
+      // when
+      const fraudReportUrl = service.fraudReportUrl;
+
+      // then
+      assert.strictEqual(fraudReportUrl, 'https://cloud.pix.fr/s/LiXkoBq9GD5aLbN/download');
+    });
+  });
 });

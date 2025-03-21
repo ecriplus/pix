@@ -74,6 +74,10 @@ export default class Url extends Service {
     return 'https://form-eu.123formbuilder.com/41052/form';
   }
 
+  get fraudReportUrl() {
+    return this.intl.t('common.urls.fraud');
+  }
+
   get invigilatorDocumentationUrl() {
     return 'https://cloud.pix.fr/s/S5LHayrjbM4Zn5f';
   }
