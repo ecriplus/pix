@@ -466,6 +466,11 @@
       }
     },
     "target-profiles": {
+      "badges": {
+        "table": {
+          "caption": "Liste des résultats thématiques. Contient l'identifiant, l'image, la clé, le nom, le message et les paramètres (colonne indiquant si le résultat thématique est en lacune ou certifiable). Des actions permettent de supprimer ou bien d'accéder à une page de détails du résultat thématique."
+        }
+      },
       "list": {
         "table": {
           "caption": "Liste des profil cibles. Contient l'identifiant, le nom interne, la catégorie, la date de création et le statut."

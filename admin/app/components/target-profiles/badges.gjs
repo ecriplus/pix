@@ -1,6 +1,8 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { fn } from '@ember/helper';
@@ -45,89 +47,113 @@ export default class Badges extends Component {
   }
 
   <template>
-    <div class="content-text content-text--small">
-      {{#if this.hasBadges}}
-        <table class="badges-table table-admin">
-          <thead class="badges-table__header">
-            <tr>
-              <th class="badges-table-header__id">ID</th>
-              <th class="badges-table-header__image">Image</th>
-              <th class="badges-table-header__key">Clé</th>
-              <th class="badges-table-header__name">Nom</th>
-              <th class="badges-table-header__message">Message</th>
-              <th class="badges-table-header__parameters">
-                <PixTooltip @isWide={{true}}>
-                  <:triggerElement>
-                    Paramètres
-                    <PixIcon @name="help" />
-                  </:triggerElement>
-                  <:tooltip>
-                    {{t "components.badges.tooltips.parameters" htmlSafe=true}}
-                  </:tooltip>
-                </PixTooltip>
-              </th>
-              <th class="badges-table-header__actions">Actions</th>
-            </tr>
-          </thead>
-          <tbody class="badges-table__body">
-            {{#each @badges as |badge|}}
-              <tr aria-label="Informations du badge {{badge.title}}">
-                <td class="badges-table-body__id">
-                  <LinkTo
-                    @route="authenticated.target-profiles.target-profile.badges.badge"
-                    @model={{badge.id}}
-                    aria-label="Voir le détail du résultat thématique ID {{badge.id}}"
-                  >
-                    {{badge.id}}
-                  </LinkTo>
-                </td>
-                <td class="badges-table-body__image"><img src={{badge.imageUrl}} alt={{badge.altMessage}} /></td>
-                <td class="badges-table-body__key">{{badge.key}}</td>
-                <td class="badges-table-body__title">{{badge.title}}</td>
-                <td class="badges-table-body__message">{{badge.message}}</td>
-                <td class="badges-table-body__parameters">
-                  <PixTag
-                    class={{if badge.isAlwaysVisible "valid" "not-valid"}}
-                    @color={{if badge.isAlwaysVisible "tertiary" "error"}}
-                  >
-                    {{if badge.isAlwaysVisible "En lacune" "Pas en lacune"}}
-                  </PixTag>
-                  <PixTag
-                    class={{if badge.isCertifiable "valid" "not-valid"}}
-                    @color={{if badge.isCertifiable "success" "error"}}
-                  >
-                    {{if badge.isCertifiable "Certifiable" "Pas certifiable"}}
-                  </PixTag>
-                </td>
-                <td class="badges-table-body__actions">
-                  <PixButtonLink
-                    @variant="secondary"
-                    @route="authenticated.target-profiles.target-profile.badges.badge"
-                    @size="small"
-                    @model={{badge.id}}
-                    aria-label="Voir le détail du résultat thématique {{badge.title}}"
-                  >
-                    Voir le détail
-                  </PixButtonLink>
-                  <PixButton
-                    @size="small"
-                    @variant="error"
-                    @triggerAction={{fn this.toggleDisplayConfirm badge.id}}
-                    class="badges-table-actions-delete"
-                    @iconBefore="delete"
-                    aria-label="Supprimer le résultat thématique {{badge.title}}"
-                  >
-                    Supprimer
-                  </PixButton>
-                </td>
-              </tr>
-            {{/each}}
-          </tbody>
-        </table>
-      {{else}}
-        <div class="table__empty">Aucun résultat thématique associé</div>
-      {{/if}}
-    </div>
+    {{#if this.hasBadges}}
+      <PixTable @data={{@badges}} @caption={{t "components.target-profiles.badges.table.caption"}} class="table insights-section__badge-table">
+        <:columns as |badge context|>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              ID
+            </:header>
+            <:cell>
+              <LinkTo
+                @route="authenticated.target-profiles.target-profile.badges.badge"
+                @model={{badge.id}}
+                aria-label="Voir le détail du résultat thématique ID {{badge.id}}"
+              >
+                {{badge.id}}
+              </LinkTo>
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="badges-table-body__image">
+            <:header>
+              Image
+            </:header>
+            <:cell>
+              <img src={{badge.imageUrl}} alt={{badge.altMessage}} />
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="break-word">
+            <:header>
+              Clé
+            </:header>
+            <:cell>
+              {{badge.key}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="break-word">
+            <:header>
+              Nom
+            </:header>
+            <:cell>
+              {{badge.title}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="break-word">
+            <:header>
+              Message
+            </:header>
+            <:cell>
+              {{badge.message}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="badges-table-header__parameters">
+            <:header>
+              <PixTooltip @isWide={{true}}>
+                <:triggerElement>
+                  Paramètres
+                  <PixIcon @name="help" />
+                </:triggerElement>
+                <:tooltip>
+                  {{t "components.badges.tooltips.parameters" htmlSafe=true}}
+                </:tooltip>
+              </PixTooltip>
+            </:header>
+            <:cell>
+              <div class="badges-table-body__content">
+                <PixTag class="badges-table-body__tag" @color={{if badge.isAlwaysVisible "tertiary" "error"}}>
+                  <PixIcon @name={{if badge.isAlwaysVisible "check" "close"}} />
+                  {{if badge.isAlwaysVisible "En lacune" "Pas en lacune"}}
+                </PixTag>
+                <PixTag class="badges-table-body__tag" @color={{if badge.isCertifiable "success" "error"}}>
+                  <PixIcon @name={{if badge.isCertifiable "check" "close"}} />
+                  {{if badge.isCertifiable "Certifiable" "Pas certifiable"}}
+                </PixTag>
+              </div>
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              Actions
+            </:header>
+            <:cell>
+              <div class="badges-table-body__content">
+                <PixButtonLink
+                  @variant="secondary"
+                  @route="authenticated.target-profiles.target-profile.badges.badge"
+                  @size="small"
+                  @model={{badge.id}}
+                  aria-label="Voir le détail du résultat thématique {{badge.title}}"
+                >
+                  Voir le détail
+                </PixButtonLink>
+                <PixButton
+                  @size="small"
+                  @variant="error"
+                  @triggerAction={{fn this.toggleDisplayConfirm badge.id}}
+                  class="badges-table-actions-delete"
+                  @iconBefore="delete"
+                  aria-label="Supprimer le résultat thématique {{badge.title}}"
+                >
+                  Supprimer
+                </PixButton>
+              </div>
+            </:cell>
+          </PixTableColumn>
+        </:columns>
+      </PixTable>
+    {{else}}
+      <div class="table__empty">Aucun résultat thématique associé</div>
+    {{/if}}
 
     <ConfirmPopup
       @message="Êtes-vous sûr de vouloir supprimer ce résultat thématique ? (Uniquement si le RT n'a pas encore été assigné)"

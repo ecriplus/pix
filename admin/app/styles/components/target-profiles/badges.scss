@@ -1,28 +1,7 @@
 @use 'pix-design-tokens/typography';
 
-.badges-table {
-  @extend %pix-body-m;
-}
-
 .badges-table-header {
-  &__id {
-    width: 110px;
-  }
-
-  &__key {
-    width: 120px;
-  }
-
-  &__name {
-    width: 250px;
-  }
-
-  &__image {
-    width: 130px;
-  }
-
   &__parameters {
-    width: 175px;
 
     .pix-tooltip {
       display: block;
@@ -39,10 +18,6 @@
       }
     }
   }
-
-  &__actions {
-    width: 180px;
-  }
 }
 
 .badges-table-body {
@@ -51,46 +26,18 @@
       display: block;
       width: 80px;
       height: 80px;
-      margin: 0 auto;
-      object-fit: contain;
-      object-position: center;
     }
   }
 
-  &__key {
-    word-wrap: break-word;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-1x);
   }
 
-  &__parameters {
-    & > * {
-      width: 100%;
-
-      & + * {
-        margin-top: var(--pix-spacing-2x);
-      }
-    }
-
-    .valid::before,
-    .not-valid::before {
-      margin-right: 0.25ch;
-    }
-
-    .valid::before {
-      content: '✔'
-    }
-
-    .not-valid::before {
-      content: '✘'
-    }
-  }
-
-  &__actions {
-    & > * {
-      width: 100%;
-    }
-
-    & > *:not(:first-child) {
-      margin-top: var(--pix-spacing-2x);
-    }
+  &__tag {
+    display: flex;
+    gap: var(--pix-spacing-1x);
+    align-items: center;
   }
 }
