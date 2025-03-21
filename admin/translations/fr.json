@@ -465,6 +465,13 @@
         }
       }
     },
+    "target-profiles": {
+      "list": {
+        "table": {
+          "caption": "Liste des profil cibles. Contient l'identifiant, le nom interne, la catégorie, la date de création et le statut."
+        }
+      }
+    },
     "users": {
       "campaign-participations": {
         "table": {
