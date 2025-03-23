@@ -39,7 +39,7 @@
   "devDependencies": {
     "@1024pix/ember-matomo-tag-manager": "^2.4.3",
     "@1024pix/ember-testing-library": "^3.0.6",
-    "@1024pix/eslint-plugin": "^2.1.0",
+    "@1024pix/eslint-plugin": "^2.1.1",
     "@1024pix/pix-ui": "^55.5.0",
     "@1024pix/stylelint-config": "^5.1.27",
     "@1024pix/web-components": "^0.2.7",
