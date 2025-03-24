@@ -556,12 +556,12 @@
           "exit-extra-information": "Quitter la surveillance de la session {sessionId}"
         },
         "address": "Nom du site",
-        "companion": {
-          "link": "Lien vers la documentation d’installation/activation",
-          "message": "L’extension Pix Companion est désormais obligatoire pour tous les candidats."
-        },
         "information": "Attention, assurez-vous que tous les candidats aient terminé leur test avant de quitter la surveillance. Pour reprendre la surveillance de cette session, vous devrez entrer à nouveau son numéro de session et son mot de passe.",
         "invigilator": "Surveillant(s)",
+        "invigilator-documentation": {
+          "link": "Documentation sur la gestion des signalements",
+          "message": "Important : Les problèmes techniques liés aux questions doivent uniquement être gérés pendant le test depuis l’interface du candidat et l’Espace Surveillant (ces signalements ne pourront pas être pris en compte a posteriori)."
+        },
         "invigilator-kit": {
           "extra-information": "Télécharger le kit surveillant",
           "label": "Kit surveillant"

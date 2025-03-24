@@ -37,11 +37,7 @@ export default class Header extends Component {
     return this.router.replaceWith('login-session-supervisor');
   }
 
-  get pixCompanionDocumentationUrl() {
-    return this.url.pixCompanionDocumentationUrl;
-  }
-
-  get isPixCompanionExtensionEnabled() {
-    return this.featureToggles.featureToggles?.isPixCompanionEnabled;
+  get invigilatorDocumentationUrl() {
+    return this.url.invigilatorDocumentationUrl;
   }
 }

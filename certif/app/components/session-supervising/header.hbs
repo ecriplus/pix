@@ -55,20 +55,18 @@
     </div>
   </dl>
 
-  {{#if this.isPixCompanionExtensionEnabled}}
-    <PixNotificationAlert @type="info" @withIcon={{true}}>
-      {{t "pages.session-supervising.header.companion.message"}}
-      <a
-        href={{this.pixCompanionDocumentationUrl}}
-        target="_blank"
-        class="link session-supervising-header__companion-link"
-        rel="noopener noreferrer"
-      >
-        {{t "pages.session-supervising.header.companion.link"}}
-        <PixIcon @name="openNew" @title={{t "navigation.external-link-title"}} />
-      </a>
-    </PixNotificationAlert>
-  {{/if}}
+  <PixNotificationAlert @type="info" @withIcon={{true}}>
+    {{t "pages.session-supervising.header.invigilator-documentation.message"}}
+    <a
+      href={{this.invigilatorDocumentationUrl}}
+      target="_blank"
+      class="link session-supervising-header__invigilator-link"
+      rel="noopener noreferrer"
+    >
+      {{t "pages.session-supervising.header.invigilator-documentation.link"}}
+      <PixIcon @name="openNew" @title={{t "navigation.external-link-title"}} />
+    </a>
+  </PixNotificationAlert>
 
   <PixButton
     class="session-supervising-header__download-button"
