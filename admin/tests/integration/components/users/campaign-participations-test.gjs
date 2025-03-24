@@ -1,11 +1,11 @@
-import { clickByName, render } from '@1024pix/ember-testing-library';
+import { clickByName, render, within } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
 import Service from '@ember/service';
 import CampaignParticipations from 'pix-admin/components/users/campaign-participations';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest, { t } from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | users | campaign-participation', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -32,7 +32,9 @@ module('Integration | Component | users | campaign-participation', function (hoo
       const screen = await render(<template><CampaignParticipations @participations={{participations}} /></template>);
 
       // then
-      assert.strictEqual(screen.getAllByLabelText('Participation').length, 2);
+      const table = screen.getByRole('table', { name: t('components.users.campaign-participations.table.caption') });
+      const rows = within(table).getAllByRole('row');
+      assert.strictEqual(rows.length, 3);
     });
 
     test('it should display an empty table when no participations', async function (assert) {

@@ -48,24 +48,12 @@ module('Integration | Component | users | certification-centers | membership-ite
     );
 
     // then
-    assert
-      .dom(screen.getByLabelText('Informations du Centre de certification Centre Jean-Bonboeur'))
-      .containsText(certificationCenterMembership.id);
-    assert
-      .dom(screen.getByLabelText('Informations du Centre de certification Centre Jean-Bonboeur'))
-      .containsText(certificationCenter.id);
-    assert
-      .dom(screen.getByLabelText('Informations du Centre de certification Centre Jean-Bonboeur'))
-      .containsText(certificationCenter.name);
-    assert
-      .dom(screen.getByLabelText('Informations du Centre de certification Centre Jean-Bonboeur'))
-      .containsText(certificationCenter.type);
-    assert
-      .dom(screen.getByLabelText('Informations du Centre de certification Centre Jean-Bonboeur'))
-      .containsText(certificationCenter.externalId);
-    assert
-      .dom(screen.getByLabelText('Informations du Centre de certification Centre Jean-Bonboeur'))
-      .containsText('Membre');
+    assert.dom(screen.getByRole('cell', { name: certificationCenterMembership.id })).exists();
+    assert.dom(screen.getByRole('cell', { name: certificationCenter.id })).exists();
+    assert.dom(screen.getByRole('cell', { name: certificationCenter.name })).exists();
+    assert.dom(screen.getByRole('cell', { name: certificationCenter.type })).exists();
+    assert.dom(screen.getByRole('cell', { name: certificationCenter.externalId })).exists();
+    assert.dom(screen.getByRole('cell', { name: 'Membre' })).exists();
     assert
       .dom(screen.getByRole('button', { name: 'Modifier le rôle du membre de ce centre de certification' }))
       .exists();

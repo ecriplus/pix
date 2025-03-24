@@ -1,10 +1,10 @@
-import { clickByName, render } from '@1024pix/ember-testing-library';
+import { clickByName, render, within } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import OrganizationLearnerInformation from 'pix-admin/components/users/user-detail-personal-information/organization-learner-information';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest, { t } from '../../../../helpers/setup-intl-rendering';
 
 module(
   'Integration | Component | users | user-detail-personal-information | organization-learner-information',
@@ -55,7 +55,11 @@ module(
         );
 
         // then
-        assert.strictEqual(screen.getAllByLabelText('Inscription').length, 2);
+        const table = screen.getByRole('table', {
+          name: t('components.users.organization-learner-information.table.caption'),
+        });
+        const rows = within(table).getAllByRole('row');
+        assert.strictEqual(rows.length, 3);
       });
 
       test('should display organization learner’s info', async function (assert) {

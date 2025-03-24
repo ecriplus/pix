@@ -1,3 +1,5 @@
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { t } from 'ember-intl';
 
 <template>
@@ -8,29 +10,41 @@ import { t } from 'ember-intl';
     <p>Total pix obtenu</p>
   </div>
 
-  <div class="user-profile-table">
-    <table class="table-admin">
-      <caption class="screen-reader-only">Pix et niveau obtenus en fonction des compétences</caption>
-      <thead>
-        <tr>
-          <th scope="col">Compétences</th>
-          <th scope="col">Pix</th>
-          <th scope="col">Niveau</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each @profile.scorecards as |scorecard|}}
-          <tr>
-            <td>{{scorecard.name}}</td>
-            <td>{{scorecard.earnedPix}}</td>
-            <td>{{scorecard.level}}</td>
-          </tr>
-        {{else}}
-          <tr>
-            <td colspan="10" class="table-admin-empty">{{t "common.tables.empty-result"}}</td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
-  </div>
+  {{#if @profile.scorecards}}
+    <PixTable
+      @variant="primary"
+      @data={{@profile.scorecards}}
+      @caption="Pix et niveau obtenus en fonction des compétences"
+      class="user-profile-table"
+    >
+      <:columns as |scorecard context|>
+        <PixTableColumn @context={{context}}>
+          <:header>
+            Compétences
+          </:header>
+          <:cell>
+            {{scorecard.name}}
+          </:cell>
+        </PixTableColumn>
+        <PixTableColumn @context={{context}}>
+          <:header>
+            Pix
+          </:header>
+          <:cell>
+            {{scorecard.earnedPix}}
+          </:cell>
+        </PixTableColumn>
+        <PixTableColumn @context={{context}}>
+          <:header>
+            Niveau
+          </:header>
+          <:cell>
+            {{scorecard.level}}
+          </:cell>
+        </PixTableColumn>
+      </:columns>
+    </PixTable>
+  {{else}}
+    <div class="table__empty">{{t "common.tables.empty-result"}}</div>
+  {{/if}}
 </template>
