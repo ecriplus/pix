@@ -40,44 +40,43 @@
     "global": {
       "meshlevel": {
         "LEVEL_ADVANCED_5": {
-          "label": "Advanced 1",
-          "summary": "",
-          "description": ""
+          "label": "Geavanceerd 1",
+          "summary": "Je hebt geavanceerde digitale vaardigheden en gedegen kennis waarmee je zelfstandig met nieuwe situaties kunt omgaan. Je kunt anderen helpen.",
+          "description": "Je kunt specialistische tools gebruiken om betrouwbare informatie te zoeken, sociale netwerken te beheren en afbeeldingen en video's te bewerken. Je weet hoe je gegevensanalyses en geschikte grafische weergaven moet maken. Je weet hoe je een digitale omgeving inricht (installatie en configuratie). Je bent bekend met de problematiek rond tracking en gegevensverzameling. Je begrijpt de milieu- en maatschappelijke gevolgen van digitaal gebruik en weet hoe je je werkwijzen kunt aanpassen."
         },
         "LEVEL_ADVANCED_6": {
-          "label": "Advanced 2",
-          "summary": "",
-          "description": ""
+          "label": "Geavanceerd 2",
+          "summary": "Je beschikt over geavanceerde digitale vaardigheden en diepgaande kennis die je op een creatieve en veilige manier kunt inzetten voor jezelf of voor anderen. Je kunt andere mensen helpen hun vaardigheden te ontwikkelen.",
+          "description": "Je hebt volledige controle over je digitale omgeving zodat je content kunt creëren en distribueren, communiceren en samenwerken. Je weet hoe je je online aanwezigheid beheert en kiest de juiste instellingen voor je uitzendingen. U kunt bepaalde taken programmeren en automatiseren (gegevensverwerking, back-up, bijwerken, enz.). Je kunt anderen helpen om hun praktijken te beveiligen en in het bijzonder om hun impact op het milieu en de gezondheid te beperken."
         },
         "LEVEL_BEGINNER_1": {
           "label": "Beginner 1",
-          "summary": "",
-          "description": ""
+          "summary": "U hebt eenvoudige digitale praktijken en hebt vaak hulp nodig",
+          "description": "Je kunt je weg vinden in de interfaces van de digitale hulpmiddelen die je al gebruikt (telefoon, tablet, computer). Met af en toe ondersteuning kun je een website bezoeken, berichten lezen en beantwoorden (sms'jes, e-mails, enz.), eenvoudige toepassingen gebruiken op je telefoon of tablet en toegang krijgen tot online diensten."
         },
         "LEVEL_BEGINNER_2": {
           "label": "Beginner 2",
-          "summary": "",
-          "description": ""
+          "summary": "Je hebt eenvoudige digitale praktijken, met hulp als het moeilijk wordt.",
+          "description": "In je gebruikelijke digitale omgeving weet je hoe je informatie op het web kunt zoeken, een bestand kunt downloaden en terugvinden, elektronische berichten kunt raadplegen en versturen en je apparaten kunt verbinden met het internet (computers, tablets, telefoons). Je kunt tekst met eenvoudige opmaak invoeren en opslaan. Je weet dat sommige online gepubliceerde informatie vals is en dat het belangrijk is om je accounts te beschermen met veilige wachtwoorden."
         },
         "LEVEL_EXPERT_7": {
           "label": "Expert 1",
-          "summary": "",
-          "description": ""
+          "summary": "Je beschikt over geoptimaliseerde digitale praktijken en deskundige kennis waarmee je complexe en nieuwe situaties methodisch kunt aanpakken.",
+          "description": "Je bent in staat een behoefte te analyseren, documentatie te raadplegen, zelfs technische documentatie, en digitale oplossingen te evalueren om de meest optimale oplossing te implementeren of zelfs zelf tools te ontwikkelen. U begrijpt de economische, sociale en ethische aspecten van digitale technologieën en kunt kritisch nadenken over uw digitale praktijken. Je bent in staat om je te bekwamen in nieuwe technieken en hebt een goed begrip van de meest recente technologische ontwikkelingen, zoals die mogelijk zijn gemaakt door kunstmatige intelligentie."
         },
         "LEVEL_EXPERT_8": {
           "label": "Expert 2",
-          "summary": "",
-          "description": ""
+          "summary": "Je bent in staat om je oplossingen voor nieuwe en specifieke problemen te documenteren zodat ze gedeeld kunnen worden."
         },
         "LEVEL_INDEPENDENT_3": {
-          "label": "Independent 1",
-          "summary": "",
-          "description": ""
+          "label": "Onafhankelijk 1",
+          "summary": "Je kunt eenvoudige digitale taken zelfstandig uitvoeren in de meeste alledaagse situaties.",
+          "description": "Je weet hoe je op het web moet surfen om diepgaand onderzoek te doen aan de hand van relevante informatie. Je kunt deelnemen aan samenwerkingsactiviteiten (e-mail, gedeelde agenda, videovergaderingen, gedeelde documenten). Je weet hoe je de meest voorkomende functies van standaardsoftware (tekstverwerking en spreadsheets) moet gebruiken. U bent zich bewust van de risico's van uw digitale praktijken en de noodzaak om deze te beveiligen, evenals van de milieu-impact van uw digitale gebruik. Je weet hoe je veelvoorkomende problemen oplost (wachtwoord, verbinding)."
         },
         "LEVEL_INDEPENDENT_4": {
-          "label": "Independent 2",
-          "summary": "",
-          "description": ""
+          "label": "Onafhankelijk 2",
+          "summary": "Je voelt je op je gemak in alle gangbare digitale situaties en hebt een goede beheersing van het vocabulaire dat bij digitale technologieën hoort.",
+          "description": "Je weet hoe je een zoekstrategie voor informatie op het web en via sociale netwerken opzet en hoe je de betrouwbaarheid van de gevonden informatie controleert. Je kunt de belangrijkste functies van samenwerkingstools gebruiken en documenten maken met verschillende software (tekstverwerking, spreadsheets, diavoorstellingen, afbeeldingen). Je kunt veilige praktijken implementeren op het gebied van de bescherming van persoonlijke gegevens en apparaten. Je kunt je digitale praktijken aanpassen om hun impact op het milieu en je gezondheid te beperken."
         }
       }
     }

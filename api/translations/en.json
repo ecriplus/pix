@@ -183,44 +183,43 @@
     "global": {
       "meshlevel": {
         "LEVEL_ADVANCED_5": {
+          "description": "You are able to use specialist tools to search for reliable information, manage social networks and edit images and videos. You know how to produce data analyses and appropriate graphic representations. You know how to set up a digital environment (installation and configuration). You are familiar with the issues surrounding tracking and data collection. You understand the environmental and societal impacts of digital usage and know how to adapt your practices",
           "label": "Advanced 1",
-          "summary": "",
-          "description": ""
+          "summary": "You have advanced digital skills and sound knowledge enabling you to deal with new situations on your own. You can help others."
         },
         "LEVEL_ADVANCED_6": {
+          "description": "You have full control over your digital environment so that you can create and distribute content, communicate and collaborate. You know how to manage your online presence and choose the right settings for your broadcasts. You can programme and automate certain tasks (data processing, backup, updating, etc.). You can help others to secure their practices, and in particular limit their environmental and health impact.",
           "label": "Advanced 2",
-          "summary": "",
-          "description": ""
+          "summary": "You have advanced digital skills and in-depth knowledge that you can put to good use, for yourself or others, in a creative and secure way. You can help other people develop their skills."
         },
         "LEVEL_BEGINNER_1": {
+          "description": "You can find your way around the interfaces of the digital tools you've already used (phone, tablet, computer). With occasional support, you can visit a website, read and reply to messages (text messages, emails, etc.), use simple applications on your phone or tablet and access online services.",
           "label": "Beginner 1",
-          "summary": "",
-          "description": ""
+          "summary": "You have simple digital practices and often need help"
         },
         "LEVEL_BEGINNER_2": {
+          "description": "In your usual digital environment, you know how to search for information on the web, download a file and find it again, consult and send electronic messages and connect your devices to the internet (computers, tablets, phones). You can enter text with simple formatting and save it. You know that some information published online is false and that it is important to protect your accounts with secure passwords.",
           "label": "Beginner 2",
-          "summary": "",
-          "description": ""
+          "summary": "You have simple digital practices, with help when the going gets tough."
         },
         "LEVEL_EXPERT_7": {
+          "description": "You will be able to analyse a need, consult documentation, even technical documentation, and evaluate digital solutions in order to implement the most optimal solution, or even develop tools yourself. You will understand the economic, social and ethical issues associated with digital technologies and be able to think critically about your digital practices. You will be able to train in new techniques and have a good grasp of the most recent technological advances, such as those made possible by artificial intelligence.",
           "label": "Expert 1",
-          "summary": "",
-          "description": ""
+          "summary": "You have optimised digital practices and expert knowledge enabling you to tackle complex and new situations methodically."
         },
         "LEVEL_EXPERT_8": {
           "label": "Expert 2",
-          "summary": "",
-          "description": ""
+          "summary": "You are able to document your solutions to new and specific problems so that they can be shared."
         },
         "LEVEL_INDEPENDENT_3": {
+          "description": "You know how to surf the Web to carry out in-depth research using relevant information. You can take part in collaborative activities (e-mail, shared diary, video meetings, shared documents). You know how to use the most common functions of standard software (word processing and spreadsheets). You are aware of the risks associated with your digital practices and the need to secure them, as well as the environmental impact of your digital uses. You know how to solve common problems (password, connection).",
           "label": "Independent 1",
-          "summary": "",
-          "description": ""
+          "summary": "You will be able to carry out simple digital tasks independently in most everyday situations."
         },
         "LEVEL_INDEPENDENT_4": {
+          "description": "You know how to set up an information search strategy on the web and via social networks and check the reliability of the information you find. You can use the main functions of collaborative tools and create documents using different software (word processing, spreadsheets, slideshows, images). You can implement secure practices in terms of personal data and device protection. You can adapt your digital practices to limit their impact on the environment and on your health.",
           "label": "Independent 2",
-          "summary": "",
-          "description": ""
+          "summary": "You are at ease in all common digital situations and have a good command of the vocabulary associated with digital technologies."
         }
       }
     }

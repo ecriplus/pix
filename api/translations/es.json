@@ -40,44 +40,43 @@
     "global": {
       "meshlevel": {
         "LEVEL_ADVANCED_5": {
-          "label": "Advanced 1",
-          "summary": "",
-          "description": ""
+          "label": "Avanzado 1",
+          "summary": "Tienes competencias digitales avanzadas y conocimientos sólidos que te permiten afrontar nuevas situaciones por ti mismo. Puedes ayudar a los demás.",
+          "description": "Eres capaz de utilizar herramientas especializadas para buscar información fiable, gestionar redes sociales y editar imágenes y vídeos. Sabes elaborar análisis de datos y representaciones gráficas adecuadas. Sabes configurar un entorno digital (instalación y configuración). Conoces las cuestiones relacionadas con el seguimiento y la recopilación de datos. Comprendes las repercusiones medioambientales y sociales del uso digital y sabes cómo adaptar tus prácticas."
         },
         "LEVEL_ADVANCED_6": {
-          "label": "Advanced 2",
-          "summary": "",
-          "description": ""
+          "label": "Avanzado 2",
+          "summary": "Tienes competencias digitales avanzadas y conocimientos profundos que puedes poner en práctica, para ti o para otros, de forma creativa y segura. Puedes ayudar a otras personas a desarrollar sus competencias.",
+          "description": "Tienes pleno control de tu entorno digital para crear y distribuir contenidos, comunicarte y colaborar. Sabe cómo gestionar su presencia en línea y elegir la configuración adecuada para sus emisiones. Puedes programar y automatizar determinadas tareas (tratamiento de datos, copias de seguridad, actualización, etc.). Puedes ayudar a otros a asegurar sus prácticas y, en particular, a limitar su impacto medioambiental y sanitario."
         },
         "LEVEL_BEGINNER_1": {
-          "label": "Beginner 1",
-          "summary": "",
-          "description": ""
+          "label": "Principiante 1",
+          "summary": "Tiene prácticas digitales sencillas y a menudo necesita ayuda",
+          "description": "Puede orientarse en las interfaces de las herramientas digitales que ya ha utilizado (teléfono, tableta, ordenador). Con ayuda ocasional, puedes visitar un sitio web, leer y responder mensajes (mensajes de texto, correos electrónicos, etc.), utilizar aplicaciones sencillas en tu teléfono o tableta y acceder a servicios en línea."
         },
         "LEVEL_BEGINNER_2": {
-          "label": "Beginner 2",
-          "summary": "",
-          "description": ""
+          "label": "Principiante 2",
+          "summary": "Tienes prácticas digitales sencillas, con ayuda cuando las cosas se ponen difíciles.",
+          "description": "En tu entorno digital habitual, sabes buscar información en la web, descargar un archivo y volver a encontrarlo, consultar y enviar mensajes electrónicos y conectar tus dispositivos a internet (ordenadores, tabletas, teléfonos). Sabes introducir texto con un formato sencillo y guardarlo. Sabes que algunas informaciones publicadas en internet son falsas y que es importante proteger tus cuentas con contraseñas seguras."
         },
         "LEVEL_EXPERT_7": {
-          "label": "Expert 1",
-          "summary": "",
-          "description": ""
+          "label": "Experto 1",
+          "summary": "Posee prácticas digitales optimizadas y conocimientos especializados que le permiten abordar metódicamente situaciones nuevas y complejas.",
+          "description": "Serás capaz de analizar una necesidad, consultar documentación, incluso técnica, y evaluar soluciones digitales para aplicar la más óptima, o incluso desarrollar herramientas por ti mismo. Comprenderás las cuestiones económicas, sociales y éticas asociadas a las tecnologías digitales y serás capaz de reflexionar críticamente sobre tus prácticas digitales. Podrás formarte en nuevas técnicas y dominar los avances tecnológicos más recientes, como los que posibilita la inteligencia artificial."
         },
         "LEVEL_EXPERT_8": {
-          "label": "Expert 2",
-          "summary": "",
-          "description": ""
+          "label": "Experto 2",
+          "summary": "Podrá documentar sus soluciones a problemas nuevos y específicos para que puedan compartirse."
         },
         "LEVEL_INDEPENDENT_3": {
-          "label": "Independent 1",
-          "summary": "",
-          "description": ""
+          "label": "Independiente 1",
+          "summary": "Podrá realizar tareas digitales sencillas de forma autónoma en la mayoría de las situaciones cotidianas.",
+          "description": "Sabes navegar por Internet para realizar investigaciones en profundidad utilizando información relevante. Sabes participar en actividades colaborativas (correo electrónico, agenda compartida, reuniones de vídeo, documentos compartidos). Sabes utilizar las funciones más habituales de los programas informáticos estándar (tratamiento de textos y hojas de cálculo). Eres consciente de los riesgos asociados a tus prácticas digitales y de la necesidad de protegerlas, así como del impacto medioambiental de tus usos digitales. Sabes resolver problemas habituales (contraseña, conexión)."
         },
         "LEVEL_INDEPENDENT_4": {
-          "label": "Independent 2",
-          "summary": "",
-          "description": ""
+          "label": "Independiente 2",
+          "summary": "Se desenvuelve con soltura en todas las situaciones digitales habituales y domina el vocabulario asociado a las tecnologías digitales.",
+          "description": "Sabes establecer una estrategia de búsqueda de información en la web y a través de las redes sociales y comprobar la fiabilidad de la información que encuentras. Sabes utilizar las principales funciones de las herramientas de colaboración y crear documentos utilizando distintos programas informáticos (tratamiento de textos, hojas de cálculo, presentaciones de diapositivas, imágenes). Puedes aplicar prácticas seguras en materia de protección de datos personales y de dispositivos. Puedes adaptar tus prácticas digitales para limitar su impacto en el medio ambiente y en tu salud."
         }
       }
     }
