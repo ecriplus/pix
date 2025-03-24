@@ -274,7 +274,7 @@
           "element": {
             "id": "be1b5866-6475-4bed-a775-e07be73f156e",
             "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clic-1erdoublesclics/index.html\" width=\"100%\" height=\"394\"></iframe>"
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clic-1erdoublesclics/index.html\" height=\"394\"></iframe>"
           }
         }
       ]
@@ -388,7 +388,7 @@
           "element": {
             "id": "fc26348a-dea8-4010-bfa6-efd0252b9516",
             "type": "text",
-            "content": "<p><strong>Dans la zone ci-dessous, entraînez-vous à faire un clic droit puis un clic gauche à la suite.</strong></p><p><br></p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-clicdroitpuisgauche/index.html\" width=\"100%\" height=\"394\"></iframe>"
+            "content": "<p><strong>Dans la zone ci-dessous, entraînez-vous à faire un clic droit puis un clic gauche à la suite.</strong></p><p><br></p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-clicdroitpuisgauche/index.html\" height=\"394\"></iframe>"
           }
         }
       ]
@@ -422,7 +422,7 @@
           "element": {
             "id": "fe6818f4-ad9d-4b5e-bc58-b18cd1d6cee8",
             "type": "text",
-            "content": "<p>Récapitulons tout ce que vous venez de voir dans ce module. <br></p><p><strong>Dans l'image ci-dessous, déplacez votre pointeur sur le dessin de la souris.</strong> <br>Pour chaque bouton, suivez les consignes.</p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-recap3boutonsbleu/index.html\" width=\"100%\" height=\"394\"></iframe>"
+            "content": "<p>Récapitulons tout ce que vous venez de voir dans ce module. <br></p><p><strong>Dans l'image ci-dessous, déplacez votre pointeur sur le dessin de la souris.</strong> <br>Pour chaque bouton, suivez les consignes.</p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-recap3boutonsbleu/index.html\" height=\"394\"></iframe>"
           }
         },
         {
