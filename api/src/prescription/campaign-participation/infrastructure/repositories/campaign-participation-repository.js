@@ -58,6 +58,20 @@ const batchUpdate = async function (campaignParticipations) {
   return Promise.all(campaignParticipations.map((campaignParticipation) => update(campaignParticipation)));
 };
 
+const getLocked = async function (id) {
+  const knexConn = DomainTransaction.getConnection();
+
+  const campaignParticipationDTO = await knexConn.from('campaign-participations').forUpdate().where({ id }).first();
+  const campaignDTO = await knexConn.from('campaigns').where({ id: campaignParticipationDTO.campaignId }).first();
+  const assessmentDTOs = await knexConn.from('assessments').where({ campaignParticipationId: id });
+  const campaign = new Campaign(campaignDTO);
+  return new CampaignParticipation({
+    ...campaignParticipationDTO,
+    campaign,
+    assessments: assessmentDTOs.map((assessmentDTO) => new Assessment({ ...assessmentDTO, campaign })),
+  });
+};
+
 const get = async function (id) {
   const knexConn = DomainTransaction.getConnection();
 
@@ -253,6 +267,7 @@ export {
   getByCampaignIds,
   getCampaignParticipationsForOrganizationLearner,
   getCodeOfLastParticipationToProfilesCollectionCampaignForUser,
+  getLocked,
   hasAssessmentParticipations,
   isRetrying,
   remove,

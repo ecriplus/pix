@@ -9,7 +9,7 @@ const shareCampaignResult = async function ({
   participationResultCalculationJobRepository,
   participationSharedJobRepository,
 }) {
-  const campaignParticipation = await campaignParticipationRepository.get(campaignParticipationId);
+  const campaignParticipation = await campaignParticipationRepository.getLocked(campaignParticipationId);
 
   _checkUserIsOwnerOfCampaignParticipation(campaignParticipation, userId);
 

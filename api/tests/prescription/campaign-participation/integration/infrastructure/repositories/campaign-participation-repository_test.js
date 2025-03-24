@@ -302,6 +302,89 @@ describe('Integration | Repository | Campaign Participation', function () {
     });
   });
 
+  describe('#getLocked', function () {
+    let campaignId;
+    let assessment;
+    let participation;
+
+    beforeEach(async function () {
+      campaignId = databaseBuilder.factory.buildCampaign({}).id;
+      participation = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId,
+        validatedSkillsCount: 12,
+      });
+      assessment = databaseBuilder.factory.buildAssessment({
+        type: 'CAMPAIGN',
+        campaignParticipationId: participation.id,
+        createdAt: new Date('2000-01-01T10:00:00Z'),
+      });
+      await databaseBuilder.commit();
+    });
+
+    it('should return a campaign participation object', async function () {
+      // when
+      const foundCampaignParticipation = await DomainTransaction.execute(async () => {
+        return campaignParticipationRepository.getLocked(participation.id);
+      });
+
+      // then
+      expect(foundCampaignParticipation.id).to.equal(participation.id);
+      expect(foundCampaignParticipation.validatedSkillsCount).to.equal(12);
+    });
+
+    it('returns the campaign of campaignParticipation', async function () {
+      // when
+      const foundCampaignParticipation = await DomainTransaction.execute(async () => {
+        return campaignParticipationRepository.getLocked(participation.id);
+      });
+
+      // then
+      expect(foundCampaignParticipation.campaign.id).to.equal(campaignId);
+    });
+
+    it('returns the assessments of campaignParticipation', async function () {
+      // when
+      const foundCampaignParticipation = await DomainTransaction.execute(async () => {
+        return campaignParticipationRepository.getLocked(participation.id);
+      });
+
+      const assessmentIds = foundCampaignParticipation.assessments.map(({ id }) => id);
+
+      // then
+      expect(assessmentIds).to.exactlyContain([assessment.id]);
+    });
+
+    it('should lock table for update', async function () {
+      const error = await catchErr(DomainTransaction.execute)(async () => {
+        campaignParticipationRepository.getLocked(participation.id);
+        // we mimick a concurrent call on the campaign-participations table on the same row
+        return knex('campaign-participations').where({ id: participation.id }).first().forUpdate().timeout(100);
+      });
+      expect(error).instanceOf(Error);
+      expect(error.message).to.equal('Defined query timeout of 100ms exceeded when running query.');
+    });
+
+    it('should not lock table for update', async function () {
+      const campaignParticipationNotSharedId = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId,
+        status: STARTED,
+        sharedAt: null,
+      }).id;
+      await databaseBuilder.commit();
+
+      const notLockedParticipation = await DomainTransaction.execute(async () => {
+        campaignParticipationRepository.getLocked(participation.id);
+        // we mimick a concurrent call on the campaign-participations table on another row
+        return knex('campaign-participations')
+          .where({ id: campaignParticipationNotSharedId })
+          .first()
+          .forUpdate()
+          .timeout(100);
+      });
+      expect(notLockedParticipation.id).to.equal(campaignParticipationNotSharedId);
+    });
+  });
+
   describe('#getByCampaignIds', function () {
     it('should return participations', async function () {
       // given
