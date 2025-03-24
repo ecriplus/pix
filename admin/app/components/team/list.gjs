@@ -1,5 +1,7 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { concat, fn } from '@ember/helper';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
@@ -92,81 +94,96 @@ export default class List extends Component {
   }
 
   <template>
-    <div class="content-text content-text--small">
-      <table aria-label="Liste des membres" class="table-admin">
-        <thead>
-          <tr>
-            <th>Prénom</th>
-            <th>Nom</th>
-            <th>Adresse e-mail</th>
-            <th>Rôle</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        {{#if @members}}
-          <tbody>
-            {{#each @members as |member|}}
-              <tr aria-label={{concat member.firstName " " member.lastName}}>
-                <td>{{member.firstName}}</td>
-                <td>{{member.lastName}}</td>
-                <td class="break-word">{{member.email}}</td>
-                <td>
-                  {{#if member.isInEditionMode}}
-                    <PixSelect
-                      @onChange={{fn this.setAdminRoleSelection member}}
-                      @value={{or member.updatedRole member.role}}
-                      @options={{@roles}}
-                      @screenReaderOnly={{true}}
-                      @hideDefaultOption={{true}}
-                    >
-                      <:label>Sélectionner un rôle</:label>
-                      <:default as |role|>{{role.label}}</:default>
-                    </PixSelect>
-                  {{else}}
-                    {{member.role}}
-                  {{/if}}
-                </td>
-                <td>
-                  <div class="admin-member-item-actions">
-                    {{#if member.isInEditionMode}}
-                      <PixButton
-                        class="admin-member-item-actions__button"
-                        aria-label="Valider la modification de rôle"
-                        @triggerAction={{fn this.updateMemberRole member}}
-                      >
-                        {{t "common.actions.validate"}}
-                      </PixButton>
-                    {{else}}
-                      <PixButton
-                        class="admin-member-item-actions__button"
-                        aria-label={{concat "Modifier le rôle de l'agent " member.firstName " " member.lastName}}
-                        @triggerAction={{fn this.toggleEditionModeForThisMember member}}
-                        @iconBefore="edit"
-                      >
-                        {{t "common.actions.edit"}}
-                      </PixButton>
-                    {{/if}}
-                    <PixButton
-                      class="admin-member-item-actions__button"
-                      @variant="error"
-                      aria-label={{concat "Désactiver l'agent " member.firstName " " member.lastName}}
-                      @triggerAction={{fn this.displayDeactivateConfirmationPopup member}}
-                      @iconBefore="delete"
-                    >
-                      {{t "common.actions.deactivate"}}
-                    </PixButton>
+    {{#if @members}}
+      <PixTable @variant="primary" @data={{@members}} @caption={{t "pages.team.table.caption"}}>
+        <:columns as |member context|>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              Prénom
+            </:header>
+            <:cell>
+              {{member.firstName}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="break-word">
+            <:header>
+              Nom
+            </:header>
+            <:cell>
+              {{member.lastName}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="break-word">
+            <:header>
+              Adresse e-mail
+            </:header>
+            <:cell>
+              {{member.email}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              Rôle
+            </:header>
+            <:cell>
+              {{#if member.isInEditionMode}}
+                <PixSelect
+                  @onChange={{fn this.setAdminRoleSelection member}}
+                  @value={{or member.updatedRole member.role}}
+                  @options={{@roles}}
+                  @screenReaderOnly={{true}}
+                  @hideDefaultOption={{true}}
+                >
+                  <:label>Sélectionner un rôle</:label>
+                  <:default as |role|>{{role.label}}</:default>
+                </PixSelect>
+              {{else}}
+                {{member.role}}
+              {{/if}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              Actions
+            </:header>
+            <:cell>
+              <div class="admin-member-item-actions">
+                {{#if member.isInEditionMode}}
+                  <PixButton
+                    class="admin-member-item-actions__button"
+                    aria-label="Valider la modification de rôle"
+                    @triggerAction={{fn this.updateMemberRole member}}
+                  >
+                    {{t "common.actions.validate"}}
+                  </PixButton>
+                {{else}}
+                  <PixButton
+                    class="admin-member-item-actions__button"
+                    aria-label={{concat "Modifier le rôle de l'agent " member.firstName " " member.lastName}}
+                    @triggerAction={{fn this.toggleEditionModeForThisMember member}}
+                    @iconBefore="edit"
+                  >
+                    {{t "common.actions.edit"}}
+                  </PixButton>
+                {{/if}}
+                <PixButton
+                  class="admin-member-item-actions__button"
+                  @variant="error"
+                  aria-label={{concat "Désactiver l'agent " member.firstName " " member.lastName}}
+                  @triggerAction={{fn this.displayDeactivateConfirmationPopup member}}
+                  @iconBefore="delete"
+                >
+                  {{t "common.actions.deactivate"}}
+                </PixButton>
 
-                  </div>
-                </td>
-              </tr>
-            {{/each}}
-          </tbody>
-        {{/if}}
-      </table>
-      {{#unless @members}}
-        <div class="table__empty">{{t "common.tables.empty-result"}}</div>
-      {{/unless}}
-    </div>
+              </div>
+            </:cell>
+          </PixTableColumn>
+        </:columns>
+      </PixTable>
+    {{else}}
+      <div class="table__empty">{{t "common.tables.empty-result"}}</div>
+    {{/if}}
 
     <ConfirmPopup
       @message={{this.confirmPopUpMessage}}

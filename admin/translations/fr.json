@@ -989,6 +989,13 @@
       },
       "tubes-count": "Nombre de sujets compris dans ce profil cible"
     },
+    "team": {
+      "list": {
+        "table": {
+          "caption": "Liste des membres interne de Pix ayant accès à Pix Admin. Contient le nom, prénom, adresse e-mail et le rôle (CERTIF, METIER, SUPPPORT ou ADMIN). Des actions permettent de modifier le rôle ou de désactiver le membre"
+        }
+      }
+    },
     "trainings": {
       "training": {
         "details": {

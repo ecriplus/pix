@@ -1,10 +1,10 @@
-import { clickByName, render } from '@1024pix/ember-testing-library';
+import { clickByName, render, within } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import List from 'pix-admin/components/team/list';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest, {t} from '../../../helpers/setup-intl-rendering';
 import { waitForDialogClose } from '../../../helpers/wait-for.js';
 
 module('Integration | Component | team | list', function (hooks) {
@@ -27,8 +27,9 @@ module('Integration | Component | team | list', function (hooks) {
       const screen = await render(<template><List @members={{members}} /></template>);
 
       // then
-      assert.dom(screen.getByRole('row', { name: 'Marie Tim' })).includesText('marie.tim@example.net');
-      assert.dom(screen.getByRole('row', { name: 'Marie Tim' })).includesText('SUPER_ADMIN');
+      const table = screen.getByRole('table', { name: t('pages.team.table.caption') });
+      assert.dom(within(table).getByRole('cell', { name: 'marie.tim@example.net'})).exists();
+      assert.dom(within(table).getByRole('cell', { name: 'SUPER_ADMIN'})).exists();
     });
 
     test('should display action buttons for a member', async function (assert) {
