@@ -1,11 +1,13 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationCandidate } from '../../../../shared/domain/models/index.js';
 import { ComplementaryCertification } from '../../../session-management/domain/models/ComplementaryCertification.js';
 import { SessionManagement } from '../../../session-management/domain/models/SessionManagement.js';
 
 const getWithCertificationCandidates = async function ({ id }) {
-  const session = await knex.from('sessions').where({ id }).first();
+  const knexConn = DomainTransaction.getConnection();
+  const session = await knexConn.from('sessions').where({ id }).first();
 
   if (!session) {
     throw new NotFoundError("La session n'existe pas ou son accès est restreint");
