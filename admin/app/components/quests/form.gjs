@@ -59,11 +59,11 @@ export default class QuestForm extends Component {
         this.eligibilityRequirementsStr,
         snippets.objectRequirementsByLabel,
       );
-      const eligibilityRequirementsJSON = JSON.stringify([eligibilityRequirements]);
 
-      console.log([eligibilityRequirements]);
-      console.log(eligibilityRequirementsJSON);
-      await navigator.clipboard.writeText(eligibilityRequirementsJSON);
+      const questToJson = JSON.stringify({rewardId: this.rewardId, rewardType: this.rewardType, eligibilityRequirements: [eligibilityRequirements]});
+
+      console.log(questToJson)
+      await navigator.clipboard.writeText(questToJson);
       this.pixToast.sendSuccessNotification({
         message: 'Votre quête a été copié dans votre presse papier ou presque.',
       });
