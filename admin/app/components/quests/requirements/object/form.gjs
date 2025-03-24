@@ -17,13 +17,13 @@ import PixFieldset from 'pix-admin/components/ui/pix-fieldset';
  */
 export default class ObjectRequirementCreateOrEditForm extends Component {
   @action
-  getFieldComparisonForName(value) {
-    return this.args.formFields.find((field) => field.name === value).comparison;
+  getFieldComparisonForName(name) {
+    return this.args.formFields.find((field) => field.name === name).comparison;
   }
 
   @action
-  getFieldValueForName(value) {
-    return this.args.formFields.find((field) => field.name === value).value;
+  getFieldValueForName(name) {
+    return this.args.formFields.find((field) => field.name === name).data;
   }
 
   <template>
@@ -38,27 +38,29 @@ export default class ObjectRequirementCreateOrEditForm extends Component {
         <:label>Nom de la condition</:label>
       </PixInput>
 
-      <PixFieldset role="radiogroup">
-        <:title>Comment évaluer la condition ?</:title>
-        <:content>
-          <PixRadioButton
-            name="comparison"
-            @value={{true}}
-            {{on "change" (fn @updateComparison "all")}}
-            checked={{eq @requirementComparison "all"}}
-          >
-            <:label>Tous les critères sont remplis</:label>
-          </PixRadioButton>
-          <PixRadioButton
-            name="comparison"
-            @value={{false}}
-            {{on "change" (fn @updateComparison "one-of")}}
-            checked={{eq @requirementComparison "one-of"}}
-          >
-            <:label>Au moins un critère est rempli</:label>
-          </PixRadioButton>
-        </:content>
-      </PixFieldset>
+      {{#unless @configuration.mergeFields}}
+        <PixFieldset role="radiogroup">
+          <:title>Comment évaluer la condition ?</:title>
+          <:content>
+            <PixRadioButton
+              name="comparison"
+              @value="all-condition"
+              {{on "change" (fn @updateComparison "all")}}
+              checked={{eq @requirementComparison "all"}}
+            >
+              <:label>Tous les critères sont remplis</:label>
+            </PixRadioButton>
+            <PixRadioButton
+              name="comparison"
+              @value="on-off-condition"
+              {{on "change" (fn @updateComparison "one-of")}}
+              checked={{eq @requirementComparison "one-of"}}
+            >
+              <:label>Au moins un critère est rempli</:label>
+            </PixRadioButton>
+          </:content>
+        </PixFieldset>
+      {{/unless}}
 
       {{#each @configuration.fieldConfigurations as |fieldConfiguration|}}
         <FormField

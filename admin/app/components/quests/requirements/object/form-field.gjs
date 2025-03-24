@@ -19,9 +19,19 @@ export default class ObjectRequirementCreateOrEditFormField extends Component {
 
   constructor() {
     super(...arguments);
-    this.isFieldEnabled = this.args.fieldComparison;
-    this.formComparison = this.args.fieldComparison ?? null;
-    this.formValue = this.args.fieldValue ?? null;
+    this.isFieldEnabled = this.args.fieldComparison || this.args.fieldConfiguration.hasSingleChoice;
+
+    if (this.args.fieldConfiguration.hasSingleChoice) {
+      this.formComparison = 'specific';
+    } else {
+      this.formComparison = this.args.fieldComparison ?? null;
+    }
+
+    if (this.args.fieldConfiguration.parseToObject) {
+      this.formValue = JSON.stringify(this.args.fieldValue);
+    } else {
+      this.formValue = this.args.fieldValue ?? null;
+    }
   }
 
   @action
@@ -51,6 +61,10 @@ export default class ObjectRequirementCreateOrEditFormField extends Component {
       comparison: this.formComparison,
       value: this.formValue,
     });
+  }
+
+  get isDisabled() {
+    return this.args.fieldConfiguration.hasSingleChoice;
   }
 
   get checkboxLabel() {
@@ -91,7 +105,9 @@ export default class ObjectRequirementCreateOrEditFormField extends Component {
   }
 
   get inputLabel() {
-    if (['one-of', 'all'].includes(this.formComparison)) {
+    if (this.args.fieldConfiguration.hasSingleChoice) {
+      return this.checkboxLabel;
+    } else if (['one-of', 'all'].includes(this.formComparison)) {
       return 'Saisir les valeurs séparées par des virgules, sans espaces';
     } else {
       return 'Saisir la valeur';
@@ -100,24 +116,29 @@ export default class ObjectRequirementCreateOrEditFormField extends Component {
 
   <template>
     <div>
-      <PixCheckbox
-        {{on "change" this.enableOrDisableField}}
-        @value={{this.isFieldEnabled}}
-        checked={{this.isFieldEnabled}}
-      >
-        <:label><b>{{this.checkboxLabel}}</b> ({{this.typeHelpLabel}})</:label>
-      </PixCheckbox>
+      {{#unless @fieldConfiguration.hasSingleChoice}}
+        <PixCheckbox
+          {{on "change" this.enableOrDisableField}}
+          @value={{this.isFieldEnabled}}
+          checked={{this.isFieldEnabled}}
+        >
+          <:label><b>{{this.checkboxLabel}}</b> ({{this.typeHelpLabel}})</:label>
+        </PixCheckbox>
+      {{/unless}}
       <div class="quest-field">
         {{#if this.isFieldEnabled}}
-          <PixSelect
-            @onChange={{this.updateComparison}}
-            @value={{this.formComparison}}
-            @options={{this.comparisonOptions}}
-            @hideDefaultOption={{true}}
-            @hideDefaultValue={{true}}
-          >
-            <:label>Sélectionner une modalité de comparaison</:label>
-          </PixSelect>
+          {{#unless @fieldConfiguration.hasSingleChoice}}
+            <PixSelect
+              @onChange={{this.updateComparison}}
+              @value={{this.formComparison}}
+              @options={{this.comparisonOptions}}
+              @hideDefaultOption={{true}}
+              @hideDefaultValue={{true}}
+            >
+              <:label>Sélectionner une modalité de comparaison</:label>
+            </PixSelect>
+          {{/unless}}
+
           {{#if this.formComparison}}
             <PixInput
               onchange={{this.updateValue}}

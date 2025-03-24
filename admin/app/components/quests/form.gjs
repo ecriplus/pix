@@ -10,6 +10,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { objectConfigurations } from 'pix-admin/components/quests/requirements/object/object-configuration.js';
 
 import PageTitle from '../ui/page-title';
 import SnippetList from './snippets/list';
@@ -22,17 +23,17 @@ export default class QuestForm extends Component {
   @tracked rewardId = '';
   @tracked eligibilityRequirementsStr = '';
   @tracked successRequirementsStr = '';
-  @tracked switchRequirements = false;
+  @tracked switchRequirements = true;
 
   @service router;
   @service pixToast;
 
   get requirementsStr() {
-    return this.switchRequirements ? this.successRequirementsStr : this.eligibilityRequirementsStr;
+    return !this.switchRequirements ? this.successRequirementsStr : this.eligibilityRequirementsStr;
   }
 
   get requirementState() {
-    return this.switchRequirements ? 'Succès' : 'Éligiblités';
+    return !this.switchRequirements ? 'Succès' : 'Éligiblités';
   }
 
   @action
@@ -52,7 +53,7 @@ export default class QuestForm extends Component {
 
   @action
   updateRequirementsStr(event) {
-    if(this.switchRequirements) {
+    if (!this.switchRequirements) {
       this.successRequirementsStr = event.target.value;
     } else {
       this.eligibilityRequirementsStr = event.target.value;
@@ -61,7 +62,7 @@ export default class QuestForm extends Component {
 
   @action
   appendToRequirementsStr(str) {
-    if(this.switchRequirements) {
+    if (!this.switchRequirements) {
       this.successRequirementsStr += str;
     } else {
       this.eligibilityRequirementsStr += str;
@@ -84,16 +85,13 @@ export default class QuestForm extends Component {
         snippets.objectRequirementsByLabel,
       );
 
-      const successRequirements = this.popToRootToPip(
-        this.successRequirementsStr,
-        snippets.objectRequirementsByLabel,
-      );
+      const successRequirements = this.popToRootToPip(this.successRequirementsStr, snippets.objectRequirementsByLabel);
 
       const questToJson = JSON.stringify({
-        rewardId: this.rewardId,
+        rewardId: parseInt(this.rewardId),
         rewardType: this.rewardType,
         eligibilityRequirements: [eligibilityRequirements],
-        successRequirements: [successRequirements],
+        successRequirements: successRequirements ? [successRequirements] : [],
       });
 
       console.log(questToJson);
@@ -135,9 +133,15 @@ export default class QuestForm extends Component {
       if (currentWord === ')') {
         // Le requirement compose en cours est fini
         // On le sort de la pile et on l'ajoute dans le requirement compose juste en dessous
-        latestCompletedCompose = composeStack.pop();
         if (composeStack.length > 0) {
-          composeStack.at(-1).data.push(latestCompletedCompose);
+          const stack = composeStack.at(-2);
+
+          if (stack && stack.requirement_type === 'compose') {
+            latestCompletedCompose = composeStack.pop();
+            composeStack.at(-1).data.push(latestCompletedCompose);
+          } else {
+            latestCompletedCompose = composeStack;
+          }
         }
         currentWord = '';
       } else if (currentWord === ',') {
@@ -165,11 +169,18 @@ export default class QuestForm extends Component {
         currentWord = '';
       } else if (snippetNames.includes(currentWord)) {
         // Un opérande ! on l'ajoute au requirement compose en cours
-        composeStack.at(-1).data.push(objectRequirementsByLabel[currentWord]);
+        const requirement = objectRequirementsByLabel[currentWord];
+
+        const formatDataQuest = objectConfigurations[requirement.requirement_type].formatRequirement(requirement);
+
+        const stack = composeStack.at(-1);
+        stack && stack.requirement_type === 'compose'
+          ? composeStack.at(-1).data.push(formatDataQuest)
+          : composeStack.push(formatDataQuest);
         currentWord = '';
       }
     }
-    return latestCompletedCompose;
+    return latestCompletedCompose || composeStack;
   }
 
   <template>
@@ -177,76 +188,69 @@ export default class QuestForm extends Component {
       <:title>Création de la quête</:title>
     </PageTitle>
 
-    <PixBlock @variant="admin" class="quest-button-edition">
-      <PixInput onchange={{this.updateName}} required={{true}}>
-        <:label>Nom de la quête</:label>
-      </PixInput>
-      <PixInput onchange={{this.updateRewardType}} required={{true}}>
-        <:label>Type de récompense</:label>
-      </PixInput>
-      <PixInput onchange={{this.updateRewardId}} required={{true}}>
-        <:label>ID de récompense</:label>
-      </PixInput>
-    </PixBlock>
+    <section class="quest-object-form">
+      <PixBlock @variant="admin" class="quest-button-edition">
+        <PixInput onchange={{this.updateName}} required={{true}}>
+          <:label>Nom de la quête</:label>
+        </PixInput>
+        <PixInput onchange={{this.updateRewardType}} required={{true}}>
+          <:label>Type de récompense</:label>
+        </PixInput>
+        <PixInput onchange={{this.updateRewardId}} required={{true}}>
+          <:label>ID de récompense</:label>
+        </PixInput>
+      </PixBlock>
 
-    <PixBlock @variant="admin" class="quest-button-edition quest-button-edition--column">
-      <PixToggleButton @toggled={{this.switchRequirements}} @onChange={{this.onChangeRequirements}}>
-        <:label>Mes requirements :</:label>
-        <:viewA>Succès</:viewA>
-        <:viewB>Éligibilités</:viewB>
-      </PixToggleButton>
+      <PixBlock @variant="admin" class="quest-button-edition quest-button-edition--column">
+        <PixToggleButton @toggled={{this.switchRequirements}} @onChange={{this.onChangeRequirements}}>
+          <:label>Mes requirements :</:label>
+          <:viewA>Éligibilités</:viewA>
+          <:viewB>Succès</:viewB>
+        </PixToggleButton>
 
-      <PixTextarea
-        value={{this.requirementsStr}}
-        {{on "change" this.updateRequirementsStr}}
-        rows="15"
-      >
-        <:label>Mes requirements ({{this.requirementState}})</:label>
-      </PixTextarea>
-    </PixBlock>
+        <PixTextarea value={{this.requirementsStr}} {{on "change" this.updateRequirementsStr}} rows="15">
+          <:label>Mes requirements ({{this.requirementState}})</:label>
+        </PixTextarea>
+      </PixBlock>
 
-    <PixBlock @variant="admin" class="quest-button-edition quest-button-edition--column">
-      <ul class="quest-button-edition__list">
-        <li>
-          <PixButton
-            @size="small"
-            @variant="secondary"
-            @triggerAction={{fn this.appendToRequirementsStr "all("}}
-          >
-            all(
-          </PixButton>
-        </li>
-        <li>
-          <PixButton
-            @size="small"
-            @variant="secondary"
-            @triggerAction={{fn this.appendToRequirementsStr "one-of("}}
-          >
-            one-of(
-          </PixButton>
-        </li>
-        <li>
-          <PixButton @size="small" @variant="secondary" @triggerAction={{fn this.appendToRequirementsStr ")"}}>
-            )
-          </PixButton>
-        </li>
-        <li>
-          <PixButton @size="small" @variant="secondary" @triggerAction={{fn this.appendToRequirementsStr ","}}>
-            ,
-          </PixButton>
-        </li>
-      </ul>
-      <SnippetList @triggerAction={{this.appendToRequirementsStr}} />
-    </PixBlock>
+      <PixBlock @variant="admin" class="quest-button-edition quest-button-edition--column">
+        <h2>Créateur de condition :</h2>
+        <ul class="quest-button-edition__list">
+          <li>
+            <PixButton @size="small" @variant="secondary" @triggerAction={{fn this.appendToRequirementsStr "all("}}>
+              all(
+            </PixButton>
+          </li>
+          <li>
+            <PixButton @size="small" @variant="secondary" @triggerAction={{fn this.appendToRequirementsStr "one-of("}}>
+              one-of(
+            </PixButton>
+          </li>
+          <li>
+            <PixButton @size="small" @variant="secondary" @triggerAction={{fn this.appendToRequirementsStr ")"}}>
+              )
+            </PixButton>
+          </li>
+          <li>
+            <PixButton @size="small" @variant="secondary" @triggerAction={{fn this.appendToRequirementsStr ","}}>
+              ,
+            </PixButton>
+          </li>
+        </ul>
 
-    <div class="quest-button-edition__button">
-      <PixButtonLink @route="authenticated.quest-new-or-edit-snippet" @size="small" @variant="primary">
-        Créer ou modifier un snippet de requirement
-      </PixButtonLink>
+        <h2>Mes snippets :</h2>
+        <SnippetList @triggerAction={{this.appendToRequirementsStr}} />
+      </PixBlock>
 
-      <PixButton @size="small" @variant="success" @triggerAction={{this.copyEligibilityRequirementsToClipboard}}>
-        Mettre le json des requirements d'éligibilité dans le presse-papiers
-      </PixButton>
-    </div>
+      <div class="quest-button-edition__button">
+        <PixButtonLink @route="authenticated.quest-new-or-edit-snippet" @size="small" @variant="primary">
+          Créer ou modifier un snippet de requirement
+        </PixButtonLink>
+
+        <PixButton @size="small" @variant="success" @triggerAction={{this.copyEligibilityRequirementsToClipboard}}>
+          Mettre le json des requirements d'éligibilité dans le presse-papiers
+        </PixButton>
+      </div>
+    </section>
   </template>
 }

@@ -1,28 +1,39 @@
 class ObjectConfiguration {
-  constructor({ name, refersToAnArray, fieldConfigurations }) {
+  constructor({ name, refersToAnArray, fieldConfigurations, mergeFields = false }) {
     this.name = name;
     this.refersToAnArray = refersToAnArray;
     this.fieldConfigurations = fieldConfigurations;
+    this.mergeFields = mergeFields;
   }
 
   buildRequirementFromFormValues(formComparison, formFields) {
     const data = {};
     for (const fieldConfiguration of this.fieldConfigurations) {
       const formField = formFields.find((formField) => formField.name === fieldConfiguration.name);
-      const trimmedFormFieldValue = formField.value ? formField.value.toString().trim() : formField.value;
+
+      let trimmedFormFieldValue =
+        formField.data && !Array.isArray(formField.data) ? formField.data.toString().trim() : formField.data;
+
+      if (fieldConfiguration.parseToObject && !Array.isArray(formField.data)) {
+        trimmedFormFieldValue = JSON.parse(trimmedFormFieldValue);
+      }
       const isFormFieldValid = formField.comparison && trimmedFormFieldValue;
       if (!isFormFieldValid) {
         continue;
       }
-      data[formField.name] = {
-        data: {
-          comparison: formField.comparison,
-          value: ['one-of', 'all'].includes(formField.comparison)
+
+      const value =
+        fieldConfiguration.parseToObject || Array.isArray(trimmedFormFieldValue)
+          ? trimmedFormFieldValue
+          : ['one-of', 'all'].includes(formField.comparison)
             ? trimmedFormFieldValue
                 .split(',')
                 .map((value) => castFromStringToType(value.trim(), fieldConfiguration.type))
-            : castFromStringToType(trimmedFormFieldValue, fieldConfiguration.type),
-        },
+            : castFromStringToType(trimmedFormFieldValue, fieldConfiguration.type);
+
+      data[formField.name] = {
+        comparison: formField.comparison,
+        data: value,
       };
     }
     return {
@@ -30,6 +41,19 @@ class ObjectConfiguration {
       comparison: formComparison,
       data,
     };
+  }
+
+  formatRequirement(requirement) {
+    if (this.mergeFields) {
+      const mergedFields = {};
+      for (const [key, object] of Object.entries(requirement.data)) {
+        mergedFields[key] = object.data;
+      }
+
+      return Object.assign({}, requirement, { data: mergedFields });
+    } else {
+      return requirement;
+    }
   }
 }
 
@@ -44,11 +68,13 @@ function castFromStringToType(strValue, type) {
 }
 
 class FieldConfiguration {
-  constructor({ name, type, refersToAnArray, allowedValues = [] }) {
+  constructor({ name, type, refersToAnArray, hasSingleChoice = false, parseToObject = false, allowedValues = [] }) {
     this.name = name;
     this.type = type;
     this.refersToAnArray = refersToAnArray;
+    this.parseToObject = parseToObject;
     this.allowedValues = allowedValues;
+    this.hasSingleChoice = hasSingleChoice;
   }
 
   static get TYPES() {
@@ -60,6 +86,7 @@ class FieldConfiguration {
   }
 }
 
+// ORGANIZATION
 const organizationConfigField_isManagingStudents = new FieldConfiguration({
   name: 'isManagingStudents',
   type: FieldConfiguration.TYPES.BOOLEAN,
@@ -87,6 +114,7 @@ const organizationConfiguration = new ObjectConfiguration({
   ],
 });
 
+// ORGANIZATION LEARNER
 const organizationLearnerConfigField_MEFCode = new FieldConfiguration({
   name: 'MEFCode',
   type: FieldConfiguration.TYPES.STRING,
@@ -98,6 +126,7 @@ const organizationLearnerConfiguration = new ObjectConfiguration({
   fieldConfigurations: [organizationLearnerConfigField_MEFCode],
 });
 
+// CAMPAIGN PARTICIPATIONS
 const campaignParticipationsConfigField_targetProfileId = new FieldConfiguration({
   name: 'targetProfileId',
   type: FieldConfiguration.TYPES.NUMBER,
@@ -115,10 +144,33 @@ const campaignParticipationsConfiguration = new ObjectConfiguration({
   fieldConfigurations: [campaignParticipationsConfigField_targetProfileId, campaignParticipationsConfigField_status],
 });
 
+// CAPPED TUBES
+const cappedTubeConfiguration_cappedTubes = new FieldConfiguration({
+  name: 'cappedTubes',
+  type: FieldConfiguration.TYPES.STRING,
+  hasSingleChoice: true,
+  parseToObject: true,
+  refersToAnArray: true,
+});
+const cappedTubeConfiguration_threshold = new FieldConfiguration({
+  name: 'threshold',
+  type: FieldConfiguration.TYPES.NUMBER,
+  hasSingleChoice: true,
+  refersToAnArray: false,
+});
+
+const cappedTubeConfiguration = new ObjectConfiguration({
+  name: 'cappedTubes',
+  refersToAnArray: false,
+  mergeFields: true,
+  fieldConfigurations: [cappedTubeConfiguration_cappedTubes, cappedTubeConfiguration_threshold],
+});
+
 const objectConfigurations = {
   [organizationConfiguration.name]: organizationConfiguration,
   [organizationLearnerConfiguration.name]: organizationLearnerConfiguration,
   [campaignParticipationsConfiguration.name]: campaignParticipationsConfiguration,
+  [cappedTubeConfiguration.name]: cappedTubeConfiguration,
 };
 
 export { objectConfigurations };

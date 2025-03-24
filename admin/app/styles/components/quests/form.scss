@@ -1,7 +1,6 @@
 .quest-button-edition {
   display: flex;
   gap: 24px;
-  margin-bottom: 24px;
 
   &--column {
     flex-direction: column;
@@ -11,10 +10,6 @@
   &__list {
     display: flex;
     gap: 24px;
-
-    &:first-child{
-      margin-bottom: 24px;
-    }
   }
 
   &__button {

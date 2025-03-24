@@ -28,6 +28,7 @@ export default class RequirementForm extends Component {
       { value: 'organization', label: 'Organization' },
       { value: 'organizationLearner', label: 'Organization Learner' },
       { value: 'campaignParticipations', label: 'Participation' },
+      { value: 'cappedTubes', label: 'Tubes cappés' },
     ];
   }
 
@@ -60,27 +61,36 @@ export default class RequirementForm extends Component {
 
   @action
   updateRequirementType(value, isEditing = false) {
+    if (!isEditing) this.resetRequirement();
+
     this.selectedRequirementType = value;
+    this.requirementComparison = objectConfigurations[this.selectedRequirementType].mergeFields
+      ? 'all'
+      : this.requirementComparison;
     this.formFields = objectConfigurations[this.selectedRequirementType].fieldConfigurations.map(
-      (fieldConfiguration) => ({
-        name: fieldConfiguration.name,
-        comparison:
-          isEditing && this.requirementFields[fieldConfiguration.name]
-            ? this.requirementFields[fieldConfiguration.name].data.comparison
-            : null,
-        value:
-          isEditing && this.requirementFields[fieldConfiguration.name]
-            ? this.requirementFields[fieldConfiguration.name].data.value
-            : null,
-      }),
+      (fieldConfiguration) => {
+        const field = isEditing && this.requirementFields[fieldConfiguration.name];
+        return {
+          name: fieldConfiguration.name,
+          comparison: isEditing && field ? field.comparison : undefined,
+          data: isEditing && field ? field.data : undefined,
+        };
+      },
     );
+  }
+
+  @action
+  resetRequirement() {
+    this.requirementComparison = null;
+    this.requirementLabel = null;
+    this.requirementFields = null;
   }
 
   @action
   updateField({ name, comparison, value }) {
     const field = this.formFields.find((field) => field.name === name);
     field.comparison = comparison;
-    field.value = value;
+    field.data = value;
   }
 
   @action
@@ -97,6 +107,9 @@ export default class RequirementForm extends Component {
       snippets.objectRequirementsByLabel[this.requirementLabel] = requirement;
       window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(snippets));
       this.pixToast.sendSuccessNotification({ message: 'Le requirement est ajouté dans le local storage.' });
+
+      this.selectedRequirementType = null;
+      this.resetRequirement();
     } catch (error) {
       console.log(error);
       this.pixToast.sendErrorNotification({ message: "Le requirement n'a pas pu être ajouté." });
@@ -137,7 +150,8 @@ export default class RequirementForm extends Component {
         </div>
       </PixBlock>
 
-      <PixBlock @variant="admin" class="quest-button-edition">
+      <PixBlock @variant="admin" class="quest-button-edition quest-button-edition--column">
+        <h2>Editer mes snippets :</h2>
         <SnippetList @triggerAction={{this.editRequirement}} />
       </PixBlock>
 
