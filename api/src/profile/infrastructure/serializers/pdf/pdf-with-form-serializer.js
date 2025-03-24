@@ -3,6 +3,8 @@ import { readFile } from 'node:fs/promises';
 import JSZip from 'jszip';
 import { PDFDocument } from 'pdf-lib';
 
+import { FONTS, initializeFonts } from '../../../../shared/infrastructure/serializers/pdf/utils.js';
+
 export async function serialize(templateUrl, entry, creationDate = new Date()) {
   if (Array.isArray(entry)) {
     return serializeArray(templateUrl, entry, creationDate);
@@ -25,6 +27,7 @@ async function serializeArray(templateUrl, entries, creationDate) {
 async function serializeObject(templateUrl, entry, creationDate) {
   const template = await readFile(templateUrl);
   const pdf = await PDFDocument.load(template);
+  const { [FONTS.robotoRegular]: embeddedRobotoFont } = await initializeFonts(pdf, [FONTS.robotoRegular]);
 
   pdf.setCreationDate(creationDate);
   pdf.setModificationDate(creationDate);
@@ -34,6 +37,7 @@ async function serializeObject(templateUrl, entry, creationDate) {
     if (fieldName === 'filename') continue;
     const field = form.getTextField(fieldName);
     field.setText(value);
+    field.updateAppearances(embeddedRobotoFont);
     field.enableReadOnly();
   }
   return Buffer.from(await pdf.save());
