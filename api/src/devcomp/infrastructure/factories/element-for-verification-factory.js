@@ -50,7 +50,6 @@ export class ElementForVerificationFactory {
           feedback: proposal.feedback,
         });
       }),
-      feedbacks: element.feedbacks,
       solution: element.solution,
     });
   }

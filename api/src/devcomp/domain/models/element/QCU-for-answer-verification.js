@@ -3,24 +3,19 @@ import Joi from 'joi';
 import { EntityValidationError } from '../../../../shared/domain/errors.js';
 import { assertNotNullOrUndefined } from '../../../../shared/domain/models/asserts.js';
 import { ModuleInstantiationError } from '../../errors.js';
-import { Feedbacks } from '../Feedbacks.js';
 import { QcuCorrectionResponse } from '../QcuCorrectionResponse.js';
 import { ValidatorQCU } from '../validator/ValidatorQCU.js';
 import { QCU } from './QCU.js';
 
 class QCUForAnswerVerification extends QCU {
   userResponse;
-  constructor({ id, instruction, locales, proposals, solution, feedbacks, validator }) {
+  constructor({ id, instruction, locales, proposals, solution, validator }) {
     super({ id, instruction, locales, proposals });
 
     assertNotNullOrUndefined(solution, 'The solution is required for a verification QCU');
     this.#assertSolutionIsAnExistingProposal(solution, proposals);
 
     this.solution = { value: solution };
-
-    if (feedbacks) {
-      this.feedbacks = new Feedbacks(feedbacks);
-    }
 
     if (validator) {
       this.validator = validator;
@@ -46,7 +41,7 @@ class QCUForAnswerVerification extends QCU {
 
     return new QcuCorrectionResponse({
       status: validation.result,
-      feedback: this.#getFeedback(validation),
+      feedback: this.#getFeedback(),
       solution: this.solution.value,
     });
   }
@@ -71,13 +66,8 @@ class QCUForAnswerVerification extends QCU {
     }
   }
 
-  #getFeedback(validation) {
-    const specificFeedback = this.#getSpecificFeedbackByProposalId(this.userResponse);
-    if (specificFeedback) {
-      return specificFeedback;
-    }
-
-    return validation.result.isOK() ? this.feedbacks.valid : this.feedbacks.invalid;
+  #getFeedback() {
+    return this.#getSpecificFeedbackByProposalId(this.userResponse);
   }
 }
 
