@@ -2,8 +2,8 @@ import { Readable } from 'node:stream';
 
 import _ from 'lodash';
 
-import { pickChallengeService } from '../../../evaluation/domain/services/pick-challenge-service.js';
 import { random } from '../../../shared/infrastructure/utils/random.js';
+import pickChallengeService from '../../evaluation/domain/services/pick-challenge-service.js';
 import { pickAnswerStatusService } from '../../shared/domain/services/pick-answer-status-service.js';
 import { usecases } from '../domain/usecases/index.js';
 import { scenarioSimulatorBatchSerializer } from '../infrastructure/serializers/scenario-simulator-batch-serializer.js';
@@ -34,7 +34,7 @@ async function simulateFlashAssessmentScenario(
     const iterations = _.range(0, numberOfIterations);
 
     for (const index of iterations) {
-      const pickChallenge = dependencies.pickChallengeService.chooseNextChallenge(challengePickProbability);
+      const pickChallenge = dependencies.pickChallengeService.getChallengePicker(challengePickProbability);
 
       const usecaseParams = _.omitBy(
         {
