@@ -32,8 +32,9 @@ const publishCertificationCourses = async function (certificationStatuses) {
     version: -1, // Version number used to meet requirements regarding the version column non-null constraint in the insert request below
   }));
 
+  const knexConn = DomainTransaction.getConnection();
   // Trick to .batchUpdate(), which does not exist in knex per say
-  await knex('certification-courses')
+  await knexConn('certification-courses')
     .insert(certificationDataToUpdate)
     .onConflict('id')
     .merge(['isPublished', 'updatedAt']);
