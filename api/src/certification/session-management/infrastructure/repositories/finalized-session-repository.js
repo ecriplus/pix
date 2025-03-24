@@ -17,7 +17,8 @@ const remove = async function ({ sessionId }) {
 };
 
 const get = async function ({ sessionId }) {
-  const finalizedSessionDto = await knex('finalized-sessions').where({ sessionId }).first();
+  const knexConn = DomainTransaction.getConnection();
+  const finalizedSessionDto = await knexConn('finalized-sessions').where({ sessionId }).first();
 
   if (!finalizedSessionDto) {
     throw new NotFoundError(`Session of id ${sessionId} does not exist.`);
