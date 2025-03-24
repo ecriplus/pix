@@ -19,7 +19,6 @@ import * as assessmentRepository from '../../infrastructure/repositories/assessm
 import { repositories } from '../../infrastructure/repositories/index.js';
 import * as assessmentSerializer from '../../infrastructure/serializers/jsonapi/assessment-serializer.js';
 import * as challengeSerializer from '../../infrastructure/serializers/jsonapi/challenge-serializer.js';
-import { logger } from '../../infrastructure/utils/logger.js';
 import {
   extractLocaleFromRequest,
   extractUserIdFromRequest,
@@ -68,18 +67,8 @@ const getNextChallenge = async function (
 ) {
   const assessmentId = request.params.id;
 
-  const logContext = {
-    zone: 'assessmentController.getNextChallenge',
-    type: 'controller',
-    assessmentId,
-  };
-  logger.trace(logContext, 'tracing assessmentController.getNextChallenge()');
-
   try {
     const challenge = await _getChallenge(assessmentId, request, dependencies);
-    logContext.challenge = challenge;
-    logger.trace(logContext, 'replying with challenge');
-
     return challengeSerializer.serialize(challenge);
   } catch (error) {
     if (error instanceof AssessmentEndedError) {
