@@ -7,17 +7,25 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   let application2;
 
   beforeEach(async function () {
+    const createdAt = new Date();
+    // To avoid flackyness on date comparison, we set createdAt in the past
+    createdAt.setMinutes(-1);
+
     application2 = databaseBuilder.factory.buildClientApplication({
       name: 'appli2',
       clientId: 'clientId-appli2',
       clientSecret: 'secret-app2',
       scopes: ['scope3', 'scope4', 'scope5'],
+      createdAt,
+      updatedAt: createdAt,
     });
     application1 = databaseBuilder.factory.buildClientApplication({
       name: 'appli1',
       clientId: 'clientId-appli1',
       clientSecret: 'secret-app1',
       scopes: ['scope1', 'scope2'],
+      createdAt,
+      updatedAt: createdAt,
     });
 
     await databaseBuilder.commit();
