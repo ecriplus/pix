@@ -133,7 +133,7 @@ export default class CertificationInformationsController extends Controller {
         competence[propName] = parseInt(value);
       }
     } else if (value.trim().length > 0) {
-      competences.addObject({
+      competences.push({
         competence_code: competenceCode,
         [propName]: parseInt(value),
         area_code: competenceCode.substr(0, 1),

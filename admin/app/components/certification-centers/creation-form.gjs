@@ -57,7 +57,7 @@ export default class CertificationCenterForm extends Component {
     if (habilitations.includes(habilitation)) {
       habilitations.removeObject(habilitation);
     } else {
-      habilitations.addObject(habilitation);
+      habilitations.push(habilitation);
     }
   }
 
