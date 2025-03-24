@@ -45,12 +45,12 @@ export default class Training extends Model {
 
   get prerequisiteTrigger() {
     const trainingTriggers = this.hasMany('trainingTriggers').value() || [];
-    return trainingTriggers.findBy('type', 'prerequisite');
+    return trainingTriggers.find((trigger) => trigger.type === 'prerequisite');
   }
 
   get goalTrigger() {
     const trainingTriggers = this.hasMany('trainingTriggers').value() || [];
-    return trainingTriggers.findBy('type', 'goal');
+    return trainingTriggers.find((trigger) => trigger.type === 'goal');
   }
 
   get sortedTargetProfileSummaries() {

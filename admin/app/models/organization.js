@@ -63,7 +63,7 @@ export default class Organization extends Model {
 
   async hasMember(userId) {
     const memberships = await this.organizationMemberships;
-    return !!memberships.findBy('user.id', userId);
+    return memberships.some((membership) => membership.user?.id === userId);
   }
 
   get archivedFormattedDate() {
