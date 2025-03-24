@@ -30,18 +30,17 @@ export default class CappedTubesCriterion extends Component {
     if (this.selectedTubeIds.includes(tube.id)) {
       return;
     }
-    this.selectedTubeIds.pushObject(tube.id);
+    this.selectedTubeIds = [...this.selectedTubeIds, tube.id];
 
     this._triggerOnChange();
   }
 
   @action
   uncheckTube(tube) {
-    const index = this.selectedTubeIds.indexOf(tube.id);
-    if (index === -1) {
+    if (!this.selectedTubeIds.includes(tube.id)) {
       return;
     }
-    this.selectedTubeIds.removeAt(index);
+    this.selectedTubeIds = this.selectedTubeIds.filter((id) => id !== tube.id);
 
     this._triggerOnChange();
   }
