@@ -1,5 +1,41 @@
 # Pix Changelog
 
+## v5.70.0 (24/03/2025)
+
+
+### :rocket: Amélioration
+- [#11770](https://github.com/1024pix/pix/pull/11770) [FEATURE] Ne pas afficher le bloc des attestations si un utilisateur est anonyme (PIX-17118).
+- [#11698](https://github.com/1024pix/pix/pull/11698) [FEATURE] Ajout d'une route d'enregistrement automatique de plateforme LTI (PIX-16989).
+- [#11546](https://github.com/1024pix/pix/pull/11546) [FEATURE] Script de gestion des applications clientes (PIX-16791).
+
+### :building_construction: Tech
+- [#11765](https://github.com/1024pix/pix/pull/11765) [TECH] :truck: Déplace le service d'obscurcissement vers `src/shared`.
+- [#11421](https://github.com/1024pix/pix/pull/11421) [TECH] Ajouter un nouveau requirement de type CappedTubes pour pouvoir exprimer une quête à l'aide de sujets cappés en niveau (PIX-16539).
+- [#11773](https://github.com/1024pix/pix/pull/11773) [TECH] Ajout de la colonne jurisdiction à la table client_applications (PIX-17137).
+- [#11754](https://github.com/1024pix/pix/pull/11754) [TECH] modification des robots.txt pour ne pas indexer les environnements hors prod.
+- [#11772](https://github.com/1024pix/pix/pull/11772) [TECH] :hammer: création d'un script pour compléter un `assessment` qui ne l'a pas été... (pix-17108).
+
+### :bug: Correction
+- [#11775](https://github.com/1024pix/pix/pull/11775) [BUGFIX] :bug: Corrige le problème de pagination dans la page de liste des sessions de PixAdmin.
+
+### :arrow_up: Montée de version
+- [#11798](https://github.com/1024pix/pix/pull/11798) [BUMP] Update dependency @1024pix/pix-ui to ^55.6.0 (mon-pix).
+- [#11799](https://github.com/1024pix/pix/pull/11799) [BUMP] Update dependency @1024pix/pix-ui to ^55.6.0 (orga).
+- [#11796](https://github.com/1024pix/pix/pull/11796) [BUMP] Update dependency @1024pix/pix-ui to ^55.6.0 (admin).
+- [#11797](https://github.com/1024pix/pix/pull/11797) [BUMP] Update dependency @1024pix/pix-ui to ^55.6.0 (junior).
+- [#11795](https://github.com/1024pix/pix/pull/11795) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.28 (orga).
+- [#11794](https://github.com/1024pix/pix/pull/11794) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.28 (mon-pix).
+- [#11793](https://github.com/1024pix/pix/pull/11793) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.28 (junior).
+- [#11792](https://github.com/1024pix/pix/pull/11792) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.28 (certif).
+- [#11791](https://github.com/1024pix/pix/pull/11791) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.28 (admin).
+- [#11789](https://github.com/1024pix/pix/pull/11789) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.1 (mon-pix).
+- [#11790](https://github.com/1024pix/pix/pull/11790) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.1 (orga).
+- [#11788](https://github.com/1024pix/pix/pull/11788) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.1 (junior).
+- [#11786](https://github.com/1024pix/pix/pull/11786) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.1 (certif).
+- [#11787](https://github.com/1024pix/pix/pull/11787) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.1 (dossier racine).
+- [#11785](https://github.com/1024pix/pix/pull/11785) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.1 (audit-logger).
+- [#11784](https://github.com/1024pix/pix/pull/11784) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.1 (api).
+
 ## v5.69.0 (21/03/2025)
 
 
