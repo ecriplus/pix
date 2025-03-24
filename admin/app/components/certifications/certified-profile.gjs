@@ -29,9 +29,9 @@ export default class CertifiedProfile extends Component {
   }
 
   get certifiedCompetenceList() {
-    const competencesOfCertifiedAreas = this.certifiedAreas
-      .toArray()
-      .flatMap((certifiedArea) => this._buildCertifiedCompetencesOfCertifiedArea(certifiedArea));
+    const competencesOfCertifiedAreas = [...this.certifiedAreas].flatMap((certifiedArea) =>
+      this._buildCertifiedCompetencesOfCertifiedArea(certifiedArea),
+    );
 
     const [pixCompetences, nonPixCompetences] = partition(competencesOfCertifiedAreas, { origin: 'Pix' });
     const certifiedCompetencesGroupedByOriginWithNonPixCompetencesFirst = [...nonPixCompetences, ...pixCompetences];

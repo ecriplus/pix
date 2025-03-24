@@ -72,10 +72,10 @@ export default class CappedTubesCriterion extends Component {
     return (
       this.areasList
         .flatMap((area) => {
-          const competences = area.hasMany('competences').value().toArray();
+          const competences = [...area.hasMany('competences').value()];
           return competences.flatMap((competence) => {
-            const thematics = competence.hasMany('thematics').value().toArray();
-            return thematics.flatMap((thematic) => thematic.hasMany('tubes').value().toArray());
+            const thematics = [...competence.hasMany('thematics').value()];
+            return thematics.flatMap((thematic) => [...thematic.hasMany('tubes').value()]);
           });
         })
         .filter((tube) => this.selectedTubeIds.includes(tube.id)) ?? []

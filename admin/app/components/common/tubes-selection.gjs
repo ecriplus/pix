@@ -113,7 +113,7 @@ export default class TubesSelection extends Component {
         this.selectedFrameworks.map(async (framework) => {
           if (framework.areas.isFulfilled) await framework.areas.reload();
           const frameworkAreas = await framework.areas;
-          return frameworkAreas.toArray();
+          return [...frameworkAreas];
         }),
       )
     ).flat();

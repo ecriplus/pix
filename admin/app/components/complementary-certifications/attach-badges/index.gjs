@@ -79,7 +79,7 @@ export default class AttachBadges extends Component {
     try {
       const complementaryCertification = this.args.complementaryCertification;
 
-      const complementaryCertificationBadges = this.store.peekAll('complementary-certification-badge').toArray();
+      const complementaryCertificationBadges = [...this.store.peekAll('complementary-certification-badge')];
 
       complementaryCertificationBadges.forEach((complementaryCertificationBadge) => {
         complementaryCertification.complementaryCertificationBadges.removeObject(complementaryCertificationBadge);

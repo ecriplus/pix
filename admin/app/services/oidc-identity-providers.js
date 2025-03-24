@@ -4,7 +4,7 @@ export default class OidcIdentityProviders extends Service {
   @service store;
 
   get list() {
-    return this.store.peekAll('oidc-identity-provider').toArray();
+    return [...this.store.peekAll('oidc-identity-provider')];
   }
 
   get hasIdentityProviders() {
