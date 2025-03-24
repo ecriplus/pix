@@ -1,4 +1,4 @@
-import '@1024pix/web-components';
+import '@1024pix/epreuves-components';
 
 import Application from '@ember/application';
 import loadInitializers from 'ember-load-initializers';
