@@ -9,18 +9,6 @@ import { organizationInvitationSerializer } from '../../../src/team/infrastructu
 import { usecases } from '../../domain/usecases/index.js';
 import * as organizationMemberIdentitySerializer from '../../infrastructure/serializers/jsonapi/organization-member-identity-serializer.js';
 
-const create = async function (request) {
-  const superAdminUserId = extractUserIdFromRequest(request);
-  const organization = organizationForAdminSerializer.deserialize(request.payload);
-
-  organization.createdBy = +superAdminUserId;
-
-  const createdOrganization = await usecases.createOrganization({ organization });
-  const serializedOrganization = organizationForAdminSerializer.serialize(createdOrganization);
-
-  return serializedOrganization;
-};
-
 const createInBatch = async function (request, h) {
   const organizations = await csvSerializer.deserializeForOrganizationsImport(request.payload.path);
 
@@ -81,7 +69,6 @@ const findChildrenOrganizationsForAdmin = async function (
 
 const organizationController = {
   archiveOrganization,
-  create,
   createInBatch,
   findChildrenOrganizationsForAdmin,
   findPaginatedFilteredOrganizations,

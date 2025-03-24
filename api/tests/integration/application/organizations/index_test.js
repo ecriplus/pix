@@ -4,25 +4,6 @@ import { securityPreHandlers } from '../../../../src/shared/application/security
 import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
 
 describe('Integration | Application | Organizations | Routes', function () {
-  describe('POST /api/admin/organizations', function () {
-    it('should exist', async function () {
-      // given
-      const method = 'POST';
-      const url = '/api/admin/organizations';
-
-      sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
-      sinon.stub(organizationController, 'create').returns('ok');
-      const httpTestServer = new HttpTestServer();
-      await httpTestServer.register(moduleUnderTest);
-
-      // when
-      const response = await httpTestServer.request(method, url);
-
-      // then
-      expect(response.statusCode).to.equal(200);
-    });
-  });
-
   describe('GET /api/admin/organizations', function () {
     it('should exist', async function () {
       // given
