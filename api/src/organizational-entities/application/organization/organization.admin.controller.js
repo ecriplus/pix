@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
@@ -42,7 +41,7 @@ const create = async function (request) {
 
   organization.createdBy = superAdminUserId;
 
-  const createdOrganization = await libUsecases.createOrganization({ organization });
+  const createdOrganization = await usecases.createOrganization({ organization });
   const serializedOrganization = organizationForAdminSerializer.serialize(createdOrganization);
 
   return serializedOrganization;

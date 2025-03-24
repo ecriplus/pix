@@ -1,4 +1,4 @@
-import { Organization } from '../../../src/shared/domain/models/index.js';
+import { Organization } from '../../../shared/domain/models/index.js';
 
 const createOrganization = async function ({
   organization,

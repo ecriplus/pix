@@ -1,10 +1,10 @@
-import { createOrganization } from '../../../../lib/domain/usecases/create-organization.js';
-import * as organizationCreationValidator from '../../../../lib/domain/validators/organization-creation-validator.js';
-import { OrganizationForAdmin } from '../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
-import * as dataProtectionOfficerRepository from '../../../../src/organizational-entities/infrastructure/repositories/data-protection-officer.repository.js';
-import { organizationForAdminRepository } from '../../../../src/organizational-entities/infrastructure/repositories/organization-for-admin.repository.js';
-import * as schoolRepository from '../../../../src/school/infrastructure/repositories/school-repository.js';
-import { databaseBuilder, expect, insertMultipleSendingFeatureForNewOrganization } from '../../../test-helper.js';
+import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
+import { createOrganization } from '../../../../../src/organizational-entities/domain/usecases/create-organization.js';
+import * as organizationCreationValidator from '../../../../../src/organizational-entities/domain/validators/organization-creation-validator.js';
+import * as dataProtectionOfficerRepository from '../../../../../src/organizational-entities/infrastructure/repositories/data-protection-officer.repository.js';
+import { organizationForAdminRepository } from '../../../../../src/organizational-entities/infrastructure/repositories/organization-for-admin.repository.js';
+import * as schoolRepository from '../../../../../src/school/infrastructure/repositories/school-repository.js';
+import { databaseBuilder, expect, insertMultipleSendingFeatureForNewOrganization } from '../../../../test-helper.js';
 
 describe('Integration | UseCases | create-organization', function () {
   it('returns newly created organization', async function () {

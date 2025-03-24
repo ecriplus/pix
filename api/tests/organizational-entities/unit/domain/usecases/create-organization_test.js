@@ -1,7 +1,7 @@
-import { createOrganization } from '../../../../lib/domain/usecases/create-organization.js';
-import { OrganizationForAdmin } from '../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
-import { EntityValidationError } from '../../../../src/shared/domain/errors.js';
-import { catchErr, expect, sinon } from '../../../test-helper.js';
+import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
+import { createOrganization } from '../../../../../src/organizational-entities/domain/usecases/create-organization.js';
+import { EntityValidationError } from '../../../../../src/shared/domain/errors.js';
+import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | create-organization', function () {
   let organizationCreationValidator;

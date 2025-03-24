@@ -72,7 +72,6 @@ import * as organizationMemberIdentityRepository from '../../infrastructure/repo
 import * as targetProfileShareRepository from '../../infrastructure/repositories/target-profile-share-repository.js';
 import * as learningContentConversionService from '../services/learning-content/learning-content-conversion-service.js';
 import * as userReconciliationService from '../services/user-reconciliation-service.js';
-import * as organizationCreationValidator from '../validators/organization-creation-validator.js';
 import * as organizationValidator from '../validators/organization-with-tags-and-target-profiles-script.js';
 
 const oidcAuthenticationServiceRegistry = new OidcAuthenticationServiceRegistry({ oidcProviderRepository });
@@ -133,7 +132,6 @@ const dependencies = {
   learningContentConversionService,
   membershipRepository,
   obfuscationService,
-  organizationCreationValidator,
   organizationForAdminRepository,
   organizationInvitationRepository,
   organizationInvitationService,
