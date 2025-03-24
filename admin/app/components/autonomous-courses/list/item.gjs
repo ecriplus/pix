@@ -1,3 +1,4 @@
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';
@@ -5,19 +6,37 @@ import { t } from 'ember-intl';
 import formatDate from '../../../helpers/format-date';
 
 <template>
-  <tr>
-    <td>
+  <PixTableColumn @context={{@context}}>
+    <:header>
+      {{t "components.autonomous-courses.list.headers.id"}}
+    </:header>
+    <:cell>
       {{@item.id}}
-    </td>
-    <td>
+    </:cell>
+  </PixTableColumn>
+  <PixTableColumn @context={{@context}}>
+    <:header>
+      {{t "components.autonomous-courses.list.headers.name"}}
+    </:header>
+    <:cell>
       <LinkTo @route="authenticated.autonomous-courses.details" @model={{@item.id}}>
         {{@item.name}}
       </LinkTo>
-    </td>
-    <td>
+    </:cell>
+  </PixTableColumn>
+  <PixTableColumn @context={{@context}}>
+    <:header>
+      {{t "components.autonomous-courses.list.headers.createdAt"}}
+    </:header>
+    <:cell>
       {{formatDate @item.createdAt}}
-    </td>
-    <td>
+    </:cell>
+  </PixTableColumn>
+  <PixTableColumn @context={{@context}}>
+    <:header>
+      {{t "components.autonomous-courses.list.headers.status"}}
+    </:header>
+    <:cell>
       {{#if @item.archivedAt}}
         <PixTag @color="grey-light">
           {{t "components.autonomous-courses.list.status.archived"}}
@@ -27,6 +46,6 @@ import formatDate from '../../../helpers/format-date';
           {{t "components.autonomous-courses.list.status.active"}}
         </PixTag>
       {{/if}}
-    </td>
-  </tr>
+    </:cell>
+  </PixTableColumn>
 </template>

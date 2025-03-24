@@ -95,7 +95,7 @@ export default class List extends Component {
 
   <template>
     {{#if @members}}
-      <PixTable @variant="primary" @data={{@members}} @caption={{t "pages.team.table.caption"}}>
+      <PixTable @variant="admin" @data={{@members}} @caption={{t "pages.team.table.caption"}}>
         <:columns as |member context|>
           <PixTableColumn @context={{context}}>
             <:header>
