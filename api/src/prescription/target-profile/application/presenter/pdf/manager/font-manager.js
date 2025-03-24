@@ -1,9 +1,6 @@
-import { readFile } from 'node:fs/promises';
-import * as url from 'node:url';
+import { FONTS, initializeFonts } from '../../../../../../shared/infrastructure/serializers/pdf/utils.js';
 
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-
-const embeddedFonts = {};
+let embeddedFonts = {};
 const COVER_PAGE_VERSION_TEXT_FONT_SIZE = 20;
 const COVER_PAGE_LEGAL_MENTION_TEXT_FONT_SIZE = 10;
 const COVER_PAGE_TITLE_TEXT_FONT_SIZE = 30;
@@ -13,13 +10,6 @@ const COMPETENCE_TEXT_FONT_SIZE = 12;
 const TUBE_TITLE_TEXT_FONT_SIZE = 7;
 const TUBE_DESCRIPTION_TEXT_FONT_SIZE = 7.5;
 const THEMATIC_TEXT_FONT_SIZE = 7;
-
-const fonts = {
-  robotoCondensedBold: 'RobotoCondensed-Bold.ttf',
-  robotoCondensedLight: 'RobotoCondensed-Light.ttf',
-  robotoCondensedRegular: 'RobotoCondensed-Regular.ttf',
-  robotoRegular: 'Roboto-Regular.ttf',
-};
 
 const FontManager = {
   key: {
@@ -178,15 +168,16 @@ const FontManager = {
 
   /**
    * @param pdfDocument {PDFDocument}
-   * @param dirname {string}
    * @returns {Promise<void>}
    */
   async initializeFonts(pdfDocument) {
-    for (const fontKey in fonts) {
-      const fontFilename = fonts[fontKey];
-      const fontFile = await readFile(`${__dirname}/fonts/${fontFilename}`);
-      embeddedFonts[fontKey] = await pdfDocument.embedFont(fontFile, { subset: true, customName: fontFilename });
-    }
+    const newEmbeddedFonts = await initializeFonts(pdfDocument, [
+      FONTS.robotoCondensedBold,
+      FONTS.robotoCondensedLight,
+      FONTS.robotoCondensedRegular,
+      FONTS.robotoRegular,
+    ]);
+    embeddedFonts = Object.assign(embeddedFonts, newEmbeddedFonts);
   },
 };
 
