@@ -137,9 +137,10 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           .from('client_applications')
           .where({ clientId })
           .first();
-        expect(updatedAt).to.be.greaterThan(createdAt);
+
         expect(scopes).to.have.lengthOf(4);
         expect(scopes).to.have.members(['scope1', 'scope2', 'newScope1', 'newScope2']);
+        expect(updatedAt).to.be.greaterThan(createdAt);
       });
     });
 
@@ -175,9 +176,10 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           .from('client_applications')
           .where({ clientId })
           .first();
-        expect(updatedAt).to.be.greaterThan(createdAt);
+
         expect(scopes).to.have.lengthOf(1);
         expect(scopes).to.deep.equal(['scope4']);
+        expect(updatedAt).to.be.greaterThan(createdAt);
       });
     });
 
