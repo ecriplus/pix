@@ -9,20 +9,30 @@ import { tokenRoutes } from './token/token.route.js';
 import { userAdminRoutes } from './user/user.admin.route.js';
 import { userRoutes } from './user/user.route.js';
 
-const register = async function (server) {
-  server.route([
-    ...accountRecoveryRoutes,
-    ...anonymizationAdminRoutes,
-    ...ltiRoutes,
-    ...oidcProviderAdminRoutes,
-    ...oidcProviderRoutes,
-    ...passwordRoutes,
-    ...samlRoutes,
-    ...tokenRoutes,
-    ...userAdminRoutes,
-    ...userRoutes,
-  ]);
-};
+const allRoutes = [
+  ...accountRecoveryRoutes,
+  ...anonymizationAdminRoutes,
+  ...ltiRoutes,
+  ...oidcProviderAdminRoutes,
+  ...oidcProviderRoutes,
+  ...passwordRoutes,
+  ...samlRoutes,
+  ...tokenRoutes,
+  ...userAdminRoutes,
+  ...userRoutes,
+];
+
+function register(server, { routes = allRoutes, tags }) {
+  if (!tags) {
+    server.route(routes);
+    return;
+  }
+
+  const filteredRoutes = routes.filter((route) =>
+    (route.config ?? route.options).tags.some((tag) => tags.includes(tag)),
+  );
+  server.route(filteredRoutes);
+}
 
 const name = 'identity-access-management-api';
 
