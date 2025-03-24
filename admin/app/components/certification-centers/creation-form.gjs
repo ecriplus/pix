@@ -53,11 +53,11 @@ export default class CertificationCenterForm extends Component {
 
   @action
   updateGrantedHabilitation(habilitation) {
-    const habilitations = this.habilitations;
-    if (habilitations.includes(habilitation)) {
-      habilitations.removeObject(habilitation);
+    const index = this.habilitations.indexOf(habilitation);
+    if (index !== -1) {
+      this.habilitations.splice(index, 1);
     } else {
-      habilitations.push(habilitation);
+      this.habilitations.push(habilitation);
     }
   }
 

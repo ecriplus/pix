@@ -48,7 +48,8 @@ export default class InformationEdit extends Component {
   async updateGrantedHabilitation(habilitation) {
     const habilitations = await this.form.habilitations;
     if (habilitations.includes(habilitation)) {
-      habilitations.removeObject(habilitation);
+      const index = habilitations.indexOf(habilitation);
+      habilitations.splice(index, 1);
     } else {
       habilitations.push(habilitation);
     }
