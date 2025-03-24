@@ -1,5 +1,6 @@
 import { randomUUID } from 'node:crypto';
 
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { SessionPublicationBatchResult } from '../models/SessionPublicationBatchResult.js';
 
 const publishSessionsInBatch = async function ({
@@ -17,21 +18,23 @@ const publishSessionsInBatch = async function ({
   const result = new SessionPublicationBatchResult(batchId);
   for (const sessionId of sessionIds) {
     try {
-      const session = await sessionPublicationService.publishSession({
-        sessionId,
-        publishedAt,
-        certificationRepository,
-        finalizedSessionRepository,
-        sharedSessionRepository,
-        sessionRepository,
-      });
+      await DomainTransaction.execute(async () => {
+        const session = await sessionPublicationService.publishSession({
+          sessionId,
+          publishedAt,
+          certificationRepository,
+          finalizedSessionRepository,
+          sharedSessionRepository,
+          sessionRepository,
+        });
 
-      await sessionPublicationService.manageEmails({
-        i18n,
-        session,
-        publishedAt,
-        certificationCenterRepository,
-        sessionRepository,
+        await sessionPublicationService.manageEmails({
+          i18n,
+          session,
+          publishedAt,
+          certificationCenterRepository,
+          sessionRepository,
+        });
       });
     } catch (error) {
       result.addPublicationError(sessionId, error);
