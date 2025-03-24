@@ -1,4 +1,3 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationCenter } from '../../../../shared/domain/models/CertificationCenter.js';
@@ -85,8 +84,9 @@ export const findByExternalId = async ({ externalId }) => {
   });
 };
 
-export const getRefererEmails = async ({ id }) =>
-  await knex('certification-centers')
+export const getRefererEmails = async ({ id }) => {
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn('certification-centers')
     .select('users.email')
     .join(
       'certification-center-memberships',
@@ -96,3 +96,4 @@ export const getRefererEmails = async ({ id }) =>
     .join('users', 'users.id', 'certification-center-memberships.userId')
     .where('certification-centers.id', id)
     .where('certification-center-memberships.isReferer', true);
+};
