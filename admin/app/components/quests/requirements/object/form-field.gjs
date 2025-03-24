@@ -122,6 +122,7 @@ export default class ObjectRequirementCreateOrEditFormField extends Component {
             <PixInput
               onchange={{this.updateValue}}
               @subLabel={{this.placeholder}}
+              @value={{this.formValue}}
               required={{true}}
               aria-required={{true}}
             >

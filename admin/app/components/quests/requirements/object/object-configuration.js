@@ -9,7 +9,7 @@ class ObjectConfiguration {
     const data = {};
     for (const fieldConfiguration of this.fieldConfigurations) {
       const formField = formFields.find((formField) => formField.name === fieldConfiguration.name);
-      const trimmedFormFieldValue = formField.value ? formField.value.trim() : formField.value;
+      const trimmedFormFieldValue = formField.value ? formField.value.toString().trim() : formField.value;
       const isFormFieldValid = formField.comparison && trimmedFormFieldValue;
       if (!isFormFieldValid) {
         continue;

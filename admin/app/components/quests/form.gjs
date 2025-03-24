@@ -3,7 +3,6 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
-import PageTitle from '../ui/page-title';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
@@ -11,24 +10,19 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 
+import PageTitle from '../ui/page-title';
+import SnippetList from './snippets/list';
+
 const LOCAL_STORAGE_KEY = 'QUEST_REQUIREMENT_SNIPPETS';
 
 export default class QuestForm extends Component {
   @tracked name = '';
   @tracked rewardType = 'attestations';
   @tracked rewardId = '';
-  //@tracked eligibilityRequirementsStr = 'all(one-of(OrgaAEFE,OrgaSCO),all(OrgaAEFE,OrgaSCO,MonCousin),OrgaAEFE)';
   @tracked eligibilityRequirementsStr = '';
 
   @service router;
   @service pixToast;
-
-  get snippets() {
-    const snippets = JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY)) ?? {
-      objectRequirementsByLabel: {},
-    };
-    return Object.keys(snippets.objectRequirementsByLabel);
-  }
 
   @action
   updateName(event) {
@@ -201,24 +195,12 @@ export default class QuestForm extends Component {
           </PixButton>
         </li>
       </ul>
-      <ul class="quest-button-edition__list">
-        {{#each this.snippets as |snippetName|}}
-          <li>
-            <PixButton
-              @size="small"
-              @variant="secondary"
-              @triggerAction={{fn this.appendToEligibilityRequirements snippetName}}
-            >
-              {{snippetName}}
-            </PixButton>
-          </li>
-        {{/each}}
-      </ul>
+      <SnippetList @triggerAction={{this.appendToEligibilityRequirements}} />
     </PixBlock>
 
     <div class="quest-button-edition__button">
       <PixButtonLink @route="authenticated.quest-new-or-edit-snippet" @size="small" @variant="primary">
-        Ajouter un nouveau snippet de requirement
+        Créer ou modifier un snippet de requirement
       </PixButtonLink>
 
       <PixButton @size="small" @variant="success" @triggerAction={{this.copyEligibilityRequirementsToClipboard}}>

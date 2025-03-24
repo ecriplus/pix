@@ -4,14 +4,10 @@ import PixRadioButton from '@1024pix/pix-ui/components/pix-radio-button';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
-import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 import { eq } from 'ember-truth-helpers';
 import FormField from 'pix-admin/components/quests/requirements/object/form-field';
 import PixFieldset from 'pix-admin/components/ui/pix-fieldset';
-
-const LOCAL_STORAGE_KEY = 'QUEST_REQUIREMENT_SNIPPETS';
 
 /**
  * @param {ObjectConfiguration} configuration
@@ -20,61 +16,25 @@ const LOCAL_STORAGE_KEY = 'QUEST_REQUIREMENT_SNIPPETS';
  * @param {{fieldComparison: String, fieldValue: Any, fieldName: String}[]} requirementFields
  */
 export default class ObjectRequirementCreateOrEditForm extends Component {
-  @service pixToast;
-  @tracked formLabel;
-  @tracked formComparison;
-  @tracked formFields;
-
-  constructor() {
-    super(...arguments);
-    this.formLabel = this.args.requirementLabel ?? '';
-    this.formComparison = this.args.requirementComparison ?? 'all';
-    this.formFields =
-      structuredClone(this.args.requirementFields) ??
-      this.args.configuration.fieldConfigurations.map((fieldConfiguration) => ({
-        name: fieldConfiguration.name,
-        comparison: null,
-        value: null,
-      }));
+  @action
+  getFieldComparisonForName(value) {
+    return this.args.formFields.find((field) => field.name === value).comparison;
   }
 
   @action
-  updateLabel(event) {
-    this.formLabel = event.target.value;
-  }
-
-  @action
-  updateComparison(value) {
-    this.formComparison = value;
-  }
-
-  @action
-  updateField({ name, comparison, value }) {
-    const field = this.formFields.find((field) => field.name === name);
-    field.comparison = comparison;
-    field.value = value;
-  }
-
-  @action
-  saveSnippet(event) {
-    event.preventDefault();
-    try {
-      const requirement = this.args.configuration.buildRequirementFromFormValues(this.formComparison, this.formFields);
-      const snippets = JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY)) ?? {
-        objectRequirementsByLabel: {},
-      };
-      snippets.objectRequirementsByLabel[this.formLabel] = requirement;
-      window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(snippets));
-      this.pixToast.sendSuccessNotification({ message: 'Le requirement est ajouté dans le local storage.' });
-    } catch (error) {
-      console.log(error);
-      this.pixToast.sendErrorNotification({ message: "Le requirement n'a pas pu être ajouté." });
-    }
+  getFieldValueForName(value) {
+    return this.args.formFields.find((field) => field.name === value).value;
   }
 
   <template>
-    <form class="quest-object-form" {{on "submit" this.saveSnippet}}>
-      <PixInput onchange={{this.updateLabel}} required={{true}} aria-required={{true}}>
+    <form class="quest-object-form" {{on "submit" @saveSnippet}}>
+      <PixInput
+        class="quest-requirement-form__item-width-content"
+        onchange={{@updateLabel}}
+        @value={{@requirementLabel}}
+        required={{true}}
+        aria-required={{true}}
+      >
         <:label>Nom de la condition</:label>
       </PixInput>
 
@@ -84,16 +44,16 @@ export default class ObjectRequirementCreateOrEditForm extends Component {
           <PixRadioButton
             name="comparison"
             @value={{true}}
-            {{on "change" (fn this.updateComparison "all")}}
-            checked={{eq this.formComparison "all"}}
+            {{on "change" (fn @updateComparison "all")}}
+            checked={{eq @requirementComparison "all"}}
           >
             <:label>Tous les critères sont remplis</:label>
           </PixRadioButton>
           <PixRadioButton
             name="comparison"
             @value={{false}}
-            {{on "change" (fn this.updateComparison "one-of")}}
-            checked={{eq this.formComparison "one-of"}}
+            {{on "change" (fn @updateComparison "one-of")}}
+            checked={{eq @requirementComparison "one-of"}}
           >
             <:label>Au moins un critère est rempli</:label>
           </PixRadioButton>
@@ -103,7 +63,7 @@ export default class ObjectRequirementCreateOrEditForm extends Component {
       {{#each @configuration.fieldConfigurations as |fieldConfiguration|}}
         <FormField
           @fieldConfiguration={{fieldConfiguration}}
-          @onFieldUpdated={{this.updateField}}
+          @onFieldUpdated={{@updateField}}
           @fieldComparison={{this.getFieldComparisonForName fieldConfiguration.name}}
           @fieldValue={{this.getFieldValueForName fieldConfiguration.name}}
         />
