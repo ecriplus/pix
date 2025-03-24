@@ -48,7 +48,7 @@ export default class Stages extends Component {
   }
 
   get hasNewStage() {
-    return this.stages.any((stage) => stage.isBeingCreated);
+    return this.stages.some((stage) => stage.isBeingCreated);
   }
 
   get newStages() {

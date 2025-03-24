@@ -93,7 +93,7 @@ export default class UserOverview extends Component {
 
   get hasSsoAuthentication() {
     const oidcProvidersCodes = this.oidcIdentityProviders.list.map((provider) => provider.code);
-    return this.authenticationMethods.any(
+    return this.authenticationMethods.some(
       (authenticationMethod) =>
         oidcProvidersCodes.includes(authenticationMethod.identityProvider) ||
         authenticationMethod.identityProvider === 'GAR',
