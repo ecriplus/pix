@@ -4,7 +4,7 @@ import List from 'pix-admin/components/team/list';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import setupIntlRenderingTest, {t} from '../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest, { t } from '../../../helpers/setup-intl-rendering';
 import { waitForDialogClose } from '../../../helpers/wait-for.js';
 
 module('Integration | Component | team | list', function (hooks) {
@@ -28,8 +28,8 @@ module('Integration | Component | team | list', function (hooks) {
 
       // then
       const table = screen.getByRole('table', { name: t('pages.team.table.caption') });
-      assert.dom(within(table).getByRole('cell', { name: 'marie.tim@example.net'})).exists();
-      assert.dom(within(table).getByRole('cell', { name: 'SUPER_ADMIN'})).exists();
+      assert.dom(within(table).getByRole('cell', { name: 'marie.tim@example.net' })).exists();
+      assert.dom(within(table).getByRole('cell', { name: 'SUPER_ADMIN' })).exists();
     });
 
     test('should display action buttons for a member', async function (assert) {

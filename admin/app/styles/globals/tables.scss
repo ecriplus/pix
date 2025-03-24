@@ -72,17 +72,9 @@ td.td--bold {
     text-align: center;
   }
 
-  &--id {
-    width: 140px;
-  }
-
   &--break-word {
     word-break: break-all;
   }
-}
-
-.table__cell--name {
-  word-break: break-all;
 }
 
 .table__cell--percentage {

@@ -54,7 +54,7 @@ export default class Places extends Component {
       {{/if}}
 
       {{#unless @places}}
-        <div class="table-admin-empty">Aucun lot de places saisi</div>
+        <div class="table__empty">Aucun lot de places saisi</div>
       {{/unless}}
 
       <DeleteModal
