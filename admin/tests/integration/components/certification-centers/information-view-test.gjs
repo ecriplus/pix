@@ -5,14 +5,6 @@ import InformationView from 'pix-admin/components/certification-centers/informat
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
-function _createEmberDataHabilitations(store) {
-  return ArrayProxy.create({
-    content: [
-      store.createRecord('complementary-certification', { id: 0, key: 'DROIT', label: 'Pix+Droit' }),
-      store.createRecord('complementary-certification', { id: 1, key: 'CLEA', label: 'Cléa' }),
-    ],
-  });
-}
 
 module('Integration | Component | certification-centers/information-view', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -20,7 +12,13 @@ module('Integration | Component | certification-centers/information-view', funct
   test('it should display label and values in read mode', async function (assert) {
     // given
     const store = this.owner.lookup('service:store');
-    const availableHabilitations = _createEmberDataHabilitations(store);
+    const pixDroitHabilitation = store.createRecord('complementary-certification', {
+      id: 0,
+      key: 'DROIT',
+      label: 'Pix+Droit',
+    });
+    const cleaHabilitation = store.createRecord('complementary-certification', { id: 1, key: 'CLEA', label: 'Cléa' });
+    const availableHabilitations = ArrayProxy.create({ content: [pixDroitHabilitation, cleaHabilitation] });
 
     const certificationCenter = store.createRecord('certification-center', {
       name: 'Centre SCO',
@@ -29,7 +27,7 @@ module('Integration | Component | certification-centers/information-view', funct
       dataProtectionOfficerFirstName: 'Lucky',
       dataProtectionOfficerLastName: 'Number',
       dataProtectionOfficerEmail: 'lucky@example.net',
-      habilitations: [availableHabilitations.firstObject],
+      habilitations: [pixDroitHabilitation],
     });
 
     // when
