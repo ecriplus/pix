@@ -17,7 +17,7 @@ describe('Integration | Infrastructure | Serializers | Pdf | PdfWithForm', funct
 
       const template = `${__dirname}/template.pdf`;
       const data = new Map();
-      data.set('fullName', 'Nom complet');
+      data.set('fullName', 'Ķatherine AvecUnCharChelou');
       data.set('date', '12/02/21');
 
       // when
