@@ -1,6 +1,7 @@
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import sortBy from 'lodash/sortBy';
 
 import Area from '../../common/tubes-details/area';
 
@@ -17,7 +18,7 @@ export default class Details extends Component {
   }
 
   get areasList() {
-    return this.areas.sortBy('code').map((area) => this.buildAreaViewModel(area));
+    return sortBy(this.areas, 'code').map((area) => this.buildAreaViewModel(area));
   }
 
   buildAreaViewModel(area) {

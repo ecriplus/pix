@@ -5,6 +5,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import sortBy from 'lodash/sortBy';
 
 import ActionsOnUsersRoleInOrganization from '../actions-on-users-role-in-organization';
 
@@ -12,7 +13,7 @@ export default class UserOrganizationMemberships extends Component {
   @service accessControl;
 
   get orderedOrganizationMemberships() {
-    return this.args.organizationMemberships.sortBy('organizationName');
+    return sortBy(this.args.organizationMemberships, 'organizationName');
   }
 
   <template>

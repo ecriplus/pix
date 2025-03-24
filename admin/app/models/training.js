@@ -1,4 +1,5 @@
 import Model, { attr, hasMany } from '@ember-data/model';
+import sortBy from 'lodash/sortBy';
 
 import formatList from '../utils/format-select-options';
 
@@ -54,6 +55,6 @@ export default class Training extends Model {
   }
 
   get sortedTargetProfileSummaries() {
-    return this.hasMany('targetProfileSummaries').value().sortBy('id');
+    return sortBy(this.hasMany('targetProfileSummaries').value(), 'id');
   }
 }

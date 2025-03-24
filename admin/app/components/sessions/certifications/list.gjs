@@ -4,11 +4,15 @@ import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { LinkTo } from '@ember/routing';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
+import sortBy from 'lodash/sortBy';
 
 import CertificationStatus from './status';
 export default class CertificationsHeader extends Component {
   get sortedCertificationJurySummaries() {
-    return this.args.juryCertificationSummaries.sortBy('numberOfCertificationIssueReportsWithRequiredAction').reverse();
+    return sortBy(
+      this.args.juryCertificationSummaries,
+      'numberOfCertificationIssueReportsWithRequiredAction',
+    ).reverse();
   }
 
   <template>

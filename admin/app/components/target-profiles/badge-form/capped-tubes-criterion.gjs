@@ -6,6 +6,7 @@ import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import sortBy from 'lodash/sortBy';
 
 import Areas from '../../common/tubes-selection/areas';
 
@@ -22,7 +23,7 @@ export default class CappedTubesCriterion extends Component {
   }
 
   get areas() {
-    return this.areasList.sortBy('code');
+    return sortBy(this.areasList, 'code');
   }
 
   @action

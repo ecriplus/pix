@@ -6,12 +6,13 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import sortBy from 'lodash/sortBy';
 
 export default class CertificationCenterInvitations extends Component {
   @service intl;
 
   get sortedCertificationCenterInvitations() {
-    return this.args.certificationCenterInvitations.sortBy('updatedAt').reverse();
+    return sortBy(this.args.certificationCenterInvitations, 'updatedAt').reverse();
   }
 
   <template>

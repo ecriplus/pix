@@ -1,5 +1,4 @@
 import { render } from '@1024pix/ember-testing-library';
-import ArrayProxy from '@ember/array/proxy';
 import { t } from 'ember-intl/test-support';
 import InformationView from 'pix-admin/components/certification-centers/information-view';
 import { module, test } from 'qunit';
@@ -18,7 +17,7 @@ module('Integration | Component | certification-centers/information-view', funct
       label: 'Pix+Droit',
     });
     const cleaHabilitation = store.createRecord('complementary-certification', { id: 1, key: 'CLEA', label: 'Cléa' });
-    const availableHabilitations = ArrayProxy.create({ content: [pixDroitHabilitation, cleaHabilitation] });
+    const availableHabilitations = [pixDroitHabilitation, cleaHabilitation];
 
     const certificationCenter = store.createRecord('certification-center', {
       name: 'Centre SCO',

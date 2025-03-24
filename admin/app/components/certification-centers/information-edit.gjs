@@ -9,6 +9,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import sortBy from 'lodash/sortBy';
 
 import contains from '../../helpers/contains.js';
 import { types } from '../../models/certification-center';
@@ -29,7 +30,7 @@ export default class InformationEdit extends Component {
   }
 
   get availableHabilitations() {
-    return this.args.availableHabilitations?.sortBy('id');
+    return sortBy(this.args.availableHabilitations, 'id');
   }
 
   @action

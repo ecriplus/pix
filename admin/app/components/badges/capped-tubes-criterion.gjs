@@ -1,13 +1,11 @@
 import Component from '@glimmer/component';
+import sortBy from 'lodash/sortBy';
 
 import Area from '../common/tubes-details/area';
 
 export default class CappedTubesCriterion extends Component {
   get areasForView() {
-    return this.args.targetProfile
-      .hasMany('areas')
-      .value()
-      .sortBy('code')
+    return sortBy(this.args.targetProfile.hasMany('areas').value(), 'code')
       .map((area) => ({
         area,
         competences: this._buildCompetencesViewModel(area.hasMany('competences').value()),
@@ -21,8 +19,7 @@ export default class CappedTubesCriterion extends Component {
   }
 
   _buildCompetencesViewModel(competences) {
-    return competences
-      .sortBy('index')
+    return sortBy(competences, 'index')
       .map((competence) => ({
         competence,
         thematics: this._buildThematicsViewModel(competence.hasMany('thematics').value()),
@@ -35,8 +32,7 @@ export default class CappedTubesCriterion extends Component {
   }
 
   _buildThematicsViewModel(thematics) {
-    return thematics
-      .sortBy('index')
+    return sortBy(thematics, 'index')
       .map((thematic) => ({
         thematic,
         tubes: this._buildTubesViewModel(thematic.hasMany('tubes').value()),
@@ -50,8 +46,7 @@ export default class CappedTubesCriterion extends Component {
   }
 
   _buildTubesViewModel(tubes) {
-    return tubes
-      .sortBy('practicalName')
+    return sortBy(tubes, 'practicalName')
       .map((tube) => ({
         tube,
         cappedTube: this.args.criterion.cappedTubes.find(({ tubeId }) => tubeId === tube.id),

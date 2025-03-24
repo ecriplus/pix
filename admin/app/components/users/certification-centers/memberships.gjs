@@ -6,7 +6,9 @@ import MembershipItem from './membership-item';
 
 export default class Memberships extends Component {
   get orderedCertificationCenterMemberships() {
-    return this.args.certificationCenterMemberships.sortBy('certificationCenter.name');
+    return [...this.args.certificationCenterMemberships].sort((a, b) =>
+      a.certificationCenter?.get('name')?.localeCompare(b.certificationCenter?.get('name')),
+    );
   }
 
   <template>

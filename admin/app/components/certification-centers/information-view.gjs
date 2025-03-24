@@ -7,6 +7,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import sortBy from 'lodash/sortBy';
 import ENV from 'pix-admin/config/environment';
 
 import HabilitationTag from './habilitation-tag';
@@ -25,7 +26,7 @@ export default class InformationView extends Component {
   }
 
   get availableHabilitations() {
-    const habilitations = this.args.availableHabilitations?.sortBy('id') || [];
+    const habilitations = sortBy(this.args.availableHabilitations, 'id');
     return habilitations.map((habilitation) => {
       const isHabilitated = this.habilitations.includes(habilitation);
       const label = habilitation.label;
