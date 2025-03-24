@@ -786,6 +786,11 @@
             }
           }
         },
+        "neutralization": {
+          "table": {
+            "caption": "Liste des questions passées par le candidats. Contient l'identifiant et le RecId de l'épreuve associé. Une action permet de neutraliser ou de dé-neutraliser les questions."
+          }
+        },
         "result": {
           "table": {
             "headers": {
