@@ -4,6 +4,7 @@ export const COMPARISONS = {
   EQUAL: 'equal',
   ONE_OF: 'one-of',
   ALL: 'all',
+  LIKE: 'like',
 };
 
 export class CriterionProperty {
@@ -49,6 +50,13 @@ export class CriterionProperty {
     } else {
       if (this.#comparison === COMPARISONS.EQUAL) {
         return dataAttr === criterionAttr;
+      }
+      if (this.#comparison === COMPARISONS.LIKE) {
+        const coercedDataAttr = dataAttr ?? '';
+        if (typeof criterionAttr === 'string' && typeof coercedDataAttr === 'string') {
+          return coercedDataAttr.toLowerCase().includes(criterionAttr.toLowerCase());
+        }
+        throw new ComparisonNotImplementedError(this.#comparison);
       }
       throw new ComparisonNotImplementedError(this.#comparison);
     }
