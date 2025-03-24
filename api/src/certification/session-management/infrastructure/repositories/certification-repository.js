@@ -1,10 +1,12 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 
 const getStatusesBySessionId = async function (sessionId) {
-  // isCancelled will be removed
-  return knex('certification-courses')
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn('certification-courses')
     .select({
       certificationCourseId: 'certification-courses.id',
+      // isCancelled will be removed
       isCancelled: 'certification-courses.isCancelled',
       pixCertificationStatus: 'assessment-results.status',
     })
