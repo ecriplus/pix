@@ -1,6 +1,5 @@
 import { learnerParticipationController } from '../../../../../src/prescription/campaign-participation/application/learner-participation-controller.js';
 import { usecases } from '../../../../../src/prescription/campaign-participation/domain/usecases/index.js';
-import { ApplicationTransaction } from '../../../../../src/prescription/shared/infrastructure/ApplicationTransaction.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
@@ -25,10 +24,10 @@ describe('Unit | Application | Controller | Learner-Participation', function () 
         },
       };
       sinon.stub(usecases, 'shareCampaignResult');
-      sinon.stub(ApplicationTransaction, 'execute').callsFake((callback) => {
+      sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
         return callback();
       });
-      sinon.stub(ApplicationTransaction, 'getTransactionAsDomainTransaction');
+      sinon.stub(DomainTransaction, 'getConnection');
     });
 
     it('should call the usecase to share campaign result', async function () {

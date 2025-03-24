@@ -2,9 +2,9 @@ import _ from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { CAMPAIGN_FEATURES } from '../../../../shared/domain/constants.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { cryptoService } from '../../../../shared/domain/services/crypto-service.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
-import { ApplicationTransaction } from '../../../shared/infrastructure/ApplicationTransaction.js';
 import { UnknownCampaignId } from '../../domain/errors.js';
 import { Campaign } from '../../domain/models/Campaign.js';
 
@@ -31,7 +31,7 @@ const CAMPAIGN_ATTRIBUTES = [
 ];
 
 const getByIds = async (ids) => {
-  const knexConn = ApplicationTransaction.getConnection();
+  const knexConn = DomainTransaction.getConnection();
   const campaigns = await knexConn('campaigns').whereIn('id', ids);
 
   if (campaigns.length === 0) return null;
@@ -64,7 +64,7 @@ const get = async function (id) {
 };
 
 const update = async function (campaign) {
-  const knexConn = ApplicationTransaction.getConnection();
+  const knexConn = DomainTransaction.getConnection();
   const [editedCampaign] = await knexConn('campaigns')
     .where({ id: campaign.id })
     .update(_.pick(campaign, CAMPAIGN_ATTRIBUTES))
