@@ -7,13 +7,8 @@
 
 .circle-chart {
   position: relative;
-  display: flex;
-}
-
-.circle-chart__content {
   width: 100px;
   height: 100px;
-  max-height: 128px;
 
   &--small {
     width: 70px;
@@ -24,6 +19,11 @@
     width: 120px;
     height: 120px;
   }
+}
+
+.circle-chart__circle {
+  width: 100%;
+  height: 100%;
 }
 
 .circle {
@@ -64,11 +64,7 @@
 
 .circle-chart__text {
   position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

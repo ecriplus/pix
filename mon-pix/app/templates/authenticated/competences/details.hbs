@@ -1,11 +1,7 @@
 {{page-title @model.name}}
 
 <Global::AppLayout>
-  <main id="main" class="main background-banner-wrapper competence-details" role="main">
-    <div class="background-banner"></div>
-
-    <div class="rounded-panel rounded-panel--strong rounded-panel--over-background-banner">
-      <ScorecardDetails @scorecard={{@model}} />
-    </div>
+  <main id="main" class="competence-details global-page-container" role="main">
+    <ScorecardDetails @scorecard={{@model}} />
   </main>
 </Global::AppLayout>

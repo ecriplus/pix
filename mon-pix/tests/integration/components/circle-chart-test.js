@@ -56,15 +56,10 @@ module('Integration | Component | circle-chart', function (hooks) {
 
     test('should display the chart with given width and height', async function (assert) {
       // when
-      await render(hbs`<CircleChart @chartClass='circle-chart__content--big' />`);
+      await render(hbs`<CircleChart @chartClass='circle-chart--big' />`);
 
       // then
-      assert.ok(
-        this.element
-          .querySelector('.circle-chart__content')
-          .getAttribute('class')
-          .includes('circle-chart__content--big'),
-      );
+      assert.ok(this.element.querySelector('.circle-chart').getAttribute('class').includes('circle-chart--big'));
     });
   });
 });

@@ -1,27 +1,28 @@
 <div>
-  <div class="scorecard-details__header">
-    <PixButtonLink @route="authenticated.profile" @variant="tertiary" @iconBefore="arrowLeft">
+  <section class="scorecard-details__header">
+    <PixButtonLink
+      @route="authenticated.profile"
+      @variant="tertiary"
+      @iconBefore="arrowLeft"
+      class="scorecard-details-header__back-button"
+    >
       {{t "navigation.back-to-profile"}}
     </PixButtonLink>
-  </div>
+  </section>
 
-  <div class="scorecard-details__content">
-    <div class="scorecard-details-content__left">
-      <div class="scorecard-details-content-left__area scorecard-details-content-left__area--{{@scorecard.area.color}}">
-        {{@scorecard.area.title}}
-      </div>
-      <h1 class="scorecard-details-content-left__name">
+  <section class="scorecard-details__competence">
+    <div class="scorecard-details-competence__details">
+      <h1 class="scorecard-details-competence-details__name">
         {{@scorecard.name}}
       </h1>
-      <div class="scorecard-details-content-left__description">
+      <div class="scorecard-details-competence-details__description">
         {{@scorecard.description}}
       </div>
     </div>
 
-    <div class="scorecard-details-content__right">
-
+    <div class="scorecard-details-content__score">
       {{#if @scorecard.isFinished}}
-        <div class="scorecard-details-content-right__score-container">
+        <div class="scorecard-details-content-score__score-container">
           {{#if this.displayCongrats}}
             <div class="competence-card__congrats">
               <div class="competence-card__level competence-card__level--congrats">
@@ -35,7 +36,7 @@
             <CircleChart
               @value={{@scorecard.capedPercentageAheadOfNextLevel}}
               @sliceColor={{@scorecard.area.color}}
-              @chartClass="circle-chart__content--big"
+              @chartClass="circle-chart--big"
               @thicknessClass="circle--thick"
               role="img"
               aria-label="{{scorecard-aria-label @scorecard}}"
@@ -47,7 +48,7 @@
             </CircleChart>
           {{/if}}
 
-          <div class="scorecard-details-content-right-score-container__pix-earned">
+          <div class="pix-earned">
             <div class="score-label">{{t "common.pix"}}</div>
             <div class="score-value">{{replace-zero-by-dash @scorecard.earnedPix}}</div>
           </div>
@@ -55,28 +56,29 @@
 
         {{#if this.displayImprovingWaitSentence}}
           <div class="scorecard-details__improvement-countdown">
-            <span class="scorecard-details-improvement-countdown__label">{{t
+            <div class="scorecard-details-improvement-countdown__label">{{t
                 "pages.competence-details.actions.improve.description.waiting-text"
-              }}</span>
-            <span class="scorecard-details-improvement-countdown__count">{{t
+              }}</div>
+            <strong class="scorecard-details-improvement-countdown__count">{{t
                 "pages.competence-details.actions.improve.description.countdown"
                 daysBeforeImproving=@scorecard.remainingDaysBeforeImproving
-              }}</span>
+              }}</strong>
           </div>
         {{/if}}
 
         {{#if this.displayImprovingButton}}
           <PixButton
-            class="scorecard-details__improve-button button--big"
+            class="scorecard-details__improve-button"
             @variant="success"
+            @size="large"
             @triggerAction={{this.improveCompetenceEvaluation}}
           >
             {{t "pages.competence-details.actions.improve.label"}}
             <span class="sr-only">{{t "pages.competence-details.for-competence" competence=@scorecard.name}}</span>
           </PixButton>
-          <span class="scorecard-details__improving-text">{{t
+          <div class="scorecard-details__improving-text">{{t
               "pages.competence-details.actions.improve.improvingText"
-            }}</span>
+            }}</div>
         {{/if}}
 
         {{#if this.displayResetButton}}
@@ -92,7 +94,7 @@
         {{/if}}
 
         {{#if this.displayResetWaitSentence}}
-          <p class="scorecard-details-content-right__reset-message">{{t
+          <p class="scorecard-details-content-score__reset-message">{{t
               "pages.competence-details.actions.reset.description"
               daysBeforeReset=@scorecard.remainingDaysBeforeReset
             }}</p>
@@ -100,11 +102,11 @@
       {{/if}}
 
       {{#if @scorecard.isStarted}}
-        <div class="scorecard-details-content-right__score-container">
+        <div class="scorecard-details-content-score__score-container">
           <CircleChart
             @value={{@scorecard.capedPercentageAheadOfNextLevel}}
             @sliceColor={{@scorecard.area.color}}
-            @chartClass="circle-chart__content--big"
+            @chartClass="circle-chart--big"
             @thicknessClass="circle--thick"
             role="img"
             aria-label="{{scorecard-aria-label @scorecard}}"
@@ -115,14 +117,14 @@
             </div>
           </CircleChart>
 
-          <div class="scorecard-details-content-right-score-container__pix-earned">
+          <div class="pix-earned">
             <div class="score-label">{{t "common.pix"}}</div>
             <div class="score-value">{{replace-zero-by-dash @scorecard.earnedPix}}</div>
           </div>
         </div>
 
         {{#if this.displayRemainingPixToNextLevel}}
-          <div class="scorecard-details-content-right__level-info">
+          <div class="scorecard-details-content-score__level-info">
             {{t
               "pages.competence-details.next-level-info"
               remainingPixToNextLevel=@scorecard.remainingPixToNextLevel
@@ -131,14 +133,15 @@
           </div>
         {{/if}}
 
-        <LinkTo
+        <PixButtonLink
+          class="scorecard-details__resume-button"
           @route="authenticated.competences.resume"
           @model={{@scorecard.competenceId}}
-          class="button button--big button--thin button--round button--link button--green scorecard-details__resume-or-start-button"
+          @size="large"
         >
           {{t "pages.competence-details.actions.continue.label"}}
           <span class="sr-only">{{t "pages.competence-details.for-competence" competence=@scorecard.name}}</span>
-        </LinkTo>
+        </PixButtonLink>
 
         {{#if this.displayResetButton}}
           <PixButton
@@ -153,7 +156,7 @@
         {{/if}}
 
         {{#if this.displayResetWaitSentence}}
-          <p class="scorecard-details-content-right__reset-message">{{t
+          <p class="scorecard-details-content-score__reset-message">{{t
               "pages.competence-details.actions.reset.description"
               daysBeforeReset=@scorecard.remainingDaysBeforeReset
             }}</p>
@@ -161,39 +164,43 @@
       {{/if}}
 
       {{#if @scorecard.isNotStarted}}
-        <LinkTo
+        <PixButtonLink
+          class="scorecard-details__start-button"
           @route="authenticated.competences.resume"
           @model={{@scorecard.competenceId}}
-          class="button button--big button--thin button--round button--link button--green scorecard-details__resume-or-start-button"
+          @size="large"
+          @variant="success"
         >
           {{t "pages.competence-details.actions.start.label"}}
           <span class="sr-only">{{t "pages.competence-details.for-competence" competence=@scorecard.name}}</span>
-        </LinkTo>
+        </PixButtonLink>
       {{/if}}
     </div>
-  </div>
+  </section>
+
   {{#if this.tutorialsGroupedByTubeName}}
-    <div class="scorecard-details__content">
-      <div class="tutorials">
-        <div class="tutorials__header">
-          <h2 class="tutorials-header__title">{{t "pages.competence-details.tutorials.title"}}</h2>
-          <p class="tutorials-header__description">{{t "pages.competence-details.tutorials.description"}}</p>
-        </div>
-        <div>
-          {{#each this.tutorialsGroupedByTubeName as |tube|}}
-            <div class="tube">
-              <h3 class="tube__title">{{tube.practicalTitle}}</h3>
-              <ul class="tube__content">
-                {{#each tube.tutorials as |tutorial|}}
-                  <Tutorials::Card @tutorial={{tutorial}} />
-                {{/each}}
-              </ul>
-            </div>
-          {{/each}}
-        </div>
+    <section class="scorecard-details__tutorials">
+      <div class="scorecard-details-tutorials__header">
+        <h2 class="scorecard-details-tutorials-header__title">{{t "pages.competence-details.tutorials.title"}}</h2>
+        <p class="scorecard-details-tutorials-header__description">{{t
+            "pages.competence-details.tutorials.description"
+          }}</p>
       </div>
-    </div>
+      <ul class="scorecard-details-tutorials__list">
+        {{#each this.tutorialsGroupedByTubeName as |tube|}}
+          <li class="tube">
+            <h3 class="tube__title">{{tube.practicalTitle}}</h3>
+            <ul class="tube__content">
+              {{#each tube.tutorials as |tutorial|}}
+                <Tutorials::Card @tutorial={{tutorial}} />
+              {{/each}}
+            </ul>
+          </li>
+        {{/each}}
+      </ul>
+    </section>
   {{/if}}
+
 </div>
 <PixModal
   @title={{t "pages.competence-details.actions.reset.modal.title" scoreCardName=@scorecard.name}}

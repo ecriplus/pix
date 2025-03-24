@@ -10,27 +10,6 @@ module('Integration | Component | scorecard-details', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   module('Component rendering', function () {
-    test('should display the scorecard header with area color', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const scorecard = store.createRecord('scorecard', {
-        area: store.createRecord('area', {
-          title: 'Area title',
-          color: 'jaffa',
-        }),
-      });
-
-      this.set('scorecard', scorecard);
-
-      // when
-      const screen = await render(hbs`<ScorecardDetails @scorecard={{this.scorecard}} />`);
-
-      // then
-      assert.ok(
-        screen.getByText('Area title').getAttribute('class').includes('scorecard-details-content-left__area--jaffa'),
-      );
-    });
-
     test('should display the competence information', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
