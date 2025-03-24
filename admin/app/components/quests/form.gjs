@@ -3,6 +3,7 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
+import PixToggleButton from '@1024pix/pix-ui/components/pix-toggle-button';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
@@ -20,9 +21,19 @@ export default class QuestForm extends Component {
   @tracked rewardType = 'attestations';
   @tracked rewardId = '';
   @tracked eligibilityRequirementsStr = '';
+  @tracked successRequirementsStr = '';
+  @tracked switchRequirements = false;
 
   @service router;
   @service pixToast;
+
+  get requirementsStr() {
+    return this.switchRequirements ? this.successRequirementsStr : this.eligibilityRequirementsStr;
+  }
+
+  get requirementState() {
+    return this.switchRequirements ? 'Succès' : 'Éligiblités';
+  }
 
   @action
   updateName(event) {
@@ -40,13 +51,26 @@ export default class QuestForm extends Component {
   }
 
   @action
-  updateEligibilityRequirements(event) {
-    this.eligibilityRequirementsStr = event.target.value;
+  updateRequirementsStr(event) {
+    if(this.switchRequirements) {
+      this.successRequirementsStr = event.target.value;
+    } else {
+      this.eligibilityRequirementsStr = event.target.value;
+    }
   }
 
   @action
-  appendToEligibilityRequirements(str) {
-    this.eligibilityRequirementsStr += str;
+  appendToRequirementsStr(str) {
+    if(this.switchRequirements) {
+      this.successRequirementsStr += str;
+    } else {
+      this.eligibilityRequirementsStr += str;
+    }
+  }
+
+  @action
+  onChangeRequirements() {
+    this.switchRequirements = !this.switchRequirements;
   }
 
   @action
@@ -60,9 +84,19 @@ export default class QuestForm extends Component {
         snippets.objectRequirementsByLabel,
       );
 
-      const questToJson = JSON.stringify({rewardId: this.rewardId, rewardType: this.rewardType, eligibilityRequirements: [eligibilityRequirements]});
+      const successRequirements = this.popToRootToPip(
+        this.successRequirementsStr,
+        snippets.objectRequirementsByLabel,
+      );
 
-      console.log(questToJson)
+      const questToJson = JSON.stringify({
+        rewardId: this.rewardId,
+        rewardType: this.rewardType,
+        eligibilityRequirements: [eligibilityRequirements],
+        successRequirements: [successRequirements],
+      });
+
+      console.log(questToJson);
       await navigator.clipboard.writeText(questToJson);
       this.pixToast.sendSuccessNotification({
         message: 'Votre quête a été copié dans votre presse papier ou presque.',
@@ -142,35 +176,42 @@ export default class QuestForm extends Component {
     <PageTitle>
       <:title>Création de la quête</:title>
     </PageTitle>
+
     <PixBlock @variant="admin" class="quest-button-edition">
-      <div class="quest-button-edition__form">
-        <PixInput onchange={{this.updateName}} required={{true}}>
-          <:label>Nom de la quête</:label>
-        </PixInput>
-        <PixInput onchange={{this.updateRewardType}} required={{true}}>
-          <:label>Type de récompense</:label>
-        </PixInput>
-        <PixInput onchange={{this.updateRewardId}} required={{true}}>
-          <:label>ID de récompense</:label>
-        </PixInput>
-      </div>
+      <PixInput onchange={{this.updateName}} required={{true}}>
+        <:label>Nom de la quête</:label>
+      </PixInput>
+      <PixInput onchange={{this.updateRewardType}} required={{true}}>
+        <:label>Type de récompense</:label>
+      </PixInput>
+      <PixInput onchange={{this.updateRewardId}} required={{true}}>
+        <:label>ID de récompense</:label>
+      </PixInput>
+    </PixBlock>
+
+    <PixBlock @variant="admin" class="quest-button-edition quest-button-edition--column">
+      <PixToggleButton @toggled={{this.switchRequirements}} @onChange={{this.onChangeRequirements}}>
+        <:label>Mes requirements :</:label>
+        <:viewA>Succès</:viewA>
+        <:viewB>Éligibilités</:viewB>
+      </PixToggleButton>
 
       <PixTextarea
-        value={{this.eligibilityRequirementsStr}}
-        {{on "change" this.updateEligibilityRequirements}}
+        value={{this.requirementsStr}}
+        {{on "change" this.updateRequirementsStr}}
         rows="15"
       >
-        <:label>Mes requirements d'éligibilité</:label>
+        <:label>Mes requirements ({{this.requirementState}})</:label>
       </PixTextarea>
     </PixBlock>
 
-    <PixBlock @variant="admin" class="quest-button-edition">
+    <PixBlock @variant="admin" class="quest-button-edition quest-button-edition--column">
       <ul class="quest-button-edition__list">
         <li>
           <PixButton
             @size="small"
             @variant="secondary"
-            @triggerAction={{fn this.appendToEligibilityRequirements "all("}}
+            @triggerAction={{fn this.appendToRequirementsStr "all("}}
           >
             all(
           </PixButton>
@@ -179,23 +220,23 @@ export default class QuestForm extends Component {
           <PixButton
             @size="small"
             @variant="secondary"
-            @triggerAction={{fn this.appendToEligibilityRequirements "one-of("}}
+            @triggerAction={{fn this.appendToRequirementsStr "one-of("}}
           >
             one-of(
           </PixButton>
         </li>
         <li>
-          <PixButton @size="small" @variant="secondary" @triggerAction={{fn this.appendToEligibilityRequirements ")"}}>
+          <PixButton @size="small" @variant="secondary" @triggerAction={{fn this.appendToRequirementsStr ")"}}>
             )
           </PixButton>
         </li>
         <li>
-          <PixButton @size="small" @variant="secondary" @triggerAction={{fn this.appendToEligibilityRequirements ","}}>
+          <PixButton @size="small" @variant="secondary" @triggerAction={{fn this.appendToRequirementsStr ","}}>
             ,
           </PixButton>
         </li>
       </ul>
-      <SnippetList @triggerAction={{this.appendToEligibilityRequirements}} />
+      <SnippetList @triggerAction={{this.appendToRequirementsStr}} />
     </PixBlock>
 
     <div class="quest-button-edition__button">

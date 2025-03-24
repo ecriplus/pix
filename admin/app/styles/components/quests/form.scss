@@ -1,11 +1,12 @@
 .quest-button-edition {
+  display: flex;
+  gap: 24px;
   margin-bottom: 24px;
 
-  &__form {
-    display: flex;
-    gap: 24px;
-    margin-bottom: 24px;
+  &--column {
+    flex-direction: column;
   }
+
 
   &__list {
     display: flex;
