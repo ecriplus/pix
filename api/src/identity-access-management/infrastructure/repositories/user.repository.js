@@ -17,6 +17,7 @@ import { Membership } from '../../../shared/domain/models/Membership.js';
 import { fetchPage, isUniqConstraintViolated } from '../../../shared/infrastructure/utils/knex-utils.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../domain/constants/identity-providers.js';
 import { QUERY_TYPES } from '../../domain/constants/user-query.js';
+import { LastUserApplicationConnection } from '../../domain/models/LastUserApplicationConnection.js';
 import { User } from '../../domain/models/User.js';
 import { UserDetailsForAdmin } from '../../domain/models/UserDetailsForAdmin.js';
 import { UserLogin } from '../../domain/models/UserLogin.js';
@@ -129,6 +130,8 @@ const getUserDetailsForAdmin = async function (userId) {
     type: 'TOS',
   });
 
+  const lastUserApplicationConnectionsDTO = await knex('last-user-application-connections').where({ userId });
+
   const authenticationMethodsDTO = await knex('authentication-methods')
     .select([
       'authentication-methods.id',
@@ -166,6 +169,7 @@ const getUserDetailsForAdmin = async function (userId) {
     organizationLearnersDTO,
     authenticationMethodsDTO,
     pixAdminRolesDTO,
+    lastUserApplicationConnectionsDTO,
   });
 };
 
@@ -489,6 +493,7 @@ function _fromKnexDTOToUserDetailsForAdmin({
   organizationLearnersDTO,
   authenticationMethodsDTO,
   pixAdminRolesDTO,
+  lastUserApplicationConnectionsDTO,
 }) {
   const organizationLearners = organizationLearnersDTO.map(
     (organizationLearnerDTO) =>
@@ -517,6 +522,10 @@ function _fromKnexDTOToUserDetailsForAdmin({
     temporaryBlockedUntil: userDTO.temporaryBlockedUntil,
     blockedAt: userDTO.blockedAt,
   });
+
+  const lastApplicationConnections = lastUserApplicationConnectionsDTO.map(
+    (lastUserApplicationConnectionDTO) => new LastUserApplicationConnection(lastUserApplicationConnectionDTO),
+  );
 
   const authenticationMethods = authenticationMethodsDTO.map((authenticationMethod) => {
     const isPixAuthenticationMethodWithAuthenticationComplement =
@@ -560,6 +569,7 @@ function _fromKnexDTOToUserDetailsForAdmin({
     anonymisedByFirstName: userDTO.anonymisedByFirstName,
     anonymisedByLastName: userDTO.anonymisedByLastName,
     isPixAgent: pixAdminRolesDTO.length > 0,
+    lastApplicationConnections,
   });
 }
 

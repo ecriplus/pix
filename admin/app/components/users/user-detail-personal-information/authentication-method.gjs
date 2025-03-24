@@ -235,6 +235,19 @@ export default class AuthenticationMethod extends Component {
           {{#if this.shouldChangePassword}}{{t "common.words.yes"}}{{else}}{{t "common.words.no"}}{{/if}}
         </li>
       {{/if}}
+
+      {{#each @user.orderedLastApplicationConnections as |orderedLastApplicationConnection|}}
+        <li>
+          {{t
+            "components.users.user-detail-personal-information.authentication-method.last-application-connection-date"
+          }}
+          {{orderedLastApplicationConnection.label}}
+          :
+          {{#if orderedLastApplicationConnection.lastLoggedAt}}
+            {{dayjsFormat orderedLastApplicationConnection.lastLoggedAt "DD/MM/YYYY"}}
+          {{/if}}
+        </li>
+      {{/each}}
     </ul>
 
     <table class="authentication-method-table">

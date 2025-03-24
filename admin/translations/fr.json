@@ -521,6 +521,7 @@
           "copy-username": "Copier l’identifiant"
         },
         "authentication-method": {
+          "last-application-connection-date": "Date de dernière connexion",
           "last-logged-at": "Dernière connexion le {date}",
           "should-change-password-status": "Mot de passe temporaire :"
         },

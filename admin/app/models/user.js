@@ -2,6 +2,14 @@
 import { computed } from '@ember/object';
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
+const orderedApplicationNames = ['app', 'orga', 'certif'];
+
+const applicationLabels = {
+  app: 'Pix App',
+  orga: 'Pix Orga',
+  certif: 'Pix Certif',
+};
+
 export default class User extends Model {
   @attr() firstName;
   @attr() lastName;
@@ -31,6 +39,7 @@ export default class User extends Model {
   @hasMany('certification-center-membership', { async: true, inverse: 'user' }) certificationCenterMemberships;
   @hasMany('organization-learner', { async: true, inverse: 'user' }) organizationLearners;
   @hasMany('authentication-method', { async: true, inverse: null }) authenticationMethods;
+  @hasMany('last-application-connection', { async: false, inverse: null }) lastApplicationConnections;
   @hasMany('user-participation', { async: true, inverse: null }) participations;
 
   @computed('firstName', 'lastName')
@@ -53,5 +62,17 @@ export default class User extends Model {
   }
   get authenticationMethodCount() {
     return this.username && this.email ? this.authenticationMethods.length + 1 : this.authenticationMethods.length;
+  }
+
+  get orderedLastApplicationConnections() {
+    const connections = orderedApplicationNames.map((applicationName) => {
+      const lastLoggedAt = this.lastApplicationConnections?.find((connection) => {
+        return connection.application === applicationName;
+      })?.lastLoggedAt;
+
+      return { lastLoggedAt, label: applicationLabels[applicationName] };
+    });
+
+    return connections;
   }
 }

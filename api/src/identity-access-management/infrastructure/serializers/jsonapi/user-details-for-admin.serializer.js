@@ -34,6 +34,7 @@ const serialize = function (usersDetailsForAdmin) {
       'anonymisedByFullName',
       'organizationLearners',
       'authenticationMethods',
+      'lastApplicationConnections',
       'profile',
       'participations',
       'organizationMemberships',
@@ -62,6 +63,11 @@ const serialize = function (usersDetailsForAdmin) {
       ref: 'id',
       includes: true,
       attributes: ['identityProvider', 'authenticationComplement', 'lastLoggedAt'],
+    },
+    lastApplicationConnections: {
+      ref: 'id',
+      includes: true,
+      attributes: ['application', 'lastLoggedAt'],
     },
     userLogin: {
       ref: 'id',

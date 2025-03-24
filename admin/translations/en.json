@@ -511,6 +511,7 @@
           "copy-username": "Copy user id"
         },
         "authentication-method": {
+          "last-application-connection-date": "Last application connection date",
           "last-logged-at": "Last logged at {date}",
           "should-change-password-status": "Temporary password :"
         },

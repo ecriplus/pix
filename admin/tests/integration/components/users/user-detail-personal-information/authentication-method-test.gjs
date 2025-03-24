@@ -10,17 +10,19 @@ import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 module('Integration | Component | users | user-detail-personal-information | authentication-method', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  module('When the admin member has access to users actions scope', function () {
-    class AccessControlStub extends Service {
+  module('When the admin member has access to users actions scope', function (hooks) {
+    const stub = class AccessControlStub extends Service {
       hasAccessToUsersActionsScope = true;
-    }
+    };
+    hooks.beforeEach(function () {
+      this.owner.register('service:access-control', stub);
+    });
 
     module('When user has authentication methods', function () {
       module('when user has confirmed his email address', function () {
         test('should display email confirmed date', async function (assert) {
           // given
           const user = { emailConfirmedAt: new Date('2020-10-30'), authenticationMethods: [] };
-          this.owner.register('service:access-control', AccessControlStub);
 
           // when
           const screen = await render(<template><AuthenticationMethod @user={{user}} /></template>);
@@ -44,7 +46,6 @@ module('Integration | Component | users | user-detail-personal-information | aut
         test('it should display "Adresse e-mail non confirmée"', async function (assert) {
           // given
           const user = { emailConfirmedAt: null, authenticationMethods: [] };
-          this.owner.register('service:access-control', AccessControlStub);
 
           // when
           const screen = await render(<template><AuthenticationMethod @user={{user}} /></template>);
@@ -71,7 +72,6 @@ module('Integration | Component | users | user-detail-personal-information | aut
               },
             ],
           };
-          this.owner.register('service:access-control', AccessControlStub);
 
           // when
           const screen = await render(<template><AuthenticationMethod @user={{user}} /></template>);
@@ -102,8 +102,6 @@ module('Integration | Component | users | user-detail-personal-information | aut
             ],
           };
 
-          this.owner.register('service:access-control', AccessControlStub);
-
           // when
           const screen = await render(<template><AuthenticationMethod @user={{user}} /></template>);
 
@@ -133,7 +131,6 @@ module('Integration | Component | users | user-detail-personal-information | aut
               },
             ],
           };
-          this.owner.register('service:access-control', AccessControlStub);
 
           // when
           const screen = await render(<template><AuthenticationMethod @user={{user}} /></template>);
@@ -159,7 +156,6 @@ module('Integration | Component | users | user-detail-personal-information | aut
           test('should display information', async function (assert) {
             // given
             const user = { email: 'pix.aile@example.net', authenticationMethods: [{ identityProvider: 'PIX' }] };
-            this.owner.register('service:access-control', AccessControlStub);
 
             // when
             const screen = await render(<template><AuthenticationMethod @user={{user}} /></template>);
@@ -173,7 +169,6 @@ module('Integration | Component | users | user-detail-personal-information | aut
           test('should display information', async function (assert) {
             // given
             const user = { authenticationMethods: [] };
-            this.owner.register('service:access-control', AccessControlStub);
 
             // when
             const screen = await render(<template><AuthenticationMethod @user={{user}} /></template>);
@@ -191,7 +186,6 @@ module('Integration | Component | users | user-detail-personal-information | aut
           test('should display information', async function (assert) {
             // given
             const user = { username: 'PixAile', authenticationMethods: [{ identityProvider: 'PIX' }] };
-            this.owner.register('service:access-control', AccessControlStub);
 
             // when
             const screen = await render(<template><AuthenticationMethod @user={{user}} /></template>);
@@ -205,7 +199,6 @@ module('Integration | Component | users | user-detail-personal-information | aut
           test('should display information', async function (assert) {
             // given
             const user = { authenticationMethods: [] };
-            this.owner.register('service:access-control', AccessControlStub);
 
             // when
             const screen = await render(<template><AuthenticationMethod @user={{user}} /></template>);
@@ -223,7 +216,6 @@ module('Integration | Component | users | user-detail-personal-information | aut
           test('should display information and reassign authentication method button', async function (assert) {
             // given
             const user = { authenticationMethods: [{ identityProvider: 'GAR' }] };
-            this.owner.register('service:access-control', AccessControlStub);
 
             // when
             const screen = await render(<template><AuthenticationMethod @user={{user}} /></template>);
@@ -238,7 +230,6 @@ module('Integration | Component | users | user-detail-personal-information | aut
           test('should display information', async function (assert) {
             // given
             const user = { username: 'PixAile', authenticationMethods: [{ identityProvider: 'PIX' }] };
-            this.owner.register('service:access-control', AccessControlStub);
 
             // when
             const screen = await render(<template><AuthenticationMethod @user={{user}} /></template>);
@@ -265,7 +256,6 @@ module('Integration | Component | users | user-detail-personal-information | aut
           test('should display information', async function (assert) {
             // given
             const user = { authenticationMethods: [] };
-            this.owner.register('service:access-control', AccessControlStub);
             this.owner.register('service:oidc-identity-providers', OidcIdentityProvidersStub);
 
             // when
@@ -287,7 +277,6 @@ module('Integration | Component | users | user-detail-personal-information | aut
               authenticationMethods: [{ identityProvider: 'PIX' }, { identityProvider: 'SUNLIGHT_NAVIGATIONS' }],
             };
 
-            this.owner.register('service:access-control', AccessControlStub);
             this.owner.register('service:oidc-identity-providers', OidcIdentityProvidersStub);
 
             // when
@@ -312,7 +301,6 @@ module('Integration | Component | users | user-detail-personal-information | aut
               authenticationMethods: [{ identityProvider: 'PIX' }],
             };
 
-            this.owner.register('service:access-control', AccessControlStub);
             this.owner.register('service:oidc-identity-providers', OidcIdentityProvidersStub);
 
             // when
@@ -340,7 +328,6 @@ module('Integration | Component | users | user-detail-personal-information | aut
         test('it should not display a remove authentication method link', async function (assert) {
           // given
           const user = { username: 'PixAile', authenticationMethods: [{ identityProvider: 'PIX' }] };
-          this.owner.register('service:access-control', AccessControlStub);
 
           // when
           const screen = await render(<template><AuthenticationMethod @user={{user}} /></template>);
@@ -367,7 +354,6 @@ module('Integration | Component | users | user-detail-personal-information | aut
             username: 'PixAile',
             authenticationMethods: [{ identityProvider: 'SUNLIGHT_NAVIGATIONS' }],
           };
-          this.owner.register('service:access-control', AccessControlStub);
 
           // when
           const screen = await render(<template><AuthenticationMethod @user={{user}} /></template>);
@@ -383,7 +369,6 @@ module('Integration | Component | users | user-detail-personal-information | aut
             const user = {
               authenticationMethods: [],
             };
-            this.owner.register('service:access-control', AccessControlStub);
 
             // when
             const screen = await render(<template><AuthenticationMethod @user={{user}} /></template>);
@@ -397,7 +382,6 @@ module('Integration | Component | users | user-detail-personal-information | aut
           test('it should not display add authentication method button', async function (assert) {
             // given
             const user = { username: 'PixAile', authenticationMethods: [{ identityProvider: 'PIX' }] };
-            this.owner.register('service:access-control', AccessControlStub);
 
             // when
             const screen = await render(<template><AuthenticationMethod @user={{user}} /></template>);
@@ -407,6 +391,37 @@ module('Integration | Component | users | user-detail-personal-information | aut
           });
         });
       });
+    });
+
+    test('it displays last application connections', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const user = store.createRecord('user', {
+        username: 'PixAile',
+        authenticationMethods: [store.createRecord('authentication-method', { identityProvider: 'PIX' })],
+        lastApplicationConnections: [
+          store.createRecord('last-application-connection', {
+            application: 'app',
+            lastLoggedAt: new Date('2022-05-01T00:00:00Z'),
+          }),
+          store.createRecord('last-application-connection', {
+            application: 'orga',
+            lastLoggedAt: new Date('2022-01-01T00:00:00Z'),
+          }),
+          store.createRecord('last-application-connection', {
+            application: 'certif',
+            lastLoggedAt: new Date('2022-02-01T00:00:00Z'),
+          }),
+        ],
+      });
+
+      // when
+      const screen = await render(<template><AuthenticationMethod @user={{user}} /></template>);
+
+      // then
+      assert.dom(screen.getByText('Date de dernière connexion Pix App : 01/05/2022')).exists();
+      assert.dom(screen.getByText('Date de dernière connexion Pix Orga : 01/01/2022')).exists();
+      assert.dom(screen.getByText('Date de dernière connexion Pix Certif : 01/02/2022')).exists();
     });
   });
 
