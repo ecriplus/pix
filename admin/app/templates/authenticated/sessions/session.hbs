@@ -21,18 +21,17 @@
 </header>
 
 <main class="page-body">
-  <nav class="navbar">
-    <LinkTo @route="authenticated.sessions.session.informations" @model={{@model.id}} class="navbar-item">
+  <PixTabs @variant="primary" @ariaLabel="Navigation de la section détails d'une session" class="navigation">
+    <LinkTo @route="authenticated.sessions.session.informations" @model={{@model.id}}>
       Informations
     </LinkTo>
     <LinkTo
       @route="authenticated.sessions.session.certifications"
       @model={{@model.id}}
-      class="navbar-item"
       aria-label="Liste des certifications de la session"
     >
       Certifications
     </LinkTo>
-  </nav>
+  </PixTabs>
   {{outlet}}
 </main>

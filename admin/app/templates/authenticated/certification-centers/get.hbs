@@ -15,16 +15,15 @@
     @updateCertificationCenter={{this.updateCertificationCenter}}
   />
 
-  <nav aria-label="Navigation de la section centre de certification" class="navbar">
-
-    <LinkTo @route="authenticated.certification-centers.get.team" class="navbar-item">
+  <PixTabs @variant="primary" @ariaLabel="Navigation de la section centre de certification" class="navigation">
+    <LinkTo @route="authenticated.certification-centers.get.team">
       Équipe
     </LinkTo>
 
-    <LinkTo @route="authenticated.certification-centers.get.invitations" class="navbar-item">
+    <LinkTo @route="authenticated.certification-centers.get.invitations">
       Invitations
     </LinkTo>
-  </nav>
+  </PixTabs>
 
   {{outlet}}
 

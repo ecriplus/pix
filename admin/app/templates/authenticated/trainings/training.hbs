@@ -44,14 +44,14 @@
     {{/if}}
   </section>
 
-  <nav class="navbar">
-    <LinkTo @route="authenticated.trainings.training.triggers" @model={{@model}} class="navbar-item">
+  <PixTabs @variant="primary" @ariaLabel="Navigation de la section détails d'un contenu formatif" class="navigation">
+    <LinkTo @route="authenticated.trainings.training.triggers" @model={{@model}}>
       {{t "pages.trainings.training.triggers.tabName"}}
     </LinkTo>
-    <LinkTo @route="authenticated.trainings.training.target-profiles" @model={{@model}} class="navbar-item">
+    <LinkTo @route="authenticated.trainings.training.target-profiles" @model={{@model}}>
       {{t "pages.trainings.training.targetProfiles.tabName"}}
     </LinkTo>
-  </nav>
+  </PixTabs>
 
   {{outlet}}
 </main>

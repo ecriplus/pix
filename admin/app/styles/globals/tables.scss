@@ -9,6 +9,15 @@ table {
   background-color: var(--pix-neutral-0) ;
   border-collapse: collapse;
   border-spacing: 0;
+
+  a:not(.pix-button, .sidebar__link, .login-form__oidc-connect-link) {
+    color: var(--pix-tertiary-500);
+    text-decoration: underline;
+
+    &:visited {
+      color: var(--pix-primary-500);
+    }
+  }
 }
 
 thead {

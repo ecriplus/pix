@@ -13,21 +13,21 @@
     <Users::UserOverview @user={{@model}} />
   </section>
 
-  <nav class="navbar" aria-label="Navigation de la section détails d'un utilisateur">
-    <LinkTo @route="authenticated.users.get.information" @model={{@model}} class="navbar-item">
+  <PixTabs @variant="primary" @ariaLabel="Navigation de la section détails d'un utilisateur" class="navigation">
+    <LinkTo @route="authenticated.users.get.information" @model={{@model}}>
       {{t "pages.user-details.navbar.details"}}
     </LinkTo>
 
-    <LinkTo @route="authenticated.users.get.authentication-methods" @model={{@model}} class="navbar-item">
+    <LinkTo @route="authenticated.users.get.authentication-methods" @model={{@model}}>
       {{t "pages.user-details.navbar.authentication-methods"}}
       ({{@model.authenticationMethodCount}})
     </LinkTo>
 
-    <LinkTo @route="authenticated.users.get.profile" @model={{@model}} class="navbar-item">
+    <LinkTo @route="authenticated.users.get.profile" @model={{@model}}>
       {{t "pages.user-details.navbar.profile"}}
     </LinkTo>
 
-    <LinkTo @route="authenticated.users.get.campaign-participations" @model={{@model}} class="navbar-item">
+    <LinkTo @route="authenticated.users.get.campaign-participations" @model={{@model}}>
       {{t "pages.user-details.navbar.participations-list"}}
       ({{@model.participationCount}})
     </LinkTo>
@@ -36,7 +36,6 @@
       @route="authenticated.users.get.organizations"
       @model={{@model}}
       aria-label="Organisations de l’utilisateur"
-      class="navbar-item"
     >
       {{t "pages.user-details.navbar.organizations-list"}}
       ({{@model.organizationMembershipCount}})
@@ -45,7 +44,6 @@
     <LinkTo
       @route="authenticated.users.get.certification-center-memberships"
       aria-label="Centres de certification auxquels appartient l´utilisateur"
-      class="navbar-item"
     >
       {{t "pages.user-details.navbar.certification-centers-list"}}
       ({{@model.certificationCenterMembershipCount}})
@@ -55,11 +53,10 @@
       @route="authenticated.users.get.cgu"
       @model={{@model}}
       aria-label={{t "pages.user-details.navbar.cgu-aria-label"}}
-      class="navbar-item"
     >
       {{t "pages.user-details.navbar.cgu"}}
     </LinkTo>
-  </nav>
+  </PixTabs>
 
   {{outlet}}
 </main>

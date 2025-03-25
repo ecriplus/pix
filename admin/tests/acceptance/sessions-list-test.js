@@ -37,14 +37,14 @@ module('Acceptance | Session List', function (hooks) {
 
     test('it should display the number of sessions with required actions', async function (assert) {
       // given
-      server.createList('with-required-action-session', 10, { version: 2 });
+      server.createList('with-required-action-session', 10, { version: 3 });
 
       // when
       const screen = await visit('/sessions/list');
 
       // then
       assert.strictEqual(currentURL(), '/sessions/list');
-      assert.dom(screen.getByText('Sessions à traiter (10)')).exists();
+      assert.dom(screen.getByText('Sessions à traiter V3 (10)')).exists();
     });
 
     module('#Pagination', function (hooks) {

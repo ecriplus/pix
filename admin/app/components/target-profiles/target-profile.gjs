@@ -1,6 +1,7 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
+import PixTabs from '@1024pix/pix-ui/components/pix-tabs';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
@@ -287,30 +288,28 @@ export default class TargetProfile extends Component {
         </div>
       </section>
 
-      <nav class="navbar">
-        <LinkTo @route="authenticated.target-profiles.target-profile.details" @model={{@model}} class="navbar-item">
+      <PixTabs @variant="primary" @ariaLabel="Navigation de la section détails d'un profil cible" class="navigation">
+        <LinkTo @route="authenticated.target-profiles.target-profile.details" @model={{@model}}>
           Détails
         </LinkTo>
         <LinkTo
           @route="authenticated.target-profiles.target-profile.organizations"
           @model={{@model}}
-          class="navbar-item"
           aria-label="Organisations du profil cible"
         >
           Organisations
         </LinkTo>
-        <LinkTo @route="authenticated.target-profiles.target-profile.insights" @model={{@model}} class="navbar-item">
+        <LinkTo @route="authenticated.target-profiles.target-profile.insights" @model={{@model}}>
           Clés de lecture
         </LinkTo>
         <LinkTo
           @route="authenticated.target-profiles.target-profile.training-summaries"
           @model={{@model}}
-          class="navbar-item"
           aria-label="Contenus formatifs du profil cible"
         >
           Contenus formatifs
         </LinkTo>
-      </nav>
+      </PixTabs>
 
       {{yield}}
 
