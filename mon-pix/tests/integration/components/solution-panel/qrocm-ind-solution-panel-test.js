@@ -29,7 +29,7 @@ module('Integration | Component | QROCm ind solution panel', function (hooks) {
   });
   const answer = EmberObject.create({
     id: 'answer_id',
-    value: "key1: '' key2: 'wrongAnswer2' key3: 'rightAnswer3'",
+    value: `key1: ''\nkey2: 'wrongAnswer2'\nkey3: 'rightAnswer3'`,
     resultDetails: 'key1: false\nkey2: false\nkey3: true',
     assessment,
     challenge,
