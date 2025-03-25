@@ -32,13 +32,6 @@ export const selectNextCertificationChallenge = withTransaction(
   }) => {
     const assessment = await dependencies.assessmentRepository.get(assessmentId);
 
-    if (assessment.isStarted()) {
-      await dependencies.assessmentRepository.updateLastQuestionDate({
-        id: assessment.id,
-        lastQuestionDate: new Date(),
-      });
-    }
-
     const certificationCourse = await dependencies.certificationCourseRepository.get({
       id: assessment.certificationCourseId,
     });
@@ -48,13 +41,6 @@ export const selectNextCertificationChallenge = withTransaction(
       challenge = await usecases.getNextChallenge({ assessment, locale });
     } else {
       challenge = await usecases.getNextChallengeForV2Certification({ assessment, locale });
-    }
-
-    if (challenge && challenge.id !== assessment.lastChallengeId) {
-      await dependencies.assessmentRepository.updateWhenNewChallengeIsAsked({
-        id: assessment.id,
-        lastChallengeId: challenge.id,
-      });
     }
 
     return challenge;
