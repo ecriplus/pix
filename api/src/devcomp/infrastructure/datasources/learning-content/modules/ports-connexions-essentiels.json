@@ -2,7 +2,7 @@
   "id": "12cd102f-9831-4264-8d5e-15a8f177594a",
   "slug": "ports-connexions-essentiels",
   "title": "Les ports de connexion d’un ordinateur",
-  "isBeta": false,
+  "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
     "description": "<p>Pour savoir ce qu'on peut brancher ou non à un ordinateur, il faut bien connaître les principaux ports de connexion !</p>",

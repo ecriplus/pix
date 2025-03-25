@@ -2,7 +2,7 @@
   "id": "654c44dc-0560-4acc-9860-4a67c923577f",
   "slug": "bases-clavier-1",
   "title": "Les bases du clavier sur ordinateur 1/2",
-  "isBeta": false,
+  "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
     "description": "<p>Dans ce module, découvrez ce qu’est un clavier et à quoi il sert. <span aria-hidden=\"true\">⌨️</span><br>Vous apprendrez à taper des mots simples et à modifier du texte.<br>Pour ce module, vous devez déjà savoir utiliser une souris d’ordinateur.</p>",
