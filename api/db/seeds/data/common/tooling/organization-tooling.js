@@ -64,7 +64,6 @@ async function createOrganization({
   features = [],
   configOrganization,
   parentOrganizationId,
-  withOrganizationLearners = true,
 }) {
   organizationId = _buildOrganization({
     databaseBuilder,
@@ -109,13 +108,11 @@ async function createOrganization({
     features,
   });
 
-  if (withOrganizationLearners) {
-    _buildOrganizationLearners({
-      databaseBuilder,
-      organizationId,
-      configOrganization,
-    });
-  }
+  _buildOrganizationLearners({
+    databaseBuilder,
+    organizationId,
+    configOrganization,
+  });
 
   await databaseBuilder.commit();
   return { organizationId };

@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 
+import { normalizeAndRemoveAccents } from '../../../shared/infrastructure/utils/string-utils.js';
 import { V3CertificationAttestation } from '../domain/models/V3CertificationAttestation.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as certificationAttestationPdf from '../infrastructure/utils/pdf/certification-attestation-pdf.js';
@@ -52,8 +53,10 @@ const getPDFAttestation = async function (
 const getCertificationPDFAttestationsForSession = async function (
   request,
   h,
-  dependencies = { certificationAttestationPdf },
+  dependencies = { certificationAttestationPdf, v3CertificationAttestationPdf },
 ) {
+  const { i18n } = request;
+
   const sessionId = request.params.sessionId;
   const isFrenchDomainExtension = request.query.isFrenchDomainExtension;
   const attestations = await usecases.getCertificationAttestationsForSession({
@@ -61,10 +64,21 @@ const getCertificationPDFAttestationsForSession = async function (
   });
 
   if (attestations.every((attestation) => attestation instanceof V3CertificationAttestation)) {
-    return h.response().code(200);
-  }
+    const translatedFileName = i18n.__('certification-confirmation.file-name', {
+      deliveredAt: dayjs(attestations[0].deliveredAt).format('YYYYMMDD'),
+    });
 
-  const i18n = request.i18n;
+    return h
+      .response(
+        dependencies.v3CertificationAttestationPdf.generate({
+          certificates: attestations,
+          i18n,
+        }),
+      )
+      .code(200)
+      .header('Content-Disposition', `attachment; filename=session-${sessionId}-${translatedFileName}`)
+      .header('Content-Type', 'application/pdf');
+  }
 
   const { buffer } = await dependencies.certificationAttestationPdf.getCertificationAttestationsPdfBuffer({
     certificates: attestations,
@@ -82,7 +96,7 @@ const getCertificationPDFAttestationsForSession = async function (
 const downloadCertificationAttestationsForDivision = async function (
   request,
   h,
-  dependencies = { certificationAttestationPdf },
+  dependencies = { certificationAttestationPdf, v3CertificationAttestationPdf },
 ) {
   const organizationId = request.params.organizationId;
   const { i18n } = request;
@@ -94,7 +108,22 @@ const downloadCertificationAttestationsForDivision = async function (
   });
 
   if (attestations.every((attestation) => attestation instanceof V3CertificationAttestation)) {
-    return h.response().code(200);
+    const normalizedDivision = normalizeAndRemoveAccents(division);
+
+    const translatedFileName = i18n.__('certification-confirmation.file-name', {
+      deliveredAt: dayjs(attestations[0].deliveredAt).format('YYYYMMDD'),
+    });
+
+    return h
+      .response(
+        dependencies.v3CertificationAttestationPdf.generate({
+          certificates: attestations,
+          i18n,
+        }),
+      )
+      .code(200)
+      .header('Content-Disposition', `attachment; filename=${normalizedDivision}-${translatedFileName}`)
+      .header('Content-Type', 'application/pdf');
   }
 
   const { buffer } = await dependencies.certificationAttestationPdf.getCertificationAttestationsPdfBuffer({
