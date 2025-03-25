@@ -1,7 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 import PixToastContainer from '@1024pix/pix-ui/components/pix-toast-container';
 import Service from '@ember/service';
-import { triggerEvent } from '@ember/test-helpers';
+import { click, triggerEvent } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import AddOrganizationFeaturesInBatch from 'pix-admin/components/administration/common/add-organization-features-in-batch';
 import ENV from 'pix-admin/config/environment';
@@ -17,19 +17,41 @@ const file = new Blob([fileContent], { type: `valid-file` });
 module('Integration | Component |  administration/add-organization-features-in-batch', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  let fetchStub;
+  let fetchStub, fileSaverStub;
 
   hooks.beforeEach(function () {
     class SessionService extends Service {
       data = { authenticated: { access_token: accessToken } };
     }
+    class FileSaver extends Service {
+      save = fileSaverStub;
+    }
     this.owner.register('service:session', SessionService);
+    this.owner.register('service:file-saver', FileSaver);
 
     fetchStub = sinon.stub(window, 'fetch');
+    fileSaverStub = sinon.stub();
   });
 
   hooks.afterEach(function () {
     window.fetch.restore();
+  });
+
+  module('when user download template', function () {
+    test('it calls fileSaver', async function (assert) {
+      // when
+      const screen = await render(<template><AddOrganizationFeaturesInBatch /><PixToastContainer /></template>);
+
+      const button = await screen.getByRole('button', { name: t('common.actions.download-template'), exact: false });
+      await click(button);
+
+      // then
+      sinon.assert.calledWithExactly(fileSaverStub, {
+        url: `${ENV.APP.API_HOST}/api/admin/organizations/add-organization-features/template`,
+        token: accessToken,
+      });
+      assert.ok(true);
+    });
   });
 
   module('when import succeeds', function (hooks) {
