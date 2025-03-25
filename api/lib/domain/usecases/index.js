@@ -6,10 +6,6 @@ import { fileURLToPath } from 'node:url';
 import * as certificationChallengeLiveAlertRepository from '../../../src/certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
 import * as certificationCompanionAlertRepository from '../../../src/certification/shared/infrastructure/repositories/certification-companion-alert-repository.js';
 import * as algorithmDataFetcherService from '../../../src/evaluation/domain/services/algorithm-methods/data-fetcher.js';
-import * as smartRandom from '../../../src/evaluation/domain/services/algorithm-methods/smart-random.js';
-// Used with vicious ...arguments
-import * as improvementService from '../../../src/evaluation/domain/services/improvement-service.js';
-import { pickChallengeService } from '../../../src/evaluation/domain/services/pick-challenge-service.js';
 import * as competenceEvaluationRepository from '../../../src/evaluation/infrastructure/repositories/competence-evaluation-repository.js';
 import * as stageAcquisitionRepository from '../../../src/evaluation/infrastructure/repositories/stage-acquisition-repository.js';
 import * as stageRepository from '../../../src/evaluation/infrastructure/repositories/stage-repository.js';
@@ -140,17 +136,14 @@ const dependencies = {
   organizationMemberIdentityRepository,
   organizationRepository,
   organizationTagRepository,
-  improvementService,
   organizationValidator,
   passwordGenerator,
   passwordValidator,
-  pickChallengeService,
   pixAuthenticationService,
   prescriptionOrganizationLearnerRepository,
   schoolRepository,
   scoAccountRecoveryService,
   skillRepository,
-  smartRandom,
   stageAcquisitionRepository,
   stageRepository,
   studentRepository,

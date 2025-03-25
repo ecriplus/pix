@@ -1,8 +1,8 @@
-import { getNextChallengeForCompetenceEvaluation } from '../../../../lib/domain/usecases/get-next-challenge-for-competence-evaluation.js';
-import { UserNotAuthorizedToAccessEntityError } from '../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { getNextChallengeForCompetenceEvaluation } from '../../../../../src/evaluation/domain/usecases/get-next-challenge-for-competence-evaluation.js';
+import { UserNotAuthorizedToAccessEntityError } from '../../../../../src/shared/domain/errors.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Domain | Use Cases | get-next-challenge-for-competence-evaluation', function () {
+describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-competence-evaluation', function () {
   describe('#getNextChallengeForCompetenceEvaluation', function () {
     let userId,
       assessmentId,
@@ -12,16 +12,12 @@ describe('Unit | Domain | Use Cases | get-next-challenge-for-competence-evaluat
       challenges,
       targetSkills,
       locale,
-      answerRepository,
-      challengeRepository,
-      skillRepository,
-      knowledgeElementRepository,
       pickChallengeService,
       recentKnowledgeElements,
       actualComputedChallenge,
       challengeUrl21,
       challengeUrl22,
-      improvementService,
+      algorithmDataFetcherServiceStub,
       smartRandomStub;
 
     beforeEach(async function () {
@@ -35,17 +31,15 @@ describe('Unit | Domain | Use Cases | get-next-challenge-for-competence-evaluat
       lastAnswer = null;
       locale = 'fr';
 
-      answerRepository = { findByAssessment: sinon.stub().resolves([lastAnswer]) };
-      challengeRepository = { findValidatedByCompetenceId: sinon.stub().resolves(challenges) };
-      skillRepository = { findActiveByCompetenceId: sinon.stub().resolves(targetSkills) };
+      algorithmDataFetcherServiceStub = {
+        fetchForCompetenceEvaluations: sinon.stub(),
+      };
       pickChallengeService = { pickChallenge: sinon.stub().resolves(challengeUrl22) };
 
       recentKnowledgeElements = [
         { createdAt: 4, skillId: 'url2' },
         { createdAt: 2, skillId: 'web1' },
       ];
-      knowledgeElementRepository = { findUniqByUserId: sinon.stub().resolves(recentKnowledgeElements) };
-      improvementService = { filterKnowledgeElementsIfImproving: sinon.stub().resolves(recentKnowledgeElements) };
 
       const web2 = domainBuilder.buildSkill({ name: '@web2' });
       web2.challenges = [
@@ -62,6 +56,13 @@ describe('Unit | Domain | Use Cases | get-next-challenge-for-competence-evaluat
         domainBuilder.buildChallenge({ id: 'challenge_search2_2' }),
       ];
 
+      algorithmDataFetcherServiceStub.fetchForCompetenceEvaluations.resolves({
+        allAnswers: [lastAnswer],
+        lastAnswer: lastAnswer,
+        targetSkills,
+        challenges,
+        knowledgeElements: recentKnowledgeElements,
+      });
       smartRandomStub = {
         getPossibleSkillsForNextChallenge: sinon.stub().returns({
           hasAssessmentEnded: false,
@@ -76,14 +77,10 @@ describe('Unit | Domain | Use Cases | get-next-challenge-for-competence-evaluat
         requestErr = await catchErr(getNextChallengeForCompetenceEvaluation)({
           assessment,
           userId: userId + 1,
-          answerRepository,
-          challengeRepository,
-          knowledgeElementRepository,
-          skillRepository,
           pickChallengeService,
-          improvementService,
           locale,
-          smartRandom: smartRandomStub,
+          smartRandomService: smartRandomStub,
+          algorithmDataFetcherService: algorithmDataFetcherServiceStub,
         });
       });
       it('should throw a UserNotAuthorizedToAccessEntityError error', function () {
@@ -96,29 +93,14 @@ describe('Unit | Domain | Use Cases | get-next-challenge-for-competence-evaluat
         actualComputedChallenge = await getNextChallengeForCompetenceEvaluation({
           assessment,
           userId,
-          answerRepository,
-          challengeRepository,
-          knowledgeElementRepository,
-          skillRepository,
           pickChallengeService,
-          improvementService,
           locale,
-          smartRandom: smartRandomStub,
+          smartRandomService: smartRandomStub,
+          algorithmDataFetcherService: algorithmDataFetcherServiceStub,
         });
       });
-      it('should have fetched the answers', function () {
-        expect(answerRepository.findByAssessment).to.have.been.calledWithExactly(assessmentId);
-      });
 
-      it('should have fetched the most recent knowledge elements', function () {
-        expect(knowledgeElementRepository.findUniqByUserId).to.have.been.calledWithExactly({ userId });
-      });
-
-      it('should have fetched the challenges', function () {
-        expect(challengeRepository.findValidatedByCompetenceId).to.have.been.calledWithExactly(competenceId, locale);
-      });
-
-      it('should have fetched the next challenge with only most recent knowledge elements', function () {
+      it('should have called the smart random with whatever returned by the data fetcher', function () {
         const allAnswers = [lastAnswer];
         expect(smartRandomStub.getPossibleSkillsForNextChallenge).to.have.been.calledWithExactly({
           allAnswers,

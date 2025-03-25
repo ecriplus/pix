@@ -58,7 +58,6 @@ const getNextChallenge = async function (
   request,
   h,
   dependencies = {
-    usecases,
     evaluationUsecases,
     assessmentRepository,
     certificationVersionRepository,
@@ -236,7 +235,7 @@ async function _getChallengeByAssessmentType({ assessment, request, dependencies
 
   if (assessment.isCompetenceEvaluation()) {
     const userId = extractUserIdFromRequest(request);
-    return dependencies.usecases.getNextChallengeForCompetenceEvaluation({ assessment, userId, locale });
+    return dependencies.evaluationUsecases.getNextChallengeForCompetenceEvaluation({ assessment, userId, locale });
   }
 
   return null;
