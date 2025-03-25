@@ -221,6 +221,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
                   new KnowledgeElement({
                     ...knowledgeElementsToSave[0],
                     assessmentId: undefined,
+                    answerId: undefined,
                     userId: undefined,
                     id: undefined,
                     createdAt: new Date(),
@@ -228,6 +229,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
                   new KnowledgeElement({
                     ...knowledgeElementsToSave[1],
                     assessmentId: undefined,
+                    answerId: undefined,
                     userId: undefined,
                     id: undefined,
                     createdAt: new Date(),
@@ -235,12 +237,14 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
                   new KnowledgeElement({
                     ...knowledgeElement1,
                     assessmentId: undefined,
+                    answerId: undefined,
                     userId: undefined,
                     id: undefined,
                   }),
                   new KnowledgeElement({
                     ...knowledgeElement2,
                     assessmentId: undefined,
+                    answerId: undefined,
                     userId: undefined,
                     id: undefined,
                   }),
@@ -278,6 +282,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
                   new KnowledgeElement({
                     ...knowledgeElementsToSave[0],
                     assessmentId: undefined,
+                    answerId: undefined,
                     userId: undefined,
                     id: undefined,
                     createdAt: new Date(),
@@ -285,6 +290,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
                   new KnowledgeElement({
                     ...knowledgeElementsToSave[1],
                     assessmentId: undefined,
+                    answerId: undefined,
                     userId: undefined,
                     id: undefined,
                     createdAt: new Date(),
@@ -1019,6 +1025,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
             new KnowledgeElement({
               ...domainKEInParticipation,
               assessmentId: undefined,
+              answerId: undefined,
               id: undefined,
               userId: undefined,
             }),
