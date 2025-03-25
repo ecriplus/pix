@@ -39,6 +39,187 @@
   ],
   "grains": [
     {
+      "id": "a39ce6eb-f3db-447f-808f-aa6a06b940c9",
+      "type": "lesson",
+      "title": "test iframe",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "52af6cab-07df-4962-abc5-20cf95d5eb5a",
+            "type": "text",
+            "content": "<p>Voici une iframe :</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "f00133f5-0653-425b-a25f-3c9604820529",
+            "type": "text",
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/cartes2.html\" height=\"420\"></iframe>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "e32c01a8-7ae1-4c6d-9a16-6487c7c504d2",
+            "type": "text",
+            "content": "<p>Elles ne sont autorisées qu'en béta.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "0d4ef09a-ebb8-4514-a037-8fb22e540d7d",
+      "type": "lesson",
+      "title": "test web component",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "96e2457d-54d3-461a-97e4-69180a30bfb7",
+            "type": "text",
+            "content": "<p>Voici un web component, développé à la va-vite pour la démo :</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "cfec5a0e-2ed5-462f-8974-e5ca25faae39",
+            "type": "custom",
+            "tagName": "cartes-a-retourner",
+            "props": {
+              "cardsPerLine": 4,
+              "cards": [
+                {
+                  "frontImageUrl": "https://i.imgur.com/ynIpt6T.png",
+                  "backImageUrl": "https://i.imgur.com/prjj6bH.png"
+                },
+                {
+                  "frontImageUrl": "https://i.imgur.com/Gcy9yUl.png",
+                  "backImageUrl": "https://i.imgur.com/HVZcy58.png"
+                },
+                {
+                  "frontImageUrl": "https://i.imgur.com/k2istl3.png",
+                  "backImageUrl": "https://i.imgur.com/ww44Phm.png"
+                },
+                {
+                  "frontImageUrl": "https://i.imgur.com/6MLS2tU.png",
+                  "backImageUrl": "https://i.imgur.com/chQSy0B.png"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "5e77afeb-78a8-4733-a451-fbe5fa2f360c",
+            "type": "text",
+            "content": "<p>Comme vous pouvez le voir l'expérience utilisateur n'est pas du tout la même.</p><p><em>Notamment pour les utilisateurs de lecteur d'écran</em></p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "298518dc-9ad0-4709-92c0-c0a1fb1a1a2a",
+            "type": "text",
+            "content": "<p>Un avantage est que la configuration peut être précisée directement dans le contenu du module et pas côté pix-epreuves</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "0d4ef09a-ebb8-4514-a037-8fb22e540d7c",
+      "type": "discovery",
+      "title": "Voici un grain qui contient un webcomponent",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "5415e701-d81a-4f5e-b0e4-a0db67d83e18",
+            "type": "text",
+            "content": "<p>Voici un autre exemple de web component, le QCU Image :</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "cfec5a0e-2ed5-462f-8974-e5ca25faae38",
+            "type": "custom",
+            "tagName": "qcu-image",
+            "props": {
+              "name": "Liste d'applications",
+              "maxChoicesPerLine": 3,
+              "imageChoicesSize": "icon",
+              "choices": [
+                {
+                  "name": "Google",
+                  "image": {
+                    "width": 534,
+                    "height": 544,
+                    "loading": "lazy",
+                    "decoding": "async",
+                    "src": "https://epreuves.pix.fr/_astro/Google.B1bcY5Go_1BynY8.svg"
+                  }
+                },
+                {
+                  "name": "LibreOffice Writer",
+                  "image": {
+                    "width": 205,
+                    "height": 246,
+                    "loading": "lazy",
+                    "decoding": "async",
+                    "src": "https://epreuves.pix.fr/_astro/writer.3bR8N2DK_Z1iWuJ9.webp"
+                  }
+                },
+                {
+                  "name": "Explorateur",
+                  "image": {
+                    "width": 128,
+                    "height": 128,
+                    "loading": "lazy",
+                    "decoding": "async",
+                    "src": "https://epreuves.pix.fr/_astro/windows-file-explorer.CnF8MYwI_23driA.webp"
+                  }
+                },
+                {
+                  "name": "Geogebra",
+                  "image": {
+                    "width": 640,
+                    "height": 640,
+                    "loading": "lazy",
+                    "decoding": "async",
+                    "src": "https://epreuves.pix.fr/_astro/geogebra.CZH9VYqc_19v4nj.webp"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "73e4676d-fcc9-4ef2-b6de-b33e71922c04",
+            "type": "text",
+            "content": "<p>Pour comparer du comparable voici la même chose en version embed :</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "9c8a0dc3-4e8e-4cf9-ab37-3280931cbab7",
+            "type": "embed",
+            "isCompletionRequired": false,
+            "title": "QCU Image",
+            "url": "https://epreuves.pix.fr/fr/qcu_image/1d_iconewriter.html",
+            "instruction": "<p>Instruction</p>",
+            "height": 600
+          }
+        }
+      ]
+    },
+    {
       "id": "f312c33d-e7c9-4a69-9ba0-913957b8f7dd",
       "type": "discovery",
       "title": "Voici un grain de découverte",

@@ -7,6 +7,7 @@ import { BlockText } from '../../domain/models/block/BlockText.js';
 import { ComponentElement } from '../../domain/models/component/ComponentElement.js';
 import { ComponentStepper } from '../../domain/models/component/ComponentStepper.js';
 import { Step } from '../../domain/models/component/Step.js';
+import { CustomElement } from '../../domain/models/element/CustomElement.js';
 import { Download } from '../../domain/models/element/Download.js';
 import { Embed } from '../../domain/models/element/Embed.js';
 import { Expand } from '../../domain/models/element/Expand.js';
@@ -89,6 +90,8 @@ export class ModuleFactory {
 
   static #buildElement(element) {
     switch (element.type) {
+      case 'custom':
+        return ModuleFactory.#buildCustom(element);
       case 'download':
         return ModuleFactory.#buildDownload(element);
       case 'embed':
@@ -118,6 +121,14 @@ export class ModuleFactory {
         });
         return undefined;
     }
+  }
+
+  static #buildCustom(element) {
+    return new CustomElement({
+      id: element.id,
+      tagName: element.tagName,
+      props: element.props,
+    });
   }
 
   static #buildDownload(element) {
