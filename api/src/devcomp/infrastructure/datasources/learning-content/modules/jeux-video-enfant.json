@@ -105,16 +105,12 @@
           "type": "element",
           "element": {
             "id": "682ce2e6-b587-49f8-9860-ad0e32c62664",
-            "type": "text",
-            "content": "<p>Après cette vidéo, vous devrez donner la signification de pictogrammes de la signalétique PEGI.</p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "8f40df65-2254-4fb9-94b1-83d8bbe5ae7f",
-            "type": "text",
-            "content": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/xU286BSZKcQ?si=fvOxN_VCRTdbGvwL\" title=\"La signalétique PEGI\"></iframe>"
+            "type": "video",
+            "title": "La signalétique PEGI",
+            "url": "https://assets.pix.org/modules/jeu-video-enfant/signaletique_pegi_ppn3.mp4",
+            "poster": "https://assets.pix.org/modules/jeu-video-enfant/signaletique_pegi_ppn3.jpg",
+            "subtitles": "https://assets.pix.org/modules/jeu-video-enfant/signaletique_pegi_ppn3.vtt",
+            "transcription": "<p>La signalétique PEGI<br><br> Franck regarde la fiche du jeu vidéo que sa fille aimerait avoir. <br>Ce jeu est-il adapté à son âge ?&nbsp; <br>Pour le savoir, Franck peut s’appuyer sur la signalétique PEGI. La signalétique PEGI est un ensemble de pictogrammes qui sont présents sur tous les jeux vendus en France et dans de nombreux pays, que ce soit sur les boîtes vendues en magasins ou sur les boutiques en ligne.&nbsp; <br>Ces pictogrammes donnent une indication aux parents mais ils n’interdisent pas la vente des jeux.&nbsp; La première série de pictogrammes marque le fait que le jeu n’est pas adapté aux enfants en dessous de l’âge indiqué. Ainsi, un jeu avec le pictogramme PEGI 7 sera déconseillé aux enfants de moins de 7 ans.&nbsp; Attention, ces pictogrammes n’indiquent pas la difficulté du jeu par rapport à l’âge de l’enfant. <br>Par exemple, un jeu avec le pictogramme PEGI 3 ne contient pas de contenus choquants pour un enfant de 3 ans, mais il peut être trop compliqué pour lui ! (ex échec) <br>A côté du pictogramme d’âge, il peut y avoir, en plus, des marqueurs thématiques qui donnent une information sur le contenu du jeu Sur certains jeux ou applications, il n’y a pas de pictogramme d’âge, mais un pictogramme “Accompagnement des parents recommandé”.&nbsp; <br>Ce pictogramme est présent sur des jeux et applications qui contiennent des contenus créés par les utilisateurs. Il peut donc y avoir des contenus adaptés pour les plus jeunes mais d’autres moins, il vaut donc mieux utiliser le jeu en étant accompagné par les parents. <br>Et si, comme Franck, vous voulez en savoir plus sur la signalétique PEGI, rendez-vous sur pédagojeux.fr. PédaGoJeux est un collectif qui informe et accompagne les familles autour des jeux vidéo.</p>"
           }
         }
       ]
