@@ -46,7 +46,7 @@ export const tokenRoutes = [
         },
       },
       handler: tokenController.authenticateApplication,
-      tags: ['api', 'authorization-server', 'parcoursup'],
+      tags: ['api', 'authorization-server', 'parcoursup', 'maddo'],
     },
   },
   {
