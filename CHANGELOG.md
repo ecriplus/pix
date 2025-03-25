@@ -1,5 +1,34 @@
 # Pix Changelog
 
+## v5.71.0 (25/03/2025)
+
+
+### :rocket: Amélioration
+- [#11753](https://github.com/1024pix/pix/pull/11753) [FEATURE] Reporter l'email dans la page de réinitialisation du mot de passe (PIX-16730).
+- [#11769](https://github.com/1024pix/pix/pull/11769) [FEATURE] Interdire les feedbacks globaux dans les QCU (PIX-17119).
+- [#11718](https://github.com/1024pix/pix/pull/11718) [FEATURE] :memo:  Révision du texte à propos de pix companion dans l'espace surveillant (PIX-17042).
+- [#11774](https://github.com/1024pix/pix/pull/11774) [FEATURE] Affichage de la dernière connexion par app dans l'onglet "Méthodes de connexion" (PIX-16995).
+- [#11600](https://github.com/1024pix/pix/pull/11600) [FEATURE] Améliorer le style de la page de détail de compétence (PIX-16882).
+- [#11782](https://github.com/1024pix/pix/pull/11782) [FEATURE] Pix Table sur Pix Admin épisode 9 : Utilisateurs (PIX-17141).
+
+### :building_construction: Tech
+- [#11776](https://github.com/1024pix/pix/pull/11776) [TECH] Pix 17139/refactor application transaction.
+
+### :bug: Correction
+- [#11806](https://github.com/1024pix/pix/pull/11806) [BUGFIX] La génération d'une attestation PDF, dans le cadre de quête, plante lorsque l'utilisateur a un nom avec des caractères spéciaux (PIX-17128).
+
+### :arrow_up: Montée de version
+- [#11825](https://github.com/1024pix/pix/pull/11825) [BUMP] Update dependency @glimmer/component to v2 (junior).
+- [#11824](https://github.com/1024pix/pix/pull/11824) [BUMP] Update dependency pdfjs-dist to v5 (api).
+- [#11823](https://github.com/1024pix/pix/pull/11823) [BUMP] Update dependency ember-source to ~6.3.0 (junior).
+- [#11811](https://github.com/1024pix/pix/pull/11811) [BUMP] Update dependency ember-source to v6 (junior).
+- [#11808](https://github.com/1024pix/pix/pull/11808) [BUMP] Remplacement de @1024pix/web-components par @1024pix/epreuves-components.
+- [#11739](https://github.com/1024pix/pix/pull/11739) [BUMP] Update dependency html-validate to v9 (PIX-17086).
+- [#11809](https://github.com/1024pix/pix/pull/11809) [BUMP] Update dependency @1024pix/pix-ui to ^55.6.0 (certif).
+
+### :coffee: Autre
+- [#11625](https://github.com/1024pix/pix/pull/11625) [DOC] Amendement de l'ADR sur les migrations.
+
 ## v5.70.0 (24/03/2025)
 
 
