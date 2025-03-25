@@ -5,6 +5,8 @@ export async function getNextChallenge({
   userId,
   locale,
   assessmentRepository,
+  answerRepository,
+  challengeRepository,
   evaluationUsecases,
   certificationEvaluationRepository,
 }) {
@@ -15,6 +17,14 @@ export async function getNextChallenge({
   await assessmentRepository.updateLastQuestionDate({ id: assessment.id, lastQuestionDate: new Date() });
 
   let nextChallenge = null;
+  const answers = await answerRepository.findByAssessment(assessment.id);
+  const hasAnswered = hasAnsweredLatestChallengeAsked({
+    answers,
+    lastChallengeId: assessment.lastChallengeId,
+  });
+  if (!hasAnswered) {
+    return challengeRepository.get(assessment.lastChallengeId);
+  }
   if (assessment.isCertification()) {
     nextChallenge = await certificationEvaluationRepository.selectNextCertificationChallenge({
       assessmentId: assessment.id,
@@ -46,4 +56,11 @@ export async function getNextChallenge({
   }
 
   return nextChallenge;
+}
+
+function hasAnsweredLatestChallengeAsked({ answers, lastChallengeId }) {
+  if (!lastChallengeId) {
+    return true;
+  }
+  return answers.some((answer) => answer.challengeId === lastChallengeId);
 }
