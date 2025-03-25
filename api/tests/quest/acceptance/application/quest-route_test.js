@@ -98,6 +98,25 @@ describe('Quest | Acceptance | Application | Quest Route ', function () {
     });
   });
 
+  describe('GET /api/admin/quests/template', function () {
+    it('responds with a 200', async function () {
+      // given
+      const admin = await insertUserWithRoleSuperAdmin();
+      await databaseBuilder.commit();
+      const options = {
+        method: 'GET',
+        headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
+        url: '/api/admin/quests/template',
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+    });
+  });
+
   describe('POST /api/admin/quests', function () {
     it('responds with a 204 - no content', async function () {
       // given

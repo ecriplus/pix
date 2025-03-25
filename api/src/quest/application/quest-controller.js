@@ -1,4 +1,6 @@
+import { generateCSVTemplate } from '../../shared/infrastructure/serializers/csv/csv-template.js';
 import * as requestResponseUtils from '../../shared/infrastructure/utils/request-response-utils.js';
+import { QUEST_HEADER } from '../domain/constants.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as questResultSerializer from '../infrastructure/serializers/quest-result-serializer.js';
 
@@ -13,6 +15,17 @@ const getQuestResults = async function (request, h, dependencies = { questResult
   return h.response(serializedQuestResults);
 };
 
+const getTemplateForCreateOrUpdateQuestsInBatch = async function (request, h) {
+  const fields = QUEST_HEADER.columns.map(({ name }) => name);
+  const csvTemplateFileContent = generateCSVTemplate(fields);
+
+  return h
+    .response(csvTemplateFileContent)
+    .header('Content-Type', 'text/csv; charset=utf-8')
+    .header('content-disposition', 'filename=create-or-update-quests-in-batch')
+    .code(200);
+};
+
 const createOrUpdateQuestsInBatch = async function (request, h) {
   await usecases.createOrUpdateQuestsInBatch({
     filePath: request.payload.path,
@@ -23,6 +36,7 @@ const createOrUpdateQuestsInBatch = async function (request, h) {
 const questController = {
   getQuestResults,
   createOrUpdateQuestsInBatch,
+  getTemplateForCreateOrUpdateQuestsInBatch,
 };
 
 export { questController };
