@@ -10,6 +10,8 @@ export default class ParticipationsSection extends Component {
 
   <template>
     <section class="no-background">
+      <h2 class="participations-section__title">Participations</h2>
+
       <p class="participations-section__subtitle">
         Attention toute modification sur une participation nécessite un accord écrit du prescripteur.
       </p>

@@ -1,9 +1,12 @@
-/* stylelint-disable selector-class-pattern */
+@use 'pix-design-tokens/typography';
+
 .participations-section__title {
-  margin-bottom: 0;
+  margin: var(--pix-spacing-6x) 0 var(--pix-spacing-4x) var(--pix-spacing-2x);
 }
 
 .participations-section__subtitle {
+  margin-left: var(--pix-spacing-2x);
   color: var(--pix-neutral-500);
-  font-size: 0.875rem;
+
+  @extend %pix-body-s;
 }
