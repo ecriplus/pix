@@ -1,11 +1,6 @@
 {{page-title "Centre " @model.certificationCenter.id}}
 <header class="page-header">
-  <div>
-    <LinkTo @route="authenticated.certification-centers.list"><span id="link-to-certification-centers-page">Tous les
-        centres de certification</span></LinkTo>
-    <span class="wire">&nbsp;>&nbsp;</span>
-    <h1>{{@model.certificationCenter.name}}</h1>
-  </div>
+  <CertificationCenters::Breadcrumb @currentPageLabel={{@model.certificationCenter.name}} />
 </header>
 
 <main class="page-body" id="certification-center-get-page">

@@ -3,13 +3,21 @@ import { t } from 'ember-intl/test-support';
 import TargetProfile from 'pix-admin/components/target-profiles/target-profile';
 import ENV from 'pix-admin/config/environment';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | TargetProfile', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  hooks.beforeEach(async function () {
+    const serviceRouter = this.owner.lookup('service:router');
+    sinon.stub(serviceRouter, 'currentRouteName').value('authenticated.target-profiles.target-profile');
+    sinon.stub(serviceRouter, 'currentRoute').value({ localName: 'targetProfile' });
+  });
+
   const targetProfileSampleData = {
+    internalName: 'Profil cible',
     areKnowledgeElementsResettable: false,
     category: 'PREDEFINED',
     createdAt: new Date('2024-03-01'),

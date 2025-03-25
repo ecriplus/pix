@@ -17,7 +17,7 @@ module('Acceptance | Organizations | Children', function (hooks) {
 
   test('"Organisations filles" tab exists', async function (assert) {
     // given
-    const organizationId = this.server.create('organization').id;
+    const organizationId = this.server.create('organization', { name: 'Orga name' }).id;
 
     // when
     const screen = await visit(`/organizations/${organizationId}/children`);
@@ -30,7 +30,7 @@ module('Acceptance | Organizations | Children', function (hooks) {
   module('when there is no child organization', function () {
     test('displays a message', async function (assert) {
       // given
-      const organizationId = this.server.create('organization').id;
+      const organizationId = this.server.create('organization', { name: 'Orga name' }).id;
       this.server.get(`/admin/organizations/${organizationId}/children`, () => ({ data: [] }));
 
       // when
@@ -45,7 +45,7 @@ module('Acceptance | Organizations | Children', function (hooks) {
   module('when there is at least one child organization', function () {
     test('displays a list of child organizations', async function (assert) {
       // given
-      const parentOrganizationId = this.server.create('organization', { id: 1 }).id;
+      const parentOrganizationId = this.server.create('organization', { id: 1, name: 'Orga name' }).id;
       this.server.create('organization', { id: 2, parentOrganizationId: 1, name: 'Child' });
 
       // when
@@ -60,7 +60,7 @@ module('Acceptance | Organizations | Children', function (hooks) {
   module('when user has role "SUPER_ADMIN"', function () {
     test('displays attach child organization form', async function (assert) {
       // given
-      const parentOrganizationId = this.server.create('organization').id;
+      const parentOrganizationId = this.server.create('organization', { name: 'Orga name' }).id;
 
       // when
       const screen = await visit(`/organizations/${parentOrganizationId}/children`);
@@ -96,7 +96,7 @@ module('Acceptance | Organizations | Children', function (hooks) {
       test('hides attach child organization form', async function (assert) {
         // given
         await authenticateAdminMemberWithRole(role.authData)(server);
-        const parentOrganizationId = this.server.create('organization').id;
+        const parentOrganizationId = this.server.create('organization', { name: 'Orga name' }).id;
 
         // when
         const screen = await visit(`/organizations/${parentOrganizationId}/children`);

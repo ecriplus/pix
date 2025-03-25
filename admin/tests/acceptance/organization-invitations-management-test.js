@@ -23,7 +23,7 @@ module('Acceptance | organization invitations management', function (hooks) {
   test('should display invitations tab', async function (assert) {
     // given
     await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-    const organization = this.server.create('organization');
+    const organization = this.server.create('organization', { name: 'Orga name' });
 
     // when
     const screen = await visit(`/organizations/${organization.id}`);
@@ -36,7 +36,7 @@ module('Acceptance | organization invitations management', function (hooks) {
     test('should create an organization-invitation', async function (assert) {
       // given
       await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-      const organization = this.server.create('organization');
+      const organization = this.server.create('organization', { name: 'Orga name' });
 
       // when
       const screen = await visit(`/organizations/${organization.id}/invitations`);
@@ -53,7 +53,7 @@ module('Acceptance | organization invitations management', function (hooks) {
     test('should display an error if the creation has failed', async function (assert) {
       // given
       await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-      const organization = this.server.create('organization');
+      const organization = this.server.create('organization', { name: 'Orga name' });
 
       this.server.post(
         '/admin/organizations/:id/invitations',

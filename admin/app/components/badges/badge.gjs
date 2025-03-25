@@ -5,7 +5,6 @@ import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
-import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
@@ -16,6 +15,7 @@ import set from 'ember-set-helper/helpers/set';
 import { not } from 'ember-truth-helpers';
 
 import SafeMarkdownToHtml from '../safe-markdown-to-html';
+import Breadcrumb from '../target-profiles/breadcrumb';
 import CampaignCriterion from './campaign-criterion';
 import CappedTubesCriterion from './capped-tubes-criterion';
 
@@ -114,15 +114,7 @@ export default class Badge extends Component {
 
   <template>
     <header class="page-header">
-      <div>
-        <p>
-          <LinkTo
-            @route="authenticated.target-profiles.target-profile.insights"
-          >{{@targetProfile.internalName}}</LinkTo>
-          <span class="wire">&nbsp;>&nbsp;</span>
-          <h1>Badge {{@badge.id}}</h1>
-        </p>
-      </div>
+      <Breadcrumb @targetProfile={{@targetProfile}} @currentPageLabel={{@badge.id}} />
     </header>
 
     <main class="page-body">

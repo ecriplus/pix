@@ -1,18 +1,7 @@
 {{page-title "Campagne " @model.name}}
 
 <header class="page-header">
-  <div>
-    <LinkTo @route="authenticated.organizations.list">Toutes les organisations</LinkTo>
-    <span class="wire">&nbsp;>&nbsp;</span>
-    <LinkTo
-      @route="authenticated.organizations.get"
-      @model={{@model.organizationId}}
-    >{{@model.organizationName}}</LinkTo>
-    <span class="wire">&nbsp;>&nbsp;</span>
-    <h1>Campagne
-      {{@model.name}}
-    </h1>
-  </div>
+  <Campaigns::Breadcrumb @campaign={{@model}} />
 </header>
 
 <main class="page-body">

@@ -58,7 +58,7 @@ module('Acceptance | Session pages', function (hooks) {
           const screen = await visit('/sessions/1');
 
           // then
-          assert.dom(screen.getByRole('heading', { name: 'Sessions de certification' })).exists();
+          assert.dom(screen.getByText('Session 1')).exists();
           assert.dom(screen.getByRole('textbox', { name: 'Rechercher une session avec un identifiant' })).hasValue('1');
         });
 

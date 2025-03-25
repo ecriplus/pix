@@ -1,6 +1,6 @@
-import { LinkTo } from '@ember/routing';
 import Component from '@glimmer/component';
 
+import Breadcrumb from './breadcrumb';
 import UpdateStage from './update-stage';
 import ViewStage from './view-stage';
 
@@ -14,15 +14,7 @@ export default class Stage extends Component {
 
   <template>
     <header class="page-header">
-      <div>
-        <p>
-          <LinkTo @route="authenticated.target-profiles.target-profile.insights">{{@targetProfileName}}</LinkTo>
-          <span class="wire">&nbsp;>&nbsp;</span>
-          <h1>Palier
-            {{@stage.id}}
-          </h1>
-        </p>
-      </div>
+      <Breadcrumb @targetProfileName={{@targetProfileName}} @stageId={{@stage.id}} />
     </header>
 
     <main class="page-body">

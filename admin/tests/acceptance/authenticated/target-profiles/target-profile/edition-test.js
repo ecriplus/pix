@@ -57,8 +57,7 @@ module('Acceptance | Target Profile Edition', function (hooks) {
 
     // then
     assert.dom(screen.getByText('Le profil cible a été modifié avec succès.')).exists();
-
-    assert.strictEqual(screen.getAllByRole('heading', { name: 'Un nouveau nom interne' }).length, 2);
+    assert.dom(screen.getByRole('heading', { name: 'Un nouveau nom interne' })).exists();
     assert.dom(screen.getByText('Une nouvelle description')).exists();
 
     await clickByName('area_f2_a1 code · area_f2_a1 title');

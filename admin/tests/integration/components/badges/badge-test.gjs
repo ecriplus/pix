@@ -1,11 +1,18 @@
 import { render } from '@1024pix/ember-testing-library';
 import Badge from 'pix-admin/components/badges/badge';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | badges/badge', function (hooks) {
   setupIntlRenderingTest(hooks);
+
+  hooks.beforeEach(async function () {
+    const serviceRouter = this.owner.lookup('service:router');
+    sinon.stub(serviceRouter, 'currentRouteName').value('authenticated.target-profiles.target-profile');
+    sinon.stub(serviceRouter, 'currentRoute').value({ localName: 'badges' });
+  });
 
   test('should render all details about the badge', async function (assert) {
     // given
@@ -21,12 +28,16 @@ module('Integration | Component | badges/badge', function (hooks) {
       isAlwaysVisible: true,
       criteria: [],
     });
+    const targetProfile = store.createRecord('target-profile', {
+      id: 1,
+      internalName: 'Profil cible',
+    });
 
     // when
-    const screen = await render(<template><Badge @badge={{badge}} /></template>);
+    const screen = await render(<template><Badge @badge={{badge}} @targetProfile={{targetProfile}} /></template>);
 
     // then
-    assert.dom(screen.getByText(badge.id)).exists();
+    assert.dom(screen.getAllByText(badge.id)[1]).exists();
     assert.dom(screen.getByText(badge.title)).exists();
     assert.dom(screen.getByText(badge.message)).exists();
     assert.dom(screen.getByText(badge.key)).exists();
@@ -40,6 +51,8 @@ module('Integration | Component | badges/badge', function (hooks) {
     // given
     const store = this.owner.lookup('service:store');
     const targetProfile = store.createRecord('target-profile', {
+      id: 1,
+      internalName: 'Profil cible',
       areas: [],
     });
     const criterionCampaignParticipation = store.createRecord('badge-criterion', {
@@ -83,6 +96,8 @@ module('Integration | Component | badges/badge', function (hooks) {
     // given
     const store = this.owner.lookup('service:store');
     const targetProfile = store.createRecord('target-profile', {
+      id: 1,
+      internalName: 'Profil cible',
       areas: [],
     });
 

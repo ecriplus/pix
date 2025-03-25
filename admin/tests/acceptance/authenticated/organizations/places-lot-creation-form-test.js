@@ -12,7 +12,7 @@ module('Acceptance | Organizations | places lot creation form', function (hooks)
   test('should go to places listing page', async function (assert) {
     // given
     await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-    const ownerOrganizationId = this.server.create('organization').id;
+    const ownerOrganizationId = this.server.create('organization', { name: 'Orga name' }).id;
 
     const screen = await visit(`/organizations/${ownerOrganizationId}/places/new`);
 

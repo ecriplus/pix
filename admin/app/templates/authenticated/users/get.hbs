@@ -1,10 +1,6 @@
 {{page-title "Utilisateur " @model.id}}
 <header class="page-header">
-  <div>
-    <LinkTo @route="authenticated.users.list"><span id="link-to-users-page">Tous les utilisateurs</span></LinkTo>
-    <span class="wire">&nbsp;>&nbsp;</span>
-    <h1>Utilisateur {{@model.id}}</h1>
-  </div>
+  <Users::Breadcrumb @userId={{@model.id}} />
 </header>
 
 <main class="page-body">

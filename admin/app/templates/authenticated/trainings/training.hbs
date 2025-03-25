@@ -2,13 +2,8 @@
 
 {{! template-lint-disable no-redundant-role }}
 <header class="page-header" role="banner">
-  <div>
-    <LinkTo @route="authenticated.trainings.list">Tous les contenus formatifs</LinkTo>
-    <PixIcon @name="chevronRight" @ariaHidden={{true}} />
-    <h1>Détail du contenu formatif
-      {{@model.id}}
-    </h1>
-  </div>
+  <Trainings::Breadcrumb @currentPageLabel={{@model.id}} />
+
   <div class="page-actions">
     <a
       class="page-actions__link"

@@ -121,7 +121,7 @@ module('Acceptance | Organizations | List', function (hooks) {
 
     test('it should redirect to organization details on click', async function (assert) {
       // given
-      server.create('organization', { id: 1 });
+      server.create('organization', { id: 1, name: 'Orga name' });
       const screen = await visit('/organizations/list');
 
       // when

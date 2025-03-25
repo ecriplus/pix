@@ -23,7 +23,7 @@ module('Acceptance | Campaign Participations', function (hooks) {
     test('it should display campaign participations', async function (assert) {
       // given
       await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-      server.create('campaign', { id: 1, name: 'Campaign name' });
+      server.create('campaign', { id: 1, name: 'Campaign name', organizationId: 2, organizationName: 'Orga name' });
       server.create('campaign-participation', { firstName: 'Georgette', lastName: 'Frimousse' });
 
       // when

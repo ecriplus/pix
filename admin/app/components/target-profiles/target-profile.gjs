@@ -15,6 +15,7 @@ import ENV from 'pix-admin/config/environment';
 import formatDate from '../../helpers/format-date';
 import ConfirmPopup from '../confirm-popup';
 import SafeMarkdownToHtml from '../safe-markdown-to-html';
+import Breadcrumb from './breadcrumb';
 import Category from './category';
 import Copy from './modal/copy';
 import PdfParametersModal from './pdf-parameters-modal';
@@ -176,11 +177,7 @@ export default class TargetProfile extends Component {
   <template>
     {{pageTitle "Profil " @model.id " | Pix Admin" replace=true}}
     <header class="page-header">
-      <div>
-        <LinkTo @route="authenticated.target-profiles.list">Tous les profils cibles</LinkTo>
-        <span class="wire">&nbsp;>&nbsp;</span>
-        <h1>{{@model.internalName}}</h1>
-      </div>
+      <Breadcrumb @currentPageLabel={{@model.internalName}} />
     </header>
 
     <main class="page-body">

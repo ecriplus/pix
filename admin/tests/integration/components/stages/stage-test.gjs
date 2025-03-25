@@ -24,9 +24,15 @@ module('Integration | Component | Stage', function (hooks) {
         prescriberTitle: 'titre du prescripteur',
         prescriberDescription: 'description de prescripteur',
       };
+      const targetProfileName = 'Profil cible';
 
       component = <template>
-        <Stage @stage={{stage}} @toggleEditMode={{toggleEditMode}} @isEditMode={{isEditMode}} />
+        <Stage
+          @stage={{stage}}
+          @toggleEditMode={{toggleEditMode}}
+          @isEditMode={{isEditMode}}
+          @targetProfileName={{targetProfileName}}
+        />
       </template>;
     });
 
@@ -64,9 +70,15 @@ module('Integration | Component | Stage', function (hooks) {
         prescriberTitle: 'titre du prescripteur',
         prescriberDescription: 'description de prescripteur',
       };
+      const targetProfileName = 'Profil cible';
 
       component = <template>
-        <Stage @stage={{stage}} @toggleEditMode={{toggleEditMode}} @isEditMode={{isEditMode}} />
+        <Stage
+          @stage={{stage}}
+          @toggleEditMode={{toggleEditMode}}
+          @isEditMode={{isEditMode}}
+          @targetProfileName={{targetProfileName}}
+        />
       </template>;
     });
 
@@ -104,9 +116,15 @@ module('Integration | Component | Stage', function (hooks) {
         prescriberTitle: 'titre du prescripteur',
         prescriberDescription: 'description de prescripteur',
       };
+      const targetProfileName = 'Profil cible';
 
       component = <template>
-        <Stage @stage={{stage}} @toggleEditMode={{toggleEditMode}} @isEditMode={{isEditMode}} />
+        <Stage
+          @stage={{stage}}
+          @toggleEditMode={{toggleEditMode}}
+          @isEditMode={{isEditMode}}
+          @targetProfileName={{targetProfileName}}
+        />
       </template>;
     });
 
@@ -144,10 +162,12 @@ module('Integration | Component | Stage', function (hooks) {
         prescriberTitle: 'titre du prescripteur',
         prescriberDescription: 'description de prescripteur',
       };
+      const targetProfileName = 'Profil cible';
 
       component = <template>
         <Stage
           @stage={{stage}}
+          @targetProfileName={{targetProfileName}}
           @toggleEditMode={{toggleEditMode}}
           @isEditMode={{isEditMode}}
           @hasLinkedCampaign={{hasLinkedCampaign}}
@@ -177,9 +197,16 @@ module('Integration | Component | Stage', function (hooks) {
         prescriberTitle: 'dummy',
         prescriberDescription: 'dummy',
       };
+      const targetProfileName = 'Profil cible';
 
       component = <template>
-        <Stage @stage={{stage}} @isEditMode={{true}} @hasLinkedCampaign={{hasLinkedCampaign}} @onUpdate={{update}} />
+        <Stage
+          @stage={{stage}}
+          @isEditMode={{true}}
+          @hasLinkedCampaign={{hasLinkedCampaign}}
+          @onUpdate={{update}}
+          @targetProfileName={{targetProfileName}}
+        />
       </template>;
     });
 
