@@ -7,7 +7,6 @@ import {
 } from '../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { organizationInvitationSerializer } from '../../../src/team/infrastructure/serializers/jsonapi/organization-invitation.serializer.js';
 import { usecases } from '../../domain/usecases/index.js';
-import * as organizationMemberIdentitySerializer from '../../infrastructure/serializers/jsonapi/organization-member-identity-serializer.js';
 
 const createInBatch = async function (request, h) {
   const organizations = await csvSerializer.deserializeForOrganizationsImport(request.payload.path);
@@ -25,16 +24,6 @@ const findPaginatedFilteredOrganizations = async function (request, h, dependenc
     page: options.page,
   });
   return dependencies.organizationSerializer.serialize(organizations, pagination);
-};
-
-const getOrganizationMemberIdentities = async function (
-  request,
-  h,
-  dependencies = { organizationMemberIdentitySerializer },
-) {
-  const organizationId = request.params.id;
-  const members = await usecases.getOrganizationMemberIdentities({ organizationId });
-  return dependencies.organizationMemberIdentitySerializer.serialize(members);
 };
 
 const resendInvitation = async function (request, h) {
@@ -72,7 +61,6 @@ const organizationController = {
   createInBatch,
   findChildrenOrganizationsForAdmin,
   findPaginatedFilteredOrganizations,
-  getOrganizationMemberIdentities,
   resendInvitation,
 };
 
