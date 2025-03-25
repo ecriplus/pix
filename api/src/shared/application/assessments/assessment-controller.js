@@ -227,7 +227,7 @@ async function _getChallengeByAssessmentType({ assessment, request, dependencies
   }
 
   if (assessment.isDemo()) {
-    return dependencies.usecases.getNextChallengeForDemo({ assessment });
+    return dependencies.evaluationUsecases.getNextChallengeForDemo({ assessment });
   }
 
   if (assessment.isForCampaign()) {

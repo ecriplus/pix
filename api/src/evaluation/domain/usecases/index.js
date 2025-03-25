@@ -1,6 +1,7 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import * as courseRepository from '../../../../src/shared/infrastructure/repositories/course-repository.js';
 import * as certificationEvaluationCandidateRepository from '../../../certification/evaluation/infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationChallengeLiveAlertRepository from '../../../certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
 import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
@@ -64,6 +65,7 @@ const dependencies = {
   competenceEvaluationRepository,
   competenceRepository,
   correctionService,
+  courseRepository,
   feedbackRepository,
   getCompetenceLevel,
   improvementService,
