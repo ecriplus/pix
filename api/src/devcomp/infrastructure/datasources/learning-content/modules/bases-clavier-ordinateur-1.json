@@ -443,7 +443,7 @@
           "element": {
             "id": "388eb851-d9c2-4434-89a1-5879d80467b2",
             "type": "expand",
-            "title": "<span aria-hidden=\"true\">🤔</span> Bon à savoir",
+            "title": "🤔 Bon à savoir",
             "content": "<p> Pour taper du texte rapidement, il est conseillé d’utiliser ses deux mains.<span aria-hidden=\"true\">🙌</span> Quand on débute, ce n’est pas nécessaire.<br> Pensez aussi à ne pas taper trop fort sur les touches pour ne pas les abîmer.</p>"
           }
         }
