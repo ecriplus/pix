@@ -1,5 +1,7 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { generateCSVTemplate } from '../../../shared/infrastructure/serializers/csv/csv-template.js';
 import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { ORGANIZATION_FEATURES_HEADER } from '../../domain/constants.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { organizationTagCsvParser } from '../../infrastructure/parsers/csv/organization-tag-csv.parser.js';
 import { organizationForAdminSerializer } from '../../infrastructure/serializers/jsonapi/organizations-administration/organization-for-admin.serializer.js';
@@ -25,6 +27,17 @@ const attachChildOrganization = async function (request, h) {
   await usecases.attachChildOrganizationToOrganization({ childOrganizationIds, parentOrganizationId });
 
   return h.response().code(204);
+};
+
+const getTemplateForAddOrganizationFeatureInBatch = async function (request, h) {
+  const fields = ORGANIZATION_FEATURES_HEADER.columns.map(({ name }) => name);
+  const csvTemplateFileContent = generateCSVTemplate(fields);
+
+  return h
+    .response(csvTemplateFileContent)
+    .header('Content-Type', 'text/csv; charset=utf-8')
+    .header('content-disposition', 'filename=add-organization-feature-in-batch')
+    .code(200);
 };
 
 const addOrganizationFeatureInBatch = async function (request, h) {
@@ -82,6 +95,7 @@ const organizationAdminController = {
   create,
   archiveOrganization,
   attachChildOrganization,
+  getTemplateForAddOrganizationFeatureInBatch,
   addOrganizationFeatureInBatch,
   getOrganizationDetails,
   updateOrganizationsInBatch,
