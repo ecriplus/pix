@@ -3,31 +3,44 @@ import PixModal from '@1024pix/pix-ui/components/pix-modal';
 import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
-import focus from '../../../modifiers/focus';
+import focus from '../../../../../modifiers/focus';
 
 export default class CertificationIssueReportModal extends Component {
-  @tracked label = null;
+  @service pixToast;
+
+  @tracked resolution = null;
   @tracked errorMessage = null;
 
   @action
-  resolve() {
+  async onSubmit() {
     if (this._isInvalid()) {
       this.errorMessage = 'Le motif de résolution doit être renseigné.';
       return;
     }
 
     this.errorMessage = null;
-    this.args.resolveIssueReport(this.args.issueReport, this.label);
-    this.args.closeResolveModal();
+
+    try {
+      await this.args.issueReport.save({ adapterOptions: { resolutionLabel: this.resolution } });
+      await this.args.certification.reload();
+
+      this.pixToast.sendSuccessNotification({ message: 'Le signalement a été résolu.' });
+    } catch (error) {
+      console.log('error', error);
+      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue :\n' + error?.errors[0]?.detail });
+    } finally {
+      this.args.toggleResolveModal();
+    }
   }
 
   @action
-  onChangeLabel(event) {
-    this.label = event.target.value;
+  onResolutionChange(event) {
+    this.resolution = event.target.value;
   }
 
   get actionName() {
@@ -35,7 +48,7 @@ export default class CertificationIssueReportModal extends Component {
   }
 
   _isInvalid() {
-    return this.args.issueReport.isResolved && !this.label?.trim();
+    return this.args.issueReport.isResolved && !this.resolution?.trim();
   }
 
   <template>
@@ -47,7 +60,7 @@ export default class CertificationIssueReportModal extends Component {
           type="text"
           maxLength="255"
           @errorMessage={{this.errorMessage}}
-          {{on "change" this.onChangeLabel}}
+          {{on "change" this.onResolutionChange}}
           {{focus}}
         >
           <:label>Résolution</:label>
@@ -56,14 +69,13 @@ export default class CertificationIssueReportModal extends Component {
 
       <:footer>
         <PixButton
-          @type="submit"
-          @size="small"
+          @variant="secondary"
           class="pix-button--background-transparent-light"
-          {{on "click" @toggleResolveModal}}
+          @triggerAction={{@toggleResolveModal}}
         >
           {{t "common.actions.cancel"}}
         </PixButton>
-        <PixButton @size="small" @triggerAction={{this.resolve}}>{{this.actionName}}</PixButton>
+        <PixButton @triggerAction={{this.onSubmit}}>{{this.actionName}}</PixButton>
       </:footer>
     </PixModal>
   </template>
