@@ -157,29 +157,6 @@ const register = async function (server) {
         tags: ['api', 'invitations'],
       },
     },
-    {
-      method: 'GET',
-      path: '/api/organizations/{id}/member-identities',
-      config: {
-        pre: [
-          {
-            method: securityPreHandlers.checkUserBelongsToOrganization,
-            assign: 'belongsToOrganization',
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            id: identifiersType.organizationId,
-          }),
-        },
-        handler: organizationController.getOrganizationMemberIdentities,
-        tags: ['api', 'organizations'],
-        notes: [
-          'Cette route est restreinte aux utilisateurs authentifiés',
-          "Elle retourne l'identité des membres rattachés à l’organisation.",
-        ],
-      },
-    },
   ];
 
   server.route([...adminRoutes, ...orgaRoutes]);
