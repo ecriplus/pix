@@ -52,7 +52,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
   describe('(demo) GET /api/assessments/:assessment_id/next', function () {
     const assessmentId = 1;
 
-    context('when no challenge is answered', function () {
+    context('when next challenge found', function () {
       beforeEach(function () {
         databaseBuilder.factory.buildAssessment({
           id: assessmentId,
@@ -62,7 +62,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
         return databaseBuilder.commit();
       });
 
-      it('should return 200 HTTP status code', function () {
+      it('should return 200 HTTP status code', async function () {
         // given
         const options = {
           method: 'GET',
@@ -70,42 +70,10 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
         };
 
         // when
-        return server.inject(options).then((response) => {
-          expect(response.statusCode).to.equal(200);
-        });
-      });
-
-      it('should return application/json', function () {
-        // given
-        const options = {
-          method: 'GET',
-          url: '/api/assessments/' + assessmentId + '/next',
-        };
-
-        // when
-        const promise = server.inject(options);
-
-        // then
-        return promise.then((response) => {
-          const contentType = response.headers['content-type'];
-          expect(contentType).to.contain('application/json');
-        });
-      });
-
-      it('should return the first challenge if none already answered', function () {
-        // given
-        const options = {
-          method: 'GET',
-          url: '/api/assessments/' + assessmentId + '/next',
-        };
-
-        // when
-        const promise = server.inject(options);
-
-        // then
-        return promise.then((response) => {
-          expect(response.result.data.id).to.equal('first_challenge');
-        });
+        const response = await server.inject(options);
+        expect(response.statusCode).to.equal(200);
+        expect(response.headers['content-type']).to.contain('application/json');
+        expect(response.result.data.id).to.equal('first_challenge');
       });
     });
 
@@ -128,12 +96,10 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
         };
 
         // when
-        const promise = server.inject(options);
+        const response = await server.inject(options);
 
         // then
-        return promise.then((response) => {
-          expect(response.result.data.id).to.equal('second_challenge');
-        });
+        expect(response.result.data.id).to.equal('second_challenge');
       });
     });
 
