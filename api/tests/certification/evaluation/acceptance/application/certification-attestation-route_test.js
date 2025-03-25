@@ -146,7 +146,6 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
               assessmentId: assessment.id,
               level: 1,
               pixScore: 23,
-              emitter: 'PIX-ALGO',
               status: AssessmentResult.status.VALIDATED,
             });
 
@@ -455,7 +454,6 @@ async function _buildDatabaseCertification({
     assessmentId: assessment.id,
     level: 1,
     pixScore: 23,
-    emitter: 'PIX-ALGO',
     status: 'validated',
   });
   const { id } = databaseBuilder.factory.buildComplementaryCertificationCourse({

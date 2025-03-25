@@ -4,12 +4,7 @@ import {
   CertificationIssueReportSubcategories,
 } from '../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
 import { SESSIONS_VERSIONS } from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
-import {
-  AnswerStatus,
-  Assessment,
-  AssessmentResult,
-  CertificationResult,
-} from '../../../../../src/shared/domain/models/index.js';
+import { AnswerStatus, Assessment, AssessmentResult } from '../../../../../src/shared/domain/models/index.js';
 import {
   createServer,
   databaseBuilder,
@@ -382,9 +377,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
 
           // then
           expect(response.statusCode).to.equal(200);
-          const actualKoAssessmentResult = await knex('assessment-results')
-            .where({ assessmentId, emitter: CertificationResult.emitters.PIX_ALGO_AUTO_JURY })
-            .first();
+          const actualKoAssessmentResult = await knex('assessment-results').where({ assessmentId }).first();
           expect(actualKoAssessmentResult.pixScore).not.to.equal(assessmentResultKo.pixScore);
         });
       });
