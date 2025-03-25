@@ -1,6 +1,6 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
-import { find } from '@ember/test-helpers';
+import { find, findAll } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import ModuleGrain from 'mon-pix/components/module/grain/grain';
@@ -169,6 +169,75 @@ module('Integration | Component | Module | Grain', function (hooks) {
   });
 
   module('when component is an element', function () {
+    module('when element is a custom element', function () {
+      test('should display a "CustomElement" element', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const customElement = {
+          type: 'custom',
+          tagName: 'qcu-image',
+          props: {
+            name: "Liste d'applications",
+            maxChoicesPerLine: 3,
+            imageChoicesSize: 'icon',
+            choices: [
+              {
+                name: 'Google',
+                image: {
+                  width: 534,
+                  height: 544,
+                  loading: 'lazy',
+                  decoding: 'async',
+                  src: 'https://epreuves.pix.fr/_astro/Google.B1bcY5Go_1BynY8.svg',
+                },
+              },
+              {
+                name: 'LibreOffice Writer',
+                image: {
+                  width: 205,
+                  height: 246,
+                  loading: 'lazy',
+                  decoding: 'async',
+                  src: 'https://epreuves.pix.fr/_astro/writer.3bR8N2DK_Z1iWuJ9.webp',
+                },
+              },
+              {
+                name: 'Explorateur',
+                image: {
+                  width: 128,
+                  height: 128,
+                  loading: 'lazy',
+                  decoding: 'async',
+                  src: 'https://epreuves.pix.fr/_astro/windows-file-explorer.CnF8MYwI_23driA.webp',
+                },
+              },
+              {
+                name: 'Geogebra',
+                image: {
+                  width: 640,
+                  height: 640,
+                  loading: 'lazy',
+                  decoding: 'async',
+                  src: 'https://epreuves.pix.fr/_astro/geogebra.CZH9VYqc_19v4nj.webp',
+                },
+              },
+            ],
+          },
+        };
+        const grain = store.createRecord('grain', {
+          title: 'Grain title',
+          components: [{ type: 'element', element: customElement }],
+        });
+
+        // when
+        await render(<template><ModuleGrain @grain={{grain}} /></template>);
+
+        // then
+        assert.strictEqual(findAll('.element-custom').length, 1);
+        assert.strictEqual(findAll('qcu-image').length, 1);
+      });
+    });
+
     module('when element is a text', function () {
       test('should display text element', async function (assert) {
         // given

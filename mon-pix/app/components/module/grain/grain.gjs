@@ -17,6 +17,7 @@ export default class ModuleGrain extends Component {
   grain = this.args.grain;
 
   static AVAILABLE_ELEMENT_TYPES = [
+    'custom',
     'download',
     'embed',
     'expand',

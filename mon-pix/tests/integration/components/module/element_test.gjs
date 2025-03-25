@@ -9,6 +9,69 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Module | Element', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  test('should display an element with an custom element', async function (assert) {
+    // given
+    const element = {
+      id: '8d7687c8-4a02-4d7e-bf6c-693a6d481c78',
+      type: 'custom',
+      tagName: 'qcu-image',
+      props: {
+        name: "Liste d'applications",
+        maxChoicesPerLine: 3,
+        imageChoicesSize: 'icon',
+        choices: [
+          {
+            name: 'Google',
+            image: {
+              width: 534,
+              height: 544,
+              loading: 'lazy',
+              decoding: 'async',
+              src: 'https://epreuves.pix.fr/_astro/Google.B1bcY5Go_1BynY8.svg',
+            },
+          },
+          {
+            name: 'LibreOffice Writer',
+            image: {
+              width: 205,
+              height: 246,
+              loading: 'lazy',
+              decoding: 'async',
+              src: 'https://epreuves.pix.fr/_astro/writer.3bR8N2DK_Z1iWuJ9.webp',
+            },
+          },
+          {
+            name: 'Explorateur',
+            image: {
+              width: 128,
+              height: 128,
+              loading: 'lazy',
+              decoding: 'async',
+              src: 'https://epreuves.pix.fr/_astro/windows-file-explorer.CnF8MYwI_23driA.webp',
+            },
+          },
+          {
+            name: 'Geogebra',
+            image: {
+              width: 640,
+              height: 640,
+              loading: 'lazy',
+              decoding: 'async',
+              src: 'https://epreuves.pix.fr/_astro/geogebra.CZH9VYqc_19v4nj.webp',
+            },
+          },
+        ],
+      },
+    };
+
+    // when
+    await render(<template><ModulixElement @element={{element}} /></template>);
+
+    // then
+    assert.strictEqual(findAll('.element-custom').length, 1);
+    assert.strictEqual(findAll('qcu-image').length, 1);
+  });
+
   test('should display an element with a text element', async function (assert) {
     // given
     const element = {
