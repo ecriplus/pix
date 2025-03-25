@@ -1,3 +1,5 @@
+import { AssessmentEndedError } from '../errors.js';
+
 export async function getNextChallenge({
   assessmentId,
   userId,
@@ -7,10 +9,10 @@ export async function getNextChallenge({
   certificationEvaluationRepository,
 }) {
   const assessment = await assessmentRepository.get(assessmentId);
-
-  if (assessment.isStarted()) {
-    await assessmentRepository.updateLastQuestionDate({ id: assessment.id, lastQuestionDate: new Date() });
+  if (!assessment.isStarted()) {
+    throw new AssessmentEndedError();
   }
+  await assessmentRepository.updateLastQuestionDate({ id: assessment.id, lastQuestionDate: new Date() });
 
   let nextChallenge = null;
   if (assessment.isCertification()) {

@@ -1,6 +1,7 @@
+import { AssessmentEndedError } from '../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../src/shared/domain/models/index.js';
 import { getNextChallenge } from '../../../../../src/shared/domain/usecases/get-next-challenge.js';
-import { domainBuilder, expect, preventStubsToBeCalledUnexpectedly, sinon } from '../../../../test-helper.js';
+import { catchErr, domainBuilder, expect, preventStubsToBeCalledUnexpectedly, sinon } from '../../../../test-helper.js';
 
 describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () {
   describe('#getNextChallenge', function () {
@@ -69,12 +70,37 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
       };
     });
 
+    context('when assessment is not started', function () {
+      let assessment;
+
+      beforeEach(function () {
+        assessment = domainBuilder.buildAssessment({ id: assessmentId, type: Assessment.types.PREVIEW });
+      });
+
+      // eslint-disable-next-line mocha/no-setup-in-describe
+      Object.values(Assessment.states)
+        .filter((assessmentState) => assessmentState !== Assessment.states.STARTED)
+        .forEach((assessmentState) => {
+          it(`should throw a AssessmentEndedError when assessment is ${assessmentState}`, async function () {
+            assessment.state = assessmentState;
+            assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
+
+            const err = await catchErr(getNextChallenge)(dependencies);
+
+            expect(err).to.be.instanceOf(AssessmentEndedError);
+          });
+        });
+    });
+
     context('Assessment types', function () {
       context('for assessment of type PREVIEW', function () {
         let assessment;
 
         beforeEach(function () {
-          assessment = domainBuilder.buildAssessment({ type: Assessment.types.PREVIEW });
+          assessment = domainBuilder.buildAssessment({
+            state: Assessment.states.STARTED,
+            type: Assessment.types.PREVIEW,
+          });
           assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
           assessmentRepository_updateLastQuestionDateStub.resolves();
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
@@ -93,7 +119,10 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         let assessment;
 
         beforeEach(function () {
-          assessment = domainBuilder.buildAssessment({ type: Assessment.types.DEMO });
+          assessment = domainBuilder.buildAssessment({
+            state: Assessment.states.STARTED,
+            type: Assessment.types.DEMO,
+          });
           assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
           assessmentRepository_updateLastQuestionDateStub.resolves();
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
@@ -112,7 +141,10 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         let assessment;
 
         beforeEach(function () {
-          assessment = domainBuilder.buildAssessment({ type: Assessment.types.CAMPAIGN });
+          assessment = domainBuilder.buildAssessment({
+            state: Assessment.states.STARTED,
+            type: Assessment.types.CAMPAIGN,
+          });
           assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
           assessmentRepository_updateLastQuestionDateStub.resolves();
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
@@ -133,7 +165,10 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         let assessment;
 
         beforeEach(function () {
-          assessment = domainBuilder.buildAssessment({ type: Assessment.types.COMPETENCE_EVALUATION });
+          assessment = domainBuilder.buildAssessment({
+            state: Assessment.states.STARTED,
+            type: Assessment.types.COMPETENCE_EVALUATION,
+          });
           assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
           assessmentRepository_updateLastQuestionDateStub.resolves();
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
@@ -154,7 +189,11 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         let assessment;
 
         beforeEach(function () {
-          assessment = domainBuilder.buildAssessment({ id: assessmentId, type: Assessment.types.CERTIFICATION });
+          assessment = domainBuilder.buildAssessment({
+            state: Assessment.states.STARTED,
+            id: assessmentId,
+            type: Assessment.types.CERTIFICATION,
+          });
           assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
           assessmentRepository_updateLastQuestionDateStub.resolves();
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
@@ -175,7 +214,11 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         let assessment;
 
         beforeEach(function () {
-          assessment = domainBuilder.buildAssessment({ id: assessmentId, type: 'coucou les zamis' });
+          assessment = domainBuilder.buildAssessment({
+            state: Assessment.states.STARTED,
+            id: assessmentId,
+            type: 'coucou les zamis',
+          });
           assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
           assessmentRepository_updateLastQuestionDateStub.resolves();
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
@@ -196,7 +239,11 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
 
         beforeEach(function () {
           clock = sinon.useFakeTimers(new Date('2023-10-05'));
-          assessment = domainBuilder.buildAssessment({ id: assessmentId, type: Assessment.types.PREVIEW });
+          assessment = domainBuilder.buildAssessment({
+            state: Assessment.states.STARTED,
+            id: assessmentId,
+            type: Assessment.types.PREVIEW,
+          });
           evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves({ id: 'someChallengeId' });
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
         });
@@ -205,22 +252,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           clock.restore();
         });
 
-        // eslint-disable-next-line mocha/no-setup-in-describe
-        Object.values(Assessment.states)
-          .filter((assessmentState) => assessmentState !== Assessment.states.STARTED)
-          .forEach((assessmentState) => {
-            it(`should not update the last question date when assessment is in state ${assessmentState}`, async function () {
-              assessment.state = assessmentState;
-              assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
-
-              await getNextChallenge(dependencies);
-
-              expect(assessmentRepository_updateLastQuestionDateStub).to.not.have.been.called;
-            });
-          });
-
-        it(`should update the last question date when assessment is in state Started`, async function () {
-          assessment.state = Assessment.states.STARTED;
+        it(`should update the last question date`, async function () {
           assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
           assessmentRepository_updateLastQuestionDateStub.resolves();
 
@@ -239,7 +271,11 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
 
         context('when no next challenge has been found', function () {
           it('should not update last challenge asked', async function () {
-            const assessment = domainBuilder.buildAssessment({ id: assessmentId, type: Assessment.types.PREVIEW });
+            const assessment = domainBuilder.buildAssessment({
+              id: assessmentId,
+              state: Assessment.states.STARTED,
+              type: Assessment.types.PREVIEW,
+            });
             assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
             evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves(null);
 
@@ -253,6 +289,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           it('should not update last challenge asked', async function () {
             const assessment = domainBuilder.buildAssessment({
               id: assessmentId,
+              state: Assessment.states.STARTED,
               type: Assessment.types.PREVIEW,
               lastChallengeId: 'currentChallengeId',
             });
@@ -271,6 +308,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           it('should update last challenge asked', async function () {
             const assessment = domainBuilder.buildAssessment({
               id: assessmentId,
+              state: Assessment.states.STARTED,
               type: Assessment.types.PREVIEW,
               lastChallengeId: 'previousChallengeId',
             });
