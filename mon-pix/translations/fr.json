@@ -1256,7 +1256,7 @@
         },
         "subtitle": "Continuez vos parcours de test en cours ou envoyez vos résultats",
         "tests-link": "Tous mes parcours",
-        "title": "Parcours"
+        "title": "Mes parcours"
       },
       "empty-dashboard": {
         "link-to-competences": "Voir mes compétences",
@@ -2152,8 +2152,8 @@
         },
         "title": "Parcours désactivés"
       },
-      "description": "Retrouvez ici les parcours d’évaluation que vous avez commencés ou terminés.",
-      "title": "Parcours"
+      "description": "Retrouvez vos parcours Pix, suivez votre progression et reprenez simplement là où vous en étiez.",
+      "title": "Mes parcours"
     },
     "user-trainings": {
       "description": "Continuez à progresser grâce aux formations recommandées à l’issue de vos parcours d’évaluation.",
