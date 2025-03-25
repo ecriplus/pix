@@ -12,7 +12,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
     let evaluationUsecases_getNextChallengeForDemoStub;
     let evaluationUsecases_getNextChallengeForCampaignAssessmentStub;
     let evaluationUsecases_getNextChallengeForCompetenceEvaluationStub;
-    let certificationVersionRepository_selectNextCertificationChallengeStub;
+    let certificationEvaluationRepository_selectNextCertificationChallengeStub;
 
     beforeEach(function () {
       userId = 'someUserId';
@@ -29,7 +29,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
       evaluationUsecases_getNextChallengeForCompetenceEvaluationStub = sinon
         .stub()
         .named('getNextChallengeForCompetenceEvaluation');
-      certificationVersionRepository_selectNextCertificationChallengeStub = sinon
+      certificationEvaluationRepository_selectNextCertificationChallengeStub = sinon
         .stub()
         .named('selectNextCertificationChallenge');
       preventStubsToBeCalledUnexpectedly([
@@ -39,7 +39,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         evaluationUsecases_getNextChallengeForDemoStub,
         evaluationUsecases_getNextChallengeForCampaignAssessmentStub,
         evaluationUsecases_getNextChallengeForCompetenceEvaluationStub,
-        certificationVersionRepository_selectNextCertificationChallengeStub,
+        certificationEvaluationRepository_selectNextCertificationChallengeStub,
       ]);
 
       const assessmentRepository = {
@@ -55,8 +55,8 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         getNextChallengeForCompetenceEvaluation: evaluationUsecases_getNextChallengeForCompetenceEvaluationStub,
       };
 
-      const certificationVersionRepository = {
-        selectNextCertificationChallenge: certificationVersionRepository_selectNextCertificationChallengeStub,
+      const certificationEvaluationRepository = {
+        selectNextCertificationChallenge: certificationEvaluationRepository_selectNextCertificationChallengeStub,
       };
 
       dependencies = {
@@ -65,7 +65,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         locale,
         assessmentRepository,
         evaluationUsecases,
-        certificationVersionRepository,
+        certificationEvaluationRepository,
       };
     });
 
@@ -162,7 +162,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
 
         it('should call usecase and return value from certification usecase', async function () {
           const challenge = domainBuilder.buildChallenge({ id: 'challengeForCertification' });
-          certificationVersionRepository_selectNextCertificationChallengeStub
+          certificationEvaluationRepository_selectNextCertificationChallengeStub
             .withArgs({ assessmentId: assessment.id, locale })
             .resolves(challenge);
           const actualNextChallenge = await getNextChallenge(dependencies);

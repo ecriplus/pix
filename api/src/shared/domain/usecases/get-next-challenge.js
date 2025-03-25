@@ -4,7 +4,7 @@ export async function getNextChallenge({
   locale,
   assessmentRepository,
   evaluationUsecases,
-  certificationVersionRepository,
+  certificationEvaluationRepository,
 }) {
   const assessment = await assessmentRepository.get(assessmentId);
 
@@ -14,7 +14,7 @@ export async function getNextChallenge({
 
   let nextChallenge = null;
   if (assessment.isCertification()) {
-    nextChallenge = await certificationVersionRepository.selectNextCertificationChallenge({
+    nextChallenge = await certificationEvaluationRepository.selectNextCertificationChallenge({
       assessmentId: assessment.id,
       locale,
     });
