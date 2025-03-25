@@ -14,7 +14,7 @@ const pause = async (duration) => {
 };
 
 function getKnowlegdeElementSnapshotsQuery() {
-  return knex('knowledge-element-snapshots').whereRaw("(snapshot->0->>'userId') is not null");
+  return knex('knowledge-element-snapshots').whereRaw("(snapshot->0->>'answerId') is not null");
 }
 
 function getKnowlegdeElementSnapshotLimit(firstId, limit = DEFAULT_CHUNK_SIZE) {
@@ -73,7 +73,6 @@ export class CleanKeSnapshotScript extends Script {
             'source',
             'status',
             'skillId',
-            'answerId',
             'createdAt',
             'earnedPix',
             'competenceId',

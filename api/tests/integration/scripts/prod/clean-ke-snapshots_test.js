@@ -80,7 +80,7 @@ describe('Script | Prod | Clean knowledge-element-snapshot snapshot (jsonb)', fu
         userId: user.id,
         snappedAt: participation3.sharedAt,
         knowledgeElementsAttributes: [
-          { skillId: 'skill_2', status: 'validated', earnedPix: 40, userId: null, assessmentId: null },
+          { skillId: 'skill_2', status: 'validated', earnedPix: 40, userId: null, assessmentId: null, answerId: null },
         ],
       });
 
