@@ -2,11 +2,11 @@
 @use 'pix-design-tokens/typography';
 
 .page {
-  header, .page-header {
+  header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: var(--pix-spacing-2x) 20px;
+    margin: var(--pix-spacing-2x) var(--pix-spacing-4x) 0 var(--pix-spacing-4x);
     padding-bottom: var(--pix-spacing-6x);
     border-bottom: 1px solid var(--pix-neutral-100);
 
@@ -27,6 +27,10 @@
         }
       }
     }
+  }
+
+  .page-header {
+    margin-top: var(--pix-spacing-4x);
   }
 
   .page-body {
