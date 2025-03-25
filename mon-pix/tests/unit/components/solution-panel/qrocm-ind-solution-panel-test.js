@@ -22,7 +22,7 @@ module('Unit | Component | solution-panel/qrocm-ind-solution-panel', function (h
     test('should return an array with data to display (case when the answers are right)', function (assert) {
       //Given
       challenge = EmberObject.create({ proposals: 'content : ${smiley1}\n\ntriste : ${smiley2}' });
-      answer = { value: "smiley1: ':)' smiley2: ':('", resultDetails: 'smiley1: true\nsmiley2: true' };
+      answer = { value: "smiley1: ':)'\nsmiley2: ':('", resultDetails: 'smiley1: true\nsmiley2: true' };
       solution = 'smiley1: \n - :-)\n - :)\n - :-D\n - :D\n - :))\n\nsmiley2:\n - :-(\n - :(\n - :((';
 
       const expectedBlocksData = [
@@ -70,7 +70,7 @@ module('Unit | Component | solution-panel/qrocm-ind-solution-panel', function (h
     test('should return an array with data to display (case when there is wrong answers)', function (assert) {
       //Given
       challenge = EmberObject.create({ proposals: 'Clé USB : ${num1}\n\nCarte mémoire (SD) : ${num2}' });
-      answer = { value: "num1: '1' num2: '2'", resultDetails: 'num1: false\nnum2: false' };
+      answer = { value: "num1: '1'\nnum2: '2'", resultDetails: 'num1: false\nnum2: false' };
       solution = 'num1: \n - 2\n\nnum2:\n - 1';
       const result = [
         {
@@ -117,7 +117,7 @@ module('Unit | Component | solution-panel/qrocm-ind-solution-panel', function (h
     test('should return an array with data to display (case when there is some empty answer)', function (assert) {
       //Given
       challenge = EmberObject.create({ proposals: 'Clé USB : ${num1}\n\nCarte mémoire (SD) : ${num2}' });
-      answer = { value: "num1: '' num2: '2'", resultDetails: 'num1: false\nnum2: false' };
+      answer = { value: "num1: ''\nnum2: '2'", resultDetails: 'num1: false\nnum2: false' };
       solution = 'num1: \n - 2\n\nnum2:\n - 1';
 
       const result = [
@@ -166,7 +166,7 @@ module('Unit | Component | solution-panel/qrocm-ind-solution-panel', function (h
       // given
       challenge = EmberObject.create({ proposals: '- alain@pix.fr : ${num1}\n\n- leonie@pix.fr : ${num2}' });
       answer = {
-        value: "num1: '1' num2: '2'",
+        value: "num1: '1'\nnum2: '2'",
         resultDetails: 'num1: false\nnum2: false',
       };
       solution = 'num1: \n - 2\n\nnum2:\n - 3';
@@ -219,7 +219,7 @@ module('Unit | Component | solution-panel/qrocm-ind-solution-panel', function (h
         proposals:
           '- Combien le dossier "projet PIX" contient-il de dossiers ? ${Num1}\n\n- Combien le dossier "images" contient-il de fichiers ? ${Num2}',
       });
-      answer = { value: "Num1: '2' Num2: '3'", resultDetails: 'Num1: false\nNum2: false' };
+      answer = { value: "Num1: '2'\nNum2: '3'", resultDetails: 'Num1: false\nNum2: false' };
       solution = 'Num1:\n - 1\n\nNum2:\n - 6';
 
       const result = [

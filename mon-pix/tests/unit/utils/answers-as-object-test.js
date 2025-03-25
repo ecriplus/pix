@@ -6,7 +6,7 @@ module('Unit | Utility | answers as object', function () {
     test('should return an object of given answers with key of the input', function (assert) {
       // given
       const answer = {
-        value: "num1: '4' num2: '1' num3: '2' num4: '3'",
+        value: "num1: '4'\nnum2: '1'\nnum3: '2'\nnum4: '3'",
       };
       const expectedResult = {
         num1: '4',

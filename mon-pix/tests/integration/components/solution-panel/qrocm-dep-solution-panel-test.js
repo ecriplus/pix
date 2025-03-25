@@ -42,7 +42,7 @@ const buildComponentArguments = (
       : 'p1:\n- solution1\np2:\n- solution2',
     answer: EmberObject.create({
       id: 'answer_id',
-      value: challengeStatus === CHALLENGE_SKIPPED_FLAG ? SKIPPED_VALUE : "key1: 'rightAnswer1' key2: 'rightAnswer2'",
+      value: challengeStatus === CHALLENGE_SKIPPED_FLAG ? SKIPPED_VALUE : "key1: 'rightAnswer1'\nkey2: 'rightAnswer2'",
       result: challengeStatus,
       assessment: EmberObject.create({ id: 'assessment_id' }),
     }),

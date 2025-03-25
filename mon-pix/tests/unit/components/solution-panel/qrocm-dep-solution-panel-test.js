@@ -15,7 +15,7 @@ module('Unit | Component | solution-panel/qrocm-dep-solution-panel', function (h
         proposals: 'content : ${challengeInput1}\n\ntriste : ${challengeInput2}',
       });
       const answer = {
-        value: "challengeInput1: 'good answer value 1' challengeInput2: 'good answer value 2'",
+        value: "challengeInput1: 'good answer value 1'\nchallengeInput2: 'good answer value 2'",
         result: 'ko',
       };
       const answersEvaluation = [true, true];
@@ -112,7 +112,7 @@ module('Unit | Component | solution-panel/qrocm-dep-solution-panel', function (h
         proposals: 'content : ${challengeInput1}\n\ntriste : ${challengeInput2}',
       });
       const answer = {
-        value: "challengeInput1: 'good answer' challengeInput2: 'wrong answer'",
+        value: "challengeInput1: 'good answer'\nchallengeInput2: 'wrong answer'",
         result: 'ko',
       };
       const answersEvaluation = [true, false];
@@ -257,7 +257,7 @@ module('Unit | Component | solution-panel/qrocm-dep-solution-panel', function (h
         });
         const component = createGlimmerComponent('solution-panel/qrocm-dep-solution-panel', {
           challenge,
-          answer: { result: 'ko', value: "key1: 'rightAnswer1' key2: 'rightAnswer2'" },
+          answer: { result: 'ko', value: "key1: 'rightAnswer1'\nkey2: 'rightAnswer2'" },
           solutionsWithoutGoodAnswers: ['tag', 'marche', 'masque'],
           solution: 'p1:\n- solution1\np2:\n- solution2\np3:\n- solution3',
         });
@@ -278,7 +278,7 @@ module('Unit | Component | solution-panel/qrocm-dep-solution-panel', function (h
         });
         const component = createGlimmerComponent('solution-panel/qrocm-dep-solution-panel', {
           challenge,
-          answer: { result: 'ko', value: "key1: 'wrongAnswer1' key2: 'wrongAnswer2'" },
+          answer: { result: 'ko', value: "key1: 'wrongAnswer1'\nkey2: 'wrongAnswer2'" },
           solutionsWithoutGoodAnswers: ['tag', 'marche'],
           solution: 'p1:\n- solution1\np2:\n- solution2',
         });
