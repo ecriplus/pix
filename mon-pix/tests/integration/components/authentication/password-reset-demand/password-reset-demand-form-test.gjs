@@ -55,6 +55,21 @@ module('Integration | Component | Authentication | PasswordResetDemand | passwor
     assert.strictEqual(link.getAttribute('href'), 'https://pix.fr/support');
   });
 
+  module('when the email to reset is passed in query parameters', function () {
+    test('it displays the given email address in email input', async function (assert) {
+      // given
+      const currentRoute = { queryParams: { email: 'given-email@example.net' } };
+      const routerService = this.owner.lookup('service:router');
+      sinon.stub(routerService, 'currentRoute').value(currentRoute);
+
+      // when
+      const screen = await render(<template><PasswordResetDemandForm /></template>);
+
+      // then
+      assert.dom(screen.queryByRole('textbox', { name: 'Adresse e-mail' })).hasValue('given-email@example.net');
+    });
+  });
+
   module('email input validation', function () {
     module('when the email input is valid', function () {
       test('it doesn’t display any error message', async function (assert) {
