@@ -406,6 +406,15 @@ const findAnotherUserByUsername = async function (userId, username) {
 };
 
 /**
+ * @param {string} userId
+ * @return {Promise<User>}
+ */
+const findById = async function (userId) {
+  const user = await knex('users').where({ id: userId }).first();
+  return user ? new User(user) : null;
+};
+
+/**
  * @param {{
  *   userId: string
  * }} params
@@ -429,6 +438,7 @@ const updateLastDataProtectionPolicySeenAt = async function ({ userId }) {
  * @property {function} findAnotherUserByEmail
  * @property {function} findAnotherUserByUsername
  * @property {function} findByExternalIdentifier
+ * @property {function} findById
  * @property {function} findPaginatedFiltered
  * @property {function} get
  * @property {function} getByEmail
@@ -461,6 +471,7 @@ export {
   findAnotherUserByEmail,
   findAnotherUserByUsername,
   findByExternalIdentifier,
+  findById,
   findPaginatedFiltered,
   get,
   getByEmail,

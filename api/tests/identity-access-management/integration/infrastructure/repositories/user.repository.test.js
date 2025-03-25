@@ -184,6 +184,35 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       });
     });
 
+    describe('#findById', function () {
+      describe('when user exists', function () {
+        it('returns the user', async function () {
+          // given
+          const userInDB = databaseBuilder.factory.buildUser();
+          await databaseBuilder.commit();
+
+          // when
+          const foundUser = await userRepository.findById(userInDB.id);
+
+          // then
+          expect(foundUser).to.deepEqualInstance(new User(userInDB));
+        });
+      });
+
+      describe('when user does not exist', function () {
+        it('returns null', async function () {
+          // given
+          const userId = 123456;
+
+          // when
+          const foundUser = await userRepository.findById(userId);
+
+          // then
+          expect(foundUser).to.be.null;
+        });
+      });
+    });
+
     describe('#findPaginatedFiltered', function () {
       context('when there are users in the database', function () {
         it('returns an array of users', async function () {
