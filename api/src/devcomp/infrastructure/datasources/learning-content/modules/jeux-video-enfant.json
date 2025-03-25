@@ -30,7 +30,7 @@
     },
     {
       "grainId": "d09b483b-c182-44be-9c55-8c570e7b70d2",
-      "content": "<p>Franck sait maintenant vérifier l’âge recommandé pour un jeu.<br>En plus, il veut éviter que Marilou dépense de l’argent en achetant des bonus pendant qu’elle joue.<br>Découvrez ce que sont les achats intégrés dans les jeux vidéo. 💸</p>"
+      "content": "<p>Franck sait à présent vérifier l’âge recommandé pour un jeu.<br>Il veut maintenant éviter que Marilou dépense de l’argent en achetant des bonus pendant qu'elle joue.<br>Découvrez ce que sont les achats intégrés dans les jeux vidéo. 💸</p>"
     },
     {
       "grainId": "fe9fa67b-ddfc-4932-8f5d-eba163a206b9",
@@ -60,7 +60,7 @@
           "element": {
             "id": "442fa2ba-d532-423b-ba89-c4ff38ff270c",
             "type": "text",
-            "content": "<p>Avant d’acheter et de télécharger le jeu réclamé par Marilou, Franck se rend sur la fiche du jeu en ligne pour regarder les informations concernant le jeu. 👀</p>"
+            "content": "<p>Avant d’acheter et de télécharger le jeu réclamé par sa fille de 8 ans, Franck se rend sur la fiche du jeu en ligne pour regarder les informations concernant le jeu. 👀</p>"
           }
         },
         {
@@ -78,7 +78,7 @@
           "element": {
             "id": "3aeba304-6774-4d57-a19a-3309f2181368",
             "type": "qcu",
-            "instruction": "<p>A votre avis, ce jeu est-il adapté à l’âge de Marilou ?</p>",
+            "instruction": "<p>À votre avis, ce jeu est-il adapté à l’âge de Marilou ?</p>",
             "proposals": [
               {
                 "id": "1",
@@ -185,18 +185,18 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "<p>Le jeu doit être utilisé accompagné des parents.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! 🎉</span></p><p> Ce pictogramme «&nbsp;!&nbsp;» signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs. Il peut donc y avoir des contenus ne convenant pas aux enfants ! Il convient donc d’accompagner les enfants dans leur utilisation.</p>"
+                      "content": "<p>Le jeu doit être utilisé avec l’accompagnement des parents</p>",
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! 🎉</span></p><p> Ce pictogramme «&nbsp;!&nbsp;» signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs. Il peut donc y avoir des contenus non adaptés aux enfants ! Il convient donc d’accompagner les enfants dans leur utilisation.</p>"
                     },
                     {
                       "id": "2",
                       "content": "<p>Le jeu n’a aucune recommandation PEGI.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le pictogramme «&nbsp;!&nbsp;» fait partie de la signalétique PEGI, il signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le pictogramme «&nbsp;!&nbsp;» fait partie de la signalétique PEGI. Il signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs.</p>"
                     },
                     {
                       "id": "3",
                       "content": "<p>Le jeu est déconseillé aux enfants de moins de 7 ans.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le pictogramme «&nbsp;!&nbsp;» signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs.&nbsp;Attention, il peut y avoir des contenus pour tous les âges.<br></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le pictogramme «&nbsp;!&nbsp;» signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs.&nbsp;Attention, il peut y avoir des contenus pour tous les âges.</p>"
                     }
                   ],
                   "solution": "1"
@@ -243,7 +243,7 @@
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/ppn3_achats_integres_mentions.png",
                   "alt": "Image du pictogramme PEGI décrite dans l’alternative textuelle",
-                  "alternativeText": "<p>Images du Pictogramme PEGI Achats intégrés et des différentes mentions : «&nbsp;achats intra-jeu&nbsp;», «&nbsp;achats intra-jeu facultatifs&nbsp;», «&nbsp;inclut des achats intégrés&nbsp;», «&nbsp;achats intra-jeu (y compris divers articles&nbsp;», «&nbsp;achats numériques&nbsp;».</p>"
+                  "alternativeText": "<p>Images du Pictogramme PEGI Achats intégrés et des différentes mentions&nbsp;: «&nbsp;achats intra-jeu&nbsp;», «&nbsp;achats intra-jeu facultatifs&nbsp;», «&nbsp;inclut des achats intégrés&nbsp;», «&nbsp;achats intra-jeu (y compris divers articles&nbsp;», «&nbsp;achats numériques&nbsp;».</p>"
                 }
               ]
             },
@@ -252,7 +252,7 @@
                 {
                   "id": "a5bc3ebf-2417-445c-96ed-8b199ecbff52",
                   "type": "text",
-                  "content": "<p>Certains jeux proposent des achats intégrés particulièrement attirants : <strong>les loot boxes</strong>.</p>"
+                  "content": "<p>Certains jeux proposent des achats intégrés particulièrement attirants &nbsp;: <strong>les loot boxes</strong>.</p>"
                 },
                 {
                   "id": "453c0d40-58b4-4cb8-b972-30c8e382d5f3",
@@ -264,7 +264,7 @@
                 {
                   "id": "dd17d894-7c5e-467e-a3f8-ee6710bba415",
                   "type": "text",
-                  "content": "<p>📦 Une loot box (boîte à butins) est un <strong>objet virtuel </strong> (un coffre, une boîte, ...) qu’un joueur peut acheter dans le jeu.<br>Chaque loot box contient des objets, communs ou très rares, à utiliser dans le jeu.<br><strong>Ce contenu est aléatoire, comme pour une pochette-surprise ou des cartes à collectionner.</strong><br>Le joueur est souvent incité à acheter des loot boxes lors des parties, pour obtenir l’objet qu’il souhaite ou pour avancer plus efficacement dans le jeu.</p><p><br>🤔 <strong>Bon à savoir</strong>&nbsp;<br>Depuis mai 2020, un jeu qui propose des loot boxes doit obligatoirement indiquer «&nbsp;<strong>Inclut des contenus aléatoires</strong>&nbsp;» sur la boîte ou la fiche du jeu.</p>"
+                  "content": "<p>📦 Une loot box (boîte à butins) est un <strong>objet virtuel </strong> (un coffre, une boîte, ... etc) qu’un joueur peut acheter dans le jeu.<br>Chaque loot box contient des objets, communs ou très rares, à utiliser dans le jeu.<br><strong>Ce contenu est aléatoire, comme pour une pochette-surprise ou des cartes à collectionner.</strong><br>Le joueur est souvent incité à acheter des loot boxes lors des parties, pour obtenir l’objet qu’il souhaite ou pour avancer plus efficacement dans le jeu.</p><p><br>🤔 <strong>Bon à savoir</strong>&nbsp;<br>Depuis mai 2020, un jeu qui propose des loot boxes doit obligatoirement indiquer «&nbsp;<strong>Inclut des contenus aléatoires</strong>&nbsp;» sur la boîte ou la fiche du jeu.</p>"
                 }
               ]
             }
@@ -282,7 +282,7 @@
           "element": {
             "id": "05677303-3d47-40e0-ae61-f915014bcc07",
             "type": "text",
-            "content": "<p>Pour chacun des jeux suivants, observez la fiche ou la boîte du jeu, puis trouvez s’il y a ou non des achats intégrés et des loot boxes.</p>"
+            "content": "<p>Pour chacun des jeux suivants&nbsp;:</p><ul><li>observez la fiche ou la boîte du jeu,</li><li>trouvez si il y a ou non des achats intégrés et des loot boxes.</li></ul>"
           }
         },
         {
@@ -295,7 +295,7 @@
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/ppn3_lornitteclan.png",
                   "alt": "capture d’écran de la page d’installation du jeu vidéo Lorttnite Clan détaillée dans l’alternative textuelle",
-                  "alternativeText": "<p>Jeu Lorttnite Clan :&nbsp;</p><ul><li>4,1 étoiles</li><li>Communauté compétitive</li><li>Commandes rapides à maîtriser</li><li> Lien «&nbsp;vue d’ensemble&nbsp;»</li><li>Contenus additionnels</li><li>FAQ</li><li>Pegi 12</li><li>Violence, achats dans le jeu (inclut des éléments aléatoires)</li><li>Jeu de base</li><li>Gratuit</li><li>Boutons :«&nbsp;obtenir&nbsp;», «&nbsp;ajouter au panier&nbsp;», «&nbsp;ajouter à la liste de souhaits&nbsp;»</li></ul>"
+                  "alternativeText": "<p>Jeu Lorttnite Clan&nbsp;:</p><ul><li>4,1 étoiles</li><li>Communauté compétitive</li><li>Commandes rapides à maîtriser</li><li> Lien «&nbsp;vue d’ensemble&nbsp;»</li><li>Contenus additionnels</li><li>FAQ</li><li>Pegi 12</li><li>Violence, achats dans le jeu (inclut des éléments aléatoires)</li><li>Jeu de base</li><li>Gratuit</li><li>Boutons&nbsp;: «&nbsp;obtenir&nbsp;», «&nbsp;ajouter au panier&nbsp;», «&nbsp;ajouter à la liste de souhaits&nbsp;»</li></ul>"
                 },
                 {
                   "id": "6781d13a-91fb-45b5-ba52-311e290b47a1",
@@ -305,7 +305,7 @@
                     {
                       "id": "1",
                       "content": "<p>Il n’y a pas d’achats intégrés dans ce jeu.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de mots tels que achats intra-jeu&nbsp;» ou achats intégrés&nbsp;» sur cette fiche ?</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de mots tels que «&nbsp;achats intra-jeu&nbsp;» ou «&nbsp;achats intégrés&nbsp;» sur cette fiche ?</p>"
                     },
                     {
                       "id": "2",
