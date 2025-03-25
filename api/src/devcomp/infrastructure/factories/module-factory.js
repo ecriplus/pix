@@ -47,7 +47,7 @@ export class ModuleFactory {
               .map((component) => {
                 switch (component.type) {
                   case 'element': {
-                    const element = ModuleFactory.#buildElement(component.element);
+                    const element = ModuleFactory.#buildElement(component.element, moduleData.isBeta);
                     if (element) {
                       return new ComponentElement({ element });
                     } else {
@@ -60,7 +60,7 @@ export class ModuleFactory {
                         return new Step({
                           elements: step.elements
                             .map((element) => {
-                              const domainElement = ModuleFactory.#buildElement(element);
+                              const domainElement = ModuleFactory.#buildElement(element, moduleData.isBeta);
                               if (domainElement) {
                                 return domainElement;
                               } else {
@@ -88,7 +88,7 @@ export class ModuleFactory {
     }
   }
 
-  static #buildElement(element) {
+  static #buildElement(element, isBeta) {
     switch (element.type) {
       case 'custom':
         return ModuleFactory.#buildCustom(element);
@@ -99,7 +99,7 @@ export class ModuleFactory {
       case 'expand':
         return ModuleFactory.#buildExpand(element);
       case 'image':
-        return ModuleFactory.#buildImage(element);
+        return ModuleFactory.#buildImage(element, isBeta);
       case 'separator':
         return ModuleFactory.#buildSeparator(element);
       case 'text':
@@ -157,7 +157,7 @@ export class ModuleFactory {
     });
   }
 
-  static #buildImage(element) {
+  static #buildImage(element, isBeta) {
     return new Image({
       id: element.id,
       url: element.url,
@@ -165,6 +165,7 @@ export class ModuleFactory {
       alternativeText: element.alternativeText,
       legend: element.legend,
       licence: element.licence,
+      isBeta,
     });
   }
 
