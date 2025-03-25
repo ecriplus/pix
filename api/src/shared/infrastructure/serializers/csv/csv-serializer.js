@@ -453,6 +453,7 @@ export {
   deserializeForOrganizationsImport,
   deserializeForSessionsImport,
   parseForCampaignsImport,
+  requiredFieldNamesForCampaignsImport,
   serializeLine,
   verifyColumnsValueAgainstConstraints,
 };

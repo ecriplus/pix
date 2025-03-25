@@ -99,6 +99,25 @@ const register = async function (server) {
       },
     },
     {
+      method: 'GET',
+      path: '/api/admin/campaigns/template',
+      config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+            assign: 'hasRoleSuperAdmin',
+          },
+        ],
+        handler: campaignAdministrationController.getTemplateForCreateCampaigns,
+        notes: [
+          '- **Cette route est restreinte aux utilisateurs authentifiés ayant pour rôle SUPER_ADMIN**\n' +
+            '- Elle permet de télécharger le template pour créer des campagnes à partir d‘un fichier au format CSV\n' +
+            '- Elle ne retourne aucune valeur',
+        ],
+        tags: ['api', 'admin', 'campaigns'],
+      },
+    },
+    {
       method: 'POST',
       path: '/api/admin/campaigns',
       config: {

@@ -6,6 +6,7 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
+  insertUserWithRoleSuperAdmin,
   knex,
   learningContentBuilder,
   mockLearningContent,
@@ -215,6 +216,25 @@ describe('Acceptance | API | campaign-administration-route', function () {
 
       // then
       expect(response.statusCode).to.equal(403);
+    });
+  });
+
+  describe('GET /api/admin/campaigns/template', function () {
+    it('responds with a 200', async function () {
+      // given
+      const admin = await insertUserWithRoleSuperAdmin();
+      await databaseBuilder.commit();
+      const options = {
+        method: 'GET',
+        headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
+        url: '/api/admin/campaigns/template',
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
     });
   });
 
