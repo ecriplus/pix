@@ -1,38 +1,38 @@
-Login => ok
+- [x] Login
 
-Onboarding
+**Onboarding**
 
-- Invitation et Signup (rejoindre une organisation)
-- Invitation et Signin (authentifié ou non)
-- Logout
+- [x] Invitation et Signup (rejoindre une organisation)
+- [x] Invitation et Signin (authentifié ou non)
+- [ ] Logout
 
-student-sco
+**student-sco**
 
-- Accès d'un admin vs accès d'une membre
-- Je veux changer le mot de passe d'un élève
-- Je veux créer un identifiant pour un élève ayant la méthode de connexion Mediacentre
+- [ ] Accès d'un admin vs accès d'une membre
+- [ ] Je veux changer le mot de passe d'un élève
+- [ ] Je veux créer un identifiant pour un élève ayant la méthode de connexion Mediacentre
 
-student-sup
+**student-sup**
 
-- Accès d'un admin vs accès d'une membre
-- J'affiche la liste des élèves
+- [ ] Accès d'un admin vs accès d'une membre
+- [ ] J'affiche la liste des élèves
 
-campagne-evaluation
+**campaign-evaluation**
 
-- Création d'une campagne d'évaluation
-- Je consulte le détail d'une campagne d'évaluation
+- [ ] Création d'une campagne d'évaluation
+- [ ] Je consulte le détail d'une campagne d'évaluation
 
-campagne-profile
+**campaign-profile**
 
-- Création d'une campagne de profil
-- Je consulte le détail d'une campagne de profil
+- [ ] Création d'une campagne de profil
+- [ ] Je consulte le détail d'une campagne de profil
 
-campagne-management
+**campaign-management**
 
-- Duplication
-- Archivage / désarchivage
-- Modification
+- [ ] Duplication
+- [ ] Archivage / désarchivage
+- [ ] Modification
 
-member-management
+**member-management**
 
-- J'envoie une invitation à rejoindre Pix Orga
+- [ ] J'envoie une invitation à rejoindre Pix Orga

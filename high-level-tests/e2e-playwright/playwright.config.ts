@@ -75,7 +75,7 @@ export default defineConfig({
             START_JOB_IN_WEB_PROCESS: 'false',
             PIX_AUDIT_LOGGER_ENABLED: 'false',
             MAILING_ENABLED: 'false',
-            FT_PIXAPP_NEW_LAYOUT_ENABLED: 'true',
+            FT_PIXAPP_NEW_LAYOUT_ENABLED: 'false',
           },
         },
         {
