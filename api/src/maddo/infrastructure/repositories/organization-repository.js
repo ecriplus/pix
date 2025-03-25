@@ -1,4 +1,5 @@
 import { knex } from '../../../../db/knex-database-connection.js';
+import { Organization } from '../../domain/models/Organization.js';
 
 export async function findIdsByTagNames(tagNames) {
   return knex
@@ -9,4 +10,17 @@ export async function findIdsByTagNames(tagNames) {
     .groupBy('organization-tags.organizationId')
     .havingRaw('count(*) = ?', [tagNames.length])
     .orderBy('organization-tags.organizationId');
+}
+
+export async function findByIds(organizationIds) {
+  const rawOrganizations = await knex
+    .select('id', 'name')
+    .from('organizations')
+    .whereIn('id', organizationIds)
+    .orderBy('id');
+  return rawOrganizations.map(toDomain);
+}
+
+function toDomain(rawOrganization) {
+  return new Organization(rawOrganization);
 }
