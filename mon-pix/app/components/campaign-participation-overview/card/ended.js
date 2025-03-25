@@ -1,6 +1,7 @@
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+
 export default class Ended extends Component {
   @service router;
   @service metrics;
