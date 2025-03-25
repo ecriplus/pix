@@ -197,6 +197,9 @@
       },
       "candidates": "Candidats",
       "invigilator": "Surveillant"
+    },
+    "urls": {
+      "fraud": "https://cloud.pix.fr/s/LiXkoBq9GD5aLbN/download"
     }
   },
   "navigation": {
@@ -696,6 +699,10 @@
           "attendance-sheet": {
             "extra-information": "Télécharger la feuille d'émargement",
             "label": "Feuille d'émargement"
+          },
+          "fraud": {
+            "extra-information": "Télécharger le PV de fraude",
+            "label": "PV de fraude"
           },
           "incident-report": {
             "extra-information": "Télécharger le PV d'incident",

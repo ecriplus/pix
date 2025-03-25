@@ -197,6 +197,9 @@
       },
       "candidates": "Candidates",
       "invigilator": "Invigilator"
+    },
+    "urls": {
+      "fraud": "https://cloud.pix.fr/s/9A598pR5ksp6jss/download"
     }
   },
   "navigation": {
@@ -696,6 +699,10 @@
           "attendance-sheet": {
             "extra-information": "Download attendance sheet",
             "label": "Attendance sheet"
+          },
+          "fraud": {
+            "extra-information": "Download fraud report",
+            "label": "Fraud report"
           },
           "incident-report": {
             "extra-information": "Download incident report",
