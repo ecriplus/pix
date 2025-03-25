@@ -6,11 +6,13 @@ import { t } from 'ember-intl';
 import ENV from 'pix-admin/config/environment';
 
 import AdministrationBlockLayout from '../block-layout';
+import DownloadTemplate from '../download-template';
 
 export default class UpsertQuestsInBatch extends Component {
   @service intl;
   @service pixToast;
   @service session;
+  @service fileSaver;
   @service errorResponseHandler;
 
   @action
@@ -49,14 +51,16 @@ export default class UpsertQuestsInBatch extends Component {
       @title={{t "components.administration.upsert-quests-in-batch.title"}}
       @description={{t "components.administration.upsert-quests-in-batch.description"}}
     >
-      <PixButtonUpload
-        @id="quests-batch-update-file-upload"
-        @onChange={{this.upsertQuestsInBatch}}
-        @variant="secondary"
-        accept=".csv"
-      >
-        {{t "components.administration.upsert-quests-in-batch.upload-button"}}
-      </PixButtonUpload>
+      <DownloadTemplate @url="/api/admin/quests/template">
+        <PixButtonUpload
+          @id="quests-batch-update-file-upload"
+          @onChange={{this.upsertQuestsInBatch}}
+          @variant="secondary"
+          accept=".csv"
+        >
+          {{t "components.administration.upsert-quests-in-batch.upload-button"}}
+        </PixButtonUpload>
+      </DownloadTemplate>
     </AdministrationBlockLayout>
   </template>
 }
