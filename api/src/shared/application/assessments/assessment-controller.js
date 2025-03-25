@@ -223,7 +223,7 @@ async function _getChallengeByAssessmentType({ assessment, request, dependencies
   }
 
   if (assessment.isPreview()) {
-    return dependencies.usecases.getNextChallengeForPreview({});
+    return dependencies.evaluationUsecases.getNextChallengeForPreview({});
   }
 
   if (assessment.isDemo()) {
