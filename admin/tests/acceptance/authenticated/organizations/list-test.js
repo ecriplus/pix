@@ -112,7 +112,7 @@ module('Acceptance | Organizations | List', function (hooks) {
         const screen = await visit('/organizations/list');
 
         // when
-        await click(screen.getByRole('checkbox'));
+        await click(screen.getByRole('button', { name: 'Masquer les organisations archivées' }));
 
         // then
         assert.strictEqual(currentURL(), '/organizations/list?hideArchived=true');
