@@ -143,12 +143,12 @@ export class DatabaseBuilder {
     if (!this.#isFirstCommit) return;
     await this.#loadTables();
     if (this.#emptyFirst) {
-      await this.#emptyDatabase();
+      await this.emptyDatabase();
     }
     this.#isFirstCommit = false;
   }
 
-  async #emptyDatabase() {
+  async emptyDatabase() {
     this.#beforeEmptyDatabase?.();
 
     const sortedTableNames = this.#tablesOrderedByDependency.map(sanitizeTableName).join(',');
