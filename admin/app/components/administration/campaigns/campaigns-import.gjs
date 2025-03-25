@@ -5,6 +5,7 @@ import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
 import AdministrationBlockLayout from '../block-layout';
+import DownloadTemplate from '../download-template';
 
 export default class CampaignsImport extends Component {
   @service intl;
@@ -44,14 +45,16 @@ export default class CampaignsImport extends Component {
       @title={{t "components.administration.campaigns-import.title"}}
       @description={{t "components.administration.campaigns-import.description"}}
     >
-      <PixButtonUpload
-        @id="campaigns-file-upload"
-        @onChange={{this.importCampaigns}}
-        @variant="secondary"
-        accept=".csv"
-      >
-        {{t "components.administration.campaigns-import.upload-button"}}
-      </PixButtonUpload>
+      <DownloadTemplate @url="/api/admin/campaigns/template">
+        <PixButtonUpload
+          @id="campaigns-file-upload"
+          @onChange={{this.importCampaigns}}
+          @variant="secondary"
+          accept=".csv"
+        >
+          {{t "components.administration.campaigns-import.upload-button"}}
+        </PixButtonUpload>
+      </DownloadTemplate>
     </AdministrationBlockLayout>
   </template>
 }
