@@ -609,7 +609,7 @@
           "element": {
             "id": "bed8da7e-630d-4400-b1c2-9e250ccee7e4",
             "type": "text",
-            "content": "<p><span aria-hidden=\"true\">💡</span> Si besoin, cliquez sur <strong>Réinitialiser </strong>pour recommencer depuis le début.</p>"
+            "content": "<p><span aria-hidden=\"true\">💡</span> Si besoin, cliquez sur <strong>Recommencer </strong>pour recommencer depuis le début.</p>"
           }
         }
       ]
