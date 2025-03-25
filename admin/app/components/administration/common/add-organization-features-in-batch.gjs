@@ -1,6 +1,4 @@
-import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonUpload from '@1024pix/pix-ui/components/pix-button-upload';
-import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -8,6 +6,7 @@ import { t } from 'ember-intl';
 import ENV from 'pix-admin/config/environment';
 
 import AdministrationBlockLayout from '../block-layout';
+import DownloadTemplate from '../download-template';
 
 export default class AddOrganizationFeaturesInBatch extends Component {
   @service intl;
@@ -47,35 +46,22 @@ export default class AddOrganizationFeaturesInBatch extends Component {
     }
   }
 
-  @action
-  async downloadTemplate() {
-    try {
-      const url = ENV.APP.API_HOST + '/api/admin/organizations/add-organization-features/template';
-      const token = this.session.data.authenticated.access_token;
-      await this.fileSaver.save({ url, token });
-    } catch (error) {
-      this.pixToast.sendErrorNotification({ message: error.message });
-    }
-  }
-
   <template>
     <AdministrationBlockLayout
       @title={{t "components.administration.add-organization-features-in-batch.title"}}
       @description={{t "components.administration.add-organization-features-in-batch.description"}}
     >
       <div class="csv-import">
-        <PixButtonUpload
-          @id="organizations-batch-update-file-upload"
-          @onChange={{this.addOrganizationFeaturesInBatch}}
-          @variant="secondary"
-          accept=".csv"
-        >
-          {{t "components.administration.add-organization-features-in-batch.upload-button"}}
-        </PixButtonUpload>
-        <PixButton @triggerAction={{this.downloadTemplate}} @variant="tertiary">
-          <PixIcon @name="download" @plainIcon={{true}} @ariaHidden={{true}} />
-          {{t "common.actions.download-template"}}
-        </PixButton>
+        <DownloadTemplate @url="/api/admin/organizations/add-organization-features/template">
+          <PixButtonUpload
+            @id="organizations-batch-update-file-upload"
+            @onChange={{this.addOrganizationFeaturesInBatch}}
+            @variant="secondary"
+            accept=".csv"
+          >
+            {{t "components.administration.add-organization-features-in-batch.upload-button"}}
+          </PixButtonUpload>
+        </DownloadTemplate>
       </div>
     </AdministrationBlockLayout>
   </template>
