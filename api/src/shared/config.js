@@ -527,6 +527,7 @@ const configuration = (function () {
     config.featureToggles.isOppsyDisabled = false;
     config.featureToggles.isPixAppNewLayoutEnabled = true;
     config.featureToggles.isPixCompanionEnabled = false;
+    config.featureToggles.isPixAdminNewSidebarEnabled = false;
     config.featureToggles.isSelfAccountDeletionEnabled = false;
     config.featureToggles.isQuestEnabled = false;
     config.featureToggles.isAsyncQuestRewardingCalculationEnabled = false;
