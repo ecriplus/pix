@@ -19,7 +19,7 @@ describe('Unit | UseCase | share-campaign-result', function () {
       performAsync: sinon.stub(),
     };
     campaignParticipationRepository = {
-      get: sinon.stub(),
+      getLocked: sinon.stub(),
       updateWithSnapshot: sinon.stub(),
     };
     userId = 123;
@@ -29,7 +29,7 @@ describe('Unit | UseCase | share-campaign-result', function () {
   context('when user is not the owner of the campaign participation', function () {
     it('throws a UserNotAuthorizedToAccessEntityError error ', async function () {
       // given
-      campaignParticipationRepository.get.resolves({ userId: userId + 1 });
+      campaignParticipationRepository.getLocked.resolves({ userId: userId + 1 });
 
       // when
       const error = await catchErr(usecases.shareCampaignResult)({
@@ -53,7 +53,7 @@ describe('Unit | UseCase | share-campaign-result', function () {
         userId,
       });
       sinon.stub(campaignParticipation, 'share');
-      campaignParticipationRepository.get.withArgs(campaignParticipationId).resolves(campaignParticipation);
+      campaignParticipationRepository.getLocked.withArgs(campaignParticipationId).resolves(campaignParticipation);
 
       // when
       await usecases.shareCampaignResult({
@@ -77,7 +77,7 @@ describe('Unit | UseCase | share-campaign-result', function () {
       });
       sinon.stub(campaignParticipation, 'share');
 
-      campaignParticipationRepository.get.resolves(campaignParticipation);
+      campaignParticipationRepository.getLocked.resolves(campaignParticipation);
 
       // when
       await usecases.shareCampaignResult({
