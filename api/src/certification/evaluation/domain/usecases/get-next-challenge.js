@@ -5,7 +5,7 @@
  * @typedef {import('../../../session-management/domain/usecases/index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('../../../session-management/domain/usecases/index.js').ChallengeRepository} ChallengeRepository
  * @typedef {import('../../../session-management/domain/usecases/index.js').FlashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
- * @typedef {import('../../../session-management/domain/usecases/index.js').PickChallengeService} PickChallengeService
+ * @typedef {import('../../../evaluation/domain/usecases/index.js').PickChallengeService} PickChallengeService
  * @typedef {import('../../../session-management/domain/usecases/index.js').FlashAlgorithmService} FlashAlgorithmService
  * @typedef {import('../../../session-management/domain/usecases/index.js').CertificationCandidateRepository} CertificationCandidateRepository
  */
@@ -106,7 +106,7 @@ const getNextChallenge = async function ({
     throw new AssessmentEndedError();
   }
 
-  const challenge = pickChallengeService.chooseNextChallenge()({ possibleChallenges });
+  const challenge = pickChallengeService.getChallengePicker()({ possibleChallenges });
 
   const certificationChallenge = new CertificationChallenge({
     associatedSkillName: challenge.skill.name,

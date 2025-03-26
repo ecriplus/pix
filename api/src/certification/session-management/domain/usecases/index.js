@@ -2,7 +2,6 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { pickChallengeService } from '../../../../../src/evaluation/domain/services/pick-challenge-service.js';
 import * as flashAlgorithmService from '../../../../certification/flash-certification/domain/services/algorithm-methods/flash.js';
 import * as userRepository from '../../../../identity-access-management/infrastructure/repositories/user.repository.js';
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
@@ -107,7 +106,6 @@ import * as sessionPublicationService from '../services/session-publication-serv
  * @typedef {placementProfileService} PlacementProfileService
  * @typedef {certificationCpfService} CertificationCpfService
  * @typedef {mailService} MailService
- * @typedef {pickChallengeService} PickChallengeService
  * @typedef {flashAlgorithmService} FlashAlgorithmService
  * @typedef {sessionPublicationService} SessionPublicationService
  * @typedef {flashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
@@ -137,7 +135,6 @@ const dependencies = {
   certificationIssueReportRepository,
   flashAlgorithmConfigurationRepository,
   flashAlgorithmService,
-  pickChallengeService,
   sessionPublicationService,
   sharedSessionRepository,
   userRepository,

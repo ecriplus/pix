@@ -1,7 +1,5 @@
 import hashInt from 'hash-int';
 
-import { config } from '../../../../src/shared/config.js';
-import { random } from '../../../shared/infrastructure/utils/random.js';
 const NON_EXISTING_ITEM = null;
 const VALIDATED_STATUS = 'validé';
 
@@ -16,15 +14,7 @@ const pickChallenge = ({ skills, randomSeed, locale }) => {
   return pickLocaleChallengeAtIndex(chosenSkill.challenges, locale, keyForChallenge);
 };
 
-const chooseNextChallenge =
-  (probabilityToPickChallenge = config.v3Certification.defaultProbabilityToPickChallenge) =>
-  ({ possibleChallenges }) => {
-    const challengeIndex = random.binaryTreeRandom(probabilityToPickChallenge, possibleChallenges.length);
-
-    return possibleChallenges[challengeIndex];
-  };
-
-export const pickChallengeService = { pickChallenge, chooseNextChallenge };
+export const pickChallengeService = { pickChallenge };
 
 const pickLocaleChallengeAtIndex = (challenges, locale, index) => {
   const localeChallenges = challenges.filter((challenge) => challenge.locales.includes(locale));

@@ -44,7 +44,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         getNextChallengeByCourseIdForV3: sinon.stub(),
       };
       pickChallengeService = {
-        chooseNextChallenge: sinon.stub(),
+        getChallengePicker: sinon.stub(),
       };
       flashAlgorithmService = {
         getPossibleNextChallenges: sinon.stub(),
@@ -113,13 +113,13 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           })
           .returns([nextChallengeToAnswer]);
 
-        const chooseNextChallengeImpl = sinon.stub();
-        chooseNextChallengeImpl
+        const getChallengePickerImpl = sinon.stub();
+        getChallengePickerImpl
           .withArgs({
             possibleChallenges: [nextChallengeToAnswer],
           })
           .returns(nextChallengeToAnswer);
-        pickChallengeService.chooseNextChallenge.withArgs().returns(chooseNextChallengeImpl);
+        pickChallengeService.getChallengePicker.withArgs().returns(getChallengePickerImpl);
 
         // when
         const challenge = await getNextChallenge({
@@ -202,13 +202,13 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             })
             .returns([nextChallengeToAnswer]);
 
-          const chooseNextChallengeImpl = sinon.stub();
-          chooseNextChallengeImpl
+          const getChallengePickerImpl = sinon.stub();
+          getChallengePickerImpl
             .withArgs({
               possibleChallenges: [nextChallengeToAnswer],
             })
             .returns(nextChallengeToAnswer);
-          pickChallengeService.chooseNextChallenge.withArgs().returns(chooseNextChallengeImpl);
+          pickChallengeService.getChallengePicker.withArgs().returns(getChallengePickerImpl);
 
           const candidateNeedingAccessibilityAdjustment = domainBuilder.buildCertificationCandidateForSupervising({
             id: 'candidateNeedingAccessibilityAdjustmentId',
@@ -359,13 +359,13 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           })
           .returns([nextChallengeToAnswer]);
 
-        const chooseNextChallengeImpl = sinon.stub();
-        chooseNextChallengeImpl
+        const getChallengePickerImpl = sinon.stub();
+        getChallengePickerImpl
           .withArgs({
             possibleChallenges: [nextChallengeToAnswer],
           })
           .returns(nextChallengeToAnswer);
-        pickChallengeService.chooseNextChallenge.withArgs().returns(chooseNextChallengeImpl);
+        pickChallengeService.getChallengePicker.withArgs().returns(getChallengePickerImpl);
 
         // when
         const challenge = await getNextChallenge({
@@ -451,13 +451,13 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs(assessment.certificationCourseId, [])
           .resolves(nonAnsweredCertificationChallenge);
 
-        const chooseNextChallengeImpl = sinon.stub();
-        chooseNextChallengeImpl
+        const getChallengePickerImpl = sinon.stub();
+        getChallengePickerImpl
           .withArgs({
             possibleChallenges: [nextChallenge],
           })
           .returns(nextChallenge);
-        pickChallengeService.chooseNextChallenge.withArgs().returns(chooseNextChallengeImpl);
+        pickChallengeService.getChallengePicker.withArgs().returns(getChallengePickerImpl);
 
         // when
         const challenge = await getNextChallenge({
@@ -551,13 +551,13 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs(assessment.certificationCourseId, [])
           .resolves(nonAnsweredCertificationChallenge);
 
-        const chooseNextChallengeImpl = sinon.stub();
-        chooseNextChallengeImpl
+        const getChallengePickerImpl = sinon.stub();
+        getChallengePickerImpl
           .withArgs({
             possibleChallenges: [challengeWithOtherSkill],
           })
           .returns(challengeWithOtherSkill);
-        pickChallengeService.chooseNextChallenge.withArgs().returns(chooseNextChallengeImpl);
+        pickChallengeService.getChallengePicker.withArgs().returns(getChallengePickerImpl);
 
         // when
         const challenge = await getNextChallenge({
@@ -707,13 +707,13 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               })
               .returns([nextChallengeToAnswer]);
 
-            const chooseNextChallengeImpl = sinon.stub();
-            chooseNextChallengeImpl
+            const getChallengePickerImpl = sinon.stub();
+            getChallengePickerImpl
               .withArgs({
                 possibleChallenges: [nextChallengeToAnswer],
               })
               .returns(nextChallengeToAnswer);
-            pickChallengeService.chooseNextChallenge.withArgs().returns(chooseNextChallengeImpl);
+            pickChallengeService.getChallengePicker.withArgs().returns(getChallengePickerImpl);
 
             // when
             const challenge = await getNextChallenge({

@@ -1,7 +1,7 @@
+import pickChallengeService from '../../../../../src/certification/evaluation/domain/services/pick-challenge-service.js';
 import * as moduleUnderTest from '../../../../../src/certification/flash-certification/application/scenario-simulator-route.js';
 import { usecases } from '../../../../../src/certification/flash-certification/domain/usecases/index.js';
 import { pickAnswerStatusService } from '../../../../../src/certification/shared/domain/services/pick-answer-status-service.js';
-import { pickChallengeService } from '../../../../../src/evaluation/domain/services/pick-challenge-service.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { domainBuilder, expect, HttpTestServer, parseJsonStream, sinon } from '../../../../test-helper.js';
 
@@ -19,7 +19,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
     sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin');
     sinon.stub(pickAnswerStatusService, 'pickAnswerStatusFromArray');
     sinon.stub(pickAnswerStatusService, 'pickAnswerStatusForCapacity');
-    sinon.stub(pickChallengeService, 'chooseNextChallenge');
+    sinon.stub(pickChallengeService, 'getChallengePicker');
 
     httpTestServer = new HttpTestServer();
     await httpTestServer.register(moduleUnderTest);
@@ -50,7 +50,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
           const challengePickProbability = 40;
 
           const pickChallengeImplementation = sinon.stub();
-          pickChallengeService.chooseNextChallenge
+          pickChallengeService.getChallengePicker
             .withArgs(challengePickProbability)
             .returns(pickChallengeImplementation);
           const pickAnswerStatusForCapacityImplementation = sinon.stub();
@@ -112,7 +112,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
             const capacity = -3.1;
 
             const pickChallengeImplementation = sinon.stub();
-            pickChallengeService.chooseNextChallenge.returns(pickChallengeImplementation);
+            pickChallengeService.getChallengePicker.returns(pickChallengeImplementation);
             const pickAnswerStatusFromCapacityImplementation = sinon.stub();
             pickAnswerStatusService.pickAnswerStatusForCapacity
               .withArgs(capacity)
@@ -168,7 +168,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
             const capacity = -3.1;
 
             const pickChallengeImplementation = sinon.stub();
-            pickChallengeService.chooseNextChallenge.returns(pickChallengeImplementation);
+            pickChallengeService.getChallengePicker.returns(pickChallengeImplementation);
             const pickAnswerStatusFromCapacityImplementation = sinon.stub();
             pickAnswerStatusService.pickAnswerStatusForCapacity
               .withArgs(capacity)
@@ -225,7 +225,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
             const capacity = -3.1;
 
             const pickChallengeImplementation = sinon.stub();
-            pickChallengeService.chooseNextChallenge.returns(pickChallengeImplementation);
+            pickChallengeService.getChallengePicker.returns(pickChallengeImplementation);
             const pickAnswerStatusFromCapacityImplementation = sinon.stub();
             pickAnswerStatusService.pickAnswerStatusForCapacity
               .withArgs(capacity)
