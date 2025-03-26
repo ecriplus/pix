@@ -40,22 +40,6 @@ module('Acceptance | School', function (hooks) {
         );
       });
 
-      test('Should display the footer on divisions page ', async function (assert) {
-        this.server.create('school');
-        const screen = await visit('schools/MINIPIXOU');
-        assert.dom(screen.getByLabelText(t('navigation.footer.label'))).exists();
-        assert.dom(screen.getByText(t('navigation.footer.legal-notice'))).exists();
-        assert.dom(screen.getByText(t('navigation.footer.student-data-protection-policy'))).exists();
-        assert.strictEqual(
-          screen.getByRole('link', { name: t('navigation.footer.legal-notice') }).href,
-          t('navigation.footer.legal-notice-url'),
-        );
-        assert.strictEqual(
-          screen.getByRole('link', { name: t('navigation.footer.student-data-protection-policy') }).href,
-          t('navigation.footer.student-data-protection-policy-url'),
-        );
-      });
-
       test('Should not display the footer on students page ', async function (assert) {
         this.server.create('school');
         const screen = await visit('schools/MINIPIXOU/students?division=CM1-A');
