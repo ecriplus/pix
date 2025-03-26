@@ -2,35 +2,28 @@
 <div class="page">
   <header>
     <h1>{{t "pages.sessions.title"}}</h1>
-    <div class="page-actions">
-    </div>
   </header>
 
-  <nav class="navbar">
-    <LinkTo @route="authenticated.sessions.list.with-required-action" @query={{hash version=2}} class="navbar-item">
-      {{t "pages.sessions.list.required-actions.v2"}}
-      ({{this.sessionsWithRequiredActionCount}})
-    </LinkTo>
-    <LinkTo @route="authenticated.sessions.list.to-be-published" @query={{hash version=2}} class="navbar-item">
-      {{t "pages.sessions.list.to-be-published.v2"}}
-    </LinkTo>
-    <LinkTo @route="authenticated.sessions.list.all" class="navbar-item">
-      {{t "pages.sessions.list.all"}}
-    </LinkTo>
-    <LinkTo
-      @route="authenticated.sessions.list.with-required-action"
-      @query={{hash version=3}}
-      class="navbar-item navbar-item--right"
-    >
-      {{t "pages.sessions.list.required-actions.v3"}}
-      ({{this.sessionsWithRequiredActionCountVersion3}})
-    </LinkTo>
-    <LinkTo @route="authenticated.sessions.list.to-be-published" @query={{hash version=3}} class="navbar-item">
-      {{t "pages.sessions.list.to-be-published.v3"}}
-    </LinkTo>
-  </nav>
-
   <main class="page-body">
+    <PixTabs @variant="primary" @ariaLabel="Navigation de la section sessions" class="navigation">
+      <LinkTo @route="authenticated.sessions.list.with-required-action" @query={{hash version=3}}>
+        {{t "pages.sessions.list.required-actions.v3"}}
+        ({{this.sessionsWithRequiredActionCountVersion3}})
+      </LinkTo>
+      <LinkTo @route="authenticated.sessions.list.to-be-published" @query={{hash version=3}}>
+        {{t "pages.sessions.list.to-be-published.v3"}}
+      </LinkTo>
+      <LinkTo @route="authenticated.sessions.list.all">
+        {{t "pages.sessions.list.all"}}
+      </LinkTo>
+      <LinkTo @route="authenticated.sessions.list.with-required-action" @query={{hash version=2}}>
+        {{t "pages.sessions.list.required-actions.v2"}}
+        ({{this.sessionsWithRequiredActionCount}})
+      </LinkTo>
+      <LinkTo @route="authenticated.sessions.list.to-be-published" @query={{hash version=2}}>
+        {{t "pages.sessions.list.to-be-published.v2"}}
+      </LinkTo>
+    </PixTabs>
     <section class="page-section">
       {{outlet}}
     </section>

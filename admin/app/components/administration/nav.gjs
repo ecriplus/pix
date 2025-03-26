@@ -1,32 +1,31 @@
+import PixTabs from '@1024pix/pix-ui/components/pix-tabs';
 import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';
 
 <template>
-  <nav aria-label={{t "pages.administration.navigation.aria-label"}} class="navbar">
-
-    <LinkTo @route="authenticated.administration.common" class="navbar-item">
+  <PixTabs @variant="primary" @ariaLabel={{t "pages.administration.navigation.aria-label"}} class="navigation">
+    <LinkTo @route="authenticated.administration.common">
       {{t "pages.administration.navigation.common.label"}}
     </LinkTo>
 
-    <LinkTo @route="authenticated.administration.campaigns" class="navbar-item">
+    <LinkTo @route="authenticated.administration.campaigns">
       {{t "pages.administration.navigation.campaigns.label"}}
     </LinkTo>
 
-    <LinkTo @route="authenticated.administration.organizations" class="navbar-item">
+    <LinkTo @route="authenticated.administration.organizations">
       {{t "pages.administration.navigation.organizations.label"}}
     </LinkTo>
 
-    <LinkTo @route="authenticated.administration.certification" class="navbar-item">
+    <LinkTo @route="authenticated.administration.certification">
       {{t "pages.administration.navigation.certification.label"}}
     </LinkTo>
 
-    <LinkTo @route="authenticated.administration.deployment" class="navbar-item">
+    <LinkTo @route="authenticated.administration.deployment">
       {{t "pages.administration.navigation.deployment.label"}}
     </LinkTo>
 
-    <LinkTo @route="authenticated.administration.access" class="navbar-item">
+    <LinkTo @route="authenticated.administration.access">
       {{t "pages.administration.navigation.access.label"}}
     </LinkTo>
-
-  </nav>
+  </PixTabs>
 </template>

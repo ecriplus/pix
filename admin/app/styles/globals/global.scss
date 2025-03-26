@@ -35,15 +35,6 @@ abbr {
   }
 }
 
-a:not(.pix-button, .sidebar__link, .login-form__oidc-connect-link) {
-  color: var(--pix-tertiary-500);
-  text-decoration: underline;
-
-  &:visited {
-    color: var(--pix-primary-500);
-  }
-}
-
 a.pix-button {
   &:hover {
     color: var(--pix-neutral-0);
@@ -70,4 +61,8 @@ a.pix-button {
   &.gap-4x {
     gap: var(--pix-spacing-4x);
   }
+}
+
+.navigation {
+  margin: var(--pix-spacing-2x) 0 var(--pix-spacing-6x) 0;
 }

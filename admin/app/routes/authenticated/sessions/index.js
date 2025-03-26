@@ -5,6 +5,6 @@ export default class AuthenticatedSessionsRoute extends Route {
   @service router;
 
   beforeModel() {
-    this.router.transitionTo('authenticated.sessions.list.with-required-action');
+    this.router.transitionTo('authenticated.sessions.list.with-required-action', { queryParams: { version: 3 } });
   }
 }

@@ -886,11 +886,11 @@
           }
         },
         "required-actions": {
-          "v2": "Sessions à traiter",
+          "v2": "Sessions à traiter V2",
           "v3": "Sessions à traiter V3"
         },
         "to-be-published": {
-          "v2": "Sessions à publier",
+          "v2": "Sessions à publier V2",
           "v3": "Sessions à publier V3"
         }
       },
