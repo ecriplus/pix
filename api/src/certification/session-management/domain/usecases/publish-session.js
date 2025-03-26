@@ -1,3 +1,5 @@
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
+
 /**
  * @typedef {import ('../../../../../src/certification/session-management/domain/usecases/index.js').CertificationRepository} CertificationRepository
  * @typedef {import ('../../../../../lib/domain/usecases/index.js').FinalizedSessionRepository} FinalizedSessionRepository
@@ -27,24 +29,26 @@ const publishSession = async function ({
   sessionRepository,
   sessionPublicationService,
 }) {
-  const session = await sessionPublicationService.publishSession({
-    sessionId,
-    publishedAt,
-    certificationRepository,
-    finalizedSessionRepository,
-    sessionRepository,
-    sharedSessionRepository,
-  });
+  return DomainTransaction.execute(async function () {
+    const session = await sessionPublicationService.publishSession({
+      sessionId,
+      publishedAt,
+      certificationRepository,
+      finalizedSessionRepository,
+      sessionRepository,
+      sharedSessionRepository,
+    });
 
-  await sessionPublicationService.manageEmails({
-    i18n,
-    session,
-    publishedAt,
-    certificationCenterRepository,
-    sessionRepository,
-  });
+    await sessionPublicationService.manageEmails({
+      i18n,
+      session,
+      publishedAt,
+      certificationCenterRepository,
+      sessionRepository,
+    });
 
-  return sessionRepository.get({ id: sessionId });
+    return sessionRepository.get({ id: sessionId });
+  });
 };
 
 export { publishSession };
