@@ -6,6 +6,12 @@ export function buildClientApplication({
   clientId = 'client-id',
   clientSecret = 'super-secret',
   scopes = ['scope1', 'scope2'],
+  jurisdiction = [
+    {
+      rule: 'tags',
+      value: ['MEDNUM'],
+    },
+  ],
 } = {}) {
-  return new ClientApplication({ id, name, clientId, clientSecret, scopes });
+  return new ClientApplication({ id, name, clientId, clientSecret, scopes, jurisdiction });
 }

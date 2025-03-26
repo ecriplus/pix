@@ -1,6 +1,7 @@
 import { ATTESTATIONS } from '../../../../src/profile/domain/constants.js';
 import {
   AGRICULTURE_TAG,
+  COLLEGE_TAG,
   FEATURE_ATTESTATIONS_MANAGEMENT_ID,
   FEATURE_CAMPAIGN_WITHOUT_USER_PROFILE_ID,
   FEATURE_COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY_ID,
@@ -51,6 +52,7 @@ async function _createScoOrganization(databaseBuilder) {
       { id: FEATURE_MULTIPLE_SENDING_ASSESSMENT_ID },
       { id: FEATURE_ATTESTATIONS_MANAGEMENT_ID, params: JSON.stringify([ATTESTATIONS.SIXTH_GRADE]) },
     ],
+    tagIds: [COLLEGE_TAG.id],
   });
 
   await organization.createOrganization({
