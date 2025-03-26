@@ -1,4 +1,4 @@
-import { ComparisonNotImplementedError } from '../errors.js';
+import { InvalidComparisonError } from '../errors.js';
 
 export const COMPARISONS = {
   EQUAL: 'equal',
@@ -40,25 +40,36 @@ export class CriterionProperty {
         } else if (this.#comparison === COMPARISONS.ONE_OF) {
           return criterionAttr.some((valueToTest) => dataAttr.includes(valueToTest));
         }
-        throw new ComparisonNotImplementedError(this.#comparison);
+        throw new InvalidComparisonError({
+          comparisonOperator: this.#comparison,
+          typeofCriterion: 'array',
+          typeofData: 'array',
+        });
       } else {
         if (this.#comparison === COMPARISONS.ONE_OF) {
           return criterionAttr.some((valueToTest) => valueToTest === dataAttr);
         }
-        throw new ComparisonNotImplementedError(this.#comparison);
+        throw new InvalidComparisonError({
+          comparisonOperator: this.#comparison,
+          typeofCriterion: 'array',
+          typeofData: typeof dataAttr,
+        });
       }
     } else {
       if (this.#comparison === COMPARISONS.EQUAL) {
         return dataAttr === criterionAttr;
       }
       if (this.#comparison === COMPARISONS.LIKE) {
-        const coercedDataAttr = dataAttr ?? '';
+        const coercedDataAttr = dataAttr ?? (typeof dataAttr === 'boolean' ? dataAttr : '');
         if (typeof criterionAttr === 'string' && typeof coercedDataAttr === 'string') {
           return coercedDataAttr.toLowerCase().includes(criterionAttr.toLowerCase());
         }
-        throw new ComparisonNotImplementedError(this.#comparison);
       }
-      throw new ComparisonNotImplementedError(this.#comparison);
+      throw new InvalidComparisonError({
+        comparisonOperator: this.#comparison,
+        typeofCriterion: typeof criterionAttr,
+        typeofData: typeof dataAttr,
+      });
     }
   }
 }

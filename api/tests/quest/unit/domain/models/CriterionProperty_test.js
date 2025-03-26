@@ -1,4 +1,4 @@
-import { ComparisonNotImplementedError } from '../../../../../src/quest/domain/errors.js';
+import { InvalidComparisonError } from '../../../../../src/quest/domain/errors.js';
 import { COMPARISONS, CriterionProperty } from '../../../../../src/quest/domain/models/CriterionProperty.js';
 import { expect } from '../../../../test-helper.js';
 
@@ -98,7 +98,7 @@ describe('Quest | Unit | Domain | Models | CriterionProperty', function () {
 
           expect(() => {
             criterionProperty.check({ something: false });
-          }).to.throw(ComparisonNotImplementedError);
+          }).to.throw(InvalidComparisonError);
         });
 
         it('should throw when criterion attribute type is not suited for LIKE comparison', function () {
@@ -110,7 +110,7 @@ describe('Quest | Unit | Domain | Models | CriterionProperty', function () {
 
           expect(() => {
             criterionProperty.check({ something: 'coucou' });
-          }).to.throw(ComparisonNotImplementedError);
+          }).to.throw(InvalidComparisonError);
         });
       });
     });
