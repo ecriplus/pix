@@ -35,12 +35,6 @@
       "options": {
         "version": "15.10"
       }
-    },
-    {
-      "plan": "redis:redis-sandbox",
-      "options": {
-        "version": "7.2.5"
-      }
     }
   ],
   "formation": {
