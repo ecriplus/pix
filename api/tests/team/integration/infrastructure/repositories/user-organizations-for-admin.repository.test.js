@@ -113,6 +113,7 @@ describe('Integration | Team | Infrastructure | Repository | user-organizations-
             'organizationName',
             'organizationType',
             'organizationExternalId',
+            'lastAccessedAt',
           );
         expect(userOrganizations[0].organizationName).be.oneOf(['Organization 2', 'Organization 3']);
 
@@ -125,6 +126,7 @@ describe('Integration | Team | Infrastructure | Repository | user-organizations-
             'organizationName',
             'organizationType',
             'organizationExternalId',
+            'lastAccessedAt',
           );
         expect(userOrganizations[1].organizationName).be.oneOf(['Organization 2', 'Organization 3']);
       });

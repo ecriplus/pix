@@ -13,6 +13,7 @@ describe('Unit | Team | Serializer | JSONAPI | user-organization-for-admin-seria
         organizationName: 'Organization 1',
         organizationType: 'SCO',
         organizationExternalId: '1234',
+        lastAccessedAt: new Date('2023-03-23').toISOString(),
       });
       const userOrganizationForAdmin2 = new UserOrganizationForAdmin({
         id: 43,
@@ -37,6 +38,7 @@ describe('Unit | Team | Serializer | JSONAPI | user-organization-for-admin-seria
               'organization-name': 'Organization 1',
               'organization-type': 'SCO',
               'organization-role': 'MEMBER',
+              'last-accessed-at': '2023-03-23T00:00:00.000Z',
             },
             id: '42',
             type: 'organization-memberships',
@@ -48,6 +50,7 @@ describe('Unit | Team | Serializer | JSONAPI | user-organization-for-admin-seria
               'organization-name': 'Organization 2',
               'organization-type': 'SUP',
               'organization-role': 'ADMIN',
+              'last-accessed-at': undefined,
             },
             id: '43',
             type: 'organization-memberships',

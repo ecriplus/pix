@@ -51,6 +51,7 @@ describe('Acceptance | Team | Application | Admin | Routes | certification-cente
               role: 'MEMBER',
               'created-at': response.result.data[0].attributes['created-at'],
               'updated-at': response.result.data[0].attributes['updated-at'],
+              'last-accessed-at': response.result.data[0].attributes['last-accessed-at'],
             },
             relationships: {
               'certification-center': {
@@ -122,6 +123,7 @@ describe('Acceptance | Team | Application | Admin | Routes | certification-cente
               role: 'ADMIN',
               'created-at': response.result.data.attributes['created-at'],
               'updated-at': response.result.data.attributes['updated-at'],
+              'last-accessed-at': response.result.data.attributes['last-accessed-at'],
             },
             relationships: {
               'certification-center': {
@@ -176,6 +178,7 @@ describe('Acceptance | Team | Application | Admin | Routes | certification-cente
                 role: 'ADMIN',
                 'created-at': result.data.attributes['created-at'],
                 'updated-at': result.data.attributes['updated-at'],
+                'last-accessed-at': result.data.attributes['last-accessed-at'],
               },
               relationships: {
                 'certification-center': {

@@ -494,6 +494,7 @@
             "center-id": "Centre ID",
             "center-name": "Nom",
             "center-type": "Type",
+            "last-accessed-at": "Dernier accès",
             "member-id": "Membre ID",
             "role-label": "Rôle"
           }

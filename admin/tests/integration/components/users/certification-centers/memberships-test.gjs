@@ -42,6 +42,7 @@ module('Integration | Component | users | certification-centers | memberships', 
         id: '456',
         certificationCenter,
         role: 'MEMBER',
+        lastAccessedAt: new Date('2020-01-01'),
       });
 
       const certificationCenterMemberships = [certificationCenterMembership];
@@ -62,6 +63,7 @@ module('Integration | Component | users | certification-centers | memberships', 
       // then
       assert.dom(screen.getByText('Centre Kaede')).exists();
       assert.dom(screen.getByText('Membre')).exists();
+      assert.dom(screen.getByText('01/01/2020')).exists();
     });
   });
 });

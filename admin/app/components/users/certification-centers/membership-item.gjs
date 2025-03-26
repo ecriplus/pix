@@ -5,6 +5,7 @@ import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
 
 import MembershipItemActions from './membership-item-actions';
@@ -86,6 +87,16 @@ export default class UsersCertificationCentersMembershipItemComponent extends Co
       </:header>
       <:cell>
         {{@certificationCenterMembership.certificationCenter.externalId}}
+      </:cell>
+    </PixTableColumn>
+    <PixTableColumn @context={{@context}} class="break-word">
+      <:header>
+        {{t "components.users.certification-centers.memberships.table-headers.last-accessed-at"}}
+      </:header>
+      <:cell>
+        {{#if @certificationCenterMembership.lastAccessedAt}}
+          {{dayjsFormat @certificationCenterMembership.lastAccessedAt "DD/MM/YYYY"}}
+        {{/if}}
       </:cell>
     </PixTableColumn>
     <PixTableColumn @context={{@context}}>

@@ -3,6 +3,7 @@ import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
 
 import ActionsOnUsersRoleInOrganization from '../actions-on-users-role-in-organization';
@@ -66,6 +67,16 @@ export default class UserOrganizationMemberships extends Component {
             </:header>
             <:cell>
               {{organizationMembership.organizationExternalId}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="break-word">
+            <:header>
+              Dernier accès
+            </:header>
+            <:cell>
+              {{#if organizationMembership.lastAccessedAt}}
+                {{dayjsFormat organizationMembership.lastAccessedAt "DD/MM/YYYY"}}
+              {{/if}}
             </:cell>
           </PixTableColumn>
           <ActionsOnUsersRoleInOrganization @organizationMembership={{organizationMembership}} @context={{context}} />
