@@ -37,7 +37,7 @@ export default class TrainingListSummaryItems extends Component {
     {{/if}}
 
     {{#if @summaries}}
-      <PixTable @data={{@summaries}} @caption={{t "pages.trainings.training.list.caption"}}>
+      <PixTable @variant="admin" @data={{@summaries}} @caption={{t "pages.trainings.training.list.caption"}}>
         <:columns as |summary context|>
           <PixTableColumn @context={{context}} class="table__column--medium">
             <:header>

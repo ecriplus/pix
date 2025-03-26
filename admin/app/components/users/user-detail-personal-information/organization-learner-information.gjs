@@ -19,7 +19,7 @@ export default class OrganizationLearnerInformation extends Component {
 
     {{#if @user.organizationLearners}}
       <PixTable
-        @variant="primary"
+        @variant="admin"
         @caption={{t "components.users.organization-learner-information.table.caption"}}
         @data={{@user.organizationLearners}}
       >

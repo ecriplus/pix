@@ -40,7 +40,11 @@ export default class ToBePublishedSessionsList extends Component {
   }
   <template>
     {{#if @toBePublishedSessions}}
-      <PixTable @data={{@toBePublishedSessions}} @caption={{t "pages.sessions.table.to-be-published.caption"}}>
+      <PixTable
+        @variant="admin"
+        @data={{@toBePublishedSessions}}
+        @caption={{t "pages.sessions.table.to-be-published.caption"}}
+      >
         <:columns as |row toBePublishedSession|>
           <PixTableColumn @context={{toBePublishedSession}}>
             <:header>

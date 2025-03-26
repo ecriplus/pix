@@ -22,7 +22,7 @@ export default class UserOrganizationMemberships extends Component {
 
     {{#if this.orderedOrganizationMemberships}}
       <PixTable
-        @variant="primary"
+        @variant="admin"
         @data={{this.orderedOrganizationMemberships}}
         @caption={{t "components.users.organizations.memberships.table.caption"}}
       >

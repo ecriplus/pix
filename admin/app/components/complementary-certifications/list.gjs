@@ -11,6 +11,7 @@ export default class List extends Component {
 
   <template>
     <PixTable
+      @variant="admin"
       @data={{this.sortedComplementaryCertifications}}
       @caption={{t "components.complementary-certifications.list.caption"}}
     >

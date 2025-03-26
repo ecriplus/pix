@@ -16,7 +16,7 @@ export default class ParticipationsSection extends Component {
         Attention toute modification sur une participation nécessite un accord écrit du prescripteur.
       </p>
 
-      <PixTable @data={{@participations}} @caption="Liste des participations" class="table">
+      <PixTable @variant="admin" @data={{@participations}} @caption="Liste des participations" class="table">
         <:columns as |participation context|>
           <ParticipationRow
             @participation={{participation}}

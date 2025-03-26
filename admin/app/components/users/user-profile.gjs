@@ -12,7 +12,7 @@ import { t } from 'ember-intl';
 
   {{#if @profile.scorecards}}
     <PixTable
-      @variant="primary"
+      @variant="admin"
       @data={{@profile.scorecards}}
       @caption="Pix et niveau obtenus en fonction des compétences"
       class="user-profile-table"

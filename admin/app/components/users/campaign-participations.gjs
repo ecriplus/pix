@@ -43,7 +43,7 @@ export default class CampaignParticipation extends Component {
 
     {{#if @participations}}
       <PixTable
-        @variant="primary"
+        @variant="admin"
         @data={{@participations}}
         @caption={{t "components.users.campaign-participations.table.caption"}}
       >

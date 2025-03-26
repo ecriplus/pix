@@ -74,7 +74,12 @@ export default class TargetProfileListSummaryItems extends Component {
     </PixFilterBanner>
 
     {{#if @summaries}}
-      <PixTable @data={{@summaries}} @caption={{t "components.target-profiles.list.table.caption"}} class="table">
+      <PixTable
+        @variant="admin"
+        @data={{@summaries}}
+        @caption={{t "components.target-profiles.list.table.caption"}}
+        class="table"
+      >
         <:columns as |summary context|>
           <PixTableColumn @context={{context}}>
             <:header>

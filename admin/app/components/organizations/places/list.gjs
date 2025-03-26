@@ -13,7 +13,7 @@ export default class List extends Component {
 
   <template>
     <PixTable
-      @variant="primary"
+      @variant="admin"
       @caption="Affichage des lots de place disponible triés par ordre anti-chronologique d'activation puis d'expiration"
       @data={{@places}}
     >

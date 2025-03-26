@@ -48,7 +48,12 @@ export default class Badges extends Component {
 
   <template>
     {{#if this.hasBadges}}
-      <PixTable @data={{@badges}} @caption={{t "components.target-profiles.badges.table.caption"}} class="table insights-section__badge-table">
+      <PixTable
+        @variant="admin"
+        @data={{@badges}}
+        @caption={{t "components.target-profiles.badges.table.caption"}}
+        class="table insights-section__badge-table"
+      >
         <:columns as |badge context|>
           <PixTableColumn @context={{context}}>
             <:header>

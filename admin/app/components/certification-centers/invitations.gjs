@@ -22,7 +22,7 @@ export default class CertificationCenterInvitations extends Component {
 
       {{#if this.sortedCertificationCenterInvitations}}
         <PixTable
-          @variant="primary"
+          @variant="admin"
           @caption={{t "components.certification-centers.invitations.table.caption"}}
           @data={{this.sortedCertificationCenterInvitations}}
         >

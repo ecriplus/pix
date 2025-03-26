@@ -151,7 +151,7 @@ export default class ListItems extends Component {
       </PixFilterBanner>
 
       {{#if @sessions}}
-        <PixTable @variant="primary" @data={{@sessions}} @caption={{t "pages.sessions.table.caption"}}>
+        <PixTable @variant="admin" @data={{@sessions}} @caption={{t "pages.sessions.table.caption"}}>
           <:columns as |session context|>
             <PixTableColumn @context={{context}}>
               <:header>

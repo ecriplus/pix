@@ -10,6 +10,7 @@ import { t } from 'ember-intl';
       {{t "components.complementary-certifications.target-profiles.history-list.title"}}
     </h2>
     <PixTable
+      @variant="admin"
       @data={{@targetProfilesHistory}}
       @caption={{t "components.complementary-certifications.target-profiles.history-list.caption"}}
     >

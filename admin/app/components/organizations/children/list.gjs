@@ -5,7 +5,7 @@ import ListItem from './list-item';
 
 <template>
   <PixTable
-    @variant="primary"
+    @variant="admin"
     @caption={{t "components.organizations.children-list.table-name"}}
     @data={{@organizations}}
   >

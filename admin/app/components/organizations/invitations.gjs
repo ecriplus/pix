@@ -23,7 +23,7 @@ export default class OrganizationInvitations extends Component {
 
       {{#if this.sortedInvitations}}
         <PixTable
-          @variant="primary"
+          @variant="admin"
           @caption={{t "components.organizations.invitations.table.caption"}}
           @data={{this.sortedInvitations}}
         >

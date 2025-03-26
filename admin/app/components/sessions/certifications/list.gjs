@@ -14,7 +14,7 @@ export default class CertificationsHeader extends Component {
   <template>
     {{#if @juryCertificationSummaries}}
       <PixTable
-        @variant="primary"
+        @variant="admin"
         @data={{this.sortedCertificationJurySummaries}}
         @caption={{t "pages.certifications.table.caption"}}
       >
