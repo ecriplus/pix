@@ -100,6 +100,7 @@ export default class ObjectRequirementCreateOrEditFormField extends Component {
       return [
         { value: 'equal', label: 'a exactement la valeur' },
         { value: 'one-of', label: 'a la valeur parmi' },
+        { value: 'like', label: 'Contient ce texte dans la chaîne' },
       ];
     }
   }
@@ -109,6 +110,8 @@ export default class ObjectRequirementCreateOrEditFormField extends Component {
       return this.checkboxLabel;
     } else if (['one-of', 'all'].includes(this.formComparison)) {
       return 'Saisir les valeurs séparées par des virgules, sans espaces';
+    } else if (this.formComparison === 'like') {
+      return 'Saisir la valeur (string)';
     } else {
       return 'Saisir la valeur';
     }

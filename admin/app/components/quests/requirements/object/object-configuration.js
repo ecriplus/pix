@@ -132,16 +132,26 @@ const campaignParticipationsConfigField_targetProfileId = new FieldConfiguration
   type: FieldConfiguration.TYPES.NUMBER,
   refersToAnArray: false,
 });
+const campaignParticipationsConfigField_campaignName = new FieldConfiguration({
+  name: 'campaignName',
+  type: FieldConfiguration.TYPES.STRING,
+  refersToAnArray: false,
+});
 const campaignParticipationsConfigField_status = new FieldConfiguration({
   name: 'status',
   type: FieldConfiguration.TYPES.STRING,
   refersToAnArray: false,
   allowedValues: ['STARTED', 'TO_SHARE', 'SHARED'],
 });
+
 const campaignParticipationsConfiguration = new ObjectConfiguration({
   name: 'campaignParticipations',
   refersToAnArray: true,
-  fieldConfigurations: [campaignParticipationsConfigField_targetProfileId, campaignParticipationsConfigField_status],
+  fieldConfigurations: [
+    campaignParticipationsConfigField_targetProfileId,
+    campaignParticipationsConfigField_status,
+    campaignParticipationsConfigField_campaignName,
+  ],
 });
 
 // CAPPED TUBES
