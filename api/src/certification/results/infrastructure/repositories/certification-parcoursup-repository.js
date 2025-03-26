@@ -92,14 +92,18 @@ const getByVerificationCode = async ({ verificationCode }) => {
  */
 const _toDomain = (certificationResultDto) => {
   return certificationResultDto.map((certificationResult) => {
-    const competences = certificationResult.competences.map((competence) => {
-      return new Competence({
-        code: competence.competence_code,
-        name: competence.competence_name,
-        areaName: competence.area_name,
-        level: competence.competence_level,
-      });
-    });
+    const uniqCompetences = new Map();
+    for (const competence of certificationResult.competences) {
+      uniqCompetences.set(
+        competence.competence_code,
+        new Competence({
+          code: competence.competence_code,
+          name: competence.competence_name,
+          areaName: competence.area_name,
+          level: competence.competence_level,
+        }),
+      );
+    }
 
     return new CertificationResult({
       ine: certificationResult.national_student_id,
@@ -110,7 +114,7 @@ const _toDomain = (certificationResultDto) => {
       status: certificationResult.status,
       pixScore: certificationResult.pix_score,
       certificationDate: certificationResult.certification_date,
-      competences,
+      competences: Array.from(uniqCompetences.values()),
     });
   });
 };
