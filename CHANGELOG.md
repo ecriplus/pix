@@ -1,5 +1,35 @@
 # Pix Changelog
 
+## v5.73.0 (26/03/2025)
+
+
+### :rocket: Amélioration
+- [#11828](https://github.com/1024pix/pix/pull/11828) [FEATURE] Ajout de PixTabs dans Pix Admin (PIX-17194).
+- [#11842](https://github.com/1024pix/pix/pull/11842) [FEATURE] S'assurer que les images de Modules de prod respectent les contraintes tech (PIX-17215).
+- [#11700](https://github.com/1024pix/pix/pull/11700) [FEATURE] Permettre de placer des custom elements dans les contenus Modulix (PIX-17186).
+- [#11822](https://github.com/1024pix/pix/pull/11822) [FEATURE] supprime la propriété `answerId` des snapshots (Pix-17187).
+- [#11779](https://github.com/1024pix/pix/pull/11779) [FEATURE] MaDDo - Ajout d'une route listant les organisations autorisées pour un client.
+- [#11815](https://github.com/1024pix/pix/pull/11815) [FEATURE] [Pix Admin] Afficher la date de dernier accès aux orgas & centres de certification sur la fiche utilisateur (PIX-17074 ).
+- [#11839](https://github.com/1024pix/pix/pull/11839) [FEATURE] Ajoute des boutons pour télécharger les templates des fichiers d'import CSV sur Admin.
+
+### :building_construction: Tech
+- [#11807](https://github.com/1024pix/pix/pull/11807) [TECH] Déplacer le challenge-picker spécifique à la certif (PIX-13739).
+- [#11818](https://github.com/1024pix/pix/pull/11818) [TECH] utilise un verrou pour protéger l'accès à une participation avant de la partagée (PIX-17156).
+- [#11817](https://github.com/1024pix/pix/pull/11817) [TECH] Ajout de transactions aux usecases de publication de sessions (PIX-17161).
+- [#11848](https://github.com/1024pix/pix/pull/11848) [TECH] Utiliser la version de production de PG sur les RA.
+- [#11849](https://github.com/1024pix/pix/pull/11849) [TECH] Optimiser la CI et les RA de l'audit logger.
+- [#11836](https://github.com/1024pix/pix/pull/11836) [TECH] Migration des test e2e Pix Orga en Playwright.
+
+### :bug: Correction
+- [#11856](https://github.com/1024pix/pix/pull/11856) [BUGFIX] Eviter les doublons de competences dans la reponse Parcoursup  (PIX-17218).
+
+### :arrow_up: Montée de version
+- [#11850](https://github.com/1024pix/pix/pull/11850) [BUMP] Update dependency @1024pix/pix-ui to ^55.6.1 (mon-pix).
+- [#11854](https://github.com/1024pix/pix/pull/11854) [BUMP] Update dependency @1024pix/pix-ui to ^55.6.1 (orga).
+- [#11841](https://github.com/1024pix/pix/pull/11841) [BUMP] Update dependency @1024pix/pix-ui to ^55.6.1 (certif).
+- [#11847](https://github.com/1024pix/pix/pull/11847) [BUMP] Update dependency @1024pix/pix-ui to ^55.6.1 (junior).
+- [#11840](https://github.com/1024pix/pix/pull/11840) [BUMP] Update dependency @1024pix/pix-ui to ^55.6.1 (admin).
+
 ## v5.72.0 (26/03/2025)
 
 
