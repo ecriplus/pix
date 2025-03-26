@@ -14,6 +14,7 @@ import { Grain } from '../../../../../src/devcomp/domain/models/Grain.js';
 import { Module } from '../../../../../src/devcomp/domain/models/module/Module.js';
 import { TransitionText } from '../../../../../src/devcomp/domain/models/TransitionText.js';
 import { ModuleFactory } from '../../../../../src/devcomp/infrastructure/factories/module-factory.js';
+import { DomainError } from '../../../../../src/shared/domain/errors.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
 import { catchErrSync, expect, sinon } from '../../../../test-helper.js';
 import { validateFlashcards } from '../../../shared/validateFlashcards.js';
@@ -336,6 +337,54 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
     });
 
     describe('With ComponentElement', function () {
+      describe('When isBeta is false', function () {
+        it('should throw a DomainError when Image element does not have a valid url', function () {
+          // given
+          const moduleData = {
+            id: '6282925d-4775-4bca-b513-4c3009ec5886',
+            slug: 'title',
+            title: 'title',
+            isBeta: false,
+            details: {
+              image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+              description: 'Description',
+              duration: 5,
+              level: 'Débutant',
+              tabletSupport: 'comfortable',
+              objectives: ['Objective 1'],
+            },
+            grains: [
+              {
+                id: 'f312c33d-e7c9-4a69-9ba0-913957b8f7dd',
+                type: 'lesson',
+                title: 'title',
+                components: [
+                  {
+                    type: 'element',
+                    element: {
+                      id: '8d7687c8-4a02-4d7e-bf6c-693a6d481c78',
+                      type: 'image',
+                      url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg',
+                      alt: 'Alternative',
+                      alternativeText: 'Alternative textuelle',
+                      legend: 'legend',
+                      licence: 'licence',
+                    },
+                  },
+                ],
+              },
+            ],
+          };
+
+          // when
+          const error = catchErrSync(() => ModuleFactory.build(moduleData))();
+
+          // then
+          expect(error).to.be.an.instanceOf(DomainError);
+          expect(error.message).to.equal('The image URL must be from "assets.pix.org" when module is production ready');
+        });
+      });
+
       it('should instantiate a Module with a ComponentElement which contains an Image Element', function () {
         // given
         const moduleData = {
@@ -927,6 +976,58 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
     });
 
     describe('With ComponentStepper', function () {
+      describe('When isBeta is false', function () {
+        it('should throw a DomainError when Image element does not have a valid url', function () {
+          // given
+          const moduleData = {
+            id: '6282925d-4775-4bca-b513-4c3009ec5886',
+            slug: 'title',
+            title: 'title',
+            isBeta: false,
+            details: {
+              image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+              description: 'Description',
+              duration: 5,
+              level: 'Débutant',
+              tabletSupport: 'comfortable',
+              objectives: ['Objective 1'],
+            },
+            grains: [
+              {
+                id: 'f312c33d-e7c9-4a69-9ba0-913957b8f7dd',
+                type: 'lesson',
+                title: 'title',
+                components: [
+                  {
+                    type: 'stepper',
+                    steps: [
+                      {
+                        elements: [
+                          {
+                            id: '8d7687c8-4a02-4d7e-bf6c-693a6d481c78',
+                            type: 'image',
+                            url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg',
+                            alt: "Dessin détaillé dans l'alternative textuelle",
+                            alternativeText: "Dessin d'un ordinateur dans un univers spatial.",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          };
+
+          // when
+          const error = catchErrSync(() => ModuleFactory.build(moduleData))();
+
+          // then
+          expect(error).to.be.an.instanceOf(DomainError);
+          expect(error.message).to.equal('The image URL must be from "assets.pix.org" when module is production ready');
+        });
+      });
+
       it('should instantiate a Module with a ComponentStepper which contains an Image Element', function () {
         // given
         const moduleData = {

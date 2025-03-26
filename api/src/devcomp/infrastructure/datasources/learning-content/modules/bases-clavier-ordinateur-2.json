@@ -2,7 +2,7 @@
   "id": "bb0a4ed3-1b49-4782-b867-05ade0868c4f",
   "slug": "bases-clavier-2",
   "title": "Les bases du clavier sur ordinateur 2/2",
-  "isBeta": false,
+  "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
     "description": "<p>Pour taper certains caractères, il suffit d’appuyer une fois sur une touche. Pour d’autres c’est un peu plus compliqué ! <br>Dans ce module, vous apprendrez à taper des caractères en appuyant sur deux touches en même temps : les majuscules ou la ponctuation par exemple.</p>",

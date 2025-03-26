@@ -8,16 +8,17 @@ describe('Unit | Devcomp | Domain | Models | Element | Image', function () {
       // when
       const image = new Image({
         id: 'id',
-        url: 'url',
+        url: 'https://assets.pix.org/modules/placeholder-details.svg',
         alt: 'alt',
         alternativeText: 'alternativeText',
         legend: 'legend',
         licence: 'licence',
+        isBeta: false,
       });
 
       // then
       expect(image.id).to.equal('id');
-      expect(image.url).to.equal('url');
+      expect(image.url).to.equal('https://assets.pix.org/modules/placeholder-details.svg');
       expect(image.alt).to.equal('alt');
       expect(image.alternativeText).to.equal('alternativeText');
       expect(image.legend).to.equal('legend');
@@ -48,10 +49,21 @@ describe('Unit | Devcomp | Domain | Models | Element | Image', function () {
     });
   });
 
-  describe('An image without alt', function () {
+  describe('An image with invalid url', function () {
     it('should throw an error', function () {
       // when
       const error = catchErrSync(() => new Image({ id: 'id', url: 'url' }))();
+
+      // then
+      expect(error).to.be.instanceOf(DomainError);
+      expect(error.message).to.equal('The URL must be a valid URL for an image');
+    });
+  });
+
+  describe('An image without alt', function () {
+    it('should throw an error', function () {
+      // when
+      const error = catchErrSync(() => new Image({ id: 'id', url: 'https://images.pix.fr/coolcat.jpg' }))();
 
       // then
       expect(error).to.be.instanceOf(DomainError);
@@ -62,11 +74,35 @@ describe('Unit | Devcomp | Domain | Models | Element | Image', function () {
   describe('An image without an alternative text', function () {
     it('should throw an error', function () {
       // when
-      const error = catchErrSync(() => new Image({ id: 'id', url: 'url', alt: 'alt' }))();
+      const error = catchErrSync(() => new Image({ id: 'id', url: 'https://images.pix.fr/coolcat.jpg', alt: 'alt' }))();
 
       // then
       expect(error).to.be.instanceOf(DomainError);
       expect(error.message).to.equal('The alternative text is required for an image');
+    });
+  });
+
+  describe('When isBeta is false', function () {
+    describe('and image URL is not from assets.pix.org', function () {
+      it('should throw an error', function () {
+        // given & when
+        const error = catchErrSync(
+          () =>
+            new Image({
+              id: 'id',
+              url: 'https://images.pix.fr/coolcat.jpg',
+              alt: 'alt',
+              alternativeText: 'alternativeText',
+              legend: 'legend',
+              licence: 'licence',
+              isBeta: false,
+            }),
+        )();
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal('The image URL must be from "assets.pix.org" when module is production ready');
+      });
     });
   });
 });

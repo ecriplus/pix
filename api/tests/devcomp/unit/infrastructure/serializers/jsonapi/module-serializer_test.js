@@ -222,7 +222,7 @@ function getComponents() {
     new ComponentElement({
       element: new Image({
         id: '3',
-        url: 'url',
+        url: 'https://assets.pix.org/modules/placeholder-details.svg',
         alt: 'alt',
         alternativeText: 'alternativeText',
         licence: 'mon copyright',
@@ -399,7 +399,7 @@ function getAttributesComponents() {
         id: '3',
         isAnswerable: false,
         type: 'image',
-        url: 'url',
+        url: 'https://assets.pix.org/modules/placeholder-details.svg',
         legend: 'ma légende',
         licence: 'mon copyright',
       },
