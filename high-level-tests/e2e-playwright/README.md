@@ -23,8 +23,16 @@ Vous devez avoir démarré les conteneurs Docker Pix au préalable: `docker comp
 npm run test
 ```
 
-## Exécuter en mode UI\*
+## Exécuter en mode UI
 
 ```bash
 npm run test:ui
+```
+
+## Lancer l'enregistreur d'action
+
+Pour faciliter l'écriture des test, playwright propose un utilitaire pour logger les actions utilisateur et générer un scénario.
+
+```bash
+npx playwright codegen
 ```
