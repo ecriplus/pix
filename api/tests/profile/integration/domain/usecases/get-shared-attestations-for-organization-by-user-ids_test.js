@@ -1,6 +1,7 @@
 import { AttestationNotFoundError, NoProfileRewardsFoundError } from '../../../../../src/profile/domain/errors.js';
 import { User } from '../../../../../src/profile/domain/models/User.js';
 import { usecases } from '../../../../../src/profile/domain/usecases/index.js';
+import { normalizeAndRemoveAccents } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
 import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Profile | Integration | Domain | get-shared-attestations-for-organization-by-user-ids', function () {
@@ -55,7 +56,7 @@ describe('Profile | Integration | Domain | get-shared-attestations-for-organizat
       });
 
       expect(results).to.deep.equal({
-        data: [firstUser.toForm(firstProfileReward.createdAt, locale)],
+        data: [firstUser.toForm(firstProfileReward.createdAt, locale, normalizeAndRemoveAccents)],
         templateName: attestation.templateName,
       });
       expect(results.data[0].get('firstName')).to.equal('Alex');

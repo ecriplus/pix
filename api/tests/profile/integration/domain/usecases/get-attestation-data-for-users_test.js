@@ -1,6 +1,7 @@
 import { AttestationNotFoundError } from '../../../../../src/profile/domain/errors.js';
 import { User } from '../../../../../src/profile/domain/models/User.js';
 import { usecases } from '../../../../../src/profile/domain/usecases/index.js';
+import { normalizeAndRemoveAccents } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
 import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Profile | Integration | Domain | get-attestation-data-for-users', function () {
@@ -42,7 +43,10 @@ describe('Profile | Integration | Domain | get-attestation-data-for-users', func
       });
 
       expect(results).to.deep.equal({
-        data: [firstUser.toForm(firstCreatedAt, locale), secondUser.toForm(secondCreatedAt, locale)],
+        data: [
+          firstUser.toForm(firstCreatedAt, locale, normalizeAndRemoveAccents),
+          secondUser.toForm(secondCreatedAt, locale, normalizeAndRemoveAccents),
+        ],
         templateName: attestation.templateName,
       });
       expect(results.data[0].get('firstName')).to.equal('Alex');
