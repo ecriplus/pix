@@ -18,6 +18,7 @@ describe('Unit | Domain | Read-Models | CampaignParticipationOverview', function
         organizationName: 'Pix',
         campaignCode: 'campaignCode',
         campaignTitle: 'campaignTitle',
+        campaignName: 'campaignName',
         masteryRate: 0.5,
       });
 
@@ -30,6 +31,7 @@ describe('Unit | Domain | Read-Models | CampaignParticipationOverview', function
       expect(campaignParticipationOverview.status).to.equal(SHARED);
       expect(campaignParticipationOverview.campaignCode).to.equal('campaignCode');
       expect(campaignParticipationOverview.campaignTitle).to.equal('campaignTitle');
+      expect(campaignParticipationOverview.campaignName).to.equal('campaignName');
       expect(campaignParticipationOverview.masteryRate).to.equal(0.5);
     });
 

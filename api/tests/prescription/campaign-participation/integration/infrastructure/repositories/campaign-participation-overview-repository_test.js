@@ -59,6 +59,7 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         const { id: organizationId } = databaseBuilder.factory.buildOrganization({ name: 'Organization ABCD' });
         const { id: campaignId } = databaseBuilder.factory.buildCampaign({
           title: 'Campaign ABCD',
+          name: 'Campaign Name DEF',
           code: 'ABCD',
           organizationId,
           targetProfileId: targetProfile.id,
@@ -90,6 +91,7 @@ describe('Integration | Repository | Campaign Participation Overview', function 
           isShared: true,
           campaignCode: 'ABCD',
           campaignTitle: 'Campaign ABCD',
+          campaignName: 'Campaign Name DEF',
           organizationName: 'Organization ABCD',
           masteryRate: 0.1,
           totalStagesCount: undefined,
