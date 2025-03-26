@@ -20,30 +20,6 @@ const register = async function (server) {
   const adminRoutes = [
     {
       method: 'POST',
-      path: '/api/admin/organizations',
-      config: {
-        pre: [
-          {
-            method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([
-                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-                securityPreHandlers.checkAdminMemberHasRoleSupport,
-                securityPreHandlers.checkAdminMemberHasRoleMetier,
-              ])(request, h),
-            assign: 'hasAuthorizationToAccessAdminScope',
-          },
-        ],
-        handler: organizationController.create,
-        tags: ['api', 'organizations'],
-        notes: [
-          "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
-            '- SUPER_ADMIN, SUPPORT ou METIER\n' +
-            '- Elle permet de créer une nouvelle organisation',
-        ],
-      },
-    },
-    {
-      method: 'POST',
       path: '/api/admin/organizations/import-csv',
       config: {
         pre: [

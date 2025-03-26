@@ -14,6 +14,7 @@ import * as organizationFeatureRepository from '../../infrastructure/repositorie
 import { organizationForAdminRepository } from '../../infrastructure/repositories/organization-for-admin.repository.js';
 import * as organizationTagRepository from '../../infrastructure/repositories/organization-tag.repository.js';
 import { tagRepository } from '../../infrastructure/repositories/tag.repository.js';
+import * as organizationCreationValidator from '../validators/organization-creation-validator.js';
 
 const path = dirname(fileURLToPath(import.meta.url));
 
@@ -28,9 +29,11 @@ const path = dirname(fileURLToPath(import.meta.url));
  * @typedef {import ('../../infrastructure/repositories/organization-for-admin.repository.js')} OrganizationForAdminRepository
  * @typedef {import ('../../infrastructure/repositories/tag.repository.js')} TagRepository
  * @typedef {import ('../../../school/infrastructure/repositories/school-repository.js')} SchoolRepository
+ * @typedef {import ('../validators/organization-creation-validator.js')} OrganizationCreationValidator
  */
 
 const repositories = {
+  organizationCreationValidator,
   centerRepository,
   certificationCenterRepository,
   certificationCenterForAdminRepository,

@@ -76,37 +76,4 @@ describe('Unit | Router | organization-router', function () {
       });
     });
   });
-
-  describe('POST /api/admin/organizations', function () {
-    it('returns forbidden access if admin member has CERTIF role', async function () {
-      // given
-      sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleCertif').callsFake((request, h) => h.response(true));
-      sinon
-        .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
-        .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
-      sinon
-        .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
-        .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
-      sinon
-        .stub(securityPreHandlers, 'checkAdminMemberHasRoleMetier')
-        .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
-
-      const httpTestServer = new HttpTestServer();
-      await httpTestServer.register(moduleUnderTest);
-
-      // when
-      const response = await httpTestServer.request('POST', '/api/admin/organizations', {
-        data: {
-          type: 'organizations',
-          attributes: {
-            name: 'Super Tag',
-            type: 'SCO',
-          },
-        },
-      });
-
-      // then
-      expect(response.statusCode).to.equal(403);
-    });
-  });
 });

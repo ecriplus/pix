@@ -26,6 +26,124 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
     server = await createServer();
   });
 
+  describe('POST /api/admin/organizations', function () {
+    let payload;
+    let options;
+
+    beforeEach(function () {
+      payload = {
+        data: {
+          type: 'organizations',
+          attributes: {
+            name: 'The name of the organization',
+            type: 'PRO',
+            'documentation-url': 'https://kingArthur.com',
+          },
+        },
+      };
+      options = {
+        method: 'POST',
+        url: '/api/admin/organizations',
+        payload,
+        headers: generateAuthenticatedUserRequestHeaders(),
+      };
+    });
+
+    describe('Success case', function () {
+      it('returns 200 HTTP status code with the created organization', async function () {
+        // given
+        const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
+        await databaseBuilder.commit();
+
+        // when
+        const { result, statusCode } = await server.inject({
+          method: 'POST',
+          url: '/api/admin/organizations',
+          payload: {
+            data: {
+              type: 'organizations',
+              attributes: {
+                name: 'The name of the organization',
+                type: 'PRO',
+                'documentation-url': 'https://kingArthur.com',
+                'data-protection-officer-email': 'justin.ptipeu@example.net',
+              },
+            },
+          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdminUserId }),
+        });
+
+        // then
+        expect(statusCode).to.equal(200);
+        const createdOrganization = result.data.attributes;
+        expect(createdOrganization.name).to.equal('The name of the organization');
+        expect(createdOrganization.type).to.equal('PRO');
+        expect(createdOrganization['documentation-url']).to.equal('https://kingArthur.com');
+        expect(createdOrganization['data-protection-officer-email']).to.equal('justin.ptipeu@example.net');
+        expect(createdOrganization['created-by']).to.equal(superAdminUserId);
+      });
+    });
+
+    describe('when creating with a wrong payload (ex: organization type is wrong)', function () {
+      it('should return 422 HTTP status code', async function () {
+        // given
+        payload.data.attributes.type = 'FAK';
+
+        // then
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(422);
+      });
+
+      it('should not keep the user in the database', async function () {
+        // given
+        payload.data.attributes.type = 'FAK';
+
+        // then
+        const creatingOrganizationOnFailure = server.inject(options);
+
+        // then
+        return creatingOrganizationOnFailure.then(() => {
+          return knex('users')
+            .count('id as id')
+            .then((count) => {
+              expect(parseInt(count[0].id, 10)).to.equal(1);
+            });
+        });
+      });
+    });
+
+    describe('Resource access management', function () {
+      it('should respond with a 401 - unauthorized access - if user is not authenticated', function () {
+        // given
+        options.headers.authorization = 'invalid.access.token';
+
+        // when
+        const promise = server.inject(options);
+
+        // then
+        return promise.then((response) => {
+          expect(response.statusCode).to.equal(401);
+        });
+      });
+
+      it('should respond with a 403 - forbidden access - if user has not role Super Admin', function () {
+        // given
+        const nonSuperAdminUserId = 9999;
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: nonSuperAdminUserId });
+
+        // when
+        const promise = server.inject(options);
+
+        // then
+        return promise.then((response) => {
+          expect(response.statusCode).to.equal(403);
+        });
+      });
+    });
+  });
+
   describe('GET /api/admin/organizations/{id}', function () {
     context('Expected output', function () {
       it('should return the matching organization as JSON API', async function () {
