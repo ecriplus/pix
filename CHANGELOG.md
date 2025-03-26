@@ -1,5 +1,30 @@
 # Pix Changelog
 
+## v5.72.0 (26/03/2025)
+
+
+### :rocket: Amélioration
+- [#11821](https://github.com/1024pix/pix/pull/11821) [FEATURE] Mise en prod PPN3.
+- [#11778](https://github.com/1024pix/pix/pull/11778) [FEATURE] Ajouter le PV de fraude sur la page de détails d'une session sur Pix Certif (PIX-17043).
+- [#11832](https://github.com/1024pix/pix/pull/11832) [FEATURE] Correction relecture module.
+- [#11771](https://github.com/1024pix/pix/pull/11771) [FEATURE] Ajouter la génération des attestations v3 de sessions et classes (PIX-17066).
+
+### :building_construction: Tech
+- [#11801](https://github.com/1024pix/pix/pull/11801) [TECH] Migrer la route POST /api/admin/organizations (PIX-17110).
+- [#11830](https://github.com/1024pix/pix/pull/11830) [TECH] ajoute la table `campaign-participation-tube-reached-levels` (PIX-17168).
+- [#11780](https://github.com/1024pix/pix/pull/11780) [TECH] ajoute un script pour créer les knowledge-element-snapshot perdus (pix-17101).
+- [#11813](https://github.com/1024pix/pix/pull/11813) [TECH] Ajouter un sous-composant d'affichage des alertes utilisateur (PIX-16722).
+- [#11820](https://github.com/1024pix/pix/pull/11820) [TECH] Remplacer ember-toggle par PixToggleButton.
+- [#11629](https://github.com/1024pix/pix/pull/11629) [TECH] Utilisation de Playwright pour les test e2e (expérimentation).
+
+### :bug: Correction
+- [#11816](https://github.com/1024pix/pix/pull/11816) [BUGFIX] Enregistrer la route `/api/application/token` sur MaDDo.
+
+### :arrow_up: Montée de version
+- [#11831](https://github.com/1024pix/pix/pull/11831) [BUMP] Update Node.js to v22.14.0.
+- [#11740](https://github.com/1024pix/pix/pull/11740) [BUMP] Update dependency js-yaml to v4 (mon-pix).
+- [#11829](https://github.com/1024pix/pix/pull/11829) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.1 (e2e-playwright).
+
 ## v5.71.0 (25/03/2025)
 
 
