@@ -1717,6 +1717,7 @@
           "no-level": "Competence not started"
         }
       },
+      "description": "Evaluate yourself at your own pace on 16 digital skills. Choose a skill and start earning pix.",
       "first-title": "You have 16 competences to test. '<br>'Get your thinking hat on and off we go!",
       "resume-campaign-banner": {
         "accessibility": {
@@ -1942,9 +1943,9 @@
             "content": "Send us your results to enable the customised test organizer to support you.'<br />'After sharing, you'll have access to these training customised tests!",
             "share-error": "There was an error sending your results. Please try again."
           },
-          "sent-results-modal" : {
+          "sent-results-modal": {
             "return-results-action": "Close and return to results",
-            "subtitle": "Ready to expand your knowledge? \uD83C\uDF93",
+            "subtitle": "Ready to expand your knowledge? 🎓",
             "title": "Shared results"
           },
           "tab-label": "Trainings",
@@ -2143,6 +2144,15 @@
       "title": "My account"
     },
     "user-tests": {
+      "anonymised-participations": {
+        "course": "Course",
+        "states": {
+          "completed": "done",
+          "started": "started"
+        },
+        "title": "Deactivated courses"
+      },
+      "description": "Find here the evaluation courses you have started or completed.",
       "title": "My customised tests"
     },
     "user-trainings": {

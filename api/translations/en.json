@@ -1,4 +1,16 @@
 {
+  "account-recovery-email": {
+    "params": {
+      "choosePassword": "Choose a password",
+      "context": "*Vous avez demandé la récupération de votre compte Pix.",
+      "doNotAnswer": "*Ceci est un e-mail automatique, merci de ne pas y répondre.",
+      "instruction": "*Choisissez un mot de passe pour finaliser la procédure.",
+      "linkValidFor": "*Ce lien est valide 24 heures. Si vous n'êtes pas à l'origine de cette demande, merci d'ignorer cet e-mail.",
+      "moreOn": "Learn more about",
+      "pixPresentation": "*Pix est le service public en ligne pour évaluer, développer et certifier ses compétences numériques.",
+      "signing": "– The Pix team"
+    }
+  },
   "attendance-sheet": {
     "certification-information": {
       "date": "Date:",
@@ -129,7 +141,6 @@
     "prepayment": "Prepayment code",
     "pricing": "Pricing",
     "pricing-pix": "Pricing of Pix’s share",
-    "title": "Candidates' list",
     "tooltip-line-1": "(Required in particular when purchasing combined credits)",
     "tooltip-line-2": "It must be comprised of the organisation’s SIRET and of the invoice’s number. Ex: 12345678912345/FACT12345. ",
     "tooltip-line-3": "If you don’t have an invoice, a prepayment code must be set with Pix.",
@@ -212,6 +223,8 @@
       "download": "Download the results",
       "emailValidFor": "This link is valid for thirty days.",
       "findOutMore": "Find out more about ",
+      "findOutMoreFranceSuffix": " (France) or ",
+      "findOutMoreInternationalSuffix": " (International)",
       "guidelines": "The reporting transmitted by the certification centre has been taken into account - if need be - by the Pix examining body. You will find guidelines to help you read these results here.",
       "guidelinesLinkName": "Interpretation of specifiers' results",
       "overviewText": "Hello, here are the results of the certifications that you have recommended to your audiences",
@@ -238,6 +251,7 @@
       "JURY_COMMENT_FOR_ORGANIZATION": "Examining body’s comment for the organisation",
       "LASTNAME": "Last name",
       "PIX_SCORE": "Number of pix",
+      "REGISTRATION_STATUS": "Status at registration",
       "SESSION_ID": "Session",
       "SKILL_LABEL": "{skillIndex}",
       "STATUS": "Status"
