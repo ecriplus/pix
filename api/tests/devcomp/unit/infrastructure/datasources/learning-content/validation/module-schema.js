@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { customElementSchema } from './element/custom-element-schema.js';
 import { downloadElementSchema } from './element/download-schema.js';
 import { embedElementSchema } from './element/embed-schema.js';
 import { expandElementSchema } from './element/expand-schema.js';
@@ -29,6 +30,7 @@ const moduleDetailsSchema = Joi.object({
 
 const elementSchema = Joi.alternatives().conditional('.type', {
   switch: [
+    { is: 'custom', then: customElementSchema },
     { is: 'download', then: downloadElementSchema },
     { is: 'embed', then: embedElementSchema },
     { is: 'expand', then: expandElementSchema },
@@ -45,6 +47,7 @@ const elementSchema = Joi.alternatives().conditional('.type', {
 
 const stepperElementSchema = Joi.alternatives().conditional('.type', {
   switch: [
+    { is: 'custom', then: customElementSchema },
     { is: 'download', then: downloadElementSchema },
     { is: 'expand', then: expandElementSchema },
     { is: 'image', then: imageElementSchema },

@@ -1,4 +1,5 @@
 import './deprecation-workflow';
+import '@1024pix/epreuves-components';
 
 import Application from '@ember/application';
 import { init as initSentry } from '@sentry/ember';
