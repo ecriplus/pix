@@ -167,18 +167,10 @@ workflows:
           requires:
             - api_install
 
-      - audit_logger_install:
-          context: Pix
-          requires:
-            - checkout
-      - audit_logger_lint:
-          context: Pix
-          requires:
-            - audit_logger_install
       - audit_logger_test:
           context: Pix
           requires:
-            - audit_logger_install
+            - checkout
 
       - mon_pix_build:
           context: Pix
@@ -508,9 +500,9 @@ jobs:
       - store_artifacts:
           path: /home/circleci/test-results
 
-  audit_logger_install:
+  audit_logger_test:
     executor:
-      name: node-docker
+      name: node-postgres-docker
     working_directory: ~/pix/audit-logger
     steps:
       - attach_workspace:
@@ -524,37 +516,15 @@ jobs:
           key: v7-audit-logger-npm-{{ checksum "cachekey" }}
           paths:
             - ~/.npm
-      - persist_to_workspace:
-          root: ~/pix
-          paths:
-            - audit-logger
-
-  audit_logger_lint:
-    executor:
-      name: node-postgres-docker
-    working_directory: ~/pix/audit-logger
-    steps:
-      - attach_workspace:
-          at: ~/pix
       - run:
           name: Lint
           command: npm run lint
-          when: always
-
-  audit_logger_test:
-    executor:
-      name: node-postgres-docker
-    working_directory: ~/pix/audit-logger
-    steps:
-      - attach_workspace:
-          at: ~/pix
       - run:
           name: Test
           command: npm run test
           environment:
             PIX_API_CLIENT_SECRET: $2a$04$vkPRiypzeVQVG92/dCll7.5brjDQZVZc750VwKBc01icXjVIQqRVq
             TEST_DATABASE_URL: postgres://circleci@localhost:5432/circleci
-          when: always
       - store_test_results:
           path: /home/circleci/test-results
       - store_artifacts:
