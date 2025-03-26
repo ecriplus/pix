@@ -7,9 +7,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   let application2;
 
   beforeEach(async function () {
-    const createdAt = new Date();
-    // To avoid flackyness on date comparison, we set createdAt in the past
-    createdAt.setMinutes(-1);
+    const createdAt = new Date('2025-03-26T13:18:20Z');
 
     application2 = databaseBuilder.factory.buildClientApplication({
       name: 'appli2',
