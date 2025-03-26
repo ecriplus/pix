@@ -1,6 +1,6 @@
 {{page-title (t "pages.missions.list.title")}}
-<div>
-  <div class="header_container">
+<WidthLimitedContent>
+  <Header>
     <RobotDialog>
       <Bubble @message={{t "pages.missions.list.instruction" prenom=this.model.organizationLearner.firstName}} />
       <Bubble
@@ -11,8 +11,7 @@
         }}
       />
     </RobotDialog>
-    <IdentifiedLearner />
-  </div>
+  </Header>
   <div class="cards">
     {{#each this.orderedMissionList as |mission|}}
       <PixButton @triggerAction={{fn this.goToMission mission.id}} class="card">
@@ -35,4 +34,4 @@
       </PixButton>
     {{/each}}
   </div>
-</div>
+</WidthLimitedContent>

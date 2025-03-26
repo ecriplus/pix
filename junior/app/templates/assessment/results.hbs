@@ -1,43 +1,44 @@
 {{page-title (t "pages.missions.end-page.title")}}
 <Challenge::ChallengeLayout @color="{{this.feedbackClassName}}">
-  <div class="mission-page">
-    <div class="header_container">
-      <RobotDialog @class={{this.robotMood}}>
-        {{#each this.robotFeedBackMessage as |message|}}
-          <Bubble @message={{message}} />
-        {{/each}}
-      </RobotDialog>
-      <IdentifiedLearner />
-    </div>
-    <div class="mission-page__body">
-      <MissionCard::CompletedMissionCard
-        @missionLabelStatus={{t "pages.missions.list.status.completed.label"}}
-        @title={{@model.mission.name}}
-        @areaCode={{@model.mission.areaCode}}
-      />
-
-      <div class="mission-page__details">
-        <p class="details-list__title details-list__title--big">{{t this.resultsTitle}}</p>
-        <ul class="details-list">
-          {{#each this.validatedObjectives as |element index|}}
-
-            <li>
-              {{#if (this.isStepSuccessFul index)}}
-                <img src="/images/icons/valid.svg" alt="Valid" />
-              {{else}}
-                <img src="/images/icons/not-valid.svg" alt="Invalid" />
-              {{/if}}
-              <MarkdownToHtml @markdown="{{element}}" class="details-list__item" />
-            </li>
+  <WidthLimitedContent>
+    <div class="mission-page">
+      <Header>
+        <RobotDialog @class={{this.robotMood}}>
+          {{#each this.robotFeedBackMessage as |message|}}
+            <Bubble @message={{message}} />
           {{/each}}
-        </ul>
+        </RobotDialog>
+      </Header>
+      <div class="mission-page__body">
+        <MissionCard::CompletedMissionCard
+          @missionLabelStatus={{t "pages.missions.list.status.completed.label"}}
+          @title={{@model.mission.name}}
+          @areaCode={{@model.mission.areaCode}}
+        />
 
-        <PixButtonLink @route="identified.missions" class="details-action">
-          <p>{{t "pages.missions.end-page.back-to-missions"}}</p>
-          <PixIcon @name="arrowRight" class="details-action__icon" @ariaHidden={{true}} />
-        </PixButtonLink>
+        <div class="mission-page__details">
+          <p class="details-list__title details-list__title--big">{{t this.resultsTitle}}</p>
+          <ul class="details-list">
+            {{#each this.validatedObjectives as |element index|}}
 
+              <li class="details-list--with-image">
+                {{#if (this.isStepSuccessFul index)}}
+                  <img src="/images/icons/valid.svg" alt="Valid" />
+                {{else}}
+                  <img src="/images/icons/not-valid.svg" alt="Invalid" />
+                {{/if}}
+                <MarkdownToHtml @markdown="{{element}}" class="details-list__item" />
+              </li>
+            {{/each}}
+          </ul>
+
+          <PixButtonLink @route="identified.missions" class="details-action">
+            <p>{{t "pages.missions.end-page.back-to-missions"}}</p>
+            <PixIcon @name="arrowRight" class="details-action__icon" @ariaHidden={{true}} />
+          </PixButtonLink>
+
+        </div>
       </div>
     </div>
-  </div>
+  </WidthLimitedContent>
 </Challenge::ChallengeLayout>

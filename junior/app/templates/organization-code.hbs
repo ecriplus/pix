@@ -1,37 +1,39 @@
 {{page-title (t "pages.home.page-title")}}
 
-<form onSubmit={{this.goToSchool}} class="school-code">
-  <div class="school-code__welcome-with-bubble">
-    <div class="school-code__rotated-bubble">{{t "pages.home.beta"}}</div>
-    <p class="school-code__welcome">{{t "pages.home.welcome"}}</p>
-  </div>
-  <p class="school-code__instructions">{{t "pages.home.code-instruction"}}</p>
-  <div class="school-code__input">
-    <PixCode
-      @length="9"
-      @requiredLabel={{t "common.forms.mandatory"}}
-      @value={{this.schoolCode}}
-      aria-label={{t "pages.home.code-description"}}
-      {{on "input" this.handleCode}}
-      class="school-code__pix-code"
-    >
-      <:label>{{t "pages.home.code-label"}}</:label>
-    </PixCode>
-  </div>
+<WidthLimitedContent>
+  <form onSubmit={{this.goToSchool}} class="school-code">
+    <div class="school-code__welcome-with-bubble">
+      <div class="school-code__rotated-bubble">{{t "pages.home.beta"}}</div>
+      <p class="school-code__welcome">{{t "pages.home.welcome"}}</p>
+    </div>
+    <p class="school-code__instructions">{{t "pages.home.code-instruction"}}</p>
+    <div class="school-code__input">
+      <PixCode
+        @length="9"
+        @requiredLabel={{t "common.forms.mandatory"}}
+        @value={{this.schoolCode}}
+        aria-label={{t "pages.home.code-description"}}
+        {{on "input" this.handleCode}}
+        class="school-code__pix-code"
+      >
+        <:label>{{t "pages.home.code-label"}}</:label>
+      </PixCode>
+    </div>
 
-  <PixButton class="pix1d-button" @type="submit" @size="large">
-    {{t "pages.home.go-to-school"}}
-  </PixButton>
-  <p>
-    <strong>{{t "pages.home.not-any-code"}}</strong>
-    <PixButtonLink @href="https://pix.fr/enseignement-primaire" target="_blank" @variant="tertiary">
-      {{t "pages.home.ask-to-activate-organization"}}
-    </PixButtonLink>
-  </p>
+    <PixButton class="pix1d-button" @type="submit" @size="large">
+      {{t "pages.home.go-to-school"}}
+    </PixButton>
+    <p>
+      <strong>{{t "pages.home.not-any-code"}}</strong>
+      <PixButtonLink @href="https://pix.fr/enseignement-primaire" target="_blank" @variant="tertiary">
+        {{t "pages.home.ask-to-activate-organization"}}
+      </PixButtonLink>
+    </p>
 
-  <div class="logos">
-    <img src="/images/government-logo.svg" alt={{t "pages.home.government-logo-alt"}} class="logo" />
-    <img src="/images/logo.svg" alt="Pix Junior" class="logo" />
-  </div>
-</form>
+    <div class="logos">
+      <img src="/images/government-logo.svg" alt={{t "pages.home.government-logo-alt"}} class="logo" />
+      <img src="/images/logo.svg" alt="Pix Junior" class="logo" />
+    </div>
+  </form>
+</WidthLimitedContent>
 <Footer />
