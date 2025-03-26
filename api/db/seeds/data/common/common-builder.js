@@ -1,5 +1,5 @@
 import { PIX_ADMIN } from '../../../../src/authorization/domain/constants.js';
-import { PIX_PUBLIC_TARGET_PROFILE_ID, REAL_PIX_SUPER_ADMIN_ID } from './constants.js';
+import { COLLEGE_TAG, PIX_PUBLIC_TARGET_PROFILE_ID, REAL_PIX_SUPER_ADMIN_ID } from './constants.js';
 import { acceptPixOrgaTermsOfService, createPixOrgaTermsOfService } from './tooling/legal-documents.js';
 import { createTargetProfile } from './tooling/target-profile-tooling.js';
 
@@ -92,6 +92,13 @@ function createClientApplications(databaseBuilder) {
     clientId: 'parcoursup',
     clientSecret: 'parcoursup-secret-de-trente-deux-caracteres',
     scopes: ['parcoursup'],
+  });
+  databaseBuilder.factory.buildClientApplication({
+    name: 'multi-organizations-client-application',
+    clientId: 'maddo-client',
+    clientSecret: 'maddo-secret',
+    scopes: ['meta'],
+    jurisdiction: { rules: [{ name: 'tags', value: [COLLEGE_TAG.name] }] },
   });
 }
 
