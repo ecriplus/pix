@@ -17,7 +17,9 @@ class KnowledgeElementCollection {
 
   toSnapshot() {
     return JSON.stringify(
-      this.latestUniqNonResetKnowledgeElements.map((ke) => _.omit(ke, ['id', 'assessmentId', 'userId'])),
+      this.latestUniqNonResetKnowledgeElements.map((ke) =>
+        _.pick(ke, ['createdAt', 'source', 'status', 'earnedPix', 'skillId', 'competenceId']),
+      ),
     );
   }
 }

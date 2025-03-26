@@ -192,6 +192,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
             id: undefined,
             assessmentId: undefined,
             userId: undefined,
+            answerId: undefined,
           },
         ],
       });
@@ -241,6 +242,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
             id: undefined,
             assessmentId: undefined,
             userId: undefined,
+            answerId: undefined,
           },
         ],
         [secondCampaignParticipationId]: [
@@ -249,6 +251,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
             id: undefined,
             assessmentId: undefined,
             userId: undefined,
+            answerId: undefined,
           },
         ],
       });
@@ -362,6 +365,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
               id: undefined,
               assessmentId: undefined,
               userId: undefined,
+              answerId: undefined,
             },
           ],
           campaignParticipationId: campaignParticipationId1,
@@ -373,6 +377,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
               id: undefined,
               assessmentId: undefined,
               userId: undefined,
+              answerId: undefined,
             },
           ],
           campaignParticipationId: campaignParticipationId2,
@@ -384,6 +389,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
               id: undefined,
               assessmentId: undefined,
               userId: undefined,
+              answerId: undefined,
             },
           ],
           campaignParticipationId: campaignParticipationId3,

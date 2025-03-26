@@ -18,7 +18,7 @@ describe('Unit | Domain | Models | KnowledgeElementCollection', function () {
       });
       const keCollection = new KnowledgeElementCollection([ke1]);
       expect(keCollection.toSnapshot()).equal(
-        '[{"createdAt":"2025-01-10T00:00:00.000Z","source":"direct","status":"validated","earnedPix":4,"answerId":1,"skillId":"rec1","competenceId":5}]',
+        '[{"createdAt":"2025-01-10T00:00:00.000Z","source":"direct","status":"validated","earnedPix":4,"skillId":"rec1","competenceId":5}]',
       );
     });
 
@@ -43,7 +43,7 @@ describe('Unit | Domain | Models | KnowledgeElementCollection', function () {
       expect(snapshot).equals('[]');
     });
 
-    it('should drop id, userId, skillId', function () {
+    it('should drop id, userId, assessmentId, answerId', function () {
       const ke1 = buildKnowledgeElement({
         skillId: 'rec1',
         competenceId: 5,
@@ -52,6 +52,8 @@ describe('Unit | Domain | Models | KnowledgeElementCollection', function () {
         answerId: 1,
         assessmentId: 2,
         id: 1,
+        source: KnowledgeElement.SourceType.DIRECT,
+        status: KnowledgeElement.StatusType.VALIDATED,
         userId: 1,
       });
       const keCollection = new KnowledgeElementCollection([ke1]);
@@ -59,6 +61,7 @@ describe('Unit | Domain | Models | KnowledgeElementCollection', function () {
       expect(snapshot).not.match(/"userId":/i);
       expect(snapshot).not.match(/"id":/i);
       expect(snapshot).not.match(/"assessmentId":/i);
+      expect(snapshot).not.match(/"answerId":/i);
     });
   });
 
