@@ -48,6 +48,9 @@ export class MeshConfiguration {
     return { key: currentMesh.value[0], value: currentMesh.value[1] };
   }
 
+  /**
+   * @deprecated please use {@link MeshConfiguration#findMeshFromScore}
+   */
   findIntervalIndexFromScore({ score }) {
     const configuration = this.MESH_CONFIGURATION.values();
     let cumulativeSumOfWeights = configuration.next().value.weight;

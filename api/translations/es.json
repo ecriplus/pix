@@ -40,43 +40,39 @@
     "global": {
       "meshlevel": {
         "LEVEL_ADVANCED_5": {
-          "label": "Avanzado 1",
-          "summary": "Tienes competencias digitales avanzadas y conocimientos sólidos que te permiten afrontar nuevas situaciones por ti mismo. Puedes ayudar a los demás.",
-          "description": "Eres capaz de utilizar herramientas especializadas para buscar información fiable, gestionar redes sociales y editar imágenes y vídeos. Sabes elaborar análisis de datos y representaciones gráficas adecuadas. Sabes configurar un entorno digital (instalación y configuración). Conoces las cuestiones relacionadas con el seguimiento y la recopilación de datos. Comprendes las repercusiones medioambientales y sociales del uso digital y sabes cómo adaptar tus prácticas."
+          "description": "You are able to use specialist tools to search for reliable information, manage social networks and edit images and videos. You know how to produce data analyses and appropriate graphic representations. You know how to set up a digital environment (installation and configuration). You are familiar with the issues surrounding tracking and data collection. You understand the environmental and societal impacts of digital usage and know how to adapt your practices",
+          "label": "Advanced 1",
+          "summary": "You have advanced digital skills and sound knowledge enabling you to deal with new situations on your own. You can help others."
         },
         "LEVEL_ADVANCED_6": {
-          "label": "Avanzado 2",
-          "summary": "Tienes competencias digitales avanzadas y conocimientos profundos que puedes poner en práctica, para ti o para otros, de forma creativa y segura. Puedes ayudar a otras personas a desarrollar sus competencias.",
-          "description": "Tienes pleno control de tu entorno digital para crear y distribuir contenidos, comunicarte y colaborar. Sabe cómo gestionar su presencia en línea y elegir la configuración adecuada para sus emisiones. Puedes programar y automatizar determinadas tareas (tratamiento de datos, copias de seguridad, actualización, etc.). Puedes ayudar a otros a asegurar sus prácticas y, en particular, a limitar su impacto medioambiental y sanitario."
+          "description": "You have full control over your digital environment so that you can create and distribute content, communicate and collaborate. You know how to manage your online presence and choose the right settings for your broadcasts. You can programme and automate certain tasks (data processing, backup, updating, etc.). You can help others to secure their practices, and in particular limit their environmental and health impact.",
+          "label": "Advanced 2",
+          "summary": "You have advanced digital skills and in-depth knowledge that you can put to good use, for yourself or others, in a creative and secure way. You can help other people develop their skills."
         },
         "LEVEL_BEGINNER_1": {
-          "label": "Principiante 1",
-          "summary": "Tiene prácticas digitales sencillas y a menudo necesita ayuda",
-          "description": "Puede orientarse en las interfaces de las herramientas digitales que ya ha utilizado (teléfono, tableta, ordenador). Con ayuda ocasional, puedes visitar un sitio web, leer y responder mensajes (mensajes de texto, correos electrónicos, etc.), utilizar aplicaciones sencillas en tu teléfono o tableta y acceder a servicios en línea."
+          "description": "You can find your way around the interfaces of the digital tools you've already used (phone, tablet, computer). With occasional support, you can visit a website, read and reply to messages (text messages, emails, etc.), use simple applications on your phone or tablet and access online services.",
+          "label": "Beginner 1",
+          "summary": "You have simple digital practices and often need help"
         },
         "LEVEL_BEGINNER_2": {
-          "label": "Principiante 2",
-          "summary": "Tienes prácticas digitales sencillas, con ayuda cuando las cosas se ponen difíciles.",
-          "description": "En tu entorno digital habitual, sabes buscar información en la web, descargar un archivo y volver a encontrarlo, consultar y enviar mensajes electrónicos y conectar tus dispositivos a internet (ordenadores, tabletas, teléfonos). Sabes introducir texto con un formato sencillo y guardarlo. Sabes que algunas informaciones publicadas en internet son falsas y que es importante proteger tus cuentas con contraseñas seguras."
+          "description": "In your usual digital environment, you know how to search for information on the web, download a file and find it again, consult and send electronic messages and connect your devices to the internet (computers, tablets, phones). You can enter text with simple formatting and save it. You know that some information published online is false and that it is important to protect your accounts with secure passwords.",
+          "label": "Beginner 2",
+          "summary": "You have simple digital practices, with help when the going gets tough."
         },
         "LEVEL_EXPERT_7": {
-          "label": "Experto 1",
-          "summary": "Posee prácticas digitales optimizadas y conocimientos especializados que le permiten abordar metódicamente situaciones nuevas y complejas.",
-          "description": "Serás capaz de analizar una necesidad, consultar documentación, incluso técnica, y evaluar soluciones digitales para aplicar la más óptima, o incluso desarrollar herramientas por ti mismo. Comprenderás las cuestiones económicas, sociales y éticas asociadas a las tecnologías digitales y serás capaz de reflexionar críticamente sobre tus prácticas digitales. Podrás formarte en nuevas técnicas y dominar los avances tecnológicos más recientes, como los que posibilita la inteligencia artificial."
-        },
-        "LEVEL_EXPERT_8": {
-          "label": "Experto 2",
-          "summary": "Podrá documentar sus soluciones a problemas nuevos y específicos para que puedan compartirse."
+          "description": "You will be able to analyse a need, consult documentation, even technical documentation, and evaluate digital solutions in order to implement the most optimal solution, or even develop tools yourself. You will understand the economic, social and ethical issues associated with digital technologies and be able to think critically about your digital practices. You will be able to train in new techniques and have a good grasp of the most recent technological advances, such as those made possible by artificial intelligence.",
+          "label": "Expert 1",
+          "summary": "You have optimised digital practices and expert knowledge enabling you to tackle complex and new situations methodically."
         },
         "LEVEL_INDEPENDENT_3": {
-          "label": "Independiente 1",
-          "summary": "Podrá realizar tareas digitales sencillas de forma autónoma en la mayoría de las situaciones cotidianas.",
-          "description": "Sabes navegar por Internet para realizar investigaciones en profundidad utilizando información relevante. Sabes participar en actividades colaborativas (correo electrónico, agenda compartida, reuniones de vídeo, documentos compartidos). Sabes utilizar las funciones más habituales de los programas informáticos estándar (tratamiento de textos y hojas de cálculo). Eres consciente de los riesgos asociados a tus prácticas digitales y de la necesidad de protegerlas, así como del impacto medioambiental de tus usos digitales. Sabes resolver problemas habituales (contraseña, conexión)."
+          "description": "You know how to surf the Web to carry out in-depth research using relevant information. You can take part in collaborative activities (e-mail, shared diary, video meetings, shared documents). You know how to use the most common functions of standard software (word processing and spreadsheets). You are aware of the risks associated with your digital practices and the need to secure them, as well as the environmental impact of your digital uses. You know how to solve common problems (password, connection).",
+          "label": "Independent 1",
+          "summary": "You will be able to carry out simple digital tasks independently in most everyday situations."
         },
         "LEVEL_INDEPENDENT_4": {
-          "label": "Independiente 2",
-          "summary": "Se desenvuelve con soltura en todas las situaciones digitales habituales y domina el vocabulario asociado a las tecnologías digitales.",
-          "description": "Sabes establecer una estrategia de búsqueda de información en la web y a través de las redes sociales y comprobar la fiabilidad de la información que encuentras. Sabes utilizar las principales funciones de las herramientas de colaboración y crear documentos utilizando distintos programas informáticos (tratamiento de textos, hojas de cálculo, presentaciones de diapositivas, imágenes). Puedes aplicar prácticas seguras en materia de protección de datos personales y de dispositivos. Puedes adaptar tus prácticas digitales para limitar su impacto en el medio ambiente y en tu salud."
+          "description": "You know how to set up an information search strategy on the web and via social networks and check the reliability of the information you find. You can use the main functions of collaborative tools and create documents using different software (word processing, spreadsheets, slideshows, images). You can implement secure practices in terms of personal data and device protection. You can adapt your digital practices to limit their impact on the environment and on your health.",
+          "label": "Independent 2",
+          "summary": "You are at ease in all common digital situations and have a good command of the vocabulary associated with digital technologies."
         }
       }
     }
