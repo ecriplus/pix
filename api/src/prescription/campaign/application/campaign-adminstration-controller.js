@@ -4,11 +4,23 @@ import { usecases } from '../../../../src/prescription/campaign/domain/usecases/
 import * as checkAdminMemberHasRoleSuperAdminUseCase from '../../../shared/application/usecases/checkAdminMemberHasRoleSuperAdmin.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import * as csvSerializer from '../../../shared/infrastructure/serializers/csv/csv-serializer.js';
+import { generateCSVTemplate } from '../../../shared/infrastructure/serializers/csv/csv-template.js';
 import * as requestResponseUtils from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import * as csvCampaignsIdsParser from '../infrastructure/serializers/csv/csv-campaigns-ids-parser.js';
 import * as campaignManagementSerializer from '../infrastructure/serializers/jsonapi/campaign-management-serializer.js';
 import * as campaignReportSerializer from '../infrastructure/serializers/jsonapi/campaign-report-serializer.js';
+
+const getTemplateForCreateCampaigns = (request, h) => {
+  const fields = csvSerializer.requiredFieldNamesForCampaignsImport;
+  const csvTemplateFileContent = generateCSVTemplate(fields);
+
+  return h
+    .response(csvTemplateFileContent)
+    .header('Content-Type', 'text/csv; charset=utf-8')
+    .header('content-disposition', 'filename=create-campaigns')
+    .code(200);
+};
 
 const createCampaigns = async function (request, h, dependencies = { csvSerializer }) {
   const campaignsToCreate = await dependencies.csvSerializer.deserializeForCampaignsImport(request.payload.path);
@@ -157,6 +169,7 @@ const campaignAdministrationController = {
   archiveCampaigns,
   unarchiveCampaign,
   deleteCampaigns,
+  getTemplateForCreateCampaigns,
 };
 
 export { campaignAdministrationController };

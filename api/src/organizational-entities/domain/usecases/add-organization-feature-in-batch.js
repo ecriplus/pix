@@ -4,37 +4,12 @@
 
 import { createReadStream } from 'node:fs';
 
-import { CsvColumn } from '../../../../src/shared/infrastructure/serializers/csv/csv-column.js';
 import { getDataBuffer } from '../../../prescription/learner-management/infrastructure/utils/bufferize/get-data-buffer.js';
 import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { CsvParser } from '../../../shared/infrastructure/serializers/csv/csv-parser.js';
+import { ORGANIZATION_FEATURES_HEADER } from '../constants.js';
 import { FeatureParamsNotProcessable } from '../errors.js';
 import { OrganizationFeature } from '../models/OrganizationFeature.js';
-
-const organizationFeatureCsvHeader = {
-  columns: [
-    new CsvColumn({
-      property: 'featureId',
-      name: 'Feature ID',
-      isRequired: true,
-    }),
-    new CsvColumn({
-      property: 'organizationId',
-      name: 'Organization ID',
-      isRequired: true,
-    }),
-    new CsvColumn({
-      property: 'params',
-      name: 'Params',
-      isRequired: false,
-    }),
-    new CsvColumn({
-      property: 'deleteLearner',
-      name: 'Delete Learner',
-      isRequired: false,
-    }),
-  ],
-};
 
 export const addOrganizationFeatureInBatch = withTransaction(
   /**
@@ -49,7 +24,7 @@ export const addOrganizationFeatureInBatch = withTransaction(
     const stream = createReadStream(filePath);
     const buffer = await getDataBuffer(stream);
 
-    const csvParser = new CsvParser(buffer, organizationFeatureCsvHeader);
+    const csvParser = new CsvParser(buffer, ORGANIZATION_FEATURES_HEADER);
     const csvData = csvParser.parse();
     const data = csvData.map(({ featureId, organizationId, params, deleteLearner }) => {
       try {

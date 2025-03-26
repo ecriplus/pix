@@ -6,11 +6,13 @@ import { t } from 'ember-intl';
 import ENV from 'pix-admin/config/environment';
 
 import AdministrationBlockLayout from '../block-layout';
+import DownloadTemplate from '../download-template';
 
 export default class AddOrganizationFeaturesInBatch extends Component {
   @service intl;
   @service pixToast;
   @service session;
+  @service fileSaver;
   @service errorResponseHandler;
 
   @action
@@ -49,14 +51,18 @@ export default class AddOrganizationFeaturesInBatch extends Component {
       @title={{t "components.administration.add-organization-features-in-batch.title"}}
       @description={{t "components.administration.add-organization-features-in-batch.description"}}
     >
-      <PixButtonUpload
-        @id="organizations-batch-update-file-upload"
-        @onChange={{this.addOrganizationFeaturesInBatch}}
-        @variant="secondary"
-        accept=".csv"
-      >
-        {{t "components.administration.add-organization-features-in-batch.upload-button"}}
-      </PixButtonUpload>
+      <div class="csv-import">
+        <DownloadTemplate @url="/api/admin/organizations/add-organization-features/template">
+          <PixButtonUpload
+            @id="organizations-batch-update-file-upload"
+            @onChange={{this.addOrganizationFeaturesInBatch}}
+            @variant="secondary"
+            accept=".csv"
+          >
+            {{t "components.administration.add-organization-features-in-batch.upload-button"}}
+          </PixButtonUpload>
+        </DownloadTemplate>
+      </div>
     </AdministrationBlockLayout>
   </template>
 }
