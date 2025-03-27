@@ -746,6 +746,7 @@
           }
         },
         "tabs": {
+          "aria-label": "Navigation de la section détails d'une session",
           "details": "Détails"
         },
         "title": "Session {sessionId}"
@@ -1044,6 +1045,7 @@
         "actions": "Actions"
       },
       "tabs": {
+        "aria-label": "Navigation de la section équipe",
         "invitation": "Invitations ({count, plural, =0 {-} other {{count}}})",
         "member": "Membres ({count, plural, =0 {-} other {{count}}})"
       },
