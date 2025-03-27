@@ -41,9 +41,11 @@ const generateV3AttestationTemplate = ({ pdf, data, translate }) => {
     .font('Roboto-Regular')
     .fontSize(11)
     .text(
-      translate('certification.attestation.v3.main-content.certification-center', {
-        certificationCenter: data.certificationCenter,
-      }),
+      _formatText(
+        translate('certification.attestation.v3.main-content.certification-center', {
+          certificationCenter: data.certificationCenter,
+        }),
+      ),
       {
         width: 380,
         lineGap: 2,
@@ -68,23 +70,30 @@ const generateV3AttestationTemplate = ({ pdf, data, translate }) => {
     .font('Roboto-Regular')
     .fontSize(11)
     .text(
-      translate('certification.attestation.v3.main-content.birth', {
-        birthdate,
-        birthplace: data.birthplace,
-      }).replaceAll('&#x2F;', '/'),
+      _formatText(
+        translate('certification.attestation.v3.main-content.birth', {
+          birthdate,
+          birthplace: data.birthplace,
+        }),
+      ),
     );
-  pdf.font('Roboto-Regular').fontSize(11).text(
-    translate('certification.attestation.v3.main-content.delivered-at.date', {
-      deliveredAt,
-    }).replaceAll('&#x2F;', '/'),
-    82,
-    364,
-  );
   pdf
     .font('Roboto-Regular')
     .fontSize(11)
+    .text(
+      _formatText(
+        translate('certification.attestation.v3.main-content.delivered-at.date', {
+          deliveredAt,
+        }),
+      ),
+      82,
+      364,
+    );
+  pdf
+    .font('Roboto-Regular')
+    .fontSize(10)
     .fillColor('#6b778b')
-    .text(translate('certification.attestation.v3.main-content.signature'), 82, 438);
+    .text(translate('certification.attestation.v3.main-content.signature'), 82, 440);
 
   // QR code content
   pdf.font('Roboto-Medium').fontSize(11).fillColor('#5e6c84').text(data.verificationCode, 142, 467).moveDown(0.25);
