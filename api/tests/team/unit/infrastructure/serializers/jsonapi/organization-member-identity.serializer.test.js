@@ -1,10 +1,10 @@
-import * as serializer from '../../../../../lib/infrastructure/serializers/jsonapi/organization-member-identity-serializer.js';
-import { OrganizationMemberIdentity } from '../../../../../src/shared/domain/models/OrganizationMemberIdentity.js';
-import { expect } from '../../../../test-helper.js';
+import { OrganizationMemberIdentity } from '../../../../../../src/shared/domain/models/index.js';
+import * as serializer from '../../../../../../src/team/infrastructure/serializers/jsonapi/organization-member-identity.serializer.js';
+import { expect } from '../../../../../test-helper.js';
 
-describe('Unit | Serializer | organization-members-serializer', function () {
+describe('Unit | Serializer | JSONAPI | organization-members-serializer', function () {
   describe('#serialize', function () {
-    it('should return a JSON API serialized organization members', function () {
+    it('returns a JSON API serialized organization members', function () {
       // given
       const organizationMember1 = new OrganizationMemberIdentity({
         id: 123,

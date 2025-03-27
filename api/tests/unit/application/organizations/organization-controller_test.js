@@ -101,31 +101,6 @@ describe('Unit | Application | Organizations | organization-controller', functio
     });
   });
 
-  describe('#getOrganizationMemberIdentities', function () {
-    it('should return all members identities of the organization serialized', async function () {
-      // given
-      const organizationId = 1234;
-      const members = Symbol('members');
-      const serializedMembersIdentities = Symbol('members serialized');
-
-      sinon.stub(usecases, 'getOrganizationMemberIdentities').withArgs({ organizationId }).returns(members);
-      const organizationMemberIdentitySerializerStub = {
-        serialize: sinon.stub(),
-      };
-      const dependencies = {
-        organizationMemberIdentitySerializer: organizationMemberIdentitySerializerStub,
-      };
-      organizationMemberIdentitySerializerStub.serialize.withArgs(members).returns(serializedMembersIdentities);
-
-      // when
-      const request = { params: { id: organizationId } };
-      const result = await organizationController.getOrganizationMemberIdentities(request, hFake, dependencies);
-
-      // then
-      expect(result).to.be.equal(serializedMembersIdentities);
-    });
-  });
-
   describe('#findChildrenOrganizationsForAdmin', function () {
     it('calls findChildrenOrganizationsForAdmin usecase and returns a serialized list of organizations', async function () {
       // given

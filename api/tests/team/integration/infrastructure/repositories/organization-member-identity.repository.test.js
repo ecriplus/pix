@@ -1,10 +1,10 @@
-import * as organizationMemberIdentityRepository from '../../../../lib/infrastructure/repositories/organization-member-identity-repository.js';
-import { OrganizationMemberIdentity } from '../../../../src/shared/domain/models/OrganizationMemberIdentity.js';
-import { databaseBuilder, expect } from '../../../test-helper.js';
+import { OrganizationMemberIdentity } from '../../../../../src/shared/domain/models/index.js';
+import * as organizationMemberIdentityRepository from '../../../../../src/team/infrastructure/repositories/organization-member-identity.repository.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 
-describe('Integration | Repository | organizationMemberIdentityRepository', function () {
+describe('Integration | Team | Infrastructure | Repository | organizationMemberIdentityRepository', function () {
   describe('#findAllByOrganizationId', function () {
-    it('should return only actives members identities', async function () {
+    it('returns only actives members identities', async function () {
       // given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const activeMemberId = databaseBuilder.factory.buildUser({ firstName: 'Jean', lastName: 'Némard' }).id;
@@ -24,7 +24,7 @@ describe('Integration | Repository | organizationMemberIdentityRepository', func
       expect(members[0].lastName).to.equal('Némard');
     });
 
-    it('should return only members of the organization', async function () {
+    it('returns only members of the organization', async function () {
       // given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const otherOrganizationId = databaseBuilder.factory.buildOrganization().id;
@@ -49,7 +49,7 @@ describe('Integration | Repository | organizationMemberIdentityRepository', func
       expect(members[0].id).to.deep.equal(activeMemberId);
     });
 
-    it('should return members sorted by firstName and lastName', async function () {
+    it('returns members sorted by firstName and lastName', async function () {
       // given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const activeMemberId = databaseBuilder.factory.buildUser({ firstName: 'Jean', lastName: 'Némard' }).id;
@@ -94,7 +94,7 @@ describe('Integration | Repository | organizationMemberIdentityRepository', func
       expect(members[3]).to.deep.equal(expectedMember4);
     });
 
-    it('should return an empty array if organization has no members', async function () {
+    it('returns an empty array if organization has no members', async function () {
       // given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       await databaseBuilder.commit();
@@ -108,7 +108,7 @@ describe('Integration | Repository | organizationMemberIdentityRepository', func
       expect(result).to.be.deep.equal([]);
     });
 
-    it('should return an empty array if organization does not exists', async function () {
+    it('returns an empty array if organization does not exists', async function () {
       // given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const wrongOrganizationId = organizationId + 1;
