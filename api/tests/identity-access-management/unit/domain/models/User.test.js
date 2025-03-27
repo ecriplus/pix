@@ -586,6 +586,35 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
     });
   });
 
+  describe('#isActive', function () {
+    it('return true when user isAnonymous (without real account)', function () {
+      // given
+      const user = domainBuilder.buildUser({ isAnonymous: true });
+
+      // when
+      // then
+      expect(user.isActive).to.be.true;
+    });
+
+    it('return true when user hasBeenAnonymized (user demand to delete his account)', function () {
+      // given
+      const user = domainBuilder.buildUser({ isAnonymous: false, hasBeenAnonymised: true });
+
+      // when
+      // then
+      expect(user.isActive).to.be.true;
+    });
+
+    it('return false when user not Anonymous and still active ', function () {
+      // given
+      const user = domainBuilder.buildUser({ isAnonymous: false, hasBeenAnonymised: false });
+
+      // when
+      // then
+      expect(user.isActive).to.be.false;
+    });
+  });
+
   describe('#mapToDatabaseDto', function () {
     it('maps user model into user database DTO', function () {
       // given
