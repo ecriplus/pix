@@ -1,9 +1,17 @@
+import Joi from 'joi';
+
 import { CriterionProperty } from './CriterionProperty.js';
+
+const schema = Joi.object({ data: Joi.object().pattern(Joi.string(), Joi.object()).required() });
 
 export class Criterion {
   #properties;
 
-  constructor({ data }) {
+  constructor(args) {
+    this.#validate(args);
+
+    const { data } = args;
+
     this.#properties = Object.keys(data).map((key) => {
       const property = data[key];
       return new CriterionProperty({
@@ -12,6 +20,10 @@ export class Criterion {
         comparison: property.comparison,
       });
     });
+  }
+
+  #validate(args) {
+    schema.validate(args);
   }
 
   get data() {
