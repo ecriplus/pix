@@ -113,52 +113,60 @@ const generateV3AttestationTemplate = ({ pdf, data, translate }) => {
     width: 84,
     align: 'center',
   });
-  pdf
-    .font('Roboto-Regular')
-    .fontSize(11)
-    .fillColor('#6b778b')
-    .text(translate('certification.attestation.v3.score-content.global-level'), 550, 195, {
-      width: 205,
-      align: 'center',
-    });
 
   const globalLevel = data.globalLevel;
-  const globalLevelLabel = globalLevel.getLevelLabel(translate);
-  pdf
-    .roundedRect(
-      650 - (pdf.widthOfString(globalLevelLabel) * 2) / 2,
-      212,
-      pdf.widthOfString(globalLevelLabel) * 2,
-      24,
-      24,
-    )
-    .fill('#6712FF');
-  pdf
-    .font('Nunito-Bold')
-    .fontSize(14)
-    .fillColor('#FFFFFF')
-    .text(globalLevelLabel, 650 - (pdf.widthOfString(globalLevelLabel) * 2) / 2, 214, {
-      width: pdf.widthOfString(globalLevelLabel) * 2,
-      align: 'center',
-    });
 
-  const globalLevelSummary = globalLevel.getSummaryLabel(translate);
-  const globalLevelDescription = globalLevel.getDescriptionLabel(translate);
-  pdf
-    .font('Nunito-Bold')
-    .fontSize(11)
-    .fillColor('#253858')
-    .text(translate('certification.attestation.v3.score-content.level-explanation'), 530, 250, {
-      width: 250,
-    })
-    .moveDown(0.5)
-    .font('Roboto-Medium')
-    .fontSize(9.5)
-    .text(globalLevelSummary)
-    .moveDown(0.5)
-    .font('Roboto-Regular')
-    .fontSize(9.5)
-    .text(globalLevelDescription);
+  if (globalLevel.meshLevel !== 'LEVEL_PRE_BEGINNER') {
+    pdf
+      .font('Roboto-Regular')
+      .fontSize(11)
+      .fillColor('#6b778b')
+      .text(translate('certification.attestation.v3.score-content.global-level'), 550, 195, {
+        width: 205,
+        align: 'center',
+      });
+
+    const globalLevelLabel = globalLevel.getLevelLabel(translate);
+    pdf
+      .roundedRect(
+        652 - (pdf.widthOfString(globalLevelLabel) * 2) / 2,
+        212,
+        pdf.widthOfString(globalLevelLabel) * 2,
+        24,
+        24,
+      )
+      .fill('#6712FF');
+    pdf
+      .font('Nunito-Bold')
+      .fontSize(14)
+      .fillColor('#FFFFFF')
+      .text(globalLevelLabel, 652 - (pdf.widthOfString(globalLevelLabel) * 2) / 2, 214, {
+        width: pdf.widthOfString(globalLevelLabel) * 2,
+        align: 'center',
+      });
+
+    const globalLevelSummary = globalLevel.getSummaryLabel(translate);
+    const globalLevelDescription = globalLevel.getDescriptionLabel(translate);
+    pdf
+      .font('Nunito-Bold')
+      .fontSize(11)
+      .fillColor('#253858')
+      .text(translate('certification.attestation.v3.score-content.level-explanation'), 530, 250, {
+        width: 250,
+      })
+      .moveDown(0.5)
+      .font('Roboto-Medium')
+      .fontSize(9.5)
+      .text(globalLevelSummary)
+      .moveDown(0.5)
+      .font('Roboto-Regular')
+      .fontSize(9.5)
+      .text(globalLevelDescription);
+  }
+
+  function _formatText(content) {
+    return content.replaceAll('&#x2F;', '/');
+  }
 };
 
 export default generateV3AttestationTemplate;
