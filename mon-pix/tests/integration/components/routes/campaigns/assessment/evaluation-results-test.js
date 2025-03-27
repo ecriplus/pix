@@ -7,7 +7,7 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../../../helpers/setup-intl-rendering';
-import { waitForDialogClose } from '../../../../../helpers/wait-for';
+import { waitForDialog, waitForDialogClose } from '../../../../../helpers/wait-for';
 
 module('Integration | Components | Routes | Campaigns | Assessment | Evaluation Results', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -218,6 +218,80 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
           // then
           assert.dom(screen.queryByRole('dialog', { name: 'Résultats partagés' })).doesNotExist();
         });
+      });
+    });
+    module('when clicking on the share results button in hero', function () {
+      test('it should display the evaluation-sent-results modal with first 3 trainings', async function (assert) {
+        // given
+        class FeatureTogglesStub extends Service {
+          featureToggles = { isModalSentResultEnabled: true };
+        }
+        this.owner.register('service:featureToggles', FeatureTogglesStub);
+        this.model.trainings = [
+          {
+            title: 'Mon super training 1 youhou',
+            link: 'https://training.net/',
+            type: 'webinaire',
+            locale: 'fr-fr',
+            duration: { hours: 6 },
+            editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
+            editorLogoUrl:
+              'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
+          },
+          {
+            title: 'Mon super training 2 youhou',
+            link: 'https://training.net/',
+            type: 'webinaire',
+            locale: 'fr-fr',
+            duration: { hours: 12 },
+            editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
+            editorLogoUrl:
+              'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
+          },
+          {
+            title: 'Mon super training 3 youhou',
+            link: 'https://training.net/',
+            type: 'webinaire',
+            locale: 'fr-fr',
+            duration: { hours: 6 },
+            editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
+            editorLogoUrl:
+              'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
+          },
+          {
+            title: 'Mon super training 4 youhou',
+            link: 'https://training.net/',
+            type: 'webinaire',
+            locale: 'fr-fr',
+            duration: { hours: 6 },
+            editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
+            editorLogoUrl:
+              'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
+          },
+        ];
+        this.model.campaignParticipationResult.isShared = false;
+        this.model.campaignParticipationResult.competenceResults = [Symbol('competences')];
+        this.model.campaign.isForAbsoluteNovice = false;
+
+        const store = this.owner.lookup('service:store');
+        const adapter = store.adapterFor('campaign-participation-result');
+        const shareStub = sinon.stub(adapter, 'share');
+        shareStub.resolves();
+
+        // when
+        screen = await render(hbs`<Routes::Campaigns::Assessment::EvaluationResults @model={{this.model}} />`);
+        await click(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') }));
+        await waitForDialog();
+        const sharedResultsModal = await screen.getByRole('dialog', { name: 'Résultats partagés' });
+
+        // then
+        assert.dom(await screen.findByRole('button', { name: 'Fermer et revenir aux résultats' })).exists();
+        assert
+          .dom(within(sharedResultsModal).queryByRole('heading', { level: 3, name: 'Mon super training 1 youhou' }))
+          .exists();
+        assert
+          .dom(within(sharedResultsModal).queryByRole('heading', { level: 3, name: 'Mon super training 4 youhou' }))
+          .doesNotExist();
       });
     });
   });

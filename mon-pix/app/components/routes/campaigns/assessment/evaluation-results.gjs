@@ -76,6 +76,7 @@ export default class EvaluationResults extends Component {
         @hasTrainings={{this.hasTrainings}}
         @showTrainings={{this.showTrainings}}
         @isSharableCampaign={{this.isSharableCampaign}}
+        @onResultsShared={{this.shareResults}}
       />
       <EvaluationResultsTabs
         @campaign={{@model.campaign}}
