@@ -21,7 +21,7 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/organizations/{organizationId}/campaigns',
       config: {
-        auth: { access: { scope: 'meta' } },
+        auth: { access: { scope: 'campaigns' } },
         validate: {
           params: Joi.object({
             organizationId: identifiersType.organizationId,
@@ -29,7 +29,7 @@ const register = async function (server) {
         },
         pre: [organizationPreHandler, isOrganizationInJurisdictionPreHandler],
         handler: getOrganizationCampaigns,
-        notes: ["- Retourne la liste des campaignes de l'organisation fournie"],
+        notes: ["- Retourne la liste des campaignes de l'organisation donnée"],
         tags: ['api', 'meta'],
       },
     },

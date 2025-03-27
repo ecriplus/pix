@@ -92,7 +92,7 @@ describe('Acceptance | Maddo | Route | Organizations', function () {
         method: 'GET',
         url: `/api/organizations/${orgaInJurisdiction.id}/campaigns`,
         headers: {
-          authorization: generateValidRequestAuthorizationHeaderForApplication(clientId, 'pix-client', 'meta'),
+          authorization: generateValidRequestAuthorizationHeaderForApplication(clientId, 'pix-client', 'campaigns'),
         },
       };
 
