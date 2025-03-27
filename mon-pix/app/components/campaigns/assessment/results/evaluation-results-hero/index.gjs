@@ -107,6 +107,8 @@ export default class EvaluationResultsHero extends Component {
 
       await this.campaignParticipationResult.share(campaignParticipationResult, this.args.questResults);
 
+      this.args.onResultsShared();
+
       campaignParticipationResult.isShared = true;
       campaignParticipationResult.canImprove = false;
 

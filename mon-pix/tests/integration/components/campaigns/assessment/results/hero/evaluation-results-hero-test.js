@@ -225,7 +225,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
       });
 
       module('on click on the share button', function (hooks) {
-        let campaignParticipationResult, screen, shareStub;
+        let campaignParticipationResult, onResultsSharedStub, screen, shareStub;
 
         hooks.beforeEach(async function () {
           // given
@@ -248,12 +248,16 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           campaignParticipationResult.id = 'campaignParticipationResultId';
           this.set('campaignParticipationResult', campaignParticipationResult);
 
+          onResultsSharedStub = sinon.stub();
+          this.set('onResultsShared', onResultsSharedStub);
+
           // when
           screen = await render(
             hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
   @campaign={{this.campaign}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
   @isSharableCampaign={{true}}
+  @onResultsShared={{this.onResultsShared}}
 />`,
           );
         });
@@ -274,6 +278,17 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
           assert.dom(screen.queryByText(t('pages.skill-review.hero.explanations.improve'))).doesNotExist();
           assert.dom(screen.queryByRole('button', { name: t('pages.skill-review.actions.improve') })).doesNotExist();
+        });
+
+        test('on success, it should call the onResultsShared function', async function (assert) {
+          // given
+          shareStub.resolves();
+
+          // when
+          await click(screen.getByRole('button', { name: t('pages.skill-review.actions.send') }));
+
+          // then
+          assert.true(onResultsSharedStub.calledOnce);
         });
 
         test('on fail, it should display an error', async function (assert) {
@@ -566,6 +581,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         });
         campaignParticipationResult.id = 'campaignParticipationResultId';
         this.set('campaignParticipationResult', campaignParticipationResult);
+        this.set('onResultsShared', sinon.stub());
 
         campaign = this.set('campaign', { organizationId: 1, code: 'ABC' });
 
@@ -575,6 +591,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
   @campaign={{this.campaign}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
   @isSharableCampaign={{true}}
+  @onResultsShared={{this.onResultsShared}}
 />`,
         );
       });
