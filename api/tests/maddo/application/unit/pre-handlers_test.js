@@ -98,7 +98,10 @@ describe('Unit | Maddo | Application | pre handlers', function () {
       };
 
       const getCampaignOrganizationId = sinon.stub();
-      getCampaignOrganizationId.withArgs('campaignInJurisdictionId').resolves('orgaInJuridictionId');
+      getCampaignOrganizationId
+        .rejects()
+        .withArgs({ campaignId: 'campaignInJurisdictionId' })
+        .resolves('orgaInJuridictionId');
 
       // when
       const prehandlerResult = await isCampaignInJurisdictionPreHandler.method(request, hFake, {
@@ -121,7 +124,10 @@ describe('Unit | Maddo | Application | pre handlers', function () {
       };
 
       const getCampaignOrganizationId = sinon.stub();
-      getCampaignOrganizationId.withArgs('campaignNotInJurisdictionId').resolves('orgaNotInJuridictionId');
+      getCampaignOrganizationId
+        .rejects()
+        .withArgs({ campaignId: 'campaignNotInJurisdictionId' })
+        .resolves('orgaNotInJuridictionId');
 
       // when
       const prehandlerResult = await isCampaignInJurisdictionPreHandler.method(request, hFake, {
@@ -141,7 +147,10 @@ describe('Unit | Maddo | Application | pre handlers', function () {
       };
 
       const getCampaignOrganizationId = sinon.stub();
-      getCampaignOrganizationId.withArgs('campaignNotInJurisdictionId').resolves('orgaNotInJuridictionId');
+      getCampaignOrganizationId
+        .rejects()
+        .withArgs({ campaignId: 'campaignNotInJurisdictionId' })
+        .resolves('orgaNotInJuridictionId');
 
       // when
       const prehandlerResult = await isCampaignInJurisdictionPreHandler.method(request, hFake, {

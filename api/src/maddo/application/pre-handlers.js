@@ -20,8 +20,13 @@ export const isOrganizationInJurisdictionPreHandler = {
 };
 
 export const isCampaignInJurisdictionPreHandler = {
-  method: async function (request, h, dependencies) {
-    const organizationId = await dependencies.getCampaignOrganizationId(request.params.campaignId);
+  method: async function (
+    request,
+    h,
+    dependencies = { getCampaignOrganizationId: usecases.getCampaignOrganizationId },
+  ) {
+    const { campaignId } = request.params;
+    const organizationId = await dependencies.getCampaignOrganizationId({ campaignId });
     return isOrganizationInJurisdiction(request.pre?.organizationIds, organizationId, h);
   },
 };
