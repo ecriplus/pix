@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 
+import { categories } from '../../../../../src/shared/domain/models/TargetProfile.js';
 import {
   REAL_PIX_SUPER_ADMIN_ID,
   USER_ID_ADMIN_ORGANIZATION,
@@ -39,7 +40,13 @@ export default async function initUser(databaseBuilder) {
       isSimplifiedAccess: true,
       name: `Profil-cible pour parcours autonome n°${i}`,
       description: 'Profil cible pour parcours autonome',
-      category: ['Les 16 compétences', 'Thématiques', 'Parcours sur-mesure', 'Parcours prédéfinis', 'Autres'][i - 1],
+      category: [
+        categories.COMPETENCES,
+        categories.SUBJECT,
+        categories.CUSTOM,
+        categories.PREDEFINED,
+        categories.OTHER,
+      ][i - 1],
       configTargetProfile: {
         frameworks: [
           {
