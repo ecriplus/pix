@@ -28,6 +28,12 @@ export class FixValidatedLiveAlertCertificationChallengeIds extends Script {
           demandOption: false,
           default: 100,
         },
+        startingFromDate: {
+          type: 'date',
+          describe: 'allows to run the script only for certification-courses that happened after the given date',
+          demandOption: true,
+          default: new Date(2024, 10, 4),
+        },
       },
     });
 
@@ -39,7 +45,9 @@ export class FixValidatedLiveAlertCertificationChallengeIds extends Script {
     const dryRun = options.dryRun;
     const batchSize = options.batchSize;
     const delayInMs = options.delayBetweenBatch;
-    this.logger.info(`dryRun=${dryRun}`);
+    const startingFromDate = options.startingFromDate;
+
+    this.logger.info({ dryRun, batchSize, delayInMs, startingFromDate });
 
     let hasNext = true;
     let cursorId = 0;
@@ -50,6 +58,7 @@ export class FixValidatedLiveAlertCertificationChallengeIds extends Script {
         const courseIds = await this.#getCourseIds({
           cursorId,
           batchSize,
+          startingFromDate,
           transaction,
         });
 
@@ -173,12 +182,14 @@ export class FixValidatedLiveAlertCertificationChallengeIds extends Script {
     };
   }
 
-  #getCourseIds({ cursorId, batchSize, transaction }) {
+  #getCourseIds({ cursorId, batchSize, startingFromDate, transaction }) {
+    this.logger.debug({ cursorId, batchSize, startingFromDate });
     return transaction
       .select('id')
       .from('certification-courses')
       .where('certification-courses.id', '>', cursorId)
       .andWhere('certification-courses.version', '=', AlgorithmEngineVersion.V3)
+      .andWhere('certification-courses.createdAt', '>', startingFromDate)
       .orderBy('certification-courses.id')
       .limit(batchSize);
   }
