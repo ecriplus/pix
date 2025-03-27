@@ -9,7 +9,7 @@ describe('Integration | Scripts | Certification | fix-validated-live-alert-certi
       it('should fix the capacities challenges ids', async function () {
         // given
         const certificationCourseId = 321;
-        const options = { dryRun: false, batchSize: 10 };
+        const options = { dryRun: false, batchSize: 10, startingFromDate: new Date(2024, 10, 4) };
         const logger = {
           info: sinon.stub(),
           debug: sinon.stub(),
@@ -20,6 +20,7 @@ describe('Integration | Scripts | Certification | fix-validated-live-alert-certi
           id: certificationCourseId,
           userId: user.id,
           version: AlgorithmEngineVersion.V3,
+          createdAt: new Date(2024, 10, 5),
         });
         const assessment = databaseBuilder.factory.buildAssessment({
           certificationCourseId: certificationCourse.id,
