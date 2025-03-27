@@ -5,8 +5,6 @@ class CampaignParticipation {
     participantExternalId,
     status,
     sharedAt,
-    deletedAt,
-    deletedBy,
     campaignId,
     userId,
     organizationLearnerId,

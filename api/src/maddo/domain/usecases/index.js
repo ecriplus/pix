@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
+import * as campaignParticipationRepository from '../../infrastructure/repositories/campaign-participation-repository.js';
 import * as campaignRepository from '../../infrastructure/repositories/campaign-repository.js';
 import * as clientApplicationRepository from '../../infrastructure/repositories/client-application-repository.js';
 import * as organizationRepository from '../../infrastructure/repositories/organization-repository.js';
@@ -13,6 +14,7 @@ const dependencies = {
   clientApplicationRepository,
   organizationRepository,
   campaignRepository,
+  campaignParticipationRepository,
 };
 
 const usecasesWithoutInjectedDependencies = {
