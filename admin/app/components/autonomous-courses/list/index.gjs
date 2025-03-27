@@ -1,4 +1,6 @@
+import PixFilterBanner from '@1024pix/pix-ui/components/pix-filter-banner';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
 import { fn } from '@ember/helper';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
@@ -29,48 +31,29 @@ export default class AutonomousCoursesList extends Component {
   }
 
   <template>
-    <div class="content-text content-text--small">
-      <div class="table-admin">
-        <table>
-          <caption class="screen-reader-only">{{t "components.autonomous-courses.list.title"}}</caption>
-          <thead>
-            <tr>
-              <th scope="col" class="table__column table__column--id">{{t
-                  "components.autonomous-courses.list.headers.id"
-                }}</th>
-              <th scope="col">{{t "components.autonomous-courses.list.headers.name"}}</th>
-              <th scope="col" class="table__column table__medium">{{t
-                  "components.autonomous-courses.list.headers.createdAt"
-                }}</th>
-              <th scope="col" class="table__column table__medium">{{t
-                  "components.autonomous-courses.list.headers.status"
-                }}</th>
-            </tr>
-            <tr>
-              <td>
-                <PixInput type="text" oninput={{fn this.triggerFiltering "id"}} placeholder="Filtrer par ID" />
-              </td>
-              <td>
-                <PixInput type="text" oninput={{fn this.triggerFiltering "name"}} placeholder="Filtrer par nom" />
-              </td>
-              <td></td>
-              <td></td>
-            </tr>
-          </thead>
+    <div class="page-with-table">
+      <PixFilterBanner @title={{t "common.filters.title"}}>
+        <PixInput oninput={{fn this.triggerFiltering "id"}} aria-label="Filtrer par ID">
+          <:label>{{t "components.autonomous-courses.list.headers.id"}}</:label>
+        </PixInput>
+        <PixInput oninput={{fn this.triggerFiltering "name"}} aria-label="Filtrer par nom">
+          <:label>{{t "components.autonomous-courses.list.headers.name"}}</:label>
+        </PixInput>
+      </PixFilterBanner>
 
-          {{#if this.filteredItems}}
-            <tbody>
-              {{#each this.filteredItems as |autonomousCourseListItem|}}
-                <ListItem @item={{autonomousCourseListItem}} />
-              {{/each}}
-            </tbody>
-          {{/if}}
-        </table>
-
-        {{#unless @items}}
-          <div class="table__empty">{{t "components.autonomous-courses.list.no-result"}}</div>
-        {{/unless}}
-      </div>
+      {{#if @items}}
+        <PixTable
+          @variant="admin"
+          @data={{this.filteredItems}}
+          @caption={{t "components.autonomous-courses.list.title"}}
+        >
+          <:columns as |autonomousCourseListItem context|>
+            <ListItem @item={{autonomousCourseListItem}} @context={{context}} />
+          </:columns>
+        </PixTable>
+      {{else}}
+        <div class="table__empty">{{t "components.autonomous-courses.list.no-result"}}</div>
+      {{/if}}
     </div>
   </template>
 }

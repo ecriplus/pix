@@ -786,6 +786,11 @@
             }
           }
         },
+        "neutralization": {
+          "table": {
+            "caption": "Liste des questions passées par le candidats. Contient l'identifiant et le RecId de l'épreuve associé. Une action permet de neutraliser ou de dé-neutraliser les questions."
+          }
+        },
         "result": {
           "table": {
             "headers": {
@@ -983,6 +988,13 @@
         "label": "Allow resetting for evaluation-type campaigns when multiple submissions are enabled for the organisation"
       },
       "tubes-count": "Number of subjects included in this target profile"
+    },
+    "team": {
+      "list": {
+        "table": {
+          "caption": "Liste des membres interne de Pix ayant accès à Pix Admin. Contient le nom, prénom, adresse e-mail et le rôle (CERTIF, METIER, SUPPPORT ou ADMIN). Des actions permettent de modifier le rôle ou de désactiver le membre"
+        }
+      }
     },
     "trainings": {
       "training": {

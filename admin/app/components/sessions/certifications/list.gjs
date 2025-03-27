@@ -108,7 +108,7 @@ export default class CertificationsHeader extends Component {
 
       <PixPagination @pagination={{@pagination}} />
     {{else}}
-      <p class="certification-list-page__empty">{{t "common.tables.empty-result"}}</p>
+      <p class="tables__empty">{{t "common.tables.empty-result"}}</p>
     {{/if}}
   </template>
 }

@@ -1,9 +1,9 @@
-import { render } from '@1024pix/ember-testing-library';
+import { render, within } from '@1024pix/ember-testing-library';
 import { fillIn } from '@ember/test-helpers';
 import List from 'pix-admin/components/autonomous-courses/list';
 import { module, test } from 'qunit';
 
-import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest, { t } from '../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | AutonomousCourses | List', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -27,20 +27,21 @@ module('Integration | Component | AutonomousCourses | List', function (hooks) {
     const screen = await render(<template><List @items={{autonomousCoursesList}} /></template>);
 
     // then
-    assert.dom(screen.getByText('Id')).exists();
-    assert.dom(screen.getByText('1002')).exists();
-    assert.dom(screen.getByText('1001')).exists();
+    const table = screen.getByRole('table', { name: t('components.autonomous-courses.list.title') });
+    assert.dom(within(table).getByRole('columnheader', { name: 'Id' })).exists();
+    assert.dom(within(table).getByRole('cell', { name: '1002' })).exists();
+    assert.dom(within(table).getByRole('cell', { name: '1001' })).exists();
 
-    assert.dom(screen.getByText('Nom')).exists();
+    assert.dom(within(table).getByRole('columnheader', { name: 'Nom' })).exists();
     assert.dom(screen.getByRole('link', { name: 'Parcours autonome 2023' })).exists();
     assert.dom(screen.getByRole('link', { name: 'Parcours autonome 2020' })).exists();
 
-    assert.dom(screen.getByText('Date de création')).exists();
-    assert.dom(screen.getByText('01/01/2023')).exists();
-    assert.dom(screen.getByText('01/01/2020')).exists();
+    assert.dom(within(table).getByRole('columnheader', { name: 'Date de création' })).exists();
+    assert.dom(within(table).getByRole('cell', { name: '01/01/2023' })).exists();
+    assert.dom(within(table).getByRole('cell', { name: '01/01/2020' })).exists();
 
-    assert.dom(screen.getByText('Statut')).exists();
-    assert.strictEqual(screen.getAllByText('Actif').length, 2);
+    assert.dom(within(table).getByRole('columnheader', { name: 'Statut' })).exists();
+    assert.strictEqual(within(table).getAllByText('Actif').length, 2);
   });
 
   test('it should display a autonomous course with archived tag', async function (assert) {
@@ -80,7 +81,7 @@ module('Integration | Component | AutonomousCourses | List', function (hooks) {
 
       // when
       const screen = await render(<template><List @items={{autonomousCoursesList}} /></template>);
-      await fillIn(screen.getByPlaceholderText('Filtrer par ID'), 9);
+      await fillIn(screen.getByRole('textbox', { name: 'Filtrer par ID' }), 9);
 
       // then
       assert.dom(screen.getByText('Parcours autonome avec un 9 dedans')).exists();
@@ -105,7 +106,7 @@ module('Integration | Component | AutonomousCourses | List', function (hooks) {
 
       // when
       const screen = await render(<template><List @items={{autonomousCoursesList}} /></template>);
-      await fillIn(screen.getByPlaceholderText('Filtrer par nom'), 'qui va être filtré');
+      await fillIn(screen.getByRole('textbox', { name: 'Filtrer par nom' }), 'qui va être filtré');
 
       // then
       assert.dom(screen.getByText('Parcours autonome qui va être filtré')).exists();
