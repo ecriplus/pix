@@ -24,12 +24,8 @@ export default class RequirementForm extends Component {
   @tracked formFields = null;
 
   get requirementTypeOptions() {
-    return [
-      { value: 'organization', label: 'Organization' },
-      { value: 'organizationLearner', label: 'Organization Learner' },
-      { value: 'campaignParticipations', label: 'Participation' },
-      { value: 'cappedTubes', label: 'Tubes cappés' },
-    ];
+    console.log(Object.values(objectConfigurations));
+    return Object.values(objectConfigurations).map(({ name, label }) => ({ value: name, label }));
   }
 
   get configurationForSelectedRequirement() {

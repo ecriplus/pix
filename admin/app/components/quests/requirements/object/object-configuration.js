@@ -1,6 +1,7 @@
 class ObjectConfiguration {
-  constructor({ name, refersToAnArray, fieldConfigurations, mergeFields = false }) {
+  constructor({ name, label, refersToAnArray, fieldConfigurations, mergeFields = false }) {
     this.name = name;
+    this.label = label;
     this.refersToAnArray = refersToAnArray;
     this.fieldConfigurations = fieldConfigurations;
     this.mergeFields = mergeFields;
@@ -111,6 +112,7 @@ const organizationConfigField_type = new FieldConfiguration({
 });
 const organizationConfiguration = new ObjectConfiguration({
   name: 'organization',
+  label: 'Organisation',
   refersToAnArray: false,
   fieldConfigurations: [
     organizationConfigField_isManagingStudents,
@@ -128,6 +130,7 @@ const organizationLearnerConfigField_MEFCode = new FieldConfiguration({
 });
 const organizationLearnerConfiguration = new ObjectConfiguration({
   name: 'organizationLearner',
+  label: 'Organization learner',
   refersToAnArray: false,
   fieldConfigurations: [organizationLearnerConfigField_MEFCode],
 });
@@ -152,6 +155,7 @@ const campaignParticipationsConfigField_status = new FieldConfiguration({
 
 const campaignParticipationsConfiguration = new ObjectConfiguration({
   name: 'campaignParticipations',
+  label: 'Participations',
   refersToAnArray: true,
   fieldConfigurations: [
     campaignParticipationsConfigField_targetProfileId,
@@ -177,6 +181,7 @@ const cappedTubeConfiguration_threshold = new FieldConfiguration({
 
 const cappedTubeConfiguration = new ObjectConfiguration({
   name: 'cappedTubes',
+  label: 'Tubes cappés',
   refersToAnArray: true,
   mergeFields: true,
   fieldConfigurations: [cappedTubeConfiguration_cappedTubes, cappedTubeConfiguration_threshold],
