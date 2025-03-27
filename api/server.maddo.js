@@ -6,8 +6,9 @@ import { setupErrorHandling } from './config/server-setup-error-handling.js';
 import { knex } from './db/knex-database-connection.js';
 import { authentication } from './lib/infrastructure/authentication.js';
 import { identityAccessManagementRoutes } from './src/identity-access-management/application/routes.js';
-import * as organizationRoutes from './src/maddo/application/organizations-routes.js';
-import * as replicationRoutes from './src/maddo/application/replications-routes.js';
+import * as campaignsRoutes from './src/maddo/application/campaigns-routes.js';
+import * as organizationsRoutes from './src/maddo/application/organizations-routes.js';
+import * as replicationsRoutes from './src/maddo/application/replications-routes.js';
 import { Metrics } from './src/monitoring/infrastructure/metrics.js';
 import * as healthcheckRoutes from './src/shared/application/healthcheck/index.js';
 import { config } from './src/shared/config.js';
@@ -180,7 +181,13 @@ const setupAuthentication = function (server) {
 };
 
 const setupRoutesAndPlugins = async function (server) {
-  const routes = [healthcheckRoutes, ...identityAccessManagementRoutes, replicationRoutes, organizationRoutes];
+  const routes = [
+    ...identityAccessManagementRoutes,
+    campaignsRoutes,
+    healthcheckRoutes,
+    organizationsRoutes,
+    replicationsRoutes,
+  ];
   const routesWithOptions = routes.map((route) => ({
     plugin: route,
     options: { tags: ['maddo'] },

@@ -22,6 +22,11 @@ export async function findByOrganizationId(organizationId) {
   return rawCampaigns.map(toDomain);
 }
 
+export async function getOrganizationId(campaignId) {
+  const [organizationId] = await knex.pluck('organizationId').from('campaigns').where('id', campaignId);
+  return organizationId;
+}
+
 function toDomain(rawCampaign) {
   return new Campaign(rawCampaign);
 }
