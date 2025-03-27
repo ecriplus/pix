@@ -1,3 +1,5 @@
+import Joi from 'joi';
+
 import { Criterion } from './Criterion.js';
 
 export const COMPARISONS = {
@@ -48,11 +50,20 @@ class BaseRequirement {
   }
 }
 
+const composeRequirementSchema = Joi.object({
+  data: Joi.array().items(Joi.object()).required(),
+  comparison: Joi.string()
+    .valid(...Object.values(COMPARISONS))
+    .required(),
+});
+
 export class ComposedRequirement extends BaseRequirement {
   #subRequirements = null;
 
-  constructor({ data, comparison }) {
+  constructor(args) {
+    const { data, comparison } = args;
     super({ requirement_type: TYPES.COMPOSE, comparison });
+    this.#validate(args);
     this.#subRequirements = data.map((subRequirement) => {
       if (subRequirement instanceof BaseRequirement) {
         return subRequirement;
@@ -63,6 +74,10 @@ export class ComposedRequirement extends BaseRequirement {
         comparison: subRequirement.comparison,
       });
     });
+  }
+
+  #validate(args) {
+    composeRequirementSchema.validate(args);
   }
 
   get data() {
@@ -89,12 +104,29 @@ export class ComposedRequirement extends BaseRequirement {
   }
 }
 
+const objectRequirementSchema = Joi.object({
+  requirement_type: Joi.string()
+    .valid(...Object.values(TYPES.OBJECT))
+    .required(),
+  data: Joi.object().required(),
+  comparison: Joi.string()
+    .valid(...Object.values(COMPARISONS))
+    .required(),
+});
+
 export class ObjectRequirement extends BaseRequirement {
   #criterion;
 
-  constructor({ requirement_type, data, comparison }) {
+  constructor(args) {
+    const { requirement_type, data, comparison } = args;
+
     super({ requirement_type, comparison });
+    this.#validate(args);
     this.#criterion = data instanceof Criterion ? data : new Criterion({ data });
+  }
+
+  #validate(args) {
+    objectRequirementSchema.validate(args);
   }
 
   get data() {
@@ -168,14 +200,30 @@ export class SkillProfileRequirement extends BaseRequirement {
   }
 }
 
+const cappedTubesRequirementSchema = Joi.object({
+  requirement_type: TYPES.CAPPED_TUBES,
+  data: Joi.object({
+    cappedTubes: Joi.array()
+      .items(Joi.object({ tubeId: Joi.string().required(), level: Joi.number().required() }))
+      .required(),
+    threshold: Joi.number().min(0).max(100).required(),
+  }).required(),
+});
+
 export class CappedTubesRequirement extends BaseRequirement {
   #cappedTubes;
   #threshold;
 
-  constructor({ data }) {
+  constructor(args) {
+    const { data } = args;
     super({ requirement_type: TYPES.CAPPED_TUBES, comparison: null });
+    this.#validate(args);
     this.#cappedTubes = data.cappedTubes;
     this.#threshold = data.threshold;
+  }
+
+  #validate(args) {
+    cappedTubesRequirementSchema.validate(args);
   }
 
   /**
