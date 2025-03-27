@@ -1,24 +1,20 @@
-import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../src/identity-access-management/domain/constants/identity-providers.js';
-import {
-  MissingOrInvalidCredentialsError,
-  PasswordNotMatching,
-  UserShouldChangePasswordError,
-} from '../../../src/identity-access-management/domain/errors.js';
-import { AuthenticationMethod } from '../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
 import {
   UnexpectedUserAccountError,
   UserAlreadyExistsWithAuthenticationMethodError,
   UserNotFoundError,
-} from '../../../src/shared/domain/errors.js';
+} from '../../../shared/domain/errors.js';
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
+import { MissingOrInvalidCredentialsError, PasswordNotMatching, UserShouldChangePasswordError } from '../errors.js';
+import { AuthenticationMethod } from '../models/AuthenticationMethod.js';
 
 /**
- * typedef { function } authenticateExternalUser
  * @param {Object} params
  * @param {string} params.username
  * @param {string} params.password
  * @param {string} params.externalUserToken
  * @param {string} params.audience
  * @param {number} params.expectedUserId
+ * @param {RequestedApplication} params.requestedApplication,
  * @param {TokenService} params.tokenService
  * @param {PixAuthenticationService} params.pixAuthenticationService
  * @param {ObfuscationService} params.obfuscationService
@@ -26,15 +22,15 @@ import {
  * @param {UserRepository} params.userRepository
  * @param {UserLoginRepository} params.userLoginRepository
  * @param {LastUserApplicationConnectionsRepository} params.lastUserApplicationConnectionsRepository,
- * @param {RequestedApplication} params.requestedApplication,
  * @returns {Promise<*>}
  */
-async function authenticateExternalUser({
+async function authenticateForSaml({
   username,
   password,
   externalUserToken,
   audience,
   expectedUserId,
+  requestedApplication,
   tokenService,
   pixAuthenticationService,
   obfuscationService,
@@ -42,7 +38,6 @@ async function authenticateExternalUser({
   userRepository,
   userLoginRepository,
   lastUserApplicationConnectionsRepository,
-  requestedApplication,
 }) {
   try {
     const userFromCredentials = await pixAuthenticationService.getUserByUsernameAndPassword({
@@ -55,10 +50,7 @@ async function authenticateExternalUser({
       const expectedUser = await userRepository.getForObfuscation(expectedUserId);
       const authenticationMethod = await obfuscationService.getUserAuthenticationMethodWithObfuscation(expectedUser);
 
-      throw new UnexpectedUserAccountError({
-        message: undefined,
-        meta: { value: authenticationMethod.value },
-      });
+      throw new UnexpectedUserAccountError({ message: undefined, meta: { value: authenticationMethod.value } });
     }
 
     await _addGarAuthenticationMethod({
@@ -76,16 +68,14 @@ async function authenticateExternalUser({
 
     const token = tokenService.createAccessTokenForSaml({ userId: userFromCredentials.id, audience });
 
-    await userLoginRepository.updateLastLoggedAt({ userId: userFromCredentials.id });
-    await lastUserApplicationConnectionsRepository.upsert({
-      userId: userFromCredentials.id,
-      application: requestedApplication.applicationName,
-      lastLoggedAt: new Date(),
+    await _updateLastLoggedDates({
+      user: userFromCredentials,
+      requestedApplication,
+      userLoginRepository,
+      authenticationMethodRepository,
+      lastUserApplicationConnectionsRepository,
     });
-    await authenticationMethodRepository.updateLastLoggedAtByIdentityProvider({
-      userId: userFromCredentials.id,
-      identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
-    });
+
     return token;
   } catch (error) {
     if (error instanceof UserNotFoundError || error instanceof PasswordNotMatching) {
@@ -107,22 +97,40 @@ async function _addGarAuthenticationMethod({
   await _checkIfSamlIdIsNotReconciledWithAnotherUser({ samlId, userId, userRepository });
 
   const garAuthenticationMethod = new AuthenticationMethod({
+    userId,
     identityProvider: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
     externalIdentifier: samlId,
-    userId,
-    authenticationComplement: new AuthenticationMethod.GARAuthenticationComplement({
-      firstName,
-      lastName,
-    }),
+    authenticationComplement: new AuthenticationMethod.GARAuthenticationComplement({ firstName, lastName }),
   });
   await authenticationMethodRepository.create({ authenticationMethod: garAuthenticationMethod });
 }
 
-const _checkIfSamlIdIsNotReconciledWithAnotherUser = async ({ samlId, userId, userRepository }) => {
+async function _checkIfSamlIdIsNotReconciledWithAnotherUser({ samlId, userId, userRepository }) {
   const userFromCredentialsBySamlId = await userRepository.getBySamlId(samlId);
   if (userFromCredentialsBySamlId && userFromCredentialsBySamlId.id !== userId) {
     throw new UserAlreadyExistsWithAuthenticationMethodError();
   }
-};
+}
 
-export { authenticateExternalUser };
+async function _updateLastLoggedDates({
+  user,
+  requestedApplication,
+  userLoginRepository,
+  authenticationMethodRepository,
+  lastUserApplicationConnectionsRepository,
+}) {
+  await userLoginRepository.updateLastLoggedAt({ userId: user.id });
+
+  await lastUserApplicationConnectionsRepository.upsert({
+    userId: user.id,
+    application: requestedApplication.applicationName,
+    lastLoggedAt: new Date(),
+  });
+
+  await authenticationMethodRepository.updateLastLoggedAtByIdentityProvider({
+    userId: user.id,
+    identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
+  });
+}
+
+export { authenticateForSaml };
