@@ -80,18 +80,21 @@ export default class QuestForm extends Component {
       const snippets = JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY)) ?? {
         objectRequirementsByLabel: {},
       };
-      const eligibilityRequirements = this.popToRootToPip(
+      const eligibilityRequirements = this.buildArrayRequirement(
         this.eligibilityRequirementsStr,
         snippets.objectRequirementsByLabel,
       );
 
-      const successRequirements = this.popToRootToPip(this.successRequirementsStr, snippets.objectRequirementsByLabel);
+      const successRequirements = this.buildArrayRequirement(
+        this.successRequirementsStr,
+        snippets.objectRequirementsByLabel,
+      );
 
       const questToJson = JSON.stringify({
         rewardId: parseInt(this.rewardId),
         rewardType: this.rewardType,
-        eligibilityRequirements: [eligibilityRequirements],
-        successRequirements: successRequirements ? [successRequirements] : [],
+        eligibilityRequirements: eligibilityRequirements,
+        successRequirements: successRequirements,
       });
 
       console.log(questToJson);
@@ -121,7 +124,7 @@ export default class QuestForm extends Component {
       ALL(ONE-OF(A,B),C) ---> Le jeton d'opération (all ou one-of) se trouve au début, et en arguments
       on trouve la liste des opérandes.
    */
-  popToRootToPip(str, objectRequirementsByLabel) {
+  buildArrayRequirement(str, objectRequirementsByLabel) {
     // Dictionnaire des "mots" qui correspondent à des requirements feuilles
     // qu'on pourrait retrouver dans la formule
     const snippetNames = Object.keys(objectRequirementsByLabel);
@@ -248,7 +251,7 @@ export default class QuestForm extends Component {
         </PixButtonLink>
 
         <PixButton @size="small" @variant="success" @triggerAction={{this.copyEligibilityRequirementsToClipboard}}>
-          Mettre le json des requirements d'éligibilité dans le presse-papiers
+          Copiez le JSON de quête dans le presse-papiers
         </PixButton>
       </div>
     </section>

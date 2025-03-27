@@ -93,6 +93,11 @@ const organizationConfigField_isManagingStudents = new FieldConfiguration({
   refersToAnArray: false,
   allowedValues: ['true', 'false'],
 });
+const organizationConfigField_id = new FieldConfiguration({
+  name: 'id',
+  type: FieldConfiguration.TYPES.NUMBER,
+  refersToAnArray: false,
+});
 const organizationConfigField_tags = new FieldConfiguration({
   name: 'tags',
   type: FieldConfiguration.TYPES.STRING,
@@ -111,6 +116,7 @@ const organizationConfiguration = new ObjectConfiguration({
     organizationConfigField_isManagingStudents,
     organizationConfigField_tags,
     organizationConfigField_type,
+    organizationConfigField_id,
   ],
 });
 
@@ -171,7 +177,7 @@ const cappedTubeConfiguration_threshold = new FieldConfiguration({
 
 const cappedTubeConfiguration = new ObjectConfiguration({
   name: 'cappedTubes',
-  refersToAnArray: false,
+  refersToAnArray: true,
   mergeFields: true,
   fieldConfigurations: [cappedTubeConfiguration_cappedTubes, cappedTubeConfiguration_threshold],
 });
