@@ -1,3 +1,4 @@
+import { Campaign } from '../../../../src/maddo/domain/models/Campaign.js';
 import { Organization } from '../../../../src/maddo/domain/models/Organization.js';
 import {
   createMaddoServer,
@@ -49,6 +50,87 @@ describe('Acceptance | Maddo | Route | Organizations', function () {
         new Organization({ id: orgaInJurisdiction.id, name: orgaInJurisdiction.name }),
         new Organization({ id: orgaAlsoInJurisdiction.id, name: orgaAlsoInJurisdiction.name }),
       ]);
+    });
+  });
+
+  describe('GET /api/organizations/{organizationId}/campaigns', function () {
+    let orgaInJurisdiction, orgaAlsoInJurisdiction, orgaNotInJurisdiction;
+    let clientId;
+
+    beforeEach(async function () {
+      orgaInJurisdiction = databaseBuilder.factory.buildOrganization({ name: 'orga-in-jurisdiction' });
+      orgaAlsoInJurisdiction = databaseBuilder.factory.buildOrganization({ name: 'orga-also-in-jurisdiction' });
+      orgaNotInJurisdiction = databaseBuilder.factory.buildOrganization({ name: 'orga-not-in-jurisdiction' });
+
+      const tag = databaseBuilder.factory.buildTag();
+      databaseBuilder.factory.buildOrganizationTag({ organizationId: orgaInJurisdiction.id, tagId: tag.id });
+      databaseBuilder.factory.buildOrganizationTag({ organizationId: orgaAlsoInJurisdiction.id, tagId: tag.id });
+
+      clientId = 'client';
+      databaseBuilder.factory.buildClientApplication({
+        clientId: 'client',
+        jurisdiction: { rules: [{ name: 'tags', value: [tag.name] }] },
+      });
+      await databaseBuilder.commit();
+    });
+
+    it('returns the list of all campaigns belonging to organization in the client jurisdiction with an HTTP status code 200', async function () {
+      // given
+      const targetProfile = databaseBuilder.factory.buildTargetProfile();
+      const campaign1InJurisdiction = databaseBuilder.factory.buildCampaign({
+        organizationId: orgaInJurisdiction.id,
+        targetProfileId: targetProfile.id,
+      });
+      databaseBuilder.factory.buildCampaign({
+        organizationId: orgaAlsoInJurisdiction.id,
+      });
+      databaseBuilder.factory.buildCampaign({ organizationId: orgaNotInJurisdiction.id });
+
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: `/api/organizations/${orgaInJurisdiction.id}/campaigns`,
+        headers: {
+          authorization: generateValidRequestAuthorizationHeaderForApplication(clientId, 'pix-client', 'meta'),
+        },
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result).to.deep.equal([
+        new Campaign({
+          id: campaign1InJurisdiction.id,
+          name: campaign1InJurisdiction.name,
+          organizationId: orgaInJurisdiction.id,
+          organizationName: orgaInJurisdiction.name,
+          type: campaign1InJurisdiction.type,
+          targetProfileId: targetProfile.id,
+          targetProfileName: targetProfile.name,
+          code: campaign1InJurisdiction.code,
+          createdAt: campaign1InJurisdiction.createdAt,
+        }),
+      ]);
+    });
+
+    it('responds with an HTTP Forbidden when organization is not in jurisdiction', async function () {
+      // given
+      const options = {
+        method: 'GET',
+        url: `/api/organizations/${orgaNotInJurisdiction.id}/campaigns`,
+        headers: {
+          authorization: generateValidRequestAuthorizationHeaderForApplication(clientId, 'pix-client', 'meta'),
+        },
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(403);
     });
   });
 });

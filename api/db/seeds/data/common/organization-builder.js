@@ -37,6 +37,7 @@ async function _createScoOrganization(databaseBuilder) {
       { id: FEATURE_COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY_ID },
       { id: FEATURE_MULTIPLE_SENDING_ASSESSMENT_ID },
     ],
+    tagIds: [COLLEGE_TAG.id],
   });
 
   await organization.createOrganization({
@@ -52,7 +53,6 @@ async function _createScoOrganization(databaseBuilder) {
       { id: FEATURE_MULTIPLE_SENDING_ASSESSMENT_ID },
       { id: FEATURE_ATTESTATIONS_MANAGEMENT_ID, params: JSON.stringify([ATTESTATIONS.SIXTH_GRADE]) },
     ],
-    tagIds: [COLLEGE_TAG.id],
   });
 
   await organization.createOrganization({
