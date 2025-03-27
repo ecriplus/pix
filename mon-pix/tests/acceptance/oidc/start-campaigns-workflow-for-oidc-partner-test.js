@@ -7,7 +7,6 @@ import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { currentSession } from 'ember-simple-auth/test-support';
-import { Response } from 'miragejs';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -70,28 +69,12 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
         const state = 'state';
         const session = currentSession();
         session.set('data.state', state);
-        this.server.post('oidc/token', () => {
-          return new Response(
-            401,
-            {},
-            {
-              errors: [
-                {
-                  code: 'SHOULD_VALIDATE_CGU',
-                  meta: {
-                    authenticationKey: 'key',
-                  },
-                },
-              ],
-            },
-          );
-        });
 
         // when
         const screen = await visit(`/connexion/oidc-partner?code=test&state=${state}`);
 
         // then
-        assert.strictEqual(currentURL(), `/connexion/oidc?authenticationKey=key&identityProviderSlug=oidc-partner`);
+        assert.strictEqual(currentURL(), `/connexion/oidc?identityProviderSlug=oidc-partner`);
         assert.ok(screen.getByRole('heading', { name: t('pages.login-or-register-oidc.title') }));
       });
 
@@ -106,7 +89,8 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
         sessionStorage.setItem('campaigns', JSON.stringify(data));
 
         // when
-        const screen = await visit(`/connexion/oidc?authenticationKey=key&identityProviderSlug=oidc-partner`);
+        const screen = await visit(`/connexion/oidc?identityProviderSlug=oidc-partner`);
+
         await click(screen.getByRole('checkbox', { name: t('common.cgu.label') }));
         await click(screen.getByRole('button', { name: 'Je crée mon compte' }));
 

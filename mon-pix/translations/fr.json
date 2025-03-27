@@ -1550,8 +1550,11 @@
         "button": "Je crée mon compte",
         "description": "Un compte va être créé à partir des éléments transmis par l'organisme",
         "information": {
-          "family-name": "Nom : {familyName}",
-          "given-name": "Prénom : {givenName}"
+          "employeeNumber": "Numéro d'employé :",
+          "error": "Nous n’avons pas pu récupérer vos informations d’identité auprès du service utilisé. Nous vous invitons à contacter le support informatique de cette organisation.",
+          "firstName": "Prénom :",
+          "lastName": "Nom :",
+          "population": "Population :"
         },
         "title": "Je n’ai pas de compte Pix"
       },
