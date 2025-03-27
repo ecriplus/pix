@@ -87,7 +87,7 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
   });
 
   module('when the campaign has not been shared yet and has trainings', function () {
-    module('when clicking on the share results button', function () {
+    module('when clicking on the share results button in the "formations" tab', function () {
       test('it should display the evaluation-sent-results modal with first 3 trainings', async function (assert) {
         // given
         class FeatureTogglesStub extends Service {
