@@ -116,7 +116,8 @@ const findUniqByUserIdGroupedByCompetenceId = async function ({ userId, limitDat
 };
 
 const findInvalidatedAndDirectByUserId = async function ({ userId }) {
-  const invalidatedKnowledgeElements = await knex(tableName)
+  const knexConn = DomainTransaction.getConnection();
+  const invalidatedKnowledgeElements = await knexConn(tableName)
     .where({
       userId,
       status: KnowledgeElement.StatusType.INVALIDATED,

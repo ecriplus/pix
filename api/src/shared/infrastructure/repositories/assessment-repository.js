@@ -1,20 +1,20 @@
 import lodash from 'lodash';
 
-import { knex } from '../../../../db/knex-database-connection.js';
 import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
-import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
-import { NotFoundError } from '../../../shared/domain/errors.js';
-import { Assessment } from '../../domain/models/Assessment.js';
+import { DomainTransaction } from '../../domain/DomainTransaction.js';
+import { NotFoundError } from '../../domain/errors.js';
+import { Assessment } from '../../domain/models/index.js';
 
 const { groupBy, map, head, uniqBy, omit } = lodash;
 
 const getWithAnswers = async function (id) {
-  const [assessment] = await knex('assessments').where('assessments.id', id);
+  const knexConn = DomainTransaction.getConnection();
+  const [assessment] = await knexConn('assessments').where('assessments.id', id);
   if (!assessment) {
     throw new NotFoundError(`Assessment not found for ID ${id}`);
   }
 
-  const answers = await knex('answers')
+  const answers = await knexConn('answers')
     .select('id', 'challengeId', 'value')
     .where('assessmentId', id)
     .orderBy('createdAt');
@@ -39,7 +39,8 @@ const get = async function (id) {
 };
 
 const findLastCompletedAssessmentsForEachCompetenceByUser = async function (userId, limitDate) {
-  const lastCompletedAssessments = await knex('assessments')
+  const knexConn = DomainTransaction.getConnection();
+  const lastCompletedAssessments = await knexConn('assessments')
     .select('assessments.*')
     .join('assessment-results', 'assessment-results.assessmentId', 'assessments.id')
     .where({ 'assessments.userId': userId })
@@ -54,7 +55,8 @@ const findLastCompletedAssessmentsForEachCompetenceByUser = async function (user
 };
 
 const getByAssessmentIdAndUserId = async function (assessmentId, userId) {
-  const assessment = await knex('assessments').where({ id: assessmentId, userId }).first();
+  const knexConn = DomainTransaction.getConnection();
+  const assessment = await knexConn('assessments').where({ id: assessmentId, userId }).first();
   if (!assessment) throw new NotFoundError();
   return new Assessment({
     ...assessment,
@@ -73,7 +75,8 @@ const save = async function ({ assessment }) {
 };
 
 const findNotAbortedCampaignAssessmentsByUserId = async function (userId) {
-  const assessmentDTOs = await knex('assessments')
+  const knexConn = DomainTransaction.getConnection();
+  const assessmentDTOs = await knexConn('assessments')
     .where({ userId, type: 'CAMPAIGN' })
     .andWhere('state', '!=', 'aborted');
   const assessments = [];
@@ -110,7 +113,8 @@ const endBySupervisorByAssessmentId = function (assessmentId) {
 };
 
 const getByCertificationCandidateId = async function (certificationCandidateId) {
-  const assessment = await knex('assessments')
+  const knexConn = DomainTransaction.getConnection();
+  const assessment = await knexConn('assessments')
     .select('assessments.*')
     .innerJoin('certification-courses', 'certification-courses.id', 'assessments.certificationCourseId')
     .innerJoin('certification-candidates', function () {
@@ -125,7 +129,8 @@ const getByCertificationCandidateId = async function (certificationCandidateId) 
 };
 
 const ownedByUser = async function ({ id, userId = null }) {
-  const assessment = await knex('assessments').select('userId').where({ id }).first();
+  const knexConn = DomainTransaction.getConnection();
+  const assessment = await knexConn('assessments').select('userId').where({ id }).first();
 
   if (!assessment) {
     return false;
@@ -147,7 +152,8 @@ const _updateStateById = async function ({ id, state }) {
 };
 
 const updateLastQuestionDate = async function ({ id, lastQuestionDate }) {
-  const [assessmentUpdated] = await knex('assessments')
+  const knexConn = DomainTransaction.getConnection();
+  const [assessmentUpdated] = await knexConn('assessments')
     .where({ id })
     .update({ lastQuestionDate, updatedAt: new Date() })
     .returning('*');
@@ -155,7 +161,8 @@ const updateLastQuestionDate = async function ({ id, lastQuestionDate }) {
 };
 
 const updateWhenNewChallengeIsAsked = async function ({ id, lastChallengeId }) {
-  const [assessmentUpdated] = await knex('assessments')
+  const knexConn = DomainTransaction.getConnection();
+  const [assessmentUpdated] = await knexConn('assessments')
     .where({ id })
     .update({ lastChallengeId, lastQuestionState: Assessment.statesOfLastQuestion.ASKED, updatedAt: new Date() })
     .returning('*');

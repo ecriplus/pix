@@ -22,7 +22,6 @@ describe('Unit | Application | Certification | Evaluation | API', function () {
         const dependencies = {
           assessmentRepository: {
             get: sinon.stub(),
-            updateLastQuestionDate: sinon.stub(),
           },
 
           certificationCourseRepository: {
@@ -31,12 +30,6 @@ describe('Unit | Application | Certification | Evaluation | API', function () {
         };
 
         dependencies.assessmentRepository.get.resolves(certificationAssessment);
-        dependencies.assessmentRepository.updateLastQuestionDate
-          .withArgs({
-            id: 'assessmentId',
-            lastQuestionDate: new Date(),
-          })
-          .resolves();
         dependencies.certificationCourseRepository.get
           .withArgs({ id: certificationAssessment.certificationCourseId })
           .resolves(certificationCourse);
@@ -70,7 +63,6 @@ describe('Unit | Application | Certification | Evaluation | API', function () {
         const dependencies = {
           assessmentRepository: {
             get: sinon.stub(),
-            updateLastQuestionDate: sinon.stub(),
           },
 
           certificationCourseRepository: {
@@ -79,12 +71,6 @@ describe('Unit | Application | Certification | Evaluation | API', function () {
         };
 
         dependencies.assessmentRepository.get.resolves(certificationAssessment);
-        dependencies.assessmentRepository.updateLastQuestionDate
-          .withArgs({
-            id: 'assessmentId',
-            lastQuestionDate: new Date(),
-          })
-          .resolves();
         dependencies.certificationCourseRepository.get
           .withArgs({ id: certificationAssessment.certificationCourseId })
           .resolves(certificationCourse);

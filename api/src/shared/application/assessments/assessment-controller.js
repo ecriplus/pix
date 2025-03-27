@@ -4,7 +4,6 @@
 import { Serializer as JSONAPISerializer } from 'jsonapi-serializer';
 
 import { usecases } from '../../../../lib/domain/usecases/index.js';
-import * as certificationVersionRepository from '../../../certification/results/infrastructure/repositories/certification-version-repository.js';
 import { usecases as certificationUsecases } from '../../../certification/session-management/domain/usecases/index.js';
 import { usecases as devcompUsecases } from '../../../devcomp/domain/usecases/index.js';
 import { Answer } from '../../../evaluation/domain/models/Answer.js';
@@ -16,10 +15,8 @@ import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { AssessmentEndedError } from '../../domain/errors.js';
 import { sharedUsecases } from '../../domain/usecases/index.js';
 import * as assessmentRepository from '../../infrastructure/repositories/assessment-repository.js';
-import { repositories } from '../../infrastructure/repositories/index.js';
 import * as assessmentSerializer from '../../infrastructure/serializers/jsonapi/assessment-serializer.js';
 import * as challengeSerializer from '../../infrastructure/serializers/jsonapi/challenge-serializer.js';
-import { logger } from '../../infrastructure/utils/logger.js';
 import {
   extractLocaleFromRequest,
   extractUserIdFromRequest,
@@ -55,31 +52,15 @@ const getLastChallengeId = async function (request, h) {
   return h.response(lastChallengeId).code(200);
 };
 
-const getNextChallenge = async function (
-  request,
-  h,
-  dependencies = {
-    usecases,
-    evaluationUsecases,
-    assessmentRepository,
-    certificationVersionRepository,
-    repositories,
-  },
-) {
+const getNextChallenge = async function (request) {
   const assessmentId = request.params.id;
-
-  const logContext = {
-    zone: 'assessmentController.getNextChallenge',
-    type: 'controller',
-    assessmentId,
-  };
-  logger.trace(logContext, 'tracing assessmentController.getNextChallenge()');
+  const locale = extractLocaleFromRequest(request);
+  const userId = extractUserIdFromRequest(request);
 
   try {
-    const challenge = await _getChallenge(assessmentId, request, dependencies);
-    logContext.challenge = challenge;
-    logger.trace(logContext, 'replying with challenge');
-
+    const challenge = await DomainTransaction.execute(() => {
+      return sharedUsecases.getNextChallenge({ assessmentId, userId, locale });
+    });
     return challengeSerializer.serialize(challenge);
   } catch (error) {
     if (error instanceof AssessmentEndedError) {
@@ -196,59 +177,3 @@ const assessmentController = {
 };
 
 export { assessmentController };
-
-/**
- * @param {Object} dependencies
- * @param {Object} dependencies.repositories
- * @param {CertificationEvaluationRepository} dependencies.repositories.certificationEvaluationRepository
- * @param {AssessmentRepository} dependencies.assessmentRepository
- */
-async function _getChallenge(assessmentId, request, dependencies) {
-  const assessment = await dependencies.assessmentRepository.get(assessmentId);
-
-  if (assessment.isStarted() && !assessment.isCertification()) {
-    await dependencies.assessmentRepository.updateLastQuestionDate({ id: assessment.id, lastQuestionDate: new Date() });
-  }
-  const challenge = await _getChallengeByAssessmentType({ assessment, request, dependencies });
-
-  if (!assessment.isCertification() && challenge) {
-    if (challenge.id !== assessment.lastChallengeId) {
-      await dependencies.assessmentRepository.updateWhenNewChallengeIsAsked({
-        id: assessment.id,
-        lastChallengeId: challenge.id,
-      });
-    }
-  }
-
-  return challenge;
-}
-
-async function _getChallengeByAssessmentType({ assessment, request, dependencies }) {
-  const locale = extractLocaleFromRequest(request);
-
-  if (assessment.isCertification()) {
-    return dependencies.repositories.certificationEvaluationRepository.selectNextCertificationChallenge({
-      assessmentId: assessment.id,
-      locale,
-    });
-  }
-
-  if (assessment.isPreview()) {
-    return dependencies.usecases.getNextChallengeForPreview({});
-  }
-
-  if (assessment.isDemo()) {
-    return dependencies.usecases.getNextChallengeForDemo({ assessment });
-  }
-
-  if (assessment.isForCampaign()) {
-    return dependencies.evaluationUsecases.getNextChallengeForCampaignAssessment({ assessment, locale });
-  }
-
-  if (assessment.isCompetenceEvaluation()) {
-    const userId = extractUserIdFromRequest(request);
-    return dependencies.usecases.getNextChallengeForCompetenceEvaluation({ assessment, userId, locale });
-  }
-
-  return null;
-}

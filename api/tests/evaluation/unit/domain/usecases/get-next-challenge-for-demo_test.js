@@ -1,8 +1,8 @@
-import { getNextChallengeForDemo } from '../../../../lib/domain/usecases/get-next-challenge-for-demo.js';
-import { AssessmentEndedError } from '../../../../src/shared/domain/errors.js';
-import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { getNextChallengeForDemo } from '../../../../../src/evaluation/domain/usecases/get-next-challenge-for-demo.js';
+import { AssessmentEndedError } from '../../../../../src/shared/domain/errors.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Domain | Use Cases | get-next-challenge-for-demo', function () {
+describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-demo', function () {
   describe('#get-next-challenge-for-demo', function () {
     let courseRepository;
     let challengeRepository;

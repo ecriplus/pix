@@ -1,6 +1,5 @@
 import lodash from 'lodash';
 
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { constants } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
@@ -119,7 +118,8 @@ const getAllCampaignParticipationsInCampaignForASameLearner = async function ({ 
 };
 
 const getCampaignParticipationsForOrganizationLearner = async function ({ organizationLearnerId, campaignId }) {
-  const campaignParticipations = await knex('campaign-participations')
+  const knexConn = DomainTransaction.getConnection();
+  const campaignParticipations = await knexConn('campaign-participations')
     .where({
       campaignId,
       organizationLearnerId,
@@ -139,7 +139,8 @@ const remove = async function ({ id, deletedAt, deletedBy }) {
 };
 
 const findProfilesCollectionResultDataByCampaignId = async function (campaignId) {
-  const results = await knex('campaign-participations')
+  const knexConn = DomainTransaction.getConnection();
+  const results = await knexConn('campaign-participations')
     .select([
       'campaign-participations.*',
       'view-active-organization-learners.studentNumber',
@@ -163,11 +164,12 @@ const findProfilesCollectionResultDataByCampaignId = async function (campaignId)
 };
 
 const findOneByCampaignIdAndUserId = async function ({ campaignId, userId }) {
-  const campaignParticipation = await knex('campaign-participations')
+  const knexConn = DomainTransaction.getConnection();
+  const campaignParticipation = await knexConn('campaign-participations')
     .where({ userId, isImproved: false, campaignId })
     .first();
   if (!campaignParticipation) return null;
-  const assessments = await knex('assessments').where({ campaignParticipationId: campaignParticipation.id });
+  const assessments = await knexConn('assessments').where({ campaignParticipationId: campaignParticipation.id });
   const campaign = await campaignRepository.get(campaignId);
   return new CampaignParticipation({
     ...campaignParticipation,
@@ -182,7 +184,8 @@ const findOneByCampaignIdAndUserId = async function ({ campaignId, userId }) {
 };
 
 const hasAssessmentParticipations = async function (userId) {
-  const { count } = await knex('assessments')
+  const knexConn = DomainTransaction.getConnection();
+  const { count } = await knexConn('assessments')
     .count('assessments.id')
     .leftJoin('campaign-participations', 'campaignParticipationId', 'campaign-participations.id')
     .leftJoin('campaigns', 'campaigns.id', 'campaignId')
@@ -223,13 +226,14 @@ const getCodeOfLastParticipationToProfilesCollectionCampaignForUser = async func
 };
 
 const isRetrying = async function ({ campaignParticipationId }) {
-  const { id: campaignId, userId } = await knex('campaigns')
+  const knexConn = DomainTransaction.getConnection();
+  const { id: campaignId, userId } = await knexConn('campaigns')
     .select('campaigns.id', 'userId')
     .join('campaign-participations', 'campaigns.id', 'campaignId')
     .where({ 'campaign-participations.id': campaignParticipationId })
     .first();
 
-  const campaignParticipations = await knex('campaign-participations')
+  const campaignParticipations = await knexConn('campaign-participations')
     .select('sharedAt', 'isImproved')
     .where({ campaignId, userId });
 
