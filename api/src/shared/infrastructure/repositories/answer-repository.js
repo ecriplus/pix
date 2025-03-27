@@ -1,7 +1,6 @@
 import jsYaml from 'js-yaml';
 import _ from 'lodash';
 
-import { knex } from '../../../../db/knex-database-connection.js';
 import { Answer } from '../../../evaluation/domain/models/Answer.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { ChallengeAlreadyAnsweredError, NotFoundError } from '../../domain/errors.js';
@@ -38,7 +37,8 @@ const COLUMNS = Object.freeze([
 ]);
 
 const get = async function (id) {
-  const answerDTO = await knex.select(COLUMNS).from('answers').where({ id }).first();
+  const knexConn = DomainTransaction.getConnection();
+  const answerDTO = await knexConn.select(COLUMNS).from('answers').where({ id }).first();
 
   if (!answerDTO) {
     throw new NotFoundError(`Not found answer for ID ${id}`);
@@ -48,7 +48,8 @@ const get = async function (id) {
 };
 
 const findByChallengeAndAssessment = async function ({ challengeId, assessmentId }) {
-  const answerDTO = await knex
+  const knexConn = DomainTransaction.getConnection();
+  const answerDTO = await knexConn
     .select(COLUMNS)
     .from('answers')
     .where({ challengeId, assessmentId })
@@ -63,14 +64,16 @@ const findByChallengeAndAssessment = async function ({ challengeId, assessmentId
 };
 
 const findByAssessment = async function (assessmentId) {
-  const answerDTOs = await knex.select(COLUMNS).from('answers').where({ assessmentId }).orderBy('createdAt');
+  const knexConn = DomainTransaction.getConnection();
+  const answerDTOs = await knexConn.select(COLUMNS).from('answers').where({ assessmentId }).orderBy('createdAt');
   const answerDTOsWithoutDuplicate = _.uniqBy(answerDTOs, 'challengeId');
 
   return _toDomainArray(answerDTOsWithoutDuplicate);
 };
 
 const findByAssessmentExcludingChallengeIds = async function ({ assessmentId, excludedChallengeIds = [] }) {
-  const answerDTOs = await knex
+  const knexConn = DomainTransaction.getConnection();
+  const answerDTOs = await knexConn
     .with('all-first-answers', (qb) => {
       qb.select('*')
         .distinctOn('challengeId', 'assessmentId')
@@ -86,7 +89,8 @@ const findByAssessmentExcludingChallengeIds = async function ({ assessmentId, ex
 };
 
 const findChallengeIdsFromAnswerIds = async function (ids) {
-  return knex.distinct().pluck('challengeId').from('answers').whereInArray('id', ids);
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn.distinct().pluck('challengeId').from('answers').whereInArray('id', ids);
 };
 
 const save = async function ({ answer }) {
