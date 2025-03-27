@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 import { identifiersType } from '../../shared/domain/types/identifiers-type.js';
 import { getOrganizationCampaigns, getOrganizations } from './organizations-controller.js';
-import { organizationPreHandler } from './pre-handlers.js';
+import { isOrganizationInJurisdictionPreHandler, organizationPreHandler } from './pre-handlers.js';
 
 const register = async function (server) {
   server.route([
@@ -27,7 +27,7 @@ const register = async function (server) {
             organizationId: identifiersType.organizationId,
           }),
         },
-        pre: [organizationPreHandler],
+        pre: [organizationPreHandler, isOrganizationInJurisdictionPreHandler],
         handler: getOrganizationCampaigns,
         notes: ["- Retourne la liste des campaignes de l'organisation fournie"],
         tags: ['api', 'meta'],
