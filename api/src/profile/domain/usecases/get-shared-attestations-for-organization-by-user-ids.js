@@ -9,6 +9,7 @@ export async function getSharedAttestationsForOrganizationByUserIds({
   profileRewardRepository,
   attestationRepository,
   organizationProfileRewardRepository,
+  stringUtils,
 }) {
   const attestationData = await attestationRepository.getByKey({ attestationKey });
 
@@ -34,7 +35,7 @@ export async function getSharedAttestationsForOrganizationByUserIds({
   return {
     data: filteredProfileRewards.map(({ userId, createdAt }) => {
       const user = users.find((user) => user.id === userId);
-      return user.toForm(createdAt, locale);
+      return user.toForm(createdAt, locale, stringUtils.normalizeAndRemoveAccents);
     }),
     templateName: attestationData.templateName,
   };

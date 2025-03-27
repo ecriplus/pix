@@ -1,4 +1,5 @@
 import { User } from '../../../../../src/profile/domain/models/User.js';
+import { normalizeAndRemoveAccents } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Profile | Domain | Models | User', function () {
@@ -38,12 +39,12 @@ describe('Unit | Profile | Domain | Models | User', function () {
     const date = new Date('2024-10-02');
 
     // when
-    const form = user.toForm(date, 'FR-fr');
+    const form = user.toForm(date, 'FR-fr', normalizeAndRemoveAccents);
 
     // then
     expect(form.get('firstName')).to.deep.equal(user.firstName);
     expect(form.get('lastName')).to.deep.equal(user.lastName);
-    expect(form.get('filename')).to.deep.equal(user.firstName + '_' + user.lastName + '_' + Date.now());
+    expect(form.get('filename')).to.deep.equal('theo_courant_' + Date.now());
     expect(form.get('date')).to.deep.equal('02/10/2024');
   });
 });

@@ -19,12 +19,15 @@ export class User {
     return this.#lastName.toUpperCase();
   }
 
-  toForm(createdAt, locale) {
+  toForm(createdAt, locale, transformStringForFileName) {
     const map = new Map();
+
+    const filename =
+      transformStringForFileName(this.firstName) + '_' + transformStringForFileName(this.lastName) + '_' + Date.now();
 
     map.set('firstName', this.firstName);
     map.set('lastName', this.lastName);
-    map.set('filename', this.firstName + '_' + this.lastName + '_' + Date.now());
+    map.set('filename', filename);
     map.set('date', createdAt.toLocaleDateString(locale));
 
     return map;
