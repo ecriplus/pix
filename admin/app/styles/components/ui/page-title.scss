@@ -1,0 +1,71 @@
+@use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/breakpoints';
+
+.page-title {
+  width: 100%;
+
+  &--center {
+    @include breakpoints.device-is('mobile') {
+      text-align: center;
+    }
+  }
+
+  &__main {
+    display: flex;
+    gap: var(--pix-spacing-2x);
+    justify-content: space-between;
+    margin-bottom: var(--pix-spacing-8x);
+
+    &--center {
+      justify-content: center;
+    }
+
+    &--stick {
+      align-items: baseline;
+      justify-content: initial;
+    }
+  }
+
+  &__name {
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &__sub-title {
+    margin-bottom: var(--pix-spacing-6x);
+  }
+
+  &__title {
+    @extend %pix-title-m;
+
+    display: flex;
+    flex: 0 1 auto;
+    gap: var(--pix-spacing-4x);
+    align-items: center;
+    overflow: hidden;
+    color: var(--pix-neutral-900);
+    word-break: break-all;
+  }
+
+  &__notification-alert {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-2x);
+    margin-bottom: var(--pix-spacing-6x);
+  }
+}
+
+.page-sub-title {
+  @extend %pix-title-s;
+
+  margin-bottom: var(--pix-spacing-6x);
+  color: var(--pix-neutral-500);
+}
+
+.panel-header-title {
+  @extend  %pix-title-xs;
+
+  color: var(--pix-neutral-800);
+}

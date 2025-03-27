@@ -1,0 +1,49 @@
+.quest-button-edition {
+  display: flex;
+  gap: 24px;
+
+  &--column {
+    flex-direction: column;
+  }
+
+
+  &__list {
+    display: flex;
+    gap: 24px;
+  }
+
+  &__button {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+  }
+}
+
+.quest-requirement-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  &__item-width-content {
+    width: 50%;
+    min-width: fit-content;
+  }
+}
+
+.quest-object-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  & .pix-label-wrapped {
+    display: inline-flex;
+  }
+}
+
+.quest-field {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items:end
+}

@@ -203,6 +203,7 @@
         "notifications": {
           "success": "Quests have been imported."
         },
+        "quest-creator": "Create your quest",
         "title": "Create and update quests",
         "upload-button": "Import CSV file"
       }

@@ -203,6 +203,7 @@
         "notifications": {
           "success": "Les quêtes ont bien été importées."
         },
+        "quest-creator": "Créer ta Quête",
         "title": "Création et modification de quêtes",
         "upload-button": "Importer un fichier CSV"
       }

@@ -1,3 +1,4 @@
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixButtonUpload from '@1024pix/pix-ui/components/pix-button-upload';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
@@ -55,12 +56,16 @@ export default class UpsertQuestsInBatch extends Component {
         <PixButtonUpload
           @id="quests-batch-update-file-upload"
           @onChange={{this.upsertQuestsInBatch}}
-          @variant="secondary"
+          @variant="primary"
           accept=".csv"
         >
           {{t "components.administration.upsert-quests-in-batch.upload-button"}}
         </PixButtonUpload>
       </DownloadTemplate>
+
+      <PixButtonLink @iconBefore="cogsMagic" @route="authenticated.quest-creator" @variant="secondary">
+        {{t "components.administration.upsert-quests-in-batch.quest-creator"}}
+      </PixButtonLink>
     </AdministrationBlockLayout>
   </template>
 }
