@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+
 import { config } from '../../../../src/shared/config.js';
 import { tokenService } from '../../../shared/domain/services/token-service.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
@@ -40,6 +42,37 @@ const assert = async function (request, h) {
   }
 };
 
-const samlController = { metadata, login, assert };
+const authenticateForSaml = async function (request, h) {
+  const {
+    username,
+    password,
+    'external-user-token': externalUserToken,
+    'expected-user-id': expectedUserId,
+  } = request.payload.data.attributes;
+
+  const origin = getForwardedOrigin(request.headers);
+  const requestedApplication = RequestedApplication.fromOrigin(origin);
+
+  const accessToken = await usecases.authenticateForSaml({
+    username,
+    password,
+    externalUserToken,
+    expectedUserId,
+    audience: origin,
+    requestedApplication,
+  });
+
+  return h
+    .response({
+      data: {
+        id: randomUUID(),
+        type: 'external-user-authentication-requests',
+        attributes: { 'access-token': accessToken },
+      },
+    })
+    .code(200);
+};
+
+const samlController = { metadata, login, assert, authenticateForSaml };
 
 export { samlController };
