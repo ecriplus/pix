@@ -29,6 +29,10 @@ export default class EvaluationResults extends Component {
     return !isAutonomousCourse && !this.args.model.campaign.isForAbsoluteNovice;
   }
 
+  get trainingsForModal() {
+    return this.args.model.trainings.slice(0, 2);
+  }
+
   @action
   showTrainings() {
     const tabElement = document.querySelector('[role="tablist"]');
@@ -83,7 +87,7 @@ export default class EvaluationResults extends Component {
       />
       {{#if this.isModalSentResultEnabled}}
         <EvaluationSentResultsModal
-          @trainings={{@model.trainings}}
+          @trainings={{this.trainingsForModal}}
           @showModal={{this.showEvaluationResultsModal}}
           @onCloseButtonClick={{this.closeModal}}
         />

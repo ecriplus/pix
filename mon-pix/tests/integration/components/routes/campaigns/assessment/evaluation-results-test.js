@@ -88,7 +88,7 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
 
   module('when the campaign has not been shared yet and has trainings', function () {
     module('when clicking on the share results button', function () {
-      test('it should display the evaluation-sent-results modal', async function (assert) {
+      test('it should display the evaluation-sent-results modal with first 3 trainings', async function (assert) {
         // given
         class FeatureTogglesStub extends Service {
           featureToggles = { isModalSentResultEnabled: true };
@@ -125,6 +125,16 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
             editorLogoUrl:
               'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
           },
+          {
+            title: 'Mon super training 4 youhou',
+            link: 'https://training.net/',
+            type: 'webinaire',
+            locale: 'fr-fr',
+            duration: { hours: 6 },
+            editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
+            editorLogoUrl:
+              'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
+          },
         ];
         this.model.campaignParticipationResult.isShared = false;
         this.model.campaignParticipationResult.competenceResults = [Symbol('competences')];
@@ -137,12 +147,19 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
         // when
         screen = await render(hbs`<Routes::Campaigns::Assessment::EvaluationResults @model={{this.model}} />`);
         await click(screen.queryByRole('tab', { name: 'Formations' }));
-        const dialog = await screen.getByRole('dialog');
-        await click(within(dialog).queryByRole('button', { name: t('pages.skill-review.actions.send') }));
+        const trainingsDialog = await screen.getByRole('dialog');
+        await click(within(trainingsDialog).queryByRole('button', { name: t('pages.skill-review.actions.send') }));
         await waitForDialogClose();
+        const sharedResultsModal = await screen.getByRole('dialog', { name: 'Résultats partagés' });
 
         // then
         assert.dom(await screen.findByRole('button', { name: 'Fermer et revenir aux résultats' })).exists();
+        assert
+          .dom(within(sharedResultsModal).queryByRole('heading', { level: 3, name: 'Mon super training 1 youhou' }))
+          .exists();
+        assert
+          .dom(within(sharedResultsModal).queryByRole('heading', { level: 3, name: 'Mon super training 4 youhou' }))
+          .doesNotExist();
       });
 
       module('when feature_toggle ‘isModalSentResultEnabled‘ is false', function () {
