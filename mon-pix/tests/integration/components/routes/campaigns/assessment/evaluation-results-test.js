@@ -295,4 +295,33 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
       });
     });
   });
+
+  module('when campaign has not been shared yet and does not have trainings', function () {
+    module('when clicking on the share results button', function () {
+      test('it should display the evaluation-sent-results modal ', async function (assert) {
+        // given
+        class FeatureTogglesStub extends Service {
+          featureToggles = { isModalSentResultEnabled: true };
+        }
+
+        this.owner.register('service:featureToggles', FeatureTogglesStub);
+        this.model.trainings = [];
+        this.model.campaignParticipationResult.isShared = false;
+        this.model.campaignParticipationResult.competenceResults = [Symbol('competences')];
+        this.model.campaign.isForAbsoluteNovice = false;
+
+        const store = this.owner.lookup('service:store');
+        const adapter = store.adapterFor('campaign-participation-result');
+        const shareStub = sinon.stub(adapter, 'share');
+        shareStub.resolves();
+
+        // when
+        screen = await render(hbs`<Routes::Campaigns::Assessment::EvaluationResults @model={{this.model}} />`);
+        await click(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') }));
+
+        // then
+        assert.dom(await screen.queryByRole('dialog', { name: 'Résultats partagés' })).doesNotExist();
+      });
+    });
+  });
 });

@@ -17,7 +17,7 @@ export default class EvaluationResults extends Component {
   @tracked showEvaluationResultsModal = false;
 
   get isModalSentResultEnabled() {
-    return this.featureToggles.featureToggles?.isModalSentResultEnabled;
+    return this.featureToggles.featureToggles?.isModalSentResultEnabled && this.hasTrainings;
   }
 
   get hasTrainings() {
