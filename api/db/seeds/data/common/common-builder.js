@@ -97,7 +97,7 @@ function createClientApplications(databaseBuilder) {
     name: 'multi-organizations-client-application',
     clientId: 'maddo-client',
     clientSecret: 'maddo-secret',
-    scopes: ['meta'],
+    scopes: ['meta', 'campaigns'],
     jurisdiction: { rules: [{ name: 'tags', value: [COLLEGE_TAG.name] }] },
   });
 }
