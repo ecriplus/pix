@@ -21,12 +21,12 @@ export const getByOrganizationId = async (organizationId) => {
 
 /**
  * @function
- * @name getById
+ * @name getByIdForAdmin
  *
  * @param {number} id
  * @returns {Promise<TargetProfile>}
  */
-export const getById = async (id) => {
+export const getByIdForAdmin = async (id) => {
   const targetProfileForAdmin = await usecases.getTargetProfileForAdmin({ targetProfileId: id });
 
   return new TargetProfile(targetProfileForAdmin);
