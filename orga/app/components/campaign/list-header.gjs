@@ -1,4 +1,5 @@
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixTabs from '@1024pix/pix-ui/components/pix-tabs';
 import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';
 
@@ -20,20 +21,13 @@ import PageTitle from '../ui/page-title';
       </:tools>
     </PageTitle>
 
-    <nav class="panel navbar campaign-list-header__tabs" aria-label={{t "pages.campaigns-list.navigation"}}>
-      <ul>
-        <li>
-          <LinkTo @route="authenticated.campaigns.list.my-campaigns" class="navbar-item">
-            {{t "pages.campaigns-list.tabs.my-campaigns"}}
-          </LinkTo>
-        </li>
-
-        <li>
-          <LinkTo @route="authenticated.campaigns.list.all-campaigns" class="navbar-item">
-            {{t "pages.campaigns-list.tabs.all-campaigns"}}
-          </LinkTo>
-        </li>
-      </ul>
-    </nav>
+    <PixTabs @variant="orga" class="campaign-list-header__tabs" @ariaLabel={{t "pages.campaigns-list.navigation"}}>
+      <LinkTo @route="authenticated.campaigns.list.my-campaigns">
+        {{t "pages.campaigns-list.tabs.my-campaigns"}}
+      </LinkTo>
+      <LinkTo @route="authenticated.campaigns.list.all-campaigns">
+        {{t "pages.campaigns-list.tabs.all-campaigns"}}
+      </LinkTo>
+    </PixTabs>
   </header>
 </template>

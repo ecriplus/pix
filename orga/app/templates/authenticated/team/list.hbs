@@ -13,15 +13,15 @@
   </Ui::PageTitle>
 
   {{#if this.currentUser.isAdminInOrganization}}
-    <nav class="panel navbar list-team-page__tabs" aria-label={{t "navigation.team-members.aria-label"}}>
-      <LinkTo @route="authenticated.team.list.members" class="navbar-item">
+    <PixTabs @variant="orga" class="list-team-page__tabs" @ariaLabel={{t "navigation.team-members.aria-label"}}>
+      <LinkTo @route="authenticated.team.list.members">
         {{t "pages.team-list.tabs.member" count=@model.memberships.meta.rowCount}}
       </LinkTo>
 
-      <LinkTo @route="authenticated.team.list.invitations" class="navbar-item">
+      <LinkTo @route="authenticated.team.list.invitations">
         {{t "pages.team-list.tabs.invitation" count=@model.organization.organizationInvitations.length}}
       </LinkTo>
-    </nav>
+    </PixTabs>
   {{/if}}
 
   {{outlet}}

@@ -1,4 +1,5 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixTabs from '@1024pix/pix-ui/components/pix-tabs';
 import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
@@ -30,9 +31,9 @@ export default class CampaignTabs extends Component {
   }
 
   <template>
-    <div class="panel campaign-header-tabs">
-      <nav class="navbar" aria-label={{t "navigation.campaign-page.aria-label"}}>
-        <LinkTo @route="authenticated.campaigns.campaign.activity" @model={{@campaign}} class="navbar-item">
+    <div class="campaign-header-tabs">
+      <PixTabs @variant="orga" @ariaLabel={{t "navigation.campaign-page.aria-label"}}>
+        <LinkTo @route="authenticated.campaigns.campaign.activity" @model={{@campaign}}>
           {{t "pages.campaign.tab.activity"}}
         </LinkTo>
 
@@ -43,22 +44,20 @@ export default class CampaignTabs extends Component {
             "authenticated.campaigns.campaign.profile-results"
           }}
           @model={{@campaign}}
-          class="navbar-item"
         >
           {{t "pages.campaign.tab.results" count=@campaign.sharedParticipationsCount}}
         </LinkTo>
 
         {{#if (or @campaign.isTypeAssessment @campaign.isTypeExam)}}
-          <LinkTo @route="authenticated.campaigns.campaign.analysis" class="navbar-item" @model={{@campaign}}>
+          <LinkTo @route="authenticated.campaigns.campaign.analysis" @model={{@campaign}}>
             {{t "pages.campaign.tab.review"}}
           </LinkTo>
         {{/if}}
 
-        <div class="navbar-item-separator hide-on-mobile" aria-hidden="true"></div>
-        <LinkTo @route="authenticated.campaigns.campaign.settings" class="navbar-item" @model={{@campaign}}>
+        <LinkTo @route="authenticated.campaigns.campaign.settings" @model={{@campaign}}>
           {{t "pages.campaign.tab.settings"}}
         </LinkTo>
-      </nav>
+      </PixTabs>
 
       <div class="campaign-header-tabs__export-button hide-on-mobile">
         <PixButton @variant="primary" @triggerAction={{this.exportData}}>

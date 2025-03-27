@@ -1,25 +1,5 @@
 .mission-navigation {
   &__tabs {
-    display: flex;
-    gap: 8px;
-    width: fit-content;
-    margin-bottom: 20px;
-    padding: var(--pix-spacing-2x);
-    background-color: var(--pix-neutral-0);
-    border-radius: 8px;
-
-    .navbar-item {
-      padding: var(--pix-spacing-2x) var(--pix-spacing-4x);
-      font-weight: var(--pix-font-normal);
-      border-bottom: none;
-      border-radius: 8px;
-
-      &.active {
-        color: inherit;
-        font-weight: var(--pix-font-medium);
-        background: var(--pix-orga-50);
-        border-bottom: none;
-      }
-    }
+    margin-bottom: var(--pix-spacing-4x);
   }
 }
