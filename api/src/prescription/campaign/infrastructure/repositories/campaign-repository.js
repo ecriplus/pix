@@ -1,4 +1,3 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { CAMPAIGN_FEATURES } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
@@ -21,7 +20,8 @@ const areKnowledgeElementsResettable = async function ({ id }) {
 };
 
 const getByCode = async function (code) {
-  const campaign = await knex('campaigns').first().where({ code });
+  const knexConn = DomainTransaction.getConnection();
+  const campaign = await knexConn('campaigns').first().where({ code });
   if (!campaign) return null;
   return new Campaign(campaign);
 };
