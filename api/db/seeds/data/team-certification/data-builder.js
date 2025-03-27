@@ -1,21 +1,23 @@
 import * as tooling from '../common/tooling/index.js';
 import { acceptPixOrgaTermsOfService } from '../common/tooling/legal-documents.js';
+import simpleScoManagingStudentsCertificationCase from './cases/simple-sco-managing-students-certification.js';
 import { CERTIFIABLE_SUCCESS_USER_ID } from './constants.js';
 import { proOrganizationWithCertifCenter } from './create-pro-organization-with-certif-center.js';
 import { scoOrganizationManaginAgriStudentsWithFregata } from './create-sco-organization-managing-agri-student-with-fregata.js';
-import { scoOrganizationManaginStudentsWithSiecle } from './create-sco-organization-managing-student-with-siecle.js';
 import { scoOrganizationNotManagingStudents } from './create-sco-organization-not-managing-students.js';
 import { supCertificationCenterOnly } from './create-sup-certifification-center-only.js';
 import { setupConfigurations } from './setup-configuration.js';
 
 async function teamCertificationDataBuilder({ databaseBuilder }) {
   await scoOrganizationManaginAgriStudentsWithFregata({ databaseBuilder });
-  await scoOrganizationManaginStudentsWithSiecle({ databaseBuilder });
   await proOrganizationWithCertifCenter({ databaseBuilder });
   await supCertificationCenterOnly({ databaseBuilder });
   await scoOrganizationNotManagingStudents({ databaseBuilder });
   await _createSuccessCertifiableUser({ databaseBuilder });
   await setupConfigurations({ databaseBuilder });
+
+  // Cases
+  await simpleScoManagingStudentsCertificationCase({ databaseBuilder });
 }
 
 export { teamCertificationDataBuilder };
