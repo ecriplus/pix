@@ -1,20 +1,9 @@
 import { config } from '../../../../shared/config.js';
 import { COMPETENCES_COUNT, PIX_COUNT_BY_LEVEL } from '../../../../shared/domain/constants.js';
 import { status as CertificationStatus } from '../../../../shared/domain/models/AssessmentResult.js';
+import { meshConfiguration } from '../../../results/domain/models/v3/MeshConfiguration.js';
 import { ABORT_REASONS } from '../../../shared/domain/models/CertificationCourse.js';
 import { Intervals } from './Intervals.js';
-
-const weightsAndCoefficients = [
-  { weight: 64, coefficient: 0 },
-  { weight: 64, coefficient: 1 },
-  { weight: 128, coefficient: 1 },
-  { weight: 128, coefficient: 2 },
-  { weight: 128, coefficient: 3 },
-  { weight: 128, coefficient: 4 },
-  { weight: 128, coefficient: 5 },
-  { weight: 128, coefficient: 6 },
-  { weight: 128, coefficient: 7 },
-];
 
 class CertificationAssessmentScoreV3 {
   constructor({ nbPix, percentageCorrectAnswers = 100, status = CertificationStatus.VALIDATED, competenceMarks }) {
@@ -110,8 +99,9 @@ const _calculateScore = ({ capacity, certificationScoringIntervals }) => {
   const intervalIndex = scoringIntervals.findIntervalIndexFromCapacity(capacity);
   const intervalMaximum = scoringIntervals.max(intervalIndex);
   const intervalMinimum = scoringIntervals.min(intervalIndex);
-  const intervalWeight = weightsAndCoefficients[intervalIndex].weight;
-  const intervalCoefficient = weightsAndCoefficients[intervalIndex].coefficient;
+  const meshes = Array.from(meshConfiguration.MESH_CONFIGURATION.values());
+  const intervalWeight = meshes[intervalIndex].weight;
+  const intervalCoefficient = meshes[intervalIndex].coefficient;
   const progressionPercentage = 1 - (intervalMaximum - capacity) / (intervalMaximum - intervalMinimum);
   const score = Math.floor(intervalWeight * (intervalCoefficient + progressionPercentage));
 
@@ -137,7 +127,5 @@ const _shouldDowngradeCapacity = ({ maximumAssessmentLength, answers, abortReaso
     abortReason === ABORT_REASONS.CANDIDATE
   );
 };
-
-CertificationAssessmentScoreV3.weightsAndCoefficients = weightsAndCoefficients;
 
 export { CertificationAssessmentScoreV3 };

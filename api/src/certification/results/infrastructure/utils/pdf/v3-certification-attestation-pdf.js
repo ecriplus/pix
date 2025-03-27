@@ -1,9 +1,14 @@
+/**
+ * @typedef {import ('../../../domain/models/V3CertificationAttestation.js').V3CertificationAttestation} V3CertificationAttestation
+ */
 import PDFDocument from 'pdfkit';
 
-import { GlobalCertificationLevel } from '../../../../shared/domain/models/GlobalCertificationLevel.js';
-import { findIntervalIndexFromScore } from '../../../domain/services/find-interval-index-from-score.js';
 import generateV3AttestationTemplate from './templates/v3-attestation.js';
 
+/**
+ * @param {Object} params
+ * @param {Array<V3CertificationAttestation>} params.certificates
+ */
 const generate = ({ certificates, i18n }) => {
   const doc = new PDFDocument({
     size: 'A4',
@@ -22,18 +27,10 @@ const generate = ({ certificates, i18n }) => {
       doc.addPage();
     }
 
-    // En attendant PIX-17106
-    const globalCertificationLevel = new GlobalCertificationLevel({
-      meshLevel: findIntervalIndexFromScore({
-        score: certificate.pixScore,
-      }),
-    });
-
     generateV3AttestationTemplate({
       pdf: doc,
       data: certificate,
       translate: i18n.__,
-      globalCertificationLevel,
     });
   });
 

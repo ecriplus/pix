@@ -1,10 +1,17 @@
+/**
+ * @typedef {import ('../../../../domain/models/V3CertificationAttestation.js').V3CertificationAttestation} V3CertificationAttestation
+ */
 import path from 'node:path';
 import * as url from 'node:url';
 
 import dayjs from 'dayjs';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
-const generateV3AttestationTemplate = ({ pdf, data, translate, globalCertificationLevel }) => {
+/**
+ * @param {Object} params
+ * @param {V3CertificationAttestation} params.data
+ */
+const generateV3AttestationTemplate = ({ pdf, data, translate }) => {
   // Global
   pdf.image(path.resolve(__dirname, 'background.jpg'), 0, 0, {
     width: pdf.page.width,
@@ -115,7 +122,8 @@ const generateV3AttestationTemplate = ({ pdf, data, translate, globalCertificati
       align: 'center',
     });
 
-  const globalLevelLabel = globalCertificationLevel.getLevelLabel(translate);
+  const globalLevel = data.globalLevel;
+  const globalLevelLabel = globalLevel.getLevelLabel(translate);
   pdf
     .roundedRect(
       650 - (pdf.widthOfString(globalLevelLabel) * 2) / 2,
@@ -133,6 +141,9 @@ const generateV3AttestationTemplate = ({ pdf, data, translate, globalCertificati
       width: pdf.widthOfString(globalLevelLabel) * 2,
       align: 'center',
     });
+
+  const globalLevelSummary = globalLevel.getSummaryLabel(translate);
+  const globalLevelDescription = globalLevel.getDescriptionLabel(translate);
   pdf
     .font('Nunito-Bold')
     .fontSize(11)
@@ -143,11 +154,11 @@ const generateV3AttestationTemplate = ({ pdf, data, translate, globalCertificati
     .moveDown(0.5)
     .font('Roboto-Medium')
     .fontSize(9.5)
-    .text('globalCertificationLevel.getSummaryLabel(translate)')
+    .text(globalLevelSummary)
     .moveDown(0.5)
     .font('Roboto-Regular')
     .fontSize(9.5)
-    .text('globalCertificationLevel.getDescriptionLabel(translate)');
+    .text(globalLevelDescription);
 };
 
 export default generateV3AttestationTemplate;

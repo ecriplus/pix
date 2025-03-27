@@ -62,7 +62,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certification Attestat
         maxReachableLevelOnCertificationDate: 5,
         deliveredAt: new Date('2021-05-05'),
         certificationCenter: 'Centre des poules bien dodues',
-        pixScore: 51,
+        pixScore: 256,
         sessionId: 789,
       }),
       domainBuilder.certification.results.buildV3CertificationAttestation({
@@ -78,7 +78,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certification Attestat
         maxReachableLevelOnCertificationDate: 5,
         deliveredAt: new Date('2020-05-05'),
         certificationCenter: 'Centre des centres',
-        pixScore: 51,
+        pixScore: 256,
         sessionId: 789,
       }),
     ];
@@ -109,6 +109,9 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certification Attestat
       expect(pageContent).to.include(`le ${dayjs(certificates[index].deliveredAt).format('DD/MM/YYYY')}`);
       expect(pageContent).to.include(`${certificates[index].verificationCode}`);
       expect(pageContent).to.include(`${certificates[index].pixScore}`);
+      expect(pageContent).to.include('Indépendant 1');
+      expect(pageContent).to.include('Vous avez des pratiques numériques simples');
+      expect(pageContent).to.include('Vous savez naviguer sur le Web');
       expect(pageContent).to.include(`${certificates[index].maxReachableScore}`);
     });
   });

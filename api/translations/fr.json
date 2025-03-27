@@ -182,14 +182,45 @@
     },
     "global": {
       "meshlevel": {
-        "1": "Novice 1",
-        "2": "Novice 2",
-        "3": "Indépendant 1",
-        "4": "Indépendant 2",
-        "5": "Avancé 1",
-        "6": "Avancé 2",
-        "7": "Expert 1",
-        "8": "Expert 2"
+        "LEVEL_ADVANCED_5": {
+          "description": "Vous êtes capable de recourir à des outils spécialisés pour rechercher de l'information de façon fiable, gérer des réseaux sociaux, éditer des images et des vidéos. Vous savez produire des analyses de données et des représentations graphiques adaptées. Vous savez mettre en place un environnement numérique (installation et paramétrage). Vous connaissez les enjeux autour du traçage et de la collecte de données. Vous comprenez les impacts environnementaux et sociétaux des usages numériques et savez adapter vos pratiques.",
+          "label": "Avancé 1",
+          "summary": "Vous avez des pratiques numériques avancées et disposez de connaissances solides qui vous permettent de faire face seul(e) à des situations nouvelles. Vous pouvez venir en aide à d'autres personnes."
+        },
+        "LEVEL_ADVANCED_6": {
+          "description": "Vous maîtrisez pleinement votre environnement numérique pour créer et diffuser des contenus, communiquer et collaborer. Vous savez gérer votre présence en ligne et choisir les paramètres pertinents pour vos diffusions. Vous savez programmer et automatiser certaines tâches (traitement de données, sauvegarde, mise à jour, etc). Vous pouvez accompagner les autres pour sécuriser leurs pratiques, et notamment limiter leur impact environnemental et sur la santé.",
+          "label": "Avancé 2",
+          "summary": "Vous avez des pratiques numériques avancées et disposez de connaissances approfondies, que vous pouvez mettre à profit, pour vous-même ou pour d'autres, de manière créative et sécurisée. Vous pouvez accompagner la montée en compétences d'autres personnes."
+        },
+        "LEVEL_BEGINNER_1": {
+          "description": "Vous savez vous repérer dans les interfaces des outils numériques que vous avez déjà utilisés (téléphone, tablette, ordinateur). Avec un accompagnement ponctuel, vous pouvez visiter un site Web, lire vos messages (SMS, mails,...) et y répondre, utiliser des applications simples sur téléphone ou tablette, et accéder à des services en ligne.",
+          "label": "Novice 1",
+          "summary": "Vous avez des pratiques numériques simples en ayant souvent besoin d'aide"
+        },
+        "LEVEL_BEGINNER_2": {
+          "description": "Dans votre environnement numérique habituel, vous savez rechercher des informations sur le Web, télécharger un fichier et le retrouver, consulter et envoyer des messages électroniques, connecter vos appareils  à internet (ordinateurs, tablette, téléphone). Vous pouvez saisir un texte avec une mise en forme simple et le sauvegarder. Vous savez que certaines informations publiées en ligne sont fausses et qu'il est important de protéger ses comptes avec des mots de passe sûrs.",
+          "label": "Novice 2",
+          "summary": "Vous avez des pratiques numériques simples, avec de l'aide quand la situation se complique."
+        },
+        "LEVEL_EXPERT_7": {
+          "description": "Vous êtes capable d'analyser un besoin, de consulter de la documentation même technique et d'évaluer des solutions numériques pour mettre en oeuvre la plus optimale, voire même de développer vous-mêmes des outils. Vous comprenez les enjeux économiques, sociétaux, et éthiques associés aux technologies numériques et pouvez exercer votre esprit critique sur vos pratiques numériques. Vous êtes en capacité de vous former à de nouvelles techniques et appréhendez avec aisance les avancées technologiques les plus récentes, telles que celles permises par l'intelligence artificielle.",
+          "label": "Expert 1",
+          "summary": "Vous avez des pratiques numériques optimisées et disposez de connaissances expertes qui vous permettent d'aborder avec méthode des situations complexes et nouvelles."
+        },
+        "LEVEL_EXPERT_8": {
+          "label": "Expert 2",
+          "summary": "Vous êtes capables de documenter vos solutions à des problèmes nouveaux et spécifiques pour les partager."
+        },
+        "LEVEL_INDEPENDENT_3": {
+          "description": "Vous savez naviguer sur le Web pour réaliser une recherche approfondie avec des informations pertinentes. Vous savez participer à des activités collaboratives (messagerie, agenda partagé, réunion en visio, documents partagés). Vous savez utiliser les fonctionnalités les plus courantes des logiciels usuels (traitement de texte et tableur). Vous êtes sensible aux risques associés à vos pratiques numériques et à la nécessité de les sécuriser, ainsi qu'à l'impact environnemental de vos usages numériques. Vous savez résoudre les problèmes courants (mot de passe, connexion).",
+          "label": "Indépendant 1",
+          "summary": "Vous avez des pratiques numériques simples en autonomie dans la plupart des situations courantes."
+        },
+        "LEVEL_INDEPENDENT_4": {
+          "description": "Vous savez mettre en place une stratégie de recherche d'information sur le Web et via les réseaux sociaux et vérifier la fiabilité des informations trouvées. Vous savez utiliser les principales fonctionnalités des outils collaboratifs et créer des documents au moyen de différents logiciels (traitement de texte, tableur, diaporama, images). Vous pouvez mettre en oeuvre des pratiques sécurisées en matière de données personnelles et de protection de vos appareils. Vous savez adapter vos pratiques numériques pour limiter leur impact sur l'environnement et sur votre santé.",
+          "label": "Indépendant 2",
+          "summary": "Vous êtes à l'aise dans toutes les situations courantes d'utilisation du numérique et maîtrisez le vocabulaire usuel associé aux technologies numériques."
+        }
       }
     }
   },

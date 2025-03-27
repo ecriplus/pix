@@ -31,10 +31,6 @@ describe('Certification | Results | Unit | Application | parcoursup-controller',
         .withArgs({ ...request.payload })
         .resolves(certificationResultForParcoursup);
 
-      const globalMeshLevel = Symbol('globalMeshLevel');
-      sinon.stub(usecases, 'getGlobalMeshLevel');
-      usecases.getGlobalMeshLevel.withArgs({ pixScore }).resolves(globalMeshLevel);
-
       const dependencies = {
         parcoursupCertificationSerializer: {
           serialize: sinon.stub(),
@@ -47,7 +43,6 @@ describe('Certification | Results | Unit | Application | parcoursup-controller',
       // then
       expect(dependencies.parcoursupCertificationSerializer.serialize).to.have.been.calledOnceWithExactly({
         certificationResult: certificationResultForParcoursup,
-        globalMeshLevel,
         translate: getI18n(FRENCH_FRANCE).__,
       });
     });

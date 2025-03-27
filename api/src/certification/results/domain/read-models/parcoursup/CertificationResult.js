@@ -1,6 +1,4 @@
-/**
- * @typedef {import('./Competence.js').Competence} Competence
- */
+import { GlobalCertificationLevel } from '../../models/v3/GlobalCertificationLevel.js';
 
 export class CertificationResult {
   /**
@@ -13,7 +11,7 @@ export class CertificationResult {
    * @param {string} props.status
    * @param {string} props.pixScore
    * @param {Date} props.certificationDate
-   * @param {string} props.globalLevel
+   * @param {GlobalCertificationLevel} props.globalLevel
    * @param {Array<Competence>} props.competences
    */
   constructor({
@@ -25,7 +23,6 @@ export class CertificationResult {
     status,
     pixScore,
     certificationDate,
-    globalLevel = '',
     competences,
   }) {
     this.ine = ine;
@@ -36,7 +33,7 @@ export class CertificationResult {
     this.status = status;
     this.pixScore = pixScore;
     this.certificationDate = certificationDate;
-    this.globalLevel = globalLevel;
+    this.globalLevel = new GlobalCertificationLevel({ score: pixScore });
     this.competences = competences;
   }
 }
