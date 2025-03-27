@@ -1,12 +1,11 @@
 .campaign-header-tabs {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 24px;
-  padding: 0;
+  margin-bottom: var(--pix-spacing-4x);
 
   &__export-button {
     display: flex;
-    align-items: center;
+    align-items: end;
     padding-right: 10px;
   }
 }
