@@ -27,7 +27,7 @@ export function createWarningConnectionEmail({ locale, email, firstName, validat
 
   const { i18n, defaultVariables } = factory;
   const pixAppUrl = urlBuilder.getPixAppBaseUrl(locale);
-  const resetUrl = `${pixAppUrl}/mot-de-passe-oublie?lang=${lang}&email=${email}`;
+  const resetUrl = `${pixAppUrl}/mot-de-passe-oublie?lang=${lang}&email=${encodeURIComponent(email)}`;
 
   return factory.buildEmail({
     template: mailer.warningConnectionTemplateId,
