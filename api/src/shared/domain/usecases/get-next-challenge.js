@@ -23,7 +23,12 @@ export async function getNextChallenge({
     lastChallengeId: assessment.lastChallengeId,
   });
   if (!hasAnswered) {
-    return challengeRepository.get(assessment.lastChallengeId);
+    nextChallenge = await challengeRepository.get(assessment.lastChallengeId);
+    if (nextChallenge.isOperative) {
+      return nextChallenge;
+    } else {
+      nextChallenge = null;
+    }
   }
   if (assessment.isCertification()) {
     nextChallenge = await certificationEvaluationRepository.selectNextCertificationChallenge({
