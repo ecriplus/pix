@@ -52,12 +52,7 @@ const getSessionExpirationDate = async function ({ code }) {
   return sessionExpirationDate;
 };
 
-const deleteByOrganizationId = async function ({ organizationId }) {
-  await knex('schools').where({ organizationId }).delete();
-};
-
 export {
-  deleteByOrganizationId,
   getByCode,
   getById,
   getDivisions,

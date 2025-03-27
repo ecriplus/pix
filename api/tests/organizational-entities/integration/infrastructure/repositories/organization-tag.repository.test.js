@@ -96,34 +96,4 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       expect(foundOrganizations).to.have.lengthOf(2);
     });
   });
-
-  describe('#deleteTag', function () {
-    it('delete organizationTags', async function () {
-      // given
-      const organization1 = databaseBuilder.factory.buildOrganization();
-      const organization2 = databaseBuilder.factory.buildOrganization();
-      const tag1 = databaseBuilder.factory.buildTag({ name: 'tag1' });
-      const tag2 = databaseBuilder.factory.buildTag({ name: 'tag2' });
-      databaseBuilder.factory.buildOrganizationTag({
-        organizationId: organization1.id,
-        tagId: tag1.id,
-      });
-      databaseBuilder.factory.buildOrganizationTag({
-        organizationId: organization2.id,
-        tagId: tag2.id,
-      });
-      databaseBuilder.factory.buildOrganizationTag({
-        organizationId: organization1.id,
-        tagId: tag2.id,
-      });
-      await databaseBuilder.commit();
-      // when
-      await organizationTagRepository.deleteTagsByOrganizationId(organization1.id);
-      // then
-      const organizationTags = await knex('organization-tags').select();
-      expect(organizationTags).to.have.lengthOf(1);
-      expect(organizationTags[0]).to.have.property('tagId', tag2.id);
-      expect(organizationTags[0]).to.have.property('organizationId', organization2.id);
-    });
-  });
 });
