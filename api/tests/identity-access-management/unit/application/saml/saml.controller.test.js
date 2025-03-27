@@ -1,10 +1,10 @@
-import { authenticationController } from '../../../../lib/application/authentication/authentication-controller.js';
-import { usecases } from '../../../../lib/domain/usecases/index.js';
-import { RequestedApplication } from '../../../../src/identity-access-management/infrastructure/utils/network.js';
-import { expect, hFake, sinon } from '../../../test-helper.js';
+import { samlController } from '../../../../../src/identity-access-management/application/saml/saml.controller.js';
+import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
+import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
+import { expect, hFake, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Application | Controller | Authentication', function () {
-  describe('#authenticateExternalUser', function () {
+describe('Unit | Identity Access Management | Application | Controller | Authentication', function () {
+  describe('#authenticateForSaml', function () {
     it('returns an access token', async function () {
       // given
       const accessToken = 'jwt.access.token';
@@ -36,7 +36,7 @@ describe('Unit | Application | Controller | Authentication', function () {
       };
 
       sinon
-        .stub(usecases, 'authenticateExternalUser')
+        .stub(usecases, 'authenticateForSaml')
         .withArgs({
           username: user.username,
           password: user.password,
@@ -48,7 +48,7 @@ describe('Unit | Application | Controller | Authentication', function () {
         .resolves(accessToken);
 
       // when
-      const response = await authenticationController.authenticateExternalUser(request, hFake);
+      const response = await samlController.authenticateForSaml(request, hFake);
 
       // then
       expect(response.statusCode).to.equal(200);

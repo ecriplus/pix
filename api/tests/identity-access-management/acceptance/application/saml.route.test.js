@@ -1,9 +1,10 @@
 import _ from 'lodash';
 import samlify from 'samlify';
 
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { config as settings } from '../../../../src/shared/config.js';
-import { decodeIfValid } from '../../../../src/shared/domain/services/token-service.js';
-import { createServer, databaseBuilder, expect, sinon } from '../../../test-helper.js';
+import { decodeIfValid, tokenService } from '../../../../src/shared/domain/services/token-service.js';
+import { createServer, databaseBuilder, expect, knex, sinon } from '../../../test-helper.js';
 
 const testCertificate = `MIICCzCCAXQCCQD2MlHh/QmGmjANBgkqhkiG9w0BAQsFADBKMQswCQYDVQQGEwJG
 UjEPMA0GA1UECAwGRlJBTkNFMQ4wDAYDVQQHDAVQQVJJUzEMMAoGA1UECgwDUElY
@@ -249,6 +250,263 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
         aud: 'https://app.pix.fr',
       });
       expect(response.headers.location).to.match(/^\/connexion\/gar#[-_a-zA-Z0-9.]+$/);
+    });
+  });
+
+  describe('POST /api/token-from-external-user', function () {
+    const method = 'POST';
+    const url = '/api/token-from-external-user';
+
+    describe('when user has a reconciled Pix account and successfully authenticate to Pix from GAR (saml)', function () {
+      it('returns a 200 with accessToken', async function () {
+        // given
+        const password = 'Pix123';
+        const userAttributes = {
+          firstName: 'saml',
+          lastName: 'jackson',
+          samlId: 'SAMLJACKSONID',
+        };
+        const user = databaseBuilder.factory.buildUser.withRawPassword({
+          username: 'saml.jackson1234',
+          rawPassword: password,
+        });
+        const expectedExternalToken = tokenService.createIdTokenForUserReconciliation(userAttributes);
+
+        const options = {
+          method: 'POST',
+          url: '/api/token-from-external-user',
+          headers: {
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host': 'app.pix.fr',
+          },
+          payload: {
+            data: {
+              attributes: {
+                username: user.username,
+                password: password,
+                'external-user-token': expectedExternalToken,
+                'expected-user-id': user.id,
+              },
+              type: 'external-user-authentication-requests',
+            },
+          },
+        };
+
+        await databaseBuilder.commit();
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result.data.attributes['access-token']).to.exist;
+        const decodedAccessToken = await decodeIfValid(response.result.data.attributes['access-token']);
+        expect(decodedAccessToken).to.include({
+          aud: 'https://app.pix.fr',
+        });
+      });
+
+      it('adds a GAR authentication method', async function () {
+        // given
+        const password = 'Pix123';
+        const userAttributes = {
+          firstName: 'saml',
+          lastName: 'jackson',
+          samlId: 'SAMLJACKSONID',
+        };
+        const user = databaseBuilder.factory.buildUser.withRawPassword({
+          username: 'saml.jackson1234',
+          rawPassword: password,
+        });
+        const expectedExternalToken = tokenService.createIdTokenForUserReconciliation(userAttributes);
+
+        const options = {
+          method: 'POST',
+          url: '/api/token-from-external-user',
+          headers: {
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host': 'app.pix.fr',
+          },
+          payload: {
+            data: {
+              attributes: {
+                username: user.username,
+                password: password,
+                'external-user-token': expectedExternalToken,
+                'expected-user-id': user.id,
+              },
+              type: 'external-user-authentication-requests',
+            },
+          },
+        };
+
+        await databaseBuilder.commit();
+
+        // when
+        await server.inject(options);
+
+        // then
+        const authenticationMethods = await knex('authentication-methods').where({
+          identityProvider: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
+          userId: user.id,
+          externalIdentifier: 'SAMLJACKSONID',
+        });
+        expect(authenticationMethods).to.have.lengthOf(1);
+        expect(authenticationMethods[0].authenticationComplement).to.deep.equal({
+          firstName: 'saml',
+          lastName: 'jackson',
+        });
+      });
+    });
+
+    describe('when the authentication fails', function () {
+      let payload;
+
+      beforeEach(function () {
+        payload = {
+          data: {
+            attributes: {
+              username: 'saml.jackson0101',
+              password: 'password',
+              'external-user-token': 'expectedExternalToken',
+              'expected-user-id': 1,
+            },
+            type: 'external-user-authentication-requests',
+          },
+        };
+      });
+
+      it('returns a 400 Bad Request if username is missing', async function () {
+        // given
+        payload.data.attributes.username = undefined;
+
+        // when
+        const response = await server.inject({ method, url, payload });
+
+        // then
+        expect(response.statusCode).to.equal(400);
+      });
+
+      it('returns a 400 Bad Request if password is missing', async function () {
+        // given
+        payload.data.attributes.password = undefined;
+
+        // when
+        const response = await server.inject({ method, url, payload });
+
+        // then
+        expect(response.statusCode).to.equal(400);
+      });
+
+      it('returns a 400 Bad Request if external-user-token is missing', async function () {
+        // given
+        payload.data.attributes['external-user-token'] = undefined;
+
+        // when
+        const response = await server.inject({ method, url, payload });
+
+        // then
+        expect(response.statusCode).to.equal(400);
+      });
+
+      it('returns a 400 Bad Request if expected-user-id is missing', async function () {
+        // given
+        payload.data.attributes['expected-user-id'] = undefined;
+
+        // when
+        const response = await server.inject({ method, url, payload });
+
+        // then
+        expect(response.statusCode).to.equal(400);
+      });
+
+      context('when user is blocked', function () {
+        context('when the given username is an email', function () {
+          it('returns 403', async function () {
+            // given
+            const email = 'i.am.blocked@example.net';
+            const password = 'pix123';
+            const userAttributes = {
+              firstName: 'I_am',
+              lastName: 'Blocked',
+              samlId: 'someSamlId',
+            };
+            const user = databaseBuilder.factory.buildUser.withRawPassword({
+              email,
+              rawPassword: password,
+            });
+            databaseBuilder.factory.buildUserLogin({ userId: user.id, failureCount: 50, blockedAt: new Date() });
+            const expectedExternalToken = tokenService.createIdTokenForUserReconciliation(userAttributes);
+
+            await databaseBuilder.commit();
+
+            const options = {
+              method: 'POST',
+              url: '/api/token-from-external-user',
+              payload: {
+                data: {
+                  attributes: {
+                    username: email,
+                    password,
+                    'external-user-token': expectedExternalToken,
+                    'expected-user-id': user.id,
+                  },
+                  type: 'external-user-authentication-requests',
+                },
+              },
+            };
+
+            // when
+            const response = await server.inject(options);
+
+            // then
+            expect(response.statusCode).to.equal(403);
+          });
+        });
+
+        context('when the given username is not an email', function () {
+          it('returns 403', async function () {
+            // given
+            const username = 'i_am_blocked';
+            const password = 'pix123';
+            const userAttributes = {
+              firstName: 'I_am',
+              lastName: 'Blocked',
+              samlId: 'someSamlId',
+            };
+            const user = databaseBuilder.factory.buildUser.withRawPassword({
+              username,
+              rawPassword: password,
+            });
+            databaseBuilder.factory.buildUserLogin({ userId: user.id, failureCount: 50, blockedAt: new Date() });
+            const expectedExternalToken = tokenService.createIdTokenForUserReconciliation(userAttributes);
+
+            await databaseBuilder.commit();
+
+            const options = {
+              method: 'POST',
+              url: '/api/token-from-external-user',
+              payload: {
+                data: {
+                  attributes: {
+                    username,
+                    password,
+                    'external-user-token': expectedExternalToken,
+                    'expected-user-id': user.id,
+                  },
+                  type: 'external-user-authentication-requests',
+                },
+              },
+            };
+
+            // when
+            const response = await server.inject(options);
+
+            // then
+            expect(response.statusCode).to.equal(403);
+          });
+        });
+      });
     });
   });
 });

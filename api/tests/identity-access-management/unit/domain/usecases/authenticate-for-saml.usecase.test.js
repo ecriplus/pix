@@ -1,20 +1,20 @@
-import { authenticateExternalUser } from '../../../../lib/domain/usecases/authenticate-external-user.js';
-import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import {
   MissingOrInvalidCredentialsError,
   PasswordNotMatching,
   UserShouldChangePasswordError,
-} from '../../../../src/identity-access-management/domain/errors.js';
-import { AuthenticationMethod } from '../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
-import { RequestedApplication } from '../../../../src/identity-access-management/infrastructure/utils/network.js';
+} from '../../../../../src/identity-access-management/domain/errors.js';
+import { AuthenticationMethod } from '../../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
+import { authenticateForSaml } from '../../../../../src/identity-access-management/domain/usecases/authenticate-for-saml.usecase.js';
+import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import {
   UnexpectedUserAccountError,
   UserAlreadyExistsWithAuthenticationMethodError,
   UserNotFoundError,
-} from '../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
+} from '../../../../../src/shared/domain/errors.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Application | UseCase | authenticate-external-user', function () {
+describe('Unit | Identity Access Management | Domain | UseCase | authenticate-for-saml', function () {
   let lastUserApplicationConnectionsRepository;
   let tokenService;
   let pixAuthenticationService;
@@ -76,7 +76,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
       tokenService.createAccessTokenForSaml.withArgs({ userId: user.id, audience }).resolves(expectedToken);
 
       // when
-      const token = await authenticateExternalUser({
+      const token = await authenticateForSaml({
         username: user.email,
         password,
         externalUserToken,
@@ -122,7 +122,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
       tokenService.createAccessTokenForSaml.withArgs({ userId: user.id, audience }).resolves(expectedToken);
 
       // when
-      await authenticateExternalUser({
+      await authenticateForSaml({
         username: user.email,
         password,
         externalUserToken,
@@ -173,7 +173,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
       userRepository.getForObfuscation.withArgs(expectedUserId).resolves(expectedUser);
 
       // when
-      const error = await catchErr(authenticateExternalUser)({
+      const error = await catchErr(authenticateForSaml)({
         username: user.email,
         password,
         externalUserToken: 'an external user token',
@@ -213,7 +213,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         userRepository.getBySamlId.withArgs(samlId).resolves(userFromExternalUserToken);
 
         // when
-        const error = await catchErr(authenticateExternalUser)({
+        const error = await catchErr(authenticateForSaml)({
           username: userFromCredentials.email,
           password,
           externalUserToken: externalUserToken,
@@ -254,7 +254,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         });
 
         // when
-        await authenticateExternalUser({
+        await authenticateForSaml({
           username: user.email,
           password,
           externalUserToken,
@@ -285,7 +285,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
     });
 
     context('when user should change password', function () {
-      it('also adds GAR authentication method', async function () {
+      it('adds GAR authentication method', async function () {
         // given
         const oneTimePassword = 'Azerty123*';
         const user = createUserWithValidCredentialsWhoShouldChangePassword({
@@ -308,7 +308,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         });
 
         // when
-        await catchErr(authenticateExternalUser)({
+        await catchErr(authenticateForSaml)({
           username: user.email,
           password: oneTimePassword,
           externalUserToken,
@@ -359,7 +359,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         });
 
         // when
-        const error = await catchErr(authenticateExternalUser)({
+        const error = await catchErr(authenticateForSaml)({
           username: user.email,
           password: oneTimePassword,
           externalUserToken,
@@ -395,7 +395,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         .rejects(new UserNotFoundError());
 
       // when
-      const error = await catchErr(authenticateExternalUser)({
+      const error = await catchErr(authenticateForSaml)({
         username: unknownUserEmail,
         password,
         tokenService,
@@ -422,7 +422,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         .rejects(new PasswordNotMatching());
 
       // when
-      const error = await catchErr(authenticateExternalUser)({
+      const error = await catchErr(authenticateForSaml)({
         username: email,
         password: invalidPassword,
         tokenService,
