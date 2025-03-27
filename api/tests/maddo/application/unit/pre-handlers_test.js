@@ -1,6 +1,7 @@
 import boom from '@hapi/boom';
 
 import {
+  isCampaignInJurisdictionPreHandler,
   isOrganizationInJurisdictionPreHandler,
   organizationPreHandler,
 } from '../../../../src/maddo/application/pre-handlers.js';
@@ -78,6 +79,74 @@ describe('Unit | Maddo | Application | pre handlers', function () {
 
       // when
       const prehandlerResult = isOrganizationInJurisdictionPreHandler.method(request, hFake);
+
+      // then
+      expect(prehandlerResult).to.deep.equal(boom.forbidden());
+    });
+  });
+
+  describe('#isCampaignInJurisdictionPreHandler', function () {
+    it('calls continue when campaign is linked to an organization belonging to jurisdiction', async function () {
+      // given
+      const request = {
+        pre: {
+          organizationIds: ['orgaInJuridictionId'],
+        },
+        params: {
+          campaignId: 'campaignInJurisdictionId',
+        },
+      };
+
+      const getCampaignOrganizationId = sinon.stub();
+      getCampaignOrganizationId.withArgs('campaignInJurisdictionId').resolves('orgaInJuridictionId');
+
+      // when
+      const prehandlerResult = await isCampaignInJurisdictionPreHandler.method(request, hFake, {
+        getCampaignOrganizationId,
+      });
+
+      // then
+      expect(prehandlerResult).to.equal(hFake.continue);
+    });
+
+    it('returns forbidden when campaign is linked to an organization not belonging to jurisdiction', async function () {
+      // given
+      const request = {
+        pre: {
+          organizationIds: ['orgaInJuridictionId'],
+        },
+        params: {
+          campaignId: 'campaignNotInJurisdictionId',
+        },
+      };
+
+      const getCampaignOrganizationId = sinon.stub();
+      getCampaignOrganizationId.withArgs('campaignNotInJurisdictionId').resolves('orgaNotInJuridictionId');
+
+      // when
+      const prehandlerResult = await isCampaignInJurisdictionPreHandler.method(request, hFake, {
+        getCampaignOrganizationId,
+      });
+
+      // then
+      expect(prehandlerResult).to.deep.equal(boom.forbidden());
+    });
+
+    it('returns forbidden when jurisdiction has not been resolved before', async function () {
+      // given
+      const request = {
+        params: {
+          campaignId: 'campaignNotInJurisdictionId',
+        },
+      };
+
+      const getCampaignOrganizationId = sinon.stub();
+      getCampaignOrganizationId.withArgs('campaignNotInJurisdictionId').resolves('orgaNotInJuridictionId');
+
+      // when
+      const prehandlerResult = await isCampaignInJurisdictionPreHandler.method(request, hFake, {
+        getCampaignOrganizationId,
+      });
 
       // then
       expect(prehandlerResult).to.deep.equal(boom.forbidden());

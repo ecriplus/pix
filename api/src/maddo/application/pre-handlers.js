@@ -15,10 +15,20 @@ export const organizationPreHandler = {
 
 export const isOrganizationInJurisdictionPreHandler = {
   method: function (request, h) {
-    const jurisdictionOrganizationIds = request.pre?.organizationIds ?? [];
-    if (!jurisdictionOrganizationIds.includes(request.params.organizationId)) {
-      return boom.forbidden();
-    }
-    return h.continue;
+    return isOrganizationInJurisdiction(request.pre?.organizationIds, request.params.organizationId, h);
   },
 };
+
+export const isCampaignInJurisdictionPreHandler = {
+  method: async function (request, h, dependencies) {
+    const organizationId = await dependencies.getCampaignOrganizationId(request.params.campaignId);
+    return isOrganizationInJurisdiction(request.pre?.organizationIds, organizationId, h);
+  },
+};
+
+function isOrganizationInJurisdiction(jurisdictionOrganizationIds = [], organizationId, h) {
+  if (!jurisdictionOrganizationIds.includes(organizationId)) {
+    return boom.forbidden();
+  }
+  return h.continue;
+}
