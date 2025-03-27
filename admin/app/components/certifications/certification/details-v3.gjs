@@ -309,7 +309,7 @@ export default class DetailsV3 extends Component {
         {{t "pages.certifications.certification.details.v3.questions-list.title"}}
       </h2>
       <PixTable
-        @variant="primary"
+        @variant="admin"
         @caption={{t "pages.certifications.certification.details.v3.questions-list.caption"}}
         @data={{@details.certificationChallengesForAdministration}}
       >

@@ -9,7 +9,7 @@ import CampaignType from '../campaigns/type';
 
 <template>
   <section class="no-background">
-    <PixTable @data={{@campaigns}} @caption="Liste des campagnes de l'organisation" class="table">
+    <PixTable @variant="admin" @data={{@campaigns}} @caption="Liste des campagnes de l'organisation" class="table">
       <:columns as |campaign context|>
         <PixTableColumn @context={{context}}>
           <:header>Code</:header>

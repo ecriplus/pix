@@ -33,7 +33,7 @@ export default class CertificationCenterListItems extends Component {
 
       {{#if @certificationCenters}}
         <PixTable
-          @variant="primary"
+          @variant="admin"
           @caption={{t "components.certification-centers.list-items.table.caption"}}
           @data={{@certificationCenters}}
         >

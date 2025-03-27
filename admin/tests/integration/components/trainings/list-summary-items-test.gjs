@@ -1,8 +1,8 @@
-import { render } from '@1024pix/ember-testing-library';
+import { render, within } from '@1024pix/ember-testing-library';
 import ListSummaryItems from 'pix-admin/components/trainings/list-summary-items';
 import { module, test } from 'qunit';
 
-import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest, { t } from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | list-summary-items', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -34,7 +34,9 @@ module('Integration | Component | list-summary-items', function (hooks) {
     );
 
     // then
-    assert.strictEqual(screen.getAllByLabelText('Contenu formatif').length, 2);
+    const table = screen.getByRole('table', { name: t('pages.trainings.training.list.caption') });
+    const rows = within(table).getAllByRole('row');
+    assert.strictEqual(rows.length, 3);
   });
 
   test('it should display trainings summaries data', async function (assert) {
@@ -54,7 +56,8 @@ module('Integration | Component | list-summary-items', function (hooks) {
     );
 
     // then
-    assert.dom(screen.getByLabelText('Contenu formatif')).containsText(id);
-    assert.dom(screen.getByLabelText('Contenu formatif')).containsText(internalTitle);
+    const table = screen.getByRole('table', { name: t('pages.trainings.training.list.caption') });
+    assert.dom(within(table).getByRole('cell', { name: id })).exists();
+    assert.dom(within(table).getByRole('cell', { name: internalTitle })).exists();
   });
 });

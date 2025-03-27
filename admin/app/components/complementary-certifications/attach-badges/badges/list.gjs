@@ -42,7 +42,7 @@ export default class List extends Component {
             {{t "common.forms.mandatory-fields" htmlSafe=true}}
           </p>
 
-          <PixTable @variant="primary" @data={{@options}} @caption="Liste des résultats thématiques">
+          <PixTable @variant="admin" @data={{@options}} @caption="Liste des résultats thématiques">
             <:columns as |row option|>
               <PixTableColumn @context={{option}}>
                 <:header>

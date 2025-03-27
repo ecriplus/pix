@@ -64,7 +64,7 @@ export default class OrganizationTeamSection extends Component {
 
       {{#if @organizationMemberships}}
         <PixTable
-          @variant="primary"
+          @variant="admin"
           @caption={{t "components.organizations.team-section.table.caption"}}
           @data={{@organizationMemberships}}
         >

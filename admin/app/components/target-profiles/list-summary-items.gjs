@@ -2,6 +2,8 @@ import PixFilterBanner from '@1024pix/pix-ui/components/pix-filter-banner';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixMultiSelect from '@1024pix/pix-ui/components/pix-multi-select';
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { fn } from '@ember/helper';
 import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
@@ -44,25 +46,22 @@ export default class TargetProfileListSummaryItems extends Component {
         type="text"
         value={{@id}}
         oninput={{fn @triggerFiltering "id"}}
-        placeholder={{t "pages.target-profiles.filters.search-by-id.placeholder"}}
-        @screenReaderOnly={{true}}
+        aria-label={{t "pages.target-profiles.filters.search-by-id.aria-label"}}
       >
-        <:label>{{t "pages.target-profiles.filters.search-by-id.name"}}</:label>
+        <:label>{{t "pages.target-profiles.filters.search-by-id.label"}}</:label>
       </PixInput>
 
       <PixInput
         type="text"
         value={{@internalName}}
-        placeholder={{t "pages.target-profiles.filters.search-by-internal-name.placeholder"}}
+        aria-label={{t "pages.target-profiles.filters.search-by-internal-name.aria-label"}}
         oninput={{fn @triggerFiltering "internalName"}}
-        @screenReaderOnly={{true}}
       >
-        <:label>{{t "pages.target-profiles.filters.search-by-internal-name.name"}}</:label>
+        <:label>{{t "pages.target-profiles.filters.search-by-internal-name.label"}}</:label>
       </PixInput>
 
       <PixMultiSelect
         @id="categories"
-        @screenReaderOnly={{true}}
         @placeholder={{t "common.filters.target-profile.placeholder"}}
         @onChange={{this.triggerCategoriesFiltering}}
         @values={{@categories}}
@@ -74,48 +73,63 @@ export default class TargetProfileListSummaryItems extends Component {
 
     </PixFilterBanner>
 
-    <div class="content-text content-text--small">
-      <div class="table-admin">
-        <table>
-          <thead>
-            <tr>
-              <th class="table__column table__column--id">{{t "common.fields.id"}}</th>
-              <th>{{t "common.fields.internalName"}}</th>
-              <th>{{t "common.fields.target-profile.category.name"}}</th>
-              <th class="col-date">{{t "common.fields.createdAt"}}</th>
-              <th class="col-status">{{t "common.fields.status"}}</th>
-            </tr>
-          </thead>
-
-          {{#if @summaries}}
-            <tbody>
-              {{#each @summaries as |summary|}}
-                <tr aria-label="Profil cible">
-                  <td class="table__column table__column--id">{{summary.id}}</td>
-                  <td>
-                    <LinkTo @route="authenticated.target-profiles.target-profile" @model={{summary.id}}>
-                      {{summary.internalName}}
-                    </LinkTo>
-                  </td>
-                  <td class="table__column table__column--id">{{t summary.translationKeyCategory}}</td>
-                  <td class="table__column">{{formatDate summary.createdAt}}</td>
-                  <td class="target-profile-table-column__status">
-                    {{if summary.outdated "Obsolète" "Actif"}}
-                  </td>
-                </tr>
-              {{/each}}
-            </tbody>
-          {{/if}}
-        </table>
-
-        {{#unless @summaries}}
-          <div class="table__empty">{{t "common.tables.empty-result"}}</div>
-        {{/unless}}
-      </div>
-    </div>
-
     {{#if @summaries}}
+      <PixTable
+        @variant="admin"
+        @data={{@summaries}}
+        @caption={{t "components.target-profiles.list.table.caption"}}
+        class="table"
+      >
+        <:columns as |summary context|>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "common.fields.id"}}
+            </:header>
+            <:cell>
+              {{summary.id}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "common.fields.internalName"}}
+            </:header>
+            <:cell>
+              <LinkTo @route="authenticated.target-profiles.target-profile" @model={{summary.id}}>
+                {{summary.internalName}}
+              </LinkTo>
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "common.fields.target-profile.category.name"}}
+            </:header>
+            <:cell>
+              {{t summary.translationKeyCategory}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "common.fields.createdAt"}}
+            </:header>
+            <:cell>
+              {{formatDate summary.createdAt}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "common.fields.status"}}
+            </:header>
+            <:cell>
+              {{if summary.outdated "Obsolète" "Actif"}}
+            </:cell>
+          </PixTableColumn>
+        </:columns>
+      </PixTable>
+
       <PixPagination @pagination={{@summaries.meta}} />
+
+    {{else}}
+      <div class="table__empty">{{t "common.tables.empty-result"}}</div>
     {{/if}}
   </template>
 }

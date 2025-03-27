@@ -20,6 +20,7 @@ export default class BadgesList extends Component {
         {{t "components.complementary-certifications.target-profiles.badges-list.title"}}
       </h2>
       <PixTable
+        @variant="admin"
         @data={{this.currentTargetProfileBadges}}
         @caption={{t "components.complementary-certifications.target-profiles.badges-list.caption"}}
       >

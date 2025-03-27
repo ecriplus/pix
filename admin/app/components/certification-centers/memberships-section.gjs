@@ -11,7 +11,7 @@ import MembershipItem from './membership-item';
 
     {{#if @certificationCenterMemberships}}
       <PixTable
-        @variant="primary"
+        @variant="admin"
         @caption={{t "components.memberships-section.table.caption"}}
         @data={{@certificationCenterMemberships}}
       >

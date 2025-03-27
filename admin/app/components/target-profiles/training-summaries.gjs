@@ -1,7 +1,7 @@
 import ListSummaryItems from '../trainings/list-summary-items';
 
 <template>
-  <section class="page-section">
+  <section class="page-section page-with-table">
     <header class="page-section__header">
       <h2 class="page-section__title">Contenus Formatifs</h2>
     </header>

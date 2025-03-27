@@ -16,7 +16,7 @@ export default class Memberships extends Component {
 
     {{#if this.orderedCertificationCenterMemberships}}
       <PixTable
-        @variant="primary"
+        @variant="admin"
         @data={{this.orderedCertificationCenterMemberships}}
         @caption={{t "components.users.certification-centers.memberships.caption"}}
       >

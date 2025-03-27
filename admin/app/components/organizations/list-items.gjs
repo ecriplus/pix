@@ -83,7 +83,7 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
 
     {{#if @organizations}}
       <PixTable
-        @variant="primary"
+        @variant="admin"
         @caption={{t "components.organizations.list-items.table.caption"}}
         @data={{@organizations}}
       >

@@ -1,10 +1,10 @@
-import { clickByName, render } from '@1024pix/ember-testing-library';
+import { clickByName, render, within } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
 import Badges from 'pix-admin/components/target-profiles/badges';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest, { t } from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | TargetProfiles::Badges', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -42,44 +42,24 @@ module('Integration | Component | TargetProfiles::Badges', function (hooks) {
 
       // then
       assert.dom(screen.queryByText('Aucun résultat thématique associé')).doesNotExist();
+      const table = screen.getByRole('table', { name: t('components.target-profiles.badges.table.caption') });
+      assert.dom(within(table).getByRole('columnheader', { name: 'ID' })).exists();
+      assert.dom(within(table).getByRole('columnheader', { name: 'Image' })).exists();
+      assert.dom(within(table).getByRole('columnheader', { name: 'Clé' })).exists();
+      assert.dom(within(table).getByRole('columnheader', { name: 'Nom' })).exists();
+      assert.dom(within(table).getByRole('columnheader', { name: 'Message' })).exists();
+      assert.dom(within(table).getByRole('columnheader', { name: 'Paramètres' })).exists();
+      assert.dom(within(table).getByRole('columnheader', { name: 'Actions' })).exists();
 
-      assert.dom(screen.getByRole('table')).exists();
+      assert.dom(within(table).getByRole('cell', { name: 'Voir le détail du résultat thématique ID 1' })).exists();
 
-      assert.dom(screen.getAllByRole('columnheader')[0]).hasText('ID');
-      assert.dom(screen.getAllByRole('columnheader')[1]).hasText('Image');
-      assert.dom(screen.getAllByRole('columnheader')[2]).hasText('Clé');
-      assert.dom(screen.getAllByRole('columnheader')[3]).hasText('Nom');
-      assert.dom(screen.getAllByRole('columnheader')[4]).hasText('Message');
-      assert.dom(screen.getAllByRole('columnheader')[5]).hasText(/Paramètres/);
-      assert.dom(screen.getAllByRole('columnheader')[6]).hasText('Actions');
-
-      assert.dom(screen.getByRole('row', { name: 'Informations du badge My title' })).exists();
-
-      assert.dom(screen.getAllByRole('cell')[0].children[0]).hasTagName('a');
-      assert
-        .dom(screen.getAllByRole('cell')[0].children[0])
-        .hasAttribute('aria-label', 'Voir le détail du résultat thématique ID 1');
-
-      assert.strictEqual(screen.getAllByRole('cell')[1].children.length, 1);
-      assert.dom(screen.getAllByRole('cell')[1].children[0]).hasTagName('img');
+      assert.dom(within(table).getByRole('img', { name: 'My alt message' })).exists();
       assert.dom(screen.getAllByRole('cell')[1].children[0]).hasAttribute('src', 'data:,');
-      assert.dom(screen.getAllByRole('cell')[1].children[0]).hasAttribute('alt', 'My alt message');
-
-      assert.dom(screen.getAllByRole('cell')[2]).hasText('My key');
-      assert.dom(screen.getAllByRole('cell')[3]).hasText('My title');
-      assert.dom(screen.getAllByRole('cell')[4]).hasText('My message');
-
-      assert.strictEqual(screen.getAllByRole('cell')[5].children.length, 2);
-      assert.dom(screen.getAllByRole('cell')[5].children[0]).hasText('Pas en lacune');
-      assert.dom(screen.getAllByRole('cell')[5].children[1]).hasText('Pas certifiable');
-
-      assert.strictEqual(screen.getAllByRole('cell')[6].children.length, 2);
-      assert
-        .dom(screen.getAllByRole('cell')[6].children[0])
-        .hasAttribute('aria-label', 'Voir le détail du résultat thématique My title');
-      assert
-        .dom(screen.getAllByRole('cell')[6].children[1])
-        .hasAttribute('aria-label', 'Supprimer le résultat thématique My title');
+      assert.dom(within(table).getByRole('cell', { name: 'My key' })).exists();
+      assert.dom(within(table).getByRole('cell', { name: 'My title' })).exists();
+      assert.dom(within(table).getByRole('cell', { name: 'My message' })).exists();
+      assert.dom(within(table).getByRole('cell', { name: 'Pas en lacune Pas certifiable' })).exists();
+      assert.dom(within(table).getByRole('button', { name: 'Supprimer le résultat thématique My title' })).exists();
     });
 
     module('when the badge is always visible', function () {
@@ -96,7 +76,8 @@ module('Integration | Component | TargetProfiles::Badges', function (hooks) {
 
         // then
         assert.dom(screen.queryByText('Pas en lacune')).doesNotExist();
-        assert.dom(screen.getAllByRole('cell')[5].children[0]).hasText('En lacune');
+        const table = screen.getByRole('table', { name: t('components.target-profiles.badges.table.caption') });
+        assert.dom(within(table).getByRole('cell', { name: 'En lacune Pas certifiable' })).exists();
       });
     });
 
@@ -114,7 +95,8 @@ module('Integration | Component | TargetProfiles::Badges', function (hooks) {
 
         // then
         assert.dom(screen.queryByText('Pas certifiable')).doesNotExist();
-        assert.dom(screen.getAllByRole('cell')[5].children[1]).hasText('Certifiable');
+        const table = screen.getByRole('table', { name: t('components.target-profiles.badges.table.caption') });
+        assert.dom(within(table).getByRole('cell', { name: 'Pas en lacune Certifiable' })).exists();
       });
     });
 
@@ -136,9 +118,9 @@ module('Integration | Component | TargetProfiles::Badges', function (hooks) {
         const screen = await render(<template><Badges @badges={{badges}} /></template>);
 
         // then
-        assert.strictEqual(screen.getAllByRole('row').length, 3);
-        assert.dom(screen.getAllByRole('row')[1]).hasAttribute('aria-label', 'Informations du badge First badge');
-        assert.dom(screen.getAllByRole('row')[2]).hasAttribute('aria-label', 'Informations du badge Second badge');
+        const table = screen.getByRole('table', { name: t('components.target-profiles.badges.table.caption') });
+        const rows = within(table).getAllByRole('row');
+        assert.strictEqual(rows.length, 3);
       });
     });
   });

@@ -21,6 +21,10 @@
       text-decoration: none;
     }
   }
+
+  &__badge-table {
+    overflow: unset;
+  }
 }
 
 .insights__section > .pix-banner-alert {

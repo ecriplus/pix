@@ -174,7 +174,7 @@ module('Acceptance | Session List', function (hooks) {
           const screen = await visit('/sessions/list');
           await click(
             screen.getByRole('button', {
-              name: 'Filtrer les sessions en sélectionnant un statut',
+              name: t('pages.sessions.table.headers.status'),
             }),
           );
           await screen.findByRole('listbox');
@@ -216,7 +216,7 @@ module('Acceptance | Session List', function (hooks) {
           const screen = await visit('/sessions/list');
           await click(
             screen.getByRole('button', {
-              name: 'Filtrer les sessions par leur version',
+              name: t('pages.sessions.list.filters.version.label'),
             }),
           );
           await screen.findByRole('listbox');
@@ -239,7 +239,7 @@ module('Acceptance | Session List', function (hooks) {
           const screen = await visit('/sessions/list');
           await click(
             screen.getByRole('button', {
-              name: 'Filtrer les sessions par leur version',
+              name: t('pages.sessions.list.filters.version.label'),
             }),
           );
           await screen.findByRole('listbox');

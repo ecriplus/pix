@@ -163,7 +163,7 @@ export default class OrganizationTargetProfilesSectionComponent extends Componen
       </header>
       {{#if @targetProfileSummaries}}
         <PixTable
-          @variant="primary"
+          @variant="admin"
           @caption={{t "components.organizations.target-profiles-section.table.caption"}}
           @data={{this.sortedTargetProfileSummaries}}
         >

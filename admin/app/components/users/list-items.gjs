@@ -7,7 +7,7 @@ import { t } from 'ember-intl';
 <template>
   {{#if @users}}
     <PixTable
-      @variant="primary"
+      @variant="admin"
       @caption={{t "components.users.list-items.table.caption"}}
       @data={{@users}}
       class="table"

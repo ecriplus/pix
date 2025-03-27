@@ -28,59 +28,53 @@
           "pages.trainings.training.targetProfiles.tabName"
         }}</h2>
     </header>
-    <div class="content-text content-text--small">
-      <div class="table-admin">
-        {{#if @model.targetProfileSummaries}}
-          <PixTable
-            @variant="primary"
-            @data={{@model.training.sortedTargetProfileSummaries}}
-            @caption="Profil cible associé au contenu"
-          >
-            <:columns as |row context|>
-              <PixTableColumn @context={{context}} class="table__column--wide">
-                <:header>
-                  ID
-                </:header>
-                <:cell>
-                  {{row.id}}
-                </:cell>
-              </PixTableColumn>
-              <PixTableColumn @context={{context}} class="table__column--wide">
-                <:header>
-                  Nom interne du profil cible
-                </:header>
-                <:cell>
-                  <LinkTo @route="authenticated.target-profiles.target-profile" @model={{row.id}}>
-                    {{row.internalName}}
-                  </LinkTo>
-                </:cell>
-              </PixTableColumn>
-              <PixTableColumn @context={{context}} class="table__column--wide">
-                <:header>
-                  Statut
-                </:header>
-                <:cell>
-                  {{if row.outdated "Obsolète" "Actif"}}
-                </:cell>
-              </PixTableColumn>
-              <PixTableColumn @context={{context}} class="table__column--wide">
-                <:header>
-                  Actions
-                </:header>
-                <:cell>
-                  <PixButton @variant="error" @iconBefore="delete" @triggerAction={{fn this.detachTargetProfile row}}>
-                    Détacher
-                  </PixButton>
-                </:cell>
-              </PixTableColumn>
-            </:columns>
-          </PixTable>
-        {{/if}}
-
-        {{#unless @model.targetProfileSummaries}}
-          <div class="table__empty">Aucun profil cible associé à ce contenu formatif</div>
-        {{/unless}}
-      </div>
-    </div>
+    {{#if @model.targetProfileSummaries}}
+      <PixTable
+        @variant="admin"
+        @data={{@model.training.sortedTargetProfileSummaries}}
+        @caption="Profil cible associé au contenu"
+      >
+        <:columns as |row context|>
+          <PixTableColumn @context={{context}} class="table__column--wide">
+            <:header>
+              ID
+            </:header>
+            <:cell>
+              {{row.id}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="table__column--wide">
+            <:header>
+              Nom interne du profil cible
+            </:header>
+            <:cell>
+              <LinkTo @route="authenticated.target-profiles.target-profile" @model={{row.id}}>
+                {{row.internalName}}
+              </LinkTo>
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="table__column--wide">
+            <:header>
+              Statut
+            </:header>
+            <:cell>
+              {{if row.outdated "Obsolète" "Actif"}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class="table__column--wide">
+            <:header>
+              Actions
+            </:header>
+            <:cell>
+              <PixButton @variant="error" @iconBefore="delete" @triggerAction={{fn this.detachTargetProfile row}}>
+                Détacher
+              </PixButton>
+            </:cell>
+          </PixTableColumn>
+        </:columns>
+      </PixTable>
+    {{else}}
+      <div class="table__empty">Aucun profil cible associé à ce contenu formatif</div>
+    {{/if}}
   </section>
 </div>

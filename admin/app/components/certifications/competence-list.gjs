@@ -85,7 +85,7 @@ export default class CertificationCompetenceList extends Component {
       {{/each}}
     {{else}}
       <PixTable
-        @variant="primary"
+        @variant="admin"
         @caption={{t "pages.certifications.certification.result.table.label"}}
         @data={{@competences}}
       >

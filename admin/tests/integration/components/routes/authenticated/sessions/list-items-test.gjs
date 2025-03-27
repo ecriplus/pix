@@ -4,7 +4,7 @@ import ListItems from 'pix-admin/components/sessions/list-items';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import setupIntlRenderingTest from '../../../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest, { t } from '../../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | routes/authenticated/sessions | list-items', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -113,7 +113,7 @@ module('Integration | Component | routes/authenticated/sessions | list-items', f
       // when
       await click(
         screen.getByRole('button', {
-          name: 'Filtrer les sessions en sélectionnant un type de centre de certification',
+          name: t('pages.sessions.table.headers.type'),
         }),
       );
       await screen.findByRole('listbox');
@@ -142,7 +142,7 @@ module('Integration | Component | routes/authenticated/sessions | list-items', f
       // when
       await click(
         screen.getByRole('button', {
-          name: 'Filtrer les sessions en sélectionnant un type de centre de certification',
+          name: t('pages.sessions.table.headers.type'),
         }),
       );
       await screen.findByRole('listbox');
@@ -161,7 +161,7 @@ module('Integration | Component | routes/authenticated/sessions | list-items', f
       // when
       await click(
         screen.getByRole('button', {
-          name: 'Filtrer les sessions en sélectionnant un statut',
+          name: t('pages.sessions.table.headers.status'),
         }),
       );
       await screen.findByRole('listbox');
@@ -191,7 +191,7 @@ module('Integration | Component | routes/authenticated/sessions | list-items', f
       // when
       await click(
         screen.getByRole('button', {
-          name: 'Filtrer les sessions en sélectionnant un statut',
+          name: t('pages.sessions.table.headers.status'),
         }),
       );
       await screen.findByRole('listbox');
@@ -210,7 +210,7 @@ module('Integration | Component | routes/authenticated/sessions | list-items', f
       // when
       await click(
         screen.getByRole('button', {
-          name: 'Filtrer les sessions par leur version',
+          name: t('pages.sessions.list.filters.version.label'),
         }),
       );
       await screen.findByRole('listbox');
@@ -239,7 +239,7 @@ module('Integration | Component | routes/authenticated/sessions | list-items', f
       // when
       await click(
         screen.getByRole('button', {
-          name: 'Filtrer les sessions par leur version',
+          name: t('pages.sessions.list.filters.version.label'),
         }),
       );
       await screen.findByRole('listbox');

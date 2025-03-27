@@ -5,7 +5,11 @@ import { t } from 'ember-intl';
 
 <template>
   {{#if @withRequiredActionSessions}}
-    <PixTable @data={{@withRequiredActionSessions}} @caption={{t "pages.sessions.table.required-actions.caption"}}>
+    <PixTable
+      @variant="admin"
+      @data={{@withRequiredActionSessions}}
+      @caption={{t "pages.sessions.table.required-actions.caption"}}
+    >
       <:columns as |row withRequiredActionSession|>
         <PixTableColumn @context={{withRequiredActionSession}} class="table__column--medium">
           <:header>

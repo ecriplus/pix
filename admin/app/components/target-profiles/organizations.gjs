@@ -168,7 +168,7 @@ export default class Organizations extends Component {
         </form>
       </div>
     </section>
-    <section class="page-section">
+    <section class="page-section organizations-list">
       <header class="page-section__header">
         <h2 class="page-section__title">Organisations</h2>
       </header>

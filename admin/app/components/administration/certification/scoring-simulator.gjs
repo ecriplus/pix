@@ -120,7 +120,7 @@ export default class ScoringSimulator extends Component {
 
     {{#if this.simulatorReport.data.attributes.competences}}
       <PixTable
-        @variant="primary"
+        @variant="admin"
         @caption={{t "pages.administration.certification.scoring-simulator.table.label"}}
         @data={{this.simulatorReport.data.attributes.competences}}
       >
