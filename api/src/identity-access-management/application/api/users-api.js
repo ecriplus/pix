@@ -28,7 +28,16 @@ export const markAssessmentInstructionsInfoAsSeen = async ({ userId }) => {
   return usecases.markAssessmentInstructionsInfoAsSeen({ userId });
 };
 
-export const getUserDetailsByUserIds = async ({ userIds }) => {
-  const users = await usecases.getUserDetailsByUserIds({ userIds });
+/**
+ * @function
+ * @name getActiveByUserIds
+ *
+ * @param {Object} params
+ * @param {Array<Number>} params.userIds
+ * @returns {Promise<Array<UserDTO>>}
+ */
+export const getActiveByUserIds = async ({ userIds }) => {
+  const users = await usecases.getActiveByUserIds({ userIds });
+
   return users.map((user) => new UserDTO(user));
 };
