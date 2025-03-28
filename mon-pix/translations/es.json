@@ -147,6 +147,12 @@
     }
   },
   "components": {
+    "attestations": {
+      "obtainedAt": "Fecha de emisión: {date}",
+      "title": {
+        "numeric-sensivity": "Certificado de sensibilización digital"
+      }
+    },
     "authentication": {
       "login-form": {
         "fields": {
@@ -354,7 +360,8 @@
   },
   "pages": {
     "attestations" : {
-      "title": "Mis títulos"
+      "title": "Mis títulos",
+      "subtitle": "Acceda a todos sus certificados Pix y descárguelos."
     },
     "account-recovery": {
       "errors": {

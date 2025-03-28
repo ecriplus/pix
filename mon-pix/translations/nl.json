@@ -147,6 +147,12 @@
     }
   },
   "components": {
+    "attestations": {
+      "obtainedAt": "Datum van uitgave: {date}",
+      "title": {
+        "numeric-sensivity": "Digitaal bewustzijnscertificaat"
+      }
+    },
     "authentication": {
       "login-form": {
         "fields": {
@@ -354,7 +360,8 @@
   },
   "pages": {
     "attestations" : {
-      "title": "Mijn getuigschriften"
+      "title": "Mijn getuigschriften",
+      "subtitle": "Krijg toegang tot al je Pix-certificaten en download ze."
     },
     "account-recovery": {
       "errors": {

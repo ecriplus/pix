@@ -147,6 +147,12 @@
     }
   },
   "components": {
+    "attestations": {
+      "obtainedAt": "Date de délivrance: {date}",
+      "title": {
+        "numeric-sensivity": "Attestation de sensibilisation au numérique"
+      }
+    },
     "authentication": {
       "login-form": {
         "fields": {
@@ -498,6 +504,7 @@
       "title": "Fin du test"
     },
     "attestations": {
+      "subtitle": "Accédez et téléchargez l’ensemble de vos attestations Pix.",
       "title": "Mes attestations"
     },
     "authentication": {

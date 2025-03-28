@@ -11,6 +11,8 @@
 
 /* components */
 @use 'components/ui/page-header' as *;
+@use '../components/attestations/card' as *;
+@use '../components/attestations/content' as *;
 @use '../components/campaigns/assessment/results/evaluation-results-hero/attestation-result' as *;
 @use 'components/campaigns/assessment/start-landing-page/campaign-landing-page-details' as *;
 @use 'components/campaigns/assessment/start-landing-page/campaign-step' as *;
