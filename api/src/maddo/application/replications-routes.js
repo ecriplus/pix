@@ -18,7 +18,11 @@ const register = async function (server) {
           }),
         },
         handler: replicate,
-        notes: ['- Permet à une application de lancer une réplication entre le datawarehouse et le datamart'],
+        description: 'Lancer un job de réplication.',
+        notes: [
+          'Permet à une application de lancer une réplication entre le datawarehouse et le datamart.',
+          '**Cette route nécessite le scope replication.**',
+        ],
         tags: ['api', 'replications'],
       },
     },

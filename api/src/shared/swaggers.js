@@ -34,7 +34,7 @@ class PixOpenApiBaseDefinition {
      */
     this.swaggerConfiguration = {
       OAS: 'v3.0',
-      routeTag: 'api',
+      routeTag: (tags) => tags.includes('api') && !tags.includes('healthcheck'),
       info: {
         title: 'Welcome to the Pix api catalog',
         version: packageJSON.version,
