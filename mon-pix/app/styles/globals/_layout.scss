@@ -81,6 +81,7 @@ img {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  margin-bottom: var(--pix-spacing-10x);
 }
 
 .global-page-container__streched-content {
