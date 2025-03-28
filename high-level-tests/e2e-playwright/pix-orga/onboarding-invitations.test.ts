@@ -1,8 +1,8 @@
 import { expect } from '@playwright/test';
 
-import { useLoggedUser } from '../helpers/auth.ts';
-import { databaseBuilder } from '../helpers/db.ts';
-import { test } from '../helpers/fixtures.ts';
+import { useLoggedUser } from '../helpers/auth.js';
+import { databaseBuilder } from '../helpers/db.js';
+import { test } from '../helpers/fixtures.js';
 
 test('A new user joins a new organization from an invitation link', async function ({ page }) {
   const invitation = databaseBuilder.factory.buildOrganizationInvitation();
@@ -11,7 +11,7 @@ test('A new user joins a new organization from an invitation link', async functi
   await page.goto(`/rejoindre?invitationId=${invitation.id}&code=${invitation.code}`);
   await expect(page.getByText('Vous êtes invité(e) à')).toBeVisible();
 
-  test.step('signup user', async () => {
+  await test.step('signup user', async () => {
     await page.getByRole('textbox', { name: 'Prénom' }).fill('mini');
     await page.getByRole('textbox', { name: 'Nom', exact: true }).fill('pixou');
     await page.getByRole('textbox', { name: 'Adresse e-mail' }).fill('minipixou@example.net');
@@ -34,7 +34,7 @@ test('An existing user joins a new organization from an invitation link', async 
   await page.goto(`/rejoindre?invitationId=${invitation.id}&code=${invitation.code}`);
   await expect(page.getByText('Vous êtes invité(e) à')).toBeVisible();
 
-  test.step('signin user', async () => {
+  await test.step('signin user', async () => {
     await page.getByRole('button', { name: 'Se connecter' }).click();
     await page.getByRole('textbox', { name: 'Adresse e-mail' }).fill(user.email);
     await page.getByRole('textbox', { name: 'Mot de passe' }).fill('pix123');
@@ -58,7 +58,7 @@ test.describe('When user is already authenticated to Pix Orga', () => {
     await page.goto(`/rejoindre?invitationId=${invitation.id}&code=${invitation.code}`);
     await expect(page.getByText('Vous êtes invité(e) à')).toBeVisible();
 
-    test.step('signin user', async () => {
+    await test.step('signin user', async () => {
       await page.getByRole('button', { name: 'Se connecter' }).click();
       await page.getByRole('textbox', { name: 'Adresse e-mail' }).fill(user.email);
       await page.getByRole('textbox', { name: 'Mot de passe' }).fill('pix123');
