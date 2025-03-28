@@ -91,12 +91,15 @@ module('Integration | Components | Campaigns | Assessment | Evaluation Results T
 
     module('when participation is not already shared', function (hooks) {
       let screen;
+      let onResultsSharedStub;
 
       hooks.beforeEach(async function () {
         // given
         this.set('isParticipationShared', false);
         this.set('campaignId', 1);
         this.set('campaignParticipationResultId', 1);
+        onResultsSharedStub = sinon.stub();
+        this.set('onResultsShared', onResultsSharedStub);
 
         // when
         screen = await render(
@@ -105,6 +108,7 @@ module('Integration | Components | Campaigns | Assessment | Evaluation Results T
   @isParticipationShared={{this.isParticipationShared}}
   @campaignParticipationResultId={{this.campaignParticipationResultId}}
   @campaignId={{this.campaignId}}
+  @onResultsShared={{this.onResultsShared}}
 />`,
         );
       });
@@ -142,6 +146,16 @@ module('Integration | Components | Campaigns | Assessment | Evaluation Results T
 
           // then
           assert.true(campaignParticipationResultServiceStub.calledOnce);
+        });
+        test('it should call the onResultsShared function', async function (assert) {
+          // given
+          sinon.stub(campaignParticipationResultService, 'share');
+
+          // when
+          await click(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') }));
+
+          // then
+          assert.true(onResultsSharedStub.calledOnce);
         });
 
         module('when share action fails', function () {

@@ -39,6 +39,7 @@ export default class EvaluationResultsTabsTrainings extends Component {
 
       const campaignParticipationResultToShare = this.args.campaignParticipationResult;
       await this.campaignParticipationResult.share(campaignParticipationResultToShare, this.args.questResults);
+      this.args.onResultsShared();
 
       campaignParticipationResultToShare.isShared = true;
       campaignParticipationResultToShare.canImprove = false;
