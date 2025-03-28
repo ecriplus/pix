@@ -28,34 +28,6 @@ module('Unit | Model | jury-certification-summary', function (hooks) {
     });
   });
 
-  module('#hasSeenEndTestScreenLabel', function () {
-    test('it returns an empty string when it has seen end test screen', function (assert) {
-      // given
-      const juryCertificationSummaryProcessed = store.createRecord('jury-certification-summary', {
-        hasSeenEndTestScreen: true,
-      });
-
-      // when
-      const hasSeenEndTestScreenLabel = juryCertificationSummaryProcessed.hasSeenEndTestScreenLabel;
-
-      // then
-      assert.strictEqual(hasSeenEndTestScreenLabel, '');
-    });
-
-    test("it returns 'non' when it has not seen end test screen", function (assert) {
-      // given
-      const juryCertificationSummaryProcessed = store.createRecord('jury-certification-summary', {
-        hasSeenEndTestScreen: false,
-      });
-
-      // when
-      const hasSeenEndTestScreenLabel = juryCertificationSummaryProcessed.hasSeenEndTestScreenLabel;
-
-      // then
-      assert.strictEqual(hasSeenEndTestScreenLabel, 'non');
-    });
-  });
-
   module('#numberOfCertificationIssueReportsWithRequiredActionLabel', function () {
     test('it returns an empty string when there are no issue reports', function (assert) {
       // given

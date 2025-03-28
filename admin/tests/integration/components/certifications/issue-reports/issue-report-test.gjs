@@ -156,7 +156,6 @@ module('Integration | Component | certifications/issue-report', function (hooks)
       subcategory: certificationIssueReportSubcategories.EXTRA_TIME_PERCENTAGE,
       expectedLabel: 'Ajout/modification du temps majoré',
     },
-    { subcategory: certificationIssueReportSubcategories.LEFT_EXAM_ROOM, expectedLabel: 'Écran de fin de test non vu' },
     {
       subcategory: certificationIssueReportSubcategories.SIGNATURE_ISSUE,
       expectedLabel: 'Était présent(e) mais a oublié de signer, ou a signé sur la mauvaise ligne',
