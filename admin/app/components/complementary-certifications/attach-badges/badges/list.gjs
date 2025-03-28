@@ -35,14 +35,14 @@ export default class List extends Component {
       {{/if}}
 
       <section class="complementary-certification-attach-badges__section">
-        <h1>Résultats thématiques certifiants</h1>
+        <h1>Badges certifiants</h1>
 
         <div class="complementary-certification-attach-badges-section__table">
           <p>
             {{t "common.forms.mandatory-fields" htmlSafe=true}}
           </p>
 
-          <PixTable @variant="admin" @data={{@options}} @caption="Liste des résultats thématiques">
+          <PixTable @variant="admin" @data={{@options}} @caption="Liste des badges">
             <:columns as |row option|>
               <PixTableColumn @context={{option}}>
                 <:header>
@@ -69,8 +69,8 @@ export default class List extends Component {
                   <ContentHeader>
                     <:default>Niveau</:default>
                     <:tooltip>
-                      Renseignez un chiffre unique pour chaque RT, niveau minimum = 1 niveau maximum = nombre total de
-                      RT.
+                      Renseignez un chiffre unique pour chaque badge, niveau minimum = 1 niveau maximum = nombre total
+                      de badge.
                     </:tooltip>
                   </ContentHeader>
                 </:header>
@@ -78,7 +78,7 @@ export default class List extends Component {
                   <PixInput
                     @id="{{row.id}}-level"
                     name="level"
-                    placeholder="Exemple de niveau de RT : 1"
+                    placeholder="Exemple de niveau de badge : 1"
                     required="true"
                     aria-required="true"
                     @screenReaderOnly={{true}}
@@ -141,7 +141,7 @@ export default class List extends Component {
                   <ContentHeader>
                     <:default>Label du certificat</:default>
                     <:tooltip>
-                      Renseignez un label qui permet de distinguer chaque RT (exemples : Pix+ Droit Expert, CléA
+                      Renseignez un label qui permet de distinguer chaque badge (exemples : Pix+ Droit Expert, CléA
                       Numérique, Pix+ Edu 2nd degré Confirmé etc…)
                     </:tooltip>
                   </ContentHeader>

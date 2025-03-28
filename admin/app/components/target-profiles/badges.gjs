@@ -38,7 +38,7 @@ export default class Badges extends Component {
     try {
       badge = this.store.peekRecord('badge', this.badgeIdToDelete);
       await badge.destroyRecord();
-      this.pixToast.sendSuccessNotification({ message: 'Le résultat thématique a été supprimé avec succès.' });
+      this.pixToast.sendSuccessNotification({ message: 'Le badge a été supprimé avec succès.' });
     } catch (error) {
       this.pixToast.sendErrorNotification({ message: error.errors[0].detail });
       badge.rollbackAttributes();
@@ -63,7 +63,7 @@ export default class Badges extends Component {
               <LinkTo
                 @route="authenticated.target-profiles.target-profile.badges.badge"
                 @model={{badge.id}}
-                aria-label="Voir le détail du résultat thématique ID {{badge.id}}"
+                aria-label="Voir le détail du badge ID {{badge.id}}"
               >
                 {{badge.id}}
               </LinkTo>
@@ -137,7 +137,7 @@ export default class Badges extends Component {
                   @route="authenticated.target-profiles.target-profile.badges.badge"
                   @size="small"
                   @model={{badge.id}}
-                  aria-label="Voir le détail du résultat thématique {{badge.title}}"
+                  aria-label="Voir le détail du badge {{badge.title}}"
                 >
                   Voir le détail
                 </PixButtonLink>
@@ -147,7 +147,7 @@ export default class Badges extends Component {
                   @triggerAction={{fn this.toggleDisplayConfirm badge.id}}
                   class="badges-table-actions-delete"
                   @iconBefore="delete"
-                  aria-label="Supprimer le résultat thématique {{badge.title}}"
+                  aria-label="Supprimer le badge {{badge.title}}"
                 >
                   Supprimer
                 </PixButton>
@@ -157,12 +157,12 @@ export default class Badges extends Component {
         </:columns>
       </PixTable>
     {{else}}
-      <div class="table__empty">Aucun résultat thématique associé</div>
+      <div class="table__empty">Aucun badge associé</div>
     {{/if}}
 
     <ConfirmPopup
-      @message="Êtes-vous sûr de vouloir supprimer ce résultat thématique ? (Uniquement si le RT n'a pas encore été assigné)"
-      @title="Suppression d'un résultat thématique"
+      @message="Êtes-vous sûr de vouloir supprimer ce badge ? (Uniquement si le badge n'a pas encore été assigné)"
+      @title="Suppression d'un badge"
       @submitTitle="Confirmer"
       @confirm={{fn this.deleteBadge this.badgeIdToDelete}}
       @cancel={{this.toggleDisplayConfirm}}

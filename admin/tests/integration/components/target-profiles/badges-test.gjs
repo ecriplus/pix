@@ -19,7 +19,7 @@ module('Integration | Component | TargetProfiles::Badges', function (hooks) {
 
       // then
       assert.dom('table').doesNotExist();
-      assert.dom(screen.getByText('Aucun résultat thématique associé')).exists();
+      assert.dom(screen.getByText('Aucun badge associé')).exists();
     });
   });
 
@@ -41,7 +41,7 @@ module('Integration | Component | TargetProfiles::Badges', function (hooks) {
       const screen = await render(<template><Badges @badges={{badges}} /></template>);
 
       // then
-      assert.dom(screen.queryByText('Aucun résultat thématique associé')).doesNotExist();
+      assert.dom(screen.queryByText('Aucun badge associé')).doesNotExist();
       const table = screen.getByRole('table', { name: t('components.target-profiles.badges.table.caption') });
       assert.dom(within(table).getByRole('columnheader', { name: 'ID' })).exists();
       assert.dom(within(table).getByRole('columnheader', { name: 'Image' })).exists();
@@ -51,7 +51,7 @@ module('Integration | Component | TargetProfiles::Badges', function (hooks) {
       assert.dom(within(table).getByRole('columnheader', { name: 'Paramètres' })).exists();
       assert.dom(within(table).getByRole('columnheader', { name: 'Actions' })).exists();
 
-      assert.dom(within(table).getByRole('cell', { name: 'Voir le détail du résultat thématique ID 1' })).exists();
+      assert.dom(within(table).getByRole('cell', { name: 'Voir le détail du badge ID 1' })).exists();
 
       assert.dom(within(table).getByRole('img', { name: 'My alt message' })).exists();
       assert.dom(screen.getAllByRole('cell')[1].children[0]).hasAttribute('src', 'data:,');
@@ -59,7 +59,7 @@ module('Integration | Component | TargetProfiles::Badges', function (hooks) {
       assert.dom(within(table).getByRole('cell', { name: 'My title' })).exists();
       assert.dom(within(table).getByRole('cell', { name: 'My message' })).exists();
       assert.dom(within(table).getByRole('cell', { name: 'Pas en lacune Pas certifiable' })).exists();
-      assert.dom(within(table).getByRole('button', { name: 'Supprimer le résultat thématique My title' })).exists();
+      assert.dom(within(table).getByRole('button', { name: 'Supprimer le badge My title' })).exists();
     });
 
     module('when the badge is always visible', function () {
@@ -156,11 +156,11 @@ module('Integration | Component | TargetProfiles::Badges', function (hooks) {
       await screen.findByRole('dialog');
 
       // then
-      assert.dom(screen.getByRole('heading', { name: "Suppression d'un résultat thématique" })).exists();
+      assert.dom(screen.getByRole('heading', { name: "Suppression d'un badge" })).exists();
       assert
         .dom(
           screen.getByText(
-            "Êtes-vous sûr de vouloir supprimer ce résultat thématique ? (Uniquement si le RT n'a pas encore été assigné)",
+            "Êtes-vous sûr de vouloir supprimer ce badge ? (Uniquement si le badge n'a pas encore été assigné)",
           ),
         )
         .exists();
