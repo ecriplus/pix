@@ -63,7 +63,7 @@ describe('Unit | Usecase | authenticate-application', function () {
         const payload = {
           clientId: 'test-apimOsmoseClientId',
           clientSecret: 'bon-secret',
-          scope: 'mauvais-scope',
+          scope: 'mauvais-scope bon-scope',
         };
 
         const clientApplicationRepository = {
@@ -90,7 +90,7 @@ describe('Unit | Usecase | authenticate-application', function () {
     });
 
     context('when given information is correct', function () {
-      it('should return created token', async function () {
+      it('should return created token with single scope', async function () {
         const payload = {
           clientId: 'test-apimOsmoseClientId',
           clientSecret: 'bon-secret',
@@ -105,6 +105,54 @@ describe('Unit | Usecase | authenticate-application', function () {
           clientId: 'test-apimOsmoseClientId',
           clientSecret: 'bon-secret',
           scopes: ['bon-scope'],
+        });
+        clientApplicationRepository.findByClientId.withArgs(payload.clientId).resolves(application);
+
+        const cryptoService = {
+          checkPassword: sinon.stub(),
+        };
+        cryptoService.checkPassword
+          .withArgs({ password: payload.clientSecret, passwordHash: application.clientSecret })
+          .resolves();
+
+        const tokenService = {
+          createAccessTokenFromApplication: sinon.stub(),
+        };
+        const expectedToken = Symbol('Mon Super token');
+        tokenService.createAccessTokenFromApplication
+          .withArgs(
+            application.clientId,
+            application.name,
+            payload.scope,
+            config.authentication.secret,
+            config.authentication.accessTokenLifespanMs,
+          )
+          .resolves(expectedToken);
+
+        const token = await authenticateApplication({
+          ...payload,
+          tokenService,
+          clientApplicationRepository,
+          cryptoService,
+        });
+
+        expect(token).to.be.equal(expectedToken);
+      });
+      it('should return created token with multiple scopes', async function () {
+        const payload = {
+          clientId: 'test-apimOsmoseClientId',
+          clientSecret: 'bon-secret',
+          scope: 'bon-scope autre-bon-scope',
+        };
+
+        const clientApplicationRepository = {
+          findByClientId: sinon.stub(),
+        };
+        const application = domainBuilder.buildClientApplication({
+          name: 'mon-application',
+          clientId: 'test-apimOsmoseClientId',
+          clientSecret: 'bon-secret',
+          scopes: ['bon-scope', 'autre-bon-scope'],
         });
         clientApplicationRepository.findByClientId.withArgs(payload.clientId).resolves(application);
 
