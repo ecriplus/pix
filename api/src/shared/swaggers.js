@@ -86,6 +86,7 @@ class PixAPI extends PixOpenApiBaseDefinition {
   constructor() {
     super({ endpoint: '/api' });
     this.swaggerConfiguration.grouping = 'tags';
+    this.swaggerConfiguration.tagsGroupingFilter = (tag) => !['api', 'maddo'].includes(tag);
   }
 }
 
