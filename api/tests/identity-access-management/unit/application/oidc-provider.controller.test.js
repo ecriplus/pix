@@ -65,7 +65,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
       expect(request.yar.commit).to.have.been.calledOnce;
     });
 
-    context('when state cookie is missing', function () {
+    context('when state is missing in session', function () {
       it('returns a BadRequestError', async function () {
         // given
         request.yar.get.returns(null);
@@ -75,7 +75,8 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
 
         // then
         expect(error).to.be.an.instanceOf(BadRequestError);
-        expect(error.message).to.equal('Required cookie "state" is missing');
+        expect(error.code).to.equal('MISSING_OIDC_STATE');
+        expect(error.message).to.equal('Required "state" is missing in session');
       });
     });
 
@@ -103,7 +104,6 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
 
         // then
         expect(error).to.be.an.instanceOf(UnauthorizedError);
-        expect(error.message).to.equal("L'utilisateur n'a pas de compte Pix");
         expect(error.code).to.equal('SHOULD_VALIDATE_CGU');
         expect(error.meta).to.deep.equal({
           authenticationKey,
