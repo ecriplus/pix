@@ -1,5 +1,59 @@
 # Pix Changelog
 
+## v5.74.0 (28/03/2025)
+
+
+### :rocket: Amélioration
+- [#11834](https://github.com/1024pix/pix/pull/11834) [FEATURE] Utiliser le composant PixBreadcrumb sur Pix Admin (PIX-17197).
+- [#11895](https://github.com/1024pix/pix/pull/11895) [FEATURE] Appliquer le variant 'admin' à la navigation PixAdmin (PIX-17224).
+- [#11827](https://github.com/1024pix/pix/pull/11827) [FEATURE] Relier le composant transitoire à la page de fin de parcours et à la modal du tab "Formation"(PIX-17016).
+- [#11844](https://github.com/1024pix/pix/pull/11844) [FEATURE] Remplacer "Résultat thématique" par "Badge" (PIX-17152).
+- [#11835](https://github.com/1024pix/pix/pull/11835) [FEATURE] Corrections PixApp page mes parcours (PIX-17182).
+- [#11867](https://github.com/1024pix/pix/pull/11867) [FEATURE] Ajout de PixTabs dans Pix Orga (PIX-17199).
+- [#11865](https://github.com/1024pix/pix/pull/11865) [FEATURE] Ajout de PixTabs dans Pix Certif (PIX-17198). .
+- [#11868](https://github.com/1024pix/pix/pull/11868) [FEATURE] Ajout d'une route de mise à disposition pour les résultats de campagne.
+- [#11883](https://github.com/1024pix/pix/pull/11883) [FEATURE] Autoriser une limite de date sur le script de récupération des décalages de live alerts (PIX-17051).
+- [#11702](https://github.com/1024pix/pix/pull/11702) [FEATURE] Fournir une interface haut niveau pour aider à l'élaboration de quêtes (PIX-17115).
+- [#11783](https://github.com/1024pix/pix/pull/11783) [FEATURE] Ajouter le résumé et la description du niveau global sur le certificat V3 (PIX-17106).
+- [#11812](https://github.com/1024pix/pix/pull/11812) [FEATURE] Pix Table sur Pix Admin : les derniers tableaux (PIX-17162).
+- [#11860](https://github.com/1024pix/pix/pull/11860) [FEATURE] Maddo - Récupération des campagnes d'une organisation (PIX-17223).
+- [#11804](https://github.com/1024pix/pix/pull/11804) [FEATURE] Pix Table sur Pix Admin : Profil Cibles / Contenus formatifs (PIX-17155).
+- [#11548](https://github.com/1024pix/pix/pull/11548) [FEATURE] Actualiser les fichiers de traduction dans toutes les apps.
+
+### :building_construction: Tech
+- [#11892](https://github.com/1024pix/pix/pull/11892) [TECH] add an index on Complementary-certification-courses.
+- [#11874](https://github.com/1024pix/pix/pull/11874) [TECH] :card_file_box: Supprime la contrainte « not null » de la colonne `emitter` de la table `assessement-results` (PIX-17237).
+- [#11814](https://github.com/1024pix/pix/pull/11814) [TECH] Créer un script pour importer la date de dernière connexion (lastLoggedAt) (PIX-10728).
+- [#11857](https://github.com/1024pix/pix/pull/11857) [TECH] déplace la table `campaign-participation-tube-reached-levels` dans le datamart (pix-17221).
+- [#11833](https://github.com/1024pix/pix/pull/11833) [TECH] Migrer la route GET /api/organizations/{id}/member-identities dans /src/team (PIX-17185).
+- [#11864](https://github.com/1024pix/pix/pull/11864) [TECH] Migrer la route /api/token-from-external-user dans le context IAM (PIX-13122).
+- [#11853](https://github.com/1024pix/pix/pull/11853) [TECH] Seeds : ajouter un cas de certification sco simple (PIX-17209).
+- [#11845](https://github.com/1024pix/pix/pull/11845) [TECH] Réécrire les tests unitaires du usecase authenticateUser en tests d'intégration (PIX-16757).
+- [#11838](https://github.com/1024pix/pix/pull/11838) [TECH] Rendre le usecase 'get-next-challenge', pour choisir la prochaine épreuve, transactionnel.
+
+### :bug: Correction
+- [#11889](https://github.com/1024pix/pix/pull/11889) [BUGFIX] Définir une largeur max pour le global container (PIX-17251).
+- [#11886](https://github.com/1024pix/pix/pull/11886) [BUGFIX] Utiliser les bonnes category dans les seeds des profils cibles (PIX-17239).
+- [#11584](https://github.com/1024pix/pix/pull/11584) [BUGFIX] Supprimer l'overflow mis par défaut sur les table dans PixOrga.
+- [#11846](https://github.com/1024pix/pix/pull/11846) [BUGFIX] Normaliser les noms de fichier PDF des attestations (PIX-17206).
+- [#11852](https://github.com/1024pix/pix/pull/11852) [BUGFIX] Encoder l'adresse email présente dans l'URL (PIX-17205).
+
+### :arrow_up: Montée de version
+- [#11903](https://github.com/1024pix/pix/pull/11903) [BUMP] Update dependency @1024pix/pix-ui to ^55.9.0 (mon-pix).
+- [#11901](https://github.com/1024pix/pix/pull/11901) [BUMP] Update dependency @1024pix/pix-ui to ^55.9.0 (junior).
+- [#11897](https://github.com/1024pix/pix/pull/11897) [BUMP] Update dependency @1024pix/pix-ui to ^55.9.0 (certif).
+- [#11873](https://github.com/1024pix/pix/pull/11873) [BUMP] Update dependency @1024pix/pix-ui to ^55.8.0 (admin).
+- [#11893](https://github.com/1024pix/pix/pull/11893) [BUMP] Update dependency @1024pix/pix-ui to ^55.8.0 (orga).
+- [#11882](https://github.com/1024pix/pix/pull/11882) [BUMP] Update dependency @1024pix/pix-ui to ^55.8.0 (mon-pix).
+- [#11875](https://github.com/1024pix/pix/pull/11875) [BUMP] Mise à jour de toutes les dépendances de la racine du monorepo.
+- [#11878](https://github.com/1024pix/pix/pull/11878) [BUMP] Update dependency @1024pix/pix-ui to ^55.8.0 (junior).
+- [#11877](https://github.com/1024pix/pix/pull/11877) [BUMP] Update dependency @1024pix/pix-ui to ^55.8.0 (certif).
+- [#11863](https://github.com/1024pix/pix/pull/11863) [BUMP] Update dependency @1024pix/pix-ui to ^55.7.0 (certif).
+- [#11871](https://github.com/1024pix/pix/pull/11871) [BUMP] Update dependency @1024pix/pix-ui to ^55.7.0 (orga).
+- [#11870](https://github.com/1024pix/pix/pull/11870) [BUMP] Update dependency @1024pix/pix-ui to ^55.7.0 (mon-pix).
+- [#11869](https://github.com/1024pix/pix/pull/11869) [BUMP] Update dependency @1024pix/pix-ui to ^55.7.0 (junior).
+- [#11862](https://github.com/1024pix/pix/pull/11862) [BUMP] Update dependency @1024pix/pix-ui to ^55.7.0 (admin).
+
 ## v5.73.0 (26/03/2025)
 
 
