@@ -106,6 +106,19 @@ const sendInvitations = async function (request, h) {
   return h.response(organizationInvitationSerializer.serialize(organizationInvitations)).created();
 };
 
+const resendInvitation = async function (request, h) {
+  const organizationId = request.params.id;
+  const email = request.payload.data.attributes.email;
+  const locale = extractLocaleFromRequest(request);
+
+  const organizationInvitation = await usecases.resendOrganizationInvitation({
+    organizationId,
+    email,
+    locale,
+  });
+  return h.response(organizationInvitationSerializer.serialize(organizationInvitation));
+};
+
 /**
  *
  * @param request
@@ -134,6 +147,7 @@ export const organizationInvitationController = {
   findPendingInvitations,
   cancelOrganizationInvitation,
   getOrganizationInvitation,
+  resendInvitation,
   sendInvitations,
   sendScoInvitation,
   sendInvitationByLangAndRole,
