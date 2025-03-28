@@ -94,48 +94,7 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
           featureToggles = { isResultsSharedModalEnabled: true };
         }
         this.owner.register('service:featureToggles', FeatureTogglesStub);
-        this.model.trainings = [
-          {
-            title: 'Mon super training 1 youhou',
-            link: 'https://training.net/',
-            type: 'webinaire',
-            locale: 'fr-fr',
-            duration: { hours: 6 },
-            editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
-            editorLogoUrl:
-              'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
-          },
-          {
-            title: 'Mon super training 2 youhou',
-            link: 'https://training.net/',
-            type: 'webinaire',
-            locale: 'fr-fr',
-            duration: { hours: 12 },
-            editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
-            editorLogoUrl:
-              'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
-          },
-          {
-            title: 'Mon super training 3 youhou',
-            link: 'https://training.net/',
-            type: 'webinaire',
-            locale: 'fr-fr',
-            duration: { hours: 6 },
-            editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
-            editorLogoUrl:
-              'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
-          },
-          {
-            title: 'Mon super training 4 youhou',
-            link: 'https://training.net/',
-            type: 'webinaire',
-            locale: 'fr-fr',
-            duration: { hours: 6 },
-            editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
-            editorLogoUrl:
-              'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
-          },
-        ];
+        this.model.trainings = generateTrainings(4);
         this.model.campaignParticipationResult.isShared = false;
         this.model.campaignParticipationResult.competenceResults = [Symbol('competences')];
         this.model.campaign.isForAbsoluteNovice = false;
@@ -169,38 +128,7 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
             featureToggles = { isResultsSharedModalEnabled: false };
           }
           this.owner.register('service:featureToggles', FeatureTogglesStub);
-          this.model.trainings = [
-            {
-              title: 'Mon super training 1 youhou',
-              link: 'https://training.net/',
-              type: 'webinaire',
-              locale: 'fr-fr',
-              duration: { hours: 6 },
-              editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
-              editorLogoUrl:
-                'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
-            },
-            {
-              title: 'Mon super training 2 youhou',
-              link: 'https://training.net/',
-              type: 'webinaire',
-              locale: 'fr-fr',
-              duration: { hours: 12 },
-              editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
-              editorLogoUrl:
-                'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
-            },
-            {
-              title: 'Mon super training 3 youhou',
-              link: 'https://training.net/',
-              type: 'webinaire',
-              locale: 'fr-fr',
-              duration: { hours: 6 },
-              editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
-              editorLogoUrl:
-                'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
-            },
-          ];
+          this.model.trainings = generateTrainings(3);
           this.model.campaignParticipationResult.isShared = false;
           this.model.campaignParticipationResult.competenceResults = [Symbol('competences')];
           this.model.campaign.isForAbsoluteNovice = false;
@@ -227,48 +155,7 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
           featureToggles = { isResultsSharedModalEnabled: true };
         }
         this.owner.register('service:featureToggles', FeatureTogglesStub);
-        this.model.trainings = [
-          {
-            title: 'Mon super training 1 youhou',
-            link: 'https://training.net/',
-            type: 'webinaire',
-            locale: 'fr-fr',
-            duration: { hours: 6 },
-            editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
-            editorLogoUrl:
-              'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
-          },
-          {
-            title: 'Mon super training 2 youhou',
-            link: 'https://training.net/',
-            type: 'webinaire',
-            locale: 'fr-fr',
-            duration: { hours: 12 },
-            editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
-            editorLogoUrl:
-              'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
-          },
-          {
-            title: 'Mon super training 3 youhou',
-            link: 'https://training.net/',
-            type: 'webinaire',
-            locale: 'fr-fr',
-            duration: { hours: 6 },
-            editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
-            editorLogoUrl:
-              'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
-          },
-          {
-            title: 'Mon super training 4 youhou',
-            link: 'https://training.net/',
-            type: 'webinaire',
-            locale: 'fr-fr',
-            duration: { hours: 6 },
-            editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
-            editorLogoUrl:
-              'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
-          },
-        ];
+        this.model.trainings = generateTrainings(4);
         this.model.campaignParticipationResult.isShared = false;
         this.model.campaignParticipationResult.competenceResults = [Symbol('competences')];
         this.model.campaign.isForAbsoluteNovice = false;
@@ -325,3 +212,23 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
     });
   });
 });
+
+function generateTrainings(numberOfTrainings) {
+  const results = [];
+
+  for (let i = 1; i <= numberOfTrainings; i++) {
+    const training = {
+      title: `Mon super training ${i} youhou`,
+      link: 'https://training.net/',
+      type: 'webinaire',
+      locale: 'fr-fr',
+      duration: { hours: 6 },
+      editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
+      editorLogoUrl:
+        'https://images.pix.fr/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
+    };
+    results.push(training);
+  }
+
+  return results;
+}
