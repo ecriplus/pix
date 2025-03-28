@@ -14,7 +14,6 @@ const serialize = function (certificationCourse) {
       'assessment',
       'nbChallenges',
       'examinerComment',
-      'hasSeenEndTestScreen',
       'firstName',
       'lastName',
       'version',

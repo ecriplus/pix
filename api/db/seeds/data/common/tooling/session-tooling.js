@@ -1116,7 +1116,6 @@ function _makeCandidatesPassCertification({
       sex: certificationCandidate.sex,
       birthplace: certificationCandidate.birthCity,
       externalId: certificationCandidate.externalId,
-      hasSeenEndTestScreen: true,
       createdAt: configSession.sessionDate,
       updatedAt: configSession.sessionDate,
       completedAt: configSession.sessionDate,

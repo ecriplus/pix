@@ -16,7 +16,6 @@ describe('Integration | Application | Certification | Evaluation | API', functio
       });
       const session = databaseBuilder.factory.buildSession({ certificationCenterId: certificationCenter.id });
       const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
-        hasSeenEndTestScreen: false,
         sessionId: session.id,
         version: AlgorithmEngineVersion.V3,
       });
