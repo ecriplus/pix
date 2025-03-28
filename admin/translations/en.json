@@ -319,7 +319,8 @@
       "membership-item": {
         "actions": {
           "edit-role": "Edit role"
-        }
+        },
+        "no-last-connection-date-info": "Has not been connected since 03/2025"
       },
       "membership-item-role": {
         "select-role": "Select role"
@@ -455,6 +456,9 @@
           "caption": "Liste des organisations. Contient l'identifiant, le nom, de type et l'identifiant externe de l'organisation."
         }
       },
+      "member-items": {
+        "no-last-connection-date-info": "Has not been connected since 03/2025"
+      },
       "target-profiles-section": {
         "table": {
           "caption": "Liste des profils cibles rattachés à l'organisation. Contient son identifiant et son nom interne. Une action permet de détacher le profil cible quand cela est possible."
@@ -500,6 +504,7 @@
               "select-role": "Select a role"
             }
           },
+          "no-last-connection-date-info": "Has not been connected since 03/2025",
           "section-title": "User Certification Centres",
           "table-headers": {
             "actions-label": "Actions",
@@ -525,6 +530,7 @@
       },
       "organizations": {
         "memberships": {
+          "no-last-connection-date-info": "Has not been connected since 03/2025",
           "table": {
             "caption": "Liste des organisations dont l'utilisateur est membre. Contient l'identifiant en tant que membre, l'identifiant, le nom, l'identifiant externe et le type de l'organisation, et enfin le rôle du membre. Plusieurs actions permettent de changer le rôle du membre et de le désactiver de l'organisation."
           }
@@ -538,6 +544,7 @@
         "authentication-method": {
           "last-application-connection-date": "Last application connection date",
           "last-logged-at": "Last logged at {date}",
+          "no-last-connection-date-info": "Has not been connected since 03/2025",
           "should-change-password-status": "Temporary password :"
         },
         "cgu": {
@@ -558,6 +565,8 @@
         "copied": "Copied!"
       },
       "user-overview": {
+        "global-last-login": "Global last login :",
+        "no-last-connection-date-info": "Has not been connected since 03/2025",
         "sso": "SSO"
       }
     }
