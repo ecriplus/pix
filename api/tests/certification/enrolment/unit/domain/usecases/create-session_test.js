@@ -79,48 +79,12 @@ describe('Unit | UseCase | create-session', function () {
           certificationCenter: certificationCenterName,
           accessCode,
           invigilatorPassword: sinon.match.string,
-          version: 2,
+          version: 3,
           createdBy: userId,
           certificationCandidates: [],
         });
 
         expect(sessionRepository.save).to.have.been.calledWithExactly({ session: expectedSession });
-      });
-
-      context('when session is created by a V3 pilot certification center', function () {
-        it('should save the session with appropriate arguments', async function () {
-          // given
-          const v3PilotCenter = domainBuilder.certification.enrolment.buildCenter({
-            id: certificationCenterId,
-            name: certificationCenterName,
-            isV3Pilot: true,
-          });
-
-          centerRepository.getById.withArgs({ id: certificationCenterId }).resolves(v3PilotCenter);
-
-          // when
-          await createSession({
-            userId,
-            session: sessionToSave,
-            centerRepository,
-            sessionRepository,
-            sessionValidator: sessionValidatorStub,
-            sessionCodeService: sessionCodeServiceStub,
-          });
-
-          // then
-          const expectedSession = new SessionEnrolment({
-            certificationCenterId,
-            certificationCenter: certificationCenterName,
-            accessCode,
-            invigilatorPassword: sinon.match.string,
-            version: 3,
-            createdBy: userId,
-            certificationCandidates: [],
-          });
-
-          expect(sessionRepository.save).to.have.been.calledWithExactly({ session: expectedSession });
-        });
       });
     });
   });

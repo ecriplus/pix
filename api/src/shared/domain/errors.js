@@ -546,13 +546,6 @@ class UserNotAuthorizedToUpdatePasswordError extends DomainError {
   }
 }
 
-class CertificationCenterPilotFeaturesConflictError extends DomainError {
-  constructor(message = 'Certification center pilot features incompatibility', code = 'PILOT_FEATURES_CONFLICT') {
-    super(message);
-    this.code = code;
-  }
-}
-
 class UserNotFoundError extends NotFoundError {
   constructor(message = 'Ce compte est introuvable.', code = 'USER_ACCOUNT_NOT_FOUND') {
     super(message, code);
@@ -1067,7 +1060,6 @@ export {
   CertificationCandidatesError,
   CertificationCenterMembershipCreationError,
   CertificationCenterMembershipDisableError,
-  CertificationCenterPilotFeaturesConflictError,
   CertificationComputeError,
   CertificationEndedByFinalizationError,
   CertificationEndedBySupervisorError,

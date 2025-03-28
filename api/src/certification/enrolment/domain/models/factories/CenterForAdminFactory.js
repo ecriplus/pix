@@ -23,7 +23,6 @@ export class CenterForAdminFactory {
         createdAt: undefined,
         updatedAt: undefined,
         isComplementaryAlonePilot: center.isComplementaryAlonePilot,
-        isV3Pilot: center.isV3Pilot,
       },
       dataProtectionOfficer: {
         firstName: dataProtectionOfficer.firstName,

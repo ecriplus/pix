@@ -56,9 +56,8 @@ const update = async function (request) {
         complementaryCertificationIds,
       });
 
-      const certificationCenterPilotFeatures = await certificationConfigurationUsecases.registerCenterPilotFeatures({
+      const certificationCenterPilotFeatures = await certificationConfigurationUsecases.getCenterPilotFeatures({
         centerId: updatedCertificationCenter.id,
-        isV3Pilot: certificationCenterInformation.isV3Pilot,
       });
 
       return { updatedCertificationCenter, certificationCenterPilotFeatures };

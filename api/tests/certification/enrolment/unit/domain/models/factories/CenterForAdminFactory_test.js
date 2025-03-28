@@ -27,7 +27,6 @@ describe('Unit | Certification | Enrolment | Domain | Models | Factories | Cente
           createdAt: undefined,
           updatedAt: undefined,
           isComplementaryAlonePilot: center.isComplementaryAlonePilot,
-          isV3Pilot: center.isV3Pilot,
         },
         dataProtectionOfficer: {
           firstName: dataProtectionOfficer.firstName,

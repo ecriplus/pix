@@ -49,6 +49,6 @@ export default class AllowedCertificationCenterAccess extends Model {
   }
 
   get isCoreComplementaryCompatibilityEnabled() {
-    return this.isV3Pilot && this.isComplementaryAlonePilot;
+    return this.isComplementaryAlonePilot;
   }
 }

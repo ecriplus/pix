@@ -22,7 +22,7 @@ const buildSession = function ({
   assignedCertificationOfficerId = null,
   invigilatorPassword = 'PIX212',
   certificationCandidates = [],
-  version = 2,
+  version = 3,
   createdBy = null,
 } = {}) {
   return new SessionEnrolment({

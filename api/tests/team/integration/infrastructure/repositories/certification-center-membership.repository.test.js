@@ -398,7 +398,6 @@ describe('Integration | Team | Infrastructure | Repository | Certification Cente
         createdAt: certificationCenter.createdAt,
         externalId: certificationCenter.externalId,
         id: certificationCenter.id,
-        isV3Pilot: certificationCenter.isV3Pilot,
         name: certificationCenter.name,
         type: certificationCenter.type,
         updatedAt: certificationCenter.updatedAt,
