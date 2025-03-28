@@ -26,7 +26,6 @@ describe('Unit | Domain | Models | CertificationReport', function () {
       const certificationReport = domainBuilder.buildCertificationReport({
         certificationCourseId: 1,
         certificationIssueReports: [],
-        hasSeenEndTestScreen: true,
         isCompleted: true,
         abortReason: 'technical',
       });
@@ -44,9 +43,6 @@ describe('Unit | Domain | Models | CertificationReport', function () {
       },
       {
         certificationIssueReports: null,
-      },
-      {
-        hasSeenEndTestScreen: null,
       },
       {
         isCompleted: null,
@@ -138,7 +134,6 @@ describe('Unit | Domain | Models | CertificationReport', function () {
 const validCertificationReportData = {
   certificationCourseId: 1,
   certificationIssueReports: [],
-  hasSeenEndTestScreen: true,
   isCompleted: true,
   abortReason: 'technical',
 };

@@ -15,7 +15,6 @@ describe('Unit | Serializer | JSONAPI | certification-report-serializer', functi
         lastName: 'Lerigolo',
         isCompleted: false,
         examinerComment: 'Certification non terminée...',
-        hasSeenEndTestScreen: false,
         abortReason: 'technical',
         certificationIssueReports: [],
       });
@@ -29,7 +28,6 @@ describe('Unit | Serializer | JSONAPI | certification-report-serializer', functi
             'last-name': 'Lerigolo',
             'is-completed': false,
             'examiner-comment': 'Certification non terminée...',
-            'has-seen-end-test-screen': false,
             'abort-reason': 'technical',
           },
           relationships: {
@@ -99,7 +97,6 @@ describe('Unit | Serializer | JSONAPI | certification-report-serializer', functi
         lastName: 'Lerigolo',
         isCompleted: true,
         examinerComment: 'Trop bien.',
-        hasSeenEndTestScreen: true,
         abortReason: null,
         certificationIssueReports: [],
       });
@@ -113,7 +110,6 @@ describe('Unit | Serializer | JSONAPI | certification-report-serializer', functi
             'last-name': 'Lerigolo',
             'is-completed': true,
             'examiner-comment': 'Trop bien.',
-            'has-seen-end-test-screen': true,
             'abort-reason': null,
           },
         },

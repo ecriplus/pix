@@ -12,7 +12,6 @@ const certificationReportSchemaForFinalization = Joi.object({
   certificationCourseId: Joi.number().required(),
   examinerComment: Joi.string().max(500).allow(null).optional(),
   certificationIssueReports: Joi.array().required(),
-  hasSeenEndTestScreen: Joi.boolean().required(),
   isCompleted: Joi.boolean().required(),
   abortReason: Joi.string().allow(null),
 });
@@ -30,7 +29,6 @@ class CertificationReport {
     this.id = CertificationReport.idFromCertificationCourseId(certificationCourseId);
     this.firstName = firstName;
     this.lastName = lastName;
-    this.hasSeenEndTestScreen = hasSeenEndTestScreen;
     this.certificationIssueReports = certificationIssueReports;
     this.certificationCourseId = certificationCourseId;
     this.isCompleted = isCompleted;
