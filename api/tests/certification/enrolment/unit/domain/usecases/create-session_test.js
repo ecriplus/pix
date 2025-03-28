@@ -1,5 +1,6 @@
 import { SessionEnrolment } from '../../../../../../src/certification/enrolment/domain/models/SessionEnrolment.js';
 import { createSession } from '../../../../../../src/certification/enrolment/domain/usecases/create-session.js';
+import { SESSIONS_VERSIONS } from '../../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | create-session', function () {
@@ -79,7 +80,7 @@ describe('Unit | UseCase | create-session', function () {
           certificationCenter: certificationCenterName,
           accessCode,
           invigilatorPassword: sinon.match.string,
-          version: 3,
+          version: SESSIONS_VERSIONS.V3,
           createdBy: userId,
           certificationCandidates: [],
         });
