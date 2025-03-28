@@ -1066,10 +1066,10 @@
     },
     "user-details": {
       "navbar": {
-        "authentication-methods": "Méthodes de connexion",
         "certification-centers-list": "Pix Certif",
         "cgu": "Terms of service",
         "cgu-aria-label": "Terms of service",
+        "connections": "Connections",
         "details": "Informations prescrit",
         "organizations-list": "Pix Orga",
         "participations-list": "Participations",
