@@ -5,7 +5,6 @@ export default class CertificationReport extends Model {
   @attr('number') certificationCourseId;
   @attr('string') firstName;
   @attr('string') lastName;
-  @attr('boolean') hasSeenEndTestScreen;
   @attr('boolean') isCompleted;
   @attr('string') abortReason;
 
@@ -26,7 +25,6 @@ export default class CertificationReport extends Model {
       certificationCourseId: this.certificationCourseId,
       firstName: this.firstName,
       lastName: this.lastName,
-      hasSeenEndTestScreen: this.hasSeenEndTestScreen,
       isCompleted: this.isCompleted,
       abortReason: this.abortReason,
     };

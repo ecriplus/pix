@@ -31,10 +31,7 @@
         @session={{this.session}}
         @certificationReports={{this.session.completedCertificationReports}}
         @issueReportDescriptionMaxLength={{this.issueReportDescriptionMaxLength}}
-        @onHasSeenEndTestScreenCheckboxClicked={{this.toggleCertificationReportHasSeenEndTestScreen}}
-        @onAllHasSeenEndTestScreenCheckboxesClicked={{this.toggleAllCertificationReportsHasSeenEndTestScreen}}
         @onIssueReportDeleteButtonClicked={{this.deleteCertificationIssueReport}}
-        @shouldDisplayHasSeenEndTestScreenCheckbox={{this.shouldDisplayHasSeenEndTestScreenCheckbox}}
       />
     {{/if}}
   </SessionFinalizationStepContainer>
@@ -58,8 +55,5 @@
 <SessionFinalization::FinalizationConfirmationModal
   @showModal={{this.showConfirmModal}}
   @closeModal={{this.closeModal}}
-  @hasUncheckedHasSeenEndTestScreen={{this.hasUncheckedHasSeenEndTestScreen}}
-  @uncheckedHasSeenEndTestScreenCount={{this.uncheckedHasSeenEndTestScreenCount}}
-  @shouldDisplayHasSeenEndTestScreenCheckbox={{this.shouldDisplayHasSeenEndTestScreenCheckbox}}
   @finalizeSession={{this.finalizeSession}}
 />

@@ -13,14 +13,12 @@ module('Unit | Model | certification report', function (hooks) {
       firstName: 'Clément',
       lastName: 'Tine',
       certificationCourseId: 987,
-      hasSeenEndTestScreen: false,
     });
 
     assert.notPropEqual(model.id, 123);
     assert.deepEqual(model.firstName, 'Clément');
     assert.deepEqual(model.lastName, 'Tine');
     assert.deepEqual(model.certificationCourseId, 987);
-    assert.false(model.hasSeenEndTestScreen);
     assert.deepEqual(model.firstIssueReportDescription, '');
   });
 
@@ -36,7 +34,6 @@ module('Unit | Model | certification report', function (hooks) {
       const certificationReport = store.createRecord('certification-report', {
         id: '123',
         certificationIssueReports: A([issueReport]),
-        hasSeenEndTestScreen: false,
       });
       // when / then
       assert.deepEqual(certificationReport.firstIssueReportDescription, description);
@@ -106,7 +103,6 @@ module('Unit | Model | certification report', function (hooks) {
       const certificationReport = store.createRecord('certification-report', {
         id: '123',
         certificationIssueReports: A([]),
-        hasSeenEndTestScreen: true,
         certificationCourseId: 1,
         firstName: 'A',
         lastName: 'B',
@@ -116,7 +112,6 @@ module('Unit | Model | certification report', function (hooks) {
       // when / then
       assert.deepEqual(certificationReport.toJSON(), {
         id: '123',
-        hasSeenEndTestScreen: true,
         certificationCourseId: 1,
         firstName: 'A',
         lastName: 'B',

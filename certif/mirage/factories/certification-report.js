@@ -17,10 +17,6 @@ export default Factory.extend({
     return 'CH-854';
   },
 
-  hasSeenEndTestScreen() {
-    return false;
-  },
-
   isCompleted() {
     return false;
   },

@@ -4,7 +4,6 @@ import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { certificationIssueReportCategories } from 'pix-certif/models/certification-issue-report';
 import { module, test } from 'qunit';
-import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
@@ -16,8 +15,6 @@ module('Integration | Component | SessionFinalization::CompletedReportsInformati
     store = this.owner.lookup('service:store');
 
     this.set('issueReportDescriptionMaxLength', 500);
-    this.set('toggleCertificationReportHasSeenEndTestScreen', sinon.stub().returns());
-    this.set('toggleAllCertificationReportsHasSeenEndTestScreen', sinon.stub().returns());
   });
 
   test('it shows "1 signalement" if there is exactly one certification issue report', async function (assert) {
@@ -31,7 +28,6 @@ module('Integration | Component | SessionFinalization::CompletedReportsInformati
       firstName: 'Alice',
       lastName: 'Alister',
       certificationIssueReports: [certificationIssueReport],
-      hasSeenEndTestScreen: null,
     });
     this.set('certificationReports', [certificationReport]);
 
@@ -39,8 +35,6 @@ module('Integration | Component | SessionFinalization::CompletedReportsInformati
     await render(hbs`<SessionFinalization::CompletedReportsInformationStep
   @certificationReports={{this.certificationReports}}
   @issueReportDescriptionMaxLength={{this.issueReportDescriptionMaxLength}}
-  @onHasSeenEndTestScreenCheckboxClicked={{this.toggleCertificationReportHasSeenEndTestScreen}}
-  @onAllHasSeenEndTestScreenCheckboxesClicked={{this.toggleAllCertificationReportsHasSeenEndTestScreen}}
 />`);
 
     // then
@@ -64,7 +58,6 @@ module('Integration | Component | SessionFinalization::CompletedReportsInformati
       firstName: 'Alice',
       lastName: 'Alister',
       certificationIssueReports: [certificationIssueReport1, certificationIssueReport2],
-      hasSeenEndTestScreen: null,
     });
     this.set('certificationReports', [certificationReport]);
 
@@ -72,8 +65,6 @@ module('Integration | Component | SessionFinalization::CompletedReportsInformati
     await render(hbs`<SessionFinalization::CompletedReportsInformationStep
   @certificationReports={{this.certificationReports}}
   @issueReportDescriptionMaxLength={{this.issueReportDescriptionMaxLength}}
-  @onHasSeenEndTestScreenCheckboxClicked={{this.toggleCertificationReportHasSeenEndTestScreen}}
-  @onAllHasSeenEndTestScreenCheckboxesClicked={{this.toggleAllCertificationReportsHasSeenEndTestScreen}}
 />`);
 
     // then
@@ -98,8 +89,6 @@ module('Integration | Component | SessionFinalization::CompletedReportsInformati
   @session={{this.session}}
   @certificationReports={{this.certificationReports}}
   @issueReportDescriptionMaxLength={{this.issueReportDescriptionMaxLength}}
-  @onHasSeenEndTestScreenCheckboxClicked={{this.toggleCertificationReportHasSeenEndTestScreen}}
-  @onAllHasSeenEndTestScreenCheckboxesClicked={{this.toggleAllCertificationReportsHasSeenEndTestScreen}}
 />`);
 
     // then
@@ -127,8 +116,6 @@ module('Integration | Component | SessionFinalization::CompletedReportsInformati
   @session={{this.session}}
   @certificationReports={{this.certificationReports}}
   @issueReportDescriptionMaxLength={{this.issueReportDescriptionMaxLength}}
-  @onHasSeenEndTestScreenCheckboxClicked={{this.toggleCertificationReportHasSeenEndTestScreen}}
-  @onAllHasSeenEndTestScreenCheckboxesClicked={{this.toggleAllCertificationReportsHasSeenEndTestScreen}}
 />`);
 
     // then
@@ -139,68 +126,6 @@ module('Integration | Component | SessionFinalization::CompletedReportsInformati
         }),
       )
       .doesNotExist();
-  });
-
-  module('when the end test screen removal feature was disabled during the certification', function () {
-    test('it shows the "Écran de fin de test vu" column', async function (assert) {
-      // given
-      this.certificationReports = [
-        store.createRecord('certification-report', {
-          hasSeenEndTestScreen: null,
-          firstName: 'Alice',
-          lastName: 'Alister',
-          certificationCourseId: 1,
-        }),
-      ];
-      this.issueReportDescriptionMaxLength = 500;
-      this.toggleCertificationReportHasSeenEndTestScreen = sinon.stub().returns();
-      this.toggleAllCertificationReportsHasSeenEndTestScreen = sinon.stub().returns();
-      this.shouldDisplayHasSeenEndTestScreenCheckbox = true;
-
-      // when
-      const screen = await render(hbs`<SessionFinalization::CompletedReportsInformationStep
-  @certificationReports={{this.certificationReports}}
-  @issueReportDescriptionMaxLength={{this.issueReportDescriptionMaxLength}}
-  @onHasSeenEndTestScreenCheckboxClicked={{this.toggleCertificationReportHasSeenEndTestScreen}}
-  @onAllHasSeenEndTestScreenCheckboxesClicked={{this.toggleAllCertificationReportsHasSeenEndTestScreen}}
-  @shouldDisplayHasSeenEndTestScreenCheckbox={{this.shouldDisplayHasSeenEndTestScreenCheckbox}}
-/>`);
-
-      // then
-      assert.dom(screen.getByRole('checkbox', { name: 'Écran de fin du test vu' })).exists();
-      assert
-        .dom(
-          screen.getByRole('checkbox', {
-            name: "Sélectionner l'écran de fin du test vu pour le candidat Alice Alister",
-          }),
-        )
-        .exists();
-    });
-  });
-
-  module('when the end test screen removal feature was enabled during the certification', function () {
-    test('it hides the "Écran de fin de test vu" column', async function (assert) {
-      // given
-      this.certificationReports = [
-        store.createRecord('certification-report', {
-          hasSeenEndTestScreen: null,
-          certificationCourseId: 1,
-        }),
-      ];
-      this.issueReportDescriptionMaxLength = 500;
-      this.shouldDisplayHasSeenEndTestScreenCheckbox = false;
-
-      // when
-      await render(hbs`<SessionFinalization::CompletedReportsInformationStep
-  @certificationReports={{this.certificationReports}}
-  @issueReportDescriptionMaxLength={{this.issueReportDescriptionMaxLength}}
-  @shouldDisplayHasSeenEndTestScreenCheckbox={{this.shouldDisplayHasSeenEndTestScreenCheckbox}}
-/>`);
-
-      // then
-      assert.dom('[data-test-id="finalization-report-all-candidates-have-seen-end-test-screen"]').doesNotExist();
-      assert.dom('[data-test-id="finalization-report-has-seen-end-test-screen_1"]').doesNotExist();
-    });
   });
 
   module('when certification is V3', function () {
@@ -219,7 +144,6 @@ module('Integration | Component | SessionFinalization::CompletedReportsInformati
             firstName: 'Alice',
             lastName: 'Alister',
             certificationIssueReports: [issue1],
-            hasSeenEndTestScreen: null,
           }),
         ];
 
@@ -260,7 +184,6 @@ module('Integration | Component | SessionFinalization::CompletedReportsInformati
             firstName: 'Alice',
             lastName: 'Alister',
             certificationIssueReports: [issue1],
-            hasSeenEndTestScreen: null,
           }),
         ];
 
@@ -307,7 +230,6 @@ module('Integration | Component | SessionFinalization::CompletedReportsInformati
             firstName: 'Alice',
             lastName: 'Alister',
             certificationIssueReports: [issue1, issue2],
-            hasSeenEndTestScreen: null,
           }),
         ];
 

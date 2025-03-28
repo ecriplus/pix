@@ -72,35 +72,6 @@
           </div>
         </:cell>
       </PixTableColumn>
-      {{#if @shouldDisplayHasSeenEndTestScreenCheckbox}}
-        <PixTableColumn @context={{context}}>
-          <:header>
-            <PixCheckbox
-              data-test-id="finalization-report-all-candidates-have-seen-end-test-screen"
-              @isIndeterminate={{this.hasPartialState}}
-              @checked={{this.hasCheckState}}
-              @class="session-finalization-reports__checker"
-              {{on "click" (fn @onAllHasSeenEndTestScreenCheckboxesClicked this.hasCheckedEverything)}}
-            >
-              <:label>{{t "pages.session-finalization.reporting.table.labels.end-of-test-screen"}}</:label>
-            </PixCheckbox>
-          </:header>
-          <:cell>
-            <PixCheckbox
-              @screenReaderOnly={{true}}
-              data-test-id="finalization-report-has-seen-end-test-screen_{{report.certificationCourseId}}"
-              @checked={{report.hasSeenEndTestScreen}}
-              {{on "click" (fn @onHasSeenEndTestScreenCheckboxClicked report)}}
-            >
-              <:label>{{t
-                  "pages.session-finalization.reporting.table.labels.end-of-test-screen-for-candidate"
-                  firstName=report.firstName
-                  lastName=report.lastName
-                }}</:label>
-            </PixCheckbox>
-          </:cell>
-        </PixTableColumn>
-      {{/if}}
     </:columns>
   </PixTable>
 

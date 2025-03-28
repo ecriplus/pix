@@ -23,7 +23,6 @@ module('Integration | Component | issue-report-modal', function (hooks) {
       certificationCourseId: 1,
       firstName: 'Lisa',
       lastName: 'Monpud',
-      hasSeenEndTestScreen: false,
     });
     this.set('report', report);
     this.set('closeModal', sinon.stub());
@@ -59,7 +58,6 @@ module('Integration | Component | issue-report-modal', function (hooks) {
       certificationCourseId: 1,
       firstName: 'Lisa',
       lastName: 'Monpud',
-      hasSeenEndTestScreen: false,
       certificationIssueReports: [issue1, issue2],
     });
     this.set('report', report);
@@ -96,7 +94,6 @@ module('Integration | Component | issue-report-modal', function (hooks) {
       certificationCourseId: 1,
       firstName: 'Lisa',
       lastName: 'Monpud',
-      hasSeenEndTestScreen: false,
       certificationIssueReports: [issue1, issue2],
     });
     this.set('report', report);
@@ -130,7 +127,6 @@ module('Integration | Component | issue-report-modal', function (hooks) {
       certificationCourseId: 1,
       firstName: 'Lisa',
       lastName: 'Monpud',
-      hasSeenEndTestScreen: false,
     });
 
     const closeModal = sinon.stub();
@@ -162,7 +158,6 @@ module('Integration | Component | issue-report-modal', function (hooks) {
       certificationCourseId: 1,
       firstName: 'Lisa',
       lastName: 'Monpud',
-      hasSeenEndTestScreen: false,
     });
 
     const onClickIssueReport = sinon.stub();
@@ -199,7 +194,6 @@ module('Integration | Component | issue-report-modal', function (hooks) {
       certificationCourseId: 1,
       firstName: 'Lisa',
       lastName: 'Monpud',
-      hasSeenEndTestScreen: false,
       certificationIssueReports: [issue],
     });
 

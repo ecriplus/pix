@@ -12,18 +12,12 @@ module('Integration | Component | finalization-confirmation-modal', function (ho
   test('it shows the finalization confirmation modal', async function (assert) {
     // given
     this.set('closeModal', sinon.stub());
-    this.set('hasUncheckedHasSeenEndTestScreen', false);
-    this.set('uncheckedHasSeenEndTestScreenCount', 0);
-    this.set('shouldDisplayHasSeenEndTestScreenCheckbox', false);
     this.set('finalizeSession', sinon.stub());
 
     // when
     const screen = await renderScreen(hbs`<SessionFinalization::FinalizationConfirmationModal
   @showModal={{true}}
   @closeModal={{this.closeModal}}
-  @hasUncheckedHasSeenEndTestScreen={{this.hasUncheckedHasSeenEndTestScreen}}
-  @uncheckedHasSeenEndTestScreenCount={{this.uncheckedHasSeenEndTestScreenCount}}
-  @shouldDisplayHasSeenEndTestScreenCheckbox={{this.shouldDisplayHasSeenEndTestScreenCheckbox}}
   @finalizeSession={{this.finalizeSession}}
 />`);
 
@@ -38,46 +32,17 @@ module('Integration | Component | finalization-confirmation-modal', function (ho
       .exists();
   });
 
-  module('when hasUncheckedHasSeenEndTestScreen and shouldDisplayHasSeenEndTestScreenCheckbox are true', function () {
-    test('it shows unchecked end test screen count', async function (assert) {
-      // given
-      this.set('closeModal', sinon.stub());
-      this.set('hasUncheckedHasSeenEndTestScreen', true);
-      this.set('uncheckedHasSeenEndTestScreenCount', 2);
-      this.set('shouldDisplayHasSeenEndTestScreenCheckbox', true);
-      this.set('finalizeSession', sinon.stub());
-
-      // when
-      const screen = await renderScreen(hbs`<SessionFinalization::FinalizationConfirmationModal
-  @closeModal={{this.closeModal}}
-  @hasUncheckedHasSeenEndTestScreen={{this.hasUncheckedHasSeenEndTestScreen}}
-  @uncheckedHasSeenEndTestScreenCount={{this.uncheckedHasSeenEndTestScreenCount}}
-  @shouldDisplayHasSeenEndTestScreenCheckbox={{this.shouldDisplayHasSeenEndTestScreenCheckbox}}
-  @finalizeSession={{this.finalizeSession}}
-/>`);
-
-      // then
-      assert.dom(screen.getByText('La case "Écran de fin du test vu" n\'est pas cochée pour 2 candidats')).exists();
-    });
-  });
-
   module('when close button cross icon is clicked', () => {
     test('it closes candidate details modal', async function (assert) {
       // given
       const closeModalStub = sinon.stub();
       this.set('closeModal', closeModalStub);
-      this.set('hasUncheckedHasSeenEndTestScreen', false);
-      this.set('uncheckedHasSeenEndTestScreenCount', 0);
-      this.set('shouldDisplayHasSeenEndTestScreenCheckbox', false);
       this.set('finalizeSession', sinon.stub());
 
       // when
       const screen = await renderScreen(hbs`<SessionFinalization::FinalizationConfirmationModal
   @showModal={{true}}
   @closeModal={{this.closeModal}}
-  @hasUncheckedHasSeenEndTestScreen={{this.hasUncheckedHasSeenEndTestScreen}}
-  @uncheckedHasSeenEndTestScreenCount={{this.uncheckedHasSeenEndTestScreenCount}}
-  @shouldDisplayHasSeenEndTestScreenCheckbox={{this.shouldDisplayHasSeenEndTestScreenCheckbox}}
   @finalizeSession={{this.finalizeSession}}
 />`);
 
@@ -94,18 +59,12 @@ module('Integration | Component | finalization-confirmation-modal', function (ho
       // given
       const closeModalStub = sinon.stub();
       this.set('closeModal', closeModalStub);
-      this.set('hasUncheckedHasSeenEndTestScreen', false);
-      this.set('uncheckedHasSeenEndTestScreenCount', 0);
-      this.set('shouldDisplayHasSeenEndTestScreenCheckbox', false);
       this.set('finalizeSession', sinon.stub());
 
       // when
       const screen = await renderScreen(hbs`<SessionFinalization::FinalizationConfirmationModal
   @showModal={{true}}
   @closeModal={{this.closeModal}}
-  @hasUncheckedHasSeenEndTestScreen={{this.hasUncheckedHasSeenEndTestScreen}}
-  @uncheckedHasSeenEndTestScreenCount={{this.uncheckedHasSeenEndTestScreenCount}}
-  @shouldDisplayHasSeenEndTestScreenCheckbox={{this.shouldDisplayHasSeenEndTestScreenCheckbox}}
   @finalizeSession={{this.finalizeSession}}
 />`);
 
@@ -122,18 +81,12 @@ module('Integration | Component | finalization-confirmation-modal', function (ho
       // given
       const finalizeSessionStub = sinon.stub();
       this.set('closeModal', sinon.stub());
-      this.set('hasUncheckedHasSeenEndTestScreen', false);
-      this.set('uncheckedHasSeenEndTestScreenCount', 0);
-      this.set('shouldDisplayHasSeenEndTestScreenCheckbox', false);
       this.set('finalizeSession', finalizeSessionStub);
 
       // when
       const screen = await renderScreen(hbs`<SessionFinalization::FinalizationConfirmationModal
   @showModal={{true}}
   @closeModal={{this.closeModal}}
-  @hasUncheckedHasSeenEndTestScreen={{this.hasUncheckedHasSeenEndTestScreen}}
-  @uncheckedHasSeenEndTestScreenCount={{this.uncheckedHasSeenEndTestScreenCount}}
-  @shouldDisplayHasSeenEndTestScreenCheckbox={{this.shouldDisplayHasSeenEndTestScreenCheckbox}}
   @finalizeSession={{this.finalizeSession}}
 />`);
 

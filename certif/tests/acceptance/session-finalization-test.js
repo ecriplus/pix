@@ -31,7 +31,6 @@ module('Acceptance | Session Finalization', function (hooks) {
       pixCertifTermsOfServiceAccepted: true,
     });
     const certificationReports = server.createList('certification-report', 2, {
-      hasSeenEndTestScreen: false,
       isCompleted: true,
     });
     session = server.create('session-management', {
@@ -77,14 +76,6 @@ module('Acceptance | Session Finalization', function (hooks) {
 
       // then
       assert.strictEqual(currentURL(), `/sessions/${session.id}/finalisation`);
-    });
-
-    test('it should display the end screen column when the center has no access to the supervisor space', async function (assert) {
-      // when
-      const screen = await visit(`/sessions/${session.id}/finalisation`);
-
-      // then
-      assert.dom(screen.queryByText('Écran de fin du test vu')).exists();
     });
 
     test('it should redirect to session details on click on return button', async function (assert) {
@@ -211,56 +202,6 @@ module('Acceptance | Session Finalization', function (hooks) {
         });
       });
 
-      module('when there is completed report', function () {
-        module('when end test screen has been seen', function () {
-          test('it should not display end test screen warning', async function (assert) {
-            // given
-            const certificationReport = server.create('certification-report', {
-              hasSeenEndTestScreen: true,
-              isCompleted: true,
-              abortReason: 'technical',
-            });
-
-            session.update({ certificationReports: [certificationReport] });
-
-            // when
-            await visit(`/sessions/${session.id}/finalisation`);
-            const screen = await visitScreen(`/sessions/${session.id}/finalisation`);
-            await click(screen.getByText('Finaliser'));
-
-            // then
-            assert.dom(screen.getByText(MODAL_TITLE)).exists();
-            assert
-              .dom(screen.queryByText('La case "Écran de fin du test vu" n\'est pas cochée pour 1 candidat(s)'))
-              .doesNotExist();
-          });
-        });
-
-        module('when end test screen has not been seen', function () {
-          test('it should display end test screen warning', async function (assert) {
-            // given
-            const certificationReport = server.create('certification-report', {
-              hasSeenEndTestScreen: false,
-              isCompleted: true,
-              abortReason: 'technical',
-            });
-
-            session.update({ certificationReports: [certificationReport] });
-
-            // when
-            await visit(`/sessions/${session.id}/finalisation`);
-            const screen = await visitScreen(`/sessions/${session.id}/finalisation`);
-            await click(screen.getByText('Finaliser'));
-
-            // then
-            assert.dom(screen.getByText(MODAL_TITLE)).exists();
-            assert
-              .dom(screen.getByText('La case "Écran de fin du test vu" n\'est pas cochée pour 1 candidat'))
-              .exists();
-          });
-        });
-      });
-
       module('when there is no uncompleted report', function () {
         test('it should not show the uncompleted reports table', async function (assert) {
           // given
@@ -283,54 +224,6 @@ module('Acceptance | Session Finalization', function (hooks) {
       });
 
       module('when there are uncompleted reports', function () {
-        module('when end test screen has not been seen', function () {
-          module('when the session has supervisor access', function () {
-            test('it should not display end test screen warning', async function (assert) {
-              // given
-              const certificationReport = server.create('certification-report', {
-                hasSeenEndTestScreen: false,
-                isCompleted: true,
-                abortReason: 'technical',
-              });
-              session.update({ certificationReports: [certificationReport], hasSupervisorAccess: true });
-
-              // when
-              const screen = await visitScreen(`/sessions/${session.id}/finalisation`);
-
-              await click(screen.getByText('Finaliser'));
-
-              // then
-              assert.dom(screen.getByText(MODAL_TITLE)).exists();
-              assert
-                .dom(screen.queryByText('La case "Écran de fin du test vu" n\'est pas cochée pour 1 candidat(s)'))
-                .doesNotExist();
-            });
-          });
-
-          module('when the session does not have supervisor access', function () {
-            test('it should display end test screen warning', async function (assert) {
-              // given
-              const certificationReport = server.create('certification-report', {
-                hasSeenEndTestScreen: false,
-                isCompleted: true,
-                abortReason: 'technical',
-              });
-              session.update({ certificationReports: [certificationReport], hasSupervisorAccess: false });
-
-              // when
-              const screen = await visitScreen(`/sessions/${session.id}/finalisation`);
-
-              await click(screen.getByText('Finaliser'));
-
-              // then
-              assert.dom(screen.getByText(MODAL_TITLE)).exists();
-              assert
-                .dom(screen.getByText('La case "Écran de fin du test vu" n\'est pas cochée pour 1 candidat'))
-                .exists();
-            });
-          });
-        });
-
         test('it should not show the completed reports table', async function (assert) {
           // given
           const certificationReport = server.create('certification-report', { isCompleted: false, abortReason: null });
@@ -341,7 +234,6 @@ module('Acceptance | Session Finalization', function (hooks) {
 
           // then
           assert.dom(screen.queryByText('Certification(s) terminée(s)\n')).doesNotExist();
-          assert.dom(screen.queryByText('Écran de fin du test vu\n')).doesNotExist();
         });
 
         test('it should show the uncompleted reports table', async function (assert) {

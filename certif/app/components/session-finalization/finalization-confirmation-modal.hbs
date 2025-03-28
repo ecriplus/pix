@@ -5,14 +5,6 @@
   @showModal={{@showModal}}
 >
   <:content>
-    {{#if (and @hasUncheckedHasSeenEndTestScreen @shouldDisplayHasSeenEndTestScreenCheckbox)}}
-      <p class="app-modal-body__contextual finalization-confirmation-modal__unchecked-has-seen-end-test-screen">
-        {{t
-          "pages.session-finalization.confirm-finalisation-modal.end-of-test-screen"
-          candidatesCount=@uncheckedHasSeenEndTestScreenCount
-        }}
-      </p>
-    {{/if}}
     <p>
       <span class="finalization-confirmation-modal__warning">
         {{t "pages.session-finalization.confirm-finalisation-modal.warning"}}

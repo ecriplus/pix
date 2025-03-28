@@ -400,7 +400,6 @@
         "actions": {
           "confirm": "Confirm the finalisation"
         },
-        "end-of-test-screen": "The “End of test screen seen” box isn’t ticked for {candidatesCount, plural,one {1 candidate} other {# candidates}}",
         "information": "you won’t be able to edit these informations thereafter. Processing time is needed before the results can be made available by Pix (this processing time may vary from one session to another).",
         "title": "Session finalisation",
         "warning": "Warning :"
@@ -425,19 +424,12 @@
       "reporting": {
         "completed-reports-information": {
           "description": "Finished certification(s)",
-          "extra-information": "List of candidates who have finished their certification exam, ordered by birth name, with a link to add a reporting if needed",
-          "table": {
-            "labels": {
-              "screen": "End of exam screen seen"
-            }
-          }
+          "extra-information": "List of candidates who have finished their certification exam, ordered by birth name, with a link to add a reporting if needed"
         },
         "description": "For the reporting to be taken into account, you must use the appropriate reporting category (examples : C1, C2, etc).",
         "table": {
           "labels": {
             "certification-number": "Certification No.",
-            "end-of-test-screen": "End of test screen seen",
-            "end-of-test-screen-for-candidate": "Select end of test screen seen for the candidate {firstName} {lastName}",
             "reporting": "Reporting"
           },
           "reporting-count": "{reportingsCount, plural,one {1 reporting} other {# reportings}}"
