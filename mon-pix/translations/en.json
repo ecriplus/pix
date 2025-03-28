@@ -1256,7 +1256,7 @@
         },
         "subtitle": "Resume your customised tests or submit your results",
         "tests-link": "All my customised tests",
-        "title": "Customised tests"
+        "title": "My customised tests"
       },
       "empty-dashboard": {
         "link-to-competences": "See my skills",
@@ -2152,7 +2152,7 @@
         },
         "title": "Deactivated courses"
       },
-      "description": "Find here the evaluation courses you have started or completed.",
+       "description": "Access your Pix tests, track your progress, and easily pick up where you left off.",
       "title": "My customised tests"
     },
     "user-trainings": {

@@ -348,7 +348,7 @@
       "account": "Mijn account",
       "certifications": "Mijn certificaten",
       "sign-out": "Log uit.",
-      "tests": "Mijn carrièrepaden"
+      "tests": "Mijn tests"
     }
   },
   "pages": {
@@ -1255,8 +1255,8 @@
           "text": "<h2>Vergeet niet het indienen van je profiel te voltooien!</h2>"
         },
         "subtitle": "Ga door met uw huidige tests of stuur uw resultaten op",
-        "tests-link": "Al mijn carrièrepaden",
-        "title": "Test"
+        "tests-link": "Al mijn tests",
+        "title": "Mijn tests"
       },
       "empty-dashboard": {
         "link-to-competences": "Bekijk mijn vaardigheden",
@@ -2144,8 +2144,8 @@
       "title": "Mijn account"
     },
     "user-tests": {
-      "title": "Mijn carrièrepaden",
-      "description": "Bekijk hier de beoordelingstrajecten die je bent begonnen of afgerond.",
+      "title": "Mijn tests",
+      "description": "Bekijk je Pix-trajecten, volg je voortgang en ga eenvoudig verder waar je was gebleven.",
       "anonymised-participations": {
         "course": "Route",
         "states": {
