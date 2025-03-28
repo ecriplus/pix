@@ -91,7 +91,7 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
       test('it should display the evaluation-sent-results modal with first 3 trainings', async function (assert) {
         // given
         class FeatureTogglesStub extends Service {
-          featureToggles = { isModalSentResultEnabled: true };
+          featureToggles = { isResultsSharedModalEnabled: true };
         }
         this.owner.register('service:featureToggles', FeatureTogglesStub);
         this.model.trainings = [
@@ -162,11 +162,11 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
           .doesNotExist();
       });
 
-      module('when feature_toggle ‘isModalSentResultEnabled‘ is false', function () {
+      module('when feature_toggle ‘isResultsSharedModalEnabled‘ is false', function () {
         test('it should not display the evaluation-sent-results modal', async function (assert) {
           // given
           class FeatureTogglesStub extends Service {
-            featureToggles = { isModalSentResultEnabled: false };
+            featureToggles = { isResultsSharedModalEnabled: false };
           }
           this.owner.register('service:featureToggles', FeatureTogglesStub);
           this.model.trainings = [
@@ -224,7 +224,7 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
       test('it should display the evaluation-sent-results modal with first 3 trainings', async function (assert) {
         // given
         class FeatureTogglesStub extends Service {
-          featureToggles = { isModalSentResultEnabled: true };
+          featureToggles = { isResultsSharedModalEnabled: true };
         }
         this.owner.register('service:featureToggles', FeatureTogglesStub);
         this.model.trainings = [
@@ -301,7 +301,7 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
       test('it should display the evaluation-sent-results modal ', async function (assert) {
         // given
         class FeatureTogglesStub extends Service {
-          featureToggles = { isModalSentResultEnabled: true };
+          featureToggles = { isResultsSharedModalEnabled: true };
         }
 
         this.owner.register('service:featureToggles', FeatureTogglesStub);

@@ -7,7 +7,7 @@ import ENV from 'mon-pix/config/environment';
 
 import EvaluationResultsHero from '../../../campaigns/assessment/results/evaluation-results-hero';
 import EvaluationResultsTabs from '../../../campaigns/assessment/results/evaluation-results-tabs';
-import EvaluationSentResultsModal from '../../../campaigns/assessment/results/evaluation-sent-results-modal';
+import EvaluationSharedResultsModal from '../../../campaigns/assessment/results/evaluation-shared-results-modal';
 import QuitResults from '../../../campaigns/assessment/results/quit-results';
 
 export default class EvaluationResults extends Component {
@@ -16,8 +16,8 @@ export default class EvaluationResults extends Component {
 
   @tracked showEvaluationResultsModal = false;
 
-  get isModalSentResultEnabled() {
-    return this.featureToggles.featureToggles?.isModalSentResultEnabled && this.hasTrainings;
+  get isResultsSharedModalEnabled() {
+    return this.featureToggles.featureToggles?.isResultsSharedModalEnabled && this.hasTrainings;
   }
 
   get hasTrainings() {
@@ -86,8 +86,8 @@ export default class EvaluationResults extends Component {
         @trainings={{@model.trainings}}
         @onResultsShared={{this.shareResults}}
       />
-      {{#if this.isModalSentResultEnabled}}
-        <EvaluationSentResultsModal
+      {{#if this.isResultsSharedModalEnabled}}
+        <EvaluationSharedResultsModal
           @trainings={{this.trainingsForModal}}
           @showModal={{this.showEvaluationResultsModal}}
           @onCloseButtonClick={{this.closeModal}}

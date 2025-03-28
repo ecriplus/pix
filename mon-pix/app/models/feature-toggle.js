@@ -6,5 +6,5 @@ export default class FeatureToggle extends Model {
   @attr('boolean') isPixAppNewLayoutEnabled;
   @attr('boolean') isPixCompanionEnabled;
   @attr('boolean') isQuestEnabled;
-  @attr('boolean') isModalSentResultEnabled;
+  @attr('boolean') isResultsSharedModalEnabled;
 }
