@@ -1,12 +1,12 @@
 import { render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
-import EvaluationSentResultsModal from 'mon-pix/components/campaigns/assessment/results/evaluation-sent-results-modal';
+import EvaluationSharedResultsModal from 'mon-pix/components/campaigns/assessment/results/evaluation-shared-results-modal';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | evaluation-sent-results-modal', function (hooks) {
+module('Integration | Component | evaluation-shared-results-modal', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   module('when showModal is true', function () {
@@ -48,7 +48,7 @@ module('Integration | Component | evaluation-sent-results-modal', function (hook
 
       // when
       const screen = await render(
-        <template><EvaluationSentResultsModal @showModal={{showModal}} @trainings={{trainings}} /></template>,
+        <template><EvaluationSharedResultsModal @showModal={{showModal}} @trainings={{trainings}} /></template>,
       );
 
       // then
@@ -66,7 +66,7 @@ module('Integration | Component | evaluation-sent-results-modal', function (hook
         const onCloseButtonClick = sinon.stub();
         const screen = await render(
           <template>
-            <EvaluationSentResultsModal @showModal={{showModal}} @onCloseButtonClick={{onCloseButtonClick}} />
+            <EvaluationSharedResultsModal @showModal={{showModal}} @onCloseButtonClick={{onCloseButtonClick}} />
           </template>,
         );
 
@@ -86,7 +86,7 @@ module('Integration | Component | evaluation-sent-results-modal', function (hook
         const onCloseButtonClick = sinon.stub();
         const screen = await render(
           <template>
-            <EvaluationSentResultsModal @showModal={{showModal}} @onCloseButtonClick={{onCloseButtonClick}} />
+            <EvaluationSharedResultsModal @showModal={{showModal}} @onCloseButtonClick={{onCloseButtonClick}} />
           </template>,
         );
 
@@ -106,7 +106,7 @@ module('Integration | Component | evaluation-sent-results-modal', function (hook
       const showModal = false;
 
       // when
-      const screen = await render(<template><EvaluationSentResultsModal @showModal={{showModal}} /></template>);
+      const screen = await render(<template><EvaluationSharedResultsModal @showModal={{showModal}} /></template>);
 
       // then
       assert.dom(screen.queryByRole('dialog')).doesNotExist();
