@@ -164,6 +164,7 @@ export default class List extends Component {
         as |toggleParticipant isParticipantSelected allSelected someSelected toggleAll selectedParticipants reset|
       >
         <PixTable
+          @condensed={{true}}
           @variant="orga"
           @caption={{t "pages.organization-participants.table.description"}}
           @data={{@participants}}

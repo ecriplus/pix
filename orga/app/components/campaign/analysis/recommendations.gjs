@@ -62,6 +62,7 @@ export default class Recommendations extends Component {
         {{this.description}}
       </p>
       <PixTable
+        @condensed={{true}}
         @variant="orga"
         @caption={{t "pages.campaign-review.table.analysis.caption"}}
         @data={{this.sortedRecommendations}}
