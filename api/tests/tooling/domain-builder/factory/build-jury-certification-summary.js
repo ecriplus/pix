@@ -13,7 +13,6 @@ const buildJuryCertificationSummary = function ({
   isPublished = true,
   isCancelled = false,
   isEndedBySupervisor = false,
-  hasSeenEndTestScreen = true,
   complementaryCertificationTakenLabel,
   certificationIssueReports = [],
 } = {}) {
@@ -29,7 +28,6 @@ const buildJuryCertificationSummary = function ({
     isPublished,
     isCancelled,
     isEndedBySupervisor,
-    hasSeenEndTestScreen,
     complementaryCertificationTakenLabel,
     certificationIssueReports,
   });

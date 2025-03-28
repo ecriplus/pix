@@ -34,7 +34,6 @@ describe('Unit | UseCase |  register-publishable-session', function () {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
-      hasSeenEndTestScreen: true,
       cleaCertificationStatus: 'not_passed',
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({

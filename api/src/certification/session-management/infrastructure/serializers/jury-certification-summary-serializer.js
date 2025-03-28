@@ -30,7 +30,6 @@ const serialize = function (juryCertificationSummary, meta) {
       'examinerComment',
       'numberOfCertificationIssueReports',
       'numberOfCertificationIssueReportsWithRequiredAction',
-      'hasSeenEndTestScreen',
       'isFlaggedAborted',
       'complementaryCertificationTakenLabel',
     ],

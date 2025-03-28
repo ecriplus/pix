@@ -102,7 +102,6 @@ describe('Acceptance | Controller | session-controller-get-jury-certification-su
           'number-of-certification-issue-reports-with-required-action': 0,
           'complementary-certification-taken-label': 'CléA Numérique',
           'examiner-comment': undefined,
-          'has-seen-end-test-screen': certif1.hasSeenEndTestScreen,
           'is-flagged-aborted': false,
         };
         expectedJuryCertifSumm2 = {
@@ -118,7 +117,6 @@ describe('Acceptance | Controller | session-controller-get-jury-certification-su
           'complementary-certification-taken-label': null,
           'completed-at': certif2.completedAt,
           'examiner-comment': undefined,
-          'has-seen-end-test-screen': certif2.hasSeenEndTestScreen,
           'is-flagged-aborted': false,
         };
 
