@@ -307,7 +307,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
           index: '1.2',
         },
       ];
-      const session = this.server.create('session');
+      const session = this.server.create('session', { id: 1 });
       const certificationId = this.server.create('certification', { sessionId: session.id }).id;
       this.server.create('certification-detail', {
         id: certificationId,

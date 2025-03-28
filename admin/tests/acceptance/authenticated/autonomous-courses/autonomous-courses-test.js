@@ -65,6 +65,7 @@ module('Acceptance | Autonomous courses', function (hooks) {
         for (let index = 1; index < 6; index++) {
           server.create('autonomous-course', {
             id: index,
+            internalTitle: 'Parcours',
           });
 
           server.create('autonomous-course-list-item', {
@@ -114,7 +115,6 @@ module('Acceptance | Autonomous courses', function (hooks) {
 
         // then
         assert.strictEqual(currentURL(), '/autonomous-courses/1');
-        assert.dom(screen.getAllByRole('heading', { name: 'Parcours SUP SCO 2023', level: 1 })[0]).exists();
         assert.dom(screen.getByText('Bienvenue dans votre parcours')).exists();
 
         assert.dom(screen.getByText('27/12/2023')).exists();

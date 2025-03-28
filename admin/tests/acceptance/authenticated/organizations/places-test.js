@@ -16,7 +16,7 @@ module('Acceptance | Organizations | places', function (hooks) {
 
     test('should display current organization places capacity', async function (assert) {
       // given
-      const ownerOrganizationId = this.server.create('organization').id;
+      const ownerOrganizationId = this.server.create('organization', { name: 'Orga name' }).id;
 
       // when
       const screen = await visit(`/organizations/${ownerOrganizationId}/places`);
@@ -28,7 +28,7 @@ module('Acceptance | Organizations | places', function (hooks) {
 
     test('should display organization places', async function (assert) {
       // given
-      const ownerOrganizationId = this.server.create('organization').id;
+      const ownerOrganizationId = this.server.create('organization', { name: 'Orga name' }).id;
       this.server.create('organization-place', {
         count: 7777,
         reference: 'FFVII',
@@ -49,7 +49,7 @@ module('Acceptance | Organizations | places', function (hooks) {
 
     test('should not diplay add places lot button', async function (assert) {
       // given
-      const ownerOrganizationId = this.server.create('organization').id;
+      const ownerOrganizationId = this.server.create('organization', { name: 'Orga name' }).id;
 
       // when
       const screen = await visit(`/organizations/${ownerOrganizationId}/places`);
@@ -66,7 +66,7 @@ module('Acceptance | Organizations | places', function (hooks) {
 
     test('should go to add places lot page', async function (assert) {
       // given
-      const ownerOrganizationId = this.server.create('organization').id;
+      const ownerOrganizationId = this.server.create('organization', { name: 'Orga name' }).id;
 
       const screen = await visit(`/organizations/${ownerOrganizationId}/places`);
       // when

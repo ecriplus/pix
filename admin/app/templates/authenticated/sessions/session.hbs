@@ -1,11 +1,7 @@
 {{! template-lint-disable require-input-label }}
 {{page-title "Session " @model.id}}
 <header class="page-header">
-  <div>
-    <LinkTo @route="authenticated.sessions.list">Toutes les sessions de certification</LinkTo>
-    <span class="wire">&nbsp;>&nbsp;</span>
-    <h1>Sessions de certification</h1>
-  </div>
+  <Sessions::Breadcrumb @sessionId={{@model.id}} />
   <div class="page-actions">
     <form class="form-inline" {{on "submit" this.loadSession}}>
       <PixInput

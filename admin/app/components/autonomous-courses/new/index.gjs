@@ -7,7 +7,7 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
 
-import Breadcrumb from '../../layout/breadcrumb';
+import Breadcrumb from '../breadcrumb';
 import TechnicalInformations from './technical-informations';
 import UserInformations from './user-informations';
 
@@ -74,7 +74,7 @@ export default class NewAutonomousCourse extends Component {
     {{pageTitle this.translatedTitle}}
 
     <header>
-      <Breadcrumb />
+      <Breadcrumb @currentPageLabel="Nouveau parcours autonome" />
     </header>
 
     <main class="main-admin-form">

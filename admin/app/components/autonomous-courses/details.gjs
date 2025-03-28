@@ -5,7 +5,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
-import Breadcrumb from '../layout/breadcrumb';
+import Breadcrumb from './breadcrumb';
 import UpdateAutonomousCourseForm from './update-autonomous-course-form';
 import ViewAutonomousCourse from './view-autonomous-course';
 
@@ -40,7 +40,7 @@ export default class Details extends Component {
 
   <template>
     <header>
-      <Breadcrumb @title={{@autonomousCourse.internalTitle}} />
+      <Breadcrumb @currentPageLabel={{@autonomousCourse.internalTitle}} />
     </header>
 
     <main class="page-body">

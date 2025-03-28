@@ -23,7 +23,7 @@ module('Acceptance | Campaign Page', function (hooks) {
     test('it should display the default page', async function (assert) {
       // given
       await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-      server.create('campaign', { id: 1, name: 'Campaign name' });
+      server.create('campaign', { id: 1, name: 'Campaign name', organizationId: 2, organizationName: 'Orga name' });
 
       // when
       const screen = await visit('/campaigns/1');

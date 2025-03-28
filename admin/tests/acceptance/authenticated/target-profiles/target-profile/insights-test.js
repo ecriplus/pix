@@ -449,7 +449,7 @@ module('Acceptance | Target Profile Insights', function (hooks) {
 
         // then
         assert.strictEqual(currentURL(), '/target-profiles/1/badges/100');
-        assert.dom(screen.getByText('100')).exists();
+        assert.dom(screen.getAllByText('100')[1]).exists();
         assert.dom(screen.getByText('tagada')).exists();
         assert.dom(screen.getByText('image.png')).exists();
         assert.dom(screen.getByText('KEY_BADGE_1')).exists();
@@ -506,7 +506,7 @@ module('Acceptance | Target Profile Insights', function (hooks) {
 
         // then
         assert.strictEqual(currentURL(), '/target-profiles/1/badges/100');
-        assert.dom(screen.getByText('100')).exists();
+        assert.dom(screen.getAllByText('100')[1]).exists();
         assert.dom(screen.getByText('nouveau titre')).exists();
         assert.dom(screen.getByText('new_image.svg')).exists();
         assert.dom(screen.getByText('NEW_KEY')).exists();
@@ -641,7 +641,7 @@ module('Acceptance | Target Profile Insights', function (hooks) {
 
         // then
         assert.strictEqual(currentURL(), '/target-profiles/1/badges/1');
-        assert.dom(screen.getByText('1')).exists();
+        assert.dom(screen.getAllByText('1')[1]).exists();
         assert.dom(screen.getByText('Mon nouveau badge')).exists();
         assert.dom(screen.getByText('troll.png')).exists();
         assert.dom(screen.getByText('MY_BADGE')).exists();

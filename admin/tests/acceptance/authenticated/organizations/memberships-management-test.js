@@ -14,7 +14,7 @@ module('Acceptance | Organizations | Memberships management', function (hooks) {
 
   hooks.beforeEach(async function () {
     await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-    organization = this.server.create('organization');
+    organization = this.server.create('organization', { name: 'Orga name' });
   });
 
   test('should redirect to organization team page', async function (assert) {

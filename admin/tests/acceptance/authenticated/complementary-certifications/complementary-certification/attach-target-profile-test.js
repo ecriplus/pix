@@ -31,7 +31,13 @@ module(
             const screen = await visit('/complementary-certifications/1/attach-target-profile/3');
 
             // then
-            assert.dom(screen.getByRole('heading', { name: 'MARIANNE CERTIF' })).exists();
+            assert
+              .dom(
+                screen.getByRole('heading', {
+                  name: 'Rattacher un nouveau profil cible à la certification MARIANNE CERTIF',
+                }),
+              )
+              .exists();
             assert.dom(screen.getByRole('link', { name: 'ALEX TARGET' })).exists();
           });
 
@@ -75,7 +81,13 @@ module(
             const screen = await visit('/complementary-certifications/1/attach-target-profile/-1');
 
             // then
-            assert.dom(screen.getByRole('heading', { name: 'MARIANNE CERTIF' })).exists();
+            assert
+              .dom(
+                screen.getByRole('heading', {
+                  name: 'Rattacher un nouveau profil cible à la certification MARIANNE CERTIF',
+                }),
+              )
+              .exists();
             assert.dom(screen.queryByRole('link', { name: 'ALEX TARGET' })).doesNotExist();
           });
         });

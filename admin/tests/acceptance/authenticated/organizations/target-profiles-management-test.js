@@ -15,7 +15,7 @@ module('Acceptance | Organizations | Target profiles management', function (hook
 
   test('should display organization target profiles', async function (assert) {
     // given
-    const ownerOrganizationId = this.server.create('organization').id;
+    const ownerOrganizationId = this.server.create('organization', { name: 'Orga name' }).id;
     this.server.create('target-profile-summary', { internalName: 'Profil cible du ghetto' });
 
     // when
@@ -31,7 +31,7 @@ module('Acceptance | Organizations | Target profiles management', function (hook
 
   test('should add a target profile to an organization', async function (assert) {
     // given
-    const organization = this.server.create('organization');
+    const organization = this.server.create('organization', { name: 'Orga name' });
 
     // when
     const screen = await visit(`/organizations/${organization.id}/target-profiles`);
@@ -52,7 +52,7 @@ module('Acceptance | Organizations | Target profiles management', function (hook
   test('should not display organization target profiles when user does not have access', async function (assert) {
     // given
     await authenticateAdminMemberWithRole({ isCertif: true })(server);
-    const ownerOrganizationId = this.server.create('organization').id;
+    const ownerOrganizationId = this.server.create('organization', { name: 'Orga name' }).id;
     this.server.create('target-profile-summary', { internalName: 'Profil cible du ghetto', ownerOrganizationId });
 
     // when

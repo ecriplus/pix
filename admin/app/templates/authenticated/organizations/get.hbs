@@ -1,9 +1,5 @@
 <header class="page-header">
-  <div>
-    <LinkTo @route="authenticated.organizations.list">Toutes les organisations</LinkTo>
-    <span class="wire">&nbsp;>&nbsp;</span>
-    <h1>{{@model.name}}</h1>
-  </div>
+  <Organizations::Breadcrumb @currentPageLabel={{@model.name}} />
 </header>
 
 <main class="page-body" id="organizations-get-page">
