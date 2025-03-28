@@ -42,7 +42,11 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
         method: 'GET',
         url: `/api/campaigns/${campaign.id}/participations`,
         headers: {
-          authorization: generateValidRequestAuthorizationHeaderForApplication(clientId, 'pix-client', 'campaigns'),
+          authorization: generateValidRequestAuthorizationHeaderForApplication(
+            clientId,
+            'pix-client',
+            'campaigns meta',
+          ),
         },
       };
 

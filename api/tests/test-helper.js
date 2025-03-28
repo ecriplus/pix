@@ -136,7 +136,7 @@ function generateAuthenticatedUserRequestHeaders({
   };
 }
 
-function generateValidRequestAuthorizationHeaderForApplication(clientId = 'client-id-name', source, scope) {
+function generateValidRequestAuthorizationHeaderForApplication(clientId = 'client-id-name', source, scope = '') {
   const accessToken = tokenService.createAccessTokenFromApplication(
     clientId,
     source,
