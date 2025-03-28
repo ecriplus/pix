@@ -496,6 +496,9 @@
       },
       "title": "End of test"
     },
+    "attestations": {
+      "title": "My certificates"
+    },
     "authentication": {
       "login": {
         "signup-button": "Sign up"

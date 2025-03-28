@@ -352,6 +352,9 @@
     }
   },
   "pages": {
+    "attestations" : {
+      "title": "Mis títulos"
+    },
     "account-recovery": {
       "errors": {
         "account-exists": "Ya existe una cuenta con esta dirección de correo electrónico.",

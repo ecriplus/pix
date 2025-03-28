@@ -352,6 +352,9 @@
     }
   },
   "pages": {
+    "attestations" : {
+      "title": "Mijn getuigschriften"
+    },
     "account-recovery": {
       "errors": {
         "account-exists": "Er bestaat al een account met dit e-mailadres.",
