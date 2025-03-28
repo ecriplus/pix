@@ -2,4 +2,6 @@
   <DataProtectionPolicyInformationBanner />
 </div>
 
-{{outlet}}
+<Global::AppLayout @hasAttestationDetails={{gt this.model.attestationDetail.length 0}}>
+  {{outlet}}
+</Global::AppLayout>
