@@ -8,6 +8,7 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   insertOrganizationUserWithRoleAdmin,
+  sinon,
 } from '../../../../../tests/test-helper.js';
 
 const { omit: _omit } = lodash;
@@ -513,6 +514,76 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
 
         // then
         expect(response.statusCode).to.equal(201);
+      });
+    });
+  });
+
+  describe('PATCH /api/organizations/{id}/resend-invitation', function () {
+    let clock;
+    const now = new Date('2022-12-25');
+
+    beforeEach(function () {
+      clock = sinon.useFakeTimers({
+        now,
+        toFake: ['Date'],
+      });
+    });
+
+    afterEach(async function () {
+      clock.restore();
+    });
+
+    it('should return the matching organization invitation as JSON API', async function () {
+      // given
+      const adminUserId = databaseBuilder.factory.buildUser().id;
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      databaseBuilder.factory.buildMembership({
+        userId: adminUserId,
+        organizationId,
+        organizationRole: Membership.roles.ADMIN,
+      });
+
+      const email = 'anna.tole@example.net';
+      const userToReInvite = databaseBuilder.factory.buildUser({ email });
+      const existingOrganizationInvitationId = databaseBuilder.factory.buildOrganizationInvitation({
+        organizationId,
+        email,
+        updatedAt: new Date('2022-12-12'),
+      }).id;
+
+      await databaseBuilder.commit();
+
+      // when
+      const response = await server.inject({
+        method: 'PATCH',
+        url: `/api/organizations/${organizationId}/resend-invitation`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUserId }),
+        payload: {
+          data: {
+            type: 'organization-invitations',
+            attributes: {
+              email: 'annA.tole@example.net',
+            },
+          },
+        },
+      });
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result).to.deep.equal({
+        data: {
+          id: `${existingOrganizationInvitationId}`,
+          type: 'organization-invitations',
+          attributes: {
+            'organization-id': organizationId,
+            'organization-name': undefined,
+            email: userToReInvite.email,
+            status: OrganizationInvitation.StatusType.PENDING,
+            role: null,
+            lang: 'fr',
+            'updated-at': now,
+          },
+        },
       });
     });
   });
