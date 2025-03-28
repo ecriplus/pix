@@ -6,7 +6,7 @@
   gap: var(--pix-spacing-6x);
   justify-content: space-between;
   padding-bottom: var(--pix-spacing-6x);
-  border-bottom: 1px solid var(--pix-neutral-100);
+  border-bottom: 1px solid rgb(var(--pix-primary-100-inline), 0.8);
   margin-block: var(--pix-spacing-6x) var(--pix-spacing-8x);
 }
 
