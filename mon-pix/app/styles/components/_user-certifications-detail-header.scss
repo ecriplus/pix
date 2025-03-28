@@ -21,7 +21,9 @@
   @extend %pix-body-m;
 
   &__info-certificate {
-    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     color: var(--pix-neutral-800);
 
     & > * {

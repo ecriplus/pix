@@ -41,9 +41,11 @@ const generateV3AttestationTemplate = ({ pdf, data, translate }) => {
     .font('Roboto-Regular')
     .fontSize(11)
     .text(
-      translate('certification.attestation.v3.main-content.certification-center', {
-        certificationCenter: data.certificationCenter,
-      }),
+      _formatText(
+        translate('certification.attestation.v3.main-content.certification-center', {
+          certificationCenter: data.certificationCenter,
+        }),
+      ),
       {
         width: 380,
         lineGap: 2,
@@ -68,23 +70,30 @@ const generateV3AttestationTemplate = ({ pdf, data, translate }) => {
     .font('Roboto-Regular')
     .fontSize(11)
     .text(
-      translate('certification.attestation.v3.main-content.birth', {
-        birthdate,
-        birthplace: data.birthplace,
-      }).replaceAll('&#x2F;', '/'),
+      _formatText(
+        translate('certification.attestation.v3.main-content.birth', {
+          birthdate,
+          birthplace: data.birthplace,
+        }),
+      ),
     );
-  pdf.font('Roboto-Regular').fontSize(11).text(
-    translate('certification.attestation.v3.main-content.delivered-at.date', {
-      deliveredAt,
-    }).replaceAll('&#x2F;', '/'),
-    82,
-    364,
-  );
   pdf
     .font('Roboto-Regular')
     .fontSize(11)
+    .text(
+      _formatText(
+        translate('certification.attestation.v3.main-content.delivered-at.date', {
+          deliveredAt,
+        }),
+      ),
+      82,
+      364,
+    );
+  pdf
+    .font('Roboto-Regular')
+    .fontSize(10)
     .fillColor('#6b778b')
-    .text(translate('certification.attestation.v3.main-content.signature'), 82, 438);
+    .text(translate('certification.attestation.v3.main-content.signature'), 82, 440);
 
   // QR code content
   pdf.font('Roboto-Medium').fontSize(11).fillColor('#5e6c84').text(data.verificationCode, 142, 467).moveDown(0.25);
@@ -113,52 +122,60 @@ const generateV3AttestationTemplate = ({ pdf, data, translate }) => {
     width: 84,
     align: 'center',
   });
-  pdf
-    .font('Roboto-Regular')
-    .fontSize(11)
-    .fillColor('#6b778b')
-    .text(translate('certification.attestation.v3.score-content.global-level'), 550, 195, {
-      width: 205,
-      align: 'center',
-    });
 
   const globalLevel = data.globalLevel;
-  const globalLevelLabel = globalLevel.getLevelLabel(translate);
-  pdf
-    .roundedRect(
-      650 - (pdf.widthOfString(globalLevelLabel) * 2) / 2,
-      212,
-      pdf.widthOfString(globalLevelLabel) * 2,
-      24,
-      24,
-    )
-    .fill('#6712FF');
-  pdf
-    .font('Nunito-Bold')
-    .fontSize(14)
-    .fillColor('#FFFFFF')
-    .text(globalLevelLabel, 650 - (pdf.widthOfString(globalLevelLabel) * 2) / 2, 214, {
-      width: pdf.widthOfString(globalLevelLabel) * 2,
-      align: 'center',
-    });
 
-  const globalLevelSummary = globalLevel.getSummaryLabel(translate);
-  const globalLevelDescription = globalLevel.getDescriptionLabel(translate);
-  pdf
-    .font('Nunito-Bold')
-    .fontSize(11)
-    .fillColor('#253858')
-    .text(translate('certification.attestation.v3.score-content.level-explanation'), 530, 250, {
-      width: 250,
-    })
-    .moveDown(0.5)
-    .font('Roboto-Medium')
-    .fontSize(9.5)
-    .text(globalLevelSummary)
-    .moveDown(0.5)
-    .font('Roboto-Regular')
-    .fontSize(9.5)
-    .text(globalLevelDescription);
+  if (globalLevel.meshLevel !== 'LEVEL_PRE_BEGINNER') {
+    pdf
+      .font('Roboto-Regular')
+      .fontSize(11)
+      .fillColor('#6b778b')
+      .text(translate('certification.attestation.v3.score-content.global-level'), 550, 195, {
+        width: 205,
+        align: 'center',
+      });
+
+    const globalLevelLabel = globalLevel.getLevelLabel(translate);
+    pdf
+      .roundedRect(
+        652 - (pdf.widthOfString(globalLevelLabel) * 2) / 2,
+        212,
+        pdf.widthOfString(globalLevelLabel) * 2,
+        24,
+        24,
+      )
+      .fill('#6712FF');
+    pdf
+      .font('Nunito-Bold')
+      .fontSize(14)
+      .fillColor('#FFFFFF')
+      .text(globalLevelLabel, 652 - (pdf.widthOfString(globalLevelLabel) * 2) / 2, 214, {
+        width: pdf.widthOfString(globalLevelLabel) * 2,
+        align: 'center',
+      });
+
+    const globalLevelSummary = globalLevel.getSummaryLabel(translate);
+    const globalLevelDescription = globalLevel.getDescriptionLabel(translate);
+    pdf
+      .font('Nunito-Bold')
+      .fontSize(11)
+      .fillColor('#253858')
+      .text(translate('certification.attestation.v3.score-content.level-explanation'), 530, 250, {
+        width: 250,
+      })
+      .moveDown(0.5)
+      .font('Roboto-Medium')
+      .fontSize(9.5)
+      .text(globalLevelSummary)
+      .moveDown(0.5)
+      .font('Roboto-Regular')
+      .fontSize(9.5)
+      .text(globalLevelDescription);
+  }
+
+  function _formatText(content) {
+    return content.replaceAll('&#x2F;', '/');
+  }
 };
 
 export default generateV3AttestationTemplate;

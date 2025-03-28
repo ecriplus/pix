@@ -596,7 +596,7 @@
       "title": "Customised test"
     },
     "certificate": {
-      "attestation": "Download my certificate of achievement",
+      "attestation": "Download my certificate",
       "back-link": "Return to my certificates",
       "candidate-birth": "Born on {birthdate}",
       "candidate-birth-complete": "Born on {birthdate} in {birthplace}",
