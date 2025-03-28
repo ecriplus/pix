@@ -59,7 +59,6 @@ export const finalizeAll = async ({ certificationReports }) => {
 const finalize = async (certificationReport) => {
   const knexConnection = DomainTransaction.getConnection();
   return knexConnection(CERTIFICATION_COURSES_TABLE).where({ id: certificationReport.certificationCourseId }).update({
-    hasSeenEndTestScreen: certificationReport.hasSeenEndTestScreen,
     updatedAt: new Date(),
   });
 };

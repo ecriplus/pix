@@ -1,11 +1,10 @@
-import _ from 'lodash';
+import sinon from 'sinon';
 
-import { CertificationCourseUpdateError } from '../../../../../../src/certification/shared/domain/errors.js';
 import { CertificationIssueReportCategory } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
 import { CertificationReport } from '../../../../../../src/certification/shared/domain/models/CertificationReport.js';
 import * as certificationReportRepository from '../../../../../../src/certification/shared/infrastructure/repositories/certification-report-repository.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | CertificationReport', function () {
   describe('#findBySessionId', function () {
@@ -47,7 +46,6 @@ describe('Integration | Repository | CertificationReport', function () {
           lastName: certificationCourse1.lastName,
           isCompleted: true,
           certificationIssueReports: [{ ...certificationIssueReport1, isImpactful: true }],
-          hasSeenEndTestScreen: certificationCourse1.hasSeenEndTestScreen,
         });
         const expectedCertificationReport2 = domainBuilder.buildCertificationReport({
           id: CertificationReport.idFromCertificationCourseId(certificationCourse2.id),
@@ -56,7 +54,6 @@ describe('Integration | Repository | CertificationReport', function () {
           lastName: certificationCourse2.lastName,
           isCompleted: true,
           certificationIssueReports: [],
-          hasSeenEndTestScreen: certificationCourse2.hasSeenEndTestScreen,
         });
         expect(certificationReports).to.deep.equal([expectedCertificationReport1, expectedCertificationReport2]);
       });
@@ -87,30 +84,37 @@ describe('Integration | Repository | CertificationReport', function () {
     });
 
     context('when reports are being successfully finalized', function () {
-      it('should finalize certification reports', async function () {
-        const certificationCourseId1 = databaseBuilder.factory.buildCertificationCourse({
-          sessionId,
-          hasSeenEndTestScreen: false,
-        }).id;
+      let clock, now;
 
-        const certificationCourseId2 = databaseBuilder.factory.buildCertificationCourse({
+      beforeEach(function () {
+        now = new Date('2024-11-16');
+        clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+      });
+
+      afterEach(function () {
+        clock.restore();
+      });
+
+      it('should finalize certification reports', async function () {
+        const certificationCourse1 = databaseBuilder.factory.buildCertificationCourse({
           sessionId,
-          hasSeenEndTestScreen: false,
-        }).id;
+        });
+
+        const certificationCourse2 = databaseBuilder.factory.buildCertificationCourse({
+          sessionId,
+        });
 
         await databaseBuilder.commit();
 
         // given
         const certificationReport1 = domainBuilder.buildCertificationReport({
           sessionId,
-          certificationCourseId: certificationCourseId1,
-          hasSeenEndTestScreen: true,
+          certificationCourseId: certificationCourse1.id,
         });
 
         const certificationReport2 = domainBuilder.buildCertificationReport({
           sessionId,
-          certificationCourseId: certificationCourseId2,
-          hasSeenEndTestScreen: false,
+          certificationCourseId: certificationCourse2.id,
         });
 
         // when
@@ -119,56 +123,18 @@ describe('Integration | Repository | CertificationReport', function () {
         });
 
         // then
-        const actualCertificationReports = await certificationReportRepository.findBySessionId({ sessionId });
-        const actualReport1 = _.find(actualCertificationReports, { id: certificationReport1.id });
+        const updatedCertificationReport1 = await databaseBuilder
+          .knex('certification-courses')
+          .where({ id: certificationCourse1.id })
+          .first();
 
-        expect(actualReport1.hasSeenEndTestScreen).to.equal(true);
-      });
-    });
+        const updatedCertificationReport2 = await databaseBuilder
+          .knex('certification-courses')
+          .where({ id: certificationCourse2.id })
+          .first();
 
-    context('when finalization fails', function () {
-      it('should have left the Courses as they were and rollback updates if any', async function () {
-        // given
-        const certificationCourseId1 = databaseBuilder.factory.buildCertificationCourse({
-          sessionId,
-          hasSeenEndTestScreen: false,
-        }).id;
-
-        const certificationCourseId2 = databaseBuilder.factory.buildCertificationCourse({
-          sessionId,
-          hasSeenEndTestScreen: false,
-        }).id;
-
-        await databaseBuilder.commit();
-
-        const certificationReport1 = domainBuilder.buildCertificationReport({
-          certificationCourseId: certificationCourseId1,
-          hasSeenEndTestScreen: false,
-          examinerComment: "J'aime les fruits et les poulets",
-          sessionId,
-        });
-
-        const certificationReport2 = domainBuilder.buildCertificationReport({
-          certificationCourseId: certificationCourseId2,
-          hasSeenEndTestScreen: 'je suis supposé être un booléen',
-          examinerComment: null,
-          sessionId,
-        });
-
-        // when
-        const error = await catchErr(
-          certificationReportRepository.finalizeAll,
-          certificationReportRepository,
-        )({ certificationReports: [certificationReport1, certificationReport2] });
-
-        // then
-        const actualCertificationReports = await certificationReportRepository.findBySessionId({ sessionId });
-        const actualReport1 = _.find(actualCertificationReports, { id: certificationReport1.id });
-        const actualReport2 = _.find(actualCertificationReports, { id: certificationReport2.id });
-
-        expect(actualReport1.certificationIssueReports).to.deep.equal([]);
-        expect(actualReport2.hasSeenEndTestScreen).to.equal(false);
-        expect(error).to.be.an.instanceOf(CertificationCourseUpdateError);
+        expect(updatedCertificationReport1.updatedAt).to.deep.equal(now);
+        expect(updatedCertificationReport2.updatedAt).to.deep.equal(now);
       });
     });
   });
