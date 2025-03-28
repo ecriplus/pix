@@ -26,6 +26,10 @@ export default class AppNavigation extends Component {
     return this.currentUser.user.hasRecommendedTrainings;
   }
 
+  get showAttestationNavItem() {
+    return this.currentUser.hasAttestationsDetails;
+  }
+
   <template>
     <PixNavigation class="app-navigation" @navigationAriaLabel="navigation principale">
       <:brand>
@@ -54,6 +58,11 @@ export default class AppNavigation extends Component {
           <PixNavigationButton @route="authenticated.certifications" @icon="newRealease">
             {{t "navigation.main.start-certification"}}
           </PixNavigationButton>
+          {{#if this.showAttestationNavItem}}
+            <PixNavigationButton @route="authenticated.attestations" @icon="awards">
+              {{t "navigation.main.attestations"}}
+            </PixNavigationButton>
+          {{/if}}
           {{#if this.showTrainingsNavItem}}
             <PixNavigationButton @route="authenticated.user-trainings" @icon="book">
               {{t "navigation.main.trainings"}}

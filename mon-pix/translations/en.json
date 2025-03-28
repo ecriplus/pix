@@ -324,6 +324,7 @@
     },
     "homepage": "Pix's Homepage",
     "main": {
+      "attestations": "My certifications",
       "code": "I have a code",
       "dashboard": "Home",
       "help": "Help",

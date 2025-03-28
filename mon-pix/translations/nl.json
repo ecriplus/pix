@@ -324,6 +324,7 @@
     },
     "homepage": "Startpagina Pix",
     "main": {
+      "attestations": "Mijn getuigschriften",
       "code": "Ik heb een code",
       "dashboard": "Home",
       "help": "Help",

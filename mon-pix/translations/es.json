@@ -324,6 +324,7 @@
     },
     "homepage": "Página de inicio de Pix",
     "main": {
+      "attestations": "Mis títulos",
       "code": "Tengo un código",
       "dashboard": "Inicio",
       "help": "Ayuda",
