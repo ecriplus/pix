@@ -173,7 +173,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
                     attributes: {
                       'certification-course-id': report.certificationCourseId,
                       'examiner-comment': 'What a fine lad this one',
-                      'has-seen-end-test-screen': false,
                       'is-completed': true,
                     },
                   },
@@ -207,7 +206,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             userId,
             sessionId: session.id,
             completedAt: new Date(),
-            hasSeenEndTestScreen: true,
           }).id;
           databaseBuilder.factory.buildCertificationCandidate({
             sessionId: session.id,
@@ -267,7 +265,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
                     attributes: {
                       'certification-course-id': report.certificationCourseId,
                       'examiner-comment': 'What a fine lad this one',
-                      'has-seen-end-test-screen': true,
                       'is-completed': true,
                     },
                   },
@@ -370,7 +367,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
                     attributes: {
                       'certification-course-id': report.certificationCourseId,
                       'examiner-comment': 'What a fine lad this one',
-                      'has-seen-end-test-screen': false,
                       'is-completed': true,
                     },
                   },
@@ -427,7 +423,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             sessionId: session.id,
             completedAt: new Date(),
             version: AlgorithmEngineVersion.V3,
-            hasSeenEndTestScreen: true,
           }).id;
           databaseBuilder.factory.buildCertificationCenterMembership({
             userId,
@@ -481,7 +476,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
                     attributes: {
                       'certification-course-id': report.certificationCourseId,
                       'examiner-comment': 'What a fine lad this one',
-                      'has-seen-end-test-screen': true,
                       'is-completed': true,
                     },
                   },
@@ -600,7 +594,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
                     attributes: {
                       'certification-course-id': report.certificationCourseId,
                       'examiner-comment': 'What a fine lad this one',
-                      'has-seen-end-test-screen': true,
                       'is-completed': true,
                       'abort-reason': abortReason,
                     },
@@ -645,7 +638,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
                     attributes: {
                       'certification-course-id': report.certificationCourseId,
                       'examiner-comment': 'What a fine lad this one',
-                      'has-seen-end-test-screen': false,
                       'is-completed': false,
                       'abort-reason': 'technical',
                     },
@@ -736,7 +728,6 @@ const _createSession = async ({ version = 2 } = {}) => {
             attributes: {
               'certification-course-id': report1.certificationCourseId,
               'examiner-comment': 'What a fine lad this one',
-              'has-seen-end-test-screen': false,
               'is-completed': true,
             },
           },
@@ -746,7 +737,6 @@ const _createSession = async ({ version = 2 } = {}) => {
             attributes: {
               'certification-course-id': report2.certificationCourseId,
               'examiner-comment': 'What a fine lad this two',
-              'has-seen-end-test-screen': true,
               'is-completed': true,
             },
           },

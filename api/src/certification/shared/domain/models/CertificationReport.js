@@ -22,7 +22,6 @@ class CertificationReport {
     firstName,
     lastName,
     examinerComment,
-    hasSeenEndTestScreen,
     certificationIssueReports = [],
     certificationCourseId,
     isCompleted,
@@ -63,7 +62,6 @@ class CertificationReport {
       firstName: certificationCourseDTO.firstName,
       lastName: certificationCourseDTO.lastName,
       certificationIssueReports: certificationCourseDTO.certificationIssueReports,
-      hasSeenEndTestScreen: certificationCourseDTO.hasSeenEndTestScreen,
       isCompleted: certificationCourseDTO.assessment.isCompleted(),
       abortReason: certificationCourseDTO.abortReason,
     });

@@ -12,19 +12,13 @@ import { FinalizedSession } from '../models/FinalizedSession.js';
  * @param {AutoJuryDone} params.autoJuryDone
  * @param {JuryCertificationSummaryRepository} params.juryCertificationSummaryRepository
  * @param {FinalizedSessionRepository} params.finalizedSessionRepository
- * @param {SupervisorAccessRepository} params.supervisorAccessRepository
  */
 export const registerPublishableSession = async ({
   autoJuryDone,
   juryCertificationSummaryRepository,
   finalizedSessionRepository,
-  supervisorAccessRepository,
 }) => {
   const juryCertificationSummaries = await juryCertificationSummaryRepository.findBySessionId({
-    sessionId: autoJuryDone.sessionId,
-  });
-
-  const hasSupervisorAccess = await supervisorAccessRepository.sessionHasSupervisorAccess({
     sessionId: autoJuryDone.sessionId,
   });
 
@@ -35,7 +29,6 @@ export const registerPublishableSession = async ({
     sessionDate: autoJuryDone.sessionDate,
     sessionTime: autoJuryDone.sessionTime,
     hasExaminerGlobalComment: autoJuryDone.hasExaminerGlobalComment,
-    hasSupervisorAccess,
     juryCertificationSummaries,
   });
 

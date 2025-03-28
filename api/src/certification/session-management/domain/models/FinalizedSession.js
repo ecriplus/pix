@@ -27,7 +27,6 @@ class FinalizedSession {
     sessionTime,
     hasExaminerGlobalComment,
     juryCertificationSummaries,
-    hasSupervisorAccess,
   }) {
     return new FinalizedSession({
       sessionId,
@@ -39,8 +38,7 @@ class FinalizedSession {
         !hasExaminerGlobalComment &&
         _hasNoIssueReportsWithRequiredAction(juryCertificationSummaries) &&
         _hasNoScoringError(juryCertificationSummaries) &&
-        _hasNoUnfinishedWithoutAbortReason(juryCertificationSummaries) &&
-        _hasAllFinishedEndTestScreensSeenByExaminer(hasSupervisorAccess, juryCertificationSummaries),
+        _hasNoUnfinishedWithoutAbortReason(juryCertificationSummaries),
       publishedAt: null,
     });
   }
@@ -75,11 +73,4 @@ function _hasNoUnfinishedWithoutAbortReason(juryCertificationSummaries) {
   return juryCertificationSummaries
     .filter((certificationSummary) => !certificationSummary.completedAt)
     .every((unfinishedCertificationSummary) => unfinishedCertificationSummary.isFlaggedAborted);
-}
-
-function _hasAllFinishedEndTestScreensSeenByExaminer(hasSupervisorAccess, juryCertificationSummaries) {
-  if (hasSupervisorAccess) return true;
-  return juryCertificationSummaries
-    .filter((certificationSummary) => Boolean(certificationSummary.completedAt))
-    .every((finishedCertificationSummary) => finishedCertificationSummary.hasSeenEndTestScreen);
 }
