@@ -9,7 +9,7 @@ describe('Unit | UseCase | get-target-profile', function () {
     };
     const campaignId = 123;
     const targetProfile = Symbol('targetProfile');
-    targetProfileRepository.getByCampaignId.withArgs(campaignId).resolves(targetProfile);
+    targetProfileRepository.getByCampaignId.withArgs({ campaignId }).resolves(targetProfile);
 
     // when
     const result = await getTargetProfile({

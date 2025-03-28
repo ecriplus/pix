@@ -34,6 +34,19 @@ export const getByIdForAdmin = async (id) => {
 
 /**
  * @function
+ * @name getById
+ *
+ * @param {number} id
+ * @returns {Promise<TargetProfile>}
+ */
+export const getById = async (id) => {
+  const targetProfile = await usecases.getTargetProfile({ targetProfileId: id });
+
+  return new TargetProfile(targetProfile);
+};
+
+/**
+ * @function
  * @name findSkillByTargetProfileIds
  *
  * @param {Array<number>} targetProfilsIds
