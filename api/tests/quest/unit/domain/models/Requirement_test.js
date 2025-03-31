@@ -105,8 +105,10 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
         // given
         const buildData = {
           requirement_type: TYPES.CAPPED_TUBES,
-          comparison: 'irrelevant',
-          data: {},
+          data: {
+            cappedTubes: [],
+            threshold: 0,
+          },
         };
 
         // when
