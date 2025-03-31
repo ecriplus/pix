@@ -35,45 +35,59 @@ function translateMessage(locale, key) {
   return key;
 }
 
-function _formatUndefinedAttribute({ message, locale }) {
-  return {
+function _formatUndefinedAttribute({ message, locale, meta }) {
+  const error = {
     status: '422',
     title: 'Invalid data attributes',
     detail: translateMessage(locale, message),
   };
+  if (meta) {
+    error.meta = meta;
+  }
+  return error;
 }
 
-function _formatRelationship({ attribute, message, locale }) {
+function _formatRelationship({ attribute, message, locale, meta }) {
   const relationship = attribute.replace('Id', '');
-  return {
+  const error = {
     status: '422',
     source: {
       pointer: `/data/relationships/${_.kebabCase(relationship)}`,
     },
     title: `Invalid relationship "${relationship}"`,
     detail: translateMessage(locale, message),
+    meta,
   };
+  if (meta) {
+    error.meta = meta;
+  }
+  return error;
 }
 
-function _formatAttribute({ attribute, message, locale }) {
-  return {
+function _formatAttribute({ attribute, message, locale, meta }) {
+  const error = {
     status: '422',
     source: {
       pointer: `/data/attributes/${_.kebabCase(attribute)}`,
     },
     title: `Invalid data attribute "${attribute}"`,
     detail: translateMessage(locale, message),
+    meta,
   };
+  if (meta) {
+    error.meta = meta;
+  }
+  return error;
 }
 
-function _formatInvalidAttribute(locale, { attribute, message }) {
+function _formatInvalidAttribute(locale, meta, { attribute, message }) {
   if (!attribute) {
-    return _formatUndefinedAttribute({ message, locale });
+    return _formatUndefinedAttribute({ message, locale, meta });
   }
   if (attribute.endsWith('Id') && !NOT_VALID_RELATIONSHIPS.includes(attribute)) {
-    return _formatRelationship({ attribute, message, locale });
+    return _formatRelationship({ attribute, message, locale, meta });
   }
-  return _formatAttribute({ attribute, message, locale });
+  return _formatAttribute({ attribute, message, locale, meta });
 }
 
 function _mapToHttpError(error) {
@@ -490,7 +504,7 @@ function handle(request, h, error) {
     const locale = extractLocaleFromRequest(request).split('-')[0];
 
     const jsonApiError = new JSONAPIError(
-      error.invalidAttributes?.map(_formatInvalidAttribute.bind(_formatInvalidAttribute, locale)),
+      error.invalidAttributes?.map(_formatInvalidAttribute.bind(_formatInvalidAttribute, locale, error.meta)),
     );
     return h.response(jsonApiError).code(422);
   }
