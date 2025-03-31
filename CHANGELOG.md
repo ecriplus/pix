@@ -1,5 +1,16 @@
 # Pix Changelog
 
+## v5.75.0 (31/03/2025)
+
+
+### :rocket: Amélioration
+- [#11885](https://github.com/1024pix/pix/pull/11885) [FEATURE] Ne pas afficher d'information lié au niveau global sur le certificat V3 pour un score inférieur à 64pix (PIX-17181).
+
+### :arrow_up: Montée de version
+- [#11904](https://github.com/1024pix/pix/pull/11904) [BUMP] Update dependency @1024pix/pix-ui to ^55.9.0 (orga).
+- [#11898](https://github.com/1024pix/pix/pull/11898) [BUMP] Update dependency @1024pix/pix-ui to ^55.9.0 (admin).
+- [#11881](https://github.com/1024pix/pix/pull/11881) [BUMP] Mise à jour des dépendances de audit logger.
+
 ## v5.74.0 (28/03/2025)
 
 
