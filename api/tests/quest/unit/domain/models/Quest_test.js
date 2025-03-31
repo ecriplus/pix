@@ -15,7 +15,7 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
     it('should throw if args are not valid', function () {
       expect(() => {
         new Quest({ rewardId: 1 });
-      }).to.throw;
+      }).to.throw();
     });
 
     it('should not throw if args are valid', function () {
@@ -23,7 +23,7 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
         new Quest({
           rewardType: 'attestations',
           rewardId: 1,
-          eligiblityRequirements: [
+          eligibilityRequirements: [
             {
               data: {
                 status: {
@@ -58,13 +58,13 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
             },
           ],
         });
-      }).to.throw;
+      }).not.to.throw();
     });
 
     it('should throw without args', function () {
       expect(() => {
         new Quest();
-      }).to.throw;
+      }).to.throw();
     });
   });
 

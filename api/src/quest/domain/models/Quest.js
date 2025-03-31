@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { EntityValidationError } from '../../../shared/domain/errors.js';
 import { COMPARISONS as _CRITERION_COMPARISONS } from './CriterionProperty.js';
 import {
   COMPARISONS as _REQUIREMENT_COMPARISONS,
@@ -46,7 +47,10 @@ class Quest {
   }
 
   #validate(quest) {
-    schema.validate(quest);
+    const { error } = schema.validate(quest);
+    if (error) {
+      throw EntityValidationError.fromJoiErrors(error.details, undefined, { data: quest });
+    }
   }
 
   get eligibilityRequirements() {

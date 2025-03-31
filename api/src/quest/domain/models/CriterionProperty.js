@@ -17,23 +17,33 @@ const schema = Joi.object({
     .required(),
 });
 
+export class CriterionPropertyError extends Error {
+  constructor({ message, details }) {
+    super(message);
+    this.details = details;
+  }
+}
+
 export class CriterionProperty {
   #key;
   #data;
   #comparison;
 
   constructor(args) {
-    this.#validate(args);
-
     const { key, data, comparison } = args;
 
     this.#key = key;
     this.#data = data;
     this.#comparison = comparison;
+
+    this.#validate(args);
   }
 
   #validate(args) {
-    schema.validate(args);
+    const { error } = schema.validate(args);
+    if (error) {
+      throw new CriterionPropertyError({ message: 'arguments are invalid', details: error.details });
+    }
   }
 
   get key() {

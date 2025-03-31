@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { EntityValidationError } from '../../../shared/domain/errors.js';
 import { Criterion } from './Criterion.js';
 
 export const COMPARISONS = {
@@ -51,6 +52,7 @@ class BaseRequirement {
 }
 
 const composeRequirementSchema = Joi.object({
+  requirement_type: TYPES.COMPOSE,
   data: Joi.array().items(Joi.object()).required(),
   comparison: Joi.string()
     .valid(...Object.values(COMPARISONS))
@@ -63,7 +65,6 @@ export class ComposedRequirement extends BaseRequirement {
   constructor(args) {
     const { data, comparison } = args;
     super({ requirement_type: TYPES.COMPOSE, comparison });
-    this.#validate(args);
     this.#subRequirements = data.map((subRequirement) => {
       if (subRequirement instanceof BaseRequirement) {
         return subRequirement;
@@ -74,10 +75,15 @@ export class ComposedRequirement extends BaseRequirement {
         comparison: subRequirement.comparison,
       });
     });
+
+    this.#validate(args);
   }
 
   #validate(args) {
-    composeRequirementSchema.validate(args);
+    const { error } = composeRequirementSchema.validate(args);
+    if (error) {
+      throw EntityValidationError.fromJoiErrors(error.details, undefined, { data: this.toDTO() });
+    }
   }
 
   get data() {
@@ -121,12 +127,17 @@ export class ObjectRequirement extends BaseRequirement {
     const { requirement_type, data, comparison } = args;
 
     super({ requirement_type, comparison });
-    this.#validate(args);
+
     this.#criterion = data instanceof Criterion ? data : new Criterion({ data });
+
+    this.#validate(args);
   }
 
   #validate(args) {
-    objectRequirementSchema.validate(args);
+    const { error } = objectRequirementSchema.validate(args);
+    if (error) {
+      throw EntityValidationError.fromJoiErrors(error.details, undefined, { data: this.toDTO() });
+    }
   }
 
   get data() {
@@ -217,13 +228,18 @@ export class CappedTubesRequirement extends BaseRequirement {
   constructor(args) {
     const { data } = args;
     super({ requirement_type: TYPES.CAPPED_TUBES, comparison: null });
-    this.#validate(args);
+
     this.#cappedTubes = data.cappedTubes;
     this.#threshold = data.threshold;
+
+    this.#validate(args);
   }
 
   #validate(args) {
-    cappedTubesRequirementSchema.validate(args);
+    const { error } = cappedTubesRequirementSchema.validate(args);
+    if (error) {
+      throw EntityValidationError.fromJoiErrors(error.details, undefined, { data: this.toDTO() });
+    }
   }
 
   /**
