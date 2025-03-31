@@ -59,132 +59,94 @@ describe('Unit | Usecase | authenticate-application', function () {
     });
 
     context('when client scopes are different', function () {
-      it('should throw an error', async function () {
-        const payload = {
-          clientId: 'test-apimOsmoseClientId',
-          clientSecret: 'bon-secret',
-          scope: 'mauvais-scope bon-scope',
-        };
+      // eslint-disable-next-line mocha/no-setup-in-describe
+      [{ scope: 'mauvais-scope bon-scope' }, { scope: 'mauvais-scope' }].forEach(({ scope }) => {
+        it(`should throw an error when scope is ${scope}`, async function () {
+          const payload = {
+            clientId: 'test-apimOsmoseClientId',
+            clientSecret: 'bon-secret',
+            scope,
+          };
 
-        const clientApplicationRepository = {
-          findByClientId: sinon.stub(),
-        };
-        const application = domainBuilder.buildClientApplication({
-          name: 'test-apimOsmoseClientId',
-          clientSecret: 'bon-secret',
-          scopes: ['bon-scope'],
+          const clientApplicationRepository = {
+            findByClientId: sinon.stub(),
+          };
+          const application = domainBuilder.buildClientApplication({
+            name: 'test-apimOsmoseClientId',
+            clientSecret: 'bon-secret',
+            scopes: ['bon-scope'],
+          });
+          clientApplicationRepository.findByClientId.withArgs(payload.clientId).resolves(application);
+
+          const cryptoService = {
+            checkPassword: sinon.stub(),
+          };
+          cryptoService.checkPassword
+            .withArgs({ password: payload.clientSecret, passwordHash: application.clientSecret })
+            .resolves();
+
+          const err = await catchErr(authenticateApplication)({
+            ...payload,
+            clientApplicationRepository,
+            cryptoService,
+          });
+
+          expect(err).to.be.instanceOf(ApplicationScopeNotAllowedError);
         });
-        clientApplicationRepository.findByClientId.withArgs(payload.clientId).resolves(application);
-
-        const cryptoService = {
-          checkPassword: sinon.stub(),
-        };
-        cryptoService.checkPassword
-          .withArgs({ password: payload.clientSecret, passwordHash: application.clientSecret })
-          .resolves();
-
-        const err = await catchErr(authenticateApplication)({ ...payload, clientApplicationRepository, cryptoService });
-
-        expect(err).to.be.instanceOf(ApplicationScopeNotAllowedError);
       });
     });
 
     context('when given information is correct', function () {
-      it('should return created token with single scope', async function () {
-        const payload = {
-          clientId: 'test-apimOsmoseClientId',
-          clientSecret: 'bon-secret',
-          scope: 'bon-scope',
-        };
+      // eslint-disable-next-line mocha/no-setup-in-describe
+      [{ scope: 'bon-scope' }, { scope: 'bon-scope autre-bon-scope' }].forEach(({ scope }) => {
+        it(`should return created token with scope ${scope}`, async function () {
+          const payload = {
+            clientId: 'test-apimOsmoseClientId',
+            clientSecret: 'bon-secret',
+            scope,
+          };
 
-        const clientApplicationRepository = {
-          findByClientId: sinon.stub(),
-        };
-        const application = domainBuilder.buildClientApplication({
-          name: 'mon-application',
-          clientId: 'test-apimOsmoseClientId',
-          clientSecret: 'bon-secret',
-          scopes: ['bon-scope'],
+          const clientApplicationRepository = {
+            findByClientId: sinon.stub(),
+          };
+          const application = domainBuilder.buildClientApplication({
+            name: 'mon-application',
+            clientId: 'test-apimOsmoseClientId',
+            clientSecret: 'bon-secret',
+            scopes: ['bon-scope', 'autre-bon-scope'],
+          });
+          clientApplicationRepository.findByClientId.withArgs(payload.clientId).resolves(application);
+
+          const cryptoService = {
+            checkPassword: sinon.stub(),
+          };
+          cryptoService.checkPassword
+            .withArgs({ password: payload.clientSecret, passwordHash: application.clientSecret })
+            .resolves();
+
+          const tokenService = {
+            createAccessTokenFromApplication: sinon.stub(),
+          };
+          const expectedToken = Symbol('Mon Super token');
+          tokenService.createAccessTokenFromApplication
+            .withArgs(
+              application.clientId,
+              application.name,
+              payload.scope,
+              config.authentication.secret,
+              config.authentication.accessTokenLifespanMs,
+            )
+            .resolves(expectedToken);
+
+          const token = await authenticateApplication({
+            ...payload,
+            tokenService,
+            clientApplicationRepository,
+            cryptoService,
+          });
+
+          expect(token).to.be.equal(expectedToken);
         });
-        clientApplicationRepository.findByClientId.withArgs(payload.clientId).resolves(application);
-
-        const cryptoService = {
-          checkPassword: sinon.stub(),
-        };
-        cryptoService.checkPassword
-          .withArgs({ password: payload.clientSecret, passwordHash: application.clientSecret })
-          .resolves();
-
-        const tokenService = {
-          createAccessTokenFromApplication: sinon.stub(),
-        };
-        const expectedToken = Symbol('Mon Super token');
-        tokenService.createAccessTokenFromApplication
-          .withArgs(
-            application.clientId,
-            application.name,
-            payload.scope,
-            config.authentication.secret,
-            config.authentication.accessTokenLifespanMs,
-          )
-          .resolves(expectedToken);
-
-        const token = await authenticateApplication({
-          ...payload,
-          tokenService,
-          clientApplicationRepository,
-          cryptoService,
-        });
-
-        expect(token).to.be.equal(expectedToken);
-      });
-      it('should return created token with multiple scopes', async function () {
-        const payload = {
-          clientId: 'test-apimOsmoseClientId',
-          clientSecret: 'bon-secret',
-          scope: 'bon-scope autre-bon-scope',
-        };
-
-        const clientApplicationRepository = {
-          findByClientId: sinon.stub(),
-        };
-        const application = domainBuilder.buildClientApplication({
-          name: 'mon-application',
-          clientId: 'test-apimOsmoseClientId',
-          clientSecret: 'bon-secret',
-          scopes: ['bon-scope', 'autre-bon-scope'],
-        });
-        clientApplicationRepository.findByClientId.withArgs(payload.clientId).resolves(application);
-
-        const cryptoService = {
-          checkPassword: sinon.stub(),
-        };
-        cryptoService.checkPassword
-          .withArgs({ password: payload.clientSecret, passwordHash: application.clientSecret })
-          .resolves();
-
-        const tokenService = {
-          createAccessTokenFromApplication: sinon.stub(),
-        };
-        const expectedToken = Symbol('Mon Super token');
-        tokenService.createAccessTokenFromApplication
-          .withArgs(
-            application.clientId,
-            application.name,
-            payload.scope,
-            config.authentication.secret,
-            config.authentication.accessTokenLifespanMs,
-          )
-          .resolves(expectedToken);
-
-        const token = await authenticateApplication({
-          ...payload,
-          tokenService,
-          clientApplicationRepository,
-          cryptoService,
-        });
-
-        expect(token).to.be.equal(expectedToken);
       });
     });
   });
