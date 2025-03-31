@@ -8,6 +8,7 @@ import * as campaignParticipationRepository from '../../../prescription/campaign
 import * as targetProfileRepository from '../../../prescription/target-profile/infrastructure/repositories/target-profile-repository.js';
 import * as knowledgeElementRepository from '../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as skillRepository from '../../../shared/infrastructure/repositories/skill-repository.js';
+import * as tubeRepository from '../../../shared/infrastructure/repositories/tube-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
@@ -20,6 +21,7 @@ const dependencies = {
   campaignParticipationRepository,
   knowledgeElementRepository,
   targetProfileRepository,
+  tubeRepository,
   targetProfileTrainingRepository,
   skillRepository,
   userRepository,

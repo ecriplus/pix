@@ -1,4 +1,6 @@
-import { usecases } from '../../../../lib/domain/usecases/index.js';
+// TODO Bounded context violation
+import { usecases as devCompUsecases } from '../../../devcomp/domain/usecases/index.js';
+// TODO Bounded context violation
 import * as tutorialSerializer from '../../../devcomp/infrastructure/serializers/jsonapi/tutorial-serializer.js';
 import { evaluationUsecases } from '../../../evaluation/domain/usecases/index.js';
 import * as requestResponseUtils from '../../../shared/infrastructure/utils/request-response-utils.js';
@@ -23,7 +25,7 @@ const findTutorials = function (request, h, dependencies = { requestResponseUtil
   const authenticatedUserId = request.auth.credentials.userId;
   const scorecardId = request.params.id;
 
-  return usecases
+  return devCompUsecases
     .findTutorials({
       authenticatedUserId,
       scorecardId,

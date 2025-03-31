@@ -1,6 +1,6 @@
-import { usecases } from '../../../../../lib/domain/usecases/index.js';
-import { evaluationUsecases } from '../../../../../src/evaluation//domain/usecases/index.js';
+import { usecases as devCompUsecases } from '../../../../../src/devcomp/domain/usecases/index.js';
 import { scorecardController } from '../../../../../src/evaluation/application/scorecards/scorecard-controller.js';
+import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
 import * as requestResponseUtils from '../../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
 
@@ -56,7 +56,10 @@ describe('Unit | Controller | scorecard-controller', function () {
     const tutorials = [];
 
     beforeEach(function () {
-      sinon.stub(usecases, 'findTutorials').withArgs({ authenticatedUserId, scorecardId, locale }).resolves(tutorials);
+      sinon
+        .stub(devCompUsecases, 'findTutorials')
+        .withArgs({ authenticatedUserId, scorecardId, locale })
+        .resolves(tutorials);
     });
 
     it('should call the expected usecase', async function () {
