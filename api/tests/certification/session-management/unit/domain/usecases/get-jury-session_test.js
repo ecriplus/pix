@@ -4,14 +4,10 @@ import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-help
 
 describe('Certification | Session Management | Unit | Domain | UseCase | get-jury-session', function () {
   let jurySessionRepository;
-  let supervisorAccessRepository;
 
   beforeEach(function () {
     jurySessionRepository = {
       get: sinon.stub(),
-    };
-    supervisorAccessRepository = {
-      sessionHasSupervisorAccess: sinon.stub(),
     };
   });
 
@@ -26,7 +22,6 @@ describe('Certification | Session Management | Unit | Domain | UseCase | get-jur
       const actualSession = await getJurySession({
         sessionId,
         jurySessionRepository,
-        supervisorAccessRepository,
       });
 
       // then
@@ -41,7 +36,7 @@ describe('Certification | Session Management | Unit | Domain | UseCase | get-jur
       jurySessionRepository.get.withArgs({ id: sessionId }).rejects(new NotFoundError());
 
       // when
-      const err = await catchErr(getJurySession)({ sessionId, jurySessionRepository, supervisorAccessRepository });
+      const err = await catchErr(getJurySession)({ sessionId, jurySessionRepository });
 
       // then
       expect(err).to.be.an.instanceof(NotFoundError);

@@ -2,7 +2,6 @@
  * @typedef {import('../events/AutoJuryDone.js').AutoJuryDone} AutoJuryDone
  *  @typedef {import('./index.js').JuryCertificationSummaryRepository} JuryCertificationSummaryRepository
  *  @typedef {import('./index.js').FinalizedSessionRepository} FinalizedSessionRepository
- *  @typedef {import('./index.js').SupervisorAccessRepository} SupervisorAccessRepository
  */
 
 import { FinalizedSession } from '../models/FinalizedSession.js';

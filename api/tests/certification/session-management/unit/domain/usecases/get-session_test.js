@@ -4,15 +4,11 @@ import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-help
 
 describe('Unit | UseCase | get-session', function () {
   let sessionRepository;
-  let supervisorAccessRepository;
 
   beforeEach(function () {
     sessionRepository = {
       hasSomeCleaAcquired: sinon.stub(),
       get: sinon.stub(),
-    };
-    supervisorAccessRepository = {
-      sessionHasSupervisorAccess: sinon.stub(),
     };
   });
 
@@ -23,59 +19,15 @@ describe('Unit | UseCase | get-session', function () {
       const sessionToFind = domainBuilder.certification.enrolment.buildSession({ id: sessionId });
       sessionRepository.get.withArgs({ id: sessionId }).resolves(sessionToFind);
       sessionRepository.hasSomeCleaAcquired.withArgs({ id: sessionId }).resolves(false);
-      supervisorAccessRepository.sessionHasSupervisorAccess.resolves(true);
 
       // when
       const { session: actualSession } = await getSession({
         sessionId,
         sessionRepository,
-        supervisorAccessRepository,
       });
 
       // then
       expect(actualSession).to.deepEqualInstance(sessionToFind);
-    });
-
-    context('when the session does have supervisor access', function () {
-      it('should return hasSupervisorAccess to true', async function () {
-        // given
-        const sessionId = 123;
-        const sessionToFind = domainBuilder.certification.enrolment.buildSession({ id: sessionId });
-        sessionRepository.get.withArgs({ id: sessionId }).resolves(sessionToFind);
-        sessionRepository.hasSomeCleaAcquired.withArgs({ id: sessionId }).resolves(false);
-        supervisorAccessRepository.sessionHasSupervisorAccess.resolves(true);
-
-        // when
-        const { hasSupervisorAccess } = await getSession({
-          sessionId,
-          sessionRepository,
-          supervisorAccessRepository,
-        });
-
-        // then
-        expect(hasSupervisorAccess).to.be.true;
-      });
-    });
-
-    context('when the session does not have supervisor access', function () {
-      it('should return hasSupervisorAccess to true', async function () {
-        // given
-        const sessionId = 123;
-        const sessionToFind = domainBuilder.certification.enrolment.buildSession({ id: sessionId });
-        sessionRepository.get.withArgs({ id: sessionId }).resolves(sessionToFind);
-        sessionRepository.hasSomeCleaAcquired.withArgs({ id: sessionId }).resolves(false);
-        supervisorAccessRepository.sessionHasSupervisorAccess.resolves(false);
-
-        // when
-        const { hasSupervisorAccess } = await getSession({
-          sessionId,
-          sessionRepository,
-          supervisorAccessRepository,
-        });
-
-        // then
-        expect(hasSupervisorAccess).to.be.false;
-      });
     });
 
     context('when the session does have any acquired clea result', function () {
@@ -85,13 +37,11 @@ describe('Unit | UseCase | get-session', function () {
         const sessionToFind = domainBuilder.certification.enrolment.buildSession({ id: sessionId });
         sessionRepository.get.withArgs({ id: sessionId }).resolves(sessionToFind);
         sessionRepository.hasSomeCleaAcquired.withArgs({ id: sessionId }).resolves(true);
-        supervisorAccessRepository.sessionHasSupervisorAccess.resolves(true);
 
         // when
         const { hasSomeCleaAcquired } = await getSession({
           sessionId,
           sessionRepository,
-          supervisorAccessRepository,
         });
 
         // then
@@ -106,13 +56,11 @@ describe('Unit | UseCase | get-session', function () {
         const sessionToFind = domainBuilder.certification.enrolment.buildSession({ id: sessionId });
         sessionRepository.get.withArgs({ id: sessionId }).resolves(sessionToFind);
         sessionRepository.hasSomeCleaAcquired.withArgs({ id: sessionId }).resolves(false);
-        supervisorAccessRepository.sessionHasSupervisorAccess.resolves(true);
 
         // when
         const { hasSomeCleaAcquired } = await getSession({
           sessionId,
           sessionRepository,
-          supervisorAccessRepository,
         });
 
         // then
@@ -131,7 +79,6 @@ describe('Unit | UseCase | get-session', function () {
       const err = await catchErr(getSession)({
         sessionId,
         sessionRepository,
-        supervisorAccessRepository,
       });
 
       // then
