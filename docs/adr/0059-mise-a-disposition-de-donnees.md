@@ -4,7 +4,7 @@ Date : 2025-02-11
 
 ## État
 
-En cours de rédaction
+Validée
 
 ## Contexte
 
