@@ -32,6 +32,14 @@ function createAccessTokenForSaml({ userId, audience }) {
   return _createAccessToken({ userId, source: 'external', expirationDelaySeconds, audience });
 }
 
+/**
+ * @param {string} clientId
+ * @param {string} source
+ * @param {string | string[]} scope
+ * @param {string} secret
+ * @param {number | string} expiresIn
+ * @returns {string}
+ */
 function createAccessTokenFromApplication(
   clientId,
   source,
@@ -43,7 +51,7 @@ function createAccessTokenFromApplication(
     {
       client_id: clientId,
       source,
-      scope,
+      scope: Array.isArray(scope) ? scope.join(' ') : scope,
     },
     secret,
     { expiresIn },

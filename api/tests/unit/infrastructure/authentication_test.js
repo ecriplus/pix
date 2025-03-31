@@ -273,7 +273,13 @@ describe('Unit | Infrastructure | Authentication', function () {
         const h = { authenticated: sinon.stub() };
         const decodedAccessToken = {
           client_id: 'client_id',
-          scope: 'scope',
+          scope: 'scope1 scope2',
+          source: 'source',
+        };
+
+        const expectedCredentials = {
+          client_id: 'client_id',
+          scope: ['scope1', 'scope2'],
           source: 'source',
         };
         tokenService.extractTokenFromAuthChain.withArgs('Bearer token').returns('token');
@@ -286,7 +292,7 @@ describe('Unit | Infrastructure | Authentication', function () {
         await authenticate(request, h);
 
         // then
-        expect(h.authenticated).to.have.been.calledWithExactly({ credentials: decodedAccessToken });
+        expect(h.authenticated).to.have.been.calledWithExactly({ credentials: expectedCredentials });
       });
     });
 

@@ -82,7 +82,7 @@ export async function validateClientApplication(decodedAccessToken) {
     isValid: true,
     credentials: {
       client_id: decodedAccessToken.client_id,
-      scope: decodedAccessToken.scope,
+      scope: decodedAccessToken.scope.split(/\s/g),
       source: decodedAccessToken.source,
     },
   };

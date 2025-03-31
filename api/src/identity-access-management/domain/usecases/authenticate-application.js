@@ -44,7 +44,11 @@ async function _checkClientSecret(application, clientSecret, cryptoService) {
 }
 
 function _checkAppScope(application, scope) {
-  if (!application.scopes.includes(scope)) {
-    throw new ApplicationScopeNotAllowedError('The scope is invalid.');
+  const requestedScopes = scope.split(/\s/g);
+
+  for (const requestedScope of requestedScopes) {
+    if (!application.scopes.includes(requestedScope)) {
+      throw new ApplicationScopeNotAllowedError('The scope is invalid.');
+    }
   }
 }

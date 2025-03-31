@@ -505,7 +505,8 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
     let options;
     const OSMOSE_CLIENT_ID = 'test-apimOsmoseClientId';
     const OSMOSE_CLIENT_SECRET = 'test-apimOsmoseClientSecret';
-    const SCOPE = 'organizations-certifications-result';
+    const SCOPE1 = 'organizations-certifications-result';
+    const SCOPE2 = 'another-scope';
 
     beforeEach(async function () {
       server = await createServer();
@@ -523,7 +524,7 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
         name: 'osmose',
         clientId: OSMOSE_CLIENT_ID,
         clientSecret: OSMOSE_CLIENT_SECRET,
-        scopes: [SCOPE],
+        scopes: [SCOPE1, SCOPE2],
       });
       await databaseBuilder.commit();
     });
@@ -534,7 +535,7 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
         grant_type: 'client_credentials',
         client_id: OSMOSE_CLIENT_ID,
         client_secret: OSMOSE_CLIENT_SECRET,
-        scope: SCOPE,
+        scope: `${SCOPE1} ${SCOPE2}`,
       });
 
       // when
@@ -555,7 +556,7 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
         grant_type: 'client_credentials',
         client_id: 'NOT REGISTRED',
         client_secret: OSMOSE_CLIENT_SECRET,
-        scope: SCOPE,
+        scope: SCOPE1,
       });
 
       // when
@@ -575,7 +576,7 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
         grant_type: 'client_credentials',
         client_id: OSMOSE_CLIENT_ID,
         client_secret: 'invalid secret',
-        scope: SCOPE,
+        scope: SCOPE1,
       });
 
       // when
@@ -589,13 +590,13 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
       });
     });
 
-    it('should return a 403 when scope is not allowed', async function () {
+    it('should return a 403 when at least one scope is not allowed', async function () {
       // given
       options.payload = querystring.stringify({
         grant_type: 'client_credentials',
         client_id: OSMOSE_CLIENT_ID,
         client_secret: OSMOSE_CLIENT_SECRET,
-        scope: 'invalid scope',
+        scope: `invalid-scope ${SCOPE1}`,
       });
 
       // when
