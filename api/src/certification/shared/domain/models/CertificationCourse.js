@@ -32,7 +32,6 @@ class CertificationCourse {
    * @param {string} props.birthCountry
    * @param {string} props.sex
    * @param {number} props.externalId
-   * @param {boolean} props.hasSeenEndTestScreen
    * @param {Date} props.createdAt
    * @param {Date} props.completedAt
    * @param {boolean} props.isPublished
@@ -63,7 +62,6 @@ class CertificationCourse {
     birthCountry,
     sex,
     externalId,
-    hasSeenEndTestScreen,
     createdAt,
     completedAt,
     isPublished = false,
@@ -93,7 +91,6 @@ class CertificationCourse {
     this._birthCountry = birthCountry;
     this._sex = sex;
     this._externalId = externalId;
-    this._hasSeenEndTestScreen = hasSeenEndTestScreen;
     this._createdAt = createdAt;
     this._completedAt = completedAt;
     this._isPublished = isPublished;
@@ -351,7 +348,6 @@ class CertificationCourse {
       birthCountry: this._birthCountry,
       sex: this._sex,
       externalId: this._externalId,
-      hasSeenEndTestScreen: this._hasSeenEndTestScreen,
       createdAt: this._createdAt,
       completedAt: this._completedAt,
       isPublished: this._isPublished,

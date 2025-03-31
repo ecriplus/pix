@@ -273,7 +273,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             'finalized-at': null,
             'results-sent-to-prescriber-at': null,
             'published-at': null,
-            'has-supervisor-access': false,
             'has-some-clea-acquired': false,
             version: 2,
           },

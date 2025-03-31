@@ -15,7 +15,6 @@ describe('Unit | Domain | Models | FinalizedSession', function () {
         sessionTime: '16:00',
         hasExaminerGlobalComment: true,
         juryCertificationSummaries: _noneWithRequiredActionNorError(),
-        hasSupervisorAccess: false,
         finalizedAt: new Date('2020-01-01T00:00:00Z'),
       });
       // then
@@ -31,7 +30,6 @@ describe('Unit | Domain | Models | FinalizedSession', function () {
         sessionTime: '16:00',
         hasExaminerGlobalComment: false,
         juryCertificationSummaries: _noneWithRequiredActionNorError(),
-        hasSupervisorAccess: true,
         finalizedAt: new Date('2020-01-01T00:00:00Z'),
       });
 
@@ -49,7 +47,6 @@ describe('Unit | Domain | Models | FinalizedSession', function () {
           sessionTime: '16:00',
           hasExaminerGlobalComment: false,
           juryCertificationSummaries: _noneWithRequiredActionNorErrorButEndScreenNotSeen(),
-          hasSupervisorAccess: true,
           finalizedAt: new Date('2020-01-01T00:00:00Z'),
         });
 
@@ -66,26 +63,6 @@ describe('Unit | Domain | Models | FinalizedSession', function () {
           sessionTime: '16:00',
           hasExaminerGlobalComment: false,
           juryCertificationSummaries: _someWhichAreUnfinishedButHaveNoAbortReason(),
-          hasSupervisorAccess: true,
-          finalizedAt: new Date('2020-01-01T00:00:00Z'),
-        });
-
-        // then
-        expect(finalizedSession.isPublishable).to.be.false;
-      });
-    });
-
-    context('when supervisor portal was not used', function () {
-      it('is not publishable when at least one test end screen has not been seen', function () {
-        // given / when
-        const finalizedSession = FinalizedSession.from({
-          sessionId: 1234,
-          certificationCenterName: 'a certification center',
-          sessionDate: '2021-01-29',
-          sessionTime: '16:00',
-          hasExaminerGlobalComment: false,
-          juryCertificationSummaries: _noneWithRequiredActionNorErrorButEndScreenNotSeen(),
-          hasSupervisorAccess: false,
           finalizedAt: new Date('2020-01-01T00:00:00Z'),
         });
 
@@ -103,7 +80,6 @@ describe('Unit | Domain | Models | FinalizedSession', function () {
         sessionTime: '16:00',
         hasExaminerGlobalComment: false,
         juryCertificationSummaries: _someWithUnresolvedRequiredActionButNoErrorOrStartedStatus(),
-        hasSupervisorAccess: false,
         finalizedAt: new Date('2020-01-01T00:00:00Z'),
       });
       // then
@@ -119,7 +95,6 @@ describe('Unit | Domain | Models | FinalizedSession', function () {
         sessionTime: '16:00',
         hasExaminerGlobalComment: false,
         juryCertificationSummaries: _noneWithRequiredActionButSomeErrorStatus(),
-        hasSupervisorAccess: false,
         finalizedAt: new Date('2020-01-01T00:00:00Z'),
       });
 
@@ -136,7 +111,6 @@ describe('Unit | Domain | Models | FinalizedSession', function () {
         sessionTime: '16:00',
         hasExaminerGlobalComment: false,
         juryCertificationSummaries: _noneWithRequiredActionButSomeStartedStatus(),
-        hasSupervisorAccess: false,
         finalizedAt: new Date('2020-01-01T00:00:00Z'),
       });
 
@@ -153,7 +127,6 @@ describe('Unit | Domain | Models | FinalizedSession', function () {
         sessionTime: '16:00',
         hasExaminerGlobalComment: false,
         juryCertificationSummaries: _noneWithRequiredActionNorError(),
-        hasSupervisorAccess: false,
         finalizedAt: new Date('2020-01-01T00:00:00Z'),
       });
 
@@ -170,7 +143,6 @@ describe('Unit | Domain | Models | FinalizedSession', function () {
         sessionTime: '16:00',
         hasExaminerGlobalComment: false,
         juryCertificationSummaries: _someWithResolvedRequiredActionButNoErrorOrStartedStatus(),
-        hasSupervisorAccess: false,
         finalizedAt: new Date('2020-01-01T00:00:00Z'),
       });
       // then
@@ -263,7 +235,6 @@ function _noneWithRequiredActionNorError() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
-      hasSeenEndTestScreen: true,
       cleaCertificationStatus: 'not_passed',
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
@@ -286,7 +257,6 @@ function _noneWithRequiredActionNorErrorButEndScreenNotSeen() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
-      hasSeenEndTestScreen: false,
       cleaCertificationStatus: 'not_passed',
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
@@ -304,7 +274,6 @@ function _noneWithRequiredActionNorErrorButEndScreenNotSeen() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
-      hasSeenEndTestScreen: true,
       cleaCertificationStatus: 'not_passed',
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
@@ -327,7 +296,6 @@ function _noneWithRequiredActionButSomeErrorStatus() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
-      hasSeenEndTestScreen: true,
       cleaCertificationStatus: 'not_passed',
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
@@ -349,7 +317,6 @@ function _noneWithRequiredActionButSomeStartedStatus() {
       createdAt: new Date(),
       completedAt: null,
       isPublished: false,
-      hasSeenEndTestScreen: true,
       cleaCertificationStatus: 'not_passed',
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
@@ -371,7 +338,6 @@ function _someWithUnresolvedRequiredActionButNoErrorOrStartedStatus() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
-      hasSeenEndTestScreen: true,
       cleaCertificationStatus: 'not_passed',
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
@@ -395,7 +361,6 @@ function _someWithResolvedRequiredActionButNoErrorOrStartedStatus() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
-      hasSeenEndTestScreen: true,
       cleaCertificationStatus: 'not_passed',
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({

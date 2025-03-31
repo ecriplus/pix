@@ -11,7 +11,6 @@ const serialize = function (certificationReports) {
       'firstName',
       'lastName',
       'examinerComment',
-      'hasSeenEndTestScreen',
       'certificationIssueReports',
       'isCompleted',
       'abortReason',

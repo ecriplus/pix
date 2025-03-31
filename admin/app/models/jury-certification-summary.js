@@ -21,7 +21,6 @@ export default class JuryCertificationSummary extends Model {
   @attr() isPublished;
   @attr() isCancelled;
   @attr() examinerComment;
-  @attr() hasSeenEndTestScreen;
   @attr() complementaryCertificationTakenLabel;
   @attr() numberOfCertificationIssueReports;
   @attr() isFlaggedAborted;
@@ -42,11 +41,6 @@ export default class JuryCertificationSummary extends Model {
     return this.numberOfCertificationIssueReportsWithRequiredAction > 0
       ? this.numberOfCertificationIssueReportsWithRequiredAction
       : '';
-  }
-
-  @computed('hasSeenEndTestScreen')
-  get hasSeenEndTestScreenLabel() {
-    return this.hasSeenEndTestScreen ? '' : 'non';
   }
 
   @computed('status', 'isCancelled')

@@ -82,7 +82,6 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
           completedAt: manyAsrCertification.completedAt,
           createdAt: manyAsrCertification.createdAt,
           firstName: manyAsrCertification.firstName,
-          hasSeenEndTestScreen: manyAsrCertification.hasSeenEndTestScreen,
           id: manyAsrCertification.id,
           isPublished: manyAsrCertification.isPublished,
           isCancelled: false,
@@ -120,9 +119,6 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
           expect(juryCertificationSummaries[0].createdAt).to.deep.equal(manyAsrCertification.createdAt);
           expect(juryCertificationSummaries[0].completedAt).to.deep.equal(manyAsrCertification.completedAt);
           expect(juryCertificationSummaries[0].isPublished).to.equal(manyAsrCertification.isPublished);
-          expect(juryCertificationSummaries[0].hasSeendEndTestScreen).to.equal(
-            manyAsrCertification.hasSeendEndTestScreen,
-          );
         });
       });
 
@@ -367,7 +363,6 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
         expect(juryCertificationSummary.createdAt).to.deep.equal(manyAsrCertification.createdAt);
         expect(juryCertificationSummary.completedAt).to.deep.equal(manyAsrCertification.completedAt);
         expect(juryCertificationSummary.isPublished).to.equal(manyAsrCertification.isPublished);
-        expect(juryCertificationSummary.hasSeendEndTestScreen).to.equal(manyAsrCertification.hasSeendEndTestScreen);
         expect(juryCertificationSummary.complementaryCertificationTakenLabel).to.equal(label);
         expect(juryCertificationSummary.certificationIssueReports).to.deep.equal([
           domainBuilder.buildCertificationIssueReport({

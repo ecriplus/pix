@@ -50,7 +50,6 @@ export const categoryToLabel = {
 export const subcategoryToLabel = {
   [certificationIssueReportSubcategories.NAME_OR_BIRTHDATE]: 'Modification des prénom/nom/date de naissance',
   [certificationIssueReportSubcategories.EXTRA_TIME_PERCENTAGE]: 'Ajout/modification du temps majoré',
-  [certificationIssueReportSubcategories.LEFT_EXAM_ROOM]: 'Écran de fin de test non vu',
   [certificationIssueReportSubcategories.SIGNATURE_ISSUE]:
     'Était présent(e) mais a oublié de signer, ou a signé sur la mauvaise ligne',
   [certificationIssueReportSubcategories.IMAGE_NOT_DISPLAYING]: "L'image ne s'affiche pas",

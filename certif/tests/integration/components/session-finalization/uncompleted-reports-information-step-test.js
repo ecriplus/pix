@@ -24,7 +24,6 @@ module('Integration | Component | SessionFinalization::UncompletedReportsInforma
       firstName: 'Alice',
       lastName: 'Alister',
       certificationIssueReports: [certificationIssueReport],
-      hasSeenEndTestScreen: null,
     });
 
     const abortStub = sinon.stub();
@@ -67,7 +66,6 @@ module('Integration | Component | SessionFinalization::UncompletedReportsInforma
       firstName: 'Alice',
       lastName: 'Alister',
       certificationIssueReports: [certificationIssueReport1, certificationIssueReport2],
-      hasSeenEndTestScreen: null,
     });
     const abortStub = sinon.stub();
 
@@ -138,7 +136,6 @@ module('Integration | Component | SessionFinalization::UncompletedReportsInforma
       firstName: 'Alice',
       lastName: 'Alister',
       certificationIssueReports: [certificationIssueReport],
-      hasSeenEndTestScreen: null,
     });
 
     const abortStub = sinon.stub();
@@ -168,7 +165,6 @@ module('Integration | Component | SessionFinalization::UncompletedReportsInforma
       firstName: 'Alice',
       lastName: 'Alister',
       certificationIssueReports: [],
-      hasSeenEndTestScreen: null,
     });
 
     const abortStub = sinon.stub();
@@ -199,7 +195,6 @@ module('Integration | Component | SessionFinalization::UncompletedReportsInforma
       store.createRecord('certification-report', {
         certificationCourseId: 1234,
         certificationIssueReports: [],
-        hasSeenEndTestScreen: null,
       }),
     ];
     this.abort = sinon.stub();
@@ -241,7 +236,6 @@ module('Integration | Component | SessionFinalization::UncompletedReportsInforma
           firstName: 'Alice',
           lastName: 'Alister',
           certificationIssueReports: [issue1],
-          hasSeenEndTestScreen: null,
         });
 
         const abortStub = sinon.stub();
@@ -285,7 +279,6 @@ module('Integration | Component | SessionFinalization::UncompletedReportsInforma
           firstName: 'Alice',
           lastName: 'Alister',
           certificationIssueReports: [issue1],
-          hasSeenEndTestScreen: null,
         });
 
         const abortStub = sinon.stub();
@@ -333,7 +326,6 @@ module('Integration | Component | SessionFinalization::UncompletedReportsInforma
           firstName: 'Alice',
           lastName: 'Alister',
           certificationIssueReports: [issue1, issue2],
-          hasSeenEndTestScreen: null,
         });
 
         const abortStub = sinon.stub();

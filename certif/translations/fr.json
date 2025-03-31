@@ -400,7 +400,6 @@
         "actions": {
           "confirm": "Confirmer la finalisation"
         },
-        "end-of-test-screen": "La case \"Écran de fin du test vu\" n'est pas cochée pour {candidatesCount, plural,one {1 candidat} other {# candidats}}",
         "information": "il ne vous sera plus possible de modifier ces informations par la suite. Un délai de traitement est nécessaire avant la mise à disposition des résultats par Pix (ce délai de traitement pouvant varier d'une session à l'autre).",
         "title": "Finalisation de la session",
         "warning": "Attention :"
@@ -425,19 +424,12 @@
       "reporting": {
         "completed-reports-information": {
           "description": "Certification(s) terminée(s)",
-          "extra-information": "Liste des candidats qui ont fini leur test de certification, triée par nom de naissance, avec un lien pour ajouter un ou plusieurs signalements le cas échéant.",
-          "table": {
-            "labels": {
-              "screen": "Écran de fin du test vu"
-            }
-          }
+          "extra-information": "Liste des candidats qui ont fini leur test de certification, triée par nom de naissance, avec un lien pour ajouter un ou plusieurs signalements le cas échéant."
         },
         "description": "Pour que le signalement soit pris en compte, il est nécessaire d’utiliser la catégorie de signalement appropriée (exemples : C1, C2, etc).",
         "table": {
           "labels": {
             "certification-number": "N° de certification",
-            "end-of-test-screen": "Écran de fin du test vu",
-            "end-of-test-screen-for-candidate": "Sélectionner l'écran de fin du test vu pour le candidat {firstName} {lastName}",
             "reporting": "Signalement"
           },
           "reporting-count": "{reportingsCount, plural,one {1 signalement} other {# signalements}}"

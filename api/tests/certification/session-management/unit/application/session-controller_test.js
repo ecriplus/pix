@@ -26,7 +26,7 @@ describe('Certification | Session Management | Unit | Application | Controller |
         const serializedSession = Symbol('serializedSession');
         usecases.getSession.withArgs({ sessionId }).resolves({ session: foundSession, hasSomeCleaAcquired: false });
         sessionSerializer.serialize
-          .withArgs({ session: foundSession, hasSupervisorAccess: undefined, hasSomeCleaAcquired: false })
+          .withArgs({ session: foundSession, hasSomeCleaAcquired: false })
           .returns(serializedSession);
 
         // when

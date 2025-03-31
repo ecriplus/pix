@@ -13,7 +13,6 @@ export default class Session extends Model {
 
   @attr('string') status;
   @attr('string') examinerGlobalComment;
-  @attr('boolean') hasSupervisorAccess;
   @attr('boolean') hasSomeCleaAcquired;
   @attr('boolean') hasIncident;
   @attr('boolean') hasJoiningIssue;

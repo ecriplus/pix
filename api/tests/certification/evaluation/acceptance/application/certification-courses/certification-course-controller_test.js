@@ -34,7 +34,6 @@ describe('Acceptance | API | Certification Course', function () {
       });
       const session = databaseBuilder.factory.buildSession({ certificationCenterId: certificationCenter.id });
       const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
-        hasSeenEndTestScreen: false,
         sessionId: session.id,
       });
       userId = certificationCourse.userId;
@@ -57,7 +56,6 @@ describe('Acceptance | API | Certification Course', function () {
         id: certificationCourse.id.toString(),
         attributes: {
           'examiner-comment': "il s'est enfuit de la session",
-          'has-seen-end-test-screen': false,
           'nb-challenges': 0,
           'first-name': certificationCourse.firstName,
           'last-name': certificationCourse.lastName,

@@ -8,8 +8,8 @@ import * as sessionSerializer from '../infrastructure/serializers/session-serial
 
 const get = async function (request, h, dependencies = { sessionSerializer }) {
   const sessionId = request.params.sessionId;
-  const { session, hasSupervisorAccess, hasSomeCleaAcquired } = await usecases.getSession({ sessionId });
-  return dependencies.sessionSerializer.serialize({ session, hasSupervisorAccess, hasSomeCleaAcquired });
+  const { session, hasSomeCleaAcquired } = await usecases.getSession({ sessionId });
+  return dependencies.sessionSerializer.serialize({ session, hasSomeCleaAcquired });
 };
 
 const findPaginatedFilteredJurySessions = async function (

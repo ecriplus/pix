@@ -11,24 +11,6 @@ export default class CompletedReportsInformationStep extends Component {
     return this.args.certificationReports.length !== 0;
   }
 
-  get hasCheckedEverything() {
-    const allCertifReportsAreCheck = this.args.certificationReports.every((report) => report.hasSeenEndTestScreen);
-    return this.certificationReportsAreNotEmpty && allCertifReportsAreCheck;
-  }
-
-  get hasCheckedSomething() {
-    const hasOneOrMoreCheck = this.args.certificationReports.some((report) => report.hasSeenEndTestScreen);
-    return this.certificationReportsAreNotEmpty && hasOneOrMoreCheck;
-  }
-
-  get hasCheckState() {
-    return this.hasCheckedSomething || this.hasCheckedEverything;
-  }
-
-  get hasPartialState() {
-    return !this.hasCheckedEverything && this.hasCheckedSomething;
-  }
-
   @action
   openAddIssueReportModal(report) {
     this.showIssueReportsModal = false;

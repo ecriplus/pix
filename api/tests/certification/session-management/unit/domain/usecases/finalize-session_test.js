@@ -84,11 +84,12 @@ describe('Unit | UseCase | finalize-session', function () {
 
   context('When the session status is not finalized yet ', function () {
     let certificationReports;
+
     context('When the certificationReports are not valid', function () {
       beforeEach(function () {
-        const courseWithoutHasSeenLastScreen = domainBuilder.buildCertificationReport();
-        delete courseWithoutHasSeenLastScreen.hasSeenEndTestScreen;
-        certificationReports = [courseWithoutHasSeenLastScreen];
+        const courseWithoutFirstName = domainBuilder.buildCertificationReport();
+        delete courseWithoutFirstName.firstName;
+        certificationReports = [courseWithoutFirstName];
       });
 
       it('should throw an InvalidCertificationReportForFinalization error', async function () {
@@ -148,7 +149,6 @@ describe('Unit | UseCase | finalize-session', function () {
       beforeEach(function () {
         const validReportForFinalization = domainBuilder.buildCertificationReport({
           examinerComment: 'signalement sur le candidat',
-          hasSeenEndTestScreen: false,
         });
         certificationReports = [validReportForFinalization];
         sessionRepository.isFinalized.withArgs({ id: sessionId }).resolves(false);
@@ -172,7 +172,6 @@ describe('Unit | UseCase | finalize-session', function () {
         now = new Date(clock.now);
         const validReportForFinalization = domainBuilder.buildCertificationReport({
           examinerComment: 'signalement sur le candidat',
-          hasSeenEndTestScreen: false,
           isCompleted: true,
         });
         certificationReports = [validReportForFinalization];
@@ -224,7 +223,6 @@ describe('Unit | UseCase | finalize-session', function () {
         clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
         const validReportForFinalization = domainBuilder.buildCertificationReport({
           examinerComment: 'signalement sur le candidat',
-          hasSeenEndTestScreen: false,
           isCompleted: true,
         });
         certificationReports = [validReportForFinalization];

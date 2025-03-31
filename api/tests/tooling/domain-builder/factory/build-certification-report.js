@@ -5,7 +5,6 @@ const buildCertificationReport = function ({
   id = 'CertificationReport:456',
   firstName = 'Tiffany',
   lastName = 'Schwarzenegger',
-  hasSeenEndTestScreen = false,
   examinerComment,
   isCompleted,
   certificationIssueReports,
@@ -17,7 +16,6 @@ const buildCertificationReport = function ({
     certificationCourseId,
     firstName,
     lastName,
-    hasSeenEndTestScreen,
     examinerComment,
     isCompleted,
     certificationIssueReports: certificationIssueReports

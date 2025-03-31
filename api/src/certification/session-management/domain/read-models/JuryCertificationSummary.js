@@ -15,7 +15,6 @@ class JuryCertificationSummary {
     isPublished,
     isCancelled,
     isEndedBySupervisor,
-    hasSeenEndTestScreen,
     complementaryCertificationTakenLabel,
     certificationIssueReports,
   } = {}) {
@@ -30,7 +29,6 @@ class JuryCertificationSummary {
     this.createdAt = createdAt;
     this.completedAt = completedAt;
     this.isPublished = isPublished;
-    this.hasSeenEndTestScreen = hasSeenEndTestScreen;
     this.certificationIssueReports = certificationIssueReports;
   }
 

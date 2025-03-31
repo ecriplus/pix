@@ -5,7 +5,6 @@ import { alias } from '@ember/object/computed';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import isEmpty from 'lodash/isEmpty';
-import sumBy from 'lodash/sumBy';
 import trim from 'lodash/trim';
 
 export default class SessionsFinalizeController extends Controller {
@@ -22,18 +21,6 @@ export default class SessionsFinalizeController extends Controller {
 
   get pageTitle() {
     return `Finalisation | Session ${this.session.id} | Pix Certif`;
-  }
-
-  get shouldDisplayHasSeenEndTestScreenCheckbox() {
-    return !this.session.hasSupervisorAccess;
-  }
-
-  get uncheckedHasSeenEndTestScreenCount() {
-    return sumBy(this.session.completedCertificationReports, (reports) => Number(!reports.hasSeenEndTestScreen));
-  }
-
-  get hasUncheckedHasSeenEndTestScreen() {
-    return this.uncheckedHasSeenEndTestScreenCount > 0;
   }
 
   @action
@@ -79,25 +66,6 @@ export default class SessionsFinalizeController extends Controller {
     if (inputText.length <= this.examinerGlobalCommentMaxLength) {
       this.session.examinerGlobalComment = this._convertStringToNullIfEmpty(inputText);
     }
-  }
-
-  @action
-  toggleCertificationReportHasSeenEndTestScreen(certificationReport) {
-    certificationReport.hasSeenEndTestScreen = !certificationReport.hasSeenEndTestScreen;
-  }
-
-  @action
-  toggleAllCertificationReportsHasSeenEndTestScreen(allChecked, parentCheckbox) {
-    const newState = !allChecked;
-
-    this.session
-      .hasMany('certificationReports')
-      .value()
-      .filter((certificationReport) => certificationReport.isCompleted)
-      .forEach((certificationReport) => {
-        certificationReport.hasSeenEndTestScreen = newState;
-      });
-    parentCheckbox.srcElement.checked = newState;
   }
 
   @action

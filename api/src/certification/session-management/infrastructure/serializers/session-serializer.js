@@ -5,7 +5,7 @@ import { SessionManagement } from '../../domain/models/SessionManagement.js';
 
 const { Serializer } = jsonapiSerializer;
 
-const serialize = function ({ session, hasSupervisorAccess, hasSomeCleaAcquired }) {
+const serialize = function ({ session, hasSomeCleaAcquired }) {
   const attributes = [
     'status',
     'examinerGlobalComment',
@@ -15,15 +15,11 @@ const serialize = function ({ session, hasSupervisorAccess, hasSomeCleaAcquired 
     'resultsSentToPrescriberAt',
     'publishedAt',
     'certificationReports',
-    'hasSupervisorAccess',
     'hasSomeCleaAcquired',
     'version',
   ];
   return new Serializer('session-management', {
     transform(record) {
-      if (hasSupervisorAccess !== undefined) {
-        record.hasSupervisorAccess = hasSupervisorAccess;
-      }
       if (hasSomeCleaAcquired !== undefined) {
         record.hasSomeCleaAcquired = hasSomeCleaAcquired;
       }

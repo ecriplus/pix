@@ -17,7 +17,6 @@ describe('Unit | Serializer | JSONAPI | certification-course-serializer', functi
         assessment: assessment,
         challenges: ['challenge1', 'challenge2'],
         certificationIssueReports: [],
-        hasSeenEndTestScreen: true,
         version: 2,
         isAdjustedForAccessibility: true,
       });
@@ -38,7 +37,6 @@ describe('Unit | Serializer | JSONAPI | certification-course-serializer', functi
           attributes: {
             'nb-challenges': 2,
             'examiner-comment': "Signalement de l'examinateur",
-            'has-seen-end-test-screen': true,
             'first-name': certificationCourse.toDTO().firstName,
             'last-name': certificationCourse.toDTO().lastName,
             'is-adjusted-for-accessibility': true,
@@ -71,7 +69,6 @@ describe('Unit | Serializer | JSONAPI | certification-course-serializer', functi
         assessment: assessment,
         challenges: ['challenge1', 'challenge2'],
         certificationIssueReports: undefined,
-        hasSeenEndTestScreen: true,
         version: 2,
         isAdjustedForAccessibility: false,
       });
@@ -83,7 +80,6 @@ describe('Unit | Serializer | JSONAPI | certification-course-serializer', functi
           attributes: {
             'nb-challenges': 2,
             'examiner-comment': undefined,
-            'has-seen-end-test-screen': true,
             'first-name': certificationCourse.toDTO().firstName,
             'last-name': certificationCourse.toDTO().lastName,
             version: 2,
@@ -116,7 +112,6 @@ describe('Unit | Serializer | JSONAPI | certification-course-serializer', functi
         assessment: assessment,
         challenges: undefined,
         certificationIssueReports: undefined,
-        hasSeenEndTestScreen: true,
         version: 2,
         isAdjustedForAccessibility: false,
       });
@@ -128,7 +123,6 @@ describe('Unit | Serializer | JSONAPI | certification-course-serializer', functi
           attributes: {
             'nb-challenges': 0,
             'examiner-comment': undefined,
-            'has-seen-end-test-screen': true,
             'first-name': certificationCourse.toDTO().firstName,
             'last-name': certificationCourse.toDTO().lastName,
             version: 2,

@@ -7,11 +7,9 @@ import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 const juryCertificationSummaryRepository = { findBySessionId: sinon.stub() };
 const finalizedSessionRepository = { save: sinon.stub() };
-const supervisorAccessRepository = { sessionHasSupervisorAccess: sinon.stub() };
 const dependencies = {
   juryCertificationSummaryRepository,
   finalizedSessionRepository,
-  supervisorAccessRepository,
 };
 
 describe('Unit | UseCase |  register-publishable-session', function () {
@@ -34,7 +32,6 @@ describe('Unit | UseCase |  register-publishable-session', function () {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
-      hasSeenEndTestScreen: true,
       cleaCertificationStatus: 'not_passed',
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
@@ -47,16 +44,12 @@ describe('Unit | UseCase |  register-publishable-session', function () {
       .withArgs({ sessionId: 1234 })
       .resolves([juryCertificationSummary]);
     finalizedSessionRepository.save.resolves();
-    supervisorAccessRepository.sessionHasSupervisorAccess.resolves(true);
     const finalizedSessionFromSpy = sinon.spy(FinalizedSession, 'from');
 
     // when
     await registerPublishableSession({ autoJuryDone, ...dependencies });
 
     // then
-    expect(supervisorAccessRepository.sessionHasSupervisorAccess).to.have.been.calledOnceWithExactly({
-      sessionId: 1234,
-    });
     expect(finalizedSessionFromSpy).to.have.been.calledOnceWithExactly({
       sessionId: autoJuryDone.sessionId,
       finalizedAt: autoJuryDone.finalizedAt,
@@ -64,7 +57,6 @@ describe('Unit | UseCase |  register-publishable-session', function () {
       sessionDate: autoJuryDone.sessionDate,
       sessionTime: autoJuryDone.sessionTime,
       hasExaminerGlobalComment: false,
-      hasSupervisorAccess: true,
       juryCertificationSummaries: [juryCertificationSummary],
     });
     expect(finalizedSessionRepository.save).to.have.been.calledWithExactly({
@@ -75,7 +67,6 @@ describe('Unit | UseCase |  register-publishable-session', function () {
         sessionDate: autoJuryDone.sessionDate,
         sessionTime: autoJuryDone.sessionTime,
         isPublishable: true,
-        hasSupervisorAccess: true,
         publishedAt: null,
       }),
     });

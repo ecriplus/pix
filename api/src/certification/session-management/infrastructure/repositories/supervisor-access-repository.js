@@ -1,5 +1,4 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
-import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 
 const create = async function ({ sessionId, userId }) {
   await knex('supervisor-accesses').insert({ sessionId, userId });
@@ -7,12 +6,6 @@ const create = async function ({ sessionId, userId }) {
 
 const isUserSupervisorForSession = async function ({ sessionId, userId }) {
   const result = await knex.select(1).from('supervisor-accesses').where({ sessionId, userId }).first();
-  return Boolean(result);
-};
-
-const sessionHasSupervisorAccess = async function ({ sessionId }) {
-  const knexConn = DomainTransaction.getConnection();
-  const result = await knexConn.select(1).from('supervisor-accesses').where({ sessionId }).first();
   return Boolean(result);
 };
 
@@ -26,4 +19,4 @@ const isUserSupervisorForSessionCandidate = async function ({ supervisorId, cert
   return Boolean(result);
 };
 
-export { create, isUserSupervisorForSession, isUserSupervisorForSessionCandidate, sessionHasSupervisorAccess };
+export { create, isUserSupervisorForSession, isUserSupervisorForSessionCandidate };

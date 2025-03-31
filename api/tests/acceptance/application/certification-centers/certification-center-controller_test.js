@@ -266,7 +266,6 @@ describe('Acceptance | API | Certification Center', function () {
               status: null,
               'examiner-global-comment': null,
               'supervisor-password': null,
-              'has-supervisor-access': false,
               'has-some-clea-acquired': false,
               'has-incident': false,
               'has-joining-issue': false,

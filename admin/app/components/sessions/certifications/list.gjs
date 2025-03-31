@@ -61,16 +61,6 @@ export default class CertificationsHeader extends Component {
               {{certification.numberOfCertificationIssueReportsWithRequiredActionLabel}}
             </:cell>
           </PixTableColumn>
-          {{#if @displayHasSeenEndTestScreenColumn}}
-            <PixTableColumn @context={{context}}>
-              <:header>
-                Ecran de fin de test vu
-              </:header>
-              <:cell>
-                {{certification.hasSeenEndTestScreenLabel}}
-              </:cell>
-            </PixTableColumn>
-          {{/if}}
           <PixTableColumn @context={{context}}>
             <:header>
               {{t "pages.certifications.table.headers.other-certification"}}
