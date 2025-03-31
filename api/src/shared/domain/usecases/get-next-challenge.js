@@ -18,11 +18,11 @@ export async function getNextChallenge({
 
   let nextChallenge = null;
   const answers = await answerRepository.findByAssessment(assessment.id);
-  const hasAnswered = hasAnsweredLatestChallengeAsked({
+  const waitingForLatestChallengeAnswer = checkIfLatestChallengeOfAssessmentIsAwaitingToBeAnswered({
     answers,
     lastChallengeId: assessment.lastChallengeId,
   });
-  if (!hasAnswered) {
+  if (waitingForLatestChallengeAnswer) {
     nextChallenge = await challengeRepository.get(assessment.lastChallengeId);
     if (nextChallenge.isOperative) {
       return nextChallenge;
@@ -63,9 +63,9 @@ export async function getNextChallenge({
   return nextChallenge;
 }
 
-function hasAnsweredLatestChallengeAsked({ answers, lastChallengeId }) {
+function checkIfLatestChallengeOfAssessmentIsAwaitingToBeAnswered({ answers, lastChallengeId }) {
   if (!lastChallengeId) {
-    return true;
+    return false;
   }
-  return answers.some((answer) => answer.challengeId === lastChallengeId);
+  return !answers.some((answer) => answer.challengeId === lastChallengeId);
 }
