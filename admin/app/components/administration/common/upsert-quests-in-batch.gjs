@@ -1,9 +1,13 @@
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixButtonUpload from '@1024pix/pix-ui/components/pix-button-upload';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import { modifier } from 'ember-modifier';
+import isEmpty from 'lodash/isEmpty';
 import ENV from 'pix-admin/config/environment';
 
 import AdministrationBlockLayout from '../block-layout';
@@ -16,9 +20,12 @@ export default class UpsertQuestsInBatch extends Component {
   @service fileSaver;
   @service errorResponseHandler;
 
+  @tracked errors = null;
+
   @action
   async upsertQuestsInBatch(files) {
     let response;
+    this.errors = null;
     try {
       const fileContent = files[0];
 
@@ -38,7 +45,12 @@ export default class UpsertQuestsInBatch extends Component {
         });
         return;
       } else {
-        this.errorResponseHandler.notify(await response.json());
+        const { errors: responseErrors } = await response.json();
+        if (isJSONAPIError(responseErrors)) {
+          this.errors = responseErrors;
+        } else {
+          this.errorResponseHandler.notify(await response.json(), undefined, true);
+        }
       }
     } catch {
       this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
@@ -51,6 +63,7 @@ export default class UpsertQuestsInBatch extends Component {
     <AdministrationBlockLayout
       @title={{t "components.administration.upsert-quests-in-batch.title"}}
       @description={{t "components.administration.upsert-quests-in-batch.description"}}
+      class="upsert-quests-in-batch"
     >
       <DownloadTemplate @url="/api/admin/quests/template">
         <PixButtonUpload
@@ -67,5 +80,26 @@ export default class UpsertQuestsInBatch extends Component {
         {{t "components.administration.upsert-quests-in-batch.quest-creator"}}
       </PixButtonLink>
     </AdministrationBlockLayout>
+    {{#if this.errors}}
+      <PixNotificationAlert @withIcon={{true}} @type="error" class="upsert-quests-in-batch__errors">
+        <ul>
+          {{#each this.errors as |error|}}
+            <li class="upsert-quests-in-batch__error">
+              <span>{{error.detail}}</span>
+              <pre class="upsert-quests-in-batch__json">{{(transformMetaToJSON error)}}</pre>
+            </li>
+          {{/each}}
+        </ul>
+      </PixNotificationAlert>
+    {{/if}}
   </template>
+}
+
+function isJSONAPIError(errors) {
+  return !isEmpty(errors) && errors.every((error) => error.title);
+}
+
+function transformMetaToJSON(error) {
+  if (!error.meta.data) return '';
+  return JSON.stringify(error.meta.data, undefined, 2);
 }
