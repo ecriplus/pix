@@ -11,6 +11,63 @@ import { KnowledgeElement } from '../../../../../src/shared/domain/models/index.
 import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Models | Quest ', function () {
+  describe('#constructor', function () {
+    it('should throw if args are not valid', function () {
+      expect(() => {
+        new Quest({ rewardId: 1 });
+      }).to.throw;
+    });
+
+    it('should not throw if args are valid', function () {
+      expect(() => {
+        new Quest({
+          rewardType: 'attestations',
+          rewardId: 1,
+          eligiblityRequirements: [
+            {
+              data: {
+                status: {
+                  data: ['SHARED', 'TO_SHARE'],
+                  comparison: 'one-of',
+                },
+                targetProfileId: {
+                  data: 2,
+                  comparison: 'equal',
+                },
+              },
+              comparison: 'all',
+              requirement_type: 'campaignParticipations',
+            },
+          ],
+          successRequirements: [
+            {
+              requirement_type: 'cappedTubes',
+              data: {
+                cappedTubes: [
+                  {
+                    tubeId: 'tube11aVujagTGVuMY',
+                    level: 2,
+                  },
+                  {
+                    tubeId: 'recBbCIEKgrQi7eb6',
+                    level: 5,
+                  },
+                ],
+                threshold: 50,
+              },
+            },
+          ],
+        });
+      }).to.throw;
+    });
+
+    it('should throw without args', function () {
+      expect(() => {
+        new Quest();
+      }).to.throw;
+    });
+  });
+
   describe('#isEligible', function () {
     it('return true', function () {
       const quest = new Quest({
