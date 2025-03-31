@@ -5,8 +5,8 @@ export default {
     defaultValue: false,
     tags: ['frontend'],
   },
-  isModalSentResultEnabled: {
-    description: 'Used to enable display of sent-results-modal',
+  isResultsSharedModalEnabled: {
+    description: 'Used to enable displaying the "results shared!" modal',
     type: 'boolean',
     defaultValue: false,
     tags: ['frontend', 'team-devcomp'],

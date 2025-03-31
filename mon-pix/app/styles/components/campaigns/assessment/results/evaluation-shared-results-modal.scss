@@ -2,7 +2,7 @@
 @use 'pix-design-tokens/typography';
 @use 'pix-design-tokens/shadows';
 
-.evaluation-sent-results-modal__overlay {
+.evaluation-shared-results-modal__overlay {
   position: fixed;
   top: 0;
   right: 0;
@@ -33,7 +33,7 @@
   }
 }
 
-.evaluation-sent-results-modal {
+.evaluation-shared-results-modal {
   @extend %pix-shadow-sm;
 
   display: inline-block;
@@ -43,7 +43,7 @@
   overflow: hidden;
   color: var(--pix-neutral-900);
   text-align: center;
-  vertical-align: middle; // Centered vertically with the .evaluation-sent-results-modal__overlay::after which is 100% height
+  vertical-align: middle; // Centered vertically with the .evaluation-shared-results-modal__overlay::after which is 100% height
   background-color: var(--pix-primary-10);
 
   &__header {
