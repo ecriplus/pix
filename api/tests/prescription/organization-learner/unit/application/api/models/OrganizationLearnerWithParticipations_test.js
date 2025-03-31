@@ -1,4 +1,5 @@
 import { OrganizationLearnerWithParticipations } from '../../../../../../../src/prescription/organization-learner/application/api/read-models/OrganizationLearnerWithParticipations.js';
+import { CampaignParticipationStatuses } from '../../../../../../../src/prescription/shared/domain/constants.js';
 import { domainBuilder, expect } from '../../../../../../test-helper.js';
 
 describe('Unit | Application| API | Models | OrganizationLearnerWithParticipations', function () {
@@ -8,8 +9,18 @@ describe('Unit | Application| API | Models | OrganizationLearnerWithParticipatio
     const organization = domainBuilder.buildOrganization();
     const organizationLearner = domainBuilder.buildOrganizationLearner();
     const participationsList = [
-      domainBuilder.buildCampaignParticipationOverview(),
-      domainBuilder.buildCampaignParticipationOverview(),
+      domainBuilder.buildCampaignParticipationOverview({
+        id: 123,
+        targetProfileId: 321,
+        status: CampaignParticipationStatuses.SHARED,
+        campaignName: 'Mon nom 1',
+      }),
+      domainBuilder.buildCampaignParticipationOverview({
+        id: 456,
+        targetProfileId: 654,
+        status: CampaignParticipationStatuses.TO_SHARE,
+        campaignName: 'Mon nom 2',
+      }),
     ];
 
     // when
@@ -38,14 +49,16 @@ describe('Unit | Application| API | Models | OrganizationLearnerWithParticipatio
     });
     expect(organizationLearnerWithParticipations.campaignParticipations).to.deep.have.members([
       {
-        targetProfileId: participationsList[0].targetProfileId,
-        id: participationsList[0].id,
-        status: participationsList[0].status,
+        targetProfileId: 321,
+        id: 123,
+        status: CampaignParticipationStatuses.SHARED,
+        campaignName: 'Mon nom 1',
       },
       {
-        targetProfileId: participationsList[1].targetProfileId,
-        id: participationsList[1].id,
-        status: participationsList[1].status,
+        targetProfileId: 654,
+        id: 456,
+        status: CampaignParticipationStatuses.TO_SHARE,
+        campaignName: 'Mon nom 2',
       },
     ]);
   });

@@ -29,7 +29,10 @@ import { OrganizationLearnerWithParticipations } from './read-models/Organizatio
 /**
  * @typedef CampaignParticipation
  * @type {object}
+ * @property {number} id
  * @property {number} targetProfileId
+ * @property {string} status
+ * @property {string} campaignName
  */
 
 /**

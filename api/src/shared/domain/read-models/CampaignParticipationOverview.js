@@ -15,6 +15,7 @@ class CampaignParticipationOverview {
     targetProfileId,
     campaignCode,
     campaignTitle,
+    campaignName,
     campaignArchivedAt,
     deletedAt,
     masteryRate,
@@ -32,6 +33,7 @@ class CampaignParticipationOverview {
     this.campaignId = campaignId;
     this.campaignCode = campaignCode;
     this.campaignTitle = campaignTitle;
+    this.campaignName = campaignName;
     this.masteryRate = !_.isNil(masteryRate) ? Number(masteryRate) : null;
     this.validatedSkillsCount = validatedSkillsCount;
     const dates = [deletedAt, campaignArchivedAt].filter((a) => a != null);

@@ -35,13 +35,13 @@ export class DataForQuest {
     return this.#eligibility.campaignParticipations;
   }
 
-  buildDataForQuestScopedByCampaignParticipationId(...args) {
-    const eligibility = this.#eligibility.buildEligibilityScopedByCampaignParticipationId(...args);
+  buildDataForQuestScopedByCampaignParticipationId({ campaignParticipationId }) {
+    const eligibility = this.#eligibility.buildEligibilityScopedByCampaignParticipationId({ campaignParticipationId });
     return new DataForQuest({ eligibility, success: this.#success });
   }
 
-  hasCampaignParticipation(...args) {
-    return this.#eligibility.hasCampaignParticipation(...args);
+  hasCampaignParticipation(campaignParticipationId) {
+    return this.#eligibility.hasCampaignParticipation(campaignParticipationId);
   }
 
   /*
@@ -52,13 +52,11 @@ export class DataForQuest {
     return this.#success.knowledgeElements;
   }
 
-  // TODO :  stop using this mystical args ?
-  getMasteryPercentageForSkills(...args) {
-    return this.#success.getMasteryPercentageForSkills(...args);
+  getMasteryPercentageForSkills(skillIds) {
+    return this.#success.getMasteryPercentageForSkills(skillIds);
   }
 
-  // TODO :  stop using this mystical args ?
-  getMasteryPercentageForCappedTubes(...args) {
-    return this.#success.getMasteryPercentageForCappedTubes(...args);
+  getMasteryPercentageForCappedTubes(cappedTubes) {
+    return this.#success.getMasteryPercentageForCappedTubes(cappedTubes);
   }
 }

@@ -79,6 +79,7 @@ class CsvParser {
       } = papa.parse(decodedInput, { ...PARSING_OPTIONS, preview: 1 });
       if (fields.some((value) => checkedColumns.includes(value))) {
         inputEncoding = encoding;
+        break;
       }
     }
 
@@ -93,7 +94,7 @@ class CsvParser {
     return checkedColumns;
   }
 
-  _parse(encoding = 'utf8') {
+  _parse(encoding = 'utf-8') {
     const decodedInput = iconv.decode(this._input, encoding);
 
     const {
