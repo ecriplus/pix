@@ -1,5 +1,5 @@
 import { JobController } from '../../../../shared/application/jobs/job-controller.js';
-import { eventDispatcher } from '../../../../shared/domain/events/index.js';
+import { handlersAsServices } from '../../../../shared/domain/events/index.js';
 import CertificationRescoredByScript from '../../domain/events/CertificationRescoredByScript.js';
 import { CertificationRescoringByScriptJob } from '../../domain/models/CertificationRescoringByScriptJob.js';
 
@@ -15,10 +15,12 @@ class CertificationRescoringByScriptJobController extends JobController {
   async handle({
     data,
     dependencies = {
-      eventDispatcher,
+      handlersAsServices,
     },
   }) {
-    await dependencies.eventDispatcher.dispatch(new CertificationRescoredByScript(data));
+    return dependencies.handlersAsServices.handleCertificationRescoring.handleCertificationRescoring(
+      new CertificationRescoredByScript(data),
+    );
   }
 }
 
