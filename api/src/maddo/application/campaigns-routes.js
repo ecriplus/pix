@@ -1,6 +1,7 @@
 import Joi from 'joi';
 
 import { identifiersType } from '../../shared/domain/types/identifiers-type.js';
+import { responseObjectErrorDoc } from '../../shared/infrastructure/open-api-doc/response-object-error-doc.js';
 import { getCampaignParticipations } from './campaigns-controller.js';
 import { isCampaignInJurisdictionPreHandler, organizationPreHandler } from './pre-handlers.js';
 
@@ -18,8 +19,29 @@ const register = async function (server) {
         },
         pre: [organizationPreHandler, isCampaignInJurisdictionPreHandler],
         handler: getCampaignParticipations,
-        notes: ['- Retourne les résultats de la campagne donnée.'],
+        description: 'Lister les résultats d’une campagne',
+        notes: [
+          'Retourne les résultats de la campagne avec l’identifiant `campaignId`.',
+          '**Cette route nécessite le scope campaigns.**',
+        ],
         tags: ['api', 'campaigns', 'maddo'],
+        response: {
+          failAction: 'log',
+          status: {
+            200: Joi.object({
+              id: Joi.number().description('ID de la participation à la campagne'),
+              createdAt: Joi.date().description('Date de début de participation'),
+              participantExternalId: Joi.string().description('Identifiant Externe rempli en début de participation'),
+              status: Joi.string().description('Statut de la participation : STARTED, TO_SHARE, SHARED'),
+              sharedAt: Joi.date().description('Date de participation'),
+              campaignId: Joi.number().description('ID de la campagne liée à la participation'),
+              userId: Joi.number().description('ID utilisateur du participant'),
+              organizationLearnerId: Joi.number().description("ID du participant au sein de l'organisation"),
+            }).label('CampaignParticipation'),
+            401: responseObjectErrorDoc,
+            403: responseObjectErrorDoc,
+          },
+        },
       },
     },
   ]);

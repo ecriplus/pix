@@ -34,7 +34,7 @@ class PixOpenApiBaseDefinition {
      */
     this.swaggerConfiguration = {
       OAS: 'v3.0',
-      routeTag: 'api',
+      routeTag: (tags) => tags.includes('api') && !tags.includes('healthcheck'),
       info: {
         title: 'Welcome to the Pix api catalog',
         version: packageJSON.version,
@@ -86,6 +86,7 @@ class PixAPI extends PixOpenApiBaseDefinition {
   constructor() {
     super({ endpoint: '/api' });
     this.swaggerConfiguration.grouping = 'tags';
+    this.swaggerConfiguration.tagsGroupingFilter = (tag) => !['api', 'maddo'].includes(tag);
   }
 }
 

@@ -8,7 +8,7 @@ const register = async function (server) {
       config: {
         auth: false,
         handler: healthcheckController.get,
-        tags: ['api'],
+        tags: ['api', 'healthcheck'],
       },
     },
     {
@@ -17,7 +17,7 @@ const register = async function (server) {
       config: {
         auth: false,
         handler: healthcheckController.checkDbStatus,
-        tags: ['api'],
+        tags: ['api', 'healthcheck'],
       },
     },
     {
@@ -26,7 +26,7 @@ const register = async function (server) {
       config: {
         auth: false,
         handler: healthcheckController.checkRedisStatus,
-        tags: ['api'],
+        tags: ['api', 'healthcheck'],
       },
     },
     {

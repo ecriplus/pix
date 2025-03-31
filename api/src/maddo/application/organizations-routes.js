@@ -1,6 +1,7 @@
 import Joi from 'joi';
 
 import { identifiersType } from '../../shared/domain/types/identifiers-type.js';
+import { responseObjectErrorDoc } from '../../shared/infrastructure/open-api-doc/response-object-error-doc.js';
 import { getOrganizationCampaigns, getOrganizations } from './organizations-controller.js';
 import { isOrganizationInJurisdictionPreHandler, organizationPreHandler } from './pre-handlers.js';
 
@@ -13,8 +14,23 @@ const register = async function (server) {
         auth: { access: { scope: 'meta' } },
         pre: [organizationPreHandler],
         handler: getOrganizations,
-        notes: ["- Retourne la liste des organisations auxquelles l'application client a droit"],
+        description: 'Lister les organisations Pix Orga.',
+        notes: [
+          'Retourne la liste des organisations auxquelles l’application cliente a droit.',
+          '**Cette route nécessite le scope meta.**',
+        ],
         tags: ['api', 'meta'],
+        response: {
+          failAction: 'log',
+          status: {
+            200: Joi.object({
+              id: Joi.number().description("ID de l'organisation"),
+              name: Joi.string().description("Nom de l'organisation"),
+            }).label('Organization'),
+            401: responseObjectErrorDoc,
+            403: responseObjectErrorDoc,
+          },
+        },
       },
     },
     {
@@ -29,8 +45,34 @@ const register = async function (server) {
         },
         pre: [organizationPreHandler, isOrganizationInJurisdictionPreHandler],
         handler: getOrganizationCampaigns,
-        notes: ["- Retourne la liste des campaignes de l'organisation donnée"],
+        description: 'Lister les campagnes d’une organisation.',
+        notes: [
+          'Retourne la liste des campagnes de l’organisation avec l’identifiant `organizationId`.',
+          '**Cette route nécessite le scope campaigns.**',
+        ],
         tags: ['api', 'meta'],
+        response: {
+          failAction: 'log',
+          status: {
+            200: Joi.object({
+              id: Joi.number().description('ID de la campagne'),
+              name: Joi.string().description('Nom de la campagne'),
+              organizationId: Joi.number().description("ID de l'organisation propriétaire de la campagne"),
+              organizationName: Joi.string().description("Nom de l'organisation propriétaire de la campagne"),
+              type: Joi.string().description('Type de la campagne : ASSESSMENT, EXAM, PROFILES_COLLECTION'),
+              targetProfileId: Joi.number().description(
+                'ID du profil cible lié à la campagne, null si le type est PROFILES_COLLECTION',
+              ),
+              targetProfileName: Joi.string().description(
+                'Nom du profil cible lié à la campagne, null si le type est PROFILES_COLLECTION',
+              ),
+              code: Joi.string().description('Code campagne'),
+              createdAt: Joi.date().description('Date de création de la campagne'),
+            }).label('Organization'),
+            401: responseObjectErrorDoc,
+            403: responseObjectErrorDoc,
+          },
+        },
       },
     },
   ]);
