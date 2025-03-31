@@ -35,7 +35,11 @@
       &__header {
         display: flex;
         align-items: center;
-        margin-bottom: 20px;
+        margin-top: var(--pix-spacing-6x);
+        margin-bottom: 0;
+        padding-top: var(--pix-spacing-3x);
+        padding-bottom: var(--pix-spacing-2x);
+        border-top: 1px solid var(--pix-neutral-100);
       }
 
       h2, &__title {
