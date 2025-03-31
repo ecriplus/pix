@@ -76,7 +76,7 @@
               {
                 "id": "1",
                 "content": "<p>le Studio Scène</p>",
-                "feedback": "<span class=\"feedback__state\">Bonne réponse !</span><span aria-hidden=\"true\">🎉</span>"
+                "feedback": "<span class=\"feedback__state\">Bonne réponse !\uD83C\uDF89</span>"
               },
               {
                 "id": "2",
@@ -178,12 +178,12 @@
                     {
                       "id": "1",
                       "content": "<p>vrai</p>",
-                      "feedback": "<span class=\"feedback__state\">Bonne réponse !</span><span aria-hidden=\"true\">🎉</span><p>Le champ À sert à indiquer le destinataire du mail. Il est obligatoire de le compléter pour que le mail soit envoyé et qu'une personne le reçoive.</p>"
+                      "feedback": "<span class=\"feedback__state\">Bonne réponse !\uD83C\uDF89</span><p>Le champ À sert à indiquer le destinataire du mail. Il est obligatoire de le compléter pour que le mail soit envoyé et qu'une personne le reçoive.</p>"
                     },
                     {
                       "id": "2",
                       "content": "<p>faux</p>",
-                      "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><span aria-hidden=\"true\">🎉</span><p>Le champ À sert à indiquer le destinataire du mail. Il est obligatoire de le compléter pour que le mail soit envoyé et qu'une personne le reçoive.</p>"
+                      "feedback": "<span class=\"feedback__state\">Mauvaise réponse.\uD83C\uDF89</span><p>Le champ À sert à indiquer le destinataire du mail. Il est obligatoire de le compléter pour que le mail soit envoyé et qu'une personne le reçoive.</p>"
                     }
                   ],
                   "solution": "1"
@@ -200,7 +200,7 @@
                     {
                       "id": "1",
                       "content": "<p>vrai</p>",
-                      "feedback": "<span class=\"feedback__state\">Bonne réponse !</span><span aria-hidden=\"true\">🎉</span><p>Le champ Objet sert à expliquer rapidement le contenu du mail. S’il n’est pas complété, le champ sera rempli automatiquement avec <code>(aucun objet)</code>.</p>"
+                      "feedback": "<span class=\"feedback__state\">Bonne réponse !\uD83C\uDF89</span><p>Le champ Objet sert à expliquer rapidement le contenu du mail. S’il n’est pas complété, le champ sera rempli automatiquement avec <code>(aucun objet)</code>.</p>"
                     },
                     {
                       "id": "2",
@@ -222,7 +222,7 @@
                     {
                       "id": "1",
                       "content": "<p>vrai</p>",
-                      "feedback": "<span class=\"feedback__state\">Bonne réponse !</span><span aria-hidden=\"true\">🎉</span><p>La personne qui envoie le mail (expéditeur) doit être connectée à un compte avec une adresse mail. C’est cette adresse qui est automatiquement écrite dans le champ <code>De</code>.</p>"
+                      "feedback": "<span class=\"feedback__state\">Bonne réponse !\uD83C\uDF89</span><p>La personne qui envoie le mail (expéditeur) doit être connectée à un compte avec une adresse mail. C’est cette adresse qui est automatiquement écrite dans le champ <code>De</code>.</p>"
                     },
                     {
                       "id": "2",
@@ -391,7 +391,7 @@
               }
             ],
             "feedbacks": {
-              "valid": "<p><span class=\"feedback__state\">Bonne réponse !</span><span aria-hidden=\"true\">🎉</span></p>",
+              "valid": "<p><span class=\"feedback__state\">Bonne réponse !\uD83C\uDF89</span></p>",
               "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Observez à nouveau le mail et réessayez.</p>"
             }
           }

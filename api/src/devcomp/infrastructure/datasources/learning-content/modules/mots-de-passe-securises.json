@@ -302,7 +302,7 @@
                     {
                       "id": "1",
                       "content": "Vrai",
-                      "feedback": "<span class=\"feedback__state\">Correct&#8239;!&nbsp;<span aria-hidden=\"true\">🎉</span></span>"
+                      "feedback": "<span class=\"feedback__state\">Correct&#8239;!&nbsp;\uD83C\uDF89</span>"
                     },
                     {
                       "id": "2",
@@ -329,7 +329,7 @@
                     {
                       "id": "2",
                       "content": "Faux",
-                      "feedback": "<span class=\"feedback__state\">Correct&#8239;!&nbsp;<span aria-hidden=\"true\">🎉</span> </span>"
+                      "feedback": "<span class=\"feedback__state\">Correct&#8239;!&nbsp;\uD83C\uDF89</span>"
                     }
                   ],
                   "solution": "2"
@@ -346,7 +346,7 @@
                     {
                       "id": "1",
                       "content": "Vrai",
-                      "feedback": "<span class=\"feedback__state\">Correct&#8239;!&nbsp;<span aria-hidden=\"true\">🎉</span> </span>"
+                      "feedback": "<span class=\"feedback__state\">Correct&#8239;!&nbsp;\uD83C\uDF89 </span>"
                     },
                     {
                       "id": "2",
