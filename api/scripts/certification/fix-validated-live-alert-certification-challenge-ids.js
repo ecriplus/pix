@@ -2,6 +2,7 @@ import 'dotenv/config';
 
 import { knex } from '../../db/knex-database-connection.js';
 import { AlgorithmEngineVersion } from '../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
+import { isoDateParser } from '../../src/shared/application/scripts/parsers.js';
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
 
@@ -29,10 +30,19 @@ export class FixValidatedLiveAlertCertificationChallengeIds extends Script {
           default: 100,
         },
         startingFromDate: {
-          type: 'date',
-          describe: 'allows to run the script only for certification-courses that happened after the given date',
+          type: 'string',
+          describe: 'scan certification-courses that happened after and __including__ the start date',
           demandOption: true,
-          default: new Date(2024, 10, 4),
+          requiresArg: true,
+          default: '2024-11-4',
+          coerce: isoDateParser(),
+        },
+        stopAtDate: {
+          type: 'string',
+          describe: 'scan certification-courses that happened before and __excluding__ the stop date',
+          demandOption: true,
+          requiresArg: true,
+          coerce: isoDateParser(),
         },
       },
     });
@@ -46,8 +56,13 @@ export class FixValidatedLiveAlertCertificationChallengeIds extends Script {
     const batchSize = options.batchSize;
     const delayInMs = options.delayBetweenBatch;
     const startingFromDate = options.startingFromDate;
+    const stopAtDate = options.stopAtDate;
 
-    this.logger.info({ dryRun, batchSize, delayInMs, startingFromDate });
+    this.logger.info({ dryRun, batchSize, delayInMs, startingFromDate, stopAtDate });
+
+    if (startingFromDate > stopAtDate) {
+      throw new Error('start date must be a date before the stop date');
+    }
 
     let hasNext = true;
     let cursorId = 0;
@@ -59,6 +74,7 @@ export class FixValidatedLiveAlertCertificationChallengeIds extends Script {
           cursorId,
           batchSize,
           startingFromDate,
+          stopAtDate,
           transaction,
         });
 
@@ -182,14 +198,15 @@ export class FixValidatedLiveAlertCertificationChallengeIds extends Script {
     };
   }
 
-  #getCourseIds({ cursorId, batchSize, startingFromDate, transaction }) {
-    this.logger.debug({ cursorId, batchSize, startingFromDate });
+  #getCourseIds({ cursorId, batchSize, startingFromDate, stopAtDate, transaction }) {
+    this.logger.debug({ cursorId, batchSize, startingFromDate, stopAtDate });
     return transaction
       .select('id')
       .from('certification-courses')
       .where('certification-courses.id', '>', cursorId)
       .andWhere('certification-courses.version', '=', AlgorithmEngineVersion.V3)
-      .andWhere('certification-courses.createdAt', '>', startingFromDate)
+      .andWhere('certification-courses.createdAt', '>=', startingFromDate)
+      .andWhere('certification-courses.createdAt', '<', stopAtDate)
       .orderBy('certification-courses.id')
       .limit(batchSize);
   }

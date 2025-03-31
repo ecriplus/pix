@@ -9,7 +9,12 @@ describe('Integration | Scripts | Certification | fix-validated-live-alert-certi
       it('should fix the capacities challenges ids', async function () {
         // given
         const certificationCourseId = 321;
-        const options = { dryRun: false, batchSize: 10, startingFromDate: new Date(2024, 10, 4) };
+        const options = {
+          dryRun: false,
+          batchSize: 10,
+          startingFromDate: new Date(2024, 10, 4),
+          stopAtDate: new Date(2024, 10, 6),
+        };
         const logger = {
           info: sinon.stub(),
           debug: sinon.stub(),
