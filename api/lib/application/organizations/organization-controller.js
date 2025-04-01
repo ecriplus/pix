@@ -1,11 +1,7 @@
 import * as organizationSerializer from '../../../src/organizational-entities/infrastructure/serializers/jsonapi/organization-serializer.js';
 import { organizationForAdminSerializer } from '../../../src/organizational-entities/infrastructure/serializers/jsonapi/organizations-administration/organization-for-admin.serializer.js';
 import * as csvSerializer from '../../../src/shared/infrastructure/serializers/csv/csv-serializer.js';
-import {
-  extractLocaleFromRequest,
-  extractUserIdFromRequest,
-} from '../../../src/shared/infrastructure/utils/request-response-utils.js';
-import { organizationInvitationSerializer } from '../../../src/team/infrastructure/serializers/jsonapi/organization-invitation.serializer.js';
+import { extractUserIdFromRequest } from '../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 
 const createInBatch = async function (request, h) {
@@ -24,19 +20,6 @@ const findPaginatedFilteredOrganizations = async function (request, h, dependenc
     page: options.page,
   });
   return dependencies.organizationSerializer.serialize(organizations, pagination);
-};
-
-const resendInvitation = async function (request, h) {
-  const organizationId = request.params.id;
-  const email = request.payload.data.attributes.email;
-  const locale = extractLocaleFromRequest(request);
-
-  const organizationInvitation = await usecases.resendOrganizationInvitation({
-    organizationId,
-    email,
-    locale,
-  });
-  return h.response(organizationInvitationSerializer.serialize(organizationInvitation));
 };
 
 const archiveOrganization = async function (request, h, dependencies = { organizationForAdminSerializer }) {
@@ -61,7 +44,6 @@ const organizationController = {
   createInBatch,
   findChildrenOrganizationsForAdmin,
   findPaginatedFilteredOrganizations,
-  resendInvitation,
 };
 
 export { organizationController };
