@@ -1,5 +1,28 @@
 # Pix Changelog
 
+## v5.76.0 (01/04/2025)
+
+
+### :rocket: Amélioration
+- [#11891](https://github.com/1024pix/pix/pull/11891) [FEATURE] Autoriser les applications clientes à demander plusieurs scopes dans un même token (PIX-17247).
+- [#11884](https://github.com/1024pix/pix/pull/11884) [FEATURE] Afficher la modale avec les contenus formatifs après avoir envoyé les résultats avec le bouton dans le hero (PIX-17235).
+- [#11819](https://github.com/1024pix/pix/pull/11819) [FEATURE] Ajouter un critère dans les quêtes pour vérifier qu'une chaîne est incluse dans une autre chaîne, insensible à la casse (PIX-17178).
+- [#11910](https://github.com/1024pix/pix/pull/11910) [FEATURE] Borner le script de rattrapage des live alert par date (PIX-17051).
+- [#11899](https://github.com/1024pix/pix/pull/11899) [FEATURE] Documenter les routes de mise à disposition de données (PIX-17258).
+
+### :building_construction: Tech
+- [#11907](https://github.com/1024pix/pix/pull/11907) [TECH] Migrer la route  PATCH /api/organizations/{id}/resend-invitation vers /src (PIX-17259).
+- [#11859](https://github.com/1024pix/pix/pull/11859) [TECH] :truck: Déplace le cas d'usage `find-tutorial` vers `src/`.
+- [#11896](https://github.com/1024pix/pix/pull/11896) [TECH] Supprimer la propriété "hasSeenEndTestScreen" de l'API (PIX-17031).
+
+### :arrow_up: Montée de version
+- [#11909](https://github.com/1024pix/pix/pull/11909) [BUMP] Update dependency eslint-plugin-unicorn to v58 (certif).
+- [#11908](https://github.com/1024pix/pix/pull/11908) [BUMP] Update dependency eslint-plugin-unicorn to v58 (api).
+
+### :coffee: Autre
+- [#11872](https://github.com/1024pix/pix/pull/11872) Revert "Revert "[TECH] Retirer le script de suppression en masse d'organisations (PIX-16269)"".
+- [#11447](https://github.com/1024pix/pix/pull/11447) [DOC] ADR sur le stockage et la production de données destinées à la mise à disposition.
+
 ## v5.75.0 (31/03/2025)
 
 
