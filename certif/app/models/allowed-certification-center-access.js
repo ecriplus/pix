@@ -19,7 +19,6 @@ export default class AllowedCertificationCenterAccess extends Model {
   @attr() habilitations;
   @attr() pixCertifScoBlockedAccessDateLycee;
   @attr() pixCertifScoBlockedAccessDateCollege;
-  @attr() isV3Pilot;
   @attr() isComplementaryAlonePilot;
 
   get isSco() {
