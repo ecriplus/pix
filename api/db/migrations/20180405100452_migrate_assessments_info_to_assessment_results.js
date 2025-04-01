@@ -13,6 +13,7 @@ const up = function (knex) {
           createdAt: assessment.createdAt,
           level: assessment.estimatedLevel,
           pixScore: assessment.pixScore,
+          emitter: 'PIX-ALGO',
           commentForJury: 'Computed',
           assessmentId: assessment.id,
           status: 'validated',

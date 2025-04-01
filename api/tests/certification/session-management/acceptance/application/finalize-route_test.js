@@ -377,7 +377,10 @@ describe('Certification | Session Management | Acceptance | Application | Route 
 
           // then
           expect(response.statusCode).to.equal(200);
-          const actualKoAssessmentResult = await knex('assessment-results').where({ assessmentId }).first();
+          const actualKoAssessmentResult = await knex('assessment-results')
+            .where({ assessmentId })
+            .orderBy('createdAt', 'desc')
+            .first();
           expect(actualKoAssessmentResult.pixScore).not.to.equal(assessmentResultKo.pixScore);
         });
       });
