@@ -17,4 +17,10 @@ export default {
     defaultValue: false,
     tags: ['team-certification'],
   },
+  shouldDisplayNewAnalysisPage: {
+    description: 'Display the new page for campaign analysis',
+    type: 'boolean',
+    defaultValue: false,
+    tags: ['frontend', 'pix-orga', 'team-prescription'],
+  },
 };
