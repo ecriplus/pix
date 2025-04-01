@@ -10,7 +10,7 @@
 @use 'globals/fonts' as *;
 
 // Components
-@use 'components/challenge/challenge' as *;
+@use 'components/header' as *;
 @use 'components/challenge/challenge-actions' as *;
 @use 'components/challenge/challenge-embed-simulator' as *;
 @use 'components/challenge/challenge-content' as *;
@@ -27,6 +27,7 @@
 @use 'components/identified-learner' as *;
 @use 'components/oralization-button' as *;
 @use 'components/robot-dialog' as *;
+@use 'components/width-limited-content' as *;
 
 // Pages
 @use 'pages/identified/missions/introduction' as *;

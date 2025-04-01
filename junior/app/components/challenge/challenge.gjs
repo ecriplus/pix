@@ -8,7 +8,7 @@ import ENV from 'junior/config/environment';
 
 import Bubble from '../bubble';
 import DelayedElement from '../delayed-element';
-import IdentifiedLearner from '../identified-learner';
+import Header from '../header';
 import RobotDialog from '../robot-dialog';
 import ChallengeContent from './challenge-content';
 import ChallengeLayout from './challenge-layout';
@@ -161,7 +161,7 @@ export default class Challenge extends Component {
   <template>
     {{pageTitle (t "pages.challenge.title")}}
     <ChallengeLayout @color={{this.layoutColor}}>
-      <div class="header_container">
+      <Header>
         <RobotDialog @class={{this.robotMood}}>
           {{#each @challenge.instructions as |instruction index|}}
             <DelayedElement @shouldDisplayIn={{this.bubbleDisplayDelay index}}>
@@ -178,8 +178,7 @@ export default class Challenge extends Component {
             />
           {{/if}}
         </RobotDialog>
-        <IdentifiedLearner />
-      </div>
+      </Header>
       <DelayedElement @shouldDisplayIn={{this.challengeItemDisplayDelay}}>
         <ChallengeContent
           @setAnswerValue={{this.setAnswerValue}}

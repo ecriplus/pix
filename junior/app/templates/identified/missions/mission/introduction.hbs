@@ -1,35 +1,36 @@
 {{page-title (t "pages.missions.introduction-page.title")}}
 
 <Challenge::ChallengeLayout>
-  <div class="mission-introduction">
-    <div class="header_container">
-      <RobotDialog>
-        <Bubble
-          @message={{t "pages.missions.introduction-page.robot-text.0"}}
-          @oralization={{@model.learnerHasOralizationFeature}}
-        />
+  <WidthLimitedContent>
+    <div class="mission-introduction">
+      <Header>
+        <RobotDialog>
+          <Bubble
+            @message={{t "pages.missions.introduction-page.robot-text.0"}}
+            @oralization={{@model.learnerHasOralizationFeature}}
+          />
 
-        <Bubble
-          @message={{t "pages.missions.introduction-page.robot-text.1"}}
-          @oralization={{@model.learnerHasOralizationFeature}}
-        />
-      </RobotDialog>
-      <IdentifiedLearner />
-    </div>
-    <div class="mission-introduction__container">
-      <div class="mission-introduction__media">
-        <Challenge::Content::ChallengeMedia
-          @src={{@model.mission.introductionMediaUrl}}
-          @alt={{@model.mission.introductionMediaAlt}}
-          @type={{@model.mission.introductionMediaType}}
-        />
+          <Bubble
+            @message={{t "pages.missions.introduction-page.robot-text.1"}}
+            @oralization={{@model.learnerHasOralizationFeature}}
+          />
+        </RobotDialog>
+      </Header>
+      <div class="mission-introduction__container">
+        <div class="mission-introduction__media">
+          <Challenge::Content::ChallengeMedia
+            @src={{@model.mission.introductionMediaUrl}}
+            @alt={{@model.mission.introductionMediaAlt}}
+            @type={{@model.mission.introductionMediaType}}
+          />
+        </div>
+        <div class="mission-introduction__actions">
+          <PixButtonLink @route="identified.missions.mission.resume" size="large" class="details-action">
+            <p>{{t "pages.missions.introduction-page.start-mission"}}</p>
+            <PixIcon @name="arrowRight" class="button-actions__icon" @ariaHidden={{true}} />
+          </PixButtonLink>
+        </div>
       </div>
-      <div class="mission-introduction__actions">
-        <PixButtonLink @route="identified.missions.mission.resume" size="large" class="details-action">
-          <p>{{t "pages.missions.introduction-page.start-mission"}}</p>
-          <PixIcon @name="arrowRight" class="button-actions__icon" @ariaHidden={{true}} />
-        </PixButtonLink>
-      </div>
     </div>
-  </div>
+  </WidthLimitedContent>
 </Challenge::ChallengeLayout>

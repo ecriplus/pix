@@ -90,7 +90,7 @@ export default class Qrocm extends Component {
         {{/if}}
         {{#if (eq block.type "select")}}
           <PixSelect
-            class="challenge-content-proposals__response challenge-content-proposals__response--selector"
+            class="challenge-content-proposals__response"
             @value={{get this.answerValues block.input}}
             @screenReaderOnly={{true}}
             @placeholder={{block.placeholder}}
@@ -99,6 +99,7 @@ export default class Qrocm extends Component {
             @onChange={{fn this.onSelectChange block.input}}
             @id="{{block.input}}"
             @isDisabled={{@isDisabled}}
+            @isComputeWidthDisabled={{true}}
           >
             <:label>{{block.ariaLabel}}</:label>
           </PixSelect>
