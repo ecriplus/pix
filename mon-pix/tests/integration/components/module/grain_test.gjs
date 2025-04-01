@@ -816,7 +816,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
         });
         const passage = store.createRecord('passage');
         const correctionResponse = store.createRecord('correction-response', {
-          feedback: 'Too bad!',
+          feedback: { state: 'Too bad!' },
           status: 'ko',
           solution: '1',
         });
@@ -1324,7 +1324,10 @@ module('Integration | Component | Module | Grain', function (hooks) {
             });
 
             const passage = store.createRecord('passage');
-            const correction = store.createRecord('correction-response', { status: 'ok', feedback: 'super' });
+            const correction = store.createRecord('correction-response', {
+              status: 'ok',
+              feedback: { state: 'super' },
+            });
             store.createRecord('element-answer', {
               elementId: 'd0690f26-978c-41c3-9a21-da931857739c',
               correction,
@@ -1384,7 +1387,10 @@ module('Integration | Component | Module | Grain', function (hooks) {
             });
 
             const passage = store.createRecord('passage');
-            const correction = store.createRecord('correction-response', { status: 'ok', feedback: 'super' });
+            const correction = store.createRecord('correction-response', {
+              status: 'ok',
+              feedback: { state: 'super' },
+            });
             store.createRecord('element-answer', {
               elementId: 'd0690f26-978c-41c3-9a21-da931857739c',
               correction,
@@ -1460,7 +1466,10 @@ module('Integration | Component | Module | Grain', function (hooks) {
                 ],
               });
 
-              const correction = store.createRecord('correction-response', { status: 'ok', feedback: 'super' });
+              const correction = store.createRecord('correction-response', {
+                status: 'ok',
+                feedback: { state: 'super' },
+              });
               store.createRecord('element-answer', {
                 elementId: 'd0690f26-978c-41c3-9a21-da931857739c',
                 correction,
@@ -1522,7 +1531,10 @@ module('Integration | Component | Module | Grain', function (hooks) {
                 ],
               });
 
-              const correction = store.createRecord('correction-response', { status: 'ok', feedback: 'super' });
+              const correction = store.createRecord('correction-response', {
+                status: 'ok',
+                feedback: { state: 'super' },
+              });
               store.createRecord('element-answer', {
                 elementId: 'd0690f26-978c-41c3-9a21-da931857739c',
                 correction,

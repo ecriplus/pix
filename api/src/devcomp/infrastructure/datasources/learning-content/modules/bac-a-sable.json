@@ -365,17 +365,26 @@
               {
                 "id": "1",
                 "content": "Des recettes de lasagne",
-                "feedback": "<span class=\"feedback__state\">Incorrect.</span><p>Erreur, ce ne sont pas des lasagnes</p>"
+                "feedback": {
+                  "state": "Incorrect.",
+                  "diagnosis": "<p>Erreur, ce ne sont pas des lasagnes</p>"
+                }
               },
               {
                 "id": "2",
                 "content": "Des recettes de pâté en croûte",
-                "feedback": "<span class=\"feedback__state\">Incorrect.</span><p>Non, ce ne sont pas des recettes de pâté en croûte</p>"
+                "feedback": {
+                  "state": "Incorrect.",
+                  "diagnosis": "<p>Non, ce ne sont pas des recettes de pâté en croûte</p>"
+                }
               },
               {
                 "id": "3",
                 "content": "Des recettes végétariennes",
-                "feedback": "<span class=\"feedback__state\">Correct&#8239;!</span><p>Bonne réponse ! Ce sont bien des recettes végétariennes</p>"
+                "feedback": {
+                  "state": "Correct&#8239;!",
+                  "diagnosis": "<p>Bonne réponse ! Ce sont bien des recettes végétariennes</p>"
+                }
               }
             ],
             "solution": "3"
@@ -428,12 +437,18 @@
                     {
                       "id": "1",
                       "content": "Vrai",
-                      "feedback": "<span class=\"feedback__state\">Correct&#8239;!</span><p> Ces 16 compétences sont rangées dans 5 domaines.</p>"
+                      "feedback": {
+                        "state": "Correct&#8239;!",
+                        "diagnosis": "<p> Ces 16 compétences sont rangées dans 5 domaines.</p>"
+                      }
                     },
                     {
                       "id": "2",
                       "content": "Faux",
-                      "feedback": "<span class=\"feedback__state\">Incorrect.</span><p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden=\"true\">👆</span>!</p>"
+                      "feedback": {
+                        "state": "Incorrect.",
+                        "diagnosis": "<p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden=\"true\">👆</span>!</p>"
+                      }
                     }
                   ],
                   "solution": "1"
@@ -450,12 +465,18 @@
                     {
                       "id": "1",
                       "content": "Vrai",
-                      "feedback": "<span class=\"feedback__state\">Incorrect.</span><p> Et non ! Il y a seulement 5 domaines sur Pix.</p>"
+                      "feedback": {
+                        "state": "Incorrect.",
+                        "diagnosis": "<p> Et non ! Il y a seulement 5 domaines sur Pix.</p>"
+                      }
                     },
                     {
                       "id": "2",
                       "content": "Faux",
-                      "feedback": "<span class=\"feedback__state\">Correct&#8239;!</span><p> Bien vu !</p>"
+                      "feedback": {
+                        "state": "Correct&#8239;!",
+                        "diagnosis": "<p> Bien vu !</p>"
+                      }
                     }
                   ],
                   "solution": "2"
@@ -472,12 +493,18 @@
                     {
                       "id": "1",
                       "content": "Vrai",
-                      "feedback": "<span class=\"feedback__state\">Correct&#8239;!</span><p> Et oui ! A noter, seulement 7 sont actifs aujourd’hui.</p>"
+                      "feedback": {
+                        "state": "Correct&#8239;!",
+                        "diagnosis": "<p> Et oui ! A noter, seulement 7 sont actifs aujourd’hui.</p>"
+                      }
                     },
                     {
                       "id": "2",
                       "content": "Faux",
-                      "feedback": "<span class=\"feedback__state\">Incorrect.</span><p> Incorrect ! Il existe 8 niveaux par compétence.</p>"
+                      "feedback": {
+                        "state": "Incorrect.",
+                        "diagnosis": "<p> Incorrect ! Il existe 8 niveaux par compétence.</p>"
+                      }
                     }
                   ],
                   "solution": "1"
@@ -522,8 +549,14 @@
               }
             ],
             "feedbacks": {
-              "valid": "<span class=\"feedback__state\">Correct&#8239;!</span><p>Vous nous avez bien cernés&nbsp;:)</p>",
-              "invalid": "<span class=\"feedback__state\">Et non&#8239;!</span><p> Pix sert à évaluer, certifier et développer ses compétences numériques.</p>"
+              "valid": {
+                "state": "Correct&#8239;!",
+                "diagnosis": "<p>Vous nous avez bien cernés&nbsp;:)</p>"
+              },
+              "invalid": {
+                "state": "Et non&#8239;!",
+                "diagnosis": "<p> Pix sert à évaluer, certifier et développer ses compétences numériques.</p>"
+              }
             },
             "solutions": ["1", "3", "4"]
           }
@@ -545,17 +578,26 @@
               {
                 "id": "1",
                 "content": "Bienvenue",
-                "feedback": "<span class=\"feedback__state\">Incorrect.</span><p> Remonter la page pour retrouver le premier mot&#8239;!</p>"
+                "feedback": {
+                  "state": "Incorrect.",
+                  "diagnosis": "<p> Remonter la page pour retrouver le premier mot&#8239;!</p>"
+                }
               },
               {
                 "id": "2",
                 "content": "Bonjour",
-                "feedback": "<span class=\"feedback__state\">Correct&#8239;!</span><p> Vous avez bien remonté la page</p>"
+                "feedback": {
+                  "state": "Correct&#8239;!",
+                  "diagnosis": "<p> Vous avez bien remonté la page</p>"
+                }
               },
               {
                 "id": "3",
                 "content": "Nous",
-                "feedback": "<span class=\"feedback__state\">Incorrect.</span><p> Remonter la page pour retrouver le premier mot&#8239;!</p>"
+                "feedback": {
+                  "state": "Incorrect.",
+                  "diagnosis": "<p> Remonter la page pour retrouver le premier mot&#8239;!</p>"
+                }
               }
             ],
             "solution": "2"
@@ -605,12 +647,20 @@
                 "ariaLabel": "Année à trouver",
                 "defaultValue": "",
                 "tolerances": [],
-                "solutions": ["2016"]
+                "solutions": [
+                  "2016"
+                ]
               }
             ],
             "feedbacks": {
-              "valid": "<span class=\"feedback__state\">Correct&#8239;!</span><p> vous nous connaissez bien&nbsp;<span aria-hidden=\"true\">🎉</span></p>",
-              "invalid": "<span class=\"feedback__state\">Incorrect&#8239;!</span><p> vous y arriverez la prochaine fois&#8239;!</p>"
+              "valid": {
+                "state": "Correct&#8239;!",
+                "diagnosis": "<p> vous nous connaissez bien &nbsp; <span aria-hidden=\"true\">🎉</span></p>"
+              },
+              "invalid": {
+                "state": "Incorrect&#8239;!",
+                "diagnosis": "<p> vous y arriverez la prochaine fois&#8239;!</p>"
+              }
             }
           }
         }
@@ -658,8 +708,14 @@
               }
             ],
             "feedbacks": {
-              "valid": "<span class=\"feedback__state\">Correct&#8239;!</span>",
-              "invalid": "<span class=\"feedback__state\">Incorrect&#8239;!</span>"
+              "valid": {
+                "state": "Correct&#8239;!",
+                "diagnosis": ""
+              },
+              "invalid": {
+                "state": "Incorrect&#8239;!",
+                "diagnosis":  ""
+              }
             }
           }
         }
@@ -706,13 +762,23 @@
                 "placeholder": "",
                 "ariaLabel": "Nom de ce produit",
                 "defaultValue": "",
-                "tolerances": ["t1"],
-                "solutions": ["Modulix"]
+                "tolerances": [
+                  "t1"
+                ],
+                "solutions": [
+                  "Modulix"
+                ]
               }
             ],
             "feedbacks": {
-              "valid": "<span class=\"feedback__state\">Correct&#8239;!</span><p> Vous êtes prêt à explorer&nbsp;<span aria-hidden=\"true\">🎉</span></p>",
-              "invalid": "<span class=\"feedback__state\">Incorrect&#8239;!</span><p> Vous y arriverez la prochaine fois&#8239;!</p>"
+              "valid": {
+                "state": "Correct&#8239;!",
+                "diagnosis": "<p>Vous êtes prêt à explorer &nbsp; <span aria-hidden=\"true\">🎉</span></p>"
+              },
+              "invalid": {
+                "state": "Incorrect&#8239;!",
+                "diagnosis": "<p> Vous y arriverez la prochaine fois&#8239;!</p>"
+              }
             }
           }
         }
