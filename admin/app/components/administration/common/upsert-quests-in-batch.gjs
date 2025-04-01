@@ -13,6 +13,15 @@ import ENV from 'pix-admin/config/environment';
 import AdministrationBlockLayout from '../block-layout';
 import DownloadTemplate from '../download-template';
 
+const scrollToElement = modifier((element) => {
+  const top = element.getBoundingClientRect().top;
+
+  window.scrollTo({
+    top,
+    behavior: 'smooth',
+  });
+});
+
 export default class UpsertQuestsInBatch extends Component {
   @service intl;
   @service pixToast;
@@ -84,9 +93,9 @@ export default class UpsertQuestsInBatch extends Component {
       <PixNotificationAlert @withIcon={{true}} @type="error" class="upsert-quests-in-batch__errors">
         <ul>
           {{#each this.errors as |error|}}
-            <li class="upsert-quests-in-batch__error">
+            <li class="upsert-quests-in-batch__error" {{scrollToElement}}>
               <span>{{error.detail}}</span>
-              <pre class="upsert-quests-in-batch__json">{{(transformMetaToJSON error)}}</pre>
+              <pre class="upsert-quests-in-batch__json">{{transformMetaToJSON error}}</pre>
             </li>
           {{/each}}
         </ul>
