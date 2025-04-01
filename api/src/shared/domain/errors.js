@@ -233,30 +233,30 @@ class ImportLearnerConfigurationError extends DomainError {
 }
 
 class EntityValidationError extends DomainError {
-  constructor({ invalidAttributes }) {
-    super("Échec de validation de l'entité.");
+  constructor({ invalidAttributes }, code, meta) {
+    super("Échec de validation de l'entité.", code, meta);
     this.invalidAttributes = invalidAttributes;
   }
 
-  static fromJoiError(joiError) {
+  static fromJoiError(joiError, code, meta) {
     const invalidAttributes = { attribute: joiError.context.key, message: joiError.message };
 
-    return new EntityValidationError({ invalidAttributes });
+    return new EntityValidationError({ invalidAttributes }, code, meta);
   }
 
-  static fromJoiErrors(joiErrors) {
+  static fromJoiErrors(joiErrors, code, meta) {
     const invalidAttributes = joiErrors.map((error) => {
       return { attribute: error.context.key, message: error.message };
     });
-    return new EntityValidationError({ invalidAttributes });
+    return new EntityValidationError({ invalidAttributes }, code, meta);
   }
 
-  static fromMultipleEntityValidationErrors(entityValidationErrors) {
+  static fromMultipleEntityValidationErrors(entityValidationErrors, code, meta) {
     const invalidAttributes = entityValidationErrors.reduce((invalidAttributes, entityValidationError) => {
       invalidAttributes.push(...entityValidationError.invalidAttributes);
       return invalidAttributes;
     }, []);
-    return new EntityValidationError({ invalidAttributes });
+    return new EntityValidationError({ invalidAttributes }, code, meta);
   }
 }
 
