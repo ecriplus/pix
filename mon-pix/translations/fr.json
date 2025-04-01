@@ -1343,7 +1343,7 @@
       "warning-message-logout": "Se déconnecter"
     },
     "fill-in-certificate-verification-code": {
-      "description": "La certification Pix atteste d’un niveau de maîtrise des compétences numériques : saisissez ci-après le \"code de vérification\" du certificat Pix à vérifier.",
+      "description": "La certification Pix atteste d’un niveau de maîtrise des compétences numériques : saisissez ci-après le \"code de vérification\" du certificat Pix à vérifier.",
       "errors": {
         "missing-code": "Merci de renseigner le code de vérification.",
         "not-found": "Il n'y a pas de certificat Pix correspondant.",

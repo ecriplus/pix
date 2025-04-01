@@ -19,7 +19,11 @@ module('Integration | Component | certification verification code form', functio
     assert
       .dom(screen.getByRole('heading', { name: t('pages.fill-in-certificate-verification-code.first-title') }))
       .exists();
-    assert.dom(screen.getByText(t('pages.fill-in-certificate-verification-code.description'))).exists();
+    assert
+      .dom(
+        screen.getByText(t('pages.fill-in-certificate-verification-code.description'), { collapseWhitespace: false }),
+      )
+      .exists();
     assert.dom(screen.getByRole('textbox', { name: 'Code de vérification * Exemple: P-XXXXXXXX' })).exists();
     assert.dom(screen.getByRole('button', { name: t('pages.fill-in-certificate-verification-code.verify') })).exists();
   });

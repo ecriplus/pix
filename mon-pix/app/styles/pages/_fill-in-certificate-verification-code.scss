@@ -1,37 +1,20 @@
-@use 'pix-design-tokens/breakpoints';
-@use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/colors';
 
-.fill-in-certificate-verification-code {
-  width: 75%;
-  margin: 0 auto var(--pix-spacing-8x);
-  padding: var(--pix-spacing-12x) var(--pix-spacing-6x);
+.fill-in-certificate-verification-code__form {
+  margin-bottom: var(--pix-spacing-12x);
+  text-align: center;
 
-  @extend %pix-body-m;
+  input {
+    background-color: var(--pix-neutral-0);
 
-  @include breakpoints.device-is('tablet') {
-    padding: var(--pix-spacing-12x) 60px;
-  }
-
-  &__title {
-    text-align: center;
-
-    @extend %pix-title-m;
-  }
-
-  &__description {
-    margin: var(--pix-spacing-6x) 0;
-    color: var(--pix-neutral-500);
-    line-height: 1.375rem;
-    text-align: center;
-  }
-
-  &__form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .form__actions {
-      margin: var(--pix-spacing-6x) 0;
+    @media (max-width: 25rem) {
+      height: 14vw;
+      font-size: 8vw;
     }
+  }
+
+  [type="submit"] {
+    display: inline-flex;
+    margin-top: var(--pix-spacing-4x);
   }
 }

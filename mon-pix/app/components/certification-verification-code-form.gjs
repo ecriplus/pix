@@ -1,5 +1,3 @@
-import PixBackgroundHeader from '@1024pix/pix-ui/components/pix-background-header';
-import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixCode from '@1024pix/pix-ui/components/pix-code';
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
@@ -56,41 +54,39 @@ export default class CertificationVerificationCodeForm extends Component {
   }
 
   <template>
-    <PixBackgroundHeader id="main">
-      <PixBlock class="fill-in-certificate-verification-code">
-        <h1 class="fill-in-certificate-verification-code__title">
-          {{t "pages.fill-in-certificate-verification-code.first-title"}}
-        </h1>
+    <section class="global-page-header">
+      <h1 class="global-page-header__title">
+        {{t "pages.fill-in-certificate-verification-code.first-title"}}
+      </h1>
 
-        <p class="fill-in-certificate-verification-code__description">
-          {{t "pages.fill-in-certificate-verification-code.description"}}
-        </p>
+      <p class="global-page-header__description">
+        {{t "pages.fill-in-certificate-verification-code.description"}}
+      </p>
+    </section>
 
-        <form class="fill-in-certificate-verification-code__form" autocomplete="off">
-          <PixCode
-            @length="10"
-            @requiredLabel={{t "common.forms.mandatory"}}
-            @subLabel={{t "pages.fill-in-certificate-verification-code.sub-label"}}
-            @value={{this.certificateVerificationCode}}
-            @validationStatus={{this.status}}
-            @errorMessage={{this.errorMessage}}
-            {{on "keyup" this.clearErrors}}
-            {{on "input" this.handleVerificationCodeInput}}
-          >
-            <:label>{{t "pages.fill-in-certificate-verification-code.label"}}</:label>
-          </PixCode>
+    <form class="fill-in-certificate-verification-code__form" autocomplete="off">
+      <PixCode
+        @length="10"
+        @requiredLabel={{t "common.forms.mandatory"}}
+        @subLabel={{t "pages.fill-in-certificate-verification-code.sub-label"}}
+        @value={{this.certificateVerificationCode}}
+        @validationStatus={{this.status}}
+        @errorMessage={{this.errorMessage}}
+        {{on "keyup" this.clearErrors}}
+        {{on "input" this.handleVerificationCodeInput}}
+      >
+        <:label>{{t "pages.fill-in-certificate-verification-code.label"}}</:label>
+      </PixCode>
 
-          <PixButton @type="submit" @triggerAction={{this.checkCertificate}} class="form__actions">
-            {{t "pages.fill-in-certificate-verification-code.verify"}}
-          </PixButton>
+      <PixButton @type="submit" @triggerAction={{this.checkCertificate}}>
+        {{t "pages.fill-in-certificate-verification-code.verify"}}
+      </PixButton>
 
-          {{#if @apiErrorMessage}}
-            <PixNotificationAlert @type="error" @withIcon={{true}}>
-              {{@apiErrorMessage}}
-            </PixNotificationAlert>
-          {{/if}}
-        </form>
-      </PixBlock>
-    </PixBackgroundHeader>
+      {{#if @apiErrorMessage}}
+        <PixNotificationAlert @type="error" @withIcon={{true}}>
+          {{@apiErrorMessage}}
+        </PixNotificationAlert>
+      {{/if}}
+    </form>
   </template>
 }
