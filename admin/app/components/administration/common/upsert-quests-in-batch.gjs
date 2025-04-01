@@ -6,21 +6,11 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
-import { modifier } from 'ember-modifier';
-import isEmpty from 'lodash/isEmpty';
 import ENV from 'pix-admin/config/environment';
+import { scrollToElement } from 'pix-admin/modifiers/scroll-to';
 
 import AdministrationBlockLayout from '../block-layout';
 import DownloadTemplate from '../download-template';
-
-const scrollToElement = modifier((element) => {
-  const top = element.getBoundingClientRect().top;
-
-  window.scrollTo({
-    top,
-    behavior: 'smooth',
-  });
-});
 
 export default class UpsertQuestsInBatch extends Component {
   @service intl;
@@ -54,14 +44,16 @@ export default class UpsertQuestsInBatch extends Component {
         });
         return;
       } else {
-        const { errors: responseErrors } = await response.json();
+        const responseJson = await response.json();
+        const { errors: responseErrors } = responseJson;
         if (isJSONAPIError(responseErrors)) {
           this.errors = responseErrors;
         } else {
-          this.errorResponseHandler.notify(await response.json(), undefined, true);
+          this.errorResponseHandler.notify(responseJson, undefined, true);
         }
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
     } finally {
       this.isLoading = false;
@@ -72,36 +64,43 @@ export default class UpsertQuestsInBatch extends Component {
     <AdministrationBlockLayout
       @title={{t "components.administration.upsert-quests-in-batch.title"}}
       @description={{t "components.administration.upsert-quests-in-batch.description"}}
+      @actionsClass="upsert-quests-in-batch__actions"
       class="upsert-quests-in-batch"
     >
-      <DownloadTemplate @url="/api/admin/quests/template">
-        <PixButtonUpload
-          @id="quests-batch-update-file-upload"
-          @onChange={{this.upsertQuestsInBatch}}
-          @variant="primary"
-          accept=".csv"
-        >
-          {{t "components.administration.upsert-quests-in-batch.upload-button"}}
-        </PixButtonUpload>
-      </DownloadTemplate>
+      <div class="upsert-quests-in-batch__buttons">
+        <DownloadTemplate @url="/api/admin/quests/template">
+          <PixButtonUpload
+            @id="quests-batch-update-file-upload"
+            @onChange={{this.upsertQuestsInBatch}}
+            @variant="primary"
+            accept=".csv"
+          >
+            {{t "components.administration.upsert-quests-in-batch.upload-button"}}
+          </PixButtonUpload>
+        </DownloadTemplate>
 
-      <PixButtonLink @iconBefore="cogsMagic" @route="authenticated.quest-creator" @variant="secondary">
-        {{t "components.administration.upsert-quests-in-batch.quest-creator"}}
-      </PixButtonLink>
+        <PixButtonLink @iconBefore="cogsMagic" @route="authenticated.quest-creator" @variant="secondary">
+          {{t "components.administration.upsert-quests-in-batch.quest-creator"}}
+        </PixButtonLink>
+      </div>
+      {{#if this.errors}}
+        <PixNotificationAlert @withIcon={{true}} @type="error" class="upsert-quests-in-batch__errors">
+          <ul>
+            {{#each this.errors as |error|}}
+              <li class="upsert-quests-in-batch__error" {{scrollToElement}}>
+                <span>{{error.detail}}</span>
+                <pre class="upsert-quests-in-batch__json">{{transformMetaToJSON error}}</pre>
+              </li>
+            {{/each}}
+          </ul>
+        </PixNotificationAlert>
+      {{/if}}
     </AdministrationBlockLayout>
-    {{#if this.errors}}
-      <PixNotificationAlert @withIcon={{true}} @type="error" class="upsert-quests-in-batch__errors">
-        <ul>
-          {{#each this.errors as |error|}}
-            <li class="upsert-quests-in-batch__error" {{scrollToElement}}>
-              <span>{{error.detail}}</span>
-              <pre class="upsert-quests-in-batch__json">{{transformMetaToJSON error}}</pre>
-            </li>
-          {{/each}}
-        </ul>
-      </PixNotificationAlert>
-    {{/if}}
   </template>
+}
+
+function isEmpty(value) {
+  return Array.isArray(value) && value.length === 0;
 }
 
 function isJSONAPIError(errors) {

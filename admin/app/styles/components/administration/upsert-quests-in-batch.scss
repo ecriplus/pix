@@ -1,4 +1,13 @@
 .upsert-quests-in-batch {
+  &__actions {
+    display: block;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: var(--pix-spacing-4x);
+  }
+
   &__errors {
     margin-top: var(--pix-spacing-4x);
 
