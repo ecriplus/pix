@@ -1,26 +1,24 @@
 {{page-title (t "pages.user-trainings.title")}}
 
-<Global::AppLayout>
-  <main id="main" class="main" role="main">
-    <Training::Header />
-    <div class="user-trainings-content">
-      {{#if @model.trainings.meta.pagination.rowCount}}
-        <div class="user-trainings-content__container">
-          <ul class="user-trainings-content__list">
-            {{#each @model.trainings as |training|}}
-              <li class="user-trainings-content-list__item">
-                <Training::Card @training={{training}} />
-              </li>
-            {{/each}}
-          </ul>
-          <PixPagination
-            @pagination={{@model.trainings.meta.pagination}}
-            @pageOptions={{this.pageOptions}}
-            @locale={{this.intl.primaryLocale}}
-            @isCondensed="true"
-          />
-        </div>
-      {{/if}}
-    </div>
-  </main>
-</Global::AppLayout>
+<main id="main" class="main" role="main">
+  <Training::Header />
+  <div class="user-trainings-content">
+    {{#if @model.trainings.meta.pagination.rowCount}}
+      <div class="user-trainings-content__container">
+        <ul class="user-trainings-content__list">
+          {{#each @model.trainings as |training|}}
+            <li class="user-trainings-content-list__item">
+              <Training::Card @training={{training}} />
+            </li>
+          {{/each}}
+        </ul>
+        <PixPagination
+          @pagination={{@model.trainings.meta.pagination}}
+          @pageOptions={{this.pageOptions}}
+          @locale={{this.intl.primaryLocale}}
+          @isCondensed="true"
+        />
+      </div>
+    {{/if}}
+  </div>
+</main>

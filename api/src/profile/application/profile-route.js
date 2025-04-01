@@ -1,8 +1,7 @@
 import Joi from 'joi';
 
-import { identifiersType } from '../../../src/shared/domain/types/identifiers-type.js';
 import { securityPreHandlers } from '../../shared/application/security-pre-handlers.js';
-import { attestationController } from './attestation-controller.js';
+import { identifiersType } from '../../shared/domain/types/identifiers-type.js';
 import { profileController } from './profile-controller.js';
 
 const register = async function (server) {
@@ -37,31 +36,6 @@ const register = async function (server) {
   ];
 
   const userRoutes = [
-    {
-      method: 'GET',
-      path: '/api/users/{userId}/attestations/{attestationKey}',
-      config: {
-        pre: [
-          {
-            method: securityPreHandlers.checkRequestedUserIsAuthenticatedUser,
-            assign: 'requestedUserIsAuthenticatedUser',
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            userId: identifiersType.userId,
-            attestationKey: Joi.string(),
-          }),
-        },
-        handler: attestationController.getUserAttestation,
-        notes: [
-          '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
-            "- Récupération de l'attestation utilisateur" +
-            '- L’id demandé doit correspondre à celui de l’utilisateur authentifié',
-        ],
-        tags: ['api', 'user', 'profile'],
-      },
-    },
     {
       method: 'GET',
       path: '/api/users/{id}/profile',

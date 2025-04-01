@@ -147,6 +147,12 @@
     }
   },
   "components": {
+    "attestations": {
+      "obtainedAt": "Datum van uitgave: {date}",
+      "title": {
+        "numeric-sensivity": "Digitaal bewustzijnscertificaat"
+      }
+    },
     "authentication": {
       "login-form": {
         "fields": {
@@ -324,6 +330,7 @@
     },
     "homepage": "Startpagina Pix",
     "main": {
+      "attestations": "Mijn getuigschriften",
       "code": "Ik heb een code",
       "dashboard": "Home",
       "help": "Help",
@@ -352,6 +359,10 @@
     }
   },
   "pages": {
+    "attestations" : {
+      "title": "Mijn getuigschriften",
+      "subtitle": "Krijg toegang tot al je Pix-certificaten en download ze."
+    },
     "account-recovery": {
       "errors": {
         "account-exists": "Er bestaat al een account met dit e-mailadres.",

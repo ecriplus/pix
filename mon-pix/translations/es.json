@@ -147,6 +147,12 @@
     }
   },
   "components": {
+    "attestations": {
+      "obtainedAt": "Fecha de emisión: {date}",
+      "title": {
+        "numeric-sensivity": "Certificado de sensibilización digital"
+      }
+    },
     "authentication": {
       "login-form": {
         "fields": {
@@ -324,6 +330,7 @@
     },
     "homepage": "Página de inicio de Pix",
     "main": {
+      "attestations": "Mis títulos",
       "code": "Tengo un código",
       "dashboard": "Inicio",
       "help": "Ayuda",
@@ -352,6 +359,10 @@
     }
   },
   "pages": {
+    "attestations" : {
+      "title": "Mis títulos",
+      "subtitle": "Acceda a todos sus certificados Pix y descárguelos."
+    },
     "account-recovery": {
       "errors": {
         "account-exists": "Ya existe una cuenta con esta dirección de correo electrónico.",

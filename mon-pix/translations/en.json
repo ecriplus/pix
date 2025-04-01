@@ -147,6 +147,12 @@
     }
   },
   "components": {
+    "attestations": {
+      "obtainedAt": "Date of issue : {date}",
+      "title": {
+        "numeric-sensivity": "Digital awareness certificate"
+      }
+    },
     "authentication": {
       "login-form": {
         "fields": {
@@ -324,6 +330,7 @@
     },
     "homepage": "Pix's Homepage",
     "main": {
+      "attestations": "My certifications",
       "code": "I have a code",
       "dashboard": "Home",
       "help": "Help",
@@ -495,6 +502,10 @@
         "header": "Your answers"
       },
       "title": "End of test"
+    },
+    "attestations": {
+      "subtitle": "Access and download all your Pix certificates.",
+      "title": "My certificates"
     },
     "authentication": {
       "login": {
