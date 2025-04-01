@@ -9,6 +9,8 @@ const buildCertificationCenter = function ({
   updatedAt,
   isV3Pilot = false,
   isScoBlockedAccessWhitelist = false,
+  archivedAt = null,
+  archivedBy = null,
 } = {}) {
   const values = {
     id,
@@ -19,6 +21,8 @@ const buildCertificationCenter = function ({
     updatedAt,
     isV3Pilot,
     isScoBlockedAccessWhitelist,
+    archivedAt,
+    archivedBy,
   };
   return databaseBuffer.pushInsertable({
     tableName: 'certification-centers',

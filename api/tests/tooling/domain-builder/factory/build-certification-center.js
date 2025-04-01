@@ -9,6 +9,8 @@ const buildCertificationCenter = function ({
   updatedAt,
   habilitations = [],
   isV3Pilot = false,
+  archivedAt,
+  archivedBy,
 } = {}) {
   return new CertificationCenter({
     id,
@@ -19,6 +21,8 @@ const buildCertificationCenter = function ({
     createdAt,
     habilitations,
     isV3Pilot,
+    archivedAt,
+    archivedBy,
   });
 };
 
