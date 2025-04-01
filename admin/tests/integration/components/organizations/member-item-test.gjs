@@ -43,7 +43,7 @@ module('Integration | Component | MemberItem', function (hooks) {
     assert.dom(screen.getByRole('cell', { name: 'John' })).exists();
     assert.dom(screen.getByRole('cell', { name: 'Doe' })).exists();
     assert.dom(screen.getByRole('cell', { name: 'toto@example.net' })).exists();
-    assert.dom(screen.getByRole('cell', { name: dayjs(now).format('DD/MM/YYYY HH:mm') })).exists();
+    assert.dom(screen.getByRole('cell', { name: dayjs(now).format('DD/MM/YYYY') })).exists();
   });
   module('if there is no last access date', function () {
     test('displays default last access date', async function (assert) {
