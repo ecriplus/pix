@@ -88,12 +88,21 @@
                 "ariaLabel": "zone de saisie",
                 "defaultValue": "",
                 "tolerances": [],
-                "solutions": ["voilà le zèbre déçu", "« voilà le zèbre déçu »"]
+                "solutions": [
+                  "voilà le zèbre déçu",
+                  "« voilà le zèbre déçu »"
+                ]
               }
             ],
             "feedbacks": {
-              "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span><br>Bravo ! <span aria-hidden=\"true\">🦓</span> Vous savez utiliser le clavier pour taper des lettres, des espaces et des caractères accentués.</p>",
-              "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Pour retrouver les caractères dont vous avez besoin, vous pouvez utiliser les indices. N’hésitez pas à réessayer.</p>"
+              "valid": {
+                "state": "Bonne réponse ! 🎉",
+                "diagnosis": "<p>Bravo ! 🦓 Vous savez utiliser le clavier pour taper des lettres, des espaces et des caractères accentués.</p>"
+              },
+              "invalid": {
+                "state": "Mauvaise réponse.",
+                "diagnosis": "<p>Pour retrouver les caractères dont vous avez besoin, vous pouvez utiliser les indices. N’hésitez pas à réessayer.</p>"
+              }
             }
           }
         },
@@ -314,13 +323,23 @@
                 "placeholder": "recopiez la phrase ",
                 "ariaLabel": "zone de saisie",
                 "defaultValue": "",
-                "tolerances": ["t1"],
-                "solutions": ["Coucou, peux-tu mettre ces 3 pommes à cet endroit ?"]
+                "tolerances": [
+                  "t1"
+                ],
+                "solutions": [
+                  "Coucou, peux-tu mettre ces 3 pommes à cet endroit ?"
+                ]
               }
             ],
             "feedbacks": {
-              "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🍏🍏🍏</span></span></p><p>Bravo, vous maîtrisez la touche majuscule ⇧.</p>",
-              "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse. <span aria-hidden=\"true\">🍎🍎🍎</span></span></p><p>Pour taper les caractères spéciaux, faites bien attention à leur position sur la touche. Elle vous indique si vous avez besoin d’utiliser la touche majuscule ⇧.</p>"
+              "valid": {
+                "state": "Bonne réponse ! \uD83C\uDF4F\uD83C\uDF4F\uD83C\uDF4F",
+                "diagnosis": "<p>Bravo, vous maîtrisez la touche majuscule ⇧.</p>"
+              },
+              "invalid": {
+                "state": "Mauvaise réponse. \uD83C\uDF4E\uD83C\uDF4E\uD83C\uDF4E",
+                "diagnosis": "<p>Pour taper les caractères spéciaux, faites bien attention à leur position sur la touche. Elle vous indique si vous avez besoin d’utiliser la touche majuscule ⇧.</p>"
+              }
             }
           }
         }

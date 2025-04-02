@@ -278,8 +278,14 @@
                     }
                   ],
                   "feedbacks": {
-                    "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🥒</span></span><br>Bravo ! Vous avez bien complété la phrase.</p>",
-                    "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse. <span aria-hidden=\"true\">🍽️</span></span><br>Bien tenté ! Mais la phrase n’est pas identique. Réessayez !</p>"
+                    "valid": {
+                      "state": "Bonne réponse ! 🥒",
+                      "diagnosis": "<p>Bravo ! Vous avez bien complété la phrase.</p>"
+                    },
+                    "invalid": {
+                      "state": "Mauvaise réponse. \uD83C\uDF7D\uFE0F",
+                      "diagnosis": "<p> Bien tenté ! Mais la phrase n’est pas identique. Réessayez !</p>"
+                    }
                   }
                 }
               ]
@@ -515,12 +521,20 @@
                       "ariaLabel": "Cliquer ici",
                       "defaultValue": "",
                       "tolerances": [],
-                      "solutions": ["céleri"]
+                      "solutions": [
+                        "céleri"
+                      ]
                     }
                   ],
                   "feedbacks": {
-                    "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span>&nbsp;<br></p>",
-                    "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><br>N'oubliez pas d'utiliser le e accentué.</p>"
+                    "valid": {
+                      "state": "Bonne réponse ! 🎉",
+                      "diagnosis": ""
+                    },
+                    "invalid": {
+                      "state": "Mauvaise réponse. ",
+                      "diagnosis": "<p>N'oubliez pas d'utiliser le e accentué.</p>"
+                    }
                   }
                 }
               ]
@@ -542,12 +556,20 @@
                       "ariaLabel": "Cliquer ici",
                       "defaultValue": "",
                       "tolerances": [],
-                      "solutions": ["pastèque"]
+                      "solutions": [
+                        "pastèque"
+                      ]
                     }
                   ],
                   "feedbacks": {
-                    "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p>",
-                    "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><br>N'oubliez pas d'utiliser le e accentué.</p>"
+                    "valid": {
+                      "state": "Bonne réponse ! 🎉",
+                      "diagnosis": ""
+                    },
+                    "invalid": {
+                      "state": "Mauvaise réponse.",
+                      "diagnosis": "<p>N'oubliez pas d'utiliser le e accentué.</p>"
+                    }
                   }
                 }
               ]
@@ -569,12 +591,20 @@
                       "ariaLabel": "Cliquer ici",
                       "defaultValue": "",
                       "tolerances": [],
-                      "solutions": ["bac à glaçons"]
+                      "solutions": [
+                        "bac à glaçons"
+                      ]
                     }
                   ],
                   "feedbacks": {
-                    "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p>",
-                    "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><br>N'oubliez pas d'utiliser les deux lettres accentuées.</p>"
+                    "valid": {
+                      "state": "Bonne réponse ! 🎉",
+                      "diagnosis": ""
+                    },
+                    "invalid": {
+                      "state": "Mauvaise réponse.",
+                      "diagnosis": "<p>N'oubliez pas d'utiliser les deux lettres accentuées.</p>"
+                    }
                   }
                 }
               ]
