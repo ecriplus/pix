@@ -31,6 +31,10 @@
   @include breakpoints.device-is('desktop') {
     max-width: 980px;
   }
+
+  @include breakpoints.device-is('mobile') {
+    margin:  0 0 var(--pix-spacing-4x);
+  }
 }
 
 .error-page__main-content {
@@ -49,6 +53,14 @@
     @extend %pix-title-m;
 
     padding-bottom: var(--pix-spacing-6x);
+
+    @include breakpoints.device-is('mobile') {
+      text-align: center;
+    }
+
+    @include breakpoints.device-is('tablet') {
+      text-align: center;
+    }
   }
 
   p {
