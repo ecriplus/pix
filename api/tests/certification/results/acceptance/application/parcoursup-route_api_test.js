@@ -1,11 +1,11 @@
 import {
-  createMaddoServer,
+  createServer,
   datamartBuilder,
   expect,
   generateValidRequestAuthorizationHeaderForApplication,
 } from '../../../../test-helper.js';
 
-describe('Certification | Results | Acceptance | Application | parcoursup-route', function () {
+describe('Certification | Results | Acceptance | Application | API | parcoursup-route', function () {
   let server,
     ine,
     organizationUai,
@@ -19,7 +19,7 @@ describe('Certification | Results | Acceptance | Application | parcoursup-route'
     certificationResultData;
 
   beforeEach(async function () {
-    server = await createMaddoServer();
+    server = await createServer();
 
     PARCOURSUP_CLIENT_ID = 'test-parcoursupClientId';
     PARCOURSUP_SCOPE = 'parcoursup';
