@@ -76,9 +76,9 @@ export default class LoginOidcRoute extends Route {
       const error = new JSONApiError(apiError.detail, apiError);
 
       const shouldUserCreateAnAccount = error.code === 'SHOULD_VALIDATE_CGU';
-      const { authenticationKey, email } = error.meta ?? {};
+      const { authenticationKey, userClaims } = error.meta ?? {};
       if (shouldUserCreateAnAccount && authenticationKey) {
-        return { shouldUserCreateAnAccount, authenticationKey, email, identityProviderSlug };
+        return { shouldUserCreateAnAccount, authenticationKey, email: userClaims.email, identityProviderSlug };
       }
 
       if (error.status === '403' && error.code === 'PIX_ADMIN_ACCESS_NOT_ALLOWED') {

@@ -164,7 +164,9 @@ module('Unit | Route | login-oidc', function (hooks) {
               authenticationKey: 'key',
               givenName: 'Mélusine',
               familyName: 'TITEGOUTTE',
-              email: 'melu@example.net',
+              userClaims: {
+                email: 'melu@example.net',
+              },
             },
           },
         ],
