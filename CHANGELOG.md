@@ -1,5 +1,34 @@
 # Pix Changelog
 
+## v5.77.0 (02/04/2025)
+
+
+### :rocket: Amélioration
+- [#11879](https://github.com/1024pix/pix/pull/11879) [FEATURE] Ajoute la validation sur le système de quêtes (PIX-17236).
+- [#11851](https://github.com/1024pix/pix/pull/11851) [FEATURE] [Pix Admin] Si la date de dernière connexion est vide afficher le message « Non connecté depuis 03/2025 » + renommer l’onglet « Méthodes de connexion » (PIX-17109).
+- [#11858](https://github.com/1024pix/pix/pull/11858) [FEATURE] Ne pas télécharger dans le zip des attestations les utilisateurs anonymisé ou anonyme (PIX-17222).
+- [#11880](https://github.com/1024pix/pix/pull/11880) [FEATURE] Afficher une page Attestations sur PixApp (Pix-17225).
+- [#11911](https://github.com/1024pix/pix/pull/11911) [FEATURE] Améliorer le style de la page de vérification de certif (PIX-17278).
+- [#11803](https://github.com/1024pix/pix/pull/11803) [FEATURE] Pix Junior - Limitation de la largeur du contenu affiché sur grand écran (PIX-16978).
+
+### :building_construction: Tech
+- [#11902](https://github.com/1024pix/pix/pull/11902) [TECH] Tests e2e de gestion des élèves sco avec Playwright.
+- [#11922](https://github.com/1024pix/pix/pull/11922) [TECH] Créer un feature toggle pour la nouvelle page d'analyse de campagne (PIX-17025).
+- [#11906](https://github.com/1024pix/pix/pull/11906) [TECH] Ajouter des élèves pour les seeds de Certif (cas sco managing student) (PIX-17252).
+- [#11843](https://github.com/1024pix/pix/pull/11843) [TECH] Eviter de re-déclencher les calculs pour déterminer la prochaine épreuve dans assessments/:id/next si la dernière épreuve proposée n'a pas encore été répondue.
+
+### :bug: Correction
+- [#11855](https://github.com/1024pix/pix/pull/11855) [BUGFIX] La tooltip au niveau du parcours dans les paramètres de campagne n'affiche pas les bonnes informations (PIX-17032).
+
+### :arrow_up: Montée de version
+- [#11930](https://github.com/1024pix/pix/pull/11930) [BUMP] Update dependency @1024pix/pix-ui to ^55.10.0 (certif).
+- [#11929](https://github.com/1024pix/pix/pull/11929) [BUMP] Update dependency @1024pix/pix-ui to ^55.10.0 (admin).
+- [#11923](https://github.com/1024pix/pix/pull/11923) [BUMP] Update dependency sinon to v20 (certif).
+- [#11925](https://github.com/1024pix/pix/pull/11925) [BUMP] Update dependency sinon to v20 (load-testing).
+- [#11924](https://github.com/1024pix/pix/pull/11924) [BUMP] Update dependency sinon to v20 (junior).
+- [#11918](https://github.com/1024pix/pix/pull/11918) [BUMP] Update dependency sinon to v20 (admin).
+- [#11919](https://github.com/1024pix/pix/pull/11919) [BUMP] Update dependency sinon to v20 (api).
+
 ## v5.76.0 (01/04/2025)
 
 
