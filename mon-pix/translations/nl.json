@@ -277,16 +277,16 @@
       "start-landing-page": {
         "steps": {
           "step1": {
-            "description": "Answer questions adapted to your level",
-            "title": "Pass test"
+            "description": "Vragen beantwoorden die zijn aangepast aan je niveau",
+            "title": "Beoordeel jezelf"
           },
           "step2": {
-            "description": "Discover your strengths and areas for improvement",
-            "title": "Discover your score"
+            "description": "Analyseer je sterke punten en verbeterpunten",
+            "title": "Ontdek je score"
           },
           "step3": {
-            "description": "Access training tailored to your results",
-            "title": "Make progress"
+            "description": "Toegang tot training afgestemd op jouw resultaten",
+            "title": "Vooruitgang boeken"
           }
         }
       }

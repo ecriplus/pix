@@ -277,16 +277,16 @@
       "start-landing-page": {
         "steps": {
           "step1": {
-            "description": "Answer questions adapted to your level",
-            "title": "Pass test"
+            "description": "Responde a preguntas adaptadas a tu nivel",
+            "title": "Evalúa tus habilidades"
           },
           "step2": {
-            "description": "Discover your strengths and areas for improvement",
-            "title": "Discover your score"
+            "description": "Analyza tus puntos fuertes y tus areas de mejora",
+            "title": "Descubre tus resultados"
           },
           "step3": {
-            "description": "Access training tailored to your results",
-            "title": "Make progress"
+            "description": "Accede a contenidos adaptados a tus resultados para progresar",
+            "title": "Mejora"
           }
         }
       }

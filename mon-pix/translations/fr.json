@@ -278,10 +278,10 @@
         "steps": {
           "step1": {
             "description": "Répondez à des questions qui s'adaptent à votre niveau",
-            "title": "Passez le test"
+            "title": "Évaluez-vous"
           },
           "step2": {
-            "description": "Découvrez vos forces et axes de progression",
+            "description": "Analysez vos forces et axes de progression",
             "title": "Découvrez votre score"
           },
           "step3": {
