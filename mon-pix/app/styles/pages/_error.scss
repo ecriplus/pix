@@ -49,18 +49,15 @@
     padding: var(--pix-spacing-6x) 0;
   }
 
+  @include breakpoints.device-is('mobile') {
+    padding: 0 0 var(--pix-spacing-4x);
+  }
+
   &__title {
     @extend %pix-title-m;
 
     padding-bottom: var(--pix-spacing-6x);
-
-    @include breakpoints.device-is('mobile') {
-      text-align: center;
-    }
-
-    @include breakpoints.device-is('tablet') {
-      text-align: center;
-    }
+    text-align: center;
   }
 
   p {
