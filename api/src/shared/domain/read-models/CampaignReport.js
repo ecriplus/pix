@@ -23,7 +23,9 @@ class CampaignReport {
     badges = [],
     stages = [],
     multipleSendings,
+    targetProfileName,
   } = {}) {
+    this.targetProfileName = targetProfileName;
     this.id = id;
     this.name = name;
     this.code = code;

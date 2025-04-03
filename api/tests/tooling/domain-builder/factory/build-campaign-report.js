@@ -18,6 +18,7 @@ const buildCampaignReport = function ({
   ownerFirstName = 'Un prénom',
   ownerLastName = 'Un nom',
   targetProfileId = 3,
+  targetProfileName = 'targetProfile',
   participationsCount = 5,
   sharedParticipationsCount = 2,
   averageResult = 0.4,
