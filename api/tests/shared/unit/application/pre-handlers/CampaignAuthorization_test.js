@@ -1,7 +1,7 @@
-import { CampaignAuthorization } from '../../../../../lib/application/preHandlers/models/CampaignAuthorization.js';
+import { CampaignAuthorization } from '../../../../../src/shared/application/pre-handlers/CampaignAuthorization.js';
 import { expect } from '../../../../test-helper.js';
 
-describe('Unit | Domain | models | CampaignAuthorization', function () {
+describe('Shared | Unit | Application | PreHandlers | CampaignAuthorization', function () {
   describe('#isAllowedToManage', function () {
     it('should be false if user is member of organization and not owner of the campaign', function () {
       // given
