@@ -39,6 +39,6 @@ export default {
     description: 'Used to enable new certification page for V3',
     type: 'boolean',
     defaultValue: false,
-    tags: ['frontend', 'team-certification'],
+    tags: ['frontend', 'pix-app', 'team-certification'],
   },
 };
