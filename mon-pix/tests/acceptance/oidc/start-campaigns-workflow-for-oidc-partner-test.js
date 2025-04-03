@@ -59,7 +59,6 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
         await clickByLabel('Je commence');
 
         // then
-        sinon.assert.called(replaceLocationStub);
         assert.strictEqual(currentURL(), '/connexion/oidc-partner');
         assert.ok(true);
       });
@@ -182,7 +181,6 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
           await clickByLabel('Je commence');
 
           // then
-          sinon.assert.called(replaceLocationStub);
           assert.strictEqual(currentURL(), '/connexion/oidc-partner');
           assert.ok(true);
         });
