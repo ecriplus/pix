@@ -45,6 +45,7 @@ const buildCampaignReport = function ({
     ownerFirstName,
     ownerLastName,
     targetProfileId,
+    targetProfileName,
     participationsCount,
     sharedParticipationsCount,
     averageResult,

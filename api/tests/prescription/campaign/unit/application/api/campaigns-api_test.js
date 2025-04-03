@@ -208,6 +208,7 @@ describe('Unit | API | Campaigns', function () {
       const organizationId = Symbol('organizationId');
       const page = Symbol('page');
       const meta = Symbol('meta');
+      const targetProfileName = Symbol('targetProfileName');
       const campaignInformation1 = domainBuilder.buildCampaignReport({
         id: 777,
         code: 'SOMETHING',
@@ -216,6 +217,7 @@ describe('Unit | API | Campaigns', function () {
         customLandingPageText: 'Rooooooooooooar',
         createdAt: new Date('2020-01-01'),
         archivedAt: new Date('2023-01-01'),
+        targetProfileName,
       });
       const campaignInformation2 = domainBuilder.buildCampaignReport({
         id: 666,
@@ -225,6 +227,7 @@ describe('Unit | API | Campaigns', function () {
         customLandingPageText: 'pshh pshh pshhh pshhh',
         createdAt: new Date('2020-01-01'),
         archivedAt: new Date('2023-01-01'),
+        targetProfileName,
       });
 
       const getCampaignStub = sinon.stub(usecases, 'findPaginatedFilteredOrganizationCampaigns');
@@ -243,6 +246,7 @@ describe('Unit | API | Campaigns', function () {
       expect(firstCampaignListItem.name).to.be.equal(campaignInformation1.name);
       expect(firstCampaignListItem.createdAt).to.be.equal(campaignInformation1.createdAt);
       expect(firstCampaignListItem.archivedAt).to.be.equal(campaignInformation1.archivedAt);
+      expect(firstCampaignListItem.targetProfileName).to.be.equal(targetProfileName);
     });
   });
 });
