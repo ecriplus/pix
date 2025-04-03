@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { generateCSVTemplate } from '../../../shared/infrastructure/serializers/csv/csv-template.js';
 import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
@@ -95,7 +94,7 @@ const updateOrganizationInformation = async function (
 const findPaginatedFilteredOrganizations = async function (request, h, dependencies = { organizationSerializer }) {
   const options = request.query;
 
-  const { models: organizations, pagination } = await libUsecases.findPaginatedFilteredOrganizations({
+  const { models: organizations, pagination } = await usecases.findPaginatedFilteredOrganizations({
     filter: options.filter,
     page: options.page,
   });
