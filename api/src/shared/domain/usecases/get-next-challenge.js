@@ -17,11 +17,17 @@ export async function getNextChallenge({
   await assessmentRepository.updateLastQuestionDate({ id: assessment.id, lastQuestionDate: new Date() });
 
   let nextChallenge = null;
-  const answers = await answerRepository.findByAssessment(assessment.id);
-  const waitingForLatestChallengeAnswer = checkIfLatestChallengeOfAssessmentIsAwaitingToBeAnswered({
-    answers,
-    lastChallengeId: assessment.lastChallengeId,
-  });
+  let waitingForLatestChallengeAnswer;
+  if (assessment.isCertification()) {
+    // Force executing the usecase because of the live alert system
+    waitingForLatestChallengeAnswer = false;
+  } else {
+    const answers = await answerRepository.findByAssessment(assessment.id);
+    waitingForLatestChallengeAnswer = checkIfLatestChallengeOfAssessmentIsAwaitingToBeAnswered({
+      answers,
+      lastChallengeId: assessment.lastChallengeId,
+    });
+  }
   if (waitingForLatestChallengeAnswer) {
     nextChallenge = await challengeRepository.get(assessment.lastChallengeId);
     if (nextChallenge.isOperative) {
