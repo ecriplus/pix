@@ -23,4 +23,10 @@ export default {
     defaultValue: false,
     tags: ['frontend', 'pix-orga', 'team-prescription'],
   },
+  isPixAdminNewSidebarEnabled: {
+    description: 'Display the new sidebar for Pix Admin',
+    type: 'boolean',
+    defaultValue: false,
+    tags: ['frontend', 'pix-admin'],
+  },
 };
