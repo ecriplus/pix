@@ -1,4 +1,5 @@
 import { clickByName, render as renderScreen, within } from '@1024pix/ember-testing-library';
+import dayjs from 'dayjs';
 import { t } from 'ember-intl/test-support';
 import hbs from 'htmlbars-inline-precompile';
 import { module, test } from 'qunit';
@@ -74,9 +75,13 @@ module('Integration | Component |  team/invitation-list', function (hooks) {
     // then
     const table = screen.getByRole('table', { name: t('pages.team-invitations.table.caption') });
     assert.dom(within(table).getByRole('cell', { name: 'camille.onette@example.net' })).exists();
-    assert.dom(within(table).getByRole('cell', { name: '21/09/2023 - 16:21' })).exists();
     assert.dom(within(table).getByRole('cell', { name: 'lee.tige@example.net' })).exists();
-    assert.dom(within(table).getByRole('cell', { name: '20/09/2023 - 16:21' })).exists();
+
+    const timeFormat = 'DD/MM/YYYY [-] HH:mm';
+    const TimeOfFirstInvitation = dayjs(invitation.updatedAt).format(timeFormat);
+    const TimeOfSecondInvitation = dayjs(secondInvitation.updatedAt).format(timeFormat);
+    assert.dom(within(table).getByRole('cell', { name: TimeOfFirstInvitation })).exists();
+    assert.dom(within(table).getByRole('cell', { name: TimeOfSecondInvitation })).exists();
   });
 
   module('when the user clicks on the cancel invitation button', function () {

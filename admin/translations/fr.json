@@ -675,13 +675,6 @@
             },
             "label": "phase test compatibilité Pix v3 / Pix+"
           },
-          "is-v3-pilot": {
-            "aria-label": {
-              "active": "Est pilote certification V3",
-              "inactive": "N'est pas pilote certification V3"
-            },
-            "label": "pilote certification V3"
-          },
           "title": "Fonctionnalités pilotes"
         }
       },

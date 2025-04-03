@@ -254,10 +254,6 @@ function _mapToHttpError(error) {
     return new HttpErrors.ForbiddenError(error.message, error.code);
   }
 
-  if (error instanceof SharedDomainErrors.CertificationCenterPilotFeaturesConflictError) {
-    return new HttpErrors.ForbiddenError(error.message, error.code);
-  }
-
   if (error instanceof SharedDomainErrors.AlreadyExistingEntityError) {
     return new HttpErrors.PreconditionFailedError(error.message, error.code, error.meta);
   }

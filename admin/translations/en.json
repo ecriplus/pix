@@ -675,13 +675,6 @@
             },
             "label": "Pix/Pix+ compatibility test phase"
           },
-          "is-v3-pilot": {
-            "aria-label": {
-              "active": "is V3 certification pilot",
-              "inactive": "is not V3 certification pilot"
-            },
-            "label": "V3 certification pilot"
-          },
           "title": "Pilot features"
         }
       },

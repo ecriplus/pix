@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import { CenterForAdmin } from '../../../../../src/certification/enrolment/domain/models/CenterForAdmin.js';
 import * as CertificationCenterForAdminRepository from '../../../../../src/organizational-entities/infrastructure/repositories/certification-center-for-admin.repository.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
@@ -39,7 +41,6 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       expect(savedCertificationCenter.id).to.exist;
       expect(savedCertificationCenter.name).to.equal(certificationCenterName);
       expect(savedCertificationCenter.type).to.equal(certificationCenterType);
-      expect(savedCertificationCenter.isV3Pilot).to.equal(true);
     });
   });
 
@@ -62,7 +63,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
       // then
       const updatedCertificationCenter = await knex('certification-centers').select().where({ id: center.id }).first();
-      expect(updatedCertificationCenter).to.deep.equal({
+      expect(_.omit(updatedCertificationCenter, 'isV3Pilot')).to.deep.equal({
         ...center,
         name: 'Great Oak Certification Center',
         updatedAt: updatedCertificationCenter.updatedAt,

@@ -12,7 +12,6 @@ const deserialize = function ({ data }) {
     id: data.id,
     name: data.attributes.name,
     type: data.attributes.type,
-    isV3Pilot: data.attributes['is-v3-pilot'],
     isComplementaryAlonePilot: data.attributes['is-complementary-alone-pilot'],
   };
   const dataProtectionOfficer = {
@@ -39,7 +38,6 @@ const serialize = function (certificationCenter, certificationCenterPilotFeature
       'dataProtectionOfficerLastName',
       'dataProtectionOfficerEmail',
       'habilitations',
-      'isV3Pilot',
       'isComplementaryAlonePilot',
     ],
     typeForAttribute: (attribute) => {

@@ -76,7 +76,6 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
     externalId,
     createdAt: new Date('2022-01-30'),
     habilitations: [],
-    isV3Pilot: true,
   });
 
   const certificationCenterForAdmin = await organizationalEntitiesUsecases.createCertificationCenter({

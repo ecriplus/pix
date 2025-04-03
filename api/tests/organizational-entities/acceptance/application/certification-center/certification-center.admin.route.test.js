@@ -179,7 +179,6 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
                 name: 'Nouveau Centre de Certif',
                 type: 'SCO',
                 'data-protection-officer-email': 'adrienne.quepourra@example.net',
-                'is-v3-pilot': true,
               },
               relationships: {
                 habilitations: {
@@ -201,7 +200,6 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
         expect(response.result.data.attributes['data-protection-officer-email']).to.equal(
           'adrienne.quepourra@example.net',
         );
-        expect(response.result.data.attributes['is-v3-pilot']).to.equal(true);
         expect(response.result.data.id).to.be.ok;
       });
     });
@@ -292,7 +290,6 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
               'data-protection-officer-first-name': undefined,
               'data-protection-officer-last-name': undefined,
               'data-protection-officer-email': undefined,
-              'is-v3-pilot': false,
               'is-complementary-alone-pilot': false,
             },
             relationships: {
@@ -379,7 +376,6 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
                 'data-protection-officer-first-name': 'Justin',
                 'data-protection-officer-last-name': 'Ptipeu',
                 'data-protection-officer-email': 'justin.ptipeu@example.net',
-                'is-v3-pilot': true,
                 name: 'Justin Ptipeu Orga',
                 type: 'PRO',
               },
@@ -393,7 +389,6 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
         expect(result.data.attributes['data-protection-officer-first-name']).to.equal('Justin');
         expect(result.data.attributes['data-protection-officer-last-name']).to.equal('Ptipeu');
         expect(result.data.attributes['data-protection-officer-email']).to.equal('justin.ptipeu@example.net');
-        expect(result.data.attributes['is-v3-pilot']).to.equal(true);
         expect(result.data.attributes.name).to.equal('Justin Ptipeu Orga');
       });
     });

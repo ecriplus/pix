@@ -85,7 +85,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
 
         beforeEach(async function () {
           const user = databaseBuilder.factory.buildUser({ id: userId });
-          const certificationCenterId = databaseBuilder.factory.buildCertificationCenter({ isV3Pilot: true }).id;
+          const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
           const sessionId = databaseBuilder.factory.buildSession({
             certificationCenterId,
             version: SESSIONS_VERSIONS.V3,
@@ -202,7 +202,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
       context('When resuming certification session after leaving', function () {
         it('should return the last challenge the user has seen before leaving the session', async function () {
           const user = databaseBuilder.factory.buildUser({ id: userId });
-          const certificationCenterId = databaseBuilder.factory.buildCertificationCenter({ isV3Pilot: true }).id;
+          const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
           const sessionId = databaseBuilder.factory.buildSession({
             certificationCenterId,
             version: SESSIONS_VERSIONS.V3,
@@ -257,7 +257,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
       context('When resuming certification session after leaving', function () {
         it('should return the last challenge the user has seen before leaving the session', async function () {
           const user = databaseBuilder.factory.buildUser({ id: userId });
-          const certificationCenterId = databaseBuilder.factory.buildCertificationCenter({ isV3Pilot: true }).id;
+          const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
           const sessionId = databaseBuilder.factory.buildSession({
             certificationCenterId,
           }).id;

@@ -12,7 +12,6 @@ class CenterForAdmin {
    * @param {Date} params.center.createdAt
    * @param {Date} params.center.updatedAt
    * @param {boolean} params.center.isComplementaryAlonePilot
-   * @param {boolean} params.center.isV3Pilot
    * @param {string} params.dataProtectionOfficer.firstName
    * @param {string} params.dataProtectionOfficer.lastName
    * @param {string} params.dataProtectionOfficer.email
@@ -26,7 +25,6 @@ class CenterForAdmin {
     this.createdAt = center.createdAt;
     this.updatedAt = center.updatedAt;
     this.isComplementaryAlonePilot = center.isComplementaryAlonePilot;
-    this.isV3Pilot = center.isV3Pilot;
     this.dataProtectionOfficerFirstName = dataProtectionOfficer.firstName;
     this.dataProtectionOfficerLastName = dataProtectionOfficer.lastName;
     this.dataProtectionOfficerEmail = dataProtectionOfficer.email;

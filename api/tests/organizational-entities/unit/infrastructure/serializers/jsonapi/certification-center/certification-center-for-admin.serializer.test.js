@@ -19,7 +19,6 @@ describe('Unit | Organizational Entities | Infrastructure | Serializer | JSONAPI
           'data-protection-officer-first-name': 'Justin',
           'data-protection-officer-last-name': 'Ptipeu',
           'data-protection-officer-email': 'justin.ptipeu@example.net',
-          'is-v3-pilot': false,
           'is-complementary-alone-pilot': false,
         },
         relationships: {},
@@ -33,7 +32,6 @@ describe('Unit | Organizational Entities | Infrastructure | Serializer | JSONAPI
       externalId: '12345',
       createdAt: null,
       habilitations: [],
-      isV3Pilot: false,
       isComplementaryAlonePilot: false,
     };
 
@@ -81,7 +79,6 @@ describe('Unit | Organizational Entities | Infrastructure | Serializer | JSONAPI
 
         // then
         certificationCenterJsonApi.data.attributes['created-at'] = new Date('2018-01-01T05:43:10Z');
-        certificationCenterJsonApi.data.attributes['is-v3-pilot'] = false;
         certificationCenterJsonApi.data.relationships = {
           'certification-center-memberships': {
             links: {
@@ -117,7 +114,6 @@ describe('Unit | Organizational Entities | Infrastructure | Serializer | JSONAPI
     describe('#deserialize', function () {
       it('should convert a JSON API data into a CertificationCenterForAdmin model object', function () {
         // when
-        certificationCenterJsonApi.data.attributes['is-v3-pilot'] = true;
         const deserializedCertificationCenterForAdmin = serializer.deserialize(certificationCenterJsonApi);
 
         // then
@@ -125,7 +121,6 @@ describe('Unit | Organizational Entities | Infrastructure | Serializer | JSONAPI
           center: {
             ...centerForAdmin,
             id: '123',
-            isV3Pilot: true,
           },
           dataProtectionOfficer,
         });
@@ -147,7 +142,6 @@ describe('Unit | Organizational Entities | Infrastructure | Serializer | JSONAPI
             ...centerForAdmin,
             createdAt: new Date('2018-01-01T05:43:10Z'),
             habilitations: [complementaryCertification],
-            isV3Pilot: true,
           },
           dataProtectionOfficer,
         });
@@ -157,7 +151,6 @@ describe('Unit | Organizational Entities | Infrastructure | Serializer | JSONAPI
 
         // then
         certificationCenterJsonApi.data.attributes['created-at'] = new Date('2018-01-01T05:43:10Z');
-        certificationCenterJsonApi.data.attributes['is-v3-pilot'] = true;
         certificationCenterJsonApi.data.relationships = {
           'certification-center-memberships': {
             links: {

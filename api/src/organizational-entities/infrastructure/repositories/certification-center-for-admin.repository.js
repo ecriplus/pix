@@ -7,7 +7,6 @@ const save = async function (certificationCenter) {
     name: certificationCenter.name,
     type: certificationCenter.type,
     externalId: certificationCenter.externalId,
-    isV3Pilot: true,
   });
   return _toDomain(certificationCenterCreated);
 };
@@ -36,7 +35,6 @@ function _toDomain(certificationCenterDTO) {
       createdAt: certificationCenterDTO.createdAt,
       updatedAt: certificationCenterDTO.updatedAt,
       isComplementaryAlonePilot: undefined,
-      isV3Pilot: certificationCenterDTO.isV3Pilot,
     },
   });
 }

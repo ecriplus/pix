@@ -38,10 +38,7 @@ export default class EnrolledCandidates extends Component {
   @tracked showNewCandidateModal = false;
 
   get shouldDisplayAccessibilityAdjustmentNeededFeature() {
-    return (
-      this.currentUser.currentAllowedCertificationCenterAccess.isV3Pilot &&
-      this.featureToggles.featureToggles?.isNeedToAdjustCertificationAccessibilityEnabled
-    );
+    return this.featureToggles.featureToggles?.isNeedToAdjustCertificationAccessibilityEnabled;
   }
 
   get caption() {

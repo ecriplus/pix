@@ -35,14 +35,6 @@ export default class InformationView extends Component {
   }
 
   get availablePilotFeatures() {
-    const isV3Pilot = this.args.certificationCenter.isV3Pilot;
-    const isV3PilotLabel = this.intl.t('pages.certification-centers.information-view.pilot-features.is-v3-pilot.label');
-    const isV3PilotAriaLabel = this.intl.t(
-      `pages.certification-centers.information-view.pilot-features.is-v3-pilot.aria-label.${
-        isV3Pilot ? 'active' : 'inactive'
-      }`,
-    );
-
     const isComplementaryAlonePilot = this.args.certificationCenter.isComplementaryAlonePilot;
     const isComplementaryAlonePilotLabel = this.intl.t(
       'pages.certification-centers.information-view.pilot-features.is-complementary-alone-pilot.label',
@@ -54,7 +46,6 @@ export default class InformationView extends Component {
     );
 
     return [
-      { isPilot: isV3Pilot, label: isV3PilotLabel, ariaLabel: isV3PilotAriaLabel },
       {
         isPilot: isComplementaryAlonePilot,
         label: isComplementaryAlonePilotLabel,
