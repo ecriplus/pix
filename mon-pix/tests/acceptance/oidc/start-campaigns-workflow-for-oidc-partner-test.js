@@ -60,7 +60,6 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
 
         // then
         assert.strictEqual(currentURL(), '/connexion/oidc-partner');
-        assert.ok(true);
       });
 
       test('should redirect to login or register oidc page', async function (assert) {
@@ -182,7 +181,6 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
 
           // then
           assert.strictEqual(currentURL(), '/connexion/oidc-partner');
-          assert.ok(true);
         });
       });
     });
