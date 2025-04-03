@@ -278,10 +278,10 @@
         "steps": {
           "step1": {
             "description": "Answer questions adapted to your level",
-            "title": "Pass test"
+            "title": "Test yourself"
           },
           "step2": {
-            "description": "Discover your strengths and areas for improvement",
+            "description": "Analyze your strengths and areas for improvement",
             "title": "Discover your score"
           },
           "step3": {
@@ -1956,7 +1956,7 @@
           },
           "shared-results-modal": {
             "return-results-action": "Close and return to results",
-            "subtitle": "Ready to expand your knowledge? 🎓",
+            "subtitle": "Ready to expand your skills? 🎓",
             "title": "Shared results"
           },
           "tab-label": "Trainings",
