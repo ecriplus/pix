@@ -35,4 +35,10 @@ export default {
     defaultValue: false,
     tags: ['frontend', 'pix-app'],
   },
+  isV3CertificationPageEnabled: {
+    description: 'Used to enable new certification page for V3',
+    type: 'boolean',
+    defaultValue: false,
+    tags: ['frontend', 'team-certification'],
+  },
 };
