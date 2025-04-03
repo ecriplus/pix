@@ -1,5 +1,23 @@
 # Pix Changelog
 
+## v5.79.0 (03/04/2025)
+
+
+### :rocket: Amélioration
+- [#11937](https://github.com/1024pix/pix/pull/11937) [FEATURE] Améliorer Design et traductions page de début / fin de parcours(PIX-17263)(PIX-17288).
+
+### :building_construction: Tech
+- [#11921](https://github.com/1024pix/pix/pull/11921) [TECH] Corrige les tests n'utilisant pas correctement l'assert throw.
+
+### :bug: Correction
+- [#11915](https://github.com/1024pix/pix/pull/11915) [BUGFIX] Réparer les tables des listes de sessions (PIX-17279).
+
+### :arrow_up: Montée de version
+- [#11947](https://github.com/1024pix/pix/pull/11947) [BUMP] Update dependency sinon to v20 (orga).
+
+### :coffee: Autre
+- [#11938](https://github.com/1024pix/pix/pull/11938) FEATURE - modif clavier 1 & 2 : ajout des fiches de revisions .
+
 ## v5.78.0 (03/04/2025)
 
 
