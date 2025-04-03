@@ -1,6 +1,5 @@
 import Joi from 'joi';
 
-import { organizationController } from '../../../../lib/application/organizations/organization-controller.js';
 import { BadRequestError, PayloadTooLargeError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { MAX_FILE_SIZE_UPLOAD } from '../../../shared/domain/constants.js';
@@ -49,7 +48,7 @@ const register = async function (server) {
             return sendJsonApiError(new BadRequestError('Un des champs de recherche saisis est invalide.'), h);
           },
         },
-        handler: organizationController.findPaginatedFilteredOrganizations,
+        handler: organizationAdminController.findPaginatedFilteredOrganizations,
         tags: ['api', 'organizations'],
         notes: [
           "- **Cette route est restreinte aux utilisateurs authentifiés ayant un rôle permettant un accès à l'admin de Pix**\n" +

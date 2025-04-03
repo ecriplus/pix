@@ -1,4 +1,3 @@
-import { organizationController } from '../../../../../lib/application/organizations/organization-controller.js';
 import { organizationAdminController } from '../../../../../src/organizational-entities/application/organization/organization.admin.controller.js';
 import * as organizationAdminRoutes from '../../../../../src/organizational-entities/application/organization/organization.admin.route.js';
 import {
@@ -39,7 +38,7 @@ describe('Integration | Organizational Entities | Application | Route | Admin | 
         sinon
           .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
           .returns((request, h) => h.response().code(403).takeover());
-        sinon.stub(organizationController, 'findPaginatedFilteredOrganizations').returns('ok');
+        sinon.stub(organizationAdminController, 'findPaginatedFilteredOrganizations').returns('ok');
 
         // when
         const response = await httpTestServer.request(method, url);
