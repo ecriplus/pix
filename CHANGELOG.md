@@ -1,5 +1,30 @@
 # Pix Changelog
 
+## v5.78.0 (03/04/2025)
+
+
+### :rocket: Amélioration
+- [#11916](https://github.com/1024pix/pix/pull/11916) [FEATURE] Splitter le diagnostic et le constat d'un feedback (PIX-16579).
+- [#11866](https://github.com/1024pix/pix/pull/11866) [FEATURE] Revoir le design de la page d'erreur (PIX-17054).
+- [#11914](https://github.com/1024pix/pix/pull/11914) [FEATURE] Ajustements des marges et couleurs de fond après la mise à jour de la nav du Pix -Admin (PIX-17276).
+- [#11928](https://github.com/1024pix/pix/pull/11928) [FEATURE] Ajouter les attributs d'archivage d'un centre de certification (PIX-16748).
+
+### :building_construction: Tech
+- [#11945](https://github.com/1024pix/pix/pull/11945) [TECH] Ajouter les routes parcoursup dans l'API Maddo (PIX-17321).
+
+### :bug: Correction
+- [#11939](https://github.com/1024pix/pix/pull/11939) [BUGFIX] MaDDo - Ne pas échouer la réplication si une nouvelle colonne est ajoutée dans la table source.
+- [#11876](https://github.com/1024pix/pix/pull/11876) [BUGFIX] Ajout d'un script pour finaliser des sessions pas entièrement finalisées (PIX-16785).
+
+### :arrow_up: Montée de version
+- [#11946](https://github.com/1024pix/pix/pull/11946) [BUMP] Update dependency sinon to v20 (mon-pix).
+- [#11944](https://github.com/1024pix/pix/pull/11944) [BUMP] Update dependency @1024pix/pix-ui to ^55.11.0 (orga).
+- [#11942](https://github.com/1024pix/pix/pull/11942) [BUMP] Update dependency @1024pix/pix-ui to ^55.11.0 (junior).
+- [#11941](https://github.com/1024pix/pix/pull/11941) [BUMP] Update dependency @1024pix/pix-ui to ^55.11.0 (certif).
+- [#11940](https://github.com/1024pix/pix/pull/11940) [BUMP] Update dependency @1024pix/pix-ui to ^55.11.0 (admin).
+- [#11932](https://github.com/1024pix/pix/pull/11932) [BUMP] Update dependency @1024pix/pix-ui to ^55.10.0 (junior).
+- [#11933](https://github.com/1024pix/pix/pull/11933) [BUMP] Update dependency @1024pix/pix-ui to ^55.10.0 (mon-pix).
+
 ## v5.77.0 (02/04/2025)
 
 
