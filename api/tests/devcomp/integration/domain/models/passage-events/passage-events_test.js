@@ -12,7 +12,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | passage-eve
       const id = Symbol('id');
       const occurredAt = Symbol('date');
       const createdAt = Symbol('date');
-      const passageId = Symbol('passage');
+      const passageId = 1234;
       const contentHash = Symbol('contentHash');
 
       // when
@@ -34,7 +34,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | passage-eve
         const id = Symbol('id');
         const occurredAt = Symbol('date');
         const createdAt = Symbol('date');
-        const passageId = Symbol('passage');
+        const passageId = 1234;
 
         // when
         const error = catchErrSync(() => new PassageStartedEvent({ id, occurredAt, createdAt, passageId }))();
@@ -52,7 +52,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | passage-eve
       const id = Symbol('id');
       const occurredAt = Symbol('date');
       const createdAt = Symbol('date');
-      const passageId = Symbol('passage');
+      const passageId = 1234;
 
       // when
       const passageTerminatedEvent = new PassageTerminatedEvent({ id, occurredAt, createdAt, passageId });
