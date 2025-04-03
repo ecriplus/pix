@@ -1550,8 +1550,11 @@
         "button": "Create my account",
         "description": "An account will be created based on the information sent by the organisation",
         "information": {
-          "family-name": "Last name  : {familyName}",
-          "given-name": "First name : {givenName}"
+          "employeeNumber": "Employee number :",
+          "error": "We were unable to retrieve your identity information from the service used. We invite you to contact this organisation's IT support.",
+          "firstName": "First name :",
+          "lastName": "Last name :",
+          "population": "Population :"
         },
         "title": "Sign up"
       },
