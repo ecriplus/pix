@@ -1,5 +1,23 @@
 # Pix Changelog
 
+## v5.80.0 (03/04/2025)
+
+
+### :rocket: Amélioration
+- [#11861](https://github.com/1024pix/pix/pull/11861) [FEATURE] Modifier l'interface de la double mire SSO pour inclure toutes les données récupérées des utilisateurs (PIX-16303).
+
+### :building_construction: Tech
+- [#11936](https://github.com/1024pix/pix/pull/11936) [TECH] Créer une migration pour supprimer la contrainte userId et snappedAt dans la table knowledge-element-snapshots et rendre ces 2 colones nullables (PIX-17211).
+- [#11953](https://github.com/1024pix/pix/pull/11953) [TECH] Migrer les feature toggles des layouts vers le nouveau système (PIX-17339).
+- [#11900](https://github.com/1024pix/pix/pull/11900) [TECH] :truck: Déplacement du `preHandler`  `CampaignAuthorization` vers `src/shared/`.
+
+### :bug: Correction
+- [#11958](https://github.com/1024pix/pix/pull/11958) [BUGFIX] Corriger la sélection de question lorsqu'une alerte est levée (PIX-17349).
+
+### :arrow_up: Montée de version
+- [#11943](https://github.com/1024pix/pix/pull/11943) [BUMP] Update dependency @1024pix/pix-ui to ^55.11.0 (mon-pix).
+- [#11949](https://github.com/1024pix/pix/pull/11949) [BUMP] Update dependency @1024pix/pix-ui to ^55.11.1 (admin).
+
 ## v5.79.0 (03/04/2025)
 
 
