@@ -1,9 +1,9 @@
-import { CenterForAdmin } from '../../../../../../../src/certification/enrolment/domain/models/CenterForAdmin.js';
-import { CenterForAdminFactory } from '../../../../../../../src/certification/enrolment/domain/models/factories/CenterForAdminFactory.js';
-import { Habilitation } from '../../../../../../../src/certification/enrolment/domain/models/Habilitation.js';
-import { domainBuilder, expect } from '../../../../../../test-helper.js';
+import { Habilitation } from '../../../../../../src/certification/enrolment/domain/models/Habilitation.js';
+import { CenterForAdmin } from '../../../../../../src/organizational-entities/domain/models/CenterForAdmin.js';
+import { CenterForAdminFactory } from '../../../../../../src/organizational-entities/domain/models/factories/CenterForAdminFactory.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
-describe('Unit | Certification | Enrolment | Domain | Models | Factories | CenterForAdminFactory', function () {
+describe('Unit | Organizational Entities | Domain | Models | Factories | CenterForAdminFactory', function () {
   it('should build a Center for admin', function () {
     // given
     const habilitation = { complementaryCertificationId: 12, key: 'A_KEY', label: 'This is a key' };

@@ -2,7 +2,7 @@ import jsonapiSerializer from 'jsonapi-serializer';
 
 const { Serializer } = jsonapiSerializer;
 
-import { CenterForAdmin } from '../../../../../certification/enrolment/domain/models/CenterForAdmin.js';
+import { CenterForAdmin } from '../../../../domain/models/CenterForAdmin.js';
 
 const deserialize = function ({ data }) {
   const center = {

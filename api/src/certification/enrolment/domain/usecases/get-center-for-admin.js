@@ -1,9 +1,9 @@
 /**
  * @typedef {import('./index.js').CenterRepository} CenterRepository
- * @typedef {import('../models/CenterForAdmin.js').CenterForAdmin} CenterForAdmin
+ * @typedef {import('../../../../organizational-entities/domain/models/CenterForAdmin.js').CenterForAdmin} CenterForAdmin
  */
 
-import { CenterForAdminFactory } from '../models/factories/CenterForAdminFactory.js';
+import { CenterForAdminFactory } from '../../../../organizational-entities/domain/models/factories/CenterForAdminFactory.js';
 
 /**
  * @param {Object} params

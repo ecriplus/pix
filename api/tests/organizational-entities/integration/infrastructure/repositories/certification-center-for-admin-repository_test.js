@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { CenterForAdmin } from '../../../../../src/certification/enrolment/domain/models/CenterForAdmin.js';
+import { CenterForAdmin } from '../../../../../src/organizational-entities/domain/models/CenterForAdmin.js';
 import * as CertificationCenterForAdminRepository from '../../../../../src/organizational-entities/infrastructure/repositories/certification-center-for-admin.repository.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
