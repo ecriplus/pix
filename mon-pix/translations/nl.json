@@ -342,6 +342,11 @@
       "tutorials": "Mijn tutorials"
     },
     "mobile-button-title": "Open het menu",
+    "nav-bar": {
+      "aria-label": "hoofdnavigatie",
+      "close": "Sluit de navigatie",
+      "open": "Open navigatie"
+    },
     "not-logged": {
       "sign-in": "Inloggen",
       "sign-up": "Meld je nu aan"
