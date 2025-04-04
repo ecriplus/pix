@@ -1,7 +1,7 @@
 {{! template-lint-disable no-redundant-fn }}
 {{#if @certification.date}}
   <div class="user-certifications-detail-header">
-    <UserCertificationsHexagonScore @score={{@certification.pixScore}} />
+    <Certifications::UserCertificationsHexagonScore @score={{@certification.pixScore}} />
     <div class="user-certifications-detail-header__info-certificate">
       <h1>{{t "pages.certificate.title"}}</h1>
 
