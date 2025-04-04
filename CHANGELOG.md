@@ -1,5 +1,15 @@
 # Pix Changelog
 
+## v5.81.0 (04/04/2025)
+
+
+### :building_construction: Tech
+- [#11931](https://github.com/1024pix/pix/pull/11931) [TECH] Suppression de isV3Pilot (PIX-16602).
+
+### :arrow_up: Montée de version
+- [#11968](https://github.com/1024pix/pix/pull/11968) [BUMP] Update dependency @1024pix/pix-ui to ^55.12.0 (orga).
+- [#11956](https://github.com/1024pix/pix/pull/11956) [BUMP] Update dependency @1024pix/pix-ui to ^55.12.0 (junior).
+
 ## v5.80.0 (03/04/2025)
 
 
