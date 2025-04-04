@@ -339,7 +339,7 @@
       "skills": "Compétences",
       "start-certification": "Certification",
       "trainings": "Mes formations",
-      "tutorials": "Mes tutos"
+      "tutorials": "Mes tutoriels"
     },
     "mobile-button-title": "Ouvrir le menu",
     "nav-bar": {
@@ -2224,7 +2224,7 @@
         "reset-aria-label": "Réinitialiser et désélectionner tous les filtres",
         "see-results": "Voir les résultats"
       },
-      "title": "Tutoriels"
+      "title": "Mes tutoriels"
     }
   }
 }
