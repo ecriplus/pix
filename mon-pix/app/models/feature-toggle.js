@@ -7,4 +7,5 @@ export default class FeatureToggle extends Model {
   @attr('boolean') isPixCompanionEnabled;
   @attr('boolean') isQuestEnabled;
   @attr('boolean') isResultsSharedModalEnabled;
+  @attr('boolean') isV3CertificationPageEnabled;
 }

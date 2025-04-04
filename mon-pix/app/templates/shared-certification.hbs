@@ -2,6 +2,10 @@
 
 <Global::AppLayout>
   <main id="main" class="global-page-container" role="main">
-    <Certifications::Shared::v2Certification @model={{this.model}} />
+    {{#if this.displayV3CertificationShared}}
+      <Certifications::Shared::v3Certification @certification={{this.model}} />
+    {{else}}
+      <Certifications::Shared::v2Certification @model={{this.model}} />
+    {{/if}}
   </main>
 </Global::AppLayout>
