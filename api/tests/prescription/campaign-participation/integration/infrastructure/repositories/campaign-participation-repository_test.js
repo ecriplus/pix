@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
- import * as knowledgeElementSnapshotAPI from '../../../../../../src/prescription/campaign/application/api/knowledge-element-snapshots-api.js';
+import * as knowledgeElementSnapshotAPI from '../../../../../../src/prescription/campaign/application/api/knowledge-element-snapshots-api.js';
 import { CampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipation.js';
 import { AvailableCampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/read-models/AvailableCampaignParticipation.js';
 import * as campaignParticipationRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
