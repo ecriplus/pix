@@ -1,5 +1,16 @@
 # Pix Changelog
 
+## v5.82.0 (04/04/2025)
+
+
+### :rocket: Amélioration
+- [#11934](https://github.com/1024pix/pix/pull/11934) [FEATURE] Autoriser un participant avec une participation précédente supprimée à re-participer (PIX-15809).
+- [#11935](https://github.com/1024pix/pix/pull/11935) [FEATURE] Ne pas afficher l'heure sur les dates de dernier accès dans PIX Admin (PIX-17281).
+
+### :bug: Correction
+- [#11802](https://github.com/1024pix/pix/pull/11802) [BUGFIX] Pix Junior - Affichage des puces sur la liste des objectifs d'une mission (PIX-16943).
+- [#11957](https://github.com/1024pix/pix/pull/11957) [BUGFIX] Réparer les réplications parcoursup.
+
 ## v5.81.0 (04/04/2025)
 
 
