@@ -51,9 +51,7 @@ module('Integration | Component |  certification-centers/membership-item', funct
       );
 
       // then
-      const expectedLastAccessDate = dayjs(certificationCenterMembership.lastAccessedAt).format(
-        'DD-MM-YYYY - HH:mm:ss',
-      );
+      const expectedLastAccessedAtDate = dayjs(certificationCenterMembership.lastAccessedAt).format('DD-MM-YYYY');
       const expectedCreationDate = dayjs(certificationCenterMembership.createdAt).format('DD-MM-YYYY - HH:mm:ss');
 
       assert.dom(screen.getByRole('link', { name: certificationCenterMembership.id })).exists();
@@ -61,7 +59,7 @@ module('Integration | Component |  certification-centers/membership-item', funct
       assert.dom(screen.getByRole('cell', { name: user.lastName })).exists();
       assert.dom(screen.getByRole('cell', { name: user.email })).exists();
       assert.dom(screen.getByRole('cell', { name: 'Membre' })).exists();
-      assert.dom(screen.getByRole('cell', { name: expectedLastAccessDate })).exists();
+      assert.dom(screen.getByRole('cell', { name: expectedLastAccessedAtDate })).exists();
       assert.dom(screen.getByRole('cell', { name: expectedCreationDate })).exists();
       assert.dom(screen.getByRole('button', { name: 'Modifier le rôle' })).exists();
       assert.dom(screen.getByRole('button', { name: 'Désactiver' })).exists();

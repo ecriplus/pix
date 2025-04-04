@@ -13,7 +13,7 @@ export default class MemberItem extends Component {
     if (!this.args.organizationMembership.lastAccessedAt) {
       return this.intl.t('components.organizations.member-items.no-last-connection-date-info');
     }
-    return dayjs(this.args.organizationMembership.lastAccessedAt).format('DD/MM/YYYY HH:mm');
+    return dayjs(this.args.organizationMembership.lastAccessedAt).format('DD/MM/YYYY');
   }
 
   <template>
