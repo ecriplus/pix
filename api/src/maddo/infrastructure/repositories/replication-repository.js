@@ -7,7 +7,6 @@ export const replications = [
     from: ({ datawarehouseKnex }) => {
       return datawarehouseKnex('data_export_parcoursup_certif_result').select(
         'national_student_id',
-        'national_student_id',
         'organization_uai',
         'last_name',
         'first_name',
@@ -16,7 +15,6 @@ export const replications = [
         'pix_score',
         'certification_date',
         'competence_level',
-        'organization_uai',
         'competence_name',
         'competence_code',
         'area_name',
@@ -34,7 +32,8 @@ export const replications = [
     },
     from: ({ datawarehouseKnex }) => {
       return datawarehouseKnex('data_export_parcoursup_certif_result').select(
-        'certification_code_verification',
+        'national_student_id',
+        'organization_uai',
         'last_name',
         'first_name',
         'birthdate',
@@ -42,13 +41,10 @@ export const replications = [
         'pix_score',
         'certification_date',
         'competence_level',
-        'certification_code_verification',
         'competence_name',
         'competence_code',
         'area_name',
         'certification_courses_id',
-        'national_student_id',
-        'organization_uai',
       );
     },
     to: ({ datamartKnex }, chunk) => {
@@ -62,9 +58,7 @@ export const replications = [
     },
     from: ({ datawarehouseKnex }) => {
       return datawarehouseKnex('data_export_parcoursup_certif_result_code_validation').select(
-        'national_student_id',
-        'national_student_id',
-        'organization_uai',
+        'certification_code_verification',
         'last_name',
         'first_name',
         'birthdate',
@@ -72,7 +66,6 @@ export const replications = [
         'pix_score',
         'certification_date',
         'competence_level',
-        'organization_uai',
         'competence_name',
         'competence_code',
         'area_name',
@@ -98,13 +91,10 @@ export const replications = [
         'pix_score',
         'certification_date',
         'competence_level',
-        'certification_code_verification',
         'competence_name',
         'competence_code',
         'area_name',
         'certification_courses_id',
-        'national_student_id',
-        'organization_uai',
       );
     },
     to: ({ datamartKnex }, chunk) => {
