@@ -22,6 +22,7 @@ export function stubSessionService(owner, sessionData = {}) {
   const userIdForLearnerAssociation = sessionData.userIdForLearnerAssociation;
   const userId = isAuthenticated ? sessionData.userId || 123 : null;
   const source = isAuthenticated ? sessionData.source || 'pix' : null;
+  const identityProviderCode = sessionData.identityProviderCode;
 
   class SessionStub extends Service {
     constructor() {
@@ -34,6 +35,10 @@ export function stubSessionService(owner, sessionData = {}) {
         this.data = {
           authenticated: { user_id: userId, source, access_token: 'access_token!' },
         };
+
+        if (identityProviderCode) {
+          Object.assign(this.data.authenticated, { identityProviderCode });
+        }
       } else {
         this.data = {};
       }
