@@ -38,8 +38,6 @@ const updateWithSnapshot = async function (campaignParticipation) {
     limitDate: campaignParticipation.sharedAt,
   });
   await knowledgeElementSnapshotRepository.save({
-    userId: campaignParticipation.userId,
-    snappedAt: campaignParticipation.sharedAt,
     snapshot: new KnowledgeElementCollection(knowledgeElements).toSnapshot(),
     campaignParticipationId: campaignParticipation.id,
   });

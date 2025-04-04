@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import * as knowledgeElementSnapshotAPI from '../../../../../../src/prescription/campaign/application/api/knowledge-element-snapshots-api.js';
+ import * as knowledgeElementSnapshotAPI from '../../../../../../src/prescription/campaign/application/api/knowledge-element-snapshots-api.js';
 import { CampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipation.js';
 import { AvailableCampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/read-models/AvailableCampaignParticipation.js';
 import * as campaignParticipationRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
@@ -155,8 +155,6 @@ describe('Integration | Repository | Campaign Participation', function () {
         });
         const knowledgeElementsBefore = new KnowledgeElementCollection([knowledgeElement1, knowledgeElement2]);
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
-          userId,
-          snappedAt: new Date('2019-01-01'),
           campaignParticipationId: campaignParticipation.id,
           snapshot: knowledgeElementsBefore.toSnapshot(),
         });
