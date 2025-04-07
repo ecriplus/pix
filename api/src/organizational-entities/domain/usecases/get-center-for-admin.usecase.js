@@ -7,11 +7,11 @@ import { CenterForAdminFactory } from '../models/factories/CenterForAdminFactory
 
 /**
  * @param {Object} params
- * @param {CenterRepository} params.centerRepository
+ * @param {CertificationCenterRepository} params.certificationCenterRepository
  * @returns {CenterForAdmin}
  */
-const getCenterForAdmin = async function ({ id, centerRepository, dataProtectionOfficerRepository }) {
-  const center = await centerRepository.getById({ id });
+const getCenterForAdmin = async function ({ id, certificationCenterRepository, dataProtectionOfficerRepository }) {
+  const center = await certificationCenterRepository.getById({ id });
   const dataProtectionOfficer = await dataProtectionOfficerRepository.get({
     certificationCenterId: id,
   });
