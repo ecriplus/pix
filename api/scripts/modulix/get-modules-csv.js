@@ -8,6 +8,7 @@ export async function getModulesListAsCsv(modules) {
     data: modules,
     delimiter: '\t',
     fileHeaders: [
+      { label: 'ModuleId', value: 'id' },
       { label: 'ModuleSlug', value: 'slug' },
       { label: 'ModuleTitle', value: 'title' },
       { label: 'ModuleLevel', value: 'details.level' },
