@@ -1,5 +1,20 @@
 # Pix Changelog
 
+## v5.83.0 (07/04/2025)
+
+
+### :rocket: Amélioration
+- [#11963](https://github.com/1024pix/pix/pull/11963) [FEATURE] Créer le FT pour le nouveau certificat en ligne V3 (PIX-17328).
+
+### :building_construction: Tech
+- [#11826](https://github.com/1024pix/pix/pull/11826) [TECH] :broom: Supprimer l'utilisation de la colonne `emitter` (PIX-16124).
+- [#11964](https://github.com/1024pix/pix/pull/11964) [TECH]  ajoute une contrainte d'unicité pour `campaignParticipationId` sur `knowledge-element-snapshot` (pix-17358).
+- [#11913](https://github.com/1024pix/pix/pull/11913) [TECH] :recycle: Execute le rescoring par script en synchrone (PIX-17242).
+
+### :bug: Correction
+- [#11894](https://github.com/1024pix/pix/pull/11894) [BUGFIX] Quelques menues corrections suite au recettage des nouveaux gabarits (PIX-17255).
+- [#11630](https://github.com/1024pix/pix/pull/11630) [BUGFIX] Mettre à jour et rajouter les attributs nécessaire sur la navbar de Pix app (PIX-16773).
+
 ## v5.82.0 (04/04/2025)
 
 
