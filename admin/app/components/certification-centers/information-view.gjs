@@ -1,5 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
@@ -61,6 +62,16 @@ export default class InformationView extends Component {
 
   <template>
     <h1 class="certification-center-information-display__name">{{@certificationCenter.name}}</h1>
+
+    {{#if @certificationCenter.isArchived}}
+      <PixNotificationAlert class="certification-center-information-display__archived-warning" @type="warning">
+        {{t
+          "pages.certification-centers.information-view.is-archived-warning"
+          archivedAt=@certificationCenter.archivedAtFormatDate
+          archivedBy=@certificationCenter.archivistFullName
+        }}
+      </PixNotificationAlert>
+    {{/if}}
 
     <dl class="certification-center-information-display__list">
       <dt class="label">Type :</dt>

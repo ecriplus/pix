@@ -670,6 +670,7 @@
           },
           "title": "Habilitated to the following complementary certifications"
         },
+        "is-archived-warning": "Archived at {archivedAt} by {archivedBy}.",
         "pilot-features": {
           "is-complementary-alone-pilot": {
             "aria-label": {
