@@ -9,7 +9,6 @@ const buildV3CertificationAttestation = function ({
   certificationCenter = 'L’université du Pix',
   deliveredAt = new Date('2018-10-03T01:02:03Z'),
   pixScore = 123,
-  maxReachableLevelOnCertificationDate = 7,
   verificationCode = 'P-SOMECODE',
 } = {}) {
   return new V3CertificationAttestation({
@@ -21,7 +20,6 @@ const buildV3CertificationAttestation = function ({
     certificationCenter,
     deliveredAt,
     pixScore,
-    maxReachableLevelOnCertificationDate,
     verificationCode,
   });
 };

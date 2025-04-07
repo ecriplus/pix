@@ -1,4 +1,4 @@
-import { COMPETENCES_COUNT, PIX_COUNT_BY_LEVEL } from '../../../../shared/domain/constants.js';
+import { MAX_REACHABLE_SCORE } from '../../../../shared/domain/constants.js';
 import { GlobalCertificationLevel } from './v3/GlobalCertificationLevel.js';
 
 export class V3CertificationAttestation {
@@ -13,7 +13,6 @@ export class V3CertificationAttestation {
    * @param {string} props.pixScore
    * @param {GlobalCertificationLevel} props.[globalLevel] - auto calculated
    * @param {string} props.verificationCode
-   * @param {number} props.maxReachableScore - level maximum at the time of the certification course (certification-courses.maxReachableLevelOnCertificationDate)
    */
   constructor({
     id,
@@ -24,7 +23,6 @@ export class V3CertificationAttestation {
     certificationCenter,
     deliveredAt,
     pixScore,
-    maxReachableLevelOnCertificationDate,
     verificationCode,
   } = {}) {
     this.id = id;
@@ -37,6 +35,6 @@ export class V3CertificationAttestation {
     this.pixScore = pixScore;
     this.globalLevel = new GlobalCertificationLevel({ score: pixScore });
     this.verificationCode = verificationCode;
-    this.maxReachableScore = maxReachableLevelOnCertificationDate * PIX_COUNT_BY_LEVEL * COMPETENCES_COUNT;
+    this.maxReachableScore = MAX_REACHABLE_SCORE;
   }
 }
