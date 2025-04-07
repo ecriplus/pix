@@ -152,6 +152,7 @@ Router.map(function () {
 
     this.route('tools', function () {
       this.route('campaigns');
+      this.route('certification');
       this.route('junior');
     });
 
