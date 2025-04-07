@@ -11,6 +11,8 @@ class CenterForAdmin {
    * @param {string} params.center.externalId
    * @param {Date} params.center.createdAt
    * @param {Date} params.center.updatedAt
+   * @param {Date} params.center.archivedAt
+   * @param {number} params.center.archivedBy
    * @param {boolean} params.center.isComplementaryAlonePilot
    * @param {string} params.dataProtectionOfficer.firstName
    * @param {string} params.dataProtectionOfficer.lastName
@@ -24,6 +26,8 @@ class CenterForAdmin {
     this.externalId = center.externalId;
     this.createdAt = center.createdAt;
     this.updatedAt = center.updatedAt;
+    this.archivedAt = center.archivedAt;
+    this.archivedBy = center.archivedBy;
     this.isComplementaryAlonePilot = center.isComplementaryAlonePilot;
     this.dataProtectionOfficerFirstName = dataProtectionOfficer.firstName;
     this.dataProtectionOfficerLastName = dataProtectionOfficer.lastName;

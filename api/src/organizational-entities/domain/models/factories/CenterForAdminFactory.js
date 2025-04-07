@@ -22,6 +22,8 @@ export class CenterForAdminFactory {
         externalId: center.externalId,
         createdAt: undefined,
         updatedAt: undefined,
+        archivedAt: center.archivedAt,
+        archivedBy: center.archivedBy,
         isComplementaryAlonePilot: center.isComplementaryAlonePilot,
       },
       dataProtectionOfficer: {

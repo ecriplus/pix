@@ -12,6 +12,8 @@ const deserialize = function ({ data }) {
     id: data.id,
     name: data.attributes.name,
     type: data.attributes.type,
+    archivedAt: data.attributes['archived-at'],
+    archivedBy: data.attributes['archived-by'],
     isComplementaryAlonePilot: data.attributes['is-complementary-alone-pilot'],
   };
   const dataProtectionOfficer = {
@@ -33,6 +35,8 @@ const serialize = function (certificationCenter, certificationCenterPilotFeature
       'type',
       'externalId',
       'createdAt',
+      'archivedAt',
+      'archivedBy',
       'certificationCenterMemberships',
       'dataProtectionOfficerFirstName',
       'dataProtectionOfficerLastName',
