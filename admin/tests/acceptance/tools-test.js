@@ -14,12 +14,12 @@ module('Acceptance | tools', function (hooks) {
   });
 
   module('Access', function () {
-    test('Tools page should be accessible from /tools', async function (assert) {
+    test('Tools campaigns tab should be accessible from /tools', async function (assert) {
       // given & when
       await visit('/tools');
 
       // then
-      assert.strictEqual(currentURL(), '/tools');
+      assert.strictEqual(currentURL(), '/tools/campaigns');
     });
 
     test('it should set tools menubar item active', async function (assert) {

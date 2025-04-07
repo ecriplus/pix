@@ -653,6 +653,9 @@
         "deployment": {
           "label": "Déploiement"
         },
+        "junior": {
+          "label": "Junior"
+        },
         "organizations": {
           "label": "Organisations"
         }

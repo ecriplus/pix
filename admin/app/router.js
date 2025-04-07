@@ -150,7 +150,10 @@ Router.map(function () {
       this.route('access');
     });
 
-    this.route('tools');
+    this.route('tools', function () {
+      this.route('campaigns');
+      this.route('junior');
+    });
 
     this.route('smart-random-simulator', function () {
       this.route('get-next-challenge');
