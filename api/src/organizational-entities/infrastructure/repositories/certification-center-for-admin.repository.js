@@ -1,4 +1,5 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { NotFoundError } from '../../../shared/domain/errors.js';
 import { CenterForAdmin } from '../../domain/models/CenterForAdmin.js';
 
 const save = async function (certificationCenter) {
@@ -22,7 +23,28 @@ const update = async function (certificationCenter) {
     .where({ id: certificationCenter.id });
 };
 
-export { save, update };
+/**
+ * @type {function}
+ * @param {Object} params
+ * @param {string|number} params.certificationCenterId
+ * @param {string|number} params.archivedBy
+ * @param {date} params.archiveDate
+ */
+const archive = async function ({ certificationCenterId, archivedBy, archiveDate }) {
+  const knexConn = DomainTransaction.getConnection();
+  const certificationCenter = await knexConn('certification-centers').where({ id: certificationCenterId }).first();
+  if (!certificationCenter) {
+    throw new NotFoundError();
+  }
+  if (certificationCenter.archivedBy) {
+    return;
+  }
+  await knexConn('certification-centers')
+    .where({ id: certificationCenterId })
+    .update({ archivedBy, archivedAt: archiveDate });
+};
+
+export { archive, save, update };
 
 function _toDomain(certificationCenterDTO) {
   return new CenterForAdmin({
