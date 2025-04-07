@@ -64,6 +64,24 @@ const countActiveMembersForCertificationCenter = async function (certificationCe
 };
 
 /**
+ * @param {Object} params
+ * @param {string} params.certificationCenterId
+ * @param {date} params.disabledAt
+ * @param {string} params.updatedByUserId
+ */
+const disableMembershipsByCertificationCenterId = async function ({
+  certificationCenterId,
+  disabledAt,
+  updatedByUserId,
+}) {
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn
+    .from(CERTIFICATION_CENTER_MEMBERSHIP_TABLE_NAME)
+    .where({ certificationCenterId, disabledAt: null })
+    .update({ disabledAt, updatedByUserId });
+};
+
+/**
  * Get the number of active memberships for a user
  *
  * @param {string} userId - The ID of the user
@@ -362,6 +380,7 @@ const certificationCenterMembershipRepository = {
   create,
   disableById,
   disableMembershipsByUserId,
+  disableMembershipsByCertificationCenterId,
   findActiveAdminsByCertificationCenterId,
   findActiveByCertificationCenterIdSortedByRole,
   findByCertificationCenterIdAndUserId,

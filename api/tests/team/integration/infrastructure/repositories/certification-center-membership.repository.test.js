@@ -1018,6 +1018,95 @@ describe('Integration | Team | Infrastructure | Repository | Certification Cente
     });
   });
 
+  describe('#disableMembershipsByCertificationCenterId', function () {
+    it('disables memberships of a certification center', async function () {
+      // given
+      const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
+      const disableDate = new Date('2023-09-12');
+      const thisCertificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+      const otherCertificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+
+      databaseBuilder.factory.buildUser({ id: 7 });
+      databaseBuilder.factory.buildUser({ id: 8 });
+
+      databaseBuilder.factory.buildCertificationCenterMembership({
+        userId: 7,
+        certificationCenterId: thisCertificationCenterId,
+      });
+      databaseBuilder.factory.buildCertificationCenterMembership({
+        userId: 8,
+        certificationCenterId: thisCertificationCenterId,
+      });
+      databaseBuilder.factory.buildCertificationCenterMembership({
+        userId: 8,
+        certificationCenterId: otherCertificationCenterId,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      await certificationCenterMembershipRepository.disableMembershipsByCertificationCenterId({
+        certificationCenterId: thisCertificationCenterId,
+        disabledAt: disableDate,
+        updatedByUserId: superAdminUserId,
+      });
+
+      // then
+      const newlyDisabledMembers = await knex('certification-center-memberships').where({
+        disabledAt: disableDate,
+        updatedByUserId: superAdminUserId,
+      });
+      expect(newlyDisabledMembers).to.have.lengthOf(2);
+
+      const nonDisabledMember = await knex('certification-center-memberships')
+        .where({
+          certificationCenterId: otherCertificationCenterId,
+        })
+        .first();
+      expect(nonDisabledMember.disabledAt).to.be.null;
+    });
+
+    it('does not update already disabled memberships of a certification center', async function () {
+      // given
+      const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
+      const disableDate = new Date('2023-09-12');
+      const previousDate = new Date('2021-01-01');
+      const thisCertificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+
+      databaseBuilder.factory.buildUser({ id: 7 });
+      databaseBuilder.factory.buildUser({ id: 8 });
+
+      const activeMembershipOfThisCenter = databaseBuilder.factory.buildCertificationCenterMembership({
+        userId: 7,
+        certificationCenterId: thisCertificationCenterId,
+      });
+      databaseBuilder.factory.buildCertificationCenterMembership({
+        userId: 8,
+        certificationCenterId: thisCertificationCenterId,
+        disabledAt: previousDate,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      await certificationCenterMembershipRepository.disableMembershipsByCertificationCenterId({
+        certificationCenterId: thisCertificationCenterId,
+        disabledAt: disableDate,
+        updatedByUserId: superAdminUserId,
+      });
+
+      // then
+      const newlyDisabledMemberships = await knex('certification-center-memberships').where({
+        disabledAt: disableDate,
+        updatedByUserId: superAdminUserId,
+      });
+      expect(newlyDisabledMemberships).to.have.lengthOf(1);
+
+      const [newlyDisabledMembership] = newlyDisabledMemberships;
+      expect(newlyDisabledMembership.userId).to.equal(activeMembershipOfThisCenter.userId);
+    });
+  });
+
   describe('#update', function () {
     const now = new Date('2023-09-12');
 
