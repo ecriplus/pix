@@ -572,14 +572,8 @@ class AlreadyExistingMembershipError extends DomainError {
   }
 }
 
-class ApplicationWithInvalidClientIdError extends DomainError {
+class ApplicationWithInvalidCredentialsError extends DomainError {
   constructor(message = 'The client ID or secret are invalid.') {
-    super(message);
-  }
-}
-
-class ApplicationWithInvalidClientSecretError extends DomainError {
-  constructor(message = 'The client secret is invalid.') {
     super(message);
   }
 }
@@ -1031,8 +1025,7 @@ export {
   AlreadyRegisteredUsernameError,
   AlreadySharedCampaignParticipationError,
   ApplicationScopeNotAllowedError,
-  ApplicationWithInvalidClientIdError,
-  ApplicationWithInvalidClientSecretError,
+  ApplicationWithInvalidCredentialsError,
   AssessmentEndedError,
   AssessmentNotCompletedError,
   AssessmentResultNotCreatedError,
