@@ -1,5 +1,27 @@
 # Pix Changelog
 
+## v5.85.0 (08/04/2025)
+
+
+### :rocket: Amélioration
+- [#11974](https://github.com/1024pix/pix/pull/11974) [FEATURE] Suppression du détail sur les raisons d'un échec d'authentification.
+- [#11986](https://github.com/1024pix/pix/pull/11986) [FEATURE] Modifier le wording du lien pour interpréter les résultats de la certification sur Pix App (PIX-17380).
+- [#11971](https://github.com/1024pix/pix/pull/11971) [FEATURE] Créer la nouvelle page de certification (vide) sur Pix App (PIX-17337).
+
+### :building_construction: Tech
+- [#11984](https://github.com/1024pix/pix/pull/11984) [TECH] Passer les fichiers templates au format GJS sur PixOrga.
+- [#11988](https://github.com/1024pix/pix/pull/11988) [TECH] Supprimer la mention attestation dans le nom du PDF de la certification (PIX-17409).
+- [#11969](https://github.com/1024pix/pix/pull/11969) [TECH] Supprimer/déplacer des fichiers oubliés lors des migrations (PIX-17395).
+- [#11972](https://github.com/1024pix/pix/pull/11972) [TECH] Modifier le lien de documentation dans l'espace surveillant sur Pix Certif (PIX-17385).
+- [#11965](https://github.com/1024pix/pix/pull/11965) [TECH] arrêter d'utiliser les champs userId / snappedAt (Pix-17286).
+
+### :bug: Correction
+- [#11995](https://github.com/1024pix/pix/pull/11995) [BUGFIX] Corriger l'affichage des modales sur Pix Certif.
+
+### :arrow_up: Montée de version
+- [#11992](https://github.com/1024pix/pix/pull/11992) [BUMP] Update dependency @1024pix/pix-ui to ^55.13.0 (certif).
+- [#11955](https://github.com/1024pix/pix/pull/11955) [BUMP] Update dependency @1024pix/pix-ui to ^55.12.1 (certif).
+
 ## v5.84.0 (08/04/2025)
 
 
