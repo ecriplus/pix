@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import * as centerRepository from '../../../certification/enrolment/infrastructure/repositories/center-repository.js';
 import * as learnersApi from '../../../prescription/learner-management/application/api/learners-api.js';
 import * as schoolRepository from '../../../school/infrastructure/repositories/school-repository.js';
+import * as codeGenerator from '../../../shared/domain/services/code-generator.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as certificationCenterRepository from '../../infrastructure/repositories/certification-center.repository.js';
@@ -34,6 +35,7 @@ const path = dirname(fileURLToPath(import.meta.url));
 
 const repositories = {
   organizationCreationValidator,
+  codeGenerator,
   centerRepository,
   certificationCenterRepository,
   certificationCenterForAdminRepository,
