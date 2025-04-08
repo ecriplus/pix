@@ -3,7 +3,7 @@
     <span>{{t "pages.certificate.competences.subtitle" maxReachableLevel=this.maxReachableLevel}}</span></h2>
 
   {{#each this.sortedAreas as |area|}}
-    <UserCertificationsDetailCompetence @area={{area}} />
+    <Certifications::UserCertificationsDetailCompetence @area={{area}} />
   {{/each}}
 
 </div>

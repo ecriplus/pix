@@ -6,8 +6,7 @@
   &__details-body {
     display: flex;
     width: 100%;
-    max-width: 980px;
-    margin-top: 32px;
+    margin-top: var(--pix-spacing-8x);
   }
 
   h2 {
@@ -27,8 +26,8 @@
 
   &__previous-button {
     width: fit-content;
+    margin-top: var(--pix-spacing-10x);
     margin-bottom: var(--pix-spacing-3x);
-    border: 1px solid transparent;
   }
 }
 

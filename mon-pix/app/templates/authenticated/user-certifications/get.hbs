@@ -1,7 +1,7 @@
-<PixBackgroundHeader class="user-certifications-page-get">
+<main id="main" class="global-page-container" role="main">
   <PixButtonLink
     @route="authenticated.user-certifications"
-    @variant="transparent-dark"
+    @variant="tertiary"
     @iconBefore="arrowLeft"
     class="user-certifications-page__previous-button"
   >
@@ -9,16 +9,16 @@
   </PixButtonLink>
 
   <PixBlock class="user-certifications-page-get__header">
-    <UserCertificationsDetailHeader @certification={{@model}} />
+    <Certifications::UserCertificationsDetailHeader @certification={{@model}} />
   </PixBlock>
 
   <div class="user-certifications-page-get__details-body">
-    <UserCertificationsDetailCompetencesList
+    <Certifications::UserCertificationsDetailCompetencesList
       @resultCompetenceTree={{@model.resultCompetenceTree}}
       @maxReachableLevelOnCertificationDate={{this.model.maxReachableLevelOnCertificationDate}}
     />
     {{#if this.shouldDisplayDetailsSection}}
-      <UserCertificationsDetailResult @certification={{@model}} />
+      <Certifications::UserCertificationsDetailResult @certification={{@model}} />
     {{/if}}
   </div>
 
@@ -29,5 +29,4 @@
       maxReachablePixCountOnCertificationDate=this.model.maxReachablePixCountOnCertificationDate
     }}
   </p>
-
-</PixBackgroundHeader>
+</main>
