@@ -61,7 +61,11 @@ class FlashcardsCardAutoAssessedEvent extends PassageEventWithElement {
     assertNotNullOrUndefined(cardId, 'The cardId is required for a FlashcardsCardAutoAssessedEvent');
     assertHasUuidLength(cardId, 'The cardId property should be exactly 36 characters long');
     assertNotNullOrUndefined(autoAssessment, 'The autoAssessment is required for a FlashcardsCardAutoAssessedEvent');
-    assertEnumValue(AutoAssessmentEnumValues, autoAssessment);
+    assertEnumValue(
+      AutoAssessmentEnumValues,
+      autoAssessment,
+      'The autoAssessment value must be one of these : [‘yes‘, ‘maybe‘, ‘no‘]',
+    );
 
     this.elementId = elementId;
     this.cardId = cardId;

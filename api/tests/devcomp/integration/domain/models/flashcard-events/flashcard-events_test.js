@@ -231,7 +231,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
 
         // then
         expect(error).to.be.instanceOf(TypeError);
-        expect(error.message).to.equal('Illegal enum value provided');
+        expect(error.message).to.equal('The autoAssessment value must be one of these : [‘yes‘, ‘maybe‘, ‘no‘]');
       });
     });
   });
