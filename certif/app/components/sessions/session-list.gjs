@@ -195,7 +195,6 @@ export default class SessionList extends Component {
                       }}
                       disabled={{true}}
                       aria-describedby='tooltip-delete-session-button'
-                      @withBackground={{true}}
                     />
                   </:triggerElement>
                   <:tooltip>{{t 'pages.sessions.list.actions.delete-session.disabled'}}</:tooltip>
@@ -206,7 +205,6 @@ export default class SessionList extends Component {
                   @plainIcon={{true}}
                   @ariaLabel={{t 'pages.sessions.list.actions.delete-session.label' sessionSummaryId=sessionSummary.id}}
                   disabled={{false}}
-                  @withBackground={{true}}
                   @triggerAction={{fn
                     this.openSessionDeletionConfirmModal
                     sessionSummary.id
