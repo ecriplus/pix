@@ -155,8 +155,6 @@ describe('Integration | Repository | Campaign Participation', function () {
         });
         const knowledgeElementsBefore = new KnowledgeElementCollection([knowledgeElement1, knowledgeElement2]);
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
-          userId,
-          snappedAt: new Date('2019-01-01'),
           campaignParticipationId: campaignParticipation.id,
           snapshot: knowledgeElementsBefore.toSnapshot(),
         });
