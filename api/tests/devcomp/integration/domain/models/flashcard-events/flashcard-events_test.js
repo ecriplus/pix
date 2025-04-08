@@ -182,6 +182,27 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
         expect(error.message).to.equal('The cardId property should be exactly 36 characters long');
       });
     });
+
+    describe('when autoAssessment is not given', function () {
+      it('should throw an error', function () {
+        // given
+        const id = Symbol('id');
+        const occurredAt = new Date();
+        const createdAt = new Date();
+        const passageId = 2;
+        const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
+        const cardId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8666';
+
+        // when
+        const error = catchErrSync(
+          () => new FlashcardsCardAutoAssessedEvent({ id, occurredAt, createdAt, passageId, elementId, cardId }),
+        )();
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal('The autoAssessment is required for a FlashcardsCardAutoAssessedEvent');
+      });
+    });
   });
 
   describe('#FlashcardsRectoReviewedEvent', function () {
