@@ -643,7 +643,7 @@
         "title": "Código de comprobación",
         "tooltip": "Facilita este código para que un tercero pueda comprobar la autenticidad de tu certificado"
       },
-      "learn-about-certification-results": "Comprender mis resultados de certificación Pix"
+      "learn-about-certification-results": "¿Cómo interpretar los resultados?"
     },
     "certification-ender": {
       "candidate": {
