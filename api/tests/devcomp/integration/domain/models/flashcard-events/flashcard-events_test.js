@@ -116,7 +116,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
       const passageId = 2;
       const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
       const cardId = 'c4675f66-97f1-4202-8aeb-0388edf102d5';
-      const autoAssessment = Symbol('yes');
+      const autoAssessment = 'yes';
 
       // when
       const flashcardsCardAutoAssessedEvent = new FlashcardsCardAutoAssessedEvent({
@@ -201,6 +201,37 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
         // then
         expect(error).to.be.instanceOf(DomainError);
         expect(error.message).to.equal('The autoAssessment is required for a FlashcardsCardAutoAssessedEvent');
+      });
+    });
+
+    describe('when autoAssessment is not an acceptable value', function () {
+      it('should throw an error', function () {
+        // given
+        const id = Symbol('id');
+        const occurredAt = new Date();
+        const createdAt = new Date();
+        const passageId = 2;
+        const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
+        const cardId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8666';
+        const autoAssessment = 'wrong_value';
+
+        // when
+        const error = catchErrSync(
+          () =>
+            new FlashcardsCardAutoAssessedEvent({
+              id,
+              occurredAt,
+              createdAt,
+              passageId,
+              elementId,
+              cardId,
+              autoAssessment,
+            }),
+        )();
+
+        // then
+        expect(error).to.be.instanceOf(TypeError);
+        expect(error.message).to.equal('Illegal enum value provided');
       });
     });
   });

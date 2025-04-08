@@ -1,5 +1,15 @@
-import { assertHasUuidLength, assertNotNullOrUndefined } from '../../../../shared/domain/models/asserts.js';
-import { PassageElementEvent } from './PassageElementEvent.js';
+import {
+  assertEnumValue,
+  assertHasUuidLength,
+  assertNotNullOrUndefined,
+} from '../../../../shared/domain/models/asserts.js';
+import { PassageEventWithElement } from './PassageEventWithElement.js';
+
+const AutoAssessmentEnumValues = Object.freeze({
+  YES: 'yes',
+  MAYBE: 'maybe',
+  NO: 'no',
+});
 
 /**
  * @class FlashcardsStartedEvent
@@ -51,6 +61,7 @@ class FlashcardsCardAutoAssessedEvent extends PassageEventWithElement {
     assertNotNullOrUndefined(cardId, 'The cardId is required for a FlashcardsCardAutoAssessedEvent');
     assertHasUuidLength(cardId, 'The cardId property should be exactly 36 characters long');
     assertNotNullOrUndefined(autoAssessment, 'The autoAssessment is required for a FlashcardsCardAutoAssessedEvent');
+    assertEnumValue(AutoAssessmentEnumValues, autoAssessment);
 
     this.elementId = elementId;
     this.cardId = cardId;
