@@ -29,7 +29,12 @@ module('Integration | Component |  team/invitation-list', function (hooks) {
 
   test('displays email address, last sending date and actions headers', async function (assert) {
     // given
-    this.set('invitations', []);
+    const invitation = store.createRecord('certification-center-invitation', {
+      id: '1',
+      email: 'camille.onette@example.net',
+      updatedAt: new Date('2023-09-21T16:21:12Z'),
+    });
+    this.set('invitations', [invitation]);
 
     // when
     const screen = await renderScreen(
@@ -152,6 +157,25 @@ module('Integration | Component |  team/invitation-list', function (hooks) {
 
       // then
       assert.dom(screen.getByRole('button', { name: "Renvoyer l'invitation" })).isDisabled();
+    });
+  });
+
+  module('when there is no invitation', function () {
+    test('should display empty message', async function (assert) {
+      // given
+      this.set('invitations', []);
+
+      // when
+      const screen = await renderScreen(
+        hbs`<Team::InvitationsList
+  @invitations={{this.invitations}}
+  @onCancelInvitationButtonClicked={{this.cancelInvitation}}
+  @onResendInvitationButtonClicked={{this.resendInvitation}}
+/>`,
+      );
+
+      // then
+      assert.dom(screen.getByText(t('common.labels.table.empty-result'))).exists();
     });
   });
 });
