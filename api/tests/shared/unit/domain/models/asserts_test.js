@@ -41,6 +41,21 @@ describe('Unit | Shared | Models | asserts', function () {
       });
     });
 
+    describe('given invalid value with custom error message', function () {
+      it('should throw', function () {
+        // given
+        const errorMessage = 'This is an error with my custom message';
+        const anEnum = { X: 'y' };
+
+        // When
+        const error = catchErrSync(() => assertEnumValue(anEnum, 'z', errorMessage))();
+
+        // Then
+        expect(error).to.be.instanceOf(TypeError);
+        expect(error.message).to.equal('This is an error with my custom message');
+      });
+    });
+
     describe('given valid values', function () {
       it('should not throw', function () {
         // given
