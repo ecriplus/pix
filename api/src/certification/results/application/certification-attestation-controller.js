@@ -86,7 +86,7 @@ const getCertificationPDFAttestationsForSession = async function (
     i18n,
   });
 
-  const fileName = `attestation-pix-session-${sessionId}.pdf`;
+  const fileName = `certification-pix-session-${sessionId}.pdf`;
   return h
     .response(buffer)
     .header('Content-Disposition', `attachment; filename=${fileName}`)

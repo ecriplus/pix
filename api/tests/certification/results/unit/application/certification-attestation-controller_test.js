@@ -49,7 +49,7 @@ describe('Certification | Results | Unit | Application | Controller | certificat
         });
         expect(response.source).to.deep.equal(generatedPdf);
         expect(response.headers['Content-Disposition']).to.contains(
-          `attachment; filename=attestation-pix-${dayjs(v3CertificationAttestation.deliveredAt).format('YYYYMMDD')}.pdf`,
+          `attachment; filename=certification-pix-${dayjs(v3CertificationAttestation.deliveredAt).format('YYYYMMDD')}.pdf`,
         );
       });
     });
@@ -59,7 +59,7 @@ describe('Certification | Results | Unit | Application | Controller | certificat
         // given
         const certificationAttestation = domainBuilder.buildCertificationAttestation();
         const attestationPDF = 'binary string';
-        const filename = 'attestation-pix-20181003.pdf';
+        const filename = 'certification-pix-20181003.pdf';
         const userId = 1;
         const i18n = Symbol('i18n');
 
@@ -143,7 +143,7 @@ describe('Certification | Results | Unit | Application | Controller | certificat
         });
         expect(response.source).to.deep.equal(generatedPdf);
         expect(response.headers['Content-Disposition']).to.contains(
-          `attachment; filename=session-${session.id}-attestation-pix-${dayjs(v3CertificationAttestation.deliveredAt).format('YYYYMMDD')}.pdf`,
+          `attachment; filename=session-${session.id}-certification-pix-${dayjs(v3CertificationAttestation.deliveredAt).format('YYYYMMDD')}.pdf`,
         );
       });
     });
@@ -214,7 +214,7 @@ describe('Certification | Results | Unit | Application | Controller | certificat
         // then
         expect(response.source).to.deep.equal(attestationPDF);
         expect(response.headers['Content-Disposition']).to.contains(
-          'attachment; filename=attestation-pix-session-12.pdf',
+          'attachment; filename=certification-pix-session-12.pdf',
         );
       });
     });
@@ -279,7 +279,7 @@ describe('Certification | Results | Unit | Application | Controller | certificat
         });
         expect(response.source).to.deep.equal(generatedPdf);
         expect(response.headers['Content-Disposition']).to.contains(
-          `attachment; filename=3eme-b-attestation-pix-${dayjs(v3CertificationAttestation.deliveredAt).format('YYYYMMDD')}.pdf`,
+          `attachment; filename=3eme-b-certification-pix-${dayjs(v3CertificationAttestation.deliveredAt).format('YYYYMMDD')}.pdf`,
         );
       });
     });
