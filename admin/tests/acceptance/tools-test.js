@@ -1,6 +1,7 @@
 import { clickByName, visit, within } from '@1024pix/ember-testing-library';
 import { click, currentURL, fillIn } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { module, test } from 'qunit';
@@ -9,29 +10,106 @@ module('Acceptance | tools', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
-  hooks.beforeEach(async function () {
-    await authenticateAdminMemberWithRole({ isMetier: true })(server);
-  });
-
   module('Access', function () {
-    test('Tools campaigns tab should be accessible from /tools', async function (assert) {
-      // given & when
-      await visit('/tools');
+    module('when user role is superadmin', function (hooks) {
+      hooks.beforeEach(async function () {
+        await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+      });
 
-      // then
-      assert.strictEqual(currentURL(), '/tools/campaigns');
+      test('Tools campaigns tab should be accessible from /tools', async function (assert) {
+        // given & when
+        const screen = await visit('/tools');
+
+        // then
+        assert.strictEqual(currentURL(), '/tools/campaigns');
+
+        const toolsNav = screen.getByRole('navigation', { name: t('pages.tools.navigation.aria-label') });
+        assert.strictEqual(toolsNav.children.length, 3);
+        assert
+          .dom(within(toolsNav).getByRole('link', { name: t('pages.administration.navigation.campaigns.label') }))
+          .exists();
+        assert
+          .dom(within(toolsNav).getByRole('link', { name: t('pages.administration.navigation.junior.label') }))
+          .exists();
+        assert
+          .dom(within(toolsNav).getByRole('link', { name: t('pages.administration.navigation.certification.label') }))
+          .exists();
+      });
+
+      test('it should set tools menubar item active', async function (assert) {
+        // when
+        const screen = await visit(`/tools`);
+
+        // then
+        assert.dom(screen.getByRole('link', { name: 'Outils' })).hasClass('active');
+      });
     });
 
-    test('it should set tools menubar item active', async function (assert) {
-      // when
-      const screen = await visit(`/tools`);
+    module('when user role is metier', function (hooks) {
+      hooks.beforeEach(async function () {
+        await authenticateAdminMemberWithRole({ isMetier: true })(server);
+      });
 
-      // then
-      assert.dom(screen.getByRole('link', { name: 'Outils' })).hasClass('active');
+      test('Tools campaigns tab should be accessible from /tools', async function (assert) {
+        // given & when
+        const screen = await visit('/tools');
+
+        // then
+        assert.strictEqual(currentURL(), '/tools/campaigns');
+
+        const toolsNav = screen.getByRole('navigation', { name: t('pages.tools.navigation.aria-label') });
+        assert.strictEqual(toolsNav.children.length, 2);
+        assert
+          .dom(within(toolsNav).getByRole('link', { name: t('pages.administration.navigation.campaigns.label') }))
+          .exists();
+        assert
+          .dom(within(toolsNav).getByRole('link', { name: t('pages.administration.navigation.junior.label') }))
+          .exists();
+      });
+
+      test('it should set tools menubar item active', async function (assert) {
+        // when
+        const screen = await visit(`/tools`);
+
+        // then
+        assert.dom(screen.getByRole('link', { name: 'Outils' })).hasClass('active');
+      });
+    });
+
+    module('when user role is certif', function (hooks) {
+      hooks.beforeEach(async function () {
+        await authenticateAdminMemberWithRole({ isCertif: true })(server);
+      });
+
+      test('Tools campaigns tab should be accessible from /tools', async function (assert) {
+        // given & when
+        const screen = await visit('/tools');
+
+        // then
+        assert.strictEqual(currentURL(), '/tools/certification');
+
+        const toolsNav = screen.getByRole('navigation', { name: t('pages.tools.navigation.aria-label') });
+        assert.strictEqual(toolsNav.children.length, 1);
+        assert
+          .dom(within(toolsNav).getByRole('link', { name: t('pages.administration.navigation.certification.label') }))
+          .exists();
+      });
+
+      test('it should set tools menubar item active', async function (assert) {
+        // when
+        const screen = await visit(`/tools`);
+
+        // then
+        assert.dom(screen.getByRole('link', { name: 'Outils' })).hasClass('active');
+      });
     });
   });
 
-  module('certification tab', function () {
+  module('certification tab', function (hooks) {
+    hooks.beforeEach(async function () {
+      await authenticateAdminMemberWithRole({ isCertif: true })(server);
+    });
+
     module('scoring simulator', function () {
       module('when a capacity is given', function () {
         test('displays a score and competence levels list', async function (assert) {

@@ -6,16 +6,20 @@
   </header>
 
   <main class="page-body">
-    <PixTabs @variant="primary" @ariaLabel={{t "pages.administration.navigation.aria-label"}} class="navigation">
-      <LinkTo @route="authenticated.tools.campaigns">
-        {{t "pages.administration.navigation.campaigns.label"}}
-      </LinkTo>
-      <LinkTo @route="authenticated.tools.certification">
-        {{t "pages.administration.navigation.certification.label"}}
-      </LinkTo>
-      <LinkTo @route="authenticated.tools.junior">
-        {{t "pages.administration.navigation.junior.label"}}
-      </LinkTo>
+    <PixTabs @variant="primary" @ariaLabel={{t "pages.tools.navigation.aria-label"}} class="navigation">
+      {{#unless this.currentUserRole.isCertif}}
+        <LinkTo @route="authenticated.tools.campaigns">
+          {{t "pages.administration.navigation.campaigns.label"}}
+        </LinkTo>
+        <LinkTo @route="authenticated.tools.junior">
+          {{t "pages.administration.navigation.junior.label"}}
+        </LinkTo>
+      {{/unless}}
+      {{#unless this.currentUserRole.isMetier}}
+        <LinkTo @route="authenticated.tools.certification">
+          {{t "pages.administration.navigation.certification.label"}}
+        </LinkTo>
+      {{/unless}}
     </PixTabs>
 
     {{outlet}}

@@ -1002,6 +1002,11 @@
         }
       }
     },
+    "tools": {
+      "navigation": {
+        "aria-label": "Navigation de la section outils"
+      }
+    },
     "trainings": {
       "training": {
         "details": {
