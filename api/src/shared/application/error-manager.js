@@ -223,18 +223,14 @@ function _mapToHttpError(error) {
     return new HttpErrors.ServiceUnavailableError(error.message);
   }
 
-  if (error instanceof SharedDomainErrors.ApplicationWithInvalidClientIdError) {
-    return new HttpErrors.UnauthorizedError('The client ID is invalid.');
-  }
-
   if (error instanceof SharedDomainErrors.CertificationCandidatesError) {
     return new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta);
   }
   if (error instanceof SharedDomainErrors.AuthenticationMethodAlreadyExistsError) {
     return new HttpErrors.UnprocessableEntityError(error.message);
   }
-  if (error instanceof SharedDomainErrors.ApplicationWithInvalidClientSecretError) {
-    return new HttpErrors.UnauthorizedError('The client secret is invalid.');
+  if (error instanceof SharedDomainErrors.ApplicationWithInvalidCredentialsError) {
+    return new HttpErrors.UnauthorizedError('The client ID and/or secret are invalid.');
   }
   if (error instanceof SharedDomainErrors.MissingAttributesError) {
     return new HttpErrors.UnprocessableEntityError(error.message);
