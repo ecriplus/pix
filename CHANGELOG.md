@@ -1,5 +1,20 @@
 # Pix Changelog
 
+## v5.84.0 (08/04/2025)
+
+
+### :rocket: Amélioration
+- [#11978](https://github.com/1024pix/pix/pull/11978) [FEATURE] Modifier le score maximal atteignable sur le nouveau certificat V3 (PIX-17394).
+- [#11960](https://github.com/1024pix/pix/pull/11960) [FEATURE] Ajustements de la traduction en NL pour Accès (PIX-17357).
+
+### :building_construction: Tech
+- [#11981](https://github.com/1024pix/pix/pull/11981) [TECH] Met à jour Ember en 6.3.0 sur PixOrga.
+- [#11975](https://github.com/1024pix/pix/pull/11975) [TECH] Ne plus demander de reviews de devcomp à la modification du référentiel (PIX-17006).
+- [#11979](https://github.com/1024pix/pix/pull/11979) [TECH] Corrige un test sur PixOrga qui casse en local et pas sur la CI.
+
+### :bug: Correction
+- [#11985](https://github.com/1024pix/pix/pull/11985) [BUGFIX] Augmentation du délai maximum du job de réplication (MADDO).
+
 ## v5.83.0 (07/04/2025)
 
 
