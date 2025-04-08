@@ -903,7 +903,6 @@ describe('Integration | Team | Infrastructure | Repository | Certification Cente
             ...firstMembership,
             createdAt: creationDate,
             disabledAt: now,
-            updatedAt: now,
             updatedByUserId,
             lastAccessedAt: null,
           },
@@ -911,7 +910,6 @@ describe('Integration | Team | Infrastructure | Repository | Certification Cente
             ...secondMembership,
             createdAt: creationDate,
             disabledAt: now,
-            updatedAt: now,
             updatedByUserId,
             lastAccessedAt: null,
           },
@@ -962,7 +960,6 @@ describe('Integration | Team | Infrastructure | Repository | Certification Cente
           {
             ...firstMembership,
             disabledAt: now,
-            updatedAt: now,
             updatedByUserId,
             lastAccessedAt: null,
           },
