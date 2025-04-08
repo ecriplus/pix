@@ -273,7 +273,7 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
               'external-id': 'EX123',
               'created-at': undefined,
               'archived-at': null,
-              'archived-by': null,
+              'archivist-full-name': null,
               'data-protection-officer-first-name': undefined,
               'data-protection-officer-last-name': undefined,
               'data-protection-officer-email': undefined,

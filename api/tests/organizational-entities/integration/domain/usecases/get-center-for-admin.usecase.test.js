@@ -6,9 +6,13 @@ describe('Integration | UseCases | get-center-for-admin', function () {
   it('should get the certification center for admin', async function () {
     // given
     const certificationCenterId = 1234;
+    const date = new Date();
+    const userId = databaseBuilder.factory.buildUser.withRole({ firstName: 'toto', lastName: 'tutu' }).id;
     databaseBuilder.factory.buildCertificationCenter({
       id: certificationCenterId,
       name: 'Center for admin',
+      archivedAt: date,
+      archivedBy: userId,
     });
     databaseBuilder.factory.buildDataProtectionOfficer.withCertificationCenterId({
       certificationCenterId,
@@ -29,5 +33,7 @@ describe('Integration | UseCases | get-center-for-admin', function () {
     expect(certificationCenter.name).to.equal('Center for admin');
     expect(certificationCenter.dataProtectionOfficerFirstName).to.equal('John');
     expect(certificationCenter.dataProtectionOfficerLastName).to.equal('Doe');
+    expect(certificationCenter.archivedAt).to.deep.equal(date);
+    expect(certificationCenter.archivistFullName).to.equal('toto tutu');
   });
 });

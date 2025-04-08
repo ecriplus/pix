@@ -5,6 +5,7 @@ describe('Unit | Organizational Entities | Infrastructure | Serializer | JSONAPI
   let certificationCenterJsonApi;
   let centerForAdmin;
   let dataProtectionOfficer;
+  let archivistFullName;
 
   beforeEach(function () {
     certificationCenterJsonApi = {
@@ -17,7 +18,7 @@ describe('Unit | Organizational Entities | Infrastructure | Serializer | JSONAPI
           'external-id': '12345',
           'created-at': new Date('2018-02-01T01:02:03Z'),
           'archived-at': null,
-          'archived-by': null,
+          'archivist-full-name': null,
           'data-protection-officer-first-name': 'Justin',
           'data-protection-officer-last-name': 'Ptipeu',
           'data-protection-officer-email': 'justin.ptipeu@example.net',
@@ -34,11 +35,11 @@ describe('Unit | Organizational Entities | Infrastructure | Serializer | JSONAPI
       externalId: '12345',
       createdAt: null,
       habilitations: [],
-      archivedBy: null,
       archivedAt: null,
       isComplementaryAlonePilot: false,
     };
 
+    archivistFullName = null;
     dataProtectionOfficer = { firstName: 'Justin', lastName: 'Ptipeu', email: 'justin.ptipeu@example.net' };
   });
 
@@ -53,6 +54,7 @@ describe('Unit | Organizational Entities | Infrastructure | Serializer | JSONAPI
           ...centerForAdmin,
           id: '123',
         },
+        archivistFullName,
         dataProtectionOfficer,
       });
 
@@ -73,6 +75,7 @@ describe('Unit | Organizational Entities | Infrastructure | Serializer | JSONAPI
             createdAt: new Date('2018-01-01T05:43:10Z'),
             habilitations: [complementaryCertification],
           },
+          archivistFullName,
           dataProtectionOfficer,
         });
 
@@ -121,6 +124,7 @@ describe('Unit | Organizational Entities | Infrastructure | Serializer | JSONAPI
             ...centerForAdmin,
             isComplementaryAlonePilot: true,
           },
+          archivistFullName,
           dataProtectionOfficer,
         });
 

@@ -13,7 +13,7 @@ const deserialize = function ({ data }) {
     name: data.attributes.name,
     type: data.attributes.type,
     archivedAt: data.attributes['archived-at'],
-    archivedBy: data.attributes['archived-by'],
+    archivistFullName: data.attributes['archivist-full-name'],
     isComplementaryAlonePilot: data.attributes['is-complementary-alone-pilot'],
   };
   const dataProtectionOfficer = {
@@ -24,6 +24,7 @@ const deserialize = function ({ data }) {
 
   return new CenterForAdmin({
     center,
+    archivistFullName: center.archivistFullName,
     dataProtectionOfficer,
   });
 };
@@ -36,7 +37,7 @@ const serialize = function (certificationCenter, certificationCenterPilotFeature
       'externalId',
       'createdAt',
       'archivedAt',
-      'archivedBy',
+      'archivistFullName',
       'certificationCenterMemberships',
       'dataProtectionOfficerFirstName',
       'dataProtectionOfficerLastName',

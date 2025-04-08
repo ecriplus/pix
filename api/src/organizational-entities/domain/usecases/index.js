@@ -5,6 +5,7 @@ import * as centerRepository from '../../../certification/enrolment/infrastructu
 import * as learnersApi from '../../../prescription/learner-management/application/api/learners-api.js';
 import * as schoolRepository from '../../../school/infrastructure/repositories/school-repository.js';
 import * as codeGenerator from '../../../shared/domain/services/code-generator.js';
+import { adminMemberRepository } from '../../../shared/infrastructure/repositories/admin-member.repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as certificationCenterRepository from '../../infrastructure/repositories/certification-center.repository.js';
@@ -21,6 +22,7 @@ const path = dirname(fileURLToPath(import.meta.url));
 
 /**
  * @typedef {import ('../../../prescription/learner-management/application/api/learners-api.js')} learnersApi
+ * @typedef {import ('../../../shared/infrastructure/repositories/admin-member.repository.js')} AdminMemberRepository
  * @typedef {import ('../../infrastructure/repositories/certification-center.repository.js')} CertificationCenterRepository
  * @typedef {import ('../../../certification/enrolment/infrastructure/repositories/center-repository.js')} CenterRepository
  * @typedef {import ('../../infrastructure/repositories/certification-center-for-admin-repository.js')} CertificationCenterForAdminRepository
@@ -34,6 +36,7 @@ const path = dirname(fileURLToPath(import.meta.url));
  */
 
 const repositories = {
+  adminMemberRepository,
   organizationCreationValidator,
   codeGenerator,
   centerRepository,

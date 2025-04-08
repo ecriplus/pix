@@ -12,7 +12,7 @@ export class CenterForAdminFactory {
    * @param {Center} params.center
    * @param {DataProtectionOfficer} params.dataProtectionOfficer
    */
-  static fromCenterAndDataProtectionOfficer({ center, dataProtectionOfficer = {} }) {
+  static fromCenterAndDataProtectionOfficer({ center, archivistFullName, dataProtectionOfficer = {} }) {
     return new CenterForAdmin({
       center: {
         id: center.id,
@@ -23,9 +23,9 @@ export class CenterForAdminFactory {
         createdAt: undefined,
         updatedAt: undefined,
         archivedAt: center.archivedAt,
-        archivedBy: center.archivedBy,
         isComplementaryAlonePilot: center.isComplementaryAlonePilot,
       },
+      archivistFullName,
       dataProtectionOfficer: {
         firstName: dataProtectionOfficer.firstName,
         lastName: dataProtectionOfficer.lastName,
