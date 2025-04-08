@@ -112,7 +112,7 @@ export default class SessionList extends Component {
               </LinkTo>
             </:cell>
           </PixTableColumn>
-          <PixTableColumn @context={{context}}>
+          <PixTableColumn @context={{context}} class='table__column--hyphen'>
             <:header>
               {{t 'common.forms.session-labels.center-name'}}
             </:header>
@@ -120,7 +120,7 @@ export default class SessionList extends Component {
               {{sessionSummary.address}}
             </:cell>
           </PixTableColumn>
-          <PixTableColumn @context={{context}}>
+          <PixTableColumn @context={{context}} class='table__column--hyphen'>
             <:header>
               {{t 'common.forms.session-labels.room'}}
             </:header>
