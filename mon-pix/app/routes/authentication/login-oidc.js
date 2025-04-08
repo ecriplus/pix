@@ -1,6 +1,5 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import fetch from 'fetch';
 import get from 'lodash/get';
 import ENV from 'mon-pix/config/environment';
 import { createTranslatedApplicationError } from 'mon-pix/errors/factories/create-application-error';

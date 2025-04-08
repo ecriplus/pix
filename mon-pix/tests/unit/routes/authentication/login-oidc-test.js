@@ -1,6 +1,5 @@
 import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
-import * as fetch from 'fetch';
 import { SessionStorageEntry } from 'mon-pix//utils/session-storage-entry';
 import { ApplicationError } from 'mon-pix/errors/application-error';
 import { module, test } from 'qunit';
@@ -38,7 +37,7 @@ module('Unit | Route | login-oidc', function (hooks) {
 
     module('when no code exists in queryParams', function (hooks) {
       hooks.beforeEach(function () {
-        sinon.stub(fetch, 'default').resolves({
+        sinon.stub(window, 'fetch').resolves({
           json: sinon.stub().resolves({ redirectTarget: 'https://oidc/connexion' }),
         });
         const oidcPartner = {
