@@ -643,7 +643,7 @@
         "title": "Verificatie code",
         "tooltip": "Geef deze code om een derde partij de echtheid van je certificaat te laten controleren"
       },
-      "learn-about-certification-results": "Inzicht in mijn Pix-certificeringsresultaten"
+      "learn-about-certification-results": "Hoe moeten de resultaten worden geïnterpreteerd?"
     },
     "certification-ender": {
       "candidate": {
