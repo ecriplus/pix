@@ -1,10 +1,9 @@
-import { updateCertificationCenterDataProtectionOfficerInformation } from '../../../../lib/domain/usecases/update-certification-center-data-protection-officer-information.js';
-import { DataProtectionOfficer } from '../../../../src/organizational-entities/domain/models/DataProtectionOfficer.js';
-import * as dataProtectionOfficerRepository from '../../../../src/organizational-entities/infrastructure/repositories/data-protection-officer.repository.js';
-import { databaseBuilder, expect } from '../../../test-helper.js';
+import { DataProtectionOfficer } from '../../../../../src/organizational-entities/domain/models/DataProtectionOfficer.js';
+import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 
-describe('Integration | UseCases | update-certification-center-data-protection-officer-information', function () {
-  it('should add data protection officer information for a certification center', async function () {
+describe('Integration | Organizational Entities | Domain | UseCase | update-certification-center-data-protection-officer-information', function () {
+  it('adds data protection officer information for a certification center', async function () {
     // given
     const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
     await databaseBuilder.commit();
@@ -17,9 +16,8 @@ describe('Integration | UseCases | update-certification-center-data-protection-o
     };
 
     // when
-    const updatedDataProtectionOfficer = await updateCertificationCenterDataProtectionOfficerInformation({
+    const updatedDataProtectionOfficer = await usecases.updateCertificationCenterDataProtectionOfficerInformation({
       dataProtectionOfficer,
-      dataProtectionOfficerRepository,
     });
 
     // then
@@ -32,7 +30,7 @@ describe('Integration | UseCases | update-certification-center-data-protection-o
     expect(updatedDataProtectionOfficer.organizationId).to.be.null;
   });
 
-  it('should update certification center data protection officer information', async function () {
+  it('updates certification center data protection officer information', async function () {
     // given
     const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
     const dataProtectionOfficerToUpdate = databaseBuilder.factory.buildDataProtectionOfficer.withCertificationCenterId({
@@ -49,9 +47,8 @@ describe('Integration | UseCases | update-certification-center-data-protection-o
     };
 
     // when
-    const updatedDataProtectionOfficer = await updateCertificationCenterDataProtectionOfficerInformation({
+    const updatedDataProtectionOfficer = await usecases.updateCertificationCenterDataProtectionOfficerInformation({
       dataProtectionOfficer,
-      dataProtectionOfficerRepository,
     });
 
     // then
