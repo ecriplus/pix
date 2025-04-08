@@ -10,7 +10,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | passage-eve
     it('should init and keep attributes', function () {
       // given
       const id = Symbol('id');
-      const occurredAt = Symbol('date');
+      const occurredAt = new Date();
       const createdAt = Symbol('date');
       const passageId = 1234;
       const contentHash = Symbol('contentHash');
@@ -32,7 +32,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | passage-eve
       it('should throw an error', function () {
         // given
         const id = Symbol('id');
-        const occurredAt = Symbol('date');
+        const occurredAt = new Date();
         const createdAt = Symbol('date');
         const passageId = 1234;
 
@@ -50,7 +50,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | passage-eve
     it('should init and keep attributes', function () {
       // given
       const id = Symbol('id');
-      const occurredAt = Symbol('date');
+      const occurredAt = new Date();
       const createdAt = Symbol('date');
       const passageId = 1234;
 
