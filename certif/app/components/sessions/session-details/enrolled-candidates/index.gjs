@@ -467,7 +467,6 @@ export default class EnrolledCandidates extends Component {
                           }} {{candidate.firstName}} {{candidate.lastName}}'
                           disabled
                           aria-describedby='tooltip-edit-student-button'
-                          @withBackground={{true}}
                         />
                       </:triggerElement>
                       <:tooltip>{{t 'pages.sessions.detail.candidates.list.actions.edit.tooltip'}}</:tooltip>
@@ -480,7 +479,6 @@ export default class EnrolledCandidates extends Component {
                       @ariaLabel='{{t
                         "pages.sessions.detail.candidates.list.actions.edit.extra-information"
                       }} {{candidate.firstName}} {{candidate.lastName}}'
-                      @withBackground={{true}}
                     />
                   {{/if}}
                 {{/if}}
@@ -495,7 +493,6 @@ export default class EnrolledCandidates extends Component {
                         }} {{candidate.firstName}} {{candidate.lastName}}'
                         disabled
                         aria-describedby='tooltip-delete-student-button'
-                        @withBackground={{true}}
                       />
                     </:triggerElement>
                     <:tooltip>{{t 'pages.sessions.detail.candidates.list.actions.delete.tooltip'}}</:tooltip>
@@ -508,7 +505,6 @@ export default class EnrolledCandidates extends Component {
                     @ariaLabel='{{t
                       "pages.sessions.detail.candidates.list.actions.delete.extra-information"
                     }} {{candidate.firstName}} {{candidate.lastName}}'
-                    @withBackground={{true}}
                   />
                 {{/if}}
               </div>

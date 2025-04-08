@@ -29,7 +29,6 @@
                   @ariaLabel={{t "pages.team-invitations.actions.resend-invitation"}}
                   @iconName="refresh"
                   @triggerAction={{fn @onResendInvitationButtonClicked invitation}}
-                  @withBackground={{true}}
                   disabled={{invitation.isResendingInvitation}}
                   aria-disabled={{invitation.isResendingInvitation}}
                 />
@@ -46,7 +45,6 @@
                   @iconName="delete"
                   @plainIcon={{true}}
                   @triggerAction={{fn @onCancelInvitationButtonClicked invitation}}
-                  @withBackground={{true}}
                 />
               </:triggerElement>
               <:tooltip>
