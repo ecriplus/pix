@@ -1507,4 +1507,67 @@ describe('Integration | Repository | Campaign Participation', function () {
       });
     });
   });
+
+  describe('#getSharedParticipationIds', function () {
+    context('no shared participation', function () {
+      it('should return an empty array', async function () {
+        // given
+        const participation = databaseBuilder.factory.buildCampaignParticipation({
+          status: CampaignParticipationStatuses.TO_SHARE,
+        });
+        databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: participation.campaignId,
+          status: CampaignParticipationStatuses.STARTED,
+        });
+        await databaseBuilder.commit();
+        // given
+        // when
+        const result = await campaignParticipationRepository.getSharedParticipationIds(participation.campaignId);
+
+        // then
+        expect(result).to.be.empty;
+      });
+    });
+    context('with participation in another campaign', function () {
+      it('should return an empty array', async function () {
+        // given
+        const campaign1 = databaseBuilder.factory.buildCampaign();
+        const campaign2 = databaseBuilder.factory.buildCampaign();
+        databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign1.id,
+          status: CampaignParticipationStatuses.SHARED,
+        });
+
+        await databaseBuilder.commit();
+        // given
+        // when
+        const result = await campaignParticipationRepository.getSharedParticipationIds(campaign2.id);
+
+        // then
+        expect(result).to.be.empty;
+      });
+    });
+    context('with improved shared participation', function () {
+      it('should return only not improved participation ', async function () {
+        // given
+        const improvedParticipation = databaseBuilder.factory.buildCampaignParticipation({
+          status: CampaignParticipationStatuses.SHARED,
+          isImproved: true,
+        });
+        const participation = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: improvedParticipation.campaignId,
+          status: CampaignParticipationStatuses.SHARED,
+          userId: improvedParticipation.userId,
+          organizationLearnerId: improvedParticipation.organizationLearnerId,
+        });
+        await databaseBuilder.commit();
+        // when
+        const result = await campaignParticipationRepository.getSharedParticipationIds(participation.campaignId);
+
+        // then
+        expect(result).lengthOf(1);
+        expect(result[0]).equal(participation.id);
+      });
+    });
+  });
 });
