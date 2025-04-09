@@ -13,7 +13,7 @@ const findPaginatedFilteredOrganizationCampaigns = withTransaction(async functio
   knowledgeElementSnapshotRepository,
   withCoverRate,
 }) {
-  const campaignReports = campaignReportRepository.findPaginatedFilteredByOrganizationId({
+  const campaignReports = await campaignReportRepository.findPaginatedFilteredByOrganizationId({
     organizationId,
     filter,
     page,
@@ -38,6 +38,7 @@ const findPaginatedFilteredOrganizationCampaigns = withTransaction(async functio
     });
     campaignReport.setCoverRate(campaignResultLevelPerTubesAndCompetences);
   }
+  return campaignReports;
 });
 
 export { findPaginatedFilteredOrganizationCampaigns };
