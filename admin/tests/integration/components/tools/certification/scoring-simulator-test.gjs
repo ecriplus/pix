@@ -1,11 +1,11 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
 import { fillIn } from '@ember/test-helpers';
-import ScoringSimulator from 'pix-admin/components/administration/certification/scoring-simulator';
+import ScoringSimulator from 'pix-admin/components/tools/certification/scoring-simulator';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
-module('Integration | Component |  administration/certification/scoring-simulator', function (hooks) {
+module('Integration | Component | Tools | certification/scoring-simulator', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   test('it should display form', async function (assert) {

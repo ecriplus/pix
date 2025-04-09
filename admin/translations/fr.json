@@ -653,6 +653,9 @@
         "deployment": {
           "label": "Déploiement"
         },
+        "junior": {
+          "label": "Junior"
+        },
         "organizations": {
           "label": "Organisations"
         }
@@ -997,6 +1000,11 @@
         "table": {
           "caption": "Liste des membres interne de Pix ayant accès à Pix Admin. Contient le nom, prénom, adresse e-mail et le rôle (CERTIF, METIER, SUPPPORT ou ADMIN). Des actions permettent de modifier le rôle ou de désactiver le membre"
         }
+      }
+    },
+    "tools": {
+      "navigation": {
+        "aria-label": "Navigation de la section outils"
       }
     },
     "trainings": {
