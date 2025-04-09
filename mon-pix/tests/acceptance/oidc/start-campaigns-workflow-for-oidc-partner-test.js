@@ -2,7 +2,7 @@
 
 import { visit } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { click, currentURL, fillIn } from '@ember/test-helpers';
+import { click, currentURL, fillIn, settled } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
@@ -93,6 +93,8 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
 
         await click(screen.getByRole('checkbox', { name: t('common.cgu.label') }));
         await click(screen.getByRole('button', { name: 'Je crée mon compte' }));
+        // eslint-disable-next-line ember/no-settled-after-test-helper
+        await settled();
 
         // then
         assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/evaluation/didacticiel`);
