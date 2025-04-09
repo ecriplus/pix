@@ -1,14 +1,13 @@
 import { knex as datamartKnex } from '../../../../datamart/knex-database-connection.js';
 import { knex as datawarehouseKnex } from '../../../../datawarehouse/knex-database-connection.js';
 import { JobController, JobGroup } from '../../../shared/application/jobs/job-controller.js';
-import { JobExpireIn } from '../../../shared/infrastructure/repositories/jobs/job-repository.js';
 import { ReplicationJob } from '../../domain/models/ReplicationJob.js';
 import { extractTransformAndLoadData } from '../../domain/usecases/extract-transform-and-load-data.js';
 import * as replicationRepository from '../../infrastructure/repositories/replication-repository.js';
 
 export class ReplicationJobController extends JobController {
   constructor() {
-    super(ReplicationJob.name, { jobGroup: JobGroup.MADDO, expireIn: JobExpireIn.FOUR_HOURS });
+    super(ReplicationJob.name, { jobGroup: JobGroup.MADDO });
   }
 
   async handle({
