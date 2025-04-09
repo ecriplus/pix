@@ -1,5 +1,23 @@
 # Pix Changelog
 
+## v5.86.0 (09/04/2025)
+
+
+### :rocket: Amélioration
+- [#12000](https://github.com/1024pix/pix/pull/12000) [FEATURE] Ajouter le champ moduleId dans get-elements-csv (PIX-17405).
+- [#11980](https://github.com/1024pix/pix/pull/11980) [FEATURE] Déplacer le simulateur de scoring certif dans les outils (PIX-17393).
+- [#11977](https://github.com/1024pix/pix/pull/11977) [FEATURE] Ajouter le champ moduleId au script get-modules-csv (PIX-17219).
+- [#11982](https://github.com/1024pix/pix/pull/11982) [FEATURE] Corrections design sur la page d'affichage du Certificat Pix (PIX-17056).
+
+### :building_construction: Tech
+- [#11890](https://github.com/1024pix/pix/pull/11890) [TECH] Réduit la violation de contexte restreint entre évaluation et devcomp.
+- [#11959](https://github.com/1024pix/pix/pull/11959) [TECH] Migrer la route GET /api/admin/organizations (PIX-17348).
+
+### :bug: Correction
+- [#12003](https://github.com/1024pix/pix/pull/12003) [BUGFIX] Augmentation du délai maximum du job de réplication (MADDO). .
+- [#11991](https://github.com/1024pix/pix/pull/11991) [BUGFIX] Couper les cellules avec des mots trop longs dans la liste des sessions certif (PIX-17378).
+- [#11994](https://github.com/1024pix/pix/pull/11994) [BUGFIX] Ajouter la dependance manquante codeGenerator dans les injections de dépendances pour les usecases (PIX-17417).
+
 ## v5.85.0 (08/04/2025)
 
 
