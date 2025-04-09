@@ -84,6 +84,10 @@ class CampaignReport {
     this.stages = stageCollection.stages;
   }
 
+  setCoverRate(campaignResultLevelsPerTubesAndCompetences) {
+    this.tubes = campaignResultLevelsPerTubesAndCompetences.levelsPerTube;
+  }
+
   computeAverageResult(masteryRates) {
     const totalMasteryRates = masteryRates.length;
     if (totalMasteryRates > 0) {
