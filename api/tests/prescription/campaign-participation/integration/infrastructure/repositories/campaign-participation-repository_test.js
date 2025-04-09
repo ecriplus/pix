@@ -354,7 +354,7 @@ describe('Integration | Repository | Campaign Participation', function () {
 
     it('should lock table for update', async function () {
       const error = await catchErr(DomainTransaction.execute)(async () => {
-        campaignParticipationRepository.getLocked(participation.id);
+        await campaignParticipationRepository.getLocked(participation.id);
         // we mimick a concurrent call on the campaign-participations table on the same row
         return knex('campaign-participations').where({ id: participation.id }).first().forUpdate().timeout(100);
       });
