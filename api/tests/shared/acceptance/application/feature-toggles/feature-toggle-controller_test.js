@@ -37,7 +37,6 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'setup-ecosystem-before-start': false,
             'should-display-new-analysis-page': false,
             'show-experimental-missions': false,
-            'show-new-campaign-presentation-page': false,
             'show-new-result-page': false,
             'is-v3-certification-page-enabled': false,
           },
