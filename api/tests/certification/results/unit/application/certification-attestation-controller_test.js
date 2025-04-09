@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 
 import { certificationAttestationController } from '../../../../../src/certification/results/application/certification-attestation-controller.js';
 import { usecases } from '../../../../../src/certification/results/domain/usecases/index.js';
+import { SESSIONS_VERSIONS } from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { LANGUAGES_CODE } from '../../../../../src/shared/domain/services/language-service.js';
 import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
@@ -232,13 +233,16 @@ describe('Certification | Results | Unit | Application | Controller | certificat
       clock.restore();
     });
 
-    describe('when attestations are for v3', function () {
-      it('should return division attestations in PDF binary format', async function () {
+    describe('when there are at least one v3 attestation', function () {
+      it('should return only v3 division attestations in PDF binary format', async function () {
         // given
         const userId = 1;
         const i18n = getI18n();
 
         const v3CertificationAttestation = domainBuilder.certification.results.buildV3CertificationAttestation();
+        const v2CertificationAttestation = domainBuilder.buildCertificationAttestation({
+          version: SESSIONS_VERSIONS.V2,
+        });
         const generatedPdf = Symbol('Stream');
 
         const organizationId = domainBuilder.buildOrganization().id;
@@ -257,7 +261,7 @@ describe('Certification | Results | Unit | Application | Controller | certificat
             division,
             organizationId,
           })
-          .resolves([v3CertificationAttestation, v3CertificationAttestation]);
+          .resolves([v3CertificationAttestation, v3CertificationAttestation, v2CertificationAttestation]);
 
         const generatePdfStub = {
           generate: sinon.stub().returns(generatedPdf),
