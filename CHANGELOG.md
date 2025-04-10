@@ -1,5 +1,21 @@
 # Pix Changelog
 
+## v5.87.0 (10/04/2025)
+
+
+### :rocket: Amélioration
+- [#12007](https://github.com/1024pix/pix/pull/12007) [FEATURE] Ajouter ModuleId dans le script get-proposals-csv (PIX-17406).
+- [#11948](https://github.com/1024pix/pix/pull/11948) [FEATURE] ajoute la route pour récupérer les niveaux par sujet et competence (Pix-17023).
+
+### :building_construction: Tech
+- [#12011](https://github.com/1024pix/pix/pull/12011) [TECH] Supprimer le FT showNewCampaignPresentationPage (PIX-17434).
+- [#12010](https://github.com/1024pix/pix/pull/12010) [TECH] Ajouter le dossier oublié des scripts de devcomp aux review automatiques (PIX-17430).
+- [#11970](https://github.com/1024pix/pix/pull/11970) [TECH] Supprimer les colones userId et snappedAt de knowledge-element-snapshots (PIX-17212).
+- [#11998](https://github.com/1024pix/pix/pull/11998) [TECH] Supprimer la dépendance à `ember-fetch` dans Pix App.
+
+### :bug: Correction
+- [#12005](https://github.com/1024pix/pix/pull/12005) [BUGFIX] Corriger la scrollbar sur le composant transitoire (PIX-17402).
+
 ## v5.86.0 (09/04/2025)
 
 
