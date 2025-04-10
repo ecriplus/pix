@@ -612,7 +612,9 @@
       "title": "Parcours"
     },
     "certificate": {
-      "attestation": "Télécharger mon attestation",
+      "actions": {
+        "download": "Télécharger mon certificat"
+      },
       "back-link": "Retour à mes certifications",
       "candidate-birth": "Né(e) le {birthdate}",
       "candidate-birth-complete": "Né(e) le {birthdate} à {birthplace}",

@@ -247,7 +247,7 @@ module('Integration | Component | user certifications detail header', function (
       );
 
       // when
-      await click(screen.getByRole('button', { name: 'Télécharger mon attestation' }));
+      await click(screen.getByRole('button', { name: t('pages.certificate.actions.download') }));
 
       // then
       sinon.assert.calledWith(fileSaverSaveStub, {
@@ -360,7 +360,7 @@ module('Integration | Component | user certifications detail header', function (
       );
 
       // when
-      await click(screen.getByRole('button', { name: 'Télécharger mon attestation' }));
+      await click(screen.getByRole('button', { name: t('pages.certificate.actions.download') }));
 
       // then
       sinon.assert.calledWith(fileSaverSaveStub, {
@@ -460,7 +460,7 @@ module('Integration | Component | user certifications detail header', function (
       );
 
       // when
-      await click(screen.getByRole('button', { name: 'Télécharger mon attestation' }));
+      await click(screen.getByRole('button', { name: t('pages.certificate.actions.download') }));
 
       // then
       assert.ok(screen.getByText('Une erreur est survenue. Veuillez recommencer ou contacter le support.'));

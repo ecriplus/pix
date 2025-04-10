@@ -48,7 +48,7 @@ function getAttesttationIcon(type) {
       @iconBefore="download"
       class="attestation-card__button"
     >
-      {{t "pages.certificate.attestation"}}
+      {{t "pages.certificate.actions.download"}}
     </PixButton>
   </PixBlock>
 </template>
