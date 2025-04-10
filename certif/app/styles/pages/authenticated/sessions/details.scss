@@ -128,6 +128,20 @@
   &__clipboard-button {
     margin-left: 4px;
   }
+
+  .pix-icon-button {
+    &:hover {
+      background-color: var(--pix-neutral-0);
+      &:active {
+        color: var(--pix-neutral-0);
+      }
+    }
+    &:focus {
+      &:hover {
+        background-color: var(--pix-neutral-800);
+      }
+    }
+  }
 }
 
 .session-details-buttons {
