@@ -26,32 +26,6 @@ export const replications = [
     },
   },
   {
-    name: 'data_export_parcoursup_certif_result',
-    before: async ({ datamartKnex }) => {
-      await datamartKnex('data_export_parcoursup_certif_result').delete();
-    },
-    from: ({ datawarehouseKnex }) => {
-      return datawarehouseKnex('data_export_parcoursup_certif_result').select(
-        'national_student_id',
-        'organization_uai',
-        'last_name',
-        'first_name',
-        'birthdate',
-        'status',
-        'pix_score',
-        'certification_date',
-        'competence_level',
-        'competence_name',
-        'competence_code',
-        'area_name',
-        'certification_courses_id',
-      );
-    },
-    to: ({ datamartKnex }, chunk) => {
-      return datamartKnex('data_export_parcoursup_certif_result').insert(chunk);
-    },
-  },
-  {
     name: 'certification_results',
     before: async ({ datamartKnex }) => {
       await datamartKnex('certification_results').delete();
@@ -74,31 +48,6 @@ export const replications = [
     },
     to: ({ datamartKnex }, chunk) => {
       return datamartKnex('certification_results').insert(chunk);
-    },
-  },
-  {
-    name: 'data_export_parcoursup_certif_result_code_validation',
-    before: async ({ datamartKnex }) => {
-      await datamartKnex('data_export_parcoursup_certif_result_code_validation').delete();
-    },
-    from: ({ datawarehouseKnex }) => {
-      return datawarehouseKnex('data_export_parcoursup_certif_result_code_validation').select(
-        'certification_code_verification',
-        'last_name',
-        'first_name',
-        'birthdate',
-        'status',
-        'pix_score',
-        'certification_date',
-        'competence_level',
-        'competence_name',
-        'competence_code',
-        'area_name',
-        'certification_courses_id',
-      );
-    },
-    to: ({ datamartKnex }, chunk) => {
-      return datamartKnex('data_export_parcoursup_certif_result_code_validation').insert(chunk);
     },
   },
 ];
