@@ -1,4 +1,4 @@
-import { visit } from '@1024pix/ember-testing-library';
+import { visit, within } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
@@ -51,7 +51,7 @@ module('Acceptance | authenticated/sessions/list/with required action', function
       const screen = await visit('/sessions/list/with-required-action');
 
       // then
-      assert.dom(screen.getByRole('link', { name: 'Sessions de certifications' })).hasClass('active');
+      assert.dom(screen.getByRole('link', { name: 'Sessions de certif' })).hasClass('active');
     });
 
     module('when clicking on the sessions to be treated tab', function () {
@@ -167,12 +167,15 @@ module('Acceptance | authenticated/sessions/list/with required action', function
 
         // when
         await click(screen.getByRole('checkbox', { name: t('pages.sessions.table.required-actions.checkbox-label') }));
+
         // then
+        const table = screen.getByRole('table');
+
         assert.dom('table tbody tr').exists({ count: 1 });
-        assert.dom(screen.getByText('Centre SCO des Anne-Étoiles')).exists();
-        assert.dom(screen.getByText('1')).exists();
-        assert.dom(screen.getByText('01/01/2021 à 17:00:00')).exists();
-        assert.dom(screen.getByText('John Doe')).exists();
+        assert.dom(within(table).getByText('Centre SCO des Anne-Étoiles')).exists();
+        assert.dom(within(table).getByText('1')).exists();
+        assert.dom(within(table).getByText('01/01/2021 à 17:00:00')).exists();
+        assert.dom(within(table).getByText('John Doe')).exists();
       });
     });
   });
