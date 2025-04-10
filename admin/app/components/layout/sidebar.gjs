@@ -18,7 +18,11 @@ export default class Sidebar extends Component {
   }
 
   <template>
-    <PixNavigation @menuLabel="Menu">
+    <PixNavigation
+      @navigationAriaLabel={{t "components.layout.sidebar.labels.main"}}
+      @openLabel={{t "components.layout.sidebar.labels.open"}}
+      @closeLabel={{t "components.layout.sidebar.labels.close"}}
+    >
       <:brand>
         <LinkTo @route="authenticated.index">
           <img src="/admin-logo.svg" alt={{t "common.home-page"}} />
