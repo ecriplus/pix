@@ -6,8 +6,8 @@ import { fileURLToPath } from 'node:url';
  * campaignRepository.getByCode
  * groupRepository.findByOrganizationId
  */
-import * as userReconciliationService from '../../../../../lib/domain/services/user-reconciliation-service.js';
 import * as campaignRepository from '../../../../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
+import * as userReconciliationService from '../../../../../src/shared/domain/services/user-reconciliation-service.js';
 import * as authenticationMethodRepository from '../../../../identity-access-management/infrastructure/repositories/authentication-method.repository.js';
 import { lastUserApplicationConnectionsRepository } from '../../../../identity-access-management/infrastructure/repositories/last-user-application-connections.repository.js';
 import * as userRepository from '../../../../identity-access-management/infrastructure/repositories/user.repository.js';
