@@ -1,5 +1,21 @@
 # Pix Changelog
 
+## v5.88.0 (10/04/2025)
+
+
+### :rocket: Amélioration
+- [#11987](https://github.com/1024pix/pix/pull/11987) [FEATURE] Assurer l'intégrité des données enregistrées côté Model (PIX-17157).
+- [#12001](https://github.com/1024pix/pix/pull/12001) [FEATURE] Renommage du bouton de téléchargement de certificat (PIX-17421).
+- [#11952](https://github.com/1024pix/pix/pull/11952) [FEATURE] MaDDo Parcoursup - Utiliser les tables génériques de résultats de certif (PIX-17323).
+- [#11954](https://github.com/1024pix/pix/pull/11954) [FEATURE] MaDDo - Suppression de la mise à dispo parcoursup depuis l'API Pix (PIX-17326).
+- [#11983](https://github.com/1024pix/pix/pull/11983) [FEATURE] Ajouter un script de normalisation suite au passage de la limite de blocage de 50 à 30 (PIX-16105).
+
+### :building_construction: Tech
+- [#12006](https://github.com/1024pix/pix/pull/12006) [TECH] Corriger un test flaky sur le repository campaign-participation (PIX-17428).
+
+### :bug: Correction
+- [#12016](https://github.com/1024pix/pix/pull/12016) [BUGFIX] Rajouter les attributs manquant sur la navbar de Pix orga (PIX-17440).
+
 ## v5.87.0 (10/04/2025)
 
 
