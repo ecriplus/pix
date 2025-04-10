@@ -59,7 +59,7 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
   it('should save the passage and record passage started event', async function () {
     // given
     const moduleId = Symbol('moduleId');
-    const passageId = Symbol('passageId');
+    const passageId = 1234;
     const userId = Symbol('userId');
 
     const slug = 'les-adresses-email';
