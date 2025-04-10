@@ -2,7 +2,7 @@ export const replications = [
   {
     name: 'sco_certification_results',
     before: async ({ datamartKnex }) => {
-      await datamartKnex('sco_certification_results').delete();
+      await datamartKnex('sco_certification_results').truncate();
     },
     from: ({ datawarehouseKnex }) => {
       return datawarehouseKnex('data_export_parcoursup_certif_result').select(
@@ -28,7 +28,7 @@ export const replications = [
   {
     name: 'certification_results',
     before: async ({ datamartKnex }) => {
-      await datamartKnex('certification_results').delete();
+      await datamartKnex('certification_results').truncate();
     },
     from: ({ datawarehouseKnex }) => {
       return datawarehouseKnex('data_export_parcoursup_certif_result_code_validation').select(
