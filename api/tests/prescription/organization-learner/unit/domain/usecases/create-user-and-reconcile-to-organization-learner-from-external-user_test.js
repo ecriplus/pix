@@ -1,7 +1,7 @@
-import { createUserAndReconcileToOrganizationLearnerFromExternalUser } from '../../../../lib/domain/usecases/create-user-and-reconcile-to-organization-learner-from-external-user.js';
-import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
-import { RequestedApplication } from '../../../../src/identity-access-management/infrastructure/utils/network.js';
-import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../../src/identity-access-management/domain/constants/identity-providers.js';
+import { RequestedApplication } from '../../../../../../src/identity-access-management/infrastructure/utils/network.js';
+import { createUserAndReconcileToOrganizationLearnerFromExternalUser } from '../../../../../../src/prescription/organization-learner/domain/usecases/create-user-and-reconcile-to-organization-learner-from-external-user.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | create-user-and-reconcile-to-organization-learner-from-external-user', function () {
   let obfuscationService;
