@@ -209,6 +209,8 @@ describe('Unit | API | Campaigns', function () {
       const page = Symbol('page');
       const meta = Symbol('meta');
       const targetProfileName = Symbol('targetProfileName');
+      const coverRate = domainBuilder.prescription.campaign.buildCampaignResultLevelsPerTubesAndCompetences();
+
       const campaignInformation1 = domainBuilder.buildCampaignReport({
         id: 777,
         code: 'SOMETHING',
@@ -219,6 +221,8 @@ describe('Unit | API | Campaigns', function () {
         archivedAt: new Date('2023-01-01'),
         targetProfileName,
       });
+
+      campaignInformation1.setCoverRate(coverRate);
       const campaignInformation2 = domainBuilder.buildCampaignReport({
         id: 666,
         code: 'SOMETHING',
@@ -247,6 +251,7 @@ describe('Unit | API | Campaigns', function () {
       expect(firstCampaignListItem.createdAt).to.be.equal(campaignInformation1.createdAt);
       expect(firstCampaignListItem.archivedAt).to.be.equal(campaignInformation1.archivedAt);
       expect(firstCampaignListItem.targetProfileName).to.be.equal(targetProfileName);
+      expect(firstCampaignListItem.tubes).to.be.equal(campaignInformation1.tubes);
     });
   });
 });
