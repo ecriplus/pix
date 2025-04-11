@@ -1,4 +1,4 @@
-import { V3CertificationAttestation } from '../../../../../../src/certification/results/domain/models/V3CertificationAttestation.js';
+import { V3Certificate } from '../../../../../../src/certification/results/domain/models/V3Certificate.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 
 const buildV3CertificationAttestation = function ({
@@ -14,7 +14,7 @@ const buildV3CertificationAttestation = function ({
   resultCompetenceTree = null,
   algorithmEngineVersion = AlgorithmEngineVersion.V3,
 } = {}) {
-  return new V3CertificationAttestation({
+  return new V3Certificate({
     id,
     firstName,
     lastName,
