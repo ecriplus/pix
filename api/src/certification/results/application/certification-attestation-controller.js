@@ -107,7 +107,9 @@ const downloadCertificationAttestationsForDivision = async function (
     division,
   });
 
-  if (attestations.every((attestation) => attestation instanceof V3CertificationAttestation)) {
+  if (attestations.some((attestation) => attestation instanceof V3CertificationAttestation)) {
+    const v3Certificates = attestations.filter((certificate) => certificate instanceof V3CertificationAttestation);
+
     const normalizedDivision = normalizeAndRemoveAccents(division);
 
     const translatedFileName = i18n.__('certification-confirmation.file-name', {
@@ -117,7 +119,7 @@ const downloadCertificationAttestationsForDivision = async function (
     return h
       .response(
         dependencies.v3CertificationAttestationPdf.generate({
-          certificates: attestations,
+          certificates: v3Certificates,
           i18n,
         }),
       )
