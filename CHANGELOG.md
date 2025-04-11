@@ -1,5 +1,25 @@
 # Pix Changelog
 
+## v5.89.0 (11/04/2025)
+
+
+### :rocket: Amélioration
+- [#12013](https://github.com/1024pix/pix/pull/12013) [FEATURE] Ne récupérer que les certifs v3 lors du téléchargement des certifs d'une classe (PIX-17435).
+- [#12022](https://github.com/1024pix/pix/pull/12022) [FEATURE] Améliorer la vitesse des réplications (PIX-17456).
+
+### :building_construction: Tech
+- [#12021](https://github.com/1024pix/pix/pull/12021) [TECH] Suppression des tables parcoursup historiques non utilisées (PIX-17324).
+- [#12008](https://github.com/1024pix/pix/pull/12008) [TECH] Ajout de métriques sur le pool de connexion pour toutes les connexions de base de données.
+- [#12020](https://github.com/1024pix/pix/pull/12020) [TECH] Suppression des réplications sur les tables historiques de parcoursup (PIX-17319).
+
+### :bug: Correction
+- [#12024](https://github.com/1024pix/pix/pull/12024) [BUGFIX] :bug: Révision de la requête SQL pour la récupération de certificat pour le LSU/LSL (PIX-17408).
+- [#12026](https://github.com/1024pix/pix/pull/12026) [BUGFIX] Problème SEO sur le projet junior (pix-17392).
+
+### :arrow_up: Montée de version
+- [#12028](https://github.com/1024pix/pix/pull/12028) [BUMP] Update dependency @1024pix/pix-ui to ^55.14.0 (orga).
+- [#11967](https://github.com/1024pix/pix/pull/11967) [BUMP] Update dependency @1024pix/pix-ui to ^55.12.0 (mon-pix).
+
 ## v5.88.0 (10/04/2025)
 
 
