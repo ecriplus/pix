@@ -30,6 +30,7 @@ describe('Script | Prod | Clean knowledge-element-snapshot snapshot (jsonb)', fu
     let logger;
     let dependencies;
     let user, campaign, learner;
+    let firstSnapshotId, secondSnapshotId, thirdSnapshotId;
 
     beforeEach(async function () {
       script = new CleanKeSnapshotScript();
@@ -63,36 +64,43 @@ describe('Script | Prod | Clean knowledge-element-snapshot snapshot (jsonb)', fu
         sharedAt: new Date('2025-01-03'),
       });
 
+      const assessmentId = databaseBuilder.factory.buildAssessment({
+        userId: user.id,
+        campaignParticipationId: participation.id,
+      }).id;
+      const answerId = databaseBuilder.factory.buildAnswer({ assessmentId }).id;
+      firstSnapshotId = 1;
+      secondSnapshotId = 2;
+      thirdSnapshotId = 3;
       databaseBuilder.factory.knowledgeElementSnapshotFactory.buildSnapshot({
-        id: 1,
-        knowledgeElementsAttributes: [{ skillId: 'skill_1', status: 'validated', earnedPix: 40, userId: user.id }],
+        id: firstSnapshotId,
+        knowledgeElementsAttributes: [
+          { skillId: 'skill_1', status: 'validated', earnedPix: 40, userId: user.id, answerId },
+        ],
         campaignParticipationId: participation.id,
       });
       databaseBuilder.factory.knowledgeElementSnapshotFactory.buildSnapshot({
-        id: 2,
+        id: secondSnapshotId,
         knowledgeElementsAttributes: [{ skillId: 'skill_2', status: 'validated', earnedPix: 40, userId: user.id }],
         campaignParticipationId: participation2.id,
       });
       databaseBuilder.factory.knowledgeElementSnapshotFactory.buildSnapshot({
-        id: 3,
+        id: thirdSnapshotId,
         knowledgeElementsAttributes: [
-          { skillId: 'skill_2', status: 'validated', earnedPix: 40, userId: null, assessmentId: null, answerId: null },
+          {
+            id: 456,
+            skillId: 'skill_2',
+            status: 'validated',
+            earnedPix: 40,
+            userId: null,
+            assessmentId: null,
+            answerId: null,
+          },
         ],
         campaignParticipationId: participation3.id,
       });
 
       await databaseBuilder.commit();
-    });
-
-    it('should log how many element it will clean', async function () {
-      // when
-      await script.handle({ options: { pauseDuration: 0 }, logger, dependencies });
-
-      // then
-      expect(logger.info).to.have.been.calledWithExactly(
-        { event: 'CleanKeSnapshotScript' },
-        'Start cleaning 2 (1 batch) knowledge-element-snapshots to clean.',
-      );
     });
 
     it('should clean snapshot one by one', async function () {
@@ -106,8 +114,8 @@ describe('Script | Prod | Clean knowledge-element-snapshot snapshot (jsonb)', fu
       const snapshots = await knex('knowledge-element-snapshots').pluck('snapshot');
 
       expect(snapshots.flat().every(({ userId, assessmentId }) => !userId && !assessmentId)).to.be.true;
-      expect(logger.info).to.have.been.calledWithExactly({ event: 'CleanKeSnapshotScript' }, '1/2 chunks done !');
-      expect(logger.info).to.have.been.calledWithExactly({ event: 'CleanKeSnapshotScript' }, '2/2 chunks done !');
+      expect(logger.info).to.have.been.calledWithExactly({ event: 'CleanKeSnapshotScript' }, '1 chunks done !');
+      expect(logger.info).to.have.been.calledWithExactly({ event: 'CleanKeSnapshotScript' }, '2 chunks done !');
     });
 
     it('should pause between chunks', async function () {
@@ -119,6 +127,67 @@ describe('Script | Prod | Clean knowledge-element-snapshot snapshot (jsonb)', fu
 
       // then
       expect(dependencies.pause).to.have.been.calledOnceWithExactly(10);
+    });
+
+    it('should remove userId, answerId and assessmentId from snapshots when answerId is in snapshot', async function () {
+      // given
+
+      // when
+      await script.handle({ logger, dependencies });
+
+      // then
+      const snapshots = await knex('knowledge-element-snapshots');
+
+      const firstSnapshot = snapshots.find((snapshot) => snapshot.id === firstSnapshotId);
+      const secondSnapshot = snapshots.find((snapshot) => snapshot.id === secondSnapshotId);
+
+      expect(firstSnapshot.snapshot).to.deep.equal([
+        {
+          source: 'direct',
+          status: 'validated',
+          skillId: 'skill_1',
+          createdAt: '2020-01-01T00:00:00.000Z',
+          earnedPix: 40,
+          competenceId: 'recCHA789',
+        },
+      ]);
+      expect(secondSnapshot.snapshot).to.deep.equal([
+        {
+          source: 'direct',
+          status: 'validated',
+          skillId: 'skill_2',
+          createdAt: '2020-01-01T00:00:00.000Z',
+          earnedPix: 40,
+          competenceId: 'recCHA789',
+        },
+      ]);
+    });
+
+    it('should not update snapshot without answerId', async function () {
+      // given
+      // We just verify that we dont want to touch at others snapshot without answerId
+      // when
+      await script.handle({ logger, dependencies });
+
+      // then
+      const snapshots = await knex('knowledge-element-snapshots');
+
+      const thirdSnapshot = snapshots.find((snapshot) => snapshot.id === thirdSnapshotId);
+
+      expect(thirdSnapshot.snapshot).to.deep.equal([
+        {
+          id: 456,
+          source: 'direct',
+          status: 'validated',
+          skillId: 'skill_2',
+          createdAt: '2020-01-01T00:00:00.000Z',
+          earnedPix: 40,
+          competenceId: 'recCHA789',
+          userId: null,
+          answerId: null,
+          assessmentId: null,
+        },
+      ]);
     });
   });
 });
