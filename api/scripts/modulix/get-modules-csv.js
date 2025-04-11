@@ -42,6 +42,10 @@ export async function getModulesListAsCsv(modules) {
         label: 'ModuleTotalSummaries',
         value: (row) => row.grains.filter((grain) => grain.type === 'summary').length,
       },
+      {
+        label: 'ModuleTotalTransitions',
+        value: (row) => row.grains.filter((grain) => grain.type === 'transition').length,
+      },
       { label: 'ModuleDuration', value: (row) => `=TEXT(${row.details.duration}/24/60; "mm:ss")` },
       {
         label: 'ModuleTotalElements',
