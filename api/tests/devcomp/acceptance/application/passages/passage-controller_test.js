@@ -20,7 +20,7 @@ describe('Acceptance | Controller | passage-controller', function () {
         const expectedResponse = {
           type: 'passages',
           attributes: {
-            'module-id': 'bien-ecrire-son-adresse-mail',
+            'module-id': 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d',
           },
         };
 
@@ -54,7 +54,7 @@ describe('Acceptance | Controller | passage-controller', function () {
         const expectedResponse = {
           type: 'passages',
           attributes: {
-            'module-id': 'bien-ecrire-son-adresse-mail',
+            'module-id': 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d',
           },
         };
 
