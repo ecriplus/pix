@@ -1,6 +1,5 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import fetch from 'fetch';
 import get from 'lodash/get';
 import ENV from 'pix-admin/config/environment';
 import JSONApiError from 'pix-admin/errors/json-api-error';
