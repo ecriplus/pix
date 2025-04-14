@@ -1,5 +1,8 @@
-import Joi from 'joi';
+import JoiDate from '@joi/date';
+import BaseJoi from 'joi';
+const Joi = BaseJoi.extend(JoiDate);
 
+import { organizationController } from '../../../../lib/application/organizations/organization-controller.js';
 import { BadRequestError, PayloadTooLargeError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { MAX_FILE_SIZE_UPLOAD } from '../../../shared/domain/constants.js';
@@ -13,6 +16,35 @@ const TWO_AND_HALF_MEGABYTES = 1048576 * 2.5;
 
 const register = async function (server) {
   server.route([
+    {
+      method: 'GET',
+      path: '/api/admin/organizations/{organizationId}/children',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            organizationId: identifiersType.organizationId,
+          }),
+        },
+        handler: organizationController.findChildrenOrganizationsForAdmin,
+        tags: ['api', 'organizations'],
+        notes: [
+          "- **Cette route est restreinte aux utilisateurs authentifiés ayant un rôle permettant un accès à l'admin de Pix**\n" +
+            '- Elle permet de récupérer la liste des organisations filles',
+        ],
+      },
+    },
     {
       method: 'GET',
       path: '/api/admin/organizations',
