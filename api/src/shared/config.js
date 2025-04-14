@@ -304,7 +304,6 @@ const configuration = (function () {
       ),
       isOppsyDisabled: toBoolean(process.env.FT_OPPSY_DISABLED),
       isPixCompanionEnabled: toBoolean(process.env.FT_PIX_COMPANION_ENABLED),
-      isSelfAccountDeletionEnabled: toBoolean(process.env.FT_SELF_ACCOUNT_DELETION),
       isQuestEnabled: toBoolean(process.env.FT_ENABLE_QUESTS),
       isTextToSpeechButtonEnabled: toBoolean(process.env.FT_ENABLE_TEXT_TO_SPEECH_BUTTON),
       setupEcosystemBeforeStart: toBoolean(process.env.FT_SETUP_ECOSYSTEM_BEFORE_START) || false,
@@ -525,7 +524,6 @@ const configuration = (function () {
     config.featureToggles.isPixAppNewLayoutEnabled = true;
     config.featureToggles.isPixCompanionEnabled = false;
     config.featureToggles.isPixAdminNewSidebarEnabled = false;
-    config.featureToggles.isSelfAccountDeletionEnabled = false;
     config.featureToggles.isQuestEnabled = false;
     config.featureToggles.isAsyncQuestRewardingCalculationEnabled = false;
     config.featureToggles.isTextToSpeechButtonEnabled = false;

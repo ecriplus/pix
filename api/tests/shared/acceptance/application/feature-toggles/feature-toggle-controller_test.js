@@ -32,7 +32,7 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'is-pix-admin-new-sidebar-enabled': false,
             'is-pix-companion-enabled': false,
             'is-quest-enabled': false,
-            'is-self-account-deletion-enabled': false,
+            'is-self-account-deletion-enabled': true,
             'is-text-to-speech-button-enabled': false,
             'setup-ecosystem-before-start': false,
             'should-display-new-analysis-page': false,

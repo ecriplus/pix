@@ -1,4 +1,4 @@
-import { config } from '../../../shared/config.js';
+import { featureToggles } from '../../../shared/infrastructure/feature-toggles/index.js';
 
 /**
  * Determines if a user can self-delete their account.
@@ -13,12 +13,11 @@ import { config } from '../../../shared/config.js';
  */
 const canSelfDeleteAccount = async ({
   userId,
-  featureToggles = config.featureToggles,
   candidatesApiRepository,
   learnersApiRepository,
   userTeamsApiRepository,
 }) => {
-  const { isSelfAccountDeletionEnabled } = featureToggles;
+  const isSelfAccountDeletionEnabled = await featureToggles.get('isSelfAccountDeletionEnabled');
   if (!isSelfAccountDeletionEnabled) return false;
 
   const hasBeenLearner = await learnersApiRepository.hasBeenLearner({ userId });

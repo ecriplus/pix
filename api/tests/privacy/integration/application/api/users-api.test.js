@@ -1,6 +1,5 @@
 import * as userApi from '../../../../../src/privacy/application/api/users-api.js';
-import { config } from '../../../../../src/shared/config.js';
-import { databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | Privacy | Application | Api | users', function () {
   describe('#anonymizeUser', function () {
@@ -22,7 +21,6 @@ describe('Integration | Privacy | Application | Api | users', function () {
   describe('#canSelfDeleteAccount', function () {
     it('indicates if a user can self delete their account', async function () {
       // given
-      sinon.stub(config.featureToggles, 'isSelfAccountDeletionEnabled').value(true);
 
       const userId = databaseBuilder.factory.buildUser().id;
       await databaseBuilder.commit();

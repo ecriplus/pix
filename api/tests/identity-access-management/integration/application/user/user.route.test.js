@@ -1,6 +1,6 @@
 import { identityAccessManagementRoutes } from '../../../../../src/identity-access-management/application/routes.js';
 import { userController } from '../../../../../src/identity-access-management/application/user/user.controller.js';
-import { config } from '../../../../../src/shared/config.js';
+import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import * as i18nPlugin from '../../../../../src/shared/infrastructure/plugins/i18n.js';
 import {
   databaseBuilder,
@@ -113,7 +113,7 @@ describe('Integration | Identity Access Management | Application | Route | User'
 
     context('when user cannot self delete their account', function () {
       beforeEach(async function () {
-        sinon.stub(config.featureToggles, 'isSelfAccountDeletionEnabled').value(false);
+        await featureToggles.set('isSelfAccountDeletionEnabled', false);
       });
 
       it('returns a 403 HTTP status code', async function () {

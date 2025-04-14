@@ -1,13 +1,14 @@
 import { usecases } from '../../../../../src/privacy/domain/usecases/index.js';
+import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Privacy | Domain | UseCase | can-self-delete-account', function () {
   const userId = '123';
   let dependencies;
 
-  beforeEach(function () {
+  beforeEach(async function () {
     dependencies = {
-      featureToggles: { isSelfAccountDeletionEnabled: false },
+      featureToggles,
       learnersApiRepository: { hasBeenLearner: sinon.stub().resolves(false) },
       candidatesApiRepository: { hasBeenCandidate: sinon.stub().resolves(false) },
       userTeamsApiRepository: {
@@ -21,12 +22,10 @@ describe('Unit | Privacy | Domain | UseCase | can-self-delete-account', function
   });
 
   context('When feature flag is enabled', function () {
-    beforeEach(function () {
-      sinon.stub(dependencies.featureToggles, 'isSelfAccountDeletionEnabled').value(true);
-    });
-
     context('When user is eligible', function () {
       it('returns true', async function () {
+        // given
+        await featureToggles.set('isSelfAccountDeletionEnabled', true);
         // when
         const result = await usecases.canSelfDeleteAccount({ userId, ...dependencies });
 
@@ -114,10 +113,12 @@ describe('Unit | Privacy | Domain | UseCase | can-self-delete-account', function
   });
 
   context('Feature flag is disabled', function () {
+    beforeEach(async function () {
+      await featureToggles.set('isSelfAccountDeletionEnabled', false);
+    });
     context('When user is eligible', function () {
       it('returns false', async function () {
         // given
-        sinon.stub(dependencies.featureToggles, 'isSelfAccountDeletionEnabled').value(false);
 
         // when
         const result = await usecases.canSelfDeleteAccount({ userId: '123', ...dependencies });
