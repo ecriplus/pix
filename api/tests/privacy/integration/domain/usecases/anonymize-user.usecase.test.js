@@ -2,10 +2,15 @@ import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js'
 import { RefreshToken } from '../../../../../src/identity-access-management/domain/models/RefreshToken.js';
 import { UserAnonymizedEventLoggingJob } from '../../../../../src/identity-access-management/domain/models/UserAnonymizedEventLoggingJob.js';
 import { refreshTokenRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/refresh-token.repository.js';
+import { LegalDocumentService } from '../../../../../src/legal-documents/domain/models/LegalDocumentService.js';
+import { LegalDocumentType } from '../../../../../src/legal-documents/domain/models/LegalDocumentType.js';
 import { usecases } from '../../../../../src/privacy/domain/usecases/index.js';
 import { config } from '../../../../../src/shared/config.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+
+const { PIX_ORGA } = LegalDocumentService.VALUES;
+const { TOS } = LegalDocumentType.VALUES;
 
 describe('Integration | Privacy | Domain | UseCase | anonymize-user', function () {
   let clock;
@@ -25,6 +30,7 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
     disables all user’s organization memberships,
     disables all user’s certification center memberships,
     disables all user’s student prescriptions,
+    anonymizes user’s legal document acceptances,
     anonymizes user login info,
     anonymizes last user application connections lastLoggedAt,
     anonymizes membership lastAccessedAt,
@@ -59,6 +65,13 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
 
     const managingStudentsOrga = databaseBuilder.factory.buildOrganization({ isManagingStudents: true });
     databaseBuilder.factory.buildOrganizationLearner({ userId, organizationId: managingStudentsOrga.id });
+
+    const legalDocumentVersion = databaseBuilder.factory.buildLegalDocumentVersion({ service: PIX_ORGA, type: TOS });
+    const userAcceptanceId = databaseBuilder.factory.buildLegalDocumentVersionUserAcceptance({
+      userId: user.id,
+      legalDocumentVersionId: legalDocumentVersion.id,
+      acceptedAt: new Date('2023-03-23T23:23:23Z'),
+    }).id;
 
     const userLogin = databaseBuilder.factory.buildUserLogin({
       userId,
@@ -118,6 +131,11 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
 
     const organizationLearners = await knex('organization-learners').where({ userId });
     expect(organizationLearners).to.have.lengthOf(0);
+
+    const userAcceptance = await knex('legal-document-version-user-acceptances')
+      .where({ id: userAcceptanceId })
+      .first();
+    expect(userAcceptance.acceptedAt.toISOString()).to.equal('2023-03-01T00:00:00.000Z');
 
     const anonymizedUserLogin = await knex('user-logins').where({ id: userLogin.id }).first();
     expect(anonymizedUserLogin.createdAt.toISOString()).to.equal('2012-12-01T00:00:00.000Z');
