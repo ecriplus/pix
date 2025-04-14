@@ -1,4 +1,3 @@
-import { usecases as organizationUsecases } from '../../../../lib/domain/usecases/index.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { generateCSVTemplate } from '../../../shared/infrastructure/serializers/csv/csv-template.js';
 import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
@@ -104,7 +103,7 @@ const findPaginatedFilteredOrganizations = async function (request, h, dependenc
 
 const findChildrenOrganizations = async function (request, h, dependencies = { organizationForAdminSerializer }) {
   const parentOrganizationId = request.params.organizationId;
-  const childOrganizations = await organizationUsecases.findChildrenOrganizationsForAdmin({ parentOrganizationId });
+  const childOrganizations = await usecases.findChildrenOrganizations({ parentOrganizationId });
   return dependencies.organizationForAdminSerializer.serialize(childOrganizations);
 };
 
