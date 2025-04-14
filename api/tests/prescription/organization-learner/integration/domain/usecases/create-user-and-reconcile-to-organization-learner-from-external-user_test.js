@@ -1,14 +1,14 @@
-import { usecases } from '../../../../lib/domain/usecases/index.js';
-import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
-import { RequestedApplication } from '../../../../src/identity-access-management/infrastructure/utils/network.js';
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../../src/identity-access-management/domain/constants/identity-providers.js';
+import { RequestedApplication } from '../../../../../../src/identity-access-management/infrastructure/utils/network.js';
+import { usecases } from '../../../../../../src/prescription/organization-learner/domain/usecases/index.js';
 import {
   CampaignCodeError,
   NotFoundError,
   ObjectValidationError,
   OrganizationLearnerAlreadyLinkedToUserError,
-} from '../../../../src/shared/domain/errors.js';
-import { tokenService } from '../../../../src/shared/domain/services/token-service.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../test-helper.js';
+} from '../../../../../../src/shared/domain/errors.js';
+import { tokenService } from '../../../../../../src/shared/domain/services/token-service.js';
+import { catchErr, databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Integration | UseCases | create-user-and-reconcile-to-organization-learner-from-external-user', function () {
   let audience, requestedApplication;
@@ -73,6 +73,7 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
         const error = await catchErr(usecases.createUserAndReconcileToOrganizationLearnerFromExternalUser)({
           campaignCode,
           token,
+          tokenService,
         });
 
         // then

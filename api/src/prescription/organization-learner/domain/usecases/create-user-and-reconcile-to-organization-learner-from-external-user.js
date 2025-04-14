@@ -1,9 +1,9 @@
-import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../src/identity-access-management/domain/constants/identity-providers.js';
-import { AuthenticationMethod } from '../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
-import { User } from '../../../src/identity-access-management/domain/models/User.js';
-import { STUDENT_RECONCILIATION_ERRORS } from '../../../src/shared/domain/constants.js';
-import { DomainTransaction } from '../../../src/shared/domain/DomainTransaction.js';
-import { CampaignCodeError, ObjectValidationError } from '../../../src/shared/domain/errors.js';
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../identity-access-management/domain/constants/identity-providers.js';
+import { AuthenticationMethod } from '../../../../identity-access-management/domain/models/AuthenticationMethod.js';
+import { User } from '../../../../identity-access-management/domain/models/User.js';
+import { STUDENT_RECONCILIATION_ERRORS } from '../../../../shared/domain/constants.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { CampaignCodeError, ObjectValidationError } from '../../../../shared/domain/errors.js';
 
 const existingUserReconciliationErrors = [
   STUDENT_RECONCILIATION_ERRORS.RECONCILIATION.IN_SAME_ORGANIZATION.samlId.code,
@@ -25,7 +25,7 @@ const createUserAndReconcileToOrganizationLearnerFromExternalUser = async functi
   userRepository,
   userLoginRepository,
   userToCreateRepository,
-  organizationLearnerRepository,
+  libOrganizationLearnerRepository,
   prescriptionOrganizationLearnerRepository,
   lastUserApplicationConnectionsRepository,
   studentRepository,
@@ -59,7 +59,7 @@ const createUserAndReconcileToOrganizationLearnerFromExternalUser = async functi
       await userReconciliationService.findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo({
         organizationId: campaign.organizationId,
         reconciliationInfo,
-        organizationLearnerRepository,
+        organizationLearnerRepository: libOrganizationLearnerRepository,
       });
 
     await userReconciliationService.assertStudentHasAnAlreadyReconciledAccount(
@@ -81,7 +81,7 @@ const createUserAndReconcileToOrganizationLearnerFromExternalUser = async functi
         organizationLearnerId: matchedOrganizationLearner.id,
         samlId,
         authenticationMethodRepository,
-        organizationLearnerRepository,
+        organizationLearnerRepository: libOrganizationLearnerRepository,
         userToCreateRepository,
       });
     }
