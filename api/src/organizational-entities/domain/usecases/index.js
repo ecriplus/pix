@@ -9,6 +9,7 @@ import { adminMemberRepository } from '../../../shared/infrastructure/repositori
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as certificationCenterRepository from '../../infrastructure/repositories/certification-center.repository.js';
+import { certificationCenterApiRepository } from '../../infrastructure/repositories/certification-center-api.repository.js';
 import * as certificationCenterForAdminRepository from '../../infrastructure/repositories/certification-center-for-admin.repository.js';
 import * as complementaryCertificationHabilitationRepository from '../../infrastructure/repositories/complementary-certification-habilitation.repository.js';
 import * as dataProtectionOfficerRepository from '../../infrastructure/repositories/data-protection-officer.repository.js';
@@ -23,6 +24,7 @@ const path = dirname(fileURLToPath(import.meta.url));
 /**
  * @typedef {import ('../../../prescription/learner-management/application/api/learners-api.js')} learnersApi
  * @typedef {import ('../../../shared/infrastructure/repositories/admin-member.repository.js')} AdminMemberRepository
+ * @typedef {import ('../../infrastructure/repositories/certification-center-api.repository.js')} certificationCenterApiRepository
  * @typedef {import ('../../infrastructure/repositories/certification-center.repository.js')} CertificationCenterRepository
  * @typedef {import ('../../../certification/enrolment/infrastructure/repositories/center-repository.js')} CenterRepository
  * @typedef {import ('../../infrastructure/repositories/certification-center-for-admin-repository.js')} CertificationCenterForAdminRepository
@@ -43,6 +45,7 @@ const repositories = {
   certificationCenterRepository,
   certificationCenterForAdminRepository,
   dataProtectionOfficerRepository,
+  certificationCenterApiRepository,
   complementaryCertificationHabilitationRepository,
   organizationForAdminRepository,
   organizationFeatureRepository,
@@ -75,4 +78,4 @@ const usecasesWithoutInjectedDependencies = {
  */
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
 
-export { usecases };
+export { repositories, usecases };
