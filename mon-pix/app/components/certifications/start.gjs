@@ -7,7 +7,7 @@ import CompanionBlocker from '../companion/blocker';
 <template>
   <CompanionBlocker>
     <main class="main" role="main">
-      <PixBackgroundHeader id="main">
+      <PixBackgroundHeader id="main" class="certification-start-page__header">
         <PixBlock @shadow="heavy" class="certification-start-page__block">
           <CertificationStarter @certificationCandidateSubscription={{@certificationCandidateSubscription}} />
         </PixBlock>

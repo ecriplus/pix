@@ -1,12 +1,14 @@
 {{page-title (t "pages.certification-start.title")}}
 
-<main id="main" class="global-page-container" role="main">
-  {{#if this.model.isCertifiable}}
-    <PixBlock class="certification-start-page__block">
-      <CertificationBanners @certificationEligibility={{this.model}} @fullName={{this.currentUser.user.fullName}} />
-      <CertificationJoiner @onStepChange={{this.changeStep}} />
-    </PixBlock>
-  {{else}}
-    <CertificationNotCertifiable />
-  {{/if}}
-</main>
+<Global::AppLayout>
+  <main id="main" class="global-page-container" role="main">
+    {{#if this.model.isCertifiable}}
+      <PixBlock class="certification-start-page__block">
+        <CertificationBanners @certificationEligibility={{this.model}} @fullName={{this.currentUser.user.fullName}} />
+        <CertificationJoiner @onStepChange={{this.changeStep}} />
+      </PixBlock>
+    {{else}}
+      <CertificationNotCertifiable />
+    {{/if}}
+  </main>
+</Global::AppLayout>
