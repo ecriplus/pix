@@ -28,7 +28,7 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'is-results-shared-modal-enabled': false,
             'is-need-to-adjust-certification-accessibility-enabled': false,
             'is-oppsy-disabled': false,
-            'is-pix-app-new-layout-enabled': true,
+            'is-pix-app-new-layout-enabled': false,
             'is-pix-admin-new-sidebar-enabled': false,
             'is-pix-companion-enabled': false,
             'is-quest-enabled': false,
