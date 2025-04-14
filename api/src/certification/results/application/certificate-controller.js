@@ -1,12 +1,45 @@
 import dayjs from 'dayjs';
 
+import * as requestResponseUtils from '../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { normalizeAndRemoveAccents } from '../../../shared/infrastructure/utils/string-utils.js';
 import { V3CertificationAttestation } from '../domain/models/V3CertificationAttestation.js';
 import { usecases } from '../domain/usecases/index.js';
+import * as privateCertificateSerializer from '../infrastructure/serializers/private-certificate-serializer.js';
+import * as shareableCertificateSerializer from '../infrastructure/serializers/shareable-certificate-serializer.js';
 import * as certificationAttestationPdf from '../infrastructure/utils/pdf/certification-attestation-pdf.js';
 import * as v3CertificationAttestationPdf from '../infrastructure/utils/pdf/v3-certification-attestation-pdf.js';
 
-const getPDFAttestation = async function (
+const getCertificateByVerificationCode = async function (request, h, dependencies = { requestResponseUtils }) {
+  const verificationCode = request.payload.verificationCode;
+  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+
+  const shareableCertificate = await usecases.getShareableCertificate({ verificationCode, locale });
+  return shareableCertificateSerializer.serialize(shareableCertificate);
+};
+
+const getCertificate = async function (request, h, dependencies = { requestResponseUtils }) {
+  const userId = request.auth.credentials.userId;
+  const certificationCourseId = request.params.certificationCourseId;
+  const translate = request.i18n.__;
+  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+
+  const privateCertificate = await usecases.getPrivateCertificate({
+    userId,
+    certificationCourseId,
+    locale,
+  });
+  return privateCertificateSerializer.serialize(privateCertificate, { translate });
+};
+
+const findUserCertificates = async function (request) {
+  const userId = request.auth.credentials.userId;
+  const translate = request.i18n.__;
+
+  const privateCertificates = await usecases.findUserPrivateCertificates({ userId });
+  return privateCertificateSerializer.serialize(privateCertificates, { translate });
+};
+
+const getPDFCertificate = async function (
   request,
   h,
   dependencies = { certificationAttestationPdf, v3CertificationAttestationPdf },
@@ -16,20 +49,20 @@ const getPDFAttestation = async function (
   const { i18n } = request;
   const { isFrenchDomainExtension } = request.query;
 
-  const attestation = await usecases.getCertificationAttestation({
+  const certificate = await usecases.getCertificationAttestation({
     userId,
     certificationCourseId,
   });
 
-  if (attestation instanceof V3CertificationAttestation) {
+  if (certificate instanceof V3CertificationAttestation) {
     const fileName = i18n.__('certification-confirmation.file-name', {
-      deliveredAt: dayjs(attestation.deliveredAt).format('YYYYMMDD'),
+      deliveredAt: dayjs(certificate.deliveredAt).format('YYYYMMDD'),
     });
 
     return h
       .response(
         dependencies.v3CertificationAttestationPdf.generate({
-          certificates: [attestation],
+          certificates: [certificate],
           i18n,
         }),
       )
@@ -39,7 +72,7 @@ const getPDFAttestation = async function (
   }
 
   const { buffer, fileName } = await dependencies.certificationAttestationPdf.getCertificationAttestationsPdfBuffer({
-    certificates: [attestation],
+    certificates: [certificate],
     isFrenchDomainExtension,
     i18n,
   });
@@ -50,7 +83,7 @@ const getPDFAttestation = async function (
     .header('Content-Type', 'application/pdf');
 };
 
-const getCertificationPDFAttestationsForSession = async function (
+const getSessionCertificates = async function (
   request,
   h,
   dependencies = { certificationAttestationPdf, v3CertificationAttestationPdf },
@@ -59,19 +92,19 @@ const getCertificationPDFAttestationsForSession = async function (
 
   const sessionId = request.params.sessionId;
   const isFrenchDomainExtension = request.query.isFrenchDomainExtension;
-  const attestations = await usecases.getCertificationAttestationsForSession({
+  const certificates = await usecases.getCertificationAttestationsForSession({
     sessionId,
   });
 
-  if (attestations.every((attestation) => attestation instanceof V3CertificationAttestation)) {
+  if (certificates.every((certificate) => certificate instanceof V3CertificationAttestation)) {
     const translatedFileName = i18n.__('certification-confirmation.file-name', {
-      deliveredAt: dayjs(attestations[0].deliveredAt).format('YYYYMMDD'),
+      deliveredAt: dayjs(certificates[0].deliveredAt).format('YYYYMMDD'),
     });
 
     return h
       .response(
         dependencies.v3CertificationAttestationPdf.generate({
-          certificates: attestations,
+          certificates,
           i18n,
         }),
       )
@@ -81,7 +114,7 @@ const getCertificationPDFAttestationsForSession = async function (
   }
 
   const { buffer } = await dependencies.certificationAttestationPdf.getCertificationAttestationsPdfBuffer({
-    certificates: attestations,
+    certificates,
     isFrenchDomainExtension,
     i18n,
   });
@@ -93,7 +126,7 @@ const getCertificationPDFAttestationsForSession = async function (
     .header('Content-Type', 'application/pdf');
 };
 
-const downloadCertificationAttestationsForDivision = async function (
+const downloadDivisionCertificates = async function (
   request,
   h,
   dependencies = { certificationAttestationPdf, v3CertificationAttestationPdf },
@@ -102,18 +135,18 @@ const downloadCertificationAttestationsForDivision = async function (
   const { i18n } = request;
   const { division, isFrenchDomainExtension } = request.query;
 
-  const attestations = await usecases.findCertificationAttestationsForDivision({
+  const certificates = await usecases.findCertificationAttestationsForDivision({
     organizationId,
     division,
   });
 
-  if (attestations.some((attestation) => attestation instanceof V3CertificationAttestation)) {
-    const v3Certificates = attestations.filter((certificate) => certificate instanceof V3CertificationAttestation);
+  if (certificates.some((certificate) => certificate instanceof V3CertificationAttestation)) {
+    const v3Certificates = certificates.filter((certificate) => certificate instanceof V3CertificationAttestation);
 
     const normalizedDivision = normalizeAndRemoveAccents(division);
 
     const translatedFileName = i18n.__('certification-confirmation.file-name', {
-      deliveredAt: dayjs(attestations[0].deliveredAt).format('YYYYMMDD'),
+      deliveredAt: dayjs(certificates[0].deliveredAt).format('YYYYMMDD'),
     });
 
     return h
@@ -129,7 +162,7 @@ const downloadCertificationAttestationsForDivision = async function (
   }
 
   const { buffer } = await dependencies.certificationAttestationPdf.getCertificationAttestationsPdfBuffer({
-    certificates: attestations,
+    certificates,
     isFrenchDomainExtension,
     i18n,
   });
@@ -143,9 +176,13 @@ const downloadCertificationAttestationsForDivision = async function (
     .header('Content-Type', 'application/pdf');
 };
 
-const certificationAttestationController = {
-  getPDFAttestation,
-  getCertificationPDFAttestationsForSession,
-  downloadCertificationAttestationsForDivision,
+const certificateController = {
+  getCertificate,
+  findUserCertificates,
+  getCertificateByVerificationCode,
+  getPDFCertificate,
+  getSessionCertificates,
+  downloadDivisionCertificates,
 };
-export { certificationAttestationController };
+
+export { certificateController };

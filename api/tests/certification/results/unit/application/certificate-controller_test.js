@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-import { certificationAttestationController } from '../../../../../src/certification/results/application/certification-attestation-controller.js';
+import { certificateController } from '../../../../../src/certification/results/application/certificate-controller.js';
 import { usecases } from '../../../../../src/certification/results/domain/usecases/index.js';
 import { SESSIONS_VERSIONS } from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { LANGUAGES_CODE } from '../../../../../src/shared/domain/services/language-service.js';
@@ -9,8 +9,201 @@ import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js'
 
 const { FRENCH } = LANGUAGES_CODE;
 
-describe('Certification | Results | Unit | Application | Controller | certification-attestation-controller', function () {
-  describe('#getPDFAttestation', function () {
+describe('Certification | Results | Unit | Application | certificate-controller', function () {
+  describe('#getCertificateByVerificationCode', function () {
+    it('should return a serialized shareable certificate given by verification code', async function () {
+      // given
+      const request = { payload: { verificationCode: 'P-123456BB' } };
+      const locale = 'fr-fr';
+      const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
+      const shareableCertificate = domainBuilder.buildShareableCertificate({
+        id: 123,
+        firstName: 'Dorothé',
+        lastName: '2Pac',
+        birthdate: '2000-01-01',
+        birthplace: 'Sin City',
+        isPublished: true,
+        date: new Date('2020-01-01T00:00:00Z'),
+        deliveredAt: new Date('2021-01-01T00:00:00Z'),
+        certificationCenter: 'Centre des choux de Bruxelles',
+        pixScore: 456,
+        certifiedBadgeImages: ['/img/1'],
+        maxReachableLevelOnCertificationDate: 6,
+        version: SESSIONS_VERSIONS.V3,
+      });
+      sinon.stub(usecases, 'getShareableCertificate');
+      usecases.getShareableCertificate
+        .withArgs({ verificationCode: 'P-123456BB', locale })
+        .resolves(shareableCertificate);
+      requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
+
+      // when
+      const response = await certificateController.getCertificateByVerificationCode(request, hFake, {
+        requestResponseUtils: requestResponseUtilsStub,
+      });
+
+      // then
+      expect(response).to.deep.equal({
+        data: {
+          id: '123',
+          type: 'certifications',
+          attributes: {
+            'first-name': 'Dorothé',
+            'last-name': '2Pac',
+            birthdate: '2000-01-01',
+            birthplace: 'Sin City',
+            'certification-center': 'Centre des choux de Bruxelles',
+            date: new Date('2020-01-01T00:00:00Z'),
+            'delivered-at': new Date('2021-01-01T00:00:00Z'),
+            'is-published': true,
+            'pix-score': 456,
+            'certified-badge-images': ['/img/1'],
+            'max-reachable-level-on-certification-date': 6,
+            version: SESSIONS_VERSIONS.V3,
+          },
+          relationships: {
+            'result-competence-tree': {
+              data: null,
+            },
+          },
+        },
+      });
+    });
+  });
+
+  describe('#getCertificate', function () {
+    it('should return a serialized private certificate given by id', async function () {
+      // given
+      const userId = 1;
+      const certificationCourseId = 2;
+      const request = {
+        auth: { credentials: { userId } },
+        params: { certificationCourseId },
+        i18n: getI18n(),
+      };
+      const locale = 'fr-fr';
+      const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
+      const privateCertificate = domainBuilder.buildPrivateCertificate.validated({
+        id: certificationCourseId,
+        firstName: 'Dorothé',
+        lastName: '2Pac',
+        birthdate: '2000-01-01',
+        birthplace: 'Sin City',
+        isPublished: true,
+        date: new Date('2020-01-01T00:00:00Z'),
+        deliveredAt: new Date('2021-01-01T00:00:00Z'),
+        certificationCenter: 'Centre des choux de Bruxelles',
+        pixScore: 456,
+        commentForCandidate: 'Cette personne est impolie !',
+        certifiedBadgeImages: [],
+        verificationCode: 'P-SUPERCODE',
+        maxReachableLevelOnCertificationDate: 6,
+        version: SESSIONS_VERSIONS.V3,
+      });
+      sinon.stub(usecases, 'getPrivateCertificate');
+      usecases.getPrivateCertificate.withArgs({ userId, certificationCourseId, locale }).resolves(privateCertificate);
+      requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
+
+      // when
+      const response = await certificateController.getCertificate(request, hFake, {
+        requestResponseUtils: requestResponseUtilsStub,
+      });
+
+      // then
+      expect(response).to.deep.equal({
+        data: {
+          id: '2',
+          type: 'certifications',
+          attributes: {
+            'first-name': 'Dorothé',
+            'last-name': '2Pac',
+            birthdate: '2000-01-01',
+            birthplace: 'Sin City',
+            'certification-center': 'Centre des choux de Bruxelles',
+            date: new Date('2020-01-01T00:00:00Z'),
+            'delivered-at': new Date('2021-01-01T00:00:00Z'),
+            'is-published': true,
+            'pix-score': 456,
+            status: 'validated',
+            'comment-for-candidate': 'Cette personne est impolie !',
+            'certified-badge-images': [],
+            'verification-code': 'P-SUPERCODE',
+            'max-reachable-level-on-certification-date': 6,
+            version: SESSIONS_VERSIONS.V3,
+          },
+          relationships: {
+            'result-competence-tree': {
+              data: null,
+            },
+          },
+        },
+      });
+    });
+  });
+
+  describe('#findUserCertificates', function () {
+    it('should return the serialized private certificates of the user', async function () {
+      // given
+      const userId = 1;
+      const request = { auth: { credentials: { userId } }, i18n: getI18n() };
+      const privateCertificate1 = domainBuilder.buildPrivateCertificate.validated({
+        id: 123,
+        firstName: 'Dorothé',
+        lastName: '2Pac',
+        birthdate: '2000-01-01',
+        birthplace: 'Sin City',
+        isPublished: true,
+        date: new Date('2020-01-01T00:00:00Z'),
+        deliveredAt: new Date('2021-01-01T00:00:00Z'),
+        certificationCenter: 'Centre des choux de Bruxelles',
+        pixScore: 456,
+        commentForCandidate: 'Cette personne est impolie !',
+        certifiedBadgeImages: [],
+        verificationCode: 'P-SUPERCODE',
+        maxReachableLevelOnCertificationDate: 6,
+        version: SESSIONS_VERSIONS.V3,
+      });
+      sinon.stub(usecases, 'findUserPrivateCertificates');
+      usecases.findUserPrivateCertificates.withArgs({ userId }).resolves([privateCertificate1]);
+
+      // when
+      const response = await certificateController.findUserCertificates(request, hFake);
+
+      // then
+      expect(response).to.deep.equal({
+        data: [
+          {
+            id: '123',
+            type: 'certifications',
+            attributes: {
+              'first-name': 'Dorothé',
+              'last-name': '2Pac',
+              birthdate: '2000-01-01',
+              birthplace: 'Sin City',
+              'certification-center': 'Centre des choux de Bruxelles',
+              date: new Date('2020-01-01T00:00:00Z'),
+              'delivered-at': new Date('2021-01-01T00:00:00Z'),
+              'is-published': true,
+              'pix-score': 456,
+              status: 'validated',
+              'comment-for-candidate': 'Cette personne est impolie !',
+              'certified-badge-images': [],
+              'verification-code': 'P-SUPERCODE',
+              'max-reachable-level-on-certification-date': 6,
+              version: SESSIONS_VERSIONS.V3,
+            },
+            relationships: {
+              'result-competence-tree': {
+                data: null,
+              },
+            },
+          },
+        ],
+      });
+    });
+  });
+
+  describe('#getPDFCertificate', function () {
     describe('when the attestation is for v3', function () {
       it('should return attestation in PDF binary format', async function () {
         // given
@@ -39,7 +232,7 @@ describe('Certification | Results | Unit | Application | Controller | certificat
         };
 
         // when
-        const response = await certificationAttestationController.getPDFAttestation(request, hFake, {
+        const response = await certificateController.getPDFCertificate(request, hFake, {
           v3CertificationAttestationPdf: generatePdfStub,
         });
 
@@ -88,7 +281,7 @@ describe('Certification | Results | Unit | Application | Controller | certificat
           .resolves({ buffer: attestationPDF, fileName: filename });
 
         // when
-        const response = await certificationAttestationController.getPDFAttestation(request, hFake, {
+        const response = await certificateController.getPDFCertificate(request, hFake, {
           certificationAttestationPdf: certificationAttestationPdfStub,
         });
 
@@ -99,7 +292,7 @@ describe('Certification | Results | Unit | Application | Controller | certificat
     });
   });
 
-  describe('#getCertificationPDFAttestationsForSession', function () {
+  describe('#getSessionCertificates', function () {
     describe('when attestations are for a v3 session', function () {
       it('should return attestation in PDF binary format', async function () {
         // given
@@ -129,13 +322,9 @@ describe('Certification | Results | Unit | Application | Controller | certificat
         };
 
         // when
-        const response = await certificationAttestationController.getCertificationPDFAttestationsForSession(
-          request,
-          hFake,
-          {
-            v3CertificationAttestationPdf: generatePdfStub,
-          },
-        );
+        const response = await certificateController.getSessionCertificates(request, hFake, {
+          v3CertificationAttestationPdf: generatePdfStub,
+        });
 
         // then
         expect(generatePdfStub.generate).calledOnceWithExactly({
@@ -204,13 +393,9 @@ describe('Certification | Results | Unit | Application | Controller | certificat
           .resolves({ buffer: attestationPDF });
 
         // when
-        const response = await certificationAttestationController.getCertificationPDFAttestationsForSession(
-          request,
-          hFake,
-          {
-            certificationAttestationPdf,
-          },
-        );
+        const response = await certificateController.getSessionCertificates(request, hFake, {
+          certificationAttestationPdf,
+        });
 
         // then
         expect(response.source).to.deep.equal(attestationPDF);
@@ -221,7 +406,7 @@ describe('Certification | Results | Unit | Application | Controller | certificat
     });
   });
 
-  describe('#downloadCertificationAttestationsForDivision', function () {
+  describe('#downloadDivisionCertificates', function () {
     const now = new Date('2019-01-01T05:06:07Z');
     let clock;
 
@@ -268,13 +453,9 @@ describe('Certification | Results | Unit | Application | Controller | certificat
         };
 
         // when
-        const response = await certificationAttestationController.downloadCertificationAttestationsForDivision(
-          request,
-          hFake,
-          {
-            v3CertificationAttestationPdf: generatePdfStub,
-          },
-        );
+        const response = await certificateController.downloadDivisionCertificates(request, hFake, {
+          v3CertificationAttestationPdf: generatePdfStub,
+        });
 
         // then
         expect(generatePdfStub.generate).calledOnceWithExactly({
@@ -330,11 +511,7 @@ describe('Certification | Results | Unit | Application | Controller | certificat
           .resolves({ buffer: attestationsPDF });
 
         // when
-        const response = await certificationAttestationController.downloadCertificationAttestationsForDivision(
-          request,
-          hFake,
-          dependencies,
-        );
+        const response = await certificateController.downloadDivisionCertificates(request, hFake, dependencies);
 
         // then
         expect(response.source).to.deep.equal(attestationsPDF);
