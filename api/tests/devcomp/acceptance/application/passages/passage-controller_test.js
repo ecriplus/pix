@@ -20,7 +20,7 @@ describe('Acceptance | Controller | passage-controller', function () {
         const expectedResponse = {
           type: 'passages',
           attributes: {
-            'module-id': 'bien-ecrire-son-adresse-mail',
+            'module-id': 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d',
           },
         };
 
@@ -54,7 +54,7 @@ describe('Acceptance | Controller | passage-controller', function () {
         const expectedResponse = {
           type: 'passages',
           attributes: {
-            'module-id': 'bien-ecrire-son-adresse-mail',
+            'module-id': 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d',
           },
         };
 
@@ -90,7 +90,7 @@ describe('Acceptance | Controller | passage-controller', function () {
       const cases = [
         {
           case: 'QCU',
-          moduleId: 'bien-ecrire-son-adresse-mail',
+          moduleId: 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d',
           elementId: '845fe6d7-7ac5-46bb-a5d6-0419148b3978',
           userResponse: ['2'],
           expectedUserResponseValue: '2',
@@ -103,7 +103,7 @@ describe('Acceptance | Controller | passage-controller', function () {
         },
         {
           case: 'QROCM-ind',
-          moduleId: 'bien-ecrire-son-adresse-mail',
+          moduleId: 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d',
           elementId: '8709ad92-093e-447a-a7b6-3223e6171196',
           userResponse: [{ input: 'email', answer: 'naomizao457@yahoo.com' }],
           expectedUserResponseValue: { email: 'naomizao457@yahoo.com' },
@@ -118,7 +118,7 @@ describe('Acceptance | Controller | passage-controller', function () {
         },
         {
           case: 'QCM',
-          moduleId: 'bac-a-sable',
+          moduleId: '6282925d-4775-4bca-b513-4c3009ec5886',
           elementId: '30701e93-1b4d-4da4-b018-fa756c07d53f',
           userResponse: ['1', '3', '4'],
           expectedUserResponseValue: ['1', '3', '4'],
