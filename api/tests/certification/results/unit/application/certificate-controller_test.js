@@ -2,10 +2,13 @@ import dayjs from 'dayjs';
 
 import { certificateController } from '../../../../../src/certification/results/application/certificate-controller.js';
 import { usecases } from '../../../../../src/certification/results/domain/usecases/index.js';
+import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { SESSIONS_VERSIONS } from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
+import { usecases as certificationSharedUsecases } from '../../../../../src/certification/shared/domain/usecases/index.js';
+import { UnauthorizedError } from '../../../../../src/shared/application/http-errors.js';
 import { LANGUAGES_CODE } from '../../../../../src/shared/domain/services/language-service.js';
 import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
+import { catchErr, domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 const { FRENCH } = LANGUAGES_CODE;
 
@@ -204,29 +207,71 @@ describe('Certification | Results | Unit | Application | certificate-controller'
   });
 
   describe('#getPDFCertificate', function () {
-    describe('when the attestation is for v3', function () {
-      it('should return attestation in PDF binary format', async function () {
+    context('when the user is not owner of the certification attestation', function () {
+      it('should throw an error', async function () {
         // given
-        const v3CertificationAttestation = domainBuilder.certification.results.buildV3CertificationAttestation();
+        const certificationCourse = domainBuilder.buildCertificationCourse({
+          id: 123,
+          userId: 567,
+        });
+
         const userId = 1;
         const i18n = getI18n();
-        const generatedPdf = Symbol('Stream');
 
         const request = {
           i18n,
-          auth: { credentials: { userId: 1 } },
+          auth: { credentials: { userId } },
           params: { certificationCourseId: 1 },
           query: { lang: FRENCH },
         };
 
         sinon
-          .stub(usecases, 'getCertificationAttestation')
+          .stub(certificationSharedUsecases, 'getCertificationCourse')
           .withArgs({
-            userId,
             certificationCourseId: request.params.certificationCourseId,
           })
+          .resolves(certificationCourse);
+
+        // when
+        const error = await catchErr(certificateController.getPDFCertificate)(request, hFake, {
+          v3CertificationAttestationPdf: sinon.stub(),
+        });
+
+        // then
+        expect(error).to.be.instanceOf(UnauthorizedError);
+      });
+    });
+
+    describe('when the attestation is for v3', function () {
+      it('should return attestation in PDF binary format', async function () {
+        // given
+        const userId = 1;
+        const i18n = getI18n();
+
+        const request = {
+          i18n,
+          auth: { credentials: { userId } },
+          params: { certificationCourseId: 9 },
+          query: { lang: FRENCH },
+        };
+
+        const certificationCourse = domainBuilder.buildCertificationCourse({
+          id: request.params.certificationCourseId,
+          userId,
+          version: AlgorithmEngineVersion.V3,
+        });
+        sinon
+          .stub(certificationSharedUsecases, 'getCertificationCourse')
+          .withArgs({ certificationCourseId: request.params.certificationCourseId })
+          .resolves(certificationCourse);
+
+        const v3CertificationAttestation = domainBuilder.certification.results.buildV3CertificationAttestation();
+        sinon
+          .stub(usecases, 'getCertificationAttestation')
+          .withArgs({ certificationCourseId: request.params.certificationCourseId })
           .resolves(v3CertificationAttestation);
 
+        const generatedPdf = Symbol('Stream');
         const generatePdfStub = {
           generate: sinon.stub().returns(generatedPdf),
         };
@@ -251,25 +296,33 @@ describe('Certification | Results | Unit | Application | certificate-controller'
     describe('when the attestation is for v2', function () {
       it('should return attestation in PDF binary format', async function () {
         // given
-        const certificationAttestation = domainBuilder.buildCertificationAttestation();
-        const attestationPDF = 'binary string';
-        const filename = 'certification-pix-20181003.pdf';
         const userId = 1;
         const i18n = Symbol('i18n');
 
         const request = {
           i18n,
           auth: { credentials: { userId } },
-          params: { certificationCourseId: 1 },
+          params: { certificationCourseId: 9 },
           query: { isFrenchDomainExtension: true, lang: FRENCH },
         };
 
+        const certificationCourse = domainBuilder.buildCertificationCourse({
+          id: request.params.certificationCourseId,
+          userId,
+          version: AlgorithmEngineVersion.V2,
+        });
+        sinon
+          .stub(certificationSharedUsecases, 'getCertificationCourse')
+          .withArgs({ certificationCourseId: request.params.certificationCourseId })
+          .resolves(certificationCourse);
+
+        const certificationAttestation = domainBuilder.buildCertificationAttestation();
+        const attestationPDF = 'binary string';
+        const filename = 'certification-pix-20181003.pdf';
+
         sinon
           .stub(usecases, 'getCertificationAttestation')
-          .withArgs({
-            userId,
-            certificationCourseId: request.params.certificationCourseId,
-          })
+          .withArgs({ certificationCourseId: request.params.certificationCourseId })
           .resolves(certificationAttestation);
 
         const certificationAttestationPdfStub = {
