@@ -27,7 +27,7 @@ describe('Integration | Legal document | Infrastructure | Repository | user-acce
   });
 
   describe('#findLastForLegalDocument', function () {
-    it('finds the last user acceptance record for a legal document type and service.', async function () {
+    it('finds the last user acceptance record for a legal document type and service', async function () {
       // given
       const user = databaseBuilder.factory.buildUser();
       const oldDocumentVersion = databaseBuilder.factory.buildLegalDocumentVersion({
@@ -122,7 +122,7 @@ describe('Integration | Legal document | Infrastructure | Repository | user-acce
   });
 
   describe('#findByLegalDocumentVersionId', function () {
-    it('finds the last user acceptance record for a legal document id.', async function () {
+    it('finds the last user acceptance record for a legal document id', async function () {
       // given
       const user = databaseBuilder.factory.buildUser();
       const oldDocumentVersion = databaseBuilder.factory.buildLegalDocumentVersion({
