@@ -3,7 +3,10 @@ import dayjs from 'dayjs';
 import { certificateController } from '../../../../../src/certification/results/application/certificate-controller.js';
 import { usecases } from '../../../../../src/certification/results/domain/usecases/index.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
-import { SESSIONS_VERSIONS } from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
+import {
+  SESSIONS_VERSIONS as AlgrorithmEngineVersion,
+  SESSIONS_VERSIONS,
+} from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { usecases as certificationSharedUsecases } from '../../../../../src/certification/shared/domain/usecases/index.js';
 import { UnauthorizedError } from '../../../../../src/shared/application/http-errors.js';
 import { LANGUAGES_CODE } from '../../../../../src/shared/domain/services/language-service.js';
@@ -14,62 +17,68 @@ const { FRENCH } = LANGUAGES_CODE;
 
 describe('Certification | Results | Unit | Application | certificate-controller', function () {
   describe('#getCertificateByVerificationCode', function () {
-    it('should return a serialized shareable certificate given by verification code', async function () {
-      // given
-      const request = { payload: { verificationCode: 'P-123456BB' } };
-      const locale = 'fr-fr';
-      const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
-      const shareableCertificate = domainBuilder.buildShareableCertificate({
-        id: 123,
-        firstName: 'Dorothé',
-        lastName: '2Pac',
-        birthdate: '2000-01-01',
-        birthplace: 'Sin City',
-        isPublished: true,
-        date: new Date('2020-01-01T00:00:00Z'),
-        deliveredAt: new Date('2021-01-01T00:00:00Z'),
-        certificationCenter: 'Centre des choux de Bruxelles',
-        pixScore: 456,
-        certifiedBadgeImages: ['/img/1'],
-        maxReachableLevelOnCertificationDate: 6,
-        version: SESSIONS_VERSIONS.V3,
-      });
-      sinon.stub(usecases, 'getShareableCertificate');
-      usecases.getShareableCertificate
-        .withArgs({ verificationCode: 'P-123456BB', locale })
-        .resolves(shareableCertificate);
-      requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
+    describe('when certification course version is V3', function () {
+      it('should return serialized V3 certificate data', async function () {
+        // given
+        const request = { payload: { verificationCode: 'P-123456BB' } };
+        const locale = 'fr-fr';
+        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
+        const shareableCertificateSerializerStub = { serialize: sinon.stub() };
+        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
+        const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgrorithmEngineVersion.V3 });
+        sinon.stub(usecases, 'getCertificationCourseByVerificationCode');
+        sinon.stub(usecases, 'getCertificationAttestation');
+        sinon.stub(usecases, 'getShareableCertificate');
+        usecases.getCertificationCourseByVerificationCode.resolves(certificationCourse);
+        const certificate = Symbol('certificate');
+        usecases.getCertificationAttestation.resolves(certificate);
 
-      // when
-      const response = await certificateController.getCertificateByVerificationCode(request, hFake, {
-        requestResponseUtils: requestResponseUtilsStub,
-      });
+        // when
+        await certificateController.getCertificateByVerificationCode(request, hFake, {
+          requestResponseUtils: requestResponseUtilsStub,
+          shareableCertificateSerializer: shareableCertificateSerializerStub,
+        });
 
-      // then
-      expect(response).to.deep.equal({
-        data: {
-          id: '123',
-          type: 'certifications',
-          attributes: {
-            'first-name': 'Dorothé',
-            'last-name': '2Pac',
-            birthdate: '2000-01-01',
-            birthplace: 'Sin City',
-            'certification-center': 'Centre des choux de Bruxelles',
-            date: new Date('2020-01-01T00:00:00Z'),
-            'delivered-at': new Date('2021-01-01T00:00:00Z'),
-            'is-published': true,
-            'pix-score': 456,
-            'certified-badge-images': ['/img/1'],
-            'max-reachable-level-on-certification-date': 6,
-            version: SESSIONS_VERSIONS.V3,
-          },
-          relationships: {
-            'result-competence-tree': {
-              data: null,
-            },
-          },
-        },
+        // then
+        expect(usecases.getCertificationCourseByVerificationCode).calledOnceWithExactly({
+          verificationCode: 'P-123456BB',
+        });
+        expect(usecases.getCertificationAttestation).calledOnceWithExactly({
+          certificationCourseId: certificationCourse.getId(),
+        });
+        expect(usecases.getShareableCertificate).to.not.have.been.calledOnce;
+      });
+    });
+
+    describe('when certification course version is V2', function () {
+      it('should return a serialized shareable certificate given by verification code', async function () {
+        // given
+        const request = { payload: { verificationCode: 'P-123456BB' } };
+        const locale = 'fr-fr';
+        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
+        const shareableCertificateSerializerStub = { serialize: sinon.stub() };
+        sinon.stub(usecases, 'getShareableCertificate');
+        sinon.stub(usecases, 'getCertificationCourseByVerificationCode');
+        sinon.stub(usecases, 'getCertificationAttestation');
+        usecases.getShareableCertificate
+          .withArgs({ verificationCode: 'P-123456BB', locale })
+          .resolves(Symbol('certificate'));
+        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
+        const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgrorithmEngineVersion.V2 });
+        usecases.getCertificationCourseByVerificationCode.resolves(certificationCourse);
+
+        // when
+        await certificateController.getCertificateByVerificationCode(request, hFake, {
+          requestResponseUtils: requestResponseUtilsStub,
+          shareableCertificateSerializer: shareableCertificateSerializerStub,
+        });
+
+        // then
+        expect(usecases.getCertificationCourseByVerificationCode).calledOnceWithExactly({
+          verificationCode: 'P-123456BB',
+        });
+        expect(usecases.getShareableCertificate).calledOnceWithExactly({ verificationCode: 'P-123456BB', locale });
+        expect(usecases.getCertificationAttestation).to.not.have.been.calledOnce;
       });
     });
   });

@@ -11,12 +11,23 @@ import * as shareableCertificateSerializer from '../infrastructure/serializers/s
 import * as certificationAttestationPdf from '../infrastructure/utils/pdf/certification-attestation-pdf.js';
 import * as v3CertificationAttestationPdf from '../infrastructure/utils/pdf/v3-certification-attestation-pdf.js';
 
-const getCertificateByVerificationCode = async function (request, h, dependencies = { requestResponseUtils }) {
+const getCertificateByVerificationCode = async function (
+  request,
+  h,
+  dependencies = { requestResponseUtils, shareableCertificateSerializer },
+) {
+  let certificate;
   const verificationCode = request.payload.verificationCode;
   const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
 
-  const shareableCertificate = await usecases.getShareableCertificate({ verificationCode, locale });
-  return shareableCertificateSerializer.serialize(shareableCertificate);
+  const certificationCourse = await usecases.getCertificationCourseByVerificationCode({ verificationCode });
+
+  if (certificationCourse.isV3()) {
+    certificate = await usecases.getCertificationAttestation({ certificationCourseId: certificationCourse.getId() });
+  } else {
+    certificate = await usecases.getShareableCertificate({ verificationCode, locale });
+  }
+  return dependencies.shareableCertificateSerializer.serialize(certificate);
 };
 
 const getCertificate = async function (request, h, dependencies = { requestResponseUtils }) {
