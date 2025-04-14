@@ -4,7 +4,7 @@ import { usecases as certificationSharedUsecases } from '../../../../src/certifi
 import * as requestResponseUtils from '../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { UnauthorizedError } from '../../../shared/application/http-errors.js';
 import { normalizeAndRemoveAccents } from '../../../shared/infrastructure/utils/string-utils.js';
-import { V3CertificationAttestation } from '../domain/models/V3CertificationAttestation.js';
+import { V3Certificate } from '../domain/models/V3Certificate.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as privateCertificateSerializer from '../infrastructure/serializers/private-certificate-serializer.js';
 import * as shareableCertificateSerializer from '../infrastructure/serializers/shareable-certificate-serializer.js';
@@ -59,7 +59,7 @@ const getPDFCertificate = async function (
 
   const certificate = await usecases.getCertificationAttestation({ certificationCourseId });
 
-  if (certificate instanceof V3CertificationAttestation) {
+  if (certificate instanceof V3Certificate) {
     const fileName = i18n.__('certification-confirmation.file-name', {
       deliveredAt: dayjs(certificate.deliveredAt).format('YYYYMMDD'),
     });
@@ -101,7 +101,7 @@ const getSessionCertificates = async function (
     sessionId,
   });
 
-  if (certificates.every((certificate) => certificate instanceof V3CertificationAttestation)) {
+  if (certificates.every((certificate) => certificate instanceof V3Certificate)) {
     const translatedFileName = i18n.__('certification-confirmation.file-name', {
       deliveredAt: dayjs(certificates[0].deliveredAt).format('YYYYMMDD'),
     });
@@ -145,9 +145,8 @@ const downloadDivisionCertificates = async function (
     division,
   });
 
-  if (certificates.some((certificate) => certificate instanceof V3CertificationAttestation)) {
-    const v3Certificates = certificates.filter((certificate) => certificate instanceof V3CertificationAttestation);
-
+  if (certificates.some((certificate) => certificate instanceof V3Certificate)) {
+    const v3Certificates = certificates.filter((certificate) => certificate instanceof V3Certificate);
     const normalizedDivision = normalizeAndRemoveAccents(division);
 
     const translatedFileName = i18n.__('certification-confirmation.file-name', {

@@ -609,7 +609,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           });
         });
 
-        it('should return a V3CertificationAttestation', async function () {
+        it('should return a V3Certificate', async function () {
           // given
           await featureToggles.set('isV3CertificationAttestationEnabled', true);
           const learningContentObjects = learningContentBuilder.fromAreas(minimalLearningContent);

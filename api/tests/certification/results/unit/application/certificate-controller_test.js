@@ -477,8 +477,8 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         const userId = 1;
         const i18n = getI18n();
 
-        const v3CertificationAttestation = domainBuilder.certification.results.buildV3CertificationAttestation();
-        const v2CertificationAttestation = domainBuilder.buildCertificationAttestation({
+        const v3Certificate = domainBuilder.certification.results.buildV3CertificationAttestation();
+        const v2Certificate = domainBuilder.buildCertificationAttestation({
           version: SESSIONS_VERSIONS.V2,
         });
         const generatedPdf = Symbol('Stream');
@@ -499,7 +499,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
             division,
             organizationId,
           })
-          .resolves([v3CertificationAttestation, v3CertificationAttestation, v2CertificationAttestation]);
+          .resolves([v3Certificate, v3Certificate, v2Certificate]);
 
         const generatePdfStub = {
           generate: sinon.stub().returns(generatedPdf),
@@ -512,12 +512,12 @@ describe('Certification | Results | Unit | Application | certificate-controller'
 
         // then
         expect(generatePdfStub.generate).calledOnceWithExactly({
-          certificates: [v3CertificationAttestation, v3CertificationAttestation],
+          certificates: [v3Certificate, v3Certificate],
           i18n,
         });
         expect(response.source).to.deep.equal(generatedPdf);
         expect(response.headers['Content-Disposition']).to.contains(
-          `attachment; filename=3eme-b-certification-pix-${dayjs(v3CertificationAttestation.deliveredAt).format('YYYYMMDD')}.pdf`,
+          `attachment; filename=3eme-b-certification-pix-${dayjs(v3Certificate.deliveredAt).format('YYYYMMDD')}.pdf`,
         );
       });
     });
