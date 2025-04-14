@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as sessionEnrolmentRepository from '../../../enrolment/infrastructure/repositories/session-repository.js';
+import * as resultsCertificationCourseRepository from '../../../results/infrastructure/repositories/certification-course-repository.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
 import * as certificationReportRepository from '../../../shared/infrastructure/repositories/certification-report-repository.js';
 import * as sharedSessionRepository from '../../../shared/infrastructure/repositories/session-repository.js';
@@ -33,6 +34,7 @@ import * as scoCertificationCandidateRepository from '../../infrastructure/repos
  **/
 
 const dependencies = {
+  resultsCertificationCourseRepository,
   certificationCourseRepository,
   certificationResultRepository,
   scoCertificationCandidateRepository,
