@@ -23,7 +23,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         const request = { payload: { verificationCode: 'P-123456BB' } };
         const locale = 'fr-fr';
         const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
-        const shareableCertificateSerializerStub = { serialize: sinon.stub() };
+        const certificateSerializerStub = { serialize: sinon.stub() };
         requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
         const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgrorithmEngineVersion.V3 });
         sinon.stub(usecases, 'getCertificationCourseByVerificationCode');
@@ -36,7 +36,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         // when
         await certificateController.getCertificateByVerificationCode(request, hFake, {
           requestResponseUtils: requestResponseUtilsStub,
-          shareableCertificateSerializer: shareableCertificateSerializerStub,
+          certificateSerializer: certificateSerializerStub,
         });
 
         // then
@@ -56,7 +56,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         const request = { payload: { verificationCode: 'P-123456BB' } };
         const locale = 'fr-fr';
         const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
-        const shareableCertificateSerializerStub = { serialize: sinon.stub() };
+        const certificateSerializerStub = { serialize: sinon.stub() };
         sinon.stub(usecases, 'getShareableCertificate');
         sinon.stub(usecases, 'getCertificationCourseByVerificationCode');
         sinon.stub(usecases, 'getCertificationAttestation');
@@ -70,7 +70,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         // when
         await certificateController.getCertificateByVerificationCode(request, hFake, {
           requestResponseUtils: requestResponseUtilsStub,
-          shareableCertificateSerializer: shareableCertificateSerializerStub,
+          certificateSerializer: certificateSerializerStub,
         });
 
         // then

@@ -6,15 +6,15 @@ import { UnauthorizedError } from '../../../shared/application/http-errors.js';
 import { normalizeAndRemoveAccents } from '../../../shared/infrastructure/utils/string-utils.js';
 import { V3Certificate } from '../domain/models/V3Certificate.js';
 import { usecases } from '../domain/usecases/index.js';
+import * as certificateSerializer from '../infrastructure/serializers/certificate-serializer.js';
 import * as privateCertificateSerializer from '../infrastructure/serializers/private-certificate-serializer.js';
-import * as shareableCertificateSerializer from '../infrastructure/serializers/shareable-certificate-serializer.js';
 import * as certificationAttestationPdf from '../infrastructure/utils/pdf/certification-attestation-pdf.js';
 import * as v3CertificationAttestationPdf from '../infrastructure/utils/pdf/v3-certification-attestation-pdf.js';
 
 const getCertificateByVerificationCode = async function (
   request,
   h,
-  dependencies = { requestResponseUtils, shareableCertificateSerializer },
+  dependencies = { requestResponseUtils, certificateSerializer },
 ) {
   let certificate;
   const verificationCode = request.payload.verificationCode;
@@ -27,7 +27,7 @@ const getCertificateByVerificationCode = async function (
   } else {
     certificate = await usecases.getShareableCertificate({ verificationCode, locale });
   }
-  return dependencies.shareableCertificateSerializer.serialize(certificate);
+  return dependencies.certificateSerializer.serialize(certificate);
 };
 
 const getCertificate = async function (request, h, dependencies = { requestResponseUtils }) {
