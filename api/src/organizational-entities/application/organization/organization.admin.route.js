@@ -2,7 +2,6 @@ import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 const Joi = BaseJoi.extend(JoiDate);
 
-import { organizationController } from '../../../../lib/application/organizations/organization-controller.js';
 import { BadRequestError, PayloadTooLargeError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { MAX_FILE_SIZE_UPLOAD } from '../../../shared/domain/constants.js';
@@ -37,7 +36,7 @@ const register = async function (server) {
             organizationId: identifiersType.organizationId,
           }),
         },
-        handler: organizationController.findChildrenOrganizationsForAdmin,
+        handler: organizationAdminController.findChildrenOrganizations,
         tags: ['api', 'organizations'],
         notes: [
           "- **Cette route est restreinte aux utilisateurs authentifiés ayant un rôle permettant un accès à l'admin de Pix**\n" +

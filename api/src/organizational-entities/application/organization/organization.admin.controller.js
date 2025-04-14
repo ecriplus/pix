@@ -1,3 +1,4 @@
+import { usecases as organizationUsecases } from '../../../../lib/domain/usecases/index.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { generateCSVTemplate } from '../../../shared/infrastructure/serializers/csv/csv-template.js';
 import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
@@ -101,6 +102,12 @@ const findPaginatedFilteredOrganizations = async function (request, h, dependenc
   return dependencies.organizationSerializer.serialize(organizations, pagination);
 };
 
+const findChildrenOrganizations = async function (request, h, dependencies = { organizationForAdminSerializer }) {
+  const parentOrganizationId = request.params.organizationId;
+  const childOrganizations = await organizationUsecases.findChildrenOrganizationsForAdmin({ parentOrganizationId });
+  return dependencies.organizationForAdminSerializer.serialize(childOrganizations);
+};
+
 const organizationAdminController = {
   addTagsToOrganizations,
   create,
@@ -112,6 +119,7 @@ const organizationAdminController = {
   updateOrganizationsInBatch,
   updateOrganizationInformation,
   findPaginatedFilteredOrganizations,
+  findChildrenOrganizations,
 };
 
 export { organizationAdminController };
