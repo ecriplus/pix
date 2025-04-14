@@ -3,8 +3,8 @@ import {
   fillByLabel,
   fireEvent,
   render,
-  within,
   waitForElementToBeRemoved,
+  within,
 } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
