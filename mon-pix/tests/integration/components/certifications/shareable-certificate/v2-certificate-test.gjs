@@ -5,7 +5,7 @@ import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | Certifications | Shared | v2-certification', function (hooks) {
+module('Integration | Component | Certifications | Shareable certificate | v2-certificate', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   test('it displays certification starter page when extension is enabled', async function (assert) {
@@ -31,7 +31,7 @@ module('Integration | Component | Certifications | Shared | v2-certification', f
 
     // when
     const screen = await render(hbs`
-      <Certifications::Shared::v2Certification @model={{this.certification}} />`);
+      <Certifications::ShareableCertificate::v2Certificate @model={{this.certification}} />`);
 
     // then
     assert.dom(screen.getByRole('link', { name: t('pages.shared-certification.back-link') })).exists();
@@ -63,7 +63,7 @@ module('Integration | Component | Certifications | Shared | v2-certification', f
 
         // when
         const screen = await render(hbs`
-      <Certifications::Shared::v2Certification @model={{this.certification}} />`);
+      <Certifications::ShareableCertificate::v2Certificate @model={{this.certification}} />`);
 
         // then
         assert.dom(screen.getByRole('heading', { level: 2, name: t('pages.certificate.jury-title') })).exists();
@@ -95,7 +95,7 @@ module('Integration | Component | Certifications | Shared | v2-certification', f
 
         // when
         const screen = await render(hbs`
-      <Certifications::Shared::v2Certification @model={{this.certification}} />`);
+      <Certifications::ShareableCertificate::v2Certificate @model={{this.certification}} />`);
 
         // then
         assert
@@ -128,7 +128,7 @@ module('Integration | Component | Certifications | Shared | v2-certification', f
 
         // when
         const screen = await render(hbs`
-      <Certifications::Shared::v2Certification @model={{this.certification}} />`);
+      <Certifications::ShareableCertificate::v2Certificate @model={{this.certification}} />`);
 
         // then
         assert
