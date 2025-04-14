@@ -72,12 +72,7 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
               },
               relationships: {
                 habilitations: {
-                  data: [
-                    {
-                      id: '12',
-                      type: 'complementary-certifications',
-                    },
-                  ],
+                  data: [],
                 },
                 'certification-center-memberships': {
                   links: {
@@ -104,16 +99,6 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
                     related: '/api/certification-centers/2/certification-center-memberships',
                   },
                 },
-              },
-            },
-          ],
-          included: [
-            {
-              id: '12',
-              type: 'complementary-certifications',
-              attributes: {
-                label: 'Pix+Edu 1er degré',
-                key: 'EDU_1ER_DEGRE',
               },
             },
           ],
@@ -287,6 +272,8 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
               type: 'SUP',
               'external-id': 'EX123',
               'created-at': undefined,
+              'archived-at': null,
+              'archivist-full-name': null,
               'data-protection-officer-first-name': undefined,
               'data-protection-officer-last-name': undefined,
               'data-protection-officer-email': undefined,

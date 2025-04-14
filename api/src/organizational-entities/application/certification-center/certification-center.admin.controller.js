@@ -1,5 +1,4 @@
 import { usecases as certificationConfigurationUsecases } from '../../../certification/configuration/domain/usecases/index.js';
-import { usecases as certificationUsecases } from '../../../certification/enrolment/domain/usecases/index.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as certificationCenterSerializer from '../../infrastructure/serializers/jsonapi/certification-center/certification-center.serializer.js';
@@ -35,7 +34,7 @@ const findPaginatedFilteredCertificationCenters = async function (
 const getCertificationCenterDetails = async function (request) {
   const certificationCenterId = request.params.id;
 
-  const certificationCenterDetails = await certificationUsecases.getCenterForAdmin({ id: certificationCenterId });
+  const certificationCenterDetails = await usecases.getCenterForAdmin({ id: certificationCenterId });
 
   return certificationCenterForAdminSerializer.serialize(certificationCenterDetails);
 };

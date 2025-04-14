@@ -2,7 +2,7 @@ import jsonapiSerializer from 'jsonapi-serializer';
 
 const { Serializer } = jsonapiSerializer;
 
-import { CenterForAdmin } from '../../../../../certification/enrolment/domain/models/CenterForAdmin.js';
+import { CenterForAdmin } from '../../../../domain/models/CenterForAdmin.js';
 
 const deserialize = function ({ data }) {
   const center = {
@@ -12,6 +12,8 @@ const deserialize = function ({ data }) {
     id: data.id,
     name: data.attributes.name,
     type: data.attributes.type,
+    archivedAt: data.attributes['archived-at'],
+    archivistFullName: data.attributes['archivist-full-name'],
     isComplementaryAlonePilot: data.attributes['is-complementary-alone-pilot'],
   };
   const dataProtectionOfficer = {
@@ -22,6 +24,7 @@ const deserialize = function ({ data }) {
 
   return new CenterForAdmin({
     center,
+    archivistFullName: center.archivistFullName,
     dataProtectionOfficer,
   });
 };
@@ -33,6 +36,8 @@ const serialize = function (certificationCenter, certificationCenterPilotFeature
       'type',
       'externalId',
       'createdAt',
+      'archivedAt',
+      'archivistFullName',
       'certificationCenterMemberships',
       'dataProtectionOfficerFirstName',
       'dataProtectionOfficerLastName',

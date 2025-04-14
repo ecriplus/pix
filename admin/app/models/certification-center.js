@@ -1,4 +1,5 @@
 import Model, { attr, hasMany } from '@ember-data/model';
+import dayjs from 'dayjs';
 
 export const types = [
   { value: 'PRO', label: 'Organisation professionnelle' },
@@ -10,6 +11,8 @@ export default class CertificationCenter extends Model {
   @attr() name;
   @attr() type;
   @attr() externalId;
+  @attr() archivedAt;
+  @attr() archivistFullName;
   @attr() dataProtectionOfficerFirstName;
   @attr() dataProtectionOfficerLastName;
   @attr() dataProtectionOfficerEmail;
@@ -19,6 +22,14 @@ export default class CertificationCenter extends Model {
 
   get typeLabel() {
     return types.find((type) => type.value === this.type).label;
+  }
+
+  get isArchived() {
+    return Boolean(this.archivedAt);
+  }
+
+  get archivedAtFormatDate() {
+    return this.archivedAt && dayjs(this.archivedAt).format('DD/MM/YYYY');
   }
 
   get dataProtectionOfficerFullName() {

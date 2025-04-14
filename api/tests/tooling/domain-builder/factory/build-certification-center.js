@@ -8,8 +8,6 @@ const buildCertificationCenter = function ({
   createdAt = new Date('2020-01-01'),
   updatedAt,
   habilitations = [],
-  archivedAt,
-  archivedBy,
 } = {}) {
   return new CertificationCenter({
     id,
@@ -19,8 +17,6 @@ const buildCertificationCenter = function ({
     updatedAt,
     createdAt,
     habilitations,
-    archivedAt,
-    archivedBy,
   });
 };
 

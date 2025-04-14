@@ -1,10 +1,10 @@
 /**
- * @typedef {import('../Center.js').Center} Center
- * @typedef {import('../../../../../organizational-entities/domain/models/DataProtectionOfficer.js').DataProtectionOfficer} DataProtectionOfficer
+ * @typedef {import('../../../../certification/enrolment/domain/models/Center.js').Center} Center
+ * @typedef {import('../DataProtectionOfficer.js').DataProtectionOfficer} DataProtectionOfficer
  */
 
+import { Habilitation } from '../../../../certification/enrolment/domain/models/Habilitation.js';
 import { CenterForAdmin } from '../CenterForAdmin.js';
-import { Habilitation } from '../Habilitation.js';
 
 export class CenterForAdminFactory {
   /**
@@ -12,7 +12,7 @@ export class CenterForAdminFactory {
    * @param {Center} params.center
    * @param {DataProtectionOfficer} params.dataProtectionOfficer
    */
-  static fromCenterAndDataProtectionOfficer({ center, dataProtectionOfficer = {} }) {
+  static fromCenterAndDataProtectionOfficer({ center, archivistFullName, dataProtectionOfficer = {} }) {
     return new CenterForAdmin({
       center: {
         id: center.id,
@@ -22,8 +22,10 @@ export class CenterForAdminFactory {
         externalId: center.externalId,
         createdAt: undefined,
         updatedAt: undefined,
+        archivedAt: center.archivedAt,
         isComplementaryAlonePilot: center.isComplementaryAlonePilot,
       },
+      archivistFullName,
       dataProtectionOfficer: {
         firstName: dataProtectionOfficer.firstName,
         lastName: dataProtectionOfficer.lastName,
