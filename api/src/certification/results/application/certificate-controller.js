@@ -1,6 +1,8 @@
 import dayjs from 'dayjs';
 
+import { usecases as certificationSharedUsecases } from '../../../../src/certification/shared/domain/usecases/index.js';
 import * as requestResponseUtils from '../../../../src/shared/infrastructure/utils/request-response-utils.js';
+import { UnauthorizedError } from '../../../shared/application/http-errors.js';
 import { normalizeAndRemoveAccents } from '../../../shared/infrastructure/utils/string-utils.js';
 import { V3CertificationAttestation } from '../domain/models/V3CertificationAttestation.js';
 import { usecases } from '../domain/usecases/index.js';
@@ -49,10 +51,13 @@ const getPDFCertificate = async function (
   const { i18n } = request;
   const { isFrenchDomainExtension } = request.query;
 
-  const certificate = await usecases.getCertificationAttestation({
-    userId,
-    certificationCourseId,
-  });
+  const certificationCourse = await certificationSharedUsecases.getCertificationCourse({ certificationCourseId });
+
+  if (certificationCourse.getUserId() !== userId) {
+    throw new UnauthorizedError();
+  }
+
+  const certificate = await usecases.getCertificationAttestation({ certificationCourseId });
 
   if (certificate instanceof V3CertificationAttestation) {
     const fileName = i18n.__('certification-confirmation.file-name', {
