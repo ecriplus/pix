@@ -1,5 +1,19 @@
 # Pix Changelog
 
+## v5.90.0 (14/04/2025)
+
+
+### :building_construction: Tech
+- [#12018](https://github.com/1024pix/pix/pull/12018) [TECH] Supprimer la dépendance à `ember-fetch` dans Pix Admin.
+- [#12029](https://github.com/1024pix/pix/pull/12029) [TECH] Utiliser une 401 plutôt qu'une 403 en cas d'erreur de mot de passe dans la page de connexion à l'espace surveillant (PIX-17461).
+
+### :bug: Correction
+- [#12009](https://github.com/1024pix/pix/pull/12009) [BUGFIX] Corriger des erreurs suite à la montée de version Pix UI sur Pix Certif (PIX-17429).
+
+### :arrow_up: Montée de version
+- [#12039](https://github.com/1024pix/pix/pull/12039) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.29 (certif).
+- [#12037](https://github.com/1024pix/pix/pull/12037) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.29 (admin).
+
 ## v5.89.0 (11/04/2025)
 
 
