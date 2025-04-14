@@ -1,4 +1,5 @@
 import { V3CertificationAttestation } from '../../../../../../src/certification/results/domain/models/V3CertificationAttestation.js';
+import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 
 const buildV3CertificationAttestation = function ({
   id = 1,
@@ -10,6 +11,8 @@ const buildV3CertificationAttestation = function ({
   deliveredAt = new Date('2018-10-03T01:02:03Z'),
   pixScore = 123,
   verificationCode = 'P-SOMECODE',
+  resultCompetenceTree = null,
+  algorithmEngineVersion = AlgorithmEngineVersion.V3,
 } = {}) {
   return new V3CertificationAttestation({
     id,
@@ -21,6 +24,8 @@ const buildV3CertificationAttestation = function ({
     deliveredAt,
     pixScore,
     verificationCode,
+    resultCompetenceTree,
+    algorithmEngineVersion,
   });
 };
 

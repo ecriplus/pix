@@ -13,6 +13,8 @@ export class V3CertificationAttestation {
    * @param {string} props.pixScore
    * @param {GlobalCertificationLevel} props.[globalLevel] - auto calculated
    * @param {string} props.verificationCode
+   * @param {Array<ResultCompetenceTree>} props.resultCompetenceTree
+   * @param {AlgorithmEngineVersion} props.algorithmEngineVersion
    */
   constructor({
     id,
@@ -24,6 +26,8 @@ export class V3CertificationAttestation {
     deliveredAt,
     pixScore,
     verificationCode,
+    resultCompetenceTree,
+    algorithmEngineVersion,
   } = {}) {
     this.id = id;
     this.firstName = firstName;
@@ -36,5 +40,7 @@ export class V3CertificationAttestation {
     this.globalLevel = new GlobalCertificationLevel({ score: pixScore });
     this.verificationCode = verificationCode;
     this.maxReachableScore = MAX_REACHABLE_SCORE;
+    this.resultCompetenceTree = resultCompetenceTree;
+    this.algorithmEngineVersion = algorithmEngineVersion;
   }
 }
