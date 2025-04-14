@@ -72,7 +72,7 @@ describe('Unit | Devcomp | Domain | Models | PassageEvent', function () {
         // given
         class FakeEvent extends PassageEvent {
           constructor() {
-            super({ id: 1, type: 'FAKE', occurredAt: Symbol('date'), createdAt: Symbol('date') });
+            super({ id: 1, type: 'FAKE', occurredAt: new Date(), createdAt: Symbol('date') });
           }
         }
 
