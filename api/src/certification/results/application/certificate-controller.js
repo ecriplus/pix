@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import { usecases as certificationSharedUsecases } from '../../../../src/certification/shared/domain/usecases/index.js';
 import * as requestResponseUtils from '../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { UnauthorizedError } from '../../../shared/application/http-errors.js';
+import { featureToggles } from '../../../shared/infrastructure/feature-toggles/index.js';
 import { normalizeAndRemoveAccents } from '../../../shared/infrastructure/utils/string-utils.js';
 import { V3Certificate } from '../domain/models/V3Certificate.js';
 import { usecases } from '../domain/usecases/index.js';
@@ -22,10 +23,13 @@ const getCertificateByVerificationCode = async function (
 
   const certificationCourse = await usecases.getCertificationCourseByVerificationCode({ verificationCode });
 
-  if (certificationCourse.isV3()) {
+  if (certificationCourse.isV3() && (await featureToggles.get('isV3CertificationPageEnabled'))) {
     certificate = await usecases.getCertificationAttestation({ certificationCourseId: certificationCourse.getId() });
   } else {
-    certificate = await usecases.getShareableCertificate({ verificationCode, locale });
+    certificate = await usecases.getShareableCertificate({
+      certificationCourseId: certificationCourse.getId(),
+      locale,
+    });
   }
   return dependencies.certificateSerializer.serialize(certificate);
 };

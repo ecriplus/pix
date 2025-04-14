@@ -3,13 +3,11 @@ import dayjs from 'dayjs';
 import { certificateController } from '../../../../../src/certification/results/application/certificate-controller.js';
 import { usecases } from '../../../../../src/certification/results/domain/usecases/index.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
-import {
-  SESSIONS_VERSIONS as AlgrorithmEngineVersion,
-  SESSIONS_VERSIONS,
-} from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
+import { SESSIONS_VERSIONS } from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { usecases as certificationSharedUsecases } from '../../../../../src/certification/shared/domain/usecases/index.js';
 import { UnauthorizedError } from '../../../../../src/shared/application/http-errors.js';
 import { LANGUAGES_CODE } from '../../../../../src/shared/domain/services/language-service.js';
+import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { catchErr, domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
@@ -18,35 +16,75 @@ const { FRENCH } = LANGUAGES_CODE;
 describe('Certification | Results | Unit | Application | certificate-controller', function () {
   describe('#getCertificateByVerificationCode', function () {
     describe('when certification course version is V3', function () {
-      it('should return serialized V3 certificate data', async function () {
-        // given
-        const request = { payload: { verificationCode: 'P-123456BB' } };
-        const locale = 'fr-fr';
-        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
-        const certificateSerializerStub = { serialize: sinon.stub() };
-        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
-        const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgrorithmEngineVersion.V3 });
-        sinon.stub(usecases, 'getCertificationCourseByVerificationCode');
-        sinon.stub(usecases, 'getCertificationAttestation');
-        sinon.stub(usecases, 'getShareableCertificate');
-        usecases.getCertificationCourseByVerificationCode.resolves(certificationCourse);
-        const certificate = Symbol('certificate');
-        usecases.getCertificationAttestation.resolves(certificate);
+      describe('when isV3CertificationPageEnabled feature toggle is enabled', function () {
+        it('should return serialized V3 certificate data', async function () {
+          // given
+          await featureToggles.set('isV3CertificationPageEnabled', true);
+          const request = { payload: { verificationCode: 'P-123456BB' } };
+          const locale = 'fr-fr';
+          const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
+          const certificateSerializerStub = { serialize: sinon.stub() };
+          requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
+          const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgorithmEngineVersion.V3 });
+          sinon.stub(usecases, 'getCertificationCourseByVerificationCode');
+          sinon.stub(usecases, 'getCertificationAttestation');
+          sinon.stub(usecases, 'getShareableCertificate');
+          usecases.getCertificationCourseByVerificationCode.resolves(certificationCourse);
+          const certificate = Symbol('certificate');
+          usecases.getCertificationAttestation.resolves(certificate);
 
-        // when
-        await certificateController.getCertificateByVerificationCode(request, hFake, {
-          requestResponseUtils: requestResponseUtilsStub,
-          certificateSerializer: certificateSerializerStub,
-        });
+          // when
+          await certificateController.getCertificateByVerificationCode(request, hFake, {
+            requestResponseUtils: requestResponseUtilsStub,
+            certificateSerializer: certificateSerializerStub,
+          });
 
-        // then
-        expect(usecases.getCertificationCourseByVerificationCode).calledOnceWithExactly({
-          verificationCode: 'P-123456BB',
+          // then
+          expect(usecases.getCertificationCourseByVerificationCode).calledOnceWithExactly({
+            verificationCode: 'P-123456BB',
+          });
+          expect(usecases.getCertificationAttestation).calledOnceWithExactly({
+            certificationCourseId: certificationCourse.getId(),
+          });
+          expect(usecases.getShareableCertificate).to.not.have.been.calledOnce;
         });
-        expect(usecases.getCertificationAttestation).calledOnceWithExactly({
-          certificationCourseId: certificationCourse.getId(),
+      });
+
+      describe('when isV3CertificationPageEnabled feature toggle is disabled', function () {
+        it('should return serialized V2 certificate data', async function () {
+          // given
+          await featureToggles.set('isV3CertificationPageEnabled', false);
+          const request = { payload: { verificationCode: 'P-123456BB' } };
+          const locale = 'fr-fr';
+          const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
+          const certificateSerializerStub = { serialize: sinon.stub() };
+          requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
+          sinon.stub(usecases, 'getShareableCertificate');
+          sinon.stub(usecases, 'getCertificationCourseByVerificationCode');
+          sinon.stub(usecases, 'getCertificationAttestation');
+          usecases.getShareableCertificate
+            .withArgs({ verificationCode: 'P-123456BB', locale })
+            .resolves(Symbol('certificate'));
+          requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
+          const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgorithmEngineVersion.V2 });
+          usecases.getCertificationCourseByVerificationCode.resolves(certificationCourse);
+
+          // when
+          await certificateController.getCertificateByVerificationCode(request, hFake, {
+            requestResponseUtils: requestResponseUtilsStub,
+            certificateSerializer: certificateSerializerStub,
+          });
+
+          // then
+          expect(usecases.getCertificationCourseByVerificationCode).calledOnceWithExactly({
+            verificationCode: 'P-123456BB',
+          });
+          expect(usecases.getShareableCertificate).calledOnceWithExactly({
+            certificationCourseId: certificationCourse.getId(),
+            locale,
+          });
+          expect(usecases.getCertificationAttestation).to.not.have.been.calledOnce;
         });
-        expect(usecases.getShareableCertificate).to.not.have.been.calledOnce;
       });
     });
 
@@ -64,7 +102,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           .withArgs({ verificationCode: 'P-123456BB', locale })
           .resolves(Symbol('certificate'));
         requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
-        const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgrorithmEngineVersion.V2 });
+        const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgorithmEngineVersion.V2 });
         usecases.getCertificationCourseByVerificationCode.resolves(certificationCourse);
 
         // when
@@ -77,7 +115,10 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         expect(usecases.getCertificationCourseByVerificationCode).calledOnceWithExactly({
           verificationCode: 'P-123456BB',
         });
-        expect(usecases.getShareableCertificate).calledOnceWithExactly({ verificationCode: 'P-123456BB', locale });
+        expect(usecases.getShareableCertificate).calledOnceWithExactly({
+          certificationCourseId: certificationCourse.getId(),
+          locale,
+        });
         expect(usecases.getCertificationAttestation).to.not.have.been.calledOnce;
       });
     });

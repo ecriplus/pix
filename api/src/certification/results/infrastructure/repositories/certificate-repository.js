@@ -110,14 +110,14 @@ const getPrivateCertificate = async function (id, { locale } = {}) {
   });
 };
 
-const getShareableCertificateByVerificationCode = async function (verificationCode, { locale } = {}) {
+const getShareableCertificate = async function ({ certificationCourseId, locale }) {
   const shareableCertificateDTO = await _selectShareableCertificates()
     .groupBy('certification-courses.id', 'sessions.id', 'assessment-results.id')
-    .where({ verificationCode })
+    .where('certification-courses.id', certificationCourseId)
     .first();
 
   if (!shareableCertificateDTO) {
-    throw new NotFoundError(`There is no certification course with verification code "${verificationCode}"`);
+    throw new NotFoundError(`There is no certification course with given certification course id`);
   }
 
   const competenceTree = await competenceTreeRepository.get({ locale });
@@ -132,7 +132,7 @@ export {
   findPrivateCertificatesByUserId,
   getCertificationAttestation,
   getPrivateCertificate,
-  getShareableCertificateByVerificationCode,
+  getShareableCertificate,
 };
 
 function _selectCertificationAttestations() {
