@@ -4,6 +4,7 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
+  knex,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Organization Entities | Admin | Route | Certification Centers', function () {
@@ -378,6 +379,49 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
         expect(result.data.attributes['data-protection-officer-email']).to.equal('justin.ptipeu@example.net');
         expect(result.data.attributes.name).to.equal('Justin Ptipeu Orga');
       });
+    });
+  });
+
+  describe('POST /api/admin/certification-centers/{certificationCenterId}/archive', function () {
+    it('archives the certification center and related data and returns 204', async function () {
+      // given
+      const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+      const previousUpdate = new Date(2022, 4, 5);
+      const userId = databaseBuilder.factory.buildUser().id;
+      databaseBuilder.factory.buildCertificationCenterMembership({ userId, certificationCenterId });
+      databaseBuilder.factory.buildCertificationCenterInvitation({
+        certificationCenterId,
+        statusCode: 'pending',
+        updatedAt: previousUpdate,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const response = await server.inject({
+        method: 'POST',
+        url: `/api/admin/certification-centers/${certificationCenterId}/archive`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminMember.id }),
+      });
+
+      // then
+      expect(response.statusCode).to.equal(204);
+
+      const archivedCenter = await knex('certification-centers').where({ id: certificationCenterId }).first();
+      expect(archivedCenter.archivedBy).to.deep.equal(adminMember.id);
+      expect(archivedCenter.archivedAt).to.be.instanceOf(Date);
+      expect(archivedCenter.archivedAt).not.to.deep.equal(previousUpdate);
+
+      const disabledMembership = await knex('certification-center-memberships')
+        .where({ certificationCenterId })
+        .first();
+      expect(disabledMembership.updatedByUserId).to.equal(adminMember.id);
+      expect(disabledMembership.disabledAt).to.deep.equal(archivedCenter.archivedAt);
+
+      const cancelledInvitation = await knex('certification-center-invitations')
+        .where({ certificationCenterId })
+        .first();
+      expect(cancelledInvitation.status).to.deep.equal('cancelled');
+      expect(cancelledInvitation.updatedAt).to.deep.equal(archivedCenter.archivedAt);
     });
   });
 });
