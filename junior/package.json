@@ -110,7 +110,7 @@
     "stylelint": "^16.13.2",
     "stylelint-order": "^6.0.4",
     "tracked-built-ins": "^4.0.0",
-    "webpack": "5.98.0",
+    "webpack": "5.99.0",
     "xss": "^1.0.14"
   },
   "ember": {
