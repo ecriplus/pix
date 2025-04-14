@@ -152,6 +152,7 @@ function _selectCertificationAttestations() {
       verificationCode: 'certification-courses.verificationCode',
       certificationCenter: 'sessions.certificationCenter',
       maxReachableLevelOnCertificationDate: 'certification-courses.maxReachableLevelOnCertificationDate',
+      algorithmEngineVersion: 'certification-courses.version',
       pixScore: 'assessment-results.pixScore',
       assessmentResultId: 'assessment-results.id',
       competenceMarks: knex.raw(`
@@ -273,6 +274,7 @@ async function _toDomainForCertificationAttestation({ certificationCourseDTO, co
   ) {
     return new V3CertificationAttestation({
       ...certificationCourseDTO,
+      resultCompetenceTree: (await featureToggles.get('isV3CertificationPageEnabled')) ? resultCompetenceTree : [],
     });
   }
 
