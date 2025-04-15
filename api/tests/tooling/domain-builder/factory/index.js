@@ -210,6 +210,7 @@ import {
   buildLtiPlatformRegistrationWithPlatformConfig,
 } from './identity-access-management/build-lti-platform-registration.js';
 import { buildUserLogin } from './identity-access-management/build-user-login.js';
+import { buildCampaignParticipation as maddoBuildCampaignParticipation } from './maddo/build-campaign-participation.js';
 import { buildCampaign as boundedContextCampaignBuildCampaign } from './prescription/campaign/build-campaign.js';
 import { buildCampaignResultLevelsPerTubesAndCompetences as boundedContextCampaignBuildCampaignResultLevelsPerTubesAndCompetences } from './prescription/campaign/build-campaign-result-levels-per-tubes-and-competences.js';
 import { buildCampaignParticipation as boundedContextCampaignParticipationBuildCampaignParticipation } from './prescription/campaign-participation/build-campaign-participation.js';
@@ -295,6 +296,10 @@ const identityAccessManagement = {
   buildUserLogin,
   buildLtiPlatformRegistration,
   buildLtiPlatformRegistrationWithPlatformConfig,
+};
+
+const maddo = {
+  buildCampaignParticipation: maddoBuildCampaignParticipation,
 };
 
 export {
@@ -474,5 +479,6 @@ export {
   buildValidator,
   certification,
   identityAccessManagement,
+  maddo,
   prescription,
 };

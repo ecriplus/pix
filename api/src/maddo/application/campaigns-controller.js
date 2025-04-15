@@ -7,6 +7,7 @@ export async function getCampaignParticipations(
 ) {
   const campaignParticipations = await dependencies.getCampaignParticipations({
     campaignId: request.params.campaignId,
+    clientId: request.auth.credentials.client_id,
   });
   return h.response(campaignParticipations).code(200);
 }

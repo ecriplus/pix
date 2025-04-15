@@ -1,8 +1,8 @@
-import { CampaignParticipation } from '../../../../src/maddo/domain/models/CampaignParticipation.js';
 import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
 import {
   createMaddoServer,
   databaseBuilder,
+  domainBuilder,
   expect,
   generateValidRequestAuthorizationHeaderForApplication,
 } from '../../../test-helper.js';
@@ -56,8 +56,8 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
       // then
       expect(response.statusCode).to.equal(200);
       expect(response.result).to.deep.equal([
-        new CampaignParticipation(participation1),
-        new CampaignParticipation(participation2),
+        domainBuilder.maddo.buildCampaignParticipation({ ...participation1, clientId }),
+        domainBuilder.maddo.buildCampaignParticipation({ ...participation2, clientId }),
       ]);
     });
   });
