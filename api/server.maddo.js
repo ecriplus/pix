@@ -14,13 +14,13 @@ import * as replicationsRoutes from './src/maddo/application/replications-routes
 import { Metrics } from './src/monitoring/infrastructure/metrics.js';
 import * as healthcheckRoutes from './src/shared/application/healthcheck/index.js';
 import { config } from './src/shared/config.js';
-import { monitoringTools } from './src/shared/infrastructure/monitoring-tools.js';
+import { installHapiHook } from './src/shared/infrastructure/async-local-storage.js';
 import { plugins } from './src/shared/infrastructure/plugins/index.js';
 import { deserializer } from './src/shared/infrastructure/serializers/jsonapi/deserializer.js';
 import { swaggers } from './src/shared/swaggers.js';
 import { handleFailAction } from './src/shared/validate.js';
 
-monitoringTools.installHapiHook();
+installHapiHook();
 
 const { logOpsMetrics, port, logging } = config;
 const createMaddoServer = async () => {

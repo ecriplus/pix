@@ -91,7 +91,6 @@ describe('Integration | Infrastructure | plugins | pino', function () {
     context('with request monitoring disabled', function () {
       beforeEach(function () {
         sinon.stub(config.hapi, 'enableRequestMonitoring').value(false);
-        monitoringTools.installHapiHook();
       });
 
       it('should log the message and version', async function () {
@@ -122,7 +121,6 @@ describe('Integration | Infrastructure | plugins | pino', function () {
     context('with request monitoring enabled', function () {
       beforeEach(function () {
         sinon.stub(config.hapi, 'enableRequestMonitoring').value(true);
-        monitoringTools.installHapiHook();
       });
 
       it('should log the message, version, user id, route and metrics', async function () {

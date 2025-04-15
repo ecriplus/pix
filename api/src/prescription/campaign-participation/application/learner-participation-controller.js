@@ -1,11 +1,10 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
-import { monitoringTools } from '../../../shared/infrastructure/monitoring-tools.js';
 import * as requestResponseUtils from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as campaignParticipationSerializer from '../infrastructure/serializers/jsonapi/campaign-participation-serializer.js';
 import * as sharedProfileForCampaignSerializer from '../infrastructure/serializers/jsonapi/shared-profile-for-campaign-serializer.js';
 
-const save = async function (request, h, dependencies = { campaignParticipationSerializer, monitoringTools }) {
+const save = async function (request, h, dependencies = { campaignParticipationSerializer }) {
   const userId = request.auth.credentials.userId;
   const campaignParticipation = await dependencies.campaignParticipationSerializer.deserialize(request.payload);
 
