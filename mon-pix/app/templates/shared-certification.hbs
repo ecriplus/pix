@@ -3,7 +3,7 @@
 <Global::AppLayout>
   <main id="main" class="global-page-container" role="main">
     {{#if this.displayV3CertificationShared}}
-      <Certifications::ShareableCertificate::v3Certificate @certification={{this.model}} />
+      <Certifications::ShareableCertificate::v3Certificate @certificate={{this.model}} />
     {{else}}
       <Certifications::ShareableCertificate::v2Certificate @model={{this.model}} />
     {{/if}}

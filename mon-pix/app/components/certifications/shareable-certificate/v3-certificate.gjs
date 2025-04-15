@@ -1,11 +1,17 @@
-<template>
-  <h1>
-    {{! template-lint-disable "no-bare-strings" }}
-    Page Certificat V3
-  </h1>
-  <p>{{@certification.fullName}} {{@certification.birthdate}}</p>
+import { t } from 'ember-intl';
 
-  {{#each @certification.resultCompetenceTree.areas as |area|}}
+import CandidateInformation from '../certificate-information/candidate-information';
+
+<template>
+  <section class="global-page-header">
+    <h1 class="global-page-header__title">
+      {{t "pages.certificate.title"}}
+    </h1>
+  </section>
+
+  <CandidateInformation @certificate={{@certificate}} />
+
+  {{#each @certificate.resultCompetenceTree.areas as |area|}}
     {{#each area.resultCompetences as |resultCompetence|}}
       <p>{{resultCompetence.name}}</p>
     {{/each}}

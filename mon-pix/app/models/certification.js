@@ -28,6 +28,10 @@ export default class Certification extends Model {
   @attr('number') maxReachableLevelOnCertificationDate;
   @attr('number') version;
   @attr('number') algorithmEngineVersion;
+  @attr('string') globalLevelLabel;
+  @attr('string') globalSummaryLabel;
+  @attr('string') globalDescriptionLabel;
+  @attr('date') certificationDate;
 
   // includes
   @belongsTo('result-competence-tree', { async: true, inverse: null }) resultCompetenceTree;

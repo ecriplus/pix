@@ -616,9 +616,11 @@
         "download": "Télécharger mon certificat"
       },
       "back-link": "Retour à mes certifications",
+      "candidate": "Candidat :",
       "candidate-birth": "Né(e) le {birthdate}",
       "candidate-birth-complete": "Né(e) le {birthdate} à {birthplace}",
       "certification-center": "Centre de certification :",
+      "certification-date": "Date de passage :",
       "competences": {
         "information": "Votre score certifié a été calculé en fonction de vos réponses lors du passage de la certification. Il peut donc différer du nombre de Pix affiché dans votre profil. Le jour de votre certification il était possible d’atteindre le niveau {maxReachableLevelOnCertificationDate} des compétences et {maxReachablePixCountOnCertificationDate} pix au maximum.",
         "subtitle": "(niveaux sur {maxReachableLevel})",
@@ -628,6 +630,7 @@
         "alternative": "Certification complémentaire",
         "title": "Autre certification obtenue"
       },
+      "delivered-at": "Date de délivrance :",
       "exam-date": "Date de passage :",
       "hexagon-score": {
         "certified": "certifiés"
@@ -1964,7 +1967,7 @@
             "content": "Envoyez vos résultats pour permettre à l’organisateur du parcours de vous accompagner.'<br />'Après avoir partagé, vous bénéficierez d'un accès à ces formations&nbsp;!",
             "share-error": "Il y a eu une erreur lors de l'envoi de vos résultats. Veuillez réessayer."
           },
-          "shared-results-modal" : {
+          "shared-results-modal": {
             "return-results-action": "Fermer et revenir aux résultats",
             "subtitle": "Prêt à développer vos compétences ?  \uD83C\uDF93",
             "title": "Résultats partagés"

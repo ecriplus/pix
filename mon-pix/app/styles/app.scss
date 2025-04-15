@@ -45,6 +45,7 @@
 @use 'components/choice-chip' as *;
 @use 'components/reset-campaign-participation-modal' as *;
 @use 'components/tabs' as *;
+@use 'components/certifications/certificate-information/candidate-information' as *;
 
 /* we need this to be before competence-card-default because of a mix
 of an adaptative/mobile-first approach — refactoring is welcome here */
