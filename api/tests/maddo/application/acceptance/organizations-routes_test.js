@@ -1,5 +1,7 @@
 import { Campaign } from '../../../../src/maddo/domain/models/Campaign.js';
 import { Organization } from '../../../../src/maddo/domain/models/Organization.js';
+import { KnowledgeElementCollection } from '../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
+import { KnowledgeElement } from '../../../../src/shared/domain/models/KnowledgeElement.js';
 import {
   createMaddoServer,
   databaseBuilder,
@@ -86,6 +88,32 @@ describe('Acceptance | Maddo | Route | Organizations', function () {
       });
       databaseBuilder.factory.buildCampaign({ organizationId: orgaNotInJurisdiction.id });
 
+      const frameworkId = databaseBuilder.factory.learningContent.buildFramework().id;
+      const areaId = databaseBuilder.factory.learningContent.buildArea({ frameworkId }).id;
+      const competenceId = databaseBuilder.factory.learningContent.buildCompetence({ areaId }).id;
+      const tube = databaseBuilder.factory.learningContent.buildTube({ competenceId });
+      const skillId = databaseBuilder.factory.learningContent.buildSkill({ tubeId: tube.id, status: 'actif' }).id;
+
+      databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign1InJurisdiction.id, skillId });
+      const userId = databaseBuilder.factory.buildUser().id;
+      databaseBuilder.factory.buildMembership({ organizationId: orgaNotInJurisdiction.id, userId });
+
+      const participationUser = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaign1InJurisdiction.id,
+        userId,
+      });
+
+      const ke = databaseBuilder.factory.buildKnowledgeElement({
+        status: KnowledgeElement.StatusType.VALIDATED,
+        skillId,
+        userId: participationUser.userId,
+      });
+
+      databaseBuilder.factory.buildKnowledgeElementSnapshot({
+        campaignParticipationId: participationUser.id,
+        snapshot: new KnowledgeElementCollection([ke]).toSnapshot(),
+      });
+
       await databaseBuilder.commit();
 
       const options = {
@@ -112,6 +140,16 @@ describe('Acceptance | Maddo | Route | Organizations', function () {
           targetProfileName: targetProfile.name,
           code: campaign1InJurisdiction.code,
           createdAt: campaign1InJurisdiction.createdAt,
+          tubes: [
+            {
+              id: tube.id,
+              competenceId,
+              maxLevel: 2,
+              meanLevel: 2,
+              practicalDescription: tube.practicalDescription_i18n['fr'],
+              practicalTitle: tube.practicalTitle_i18n['fr'],
+            },
+          ],
         }),
       ]);
     });
