@@ -27,6 +27,7 @@ describe('Acceptance | Controller | passage-events-controller', function () {
                   'occurred-at': 1556419320000,
                   'passage-id': passage.id,
                   'element-id': '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095',
+                  'sequence-number': 1,
                 },
               ],
             },
@@ -37,7 +38,7 @@ describe('Acceptance | Controller | passage-events-controller', function () {
       // then
       expect(response.statusCode).to.equal(201);
 
-      const createdEvent = await knex('passage-events').where({ passageId: passage.id }).first();
+      const createdEvent = await knex('passage-events').where({ passageId: passage.id, sequenceNumber: 1 }).first();
       expect(createdEvent).to.not.be.undefined;
     });
   });

@@ -15,6 +15,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
     const flashcardsVersoSeenEvent = {
       occurredAt: new Date(),
       passageId: 2,
+      sequenceNumber: 1,
       elementId: '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095',
       cardId: 'c4675f66-97f1-4202-8aeb-0388edf102d5',
       type: 'FLASHCARDS_VERSO_SEEN',
@@ -23,6 +24,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
     const flashcardsStartedEvent = {
       occurredAt: new Date(),
       passageId: 2,
+      sequenceNumber: 1,
       elementId: '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095',
       type: 'FLASHCARDS_STARTED',
     };
@@ -30,6 +32,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
     const flashcardsCardAutoAssessedEvent = {
       occurredAt: new Date(),
       passageId: 2,
+      sequenceNumber: 1,
       elementId: '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095',
       cardId: 'c4675f66-97f1-4202-8aeb-0388edf102d5',
       type: 'FLASHCARDS_CARD_AUTO_ASSESSED',
@@ -39,6 +42,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
     const flashcardsRectoReviewedEvent = {
       occurredAt: new Date(),
       passageId: 2,
+      sequenceNumber: 1,
       elementId: '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095',
       cardId: 'c4675f66-97f1-4202-8aeb-0388edf102d5',
       type: 'FLASHCARDS_RECTO_REVIEWED',
@@ -47,6 +51,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
     const flashcardsRetriedEvent = {
       occurredAt: new Date(),
       passageId: 2,
+      sequenceNumber: 1,
       elementId: '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095',
       type: 'FLASHCARDS_RETRIED',
     };

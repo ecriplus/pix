@@ -8,6 +8,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | PassageEvent
       const type = 'FLASHCARDS_STARTED';
       const occurredAt = 1556419320000;
       const passageId = 2;
+      const sequenceNumber = 1;
       const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
 
       const json = {
@@ -18,6 +19,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | PassageEvent
                 elementId: elementId,
                 'occurred-at': occurredAt,
                 'passage-id': passageId,
+                'sequence-number': sequenceNumber,
                 type,
               },
             ],
@@ -35,6 +37,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | PassageEvent
           elementId,
           occurredAt: new Date('2019-04-28T02:42:00Z'),
           passageId,
+          sequenceNumber,
           type,
         },
       ]);
