@@ -18,6 +18,7 @@ const getCertificateByVerificationCode = async function (
   dependencies = { requestResponseUtils, certificateSerializer },
 ) {
   let certificate;
+  const i18n = request.i18n;
   const verificationCode = request.payload.verificationCode;
   const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
 
@@ -31,7 +32,7 @@ const getCertificateByVerificationCode = async function (
       locale,
     });
   }
-  return dependencies.certificateSerializer.serialize(certificate);
+  return dependencies.certificateSerializer.serialize({ certificate, translate: i18n.__ });
 };
 
 const getCertificate = async function (request, h, dependencies = { requestResponseUtils }) {

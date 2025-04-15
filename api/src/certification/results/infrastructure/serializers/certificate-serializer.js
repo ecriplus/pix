@@ -45,10 +45,29 @@ const attributes = [
   'maxReachableLevelOnCertificationDate',
   'version',
   'algorithmEngineVersion',
+  'globalLevelLabel',
+  'globalSummaryLabel',
+  'globalDescriptionLabel',
+  'certificationDate',
 ];
 
-const serialize = function (certificate) {
+const serialize = function ({ certificate, translate }) {
+  let globalLevel = {};
+
+  if (certificate?.globalLevel) {
+    globalLevel = {
+      globalLevelLabel: certificate.globalLevel.getLevelLabel(translate),
+      globalSummaryLabel: certificate.globalLevel.getSummaryLabel(translate),
+      globalDescriptionLabel: certificate.globalLevel.getDescriptionLabel(translate),
+    };
+  }
   return new Serializer('certifications', {
+    transform(certificate) {
+      return {
+        ...certificate,
+        ...globalLevel,
+      };
+    },
     typeForAttribute,
     attributes,
     resultCompetenceTree,
