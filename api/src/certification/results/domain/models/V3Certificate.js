@@ -15,6 +15,7 @@ export class V3Certificate {
    * @param {string} props.verificationCode
    * @param {Array<ResultCompetenceTree>} props.resultCompetenceTree
    * @param {AlgorithmEngineVersion} props.algorithmEngineVersion
+   * @param {Date} props.certificationDate - date of certification
    */
   constructor({
     id,
@@ -28,6 +29,7 @@ export class V3Certificate {
     verificationCode,
     resultCompetenceTree,
     algorithmEngineVersion,
+    certificationDate,
   } = {}) {
     this.id = id;
     this.firstName = firstName;
@@ -42,5 +44,6 @@ export class V3Certificate {
     this.maxReachableScore = MAX_REACHABLE_SCORE;
     this.resultCompetenceTree = resultCompetenceTree;
     this.algorithmEngineVersion = algorithmEngineVersion;
+    this.certificationDate = certificationDate;
   }
 }

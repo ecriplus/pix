@@ -13,6 +13,7 @@ const buildV3CertificationAttestation = function ({
   verificationCode = 'P-SOMECODE',
   resultCompetenceTree = null,
   algorithmEngineVersion = AlgorithmEngineVersion.V3,
+  certificationDate = new Date('2015-10-03T01:02:03Z'),
 } = {}) {
   return new V3Certificate({
     id,
@@ -26,6 +27,7 @@ const buildV3CertificationAttestation = function ({
     verificationCode,
     resultCompetenceTree,
     algorithmEngineVersion,
+    certificationDate,
   });
 };
 

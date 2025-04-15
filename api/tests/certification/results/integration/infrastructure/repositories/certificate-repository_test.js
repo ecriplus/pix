@@ -603,6 +603,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
                 deliveredAt: certificationAttestationData.deliveredAt,
                 pixScore: certificationAttestationData.pixScore,
                 algorithmEngineVersion: AlgorithmEngineVersion.V3,
+                certificationDate: certificationAttestationData.date,
                 resultCompetenceTree,
               });
             expect(certificationAttestation).to.deepEqualInstance(expectedCertificationAttestation);
@@ -646,8 +647,10 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           });
 
           // then
-          const expectedCertificationAttestation =
-            domainBuilder.certification.results.buildV3CertificationAttestation(certificationAttestationData);
+          const expectedCertificationAttestation = domainBuilder.certification.results.buildV3CertificationAttestation({
+            ...certificationAttestationData,
+            certificationDate: certificationAttestationData.date,
+          });
           expect(certificationAttestation).to.deepEqualInstanceOmitting(expectedCertificationAttestation, [
             'resultCompetenceTree',
           ]);
