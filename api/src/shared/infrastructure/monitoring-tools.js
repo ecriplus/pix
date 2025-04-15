@@ -1,17 +1,11 @@
-import Request from '@hapi/hapi/lib/request.js';
 import lodash from 'lodash';
 
 import { config } from '../config.js';
 
-const { get, set, update, omit } = lodash;
-import async_hooks from 'node:async_hooks';
-
+const { get, update, omit } = lodash;
+import { asyncLocalStorage, getContext, getInContext, setInContext } from './async-local-storage.js';
 import { logger } from './utils/logger.js';
 import * as requestResponseUtils from './utils/request-response-utils.js';
-
-const { AsyncLocalStorage } = async_hooks;
-
-const asyncLocalStorage = new AsyncLocalStorage();
 
 function getCorrelationContext() {
   if (!config.hapi.enableRequestMonitoring) {
@@ -83,54 +77,10 @@ function extractUserIdFromRequest(request) {
   return userId || '-';
 }
 
-function getInContext(path, value) {
-  const store = asyncLocalStorage.getStore();
-  if (!store) return;
-  return get(store, path, value);
-}
-
-function setInContext(path, value) {
-  const store = asyncLocalStorage.getStore();
-  if (!store) return;
-  set(store, path, value);
-}
-
 function incrementInContext(path, increment = 1) {
   const store = asyncLocalStorage.getStore();
   if (!store) return;
   update(store, path, (v) => (v ?? 0) + increment);
-}
-
-function getContext() {
-  return asyncLocalStorage.getStore();
-}
-
-function pushInContext(path, value) {
-  const store = asyncLocalStorage.getStore();
-  if (!store) return;
-  let array = get(store, path);
-  if (!array) {
-    array = [value];
-    set(store, path, array);
-  } else {
-    array.push(value);
-  }
-}
-
-function installHapiHook() {
-  if (!config.hapi.enableRequestMonitoring) return;
-
-  const originalMethod = Request.prototype._execute;
-
-  if (!originalMethod) {
-    throw new Error('Hapi method Request.prototype._execute not found while patch');
-  }
-
-  Request.prototype._execute = function (...args) {
-    const request = this;
-    const context = { request };
-    return asyncLocalStorage.run(context, () => originalMethod.call(request, args));
-  };
 }
 
 const monitoringTools = {
@@ -138,11 +88,9 @@ const monitoringTools = {
   getContext,
   getInContext,
   incrementInContext,
-  installHapiHook,
   logErrorWithCorrelationIds,
   logWarnWithCorrelationIds,
   logInfoWithCorrelationIds,
-  pushInContext,
   setInContext,
   asyncLocalStorage,
 };
@@ -153,11 +101,9 @@ export {
   getContext,
   getInContext,
   incrementInContext,
-  installHapiHook,
   logErrorWithCorrelationIds,
   logInfoWithCorrelationIds,
   logWarnWithCorrelationIds,
   monitoringTools,
-  pushInContext,
   setInContext,
 };

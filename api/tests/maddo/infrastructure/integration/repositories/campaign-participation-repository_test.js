@@ -1,11 +1,11 @@
-import { CampaignParticipation } from '../../../../../src/maddo/domain/models/CampaignParticipation.js';
 import { findByCampaignId } from '../../../../../src/maddo/infrastructure/repositories/campaign-participation-repository.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Maddo | Infrastructure | Repositories | Integration | campaign-participation', function () {
   describe('#findByCampaignId', function () {
     it('lists campaign participations belonging to campaign with given id', async function () {
       // given
+      const clientId = 'client-id';
       const campaign1 = databaseBuilder.factory.buildCampaign();
       const campaign2 = databaseBuilder.factory.buildCampaign();
 
@@ -15,12 +15,12 @@ describe('Maddo | Infrastructure | Repositories | Integration | campaign-partici
       await databaseBuilder.commit();
 
       const expectedCampaignParticipations = [
-        new CampaignParticipation(campaignParticipation1),
-        new CampaignParticipation(campaignParticipation3),
+        domainBuilder.maddo.buildCampaignParticipation({ ...campaignParticipation1, clientId }),
+        domainBuilder.maddo.buildCampaignParticipation({ ...campaignParticipation3, clientId }),
       ];
 
       // when
-      const campaignParticipations = await findByCampaignId(campaign1.id);
+      const campaignParticipations = await findByCampaignId(campaign1.id, clientId);
 
       // then
       expect(campaignParticipations).to.deep.equal(expectedCampaignParticipations);

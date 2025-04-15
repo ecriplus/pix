@@ -1,7 +1,7 @@
 import { knex } from '../../../../db/knex-database-connection.js';
 import { CampaignParticipation } from '../../domain/models/CampaignParticipation.js';
 
-export async function findByCampaignId(campaignId) {
+export async function findByCampaignId(campaignId, clientId) {
   const rawCampaigns = await knex
     .select(
       'id',
@@ -13,14 +13,13 @@ export async function findByCampaignId(campaignId) {
       'deletedBy',
       'campaignId',
       'userId',
-      'organizationLearnerId',
     )
     .from('campaign-participations')
     .where('campaignId', campaignId)
     .orderBy('id');
-  return rawCampaigns.map(toDomain);
+  return rawCampaigns.map((rawCampaign) => toDomain(rawCampaign, clientId));
 }
 
-function toDomain(rawCampaignParticipation) {
-  return new CampaignParticipation(rawCampaignParticipation);
+function toDomain(rawCampaignParticipation, clientId) {
+  return new CampaignParticipation({ ...rawCampaignParticipation, clientId });
 }
