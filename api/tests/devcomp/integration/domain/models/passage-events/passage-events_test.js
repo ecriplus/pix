@@ -13,10 +13,18 @@ describe('Integration | Devcomp | Domain | Models | passage-events | passage-eve
       const occurredAt = new Date();
       const createdAt = Symbol('date');
       const passageId = 1234;
+      const sequenceNumber = 2;
       const contentHash = Symbol('contentHash');
 
       // when
-      const passageStartedEvent = new PassageStartedEvent({ id, occurredAt, createdAt, passageId, contentHash });
+      const passageStartedEvent = new PassageStartedEvent({
+        id,
+        occurredAt,
+        createdAt,
+        passageId,
+        sequenceNumber,
+        contentHash,
+      });
 
       // then
       expect(passageStartedEvent.id).to.equal(id);
@@ -35,9 +43,12 @@ describe('Integration | Devcomp | Domain | Models | passage-events | passage-eve
         const occurredAt = new Date();
         const createdAt = Symbol('date');
         const passageId = 1234;
+        const sequenceNumber = 2;
 
         // when
-        const error = catchErrSync(() => new PassageStartedEvent({ id, occurredAt, createdAt, passageId }))();
+        const error = catchErrSync(
+          () => new PassageStartedEvent({ id, occurredAt, createdAt, passageId, sequenceNumber }),
+        )();
 
         // then
         expect(error).to.be.instanceOf(DomainError);
@@ -53,9 +64,16 @@ describe('Integration | Devcomp | Domain | Models | passage-events | passage-eve
       const occurredAt = new Date();
       const createdAt = Symbol('date');
       const passageId = 1234;
+      const sequenceNumber = 2;
 
       // when
-      const passageTerminatedEvent = new PassageTerminatedEvent({ id, occurredAt, createdAt, passageId });
+      const passageTerminatedEvent = new PassageTerminatedEvent({
+        id,
+        occurredAt,
+        createdAt,
+        passageId,
+        sequenceNumber,
+      });
 
       // then
       expect(passageTerminatedEvent.id).to.equal(id);

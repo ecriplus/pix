@@ -16,10 +16,18 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
       const occurredAt = new Date();
       const createdAt = new Date();
       const passageId = 2;
+      const sequenceNumber = 3;
       const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
 
       // when
-      const flashcardsStartedEvent = new FlashcardsStartedEvent({ id, occurredAt, createdAt, passageId, elementId });
+      const flashcardsStartedEvent = new FlashcardsStartedEvent({
+        id,
+        occurredAt,
+        createdAt,
+        passageId,
+        sequenceNumber,
+        elementId,
+      });
 
       // then
       expect(flashcardsStartedEvent.id).to.equal(id);
@@ -27,6 +35,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
       expect(flashcardsStartedEvent.occurredAt).to.equal(occurredAt);
       expect(flashcardsStartedEvent.createdAt).to.equal(createdAt);
       expect(flashcardsStartedEvent.passageId).to.equal(passageId);
+      expect(flashcardsStartedEvent.sequenceNumber).to.equal(sequenceNumber);
       expect(flashcardsStartedEvent.elementId).to.equal(elementId);
       expect(flashcardsStartedEvent.data).to.deep.equal({ elementId });
     });
@@ -39,6 +48,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
       const occurredAt = new Date();
       const createdAt = new Date();
       const passageId = 2;
+      const sequenceNumber = 3;
       const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
       const cardId = 'c4675f66-97f1-4202-8aeb-0388edf102d5';
 
@@ -48,6 +58,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
         occurredAt,
         createdAt,
         passageId,
+        sequenceNumber,
         elementId,
         cardId,
       });
@@ -58,6 +69,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
       expect(flashcardsCardAnswerSeenEvent.occurredAt).to.equal(occurredAt);
       expect(flashcardsCardAnswerSeenEvent.createdAt).to.equal(createdAt);
       expect(flashcardsCardAnswerSeenEvent.passageId).to.equal(passageId);
+      expect(flashcardsCardAnswerSeenEvent.sequenceNumber).to.equal(sequenceNumber);
       expect(flashcardsCardAnswerSeenEvent.elementId).to.equal(elementId);
       expect(flashcardsCardAnswerSeenEvent.data).to.deep.equal({ cardId, elementId });
     });
@@ -69,11 +81,12 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
         const occurredAt = new Date();
         const createdAt = new Date();
         const passageId = 2;
+        const sequenceNumber = 3;
         const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
 
         // when
         const error = catchErrSync(
-          () => new FlashcardsVersoSeenEvent({ id, occurredAt, createdAt, passageId, elementId }),
+          () => new FlashcardsVersoSeenEvent({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }),
         )();
 
         // then
@@ -95,6 +108,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
               occurredAt: new Date(),
               createdAt: new Date(),
               passageId: 2,
+              sequenceNumber: 1,
               elementId: '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095',
               cardId,
             }),
@@ -114,6 +128,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
       const occurredAt = new Date();
       const createdAt = new Date();
       const passageId = 2;
+      const sequenceNumber = 3;
       const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
       const cardId = 'c4675f66-97f1-4202-8aeb-0388edf102d5';
       const autoAssessment = 'yes';
@@ -124,6 +139,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
         occurredAt,
         createdAt,
         passageId,
+        sequenceNumber,
         elementId,
         cardId,
         autoAssessment,
@@ -135,6 +151,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
       expect(flashcardsCardAutoAssessedEvent.occurredAt).to.equal(occurredAt);
       expect(flashcardsCardAutoAssessedEvent.createdAt).to.equal(createdAt);
       expect(flashcardsCardAutoAssessedEvent.passageId).to.equal(passageId);
+      expect(flashcardsCardAutoAssessedEvent.sequenceNumber).to.equal(sequenceNumber);
       expect(flashcardsCardAutoAssessedEvent.elementId).to.equal(elementId);
       expect(flashcardsCardAutoAssessedEvent.data).to.deep.equal({ cardId, autoAssessment, elementId });
     });
@@ -146,11 +163,13 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
         const occurredAt = new Date();
         const createdAt = new Date();
         const passageId = 2;
+        const sequenceNumber = 3;
         const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
 
         // when
         const error = catchErrSync(
-          () => new FlashcardsCardAutoAssessedEvent({ id, occurredAt, createdAt, passageId, elementId }),
+          () =>
+            new FlashcardsCardAutoAssessedEvent({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }),
         )();
 
         // then
@@ -172,6 +191,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
               occurredAt: new Date(),
               createdAt: new Date(),
               passageId: 2,
+              sequenceNumber: 1,
               elementId: '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095',
               cardId,
             }),
@@ -190,12 +210,22 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
         const occurredAt = new Date();
         const createdAt = new Date();
         const passageId = 2;
+        const sequenceNumber = 3;
         const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
         const cardId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8666';
 
         // when
         const error = catchErrSync(
-          () => new FlashcardsCardAutoAssessedEvent({ id, occurredAt, createdAt, passageId, elementId, cardId }),
+          () =>
+            new FlashcardsCardAutoAssessedEvent({
+              id,
+              occurredAt,
+              createdAt,
+              passageId,
+              sequenceNumber,
+              elementId,
+              cardId,
+            }),
         )();
 
         // then
@@ -211,6 +241,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
         const occurredAt = new Date();
         const createdAt = new Date();
         const passageId = 2;
+        const sequenceNumber = 3;
         const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
         const cardId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8666';
         const autoAssessment = 'wrong_value';
@@ -223,6 +254,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
               occurredAt,
               createdAt,
               passageId,
+              sequenceNumber,
               elementId,
               cardId,
               autoAssessment,
@@ -243,6 +275,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
       const occurredAt = new Date();
       const createdAt = new Date();
       const passageId = 2;
+      const sequenceNumber = 3;
       const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
       const cardId = 'c4675f66-97f1-4202-8aeb-0388edf102d5';
 
@@ -252,6 +285,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
         occurredAt,
         createdAt,
         passageId,
+        sequenceNumber,
         elementId,
         cardId,
       });
@@ -262,6 +296,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
       expect(flashcardsCardQuestionReviewedEvent.occurredAt).to.equal(occurredAt);
       expect(flashcardsCardQuestionReviewedEvent.createdAt).to.equal(createdAt);
       expect(flashcardsCardQuestionReviewedEvent.passageId).to.equal(passageId);
+      expect(flashcardsCardQuestionReviewedEvent.sequenceNumber).to.equal(sequenceNumber);
       expect(flashcardsCardQuestionReviewedEvent.elementId).to.equal(elementId);
       expect(flashcardsCardQuestionReviewedEvent.data).to.deep.equal({ cardId, elementId });
     });
@@ -273,11 +308,12 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
         const occurredAt = new Date();
         const createdAt = new Date();
         const passageId = 2;
+        const sequenceNumber = 3;
         const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
 
         // when
         const error = catchErrSync(
-          () => new FlashcardsRectoReviewedEvent({ id, occurredAt, createdAt, passageId, elementId }),
+          () => new FlashcardsRectoReviewedEvent({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }),
         )();
 
         // then
@@ -299,6 +335,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
               occurredAt: new Date(),
               createdAt: new Date(),
               passageId: 2,
+              sequenceNumber: 1,
               elementId: '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095',
               cardId,
             }),
@@ -318,6 +355,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
       const occurredAt = new Date();
       const createdAt = new Date();
       const passageId = 2;
+      const sequenceNumber = 3;
       const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
 
       // when
@@ -326,6 +364,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
         occurredAt,
         createdAt,
         passageId,
+        sequenceNumber,
         elementId,
       });
 
@@ -335,6 +374,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | flashcard-e
       expect(flashcardsRetriedEvent.occurredAt).to.equal(occurredAt);
       expect(flashcardsRetriedEvent.createdAt).to.equal(createdAt);
       expect(flashcardsRetriedEvent.passageId).to.equal(passageId);
+      expect(flashcardsRetriedEvent.sequenceNumber).to.equal(sequenceNumber);
       expect(flashcardsRetriedEvent.elementId).to.equal(elementId);
       expect(flashcardsRetriedEvent.data).to.deep.equal({ elementId });
     });
