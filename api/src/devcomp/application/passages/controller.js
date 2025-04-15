@@ -1,6 +1,7 @@
 import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
 
 const CREATE_PASSAGE_SEQUENCE_NUMBER = 1;
+const TERMINATE_PASSAGE_SEQUENCE_NUMBER = 1000;
 
 const create = async function (request, h, { usecases, passageSerializer }) {
   const { 'module-id': moduleSlug } = request.payload.data.attributes;
@@ -26,12 +27,17 @@ const verifyAndSaveAnswer = async function (request, h, { usecases, elementAnswe
 };
 
 const terminate = async function (request, h, { usecases, passageSerializer }) {
+  const sequenceNumber = TERMINATE_PASSAGE_SEQUENCE_NUMBER;
   const { passageId } = request.params;
   const requestTimestamp = requestResponseUtils.extractTimestampFromRequest(request);
-  const updatedPassage = await usecases.terminatePassage({ passageId, occurredAt: new Date(requestTimestamp) });
+  const updatedPassage = await usecases.terminatePassage({
+    passageId,
+    sequenceNumber,
+    occurredAt: new Date(requestTimestamp),
+  });
   return passageSerializer.serialize(updatedPassage);
 };
 
 const passageController = { create, verifyAndSaveAnswer, terminate };
 
-export { passageController, CREATE_PASSAGE_SEQUENCE_NUMBER };
+export { CREATE_PASSAGE_SEQUENCE_NUMBER, passageController, TERMINATE_PASSAGE_SEQUENCE_NUMBER };
