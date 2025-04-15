@@ -21,6 +21,7 @@ describe('Integration | DevComp | Repositories | PassageEventRepository', functi
       const event = new PassageStartedEvent({
         occurredAt: new Date('2019-04-28'),
         passageId: passage.id,
+        sequenceNumber: 1,
         contentHash: 'abcd1234',
       });
 
@@ -29,7 +30,7 @@ describe('Integration | DevComp | Repositories | PassageEventRepository', functi
 
       // then
       const recordedEvent = await knex('passage-events')
-        .where({ type: 'PASSAGE_STARTED', passageId: passage.id })
+        .where({ type: 'PASSAGE_STARTED', passageId: passage.id, sequenceNumber: 1 })
         .first();
       expect(recordedEvent.data.contentHash).to.equal('abcd1234');
       expect(recordedEvent.occurredAt).to.deep.equal(new Date('2019-04-28'));
