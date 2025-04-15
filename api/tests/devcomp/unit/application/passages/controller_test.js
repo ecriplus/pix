@@ -1,4 +1,7 @@
-import { passageController } from '../../../../../src/devcomp/application/passages/controller.js';
+import {
+  CREATE_PASSAGE_SEQUENCE_NUMBER,
+  passageController,
+} from '../../../../../src/devcomp/application/passages/controller.js';
 import { requestResponseUtils } from '../../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
@@ -9,6 +12,7 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
       const serializedPassage = Symbol('serialized modules');
       const moduleSlug = Symbol('module-slug');
       const passage = Symbol('passage');
+      const sequenceNumber = CREATE_PASSAGE_SEQUENCE_NUMBER;
       const userId = Symbol('user-id');
       const passageSerializer = {
         serialize: sinon.stub(),
@@ -32,7 +36,9 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
       const usecases = {
         createPassage: sinon.stub(),
       };
-      usecases.createPassage.withArgs({ moduleSlug, userId, occurredAt: new Date(requestTimestamp) }).returns(passage);
+      usecases.createPassage
+        .withArgs({ moduleSlug, sequenceNumber, userId, occurredAt: new Date(requestTimestamp) })
+        .returns(passage);
 
       // when
       await passageController.create({ payload: { data: { attributes: { 'module-id': moduleSlug } } } }, hStub, {
