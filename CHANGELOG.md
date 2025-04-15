@@ -1,5 +1,46 @@
 # Pix Changelog
 
+## v5.91.0 (15/04/2025)
+
+
+### :rocket: Amélioration
+- [#12055](https://github.com/1024pix/pix/pull/12055) [FEATURE] Ajouter la colonne sequenceNumber dans passage-events.
+- [#12002](https://github.com/1024pix/pix/pull/12002) [FEATURE] Donner accès aux compétences du candidat sur le modèle du certificat V3 (PIX-17338).
+- [#11976](https://github.com/1024pix/pix/pull/11976) [FEATURE] Afficher dans Pix-Admin si un CDC est archivé et qui a fait l'action (PIX-17367).
+- [#12035](https://github.com/1024pix/pix/pull/12035) [FEATURE] Support du type de grain "transition" (PIX-17472).
+- [#12033](https://github.com/1024pix/pix/pull/12033) [FEATURE] Réferencer l'id du module plutôt que son slug (PIX-17403).
+
+### :building_construction: Tech
+- [#11993](https://github.com/1024pix/pix/pull/11993) [TECH] Migrer la route /api/sco-organization-learners/external dans src>prescription>organization-learner (pix-16333).
+- [#12031](https://github.com/1024pix/pix/pull/12031) [TECH] Renommer l'objet du domaine  v3 certification attestation (PIX-17464).
+- [#12054](https://github.com/1024pix/pix/pull/12054) [TECH] Déplacer le check de l'utilisateur téléchargeant le PDF de certificat dans le controller (PIX-17501).
+- [#11692](https://github.com/1024pix/pix/pull/11692) [TECH] inclus les banner dans le layout de AppLayout (PIX-17484).
+- [#12038](https://github.com/1024pix/pix/pull/12038) [TECH] Supprimer la dépendance à `ember-fetch` dans Pix Certif.
+- [#12032](https://github.com/1024pix/pix/pull/12032) [TECH] Ajouter une colonne "id" à la table legal-document-version-user-acceptances (PIX-17466).
+- [#12012](https://github.com/1024pix/pix/pull/12012) [TECH] Prévenir les incompréhensions due aux expirations de jobs.  .
+- [#12015](https://github.com/1024pix/pix/pull/12015) [TECH]  Renommer et regrouper les routes et controlleurs d'attestation pour évoquer un certificat (Pix-17439).
+
+### :bug: Correction
+- [#12017](https://github.com/1024pix/pix/pull/12017) [BUGFIX] Ne plus faire apparaître le menu lorsqu'un candidat entre en certification sur Pix App (PIX-17425).
+
+### :arrow_up: Montée de version
+- [#12048](https://github.com/1024pix/pix/pull/12048) [BUMP] Update dependency @1024pix/pix-ui to ^55.15.0 (admin).
+- [#12053](https://github.com/1024pix/pix/pull/12053) [BUMP] Update dependency ember-simple-auth to v8 (mon-pix).
+- [#12056](https://github.com/1024pix/pix/pull/12056) [BUMP] Update dependency webpack to v5.99.0 (junior).
+- [#12051](https://github.com/1024pix/pix/pull/12051) [BUMP] Update dependency ember-simple-auth to v8 (admin).
+- [#12052](https://github.com/1024pix/pix/pull/12052) [BUMP] Update dependency ember-simple-auth to v8 (certif).
+- [#12049](https://github.com/1024pix/pix/pull/12049) [BUMP] Update dependency @1024pix/pix-ui to ^55.15.0 (orga).
+- [#11966](https://github.com/1024pix/pix/pull/11966) [BUMP] Update dependency @1024pix/pix-ui to ^55.14.0 (admin).
+- [#12046](https://github.com/1024pix/pix/pull/12046) [BUMP] Update dependency @1024pix/pix-ui to ^55.15.0 (mon-pix).
+- [#12045](https://github.com/1024pix/pix/pull/12045) [BUMP] Update dependency @1024pix/pix-ui to ^55.15.0 (junior).
+- [#12044](https://github.com/1024pix/pix/pull/12044) [BUMP] Update dependency @1024pix/pix-ui to ^55.14.0 (junior).
+- [#12043](https://github.com/1024pix/pix/pull/12043) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.29 (orga).
+- [#12041](https://github.com/1024pix/pix/pull/12041) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.29 (mon-pix).
+- [#12040](https://github.com/1024pix/pix/pull/12040) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.29 (junior).
+
+### :coffee: Autre
+- [#12036](https://github.com/1024pix/pix/pull/12036) Ajouter un endpoint pour enregistrer les évènements des passages (PIX-16954).
+
 ## v5.90.0 (14/04/2025)
 
 
