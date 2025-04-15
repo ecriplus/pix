@@ -354,9 +354,10 @@ const acceptPixLastTermsOfService = async function (id) {
 };
 
 const updatePixCertifTermsOfServiceAcceptedToTrue = async function (id) {
+  const knexConn = DomainTransaction.getConnection();
   const now = new Date();
 
-  const [user] = await knex('users')
+  const [user] = await knexConn('users')
     .where({ id })
     .update({ pixCertifTermsOfServiceAccepted: true, lastPixCertifTermsOfServiceValidatedAt: now, updatedAt: now })
     .returning('*');
