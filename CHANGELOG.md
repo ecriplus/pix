@@ -4,7 +4,7 @@
 
 
 ### :rocket: Amélioration
-- [#12055](https://github.com/1024pix/pix/pull/12055) [FEATURE] Ajouter la colonne sequenceNumber dans passage-events.
+- [#12055](https://github.com/1024pix/pix/pull/12055) [FEATURE] Ajouter la colonne sequenceNumber dans passage-events (PIX-17500).
 - [#12002](https://github.com/1024pix/pix/pull/12002) [FEATURE] Donner accès aux compétences du candidat sur le modèle du certificat V3 (PIX-17338).
 - [#11976](https://github.com/1024pix/pix/pull/11976) [FEATURE] Afficher dans Pix-Admin si un CDC est archivé et qui a fait l'action (PIX-17367).
 - [#12035](https://github.com/1024pix/pix/pull/12035) [FEATURE] Support du type de grain "transition" (PIX-17472).
