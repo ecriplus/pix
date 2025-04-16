@@ -8,6 +8,7 @@ import { refreshTokenRepository } from '../../../identity-access-management/infr
 import { resetPasswordDemandRepository } from '../../../identity-access-management/infrastructure/repositories/reset-password-demand.repository.js';
 import * as userRepository from '../../../identity-access-management/infrastructure/repositories/user.repository.js';
 import * as userAcceptanceRepository from '../../../legal-documents/infrastructure/repositories/user-acceptance.repository.js';
+import * as campaignParticipationsApi from '../../../prescription/campaign-participation/application/api/campaign-participations-api.js';
 import * as organizationLearnerRepository from '../../../shared/infrastructure/repositories/organization-learner-repository.js';
 import * as userLoginRepository from '../../../shared/infrastructure/repositories/user-login-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
@@ -41,7 +42,7 @@ const usecasesWithoutInjectedDependencies = {
   ...(await importNamedExportsFromDirectory({ path: join(path, './'), ignoredFileNames: ['index.js'] })),
 };
 
-const dependencies = Object.assign({}, repositories);
+const dependencies = Object.assign({ campaignParticipationsApi }, repositories);
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
 
