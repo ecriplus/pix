@@ -64,16 +64,16 @@
                 "id": "3",
                 "content": "<p>un code à 4 chiffres</p>",
                 "feedback": {
-                  "state": "<p><strong>Pas tout à fait.</strong></p><p>En général, on vous demande plutôt un identifiant et un mot de passe.&nbsp; <br>Mais maintenant, les mots de passe ne suffisent pas toujours. On vous explique tout !</p>",
-                  "diagnosis": ""
+                  "state": "",
+                  "diagnosis": "<p><strong>Pas tout à fait.</strong></p><p>En général, on vous demande plutôt un identifiant et un mot de passe.&nbsp; <br>Mais maintenant, les mots de passe ne suffisent pas toujours. On vous explique tout !</p>"
                 }
               },
               {
                 "id": "4",
                 "content": "<p>Je ne sais pas.</p>",
                 "feedback": {
-                  "state": "<p>En général, on vous demande  un identifiant et un mot de passe.&nbsp; <br>Mais maintenant, les mots de passe ne suffisent pas toujours. On vous explique tout !</p>",
-                  "diagnosis": ""
+                  "state": "",
+                  "diagnosis": "<p>En général, on vous demande  un identifiant et un mot de passe.&nbsp; <br>Mais maintenant, les mots de passe ne suffisent pas toujours. On vous explique tout !</p>"
                 }
               }
             ],
