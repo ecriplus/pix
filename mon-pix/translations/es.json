@@ -612,6 +612,14 @@
       }
     },
     "certificate": {
+      "global-level": "Your level",
+      "certification-value": {
+        "paragraphs": {
+          "1": "Officially recognised, Pix Certification attests to your mastery of digital skills. You'll be joining a community of millions of certified users. Congratulations on this important step in your career!",
+          "2": "Your certified score has been calculated on the basis of your answers during the certification process. It may therefore differ from the number of pix shown in your profile.",
+          "3": "On the day of your certification, it was possible to reach level 7 and a maximum of 895 pix (Expert 1 level)."
+        }
+      },
       "attestation": "Descargar mi certificado",
       "back-link": "Volver a mis certificaciones",
       "candidate-birth": "Nacido/a el {birthdate}",

@@ -621,6 +621,13 @@
       "candidate-birth-complete": "Born on {birthdate} in {birthplace}",
       "certification-center": "Certification centre:",
       "certification-date": "Exam date:",
+      "certification-value": {
+        "paragraphs": {
+          "1": "Officially recognised, Pix Certification attests to your mastery of digital skills. You'll be joining a community of millions of certified users. Congratulations on this important step in your career!",
+          "2": "Your certified score has been calculated on the basis of your answers during the certification process. It may therefore differ from the number of pix shown in your profile.",
+          "3": "On the day of your certification, it was possible to reach level 7 and a maximum of 895 pix (Expert 1 level)."
+        }
+      },
       "competences": {
         "information": "Your certified score was calculated based on the answers you gave whilst taking the certification. It may be different from the score shown on your profile. When you took the certification, it was possible to reach a maximum of level {maxReachableLevelOnCertificationDate} in each competence and {maxReachablePixCountOnCertificationDate} pix.",
         "subtitle": "(levels out of {maxReachableLevel})",
@@ -638,6 +645,7 @@
         }
       },
       "exam-date": "Completion date:",
+      "global-level": "Your level",
       "hexagon-score": {
         "certified": "certified"
       },

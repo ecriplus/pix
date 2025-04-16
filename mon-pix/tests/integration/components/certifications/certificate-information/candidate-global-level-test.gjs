@@ -5,10 +5,10 @@ import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | Certifications | Shareable certificate | v3-certificate', function (hooks) {
+module('Integration | Component | Certifications | Certificate information | candidate global level', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  test('it displays v3 certificate information', async function (assert) {
+  test('it displays the component', async function (assert) {
     // given
     const store = this.owner.lookup('service:store');
     const certification = store.createRecord('certification', {
@@ -23,16 +23,19 @@ module('Integration | Component | Certifications | Shareable certificate | v3-ce
       resultCompetenceTree: store.createRecord('result-competence-tree'),
       maxReachableLevelOnCertificationDate: new Date('2018-02-15T15:15:52Z'),
       globalLevelLabel: 'Expert 1',
+      globalDescriptionLabel: 'Vous êtes capable de tout.',
+      globalSummaryLabel: 'Expert de tous les domaines, Pix vous dit bravo !',
     });
     this.set('certification', certification);
 
     // when
     const screen = await render(hbs`
-      <Certifications::ShareableCertificate::v3Certificate @certificate={{this.certification}} />`);
+      <Certifications::CertificateInformation::candidateGlobalLevel @certificate={{this.certification}} />`);
 
     // then
-    assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.title') })).exists();
-    const globalLevelLabels = screen.getAllByText(certification.globalLevelLabel);
-    assert.strictEqual(globalLevelLabels.length, 2);
+    assert.dom(screen.getByRole('heading', { name: t('pages.certificate.global-level'), level: 2 })).exists();
+    assert.dom(screen.getByText(certification.globalLevelLabel)).exists();
+    assert.dom(screen.getByText(certification.globalDescriptionLabel)).exists();
+    assert.dom(screen.getByText(certification.globalSummaryLabel)).exists();
   });
 });
