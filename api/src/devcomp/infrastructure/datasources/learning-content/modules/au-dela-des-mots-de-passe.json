@@ -5,7 +5,7 @@
   "isBeta": true,
   "details": {
     "image": "",
-    "description": "<p>Code reçu par SMS, empreinte digitale, reconnaissance faciale… De plus en plus de moyens existent pour prouver son identité en ligne. <br>Dans ce module, vous allez découvrir les différentes façons de s’authentifier et pourquoi elles renforcent la sécurité de vos comptes. 🔐 &nbsp; <br></p><p><br></p>",
+    "description": "<p>Code reçu par SMS, empreinte digitale, reconnaissance faciale… De plus en plus de moyens existent pour prouver son identité en ligne. <br>Dans ce module, vous allez découvrir les différentes façons de s’authentifier et pourquoi elles renforcent la sécurité de vos comptes. 🔐</p>",
     "duration": 5,
     "level": "Débutant",
     "objectives": [
@@ -17,7 +17,7 @@
   "transitionTexts": [
     {
       "grainId": "",
-      "content": "<p><br></p>"
+      "content": "<p></p>"
     }
   ],
   "grains": [
@@ -52,23 +52,23 @@
                 "id": "1",
                 "content": "<p>une empreinte digitale</p>",
                 "feedback": {
-                  "state": "<p><br></p>",
-                  "diagnosis": "<p><strong>Pas tout à fait.</strong> </p><p>En général, on vous demande plutôt un identifiant et un mot de passe.&nbsp; </p><p>Mais maintenant, les mots de passe ne suffisent pas toujours. On vous explique tout !</p><br>"
+                  "state": "<p></p>",
+                  "diagnosis": "<p><strong>Pas tout à fait.</strong> </p><p>En général, on vous demande plutôt un identifiant et un mot de passe.&nbsp; </p><p>Mais maintenant, les mots de passe ne suffisent pas toujours. On vous explique tout !</p>"
                 }
               },
               {
                 "id": "2",
                 "content": "<p>un identifiant et un mot de passe</p>",
                 "feedback": {
-                  "state": "<p><br></p>",
-                  "diagnosis": "<p><strong>Oui ! </strong></p><p>Mais maintenant, les mots de passe ne suffisent pas toujours. On vous explique tout !<br></p>"
+                  "state": "<p></p>",
+                  "diagnosis": "<p><strong>Oui ! </strong></p><p>Mais maintenant, les mots de passe ne suffisent pas toujours. On vous explique tout !</p>"
                 }
               },
               {
                 "id": "3",
                 "content": "<p>un code à 4 chiffres</p>",
                 "feedback": {
-                  "state": "<p><strong>Pas tout à fait.</strong></p><p>En général, on vous demande plutôt un identifiant et un mot de passe.&nbsp; <br>Mais maintenant, les mots de passe ne suffisent pas toujours. On vous explique tout !<br><br></p>",
+                  "state": "<p><strong>Pas tout à fait.</strong></p><p>En général, on vous demande plutôt un identifiant et un mot de passe.&nbsp; <br>Mais maintenant, les mots de passe ne suffisent pas toujours. On vous explique tout !</p>",
                   "diagnosis": ""
                 }
               },
@@ -96,7 +96,7 @@
           "element": {
             "id": "fa687ee1-8f0b-4787-8582-4c12a4597beb",
             "type": "text",
-            "content": "<p>Sylvie et Quentin ont du mal à se connecter à leurs services numériques.&nbsp;Vous allez les aider !<br></p>"
+            "content": "<p>Sylvie et Quentin ont du mal à se connecter à leurs services numériques.&nbsp;Vous allez les aider !</p>"
           }
         }
       ]
@@ -111,7 +111,7 @@
           "element": {
             "id": "70ac0971-48f3-4d26-81c1-2df452852319",
             "type": "text",
-            "content": "<p>Sylvie veut se connecter à son journal en ligne préféré. Elle vous transmet ses informations :&nbsp; </p>\n<ul>\n    <li>identifiant : sylvie.girard</li>\n    <li>mot de passe : Gmléso6+</li>\n</ul>\n<p>👉 Aidez Sylvie à se connecter en écrivant ses identifiants.<br></p>"
+            "content": "<p>Sylvie veut se connecter à son journal en ligne préféré. Elle vous transmet ses informations :&nbsp; </p>\n<ul>\n    <li>identifiant : sylvie.girard</li>\n    <li>mot de passe : Gmléso6+</li>\n</ul>\n<p>👉 Aidez Sylvie à se connecter en écrivant ses identifiants.</p>"
           }
         },
         {
@@ -139,7 +139,7 @@
           "element": {
             "id": "9fd2f6a0-9892-4a92-a73f-f0f36efd38fb",
             "type": "qcu",
-            "instruction": "<p>Combien d’étapes y a-t-il pour se connecter au compte de Sylvie ?&nbsp;<br></p>",
+            "instruction": "<p>Combien d’étapes y a-t-il pour se connecter au compte de Sylvie ?&nbsp;</p>",
             "proposals": [
               {
                 "id": "1",
@@ -219,7 +219,7 @@
           "element": {
             "id": "b0a6d0e7-3047-4bc9-a9f8-8578cc16641d",
             "type": "text",
-            "content": "<p>Quentin veut se connecter à sa boîte mail. Il vous transmet ses informations :&nbsp; </p><ul><li>identifiant : Quentin</li><li>mot de passe : M0tD3p4s53F0rt#$<br></li></ul><p>Ecrivez ces identifiants pour aider Quentin à se connecter.<br></p>"
+            "content": "<p>Quentin veut se connecter à sa boîte mail. Il vous transmet ses informations :&nbsp; </p><ul><li>identifiant : Quentin</li><li>mot de passe : M0tD3p4s53F0rt#$<br></li></ul><p>Ecrivez ces identifiants pour aider Quentin à se connecter.</p>"
           }
         },
         {
@@ -247,7 +247,7 @@
           "element": {
             "id": "8dd370b7-13b1-4768-879b-0046ddff9bec",
             "type": "qcu",
-            "instruction": "<p>Combien d’étapes y a-t-il pour se connecter au compte de Quentin ?&nbsp;<br></p>",
+            "instruction": "<p>Combien d’étapes y a-t-il pour se connecter au compte de Quentin ?&nbsp;</p>",
             "proposals": [
               {
                 "id": "1",
@@ -297,7 +297,7 @@
           "element": {
             "id": "3c327379-4354-4c99-805f-cbc519deb937",
             "type": "text",
-            "content": "<p>Quand il y a <strong>deux étapes</strong> pour prouver son identité, on appelle cela une <strong>double authentification</strong>.&nbsp; <br>✔️ Par exemple :&nbsp; </p>\n<ul>\n    <li>un mot de passe puis un code par SMS pour un compte,</li>\n    <li>un code PIN puis une empreinte digitale sur un téléphone</li>\n</ul>\n<p>De plus en plus de sites internet proposent cette fonctionnalité.<br><br></p>"
+            "content": "<p>Quand il y a <strong>deux étapes</strong> pour prouver son identité, on appelle cela une <strong>double authentification</strong>.&nbsp; <br>✔️ Par exemple :&nbsp; </p>\n<ul>\n    <li>un mot de passe puis un code par SMS pour un compte,</li>\n    <li>un code PIN puis une empreinte digitale sur un téléphone</li>\n</ul>\n<p>De plus en plus de sites internet proposent cette fonctionnalité.</p>"
           }
         }
       ]
@@ -362,7 +362,7 @@
           "element": {
             "id": "1a6e0f45-7f7d-4e6e-8470-04bf9e0f6035",
             "type": "text",
-            "content": "<p>Il arrive aussi que des identifiants et des mots de passe fuitent sur internet.</p><p>Des pirates peuvent utiliser ces informations pour se connecter à la place des gens.&nbsp;<br><br></p>"
+            "content": "<p>Il arrive aussi que des identifiants et des mots de passe fuitent sur internet.</p><p>Des pirates peuvent utiliser ces informations pour se connecter à la place des gens.&nbsp;</p>"
           }
         }
       ]
@@ -377,7 +377,7 @@
           "element": {
             "id": "16f3da9e-0393-49f9-b3b9-7ee3415d0e2c",
             "type": "text",
-            "content": "<p>Michel vient de recevoir le SMS ci-dessous sur son portable :&nbsp;<br><br></p>"
+            "content": "<p>Michel vient de recevoir le SMS ci-dessous sur son portable :&nbsp;</p>"
           }
         },
         {
@@ -397,7 +397,7 @@
           "element": {
             "id": "7d35ae45-7ba8-42af-a566-c09b4de83542",
             "type": "text",
-            "content": "<p>Pourtant, cela fait longtemps qu’il ne s’est pas connecté à ce compte.<br></p>"
+            "content": "<p>Pourtant, cela fait longtemps qu’il ne s’est pas connecté à ce compte.</p>"
           }
         },
         {
@@ -412,7 +412,7 @@
           "element": {
             "id": "bf9029c8-8cee-43bf-8750-e8e6215367cb",
             "type": "qcu",
-            "instruction": "<p>Qu’est-ce que cela signifie ?<br></p>",
+            "instruction": "<p>Qu’est-ce que cela signifie ?</p>",
             "proposals": [
               {
                 "id": "1",
@@ -454,7 +454,7 @@
           "element": {
             "id": "9c5a186f-1055-4752-83b2-c76f0ced9364",
             "type": "text",
-            "content": "<p>Avec la <strong>double authentification</strong>, une <strong>personne mal intentionnée</strong> qui a seulement votre mot de passe <strong>est bloquée</strong>.&nbsp; </p>\n<p>🤔 <strong>Bon à savoir</strong> </p>\n<p>Si vous recevez un code de confirmation par SMS mais que vous n’êtes pas en train de vous connecter à un site, changez rapidement le mot de passe de votre compte. <br><br></p>"
+            "content": "<p>Avec la <strong>double authentification</strong>, une <strong>personne mal intentionnée</strong> qui a seulement votre mot de passe <strong>est bloquée</strong>.&nbsp; </p>\n<p>🤔 <strong>Bon à savoir</strong> </p>\n<p>Si vous recevez un code de confirmation par SMS mais que vous n’êtes pas en train de vous connecter à un site, changez rapidement le mot de passe de votre compte. </p>"
           }
         }
       ]
@@ -469,7 +469,7 @@
           "element": {
             "id": "1826117c-67bb-4773-83ec-72adae3d516e",
             "type": "text",
-            "content": "<p>📌 Résumons l’essentiel avant de passer à la suite.</p><ul><li>Sur ses comptes en ligne, il est plus sécurisé de <strong>prouver son identité de deux manières différentes</strong>. C’est la <strong>double authentification</strong>.</li><li>On peut par exemple utiliser un <strong>code PIN</strong> ou une <strong>empreinte digitale</strong>, en plus d’<strong>un identifiant et d’un mot de passe</strong>.</li><li>Si vous avez <strong>un doute sur la sécurité </strong>d’un compte, <strong>changez votre mot de passe</strong> rapidement.</li><br></ul><br>"
+            "content": "<p>📌 Résumons l’essentiel avant de passer à la suite.</p><ul><li>Sur ses comptes en ligne, il est plus sécurisé de <strong>prouver son identité de deux manières différentes</strong>. C’est la <strong>double authentification</strong>.</li><li>On peut par exemple utiliser un <strong>code PIN</strong> ou une <strong>empreinte digitale</strong>, en plus d’<strong>un identifiant et d’un mot de passe</strong>.</li><li>Si vous avez <strong>un doute sur la sécurité </strong>d’un compte, <strong>changez votre mot de passe</strong> rapidement.</li><br></ul>"
           }
         }
       ]
@@ -523,7 +523,7 @@
           "element": {
             "id": "c46b2ffd-b340-42e1-b8fb-a1a830338e7b",
             "type": "text",
-            "content": "<p><strong>À vous de jouer ! 🕹️&nbsp;</strong></p><p>Pour finir, vous allez faire une double authentification en pratique.<br></p>"
+            "content": "<p><strong>À vous de jouer ! 🕹️&nbsp;</strong></p><p>Pour finir, vous allez faire une double authentification en pratique.</p>"
           }
         }
       ]
