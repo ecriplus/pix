@@ -1,5 +1,6 @@
 import { Campaign } from '../../../../src/maddo/domain/models/Campaign.js';
 import { Organization } from '../../../../src/maddo/domain/models/Organization.js';
+import { CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { KnowledgeElement } from '../../../../src/shared/domain/models/KnowledgeElement.js';
 import {
@@ -133,10 +134,7 @@ describe('Acceptance | Maddo | Route | Organizations', function () {
         new Campaign({
           id: campaign1InJurisdiction.id,
           name: campaign1InJurisdiction.name,
-          organizationId: orgaInJurisdiction.id,
-          organizationName: orgaInJurisdiction.name,
           type: campaign1InJurisdiction.type,
-          targetProfileId: targetProfile.id,
           targetProfileName: targetProfile.name,
           code: campaign1InJurisdiction.code,
           createdAt: campaign1InJurisdiction.createdAt,
@@ -152,6 +150,42 @@ describe('Acceptance | Maddo | Route | Organizations', function () {
           ],
         }),
       ]);
+    });
+
+    context('when organization contains profile collection campaigns', function () {
+      it('returns the list of all campaigns belonging to organization in the client jurisdiction with an HTTP status code 200', async function () {
+        // given
+        const campaign1InJurisdiction = databaseBuilder.factory.buildCampaign({
+          type: CampaignTypes.PROFILES_COLLECTION,
+          organizationId: orgaInJurisdiction.id,
+        });
+        await databaseBuilder.commit();
+
+        const options = {
+          method: 'GET',
+          url: `/api/organizations/${orgaInJurisdiction.id}/campaigns`,
+          headers: {
+            authorization: generateValidRequestAuthorizationHeaderForApplication(clientId, 'pix-client', 'campaigns'),
+          },
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result).to.deep.equal([
+          new Campaign({
+            id: campaign1InJurisdiction.id,
+            name: campaign1InJurisdiction.name,
+            type: campaign1InJurisdiction.type,
+            targetProfileName: null,
+            code: campaign1InJurisdiction.code,
+            createdAt: campaign1InJurisdiction.createdAt,
+            tubes: null,
+          }),
+        ]);
+      });
     });
 
     it('responds with an HTTP Forbidden when organization is not in jurisdiction', async function () {
