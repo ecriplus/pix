@@ -224,6 +224,37 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         assert.dom(screen.getByRole('button', { name: t('pages.skill-review.actions.send') })).exists();
       });
 
+      test('it should display disabled notation', async function (assert) {
+        // given
+        this.set('campaign', {
+          customResultPageText: 'My custom result page text',
+          organizationId: 1,
+        });
+
+        this.set('campaignParticipationResult', {
+          campaignParticipationBadges: [],
+          isShared: false,
+          isDisabled: true,
+          canImprove: false,
+          masteryRate: 0.75,
+          reachedStage: { acquired: 4, total: 5 },
+        });
+
+        // when
+        const screen = await render(
+          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
+  @campaign={{this.campaign}}
+  @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{true}}
+/>`,
+        );
+
+        // then
+        assert.ok(screen.getByText(t('pages.skill-review.disabled-share')));
+        assert.notOk(screen.queryByText(t('pages.skill-review.hero.explanations.send-results')));
+        assert.notOk(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') }));
+      });
+
       module('on click on the share button', function (hooks) {
         let campaignParticipationResult, onResultsSharedStub, screen, shareStub;
 
@@ -393,6 +424,35 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
     });
 
     module('when results are shared', function () {
+      test('it should not display disabled notation', async function (assert) {
+        // given
+        this.set('campaign', {
+          customResultPageText: 'My custom result page text',
+          organizationId: 1,
+        });
+
+        this.set('campaignParticipationResult', {
+          campaignParticipationBadges: [],
+          isShared: true,
+          isDisabled: true,
+          canImprove: false,
+          masteryRate: 0.75,
+          reachedStage: { acquired: 4, total: 5 },
+        });
+
+        // when
+        const screen = await render(
+          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
+  @campaign={{this.campaign}}
+  @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{true}}
+/>`,
+        );
+
+        // then
+        assert.notOk(screen.queryByText(t('pages.skill-review.disabled-share')));
+      });
+
       module('when there are no trainings and no custom link', function () {
         test('it should display a message and a homepage link', async function (assert) {
           // given

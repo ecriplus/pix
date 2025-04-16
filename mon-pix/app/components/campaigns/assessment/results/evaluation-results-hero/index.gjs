@@ -8,6 +8,7 @@ import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import { not } from 'ember-truth-helpers';
 
 import MarkdownToHtml from '../../../../markdown-to-html';
 import AcquiredBadges from './acquired-badges';
@@ -209,7 +210,7 @@ export default class EvaluationResultsHero extends Component {
                 {{t "pages.skill-review.hero.explanations.trainings"}}
               </p>
             {{/if}}
-          {{else}}
+          {{else if (not @campaignParticipationResult.isDisabled)}}
             <p class="evaluation-results-hero-details__explanations">
               {{t "pages.skill-review.hero.explanations.send-results"}}
             </p>
@@ -237,13 +238,19 @@ export default class EvaluationResultsHero extends Component {
                 {{/unless}}
               {{/if}}
             {{else}}
-              <PixButton
-                @triggerAction={{this.handleShareResultsClick}}
-                @size="large"
-                @isLoading={{this.isButtonLoading}}
-              >
-                {{t "pages.skill-review.actions.send"}}
-              </PixButton>
+              {{#if @campaignParticipationResult.isDisabled}}
+                <PixNotificationAlert @type="warning" @withIcon={{true}}>
+                  {{t "pages.skill-review.disabled-share"}}
+                </PixNotificationAlert>
+              {{else}}
+                <PixButton
+                  @triggerAction={{this.handleShareResultsClick}}
+                  @size="large"
+                  @isLoading={{this.isButtonLoading}}
+                >
+                  {{t "pages.skill-review.actions.send"}}
+                </PixButton>
+              {{/if}}
             {{/if}}
             {{#if @campaignParticipationResult.canImprove}}
               <PixButton

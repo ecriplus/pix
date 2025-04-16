@@ -1885,7 +1885,7 @@
         "result": "Overall result",
         "title": "Your results by competence"
       },
-      "disabled-share": "This customised test has been deactivated by the organiser.'<br>'It is no longer possible to submit results.",
+      "disabled-share": "This customised test has been deactivated by the organiser. It is no longer possible to submit results.",
       "error": "Oops, an error occurred!",
       "hero": {
         "acquired-badges-title": "Awards received",

@@ -1880,7 +1880,7 @@
         "result": "Resultado global",
         "title": "Tus resultados por competencia"
       },
-      "disabled-share": "Este test ha sido desactivado por el organizador.'<br>'Ya no es posible enviar resultados.",
+      "disabled-share": "Este test ha sido desactivado por el organizador. Ya no es posible enviar resultados.",
       "error": "¡Uy, se ha producido un error!",
       "hero": {
         "acquired-badges-title": "Premios obtenidos",
