@@ -4,7 +4,7 @@
   "title": "Au-delà des mots de passe : comment s’authentifier ?",
   "isBeta": true,
   "details": {
-    "image": "",
+    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
     "description": "<p>Code reçu par SMS, empreinte digitale, reconnaissance faciale… De plus en plus de moyens existent pour prouver son identité en ligne. <br>Dans ce module, vous allez découvrir les différentes façons de s’authentifier et pourquoi elles renforcent la sécurité de vos comptes. 🔐</p>",
     "duration": 5,
     "level": "Débutant",
@@ -15,10 +15,6 @@
     "tabletSupport": "comfortable"
   },
   "transitionTexts": [
-    {
-      "grainId": "",
-      "content": "<p></p>"
-    }
   ],
   "grains": [
     {
@@ -122,7 +118,7 @@
             "isCompletionRequired": false,
             "title": "simulateur 1FA",
             "url": "https://1024pix.github.io/atelier-contenus/RPE/simulateur_1FA_v1.html",
-            "instruction": "",
+            "instruction": "<p></p>",
             "solution": "",
             "height": 600
           }
@@ -230,7 +226,7 @@
             "isCompletionRequired": false,
             "title": "simulateur 2FA",
             "url": "https://1024pix.github.io/atelier-contenus/RPE/simulateur_2FA_v1.html",
-            "instruction": "",
+            "instruction": "<p></p>",
             "solution": "",
             "height": 320
           }
@@ -508,15 +504,6 @@
             {
               "elements": [
                 {
-                  "id": "35488277-2ec4-4567-a1c2-cf84a45c9ff5",
-                  "type": "image",
-                  "url": "",
-                  "alt": "",
-                  "alternativeText": "",
-                  "legend": "",
-                  "licence": ""
-                },
-                {
                   "id": "2855bd90-094f-469d-bcd8-952b565f7be3",
                   "type": "qcu",
                   "instruction": "<p>Pour se connecter à son compte personnel sur un site internet, Quentin doit saisir son identifiant et son mot de passe.</p>",
@@ -552,15 +539,6 @@
             },
             {
               "elements": [
-                {
-                  "id": "95c3f838-f162-4c7f-a351-95da088a1228",
-                  "type": "image",
-                  "url": "",
-                  "alt": "",
-                  "alternativeText": "",
-                  "legend": "",
-                  "licence": ""
-                },
                 {
                   "id": "cb8d2ecb-684b-4aab-b99a-6d511bed45b6",
                   "type": "qcu",
@@ -598,15 +576,6 @@
             {
               "elements": [
                 {
-                  "id": "0ff340e6-d21a-44a6-8eb7-0d21d0691077",
-                  "type": "image",
-                  "url": "",
-                  "alt": "",
-                  "alternativeText": "",
-                  "legend": "",
-                  "licence": ""
-                },
-                {
                   "id": "6b83d4e1-3533-4f46-b65f-82f17f711df0",
                   "type": "qcu",
                   "instruction": "<p>Lucas déverrouille son téléphone avec l’empreinte de son doigt.<br></p>",
@@ -642,15 +611,6 @@
             },
             {
               "elements": [
-                {
-                  "id": "9b91e900-301f-4df3-a5cd-8406e3ddd53d",
-                  "type": "image",
-                  "url": "",
-                  "alt": "",
-                  "alternativeText": "",
-                  "legend": "",
-                  "licence": ""
-                },
                 {
                   "id": "a03dcef2-1aa7-4c31-85ae-406edbab24b9",
                   "type": "qcu",
@@ -723,7 +683,7 @@
             "id": "a2b2910f-05e9-4462-bbd4-47f7426271eb",
             "type": "embed",
             "isCompletionRequired": true,
-            "title": "",
+            "title": "simulateur Papotix",
             "url": "https://epreuves.pix.fr/papotix/papotix.html?mode=example&lang=fr",
             "instruction": "<p>👉 Réalisez toutes les étapes pour que Quentin accède à son compte Papotix.</p>",
             "solution": "",
