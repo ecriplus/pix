@@ -315,7 +315,7 @@
                 "content": "<p>le compte de Sylvie</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p><strong>Pas tout à fait.</strong></p>\n<p>Le code envoyé sur le portable de Quentin permet de renforcer la sécurité de son compte, avec une deuxième étape. La preuve : vous n’avez pas réussi à vous connecter à son compte !</p>"
+                  "diagnosis": "<p><strong>Pas tout à fait.</strong></p>\n<p>Le code envoyé sur le portable de Quentin permet de renforcer la sécurité de son compte, avec une deuxième étape.<br>La preuve : vous n’avez pas réussi à vous connecter à son compte !</p>"
                 }
               },
               {
@@ -465,7 +465,7 @@
           "element": {
             "id": "1826117c-67bb-4773-83ec-72adae3d516e",
             "type": "text",
-            "content": "<p>📌 Résumons l’essentiel avant de passer à la suite.</p><ul><li>Sur ses comptes en ligne, il est plus sécurisé de <strong>prouver son identité de deux manières différentes</strong>. C’est la <strong>double authentification</strong>.</li><li>On peut par exemple utiliser un <strong>code PIN</strong> ou une <strong>empreinte digitale</strong>, en plus d’<strong>un identifiant et d’un mot de passe</strong>.</li><li>Si vous avez <strong>un doute sur la sécurité </strong>d’un compte, <strong>changez votre mot de passe</strong> rapidement.</li><br></ul>"
+            "content": "<p>📌 Résumons l’essentiel avant de passer à la suite :</p><ul><li>Sur ses comptes en ligne, il est plus sécurisé de <strong>prouver son identité de deux manières différentes</strong>. C’est la <strong>double authentification</strong>.</li><br><li>On peut par exemple utiliser un <strong>code PIN</strong> ou une <strong>empreinte digitale</strong>, en plus d’<strong>un identifiant et d’un mot de passe</strong>.</li><br><li>Si vous avez <strong>un doute sur la sécurité </strong>d’un compte, <strong>changez votre mot de passe</strong> rapidement.</li></ul>"
           }
         }
       ]
@@ -605,7 +605,7 @@
                       }
                     }
                   ],
-                  "solution": ""
+                  "solution": "1"
                 }
               ]
             },
