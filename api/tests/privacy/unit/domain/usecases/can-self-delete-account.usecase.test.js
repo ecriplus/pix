@@ -10,7 +10,12 @@ describe('Unit | Privacy | Domain | UseCase | can-self-delete-account', function
     dependencies = {
       featureToggles,
       learnersApiRepository: { hasBeenLearner: sinon.stub().resolves(false) },
-      candidatesApiRepository: { hasBeenCandidate: sinon.stub().resolves(false) },
+      campaignParticipationsApi: {
+        hasCampaignParticipations: sinon.stub(),
+      },
+      candidatesApiRepository: {
+        hasBeenCandidate: sinon.stub().resolves(false),
+      },
       userTeamsApiRepository: {
         getUserTeamsInfo: sinon.stub().resolves({
           isPixAgent: false,
@@ -44,6 +49,32 @@ describe('Unit | Privacy | Domain | UseCase | can-self-delete-account', function
 
         // then
         expect(result).to.be.false;
+      });
+    });
+
+    context('When user has participated in a campaign', function () {
+      it('returns false', async function () {
+        // given
+        dependencies.campaignParticipationsApi.hasCampaignParticipations.withArgs({ userId }).resolves(true);
+
+        // when
+        const result = await usecases.canSelfDeleteAccount({ userId, ...dependencies });
+
+        // then
+        expect(result).to.be.false;
+      });
+    });
+
+    context('when user has not participated in a campaign', function () {
+      it('returns true', async function () {
+        // given
+        dependencies.campaignParticipationsApi.hasCampaignParticipations.withArgs({ userId }).resolves(false);
+
+        // when
+        const result = await usecases.canSelfDeleteAccount({ userId, ...dependencies });
+
+        // then
+        expect(result).to.be.true;
       });
     });
 

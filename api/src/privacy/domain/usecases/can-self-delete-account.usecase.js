@@ -16,12 +16,16 @@ const canSelfDeleteAccount = async ({
   candidatesApiRepository,
   learnersApiRepository,
   userTeamsApiRepository,
+  campaignParticipationsApi,
 }) => {
   const isSelfAccountDeletionEnabled = await featureToggles.get('isSelfAccountDeletionEnabled');
   if (!isSelfAccountDeletionEnabled) return false;
 
   const hasBeenLearner = await learnersApiRepository.hasBeenLearner({ userId });
   if (hasBeenLearner) return false;
+
+  const hasCampaignParticipations = await campaignParticipationsApi.hasCampaignParticipations({ userId });
+  if (hasCampaignParticipations) return false;
 
   const hasBeenCandidate = await candidatesApiRepository.hasBeenCandidate({ userId });
   if (hasBeenCandidate) return false;
