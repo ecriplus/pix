@@ -107,7 +107,7 @@
           "element": {
             "id": "70ac0971-48f3-4d26-81c1-2df452852319",
             "type": "text",
-            "content": "<p>Sylvie veut se connecter à son journal en ligne préféré. Elle vous transmet ses informations :&nbsp; </p>\n<ul>\n    <li>identifiant : sylvie.girard</li>\n    <li>mot de passe : Gmléso6+</li>\n</ul>\n<p>👉 Aidez Sylvie à se connecter en écrivant ses identifiants.</p>"
+            "content": "<p>Sylvie veut se connecter à son journal en ligne préféré. Elle vous transmet ses informations :&nbsp; </p>\n<ul>\n    <li>identifiant : <code>sylvie.girard</code></li>\n    <li>mot de passe : <code>Gmléso6+</code></li>\n</ul>\n<p>👉 Aidez Sylvie à se connecter en écrivant ses identifiants.</p>"
           }
         },
         {
@@ -215,7 +215,7 @@
           "element": {
             "id": "b0a6d0e7-3047-4bc9-a9f8-8578cc16641d",
             "type": "text",
-            "content": "<p>Quentin veut se connecter à sa boîte mail. Il vous transmet ses informations :&nbsp; </p><ul><li>identifiant : Quentin</li><li>mot de passe : M0tD3p4s53F0rt#$<br></li></ul><p>Ecrivez ces identifiants pour aider Quentin à se connecter.</p>"
+            "content": "<p>Quentin veut se connecter à sa boîte mail. Il vous transmet ses informations :&nbsp; </p><ul><li>identifiant : <code>Quentin</code></li><li>mot de passe : <code>M0tD3p4s53F0rt#$</code><br></li></ul><p>Ecrivez ces identifiants pour aider Quentin à se connecter.</p>"
           }
         },
         {
