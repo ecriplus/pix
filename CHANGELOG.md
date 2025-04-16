@@ -1,5 +1,19 @@
 # Pix Changelog
 
+## v5.92.0 (16/04/2025)
+
+
+### :rocket: Amélioration
+- [#12068](https://github.com/1024pix/pix/pull/12068) [FEATURE] Exposer un learnerId unique par clientId (PIX-17513).
+- [#12014](https://github.com/1024pix/pix/pull/12014) [FEATURE] Créer l'API interne pour mettre à disposition les données des participations par campagne (PIX-17351).
+- [#11973](https://github.com/1024pix/pix/pull/11973) [FEATURE] Créer la route POST /api/admin/certification-centers/{id}/archive.
+
+### :building_construction: Tech
+- [#12061](https://github.com/1024pix/pix/pull/12061) [TECH] copie les snapshot de datawarehouse vers production (PIX-17499).
+
+### :bug: Correction
+- [#12064](https://github.com/1024pix/pix/pull/12064) [BUGFIX] Corriger le nombre de contenus formatifs affiché dans la modal de fin de parcours (PIX-17512).
+
 ## v5.91.0 (15/04/2025)
 
 
