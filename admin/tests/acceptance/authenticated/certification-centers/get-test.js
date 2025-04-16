@@ -239,6 +239,28 @@ module('Acceptance | authenticated/certification-centers/get', function (hooks) 
       });
     });
 
+    module('when the archive confirmation button is clicked', function () {
+      test('displays archived certification center banner', async function (assert) {
+        // given
+        await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+        const certificationCenter = server.create('certification-center', {
+          name: 'Pokemon Center',
+          externalId: 'ABCDEF',
+          type: 'PRO',
+          archivedAt: null,
+          archivistFullName: null,
+        });
+
+        // when
+        const screen = await visit(`/certification-centers/${certificationCenter.id}`);
+        await click(screen.getByRole('button', { name: 'Archiver' }));
+        await click(screen.getByRole('button', { name: 'Confirmer' }));
+
+        // then
+        assert.dom(await screen.findByText('Archivé le 01/01/2025 par John Doe.')).exists();
+      });
+    });
+
     module('tab navigation', function () {
       test('should show Équipe and Invitations tab', async function (assert) {
         // given

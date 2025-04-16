@@ -31,4 +31,9 @@ export default class AuthenticatedCertificationCentersGetController extends Cont
       });
     }
   }
+
+  @action
+  refresh() {
+    this.send('refreshModel');
+  }
 }

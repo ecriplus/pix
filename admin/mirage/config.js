@@ -189,6 +189,13 @@ function routes() {
       failureCount: 0,
     });
   });
+
+  this.post('/admin/certification-centers/:id/archive', (schema, request) => {
+    const certificationCenterId = request.params.id;
+    const certificationCenter = schema.certificationCenters.findBy({ id: certificationCenterId });
+    return certificationCenter.update({ archivedAt: new Date('2025-01-01'), archivistFullName: 'John Doe' });
+  });
+
   this.post('/admin/users/:id/anonymize', (schema, request) => {
     const userId = request.params.id;
     const user = schema.users.findBy({ id: userId });

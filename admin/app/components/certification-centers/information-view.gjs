@@ -15,6 +15,7 @@ export default class InformationView extends Component {
   @service intl;
   @tracked habilitations = [];
   @tracked isArchiveModalOpen = false;
+  @service store;
 
   constructor() {
     super(...arguments);
@@ -70,7 +71,13 @@ export default class InformationView extends Component {
 
   @action
   async archiveCertificationCenter() {
-    alert('coucou');
+    const adapter = this.store.adapterFor('certification-center');
+    await adapter.archiveCertificationCenter(this.args.certificationCenter.id);
+
+    this.toggleShowArchiveModal();
+    await this.args.certificationCenter.reload();
+
+    return this.args.refreshModel();
   }
 
   <template>
