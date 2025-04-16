@@ -17,6 +17,12 @@ export default {
     defaultValue: false,
     tags: ['team-certification'],
   },
+  isSelfAccountDeletionEnabled: {
+    description: 'Toggle self account deletion feature',
+    type: 'boolean',
+    defaultValue: true,
+    tags: ['frontend', 'team-acces'],
+  },
   shouldDisplayNewAnalysisPage: {
     description: 'Display the new page for campaign analysis',
     type: 'boolean',

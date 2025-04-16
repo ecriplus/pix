@@ -5,9 +5,9 @@ import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-
 import { emailValidationDemandRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/email-validation-demand.repository.js';
 import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
 import { userEmailRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/user-email.repository.js';
-import { config } from '../../../../../src/shared/config.js';
 import { constants } from '../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
+import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import {
   createServer,
   databaseBuilder,
@@ -278,6 +278,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
   describe('GET /api/users/my-account', function () {
     it('returns 200 HTTP status code', async function () {
       // given
+      await featureToggles.set('isSelfAccountDeletionEnabled', false);
       const user = databaseBuilder.factory.buildUser();
       await databaseBuilder.commit();
 
@@ -975,8 +976,6 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
     let userId;
 
     beforeEach(async function () {
-      sinon.stub(config.featureToggles, 'isSelfAccountDeletionEnabled').value(true);
-
       userId = databaseBuilder.factory.buildUser().id;
       await databaseBuilder.commit();
     });

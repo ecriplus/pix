@@ -5,12 +5,11 @@ describe('Integration | Privacy | Domain | UseCase | can-self-delete-account', f
   context('When user is eligible', function () {
     it('returns true', async function () {
       // given
-      const featureToggles = { isSelfAccountDeletionEnabled: true };
       const user = databaseBuilder.factory.buildUser();
       await databaseBuilder.commit();
 
       // when
-      const result = await usecases.canSelfDeleteAccount({ userId: user.id, featureToggles });
+      const result = await usecases.canSelfDeleteAccount({ userId: user.id });
 
       // then
       expect(result).to.be.true;
