@@ -41,12 +41,16 @@ const getCertificate = async function (request, h, dependencies = { requestRespo
   const translate = request.i18n.__;
   const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
 
-  const privateCertificate = await usecases.getPrivateCertificate({
-    userId,
-    certificationCourseId,
-    locale,
-  });
-  return privateCertificateSerializer.serialize(privateCertificate, { translate });
+  const certificationCourse = await certificationSharedUsecases.getCertificationCourse({ certificationCourseId });
+
+  if (!certificationCourse.isV3()) {
+    const certificate = await usecases.getPrivateCertificate({
+      userId,
+      certificationCourseId: certificationCourse.getId(),
+      locale,
+    });
+    return privateCertificateSerializer.serialize(certificate, { translate });
+  }
 };
 
 const findUserCertificates = async function (request) {
