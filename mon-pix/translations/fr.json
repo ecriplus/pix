@@ -631,6 +631,12 @@
         "title": "Autre certification obtenue"
       },
       "delivered-at": "Date de délivrance :",
+      "details": {
+        "competences": {
+          "description": "Votre score Pix donne une estimation de votre niveau dans les 16 compétences numériques.",
+          "title": "Votre profil de compétences numériques"
+        }
+      },
       "exam-date": "Date de passage :",
       "hexagon-score": {
         "certified": "certifiés"
@@ -1969,7 +1975,7 @@
           },
           "shared-results-modal": {
             "return-results-action": "Fermer et revenir aux résultats",
-            "subtitle": "Prêt à développer vos compétences ?  \uD83C\uDF93",
+            "subtitle": "Prêt à développer vos compétences ?  🎓",
             "title": "Résultats partagés"
           },
           "tab-label": "Formations",

@@ -1,6 +1,7 @@
 import { t } from 'ember-intl';
 
 import CandidateInformation from '../certificate-information/candidate-information';
+import CompetencesDetails from '../certificate-information/competences-details';
 
 <template>
   <section class="global-page-header">
@@ -10,10 +11,5 @@ import CandidateInformation from '../certificate-information/candidate-informati
   </section>
 
   <CandidateInformation @certificate={{@certificate}} />
-
-  {{#each @certificate.resultCompetenceTree.areas as |area|}}
-    {{#each area.resultCompetences as |resultCompetence|}}
-      <p>{{resultCompetence.name}}</p>
-    {{/each}}
-  {{/each}}
+  <CompetencesDetails @resultCompetenceTree={{@certificate.resultCompetenceTree}} />
 </template>

@@ -1,0 +1,250 @@
+@use 'pix-design-tokens/typography';
+
+.certificate-competences-details__title {
+  @extend %pix-title-xs;
+}
+
+.certificate-competences-details__description {
+  @extend %pix-body-m;
+
+  color: var(--pix-neutral-900);
+
+  a {
+    display: inline-flex;
+  }
+}
+
+.certificate-competences-details__tabs {
+  display: grid;
+  grid-template-columns: 9rem auto;
+  gap: 0 var(--pix-spacing-10x);
+  margin-top: var(--pix-spacing-4x);
+  text-wrap: pretty;
+}
+
+.certificate-competences-details__tablist {
+  display: grid;
+  gap: var(--pix-spacing-2x);
+
+  button {
+    --area-color: var(--pix-primary-10);
+
+    @extend %pix-body-s;
+
+    position: relative;
+    z-index: 0;
+    min-height: 4.4375rem;
+    padding: var(--pix-spacing-1x) var(--pix-spacing-2x);
+    overflow: hidden;
+    text-align: left;
+    border-radius: 0.5rem;
+
+    &::before {
+      position: absolute;
+      z-index: -1;
+      background-color: var(--area-color);
+      visibility: hidden;
+      opacity: 0.1;
+      content: '';
+      inset: 0;
+    }
+
+    &[aria-selected='true'],
+    &:hover,
+    &:focus-visible {
+      font-weight: var(--pix-font-bold);
+
+      &::before {
+        visibility: visible;
+      }
+    }
+  }
+}
+
+.certificate-competences-details-tablist__area-header {
+  --area-color: var(--pix-primary-10);
+
+  position: relative;
+  z-index: 0;
+  display: flex;
+  gap: var(--pix-spacing-4x);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--pix-spacing-4x) var(--pix-spacing-6x);
+  overflow: hidden;
+  border-radius: 0.5rem;
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    background-color: var(--area-color);
+    opacity: 0.1;
+    content: '';
+    inset: 0;
+  }
+
+  & > :first-child {
+    @extend %pix-title-xxs;
+
+    color: var(--area-color-dark);
+    font-weight: var(--pix-font-bold);
+  }
+
+  & > :last-child {
+    @extend %pix-body-s;
+
+    color: var(--pix-neutral-500);
+    font-weight: var(--pix-font-bold);
+    text-transform: capitalize;
+  }
+}
+
+.certificate-competences-details-tablist__competences-list {
+  li {
+    @extend %pix-body-m;
+
+    display: flex;
+    gap: var(--pix-spacing-4x);
+    align-items: center;
+    padding: var(--pix-spacing-4x) var(--pix-spacing-6x);
+
+    & + li {
+      border-top: 1px solid var(--pix-neutral-100);
+    }
+
+    &::before {
+      display: block;
+      flex-shrink: 0;
+      width: 3rem;
+      height: 3rem;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+      content: '';
+    }
+
+    span:first-of-type {
+      flex-grow: 1;
+      font-weight: var(--pix-font-bold);
+    }
+
+    span:last-of-type {
+      font-weight: var(--pix-font-bold);
+      font-size: 125%;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .certificate-competences-details__tabs {
+    display: block;
+
+    [role="tabpanel"][hidden] {
+      display: block;
+    }
+
+    [role="tabpanel"]:not(:first-child) {
+      margin-top: var(--pix-spacing-10x);
+    }
+  }
+
+  .certificate-competences-details__tablist {
+    display: none;
+  }
+}
+
+/**
+ * Areas colors and competences icons
+ */
+.certificate-competences-details {
+  // Areas colors
+  [data-area-code='1'] {
+    --area-color: var(--pix-information-light);
+    --area-color-dark: var(--pix-information-dark);
+  }
+
+  [data-area-code='2'] {
+    --area-color: var(--pix-content-light);
+     --area-color-dark: var(--pix-content-dark);
+  }
+
+  [data-area-code='3'] {
+    --area-color: var(--pix-communication-light);
+     --area-color-dark: var(--pix-communication-dark);
+  }
+
+  [data-area-code='4'] {
+    --area-color: var(--pix-security-light);
+     --area-color-dark: var(--pix-security-dark);
+  }
+
+  [data-area-code='5'] {
+    --area-color: var(--pix-environment-light);
+     --area-color-dark: var(--pix-environment-dark);
+  }
+
+  // Competences icons
+  [data-competence-index='1.1']::before {
+    background-image: url('/images/icons/competences/mener-une-recherche.svg');
+  }
+
+  [data-competence-index='1.2']::before {
+    background-image: url('/images/icons/competences/gerer-des-donnees.svg');
+  }
+
+  [data-competence-index='1.3']::before {
+    background-image: url('/images/icons/competences/traiter-des-donnees.svg');
+  }
+
+  [data-competence-index='2.1']::before {
+    background-image: url('/images/icons/competences/interagir.svg');
+  }
+
+  [data-competence-index='2.2']::before {
+    background-image: url('/images/icons/competences/partager-et-publier.svg');
+  }
+
+  [data-competence-index='2.3']::before {
+    background-image: url('/images/icons/competences/collaborer.svg');
+  }
+
+  [data-competence-index='2.4']::before {
+    background-image: url('/images/icons/competences/inserer-dans-le-monde-numerique.svg');
+  }
+
+  [data-competence-index='3.1']::before {
+    background-image: url('/images/icons/competences/developper-des-docs-textuels.svg');
+  }
+
+  [data-competence-index='3.2']::before {
+    background-image: url('/images/icons/competences/developper-des-docs-multimedia.svg');
+  }
+
+  [data-competence-index='3.3']::before {
+    background-image: url('/images/icons/competences/adapter-les-documents.svg');
+  }
+
+  [data-competence-index='3.4']::before {
+    background-image: url('/images/icons/competences/programmer.svg');
+  }
+
+  [data-competence-index='4.1']::before {
+    background-image: url('/images/icons/competences/securiser-environnement.svg');
+  }
+
+  [data-competence-index='4.2']::before {
+    background-image: url('/images/icons/competences/proteger-les-donnees.svg');
+  }
+
+  [data-competence-index='4.3']::before {
+    background-image: url('/images/icons/competences/proteger-la-sante.svg');
+  }
+
+  [data-competence-index='5.1']::before {
+    background-image: url('/images/icons/competences/problemes-techniques.svg');
+  }
+
+  [data-competence-index='5.2']::before {
+    background-image: url('/images/icons/competences/environnement-numerique.svg');
+  }
+}
