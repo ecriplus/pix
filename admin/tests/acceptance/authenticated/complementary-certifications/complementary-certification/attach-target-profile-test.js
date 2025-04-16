@@ -160,7 +160,6 @@ module(
               await targetProfileSelectable.click();
 
               // then
-              //await new Promise((a) => setTimeout(() => a(), 2000));
               assert
                 .dom(
                   await screen.findByRole('checkbox', {
