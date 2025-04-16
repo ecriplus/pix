@@ -181,6 +181,15 @@ const findOneByCampaignIdAndUserId = async function ({ campaignId, userId }) {
   });
 };
 
+const getCampaignParticipationsCountByUserId = async function ({ userId }) {
+  const knexConn = DomainTransaction.getConnection();
+  const result = await knexConn('campaign-participations')
+    .count('campaign-participations.id as count')
+    .where({ userId })
+    .first();
+  return result.count;
+};
+
 const hasAssessmentParticipations = async function (userId) {
   const knexConn = DomainTransaction.getConnection();
   const { count } = await knexConn('assessments')
@@ -276,6 +285,7 @@ export {
   get,
   getAllCampaignParticipationsInCampaignForASameLearner,
   getByCampaignIds,
+  getCampaignParticipationsCountByUserId,
   getCampaignParticipationsForOrganizationLearner,
   getCodeOfLastParticipationToProfilesCollectionCampaignForUser,
   getLocked,
