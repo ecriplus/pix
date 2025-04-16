@@ -7,7 +7,7 @@ import UserCertificationsDetailCompetencesList from '../user-certifications-deta
 import UserCertificationsDetailHeader from '../user-certifications-detail-header';
 import UserCertificationsDetailResult from '../user-certifications-detail-result';
 
-export default class v2CertificationShared extends Component {
+export default class v2Certificate extends Component {
   get shouldDisplayDetailsSection() {
     const model = this.args.model;
     return Boolean(model.commentForCandidate || model.hasAcquiredComplementaryCertifications);

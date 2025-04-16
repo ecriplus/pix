@@ -31,19 +31,20 @@ const resultCompetenceTree = {
 };
 
 const attributes = [
-  'certificationCenter',
+  'firstName',
+  'lastName',
   'birthdate',
   'birthplace',
   'date',
-  'firstName',
   'deliveredAt',
+  'certificationCenter',
   'isPublished',
-  'lastName',
   'pixScore',
   'resultCompetenceTree',
   'certifiedBadgeImages',
   'maxReachableLevelOnCertificationDate',
   'version',
+  'algorithmEngineVersion',
 ];
 
 const serialize = function (certificate) {

@@ -31,6 +31,7 @@ function certificationResponse({ version }) {
         'clea-certification-status': 'acquired',
         'certified-badge-images': [],
         version,
+        'algorithm-engine-version': version,
       },
       relationships: {
         'result-competence-tree': {

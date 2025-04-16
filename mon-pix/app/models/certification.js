@@ -27,6 +27,7 @@ export default class Certification extends Model {
   @attr() certifiedBadgeImages;
   @attr('number') maxReachableLevelOnCertificationDate;
   @attr('number') version;
+  @attr('number') algorithmEngineVersion;
 
   // includes
   @belongsTo('result-competence-tree', { async: true, inverse: null }) resultCompetenceTree;

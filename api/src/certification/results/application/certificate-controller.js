@@ -3,20 +3,35 @@ import dayjs from 'dayjs';
 import { usecases as certificationSharedUsecases } from '../../../../src/certification/shared/domain/usecases/index.js';
 import * as requestResponseUtils from '../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { UnauthorizedError } from '../../../shared/application/http-errors.js';
+import { featureToggles } from '../../../shared/infrastructure/feature-toggles/index.js';
 import { normalizeAndRemoveAccents } from '../../../shared/infrastructure/utils/string-utils.js';
 import { V3Certificate } from '../domain/models/V3Certificate.js';
 import { usecases } from '../domain/usecases/index.js';
+import * as certificateSerializer from '../infrastructure/serializers/certificate-serializer.js';
 import * as privateCertificateSerializer from '../infrastructure/serializers/private-certificate-serializer.js';
-import * as shareableCertificateSerializer from '../infrastructure/serializers/shareable-certificate-serializer.js';
 import * as certificationAttestationPdf from '../infrastructure/utils/pdf/certification-attestation-pdf.js';
 import * as v3CertificationAttestationPdf from '../infrastructure/utils/pdf/v3-certification-attestation-pdf.js';
 
-const getCertificateByVerificationCode = async function (request, h, dependencies = { requestResponseUtils }) {
+const getCertificateByVerificationCode = async function (
+  request,
+  h,
+  dependencies = { requestResponseUtils, certificateSerializer },
+) {
+  let certificate;
   const verificationCode = request.payload.verificationCode;
   const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
 
-  const shareableCertificate = await usecases.getShareableCertificate({ verificationCode, locale });
-  return shareableCertificateSerializer.serialize(shareableCertificate);
+  const certificationCourse = await usecases.getCertificationCourseByVerificationCode({ verificationCode });
+
+  if (certificationCourse.isV3() && (await featureToggles.get('isV3CertificationPageEnabled'))) {
+    certificate = await usecases.getCertificationAttestation({ certificationCourseId: certificationCourse.getId() });
+  } else {
+    certificate = await usecases.getShareableCertificate({
+      certificationCourseId: certificationCourse.getId(),
+      locale,
+    });
+  }
+  return dependencies.certificateSerializer.serialize(certificate);
 };
 
 const getCertificate = async function (request, h, dependencies = { requestResponseUtils }) {

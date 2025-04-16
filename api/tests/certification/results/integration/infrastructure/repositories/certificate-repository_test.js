@@ -2341,7 +2341,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
     });
   });
 
-  describe('#getShareableCertificateByVerificationCode', function () {
+  describe('#getShareableCertificate', function () {
     const minimalLearningContent = [
       {
         id: 'recArea0',
@@ -2358,11 +2358,11 @@ describe('Integration | Infrastructure | Repository | Certification', function (
 
     it('should throw a NotFoundError when shareable certificate does not exist', async function () {
       // when
-      const error = await catchErr(certificateRepository.getShareableCertificateByVerificationCode)('P-SOMECODE');
+      const error = await catchErr(certificateRepository.getShareableCertificate)({ certificationCourseId: 1 });
 
       // then
       expect(error).to.be.instanceOf(NotFoundError);
-      expect(error.message).to.equal('There is no certification course with verification code "P-SOMECODE"');
+      expect(error.message).to.equal('There is no certification course with given certification course id');
     });
 
     it('should throw a NotFoundError when certificate has no assessment-result', async function () {
@@ -2405,11 +2405,11 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       await databaseBuilder.commit();
 
       // when
-      const error = await catchErr(certificateRepository.getShareableCertificateByVerificationCode)('P-SOMECODE');
+      const error = await catchErr(certificateRepository.getShareableCertificate)({ certificationCourseId });
 
       // then
       expect(error).to.be.instanceOf(NotFoundError);
-      expect(error.message).to.equal('There is no certification course with verification code "P-SOMECODE"');
+      expect(error.message).to.equal('There is no certification course with given certification course id');
     });
 
     it('should throw a NotFoundError when certificate is cancelled', async function () {
@@ -2457,11 +2457,11 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       await databaseBuilder.commit();
 
       // when
-      const error = await catchErr(certificateRepository.getShareableCertificateByVerificationCode)('P-SOMECODE');
+      const error = await catchErr(certificateRepository.getShareableCertificate)({ certificationCourseId });
 
       // then
       expect(error).to.be.instanceOf(NotFoundError);
-      expect(error.message).to.equal('There is no certification course with verification code "P-SOMECODE"');
+      expect(error.message).to.equal('There is no certification course with given certification course id');
     });
 
     it('should throw a NotFoundError when certificate is not published', async function () {
@@ -2509,11 +2509,11 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       await databaseBuilder.commit();
 
       // when
-      const error = await catchErr(certificateRepository.getShareableCertificateByVerificationCode)('P-SOMECODE');
+      const error = await catchErr(certificateRepository.getShareableCertificate)({ certificationCourseId });
 
       // then
       expect(error).to.be.instanceOf(NotFoundError);
-      expect(error.message).to.equal('There is no certification course with verification code "P-SOMECODE"');
+      expect(error.message).to.equal('There is no certification course with given certification course id');
     });
 
     it('should throw a NotFoundError when certificate is rejected', async function () {
@@ -2561,11 +2561,11 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       await databaseBuilder.commit();
 
       // when
-      const error = await catchErr(certificateRepository.getShareableCertificateByVerificationCode)('P-SOMECODE');
+      const error = await catchErr(certificateRepository.getShareableCertificate)({ certificationCourseId });
 
       // then
       expect(error).to.be.instanceOf(NotFoundError);
-      expect(error.message).to.equal('There is no certification course with verification code "P-SOMECODE"');
+      expect(error.message).to.equal('There is no certification course with given certification course id');
     });
 
     describe('when "locale" is french', function () {
@@ -2659,12 +2659,10 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         await mockLearningContent(learningContentObjects);
 
         // when
-        const shareableCertificate = await certificateRepository.getShareableCertificateByVerificationCode(
-          'P-SOMECODE',
-          {
-            locale: 'fr',
-          },
-        );
+        const shareableCertificate = await certificateRepository.getShareableCertificate({
+          certificationCourseId,
+          locale: 'fr',
+        });
 
         // then
         const resultCompetenceTree = domainBuilder.buildResultCompetenceTree({
@@ -2772,12 +2770,10 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         await mockLearningContent(learningContentObjects);
 
         // when
-        const shareableCertificate = await certificateRepository.getShareableCertificateByVerificationCode(
-          'P-SOMECODE',
-          {
-            locale: 'en',
-          },
-        );
+        const shareableCertificate = await certificateRepository.getShareableCertificate({
+          certificationCourseId,
+          locale: 'en',
+        });
 
         // then
         const resultCompetenceTree = domainBuilder.buildResultCompetenceTree({
@@ -2880,8 +2876,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         await databaseBuilder.commit();
 
         // when
-        const shareableCertificate =
-          await certificateRepository.getShareableCertificateByVerificationCode('P-SOMECODE');
+        const shareableCertificate = await certificateRepository.getShareableCertificate({ certificationCourseId });
 
         // then
         const expectedShareableCertificate = domainBuilder.buildShareableCertificate({
