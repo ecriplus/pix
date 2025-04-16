@@ -503,13 +503,189 @@
           }
         },
         {
-          "type": "element",
-          "element": {
-            "id": "d7594680-209c-4760-865a-40cd0b53f6b0",
-            "type": "custom",
-            "tagName": "",
-            "props": {}
-          }
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "35488277-2ec4-4567-a1c2-cf84a45c9ff5",
+                  "type": "image",
+                  "url": "",
+                  "alt": "",
+                  "alternativeText": "",
+                  "legend": "",
+                  "licence": ""
+                },
+                {
+                  "id": "2855bd90-094f-469d-bcd8-952b565f7be3",
+                  "type": "qcu",
+                  "instruction": "<p>Pour se connecter à son compte personnel sur un site internet, Quentin doit saisir son identifiant et son mot de passe.</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>simple authentification</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse !</p>",
+                        "diagnosis": "<p>Il y a une seule étape pour vérifier l’identité de Quentin.<br></p>"
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>double authentification</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Il y a une seule étape pour vérifier l’identité de Quentin.<br></p>"
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>aucun des deux</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Il y a une seule étape pour vérifier l’identité de Quentin.<br></p>"
+                      }
+                    }
+                  ],
+                  "solution": "1"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "95c3f838-f162-4c7f-a351-95da088a1228",
+                  "type": "image",
+                  "url": "",
+                  "alt": "",
+                  "alternativeText": "",
+                  "legend": "",
+                  "licence": ""
+                },
+                {
+                  "id": "cb8d2ecb-684b-4aab-b99a-6d511bed45b6",
+                  "type": "qcu",
+                  "instruction": "<p>Après avoir saisi ses identifiants, Stéphanie reçoit un code par SMS pour finaliser sa connexion.</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>simple authentification</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Il y a deux étapes : identifiant et mot de passe, puis le code par SMS.<br></p>"
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>double authentification</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse !</p>",
+                        "diagnosis": "<p>Il y a deux étapes : identifiant et mot de passe, puis le code par SMS.<br></p>"
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>aucun des deux</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Il y a deux étapes : identifiant et mot de passe, puis le code par SMS.<br></p>"
+                      }
+                    }
+                  ],
+                  "solution": "2"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "0ff340e6-d21a-44a6-8eb7-0d21d0691077",
+                  "type": "image",
+                  "url": "",
+                  "alt": "",
+                  "alternativeText": "",
+                  "legend": "",
+                  "licence": ""
+                },
+                {
+                  "id": "6b83d4e1-3533-4f46-b65f-82f17f711df0",
+                  "type": "qcu",
+                  "instruction": "<p>Lucas déverrouille son téléphone avec l’empreinte de son doigt.<br></p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>simple authentification</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse !</p>",
+                        "diagnosis": "<p>Il y a une seule étape pour vérifier l’identité de Lucas : son empreinte digitale.</p>"
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>double authentification</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Il y a une seule étape pour vérifier l’identité de Lucas : son empreinte digitale.</p>"
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>aucun des deux</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Il y a une seule étape pour vérifier l’identité de Lucas : son empreinte digitale.</p>"
+                      }
+                    }
+                  ],
+                  "solution": ""
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "9b91e900-301f-4df3-a5cd-8406e3ddd53d",
+                  "type": "image",
+                  "url": "",
+                  "alt": "",
+                  "alternativeText": "",
+                  "legend": "",
+                  "licence": ""
+                },
+                {
+                  "id": "a03dcef2-1aa7-4c31-85ae-406edbab24b9",
+                  "type": "qcu",
+                  "instruction": "<p>Après avoir saisi ses identifiants, Romuald doit cocher une case pour prouver qu’il n’est pas un robot.&nbsp;<br></p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>simple authentification</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Une case à cocher de ce type (Captcha) ne sert pas à vérifier l’identité de Romuald. Ce n’est pas une étape d’authentification.</p>"
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>double authentification</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Une case à cocher de ce type (Captcha) ne sert pas à vérifier l’identité de Romuald. Ce n’est pas une étape d’authentification.</p>"
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>aucun des deux</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse !</p>",
+                        "diagnosis": "<p>Une case à cocher de ce type (Captcha) ne sert pas à vérifier l’identité de Romuald. Ce n’est pas une étape d’authentification.</p>"
+                      }
+                    }
+                  ],
+                  "solution": "3"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
