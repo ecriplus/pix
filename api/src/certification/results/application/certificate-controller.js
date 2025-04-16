@@ -43,8 +43,12 @@ const getCertificate = async function (request, h, dependencies = { requestRespo
 
   const certificationCourse = await certificationSharedUsecases.getCertificationCourse({ certificationCourseId });
 
-  if (!certificationCourse.isV3()) {
-    const certificate = await usecases.getPrivateCertificate({
+  let certificate;
+  if (certificationCourse.isV3() && (await featureToggles.get('isV3CertificationPageEnabled'))) {
+    certificate = await usecases.getCertificationAttestation({ certificationCourseId: certificationCourse.getId() });
+    return certificateSerializer.serialize({ certificate, translate });
+  } else {
+    certificate = await usecases.getPrivateCertificate({
       userId,
       certificationCourseId: certificationCourse.getId(),
       locale,

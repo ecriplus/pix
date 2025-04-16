@@ -205,6 +205,162 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         });
       });
     });
+
+    describe('when certification course version is V3', function () {
+      describe('when isV3CertificationPageEnabled feature toggle is enabled', function () {
+        it('should return a serialized certificate given by id', async function () {
+          // given
+          const userId = 1;
+          const certificationCourseId = 2;
+          const request = {
+            auth: { credentials: { userId } },
+            params: { certificationCourseId },
+            i18n: getI18n(),
+          };
+          const locale = 'fr-fr';
+          await featureToggles.set('isV3CertificationPageEnabled', true);
+          const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
+          const certificationCourse = domainBuilder.buildCertificationCourse({
+            id: certificationCourseId,
+            version: AlgorithmEngineVersion.V3,
+          });
+          const certificate = domainBuilder.certification.results.buildV3CertificationAttestation({
+            id: certificationCourseId,
+            firstName: 'Dorothé',
+            lastName: '2Pac',
+            birthdate: '2000-01-01',
+            birthplace: 'Sin City',
+            deliveredAt: new Date('2021-01-01T00:00:00Z'),
+            certificationCenter: 'Centre des choux de Bruxelles',
+            pixScore: 456,
+            verificationCode: 'P-SUPERCODE',
+            resultCompetenceTree: null,
+            algorithmEngineVersion: AlgorithmEngineVersion.V3,
+            certificationDate: new Date('2020-01-01T00:00:00Z'),
+          });
+          sinon.stub(certificationSharedUsecases, 'getCertificationCourse');
+          certificationSharedUsecases.getCertificationCourse
+            .withArgs({ certificationCourseId })
+            .resolves(certificationCourse);
+          sinon.stub(usecases, 'getCertificationAttestation');
+          usecases.getCertificationAttestation.withArgs({ certificationCourseId }).resolves(certificate);
+          requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
+
+          // when
+          const response = await certificateController.getCertificate(request, hFake, {
+            requestResponseUtils: requestResponseUtilsStub,
+          });
+
+          // then
+          const translate = getI18n().__;
+          expect(response).to.deep.equal({
+            data: {
+              id: '2',
+              type: 'certifications',
+              attributes: {
+                'first-name': 'Dorothé',
+                'last-name': '2Pac',
+                birthdate: '2000-01-01',
+                birthplace: 'Sin City',
+                'certification-center': 'Centre des choux de Bruxelles',
+                'certification-date': new Date('2020-01-01T00:00:00Z'),
+                'delivered-at': new Date('2021-01-01T00:00:00Z'),
+                'pix-score': 456,
+                'algorithm-engine-version': AlgorithmEngineVersion.V3,
+                'verification-code': 'P-SUPERCODE',
+                'global-level-label': certificate.globalLevel.getLevelLabel(translate),
+                'global-summary-label': certificate.globalLevel.getSummaryLabel(translate),
+                'global-description-label': certificate.globalLevel.getDescriptionLabel(translate),
+              },
+              relationships: {
+                'result-competence-tree': {
+                  data: null,
+                },
+              },
+            },
+          });
+        });
+      });
+
+      describe('when isV3CertificationPageEnabled feature toggle is disabled', function () {
+        it('should return a serialized private certificate given by id', async function () {
+          // given
+          const userId = 1;
+          const certificationCourseId = 2;
+          const request = {
+            auth: { credentials: { userId } },
+            params: { certificationCourseId },
+            i18n: getI18n(),
+          };
+          const locale = 'fr-fr';
+          await featureToggles.set('isV3CertificationPageEnabled', false);
+          const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
+          const certificationCourse = domainBuilder.buildCertificationCourse({
+            id: certificationCourseId,
+            version: AlgorithmEngineVersion.V3,
+          });
+          const certificate = domainBuilder.buildPrivateCertificate.validated({
+            id: certificationCourseId,
+            firstName: 'Dorothé',
+            lastName: '2Pac',
+            birthdate: '2000-01-01',
+            birthplace: 'Sin City',
+            isPublished: true,
+            date: new Date('2020-01-01T00:00:00Z'),
+            deliveredAt: new Date('2021-01-01T00:00:00Z'),
+            certificationCenter: 'Centre des choux de Bruxelles',
+            pixScore: 456,
+            commentForCandidate: 'Cette personne est impolie !',
+            certifiedBadgeImages: [],
+            verificationCode: 'P-SUPERCODE',
+            maxReachableLevelOnCertificationDate: 6,
+            version: SESSIONS_VERSIONS.V3,
+          });
+          sinon.stub(certificationSharedUsecases, 'getCertificationCourse');
+          certificationSharedUsecases.getCertificationCourse
+            .withArgs({ certificationCourseId })
+            .resolves(certificationCourse);
+          sinon.stub(usecases, 'getPrivateCertificate');
+          usecases.getPrivateCertificate.withArgs({ userId, certificationCourseId, locale }).resolves(certificate);
+          requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
+
+          // when
+          const response = await certificateController.getCertificate(request, hFake, {
+            requestResponseUtils: requestResponseUtilsStub,
+          });
+
+          // then
+          expect(response).to.deep.equal({
+            data: {
+              id: '2',
+              type: 'certifications',
+              attributes: {
+                'first-name': 'Dorothé',
+                'last-name': '2Pac',
+                birthdate: '2000-01-01',
+                birthplace: 'Sin City',
+                'certification-center': 'Centre des choux de Bruxelles',
+                date: new Date('2020-01-01T00:00:00Z'),
+                'delivered-at': new Date('2021-01-01T00:00:00Z'),
+                'is-published': true,
+                'pix-score': 456,
+                status: 'validated',
+                'comment-for-candidate': 'Cette personne est impolie !',
+                'certified-badge-images': [],
+                'verification-code': 'P-SUPERCODE',
+                'max-reachable-level-on-certification-date': 6,
+                version: SESSIONS_VERSIONS.V3,
+              },
+              relationships: {
+                'result-competence-tree': {
+                  data: null,
+                },
+              },
+            },
+          });
+        });
+      });
+    });
   });
 
   describe('#findUserCertificates', function () {

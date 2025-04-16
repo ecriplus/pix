@@ -201,6 +201,7 @@ describe('Unit | Serializer | JSONAPI | certificate-serializer', function () {
             'first-name': 'Jean',
             'last-name': 'Bon',
             'pix-score': 123,
+            'verification-code': 'P-SOMECODE',
             'global-level-label': shareableCertificate.globalLevel.getLevelLabel(translate),
             'global-summary-label': shareableCertificate.globalLevel.getSummaryLabel(translate),
             'global-description-label': shareableCertificate.globalLevel.getDescriptionLabel(translate),
