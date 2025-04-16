@@ -13,20 +13,13 @@ const pause = async (duration) => {
   });
 };
 
-function getKnowlegdeElementSnapshotsQuery() {
-  return knex('knowledge-element-snapshots').whereRaw("(snapshot->0->>'answerId') is not null");
-}
-
 function getKnowlegdeElementSnapshotLimit(firstId, limit = DEFAULT_CHUNK_SIZE) {
-  return getKnowlegdeElementSnapshotsQuery()
+  return knex('knowledge-element-snapshots')
     .select('id', 'snapshot')
     .limit(limit)
+    .whereRaw("(snapshot->0->>'answerId') is not null")
     .where('id', '>=', firstId)
     .orderBy('id', 'asc');
-}
-
-function getKnowlegdeElementSnapshotCount() {
-  return getKnowlegdeElementSnapshotsQuery().count({ count: 1 }).first();
 }
 
 // Définition du script
@@ -57,26 +50,15 @@ export class CleanKeSnapshotScript extends Script {
   }) {
     const logInfo = (message) => logger.info({ event: 'CleanKeSnapshotScript' }, message);
 
-    const snapshotToClean = await getKnowlegdeElementSnapshotCount();
-
-    const nbChunk = Math.ceil(snapshotToClean.count / (options.chunkSize || DEFAULT_CHUNK_SIZE));
-
-    logInfo(`Start cleaning ${snapshotToClean.count} (${nbChunk} batch) knowledge-element-snapshots to clean.`);
-
     let snapshots = await getKnowlegdeElementSnapshotLimit(0, options.chunkSize);
     let chunkDone = 0;
 
     while (snapshots.length > 0) {
       await knex.transaction(async (trx) => {
         for (const { id, snapshot } of snapshots) {
-          const cleanedSnapshot = pick(snapshot, [
-            'source',
-            'status',
-            'skillId',
-            'createdAt',
-            'earnedPix',
-            'competenceId',
-          ]);
+          const cleanedSnapshot = snapshot.map((item) =>
+            pick(item, ['source', 'status', 'skillId', 'createdAt', 'earnedPix', 'competenceId']),
+          );
           await trx('knowledge-element-snapshots')
             .where('id', id)
             .update({
@@ -92,7 +74,7 @@ export class CleanKeSnapshotScript extends Script {
         await dependencies.pause(options.pauseDuration);
       }
       chunkDone += 1;
-      logInfo(`${chunkDone}/${nbChunk} chunks done !`);
+      logInfo(`${chunkDone} chunks done !`);
     }
   }
 }
