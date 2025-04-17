@@ -1,5 +1,26 @@
 # Pix Changelog
 
+## v5.93.0 (17/04/2025)
+
+
+### :rocket: Amélioration
+- [#12066](https://github.com/1024pix/pix/pull/12066) [FEATURE] Ajouter un sequenceNumber dans les `passage-events`(PIX-17490).
+- [#12070](https://github.com/1024pix/pix/pull/12070) [FEATURE] Retourner le taux de couverture dans le retour du détails des organisations (PIX-17511).
+- [#12069](https://github.com/1024pix/pix/pull/12069) [FEATURE] Créer un premier composant pour afficher les informations du candidat sur la page de certificat V3 (PIX-17519).
+- [#12062](https://github.com/1024pix/pix/pull/12062) [FEATURE] Permettre l'affichage des compétences sur le certificat V3 en ligne (partagé) sur Pix App (PIX-17476).
+
+### :building_construction: Tech
+- [#12050](https://github.com/1024pix/pix/pull/12050) [TECH] Migrer le feature toggle de suppression de compte vers le nouveau système (PIX-17483).
+
+### :bug: Correction
+- [#12077](https://github.com/1024pix/pix/pull/12077) [BUGFIX] Passer les tubes à null pour récupérer les collectes de profil via Campaign-Api.js (PIX-17531).
+- [#12019](https://github.com/1024pix/pix/pull/12019) [BUGFIX] Rajouter les labels sur la nav de Pix admin (PIX-17448).
+- [#12065](https://github.com/1024pix/pix/pull/12065) [BUGFIX] Corriger le script de clean des snapshots (PIX-17471).
+- [#12073](https://github.com/1024pix/pix/pull/12073) [BUGFIX] Ne pas afficher le bouton envoyé ses résultats lorsque la campagne est desactivé (PIX-17521).
+
+### :arrow_up: Montée de version
+- [#12058](https://github.com/1024pix/pix/pull/12058) [BUMP] Update dependency ember-simple-auth to v8 (orga).
+
 ## v5.92.0 (16/04/2025)
 
 
