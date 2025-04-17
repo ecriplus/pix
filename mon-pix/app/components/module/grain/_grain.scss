@@ -49,8 +49,22 @@ $grain-card-border-radius: var(--pix-spacing-4x);
     border-radius: 0 0 $grain-card-border-radius $grain-card-border-radius;
   }
 
-  &--lesson,
-  &--discovery,
+  &--lesson {
+    background: var(--modulix-lesson-card-background);
+
+    .grain-card__footer {
+      background: var(--modulix-lesson-card-footer-background);
+    }
+  }
+
+  &--discovery {
+    background: var(--modulix-lesson-card-background);
+
+    .grain-card__footer {
+      background: var(--modulix-lesson-card-footer-background);
+    }
+  }
+
   &--summary {
     background: var(--modulix-lesson-card-background);
 
@@ -59,7 +73,14 @@ $grain-card-border-radius: var(--pix-spacing-4x);
     }
   }
 
-  &--activity,
+  &--activity {
+    background: var(--modulix-activity-card-background);
+
+    .grain-card__footer {
+      background: var(--modulix-activity-card-footer-background);
+    }
+  }
+
   &--challenge {
     background: var(--modulix-activity-card-background);
 
