@@ -9,11 +9,29 @@ import { Assessment, KnowledgeElement } from '../../../../../../src/shared/domai
 import { databaseBuilder, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Prescription Integration | UseCase | get-user-campaign-assessment-result', function () {
+  let skillIds, userId;
+
+  beforeEach(async function () {
+    skillIds = ['acquisA', 'acquisB'];
+    userId = databaseBuilder.factory.buildUser().id;
+    databaseBuilder.factory.learningContent.buildArea({
+      id: 'monAreaId',
+    });
+    databaseBuilder.factory.learningContent.buildCompetence({
+      id: 'maCompetenceId',
+      areaId: 'monAreaId',
+      name_i18n: {
+        fr: 'nom de la compétence',
+      },
+      skillIds,
+    });
+
+    await databaseBuilder.commit();
+  });
+
   context('when campaign is of type ASSESSMENT', function () {
     it('should return an participant assessment result based on the user profile', async function () {
       // given
-      const skillIds = ['acquisA', 'acquisB'];
-      const userId = databaseBuilder.factory.buildUser().id;
       const campaignId = databaseBuilder.factory.buildCampaign({
         type: CampaignTypes.ASSESSMENT,
       }).id;
@@ -34,17 +52,7 @@ describe('Prescription Integration | UseCase | get-user-campaign-assessment-resu
         campaignParticipationId,
         type: Assessment.types.CAMPAIGN,
       });
-      databaseBuilder.factory.learningContent.buildArea({
-        id: 'monAreaId',
-      });
-      databaseBuilder.factory.learningContent.buildCompetence({
-        id: 'maCompetenceId',
-        areaId: 'monAreaId',
-        name_i18n: {
-          fr: 'nom de la compétence',
-        },
-        skillIds,
-      });
+
       skillIds.map((id, index) => {
         databaseBuilder.factory.learningContent.buildSkill({
           id,
@@ -79,11 +87,10 @@ describe('Prescription Integration | UseCase | get-user-campaign-assessment-resu
       });
     });
   });
+
   context('when campaign is of type EXAM', function () {
-    it('should return an participant assessment result based on the user profile', async function () {
+    it('should return an participant assessment result based on the knowledge element snapshot attach on participation', async function () {
       // given
-      const skillIds = ['acquisA', 'acquisB'];
-      const userId = databaseBuilder.factory.buildUser().id;
       const campaignId = databaseBuilder.factory.buildCampaign({
         type: CampaignTypes.EXAM,
       }).id;
@@ -104,17 +111,7 @@ describe('Prescription Integration | UseCase | get-user-campaign-assessment-resu
         campaignParticipationId,
         type: Assessment.types.CAMPAIGN,
       });
-      databaseBuilder.factory.learningContent.buildArea({
-        id: 'monAreaId',
-      });
-      databaseBuilder.factory.learningContent.buildCompetence({
-        id: 'maCompetenceId',
-        areaId: 'monAreaId',
-        name_i18n: {
-          fr: 'nom de la compétence',
-        },
-        skillIds,
-      });
+
       const domainKEs = skillIds.map((id, index) => {
         databaseBuilder.factory.learningContent.buildSkill({
           id,
