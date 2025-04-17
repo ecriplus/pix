@@ -34,7 +34,6 @@ export default class LoginOidcRoute extends Route {
     }
 
     if (!queryParams.code) {
-      this._cleanSession();
       return this._makeOidcAuthenticationRequest(identityProviderSlug);
     }
   }
@@ -60,11 +59,8 @@ export default class LoginOidcRoute extends Route {
     });
   }
 
-  _cleanSession() {
-    this.session.set('data.nextURL', undefined);
-  }
-
   async _makeOidcAuthenticationRequest(identityProviderSlug) {
+    this.session.set('data.nextURL', undefined);
 
     // Storing the `attemptedTransition` in the localstorage so when the user returns after
     // the login they can be sent to the initial destination.
