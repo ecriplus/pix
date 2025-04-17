@@ -1,6 +1,5 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
-// eslint-disable-next-line no-restricted-imports
-import { find, findAll } from '@ember/test-helpers';
+import { findAll } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import ModuleGrain from 'mon-pix/components/module/grain/grain';
@@ -75,113 +74,6 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
       // then
       assert.dom('.grain__header').doesNotExist();
-    });
-  });
-
-  module('type', function () {
-    test('should have the "activity" color and tag if grain is of type activity', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const grain = store.createRecord('grain', { type: 'activity', title: 'Grain title' });
-      this.set('grain', grain);
-
-      // when
-      const screen = await render(hbs`
-        <Module::Grain::Grain @grain={{this.grain}} />`);
-
-      // then
-      assert.dom(find('.grain-card--activity')).exists();
-      assert.dom(screen.getByText('Activité')).exists();
-    });
-
-    test('should have the "lesson" color and tag if grain is of type lesson', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const grain = store.createRecord('grain', { type: 'lesson', title: 'Grain title' });
-      this.set('grain', grain);
-
-      // when
-      const screen = await render(hbs`
-        <Module::Grain::Grain @grain={{this.grain}} />`);
-
-      // then
-      assert.dom(find('.grain-card--lesson')).exists();
-      assert.dom(screen.getByText('Leçon')).exists();
-    });
-
-    test('should have the "lesson" color and tag if grain is of undefined type', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const grain = store.createRecord('grain', { title: 'Grain title' });
-      this.set('grain', grain);
-
-      // when
-      const screen = await render(hbs`
-        <Module::Grain::Grain @grain={{this.grain}} />`);
-
-      // then
-      assert.dom(find('.grain-card--lesson')).exists();
-      assert.dom(screen.getByText('Leçon')).exists();
-    });
-
-    test('should have the "lesson" color and tag if grain is of unknown type', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const grain = store.createRecord('grain', { type: 'yolo', title: 'Grain title' });
-      this.set('grain', grain);
-
-      // when
-      const screen = await render(hbs`
-        <Module::Grain::Grain @grain={{this.grain}} />`);
-
-      // then
-      assert.dom(find('.grain-card--lesson')).exists();
-      assert.dom(screen.getByText('Leçon')).exists();
-    });
-
-    test('should have the "discovery" color and tag if grain is of type discovery', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const grain = store.createRecord('grain', { type: 'discovery', title: 'Grain title' });
-      this.set('grain', grain);
-
-      // when
-      const screen = await render(hbs`
-        <Module::Grain::Grain @grain={{this.grain}} />`);
-
-      // then
-      assert.dom(find('.grain-card--discovery')).exists();
-      assert.dom(screen.getByText('Découverte')).exists();
-    });
-
-    test('should have the "challenge" color and tag if grain is of type challenge', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const grain = store.createRecord('grain', { type: 'challenge', title: 'Grain title' });
-      this.set('grain', grain);
-
-      // when
-      const screen = await render(hbs`
-        <Module::Grain::Grain @grain={{this.grain}} />`);
-
-      // then
-      assert.dom(find('.grain-card--challenge')).exists();
-      assert.dom(screen.getByText('Défi')).exists();
-    });
-
-    test('should have the "summary" color and tag if grain is of type summary', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const grain = store.createRecord('grain', { type: 'summary', title: 'Grain title' });
-      this.set('grain', grain);
-
-      // when
-      const screen = await render(hbs`
-        <Module::Grain::Grain @grain={{this.grain}} />`);
-
-      // then
-      assert.dom(find('.grain-card--summary')).exists();
-      assert.dom(screen.getByText("Récap'")).exists();
     });
   });
 
