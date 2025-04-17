@@ -18,6 +18,13 @@ export default class ModulePassage extends Component {
   displayableGrains = this.args.module.grains.filter((grain) => ModuleGrain.getSupportedComponents(grain).length > 0);
   @tracked grainsToDisplay = this.displayableGrains.length > 0 ? [this.displayableGrains[0]] : [];
 
+  displayableGrainsInNavbar = this.displayableGrains.filter((grain) => grain.type !== 'transition');
+  @tracked grainsToDisplayInNavbar = this.grainsToDisplay.filter((grain) => grain.type !== 'transition');
+
+  get navbarCurrentPassageStep() {
+    return this.grainsToDisplayInNavbar.length;
+  }
+
   @action
   hasGrainJustAppeared(index) {
     if (this.grainsToDisplay.length === 1) {
@@ -86,6 +93,10 @@ export default class ModulePassage extends Component {
 
     const nextGrain = this.displayableGrains[this.currentGrainIndex + 1];
     this.grainsToDisplay = [...this.grainsToDisplay, nextGrain];
+
+    if (nextGrain.type !== 'transition') {
+      this.grainsToDisplayInNavbar = [...this.grainsToDisplayInNavbar, nextGrain];
+    }
   }
 
   @action
@@ -202,7 +213,7 @@ export default class ModulePassage extends Component {
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.id}`,
-      'pix-event-name': `Click sur le bouton Étape ${this.currentPassageStep} sur ${this.displayableGrains.length} de la barre de navigation`,
+      'pix-event-name': `Click sur le bouton Étape ${this.navbarCurrentPassageStep} sur ${this.displayableGrainsInNavbar.length} de la barre de navigation`,
     });
   }
 
@@ -236,10 +247,10 @@ export default class ModulePassage extends Component {
       <BetaBanner />
     {{/if}}
     <ModuleNavbar
-      @currentStep={{this.currentPassageStep}}
-      @totalSteps={{this.displayableGrains.length}}
+      @currentStep={{this.navbarCurrentPassageStep}}
+      @totalSteps={{this.displayableGrainsInNavbar.length}}
       @module={{@module}}
-      @grainsToDisplay={{this.grainsToDisplay}}
+      @grainsToDisplay={{this.grainsToDisplayInNavbar}}
       @goToGrain={{this.goToGrain}}
       @onSidebarOpen={{this.onSidebarOpen}}
     />
