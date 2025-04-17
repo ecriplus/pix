@@ -8,6 +8,10 @@
   padding-bottom: var(--pix-spacing-6x);
   border-bottom: 1px solid rgb(var(--pix-primary-100-inline), 0.8);
   margin-block: var(--pix-spacing-6x) var(--pix-spacing-8x);
+
+  &__breadcrumb {
+    flex-direction: column;
+  }
 }
 
 .global-page-header__left-content {
@@ -32,3 +36,5 @@
   color: var(--pix-neutral-500);
   text-wrap: balance;
 }
+
+
