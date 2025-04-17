@@ -3,10 +3,8 @@
 $grain-card-border-radius: var(--pix-spacing-4x);
 
 .grain {
-  --modulix-lesson-card-background: var(--pix-info-50);
-  --modulix-lesson-card-footer-background: rgb(237 245 254);
-  --modulix-activity-card-background: var(--pix-neutral-20);
-  --modulix-activity-card-footer-background: rgb(247 249 250);
+  --modulix-summary-card-background: var(--pix-secondary-100);
+  --modulix-challenge-card-background: rgba(var(--pix-primary-100-inline), 0.3);
 
   width: 100%;
 
@@ -44,48 +42,26 @@ $grain-card-border-radius: var(--pix-spacing-4x);
   }
 
   &__footer {
-    padding: var(--pix-spacing-6x);
-    border-top: 1px solid var(--pix-neutral-100);
+    padding: var(--pix-spacing-2x) var(--pix-spacing-6x);
+    border-top: 0 solid var(--pix-neutral-100);
     border-radius: 0 0 $grain-card-border-radius $grain-card-border-radius;
   }
 
-  &--lesson {
-    background: var(--modulix-lesson-card-background);
-
-    .grain-card__footer {
-      background: var(--modulix-lesson-card-footer-background);
-    }
-  }
-
-  &--discovery {
-    background: var(--modulix-lesson-card-background);
-
-    .grain-card__footer {
-      background: var(--modulix-lesson-card-footer-background);
-    }
-  }
-
   &--summary {
-    background: var(--modulix-lesson-card-background);
+    background: var(--modulix-summary-card-background);
 
     .grain-card__footer {
-      background: var(--modulix-lesson-card-footer-background);
-    }
-  }
-
-  &--activity {
-    background: var(--modulix-activity-card-background);
-
-    .grain-card__footer {
-      background: var(--modulix-activity-card-footer-background);
+      padding: var(--pix-spacing-6x);
+      border-top: 1px solid var(--pix-neutral-100);
     }
   }
 
   &--challenge {
-    background: var(--modulix-activity-card-background);
+    background: var(--modulix-challenge-card-background);
 
     .grain-card__footer {
-      background: var(--modulix-activity-card-footer-background);
+      padding: var(--pix-spacing-6x);
+      border-top: 1px solid var(--pix-neutral-100);
     }
   }
 }
