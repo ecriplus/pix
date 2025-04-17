@@ -1,3 +1,5 @@
+import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
+
 /**
  * @param {{
  *   userId: string,
@@ -5,6 +7,6 @@
  * }} params
  * @return {Promise<User>}
  */
-export const acceptPixCertifTermsOfService = function ({ userId, userRepository }) {
+export const acceptPixCertifTermsOfService = withTransaction(function ({ userId, userRepository }) {
   return userRepository.updatePixCertifTermsOfServiceAcceptedToTrue(userId);
-};
+});
