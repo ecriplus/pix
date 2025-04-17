@@ -34,32 +34,31 @@ export default class LoginOidcRoute extends Route {
     }
 
     if (!queryParams.code) {
-      return this._makeOidcAuthenticationRequest(identityProviderSlug);
+      return this._makeOidcAuthenticationRequest(identityProvider);
     }
   }
 
   async model(params, transition) {
-    const queryParams = transition.to.queryParams;
-
+    const { code, state, iss } = transition.to.queryParams;
     const identityProviderSlug = params.identity_provider_slug;
-    if (queryParams.code) {
-      return this._handleOidcCallbackRequest(queryParams.code, queryParams.state, queryParams.iss, identityProviderSlug);
+    const identityProvider = this.oidcIdentityProviders[identityProviderSlug];
+    if (code) {
+      return this._handleOidcCallbackRequest({ code, state, iss, identityProvider });
     }
   }
 
   afterModel({ shouldValidateCgu, identityProviderSlug } = {}) {
     const shouldCreateAnAccountForUser = shouldValidateCgu && oidcUserAuthenticationStorage.get().authenticationKey;
-
-    if (!shouldCreateAnAccountForUser) return;
-
-    return this.router.replaceWith('authentication.login-or-register-oidc', {
-      queryParams: {
-        identityProviderSlug,
-      },
-    });
+    if (shouldCreateAnAccountForUser) {
+      return this.router.replaceWith('authentication.login-or-register-oidc', {
+        queryParams: {
+          identityProviderSlug,
+        },
+      });
+    }
   }
 
-  async _makeOidcAuthenticationRequest(identityProviderSlug) {
+  async _makeOidcAuthenticationRequest(identityProvider) {
     this.session.set('data.nextURL', undefined);
 
     // Storing the `attemptedTransition` in the localstorage so when the user returns after
@@ -77,15 +76,15 @@ export default class LoginOidcRoute extends Route {
       this.session.set('data.nextURL', url);
     }
 
-    const identityProvider = this.oidcIdentityProviders[identityProviderSlug]?.code;
     const response = await fetch(
-      `${ENV.APP.API_HOST}/api/oidc/authorization-url?identity_provider=${identityProvider}`,
+      `${ENV.APP.API_HOST}/api/oidc/authorization-url?identity_provider=${identityProvider.code}`,
     );
     const { redirectTarget } = await response.json();
     this.location.replace(redirectTarget);
   }
 
-  async _handleOidcCallbackRequest(code, state, iss, identityProviderSlug) {
+  async _handleOidcCallbackRequest({ identityProvider, code, state, iss }) {
+    const identityProviderSlug = identityProvider.slug;
     try {
       await this.session.authenticate('authenticator:oidc', {
         code,
@@ -99,7 +98,6 @@ export default class LoginOidcRoute extends Route {
       const error = new JSONApiError(apiError.detail, apiError);
 
       const shouldValidateCgu = error.code === 'SHOULD_VALIDATE_CGU';
-
       if (shouldValidateCgu && error.meta.authenticationKey) {
         oidcUserAuthenticationStorage.set(error.meta);
         return { shouldValidateCgu, identityProviderSlug };
