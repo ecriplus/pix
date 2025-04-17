@@ -27,7 +27,7 @@ describe('Integration | Legal document | Infrastructure | Repository | user-acce
   });
 
   describe('#findLastForLegalDocument', function () {
-    it('finds the last user acceptance record for a legal document type and service.', async function () {
+    it('finds the last user acceptance record for a legal document type and service', async function () {
       // given
       const user = databaseBuilder.factory.buildUser();
       const oldDocumentVersion = databaseBuilder.factory.buildLegalDocumentVersion({
@@ -122,7 +122,7 @@ describe('Integration | Legal document | Infrastructure | Repository | user-acce
   });
 
   describe('#findByLegalDocumentVersionId', function () {
-    it('finds the last user acceptance record for a legal document id.', async function () {
+    it('finds the last user acceptance record for a legal document id', async function () {
       // given
       const user = databaseBuilder.factory.buildUser();
       const oldDocumentVersion = databaseBuilder.factory.buildLegalDocumentVersion({
@@ -175,6 +175,72 @@ describe('Integration | Legal document | Infrastructure | Repository | user-acce
         // then
         expect(userAcceptance).to.be.null;
       });
+    });
+  });
+
+  describe('#findByUserId', function () {
+    it('returns legal document version user acceptances of the given user', async function () {
+      // given
+      const legalDocumentVersion = databaseBuilder.factory.buildLegalDocumentVersion({
+        type: TOS,
+        service: PIX_ORGA,
+        versionAt: new Date('2024-02-01'),
+      });
+
+      const user = databaseBuilder.factory.buildUser();
+      const userAcceptanceId = databaseBuilder.factory.buildLegalDocumentVersionUserAcceptance({
+        userId: user.id,
+        legalDocumentVersionId: legalDocumentVersion.id,
+        acceptedAt: new Date('2024-03-01'),
+      }).id;
+
+      const user2 = databaseBuilder.factory.buildUser();
+      databaseBuilder.factory.buildLegalDocumentVersionUserAcceptance({
+        userId: user2.id,
+        legalDocumentVersionId: legalDocumentVersion.id,
+        acceptedAt: new Date('2024-03-01'),
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const userAcceptances = await userAcceptanceRepository.findByUserId(user.id);
+
+      // then
+      expect(userAcceptances).to.have.length(1);
+      expect(userAcceptances[0].id).to.equal(userAcceptanceId);
+    });
+  });
+
+  describe('#update', function () {
+    it('updates the legal document version user acceptance corresponding to the given id', async function () {
+      // given
+      const legalDocumentVersion = databaseBuilder.factory.buildLegalDocumentVersion({
+        type: TOS,
+        service: PIX_ORGA,
+        versionAt: new Date('2024-03-01'),
+      });
+
+      const user = databaseBuilder.factory.buildUser();
+      const userAcceptanceId = databaseBuilder.factory.buildLegalDocumentVersionUserAcceptance({
+        userId: user.id,
+        legalDocumentVersionId: legalDocumentVersion.id,
+        acceptedAt: new Date('2024-03-01'),
+      }).id;
+
+      await databaseBuilder.commit();
+
+      // when
+      await userAcceptanceRepository.update({
+        id: userAcceptanceId,
+        acceptedAt: new Date('2025-03-01'),
+      });
+
+      // then
+      const userAcceptance = await knex('legal-document-version-user-acceptances')
+        .where({ id: userAcceptanceId })
+        .first();
+      expect(userAcceptance.acceptedAt.toISOString()).to.equal('2025-03-01T00:00:00.000Z');
     });
   });
 });

@@ -62,4 +62,16 @@ const findByLegalDocumentVersionId = async ({ userId, legalDocumentVersionId }) 
   return userAcceptanceDto;
 };
 
-export { create, findByLegalDocumentVersionId, findLastForLegalDocument };
+const findByUserId = async function (userId) {
+  const knexConn = DomainTransaction.getConnection();
+  const userAcceptanceDtos = await knexConn.from(TABLE_NAME).where({ userId });
+  return userAcceptanceDtos;
+};
+
+const update = async function (properties) {
+  const knexConn = DomainTransaction.getConnection();
+  const { id, ...data } = properties;
+  await knexConn(TABLE_NAME).where({ id }).update(data);
+};
+
+export { create, findByLegalDocumentVersionId, findByUserId, findLastForLegalDocument, update };
