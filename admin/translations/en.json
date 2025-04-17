@@ -392,6 +392,11 @@
         "certifications": "Certifications",
         "complementary-certifications": "Compl. certifications",
         "complementary-certifications-label": "Complementary certifications",
+        "labels": {
+          "close": "Close navigation",
+          "main": "Main navigation",
+          "open": "Open navigation"
+        },
         "logout": "Log out",
         "organizations": "Organizations",
         "sessions": "Certif sessions",
