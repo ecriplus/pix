@@ -25,20 +25,35 @@ const findPaginatedFilteredOrganizationCampaigns = withTransaction(async functio
   }
 
   for (const campaignReport of campaignReports.models) {
-    const campaignParticipationIds = await campaignParticipationRepository.getSharedParticipationIds(campaignReport.id);
-
-    const knowledgeElementsByParticipation =
-      await knowledgeElementSnapshotRepository.findByCampaignParticipationIds(campaignParticipationIds);
-
-    const learningContent = await learningContentRepository.findByCampaignId(campaignReport.id, locale);
-    const campaignResultLevelPerTubesAndCompetences = new CampaignResultLevelsPerTubesAndCompetences({
-      campaignId: campaignReport.id,
-      learningContent,
-      knowledgeElementsByParticipation,
-    });
-    campaignReport.setCoverRate(campaignResultLevelPerTubesAndCompetences);
+    if (campaignReport.canComputeCoverRate) {
+      const coverRate = await computeCoverRate(campaignReport.id, locale, {
+        campaignParticipationRepository,
+        knowledgeElementSnapshotRepository,
+        learningContentRepository,
+      });
+      campaignReport.setCoverRate(coverRate);
+    }
   }
   return campaignReports;
 });
 
 export { findPaginatedFilteredOrganizationCampaigns };
+
+async function computeCoverRate(
+  campaignReportId,
+  locale,
+  { campaignParticipationRepository, knowledgeElementSnapshotRepository, learningContentRepository },
+) {
+  const campaignParticipationIds = await campaignParticipationRepository.getSharedParticipationIds(campaignReportId);
+
+  const knowledgeElementsByParticipation =
+    await knowledgeElementSnapshotRepository.findByCampaignParticipationIds(campaignParticipationIds);
+
+  const learningContent = await learningContentRepository.findByCampaignId(campaignReportId, locale);
+  const campaignResultLevelPerTubesAndCompetences = new CampaignResultLevelsPerTubesAndCompetences({
+    campaignId: campaignReportId,
+    learningContent,
+    knowledgeElementsByParticipation,
+  });
+  return campaignResultLevelPerTubesAndCompetences;
+}

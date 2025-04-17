@@ -47,6 +47,7 @@ class CampaignReport {
     this.badges = badges;
     this.stages = stages;
     this.multipleSendings = multipleSendings;
+    this.tubes = this.canComputeCoverRate ? undefined : null;
   }
 
   get isAssessment() {
@@ -59,6 +60,10 @@ class CampaignReport {
 
   get isProfilesCollection() {
     return this.type === CampaignTypes.PROFILES_COLLECTION;
+  }
+
+  get canComputeCoverRate() {
+    return !this.isProfilesCollection;
   }
 
   get isArchived() {
