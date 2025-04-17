@@ -35,7 +35,7 @@ export default class LoginOidcRoute extends Route {
 
     if (!queryParams.code) {
       this._cleanSession();
-      return this._handleRedirectRequest(identityProviderSlug);
+      return this._makeOidcAuthenticationRequest(identityProviderSlug);
     }
   }
 
@@ -44,7 +44,7 @@ export default class LoginOidcRoute extends Route {
 
     const identityProviderSlug = params.identity_provider_slug;
     if (queryParams.code) {
-      return this._handleCallbackRequest(queryParams.code, queryParams.state, queryParams.iss, identityProviderSlug);
+      return this._handleOidcCallbackRequest(queryParams.code, queryParams.state, queryParams.iss, identityProviderSlug);
     }
   }
 
@@ -64,7 +64,7 @@ export default class LoginOidcRoute extends Route {
     this.session.set('data.nextURL', undefined);
   }
 
-  async _handleCallbackRequest(code, state, iss, identityProviderSlug) {
+  async _handleOidcCallbackRequest(code, state, iss, identityProviderSlug) {
     try {
       await this.session.authenticate('authenticator:oidc', {
         code,
@@ -88,7 +88,7 @@ export default class LoginOidcRoute extends Route {
     }
   }
 
-  async _handleRedirectRequest(identityProviderSlug) {
+  async _makeOidcAuthenticationRequest(identityProviderSlug) {
 
     // Storing the `attemptedTransition` in the localstorage so when the user returns after
     // the login they can be sent to the initial destination.
