@@ -2,6 +2,7 @@ import { ResultCompetence } from '../../../../../../src/certification/results/do
 import { ResultCompetenceTree } from '../../../../../../src/certification/results/domain/models/ResultCompetenceTree.js';
 import * as serializer from '../../../../../../src/certification/results/infrastructure/serializers/certificate-serializer.js';
 import { SESSIONS_VERSIONS } from '../../../../../../src/certification/shared/domain/models/SessionVersion.js';
+import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Serializer | JSONAPI | certificate-serializer', function () {
@@ -51,9 +52,10 @@ describe('Unit | Serializer | JSONAPI | certificate-serializer', function () {
           maxReachableLevelOnCertificationDate: 6,
           version: SESSIONS_VERSIONS.V3,
         });
+        const translate = getI18n().__;
 
         // when
-        const serializedCertifications = serializer.serialize(shareableCertificate);
+        const serializedCertifications = serializer.serialize({ certificate: shareableCertificate, translate });
 
         // then
         expect(serializedCertifications.data).to.deep.equal({
@@ -181,9 +183,10 @@ describe('Unit | Serializer | JSONAPI | certificate-serializer', function () {
           id: 123,
           resultCompetenceTree,
         });
+        const translate = getI18n().__;
 
         // when
-        const serializedCertifications = serializer.serialize(shareableCertificate);
+        const serializedCertifications = serializer.serialize({ certificate: shareableCertificate, translate });
 
         // then
         expect(serializedCertifications.data).to.deep.equal({
@@ -198,6 +201,10 @@ describe('Unit | Serializer | JSONAPI | certificate-serializer', function () {
             'first-name': 'Jean',
             'last-name': 'Bon',
             'pix-score': 123,
+            'global-level-label': shareableCertificate.globalLevel.getLevelLabel(translate),
+            'global-summary-label': shareableCertificate.globalLevel.getSummaryLabel(translate),
+            'global-description-label': shareableCertificate.globalLevel.getDescriptionLabel(translate),
+            'certification-date': new Date('2015-10-03T01:02:03Z'),
           },
           relationships: {
             'result-competence-tree': {

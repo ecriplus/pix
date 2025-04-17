@@ -274,6 +274,7 @@ async function _toDomainForCertificationAttestation({ certificationCourseDTO, co
   ) {
     return new V3Certificate({
       ...certificationCourseDTO,
+      certificationDate: certificationCourseDTO.date,
       resultCompetenceTree: (await featureToggles.get('isV3CertificationPageEnabled')) ? resultCompetenceTree : [],
     });
   }

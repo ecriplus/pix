@@ -616,9 +616,11 @@
         "download": "Download my certificate"
       },
       "back-link": "Return to my certificates",
+      "candidate": "Candidate:",
       "candidate-birth": "Born on {birthdate}",
       "candidate-birth-complete": "Born on {birthdate} in {birthplace}",
       "certification-center": "Certification centre:",
+      "certification-date": "Exam date:",
       "competences": {
         "information": "Your certified score was calculated based on the answers you gave whilst taking the certification. It may be different from the score shown on your profile. When you took the certification, it was possible to reach a maximum of level {maxReachableLevelOnCertificationDate} in each competence and {maxReachablePixCountOnCertificationDate} pix.",
         "subtitle": "(levels out of {maxReachableLevel})",
@@ -628,6 +630,7 @@
         "alternative": "Additional certification",
         "title": "Other certification awarded"
       },
+      "delivered-at": "Date of issue:",
       "exam-date": "Completion date:",
       "hexagon-score": {
         "certified": "certified"
@@ -2173,7 +2176,7 @@
         },
         "title": "Deactivated courses"
       },
-       "description": "Access your Pix tests, track your progress, and easily pick up where you left off.",
+      "description": "Access your Pix tests, track your progress, and easily pick up where you left off.",
       "title": "My customised tests"
     },
     "user-trainings": {

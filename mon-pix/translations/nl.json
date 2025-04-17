@@ -617,6 +617,9 @@
       "candidate-birth": "Geboren op {birthdate}",
       "candidate-birth-complete": "Geboren op {birthdate} te {birthplace}.",
       "certification-center": "Certificeringscentrum :",
+      "delivered-at": "Date of issue:",
+      "certification-date": "Exam date:",
+      "candidate": "Candidate:",
       "competences": {
         "information": "Je gecertificeerde score is berekend op basis van je antwoorden tijdens het certificeringsproces. Deze kan daarom afwijken van het aantal Pix dat wordt weergegeven in je profiel. Op de dag van je certificering was het mogelijk om het {maxReachableLevelOnCertificationDate} vaardigheidsniveau en {maxReachablePixCountOnCertificationDate} pix maximaal te behalen.",
         "subtitle": "(niveaus op {maxReachableLevel})",

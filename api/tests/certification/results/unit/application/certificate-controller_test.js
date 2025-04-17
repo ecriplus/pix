@@ -19,8 +19,9 @@ describe('Certification | Results | Unit | Application | certificate-controller'
       describe('when isV3CertificationPageEnabled feature toggle is enabled', function () {
         it('should return serialized V3 certificate data', async function () {
           // given
+          const i18n = getI18n();
           await featureToggles.set('isV3CertificationPageEnabled', true);
-          const request = { payload: { verificationCode: 'P-123456BB' } };
+          const request = { i18n, payload: { verificationCode: 'P-123456BB' } };
           const locale = 'fr-fr';
           const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
           const certificateSerializerStub = { serialize: sinon.stub() };
@@ -53,8 +54,9 @@ describe('Certification | Results | Unit | Application | certificate-controller'
       describe('when isV3CertificationPageEnabled feature toggle is disabled', function () {
         it('should return serialized V2 certificate data', async function () {
           // given
+          const i18n = getI18n();
           await featureToggles.set('isV3CertificationPageEnabled', false);
-          const request = { payload: { verificationCode: 'P-123456BB' } };
+          const request = { i18n, payload: { verificationCode: 'P-123456BB' } };
           const locale = 'fr-fr';
           const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
           const certificateSerializerStub = { serialize: sinon.stub() };
@@ -91,7 +93,8 @@ describe('Certification | Results | Unit | Application | certificate-controller'
     describe('when certification course version is V2', function () {
       it('should return a serialized shareable certificate given by verification code', async function () {
         // given
-        const request = { payload: { verificationCode: 'P-123456BB' } };
+        const i18n = getI18n();
+        const request = { i18n, payload: { verificationCode: 'P-123456BB' } };
         const locale = 'fr-fr';
         const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
         const certificateSerializerStub = { serialize: sinon.stub() };

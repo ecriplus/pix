@@ -32,6 +32,8 @@ function certificationResponse({ version }) {
         'certified-badge-images': [],
         version,
         'algorithm-engine-version': version,
+        'certification-date': '2020-01-31T00:00:00.000Z',
+        'global-level-label': 'Intermédiaire 1',
       },
       relationships: {
         'result-competence-tree': {

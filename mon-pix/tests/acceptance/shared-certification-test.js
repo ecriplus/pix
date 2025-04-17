@@ -24,7 +24,8 @@ module('Acceptance | Certificate verification', function (hooks) {
         await click(screen.getByRole('button', { name: 'Vérifier le certificat' }));
 
         // then
-        assert.dom(screen.getByRole('heading', { name: 'Page Certificat V3' })).exists();
+        assert.dom(screen.getByRole('heading', { name: t('pages.certificate.title') })).exists();
+        assert.dom(screen.getByText('Intermédiaire 1')).exists();
       });
     });
 
