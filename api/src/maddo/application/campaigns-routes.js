@@ -28,16 +28,22 @@ const register = async function (server) {
         response: {
           failAction: 'log',
           status: {
-            200: Joi.object({
-              id: Joi.number().description('ID de la participation à la campagne'),
-              createdAt: Joi.date().description('Date de début de participation'),
-              participantExternalId: Joi.string().description('Identifiant Externe rempli en début de participation'),
-              status: Joi.string().description('Statut de la participation : STARTED, TO_SHARE, SHARED'),
-              sharedAt: Joi.date().description('Date de participation'),
-              campaignId: Joi.number().description('ID de la campagne liée à la participation'),
-              userId: Joi.number().description('ID utilisateur du participant'),
-              organizationLearnerId: Joi.number().description("ID du participant au sein de l'organisation"),
-            }).label('CampaignParticipation'),
+            200: Joi.array()
+              .items(
+                Joi.object({
+                  id: Joi.number().description('ID de la participation à la campagne'),
+                  createdAt: Joi.date().description('Date de début de participation'),
+                  participantExternalId: Joi.string().description(
+                    'Identifiant Externe rempli en début de participation',
+                  ),
+                  status: Joi.string().description('Statut de la participation : STARTED, TO_SHARE, SHARED'),
+                  sharedAt: Joi.date().description('Date de participation'),
+                  campaignId: Joi.number().description('ID de la campagne liée à la participation'),
+                  userId: Joi.number().description('ID utilisateur du participant'),
+                  organizationLearnerId: Joi.number().description("ID du participant au sein de l'organisation"),
+                }).label('CampaignParticipation'),
+              )
+              .label('CampaignParticipations'),
             401: responseObjectErrorDoc,
             403: responseObjectErrorDoc,
           },
