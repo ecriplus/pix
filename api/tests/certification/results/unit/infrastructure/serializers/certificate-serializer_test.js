@@ -205,6 +205,7 @@ describe('Unit | Serializer | JSONAPI | certificate-serializer', function () {
             'global-level-label': shareableCertificate.globalLevel.getLevelLabel(translate),
             'global-summary-label': shareableCertificate.globalLevel.getSummaryLabel(translate),
             'global-description-label': shareableCertificate.globalLevel.getDescriptionLabel(translate),
+            level: '1',
             'certification-date': new Date('2015-10-03T01:02:03Z'),
           },
           relationships: {
