@@ -30,7 +30,7 @@ export default class LoginOidcRoute extends Route {
     if (!queryParams.code) {
       this._cleanSession();
 
-      const identityProviderSlug = transition.to.params.identity_provider_slug.toString();
+      const identityProviderSlug = transition.to.params.identity_provider_slug;
       const isSupportedIdentityProvider = this.oidcIdentityProviders[identityProviderSlug] ?? null;
       if (isSupportedIdentityProvider) return this._handleRedirectRequest(identityProviderSlug);
 
