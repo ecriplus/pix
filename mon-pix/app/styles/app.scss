@@ -30,6 +30,8 @@
 @use 'components/certification-not-certifiable' as *;
 @use 'components/certifications-list' as *;
 @use 'components/certifications-list-item' as *;
+@use 'components/certifications/certificate-information/candidate-information' as *;
+@use 'components/certifications/certificate-information/competences-details' as *;
 @use 'components/certifications/certification-ender' as *;
 @use 'components/communication-banner' as *;
 @use 'components/companion/blocker' as *;
@@ -45,7 +47,6 @@
 @use 'components/choice-chip' as *;
 @use 'components/reset-campaign-participation-modal' as *;
 @use 'components/tabs' as *;
-@use 'components/certifications/certificate-information/candidate-information' as *;
 
 /* we need this to be before competence-card-default because of a mix
 of an adaptative/mobile-first approach — refactoring is welcome here */

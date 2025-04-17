@@ -631,6 +631,12 @@
         "title": "Other certification awarded"
       },
       "delivered-at": "Date of issue:",
+      "details": {
+        "competences": {
+          "description": "Your Pix score gives an estimate of your level in the 16 digital skills.",
+          "title": "Your digital skills profile"
+        }
+      },
       "exam-date": "Completion date:",
       "hexagon-score": {
         "certified": "certified"
