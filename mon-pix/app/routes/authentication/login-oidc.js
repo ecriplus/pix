@@ -27,14 +27,15 @@ export default class LoginOidcRoute extends Route {
       throw error;
     }
 
+    const identityProviderSlug = transition.to.params.identity_provider_slug;
+    const identityProvider = this.oidcIdentityProviders[identityProviderSlug];
+    if (!identityProvider) {
+      return this.router.replaceWith('authentication.login');
+    }
+
     if (!queryParams.code) {
       this._cleanSession();
-
-      const identityProviderSlug = transition.to.params.identity_provider_slug;
-      const isSupportedIdentityProvider = this.oidcIdentityProviders[identityProviderSlug] ?? null;
-      if (isSupportedIdentityProvider) return this._handleRedirectRequest(identityProviderSlug);
-
-      return this.router.replaceWith('authentication.login');
+      return this._handleRedirectRequest(identityProviderSlug);
     }
   }
 
