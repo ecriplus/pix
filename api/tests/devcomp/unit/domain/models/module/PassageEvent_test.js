@@ -54,7 +54,7 @@ describe('Unit | Devcomp | Domain | Models | PassageEvent', function () {
         // given
         class FakeEvent extends PassageEvent {
           constructor() {
-            super({ id: 1, type: 'FAKE', passageId: 124, occurredAt: 'abcd' });
+            super({ id: 1, type: 'FAKE', passageId: 124, occurredAt: 'abcd', sequenceNumber: 2 });
           }
         }
 
@@ -72,7 +72,7 @@ describe('Unit | Devcomp | Domain | Models | PassageEvent', function () {
         // given
         class FakeEvent extends PassageEvent {
           constructor() {
-            super({ id: 1, type: 'FAKE', occurredAt: Symbol('date'), createdAt: Symbol('date') });
+            super({ id: 1, type: 'FAKE', occurredAt: new Date(), createdAt: Symbol('date') });
           }
         }
 
@@ -82,6 +82,30 @@ describe('Unit | Devcomp | Domain | Models | PassageEvent', function () {
         // then
         expect(error).to.be.instanceOf(DomainError);
         expect(error.message).to.equal('The passageId is required for a PassageEvent');
+      });
+    });
+
+    describe('if a passage event does not have a sequenceNumber', function () {
+      it('should throw an error', function () {
+        // given
+        class FakeEvent extends PassageEvent {
+          constructor() {
+            super({
+              id: 1,
+              type: 'FAKE',
+              passageId: 124,
+              occurredAt: new Date(),
+              createdAt: Symbol('date'),
+            });
+          }
+        }
+
+        // when
+        const error = catchErrSync(() => new FakeEvent())();
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal('The sequenceNumber is required for a PassageEvent');
       });
     });
 
@@ -96,6 +120,7 @@ describe('Unit | Devcomp | Domain | Models | PassageEvent', function () {
               occurredAt: new Date(),
               createdAt: Symbol('date'),
               passageId: 'blablabla',
+              sequenceNumber: 2,
             });
           }
         }
@@ -113,7 +138,7 @@ describe('Unit | Devcomp | Domain | Models | PassageEvent', function () {
         const passageId = 2;
         class FakeEvent extends PassageEvent {
           constructor() {
-            super({ id: 1, type: 'FAKE', occurredAt: new Date(), passageId });
+            super({ id: 1, type: 'FAKE', occurredAt: new Date(), passageId, sequenceNumber: 2 });
           }
         }
 
@@ -125,6 +150,70 @@ describe('Unit | Devcomp | Domain | Models | PassageEvent', function () {
       });
     });
 
+    describe('#setSequenceNumber', function () {
+      it('should throw an error when sequenceNumber is a string', function () {
+        // given
+        class FakeEvent extends PassageEvent {
+          constructor() {
+            super({
+              id: 1,
+              type: 'FAKE',
+              occurredAt: new Date(),
+              createdAt: Symbol('date'),
+              passageId: 123,
+              sequenceNumber: '9',
+            });
+          }
+        }
+
+        // when
+        const error = catchErrSync(() => new FakeEvent())();
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal('The sequenceNumber should be a number');
+      });
+
+      it('should throw an error when sequenceNumber < 0', function () {
+        // given
+        class FakeEvent extends PassageEvent {
+          constructor() {
+            super({
+              id: 1,
+              type: 'FAKE',
+              occurredAt: new Date(),
+              createdAt: Symbol('date'),
+              passageId: 123,
+              sequenceNumber: -12,
+            });
+          }
+        }
+
+        // when
+        const error = catchErrSync(() => new FakeEvent())();
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal('The sequenceNumber should be a number higher than 0');
+      });
+
+      it('sets sequenceNumber when it is valid', function () {
+        // given
+        const sequenceNumber = 3;
+        class FakeEvent extends PassageEvent {
+          constructor() {
+            super({ id: 1, type: 'FAKE', occurredAt: new Date(), passageId: 2, sequenceNumber });
+          }
+        }
+
+        // when
+        const fakeEvent = new FakeEvent();
+
+        // then
+        expect(fakeEvent.sequenceNumber).to.deep.equal(sequenceNumber);
+      });
+    });
+
     describe('if a passage event has minimal required attributes', function () {
       it('should create a PassageEvent and set id attribute', function () {
         // given
@@ -132,9 +221,11 @@ describe('Unit | Devcomp | Domain | Models | PassageEvent', function () {
         const occurredAt = new Date('2025-04-27T15:02:00Z');
         const createdAt = Symbol('date');
         const passageId = 3;
+        const sequenceNumber = 3;
+
         class FakeEvent extends PassageEvent {
           constructor() {
-            super({ id, type: 'FAKE', occurredAt, createdAt, passageId });
+            super({ id, type: 'FAKE', occurredAt, createdAt, passageId, sequenceNumber });
           }
         }
 
@@ -151,9 +242,10 @@ describe('Unit | Devcomp | Domain | Models | PassageEvent', function () {
         const occurredAt = new Date('2025-04-27T15:02:00Z');
         const createdAt = Symbol('date');
         const passageId = 3;
+        const sequenceNumber = 3;
         class FakeEvent extends PassageEvent {
           constructor() {
-            super({ id, type: 'FAKE', occurredAt, createdAt, passageId });
+            super({ id, type: 'FAKE', occurredAt, createdAt, passageId, sequenceNumber });
           }
         }
 
@@ -170,9 +262,10 @@ describe('Unit | Devcomp | Domain | Models | PassageEvent', function () {
         const occurredAt = new Date('2025-04-27T15:02:00Z');
         const createdAt = Symbol('date');
         const passageId = 3;
+        const sequenceNumber = 3;
         class FakeEvent extends PassageEvent {
           constructor() {
-            super({ id, type: 'FAKE', occurredAt, createdAt, passageId });
+            super({ id, type: 'FAKE', occurredAt, createdAt, passageId, sequenceNumber });
           }
         }
 
@@ -189,9 +282,10 @@ describe('Unit | Devcomp | Domain | Models | PassageEvent', function () {
         const occurredAt = new Date('2025-04-27T15:02:00Z');
         const createdAt = Symbol('date');
         const passageId = 3;
+        const sequenceNumber = 3;
         class FakeEvent extends PassageEvent {
           constructor() {
-            super({ id, type: 'FAKE', occurredAt, createdAt, passageId });
+            super({ id, type: 'FAKE', occurredAt, createdAt, passageId, sequenceNumber });
           }
         }
 
@@ -208,9 +302,10 @@ describe('Unit | Devcomp | Domain | Models | PassageEvent', function () {
         const occurredAt = new Date('2025-04-27T15:02:00Z');
         const createdAt = Symbol('date');
         const passageId = 3;
+        const sequenceNumber = 3;
         class FakeEvent extends PassageEvent {
           constructor() {
-            super({ id, type: 'FAKE', occurredAt, createdAt, passageId });
+            super({ id, type: 'FAKE', occurredAt, createdAt, passageId, sequenceNumber });
           }
         }
 
@@ -227,9 +322,10 @@ describe('Unit | Devcomp | Domain | Models | PassageEvent', function () {
         const occurredAt = new Date('2025-04-27T15:02:00Z');
         const createdAt = Symbol('date');
         const passageId = 3;
+        const sequenceNumber = 3;
         class FakeEvent extends PassageEvent {
           constructor() {
-            super({ id, type: 'FAKE', occurredAt, createdAt, passageId });
+            super({ id, type: 'FAKE', occurredAt, createdAt, passageId, sequenceNumber });
           }
         }
 

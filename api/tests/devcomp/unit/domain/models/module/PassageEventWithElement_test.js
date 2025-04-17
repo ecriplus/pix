@@ -11,6 +11,7 @@ describe('Unit | Devcomp | Domain | Models | Module | PassageEventWithElement', 
       const occurredAt = new Date();
       const createdAt = Symbol('date');
       const passageId = 3;
+      const sequenceNumber = 1;
 
       // when
       const error = catchErrSync(
@@ -21,6 +22,7 @@ describe('Unit | Devcomp | Domain | Models | Module | PassageEventWithElement', 
             occurredAt,
             createdAt,
             passageId,
+            sequenceNumber,
           }),
       )();
 
@@ -41,6 +43,7 @@ describe('Unit | Devcomp | Domain | Models | Module | PassageEventWithElement', 
             occurredAt: new Date(),
             createdAt: new Date(),
             passageId: 123,
+            sequenceNumber: 2,
           }),
       )();
 
@@ -63,6 +66,7 @@ describe('Unit | Devcomp | Domain | Models | Module | PassageEventWithElement', 
             createdAt: new Date(),
             passageId: 123,
             elementId: 'abcd',
+            sequenceNumber: 2,
           }),
       )();
 

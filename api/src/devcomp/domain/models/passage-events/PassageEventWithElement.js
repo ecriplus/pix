@@ -11,8 +11,8 @@ import { PassageEvent } from './PassageEvent.js';
  * Subclasses should be named in past tense.
  */
 class PassageEventWithElement extends PassageEvent {
-  constructor({ id, type, occurredAt, createdAt, passageId, elementId, data } = {}) {
-    super({ id, type, occurredAt, createdAt, passageId, data: { ...data, elementId } });
+  constructor({ id, type, occurredAt, createdAt, passageId, sequenceNumber, elementId, data } = {}) {
+    super({ id, type, occurredAt, createdAt, passageId, sequenceNumber, data: { ...data, elementId } });
 
     if (this.constructor === PassageEventWithElement) {
       throw new PassageEventWithElementInstantiationError();

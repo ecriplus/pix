@@ -61,6 +61,7 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
     const moduleId = Symbol('moduleId');
     const moduleSlug = 'les-adresses-email';
     const passageId = 1234;
+    const sequenceNumber = 1;
     const userId = Symbol('userId');
 
     const title = 'Les adresses email';
@@ -93,6 +94,7 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
       contentHash: version,
       occurredAt,
       passageId,
+      sequenceNumber,
     });
 
     const userRepositoryStub = {
@@ -116,6 +118,7 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
     const result = await createPassage({
       occurredAt,
       moduleSlug,
+      sequenceNumber,
       userId,
       passageRepository: passageRepositoryStub,
       passageEventRepository: passageEventRepositoryStub,

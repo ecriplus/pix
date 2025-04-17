@@ -17,8 +17,8 @@ const AutoAssessmentEnumValues = Object.freeze({
  * A FlashcardsStartedEvent is generated when a set of Modulix flashcards is started and saved in DB.
  */
 class FlashcardsStartedEvent extends PassageEventWithElement {
-  constructor({ id, occurredAt, createdAt, passageId, elementId }) {
-    super({ id, type: 'FLASHCARDS_STARTED', occurredAt, createdAt, passageId, elementId });
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }) {
+    super({ id, type: 'FLASHCARDS_STARTED', occurredAt, createdAt, passageId, sequenceNumber, elementId });
 
     this.elementId = elementId;
   }
@@ -30,8 +30,17 @@ class FlashcardsStartedEvent extends PassageEventWithElement {
  * A FlashcardsVersoSeenEvent is generated when a card's answer is seen and saved in DB.
  */
 class FlashcardsVersoSeenEvent extends PassageEventWithElement {
-  constructor({ id, occurredAt, createdAt, passageId, elementId, cardId }) {
-    super({ id, type: 'FLASHCARDS_VERSO_SEEN', occurredAt, createdAt, passageId, elementId, data: { cardId } });
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId, cardId }) {
+    super({
+      id,
+      type: 'FLASHCARDS_VERSO_SEEN',
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
+      data: { cardId },
+    });
 
     assertNotNullOrUndefined(cardId, 'The cardId is required for a FlashcardsVersoSeenEvent');
     assertHasUuidLength(cardId, 'The cardId property should be exactly 36 characters long');
@@ -47,13 +56,14 @@ class FlashcardsVersoSeenEvent extends PassageEventWithElement {
  * A FlashcardsCardAutoAssessedEvent is generated when an auto-assessment is given and saved in DB.
  */
 class FlashcardsCardAutoAssessedEvent extends PassageEventWithElement {
-  constructor({ id, occurredAt, createdAt, passageId, elementId, cardId, autoAssessment }) {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId, cardId, autoAssessment }) {
     super({
       id,
       type: 'FLASHCARDS_CARD_AUTO_ASSESSED',
       occurredAt,
       createdAt,
       passageId,
+      sequenceNumber,
       elementId,
       data: { cardId, autoAssessment },
     });
@@ -79,13 +89,14 @@ class FlashcardsCardAutoAssessedEvent extends PassageEventWithElement {
  * A FlashcardsRectoReviewedEvent is generated when a card's question is reviewed and saved in DB.
  */
 class FlashcardsRectoReviewedEvent extends PassageEventWithElement {
-  constructor({ id, occurredAt, createdAt, passageId, elementId, cardId }) {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId, cardId }) {
     super({
       id,
       type: 'FLASHCARDS_RECTO_REVIEWED',
       occurredAt,
       createdAt,
       passageId,
+      sequenceNumber,
       elementId,
       data: { cardId },
     });
@@ -104,8 +115,8 @@ class FlashcardsRectoReviewedEvent extends PassageEventWithElement {
  * A FlashcardsRetriedEvent is generated when a set of Modulix flashcards is retried and saved in DB.
  */
 class FlashcardsRetriedEvent extends PassageEventWithElement {
-  constructor({ id, occurredAt, createdAt, passageId, elementId }) {
-    super({ id, type: 'FLASHCARDS_RETRIED', occurredAt, createdAt, passageId, elementId });
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }) {
+    super({ id, type: 'FLASHCARDS_RETRIED', occurredAt, createdAt, passageId, sequenceNumber, elementId });
 
     this.elementId = elementId;
   }

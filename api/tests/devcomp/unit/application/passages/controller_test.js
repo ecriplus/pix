@@ -1,4 +1,8 @@
-import { passageController } from '../../../../../src/devcomp/application/passages/controller.js';
+import {
+  CREATE_PASSAGE_SEQUENCE_NUMBER,
+  passageController,
+  TERMINATE_PASSAGE_SEQUENCE_NUMBER,
+} from '../../../../../src/devcomp/application/passages/controller.js';
 import { requestResponseUtils } from '../../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
@@ -9,6 +13,7 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
       const serializedPassage = Symbol('serialized modules');
       const moduleSlug = Symbol('module-slug');
       const passage = Symbol('passage');
+      const sequenceNumber = CREATE_PASSAGE_SEQUENCE_NUMBER;
       const userId = Symbol('user-id');
       const passageSerializer = {
         serialize: sinon.stub(),
@@ -32,7 +37,9 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
       const usecases = {
         createPassage: sinon.stub(),
       };
-      usecases.createPassage.withArgs({ moduleSlug, userId, occurredAt: new Date(requestTimestamp) }).returns(passage);
+      usecases.createPassage
+        .withArgs({ moduleSlug, sequenceNumber, userId, occurredAt: new Date(requestTimestamp) })
+        .returns(passage);
 
       // when
       await passageController.create({ payload: { data: { attributes: { 'module-id': moduleSlug } } } }, hStub, {
@@ -99,6 +106,7 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
       const requestTimestamp = new Date('2025-01-01').getTime();
       const serializedPassage = Symbol('serialized modules');
       const passageId = Symbol('passage-id');
+      const sequenceNumber = TERMINATE_PASSAGE_SEQUENCE_NUMBER;
       const passage = Symbol('passage');
       const extractTimestampStub = sinon
         .stub(requestResponseUtils, 'extractTimestampFromRequest')
@@ -106,7 +114,9 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
       const usecases = {
         terminatePassage: sinon.stub(),
       };
-      usecases.terminatePassage.withArgs({ passageId, occurredAt: new Date(requestTimestamp) }).returns(passage);
+      usecases.terminatePassage
+        .withArgs({ passageId, sequenceNumber, occurredAt: new Date(requestTimestamp) })
+        .returns(passage);
       const passageSerializer = {
         serialize: sinon.stub(),
       };

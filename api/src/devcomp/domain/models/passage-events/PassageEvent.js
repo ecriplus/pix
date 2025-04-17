@@ -12,7 +12,7 @@ import { PassageEventInstantiationError } from '../../errors.js';
  * This is the base class for all PassageEvents. Subclasses should be named in past tense.
  */
 class PassageEvent {
-  constructor({ id, type, occurredAt, createdAt, passageId, data } = {}) {
+  constructor({ id, type, occurredAt, createdAt, passageId, sequenceNumber, data } = {}) {
     if (this.constructor === PassageEvent) {
       throw new PassageEventInstantiationError();
     }
@@ -20,6 +20,7 @@ class PassageEvent {
     assertNotNullOrUndefined(type, 'The type is required for a PassageEvent');
     assertNotNullOrUndefined(occurredAt, 'The occurredAt is required for a PassageEvent');
     assertNotNullOrUndefined(passageId, 'The passageId is required for a PassageEvent');
+    assertNotNullOrUndefined(sequenceNumber, 'The sequenceNumber is required for a PassageEvent');
 
     this.id = id;
     this.type = type;
@@ -27,6 +28,7 @@ class PassageEvent {
     this.createdAt = createdAt;
     this.setPassageId(passageId);
     this.data = data;
+    this.setSequenceNumber(sequenceNumber);
   }
 
   setPassageId(passageId) {
@@ -43,6 +45,17 @@ class PassageEvent {
     }
 
     this.occurredAt = occurredAt;
+  }
+
+  setSequenceNumber(sequenceNumber) {
+    if (typeof sequenceNumber !== 'number') {
+      throw new DomainError('The sequenceNumber should be a number');
+    }
+    if (sequenceNumber < 1) {
+      throw new DomainError('The sequenceNumber should be a number higher than 0');
+    }
+
+    this.sequenceNumber = sequenceNumber;
   }
 }
 
