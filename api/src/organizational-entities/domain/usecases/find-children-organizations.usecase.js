@@ -1,6 +1,6 @@
-import { NotFoundError } from '../../../src/shared/domain/errors.js';
+import { NotFoundError } from '../../../shared/domain/errors.js';
 
-async function findChildrenOrganizationsForAdmin({ parentOrganizationId, organizationForAdminRepository }) {
+async function findChildrenOrganizations({ parentOrganizationId, organizationForAdminRepository }) {
   const parentOrganizationExist = await organizationForAdminRepository.exist(parentOrganizationId);
 
   if (!parentOrganizationExist) {
@@ -12,4 +12,4 @@ async function findChildrenOrganizationsForAdmin({ parentOrganizationId, organiz
   return children;
 }
 
-export { findChildrenOrganizationsForAdmin };
+export { findChildrenOrganizations };

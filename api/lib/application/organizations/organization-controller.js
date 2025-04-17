@@ -18,20 +18,9 @@ const archiveOrganization = async function (request, h, dependencies = { organiz
   return dependencies.organizationForAdminSerializer.serialize(archivedOrganization);
 };
 
-const findChildrenOrganizationsForAdmin = async function (
-  request,
-  h,
-  dependencies = { organizationForAdminSerializer },
-) {
-  const parentOrganizationId = request.params.organizationId;
-  const childOrganizations = await usecases.findChildrenOrganizationsForAdmin({ parentOrganizationId });
-  return dependencies.organizationForAdminSerializer.serialize(childOrganizations);
-};
-
 const organizationController = {
   archiveOrganization,
   createInBatch,
-  findChildrenOrganizationsForAdmin,
 };
 
 export { organizationController };

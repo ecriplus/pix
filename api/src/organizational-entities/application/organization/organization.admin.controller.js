@@ -101,6 +101,12 @@ const findPaginatedFilteredOrganizations = async function (request, h, dependenc
   return dependencies.organizationSerializer.serialize(organizations, pagination);
 };
 
+const findChildrenOrganizations = async function (request, h, dependencies = { organizationForAdminSerializer }) {
+  const parentOrganizationId = request.params.organizationId;
+  const childOrganizations = await usecases.findChildrenOrganizations({ parentOrganizationId });
+  return dependencies.organizationForAdminSerializer.serialize(childOrganizations);
+};
+
 const organizationAdminController = {
   addTagsToOrganizations,
   create,
@@ -112,6 +118,7 @@ const organizationAdminController = {
   updateOrganizationsInBatch,
   updateOrganizationInformation,
   findPaginatedFilteredOrganizations,
+  findChildrenOrganizations,
 };
 
 export { organizationAdminController };
