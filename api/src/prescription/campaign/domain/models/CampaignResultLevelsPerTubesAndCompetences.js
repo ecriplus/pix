@@ -16,7 +16,7 @@ class CampaignResultLevelsPerTubesAndCompetences {
   }
 
   #getTubesWithLevels(tubes) {
-    const maxTubeLevels = tubes.map((tube) => {
+    return tubes.map((tube) => {
       const participationsReachedLevels = this.#computeParticipationsReachedLevelForTube(tube);
       const meanLevel = average(participationsReachedLevels);
 
@@ -31,7 +31,6 @@ class CampaignResultLevelsPerTubesAndCompetences {
         meanLevel,
       };
     });
-    return maxTubeLevels;
   }
 
   get levelsPerTube() {
@@ -39,7 +38,7 @@ class CampaignResultLevelsPerTubesAndCompetences {
   }
 
   get levelsPerCompetence() {
-    const maxCompetenceLevels = this.learningContent.competences.map((competence) => {
+    return this.learningContent.competences.map((competence) => {
       const tubes = this.#tubesWithLevels.filter((tube) => tube.competenceId === competence.id);
       const averageTubesMaxReachableLevel = averageBy(tubes, 'maxLevel');
       const averageTubesMeanReachedLevel = averageBy(tubes, 'meanLevel');
@@ -53,7 +52,6 @@ class CampaignResultLevelsPerTubesAndCompetences {
         meanLevel: averageTubesMeanReachedLevel,
       };
     });
-    return maxCompetenceLevels;
   }
 
   get maxReachableLevel() {

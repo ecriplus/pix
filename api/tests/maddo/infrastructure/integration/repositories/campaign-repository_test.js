@@ -1,5 +1,7 @@
 import { Campaign } from '../../../../../src/maddo/domain/models/Campaign.js';
 import { findByOrganizationId } from '../../../../../src/maddo/infrastructure/repositories/campaign-repository.js';
+import { KnowledgeElementCollection } from '../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
+import { KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Maddo | Infrastructure | Repositories | Integration | campaign', function () {
@@ -18,6 +20,50 @@ describe('Maddo | Infrastructure | Repositories | Integration | campaign', funct
         targetProfileId: targetProfile.id,
       });
       databaseBuilder.factory.buildCampaign({ organizationId: otherOrganizationId });
+
+      const frameworkId = databaseBuilder.factory.learningContent.buildFramework().id;
+      const areaId = databaseBuilder.factory.learningContent.buildArea({ frameworkId }).id;
+      const competence = databaseBuilder.factory.learningContent.buildCompetence({ areaId });
+      const tube = databaseBuilder.factory.learningContent.buildTube({ competenceId: competence.id });
+      const skill = databaseBuilder.factory.learningContent.buildSkill({ tubeId: tube.id, status: 'actif' });
+
+      databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign1.id, skillId: skill.id });
+      databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign2.id, skillId: skill.id });
+      const userId = databaseBuilder.factory.buildUser().id;
+      databaseBuilder.factory.buildMembership({ organizationId: organization.id, userId });
+
+      const participationUser = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaign1.id,
+        userId,
+      });
+
+      const ke = databaseBuilder.factory.buildKnowledgeElement({
+        status: KnowledgeElement.StatusType.VALIDATED,
+        skillId: skill.id,
+        userId: participationUser.userId,
+      });
+
+      databaseBuilder.factory.buildKnowledgeElementSnapshot({
+        campaignParticipationId: participationUser.id,
+        snapshot: new KnowledgeElementCollection([ke]).toSnapshot(),
+      });
+
+      const participationUser2 = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaign2.id,
+        userId,
+      });
+
+      const ke2 = databaseBuilder.factory.buildKnowledgeElement({
+        status: KnowledgeElement.StatusType.INVALIDATED,
+        skillId: skill.id,
+        userId: participationUser.userId,
+      });
+
+      databaseBuilder.factory.buildKnowledgeElementSnapshot({
+        campaignParticipationId: participationUser2.id,
+        snapshot: new KnowledgeElementCollection([ke2]).toSnapshot(),
+      });
+
       await databaseBuilder.commit();
 
       // when
@@ -28,24 +74,38 @@ describe('Maddo | Infrastructure | Repositories | Integration | campaign', funct
         new Campaign({
           id: campaign1.id,
           name: campaign1.name,
-          organizationId: organization.id,
-          organizationName: organization.name,
           type: campaign1.type,
-          targetProfileId: targetProfile.id,
           targetProfileName: targetProfile.name,
           code: campaign1.code,
           createdAt: campaign1.createdAt,
+          tubes: [
+            {
+              competenceId: competence.id,
+              id: tube.id,
+              maxLevel: skill.level,
+              meanLevel: 2,
+              practicalDescription: tube.practicalDescription_i18n['fr'],
+              practicalTitle: tube.practicalTitle_i18n['fr'],
+            },
+          ],
         }),
         new Campaign({
           id: campaign2.id,
           name: campaign2.name,
-          organizationId: organization.id,
-          organizationName: organization.name,
           type: campaign2.type,
-          targetProfileId: targetProfile.id,
           targetProfileName: targetProfile.name,
           code: campaign2.code,
           createdAt: campaign2.createdAt,
+          tubes: [
+            {
+              competenceId: competence.id,
+              id: tube.id,
+              maxLevel: skill.level,
+              meanLevel: 0,
+              practicalDescription: tube.practicalDescription_i18n['fr'],
+              practicalTitle: tube.practicalTitle_i18n['fr'],
+            },
+          ],
         }),
       ]);
     });

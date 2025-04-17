@@ -23,10 +23,14 @@ const register = async function (server) {
         response: {
           failAction: 'log',
           status: {
-            200: Joi.object({
-              id: Joi.number().description("ID de l'organisation"),
-              name: Joi.string().description("Nom de l'organisation"),
-            }).label('Organization'),
+            200: Joi.array()
+              .items(
+                Joi.object({
+                  id: Joi.number().description("ID de l'organisation"),
+                  name: Joi.string().description("Nom de l'organisation"),
+                }).label('Organization'),
+              )
+              .label('Organizations'),
             401: responseObjectErrorDoc,
             403: responseObjectErrorDoc,
           },
@@ -54,21 +58,35 @@ const register = async function (server) {
         response: {
           failAction: 'log',
           status: {
-            200: Joi.object({
-              id: Joi.number().description('ID de la campagne'),
-              name: Joi.string().description('Nom de la campagne'),
-              organizationId: Joi.number().description("ID de l'organisation propriétaire de la campagne"),
-              organizationName: Joi.string().description("Nom de l'organisation propriétaire de la campagne"),
-              type: Joi.string().description('Type de la campagne : ASSESSMENT, EXAM, PROFILES_COLLECTION'),
-              targetProfileId: Joi.number().description(
-                'ID du profil cible lié à la campagne, null si le type est PROFILES_COLLECTION',
-              ),
-              targetProfileName: Joi.string().description(
-                'Nom du profil cible lié à la campagne, null si le type est PROFILES_COLLECTION',
-              ),
-              code: Joi.string().description('Code campagne'),
-              createdAt: Joi.date().description('Date de création de la campagne'),
-            }).label('Organization'),
+            200: Joi.array()
+              .items(
+                Joi.object({
+                  id: Joi.number().description('ID de la campagne'),
+                  name: Joi.string().description('Nom de la campagne'),
+                  type: Joi.string().description('Type de la campagne : ASSESSMENT, EXAM, PROFILES_COLLECTION'),
+                  targetProfileName: Joi.string().description(
+                    'Nom du profil cible lié à la campagne, null si le type de la campagne est `PROFILES_COLLECTION`',
+                  ),
+                  code: Joi.string().description('Code campagne'),
+                  createdAt: Joi.date().description('Date de création de la campagne'),
+                  tubes: Joi.array()
+                    .items(
+                      Joi.object({
+                        competenceId: Joi.string().description('ID de la compétence auquel appartient le sujet'),
+                        id: Joi.string().description('ID du sujet'),
+                        maxLevel: Joi.number().description('Niveau maximum atteignable dans cette campagne'),
+                        meanLevel: Joi.number().description('Niveau moyen obtenu dans cette campagne'),
+                        practicalDescription: Joi.string().description('Description du sujet'),
+                        practicalTitle: Joi.string().description('Titre du sujet'),
+                      }).label('Tube'),
+                    )
+                    .description(
+                      'Sujets évalués dans la campagne, null si le type de la campagne est `PROFILES_COLLECTION`',
+                    )
+                    .label('Tubes'),
+                }).label('Campaign'),
+              )
+              .label('Campaigns'),
             401: responseObjectErrorDoc,
             403: responseObjectErrorDoc,
           },
