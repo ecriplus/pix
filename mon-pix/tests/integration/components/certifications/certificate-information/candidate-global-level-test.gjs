@@ -19,12 +19,13 @@ module('Integration | Component | Certifications | Certificate information | can
       certificationDate: new Date('2018-02-15T15:15:52Z'),
       deliveredAt: new Date('2018-02-17T15:15:52Z'),
       certificationCenter: 'Université de Lyon',
-      pixScore: 654,
+      pixScore: 840,
       resultCompetenceTree: store.createRecord('result-competence-tree'),
       maxReachableLevelOnCertificationDate: new Date('2018-02-15T15:15:52Z'),
       globalLevelLabel: 'Expert 1',
       globalDescriptionLabel: 'Vous êtes capable de tout.',
       globalSummaryLabel: 'Expert de tous les domaines, Pix vous dit bravo !',
+      level: '7',
     });
     this.set('certification', certification);
 
@@ -33,9 +34,19 @@ module('Integration | Component | Certifications | Certificate information | can
       <Certifications::CertificateInformation::candidateGlobalLevel @certificate={{this.certification}} />`);
 
     // then
-    assert.dom(screen.getByRole('heading', { name: t('pages.certificate.global-level'), level: 2 })).exists();
+    assert.dom(screen.getByRole('heading', { name: t('pages.certificate.global.labels.level'), level: 2 })).exists();
     assert.dom(screen.getByText(certification.globalLevelLabel)).exists();
     assert.dom(screen.getByText(certification.globalDescriptionLabel)).exists();
     assert.dom(screen.getByText(certification.globalSummaryLabel)).exists();
+    assert
+      .dom(
+        screen.getByRole('progressbar', {
+          name: t('pages.certificate.global.progressbar-explanation', {
+            level: certification.level,
+            globalLevelLabel: certification.globalLevelLabel,
+          }),
+        }),
+      )
+      .exists();
   });
 });

@@ -645,7 +645,16 @@
         }
       },
       "exam-date": "Completion date:",
-      "global-level": "Your level",
+      "global": {
+        "labels": {
+          "advanced": "Advanced",
+          "beginner": "Beginner",
+          "expert": "Expert",
+          "independent": "Independent",
+          "level": "Your level"
+        },
+        "progressbar-explanation": "Bar de progression indiquant votre niveau atteint ( {level}, ou niveau {globalLevelLabel} ) sur un niveau maximum atteignable de 7 ( niveau Expert 1 )"
+      },
       "hexagon-score": {
         "certified": "certified"
       },

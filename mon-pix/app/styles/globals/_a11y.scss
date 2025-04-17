@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/breakpoints';
+
 .sr-only {
   position: absolute;
   display: block;
@@ -19,4 +21,10 @@
   background-repeat: no-repeat;
   background-size: 1rem;
   content: '';
+}
+
+@include breakpoints.device-is('mobile') {
+  .hide-on-mobile {
+    display: none;
+  }
 }
