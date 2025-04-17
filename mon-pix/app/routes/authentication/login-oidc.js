@@ -64,30 +64,6 @@ export default class LoginOidcRoute extends Route {
     this.session.set('data.nextURL', undefined);
   }
 
-  async _handleOidcCallbackRequest(code, state, iss, identityProviderSlug) {
-    try {
-      await this.session.authenticate('authenticator:oidc', {
-        code,
-        state,
-        iss,
-        identityProviderSlug,
-        hostSlug: 'token',
-      });
-    } catch (response) {
-      const apiError = get(response, 'errors[0]');
-      const error = new JSONApiError(apiError.detail, apiError);
-
-      const shouldValidateCgu = error.code === 'SHOULD_VALIDATE_CGU';
-
-      if (shouldValidateCgu && error.meta.authenticationKey) {
-        oidcUserAuthenticationStorage.set(error.meta);
-        return { shouldValidateCgu, identityProviderSlug };
-      }
-
-      throw error;
-    }
-  }
-
   async _makeOidcAuthenticationRequest(identityProviderSlug) {
 
     // Storing the `attemptedTransition` in the localstorage so when the user returns after
@@ -111,5 +87,29 @@ export default class LoginOidcRoute extends Route {
     );
     const { redirectTarget } = await response.json();
     this.location.replace(redirectTarget);
+  }
+
+  async _handleOidcCallbackRequest(code, state, iss, identityProviderSlug) {
+    try {
+      await this.session.authenticate('authenticator:oidc', {
+        code,
+        state,
+        iss,
+        identityProviderSlug,
+        hostSlug: 'token',
+      });
+    } catch (response) {
+      const apiError = get(response, 'errors[0]');
+      const error = new JSONApiError(apiError.detail, apiError);
+
+      const shouldValidateCgu = error.code === 'SHOULD_VALIDATE_CGU';
+
+      if (shouldValidateCgu && error.meta.authenticationKey) {
+        oidcUserAuthenticationStorage.set(error.meta);
+        return { shouldValidateCgu, identityProviderSlug };
+      }
+
+      throw error;
+    }
   }
 }
