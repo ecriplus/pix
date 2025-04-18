@@ -1,30 +1,59 @@
 import PixBlock from '@1024pix/pix-ui/components/pix-block';
+import PixGauge from '@1024pix/pix-ui/components/pix-gauge';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
+import { service } from '@ember/service';
+import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
-<template>
-  <div class="certification-score-information">
-    <p>{{t "pages.certificate.certification-value.paragraphs.1"}}</p>
-    <p>{{t "pages.certificate.certification-value.paragraphs.2"}}</p>
-    <p class="certification-score-information--bold">{{t "pages.certificate.certification-value.paragraphs.3"}}</p>
-  </div>
+export default class candidateGlobalLevel extends Component {
+  @service intl;
 
-  <PixBlock class="candidate-global-information">
-    <div class="candidate-global-information__level">
-      <img
-        class="candidate-global-information-level__image"
-        src="/images/certificate/global-level-image.svg"
-        alt=""
-        role="presentation"
+  get stepLabels() {
+    return [
+      this.intl.t('pages.certificate.global.labels.beginner'),
+      this.intl.t('pages.certificate.global.labels.independent'),
+      this.intl.t('pages.certificate.global.labels.advanced'),
+      this.intl.t('pages.certificate.global.labels.expert'),
+    ];
+  }
+
+  <template>
+    <div class="certification-score-information">
+      <p>{{t "pages.certificate.certification-value.paragraphs.1"}}</p>
+      <p>{{t "pages.certificate.certification-value.paragraphs.2"}}</p>
+      <p class="certification-score-information--bold">{{t "pages.certificate.certification-value.paragraphs.3"}}</p>
+    </div>
+
+    <div class="hide-on-mobile global-level-gauge">
+      <PixGauge
+        @label={{t
+          "pages.certificate.global.progressbar-explanation"
+          level=@certificate.level
+          globalLevelLabel=@certificate.globalLevelLabel
+        }}
+        @reachedLevel={{@certificate.level}}
+        @maxLevel="7"
+        @stepLabels={{this.stepLabels}}
       />
-      <div class="candidate-global-information-level__container">
-        <h2>{{t "pages.certificate.global-level"}}</h2>
-        <PixTag>{{@certificate.globalLevelLabel}}</PixTag>
+    </div>
+
+    <PixBlock class="candidate-global-information">
+      <div class="candidate-global-information__level">
+        <img
+          class="candidate-global-information-level__image"
+          src="/images/certificate/global-level-image.svg"
+          alt=""
+          role="presentation"
+        />
+        <div class="candidate-global-information-level__container">
+          <h2>{{t "pages.certificate.global.labels.level"}}</h2>
+          <PixTag>{{@certificate.globalLevelLabel}}</PixTag>
+        </div>
       </div>
-    </div>
-    <div>
-      <p class="candidate-global-information--bold">{{@certificate.globalSummaryLabel}}</p>
-      <p>{{@certificate.globalDescriptionLabel}}</p>
-    </div>
-  </PixBlock>
-</template>
+      <div>
+        <p class="candidate-global-information--bold">{{@certificate.globalSummaryLabel}}</p>
+        <p>{{@certificate.globalDescriptionLabel}}</p>
+      </div>
+    </PixBlock>
+  </template>
+}

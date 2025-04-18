@@ -48,6 +48,7 @@ const attributes = [
   'globalLevelLabel',
   'globalSummaryLabel',
   'globalDescriptionLabel',
+  'level',
   'certificationDate',
   'verificationCode',
 ];
@@ -60,6 +61,7 @@ const serialize = function ({ certificate, translate }) {
       globalLevelLabel: certificate.globalLevel.getLevelLabel(translate),
       globalSummaryLabel: certificate.globalLevel.getSummaryLabel(translate),
       globalDescriptionLabel: certificate.globalLevel.getDescriptionLabel(translate),
+      level: _getLevel(certificate),
     };
   }
   return new Serializer('certifications', {
@@ -74,5 +76,9 @@ const serialize = function ({ certificate, translate }) {
     resultCompetenceTree,
   }).serialize(certificate);
 };
+
+function _getLevel(certificate) {
+  return certificate.globalLevel.meshLevel.split('_').at(-1);
+}
 
 export { serialize };

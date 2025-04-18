@@ -32,6 +32,7 @@ export default class Certification extends Model {
   @attr('string') globalSummaryLabel;
   @attr('string') globalDescriptionLabel;
   @attr('date') certificationDate;
+  @attr('string') level;
 
   // includes
   @belongsTo('result-competence-tree', { async: true, inverse: null }) resultCompetenceTree;
