@@ -113,6 +113,11 @@ export default class LoginOidcRoute extends Route {
       const apiError = get(response, 'errors[0]');
       const error = new JSONApiError(apiError.detail, apiError);
 
+      if (error.code == 'MISSING_OIDC_STATE') {
+        this.router.transitionTo('authentication.login');
+        return;
+      }
+
       const shouldValidateCgu = error.code === 'SHOULD_VALIDATE_CGU';
       if (shouldValidateCgu && error.meta.authenticationKey) {
         oidcUserAuthenticationStorage.set(error.meta);
