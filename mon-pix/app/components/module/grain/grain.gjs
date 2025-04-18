@@ -7,7 +7,6 @@ import { t } from 'ember-intl';
 import { eq } from 'ember-truth-helpers';
 import Element from 'mon-pix/components/module/component/element';
 import Stepper from 'mon-pix/components/module/component/stepper';
-import GrainTag from 'mon-pix/components/module/grain/tag';
 import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 import didInsert from 'mon-pix/modifiers/modifier-did-insert';
 
@@ -189,9 +188,6 @@ export default class ModuleGrain extends Component {
         </header>
       {{/if}}
 
-      <div class="grain-card__tag">
-        <GrainTag @type={{this.grainType}} />
-      </div>
       <div class="grain__card grain-card--{{this.grainType}}">
         <div class="grain-card__content">
           <!-- eslint-disable-next-line no-unused-vars -->

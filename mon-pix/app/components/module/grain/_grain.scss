@@ -25,7 +25,7 @@ $grain-card-border-radius: var(--pix-spacing-4x);
   }
 
   &__card {
-    border-radius: $grain-card-border-radius 0 $grain-card-border-radius $grain-card-border-radius;
+    border-radius: $grain-card-border-radius;
   }
 
   &:focus-visible {
@@ -49,19 +49,10 @@ $grain-card-border-radius: var(--pix-spacing-4x);
     border-radius: 0 0 $grain-card-border-radius $grain-card-border-radius;
   }
 
-  &__tag {
-    display: flex;
-    justify-content: flex-end;
-  }
-
   &--lesson,
   &--discovery,
   &--summary {
     background: var(--modulix-lesson-card-background);
-
-    &__tag {
-      background-color: inherit;
-    }
 
     .grain-card__footer {
       background: var(--modulix-lesson-card-footer-background);
@@ -71,10 +62,6 @@ $grain-card-border-radius: var(--pix-spacing-4x);
   &--activity,
   &--challenge {
     background: var(--modulix-activity-card-background);
-
-    &__tag {
-      background-color: inherit;
-    }
 
     .grain-card__footer {
       background: var(--modulix-activity-card-footer-background);
