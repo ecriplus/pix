@@ -25,7 +25,8 @@ module('Acceptance | Certificate verification', function (hooks) {
 
         // then
         assert.dom(screen.getByRole('heading', { name: t('pages.certificate.title') })).exists();
-        assert.dom(screen.getByText('Intermédiaire 1')).exists();
+        const globalLevelLabels = screen.getAllByText('Intermédiaire 1');
+        assert.strictEqual(globalLevelLabels.length, 2);
       });
     });
 

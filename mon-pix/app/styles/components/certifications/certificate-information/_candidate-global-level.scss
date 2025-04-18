@@ -1,0 +1,62 @@
+@use 'pix-design-tokens/fonts';
+@use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/breakpoints';
+
+
+.certification-score-information {
+  @extend %pix-body-m;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-2x);
+  margin: var(--pix-spacing-10x) 0;
+
+  &--bold {
+    font-weight: var(--pix-font-bold);
+  }
+}
+
+.candidate-global-information {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-8x);
+  align-items: center;
+
+  @include breakpoints.device-is('tablet') {
+    flex-direction: row;
+  }
+
+  &--bold {
+    margin-bottom: var(--pix-spacing-2x);
+    font-weight: var(--pix-font-bold);
+  }
+
+  &__level {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-2x);
+    align-items: center;
+
+    @include breakpoints.device-is('tablet') {
+      width: 50rem;
+    }
+  }
+}
+
+.candidate-global-information-level {
+  &__image {
+    width: 58px;
+    height: 82px;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-2x);
+    align-items: center;
+
+    h2 {
+      @extend %pix-title-xs;
+    }
+  }
+}
