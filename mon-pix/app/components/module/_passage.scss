@@ -3,6 +3,7 @@
 .module-passage {
   max-width: var(--modulix-max-content-width);
   margin: 0 auto;
+  padding: 0 var(--pix-spacing-4x);
 
   .auto-scroll {
     min-height: calc(100vh - var(--scroll-offset));

@@ -37,32 +37,20 @@ $grain-card-border-radius: var(--pix-spacing-4x);
 }
 
 .grain-card {
-  &__content {
-    padding: var(--pix-spacing-6x);
-  }
-
   &__footer {
-    padding: var(--pix-spacing-2x) var(--pix-spacing-6x);
+    padding: var(--pix-spacing-2x) 0;
     border-top: 0 solid var(--pix-neutral-100);
     border-radius: 0 0 $grain-card-border-radius $grain-card-border-radius;
   }
 
   &--summary {
+    padding: var(--pix-spacing-6x);
     background: var(--modulix-summary-card-background);
-
-    .grain-card__footer {
-      padding: var(--pix-spacing-6x);
-      border-top: 1px solid var(--pix-neutral-100);
-    }
   }
 
   &--challenge {
+    padding: var(--pix-spacing-6x);
     background: var(--modulix-challenge-card-background);
-
-    .grain-card__footer {
-      padding: var(--pix-spacing-6x);
-      border-top: 1px solid var(--pix-neutral-100);
-    }
   }
 }
 
