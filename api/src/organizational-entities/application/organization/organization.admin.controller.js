@@ -1,4 +1,6 @@
+import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import * as csvSerializer from '../../../shared/infrastructure/serializers/csv/csv-serializer.js';
 import { generateCSVTemplate } from '../../../shared/infrastructure/serializers/csv/csv-template.js';
 import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { ORGANIZATION_FEATURES_HEADER } from '../../domain/constants.js';
@@ -61,6 +63,14 @@ const create = async function (request) {
   return serializedOrganization;
 };
 
+const createInBatch = async function (request, h) {
+  const organizations = await csvSerializer.deserializeForOrganizationsImport(request.payload.path);
+
+  const createdOrganizations = await libUsecases.createOrganizationsWithTagsAndTargetProfiles({ organizations });
+
+  return h.response(organizationForAdminSerializer.serialize(createdOrganizations)).code(204);
+};
+
 const getOrganizationDetails = async function (request, h, dependencies = { organizationForAdminSerializer }) {
   const organizationId = request.params.id;
 
@@ -110,6 +120,7 @@ const findChildrenOrganizations = async function (request, h, dependencies = { o
 const organizationAdminController = {
   addTagsToOrganizations,
   create,
+  createInBatch,
   archiveOrganization,
   attachChildOrganization,
   getTemplateForAddOrganizationFeatureInBatch,

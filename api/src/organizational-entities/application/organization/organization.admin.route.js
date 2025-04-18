@@ -2,7 +2,6 @@ import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 const Joi = BaseJoi.extend(JoiDate);
 
-import { organizationController } from '../../../../lib/application/organizations/organization-controller.js';
 import { BadRequestError, PayloadTooLargeError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { MAX_FILE_SIZE_UPLOAD } from '../../../shared/domain/constants.js';
@@ -38,7 +37,7 @@ const register = async function (server) {
             );
           },
         },
-        handler: organizationController.createInBatch,
+        handler: organizationAdminController.createInBatch,
         tags: ['api', 'admin', 'organizations'],
         notes: [
           "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
