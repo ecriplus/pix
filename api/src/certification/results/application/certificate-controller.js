@@ -35,18 +35,30 @@ const getCertificateByVerificationCode = async function (
   return dependencies.certificateSerializer.serialize({ certificate, translate: i18n.__ });
 };
 
-const getCertificate = async function (request, h, dependencies = { requestResponseUtils }) {
+const getCertificate = async function (
+  request,
+  h,
+  dependencies = { requestResponseUtils, certificateSerializer, privateCertificateSerializer },
+) {
   const userId = request.auth.credentials.userId;
   const certificationCourseId = request.params.certificationCourseId;
   const translate = request.i18n.__;
   const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
 
-  const privateCertificate = await usecases.getPrivateCertificate({
-    userId,
-    certificationCourseId,
-    locale,
-  });
-  return privateCertificateSerializer.serialize(privateCertificate, { translate });
+  const certificationCourse = await certificationSharedUsecases.getCertificationCourse({ certificationCourseId });
+
+  let certificate;
+  if (certificationCourse.isV3() && (await featureToggles.get('isV3CertificationPageEnabled'))) {
+    certificate = await usecases.getCertificationAttestation({ certificationCourseId: certificationCourse.getId() });
+    return dependencies.certificateSerializer.serialize({ certificate, translate });
+  } else {
+    certificate = await usecases.getPrivateCertificate({
+      userId,
+      certificationCourseId: certificationCourse.getId(),
+      locale,
+    });
+    return dependencies.privateCertificateSerializer.serialize(certificate, { translate });
+  }
 };
 
 const findUserCertificates = async function (request) {

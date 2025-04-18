@@ -42,7 +42,6 @@ const attributes = [
   'certificationCenter',
   'pixScore',
   'status',
-  'status',
   'commentForCandidate',
   'resultCompetenceTree',
   'certifiedBadgeImages',

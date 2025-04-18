@@ -49,6 +49,7 @@ const attributes = [
   'globalSummaryLabel',
   'globalDescriptionLabel',
   'certificationDate',
+  'verificationCode',
 ];
 
 const serialize = function ({ certificate, translate }) {
