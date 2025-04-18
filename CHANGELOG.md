@@ -1,5 +1,23 @@
 # Pix Changelog
 
+## v5.94.0 (18/04/2025)
+
+
+### :rocket: Amélioration
+- [#12094](https://github.com/1024pix/pix/pull/12094) [FEATURE] Mise en retrait du bouton Réessayer de Modulix (PIX-17566).
+- [#12081](https://github.com/1024pix/pix/pull/12081) [FEATURE] Renvoyer le certificat V3 pour un utilisateur connecté (PIX-17478).
+- [#12087](https://github.com/1024pix/pix/pull/12087) [FEATURE] Script de reprise de données d'acceptation de CGU pour les utilisateurs anonymisés (PIX-17272) .
+- [#12071](https://github.com/1024pix/pix/pull/12071) [FEATURE] Afficher le détail des compétences d'un certificat en ligne (PIX-17476).
+
+### :building_construction: Tech
+- [#12072](https://github.com/1024pix/pix/pull/12072) [TECH] Ajouter un script pour archiver en masse des centres de certification (PIX-16851).
+- [#12057](https://github.com/1024pix/pix/pull/12057) [TECH] Migrer la route GET /api/admin/organizations/{organizationId}/children (PIX-17498).
+- [#12067](https://github.com/1024pix/pix/pull/12067) [TECH] Utiliser une transaction pour la fonction d'acceptation des termes d'utilisations de certif (PIX-15374).
+- [#12082](https://github.com/1024pix/pix/pull/12082) [TECH] Rendre la colonne userId nullable dans la table badge-acquisitions (PIX-16569).
+
+### :bug: Correction
+- [#12047](https://github.com/1024pix/pix/pull/12047) [BUGFIX] Prendre en compte les legal-document-version-user-acceptances dans le use-case d'anonymisation d'un utilisateur (PIX-17271).
+
 ## v5.93.0 (17/04/2025)
 
 
