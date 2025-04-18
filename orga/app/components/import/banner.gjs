@@ -2,6 +2,7 @@ import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import dayjs from 'dayjs';
 
 const statusI18nLabel = {
   STARTED: 'upload-in-progress',
@@ -25,7 +26,7 @@ export default class ImportBanner extends Component {
       createdBy: { firstName, lastName },
     } = this.args.organizationImportDetail;
     return this.intl.t('pages.organization-participants-import.global-success', {
-      date: updatedAt.toLocaleDateString(),
+      date: dayjs(updatedAt).format('D MMM YYYY'),
       firstName,
       lastName,
     });
@@ -81,7 +82,7 @@ export default class ImportBanner extends Component {
     return this.intl.t('pages.organization-participants-import.banner.upload-completed', {
       firstName,
       lastName,
-      date: createdAt.toLocaleDateString(),
+      date: dayjs(createdAt).format('D MMM YYYY'),
     });
   }
 

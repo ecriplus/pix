@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import dayjs from 'dayjs';
 import { t } from 'ember-intl/test-support';
 import ImportBanner from 'pix-orga/components/import/banner';
 import { module, test } from 'qunit';
@@ -66,7 +67,7 @@ module('Integration | Component | Import::Banner', function (hooks) {
           t('pages.organization-participants-import.banner.upload-completed', {
             firstName: 'Obi',
             lastName: 'Wan',
-            date: createdAt.toLocaleDateString(),
+            date: dayjs(createdAt).format('D MMM YYYY'),
           }),
           { exact: false },
         ),
@@ -105,7 +106,7 @@ module('Integration | Component | Import::Banner', function (hooks) {
           t('pages.organization-participants-import.banner.upload-completed', {
             firstName: 'Obi',
             lastName: 'Wan',
-            date: createdAt.toLocaleDateString(),
+            date: dayjs(createdAt).format('D MMM YYYY'),
           }),
           { exact: false },
         ),
@@ -141,7 +142,7 @@ module('Integration | Component | Import::Banner', function (hooks) {
           t('pages.organization-participants-import.global-success', {
             firstName: 'Richard',
             lastName: 'Aldana',
-            date: new Date(2020, 10, 2).toLocaleDateString(),
+            date: dayjs(organizationImportDetail.updatedAt).format('D MMM YYYY'),
           }),
         ),
       );
@@ -168,7 +169,7 @@ module('Integration | Component | Import::Banner', function (hooks) {
           t('pages.organization-participants-import.global-success', {
             firstName: 'Richard',
             lastName: 'Aldana',
-            date: new Date(2020, 10, 2).toLocaleDateString(),
+            date: dayjs(organizationImportDetail.updatedAt).format('D MMM YYYY'),
           }),
         ),
       );
@@ -233,7 +234,7 @@ module('Integration | Component | Import::Banner', function (hooks) {
           t('pages.organization-participants-import.banner.upload-completed', {
             firstName: 'Dark',
             lastName: 'Vador',
-            date: createdAt.toLocaleDateString(),
+            date: dayjs(createdAt).format('D MMM YYYY'),
           }),
           { exact: false },
         ),
@@ -278,7 +279,7 @@ module('Integration | Component | Import::Banner', function (hooks) {
           t('pages.organization-participants-import.banner.upload-completed', {
             firstName: 'Dark',
             lastName: 'Vador',
-            date: createdAt.toLocaleDateString(),
+            date: dayjs(createdAt).format('D MMM YYYY'),
           }),
           { exact: false },
         ),

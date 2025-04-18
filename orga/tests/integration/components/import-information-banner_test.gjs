@@ -89,7 +89,7 @@ module('Integration | Component | ImportInformationBanner', function (hooks) {
         t('components.import-information-banner.success', {
           firstname: importDetail.createdBy.firstName,
           lastname: importDetail.createdBy.lastName,
-          date: importDetail.updatedAt.toLocaleDateString(),
+          date: dayjs(importDetail.updatedAt).format('D MMM YYYY'),
         }),
       ),
     );
