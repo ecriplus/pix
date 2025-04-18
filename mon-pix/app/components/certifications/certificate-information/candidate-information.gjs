@@ -13,7 +13,9 @@ import { t } from 'ember-intl';
             "pages.certificate.hexagon-score.certified"
           }}</span>
       </div>
-      <PixTag>{{@certificate.globalLevelLabel}}</PixTag>
+      {{#if @certificate.globalLevelLabel}}
+        <PixTag data-testid="global-level-label-tag">{{@certificate.globalLevelLabel}}</PixTag>
+      {{/if}}
     </div>
     <div>
       <ul class="candidate-information__list">
