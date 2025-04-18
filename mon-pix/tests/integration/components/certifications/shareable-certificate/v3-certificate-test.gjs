@@ -1,4 +1,4 @@
-import { render } from '@1024pix/ember-testing-library';
+import { render, within } from '@1024pix/ember-testing-library';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
@@ -32,6 +32,13 @@ module('Integration | Component | Certifications | Shareable certificate | v3-ce
 
     // then
     assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.title') })).exists();
+    assert
+      .dom(
+        within(screen.getByRole('navigation')).getByRole('link', {
+          name: t('pages.fill-in-certificate-verification-code.title'),
+        }),
+      )
+      .exists();
     const globalLevelLabels = screen.getAllByText(certification.globalLevelLabel);
     assert.strictEqual(globalLevelLabels.length, 2);
   });

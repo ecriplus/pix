@@ -24,7 +24,7 @@ export default class candidateGlobalLevel extends Component {
       <p class="certification-score-information--bold">{{t "pages.certificate.certification-value.paragraphs.3"}}</p>
     </div>
 
-    <div class="hide-on-mobile global-level-gauge">
+    <div class="hide-on-mobile">
       <PixGauge
         @label={{t
           "pages.certificate.global.progressbar-explanation"

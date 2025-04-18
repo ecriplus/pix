@@ -1,5 +1,5 @@
 import { visit } from '@1024pix/ember-testing-library';
-import { click, fillIn } from '@ember/test-helpers';
+import { click, currentURL, fillIn } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
@@ -27,6 +27,25 @@ module('Acceptance | Certificate verification', function (hooks) {
         assert.dom(screen.getByRole('heading', { name: t('pages.certificate.title') })).exists();
         const globalLevelLabels = screen.getAllByText('Intermédiaire 1');
         assert.strictEqual(globalLevelLabels.length, 2);
+      });
+
+      module('when user clicks on the breadcrumb', function () {
+        test('should returns to form certificate page', async function (assert) {
+          // given
+          server.create('feature-toggle', { id: '0', isV3CertificationPageEnabled: true });
+          const screen = await visit('/verification-certificat');
+          await fillIn(
+            screen.getByRole('textbox', { name: 'Code de vérification * Exemple: P-XXXXXXXX' }),
+            'P-V3V3V3V3',
+          );
+          await click(screen.getByRole('button', { name: 'Vérifier le certificat' }));
+
+          // when
+          await click(screen.getByRole('link', { name: t('pages.fill-in-certificate-verification-code.title') }));
+
+          // then
+          assert.strictEqual(currentURL(), '/verification-certificat');
+        });
       });
     });
 
