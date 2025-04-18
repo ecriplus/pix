@@ -128,7 +128,6 @@ describe('Prescription Integration | UseCase | get-user-campaign-assessment-resu
 
         databaseBuilder.factory.buildStageAcquisition({
           stageId: 123,
-          userId,
           campaignParticipationId,
         });
 

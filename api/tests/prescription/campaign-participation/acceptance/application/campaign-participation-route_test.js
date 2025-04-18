@@ -534,7 +534,6 @@ describe('Acceptance | API | Campaign Participations', function () {
 
       databaseBuilder.factory.buildStageAcquisition({
         stageId: stage.id,
-        userId: user.id,
         campaignParticipationId: campaignParticipation.id,
       });
 

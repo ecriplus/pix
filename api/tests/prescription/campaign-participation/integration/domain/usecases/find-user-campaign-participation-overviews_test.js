@@ -39,13 +39,11 @@ describe('Integration | UseCase | find-user-campaign-participation-overviews_tes
 
       databaseBuilder.factory.buildStageAcquisition({
         stageId: targetProfile1Stage1.id,
-        userId: user.id,
         campaignParticipationId: campaign1Participation1.id,
       });
 
       databaseBuilder.factory.buildStageAcquisition({
         stageId: targetProfile2Stage2.id,
-        userId: user.id,
         campaignParticipationId: campaign2Participation2.id,
       });
 
@@ -105,19 +103,16 @@ describe('Integration | UseCase | find-user-campaign-participation-overviews_tes
 
       databaseBuilder.factory.buildStageAcquisition({
         stageId: stage1.id,
-        userId: user.id,
         campaignParticipationId: campaign1Participation1.id,
       });
 
       databaseBuilder.factory.buildStageAcquisition({
         stageId: stage1.id,
-        userId: user.id,
         campaignParticipationId: campaign2Participation2.id,
       });
 
       databaseBuilder.factory.buildStageAcquisition({
         stageId: stage2.id,
-        userId: user.id,
         campaignParticipationId: campaign2Participation2.id,
       });
 

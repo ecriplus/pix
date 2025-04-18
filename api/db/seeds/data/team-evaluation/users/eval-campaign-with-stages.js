@@ -373,7 +373,6 @@ export default async function initUser(databaseBuilder) {
   ].forEach(({ stages, campaignParticipation }) => {
     stages.stageIds.forEach((stageId) => {
       databaseBuilder.factory.buildStageAcquisition({
-        userId: user.id,
         campaignParticipationId: campaignParticipation.id,
         stageId,
       });
