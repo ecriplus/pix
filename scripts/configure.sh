@@ -72,6 +72,11 @@ function install_apps_dependencies() {
 
   echo "✅ Root dependencies installed."
   echo ""
+
+  echo "Install all apps dependencies"
+  npm run ci:all
+  echo "✔ All dependencies were downloaded and installed"
+  echo "-----------"
 }
 
 function setup_and_run_infrastructure() {
@@ -92,47 +97,11 @@ function setup_and_run_infrastructure() {
   echo "Creating database"
 
   # It drops and creates database then load the seed.
-  (cd api && npm ci && npm run db:reset)
+  (cd api && npm run db:reset)
 
   echo "✅ Database created"
   echo ""
 
-  # Install dependencies for  admin
-  echo "Installing dependencies for admin"
-  (cd admin && npm ci)
-  echo "✅ Dependencies for admin were installed"
-  echo ""
-
-  # Install dependencies for audit-logger
-  echo "Installing dependencies for audit-logger"
-  (cd audit-logger && npm ci)
-  echo "✅ Dependencies for audit-logger were installed"
-  echo ""
-
-  # Install dependencies for "certif"
-  echo "Installing dependencies for certif"
-  (cd certif && npm ci)
-  echo "✅ Dependencies for certif were installed"
-  echo ""
-
-  # Install dependencies for "junior"
-  echo "Installing dependencies for junior"
-  (cd junior && npm ci)
-  echo "✅ Dependencies for junior were installed"
-  echo ""
-
-  # Install dependencies for "mon-pix"
-  echo "Installing dependencies for mon-pix"
-  (cd mon-pix && npm ci)
-  echo "✅ Dependencies for mon-pix were installed"
-  echo ""
-
-  # Install dependencies for orga
-  echo "Installing dependencies for orga"
-  (cd orga && npm ci)
-  echo "✅ Dependencies for orga were installed"
-  echo "-----------"
-  echo "✔ All dependencies were downloaded and installed"
 
 }
 
@@ -145,7 +114,11 @@ function display_footer {
 display_banner
 display_header
 verify_prerequesite_programs
-generate_environment_config_file
-setup_and_run_infrastructure
+if [ "$1" == "without-env-file" ]; then
+  echo "Skipping environment variables generation"
+else
+  generate_environment_config_file
+fi
 install_apps_dependencies
+setup_and_run_infrastructure
 display_footer
