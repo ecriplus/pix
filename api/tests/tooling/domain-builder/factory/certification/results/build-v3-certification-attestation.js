@@ -1,4 +1,4 @@
-import { V3Certificate } from '../../../../../../src/certification/results/domain/models/v3/Certificate.js';
+import { Certificate } from '../../../../../../src/certification/results/domain/models/v3/Certificate.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 
 const buildV3CertificationAttestation = function ({
@@ -15,7 +15,7 @@ const buildV3CertificationAttestation = function ({
   algorithmEngineVersion = AlgorithmEngineVersion.V3,
   certificationDate = new Date('2015-10-03T01:02:03Z'),
 } = {}) {
-  return new V3Certificate({
+  return new Certificate({
     id,
     firstName,
     lastName,

@@ -2,7 +2,7 @@ import { MAX_REACHABLE_SCORE } from '../../../../../shared/domain/constants.js';
 import { CERTIFICATE_LEVELS } from './CertificateLevels.js';
 import { GlobalCertificationLevel } from './GlobalCertificationLevel.js';
 
-export class V3Certificate {
+export class Certificate {
   /**
    * @param {Object} props
    * @param {number} props.id - certification course id

@@ -1,5 +1,5 @@
 /**
- * @typedef {import ('../../../../domain/models/v3/Certificate.js').V3Certificate} V3Certificate
+ * @typedef {import ('../../../../domain/models/v3/Certificate.js').Certificate} Certificate
  */
 import path from 'node:path';
 import * as url from 'node:url';
@@ -9,7 +9,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 /**
  * @param {Object} params
- * @param {V3Certificate} params.data
+ * @param {Certificate} params.data
  */
 const generateV3AttestationTemplate = ({ pdf, data, translate }) => {
   // Global

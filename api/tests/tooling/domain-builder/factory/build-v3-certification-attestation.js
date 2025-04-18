@@ -1,4 +1,4 @@
-import { V3Certificate } from '../../../../src/certification/results/domain/models/v3/Certificate.js';
+import { Certificate } from '../../../../src/certification/results/domain/models/v3/Certificate.js';
 
 const buildV3CertificationAttestation = async function ({
   id = 1,
@@ -11,7 +11,7 @@ const buildV3CertificationAttestation = async function ({
   pixScore = 123,
   verificationCode = 'P-SOMECODE',
 } = {}) {
-  return new V3Certificate({
+  return new Certificate({
     id,
     firstName,
     lastName,
