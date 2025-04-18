@@ -13,42 +13,75 @@ import { waitForDialog } from '../../../helpers/wait-for';
 module('Integration | Component | Module | Passage', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  test('should display given module with one grain', async function (assert) {
-    // given
-    const store = this.owner.lookup('service:store');
-    const textElement = { content: 'content', type: 'text' };
-    const qcuElement = {
-      instruction: 'instruction',
-      proposals: ['radio1', 'radio2'],
-      type: 'qcu',
-    };
-    const components = [
-      {
-        type: 'element',
-        element: textElement,
-      },
-      {
-        type: 'element',
-        element: qcuElement,
-      },
-    ];
-    const grain = store.createRecord('grain', { id: 'grainId1', components });
-    const transitionTexts = [{ grainId: 'grainId1', content: 'transition text' }];
+  module('when module has one grain', function () {
+    test('should display given module', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const textElement = { content: 'content', type: 'text' };
+      const qcuElement = {
+        instruction: 'instruction',
+        proposals: ['radio1', 'radio2'],
+        type: 'qcu',
+      };
+      const components = [
+        {
+          type: 'element',
+          element: textElement,
+        },
+        {
+          type: 'element',
+          element: qcuElement,
+        },
+      ];
+      const grain = store.createRecord('grain', { id: 'grainId1', components });
+      const transitionTexts = [{ grainId: 'grainId1', content: 'transition text' }];
 
-    const module = store.createRecord('module', { title: 'Module title', grains: [grain], transitionTexts });
-    const passage = store.createRecord('passage');
+      const module = store.createRecord('module', { title: 'Module title', grains: [grain], transitionTexts });
+      const passage = store.createRecord('passage');
 
-    // when
-    const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
+      // when
+      const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
 
-    // then
-    assert.ok(screen.getByRole('heading', { name: module.title, level: 1 }));
-    assert.ok(screen.getByRole('banner').innerText.includes('transition text'));
-    assert.strictEqual(findAll('.element-text').length, 1);
-    assert.strictEqual(findAll('.element-qcu').length, 1);
+      // then
+      assert.ok(screen.getByRole('heading', { name: module.title, level: 1 }));
+      assert.ok(screen.getByRole('banner').innerText.includes('transition text'));
+      assert.strictEqual(findAll('.element-text').length, 1);
+      assert.strictEqual(findAll('.element-qcu').length, 1);
 
-    assert.dom(screen.getByRole('navigation', { name: 'Étape 1 sur 1' }));
-    assert.dom(screen.queryByRole('button', { name: 'Continuer' })).doesNotExist();
+      assert.dom(screen.queryByRole('button', { name: 'Continuer' })).doesNotExist();
+    });
+
+    test('should display navigation', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const textElement = { content: 'content', type: 'text' };
+      const qcuElement = {
+        instruction: 'instruction',
+        proposals: ['radio1', 'radio2'],
+        type: 'qcu',
+      };
+      const components = [
+        {
+          type: 'element',
+          element: textElement,
+        },
+        {
+          type: 'element',
+          element: qcuElement,
+        },
+      ];
+      const grain = store.createRecord('grain', { id: 'grainId1', components });
+      const transitionTexts = [{ grainId: 'grainId1', content: 'transition text' }];
+
+      const module = store.createRecord('module', { title: 'Module title', grains: [grain], transitionTexts });
+      const passage = store.createRecord('passage');
+
+      // when
+      const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
+
+      // then
+      assert.dom(screen.getByRole('navigation', { name: 'Étape 1 sur 1' })).exists();
+    });
   });
 
   module('when a grain contains non existing elements', function () {
@@ -159,31 +192,54 @@ module('Integration | Component | Module | Passage', function (hooks) {
     });
   });
 
-  test('should display given module with more than one grain', async function (assert) {
-    // given
-    const store = this.owner.lookup('service:store');
-    const textElement = { content: 'content', type: 'text' };
-    const qcuElement = {
-      instruction: 'instruction',
-      proposals: ['radio1', 'radio2'],
-      type: 'qcu',
-    };
-    const grain1 = store.createRecord('grain', { components: [{ type: 'element', element: textElement }] });
-    const grain2 = store.createRecord('grain', { components: [{ type: 'element', element: qcuElement }] });
+  module('when module has more than on grain', function () {
+    test('should display given module', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const textElement = { content: 'content', type: 'text' };
+      const qcuElement = {
+        instruction: 'instruction',
+        proposals: ['radio1', 'radio2'],
+        type: 'qcu',
+      };
+      const grain1 = store.createRecord('grain', { components: [{ type: 'element', element: textElement }] });
+      const grain2 = store.createRecord('grain', { components: [{ type: 'element', element: qcuElement }] });
 
-    const module = store.createRecord('module', { title: 'Module title', grains: [grain1, grain2] });
-    const passage = store.createRecord('passage');
+      const module = store.createRecord('module', { title: 'Module title', grains: [grain1, grain2] });
+      const passage = store.createRecord('passage');
 
-    // when
-    const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
+      // when
+      const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
 
-    // then
-    assert.ok(screen.getByRole('heading', { name: module.title, level: 1 }));
-    assert.strictEqual(findAll('.element-text').length, 1);
-    assert.strictEqual(findAll('.element-qcu').length, 0);
+      // then
+      assert.ok(screen.getByRole('heading', { name: module.title, level: 1 }));
+      assert.strictEqual(findAll('.element-text').length, 1);
+      assert.strictEqual(findAll('.element-qcu').length, 0);
 
-    assert.dom(screen.getByRole('navigation', { name: 'Étape 1 sur 2' }));
-    assert.dom(screen.queryByRole('button', { name: 'Continuer' })).exists({ count: 1 });
+      assert.dom(screen.queryByRole('button', { name: 'Continuer' })).exists({ count: 1 });
+    });
+
+    test('should display navigation', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const textElement = { content: 'content', type: 'text' };
+      const qcuElement = {
+        instruction: 'instruction',
+        proposals: ['radio1', 'radio2'],
+        type: 'qcu',
+      };
+      const grain1 = store.createRecord('grain', { components: [{ type: 'element', element: textElement }] });
+      const grain2 = store.createRecord('grain', { components: [{ type: 'element', element: qcuElement }] });
+
+      const module = store.createRecord('module', { title: 'Module title', grains: [grain1, grain2] });
+      const passage = store.createRecord('passage');
+
+      // when
+      const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
+
+      // then
+      assert.dom(screen.getByRole('navigation', { name: 'Étape 1 sur 2' })).exists();
+    });
   });
 
   module('when user clicks on skip button', function () {
@@ -277,7 +333,26 @@ module('Integration | Component | Module | Passage', function (hooks) {
       // then
       const grainsAfteronGrainContinue = screen.getAllByRole('article');
       assert.strictEqual(grainsAfteronGrainContinue.length, 2);
-      assert.dom(screen.getByRole('navigation', { name: 'Étape 2 sur 2' }));
+    });
+
+    test('should update navigation', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const text1Element = { content: 'content', type: 'text' };
+      const text2Element = { content: 'content 2', type: 'text' };
+      const grain1 = store.createRecord('grain', { components: [{ type: 'element', element: text1Element }] });
+      const grain2 = store.createRecord('grain', { components: [{ type: 'element', element: text2Element }] });
+
+      const module = store.createRecord('module', { title: 'Module title', grains: [grain1, grain2] });
+      const passage = store.createRecord('passage');
+
+      const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
+
+      // when
+      await clickByName(continueButtonName);
+
+      // then
+      assert.dom(screen.getByRole('navigation', { name: 'Étape 2 sur 2' })).exists();
     });
 
     test('should give focus on the last grain when appearing', async function (assert) {
