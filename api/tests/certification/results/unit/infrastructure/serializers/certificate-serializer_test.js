@@ -179,7 +179,7 @@ describe('Unit | Serializer | JSONAPI | certificate-serializer', function () {
           id: '123-456',
           areas: [area1],
         });
-        const shareableCertificate = domainBuilder.certification.results.buildV3CertificationAttestation({
+        const shareableCertificate = domainBuilder.certification.results.buildCertificate({
           id: 123,
           resultCompetenceTree,
         });

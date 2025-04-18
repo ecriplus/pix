@@ -1,6 +1,6 @@
 import { Certificate } from '../../../../src/certification/results/domain/models/v3/Certificate.js';
 
-const buildV3CertificationAttestation = async function ({
+const buildCertificate = async function ({
   id = 1,
   firstName = 'Jean',
   lastName = 'Bon',
@@ -24,4 +24,4 @@ const buildV3CertificationAttestation = async function ({
   });
 };
 
-export { buildV3CertificationAttestation };
+export { buildCertificate };

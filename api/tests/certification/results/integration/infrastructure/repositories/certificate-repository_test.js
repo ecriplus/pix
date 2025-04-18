@@ -591,21 +591,20 @@ describe('Integration | Infrastructure | Repository | Certification', function (
               competenceMarks: [competenceMarks1, competenceMarks2],
               competenceTree: domainBuilder.buildCompetenceTree({ areas: [area1] }),
             });
-            const expectedCertificationAttestation =
-              domainBuilder.certification.results.buildV3CertificationAttestation({
-                ...certificationAttestationData,
-                id: certificationAttestationData.id,
-                firstName: certificationAttestationData.firstName,
-                lastName: certificationAttestationData.lastName,
-                birthdate: certificationAttestationData.birthdate,
-                birthplace: certificationAttestationData.birthplace,
-                certificationCenter: certificationAttestationData.certificationCenter,
-                deliveredAt: certificationAttestationData.deliveredAt,
-                pixScore: certificationAttestationData.pixScore,
-                algorithmEngineVersion: AlgorithmEngineVersion.V3,
-                certificationDate: certificationAttestationData.date,
-                resultCompetenceTree,
-              });
+            const expectedCertificationAttestation = domainBuilder.certification.results.buildCertificate({
+              ...certificationAttestationData,
+              id: certificationAttestationData.id,
+              firstName: certificationAttestationData.firstName,
+              lastName: certificationAttestationData.lastName,
+              birthdate: certificationAttestationData.birthdate,
+              birthplace: certificationAttestationData.birthplace,
+              certificationCenter: certificationAttestationData.certificationCenter,
+              deliveredAt: certificationAttestationData.deliveredAt,
+              pixScore: certificationAttestationData.pixScore,
+              algorithmEngineVersion: AlgorithmEngineVersion.V3,
+              certificationDate: certificationAttestationData.date,
+              resultCompetenceTree,
+            });
             expect(certificationAttestation).to.deepEqualInstance(expectedCertificationAttestation);
           });
         });
@@ -647,7 +646,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           });
 
           // then
-          const expectedCertificationAttestation = domainBuilder.certification.results.buildV3CertificationAttestation({
+          const expectedCertificationAttestation = domainBuilder.certification.results.buildCertificate({
             ...certificationAttestationData,
             certificationDate: certificationAttestationData.date,
           });

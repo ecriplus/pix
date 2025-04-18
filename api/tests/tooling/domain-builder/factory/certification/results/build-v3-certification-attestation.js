@@ -1,7 +1,7 @@
 import { Certificate } from '../../../../../../src/certification/results/domain/models/v3/Certificate.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 
-const buildV3CertificationAttestation = function ({
+const buildCertificate = function ({
   id = 1,
   firstName = 'Jean',
   lastName = 'Bon',
@@ -31,4 +31,4 @@ const buildV3CertificationAttestation = function ({
   });
 };
 
-export { buildV3CertificationAttestation };
+export { buildCertificate };
