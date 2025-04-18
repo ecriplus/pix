@@ -1,4 +1,5 @@
 import { MAX_REACHABLE_SCORE } from '../../../../../shared/domain/constants.js';
+import { CERTIFICATE_LEVELS } from './CertificateLevels.js';
 import { GlobalCertificationLevel } from './GlobalCertificationLevel.js';
 
 export class V3Certificate {
@@ -48,6 +49,6 @@ export class V3Certificate {
   }
 
   get isPreBeginnerLevel() {
-    return new GlobalCertificationLevel({ score: this.pixScore }).meshLevel === 'LEVEL_PRE_BEGINNER';
+    return new GlobalCertificationLevel({ score: this.pixScore }).meshLevel === CERTIFICATE_LEVELS.preBeginner;
   }
 }
