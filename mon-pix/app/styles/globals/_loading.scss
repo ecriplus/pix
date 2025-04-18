@@ -1,5 +1,4 @@
-.app-loader,
-.app-nested-loader {
+.app-loader {
   position: absolute;
   top: 0;
   left: 0;
@@ -20,9 +19,4 @@
 
 .app-loader__image {
   text-align: center;
-}
-
-.app-nested-loader {
-  position: relative;
-  padding: 40px;
 }
