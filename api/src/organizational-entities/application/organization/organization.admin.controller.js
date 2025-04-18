@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import * as csvSerializer from '../../../shared/infrastructure/serializers/csv/csv-serializer.js';
 import { generateCSVTemplate } from '../../../shared/infrastructure/serializers/csv/csv-template.js';
@@ -66,7 +65,7 @@ const create = async function (request) {
 const createInBatch = async function (request, h) {
   const organizations = await csvSerializer.deserializeForOrganizationsImport(request.payload.path);
 
-  const createdOrganizations = await libUsecases.createOrganizationsWithTagsAndTargetProfiles({ organizations });
+  const createdOrganizations = await usecases.createOrganizationsWithTagsAndTargetProfiles({ organizations });
 
   return h.response(organizationForAdminSerializer.serialize(createdOrganizations)).code(204);
 };

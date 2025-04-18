@@ -1,31 +1,31 @@
 import lodash from 'lodash';
 
-import { createOrganizationsWithTagsAndTargetProfiles } from '../../../../lib/domain/usecases/create-organizations-with-tags-and-target-profiles.js';
-import * as organizationValidator from '../../../../lib/domain/validators/organization-with-tags-and-target-profiles-script.js';
-import * as targetProfileShareRepository from '../../../../lib/infrastructure/repositories/target-profile-share-repository.js';
-import * as dataProtectionOfficerRepository from '../../../../src/organizational-entities/infrastructure/repositories/data-protection-officer.repository.js';
-import { organizationForAdminRepository } from '../../../../src/organizational-entities/infrastructure/repositories/organization-for-admin.repository.js';
-import * as organizationTagRepository from '../../../../src/organizational-entities/infrastructure/repositories/organization-tag.repository.js';
-import { tagRepository } from '../../../../src/organizational-entities/infrastructure/repositories/tag.repository.js';
-import * as schoolRepository from '../../../../src/school/infrastructure/repositories/school-repository.js';
-import { ORGANIZATION_FEATURE } from '../../../../src/shared/domain/constants.js';
+import * as organizationValidator from '../../../../../lib/domain/validators/organization-with-tags-and-target-profiles-script.js';
+import * as targetProfileShareRepository from '../../../../../lib/infrastructure/repositories/target-profile-share-repository.js';
+import { createOrganizationsWithTagsAndTargetProfiles } from '../../../../../src/organizational-entities/domain/usecases/create-organizations-with-tags-and-target-profiles.usecase.js';
+import * as dataProtectionOfficerRepository from '../../../../../src/organizational-entities/infrastructure/repositories/data-protection-officer.repository.js';
+import { organizationForAdminRepository } from '../../../../../src/organizational-entities/infrastructure/repositories/organization-for-admin.repository.js';
+import * as organizationTagRepository from '../../../../../src/organizational-entities/infrastructure/repositories/organization-tag.repository.js';
+import { tagRepository } from '../../../../../src/organizational-entities/infrastructure/repositories/tag.repository.js';
+import * as schoolRepository from '../../../../../src/school/infrastructure/repositories/school-repository.js';
+import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import {
   ObjectValidationError,
   OrganizationTagNotFound,
   TargetProfileInvalidError,
-} from '../../../../src/shared/domain/errors.js';
-import { EntityValidationError } from '../../../../src/shared/domain/errors.js';
-import { Membership } from '../../../../src/shared/domain/models/Membership.js';
-import * as organizationRepository from '../../../../src/shared/infrastructure/repositories/organization-repository.js';
-import { organizationInvitationService } from '../../../../src/team/domain/services/organization-invitation.service.js';
-import { organizationInvitationRepository } from '../../../../src/team/infrastructure/repositories/organization-invitation.repository.js';
+} from '../../../../../src/shared/domain/errors.js';
+import { EntityValidationError } from '../../../../../src/shared/domain/errors.js';
+import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
+import * as organizationRepository from '../../../../../src/shared/infrastructure/repositories/organization-repository.js';
+import { organizationInvitationService } from '../../../../../src/team/domain/services/organization-invitation.service.js';
+import { organizationInvitationRepository } from '../../../../../src/team/infrastructure/repositories/organization-invitation.repository.js';
 import {
   catchErr,
   databaseBuilder,
   expect,
   insertMultipleSendingFeatureForNewOrganization,
   knex,
-} from '../../../test-helper.js';
+} from '../../../../test-helper.js';
 
 const { omit } = lodash;
 

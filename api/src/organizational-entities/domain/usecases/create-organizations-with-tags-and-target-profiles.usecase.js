@@ -1,19 +1,19 @@
 import lodash from 'lodash';
 
-import { PGSQL_FOREIGN_KEY_VIOLATION_ERROR } from '../../../db/pgsql-errors.js';
-import { DomainTransaction } from '../../../src/shared/domain/DomainTransaction.js';
-import { InvalidInputDataError } from '../../../src/shared/domain/errors.js';
+import { PGSQL_FOREIGN_KEY_VIOLATION_ERROR } from '../../../../db/pgsql-errors.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { InvalidInputDataError } from '../../../shared/domain/errors.js';
 import {
   DomainError,
   ObjectValidationError,
   OrganizationTagNotFound,
   TargetProfileInvalidError,
-} from '../../../src/shared/domain/errors.js';
-import { Organization, OrganizationForAdmin, OrganizationTag } from '../../../src/shared/domain/models/index.js';
-import * as codeGenerator from '../../../src/shared/domain/services/code-generator.js';
-import { CONCURRENCY_HEAVY_OPERATIONS } from '../../../src/shared/infrastructure/constants.js';
-import { monitoringTools } from '../../../src/shared/infrastructure/monitoring-tools.js';
-import { PromiseUtils } from '../../../src/shared/infrastructure/utils/promise-utils.js';
+} from '../../../shared/domain/errors.js';
+import { Organization, OrganizationForAdmin, OrganizationTag } from '../../../shared/domain/models/index.js';
+import * as codeGenerator from '../../../shared/domain/services/code-generator.js';
+import { CONCURRENCY_HEAVY_OPERATIONS } from '../../../shared/infrastructure/constants.js';
+import { monitoringTools } from '../../../shared/infrastructure/monitoring-tools.js';
+import { PromiseUtils } from '../../../shared/infrastructure/utils/promise-utils.js';
 
 const SEPARATOR = '_';
 
