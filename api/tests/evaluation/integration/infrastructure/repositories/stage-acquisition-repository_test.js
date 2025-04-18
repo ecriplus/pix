@@ -1,6 +1,5 @@
 import { StageAcquisition } from '../../../../../src/evaluation/domain/models/StageAcquisition.js';
 import {
-  getByCampaignIdAndUserId,
   getByCampaignParticipation,
   getByCampaignParticipations,
   getStageIdsByCampaignParticipation,
@@ -8,7 +7,7 @@ import {
 } from '../../../../../src/evaluation/infrastructure/repositories/stage-acquisition-repository.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
-describe('Integration | Repository | Stage Acquisition', function () {
+describe('Evaluation | Integration | Repository | Stage Acquisition', function () {
   describe('getByCampaignParticipation', function () {
     let stageAcquisition;
 
@@ -97,47 +96,6 @@ describe('Integration | Repository | Stage Acquisition', function () {
 
       // then
       expect(result.length).to.deep.equal(2);
-    });
-  });
-
-  describe('getByCampaignIdAndUserId', function () {
-    let stage;
-    let user;
-    let campaign;
-    let campaignParticipation;
-    let targetProfile;
-
-    beforeEach(async function () {
-      // given
-      user = databaseBuilder.factory.buildUser();
-      targetProfile = databaseBuilder.factory.buildTargetProfile();
-      databaseBuilder.factory.buildStage({ targetProfileId: targetProfile.id });
-      campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id });
-      stage = databaseBuilder.factory.buildStage({ campaignId: campaign.id });
-      campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaign.id });
-      databaseBuilder.factory.buildStageAcquisition({
-        campaignParticipationId: campaignParticipation.id,
-        userId: user.id,
-        stageId: stage.id,
-      });
-
-      await databaseBuilder.commit();
-    });
-
-    it('should return StageAcquisition instances', async function () {
-      // when
-      const result = await getByCampaignIdAndUserId(campaign.id, user.id);
-
-      // then
-      expect(result[0]).to.be.instanceof(StageAcquisition);
-    });
-
-    it('should return the expected stages', async function () {
-      // when
-      const result = await getByCampaignIdAndUserId(campaign.id, user.id);
-
-      // then
-      expect(result[0].stageId).to.deep.equal(stage.id);
     });
   });
 

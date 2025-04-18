@@ -30,7 +30,7 @@ describe('Unit | UseCase | get-user-campaign-assessment-result', function () {
       get: sinon.stub(),
     };
     stageRepository = { getByCampaignId: sinon.stub() };
-    stageAcquisitionRepository = { getByCampaignIdAndUserId: sinon.stub() };
+    stageAcquisitionRepository = { getByCampaignParticipation: sinon.stub() };
     compareStagesAndAcquiredStages = { compare: sinon.stub() };
     args = {
       userId,
@@ -86,7 +86,9 @@ describe('Unit | UseCase | get-user-campaign-assessment-result', function () {
       const stage2 = domainBuilder.buildStage();
       const stageAcquisition = domainBuilder.buildStageAcquisition();
       stageRepository.getByCampaignId.withArgs(campaignId).resolves([stage1, stage2]);
-      stageAcquisitionRepository.getByCampaignIdAndUserId.withArgs(campaignId, userId).resolves([stageAcquisition]);
+      stageAcquisitionRepository.getByCampaignParticipation
+        .withArgs(campaignParticipationId)
+        .resolves([stageAcquisition]);
       compareStagesAndAcquiredStages.compare.withArgs([stage1, stage2], [stageAcquisition]).returns({
         reachedStageNumber: 1,
         totalNumberOfStages: 2,

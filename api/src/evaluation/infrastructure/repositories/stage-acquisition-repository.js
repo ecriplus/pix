@@ -2,7 +2,6 @@ import {
   CAMPAIGN_PARTICIPATION_ID_COLUMN,
   STAGE_ACQUISITIONS_TABLE_NAME,
   STAGE_ID_COLUMN,
-  USER_ID_COLUMN,
 } from '../../../../db/migrations/20230721114848_create-stage_acquisitions-table.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { StageAcquisition } from '../../domain/models/StageAcquisition.js';
@@ -66,26 +65,6 @@ const getStageIdsByCampaignParticipation = async (campaignParticipationsId) => {
 };
 
 /**
- * @param {number} campaignId
- * @param {number} userId
- *
- * @returns {Promise<StageAcquisition[]>}
- */
-const getByCampaignIdAndUserId = async (campaignId, userId) =>
-  toDomain(
-    await buildSelectAllQuery()
-      .join(
-        'campaign-participations',
-        'campaign-participations.id',
-        `${STAGE_ACQUISITIONS_TABLE_NAME}.${CAMPAIGN_PARTICIPATION_ID_COLUMN}`,
-      )
-      .join('campaigns', 'campaigns.id', 'campaign-participations.campaignId')
-      .where('campaigns.id', campaignId)
-      .where(`${STAGE_ACQUISITIONS_TABLE_NAME}.${USER_ID_COLUMN}`, userId)
-      .orderBy(`${STAGE_ACQUISITIONS_TABLE_NAME}.id`),
-  );
-
-/**
  * @param {Stage[]} stages
  * @param {number} userId
  * @param {number} campaignParticipationId
@@ -102,10 +81,4 @@ const saveStages = async (stages, userId, campaignParticipationId) => {
   return knexConnection(STAGE_ACQUISITIONS_TABLE_NAME).insert(acquiredStages);
 };
 
-export {
-  getByCampaignIdAndUserId,
-  getByCampaignParticipation,
-  getByCampaignParticipations,
-  getStageIdsByCampaignParticipation,
-  saveStages,
-};
+export { getByCampaignParticipation, getByCampaignParticipations, getStageIdsByCampaignParticipation, saveStages };

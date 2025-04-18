@@ -52,7 +52,7 @@ const getUserCampaignAssessmentResult = async function ({
 
     const [stages, acquiredStages] = await Promise.all([
       stageRepository.getByCampaignId(campaignId),
-      stageAcquisitionRepository.getByCampaignIdAndUserId(campaignId, userId),
+      stageAcquisitionRepository.getByCampaignParticipation(campaignParticipation.id),
     ]);
 
     const stagesAndAcquiredStagesComparison = compareStagesAndAcquiredStages.compare(stages, acquiredStages);

@@ -9,11 +9,29 @@ import { Assessment, KnowledgeElement } from '../../../../../../src/shared/domai
 import { databaseBuilder, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Prescription Integration | UseCase | get-user-campaign-assessment-result', function () {
+  let skillIds, userId;
+
+  beforeEach(async function () {
+    skillIds = ['acquisA', 'acquisB'];
+    userId = databaseBuilder.factory.buildUser().id;
+    databaseBuilder.factory.learningContent.buildArea({
+      id: 'monAreaId',
+    });
+    databaseBuilder.factory.learningContent.buildCompetence({
+      id: 'maCompetenceId',
+      areaId: 'monAreaId',
+      name_i18n: {
+        fr: 'nom de la compétence',
+      },
+      skillIds,
+    });
+
+    await databaseBuilder.commit();
+  });
+
   context('when campaign is of type ASSESSMENT', function () {
     it('should return an participant assessment result based on the user profile', async function () {
       // given
-      const skillIds = ['acquisA', 'acquisB'];
-      const userId = databaseBuilder.factory.buildUser().id;
       const campaignId = databaseBuilder.factory.buildCampaign({
         type: CampaignTypes.ASSESSMENT,
       }).id;
@@ -34,17 +52,7 @@ describe('Prescription Integration | UseCase | get-user-campaign-assessment-resu
         campaignParticipationId,
         type: Assessment.types.CAMPAIGN,
       });
-      databaseBuilder.factory.learningContent.buildArea({
-        id: 'monAreaId',
-      });
-      databaseBuilder.factory.learningContent.buildCompetence({
-        id: 'maCompetenceId',
-        areaId: 'monAreaId',
-        name_i18n: {
-          fr: 'nom de la compétence',
-        },
-        skillIds,
-      });
+
       skillIds.map((id, index) => {
         databaseBuilder.factory.learningContent.buildSkill({
           id,
@@ -78,12 +86,105 @@ describe('Prescription Integration | UseCase | get-user-campaign-assessment-resu
         id: 'maCompetenceId',
       });
     });
+
+    context('stages', function () {
+      it('return acquired stages on participation', async function () {
+        const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+        const campaignId = databaseBuilder.factory.buildCampaign({
+          type: CampaignTypes.ASSESSMENT,
+          targetProfileId,
+        }).id;
+        databaseBuilder.factory.buildStage({
+          id: 123,
+          targetProfileId,
+          isFirstSkill: false,
+          level: 0,
+          threshold: null,
+          title: 'Palier niveau 0 titre',
+          message: 'Palier niveau 0 message',
+          prescriberTitle: 'Palier niveau 0 titre prescripteur',
+          prescriberDescription: 'Palier niveau 0 description prescripteur',
+        });
+        databaseBuilder.factory.buildStage({
+          id: 456,
+          targetProfileId,
+          isFirstSkill: false,
+          level: 1,
+          threshold: null,
+        });
+
+        skillIds.map((skillId) =>
+          databaseBuilder.factory.buildCampaignSkill({
+            campaignId,
+            skillId,
+          }),
+        );
+        const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId,
+          userId,
+          sharedAt: null,
+          status: CampaignParticipationStatuses.TO_SHARE,
+        }).id;
+
+        databaseBuilder.factory.buildStageAcquisition({
+          stageId: 123,
+          userId,
+          campaignParticipationId,
+        });
+
+        const assessmentDB = databaseBuilder.factory.buildAssessment({
+          userId,
+          campaignParticipationId,
+          type: Assessment.types.CAMPAIGN,
+        });
+
+        skillIds.map((id, index) => {
+          databaseBuilder.factory.learningContent.buildSkill({
+            id,
+            competenceId: 'maCompetenceId',
+            pixValue: PIX_COUNT_BY_LEVEL,
+            status: 'actif',
+            tubeId: 'monTubeId',
+            level: index + 1,
+          });
+          databaseBuilder.factory.buildKnowledgeElement({
+            skillId: id,
+            status: KnowledgeElement.StatusType.INVALIDATED,
+            source: KnowledgeElement.SourceType.DIRECT,
+            userId,
+            assessmentId: assessmentDB.id,
+          });
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const participantAssessmentResult = await usecases.getUserCampaignAssessmentResult({
+          userId,
+          campaignId,
+          locale: 'fr',
+        });
+
+        // then
+        expect(participantAssessmentResult.reachedStage).to.deep.equal({
+          id: 123,
+          isFirstSkill: false,
+          level: 0,
+          title: 'Palier niveau 0 titre',
+          message: 'Palier niveau 0 message',
+          prescriberTitle: 'Palier niveau 0 titre prescripteur',
+          prescriberDescription: 'Palier niveau 0 description prescripteur',
+          reachedStage: 1,
+          targetProfileId,
+          threshold: null,
+          totalStage: 2,
+        });
+      });
+    });
   });
+
   context('when campaign is of type EXAM', function () {
-    it('should return an participant assessment result based on the user profile', async function () {
+    it('should return an participant assessment result based on the knowledge element snapshot attach on participation', async function () {
       // given
-      const skillIds = ['acquisA', 'acquisB'];
-      const userId = databaseBuilder.factory.buildUser().id;
       const campaignId = databaseBuilder.factory.buildCampaign({
         type: CampaignTypes.EXAM,
       }).id;
@@ -104,17 +205,7 @@ describe('Prescription Integration | UseCase | get-user-campaign-assessment-resu
         campaignParticipationId,
         type: Assessment.types.CAMPAIGN,
       });
-      databaseBuilder.factory.learningContent.buildArea({
-        id: 'monAreaId',
-      });
-      databaseBuilder.factory.learningContent.buildCompetence({
-        id: 'maCompetenceId',
-        areaId: 'monAreaId',
-        name_i18n: {
-          fr: 'nom de la compétence',
-        },
-        skillIds,
-      });
+
       const domainKEs = skillIds.map((id, index) => {
         databaseBuilder.factory.learningContent.buildSkill({
           id,
