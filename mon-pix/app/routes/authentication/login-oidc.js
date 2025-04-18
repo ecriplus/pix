@@ -16,7 +16,7 @@ export default class LoginOidcRoute extends Route {
   @service router;
   @service session;
 
-  beforeModel(transition) {
+  async beforeModel(transition) {
     const queryParams = transition.to.queryParams;
     if (queryParams.error) {
       const error = createTranslatedApplicationError.withCodeAndDescription({
@@ -30,11 +30,14 @@ export default class LoginOidcRoute extends Route {
     const identityProviderSlug = transition.to.params.identity_provider_slug;
     const identityProvider = this.oidcIdentityProviders[identityProviderSlug];
     if (!identityProvider) {
-      return this.router.replaceWith('authentication.login');
+      this.router.transitionTo('authentication.login');
+      return;
     }
 
     if (!queryParams.code) {
-      return this._makeOidcAuthenticationRequest(identityProvider);
+      transition.abort();
+      await this._makeOidcAuthenticationRequest(identityProvider);
+      return;
     }
   }
 
@@ -42,15 +45,16 @@ export default class LoginOidcRoute extends Route {
     const { code, state, iss } = transition.to.queryParams;
     const identityProviderSlug = params.identity_provider_slug;
     const identityProvider = this.oidcIdentityProviders[identityProviderSlug];
-    if (code) {
-      return this._handleOidcCallbackRequest({ code, state, iss, identityProvider });
-    }
+
+    const model = await this._handleOidcCallbackRequest({ identityProvider, code, state, iss });
+    return model;
   }
 
-  afterModel({ shouldValidateCgu, identityProviderSlug } = {}) {
-    const shouldCreateAnAccountForUser = shouldValidateCgu && oidcUserAuthenticationStorage.get().authenticationKey;
-    if (shouldCreateAnAccountForUser) {
-      return this.router.replaceWith('authentication.login-or-register-oidc', {
+  redirect(model) {
+    const { identityProviderSlug, shouldCreateUserAccount } = model;
+
+    if (shouldCreateUserAccount) {
+      this.router.transitionTo('authentication.login-or-register-oidc', {
         queryParams: {
           identityProviderSlug,
         },
@@ -79,8 +83,9 @@ export default class LoginOidcRoute extends Route {
     const response = await fetch(
       `${ENV.APP.API_HOST}/api/oidc/authorization-url?identity_provider=${identityProvider.code}`,
     );
-    const { redirectTarget } = await response.json();
-    this.location.replace(redirectTarget);
+    const { redirectTarget: authorizationUrl } = await response.json();
+
+    this.location.replace(authorizationUrl);
   }
 
   async _handleOidcCallbackRequest({ identityProvider, code, state, iss }) {
@@ -93,6 +98,8 @@ export default class LoginOidcRoute extends Route {
         identityProviderSlug,
         hostSlug: 'token',
       });
+
+      return { identityProviderSlug, shouldCreateUserAccount: false };
     } catch (response) {
       const apiError = get(response, 'errors[0]');
       const error = new JSONApiError(apiError.detail, apiError);
@@ -100,7 +107,8 @@ export default class LoginOidcRoute extends Route {
       const shouldValidateCgu = error.code === 'SHOULD_VALIDATE_CGU';
       if (shouldValidateCgu && error.meta.authenticationKey) {
         oidcUserAuthenticationStorage.set(error.meta);
-        return { shouldValidateCgu, identityProviderSlug };
+
+        return { identityProviderSlug, shouldCreateUserAccount: true };
       }
 
       throw error;
