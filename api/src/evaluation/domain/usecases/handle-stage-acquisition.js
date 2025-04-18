@@ -74,7 +74,7 @@ const handleStageAcquisition = async function ({
 
   if (!stagesToStore.length) return;
 
-  await stageAcquisitionRepository.saveStages(stagesToStore, assessment.userId, campaignParticipation.id);
+  await stageAcquisitionRepository.saveStages(stagesToStore, campaignParticipation.id);
 };
 
 /**

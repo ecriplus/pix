@@ -103,7 +103,6 @@ describe('Evaluation | Integration | Repository | Stage Acquisition', function (
     let targetProfile;
     let stages;
     let campaign;
-    let user;
     let campaignParticipation;
 
     beforeEach(async function () {
@@ -114,7 +113,6 @@ describe('Evaluation | Integration | Repository | Stage Acquisition', function (
         databaseBuilder.factory.buildStage({ targetProfileId: targetProfile.id }),
       ];
       campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id });
-      user = databaseBuilder.factory.buildUser();
       campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaign.id });
 
       await databaseBuilder.commit();
@@ -122,7 +120,7 @@ describe('Evaluation | Integration | Repository | Stage Acquisition', function (
 
     it('return the expected stage', async function () {
       // when
-      await saveStages(stages, user.id, campaignParticipation.id);
+      await saveStages(stages, campaignParticipation.id);
 
       // then
       const result = await knex('stage-acquisitions')
@@ -130,7 +128,6 @@ describe('Evaluation | Integration | Repository | Stage Acquisition', function (
           'stageId',
           stages.map(({ id }) => id),
         )
-        .andWhere('userId', user.id)
         .andWhere('campaignParticipationId', campaignParticipation.id);
 
       expect(result).to.have.lengthOf(2);
