@@ -1,5 +1,5 @@
 /**
- * @typedef {import ('../../../domain/models/V3Certificate.js').V3Certificate} V3Certificate
+ * @typedef {import ('../../../domain/models/v3/Certificate.js').V3Certificate} V3Certificate
  */
 import PDFDocument from 'pdfkit';
 

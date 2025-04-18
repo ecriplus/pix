@@ -1,5 +1,5 @@
-import { MAX_REACHABLE_SCORE } from '../../../../shared/domain/constants.js';
-import { GlobalCertificationLevel } from './v3/GlobalCertificationLevel.js';
+import { MAX_REACHABLE_SCORE } from '../../../../../shared/domain/constants.js';
+import { GlobalCertificationLevel } from './GlobalCertificationLevel.js';
 
 export class V3Certificate {
   /**
@@ -39,11 +39,15 @@ export class V3Certificate {
     this.deliveredAt = deliveredAt;
     this.certificationCenter = certificationCenter;
     this.pixScore = pixScore;
-    this.globalLevel = new GlobalCertificationLevel({ score: pixScore });
+    this.globalLevel = this.isPreBeginnerLevel ? null : new GlobalCertificationLevel({ score: pixScore });
     this.verificationCode = verificationCode;
     this.maxReachableScore = MAX_REACHABLE_SCORE;
-    this.resultCompetenceTree = resultCompetenceTree;
+    this.resultCompetenceTree = this.isPreBeginnerLevel ? null : resultCompetenceTree;
     this.algorithmEngineVersion = algorithmEngineVersion;
     this.certificationDate = certificationDate;
+  }
+
+  get isPreBeginnerLevel() {
+    return new GlobalCertificationLevel({ score: this.pixScore }).meshLevel === 'LEVEL_PRE_BEGINNER';
   }
 }

@@ -5,7 +5,7 @@ import * as requestResponseUtils from '../../../../src/shared/infrastructure/uti
 import { UnauthorizedError } from '../../../shared/application/http-errors.js';
 import { featureToggles } from '../../../shared/infrastructure/feature-toggles/index.js';
 import { normalizeAndRemoveAccents } from '../../../shared/infrastructure/utils/string-utils.js';
-import { V3Certificate } from '../domain/models/V3Certificate.js';
+import { V3Certificate } from '../domain/models/v3/Certificate.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as certificateSerializer from '../infrastructure/serializers/certificate-serializer.js';
 import * as privateCertificateSerializer from '../infrastructure/serializers/private-certificate-serializer.js';

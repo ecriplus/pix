@@ -1,4 +1,4 @@
-import { V3Certificate } from '../../../../src/certification/results/domain/models/V3Certificate.js';
+import { V3Certificate } from '../../../../src/certification/results/domain/models/v3/Certificate.js';
 
 const buildV3CertificationAttestation = async function ({
   id = 1,

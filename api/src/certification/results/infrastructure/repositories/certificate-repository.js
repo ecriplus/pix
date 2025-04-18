@@ -12,7 +12,7 @@ import {
 import { featureToggles } from '../../../../shared/infrastructure/feature-toggles/index.js';
 import { SessionVersion } from '../../../shared/domain/models/SessionVersion.js';
 import { CertificationAttestation } from '../../domain/models/CertificationAttestation.js';
-import { V3Certificate } from '../../domain/models/V3Certificate.js';
+import { V3Certificate } from '../../domain/models/v3/Certificate.js';
 import { CertifiedBadge } from '../../domain/read-models/CertifiedBadge.js';
 import * as competenceTreeRepository from './competence-tree-repository.js';
 

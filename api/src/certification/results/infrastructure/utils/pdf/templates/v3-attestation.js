@@ -1,5 +1,5 @@
 /**
- * @typedef {import ('../../../../domain/models/V3Certificate.js').V3Certificate} V3Certificate
+ * @typedef {import ('../../../../domain/models/v3/Certificate.js').V3Certificate} V3Certificate
  */
 import path from 'node:path';
 import * as url from 'node:url';
@@ -125,7 +125,7 @@ const generateV3AttestationTemplate = ({ pdf, data, translate }) => {
 
   const globalLevel = data.globalLevel;
 
-  if (globalLevel.meshLevel !== 'LEVEL_PRE_BEGINNER') {
+  if (!data.isPreBeginnerLevel) {
     pdf
       .font('Roboto-Regular')
       .fontSize(11)
