@@ -3,11 +3,21 @@ import dayjs from 'dayjs';
 import { t } from 'ember-intl/test-support';
 import ImportInformationBanner from 'pix-orga/components/import-information-banner';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
 module('Integration | Component | ImportInformationBanner', function (hooks) {
   setupIntlRenderingTest(hooks);
+  let clock;
+
+  hooks.beforeEach(function () {
+    clock = sinon.useFakeTimers({ now: new Date('2024-07-07') });
+  });
+
+  hooks.afterEach(function () {
+    clock.restore();
+  });
 
   test('it show nothing when there is no import', async function (assert) {
     // when
@@ -67,14 +77,21 @@ module('Integration | Component | ImportInformationBanner', function (hooks) {
     const importDetail = store.createRecord('organization-import-detail', {
       status: 'IMPORTED',
       updatedAt: dayjs().toDate(),
+      createdBy: {
+        firstName: 'Alain',
+        lastName: 'Terieur',
+      },
     });
     // when
     const screen = await render(<template><ImportInformationBanner @importDetail={{importDetail}} /></template>);
-
     assert.ok(
-      screen.getByText(t('components.import-information-banner.success'), {
-        exact: false,
-      }),
+      screen.getByText(
+        t('components.import-information-banner.success', {
+          firstname: importDetail.createdBy.firstName,
+          lastname: importDetail.createdBy.lastName,
+          date: importDetail.updatedAt.toLocaleDateString(),
+        }),
+      ),
     );
   });
 

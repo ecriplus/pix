@@ -27,7 +27,15 @@ export default class ImportBanner extends Component {
     if (this.args.importDetail?.hasError) {
       return this.intl.t('components.import-information-banner.error');
     } else if (this.args.importDetail?.isDone) {
-      return this.intl.t('components.import-information-banner.success');
+      const {
+        updatedAt,
+        createdBy: { firstName, lastName },
+      } = this.args.importDetail;
+      return this.intl.t('components.import-information-banner.success', {
+        date: updatedAt.toLocaleDateString(),
+        firstname: firstName,
+        lastname: lastName,
+      });
     }
     if (this.args.importDetail?.inProgress) {
       return this.intl.t('components.import-information-banner.in-progress');
