@@ -34,6 +34,15 @@ export default class LoginOidcRoute extends Route {
       return;
     }
 
+    // Preventing OIDC authentication replay errors when doing history back and reload
+    // when the user is already authenticated with the same OIDC Provider.
+    if (this.session.isAuthenticated) {
+      if (identityProvider.code == this.session.data.authenticated.identityProviderCode) {
+        this.router.transitionTo('authenticated');
+        return;
+      }
+    }
+
     if (!queryParams.code) {
       transition.abort();
       await this._makeOidcAuthenticationRequest(identityProvider);
