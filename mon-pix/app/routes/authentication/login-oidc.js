@@ -94,7 +94,7 @@ export default class LoginOidcRoute extends Route {
     );
     const { redirectTarget: authorizationUrl } = await response.json();
 
-    this.location.replace(authorizationUrl);
+    this.location.assign(authorizationUrl);
   }
 
   async _handleOidcCallbackRequest({ identityProvider, code, state, iss }) {
