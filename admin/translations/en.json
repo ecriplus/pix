@@ -2,8 +2,10 @@
   "common": {
     "actions": {
       "add": "Add",
+      "archive": "Archive",
       "cancel": "Cancel",
       "close": "Close",
+      "confirm": "Confirm",
       "deactivate": "Deactivate",
       "download-template": "Download template",
       "edit": "Edit",
@@ -667,6 +669,15 @@
       }
     },
     "certification-centers": {
+      "archive-confirmation-modal": {
+        "attachment": "Le rattachement et l'invitation de nouvelles personnes seront bloqués",
+        "campaigns": "Les campagnes actives vont être archivées",
+        "invitations": "Les invitations en attente vont être annulées",
+        "members": "Les membres actifs vont être désactivés",
+        "question": "Êtes-vous sûr de vouloir archiver ce centre de certification?",
+        "title": "Archiver le centre de certification {certificationCenterName}",
+        "warning": "Cette action est irréversible."
+      },
       "information-view": {
         "habilitations": {
           "aria-label": {

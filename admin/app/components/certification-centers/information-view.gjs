@@ -1,6 +1,8 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixModal from '@1024pix/pix-ui/components/pix-modal';
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
+import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
@@ -12,6 +14,8 @@ import HabilitationTag from './habilitation-tag';
 export default class InformationView extends Component {
   @service intl;
   @tracked habilitations = [];
+  @tracked isArchiveModalOpen = false;
+  @service store;
 
   constructor() {
     super(...arguments);
@@ -58,6 +62,22 @@ export default class InformationView extends Component {
   get externalURL() {
     const urlDashboardPrefix = ENV.APP.CERTIFICATION_CENTER_DASHBOARD_URL;
     return urlDashboardPrefix && urlDashboardPrefix + this.args.certificationCenter.id;
+  }
+
+  @action
+  toggleShowArchiveModal() {
+    this.isArchiveModalOpen = !this.isArchiveModalOpen;
+  }
+
+  @action
+  async archiveCertificationCenter() {
+    const adapter = this.store.adapterFor('certification-center');
+    await adapter.archiveCertificationCenter(this.args.certificationCenter.id);
+
+    this.toggleShowArchiveModal();
+    await this.args.certificationCenter.reload();
+
+    return this.args.refreshModel();
   }
 
   <template>
@@ -121,6 +141,13 @@ export default class InformationView extends Component {
           {{t "common.actions.edit"}}
         </PixButton>
       </li>
+      {{#unless @certificationCenter.isArchived}}
+        <li>
+          <PixButton @variant="error" @size="small" @triggerAction={{this.toggleShowArchiveModal}}>
+            {{t "common.actions.archive"}}
+          </PixButton>
+        </li>
+      {{/unless}}
       <li>
         <PixButtonLink
           @variant="secondary"
@@ -133,5 +160,37 @@ export default class InformationView extends Component {
         </PixButtonLink>
       </li>
     </ul>
+
+    {{#if this.isArchiveModalOpen}}
+      <PixModal
+        @title={{t
+          "pages.certification-centers.archive-confirmation-modal.title"
+          certificationCenterName=@certificationCenter.name
+        }}
+        @showModal={{this.isArchiveModalOpen}}
+        @onCloseButtonClick={{this.toggleShowArchiveModal}}
+      >
+        <:content>
+          <p>{{t "pages.certification-centers.archive-confirmation-modal.question"}}</p>
+          <ul class="certification-center-confirmation-modal__list">
+            <li>{{t "pages.certification-centers.archive-confirmation-modal.members"}}</li>
+            <li>{{t "pages.certification-centers.archive-confirmation-modal.invitations"}}</li>
+            <li>{{t "pages.certification-centers.archive-confirmation-modal.campaigns"}}</li>
+            <li>{{t "pages.certification-centers.archive-confirmation-modal.attachment"}}</li>
+          </ul>
+          <p class="certification-center-confirmation-modal__warning">{{t
+              "pages.certification-centers.archive-confirmation-modal.warning"
+            }}</p>
+        </:content>
+        <:footer>
+          <PixButton @triggerAction={{this.toggleShowArchiveModal}} @size="small" @variant="secondary">
+            {{t "common.actions.cancel"}}
+          </PixButton>
+          <PixButton @triggerAction={{this.archiveCertificationCenter}} @size="small">
+            {{t "common.actions.confirm"}}
+          </PixButton>
+        </:footer>
+      </PixModal>
+    {{/if}}
   </template>
 }

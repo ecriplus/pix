@@ -1,3 +1,4 @@
+import { action } from '@ember/object';
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import RSVP from 'rsvp';
@@ -13,5 +14,10 @@ export default class CertificationCentersGetRoute extends Route {
       certificationCenter,
       habilitations,
     });
+  }
+
+  @action
+  refreshModel() {
+    this.refresh();
   }
 }

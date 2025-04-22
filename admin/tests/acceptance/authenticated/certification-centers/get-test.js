@@ -200,6 +200,67 @@ module('Acceptance | authenticated/certification-centers/get', function (hooks) 
   });
 
   module('when certification center is not archived', function () {
+    test('displays the "Archive" button', async function (assert) {
+      // given
+      await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+      const certificationCenter = server.create('certification-center', {
+        name: 'Pokemon Center',
+        externalId: 'ABCDEF',
+        type: 'PRO',
+        archivedAt: null,
+        archivistFullName: null,
+      });
+
+      // when
+      const screen = await visit(`/certification-centers/${certificationCenter.id}`);
+
+      // then
+      assert.dom(screen.getByRole('button', { name: 'Archiver' })).exists();
+    });
+
+    module('when the "Archive" button is clicked', function () {
+      test('displays the confirmation modal', async function (assert) {
+        // given
+        await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+        const certificationCenter = server.create('certification-center', {
+          name: 'Pokemon Center',
+          externalId: 'ABCDEF',
+          type: 'PRO',
+          archivedAt: null,
+          archivistFullName: null,
+        });
+
+        // when
+        const screen = await visit(`/certification-centers/${certificationCenter.id}`);
+        await click(screen.getByRole('button', { name: 'Archiver' }));
+
+        // then
+        assert.dom(screen.getByText('Archiver le centre de certification Pokemon Center')).exists();
+      });
+    });
+
+    module('when the archive confirmation button is clicked', function () {
+      test('displays archived certification center banner', async function (assert) {
+        // given
+        await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+        const certificationCenter = server.create('certification-center', {
+          name: 'Pokemon Center',
+          externalId: 'ABCDEF',
+          type: 'PRO',
+          archivedAt: null,
+          archivistFullName: null,
+        });
+
+        // when
+        const screen = await visit(`/certification-centers/${certificationCenter.id}`);
+        await click(screen.getByRole('button', { name: 'Archiver' }));
+        await click(screen.getByRole('button', { name: 'Confirmer' }));
+
+        // then
+        assert.dom(await screen.findByText('Archivé le 01/01/2025 par John Doe.')).exists();
+      });
+    });
+
     module('tab navigation', function () {
       test('should show Équipe and Invitations tab', async function (assert) {
         // given
@@ -248,6 +309,24 @@ module('Acceptance | authenticated/certification-centers/get', function (hooks) 
   });
 
   module('when certification center is archived', function () {
+    test('does not display "Archive" button', async function (assert) {
+      // given
+      await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+      const certificationCenter = server.create('certification-center', {
+        name: 'Pokemon Center',
+        externalId: 'ABCDEF',
+        type: 'PRO',
+        archivedAt: new Date(),
+        archivistFullName: null,
+      });
+
+      // when
+      const screen = await visit(`/certification-centers/${certificationCenter.id}`);
+
+      // then
+      assert.dom(screen.queryByRole('button', { name: 'Archiver' })).doesNotExist();
+    });
+
     test('displays archived at date and archivist full name', async function (assert) {
       // given
       await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);

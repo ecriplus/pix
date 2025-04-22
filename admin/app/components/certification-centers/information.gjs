@@ -28,6 +28,7 @@ export default class Information extends Component {
             @certificationCenter={{@certificationCenter}}
             @availableHabilitations={{@availableHabilitations}}
             @toggleEditMode={{this.toggleEditMode}}
+            @refreshModel={{@refreshModel}}
           />
         {{/if}}
       </div>
