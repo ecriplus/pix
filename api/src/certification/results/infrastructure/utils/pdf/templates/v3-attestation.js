@@ -125,7 +125,7 @@ const generateV3AttestationTemplate = ({ pdf, data, translate }) => {
 
   const globalLevel = data.globalLevel;
 
-  if (!data.isPreBeginnerLevel) {
+  if (data.globalLevel) {
     pdf
       .font('Roboto-Regular')
       .fontSize(11)

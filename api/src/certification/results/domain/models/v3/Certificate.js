@@ -40,15 +40,16 @@ export class Certificate {
     this.deliveredAt = deliveredAt;
     this.certificationCenter = certificationCenter;
     this.pixScore = pixScore;
-    this.globalLevel = this.isPreBeginnerLevel ? null : new GlobalCertificationLevel({ score: pixScore });
+    this.globalLevel = this.#findLevel();
     this.verificationCode = verificationCode;
     this.maxReachableScore = MAX_REACHABLE_SCORE;
-    this.resultCompetenceTree = this.isPreBeginnerLevel ? null : resultCompetenceTree;
+    this.resultCompetenceTree = this.globalLevel ? resultCompetenceTree : null;
     this.algorithmEngineVersion = algorithmEngineVersion;
     this.certificationDate = certificationDate;
   }
 
-  get isPreBeginnerLevel() {
-    return new GlobalCertificationLevel({ score: this.pixScore }).meshLevel === CERTIFICATE_LEVELS.preBeginner;
+  #findLevel() {
+    const globalCertificationLevel = new GlobalCertificationLevel({ score: this.pixScore });
+    return globalCertificationLevel.meshLevel === CERTIFICATE_LEVELS.preBeginner ? null : globalCertificationLevel;
   }
 }
