@@ -15,7 +15,7 @@ export async function addTagsToOrganizations({
   for (const organizationTag of organizationTags) {
     const { organizationId, tagName } = organizationTag;
 
-    const organization = await organizationForAdminRepository.exist(organizationId);
+    const organization = await organizationForAdminRepository.exist({ organizationId });
     if (!organization) {
       throw new OrganizationNotFound({
         meta: {

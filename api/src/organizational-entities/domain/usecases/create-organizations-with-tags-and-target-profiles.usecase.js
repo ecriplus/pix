@@ -25,15 +25,13 @@ const createOrganizationsWithTagsAndTargetProfiles = async function ({
 
   // dependencies
   dataProtectionOfficerRepository,
-  organizationInvitationRepository,
-  organizationRepository,
   organizationForAdminRepository,
   organizationTagRepository,
+  organizationRepository,
   schoolRepository,
   tagRepository,
   targetProfileShareRepository,
   organizationValidator,
-  organizationInvitationService,
 }) {
   if (isEmpty(organizations)) {
     throw new ObjectValidationError('Les organisations ne sont pas renseignées.');
@@ -75,9 +73,8 @@ const createOrganizationsWithTagsAndTargetProfiles = async function ({
 
   await _sendInvitationEmails({
     createdOrganizations,
-    organizationInvitationRepository,
     organizationRepository,
-    organizationInvitationService,
+    organizationForAdminRepository,
   });
 
   return createdOrganizations.map(({ createdOrganization }) => createdOrganization);
@@ -88,7 +85,12 @@ export { createOrganizationsWithTagsAndTargetProfiles };
 async function _createOrganizations({ transformedOrganizationsData, organizationForAdminRepository }) {
   return PromiseUtils.mapSeries(transformedOrganizationsData, async (organizationToCreate) => {
     try {
-      const createdOrganization = await organizationForAdminRepository.save(organizationToCreate.organization);
+      const createdOrganization = await organizationForAdminRepository.save({
+        organization: {
+          ...organizationToCreate.organization,
+          provinceCode: organizationToCreate.organization.provinceCode,
+        },
+      });
       return {
         createdOrganization,
         organizationToCreate,
@@ -251,12 +253,7 @@ async function _addTargetProfiles({ createdOrganizations, targetProfileShareRepo
   }
 }
 
-async function _sendInvitationEmails({
-  createdOrganizations,
-  organizationInvitationRepository,
-  organizationRepository,
-  organizationInvitationService,
-}) {
+async function _sendInvitationEmails({ createdOrganizations, organizationRepository, organizationForAdminRepository }) {
   try {
     const createdOrganizationsWithEmail = createdOrganizations
       .map(({ createdOrganization, organizationToCreate }) => {
@@ -274,10 +271,9 @@ async function _sendInvitationEmails({
       .filter((organization) => Boolean(organization.email));
 
     for (const organizationWithEmail of createdOrganizationsWithEmail) {
-      await organizationInvitationService.createProOrganizationInvitation({
-        organizationRepository,
-        organizationInvitationRepository,
+      await organizationForAdminRepository.createProOrganizationInvitation({
         ...organizationWithEmail,
+        organizationRepository,
       });
     }
   } catch (error) {

@@ -5,12 +5,12 @@ import 'dotenv/config';
 import lodash from 'lodash';
 
 import { databaseConnections } from '../db/database-connections.js';
-import { createOrganizationsWithTagsAndTargetProfiles } from '../lib/domain/usecases/create-organizations-with-tags-and-target-profiles.js';
-import * as organizationValidator from '../lib/domain/validators/organization-with-tags-and-target-profiles-script.js';
-import * as targetProfileShareRepository from '../lib/infrastructure/repositories/target-profile-share-repository.js';
+import { createOrganizationsWithTagsAndTargetProfiles } from '../src/organizational-entities/domain/usecases/create-organizations-with-tags-and-target-profiles.usecase.js';
+import * as organizationValidator from '../src/organizational-entities/domain/validators/organization-with-tags-and-target-profiles.js';
 import * as dataProtectionOfficerRepository from '../src/organizational-entities/infrastructure/repositories/data-protection-officer.repository.js';
 import * as organizationTagRepository from '../src/organizational-entities/infrastructure/repositories/organization-tag.repository.js';
 import { tagRepository } from '../src/organizational-entities/infrastructure/repositories/tag.repository.js';
+import * as targetProfileShareRepository from '../src/organizational-entities/infrastructure/repositories/target-profile-share-repository.js';
 import { DomainTransaction as domainTransaction } from '../src/shared/domain/DomainTransaction.js';
 import { informationBannersStorage, temporaryStorage } from '../src/shared/infrastructure/key-value-storages/index.js';
 import * as organizationRepository from '../src/shared/infrastructure/repositories/organization-repository.js';

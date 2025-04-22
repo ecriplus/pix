@@ -37,13 +37,15 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
     });
 
     // then
-    expect(organizationForAdminRepository.get).to.have.been.calledWithExactly(givenOrganization.id);
+    expect(organizationForAdminRepository.get).to.have.been.calledWithExactly({ organizationId: givenOrganization.id });
     expect(existingOrganizationForAdmin.updateWithDataProtectionOfficerAndTags).to.have.been.calledWithExactly(
       givenOrganization,
       givenOrganization.dataProtectionOfficer,
       tagsToUpdate,
     );
-    expect(organizationForAdminRepository.update).to.have.been.calledWithExactly(existingOrganizationForAdmin);
+    expect(organizationForAdminRepository.update).to.have.been.calledWithExactly({
+      organization: existingOrganizationForAdmin,
+    });
     expect(result).to.equal(updatedOrganization);
   });
 

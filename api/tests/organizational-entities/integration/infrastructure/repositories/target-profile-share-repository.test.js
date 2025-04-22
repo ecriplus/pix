@@ -1,5 +1,5 @@
-import * as targetProfileShareRepository from '../../../../lib/infrastructure/repositories/target-profile-share-repository.js';
-import { databaseBuilder, expect, knex } from '../../../test-helper.js';
+import * as targetProfileShareRepository from '../../../../../src/organizational-entities/infrastructure/repositories/target-profile-share-repository.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Repository | Target-profile-share', function () {
   describe('#batchAddTargetProfilesToOrganization', function () {

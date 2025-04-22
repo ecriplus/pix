@@ -1,8 +1,8 @@
-import { validate } from '../../../../lib/domain/validators/organization-with-tags-and-target-profiles-script.js';
-import { SUPPORTED_LOCALES } from '../../../../src/shared/domain/constants.js';
-import { EntityValidationError } from '../../../../src/shared/domain/errors.js';
-import { Organization } from '../../../../src/shared/domain/models/index.js';
-import { catchErrSync, expect } from '../../../test-helper.js';
+import { validate } from '../../../../../src/organizational-entities/domain/validators/organization-with-tags-and-target-profiles.js';
+import { SUPPORTED_LOCALES } from '../../../../../src/shared/domain/constants.js';
+import { EntityValidationError } from '../../../../../src/shared/domain/errors.js';
+import { Organization } from '../../../../../src/shared/domain/models/index.js';
+import { catchErrSync, expect } from '../../../../test-helper.js';
 
 const organizationTypes = [...Object.values(Organization.types)];
 const supportedLocales = SUPPORTED_LOCALES.map((supportedLocale) => supportedLocale.toLocaleLowerCase());

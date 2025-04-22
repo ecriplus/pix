@@ -46,8 +46,9 @@ const archive = async function ({ id, archivedBy }) {
  * @param {string|number} organizationId
  * @return {Promise<boolean>}
  */
-const exist = async function (organizationId) {
+const exist = async function ({ organizationId }) {
   const organization = await knex(ORGANIZATIONS_TABLE_NAME).where({ id: organizationId }).first();
+
   return Boolean(organization);
 };
 
@@ -56,7 +57,7 @@ const exist = async function (organizationId) {
  * @param {string|number} parentOrganizationId
  * @return {Promise<OrganizationForAdmin[]>}
  */
-const findChildrenByParentOrganizationId = async function (parentOrganizationId) {
+const findChildrenByParentOrganizationId = async function ({ parentOrganizationId }) {
   const children = await knex(ORGANIZATIONS_TABLE_NAME).where({ parentOrganizationId }).orderBy('name', 'ASC');
   return children.map(_toDomain);
 };
@@ -66,7 +67,7 @@ const findChildrenByParentOrganizationId = async function (parentOrganizationId)
  * @param {string|number} id
  * @return {Promise<OrganizationForAdmin|NotFoundError>}
  */
-const get = async function (id) {
+const get = async function ({ organizationId }) {
   const knexConn = DomainTransaction.getConnection();
   const organization = await knexConn(ORGANIZATIONS_TABLE_NAME)
     .select({
@@ -105,11 +106,11 @@ const get = async function (id) {
       'organizations.id',
     )
     .leftJoin('organizations AS parentOrganizations', 'parentOrganizations.id', 'organizations.parentOrganizationId')
-    .where('organizations.id', id)
+    .where('organizations.id', organizationId)
     .first();
 
   if (!organization) {
-    throw new NotFoundError(`Not found organization for ID ${id}`);
+    throw new NotFoundError(`Not found organization for ID ${organizationId}`);
   }
 
   const tags = await knexConn('tags')
@@ -159,7 +160,7 @@ const get = async function (id) {
  * @param {OrganizationForAdmin} organization
  * @return {Promise<OrganizationForAdmin>}
  */
-const save = async function (organization) {
+const save = async function ({ organization }) {
   const knexConn = DomainTransaction.getConnection();
   const data = _.pick(organization, [
     'name',
@@ -187,7 +188,7 @@ const save = async function (organization) {
  * @param {OrganizationForAdmin} organization
  * @return {Promise<void>}
  */
-const update = async function (organization) {
+const update = async function ({ organization }) {
   const knexConn = DomainTransaction.getConnection();
   const organizationRawData = _.pick(organization, [
     'credit',
@@ -232,6 +233,33 @@ const findPaginatedFiltered = async function ({ filter, page }) {
   const { results, pagination } = await fetchPage(query, page);
   const organizations = results.map((model) => _toDomain(model));
   return { models: organizations, pagination };
+};
+
+/**
+ * @param {Object} params
+ * @param {string} params.organizationId
+ * @param {string} params.email
+ * @param {string} params.role
+ * @param {string} params.locale
+ * @param {OrganizationRepository} params.organizationRepository
+ * @param {OrganizationApi} params.organizationApi
+ * @returns {Promise<void>}
+ */
+const createProOrganizationInvitation = async function ({
+  organizationId,
+  email,
+  role,
+  locale,
+  organizationRepository,
+  organizationApi,
+}) {
+  await organizationApi.createProOrganizationInvitation({
+    organizationId,
+    email,
+    role,
+    locale,
+    organizationRepository,
+  });
 };
 
 async function _addOrUpdateDataProtectionOfficer(knexConn, dataProtectionOfficer) {
@@ -363,6 +391,7 @@ function _toDomain(rawOrganization) {
 
 export const organizationForAdminRepository = {
   archive,
+  createProOrganizationInvitation,
   exist,
   findPaginatedFiltered,
   findChildrenByParentOrganizationId,

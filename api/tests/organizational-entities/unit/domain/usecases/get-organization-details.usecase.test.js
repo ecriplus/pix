@@ -18,7 +18,7 @@ describe('Unit | Organizational Entities | Domain | UseCase | get-organization-d
     await getOrganizationDetails({ organizationId, organizationForAdminRepository });
 
     // then
-    expect(organizationForAdminRepository.get).to.have.been.calledWithExactly(organizationId);
+    expect(organizationForAdminRepository.get).to.have.been.calledWithExactly({ organizationId });
   });
 
   context('when the organization is a SCO-1D type', function () {

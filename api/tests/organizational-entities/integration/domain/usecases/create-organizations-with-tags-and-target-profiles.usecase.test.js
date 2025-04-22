@@ -1,13 +1,6 @@
 import lodash from 'lodash';
 
-import * as organizationValidator from '../../../../../lib/domain/validators/organization-with-tags-and-target-profiles-script.js';
-import * as targetProfileShareRepository from '../../../../../lib/infrastructure/repositories/target-profile-share-repository.js';
-import { createOrganizationsWithTagsAndTargetProfiles } from '../../../../../src/organizational-entities/domain/usecases/create-organizations-with-tags-and-target-profiles.usecase.js';
-import * as dataProtectionOfficerRepository from '../../../../../src/organizational-entities/infrastructure/repositories/data-protection-officer.repository.js';
-import { organizationForAdminRepository } from '../../../../../src/organizational-entities/infrastructure/repositories/organization-for-admin.repository.js';
-import * as organizationTagRepository from '../../../../../src/organizational-entities/infrastructure/repositories/organization-tag.repository.js';
-import { tagRepository } from '../../../../../src/organizational-entities/infrastructure/repositories/tag.repository.js';
-import * as schoolRepository from '../../../../../src/school/infrastructure/repositories/school-repository.js';
+import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import {
   ObjectValidationError,
@@ -16,9 +9,6 @@ import {
 } from '../../../../../src/shared/domain/errors.js';
 import { EntityValidationError } from '../../../../../src/shared/domain/errors.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
-import * as organizationRepository from '../../../../../src/shared/infrastructure/repositories/organization-repository.js';
-import { organizationInvitationService } from '../../../../../src/team/domain/services/organization-invitation.service.js';
-import { organizationInvitationRepository } from '../../../../../src/team/infrastructure/repositories/organization-invitation.repository.js';
 import {
   catchErr,
   databaseBuilder,
@@ -53,17 +43,8 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
         const organizations = [];
 
         // when
-        const error = await catchErr(createOrganizationsWithTagsAndTargetProfiles)({
+        const error = await catchErr(usecases.createOrganizationsWithTagsAndTargetProfiles)({
           organizations,
-          organizationRepository,
-          organizationForAdminRepository,
-          tagRepository,
-          targetProfileShareRepository,
-          organizationTagRepository,
-          organizationInvitationRepository,
-          dataProtectionOfficerRepository,
-          organizationValidator,
-          organizationInvitationService,
         });
 
         // then
@@ -92,17 +73,8 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
         ];
 
         // when
-        const error = await catchErr(createOrganizationsWithTagsAndTargetProfiles)({
+        const error = await catchErr(usecases.createOrganizationsWithTagsAndTargetProfiles)({
           organizations: organizationsWithEmptyValues,
-          organizationRepository,
-          organizationForAdminRepository,
-          tagRepository,
-          targetProfileShareRepository,
-          organizationTagRepository,
-          organizationInvitationRepository,
-          dataProtectionOfficerRepository,
-          organizationValidator,
-          organizationInvitationService,
         });
 
         // then
@@ -193,17 +165,8 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
         ];
 
         // when
-        const error = await catchErr(createOrganizationsWithTagsAndTargetProfiles)({
+        const error = await catchErr(usecases.createOrganizationsWithTagsAndTargetProfiles)({
           organizations: organizationsWithTagsWithOneMissingExternalId,
-          organizationRepository,
-          organizationForAdminRepository,
-          tagRepository,
-          targetProfileShareRepository,
-          organizationTagRepository,
-          organizationInvitationRepository,
-          dataProtectionOfficerRepository,
-          organizationValidator,
-          organizationInvitationService,
         });
 
         // then
@@ -266,17 +229,8 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
         ];
 
         // when
-        const error = await catchErr(createOrganizationsWithTagsAndTargetProfiles)({
+        const error = await catchErr(usecases.createOrganizationsWithTagsAndTargetProfiles)({
           organizations: organizationsWithTagsWithOneMissingName,
-          organizationRepository,
-          organizationForAdminRepository,
-          tagRepository,
-          targetProfileShareRepository,
-          organizationTagRepository,
-          organizationInvitationRepository,
-          dataProtectionOfficerRepository,
-          organizationValidator,
-          organizationInvitationService,
         });
 
         // then
@@ -342,17 +296,8 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
         ];
 
         // when
-        const error = await catchErr(createOrganizationsWithTagsAndTargetProfiles)({
+        const error = await catchErr(usecases.createOrganizationsWithTagsAndTargetProfiles)({
           organizations: organizationsWithTagsNotExists,
-          organizationRepository,
-          organizationForAdminRepository,
-          tagRepository,
-          targetProfileShareRepository,
-          organizationTagRepository,
-          organizationInvitationRepository,
-          dataProtectionOfficerRepository,
-          organizationValidator,
-          organizationInvitationService,
         });
 
         // then
@@ -421,17 +366,8 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
       ];
 
       // when
-      await createOrganizationsWithTagsAndTargetProfiles({
+      await usecases.createOrganizationsWithTagsAndTargetProfiles({
         organizations: organizationsWithTagsAlreadyExist,
-        organizationRepository,
-        organizationForAdminRepository,
-        tagRepository,
-        targetProfileShareRepository,
-        organizationTagRepository,
-        organizationInvitationRepository,
-        dataProtectionOfficerRepository,
-        organizationValidator,
-        organizationInvitationService,
       });
 
       // then
@@ -519,17 +455,8 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
       ];
 
       // when
-      const error = await catchErr(createOrganizationsWithTagsAndTargetProfiles)({
+      const error = await catchErr(usecases.createOrganizationsWithTagsAndTargetProfiles)({
         organizations: organizationsWithNonExistingTargetProfile,
-        organizationRepository,
-        organizationForAdminRepository,
-        tagRepository,
-        targetProfileShareRepository,
-        organizationTagRepository,
-        organizationInvitationRepository,
-        dataProtectionOfficerRepository,
-        organizationValidator,
-        organizationInvitationService,
       });
 
       // then
@@ -597,17 +524,8 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
       ];
 
       // when
-      await createOrganizationsWithTagsAndTargetProfiles({
+      await usecases.createOrganizationsWithTagsAndTargetProfiles({
         organizations: organizationsWithExistingTargetProfiles,
-        organizationRepository,
-        organizationForAdminRepository,
-        tagRepository,
-        targetProfileShareRepository,
-        organizationTagRepository,
-        organizationInvitationRepository,
-        dataProtectionOfficerRepository,
-        organizationValidator,
-        organizationInvitationService,
       });
 
       // then
@@ -683,17 +601,8 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
       ];
 
       // when
-      await createOrganizationsWithTagsAndTargetProfiles({
+      await usecases.createOrganizationsWithTagsAndTargetProfiles({
         organizations: organizationsWithInvitationRole,
-        organizationRepository,
-        organizationForAdminRepository,
-        tagRepository,
-        targetProfileShareRepository,
-        organizationTagRepository,
-        organizationInvitationRepository,
-        dataProtectionOfficerRepository,
-        organizationValidator,
-        organizationInvitationService,
       });
 
       // then
@@ -731,18 +640,8 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
       ];
 
       // when
-      const createdOrganizations = await createOrganizationsWithTagsAndTargetProfiles({
+      const createdOrganizations = await usecases.createOrganizationsWithTagsAndTargetProfiles({
         organizations,
-        organizationRepository,
-        organizationForAdminRepository,
-        tagRepository,
-        targetProfileShareRepository,
-        organizationTagRepository,
-        organizationInvitationRepository,
-        dataProtectionOfficerRepository,
-        organizationValidator,
-        organizationInvitationService,
-        schoolRepository,
       });
 
       // then
@@ -805,18 +704,8 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
       ];
 
       // when
-      await createOrganizationsWithTagsAndTargetProfiles({
+      await usecases.createOrganizationsWithTagsAndTargetProfiles({
         organizations,
-        organizationRepository,
-        organizationForAdminRepository,
-        tagRepository,
-        targetProfileShareRepository,
-        organizationTagRepository,
-        organizationInvitationRepository,
-        dataProtectionOfficerRepository,
-        organizationValidator,
-        organizationInvitationService,
-        schoolRepository,
       });
 
       // then
@@ -867,18 +756,8 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
       ];
 
       // when
-      await createOrganizationsWithTagsAndTargetProfiles({
+      await usecases.createOrganizationsWithTagsAndTargetProfiles({
         organizations,
-        organizationRepository,
-        organizationForAdminRepository,
-        tagRepository,
-        targetProfileShareRepository,
-        organizationTagRepository,
-        organizationInvitationRepository,
-        dataProtectionOfficerRepository,
-        organizationValidator,
-        organizationInvitationService,
-        schoolRepository,
       });
 
       // then

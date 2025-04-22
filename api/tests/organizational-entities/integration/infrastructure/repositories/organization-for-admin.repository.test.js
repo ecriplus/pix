@@ -466,7 +466,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         await databaseBuilder.commit();
 
         // when
-        const result = await organizationForAdminRepository.exist(organizationId);
+        const result = await organizationForAdminRepository.exist({ organizationId });
 
         // then
         expect(result).to.be.true;
@@ -479,7 +479,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         const organizationId = 1234;
 
         // when
-        const result = await organizationForAdminRepository.exist(organizationId);
+        const result = await organizationForAdminRepository.exist({ organizationId });
 
         // then
         expect(result).to.be.false;
@@ -502,7 +502,9 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       it('returns an empty array', async function () {
         //given
         //when
-        const children = await organizationForAdminRepository.findChildrenByParentOrganizationId(parentOrganizationId);
+        const children = await organizationForAdminRepository.findChildrenByParentOrganizationId({
+          parentOrganizationId,
+        });
 
         //then
         expect(children).to.have.lengthOf(0);
@@ -521,7 +523,9 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         await databaseBuilder.commit();
 
         // when
-        const children = await organizationForAdminRepository.findChildrenByParentOrganizationId(parentOrganizationId);
+        const children = await organizationForAdminRepository.findChildrenByParentOrganizationId({
+          parentOrganizationId,
+        });
 
         // then
         expect(children.length).to.be.greaterThanOrEqual(1);
@@ -587,7 +591,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       await databaseBuilder.commit();
 
       // when
-      const foundOrganizationForAdmin = await organizationForAdminRepository.get(organization.id);
+      const foundOrganizationForAdmin = await organizationForAdminRepository.get({ organizationId: organization.id });
 
       // then
       const expectedOrganizationForAdmin = new OrganizationForAdmin({
@@ -634,7 +638,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       const nonExistentId = 10083;
 
       // when
-      const error = await catchErr(organizationForAdminRepository.get)(nonExistentId);
+      const error = await catchErr(organizationForAdminRepository.get)({ organizationId: nonExistentId });
 
       // then
       expect(error).to.be.an.instanceof(NotFoundError);
@@ -678,7 +682,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         await databaseBuilder.commit();
 
         // when
-        const foundOrganizationForAdmin = await organizationForAdminRepository.get(organization.id);
+        const foundOrganizationForAdmin = await organizationForAdminRepository.get({ organizationId: organization.id });
 
         // then
         const expectedOrganizationForAdmin = new OrganizationForAdmin({
@@ -739,7 +743,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         await databaseBuilder.commit();
 
         // when
-        const organization = await organizationForAdminRepository.get(insertedOrganization.id);
+        const organization = await organizationForAdminRepository.get({ organizationId: insertedOrganization.id });
 
         // then
         const expectedTags = [domainBuilder.buildTag({ ...tag1 }), domainBuilder.buildTag({ ...tag2 })];
@@ -777,7 +781,9 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         await databaseBuilder.commit();
 
         // when
-        const foundOrganizationForAdmin = await organizationForAdminRepository.get(insertedOrganization.id);
+        const foundOrganizationForAdmin = await organizationForAdminRepository.get({
+          organizationId: insertedOrganization.id,
+        });
 
         // then
         const expectedOrganizationForAdmin = new OrganizationForAdmin({
@@ -833,7 +839,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       });
 
       // when
-      const savedOrganization = await organizationForAdminRepository.save(organization);
+      const savedOrganization = await organizationForAdminRepository.save({ organization });
 
       // then
       expect(savedOrganization).to.be.instanceOf(OrganizationForAdmin);
@@ -865,7 +871,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           createdBy: superAdminUserId,
         });
 
-        const savedOrganization = await organizationForAdminRepository.save(organization);
+        const savedOrganization = await organizationForAdminRepository.save({ organization });
 
         const savedOrganizationFeatures = await knex('organization-features')
           .where({
@@ -906,7 +912,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
       // when
       childOrganizationForAdmin.parentOrganizationId = parentOrganizationId;
-      await organizationForAdminRepository.update(childOrganizationForAdmin);
+      await organizationForAdminRepository.update({ organization: childOrganizationForAdmin });
 
       // then
       const updatedOrganization = await knex('organizations').where({ id: childOrganization.id }).first();
@@ -933,7 +939,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           [ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT.key]: { active: true },
         },
       });
-      await organizationForAdminRepository.update(organizationToUpdate);
+      await organizationForAdminRepository.update({ organization: organizationToUpdate });
 
       // then
       const enabledFeatures = await knex('organization-features')
@@ -965,7 +971,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         },
       });
 
-      await organizationForAdminRepository.update(organizationToUpdate);
+      await organizationForAdminRepository.update({ organization: organizationToUpdate });
 
       // then
       const enabledFeatures = await knex('organization-features')
@@ -1002,7 +1008,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           [ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT.key]: { active: false },
         },
       });
-      await organizationForAdminRepository.update(organizationToUpdate);
+      await organizationForAdminRepository.update({ organization: organizationToUpdate });
 
       //then
       const enabledFeatures = await knex('organization-features').whereNot({ featureId: byDefaultFeatureId });
@@ -1028,7 +1034,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
         },
       });
-      await organizationForAdminRepository.update(organizationToUpdate);
+      await organizationForAdminRepository.update({ organization: organizationToUpdate });
 
       //then
       const enabledFeatures = await knex('organization-features');
@@ -1053,7 +1059,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         dataProtectionOfficerFirstName: 'Iron',
         dataProtectionOfficerLastName: 'Man',
       });
-      await organizationForAdminRepository.update(organizationToUpdate);
+      await organizationForAdminRepository.update({ organization: organizationToUpdate });
 
       // then
       const dataProtectionOfficerCreated = await knex('data-protection-officers')
@@ -1091,7 +1097,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         dataProtectionOfficerFirstName: 'Iron',
         dataProtectionOfficerLastName: 'Man',
       });
-      await organizationForAdminRepository.update(organizationToUpdate);
+      await organizationForAdminRepository.update({ organization: organizationToUpdate });
 
       // then
       const dataProtectionOfficerUpdated = await knex('data-protection-officers')
@@ -1123,7 +1129,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       });
 
       organizationToUpdate.tagsToAdd = tagsToAdd;
-      await organizationForAdminRepository.update(organizationToUpdate);
+      await organizationForAdminRepository.update({ organization: organizationToUpdate });
 
       // then
       const addedTags = await knex('organization-tags').select('tagId', 'organizationId').where({ organizationId });
@@ -1145,7 +1151,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       });
 
       organizationToUpdate.tagsToAdd = tagsToAdd;
-      await organizationForAdminRepository.update(organizationToUpdate);
+      await organizationForAdminRepository.update({ organization: organizationToUpdate });
 
       // then
       const addedTags = await knex('organization-tags').where({ organizationId });
@@ -1173,7 +1179,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       });
 
       organizationToUpdate.tagsToRemove = tagsToRemove;
-      await organizationForAdminRepository.update(organizationToUpdate);
+      await organizationForAdminRepository.update({ organization: organizationToUpdate });
 
       // then
       const result = await knex('organization-tags').where({ organizationId });
@@ -1187,7 +1193,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       const { count: nbOrganizationsBeforeUpdate } = await knex('organizations').count('*').first();
 
       // when
-      await organizationForAdminRepository.update(new OrganizationForAdmin(organization));
+      await organizationForAdminRepository.update({ organization: new OrganizationForAdmin(organization) });
 
       // then
       const { count: nbOrganizationsAfterUpdate } = await knex('organizations').count('*').first();
