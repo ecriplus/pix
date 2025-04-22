@@ -1,8 +1,8 @@
 import Joi from 'joi';
 
-import { config } from '../../../../src/shared/config.js';
 import { assessmentAuthorization } from '../../../evaluation/application/pre-handlers/assessment-authorization.js';
 import { securityPreHandlers } from '../../application/security-pre-handlers.js';
+import { config } from '../../config.js';
 import { identifiersType } from '../../domain/types/identifiers-type.js';
 import { assessmentController } from './assessment-controller.js';
 

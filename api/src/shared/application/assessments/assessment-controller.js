@@ -39,7 +39,7 @@ const get = async function (request, _, dependencies = { assessmentSerializer })
   const assessmentId = request.params.id;
   const locale = extractLocaleFromRequest(request);
 
-  const assessment = await usecases.getAssessment({ assessmentId, locale });
+  const assessment = await sharedUsecases.getAssessment({ assessmentId, locale });
 
   return dependencies.assessmentSerializer.serialize(assessment);
 };
@@ -105,7 +105,7 @@ const findCompetenceEvaluations = async function (request) {
 const autoValidateNextChallenge = async function (request, h) {
   const assessmentId = request.params.id;
   const locale = extractLocaleFromRequest(request);
-  const assessment = await usecases.getAssessment({ assessmentId, locale });
+  const assessment = await sharedUsecases.getAssessment({ assessmentId, locale });
   const userId = assessment.userId;
   const fakeAnswer = new Answer({
     assessmentId,

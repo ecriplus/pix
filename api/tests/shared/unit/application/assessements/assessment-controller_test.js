@@ -7,6 +7,7 @@ import { assessmentController } from '../../../../../src/shared/application/asse
 import { config } from '../../../../../src/shared/config.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import * as events from '../../../../../src/shared/domain/events/index.js';
+import { sharedUsecases } from '../../../../../src/shared/domain/usecases/index.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Controller | assessment-controller', function () {
@@ -35,7 +36,7 @@ describe('Unit | Controller | assessment-controller', function () {
     let assessmentSerializerStub;
 
     beforeEach(function () {
-      sinon.stub(usecases, 'getAssessment').withArgs({ assessmentId, locale }).resolves(assessment);
+      sinon.stub(sharedUsecases, 'getAssessment').withArgs({ assessmentId, locale }).resolves(assessment);
       assessmentSerializerStub = { serialize: sinon.stub() };
       assessmentSerializerStub.serialize.resolvesArg(0);
     });
