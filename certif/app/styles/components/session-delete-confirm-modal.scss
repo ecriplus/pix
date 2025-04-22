@@ -1,13 +1,7 @@
-/* stylelint-disable no-descending-specificity */
-
-.session-delete-confirmation-modal-warning {
+.session-delete-confirmation-modal-warning__content {
   margin-bottom: 14px;
 
-  &__content {
-    margin-bottom: 14px;
-
-    span {
-      font-weight: 700;
-    }
+  span {
+    font-weight: 700;
   }
 }
