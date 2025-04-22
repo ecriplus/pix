@@ -8,13 +8,13 @@ import { refreshTokenRepository } from '../../../identity-access-management/infr
 import { resetPasswordDemandRepository } from '../../../identity-access-management/infrastructure/repositories/reset-password-demand.repository.js';
 import * as userRepository from '../../../identity-access-management/infrastructure/repositories/user.repository.js';
 import * as userAcceptanceRepository from '../../../legal-documents/infrastructure/repositories/user-acceptance.repository.js';
-import * as campaignParticipationsApi from '../../../prescription/campaign-participation/application/api/campaign-participations-api.js';
 import * as organizationLearnerRepository from '../../../shared/infrastructure/repositories/organization-learner-repository.js';
 import * as userLoginRepository from '../../../shared/infrastructure/repositories/user-login-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import { certificationCenterMembershipRepository } from '../../../team/infrastructure/repositories/certification-center-membership.repository.js';
 import * as membershipRepository from '../../../team/infrastructure/repositories/membership.repository.js';
+import * as campaignParticipationsApiRepository from '../../infrastructure/repositories/campaign-participations-api.repository.js';
 import * as candidatesApiRepository from '../../infrastructure/repositories/candidates-api.repository.js';
 import * as learnersApiRepository from '../../infrastructure/repositories/learners-api.repository.js';
 import * as userTeamsApiRepository from '../../infrastructure/repositories/user-teams-api.repository.js';
@@ -23,6 +23,7 @@ const path = dirname(fileURLToPath(import.meta.url));
 
 const repositories = {
   authenticationMethodRepository,
+  campaignParticipationsApiRepository,
   candidatesApiRepository,
   certificationCenterMembershipRepository,
   learnersApiRepository,
@@ -42,7 +43,7 @@ const usecasesWithoutInjectedDependencies = {
   ...(await importNamedExportsFromDirectory({ path: join(path, './'), ignoredFileNames: ['index.js'] })),
 };
 
-const dependencies = Object.assign({ campaignParticipationsApi }, repositories);
+const dependencies = Object.assign({}, repositories);
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
 

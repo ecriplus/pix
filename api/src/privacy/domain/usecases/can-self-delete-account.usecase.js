@@ -6,6 +6,7 @@ import { featureToggles } from '../../../shared/infrastructure/feature-toggles/i
  * @param {Object} params - The parameters for the use case.
  * @param {number} params.userId - The ID of the user.
  * @param {Object} params.featureToggles - The feature toggles configuration.
+ * @param {Object} params.campaignParticipationsApiRepository - The repository for campaign participations operations.
  * @param {Object} params.candidatesApiRepository - The repository for candidate-related operations.
  * @param {Object} params.learnersApiRepository - The repository for learner-related operations.
  * @param {Object} params.userTeamsApiRepository - The repository for user team access operations.
@@ -16,7 +17,7 @@ const canSelfDeleteAccount = async ({
   candidatesApiRepository,
   learnersApiRepository,
   userTeamsApiRepository,
-  campaignParticipationsApi,
+  campaignParticipationsApiRepository,
 }) => {
   const isSelfAccountDeletionEnabled = await featureToggles.get('isSelfAccountDeletionEnabled');
   if (!isSelfAccountDeletionEnabled) return false;
@@ -24,7 +25,7 @@ const canSelfDeleteAccount = async ({
   const hasBeenLearner = await learnersApiRepository.hasBeenLearner({ userId });
   if (hasBeenLearner) return false;
 
-  const hasCampaignParticipations = await campaignParticipationsApi.hasCampaignParticipations({ userId });
+  const hasCampaignParticipations = await campaignParticipationsApiRepository.hasCampaignParticipations({ userId });
   if (hasCampaignParticipations) return false;
 
   const hasBeenCandidate = await candidatesApiRepository.hasBeenCandidate({ userId });

@@ -10,7 +10,7 @@ describe('Unit | Privacy | Domain | UseCase | can-self-delete-account', function
     dependencies = {
       featureToggles,
       learnersApiRepository: { hasBeenLearner: sinon.stub().resolves(false) },
-      campaignParticipationsApi: {
+      campaignParticipationsApiRepository: {
         hasCampaignParticipations: sinon.stub(),
       },
       candidatesApiRepository: {
@@ -55,7 +55,7 @@ describe('Unit | Privacy | Domain | UseCase | can-self-delete-account', function
     context('When user has participated in a campaign', function () {
       it('returns false', async function () {
         // given
-        dependencies.campaignParticipationsApi.hasCampaignParticipations.withArgs({ userId }).resolves(true);
+        dependencies.campaignParticipationsApiRepository.hasCampaignParticipations.withArgs({ userId }).resolves(true);
 
         // when
         const result = await usecases.canSelfDeleteAccount({ userId, ...dependencies });
@@ -68,7 +68,7 @@ describe('Unit | Privacy | Domain | UseCase | can-self-delete-account', function
     context('when user has not participated in a campaign', function () {
       it('returns true', async function () {
         // given
-        dependencies.campaignParticipationsApi.hasCampaignParticipations.withArgs({ userId }).resolves(false);
+        dependencies.campaignParticipationsApiRepository.hasCampaignParticipations.withArgs({ userId }).resolves(false);
 
         // when
         const result = await usecases.canSelfDeleteAccount({ userId, ...dependencies });
