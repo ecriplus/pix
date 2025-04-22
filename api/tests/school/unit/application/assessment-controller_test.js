@@ -93,4 +93,20 @@ describe('Unit | Controller | assessment-controller', function () {
       });
     });
   });
+
+  describe('#createAssessmentPreviewForPix1d', function () {
+    it('should call the expected usecase', async function () {
+      const assessmentSerializer = { serialize: sinon.stub() };
+      const createdAssessment = Symbol('created-assessment');
+      assessmentSerializer.serialize.withArgs(createdAssessment).resolves(Symbol('serialized-assessment'));
+      sinon.stub(usecases, 'createPreviewAssessment').resolves(createdAssessment);
+
+      const result = await assessmentController.createAssessmentPreviewForPix1d({}, hFake, {
+        assessmentSerializer,
+      });
+
+      expect(result.statusCode).to.be.equal(201);
+      expect(assessmentSerializer.serialize).to.have.been.calledWithExactly(createdAssessment);
+    });
+  });
 });

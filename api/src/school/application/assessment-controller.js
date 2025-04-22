@@ -30,7 +30,13 @@ const getCurrentActivity = async function (request, h, dependencies = { activity
   return dependencies.activitySerializer.serialize(activity);
 };
 
+const createAssessmentPreviewForPix1d = async function (request, h, dependencies = { assessmentSerializer }) {
+  const createdAssessment = await usecases.createPreviewAssessment({});
+  return h.response(dependencies.assessmentSerializer.serialize(createdAssessment)).created();
+};
+
 const assessmentController = {
+  createAssessmentPreviewForPix1d,
   getNextChallengeForPix1d,
   create,
   getById,
