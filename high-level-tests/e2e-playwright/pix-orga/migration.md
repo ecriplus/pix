@@ -20,7 +20,7 @@
 
 **student-sup**
 
-- [ ] J'affiche la liste des élèves
+- [x] J'affiche la liste des élèves
 
 **campaign-evaluation**
 
