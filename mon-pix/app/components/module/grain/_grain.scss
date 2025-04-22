@@ -31,7 +31,7 @@ $grain-card-border-radius: var(--pix-spacing-4x);
 
     .grain__card {
       outline: 2px solid var(--pix-neutral-500);
-      outline-offset: -2px;
+      outline-offset: var(--pix-spacing-3x);
     }
   }
 }
@@ -74,6 +74,6 @@ $grain-card-border-radius: var(--pix-spacing-4x);
 .grain--active:focus-visible {
   .grain__card {
     outline: 2px solid var(--pix-neutral-500);
-    outline-offset: -2px;
+    outline-offset: var(--pix-spacing-3x);
   }
 }
