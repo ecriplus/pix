@@ -160,7 +160,7 @@ describe('Unit | Controller | assessment-controller', function () {
       const competenceEvaluation1 = domainBuilder.buildCompetenceEvaluation({ assessmentId, userId });
       const competenceEvaluation2 = domainBuilder.buildCompetenceEvaluation({ assessmentId, userId });
       sinon
-        .stub(usecases, 'findCompetenceEvaluationsByAssessment')
+        .stub(evaluationUsecases, 'findCompetenceEvaluationsByAssessment')
         .withArgs({ assessmentId, userId })
         .resolves([competenceEvaluation1, competenceEvaluation2]);
       const request = {

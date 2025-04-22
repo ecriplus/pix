@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-import { findCompetenceEvaluationsByAssessment } from '../../../../lib/domain/usecases/find-competence-evaluations-by-assessment.js';
-import { UserNotAuthorizedToAccessEntityError } from '../../../../src/shared/domain/errors.js';
-import { catchErr, expect, sinon } from '../../../test-helper.js';
+import { findCompetenceEvaluationsByAssessment } from '../../../../../src/evaluation/domain/usecases/find-competence-evaluations-by-assessment.js';
+import { UserNotAuthorizedToAccessEntityError } from '../../../../../src/shared/domain/errors.js';
+import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | find-competence-evaluations-by-assessment', function () {
   const userId = 1;

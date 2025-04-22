@@ -97,7 +97,10 @@ const findCompetenceEvaluations = async function (request) {
   const userId = request.auth.credentials.userId;
   const assessmentId = request.params.id;
 
-  const competenceEvaluations = await usecases.findCompetenceEvaluationsByAssessment({ userId, assessmentId });
+  const competenceEvaluations = await evaluationUsecases.findCompetenceEvaluationsByAssessment({
+    userId,
+    assessmentId,
+  });
 
   return competenceEvaluationSerializer.serialize(competenceEvaluations);
 };
