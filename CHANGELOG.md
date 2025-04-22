@@ -1,5 +1,22 @@
 # Pix Changelog
 
+## v5.95.0 (22/04/2025)
+
+
+### :rocket: Amélioration
+- [#12089](https://github.com/1024pix/pix/pull/12089) [FEATURE] Utiliser la campaignParticipationId pour récupérer les paliers atteint lors d'une campagne (Pix-17331).
+- [#12090](https://github.com/1024pix/pix/pull/12090) [FEATURE] Ajout des derniers éléments pour le certificat V3 complet sur Pix App (PIX-17575).
+- [#12097](https://github.com/1024pix/pix/pull/12097) [FEATURE] Épurer certains fonds de grains (PIX-17568).
+- [#12088](https://github.com/1024pix/pix/pull/12088) [FEATURE] Afficher la jauge pour le certificat V3 sur Pix App (PIX-17545).
+- [#12096](https://github.com/1024pix/pix/pull/12096) [FEATURE] Retirer les tags sur les cartes grains (PIX-17569).
+- [#12093](https://github.com/1024pix/pix/pull/12093) [FEATURE] Affinage navbar Modulix (PIX-17565).
+- [#12092](https://github.com/1024pix/pix/pull/12092) [FEATURE] Elargir la largeur max du module (desktop) et la taille de l'image (PIX-17564).
+- [#12083](https://github.com/1024pix/pix/pull/12083) [FEATURE] Afficher les informations du niveau global sur le certificat V3 sur Pix App (PIX-17532).
+
+### :building_construction: Tech
+- [#11475](https://github.com/1024pix/pix/pull/11475) [TECH] Faire évoluer le script de configuration.
+- [#12101](https://github.com/1024pix/pix/pull/12101) [TECH] Améliorer la page de chargement d'entrée en certification (PIX-17556).
+
 ## v5.94.0 (18/04/2025)
 
 
