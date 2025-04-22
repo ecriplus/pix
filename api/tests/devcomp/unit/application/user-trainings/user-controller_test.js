@@ -1,6 +1,6 @@
-import { userController } from '../../../../lib/application/users/user-controller.js';
-import { usecases as devcompUsecases } from '../../../../src/devcomp/domain/usecases/index.js';
-import { expect, hFake, sinon } from '../../../test-helper.js';
+import { userController } from '../../../../../src/devcomp/application/user-trainings/user-controller.js';
+import { usecases as devcompUsecases } from '../../../../../src/devcomp/domain/usecases/index.js';
+import { expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Controller | user-controller', function () {
   describe('#findPaginatedUserRecommendedTrainings', function () {

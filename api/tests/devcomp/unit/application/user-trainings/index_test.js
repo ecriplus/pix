@@ -1,7 +1,7 @@
-import * as moduleUnderTest from '../../../../lib/application/users/index.js';
-import { userController } from '../../../../lib/application/users/user-controller.js';
-import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
+import * as moduleUnderTest from '../../../../../src/devcomp/application/user-trainings/index.js';
+import { userController } from '../../../../../src/devcomp/application/user-trainings/user-controller.js';
+import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
+import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Router | user-router', function () {
   describe('GET /api/users/{id}/trainings', function () {

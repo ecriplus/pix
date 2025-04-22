@@ -1,6 +1,6 @@
-import { usecases as devcompUsecases } from '../../../src/devcomp/domain/usecases/index.js';
-import * as trainingSerializer from '../../../src/devcomp/infrastructure/serializers/jsonapi/training-serializer.js';
-import * as requestResponseUtils from '../../../src/shared/infrastructure/utils/request-response-utils.js';
+import * as requestResponseUtils from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { usecases as devcompUsecases } from '../../domain/usecases/index.js';
+import * as trainingSerializer from '../../infrastructure/serializers/jsonapi/training-serializer.js';
 
 const findPaginatedUserRecommendedTrainings = async function (
   request,
