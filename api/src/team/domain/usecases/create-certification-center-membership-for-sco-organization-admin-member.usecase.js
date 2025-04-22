@@ -14,7 +14,7 @@ const createCertificationCenterMembershipForScoOrganizationAdminMember = async f
     externalId: existingOrganizationMembership.organization.externalId,
   });
 
-  if (!existingCertificationCenter) return;
+  if (!existingCertificationCenter || existingCertificationCenter.archivedAt) return;
 
   const certificationCenterMembership =
     await certificationCenterMembershipRepository.findByCertificationCenterIdAndUserId({
