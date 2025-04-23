@@ -6,7 +6,6 @@ import { FileValidationError } from '../../../../../../src/shared/domain/errors.
 import * as csvSerializer from '../../../../../../src/shared/infrastructure/serializers/csv/csv-serializer.js';
 import { logger } from '../../../../../../src/shared/infrastructure/utils/logger.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
-
 describe('Unit | Serializer | CSV | csv-serializer', function () {
   describe('#serializeLine', function () {
     it('should quote strings', async function () {
@@ -1453,6 +1452,30 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
 
       // then
       expect(checkCsvHeaderStub).to.have.been.calledWithExactly({ filePath, requiredFieldNames });
+    });
+  });
+
+  describe('#deserializeForCertificationCenterBatchArchive', function () {
+    it('should check the required header', async function () {
+      // given
+      const filePath = 'file://certification-centers.csv';
+      const checkCsvHeaderStub = sinon.stub();
+      const readCsvFileStub = sinon.stub();
+      const parseCsvDataStub = sinon.stub();
+      parseCsvDataStub.resolves([{ certificationCenterId: 1234 }, { certificationCenterId: 5678 }]);
+
+      const requiredFieldNames = ['certificationCenterId'];
+
+      // when
+      const serializedData = await csvSerializer.deserializeForCertificationCenterBatchArchive(filePath, {
+        checkCsvHeader: checkCsvHeaderStub,
+        readCsvFile: readCsvFileStub,
+        parseCsvData: parseCsvDataStub,
+      });
+
+      // then
+      expect(checkCsvHeaderStub).to.have.been.calledWithExactly({ filePath, requiredFieldNames });
+      expect(serializedData).to.deep.equal([1234, 5678]);
     });
   });
 
