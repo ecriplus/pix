@@ -5,6 +5,7 @@ import {
   FlashcardsStartedEvent,
   FlashcardsVersoSeenEvent,
 } from '../../../../../src/devcomp/domain/models/passage-events/flashcard-events.js';
+import { PassageTerminatedEvent } from '../../../../../src/devcomp/domain/models/passage-events/passage-events.js';
 import { recordPassageEvents } from '../../../../../src/devcomp/domain/usecases/record-passage-events.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
@@ -56,12 +57,20 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
       type: 'FLASHCARDS_RETRIED',
     };
 
+    const passageTerminatedEvent = {
+      occurredAt: new Date(),
+      passageId: 2,
+      sequenceNumber: 1,
+      type: 'PASSAGE_TERMINATED',
+    };
+
     const events = [
       flashcardsVersoSeenEvent,
       flashcardsStartedEvent,
       flashcardsCardAutoAssessedEvent,
       flashcardsRectoReviewedEvent,
       flashcardsRetriedEvent,
+      passageTerminatedEvent,
     ];
 
     const passageEventRepositoryStub = {
@@ -77,6 +86,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
     const flashcardsCardAutoAssessedPassageEvent = new FlashcardsCardAutoAssessedEvent(flashcardsCardAutoAssessedEvent);
     const flashcardsRectoReviewedEventPassageEvent = new FlashcardsRectoReviewedEvent(flashcardsRectoReviewedEvent);
     const flashcardsRetriedEventPassageEvent = new FlashcardsRetriedEvent(flashcardsRetriedEvent);
+    const passageTerminatedPassageEvent = new PassageTerminatedEvent(passageTerminatedEvent);
 
     expect(passageEventRepositoryStub.record.getCall(0)).to.have.been.calledWithExactly(
       flashcardsVersoSeenPassageEvent,
@@ -91,6 +101,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
     expect(passageEventRepositoryStub.record.getCall(4)).to.have.been.calledWithExactly(
       flashcardsRetriedEventPassageEvent,
     );
+    expect(passageEventRepositoryStub.record.getCall(5)).to.have.been.calledWithExactly(passageTerminatedPassageEvent);
   });
   context('when type of passage event does not exist', function () {
     it('should throw an error', async function () {
