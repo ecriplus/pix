@@ -8,7 +8,7 @@ import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 module('Integration | Component | Certifications | Shareable certificate | v2-certificate', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  test('it displays certification starter page when extension is enabled', async function (assert) {
+  test('it displays certificate information', async function (assert) {
     // given
     const store = this.owner.lookup('service:store');
     const certification = store.createRecord('certification', {

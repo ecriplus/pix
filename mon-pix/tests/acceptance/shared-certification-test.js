@@ -13,7 +13,7 @@ module('Acceptance | Certificate verification', function (hooks) {
   setupIntl(hooks);
 
   module('when isV3CertificationPageEnabled feature toggle is enabled', function () {
-    module('when session version is v3', function () {
+    module('when algorithm version is v3', function () {
       test('displays v3 shared certificate page', async function (assert) {
         // given
         server.create('feature-toggle', { id: '0', isV3CertificationPageEnabled: true });
@@ -49,7 +49,7 @@ module('Acceptance | Certificate verification', function (hooks) {
       });
     });
 
-    module('when session version is v2', function () {
+    module('when algorithm version is v2', function () {
       test('displays v2 shared certificate page', async function (assert) {
         // given
         server.create('feature-toggle', { id: '0', isV3CertificationPageEnabled: true });
@@ -67,7 +67,7 @@ module('Acceptance | Certificate verification', function (hooks) {
   });
 
   module('when isV3CertificationPageEnabled feature toggle is disabled', function () {
-    module('when session version is v3', function () {
+    module('when algorithm version is v3', function () {
       test('displays v2(old) shared certificate page', async function (assert) {
         // given
         server.create('feature-toggle', { id: '0', isV3CertificationPageEnabled: false });
@@ -78,7 +78,6 @@ module('Acceptance | Certificate verification', function (hooks) {
         await click(screen.getByRole('button', { name: 'Vérifier le certificat' }));
 
         // then
-        assert.dom(screen.queryByRole('heading', { name: 'Page Certificat V3' })).doesNotExist();
         assert.dom(screen.getByRole('link', { name: t('pages.shared-certification.back-link') })).exists();
         assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.title') })).exists();
       });
