@@ -497,10 +497,12 @@ describe('Integration | Infrastructure | Repository | Certification', function (
     context('when session is V3', function () {
       context('when isV3CertificationAttestationEnabled feature toggle is truthy', function () {
         context('when isV3CertificationPageEnabled feature toggle is truthy', function () {
-          it('should return a V3CertificationAttestation with ResultCompetenceTree', async function () {
+          it('should return a V3CertificationAttestation with translated ResultCompetenceTree', async function () {
             // given
             await featureToggles.set('isV3CertificationAttestationEnabled', true);
             await featureToggles.set('isV3CertificationPageEnabled', true);
+
+            const locale = 'en';
 
             const certificationAttestationData = {
               id: 123,
@@ -552,24 +554,25 @@ describe('Integration | Infrastructure | Repository | Certification', function (
             });
             databaseBuilder.factory.buildCompetenceMark(competenceMarks2);
 
-            await databaseBuilder.commit();
-
-            const competence1 = domainBuilder.buildCompetence({
+            const competence1 = {
               id: 'recComp1',
               index: '1.1',
-              name: 'Traiter des données',
-            });
-            const competence2 = domainBuilder.buildCompetence({
+              name_i18n: { fr: 'competence 1 en français', en: 'english competence 1 name' },
+            };
+            const competence2 = {
               id: 'recComp2',
               index: '1.2',
-              name: 'Traiter des choux',
-            });
+              name_i18n: { fr: 'competence 2 en français', en: 'translated competence 1 name' },
+            };
+
+            await databaseBuilder.commit();
+
             const area1 = domainBuilder.buildArea({
               id: 'recArea1',
               code: '1',
               competences: [
-                { ...competence1, name_i18n: { fr: competence1.name } },
-                { ...competence2, name_i18n: { fr: competence2.name } },
+                { ...competence1, name: competence1.name_i18n[locale] },
+                { ...competence2, name: competence2.name_i18n[locale] },
               ],
               title: 'titre test',
               frameworkId: 'Pix',
@@ -583,6 +586,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
             // when
             const certificationAttestation = await certificateRepository.getCertificationAttestation({
               certificationCourseId: 123,
+              locale,
             });
 
             // then

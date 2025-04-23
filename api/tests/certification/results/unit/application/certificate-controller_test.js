@@ -23,16 +23,22 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           await featureToggles.set('isV3CertificationPageEnabled', true);
           const request = { i18n, payload: { verificationCode: 'P-123456BB' } };
           const locale = 'fr-fr';
+
           const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
-          const certificateSerializerStub = { serialize: sinon.stub() };
           requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
+
+          const certificateSerializerStub = { serialize: sinon.stub() };
+
           const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgorithmEngineVersion.V3 });
+
           sinon.stub(usecases, 'getCertificationCourseByVerificationCode');
-          sinon.stub(usecases, 'getCertificationAttestation');
-          sinon.stub(usecases, 'getShareableCertificate');
           usecases.getCertificationCourseByVerificationCode.resolves(certificationCourse);
+
+          sinon.stub(usecases, 'getCertificationAttestation');
           const certificate = Symbol('certificate');
           usecases.getCertificationAttestation.resolves(certificate);
+
+          sinon.stub(usecases, 'getShareableCertificate');
 
           // when
           await certificateController.getCertificateByVerificationCode(request, hFake, {
@@ -46,6 +52,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           });
           expect(usecases.getCertificationAttestation).calledOnceWithExactly({
             certificationCourseId: certificationCourse.getId(),
+            locale,
           });
           expect(usecases.getShareableCertificate).to.not.have.been.calledOnce;
         });
@@ -178,6 +185,8 @@ describe('Certification | Results | Unit | Application | certificate-controller'
       describe('when isV3CertificationPageEnabled feature toggle is enabled', function () {
         it('should return a serialized certificate', async function () {
           // given
+          await featureToggles.set('isV3CertificationPageEnabled', true);
+
           const userId = 1;
           const certificationCourseId = 2;
           const request = {
@@ -185,26 +194,28 @@ describe('Certification | Results | Unit | Application | certificate-controller'
             params: { certificationCourseId },
             i18n: getI18n(),
           };
-          await featureToggles.set('isV3CertificationPageEnabled', true);
+
+          const locale = 'fr-fr';
+          const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
+          requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
+
           const certificationCourse = domainBuilder.buildCertificationCourse({
             id: certificationCourseId,
             version: AlgorithmEngineVersion.V3,
           });
           const certificate = Symbol('V3 certificate');
+
           sinon.stub(certificationSharedUsecases, 'getCertificationCourse');
           certificationSharedUsecases.getCertificationCourse
             .withArgs({ certificationCourseId })
             .resolves(certificationCourse);
+
           sinon.stub(usecases, 'getCertificationAttestation');
-          usecases.getCertificationAttestation.withArgs({ certificationCourseId }).resolves(certificate);
+          usecases.getCertificationAttestation.withArgs({ certificationCourseId, locale }).resolves(certificate);
 
           const certificateSerializerStub = {
             serialize: sinon.stub(),
           };
-
-          const locale = 'fr-fr';
-          const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
-          requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
 
           const dependencies = {
             requestResponseUtils: requestResponseUtilsStub,

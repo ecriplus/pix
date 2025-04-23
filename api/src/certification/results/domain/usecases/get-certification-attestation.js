@@ -8,6 +8,6 @@
  * @param {CertificateRepository} params.certificateRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  */
-export const getCertificationAttestation = async function ({ certificationCourseId, certificateRepository }) {
-  return certificateRepository.getCertificationAttestation({ certificationCourseId });
+export const getCertificationAttestation = async function ({ certificationCourseId, locale, certificateRepository }) {
+  return certificateRepository.getCertificationAttestation({ certificationCourseId, locale });
 };
