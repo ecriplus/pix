@@ -1,0 +1,38 @@
+@use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/breakpoints';
+
+
+.download-pdf {
+  @extend %pix-body-m;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-4x);
+  align-items: center;
+  justify-content: end;
+  text-align: center;
+
+  @include breakpoints.device-is('tablet') {
+    gap: var(--pix-spacing-8x);
+    align-items: normal;
+  }
+
+
+  &__title {
+    @extend %pix-title-xs;
+  }
+
+  &__verification-code {
+    display: grid;
+    gap: var(--pix-spacing-2x);
+  }
+}
+
+.download-pdf-verification-code {
+  @extend %pix-title-xs;
+
+  display: flex;
+  gap: var(--pix-spacing-2x);
+  align-items: center;
+  justify-content: center;
+}

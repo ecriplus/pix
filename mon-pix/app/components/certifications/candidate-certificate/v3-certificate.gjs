@@ -6,6 +6,7 @@ import { t } from 'ember-intl';
 import CandidateGlobalLevel from '../certificate-information/candidate-global-level';
 import CandidateInformation from '../certificate-information/candidate-information';
 import CompetencesDetails from '../certificate-information/competences-details';
+import DownloadPdf from '../certificate-information/download-pdf';
 
 export default class v3Certificate extends Component {
   @service intl;
@@ -31,8 +32,12 @@ export default class v3Certificate extends Component {
       </h1>
     </section>
 
-    <section class="v3-certificate">
-      <CandidateInformation @certificate={{@certificate}} />
+    <section class="v3-candidate-certificate">
+      <div class="v3-candidate-certificate__information">
+        <CandidateInformation @certificate={{@certificate}} />
+
+        <DownloadPdf @certificate={{@certificate}} />
+      </div>
 
       <CandidateGlobalLevel @certificate={{@certificate}} />
 
