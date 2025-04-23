@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { SESSIONS_VERSIONS } from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import {
@@ -559,6 +560,7 @@ async function _registerOrganizationLearnersToSession({
   version,
 }) {
   const certificationCandidates = [];
+
   if (_hasLearnersToRegister(configSession)) {
     const extraTimePercentages = [null, 0.3, 0.5];
     const organizationLearners = await _buildOrganizationLearners(databaseBuilder, organizationId, configSession);
@@ -614,10 +616,35 @@ function _addCertificationCandidatesToScoSession(
 }
 
 async function _buildOrganizationLearners(databaseBuilder, organizationId, configSession) {
-  return await databaseBuilder
-    .knex('organization-learners')
-    .where({ organizationId })
-    .limit(configSession.learnersToRegisterCount);
+  for (let index = 0; index < configSession.learnersToRegisterCount; index++) {
+    const otherUser = databaseBuilder.factory.buildUser.withRawPassword({
+      firstName: `Élève-${index}`,
+      lastName: `Non certifiable`,
+      email: `user-with-sco-certification_${index}@example.net`,
+      cgu: true,
+      lang: 'fr',
+    });
+
+    databaseBuilder.factory.buildOrganizationLearner({
+      firstName: otherUser.firstName,
+      lastName: otherUser.lastName,
+      sex: 'M',
+      birthdate: '2000-01-01',
+      birthCity: null,
+      birthCityCode: '75115',
+      birthCountryCode: '100',
+      birthProvinceCode: null,
+      division: 'Terminal',
+      isDisabled: false,
+      organizationId,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+  }
+
+  await databaseBuilder.commit();
+
+  return databaseBuilder.knex('organization-learners').where({ organizationId });
 }
 
 function _hasLearnersToRegister(configSession) {
@@ -897,17 +924,15 @@ async function _makeCandidatesCoreCertifiable(databaseBuilder, certificationCand
     }).id;
     return { assessmentId, userId: certificationCandidate.userId };
   });
-  // All candidates are super super good
-  // They all passed the hardest skills of each competence,
-  // Thus, they will be certifiable in all pix competences, at the best level
   for (const competence of pixCompetences) {
     coreProfileData[competence.id] = {
       threeMostDifficultSkillsAndChallenges: [],
-      pixScore: Math.floor(Math.random() * 56.0),
+      pixScore: 0,
       competence,
     };
     const skills = await learningContent.findActiveSkillsByCompetenceId(competence.id);
-    const orderedSkills = _.sortBy(skills, 'level').filter(({ level }) => level <= maxLevel);
+    const orderedSkills = _.sortBy(skills, 'difficulty').filter(({ difficulty }) => difficulty <= maxLevel);
+
     for (const skill of orderedSkills) {
       const challenge = await learningContent.findFirstValidatedChallengeBySkillId(skill.id);
       if (!challenge) {
@@ -938,7 +963,7 @@ async function _makeCandidatesCoreCertifiable(databaseBuilder, certificationCand
           competenceId: skill.competenceId,
         });
       });
-      coreProfileData[competence.id].pixScore += skill.pixValue;
+      coreProfileData[competence.id].pixScore = Math.floor(Math.random() * 55) + 1;
     }
     coreProfileData[competence.id].threeMostDifficultSkillsAndChallenges = _.takeRight(
       coreProfileData[competence.id].threeMostDifficultSkillsAndChallenges,
@@ -1094,7 +1119,7 @@ async function _makeCandidatesComplementaryCertificationCertifiable(
   return complementaryProfileData;
 }
 
-function _makeCandidatesPassCertification({
+async function _makeCandidatesPassCertification({
   databaseBuilder,
   sessionId,
   certificationCandidates,
@@ -1121,9 +1146,10 @@ function _makeCandidatesPassCertification({
       completedAt: configSession.sessionDate,
       isPublished: true,
       verificationCode: `P-${verifCodeCount}`.padEnd(10, 'A'),
-      maxReachableLevelOnCertificationDate: 6,
+      maxReachableLevelOnCertificationDate: configSession.maxLevel,
       isCancelled: false,
       abortReason: null,
+      version: AlgorithmEngineVersion.V3,
     }).id;
     verifCodeCount++;
     const assessmentId = databaseBuilder.factory.buildAssessment({
@@ -1202,7 +1228,7 @@ function _makeCandidatesPassCertification({
     });
     for (const competenceData of Object.values(coreProfileData)) {
       databaseBuilder.factory.buildCompetenceMark({
-        level: Math.floor(competenceData.pixScore / 8),
+        level: Math.floor(competenceData.pixScore / configSession.maxLevel),
         score: competenceData.pixScore,
         area_code: `${competenceData.competence.index[0]}`,
         competence_code: `${competenceData.competence.index}`,
@@ -1213,6 +1239,8 @@ function _makeCandidatesPassCertification({
       _buildChallenges({ databaseBuilder, competenceData, assessmentId, certificationCourseId, configSession });
     }
   }
+
+  await databaseBuilder.commit();
 }
 
 function _buildChallenges({ databaseBuilder, competenceData, assessmentId, certificationCourseId, configSession }) {

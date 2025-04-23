@@ -1,5 +1,6 @@
 import * as tooling from '../common/tooling/index.js';
 import { acceptPixOrgaTermsOfService } from '../common/tooling/legal-documents.js';
+import publishedV3Certification from './cases/published-v3-certification.js';
 import simpleScoManagingStudentsCertificationCase from './cases/simple-sco-managing-students-certification.js';
 import { CERTIFIABLE_SUCCESS_USER_ID } from './constants.js';
 import { proOrganizationWithCertifCenter } from './create-pro-organization-with-certif-center.js';
@@ -18,6 +19,7 @@ async function teamCertificationDataBuilder({ databaseBuilder }) {
 
   // Cases
   await simpleScoManagingStudentsCertificationCase({ databaseBuilder });
+  await publishedV3Certification({ databaseBuilder });
 }
 
 export { teamCertificationDataBuilder };
