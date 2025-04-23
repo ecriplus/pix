@@ -15,45 +15,22 @@
     ],
     "tabletSupport": "comfortable"
   },
-  "transitionTexts": [
-    {
-      "grainId": "ce5797d0-074c-4a34-8004-c458df78c302",
-      "content": "<p>Dans ce module, vous allez apprendre à taper du texte avec un clavier.</p>"
-    },
-    {
-      "grainId": "421f64b0-a7b0-4855-8e24-3e4f86178a3e",
-      "content": "<p>À présent, vous allez découvrir les principales zones du clavier.</p>"
-    },
-    {
-      "grainId": "05985463-fbc5-43fe-8d39-038d0fa5c347",
-      "content": "<p>Vous connaissez maintenant les différentes zones du clavier. <br>Découvrez les principales touches nécessaires pour taper et modifier du texte.</p>"
-    },
-    {
-      "grainId": "62699177-a148-4297-a965-729158816d59",
-      "content": "<p>À vous de jouer ! <span aria-hidden=\"true\">🕹️</span> Commencez par taper des mots en utilisant uniquement les touches lettres.</p>"
-    },
-    {
-      "grainId": "b72675fd-48d4-445e-804f-6304fe70ec52",
-      "content": "<p>Bravo ! <span aria-hidden=\"true\">🎉</span> Vous avez tapé vos premiers mots. <br>À présent, découvrez la zone de texte.</p>"
-    },
-    {
-      "grainId": "36a17bbd-4975-4f9d-878e-0759801956fd",
-      "content": "<p>Maintenant, découvrez les autres touches utiles pour modifier du texte. <span aria-hidden=\"true\">⌨️</span></p>"
-    },
-    {
-      "grainId": "1b35e115-f40f-4309-bc8a-dc8122f63e25",
-      "content": "<p>Voyons si vous avez retenu l’essentiel. <span aria-hidden=\"true\">🎯</span></p>"
-    },
-    {
-      "grainId": "149c809f-17dd-418e-80d3-2fe3fa3b0e6c",
-      "content": "<p>Certaines lettres ont des accents. Voyons ensemble où les trouver sur le clavier.</p>"
-    },
-    {
-      "grainId": "9b722101-2b15-4a45-be20-6604dc9c0dbe",
-      "content": "<p>Vous allez maintenant passer à la pratique. <span aria-hidden=\"true\">⌨️</span></p>"
-    }
-  ],
   "grains": [
+    {
+      "id": "32261c7c-5922-4a48-85f0-7527fed88136",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "0c91df86-5691-422a-b2c2-cfafd4f6e3d3",
+            "type": "text",
+            "content": "<p>Dans ce module, vous allez apprendre à taper du texte avec un clavier.</p>"
+          }
+        }
+      ]
+    },
     {
       "id": "ce5797d0-074c-4a34-8004-c458df78c302",
       "type": "lesson",
@@ -98,6 +75,21 @@
             "id": "cd613fa6-2903-4932-a1f7-5b7d51ac0a41",
             "type": "text",
             "content": "<p><span aria-hidden=\"true\">🔎</span> <strong>Observez : quel type de clavier avez-vous ?</strong><br></p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a3dada31-758c-4e4d-b92a-4e9e29ac76e0",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "5f031cda-3e4c-4f80-9327-eb0f8df8f7f1",
+            "type": "text",
+            "content": "<p>À présent, vous allez découvrir les principales zones du clavier.</p>"
           }
         }
       ]
@@ -150,6 +142,21 @@
       ]
     },
     {
+      "id": "99f72474-fa53-4391-afae-441d1b0bcbe3",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "e608bdea-cfaf-4aca-93e8-6668f4207158",
+            "type": "text",
+            "content": "<p>Vous connaissez maintenant les différentes zones du clavier. <br>Découvrez les principales touches nécessaires pour taper et modifier du texte.</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "05985463-fbc5-43fe-8d39-038d0fa5c347",
       "type": "lesson",
       "title": "Introduction : les touches de base",
@@ -175,6 +182,21 @@
       ]
     },
     {
+      "id": "eb9f78a4-cd18-400a-bef7-f1b0850f36ce",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "44ad5d6e-1d51-47ac-bd9d-98acf9d7af71",
+            "type": "text",
+            "content": "<p>À vous de jouer ! <span aria-hidden=\"true\">🕹️</span> Commencez par taper des mots en utilisant uniquement les touches lettres.</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "62699177-a148-4297-a965-729158816d59",
       "type": "activity",
       "title": "La saisie de premiers mots",
@@ -193,6 +215,21 @@
             "id": "62b13b03-4b39-4893-a3ac-5b55c5a4b0a2",
             "type": "text",
             "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier1-2-saisie-1er-mots/index.html\" height=\"445\"></iframe>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "77ea948d-2345-4043-9716-8f999b177847",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "18c6f518-9e97-4e94-a5f3-e986cd52c219",
+            "type": "text",
+            "content": "<p>Bravo ! <span aria-hidden=\"true\">🎉</span> Vous avez tapé vos premiers mots. <br>À présent, découvrez la zone de texte.</p>"
           }
         }
       ]
@@ -295,6 +332,21 @@
       ]
     },
     {
+      "id": "39f2992c-b346-4cad-8bf3-95d373c96a01",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "ca6cabdb-6b85-45e1-b873-b809948eb628",
+            "type": "text",
+            "content": "<p>Maintenant, découvrez les autres touches utiles pour modifier du texte. <span aria-hidden=\"true\">⌨️</span></p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "36a17bbd-4975-4f9d-878e-0759801956fd",
       "type": "lesson",
       "title": "Les touches espace, entrée, effacer et les flèches.",
@@ -389,6 +441,21 @@
       ]
     },
     {
+      "id": "63ead640-3c01-4dfd-b8a7-566885e01037",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "731fa720-68f8-420b-ae7b-efc86b8aae5a",
+            "type": "text",
+            "content": "<p>Voyons si vous avez retenu l’essentiel. <span aria-hidden=\"true\">🎯</span></p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "1b35e115-f40f-4309-bc8a-dc8122f63e25",
       "type": "activity",
       "title": "La correction de textes avec espace, entrée, effacer.",
@@ -456,6 +523,21 @@
       ]
     },
     {
+      "id": "2b0b77eb-d091-450f-9a92-7ded5f9466bb",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "be0e2ee5-97d6-4d46-b621-42b89c16395d",
+            "type": "text",
+            "content": "<p>Certaines lettres ont des accents. Voyons ensemble où les trouver sur le clavier.</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "149c809f-17dd-418e-80d3-2fe3fa3b0e6c",
       "type": "lesson",
       "title": "Les lettres accentuées",
@@ -484,6 +566,21 @@
             "id": "0f10059b-3a41-47fd-808b-9f587cf7ab0c",
             "type": "text",
             "content": "<p>Les lettres accentuées sont écrites en bas à gauche des touches. <br>Il suffit de taper sur la touche pour que la lettre accentuée apparaisse à l’écran.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "3444120b-4205-43df-aa5a-fbc62c7f0cb2",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "6bb8779f-8f08-4a9c-803e-63eebabf80c9",
+            "type": "text",
+            "content": "<p>Vous allez maintenant passer à la pratique. <span aria-hidden=\"true\">⌨️</span></p>"
           }
         }
       ]
@@ -521,9 +618,7 @@
                       "ariaLabel": "Cliquer ici",
                       "defaultValue": "",
                       "tolerances": [],
-                      "solutions": [
-                        "céleri"
-                      ]
+                      "solutions": ["céleri"]
                     }
                   ],
                   "feedbacks": {
@@ -556,9 +651,7 @@
                       "ariaLabel": "Cliquer ici",
                       "defaultValue": "",
                       "tolerances": [],
-                      "solutions": [
-                        "pastèque"
-                      ]
+                      "solutions": ["pastèque"]
                     }
                   ],
                   "feedbacks": {
@@ -591,9 +684,7 @@
                       "ariaLabel": "Cliquer ici",
                       "defaultValue": "",
                       "tolerances": [],
-                      "solutions": [
-                        "bac à glaçons"
-                      ]
+                      "solutions": ["bac à glaçons"]
                     }
                   ],
                   "feedbacks": {
