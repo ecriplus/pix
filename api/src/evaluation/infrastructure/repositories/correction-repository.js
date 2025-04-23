@@ -1,15 +1,15 @@
 import _ from 'lodash';
 
-import { Answer } from '../../../src/evaluation/domain/models/Answer.js';
-import { Hint } from '../../../src/shared/domain/models/Hint.js';
-import { Challenge } from '../../../src/shared/domain/models/index.js';
-import { Correction } from '../../../src/shared/domain/models/index.js';
-import * as challengeRepository from '../../../src/shared/infrastructure/repositories/challenge-repository.js';
-import * as skillRepository from '../../../src/shared/infrastructure/repositories/skill-repository.js';
+import { Hint } from '../../../shared/domain/models/Hint.js';
+import { Challenge } from '../../../shared/domain/models/index.js';
+import { Correction } from '../../../shared/domain/models/index.js';
+import * as challengeRepository from '../../../shared/infrastructure/repositories/challenge-repository.js';
+import * as skillRepository from '../../../shared/infrastructure/repositories/skill-repository.js';
+import { Answer } from '../../domain/models/Answer.js';
 
 const VALIDATED_HINT_STATUSES = ['Validé', 'pré-validé'];
 
-const getByChallengeId = async function ({
+export async function getByChallengeId({
   challengeId,
   answerValue,
   userId,
@@ -56,8 +56,7 @@ const getByChallengeId = async function ({
     answersEvaluation: correctionDetails?.answersEvaluation || [],
     solutionsWithoutGoodAnswers: correctionDetails?.solutionsWithoutGoodAnswers || [],
   });
-};
-export { getByChallengeId };
+}
 
 async function _getHint(skill) {
   if (_hasValidatedHint(skill) && skill.hint) {

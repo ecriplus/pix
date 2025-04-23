@@ -1,4 +1,3 @@
-import { usecases } from '../../../../lib/domain/usecases/index.js';
 import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
 import { featureToggles } from '../../../shared/infrastructure/feature-toggles/index.js';
 import * as assessmentRepository from '../../../shared/infrastructure/repositories/assessment-repository.js';
@@ -88,7 +87,7 @@ const getCorrection = async function (request, _h, dependencies = { correctionSe
   const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
   const answerId = request.params.id;
 
-  const correction = await usecases.getCorrectionForAnswer({
+  const correction = await evaluationUsecases.getCorrectionForAnswer({
     answerId,
     userId,
     locale,

@@ -1,5 +1,8 @@
-import { AssessmentNotCompletedError, NotFoundError } from '../../../src/shared/domain/errors.js';
-import { LearningContentResourceNotFound } from '../../../src/shared/domain/errors.js';
+import {
+  AssessmentNotCompletedError,
+  LearningContentResourceNotFound,
+  NotFoundError,
+} from '../../../shared/domain/errors.js';
 
 const getCorrectionForAnswer = async function ({
   assessmentRepository,

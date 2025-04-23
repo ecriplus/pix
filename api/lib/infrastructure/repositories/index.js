@@ -6,10 +6,8 @@ import * as userRecommendedTrainingRepository from '../../../src/devcomp/infrast
 import { getCorrection } from '../../../src/evaluation/domain/services/solution/solution-service-qrocm-dep.js';
 import { fromDatasourceObject } from '../../../src/shared/infrastructure/adapters/solution-adapter.js';
 import { injectDependencies } from '../../../src/shared/infrastructure/utils/dependency-injection.js';
-import * as correctionRepository from './correction-repository.js';
 
 const repositoriesWithoutInjectedDependencies = {
-  correctionRepository,
   trainingRepository,
   trainingTriggerRepository,
   tutorialEvaluationRepository,

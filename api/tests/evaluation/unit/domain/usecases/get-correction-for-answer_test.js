@@ -1,9 +1,9 @@
-import { getCorrectionForAnswer } from '../../../../lib/domain/usecases/get-correction-for-answer.js';
-import { Answer } from '../../../../src/evaluation/domain/models/Answer.js';
-import { AssessmentNotCompletedError, NotFoundError } from '../../../../src/shared/domain/errors.js';
-import { LearningContentResourceNotFound } from '../../../../src/shared/domain/errors.js';
-import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { Answer } from '../../../../../src/evaluation/domain/models/Answer.js';
+import { getCorrectionForAnswer } from '../../../../../src/evaluation/domain/usecases/get-correction-for-answer.js';
+import { AssessmentNotCompletedError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { LearningContentResourceNotFound } from '../../../../../src/shared/domain/errors.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 class OtherError extends Error {}
 

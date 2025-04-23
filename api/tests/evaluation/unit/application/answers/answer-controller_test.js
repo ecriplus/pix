@@ -1,4 +1,3 @@
-import { usecases } from '../../../../../lib/domain/usecases/index.js';
 import { answerController } from '../../../../../src/evaluation/application/answers/answer-controller.js';
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
 import { usecases as questUsecases } from '../../../../../src/quest/domain/usecases/index.js';
@@ -330,7 +329,7 @@ describe('Unit | Controller | answer-controller', function () {
     let correctionSerializerStub;
 
     beforeEach(function () {
-      sinon.stub(usecases, 'getCorrectionForAnswer');
+      sinon.stub(evaluationUsecases, 'getCorrectionForAnswer');
       correctionSerializerStub = { serialize: sinon.stub() };
     });
 
@@ -338,7 +337,7 @@ describe('Unit | Controller | answer-controller', function () {
       // given
       requestResponseUtilsStub.extractUserIdFromRequest.returns(userId);
       requestResponseUtilsStub.extractLocaleFromRequest.returns(locale);
-      usecases.getCorrectionForAnswer.withArgs({ answerId, userId, locale }).resolves({});
+      evaluationUsecases.getCorrectionForAnswer.withArgs({ answerId, userId, locale }).resolves({});
       correctionSerializerStub.serialize.withArgs({}).returns('ok');
 
       // when

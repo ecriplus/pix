@@ -1,7 +1,7 @@
-import * as correctionRepository from '../../../../lib/infrastructure/repositories/correction-repository.js';
-import { Answer } from '../../../../src/evaluation/domain/models/Answer.js';
-import { Correction } from '../../../../src/shared/domain/models/index.js';
-import { databaseBuilder, domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { Answer } from '../../../../../src/evaluation/domain/models/Answer.js';
+import * as correctionRepository from '../../../../../src/evaluation/infrastructure/repositories/correction-repository.js';
+import { Correction } from '../../../../../src/shared/domain/models/index.js';
+import { databaseBuilder, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Repository | correction-repository', function () {
   let tutorialRepository;
