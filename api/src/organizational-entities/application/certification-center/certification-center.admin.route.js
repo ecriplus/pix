@@ -1,8 +1,14 @@
 import Joi from 'joi';
 
+import { PayloadTooLargeError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
+import { MAX_FILE_SIZE_UPLOAD } from '../../../shared/domain/constants.js';
 import { identifiersType, optionalIdentifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { certificationCenterAdminController } from './certification-center.admin.controller.js';
+
+const ERRORS = {
+  PAYLOAD_TOO_LARGE: 'PAYLOAD_TOO_LARGE',
+};
 
 const register = async function (server) {
   server.route([
@@ -146,6 +152,40 @@ const register = async function (server) {
         notes: [
           "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
             "- Elle permet d'archiver un centre de certification",
+        ],
+      },
+    },
+    {
+      method: 'POST',
+      path: '/api/admin/certification-centers/batch-archive',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([securityPreHandlers.checkAdminMemberHasRoleSuperAdmin])(
+                request,
+                h,
+              ),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        payload: {
+          maxBytes: MAX_FILE_SIZE_UPLOAD,
+          output: 'file',
+          failAction: (request, h) => {
+            return sendJsonApiError(
+              new PayloadTooLargeError('An error occurred, payload is too large', ERRORS.PAYLOAD_TOO_LARGE, {
+                maxSize: '20',
+              }),
+              h,
+            );
+          },
+        },
+        handler: (request, h) => certificationCenterAdminController.archiveInBatch(request, h),
+        tags: ['api', 'admin', 'organizational-entities', 'certification-centers'],
+        notes: [
+          "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
+            "- Elle permet d'archiver plusieurs centres de certification dont les ID sont transmis par un CSV",
         ],
       },
     },
