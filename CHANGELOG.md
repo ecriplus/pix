@@ -1,5 +1,12 @@
 # Pix Changelog
 
+## v5.96.0 (23/04/2025)
+
+
+### :rocket: Amélioration
+- [#12080](https://github.com/1024pix/pix/pull/12080) [FEATURE] Empecher un utilisateur ayant participé à une campagne de supprimer son compte en autonomie (PIX-17441).
+- [#12079](https://github.com/1024pix/pix/pull/12079) [FEATURE] Ajouter l’action d’archivage d’un CDC dans Pix Admin (PIX-16750).
+
 ## v5.95.0 (22/04/2025)
 
 
