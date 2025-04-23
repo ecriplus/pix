@@ -100,7 +100,7 @@ export default class CampaignView extends Component {
   }
 
   <template>
-    <PixBlock class="campaign-settings">
+    <PixBlock class="campaign-settings" @variant="orga">
       <dl>
         <div class="campaign-settings-row">
           <div class="campaign-settings-content">

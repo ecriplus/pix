@@ -7,7 +7,7 @@ import PageTitle from 'pix-orga/components/ui/page-title';
 <template>
   {{pageTitle "Activez ou récupérez votre espace"}}
   <div class="join-request">
-    <PixBlock class="join-request__panel">
+    <PixBlock class="join-request__panel" @variant="orga">
       <div class="panel__image">
         <img src="/pix-orga-color.svg" alt role="none" />
       </div>

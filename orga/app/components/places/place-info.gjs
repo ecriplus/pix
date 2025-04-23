@@ -3,7 +3,7 @@ import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { t } from 'ember-intl';
 
 <template>
-  <PixBlock class="place-info">
+  <PixBlock class="place-info" @variant="orga">
     <PixIcon @name="seat" class="place-info__illustration" role="none" />
     <div>
       <section class="place-info__description">

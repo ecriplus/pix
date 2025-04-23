@@ -19,7 +19,7 @@ export default class Acceptation extends Component {
   }
 
   <template>
-    <PixBlock class="terms-of-service-acceptation">
+    <PixBlock class="terms-of-service-acceptation" @variant="orga">
       {{#if this.isUpdateRequested}}
         <h1 class="pix-title-m">{{t "components.terms-of-service.title.update-requested"}}</h1>
         <p class="pix-body-m">{{t "components.terms-of-service.message.update-requested"}}</p>

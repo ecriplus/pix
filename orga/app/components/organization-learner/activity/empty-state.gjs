@@ -3,7 +3,7 @@ import { t } from 'ember-intl';
 import capitalize from 'lodash/capitalize';
 
 <template>
-  <PixBlock class="empty-state">
+  <PixBlock class="empty-state" @variant="orga">
     <img src="{{this.rootURL}}/images/empty-state-activity.svg" alt="" role="none" />
 
     <div class="empty-state__text">

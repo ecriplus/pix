@@ -42,7 +42,7 @@ export default class LoginOrRegister extends Component {
 
   <template>
     <div class="login-or-register">
-      <PixBlock class="login-or-register__panel">
+      <PixBlock class="login-or-register__panel" @variant="orga">
         <div>
           <img src="/pix-orga-color.svg" alt="" role="none" class="login-or-register-panel__logo" />
         </div>

@@ -8,7 +8,7 @@ import PageTitle from 'pix-orga/components/ui/page-title';
   {{pageTitle (t "pages.login.title")}}
   <main class="login-page">
     <div>
-      <PixBlock class="login-page__container">
+      <PixBlock class="login-page__container" @variant="orga">
         <header class="login-page__header">
           <img src="/pix-orga-color.svg" alt="Pix Orga" />
           <PageTitle @centerTitle={{true}}>
