@@ -3,6 +3,7 @@ import { assessmentController } from '../../../../../src/shared/application/asse
 import * as moduleUnderTest from '../../../../../src/shared/application/assessments/index.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { config as settings } from '../../../../../src/shared/config.js';
+import { Assessment } from '../../../../../src/shared/domain/models/index.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Application | Router | assessment-router', function () {
@@ -12,12 +13,36 @@ describe('Unit | Application | Router | assessment-router', function () {
       sinon.stub(assessmentController, 'save').callsFake((request, h) => h.response('ok').code(200));
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
+      const payload = {
+        data: {
+          attributes: {
+            type: Assessment.types.DEMO,
+          },
+        },
+      };
 
       // when
-      const response = await httpTestServer.request('POST', '/api/assessments');
+      const response = await httpTestServer.request('POST', '/api/assessments', payload);
 
       // then
       expect(response.statusCode).to.equal(200);
+    });
+
+    describe('When type is not defined', function () {
+      it('should return 400 Bad request', async function () {
+        // given
+        sinon.stub(assessmentController, 'save').callsFake((request, h) => h.response('ok').code(200));
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        const response = await httpTestServer.request('POST', '/api/assessments');
+
+        // then
+        expect(response.statusCode).to.equal(400);
+        expect(response.statusMessage).to.equal('Bad Request');
+        sinon.assert.notCalled(assessmentController.save);
+      });
     });
   });
 

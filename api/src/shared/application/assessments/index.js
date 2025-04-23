@@ -15,6 +15,18 @@ const register = async function (server) {
       path: '/api/assessments',
       config: {
         auth: false,
+        validate: {
+          options: {
+            allowUnknown: true,
+          },
+          payload: Joi.object({
+            data: Joi.object({
+              attributes: Joi.object({
+                type: Joi.string().required(),
+              }).required(),
+            }).required(),
+          }).required(),
+        },
         handler: assessmentController.save,
         tags: ['api'],
       },
