@@ -67,26 +67,6 @@ const register = async function (server) {
       },
     },
     {
-      method: 'PATCH',
-      path: '/api/assessments/{id}/complete-assessment',
-      config: {
-        auth: false,
-        pre: [
-          {
-            method: assessmentAuthorization.verify,
-            assign: 'authorizationCheck',
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            id: identifiersType.assessmentId,
-          }),
-        },
-        handler: assessmentController.completeAssessment,
-        tags: ['api'],
-      },
-    },
-    {
       method: 'GET',
       path: '/api/assessments/{id}/competence-evaluations',
       config: {

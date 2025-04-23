@@ -1,7 +1,7 @@
-import { CertificationCompletedJob } from '../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
-import { ParticipationCompletedJob } from '../../../src/prescription/campaign-participation/domain/models/ParticipationCompletedJob.js';
-import { CampaignParticipationStatuses } from '../../../src/prescription/shared/domain/constants.js';
-import { AlreadyRatedAssessmentError } from '../../../src/shared/domain/errors.js';
+import { CertificationCompletedJob } from '../../../certification/evaluation/domain/events/CertificationCompleted.js';
+import { ParticipationCompletedJob } from '../../../prescription/campaign-participation/domain/models/ParticipationCompletedJob.js';
+import { CampaignParticipationStatuses } from '../../../prescription/shared/domain/constants.js';
+import { AlreadyRatedAssessmentError } from '../errors.js';
 
 const completeAssessment = async function ({
   assessmentId,

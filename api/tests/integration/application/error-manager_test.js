@@ -72,7 +72,7 @@ describe('Integration | API | Controller Error', function () {
     });
 
     it('responds Precondition Failed when a AlreadyRatedAssessmentError error occurs', async function () {
-      routeHandler.throws(new DomainErrors.AlreadyRatedAssessmentError());
+      routeHandler.throws(new EvaluationDomainErrors.AlreadyRatedAssessmentError());
       const response = await server.requestObject(request);
 
       expect(response.statusCode).to.equal(PRECONDITION_FAILED);

@@ -51,8 +51,15 @@ class AnswerEvaluationError extends DomainError {
   }
 }
 
+class AlreadyRatedAssessmentError extends DomainError {
+  constructor(message = 'Cette évaluation a déjà été évaluée.') {
+    super(message);
+  }
+}
+
 export {
   AcquiredBadgeForbiddenUpdateError,
+  AlreadyRatedAssessmentError,
   AnswerEvaluationError,
   CompetenceResetError,
   EmptyAnswerError,

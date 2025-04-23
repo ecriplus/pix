@@ -1,12 +1,12 @@
 import _ from 'lodash';
 
-import { completeAssessment } from '../../../../lib/domain/usecases/complete-assessment.js';
-import { CertificationCompletedJob } from '../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
-import { ParticipationCompletedJob } from '../../../../src/prescription/campaign-participation/domain/models/ParticipationCompletedJob.js';
-import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
-import { AlreadyRatedAssessmentError } from '../../../../src/shared/domain/errors.js';
-import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { CertificationCompletedJob } from '../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
+import { AlreadyRatedAssessmentError } from '../../../../../src/evaluation/domain/errors.js';
+import { completeAssessment } from '../../../../../src/evaluation/domain/usecases/complete-assessment.js';
+import { ParticipationCompletedJob } from '../../../../../src/prescription/campaign-participation/domain/models/ParticipationCompletedJob.js';
+import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | complete-assessment', function () {
   let assessmentRepository;

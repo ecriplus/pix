@@ -1,13 +1,7 @@
-import { usecases } from '../../../../../lib/domain/usecases/index.js';
 import { usecases as certificationUsecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
-import { usecases as devcompUsecases } from '../../../../../src/devcomp/domain/usecases/index.js';
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
-import { usecases as questUsecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { assessmentController } from '../../../../../src/shared/application/assessments/assessment-controller.js';
-import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import * as events from '../../../../../src/shared/domain/events/index.js';
 import { sharedUsecases } from '../../../../../src/shared/domain/usecases/index.js';
-import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Controller | assessment-controller', function () {
@@ -44,95 +38,6 @@ describe('Unit | Controller | assessment-controller', function () {
 
       // then
       expect(result).to.be.equal(assessment);
-    });
-  });
-
-  describe('#completeAssessment', function () {
-    let assessmentId, assessment, locale;
-
-    beforeEach(function () {
-      assessmentId = 2;
-      assessment = Symbol('completed-assessment');
-      locale = 'fr-fr';
-      sinon.stub(DomainTransaction, 'execute').callsFake((lambda) => {
-        return lambda();
-      });
-
-      sinon.stub(usecases, 'completeAssessment');
-      sinon.stub(evaluationUsecases, 'handleBadgeAcquisition');
-      sinon.stub(devcompUsecases, 'handleTrainingRecommendation');
-      sinon.stub(evaluationUsecases, 'handleStageAcquisition');
-      sinon.stub(questUsecases, 'rewardUser');
-      usecases.completeAssessment.resolves(assessment);
-      evaluationUsecases.handleBadgeAcquisition.resolves();
-      sinon.stub(events.eventDispatcher, 'dispatch');
-    });
-
-    it('should call the completeAssessment use case', async function () {
-      // when
-      await assessmentController.completeAssessment({ params: { id: assessmentId } });
-
-      // then
-      expect(usecases.completeAssessment).to.have.been.calledWithExactly({ assessmentId, locale });
-    });
-
-    it('should call the handleBadgeAcquisition use case', async function () {
-      // when
-      await assessmentController.completeAssessment({ params: { id: assessmentId } });
-
-      // then
-      expect(evaluationUsecases.handleBadgeAcquisition).to.have.been.calledWithExactly({ assessment });
-    });
-
-    it('should call the handleTrainingRecommendation use case', async function () {
-      // given
-      const locale = 'fr-fr';
-
-      // when
-      await assessmentController.completeAssessment({ params: { id: assessmentId } });
-
-      // then
-      expect(devcompUsecases.handleTrainingRecommendation).to.have.been.calledWithExactly({
-        assessment,
-        locale,
-      });
-    });
-
-    it('should not call the rewardUser usecase if the questEnabled flag is false', async function () {
-      // given
-      await featureToggles.set('isQuestEnabled', false);
-      usecases.completeAssessment.resolves({ userId: 12 });
-
-      // when
-      await assessmentController.completeAssessment({ params: { id: assessmentId } });
-
-      // then
-      expect(questUsecases.rewardUser).to.have.not.been.called;
-    });
-
-    it('should call the rewardUser use case if there is a userId', async function () {
-      // given
-      await featureToggles.set('isQuestEnabled', true);
-      usecases.completeAssessment.resolves({ userId: 12 });
-
-      // when
-      await assessmentController.completeAssessment({ params: { id: assessmentId } });
-
-      // then
-      expect(questUsecases.rewardUser).to.have.been.calledWithExactly({
-        userId: 12,
-      });
-    });
-
-    it('should not call the rewardUser use case if there is no userId', async function () {
-      // given
-      usecases.completeAssessment.resolves({ userId: null });
-
-      // when
-      await assessmentController.completeAssessment({ params: { id: assessmentId } });
-
-      // then
-      expect(questUsecases.rewardUser).to.be.not.called;
     });
   });
 
