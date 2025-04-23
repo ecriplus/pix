@@ -77,10 +77,12 @@ export const updateOrganizationsInBatch = async function ({ filePath, organizati
         await checkOrganizationUpdate(organizationBatchUpdateDto, organizationForAdminRepository);
 
         try {
-          const organization = await organizationForAdminRepository.get(organizationBatchUpdateDto.id);
+          const organization = await organizationForAdminRepository.get({
+            organizationId: organizationBatchUpdateDto.id,
+          });
           organization.updateFromOrganizationBatchUpdateDto(organizationBatchUpdateDto);
 
-          await organizationForAdminRepository.update(organization);
+          await organizationForAdminRepository.update({ organization });
         } catch {
           throw new OrganizationBatchUpdateError({
             meta: { organizationId: organizationBatchUpdateDto.id },
@@ -92,7 +94,7 @@ export const updateOrganizationsInBatch = async function ({ filePath, organizati
 };
 
 async function checkOrganizationUpdate(organizationBatchUpdateDto, organizationForAdminRepository) {
-  const organization = await organizationForAdminRepository.exist(organizationBatchUpdateDto.id);
+  const organization = await organizationForAdminRepository.exist({ organizationId: organizationBatchUpdateDto.id });
   if (!organization) {
     throw new OrganizationNotFound({
       meta: {
@@ -102,9 +104,9 @@ async function checkOrganizationUpdate(organizationBatchUpdateDto, organizationF
   }
 
   if (organizationBatchUpdateDto.parentOrganizationId) {
-    const parentOrganization = await organizationForAdminRepository.exist(
-      organizationBatchUpdateDto.parentOrganizationId,
-    );
+    const parentOrganization = await organizationForAdminRepository.exist({
+      organizationId: organizationBatchUpdateDto.parentOrganizationId,
+    });
     if (!parentOrganization) {
       throw new UnableToAttachChildOrganizationToParentOrganizationError({
         meta: {

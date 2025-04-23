@@ -7,6 +7,7 @@ import { AlgorithmEngineVersion } from '../../../../src/certification/shared/dom
 import { CertificationCourse } from '../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { SESSIONS_VERSIONS } from '../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { LOCALE, MAX_REACHABLE_LEVEL } from '../../../../src/shared/domain/constants.js';
+import { DomainTransaction } from '../../../../src/shared/domain/DomainTransaction.js';
 import {
   CandidateNotAuthorizedToJoinSessionError,
   CandidateNotAuthorizedToResumeCertificationTestError,
@@ -73,6 +74,9 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
     verifyCertificateCodeService.generateCertificateVerificationCode = sinon.stub().resolves(verificationCode);
     certificationCenterRepository.getBySessionId = sinon.stub();
     languageService.isLanguageAvailableForV3Certification = sinon.stub();
+    sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
+      return callback();
+    });
   });
 
   afterEach(function () {

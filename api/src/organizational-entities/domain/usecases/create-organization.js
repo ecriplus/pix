@@ -9,7 +9,7 @@ const createOrganization = async function ({
   codeGenerator,
 }) {
   organizationCreationValidator.validate(organization);
-  const savedOrganization = await organizationForAdminRepository.save(organization);
+  const savedOrganization = await organizationForAdminRepository.save({ organization });
 
   await dataProtectionOfficerRepository.create({
     organizationId: savedOrganization.id,
@@ -22,7 +22,7 @@ const createOrganization = async function ({
     const code = await codeGenerator.generate(schoolRepository);
     await schoolRepository.save({ organizationId: savedOrganization.id, code });
   }
-  return await organizationForAdminRepository.get(savedOrganization.id);
+  return await organizationForAdminRepository.get({ organizationId: savedOrganization.id });
 };
 
 export { createOrganization };

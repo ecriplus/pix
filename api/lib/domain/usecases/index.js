@@ -22,9 +22,10 @@ import { organizationLearnerIdentityRepository } from '../../../src/identity-acc
 import * as userRepository from '../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
 import { userToCreateRepository } from '../../../src/identity-access-management/infrastructure/repositories/user-to-create.repository.js';
 import * as dataProtectionOfficerRepository from '../../../src/organizational-entities/infrastructure/repositories/data-protection-officer.repository.js';
-import { organizationForAdminRepository } from '../../../src/organizational-entities/infrastructure/repositories/organization-for-admin.repository.js';
+import { repositories as organizationalEntitiesRepositories } from '../../../src/organizational-entities/infrastructure/repositories/index.js';
 import * as organizationTagRepository from '../../../src/organizational-entities/infrastructure/repositories/organization-tag.repository.js';
 import { tagRepository } from '../../../src/organizational-entities/infrastructure/repositories/tag.repository.js';
+import * as targetProfileShareRepository from '../../../src/organizational-entities/infrastructure/repositories/target-profile-share-repository.js';
 import * as campaignRepository from '../../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as campaignParticipationRepository from '../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
 import { participationCompletedJobRepository } from '../../../src/prescription/campaign-participation/infrastructure/repositories/jobs/participation-completed-job-repository.js';
@@ -65,9 +66,7 @@ import * as membershipRepository from '../../../src/team/infrastructure/reposito
 import { organizationInvitationRepository } from '../../../src/team/infrastructure/repositories/organization-invitation.repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
 import { certificationCompletedJobRepository } from '../../infrastructure/repositories/jobs/certification-completed-job-repository.js';
-import * as targetProfileShareRepository from '../../infrastructure/repositories/target-profile-share-repository.js';
 import * as learningContentConversionService from '../services/learning-content/learning-content-conversion-service.js';
-import * as organizationValidator from '../validators/organization-with-tags-and-target-profiles-script.js';
 
 const oidcAuthenticationServiceRegistry = new OidcAuthenticationServiceRegistry({ oidcProviderRepository });
 
@@ -127,14 +126,13 @@ const dependencies = {
   learningContentConversionService,
   membershipRepository,
   obfuscationService,
-  organizationForAdminRepository,
+  organizationForAdminRepository: organizationalEntitiesRepositories.organizationForAdminRepository,
   organizationInvitationRepository,
   organizationInvitationService,
   organizationLearnerIdentityRepository,
   organizationLearnerRepository,
   organizationRepository,
   organizationTagRepository,
-  organizationValidator,
   passwordGenerator,
   passwordValidator,
   pixAuthenticationService,

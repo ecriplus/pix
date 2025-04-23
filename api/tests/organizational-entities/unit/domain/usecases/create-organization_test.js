@@ -50,7 +50,7 @@ describe('Unit | UseCase | create-organization', function () {
       lastName: '',
       email: 'justin.ptipeu@example.net',
     });
-    expect(organizationForAdminRepository.save).to.have.been.calledWithExactly(organization);
+    expect(organizationForAdminRepository.save).to.have.been.calledWithExactly({ organization });
   });
 
   context('When the type is SCO-1D', function () {

@@ -12,11 +12,15 @@ const attachChildOrganizationToOrganization = withTransaction(
       });
       await _assertChildOrganizationDoesNotHaveChildren({ childOrganizationId, organizationForAdminRepository });
 
-      const childOrganizationForAdmin = await organizationForAdminRepository.get(childOrganizationId);
+      const childOrganizationForAdmin = await organizationForAdminRepository.get({
+        organizationId: childOrganizationId,
+      });
 
       _assertChildOrganizationNotAlreadyAttached(childOrganizationForAdmin);
 
-      const parentOrganizationForAdmin = await organizationForAdminRepository.get(parentOrganizationId);
+      const parentOrganizationForAdmin = await organizationForAdminRepository.get({
+        organizationId: parentOrganizationId,
+      });
 
       _assertParentOrganizationIsNotChildOrganization(parentOrganizationForAdmin);
       _assertChildOrganizationHaveSameTypeAsParentOrganization({
@@ -26,7 +30,7 @@ const attachChildOrganizationToOrganization = withTransaction(
 
       childOrganizationForAdmin.updateParentOrganizationId(parentOrganizationId);
 
-      await organizationForAdminRepository.update(childOrganizationForAdmin);
+      await organizationForAdminRepository.update({ organization: childOrganizationForAdmin });
     }
   },
 );
@@ -90,7 +94,9 @@ function _assertParentOrganizationIsNotChildOrganization(parentOrganization) {
 }
 
 async function _assertChildOrganizationDoesNotHaveChildren({ childOrganizationId, organizationForAdminRepository }) {
-  const children = await organizationForAdminRepository.findChildrenByParentOrganizationId(childOrganizationId);
+  const children = await organizationForAdminRepository.findChildrenByParentOrganizationId({
+    parentOrganizationId: childOrganizationId,
+  });
 
   if (children.length) {
     throw new UnableToAttachChildOrganizationToParentOrganizationError({

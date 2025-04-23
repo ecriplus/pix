@@ -62,7 +62,9 @@ describe('Unit | Organizational Entities | Domain | UseCases | attach-child-orga
         });
 
         // then
-        expect(organizationForAdminRepository.get).to.have.been.calledOnceWithExactly(childOrganization.id);
+        expect(organizationForAdminRepository.get).to.have.been.calledOnceWithExactly({
+          organizationId: childOrganization.id,
+        });
         expect(organizationForAdminRepository.update).to.not.have.been.called;
         expect(error).to.be.instanceOf(UnableToAttachChildOrganizationToParentOrganizationError);
         expect(error.message).to.equal('Unable to attach already attached child organization');
@@ -193,9 +195,9 @@ describe('Unit | Organizational Entities | Domain | UseCases | attach-child-orga
         });
 
         // then
-        expect(organizationForAdminRepository.findChildrenByParentOrganizationId).to.have.been.calledOnceWithExactly(
-          childOrganizationId,
-        );
+        expect(organizationForAdminRepository.findChildrenByParentOrganizationId).to.have.been.calledOnceWithExactly({
+          parentOrganizationId: childOrganizationId,
+        });
         expect(organizationForAdminRepository.get).to.not.have.been.called;
         expect(organizationForAdminRepository.update).to.not.have.been.called;
         expect(error).to.be.instanceOf(UnableToAttachChildOrganizationToParentOrganizationError);
@@ -244,8 +246,12 @@ describe('Unit | Organizational Entities | Domain | UseCases | attach-child-orga
         parentOrganizationId,
       });
 
-      expect(organizationForAdminRepository.update).to.have.been.calledWith(expectedFirstChildOrganization);
-      expect(organizationForAdminRepository.update).to.have.been.calledWith(expectedSecondChildOrganization);
+      expect(organizationForAdminRepository.update).to.have.been.calledWith({
+        organization: expectedFirstChildOrganization,
+      });
+      expect(organizationForAdminRepository.update).to.have.been.calledWith({
+        organization: expectedSecondChildOrganization,
+      });
     });
   });
 });

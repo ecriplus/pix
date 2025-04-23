@@ -30,3 +30,26 @@ export async function getOrganizationMembership({
     throw error;
   }
 }
+
+/**
+ * @param {object} organizationWithEmail
+ * @returns {Promise<void>}
+ */
+export async function createProOrganizationInvitation({
+  organizationId,
+  name,
+  email,
+  role,
+  locale,
+  organizationRepository,
+  dependencies = { createProOrganizationInvitation: usecases.createProOrganizationInvitation },
+}) {
+  await dependencies.createProOrganizationInvitation({
+    organizationId,
+    name,
+    email,
+    role,
+    locale,
+    organizationRepository,
+  });
+}

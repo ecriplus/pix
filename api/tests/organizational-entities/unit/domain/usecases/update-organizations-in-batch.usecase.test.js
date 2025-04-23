@@ -88,8 +88,8 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
       // then
       expect(DomainTransaction.execute).to.have.been.called;
       expect(organizationForAdminRepository.get).to.have.been.callCount(2);
-      expect(organizationForAdminRepository.get.getCall(0)).to.have.been.calledWithExactly('1');
-      expect(organizationForAdminRepository.get.getCall(1)).to.have.been.calledWithExactly('2');
+      expect(organizationForAdminRepository.get.getCall(0)).to.have.been.calledWithExactly({ organizationId: '1' });
+      expect(organizationForAdminRepository.get.getCall(1)).to.have.been.calledWithExactly({ organizationId: '2' });
     });
 
     it('calls n times "organizationForAdminRepository.update" to update an organization', async function () {
@@ -111,12 +111,12 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
       // then
       expect(DomainTransaction.execute).to.have.been.called;
       expect(organizationForAdminRepository.update).to.have.been.callCount(2);
-      expect(organizationForAdminRepository.update.getCall(0)).to.have.been.calledWithExactly(
-        expectedFirstOrganization,
-      );
-      expect(organizationForAdminRepository.update.getCall(1)).to.have.been.calledWithExactly(
-        expectedSecondOrganization,
-      );
+      expect(organizationForAdminRepository.update.getCall(0)).to.have.been.calledWithExactly({
+        organization: expectedFirstOrganization,
+      });
+      expect(organizationForAdminRepository.update.getCall(1)).to.have.been.calledWithExactly({
+        organization: expectedSecondOrganization,
+      });
     });
   });
 

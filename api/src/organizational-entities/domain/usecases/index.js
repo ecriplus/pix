@@ -6,6 +6,7 @@ import * as learnersApi from '../../../prescription/learner-management/applicati
 import * as schoolRepository from '../../../school/infrastructure/repositories/school-repository.js';
 import * as codeGenerator from '../../../shared/domain/services/code-generator.js';
 import { adminMemberRepository } from '../../../shared/infrastructure/repositories/admin-member.repository.js';
+import * as organizationRepository from '../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as certificationCenterRepository from '../../infrastructure/repositories/certification-center.repository.js';
@@ -13,11 +14,13 @@ import { certificationCenterApiRepository } from '../../infrastructure/repositor
 import * as certificationCenterForAdminRepository from '../../infrastructure/repositories/certification-center-for-admin.repository.js';
 import * as complementaryCertificationHabilitationRepository from '../../infrastructure/repositories/complementary-certification-habilitation.repository.js';
 import * as dataProtectionOfficerRepository from '../../infrastructure/repositories/data-protection-officer.repository.js';
+import { repositories as organizationalEntitiesRepositories } from '../../infrastructure/repositories/index.js';
 import * as organizationFeatureRepository from '../../infrastructure/repositories/organization-feature-repository.js';
-import { organizationForAdminRepository } from '../../infrastructure/repositories/organization-for-admin.repository.js';
 import * as organizationTagRepository from '../../infrastructure/repositories/organization-tag.repository.js';
 import { tagRepository } from '../../infrastructure/repositories/tag.repository.js';
+import * as targetProfileShareRepository from '../../infrastructure/repositories/target-profile-share-repository.js';
 import * as organizationCreationValidator from '../validators/organization-creation-validator.js';
+import * as organizationValidator from '../validators/organization-with-tags-and-target-profiles.js';
 
 const path = dirname(fileURLToPath(import.meta.url));
 
@@ -33,12 +36,16 @@ const path = dirname(fileURLToPath(import.meta.url));
  * @typedef {import ('../../infrastructure/repositories/organization-feature-repository.js')} OrganizationFeatureRepository
  * @typedef {import ('../../infrastructure/repositories/organization-for-admin.repository.js')} OrganizationForAdminRepository
  * @typedef {import ('../../infrastructure/repositories/tag.repository.js')} TagRepository
+ * @typedef {import ('../../infrastructure/repositories/target-profile-share-repository.js')} TargetProfileShareRepository
+
+ * @typedef {import ('../../../shared/infrastructure/repositories/organization-repository.js')} OrganizationRepository
  * @typedef {import ('../../../school/infrastructure/repositories/school-repository.js')} SchoolRepository
  * @typedef {import ('../validators/organization-creation-validator.js')} OrganizationCreationValidator
  */
 
 const repositories = {
   adminMemberRepository,
+  organizationValidator,
   organizationCreationValidator,
   codeGenerator,
   centerRepository,
@@ -47,12 +54,14 @@ const repositories = {
   dataProtectionOfficerRepository,
   certificationCenterApiRepository,
   complementaryCertificationHabilitationRepository,
-  organizationForAdminRepository,
+  organizationForAdminRepository: organizationalEntitiesRepositories.organizationForAdminRepository,
   organizationFeatureRepository,
   schoolRepository,
   learnersApi,
+  organizationRepository,
   organizationTagRepository,
   tagRepository,
+  targetProfileShareRepository,
 };
 
 const dependencies = Object.assign({}, repositories);
