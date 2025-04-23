@@ -2,6 +2,7 @@ import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-al
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import dayjs from 'dayjs';
 
 export default class ImportBanner extends Component {
   @service intl;
@@ -27,7 +28,15 @@ export default class ImportBanner extends Component {
     if (this.args.importDetail?.hasError) {
       return this.intl.t('components.import-information-banner.error');
     } else if (this.args.importDetail?.isDone) {
-      return this.intl.t('components.import-information-banner.success');
+      const {
+        updatedAt,
+        createdBy: { firstName, lastName },
+      } = this.args.importDetail;
+      return this.intl.t('components.import-information-banner.success', {
+        date: dayjs(updatedAt).format('D MMM YYYY'),
+        firstname: firstName,
+        lastname: lastName,
+      });
     }
     if (this.args.importDetail?.inProgress) {
       return this.intl.t('components.import-information-banner.in-progress');

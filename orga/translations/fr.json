@@ -308,7 +308,7 @@
       "error-link": "(voir la page d'import).",
       "in-progress": "Un import est en cours",
       "in-progress-link": "(consulter l'état de l'import).",
-      "success": "Les participants ont bien été importés."
+      "success": "Les participants ont bien été importés le {date} par {firstname} {lastname}."
     },
     "organization-participants-header": {
       "default": {
