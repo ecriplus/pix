@@ -13,6 +13,21 @@
   },
   "grains": [
     {
+      "id": "d6ed29e2-fb0b-4f03-9e26-61029ecde2e3",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "08a8b1ea-4771-48ef-a5a5-665c664ba673",
+            "type": "text",
+            "content": "<p>Bonjour et bienvenue dans le bac à sable de Modulix. Vous allez pouvoir facilement découvrir comment fonctionne ce nouveau produit Pix.<br>C'est partix !</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "a39ce6eb-f3db-447f-808f-aa6a06b940c9",
       "type": "lesson",
       "title": "test iframe",
@@ -189,21 +204,6 @@
             "url": "https://epreuves.pix.fr/fr/qcu_image/1d_iconewriter.html",
             "instruction": "<p>Instruction</p>",
             "height": 600
-          }
-        }
-      ]
-    },
-    {
-      "id": "d6ed29e2-fb0b-4f03-9e26-61029ecde2e3",
-      "type": "transition",
-      "title": "",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "08a8b1ea-4771-48ef-a5a5-665c664ba673",
-            "type": "text",
-            "content": "<p>Bonjour et bienvenue dans le bac à sable de Modulix. Vous allez pouvoir facilement découvrir comment fonctionne ce nouveau produit Pix.<br>C'est partix !</p>"
           }
         }
       ]
