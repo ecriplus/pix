@@ -50,7 +50,7 @@ export const getById = async (id) => {
  * @name findSkillByTargetProfileIds
  *
  * @param {Array<number>} targetProfilsIds
- * @returns {Promise<<Array<TargetProfileSkill>>}
+ * @returns {Promise<Array<TargetProfileSkill>>}
  */
 export const findSkillsByTargetProfileIds = async (targetProfileIds) => {
   const skillsData = await usecases.findSkillsByTargetProfileIds({ targetProfileIds });
