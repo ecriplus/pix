@@ -55,7 +55,7 @@ const findByDivisionForScoIsManagingStudentsOrganization = async function ({ org
   );
 };
 
-const getCertificationAttestation = async function ({ certificationCourseId }) {
+const getCertificationAttestation = async function ({ certificationCourseId, locale }) {
   const certificationCourseDTO = await _selectCertificationAttestations()
     .where('certification-courses.id', '=', certificationCourseId)
     .groupBy('certification-courses.id', 'sessions.id', 'assessment-results.id')
@@ -65,7 +65,7 @@ const getCertificationAttestation = async function ({ certificationCourseId }) {
     throw new NotFoundError(`There is no certification course with id "${certificationCourseId}"`);
   }
 
-  const competenceTree = await competenceTreeRepository.get();
+  const competenceTree = await competenceTreeRepository.get({ locale });
   const certifiedBadges = await _getCertifiedBadges(certificationCourseDTO.id);
 
   return _toDomainForCertificationAttestation({ certificationCourseDTO, competenceTree, certifiedBadges });

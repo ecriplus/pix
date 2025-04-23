@@ -25,7 +25,10 @@ const getCertificateByVerificationCode = async function (
   const certificationCourse = await usecases.getCertificationCourseByVerificationCode({ verificationCode });
 
   if (certificationCourse.isV3() && (await featureToggles.get('isV3CertificationPageEnabled'))) {
-    certificate = await usecases.getCertificationAttestation({ certificationCourseId: certificationCourse.getId() });
+    certificate = await usecases.getCertificationAttestation({
+      certificationCourseId: certificationCourse.getId(),
+      locale,
+    });
   } else {
     certificate = await usecases.getShareableCertificate({
       certificationCourseId: certificationCourse.getId(),
@@ -49,7 +52,10 @@ const getCertificate = async function (
 
   let certificate;
   if (certificationCourse.isV3() && (await featureToggles.get('isV3CertificationPageEnabled'))) {
-    certificate = await usecases.getCertificationAttestation({ certificationCourseId: certificationCourse.getId() });
+    certificate = await usecases.getCertificationAttestation({
+      certificationCourseId: certificationCourse.getId(),
+      locale,
+    });
     return dependencies.certificateSerializer.serialize({ certificate, translate });
   } else {
     certificate = await usecases.getPrivateCertificate({

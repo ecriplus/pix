@@ -11,6 +11,8 @@ describe('Unit | UseCase | get-certification-attestation', function () {
 
   it('should return the certification attestation enhanced with result competence tree', async function () {
     // given
+    const locale = 'fr';
+
     const resultCompetenceTree = domainBuilder.buildResultCompetenceTree({ id: 'myResultTreeId' });
     const certificationAttestation = domainBuilder.buildCertificationAttestation({
       id: 123,
@@ -19,12 +21,13 @@ describe('Unit | UseCase | get-certification-attestation', function () {
     const certificationCourse = domainBuilder.buildCertificationCourse({ id: 123 });
     certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
     certificateRepository.getCertificationAttestation
-      .withArgs({ certificationCourseId: 123 })
+      .withArgs({ certificationCourseId: 123, locale })
       .resolves(certificationAttestation);
 
     // when
     const actualCertificationAttestation = await getCertificationAttestation({
       certificationCourseId: 123,
+      locale,
       certificateRepository,
       certificationCourseRepository,
     });
