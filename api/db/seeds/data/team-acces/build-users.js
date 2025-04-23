@@ -69,6 +69,15 @@ function _buildUsers(databaseBuilder) {
     emailConfirmedAt: null,
   });
   databaseBuilder.factory.buildUserLogin({ userId: userWithOldLastLoggedAt.id, lastLoggedAt: new Date('1970-01-01') });
+
+  // user without lastLoggedAt
+  const userWithoutLastLoggedAt = databaseBuilder.factory.buildUser.withRawPassword({
+    firstName: 'without',
+    lastName: 'LastLoggedAt',
+    email: 'without-lastlogged@example.net',
+    emailConfirmedAt: null,
+  });
+  databaseBuilder.factory.buildUserLogin({ userId: userWithoutLastLoggedAt.id, lastLoggedAt: null });
 }
 
 export function buildUsers(databaseBuilder) {
