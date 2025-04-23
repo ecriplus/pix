@@ -15,49 +15,22 @@
     ],
     "tabletSupport": "inconvenient"
   },
-  "transitionTexts": [
-    {
-      "grainId": "7667d4ff-dbf7-4d22-b030-592b5c4c3a86",
-      "content": "<p>Dans ce module, vous allez apprendre à utiliser les touches du clavier qui ont plusieurs caractères.</p>"
-    },
-    {
-      "grainId": "7ff9a355-6e89-4ab1-9c66-76ab054b97e3",
-      "content": "<p>Bravo ! <span aria-hidden=\"true\">🎉</span> </p><p>Vous êtes prêt. Voyons comment taper des lettres majuscules.</p>"
-    },
-    {
-      "grainId": "409aa009-7bd9-4202-b00e-5537ceb5e9e7",
-      "content": "<p>Passons à la pratique ! <span aria-hidden=\"true\">⌨️</span></p>"
-    },
-    {
-      "grainId": "b66ba0b8-ea0b-4fc2-b80e-9fc23854d735",
-      "content": "<p>Vous savez maintenant que la touche majuscule sert à taper des lettres en majuscules. Elle peut aussi servir à taper d’autres caractères.</p>"
-    },
-    {
-      "grainId": "d310a45d-b3e1-4875-9c8e-55d39368d039",
-      "content": "<p>Grâce à la touche majuscule ⇧ , vous pouvez donc taper des caractères spéciaux, de la ponctuation et des chiffres. À vous d’essayer !</p>"
-    },
-    {
-      "grainId": "6c6d1b74-2d4f-4939-8318-038c1bd56bc0",
-      "content": "<p>Sur certaines touches, il y a 3 caractères. Pour taper le 3ème caractère, apprenez à utiliser la touche Alt Gr.</p>"
-    },
-    {
-      "grainId": "e9f19af6-b3ca-4f95-ad64-88d46d23c2ad",
-      "content": "<p>Entraînez-vous à utiliser la touche Alt Gr.</p>"
-    },
-    {
-      "grainId": "0946703d-89bc-4692-ab7c-928d3bbe72bc",
-      "content": "<p>À vous de mettre en pratique tout ce que vous avez vu dans ce module.</p>"
-    },
-    {
-      "grainId": "bf9b4d7e-5d6a-4fc9-9f63-0bfc71d18982",
-      "content": "<p>Résumons l'essentiel. <span aria-hidden=\"true\">🎯</span></p>"
-    },
-    {
-      "grainId": "5ddc7207-feb0-494f-b32b-a33eb162e5f3",
-      "content": "<p>Pour explorer les différentes touches, testez-vous dans ce mini-jeu.</p>"
-    }
-  ],
   "grains": [
+    {
+      "id": "f9863d09-1ce3-41d0-8e7c-0a7cdc125c36",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "5bfffb2d-05bb-4497-a9ad-7a5402a5108f",
+            "type": "text",
+            "content": "<p>Dans ce module, vous allez apprendre à utiliser les touches du clavier qui ont plusieurs caractères.</p>"
+          }
+        }
+      ]
+    },
     {
       "id": "7667d4ff-dbf7-4d22-b030-592b5c4c3a86",
       "type": "activity",
@@ -88,10 +61,7 @@
                 "ariaLabel": "zone de saisie",
                 "defaultValue": "",
                 "tolerances": [],
-                "solutions": [
-                  "voilà le zèbre déçu",
-                  "« voilà le zèbre déçu »"
-                ]
+                "solutions": ["voilà le zèbre déçu", "« voilà le zèbre déçu »"]
               }
             ],
             "feedbacks": {
@@ -130,6 +100,21 @@
             "type": "expand",
             "title": "Indice 2",
             "content": "<p>Les touches nécessaires pour écrire la phrase sont indiquées dans l’image ci-dessous.</p><img src=\"https://i.imgur.com/KosRqGF.png\" alt=\"Les touches essentielles du clavier. Les lettres, les accents, effacer et entrée, l'espace et les flèches directionelles.\">"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c95bfc22-6473-4439-b22b-16c304546419",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "5cd44b4e-0534-4181-9478-101073d3a9b1",
+            "type": "text",
+            "content": "<p>Bravo ! <span aria-hidden=\"true\">🎉</span> </p><p>Vous êtes prêt. Voyons comment taper des lettres majuscules.</p>"
           }
         }
       ]
@@ -212,6 +197,21 @@
       ]
     },
     {
+      "id": "29637152-3aed-4491-a7b9-ffa823b51799",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "f27292d8-b444-41ca-ad80-165307e201d6",
+            "type": "text",
+            "content": "<p>Passons à la pratique ! <span aria-hidden=\"true\">⌨️</span></p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "409aa009-7bd9-4202-b00e-5537ceb5e9e7",
       "type": "activity",
       "title": "Saisie des lettres majuscules",
@@ -230,6 +230,21 @@
             "id": "3b6efd13-0d4d-461c-a61a-15a58b46383a",
             "type": "text",
             "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier2-majuscules/index.html\" height=\"445\"></iframe>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dae05a47-56b1-43e1-8562-99d2ea8fab6c",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "0d51136f-1054-4185-bce9-6abb15d10abd",
+            "type": "text",
+            "content": "<p>Vous savez maintenant que la touche majuscule sert à taper des lettres en majuscules. Elle peut aussi servir à taper d’autres caractères.</p>"
           }
         }
       ]
@@ -291,6 +306,22 @@
       ]
     },
     {
+      "id": "070a4323-376f-474f-9c58-ae1363de774e",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "4bbe20be-c9b0-41f3-bf95-fce480aa8348",
+            "type": "text",
+            "content": "<p>Grâce à la touche majuscule ⇧ , vous pouvez donc taper des caractères spéciaux, de la ponctuation et des chiffres. À vous d’essayer !</p>"
+          }
+        }
+      ]
+    },
+
+    {
       "id": "d310a45d-b3e1-4875-9c8e-55d39368d039",
       "type": "activity",
       "title": "Saisie de caractères spéciaux et chiffres",
@@ -323,12 +354,8 @@
                 "placeholder": "recopiez la phrase ",
                 "ariaLabel": "zone de saisie",
                 "defaultValue": "",
-                "tolerances": [
-                  "t1"
-                ],
-                "solutions": [
-                  "Coucou, peux-tu mettre ces 3 pommes à cet endroit ?"
-                ]
+                "tolerances": ["t1"],
+                "solutions": ["Coucou, peux-tu mettre ces 3 pommes à cet endroit ?"]
               }
             ],
             "feedbacks": {
@@ -341,6 +368,21 @@
                 "diagnosis": "<p>Pour taper les caractères spéciaux, faites bien attention à leur position sur la touche. Elle vous indique si vous avez besoin d’utiliser la touche majuscule ⇧.</p>"
               }
             }
+          }
+        }
+      ]
+    },
+    {
+      "id": "b9e9ca6d-2c23-47b5-8f60-f121daf061c9",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "75652d09-9acc-4e3d-9af8-2c12b63fba2a",
+            "type": "text",
+            "content": "<p>Sur certaines touches, il y a 3 caractères. Pour taper le 3ème caractère, apprenez à utiliser la touche Alt Gr.</p>"
           }
         }
       ]
@@ -405,6 +447,21 @@
       ]
     },
     {
+      "id": "2b527198-0ab0-45d6-8121-da0a3646b8f9",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "69e777c2-9c22-462a-aefd-b159c060b6a1",
+            "type": "text",
+            "content": "<p>Entraînez-vous à utiliser la touche Alt Gr.</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "e9f19af6-b3ca-4f95-ad64-88d46d23c2ad",
       "type": "activity",
       "title": "Saisie de caractères  grâce à Alt Gr",
@@ -423,6 +480,21 @@
             "id": "d74e4428-accc-44c4-b206-105d4dee8e12",
             "type": "text",
             "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier2-AltGr/index.html\" height=\"445\"></iframe>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "326e811c-76b8-470c-99d6-2c0209cf8685",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "baef48f2-8a7f-4f65-a5bc-d66c6846968a",
+            "type": "text",
+            "content": "<p>À vous de mettre en pratique tout ce que vous avez vu dans ce module.</p>"
           }
         }
       ]
@@ -468,6 +540,21 @@
       ]
     },
     {
+      "id": "9cb0df04-c9bd-41a8-9cdc-063099b9ddfb",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "e9e14b7b-9ef5-442d-9f30-e10cda3ec5c7",
+            "type": "text",
+            "content": "<p>Résumons l'essentiel. <span aria-hidden=\"true\">🎯</span></p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "bf9b4d7e-5d6a-4fc9-9f63-0bfc71d18982",
       "type": "summary",
       "title": "Recap schéma d'une touche",
@@ -498,6 +585,21 @@
             "id": "e51added-60dc-453b-98ed-b3230711155e",
             "type": "text",
             "content": "<p>📝&nbsp;Vous pouvez maintenant&nbsp;<a href=\"https://cloud.pix.fr/s/6TTTsJMJgJnqEjj\" target=\"_blank\">Ouvrir votre fiche de synthèse</a></p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c9a94569-94e5-433c-a7f7-23a505dc7cf1",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "17b65b49-03cf-4626-a651-dc6372c107ba",
+            "type": "text",
+            "content": "<p>Pour explorer les différentes touches, testez-vous dans ce mini-jeu.</p>"
           }
         }
       ]
