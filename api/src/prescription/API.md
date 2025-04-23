@@ -1,4 +1,4 @@
-This doc has been generated on 4/23/2025, 11:18:17 AM with `scripts/generate-api-documentation.js`. See package.json.
+This doc has been generated on 4/23/2025, 5:31:41 PM with `scripts/generate-api-documentation.js`. See package.json.
 
 ---
 ## Modules
@@ -27,6 +27,13 @@ This doc has been generated on 4/23/2025, 11:18:17 AM with `scripts/generate-api
 </dd>
 </dl>
 
+## Functions
+
+<dl>
+<dt><a href="#hasCampaignParticipations">hasCampaignParticipations(userId)</a> ⇒ <code>Promise.&lt;boolean&gt;</code></dt>
+<dd></dd>
+</dl>
+
 <a name="module_CampaignApi"></a>
 
 ## CampaignApi
@@ -38,7 +45,7 @@ This doc has been generated on 4/23/2025, 11:18:17 AM with `scripts/generate-api
     * [~update(payload)](#module_CampaignApi..update) ⇒ <code>Promise.&lt;Campaign&gt;</code>
     * [~findAllForOrganization(payload)](#module_CampaignApi..findAllForOrganization) ⇒ <code>Promise.&lt;CampaignListResponse&gt;</code>
     * [~findCampaignSkillIdsForCampaignParticipations(campaignParticipationIds)](#module_CampaignApi..findCampaignSkillIdsForCampaignParticipations) ⇒ <code>Promise.&lt;Array.&lt;Number&gt;&gt;</code>
-    * [~getCampaignParticipations(payload)](#module_CampaignApi..getCampaignParticipations) ⇒ <code>Promise.&lt;Array.&lt;CampaignParticipationDTO&gt;&gt;</code>
+    * [~getCampaignParticipations(payload)](#module_CampaignApi..getCampaignParticipations) ⇒ <code>Promise.&lt;Array.&lt;CampaignParticipationModels.AssessmentCampaignParticipation&gt;&gt;</code>
     * [~CampaignPayload](#module_CampaignApi..CampaignPayload) : <code>object</code>
     * [~UserNotAuthorizedToCreateCampaignError](#module_CampaignApi..UserNotAuthorizedToCreateCampaignError) : <code>object</code>
     * [~UpdateCampaignPayload](#module_CampaignApi..UpdateCampaignPayload) : <code>object</code>
@@ -108,7 +115,7 @@ This doc has been generated on 4/23/2025, 11:18:17 AM with `scripts/generate-api
 
 <a name="module_CampaignApi..getCampaignParticipations"></a>
 
-### CampaignApi~getCampaignParticipations(payload) ⇒ <code>Promise.&lt;Array.&lt;CampaignParticipationDTO&gt;&gt;</code>
+### CampaignApi~getCampaignParticipations(payload) ⇒ <code>Promise.&lt;Array.&lt;CampaignParticipationModels.AssessmentCampaignParticipation&gt;&gt;</code>
 **Kind**: inner method of [<code>CampaignApi</code>](#module_CampaignApi)  
 
 | Param | Type |
@@ -516,5 +523,14 @@ delete organization learner before adding import feature
 | params | <code>object</code> |  |
 | params.userId | <code>number</code> | The ID of the user wich request the action |
 | params.organizationId | <code>number</code> | The ID of the organizationId to find learner to delete |
+
+<a name="hasCampaignParticipations"></a>
+
+## hasCampaignParticipations(userId) ⇒ <code>Promise.&lt;boolean&gt;</code>
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| userId | <code>number</code> | 
 
 
