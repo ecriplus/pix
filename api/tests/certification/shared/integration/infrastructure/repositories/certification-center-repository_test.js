@@ -37,6 +37,8 @@ describe('Integration | Repository | Certification Center', function () {
           createdAt: new Date('2018-01-01T05:43:10Z'),
           complementaryCertifications: [],
           updatedAt: now,
+          archivedAt: null,
+          archivedBy: null,
         });
 
         await databaseBuilder.commit();
@@ -95,6 +97,8 @@ describe('Integration | Repository | Certification Center', function () {
           createdAt: new Date('2018-01-01T05:43:10Z'),
           habilitations: [expectedComplementaryCertification2, expectedComplementaryCertification1],
           updatedAt: now,
+          archivedAt: null,
+          archivedBy: null,
         });
 
         await databaseBuilder.commit();
@@ -236,6 +240,8 @@ describe('Integration | Repository | Certification Center', function () {
           externalId: 'EXTERNAL_ID',
           createdAt: new Date('2018-01-01T05:43:10Z'),
           updatedAt: now,
+          archivedAt: null,
+          archivedBy: null,
         });
         await databaseBuilder.commit();
 
@@ -279,6 +285,8 @@ describe('Integration | Repository | Certification Center', function () {
           createdAt: new Date('2018-01-01T05:43:10Z'),
           habilitations: [expectedComplementaryCertification],
           updatedAt: now,
+          archivedAt: null,
+          archivedBy: null,
         });
 
         await databaseBuilder.commit();

@@ -50,6 +50,49 @@ describe('Integration | Team | Domain | UseCase | create-certification-center-me
         expect(certificationCenterMembership.certificationCenterId).to.equal(certificationCenterId);
       });
 
+      context('when certification center is archived', function () {
+        it('does not add membership to certification center', async function () {
+          // given
+          const externalId = 'foo';
+          const organizationId = databaseBuilder.factory.buildOrganization({ type: 'SCO', externalId }).id;
+          const userWhoseOrganizationRoleIsToUpdate = databaseBuilder.factory.buildUser();
+          const adminWhoWantsToMakeTheOrganizationRoleChange = databaseBuilder.factory.buildUser();
+          const membership = databaseBuilder.factory.buildMembership({
+            organizationRole: Membership.roles.ADMIN,
+            organizationId,
+            userId: userWhoseOrganizationRoleIsToUpdate.id,
+          });
+          const certificationCenterId = databaseBuilder.factory.buildCertificationCenter({
+            externalId,
+            archivedAt: new Date(),
+          }).id;
+          await databaseBuilder.commit();
+
+          const givenMembership = new Membership({
+            id: membership.id,
+            organizationRole: membership.organizationRole,
+            updatedByUserId: adminWhoWantsToMakeTheOrganizationRoleChange.id,
+          });
+
+          // when
+          await createCertificationCenterMembershipForScoOrganizationAdminMember({
+            membership: givenMembership,
+            membershipRepository,
+            certificationCenterRepository,
+            certificationCenterMembershipRepository,
+          });
+
+          // then
+          const certificationCenterMembership = await knex('certification-center-memberships')
+            .where({
+              userId: userWhoseOrganizationRoleIsToUpdate.id,
+              certificationCenterId,
+            })
+            .first();
+          expect(certificationCenterMembership).to.be.undefined;
+        });
+      });
+
       context('when there is no member with the role "ADMIN"', function () {
         it('creates a certification center membership with the role "ADMIN"', async function () {
           // given

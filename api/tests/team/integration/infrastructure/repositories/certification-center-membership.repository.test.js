@@ -401,6 +401,8 @@ describe('Integration | Team | Infrastructure | Repository | Certification Cente
         name: certificationCenter.name,
         type: certificationCenter.type,
         updatedAt: certificationCenter.updatedAt,
+        archivedAt: undefined,
+        archivedBy: undefined,
       });
 
       expect(associatedUser).to.be.an.instanceOf(User);

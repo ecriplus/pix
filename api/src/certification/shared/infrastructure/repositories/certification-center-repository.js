@@ -3,16 +3,6 @@ import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationCenter } from '../../../../shared/domain/models/CertificationCenter.js';
 import { ComplementaryCertification } from '../../../complementary-certification/domain/models/ComplementaryCertification.js';
 
-const toDomain = (certificationCenter) => {
-  const habilitations = certificationCenter.habilitations.map((dbComplementaryCertification) => {
-    return new ComplementaryCertification(dbComplementaryCertification);
-  });
-  return new CertificationCenter({
-    ...certificationCenter,
-    habilitations,
-  });
-};
-
 const getComplementaryCertifications = async (knexConnection, certificationCenter) =>
   await knexConnection('complementary-certifications')
     .select([
@@ -37,7 +27,7 @@ export const get = async function ({ id }) {
     throw new NotFoundError(`Certification center with id: ${id} not found`);
   }
   const complementaryCertifications = await getComplementaryCertifications(knexConnection, certificationCenter);
-  return toDomain({
+  return _toDomain({
     ...certificationCenter,
     habilitations: complementaryCertifications,
   });
@@ -63,7 +53,7 @@ export const getBySessionId = async ({ sessionId }) => {
     throw new NotFoundError(`Could not find certification center for sessionId ${sessionId}.`);
   }
   const complementaryCertifications = await getComplementaryCertifications(knexConnection, certificationCenter);
-  return toDomain({
+  return _toDomain({
     ...certificationCenter,
     habilitations: complementaryCertifications,
   });
@@ -78,7 +68,7 @@ export const findByExternalId = async ({ externalId }) => {
   }
 
   const complementaryCertifications = await getComplementaryCertifications(knexConnection, certificationCenter);
-  return toDomain({
+  return _toDomain({
     ...certificationCenter,
     habilitations: complementaryCertifications,
   });
@@ -96,4 +86,14 @@ export const getRefererEmails = async ({ id }) => {
     .join('users', 'users.id', 'certification-center-memberships.userId')
     .where('certification-centers.id', id)
     .where('certification-center-memberships.isReferer', true);
+};
+
+const _toDomain = (certificationCenter) => {
+  const habilitations = certificationCenter.habilitations.map((dbComplementaryCertification) => {
+    return new ComplementaryCertification(dbComplementaryCertification);
+  });
+  return new CertificationCenter({
+    ...certificationCenter,
+    habilitations,
+  });
 };

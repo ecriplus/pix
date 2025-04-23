@@ -1,13 +1,15 @@
 import { CERTIFICATION_CENTER_TYPES } from '../constants.js';
 
 class CertificationCenter {
-  constructor({ id, name, externalId, type, createdAt, updatedAt, habilitations = [] } = {}) {
+  constructor({ id, name, externalId, type, createdAt, updatedAt, archivedAt, archivedBy, habilitations = [] } = {}) {
     this.id = id;
     this.name = name;
     this.externalId = externalId;
     this.type = type;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
+    this.archivedAt = archivedAt;
+    this.archivedBy = archivedBy;
     this.habilitations = habilitations;
   }
 
