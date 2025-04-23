@@ -181,14 +181,14 @@ describe('Integration | Scripts | Certification | fix-doubled-answers', function
         id: certificationCourseId,
         completedAt: new Date('2021-01-02T07:20:45Z'),
         updatedAt: new Date('2021-01-02T07:20:45Z'),
-        endedAt: new Date('2021-01-02T07:20:45Z'),
+        endedAt: null,
         abortReason: null,
       },
       {
         id: secondCertificationCourseId,
         completedAt: new Date('2021-01-02T08:20:45Z'),
         updatedAt: new Date('2021-01-02T08:20:45Z'),
-        endedAt: new Date('2021-01-02T08:20:45Z'),
+        endedAt: null,
         abortReason: null,
       },
     ]);
