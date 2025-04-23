@@ -1,7 +1,8 @@
-import { MAX_REACHABLE_SCORE } from '../../../../shared/domain/constants.js';
-import { GlobalCertificationLevel } from './v3/GlobalCertificationLevel.js';
+import { MAX_REACHABLE_SCORE } from '../../../../../shared/domain/constants.js';
+import { CERTIFICATE_LEVELS } from './CertificateLevels.js';
+import { GlobalCertificationLevel } from './GlobalCertificationLevel.js';
 
-export class V3Certificate {
+export class Certificate {
   /**
    * @param {Object} props
    * @param {number} props.id - certification course id
@@ -39,11 +40,16 @@ export class V3Certificate {
     this.deliveredAt = deliveredAt;
     this.certificationCenter = certificationCenter;
     this.pixScore = pixScore;
-    this.globalLevel = new GlobalCertificationLevel({ score: pixScore });
+    this.globalLevel = this.#findLevel();
     this.verificationCode = verificationCode;
     this.maxReachableScore = MAX_REACHABLE_SCORE;
-    this.resultCompetenceTree = resultCompetenceTree;
+    this.resultCompetenceTree = this.globalLevel ? resultCompetenceTree : null;
     this.algorithmEngineVersion = algorithmEngineVersion;
     this.certificationDate = certificationDate;
+  }
+
+  #findLevel() {
+    const globalCertificationLevel = new GlobalCertificationLevel({ score: this.pixScore });
+    return globalCertificationLevel.meshLevel === CERTIFICATE_LEVELS.preBeginner ? null : globalCertificationLevel;
   }
 }

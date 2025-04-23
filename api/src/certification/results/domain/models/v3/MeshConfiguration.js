@@ -1,4 +1,5 @@
 import { config } from '../../../../../shared/config.js';
+import { CERTIFICATE_LEVELS } from './CertificateLevels.js';
 
 export class MeshConfiguration {
   /**
@@ -13,15 +14,15 @@ export class MeshConfiguration {
    * @enum {Map<String, Mesh>}
    */
   MESH_CONFIGURATION = new Map([
-    ['LEVEL_PRE_BEGINNER', { weight: 64, coefficient: 0 }],
-    ['LEVEL_BEGINNER_1', { weight: 64, coefficient: 1 }],
-    ['LEVEL_BEGINNER_2', { weight: 128, coefficient: 1 }],
-    ['LEVEL_INDEPENDENT_3', { weight: 128, coefficient: 2 }],
-    ['LEVEL_INDEPENDENT_4', { weight: 128, coefficient: 3 }],
-    ['LEVEL_ADVANCED_5', { weight: 128, coefficient: 4 }],
-    ['LEVEL_ADVANCED_6', { weight: 128, coefficient: 5 }],
-    ['LEVEL_EXPERT_7', { weight: 128, coefficient: 6 }],
-    ['LEVEL_EXPERT_8', { weight: 128, coefficient: 7 }],
+    [CERTIFICATE_LEVELS.preBeginner, { weight: 64, coefficient: 0 }],
+    [CERTIFICATE_LEVELS.beginner1, { weight: 64, coefficient: 1 }],
+    [CERTIFICATE_LEVELS.beginner2, { weight: 128, coefficient: 1 }],
+    [CERTIFICATE_LEVELS.independent3, { weight: 128, coefficient: 2 }],
+    [CERTIFICATE_LEVELS.independent4, { weight: 128, coefficient: 3 }],
+    [CERTIFICATE_LEVELS.advanced5, { weight: 128, coefficient: 4 }],
+    [CERTIFICATE_LEVELS.advanced6, { weight: 128, coefficient: 5 }],
+    [CERTIFICATE_LEVELS.expert7, { weight: 128, coefficient: 6 }],
+    [CERTIFICATE_LEVELS.expert8, { weight: 128, coefficient: 7 }],
   ]);
 
   #MAX_REACHABLE_LEVEL = config.v3Certification.maxReachableLevel;

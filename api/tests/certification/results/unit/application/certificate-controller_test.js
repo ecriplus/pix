@@ -393,7 +393,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           .withArgs({ certificationCourseId: request.params.certificationCourseId })
           .resolves(certificationCourse);
 
-        const v3CertificationAttestation = domainBuilder.certification.results.buildV3CertificationAttestation();
+        const v3CertificationAttestation = domainBuilder.certification.results.buildCertificate();
         sinon
           .stub(usecases, 'getCertificationAttestation')
           .withArgs({ certificationCourseId: request.params.certificationCourseId })
@@ -480,7 +480,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         const userId = 1;
         const i18n = getI18n();
 
-        const v3CertificationAttestation = domainBuilder.certification.results.buildV3CertificationAttestation();
+        const v3CertificationAttestation = domainBuilder.certification.results.buildCertificate();
         const session = domainBuilder.certification.sessionManagement.buildSession.finalized({ id: 12 });
         const generatedPdf = Symbol('Stream');
 
@@ -605,7 +605,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         const userId = 1;
         const i18n = getI18n();
 
-        const v3Certificate = domainBuilder.certification.results.buildV3CertificationAttestation();
+        const v3Certificate = domainBuilder.certification.results.buildCertificate();
         const v2Certificate = domainBuilder.buildCertificationAttestation({
           version: SESSIONS_VERSIONS.V2,
         });

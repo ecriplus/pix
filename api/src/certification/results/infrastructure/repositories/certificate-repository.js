@@ -12,7 +12,7 @@ import {
 import { featureToggles } from '../../../../shared/infrastructure/feature-toggles/index.js';
 import { SessionVersion } from '../../../shared/domain/models/SessionVersion.js';
 import { CertificationAttestation } from '../../domain/models/CertificationAttestation.js';
-import { V3Certificate } from '../../domain/models/V3Certificate.js';
+import { Certificate } from '../../domain/models/v3/Certificate.js';
 import { CertifiedBadge } from '../../domain/read-models/CertifiedBadge.js';
 import * as competenceTreeRepository from './competence-tree-repository.js';
 
@@ -272,7 +272,7 @@ async function _toDomainForCertificationAttestation({ certificationCourseDTO, co
     SessionVersion.isV3(certificationCourseDTO.version) &&
     (await featureToggles.get('isV3CertificationAttestationEnabled'))
   ) {
-    return new V3Certificate({
+    return new Certificate({
       ...certificationCourseDTO,
       certificationDate: certificationCourseDTO.date,
       resultCompetenceTree: (await featureToggles.get('isV3CertificationPageEnabled')) ? resultCompetenceTree : [],

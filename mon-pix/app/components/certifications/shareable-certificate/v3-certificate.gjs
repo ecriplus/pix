@@ -36,7 +36,9 @@ export default class v3Certificate extends Component {
 
       <CandidateGlobalLevel @certificate={{@certificate}} />
 
-      <CompetencesDetails @resultCompetenceTree={{@certificate.resultCompetenceTree}} />
+      {{#if @certificate.resultCompetenceTree}}
+        <CompetencesDetails @resultCompetenceTree={{@certificate.resultCompetenceTree}} />
+      {{/if}}
     </section>
   </template>
 }
