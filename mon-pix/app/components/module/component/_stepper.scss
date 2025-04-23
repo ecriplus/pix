@@ -1,25 +1,6 @@
 @use 'pix-design-tokens/typography';
 @use '../passage';
 
-.stepper-step {
-  &__position {
-    @extend %pix-body-m;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-
-    &::before,
-    &::after {
-      flex: 1;
-      height: 2px;
-      background: var(--pix-neutral-100);
-      content: '';
-    }
-  }
-}
-
 .stepper {
   display: flex;
   flex-direction: column;
@@ -36,37 +17,22 @@
     &:last-child {
       margin-bottom: 0;
     }
-  }
 
-  .stepper-step {
     &__position {
+      display: inline-block;
+
+      @extend %pix-body-m;
+
       margin: var(--pix-spacing-1x) 0 var(--pix-spacing-4x) 0;
+      padding: var(--pix-spacing-2x) var(--pix-spacing-4x);
+      color: var(--pix-neutral-800);
+      background: var(--pix-neutral-20);
+      border-radius: var(--modulix-radius-l);
     }
   }
 
-  &__next {
-    display: flex;
-    gap: var(--pix-spacing-4x);
-    align-items: center;
-
-    &::before,
-    &::after {
-      flex-grow: 1;
-      border-top: 3px dotted var(--pix-neutral-100);
-      content: '';
-    }
-  }
-}
-
-.stepper-step-position {
-  &__content {
-    padding: var(--pix-spacing-1x) var(--pix-spacing-4x);
-    color: var(--pix-neutral-800);
-  }
-}
-
-.stepper-next {
-  &__button {
-    width: 190px;
+  &__next-button {
+    width: fit-content;
+    min-width: 140px;
   }
 }

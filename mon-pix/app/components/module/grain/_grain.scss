@@ -4,7 +4,7 @@ $grain-card-border-radius: var(--pix-spacing-4x);
 
 .grain {
   --modulix-summary-card-background: var(--pix-secondary-100);
-  --modulix-challenge-card-background: rgba(var(--pix-primary-100-inline), 0.3);
+  --modulix-challenge-card-background: var(--pix-info-50);
 
   width: 100%;
 
@@ -31,38 +31,32 @@ $grain-card-border-radius: var(--pix-spacing-4x);
 
     .grain__card {
       outline: 2px solid var(--pix-neutral-500);
-      outline-offset: -2px;
+      outline-offset: var(--pix-spacing-3x);
     }
   }
 }
 
 .grain-card {
-  &__content {
-    padding: var(--pix-spacing-6x);
-  }
-
   &__footer {
-    padding: var(--pix-spacing-2x) var(--pix-spacing-6x);
+    padding: var(--pix-spacing-2x) 0;
     border-top: 0 solid var(--pix-neutral-100);
     border-radius: 0 0 $grain-card-border-radius $grain-card-border-radius;
   }
 
   &--summary {
+    padding: var(--pix-spacing-6x);
     background: var(--modulix-summary-card-background);
-
-    .grain-card__footer {
-      padding: var(--pix-spacing-6x);
-      border-top: 1px solid var(--pix-neutral-100);
-    }
   }
 
   &--challenge {
+    padding: var(--pix-spacing-6x);
     background: var(--modulix-challenge-card-background);
+  }
 
-    .grain-card__footer {
-      padding: var(--pix-spacing-6x);
-      border-top: 1px solid var(--pix-neutral-100);
-    }
+  &--transition {
+    @extend %pix-title-xs;
+
+    font-weight: var(--pix-font-medium);
   }
 }
 
@@ -80,6 +74,6 @@ $grain-card-border-radius: var(--pix-spacing-4x);
 .grain--active:focus-visible {
   .grain__card {
     outline: 2px solid var(--pix-neutral-500);
-    outline-offset: -2px;
+    outline-offset: var(--pix-spacing-3x);
   }
 }

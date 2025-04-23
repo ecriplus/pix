@@ -29,7 +29,7 @@ export default class ModuleGrain extends Component {
     'text',
     'video',
   ];
-  static AVAILABLE_GRAIN_TYPES = ['lesson', 'activity', 'discovery', 'challenge', 'summary'];
+  static AVAILABLE_GRAIN_TYPES = ['lesson', 'activity', 'discovery', 'challenge', 'summary', 'transition'];
 
   @tracked isStepperFinished = this.hasStepper === false;
 
