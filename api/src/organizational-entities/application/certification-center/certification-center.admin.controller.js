@@ -1,6 +1,7 @@
 import { usecases as certificationConfigurationUsecases } from '../../../certification/configuration/domain/usecases/index.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { extractUserIdFromRequest } from '../../../shared/infrastructure/monitoring-tools.js';
+import * as csvSerializer from '../../../shared/infrastructure/serializers/csv/csv-serializer.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as certificationCenterSerializer from '../../infrastructure/serializers/jsonapi/certification-center/certification-center.serializer.js';
 import * as certificationCenterForAdminSerializer from '../../infrastructure/serializers/jsonapi/certification-center/certification-center-for-admin.serializer.js';
@@ -9,6 +10,16 @@ const archiveCertificationCenter = async function (request, h) {
   const certificationCenterId = request.params.certificationCenterId;
   const userId = extractUserIdFromRequest(request);
   await usecases.archiveCertificationCenter({ certificationCenterId, userId });
+
+  return h.response().code(204);
+};
+
+const archiveInBatch = async function (request, h) {
+  const userId = extractUserIdFromRequest(request);
+  const certificationCenterIds = await csvSerializer.deserializeForCertificationCenterBatchArchive(
+    request.payload.path,
+  );
+  await usecases.archiveCertificationCentersInBatch({ certificationCenterIds, userId });
 
   return h.response().code(204);
 };
@@ -78,6 +89,7 @@ const update = async function (request) {
 
 const certificationCenterAdminController = {
   archiveCertificationCenter,
+  archiveInBatch,
   create,
   findPaginatedFilteredCertificationCenters,
   getCertificationCenterDetails,
