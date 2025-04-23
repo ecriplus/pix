@@ -14,6 +14,7 @@ import { injectDependencies } from '../../../shared/infrastructure/utils/depende
 import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import { certificationCenterMembershipRepository } from '../../../team/infrastructure/repositories/certification-center-membership.repository.js';
 import * as membershipRepository from '../../../team/infrastructure/repositories/membership.repository.js';
+import * as campaignParticipationsApiRepository from '../../infrastructure/repositories/campaign-participations-api.repository.js';
 import * as candidatesApiRepository from '../../infrastructure/repositories/candidates-api.repository.js';
 import * as learnersApiRepository from '../../infrastructure/repositories/learners-api.repository.js';
 import * as userTeamsApiRepository from '../../infrastructure/repositories/user-teams-api.repository.js';
@@ -22,6 +23,7 @@ const path = dirname(fileURLToPath(import.meta.url));
 
 const repositories = {
   authenticationMethodRepository,
+  campaignParticipationsApiRepository,
   candidatesApiRepository,
   certificationCenterMembershipRepository,
   learnersApiRepository,

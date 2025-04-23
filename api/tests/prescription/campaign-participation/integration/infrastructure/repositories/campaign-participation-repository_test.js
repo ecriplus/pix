@@ -427,6 +427,46 @@ describe('Integration | Repository | Campaign Participation', function () {
     });
   });
 
+  describe('#getCampaignParticipationsCountByUserId', function () {
+    it('should return participations number', async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser().id;
+      databaseBuilder.factory.buildCampaignParticipation({
+        userId,
+      });
+      databaseBuilder.factory.buildCampaignParticipation({
+        userId,
+      });
+      const otherUserId = databaseBuilder.factory.buildUser().id;
+      databaseBuilder.factory.buildCampaignParticipation({
+        userId: otherUserId,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const participations = await campaignParticipationRepository.getCampaignParticipationsCountByUserId({ userId });
+
+      // then
+      expect(participations).to.equal(2);
+    });
+
+    it('returns 0', async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser().id;
+      const otherUserId = databaseBuilder.factory.buildUser().id;
+      databaseBuilder.factory.buildCampaignParticipation({
+        userId: otherUserId,
+      });
+      databaseBuilder.commit();
+
+      // when
+      const result = await campaignParticipationRepository.getCampaignParticipationsCountByUserId({ userId });
+
+      // then
+      expect(result).to.equal(0);
+    });
+  });
+
   describe('#update', function () {
     it('save the changes of the campaignParticipation', async function () {
       const campaignParticipationId = 12;
