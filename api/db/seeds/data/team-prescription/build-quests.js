@@ -187,7 +187,6 @@ const buildCampaignParticipations = (databaseBuilder, users) =>
 
     databaseBuilder.factory.buildStageAcquisition({
       stageId: stageZero.id,
-      userId: user.id,
       campaignParticipationId: participationId,
     });
   });

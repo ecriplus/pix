@@ -231,7 +231,6 @@ async function createAssessmentCampaign({
 
         databaseBuilder.factory.buildStageAcquisition({
           stageId: stageZero.id,
-          userId,
           campaignParticipationId,
         });
       }

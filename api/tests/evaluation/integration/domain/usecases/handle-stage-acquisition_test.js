@@ -128,11 +128,13 @@ describe('Evaluation | Integration | Usecase | Handle Stage Acquisition', functi
             stages
               .slice(0, 3)
               .map(async (stage) =>
-                databaseBuilder.factory.buildStageAcquisition({ stageId: stage.id, userId, campaignParticipationId }),
+                databaseBuilder.factory.buildStageAcquisition({ stageId: stage.id, campaignParticipationId }),
               );
 
             await databaseBuilder.commit();
-            const stageAcquisitionsBefore = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ userId });
+            const stageAcquisitionsBefore = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({
+              campaignParticipationId,
+            });
 
             // when
             await evaluationUsecases.handleStageAcquisition({
@@ -141,7 +143,7 @@ describe('Evaluation | Integration | Usecase | Handle Stage Acquisition', functi
 
             // then
             expect(stageAcquisitionsBefore).to.have.lengthOf(3);
-            const stageAcquisitionsAfter = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ userId });
+            const stageAcquisitionsAfter = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ campaignParticipationId });
             expect(stageAcquisitionsAfter).to.have.lengthOf(4);
           });
         });
@@ -167,29 +169,29 @@ describe('Evaluation | Integration | Usecase | Handle Stage Acquisition', functi
               // then
               const transactionStageAcquisitions = await domainTransaction
                 .knexTransaction(STAGE_ACQUISITIONS_TABLE_NAME)
-                .select('userId', 'stageId')
-                .where({ userId });
+                .select('campaignParticipationId', 'stageId')
+                .where({ campaignParticipationId });
 
               expect(transactionStageAcquisitions).to.have.deep.members([
                 {
-                  userId,
+                  campaignParticipationId,
                   stageId: stages[0].id,
                 },
                 {
-                  userId,
+                  campaignParticipationId,
                   stageId: stages[1].id,
                 },
                 {
-                  userId,
+                  campaignParticipationId,
                   stageId: stages[2].id,
                 },
                 {
-                  userId,
+                  campaignParticipationId,
                   stageId: stages[3].id,
                 },
               ]);
 
-              const stageAcquisitions = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ userId });
+              const stageAcquisitions = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ campaignParticipationId });
               expect(stageAcquisitions).to.have.lengthOf(0);
             });
           });
@@ -211,7 +213,7 @@ describe('Evaluation | Integration | Usecase | Handle Stage Acquisition', functi
             });
 
             // then
-            const stageAcquisitions = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ userId });
+            const stageAcquisitions = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ campaignParticipationId });
             expect(stageAcquisitions).to.have.lengthOf(0);
           });
         });
@@ -235,7 +237,7 @@ describe('Evaluation | Integration | Usecase | Handle Stage Acquisition', functi
             });
 
             // then
-            const stageAcquisitions = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ userId });
+            const stageAcquisitions = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ campaignParticipationId });
             expect(stageAcquisitions).to.have.lengthOf(4);
           });
         });
@@ -266,7 +268,7 @@ describe('Evaluation | Integration | Usecase | Handle Stage Acquisition', functi
           });
 
           // then
-          const stageAcquisitionsAfter = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ userId });
+          const stageAcquisitionsAfter = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ campaignParticipationId });
           expect(stageAcquisitionsAfter).to.have.lengthOf(1);
         });
       });
@@ -325,11 +327,13 @@ describe('Evaluation | Integration | Usecase | Handle Stage Acquisition', functi
             stages
               .slice(0, 3)
               .map(async (stage) =>
-                databaseBuilder.factory.buildStageAcquisition({ stageId: stage.id, userId, campaignParticipationId }),
+                databaseBuilder.factory.buildStageAcquisition({ stageId: stage.id, campaignParticipationId }),
               );
 
             await databaseBuilder.commit();
-            const stageAcquisitionsBefore = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ userId });
+            const stageAcquisitionsBefore = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({
+              campaignParticipationId,
+            });
 
             // when
             await evaluationUsecases.handleStageAcquisition({
@@ -338,7 +342,7 @@ describe('Evaluation | Integration | Usecase | Handle Stage Acquisition', functi
 
             // then
             expect(stageAcquisitionsBefore).to.have.lengthOf(3);
-            const stageAcquisitionsAfter = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ userId });
+            const stageAcquisitionsAfter = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ campaignParticipationId });
             expect(stageAcquisitionsAfter).to.have.lengthOf(4);
           });
         });
@@ -364,29 +368,29 @@ describe('Evaluation | Integration | Usecase | Handle Stage Acquisition', functi
               // then
               const transactionStageAcquisitions = await domainTransaction
                 .knexTransaction(STAGE_ACQUISITIONS_TABLE_NAME)
-                .select('userId', 'stageId')
-                .where({ userId });
+                .select('campaignParticipationId', 'stageId')
+                .where({ campaignParticipationId });
 
               expect(transactionStageAcquisitions).to.have.deep.members([
                 {
-                  userId,
+                  campaignParticipationId,
                   stageId: stages[0].id,
                 },
                 {
-                  userId,
+                  campaignParticipationId,
                   stageId: stages[1].id,
                 },
                 {
-                  userId,
+                  campaignParticipationId,
                   stageId: stages[2].id,
                 },
                 {
-                  userId,
+                  campaignParticipationId,
                   stageId: stages[3].id,
                 },
               ]);
 
-              const stageAcquisitions = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ userId });
+              const stageAcquisitions = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ campaignParticipationId });
               expect(stageAcquisitions).to.have.lengthOf(0);
             });
           });
@@ -408,7 +412,7 @@ describe('Evaluation | Integration | Usecase | Handle Stage Acquisition', functi
             });
 
             // then
-            const stageAcquisitions = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ userId });
+            const stageAcquisitions = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ campaignParticipationId });
             expect(stageAcquisitions).to.have.lengthOf(0);
           });
         });
@@ -432,7 +436,7 @@ describe('Evaluation | Integration | Usecase | Handle Stage Acquisition', functi
             });
 
             // then
-            const stageAcquisitions = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ userId });
+            const stageAcquisitions = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ campaignParticipationId });
             expect(stageAcquisitions).to.have.lengthOf(4);
           });
         });
@@ -469,7 +473,7 @@ describe('Evaluation | Integration | Usecase | Handle Stage Acquisition', functi
           });
 
           // then
-          const stageAcquisitionsAfter = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ userId });
+          const stageAcquisitionsAfter = await knex(STAGE_ACQUISITIONS_TABLE_NAME).where({ campaignParticipationId });
           expect(stageAcquisitionsAfter).to.have.lengthOf(1);
         });
       });

@@ -66,16 +66,14 @@ const getStageIdsByCampaignParticipation = async (campaignParticipationsId) => {
 
 /**
  * @param {Stage[]} stages
- * @param {number} userId
  * @param {number} campaignParticipationId
  *
  * @returns {Promise<[]>}
  */
-const saveStages = async (stages, userId, campaignParticipationId) => {
+const saveStages = async (stages, campaignParticipationId) => {
   const knexConnection = DomainTransaction.getConnection();
   const acquiredStages = stages.map((stage) => ({
     stageId: stage.id,
-    userId,
     campaignParticipationId,
   }));
   return knexConnection(STAGE_ACQUISITIONS_TABLE_NAME).insert(acquiredStages);
