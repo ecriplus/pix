@@ -1,4 +1,5 @@
 import { CampaignParticipationInfo } from '../../../../src/prescription/campaign/domain/read-models/CampaignParticipationInfo.js';
+import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
 
 function buildCampaignParticipationInfo({
   participantFirstName = 'participantFirstName',
@@ -14,6 +15,8 @@ function buildCampaignParticipationInfo({
   group,
   masteryRate = 1,
   additionalInfos = null,
+  status = CampaignParticipationStatuses.SHARED,
+  pixScore = 120,
 } = {}) {
   return new CampaignParticipationInfo({
     participantFirstName,
@@ -29,6 +32,8 @@ function buildCampaignParticipationInfo({
     group,
     masteryRate,
     additionalInfos,
+    status,
+    pixScore,
   });
 }
 
