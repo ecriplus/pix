@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../../lib/domain/usecases/index.js';
 import { trainingController } from '../../../../../src/devcomp/application/trainings/training-controller.js';
 import { TrainingTrigger } from '../../../../../src/devcomp/domain/models/TrainingTrigger.js';
 import { usecases } from '../../../../../src/devcomp/domain/usecases/index.js';
@@ -343,7 +342,7 @@ describe('Unit | Devcomp | Application | Trainings | Controller | training-contr
       const trainingId = 145;
       const targetProfileSummaries = Symbol('targetProfileSummaries');
       const serializedTargetProfileSummaries = Symbol('serializedTargetProfileSummaries');
-      sinon.stub(libUsecases, 'findTargetProfileSummariesForTraining').resolves(targetProfileSummaries);
+      sinon.stub(usecases, 'findTargetProfileSummariesForTraining').resolves(targetProfileSummaries);
 
       const targetProfileSummaryForAdminSerializer = {
         serialize: sinon.stub(),
@@ -358,7 +357,7 @@ describe('Unit | Devcomp | Application | Trainings | Controller | training-contr
       });
 
       // then
-      expect(libUsecases.findTargetProfileSummariesForTraining).to.have.been.calledWithExactly({ trainingId });
+      expect(usecases.findTargetProfileSummariesForTraining).to.have.been.calledWithExactly({ trainingId });
       expect(result).to.be.equal(serializedTargetProfileSummaries);
     });
   });
