@@ -1,6 +1,11 @@
+import { AssessmentCampaignParticipation } from '../../domain/read-models/CampaignParticipation.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { Campaign } from './models/Campaign.js';
 import { CampaignListItem } from './models/CampaignListItem.js';
+import {
+  AssessmentCampaignParticipation as AssessmentCampaignParticipationAPI,
+  ProfilesCollectionCampaignParticipation as ProfilesCollectionCampaignParticipationAPI,
+} from './models/CampaignParticipation.js';
 import { SavedCampaign } from './models/SavedCampaign.js';
 /**
  * @module CampaignApi
@@ -151,4 +156,26 @@ export const findCampaignSkillIdsForCampaignParticipations = async (campaignPart
   return usecases.findCampaignSkillIdsForCampaignParticipations({
     campaignParticipationIds,
   });
+};
+
+/**
+ * @typedef CampaignParticipationsPayload
+ * @type {object}
+ * @property {number} campaignId
+ */
+
+/**
+ * @function
+ * @name getCampaignParticipations
+ *
+ * @param {CampaignParticipationsPayload} payload
+ * @returns {Promise<Array<AssessmentCampaignParticipationAPI>|Array<ProfilesCollectionCampaignParticipationAPI>>}
+ */
+export const getCampaignParticipations = async function ({ campaignId }) {
+  const campaignParticipations = await usecases.getCampaignParticipations({ campaignId });
+  return campaignParticipations.map((campaignParticipation) =>
+    campaignParticipation instanceof AssessmentCampaignParticipation
+      ? new AssessmentCampaignParticipationAPI(campaignParticipation)
+      : new ProfilesCollectionCampaignParticipationAPI(campaignParticipation),
+  );
 };
