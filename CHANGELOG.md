@@ -1,5 +1,24 @@
 # Pix Changelog
 
+## v5.97.0 (24/04/2025)
+
+
+### :rocket: Amélioration
+- [#12105](https://github.com/1024pix/pix/pull/12105) [FEATURE] Corriger la phrase sur la date de dernière connexion lorsqu'il n'y en a pas (PIX-17562).
+- [#12104](https://github.com/1024pix/pix/pull/12104) [FEATURE] Gestion des compétences et du niveau global du Certificat v3 en cas de score en dessous de 64 pix (PIX-17541).
+- [#12103](https://github.com/1024pix/pix/pull/12103) [FEATURE] Ajouter plus l'info sur l'import sur la page élèves/étudiants (PIX-16950).
+- [#12098](https://github.com/1024pix/pix/pull/12098) [FEATURE] Retirer l'insertion des userId dans stage-acquisitions (Pix-17572).
+- [#12102](https://github.com/1024pix/pix/pull/12102) [FEATURE] Améliorer le design des modules.
+
+### :building_construction: Tech
+- [#12099](https://github.com/1024pix/pix/pull/12099) [TECH] Migrer la route POST /api/admin/organizations/import-csv (PIX-17560).
+- [#12118](https://github.com/1024pix/pix/pull/12118) [TECH] Ajouter une validation JOI à la route POST /api/assessments.
+- [#12117](https://github.com/1024pix/pix/pull/12117) [TECH] Supprimer des vieux scripts.
+
+### :bug: Correction
+- [#12116](https://github.com/1024pix/pix/pull/12116) [BUGFIX] Retourner les compétences traduites dans les nouveaux certificats v3 (PIX-17592).
+- [#12106](https://github.com/1024pix/pix/pull/12106) [BUGFIX] Ne pas ajouter un membre avec le rôle admin à un centre de certif archivé s'il est ajouté à une orga de type sco (PIX-16804).
+
 ## v5.96.0 (23/04/2025)
 
 
