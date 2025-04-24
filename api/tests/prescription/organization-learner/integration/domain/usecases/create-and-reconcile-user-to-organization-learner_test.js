@@ -1,28 +1,15 @@
 import lodash from 'lodash';
 const { pick } = lodash;
 
-import { createAndReconcileUserToOrganizationLearner } from '../../../../lib/domain/usecases/create-and-reconcile-user-to-organization-learner.js';
-import { usecases } from '../../../../lib/domain/usecases/index.js';
-import * as authenticationMethodRepository from '../../../../src/identity-access-management/infrastructure/repositories/authentication-method.repository.js';
-import * as userRepository from '../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
-import { userToCreateRepository } from '../../../../src/identity-access-management/infrastructure/repositories/user-to-create.repository.js';
-import * as campaignRepository from '../../../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
+import { usecases } from '../../../../../../src/prescription/organization-learner/domain/usecases/index.js';
 import {
   CampaignCodeError,
   NotFoundError,
   OrganizationLearnerAlreadyLinkedToUserError,
-} from '../../../../src/shared/domain/errors.js';
-import { EntityValidationError } from '../../../../src/shared/domain/errors.js';
-import { cryptoService } from '../../../../src/shared/domain/services/crypto-service.js';
-import * as mailService from '../../../../src/shared/domain/services/mail-service.js';
-import * as obfuscationService from '../../../../src/shared/domain/services/obfuscation-service.js';
-import * as userReconciliationService from '../../../../src/shared/domain/services/user-reconciliation-service.js';
-import * as userService from '../../../../src/shared/domain/services/user-service.js';
-import * as passwordValidator from '../../../../src/shared/domain/validators/password-validator.js';
-import * as userValidator from '../../../../src/shared/domain/validators/user-validator.js';
-import { getI18n } from '../../../../src/shared/infrastructure/i18n/i18n.js';
-import * as organizationLearnerRepository from '../../../../src/shared/infrastructure/repositories/organization-learner-repository.js';
-import { catchErr, databaseBuilder, expect } from '../../../test-helper.js';
+} from '../../../../../../src/shared/domain/errors.js';
+import { EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
+import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
+import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
 
 const i18n = getI18n();
 
@@ -39,20 +26,11 @@ describe('Integration | UseCases | create-and-reconcile-user-to-organization-lea
   context('When there is no campaign with the given code', function () {
     it('should throw a campaign code error', async function () {
       // when
-      const error = await catchErr(createAndReconcileUserToOrganizationLearner)({
+      const error = await catchErr(usecases.createAndReconcileUserToOrganizationLearner)({
         campaignCode: 'NOTEXIST',
         locale,
         password,
         userAttributes,
-        authenticationMethodRepository,
-        campaignRepository,
-        organizationLearnerRepository,
-        userRepository,
-        cryptoService,
-        mailService,
-        obfuscationService,
-        userReconciliationService,
-        userService,
         i18n,
       });
 
@@ -76,20 +54,11 @@ describe('Integration | UseCases | create-and-reconcile-user-to-organization-lea
       };
 
       // when
-      const error = await catchErr(createAndReconcileUserToOrganizationLearner)({
+      const error = await catchErr(usecases.createAndReconcileUserToOrganizationLearner)({
         campaignCode,
         locale,
         password,
         userAttributes,
-        authenticationMethodRepository,
-        campaignRepository,
-        organizationLearnerRepository,
-        userRepository,
-        cryptoService,
-        mailService,
-        obfuscationService,
-        userReconciliationService,
-        userService,
         i18n,
       });
 
@@ -126,20 +95,11 @@ describe('Integration | UseCases | create-and-reconcile-user-to-organization-lea
         await databaseBuilder.commit();
 
         // when
-        const error = await catchErr(createAndReconcileUserToOrganizationLearner)({
+        const error = await catchErr(usecases.createAndReconcileUserToOrganizationLearner)({
           campaignCode,
           locale,
           password,
           userAttributes,
-          authenticationMethodRepository,
-          campaignRepository,
-          organizationLearnerRepository,
-          userRepository,
-          cryptoService,
-          mailService,
-          obfuscationService,
-          userReconciliationService,
-          userService,
           i18n,
         });
 
@@ -185,22 +145,11 @@ describe('Integration | UseCases | create-and-reconcile-user-to-organization-lea
           });
 
           // when
-          const error = await catchErr(createAndReconcileUserToOrganizationLearner)({
+          const error = await catchErr(usecases.createAndReconcileUserToOrganizationLearner)({
             campaignCode,
             locale,
             password: '',
             userAttributes,
-            authenticationMethodRepository,
-            campaignRepository,
-            organizationLearnerRepository,
-            userRepository,
-            cryptoService,
-            mailService,
-            obfuscationService,
-            userReconciliationService,
-            userService,
-            passwordValidator,
-            userValidator,
             i18n,
           });
 
@@ -231,20 +180,11 @@ describe('Integration | UseCases | create-and-reconcile-user-to-organization-lea
           await databaseBuilder.commit();
 
           // when
-          const error = await catchErr(createAndReconcileUserToOrganizationLearner)({
+          const error = await catchErr(usecases.createAndReconcileUserToOrganizationLearner)({
             campaignCode,
             locale,
             password,
             userAttributes,
-            authenticationMethodRepository,
-            campaignRepository,
-            organizationLearnerRepository,
-            userRepository,
-            cryptoService,
-            mailService,
-            obfuscationService,
-            userReconciliationService,
-            userService,
             i18n,
           });
 
@@ -320,20 +260,11 @@ describe('Integration | UseCases | create-and-reconcile-user-to-organization-lea
           await databaseBuilder.commit();
 
           // when
-          const error = await catchErr(createAndReconcileUserToOrganizationLearner)({
+          const error = await catchErr(usecases.createAndReconcileUserToOrganizationLearner)({
             campaignCode,
             locale,
             password,
             userAttributes,
-            authenticationMethodRepository,
-            campaignRepository,
-            organizationLearnerRepository,
-            userRepository,
-            cryptoService,
-            mailService,
-            obfuscationService,
-            userReconciliationService,
-            userService,
             i18n,
           });
 
@@ -359,23 +290,11 @@ describe('Integration | UseCases | create-and-reconcile-user-to-organization-lea
           };
 
           // when
-          const result = await createAndReconcileUserToOrganizationLearner({
+          const result = await usecases.createAndReconcileUserToOrganizationLearner({
             campaignCode,
             locale,
             password,
             userAttributes,
-            authenticationMethodRepository,
-            campaignRepository,
-            organizationLearnerRepository,
-            userRepository,
-            userToCreateRepository,
-            cryptoService,
-            mailService,
-            obfuscationService,
-            userReconciliationService,
-            userService,
-            passwordValidator,
-            userValidator,
             i18n,
           });
 
