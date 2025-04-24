@@ -328,7 +328,7 @@
                       "id": "1",
                       "content": "Vrai",
                       "feedback": {
-                        "state": "Bonne réponse ! 🎉",
+                        "state": "Mauvaise réponse.",
                         "diagnosis": "<p>Au mieux, vous pourrez connaître le pays ou la ville où elle se trouve.<br>Par contre, la police peut accéder à plus d'informations, dans un cadre prévu par la loi.</p>"
                       }
                     },
@@ -336,7 +336,7 @@
                       "id": "2",
                       "content": "Faux",
                       "feedback": {
-                        "state": "Mauvaise réponse.",
+                        "state": "Bonne réponse ! 🎉",
                         "diagnosis": "<p>Au mieux, vous pourrez connaître le pays ou la ville où elle se trouve.<br>Par contre, la police peut accéder à plus d'informations, dans un cadre prévu par la loi.</p>"
                       }
                     }

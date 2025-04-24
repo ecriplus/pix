@@ -216,7 +216,7 @@
                       "id": "1",
                       "content": "<p>vrai</p>",
                       "feedback": {
-                        "state": "Bonne réponse !🎉",
+                        "state": "Mauvaise réponse.",
                         "diagnosis": "<p>Le champ Objet sert à expliquer rapidement le contenu du mail. S’il n’est pas complété, le champ sera rempli automatiquement avec <code>(aucun objet)</code>.</p>"
                       }
                     },
@@ -224,7 +224,7 @@
                       "id": "2",
                       "content": "<p>faux</p>",
                       "feedback": {
-                        "state": "Mauvaise réponse.",
+                        "state": "Bonne réponse !🎉",
                         "diagnosis": "<p>Le champ Objet sert à expliquer rapidement le contenu du mail. S’il n’est pas complété, le champ sera rempli automatiquement avec <code>(aucun objet)</code>.</p>"
                       }
                     }
