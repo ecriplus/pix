@@ -80,7 +80,7 @@
           "element": {
             "id": "c849cbc5-931e-4a00-ae6a-083e2ff0614d",
             "type": "image",
-            "url": "https://i.imgur.com/0bI4zEN.png",
+            "url": "https://i.imgur.com/GHeUZvS.jpeg",
             "alt": "-",
             "alternativeText": "<ul><li>Les souris avec un fil : photographies de 4 souris avec fil de taille, forme et couleur différentes.</li><li>Les souris sans fil : photographies de 3 souris sans fil différentes reliées par des connecteurs USB Bluetooth .</li></ul>"
           }
@@ -197,7 +197,7 @@
           "element": {
             "id": "ccaefecd-db35-40ea-a6f9-8d42fb907e63",
             "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris1-CarteAGratter/index.html\" height=\"395\"></iframe>"
+            "content": "<iframe title=\"carteagratter\" src=\"https://epreuves.pix.fr/fr/puzzle/example.html\" height=\"450\"></iframe>"
           }
         }
       ]
@@ -220,7 +220,7 @@
           "element": {
             "id": "57d7453d-58a9-43f0-830c-f5f392b06f9e",
             "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris1-DeplacerPointeur/index.html\" height=\"395\"></iframe>"
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris1-DeplacerPointeur/index.html\" height=\"400\"></iframe>"
           }
         },
         {
@@ -297,7 +297,7 @@
           "element": {
             "id": "4ec66bb9-f016-48c3-9653-56d7ae04d1b9",
             "type": "image",
-            "url": "https://i.imgur.com/AgjMRvD.gif",
+            "url": "https://i.imgur.com/8DuRmCV.gif",
             "alt": "",
             "alternativeText": ""
           }
