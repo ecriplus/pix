@@ -9,7 +9,7 @@ import { fn, uniqueId } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action, get } from '@ember/object';
 import { LinkTo } from '@ember/routing';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import dayjs from 'dayjs';
