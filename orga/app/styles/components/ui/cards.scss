@@ -1,17 +1,14 @@
 @use 'pix-design-tokens/typography';
-@use 'pix-design-tokens/shadows';
 
 .chart-card {
   position: relative;
-  padding: 16px 20px;
 
   &__title {
     @extend %pix-title-xs;
 
     display: flex;
-    gap: 4px;
-    margin-top: 0;
-    margin-bottom: 32px;
+    gap: var(--pix-spacing-1x);
+    margin-bottom: var(--pix-spacing-6x);
     color: var(--pix-neutral-500);
   }
 

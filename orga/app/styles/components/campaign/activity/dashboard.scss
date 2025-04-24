@@ -1,52 +1,29 @@
+@use 'pix-design-tokens/breakpoints';
+
 .activity-dashboard {
   display: flex;
   flex-direction: column;
+  gap: var(--pix-spacing-4x);
+  margin-bottom: var(--pix-spacing-4x);
 
   &__row {
     display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-4x);
   }
 
-  &__row:first-child {
-    margin-bottom: 24px;
-  }
-
-  &__total-participants-card {
-    margin-right: 24px;
-  }
-
-  &__participations-by-day {
-    box-sizing: border-box;
-    width: calc(75% - 24px);
-    margin-right: 24px;
-  }
-
-  &__participations-by-status {
-    box-sizing: border-box;
-    width: 25%;
-  }
-
-  @media (max-width: 768px) {
+  @include breakpoints.device-is('desktop') {
     &__row {
-      flex-direction: column;
-      margin: 0;
-    }
-
-    &__row:first-child {
-      margin-bottom: 16px;
-    }
-
-    &__total-participants-card {
-      margin-right: 0;
-      margin-bottom: 16px;
+      flex-direction: row;
+      gap: var(--pix-spacing-8x);
     }
 
     &__participations-by-day {
-      width: 100%;
-      margin-bottom: 16px;
+      width: calc(75% - var(--pix-spacing-8x));
     }
 
     &__participations-by-status {
-      width: 100%;
+      width: calc(25% - 2px);
     }
   }
 }

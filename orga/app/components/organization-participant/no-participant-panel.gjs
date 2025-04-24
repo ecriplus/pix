@@ -12,7 +12,7 @@ export default class List extends Component {
   }
 
   <template>
-    <PixBlock class="no-participant-panel">
+    <PixBlock class="no-participant-panel" @variant="orga">
       <img src="{{this.rootURL}}/images/empty-state-participants.svg" alt="" role="none" />
       <p class="content-text">
         {{t "pages.organization-participants.empty-state.message"}}

@@ -171,7 +171,7 @@ export default class Statistics extends Component {
 
       <PixPagination @pagination={{this.pagination}} @locale={{this.currentLocale}} />
     {{else}}
-      <PixBlock class="empty-state">
+      <PixBlock class="empty-state" @variant="orga">
         <div class="empty-state__text">
           <p>{{t "pages.statistics.empty-state"}}</p>
         </div>

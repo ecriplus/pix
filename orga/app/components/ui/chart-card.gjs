@@ -4,7 +4,7 @@ import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { t } from 'ember-intl';
 
 <template>
-  <PixBlock class="chart-card" ...attributes>
+  <PixBlock class="chart-card" @variant="orga" ...attributes>
     <h3 class="chart-card__title">
       {{@title}}
       {{#if @info}}<PixTooltip @isWide={{true}} @position="left">

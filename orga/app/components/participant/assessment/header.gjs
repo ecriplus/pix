@@ -113,7 +113,7 @@ export default class Header extends Component {
       </:subtitle>
     </PageTitle>
 
-    <PixBlock class="participant-header">
+    <PixBlock class="participant-header" @variant="orga">
       <header class="panel-header__headline panel-header__headline--with-right-content">
         <h2 class="panel-header-title">{{@campaign.name}}</h2>
         {{#if @campaign.multipleSendings}}

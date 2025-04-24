@@ -17,7 +17,7 @@ export default class EmptyState extends Component {
   }
 
   <template>
-    <PixBlock class="empty-state">
+    <PixBlock class="empty-state" @variant="orga">
       <img src="{{this.rootURL}}/images/empty-state.svg" alt="" role="none" />
 
       <div class="empty-state__text">
