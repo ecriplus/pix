@@ -69,7 +69,7 @@ export class FixDoubledAnswers extends Script {
         await transaction('certification-courses').where({ id: certificationCourse.id }).update({
           abortReason: null,
           completedAt: completionDate,
-          endedAt: completionDate,
+          endedAt: null,
           updatedAt: completionDate,
         });
 
