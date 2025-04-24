@@ -197,7 +197,7 @@
           "element": {
             "id": "ccaefecd-db35-40ea-a6f9-8d42fb907e63",
             "type": "text",
-            "content": "<iframe title=\"carteagratter\" src=\"https://epreuves.pix.fr/fr/puzzle/example.html\" height=\"450\"></iframe>"
+            "content": "<iframe title=\"carteagratter\" src=\"https://epreuves.pix.fr/fr/puzzle/example.html\" height=\"448\"></iframe>"
           }
         }
       ]
@@ -220,7 +220,7 @@
           "element": {
             "id": "57d7453d-58a9-43f0-830c-f5f392b06f9e",
             "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris1-DeplacerPointeur/index.html\" height=\"450\"></iframe>"
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris1-DeplacerPointeur/index.html\" height=\"449\"></iframe>"
           }
         },
         {
@@ -251,7 +251,7 @@
           "element": {
             "id": "564448dc-6485-4918-a2c1-4452b2552650",
             "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clic-3boutonsouris/index.html\" height=\"460\"></iframe>"
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clic-3boutonsouris/index.html\" height=\"447\"></iframe>"
           }
         },
         {
@@ -363,7 +363,7 @@
           "element": {
             "id": "73b6a6d3-8c76-46e9-ae1f-d208d5bf1960",
             "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clic-1erclicsgauchesV2/index.html\" height=\"470\"></iframe>"
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clic-1erclicsgauchesV2/index.html\" height=\"449\"></iframe>"
           }
         },
         {
