@@ -35,7 +35,7 @@ const templates = {
   ENWithComplementaryCertification: 'ENWithComplementaryCertification',
 };
 
-async function getCertificationAttestationsPdfBuffer({
+export async function getCertificatesPdfBuffer({
   certificates,
   isFrenchDomainExtension,
   dirname = __dirname,
@@ -139,7 +139,7 @@ async function _embedTemplatePagesIntoDocument({ viewModels, dirname, pdfDocumen
     if (_atLeastOneWithProfessionalizingCertification(viewModels)) {
       templatePages[templates.withProfessionalizingCertificationMessageAndWithComplementaryCertifications] =
         await _embedFirstPageFromTemplateByFilename(
-          'FR-attestation-template-with-professionalizing-message-and-with-complementary-certifications.pdf',
+          'FR-certificate-template-with-professionalizing-message-and-with-complementary-certifications.pdf',
           pdfDocument,
           dirname,
         );
@@ -148,14 +148,14 @@ async function _embedTemplatePagesIntoDocument({ viewModels, dirname, pdfDocumen
     if (_atLeastOneWithoutProfessionalizingCertification(viewModels)) {
       if (lang === ENGLISH) {
         templatePages[templates.ENWithComplementaryCertification] = await _embedFirstPageFromTemplateByFilename(
-          'EN-attestation-template-with-complementary-certification.pdf',
+          'EN-certificate-template-with-complementary-certification.pdf',
           pdfDocument,
           dirname,
         );
       } else {
         templatePages[templates.withoutProfessionalizingCertificationMessageAndWithComplementaryCertifications] =
           await _embedFirstPageFromTemplateByFilename(
-            'FR-attestation-template-without-professionalizing-message-and-with-complementary-certifications.pdf',
+            'FR-certificate-template-without-professionalizing-message-and-with-complementary-certifications.pdf',
             pdfDocument,
             dirname,
           );
@@ -167,7 +167,7 @@ async function _embedTemplatePagesIntoDocument({ viewModels, dirname, pdfDocumen
     if (_atLeastOneWithProfessionalizingCertification(viewModels)) {
       templatePages[templates.withProfessionalizingCertificationMessageAndWithoutComplementaryCertifications] =
         await _embedFirstPageFromTemplateByFilename(
-          'FR-attestation-template-with-professionalizing-message-and-without-complementary-certifications.pdf',
+          'FR-certificate-template-with-professionalizing-message-and-without-complementary-certifications.pdf',
           pdfDocument,
           dirname,
         );
@@ -176,14 +176,14 @@ async function _embedTemplatePagesIntoDocument({ viewModels, dirname, pdfDocumen
     if (_atLeastOneWithoutProfessionalizingCertification(viewModels)) {
       if (lang === ENGLISH) {
         templatePages[templates.ENWithoutComplementaryCertification] = await _embedFirstPageFromTemplateByFilename(
-          'EN-attestation-template-without-complementary-certification.pdf',
+          'EN-certificate-template-without-complementary-certification.pdf',
           pdfDocument,
           dirname,
         );
       } else {
         templatePages[templates.withoutProfessionalizingCertificationMessageAndWithoutComplementaryCertifications] =
           await _embedFirstPageFromTemplateByFilename(
-            'FR-attestation-template-without-professionalizing-message-and-without-complementary-certifications.pdf',
+            'FR-certificate-template-without-professionalizing-message-and-without-complementary-certifications.pdf',
             pdfDocument,
             dirname,
           );
@@ -421,6 +421,3 @@ async function _finalizeDocument(pdfDocument) {
   const buffer = Buffer.from(pdfBytes);
   return buffer;
 }
-
-const getCertificationAttestationsPdf = { getCertificationAttestationsPdfBuffer };
-export { getCertificationAttestationsPdf, getCertificationAttestationsPdfBuffer };

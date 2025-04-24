@@ -11,7 +11,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
  * @param {Object} params
  * @param {Certificate} params.data
  */
-const generateV3AttestationTemplate = ({ pdf, data, translate }) => {
+export default function generateV3AttestationTemplate({ pdf, data, translate }) {
   // Global
   pdf.image(path.resolve(__dirname, 'background.jpg'), 0, 0, {
     width: pdf.page.width,
@@ -176,6 +176,4 @@ const generateV3AttestationTemplate = ({ pdf, data, translate }) => {
   function _formatText(content) {
     return content.replaceAll('&#x2F;', '/');
   }
-};
-
-export default generateV3AttestationTemplate;
+}

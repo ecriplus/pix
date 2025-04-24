@@ -4,7 +4,7 @@ import url from 'node:url';
 import dayjs from 'dayjs';
 import { getDocument } from 'pdfjs-dist';
 
-import { generate } from '../../../../../../../src/certification/results/infrastructure/utils/pdf/v3-certification-attestation-pdf.js';
+import { generate } from '../../../../../../../src/certification/results/infrastructure/utils/pdf/generate-pdf-certificate.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect } from '../../../../../../test-helper.js';
 
@@ -141,7 +141,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certification Attestat
         sessionId: 789,
       }),
     ];
-    const referencePdfPath = 'v3-attestation-test.pdf';
+    const referencePdfPath = 'certificate-test.pdf';
     const pdfStream = await generate({ certificates, i18n });
     const pdfBuffer = await _convertStreamToBuffer(pdfStream);
     // Method used to generate a new PDF certification attestation

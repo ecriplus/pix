@@ -4,7 +4,7 @@ import * as url from 'node:url';
 import dayjs from 'dayjs';
 import pdfLibUtils from 'pdf-lib/cjs/utils/index.js';
 
-import { getCertificationAttestationsPdfBuffer } from '../../../../../../../src/certification/results/infrastructure/utils/pdf/certification-attestation-pdf.js';
+import { getCertificatesPdfBuffer } from '../../../../../../../src/certification/results/infrastructure/utils/pdf/get-certificates-pdf-buffer.js';
 import { SESSIONS_VERSIONS } from '../../../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { CertificationAttestationGenerationError } from '../../../../../../../src/shared/domain/errors.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
@@ -13,7 +13,7 @@ import { isSameBinary } from '../../../../../../tooling/binary-comparator.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
-describe('Integration | Infrastructure | Utils | Pdf | Certification Attestation Pdf', function () {
+describe('Integration | Infrastructure | Utils | Pdf | getCertificatesPdfBuffer', function () {
   beforeEach(async function () {
     _makePdfLibPredictable();
 
@@ -28,7 +28,7 @@ describe('Integration | Infrastructure | Utils | Pdf | Certification Attestation
       .reply(200, async () => readFile(`${__dirname}/stickers/macaron_droit_expert.pdf`));
   });
 
-  it('should generate full attestation (non-regression test)', async function () {
+  it('should generate full certificate (non-regression test)', async function () {
     // given
     const resultCompetenceTree = domainBuilder.buildResultCompetenceTree();
     const certificate = domainBuilder.buildCertificationAttestation({
@@ -48,11 +48,11 @@ describe('Integration | Infrastructure | Utils | Pdf | Certification Attestation
         },
       ],
     });
-    const referencePdfPath = 'certification-attestation-pdf_test_full.pdf';
+    const referencePdfPath = 'certificate-pdf_test_full.pdf';
     const i18n = getI18n();
 
     // when
-    const { buffer } = await getCertificationAttestationsPdfBuffer({
+    const { buffer } = await getCertificatesPdfBuffer({
       certificates: [certificate],
       isFrenchDomainExtension: true,
       i18n,
@@ -68,7 +68,7 @@ describe('Integration | Infrastructure | Utils | Pdf | Certification Attestation
     ).to.be.true;
   });
 
-  it('should generate full attestation with Pix+ Édu temporary badge', async function () {
+  it('should generate full certificate with Pix+ Édu temporary badge', async function () {
     // given
     const resultCompetenceTree = domainBuilder.buildResultCompetenceTree();
     const certificate = domainBuilder.buildCertificationAttestation({
@@ -85,11 +85,11 @@ describe('Integration | Infrastructure | Utils | Pdf | Certification Attestation
         },
       ],
     });
-    const referencePdfPath = 'certification-attestation-pdf_test_full_edu_temporary.pdf';
+    const referencePdfPath = 'certificate-pdf_test_full_edu_temporary.pdf';
     const i18n = getI18n();
 
     // when
-    const { buffer } = await getCertificationAttestationsPdfBuffer({
+    const { buffer } = await getCertificatesPdfBuffer({
       certificates: [certificate],
       isFrenchDomainExtension: true,
       i18n,
@@ -105,7 +105,7 @@ describe('Integration | Infrastructure | Utils | Pdf | Certification Attestation
     ).to.be.true;
   });
 
-  it('should generate full attestation with Pix+ Édu definitive badge', async function () {
+  it('should generate full certificate with Pix+ Édu definitive badge', async function () {
     // given
     const resultCompetenceTree = domainBuilder.buildResultCompetenceTree();
     const certificate = domainBuilder.buildCertificationAttestation({
@@ -122,11 +122,11 @@ describe('Integration | Infrastructure | Utils | Pdf | Certification Attestation
         },
       ],
     });
-    const referencePdfPath = 'certification-attestation-pdf_test_full_edu.pdf';
+    const referencePdfPath = 'certificate-pdf_test_full_edu.pdf';
     const i18n = getI18n();
 
     // when
-    const { buffer } = await getCertificationAttestationsPdfBuffer({
+    const { buffer } = await getCertificatesPdfBuffer({
       certificates: [certificate],
       isFrenchDomainExtension: true,
       i18n,
@@ -211,11 +211,11 @@ describe('Integration | Infrastructure | Utils | Pdf | Certification Attestation
         certifiedBadges: [],
         deliveredAt: deliveredAfterStartDate,
       });
-    const referencePdfPath = 'certification-attestation-pdf_several_pages.pdf';
+    const referencePdfPath = 'certificate-pdf_several_pages.pdf';
     const i18n = getI18n();
 
     // when
-    const { buffer } = await getCertificationAttestationsPdfBuffer({
+    const { buffer } = await getCertificatesPdfBuffer({
       certificates: [
         certificateWithComplementaryCertificationsAndWithoutProfessionalizingMessage,
         certificateWithComplementaryCertificationsAndWithProfessionalizingMessage,
@@ -256,7 +256,7 @@ describe('Integration | Infrastructure | Utils | Pdf | Certification Attestation
     const i18n = getI18n();
 
     // when
-    const error = await catchErr(getCertificationAttestationsPdfBuffer)({
+    const error = await catchErr(getCertificatesPdfBuffer)({
       certificates: [certificate],
       isFrenchDomainExtension: true,
       i18n,
@@ -282,7 +282,7 @@ describe('Integration | Infrastructure | Utils | Pdf | Certification Attestation
     const i18n = getI18n('en');
 
     // when
-    const { buffer } = await getCertificationAttestationsPdfBuffer({
+    const { buffer } = await getCertificatesPdfBuffer({
       certificates: [certificate],
       isFrenchDomainExtension: false,
       i18n,
@@ -299,7 +299,7 @@ describe('Integration | Infrastructure | Utils | Pdf | Certification Attestation
   });
 
   describe('when the certification session is version 3', function () {
-    it('should not display the professionalizing certification message in attestation', async function () {
+    it('should not display the professionalizing certification message in certificate', async function () {
       // given
       const professionalizingValidityStartDate = new Date('2022-01-01');
       const deliveredAfterStartDate = dayjs(professionalizingValidityStartDate).add(1, 'days').toDate();
@@ -314,11 +314,11 @@ describe('Integration | Infrastructure | Utils | Pdf | Certification Attestation
         certifiedBadges: [],
         deliveredAt: deliveredAfterStartDate,
       });
-      const referencePdfPath = 'certification-attestation-pdf-v3-without-professionalizing-message_test.pdf';
+      const referencePdfPath = 'certificate-pdf-v3-without-professionalizing-message_test.pdf';
       const i18n = getI18n();
 
       // when
-      const { buffer } = await getCertificationAttestationsPdfBuffer({
+      const { buffer } = await getCertificatesPdfBuffer({
         certificates: [certificateWithoutProfessionalizingMessage],
         isFrenchDomainExtension: true,
         i18n,
