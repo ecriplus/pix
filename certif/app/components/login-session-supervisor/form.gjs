@@ -6,12 +6,13 @@ import { t } from 'ember-intl';
 
 <template>
   <form {{on 'submit' @superviseSession}}>
-    <PixInput @id='session-id' type='number' {{on 'input' @setSessionId}}>
+    <PixInput @id='session-id' type='number' @requiredLabel={{t 'common.forms.required'}} {{on 'input' @setSessionId}}>
       <:label>{{t 'pages.session-supervising.login.form.session-number'}}</:label>
     </PixInput>
 
     <PixInputPassword
       @id='session-password'
+      @requiredLabel={{t 'common.forms.required'}}
       @ariaLabel={{t 'pages.session-supervising.login.form.session-password.aria-label'}}
       @subLabel={{t 'pages.session-supervising.login.form.example'}}
       @prefix='C-'
