@@ -1,4 +1,6 @@
-import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
+import { CampaignParticipationStatuses, CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
+import { KnowledgeElementCollection } from '../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
+import { KnowledgeElement } from '../../../../src/shared/domain/models/index.js';
 import {
   createMaddoServer,
   databaseBuilder,
@@ -29,11 +31,58 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
         jurisdiction: { rules: [{ name: 'tags', value: [tag.name] }] },
       });
 
-      const campaign = databaseBuilder.factory.buildCampaign({ organizationId: orgaInJurisdiction.id });
-      const participation1 = databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaign.id });
+      const frameworkId = databaseBuilder.factory.learningContent.buildFramework().id;
+      const areaId = databaseBuilder.factory.learningContent.buildArea({ frameworkId }).id;
+      const competenceId = databaseBuilder.factory.learningContent.buildCompetence({ areaId }).id;
+      const tube = databaseBuilder.factory.learningContent.buildTube({ competenceId });
+      const skillId = databaseBuilder.factory.learningContent.buildSkill({ tubeId: tube.id, status: 'actif' }).id;
+
+      const { id: userId } = databaseBuilder.factory.buildUser({
+        firstName: 'user firstname 1',
+        lastName: 'user lastname 1',
+      });
+      const organizationLearner1 = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId: orgaInJurisdiction.id,
+        userId,
+        firstName: 'firstname 1',
+        lastName: 'lastname 1',
+      });
+      const campaign = databaseBuilder.factory.buildCampaign({
+        type: CampaignTypes.ASSESSMENT,
+        organizationId: orgaInJurisdiction.id,
+      });
+      databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId });
+      const participation1 = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaign.id,
+        status: CampaignParticipationStatuses.SHARED,
+        organizationLearnerId: organizationLearner1.id,
+        masteryRate: 0.1,
+        pixScore: 42,
+        validatedSkillsCount: 10,
+        userId,
+        participantExternalId: 'external id 1',
+        createdAt: new Date('2025-01-02'),
+        sharedAt: new Date('2025-01-03'),
+      });
+      const ke = databaseBuilder.factory.buildKnowledgeElement({
+        status: KnowledgeElement.StatusType.VALIDATED,
+        skillId,
+        userId: participation1.userId,
+      });
+
+      databaseBuilder.factory.buildKnowledgeElementSnapshot({
+        campaignParticipationId: participation1.id,
+        snapshot: new KnowledgeElementCollection([ke]).toSnapshot(),
+      });
+
+      const organizationLearner2 = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId: organizationLearner1.organizationId,
+      });
       const participation2 = databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
         status: CampaignParticipationStatuses.STARTED,
+        organizationLearnerId: organizationLearner2.id,
+        userId: organizationLearner2.userId,
       });
 
       await databaseBuilder.commit();
@@ -55,7 +104,7 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
 
       // then
       expect(response.statusCode).to.equal(200);
-      expect(response.result).to.deep.equal([
+      expect(response.result).to.deep.members([
         domainBuilder.maddo.buildCampaignParticipation({ ...participation1, clientId }),
         domainBuilder.maddo.buildCampaignParticipation({ ...participation2, clientId }),
       ]);
