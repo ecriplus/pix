@@ -128,7 +128,7 @@
                 {
                   "id": "7aac23e0-6642-4ca4-928f-50e074dabc77",
                   "type": "text",
-                  "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-molette2image/test image scroll-02-02.jpg\" width=\"680\" height=\"340\"></iframe>"
+                  "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-molette2image/test image scroll-02-02.jpg\" width=\"788\" height=\"340\"></iframe>"
                 }
               ]
             },
@@ -182,7 +182,7 @@
           "element": {
             "id": "f8226449-d41d-4650-aa7a-001fbc5773a8",
             "type": "text",
-            "content": "<p>Dans cette activité, vous allez devoir retrouver un mot dans le module. Le mot à trouver se trouve avant le symbole « 📰 ». <br><br> Voici les étapes que vous allez suivre :&nbsp; </p><ul><li>Faire rouler la molette pour remonter jusqu'à la leçon en bleu.</li><li>Trouver le mot qui se trouve avant le symbole « 📰 ».</li><li>Faire rouler la molette pour redescendre ici.</li><li>Répondre à la question.</li></ul>"
+            "content": "<p>Dans cette activité, vous allez devoir retrouver un mot dans le module. Le mot à trouver se trouve avant le symbole « 📰 ». <br><br> Voici les étapes que vous allez suivre :&nbsp; </p><ul><li>Faire rouler la molette pour remonter jusqu'à l'image animée de la molette.</li><li>Trouver le mot qui se trouve avant le symbole « 📰 ».</li><li>Faire rouler la molette pour redescendre ici.</li><li>Répondre à la question.</li></ul>"
           }
         },
         {
@@ -292,7 +292,7 @@
           "element": {
             "id": "be1b5866-6475-4bed-a775-e07be73f156e",
             "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clic-1erdoublesclics/index.html\" height=\"394\"></iframe>"
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clic-1erdoublesclics/index.html\" height=\"445\"></iframe>"
           }
         }
       ]
@@ -415,7 +415,7 @@
           "element": {
             "id": "fc26348a-dea8-4010-bfa6-efd0252b9516",
             "type": "text",
-            "content": "<p><strong>Dans la zone ci-dessous, entraînez-vous à faire un clic droit puis un clic gauche à la suite.</strong></p><p><br></p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-clicdroitpuisgauche/index.html\" height=\"394\"></iframe>"
+            "content": "<p><strong>Dans la zone ci-dessous, entraînez-vous à faire un clic droit puis un clic gauche à la suite.</strong></p><p><br></p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-clicdroitpuisgauche/index.html\" height=\"445\"></iframe>"
           }
         }
       ]
@@ -449,7 +449,7 @@
           "element": {
             "id": "fe6818f4-ad9d-4b5e-bc58-b18cd1d6cee8",
             "type": "text",
-            "content": "<p>Récapitulons tout ce que vous venez de voir dans ce module. <br></p><p><strong>Dans l'image ci-dessous, déplacez votre pointeur sur le dessin de la souris.</strong> <br>Pour chaque bouton, suivez les consignes.</p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-recap3boutonsbleu/index.html\" height=\"394\"></iframe>"
+            "content": "<p>Récapitulons tout ce que vous venez de voir dans ce module. <br></p><p><strong>Dans l'image ci-dessous, déplacez votre pointeur sur le dessin de la souris.</strong> <br>Pour chaque bouton, suivez les consignes.</p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-recap3boutonsbleu/index.html\" height=\"445\"></iframe>"
           }
         },
         {
