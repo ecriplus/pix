@@ -83,6 +83,7 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
         status: CampaignParticipationStatuses.STARTED,
         organizationLearnerId: organizationLearner2.id,
         userId: organizationLearner2.userId,
+        masteryRate: null,
       });
 
       await databaseBuilder.commit();
@@ -105,8 +106,24 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
       // then
       expect(response.statusCode).to.equal(200);
       expect(response.result).to.deep.members([
-        domainBuilder.maddo.buildCampaignParticipation({ ...participation1, clientId }),
-        domainBuilder.maddo.buildCampaignParticipation({ ...participation2, clientId }),
+        domainBuilder.maddo.buildCampaignParticipation({
+          ...participation1,
+          clientId,
+          tubes: [
+            domainBuilder.maddo.buildTubeCoverage({
+              id: tube.id,
+              competenceId,
+              maxLevel: 2,
+              meanLevel: 2,
+              practicalDescription: tube.practicalDescription_i18n['fr'],
+              practicalTitle: tube.practicalTitle_i18n['fr'],
+            }),
+          ],
+        }),
+        domainBuilder.maddo.buildCampaignParticipation({
+          ...participation2,
+          clientId,
+        }),
       ]);
     });
   });

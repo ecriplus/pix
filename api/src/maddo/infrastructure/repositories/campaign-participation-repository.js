@@ -1,8 +1,9 @@
-import * as campaignAPI from '../../../prescription/campaign/application/api/campaigns-api.js';
+import * as campaignsAPI from '../../../prescription/campaign/application/api/campaigns-api.js';
 import { CampaignParticipation } from '../../domain/models/CampaignParticipation.js';
+import { TubeCoverage } from '../../domain/models/TubeCoverage.js';
 
 export async function findByCampaignId(campaignId, clientId) {
-  const campaignParticipations = await campaignAPI.getCampaignParticipations({ campaignId });
+  const campaignParticipations = await campaignsAPI.getCampaignParticipations({ campaignId });
   return campaignParticipations.map((rawCampaign) => toDomain(rawCampaign, clientId, campaignId));
 }
 
@@ -14,6 +15,8 @@ function toDomain(rawCampaignParticipation, clientId, campaignId) {
     createdAt: rawCampaignParticipation.createdAt,
     sharedAt: rawCampaignParticipation.sharedAt,
     userId: rawCampaignParticipation.userId,
+    masteryRate: rawCampaignParticipation.masteryRate,
+    tubes: rawCampaignParticipation.tubes?.map((tube) => new TubeCoverage(tube)),
     clientId,
     campaignId,
   });

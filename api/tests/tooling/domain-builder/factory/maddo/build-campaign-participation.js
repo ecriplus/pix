@@ -9,6 +9,8 @@ export function buildCampaignParticipation({
   campaignId,
   userId,
   clientId,
+  masteryRate,
+  tubes,
 } = {}) {
   return new CampaignParticipation({
     id,
@@ -19,5 +21,7 @@ export function buildCampaignParticipation({
     campaignId,
     userId,
     clientId,
+    masteryRate,
+    tubes,
   });
 }
