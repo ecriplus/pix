@@ -1,6 +1,7 @@
 import { visit, within } from '@1024pix/ember-testing-library';
 import { click, fillIn, settled, waitUntil } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { Response } from 'miragejs';
 import ENV from 'pix-certif/config/environment';
@@ -87,8 +88,14 @@ module('Acceptance | Session supervising', function (hooks) {
       });
 
       const screen = await visit('/connexion-espace-surveillant');
-      await fillIn(screen.getByRole('spinbutton', { name: 'Numéro de la session' }), '12345');
-      await fillIn(screen.getByLabelText('Mot de passe de la session Exemple : C-12345'), '6789');
+      await fillIn(
+        screen.getByLabelText(t('pages.session-supervising.login.form.session-number'), { exact: false }),
+        '12345',
+      );
+      await fillIn(
+        screen.getByLabelText(t('pages.session-supervising.login.form.session-password.label'), { exact: false }),
+        '6789',
+      );
 
       // when
       await click(screen.getByRole('button', { name: 'Surveiller la session' }));
@@ -151,8 +158,14 @@ module('Acceptance | Session supervising', function (hooks) {
     });
 
     const firstVisit = await visit('/connexion-espace-surveillant');
-    await fillIn(firstVisit.getByRole('spinbutton', { name: 'Numéro de la session' }), '12345');
-    await fillIn(firstVisit.getByLabelText('Mot de passe de la session Exemple : C-12345'), '6789');
+    await fillIn(
+      firstVisit.getByLabelText(t('pages.session-supervising.login.form.session-number'), { exact: false }),
+      '12345',
+    );
+    await fillIn(
+      firstVisit.getByLabelText(t('pages.session-supervising.login.form.session-password.label'), { exact: false }),
+      '6789',
+    );
     await click(firstVisit.getByRole('button', { name: 'Surveiller la session' }));
 
     // when
@@ -161,8 +174,14 @@ module('Acceptance | Session supervising', function (hooks) {
 
     // then
     const secondVisit = await visit('/connexion-espace-surveillant');
-    await fillIn(secondVisit.getByRole('spinbutton', { name: 'Numéro de la session' }), '12345');
-    await fillIn(secondVisit.getByLabelText('Mot de passe de la session Exemple : C-12345'), '6789');
+    await fillIn(
+      secondVisit.getByLabelText(t('pages.session-supervising.login.form.session-number'), { exact: false }),
+      '12345',
+    );
+    await fillIn(
+      secondVisit.getByLabelText(t('pages.session-supervising.login.form.session-password.label'), { exact: false }),
+      '6789',
+    );
     await click(secondVisit.getByRole('button', { name: 'Surveiller la session' }));
     await settled();
 
@@ -190,8 +209,14 @@ module('Acceptance | Session supervising', function (hooks) {
     });
 
     const firstVisit = await visit('/connexion-espace-surveillant');
-    await fillIn(firstVisit.getByRole('spinbutton', { name: 'Numéro de la session' }), '12345');
-    await fillIn(firstVisit.getByLabelText('Mot de passe de la session Exemple : C-12345'), '6789');
+    await fillIn(
+      firstVisit.getByLabelText(t('pages.session-supervising.login.form.session-number'), { exact: false }),
+      '12345',
+    );
+    await fillIn(
+      firstVisit.getByLabelText(t('pages.session-supervising.login.form.session-password.label'), { exact: false }),
+      '6789',
+    );
     await click(firstVisit.getByRole('button', { name: 'Surveiller la session' }));
 
     // when
@@ -222,8 +247,14 @@ module('Acceptance | Session supervising', function (hooks) {
     });
 
     const screen = await visit('/connexion-espace-surveillant');
-    await fillIn(screen.getByRole('spinbutton', { name: 'Numéro de la session' }), '12345');
-    await fillIn(screen.getByLabelText('Mot de passe de la session Exemple : C-12345'), '6789');
+    await fillIn(
+      screen.getByLabelText(t('pages.session-supervising.login.form.session-number'), { exact: false }),
+      '12345',
+    );
+    await fillIn(
+      screen.getByLabelText(t('pages.session-supervising.login.form.session-password.label'), { exact: false }),
+      '6789',
+    );
     await click(screen.getByRole('button', { name: 'Surveiller la session' }));
 
     // when
@@ -257,8 +288,14 @@ module('Acceptance | Session supervising', function (hooks) {
       });
 
       const screen = await visit('/connexion-espace-surveillant');
-      await fillIn(screen.getByRole('spinbutton', { name: 'Numéro de la session' }), '12345');
-      await fillIn(screen.getByLabelText('Mot de passe de la session Exemple : C-12345'), '6789');
+      await fillIn(
+        screen.getByLabelText(t('pages.session-supervising.login.form.session-number'), { exact: false }),
+        '12345',
+      );
+      await fillIn(
+        screen.getByLabelText(t('pages.session-supervising.login.form.session-password.label'), { exact: false }),
+        '6789',
+      );
 
       // when
       await click(screen.getByRole('button', { name: 'Surveiller la session' }));
@@ -299,8 +336,14 @@ module('Acceptance | Session supervising', function (hooks) {
             });
 
             const screen = await visit('/connexion-espace-surveillant');
-            await fillIn(screen.getByRole('spinbutton', { name: 'Numéro de la session' }), '12345');
-            await fillIn(screen.getByLabelText('Mot de passe de la session Exemple : C-12345'), '6789');
+            await fillIn(
+              screen.getByLabelText(t('pages.session-supervising.login.form.session-number'), { exact: false }),
+              '12345',
+            );
+            await fillIn(
+              screen.getByLabelText(t('pages.session-supervising.login.form.session-password.label'), { exact: false }),
+              '6789',
+            );
             await click(screen.getByRole('button', { name: 'Surveiller la session' }));
 
             // when
@@ -345,8 +388,14 @@ module('Acceptance | Session supervising', function (hooks) {
             });
 
             const screen = await visit('/connexion-espace-surveillant');
-            await fillIn(screen.getByRole('spinbutton', { name: 'Numéro de la session' }), '123');
-            await fillIn(screen.getByLabelText('Mot de passe de la session Exemple : C-12345'), '6789');
+            await fillIn(
+              screen.getByLabelText(t('pages.session-supervising.login.form.session-number'), { exact: false }),
+              '123',
+            );
+            await fillIn(
+              screen.getByLabelText(t('pages.session-supervising.login.form.session-password.label'), { exact: false }),
+              '6789',
+            );
             await click(screen.getByRole('button', { name: 'Surveiller la session' }));
 
             // when
@@ -399,8 +448,14 @@ module('Acceptance | Session supervising', function (hooks) {
             });
 
             const screen = await visit('/connexion-espace-surveillant');
-            await fillIn(screen.getByRole('spinbutton', { name: 'Numéro de la session' }), '12345');
-            await fillIn(screen.getByLabelText('Mot de passe de la session Exemple : C-12345'), '6789');
+            await fillIn(
+              screen.getByLabelText(t('pages.session-supervising.login.form.session-number'), { exact: false }),
+              '12345',
+            );
+            await fillIn(
+              screen.getByLabelText(t('pages.session-supervising.login.form.session-password.label'), { exact: false }),
+              '6789',
+            );
             await click(screen.getByRole('button', { name: 'Surveiller la session' }));
 
             // when
@@ -457,8 +512,14 @@ module('Acceptance | Session supervising', function (hooks) {
             });
 
             const screen = await visit('/connexion-espace-surveillant');
-            await fillIn(screen.getByRole('spinbutton', { name: 'Numéro de la session' }), '123');
-            await fillIn(screen.getByLabelText('Mot de passe de la session Exemple : C-12345'), '6789');
+            await fillIn(
+              screen.getByLabelText(t('pages.session-supervising.login.form.session-number'), { exact: false }),
+              '123',
+            );
+            await fillIn(
+              screen.getByLabelText(t('pages.session-supervising.login.form.session-password.label'), { exact: false }),
+              '6789',
+            );
             await click(screen.getByRole('button', { name: 'Surveiller la session' }));
 
             // when
@@ -507,8 +568,14 @@ module('Acceptance | Session supervising', function (hooks) {
             });
 
             const screen = await visit('/connexion-espace-surveillant');
-            await fillIn(screen.getByRole('spinbutton', { name: 'Numéro de la session' }), '12345');
-            await fillIn(screen.getByLabelText('Mot de passe de la session Exemple : C-12345'), '6789');
+            await fillIn(
+              screen.getByLabelText(t('pages.session-supervising.login.form.session-number'), { exact: false }),
+              '12345',
+            );
+            await fillIn(
+              screen.getByLabelText(t('pages.session-supervising.login.form.session-password.label'), { exact: false }),
+              '6789',
+            );
             await click(screen.getByRole('button', { name: 'Surveiller la session' }));
 
             // when
@@ -555,8 +622,14 @@ module('Acceptance | Session supervising', function (hooks) {
             });
 
             const screen = await visit('/connexion-espace-surveillant');
-            await fillIn(screen.getByRole('spinbutton', { name: 'Numéro de la session' }), '12345');
-            await fillIn(screen.getByLabelText('Mot de passe de la session Exemple : C-12345'), '6789');
+            await fillIn(
+              screen.getByLabelText(t('pages.session-supervising.login.form.session-number'), { exact: false }),
+              '12345',
+            );
+            await fillIn(
+              screen.getByLabelText(t('pages.session-supervising.login.form.session-password.label'), { exact: false }),
+              '6789',
+            );
             await click(screen.getByRole('button', { name: 'Surveiller la session' }));
 
             // when
@@ -601,8 +674,14 @@ module('Acceptance | Session supervising', function (hooks) {
             });
 
             const screen = await visit('/connexion-espace-surveillant');
-            await fillIn(screen.getByRole('spinbutton', { name: 'Numéro de la session' }), '12345');
-            await fillIn(screen.getByLabelText('Mot de passe de la session Exemple : C-12345'), '6789');
+            await fillIn(
+              screen.getByLabelText(t('pages.session-supervising.login.form.session-number'), { exact: false }),
+              '12345',
+            );
+            await fillIn(
+              screen.getByLabelText(t('pages.session-supervising.login.form.session-password.label'), { exact: false }),
+              '6789',
+            );
             await click(screen.getByRole('button', { name: 'Surveiller la session' }));
 
             // when
@@ -658,8 +737,14 @@ module('Acceptance | Session supervising', function (hooks) {
             });
 
             const screen = await visit('/connexion-espace-surveillant');
-            await fillIn(screen.getByRole('spinbutton', { name: 'Numéro de la session' }), '12345');
-            await fillIn(screen.getByLabelText('Mot de passe de la session Exemple : C-12345'), '6789');
+            await fillIn(
+              screen.getByLabelText(t('pages.session-supervising.login.form.session-number'), { exact: false }),
+              '12345',
+            );
+            await fillIn(
+              screen.getByLabelText(t('pages.session-supervising.login.form.session-password.label'), { exact: false }),
+              '6789',
+            );
             await click(screen.getByRole('button', { name: 'Surveiller la session' }));
 
             // when

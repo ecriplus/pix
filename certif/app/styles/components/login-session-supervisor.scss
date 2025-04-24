@@ -1,0 +1,85 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
+.login-session-supervisor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: var(--pix-spacing-4x) var(--pix-spacing-2x);
+  background-color: var(--pix-certif-500);
+}
+
+.login-session-supervisor__main {
+  width: 29rem;
+  max-width: 100%;
+  overflow: hidden;
+  background-color: var(--pix-neutral-0);
+  border-radius: 0.5rem;
+
+  & > * {
+    padding: 0 var(--pix-spacing-4x);
+  }
+}
+
+.login-session-supervisor__header {
+  padding-top: var(--pix-spacing-10x);
+  text-align: center;
+
+  img {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  h1 {
+    @extend %pix-body-xs;
+
+    color: var(--pix-neutral-500);
+    text-transform: uppercase;
+  }
+
+  h2 {
+    @extend %pix-title-s;
+
+    margin: var(--pix-spacing-1x) 0 var(--pix-spacing-2x);
+    color: var(--pix-neutral-800);
+  }
+
+  p {
+    @extend %pix-body-xs;
+
+    color: var(--pix-neutral-500);
+  }
+}
+
+.login-session-supervisor__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-4x);
+  max-width: 20rem;
+  margin: var(--pix-spacing-6x) auto var(--pix-spacing-4x);
+}
+
+.login-session-supervisor__form-error {
+  margin-top: var(--pix-spacing-4x);
+  text-wrap: pretty;
+}
+
+.login-session-supervisor__footer {
+  padding: var(--pix-spacing-4x);
+  text-align: center;
+  background-color: var(--pix-neutral-20);
+
+  .user {
+    @extend %pix-body-s;
+
+    display: flex;
+    gap: var(--pix-spacing-1x);
+    align-items: center;
+    justify-content: center;
+    color: var(--pix-neutral-500);
+  }
+}

@@ -1,6 +1,7 @@
 import { visit as visitScreen } from '@1024pix/ember-testing-library';
 import { click, fillIn } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
@@ -32,12 +33,19 @@ module('Acceptance | Session supervising error', function (hooks) {
       this.server.get('/sessions/2001/supervising', { errors: [{ code: 403 }] }, 403);
 
       const screen = await visitScreen('/connexion-espace-surveillant');
-      await fillIn(screen.getByRole('spinbutton', { name: 'Numéro de la session' }), '2000');
-      await fillIn(screen.getByLabelText('Mot de passe de la session Exemple : C-12345'), '6789');
+      await fillIn(
+        screen.getByLabelText(t('pages.session-supervising.login.form.session-number'), { exact: false }),
+        '2000',
+      );
+      await fillIn(
+        screen.getByLabelText(t('pages.session-supervising.login.form.session-password.label'), { exact: false }),
+        '6789',
+      );
       await click(screen.getByRole('button', { name: 'Surveiller la session' }));
 
       // when
       const secondScreen = await visitScreen('/sessions/2001/surveiller');
+
       // then
       assert.dom(secondScreen.getByRole('heading', { name: 'Une erreur est survenue' })).exists();
       assert
