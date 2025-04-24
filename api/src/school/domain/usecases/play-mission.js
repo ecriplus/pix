@@ -10,12 +10,16 @@ export async function playMission({
   assessmentRepository,
   missionAssessmentRepository,
   missionRepository,
+  organizationLearnerRepository,
 }) {
   const missionAssessment = await missionAssessmentRepository.getCurrent(missionId, organizationLearnerId);
 
   if (missionAssessment) {
     return getAssessment({ missionAssessment, assessmentRepository });
   }
+
+  await _checkOrganizationLearnerExists({ organizationLearnerRepository, organizationLearnerId });
+
   return _startMission({
     missionId,
     organizationLearnerId,
@@ -77,4 +81,8 @@ async function createMissionAssessment({
   await missionAssessmentRepository.save({ missionAssessment });
 
   return missionAssessment;
+}
+
+async function _checkOrganizationLearnerExists({ organizationLearnerRepository, organizationLearnerId }) {
+  await organizationLearnerRepository.getById({ organizationLearnerId });
 }
