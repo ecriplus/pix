@@ -9,16 +9,20 @@ import {
 } from '../../../../test-helper.js';
 
 describe('Prescription | Organization Learner | Acceptance | Application | sco-organization-learner-route', function () {
+  let server;
+
+  beforeEach(async function () {
+    server = await createServer();
+  });
+
   describe('POST /api/sco-organization-learners/external', function () {
     let organization;
     let campaign;
     let options;
     let organizationLearner;
-    let server;
 
     beforeEach(async function () {
       // given
-      server = await createServer();
 
       options = {
         method: 'POST',
@@ -188,6 +192,76 @@ describe('Prescription | Organization Learner | Acceptance | Application | sco-o
           // then
           expect(response.statusCode).to.equal(401);
         });
+      });
+    });
+  });
+
+  describe('POST /api/sco-organization-learners/dependent', function () {
+    let organization;
+    let campaign;
+    let organizationLearner;
+
+    beforeEach(async function () {
+      // given
+      organization = databaseBuilder.factory.buildOrganization();
+      organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId: organization.id,
+        userId: null,
+        nationalStudentId: 'salut',
+      });
+      campaign = databaseBuilder.factory.buildCampaign({ organizationId: organization.id });
+      await databaseBuilder.commit();
+    });
+
+    context('when creation is with email', function () {
+      it('should return an 204 status after having successfully created user and associated user to organizationLearner', async function () {
+        // when
+        const response = await server.inject({
+          method: 'POST',
+          url: '/api/sco-organization-learners/dependent',
+          payload: {
+            data: {
+              attributes: {
+                'campaign-code': campaign.code,
+                'first-name': organizationLearner.firstName,
+                'last-name': organizationLearner.lastName,
+                birthdate: organizationLearner.birthdate,
+                password: 'P@ssw0rd',
+                email: 'angie@example.net',
+                'with-username': false,
+              },
+            },
+          },
+        });
+
+        // then
+        expect(response.statusCode).to.equal(204);
+      });
+    });
+
+    context('when creation is with username', function () {
+      it('should return a 204 status after having successfully created user and associated user to organizationLearner', async function () {
+        // when
+        const response = await server.inject({
+          method: 'POST',
+          url: '/api/sco-organization-learners/dependent',
+          payload: {
+            data: {
+              attributes: {
+                'campaign-code': campaign.code,
+                'first-name': organizationLearner.firstName,
+                'last-name': organizationLearner.lastName,
+                birthdate: organizationLearner.birthdate,
+                password: 'P@ssw0rd',
+                username: 'angie.go1234',
+                'with-username': true,
+              },
+            },
+          },
+        });
+
+        // then
+        expect(response.statusCode).to.equal(204);
       });
     });
   });

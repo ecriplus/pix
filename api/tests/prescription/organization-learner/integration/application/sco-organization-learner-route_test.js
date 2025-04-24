@@ -37,14 +37,6 @@ describe('Integration | Application | Route | sco-organization-learners', functi
       };
     });
 
-    it('should succeed', async function () {
-      // when
-      response = await httpTestServer.request(method, url, payload);
-
-      // then
-      expect(response.statusCode).to.equal(200);
-    });
-
     it('should return a 400 Bad Request when campaignCode is missing', async function () {
       // given
       payload.data.attributes['campaign-code'] = '';
@@ -85,6 +77,155 @@ describe('Integration | Application | Route | sco-organization-learners', functi
       expect(JSON.parse(response.payload).errors[0].detail).to.equal(
         '"data.attributes.birthdate" must be in YYYY-MM-DD format',
       );
+    });
+  });
+
+  describe('POST /api/sco-organization-learners/dependent', function () {
+    let method;
+    let url;
+    let payload;
+    let response;
+
+    context('Error cases', function () {
+      beforeEach(async function () {
+        // given
+        method = 'POST';
+        url = '/api/sco-organization-learners/dependent';
+        payload = {
+          data: {
+            attributes: {
+              'campaign-code': 'RESTRICTD',
+              'first-name': 'Robert',
+              'last-name': 'Smith',
+              birthdate: '2012-12-12',
+              username: 'robert.smith1212',
+              password: 'P@ssw0rd',
+              'with-username': true,
+            },
+          },
+        };
+      });
+
+      it('should return 400 when firstName is empty', async function () {
+        // given
+        payload.data.attributes['first-name'] = '';
+
+        // when
+        response = await httpTestServer.request(method, url, payload);
+
+        // then
+        expect(response.statusCode).to.equal(400);
+      });
+
+      it('should return 400 when lastName is empty', async function () {
+        // given
+        payload.data.attributes['last-name'] = '';
+
+        // when
+        response = await httpTestServer.request(method, url, payload);
+
+        // then
+        expect(response.statusCode).to.equal(400);
+      });
+
+      it('should return 400 when birthDate is not a valid date', async function () {
+        // given
+        payload.data.attributes.birthdate = '2012*-12-12';
+
+        // when
+        response = await httpTestServer.request(method, url, payload);
+
+        // then
+        expect(response.statusCode).to.equal(400);
+      });
+
+      it('should return 400 when campaignCode is empty', async function () {
+        // given
+        payload.data.attributes['campaign-code'] = '';
+
+        // when
+        response = await httpTestServer.request(method, url, payload);
+
+        // then
+        expect(response.statusCode).to.equal(400);
+      });
+
+      it('should return 400 when password is not valid', async function () {
+        // given
+        payload.data.attributes.password = 'not_valid';
+
+        // when
+        response = await httpTestServer.request(method, url, payload);
+
+        // then
+        expect(response.statusCode).to.equal(400);
+      });
+
+      it('should return 400 when withUsername is not a boolean', async function () {
+        // given
+        payload.data.attributes['with-username'] = 'not_a_boolean';
+
+        // when
+        response = await httpTestServer.request(method, url, payload);
+
+        // then
+        expect(response.statusCode).to.equal(400);
+      });
+
+      context('when username is not valid', function () {
+        it('should return 400 when username is an email', async function () {
+          // given
+          payload.data.attributes.username = 'robert.smith1212@example.net';
+
+          // when
+          response = await httpTestServer.request(method, url, payload);
+
+          // then
+          expect(response.statusCode).to.equal(400);
+        });
+
+        it('should return 400 when username has not dot between names', async function () {
+          // given
+          payload.data.attributes.username = 'robertsmith1212';
+
+          // when
+          response = await httpTestServer.request(method, url, payload);
+
+          // then
+          expect(response.statusCode).to.equal(400);
+        });
+
+        it('should return 400 when username does not end with 4 digits', async function () {
+          // given
+          payload.data.attributes.username = 'robert.smith';
+
+          // when
+          response = await httpTestServer.request(method, url, payload);
+
+          // then
+          expect(response.statusCode).to.equal(400);
+        });
+
+        it('should return 400 when username is capitalized', async function () {
+          // given
+          payload.data.attributes.username = 'Robert.Smith1212';
+
+          // when
+          response = await httpTestServer.request(method, url, payload);
+          // then
+          expect(response.statusCode).to.equal(400);
+        });
+
+        it('should return 400 when username is a phone number', async function () {
+          // given
+          payload.data.attributes.username = '0601010101';
+
+          // when
+          response = await httpTestServer.request(method, url, payload);
+          // then
+          expect(response.statusCode).to.equal(400);
+        });
+      });
     });
   });
 });

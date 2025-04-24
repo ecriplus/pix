@@ -14,7 +14,6 @@ describe('Integration | Application | sco-organization-learners | sco-organizati
 
   beforeEach(async function () {
     sandbox = sinon.createSandbox();
-    sandbox.stub(usecases, 'createAndReconcileUserToOrganizationLearner').rejects(new Error('not expected error'));
     sandbox.stub(usecases, 'updateOrganizationLearnerDependentUserPassword').rejects(new Error('not expected error'));
     sandbox.stub(usecases, 'generateUsernameWithTemporaryPassword').rejects(new Error('not expected error'));
     sandbox.stub(securityPreHandlers, 'checkUserBelongsToScoOrganizationAndManagesStudents');
