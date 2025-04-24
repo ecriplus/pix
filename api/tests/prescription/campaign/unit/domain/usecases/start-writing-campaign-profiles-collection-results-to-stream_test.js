@@ -13,7 +13,7 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-profiles-collection
   const userRepository = { getWithMemberships: () => undefined };
   const competenceRepository = { listPixCompetencesOnly: () => undefined };
   const organizationRepository = { get: () => undefined };
-  const campaignParticipationRepository = { findProfilesCollectionResultDataByCampaignId: () => undefined };
+  const campaignParticipationRepository = { findInfoByCampaignId: () => undefined };
   let organizationFeatureApi;
   let writableStream;
   let csvPromise;
@@ -30,8 +30,8 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-profiles-collection
       .rejects('error for competenceRepository.listPixCompetencesOnly');
     sinon.stub(organizationRepository, 'get').rejects('error for organizationRepository.get');
     sinon
-      .stub(campaignParticipationRepository, 'findProfilesCollectionResultDataByCampaignId')
-      .rejects('error for campaignParticipationRepository.findProfilesCollectionResultDataByCampaignId');
+      .stub(campaignParticipationRepository, 'findInfoByCampaignId')
+      .rejects('error for campaignParticipationRepository.findInfoByCampaignId');
     sinon
       .stub(CampaignProfilesCollectionExport.prototype, 'export')
       .rejects('CampaignProfilesCollectionExport.prototype.export');
@@ -82,7 +82,7 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-profiles-collection
     userRepository.getWithMemberships.withArgs(user.id).resolves(user);
     organizationRepository.get.withArgs(organization.id).resolves(organization);
     competenceRepository.listPixCompetencesOnly.withArgs({ locale: 'fr' }).resolves(competences);
-    campaignParticipationRepository.findProfilesCollectionResultDataByCampaignId
+    campaignParticipationRepository.findInfoByCampaignId
       .withArgs(campaign.id)
       .resolves(campaignParticipationResultDatas);
     CampaignProfilesCollectionExport.prototype.export

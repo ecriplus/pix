@@ -6,6 +6,7 @@ import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import { Campaign } from '../../../campaign/domain/models/Campaign.js';
+import { CampaignParticipationInfo } from '../../../campaign/domain/read-models/CampaignParticipationInfo.js';
 import * as campaignRepository from '../../../campaign/infrastructure/repositories/campaign-repository.js';
 import * as knowledgeElementSnapshotRepository from '../../../campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
 import { CampaignParticipationStatuses, CampaignTypes } from '../../../shared/domain/constants.js';
@@ -136,7 +137,7 @@ const remove = async function ({ id, deletedAt, deletedBy }) {
   return await knexConn('campaign-participations').where({ id }).update({ deletedAt, deletedBy });
 };
 
-const findProfilesCollectionResultDataByCampaignId = async function (campaignId) {
+const findInfoByCampaignId = async function (campaignId) {
   const knexConn = DomainTransaction.getConnection();
   const results = await knexConn('campaign-participations')
     .select([
@@ -251,10 +252,9 @@ const isRetrying = async function ({ campaignParticipationId }) {
 };
 
 function _rowToResult(row) {
-  return {
-    id: row.id,
+  return new CampaignParticipationInfo({
+    campaignParticipationId: row.id,
     createdAt: new Date(row.createdAt),
-    isShared: row.status === CampaignParticipationStatuses.SHARED,
     sharedAt: row.sharedAt ? new Date(row.sharedAt) : null,
     participantExternalId: row.participantExternalId,
     userId: row.userId,
@@ -266,7 +266,10 @@ function _rowToResult(row) {
     additionalInfos: row.attributes,
     pixScore: row.pixScore,
     group: row.group,
-  };
+    status: row.status,
+    masteryRate: row.masteryRate,
+    validatedSkillsCount: row.validatedSkillsCount,
+  });
 }
 
 async function getSharedParticipationIds(campaignId) {
@@ -280,8 +283,8 @@ async function getSharedParticipationIds(campaignId) {
 
 export {
   batchUpdate,
+  findInfoByCampaignId,
   findOneByCampaignIdAndUserId,
-  findProfilesCollectionResultDataByCampaignId,
   get,
   getAllCampaignParticipationsInCampaignForASameLearner,
   getByCampaignIds,

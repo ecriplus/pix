@@ -20,7 +20,7 @@ const buildCampaign = function ({
   archivedBy = null,
   deletedAt = null,
   deletedBy = null,
-  type = 'ASSESSMENT',
+  type = CampaignTypes.ASSESSMENT,
   createdAt = new Date('2020-01-01'),
   organizationId,
   creatorId,

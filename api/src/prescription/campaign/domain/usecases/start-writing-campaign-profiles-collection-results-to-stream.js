@@ -36,7 +36,7 @@ const startWritingCampaignProfilesCollectionResultsToStream = async function ({
   const [allPixCompetences, organization, campaignParticipationResultDatas] = await Promise.all([
     competenceRepository.listPixCompetencesOnly({ locale: i18n.getLocale() }),
     organizationRepository.get(campaign.organizationId),
-    campaignParticipationRepository.findProfilesCollectionResultDataByCampaignId(campaign.id),
+    campaignParticipationRepository.findInfoByCampaignId(campaign.id),
   ]);
 
   const campaignProfilesCollectionExport = new CampaignProfilesCollectionExport({

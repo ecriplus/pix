@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import * as knowledgeElementSnapshotAPI from '../../../../../../src/prescription/campaign/application/api/knowledge-element-snapshots-api.js';
+import { CampaignParticipationInfo } from '../../../../../../src/prescription/campaign/domain/read-models/CampaignParticipationInfo.js';
 import { CampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipation.js';
 import { AvailableCampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/read-models/AvailableCampaignParticipation.js';
 import * as campaignParticipationRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
@@ -799,7 +800,7 @@ describe('Integration | Repository | Campaign Participation', function () {
         createdAt: new Date('2024-05-01'),
         isImproved: false,
       });
-      // add a particpation from another user
+      // add a participation from another user
       databaseBuilder.factory.buildCampaignParticipation({ campaignId });
 
       await databaseBuilder.commit();
@@ -840,7 +841,7 @@ describe('Integration | Repository | Campaign Participation', function () {
     });
   });
 
-  describe('#findProfilesCollectionResultDataByCampaignId', function () {
+  describe('#findInfoByCampaignId', function () {
     let campaign1;
     let campaign2;
     let campaignParticipation1;
@@ -858,12 +859,17 @@ describe('Integration | Repository | Campaign Participation', function () {
         division: '6emeD',
         group: null,
         attributes: { hobby: 'Genky' },
+        studentNumber: '1002',
       };
       campaignParticipation1 = databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
         organizationLearner1,
         {
           campaignId: campaign1.id,
           createdAt: new Date('2017-03-15T14:59:35Z'),
+          sharedAt: new Date('2017-03-16T14:59:35Z'),
+          validatedSkillsCount: 10,
+          pixScore: 10,
+          masteryRate: null,
         },
       );
       databaseBuilder.factory.buildCampaignParticipation({
@@ -877,14 +883,13 @@ describe('Integration | Repository | Campaign Participation', function () {
       const campaignId = campaign1.id;
 
       // when
-      const participationResultDatas =
-        await campaignParticipationRepository.findProfilesCollectionResultDataByCampaignId(campaignId);
+      const participationResultDatas = await campaignParticipationRepository.findInfoByCampaignId(campaignId);
 
       // then
       expect(participationResultDatas).lengthOf(1);
-      expect(participationResultDatas[0]).to.deep.include({
-        id: campaignParticipation1.id,
-        isShared: true,
+      expect(participationResultDatas[0]).to.be.instanceOf(CampaignParticipationInfo);
+      expect(participationResultDatas[0]).to.deep.equal({
+        isCompleted: false,
         sharedAt: campaignParticipation1.sharedAt,
         participantExternalId: campaignParticipation1.participantExternalId,
         userId: campaignParticipation1.userId,
@@ -892,6 +897,14 @@ describe('Integration | Repository | Campaign Participation', function () {
         participantLastName: organizationLearner1.lastName,
         division: organizationLearner1.division,
         additionalInfos: organizationLearner1.attributes,
+        status: campaignParticipation1.status,
+        pixScore: campaignParticipation1.pixScore,
+        validatedSkillsCount: campaignParticipation1.validatedSkillsCount,
+        createdAt: campaignParticipation1.createdAt,
+        studentNumber: organizationLearner1.studentNumber,
+        campaignParticipationId: campaignParticipation1.id,
+        masteryRate: campaignParticipation1.masteryRate,
+        group: organizationLearner1.group,
       });
     });
 
@@ -909,8 +922,7 @@ describe('Integration | Repository | Campaign Participation', function () {
       await databaseBuilder.commit();
 
       // when
-      const participationResultDatas =
-        await campaignParticipationRepository.findProfilesCollectionResultDataByCampaignId(campaignId);
+      const participationResultDatas = await campaignParticipationRepository.findInfoByCampaignId(campaignId);
 
       // then
       const attributes = participationResultDatas.map((participationResultData) =>
@@ -932,8 +944,7 @@ describe('Integration | Repository | Campaign Participation', function () {
       const campaignId = campaign1.id;
 
       // when
-      const participationResultDatas =
-        await campaignParticipationRepository.findProfilesCollectionResultDataByCampaignId(campaignId);
+      const participationResultDatas = await campaignParticipationRepository.findInfoByCampaignId(campaignId);
 
       // then
       const attributes = participationResultDatas.map((participationResultData) =>
@@ -979,8 +990,7 @@ describe('Integration | Repository | Campaign Participation', function () {
       });
 
       it('should return the division of the school registration linked to the campaign', async function () {
-        const campaignParticipationInfos =
-          await campaignParticipationRepository.findProfilesCollectionResultDataByCampaignId(campaign.id);
+        const campaignParticipationInfos = await campaignParticipationRepository.findInfoByCampaignId(campaign.id);
 
         expect(campaignParticipationInfos).to.have.lengthOf(1);
         expect(campaignParticipationInfos[0].division).to.equal('3eme');
@@ -1008,8 +1018,7 @@ describe('Integration | Repository | Campaign Participation', function () {
         await databaseBuilder.commit();
 
         // when
-        const participationResultDatas =
-          await campaignParticipationRepository.findProfilesCollectionResultDataByCampaignId(campaignId);
+        const participationResultDatas = await campaignParticipationRepository.findInfoByCampaignId(campaignId);
 
         // then
         expect(participationResultDatas).to.lengthOf(2);
@@ -1031,8 +1040,7 @@ describe('Integration | Repository | Campaign Participation', function () {
         await databaseBuilder.commit();
 
         // when
-        const participationResultDatas =
-          await campaignParticipationRepository.findProfilesCollectionResultDataByCampaignId(campaign.id);
+        const participationResultDatas = await campaignParticipationRepository.findInfoByCampaignId(campaign.id);
 
         // then
         expect(participationResultDatas[0].sharedAt).to.equal(null);

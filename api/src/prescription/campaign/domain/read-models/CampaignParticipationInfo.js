@@ -4,6 +4,7 @@ const Joi = BaseJoi.extend(JoiDate);
 import _ from 'lodash';
 
 import { validateEntity } from '../../../../shared/domain/validators/entity-validator.js';
+import { CampaignParticipationStatuses } from '../../../shared/domain/constants.js';
 
 const validationSchema = Joi.object({
   participantFirstName: Joi.string().required().allow(''),
@@ -20,6 +21,10 @@ const validationSchema = Joi.object({
   group: Joi.string().allow(null).optional(),
   masteryRate: Joi.number().required().allow(null),
   validatedSkillsCount: Joi.number().required().allow(null),
+  status: Joi.string()
+    .valid(...Object.values(CampaignParticipationStatuses))
+    .required(),
+  pixScore: Joi.number().default(null).allow(null),
 });
 
 class CampaignParticipationInfo {
@@ -38,6 +43,8 @@ class CampaignParticipationInfo {
     group,
     masteryRate,
     validatedSkillsCount,
+    status,
+    pixScore,
   } = {}) {
     this.participantFirstName = participantFirstName;
     this.participantLastName = participantLastName;
@@ -53,7 +60,13 @@ class CampaignParticipationInfo {
     this.group = group;
     this.masteryRate = !_.isNil(masteryRate) ? Number(masteryRate) : null;
     this.validatedSkillsCount = !_.isNil(validatedSkillsCount) ? Number(validatedSkillsCount) : null;
+    this.status = status;
+    this.pixScore = pixScore;
     validateEntity(validationSchema, this);
+  }
+
+  get id() {
+    return this.campaignParticipationId;
   }
 
   get isShared() {

@@ -1,4 +1,5 @@
 import { CampaignParticipationInfo } from '../../../../../../src/prescription/campaign/domain/read-models/CampaignParticipationInfo.js';
+import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { ObjectValidationError } from '../../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../../test-helper.js';
 
@@ -19,6 +20,8 @@ describe('Unit | Domain | Read-models | CampaignParticipationInfo', function () 
         sharedAt: new Date('2019-05-01'),
         masteryPercentage: 1,
         additionalInfos: null,
+        status: CampaignParticipationStatuses.SHARED,
+        pixScore: 120,
       };
     });
 
@@ -211,6 +214,7 @@ describe('Unit | Domain | Read-models | CampaignParticipationInfo', function () 
         isCompleted: true,
         createdAt: new Date('2019-04-01'),
         masteryPercentage: 1,
+        status: CampaignParticipationStatuses.SHARED,
       };
     });
 

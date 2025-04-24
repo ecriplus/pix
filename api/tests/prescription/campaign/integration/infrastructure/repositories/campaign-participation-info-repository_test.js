@@ -29,6 +29,7 @@ describe('Integration | Repository | Campaign Participation Info', function () {
           {
             campaignId: campaign1.id,
             userId,
+            pixScore: 42,
           },
           false,
         );
@@ -42,7 +43,7 @@ describe('Integration | Repository | Campaign Participation Info', function () {
 
         const campaign2 = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.ASSESSMENT });
 
-        const campaignParticipation2 = databaseBuilder.factory.buildCampaignParticipation(
+        const campaignParticipation2 = databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
           {
             firstName: 'First',
             lastName: 'Last',
@@ -51,6 +52,7 @@ describe('Integration | Repository | Campaign Participation Info', function () {
           {
             campaignId: campaign2.id,
             userId,
+            pixScore: 120,
           },
         );
 
@@ -78,6 +80,7 @@ describe('Integration | Repository | Campaign Participation Info', function () {
             campaignParticipationId: campaignParticipation1.id,
             isCompleted: false,
             masteryRate: null,
+            pixScore: 42,
             participantFirstName: 'First',
             participantLastName: 'Last',
             additionalInfos: { hobby: 'Wan' },
@@ -85,6 +88,7 @@ describe('Integration | Repository | Campaign Participation Info', function () {
             division: null,
             group: null,
             validatedSkillsCount: null,
+            status: campaignParticipation1.status,
           },
         ]);
         expect(campaignParticipationInfos[0].isShared).to.be.true;
@@ -167,6 +171,7 @@ describe('Integration | Repository | Campaign Participation Info', function () {
           campaignParticipationId: campaignParticipation2.id,
           isCompleted: true,
           masteryRate: null,
+          pixScore: null,
           additionalInfos: null,
           participantFirstName: 'Tyler',
           participantLastName: 'Durden',
@@ -174,6 +179,7 @@ describe('Integration | Repository | Campaign Participation Info', function () {
           division: null,
           group: null,
           validatedSkillsCount: null,
+          status: campaignParticipation2.status,
         });
         expect(campaignParticipationInfos[0].isShared).to.be.false;
 
@@ -185,6 +191,7 @@ describe('Integration | Repository | Campaign Participation Info', function () {
           campaignParticipationId: campaignParticipation1.id,
           isCompleted: false,
           masteryRate: null,
+          pixScore: null,
           additionalInfos: null,
           participantFirstName: 'The',
           participantLastName: 'Narrator',
@@ -192,6 +199,7 @@ describe('Integration | Repository | Campaign Participation Info', function () {
           division: null,
           group: null,
           validatedSkillsCount: null,
+          status: campaignParticipation1.status,
         });
         expect(campaignParticipationInfos[1].isShared).to.be.true;
       });
@@ -246,12 +254,14 @@ describe('Integration | Repository | Campaign Participation Info', function () {
             isCompleted: true,
             additionalInfos: null,
             masteryRate: null,
+            pixScore: null,
             participantFirstName: 'The',
             participantLastName: 'Narrator',
             studentNumber: null,
             division: null,
             group: null,
             validatedSkillsCount: null,
+            status: campaignParticipation.status,
           },
         ]);
       });
@@ -323,12 +333,14 @@ describe('Integration | Repository | Campaign Participation Info', function () {
             isCompleted: false,
             additionalInfos: null,
             masteryRate: null,
+            pixScore: null,
             participantFirstName: 'The',
             participantLastName: 'Narrator',
             studentNumber: null,
             division: null,
             group: null,
             validatedSkillsCount: null,
+            status: secondCampaignParticipation.status,
           },
           {
             sharedAt: firstCampaignParticipation.sharedAt,
@@ -339,12 +351,14 @@ describe('Integration | Repository | Campaign Participation Info', function () {
             isCompleted: true,
             additionalInfos: null,
             masteryRate: null,
+            pixScore: null,
             participantFirstName: 'The',
             participantLastName: 'Narrator',
             studentNumber: null,
             division: null,
             group: null,
             validatedSkillsCount: null,
+            status: firstCampaignParticipation.status,
           },
         ]);
       });
