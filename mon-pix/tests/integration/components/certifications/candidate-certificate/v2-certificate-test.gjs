@@ -5,7 +5,7 @@ import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | Certifications | Shareable certificate | v2-certificate', function (hooks) {
+module('Integration | Component | Certifications | Candidate certificate | v2-certificate', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   test('it displays certificate information', async function (assert) {
@@ -31,10 +31,10 @@ module('Integration | Component | Certifications | Shareable certificate | v2-ce
 
     // when
     const screen = await render(hbs`
-      <Certifications::ShareableCertificate::v2Certificate @model={{this.certification}} />`);
+      <Certifications::CandidateCertificate::v2Certificate @model={{this.certification}} />`);
 
     // then
-    assert.dom(screen.getByRole('link', { name: t('pages.shared-certification.back-link') })).exists();
+    assert.dom(screen.getByRole('link', { name: t('pages.certificate.back-link') })).exists();
     assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.title') })).exists();
   });
 
@@ -63,7 +63,7 @@ module('Integration | Component | Certifications | Shareable certificate | v2-ce
 
         // when
         const screen = await render(hbs`
-      <Certifications::ShareableCertificate::v2Certificate @model={{this.certification}} />`);
+      <Certifications::CandidateCertificate::v2Certificate @model={{this.certification}} />`);
 
         // then
         assert.dom(screen.getByRole('heading', { level: 2, name: t('pages.certificate.jury-title') })).exists();
@@ -95,7 +95,7 @@ module('Integration | Component | Certifications | Shareable certificate | v2-ce
 
         // when
         const screen = await render(hbs`
-      <Certifications::ShareableCertificate::v2Certificate @model={{this.certification}} />`);
+      <Certifications::CandidateCertificate::v2Certificate @model={{this.certification}} />`);
 
         // then
         assert
@@ -128,7 +128,7 @@ module('Integration | Component | Certifications | Shareable certificate | v2-ce
 
         // when
         const screen = await render(hbs`
-      <Certifications::ShareableCertificate::v2Certificate @model={{this.certification}} />`);
+      <Certifications::CandidateCertificate::v2Certificate @model={{this.certification}} />`);
 
         // then
         assert

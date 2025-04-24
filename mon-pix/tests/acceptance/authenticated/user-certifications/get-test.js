@@ -1,0 +1,184 @@
+import { visit } from '@1024pix/ember-testing-library';
+import { click, currentURL } from '@ember/test-helpers';
+import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
+import { setupApplicationTest } from 'ember-qunit';
+import { module, test } from 'qunit';
+
+import { authenticate } from '../../../helpers/authentication';
+import { getTableData } from '../../../helpers/get-table-data';
+
+module('Acceptance | Authenticated | User certifications | get', function (hooks) {
+  setupApplicationTest(hooks);
+  setupMirage(hooks);
+  let user;
+
+  hooks.beforeEach(function () {
+    user = server.create('user', 'withSomeCertificates');
+  });
+
+  module('when user is not connected', function () {
+    test('should the candidate certificate page not be accessible', async function (assert) {
+      // when
+      await visit('/mes-certifications/1');
+
+      // then
+      assert.strictEqual(currentURL(), '/connexion');
+    });
+  });
+
+  module('when user is connected', function (hooks) {
+    hooks.beforeEach(async function () {
+      await authenticate(user);
+    });
+
+    module('when isV3CertificationPageEnabled feature toggle is disabled', function () {
+      module('when algorithm version is v3', function () {
+        test('displays old candidate certificate page', async function (assert) {
+          // given
+          const certificate = server.create('certification', {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            birthdate: '2000-01-01',
+            certificationCenter: 'Université de Pix',
+            certifiedBadgeImages: [],
+            date: new Date('2018-07-20T14:33:56Z'),
+            status: 'validated',
+            pixScore: 777,
+            isPublished: true,
+            algorithmEngineVersion: 3,
+            resultCompetenceTree: _getResultCompetenceTree({ server }),
+          });
+          server.create('feature-toggle', { id: '0', isV3CertificationPageEnabled: false });
+
+          // when
+          const screen = await visit(`/mes-certifications/${certificate.id}`);
+
+          // then
+          assert.dom(screen.getByRole('link', { name: t('pages.certificate.back-link') })).exists();
+          assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.title') })).exists();
+          const table = screen.getByRole('table');
+          const tableData = await getTableData(table);
+          assert.deepEqual(tableData, [
+            {
+              'MON SUPER DOMAINE': 'Ma superbe compétence',
+              NIVEAU: '6',
+            },
+          ]);
+        });
+      });
+    });
+
+    module('when isV3CertificationPageEnabled feature toggle is enabled', function () {
+      module('when algorithm version is v3', function () {
+        test('displays v3 candidate certificate page', async function (assert) {
+          // given
+          const certificate = _getV3Certificate({ user, server });
+          server.create('feature-toggle', { id: '0', isV3CertificationPageEnabled: true });
+
+          // when
+          const screen = await visit(`/mes-certifications/${certificate.id}`);
+
+          // then
+          assert.dom(screen.getByRole('heading', { name: t('pages.certificate.title') })).exists();
+          const globalLevelLabels = screen.getAllByText('Expert 1');
+          assert.strictEqual(globalLevelLabels.length, 2);
+        });
+
+        module('when user clicks on the breadcrumb', function () {
+          test('should returns to certificates list page', async function (assert) {
+            // given
+            const certificate = _getV3Certificate({ user, server });
+            server.create('feature-toggle', { id: '0', isV3CertificationPageEnabled: true });
+            const screen = await visit(`/mes-certifications/${certificate.id}`);
+
+            // when
+            await click(screen.getByRole('link', { name: t('pages.certifications-list.title') }));
+
+            // then
+            assert.strictEqual(currentURL(), '/mes-certifications');
+          });
+        });
+      });
+
+      module('when algorithm version is v2', function () {
+        test('displays v2 candidate certificate page', async function (assert) {
+          // given
+          const certificate = _getV2Certificate({ user, server });
+          server.create('feature-toggle', { id: '0', isV3CertificationPageEnabled: true });
+
+          // when
+          const screen = await visit(`/mes-certifications/${certificate.id}`);
+
+          // then
+          assert.dom(screen.getByRole('link', { name: t('pages.certificate.back-link') })).exists();
+          assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.title') })).exists();
+          assert.dom(screen.getByRole('heading', { level: 2, name: t('pages.certificate.jury-title') })).exists();
+          const table = screen.getByRole('table');
+          const tableData = await getTableData(table);
+          assert.deepEqual(tableData, [
+            {
+              'MON SUPER DOMAINE': 'Ma superbe compétence',
+              NIVEAU: '6',
+            },
+          ]);
+        });
+      });
+    });
+  });
+});
+
+function _getV2Certificate({ user, server }) {
+  return server.create('certification', {
+    firstName: user.firstName,
+    lastName: user.lastName,
+    birthdate: '2000-01-01',
+    certificationCenter: 'Université de Pix',
+    commentForCandidate: 'Ceci est un commentaire jury à destination du candidat.',
+    certifiedBadgeImages: [],
+    date: new Date('2018-07-20T14:33:56Z'),
+    status: 'validated',
+    pixScore: 777,
+    isPublished: true,
+    algorithmEngineVersion: 2,
+    user,
+    resultCompetenceTree: _getResultCompetenceTree({ server }),
+  });
+}
+
+function _getV3Certificate({ user, server }) {
+  return server.create('certification', {
+    firstName: user.firstName,
+    lastName: user.lastName,
+    birthdate: '2000-01-01',
+    certificationCenter: 'Université de Pix',
+    certificationDate: new Date('2018-07-20T14:33:56Z'),
+    status: 'validated',
+    algorithmEngineVersion: 3,
+    pixScore: 777,
+    isPublished: true,
+    globalLevelLabel: 'Expert 1',
+    globalDescriptionLabel: 'Vous êtes capable de tout.',
+    globalSummaryLabel: 'Expert de tous les domaines, Pix vous dit bravo !',
+    level: '7',
+    resultCompetenceTree: _getResultCompetenceTree({ server }),
+  });
+}
+
+function _getResultCompetenceTree({ server }) {
+  const area = server.create('area', 'withCompetences');
+  const competence = server.schema.competences.findBy({ areaId: area.id });
+  const resultCompetenceTree = server.create('resultCompetenceTree', {
+    areas: [area],
+  });
+  const resultCompetence = server.create('result-competence', {
+    id: competence.id,
+    index: 1.1,
+    level: 6,
+    name: competence.name,
+    score: 70,
+  });
+  area.update({ resultCompetences: [resultCompetence] });
+
+  return resultCompetenceTree;
+}
