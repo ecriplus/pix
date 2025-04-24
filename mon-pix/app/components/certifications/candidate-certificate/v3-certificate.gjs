@@ -34,7 +34,20 @@ export default class v3Certificate extends Component {
 
     <section class="v3-candidate-certificate">
       <div class="v3-candidate-certificate__information">
-        <CandidateInformation @certificate={{@certificate}} />
+        <CandidateInformation @certificate={{@certificate}}>
+          {{#if @certificate.globalLevelLabel}}
+            <h2 class="v3-candidate-certificate-information__congratulations">
+              {{t "pages.certificate.congratulations"}}
+            </h2>
+            <p class="v3-candidate-certificate-information__global-level-information">
+              {{t "pages.certificate.global.explanation.default" globalLevelLabel=@certificate.globalLevelLabel}}
+            </p>
+          {{else}}
+            <h2 class="v3-candidate-certificate-information__global-level-information">
+              {{t "pages.certificate.global.explanation.pre-beginner-level"}}
+            </h2>
+          {{/if}}
+        </CandidateInformation>
 
         <DownloadPdf @certificate={{@certificate}} />
       </div>

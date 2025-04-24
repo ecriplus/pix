@@ -33,6 +33,11 @@ module('Integration | Component | Certifications | Candidate certificate | v3-ce
       assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.title') })).exists();
       assert
         .dom(
+          screen.getByRole('heading', { level: 2, name: t('pages.certificate.global.explanation.pre-beginner-level') }),
+        )
+        .exists();
+      assert
+        .dom(
           within(screen.getByRole('navigation')).getByRole('link', {
             name: t('pages.certifications-list.title'),
           }),
@@ -72,6 +77,14 @@ module('Integration | Component | Certifications | Candidate certificate | v3-ce
 
       // then
       assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.title') })).exists();
+      assert.dom(screen.getByRole('heading', { level: 2, name: t('pages.certificate.congratulations') })).exists();
+      assert
+        .dom(
+          screen.getByText(
+            t('pages.certificate.global.explanation.default', { globalLevelLabel: certification.globalLevelLabel }),
+          ),
+        )
+        .exists();
       assert
         .dom(
           within(screen.getByRole('navigation')).getByRole('link', {

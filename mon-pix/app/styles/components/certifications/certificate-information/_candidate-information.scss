@@ -28,6 +28,9 @@
   }
 
   &__list {
+    display:flex;
+    flex-direction: column;
+
     li {
       &:not(:last-child) {
         margin-bottom: var(--pix-spacing-1x);

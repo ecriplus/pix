@@ -17,8 +17,9 @@ import { t } from 'ember-intl';
         <PixTag data-testid="global-level-label-tag">{{@certificate.globalLevelLabel}}</PixTag>
       {{/if}}
     </div>
-    <div>
-      <ul class="candidate-information__list">
+    <div class="candidate-information__list">
+      {{yield}}
+      <ul>
         <li class="candidate-information-list--bold candidate-information-list__firstName">
           {{t "pages.certificate.candidate"}}
           {{@certificate.firstName}}

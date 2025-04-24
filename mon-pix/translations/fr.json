@@ -637,6 +637,7 @@
         "alternative": "Certification complémentaire",
         "title": "Autre certification obtenue"
       },
+      "congratulations": "Félicitations !",
       "delivered-at": "Date de délivrance :",
       "details": {
         "competences": {
@@ -646,6 +647,10 @@
       },
       "exam-date": "Date de passage :",
       "global": {
+        "explanation": {
+          "default": "Vous avez atteint le niveau {globalLevelLabel} de la Certification Pix !",
+          "pre-beginner-level": "Vous avez terminé votre test de Certification Pix, mais vos résultats ne permettent pas l’obtention du premier niveau."
+        },
         "labels": {
           "advanced": "Avancé",
           "beginner": "Novice",
