@@ -15,34 +15,22 @@
       "Repérer une fausse information sur internet"
     ]
   },
-  "transitionTexts": [
-    {
-      "content": "<p>Vous avez déjà sûrement croisé sur internet des informations douteuses. Vous avez peut-être même partagé de fausses informations (<i>fake news</i> en anglais) sans le savoir !<br>Pour démêler le vrai du faux, il existe heureusement certaines méthodes.<span aria-hidden=\"true\">🔍</span></p>",
-      "grainId": "f242e81e-b182-44a1-a668-557f26b5ff8b"
-    },
-    {
-      "content": "<p>Vous l'avez remarqué, en lisant seulement le titre d’un article, c’est très difficile de savoir si une information est vraie ou fausse.&nbsp;<span aria-hidden=\"true\">🤔</span></p><p>Et parfois, ce ne sont même pas des informations ! On vous explique tout dans la vidéo suivante.<span aria-hidden=\"true\">&nbsp;📺</span></p>",
-      "grainId": "eb83569f-2e37-49ed-aa6f-31c420b673b9"
-    },
-    {
-      "content": "<p>C'est une information et pas une anecdote, d'accord. Mais est-ce que cette information est vraie ? Pour le savoir, il faut mener l'enquête.<span aria-hidden=\"true\">🕵🏽</span></p><p>Voyons ensemble la méthode « Qui ? Quand ? D'où ? ». Trois questions à se poser pour vérifier une information.<span aria-hidden=\"true\">👇</span></p>",
-      "grainId": "ed22ab38-ec6d-47df-88ea-4894f1cd6c8a"
-    },
-    {
-      "content": "<p>Vérifiez que vous avez retenu l'essentiel en répondant à cette question. <span aria-hidden=\"true\">🎯</span></p>",
-      "grainId": "46309f55-22e6-4b0f-bfc4-2bad94f9cbd7"
-    },
-
-    {
-      "content": "<p>Même si on a vérifié le « Qui ? Quand ? D'où ? », il faut rester vigilant.<br>D'autres indices peuvent aider à détecter de fausses informations.&nbsp;👣 <br>Plus il y en a, plus l’information a des chances d’être fausse.</p>",
-      "grainId": "428ea826-6e21-4c56-a5a2-f97373f1e833"
-    },
-    {
-      "content": "<p>Pour finir, maintenant que vous en savez plus, vous allez pouvoir aider Stéphane.&nbsp;<span aria-hidden=\"true\">🕵️</span><span aria-hidden=\"true\">🕵🏿‍♀️</span></p>",
-      "grainId": "9f56f75e-3e2d-4a6e-8623-9b74747b236d"
-    }
-  ],
   "grains": [
+    {
+      "id": "97461a99-625d-47d4-bfc2-15a637e6e96d",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "54a9f6a2-c82b-4875-867c-0506efdb8087",
+            "type": "text",
+            "content": "<p>Vous avez déjà sûrement croisé sur internet des informations douteuses. Vous avez peut-être même partagé de fausses informations (<i>fake news</i> en anglais) sans le savoir !<br>Pour démêler le vrai du faux, il existe heureusement certaines méthodes. 🔍</p>"
+          }
+        }
+      ]
+    },
     {
       "id": "f242e81e-b182-44a1-a668-557f26b5ff8b",
       "type": "discovery",
@@ -166,6 +154,21 @@
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "035a96bd-855b-4093-9646-5a60362f5821",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "5c66e52b-2a1a-49c5-8797-7287a7131c1c",
+            "type": "text",
+            "content": "<p>Vous l'avez remarqué, en lisant seulement le titre d’un article, c’est très difficile de savoir si une information est vraie ou fausse.&nbsp;🤔</p><p>Et parfois, ce ne sont même pas des informations ! On vous explique tout dans la vidéo suivante.&nbsp;📺</p>"
+          }
         }
       ]
     },
@@ -394,6 +397,21 @@
       ]
     },
     {
+      "id": "288f6d86-88b1-4aad-b93c-b49e5223985d",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "d182b0c7-05bd-4ab7-beef-ea8e4d076508",
+            "type": "text",
+            "content": "<p>C'est une information et pas une anecdote, d'accord. Mais est-ce que cette information est vraie ? Pour le savoir, il faut mener l'enquête.&nbsp;🕵🏽</p><p>Voyons ensemble la méthode « Qui ? Quand ? D'où ? ». Trois questions à se poser pour vérifier une information.&nbsp;👇</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "ed22ab38-ec6d-47df-88ea-4894f1cd6c8a",
       "type": "lesson",
       "title": "Méthode pour vérifier une information (leçon)",
@@ -438,6 +456,21 @@
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "7cab267a-c008-438c-9cea-c2e9086bb7bd",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "53b5a035-84d9-458f-99e3-045b39c19285",
+            "type": "text",
+            "content": "<p>Vérifiez que vous avez retenu l'essentiel en répondant à cette question.&nbsp;🎯</p>"
+          }
         }
       ]
     },
@@ -645,6 +678,21 @@
       ]
     },
     {
+      "id": "ba6b96c4-4625-4f0c-bc2c-9f98187c2a1f",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "35a1b762-524c-488f-a997-c1e8f5129735",
+            "type": "text",
+            "content": "<p>Même si on a vérifié le « Qui ? Quand ? D'où ? », il faut rester vigilant.<br>D'autres indices peuvent aider à détecter de fausses informations.&nbsp;👣 <br>Plus il y en a, plus l’information a des chances d’être fausse.</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "428ea826-6e21-4c56-a5a2-f97373f1e833",
       "type": "lesson",
       "title": "Les indices d’une information douteuse",
@@ -665,6 +713,21 @@
             "url": "https://i.imgur.com/9j2xh4U.png",
             "alt": "Publication de Alain Bacri (@AlainBacri) sur X (Twitter) détaillée dans l'alternative textuelle",
             "alternativeText": "Publication de Alain Bacri (@AlainBacri) sur X (Twitter) à 9h22 le 6 août 2022&nbsp;: &laquo;&nbsp;Arrêtez TOUS le DOLIPRANE&#8239;!!! (2 émojis tête de mort) Le paracétamol TUE les gens&#8239;!!!! mais personne en parle ! (2 emojis tête de mort) Il y a plusieurs PREUVES SCIENTIFIQUE qui le PROUVE, comme cet étude américaine&nbsp;: <a href=\"https://pubmed.ncbi.nlm.nih.gov/37436926/\" target=\"_blank\">https://pubmed.ncbi.nlm.nih.gov/37436926/</a> PARTAGER à un MAXIMUM de personnes. Il faut que ça se sache&#8239;!!!&nbsp;&raquo;<br>40,3 K Republications, 11,3 K Citations, 196,9 K Likes.<ul><li>Indice 1&nbsp;: <strong>Les majuscules et les émojis angoissants</strong> sont utilisés pour interpeller, créer un ton alarmiste et un sentiment d'urgence.</li><li>Indice 2&nbsp;:<strong>Les fautes d'orthographe</strong> à plusieurs endroits indiquent que le contenu a été rédigé sans attention particulière.</li><li>Indice 3&nbsp;:<strong>En demandant de partager l'information,</strong> l'auteur veut être lu à tout prix. Il cherche à rendre son contenu viral et à \"faire le buzz\".</li></ul>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "3cb4db76-fee3-4a19-8e7e-6f36f4003c27",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "ef746355-40c2-485a-a560-35dc0cc8fd37",
+            "type": "text",
+            "content": "<p>Pour finir, maintenant que vous en savez plus, vous allez pouvoir aider Stéphane.&nbsp;🕵🏿‍♀️</p>"
           }
         }
       ]
