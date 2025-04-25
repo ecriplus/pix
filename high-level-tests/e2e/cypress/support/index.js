@@ -16,6 +16,7 @@
 // Import commands.js using ES2015 syntax:
 import './commands';
 import 'cypress-axe';
+import { disableAnimation } from "./disable-animation";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
@@ -25,6 +26,13 @@ beforeEach(() => {
 
   cy.window().then((win) => {
     win.sessionStorage.clear();
+  });
+
+  // disable CSS animations due to possible flakiness with tests
+  // see https://gist.github.com/cvan/576eb41ab5d382660c14e3831c33c6ea
+  // for source code inspiration
+  cy.on('window:before:load', (cyWindow) => {
+    disableAnimation(cyWindow);
   });
 
   cy.on('uncaught:exception', (err) => {
