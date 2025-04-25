@@ -1,0 +1,64 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
+import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
+import { action } from '@ember/object';
+import { service } from '@ember/service';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { t } from 'ember-intl';
+
+import CopyPasteButton from '../../copy-paste-button';
+
+export default class DownloadPdf extends Component {
+  @service intl;
+  @service session;
+  @service fileSaver;
+  @service currentDomain;
+
+  @tracked errorMessage = null;
+
+  @action
+  async downloadAttestation() {
+    this.errorMessage = null;
+    const certificationId = this.args.certificate.id;
+    const lang = this.intl.primaryLocale;
+
+    const url = `/api/attestation/${certificationId}?isFrenchDomainExtension=${this.currentDomain.isFranceDomain}&lang=${lang}`;
+
+    const token = this.session.data.authenticated.access_token;
+    try {
+      await this.fileSaver.save({ url, token });
+    } catch {
+      this.errorMessage = this.intl.t('common.error');
+    }
+  }
+
+  <template>
+    <section class="download-pdf">
+      <h2 class="download-pdf__title">
+        {{t "pages.certificate.verification-code.share"}}
+      </h2>
+      <PixButton @triggerAction={{this.downloadAttestation}} @iconBefore="download">
+        {{t "pages.certificate.actions.download"}}
+      </PixButton>
+
+      {{#if this.errorMessage}}
+        <PixNotificationAlert @type="error" @withIcon={{true}}>
+          <p>{{this.errorMessage}}</p>
+        </PixNotificationAlert>
+      {{/if}}
+
+      <div class="download-pdf__verification-code">
+        <p>{{t "pages.certificate.verification-code.information"}}</p>
+        <PixBlock class="download-pdf-verification-code">
+          <p>{{@certificate.verificationCode}}</p>
+          <CopyPasteButton
+            @clipBoardtext={{@certificate.verificationCode}}
+            @successMessage={{t "pages.certificate.verification-code.copied"}}
+            @defaultMessage={{t "pages.certificate.verification-code.copy"}}
+          />
+        </PixBlock>
+      </div>
+    </section>
+  </template>
+}

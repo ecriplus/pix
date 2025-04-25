@@ -656,10 +656,11 @@
       "professionalizing-warning": "Het Pix-certificaat wordt door France Compétences erkend als een professionele kwalificatie zodra een minimale score van 120 pix is behaald.",
       "title": "Pix-certificaat",
       "verification-code": {
+        "share": "Share your certificate",
+        "information": "Your unique verification code",
         "alt": "Kopieer",
         "copied": "Code gekopieerd!",
         "copy": "Kopieer de code",
-        "info": "(?)",
         "title": "Verificatie code",
         "tooltip": "Geef deze code om een derde partij de echtheid van je certificaat te laten controleren"
       },

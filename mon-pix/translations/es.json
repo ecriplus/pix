@@ -656,10 +656,11 @@
       "professionalizing-warning": "El certificado Pix está reconocido como cualificación profesional por France Compétences una vez alcanzada una puntuación mínima de 120 pix.",
       "title": "Certificado Pix",
       "verification-code": {
+        "share": "Share your certificate",
+        "information": "Your unique verification code",
         "alt": "Copiar",
         "copied": "¡Código copiado!",
         "copy": "Copiar el código",
-        "info": "(?)",
         "title": "Código de comprobación",
         "tooltip": "Facilita este código para que un tercero pueda comprobar la autenticidad de tu certificado"
       },

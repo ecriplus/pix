@@ -653,9 +653,9 @@
           "independent": "Independent",
           "level": "Your level"
         },
-        "progress-bar-explanation" : {
-          "default" : "Progress bar indicating the level you have reached ( {level}, i.e. level {globalLevelLabel} ) out of a maximum attainable level of 7 ( Expert 1 level )",
-          "pre-beginner-level" : "Progress bar indicating the maximum level that can be reached in certification (i.e. 7 or Expert 1 level)"
+        "progress-bar-explanation": {
+          "default": "Progress bar indicating the level you have reached ( {level}, i.e. level {globalLevelLabel} ) out of a maximum attainable level of 7 ( Expert 1 level )",
+          "pre-beginner-level": "Progress bar indicating the maximum level that can be reached in certification (i.e. 7 or Expert 1 level)"
         }
       },
       "hexagon-score": {
@@ -671,7 +671,8 @@
         "alt": "Copy",
         "copied": "Copied!",
         "copy": "Copy the code",
-        "info": "(?)",
+        "information": "Your unique verification code",
+        "share": "Share your certificate",
         "title": "Verification code",
         "tooltip": "Communicate this code to allow a third party to verify the authenticity of your certificate"
       }

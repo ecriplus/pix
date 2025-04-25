@@ -653,9 +653,9 @@
           "independent": "Indépendant",
           "level": "Votre niveau"
         },
-        "progress-bar-explanation" : {
-          "default" : "Barre de progression indiquant votre niveau atteint ( {level}, ou niveau {globalLevelLabel} ) sur un niveau maximum atteignable de 7 ( niveau Expert 1 )",
-          "pre-beginner-level" : "Barre de progression indiquant le niveau maximum que l'on peut atteindre en certification (soit, 7 ou niveau Expert 1 )"
+        "progress-bar-explanation": {
+          "default": "Barre de progression indiquant votre niveau atteint ( {level}, ou niveau {globalLevelLabel} ) sur un niveau maximum atteignable de 7 ( niveau Expert 1 )",
+          "pre-beginner-level": "Barre de progression indiquant le niveau maximum que l'on peut atteindre en certification (soit, 7 ou niveau Expert 1 )"
         }
       },
       "hexagon-score": {
@@ -671,7 +671,8 @@
         "alt": "Copier",
         "copied": "Code copié !",
         "copy": "Copier le code",
-        "info": "(?)",
+        "information": "Votre code de vérification unique",
+        "share": "Partager votre certificat",
         "title": "Code de vérification",
         "tooltip": "Communiquez ce code pour permettre à un tiers de vérifier l'authenticité de votre certificat"
       }
