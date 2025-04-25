@@ -1,5 +1,34 @@
 # Pix Changelog
 
+## v5.98.0 (25/04/2025)
+
+
+### :rocket: Amélioration
+- [#12133](https://github.com/1024pix/pix/pull/12133) [FEATURE] Modification Modules 1e marche.
+- [#12095](https://github.com/1024pix/pix/pull/12095) [FEATURE] Ajout animation fondu à l'apparition des grains (PIX-17567).
+- [#12136](https://github.com/1024pix/pix/pull/12136) [FEATURE] Mettre à jour les traductions ES sur page début de parcours (PIX-17610).
+- [#12023](https://github.com/1024pix/pix/pull/12023) [FEATURE] Proposer une api interne pour récupérer les campagnes participations (PIX-17350).
+- [#12129](https://github.com/1024pix/pix/pull/12129) [FEATURE] Correction de 2 feedback grains vrai-faux.
+- [#12100](https://github.com/1024pix/pix/pull/12100) [FEATURE] Retirer la colonne userId de stage-acquisitions (Pix-17332).
+- [#12121](https://github.com/1024pix/pix/pull/12121) [FEATURE] Créer la nouvelle page du certificat coté candidat sur Pix App (PIX-17595).
+- [#12091](https://github.com/1024pix/pix/pull/12091) [FEATURE] Cacher le grain transition de la navbar (PIX-17473).
+
+### :building_construction: Tech
+- [#12113](https://github.com/1024pix/pix/pull/12113) [TECH] :truck: Déplace le cas d'utilisation `findTargetProfileSummariesForTraining` vers `src/devcomp/`.
+- [#12112](https://github.com/1024pix/pix/pull/12112) [TECH] migrer les tests e2e d'orga vers Playwright (PIX-17586).
+- [#12107](https://github.com/1024pix/pix/pull/12107) [TECH] :truck: Déplace la route `user trainings` vers le contexte `/src/devcomp`.
+- [#12120](https://github.com/1024pix/pix/pull/12120) [TECH] Correction du script de suppression de réponses superflues (PIX-17257).
+
+### :bug: Correction
+- [#12122](https://github.com/1024pix/pix/pull/12122) [BUGFIX] Utiliser le variant orga sur les PixBlock (PIX-17283).
+
+### :arrow_up: Montée de version
+- [#12141](https://github.com/1024pix/pix/pull/12141) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.2 (e2e-playwright).
+- [#12128](https://github.com/1024pix/pix/pull/12128) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.2 (certif).
+- [#12085](https://github.com/1024pix/pix/pull/12085) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.2 (api).
+- [#12126](https://github.com/1024pix/pix/pull/12126) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.2 (audit-logger).
+- [#12025](https://github.com/1024pix/pix/pull/12025) [BUMP] Update dependency @1024pix/pix-ui to ^55.16.1 (certif).
+
 ## v5.97.0 (24/04/2025)
 
 
