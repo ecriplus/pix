@@ -15,53 +15,22 @@
     ],
     "tabletSupport": "obstructed"
   },
-  "transitionTexts": [
-    {
-      "grainId": "f0db9bcb-a896-4801-827d-d0ceeddde3e5",
-      "content": "<p>Dans ce module vous allez prendre en main une souris pour interagir avec l'ordinateur.</p>"
-    },
-    {
-      "grainId": "115f2b94-ba20-4158-a1b1-efb159d82808",
-      "content": "<p>Dans la vidéo suivante, vous allez voir comment prendre en main une souris d'ordinateur pour ensuite la déplacer.&nbsp;<span aria-hidden=\"true\">📺</span></p>"
-    },
-    {
-      "grainId": "395f9865-bb44-4cd8-a4dd-03ffddf598f7",
-      "content": "<p>À vous de jouer. Vous allez vous entraîner à déplacer votre souris.</p>"
-    },
-    {
-      "grainId": "8a9618f5-c8d8-447e-83ae-cf66914c0aa0",
-      "content": "<p>Dans la vidéo suivante, vous allez voir comment déplacer la souris sur votre écran.&nbsp;<span aria-hidden=\"true\">📺</span></p>"
-    },
-    {
-      "grainId": "713aeb31-6bbd-4e0c-930a-ad24164f5b9c",
-      "content": "<p>Vous allez maintenant passer à la pratique.</p>"
-    },
-    {
-      "grainId": "194be335-f3c1-468e-9ad1-0a7287b95f37",
-      "content": "<p>Vous savez déplacer le pointeur de la souris à l'écran. Maintenant, entraînez-vous à être précis dans vos mouvements. <span aria-hidden=\"true\">🎯</span> </p>"
-    },
-    {
-      "grainId": "4a80afba-d2ef-4f58-a328-a0fc9f204aca",
-      "content": "<p>Maintenant que vous savez déplacer votre souris, découvrez les différents boutons de la souris !<span aria-hidden=\"true\">🖱️️</span></p>"
-    },
-    {
-      "grainId": "83f44f19-e8de-4248-bfc7-e38f19190138",
-      "content": "<p>Vous avez découvert le nom des boutons d'une souris.</p><p>Voyons à présent comment cliquer avec votre souris !<br></p>"
-    },
-    {
-      "grainId": "b491a99e-2774-469e-a63e-e2d0fb1120f2",
-      "content": "<p>Vous allez maintenant passer à la pratique. <span aria-hidden=\"true\">👇</span></p>"
-    },
-    {
-      "grainId": "03e0657a-7caf-49eb-8dfb-da0f5e52b7ba",
-      "content": "<p>Il arrive que le pointeur de la souris change de forme. C’est tout à fait normal.&nbsp;</p><p>Découvrez les différentes formes de pointeur.<br><br></p>"
-    },
-    {
-      "grainId": "efba1e45-54ca-4829-b203-1e74b9269045",
-      "content": "<p>Le clic gauche sert à ouvrir des pages internet ou à démarrer des vidéos. Pour chacune de ses actions, le pointeur change de forme.</p><p><span aria-hidden=\"true\">🖱️</span>️ À vous de jouer !</p>"
-    }
-  ],
   "grains": [
+    {
+      "id": "9c323a6c-2ae3-4257-af10-7711cebe6442",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "91ba6701-243c-4f07-bd0d-9019a1c85b4d",
+            "type": "text",
+            "content": "<p>Dans ce module vous allez prendre en main une souris pour interagir avec l'ordinateur.</p>"
+          }
+        }
+      ]
+    },
     {
       "id": "f0db9bcb-a896-4801-827d-d0ceeddde3e5",
       "type": "discovery",
@@ -96,6 +65,21 @@
       ]
     },
     {
+      "id": "2099c733-4be9-4063-8584-e854a6d9ee2f",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "b4727513-47b5-4850-bde5-263795c63f46",
+            "type": "text",
+            "content": "<p>Dans la vidéo suivante, vous allez voir comment prendre en main une souris d'ordinateur pour ensuite la déplacer.&nbsp;📺</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "115f2b94-ba20-4158-a1b1-efb159d82808",
       "type": "lesson",
       "title": "Prise en main de la souris",
@@ -118,6 +102,21 @@
             "poster": "https://i.imgur.com/lA2jUAY.jpeg",
             "subtitles": "",
             "transcription": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "4d381d79-1edf-426c-876a-fcc0fc783fc0",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "927b247f-f86a-458a-908f-62f8c39fb353",
+            "type": "text",
+            "content": "<p>À vous de jouer. Vous allez vous entraîner à déplacer votre souris.</p>"
           }
         }
       ]
@@ -153,6 +152,21 @@
       ]
     },
     {
+      "id": "2c2abead-9b97-4dc5-8ad4-876c21cd9797",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "36a93743-af38-47ae-a58e-be59b2d86656",
+            "type": "text",
+            "content": "<p>Dans la vidéo suivante, vous allez voir comment déplacer la souris sur votre écran.&nbsp;📺</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "8a9618f5-c8d8-447e-83ae-cf66914c0aa0",
       "type": "lesson",
       "title": "Déplacer son pointeur",
@@ -180,6 +194,21 @@
       ]
     },
     {
+      "id": "4925daa0-167c-4afd-83da-8435680992fd",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "c8d99f94-9e03-4e0c-85cb-11c97f0d4149",
+            "type": "text",
+            "content": "<p>Vous allez maintenant passer à la pratique.</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "713aeb31-6bbd-4e0c-930a-ad24164f5b9c",
       "type": "activity",
       "title": "Carte à gratter",
@@ -198,6 +227,21 @@
             "id": "ccaefecd-db35-40ea-a6f9-8d42fb907e63",
             "type": "text",
             "content": "<iframe title=\"carteagratter\" src=\"https://epreuves.pix.fr/fr/puzzle/example.html\" height=\"445\"></iframe>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "e81935e3-4188-4b6b-b641-127eb1f1cb74",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "2c5368e9-7d85-4132-bafe-53f198099b57",
+            "type": "text",
+            "content": "<p>Vous savez déplacer le pointeur de la souris à l'écran. Maintenant, entraînez-vous à être précis dans vos mouvements. 🎯</p>"
           }
         }
       ]
@@ -229,6 +273,21 @@
             "id": "9c1c4342-96a6-4c14-a5b0-5ed0d202fb8f",
             "type": "text",
             "content": "<h3> <span aria-hidden=\"true\">💡</span> Astuce si vous ne voyez plus le pointeur sur votre écran :&nbsp;</h3> <p> Bougez de gauche à droite votre souris doucement sur la table.<br> Vous verrez le pointeur bouger à l'écran.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "aa183b1e-2c91-45d8-b796-778e43fa7ce3",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "a11dc8fa-9030-4f70-b6d8-86af6ff66e30",
+            "type": "text",
+            "content": "<p>Maintenant que vous savez déplacer votre souris, découvrez les différents boutons de la souris ! 🖱️️</p>"
           }
         }
       ]
@@ -275,6 +334,21 @@
             "id": "98a59942-5506-4c18-b16a-97ce2010103b",
             "type": "text",
             "content": "<p><strong><span aria-hidden=\"true\">🔎</span> Observez : combien de boutons a votre souris d’ordinateur ?</strong></p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "e0c2934c-fbe0-466a-94d9-f1a4e83719fc",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "4d997b51-9404-42d3-87fc-8a9d31b0d905",
+            "type": "text",
+            "content": "<p>Vous avez découvert le nom des boutons d'une souris.</p><p>Voyons à présent comment cliquer avec votre souris !<br></p>"
           }
         }
       ]
@@ -346,6 +420,21 @@
       ]
     },
     {
+      "id": "1f8a8389-645d-4756-87a2-d30acf24eafd",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "7b083f7d-3e44-42ad-9822-8999a4e65ba4",
+            "type": "text",
+            "content": "<p>Vous allez maintenant passer à la pratique. 👇</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "b491a99e-2774-469e-a63e-e2d0fb1120f2",
       "type": "activity",
       "title": "Premiers clics gauches",
@@ -384,6 +473,21 @@
       ]
     },
     {
+      "id": "bbd5c08b-1701-4e29-8648-71eac9793379",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "0ef82c6c-4526-4ecf-9f2e-02a42fc382ac",
+            "type": "text",
+            "content": "<p>Il arrive que le pointeur de la souris change de forme. C’est tout à fait normal.&nbsp;</p><p>Découvrez les différentes formes de pointeur.<br><br></p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "03e0657a-7caf-49eb-8dfb-da0f5e52b7ba",
       "type": "lesson",
       "title": "Les types de pointeurs",
@@ -412,6 +516,21 @@
             "id": "8c07cbe0-14aa-4a0e-898d-7ddf9c4ff3be",
             "type": "text",
             "content": "<ul><li><strong>La flèche</strong> est le pointeur le plus courant.</li><li><strong>La main</strong> indique que vous pouvez cliquer.</li><li><strong>La barre verticale</strong> indique que vous pouvez taper du texte.</li><li><strong>La roue ou le sablier</strong> indiquent qu’il faut patienter.</li></ul>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "7e9abfc9-6512-4f12-8aa4-a3692207e939",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "ccc4bf26-0610-4598-a91f-49a3c2e8dd02",
+            "type": "text",
+            "content": "<p>Le clic gauche sert à ouvrir des pages internet ou à démarrer des vidéos. Pour chacune de ses actions, le pointeur change de forme.</p><p>🖱️À vous de jouer !</p>"
           }
         }
       ]
