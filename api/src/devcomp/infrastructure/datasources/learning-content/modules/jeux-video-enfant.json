@@ -15,41 +15,22 @@
     ],
     "tabletSupport": "comfortable"
   },
-  "transitionTexts": [
-    {
-      "grainId": "4812058e-6ccf-4d4b-889d-c5a18882292a",
-      "content": "<p>Franck a une fille de 8 ans, Marilou. Pour son anniversaire, elle voudrait un jeu vidéo dont elle a entendu parler à l’école : Dragon’s Kingdom. 🎮</p>"
-    },
-    {
-      "grainId": "935c4c4c-4705-4e2e-8c8f-a8db2a285bde",
-      "content": "<p>Avant de choisir un jeu vidéo pour sa fille, Franck peut vérifier plusieurs informations au sujet du jeu.<br>Découvrons ensemble la première information : la signalétique PEGI.<br></p>"
-    },
-    {
-      "grainId": "9a521207-4957-4512-8d24-b6e0f3d21226",
-      "content": "<p>Voyons si vous avez retenu l’essentiel. 🎯</p>"
-    },
-    {
-      "grainId": "d09b483b-c182-44be-9c55-8c570e7b70d2",
-      "content": "<p>Franck sait à présent vérifier l’âge recommandé pour un jeu.<br>Il veut maintenant éviter que Marilou dépense de l’argent en achetant des bonus pendant qu'elle joue.<br>Découvrez ce que sont les achats intégrés dans les jeux vidéo. 💸</p>"
-    },
-    {
-      "grainId": "fe9fa67b-ddfc-4932-8f5d-eba163a206b9",
-      "content": "<p>Vous savez à présent ce que sont les achats intégrés. <br>À vous de jouer pour les repérer sur des boîtes ou des fiches de jeux.</p>"
-    },
-    {
-      "grainId": "779de80b-ba18-4e95-ab6d-bbc5ce8edd5a",
-      "content": "<p>Après avoir vérifié le pictogramme d’âge PEGI et la présence d’achats intégrés, Franck peut vérifier une troisième information clé : la possibilité d’interagir avec d’autres joueurs dans le jeu. 💬</p>"
-    },
-    {
-      "grainId": "6e7dad63-ee7e-428b-a25f-08d760b00503",
-      "content": "<p>Franck sait maintenant que Dragon’s Kingdom, le jeu demandé par Marilou n’est pas adapté à son âge.<br>Après discussion avec sa fille de 8 ans, Franck souhaite lui acheter un autre jeu sur les dragons. 🐲</p>"
-    },
-    {
-      "grainId": "4a349720-15b7-4c86-a431-344410332fd5",
-      "content": "<p>Grâce à vous, Franck a choisi un jeu vidéo pour Marilou ! 👏<br>Il peut à présent jouer avec elle, pour l’accompagner dans sa découverte du jeu.</p>"
-    }
-  ],
   "grains": [
+    {
+      "id": "d46bad0c-2cf2-4f48-81d6-b97be61cfe32",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "12937b3b-7031-45e3-9aeb-6d3a6ea6533a",
+            "type": "text",
+            "content": "<p>Franck a une fille de 8 ans, Marilou. Pour son anniversaire, elle voudrait un jeu vidéo dont elle a entendu parler à l’école : Dragon’s Kingdom. 🎮</p>"
+          }
+        }
+      ]
+    },
     {
       "id": "4812058e-6ccf-4d4b-889d-c5a18882292a",
       "type": "discovery",
@@ -103,6 +84,21 @@
       ]
     },
     {
+      "id": "d6e7ddf5-e76d-4e4b-b9d9-17a7d039c340",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "5d5e7130-c5d2-4aa0-bb7f-20e89b27cbd8",
+            "type": "text",
+            "content": "<p>Avant de choisir un jeu vidéo pour sa fille, Franck peut vérifier plusieurs informations au sujet du jeu.<br>Découvrons ensemble la première information : la signalétique PEGI.<br></p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "935c4c4c-4705-4e2e-8c8f-a8db2a285bde",
       "type": "lesson",
       "title": "La signalétique PEGI",
@@ -117,6 +113,21 @@
             "poster": "https://assets.pix.org/modules/jeux-video-enfant/signaletique_pegi_ppn3.jpg",
             "subtitles": "https://assets.pix.org/modules/jeux-video-enfant/signaletique_pegi_ppn3.vtt",
             "transcription": "<p>La signalétique PEGI<br><br> Franck regarde la fiche du jeu vidéo que sa fille aimerait avoir. <br>Ce jeu est-il adapté à son âge ?&nbsp; <br>Pour le savoir, Franck peut s’appuyer sur la signalétique PEGI. La signalétique PEGI est un ensemble de pictogrammes qui sont présents sur tous les jeux vendus en France et dans de nombreux pays, que ce soit sur les boîtes vendues en magasins ou sur les boutiques en ligne.&nbsp; <br>Ces pictogrammes donnent une indication aux parents mais ils n’interdisent pas la vente des jeux.&nbsp; La première série de pictogrammes marque le fait que le jeu n’est pas adapté aux enfants en dessous de l’âge indiqué. Ainsi, un jeu avec le pictogramme PEGI 7 sera déconseillé aux enfants de moins de 7 ans.&nbsp; Attention, ces pictogrammes n’indiquent pas la difficulté du jeu par rapport à l’âge de l’enfant. <br>Par exemple, un jeu avec le pictogramme PEGI 3 ne contient pas de contenus choquants pour un enfant de 3 ans, mais il peut être trop compliqué pour lui ! (ex échec) <br>A côté du pictogramme d’âge, il peut y avoir, en plus, des marqueurs thématiques qui donnent une information sur le contenu du jeu Sur certains jeux ou applications, il n’y a pas de pictogramme d’âge, mais un pictogramme “Accompagnement des parents recommandé”.&nbsp; <br>Ce pictogramme est présent sur des jeux et applications qui contiennent des contenus créés par les utilisateurs. Il peut donc y avoir des contenus adaptés pour les plus jeunes mais d’autres moins, il vaut donc mieux utiliser le jeu en étant accompagné par les parents. <br>Et si, comme Franck, vous voulez en savoir plus sur la signalétique PEGI, rendez-vous sur pédagojeux.fr. PédaGoJeux est un collectif qui informe et accompagne les familles autour des jeux vidéo.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "00ef7c51-943d-4a06-811c-293cd7722108",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "9a84d404-4972-45b0-bcff-b16b07cf0e2f",
+            "type": "text",
+            "content": "<p>Voyons si vous avez retenu l’essentiel. 🎯</p>"
           }
         }
       ]
@@ -228,6 +239,21 @@
       ]
     },
     {
+      "id": "f55cd373-221b-499b-9186-5d3ec7d383da",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "89b50860-22ca-4d9d-b0fa-f4e759acf654",
+            "type": "text",
+            "content": "<p>Franck sait à présent vérifier l’âge recommandé pour un jeu.<br>Il veut maintenant éviter que Marilou dépense de l’argent en achetant des bonus pendant qu'elle joue.<br>Découvrez ce que sont les achats intégrés dans les jeux vidéo. 💸</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "d09b483b-c182-44be-9c55-8c570e7b70d2",
       "type": "lesson",
       "title": "Les achats intégrés",
@@ -289,6 +315,21 @@
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "b30b20c6-ba19-4992-8efb-20a6bf932c01",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "b7989927-5257-4f02-82d7-23d92e666c4c",
+            "type": "text",
+            "content": "<p>Vous savez à présent ce que sont les achats intégrés. <br>À vous de jouer pour les repérer sur des boîtes ou des fiches de jeux.</p>"
+          }
         }
       ]
     },
@@ -399,6 +440,21 @@
       ]
     },
     {
+      "id": "71521687-4fb1-4d45-a2d8-f33221dec895",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "d841ddce-baf4-48c7-95b8-c03bb38fa232",
+            "type": "text",
+            "content": "<p>Après avoir vérifié le pictogramme d’âge PEGI et la présence d’achats intégrés, Franck peut vérifier une troisième information clé : la possibilité d’interagir avec d’autres joueurs dans le jeu. 💬</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "779de80b-ba18-4e95-ab6d-bbc5ce8edd5a",
       "type": "lesson",
       "title": "Les interactions entre joueurs",
@@ -453,6 +509,21 @@
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "5e318a39-c2ef-4b2a-8a86-acf86092490b",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "45a1378d-e5bc-43a1-a5c8-b190d5aad710",
+            "type": "text",
+            "content": "<p>Franck sait maintenant que Dragon’s Kingdom, le jeu demandé par Marilou n’est pas adapté à son âge.<br>Après discussion avec sa fille de 8 ans, Franck souhaite lui acheter un autre jeu sur les dragons. 🐲</p>"
+          }
         }
       ]
     },
@@ -514,6 +585,21 @@
               }
             ],
             "solution": "2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "e48264b9-a0b5-4783-a78a-9844b9a6e77f",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "bb51dffa-ef4f-4124-80e4-e7024e2280dc",
+            "type": "text",
+            "content": "<p>Grâce à vous, Franck a choisi un jeu vidéo pour Marilou ! 👏<br>Il peut à présent jouer avec elle, pour l’accompagner dans sa découverte du jeu.</p>"
           }
         }
       ]
