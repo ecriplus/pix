@@ -2,21 +2,19 @@ import _ from 'lodash';
 
 import { Activity } from '../../../../../src/school/domain/models/Activity.js';
 import { Assessment } from '../../../../../src/school/domain/models/Assessment.js';
-import { playMission } from '../../../../../src/school/domain/usecases/play-mission.js';
-import * as activityRepository from '../../../../../src/school/infrastructure/repositories/activity-repository.js';
-import * as missionAssessmentRepository from '../../../../../src/school/infrastructure/repositories/mission-assessment-repository.js';
-import * as missionRepository from '../../../../../src/school/infrastructure/repositories/mission-repository.js';
-import * as assessmentRepository from '../../../../../src/shared/infrastructure/repositories/assessment-repository.js';
-import { databaseBuilder, domainBuilder, expect, knex, mockLearningContent } from '../../../../test-helper.js';
+import { usecases } from '../../../../../src/school/domain/usecases/index.js';
+import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
+import {
+  catchErr,
+  databaseBuilder,
+  domainBuilder,
+  expect,
+  knex,
+  mockLearningContent,
+} from '../../../../test-helper.js';
 import * as learningContentBuilder from '../../../../tooling/learning-content-builder/index.js';
 
 describe('Integration | UseCases | play-mission', function () {
-  const dependencies = {
-    activityRepository,
-    assessmentRepository,
-    missionAssessmentRepository,
-    missionRepository,
-  };
   const missionId = 6789;
 
   context('when no assessment is started for learner and mission', function () {
@@ -40,10 +38,9 @@ describe('Integration | UseCases | play-mission', function () {
         ],
       });
 
-      const result = await playMission({
+      const result = await usecases.playMission({
         missionId,
         organizationLearnerId,
-        ...dependencies,
       });
 
       const assessment = {
@@ -76,10 +73,9 @@ describe('Integration | UseCases | play-mission', function () {
         ],
       });
 
-      const result = await playMission({
+      const result = await usecases.playMission({
         missionId,
         organizationLearnerId,
-        ...dependencies,
       });
 
       const expectedMissionAssesment = {
@@ -111,10 +107,9 @@ describe('Integration | UseCases | play-mission', function () {
         ],
       });
 
-      const result = await playMission({
+      const result = await usecases.playMission({
         missionId,
         organizationLearnerId,
-        ...dependencies,
       });
 
       const activity = {
@@ -146,10 +141,9 @@ describe('Integration | UseCases | play-mission', function () {
         ],
       });
 
-      const assessment = await playMission({
+      const assessment = await usecases.playMission({
         missionId,
         organizationLearnerId,
-        ...dependencies,
       });
 
       const expectedAssessment = domainBuilder.buildSchoolAssessment({
@@ -162,6 +156,18 @@ describe('Integration | UseCases | play-mission', function () {
       expect(_.omit(assessment, ['createdAt', 'updatedAt'])).to.deep.equal(
         _.omit(expectedAssessment, ['createdAt', 'updatedAt']),
       );
+    });
+
+    context('when the organizationLearnerId provided does not exist', function () {
+      it('should throw a NotFoundError', async function () {
+        const error = await catchErr(usecases.playMission)({
+          missionId,
+          organizationLearnerId: 666,
+        });
+
+        expect(error).to.be.an.instanceOf(NotFoundError);
+        expect(error.message).to.equal('Student not found for ID 666');
+      });
     });
   });
   context('when an assessment is started for learner and mission', function () {
@@ -180,10 +186,9 @@ describe('Integration | UseCases | play-mission', function () {
     });
 
     it('should not save a new assessment for Pix1D', async function () {
-      await playMission({
+      await usecases.playMission({
         missionId,
         organizationLearnerId,
-        ...dependencies,
       });
 
       const assessmentNb = await knex('assessments').count().first();
@@ -192,10 +197,9 @@ describe('Integration | UseCases | play-mission', function () {
     });
 
     it('should not save a new mission assessment', async function () {
-      await playMission({
+      await usecases.playMission({
         missionId,
         organizationLearnerId,
-        ...dependencies,
       });
 
       const missionAssessmentNb = await knex('mission-assessments').count().first();
@@ -203,10 +207,9 @@ describe('Integration | UseCases | play-mission', function () {
     });
 
     it('should return the existing mission assessment', async function () {
-      const assessment = await playMission({
+      const assessment = await usecases.playMission({
         missionId,
         organizationLearnerId,
-        ...dependencies,
       });
 
       const expectedAssessment = domainBuilder.buildSchoolAssessment({
