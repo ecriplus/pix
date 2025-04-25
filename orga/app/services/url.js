@@ -1,4 +1,4 @@
-import Service, { inject as service } from '@ember/service';
+import Service, { service } from '@ember/service';
 import ENV from 'pix-orga/config/environment';
 
 import { ENGLISH_INTERNATIONAL_LOCALE } from './locale.js';

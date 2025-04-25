@@ -1,4 +1,4 @@
-import Service, { inject as service } from '@ember/service';
+import Service, { service } from '@ember/service';
 
 const CAMPAIGN_CREATION_ERRORS = {
   CAMPAIGN_NAME_IS_REQUIRED: 'api-error-messages.campaign-creation.name-required',

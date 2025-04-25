@@ -1,6 +1,6 @@
 import { action } from '@ember/object';
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
 import extraFilters from '../../../utils/extra-filter-serializer.js';
 import paramsValidator from '../../../utils/params-validator.js';
