@@ -15,37 +15,22 @@
     ],
     "tabletSupport": "comfortable"
   },
-  "transitionTexts": [
-    {
-      "grainId": "fd85068b-9126-4a6f-a53c-0179252c7b73",
-      "content": "<p>Ava vient de finir sa première semaine au collège.<span aria-hidden=\"true\">🎒</span></p><p>À la maison, Ava raconte sa journée à son père, Martin.</p><p>Lancez la vidéo pour voir leur discussion.<span aria-hidden=\"true\"> ▶️ </span></p>"
-    },
-    {
-      "grainId": "f2c81b8b-1574-4304-bd69-8ed05f579794",
-      "content": "<p>Grâce à l'ENT, Martin a accès à beaucoup d'informations, comme les devoirs d’Ava. Voyons cela ensemble&#8239;!</p>"
-    },
-    {
-      "grainId": "bf331dcd-e6ba-4d25-80f0-f95dea9e619f",
-      "content": "<p>Voyons si vous avez retenu l’essentiel. <span aria-hidden=\"\\&quot;\\\\&quot;true\\\\&quot;\\&quot;\">🎯</span></p>"
-    },
-    {
-      "grainId": "6a8d4f2b-e60b-475a-98d8-3c4e3710a14a",
-      "content": "<p>Maintenant à vous de jouer&#8239;!<br>Découvrez 3 fonctionnalités de l’ENT de Martin, et aidez-le à les utiliser.</p>"
-    },
-    {
-      "grainId": "b4154d31-a9ab-47ef-a132-3a280ed330cb",
-      "content": "<p>Vous connaissez les différents comptes qui existent sur l’ENT.<br>Regardons si vous avez bien retenu les usages conseillés du compte parent.</p>"
-    },
-    {
-      "grainId": "6c2e4b2c-bc41-4fd3-a8e3-d904fcede740",
-      "content": "<p>À présent, revenons en vidéo sur les différents comptes qui existent sur l'ENT et plus particulièrement sur le compte parent.</p>"
-    },
-    {
-      "grainId": "84f9134e-6a19-4673-a673-d4577355796a",
-      "content": "<p>Maintenant, testez votre mémoire. <span aria-hidden=\"true\">🎯</span></p>"
-    }
-  ],
   "grains": [
+    {
+      "id": "353dbd92-62f8-45d8-9537-10f2a860517b",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "d14837d6-8c5c-4071-931e-8cccc99aca2e",
+            "type": "text",
+            "content": "<p>Ava vient de finir sa première semaine au collège.<span aria-hidden=\"true\">\uD83C\uDF92</span></p><p>À la maison, Ava raconte sa journée à son père, Martin.</p><p>Lancez la vidéo pour voir leur discussion. ▶\uFE0F </p>"
+          }
+        }
+      ]
+    },
     {
       "id": "fd85068b-9126-4a6f-a53c-0179252c7b73",
       "type": "discovery",
@@ -100,6 +85,21 @@
               }
             ],
             "solution": "1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "230a5596-b73d-4702-b40e-13d6c3ca8ca8",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "45accc21-d421-4444-9547-5905afa54cf6",
+            "type": "text",
+            "content": "<p>Grâce à l'ENT, Martin a accès à beaucoup d'informations, comme les devoirs d’Ava. Voyons cela ensemble !</p>"
           }
         }
       ]
@@ -165,6 +165,21 @@
             "id": "abe95cb5-67f9-41ca-9051-c814d1163e42",
             "type": "text",
             "content": "<h3>La plupart des collèges et des lycées et certaines écoles primaire ont un ENT mais ce n'est pas obligatoire.</h3><p>Les ENT peuvent être différents d’un département ou d’une région à l’autre.</p><p><span aria-hidden=\"true\">✔️</span> Par exemple, en Corse un élève utilise l’ENT Leia et en Occitanie un élève utilise MonENTOccitanie.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "122a0494-f24d-4da9-853d-d72333349d79",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "b490bd76-fde6-4876-98d5-ccf81964e739",
+            "type": "text",
+            "content": "<p>Voyons si vous avez retenu l’essentiel. 🎯</p>"
           }
         }
       ]
@@ -284,6 +299,21 @@
             "id": "0468f3c9-f946-4309-9768-4fda3f28a4b2",
             "type": "text",
             "content": "<h3><span aria-hidden=\"true\"> 📌 </span> Résumons avant de passer à la suite&nbsp;:</h3><ul>    <li>L’ENT est utilisé par les parents, les élèves, les professeurs et les personnels d’éducation.</li>    <li>Vous pouvez accéder à l’ENT avec un identifiant et un mot de passe, fournis par l'établissement scolaire, depuis un ordinateur, une tablette, un smartphone.</li>    <li>Tous les établissements scolaires n'utilisent pas le même ENT. Les ENT proposent tous des fonctionnalités qui se ressemblent&nbsp;: messagerie, emploi du temps, cahier de textes, ...</li></ul>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "d0120279-c7f5-4030-bb38-d9bddb6dd26f",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "caf7638d-71d4-47d5-955f-a628eb12d756",
+            "type": "text",
+            "content": "<p>Maintenant à vous de jouer&#8239;!<br>Découvrez 3 fonctionnalités de l’ENT de Martin, et aidez-le à les utiliser.</p>"
           }
         }
       ]
@@ -454,6 +484,21 @@
       ]
     },
     {
+      "id": "ba0c016f-a40d-4bf9-9c99-fbd7bb2087c0",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "913d5336-5cce-4347-b8da-fcb6d24400f0",
+            "type": "text",
+            "content": "<p>À présent, revenons en vidéo sur les différents comptes qui existent sur l'ENT et plus particulièrement sur le compte parent.</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "6c2e4b2c-bc41-4fd3-a8e3-d904fcede740",
       "type": "lesson",
       "title": "Les différents types de comptes de l'ENT",
@@ -472,6 +517,21 @@
             "id": "b3cba471-c794-4a39-b044-5b084b468341",
             "type": "text",
             "content": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/Fp9IIvX7Z7o?si=BvGOl7ST3ho-x-o5\" title=\"Discussion\"></iframe>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fad888df-1aaf-4006-9cc1-cbd063e17633",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "7764df35-720c-4532-ac31-c8c7614017ba",
+            "type": "text",
+            "content": "<p>Vous connaissez les différents comptes qui existent sur l’ENT.<br>Regardons si vous avez bien retenu les usages conseillés du compte parent.</p>"
           }
         }
       ]
@@ -577,6 +637,21 @@
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "b885fddc-c3bc-4075-9b6d-e9b3cd841a35",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "66760ae7-c076-48b8-b71a-e92787a47da4",
+            "type": "text",
+            "content": "<p>Maintenant, testez votre mémoire. 🎯</p>"
+          }
         }
       ]
     },
