@@ -15,53 +15,22 @@
     ],
     "tabletSupport": "obstructed"
   },
-  "transitionTexts": [
-    {
-      "grainId": "9953bee8-bf21-45a7-9522-4d74700b4828",
-      "content": "<p>La souris permet d’interagir avec l’ordinateur de différentes façons. Le pointeur se déplace à l’écran quand la souris glisse sur la table. Le bouton gauche permet de faire un clic gauche.&nbsp; <br><br>Découvrez dans ce module comment utiliser la molette, le double-clic et le clic droit.</p>"
-    },
-    {
-      "grainId": "2ad4df3c-5afe-4c8e-8316-77f05ecb7641",
-      "content": "<p><strong>Bravo !</strong> 🎉 <br>Vous êtes prêt. Commençons par la molette.</p>"
-    },
-    {
-      "grainId": "48d4b5d0-7457-4071-ae6d-43dc4717ae86",
-      "content": "<p>À vous de jouer. 🕹️ </p><p>Vous allez vous entraîner à utiliser la molette de votre souris.</p>"
-    },
-    {
-      "grainId": "6ebfb036-f99b-4dc4-805c-f8bf7b3c76a3",
-      "content": "<p>Passez à la pratique sur une page entière. 👇 </p><p>Après cette activité, vous saurez vous déplacer dans le module grâce à la molette, vous êtes prêts ?</p>"
-    },
-    {
-      "grainId": "45d3d731-5abf-4384-afc7-12dcd8d37365",
-      "content": "<p>Félicitations !&nbsp; Vous êtes désormais autonome avec la molette ! 🎉<br>Découvrez maintenant un nouveau type de clic&nbsp;: le double-clic.</p>"
-    },
-    {
-      "grainId": "f7b7e135-b49a-41e0-88fc-1cf4c45bbc0f",
-      "content": "<p>Place à la pratique ! Entraînez-vous au double-clic dans l’activité suivante.👇</p>"
-    },
-    {
-      "grainId": "c3b07818-2cfb-4aaa-afdd-0444de95be3f",
-      "content": "<p>On utilise souvent le double-clic pour ouvrir des dossiers sur son ordinateur. 📁 <br>À vous d’essayer !</p>"
-    },
-    {
-      "grainId": "9227a9d5-929d-4a5f-b85b-1649695d058c",
-      "content": "<p>Maintenant que vous savez faire un clic, un double-clic et utiliser la molette, découvrez le dernier bouton de la souris : le bouton droit.</p>"
-    },
-    {
-      "grainId": "22ff7ef7-cf2d-4f35-80cd-af15becebbfc",
-      "content": "<p>Avant de faire apparaître la liste d’actions, commencez par faire vos premiers clics droits. 👇</p>"
-    },
-    {
-      "grainId": "9217d594-0915-4f2e-9d27-5faef1b473d3",
-      "content": "<p>Vous savez désormais alterner les clics droit et clics gauche. 👍<br>À vous maintenant d’utiliser les clics droit et gauche sur une liste d’action.</p>"
-    },
-    {
-      "grainId": "e01d9903-a264-4276-8032-3ccb1cb271bc",
-      "content": "<p>Bravo ! 🎉 Vous savez utiliser le clic droit de la souris.</p>"
-    }
-  ],
   "grains": [
+    {
+      "id": "89e43bc8-a579-428a-8e58-56dbf5f1cf93",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "d5c2e0af-72e7-42b8-a1f5-fa235be9301a",
+            "type": "text",
+            "content": "<p>La souris permet d’interagir avec l’ordinateur de différentes façons. Le pointeur se déplace à l’écran quand la souris glisse sur la table. Le bouton gauche permet de faire un clic gauche.&nbsp; <br><br>Découvrez dans ce module comment utiliser la molette, le double-clic et le clic droit.</p>"
+          }
+        }
+      ]
+    },
     {
       "id": "9953bee8-bf21-45a7-9522-4d74700b4828",
       "type": "activity",
@@ -73,6 +42,21 @@
             "id": "7724ff4d-de21-4fe3-9eab-5c9e6a18a010",
             "type": "text",
             "content": "<p>Pour commencer, faites un clic gauche sur « Continuer» 👇</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c942f3a1-52e4-41c4-8172-b7df7509b9f8",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "36044495-821b-4126-b687-b8a17c505b8e",
+            "type": "text",
+            "content": "<p><strong>Bravo !</strong> 🎉 <br>Vous êtes prêt. Commençons par la molette.</p>"
           }
         }
       ]
@@ -106,6 +90,21 @@
             "id": "695d7b72-e982-4e45-a8dd-deac2ae73c59",
             "type": "text",
             "content": "<p>Dans l'exemple ci-dessus : la molette roule vers le bas, donc on descend dans la page. </p><p>C’est comme si nos yeux descendaient sur une page de journal papier. 📰</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "1d98eca4-0217-45bf-95f9-7e5d19e0c921",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "56cb8b5c-4a25-4960-a7cf-6b86b13375a5",
+            "type": "text",
+            "content": "<p>À vous de jouer. 🕹️ </p><p>Vous allez vous entraîner à utiliser la molette de votre souris.</p>"
           }
         }
       ]
@@ -173,6 +172,21 @@
       ]
     },
     {
+      "id": "466421d6-62c3-4817-a116-0ac8d0de0d84",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "989decd1-926a-4db7-88bb-b31862131f8b",
+            "type": "text",
+            "content": "<p>Passez à la pratique sur une page entière. 👇 </p><p>Après cette activité, vous saurez vous déplacer dans le module grâce à la molette, vous êtes prêts ?</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "6ebfb036-f99b-4dc4-805c-f8bf7b3c76a3",
       "type": "activity",
       "title": "Utilisation de la molette dans le module",
@@ -218,6 +232,21 @@
               }
             ],
             "solution": "2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "3a2933a2-0026-4a80-8db4-3f8773983215",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "b42906c3-b340-40c0-852a-4ae733c7fb9e",
+            "type": "text",
+            "content": "<p>Félicitations !&nbsp; Vous êtes désormais autonome avec la molette ! 🎉<br>Découvrez maintenant un nouveau type de clic&nbsp;: le double-clic.</p>"
           }
         }
       ]
@@ -275,6 +304,21 @@
       ]
     },
     {
+      "id": "efc2abce-4d88-4251-8c15-9430891824b8",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "3b975cca-22b4-444a-8aa5-801af949536f",
+            "type": "text",
+            "content": "<p>Place à la pratique ! Entraînez-vous au double-clic dans l’activité suivante.👇</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "f7b7e135-b49a-41e0-88fc-1cf4c45bbc0f",
       "type": "activity",
       "title": "Premiers doubles-clics",
@@ -293,6 +337,21 @@
             "id": "be1b5866-6475-4bed-a775-e07be73f156e",
             "type": "text",
             "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clic-1erdoublesclics/index.html\" height=\"445\"></iframe>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "9d1dd3cb-5a58-43d7-9e5f-fa9dd62ac59b",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "e295a2ca-a6ba-45e2-8805-12ef13bcab53",
+            "type": "text",
+            "content": "<p>On utilise souvent le double-clic pour ouvrir des dossiers sur son ordinateur. 📁 <br>À vous d’essayer !</p>"
           }
         }
       ]
@@ -360,6 +419,21 @@
       ]
     },
     {
+      "id": "2c13664d-dbe8-42e7-a4bf-f6a67be2916e",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "66c9055e-c74a-4cf4-af83-70833210c86e",
+            "type": "text",
+            "content": "<p>Maintenant que vous savez faire un clic, un double-clic et utiliser la molette, découvrez le dernier bouton de la souris : le bouton droit.</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "9227a9d5-929d-4a5f-b85b-1649695d058c",
       "type": "lesson",
       "title": "Le clic droit",
@@ -406,6 +480,21 @@
       ]
     },
     {
+      "id": "aaaa5676-f865-4d85-8d95-7329e2716511",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "a609018d-fd04-460f-b574-b5107b3f4f73",
+            "type": "text",
+            "content": "<p>Avant de faire apparaître la liste d’actions, commencez par faire vos premiers clics droits. 👇</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "22ff7ef7-cf2d-4f35-80cd-af15becebbfc",
       "type": "activity",
       "title": "Premiers clics droits",
@@ -416,6 +505,21 @@
             "id": "fc26348a-dea8-4010-bfa6-efd0252b9516",
             "type": "text",
             "content": "<p><strong>Dans la zone ci-dessous, entraînez-vous à faire un clic droit puis un clic gauche à la suite.</strong></p><p><br></p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-clicdroitpuisgauche/index.html\" height=\"445\"></iframe>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "eb055116-5d70-42ac-8d7b-3bdf2f6acef9",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "7f49b2c6-8488-4868-9454-6a92b4cc7643",
+            "type": "text",
+            "content": "<p>Vous savez désormais alterner les clics droit et clics gauche. 👍<br>À vous maintenant d’utiliser les clics droit et gauche sur une liste d’action.</p>"
           }
         }
       ]
@@ -435,6 +539,21 @@
             "url": "https://epreuves.pix.fr/filemanager-module/filemanager-module.html?lang=fr",
             "instruction": "<p>Dans l’espace ci-dessous, ouvrez le dossier « Photos ».<br>Sur le fichier «photo1», faites un clic droit pour afficher la liste d’action, et cliquez sur «&nbsp;Supprimer&nbsp;».<br>Refaites la même chose sur «photo2» puis sur «photo3».</p>",
             "height": 400
+          }
+        }
+      ]
+    },
+    {
+      "id": "e4ef316d-3d48-46ce-8bb5-90ba92a113a1",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "07c245c1-73e8-4968-bb7b-99aac6590f2c",
+            "type": "text",
+            "content": "<p>Bravo ! 🎉 Vous savez utiliser le clic droit de la souris.</p>"
           }
         }
       ]
