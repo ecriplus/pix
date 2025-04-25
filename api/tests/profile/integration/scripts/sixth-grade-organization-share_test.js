@@ -1,9 +1,38 @@
 import sinon from 'sinon';
 
 import { SixthGradeOrganizationShare } from '../../../../src/profile/scripts/sixth-grade-organization-share.js';
-import { databaseBuilder, expect, knex } from '../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, knex } from '../../../test-helper.js';
 
 describe('Integration | Profile | Scripts | sixth-grade-organization-share  ', function () {
+  describe('options', function () {
+    it('parses dates correctly', function () {
+      const realDate = '2024-01-01';
+      const script = new SixthGradeOrganizationShare();
+      const { options } = script.metaInfo;
+      const parsedStartDate = options.start.coerce(realDate);
+      const parsedEndDate = options.end.coerce(realDate);
+      expect(parsedStartDate).to.be.a.instanceOf(Date);
+      expect(parsedEndDate).to.be.a.instanceOf(Date);
+    });
+
+    it('throw when dates are not correct', function () {
+      const invalidDate = [];
+      const script = new SixthGradeOrganizationShare();
+      const { options } = script.metaInfo;
+      expect(() => options.start.coerce(invalidDate)).to.throw();
+      expect(() => options.end.coerce(invalidDate)).to.throw();
+    });
+
+    it('should throw when end date is before the start date', async function () {
+      const startDate = '2024-01-01';
+      const endDate = '2023-01-01';
+      const script = new SixthGradeOrganizationShare();
+      const result = await catchErr(script.handle)(startDate, endDate);
+
+      expect(result).instanceOf(Error);
+    });
+  });
+
   describe('#handle', function () {
     let organizationProfileRewards;
     let logger;
@@ -27,17 +56,22 @@ describe('Integration | Profile | Scripts | sixth-grade-organization-share  ', f
         databaseBuilder.factory.buildOrganizationLearner({ organizationId: firstOrganizationId, userId }),
       );
 
-      // build another organization learner for userId 3
-      databaseBuilder.factory.buildOrganizationLearner({ organizationId: secondOrganizationId, userId: 3 });
+      // build another organization learner for userId 4
+      databaseBuilder.factory.buildOrganizationLearner({ organizationId: secondOrganizationId, userId: 4 });
 
       // build profile rewards
       profileRewardIds = userIds.map(
-        (userId) => databaseBuilder.factory.buildProfileReward({ rewardId: attestation.id, userId }).id,
+        (userId) =>
+          databaseBuilder.factory.buildProfileReward({
+            rewardId: attestation.id,
+            userId,
+            createdAt: `2024-01-0${userId}`,
+          }).id,
       );
 
       // build one organization profile reward to test unique constraint violation
       databaseBuilder.factory.buildOrganizationProfileReward({
-        profileRewardId: profileRewardIds[4],
+        profileRewardId: profileRewardIds[5],
         organizationId: firstOrganizationId,
       });
 
@@ -48,8 +82,8 @@ describe('Integration | Profile | Scripts | sixth-grade-organization-share  ', f
 
       await script.handle({
         options: {
-          limit: 5,
-          offset: 2,
+          start: '2024-01-02',
+          end: '2024-01-08',
         },
         logger,
       });
@@ -57,25 +91,18 @@ describe('Integration | Profile | Scripts | sixth-grade-organization-share  ', f
       organizationProfileRewards = await knex('organizations-profile-rewards').select('*');
     });
 
-    it('should handle offset option', async function () {
+    it('should handle start and end date option', async function () {
       const organizationProfilRewardIds = organizationProfileRewards.map(
         (profileReward) => profileReward.profileRewardId,
       );
-      expect(organizationProfilRewardIds).to.not.contains(profileRewardIds[0]);
-      expect(organizationProfilRewardIds).to.not.contains(profileRewardIds[1]);
-    });
 
-    it('should handle limit option', async function () {
-      const organizationProfilRewardIds = organizationProfileRewards.map(
-        (profileReward) => profileReward.profileRewardId,
-      );
-      expect(organizationProfilRewardIds).to.not.contains(profileRewardIds[7]);
+      expect(organizationProfilRewardIds).to.not.contains(profileRewardIds[0]);
       expect(organizationProfilRewardIds).to.not.contains(profileRewardIds[8]);
     });
 
     it('should handle pgsql unique constraint violation error', async function () {
       expect(logger.warn).to.have.been.calledOnceWithExactly(
-        `User 5 already shared an attestation with organization ${firstOrganizationId}`,
+        `User 6 already shared an attestation with organization ${firstOrganizationId}`,
       );
     });
 
@@ -86,12 +113,14 @@ describe('Integration | Profile | Scripts | sixth-grade-organization-share  ', f
       });
 
       expect(organizationProfileRewardsWithoutIds).to.have.deep.members([
+        { organizationId: firstOrganizationId, profileRewardId: profileRewardIds[1] },
         { organizationId: firstOrganizationId, profileRewardId: profileRewardIds[2] },
-        { organizationId: secondOrganizationId, profileRewardId: profileRewardIds[2] },
         { organizationId: firstOrganizationId, profileRewardId: profileRewardIds[3] },
+        { organizationId: secondOrganizationId, profileRewardId: profileRewardIds[3] },
         { organizationId: firstOrganizationId, profileRewardId: profileRewardIds[4] },
         { organizationId: firstOrganizationId, profileRewardId: profileRewardIds[5] },
         { organizationId: firstOrganizationId, profileRewardId: profileRewardIds[6] },
+        { organizationId: firstOrganizationId, profileRewardId: profileRewardIds[7] },
       ]);
     });
   });

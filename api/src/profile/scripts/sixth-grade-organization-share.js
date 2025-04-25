@@ -1,23 +1,24 @@
 import { ORGANIZATIONS_PROFILE_REWARDS_TABLE_NAME } from '../../../db/migrations/20241118134739_create-organizations-profile-rewards-table.js';
 import { PGSQL_UNIQUE_CONSTRAINT_VIOLATION_ERROR } from '../../../db/pgsql-errors.js';
+import { isoDateParser } from '../../shared/application/scripts/parsers.js';
 import { Script } from '../../shared/application/scripts/script.js';
 import { ScriptRunner } from '../../shared/application/scripts/script-runner.js';
 import { DomainTransaction } from '../../shared/domain/DomainTransaction.js';
 
 const options = {
-  limit: {
-    type: 'number',
-    describe: 'Id limit',
-    demandOption: true,
+  start: {
+    type: 'string',
+    describe: 'Date de début de la période à traiter, jour inclus, format "YYYY-MM-DD", (ex: "2024-01-20")',
+    demandOption: false,
     requiresArg: true,
-    coerce: Number,
+    coerce: isoDateParser(),
   },
-  offset: {
-    type: 'number',
-    describe: 'Id offset',
+  end: {
+    type: 'string',
+    describe: 'Date de fin de la période à traiter, jour inclus, format "YYYY-MM-DD", (ex: "2024-02-27")',
     demandOption: true,
     requiresArg: true,
-    coerce: Number,
+    coerce: isoDateParser(),
   },
 };
 
@@ -31,7 +32,9 @@ export class SixthGradeOrganizationShare extends Script {
   }
 
   async handle({ options, logger }) {
-    const profileRewards = await this.fetchProfileRewards(options.limit, options.offset);
+    this.checkEndDateBeforeStartDate(options.start, options.end);
+
+    const profileRewards = await this.fetchProfileRewards(options.start, options.end);
 
     logger.info(`${profileRewards.length} users to handle`);
 
@@ -69,14 +72,18 @@ export class SixthGradeOrganizationShare extends Script {
   }
 
   /**
-   * @param {number} limit
-   * @param {number} offset
+   * @param {Date} start
+   * @param {Date} end
    *
    * @returns {Promise<[{id:number, userId:number}]>}
    */
-  async fetchProfileRewards(limit, offset) {
+  async fetchProfileRewards(start, end) {
     const knexConnection = DomainTransaction.getConnection();
-    return await knexConnection('profile-rewards').select('userId', 'id').limit(limit).offset(offset).orderBy('id');
+    return await knexConnection('profile-rewards')
+      .select('userId', 'id')
+      .where('createdAt', '<=', end)
+      .where('createdAt', '>=', start)
+      .orderBy('id');
   }
 
   async fetchUserOrganizations(userId) {
@@ -86,6 +93,18 @@ export class SixthGradeOrganizationShare extends Script {
       .where({ userId });
 
     return organizations.map(({ organizationId }) => organizationId);
+  }
+
+  /**
+   * Check if the end date is before the start date.
+   *
+   * @param {Date} startDate
+   * @param {Date} endDate
+   */
+  checkEndDateBeforeStartDate(startDate, endDate) {
+    if (endDate < startDate) {
+      throw new Error('The end date must be after than the start date');
+    }
   }
 }
 
