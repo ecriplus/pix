@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { CERTIFICATION_FEATURES } from '../../../../../src/certification/shared/domain/constants.js';
+import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { CertificationCenter } from '../../../../../src/organizational-entities/domain/models/CertificationCenter.js';
 import * as certificationCenterRepository from '../../../../../src/organizational-entities/infrastructure/repositories/certification-center.repository.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
@@ -57,6 +58,88 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           type: 'PRO',
           externalId: 'EX123',
           habilitations: [],
+          features: [],
+          archivedAt: null,
+          archivedBy: null,
+          updatedAt: now,
+          createdAt: now,
+        });
+        expect(result).to.deepEqualInstance(expectedCenter);
+      });
+    });
+
+    context('when the certification center has habilitations', function () {
+      it('returns the certification center with its own habilitations', async function () {
+        // given
+        const firstCenterId = 1;
+        const secondCenterId = 2;
+        databaseBuilder.factory.buildCertificationCenter({
+          id: firstCenterId,
+          type: CertificationCenter.types.PRO,
+          archivedAt: null,
+          archivedBy: null,
+          createdAt: now,
+          updatedAt: now,
+        });
+
+        const secondCenter = databaseBuilder.factory.buildCertificationCenter({
+          id: secondCenterId,
+          type: CertificationCenter.types.PRO,
+        });
+
+        const firstComplementaryCertificationId = 123;
+        const firstComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
+          id: firstComplementaryCertificationId,
+          complementaryCertificationId: firstComplementaryCertificationId,
+          key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+        });
+
+        databaseBuilder.factory.buildComplementaryCertificationHabilitation({
+          certificationCenterId: firstCenterId,
+          complementaryCertificationId: firstComplementaryCertification.id,
+        });
+        databaseBuilder.factory.buildComplementaryCertificationHabilitation({
+          certificationCenterId: secondCenter.id,
+          complementaryCertificationId: firstComplementaryCertification.id,
+        });
+
+        const secondComplementaryCertificationId = 456;
+        const secondComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
+          id: secondComplementaryCertificationId,
+          complementaryCertificationId: secondComplementaryCertificationId,
+          key: ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
+        });
+        databaseBuilder.factory.buildComplementaryCertificationHabilitation({
+          certificationCenterId: firstCenterId,
+          complementaryCertificationId: secondComplementaryCertification.id,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const result = await certificationCenterRepository.getById({
+          id: firstCenterId,
+        });
+
+        // then
+        const firstHabilitation = domainBuilder.certification.enrolment.buildHabilitation({
+          complementaryCertificationId: firstComplementaryCertification.id,
+          key: firstComplementaryCertification.key,
+          label: firstComplementaryCertification.label,
+        });
+
+        const secondHabilitation = domainBuilder.certification.enrolment.buildHabilitation({
+          complementaryCertificationId: secondComplementaryCertification.id,
+          key: secondComplementaryCertification.key,
+          label: secondComplementaryCertification.label,
+        });
+
+        const expectedCenter = new CertificationCenter({
+          id: firstCenterId,
+          name: 'some name',
+          type: 'PRO',
+          externalId: 'EX123',
+          habilitations: [firstHabilitation, secondHabilitation],
           features: [],
           archivedAt: null,
           archivedBy: null,
