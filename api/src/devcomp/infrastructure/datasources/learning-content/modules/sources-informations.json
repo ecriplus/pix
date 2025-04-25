@@ -15,33 +15,22 @@
       "Repérer si une source d’information est fiable"
     ]
   },
-  "transitionTexts": [
-    {
-      "content": "<p>Léna et Elias discutent par SMS des Jeux asiatiques de 2029.<span aria-hidden=\"true\">🏅</span> Léna cherche à savoir si l’information donnée par Elias est vraie ou fausse.</p>",
-      "grainId": "652a469a-36b8-41ae-8cc5-1853b35d08ef"
-    },
-    {
-      "content": "<p>Léna a posé plusieurs questions à Elias pour trouver l’origine de l’information. C’est ce qu’on appelle la <strong>source d’une information. </strong>&nbsp;<span aria-hidden=\"true\">ℹ️</span><br>On vous explique tout dans la leçon suivante.</p>",
-      "grainId": "54cc6a3f-9603-4863-9ba4-052210425be2"
-    },
-    {
-      "content": "<p>Vous en savez maintenant plus sur ce qu'est une source d'information. Vérifions que vous avez compris l'essentiel.&nbsp;<span aria-hidden=\"true\">🎯</span></p>",
-      "grainId": "42e4007c-9123-4aff-806a-6d7a8de3fd0a"
-    },
-    {
-      "content": "<p>Maintenant que vous connaissez la définition d'une source d'information, voyons un exemple.</p>",
-      "grainId": "4617af32-54f4-47ac-8d0f-d4fe26925895"
-    },
-    {
-      "content": "<p>À la radio ou sur internet, une information peut être partagée pour plusieurs raisons, par différentes sources. <br>Regardons ça de plus près.</p>",
-      "grainId": "c7d94063-57ee-4e9d-b6d3-effb3e67792a"
-    },
-    {
-      "content": "<p>À vous de jouer sur des exemples concrets.</p>",
-      "grainId": "305ec524-f9c4-4745-86cf-29afb1c95e50"
-    }
-  ],
   "grains": [
+    {
+      "id": "6e73eee3-c7d8-4194-b08c-5085553aaf0d",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "40401525-ac7b-401d-ace7-0afa3cdeb2fc",
+            "type": "text",
+            "content": "<p>Léna et Elias discutent par SMS des Jeux asiatiques de 2029. 🏅 Léna cherche à savoir si l’information donnée par Elias est vraie ou fausse.</p>"
+          }
+        }
+      ]
+    },
     {
       "id": "652a469a-36b8-41ae-8cc5-1853b35d08ef",
       "type": "activity",
@@ -113,6 +102,21 @@
       ]
     },
     {
+      "id": "7087774d-21ac-4a7a-86a5-4f2c7e067d23",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "6616dc41-0667-45f3-9326-841f29b72b62",
+            "type": "text",
+            "content": "<p>Léna a posé plusieurs questions à Elias pour trouver l’origine de l’information. C’est ce qu’on appelle la <strong>source d’une information. </strong>&nbsp;ℹ️<br>On vous explique tout dans la leçon suivante.</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "54cc6a3f-9603-4863-9ba4-052210425be2",
       "type": "lesson",
       "title": "C’est quoi une source d’information ?",
@@ -160,6 +164,21 @@
       ]
     },
     {
+      "id": "425df763-0803-4b55-ad53-9ed0a04f8242",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "5fc304fc-5fc6-49f3-8170-a921b3fd8f67",
+            "type": "text",
+            "content": "<p>Vous en savez maintenant plus sur ce qu'est une source d'information. Vérifions que vous avez compris l'essentiel.&nbsp;🎯</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "42e4007c-9123-4aff-806a-6d7a8de3fd0a",
       "type": "activity",
       "title": "Définition d’une source d’information",
@@ -197,6 +216,21 @@
               }
             ],
             "solution": "3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "e42841d4-c66c-4eae-ba0d-e35ea0aff090",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "6fd96c29-72a2-4b26-aecd-5cb16115e6a0",
+            "type": "text",
+            "content": "<p>Maintenant que vous connaissez la définition d'une source d'information, voyons un exemple.</p>"
           }
         }
       ]
@@ -271,6 +305,21 @@
       ]
     },
     {
+      "id": "cac941ed-91f8-4ed0-8fdc-3fa5c154a5cf",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "bcfc36a3-15e1-4097-8ca5-e8c62b08d2d5",
+            "type": "text",
+            "content": "<p>À la radio ou sur internet, une information peut être partagée pour plusieurs raisons, par différentes sources. <br>Regardons ça de plus près.</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "c7d94063-57ee-4e9d-b6d3-effb3e67792a",
       "type": "lesson",
       "title": "Différents types de source d'informations",
@@ -329,6 +378,21 @@
             "id": "e22b6b68-a154-4b5a-a896-5b36eb6127a3",
             "type": "text",
             "content": "<h3>Certaines sources d'information sont <strong>contestables</strong>.&nbsp;<span aria-hidden=\"true\">🤨</span></h3><p>Le but de ces sources est d'influencer ou de manipuler les gens. Mais le partage de ces informations a pour principal objectif de gagner de l'argent ou du pouvoir. Ces informations peuvent donc être remises en question.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "17a074c4-b1b5-46fb-a9b8-b46b0015c5a1",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "bd9bf91d-bb84-4529-a212-06c2db761b15",
+            "type": "text",
+            "content": "<p>À vous de jouer sur des exemples concrets.</p>"
           }
         }
       ]
