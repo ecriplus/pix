@@ -160,17 +160,17 @@
   // Areas colors
   [data-area-code='1'] {
     --area-color: var(--pix-information-light);
-    --area-color-dark: var(--pix-information-dark);
+    --area-color-dark: var(--pix-error-700);
   }
 
   [data-area-code='2'] {
     --area-color: var(--pix-content-light);
-     --area-color-dark: var(--pix-content-dark);
+     --area-color-dark: var(--pix-certif-500);
   }
 
   [data-area-code='3'] {
     --area-color: var(--pix-communication-light);
-     --area-color-dark: var(--pix-communication-dark);
+     --area-color-dark: var(--pix-tertiary-900);
   }
 
   [data-area-code='4'] {

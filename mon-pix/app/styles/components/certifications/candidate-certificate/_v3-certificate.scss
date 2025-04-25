@@ -19,3 +19,15 @@
     }
   }
 }
+
+.v3-candidate-certificate-information {
+  &__congratulations {
+    @extend %pix-title-s;
+  }
+
+  &__global-level-information {
+    @extend %pix-title-xs;
+
+    margin-bottom: var(--pix-spacing-4x);
+  }
+}
