@@ -12,6 +12,14 @@ class UnableToAttachChildOrganizationToParentOrganizationError extends DomainErr
   }
 }
 
+class ArchiveCertificationCentersInBatchError extends DomainError {
+  constructor({ code = 'ARCHIVE_CERTIFICATION_CENTERS_IN_BATCH_ERROR', meta } = {}) {
+    super();
+    this.code = code;
+    this.meta = meta;
+  }
+}
+
 class DpoEmailInvalid extends DomainError {
   constructor({ code = 'DPO_EMAIL_INVALID', message = 'DPO email invalid', meta } = {}) {
     super(message);
@@ -60,6 +68,7 @@ class FeatureParamsNotProcessable extends DomainError {
 }
 
 export {
+  ArchiveCertificationCentersInBatchError,
   DpoEmailInvalid,
   FeatureNotFound,
   FeatureParamsNotProcessable,
