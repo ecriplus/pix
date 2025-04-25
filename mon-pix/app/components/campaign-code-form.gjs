@@ -96,7 +96,7 @@ export default class CampaignCodeForm extends Component {
         <PixCode
           @id="campaign-code"
           @length="9"
-          @requiredLabel={{t "common.forms.mandatory"}}
+          @requiredLabel={{t "common.form.mandatory"}}
           @screenReaderOnly={{true}}
           @value={{this.certificateVerificationCode}}
           @validationStatus={{this.validationStatus}}

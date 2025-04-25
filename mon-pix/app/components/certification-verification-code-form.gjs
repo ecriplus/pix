@@ -67,7 +67,7 @@ export default class CertificationVerificationCodeForm extends Component {
     <form class="fill-in-certificate-verification-code__form" autocomplete="off">
       <PixCode
         @length="10"
-        @requiredLabel={{t "common.forms.mandatory"}}
+        @requiredLabel={{t "common.form.mandatory"}}
         @subLabel={{t "pages.fill-in-certificate-verification-code.sub-label"}}
         @value={{this.certificateVerificationCode}}
         @validationStatus={{this.status}}
