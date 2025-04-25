@@ -6,6 +6,7 @@ import * as userRepository from '../../../identity-access-management/infrastruct
 import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as campaignParticipationRepository from '../../../prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
 import * as targetProfileRepository from '../../../prescription/target-profile/infrastructure/repositories/target-profile-repository.js';
+import * as targetProfileSummaryForAdminRepository from '../../../prescription/target-profile/infrastructure/repositories/target-profile-summary-for-admin-repository.js';
 import * as knowledgeElementRepository from '../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as skillRepository from '../../../shared/infrastructure/repositories/skill-repository.js';
 import * as tubeRepository from '../../../shared/infrastructure/repositories/tube-repository.js';
@@ -21,6 +22,7 @@ const dependencies = {
   campaignParticipationRepository,
   knowledgeElementRepository,
   targetProfileRepository,
+  targetProfileSummaryForAdminRepository,
   tubeRepository,
   targetProfileTrainingRepository,
   skillRepository,

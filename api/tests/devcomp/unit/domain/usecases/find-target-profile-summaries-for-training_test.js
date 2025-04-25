@@ -1,5 +1,5 @@
-import { findTargetProfileSummariesForTraining } from '../../../../lib/domain/usecases/find-target-profile-summaries-for-training.js';
-import { expect, sinon } from '../../../test-helper.js';
+import { findTargetProfileSummariesForTraining } from '../../../../../src/devcomp/domain/usecases/find-target-profile-summaries-for-training.js';
+import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | find-target-profile-summaries-for-training', function () {
   it('should call the repository with the right arguments and return summaries', async function () {

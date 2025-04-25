@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import * as targetProfileSummaryForAdminSerializer from '../../../prescription/target-profile/infrastructure/serializers/jsonapi/target-profile-summary-for-admin-serializer.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { usecases } from '../../domain/usecases/index.js';
@@ -19,7 +18,7 @@ const findTargetProfileSummaries = async function (
   dependencies = { targetProfileSummaryForAdminSerializer },
 ) {
   const { trainingId } = request.params;
-  const targetProfileSummaries = await libUsecases.findTargetProfileSummariesForTraining({ trainingId });
+  const targetProfileSummaries = await usecases.findTargetProfileSummariesForTraining({ trainingId });
   return dependencies.targetProfileSummaryForAdminSerializer.serialize(targetProfileSummaries);
 };
 
