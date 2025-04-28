@@ -1,5 +1,25 @@
 # Pix Changelog
 
+## v5.99.0 (28/04/2025)
+
+
+### :rocket: Amélioration
+- [#12138](https://github.com/1024pix/pix/pull/12138) [FEATURE] Finaliser la conception de la page de certificat candidat sur Pix App (PIX-17481).
+- [#12130](https://github.com/1024pix/pix/pull/12130) [FEATURE] Créer le composant pour télécharger le PDF du certificat sur Pix App (PIX-17594).
+- [#12123](https://github.com/1024pix/pix/pull/12123) [FEATURE] Enregistrer les événements `PASSAGE_TERMINATED` sur le usecase `record-passage-events` (PIX-17599).
+
+### :building_construction: Tech
+- [#12134](https://github.com/1024pix/pix/pull/12134) [TECH] Remplacer les "inject as service" pour appeler directement service (PIX-17624).
+
+### :bug: Correction
+- [#12132](https://github.com/1024pix/pix/pull/12132) [BUGFIX] Vérifier l'existence du learner avant de créer une mission.
+
+### :arrow_up: Montée de version
+- [#12149](https://github.com/1024pix/pix/pull/12149) [BUMP] Update dependency @1024pix/pix-ui to ^55.16.6 (certif).
+- [#12148](https://github.com/1024pix/pix/pull/12148) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.2 (orga).
+- [#12147](https://github.com/1024pix/pix/pull/12147) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.2 (mon-pix).
+- [#12131](https://github.com/1024pix/pix/pull/12131) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.2 (dossier racine).
+
 ## v5.98.0 (25/04/2025)
 
 
