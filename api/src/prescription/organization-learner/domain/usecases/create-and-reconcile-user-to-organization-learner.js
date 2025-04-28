@@ -1,17 +1,17 @@
 import lodash from 'lodash';
 const { isNil } = lodash;
 
-import { createAccountCreationEmail } from '../../../src/identity-access-management/domain/emails/create-account-creation.email.js';
-import { User } from '../../../src/identity-access-management/domain/models/User.js';
-import { STUDENT_RECONCILIATION_ERRORS } from '../../../src/shared/domain/constants.js';
-import { EntityValidationError } from '../../../src/shared/domain/errors.js';
-import { AlreadyRegisteredEmailError } from '../../../src/shared/domain/errors.js';
+import { createAccountCreationEmail } from '../../../../identity-access-management/domain/emails/create-account-creation.email.js';
+import { User } from '../../../../identity-access-management/domain/models/User.js';
+import { STUDENT_RECONCILIATION_ERRORS } from '../../../../shared/domain/constants.js';
+import { EntityValidationError } from '../../../../shared/domain/errors.js';
+import { AlreadyRegisteredEmailError } from '../../../../shared/domain/errors.js';
 import {
   AlreadyRegisteredUsernameError,
   CampaignCodeError,
   OrganizationLearnerAlreadyLinkedToUserError,
-} from '../../../src/shared/domain/errors.js';
-import { urlBuilder } from '../../../src/shared/infrastructure/utils/url-builder.js';
+} from '../../../../shared/domain/errors.js';
+import { urlBuilder } from '../../../../shared/infrastructure/utils/url-builder.js';
 
 const createAndReconcileUserToOrganizationLearner = async function ({
   campaignCode,
@@ -22,7 +22,7 @@ const createAndReconcileUserToOrganizationLearner = async function ({
   campaignRepository,
   emailRepository,
   emailValidationDemandRepository,
-  organizationLearnerRepository,
+  libOrganizationLearnerRepository,
   userRepository,
   userToCreateRepository,
   cryptoService,
@@ -41,7 +41,7 @@ const createAndReconcileUserToOrganizationLearner = async function ({
     await userReconciliationService.findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo({
       organizationId: campaign.organizationId,
       reconciliationInfo: userAttributes,
-      organizationLearnerRepository,
+      organizationLearnerRepository: libOrganizationLearnerRepository,
       userRepository,
       obfuscationService,
     });
@@ -76,7 +76,7 @@ const createAndReconcileUserToOrganizationLearner = async function ({
     organizationLearnerId: matchedOrganizationLearner.id,
     user: domainUser,
     authenticationMethodRepository,
-    organizationLearnerRepository,
+    organizationLearnerRepository: libOrganizationLearnerRepository,
     userToCreateRepository,
   });
 

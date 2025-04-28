@@ -3,7 +3,6 @@ import dayjs from 'dayjs';
 import * as studentInformationForAccountRecoverySerializer from '../../../src/identity-access-management/infrastructure/serializers/jsonapi/student-information-for-account-recovery-serializer.js';
 import * as scoOrganizationLearnerSerializer from '../../../src/prescription/learner-management/infrastructure/serializers/jsonapi/sco-organization-learner-serializer.js';
 import { DomainTransaction } from '../../../src/shared/domain/DomainTransaction.js';
-import * as requestResponseUtils from '../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 
 const generateUsername = async function (request, h, dependencies = { scoOrganizationLearnerSerializer }) {
@@ -27,36 +26,6 @@ const generateUsername = async function (request, h, dependencies = { scoOrganiz
   return h
     .response(dependencies.scoOrganizationLearnerSerializer.serializeWithUsernameGeneration(scoOrganizationLearner))
     .code(200);
-};
-
-const createAndReconcileUserToOrganizationLearner = async function (
-  request,
-  h,
-  dependencies = {
-    scoOrganizationLearnerSerializer,
-    requestResponseUtils,
-  },
-) {
-  const payload = request.payload.data.attributes;
-  const userAttributes = {
-    firstName: payload['first-name'],
-    lastName: payload['last-name'],
-    birthdate: payload['birthdate'],
-    email: payload.email,
-    username: payload.username,
-    withUsername: payload['with-username'],
-  };
-  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
-
-  await usecases.createAndReconcileUserToOrganizationLearner({
-    userAttributes,
-    password: payload.password,
-    campaignCode: payload['campaign-code'],
-    locale,
-    i18n: request.i18n,
-  });
-
-  return h.response().code(204);
 };
 
 const updatePassword = async function (request, h, dependencies = { scoOrganizationLearnerSerializer }) {
@@ -139,7 +108,6 @@ const batchGenerateOrganizationLearnersUsernameWithTemporaryPassword = async fun
 
 const scoOrganizationLearnerController = {
   generateUsername,
-  createAndReconcileUserToOrganizationLearner,
   updatePassword,
   generateUsernameWithTemporaryPassword,
   checkScoAccountRecovery,
