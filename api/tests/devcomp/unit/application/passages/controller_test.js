@@ -8,11 +8,13 @@ import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Application | Passages | Controller', function () {
   describe('#create', function () {
-    it('should call createPassage use-case and return serialized passage', async function () {
+    it('should call createPassage and recordPassageEvents use-cases and return serialized passage', async function () {
       // given
       const serializedPassage = Symbol('serialized modules');
       const moduleSlug = Symbol('module-slug');
-      const passage = Symbol('passage');
+      const passage = {
+        id: Symbol('passageId'),
+      };
       const sequenceNumber = CREATE_PASSAGE_SEQUENCE_NUMBER;
       const userId = Symbol('user-id');
       const passageSerializer = {
@@ -34,12 +36,19 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
         .stub(requestResponseUtils, 'extractTimestampFromRequest')
         .returns(requestTimestamp);
 
+      const passageStartedEvent = {
+        occurredAt: new Date(requestTimestamp),
+        passageId: passage.id,
+        sequenceNumber,
+        contentHash: 'NOT_IMPLEMENTED',
+        type: 'PASSAGE_STARTED',
+      };
+
       const usecases = {
         createPassage: sinon.stub(),
+        recordPassageEvents: sinon.stub(),
       };
-      usecases.createPassage
-        .withArgs({ moduleSlug, userId })
-        .returns(passage);
+      usecases.createPassage.withArgs({ moduleSlug, userId }).returns(passage);
 
       // when
       await passageController.create({ payload: { data: { attributes: { 'module-id': moduleSlug } } } }, hStub, {
@@ -50,6 +59,7 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
       // then
       expect(created).to.have.been.called;
       expect(extractTimestampStub).to.have.been.calledOnce;
+      expect(usecases.recordPassageEvents).to.have.been.calledOnceWith({ events: [passageStartedEvent] });
     });
   });
 

@@ -12,11 +12,18 @@ const create = async function (request, h, { usecases, passageSerializer }) {
     moduleSlug,
     userId,
   });
+  const version = 'NOT_IMPLEMENTED';
 
   const passageStartedData = {
-    contentHash: module.version,
+    contentHash: version,
     occurredAt: new Date(requestTimestamp),
-  });
+    passageId: passage.id,
+    sequenceNumber,
+    type: 'PASSAGE_STARTED',
+  };
+
+  await usecases.recordPassageEvents({ events: [passageStartedData] });
+
   const serializedPassage = passageSerializer.serialize(passage);
   return h.response(serializedPassage).created();
 };
