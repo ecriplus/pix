@@ -5,7 +5,10 @@ import {
   FlashcardsStartedEvent,
   FlashcardsVersoSeenEvent,
 } from '../../../../../src/devcomp/domain/models/passage-events/flashcard-events.js';
-import { PassageTerminatedEvent } from '../../../../../src/devcomp/domain/models/passage-events/passage-events.js';
+import {
+  PassageStartedEvent,
+  PassageTerminatedEvent,
+} from '../../../../../src/devcomp/domain/models/passage-events/passage-events.js';
 import { recordPassageEvents } from '../../../../../src/devcomp/domain/usecases/record-passage-events.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
@@ -64,6 +67,14 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
       type: 'PASSAGE_TERMINATED',
     };
 
+    const passageStartedEvent = {
+      occurredAt: new Date(),
+      passageId: 2,
+      sequenceNumber: 1,
+      contentHash: 'module-version',
+      type: 'PASSAGE_STARTED',
+    };
+
     const events = [
       flashcardsVersoSeenEvent,
       flashcardsStartedEvent,
@@ -71,6 +82,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
       flashcardsRectoReviewedEvent,
       flashcardsRetriedEvent,
       passageTerminatedEvent,
+      passageStartedEvent,
     ];
 
     const passageEventRepositoryStub = {
@@ -87,6 +99,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
     const flashcardsRectoReviewedEventPassageEvent = new FlashcardsRectoReviewedEvent(flashcardsRectoReviewedEvent);
     const flashcardsRetriedEventPassageEvent = new FlashcardsRetriedEvent(flashcardsRetriedEvent);
     const passageTerminatedPassageEvent = new PassageTerminatedEvent(passageTerminatedEvent);
+    const passageStartedPassageEvent = new PassageStartedEvent(passageStartedEvent);
 
     expect(passageEventRepositoryStub.record.getCall(0)).to.have.been.calledWithExactly(
       flashcardsVersoSeenPassageEvent,
@@ -102,6 +115,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
       flashcardsRetriedEventPassageEvent,
     );
     expect(passageEventRepositoryStub.record.getCall(5)).to.have.been.calledWithExactly(passageTerminatedPassageEvent);
+    expect(passageEventRepositoryStub.record.getCall(6)).to.have.been.calledWithExactly(passageStartedPassageEvent);
   });
   context('when type of passage event does not exist', function () {
     it('should throw an error', async function () {

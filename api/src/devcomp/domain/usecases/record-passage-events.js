@@ -7,7 +7,7 @@ import {
   FlashcardsStartedEvent,
   FlashcardsVersoSeenEvent,
 } from '../models/passage-events/flashcard-events.js';
-import { PassageTerminatedEvent } from '../models/passage-events/passage-events.js';
+import { PassageStartedEvent, PassageTerminatedEvent } from '../models/passage-events/passage-events.js';
 
 const recordPassageEvents = async function ({ events, passageEventRepository }) {
   const passageEvents = events.map(_buildPassageEvent);
@@ -17,6 +17,8 @@ const recordPassageEvents = async function ({ events, passageEventRepository }) 
 
 function _buildPassageEvent(event) {
   switch (event.type) {
+    case 'PASSAGE_STARTED':
+      return new PassageStartedEvent(event);
     case 'PASSAGE_TERMINATED':
       return new PassageTerminatedEvent(event);
     case 'FLASHCARDS_STARTED':
