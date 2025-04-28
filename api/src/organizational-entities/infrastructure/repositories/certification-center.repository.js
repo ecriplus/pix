@@ -7,23 +7,12 @@ import { CertificationCenter } from '../../domain/models/CertificationCenter.js'
 
 export async function getById({ id }) {
   const knexConn = DomainTransaction.getConnection();
-  const center = await knexConn
+  const certificationCenter = await knexConn
     .select({
       id: 'certification-centers.id',
       name: 'certification-centers.name',
       type: 'certification-centers.type',
       externalId: 'certification-centers.externalId',
-      habilitations: knexConn.raw(
-        `(SELECT json_agg(json_build_object(
-        'complementaryCertificationId', cch."complementaryCertificationId",
-        'key', cc."key",
-        'label', cc."label"
-          ) ORDER BY cch."complementaryCertificationId")
-          FROM "complementary-certification-habilitations" cch
-          JOIN "complementary-certifications" cc
-            ON cch."complementaryCertificationId" = cc."id"
-        WHERE cch."complementaryCertificationId" IS NOT NULL)`,
-      ),
       features: knexConn.raw('array_remove(array_agg(DISTINCT "certificationCenterFeatures"."key"), NULL)'),
       createdAt: 'certification-centers.createdAt',
       updatedAt: 'certification-centers.updatedAt',
@@ -65,11 +54,25 @@ export async function getById({ id }) {
     .groupBy('certification-centers.id')
     .first();
 
-  if (!center) {
+  if (!certificationCenter) {
     throw new NotFoundError('Center not found');
   }
 
-  return _toDomain(center);
+  const habilitationsDTO = await knexConn('complementary-certifications')
+    .select([
+      'complementary-certifications.id',
+      'complementary-certifications.key',
+      'complementary-certifications.label',
+    ])
+    .join(
+      'complementary-certification-habilitations',
+      'complementary-certification-habilitations.complementaryCertificationId',
+      'complementary-certifications.id',
+    )
+    .where('complementary-certification-habilitations.certificationCenterId', certificationCenter.id)
+    .orderBy('complementary-certifications.id');
+
+  return _toDomain({ certificationCenter, habilitationsDTO });
 }
 
 export const findPaginatedFiltered = async ({ filter, page }) => {
@@ -83,7 +86,7 @@ export const findPaginatedFiltered = async ({ filter, page }) => {
 
   const { results: certificationCenters, pagination } = await fetchPage(query, page);
 
-  return { models: certificationCenters.map(_toDomain), pagination };
+  return { models: certificationCenters.map((certificationCenter) => _toDomain({ certificationCenter })), pagination };
 };
 
 function _getCertificationCenterFeatures({ id }) {
@@ -97,10 +100,10 @@ function _getCertificationCenterFeatures({ id }) {
   };
 }
 
-const _toDomain = (certificationCenter) => {
-  const habilitations = certificationCenter?.habilitations
-    ? certificationCenter.habilitations.map(
-        (dbComplementaryCertification) => new Habilitation(dbComplementaryCertification),
+const _toDomain = ({ certificationCenter, habilitationsDTO }) => {
+  const habilitations = habilitationsDTO
+    ? habilitationsDTO.map(
+        (habilitationDTO) => new Habilitation({ complementaryCertificationId: habilitationDTO.id, ...habilitationDTO }),
       )
     : [];
   return new CertificationCenter({
