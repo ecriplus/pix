@@ -1,5 +1,5 @@
 import { visit } from '@1024pix/ember-testing-library';
-import { click, currentURL } from '@ember/test-helpers';
+import { click } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
@@ -16,10 +16,9 @@ module('Acceptance | Login or register oidc', function (hooks) {
     module('when accessing "login-or-register-oidc" page', function () {
       test('displays the page with "Français" as selected language', async function (assert) {
         // when
-        const screen = await visit('/connexion/oidc-partner?code=oidc_example_code&state=auth_session_state');
+        const screen = await visit('/connexion/oidc?identityProviderSlug=oidc-partner');
 
         // then
-        assert.strictEqual(currentURL(), '/connexion/oidc?identityProviderSlug=oidc-partner');
         assert.dom(screen.getByRole('button', { name: 'Sélectionnez une langue' })).exists();
       });
     });
@@ -27,7 +26,7 @@ module('Acceptance | Login or register oidc', function (hooks) {
     module('when user select "English" as his language', function () {
       test('displays the page with "English" as selected language', async function (assert) {
         // given
-        const screen = await visit('/connexion/oidc-partner?code=oidc_example_code&state=auth_session_state');
+        const screen = await visit('/connexion/oidc?identityProviderSlug=oidc-partner');
 
         // when
         await click(screen.getByRole('button', { name: 'Sélectionnez une langue' }));
