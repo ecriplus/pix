@@ -1,7 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
+import PixToastContainer from '@1024pix/pix-ui/components/pix-toast-container';
 import { triggerEvent } from '@ember/test-helpers';
-import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
 import CertificationCentersBatchArchive from 'pix-admin/components/administration/deployment/certification-centers-batch-archive';
 import { module, test } from 'qunit';
@@ -11,96 +10,91 @@ import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | administration/certification-centers-batch-archive', function (hooks) {
   setupIntlRenderingTest(hooks);
-  setupMirage(hooks);
-
-  let store, adapter, notificationSuccessStub, saveAdapterStub, notificationErrorStub;
 
   hooks.beforeEach(function () {
-    store = this.owner.lookup('service:store');
-    adapter = store.adapterFor('certification-centers-batch-archive');
-    saveAdapterStub = sinon.stub(adapter, 'archiveCertificationCenters');
-    notificationSuccessStub = sinon.stub();
-    notificationErrorStub = sinon.stub().returns();
+    sinon.stub(window, 'fetch');
+  });
+
+  hooks.afterEach(function () {
+    sinon.restore();
   });
 
   module('when batch archive succeeds', function () {
     test('it displays a success notification', async function (assert) {
       // given
       const file = new Blob(['foo'], { type: `valid-file` });
-      class NotificationsStub extends Service {
-        sendSuccessNotification = notificationSuccessStub;
-      }
-      this.owner.register('service:pixToast', NotificationsStub);
-      saveAdapterStub.withArgs(file).resolves();
+      window.fetch.resolves(
+        _fetchResponse({
+          status: 204,
+        }),
+      );
 
       // when
-      const screen = await render(<template><CertificationCentersBatchArchive /></template>);
+      const screen = await render(<template><CertificationCentersBatchArchive /><PixToastContainer /></template>);
       const input = await screen.findByLabelText(
         t('components.administration.certification-centers-batch-archive.upload-button'),
       );
       await triggerEvent(input, 'change', { files: [file] });
 
       // then
-      assert.true(
-        notificationSuccessStub.calledWith({
-          message: t('components.administration.certification-centers-batch-archive.notifications.success'),
-        }),
+      assert.ok(
+        await screen.findByText(
+          t('components.administration.certification-centers-batch-archive.notifications.success'),
+        ),
       );
     });
   });
 
   module('when batch archiving of certification center fails', function () {
-    test.only('it displays an error notification', async function (assert) {
+    test('it displays an error notification', async function (assert) {
       // given
-      this.server.post(
-        '/admin/certification-centers/batch-archive',
-        () =>
-          new Response(
-            422,
-            {},
-            {
-              errors: [
-                {
-                  status: '422',
-                  title: "Un souci avec l'archivage des centres de certification",
-                  code: 'ARCHIVE_CERTIFICATION_CENTERS_IN_BATCH_ERROR',
-                  detail: `Erreur lors de l'archivage`,
-                  meta: {
-                    currentLine: 2,
-                    totalLines: 4,
-                  },
-                },
-              ],
-            },
-          ),
-        412,
-      );
       const file = new Blob(['foo'], { type: `valid-file` });
-      class NotificationsStub extends Service {
-        sendErrorNotification = notificationErrorStub;
-      }
-      this.owner.register('service:pixToast', NotificationsStub);
+
+      window.fetch.resolves(
+        _fetchResponse({
+          body: {
+            errors: [
+              {
+                status: '422',
+                title: "Un souci avec l'archivage des centres de certification",
+                code: 'ARCHIVE_CERTIFICATION_CENTERS_IN_BATCH_ERROR',
+                detail: `Erreur lors de l'archivage`,
+                meta: {
+                  currentLine: 2,
+                  totalLines: 4,
+                },
+              },
+            ],
+          },
+          status: 422,
+        }),
+      );
 
       // when
-      const screen = await render(<template><CertificationCentersBatchArchive /></template>);
+      const screen = await render(<template><CertificationCentersBatchArchive /><PixToastContainer /></template>);
       const input = await screen.findByLabelText(
         t('components.administration.certification-centers-batch-archive.upload-button'),
       );
       await triggerEvent(input, 'change', { files: [file] });
 
       // then
-      assert.ok(notificationErrorStub.called);
-      assert.true(
-        notificationSuccessStub.calledWith({
-          message: t(
-            'components.administration.certification-centers-batch-archive.notifications.errors.error-in-batch',
-            {
-              currentLine: 2,
-              totalLines: 4,
-            },
-          ),
-        }),
+      assert.ok(
+        await screen.findByText(
+          t('components.administration.certification-centers-batch-archive.notifications.errors.error-in-batch', {
+            currentLine: 2,
+            totalLines: 4,
+          }),
+        ),
       );
     });
   });
 });
+
+function _fetchResponse({ body, status }) {
+  return new window.Response(JSON.stringify(body), {
+    status,
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+}
