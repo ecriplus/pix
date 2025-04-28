@@ -10,8 +10,11 @@ const create = async function (request, h, { usecases, passageSerializer }) {
   const sequenceNumber = CREATE_PASSAGE_SEQUENCE_NUMBER;
   const passage = await usecases.createPassage({
     moduleSlug,
-    sequenceNumber,
     userId,
+  });
+
+  const passageStartedData = {
+    contentHash: module.version,
     occurredAt: new Date(requestTimestamp),
   });
   const serializedPassage = passageSerializer.serialize(passage);

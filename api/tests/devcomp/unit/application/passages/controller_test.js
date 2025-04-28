@@ -38,7 +38,7 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
         createPassage: sinon.stub(),
       };
       usecases.createPassage
-        .withArgs({ moduleSlug, sequenceNumber, userId, occurredAt: new Date(requestTimestamp) })
+        .withArgs({ moduleSlug, userId })
         .returns(passage);
 
       // when
