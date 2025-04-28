@@ -17,114 +17,171 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
   });
 
   describe('GET /api/campaigns/{campaignId}/participations', function () {
-    it('returns the list of all participations of campaign with an HTTP status code 200', async function () {
-      // given
-      const orgaInJurisdiction = databaseBuilder.factory.buildOrganization({ name: 'orga-in-jurisdiction' });
-      databaseBuilder.factory.buildOrganization({ name: 'orga-not-in-jurisdiction' });
+    context('when campaign type is ASSESSMENT', function () {
+      it('returns the list of all participations of campaign with tubes and masteryRate with an HTTP status code 200', async function () {
+        // given
+        const orgaInJurisdiction = databaseBuilder.factory.buildOrganization({ name: 'orga-in-jurisdiction' });
+        databaseBuilder.factory.buildOrganization({ name: 'orga-not-in-jurisdiction' });
 
-      const tag = databaseBuilder.factory.buildTag();
-      databaseBuilder.factory.buildOrganizationTag({ organizationId: orgaInJurisdiction.id, tagId: tag.id });
+        const tag = databaseBuilder.factory.buildTag();
+        databaseBuilder.factory.buildOrganizationTag({ organizationId: orgaInJurisdiction.id, tagId: tag.id });
 
-      const clientId = 'client';
-      databaseBuilder.factory.buildClientApplication({
-        clientId: 'client',
-        jurisdiction: { rules: [{ name: 'tags', value: [tag.name] }] },
-      });
+        const clientId = 'client';
+        databaseBuilder.factory.buildClientApplication({
+          clientId: 'client',
+          jurisdiction: { rules: [{ name: 'tags', value: [tag.name] }] },
+        });
 
-      const frameworkId = databaseBuilder.factory.learningContent.buildFramework().id;
-      const areaId = databaseBuilder.factory.learningContent.buildArea({ frameworkId }).id;
-      const competenceId = databaseBuilder.factory.learningContent.buildCompetence({ areaId }).id;
-      const tube = databaseBuilder.factory.learningContent.buildTube({ competenceId });
-      const skillId = databaseBuilder.factory.learningContent.buildSkill({ tubeId: tube.id, status: 'actif' }).id;
+        const frameworkId = databaseBuilder.factory.learningContent.buildFramework().id;
+        const areaId = databaseBuilder.factory.learningContent.buildArea({ frameworkId }).id;
+        const competenceId = databaseBuilder.factory.learningContent.buildCompetence({ areaId }).id;
+        const tube = databaseBuilder.factory.learningContent.buildTube({ competenceId });
+        const skillId = databaseBuilder.factory.learningContent.buildSkill({ tubeId: tube.id, status: 'actif' }).id;
 
-      const { id: userId } = databaseBuilder.factory.buildUser({
-        firstName: 'user firstname 1',
-        lastName: 'user lastname 1',
-      });
-      const organizationLearner1 = databaseBuilder.factory.buildOrganizationLearner({
-        organizationId: orgaInJurisdiction.id,
-        userId,
-        firstName: 'firstname 1',
-        lastName: 'lastname 1',
-      });
-      const campaign = databaseBuilder.factory.buildCampaign({
-        type: CampaignTypes.ASSESSMENT,
-        organizationId: orgaInJurisdiction.id,
-      });
-      databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId });
-      const participation1 = databaseBuilder.factory.buildCampaignParticipation({
-        campaignId: campaign.id,
-        status: CampaignParticipationStatuses.SHARED,
-        organizationLearnerId: organizationLearner1.id,
-        masteryRate: 0.1,
-        pixScore: 42,
-        validatedSkillsCount: 10,
-        userId,
-        participantExternalId: 'external id 1',
-        createdAt: new Date('2025-01-02'),
-        sharedAt: new Date('2025-01-03'),
-      });
-      const ke = databaseBuilder.factory.buildKnowledgeElement({
-        status: KnowledgeElement.StatusType.VALIDATED,
-        skillId,
-        userId: participation1.userId,
-      });
+        const { id: userId } = databaseBuilder.factory.buildUser({
+          firstName: 'user firstname 1',
+          lastName: 'user lastname 1',
+        });
+        const organizationLearner1 = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: orgaInJurisdiction.id,
+          userId,
+          firstName: 'firstname 1',
+          lastName: 'lastname 1',
+        });
+        const campaign = databaseBuilder.factory.buildCampaign({
+          type: CampaignTypes.ASSESSMENT,
+          organizationId: orgaInJurisdiction.id,
+        });
+        databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId });
+        const participation1 = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign.id,
+          status: CampaignParticipationStatuses.SHARED,
+          organizationLearnerId: organizationLearner1.id,
+          masteryRate: 0.1,
+          validatedSkillsCount: 10,
+          userId,
+          participantExternalId: 'external id 1',
+          createdAt: new Date('2025-01-02'),
+          sharedAt: new Date('2025-01-03'),
+        });
+        const ke = databaseBuilder.factory.buildKnowledgeElement({
+          status: KnowledgeElement.StatusType.VALIDATED,
+          skillId,
+          userId: participation1.userId,
+        });
 
-      databaseBuilder.factory.buildKnowledgeElementSnapshot({
-        campaignParticipationId: participation1.id,
-        snapshot: new KnowledgeElementCollection([ke]).toSnapshot(),
-      });
+        databaseBuilder.factory.buildKnowledgeElementSnapshot({
+          campaignParticipationId: participation1.id,
+          snapshot: new KnowledgeElementCollection([ke]).toSnapshot(),
+        });
 
-      const organizationLearner2 = databaseBuilder.factory.buildOrganizationLearner({
-        organizationId: organizationLearner1.organizationId,
-      });
-      const participation2 = databaseBuilder.factory.buildCampaignParticipation({
-        campaignId: campaign.id,
-        status: CampaignParticipationStatuses.STARTED,
-        organizationLearnerId: organizationLearner2.id,
-        userId: organizationLearner2.userId,
-        masteryRate: null,
-      });
+        const organizationLearner2 = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: organizationLearner1.organizationId,
+        });
+        const participation2 = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign.id,
+          status: CampaignParticipationStatuses.STARTED,
+          organizationLearnerId: organizationLearner2.id,
+          userId: organizationLearner2.userId,
+          masteryRate: null,
+        });
 
-      await databaseBuilder.commit();
+        await databaseBuilder.commit();
 
-      const options = {
-        method: 'GET',
-        url: `/api/campaigns/${campaign.id}/participations`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeaderForApplication(
+        const options = {
+          method: 'GET',
+          url: `/api/campaigns/${campaign.id}/participations`,
+          headers: {
+            authorization: generateValidRequestAuthorizationHeaderForApplication(
+              clientId,
+              'pix-client',
+              'campaigns meta',
+            ),
+          },
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result).to.deep.members([
+          domainBuilder.maddo.buildCampaignParticipation({
+            ...participation1,
             clientId,
-            'pix-client',
-            'campaigns meta',
-          ),
-        },
-      };
+            tubes: [
+              domainBuilder.maddo.buildTubeCoverage({
+                id: tube.id,
+                competenceId,
+                maxLevel: 2,
+                reachedLevel: 2,
+                practicalDescription: tube.practicalDescription_i18n['fr'],
+                practicalTitle: tube.practicalTitle_i18n['fr'],
+              }),
+            ],
+          }),
+          domainBuilder.maddo.buildCampaignParticipation({
+            ...participation2,
+            clientId,
+          }),
+        ]);
+      });
+    });
 
-      // when
-      const response = await server.inject(options);
+    context('when campaign type is PROFILES_COLLECTION', function () {
+      it('returns the list of all participations of campaign with  with an HTTP status code 200', async function () {
+        // given
+        const organization = databaseBuilder.factory.buildOrganization({ name: 'orga-in-jurisdiction' });
 
-      // then
-      expect(response.statusCode).to.equal(200);
-      expect(response.result).to.deep.members([
-        domainBuilder.maddo.buildCampaignParticipation({
-          ...participation1,
-          clientId,
-          tubes: [
-            domainBuilder.maddo.buildTubeCoverage({
-              id: tube.id,
-              competenceId,
-              maxLevel: 2,
-              reachedLevel: 2,
-              practicalDescription: tube.practicalDescription_i18n['fr'],
-              practicalTitle: tube.practicalTitle_i18n['fr'],
-            }),
-          ],
-        }),
-        domainBuilder.maddo.buildCampaignParticipation({
-          ...participation2,
-          clientId,
-        }),
-      ]);
+        const tag = databaseBuilder.factory.buildTag();
+        databaseBuilder.factory.buildOrganizationTag({ organizationId: organization.id, tagId: tag.id });
+
+        const clientId = 'client';
+        databaseBuilder.factory.buildClientApplication({
+          clientId: 'client',
+          jurisdiction: { rules: [{ name: 'tags', value: [tag.name] }] },
+        });
+        const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: organization.id,
+        });
+        const campaign = databaseBuilder.factory.buildCampaign({
+          type: CampaignTypes.PROFILES_COLLECTION,
+          organizationId: organization.id,
+        });
+        const participation = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign.id,
+          status: CampaignParticipationStatuses.SHARED,
+          organizationLearnerId: organizationLearner.id,
+          userId: organizationLearner.userId,
+          pixScore: 42,
+        });
+
+        await databaseBuilder.commit();
+
+        const options = {
+          method: 'GET',
+          url: `/api/campaigns/${campaign.id}/participations`,
+          headers: {
+            authorization: generateValidRequestAuthorizationHeaderForApplication(
+              clientId,
+              'pix-client',
+              'campaigns meta',
+            ),
+          },
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result).to.deep.members([
+          domainBuilder.maddo.buildCampaignParticipation({
+            ...participation,
+            clientId,
+          }),
+        ]);
+      });
     });
   });
 });

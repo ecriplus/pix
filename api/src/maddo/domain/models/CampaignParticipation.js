@@ -13,6 +13,7 @@ class CampaignParticipation {
     clientId,
     masteryRate,
     tubes,
+    pixScore,
   } = {}) {
     this.id = id;
     this.status = status;
@@ -26,6 +27,7 @@ class CampaignParticipation {
     this.status = status;
     this.masteryRate = masteryRate;
     this.tubes = tubes;
+    this.pixScore = pixScore;
   }
 }
 

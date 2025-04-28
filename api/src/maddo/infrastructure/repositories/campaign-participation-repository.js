@@ -17,6 +17,7 @@ function toDomain(rawCampaignParticipation, clientId, campaignId) {
     userId: rawCampaignParticipation.userId,
     masteryRate: rawCampaignParticipation.masteryRate,
     tubes: rawCampaignParticipation.tubes?.map((tube) => new TubeCoverage(tube)),
+    pixScore: rawCampaignParticipation.pixScore,
     clientId,
     campaignId,
   });
