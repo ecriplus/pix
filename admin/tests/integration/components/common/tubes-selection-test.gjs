@@ -1,4 +1,4 @@
-import { clickByName, render, waitFor } from '@1024pix/ember-testing-library';
+import { clickByName, render } from '@1024pix/ember-testing-library';
 import { click, triggerEvent } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import TubesSelection from 'pix-admin/components/common/tubes-selection';
@@ -160,18 +160,13 @@ module('Integration | Component | Common::TubesSelection', function (hooks) {
   });
 
   module('#import tubes preselection or target profile export', function () {
-    test('it should display a button to import JSON file', function (assert) {
+    test('it should display a button to import JSON file', async function (assert) {
       // then
-      assert.dom(screen.getByRole('textbox')).hasAttribute('placeholder', 'Pix');
-      assert.dom(screen.getByText('Importer un fichier JSON')).exists();
+      assert.dom(await screen.findByPlaceholderText('Pix')).exists();
+      assert.dom(await screen.findByText('Importer un fichier JSON')).exists();
     });
 
-    module('when import succeeds', function (hooks) {
-      let notificationSuccessStub;
-      hooks.beforeEach(function () {
-        const notificationService = this.owner.lookup('service:pixToast');
-        notificationSuccessStub = sinon.stub(notificationService, 'sendSuccessNotification');
-      });
+    module('when import succeeds', function () {
       test('it should update areas and skills list', async function (assert) {
         // given
         const jsonFileContent = [
@@ -194,10 +189,9 @@ module('Integration | Component | Common::TubesSelection', function (hooks) {
           files: [new File(jsonFileContent, 'file-to-upload.json')],
         });
 
-        await waitFor(() => notificationSuccessStub.calledOnce);
         // then
-        assert.dom(screen.getByRole('textbox')).hasAttribute('placeholder', 'Pix plus');
-        assert.dom(screen.getByText('2/3 sujet(s) sélectionné(s)')).exists();
+        assert.dom(await screen.findByPlaceholderText('Pix plus')).exists();
+        assert.dom(await screen.findByText('2/3 sujet(s) sélectionné(s)')).exists();
       });
     });
   });
