@@ -1,9 +1,9 @@
 export class TubeCoverage {
-  constructor({ id, competenceId, maxLevel, meanLevel, practicalDescription, practicalTitle }) {
+  constructor({ id, competenceId, maxLevel, reachedLevel, practicalDescription, practicalTitle }) {
     this.id = id;
     this.competenceId = competenceId;
     this.maxLevel = maxLevel;
-    this.meanLevel = meanLevel;
+    this.reachedLevel = reachedLevel;
     this.practicalDescription = practicalDescription;
     this.practicalTitle = practicalTitle;
   }

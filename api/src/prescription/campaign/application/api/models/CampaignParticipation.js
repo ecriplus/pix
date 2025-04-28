@@ -70,7 +70,17 @@ class CampaignParticipation {
  * @typedef {object} AssessmentCampaignParticipationArgs
  * @extends CampaignParticipationArgs
  * @property {number} masteryRate
- * @property {Object} tubes
+ * @property {Array<TubeCoverage>} tubes
+ */
+
+/**
+ * @typedef {object} TubeCoverage
+ * @property {string} id
+ * @property {string} competenceId
+ * @property {number} reachedLevel
+ * @property {number} maxLevel
+ * @property {string} practicalTitle
+ * @property {string} practicalDescription
  */
 
 /**

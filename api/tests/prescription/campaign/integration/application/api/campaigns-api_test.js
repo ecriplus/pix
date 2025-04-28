@@ -133,7 +133,7 @@ describe('Integration | Application | campaign-api', function () {
               competenceId: 'competenceIdA',
               id: 'tubeIdA',
               maxLevel: 2,
-              meanLevel: 2,
+              reachedLevel: 2,
               practicalDescription: 'practicalDescription FR Tube A',
               practicalTitle: 'practicalTitle FR Tube A',
             },

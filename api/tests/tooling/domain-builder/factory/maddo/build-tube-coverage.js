@@ -4,7 +4,7 @@ export function buildTubeCoverage({
   id,
   competenceId,
   maxLevel,
-  meanLevel,
+  reachedLevel,
   practicalDescription,
   practicalTitle,
 } = {}) {
@@ -12,7 +12,7 @@ export function buildTubeCoverage({
     id,
     competenceId,
     maxLevel,
-    meanLevel,
+    reachedLevel,
     practicalDescription,
     practicalTitle,
   });

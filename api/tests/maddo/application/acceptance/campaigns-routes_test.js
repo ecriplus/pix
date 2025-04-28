@@ -114,7 +114,7 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
               id: tube.id,
               competenceId,
               maxLevel: 2,
-              meanLevel: 2,
+              reachedLevel: 2,
               practicalDescription: tube.practicalDescription_i18n['fr'],
               practicalTitle: tube.practicalTitle_i18n['fr'],
             }),
