@@ -65,7 +65,6 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
     const title = 'Les adresses email';
     const isBeta = false;
     const grains = [Symbol('text')];
-    const transitionTexts = [];
     const details = Symbol('details');
     const version = Symbol('version');
     const module = new Module({
@@ -75,7 +74,6 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
       isBeta,
       grains,
       details,
-      transitionTexts,
       version,
     });
 

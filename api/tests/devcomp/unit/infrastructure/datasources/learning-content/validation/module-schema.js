@@ -14,11 +14,6 @@ import { textElementSchema } from './element/text-schema.js';
 import { videoElementSchema } from './element/video-schema.js';
 import { htmlNotAllowedSchema, htmlSchema, uuidSchema } from './utils.js';
 
-const transitionTextSchema = Joi.object({
-  grainId: uuidSchema,
-  content: htmlSchema,
-}).required();
-
 const moduleDetailsSchema = Joi.object({
   image: Joi.string().uri().required(),
   description: htmlSchema.required(),
@@ -120,7 +115,6 @@ const moduleSchema = Joi.object({
   title: htmlNotAllowedSchema.required(),
   isBeta: Joi.boolean().required(),
   details: moduleDetailsSchema.required(),
-  transitionTexts: Joi.array().items(transitionTextSchema),
   grains: Joi.array().items(grainSchema).required(),
 }).required();
 

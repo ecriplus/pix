@@ -9,7 +9,6 @@ function serialize(module) {
         id: module.slug,
         title: module.title,
         isBeta: module.isBeta,
-        transitionTexts: module.transitionTexts,
         details: module.details,
         grains: module.grains.map((grain) => {
           return {
@@ -21,7 +20,7 @@ function serialize(module) {
         }),
       };
     },
-    attributes: ['title', 'isBeta', 'grains', 'transitionTexts', 'details'],
+    attributes: ['title', 'isBeta', 'grains', 'details'],
     grains: {
       ref: 'id',
       includes: true,

@@ -48,7 +48,6 @@ describe('Acceptance | Script | Get Elements as CSV', function () {
           tabletSupport: 'inconvenient',
           objectives: ['Naviguer dans Modulix', 'Découvrir les leçons et les activités'],
         },
-        transitionTexts: [],
         grains: [
           {
             id: 'f312c33d-e7c9-4a69-9ba0-913957b8f7dd',

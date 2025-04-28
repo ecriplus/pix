@@ -12,19 +12,17 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
       const title = 'Les adresses email';
       const isBeta = false;
       const grains = [Symbol('text')];
-      const transitionTexts = [];
       const details = Symbol('details');
       const version = Symbol('version');
 
       // when
-      const module = new Module({ id, slug, title, isBeta, grains, details, transitionTexts, version });
+      const module = new Module({ id, slug, title, isBeta, grains, details, version });
 
       // then
       expect(module.id).to.equal(id);
       expect(module.slug).to.equal(slug);
       expect(module.title).to.equal(title);
       expect(module.isBeta).to.equal(isBeta);
-      expect(module.transitionTexts).to.equal(transitionTexts);
       expect(module.grains).to.have.lengthOf(grains.length);
       expect(module.details).to.deep.equal(details);
       expect(module.version).to.deep.equal(version);
