@@ -31,7 +31,7 @@ export default class v3Certificate extends Component {
       </h1>
     </section>
 
-    <section class="v3-certificate">
+    <section class="v3-shareable-certificate">
       <CandidateInformation @certificate={{@certificate}} />
 
       <CandidateGlobalLevel @certificate={{@certificate}} />
