@@ -1,3 +1,4 @@
+import CertificationCentersBatchArchive from './certification-centers-batch-archive';
 import NewTag from './new-tag';
 import OrganizationTagsImport from './organization-tags-import';
 import OrganizationsImport from './organizations-import';
@@ -11,4 +12,6 @@ import UpdateOrganizationsInBatch from './update-organizations-in-batch';
   <OrganizationsImport />
 
   <UpdateOrganizationsInBatch />
+
+  <CertificationCentersBatchArchive />
 </template>
