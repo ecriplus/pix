@@ -15,25 +15,22 @@
       "Écrire une adresse mail correctement, en évitant les erreurs courantes"
     ]
   },
-  "transitionTexts": [
-    {
-      "content": "<p>Naomi veut envoyer un document par mail à son ami Mickaël.<br>Mais, Naomi ne trouve plus l'adresse mail de Mickaël.&nbsp;<span aria-hidden=\"true\">🤷‍♀</span><br>Elle décide de lui demander par message.<br>Lancez la vidéo pour voir leur discussion.&nbsp;<span aria-hidden=\"true\">📺</span></p>",
-      "grainId": "34d225e8-5d52-4ebd-9acd-8bde8438cfc9"
-    },
-    {
-      "content": "<p>Eh oui&#8239;! Naomi le sait&nbsp;: toutes les adresses mail ont le même format.</p><p>Nous allons étudier en détail l’adresse mail de Mickaël.&nbsp;<span aria-hidden=\"true\">🔎</span></p>",
-      "grainId": "af860b1e-0566-4b06-bcb4-a68a5151d621"
-    },
-    {
-      "content": "<p>Récapitulons ensemble avec quelques questions. <span aria-hidden=\"true\">🎯</span></p>",
-      "grainId": "edd7fec3-a649-425b-b8e3-65b13c6c47ea"
-    },
-    {
-      "content": "<p>Pour finir, à vous de jouer : vous allez devoir trouver l'adresse mail de Naomi. <span aria-hidden=\"true\">💫</span></p>",
-      "grainId": "b7ea7630-824a-4a49-83d1-abb9b8d0d120"
-    }
-  ],
   "grains": [
+    {
+      "id": "1b4f26d7-365d-43e4-9621-5846fba7e342",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "91e6c6bb-4287-4184-8860-086277fd6a31",
+            "type": "text",
+            "content": "<p>Naomi veut envoyer un document par mail à son ami Mickaël.<br>Mais, Naomi ne trouve plus l'adresse mail de Mickaël.&nbsp;<span aria-hidden=\"true\">🤷‍♀</span><br>Elle décide de lui demander par message.<br>Lancez la vidéo pour voir leur discussion.&nbsp;<span aria-hidden=\"true\">📺</span></p>"
+          }
+        }
+      ]
+    },
     {
       "id": "34d225e8-5d52-4ebd-9acd-8bde8438cfc9",
       "type": "discovery",
@@ -48,6 +45,21 @@
             "url": "https://videos.pix.fr/modulix/bien-ecrire-adresse-mail/chat_animation.mp4",
             "subtitles": "https://videos.pix.fr/modulix/bien-ecrire-adresse-mail/chat_animation.vtt",
             "transcription": "<ul><li>Naomi&nbsp;: Salut, tu peux me redonner ton adresse mail stp&#8239;?&nbsp;<span aria-hidden=\"true\">😇</span></li> <li>Mickaël&nbsp;: Oui, c’est mickael.aubert123#laposte.net</li><li>Naomi&nbsp;: T’es sûr&#8239;?&nbsp;<span aria-hidden=\"true\">😬</span></li><li>Naomi&nbsp;: Tu veux dire mickael.aubert123@laposte.net</li><li>Mickaël&nbsp;: Ah oui désolé&#8239;!&nbsp;<span aria-hidden=\"true\">😣</span></li><li>Mickaël&nbsp;: comment tu as su&#8239;? </li><li>Naomi&nbsp;: Dans une adresse mail, il y a toujours le symbole arobase !</li></ul>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "4d9f3000-e60f-4984-ac2e-30e69264e617",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "07246ad5-e460-4266-b006-65bb6ddb181f",
+            "type": "text",
+            "content": "<p>Eh oui&#8239;! Naomi le sait&nbsp;: toutes les adresses mail ont le même format.</p><p>Nous allons étudier en détail l’adresse mail de Mickaël.&nbsp;<span aria-hidden=\"true\">🔎</span></p>"
           }
         }
       ]
@@ -137,6 +149,21 @@
       ]
     },
     {
+      "id": "08750660-c33d-4ca3-b1ed-34facec20a01",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "f10c972d-ec3e-45e7-a9fd-91cbf00edbdc",
+            "type": "text",
+            "content": "<p>Récapitulons ensemble avec quelques questions. <span aria-hidden=\"true\">🎯</span></p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "edd7fec3-a649-425b-b8e3-65b13c6c47ea",
       "type": "activity",
       "title": "Les parties d’une adresse mail : applications",
@@ -164,12 +191,8 @@
                       "placeholder": "",
                       "ariaLabel": "Réponse 1 sur 1",
                       "defaultValue": "",
-                      "tolerances": [
-                        "t1"
-                      ],
-                      "solutions": [
-                        "@"
-                      ]
+                      "tolerances": ["t1"],
+                      "solutions": ["@"]
                     }
                   ],
                   "feedbacks": {
@@ -251,9 +274,7 @@
                           "content": "le fournisseur d'adresse mail"
                         }
                       ],
-                      "solutions": [
-                        "2"
-                      ]
+                      "solutions": ["2"]
                     }
                   ],
                   "feedbacks": {
@@ -421,6 +442,21 @@
       ]
     },
     {
+      "id": "398fe343-68a4-4d14-a24c-a96ef36f1c4b",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "a6b72df3-ec21-4b7a-81a0-f6864b2f93e9",
+            "type": "text",
+            "content": "<p>Pour finir, à vous de jouer : vous allez devoir trouver l'adresse mail de Naomi. <span aria-hidden=\"true\">💫</span></p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "b7ea7630-824a-4a49-83d1-abb9b8d0d120",
       "type": "challenge",
       "title": "Écrire une adresse mail correctement",
@@ -445,13 +481,8 @@
                 "placeholder": "",
                 "ariaLabel": "Adresse mail de Naomi",
                 "defaultValue": "",
-                "tolerances": [
-                  "t1"
-                ],
-                "solutions": [
-                  "naomizao457@yahoo.com",
-                  "naomizao457@yahoo.fr"
-                ]
+                "tolerances": ["t1"],
+                "solutions": ["naomizao457@yahoo.com", "naomizao457@yahoo.fr"]
               }
             ],
             "feedbacks": {

@@ -15,41 +15,22 @@
       "Savoir créer un mot de passe solide"
     ]
   },
-  "transitionTexts": [
-    {
-      "content": "<p>Un mot de passe sert à protéger vos informations et vos données. Il faut qu’il soit <strong>solide</strong>, c'est-à-dire difficile à trouver.&nbsp;<span aria-hidden=\"true\">🔐</span><br>Sinon, on peut le deviner facilement et lire vos mails, voir vos photos ou envoyer des messages à votre place.</p>",
-      "grainId": "00962dcd-9636-44b1-b1c8-d4a5ab2d90c8"
-    },
-    {
-      "content": "<p>Choisir un mot de passe très utilisé est risqué. Regardons ensemble les risques dont il faut se protéger.</p>",
-      "grainId": "831fd61c-54ae-4b21-bd3f-61f40887a869"
-    },
-    {
-      "content": "<p>Un exemple&nbsp;: Austin a utilisé des informations personnelles pour créer son mot de passe. Vous allez pouvoir le deviner facilement. À vous de jouer.&nbsp;<span aria-hidden=\"true\">🕵🏻‍♂️</span>&nbsp;<span aria-hidden=\"true\">🕵🏿‍♀️</span></p>",
-      "grainId": "1cda400f-008c-49db-b46b-6f783ccbc273"
-    },
-    {
-      "content": "<p>Pour créer un mot de passe solide, il y a certaines règles à suivre. Regardons de plus près&#8239;!</p>",
-      "grainId": "1564f763-5ba5-48ef-b752-dac463319899"
-    },
-    {
-      "content": "<p>Vérifions que vous avez compris l'essentiel avec quelques exemples.</p>",
-      "grainId": "65e80d85-4590-4662-8765-f1b3d995f21a"
-    },
-    {
-      "content": "<p>En plus des règles que vous venez de voir, voici aussi quelques astuces pour vous aider à créer vos mots de passe.&nbsp;<span aria-hidden=\"true\">💡</span></p>",
-      "grainId": "f14510d6-ee18-48be-8bb6-39a9427e3102"
-    },
-    {
-      "content": "<p>Maintenant que vous en savez plus, vous allez pouvoir aider Austin.&nbsp;<span aria-hidden=\"true\">🧑🏻‍💼</span><br> Austin veut créer un mot de passe qui est solide. </p>",
-      "grainId": "6336bac0-c272-40cc-a002-ee724a5ec4c8"
-    },
-    {
-      "content": "<p>Créer des mots de passe solides n'est pas simple. Mais cette étape est nécessaire pour se protéger.</p><p>Voici ci-dessous une synthèse des informations à retenir de ce module.</p>",
-      "grainId": "1ed4223a-2b8f-4c2c-8dcb-3d0567b562b0"
-    }
-  ],
   "grains": [
+    {
+      "id": "b742184b-085d-44e8-978e-533fe7e7d07e",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "1c3814f8-60f5-4024-86a8-6d0c270eceb1",
+            "type": "text",
+            "content": "<p>Un mot de passe sert à protéger vos informations et vos données. Il faut qu’il soit <strong>solide</strong>, c'est-à-dire difficile à trouver.&nbsp;🔐<br>Sinon, on peut le deviner facilement et lire vos mails, voir vos photos ou envoyer des messages à votre place.</p>"
+          }
+        }
+      ]
+    },
     {
       "id": "00962dcd-9636-44b1-b1c8-d4a5ab2d90c8",
       "type": "activity",
@@ -115,6 +96,21 @@
       ]
     },
     {
+      "id": "87c93058-1f81-4b08-8575-6095aac1b91a",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "598a96f0-4628-4879-9cfd-5ff8982c1da3",
+            "type": "text",
+            "content": "<p>Choisir un mot de passe très utilisé est risqué. Regardons ensemble les risques dont il faut se protéger.</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "831fd61c-54ae-4b21-bd3f-61f40887a869",
       "type": "lesson",
       "title": "Les risques liés aux mots de passe",
@@ -141,6 +137,21 @@
             "id": "9d0b7aff-a9da-453f-a6ba-c61fbaa7bb25",
             "type": "text",
             "content": "<h3><span aria-hidden=\"true\">🤖&nbsp;🏴‍☠️&nbsp;</span>Un logiciel informatique peut pirater votre mot de passe.</h3><p>Les ordinateurs sont capables de trouver des mots de passe en testant très rapidement différentes combinaisons possibles.<br>En 2023, un mot de passe court comme <code>$0Leil@?</code> peut être piraté en 5 minutes seulement. Mais avec un mot de passe plus long, comme <code>$0Leil@1504</code>, cette durée passe à 226 ans.</p> <p><span aria-hidden=\"true\">⚠️</span> En général, le pirate ne vous connaît pas. Il cherche certainement à revendre vos informations ou à vous voler de l’argent.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "de7d19e0-e74c-4431-b832-93773ea601ed",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "f300766c-5fa3-4dbe-8922-00dc73304c7b",
+            "type": "text",
+            "content": "<p>Un exemple&nbsp;: Austin a utilisé des informations personnelles pour créer son mot de passe. Vous allez pouvoir le deviner facilement. À vous de jouer.&nbsp;🕵🏻‍♂️&nbsp;🕵🏿‍♀️</p>"
           }
         }
       ]
@@ -242,6 +253,21 @@
       ]
     },
     {
+      "id": "17d853ee-fc15-4d26-8896-dd3bc0692161",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "b975bec3-4fef-42ca-8b40-ce9b59836b4c",
+            "type": "text",
+            "content": "<p>Pour créer un mot de passe solide, il y a certaines règles à suivre. Regardons de plus près&#8239;!</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "1564f763-5ba5-48ef-b752-dac463319899",
       "type": "lesson",
       "title": "Bonnes pratiques de création de mot de passe",
@@ -284,6 +310,21 @@
             "id": "c4505a09-864c-48f8-8077-013fae2db291",
             "type": "text",
             "content": "<h3>Règle n°3&nbsp;: n'utilisez pas d’informations personnelles.&nbsp;<span aria-hidden=\"true\">🤫</span></h3><p>De cette manière, il y a moins de chance que quelqu'un le devine. N'utilisez donc pas de dates de naissance et de numéros de téléphone. Un mot de passe doit être secret&#8239;!</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "46374bab-fea7-4693-b97b-aadf2083e6f3",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "f3d1330a-31f0-4252-8a89-db95905b6f09",
+            "type": "text",
+            "content": "<p>Vérifions que vous avez compris l'essentiel avec quelques exemples.</p>"
           }
         }
       ]
@@ -393,6 +434,21 @@
       ]
     },
     {
+      "id": "4de2a620-e73f-4e33-934a-495d8a7c0a1a",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "ec48b813-4f04-45ac-9515-eb6e559e354c",
+            "type": "text",
+            "content": "<p>En plus des règles que vous venez de voir, voici aussi quelques astuces pour vous aider à créer vos mots de passe.&nbsp;💡</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "f14510d6-ee18-48be-8bb6-39a9427e3102",
       "type": "lesson",
       "title": "Astuces de gestion de mots de passe",
@@ -440,6 +496,21 @@
       ]
     },
     {
+      "id": "77b65d81-a20a-4a45-b8c5-cfe23d5ba671",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "3d582ec1-c82d-488e-9e2d-0208cfd29871",
+            "type": "text",
+            "content": "<p>Maintenant que vous en savez plus, vous allez pouvoir aider Austin.&nbsp;🧑🏻‍💼<br> Austin veut créer un mot de passe qui est solide.</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "6336bac0-c272-40cc-a002-ee724a5ec4c8",
       "type": "activity",
       "title": "Les conseils à donner à un ami",
@@ -479,6 +550,21 @@
               }
             },
             "solutions": ["1", "4"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "faafaf63-05b8-49e1-85c5-cd7865c48f9f",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "b1ae2c3c-e383-4f82-b6d0-deda5b24eaa4",
+            "type": "text",
+            "content": "<p>Créer des mots de passe solides n'est pas simple. Mais cette étape est nécessaire pour se protéger.</p><p>Voici ci-dessous une synthèse des informations à retenir de ce module.</p>"
           }
         }
       ]

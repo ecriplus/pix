@@ -14,33 +14,22 @@
     ],
     "tabletSupport": "inconvenient"
   },
-  "transitionTexts": [
-    {
-      "grainId": "0d72743d-8320-4992-8ec4-510c86e6eded",
-      "content": "<p>Cette année, Rayan veut prendre des cours de théâtre. <span aria-hidden=\"true\">🎭</span></p><p>Il est allé voir plusieurs écoles de théâtre à côté de chez lui.</p><p>Il a donné son numéro de téléphone et son adresse mail pour être contacté.</p>"
-    },
-    {
-      "grainId": "e5af3428-bd1d-46a2-901e-4b5684b60739",
-      "content": "<p>Rayan a choisi de s'inscrire au cours du <strong>Théâtre Lumière</strong>. Il doit envoyer un mail pour le premier cours.</p><p>Dans la vidéo suivante, voyons ensemble comment envoyer un mail ! <span aria-hidden=\"true\">📺</span></p>"
-    },
-    {
-      "grainId": "58d65e40-acd2-44e3-9829-634c9c358395",
-      "content": "<p>Vous savez maintenant comment envoyer un mail.</p><p>Vous allez pouvoir aider Rayan à contacter Michel, son nouveau professeur de théâtre. <span aria-hidden=\"true\">📩</span></p>"
-    },
-    {
-      "grainId": "3bfa2ae1-cf67-48ce-bc59-1dd129ca2366",
-      "content": "<p>Dans un mail, chaque champ a un rôle bien précis. </p><p>Voyons si vous avez retenu l’essentiel. <span aria-hidden=\"true\">🎯</span></p>"
-    },
-    {
-      "grainId": "4159b20c-fe4b-41fd-80f9-eefdc6240e9e",
-      "content": "<p>Rayan vient de recevoir une réponse : le prochain cours est à 20 heures. <span aria-hidden=\"true\">✨</span></p><p>Maintenant, vous allez devoir analyser un autre mail.</p>"
-    },
-    {
-      "grainId": "f4b87554-8177-409c-89b8-d0e99f3bac28",
-      "content": "<p>Pour finir ce module, nous vous proposons d’envoyer un mail avec une vraie adresse à l'un de vos proches ! <span aria-hidden=\"true\">💫</span></p>"
-    }
-  ],
   "grains": [
+    {
+      "id": "0fc5545d-f5f6-4d43-9c25-0f90906a185b",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "8c6953c7-1ab8-4722-875f-f16556040f0f",
+            "type": "text",
+            "content": "<p>Cette année, Rayan veut prendre des cours de théâtre. <span aria-hidden=\"true\">🎭</span></p><p>Il est allé voir plusieurs écoles de théâtre à côté de chez lui.</p><p>Il a donné son numéro de téléphone et son adresse mail pour être contacté.</p>"
+          }
+        }
+      ]
+    },
     {
       "id": "0d72743d-8320-4992-8ec4-510c86e6eded",
       "type": "discovery",
@@ -104,6 +93,21 @@
       ]
     },
     {
+      "id": "f2b377d1-d0d6-425c-846c-48a2e73cd327",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "d2bc6890-bae8-4930-b865-c13c68685cf9",
+            "type": "text",
+            "content": "<p>Rayan a choisi de s'inscrire au cours du <strong>Théâtre Lumière</strong>. Il doit envoyer un mail pour le premier cours.</p><p>Dans la vidéo suivante, voyons ensemble comment envoyer un mail ! <span aria-hidden=\"true\">📺</span></p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "e5af3428-bd1d-46a2-901e-4b5684b60739",
       "type": "lesson",
       "title": "Les étapes pour envoyer un mail",
@@ -122,6 +126,21 @@
             "id": "fd39cc63-32f7-46eb-9f8a-55623878e0d1",
             "type": "text",
             "content": "<iframe title=\"Comment envoyer un mail ?\" width=\"560\" height=\"315\" src=\"https://tube-numerique-educatif.apps.education.fr/videos/embed/7d256f26-7777-4277-aa64-ca0084e1363b?title=0&amp;warningTitle=0&amp;peertubeLink=0&amp;p2p=0\" allowfullscreen=\"\" sandbox=\"allow-same-origin allow-scripts allow-popups allow-forms\"></iframe>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "d82081bf-d14a-4795-9d0f-8faf3d884369",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "0d3b0a93-c832-483e-ac94-f8d6154d5d6d",
+            "type": "text",
+            "content": "<p>Vous savez maintenant comment envoyer un mail.</p><p>Vous allez pouvoir aider Rayan à contacter Michel, son nouveau professeur de théâtre. <span aria-hidden=\"true\">📩</span></p>"
           }
         }
       ]
@@ -157,6 +176,21 @@
             "id": "f7429e02-e27c-4f12-ba79-80785ad66925",
             "type": "text",
             "content": "<p>🗝️ Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous :&nbsp;</p><details><summary>Indice 1</summary>Cliquez sur Nouveau message en haut à gauche pour créer un mail.</details><details><summary>Indice 2</summary>Complétez les 3 champs avec les textes écrits dans la consigne.</details><details><summary>Solution</summary><p>Voici les étapes à suivre : </p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"425\" height=\"790\" src=\"https://www.image-heberg.fr/files/1738339954456303332.gif\"></iframe></details>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "22bccab6-ec60-4be9-95a8-c9dc1cd48b53",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "be3d03c0-6679-4c38-9f64-cc19b04a6580",
+            "type": "text",
+            "content": "<p>Dans un mail, chaque champ a un rôle bien précis. </p><p>Voyons si vous avez retenu l’essentiel. <span aria-hidden=\"true\">🎯</span></p>"
           }
         }
       ]
@@ -291,6 +325,21 @@
       ]
     },
     {
+      "id": "667ebed8-cb72-4ac1-a9cd-7ae5f805f005",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "27281e03-bec3-43e3-985d-38b2eaec4c20",
+            "type": "text",
+            "content": "<p>Rayan vient de recevoir une réponse : le prochain cours est à 20 heures. <span aria-hidden=\"true\">✨</span></p><p>Maintenant, vous allez devoir analyser un autre mail.</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "4159b20c-fe4b-41fd-80f9-eefdc6240e9e",
       "type": "challenge",
       "title": "Analyser un mail",
@@ -414,9 +463,7 @@
                     "content": "Costumes pour le 27 octobre"
                   }
                 ],
-                "solutions": [
-                  "4"
-                ]
+                "solutions": ["4"]
               }
             ],
             "feedbacks": {
@@ -429,6 +476,21 @@
                 "diagnosis": "<p>Observez à nouveau le mail et réessayez.</p>"
               }
             }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ea80ad36-bf10-4eb1-bc3b-3cf044306e16",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "41c881bd-3195-459e-b1bc-c3a21b349384",
+            "type": "text",
+            "content": "<p>Pour finir ce module, nous vous proposons d’envoyer un mail avec une vraie adresse à l'un de vos proches ! <span aria-hidden=\"true\">💫</span></p>"
           }
         }
       ]

@@ -15,29 +15,22 @@
     ],
     "tabletSupport": "obstructed"
   },
-  "transitionTexts": [
-    {
-      "grainId": "cffecfef-01d5-4ae5-839e-40752fe60017",
-      "content": "<p>Vous avez peut-être déjà voulu trier les données d’un tableau à partir de plusieurs critères. Pour cela, il faut faire un tri multicritères. <br>Découvrons avec des exemples les cas où le tri multicritère est utile <span aria-hidden=\"true\">👇</span></p>"
-    },
-    {
-      "grainId": "52abc272-638f-48b1-900b-4dd2635bf9a7",
-      "content": "<p>Pour réaliser un tri multicritère, les raccourcis de tri disponible sur l'en-tête de chaque colonne sont insuffisants.&nbsp;<span aria-hidden=\"true\">❌</span><br>Reprenons le cas du tableau de Sarah qui organise un grand jeu pour enfant et découvrez comment y appliquer un tri à plusieurs critères dans la vidéo suivante. <span aria-hidden=\"true\">📺</span></p>"
-    },
-    {
-      "grainId": "257fa8da-a5f7-4dc7-8c42-f562f6c3d6ef",
-      "content": "<p>Maintenant, à vous de jouer. Vous allez aider Sarah à réaliser le classement individuel de son grand jeu. Pour cela, vous allez réaliser un tri multicritère. </p><p>À vos marques, prêts, partez ! <span aria-hidden=\"true\">🏃🏽‍♀️🏃‍♂️</span></p>"
-    },
-    {
-      "grainId": "6c869b4c-d44e-462b-98e2-21d063dfecda",
-      "content": "<p>Vous savez désormais réaliser un tri sur deux critères.<br><br> Avant de réaliser un tri avancé sur encore plus de critères, découvrez quelques bonnes pratiques et astuces pour trier plus facilement vos tableaux.<span aria-hidden=\"true\">🏆</span></p>"
-    },
-    {
-      "grainId": "16df02e4-4dd0-4fa3-9be0-44e1f54a3217",
-      "content": "<p>Vous savez désormais créer un tri multicritère sur un logiciel de tableur. <br>Grâce à ce tri, Sarah a pu donner leur classement à ses participants. <span aria-hidden=\"true\">🏆</span></p><p>Voici un récapitulatif des grandes étapes de tri et quelques précisions.</p>"
-    }
-  ],
   "grains": [
+    {
+      "id": "106d2893-c04e-450c-acab-a85aa04d71ed",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "a962681c-b603-4693-bd2f-fc5e3a36708c",
+            "type": "text",
+            "content": "<p>Vous avez peut-être déjà voulu trier les données d’un tableau à partir de plusieurs critères. Pour cela, il faut faire un tri multicritères. <br>Découvrons avec des exemples les cas où le tri multicritère est utile 👇</p>"
+          }
+        }
+      ]
+    },
     {
       "id": "cffecfef-01d5-4ae5-839e-40752fe60017",
       "type": "discovery",
@@ -196,6 +189,21 @@
       ]
     },
     {
+      "id": "9b5aa9e9-0016-4bc4-9122-10caa862a634",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "216c3b36-9ccd-4d47-a0fe-0c4bff845de8",
+            "type": "text",
+            "content": "<p>Pour réaliser un tri multicritère, les raccourcis de tri disponible sur l'en-tête de chaque colonne sont insuffisants.&nbsp;❌<br>Reprenons le cas du tableau de Sarah qui organise un grand jeu pour enfant et découvrez comment y appliquer un tri à plusieurs critères dans la vidéo suivante. 📺</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "52abc272-638f-48b1-900b-4dd2635bf9a7",
       "type": "lesson",
       "title": "Démonstration de tri multicritère",
@@ -222,6 +230,21 @@
             "id": "a9911b60-31ba-48e0-8b32-f0dacc5befee",
             "type": "text",
             "content": "<p><em>Le logiciel utilisé dans cette vidéo est LibreOffice.</em></p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "784fb1f2-8eed-4d49-95fb-e22984cc245a",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "eaaf4ff2-633f-4c6d-9016-9b9bb9e0fa3d",
+            "type": "text",
+            "content": "<p>Maintenant, à vous de jouer. Vous allez aider Sarah à réaliser le classement individuel de son grand jeu. Pour cela, vous allez réaliser un tri multicritère. </p><p>À vos marques, prêts, partez ! 🏃🏽‍♀️🏃‍♂️</p>"
           }
         }
       ]
@@ -344,6 +367,21 @@
             "id": "82815beb-6dc8-4caf-8c26-2454ffde5458",
             "type": "text",
             "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, cliquez sur les indices ci-dessous :</p><p><br></p><details><summary>Indice 1</summary><p>En fonction de votre logiciel, le vocabulaire de tri peut être différent :</p><ul><li>La fenêtre peut s’appeler «&nbsp;Trier&nbsp;», «&nbsp;Tri personnalisé&nbsp;» ou «&nbsp;Options avancées de tri&nbsp;».</li><li>Un critère de tri peut aussi s’appeler «&nbsp;Clé de tri&nbsp;» ou «&nbsp;Niveau de tri&nbsp;».</li><li>«&nbsp;Croissant&nbsp;» peut être écrit «&nbsp;Du plus petit au plus grand&nbsp;» ou «&nbsp;A-Z&nbsp;».</li></ul></details><details><summary>Indice 2</summary><p>Pour ouvrir la fenêtre de tri sur le logiciel LibreOffice, voici la manipulation à effectuer</p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"640\" height=\"400\" src=\"https://www.hebergeur-image.com/upload/88.125.115.216-67530fa7a5525.gif\"></iframe></details><details><summary>Indice 3</summary><ul><li>Commencez par sélectionner «&nbsp;<strong>Score aux fléchettes</strong>&nbsp;» dans votre premier critère de tri. Attribuez-lui un classement <strong>«&nbsp;Décroissant&nbsp;»</strong>.</li><li>Puis, sélectionnez <strong>«&nbsp;Réponse au quiz&nbsp;»</strong> dans votre second critère de tri. Attribuez-lui le classement <strong>«&nbsp;Croissant&nbsp;»</strong> </li></ul></details>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a1d3c0a0-d331-4d76-99ca-ec467da78afe",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "538cfc41-cf44-4a4f-9bcb-da4ddd18043f",
+            "type": "text",
+            "content": "<p>Vous savez désormais réaliser un tri sur deux critères.<br><br> Avant de réaliser un tri avancé sur encore plus de critères, découvrez quelques bonnes pratiques et astuces pour trier plus facilement vos tableaux. 🏆</p>"
           }
         }
       ]
@@ -523,6 +561,21 @@
             "id": "9c101788-40c6-4343-95e4-fcac920c96b7",
             "type": "text",
             "content": "<p><span aria-hidden=\"true\">❓</span> Si vous avez besoin d’aide, cliquez sur les indices ci-dessous :</p><p><br></p><details><summary>Indice 1</summary><p>Voici le résultat que vous devriez obtenir. Observez bien les colonnes pour trouver l'ordre des critères de tri.</p><iframe id=\"inlineFrameExample2\" title=\"Inline Frame Example\" width=\"640\" height=\"401\" src=\"https://www.hebergeur-image.com/upload/88.125.115.216-67727d49bec01.png\"> </iframe></details><details><summary>Indice 2</summary><p>Il y a 3 critères de tri nécessaires au classement de Sarah.<br>L’énoncé vous permet de trouver l’ordre des critères de tri suivant&nbsp;:</p> <ol> <li>L’étape la plus importante est bien sûr : la découverte du trésor</li> <li>La seconde épreuve est le nombre d’énigmes réussies</li> <li>Le troisième critère est le temps au labyrinthe</li> </ol><p>Ensuite, comparez l’ordre des critères de tri au tableau de l’indice 2 et déterminez le classement de chaque colonne.</p> </details>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "761402c5-41ec-44b1-b166-6f0b43300238",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "453fa79b-7a83-46f6-aca2-0cfd6409fa6d",
+            "type": "text",
+            "content": "<p>Vous savez désormais créer un tri multicritère sur un logiciel de tableur. <br>Grâce à ce tri, Sarah a pu donner leur classement à ses participants. 🏆</p><p>Voici un récapitulatif des grandes étapes de tri et quelques précisions.</p>"
           }
         }
       ]

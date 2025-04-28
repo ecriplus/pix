@@ -15,29 +15,22 @@
     ],
     "tabletSupport": "comfortable"
   },
-  "transitionTexts": [
-    {
-      "grainId": "651a6720-8da1-40f0-9462-26c67bde64dc",
-      "content": "<p>Vous avez peut-être déjà créé du contenu à l’aide d’un système d'IA générative.</p><p>La plupart du temps, les résultats sont crédibles. C’est d’ailleurs leur objectif principal.</p><p>Pourtant, ces résultats peuvent être parfois étranges. Voyons cela dans un exemple. <span aria-hidden=\"true\"> 👇</span></p>"
-    },
-    {
-      "grainId": "7f1a599d-e09f-4bae-8d5b-2027b6c6f788",
-      "content": "<p>Les productions des systèmes d’IA peuvent donc contenir des choses incohérentes voire farfelues : des mains à trois doigts, des arbres volants, ou des recettes à base d'œufs de vache.&nbsp;</p><p>Malgré tout, ces systèmes d’IA sont de plus en plus utilisés… mais de quoi s’agit-il ?</p>"
-    },
-    {
-      "grainId": "edbb9d7b-4981-4fd3-be13-9fb2f6c2a049",
-      "content": "<p>Vous en savez désormais plus sur les systèmes d'IA générative.</p><p> Mais avez-vous déjà écrit un prompt ? Et si on essayait ?</p>"
-    },
-    {
-      "grainId": "b384dac1-ac7d-4f91-a209-140cc0ca6bea",
-      "content": "<p>Les IA génératives sont impressionnantes… mais que se passe-t-il réellement quand on les utilise ?</p><p>On vous explique tout en vidéo&nbsp;! <span aria-hidden=\"true\">📺</span></p>"
-    },
-    {
-      "grainId": "143f1906-9e25-4afe-8f2d-70b61ec76230",
-      "content": "<p>À vous de jouer&nbsp;! Dans le défi suivant, vous allez faire halluciner des IA génératives. 🥸 🦄</p>"
-    }
-  ],
   "grains": [
+    {
+      "id": "7d35f2b0-56ec-493d-820c-54f335be6414",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "3cea7d3c-052c-4def-8e09-00003d56dd68",
+            "type": "text",
+            "content": "<p>Vous avez peut-être déjà créé du contenu à l’aide d’un système d'IA générative.</p><p>La plupart du temps, les résultats sont crédibles. C’est d’ailleurs leur objectif principal.</p><p>Pourtant, ces résultats peuvent être parfois étranges. Voyons cela dans un exemple. 👇</p>"
+          }
+        }
+      ]
+    },
     {
       "id": "651a6720-8da1-40f0-9462-26c67bde64dc",
       "type": "discovery",
@@ -119,6 +112,21 @@
       ]
     },
     {
+      "id": "4cbf20b0-c32b-429a-b3cf-c973f0fcdc9f",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "478343db-2840-49c6-951c-39b45a88c50b",
+            "type": "text",
+            "content": "<p>Les productions des systèmes d’IA peuvent donc contenir des choses incohérentes voire farfelues : des mains à trois doigts, des arbres volants, ou des recettes à base d'œufs de vache.&nbsp;</p><p>Malgré tout, ces systèmes d’IA sont de plus en plus utilisés… mais de quoi s’agit-il ?</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "7f1a599d-e09f-4bae-8d5b-2027b6c6f788",
       "type": "lesson",
       "title": "C’est quoi en fait, une IA générative ?",
@@ -174,6 +182,21 @@
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "54ca4946-d391-4112-9a4b-a2a207334348",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "0a09b520-f5d2-4926-bc98-6fdf90e2af7a",
+            "type": "text",
+            "content": "<p>Vous en savez désormais plus sur les systèmes d'IA générative.</p><p> Mais avez-vous déjà écrit un prompt ? Et si on essayait ?</p>"
+          }
         }
       ]
     },
@@ -254,6 +277,21 @@
               }
             ],
             "solution": "1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "8d2c8f24-1eed-4ccd-abd0-5df1c9431952",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "357bde39-a26c-442a-a546-c67ad7760574",
+            "type": "text",
+            "content": "<p>Les IA génératives sont impressionnantes… mais que se passe-t-il réellement quand on les utilise ?</p><p>On vous explique tout en vidéo&nbsp;! 📺</p>"
           }
         }
       ]
@@ -419,6 +457,21 @@
             "id": "5c072fb2-0baf-48dc-8b80-23c7b49d53f8",
             "type": "text",
             "content": "<p><span aria-hidden=\"true\">📌 </span>Résumons avant de passer à la suite.</p><ul><li>Pour interagir avec les systèmes d'IA génératives, les utilisateurs décrivent leur demande en lanagage naturel. C’est le <em>prompt </em>ou<em> requête </em>en français.<br><br></li><li>Les systèmes d’IA générative utilisent des algorithmes qui cherchent à <em>prédire</em> la suite du texte ou la forme d’image la plus probable.<br><br></li><li>Quand un système d’IA générative produit un résultat farfelu, c'est une <em>hallucination</em>. Ces phénomènes sont normaux et nous rappellent que ce sont des machines qui les ont générés, et non des humains !<br><br></li></ul>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2beac30f-52eb-429e-84f2-5fe7e89b5c57",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "e3821cb3-8166-44e2-9540-225d33ea5883",
+            "type": "text",
+            "content": "<p>À vous de jouer&nbsp;! Dans le défi suivant, vous allez faire halluciner des IA génératives. 🥸 🦄</p>"
           }
         }
       ]

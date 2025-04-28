@@ -14,37 +14,22 @@
     ],
     "tabletSupport": "comfortable"
   },
-  "transitionTexts": [
-    {
-      "grainId": "8bb146db-104c-41e2-aa79-14f7a06e0930",
-      "content": "<p>Sur votre ordinateur, vous pouvez brancher plusieurs appareils, comme une souris ou un clavier.&nbsp;🖱️&nbsp;⌨️</p><p>Pour les brancher, il y a des prises de différentes formes : ce sont les ports de connexion. Commençons avec un exemple.</p>"
-    },
-    {
-      "grainId": "3b26ddd0-8d3b-4f84-bee3-58cbe4073798",
-      "content": "<p>Maintenant que vous avez aidé Maxime à charger son ordinateur, découvrez les autres ports de connexion.&nbsp;<span aria-hidden=\"true\">💻</span><br></p>"
-    },
-    {
-      "grainId": "259bb2d0-8815-4bab-885a-a54f7d6d9606",
-      "content": "<p>Maintenant que vous en savez plus sur les ports de connexion, vous allez  pouvoir aider Maxime.&nbsp;<span aria-hidden=\"true\">🙋‍♂️</span><br></p>"
-    },
-    {
-      "grainId": "75091cc6-61ca-4b9e-a6a0-89701ed721a8",
-      "content": "<p>Le clavier de Maxime se branche en USB. <br>D'autres objets se branchent aussi sur le port USB.&nbsp;Découvrez-les.&nbsp;</p>"
-    },
-    {
-      "grainId": "e7aa8e1d-c88a-42ff-bf58-fe4371a1ce6a",
-      "content": "<p>Passons à la pratique avec quelques exemples.</p>"
-    },
-    {
-      "grainId": "daa8a389-28c3-4a42-870f-062375f53394",
-      "content": "<p>Testez vos connaissances sur tous les ports de connexion.&nbsp;🕹️</p>"
-    },
-    {
-      "grainId": "57cea880-a324-4a1b-8cfe-a7c8d1b0f5b1",
-      "content": "<p>Pour finir ce module, vous allez devoir explorer les ports de connexion de votre propre ordinateur.&nbsp;💻<br>À vous de jouer !</p>"
-    }
-  ],
   "grains": [
+    {
+      "id": "f8e5630c-2680-4308-86a9-c17071e8c367",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "f7038b18-cf54-4db5-aba1-462ddbbbbda6",
+            "type": "text",
+            "content": "<p>Sur votre ordinateur, vous pouvez brancher plusieurs appareils, comme une souris ou un clavier.&nbsp;🖱️&nbsp;⌨️</p><p>Pour les brancher, il y a des prises de différentes formes : ce sont les ports de connexion. Commençons avec un exemple.</p>"
+          }
+        }
+      ]
+    },
     {
       "id": "8bb146db-104c-41e2-aa79-14f7a06e0930",
       "type": "discovery",
@@ -101,6 +86,21 @@
               }
             ],
             "solution": "1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "58cf284e-53d4-43be-ae7d-c26bd600defb",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "c0642e02-74b1-4b42-a09d-3a6f7b714775",
+            "type": "text",
+            "content": "<p>Maintenant que vous avez aidé Maxime à charger son ordinateur, découvrez les autres ports de connexion.&nbsp;💻<br></p>"
           }
         }
       ]
@@ -240,6 +240,21 @@
       ]
     },
     {
+      "id": "efb9a8ad-2bef-4741-977f-d216b8ecc64d",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "23617f5e-3001-4562-937a-dac1adf32c07",
+            "type": "text",
+            "content": "<p>Maintenant que vous en savez plus sur les ports de connexion, vous allez  pouvoir aider Maxime.&nbsp;🙋‍♂️<br></p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "259bb2d0-8815-4bab-885a-a54f7d6d9606",
       "type": "activity",
       "title": "Vos ports de connexion",
@@ -324,6 +339,21 @@
       ]
     },
     {
+      "id": "ba5e1aa3-c271-4635-88a7-3a7d8aa75f8f",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "2a99722d-7860-4835-bc96-5625f645c673",
+            "type": "text",
+            "content": "<p>Le clavier de Maxime se branche en USB. <br>D'autres objets se branchent aussi sur le port USB.&nbsp;Découvrez-les.&nbsp;</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "75091cc6-61ca-4b9e-a6a0-89701ed721a8",
       "type": "lesson",
       "title": "Les appareils qui se branchent via USB",
@@ -401,6 +431,21 @@
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "b174e6d7-b450-43e7-81df-2103b9ed177d",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "124501e8-1100-44a2-a210-a3da56a6d11e",
+            "type": "text",
+            "content": "<p>Passons à la pratique avec quelques exemples.</p>"
+          }
         }
       ]
     },
@@ -530,6 +575,21 @@
       ]
     },
     {
+      "id": "0894fa96-0c3d-489c-a432-8c288b3e06cd",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "f357712f-ff2f-4a72-ba76-f31bcc7faa50",
+            "type": "text",
+            "content": "<p>Testez vos connaissances sur tous les ports de connexion.&nbsp;🕹️</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "daa8a389-28c3-4a42-870f-062375f53394",
       "type": "summary",
       "title": "Flashcard ports de connexion",
@@ -606,6 +666,21 @@
                 }
               }
             ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "5ebb51ab-d76e-4661-a114-dcf6ae2adc4f",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "22047103-8c88-42ae-8c51-e168e7b3f035",
+            "type": "text",
+            "content": "<p>Pour finir ce module, vous allez devoir explorer les ports de connexion de votre propre ordinateur.&nbsp;💻<br>À vous de jouer !</p>"
           }
         }
       ]

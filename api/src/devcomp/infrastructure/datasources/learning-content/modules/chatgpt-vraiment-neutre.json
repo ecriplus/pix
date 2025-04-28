@@ -15,33 +15,22 @@
     ],
     "tabletSupport": "comfortable"
   },
-  "transitionTexts": [
-    {
-      "grainId": "0bfa08bd-7052-49bb-89e8-150efa589926",
-      "content": "<p>Vous avez peut-être déjà utilisé des outils d'intelligence artificielle générative de texte, comme ChatGPT ou Copilot. Ces grands modèles de langage, <i>Large Language Models (LLM)</i> en anglais, peuvent être utiles pour produire des synthèses ou inventer des histoires.<span aria-hidden=\"true\">&nbsp;✒️ 💭</span></p><p>Pourtant, les textes produits contiennent parfois des maladresses ou des erreurs.<span aria-hidden=\"true\">&nbsp;❌</span> Commençons par un exemple concret&nbsp;!</p>"
-    },
-    {
-      "grainId": "c8722f6e-7534-4fdc-9f2d-515c2a96641f",
-      "content": "<p>Cette réponse en français de ChatGPT est biaisée. En effet, elle est influencée par ses données d'entraînement.<br>Ces données, récoltées en grande partie sur internet, sont majoritairement en anglais.</p><p>Dans la vidéo suivante, vous allez découvrir d’où proviennent les différents biais des LLM.<span aria-hidden=\"true\">&nbsp;📺</span></p>"
-    },
-    {
-      "grainId": "89dbbcf3-7205-470a-baf0-4aa4aac1a87e",
-      "content": "<p>Vous en savez désormais plus sur les biais des LLM. <span aria-hidden=\"true\">👩‍💻️👨🏿‍💻️</span></p><p>Vérifiez que vous avez retenu l'essentiel avec cette question. <span aria-hidden=\"true\">&nbsp;🎯</span></p>"
-    },
-    {
-      "grainId": "e52da884-2233-4101-96a5-befd5c7d7975",
-      "content": "<p>Il existe de nombreux LLM à l'heure actuelle, chacun avec ses biais. Alors, quel LLM privilégier&nbsp;?<span aria-hidden=\"true\">&nbsp;🤔</span></p><p>Le mieux est de les comparer. Une plateforme francophone est dédiée à cela&nbsp;: Compar:IA .</p>"
-    },
-    {
-      "grainId": "018ad06a-f11c-4db3-b954-ac8a6466d947",
-      "content": "<p> Les LLM peuvent donner des résultats différents selon les données avec lesquelles on les a entraînés et la façon dont on les a réglés. Mais d'où viennent ces différences ? Explications en image.<span aria-hidden=\"true\">&nbsp;🔍</span></p>"
-    },
-    {
-      "grainId": "91b54b81-5b7c-4daa-9e2f-67b7a714fd9e",
-      "content": "<p>Pour terminer ce module, vous allez devoir relever un défi. <span aria-hidden=\"true\">💫</span></p>"
-    }
-  ],
   "grains": [
+    {
+      "id": "538e03cd-7850-40e7-9017-008a2f2544f6",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "534dabf0-73dc-49a6-88f9-35bdc3b9e607",
+            "type": "text",
+            "content": "<p>Vous avez peut-être déjà utilisé des outils d'intelligence artificielle générative de texte, comme ChatGPT ou Copilot. Ces grands modèles de langage, <i>Large Language Models (LLM)</i> en anglais, peuvent être utiles pour produire des synthèses ou inventer des histoires.<span aria-hidden=\"true\">&nbsp;✒️ 💭</span></p><p>Pourtant, les textes produits contiennent parfois des maladresses ou des erreurs.<span aria-hidden=\"true\">&nbsp;❌</span> Commençons par un exemple concret&nbsp;!</p>"
+          }
+        }
+      ]
+    },
     {
       "id": "0bfa08bd-7052-49bb-89e8-150efa589926",
       "type": "discovery",
@@ -103,6 +92,21 @@
       ]
     },
     {
+      "id": "2d7b7a89-6146-4880-9202-8d4b1270de12",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "61eff022-ce71-49f0-ad86-7bee5f7c9c0e",
+            "type": "text",
+            "content": "<p>Cette réponse en français de ChatGPT est biaisée. En effet, elle est influencée par ses données d'entraînement.<br>Ces données, récoltées en grande partie sur internet, sont majoritairement en anglais.</p><p>Dans la vidéo suivante, vous allez découvrir d’où proviennent les différents biais des LLM.<span aria-hidden=\"true\">&nbsp;📺</span></p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "c8722f6e-7534-4fdc-9f2d-515c2a96641f",
       "type": "lesson",
       "title": "D'où viennent les biais des LLM ?",
@@ -125,6 +129,21 @@
             "poster": "https://i.imgur.com/ugkunY2.png",
             "subtitles": "https://videos.pix.fr/modulix/chatgpt-parle-francais/biais-llm.srt",
             "transcription": "<p>D'où viennent les biais des LLM ? <br>Joy Buolamwini est informaticienne et chercheuse. <br>En 2017, lors d’un projet universitaire, elle remarque que les logiciels de reconnaissance faciale ne détectent pas son visage. Joy teste alors ces logiciels sur son colocataire, un jeune homme blanc. Résultat : le visage du colocataire est bien détecté, contrairement à celui de Joy. <br>Ces logiciels ne reconnaissent pas le visage de Joy, du fait de sa couleur de peau. Mais pourquoi ? <br>Eh bien, ces logiciels étaient entraînés en analysant de grandes quantités de visages de personnes principalement blanches. Ces données d'entraînement ne correspondaient pas à la diversité de la réalité. Les logiciels avaient donc des biais liés à la couleur de peau. <br>En informatique, on dit qu’un algorithme présente un biais quand il y a une anomalie systématique dans ses résultats et que cette anomalie est difficile à identifier et à corriger. Les résultats d’un algorithme biaisé peuvent créer des discriminations, comme dans la situation de Joy. <br>De nos jours, les intelligences artificielles génératives, comme les grands modèles de langage, ou LLM, rencontrent les mêmes problèmes : les textes qu’ils produisent contiennent parfois des biais. Je vous explique tout ça en détail. <br>Actuellement, les LLM sont utilisés dans le monde entier par des personnes de cultures différentes. Les réponses qu’ils proposent peuvent avoir des biais, selon de nombreux facteurs : l'époque ; la culture ; la zone géographique ; etc. <br>Mais alors, d’où viennent les biais des LLM ? <br>Il y a 3 origines principales : <br>Les données d'entraînement des LLM sont la principale source de leurs biais. En effet, certains types de données peuvent être beaucoup plus présents que d’autres. On dit alors qu’il y a une surreprésentation de ces données. Par exemple, un LLM utilisé pour trier des CV pour un poste d’assistant ou d’assistante va privilégier des candidatures féminines. C'est un résultat qui comporte un biais de genre. Le LLM a en effet été entraîné avec des données de personnes qui exercent ce métier. Et, dans ce métier, les femmes sont surreprésentées. <br>Prenons un autre exemple. Un LLM utilisé pour imaginer un personnage de confiance propose la plupart du temps des personnages occidentaux, soignés, aux yeux clairs et qui portent des chemises. Ce résultat a un biais culturel : c’est un stéréotype occidental, qui ne propose pas de diversité. <br>Le code produit par les développeurs est la deuxième cause de biais des LLM. Comme tout le monde, les personnes qui développent les LLM ont des biais. Pendant la conception d’un LLM, les développeurs peuvent donc coder, consciemment ou non, leurs propres biais. En raccourci, si j’ai codé un LLM qui me dit que la meilleure glace est à la vanille et à la fraise mais que je préfère la glace à la vanille et au chocolat, je vais avoir tendance à affiner le modèle pour qu’il donne le résultat qui correspond à ma préférence. <br>Les développeurs peuvent aussi faire des réglages pour censurer certains résultats du modèle. Si je demande par exemple au LLM de Baidu, une entreprise chinoise, de me parler de la répression des manifestations de la place Tiananmen, il refusera de répondre à ma question. Ce sujet a été inscrit par ses développeurs comme sensible politiquement. <br>Enfin, la troisième origine des biais dans les LLM concerne les prompts des utilisateurs. Un utilisateur peut en effet poser à un LLM une question orientée, subjective, sans avoir conscience de ses propres biais. Par exemple : si je demande à un LLM pourquoi l’alimentation japonaise est la meilleure au monde, il va lister des explications toutes positives, sans nuancer, remettre en cause mon affirmation ou proposer d'autres types d'alimentation. Ce résultat va confirmer mes croyances : c'est un biais de confirmation. <br>Qu'ils proviennent des données d'entraînement, du développement des modèles ou des prompts proposés par les utilisateurs, les LLM peuvent présenter de nombreux biais… comme tout le monde. <br>À vous d'y prêter attention la prochaine fois que vous testerez ces outils. <br><br></p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "1cc63ed8-c51d-4dd2-94dd-78c9e591143a",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "c6bc9ee2-7bd5-4433-932c-811803a7746a",
+            "type": "text",
+            "content": "<p>Vous en savez désormais plus sur les biais des LLM. <span aria-hidden=\"true\">👩‍💻️👨🏿‍💻️</span></p><p>Vérifiez que vous avez retenu l'essentiel avec cette question. <span aria-hidden=\"true\">&nbsp;🎯</span></p>"
           }
         }
       ]
@@ -358,6 +377,21 @@
       ]
     },
     {
+      "id": "06677979-747e-4282-8ae4-50f956372994",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "a2748830-10ee-408b-8d37-8c2aa0055bb9",
+            "type": "text",
+            "content": "<p>Il existe de nombreux LLM à l'heure actuelle, chacun avec ses biais. Alors, quel LLM privilégier&nbsp;?<span aria-hidden=\"true\">&nbsp;🤔</span></p><p>Le mieux est de les comparer. Une plateforme francophone est dédiée à cela&nbsp;: Compar:IA .</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "e52da884-2233-4101-96a5-befd5c7d7975",
       "type": "discovery",
       "title": "Découverte du comparateur",
@@ -472,6 +506,21 @@
       ]
     },
     {
+      "id": "01ddfa34-b437-41ea-ac44-b16c3bd3923b",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "62fc2808-3ead-4a03-8e98-f8877c084c29",
+            "type": "text",
+            "content": "<p> Les LLM peuvent donner des résultats différents selon les données avec lesquelles on les a entraînés et la façon dont on les a réglés. Mais d'où viennent ces différences ? Explications en image.<span aria-hidden=\"true\">&nbsp;🔍</span></p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "018ad06a-f11c-4db3-b954-ac8a6466d947",
       "type": "lesson",
       "title": "Géopolitique des LLM",
@@ -500,6 +549,21 @@
             "id": "a5b4912d-7882-47ed-a782-bf87d73ead55",
             "type": "text",
             "content": "<p>Seuls <strong>quelques acteurs</strong> ont les <strong>moyens financiers</strong> de développer des grands modèles de langage.<span aria-hidden=\"true\">&nbsp;🌍&nbsp;💵</span></p><p>Selon leur <strong>pays</strong>, ces acteurs peuvent être amenés à faire des <strong>paramétrages différents</strong> de leurs modèles, par exemple pour respecter leurs lois.<span aria-hidden=\"true\">&nbsp;⚖️</span></p><hr><p>La <strong>surreprésentation de certaines langues</strong> dans les données d’entraînement favorisera des résultats qui <strong>manquent de diversité culturelle.</strong><span aria-hidden=\"true\">&nbsp;🕳️&nbsp;🗺️</span></p><p>Cependant, de nombreuses initiatives <strong>open source</strong> permettent de mieux comprendre comment ces modèles fonctionnent et sur quelles données ils ont été entraînés.</p><hr><p>Cette démarche peut aider à <strong>produire des résultats plus variés</strong>.<span aria-hidden=\"true\">&nbsp;🔵&nbsp;🔶</span></p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "990a8334-0feb-4ffb-90fd-47fb7aa27974",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "2f8728bd-93ff-4a15-8819-14e9c708c761",
+            "type": "text",
+            "content": "<p>Pour terminer ce module, vous allez devoir relever un défi. <span aria-hidden=\"true\">💫</span></p>"
           }
         }
       ]
