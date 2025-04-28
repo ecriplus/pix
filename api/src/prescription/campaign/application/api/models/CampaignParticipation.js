@@ -1,26 +1,5 @@
 import _ from 'lodash';
 
-/**
- * @typedef {
-    participantFirstName,
-    participantLastName,
-    participantExternalId,
-    studentNumber = null,
-    userId,
-    additionalInfos,
-    campaignParticipationId,
-    isCompleted,
-    createdAt,
-    sharedAt,
-    division,
-    group,
-    masteryRate,
-    validatedSkillsCount,
-    status,
-    pixScore,
-  } CampaignParticipationArgs
-*/
-
 class CampaignParticipation {
   /**
    * @typedef {Object} CampaignParticipationArgs
