@@ -130,7 +130,12 @@ describe('Acceptance | Maddo | Route | Organizations', function () {
 
       // then
       expect(response.statusCode).to.equal(200);
-      expect(response.result).to.deep.equal([
+      expect(response.result.page).to.deep.equal({
+        number: 1,
+        size: 1000,
+        count: 1,
+      });
+      expect(response.result.campaigns).to.deep.equal([
         new Campaign({
           id: campaign1InJurisdiction.id,
           name: campaign1InJurisdiction.name,
@@ -174,7 +179,7 @@ describe('Acceptance | Maddo | Route | Organizations', function () {
 
         // then
         expect(response.statusCode).to.equal(200);
-        expect(response.result).to.deep.equal([
+        expect(response.result.campaigns).to.deep.equal([
           new Campaign({
             id: campaign1InJurisdiction.id,
             name: campaign1InJurisdiction.name,
@@ -183,6 +188,82 @@ describe('Acceptance | Maddo | Route | Organizations', function () {
             code: campaign1InJurisdiction.code,
             createdAt: campaign1InJurisdiction.createdAt,
             tubes: null,
+          }),
+        ]);
+      });
+    });
+
+    context('pagination management', function () {
+      it('returns the list of n first campaigns belonging to organization in the client jurisdiction with an HTTP status code 200', async function () {
+        // given
+        const targetProfile = databaseBuilder.factory.buildTargetProfile();
+        const campaign1InJurisdiction = databaseBuilder.factory.buildCampaign({
+          organizationId: orgaInJurisdiction.id,
+          targetProfileId: targetProfile.id,
+        });
+        const campaign2InJurisdiction = databaseBuilder.factory.buildCampaign({
+          organizationId: orgaInJurisdiction.id,
+        });
+
+        const frameworkId = databaseBuilder.factory.learningContent.buildFramework().id;
+        const areaId = databaseBuilder.factory.learningContent.buildArea({ frameworkId }).id;
+        const competenceId = databaseBuilder.factory.learningContent.buildCompetence({ areaId }).id;
+        const tube = databaseBuilder.factory.learningContent.buildTube({ competenceId });
+        const skillId = databaseBuilder.factory.learningContent.buildSkill({ tubeId: tube.id, status: 'actif' }).id;
+
+        databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign1InJurisdiction.id, skillId });
+        databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign2InJurisdiction.id, skillId });
+        const userId = databaseBuilder.factory.buildUser().id;
+
+        const participationUser = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign1InJurisdiction.id,
+          userId,
+        });
+
+        const ke = databaseBuilder.factory.buildKnowledgeElement({
+          status: KnowledgeElement.StatusType.VALIDATED,
+          skillId,
+          userId: participationUser.userId,
+        });
+
+        databaseBuilder.factory.buildKnowledgeElementSnapshot({
+          campaignParticipationId: participationUser.id,
+          snapshot: new KnowledgeElementCollection([ke]).toSnapshot(),
+        });
+
+        await databaseBuilder.commit();
+
+        const options = {
+          method: 'GET',
+          url: `/api/organizations/${orgaInJurisdiction.id}/campaigns?page[number]=1&page[size]=1`,
+          headers: {
+            authorization: generateValidRequestAuthorizationHeaderForApplication(clientId, 'pix-client', 'campaigns'),
+          },
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result.campaigns).to.deep.equal([
+          new Campaign({
+            id: campaign1InJurisdiction.id,
+            name: campaign1InJurisdiction.name,
+            type: campaign1InJurisdiction.type,
+            targetProfileName: targetProfile.name,
+            code: campaign1InJurisdiction.code,
+            createdAt: campaign1InJurisdiction.createdAt,
+            tubes: [
+              {
+                id: tube.id,
+                competenceId,
+                maxLevel: 2,
+                meanLevel: 2,
+                practicalDescription: tube.practicalDescription_i18n['fr'],
+                practicalTitle: tube.practicalTitle_i18n['fr'],
+              },
+            ],
           }),
         ]);
       });

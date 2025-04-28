@@ -6,7 +6,11 @@ export async function getOrganizations(request, h, dependencies = { findOrganiza
 }
 
 export async function getOrganizationCampaigns(request, h, dependencies = { findCampaigns: usecases.findCampaigns }) {
+  const { page } = request.query;
   const requestedOrganizationId = request.params.organizationId;
-  const campaigns = await dependencies.findCampaigns({ organizationId: requestedOrganizationId });
-  return h.response(campaigns).code(200);
+  const result = await dependencies.findCampaigns({
+    organizationId: requestedOrganizationId,
+    page,
+  });
+  return h.response(result).code(200);
 }

@@ -67,9 +67,14 @@ describe('Maddo | Infrastructure | Repositories | Integration | campaign', funct
       await databaseBuilder.commit();
 
       // when
-      const campaigns = await findByOrganizationId(organization.id);
+      const { campaigns, page } = await findByOrganizationId(organization.id, { number: 1, size: 2 });
 
       // then
+      expect(page).to.deep.equal({
+        number: 1,
+        size: 2,
+        count: 1,
+      });
       expect(campaigns).to.deep.equal([
         new Campaign({
           id: campaign1.id,
