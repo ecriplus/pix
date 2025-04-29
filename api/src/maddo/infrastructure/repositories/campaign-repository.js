@@ -2,13 +2,17 @@ import { knex } from '../../../../db/knex-database-connection.js';
 import * as campaignAPI from '../../../prescription/campaign/application/api/campaigns-api.js';
 import { Campaign } from '../../domain/models/Campaign.js';
 
-export async function findByOrganizationId(organizationId) {
+export async function findByOrganizationId(organizationId, page, locale) {
   const campaigns = await campaignAPI.findAllForOrganization({
     organizationId,
     withCoverRate: true,
-    page: { size: 1000, number: 1 },
+    page,
+    locale,
   });
-  return campaigns.models.map(toDomain);
+  return {
+    page: toPage(campaigns.meta),
+    campaigns: campaigns.models.map(toDomain),
+  };
 }
 
 export async function getOrganizationId(campaignId) {
@@ -18,4 +22,8 @@ export async function getOrganizationId(campaignId) {
 
 function toDomain(rawCampaign) {
   return new Campaign(rawCampaign);
+}
+
+function toPage(meta) {
+  return { number: meta.page, size: meta.pageSize, count: meta.pageCount };
 }

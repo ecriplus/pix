@@ -208,6 +208,7 @@ describe('Unit | API | Campaigns', function () {
       it('should return paginated campaign list from organizationId without cover rate', async function () {
         const organizationId = Symbol('organizationId');
         const page = Symbol('page');
+        const locale = Symbol('locale');
         const meta = Symbol('meta');
         const targetProfileName = Symbol('targetProfileName');
 
@@ -222,13 +223,16 @@ describe('Unit | API | Campaigns', function () {
           targetProfileName,
         });
 
-        const getCampaignStub = sinon.stub(usecases, 'findPaginatedFilteredOrganizationCampaigns');
-        getCampaignStub
-          .withArgs({ organizationId, page, withCoverRate: false })
+        const findPaginatedFilteredOrganizationCampaignsStub = sinon.stub(
+          usecases,
+          'findPaginatedFilteredOrganizationCampaigns',
+        );
+        findPaginatedFilteredOrganizationCampaignsStub
+          .withArgs({ organizationId, page, locale, withCoverRate: false })
           .resolves({ models: [campaignInformation1], meta });
 
         // when
-        const result = await campaignApi.findAllForOrganization({ organizationId, page });
+        const result = await campaignApi.findAllForOrganization({ organizationId, page, locale });
 
         // then
         const firstCampaignListItem = result.models[0];
@@ -246,6 +250,7 @@ describe('Unit | API | Campaigns', function () {
       it('should return paginated campaign list from organizationId with cover rate', async function () {
         const organizationId = Symbol('organizationId');
         const page = Symbol('page');
+        const locale = Symbol('locale');
         const meta = Symbol('meta');
         const targetProfileName = Symbol('targetProfileName');
         const coverRate = domainBuilder.prescription.campaign.buildCampaignResultLevelsPerTubesAndCompetences();
@@ -263,13 +268,16 @@ describe('Unit | API | Campaigns', function () {
 
         campaignInformation1.setCoverRate(coverRate);
 
-        const getCampaignStub = sinon.stub(usecases, 'findPaginatedFilteredOrganizationCampaigns');
-        getCampaignStub
-          .withArgs({ organizationId, page, withCoverRate: true })
+        const findPaginatedFilteredOrganizationCampaignsStub = sinon.stub(
+          usecases,
+          'findPaginatedFilteredOrganizationCampaigns',
+        );
+        findPaginatedFilteredOrganizationCampaignsStub
+          .withArgs({ organizationId, page, locale, withCoverRate: true })
           .resolves({ models: [campaignInformation1], meta });
 
         // when
-        const result = await campaignApi.findAllForOrganization({ organizationId, page, withCoverRate: true });
+        const result = await campaignApi.findAllForOrganization({ organizationId, page, locale, withCoverRate: true });
 
         // then
         const firstCampaignListItem = result.models[0];

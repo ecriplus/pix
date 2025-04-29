@@ -177,6 +177,7 @@
     "preinstall": "npx check-engine",
     "scalingo-postbuild": "node scripts/generate-cron > cron.json && node scripts/generate-procfile",
     "dev": "nodemon index.js",
+    "dev:maddo": "MADDO=true nodemon index.maddo.js",
     "start": "node index.js",
     "start:maddo": "MADDO=true node index.maddo.js",
     "start:watch": "npm run dev",

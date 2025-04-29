@@ -1,3 +1,3 @@
-export async function findCampaigns({ organizationId, campaignRepository }) {
-  return campaignRepository.findByOrganizationId(organizationId);
+export async function findCampaigns({ organizationId, campaignRepository, page, locale }) {
+  return campaignRepository.findByOrganizationId(organizationId, page, locale);
 }

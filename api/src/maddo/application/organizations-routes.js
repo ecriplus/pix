@@ -46,6 +46,22 @@ const register = async function (server) {
           params: Joi.object({
             organizationId: identifiersType.organizationId,
           }),
+          query: Joi.object({
+            page: Joi.object({
+              size: Joi.number().default(1000),
+              number: Joi.number().default(1),
+            })
+              .default({
+                size: 1000,
+                number: 1,
+              })
+              .description('Informations de pagination'),
+          }),
+          headers: Joi.object({
+            'Accept-Language': Joi.string().description(
+              'Header de sélection de langue au format [RFC9110](https://httpwg.org/specs/rfc9110.html#field.accept-language)',
+            ),
+          }).unknown(),
         },
         pre: [organizationPreHandler, isOrganizationInJurisdictionPreHandler],
         handler: getOrganizationCampaigns,
@@ -58,35 +74,42 @@ const register = async function (server) {
         response: {
           failAction: 'log',
           status: {
-            200: Joi.array()
-              .items(
-                Joi.object({
-                  id: Joi.number().description('ID de la campagne'),
-                  name: Joi.string().description('Nom de la campagne'),
-                  type: Joi.string().description('Type de la campagne : ASSESSMENT, EXAM, PROFILES_COLLECTION'),
-                  targetProfileName: Joi.string().description(
-                    'Nom du profil cible lié à la campagne, null si le type de la campagne est `PROFILES_COLLECTION`',
-                  ),
-                  code: Joi.string().description('Code campagne'),
-                  createdAt: Joi.date().description('Date de création de la campagne'),
-                  tubes: Joi.array()
-                    .items(
-                      Joi.object({
-                        competenceId: Joi.string().description('ID de la compétence auquel appartient le sujet'),
-                        id: Joi.string().description('ID du sujet'),
-                        maxLevel: Joi.number().description('Niveau maximum atteignable dans cette campagne'),
-                        meanLevel: Joi.number().description('Niveau moyen obtenu dans cette campagne'),
-                        practicalDescription: Joi.string().description('Description du sujet'),
-                        practicalTitle: Joi.string().description('Titre du sujet'),
-                      }).label('Tube'),
-                    )
-                    .description(
-                      'Sujets évalués dans la campagne, null si le type de la campagne est `PROFILES_COLLECTION`',
-                    )
-                    .label('Tubes'),
-                }).label('Campaign'),
-              )
-              .label('Campaigns'),
+            200: Joi.object({
+              campaigns: Joi.array()
+                .items(
+                  Joi.object({
+                    id: Joi.number().description('ID de la campagne'),
+                    name: Joi.string().description('Nom de la campagne'),
+                    type: Joi.string().description('Type de la campagne : ASSESSMENT, EXAM, PROFILES_COLLECTION'),
+                    targetProfileName: Joi.string().description(
+                      'Nom du profil cible lié à la campagne, null si le type de la campagne est `PROFILES_COLLECTION`',
+                    ),
+                    code: Joi.string().description('Code campagne'),
+                    createdAt: Joi.date().description('Date de création de la campagne'),
+                    tubes: Joi.array()
+                      .items(
+                        Joi.object({
+                          competenceId: Joi.string().description('ID de la compétence auquel appartient le sujet'),
+                          id: Joi.string().description('ID du sujet'),
+                          maxLevel: Joi.number().description('Niveau maximum atteignable dans cette campagne'),
+                          meanLevel: Joi.number().description('Niveau moyen obtenu dans cette campagne'),
+                          practicalDescription: Joi.string().description('Description du sujet'),
+                          practicalTitle: Joi.string().description('Titre du sujet'),
+                        }).label('Tube'),
+                      )
+                      .description(
+                        'Sujets évalués dans la campagne, null si le type de la campagne est `PROFILES_COLLECTION`',
+                      )
+                      .label('Tubes'),
+                  }).label('Campaign'),
+                )
+                .label('Campaigns'),
+              page: Joi.object({
+                number: Joi.number().description('Numéro de la page courante'),
+                size: Joi.number().description('Taille de la page courante'),
+                count: Joi.number().description('Nombre total de page'),
+              }).description('Information de pagination'),
+            }),
             401: responseObjectErrorDoc,
             403: responseObjectErrorDoc,
           },
