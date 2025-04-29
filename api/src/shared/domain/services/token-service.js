@@ -184,7 +184,7 @@ function extractClientId(token, secret = config.authentication.secret) {
 }
 
 async function extractExternalUserFromIdToken(token) {
-  const externalUser = await getDecodedToken(token);
+  const externalUser = getDecodedToken(token);
 
   if (!externalUser) {
     throw new InvalidExternalUserTokenError(
