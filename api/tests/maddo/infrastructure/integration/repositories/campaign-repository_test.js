@@ -67,7 +67,7 @@ describe('Maddo | Infrastructure | Repositories | Integration | campaign', funct
       await databaseBuilder.commit();
 
       // when
-      const { campaigns, page } = await findByOrganizationId(organization.id, { number: 1, size: 2 });
+      const { campaigns, page } = await findByOrganizationId(organization.id, { number: 1, size: 2 }, 'en');
 
       // then
       expect(page).to.deep.equal({
@@ -89,8 +89,8 @@ describe('Maddo | Infrastructure | Repositories | Integration | campaign', funct
               id: tube.id,
               maxLevel: skill.level,
               meanLevel: 2,
-              practicalDescription: tube.practicalDescription_i18n['fr'],
-              practicalTitle: tube.practicalTitle_i18n['fr'],
+              practicalDescription: tube.practicalDescription_i18n.en,
+              practicalTitle: tube.practicalTitle_i18n.en,
             },
           ],
         }),
@@ -107,8 +107,8 @@ describe('Maddo | Infrastructure | Repositories | Integration | campaign', funct
               id: tube.id,
               maxLevel: skill.level,
               meanLevel: 0,
-              practicalDescription: tube.practicalDescription_i18n['fr'],
-              practicalTitle: tube.practicalTitle_i18n['fr'],
+              practicalDescription: tube.practicalDescription_i18n.en,
+              practicalTitle: tube.practicalTitle_i18n.en,
             },
           ],
         }),

@@ -2,11 +2,12 @@ import { knex } from '../../../../db/knex-database-connection.js';
 import * as campaignAPI from '../../../prescription/campaign/application/api/campaigns-api.js';
 import { Campaign } from '../../domain/models/Campaign.js';
 
-export async function findByOrganizationId(organizationId, page) {
+export async function findByOrganizationId(organizationId, page, locale) {
   const campaigns = await campaignAPI.findAllForOrganization({
     organizationId,
     withCoverRate: true,
     page,
+    locale,
   });
   return {
     page: toPage(campaigns.meta),

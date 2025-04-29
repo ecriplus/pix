@@ -269,6 +269,79 @@ describe('Acceptance | Maddo | Route | Organizations', function () {
       });
     });
 
+    context('language negociation', function () {
+      it('should return translated tube title and description', async function () {
+        // given
+        const targetProfile = databaseBuilder.factory.buildTargetProfile();
+        const campaignInJurisdiction = databaseBuilder.factory.buildCampaign({
+          organizationId: orgaInJurisdiction.id,
+          targetProfileId: targetProfile.id,
+        });
+
+        const frameworkId = databaseBuilder.factory.learningContent.buildFramework().id;
+        const areaId = databaseBuilder.factory.learningContent.buildArea({ frameworkId }).id;
+        const competenceId = databaseBuilder.factory.learningContent.buildCompetence({ areaId }).id;
+        const tube = databaseBuilder.factory.learningContent.buildTube({ competenceId });
+        const skillId = databaseBuilder.factory.learningContent.buildSkill({ tubeId: tube.id, status: 'actif' }).id;
+
+        databaseBuilder.factory.buildCampaignSkill({ campaignId: campaignInJurisdiction.id, skillId });
+        const userId = databaseBuilder.factory.buildUser().id;
+
+        const participationUser = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaignInJurisdiction.id,
+          userId,
+        });
+
+        const ke = databaseBuilder.factory.buildKnowledgeElement({
+          status: KnowledgeElement.StatusType.VALIDATED,
+          skillId,
+          userId: participationUser.userId,
+        });
+
+        databaseBuilder.factory.buildKnowledgeElementSnapshot({
+          campaignParticipationId: participationUser.id,
+          snapshot: new KnowledgeElementCollection([ke]).toSnapshot(),
+        });
+
+        await databaseBuilder.commit();
+
+        const options = {
+          method: 'GET',
+          url: `/api/organizations/${orgaInJurisdiction.id}/campaigns?page[number]=1&page[size]=1`,
+          headers: {
+            authorization: generateValidRequestAuthorizationHeaderForApplication(clientId, 'pix-client', 'campaigns'),
+            'accept-language': 'en',
+          },
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result.campaigns).to.deep.equal([
+          new Campaign({
+            id: campaignInJurisdiction.id,
+            name: campaignInJurisdiction.name,
+            type: campaignInJurisdiction.type,
+            targetProfileName: targetProfile.name,
+            code: campaignInJurisdiction.code,
+            createdAt: campaignInJurisdiction.createdAt,
+            tubes: [
+              {
+                id: tube.id,
+                competenceId,
+                maxLevel: 2,
+                meanLevel: 2,
+                practicalDescription: tube.practicalDescription_i18n.en,
+                practicalTitle: tube.practicalTitle_i18n.en,
+              },
+            ],
+          }),
+        ]);
+      });
+    });
+
     it('responds with an HTTP Forbidden when organization is not in jurisdiction', async function () {
       // given
       const options = {

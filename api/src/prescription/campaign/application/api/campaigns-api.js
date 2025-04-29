@@ -137,6 +137,7 @@ export const findAllForOrganization = async (payload) => {
   const { models: campaigns, meta } = await usecases.findPaginatedFilteredOrganizationCampaigns({
     organizationId: payload.organizationId,
     page: payload.page,
+    locale: payload.locale,
     withCoverRate: payload.withCoverRate ?? false,
   });
 
