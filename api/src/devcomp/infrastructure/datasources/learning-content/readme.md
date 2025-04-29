@@ -1,5 +1,8 @@
 # Contenus des Modules de formation Pix (bêta)
 
+> [!NOTE]
+> Cette documentation n'est pas à jour.
+
 Pix expérimente la mise à disposition de modules de formation autour des sujets numériques. Ils sont pour le moment conçus en interne, et utilisables via la plateforme Pix. Le répertoire `modules` sert de stockage technique des contenus des différents modules accessibles.
 
 > [!IMPORTANT]
@@ -33,8 +36,7 @@ flowchart TD
   B --> C[Création d'élément];
   C --> C;
   B --> B;
-  B --> D[Création de textes de transition];
-  D --> E[Proposer la mise à jour];
+  B --> D[Proposer la mise à jour];
 ```
 
 #### Création d'un nouveau module
