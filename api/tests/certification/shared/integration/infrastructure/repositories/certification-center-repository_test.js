@@ -143,6 +143,8 @@ describe('Integration | Repository | Certification Center', function () {
           createdAt: new Date('2018-01-01T05:43:10Z'),
           habilitations: [],
           updatedAt: now,
+          archivedAt: null,
+          archivedBy: null,
         });
 
         await databaseBuilder.commit();
@@ -187,6 +189,8 @@ describe('Integration | Repository | Certification Center', function () {
           createdAt: new Date('2018-01-01T05:43:10Z'),
           habilitations: [expectedComplementaryCertification],
           updatedAt: now,
+          archivedAt: null,
+          archivedBy: null,
         });
         const sessionId = databaseBuilder.factory.buildSession({ certificationCenterId }).id;
 
