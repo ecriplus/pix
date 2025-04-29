@@ -299,8 +299,9 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
 
         // then
         expect(response.statusCode).to.equal(200);
-        expect(response.result.data.attributes['access-token']).to.exist;
-        const decodedAccessToken = await decodeIfValid(response.result.data.attributes['access-token']);
+        const token = response.result.data.attributes['access-token'];
+        expect(token).to.exist;
+        const decodedAccessToken = await decodeIfValid(token);
         expect(decodedAccessToken).to.include({
           aud: 'https://app.pix.fr',
         });
