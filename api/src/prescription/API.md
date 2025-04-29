@@ -1,4 +1,4 @@
-This doc has been generated on 28/04/2025 11:04:53 with `scripts/generate-api-documentation.js`. See package.json.
+This doc has been generated on 4/29/2025, 11:49:54 AM with `scripts/generate-api-documentation.js`. See package.json.
 
 ---
 ## Modules
@@ -24,6 +24,8 @@ This doc has been generated on 28/04/2025 11:04:53 with `scripts/generate-api-do
 <dt><a href="#AssessmentCampaignParticipation">AssessmentCampaignParticipation</a></dt>
 <dd></dd>
 <dt><a href="#ProfilesCollectionCampaignParticipation">ProfilesCollectionCampaignParticipation</a></dt>
+<dd></dd>
+<dt><a href="#TubeCoverage">TubeCoverage</a></dt>
 <dd></dd>
 </dl>
 
@@ -51,8 +53,6 @@ This doc has been generated on 28/04/2025 11:04:53 with `scripts/generate-api-do
 <dt><a href="#CampaignParticipationArgs">CampaignParticipationArgs</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#AssessmentCampaignParticipationArgs">AssessmentCampaignParticipationArgs</a> : <code>object</code></dt>
-<dd></dd>
-<dt><a href="#TubeCoverage">TubeCoverage</a> : <code>object</code></dt>
 <dd></dd>
 <dt><a href="#ProfilesCollectionCampaignParticipationArgs">ProfilesCollectionCampaignParticipationArgs</a> : <code>object</code></dt>
 <dd></dd>
@@ -551,6 +551,35 @@ Récupère les organizations-learners avec leurs participations à partir d'une 
 | --- | --- |
 | args | [<code>ProfilesCollectionCampaignParticipationArgs</code>](#ProfilesCollectionCampaignParticipationArgs) | 
 
+<a name="TubeCoverage"></a>
+
+## TubeCoverage
+**Kind**: global class  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| id | <code>string</code> | 
+| competenceId | <code>string</code> | 
+| practicalTitle | <code>string</code> | 
+| practicalDescription | <code>string</code> | 
+| maxLevel | <code>number</code> | 
+| reachedLevel | <code>number</code> | 
+
+<a name="new_TubeCoverage_new"></a>
+
+### new TubeCoverage(args)
+
+| Param | Type |
+| --- | --- |
+| args | <code>object</code> | 
+| args.id | <code>string</code> | 
+| args.competenceId | <code>string</code> | 
+| args.practicalTitle | <code>string</code> | 
+| args.practicalDescription | <code>string</code> | 
+| args.maxLevel | <code>number</code> | 
+| args.reachedLevel | <code>number</code> | 
+
 <a name="hasBeenLearner"></a>
 
 ## hasBeenLearner ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -621,21 +650,6 @@ delete organization learner before adding import feature
 | --- | --- |
 | masteryRate | <code>number</code> | 
 | tubes | [<code>Array.&lt;TubeCoverage&gt;</code>](#TubeCoverage) | 
-
-<a name="TubeCoverage"></a>
-
-## TubeCoverage : <code>object</code>
-**Kind**: global typedef  
-**Properties**
-
-| Name | Type |
-| --- | --- |
-| id | <code>string</code> | 
-| competenceId | <code>string</code> | 
-| reachedLevel | <code>number</code> | 
-| maxLevel | <code>number</code> | 
-| practicalTitle | <code>string</code> | 
-| practicalDescription | <code>string</code> | 
 
 <a name="ProfilesCollectionCampaignParticipationArgs"></a>
 
