@@ -34,6 +34,7 @@ const serialize = function (campaignReports, meta) {
       'averageResult',
       'campaignCollectiveResult',
       'campaignAnalysis',
+      'campaignResultLevelsPerTubesAndCompetence',
       'divisions',
       'stages',
       'totalStage',
@@ -70,6 +71,16 @@ const serialize = function (campaignReports, meta) {
       relationshipLinks: {
         related(record, current, parent) {
           return `/api/campaigns/${parent.id}/analyses`;
+        },
+      },
+    },
+    campaignResultLevelsPerTubesAndCompetence: {
+      ref: 'id',
+      ignoreRelationshipData: true,
+      nullIfMissing: true,
+      relationshipLinks: {
+        related(record, current, parent) {
+          return `/api/campaigns/${parent.id}/level-per-tubes-and-competences`;
         },
       },
     },
