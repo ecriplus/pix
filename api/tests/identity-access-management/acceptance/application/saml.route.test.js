@@ -1,3 +1,5 @@
+import { env } from 'node:process';
+
 import _ from 'lodash';
 import samlify from 'samlify';
 
@@ -260,6 +262,8 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
     describe('when user has a reconciled Pix account and successfully authenticate to Pix from GAR (saml)', function () {
       it('returns a 200 with accessToken', async function () {
         // given
+        env.DEBUG = 'pix:token-service:invalid-token';
+
         const password = 'Pix123';
         const userAttributes = {
           firstName: 'saml',
