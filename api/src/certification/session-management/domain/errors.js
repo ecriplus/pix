@@ -100,7 +100,15 @@ class SendingEmailToResultRecipientError extends DomainError {
   }
 }
 
+class CertificationCenterIsArchivedError extends DomainError {
+  constructor(message = 'Ce centre de certification est archivé.') {
+    super(message);
+    this.code = 'CERTIFICATION_CENTER_IS_ARCHIVED';
+  }
+}
+
 export {
+  CertificationCenterIsArchivedError,
   CertificationCourseNotPublishableError,
   CertificationIssueReportAutomaticallyResolvedShouldNotBeUpdatedManually,
   ChallengeToBeDeneutralizedNotFoundError,
