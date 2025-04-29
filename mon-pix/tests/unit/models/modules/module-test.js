@@ -10,14 +10,16 @@ module('Unit | Model | Module | Module', function (hooks) {
     const details = Symbol('details');
     const store = this.owner.lookup('service:store');
     const version = Symbol('version');
+    const isBeta = Symbol('isBeta');
     const grain = store.createRecord('grain', {});
 
     // when
-    const module = store.createRecord('module', { title, details, version, grains: [grain] });
+    const module = store.createRecord('module', { title, isBeta, details, version, grains: [grain] });
 
     // then
     assert.ok(module);
     assert.strictEqual(module.title, title);
+    assert.strictEqual(module.isBeta, isBeta);
     assert.strictEqual(module.details, details);
     assert.strictEqual(module.version, version);
     assert.strictEqual(module.grains[0], grain);
