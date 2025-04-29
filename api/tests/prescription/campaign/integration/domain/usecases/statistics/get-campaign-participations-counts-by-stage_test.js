@@ -1,4 +1,5 @@
 import { usecases } from '../../../../../../../src/prescription/campaign/domain/usecases/index.js';
+import { CampaignParticipationStatuses } from '../../../../../../../src/prescription/shared/domain/constants.js';
 import {
   NoStagesForCampaign,
   UserNotAuthorizedToAccessEntityError,
@@ -48,17 +49,25 @@ describe('Integration | UseCase | get-campaign-participations-counts-by-stage', 
     await mockLearningContent(learningContentObjects);
 
     const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+
     organizationId = databaseBuilder.factory.buildOrganization().id;
     userId = databaseBuilder.factory.buildUser().id;
+
     databaseBuilder.factory.buildMembership({ organizationId, userId });
+
+    // build stages
+
     stage1 = databaseBuilder.factory.buildStage({
       targetProfileId,
-      threshold: 0,
       prescriberTitle: 'title',
+      isFirstSkill: true,
       prescriberDescription: 'desc',
     });
     stage2 = databaseBuilder.factory.buildStage({ targetProfileId, threshold: 30 });
     stage3 = databaseBuilder.factory.buildStage({ targetProfileId, threshold: 70 });
+
+    // build campaign and campaign skills
+
     campaignId = databaseBuilder.factory.buildCampaign({ organizationId, targetProfileId }).id;
     databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'recSkillId1' });
     databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'recSkillId2' });
@@ -102,30 +111,6 @@ describe('Integration | UseCase | get-campaign-participations-counts-by-stage', 
   });
 
   context('when the campaign manage stages', function () {
-    it('should return participations counts by stages', async function () {
-      databaseBuilder.factory.buildCampaignParticipation({ campaignId, masteryRate: 0 });
-      databaseBuilder.factory.buildCampaignParticipation({ campaignId, masteryRate: 0.31 });
-      databaseBuilder.factory.buildCampaignParticipation({ campaignId, masteryRate: 0.72 });
-      await databaseBuilder.commit();
-
-      // when
-      const result = await usecases.getCampaignParticipationsCountByStage({ userId, campaignId });
-
-      // then
-      expect(result).to.deep.equal([
-        {
-          id: stage1.id,
-          value: 1,
-          title: stage1.prescriberTitle,
-          description: stage1.prescriberDescription,
-          reachedStage: 1,
-          totalStage: 3,
-        },
-        { id: stage2.id, value: 1, title: null, description: null, reachedStage: 2, totalStage: 3 },
-        { id: stage3.id, value: 1, title: null, description: null, reachedStage: 3, totalStage: 3 },
-      ]);
-    });
-
     it('should set to 0 all participation counts when no participations', async function () {
       await databaseBuilder.commit();
 
@@ -144,6 +129,67 @@ describe('Integration | UseCase | get-campaign-participations-counts-by-stage', 
         },
         { id: stage2.id, value: 0, title: null, description: null, reachedStage: 2, totalStage: 3 },
         { id: stage3.id, value: 0, title: null, description: null, reachedStage: 3, totalStage: 3 },
+      ]);
+    });
+
+    it('should return participations counts by stages', async function () {
+      // this participation should not be taken into account
+      const toShareParticipation = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId,
+        status: CampaignParticipationStatuses.TO_SHARE,
+      });
+
+      // shared participations
+      const [sharedParticipation1, sharedParticipation2, sharedParticipation3] = Array.from({ length: 3 }, () =>
+        databaseBuilder.factory.buildCampaignParticipation({
+          campaignId,
+          status: CampaignParticipationStatuses.SHARED,
+        }),
+      );
+
+      // stage 1
+      databaseBuilder.factory.buildStageAcquisition({
+        campaignParticipationId: sharedParticipation1.id,
+        stageId: stage1.id,
+      });
+      databaseBuilder.factory.buildStageAcquisition({
+        campaignParticipationId: sharedParticipation2.id,
+        stageId: stage1.id,
+      });
+
+      // stage 2
+      databaseBuilder.factory.buildStageAcquisition({
+        campaignParticipationId: toShareParticipation.id,
+        stageId: stage2.id,
+      }); // this participation should not be taken into account
+      databaseBuilder.factory.buildStageAcquisition({
+        campaignParticipationId: sharedParticipation3.id,
+        stageId: stage2.id,
+      });
+
+      // stage 3
+      databaseBuilder.factory.buildStageAcquisition({
+        campaignParticipationId: sharedParticipation3.id,
+        stageId: stage3.id,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const result = await usecases.getCampaignParticipationsCountByStage({ userId, campaignId });
+
+      // then
+      expect(result).to.deep.equal([
+        {
+          id: stage1.id,
+          value: 2,
+          title: stage1.prescriberTitle,
+          description: stage1.prescriberDescription,
+          reachedStage: 1,
+          totalStage: 3,
+        },
+        { id: stage2.id, value: 0, title: null, description: null, reachedStage: 2, totalStage: 3 },
+        { id: stage3.id, value: 1, title: null, description: null, reachedStage: 3, totalStage: 3 },
       ]);
     });
   });
