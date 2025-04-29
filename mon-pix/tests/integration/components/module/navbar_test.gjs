@@ -259,6 +259,5 @@ function createModule(owner) {
   return store.createRecord('module', {
     title: 'Didacticiel',
     grains: [grain1, grain2, grain3, grain4],
-    transitionTexts: [],
   });
 }
