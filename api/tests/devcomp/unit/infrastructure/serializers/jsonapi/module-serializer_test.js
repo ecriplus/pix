@@ -47,7 +47,6 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
           attributes: {
             title,
             'is-beta': isBeta,
-            'transition-texts': [],
             details,
           },
           relationships: {
@@ -83,19 +82,12 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
           'Comprendre les fonctions des parties d’une adresse mail',
         ],
       };
-      const transitionTexts = [
-        {
-          content: '<p>content</p>',
-          grainId: '1',
-        },
-      ];
       const moduleFromDomain = new Module({
         id,
         slug,
         title,
         isBeta,
         details,
-        transitionTexts,
         grains: [
           {
             id: '1',
@@ -110,7 +102,6 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
           attributes: {
             title: 'Bien écrire son adresse mail',
             'is-beta': isBeta,
-            'transition-texts': transitionTexts,
             details,
           },
           id: 'bien-ecrire-son-adresse-mail',

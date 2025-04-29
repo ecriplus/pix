@@ -25,7 +25,6 @@ import { Details } from '../../domain/models/module/Details.js';
 import { Module } from '../../domain/models/module/Module.js';
 import { QcmProposal } from '../../domain/models/QcmProposal.js';
 import { QcuProposal } from '../../domain/models/QcuProposal.js';
-import { TransitionText } from '../../domain/models/TransitionText.js';
 
 export class ModuleFactory {
   static build(moduleData) {
@@ -36,7 +35,6 @@ export class ModuleFactory {
         title: moduleData.title,
         version: moduleData.version,
         isBeta: moduleData.isBeta,
-        transitionTexts: moduleData.transitionTexts?.map((transitionText) => new TransitionText(transitionText)) ?? [],
         details: new Details(moduleData.details),
         grains: moduleData.grains.map((grain) => {
           return new Grain({
