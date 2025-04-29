@@ -17,6 +17,9 @@ const register = async function (server) {
             data: Joi.object({
               attributes: Joi.object({
                 'module-id': Joi.string().required(),
+                'module-version': Joi.string().required(),
+                'sequence-number': Joi.number().required(),
+                'occurred-at': Joi.number().required(),
               }).required(),
             }).required(),
           }).required(),
