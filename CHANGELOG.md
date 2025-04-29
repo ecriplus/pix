@@ -1,5 +1,36 @@
 # Pix Changelog
 
+## v5.100.0 (29/04/2025)
+
+
+### :rocket: Amélioration
+- [#12158](https://github.com/1024pix/pix/pull/12158) [FEATURE] Arrêter de supporter les textes de transitions (API) (PIX-17570).
+- [#12160](https://github.com/1024pix/pix/pull/12160) [FEATURE] Enregistrer l'événement STARTED sur le usecase record-passage-events (PIX-17620).
+
+### :building_construction: Tech
+- [#12154](https://github.com/1024pix/pix/pull/12154) [TECH] Mise à jours de dépendances sur PixOrga (PIX-17623).
+- [#12152](https://github.com/1024pix/pix/pull/12152) [TECH] Utiliser les paliers acquis pour afficher les statistiques de répartition par palier sur la page d'analyse (PIX-17629).
+- [#12165](https://github.com/1024pix/pix/pull/12165) [TECH] Appeler le usecase record-passage-events dans le controller create-passage (PIX-17657).
+- [#12164](https://github.com/1024pix/pix/pull/12164) [TECH] add index on tables.
+- [#12125](https://github.com/1024pix/pix/pull/12125) [TECH] Ajouter le cas d'une certification v3 obtenue dans les seeds certif (PIX-17600).
+- [#12127](https://github.com/1024pix/pix/pull/12127) [TECH] Migrer la route /api/sco-organization-learners/dependent dans organization-learner (PIX-16332).
+- [#12153](https://github.com/1024pix/pix/pull/12153) [TECH] Migrer les textes de transition des modules (PIX-17563).
+- [#12111](https://github.com/1024pix/pix/pull/12111) [TECH] Correction d'un test non fiable sur l'import de profil cible.
+- [#12145](https://github.com/1024pix/pix/pull/12145) [TECH] Suppression de la table Maddo inutilisée campaign_participation_tube_reached_levels.
+
+### :bug: Correction
+- [#12144](https://github.com/1024pix/pix/pull/12144) [BUGFIX] Récupérer uniquement les habilitations propres à un centre (PIX-17618).
+
+### :arrow_up: Montée de version
+- [#12170](https://github.com/1024pix/pix/pull/12170) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.3 (dossier racine).
+- [#12173](https://github.com/1024pix/pix/pull/12173) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.3 (junior).
+- [#12171](https://github.com/1024pix/pix/pull/12171) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.3 (e2e-playwright).
+- [#12167](https://github.com/1024pix/pix/pull/12167) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.3 (audit-logger).
+- [#12169](https://github.com/1024pix/pix/pull/12169) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.3 (certif).
+- [#12142](https://github.com/1024pix/pix/pull/12142) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.2 (junior).
+- [#12166](https://github.com/1024pix/pix/pull/12166) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.3 (api).
+- [#12150](https://github.com/1024pix/pix/pull/12150) [BUMP] Update dependency webpack to v5.99.6 (junior).
+
 ## v5.99.0 (28/04/2025)
 
 
