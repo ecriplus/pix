@@ -1,24 +1,33 @@
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
+import AnalysisPerTubesAndCompetences from 'pix-orga/components/analysis/analysis-per-tubes-and-competences';
 import Competences from 'pix-orga/components/campaign/analysis/competences';
 import Recommendations from 'pix-orga/components/campaign/analysis/recommendations';
 import EmptyState from 'pix-orga/components/campaign/empty-state';
+
 <template>
   {{pageTitle (t "pages.campaign-review.title")}}
+  {{#if @model.campaign.hasSharedParticipations}}
+    {{#if @model.isNewPage}}
+      <AnalysisPerTubesAndCompetences @data={{@model.analysisData}} />
+    {{else}}
+      <h2 class="screen-reader-only">{{t "pages.campaign-review.title"}}</h2>
+      <Recommendations
+        @campaignTubeRecommendations={{@model.campaign.campaignAnalysis.campaignTubeRecommendations}}
+        @displayAnalysis={{@model.campaign.hasSharedParticipations}}
+      />
 
-  {{#if @model.hasSharedParticipations}}
-    <h2 class="screen-reader-only">{{t "pages.campaign-review.title"}}</h2>
-    <Recommendations
-      @campaignTubeRecommendations={{@model.campaignAnalysis.campaignTubeRecommendations}}
-      @displayAnalysis={{@model.hasSharedParticipations}}
-    />
+      <Competences
+        @campaignId={{@model.campaign.id}}
+        @campaignCollectiveResult={{@model.campaign.campaignCollectiveResult}}
+      />
+    {{/if}}
 
-    <Competences @campaignId={{@model.id}} @campaignCollectiveResult={{@model.campaignCollectiveResult}} />
   {{else}}
     {{#if @controller.isGarAuthenticationMethod}}
       <EmptyState />
     {{else}}
-      <EmptyState @campaignCode={{@model.code}} />
+      <EmptyState @campaignCode={{@model.campaign.code}} />
     {{/if}}
   {{/if}}
 </template>

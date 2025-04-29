@@ -273,6 +273,20 @@
     "no-content": "Geen inhoud"
   },
   "components": {
+    "analysis-per-tubes-and-competences": {
+      "detailed-positioning": "Gedetailleerde positionering",
+      "gauge": {
+        "label": "Niveau {reachedLevel} van {maxLevel}"
+      },
+      "table": {
+        "caption": "{index} - {name}",
+        "column": {
+          "level": "Niveau",
+          "positioning": "Positionering",
+          "tubes": "Onderwerpnaam en -beschrijving"
+        }
+      }
+    },
     "campaign": {
       "type": {
         "explanation": {

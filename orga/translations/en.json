@@ -273,6 +273,20 @@
     }
   },
   "components": {
+    "analysis-per-tubes-and-competences": {
+      "detailed-positioning": "Detailed positioning",
+      "gauge": {
+        "label": "Level {reachedLevel} of {maxLevel}"
+      },
+      "table": {
+        "caption": "{index} - {name}",
+        "column": {
+          "level": "Level",
+          "positioning": "Positioning",
+          "tubes": "Subject name and description"
+        }
+      }
+    },
     "campaign": {
       "type": {
         "explanation": {
