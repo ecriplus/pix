@@ -19,6 +19,7 @@ import {
   SIMPLE_SCO_ORGANIZATION_MEMBER_ID,
   SIMPLE_SCO_SESSION,
 } from '../constants.js';
+import makeCandidatePassCertification from '../tools/makeCandidatePassCertification.js';
 
 /**
  * --- CERTIFICATION CASE ---
@@ -50,22 +51,20 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
   await databaseBuilder.commit();
 
   // Organization
-  const organization = new OrganizationForAdmin({
-    name: 'Certification Sco Organization #1',
-    type: 'SCO',
-    isManagingStudents: true,
-    externalId,
-  });
-
-  const newOrga = await organizationalEntitiesUsecases.createOrganization({
-    organization,
+  const organization = await organizationalEntitiesUsecases.createOrganization({
+    organization: new OrganizationForAdmin({
+      name: 'Certification Sco Organization #1',
+      type: 'SCO',
+      isManagingStudents: true,
+      externalId,
+    }),
     organizationCreationValidator,
   });
 
   const organizationMembership = await teamUsecases.createMembership({
     organizationRole: Membership.roles.ADMIN,
     userId: organizationMember.id,
-    organizationId: newOrga.id,
+    organizationId: organization.id,
   });
 
   // Certification center
@@ -107,7 +106,7 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
 
   const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
     userId: scoUser.id,
-    organizationId: newOrga.id,
+    organizationId: organization.id,
     firstName: scoUser.firstName,
     lastName: scoUser.lastName,
     email: scoUser.email,
@@ -138,7 +137,7 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
       birthProvinceCode: null,
       division: '6eme',
       isDisabled: false,
-      organizationId: newOrga.id,
+      organizationId: organization.id,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -153,7 +152,7 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
       birthProvinceCode: null,
       division: 'Terminal',
       isDisabled: false,
-      organizationId: newOrga.id,
+      organizationId: organization.id,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -161,7 +160,7 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
 
   await databaseBuilder.commit();
 
-  // Transform this user into certification candidate
+  // Transform this user into a certification candidate
   const candidate = new Candidate({
     authorizedToStart: true,
     organizationLearnerId: organizationLearner.id,
@@ -176,6 +175,7 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
     hasSeenCertificationInstructions: false,
     accessibilityAdjustmentNeeded: false,
     subscriptions: [Subscription.buildCore({ certificationCandidateId: null })],
+    userId: scoUser.id,
   });
 
   /**
@@ -198,9 +198,16 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
     accessCode: 'AZERTY',
   });
 
-  await enrolmentUseCases.addCandidateToSession({
+  const candidateId = await enrolmentUseCases.addCandidateToSession({
     sessionId: SIMPLE_SCO_SESSION,
     candidate,
     normalizeStringFnc: normalize,
+  });
+
+  await makeCandidatePassCertification({
+    databaseBuilder,
+    sessionId: SIMPLE_SCO_SESSION,
+    candidateId,
+    isCertificationSucceeded: true,
   });
 }
