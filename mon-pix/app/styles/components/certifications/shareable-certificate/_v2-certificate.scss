@@ -1,0 +1,49 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
+.v2-shareable-certificate {
+  display: grid;
+  gap: var(--pix-spacing-10x);
+
+  h2 {
+    @extend %pix-title-xs;
+
+    margin-bottom: var(--pix-spacing-2x);
+  }
+
+  &__previous-button {
+    width: fit-content;
+    margin-top: var(--pix-spacing-10x);
+    margin-bottom: var(--pix-spacing-3x);
+  }
+
+  &__complementary-information {
+    @extend %pix-body-l;
+
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--pix-spacing-6x);
+
+    @include breakpoints.device-is('tablet') {
+      flex-direction: row;
+      gap: var(--pix-spacing-8x);
+      align-items: flex-start;
+
+      .certificate-competences-details {
+        width: 100%;
+      }
+    }
+  }
+
+  .v2-shareable-certificate-complementary-information {
+    &__details {
+      display: grid;
+      gap: var(--pix-spacing-6x);
+
+      @include breakpoints.device-is('tablet') {
+        gap: var(--pix-spacing-8x);
+        min-width: 21rem;
+      }
+    }
+  }
+}

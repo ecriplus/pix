@@ -6,7 +6,6 @@ import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
 import { authenticate } from '../../../helpers/authentication';
-import { getTableData } from '../../../helpers/get-table-data';
 
 module('Acceptance | Authenticated | User certifications | get', function (hooks) {
   setupApplicationTest(hooks);
@@ -57,14 +56,7 @@ module('Acceptance | Authenticated | User certifications | get', function (hooks
           // then
           assert.dom(screen.getByRole('link', { name: t('pages.certificate.back-link') })).exists();
           assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.title') })).exists();
-          const table = screen.getByRole('table');
-          const tableData = await getTableData(table);
-          assert.deepEqual(tableData, [
-            {
-              'MON SUPER DOMAINE': 'Ma superbe compétence',
-              NIVEAU: '6',
-            },
-          ]);
+          assert.dom(screen.getByRole('heading', { name: t('pages.certificate.details.competences.title') })).exists();
         });
       });
     });
@@ -114,14 +106,7 @@ module('Acceptance | Authenticated | User certifications | get', function (hooks
           assert.dom(screen.getByRole('link', { name: t('pages.certificate.back-link') })).exists();
           assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.title') })).exists();
           assert.dom(screen.getByRole('heading', { level: 2, name: t('pages.certificate.jury-title') })).exists();
-          const table = screen.getByRole('table');
-          const tableData = await getTableData(table);
-          assert.deepEqual(tableData, [
-            {
-              'MON SUPER DOMAINE': 'Ma superbe compétence',
-              NIVEAU: '6',
-            },
-          ]);
+          assert.dom(screen.getByRole('heading', { name: t('pages.certificate.details.competences.title') })).exists();
         });
       });
     });
