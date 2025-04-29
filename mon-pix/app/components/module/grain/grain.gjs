@@ -7,7 +7,6 @@ import { t } from 'ember-intl';
 import { eq } from 'ember-truth-helpers';
 import Element from 'mon-pix/components/module/component/element';
 import Stepper from 'mon-pix/components/module/component/stepper';
-import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 import didInsert from 'mon-pix/modifiers/modifier-did-insert';
 
 export default class ModuleGrain extends Component {
@@ -180,12 +179,6 @@ export default class ModuleGrain extends Component {
     >
       {{#if this.hasTitle}}
         <h2 class="screen-reader-only">{{@grain.title}}</h2>
-      {{/if}}
-
-      {{#if @transition}}
-        <header class="grain__header">
-          {{htmlUnsafe @transition.content}}
-        </header>
       {{/if}}
 
       <div class="grain__card grain-card--{{this.grainType}}">
