@@ -76,31 +76,6 @@ const register = async function (server) {
       },
     },
     {
-      method: 'GET',
-      path: '/api/assessments/{id}/last-challenge-id',
-      config: {
-        pre: [
-          {
-            method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([
-                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-                securityPreHandlers.checkAdminMemberHasRoleCertif,
-                securityPreHandlers.checkAdminMemberHasRoleSupport,
-                securityPreHandlers.checkAdminMemberHasRoleMetier,
-              ])(request, h),
-            assign: 'hasAuthorizationToAccessAdminScope',
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            id: identifiersType.assessmentId,
-          }),
-        },
-        handler: assessmentController.getLastChallengeId,
-        tags: ['api'],
-      },
-    },
-    {
       method: 'PATCH',
       path: '/api/assessments/{id}/complete-assessment',
       config: {

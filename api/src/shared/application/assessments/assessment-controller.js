@@ -44,14 +44,6 @@ const get = async function (request, _, dependencies = { assessmentSerializer })
   return dependencies.assessmentSerializer.serialize(assessment);
 };
 
-const getLastChallengeId = async function (request, h) {
-  const assessmentId = request.params.id;
-
-  const lastChallengeId = await usecases.getLastChallengeIdFromAssessmentId({ assessmentId });
-
-  return h.response(lastChallengeId).code(200);
-};
-
 const getNextChallenge = async function (request) {
   const assessmentId = request.params.id;
   const locale = extractLocaleFromRequest(request);
@@ -166,7 +158,6 @@ const createCertificationChallengeLiveAlert = async function (request, h) {
 const assessmentController = {
   save,
   get,
-  getLastChallengeId,
   getNextChallenge,
   completeAssessment,
   updateLastChallengeState,
