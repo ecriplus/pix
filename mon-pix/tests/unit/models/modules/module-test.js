@@ -9,15 +9,17 @@ module('Unit | Model | Module | Module', function (hooks) {
     const title = 'Bien écrire son adresse mail';
     const details = Symbol('details');
     const store = this.owner.lookup('service:store');
+    const version = Symbol('version');
     const grain = store.createRecord('grain', {});
 
     // when
-    const module = store.createRecord('module', { title, details, grains: [grain] });
+    const module = store.createRecord('module', { title, details, version, grains: [grain] });
 
     // then
     assert.ok(module);
     assert.strictEqual(module.title, title);
     assert.strictEqual(module.details, details);
+    assert.strictEqual(module.version, version);
     assert.strictEqual(module.grains[0], grain);
   });
 });

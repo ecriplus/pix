@@ -4,5 +4,6 @@ export default class Module extends Model {
   @attr('string') title;
   @attr('boolean') isBeta;
   @attr() details;
+  @attr('string') version;
   @hasMany('grain', { async: false, inverse: 'module' }) grains;
 }
