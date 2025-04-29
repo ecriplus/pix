@@ -1,3 +1,4 @@
+import { Passage } from '../../../../../src/devcomp/domain/models/Passage.js';
 import {
   FlashcardsCardAutoAssessedEvent,
   FlashcardsRectoReviewedEvent,
@@ -85,11 +86,12 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
       passageStartedEvent,
     ];
 
+    const passage = new Passage({ id: 2 });
     const passageEventRepositoryStub = {
       record: sinon.stub().resolves(),
     };
     const passageRepositoryStub = {
-      get: sinon.stub().resolves(),
+      get: sinon.stub().resolves(passage),
     };
 
     // when
@@ -133,7 +135,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
       };
 
       const passageRepositoryStub = {
-        get: sinon.stub().resolves(),
+        get: sinon.stub(),
       };
       const passageEventRepositoryStub = {
         record: sinon.stub().resolves(),
@@ -181,6 +183,38 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
       // then
       expect(error).to.be.instanceOf(DomainError);
       expect(error.message).to.equal(`Passage with id ${event.id} does not exist`);
+      expect(passageEventRepositoryStub.record).to.not.have.been.called;
+    });
+  });
+
+  context('when the passage for given passage id is terminated', function () {
+    it('should throw an error', async function () {
+      // given
+      const event = {
+        type: 'PASSAGE_STARTED',
+        occurredAt: new Date(),
+        sequenceNumber: 2,
+        contentHash: 'abc',
+        passageId: 123,
+      };
+
+      const passageRepositoryStub = {
+        get: sinon.stub().resolves(new Passage({ id: 123, terminatedAt: new Date() })),
+      };
+      const passageEventRepositoryStub = {
+        record: sinon.stub().resolves(),
+      };
+
+      // when
+      const error = await catchErr(recordPassageEvents)({
+        events: [event],
+        passageRepository: passageRepositoryStub,
+        passageEventRepository: passageEventRepositoryStub,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(DomainError);
+      expect(error.message).to.equal(`Passage with id ${event.id} is terminated.`);
       expect(passageEventRepositoryStub.record).to.not.have.been.called;
     });
   });

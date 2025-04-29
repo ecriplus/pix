@@ -11,17 +11,8 @@ import { PassageStartedEvent, PassageTerminatedEvent } from '../models/passage-e
 
 const recordPassageEvents = async function ({ events, passageRepository, passageEventRepository }) {
   await PromiseUtils.mapSeries(events, async (event) => {
-    try {
-      await passageRepository.get({ passageId: event.passageId });
-    } catch (error) {
-      if (error instanceof NotFoundError) {
-        throw new DomainError(`Passage with id ${event.id} does not exist`);
-      }
-
-      throw error;
-    }
-
     const passageEvent = _buildPassageEvent(event);
+    await _validatePassage({ event, passageRepository });
     await passageEventRepository.record(passageEvent);
   });
 };
@@ -44,6 +35,21 @@ function _buildPassageEvent(event) {
       return new FlashcardsRetriedEvent(event);
     default:
       throw new DomainError(`Passage event with type ${event.type} does not exist`);
+  }
+}
+
+async function _validatePassage({ event, passageRepository }) {
+  try {
+    const passage = await passageRepository.get({ passageId: event.passageId });
+    if (passage.terminatedAt != null) {
+      throw new DomainError(`Passage with id ${event.id} is terminated.`);
+    }
+  } catch (error) {
+    if (error instanceof NotFoundError) {
+      throw new DomainError(`Passage with id ${event.id} does not exist`);
+    }
+
+    throw error;
   }
 }
 
