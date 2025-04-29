@@ -11,6 +11,8 @@ import { eq } from 'ember-truth-helpers';
 
 export default class CertificateCompetencesDetails extends Component {
   @service url;
+  @service currentDomain;
+  @service currentUser;
 
   @tracked activeTab = 0;
 
@@ -23,7 +25,7 @@ export default class CertificateCompetencesDetails extends Component {
   handleTabNavigation(event) {
     const focusedTab = document.activeElement;
     const focusedTabIndex = Array.from(focusedTab.parentNode.children).indexOf(focusedTab);
-    const tabsCount = this.args.resultCompetenceTree.get('areas').length;
+    const tabsCount = this.args.certificate.resultCompetenceTree.get('areas').length;
 
     if (
       event.key === 'ArrowDown' ||
@@ -49,6 +51,14 @@ export default class CertificateCompetencesDetails extends Component {
     }
   }
 
+  get isUserFrenchReader() {
+    return this.currentUser.user && this.currentUser.user.lang === 'fr';
+  }
+
+  get displayCertificationResultsExplanation() {
+    return this.args.certificate.isV3 && (this.currentDomain.isFranceDomain || this.isUserFrenchReader);
+  }
+
   <template>
     <section class="certificate-competences-details">
       <h2 id="competences-list-title" class="certificate-competences-details__title">
@@ -56,18 +66,22 @@ export default class CertificateCompetencesDetails extends Component {
       </h2>
       <p class="certificate-competences-details__description">
         {{t "pages.certificate.details.competences.description"}}
-        <PixButtonLink
-          @href={{this.url.certificationResultsExplanationUrl}}
-          target="_blank"
-          rel="noopener noreferrer"
-          @variant="tertiary"
-          @iconAfter="openNew"
-        > {{t "pages.certificate.learn-about-certification-results"}}</PixButtonLink>
+        {{#if this.displayCertificationResultsExplanation}}
+          <PixButtonLink
+            @href={{this.url.certificationResultsExplanationUrl}}
+            target="_blank"
+            rel="noopener noreferrer"
+            @variant="tertiary"
+            @iconAfter="openNew"
+          >
+            {{t "pages.certificate.learn-about-certification-results"}}
+          </PixButtonLink>
+        {{/if}}
       </p>
 
       <PixBlock class="certificate-competences-details__tabs" @variant="admin">
         <div class="certificate-competences-details__tablist" role="tablist" aria-labelledby="competences-list-title">
-          {{#each @resultCompetenceTree.areas as |area index|}}
+          {{#each @certificate.resultCompetenceTree.areas as |area index|}}
             <button
               id="area-tab-{{index}}"
               class="certificate-competences-details-tablist__tab"
@@ -85,7 +99,7 @@ export default class CertificateCompetencesDetails extends Component {
           {{/each}}
         </div>
         <div>
-          {{#each @resultCompetenceTree.areas as |area index|}}
+          {{#each @certificate.resultCompetenceTree.areas as |area index|}}
             <div
               id="area-{{index}}"
               role="tabpanel"
