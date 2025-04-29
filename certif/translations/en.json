@@ -575,6 +575,7 @@
           },
           "description": "The password for the session to be invigilated has been revealed to you by a Pix Certif administrator",
           "errors": {
+            "certification-center-archived": "“You cannot access the certification centre because it is disabled.”",
             "incorrect-data": "The session number and/or the session password entered are incorrect.",
             "mandatory-fields": "The fields “Session number” and “Session password” are required."
           },
