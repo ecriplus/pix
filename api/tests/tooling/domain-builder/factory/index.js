@@ -1,4 +1,5 @@
 import { buildCertificate } from '../factory/certification/results/build-v3-certification-attestation.js';
+import { buildPassage } from '../factory/devcomp/build-passage.js';
 import { buildEmptyInformationBanner, buildInformationBanner } from './banner/build-banner-information.js';
 import { buildAccountRecoveryDemand } from './build-account-recovery-demand.js';
 import { buildActivity } from './build-activity.js';
@@ -293,6 +294,10 @@ const prescription = {
   },
 };
 
+const devcomp = {
+  buildPassage,
+};
+
 const identityAccessManagement = {
   buildUserLogin,
   buildLtiPlatformRegistration,
@@ -480,6 +485,7 @@ export {
   buildValidation,
   buildValidator,
   certification,
+  devcomp,
   identityAccessManagement,
   maddo,
   prescription,

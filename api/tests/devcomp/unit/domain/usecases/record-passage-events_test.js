@@ -12,7 +12,7 @@ import {
 } from '../../../../../src/devcomp/domain/models/passage-events/passage-events.js';
 import { recordPassageEvents } from '../../../../../src/devcomp/domain/usecases/record-passage-events.js';
 import { DomainError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, expect, sinon } from '../../../../test-helper.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function () {
   it('should call passage event repository to create the events', async function () {
@@ -86,7 +86,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
       passageStartedEvent,
     ];
 
-    const passage = new Passage({ id: 2, userId: null });
+    const passage = domainBuilder.devcomp.buildPassage({ id: 2 });
     const passageEventRepositoryStub = {
       record: sinon.stub().resolves(),
     };
@@ -233,7 +233,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
         type: 'PASSAGE_TERMINATED',
       };
       const passageUser = { id: 123 };
-      const passage = new Passage({ id: 2, userId: passageUser.id });
+      const passage = domainBuilder.devcomp.buildPassage({ id: 2, userId: passageUser.id });
 
       const passageRepositoryStub = {
         get: sinon.stub().withArgs({ userId: passageUser.id }).resolves(passage),
