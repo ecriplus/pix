@@ -33,6 +33,9 @@ describe('Acceptance | Controller | passage-controller', function () {
               type: 'passages',
               attributes: {
                 'module-id': 'bien-ecrire-son-adresse-mail',
+                'occurred-at': new Date('2025-04-29').getTime(),
+                'module-version': 'version',
+                'sequence-number': 1,
               },
             },
           },
@@ -51,10 +54,11 @@ describe('Acceptance | Controller | passage-controller', function () {
         // given
         const user = databaseBuilder.factory.buildUser();
         await databaseBuilder.commit();
+        const moduleId = 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d';
         const expectedResponse = {
           type: 'passages',
           attributes: {
-            'module-id': 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d',
+            'module-id': moduleId,
           },
         };
 
@@ -67,6 +71,9 @@ describe('Acceptance | Controller | passage-controller', function () {
               type: 'passages',
               attributes: {
                 'module-id': 'bien-ecrire-son-adresse-mail',
+                'occurred-at': new Date('2025-04-29').getTime(),
+                'module-version': 'version',
+                'sequence-number': 1,
               },
             },
           },
@@ -74,13 +81,16 @@ describe('Acceptance | Controller | passage-controller', function () {
         });
 
         // then
+        const { id: passageId, userId } = await knex('passages').where({ id: response.result.data.id }).first();
+        const passageEvents = await knex('passage-events').where({ passageId }).first();
+
         expect(response.statusCode).to.equal(201);
         expect(response.result.data.type).to.equal(expectedResponse.type);
         expect(response.result.data.id).to.exist;
         expect(response.result.data.attributes).to.deep.equal(expectedResponse.attributes);
 
-        const { userId } = await knex('passages').where({ id: response.result.data.id }).first();
         expect(userId).to.equal(user.id);
+        expect(passageEvents.type).to.equal('PASSAGE_STARTED');
       });
     });
   });
