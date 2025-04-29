@@ -1,0 +1,33 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import t from 'ember-intl/helpers/t';
+<template>
+  <div class="user-certifications-detail-result">
+    {{#if @certification.commentForCandidate}}
+      <h2>{{t "pages.certificate.jury-title"}}</h2>
+      <PixBlock class="user-certifications-detail-result__jury">
+        <p class="user-certifications-detail-result__jury__comment">
+          {{@certification.commentForCandidate}}
+        </p>
+        <p class="user-certifications-detail-result__jury__info">
+          <PixIcon @name="info" @plainIcon={{true}} @ariaHidden={{true}} />
+          {{t "pages.certificate.jury-info"}}
+        </p>
+      </PixBlock>
+    {{/if}}
+
+    {{#if @certification.hasAcquiredComplementaryCertifications}}
+      <h2>{{t "pages.certificate.complementary.title"}}</h2>
+      <PixBlock class="user-certifications-detail-result__container">
+        {{#each @certification.certifiedBadgeImages as |certifiedBadgeImage|}}
+          <div class="user-certifications-detail-result__complementary-certification">
+            <img src={{certifiedBadgeImage.imageUrl}} alt="{{t 'pages.certificate.complementary.alternative'}}" />
+            {{#if certifiedBadgeImage.message}}
+              <span>{{certifiedBadgeImage.message}}</span>
+            {{/if}}
+          </div>
+        {{/each}}
+      </PixBlock>
+    {{/if}}
+  </div>
+</template>

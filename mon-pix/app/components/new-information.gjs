@@ -1,0 +1,55 @@
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
+import t from 'ember-intl/helpers/t';
+import media from 'ember-responsive/helpers/media';
+import eq from 'ember-truth-helpers/helpers/eq';
+<template>
+  {{! template-lint-disable no-triple-curlies }}
+  <div class="new-information {{@variantClass}}">
+    <div class="new-information__content">
+      {{#if (media "isDesktop")}}
+        <img class="new-information-content__img" src="{{@image}}" alt />
+      {{/if}}
+      <div class="new-information-content__text {{@textAlignment}} {{@textColorClass}}">
+        {{{@information}}}
+        {{#if @linkText}}
+          {{#if (eq @linkDisplayType "button")}}
+            {{#if @code}}
+              <PixButtonLink
+                @route="{{@linkTo}}"
+                @model={{@code}}
+                class="new-information-content-text__button"
+              >{{@linkText}}</PixButtonLink>
+            {{else}}
+              <PixButtonLink
+                @route="{{@linkTo}}"
+                class="new-information-content-text__button"
+              >{{@linkText}}</PixButtonLink>
+            {{/if}}
+          {{else}}
+            <a
+              href="{{@linkTo}}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="new-information-content-text__link {{@textColorClass}}"
+            >
+              <PixIcon @name="arrowRight" @ariaHidden={{true}} />
+              <span>{{@linkText}}</span>
+            </a>
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
+
+    {{#if @closeAction}}
+      <PixIconButton
+        @iconName="close"
+        @ariaLabel={{t "common.new-information-banner.close-label"}}
+        @triggerAction={{@closeAction}}
+        @withBackground={{true}}
+        class="new-information__close"
+      />
+    {{/if}}
+  </div>
+</template>

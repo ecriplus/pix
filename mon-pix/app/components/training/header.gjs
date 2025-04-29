@@ -1,0 +1,11 @@
+import t from 'ember-intl/helpers/t';
+<template>
+  <section class="global-page-header">
+    <div class="global-page-header__left-content">
+      <h1 class="global-page-header__title">{{t "pages.user-trainings.title"}}</h1>
+      <p class="global-page-header__description">
+        {{t "pages.user-trainings.description"}}
+      </p>
+    </div>
+  </section>
+</template>

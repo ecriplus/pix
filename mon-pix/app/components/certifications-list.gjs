@@ -1,0 +1,25 @@
+import t from 'ember-intl/helpers/t';
+import CertificationsListItem from 'mon-pix/components/certifications-list-item';
+<template>
+  <div class="certifications-list">
+    <div class="certifications-list__table">
+      <div class="certifications-list__table-header">
+        <div class="certifications-list__table-header-cell">{{t "pages.certifications-list.header.date"}}</div>
+        <div class="certifications-list__table-header-cell-double-width">{{t
+            "pages.certifications-list.header.status"
+          }}</div>
+        <div class="certifications-list__table-header-cell">{{t "pages.certifications-list.header.score"}}</div>
+        <div class="certifications-list__table-header-cell-certification-center">{{t
+            "pages.certifications-list.header.certification-center"
+          }}</div>
+        <div class="certifications-list__table-header-cell"></div>
+      </div>
+
+      <div class="certifications-list__table-body" role="tablist">
+        {{#each @certifications as |certification|}}
+          <CertificationsListItem @certification={{certification}} />
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</template>

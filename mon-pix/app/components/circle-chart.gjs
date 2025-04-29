@@ -1,0 +1,25 @@
+import { concat } from '@ember/helper';
+<template>
+  <div class={{concat "circle-chart " @chartClass}} ...attributes>
+    <svg class="cicle-chart__circle" viewBox="1.2 1.2 33.6 33.6" aria-hidden="true">
+      <path class={{concat "circle " @thicknessClass}} d="M18 2 a 16 16 0 0 1 0 32 a 16 16 0 0 1 0 -32">
+      </path>
+
+      <!-- wait for value to be ready in order to animate circle under safari -->
+      {{#if @value}}
+        <path
+          class={{concat "circle circle--slice circle--" @sliceColor " " @thicknessClass}}
+          stroke-dasharray="{{@value}}, 100"
+          d="M18 2 a 16 16 0 0 1 0 32 a 16 16 0 0 1 0 -32"
+        >
+        </path>
+      {{/if}}
+
+    </svg>
+
+    <div class="circle-chart__text">
+      {{yield}}
+    </div>
+
+  </div>
+</template>

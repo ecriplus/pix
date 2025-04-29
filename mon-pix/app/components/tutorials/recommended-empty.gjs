@@ -1,0 +1,24 @@
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import { service } from '@ember/service';
+import Component from '@glimmer/component';
+import t from 'ember-intl/helpers/t';
+
+export default class RecommendedEmpty extends Component {
+  <template>
+    <div class="user-tutorials-content__recommended-empty">
+      <img src="/images/illustrations/user-tutorials/recommended-empty.svg" alt />
+      <div>
+        <h2 class="user-tutorials-recommended-empty__title">
+          {{t "pages.user-tutorials.recommended-empty.title" firstName=this.currentUser.user.firstName}}
+        </h2>
+        <p class="user-tutorials-recommended-empty__description">
+          {{t "pages.user-tutorials.recommended-empty.description"}}
+        </p>
+        <PixButtonLink @route="authenticated.profile" class="user-tutorials-recommended-empty__link">
+          {{t "pages.user-tutorials.recommended-empty.link"}}
+        </PixButtonLink>
+      </div>
+    </div>
+  </template>
+  @service currentUser;
+}

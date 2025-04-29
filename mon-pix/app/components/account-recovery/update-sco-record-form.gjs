@@ -1,0 +1,147 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
+import PixInput from '@1024pix/pix-ui/components/pix-input';
+import PixInputPassword from '@1024pix/pix-ui/components/pix-input-password';
+import { on } from '@ember/modifier';
+import { action } from '@ember/object';
+import { service } from '@ember/service';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import t from 'ember-intl/helpers/t';
+import not from 'ember-truth-helpers/helpers/not';
+import isEmpty from 'lodash/isEmpty';
+
+import isPasswordValid from '../../utils/password-validator';
+
+const STATUS_MAP = {
+  defaultStatus: 'default',
+  errorStatus: 'error',
+  successStatus: 'success',
+};
+
+const ERROR_INPUT_MESSAGE_MAP = {
+  emptyPassword: 'pages.account-recovery.update-sco-record.form.errors.empty-password',
+  wrongPasswordFormat: 'pages.account-recovery.update-sco-record.form.errors.invalid-password',
+};
+
+class PasswordValidation {
+  @tracked status = STATUS_MAP['defaultStatus'];
+  @tracked message = null;
+}
+
+export default class UpdateScoRecordFormComponent extends Component {
+  <template>
+    <h1 class="account-recovery__content--title">
+      {{t "pages.account-recovery.update-sco-record.welcome-message" firstName=@firstName}}
+    </h1>
+
+    <p class="account-recovery__content--information-text--details">
+      {{t "pages.account-recovery.update-sco-record.fill-password"}}
+    </p>
+
+    <form onSubmit={{this.submitUpdate}} class="account-recovery__content--form">
+      <div class="account-recovery__content--form-fields">
+        <PixInput @id="email" @value={{@email}} @disabled={{true}}>
+          <:label>{{t "pages.account-recovery.update-sco-record.form.email-label"}}</:label>
+        </PixInput>
+
+        <PixInputPassword
+          @id="password"
+          @value={{this.password}}
+          autocomplete="off"
+          {{on "focusout" this.validatePassword}}
+          {{on "input" this.handlePasswordInput}}
+          @validationStatus={{this.passwordValidation.status}}
+          @errorMessage={{this.passwordValidation.message}}
+          @requiredLabel={{true}}
+        >
+          <:label>{{t "pages.account-recovery.update-sco-record.form.password-label"}}</:label>
+        </PixInputPassword>
+
+        <div class="update-sco-record-form__cgu-container">
+          <PixCheckbox {{on "change" this.onChange}}>
+            <:label>
+              {{t
+                "common.cgu.message"
+                cguUrl=this.cguUrl
+                dataProtectionPolicyUrl=this.dataProtectionPolicyUrl
+                htmlSafe=true
+              }}
+            </:label>
+          </PixCheckbox>
+        </div>
+
+        <PixButton
+          @type="submit"
+          @isDisabled={{not this.isSubmitButtonEnabled}}
+          class="account-recovery__content--actions update-sco-record-form__submit"
+        >
+          {{t "pages.account-recovery.update-sco-record.form.login-button"}}
+        </PixButton>
+      </div>
+    </form>
+  </template>
+  @service intl;
+  @service url;
+
+  @tracked cguAndProtectionPoliciesAccepted = false;
+  @tracked password = '';
+  @tracked passwordValidation = new PasswordValidation();
+
+  get cguUrl() {
+    return this.url.cguUrl;
+  }
+
+  get dataProtectionPolicyUrl() {
+    return this.url.dataProtectionPolicyUrl;
+  }
+
+  get isSubmitButtonEnabled() {
+    return (
+      isPasswordValid(this.password) &&
+      !this._hasAPIRejectedCall() &&
+      this.cguAndProtectionPoliciesAccepted &&
+      !this.args.isLoading
+    );
+  }
+
+  @action
+  onChange(event) {
+    this.cguAndProtectionPoliciesAccepted = !!event.target.checked;
+  }
+
+  @action validatePassword() {
+    if (isEmpty(this.password)) {
+      this.passwordValidation.status = STATUS_MAP['errorStatus'];
+      this.passwordValidation.message = this.intl.t(ERROR_INPUT_MESSAGE_MAP['emptyPassword']);
+      return;
+    }
+
+    const isInvalidInput = !isPasswordValid(this.password);
+    if (isInvalidInput) {
+      this.passwordValidation.status = STATUS_MAP['errorStatus'];
+      this.passwordValidation.message = this.intl.t(ERROR_INPUT_MESSAGE_MAP['wrongPasswordFormat']);
+      return;
+    }
+
+    this.passwordValidation.status = STATUS_MAP['successStatus'];
+    this.passwordValidation.message = null;
+  }
+
+  @action
+  handlePasswordInput(event) {
+    this.password = event.target.value;
+  }
+
+  @action
+  async submitUpdate(event) {
+    event.preventDefault();
+    this.passwordValidation.status = STATUS_MAP['successStatus'];
+    this.passwordValidation.message = null;
+    this.args.updateRecord(this.password);
+  }
+
+  _hasAPIRejectedCall() {
+    return this.passwordValidation.status === STATUS_MAP['errorStatus'];
+  }
+}

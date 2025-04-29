@@ -1,0 +1,142 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import { action } from '@ember/object';
+import { LinkTo } from '@ember/routing';
+import { service } from '@ember/service';
+import Component from '@glimmer/component';
+import t from 'ember-intl/helpers/t';
+import CircleChart from 'mon-pix/components/circle-chart';
+import replaceZeroByDash from 'mon-pix/helpers/replace-zero-by-dash';
+import scorecardAriaLabel from 'mon-pix/helpers/scorecard-aria-label';
+
+export default class CompetenceCardDefault extends Component {
+  <template>
+    <article class="competence-card {{if @interactive 'competence-card--interactive'}}" role="article">
+      <LinkTo @route="authenticated.competences.details" @model={{@scorecard.competenceId}}>
+        <div class="competence-card__title">
+          <div class="competence-card__wrapper competence-card__wrapper--{{@scorecard.area.color}}">
+            <div class="competence-card__area-name">{{@scorecard.area.title}}</div>
+            <h4 class="competence-card__competence-name">{{@scorecard.name}}</h4>
+          </div>
+        </div>
+
+        <div class="competence-card__body" role="img" aria-label="{{scorecardAriaLabel @scorecard}}">
+          {{#if @scorecard.isFinishedWithMaxLevel}}
+            <div class="competence-card__congrats competence-card__congrats--with-magnification">
+              <div class="competence-card__level competence-card__level--congrats">
+                <span class="score-label competence-card__score-label--congrats">{{t "common.level"}}</span>
+                <span
+                  class="score-value competence-card__score-value competence-card__score-value--congrats"
+                >{{this.displayedLevel}}</span>
+              </div>
+            </div>
+          {{else}}
+            <div class="competence-card__link">
+              <CircleChart
+                @value={{@scorecard.capedPercentageAheadOfNextLevel}}
+                @sliceColor={{@scorecard.area.color}}
+                @chartClass="circle-chart--big"
+                @thicknessClass="circle--thick"
+                role="presentation"
+              >
+                <div class="competence-card__level">
+                  <span class="score-label">{{t "common.level"}}</span>
+                  <span class="score-value competence-card__score-value">{{replaceZeroByDash
+                      this.displayedLevel
+                    }}</span>
+                  <span class="competence-card__score-details">{{t "pages.profile.competence-card.details"}}</span>
+                </div>
+              </CircleChart>
+            </div>
+          {{/if}}
+        </div>
+      </LinkTo>
+
+      {{#if @scorecard.isFinishedWithMaxLevel}}
+        <div class="competence-card__congrats-message">
+          {{t "pages.profile.competence-card.congrats"}}
+        </div>
+      {{else}}
+        <div class="competence-card__interactions">
+          {{#if @scorecard.isFinished}}
+            {{#if this.shouldWaitBeforeImproving}}
+              <div class="competence-card-interactions__improvement-countdown">
+                <span class="competence-card-improvement-countdown__label">{{t
+                    "pages.competence-details.actions.improve.description.waiting-text"
+                  }}</span>
+                <span class="competence-card-improvement-countdown__count">{{t
+                    "pages.competence-details.actions.improve.description.countdown"
+                    daysBeforeImproving=@scorecard.remainingDaysBeforeImproving
+                  }}</span>
+              </div>
+            {{else}}
+              <PixButton
+                class="competence-card__button"
+                @variant="success"
+                @triggerAction={{this.improveCompetenceEvaluation}}
+              >
+                <span class="competence-card-button__label">
+                  {{t "pages.competence-details.actions.improve.label"}}
+                  <span class="sr-only">{{t
+                      "pages.competence-details.for-competence"
+                      competence=@scorecard.name
+                    }}</span>
+                </span>
+                <span class="competence-card-button__arrow"><PixIcon @name="arrowRight" @ariaHidden={{true}} /></span>
+              </PixButton>
+            {{/if}}
+          {{else}}
+            <LinkTo
+              class="button button--extra-thin button--round button--link button--green competence-card__button"
+              @model={{@scorecard.competenceId}}
+              @route="authenticated.competences.resume"
+              aria-label={{this.ariaLabelButton}}
+            >
+              <span class="competence-card-button__label">
+                {{#if @scorecard.isStarted}}
+                  {{t "pages.competence-details.actions.continue.label"}}
+                {{else}}
+                  {{t "pages.competence-details.actions.start.label"}}
+                {{/if}}
+              </span>
+              <span class="competence-card-button__arrow">
+                <PixIcon @name="arrowRight" @ariaHidden={{true}} />
+              </span>
+            </LinkTo>
+          {{/if}}
+        </div>
+      {{/if}}
+    </article>
+  </template>
+  @service currentUser;
+  @service store;
+  @service router;
+  @service competenceEvaluation;
+  @service intl;
+
+  get displayedLevel() {
+    if (this.args.scorecard.isNotStarted) {
+      return null;
+    }
+    return this.args.scorecard.level;
+  }
+
+  get shouldWaitBeforeImproving() {
+    return this.args.scorecard.remainingDaysBeforeImproving > 0;
+  }
+
+  get ariaLabelButton() {
+    const ariaLabel = this.args.scorecard.isStarted
+      ? 'pages.competence-details.actions.continue.extra-information'
+      : 'pages.competence-details.actions.start.extra-information';
+    return this.intl.t(ariaLabel, { competenceName: this.args.scorecard.name });
+  }
+
+  @action
+  async improveCompetenceEvaluation() {
+    const userId = this.currentUser.user.id;
+    const competenceId = this.args.scorecard.competenceId;
+    const scorecardId = this.args.scorecard.id;
+    return this.competenceEvaluation.improve({ userId, competenceId, scorecardId });
+  }
+}

@@ -1,0 +1,23 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
+import t from 'ember-intl/helpers/t';
+<template>
+  <div class="focused-certification-challenge-instructions">
+    <img src="/images/icone-pix-focus-rounded.svg" alt class="focused-certification-challenge-instructions__image" />
+
+    <h1 class="focused-certification-challenge-instructions__title">
+      {{t "pages.focused-certification-challenge-instructions.title"}}
+    </h1>
+
+    <p class="focused-certification-challenge-instructions__description">
+      {{t "pages.focused-certification-challenge-instructions.description"}}
+    </p>
+
+    <PixButton
+      @triggerAction={{@hasUserConfirmedWarning}}
+      class="focused-certification-challenge-instructions__confirmation-button"
+      @variant="success"
+    >
+      {{t "pages.focused-certification-challenge-instructions.action"}}
+    </PixButton>
+  </div>
+</template>

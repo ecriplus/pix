@@ -1,0 +1,73 @@
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import t from 'ember-intl/helpers/t';
+import HexagonScore from 'mon-pix/components/hexagon-score';
+import ProfileScorecards from 'mon-pix/components/profile-scorecards';
+import ProfileSharingForm from 'mon-pix/components/profile-sharing-form';
+<template>
+  {{#if @isDisabled}}
+    <div class="send-profile-header__announcement">
+      <img
+        class="send-profile-header__image"
+        src="/images/illustrations/fat-bee.svg"
+        alt={{t "pages.profile-already-shared.first-title"}}
+      />
+      <p class="send-profile-disabled-share__text">
+        {{t "pages.send-profile.disabled-share" htmlSafe=true}}
+      </p>
+      <PixButtonLink @route="authenticated" @variant="secondary">{{t
+          "pages.send-profile.form.continue"
+        }}</PixButtonLink>
+    </div>
+    <div class="send-profile-header__profile send-profile-header__profile--with-border-bottom">
+      <HexagonScore
+        @pixScore={{@user.profile.pixScore}}
+        @maxReachablePixScore={{@user.profile.maxReachablePixScore}}
+        @maxReachableLevel={{@user.profile.maxReachableLevel}}
+      />
+      <div class="send-profile-header__profile__cards">
+        <ProfileScorecards
+          @interactive={{false}}
+          class="send-profile-header__profile__cards"
+          @areas={{@user.profile.areas}}
+          @scorecards={{@user.profile.scorecards}}
+        />
+      </div>
+    </div>
+  {{else}}
+    <div class="send-profile-header__announcement">
+      <h1 class="send-profile-header__title">
+        {{t "pages.send-profile.first-title"}}
+      </h1>
+      <p class="send-profile-header__instruction">
+        {{t "pages.send-profile.instructions" htmlSafe=true}}
+      </p>
+    </div>
+    <ProfileSharingForm
+      @sendProfile={{@sendProfile}}
+      @campaignParticipation={{@campaignParticipation}}
+      @campaign={{@campaign}}
+      @errorMessage={{@errorMessage}}
+    />
+    <div class="send-profile-header__profile send-profile-header__profile--with-border-bottom">
+      <HexagonScore
+        @pixScore={{@user.profile.pixScore}}
+        @maxReachablePixScore={{@user.profile.maxReachablePixScore}}
+        @maxReachableLevel={{@user.profile.maxReachableLevel}}
+      />
+      <div class="send-profile-header__profile__cards">
+        <ProfileScorecards
+          @interactive={{false}}
+          class="send-profile-header__profile__cards"
+          @areas={{@user.profile.areas}}
+          @scorecards={{@user.profile.scorecards}}
+        />
+      </div>
+    </div>
+    <ProfileSharingForm
+      @sendProfile={{@sendProfile}}
+      @campaignParticipation={{@campaignParticipation}}
+      @campaign={{@campaign}}
+      @errorMessage={{@errorMessage}}
+    />
+  {{/if}}
+</template>

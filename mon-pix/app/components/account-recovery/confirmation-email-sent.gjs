@@ -1,0 +1,23 @@
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import t from 'ember-intl/helpers/t';
+<template>
+  <h1 class="account-recovery__content--title">
+    {{t "pages.account-recovery.find-sco-record.send-email-confirmation.title"}}
+  </h1>
+
+  <div class="account-recovery__content--step--content">
+    <p class="account-recovery__content--information-text">
+      {{t "pages.account-recovery.find-sco-record.send-email-confirmation.send-email"}}
+    </p>
+
+    <p class="account-recovery__content--information-text--details">
+      {{t "pages.account-recovery.find-sco-record.send-email-confirmation.check-spam"}}
+    </p>
+
+    <div class="account-recovery__content--actions">
+      <PixButtonLink @route="authentication.login">
+        {{t "pages.account-recovery.find-sco-record.send-email-confirmation.return"}}
+      </PixButtonLink>
+    </div>
+  </div>
+</template>
