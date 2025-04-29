@@ -265,7 +265,6 @@ export default class ModulePassage extends Component {
             @grain={{grain}}
             @onElementRetry={{this.onElementRetry}}
             @passage={{@passage}}
-            @transition={{this.grainTransition grain.id}}
             @onImageAlternativeTextOpen={{this.onImageAlternativeTextOpen}}
             @onVideoTranscriptionOpen={{this.onVideoTranscriptionOpen}}
             @onElementAnswer={{this.onElementAnswer}}

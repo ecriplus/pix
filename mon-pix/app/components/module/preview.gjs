@@ -157,7 +157,6 @@ export default class ModulixPreview extends Component {
               @grain={{grain}}
               @onElementRetry={{this.noop}}
               @passage={{this.passage}}
-              @transition={{this.grainTransition grain.id}}
               @onImageAlternativeTextOpen={{this.noop}}
               @onVideoTranscriptionOpen={{this.noop}}
               @onElementAnswer={{this.noop}}
