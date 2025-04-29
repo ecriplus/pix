@@ -1,4 +1,4 @@
-import { DomainError } from '../../../shared/domain/errors.js';
+import { DomainError, NotFoundError } from '../../../shared/domain/errors.js';
 import { PromiseUtils } from '../../../shared/infrastructure/utils/promise-utils.js';
 import {
   FlashcardsCardAutoAssessedEvent,
@@ -9,10 +9,21 @@ import {
 } from '../models/passage-events/flashcard-events.js';
 import { PassageStartedEvent, PassageTerminatedEvent } from '../models/passage-events/passage-events.js';
 
-const recordPassageEvents = async function ({ events, passageEventRepository }) {
-  const passageEvents = events.map(_buildPassageEvent);
+const recordPassageEvents = async function ({ events, passageRepository, passageEventRepository }) {
+  await PromiseUtils.mapSeries(events, async (event) => {
+    try {
+      await passageRepository.get({ passageId: event.passageId });
+    } catch (error) {
+      if (error instanceof NotFoundError) {
+        throw new DomainError(`Passage with id ${event.id} does not exist`);
+      }
 
-  await PromiseUtils.mapSeries(passageEvents, (passageEvent) => passageEventRepository.record(passageEvent));
+      throw error;
+    }
+
+    const passageEvent = _buildPassageEvent(event);
+    await passageEventRepository.record(passageEvent);
+  });
 };
 
 function _buildPassageEvent(event) {

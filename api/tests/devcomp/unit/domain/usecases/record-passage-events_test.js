@@ -10,7 +10,7 @@ import {
   PassageTerminatedEvent,
 } from '../../../../../src/devcomp/domain/models/passage-events/passage-events.js';
 import { recordPassageEvents } from '../../../../../src/devcomp/domain/usecases/record-passage-events.js';
-import { DomainError } from '../../../../../src/shared/domain/errors.js';
+import { DomainError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function () {
@@ -88,9 +88,16 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
     const passageEventRepositoryStub = {
       record: sinon.stub().resolves(),
     };
+    const passageRepositoryStub = {
+      get: sinon.stub().resolves(),
+    };
 
     // when
-    await recordPassageEvents({ events, passageEventRepository: passageEventRepositoryStub });
+    await recordPassageEvents({
+      events,
+      passageRepository: passageRepositoryStub,
+      passageEventRepository: passageEventRepositoryStub,
+    });
 
     // then
     const flashcardsVersoSeenPassageEvent = new FlashcardsVersoSeenEvent(flashcardsVersoSeenEvent);
@@ -117,6 +124,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
     expect(passageEventRepositoryStub.record.getCall(5)).to.have.been.calledWithExactly(passageTerminatedPassageEvent);
     expect(passageEventRepositoryStub.record.getCall(6)).to.have.been.calledWithExactly(passageStartedPassageEvent);
   });
+
   context('when type of passage event does not exist', function () {
     it('should throw an error', async function () {
       // given
@@ -124,6 +132,9 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
         type: 'NON_EXISTING_TYPE',
       };
 
+      const passageRepositoryStub = {
+        get: sinon.stub().resolves(),
+      };
       const passageEventRepositoryStub = {
         record: sinon.stub().resolves(),
       };
@@ -131,12 +142,45 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
       // when
       const error = await catchErr(recordPassageEvents)({
         events: [event],
+        passageRepository: passageRepositoryStub,
         passageEventRepository: passageEventRepositoryStub,
       });
 
       // then
       expect(error).to.be.instanceOf(DomainError);
       expect(error.message).to.equal(`Passage event with type ${event.type} does not exist`);
+      expect(passageEventRepositoryStub.record).to.not.have.been.called;
+    });
+  });
+
+  context('when there is no passage for given passage id', function () {
+    it('should throw an error', async function () {
+      // given
+      const event = {
+        type: 'PASSAGE_STARTED',
+        occurredAt: new Date(),
+        sequenceNumber: 2,
+        contentHash: 'abc',
+        passageId: 123,
+      };
+
+      const passageRepositoryStub = {
+        get: sinon.stub().withArgs({ passageId: 123 }).rejects(new NotFoundError()),
+      };
+      const passageEventRepositoryStub = {
+        record: sinon.stub().resolves(),
+      };
+
+      // when
+      const error = await catchErr(recordPassageEvents)({
+        events: [event],
+        passageRepository: passageRepositoryStub,
+        passageEventRepository: passageEventRepositoryStub,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(DomainError);
+      expect(error.message).to.equal(`Passage with id ${event.id} does not exist`);
       expect(passageEventRepositoryStub.record).to.not.have.been.called;
     });
   });
