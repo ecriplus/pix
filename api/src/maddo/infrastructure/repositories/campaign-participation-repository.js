@@ -1,25 +1,24 @@
-import { knex } from '../../../../db/knex-database-connection.js';
+import * as campaignsAPI from '../../../prescription/campaign/application/api/campaigns-api.js';
 import { CampaignParticipation } from '../../domain/models/CampaignParticipation.js';
+import { TubeCoverage } from '../../domain/models/TubeCoverage.js';
 
 export async function findByCampaignId(campaignId, clientId) {
-  const rawCampaigns = await knex
-    .select(
-      'id',
-      'createdAt',
-      'participantExternalId',
-      'status',
-      'sharedAt',
-      'deletedAt',
-      'deletedBy',
-      'campaignId',
-      'userId',
-    )
-    .from('campaign-participations')
-    .where('campaignId', campaignId)
-    .orderBy('id');
-  return rawCampaigns.map((rawCampaign) => toDomain(rawCampaign, clientId));
+  const campaignParticipations = await campaignsAPI.getCampaignParticipations({ campaignId });
+  return campaignParticipations.map((rawCampaign) => toDomain(rawCampaign, clientId, campaignId));
 }
 
-function toDomain(rawCampaignParticipation, clientId) {
-  return new CampaignParticipation({ ...rawCampaignParticipation, clientId });
+function toDomain(rawCampaignParticipation, clientId, campaignId) {
+  return new CampaignParticipation({
+    id: rawCampaignParticipation.campaignParticipationId,
+    status: rawCampaignParticipation.status,
+    participantExternalId: rawCampaignParticipation.participantExternalId,
+    createdAt: rawCampaignParticipation.createdAt,
+    sharedAt: rawCampaignParticipation.sharedAt,
+    userId: rawCampaignParticipation.userId,
+    masteryRate: rawCampaignParticipation.masteryRate,
+    tubes: rawCampaignParticipation.tubes?.map((tube) => new TubeCoverage(tube)),
+    pixScore: rawCampaignParticipation.pixScore,
+    clientId,
+    campaignId,
+  });
 }

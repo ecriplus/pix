@@ -1,26 +1,5 @@
 import _ from 'lodash';
 
-/**
- * @typedef {
-    participantFirstName,
-    participantLastName,
-    participantExternalId,
-    studentNumber = null,
-    userId,
-    additionalInfos,
-    campaignParticipationId,
-    isCompleted,
-    createdAt,
-    sharedAt,
-    division,
-    group,
-    masteryRate,
-    validatedSkillsCount,
-    status,
-    pixScore,
-  } CampaignParticipationArgs
-*/
-
 class CampaignParticipation {
   /**
    * @typedef {Object} CampaignParticipationArgs
@@ -70,7 +49,7 @@ class CampaignParticipation {
  * @typedef {object} AssessmentCampaignParticipationArgs
  * @extends CampaignParticipationArgs
  * @property {number} masteryRate
- * @property {Object} tubes
+ * @property {Array<TubeCoverage>} tubes
  */
 
 /**
@@ -83,7 +62,7 @@ class AssessmentCampaignParticipation extends CampaignParticipation {
   constructor(args) {
     super(args);
     this.masteryRate = !_.isNil(args.masteryRate) ? Number(args.masteryRate) : null;
-    this.tubes = args.tubes;
+    this.tubes = args.tubes?.map((tube) => new TubeCoverage(tube));
   }
 }
 
@@ -103,4 +82,37 @@ class ProfilesCollectionCampaignParticipation extends CampaignParticipation {
   }
 }
 
-export { AssessmentCampaignParticipation, CampaignParticipation, ProfilesCollectionCampaignParticipation };
+/**
+ * @property {string} id
+ * @property {string} competenceId
+ * @property {string} practicalTitle
+ * @property {string} practicalDescription
+ * @property {number} maxLevel
+ * @property {number} reachedLevel
+ */
+class TubeCoverage {
+  /**
+   * @param {object} args
+   * @param {string} args.id
+   * @param {string} args.competenceId
+   * @param {string} args.practicalTitle
+   * @param {string} args.practicalDescription
+   * @param {number} args.maxLevel
+   * @param {number} args.reachedLevel
+   */
+  constructor({ id, competenceId, practicalTitle, practicalDescription, maxLevel, reachedLevel }) {
+    this.id = id;
+    this.competenceId = competenceId;
+    this.practicalTitle = practicalTitle;
+    this.practicalDescription = practicalDescription;
+    this.maxLevel = maxLevel;
+    this.reachedLevel = reachedLevel;
+  }
+}
+
+export {
+  AssessmentCampaignParticipation,
+  CampaignParticipation,
+  ProfilesCollectionCampaignParticipation,
+  TubeCoverage,
+};

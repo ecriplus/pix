@@ -23,7 +23,7 @@ async function fetchApiInfoURL() {
 
   const res = await fetch(apiInfoURL);
   if (!res.ok) {
-    if (res.status === 404) {
+    if ([404, 503].includes(res.status)) {
       return null;
     }
 

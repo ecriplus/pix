@@ -41,6 +41,27 @@ const register = async function (server) {
                   campaignId: Joi.number().description('ID de la campagne liée à la participation'),
                   userId: Joi.number().description('ID utilisateur du participant'),
                   organizationLearnerId: Joi.number().description("ID du participant au sein de l'organisation"),
+                  pixScore: Joi.number().description(
+                    'Score en pix pour une participation à une campagne de collecte de profil',
+                  ),
+                  masteryRate: Joi.number().description(
+                    "Taux de réussite, i.e. pourcentage d'acquis validés dans la campagne",
+                  ),
+                  tubes: Joi.array()
+                    .items(
+                      Joi.object({
+                        competenceId: Joi.string().description('ID de la compétence auquel appartient le sujet'),
+                        id: Joi.string().description('ID du sujet'),
+                        maxLevel: Joi.number().description('Niveau maximum atteignable dans cette campagne'),
+                        reachedLevel: Joi.number().description('Niveau obtenu dans cette campagne'),
+                        practicalDescription: Joi.string().description('Description du sujet'),
+                        practicalTitle: Joi.string().description('Titre du sujet'),
+                      }).label('Tube'),
+                    )
+                    .description(
+                      'Sujets évalués dans la campagne, null si le type de la campagne est `PROFILES_COLLECTION`',
+                    )
+                    .label('Tubes'),
                 }).label('CampaignParticipation'),
               )
               .label('CampaignParticipations'),

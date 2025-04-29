@@ -3,6 +3,7 @@ import { CampaignResultLevelsPerTubesAndCompetences } from '../models/CampaignRe
 import {
   AssessmentCampaignParticipation,
   ProfilesCollectionCampaignParticipation,
+  TubeCoverage,
 } from '../read-models/CampaignParticipation.js';
 
 const getCampaignParticipations = async function ({
@@ -44,7 +45,12 @@ function computeTubes(campaignId, campaignParticipation, learningContent, knowle
     learningContent,
     knowledgeElementsByParticipation,
   });
-  return campaignResultLevelPerTubesAndCompetences.levelsPerTube;
+  return campaignResultLevelPerTubesAndCompetences.levelsPerTube.map(({ meanLevel, ...tube }) => {
+    return new TubeCoverage({
+      ...tube,
+      reachedLevel: meanLevel,
+    });
+  });
 }
 
 export { getCampaignParticipations };

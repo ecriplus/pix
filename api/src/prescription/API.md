@@ -1,4 +1,4 @@
-This doc has been generated on 4/23/2025, 5:31:41 PM with `scripts/generate-api-documentation.js`. See package.json.
+This doc has been generated on 4/29/2025, 11:49:54 AM with `scripts/generate-api-documentation.js`. See package.json.
 
 ---
 ## Modules
@@ -13,6 +13,19 @@ This doc has been generated on 4/23/2025, 5:31:41 PM with `scripts/generate-api-
 <dt><a href="#module_OrganizationLearnerWithParticipationsApi">OrganizationLearnerWithParticipationsApi</a></dt>
 <dd></dd>
 <dt><a href="#module_TargetProfileApi">TargetProfileApi</a></dt>
+<dd></dd>
+</dl>
+
+## Classes
+
+<dl>
+<dt><a href="#CampaignParticipation">CampaignParticipation</a></dt>
+<dd></dd>
+<dt><a href="#AssessmentCampaignParticipation">AssessmentCampaignParticipation</a></dt>
+<dd></dd>
+<dt><a href="#ProfilesCollectionCampaignParticipation">ProfilesCollectionCampaignParticipation</a></dt>
+<dd></dd>
+<dt><a href="#TubeCoverage">TubeCoverage</a></dt>
 <dd></dd>
 </dl>
 
@@ -34,6 +47,17 @@ This doc has been generated on 4/23/2025, 5:31:41 PM with `scripts/generate-api-
 <dd></dd>
 </dl>
 
+## Typedefs
+
+<dl>
+<dt><a href="#CampaignParticipationArgs">CampaignParticipationArgs</a> : <code>Object</code></dt>
+<dd></dd>
+<dt><a href="#AssessmentCampaignParticipationArgs">AssessmentCampaignParticipationArgs</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#ProfilesCollectionCampaignParticipationArgs">ProfilesCollectionCampaignParticipationArgs</a> : <code>object</code></dt>
+<dd></dd>
+</dl>
+
 <a name="module_CampaignApi"></a>
 
 ## CampaignApi
@@ -45,7 +69,7 @@ This doc has been generated on 4/23/2025, 5:31:41 PM with `scripts/generate-api-
     * [~update(payload)](#module_CampaignApi..update) ⇒ <code>Promise.&lt;Campaign&gt;</code>
     * [~findAllForOrganization(payload)](#module_CampaignApi..findAllForOrganization) ⇒ <code>Promise.&lt;CampaignListResponse&gt;</code>
     * [~findCampaignSkillIdsForCampaignParticipations(campaignParticipationIds)](#module_CampaignApi..findCampaignSkillIdsForCampaignParticipations) ⇒ <code>Promise.&lt;Array.&lt;Number&gt;&gt;</code>
-    * [~getCampaignParticipations(payload)](#module_CampaignApi..getCampaignParticipations) ⇒ <code>Promise.&lt;Array.&lt;CampaignParticipationModels.AssessmentCampaignParticipation&gt;&gt;</code>
+    * [~getCampaignParticipations(payload)](#module_CampaignApi..getCampaignParticipations) ⇒ <code>Promise.&lt;(Array.&lt;AssessmentCampaignParticipationAPI&gt;\|Array.&lt;ProfilesCollectionCampaignParticipationAPI&gt;)&gt;</code>
     * [~CampaignPayload](#module_CampaignApi..CampaignPayload) : <code>object</code>
     * [~UserNotAuthorizedToCreateCampaignError](#module_CampaignApi..UserNotAuthorizedToCreateCampaignError) : <code>object</code>
     * [~UpdateCampaignPayload](#module_CampaignApi..UpdateCampaignPayload) : <code>object</code>
@@ -115,7 +139,7 @@ This doc has been generated on 4/23/2025, 5:31:41 PM with `scripts/generate-api-
 
 <a name="module_CampaignApi..getCampaignParticipations"></a>
 
-### CampaignApi~getCampaignParticipations(payload) ⇒ <code>Promise.&lt;Array.&lt;CampaignParticipationModels.AssessmentCampaignParticipation&gt;&gt;</code>
+### CampaignApi~getCampaignParticipations(payload) ⇒ <code>Promise.&lt;(Array.&lt;AssessmentCampaignParticipationAPI&gt;\|Array.&lt;ProfilesCollectionCampaignParticipationAPI&gt;)&gt;</code>
 **Kind**: inner method of [<code>CampaignApi</code>](#module_CampaignApi)  
 
 | Param | Type |
@@ -443,7 +467,7 @@ Récupère les organizations-learners avec leurs participations à partir d'une 
 | --- | --- |
 | organizationLearner | <code>OrganizationLearner</code> | 
 | organization | <code>Organization</code> | 
-| campaignParticipations | <code>Array.&lt;CampaignParticipation&gt;</code> | 
+| campaignParticipations | [<code>Array.&lt;CampaignParticipation&gt;</code>](#CampaignParticipation) | 
 
 <a name="module_TargetProfileApi"></a>
 
@@ -491,6 +515,71 @@ Récupère les organizations-learners avec leurs participations à partir d'une 
 | --- | --- |
 | targetProfilsIds | <code>Array.&lt;number&gt;</code> | 
 
+<a name="CampaignParticipation"></a>
+
+## CampaignParticipation
+**Kind**: global class  
+<a name="new_CampaignParticipation_new"></a>
+
+### new CampaignParticipation(args)
+
+| Param | Type |
+| --- | --- |
+| args | [<code>CampaignParticipationArgs</code>](#CampaignParticipationArgs) | 
+
+<a name="AssessmentCampaignParticipation"></a>
+
+## AssessmentCampaignParticipation
+**Kind**: global class  
+<a name="new_AssessmentCampaignParticipation_new"></a>
+
+### new AssessmentCampaignParticipation(args)
+
+| Param | Type |
+| --- | --- |
+| args | [<code>AssessmentCampaignParticipationArgs</code>](#AssessmentCampaignParticipationArgs) | 
+
+<a name="ProfilesCollectionCampaignParticipation"></a>
+
+## ProfilesCollectionCampaignParticipation
+**Kind**: global class  
+<a name="new_ProfilesCollectionCampaignParticipation_new"></a>
+
+### new ProfilesCollectionCampaignParticipation(args)
+
+| Param | Type |
+| --- | --- |
+| args | [<code>ProfilesCollectionCampaignParticipationArgs</code>](#ProfilesCollectionCampaignParticipationArgs) | 
+
+<a name="TubeCoverage"></a>
+
+## TubeCoverage
+**Kind**: global class  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| id | <code>string</code> | 
+| competenceId | <code>string</code> | 
+| practicalTitle | <code>string</code> | 
+| practicalDescription | <code>string</code> | 
+| maxLevel | <code>number</code> | 
+| reachedLevel | <code>number</code> | 
+
+<a name="new_TubeCoverage_new"></a>
+
+### new TubeCoverage(args)
+
+| Param | Type |
+| --- | --- |
+| args | <code>object</code> | 
+| args.id | <code>string</code> | 
+| args.competenceId | <code>string</code> | 
+| args.practicalTitle | <code>string</code> | 
+| args.practicalDescription | <code>string</code> | 
+| args.maxLevel | <code>number</code> | 
+| args.reachedLevel | <code>number</code> | 
+
 <a name="hasBeenLearner"></a>
 
 ## hasBeenLearner ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -532,5 +621,45 @@ delete organization learner before adding import feature
 | Param | Type |
 | --- | --- |
 | userId | <code>number</code> | 
+
+<a name="CampaignParticipationArgs"></a>
+
+## CampaignParticipationArgs : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| participantFirstName | <code>string</code> | 
+| participantLastName | <code>string</code> | 
+| participantExternalId | <code>string</code> \| <code>null</code> | 
+| userId | <code>number</code> | 
+| campaignParticipationId | <code>number</code> | 
+| createdAt | <code>Date</code> | 
+| sharedAt | <code>Date</code> \| <code>null</code> | 
+| status | <code>string</code> | 
+
+<a name="AssessmentCampaignParticipationArgs"></a>
+
+## AssessmentCampaignParticipationArgs : <code>object</code>
+**Kind**: global typedef  
+**Extends**: [<code>CampaignParticipationArgs</code>](#CampaignParticipationArgs)  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| masteryRate | <code>number</code> | 
+| tubes | [<code>Array.&lt;TubeCoverage&gt;</code>](#TubeCoverage) | 
+
+<a name="ProfilesCollectionCampaignParticipationArgs"></a>
+
+## ProfilesCollectionCampaignParticipationArgs : <code>object</code>
+**Kind**: global typedef  
+**Extends**: [<code>CampaignParticipationArgs</code>](#CampaignParticipationArgs)  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| pixScore | <code>number</code> | 
 
 
