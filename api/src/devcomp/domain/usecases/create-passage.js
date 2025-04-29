@@ -1,16 +1,12 @@
 import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { ModuleDoesNotExistError } from '../errors.js';
-import { PassageStartedEvent } from '../models/passage-events/passage-events.js';
 
 const createPassage = withTransaction(async function ({
   moduleSlug,
-  occurredAt,
-  sequenceNumber,
   userId,
   moduleRepository,
   passageRepository,
-  passageEventRepository,
   userRepository,
 }) {
   const module = await _getModule({ slug: moduleSlug, moduleRepository });
@@ -19,7 +15,6 @@ const createPassage = withTransaction(async function ({
   }
 
   const passage = await passageRepository.save({ moduleId: module.id, userId });
-  await _recordPassageEvent({ module, occurredAt, passage, sequenceNumber, passageEventRepository });
 
   return passage;
 });
@@ -33,14 +28,6 @@ async function _getModule({ slug, moduleRepository }) {
     }
     throw e;
   }
-}
-
-async function _recordPassageEvent({ module, occurredAt, passage, sequenceNumber, passageEventRepository }) {
-  const { id: passageId } = passage;
-  const contentHash = module.version;
-  const passageStartedEvent = new PassageStartedEvent({ contentHash, passageId, occurredAt, sequenceNumber });
-
-  await passageEventRepository.record(passageStartedEvent);
 }
 
 export { createPassage };

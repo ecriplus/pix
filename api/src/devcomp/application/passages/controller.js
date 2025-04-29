@@ -10,10 +10,20 @@ const create = async function (request, h, { usecases, passageSerializer }) {
   const sequenceNumber = CREATE_PASSAGE_SEQUENCE_NUMBER;
   const passage = await usecases.createPassage({
     moduleSlug,
-    sequenceNumber,
     userId,
-    occurredAt: new Date(requestTimestamp),
   });
+  const version = 'NOT_IMPLEMENTED';
+
+  const passageStartedData = {
+    contentHash: version,
+    occurredAt: new Date(requestTimestamp),
+    passageId: passage.id,
+    sequenceNumber,
+    type: 'PASSAGE_STARTED',
+  };
+
+  await usecases.recordPassageEvents({ events: [passageStartedData] });
+
   const serializedPassage = passageSerializer.serialize(passage);
   return h.response(serializedPassage).created();
 };

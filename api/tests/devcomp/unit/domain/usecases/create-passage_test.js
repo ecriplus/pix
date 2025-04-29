@@ -1,7 +1,6 @@
 import { ModuleDoesNotExistError } from '../../../../../src/devcomp/domain/errors.js';
 import { Module } from '../../../../../src/devcomp/domain/models/module/Module.js';
 import { Passage } from '../../../../../src/devcomp/domain/models/Passage.js';
-import { PassageStartedEvent } from '../../../../../src/devcomp/domain/models/passage-events/passage-events.js';
 import { createPassage } from '../../../../../src/devcomp/domain/usecases/create-passage.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
@@ -56,12 +55,11 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
     });
   });
 
-  it('should save the passage and record passage started event', async function () {
+  it('should save the passage', async function () {
     // given
     const moduleId = Symbol('moduleId');
     const moduleSlug = 'les-adresses-email';
     const passageId = 1234;
-    const sequenceNumber = 1;
     const userId = Symbol('userId');
 
     const title = 'Les adresses email';
@@ -81,20 +79,12 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
       version,
     });
 
-    const occurredAt = new Date('2025-01-01');
     const passageCreatedAt = new Date('2025-03-05');
     const passage = new Passage({
       id: passageId,
       moduleId,
       userId,
       createdAt: passageCreatedAt,
-    });
-
-    const passageStartedEvent = new PassageStartedEvent({
-      contentHash: version,
-      occurredAt,
-      passageId,
-      sequenceNumber,
     });
 
     const userRepositoryStub = {
@@ -110,18 +100,11 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
     };
     passageRepositoryStub.save.resolves(passage);
 
-    const passageEventRepositoryStub = {
-      record: sinon.stub(),
-    };
-
     // when
     const result = await createPassage({
-      occurredAt,
       moduleSlug,
-      sequenceNumber,
       userId,
       passageRepository: passageRepositoryStub,
-      passageEventRepository: passageEventRepositoryStub,
       moduleRepository: moduleRepositoryStub,
       userRepository: userRepositoryStub,
     });
@@ -131,7 +114,6 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
       moduleId,
       userId,
     });
-    expect(passageEventRepositoryStub.record).to.have.been.calledOnceWith(passageStartedEvent);
     expect(result).to.equal(passage);
   });
 });
