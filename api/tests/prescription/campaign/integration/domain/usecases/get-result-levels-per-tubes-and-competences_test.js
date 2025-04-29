@@ -105,14 +105,15 @@ describe('Integration | UseCase | get-result-levels-per-tubes-and-competences', 
         name: 'name FR Compétence 1',
       },
     ]);
-    expect(result.levelsPerTube).to.deep.equal([
+    expect(result.levelsPerTube).to.equalWithGetter([
       {
         competenceId: 'recCompetence1',
+        competenceName: 'name FR Compétence 1',
         id: 'recTube1',
         maxLevel: 1,
         meanLevel: 0.5,
-        practicalDescription: 'recTube1 fr description',
-        practicalTitle: 'Tube 1 fr title',
+        description: 'recTube1 fr description',
+        title: 'Tube 1 fr title',
       },
     ]);
   });
