@@ -52,5 +52,12 @@ module('Unit | Route | modules | passage', function (hooks) {
 
     // then
     assert.strictEqual(model.passage, passage);
+    sinon.assert.calledWith(save, {
+      adapterOptions: {
+        occurredAt: new Date().getTime(),
+        sequenceNumber: 1,
+        moduleVersion: module.version,
+      },
+    });
   });
 });
