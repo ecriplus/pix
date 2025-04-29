@@ -110,11 +110,6 @@ export default class ModulePassage extends Component {
   }
 
   @action
-  grainTransition(grainId) {
-    return this.args.module.transitionTexts.find((transition) => transition.grainId === grainId);
-  }
-
-  @action
   async onModuleTerminate({ grainId }) {
     const adapter = this.store.adapterFor('passage');
     await adapter.terminate({ passageId: this.args.passage.id });

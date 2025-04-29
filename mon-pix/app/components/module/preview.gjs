@@ -32,12 +32,6 @@ export default class ModulixPreview extends Component {
       "Contribuer au contenu d'un Module"
     ]
   },
-  "transitionTexts": [
-    {
-      "content": "<p>Voici un texte de transition</p>",
-      "grainId": "1111111a-1111-1bcd-e111-1f1111gh1111"
-    }
-  ],
   "grains": [
     {
       "id": "1111111a-1111-1bcd-e111-1f1111gh1111",
@@ -99,7 +93,7 @@ export default class ModulixPreview extends Component {
 
   get formattedModule() {
     if (!this.module || this.module === '') {
-      return { grains: [], transitionTexts: [] };
+      return { grains: [] };
     }
 
     const module = JSON.parse(this.module);
@@ -107,7 +101,6 @@ export default class ModulixPreview extends Component {
     return {
       ...module,
       grains: module.grains ?? [],
-      transitionTexts: module.transitionTexts ?? [],
     };
   }
 
@@ -126,11 +119,6 @@ export default class ModulixPreview extends Component {
     } catch (e) {
       this.errorMessage = e.message;
     }
-  }
-
-  @action
-  grainTransition(grainId) {
-    return this.formattedModule.transitionTexts.find((transition) => transition.grainId === grainId);
   }
 
   @action
