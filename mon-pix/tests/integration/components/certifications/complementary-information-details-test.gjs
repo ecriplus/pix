@@ -1,12 +1,12 @@
-import { render as renderScreen } from '@1024pix/ember-testing-library';
+import { render } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 
-import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | user certifications detail result', function (hooks) {
+module('Integration | Component | complementary information details', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   let certification;
@@ -29,8 +29,8 @@ module('Integration | Component | user certifications detail result', function (
       this.set('certification', certification);
 
       // when
-      const screen = await renderScreen(
-        hbs`<Certifications::UserCertificationsDetailResult @certification={{this.certification}} />`,
+      const screen = await render(
+        hbs`<Certifications::CertificateInformation::ComplementaryInformationDetails @certificate={{this.certification}} />`,
       );
 
       // then
@@ -56,8 +56,8 @@ module('Integration | Component | user certifications detail result', function (
       this.set('certification', certification);
 
       // when
-      const screen = await renderScreen(
-        hbs`<Certifications::UserCertificationsDetailResult @certification={{this.certification}} />`,
+      const screen = await render(
+        hbs`<Certifications::CertificateInformation::ComplementaryInformationDetails @certificate={{this.certification}} />`,
       );
 
       // then
@@ -89,8 +89,8 @@ module('Integration | Component | user certifications detail result', function (
       this.set('certification', certification);
 
       // when
-      const screen = await renderScreen(
-        hbs`<Certifications::UserCertificationsDetailResult @certification={{this.certification}} />`,
+      const screen = await render(
+        hbs`<Certifications::CertificateInformation::ComplementaryInformationDetails @certificate={{this.certification}} />`,
       );
 
       // then
@@ -121,8 +121,8 @@ module('Integration | Component | user certifications detail result', function (
         this.set('certification', certification);
 
         // when
-        const screen = await renderScreen(
-          hbs`<Certifications::UserCertificationsDetailResult @certification={{this.certification}} />`,
+        const screen = await render(
+          hbs`<Certifications::CertificateInformation::ComplementaryInformationDetails @certificate={{this.certification}} />`,
         );
 
         // then
@@ -154,8 +154,8 @@ module('Integration | Component | user certifications detail result', function (
           this.set('certification', certification);
 
           // when
-          const screen = await renderScreen(
-            hbs`<Certifications::UserCertificationsDetailResult @certification={{this.certification}} />`,
+          const screen = await render(
+            hbs`<Certifications::CertificateInformation::ComplementaryInformationDetails @certificate={{this.certification}} />`,
           );
 
           // then
@@ -183,8 +183,8 @@ module('Integration | Component | user certifications detail result', function (
         this.set('certification', certification);
 
         // when
-        const screen = await renderScreen(
-          hbs`<Certifications::UserCertificationsDetailResult @certification={{this.certification}} />`,
+        const screen = await render(
+          hbs`<Certifications::CertificateInformation::ComplementaryInformationDetails @certificate={{this.certification}} />`,
         );
 
         // then
@@ -212,8 +212,8 @@ module('Integration | Component | user certifications detail result', function (
       this.set('certification', certification);
 
       // when
-      const screen = await renderScreen(
-        hbs`<Certifications::UserCertificationsDetailResult @certification={{this.certification}} />`,
+      const screen = await render(
+        hbs`<Certifications::CertificateInformation::ComplementaryInformationDetails @certificate={{this.certification}} />`,
       );
 
       // then
