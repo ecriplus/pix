@@ -86,7 +86,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
       passageStartedEvent,
     ];
 
-    const passage = new Passage({ id: 2 });
+    const passage = new Passage({ id: 2, userId: null });
     const passageEventRepositoryStub = {
       record: sinon.stub().resolves(),
     };
@@ -97,6 +97,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
     // when
     await recordPassageEvents({
       events,
+      userId: null,
       passageRepository: passageRepositoryStub,
       passageEventRepository: passageEventRepositoryStub,
     });
@@ -144,6 +145,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
       // when
       const error = await catchErr(recordPassageEvents)({
         events: [event],
+        userId: null,
         passageRepository: passageRepositoryStub,
         passageEventRepository: passageEventRepositoryStub,
       });
@@ -176,6 +178,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
       // when
       const error = await catchErr(recordPassageEvents)({
         events: [event],
+        userId: null,
         passageRepository: passageRepositoryStub,
         passageEventRepository: passageEventRepositoryStub,
       });
@@ -208,6 +211,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
       // when
       const error = await catchErr(recordPassageEvents)({
         events: [event],
+        userId: null,
         passageRepository: passageRepositoryStub,
         passageEventRepository: passageEventRepositoryStub,
       });
@@ -216,6 +220,39 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
       expect(error).to.be.instanceOf(DomainError);
       expect(error.message).to.equal(`Passage with id ${event.id} is terminated.`);
       expect(passageEventRepositoryStub.record).to.not.have.been.called;
+    });
+  });
+
+  context('when anonymous user records an event for a passage with user id', function () {
+    it('should throw an error', async function () {
+      // given
+      const passageTerminatedEvent = {
+        occurredAt: new Date(),
+        passageId: 2,
+        sequenceNumber: 1,
+        type: 'PASSAGE_TERMINATED',
+      };
+      const passageUser = { id: 123 };
+      const passage = new Passage({ id: 2, userId: passageUser.id });
+
+      const passageRepositoryStub = {
+        get: sinon.stub().withArgs({ userId: passageUser.id }).resolves(passage),
+      };
+      const passageEventRepositoryStub = {
+        record: sinon.stub(),
+      };
+
+      // when
+      const error = await catchErr(recordPassageEvents)({
+        events: [passageTerminatedEvent],
+        userId: null,
+        passageRepository: passageRepositoryStub,
+        passageEventRepository: passageEventRepositoryStub,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(DomainError);
+      expect(error.message).to.equal('Anonymous user cannot record event for passage with id 2 that belongs to a user');
     });
   });
 });

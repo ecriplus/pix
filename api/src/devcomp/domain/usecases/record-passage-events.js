@@ -9,10 +9,10 @@ import {
 } from '../models/passage-events/flashcard-events.js';
 import { PassageStartedEvent, PassageTerminatedEvent } from '../models/passage-events/passage-events.js';
 
-const recordPassageEvents = async function ({ events, passageRepository, passageEventRepository }) {
+const recordPassageEvents = async function ({ events, userId, passageRepository, passageEventRepository }) {
   await PromiseUtils.mapSeries(events, async (event) => {
     const passageEvent = _buildPassageEvent(event);
-    await _validatePassage({ event, passageRepository });
+    await _validatePassage({ event, userId, passageRepository });
     await passageEventRepository.record(passageEvent);
   });
 };
@@ -38,11 +38,17 @@ function _buildPassageEvent(event) {
   }
 }
 
-async function _validatePassage({ event, passageRepository }) {
+async function _validatePassage({ event, userId, passageRepository }) {
   try {
     const passage = await passageRepository.get({ passageId: event.passageId });
     if (passage.terminatedAt != null) {
       throw new DomainError(`Passage with id ${event.id} is terminated.`);
+    }
+
+    if (userId === null && passage.userId !== null) {
+      throw new DomainError(
+        `Anonymous user cannot record event for passage with id ${passage.id} that belongs to a user`,
+      );
     }
   } catch (error) {
     if (error instanceof NotFoundError) {
