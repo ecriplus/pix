@@ -270,6 +270,8 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
           username: 'saml.jackson1234',
           rawPassword: password,
         });
+        await databaseBuilder.commit();
+
         const expectedExternalToken = tokenService.createIdTokenForUserReconciliation(userAttributes);
 
         const options = {
@@ -291,8 +293,6 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
             },
           },
         };
-
-        await databaseBuilder.commit();
 
         // when
         const response = await server.inject(options);
@@ -318,6 +318,8 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
           username: 'saml.jackson1234',
           rawPassword: password,
         });
+        await databaseBuilder.commit();
+
         const expectedExternalToken = tokenService.createIdTokenForUserReconciliation(userAttributes);
 
         const options = {
@@ -339,8 +341,6 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
             },
           },
         };
-
-        await databaseBuilder.commit();
 
         // when
         await server.inject(options);
@@ -436,9 +436,9 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
               rawPassword: password,
             });
             databaseBuilder.factory.buildUserLogin({ userId: user.id, failureCount: 50, blockedAt: new Date() });
-            const expectedExternalToken = tokenService.createIdTokenForUserReconciliation(userAttributes);
-
             await databaseBuilder.commit();
+
+            const expectedExternalToken = tokenService.createIdTokenForUserReconciliation(userAttributes);
 
             const options = {
               method: 'POST',
@@ -479,9 +479,9 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
               rawPassword: password,
             });
             databaseBuilder.factory.buildUserLogin({ userId: user.id, failureCount: 50, blockedAt: new Date() });
-            const expectedExternalToken = tokenService.createIdTokenForUserReconciliation(userAttributes);
-
             await databaseBuilder.commit();
+
+            const expectedExternalToken = tokenService.createIdTokenForUserReconciliation(userAttributes);
 
             const options = {
               method: 'POST',
