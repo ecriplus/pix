@@ -9,6 +9,7 @@ function serialize(module) {
         id: module.slug,
         title: module.title,
         isBeta: module.isBeta,
+        version: module.version,
         details: module.details,
         grains: module.grains.map((grain) => {
           return {
@@ -20,7 +21,7 @@ function serialize(module) {
         }),
       };
     },
-    attributes: ['title', 'isBeta', 'grains', 'details'],
+    attributes: ['title', 'isBeta', 'version', 'grains', 'details'],
     grains: {
       ref: 'id',
       includes: true,

@@ -20,6 +20,9 @@ describe('Integration | Devcomp | Application | Passage | Router | passage-route
           data: {
             attributes: {
               'module-id': 'not existing id',
+              'module-version': '6c3b1771db81f7419d18d7c8010e9b62266b62b032868e319d195e52742825e5',
+              'sequence-number': '1',
+              'occurred-at': new Date('2025-04-30').getTime(),
             },
           },
         };
@@ -42,6 +45,9 @@ describe('Integration | Devcomp | Application | Passage | Router | passage-route
           data: {
             attributes: {
               'module-id': 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d',
+              'module-version': '6c3b1771db81f7419d18d7c8010e9b62266b62b032868e319d195e52742825e5',
+              'sequence-number': '1',
+              'occurred-at': new Date('2025-04-30').getTime(),
             },
           },
         };

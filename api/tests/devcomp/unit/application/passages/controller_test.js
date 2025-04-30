@@ -1,5 +1,4 @@
 import {
-  CREATE_PASSAGE_SEQUENCE_NUMBER,
   passageController,
   TERMINATE_PASSAGE_SEQUENCE_NUMBER,
 } from '../../../../../src/devcomp/application/passages/controller.js';
@@ -12,10 +11,13 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
       // given
       const serializedPassage = Symbol('serialized modules');
       const moduleSlug = Symbol('module-slug');
+      const moduleVersion = Symbol('module-version');
+      const occurredAtDate = new Date('2025-04-29');
+      const occurredAt = occurredAtDate.getTime();
+      const sequenceNumber = Symbol('sequence-number');
       const passage = {
         id: Symbol('passageId'),
       };
-      const sequenceNumber = CREATE_PASSAGE_SEQUENCE_NUMBER;
       const userId = Symbol('user-id');
       const passageSerializer = {
         serialize: sinon.stub(),
@@ -27,20 +29,27 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
       const created = sinon.stub();
       hStub.response.withArgs(serializedPassage).returns({ created });
 
-      const request = { payload: { data: { attributes: { 'module-id': moduleSlug } } } };
+      const request = {
+        payload: {
+          data: {
+            attributes: {
+              'module-id': moduleSlug,
+              'module-version': moduleVersion,
+              'occurred-at': occurredAt,
+              'sequence-number': sequenceNumber,
+            },
+          },
+        },
+      };
 
       const extractUserIdFromRequestStub = sinon.stub(requestResponseUtils, 'extractUserIdFromRequest');
       extractUserIdFromRequestStub.withArgs(request).returns(userId);
-      const requestTimestamp = new Date('2025-01-01').getTime();
-      const extractTimestampStub = sinon
-        .stub(requestResponseUtils, 'extractTimestampFromRequest')
-        .returns(requestTimestamp);
 
       const passageStartedEvent = {
-        occurredAt: new Date(requestTimestamp),
+        occurredAt: occurredAtDate,
         passageId: passage.id,
         sequenceNumber,
-        contentHash: 'NOT_IMPLEMENTED',
+        contentHash: moduleVersion,
         type: 'PASSAGE_STARTED',
       };
 
@@ -51,14 +60,13 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
       usecases.createPassage.withArgs({ moduleSlug, userId }).returns(passage);
 
       // when
-      await passageController.create({ payload: { data: { attributes: { 'module-id': moduleSlug } } } }, hStub, {
+      await passageController.create(request, hStub, {
         passageSerializer,
         usecases,
       });
 
       // then
       expect(created).to.have.been.called;
-      expect(extractTimestampStub).to.have.been.calledOnce;
       expect(usecases.recordPassageEvents).to.have.been.calledOnceWith({ events: [passageStartedEvent] });
     });
   });

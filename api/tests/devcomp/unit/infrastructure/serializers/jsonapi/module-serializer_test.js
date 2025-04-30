@@ -27,6 +27,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
       const slug = 'bien-ecrire-son-adresse-mail';
       const title = 'Bien écrire son adresse mail';
       const isBeta = true;
+      const version = Symbol('version');
       const details = {
         image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
         description:
@@ -39,7 +40,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
           'Comprendre les fonctions des parties d’une adresse mail',
         ],
       };
-      const moduleFromDomain = new Module({ id, details, slug, title, grains: [], isBeta });
+      const moduleFromDomain = new Module({ id, details, slug, title, grains: [], isBeta, version });
       const expectedJson = {
         data: {
           type: 'modules',
@@ -48,6 +49,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
             title,
             'is-beta': isBeta,
             details,
+            version,
           },
           relationships: {
             grains: {
@@ -70,6 +72,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
       const slug = 'bien-ecrire-son-adresse-mail';
       const title = 'Bien écrire son adresse mail';
       const isBeta = true;
+      const version = Symbol('version');
       const details = {
         image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
         description:
@@ -87,6 +90,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
         slug,
         title,
         isBeta,
+        version,
         details,
         grains: [
           {
@@ -102,6 +106,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
           attributes: {
             title: 'Bien écrire son adresse mail',
             'is-beta': isBeta,
+            version,
             details,
           },
           id: 'bien-ecrire-son-adresse-mail',
