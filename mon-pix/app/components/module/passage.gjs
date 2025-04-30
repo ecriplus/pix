@@ -110,11 +110,6 @@ export default class ModulePassage extends Component {
   }
 
   @action
-  grainTransition(grainId) {
-    return this.args.module.transitionTexts.find((transition) => transition.grainId === grainId);
-  }
-
-  @action
   async onModuleTerminate({ grainId }) {
     const adapter = this.store.adapterFor('passage');
     await adapter.terminate({ passageId: this.args.passage.id });
@@ -270,7 +265,6 @@ export default class ModulePassage extends Component {
             @grain={{grain}}
             @onElementRetry={{this.onElementRetry}}
             @passage={{@passage}}
-            @transition={{this.grainTransition grain.id}}
             @onImageAlternativeTextOpen={{this.onImageAlternativeTextOpen}}
             @onVideoTranscriptionOpen={{this.onVideoTranscriptionOpen}}
             @onElementAnswer={{this.onElementAnswer}}

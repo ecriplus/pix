@@ -34,9 +34,8 @@ module('Integration | Component | Module | Passage', function (hooks) {
         },
       ];
       const grain = store.createRecord('grain', { id: 'grainId1', components });
-      const transitionTexts = [{ grainId: 'grainId1', content: 'transition text' }];
 
-      const module = store.createRecord('module', { title: 'Module title', grains: [grain], transitionTexts });
+      const module = store.createRecord('module', { title: 'Module title', grains: [grain] });
       const passage = store.createRecord('passage');
 
       // when
@@ -44,7 +43,6 @@ module('Integration | Component | Module | Passage', function (hooks) {
 
       // then
       assert.ok(screen.getByRole('heading', { name: module.title, level: 1 }));
-      assert.ok(screen.getByRole('banner').innerText.includes('transition text'));
       assert.strictEqual(findAll('.element-text').length, 1);
       assert.strictEqual(findAll('.element-qcu').length, 1);
 
@@ -71,9 +69,8 @@ module('Integration | Component | Module | Passage', function (hooks) {
         },
       ];
       const grain = store.createRecord('grain', { id: 'grainId1', components });
-      const transitionTexts = [{ grainId: 'grainId1', content: 'transition text' }];
 
-      const module = store.createRecord('module', { title: 'Module title', grains: [grain], transitionTexts });
+      const module = store.createRecord('module', { title: 'Module title', grains: [grain] });
       const passage = store.createRecord('passage');
 
       // when
@@ -958,7 +955,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const element = { type: 'text', isAnswerable: false };
       const grain = store.createRecord('grain', { title: 'Grain title', components: [{ type: 'element', element }] });
 
-      const module = store.createRecord('module', { title: 'Module title', grains: [grain], transitionTexts: [] });
+      const module = store.createRecord('module', { title: 'Module title', grains: [grain] });
       const passage = store.createRecord('passage');
 
       // when
@@ -983,7 +980,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
             components: [{ type: 'element', element: qcuElement }],
           });
 
-          const module = store.createRecord('module', { title: 'Module title', grains: [grain], transitionTexts: [] });
+          const module = store.createRecord('module', { title: 'Module title', grains: [grain] });
           const passage = store.createRecord('passage');
 
           // when
@@ -1008,7 +1005,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
             components: [{ type: 'element', element: qcuElement }],
           });
 
-          const module = store.createRecord('module', { title: 'Module title', grains: [grain], transitionTexts: [] });
+          const module = store.createRecord('module', { title: 'Module title', grains: [grain] });
           const passage = store.createRecord('passage');
 
           // when
@@ -1036,7 +1033,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
             components: [{ type: 'stepper', steps: [{ elements: [textElement] }, { elements: [qcuElement] }] }],
           });
 
-          const module = store.createRecord('module', { title: 'Module title', grains: [grain], transitionTexts: [] });
+          const module = store.createRecord('module', { title: 'Module title', grains: [grain] });
           const passage = store.createRecord('passage');
 
           // when
@@ -1058,7 +1055,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
             components: [{ type: 'stepper', steps: [{ elements: [text1Element] }, { elements: [text2Element] }] }],
           });
 
-          const module = store.createRecord('module', { title: 'Module title', grains: [grain], transitionTexts: [] });
+          const module = store.createRecord('module', { title: 'Module title', grains: [grain] });
           const passage = store.createRecord('passage');
 
           // when
@@ -1268,7 +1265,6 @@ module('Integration | Component | Module | Passage', function (hooks) {
         id: 'module-title',
         title: 'Module title',
         grains: [grain],
-        transitionTexts: [],
       });
       const passage = store.createRecord('passage');
       passage.terminate = sinon.stub();
@@ -1308,7 +1304,6 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const module = store.createRecord('module', {
         title: 'Didacticiel',
         grains: [grain1, grain2],
-        transitionTexts: [],
       });
       const passage = store.createRecord('passage');
       const metrics = this.owner.lookup('service:metrics');
@@ -1349,7 +1344,6 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const module = store.createRecord('module', {
         title: 'Didacticiel',
         grains: [grain1, grain2],
-        transitionTexts: [],
       });
       const passage = store.createRecord('passage');
       const modulixAutoScroll = this.owner.lookup('service:modulix-auto-scroll');
@@ -1385,7 +1379,6 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const module = store.createRecord('module', {
         title: 'Didacticiel',
         grains: [grain1, grain2],
-        transitionTexts: [],
       });
       const passage = store.createRecord('passage');
       const metrics = this.owner.lookup('service:metrics');
@@ -1430,7 +1423,6 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const module = store.createRecord('module', {
         title: 'Didacticiel',
         grains: [grain],
-        transitionTexts: [],
       });
       const passage = store.createRecord('passage');
       const metrics = this.owner.lookup('service:metrics');
@@ -1475,7 +1467,6 @@ module('Integration | Component | Module | Passage', function (hooks) {
         const module = store.createRecord('module', {
           title: 'Didacticiel',
           grains: [grain],
-          transitionTexts: [],
         });
         const passage = store.createRecord('passage');
         const metrics = this.owner.lookup('service:metrics');
@@ -1520,7 +1511,6 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const module = store.createRecord('module', {
         title: 'Didacticiel',
         grains: [grain],
-        transitionTexts: [],
       });
       const passage = store.createRecord('passage');
       const metrics = this.owner.lookup('service:metrics');
