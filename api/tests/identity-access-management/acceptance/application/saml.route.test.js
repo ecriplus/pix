@@ -1,3 +1,5 @@
+import { env } from 'node:process';
+
 import _ from 'lodash';
 import samlify from 'samlify';
 
@@ -260,6 +262,8 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
     describe('when user has a reconciled Pix account and successfully authenticate to Pix from GAR (saml)', function () {
       it('returns a 200 with accessToken', async function () {
         // given
+        env.DEBUG = 'pix:token-service:invalid-token';
+
         const password = 'Pix123';
         const userAttributes = {
           firstName: 'saml',
@@ -270,6 +274,8 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
           username: 'saml.jackson1234',
           rawPassword: password,
         });
+        await databaseBuilder.commit();
+
         const expectedExternalToken = tokenService.createIdTokenForUserReconciliation(userAttributes);
 
         const options = {
@@ -292,15 +298,14 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
           },
         };
 
-        await databaseBuilder.commit();
-
         // when
         const response = await server.inject(options);
 
         // then
         expect(response.statusCode).to.equal(200);
-        expect(response.result.data.attributes['access-token']).to.exist;
-        const decodedAccessToken = await decodeIfValid(response.result.data.attributes['access-token']);
+        const token = response.result.data.attributes['access-token'];
+        expect(token).to.exist;
+        const decodedAccessToken = await decodeIfValid(token);
         expect(decodedAccessToken).to.include({
           aud: 'https://app.pix.fr',
         });
@@ -318,6 +323,8 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
           username: 'saml.jackson1234',
           rawPassword: password,
         });
+        await databaseBuilder.commit();
+
         const expectedExternalToken = tokenService.createIdTokenForUserReconciliation(userAttributes);
 
         const options = {
@@ -339,8 +346,6 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
             },
           },
         };
-
-        await databaseBuilder.commit();
 
         // when
         await server.inject(options);
@@ -436,9 +441,9 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
               rawPassword: password,
             });
             databaseBuilder.factory.buildUserLogin({ userId: user.id, failureCount: 50, blockedAt: new Date() });
-            const expectedExternalToken = tokenService.createIdTokenForUserReconciliation(userAttributes);
-
             await databaseBuilder.commit();
+
+            const expectedExternalToken = tokenService.createIdTokenForUserReconciliation(userAttributes);
 
             const options = {
               method: 'POST',
@@ -479,9 +484,9 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
               rawPassword: password,
             });
             databaseBuilder.factory.buildUserLogin({ userId: user.id, failureCount: 50, blockedAt: new Date() });
-            const expectedExternalToken = tokenService.createIdTokenForUserReconciliation(userAttributes);
-
             await databaseBuilder.commit();
+
+            const expectedExternalToken = tokenService.createIdTokenForUserReconciliation(userAttributes);
 
             const options = {
               method: 'POST',

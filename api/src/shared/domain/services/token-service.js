@@ -1,3 +1,5 @@
+import { env } from 'node:process';
+
 import jsonwebtoken from 'jsonwebtoken';
 
 import { config } from '../../../../src/shared/config.js';
@@ -9,12 +11,6 @@ import {
 } from '../errors.js';
 
 const CERTIFICATION_RESULTS_BY_RECIPIENT_EMAIL_LINK_SCOPE = 'certificationResultsByRecipientEmailLink';
-
-function _createAccessToken({ userId, source, expirationDelaySeconds, audience }) {
-  return jsonwebtoken.sign({ user_id: userId, source, aud: audience }, config.authentication.secret, {
-    expiresIn: expirationDelaySeconds,
-  });
-}
 
 function createAccessTokenFromUser({ userId, source, audience }) {
   const expirationDelaySeconds = config.authentication.accessTokenLifespanMs / 1000;
@@ -30,6 +26,12 @@ function createAccessTokenFromAnonymousUser({ userId, audience }) {
 function createAccessTokenForSaml({ userId, audience }) {
   const expirationDelaySeconds = config.saml.accessTokenLifespanMs / 1000;
   return _createAccessToken({ userId, source: 'external', expirationDelaySeconds, audience });
+}
+
+function _createAccessToken({ userId, source, expirationDelaySeconds, audience }) {
+  return jsonwebtoken.sign({ user_id: userId, source, aud: audience }, config.authentication.secret, {
+    expiresIn: expirationDelaySeconds,
+  });
 }
 
 /**
@@ -132,7 +134,13 @@ function decodeIfValid(token) {
 function getDecodedToken(token, secret = config.authentication.secret) {
   try {
     return jsonwebtoken.verify(token, secret);
-  } catch {
+  } catch (error) {
+    // TODO: Remove this debug used to investigate a flaky test when the cause is found
+    if (env.DEBUG == 'pix:token-service:invalid-token') {
+      // eslint-disable-next-line no-console
+      console.error(`token: "${token}"`, error);
+    }
+
     return false;
   }
 }
@@ -184,7 +192,7 @@ function extractClientId(token, secret = config.authentication.secret) {
 }
 
 async function extractExternalUserFromIdToken(token) {
-  const externalUser = await getDecodedToken(token);
+  const externalUser = getDecodedToken(token);
 
   if (!externalUser) {
     throw new InvalidExternalUserTokenError(
