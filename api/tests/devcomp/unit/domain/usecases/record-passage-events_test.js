@@ -158,7 +158,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
   });
 
   context('when there is no passage for given passage id', function () {
-    it('should throw an error', async function () {
+    it('should throw a NotFoundError', async function () {
       // given
       const event = {
         type: 'PASSAGE_STARTED',
@@ -184,8 +184,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
       });
 
       // then
-      expect(error).to.be.instanceOf(DomainError);
-      expect(error.message).to.equal(`Passage with id ${event.id} does not exist`);
+      expect(error).to.be.instanceOf(NotFoundError);
       expect(passageEventRepositoryStub.record).to.not.have.been.called;
     });
   });

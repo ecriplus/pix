@@ -1,4 +1,4 @@
-import { DomainError, NotFoundError } from '../../../shared/domain/errors.js';
+import { DomainError } from '../../../shared/domain/errors.js';
 import { PromiseUtils } from '../../../shared/infrastructure/utils/promise-utils.js';
 import {
   FlashcardsCardAutoAssessedEvent,
@@ -39,27 +39,20 @@ function _buildPassageEvent(event) {
 }
 
 async function _validatePassage({ event, userId, passageRepository }) {
-  try {
-    const passage = await passageRepository.get({ passageId: event.passageId });
-    if (passage.terminatedAt != null) {
-      throw new DomainError(`Passage with id ${event.id} is terminated.`);
-    }
+  const passage = await passageRepository.get({ passageId: event.passageId });
 
-    if (userId === null && passage.userId !== null) {
-      throw new DomainError(
-        `Anonymous user cannot record event for passage with id ${passage.id} that belongs to a user`,
-      );
-    }
+  if (passage.terminatedAt != null) {
+    throw new DomainError(`Passage with id ${event.id} is terminated.`);
+  }
 
-    if (userId && userId !== passage.userId) {
-      throw new DomainError('Wrong userId');
-    }
-  } catch (error) {
-    if (error instanceof NotFoundError) {
-      throw new DomainError(`Passage with id ${event.id} does not exist`);
-    }
+  if (userId === null && passage.userId !== null) {
+    throw new DomainError(
+      `Anonymous user cannot record event for passage with id ${passage.id} that belongs to a user`,
+    );
+  }
 
-    throw error;
+  if (userId && userId !== passage.userId) {
+    throw new DomainError('Wrong userId');
   }
 }
 
