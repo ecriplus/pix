@@ -5,27 +5,25 @@ import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import CampaignCodeForm from 'mon-pix/components/campaign-code-form';
 import DataProtectionPolicyInformationBanner from 'mon-pix/components/data-protection-policy-information-banner';
-import AppLayout from 'mon-pix/components/global/app-layout';
+
 <template>
   {{pageTitle (t "pages.fill-in-campaign-code.title")}}
 
   <div class="pix-communication-banner">
     <DataProtectionPolicyInformationBanner />
   </div>
-  <AppLayout>
-    <main id="main" class="main global-page-container" role="main">
-      <CampaignCodeForm
-        @isUserAuthenticatedByPix={{@controller.isUserAuthenticatedByPix}}
-        @isUserAuthenticatedByGAR={{@controller.isUserAuthenticatedByGAR}}
-        @startCampaign={{@controller.startCampaign}}
-        @onLanguageChange={{@controller.onLanguageChange}}
-        @selectedLanguage={{@controller.selectedLanguage}}
-        @apiErrorMessage={{@controller.apiErrorMessage}}
-        @clearErrors={{@controller.clearErrors}}
-      />
-    </main>
 
-  </AppLayout>
+  <main id="main" class="main global-page-container" role="main">
+    <CampaignCodeForm
+      @isUserAuthenticatedByPix={{@controller.isUserAuthenticatedByPix}}
+      @isUserAuthenticatedByGAR={{@controller.isUserAuthenticatedByGAR}}
+      @startCampaign={{@controller.startCampaign}}
+      @onLanguageChange={{@controller.onLanguageChange}}
+      @selectedLanguage={{@controller.selectedLanguage}}
+      @apiErrorMessage={{@controller.apiErrorMessage}}
+      @clearErrors={{@controller.clearErrors}}
+    />
+  </main>
 
   <PixModal
     @title={{t "pages.fill-in-campaign-code.mediacentre-start-campaign-modal.title"}}

@@ -5,7 +5,7 @@
   min-height: 100vh;
   background-color: var(--pix-neutral-0);
 
-  .authentication-layout__side {
+  .authentication-layout__image {
     display: none;
   }
 
@@ -33,31 +33,20 @@
       gap: var(--pix-spacing-6x);
       padding: var(--pix-spacing-6x);
 
-      .authentication-layout__side {
-        position: fixed;
-        top: var(--pix-spacing-6x);
-        z-index: 0;
-        display: grid;
-        grid-template-columns: repeat(12, minmax(0, 1fr));
-        gap: var(--pix-spacing-6x);
-        width: calc(100% - 2 * var(--pix-spacing-6x));
-        height: calc(100% - 2 * var(--pix-spacing-6x));
+      .authentication-layout__image {
+        display: unset;
+        grid-column: 1 / span 5;
+        padding: var(--pix-spacing-4x);
         text-align: center;
+        background: var(--pix-primary-500);
+        border-radius: var(--pix-spacing-6x);
 
-        .authentication-layout__image {
-          grid-column: 1 / span 5;
-          padding: var(--pix-spacing-4x);
-          background: var(--pix-primary-500);
-          border-radius: var(--pix-spacing-6x);
-
-          > img {
-            height: 100%;
-          }
+        > img {
+          height: 100%;
         }
       }
 
       .authentication-layout__main {
-        z-index: 10;
         display: flex;
         flex-direction: column;
         grid-column: 7 / span 5;

@@ -1,4 +1,5 @@
 import { visit } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { setupIntl } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
@@ -8,6 +9,15 @@ module('Acceptance | Application', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
   setupIntl(hooks, 'fr');
+
+  hooks.beforeEach(async function () {
+    this.owner.lookup('service:store');
+    class FeatureTogglesStub extends Service {
+      featureToggles = { isPixAppNewLayoutEnabled: true };
+      load = async function () {};
+    }
+    this.owner.register('service:featureToggles', FeatureTogglesStub);
+  });
 
   module('When there are no information banners', function () {
     test('it should not display any banner', async function (assert) {
@@ -34,7 +44,6 @@ module('Acceptance | Application', function (hooks) {
 
       // when
       const screen = await visit(`/`);
-
       // then
       assert.dom(screen.getByRole('alert')).exists();
     });

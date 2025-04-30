@@ -1,25 +1,46 @@
+import { inject as service } from '@ember/service';
+import Component from '@glimmer/component';
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
-import CommunicationBanner from 'mon-pix/components/communication-banner';
-import InformationBanners from 'mon-pix/components/information-banners';
-<template>
-  {{! template-lint-disable no-inline-styles }}
-  {{pageTitle (t "navigation.pix")}}
+import AppLayout from 'mon-pix/components/global/app-layout';
 
-  {{#in-element @controller.model.headElement insertBefore=null}}
-    {{! template-lint-disable no-forbidden-elements }}
-    <meta name="description" content={{t "application.description"}} />
-  {{/in-element}}
+export default class ApplicationTemplate extends Component {
+  @service router;
 
-  <div id="app">
-    <div class="pix-communication-banner">
-      <CommunicationBanner />
-      <InformationBanners @banners={{@controller.model.informationBanner.banners}} />
+  get displayFullLayout() {
+    return (
+      ![
+        'authenticated.certifications.information',
+        'authenticated.certifications.results',
+        'authenticated.certifications.start',
+      ].includes(this.router.currentRouteName) &&
+      (this.router.currentRouteName.startsWith('authenticated.') ||
+        [
+          'download-session-results',
+          'shared-certification',
+          'fill-in-campaign-code',
+          'fill-in-certificate-verification-code',
+          'error',
+        ].includes(this.router.currentRouteName))
+    );
+  }
+
+  <template>
+    {{! template-lint-disable no-inline-styles }}
+    {{pageTitle (t "navigation.pix")}}
+
+    {{#in-element @controller.model.headElement insertBefore=null}}
+      {{! template-lint-disable no-forbidden-elements }}
+      <meta name="description" content={{t "application.description"}} />
+    {{/in-element}}
+
+    <div id="app">
+      <AppLayout @displayFullLayout={{this.displayFullLayout}} @banners={{@controller.model.informationBanner.banners}}>
+        {{outlet}}
+      </AppLayout>
+
+      <!-- Preloading images -->
+      <img src="/images/loader-white.svg" alt="{{t 'common.loading.default'}}" style="display: none" />
     </div>
-
-    {{outlet}}
-
-    <!-- Preloading images -->
-    <img src="/images/loader-white.svg" alt="{{t 'common.loading.default'}}" style="display: none" />
-  </div>
-</template>
+  </template>
+}
