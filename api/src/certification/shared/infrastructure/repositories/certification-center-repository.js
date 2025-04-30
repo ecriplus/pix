@@ -44,6 +44,8 @@ export const getBySessionId = async ({ sessionId }) => {
       'certification-centers.type',
       'certification-centers.createdAt',
       'certification-centers.updatedAt',
+      'certification-centers.archivedAt',
+      'certification-centers.archivedBy',
     )
     .where({ 'sessions.id': sessionId })
     .innerJoin('sessions', 'sessions.certificationCenterId', 'certification-centers.id')

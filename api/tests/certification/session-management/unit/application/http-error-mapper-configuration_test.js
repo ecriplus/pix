@@ -1,6 +1,7 @@
 import { sessionDomainErrorMappingConfiguration } from '../../../../../src/certification/session-management/application/http-error-mapper-configuration.js';
 import { SESSION_SUPERVISING } from '../../../../../src/certification/session-management/domain/constants.js';
 import {
+  CertificationCenterIsArchivedError,
   InvalidSessionSupervisingLoginError,
   SessionAlreadyFinalizedError,
   SessionAlreadyPublishedError,
@@ -94,6 +95,25 @@ describe('Unit | Certification | Session | Application | HttpErrorMapperConfigur
       //then
       expect(error).to.be.instanceOf(HttpErrors.BadRequestError);
       expect(error.message).to.equal(message);
+    });
+  });
+
+  context('when mapping "CertificationCenterIsArchivedError"', function () {
+    it('returns an UnauthorizedError Http Error', function () {
+      // given
+      const httpErrorMapper = sessionDomainErrorMappingConfiguration.find(
+        (httpErrorMapper) => httpErrorMapper.name === CertificationCenterIsArchivedError.name,
+      );
+      const message = 'Test message error';
+      const code = 'CERTIFICATION_CENTER_IS_ARCHIVED';
+
+      // when
+      const error = httpErrorMapper.httpErrorFn(new CertificationCenterIsArchivedError(message, code));
+
+      // then
+      expect(error).to.be.instanceOf(HttpErrors.UnauthorizedError);
+      expect(error.message).to.equal(message);
+      expect(error.code).to.equal(code);
     });
   });
 

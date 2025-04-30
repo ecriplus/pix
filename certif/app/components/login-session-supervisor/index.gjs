@@ -44,6 +44,8 @@ export default class LoginSessionSupervisor extends Component {
       const errorCode = get(error, 'errors[0].code');
       if (errorCode === 'INCORRECT_DATA') {
         errorMessage = this.intl.t('pages.session-supervising.login.form.errors.incorrect-data');
+      } else if (errorCode === 'CERTIFICATION_CENTER_IS_ARCHIVED') {
+        errorMessage = this.intl.t('pages.session-supervising.login.form.errors.certification-center-archived');
       }
 
       return this._displayError(errorMessage);

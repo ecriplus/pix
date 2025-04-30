@@ -1,4 +1,5 @@
 import {
+  CertificationCenterIsArchivedError,
   InvalidSessionSupervisingLoginError,
   SessionNotAccessible,
 } from '../../../../../../src/certification/session-management/domain/errors.js';
@@ -8,6 +9,7 @@ import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-help
 describe('Unit | UseCase | supervise-session', function () {
   let sessionRepository;
   let supervisorAccessRepository;
+  let certificationCenterRepository;
 
   beforeEach(function () {
     sessionRepository = {
@@ -15,6 +17,9 @@ describe('Unit | UseCase | supervise-session', function () {
     };
     supervisorAccessRepository = {
       create: sinon.stub(),
+    };
+    certificationCenterRepository = {
+      getBySessionId: sinon.stub(),
     };
   });
 
@@ -33,6 +38,7 @@ describe('Unit | UseCase | supervise-session', function () {
       userId,
       sessionRepository,
       supervisorAccessRepository,
+      certificationCenterRepository,
     });
 
     // then
@@ -54,10 +60,34 @@ describe('Unit | UseCase | supervise-session', function () {
       userId,
       sessionRepository,
       supervisorAccessRepository,
+      certificationCenterRepository,
     });
 
     // then
     expect(error).to.be.an.instanceOf(SessionNotAccessible);
+  });
+
+  it('should a Certification center is archived error when certification center is archived', async function () {
+    // given
+    // given
+    const sessionId = 123;
+    const userId = 434;
+    const session = domainBuilder.certification.sessionManagement.buildSession.created({ id: sessionId });
+    sessionRepository.get.resolves(session);
+    certificationCenterRepository.getBySessionId.resolves({ archivedAt: new Date(), archivedBy: 1234 });
+
+    // when
+    const error = await catchErr(superviseSession)({
+      sessionId,
+      invigilatorPassword: session.invigilatorPassword,
+      userId,
+      sessionRepository,
+      supervisorAccessRepository,
+      certificationCenterRepository,
+    });
+
+    // then
+    expect(error).to.be.an.instanceOf(CertificationCenterIsArchivedError);
   });
 
   it('should create a supervisor access', async function () {
@@ -66,6 +96,10 @@ describe('Unit | UseCase | supervise-session', function () {
     const userId = 434;
     const session = domainBuilder.certification.sessionManagement.buildSession.created({ id: sessionId });
     sessionRepository.get.resolves(session);
+    certificationCenterRepository.getBySessionId.resolves({
+      archivedAt: null,
+      archivedBy: null,
+    });
 
     // when
     await superviseSession({
@@ -74,6 +108,7 @@ describe('Unit | UseCase | supervise-session', function () {
       userId,
       sessionRepository,
       supervisorAccessRepository,
+      certificationCenterRepository,
     });
 
     // then
