@@ -1,6 +1,7 @@
 import { passageEventsController } from '../../../../../src/devcomp/application/passage-events/passage-events-controller.js';
 import { BadRequestError } from '../../../../../src/shared/application/http-errors.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
+import { requestResponseUtils } from '../../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Application | Passage-Events | Controller', function () {
@@ -17,6 +18,8 @@ describe('Unit | Devcomp | Application | Passage-Events | Controller', function 
       };
       usecases.recordPassageEvents.resolves();
       const created = sinon.stub();
+      const userId = 123;
+      sinon.stub(requestResponseUtils, 'extractUserIdFromRequest').returns(userId);
       const hStub = {
         response: () => ({ created }),
       };
@@ -29,10 +32,12 @@ describe('Unit | Devcomp | Application | Passage-Events | Controller', function 
 
       // then
       expect(passageEventSerializer.deserialize).to.have.been.calledOnceWithExactly(serializedPayload);
-      expect(usecases.recordPassageEvents).to.have.been.calledWithExactly({ events: deserializedPayload });
+      expect(usecases.recordPassageEvents).to.have.been.calledWithExactly({
+        events: deserializedPayload,
+        userId,
+      });
       expect(created).to.have.been.calledOnce;
     });
-
     context('when recordPassageEvents usecase throws domain error', function () {
       it('should throw a "BadRequestError"', async function () {
         // given
@@ -41,6 +46,7 @@ describe('Unit | Devcomp | Application | Passage-Events | Controller', function 
         const passageEventSerializer = {
           deserialize: sinon.stub().returns(deserializedPayload),
         };
+
         const hStub = {};
 
         const usecases = {

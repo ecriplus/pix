@@ -9,10 +9,12 @@ import {
 } from '../models/passage-events/flashcard-events.js';
 import { PassageStartedEvent, PassageTerminatedEvent } from '../models/passage-events/passage-events.js';
 
-const recordPassageEvents = async function ({ events, passageEventRepository }) {
-  const passageEvents = events.map(_buildPassageEvent);
-
-  await PromiseUtils.mapSeries(passageEvents, (passageEvent) => passageEventRepository.record(passageEvent));
+const recordPassageEvents = async function ({ events, userId, passageRepository, passageEventRepository }) {
+  await PromiseUtils.mapSeries(events, async (event) => {
+    const passageEvent = _buildPassageEvent(event);
+    await _validatePassage({ event, userId, passageRepository });
+    await passageEventRepository.record(passageEvent);
+  });
 };
 
 function _buildPassageEvent(event) {
@@ -33,6 +35,24 @@ function _buildPassageEvent(event) {
       return new FlashcardsRetriedEvent(event);
     default:
       throw new DomainError(`Passage event with type ${event.type} does not exist`);
+  }
+}
+
+async function _validatePassage({ event, userId, passageRepository }) {
+  const passage = await passageRepository.get({ passageId: event.passageId });
+
+  if (passage.terminatedAt != null) {
+    throw new DomainError(`Passage with id ${event.id} is terminated.`);
+  }
+
+  if (userId === null && passage.userId !== null) {
+    throw new DomainError(
+      `Anonymous user cannot record event for passage with id ${passage.id} that belongs to a user`,
+    );
+  }
+
+  if (userId && userId !== passage.userId) {
+    throw new DomainError('Wrong userId');
   }
 }
 

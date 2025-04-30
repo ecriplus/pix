@@ -1,3 +1,4 @@
+import { Passage } from '../../../../../src/devcomp/domain/models/Passage.js';
 import {
   FlashcardsCardAutoAssessedEvent,
   FlashcardsRectoReviewedEvent,
@@ -10,8 +11,8 @@ import {
   PassageTerminatedEvent,
 } from '../../../../../src/devcomp/domain/models/passage-events/passage-events.js';
 import { recordPassageEvents } from '../../../../../src/devcomp/domain/usecases/record-passage-events.js';
-import { DomainError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, expect, sinon } from '../../../../test-helper.js';
+import { DomainError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function () {
   it('should call passage event repository to create the events', async function () {
@@ -85,12 +86,21 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
       passageStartedEvent,
     ];
 
+    const passage = domainBuilder.devcomp.buildPassage({ id: 2 });
     const passageEventRepositoryStub = {
       record: sinon.stub().resolves(),
     };
+    const passageRepositoryStub = {
+      get: sinon.stub().resolves(passage),
+    };
 
     // when
-    await recordPassageEvents({ events, passageEventRepository: passageEventRepositoryStub });
+    await recordPassageEvents({
+      events,
+      userId: null,
+      passageRepository: passageRepositoryStub,
+      passageEventRepository: passageEventRepositoryStub,
+    });
 
     // then
     const flashcardsVersoSeenPassageEvent = new FlashcardsVersoSeenEvent(flashcardsVersoSeenEvent);
@@ -117,6 +127,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
     expect(passageEventRepositoryStub.record.getCall(5)).to.have.been.calledWithExactly(passageTerminatedPassageEvent);
     expect(passageEventRepositoryStub.record.getCall(6)).to.have.been.calledWithExactly(passageStartedPassageEvent);
   });
+
   context('when type of passage event does not exist', function () {
     it('should throw an error', async function () {
       // given
@@ -124,6 +135,9 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
         type: 'NON_EXISTING_TYPE',
       };
 
+      const passageRepositoryStub = {
+        get: sinon.stub(),
+      };
       const passageEventRepositoryStub = {
         record: sinon.stub().resolves(),
       };
@@ -131,6 +145,8 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
       // when
       const error = await catchErr(recordPassageEvents)({
         events: [event],
+        userId: null,
+        passageRepository: passageRepositoryStub,
         passageEventRepository: passageEventRepositoryStub,
       });
 
@@ -138,6 +154,172 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
       expect(error).to.be.instanceOf(DomainError);
       expect(error.message).to.equal(`Passage event with type ${event.type} does not exist`);
       expect(passageEventRepositoryStub.record).to.not.have.been.called;
+    });
+  });
+
+  context('when there is no passage for given passage id', function () {
+    it('should throw a NotFoundError', async function () {
+      // given
+      const event = {
+        type: 'PASSAGE_STARTED',
+        occurredAt: new Date(),
+        sequenceNumber: 2,
+        contentHash: 'abc',
+        passageId: 123,
+      };
+
+      const passageRepositoryStub = {
+        get: sinon.stub().withArgs({ passageId: 123 }).rejects(new NotFoundError()),
+      };
+      const passageEventRepositoryStub = {
+        record: sinon.stub().resolves(),
+      };
+
+      // when
+      const error = await catchErr(recordPassageEvents)({
+        events: [event],
+        userId: null,
+        passageRepository: passageRepositoryStub,
+        passageEventRepository: passageEventRepositoryStub,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(NotFoundError);
+      expect(passageEventRepositoryStub.record).to.not.have.been.called;
+    });
+  });
+
+  context('when the passage for given passage id is terminated', function () {
+    it('should throw an error', async function () {
+      // given
+      const event = {
+        type: 'PASSAGE_STARTED',
+        occurredAt: new Date(),
+        sequenceNumber: 2,
+        contentHash: 'abc',
+        passageId: 123,
+      };
+
+      const passageRepositoryStub = {
+        get: sinon.stub().resolves(new Passage({ id: 123, terminatedAt: new Date() })),
+      };
+      const passageEventRepositoryStub = {
+        record: sinon.stub().resolves(),
+      };
+
+      // when
+      const error = await catchErr(recordPassageEvents)({
+        events: [event],
+        userId: null,
+        passageRepository: passageRepositoryStub,
+        passageEventRepository: passageEventRepositoryStub,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(DomainError);
+      expect(error.message).to.equal(`Passage with id ${event.id} is terminated.`);
+      expect(passageEventRepositoryStub.record).to.not.have.been.called;
+    });
+  });
+
+  context('when anonymous user records an event for a passage with user id', function () {
+    it('should throw an error', async function () {
+      // given
+      const passageTerminatedEvent = {
+        occurredAt: new Date(),
+        passageId: 2,
+        sequenceNumber: 1,
+        type: 'PASSAGE_TERMINATED',
+      };
+      const passageUser = { id: 123 };
+      const passage = domainBuilder.devcomp.buildPassage({ id: 2, userId: passageUser.id });
+
+      const passageRepositoryStub = {
+        get: sinon.stub().withArgs({ userId: passageUser.id }).resolves(passage),
+      };
+      const passageEventRepositoryStub = {
+        record: sinon.stub(),
+      };
+
+      // when
+      const error = await catchErr(recordPassageEvents)({
+        events: [passageTerminatedEvent],
+        userId: null,
+        passageRepository: passageRepositoryStub,
+        passageEventRepository: passageEventRepositoryStub,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(DomainError);
+      expect(error.message).to.equal('Anonymous user cannot record event for passage with id 2 that belongs to a user');
+    });
+  });
+
+  context('when the user is connected', function () {
+    context('when userId value in passage is null', function () {
+      it('should throw an error', async function () {
+        // given
+        const passageTerminatedEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 1,
+          type: 'PASSAGE_TERMINATED',
+        };
+        const connectedUser = { id: 123 };
+        const passage = domainBuilder.devcomp.buildPassage({ id: 2, userId: null });
+
+        const passageRepositoryStub = {
+          get: sinon.stub().withArgs({ userId: null }).resolves(passage),
+        };
+        const passageEventRepositoryStub = {
+          record: sinon.stub(),
+        };
+
+        // when
+        const error = await catchErr(recordPassageEvents)({
+          events: [passageTerminatedEvent],
+          userId: connectedUser,
+          passageRepository: passageRepositoryStub,
+          passageEventRepository: passageEventRepositoryStub,
+        });
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal('Wrong userId');
+      });
+    });
+    context('when userId value in passage does not match connected user', function () {
+      it('should throw an error', async function () {
+        // given
+        const passageTerminatedEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 1,
+          type: 'PASSAGE_TERMINATED',
+        };
+        const connectedUser = { id: 123 };
+        const passageUserId = 321;
+        const passage = domainBuilder.devcomp.buildPassage({ id: 2, userId: passageUserId });
+
+        const passageRepositoryStub = {
+          get: sinon.stub().withArgs({ userId: passageUserId }).resolves(passage),
+        };
+        const passageEventRepositoryStub = {
+          record: sinon.stub(),
+        };
+
+        // when
+        const error = await catchErr(recordPassageEvents)({
+          events: [passageTerminatedEvent],
+          userId: connectedUser,
+          passageRepository: passageRepositoryStub,
+          passageEventRepository: passageEventRepositoryStub,
+        });
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal('Wrong userId');
+      });
     });
   });
 });
