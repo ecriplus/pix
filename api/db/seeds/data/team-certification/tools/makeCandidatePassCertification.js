@@ -3,8 +3,21 @@ import _ from 'lodash';
 
 import { usecases as enrolmentUseCases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
 import { usecases as evaluationUseCases } from '../../../../../src/certification/evaluation/domain/usecases/index.js';
+import { CERTIFICATE_LEVELS } from '../../../../../src/certification/results/domain/models/v3/CertificateLevels.js';
+import { meshConfiguration } from '../../../../../src/certification/results/domain/models/v3/MeshConfiguration.js';
 import { usecases as sessionManagementUseCases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
+import { ABORT_REASONS } from '../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { CertificationReport } from '../../../../../src/certification/shared/domain/models/CertificationReport.js';
+import {
+  MAX_REACHABLE_LEVEL,
+  MINIMUM_REPRODUCIBILITY_RATE_TO_BE_CERTIFIED,
+  PIX_COUNT_BY_LEVEL,
+  V3_REPRODUCIBILITY_RATE,
+} from '../../../../../src/shared/domain/constants.js';
+import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
+import { AssessmentResult } from '../../../../../src/shared/domain/models/AssessmentResult.js';
+import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
+import { LANGUAGES_CODE } from '../../../../../src/shared/domain/services/language-service.js';
 import * as learningContent from '../../common/tooling/learning-content.js';
 
 export default async function makeCandidatePassCertification({
@@ -21,7 +34,7 @@ export default async function makeCandidatePassCertification({
     sessionId,
     accessCode: session.accessCode,
     userId: candidate.userId,
-    locale: 'fr',
+    locale: LANGUAGES_CODE.FRENCH,
   });
 
   const assessment = certificationCourse._assessment;
@@ -40,7 +53,7 @@ export default async function makeCandidatePassCertification({
     const skills = await learningContent.findActiveSkillsByCompetenceId(competence.id);
     const orderedSkills = skills
       .sort((a, b) => a.difficulty - b.difficulty)
-      .filter(({ difficulty }) => difficulty <= 8);
+      .filter(({ difficulty }) => difficulty < MAX_REACHABLE_LEVEL);
 
     for (const skill of orderedSkills) {
       const challenge = await learningContent.findFirstValidatedChallengeBySkillId(skill.id);
@@ -52,7 +65,7 @@ export default async function makeCandidatePassCertification({
 
       const answerId = databaseBuilder.factory.buildAnswer({
         value: 'dummy value',
-        result: 'ok',
+        result: AnswerStatus.OK,
         assessmentId: assessment.id,
         challengeId: challenge.id,
         createdAt: new Date(),
@@ -61,8 +74,8 @@ export default async function makeCandidatePassCertification({
         resultDetails: 'dummy value',
       }).id;
       databaseBuilder.factory.buildKnowledgeElement({
-        source: 'direct',
-        status: 'validated',
+        source: KnowledgeElement.SourceType.DIRECT,
+        status: KnowledgeElement.StatusType.VALIDATED,
         answerId,
         assessmentId: assessment.id,
         skillId: skill.id,
@@ -88,9 +101,13 @@ export default async function makeCandidatePassCertification({
   }
 
   const assessmentResult = databaseBuilder.factory.buildAssessmentResult({
-    pixScore: isCertificationSucceeded ? assessmentResultPixScore : 48,
-    reproducibilityRate: 100,
-    status: 'validated',
+    pixScore: isCertificationSucceeded
+      ? assessmentResultPixScore
+      : meshConfiguration.getMesh(CERTIFICATE_LEVELS.preBeginner).weight - 1,
+    reproducibilityRate: isCertificationSucceeded
+      ? V3_REPRODUCIBILITY_RATE
+      : MINIMUM_REPRODUCIBILITY_RATE_TO_BE_CERTIFIED - 1,
+    status: isCertificationSucceeded ? AssessmentResult.status.VALIDATED : AssessmentResult.status.REJECTED,
     commentForCandidate: '',
     commentForOrganization: '',
     juryId: null,
@@ -107,7 +124,7 @@ export default async function makeCandidatePassCertification({
   // Create competence marks
   for (const competenceData of Object.values(coreProfileData)) {
     databaseBuilder.factory.buildCompetenceMark({
-      level: Math.floor(competenceData.pixScore / 8),
+      level: Math.floor(competenceData.pixScore / PIX_COUNT_BY_LEVEL),
       score: competenceData.pixScore,
       area_code: `${competenceData.competence.index[0]}`,
       competence_code: `${competenceData.competence.index}`,
@@ -132,7 +149,7 @@ export default async function makeCandidatePassCertification({
       });
       databaseBuilder.factory.buildAnswer({
         value: 'dummy value',
-        result: 'ok',
+        result: AnswerStatus.OK,
         assessmentId: assessment.id,
         challengeId: challenge.id,
         createdAt: session.date,
@@ -149,7 +166,7 @@ export default async function makeCandidatePassCertification({
   const report = new CertificationReport({
     certificationCourseId: certificationCourse._id,
     isCompleted: false,
-    abortReason: 'technical',
+    abortReason: ABORT_REASONS.TECHNICAL,
   });
 
   databaseBuilder.factory.buildCertificationReport({ sessionId, ...report });
@@ -171,7 +188,7 @@ export default async function makeCandidatePassCertification({
     date: session.date,
     time: session.time,
     publishedAt: new Date(),
-    assignedCertificationOfficerName: 'Mariah Carey',
+    assignedCertificationOfficerName: 'Mariah Couroux',
   });
 
   await databaseBuilder.commit();
