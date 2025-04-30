@@ -1,4 +1,5 @@
 import { Candidate } from '../../../../../src/certification/enrolment/domain/models/Candidate.js';
+import { CenterTypes } from '../../../../../src/certification/enrolment/domain/models/CenterTypes.js';
 import { Subscription } from '../../../../../src/certification/enrolment/domain/models/Subscription.js';
 import { usecases as enrolmentUseCases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
 import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
@@ -9,16 +10,19 @@ import {
   types as certificationCenterTypes,
 } from '../../../../../src/shared/domain/models/CertificationCenter.js';
 import { Membership } from '../../../../../src/shared/domain/models/index.js';
+import { LANGUAGES_CODE } from '../../../../../src/shared/domain/services/language-service.js';
 import { normalize } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
 import { usecases as teamUsecases } from '../../../../../src/team/domain/usecases/index.js';
 import * as tooling from '../../common/tooling/index.js';
 import { acceptPixOrgaTermsOfService } from '../../common/tooling/legal-documents.js';
 import {
+  PUBLISHED_SCO_SESSION,
   SIMPLE_SCO_CERTIFICATION_CENTER_ID,
   SIMPLE_SCO_CERTIFICATION_USER_ID,
   SIMPLE_SCO_ORGANIZATION_MEMBER_ID,
-  SIMPLE_SCO_SESSION,
+  STARTED_SCO_SESSION,
 } from '../constants.js';
+import makeCandidatePassCertification from '../tools/makeCandidatePassCertification.js';
 
 /**
  * --- CERTIFICATION CASE ---
@@ -40,7 +44,7 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
     lastName: 'Organization Member',
     email: 'sco-managing-students-v3@example.net',
     cgu: true,
-    lang: 'fr',
+    lang: LANGUAGES_CODE.FRENCH,
     lastTermsOfServiceValidatedAt: new Date(),
     pixCertifTermsOfServiceAccepted: true,
   });
@@ -50,22 +54,20 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
   await databaseBuilder.commit();
 
   // Organization
-  const organization = new OrganizationForAdmin({
-    name: 'Certification Sco Organization #1',
-    type: 'SCO',
-    isManagingStudents: true,
-    externalId,
-  });
-
-  const newOrga = await organizationalEntitiesUsecases.createOrganization({
-    organization,
+  const organization = await organizationalEntitiesUsecases.createOrganization({
+    organization: new OrganizationForAdmin({
+      name: 'Certification Sco Organization #1',
+      type: CenterTypes.SCO,
+      isManagingStudents: true,
+      externalId,
+    }),
     organizationCreationValidator,
   });
 
   const organizationMembership = await teamUsecases.createMembership({
     organizationRole: Membership.roles.ADMIN,
     userId: organizationMember.id,
-    organizationId: newOrga.id,
+    organizationId: organization.id,
   });
 
   // Certification center
@@ -92,11 +94,11 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
    */
   const scoUser = databaseBuilder.factory.buildUser.withRawPassword({
     id: SIMPLE_SCO_CERTIFICATION_USER_ID,
-    firstName: 'certifiable',
-    lastName: 'sco-user',
+    firstName: 'SCO-user',
+    lastName: 'Certifiable',
     email: 'certifiable-sco-user@example.net',
     cgu: true,
-    lang: 'fr',
+    lang: LANGUAGES_CODE.FRENCH,
     lastTermsOfServiceValidatedAt: new Date(),
   });
 
@@ -107,7 +109,7 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
 
   const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
     userId: scoUser.id,
-    organizationId: newOrga.id,
+    organizationId: organization.id,
     firstName: scoUser.firstName,
     lastName: scoUser.lastName,
     email: scoUser.email,
@@ -122,10 +124,10 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
   for (let index = 0; index < 10; index++) {
     const otherUser = databaseBuilder.factory.buildUser.withRawPassword({
       firstName: `Élève-${index}`,
-      lastName: `Non certifiable`,
-      email: `non-certifiable-sco-user_${index}@example.net`,
+      lastName: `Dummy`,
+      email: `dummy-sco-user_${index}@example.net`,
       cgu: true,
-      lang: 'fr',
+      lang: LANGUAGES_CODE.FRENCH,
     });
     databaseBuilder.factory.buildOrganizationLearner({
       firstName: otherUser.firstName,
@@ -138,7 +140,7 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
       birthProvinceCode: null,
       division: '6eme',
       isDisabled: false,
-      organizationId: newOrga.id,
+      organizationId: organization.id,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -153,7 +155,7 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
       birthProvinceCode: null,
       division: 'Terminal',
       isDisabled: false,
-      organizationId: newOrga.id,
+      organizationId: organization.id,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -161,7 +163,7 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
 
   await databaseBuilder.commit();
 
-  // Transform this user into certification candidate
+  // Transform this user into a certification candidate
   const candidate = new Candidate({
     authorizedToStart: true,
     organizationLearnerId: organizationLearner.id,
@@ -176,12 +178,14 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
     hasSeenCertificationInstructions: false,
     accessibilityAdjustmentNeeded: false,
     subscriptions: [Subscription.buildCore({ certificationCandidateId: null })],
+    userId: scoUser.id,
   });
 
   /**
-   * 4. Initialize session
+   * 4. Initialize session with candidates ready to enter the certification
    */
-  const session = await enrolmentUseCases.createSession({
+
+  const startedScoSession = await enrolmentUseCases.createSession({
     userId: organizationMember.id,
     session: {
       certificationCenterId: certificationCenterForAdmin.id,
@@ -190,17 +194,51 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
       examiner: 'Johnny Douw',
       date: '2025-01-30',
       time: '14:30',
-      description: 'Description de la simple session Sco',
+      description: 'SCO session with candidates ready to start',
     },
   });
-  await databaseBuilder.knex('sessions').where('id', session.id).update({
-    id: SIMPLE_SCO_SESSION,
+  await databaseBuilder.knex('sessions').where('id', startedScoSession.id).update({
+    id: STARTED_SCO_SESSION,
     accessCode: 'AZERTY',
   });
 
   await enrolmentUseCases.addCandidateToSession({
-    sessionId: SIMPLE_SCO_SESSION,
-    candidate,
+    sessionId: STARTED_SCO_SESSION,
+    candidate: new Candidate(candidate), // Warning: usecase modifies the entry model...
     normalizeStringFnc: normalize,
+  });
+
+  /**
+   * 5. Initialize session that have been published
+   */
+
+  const publishedScoSession = await enrolmentUseCases.createSession({
+    userId: organizationMember.id,
+    session: {
+      certificationCenterId: certificationCenterForAdmin.id,
+      address: 'Montpellier',
+      room: '9C',
+      examiner: 'Jeanne Vieve',
+      date: '2024-12-19',
+      time: '12:30',
+      description: 'SCO session with published results',
+    },
+  });
+  await databaseBuilder.knex('sessions').where('id', publishedScoSession.id).update({
+    id: PUBLISHED_SCO_SESSION,
+    accessCode: 'AZERTY',
+  });
+
+  const publishedScoCandidateId = await enrolmentUseCases.addCandidateToSession({
+    sessionId: PUBLISHED_SCO_SESSION,
+    candidate: new Candidate(candidate), // Warning: usecase modifies the entry model...
+    normalizeStringFnc: normalize,
+  });
+
+  await makeCandidatePassCertification({
+    databaseBuilder,
+    sessionId: PUBLISHED_SCO_SESSION,
+    candidateId: publishedScoCandidateId,
+    isCertificationSucceeded: false,
   });
 }
