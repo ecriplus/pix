@@ -424,4 +424,114 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
       expect(cancelledInvitation.updatedAt).to.deep.equal(archivedCenter.archivedAt);
     });
   });
+
+  describe('POST /api/admin/certification-centers/batch-archive', function () {
+    context('success case', function () {
+      it('returns a 204 http request', async function () {
+        // given
+        const certificationCenterId1 = databaseBuilder.factory.buildCertificationCenter({
+          archivedAt: null,
+          archivedBy: null,
+        }).id;
+        const certificationCenterId2 = databaseBuilder.factory.buildCertificationCenter({
+          archivedAt: null,
+          archivedBy: null,
+        }).id;
+
+        await databaseBuilder.commit();
+        const buffer =
+          `ID du centre de certification\n` + `${certificationCenterId1}\n` + `${certificationCenterId2}\n`;
+
+        // when
+        const response = await server.inject({
+          method: 'POST',
+          url: `/api/admin/certification-centers/batch-archive`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId: adminMember.id }),
+          payload: buffer,
+        });
+
+        // then
+        const archivedCertificationCenter1 = await knex('certification-centers')
+          .where({ id: certificationCenterId1 })
+          .first();
+        const archivedCertificationCenter2 = await knex('certification-centers')
+          .where({ id: certificationCenterId2 })
+          .first();
+
+        expect(response.statusCode).to.equal(204);
+        expect(archivedCertificationCenter1.archivedBy).to.deep.equal(adminMember.id);
+        expect(archivedCertificationCenter2.archivedBy).to.deep.equal(adminMember.id);
+        expect(archivedCertificationCenter1.archivedAt).not.to.be.null;
+        expect(archivedCertificationCenter2.archivedAt).not.to.be.null;
+      });
+    });
+
+    context('error case', function () {
+      it('returns an archive in batch error with meta info', async function () {
+        // given
+        const certificationCenterId1 = databaseBuilder.factory.buildCertificationCenter({
+          archivedAt: null,
+          archivedBy: null,
+        }).id;
+        const certificationCenterId2 = databaseBuilder.factory.buildCertificationCenter({
+          archivedAt: null,
+          archivedBy: null,
+        }).id;
+
+        const nonExistingCertifcationCenterId1 = 7895;
+        const nonExistingCertifcationCenterId2 = 8513;
+
+        await databaseBuilder.commit();
+        const buffer =
+          `ID du centre de certification\n` +
+          `${certificationCenterId1}\n` +
+          `${certificationCenterId2}\n` +
+          `${nonExistingCertifcationCenterId1}\n` +
+          `${nonExistingCertifcationCenterId2}\n`;
+
+        // when
+        const response = await server.inject({
+          method: 'POST',
+          url: `/api/admin/certification-centers/batch-archive`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId: adminMember.id }),
+          payload: buffer,
+        });
+
+        // then
+        const archivedCertificationCenter1 = await knex('certification-centers')
+          .where({ id: certificationCenterId1 })
+          .first();
+        const archivedCertificationCenter2 = await knex('certification-centers')
+          .where({ id: certificationCenterId2 })
+          .first();
+
+        expect(response.statusCode).to.equal(422);
+        expect(response.result.errors[0].code).to.deep.equal('ARCHIVE_CERTIFICATION_CENTERS_IN_BATCH_ERROR');
+        expect(response.result.errors[0].meta).to.deep.equal({
+          currentLine: 3,
+          totalLines: 4,
+        });
+        expect(archivedCertificationCenter1.archivedBy).to.deep.equal(adminMember.id);
+        expect(archivedCertificationCenter2.archivedBy).to.deep.equal(adminMember.id);
+        expect(archivedCertificationCenter1.archivedAt).not.to.be.null;
+        expect(archivedCertificationCenter2.archivedAt).not.to.be.null;
+      });
+
+      it('fails when the file payload is too large', async function () {
+        const buffer = Buffer.alloc(1048576 * 22, 'B'); // > 10 Mo buffer
+
+        const options = {
+          method: 'POST',
+          url: '/api/admin/certification-centers/batch-archive',
+          headers: generateAuthenticatedUserRequestHeaders({ userId: adminMember.id }),
+          payload: buffer,
+        };
+
+        const response = await server.inject(options);
+        expect(response.statusCode).to.equal(413);
+        expect(response.result.errors[0].code).to.equal('PAYLOAD_TOO_LARGE');
+        expect(response.result.errors[0].meta.maxSize).to.equal('20');
+      });
+    });
+  });
 });

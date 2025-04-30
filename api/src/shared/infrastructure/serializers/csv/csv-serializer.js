@@ -176,6 +176,37 @@ async function deserializeForOrganizationsImport(file) {
   return await parseCsvWithHeader(file, batchOrganizationOptionsWithHeader);
 }
 
+async function deserializeForCertificationCenterBatchArchive(
+  file,
+  { checkCsvHeader, readCsvFile, parseCsvData } = csvHelper,
+) {
+  const requiredFieldNames = ['ID du centre de certification'];
+
+  await checkCsvHeader({ filePath: file, requiredFieldNames });
+  const cleanedData = await readCsvFile(file);
+
+  const batchCertificationCenterOptionsWithHeader = {
+    skipEmptyLines: true,
+    header: true,
+    transformHeader: (header) => header?.trim(),
+    transform: (value, columnName) => {
+      if (typeof value === 'string') {
+        value = value.trim();
+      }
+      if (!isEmpty(value)) {
+        if (columnName === 'ID du centre de certification') {
+          value = Number(value);
+        }
+      }
+      return value;
+    },
+  };
+
+  const parsedData = await parseCsvData(cleanedData, batchCertificationCenterOptionsWithHeader);
+
+  return parsedData.map((data) => data['ID du centre de certification']);
+}
+
 const requiredFieldNamesForCampaignsImport = [
   "Identifiant de l'organisation*",
   'Nom de la campagne*',
@@ -450,6 +481,7 @@ function serializeLine(lineArray) {
 
 export {
   deserializeForCampaignsImport,
+  deserializeForCertificationCenterBatchArchive,
   deserializeForOrganizationsImport,
   deserializeForSessionsImport,
   parseForCampaignsImport,
