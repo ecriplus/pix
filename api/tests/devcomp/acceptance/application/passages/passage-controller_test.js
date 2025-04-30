@@ -33,8 +33,8 @@ describe('Acceptance | Controller | passage-controller', function () {
               type: 'passages',
               attributes: {
                 'module-id': 'bien-ecrire-son-adresse-mail',
-                'occurred-at': new Date('2025-04-29').getTime(),
-                'module-version': 'version',
+                'occurred-at': new Date('2025-04-30').getTime(),
+                'module-version': '6c3b1771db81f7419d18d7c8010e9b62266b62b032868e319d195e52742825e5',
                 'sequence-number': 1,
               },
             },
@@ -71,8 +71,8 @@ describe('Acceptance | Controller | passage-controller', function () {
               type: 'passages',
               attributes: {
                 'module-id': 'bien-ecrire-son-adresse-mail',
-                'occurred-at': new Date('2025-04-29').getTime(),
-                'module-version': 'version',
+                'occurred-at': new Date('2025-04-30').getTime(),
+                'module-version': '6c3b1771db81f7419d18d7c8010e9b62266b62b032868e319d195e52742825e5',
                 'sequence-number': 1,
               },
             },

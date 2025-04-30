@@ -4,6 +4,8 @@ import { identifiersType } from '../../../shared/domain/types/identifiers-type.j
 import { handlerWithDependencies } from '../../infrastructure/utils/handlerWithDependencies.js';
 import { passageController } from './controller.js';
 
+const ARBITRARY_MIN_TIMESTAMP = new Date('2025-04-30').getTime();
+
 const register = async function (server) {
   server.route([
     {
@@ -17,9 +19,9 @@ const register = async function (server) {
             data: Joi.object({
               attributes: Joi.object({
                 'module-id': Joi.string().required(),
-                'module-version': Joi.string().required(),
-                'sequence-number': Joi.number().required(),
-                'occurred-at': Joi.number().required(),
+                'module-version': Joi.string().length(64).required(),
+                'sequence-number': Joi.number().valid(1).required(),
+                'occurred-at': Joi.number().min(ARBITRARY_MIN_TIMESTAMP).required(),
               }).required(),
             }).required(),
           }).required(),
