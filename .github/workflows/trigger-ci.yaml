@@ -2,14 +2,14 @@ name: Trigger CircleCI
 
 on:
   pull_request:
-    types: [opened, reopened, synchronize, ready_for_review]
+    types: [opened, reopened, synchronize, ready_for_review, labeled, unlabeled]
   push:
     branches: dev
 
 jobs:
   trigger-ci:
     runs-on: ubuntu-latest
-    if: (!github.event.pull_request.draft && github.event.pull_request.state == 'open') || github.ref == 'refs/heads/dev'
+    if: (!contains(github.event.pull_request.labels.*.name, 'Development in progress')) && ((!github.event.pull_request.draft && github.event.pull_request.state == 'open') || github.ref == 'refs/heads/dev')
 
     steps:
       - name: Extract branch name
