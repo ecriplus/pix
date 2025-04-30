@@ -180,7 +180,7 @@ async function deserializeForCertificationCenterBatchArchive(
   file,
   { checkCsvHeader, readCsvFile, parseCsvData } = csvHelper,
 ) {
-  const requiredFieldNames = ['certificationCenterId'];
+  const requiredFieldNames = ['ID du centre de certification'];
 
   await checkCsvHeader({ filePath: file, requiredFieldNames });
   const cleanedData = await readCsvFile(file);
@@ -194,7 +194,7 @@ async function deserializeForCertificationCenterBatchArchive(
         value = value.trim();
       }
       if (!isEmpty(value)) {
-        if (columnName === 'certificationCenterId') {
+        if (columnName === 'ID du centre de certification') {
           value = Number(value);
         }
       }
@@ -204,7 +204,7 @@ async function deserializeForCertificationCenterBatchArchive(
 
   const parsedData = await parseCsvData(cleanedData, batchCertificationCenterOptionsWithHeader);
 
-  return parsedData.map((data) => data.certificationCenterId);
+  return parsedData.map((data) => data['ID du centre de certification']);
 }
 
 const requiredFieldNamesForCampaignsImport = [

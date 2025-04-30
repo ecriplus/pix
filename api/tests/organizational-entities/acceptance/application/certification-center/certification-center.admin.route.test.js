@@ -439,7 +439,8 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
         }).id;
 
         await databaseBuilder.commit();
-        const buffer = `certificationCenterId\n` + `${certificationCenterId1}\n` + `${certificationCenterId2}\n`;
+        const buffer =
+          `ID du centre de certification\n` + `${certificationCenterId1}\n` + `${certificationCenterId2}\n`;
 
         // when
         const response = await server.inject({
@@ -465,8 +466,8 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
       });
     });
 
-    context('error cases', function () {
-      it('returns an error with meta info', async function () {
+    context('error case', function () {
+      it('returns an archive in batch error with meta info', async function () {
         // given
         const certificationCenterId1 = databaseBuilder.factory.buildCertificationCenter({
           archivedAt: null,
@@ -482,7 +483,7 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
 
         await databaseBuilder.commit();
         const buffer =
-          `certificationCenterId\n` +
+          `ID du centre de certification\n` +
           `${certificationCenterId1}\n` +
           `${certificationCenterId2}\n` +
           `${nonExistingCertifcationCenterId1}\n` +

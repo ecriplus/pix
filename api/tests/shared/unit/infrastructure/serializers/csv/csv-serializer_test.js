@@ -1462,9 +1462,9 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
       const checkCsvHeaderStub = sinon.stub();
       const readCsvFileStub = sinon.stub();
       const parseCsvDataStub = sinon.stub();
-      parseCsvDataStub.resolves([{ certificationCenterId: 1234 }, { certificationCenterId: 5678 }]);
+      parseCsvDataStub.resolves([{ 'ID du centre de certification': 1234 }, { 'ID du centre de certification': 5678 }]);
 
-      const requiredFieldNames = ['certificationCenterId'];
+      const requiredFieldNames = ['ID du centre de certification'];
 
       // when
       const serializedData = await csvSerializer.deserializeForCertificationCenterBatchArchive(filePath, {
