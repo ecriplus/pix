@@ -1,5 +1,36 @@
 # Pix Changelog
 
+## v5.101.0 (30/04/2025)
+
+
+### :rocket: Amélioration
+- [#12163](https://github.com/1024pix/pix/pull/12163) [FEATURE] Ajouter un workflow de release.
+- [#12174](https://github.com/1024pix/pix/pull/12174) [FEATURE] Empêcher l'accès à l'espace surveillant d'un centre de certification archivé (PIX-16805).
+- [#12182](https://github.com/1024pix/pix/pull/12182) [FEATURE] Ajout de la pagination et de la traduction au endpoint `/api/organizations/{organizationId}/campaigns` (PIX-17662).
+- [#12139](https://github.com/1024pix/pix/pull/12139) [FEATURE] Ajouter le taux de couverture aux participations de campagne dans l'API pour les partenaires (PIX-17280).
+
+### :building_construction: Tech
+- [#12140](https://github.com/1024pix/pix/pull/12140) [TECH] Ne pas lancer la CI lorsque une PR est encore au stade de développement.
+- [#12193](https://github.com/1024pix/pix/pull/12193) [TECH] Ajouter de la validation sur la route POST passage-events (PIX-17591).
+- [#12157](https://github.com/1024pix/pix/pull/12157) [TECH] Créer un script permanent pour anonymiser des utilisateurs en masse (PIX-17552).
+- [#12042](https://github.com/1024pix/pix/pull/12042) [TECH] :wastebasket: Supprime le cas d'usage `get-last-challenge-id` et la route qui l'appel.
+
+### :bug: Correction
+- [#12143](https://github.com/1024pix/pix/pull/12143) [BUGFIX] Appeler la traduction du formulaire correctement (PIX-17614).
+
+### :arrow_up: Montée de version
+- [#12195](https://github.com/1024pix/pix/pull/12195) [BUMP] Update dependency pdfkit to ^0.17.0 (api).
+- [#12189](https://github.com/1024pix/pix/pull/12189) [BUMP] Update dependency @1024pix/pix-ui to ^55.16.6 (junior).
+- [#12192](https://github.com/1024pix/pix/pull/12192) [BUMP] Update dependency @1024pix/pix-ui to ^55.16.6 (mon-pix).
+- [#12186](https://github.com/1024pix/pix/pull/12186) [BUMP] Update dependency @1024pix/pix-ui to ^55.16.6 (admin).
+- [#12185](https://github.com/1024pix/pix/pull/12185) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.30 (orga).
+- [#12181](https://github.com/1024pix/pix/pull/12181) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.30 (mon-pix).
+- [#12180](https://github.com/1024pix/pix/pull/12180) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.30 (junior).
+- [#12178](https://github.com/1024pix/pix/pull/12178) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.30 (admin).
+- [#12179](https://github.com/1024pix/pix/pull/12179) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.30 (certif).
+- [#12177](https://github.com/1024pix/pix/pull/12177) [BUMP] Update dependency @1024pix/pix-ui to ^55.16.6 (orga).
+- [#12175](https://github.com/1024pix/pix/pull/12175) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.3 (mon-pix).
+
 ## v5.100.0 (29/04/2025)
 
 
