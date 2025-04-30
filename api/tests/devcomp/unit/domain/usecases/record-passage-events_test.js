@@ -255,4 +255,72 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
       expect(error.message).to.equal('Anonymous user cannot record event for passage with id 2 that belongs to a user');
     });
   });
+
+  context('when the user is connected', function () {
+    context('when userId value in passage is null', function () {
+      it('should throw an error', async function () {
+        // given
+        const passageTerminatedEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 1,
+          type: 'PASSAGE_TERMINATED',
+        };
+        const connectedUser = { id: 123 };
+        const passage = domainBuilder.devcomp.buildPassage({ id: 2, userId: null });
+
+        const passageRepositoryStub = {
+          get: sinon.stub().withArgs({ userId: null }).resolves(passage),
+        };
+        const passageEventRepositoryStub = {
+          record: sinon.stub(),
+        };
+
+        // when
+        const error = await catchErr(recordPassageEvents)({
+          events: [passageTerminatedEvent],
+          userId: connectedUser,
+          passageRepository: passageRepositoryStub,
+          passageEventRepository: passageEventRepositoryStub,
+        });
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal('Wrong userId');
+      });
+    });
+    context('when userId value in passage does not match connected user', function () {
+      it('should throw an error', async function () {
+        // given
+        const passageTerminatedEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 1,
+          type: 'PASSAGE_TERMINATED',
+        };
+        const connectedUser = { id: 123 };
+        const passageUserId = 321;
+        const passage = domainBuilder.devcomp.buildPassage({ id: 2, userId: passageUserId });
+
+        const passageRepositoryStub = {
+          get: sinon.stub().withArgs({ userId: passageUserId }).resolves(passage),
+        };
+        const passageEventRepositoryStub = {
+          record: sinon.stub(),
+        };
+
+        // when
+        const error = await catchErr(recordPassageEvents)({
+          events: [passageTerminatedEvent],
+          userId: connectedUser,
+          passageRepository: passageRepositoryStub,
+          passageEventRepository: passageEventRepositoryStub,
+        });
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal('Wrong userId');
+      });
+    });
+  });
 });

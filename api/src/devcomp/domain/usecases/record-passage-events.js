@@ -50,6 +50,10 @@ async function _validatePassage({ event, userId, passageRepository }) {
         `Anonymous user cannot record event for passage with id ${passage.id} that belongs to a user`,
       );
     }
+
+    if (userId && userId !== passage.userId) {
+      throw new DomainError('Wrong userId');
+    }
   } catch (error) {
     if (error instanceof NotFoundError) {
       throw new DomainError(`Passage with id ${event.id} does not exist`);
