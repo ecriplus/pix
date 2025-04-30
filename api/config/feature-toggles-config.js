@@ -5,6 +5,12 @@ export default {
     defaultValue: false,
     tags: ['frontend'],
   },
+  isNewAccountRecoveryEnabled: {
+    type: 'boolean',
+    description: 'Using and testing feature account recovery process',
+    defaultValue: false,
+    tags: ['team-acces', 'frontend'],
+  },
   isResultsSharedModalEnabled: {
     description: 'Used to enable displaying the "results shared!" modal',
     type: 'boolean',
