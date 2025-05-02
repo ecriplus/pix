@@ -8,6 +8,7 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntl from '../../helpers/setup-intl';
+import { unabortedVisit } from '../../helpers/unaborted-visit';
 
 module('Acceptance | OIDC | authentication flow', function (hooks) {
   setupApplicationTest(hooks);
@@ -120,21 +121,3 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
     });
   });
 });
-
-// Lorsqu'on souhaite tester un transitionTo, on doit utiliser un try/catch en attendant l'évolution attendue dans Ember :
-// https://github.com/emberjs/ember-test-helpers/issues/332
-async function unabortedVisit(url) {
-  try {
-    await visit(url);
-  } catch (error) {
-    if (!_isEmberTransitionAborted(error)) {
-      throw error;
-    }
-
-    await settled();
-  }
-}
-
-function _isEmberTransitionAborted(error) {
-  return error.message == 'TransitionAborted';
-}
