@@ -50,6 +50,33 @@ export const replications = [
       return datamartKnex('certification_results').insert(chunk);
     },
   },
+  {
+    name: 'organizations_cover_rates',
+    before: async ({ datamartKnex }) => {
+      await datamartKnex('organizations_cover_rates').truncate();
+    },
+    from: ({ datawarehouseKnex }) => {
+      return datawarehouseKnex('data_pro_campaigns_kpi_aggregated').select(
+        'tag_name',
+        'domain_name',
+        'competence_code',
+        'competence_name',
+        'campaign_id',
+        'target_profile_id',
+        'orga_id',
+        'tube_id',
+        'tube_practical_title',
+        'extraction_date',
+        'max_level',
+        'sum_user_max_level',
+        'nb_user',
+        'nb_tubes_in_competence',
+      );
+    },
+    to: ({ datamartKnex }, chunk) => {
+      return datamartKnex('organizations_cover_rates').insert(chunk);
+    },
+  },
 ];
 
 export function getByName(name, dependencies = { replications }) {
