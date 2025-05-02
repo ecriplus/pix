@@ -3,7 +3,7 @@ import { LegalDocumentType } from '../../../../../src/legal-documents/domain/mod
 import * as userAcceptanceRepository from '../../../../../src/legal-documents/infrastructure/repositories/user-acceptance.repository.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
-const { PIX_ORGA } = LegalDocumentService.VALUES;
+const { PIX_ORGA, PIX_CERTIF } = LegalDocumentService.VALUES;
 const { TOS } = LegalDocumentType.VALUES;
 
 describe('Integration | Legal document | Infrastructure | Repository | user-acceptance', function () {
@@ -241,6 +241,55 @@ describe('Integration | Legal document | Infrastructure | Repository | user-acce
         .where({ id: userAcceptanceId })
         .first();
       expect(userAcceptance.acceptedAt.toISOString()).to.equal('2025-03-01T00:00:00.000Z');
+    });
+  });
+
+  describe('#removeAllByUserId', function () {
+    it('deletes all legal user acceptances of user', async function () {
+      // given
+      const user1 = databaseBuilder.factory.buildUser();
+      const user2 = databaseBuilder.factory.buildUser();
+      const legalDocumentVersion1 = databaseBuilder.factory.buildLegalDocumentVersion({
+        type: TOS,
+        service: PIX_ORGA,
+        versionAt: new Date('2024-03-01'),
+      });
+      const legalDocumentVersion2 = databaseBuilder.factory.buildLegalDocumentVersion({
+        type: TOS,
+        service: PIX_CERTIF,
+        versionAt: new Date('2024-03-01'),
+      });
+
+      databaseBuilder.factory.buildLegalDocumentVersionUserAcceptance({
+        userId: user1.id,
+        legalDocumentVersionId: legalDocumentVersion1.id,
+        acceptedAt: new Date('2024-03-01'),
+      });
+      databaseBuilder.factory.buildLegalDocumentVersionUserAcceptance({
+        userId: user1.id,
+        legalDocumentVersionId: legalDocumentVersion2.id,
+        acceptedAt: new Date('2024-03-01'),
+      });
+      databaseBuilder.factory.buildLegalDocumentVersionUserAcceptance({
+        userId: user2.id,
+        legalDocumentVersionId: legalDocumentVersion1.id,
+        acceptedAt: new Date('2024-03-01'),
+      });
+      databaseBuilder.factory.buildLegalDocumentVersionUserAcceptance({
+        userId: user2.id,
+        legalDocumentVersionId: legalDocumentVersion2.id,
+        acceptedAt: new Date('2024-03-01'),
+      });
+      await databaseBuilder.commit();
+
+      // when
+      await userAcceptanceRepository.removeAllByUserId(user1.id);
+
+      // then
+      const userAcceptance1 = await knex('legal-document-version-user-acceptances').where({ userId: user1.id }).first();
+      expect(userAcceptance1).to.be.undefined;
+      const userAcceptance2 = await knex('legal-document-version-user-acceptances').where({ userId: user2.id }).first();
+      expect(userAcceptance2).to.exist;
     });
   });
 });
