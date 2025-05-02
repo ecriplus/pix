@@ -22,7 +22,7 @@ import {
   SIMPLE_SCO_ORGANIZATION_MEMBER_ID,
   STARTED_SCO_SESSION,
 } from '../constants.js';
-import makeCandidatePassCertification from '../tools/makeCandidatePassCertification.js';
+import publishSessionWithCompletedValidatedCertification from '../tools/create-published-session-with-completed-validated-certification.js';
 
 /**
  * --- CERTIFICATION CASE ---
@@ -235,10 +235,10 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
     normalizeStringFnc: normalize,
   });
 
-  await makeCandidatePassCertification({
+  await publishSessionWithCompletedValidatedCertification({
     databaseBuilder,
     sessionId: PUBLISHED_SCO_SESSION,
     candidateId: publishedScoCandidateId,
-    isCertificationSucceeded: false,
+    pixScoreTarget: 550,
   });
 }
