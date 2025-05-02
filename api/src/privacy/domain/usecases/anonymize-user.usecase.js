@@ -65,7 +65,7 @@ const anonymizeUser = withTransaction(async function ({
 
   await _anonymizeLastUserApplicationConnections(lastUserApplicationConnectionsRepository, userId);
 
-  await _anonymizeUserLegalDocumentAcceptances({ userId, userAcceptanceRepository });
+  await userAcceptanceRepository.removeAllByUserId(userId);
 
   await _anonymizeUserLogin({ userId, userLoginRepository });
 
@@ -119,17 +119,6 @@ async function _anonymizeLastUserApplicationConnections(lastUserApplicationConne
   for (const lastUserApplicationConnection of lastUserApplicationConnections) {
     const anonymized = lastUserApplicationConnection.anonymize();
     await lastUserApplicationConnectionsRepository.upsert(anonymized);
-  }
-}
-
-async function _anonymizeUserLegalDocumentAcceptances({ userId, userAcceptanceRepository }) {
-  const userLegalDocumentAcceptances = await userAcceptanceRepository.findByUserId(userId);
-  for (const userLegalDocumentAcceptance of userLegalDocumentAcceptances) {
-    const anonymizedAcceptedAt = anonymizeGeneralizeDate(userLegalDocumentAcceptance.acceptedAt);
-    await userAcceptanceRepository.update({
-      id: userLegalDocumentAcceptance.id,
-      acceptedAt: anonymizedAcceptedAt,
-    });
   }
 }
 
