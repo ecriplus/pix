@@ -175,7 +175,6 @@ export default class InformationView extends Component {
           <ul class="certification-center-confirmation-modal__list">
             <li>{{t "pages.certification-centers.archive-confirmation-modal.members"}}</li>
             <li>{{t "pages.certification-centers.archive-confirmation-modal.invitations"}}</li>
-            <li>{{t "pages.certification-centers.archive-confirmation-modal.campaigns"}}</li>
             <li>{{t "pages.certification-centers.archive-confirmation-modal.attachment"}}</li>
           </ul>
           <p class="certification-center-confirmation-modal__warning">{{t
