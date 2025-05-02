@@ -1,5 +1,24 @@
 # Pix Changelog
 
+## v5.102.0 (02/05/2025)
+
+
+### :rocket: Amélioration
+- [#11905](https://github.com/1024pix/pix/pull/11905) [FEATURE] Rendre le processus d'authentifcation OIDC plus résistant aux retours arrière (PIX-13945).
+- [#12200](https://github.com/1024pix/pix/pull/12200) [FEATURE] Assurer la cohérence des évènements avec les données en base (PIX-17416).
+- [#12124](https://github.com/1024pix/pix/pull/12124) [FEATURE] Créer une route d'archivage des centres de certification en masse (PIX-17597).
+- [#12146](https://github.com/1024pix/pix/pull/12146) [FEATURE] Ajout d'options de début et de fin pour le script de rattrapage de partage d'attestations 6e (PIX-17584).
+
+### :building_construction: Tech
+- [#12201](https://github.com/1024pix/pix/pull/12201) [TECH] Création d'une table dans le datamart permettant de servir les taux de couverture par organisation via Maddo (PIX-17715).
+- [#12187](https://github.com/1024pix/pix/pull/12187) [TECH] Seeds certif: améliorer l'utilitaire de passage de certif (PIX-17665).
+- [#12168](https://github.com/1024pix/pix/pull/12168) [TECH] Enlever les "transitionTexts" des modules et des passages côté app (PIX-17571) (PIX-17453).
+- [#12190](https://github.com/1024pix/pix/pull/12190) [TECH] Enregistrer les champs supplémentaires envoyés depuis Pix APP lors de la création d'un passage-event (PIX-17551).
+- [#12191](https://github.com/1024pix/pix/pull/12191) [TECH] Investiguer un flaky sur Saml POST /api/token-from-external-user (PIX-17670).
+
+### :bug: Correction
+- [#12199](https://github.com/1024pix/pix/pull/12199) [BUGFIX] Utiliser l'action de release de la branche main.
+
 ## v5.101.0 (30/04/2025)
 
 
