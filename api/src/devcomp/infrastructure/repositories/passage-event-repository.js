@@ -1,6 +1,7 @@
 import { PGSQL_UNIQUE_CONSTRAINT_VIOLATION_ERROR } from '../../../../db/pgsql-errors.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { DomainError } from '../../../shared/domain/errors.js';
+import { PassageEventFactory } from '../../domain/factories/passage-event-factory.js';
 
 async function record(event) {
   const knexConn = DomainTransaction.getConnection();
@@ -21,4 +22,18 @@ async function record(event) {
   }
 }
 
-export { record };
+async function getAllByPassageId({ passageId }) {
+  const knexConn = DomainTransaction.getConnection();
+  const passageEvents = await knexConn('passage-events').where('passageId', passageId).orderBy('sequenceNumber');
+
+  return passageEvents.map((passageEvent) => _toDomain(passageEvent));
+}
+
+function _toDomain(passageEvent) {
+  return PassageEventFactory.build({
+    ...passageEvent,
+    ...passageEvent.data,
+  });
+}
+
+export { getAllByPassageId, record };
