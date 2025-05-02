@@ -1,4 +1,4 @@
-This doc has been generated on 4/29/2025, 11:49:54 AM with `scripts/generate-api-documentation.js`. See package.json.
+This doc has been generated on 30/04/2025 19:35:00 with `scripts/generate-api-documentation.js`. See package.json.
 
 ---
 ## Modules
@@ -19,6 +19,8 @@ This doc has been generated on 4/29/2025, 11:49:54 AM with `scripts/generate-api
 ## Classes
 
 <dl>
+<dt><a href="#CampaignTubeCoverage">CampaignTubeCoverage</a></dt>
+<dd></dd>
 <dt><a href="#CampaignParticipation">CampaignParticipation</a></dt>
 <dd></dd>
 <dt><a href="#AssessmentCampaignParticipation">AssessmentCampaignParticipation</a></dt>
@@ -50,6 +52,8 @@ This doc has been generated on 4/29/2025, 11:49:54 AM with `scripts/generate-api
 ## Typedefs
 
 <dl>
+<dt><a href="#CampaignListItemArgs">CampaignListItemArgs</a> : <code>object</code></dt>
+<dd></dd>
 <dt><a href="#CampaignParticipationArgs">CampaignParticipationArgs</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#AssessmentCampaignParticipationArgs">AssessmentCampaignParticipationArgs</a> : <code>object</code></dt>
@@ -621,6 +625,23 @@ delete organization learner before adding import feature
 | Param | Type |
 | --- | --- |
 | userId | <code>number</code> | 
+
+<a name="CampaignListItemArgs"></a>
+
+## CampaignListItemArgs : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| id | <code>number</code> | 
+| name | <code>string</code> | 
+| createdAt | <code>Date</code> | 
+| archivedAt | <code>Date</code> | 
+| type | <code>string</code> | 
+| code | <code>string</code> | 
+| targetProfileName | <code>string</code> | 
+| tubes | [<code>Array.&lt;CampaignTubeCoverage&gt;</code>](#CampaignTubeCoverage) | 
 
 <a name="CampaignParticipationArgs"></a>
 
