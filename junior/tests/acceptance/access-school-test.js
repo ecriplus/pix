@@ -4,6 +4,7 @@ import { module, test } from 'qunit';
 
 import { setupApplicationTest, t } from '../../tests/helpers';
 import identifyLearner from '../helpers/identify-learner';
+import { unabortedVisit } from '../helpers/unaborted-visit';
 
 module('Acceptance | School', function (hooks) {
   setupApplicationTest(hooks);
@@ -13,14 +14,10 @@ module('Acceptance | School', function (hooks) {
 
   module('When the user is not identified', function () {
     test('should redirect to organization-code', async function (assert) {
-      try {
-        await visit('/');
-      } catch (error) {
-        const { message } = error;
-        if (message !== 'TransitionAborted') {
-          throw error;
-        }
-      }
+      // when
+      await unabortedVisit('/');
+
+      // then
       assert.strictEqual(currentURL(), '/organization-code');
     });
 
@@ -141,16 +138,7 @@ module('Acceptance | School', function (hooks) {
         this.server.create('school');
 
         // when
-        //Lorsqu'on souhaite tester un transitionTo, on doit utiliser un try/catch 🤯
-        //https://github.com/emberjs/ember-test-helpers/issues/332
-        try {
-          await visit('/schools/MINIPIXOU/students');
-        } catch (error) {
-          const { message } = error;
-          if (message !== 'TransitionAborted') {
-            throw error;
-          }
-        }
+        await unabortedVisit('/schools/MINIPIXOU/students');
 
         // then
         assert.strictEqual(currentURL(), '/schools/MINIPIXOU');
@@ -160,15 +148,13 @@ module('Acceptance | School', function (hooks) {
 
   module('When the user is identified', function () {
     test('should display mission page', async function (assert) {
+      // given
       identifyLearner(this.owner);
-      try {
-        await visit('/');
-      } catch (error) {
-        const { message } = error;
-        if (message !== 'TransitionAborted') {
-          throw error;
-        }
-      }
+
+      // when
+      await unabortedVisit('/');
+
+      // then
       assert.strictEqual(currentURL(), '/');
     });
 
