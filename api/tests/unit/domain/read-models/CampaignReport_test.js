@@ -49,7 +49,17 @@ describe('Unit | Domain | Models | CampaignReport', function () {
       // when
       campaignReport.setCoverRate(campaignResultLevelsPerTubesAndCompetences);
       // then
-      expect(campaignReport.tubes).to.deep.equal(campaignResultLevelsPerTubesAndCompetences.levelsPerTube);
+      expect(campaignReport.tubes).to.deep.equal([
+        {
+          competenceId: 'competence1',
+          competenceName: 'compétence 1',
+          description: 'tube 1 description',
+          id: 'tube1',
+          maxLevel: 1,
+          reachedLevel: 0.5,
+          title: 'tube 1',
+        },
+      ]);
     });
   });
 

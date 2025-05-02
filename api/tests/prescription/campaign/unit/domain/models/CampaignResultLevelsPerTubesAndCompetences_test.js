@@ -114,19 +114,26 @@ describe('Unit | Domain | Models | CampaignResultLevelPerTubesAndCompetences', f
         knowledgeElementsByParticipation: keData,
       });
 
-      expect(campaignResult.levelsPerTube[0].id).to.deep.equal('tube1');
-      expect(campaignResult.levelsPerTube[0].competenceId).to.deep.equal('competence1');
-      expect(campaignResult.levelsPerTube[0].practicalTitle).to.deep.equal('tube 1');
-      expect(campaignResult.levelsPerTube[0].practicalDescription).to.deep.equal('tube 1 description');
-      expect(campaignResult.levelsPerTube[0].maxLevel).to.deep.equal(2);
-      expect(campaignResult.levelsPerTube[0].meanLevel).to.deep.equal(0.5);
-
-      expect(campaignResult.levelsPerTube[1].id).to.deep.equal('tube2');
-      expect(campaignResult.levelsPerTube[1].competenceId).to.deep.equal('competence2');
-      expect(campaignResult.levelsPerTube[1].practicalTitle).to.deep.equal('tube 2');
-      expect(campaignResult.levelsPerTube[1].practicalDescription).to.deep.equal('tube 2 description');
-      expect(campaignResult.levelsPerTube[1].maxLevel).to.deep.equal(4);
-      expect(campaignResult.levelsPerTube[1].meanLevel).to.deep.equal(2);
+      expect(campaignResult.levelsPerTube).to.deep.equal([
+        {
+          id: 'tube1',
+          competenceId: 'competence1',
+          competenceName: 'compétence 1',
+          title: 'tube 1',
+          description: 'tube 1 description',
+          maxLevel: 2,
+          meanLevel: 0.5,
+        },
+        {
+          id: 'tube2',
+          competenceId: 'competence2',
+          competenceName: 'compétence 2',
+          title: 'tube 2',
+          description: 'tube 2 description',
+          maxLevel: 4,
+          meanLevel: 2,
+        },
+      ]);
     });
 
     it('should get max level per competence', function () {
