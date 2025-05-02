@@ -307,7 +307,6 @@ const configuration = (function () {
       isQuestEnabled: toBoolean(process.env.FT_ENABLE_QUESTS),
       isTextToSpeechButtonEnabled: toBoolean(process.env.FT_ENABLE_TEXT_TO_SPEECH_BUTTON),
       setupEcosystemBeforeStart: toBoolean(process.env.FT_SETUP_ECOSYSTEM_BEFORE_START) || false,
-      showExperimentalMissions: toBoolean(process.env.FT_SHOW_EXPERIMENTAL_MISSIONS),
       showNewResultPage: toBoolean(process.env.FT_SHOW_NEW_RESULT_PAGE),
     },
     hapi: {
@@ -526,7 +525,6 @@ const configuration = (function () {
     config.featureToggles.isAsyncQuestRewardingCalculationEnabled = false;
     config.featureToggles.isTextToSpeechButtonEnabled = false;
     config.featureToggles.showNewResultPage = false;
-    config.featureToggles.showExperimentalMissions = false;
 
     config.lti.authorizedPlatforms = ['https://moodle.example.net'];
     config.lti.jwkModulusLength = 2048;
