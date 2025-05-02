@@ -1,17 +1,9 @@
-@use 'pix-design-tokens/breakpoints';
 @use 'pix-design-tokens/typography';
 @use 'pix-design-tokens/fonts';
 
 .fill-in-campaign-code {
   &__container {
-    width: 100%;
     margin-top: var(--pix-spacing-6x);
-    margin-bottom: var(--pix-spacing-8x);
-    padding: 16px 16px var(--pix-spacing-4x);
-
-    @include breakpoints.device-is('tablet') {
-      padding: var(--pix-spacing-10x);
-    }
   }
 
   &__title {
@@ -27,14 +19,6 @@
     text-align: center;
 
     @extend %pix-body-l;
-
-    @include breakpoints.device-is('tablet') {
-      width: 75vw;
-    }
-
-    @include breakpoints.device-is('mobile') {
-      width: 75vw;
-    }
   }
 
   &__form {
