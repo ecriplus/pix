@@ -46,6 +46,8 @@ export default class OidcIdentityProviders extends Service {
 
   async load() {
     const oidcIdentityProviders = await this.store.findAll('oidc-identity-provider');
-    oidcIdentityProviders.map((oidcIdentityProvider) => (this[oidcIdentityProvider.id] = oidcIdentityProvider));
+    oidcIdentityProviders.forEach((oidcIdentityProvider) => {
+      this[oidcIdentityProvider.id] = oidcIdentityProvider;
+    });
   }
 }

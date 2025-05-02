@@ -21,7 +21,7 @@ async function authenticateOidcUser(request, h) {
   await request.yar.commit(h);
 
   if (sessionState === null) {
-    throw new BadRequestError('Required cookie "state" is missing');
+    throw new BadRequestError('Required "state" is missing in session', 'MISSING_OIDC_STATE');
   }
 
   const result = await usecases.authenticateOidcUser({

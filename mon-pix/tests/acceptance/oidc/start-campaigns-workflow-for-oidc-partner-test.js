@@ -23,16 +23,17 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
 
   module('Start a campaign that belongs to an external provider', function () {
     module('When user is not logged in', function (hooks) {
-      let replaceLocationStub;
+      let assignLocationStub;
 
       hooks.beforeEach(function () {
-        replaceLocationStub = sinon.stub().resolves();
+        assignLocationStub = sinon.stub().resolves();
         this.owner.register(
           'service:location',
           Service.extend({
-            replace: replaceLocationStub,
+            assign: assignLocationStub,
           }),
         );
+
         campaign = server.create('campaign', { identityProvider: 'OIDC_PARTNER' });
       });
 
@@ -58,10 +59,10 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
         // when
         await clickByLabel('Je commence');
 
+        await settled();
+
         // then
-        sinon.assert.called(replaceLocationStub);
-        assert.strictEqual(currentURL(), '/connexion/oidc-partner');
-        assert.ok(true);
+        assert.ok(assignLocationStub.calledWith('https://oidc/connexion/oauth2/authorize'));
       });
 
       test('should redirect to login or register oidc page', async function (assert) {
@@ -102,7 +103,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
     });
 
     module('When user is logged in', function (hooks) {
-      let replaceLocationStub;
+      let assignLocationStub;
 
       hooks.beforeEach(async function () {
         const prescritUser = server.create('user', 'withEmail', {
@@ -110,11 +111,11 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
           lastTermsOfServiceValidatedAt: null,
         });
         await authenticateByEmail(prescritUser);
-        replaceLocationStub = sinon.stub().resolves();
+        assignLocationStub = sinon.stub().resolves();
         this.owner.register(
           'service:location',
           Service.extend({
-            replace: replaceLocationStub,
+            assign: assignLocationStub,
           }),
         );
         campaign = server.create('campaign', { identityProvider: 'OIDC_PARTNER' });
@@ -181,10 +182,10 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
           // when
           await clickByLabel('Je commence');
 
+          await settled();
+
           // then
-          sinon.assert.called(replaceLocationStub);
-          assert.strictEqual(currentURL(), '/connexion/oidc-partner');
-          assert.ok(true);
+          assert.ok(assignLocationStub.calledWith('https://oidc/connexion/oauth2/authorize'));
         });
       });
     });

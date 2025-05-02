@@ -16,7 +16,7 @@ export default class LoginOidcRoute extends Route {
   @service router;
   @service session;
 
-  beforeModel(transition) {
+  async beforeModel(transition) {
     const queryParams = transition.to.queryParams;
     if (queryParams.error) {
       const error = createTranslatedApplicationError.withCodeAndDescription({
@@ -27,78 +27,60 @@ export default class LoginOidcRoute extends Route {
       throw error;
     }
 
+    const identityProviderSlug = transition.to.params.identity_provider_slug;
+    const identityProvider = this.oidcIdentityProviders[identityProviderSlug];
+    if (!identityProvider) {
+      this.router.transitionTo('authentication.login');
+      return;
+    }
+
+    // Preventing OIDC authentication replay errors when doing history back and reload
+    // when the user is already authenticated with the same OIDC Provider.
+    if (this.session.isAuthenticated) {
+      if (identityProvider.code == this.session.data.authenticated.identityProviderCode) {
+        this.router.transitionTo('authenticated');
+        return;
+      }
+    }
+
     if (!queryParams.code) {
-      this._cleanSession();
-
-      const identityProviderSlug = transition.to.params.identity_provider_slug.toString();
-      const isSupportedIdentityProvider = this.oidcIdentityProviders[identityProviderSlug] ?? null;
-      if (isSupportedIdentityProvider) return this._handleRedirectRequest(identityProviderSlug);
-
-      return this.router.replaceWith('authentication.login');
+      transition.abort();
+      await this._makeOidcAuthenticationRequest(identityProvider);
+      return;
     }
   }
 
   async model(params, transition) {
-    const queryParams = transition.to.queryParams;
-
+    const { code, state, iss } = transition.to.queryParams;
     const identityProviderSlug = params.identity_provider_slug;
-    if (queryParams.code) {
-      return this._handleCallbackRequest(queryParams.code, queryParams.state, queryParams.iss, identityProviderSlug);
-    }
+    const identityProvider = this.oidcIdentityProviders[identityProviderSlug];
+
+    const model = await this._handleOidcCallbackRequest({ identityProvider, code, state, iss });
+    return model;
   }
 
-  afterModel({ shouldValidateCgu, identityProviderSlug } = {}) {
-    const shouldCreateAnAccountForUser = shouldValidateCgu && oidcUserAuthenticationStorage.get().authenticationKey;
+  redirect(model) {
+    const { identityProviderSlug, shouldCreateUserAccount } = model;
 
-    if (!shouldCreateAnAccountForUser) return;
-
-    return this.router.replaceWith('authentication.login-or-register-oidc', {
-      queryParams: {
-        identityProviderSlug,
-      },
-    });
-  }
-
-  _cleanSession() {
-    this.session.set('data.nextURL', undefined);
-  }
-
-  async _handleCallbackRequest(code, state, iss, identityProviderSlug) {
-    try {
-      await this.session.authenticate('authenticator:oidc', {
-        code,
-        state,
-        iss,
-        identityProviderSlug,
-        hostSlug: 'token',
+    if (shouldCreateUserAccount) {
+      this.router.transitionTo('authentication.login-or-register-oidc', {
+        queryParams: {
+          identityProviderSlug,
+        },
       });
-    } catch (response) {
-      const apiError = get(response, 'errors[0]');
-      const error = new JSONApiError(apiError.detail, apiError);
-
-      const shouldValidateCgu = error.code === 'SHOULD_VALIDATE_CGU';
-
-      if (shouldValidateCgu && error.meta.authenticationKey) {
-        oidcUserAuthenticationStorage.set(error.meta);
-        return { shouldValidateCgu, identityProviderSlug };
-      }
-
-      throw error;
     }
   }
 
-  async _handleRedirectRequest(identityProviderSlug) {
-    /**
-     * Store the `attemptedTransition` in the localstorage so when the user returns after
-     * the login he can be sent to the initial destination.
-     */
-    if (this.session.get('attemptedTransition')) {
-      /**
-       * There is two types of intent in transition (see: https://github.com/tildeio/router.js/blob/9b3d00eb923e0bbc34c44f08c6de1e05684b907a/ARCHITECTURE.md#transitionintent)
-       * When the route is accessed by url (/campagnes/:code), the url is provided
-       * When the route is accessed by the submit of the campaign code, the route name (campaigns.access) and contexts ([Campaign]) are provided
-       */
+  async _makeOidcAuthenticationRequest(identityProvider) {
+    this.session.set('data.nextURL', undefined);
 
+    // Storing the `attemptedTransition` in the localstorage so when the user returns after
+    // the login they can be sent to the initial destination.
+    if (this.session.get('attemptedTransition')) {
+      // There is two types of intent in transition (see: https://github.com/tildeio/router.js/blob/9b3d00eb923e0bbc34c44f08c6de1e05684b907a/ARCHITECTURE.md#transitionintent)
+      // When the route is accessed by url (/campagnes/:code), the url is provided.
+      // When the route is accessed by the submit of the campaign code,
+      // the route name (campaigns.access) and contexts ([Campaign]) are provided.
       let { url } = this.session.get('attemptedTransition.intent');
       const { name, contexts } = this.session.get('attemptedTransition.intent');
       if (!url) {
@@ -107,11 +89,43 @@ export default class LoginOidcRoute extends Route {
       this.session.set('data.nextURL', url);
     }
 
-    const identityProvider = this.oidcIdentityProviders[identityProviderSlug]?.code;
     const response = await fetch(
-      `${ENV.APP.API_HOST}/api/oidc/authorization-url?identity_provider=${identityProvider}`,
+      `${ENV.APP.API_HOST}/api/oidc/authorization-url?identity_provider=${identityProvider.code}`,
     );
-    const { redirectTarget } = await response.json();
-    this.location.replace(redirectTarget);
+    const { redirectTarget: authorizationUrl } = await response.json();
+
+    this.location.assign(authorizationUrl);
+  }
+
+  async _handleOidcCallbackRequest({ identityProvider, code, state, iss }) {
+    const identityProviderSlug = identityProvider.slug;
+    try {
+      await this.session.authenticate('authenticator:oidc', {
+        code,
+        state,
+        iss,
+        identityProviderSlug,
+        hostSlug: 'token',
+      });
+
+      return { identityProviderSlug, shouldCreateUserAccount: false };
+    } catch (response) {
+      const apiError = get(response, 'errors[0]');
+      const error = new JSONApiError(apiError.detail, apiError);
+
+      if (error.code == 'MISSING_OIDC_STATE') {
+        this.router.transitionTo('authentication.login');
+        return;
+      }
+
+      const shouldValidateCgu = error.code === 'SHOULD_VALIDATE_CGU';
+      if (shouldValidateCgu && error.meta.authenticationKey) {
+        oidcUserAuthenticationStorage.set(error.meta);
+
+        return { identityProviderSlug, shouldCreateUserAccount: true };
+      }
+
+      throw error;
+    }
   }
 }

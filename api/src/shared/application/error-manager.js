@@ -333,9 +333,6 @@ function _mapToHttpError(error) {
   if (error instanceof SharedDomainErrors.UnexpectedUserAccountError) {
     return new HttpErrors.ConflictError(error.message, error.code, error.meta);
   }
-  if (error instanceof SharedDomainErrors.AlreadyExistingEntityError) {
-    return new HttpErrors.PreconditionFailedError(error.message);
-  }
   if (error instanceof SharedDomainErrors.AlreadyExistingMembershipError) {
     return new HttpErrors.PreconditionFailedError(error.message);
   }

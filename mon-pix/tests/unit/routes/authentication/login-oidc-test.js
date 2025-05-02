@@ -1,6 +1,5 @@
 import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
-import { SessionStorageEntry } from 'mon-pix//utils/session-storage-entry';
 import { ApplicationError } from 'mon-pix/errors/application-error';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -18,30 +17,29 @@ module('Unit | Route | login-oidc', function (hooks) {
         const route = this.owner.lookup('route:authentication/login-oidc');
 
         // when & then
-        assert.throws(
-          () => {
-            route.beforeModel({
-              to: {
-                queryParams: {
-                  error: 'access_denied',
-                  error_description: 'Access was denied.',
-                },
+        assert.rejects(
+          route.beforeModel({
+            to: {
+              queryParams: {
+                error: 'access_denied',
+                error_description: 'Access was denied.',
               },
-            });
-          },
+            },
+          }),
           ApplicationError,
           'access_denied: Access was denied.',
         );
       });
     });
 
-    module('when no code exists in queryParams', function (hooks) {
+    module('when no code is present in queryParams', function (hooks) {
       hooks.beforeEach(function () {
         sinon.stub(window, 'fetch').resolves({
           json: sinon.stub().resolves({ redirectTarget: 'https://oidc/connexion' }),
         });
         const oidcPartner = {
           id: 'oidc-partner',
+          slug: 'oidc-partner',
           code: 'OIDC_PARTNER',
         };
 
@@ -61,13 +59,13 @@ module('Unit | Route | login-oidc', function (hooks) {
         test('should redirect the user to main login page', async function (assert) {
           // given
           const route = this.owner.lookup('route:authentication/login-oidc');
-          route.router = { replaceWith: sinon.stub() };
+          route.router = { transitionTo: sinon.stub() };
 
           // when
           await route.beforeModel({ to: { queryParams: {}, params: { identity_provider_slug: 'idp' } } });
 
           // then
-          sinon.assert.calledWith(route.router.replaceWith, 'authentication.login');
+          sinon.assert.calledWith(route.router.transitionTo, 'authentication.login');
           assert.ok(true);
         });
       });
@@ -82,10 +80,15 @@ module('Unit | Route | login-oidc', function (hooks) {
           });
           const route = this.owner.lookup('route:authentication/login-oidc');
           route.set('session', sessionStub);
-          route.location.replace = sinon.stub();
+          route.location.assign = sinon.stub();
+
+          const transition = {
+            to: { queryParams: {}, params: { identity_provider_slug: 'oidc-partner' } },
+            abort: sinon.stub(),
+          };
 
           // when
-          await route.beforeModel({ to: { queryParams: {}, params: { identity_provider_slug: 'oidc-partner' } } });
+          await route.beforeModel(transition);
 
           // then
           assert.strictEqual(sessionStub.data.nextURL, '/campagnes/PIXOIDC01/acces');
@@ -101,11 +104,16 @@ module('Unit | Route | login-oidc', function (hooks) {
           });
           const route = this.owner.lookup('route:authentication/login-oidc');
           route.set('session', sessionStub);
-          route.location.replace = sinon.stub();
+          route.location.assign = sinon.stub();
           route.router.urlFor = sinon.stub();
 
+          const transition = {
+            to: { queryParams: {}, params: { identity_provider_slug: 'oidc-partner' } },
+            abort: sinon.stub(),
+          };
+
           // when
-          await route.beforeModel({ to: { queryParams: {}, params: { identity_provider_slug: 'oidc-partner' } } });
+          await route.beforeModel(transition);
 
           // then
           sinon.assert.calledWith(route.router.urlFor, 'campaigns.access', 'PIXOIDC01');
@@ -122,63 +130,37 @@ module('Unit | Route | login-oidc', function (hooks) {
         });
         const route = this.owner.lookup('route:authentication/login-oidc');
         route.set('session', sessionStub);
-        route.location.replace = sinon.stub();
+        route.location.assign = sinon.stub();
+
+        const transition = {
+          to: { queryParams: {}, params: { identity_provider_slug: 'oidc-partner' } },
+          abort: sinon.stub(),
+        };
 
         // when
-        await route.beforeModel({ to: { queryParams: {}, params: { identity_provider_slug: 'oidc-partner' } } });
+        await route.beforeModel(transition);
 
         // then
-        assert.true(route.location.replace.calledWithMatch('https://oidc/connexion'));
+        assert.true(route.location.assign.calledWithMatch('https://oidc/connexion'));
         assert.deepEqual(sessionStub.data, { nextURL: '/campagnes/PIXOIDC01/acces' });
       });
     });
   });
 
-  module('#afterModel', function () {
-    module('when user has no pix account', function () {
-      test('should redirect to login or register oidc page', async function (assert) {
-        // given
-        const route = this.owner.lookup('route:authentication/login-oidc');
-        route.router = { replaceWith: sinon.stub() };
-        const identityProviderSlug = 'super-idp-name';
-        const oidcUserAuthenticationStorage = new SessionStorageEntry('oidcUserAuthentication');
-        const authenticationKey = '123';
-        oidcUserAuthenticationStorage.set({ authenticationKey });
-
-        // when
-        await route.afterModel({ shouldValidateCgu: true, identityProviderSlug });
-
-        // then
-        sinon.assert.calledWith(route.router.replaceWith, 'authentication.login-or-register-oidc', {
-          queryParams: {
-            identityProviderSlug,
-          },
-        });
-        assert.ok(true);
-      });
+  module('#model', function (hooks) {
+    hooks.beforeEach(function () {
+      const oidcPartner = {
+        id: 'oidc-partner',
+        slug: 'oidc-partner',
+        code: 'OIDC_PARTNER',
+      };
+      class OidcIdentityProvidersStub extends Service {
+        'oidc-partner' = oidcPartner;
+        list = [oidcPartner];
+      }
+      this.owner.register('service:oidcIdentityProviders', OidcIdentityProvidersStub);
     });
 
-    module('when user has a pix account', function () {
-      test("should not redirect to cgu's oidc page", async function (assert) {
-        // given
-        const route = this.owner.lookup('route:authentication/login-oidc');
-        route.router = { replaceWith: sinon.stub() };
-        const identityProviderSlug = 'super-idp-name';
-        const oidcUserAuthenticationStorage = new SessionStorageEntry('oidcUserAuthentication');
-        const authenticationKey = null;
-        oidcUserAuthenticationStorage.set({ authenticationKey });
-
-        // when
-        await route.afterModel({ shouldValidateCgu: false, identityProviderSlug });
-
-        // then
-        sinon.assert.notCalled(route.router.replaceWith);
-        assert.ok(true);
-      });
-    });
-  });
-
-  module('#model', function () {
     test('authenticates the user with identity provider', async function (assert) {
       // given
       const authenticateStub = sinon.stub().resolves();
@@ -200,7 +182,7 @@ module('Unit | Route | login-oidc', function (hooks) {
       assert.deepEqual(sessionStub.data, {});
     });
 
-    test('returns values to be received by after model to validate CGUs', async function (assert) {
+    test('returns values to be received by afterModel to validate CGU', async function (assert) {
       // given
       const authenticateStub = sinon.stub().rejects({
         errors: [
@@ -216,7 +198,7 @@ module('Unit | Route | login-oidc', function (hooks) {
       });
       const route = this.owner.lookup('route:authentication/login-oidc');
       route.set('session', sessionStub);
-      route.router = { replaceWith: sinon.stub() };
+      route.router = { transitionTo: sinon.stub() };
 
       // when
       const response = await route.model(
@@ -227,13 +209,41 @@ module('Unit | Route | login-oidc', function (hooks) {
       // then
       sinon.assert.calledOnce(authenticateStub);
       assert.deepEqual(response, {
-        shouldValidateCgu: true,
         identityProviderSlug: 'oidc-partner',
+        shouldCreateUserAccount: true,
       });
       assert.ok(true);
     });
 
-    module('when CGUs are already validated and authenticate fails', function () {
+    module('when there is a MISSING_OIDC_STATE error', function () {
+      test('it redirects to authentication.login page', async function (assert) {
+        // given
+        const authenticateStub = sinon.stub().rejects({
+          errors: [
+            {
+              code: 'MISSING_OIDC_STATE',
+            },
+          ],
+        });
+        const sessionStub = Service.create({
+          authenticate: authenticateStub,
+          data: {},
+        });
+        const route = this.owner.lookup('route:authentication/login-oidc');
+        route.set('session', sessionStub);
+        route.router = { transitionTo: sinon.stub() };
+
+        // when
+        await route.model({ identity_provider_slug: 'oidc-partner' }, { to: { queryParams: { code: 'test' } } });
+
+        // then
+        sinon.assert.calledOnce(authenticateStub);
+        sinon.assert.calledWith(route.router.transitionTo, 'authentication.login');
+        assert.ok(true);
+      });
+    });
+
+    module('when CGU are already validated and authenticate fails', function () {
       test('throws an error', async function (assert) {
         // given
         const authenticateStub = sinon.stub().rejects({ errors: [{ detail: 'there was an error' }] });
@@ -243,7 +253,7 @@ module('Unit | Route | login-oidc', function (hooks) {
         });
         const route = this.owner.lookup('route:authentication/login-oidc');
         route.set('session', sessionStub);
-        route.router = { replaceWith: sinon.stub() };
+        route.router = { transitionTo: sinon.stub() };
 
         try {
           // when
@@ -280,7 +290,7 @@ module('Unit | Route | login-oidc', function (hooks) {
         });
         const route = this.owner.lookup('route:authentication/login-oidc');
         route.set('session', sessionStub);
-        route.router = { replaceWith: sinon.stub() };
+        route.router = { transitionTo: sinon.stub() };
 
         try {
           // when
@@ -292,6 +302,47 @@ module('Unit | Route | login-oidc', function (hooks) {
             "Un ou des champs obligatoires (Champs manquants : given_name}) n'ont pas été renvoyés par votre fournisseur d'identité OIDC partner.",
           );
         }
+      });
+    });
+  });
+
+  module('#redirect', function () {
+    module('when shouldCreateUserAccount', function () {
+      test('it redirects to login or register oidc page', async function (assert) {
+        // given
+        const route = this.owner.lookup('route:authentication/login-oidc');
+        route.router = { transitionTo: sinon.stub() };
+        const identityProviderSlug = 'super-idp-name';
+        const shouldCreateUserAccount = true;
+        const model = { identityProviderSlug, shouldCreateUserAccount };
+
+        // when
+        await route.redirect(model);
+
+        // then
+        sinon.assert.calledWith(route.router.transitionTo, 'authentication.login-or-register-oidc', {
+          queryParams: {
+            identityProviderSlug,
+          },
+        }),
+          assert.ok(true);
+      });
+    });
+    module('when not shouldCreateUserAccount', function () {
+      test('it does not redirect to login or register oidc page', async function (assert) {
+        // given
+        const route = this.owner.lookup('route:authentication/login-oidc');
+        route.router = { transitionTo: sinon.stub() };
+        const identityProviderSlug = 'super-idp-name';
+        const shouldCreateUserAccount = false;
+        const model = { identityProviderSlug, shouldCreateUserAccount };
+
+        // when
+        await route.redirect(model);
+
+        // then
+        sinon.assert.notCalled(route.router.transitionTo);
+        assert.ok(true);
       });
     });
   });

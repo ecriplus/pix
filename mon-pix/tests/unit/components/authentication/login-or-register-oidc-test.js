@@ -126,7 +126,7 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
         });
       });
 
-      test('displays an error message with details', async function (assert) {
+      test('displays an error message but not with the details', async function (assert) {
         // given
         const component = createGlimmerComponent('authentication/login-or-register-oidc');
         const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
@@ -140,7 +140,7 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
         await component.register();
 
         // then
-        assert.strictEqual(component.registerErrorMessage, `${t('common.error')} (some detail)`);
+        assert.strictEqual(component.registerErrorMessage, `${t('common.error')}`);
       });
 
       test('displays a default error message', async function (assert) {

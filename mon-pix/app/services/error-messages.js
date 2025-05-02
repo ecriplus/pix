@@ -56,20 +56,14 @@ export default class ErrorMessagesService extends Service {
     let i18nKey;
     let formatOptionsFn;
     let formatOptions;
-    let formattedGenericErrorDetails;
     if (mapping) {
       ({ i18nKey, formatOptionsFn } = mapping);
       formatOptions = formatOptionsFn && formatOptionsFn(error);
     } else {
       i18nKey = 'common.error';
-      formattedGenericErrorDetails = error.detail && ` (${error.detail})`;
     }
 
-    let message = this.intl.t(i18nKey, formatOptions);
-    if (formattedGenericErrorDetails) {
-      message += formattedGenericErrorDetails;
-    }
-
+    const message = this.intl.t(i18nKey, formatOptions);
     return message;
   }
 }
