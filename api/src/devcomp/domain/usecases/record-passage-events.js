@@ -5,12 +5,12 @@ import { PassageEventFactory } from '../factories/passage-event-factory.js';
 const recordPassageEvents = async function ({ events, userId, passageRepository, passageEventRepository }) {
   await PromiseUtils.mapSeries(events, async (event) => {
     const passageEvent = PassageEventFactory.build(event);
-    await _validatePassage({ event, userId, passageRepository });
+    await _validatePassage({ event, userId, passageRepository, passageEventRepository });
     await passageEventRepository.record(passageEvent);
   });
 };
 
-async function _validatePassage({ event, userId, passageRepository }) {
+async function _validatePassage({ event, userId, passageRepository, passageEventRepository }) {
   const passage = await passageRepository.get({ passageId: event.passageId });
 
   if (passage.terminatedAt != null) {
@@ -25,6 +25,16 @@ async function _validatePassage({ event, userId, passageRepository }) {
 
   if (userId && userId !== passage.userId) {
     throw new DomainError('Wrong userId');
+  }
+
+  const existingPassageEvents = await passageEventRepository.getAllByPassageId({ passageId: event.passageId });
+  const doesTerminatedEventHaveTheHighestSequenceNumber =
+    existingPassageEvents.length > 0 &&
+    existingPassageEvents[existingPassageEvents.length - 1].sequenceNumber >= event.sequenceNumber &&
+    event.type === 'PASSAGE_TERMINATED';
+
+  if (doesTerminatedEventHaveTheHighestSequenceNumber) {
+    throw new DomainError('Passage event of type terminated should have the highest sequence number');
   }
 }
 
