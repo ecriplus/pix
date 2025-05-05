@@ -22,7 +22,13 @@ describe('Integration | Identity Access Management | Application | Controller | 
     context('Success cases', function () {
       it('returns an HTTP response with status code 200', async function () {
         // given
-        usecases.getAccountRecoveryDetails.resolves({ id: 1, email: 'email@example.net', firstName: 'Gertrude' });
+        usecases.getAccountRecoveryDetails.resolves({
+          id: 1,
+          email: 'email@example.net',
+          firstName: 'Gertrude',
+          hasGarAuthenticationMethod: false,
+          hasScoUsername: false,
+        });
 
         // when
         const response = await httpTestServer.request(method, url);

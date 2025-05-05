@@ -1,11 +1,11 @@
-import * as serializer from '../../../../../../src/identity-access-management/infrastructure/serializers/jsonapi/student-information-for-account-recovery-serializer.js';
+import * as serializer from '../../../../../../src/identity-access-management/infrastructure/serializers/jsonapi/student-information-for-account-recovery.serializer.js';
 import { StudentInformationForAccountRecovery } from '../../../../../../src/shared/domain/read-models/StudentInformationForAccountRecovery.js';
 import { expect } from '../../../../../test-helper.js';
 
-describe('Unit | Serializer | JSONAPI | student-information-for-account-recovery-serializer', function () {
+describe('Unit | Serializer | JSONAPI | student-information-for-account-recovery', function () {
   describe('#serialize()', function () {
-    it('should convert a StudentInformationForAccountRecovery model object into JSON API data', function () {
-      //given
+    it('converts a StudentInformationForAccountRecovery model object into JSON API data', function () {
+      // given
       const modelStudentInformationForAccountRecovery = new StudentInformationForAccountRecovery({
         firstName: 'Jude',
         lastName: 'Law',
@@ -35,12 +35,14 @@ describe('Unit | Serializer | JSONAPI | student-information-for-account-recovery
   });
 
   describe('#serializeAccountRecovery()', function () {
-    it('should convert an account recovery demand into JSON API data', function () {
-      //given
+    it('converts an account recovery demand into JSON API data', function () {
+      // given
       const accountRecoveryDetails = {
         id: 1,
         firstName: 'Jude',
         email: 'judelaw@example.net',
+        hasGarAuthenticationMethod: true,
+        hasScoUsername: false,
       };
 
       // when
@@ -54,6 +56,8 @@ describe('Unit | Serializer | JSONAPI | student-information-for-account-recovery
           attributes: {
             'first-name': accountRecoveryDetails.firstName,
             email: accountRecoveryDetails.email,
+            'has-gar-authentication-method': true,
+            'has-sco-username': false,
           },
         },
       };
@@ -62,8 +66,8 @@ describe('Unit | Serializer | JSONAPI | student-information-for-account-recovery
   });
 
   describe('#deserialize()', function () {
-    it('should convert the payload json to student information', async function () {
-      //given
+    it('converts the payload json to student information', async function () {
+      // given
       const payload = {
         data: {
           type: 'student-information-for-account-recoveries',
@@ -91,8 +95,8 @@ describe('Unit | Serializer | JSONAPI | student-information-for-account-recovery
       expect(json).to.deep.equal(expectedJsonApi);
     });
 
-    it('should not return undefined email when none exist in payload', async function () {
-      //given
+    it('does not return undefined email when none exist in payload', async function () {
+      // given
       const payload = {
         data: {
           type: 'student-information-for-account-recoveries',

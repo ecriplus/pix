@@ -114,7 +114,10 @@ describe('Acceptance | Identity Access Management | Application | Route | accoun
         const userId = 1234;
         const newEmail = 'newEmail@example.net';
         const firstName = 'Gertrude';
-        databaseBuilder.factory.buildUser.withRawPassword({ id: userId });
+        const username = 'gertrude.0202';
+
+        databaseBuilder.factory.buildUser.withRawPassword({ id: userId, username });
+        databaseBuilder.factory.buildAuthenticationMethod.withGarAsIdentityProvider({ userId });
         const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner({ userId, firstName });
         const { id } = databaseBuilder.factory.buildAccountRecoveryDemand({
           userId,
@@ -135,9 +138,11 @@ describe('Acceptance | Identity Access Management | Application | Route | accoun
 
         // then
         expect(response.statusCode).to.equal(200);
+        expect(response.result.data.id).to.equal(id.toString());
         expect(response.result.data.attributes.email).to.equal(newEmail.toLowerCase());
         expect(response.result.data.attributes['first-name']).to.equal(firstName);
-        expect(response.result.data.id).to.equal(id.toString());
+        expect(response.result.data.attributes['has-gar-authentication-method']).to.be.true;
+        expect(response.result.data.attributes['has-sco-username']).to.be.true;
       });
     });
   });
