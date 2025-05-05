@@ -1,5 +1,22 @@
 # Pix Changelog
 
+## v5.103.0 (05/05/2025)
+
+
+### :rocket: Amélioration
+- [#12205](https://github.com/1024pix/pix/pull/12205) [FEATURE] Replication de data_pro_campaigns_kpi_aggregated vers organizations_cover_rates (PIX-17716).
+- [#12198](https://github.com/1024pix/pix/pull/12198) [FEATURE] Ajouter un feature toggle pour la nouvelle récupération de compte (PIX-17503).
+
+### :building_construction: Tech
+- [#12209](https://github.com/1024pix/pix/pull/12209) [TECH] Ne pas configurer les jobs PgBoss si PGBOSS_CONNECTION_POOL_MAX_SIZE=0 (PIX-17727).
+- [#12206](https://github.com/1024pix/pix/pull/12206) [TECH] Migrer le feature toggle pour les missions expérimentales de Junior vers le nouveaux système.
+- [#12210](https://github.com/1024pix/pix/pull/12210) [TECH] Ajoute un index sur la table organizations (colonne parentOrganizationId).
+- [#12207](https://github.com/1024pix/pix/pull/12207) [TECH] Ajout d'un index sur mission-assessments.organizationLearnerId.
+
+### :bug: Correction
+- [#12204](https://github.com/1024pix/pix/pull/12204) [BUGFIX] Retirer le scroll horizontal sur la page j'ai un code de PixAPP (PIX-17705).
+- [#12197](https://github.com/1024pix/pix/pull/12197) [BUGFIX] Retirer un texte inutile dans la boîte de dialog d'archivage d'un centre de certification (PIX-17686).
+
 ## v5.102.0 (02/05/2025)
 
 
