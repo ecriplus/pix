@@ -1,5 +1,4 @@
 import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
-import { config } from '../../../../../src/shared/config.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { Membership } from '../../../../../src/shared/domain/models/index.js';
 import {
@@ -9,7 +8,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
-  nock,
 } from '../../../../test-helper.js';
 
 describe('Prescription | Organization Learner | Acceptance | Application | OrganizationLearnerRoute', function () {
