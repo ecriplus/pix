@@ -27,14 +27,6 @@ describe('Unit | Serializer | JSONAPI | campaign-result-levels-per-tubes-and-com
                 },
               ],
             },
-            'levels-per-tube': {
-              data: [
-                {
-                  id: 'tube1',
-                  type: 'levelsPerTubes',
-                },
-              ],
-            },
           },
         },
         included: [
@@ -57,6 +49,16 @@ describe('Unit | Serializer | JSONAPI | campaign-result-levels-per-tubes-and-com
               'max-level': 1,
               'mean-level': 0.5,
               name: 'compétence 1',
+            },
+            relationships: {
+              'levels-per-tube': {
+                data: [
+                  {
+                    id: 'tube1',
+                    type: 'levelsPerTubes',
+                  },
+                ],
+              },
             },
             id: 'competence1',
             type: 'levelsPerCompetences',
