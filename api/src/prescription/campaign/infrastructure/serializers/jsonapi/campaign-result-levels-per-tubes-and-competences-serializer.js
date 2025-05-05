@@ -13,7 +13,7 @@ const serialize = function (results) {
     levelsPerTube: {
       ref: 'id',
       includes: true,
-      attributes: ['competenceId', 'practicalTitle', 'practicalDescription', 'maxLevel', 'meanLevel'],
+      attributes: ['competenceId', 'competenceName', 'title', 'description', 'maxLevel', 'meanLevel'],
     },
   }).serialize(results);
 };

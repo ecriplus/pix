@@ -19,8 +19,8 @@ describe('Integration | UseCase | get-campaign-participations', function () {
       // given
       const frameworkId = databaseBuilder.factory.learningContent.buildFramework().id;
       const areaId = databaseBuilder.factory.learningContent.buildArea({ frameworkId }).id;
-      const competenceId = databaseBuilder.factory.learningContent.buildCompetence({ areaId }).id;
-      const tube = databaseBuilder.factory.learningContent.buildTube({ competenceId });
+      const competence = databaseBuilder.factory.learningContent.buildCompetence({ areaId });
+      const tube = databaseBuilder.factory.learningContent.buildTube({ competenceId: competence.id });
       const skillId = databaseBuilder.factory.learningContent.buildSkill({ tubeId: tube.id, status: 'actif' }).id;
 
       const organizationLearner1 = databaseBuilder.factory.buildOrganizationLearner();
@@ -85,11 +85,12 @@ describe('Integration | UseCase | get-campaign-participations', function () {
           tubes: [
             {
               id: tube.id,
-              competenceId,
+              competenceId: competence.id,
+              competenceName: competence.name_i18n[FRENCH_SPOKEN],
               maxLevel: 2,
               reachedLevel: 2,
-              practicalDescription: tube.practicalDescription_i18n['fr'],
-              practicalTitle: tube.practicalTitle_i18n['fr'],
+              description: tube.practicalDescription_i18n[FRENCH_SPOKEN],
+              title: tube.practicalTitle_i18n[FRENCH_SPOKEN],
             },
           ],
         }),

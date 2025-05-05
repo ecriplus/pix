@@ -114,20 +114,22 @@ describe('Unit | Domain | Models | CampaignResultLevelPerTubesAndCompetences', f
         knowledgeElementsByParticipation: keData,
       });
 
-      expect(campaignResult.levelsPerTube).deep.equal([
+      expect(campaignResult.levelsPerTube).to.deep.equal([
         {
           id: 'tube1',
           competenceId: 'competence1',
-          practicalTitle: 'tube 1',
-          practicalDescription: 'tube 1 description',
+          competenceName: 'compétence 1',
+          title: 'tube 1',
+          description: 'tube 1 description',
           maxLevel: 2,
           meanLevel: 0.5,
         },
         {
           id: 'tube2',
           competenceId: 'competence2',
-          practicalTitle: 'tube 2',
-          practicalDescription: 'tube 2 description',
+          competenceName: 'compétence 2',
+          title: 'tube 2',
+          description: 'tube 2 description',
           maxLevel: 4,
           meanLevel: 2,
         },
@@ -141,24 +143,19 @@ describe('Unit | Domain | Models | CampaignResultLevelPerTubesAndCompetences', f
         knowledgeElementsByParticipation: keData,
       });
 
-      expect(campaignResult.levelsPerCompetence).deep.equal([
-        {
-          id: 'competence1',
-          index: '1.1',
-          name: 'compétence 1',
-          description: 'description compétence 1',
-          maxLevel: 2,
-          meanLevel: 0.5,
-        },
-        {
-          id: 'competence2',
-          index: '1.1',
-          name: 'compétence 2',
-          description: 'description compétence 2',
-          maxLevel: 4,
-          meanLevel: 2,
-        },
-      ]);
+      expect(campaignResult.levelsPerCompetence[0].id).to.deep.equal('competence1');
+      expect(campaignResult.levelsPerCompetence[0].index).to.deep.equal('1.1');
+      expect(campaignResult.levelsPerCompetence[0].name).to.deep.equal('compétence 1');
+      expect(campaignResult.levelsPerCompetence[0].description).to.deep.equal('description compétence 1');
+      expect(campaignResult.levelsPerCompetence[0].maxLevel).to.deep.equal(2);
+      expect(campaignResult.levelsPerCompetence[0].meanLevel).to.deep.equal(0.5);
+
+      expect(campaignResult.levelsPerCompetence[1].id).to.deep.equal('competence2');
+      expect(campaignResult.levelsPerCompetence[1].index).to.deep.equal('1.1');
+      expect(campaignResult.levelsPerCompetence[1].name).to.deep.equal('compétence 2');
+      expect(campaignResult.levelsPerCompetence[1].description).to.deep.equal('description compétence 2');
+      expect(campaignResult.levelsPerCompetence[1].maxLevel).to.deep.equal(4);
+      expect(campaignResult.levelsPerCompetence[1].meanLevel).to.deep.equal(2);
     });
 
     it('should compute the maximum reachable level', function () {

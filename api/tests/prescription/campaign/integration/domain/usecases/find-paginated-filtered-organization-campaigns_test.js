@@ -72,15 +72,19 @@ describe('Integration | UseCase | find-paginated-filtered-organization-campaigns
         userId,
         withCoverRate: true,
       });
-
       //then
       expect(result.models[0]).to.be.an.instanceof(CampaignReport);
-      expect(result.models[0].tubes[0].id).to.deep.equal('tubeIdA');
-      expect(result.models[0].tubes[0].competenceId).to.deep.equal('competenceIdA');
-      expect(result.models[0].tubes[0].practicalTitle).to.deep.equal('practicalTitle FR Tube A');
-      expect(result.models[0].tubes[0].practicalDescription).to.deep.equal('practicalDescription FR Tube A');
-      expect(result.models[0].tubes[0].maxLevel).to.deep.equal(2);
-      expect(result.models[0].tubes[0].meanLevel).to.deep.equal(2);
+      expect(result.models[0].tubes).deep.equal([
+        {
+          id: 'tubeIdA',
+          competenceId: 'competenceIdA',
+          competenceName: 'name FR Compétence A',
+          title: 'practicalTitle FR Tube A',
+          description: 'practicalDescription FR Tube A',
+          maxLevel: 2,
+          reachedLevel: 2,
+        },
+      ]);
     });
   });
   context('when campaign is type profiles collect', function () {

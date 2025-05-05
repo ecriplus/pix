@@ -45,12 +45,19 @@ function computeTubes(campaignId, campaignParticipation, learningContent, knowle
     learningContent,
     knowledgeElementsByParticipation,
   });
-  return campaignResultLevelPerTubesAndCompetences.levelsPerTube.map(({ meanLevel, ...tube }) => {
-    return new TubeCoverage({
-      ...tube,
-      reachedLevel: meanLevel,
-    });
-  });
+  return campaignResultLevelPerTubesAndCompetences.levelsPerTube.map(
+    ({ id, competenceId, competenceName, title, description, meanLevel, maxLevel }) => {
+      return new TubeCoverage({
+        id,
+        competenceId,
+        title,
+        description,
+        maxLevel,
+        reachedLevel: meanLevel,
+        competenceName,
+      });
+    },
+  );
 }
 
 export { getCampaignParticipations };

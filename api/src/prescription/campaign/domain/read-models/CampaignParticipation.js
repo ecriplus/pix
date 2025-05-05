@@ -85,26 +85,30 @@ class ProfilesCollectionCampaignParticipation extends CampaignParticipation {
 /**
  * @property {string} id
  * @property {string} competenceId
- * @property {string} practicalTitle
- * @property {string} practicalDescription
+ * @property {string} competenceName
+ * @property {string} title
+ * @property {string} description
  * @property {number} maxLevel
  * @property {number} reachedLevel
+ *
  */
 class TubeCoverage {
   /**
    * @param {object} args
    * @param {string} args.id
    * @param {string} args.competenceId
-   * @param {string} args.practicalTitle
-   * @param {string} args.practicalDescription
+   * @param {string} args.competenceName
+   * @param {string} args.title
+   * @param {string} args.description
    * @param {number} args.maxLevel
    * @param {number} args.reachedLevel
    */
-  constructor({ id, competenceId, practicalTitle, practicalDescription, maxLevel, reachedLevel }) {
+  constructor({ id, competenceId, competenceName, title, description, maxLevel, reachedLevel }) {
     this.id = id;
     this.competenceId = competenceId;
-    this.practicalTitle = practicalTitle;
-    this.practicalDescription = practicalDescription;
+    this.competenceName = competenceName;
+    this.title = title;
+    this.description = description;
     this.maxLevel = maxLevel;
     this.reachedLevel = reachedLevel;
   }

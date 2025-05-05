@@ -1,4 +1,6 @@
 import { CampaignResultLevelsPerTubesAndCompetences } from '../../../../../../src/prescription/campaign/domain/models/CampaignResultLevelsPerTubesAndCompetences.js';
+import { CompetenceResultForKnowledgeElementSnapshots } from '../../../../../../src/prescription/campaign/domain/models/CompetenceResultForKnowledgeElementSnapshots.js';
+import { TubeResultForKnowledgeElementSnapshots } from '../../../../../../src/prescription/campaign/domain/models/TubeResultForKnowledgeElementSnapshots.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
 import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
@@ -91,6 +93,8 @@ describe('Integration | UseCase | get-result-levels-per-tubes-and-competences', 
     expect(result).instanceOf(CampaignResultLevelsPerTubesAndCompetences);
     expect(result.maxReachableLevel).to.equal(1);
     expect(result.meanReachedLevel).to.equal(0.5);
+    expect(result.levelsPerCompetence[0]).instanceOf(CompetenceResultForKnowledgeElementSnapshots);
+    expect(result.levelsPerTube[0]).instanceOf(TubeResultForKnowledgeElementSnapshots);
     expect(result.levelsPerCompetence).to.deep.equal([
       {
         description: 'description FR Compétence 1',
@@ -101,14 +105,15 @@ describe('Integration | UseCase | get-result-levels-per-tubes-and-competences', 
         name: 'name FR Compétence 1',
       },
     ]);
-    expect(result.levelsPerTube).to.deep.equal([
+    expect(result.levelsPerTube).to.equalWithGetter([
       {
         competenceId: 'recCompetence1',
+        competenceName: 'name FR Compétence 1',
         id: 'recTube1',
         maxLevel: 1,
         meanLevel: 0.5,
-        practicalDescription: 'recTube1 fr description',
-        practicalTitle: 'Tube 1 fr title',
+        description: 'recTube1 fr description',
+        title: 'Tube 1 fr title',
       },
     ]);
   });

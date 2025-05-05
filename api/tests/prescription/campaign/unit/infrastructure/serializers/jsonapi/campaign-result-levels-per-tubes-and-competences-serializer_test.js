@@ -41,10 +41,11 @@ describe('Unit | Serializer | JSONAPI | campaign-result-levels-per-tubes-and-com
           {
             attributes: {
               'competence-id': 'competence1',
+              'competence-name': 'compétence 1',
               'max-level': 1,
               'mean-level': 0.5,
-              'practical-description': 'tube 1 description',
-              'practical-title': 'tube 1',
+              description: 'tube 1 description',
+              title: 'tube 1',
             },
             id: 'tube1',
             type: 'levelsPerTubes',

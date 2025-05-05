@@ -288,7 +288,16 @@ describe('Unit | API | Campaigns', function () {
         expect(firstCampaignListItem.createdAt).to.be.equal(campaignInformation1.createdAt);
         expect(firstCampaignListItem.archivedAt).to.be.equal(campaignInformation1.archivedAt);
         expect(firstCampaignListItem.targetProfileName).to.be.equal(targetProfileName);
-        expect(firstCampaignListItem.tubes).to.be.equal(coverRate.levelsPerTube);
+        expect(firstCampaignListItem.tubes).to.deep.equal([
+          {
+            competenceId: 'competence1',
+            id: 'tube1',
+            maxLevel: 1,
+            meanLevel: 0.5,
+            practicalDescription: 'tube 1 description',
+            practicalTitle: 'tube 1',
+          },
+        ]);
       });
     });
   });

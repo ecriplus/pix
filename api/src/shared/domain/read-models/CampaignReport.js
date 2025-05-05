@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import { TubeCoverage } from '../../../prescription/campaign/domain/read-models/CampaignParticipation.js';
 import { CampaignTypes } from '../../../prescription/shared/domain/constants.js';
 
 class CampaignReport {
@@ -90,7 +91,19 @@ class CampaignReport {
   }
 
   setCoverRate(campaignResultLevelsPerTubesAndCompetences) {
-    this.tubes = campaignResultLevelsPerTubesAndCompetences.levelsPerTube;
+    this.tubes = campaignResultLevelsPerTubesAndCompetences.levelsPerTube.map(
+      ({ id, competenceId, competenceName, title, description, meanLevel, maxLevel }) => {
+        return new TubeCoverage({
+          id,
+          competenceId,
+          competenceName,
+          title,
+          description,
+          maxLevel,
+          reachedLevel: meanLevel,
+        });
+      },
+    );
   }
 
   computeAverageResult(masteryRates) {
