@@ -50,13 +50,16 @@ describe('Unit | Domain | Pix Junior | compute global result', function () {
       });
 
       context('with multiple step (first should be reached by design)', function () {
-        it(`should return ${Assessment.results.PARTIALLY_REACHED}`, function () {
-          const stepResults = [Assessment.results.REACHED, Assessment.results.NOT_REACHED];
-          const dareResult = undefined;
+        // eslint-disable-next-line mocha/no-setup-in-describe
+        [Assessment.results.NOT_REACHED, Assessment.results.PARTIALLY_REACHED].forEach(function (status) {
+          it(`should return ${Assessment.results.PARTIALLY_REACHED} if last step status is ${status}`, function () {
+            const stepResults = [Assessment.results.REACHED, status];
+            const dareResult = undefined;
 
-          const result = computeGlobalResult(stepResults, dareResult);
+            const result = computeGlobalResult(stepResults, dareResult);
 
-          expect(result).to.equal(Assessment.results.PARTIALLY_REACHED);
+            expect(result).to.equal(Assessment.results.PARTIALLY_REACHED);
+          });
         });
       });
     });
