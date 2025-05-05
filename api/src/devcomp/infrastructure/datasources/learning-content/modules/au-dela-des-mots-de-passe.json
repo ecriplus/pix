@@ -14,8 +14,6 @@
     ],
     "tabletSupport": "comfortable"
   },
-  "transitionTexts": [
-  ],
   "grains": [
     {
       "id": "e411fd89-64de-4434-82b1-11eb87a05baa",
@@ -119,7 +117,6 @@
             "title": "simulateur 1FA",
             "url": "https://1024pix.github.io/atelier-contenus/RPE/simulateur_1FA_v1.html",
             "instruction": "<p></p>",
-            "solution": "",
             "height": 600
           }
         }
@@ -227,7 +224,6 @@
             "title": "simulateur 2FA",
             "url": "https://1024pix.github.io/atelier-contenus/RPE/simulateur_2FA_v1.html",
             "instruction": "<p></p>",
-            "solution": "",
             "height": 320
           }
         }
@@ -465,7 +461,7 @@
           "element": {
             "id": "1826117c-67bb-4773-83ec-72adae3d516e",
             "type": "text",
-            "content": "<p>📌 Résumons l’essentiel avant de passer à la suite :</p><ul><li>Sur ses comptes en ligne, il est plus sécurisé de <strong>prouver son identité de deux manières différentes</strong>. C’est la <strong>double authentification</strong>.</li><br><li>On peut par exemple utiliser un <strong>code PIN</strong> ou une <strong>empreinte digitale</strong>, en plus d’<strong>un identifiant et d’un mot de passe</strong>.</li><br><li>Si vous avez <strong>un doute sur la sécurité </strong>d’un compte, <strong>changez votre mot de passe</strong> rapidement.</li></ul>"
+            "content": "<p>📌 Résumons l’essentiel avant de passer à la suite :</p><ul><li>Sur ses comptes en ligne, il est plus sécurisé de <strong>prouver son identité de deux manières différentes</strong>. C’est la <strong>double authentification</strong>.</li><li>On peut par exemple utiliser un <strong>code PIN</strong> ou une <strong>empreinte digitale</strong>, en plus d’<strong>un identifiant et d’un mot de passe</strong>.</li><li>Si vous avez <strong>un doute sur la sécurité </strong>d’un compte, <strong>changez votre mot de passe</strong> rapidement.</li></ul>"
           }
         }
       ]
@@ -682,11 +678,10 @@
           "element": {
             "id": "a2b2910f-05e9-4462-bbd4-47f7426271eb",
             "type": "embed",
-            "isCompletionRequired": true,
+            "isCompletionRequired": false,
             "title": "simulateur Papotix",
             "url": "https://epreuves.pix.fr/papotix/papotix.html?mode=example&lang=fr",
             "instruction": "<p>👉 Réalisez toutes les étapes pour que Quentin accède à son compte Papotix.</p>",
-            "solution": "",
             "height": 800
           }
         }
