@@ -124,6 +124,19 @@ const hasIdentityProviderPIX = async function ({ userId }) {
   return Boolean(authenticationMethodDTO);
 };
 
+const hasIdentityProviderGar = async function ({ userId }) {
+  const authenticationMethodDTO = await knex
+    .select(COLUMNS)
+    .from(AUTHENTICATION_METHODS_TABLE)
+    .where({
+      userId,
+      identityProvider: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
+    })
+    .first();
+
+  return Boolean(authenticationMethodDTO);
+};
+
 const updateLastLoggedAtByIdentityProvider = async function ({ userId, identityProvider }) {
   const knexConn = DomainTransaction.getConnection();
   return knexConn(AUTHENTICATION_METHODS_TABLE)
@@ -255,6 +268,7 @@ const anonymizeByUserIds = async function ({ userIds }) {
  * @property {function} findOneByUserIdAndIdentityProvider
  * @property {function} getByIdAndUserId
  * @property {function} hasIdentityProviderPIX
+ * @property {function} hasIdentityProviderGar
  * @property {function} removeAllAuthenticationMethodsByUserId
  * @property {function} removeByUserIdAndIdentityProvider
  * @property {function} update
@@ -272,6 +286,7 @@ export {
   findOneByExternalIdentifierAndIdentityProvider,
   findOneByUserIdAndIdentityProvider,
   getByIdAndUserId,
+  hasIdentityProviderGar,
   hasIdentityProviderPIX,
   removeAllAuthenticationMethodsByUserId,
   removeByUserIdAndIdentityProvider,
