@@ -9,8 +9,8 @@ import { Certificate } from '../domain/models/v3/Certificate.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as certificateSerializer from '../infrastructure/serializers/certificate-serializer.js';
 import * as privateCertificateSerializer from '../infrastructure/serializers/private-certificate-serializer.js';
-import * as certificationAttestationPdf from '../infrastructure/utils/pdf/certification-attestation-pdf.js';
-import * as v3CertificationAttestationPdf from '../infrastructure/utils/pdf/v3-certification-attestation-pdf.js';
+import * as v3CertificationAttestationPdf from '../infrastructure/utils/pdf/generate-pdf-certificate.js';
+import { getCertificatesPdfBuffer } from '../infrastructure/utils/pdf/get-certificates-pdf-buffer.js';
 
 const getCertificateByVerificationCode = async function (
   request,
@@ -78,7 +78,7 @@ const findUserCertificates = async function (request) {
 const getPDFCertificate = async function (
   request,
   h,
-  dependencies = { certificationAttestationPdf, v3CertificationAttestationPdf },
+  dependencies = { getCertificatesPdfBuffer, v3CertificationAttestationPdf },
 ) {
   const userId = request.auth.credentials.userId;
   const certificationCourseId = request.params.certificationCourseId;
@@ -110,7 +110,7 @@ const getPDFCertificate = async function (
       .header('Content-Type', 'application/pdf');
   }
 
-  const { buffer, fileName } = await dependencies.certificationAttestationPdf.getCertificationAttestationsPdfBuffer({
+  const { buffer, fileName } = await dependencies.getCertificatesPdfBuffer({
     certificates: [certificate],
     isFrenchDomainExtension,
     i18n,
@@ -125,7 +125,7 @@ const getPDFCertificate = async function (
 const getSessionCertificates = async function (
   request,
   h,
-  dependencies = { certificationAttestationPdf, v3CertificationAttestationPdf },
+  dependencies = { getCertificatesPdfBuffer, v3CertificationAttestationPdf },
 ) {
   const { i18n } = request;
 
@@ -152,7 +152,7 @@ const getSessionCertificates = async function (
       .header('Content-Type', 'application/pdf');
   }
 
-  const { buffer } = await dependencies.certificationAttestationPdf.getCertificationAttestationsPdfBuffer({
+  const { buffer } = await dependencies.getCertificatesPdfBuffer({
     certificates,
     isFrenchDomainExtension,
     i18n,
@@ -168,7 +168,7 @@ const getSessionCertificates = async function (
 const downloadDivisionCertificates = async function (
   request,
   h,
-  dependencies = { certificationAttestationPdf, v3CertificationAttestationPdf },
+  dependencies = { getCertificatesPdfBuffer, v3CertificationAttestationPdf },
 ) {
   const organizationId = request.params.organizationId;
   const { i18n } = request;
@@ -199,7 +199,7 @@ const downloadDivisionCertificates = async function (
       .header('Content-Type', 'application/pdf');
   }
 
-  const { buffer } = await dependencies.certificationAttestationPdf.getCertificationAttestationsPdfBuffer({
+  const { buffer } = await dependencies.getCertificatesPdfBuffer({
     certificates,
     isFrenchDomainExtension,
     i18n,

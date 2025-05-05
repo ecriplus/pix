@@ -464,18 +464,14 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           .withArgs({ certificationCourseId: request.params.certificationCourseId })
           .resolves(certificationAttestation);
 
-        const certificationAttestationPdfStub = {
-          getCertificationAttestationsPdfBuffer: sinon.stub(),
-        };
+        const dependencies = { getCertificatesPdfBuffer: sinon.stub() };
 
-        certificationAttestationPdfStub.getCertificationAttestationsPdfBuffer
+        dependencies.getCertificatesPdfBuffer
           .withArgs({ certificates: [certificationAttestation], isFrenchDomainExtension: true, i18n })
           .resolves({ buffer: attestationPDF, fileName: filename });
 
         // when
-        const response = await certificateController.getPDFCertificate(request, hFake, {
-          certificationAttestationPdf: certificationAttestationPdfStub,
-        });
+        const response = await certificateController.getPDFCertificate(request, hFake, dependencies);
 
         // then
         expect(response.source).to.deep.equal(attestationPDF);
@@ -533,9 +529,6 @@ describe('Certification | Results | Unit | Application | certificate-controller'
     describe('when attestations are for a v2 session', function () {
       it('should return an attestation in PDF binary format', async function () {
         // given
-        const certificationAttestationPdf = {
-          getCertificationAttestationsPdfBuffer: sinon.stub(),
-        };
         const session = domainBuilder.certification.sessionManagement.buildSession.finalized({ id: 12 });
         domainBuilder.buildCertificationCourse({
           id: 1,
@@ -576,7 +569,8 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           })
           .resolves([certification1, certification2, certification3]);
 
-        certificationAttestationPdf.getCertificationAttestationsPdfBuffer
+        const dependencies = { getCertificatesPdfBuffer: sinon.stub() };
+        dependencies.getCertificatesPdfBuffer
           .withArgs({
             certificates: [certification1, certification2, certification3],
             isFrenchDomainExtension: true,
@@ -585,9 +579,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           .resolves({ buffer: attestationPDF });
 
         // when
-        const response = await certificateController.getSessionCertificates(request, hFake, {
-          certificationAttestationPdf,
-        });
+        const response = await certificateController.getSessionCertificates(request, hFake, dependencies);
 
         // then
         expect(response.source).to.deep.equal(attestationPDF);
@@ -690,15 +682,11 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           })
           .resolves(certifications);
 
-        const certificationAttestationPdfStub = {
-          getCertificationAttestationsPdfBuffer: sinon.stub(),
-        };
-
         const dependencies = {
-          certificationAttestationPdf: certificationAttestationPdfStub,
+          getCertificatesPdfBuffer: sinon.stub(),
         };
 
-        certificationAttestationPdfStub.getCertificationAttestationsPdfBuffer
+        dependencies.getCertificatesPdfBuffer
           .withArgs({ certificates: certifications, isFrenchDomainExtension: true, i18n })
           .resolves({ buffer: attestationsPDF });
 

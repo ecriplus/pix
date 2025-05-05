@@ -3,7 +3,7 @@
  */
 import PDFDocument from 'pdfkit';
 
-import generateV3AttestationTemplate from './templates/v3-attestation.js';
+import generateV3AttestationTemplate from './templates/certificate.js';
 
 /**
  * @param {Object} params
