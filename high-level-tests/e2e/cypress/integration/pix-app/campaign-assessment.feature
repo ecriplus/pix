@@ -25,6 +25,8 @@ Fonctionnalité: Campagne d'évaluation
     Alors je vois 50% de réussite aux questions
     Alors je vois l'onglet de détails des résultats avec 2 compétences
     Lorsque je clique sur "J'envoie mes résultats"
+    Alors je vois la modale de contenus formatifs
+    Lorsque je clique sur "Fermer et revenir aux résultats"
     Alors je vois que j'ai envoyé les résultats
     Lorsque je clique sur "Voir les formations"
     Alors je vois la formation recommandée ayant le titre "Comment gagner des pièces d'or"

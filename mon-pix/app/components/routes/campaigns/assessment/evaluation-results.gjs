@@ -12,12 +12,11 @@ import QuitResults from '../../../campaigns/assessment/results/quit-results';
 
 export default class EvaluationResults extends Component {
   @service tabManager;
-  @service featureToggles;
 
   @tracked showEvaluationResultsModal = false;
 
   get isResultsSharedModalEnabled() {
-    return this.featureToggles.featureToggles?.isResultsSharedModalEnabled && this.hasTrainings;
+    return this.hasTrainings;
   }
 
   get hasTrainings() {

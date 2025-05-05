@@ -143,3 +143,7 @@ Then(
 When('je clique sur le bouton "Associer"', () => {
   cy.contains("button", "Associer").click();
 });
+
+Then(`je vois la modale de contenus formatifs`, () => {
+  cy.contains("Résultats partagés");
+});

@@ -1,5 +1,4 @@
 import { render, within } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
@@ -90,10 +89,6 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
     module('when clicking on the share results button in the "formations" tab', function () {
       test('it should display the evaluation-sent-results modal with first 3 trainings', async function (assert) {
         // given
-        class FeatureTogglesStub extends Service {
-          featureToggles = { isResultsSharedModalEnabled: true };
-        }
-        this.owner.register('service:featureToggles', FeatureTogglesStub);
         this.model.trainings = generateTrainings(4);
         this.model.campaignParticipationResult.isShared = false;
         this.model.campaignParticipationResult.competenceResults = [Symbol('competences')];
@@ -126,41 +121,10 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
           .dom(within(sharedResultsModal).queryByRole('heading', { level: 3, name: 'Mon super training 4 youhou' }))
           .doesNotExist();
       });
-
-      module('when feature_toggle ‘isResultsSharedModalEnabled‘ is false', function () {
-        test('it should not display the evaluation-sent-results modal', async function (assert) {
-          // given
-          class FeatureTogglesStub extends Service {
-            featureToggles = { isResultsSharedModalEnabled: false };
-          }
-          this.owner.register('service:featureToggles', FeatureTogglesStub);
-          this.model.trainings = generateTrainings(3);
-          this.model.campaignParticipationResult.isShared = false;
-          this.model.campaignParticipationResult.competenceResults = [Symbol('competences')];
-          this.model.campaign.isForAbsoluteNovice = false;
-
-          const campaignParticipationResultService = this.owner.lookup('service:campaign-participation-result');
-          const shareStub = sinon.stub(campaignParticipationResultService, 'share');
-          shareStub.resolves();
-
-          // when
-          screen = await render(hbs`<Routes::Campaigns::Assessment::EvaluationResults @model={{this.model}} />`);
-          await click(screen.queryByRole('tab', { name: 'Formations' }));
-          const dialog = await screen.getByRole('dialog');
-          await click(within(dialog).queryByRole('button', { name: t('pages.skill-review.actions.send') }));
-
-          // then
-          assert.dom(screen.queryByRole('dialog', { name: 'Résultats partagés' })).doesNotExist();
-        });
-      });
     });
     module('when clicking on the share results button in hero', function () {
       test('it should display the evaluation-sent-results modal with first 3 trainings', async function (assert) {
         // given
-        class FeatureTogglesStub extends Service {
-          featureToggles = { isResultsSharedModalEnabled: true };
-        }
-        this.owner.register('service:featureToggles', FeatureTogglesStub);
         this.model.trainings = generateTrainings(4);
         this.model.campaignParticipationResult.isShared = false;
         this.model.campaignParticipationResult.competenceResults = [Symbol('competences')];
@@ -193,11 +157,6 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
     module('when clicking on the share results button', function () {
       test('it should display the evaluation-sent-results modal ', async function (assert) {
         // given
-        class FeatureTogglesStub extends Service {
-          featureToggles = { isResultsSharedModalEnabled: true };
-        }
-
-        this.owner.register('service:featureToggles', FeatureTogglesStub);
         this.model.trainings = [];
         this.model.campaignParticipationResult.isShared = false;
         this.model.campaignParticipationResult.competenceResults = [Symbol('competences')];

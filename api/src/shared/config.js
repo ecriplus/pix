@@ -517,7 +517,6 @@ const configuration = (function () {
     config.featureToggles.deprecatePoleEmploiPushNotification = false;
     config.featureToggles.isAlwaysOkValidateNextChallengeEndpointEnabled = false;
     config.featureToggles.isDirectMetricsEnabled = false;
-    config.featureToggles.isResultsSharedModalEnabled = false;
     config.featureToggles.isNeedToAdjustCertificationAccessibilityEnabled = false;
     config.featureToggles.isOppsyDisabled = false;
     config.featureToggles.isPixCompanionEnabled = false;
