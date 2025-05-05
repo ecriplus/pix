@@ -9,7 +9,7 @@ const serialize = function (analysisByTubes) {
     transform(analysisByTubes) {
       return {
         id: randomUUID(),
-        ...analysisByTubes,
+        data: analysisByTubes.data,
       };
     },
     attributes: ['data'],

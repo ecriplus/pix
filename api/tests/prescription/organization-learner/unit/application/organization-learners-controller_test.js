@@ -110,7 +110,7 @@ describe('Unit | Application | Organization-Learner | organization-learners-cont
         serialize: sinon.stub(),
       };
       const expectedResult = Symbol('expected-result');
-      analysisByTubesSerializer.serialize.withArgs(useCaseResult).returns(expectedResult);
+      analysisByTubesSerializer.serialize.withArgs({ data: useCaseResult }).returns(expectedResult);
 
       const request = {
         params: {

@@ -5,6 +5,7 @@ import { Membership } from '../../../../../src/shared/domain/models/index.js';
 import {
   createServer,
   databaseBuilder,
+  datamartBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
@@ -83,21 +84,41 @@ describe('Prescription | Organization Learner | Acceptance | Application | Organ
         });
         await databaseBuilder.commit();
 
-        const expectedData = 'expected-data';
+        const campaignInfo = {
+          campaign_id: 456,
+          target_profile_id: 123,
+          orga_id: organizationId,
+        };
 
-        const token = 'token';
-        nock(config.apiData.url)
-          .post('/token')
-          .reply(200, { test: 'test', data: { access_token: token } });
-
-        nock(config.apiData.url)
-          .post('/query', {
-            queryId: config.apiData.queries.coverRateByTubes,
-            params: [{ name: 'organization_id', value: organizationId }],
-          })
-          .matchHeader('Content-Type', 'application/json')
-          .matchHeader('Authorization', `Bearer ${token}`)
-          .reply(200, { status: 'success', data: expectedData });
+        datamartBuilder.factory.buildOrganizationsCoverRates({
+          ...campaignInfo,
+          tag_name: 'TAG',
+          domain_name: '1 domain',
+          competence_code: '1.1',
+          competence_name: 'competence 1',
+          tube_id: 'tube1',
+          tube_practical_title: 'tubeTitle 1',
+          extraction_date: '2025-01-01',
+          max_level: 5,
+          sum_user_max_level: 2,
+          nb_user: 2,
+          nb_tubes_in_competence: 1,
+        });
+        datamartBuilder.factory.buildOrganizationsCoverRates({
+          ...campaignInfo,
+          tag_name: 'TAG',
+          domain_name: '2 domain',
+          competence_code: '2.2',
+          competence_name: 'competence 2',
+          tube_id: 'tube2',
+          tube_practical_title: 'tubeTitle 2',
+          extraction_date: '2025-01-01',
+          max_level: 7,
+          sum_user_max_level: 6,
+          nb_user: 2,
+          nb_tubes_in_competence: 1,
+        });
+        await datamartBuilder.commit();
 
         const options = {
           method: 'GET',
@@ -112,7 +133,28 @@ describe('Prescription | Organization Learner | Acceptance | Application | Organ
         const expectedResult = {
           data: {
             attributes: {
-              data: 'expected-data',
+              data: [
+                {
+                  competence: 'competence 2',
+                  competence_code: '2.2',
+                  couverture: '0.42857142857142857143',
+                  domaine: '2 domain',
+                  extraction_date: '2025-01-01',
+                  niveau_par_sujet: '7.0000000000000000',
+                  niveau_par_user: '3.0000000000000000',
+                  sujet: 'tubeTitle 2',
+                },
+                {
+                  competence: 'competence 1',
+                  competence_code: '1.1',
+                  couverture: '0.20000000000000000000',
+                  domaine: '1 domain',
+                  extraction_date: '2025-01-01',
+                  niveau_par_sujet: '5.0000000000000000',
+                  niveau_par_user: '1.00000000000000000000',
+                  sujet: 'tubeTitle 1',
+                },
+              ],
             },
             type: 'analysis-by-tubes',
           },

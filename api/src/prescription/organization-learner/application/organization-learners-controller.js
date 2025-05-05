@@ -21,7 +21,7 @@ const getAttestationZipForDivisions = async function (request, h) {
 const getAnalysisByTubes = async function (request, h, dependencies = { analysisByTubesSerializer }) {
   const organizationId = request.params.organizationId;
   const result = await usecases.getAnalysisByTubes({ organizationId });
-  const serializedResult = dependencies.analysisByTubesSerializer.serialize(result);
+  const serializedResult = dependencies.analysisByTubesSerializer.serialize({ data: result });
   return h.response(serializedResult).code(200);
 };
 
