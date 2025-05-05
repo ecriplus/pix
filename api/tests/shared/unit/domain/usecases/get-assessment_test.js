@@ -1,8 +1,8 @@
-import { getAssessment } from '../../../../lib/domain/usecases/get-assessment.js';
-import { CertificationChallengeLiveAlertStatus } from '../../../../src/certification/shared/domain/models/CertificationChallengeLiveAlert.js';
-import { NotFoundError } from '../../../../src/shared/domain/errors.js';
-import { Assessment } from '../../../../src/shared/domain/models/index.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { CertificationChallengeLiveAlertStatus } from '../../../../../src/certification/shared/domain/models/CertificationChallengeLiveAlert.js';
+import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { Assessment } from '../../../../../src/shared/domain/models/index.js';
+import { getAssessment } from '../../../../../src/shared/domain/usecases/get-assessment.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | get-assessment', function () {
   let assessment;

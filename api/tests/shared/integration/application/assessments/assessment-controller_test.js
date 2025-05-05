@@ -1,6 +1,6 @@
-import { usecases } from '../../../../../lib/domain/usecases/index.js';
 import { assessmentAuthorization } from '../../../../../src/evaluation/application/pre-handlers/assessment-authorization.js';
 import * as moduleUnderTest from '../../../../../src/shared/application/assessments/index.js';
+import { sharedUsecases } from '../../../../../src/shared/domain/usecases/index.js';
 import { domainBuilder, expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Application | Assessments | assessment-controller', function () {
@@ -9,7 +9,7 @@ describe('Integration | Application | Assessments | assessment-controller', func
   let httpTestServer;
 
   beforeEach(async function () {
-    sinon.stub(usecases, 'getAssessment');
+    sinon.stub(sharedUsecases, 'getAssessment');
     sinon.stub(assessmentAuthorization, 'verify');
     httpTestServer = new HttpTestServer();
     await httpTestServer.register(moduleUnderTest);
@@ -24,7 +24,7 @@ describe('Integration | Application | Assessments | assessment-controller', func
 
       it('should resolve a 200 HTTP response', async function () {
         // given
-        usecases.getAssessment.resolves(assessment);
+        sharedUsecases.getAssessment.resolves(assessment);
 
         // when
         const response = await httpTestServer.request('GET', '/api/assessments/1234');
@@ -35,7 +35,7 @@ describe('Integration | Application | Assessments | assessment-controller', func
 
       it('should return a JSON API organization', async function () {
         // given
-        usecases.getAssessment.resolves(assessment);
+        sharedUsecases.getAssessment.resolves(assessment);
 
         // when
         const response = await httpTestServer.request('GET', '/api/assessments/1234');

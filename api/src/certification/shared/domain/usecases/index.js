@@ -5,10 +5,6 @@ import { injectDependencies } from '../../../../shared/infrastructure/utils/depe
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
 
-/**
- * @typedef {certificationCompanionAlertRepository} CertificationCompanionAlertRepository
- */
-
 const dependencies = {
   certificationCourseRepository,
 };

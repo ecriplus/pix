@@ -1,5 +1,5 @@
-import { NotFoundError } from '../../../src/shared/domain/errors.js';
-import { Assessment } from '../../../src/shared/domain/models/index.js';
+import { NotFoundError } from '../errors.js';
+import { Assessment } from '../models/Assessment.js';
 
 export async function getAssessment({
   assessmentId,

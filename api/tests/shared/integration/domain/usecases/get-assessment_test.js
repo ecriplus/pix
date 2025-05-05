@@ -1,13 +1,13 @@
-import { getAssessment } from '../../../../lib/domain/usecases/get-assessment.js';
 import {
   CertificationCompanionLiveAlert,
   CertificationCompanionLiveAlertStatus,
-} from '../../../../src/certification/shared/domain/models/CertificationCompanionLiveAlert.js';
-import * as certificationChallengeLiveAlertRepository from '../../../../src/certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
-import * as certificationCompanionAlertRepository from '../../../../src/certification/shared/infrastructure/repositories/certification-companion-alert-repository.js';
-import { Assessment } from '../../../../src/shared/domain/models/index.js';
-import * as assessmentRepository from '../../../../src/shared/infrastructure/repositories/assessment-repository.js';
-import { databaseBuilder, expect } from '../../../test-helper.js';
+} from '../../../../../src/certification/shared/domain/models/CertificationCompanionLiveAlert.js';
+import * as certificationChallengeLiveAlertRepository from '../../../../../src/certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
+import * as certificationCompanionAlertRepository from '../../../../../src/certification/shared/infrastructure/repositories/certification-companion-alert-repository.js';
+import { Assessment } from '../../../../../src/shared/domain/models/index.js';
+import { getAssessment } from '../../../../../src/shared/domain/usecases/get-assessment.js';
+import * as assessmentRepository from '../../../../../src/shared/infrastructure/repositories/assessment-repository.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | UseCases | get-assessment', function () {
   context('When the assessment is type CERTIFICATION', function () {
