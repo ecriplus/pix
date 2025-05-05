@@ -2,7 +2,7 @@ import * as url from 'node:url';
 
 import Joi from 'joi';
 
-import { SendOrganizationInvitationsScript } from '../../../../src/team/scripts/send-organization-invitations-script.js';
+import { SendOrganizationInvitationsScript } from '../../../../src/team/scripts/send-organization-invitations.script.js';
 import { expect, sinon } from '../../../test-helper.js';
 
 const currentDirectory = url.fileURLToPath(new URL('.', import.meta.url));
@@ -63,6 +63,7 @@ describe('unit | team | scripts | send-organization-invitations-script', functio
         options: { file },
         logger,
         sendOrganizationInvitation,
+        checkDomainIsValid,
       });
 
       // then
@@ -85,6 +86,7 @@ describe('unit | team | scripts | send-organization-invitations-script', functio
         options: { file },
         logger,
         sendOrganizationInvitation,
+        checkDomainIsValid,
       });
 
       // then
@@ -102,6 +104,7 @@ describe('unit | team | scripts | send-organization-invitations-script', functio
         options: { file, batchSize: 1 },
         logger,
         sendOrganizationInvitation,
+        checkDomainIsValid,
       });
 
       // then
@@ -116,6 +119,7 @@ describe('unit | team | scripts | send-organization-invitations-script', functio
         options: { file, dryRun: true },
         logger,
         sendOrganizationInvitation,
+        checkDomainIsValid,
       });
 
       // then
