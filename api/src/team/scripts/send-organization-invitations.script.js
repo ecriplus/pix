@@ -20,6 +20,7 @@ const columnsSchemas = [
     name: 'role',
     schema: Joi.string()
       .trim()
+      .uppercase()
       .optional()
       .valid(...Object.values(OrganizationInvitation.RoleType), ''),
   },
