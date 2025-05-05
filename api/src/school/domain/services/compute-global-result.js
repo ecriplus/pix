@@ -12,7 +12,7 @@ export function computeGlobalResult(stepResults, dareResult) {
     return REACHED;
   }
 
-  if (lastStepResult === NOT_REACHED && stepResults.length > 1) {
+  if (stepResults.length > 1) {
     return PARTIALLY_REACHED;
   }
 
