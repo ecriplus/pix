@@ -1,5 +1,12 @@
 # Pix Changelog
 
+## v5.104.0 (05/05/2025)
+
+
+### :building_construction: Tech
+- [#12135](https://github.com/1024pix/pix/pull/12135) [TECH] :recycle: Renomme les fichiers utilitaires PDF de l'infrastructure certification en certificat (pix-17607).
+- [#12109](https://github.com/1024pix/pix/pull/12109) [TECH] :truck: Déplace le cas d'utilisation `getAssessment` vers `src/evaluation/`.
+
 ## v5.103.0 (05/05/2025)
 
 
