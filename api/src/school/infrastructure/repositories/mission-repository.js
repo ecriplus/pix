@@ -1,6 +1,6 @@
-import { config } from '../../../shared/config.js';
 import { LOCALE } from '../../../shared/domain/constants.js';
 import { getTranslatedKey } from '../../../shared/domain/services/get-translated-text.js';
+import { featureToggles } from '../../../shared/infrastructure/feature-toggles/index.js';
 import { LearningContentRepository } from '../../../shared/infrastructure/repositories/learning-content-repository.js';
 import { Mission, MissionContent, MissionStep } from '../../domain/models/Mission.js';
 import { MissionNotFoundError } from '../../domain/school-errors.js';
@@ -22,7 +22,7 @@ export async function get(id, locale = FRENCH_SPOKEN) {
 
 export async function findAllActiveMissions(locale = FRENCH_SPOKEN) {
   const cacheKey = 'findAllActiveMissions()';
-  const acceptedStatuses = config.featureToggles.showExperimentalMissions
+  const acceptedStatuses = (await featureToggles.get('showExperimentalMissions'))
     ? ['VALIDATED', 'EXPERIMENTAL']
     : ['VALIDATED'];
   const findActiveCallback = (knex) => knex.whereIn('status', acceptedStatuses).orderBy('id');

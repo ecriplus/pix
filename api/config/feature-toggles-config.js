@@ -53,4 +53,10 @@ export default {
     defaultValue: false,
     tags: ['frontend', 'pix-app', 'team-certification'],
   },
+  showExperimentalMissions: {
+    type: 'boolean',
+    description: 'Consider experimental missions as active',
+    defaultValue: false,
+    tags: ['team-junior'],
+  },
 };
