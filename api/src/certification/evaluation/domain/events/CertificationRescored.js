@@ -1,6 +1,6 @@
 import { assertNotNullOrUndefined } from '../../../../shared/domain/models/asserts.js';
 
-export default class CertificationRescoredByScript {
+export default class CertificationRescored {
   /**
    * @param {Object} params
    * @param {number} params.certificationCourseId - certification course that will be rescored
