@@ -17,7 +17,7 @@ export default class PassageEvents extends Service {
     passageEventsCollection.events = [
       {
         type,
-        passageId,
+        passageId: this.passageId,
         sequenceNumber: this.sequenceNumber,
         occurredAt: new Date().getTime(),
         ...data,
