@@ -1,79 +1,35 @@
-import { action } from '@ember/object';
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
-import get from 'lodash/get';
 
-import LoginSessionSupervisorFooter from './footer';
 import LoginSessionSupervisorForm from './form';
-import LoginSessionSupervisorHeader from './header';
 
 export default class LoginSessionSupervisor extends Component {
   @service intl;
-  @tracked errorMessage = null;
-  sessionId;
-  supervisorPassword;
-
-  @action
-  setSupervisorPassword(event) {
-    this.supervisorPassword = event.target.value;
-  }
-
-  @action
-  setSessionId(event) {
-    this.sessionId = event.target.value;
-  }
-
-  @action
-  async superviseSession(event) {
-    event.preventDefault();
-
-    if (!this.sessionId || !this.supervisorPassword) {
-      this._displayError(this.intl.t('pages.session-supervising.login.form.errors.mandatory-fields'));
-      return;
-    }
-
-    try {
-      await this.args.authenticateSupervisor({
-        sessionId: this.sessionId,
-        supervisorPassword: this.supervisorPassword,
-      });
-    } catch (error) {
-      let errorMessage = get(error, 'errors[0].detail');
-      const errorCode = get(error, 'errors[0].code');
-      if (errorCode === 'INCORRECT_DATA') {
-        errorMessage = this.intl.t('pages.session-supervising.login.form.errors.incorrect-data');
-      } else if (errorCode === 'CERTIFICATION_CENTER_IS_ARCHIVED') {
-        errorMessage = this.intl.t('pages.session-supervising.login.form.errors.certification-center-archived');
-      }
-
-      return this._displayError(errorMessage);
-    }
-  }
-
-  _displayError(message) {
-    this.errorMessage = message;
-  }
 
   <template>
-    <div id='login-session-supervisor-page' class='login-session-supervisor-page'>
-      <main>
-        <section>
-          <LoginSessionSupervisorHeader @errorMessage={{this.errorMessage}} />
+    <div class='login-session-supervisor'>
+      <main class='login-session-supervisor__main'>
+        <header class='login-session-supervisor__header'>
+          <img src='/illu-espace-surveillant.svg' alt='' />
+          <h1>{{t 'pages.session-supervising.login.form.title'}}</h1>
+          <h2>{{t 'pages.session-supervising.login.form.sub-title'}}</h2>
+          <p>{{t 'common.form-errors.mandatory-all-fields'}}</p>
+        </header>
 
-          <LoginSessionSupervisorForm
-            @superviseSession={{this.superviseSession}}
-            @setSessionId={{this.setSessionId}}
-            @setSupervisorPassword={{this.setSupervisorPassword}}
-          />
+        <LoginSessionSupervisorForm @authenticateSupervisor={{@authenticateSupervisor}} />
 
-          <p class='description'>
-            {{t 'pages.session-supervising.login.form.description'}}
-          </p>
-        </section>
-
-        <LoginSessionSupervisorFooter @currentUserEmail={{@currentUserEmail}} />
+        <footer class='login-session-supervisor__footer'>
+          <span class='user'>
+            <PixIcon @name='userCircle' @plainIcon={{true}} class='footer-item__icon' @ariaHidden={{true}} />
+            {{@currentUserEmail}}
+          </span>
+          <PixButtonLink class='logout-link' @route='logout' @variant='tertiary'>
+            {{t 'pages.session-supervising.login.form.actions.switch-account'}}
+          </PixButtonLink>
+        </footer>
       </main>
     </div>
   </template>
