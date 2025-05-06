@@ -1,34 +1,34 @@
 @use 'pix-design-tokens/colors';
 @use 'pix-design-tokens/fonts';
 
-#footer {
-  margin:auto 20px 20px 3rem;
-}
+.footer {
+  margin:0.5rem 0 0 3rem;
 
-.footer-navigation {
-  &__list {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  &__item {
-    display: inline-block;
-    padding: 0 12px 6px 0;
-    color: colors.$pix-neutral-60;
-    font-size: 0.8125rem;
-    font-family: fonts.$font-roboto;
-    line-height: 1.375rem;
-    letter-spacing: 0.009rem;
-
-    &:focus {
-      color: colors.$pix-neutral-50;
-      text-decoration: none;
+  .footer-navigation {
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
     }
 
-    &:hover {
-      color: colors.$pix-primary-70;
-      text-decoration: none;
-      cursor: pointer;
+    &__item {
+      display: inline-block;
+      padding: 0 12px 6px 0;
+      color: colors.$pix-neutral-60;
+      font-size: 0.8125rem;
+      font-family: fonts.$font-roboto;
+      line-height: 1.375rem;
+      letter-spacing: 0.009rem;
+
+      &:focus {
+        color: colors.$pix-neutral-50;
+        text-decoration: none;
+      }
+
+      &:hover {
+        color: colors.$pix-primary-70;
+        text-decoration: none;
+        cursor: pointer;
+      }
     }
   }
 }

@@ -1,30 +1,34 @@
 import { t } from 'ember-intl';
 
+import WidthLimitedContent from './width-limited-content';
+
 <template>
   <footer id="footer" class="footer">
-    <nav class="footer__navigation" role="navigation" aria-label={{t "navigation.footer.label"}}>
-      <ul class="footer-navigation__list">
-        <li>
-          <a
-            href="{{t 'navigation.footer.legal-notice-url'}}"
-            target="_blank"
-            class="footer-navigation__item"
-            rel="noopener noreferrer"
-          >
-            {{t "navigation.footer.legal-notice"}}
-          </a>
-        </li>
-        <li>
-          <a
-            href="{{t 'navigation.footer.student-data-protection-policy-url'}}"
-            target="_blank"
-            class="footer-navigation__item"
-            rel="noopener noreferrer"
-          >
-            {{t "navigation.footer.student-data-protection-policy"}}
-          </a>
-        </li>
-      </ul>
-    </nav>
+    <WidthLimitedContent>
+      <nav class="footer__navigation" role="navigation" aria-label={{t "navigation.footer.label"}}>
+        <ul class="footer-navigation__list">
+          <li>
+            <a
+              href="{{t 'navigation.footer.legal-notice-url'}}"
+              target="_blank"
+              class="footer-navigation__item"
+              rel="noopener noreferrer"
+            >
+              {{t "navigation.footer.legal-notice"}}
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{t 'navigation.footer.student-data-protection-policy-url'}}"
+              target="_blank"
+              class="footer-navigation__item"
+              rel="noopener noreferrer"
+            >
+              {{t "navigation.footer.student-data-protection-policy"}}
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </WidthLimitedContent>
   </footer>
 </template>
