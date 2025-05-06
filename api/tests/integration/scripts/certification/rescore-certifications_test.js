@@ -1,5 +1,5 @@
 import { RescoreCertificationScript } from '../../../../scripts/certification/rescore-certifications.js';
-import CertificationRescoredByScript from '../../../../src/certification/session-management/domain/events/CertificationRescoredByScript.js';
+import CertificationRescored from '../../../../src/certification/session-management/domain/events/CertificationRescored.js';
 import { createTempFile, expect, sinon } from '../../../test-helper.js';
 
 describe('Integration | Scripts | Certification | rescore-certfication', function () {
@@ -32,10 +32,10 @@ describe('Integration | Scripts | Certification | rescore-certfication', functio
     // then
     expect(handlersAsServices.handleCertificationRescoring).to.have.been.calledTwice;
     expect(handlersAsServices.handleCertificationRescoring).to.have.been.calledWithExactly({
-      event: new CertificationRescoredByScript({ certificationCourseId: 1 }),
+      event: new CertificationRescored({ certificationCourseId: 1 }),
     });
     expect(handlersAsServices.handleCertificationRescoring).to.have.been.calledWithExactly({
-      event: new CertificationRescoredByScript({ certificationCourseId: 2 }),
+      event: new CertificationRescored({ certificationCourseId: 2 }),
     });
   });
 });

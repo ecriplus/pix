@@ -1,6 +1,6 @@
 import { CertificationAlgorithmVersionError, NotFinalizedSessionError } from '../../../../shared/domain/errors.js';
 import { SessionAlreadyPublishedError } from '../../../session-management/domain/errors.js';
-import CertificationRescoredByScript from '../../../session-management/domain/events/CertificationRescoredByScript.js';
+import CertificationRescored from '../../../session-management/domain/events/CertificationRescored.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 
 export const rescoreCertification = async ({
@@ -31,7 +31,7 @@ export const rescoreCertification = async ({
   }
 
   return services.handleV3CertificationScoring({
-    event: new CertificationRescoredByScript({ certificationCourseId }),
+    event: new CertificationRescored({ certificationCourseId }),
     certificationAssessment,
     locale,
     dependencies: { findByCertificationCourseIdAndAssessmentId: services.findByCertificationCourseIdAndAssessmentId },

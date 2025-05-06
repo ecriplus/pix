@@ -7,7 +7,7 @@ import { services } from '../../../certification/evaluation/domain/services/inde
 import { AssessmentResultFactory } from '../../../certification/scoring/domain/models/factories/AssessmentResultFactory.js';
 import { CertificationCourseRejected } from '../../../certification/session-management/domain/events/CertificationCourseRejected.js';
 import { CertificationJuryDone } from '../../../certification/session-management/domain/events/CertificationJuryDone.js';
-import CertificationRescoredByScript from '../../../certification/session-management/domain/events/CertificationRescoredByScript.js';
+import CertificationRescored from '../../../certification/session-management/domain/events/CertificationRescored.js';
 import { AlgorithmEngineVersion } from '../../../certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { V3_REPRODUCIBILITY_RATE } from '../constants.js';
 import { CertificationComputeError } from '../errors.js';
@@ -24,7 +24,7 @@ const eventTypes = [
   CertificationCourseRejected,
   CertificationCourseUnrejected,
   CertificationCancelled,
-  CertificationRescoredByScript,
+  CertificationRescored,
   CertificationUncancelled,
 ];
 

@@ -1,6 +1,6 @@
 import { rescoreCertification } from '../../../../../../src/certification/evaluation/domain/usecases/rescore-certification.js';
 import { SessionAlreadyPublishedError } from '../../../../../../src/certification/session-management/domain/errors.js';
-import CertificationRescoredByScript from '../../../../../../src/certification/session-management/domain/events/CertificationRescoredByScript.js';
+import CertificationRescored from '../../../../../../src/certification/session-management/domain/events/CertificationRescored.js';
 import {
   CertificationAlgorithmVersionError,
   NotFinalizedSessionError,
@@ -45,7 +45,7 @@ describe('Certification | Results | Unit | Domain | Use Cases | rescore-certific
 
         // then
         expect(services.handleV3CertificationScoring).to.have.been.calledWithExactly({
-          event: new CertificationRescoredByScript({
+          event: new CertificationRescored({
             certificationCourseId: certificationAssessment.certificationCourseId,
           }),
           certificationAssessment,

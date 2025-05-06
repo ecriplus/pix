@@ -2,7 +2,7 @@ import 'dotenv/config';
 
 import Joi from 'joi';
 
-import CertificationRescoredByScript from '../../src/certification/session-management/domain/events/CertificationRescoredByScript.js';
+import CertificationRescored from '../../src/certification/session-management/domain/events/CertificationRescored.js';
 import { csvFileParser } from '../../src/shared/application/scripts/parsers.js';
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
@@ -34,7 +34,7 @@ export class RescoreCertificationScript extends Script {
     for (const { certificationCourseId } of certificationCourses) {
       logger.info(`Rescoring certification-courses>id ${certificationCourseId.length}`);
       await this.services.handleCertificationRescoring({
-        event: new CertificationRescoredByScript({ certificationCourseId }),
+        event: new CertificationRescored({ certificationCourseId }),
       });
     }
 
