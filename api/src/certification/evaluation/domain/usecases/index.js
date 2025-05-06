@@ -5,6 +5,7 @@ import * as languageService from '../../../../shared/domain/services/language-se
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
+import { services } from '../../../evaluation/domain/services/index.js';
 import * as verifyCertificateCodeService from '../../../evaluation/domain/services/verify-certificate-code-service.js';
 import * as certifiableProfileForLearningContentRepository from '../../../evaluation/infrastructure/repositories/certifiable-profile-for-learning-content-repository.js';
 import * as flashAlgorithmService from '../../../flash-certification/domain/services/algorithm-methods/flash.js';
@@ -29,10 +30,12 @@ import * as userRepository from '../../../shared/infrastructure/repositories/use
 import * as certificationCandidateRepository from '../../infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationCompanionAlertRepository from '../../infrastructure/repositories/certification-companion-alert-repository.js';
 import * as challengeCalibrationRepository from '../../infrastructure/repositories/challenge-calibration-repository.js';
+import * as evaluationSessionRepository from '../../infrastructure/repositories/session-repository.js';
 import * as certificationChallengesService from '../services/certification-challenges-service.js';
 import pickChallengeService from '../services/pick-challenge-service.js';
 /**
  * @typedef {certificationCompanionAlertRepository} CertificationCompanionAlertRepository
+ * @typedef {evaluationSessionRepository} EvaluationSessionRepository
  * @typedef {certificationChallengeRepository} CertificationChallengeRepository
  * @typedef {certificationAssessmentRepository} CertificationAssessmentRepository
  * @typedef {certifiableProfileForLearningContentRepository} CertifiableProfileForLearningContentRepository
@@ -40,6 +43,7 @@ import pickChallengeService from '../services/pick-challenge-service.js';
 
 const dependencies = {
   ...sessionRepositories,
+  evaluationSessionRepository,
   sessionManagementCertificationChallengeRepository,
   challengeCalibrationRepository,
   certificationCandidateRepository,
@@ -65,6 +69,7 @@ const dependencies = {
   certificationCompanionAlertRepository,
   certificationCourseRepository,
   certificationAssessmentRepository,
+  services,
 };
 
 const path = dirname(fileURLToPath(import.meta.url));

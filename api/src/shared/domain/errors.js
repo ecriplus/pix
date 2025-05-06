@@ -176,6 +176,15 @@ class CertificationCenterMembershipDisableError extends DomainError {
   }
 }
 
+class CertificationAlgorithmVersionError extends DomainError {
+  constructor(
+    message = 'La version de la certification ne permet pas de réaliser cette opération',
+    code = 'CERTIFICATION_USING_INCORRECT_ALGORITHM_VERSION',
+  ) {
+    super(message, code);
+  }
+}
+
 class ChallengeAlreadyAnsweredError extends DomainError {
   constructor(message = 'La question a déjà été répondue.') {
     super(message);
@@ -1006,7 +1015,7 @@ class AuditLoggerApiError extends DomainError {
 }
 
 class NotFinalizedSessionError extends DomainError {
-  constructor(message = 'A certification course cannot be cancelled while session has not been finalized.') {
+  constructor(message = 'A certification course cannot be cancelled/rescored while session has not been finalized.') {
     super(message);
   }
 }
@@ -1041,6 +1050,7 @@ export {
   CandidateNotAuthorizedToResumeCertificationTestError,
   CantImproveCampaignParticipationError,
   CertificateVerificationCodeGenerationTooManyTrials,
+  CertificationAlgorithmVersionError,
   CertificationAttestationGenerationError,
   CertificationBadgeForbiddenDeletionError,
   CertificationCandidateByPersonalInfoNotFoundError,
