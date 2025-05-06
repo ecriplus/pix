@@ -11,7 +11,7 @@ describe('Evaluation | Unit | Infrastructure | Repositories | AnswerJobRepositor
       transacting: sinon.stub().resolves([{ rowCount: 1 }]),
     }));
     await featureToggles.set('isQuestEnabled', true);
-    config.featureToggles.isAsyncQuestRewardingCalculationEnabled = true;
+    await featureToggles.set('isAsyncQuestRewardingCalculationEnabled', true);
   });
 
   describe('#performAsync', function () {
@@ -44,7 +44,7 @@ describe('Evaluation | Unit | Infrastructure | Repositories | AnswerJobRepositor
       sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
         return callback();
       });
-      config.featureToggles.isAsyncQuestRewardingCalculationEnabled = false;
+      await featureToggles.set('isAsyncQuestRewardingCalculationEnabled', false);
       const userId = Symbol('userId');
       const answerJobRepository = new AnswerJobRepository({
         dependencies: { profileRewardTemporaryStorage: profileRewardTemporaryStorageStub },

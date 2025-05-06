@@ -1,6 +1,5 @@
 import { usecases } from '../../../../lib/domain/usecases/index.js';
 import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
-import { config } from '../../../shared/config.js';
 import { featureToggles } from '../../../shared/infrastructure/feature-toggles/index.js';
 import * as assessmentRepository from '../../../shared/infrastructure/repositories/assessment-repository.js';
 import * as requestResponseUtils from '../../../shared/infrastructure/utils/request-response-utils.js';
@@ -44,7 +43,7 @@ const save = async function (
   }
   if (
     userId &&
-    !config.featureToggles.isAsyncQuestRewardingCalculationEnabled &&
+    !(await featureToggles.get('isAsyncQuestRewardingCalculationEnabled')) &&
     (await featureToggles.get('isQuestEnabled'))
   ) {
     await questUsecases.rewardUser({ userId });
