@@ -101,7 +101,15 @@ class ClientApplicationsScript extends Script {
   }
 
   async list() {
-    console.table(await clientApplicationRepository.list());
+    const list = await clientApplicationRepository.list();
+    console.table(
+      list.map((clientApplication) => {
+        return {
+          ...clientApplication,
+          jurisdiction: JSON.stringify(clientApplication.jurisdiction),
+        };
+      }),
+    );
   }
 
   async add({ name, clientId, clientSecret, scope: scopes }, logger) {
