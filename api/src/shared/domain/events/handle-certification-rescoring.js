@@ -1,13 +1,13 @@
 /**
  * @typedef {import('./index.js').CertificationAssessmentRepository} CertificationAssessmentRepository
  */
+import CertificationRescored from '../../../certification/evaluation/domain/events/CertificationRescored.js';
 import { ChallengeDeneutralized } from '../../../certification/evaluation/domain/events/ChallengeDeneutralized.js';
 import { ChallengeNeutralized } from '../../../certification/evaluation/domain/events/ChallengeNeutralized.js';
 import { services } from '../../../certification/evaluation/domain/services/index.js';
 import { AssessmentResultFactory } from '../../../certification/scoring/domain/models/factories/AssessmentResultFactory.js';
 import { CertificationCourseRejected } from '../../../certification/session-management/domain/events/CertificationCourseRejected.js';
 import { CertificationJuryDone } from '../../../certification/session-management/domain/events/CertificationJuryDone.js';
-import CertificationRescored from '../../../certification/session-management/domain/events/CertificationRescored.js';
 import { AlgorithmEngineVersion } from '../../../certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { V3_REPRODUCIBILITY_RATE } from '../constants.js';
 import { CertificationComputeError } from '../errors.js';

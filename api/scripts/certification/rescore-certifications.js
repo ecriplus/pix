@@ -2,7 +2,7 @@ import 'dotenv/config';
 
 import Joi from 'joi';
 
-import CertificationRescored from '../../src/certification/session-management/domain/events/CertificationRescored.js';
+import CertificationRescored from '../../src/certification/evaluation/domain/events/CertificationRescored.js';
 import { csvFileParser } from '../../src/shared/application/scripts/parsers.js';
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';

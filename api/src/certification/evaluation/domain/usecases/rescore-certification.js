@@ -1,7 +1,7 @@
 import { CertificationAlgorithmVersionError, NotFinalizedSessionError } from '../../../../shared/domain/errors.js';
 import { SessionAlreadyPublishedError } from '../../../session-management/domain/errors.js';
-import CertificationRescored from '../../../session-management/domain/events/CertificationRescored.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
+import CertificationRescored from '../events/CertificationRescored.js';
 
 export const rescoreCertification = async ({
   certificationCourseId,

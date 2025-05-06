@@ -1,6 +1,6 @@
+import CertificationRescored from '../../../../../../src/certification/evaluation/domain/events/CertificationRescored.js';
 import { rescoreCertification } from '../../../../../../src/certification/evaluation/domain/usecases/rescore-certification.js';
 import { SessionAlreadyPublishedError } from '../../../../../../src/certification/session-management/domain/errors.js';
-import CertificationRescored from '../../../../../../src/certification/session-management/domain/events/CertificationRescored.js';
 import {
   CertificationAlgorithmVersionError,
   NotFinalizedSessionError,

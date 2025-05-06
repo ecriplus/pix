@@ -1,5 +1,5 @@
 import { RescoreCertificationScript } from '../../../../scripts/certification/rescore-certifications.js';
-import CertificationRescored from '../../../../src/certification/session-management/domain/events/CertificationRescored.js';
+import CertificationRescored from '../../../../src/certification/evaluation/domain/events/CertificationRescored.js';
 import { createTempFile, expect, sinon } from '../../../test-helper.js';
 
 describe('Integration | Scripts | Certification | rescore-certfication', function () {
