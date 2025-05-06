@@ -150,7 +150,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
       context('When there is a validated live alert for a challenge', function () {
         beforeEach(async function () {
           const user = databaseBuilder.factory.buildUser({ id: userId });
-          const certificationCenterId = databaseBuilder.factory.buildCertificationCenter({ isV3Pilot: true }).id;
+          const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
           const sessionId = databaseBuilder.factory.buildSession({
             certificationCenterId,
             version: SESSIONS_VERSIONS.V3,
