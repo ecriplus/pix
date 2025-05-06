@@ -1,5 +1,19 @@
 # Pix Changelog
 
+## v5.105.0 (06/05/2025)
+
+
+### :rocket: Amélioration
+- [#12137](https://github.com/1024pix/pix/pull/12137) [FEATURE] Améliorer l'UX de l'écran de connexion à l'espace surveillant (PIX-17460).
+- [#12183](https://github.com/1024pix/pix/pull/12183) [FEATURE] Retirer le feature toggle `isResultsSharedModalEnabled` (PIX-17336).
+
+### :building_construction: Tech
+- [#12216](https://github.com/1024pix/pix/pull/12216) [TECH] Remplacer l'API Data par l'usage du datamart (PIX-17718).
+- [#12161](https://github.com/1024pix/pix/pull/12161) [TECH]  utiliser des modèles intermédiaires pour la calcul du taux de couverture par tube et par comptétence (PIX-17700).
+
+### :bug: Correction
+- [#12223](https://github.com/1024pix/pix/pull/12223) [BUGFIX] Positionner le résultat global à partiellement atteint quand au moins une étape est réussie.
+
 ## v5.104.0 (05/05/2025)
 
 
