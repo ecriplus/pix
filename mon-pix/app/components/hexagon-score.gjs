@@ -1,0 +1,53 @@
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
+import { isNone } from '@ember/utils';
+import Component from '@glimmer/component';
+import t from 'ember-intl/helpers/t';
+
+export default class HexagonScore extends Component {
+  <template>
+    <div class="hexagon-score">
+      <div class="hexagon-score__content">
+        <div class="hexagon-score-content__title">{{t "common.pix"}}</div>
+        <div class="hexagon-score-content__pix-score">{{this.score}}</div>
+        <div class="hexagon-score-content__pix-total">
+          1024
+          <PixTooltip @isLight={{true}} @isWide={{true}} @position="left" @id="hexagon-score-tooltip">
+            <:triggerElement>
+              <button
+                aria-label={{t "pages.profile.total-score-helper.label"}}
+                type="button"
+                class="hexagon-score-content-pix-total__icon"
+                aria-describedby="hexagon-score-tooltip"
+              >
+                <PixIcon
+                  @name="info"
+                  @plainIcon={{true}}
+                  @ariaHidden={{true}}
+                  @title={{t "pages.profile.total-score-helper.icon"}}
+                />
+              </button>
+            </:triggerElement>
+            <:tooltip>
+              <p class="hexagon-score__information hexagon-score-information__text">
+                <span class="hexagon-score-information__text--strong">
+                  {{t "pages.profile.total-score-helper.title"}}
+                </span>
+                {{t
+                  "pages.profile.total-score-helper.explanation"
+                  maxReachablePixScore=@maxReachablePixScore
+                  maxReachableLevel=@maxReachableLevel
+                  htmlSafe=true
+                }}
+              </p>
+            </:tooltip>
+          </PixTooltip>
+        </div>
+      </div>
+    </div>
+  </template>
+  get score() {
+    const score = this.args.pixScore;
+    return isNone(score) || score === 0 ? '–' : Math.floor(score);
+  }
+}

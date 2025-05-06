@@ -1,9 +1,0 @@
-<Global::AppLayout>
-  <main id="main" class="global-page-container" role="main">
-    {{#if this.displayV3CandidateCertificate}}
-      <Certifications::CandidateCertificate::v3Certificate @certificate={{this.model}} />
-    {{else}}
-      <Certifications::CandidateCertificate::v2Certificate @model={{this.model}} />
-    {{/if}}
-  </main>
-</Global::AppLayout>

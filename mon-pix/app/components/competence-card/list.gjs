@@ -1,0 +1,10 @@
+import CompetenceCard from 'mon-pix/components/competence-card';
+<template>
+  <ul class="competence-card-list">
+    {{#each @scorecards as |scorecard index|}}
+      <li class="competence-card-list__competence-card competence-card-list__competence-card--{{index}}">
+        <CompetenceCard @scorecard={{scorecard}} @interactive={{true}} />
+      </li>
+    {{/each}}
+  </ul>
+</template>

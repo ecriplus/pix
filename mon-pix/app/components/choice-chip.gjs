@@ -1,0 +1,6 @@
+import { LinkTo } from '@ember/routing';
+<template>
+  <LinkTo @route={{@route}} class="pix-choice-chip" @activeClass="pix-choice-chip--active" ...attributes>
+    {{yield}}
+  </LinkTo>
+</template>

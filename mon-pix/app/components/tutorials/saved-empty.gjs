@@ -1,0 +1,14 @@
+import t from 'ember-intl/helpers/t';
+<template>
+  <div class="user-tutorials-content__saved-empty">
+    <img src="/images/illustrations/user-tutorials/saved-empty.png" alt />
+    <div>
+      <h2 class="user-tutorials-saved-empty__title">
+        {{t "pages.user-tutorials.saved-empty.title"}}
+      </h2>
+      <p class="user-tutorials-saved-empty__description">
+        {{t "pages.user-tutorials.saved-empty.description"}}
+      </p>
+    </div>
+  </div>
+</template>

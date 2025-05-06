@@ -1,0 +1,31 @@
+import t from 'ember-intl/helpers/t';
+import NewInformation from 'mon-pix/components/new-information';
+<template>
+  {{#if @show}}
+    <section class="dashboard-banner">
+      {{#unless @hasSeenNewDashboardInfo}}
+        <NewInformation
+          @information="{{t 'pages.dashboard.presentation.message' htmlSafe=true}}"
+          @image="/images/illustrations/discovery_TDB_pix.svg"
+          @variantClass="new-information--blue-gradient-background"
+          @textColorClass="new-information--white-text"
+          @linkText="{{@newDashboardInfoLink.text}}"
+          @linkTo="{{@newDashboardInfoLink.url}}"
+          @closeAction={{@closeInformationAboutNewDashboard}}
+        />
+      {{/unless}}
+      {{#if @code}}
+        <NewInformation
+          @information="{{t 'pages.dashboard.campaigns.resume.text'}}"
+          @image="/images/profile_collect_TDB_pix.svg"
+          @variantClass="new-information--yellow-gradient-background"
+          @textColorClass="new-information--black-text"
+          @linkDisplayType="button"
+          @linkText="{{t 'pages.dashboard.campaigns.resume.action'}}"
+          @linkTo="campaigns.profiles-collection.start-or-resume"
+          @code={{@code}}
+        />
+      {{/if}}
+    </section>
+  {{/if}}
+</template>

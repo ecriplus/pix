@@ -56,7 +56,7 @@
     "@ember-data/model": "^5.3.8",
     "@ember/optional-features": "^2.1.0",
     "@ember/string": "^3.1.1",
-    "@ember/test-helpers": "^4.0.0",
+    "@ember/test-helpers": "^5.2.1",
     "@embroider/compat": "^3.0.0",
     "@embroider/core": "^3.0.0",
     "@embroider/macros": "^1.13.5",
@@ -98,7 +98,7 @@
     "ember-resolver": "^13.0.0",
     "ember-responsive": "^5.0.0",
     "ember-simple-auth": "^8.0.0",
-    "ember-source": "^6.0.0",
+    "ember-source": "^6.3.0",
     "ember-template-imports": "^4.1.1",
     "ember-template-lint": "^7.0.0",
     "ember-template-lint-plugin-prettier": "^5.0.0",
@@ -134,12 +134,21 @@
   },
   "overrides": {
     "ember-eslint-parser": "$ember-eslint-parser",
-    "ember-source": "$ember-source",
+    "ember-intl": {
+      "@ember/test-helpers": "$@ember/test-helpers"
+    },
+    "ember-data": {
+      "@ember/test-helpers": "$@ember/test-helpers"
+    },
     "ember-dayjs": {
       "ember-source": "$ember-source"
     },
     "@ember/render-modifiers": {
       "ember-source": "$ember-source"
     }
+  },
+  "exports": {
+    "./tests/*": "./tests/*",
+    "./*": "./app/*"
   }
 }

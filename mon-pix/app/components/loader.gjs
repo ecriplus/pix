@@ -1,0 +1,8 @@
+<template>
+  <div class="app-loader">
+    <p class="app-loader__image">
+      <img src="/images/interwind.gif" alt />
+    </p>
+    <p class="app-loader__text">{{@loaderText}}</p>
+  </div>
+</template>

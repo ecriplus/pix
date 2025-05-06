@@ -1,0 +1,353 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixModal from '@1024pix/pix-ui/components/pix-modal';
+import { A as EmberArray } from '@ember/array';
+import EmberObject, { action } from '@ember/object';
+import { service } from '@ember/service';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import t from 'ember-intl/helpers/t';
+import CircleChart from 'mon-pix/components/circle-chart';
+import Card from 'mon-pix/components/tutorials/card';
+import inc from 'mon-pix/helpers/inc';
+import replaceZeroByDash from 'mon-pix/helpers/replace-zero-by-dash';
+import scorecardAriaLabel from 'mon-pix/helpers/scorecard-aria-label';
+
+export default class ScorecardDetails extends Component {
+  <template>
+    <div>
+      <section class="scorecard-details__header">
+        <PixButtonLink
+          @route="authenticated.profile"
+          @variant="tertiary"
+          @iconBefore="arrowLeft"
+          class="scorecard-details-header__back-button"
+        >
+          {{t "navigation.back-to-profile"}}
+        </PixButtonLink>
+      </section>
+
+      <section class="scorecard-details__competence">
+        <div class="scorecard-details-competence__details">
+          <h1 class="scorecard-details-competence-details__name">
+            {{@scorecard.name}}
+          </h1>
+          <div class="scorecard-details-competence-details__description">
+            {{@scorecard.description}}
+          </div>
+        </div>
+
+        <div class="scorecard-details-content__score">
+          {{#if @scorecard.isFinished}}
+            <div class="scorecard-details-content-score__score-container">
+              {{#if this.displayCongrats}}
+                <div class="competence-card__congrats">
+                  <div class="competence-card__level competence-card__level--congrats">
+                    <span class="score-label competence-card__score-label--congrats">{{t "common.level"}}</span>
+                    <span
+                      class="score-value competence-card__score-value competence-card__score-value--congrats"
+                    >{{@scorecard.level}}</span>
+                  </div>
+                </div>
+              {{else}}
+                <CircleChart
+                  @value={{@scorecard.capedPercentageAheadOfNextLevel}}
+                  @sliceColor={{@scorecard.area.color}}
+                  @chartClass="circle-chart--big"
+                  @thicknessClass="circle--thick"
+                  role="img"
+                  aria-label="{{scorecardAriaLabel @scorecard}}"
+                >
+                  <div class="competence-card__level">
+                    <span class="score-label">{{t "common.level"}}</span>
+                    <span class="score-value">{{replaceZeroByDash @scorecard.level}}</span>
+                  </div>
+                </CircleChart>
+              {{/if}}
+
+              <div class="pix-earned">
+                <div class="score-label">{{t "common.pix"}}</div>
+                <div class="score-value">{{replaceZeroByDash @scorecard.earnedPix}}</div>
+              </div>
+            </div>
+
+            {{#if this.displayImprovingWaitSentence}}
+              <div class="scorecard-details__improvement-countdown">
+                <div class="scorecard-details-improvement-countdown__label">{{t
+                    "pages.competence-details.actions.improve.description.waiting-text"
+                  }}</div>
+                <strong class="scorecard-details-improvement-countdown__count">{{t
+                    "pages.competence-details.actions.improve.description.countdown"
+                    daysBeforeImproving=@scorecard.remainingDaysBeforeImproving
+                  }}</strong>
+              </div>
+            {{/if}}
+
+            {{#if this.displayImprovingButton}}
+              <PixButton
+                class="scorecard-details__improve-button"
+                @variant="success"
+                @size="large"
+                @triggerAction={{this.improveCompetenceEvaluation}}
+              >
+                {{t "pages.competence-details.actions.improve.label"}}
+                <span class="sr-only">{{t "pages.competence-details.for-competence" competence=@scorecard.name}}</span>
+              </PixButton>
+              <div class="scorecard-details__improving-text">{{t
+                  "pages.competence-details.actions.improve.improvingText"
+                }}</div>
+            {{/if}}
+
+            {{#if this.displayResetButton}}
+              <PixButton
+                id="reset-button-finished"
+                class="scorecard-details__reset-button"
+                @variant="secondary"
+                @triggerAction={{this.openModal}}
+              >
+                {{t "pages.competence-details.actions.reset.label"}}
+                <span class="sr-only">{{t "pages.competence-details.for-competence" competence=@scorecard.name}}</span>
+              </PixButton>
+            {{/if}}
+
+            {{#if this.displayResetWaitSentence}}
+              <p class="scorecard-details-content-score__reset-message">{{t
+                  "pages.competence-details.actions.reset.description"
+                  daysBeforeReset=@scorecard.remainingDaysBeforeReset
+                }}</p>
+            {{/if}}
+          {{/if}}
+
+          {{#if @scorecard.isStarted}}
+            <div class="scorecard-details-content-score__score-container">
+              <CircleChart
+                @value={{@scorecard.capedPercentageAheadOfNextLevel}}
+                @sliceColor={{@scorecard.area.color}}
+                @chartClass="circle-chart--big"
+                @thicknessClass="circle--thick"
+                role="img"
+                aria-label="{{scorecardAriaLabel @scorecard}}"
+              >
+                <div class="competence-card__level">
+                  <span class="score-label">{{t "common.level"}}</span>
+                  <span class="score-value">{{replaceZeroByDash @scorecard.level}}</span>
+                </div>
+              </CircleChart>
+
+              <div class="pix-earned">
+                <div class="score-label">{{t "common.pix"}}</div>
+                <div class="score-value">{{replaceZeroByDash @scorecard.earnedPix}}</div>
+              </div>
+            </div>
+
+            {{#if this.displayRemainingPixToNextLevel}}
+              <div class="scorecard-details-content-score__level-info">
+                {{t
+                  "pages.competence-details.next-level-info"
+                  remainingPixToNextLevel=@scorecard.remainingPixToNextLevel
+                  level=(inc @scorecard.level)
+                }}
+              </div>
+            {{/if}}
+
+            <PixButtonLink
+              class="scorecard-details__resume-button"
+              @route="authenticated.competences.resume"
+              @model={{@scorecard.competenceId}}
+              @size="large"
+            >
+              {{t "pages.competence-details.actions.continue.label"}}
+              <span class="sr-only">{{t "pages.competence-details.for-competence" competence=@scorecard.name}}</span>
+            </PixButtonLink>
+
+            {{#if this.displayResetButton}}
+              <PixButton
+                id="reset-button-started"
+                class="scorecard-details__reset-button"
+                @variant="secondary"
+                @triggerAction={{this.openModal}}
+              >
+                {{t "pages.competence-details.actions.reset.label"}}
+                <span class="sr-only">{{t "pages.competence-details.for-competence" competence=@scorecard.name}}</span>
+              </PixButton>
+            {{/if}}
+
+            {{#if this.displayResetWaitSentence}}
+              <p class="scorecard-details-content-score__reset-message">{{t
+                  "pages.competence-details.actions.reset.description"
+                  daysBeforeReset=@scorecard.remainingDaysBeforeReset
+                }}</p>
+            {{/if}}
+          {{/if}}
+
+          {{#if @scorecard.isNotStarted}}
+            <PixButtonLink
+              class="scorecard-details__start-button"
+              @route="authenticated.competences.resume"
+              @model={{@scorecard.competenceId}}
+              @size="large"
+              @variant="success"
+            >
+              {{t "pages.competence-details.actions.start.label"}}
+              <span class="sr-only">{{t "pages.competence-details.for-competence" competence=@scorecard.name}}</span>
+            </PixButtonLink>
+          {{/if}}
+        </div>
+      </section>
+
+      {{#if this.tutorialsGroupedByTubeName}}
+        <section class="scorecard-details__tutorials">
+          <div class="scorecard-details-tutorials__header">
+            <h2 class="scorecard-details-tutorials-header__title">{{t "pages.competence-details.tutorials.title"}}</h2>
+            <p class="scorecard-details-tutorials-header__description">{{t
+                "pages.competence-details.tutorials.description"
+              }}</p>
+          </div>
+          <ul class="scorecard-details-tutorials__list">
+            {{#each this.tutorialsGroupedByTubeName as |tube|}}
+              <li class="tube">
+                <h3 class="tube__title">{{tube.practicalTitle}}</h3>
+                <ul class="tube__content">
+                  {{#each tube.tutorials as |tutorial|}}
+                    <Card @tutorial={{tutorial}} />
+                  {{/each}}
+                </ul>
+              </li>
+            {{/each}}
+          </ul>
+        </section>
+      {{/if}}
+
+    </div>
+    <PixModal
+      @title={{t "pages.competence-details.actions.reset.modal.title" scoreCardName=@scorecard.name}}
+      @onCloseButtonClick={{this.closeModal}}
+      @showModal={{this.showResetModal}}
+    >
+      <:content>
+        <h2 class="scorecard-details-reset-modal__important-message">
+          {{#if @scorecard.hasNotReachedLevelOne}}
+            {{t
+              "pages.competence-details.actions.reset.modal.important-message"
+              earnedPix=@scorecard.earnedPix
+              scoreCardName=@scorecard.name
+            }}
+          {{else if @scorecard.hasReachedAtLeastLevelOne}}
+            {{t
+              "pages.competence-details.actions.reset.modal.important-message-above-level-one"
+              level=@scorecard.level
+              earnedPix=@scorecard.earnedPix
+              scoreCardName=@scorecard.name
+            }}
+          {{/if}}
+        </h2>
+        <div class="scorecard-details-reset-modal__warning">
+          <p>{{t "pages.competence-details.actions.reset.modal.warning.header"}}</p>
+          <ul class="scorecard-details-reset-modal__list">
+            <li class="scorecard-details-reset-modal-list__item">{{t
+                "pages.competence-details.actions.reset.modal.warning.ongoing-assessment"
+              }}</li>
+            <li class="scorecard-details-reset-modal-list__item">{{t
+                "pages.competence-details.actions.reset.modal.warning.certification"
+              }}</li>
+          </ul>
+        </div>
+      </:content>
+      <:footer>
+        <div class="scorecard-details-reset-modal__footer">
+          <PixButton @variant="secondary" @triggerAction={{this.closeModal}}>
+            {{t "common.actions.cancel"}}
+          </PixButton>
+          <PixButton id="pix-modal-footer__button-reset" @variant="error" @triggerAction={{this.reset}}>
+            {{t "pages.competence-details.actions.reset.label"}}
+          </PixButton>
+        </div>
+      </:footer>
+    </PixModal>
+  </template>
+  @service currentUser;
+  @service store;
+  @service router;
+  @service competenceEvaluation;
+  @service featureToggles;
+
+  @tracked showResetModal = false;
+
+  get displayImprovingWaitSentence() {
+    return !this.args.scorecard.isImprovable && !this.args.scorecard.isFinishedWithMaxLevel;
+  }
+
+  get displayImprovingButton() {
+    return this.args.scorecard.isImprovable;
+  }
+
+  get displayCongrats() {
+    return this.args.scorecard.isFinishedWithMaxLevel;
+  }
+
+  get displayRemainingPixToNextLevel() {
+    return this.args.scorecard.isProgressable;
+  }
+
+  get displayResetWaitSentence() {
+    return !this.args.scorecard.isResettable;
+  }
+
+  get displayResetButton() {
+    return this.args.scorecard.isResettable;
+  }
+
+  get tutorialsGroupedByTubeName() {
+    const tutorialsGroupedByTubeName = EmberArray();
+    const tutorials = this.args.scorecard.tutorials;
+
+    if (tutorials) {
+      tutorials.forEach((tutorial) => {
+        const foundTube = tutorialsGroupedByTubeName.findBy('name', tutorial.tubeName);
+
+        if (!foundTube) {
+          const tube = EmberObject.create({
+            name: tutorial.tubeName,
+            practicalTitle: tutorial.tubePracticalTitle,
+            tutorials: [tutorial],
+          });
+          tutorialsGroupedByTubeName.pushObject(tube);
+        } else {
+          foundTube.tutorials.push(tutorial);
+        }
+      });
+    }
+    return tutorialsGroupedByTubeName;
+  }
+
+  @action
+  openModal() {
+    this.showResetModal = true;
+  }
+
+  @action
+  closeModal() {
+    this.showResetModal = false;
+  }
+
+  @action
+  reset() {
+    this.args.scorecard.save({
+      adapterOptions: {
+        resetCompetence: true,
+        userId: this.currentUser.user.id,
+        competenceId: this.args.scorecard.competenceId,
+      },
+    });
+
+    this.showResetModal = false;
+  }
+
+  @action
+  async improveCompetenceEvaluation() {
+    const userId = this.currentUser.user.id;
+    const competenceId = this.args.scorecard.competenceId;
+    const scorecardId = this.args.scorecard.id;
+    return this.competenceEvaluation.improve({ userId, competenceId, scorecardId });
+  }
+}
