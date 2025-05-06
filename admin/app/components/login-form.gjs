@@ -13,6 +13,11 @@ import set from 'ember-set-helper/helpers/set';
 import get from 'lodash/get';
 import ENV from 'pix-admin/config/environment';
 
+// For example:
+// https://assets.pix.org/sso-logos/sso-logo-PIXADMIN-PROCONNECT.svg
+const SSO_LOGO_BASE_URL = 'https://assets.pix.org/sso-logos/';
+const SSO_LOGO_BASE_FILE_PREFIX = 'sso-logo-';
+
 export default class LoginForm extends Component {
   @service url;
   @service intl;
@@ -23,8 +28,16 @@ export default class LoginForm extends Component {
   @tracked errorMessage;
   @service oidcIdentityProviders;
 
-  get isGoogleIdentityProviderEnabled() {
-    return this.oidcIdentityProviders.isProviderEnabled('google');
+  get useSsoProviders() {
+    return this.oidcIdentityProviders.hasIdentityProviders;
+  }
+
+  get ssoProviders() {
+    return this.oidcIdentityProviders.list;
+  }
+
+  getSsoLogoUrl(ssoProvider) {
+    return `${SSO_LOGO_BASE_URL}${SSO_LOGO_BASE_FILE_PREFIX}${ssoProvider.code}.svg`;
   }
 
   @action
@@ -86,12 +99,20 @@ export default class LoginForm extends Component {
 
     <section class="login-page__section--login-form">
       <form class="login-form" {{on "submit" this.authenticateUser}}>
-        {{#if this.isGoogleIdentityProviderEnabled}}
-          <LinkTo @route="authentication.login-oidc" @model="google" class="login-form__oidc-connect-link">
-            <img src="/google-logo.svg" alt="" class="login-form__oidc-connect-link__logo" />
-            <span class="login-form__oidc-connect-link__label">{{t "pages.login.google.label"}}</span>
-          </LinkTo>
-
+        {{#if this.useSsoProviders}}
+          {{#each this.ssoProviders as |ssoProvider|}}
+            <LinkTo
+              @route="authentication.login-oidc"
+              @model="{{ssoProvider.slug}}"
+              class="login-form__oidc-connect-link"
+            >
+              <img src="{{this.getSsoLogoUrl ssoProvider}}" alt="" class="login-form__oidc-connect-link__logo" />
+              <span class="login-form__oidc-connect-link__label">{{t
+                  "pages.login.authenticate-with-sso-provider"
+                  ssoProviderName=ssoProvider.organizationName
+                }}</span>
+            </LinkTo>
+          {{/each}}
           {{#if @userShouldCreateAnAccount}}
             <PixNotificationAlert @type="error">
               Vous n'avez pas de compte Pix.

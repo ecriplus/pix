@@ -8,6 +8,7 @@ import { reject } from 'rsvp';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
+
 const ApiErrorMessages = ENV.APP.API_ERROR_MESSAGES;
 
 module('Integration | Component | login-form', function (hooks) {
@@ -22,7 +23,7 @@ module('Integration | Component | login-form', function (hooks) {
     assert.dom(screen.getByText("L'accès à Pix Admin est limité aux administrateurs de la plateforme")).exists();
   });
 
-  module('when google identity provider is disabled', function () {
+  module('when there is no identity provider enabled for Pix Admin', function () {
     test('it displays an email/password login form', async function (assert) {
       // given
       class IdentityProviderServiceStub extends Service {
@@ -43,26 +44,39 @@ module('Integration | Component | login-form', function (hooks) {
     });
   });
 
-  module('when google identity provider is enabled', function (hooks) {
+  module('when there is an identity provider enabled for Pix Admin', function (hooks) {
     hooks.beforeEach(function () {
-      class IdentityProviderServiceStub extends Service {
+      const oidcPartner = {
+        id: 'oidc-partner',
+        slug: 'oidc-partner',
+        code: 'OIDC_PARTNER',
+        organizationName: 'Partenaire OIDC',
+      };
+      class OidcIdentityProvidersStub extends Service {
+        'oidc-partner' = oidcPartner;
+        list = [oidcPartner];
+        hasIdentityProviders = true;
         isProviderEnabled = sinon.stub();
       }
-      this.owner.register('service:oidcIdentityProviders', IdentityProviderServiceStub);
-      const identityProvidersServiceStub = this.owner.lookup('service:oidcIdentityProviders');
-      identityProvidersServiceStub.isProviderEnabled.withArgs('google').returns(true);
+      this.owner.register('service:oidcIdentityProviders', OidcIdentityProvidersStub);
     });
 
-    test('displays a "login with google" button', async function (assert) {
+    test('displays a "login with SSO" button', async function (assert) {
       // when
       const screen = await render(<template><LoginForm /></template>);
 
-      // then
-      assert.dom(screen.getByRole('link', { name: 'Se connecter avec Google' })).exists();
+      assert
+        .dom(
+          screen.getByRole('link', {
+            name: t('pages.login.authenticate-with-sso-provider', { ssoProviderName: 'Partenaire OIDC' }),
+          }),
+        )
+        .exists();
+
       assert.dom(screen.queryByRole('button', { name: 'Je me connecte' })).doesNotExist();
     });
 
-    module('when user has no pix account', function () {
+    module('when user has no Pix account', function () {
       test('displays a specific error message', async function (assert) {
         // given
         const userShouldCreateAnAccount = true;
@@ -77,7 +91,7 @@ module('Integration | Component | login-form', function (hooks) {
       });
     });
 
-    module('when user has no pix access rights', function () {
+    module('when user has no Pix access rights', function () {
       test('displays a specific error message', async function (assert) {
         // given
         const userShouldRequestAccess = true;
