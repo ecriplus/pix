@@ -1,15 +1,16 @@
 import { AnswerJobRepository } from '../../../../../src/evaluation/infrastructure/repositories/answer-job-repository.js';
 import { config } from '../../../../../src/shared/config.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
+import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Evaluation | Unit | Infrastructure | Repositories | AnswerJobRepository', function () {
-  beforeEach(function () {
+  beforeEach(async function () {
     sinon.stub(config, 'featureToggles');
     sinon.stub(knex, 'batchInsert').callsFake(() => ({
       transacting: sinon.stub().resolves([{ rowCount: 1 }]),
     }));
-    config.featureToggles.isQuestEnabled = true;
+    await featureToggles.set('isQuestEnabled', true);
     config.featureToggles.isAsyncQuestRewardingCalculationEnabled = true;
   });
 
@@ -22,7 +23,7 @@ describe('Evaluation | Unit | Infrastructure | Repositories | AnswerJobRepositor
       sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
         return callback();
       });
-      config.featureToggles.isQuestEnabled = false;
+      await featureToggles.set('isQuestEnabled', false);
       const userId = Symbol('userId');
       const answerJobRepository = new AnswerJobRepository({
         dependencies: { profileRewardTemporaryStorage: profileRewardTemporaryStorageStub },

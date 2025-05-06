@@ -10,10 +10,10 @@ import { Answer } from '../../../evaluation/domain/models/Answer.js';
 import { evaluationUsecases } from '../../../evaluation/domain/usecases/index.js';
 import * as competenceEvaluationSerializer from '../../../evaluation/infrastructure/serializers/jsonapi/competence-evaluation-serializer.js';
 import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
-import { config } from '../../config.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { AssessmentEndedError } from '../../domain/errors.js';
 import { sharedUsecases } from '../../domain/usecases/index.js';
+import { featureToggles } from '../../infrastructure/feature-toggles/index.js';
 import * as assessmentRepository from '../../infrastructure/repositories/assessment-repository.js';
 import * as assessmentSerializer from '../../infrastructure/serializers/jsonapi/assessment-serializer.js';
 import * as challengeSerializer from '../../infrastructure/serializers/jsonapi/challenge-serializer.js';
@@ -71,7 +71,7 @@ const completeAssessment = async function (request) {
     const assessment = await usecases.completeAssessment({ assessmentId, locale });
     await evaluationUsecases.handleBadgeAcquisition({ assessment });
     await evaluationUsecases.handleStageAcquisition({ assessment });
-    if (assessment.userId && config.featureToggles.isQuestEnabled) {
+    if (assessment.userId && (await featureToggles.get('isQuestEnabled'))) {
       await questUsecases.rewardUser({ userId: assessment.userId });
     }
 
