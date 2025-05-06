@@ -19,9 +19,14 @@ const ORGANIZATIONS_TABLE_NAME = 'organizations';
  * @param {Object} params
  * @param {string|number} params.id
  * @param {string|number} params.archivedBy
- * @return {Promise<void|MissingAttributesError>}
+ * @return {Promise<void|MissingAttributesError|NotFoundError>}
  */
 const archive = async function ({ id, archivedBy }) {
+  const organization = await knex(ORGANIZATIONS_TABLE_NAME).where({ id }).first();
+  if (!organization) {
+    throw new NotFoundError();
+  }
+
   if (!archivedBy) {
     throw new MissingAttributesError();
   }
