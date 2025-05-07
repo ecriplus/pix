@@ -540,6 +540,14 @@
       },
       "title": "Activité"
     },
+    "campaign-analysis": {
+      "title": "Analyse",
+      "description": {
+        "resume": "Analysez, globalement et par sujet, le positionnement de vos participants dans la campagne.",
+        "explanation": "Chaque parcours évalue sur une sélection de compétences numériques du référentiel Pix. Le positionnement reflète le niveau moyen atteint par les participants par rapport au niveau maximal accessible dans le cadre du parcours.",
+        "nota-bene": "Toutes les données présentées proviennent des participations partagées et non-supprimées des campagnes d’évaluation, et sont actualisées en temps réel."
+      }
+    },
     "campaign-creation": {
       "actions": {
         "create": "Créer la campagne",

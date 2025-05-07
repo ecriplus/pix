@@ -540,6 +540,14 @@
       },
       "title": "Activity"
     },
+    "campaign-analysis": {
+      "title": "Analysis",
+      "description": {
+        "resume": "Analyse, overall and by topic, the positioning of your participants.",
+        "explanation": "Each test assesses a selection of digital skills from the Pix reference framework. Positioning reflects the average level achieved by participants in relation to the maximum level achievable on the test.",
+        "nota-bene": "All the data presented comes from shared and undeleted participation in assessment campaigns, and is updated in real time."
+      }
+    },
     "campaign-creation": {
       "actions": {
         "create": "Create a campaign",
