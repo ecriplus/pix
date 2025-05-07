@@ -212,7 +212,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
     });
 
     module('when the user self-assesses their response', function () {
-      test('should display the next card and send self-assessment', async function (assert) {
+      test('should display the next card and send self-assessment event', async function (assert) {
         // given
         const { flashcards } = _getFlashcards();
 
@@ -232,6 +232,13 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
         assert.ok(screen.getByText('Qui a écrit le Dormeur du Val ?'));
         assert.ok(screen.getByText(t('pages.modulix.flashcards.position', { currentCardPosition: 2, totalCards: 2 })));
         assert.true(onSelfAssessmentStub.calledOnce);
+
+        assert.ok(
+          passageEventsService.record.calledWith({
+            type: 'FLASHCARDS_CARD_AUTO_ASSESSED',
+            data: { autoAssessment: 'no', cardId: 'e1de6394-ff88-4de3-8834-a40057a50ff4', elementId: '71de6394-ff88-4de3-8834-a40057a50ff4' },
+          }),
+        );
       });
     });
 
