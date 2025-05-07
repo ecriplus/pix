@@ -95,12 +95,12 @@ const register = async function (server) {
                           meanLevel: Joi.number().description('Niveau moyen obtenu dans cette campagne'),
                           practicalDescription: Joi.string().description('Description du sujet'),
                           practicalTitle: Joi.string().description('Titre du sujet'),
-                        }).label('Tube'),
+                        }).label('CampaignTube'),
                       )
+                      .label('CampaignTubes')
                       .description(
                         'Sujets évalués dans la campagne, null si le type de la campagne est `PROFILES_COLLECTION`',
-                      )
-                      .label('Tubes'),
+                      ),
                   }).label('Campaign'),
                 )
                 .label('Campaigns'),
@@ -109,7 +109,7 @@ const register = async function (server) {
                 size: Joi.number().description('Taille de la page courante'),
                 count: Joi.number().description('Nombre total de page'),
               }).description('Information de pagination'),
-            }),
+            }).label('CampaignsResult'),
             401: responseObjectErrorDoc,
             403: responseObjectErrorDoc,
           },
