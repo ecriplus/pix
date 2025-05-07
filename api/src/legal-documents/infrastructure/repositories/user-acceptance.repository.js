@@ -74,4 +74,9 @@ const update = async function (properties) {
   await knexConn(TABLE_NAME).where({ id }).update(data);
 };
 
-export { create, findByLegalDocumentVersionId, findByUserId, findLastForLegalDocument, update };
+const removeAllByUserId = async function (userId) {
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn(TABLE_NAME).where({ userId }).delete();
+};
+
+export { create, findByLegalDocumentVersionId, findByUserId, findLastForLegalDocument, removeAllByUserId, update };

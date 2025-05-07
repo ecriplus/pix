@@ -67,7 +67,7 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
     databaseBuilder.factory.buildOrganizationLearner({ userId, organizationId: managingStudentsOrga.id });
 
     const legalDocumentVersion = databaseBuilder.factory.buildLegalDocumentVersion({ service: PIX_ORGA, type: TOS });
-    const userAcceptanceId = databaseBuilder.factory.buildLegalDocumentVersionUserAcceptance({
+    databaseBuilder.factory.buildLegalDocumentVersionUserAcceptance({
       userId: user.id,
       legalDocumentVersionId: legalDocumentVersion.id,
       acceptedAt: new Date('2023-03-23T23:23:23Z'),
@@ -132,10 +132,8 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
     const organizationLearners = await knex('organization-learners').where({ userId });
     expect(organizationLearners).to.have.lengthOf(0);
 
-    const userAcceptance = await knex('legal-document-version-user-acceptances')
-      .where({ id: userAcceptanceId })
-      .first();
-    expect(userAcceptance.acceptedAt.toISOString()).to.equal('2023-03-01T00:00:00.000Z');
+    const userAcceptance = await knex('legal-document-version-user-acceptances').where({ userId: user.id }).first();
+    expect(userAcceptance).to.be.undefined;
 
     const anonymizedUserLogin = await knex('user-logins').where({ id: userLogin.id }).first();
     expect(anonymizedUserLogin.createdAt.toISOString()).to.equal('2012-12-01T00:00:00.000Z');
