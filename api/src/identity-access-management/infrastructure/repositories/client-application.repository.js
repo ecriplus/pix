@@ -1,3 +1,5 @@
+import Joi from 'joi';
+
 import { knex } from '../../../../db/knex-database-connection.js';
 import { MissingClientApplicationScopesError } from '../../domain/errors.js';
 import { ClientApplication } from '../../domain/models/ClientApplication.js';
@@ -16,8 +18,20 @@ export const clientApplicationRepository = {
     return dtos.map(toDomain);
   },
 
-  async create({ name, clientId, clientSecret, scopes }) {
-    await knex.insert({ name, clientId, clientSecret, scopes }).into(TABLE_NAME);
+  async create({ name, clientId, clientSecret, scopes, jurisdiction }) {
+    const jurisdictionSchema = Joi.object({
+      rules: Joi.array()
+        .items(
+          Joi.object({
+            name: Joi.string().valid('tags').required(),
+            value: Joi.array().items(Joi.string()).required().min(1),
+          }).required(),
+        )
+        .required()
+        .min(1),
+    });
+    await jurisdictionSchema.validateAsync(jurisdiction);
+    await knex.insert({ name, clientId, clientSecret, scopes, jurisdiction }).into(TABLE_NAME);
   },
 
   async removeByClientId(clientId) {
