@@ -118,6 +118,17 @@
         "title": "Création de campagnes en masse",
         "upload-button": "Importer un fichier CSV"
       },
+      "certification-centers-batch-archive": {
+        "description": "Permet d'archiver des centres de certification par lot. Chaque ligne doit porter l'identifiant du centre de certification à archiver.",
+        "notifications": {
+          "errors": {
+            "error-in-batch": "L'archivage d'un des centres de certification a échoué. Le centre concerné est à la ligne {currentLine} du fichier comportant {totalLines} lignes. Corrigez la ligne concernée et ré-importez le fichier."
+          },
+          "success": "Les centres de certification ont bien été archivés."
+        },
+        "title": "Archivage des centres de certification en masse",
+        "upload-button": "Importer un fichier CSV"
+      },
       "oidc-providers-import": {
         "description": "Note: Chercher à importer à nouveau des OIDC Providers déjà existants renverrait une erreur.",
         "notifications": {

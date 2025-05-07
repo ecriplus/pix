@@ -118,6 +118,17 @@
         "title": "Creation of mass campaigns",
         "upload-button": "Import a CSV file"
       },
+      "certification-centers-batch-archive": {
+        "description": "Archive certification centers in batch. Each line must contain a certification center ID to archive.",
+        "notifications": {
+          "errors": {
+            "error-in-batch": "The certification centers archiving has failed. The certification center ID line n°{currentLine} failed, out of {totalLines} lines."
+          },
+          "success": "The certification centers have been archived."
+        },
+        "title": "Archiving of certification centers in batch",
+        "upload-button": "Import a CSV file"
+      },
       "oidc-providers-import": {
         "description": "Note: Trying to import already existing OIDC Providers would produce an error.",
         "notifications": {
