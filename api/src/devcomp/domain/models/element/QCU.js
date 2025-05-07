@@ -3,7 +3,7 @@ import { ModuleInstantiationError } from '../../errors.js';
 import { Element } from './Element.js';
 
 class QCU extends Element {
-  constructor({ id, instruction, locales, proposals, type= 'qcu' }) {
+  constructor({ id, instruction, locales, proposals, type = 'qcu' }) {
     super({ id, type });
 
     assertNotNullOrUndefined(instruction, 'The instruction is required for a QCU');
