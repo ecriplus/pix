@@ -1,0 +1,33 @@
+@use 'pix-design-tokens/typography';
+
+.analysis-per-tubes-and-competences {
+  &__positioning-title {
+    @extend %pix-title-s;
+
+    margin-bottom: var(--pix-spacing-6x);
+  }
+
+  &__competence-title {
+    @extend %pix-title-xxs;
+
+    margin-bottom: var(--pix-spacing-3x);
+  }
+
+  &__competence-table {
+    margin-bottom: var(--pix-spacing-6x);
+  }
+
+  &__tube-title {
+    @extend %pix-body-s;
+
+    display: block;
+    margin-bottom: var(--pix-spacing-2x);
+    font-weight: var(--pix-font-bold);
+  }
+
+  &__tube-description {
+    @extend %pix-body-s;
+
+    display: block;
+  }
+}
