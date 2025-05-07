@@ -16,8 +16,8 @@ export const clientApplicationRepository = {
     return dtos.map(toDomain);
   },
 
-  async create({ name, clientId, clientSecret, scopes }) {
-    await knex.insert({ name, clientId, clientSecret, scopes }).into(TABLE_NAME);
+  async create({ name, clientId, clientSecret, scopes, jurisdiction }) {
+    await knex.insert({ name, clientId, clientSecret, scopes, jurisdiction }).into(TABLE_NAME);
   },
 
   async removeByClientId(clientId) {

@@ -77,6 +77,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         clientId: 'clientId-appli0',
         clientSecret: 'secret-app0',
         scopes: ['scope0'],
+        jurisdiction: { rules: [{ name: 'tags', value: ['COLLEGE'] }] },
       };
 
       // when
