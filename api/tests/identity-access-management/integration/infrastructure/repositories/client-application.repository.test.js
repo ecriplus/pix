@@ -1,6 +1,8 @@
+import Joi from 'joi';
+
 import { MissingClientApplicationScopesError } from '../../../../../src/identity-access-management/domain/errors.js';
 import { clientApplicationRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/client-application.repository.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Infrastructure | Repository | client-application', function () {
   let application1;
@@ -89,6 +91,28 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(applications[0]).to.deep.contain(newApplication);
       expect(applications[1]).to.deep.contain(application1);
       expect(applications[2]).to.deep.contain(application2);
+    });
+
+    it('should not insert a client application with invalid juridiction json format', async function () {
+      // given
+      const newApplication = {
+        name: 'appli-with-invalid-jurisdiction',
+        clientId: 'clientId-appli0',
+        clientSecret: 'secret-app0',
+        scopes: ['scope0'],
+        jurisdiction: { rules: ['COLLEGE'] },
+      };
+
+      // when
+      const error = await catchErr(clientApplicationRepository.create)(newApplication);
+
+      // then
+      expect(error).to.be.instanceOf(Joi.ValidationError);
+      const clientApplications = await knex
+        .select()
+        .from('client_applications')
+        .where('name', 'appli-with-invalid-jurisdiction');
+      expect(clientApplications).to.be.empty;
     });
   });
 

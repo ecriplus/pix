@@ -36,7 +36,7 @@ class ClientApplicationsScript extends Script {
             },
             jurisdiction: {
               description:
-                "Jurisdiction definition, currently, only an object like `{ rules: [{ name: 'tag', value: ['tag name'] }] }` is supported",
+                'Jurisdiction definition, currently, only an object like `{ "rules": [{ "name": "tags", "value": ["tag name"] }] }` is supported. \nThe juridiction restricts the data access to organizations tagged with specified "tag name".',
               demandOption: true,
               type: 'object',
             },
@@ -125,7 +125,7 @@ class ClientApplicationsScript extends Script {
       clientId,
       clientSecret: hashedClientSecret,
       scopes,
-      jurisdiction,
+      jurisdiction: JSON.parse(jurisdiction),
     });
     logger.info({ clientName: name, clientId, scopes, jurisdiction }, 'client application created');
   }
