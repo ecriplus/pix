@@ -56,12 +56,12 @@ const register = async function (server) {
                         reachedLevel: Joi.number().description('Niveau obtenu dans cette campagne'),
                         practicalDescription: Joi.string().description('Description du sujet'),
                         practicalTitle: Joi.string().description('Titre du sujet'),
-                      }).label('Tube'),
+                      }).label('CampaignParticipationTube'),
                     )
                     .description(
                       'Sujets évalués dans la campagne, null si le type de la campagne est `PROFILES_COLLECTION`',
                     )
-                    .label('Tubes'),
+                    .label('CampaignParticipationTubes'),
                 }).label('CampaignParticipation'),
               )
               .label('CampaignParticipations'),
