@@ -7,6 +7,7 @@ import { expandElementSchema } from './element/expand-schema.js';
 import { flashcardsElementSchema } from './element/flashcards-schema.js';
 import { imageElementSchema } from './element/image-schema.js';
 import { qcmElementSchema } from './element/qcm-schema.js';
+import { qcuDeclarativeElementSchema } from './element/qcu-declarative-schema.js';
 import { qcuElementSchema } from './element/qcu-schema.js';
 import { qrocmElementSchema } from './element/qrocm-schema.js';
 import { separatorElementSchema } from './element/separator-schema.js';
@@ -32,6 +33,7 @@ const elementSchema = Joi.alternatives().conditional('.type', {
     { is: 'flashcards', then: flashcardsElementSchema },
     { is: 'image', then: imageElementSchema },
     { is: 'qcu', then: qcuElementSchema },
+    { is: 'qcu-declarative', then: qcuDeclarativeElementSchema },
     { is: 'qcm', then: qcmElementSchema },
     { is: 'qrocm', then: qrocmElementSchema },
     { is: 'separator', then: separatorElementSchema },
@@ -47,6 +49,7 @@ const stepperElementSchema = Joi.alternatives().conditional('.type', {
     { is: 'expand', then: expandElementSchema },
     { is: 'image', then: imageElementSchema },
     { is: 'qcu', then: qcuElementSchema },
+    { is: 'qcu-declarative', then: qcuDeclarativeElementSchema },
     { is: 'qcm', then: qcmElementSchema },
     { is: 'qrocm', then: qrocmElementSchema },
     { is: 'separator', then: separatorElementSchema },
