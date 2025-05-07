@@ -9,20 +9,24 @@ describe('Certification | Evaluation | Unit | Application | Certification Rescor
     it('should call the usecase with correct arguments and return 204 status code', async function () {
       const certificationCourseId = 123;
       const locale = 'fr-fr';
+      const juryId = 456;
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
       sinon.stub(certificationRescoringController, 'rescoreCertification').returns('ok');
       sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin').callsFake((request, h) => h.response(true));
       sinon.stub(usecases, 'rescoreCertification').resolves('ok');
+      const auth = { credentials: { userId: juryId }, strategy: {} };
 
       // when
       const response = await httpTestServer.request(
         'POST',
         `/api/admin/certifications/${certificationCourseId}/rescore`,
+        {},
+        auth,
       );
 
       // then
-      expect(usecases.rescoreCertification).to.have.been.calledWithExactly({ certificationCourseId, locale });
+      expect(usecases.rescoreCertification).to.have.been.calledWithExactly({ certificationCourseId, juryId, locale });
       expect(response.statusCode).to.equal(201);
     });
   });

@@ -14,6 +14,7 @@ describe('Certification | Results | Unit | Domain | Use Cases | rescore-certific
         // given
         const locale = 'fr-fr';
         const certificationCourseId = 123;
+        const juryId = 456;
         const certificationAssessmentRepository = {
           getByCertificationCourseId: sinon.stub(),
         };
@@ -37,6 +38,7 @@ describe('Certification | Results | Unit | Domain | Use Cases | rescore-certific
         // when
         await rescoreCertification({
           locale,
+          juryId,
           certificationCourseId,
           certificationAssessmentRepository,
           evaluationSessionRepository,
@@ -47,6 +49,7 @@ describe('Certification | Results | Unit | Domain | Use Cases | rescore-certific
         expect(services.handleV3CertificationScoring).to.have.been.calledWithExactly({
           event: new CertificationRescored({
             certificationCourseId: certificationAssessment.certificationCourseId,
+            juryId,
           }),
           certificationAssessment,
           locale,
