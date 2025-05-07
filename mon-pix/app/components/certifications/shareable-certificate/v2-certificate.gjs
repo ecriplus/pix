@@ -1,14 +1,13 @@
-import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
-import UserCertificationsDetailCompetencesList from '../user-certifications-detail-competences-list';
-import UserCertificationsDetailHeader from '../user-certifications-detail-header';
-import UserCertificationsDetailResult from '../user-certifications-detail-result';
+import CompetencesDetails from '../certificate-information/competences-details';
+import ComplementaryInformationDetails from '../certificate-information/complementary-information-details';
+import HeaderDetails from '../certificate-information/header-details';
 
 export default class v2Certificate extends Component {
-  get shouldDisplayDetailsSection() {
+  get shouldDisplayComplementaryInformationSection() {
     const model = this.args.model;
     return Boolean(model.commentForCandidate || model.hasAcquiredComplementaryCertifications);
   }
@@ -18,23 +17,22 @@ export default class v2Certificate extends Component {
       @route="fill-in-certificate-verification-code"
       @iconBefore="arrowLeft"
       @variant="tertiary"
-      class="user-certifications-page__previous-button"
+      class="v2-shareable-certificate__previous-button"
     >
       {{t "pages.shared-certification.back-link"}}
     </PixButtonLink>
 
-    <PixBlock class="user-certifications-page-get__header">
-      <UserCertificationsDetailHeader @certification={{@model}} />
-    </PixBlock>
+    <section class="v2-shareable-certificate">
+      <HeaderDetails @certificate={{@model}} />
 
-    <div class="user-certifications-page-get__details-body">
-      <UserCertificationsDetailCompetencesList
-        @resultCompetenceTree={{@model.resultCompetenceTree}}
-        @maxReachableLevelOnCertificationDate={{@model.maxReachableLevelOnCertificationDate}}
-      />
-      {{#if this.shouldDisplayDetailsSection}}
-        <UserCertificationsDetailResult @certification={{@model}} />
-      {{/if}}
-    </div>
+      <section class="v2-shareable-certificate__complementary-information">
+        <CompetencesDetails @certificate={{@model}} />
+        {{#if this.shouldDisplayComplementaryInformationSection}}
+          <div class="v2-shareable-certificate-complementary-information__details">
+            <ComplementaryInformationDetails @certificate={{@model}} />
+          </div>
+        {{/if}}
+      </section>
+    </section>
   </template>
 }

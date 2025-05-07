@@ -4,18 +4,18 @@ import sinon from 'sinon';
 import createGlimmerComponent from '../../../helpers/create-glimmer-component';
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
-module('Unit | Component | certifications', function (hooks) {
+module('Unit | Component | Certifications | Certificate information | Header details', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   module('#downloadAttestation', function () {
     module('when domain is french', function () {
       test('should call the file-saver service for downloadAttestation with the right parameters', async function (assert) {
         // given
-        const component = createGlimmerComponent('certifications/user-certifications-detail-header');
+        const component = createGlimmerComponent('certifications/certificate-information/header-details');
         const certificationId = 12;
         const token = 'a token';
 
-        component.args = { certification: { id: certificationId } };
+        component.args = { certificate: { id: certificationId } };
 
         component.fileSaver = {
           save: sinon.stub(),
@@ -50,11 +50,11 @@ module('Unit | Component | certifications', function (hooks) {
       module('when user lang is en', function () {
         test('should call the file-saver service for downloadAttestation with the right parameters', async function (assert) {
           // given
-          const component = createGlimmerComponent('certifications/user-certifications-detail-header');
+          const component = createGlimmerComponent('certifications/certificate-information/header-details');
           const certificationId = 12;
           const token = 'a token';
 
-          component.args = { certification: { id: certificationId } };
+          component.args = { certificate: { id: certificationId } };
 
           component.fileSaver = {
             save: sinon.stub(),

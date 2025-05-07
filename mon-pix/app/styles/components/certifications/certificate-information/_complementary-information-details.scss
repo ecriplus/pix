@@ -1,0 +1,25 @@
+@use 'pix-design-tokens/typography';
+
+.v2-complementary-certification-details-image {
+  text-align: center;
+
+  img {
+    width: 130px;
+    height: 130px;
+  }
+}
+
+.v2-comment-for-candidate-details {
+  @extend %pix-body-s;
+
+  display: grid;
+  gap: var(--pix-spacing-4x);
+
+  &__no-shareable-content{
+    @extend %pix-body-xs;
+
+    display: flex;
+    gap: var(--pix-spacing-2x);
+    align-items: center;
+  }
+}
