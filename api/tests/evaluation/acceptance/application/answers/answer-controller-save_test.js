@@ -3,7 +3,6 @@ import {
   REQUIREMENT_COMPARISONS,
   REQUIREMENT_TYPES,
 } from '../../../../../src/quest/domain/models/Quest.js';
-import { config } from '../../../../../src/shared/config.js';
 import { LOCALE } from '../../../../../src/shared/domain/constants.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import {
@@ -13,7 +12,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   mockLearningContent,
-  sinon,
 } from '../../../../test-helper.js';
 
 const { FRENCH_FRANCE, ENGLISH_SPOKEN } = LOCALE;
@@ -203,7 +201,7 @@ describe('Acceptance | Controller | answer-controller-save', function () {
 
       describe('when there are quests', function () {
         beforeEach(async function () {
-          sinon.stub(config.featureToggles, 'isAsyncQuestRewardingCalculationEnabled').value(false);
+          await featureToggles.set('isAsyncQuestRewardingCalculationEnabled', false);
           await featureToggles.set('isQuestEnabled', true);
         });
 

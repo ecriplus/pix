@@ -297,7 +297,6 @@ const configuration = (function () {
       isAlwaysOkValidateNextChallengeEndpointEnabled: toBoolean(
         process.env.FT_ALWAYS_OK_VALIDATE_NEXT_CHALLENGE_ENDPOINT,
       ),
-      isAsyncQuestRewardingCalculationEnabled: toBoolean(process.env.FT_ENABLE_ASYNC_QUESTS_REWARDS_CALCULATION),
       isDirectMetricsEnabled: toBoolean(process.env.FT_ENABLE_DIRECT_METRICS),
       isNeedToAdjustCertificationAccessibilityEnabled: toBoolean(
         process.env.FT_ENABLE_NEED_TO_ADJUST_CERTIFICATION_ACCESSIBILITY,
@@ -519,7 +518,6 @@ const configuration = (function () {
     config.featureToggles.isNeedToAdjustCertificationAccessibilityEnabled = false;
     config.featureToggles.isOppsyDisabled = false;
     config.featureToggles.isPixCompanionEnabled = false;
-    config.featureToggles.isAsyncQuestRewardingCalculationEnabled = false;
     config.featureToggles.isTextToSpeechButtonEnabled = false;
     config.featureToggles.showNewResultPage = false;
 
