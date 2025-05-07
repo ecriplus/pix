@@ -236,7 +236,11 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
         assert.ok(
           passageEventsService.record.calledWith({
             type: 'FLASHCARDS_CARD_AUTO_ASSESSED',
-            data: { autoAssessment: 'no', cardId: 'e1de6394-ff88-4de3-8834-a40057a50ff4', elementId: '71de6394-ff88-4de3-8834-a40057a50ff4' },
+            data: {
+              autoAssessment: 'no',
+              cardId: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
+              elementId: '71de6394-ff88-4de3-8834-a40057a50ff4',
+            },
           }),
         );
       });
@@ -264,6 +268,27 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
         // then
         assert.ok(screen.getByText('Terminé'));
       });
+    });
+  });
+
+  module('when user clicks on "See again" button', function () {
+    test('should send a flashcards recto reviewed event', async function (assert) {
+      // given
+      const { flashcards } = _getFlashcards();
+
+      // when
+      await render(<template><ModulixFlashcards @flashcards={{flashcards}} /></template>);
+      await clickByName(t('pages.modulix.buttons.flashcards.start'));
+      await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
+      await clickByName(t('pages.modulix.buttons.flashcards.seeAgain'));
+
+      // then
+      assert.ok(
+        passageEventsService.record.calledWith({
+          type: 'FLASHCARDS_RECTO_REVIEWED',
+          data: { cardId: 'e1de6394-ff88-4de3-8834-a40057a50ff4', elementId: '71de6394-ff88-4de3-8834-a40057a50ff4' },
+        }),
+      );
     });
   });
 
