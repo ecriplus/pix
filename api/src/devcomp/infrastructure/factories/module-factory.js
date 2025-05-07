@@ -16,6 +16,7 @@ import { Flashcards } from '../../domain/models/element/flashcards/Flashcards.js
 import { Image } from '../../domain/models/element/Image.js';
 import { QCM } from '../../domain/models/element/QCM.js';
 import { QCU } from '../../domain/models/element/QCU.js';
+import { QCUDeclarative } from '../../domain/models/element/QCU-declarative.js';
 import { QROCM } from '../../domain/models/element/QROCM.js';
 import { Separator } from '../../domain/models/element/Separator.js';
 import { Text } from '../../domain/models/element/Text.js';
@@ -108,6 +109,8 @@ export class ModuleFactory {
         return ModuleFactory.#buildQCM(element);
       case 'qcu':
         return ModuleFactory.#buildQCU(element);
+      case 'qcu-declarative':
+        return ModuleFactory.#buildQCUDeclarative(element);
       case 'qrocm':
         return ModuleFactory.#buildQROCM(element);
       case 'flashcards':
@@ -214,6 +217,20 @@ export class ModuleFactory {
         return new QcuProposal({
           id: proposal.id,
           content: proposal.content,
+        });
+      }),
+    });
+  }
+
+  static #buildQCUDeclarative(element) {
+    return new QCUDeclarative({
+      id: element.id,
+      instruction: element.instruction,
+      proposals: element.proposals.map((proposal) => {
+        return new QcuProposal({
+          id: proposal.id,
+          content: proposal.content,
+          feedback: proposal.feedback,
         });
       }),
     });
