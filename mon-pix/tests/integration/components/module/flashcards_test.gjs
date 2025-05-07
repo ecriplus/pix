@@ -317,7 +317,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
   });
 
   module('when user clicks on the "Retry" button', function () {
-    test('should display intro card', async function (assert) {
+    test('should display intro card and send flashcards retried event', async function (assert) {
       // given
       const { flashcards } = _getFlashcards();
 
@@ -338,6 +338,12 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
 
       // then
       assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.flashcards.start') })).exists();
+      assert.ok(
+        passageEventsService.record.calledWith({
+          type: 'FLASHCARDS_RETRIED',
+          data: { elementId: '71de6394-ff88-4de3-8834-a40057a50ff4' },
+        }),
+      );
     });
 
     module('when user click on the "start" button', function () {

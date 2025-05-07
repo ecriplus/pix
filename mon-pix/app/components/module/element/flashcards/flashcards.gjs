@@ -75,6 +75,13 @@ export default class ModulixFlashcards extends Component {
     this.currentCardIndex = 0;
     this.displayedSideName = 'recto';
     this.counters = { ...INITIAL_COUNTERS_VALUE };
+
+    this.passageEvents.record({
+      type: 'FLASHCARDS_RETRIED',
+      data: {
+        elementId: this.args.flashcards.id,
+      },
+    });
   }
 
   @action
