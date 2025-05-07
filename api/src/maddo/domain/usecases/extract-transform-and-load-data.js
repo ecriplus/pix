@@ -10,9 +10,9 @@ export async function extractTransformAndLoadData({
 
   let context = { datawarehouseKnex, datamartKnex };
 
-  const additionnalContext = await replication.before?.(context);
+  const additionalContext = await replication.before?.(context);
 
-  context = { ...additionnalContext, ...context };
+  context = { ...additionalContext, ...context };
 
   const queryBuilder = replication.from(context);
   let chunk = [];
