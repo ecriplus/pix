@@ -92,6 +92,15 @@ export default class ModulixFlashcards extends Component {
   @action
   flipCard() {
     this.displayedSideName = this.displayedSideName === 'recto' ? 'verso' : 'recto';
+    if (this.displayedSideName === 'verso') {
+      this.passageEvents.record({
+        type: 'FLASHCARDS_VERSO_SEEN',
+        data: {
+          cardId: this.currentCard.id,
+          elementId: this.args.flashcards.id,
+        },
+      });
+    }
   }
 
   incrementCounterFor(userAssessment) {

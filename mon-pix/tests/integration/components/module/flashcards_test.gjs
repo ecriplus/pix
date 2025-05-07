@@ -190,7 +190,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
   });
 
   module('when users clicks on the "Continue" button', function () {
-    test('should display options buttons to answer', async function (assert) {
+    test('should display options buttons to answer and send a flashcards verso seen event', async function (assert) {
       // given
       const { flashcards } = _getFlashcards();
 
@@ -202,6 +202,13 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
       // then
       assert.ok(screen.getByText(t('pages.modulix.flashcards.answerDirection')));
       assert.ok(screen.getByText(t('pages.modulix.buttons.flashcards.answers.no')));
+
+      assert.ok(
+        passageEventsService.record.calledWith({
+          type: 'FLASHCARDS_VERSO_SEEN',
+          data: { cardId: 'e1de6394-ff88-4de3-8834-a40057a50ff4', elementId: '71de6394-ff88-4de3-8834-a40057a50ff4' },
+        }),
+      );
     });
 
     module('when the user self-assesses their response', function () {
