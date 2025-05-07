@@ -14,13 +14,13 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | PassageEvent
       const json = {
         data: {
           attributes: {
-            'passage-events': [
+            events: [
               {
-                elementId: elementId,
-                'occurred-at': occurredAt,
-                'passage-id': passageId,
-                'sequence-number': sequenceNumber,
+                occurredAt,
+                passageId,
+                sequenceNumber,
                 type,
+                elementId,
               },
             ],
             type: 'passage-event-collection',
@@ -34,11 +34,11 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | PassageEvent
       // then
       expect(results).to.deep.equal([
         {
-          elementId,
           occurredAt: new Date('2019-04-28T02:42:00Z'),
           passageId,
           sequenceNumber,
           type,
+          elementId,
         },
       ]);
     });

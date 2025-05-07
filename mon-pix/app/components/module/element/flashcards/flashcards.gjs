@@ -15,6 +15,7 @@ const INITIAL_COUNTERS_VALUE = { yes: 0, almost: 0, no: 0 };
 
 export default class ModulixFlashcards extends Component {
   @service modulixPreviewMode;
+  @service passageEvents;
 
   @tracked
   /**
@@ -79,6 +80,13 @@ export default class ModulixFlashcards extends Component {
   @action
   start() {
     this.currentStep = 'cards';
+
+    this.passageEvents.record({
+      type: 'FLASHCARDS_STARTED',
+      data: {
+        elementId: this.args.flashcards.id,
+      },
+    });
   }
 
   @action

@@ -22,7 +22,8 @@ module('Unit | Route | modules | passage', function (hooks) {
     route.modelFor.withArgs('module').returns(module);
 
     store.createRecord = sinon.stub();
-    store.createRecord.returns({ save: () => {} });
+    const passage = { id: 2048 };
+    store.createRecord.returns({ save: () => passage });
 
     // when
     const model = await route.model({ slug: 'the-module' });
@@ -31,9 +32,9 @@ module('Unit | Route | modules | passage', function (hooks) {
     assert.strictEqual(model.module, module);
   });
 
-  test('should create and return a new passage', async function (assert) {
+  test('should create and return a new passage and initialize event service', async function (assert) {
     // given
-    const passage = Symbol('passage');
+    const passage = { id: 2019 };
 
     const route = this.owner.lookup('route:module.passage');
     const store = this.owner.lookup('service:store');
@@ -47,6 +48,9 @@ module('Unit | Route | modules | passage', function (hooks) {
 
     store.createRecord.withArgs('passage', { moduleId: 'my-module' }).returns({ save: save });
 
+    const passageEventService = this.owner.lookup('service:passage-events');
+    passageEventService.initialize = sinon.stub();
+
     // when
     const model = await route.model({ slug: 'my-module' });
 
@@ -58,6 +62,9 @@ module('Unit | Route | modules | passage', function (hooks) {
         sequenceNumber: 1,
         moduleVersion: module.version,
       },
+    });
+    sinon.assert.calledWith(passageEventService.initialize, {
+      passageId: 2019,
     });
   });
 });

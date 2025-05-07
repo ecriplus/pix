@@ -11,6 +11,13 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Module | Flashcards', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  let passageEventsService;
+
+  hooks.beforeEach(async function () {
+    passageEventsService = this.owner.lookup('service:passage-events');
+    passageEventsService.record = sinon.stub();
+  });
+
   test('should display provided instructions about Flashcards', async function (assert) {
     // given
     const { flashcards } = _getFlashcards();
@@ -156,7 +163,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
   });
 
   module('when user clicks on the "Start" button', function () {
-    test('should display the first card', async function (assert) {
+    test('should display the first card and record a FLASHCARDS_STARTED event', async function (assert) {
       // given
       const { flashcards } = _getFlashcards();
 
@@ -173,6 +180,12 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
       assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.flashcards.seeAnswer') })).exists();
       assert.ok(screen.getByText(t('pages.modulix.flashcards.direction')));
       assert.ok(screen.getByText(t('pages.modulix.flashcards.position', { currentCardPosition: 1, totalCards: 2 })));
+      assert.ok(
+        passageEventsService.record.calledWith({
+          type: 'FLASHCARDS_STARTED',
+          data: { elementId: '71de6394-ff88-4de3-8834-a40057a50ff4' },
+        }),
+      );
     });
   });
 

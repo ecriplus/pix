@@ -3,6 +3,7 @@ import { service } from '@ember/service';
 
 export default class ModulePassageRoute extends Route {
   @service store;
+  @service passageEvents;
 
   async model() {
     const module = this.modelFor('module');
@@ -13,6 +14,8 @@ export default class ModulePassageRoute extends Route {
         moduleVersion: module.version,
       },
     });
+
+    this.passageEvents.initialize({ passageId: passage.id });
 
     return { module, passage };
   }

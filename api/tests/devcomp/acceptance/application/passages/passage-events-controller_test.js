@@ -21,7 +21,7 @@ describe('Acceptance | Controller | passage-events-controller', function () {
           data: {
             type: 'passage-event-collection',
             attributes: {
-              'passage-events': [
+              events: [
                 {
                   type: 'FLASHCARDS_STARTED',
                   'occurred-at': 1556419320000,
