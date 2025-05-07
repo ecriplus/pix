@@ -1,44 +1,16 @@
 import { DomainError } from '../../../shared/domain/errors.js';
 import { PromiseUtils } from '../../../shared/infrastructure/utils/promise-utils.js';
-import {
-  FlashcardsCardAutoAssessedEvent,
-  FlashcardsRectoReviewedEvent,
-  FlashcardsRetriedEvent,
-  FlashcardsStartedEvent,
-  FlashcardsVersoSeenEvent,
-} from '../models/passage-events/flashcard-events.js';
-import { PassageStartedEvent, PassageTerminatedEvent } from '../models/passage-events/passage-events.js';
+import { PassageEventFactory } from '../factories/passage-event-factory.js';
 
 const recordPassageEvents = async function ({ events, userId, passageRepository, passageEventRepository }) {
   await PromiseUtils.mapSeries(events, async (event) => {
-    const passageEvent = _buildPassageEvent(event);
-    await _validatePassage({ event, userId, passageRepository });
+    const passageEvent = PassageEventFactory.build(event);
+    await _validatePassage({ event, userId, passageRepository, passageEventRepository });
     await passageEventRepository.record(passageEvent);
   });
 };
 
-function _buildPassageEvent(event) {
-  switch (event.type) {
-    case 'PASSAGE_STARTED':
-      return new PassageStartedEvent(event);
-    case 'PASSAGE_TERMINATED':
-      return new PassageTerminatedEvent(event);
-    case 'FLASHCARDS_STARTED':
-      return new FlashcardsStartedEvent(event);
-    case 'FLASHCARDS_VERSO_SEEN':
-      return new FlashcardsVersoSeenEvent(event);
-    case 'FLASHCARDS_CARD_AUTO_ASSESSED':
-      return new FlashcardsCardAutoAssessedEvent(event);
-    case 'FLASHCARDS_RECTO_REVIEWED':
-      return new FlashcardsRectoReviewedEvent(event);
-    case 'FLASHCARDS_RETRIED':
-      return new FlashcardsRetriedEvent(event);
-    default:
-      throw new DomainError(`Passage event with type ${event.type} does not exist`);
-  }
-}
-
-async function _validatePassage({ event, userId, passageRepository }) {
+async function _validatePassage({ event, userId, passageRepository, passageEventRepository }) {
   const passage = await passageRepository.get({ passageId: event.passageId });
 
   if (passage.terminatedAt != null) {
@@ -53,6 +25,16 @@ async function _validatePassage({ event, userId, passageRepository }) {
 
   if (userId && userId !== passage.userId) {
     throw new DomainError('Wrong userId');
+  }
+
+  const existingPassageEvents = await passageEventRepository.getAllByPassageId({ passageId: event.passageId });
+  const doesTerminatedEventHaveTheHighestSequenceNumber =
+    existingPassageEvents.length > 0 &&
+    existingPassageEvents[existingPassageEvents.length - 1].sequenceNumber >= event.sequenceNumber &&
+    event.type === 'PASSAGE_TERMINATED';
+
+  if (doesTerminatedEventHaveTheHighestSequenceNumber) {
+    throw new DomainError('Passage event of type terminated should have the highest sequence number');
   }
 }
 
