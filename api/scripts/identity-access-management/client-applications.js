@@ -34,6 +34,12 @@ class ClientApplicationsScript extends Script {
               demandOption: true,
               type: 'array',
             },
+            jurisdiction: {
+              description:
+                "Jurisdiction definition, currently, only an object like `{ rules: [{ name: 'tag', value: ['tag name'] }] }` is supported",
+              demandOption: true,
+              type: 'object',
+            },
           },
         },
         remove: {
@@ -112,15 +118,16 @@ class ClientApplicationsScript extends Script {
     );
   }
 
-  async add({ name, clientId, clientSecret, scope: scopes }, logger) {
+  async add({ name, clientId, clientSecret, scope: scopes, jurisdiction }, logger) {
     const hashedClientSecret = await cryptoService.hashPassword(clientSecret);
     await clientApplicationRepository.create({
       name,
       clientId,
       clientSecret: hashedClientSecret,
       scopes,
+      jurisdiction,
     });
-    logger.info({ clientName: name, clientId, scopes }, 'client application created');
+    logger.info({ clientName: name, clientId, scopes, jurisdiction }, 'client application created');
   }
 
   async remove({ clientId }, logger) {
