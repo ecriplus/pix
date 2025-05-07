@@ -1,5 +1,25 @@
 # Pix Changelog
 
+## v5.106.0 (07/05/2025)
+
+
+### :rocket: Amélioration
+- [#12159](https://github.com/1024pix/pix/pull/12159) [FEATURE] Appeler la route d'archivage des centres de certification en lot depuis Pix Admin (PIX-17628).
+- [#12217](https://github.com/1024pix/pix/pull/12217) [FEATURE] Assurer cohérence du sequenceNumber dans les events enregistrés (PIX-17708).
+- [#12202](https://github.com/1024pix/pix/pull/12202) [FEATURE] Ajout d'une route de rescoring de certification (PIX-17625).
+
+### :building_construction: Tech
+- [#12110](https://github.com/1024pix/pix/pull/12110) [TECH] :truck: Déplace le cas d'utilisation `find competence evaluations by assessment` vers le répertoire `src/shared/`.
+- [#12231](https://github.com/1024pix/pix/pull/12231) [TECH] Renommage de CertificationRescoredByScript.
+- [#12172](https://github.com/1024pix/pix/pull/12172) [TECH] Passage au format GJS sur PixApp.
+- [#12219](https://github.com/1024pix/pix/pull/12219) [TECH] Suppression de la colonne isV3Pilot en BDD (PIX-17580).
+
+### :bug: Correction
+- [#12212](https://github.com/1024pix/pix/pull/12212) [BUGFIX] Supprimer les date de legal-document-version-user-acceptances lorsqu'on anonymise un utilisateur (PIX-17730).
+
+### :arrow_up: Montée de version
+- [#12237](https://github.com/1024pix/pix/pull/12237) [BUMP] Update Node.js to v22.15.0.
+
 ## v5.105.0 (06/05/2025)
 
 
