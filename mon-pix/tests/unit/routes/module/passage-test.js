@@ -5,6 +5,17 @@ import sinon from 'sinon';
 module('Unit | Route | modules | passage', function (hooks) {
   setupTest(hooks);
 
+  let clock;
+  const now = new Date('2019-05-07');
+
+  hooks.beforeEach(function () {
+    clock = sinon.useFakeTimers(now);
+  });
+
+  hooks.afterEach(function () {
+    clock.restore();
+  });
+
   test('should exist', function (assert) {
     // when
     const route = this.owner.lookup('route:module.passage');
@@ -58,7 +69,7 @@ module('Unit | Route | modules | passage', function (hooks) {
     assert.strictEqual(model.passage, passage);
     sinon.assert.calledWith(save, {
       adapterOptions: {
-        occurredAt: new Date().getTime(),
+        occurredAt: now.getTime(),
         sequenceNumber: 1,
         moduleVersion: module.version,
       },
