@@ -5,6 +5,7 @@ import {
 } from '../../../../../src/quest/domain/models/Quest.js';
 import { config } from '../../../../../src/shared/config.js';
 import { LOCALE } from '../../../../../src/shared/domain/constants.js';
+import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import {
   createServer,
   databaseBuilder,
@@ -201,9 +202,9 @@ describe('Acceptance | Controller | answer-controller-save', function () {
       });
 
       describe('when there are quests', function () {
-        beforeEach(function () {
+        beforeEach(async function () {
           sinon.stub(config.featureToggles, 'isAsyncQuestRewardingCalculationEnabled').value(false);
-          sinon.stub(config.featureToggles, 'isQuestEnabled').value(true);
+          await featureToggles.set('isQuestEnabled', true);
         });
 
         it('should return 201 HTTP status code', async function () {

@@ -5,6 +5,12 @@ export default {
     defaultValue: false,
     tags: ['frontend'],
   },
+  isQuestEnabled: {
+    type: 'boolean',
+    description: 'Used to enable quests feature',
+    defaultValue: true,
+    tags: ['team-prescription', 'frontend'],
+  },
   isNewAccountRecoveryEnabled: {
     type: 'boolean',
     description: 'Using and testing feature account recovery process',

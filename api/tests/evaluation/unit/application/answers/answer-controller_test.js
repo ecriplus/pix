@@ -4,6 +4,7 @@ import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecase
 import { usecases as questUsecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { config } from '../../../../../src/shared/config.js';
 import { Assessment } from '../../../../../src/shared/domain/models/index.js';
+import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Controller | answer-controller', function () {
@@ -255,7 +256,7 @@ describe('Unit | Controller | answer-controller', function () {
       context('when quest feature is not enabled', function () {
         it('should not call rewardUser', async function () {
           // given
-          config.featureToggles.isQuestEnabled = false;
+          await featureToggles.set('isQuestEnabled', false);
 
           // when
           await answerController.save(request, hFake, {
@@ -272,7 +273,7 @@ describe('Unit | Controller | answer-controller', function () {
       context('when quest feature enabled', function () {
         it('should not call rewardUser if async is enabled', async function () {
           // given
-          config.featureToggles.isQuestEnabled = true;
+          await featureToggles.set('isQuestEnabled', true);
           config.featureToggles.isAsyncQuestRewardingCalculationEnabled = true;
 
           // when
@@ -288,7 +289,7 @@ describe('Unit | Controller | answer-controller', function () {
 
         it('should call rewardUser if async is not enabled', async function () {
           // given
-          config.featureToggles.isQuestEnabled = true;
+          await featureToggles.set('isQuestEnabled', true);
           config.featureToggles.isAsyncQuestRewardingCalculationEnabled = false;
 
           // when
@@ -304,7 +305,7 @@ describe('Unit | Controller | answer-controller', function () {
 
         it('should not call the reward user usecase if userId is not provided', async function () {
           // given
-          config.featureToggles.isQuestEnabled = true;
+          await featureToggles.set('isQuestEnabled', true);
           config.featureToggles.isAsyncQuestRewardingCalculationEnabled = false;
           requestResponseUtilsStub.extractUserIdFromRequest.withArgs(request).returns(null);
 
