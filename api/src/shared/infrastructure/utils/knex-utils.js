@@ -15,14 +15,18 @@ const DEFAULT_PAGINATION = {
 const fetchPage = async (
   queryBuilder,
   { number = DEFAULT_PAGINATION.PAGE, size = DEFAULT_PAGINATION.PAGE_SIZE } = {},
+  countRequestBuilder = undefined,
 ) => {
   const page = number < 1 ? 1 : number;
   const offset = (page - 1) * size;
 
-  const clone = queryBuilder.clone();
+  const countExecutor = countRequestBuilder
+    ? countRequestBuilder
+    : knex.count('*', { as: 'rowCount' }).from(queryBuilder.clone().as('query_all_results'));
+
   // we cannot execute the query and count the total rows at the same time
   // because it would not work when there are DISTINCT selection in the SELECT clause
-  const { rowCount } = await knex.count('*', { as: 'rowCount' }).from(clone.as('query_all_results')).first();
+  const { rowCount } = await countExecutor.first();
   const results = await queryBuilder.limit(size).offset(offset);
 
   return {

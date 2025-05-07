@@ -4,7 +4,6 @@ import { SessionSummary } from '../../domain/read-models/SessionSummary.js';
 
 const findPaginatedByCertificationCenterId = async function ({ certificationCenterId, page }) {
   const query = knex('sessions')
-    .distinct('sessions.id')
     .select({
       id: 'sessions.id',
       address: 'sessions.address',
@@ -17,12 +16,8 @@ const findPaginatedByCertificationCenterId = async function ({ certificationCent
       createdAt: 'sessions.createdAt',
     })
     .select(
-      knex.raw(
-        'COUNT(*) FILTER (WHERE "certification-candidates"."id" IS NOT NULL) OVER (partition by "sessions"."id") AS "enrolledCandidatesCount"',
-      ),
-      knex.raw(
-        'COUNT(*) FILTER (WHERE "certification-courses"."id" IS NOT NULL) OVER (partition by "sessions"."id") AS "effectiveCandidatesCount"',
-      ),
+      knex.raw('COUNT("certification-candidates"."id") AS "enrolledCandidatesCount"'),
+      knex.raw('COUNT("certification-courses"."id") AS "effectiveCandidatesCount"'),
     )
     .leftJoin('certification-candidates', 'certification-candidates.sessionId', 'sessions.id')
     .leftJoin('certification-courses', function () {
@@ -32,13 +27,15 @@ const findPaginatedByCertificationCenterId = async function ({ certificationCent
       );
     })
     .where({ certificationCenterId })
+    .groupBy('sessions.id')
     .orderBy('sessions.date', 'DESC')
     .orderBy('sessions.time', 'DESC')
     .orderBy('sessions.id', 'ASC');
 
-  const { results, pagination } = await fetchPage(query, page);
-  const atLeastOneSession = await knex('sessions').select('id').where({ certificationCenterId }).first();
-  const hasSessions = Boolean(atLeastOneSession);
+  const countQuery = knex('sessions').count('*', { as: 'rowCount' }).where({ certificationCenterId });
+
+  const { results, pagination } = await fetchPage(query, page, countQuery);
+  const hasSessions = Boolean(pagination.rowCount);
 
   const sessionSummaries = results.map((result) => SessionSummary.from(result));
   return { models: sessionSummaries, meta: { ...pagination, hasSessions } };
