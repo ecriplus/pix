@@ -274,7 +274,10 @@
   },
   "components": {
     "analysis-per-tubes-and-competences": {
-      "detailed-positioning": "Gedetailleerde positionering",
+      "detailed-positioning":{
+        "description":"Gemiddeld niveau behaald door deelnemers per onderwerp van het maximaal haalbare niveau in deze campagne.",
+        "title" : "Gedetailleerde positionering"
+      },
       "gauge": {
         "label": "Niveau {reachedLevel} van {maxLevel}"
       },

@@ -7,9 +7,11 @@ import TagLevel from '../statistics/tag-level';
 
 <template>
   <h2 class="analysis-per-tubes-and-competences__positioning-title">{{t
-      "components.analysis-per-tubes-and-competences.detailed-positioning"
+      "components.analysis-per-tubes-and-competences.detailed-positioning.title"
     }}</h2>
-
+  <p class="analysis-per-tubes-and-competences__positioning-description">{{t
+      "components.analysis-per-tubes-and-competences.detailed-positioning.description"
+    }}</p>
   {{#each @data.levelsPerCompetence as |levelsPerCompetence|}}
     <h3 class="analysis-per-tubes-and-competences__competence-title">
       {{levelsPerCompetence.index}}

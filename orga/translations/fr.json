@@ -274,7 +274,10 @@
   },
   "components": {
     "analysis-per-tubes-and-competences": {
-      "detailed-positioning": "Positionnement détaillé",
+      "detailed-positioning":{
+        "description":"Niveau moyen atteint par les participants par sujet sur le niveau maximal accessible dans cette campagne.",
+        "title" : "Positionnement détaillé"
+      },
       "gauge": {
         "label": "Niveau {reachedLevel} sur {maxLevel}"
       },

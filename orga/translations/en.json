@@ -274,7 +274,10 @@
   },
   "components": {
     "analysis-per-tubes-and-competences": {
-      "detailed-positioning": "Detailed positioning",
+      "detailed-positioning":{
+        "description":"Average level achieved by participants by topic out of the maximum level achievable in this campaign.",
+        "title" : "Detailed positioning"
+      },
       "gauge": {
         "label": "Level {reachedLevel} of {maxLevel}"
       },
