@@ -8,6 +8,7 @@ export default class PassageEvents extends Service {
 
   initialize({ passageId }) {
     this.passageId = Number(passageId);
+    this.sequenceNumber = 1;
   }
 
   async record({ type, data }) {
