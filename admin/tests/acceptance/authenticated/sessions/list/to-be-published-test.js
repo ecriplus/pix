@@ -42,7 +42,7 @@ module('Acceptance | authenticated/sessions/list/to be published', function (hoo
       const screen = await visit(SESSIONS_TO_BE_PUBLISHED_LIST_PAGE);
 
       // then
-      assert.dom(screen.getByRole('link', { name: 'Sessions de certifications' })).hasClass('active');
+      assert.dom(screen.getByRole('link', { name: 'Sessions de certif' })).hasClass('active');
     });
 
     module('when clicking on the sessions to be published tab', function () {

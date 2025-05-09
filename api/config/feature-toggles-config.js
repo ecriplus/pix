@@ -41,12 +41,6 @@ export default {
     defaultValue: false,
     tags: ['frontend', 'pix-orga', 'team-prescription'],
   },
-  isPixAdminNewSidebarEnabled: {
-    description: 'Display the new sidebar for Pix Admin',
-    type: 'boolean',
-    defaultValue: false,
-    tags: ['frontend', 'pix-admin'],
-  },
   isPixAppNewLayoutEnabled: {
     description: 'Display the new layout for Pix App',
     type: 'boolean',

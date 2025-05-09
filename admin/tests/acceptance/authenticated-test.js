@@ -1,5 +1,4 @@
 import { visit, within } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
@@ -10,42 +9,12 @@ module('Acceptance | Authenticated pages', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
-  module('When "isPixAdminNewSidebarEnabled" feature toggle has "false" value', function (hooks) {
+  module('When admin member is authenticated', function (hooks) {
     hooks.beforeEach(async function () {
-      // given
-      class FeatureTogglesStub extends Service {
-        featureToggles = { isPixAdminNewSidebarEnabled: false };
-
-        load() {}
-      }
-      this.owner.register('service:featureToggles', FeatureTogglesStub);
-
       await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
     });
 
-    test('it displays old layout with its menu-bar', async function (assert) {
-      // when
-      const screen = await visit('/');
-
-      // then
-      assert.dom(screen.getByRole('navigation', { name: 'Navigation principale' })).exists();
-    });
-  });
-
-  module('When "isPixAdminNewSidebarEnabled" feature toggle has "true" value', function (hooks) {
-    hooks.beforeEach(async function () {
-      // given
-      class FeatureTogglesStub extends Service {
-        featureToggles = { isPixAdminNewSidebarEnabled: true };
-
-        load() {}
-      }
-      this.owner.register('service:featureToggles', FeatureTogglesStub);
-
-      await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-    });
-
-    test('it displays new layout', async function (assert) {
+    test('it displays the layout', async function (assert) {
       // when
       const screen = await visit('/');
 
