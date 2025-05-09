@@ -2,7 +2,6 @@ import { type Request, type ResponseObject, type ResponseToolkit, type ServerRou
 import Joi from 'joi';
 
 import { type AuditLog } from '../domain/models/audit-log.js';
-import { AuditLogActionTypes, AuditLogClientTypes, AuditLogRoleTypes } from '../domain/models/models.definition.js';
 import { type CreateAuditLogUseCase } from '../domain/usecases/create-audit-log.usecase.js';
 import { createAuditLogUseCase } from '../domain/usecases/usecases.js';
 
@@ -41,16 +40,10 @@ export const CREATE_AUDIT_LOG_ROUTE: ServerRoute = {
           Joi.object({
             targetUserId: Joi.string().required(),
             userId: Joi.string().required(),
-            action: Joi.string()
-              .valid(...AuditLogActionTypes)
-              .required(),
+            action: Joi.string().required(),
             occurredAt: Joi.string().isoDate().required(),
-            role: Joi.string()
-              .valid(...AuditLogRoleTypes)
-              .required(),
-            client: Joi.string()
-              .valid(...AuditLogClientTypes)
-              .required(),
+            role: Joi.string().required(),
+            client: Joi.string().required(),
             data: Joi.object().optional(),
           }),
         )

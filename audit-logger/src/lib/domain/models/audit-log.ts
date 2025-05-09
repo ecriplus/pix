@@ -1,13 +1,12 @@
-import { type AuditLogAction, type AuditLogClient, type AuditLogRole } from './models.definition.js';
 
 export class AuditLog {
   id?: string;
   occurredAt: Date;
-  action: AuditLogAction;
+  action: string;
   userId: string;
   targetUserId: string;
-  client: AuditLogClient;
-  role: AuditLogRole;
+  client: string;
+  role: string;
   data?: Record<string, unknown> | null;
   createdAt?: Date;
 
