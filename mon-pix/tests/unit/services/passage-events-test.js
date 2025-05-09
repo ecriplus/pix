@@ -27,6 +27,18 @@ module('Unit | Services | PassageEvents', function (hooks) {
       // then
       assert.strictEqual(service.passageId, 1984);
     });
+
+    test('should reset passage number', async function (assert) {
+      // given
+      const service = this.owner.lookup('service:passageEvents');
+      service.sequenceNumber = 10;
+
+      // when
+      service.initialize({ passageId: '1984' });
+
+      // then
+      assert.strictEqual(service.sequenceNumber, 1);
+    });
   });
 
   module('#record', function () {
