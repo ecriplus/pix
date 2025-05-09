@@ -83,20 +83,28 @@ describe('Prescription | OrganizationLearner | Integration | Infrastructure | Or
   });
 
   describe('#create', function () {
-    it('should return the newly created OrganizationLearnerFeature link', async function () {
+    it('should active feature on learner without error', async function () {
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({ organizationId }).id;
       const featureId = databaseBuilder.factory.buildFeature({ key: 'A_KEY', organizationId }).id;
       await databaseBuilder.commit();
 
-      const newlyCreatedOrganizationLearnerFeature = await organizationLearnerFeatureRepository.create({
+      await organizationLearnerFeatureRepository.create({
         organizationLearnerId,
         featureId,
       });
-      expect([
-        newlyCreatedOrganizationLearnerFeature.featureId,
-        newlyCreatedOrganizationLearnerFeature.organizationLearnerId,
-      ]).to.deep.equal([featureId, organizationLearnerId]);
+      await organizationLearnerFeatureRepository.create({
+        organizationLearnerId,
+        featureId,
+      });
+
+      const result = await organizationLearnerFeatureRepository.getOrganizationLearnersByFeature({
+        organizationId,
+        featureKey: 'A_KEY',
+      });
+
+      expect(result).lengthOf(1);
+      expect(result[0].id).to.be.equal(organizationLearnerId);
     });
   });
 

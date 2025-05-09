@@ -21,10 +21,8 @@ async function getOrganizationLearnersByFeature({ organizationId, featureKey }) 
 
 async function create({ organizationLearnerId, featureId }) {
   const knexConn = DomainTransaction.getConnection();
-  const createdOrganizationLearnerFeature = await knexConn('organization-learner-features')
-    .insert({ organizationLearnerId, featureId })
-    .returning('*');
-  return createdOrganizationLearnerFeature[0];
+
+  await knexConn('organization-learner-features').insert({ organizationLearnerId, featureId }).onConflict().ignore();
 }
 
 async function unlink({ organizationLearnerId, featureId }) {

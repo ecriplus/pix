@@ -4,12 +4,12 @@ const create = async function (request, h) {
   const organizationLearnerId = request.params.organizationLearnerId;
   const featureKey = request.params.featureKey;
 
-  const organizationLearnerFeature = await usecases.createOrganizationLearnerFeature({
+  await usecases.createOrganizationLearnerFeature({
     organizationLearnerId,
     featureKey,
   });
 
-  return h.response(organizationLearnerFeature).code(201);
+  return h.response().code(201);
 };
 
 const unlink = async function (request, h) {

@@ -1,14 +1,13 @@
-const createOrganizationLearnerFeature = async ({
-  organizationLearnerId,
-  featureKey,
-  featureRepository,
-  organizationLearnerFeatureRepository,
-}) => {
-  const feature = await featureRepository.getFeatureByKey(featureKey);
+import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 
-  return await organizationLearnerFeatureRepository.create({
-    organizationLearnerId,
-    featureId: feature.id,
-  });
-};
+const createOrganizationLearnerFeature = withTransaction(
+  async ({ organizationLearnerId, featureKey, featureRepository, organizationLearnerFeatureRepository }) => {
+    const feature = await featureRepository.getFeatureByKey(featureKey);
+
+    return await organizationLearnerFeatureRepository.create({
+      organizationLearnerId,
+      featureId: feature.id,
+    });
+  },
+);
 export { createOrganizationLearnerFeature };
