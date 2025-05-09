@@ -23,5 +23,7 @@ const USER_ANONYMIZED_SCHEMA = Joi.object({
   updatedByUserId: Joi.number().integer().required(),
   client: Joi.string().valid('PIX_APP', 'PIX_ADMIN').required(),
   occurredAt: Joi.date().required(),
-  role: Joi.string().valid(USER_ROLE, PIX_ADMIN.ROLES.SUPER_ADMIN, PIX_ADMIN.ROLES.SUPPORT).required(),
+  role: Joi.string()
+    .valid(USER_ROLE, ...Object.values(PIX_ADMIN.ROLES))
+    .required(),
 });
