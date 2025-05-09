@@ -3,46 +3,67 @@ import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
+import CommunicationBanner from '../communication-banner';
+import DataProtectionPolicyInformationBanner from '../data-protection-policy-information-banner';
 import Footer from '../footer';
+import InformationBanners from '../information-banners';
 import NavbarHeader from '../navbar-header';
 import Skiplink from '../skiplink';
 import AppMainHeader from './app-main-header';
 import AppNavigation from './app-navigation';
 
 export default class AppLayout extends Component {
+  @service router;
+  @service session;
   @service currentUser;
   @service media;
   @service featureToggles;
 
   get displayAppMainHeader() {
-    return this.currentUser.user && !this.media.isMobile;
+    return this.args.displayFullLayout && this.session.isAuthenticated && this.currentUser.user && !this.media.isMobile;
   }
 
   <template>
     {{#if this.featureToggles.featureToggles.isPixAppNewLayoutEnabled}}
-      <Skiplink @href="#main" @label={{t "common.skip-links.skip-to-content"}} />
-      <Skiplink @href="#footer" @label={{t "common.skip-links.skip-to-footer"}} />
+      {{#if @displayFullLayout}}
+        <Skiplink @href="#main" @label={{t "common.skip-links.skip-to-content"}} />
+        <Skiplink @href="#footer" @label={{t "common.skip-links.skip-to-footer"}} />
+      {{/if}}
 
-      <PixAppLayout class="app-layout">
+      <PixAppLayout class="{{unless @displayFullLayout 'unauthenticated-page'}}">
+        <:banner>
+          {{#if @displayFullLayout}}
+            <DataProtectionPolicyInformationBanner />
+          {{/if}}
+          <CommunicationBanner />
+          <InformationBanners @banners={{@banners}} />
+        </:banner>
         <:navigation>
-          <AppNavigation />
+          {{#if @displayFullLayout}}
+            <AppNavigation />
+          {{/if}}
         </:navigation>
         <:main>
-          <div>
-            {{#if this.displayAppMainHeader}}
-              <AppMainHeader />
-            {{/if}}
-            {{yield}}
-          </div>
+          {{#if this.displayAppMainHeader}}
+            <AppMainHeader />
+          {{/if}}
+
+          {{yield}}
         </:main>
         <:footer>
-          <Footer />
+          {{#if @displayFullLayout}}
+            <Footer />
+          {{/if}}
         </:footer>
       </PixAppLayout>
     {{else}}
-      <NavbarHeader />
+      {{#if @displayFullLayout}}
+        <NavbarHeader />
+      {{/if}}
       {{yield}}
-      <Footer />
+      {{#if @displayFullLayout}}
+        <Footer />
+      {{/if}}
     {{/if}}
   </template>
 }

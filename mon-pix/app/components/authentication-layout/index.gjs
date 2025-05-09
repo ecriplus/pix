@@ -3,10 +3,8 @@ import Header from './header';
 
 <template>
   <section class="authentication-layout">
-    <div class="authentication-layout__side" role="presentation">
-      <div class="authentication-layout__image">
-        <img alt="" src="/images/illustrations/authentication.svg" />
-      </div>
+    <div class="authentication-layout__image" role="presentation">
+      <img alt="" src="/images/illustrations/authentication.svg" />
     </div>
 
     <div class="authentication-layout__main">

@@ -4,7 +4,7 @@ import { t } from 'ember-intl/test-support';
 import AppLayout from 'mon-pix/components/global/app-layout';
 import { module, test } from 'qunit';
 
-import { stubCurrentUserService } from '../../../helpers/service-stubs';
+import { stubCurrentUserService, stubSessionService } from '../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Global | App Layout', function (hooks) {
@@ -14,13 +14,14 @@ module('Integration | Component | Global | App Layout', function (hooks) {
     class FeatureTogglesStub extends Service {
       featureToggles = { isPixAppNewLayoutEnabled: true };
     }
+
     this.owner.register('service:featureToggles', FeatureTogglesStub);
   });
 
   module('navigation', function () {
     test('it should exist 2 skip links', async function (assert) {
       // given & when
-      const screen = await render(<template><AppLayout /></template>);
+      const screen = await render(<template><AppLayout @displayFullLayout={{true}} /></template>);
 
       // then
       const skipLinks = screen.getAllByRole('link', { name: /Aller/ });
@@ -30,7 +31,7 @@ module('Integration | Component | Global | App Layout', function (hooks) {
 
     test('it should exist an aside block', async function (assert) {
       // given & when
-      const screen = await render(<template><AppLayout /></template>);
+      const screen = await render(<template><AppLayout @displayFullLayout={{true}} /></template>);
 
       // then
       const aside = screen.getByRole('complementary');
@@ -49,7 +50,7 @@ module('Integration | Component | Global | App Layout', function (hooks) {
         }
         this.owner.register('service:media', MediaServiceStub);
 
-        const screen = await render(<template><AppLayout /></template>);
+        const screen = await render(<template><AppLayout @displayFullLayout={{true}} /></template>);
 
         // then
         assert.dom(screen.queryByRole('link', { name: '100 Pix' })).doesNotExist();
@@ -58,6 +59,7 @@ module('Integration | Component | Global | App Layout', function (hooks) {
 
     module('when user is connected', function (hooks) {
       hooks.beforeEach(function () {
+        stubSessionService(this.owner, { isAuthenticated: true });
         stubCurrentUserService(
           this.owner,
           {
@@ -72,7 +74,7 @@ module('Integration | Component | Global | App Layout', function (hooks) {
 
       test('it should display the user pix score', async function (assert) {
         // given & when
-        const screen = await render(<template><AppLayout /></template>);
+        const screen = await render(<template><AppLayout @displayFullLayout={{true}} /></template>);
 
         // then
         assert.dom(screen.getByRole('link', { name: '100 Pix' })).exists();
@@ -80,7 +82,7 @@ module('Integration | Component | Global | App Layout', function (hooks) {
 
       test('it should display a campaign code link', async function (assert) {
         // given & when
-        const screen = await render(<template><AppLayout /></template>);
+        const screen = await render(<template><AppLayout @displayFullLayout={{true}} /></template>);
 
         // then
         assert.dom(screen.getByRole('link', { name: t('navigation.main.code') })).exists();
@@ -88,7 +90,7 @@ module('Integration | Component | Global | App Layout', function (hooks) {
 
       test('it should display the UserLoggedMenu component', async function (assert) {
         // given & when
-        const screen = await render(<template><AppLayout /></template>);
+        const screen = await render(<template><AppLayout @displayFullLayout={{true}} /></template>);
 
         // then
         assert
@@ -108,7 +110,7 @@ module('Integration | Component | Global | App Layout', function (hooks) {
           }
           this.owner.register('service:media', MediaServiceStub);
 
-          const screen = await render(<template><AppLayout /></template>);
+          const screen = await render(<template><AppLayout @displayFullLayout={{true}} /></template>);
 
           // then
           assert.dom(screen.queryByRole('link', { name: '100 Pix' })).doesNotExist();
@@ -134,7 +136,7 @@ module('Integration | Component | Global | App Layout', function (hooks) {
   module('footer', function () {
     test('it should display the footer component', async function (assert) {
       // given & when
-      const screen = await render(<template><AppLayout /></template>);
+      const screen = await render(<template><AppLayout @displayFullLayout={{true}} /></template>);
 
       // then
       assert.dom(screen.getByText(`${t('navigation.copyrights')} ${new Date().getFullYear()} Pix`)).exists();

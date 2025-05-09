@@ -38,7 +38,7 @@ export default class DataProtectionPolicyInformationBanner extends Component {
       return false;
     }
 
-    return this.currentUser.user.shouldSeeDataProtectionPolicyInformationBanner;
+    return this.currentUser.user?.shouldSeeDataProtectionPolicyInformationBanner;
   }
 
   get dataProtectionPolicyUrl() {
