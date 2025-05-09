@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-import * as studentInformationForAccountRecoverySerializer from '../../../src/identity-access-management/infrastructure/serializers/jsonapi/student-information-for-account-recovery-serializer.js';
+import * as studentInformationForAccountRecoverySerializer from '../../../src/identity-access-management/infrastructure/serializers/jsonapi/student-information-for-account-recovery.serializer.js';
 import * as scoOrganizationLearnerSerializer from '../../../src/prescription/learner-management/infrastructure/serializers/jsonapi/sco-organization-learner-serializer.js';
 import { DomainTransaction } from '../../../src/shared/domain/DomainTransaction.js';
 import { usecases } from '../../domain/usecases/index.js';

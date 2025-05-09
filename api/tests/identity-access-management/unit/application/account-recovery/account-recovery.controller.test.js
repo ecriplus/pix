@@ -8,7 +8,13 @@ describe('Unit | Identity Access Management | Application | Controller | account
     it('returns serialized account recovery details', async function () {
       // given
       const temporaryKey = 'ABCDEFZEFDD';
-      const studentInformation = { id: 1234, email: 'philipe@example.net', firstName: 'philipe' };
+      const studentInformation = {
+        id: 1234,
+        email: 'philipe@example.net',
+        firstName: 'philipe',
+        hasGarAuthenticationMethod: false,
+        hasScoUsername: false,
+      };
       const request = {
         params: { temporaryKey },
       };

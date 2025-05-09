@@ -10,7 +10,7 @@ const serialize = function (studentInformationForAccountRecovery) {
 
 const serializeAccountRecovery = function (accountRecoveryDemand) {
   return new Serializer('account-recovery-demand', {
-    attributes: ['firstName', 'email'],
+    attributes: ['firstName', 'email', 'hasGarAuthenticationMethod', 'hasScoUsername'],
   }).serialize(accountRecoveryDemand);
 };
 

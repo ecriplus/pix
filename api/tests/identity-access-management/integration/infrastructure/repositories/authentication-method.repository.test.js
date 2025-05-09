@@ -15,7 +15,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
 
   describe('#create', function () {
     context('when creating a AuthenticationMethod containing an external identifier', function () {
-      it('should return an AuthenticationMethod', async function () {
+      it('returns an AuthenticationMethod', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser().id;
         await databaseBuilder.commit();
@@ -38,7 +38,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         ]);
       });
 
-      it('should save an AuthenticationMethod in database', async function () {
+      it('saves an AuthenticationMethod in database', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser().id;
         await databaseBuilder.commit();
@@ -63,7 +63,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     context(
       'when an AuthenticationMethod already exists for an identity provider and an external identifier',
       function () {
-        it('should throw an AlreadyExistingEntityError', async function () {
+        it('throws an AlreadyExistingEntityError', async function () {
           // given
           const userIdA = databaseBuilder.factory.buildUser().id;
           const userIdB = databaseBuilder.factory.buildUser().id;
@@ -92,7 +92,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     );
 
     context('when an AuthenticationMethod already exists for an identity provider and a userId', function () {
-      it('should throw an AlreadyExistingEntityError', async function () {
+      it('throws an AlreadyExistingEntityError', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser().id;
         const authenticationMethodA = domainBuilder.buildAuthenticationMethod.withGarAsIdentityProvider({
@@ -118,7 +118,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       });
     });
 
-    it('should be DomainTransaction compliant', async function () {
+    it('is DomainTransaction compliant', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       await databaseBuilder.commit();
@@ -287,7 +287,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   });
 
   describe('#findOneByUserIdAndIdentityProvider', function () {
-    it('should return the AuthenticationMethod associated to a user for a given identity provider', async function () {
+    it('returns the AuthenticationMethod associated to a user for a given identity provider', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
@@ -311,7 +311,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(authenticationMethodsByUserIdAndIdentityProvider).to.deepEqualInstance(garAuthenticationMethod);
     });
 
-    it('should return null if there is no AuthenticationMethod for the given user and identity provider', async function () {
+    it('returns null if there is no AuthenticationMethod for the given user and identity provider', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildAuthenticationMethod.withPoleEmploiAsIdentityProvider({ userId });
@@ -413,7 +413,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   });
 
   describe('#findOneByExternalIdentifierAndIdentityProvider', function () {
-    it('should return the AuthenticationMethod for a given external identifier and identity provider', async function () {
+    it('returns the AuthenticationMethod for a given external identifier and identity provider', async function () {
       // given
       const externalIdentifier = 'samlId';
       const userId = databaseBuilder.factory.buildUser().id;
@@ -439,7 +439,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(authenticationMethodsByTypeAndValue).to.deepEqualInstance(authenticationMethod);
     });
 
-    it('should return null if there is no AuthenticationMethods for the given external identifier and identity provider', async function () {
+    it('returns null if there is no AuthenticationMethods for the given external identifier and identity provider', async function () {
       // given & when
       const authenticationMethodsByTypeAndValue =
         await authenticationMethodRepository.findOneByExternalIdentifierAndIdentityProvider({
@@ -464,7 +464,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         clock.restore();
       });
 
-      it('should update external identifier by userId and identity provider', async function () {
+      it('updates external identifier by userId and identity provider', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser().id;
         const authenticationMethod = domainBuilder.buildAuthenticationMethod.withGarAsIdentityProvider({
@@ -488,7 +488,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(externalIdentifier).to.equal('new_value');
       });
 
-      it('should return the updated AuthenticationMethod', async function () {
+      it('returns the updated AuthenticationMethod', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser().id;
         const authenticationMethod = domainBuilder.buildAuthenticationMethod.withGarAsIdentityProvider({
@@ -514,7 +514,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     context('When authentication method does not exist', function () {
-      it('should throw an AuthenticationMethodNotFoundError', async function () {
+      it('throws an AuthenticationMethodNotFoundError', async function () {
         // given
         const userId = 12345;
         const identityProvider = NON_OIDC_IDENTITY_PROVIDERS.GAR.code;
@@ -539,7 +539,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       await databaseBuilder.commit();
     });
 
-    it('should create and return a Pix authentication method with given password in database and set shouldChangePassword to true', async function () {
+    it('creates and returns a Pix authentication method with given password in database and set shouldChangePassword to true', async function () {
       // when
       const createdAuthenticationMethod = await authenticationMethodRepository.createPasswordThatShouldBeChanged({
         userId,
@@ -554,7 +554,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(createdAuthenticationMethod).to.deepEqualInstance(expectedAuthenticationMethod);
     });
 
-    it('should not replace an existing authenticationMethod with a different identity provider', async function () {
+    it('does not replace an existing authenticationMethod with a different identity provider', async function () {
       // given
       databaseBuilder.factory.buildAuthenticationMethod.withGarAsIdentityProvider({ userId });
       await databaseBuilder.commit();
@@ -578,7 +578,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(foundAuthenticationMethodGAR).to.exist;
     });
 
-    it('should throw an AlreadyExistingEntityError when authentication method with PIX identity provider already exists for user', async function () {
+    it('throws an AlreadyExistingEntityError when authentication method with PIX identity provider already exists for user', async function () {
       // given
       await authenticationMethodRepository.createPasswordThatShouldBeChanged({
         userId,
@@ -595,7 +595,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(error).to.be.instanceOf(AlreadyExistingEntityError);
     });
 
-    it('should be DomainTransaction compliant', async function () {
+    it('is DomainTransaction compliant', async function () {
       // when
       await catchErr(async function () {
         await DomainTransaction.execute(async () => {
@@ -636,7 +636,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         clock.restore();
       });
 
-      it('should update the authentication complement in database', async function () {
+      it('updates the authentication complement in database', async function () {
         // given
         const userId = authenticationMethod.userId;
         const expiredDate = Date.now();
@@ -662,7 +662,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(updatedAuthenticationComplement.expiredDate).to.deep.equal(expiredDate);
       });
 
-      it('should return the updated AuthenticationMethod', async function () {
+      it('returns the updated AuthenticationMethod', async function () {
         // given
         const userId = authenticationMethod.userId;
         const expiredDate = Date.now();
@@ -696,7 +696,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     context('When authentication method does not exist', function () {
-      it('should throw a AuthenticationMethodNotFoundError', async function () {
+      it('throws a AuthenticationMethodNotFoundError', async function () {
         // given
         const userId = 12345;
         const authenticationComplement = {};
@@ -717,7 +717,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   });
 
   describe('#hasIdentityProviderPIX', function () {
-    it('should return true if user have an authenticationMethod with an IdentityProvider PIX ', async function () {
+    it('returns true if user has an authenticationMethod with an IdentityProvider PIX ', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
@@ -734,7 +734,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(result).to.be.true;
     });
 
-    it('should return false if user have no authenticationMethod with an IdentityProvider PIX ', async function () {
+    it('returns false if user has no authenticationMethod with an IdentityProvider PIX ', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildAuthenticationMethod.withGarAsIdentityProvider({ userId });
@@ -750,8 +750,42 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
   });
 
+  describe('#hasIdentityProviderGar', function () {
+    it('returns true if user has an authenticationMethod with an IdentityProvider GAR ', async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser().id;
+      databaseBuilder.factory.buildAuthenticationMethod.withGarAsIdentityProvider({
+        userId,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await authenticationMethodRepository.hasIdentityProviderGar({
+        userId,
+      });
+
+      // then
+      expect(result).to.be.true;
+    });
+
+    it('returns false if user has no authenticationMethod with an IdentityProvider GAR ', async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser().id;
+      databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({ userId });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await authenticationMethodRepository.hasIdentityProviderGar({
+        userId,
+      });
+
+      // then
+      expect(result).to.be.false;
+    });
+  });
+
   describe('#removeByUserIdAndIdentityProvider', function () {
-    it('should delete from database the authentication method by userId and identityProvider', async function () {
+    it('deletes from database the authentication method by userId and identityProvider', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildAuthenticationMethod.withGarAsIdentityProvider({
@@ -773,7 +807,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   });
 
   describe('#removeAllAuthenticationMethodsByUserId', function () {
-    it('should delete from database all the authentication methods by userId', async function () {
+    it('deletes from database all the authentication methods by userId', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildAuthenticationMethod.withGarAsIdentityProvider({
@@ -832,7 +866,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   });
 
   describe('#findByUserId', function () {
-    it("should return the user's authentication methods", async function () {
+    it("returns the user's authentication methods", async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const secondAuthenticationMethod = domainBuilder.buildAuthenticationMethod.withGarAsIdentityProvider({
@@ -860,7 +894,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(authenticationMethods).to.deepEqualArray([firstAuthenticationMethod, secondAuthenticationMethod]);
     });
 
-    it('should return an empty array if user has no authentication methods', async function () {
+    it('returns an empty array if user has no authentication methods', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       await databaseBuilder.commit();
@@ -874,7 +908,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   });
 
   describe('#getByIdAndUserId', function () {
-    it("should return the user's authentication method", async function () {
+    it("returns the user's authentication method", async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const otherUserId = databaseBuilder.factory.buildUser().id;
@@ -905,7 +939,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('when authentication method belongs to another user', function () {
-      it('should throw an AuthenticationMethodNotFoundError', async function () {
+      it('throws an AuthenticationMethodNotFoundError', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser().id;
         const otherUserId = databaseBuilder.factory.buildUser().id;
@@ -931,7 +965,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('when authentication method id does not exist', function () {
-      it('should throw an AuthenticationMethodNotFoundError', async function () {
+      it('throws an AuthenticationMethodNotFoundError', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser().id;
         const authenticationMethodId = domainBuilder.buildAuthenticationMethod.withGarAsIdentityProvider({ userId }).id;
@@ -950,7 +984,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('when user id does not exist', function () {
-      it('should throw an AuthenticationMethodNotFoundError', async function () {
+      it('throws an AuthenticationMethodNotFoundError', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser().id;
         const wrongUserId = userId + 1;
@@ -983,7 +1017,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       clock.restore();
     });
 
-    it('should update authentication method user id', async function () {
+    it('updates authentication method user id', async function () {
       // given
       const originUserId = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildAuthenticationMethod.withGarAsIdentityProvider({ userId: originUserId });
@@ -1013,7 +1047,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       clock.restore();
     });
 
-    it('should update authentication method complement', async function () {
+    it('updates authentication method complement', async function () {
       // given
       const now = new Date('2022-03-15');
       clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
