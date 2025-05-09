@@ -30,7 +30,7 @@ export default class AttestationContent extends Component {
   }
 
   sendMetrics() {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Page Mes Attestations',
       'pix-event-action': 'Cliquer sur le bouton Télécharger (attestation)',

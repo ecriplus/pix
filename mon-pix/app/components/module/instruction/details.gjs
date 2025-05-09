@@ -24,7 +24,7 @@ export default class ModulixDetails extends Component {
 
   @action
   onModuleStart() {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Détails du module : ${this.args.module.slug}`,
@@ -35,7 +35,7 @@ export default class ModulixDetails extends Component {
 
   @action
   onModuleStartUsingSmallScreen() {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Détails du module : ${this.args.module.slug}`,
@@ -46,7 +46,7 @@ export default class ModulixDetails extends Component {
 
   @action
   onSmallScreenModalOpen() {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Détails du module : ${this.args.module.slug}`,
@@ -57,7 +57,7 @@ export default class ModulixDetails extends Component {
 
   @action
   onSmallScreenModalClose() {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Détails du module : ${this.args.module.slug}`,

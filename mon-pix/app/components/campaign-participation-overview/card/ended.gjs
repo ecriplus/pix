@@ -63,7 +63,7 @@ export default class Ended extends Component {
 
   @action
   onClick() {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Campaign participation',
       'pix-event-action': `Voir le détail d'une participation partagée`,

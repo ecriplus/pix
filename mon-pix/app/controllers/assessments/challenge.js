@@ -249,7 +249,7 @@ export default class ChallengeController extends Controller {
   }
 
   addMetrics() {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Vocalisation',
       'pix-event-action': 'Activation globale de la vocalisation',

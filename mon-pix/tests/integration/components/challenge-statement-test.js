@@ -274,10 +274,10 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
                   id: 'rec_challenge4',
                   locales: ['fr'],
                 });
-                const add = sinon.stub();
+                const trackEvent = sinon.stub();
 
                 class MetricsStubService extends Service {
-                  add = add;
+                  trackEvent = trackEvent;
                 }
                 this.owner.register('service:metrics', MetricsStubService);
 
@@ -289,7 +289,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
                 await click(screen.getByRole('button', { name: t('pages.challenge.statement.text-to-speech.play') }));
 
                 // then
-                sinon.assert.calledWithExactly(add, {
+                sinon.assert.calledWithExactly(trackEvent, {
                   event: 'custom-event',
                   'pix-event-category': 'Vocalisation',
                   'pix-event-action': "Lecture d'une épreuve",

@@ -95,7 +95,7 @@ module('Integration | Component | CampaignParticipationOverview | Card | Ended',
         const router = this.owner.lookup('service:router');
         router.transitionTo = sinon.stub();
         const metrics = this.owner.lookup('service:metrics');
-        metrics.add = sinon.stub();
+        metrics.trackEvent = sinon.stub();
 
         const campaignParticipationOverview = store.createRecord('campaign-participation-overview', {
           isShared: true,
@@ -118,7 +118,7 @@ module('Integration | Component | CampaignParticipationOverview | Card | Ended',
         await click(screen.getByRole('button', { name: 'Voir le détail' }));
 
         // then
-        sinon.assert.calledWithExactly(metrics.add, {
+        sinon.assert.calledWithExactly(metrics.trackEvent, {
           event: 'custom-event',
           'pix-event-category': 'Campaign participation',
           'pix-event-action': `Voir le détail d'une participation partagée`,

@@ -104,7 +104,7 @@ export default class Card extends Component {
 
   @action
   trackAccess() {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Accès Contenu Formatif',
       'pix-event-action': `Click depuis : ${this.router.currentRouteName}`,

@@ -49,7 +49,7 @@ module('Integration | Component | Module | Details', function (hooks) {
         await click(screen.getByRole('button', { name: t('pages.modulix.details.startModule') }));
 
         // then
-        sinon.assert.calledWithExactly(metrics.add, {
+        sinon.assert.calledWithExactly(metrics.trackEvent, {
           event: 'custom-event',
           'pix-event-category': 'Modulix',
           'pix-event-action': `Détails du module : ${module.slug}`,
@@ -85,7 +85,7 @@ module('Integration | Component | Module | Details', function (hooks) {
           await click(screen.getByRole('button', { name: t('pages.modulix.details.startModule') }));
 
           // then
-          sinon.assert.calledWithExactly(metrics.add, {
+          sinon.assert.calledWithExactly(metrics.trackEvent, {
             event: 'custom-event',
             'pix-event-category': 'Modulix',
             'pix-event-action': `Détails du module : ${module.slug}`,
@@ -120,7 +120,7 @@ module('Integration | Component | Module | Details', function (hooks) {
           await click(screen.getByRole('button', { name: t('pages.modulix.details.startModule') }));
 
           // then
-          sinon.assert.calledWithExactly(metrics.add, {
+          sinon.assert.calledWithExactly(metrics.trackEvent, {
             event: 'custom-event',
             'pix-event-category': 'Modulix',
             'pix-event-action': `Détails du module : ${module.slug}`,
@@ -167,7 +167,7 @@ module('Integration | Component | Module | Details', function (hooks) {
             );
 
             // then
-            sinon.assert.calledWithExactly(metrics.add, {
+            sinon.assert.calledWithExactly(metrics.trackEvent, {
               event: 'custom-event',
               'pix-event-category': 'Modulix',
               'pix-event-action': `Détails du module : ${module.slug}`,
@@ -214,7 +214,7 @@ module('Integration | Component | Module | Details', function (hooks) {
             );
 
             // then
-            sinon.assert.calledWithExactly(metrics.add, {
+            sinon.assert.calledWithExactly(metrics.trackEvent, {
               event: 'custom-event',
               'pix-event-category': 'Modulix',
               'pix-event-action': `Détails du module : ${module.slug}`,
@@ -252,7 +252,7 @@ function prepareDetailsComponentContext(tabletSupport, breakpoint = 'desktop') {
   const router = this.owner.lookup('service:router');
   router.transitionTo = sinon.stub();
   const metrics = this.owner.lookup('service:metrics');
-  metrics.add = sinon.stub();
+  metrics.trackEvent = sinon.stub();
   const store = this.owner.lookup('service:store');
 
   const details = {

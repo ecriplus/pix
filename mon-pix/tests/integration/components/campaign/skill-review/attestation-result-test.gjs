@@ -70,7 +70,7 @@ module('Integration | Component | Campaign | Skill Review | attestation-result',
       this.owner.register('service:fileSaver', FileSaverStub);
 
       class MetricsStub extends Service {
-        add = metricsAddStub;
+        trackEvent = metricsAddStub;
       }
       const metricsAddStub = sinon.stub().resolves();
 

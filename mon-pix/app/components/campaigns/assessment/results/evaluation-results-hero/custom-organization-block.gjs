@@ -27,7 +27,7 @@ export default class EvaluationResultsCustomOrganizationBlock extends Component 
 
   @action
   handleCustomButtonDisplay() {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Fin de parcours',
       'pix-event-action': "Affichage du bloc de l'organisation",
@@ -37,7 +37,7 @@ export default class EvaluationResultsCustomOrganizationBlock extends Component 
 
   @action
   handleCustomButtonClick() {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Fin de parcours',
       'pix-event-action': "Affichage du bloc de l'organisation",

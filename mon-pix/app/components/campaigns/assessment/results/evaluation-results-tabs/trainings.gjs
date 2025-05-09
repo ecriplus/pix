@@ -19,7 +19,7 @@ export default class EvaluationResultsTabsTrainings extends Component {
   constructor() {
     super(...arguments);
 
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Fin de parcours',
       'pix-event-action': 'Affichage onglet',
@@ -48,7 +48,7 @@ export default class EvaluationResultsTabsTrainings extends Component {
       campaignParticipationResultToShare.isShared = true;
       campaignParticipationResultToShare.canImprove = false;
 
-      this.metrics.add({
+      this.metrics.trackEvent({
         event: 'custom-event',
         'pix-event-category': 'Fin de parcours',
         'pix-event-action': 'Envoi des résultats',

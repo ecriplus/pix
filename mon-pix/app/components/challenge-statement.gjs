@@ -261,7 +261,7 @@ export default class ChallengeStatement extends Component {
   }
 
   addMetrics() {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Vocalisation',
       'pix-event-action': "Lecture d'une épreuve",

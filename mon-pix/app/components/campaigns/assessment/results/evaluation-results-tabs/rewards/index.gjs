@@ -11,7 +11,7 @@ export default class Rewards extends Component {
   constructor() {
     super(...arguments);
 
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Fin de parcours',
       'pix-event-action': 'Affichage onglet',

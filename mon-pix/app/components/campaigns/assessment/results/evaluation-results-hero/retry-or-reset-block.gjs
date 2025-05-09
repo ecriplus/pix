@@ -21,7 +21,7 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
     super(...arguments);
 
     if (this.args.campaignParticipationResult.canRetry) {
-      this.metrics.add({
+      this.metrics.trackEvent({
         event: 'custom-event',
         'pix-event-category': 'Fin de parcours',
         'pix-event-action': 'Affichage du bloc RAZ/Repasser un parcours',
@@ -30,7 +30,7 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
     }
 
     if (this.args.campaignParticipationResult.canReset) {
-      this.metrics.add({
+      this.metrics.trackEvent({
         event: 'custom-event',
         'pix-event-category': 'Fin de parcours',
         'pix-event-action': 'Affichage du bloc RAZ/Repasser un parcours',
@@ -41,7 +41,7 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
 
   @action
   handleRetryClick() {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Fin de parcours',
       'pix-event-action': 'Affichage du bloc RAZ/Repasser un parcours',
@@ -52,7 +52,7 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
   @action
   toggleResetModalVisibility() {
     if (!this.isResetModalVisible) {
-      this.metrics.add({
+      this.metrics.trackEvent({
         event: 'custom-event',
         'pix-event-category': 'Fin de parcours',
         'pix-event-action': 'Affichage du bloc RAZ/Repasser un parcours',
@@ -65,7 +65,7 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
 
   @action
   handleResetClick() {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Fin de parcours',
       'pix-event-action': 'Affichage du bloc RAZ/Repasser un parcours',

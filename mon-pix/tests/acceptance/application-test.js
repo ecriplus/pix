@@ -4,6 +4,9 @@ import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { setupIntl } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
+
+import { authenticate } from '../helpers/authentication';
 
 module('Acceptance | Application', function (hooks) {
   setupApplicationTest(hooks);
@@ -17,6 +20,43 @@ module('Acceptance | Application', function (hooks) {
       load = async function () {};
     }
     this.owner.register('service:featureToggles', FeatureTogglesStub);
+  });
+
+  module('analytics', function (hooks) {
+    let user;
+    hooks.beforeEach(async function () {
+      // given
+      user = server.create('user', 'withEmail');
+      user = await authenticate(user);
+      class MetricServiceStub extends Service {
+        trackPage = sinon.stub();
+      }
+      this.owner.register('service:metrics', MetricServiceStub);
+    });
+
+    test('should trackPage', async function (assert) {
+      const metricService = this.owner.lookup('service:metrics');
+      // when
+      await visit('/');
+
+      // then
+      assert.ok(
+        metricService.trackPage.calledOnceWithExactly({
+          page: '/accueil',
+          routeName: 'authenticated.user-dashboard',
+        }),
+      );
+      // TODO add test for blockPageview
+    });
+    test('should rewrite id in URL', async function () {
+      const metricService = this.owner.lookup('service:metrics');
+      await visit('/competences/1');
+      sinon.assert.calledOnceWithExactly(metricService.trackPage, {
+        u: '/competences/_ID_',
+        routeName: 'authenticated.competences.index',
+      });
+      assert.ok(true);
+    });
   });
 
   module('When there are no information banners', function () {

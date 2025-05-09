@@ -191,7 +191,7 @@ module('Unit | Component | Training | card', function (hooks) {
     test('should push event on click', function (assert) {
       // given
       const metrics = this.owner.lookup('service:metrics');
-      metrics.add = sinon.stub();
+      metrics.trackEvent = sinon.stub();
       const trainingTitle = 'Mon super CF';
       const component = createGlimmerComponent('training/card', {
         training: { title: trainingTitle, link: 'https://exemple.net/' },
@@ -203,7 +203,7 @@ module('Unit | Component | Training | card', function (hooks) {
       component.trackAccess();
 
       // then
-      sinon.assert.calledWithExactly(metrics.add, {
+      sinon.assert.calledWithExactly(metrics.trackEvent, {
         event: 'custom-event',
         'pix-event-category': 'Accès Contenu Formatif',
         'pix-event-action': `Click depuis : ${currentRouteName}`,
