@@ -21,7 +21,7 @@ export function csvFileParser(columnSchema = []) {
 
         if (!column) return value;
 
-        return Joi.attempt(value, column.schema);
+        return Joi.attempt(value, column.schema, value);
       },
     });
   };

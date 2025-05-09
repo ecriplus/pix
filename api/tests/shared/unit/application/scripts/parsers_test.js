@@ -47,7 +47,7 @@ describe('Shared | Unit | Application | Parsers', function () {
 
       // then
       expect(error).to.be.instanceOf(Joi.ValidationError);
-      expect(error.message).to.equal('"value" must be a valid email');
+      expect(error.message).to.equal('boomemail.com "value" must be a valid email');
     });
   });
 
