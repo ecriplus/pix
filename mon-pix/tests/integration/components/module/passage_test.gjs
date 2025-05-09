@@ -1249,6 +1249,8 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const metrics = this.owner.lookup('service:metrics');
       metrics.add = sinon.stub();
       const store = this.owner.lookup('service:store');
+      const passageEventsService = this.owner.lookup('service:passage-events');
+      passageEventsService.record = sinon.stub();
 
       const qcuElement = {
         instruction: 'instruction',
@@ -1279,6 +1281,9 @@ module('Integration | Component | Module | Passage', function (hooks) {
         'pix-event-category': 'Modulix',
         'pix-event-action': `Passage du module : ${module.id}`,
         'pix-event-name': `Click sur le bouton Terminer du grain : ${grain.id}`,
+      });
+      sinon.assert.calledWithExactly(passageEventsService.record, {
+        type: 'PASSAGE_TERMINATED',
       });
       assert.ok(true);
     });

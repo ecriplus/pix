@@ -14,6 +14,7 @@ export default class ModulePassage extends Component {
   @service metrics;
   @service store;
   @service modulixAutoScroll;
+  @service passageEvents;
 
   displayableGrains = this.args.module.grains.filter((grain) => ModuleGrain.getSupportedComponents(grain).length > 0);
   @tracked grainsToDisplay = this.displayableGrains.length > 0 ? [this.displayableGrains[0]] : [];
@@ -118,6 +119,9 @@ export default class ModulePassage extends Component {
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.id}`,
       'pix-event-name': `Click sur le bouton Terminer du grain : ${grainId}`,
+    });
+    this.passageEvents.record({
+      type: 'PASSAGE_TERMINATED',
     });
     return this.router.transitionTo('module.recap', this.args.module);
   }
