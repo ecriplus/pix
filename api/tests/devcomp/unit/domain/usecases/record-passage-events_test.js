@@ -76,35 +76,70 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
   });
 
   context('when the passage for given passage id is terminated', function () {
-    it('should throw an error', async function () {
-      // given
-      const event = {
-        type: 'PASSAGE_STARTED',
-        occurredAt: new Date(),
-        sequenceNumber: 2,
-        contentHash: 'abc',
-        passageId: 123,
-      };
+    context('when passageEvent is not "passage_terminated"', function () {
+      it('should throw an error', async function () {
+        // given
+        const event = {
+          type: 'PASSAGE_STARTED',
+          occurredAt: new Date(),
+          sequenceNumber: 2,
+          contentHash: 'abc',
+          passageId: 123,
+        };
 
-      const passageRepositoryStub = {
-        get: sinon.stub().resolves(new Passage({ id: 123, terminatedAt: new Date() })),
-      };
-      const passageEventRepositoryStub = {
-        record: sinon.stub().resolves(),
-      };
+        const passageRepositoryStub = {
+          get: sinon.stub().resolves(new Passage({ id: 123, terminatedAt: new Date() })),
+        };
+        const passageEventRepositoryStub = {
+          record: sinon.stub().resolves(),
+        };
 
-      // when
-      const error = await catchErr(recordPassageEvents)({
-        events: [event],
-        userId: null,
-        passageRepository: passageRepositoryStub,
-        passageEventRepository: passageEventRepositoryStub,
+        // when
+        const error = await catchErr(recordPassageEvents)({
+          events: [event],
+          userId: null,
+          passageRepository: passageRepositoryStub,
+          passageEventRepository: passageEventRepositoryStub,
+        });
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal(`Passage with id ${event.id} is terminated.`);
+        expect(passageEventRepositoryStub.record).to.not.have.been.called;
       });
+    });
+    context('when passageEvent is "passage_terminated"', function () {
+      it('should not throw an error', async function () {
+        // given
+        const passageTerminatedEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 1,
+          type: 'PASSAGE_TERMINATED',
+        };
 
-      // then
-      expect(error).to.be.instanceOf(DomainError);
-      expect(error.message).to.equal(`Passage with id ${event.id} is terminated.`);
-      expect(passageEventRepositoryStub.record).to.not.have.been.called;
+        const events = [passageTerminatedEvent];
+
+        const passage = domainBuilder.devcomp.buildPassage({ id: 2, terminatedAt: new Date() });
+        const passageEventRepositoryStub = {
+          record: sinon.stub().resolves(),
+          getAllByPassageId: sinon.stub().resolves([]),
+        };
+        const passageRepositoryStub = {
+          get: sinon.stub().resolves(passage),
+        };
+
+        // when
+        const result = recordPassageEvents({
+          events,
+          userId: null,
+          passageRepository: passageRepositoryStub,
+          passageEventRepository: passageEventRepositoryStub,
+        });
+
+        // then
+        await expect(result).to.not.be.rejectedWith(DomainError);
+      });
     });
   });
 
