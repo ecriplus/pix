@@ -1,5 +1,28 @@
 # Pix Changelog
 
+## v5.107.0 (09/05/2025)
+
+
+### :rocket: Amélioration
+- [#12245](https://github.com/1024pix/pix/pull/12245) [FEATURE] Élargir les contraintes de UserAnonymizedEventLoggingJob pour pouvoir traiter tous les événements  (PIX-17789).
+- [#12246](https://github.com/1024pix/pix/pull/12246) [FEATURE] Supprimer les contraintes non génériques dans AuditLogger (PIX-17790).
+- [#12218](https://github.com/1024pix/pix/pull/12218) [FEATURE] Récupérer les informations nécessaires à l'affichage dynamique de la récupération de compte (PIX-17504).
+- [#12243](https://github.com/1024pix/pix/pull/12243) [FEATURE] Supprimer les contraintes non génériques dans la table audit-log (PIX-17737).
+- [#12188](https://github.com/1024pix/pix/pull/12188) [FEATURE] Afficher la nouvelle page d'analyse de résultat.
+- [#12076](https://github.com/1024pix/pix/pull/12076) [FEATURE] Création module au-dela-des-mots-de-passe (débutant).
+- [#12184](https://github.com/1024pix/pix/pull/12184) [FEATURE] Amélioration des certificats V2 sur Pix App (PIX-17632).
+- [#12227](https://github.com/1024pix/pix/pull/12227) [FEATURE] Créer un service pour enregistrer une séquence d'événements dans un passage (PIX-16955).
+
+### :building_construction: Tech
+- [#12234](https://github.com/1024pix/pix/pull/12234) [TECH] Ajoute la gestion des juridictions dans le script de gestion des applications clientes.
+- [#12239](https://github.com/1024pix/pix/pull/12239) [TECH] Corriger le flaky sur la route passage de Pix App (PIX-17784).
+- [#12240](https://github.com/1024pix/pix/pull/12240) [TECH] Améliorer les models swagger de Maddo.
+- [#12230](https://github.com/1024pix/pix/pull/12230) [TECH] Migrer le feature toggle de basculement synchrone/asynchrone des quêtes vers le nouveaux système (PIX-17761).
+- [#12228](https://github.com/1024pix/pix/pull/12228) [TECH] Migrer le feature toggle de l'activation des quêtes vers le nouveaux système (PIX-17760).
+
+### :bug: Correction
+- [#12208](https://github.com/1024pix/pix/pull/12208) [BUGFIX] Les "embed" des modules n'acceptent pas le copier-coller (PIX-17602).
+
 ## v5.106.0 (07/05/2025)
 
 
