@@ -41,6 +41,13 @@ export default class ModulixEmbed extends ModuleElement {
     }
   }
 
+  get permissionToClipboardWrite() {
+    if (!this.args.embed?.url) {
+      return null;
+    }
+    return isEmbedAllowedOrigin(this.args.embed.url) ? 'clipboard-write' : null;
+  }
+
   _receiveEmbedMessage(event) {
     if (!this._messageIsFromCurrentElementSimulator(event)) return;
     if (!isEmbedAllowedOrigin(event.origin)) return;
@@ -84,6 +91,7 @@ export default class ModulixEmbed extends ModuleElement {
           src={{@embed.url}}
           title={{@embed.title}}
           style={{this.heightStyle}}
+          allow="{{this.permissionToClipboardWrite}}"
           {{didInsert this.setIframeHtmlElement}}
         ></iframe>
 

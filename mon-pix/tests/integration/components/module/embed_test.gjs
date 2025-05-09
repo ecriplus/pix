@@ -3,6 +3,7 @@ import { clickByName, render } from '@1024pix/ember-testing-library';
 import { find } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModulixEmbed from 'mon-pix/components/module/element/embed';
+import ENV from 'mon-pix/config/environment';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -299,6 +300,41 @@ module('Integration | Component | Module | Embed', function (hooks) {
       // then
       const iframe = screen.getByTitle(embed.title);
       assert.strictEqual(document.activeElement, iframe);
+    });
+  });
+
+  module('when user copy pastes', function () {
+    test('it should allow `clipboard-write` when the embed origin is allowed ', async function (assert) {
+      // given
+      const embed = {
+        id: 'id',
+        title: 'title',
+        isCompletionRequired: false,
+        url: `${ENV.APP.EMBED_ALLOWED_ORIGINS[0]}/embed-simulator.url`,
+        height: 800,
+      };
+
+      // when
+      await render(<template><ModulixEmbed @embed={{embed}} /></template>);
+
+      // then
+      assert.strictEqual(find('.element-embed-container__iframe').allow, 'clipboard-write');
+    });
+    test('it should not allow `clipboard-write` when the embed origin is not allowed', async function (assert) {
+      // given
+      const embed = {
+        id: 'id',
+        title: 'title',
+        isCompletionRequired: false,
+        url: `not-allowed-origin/embed-simulator.url`,
+        height: 800,
+      };
+
+      // when
+      await render(<template><ModulixEmbed @embed={{embed}} /></template>);
+
+      // then
+      assert.notOk(find('.element-embed-container__iframe').allow);
     });
   });
 });
