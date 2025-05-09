@@ -30,6 +30,19 @@ describe('Unit | Domain | Pix Junior | compute step result', function () {
       expect(result).to.equal(Assessment.results.PARTIALLY_REACHED);
     });
   });
+  context('When the last activity is a skipped VALIDATION', function () {
+    it(`should return ${Assessment.results.PARTIALLY_REACHED}`, async function () {
+      const lastActivity = domainBuilder.buildActivity({
+        level: Activity.levels.VALIDATION,
+        status: Activity.status.SKIPPED,
+        stepIndex: 1,
+      });
+
+      const result = await computeStepResult(lastActivity);
+
+      expect(result).to.equal(Assessment.results.PARTIALLY_REACHED);
+    });
+  });
   context('When the last activity is a failed TRAINING', function () {
     it(`should return ${Assessment.results.NOT_REACHED}`, async function () {
       const lastActivity = domainBuilder.buildActivity({

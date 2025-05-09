@@ -8,12 +8,8 @@ export function computeStepResult(lastActivity) {
     return undefined;
   }
 
-  if (lastActivity.level === Activity.levels.VALIDATION && lastActivity.status === Activity.status.SUCCEEDED) {
-    return REACHED;
-  }
-
-  if (lastActivity.level === Activity.levels.VALIDATION && lastActivity.status === Activity.status.FAILED) {
-    return PARTIALLY_REACHED;
+  if (lastActivity.level === Activity.levels.VALIDATION) {
+    return lastActivity.status === Activity.status.SUCCEEDED ? REACHED : PARTIALLY_REACHED;
   }
 
   return NOT_REACHED;
