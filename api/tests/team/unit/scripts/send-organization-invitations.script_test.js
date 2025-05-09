@@ -2,7 +2,7 @@ import * as url from 'node:url';
 
 import Joi from 'joi';
 
-import { SendOrganizationInvitationsScript } from '../../../../src/team/scripts/send-organization-invitations-script.js';
+import { SendOrganizationInvitationsScript } from '../../../../src/team/scripts/send-organization-invitations.script.js';
 import { expect, sinon } from '../../../test-helper.js';
 
 const currentDirectory = url.fileURLToPath(new URL('.', import.meta.url));
@@ -53,7 +53,7 @@ describe('unit | team | scripts | send-organization-invitations-script', functio
         { 'Organization Id': 3, email: 'test3@example.net', locale: 'fr', role: 'MEMBER' },
       ];
       script = new SendOrganizationInvitationsScript();
-      logger = { info: sinon.spy() };
+      logger = { info: sinon.spy(), error: sinon.spy() };
       sendOrganizationInvitation = sinon.stub();
     });
 
@@ -73,7 +73,7 @@ describe('unit | team | scripts | send-organization-invitations-script', functio
         locale: file[0].locale,
         role: file[0].role,
       });
-      expect(logger.info).to.have.been.calledWith('3 invitations processed');
+      expect(logger.info).to.have.been.calledWith('3 of 3 invitations processed');
     });
 
     it('runs the script and replace empty role by null', async function () {
@@ -122,6 +122,22 @@ describe('unit | team | scripts | send-organization-invitations-script', functio
       expect(logger.info).to.have.been.calledWith('Dry run, no action');
       expect(sendOrganizationInvitation).to.not.have.been.called;
       expect(logger.info).to.have.been.calledWith('3 invitations will be processed');
+    });
+
+    it('runs the script and throws an error if an error occured', async function () {
+      // given
+      sendOrganizationInvitation.onCall(1).rejects('error');
+      // when // then
+      await expect(
+        script.handle({
+          options: { file, dryRun: false },
+          logger,
+          sendOrganizationInvitation,
+        }),
+      ).to.be.rejectedWith(Error, 'There are 1 errors in the process');
+      expect(logger.error).to.have.been.calledWith('Error on line 2, error');
+      expect(logger.info).to.have.been.calledWith('2 of 3 invitations processed');
+      expect(sendOrganizationInvitation).to.have.callCount(3);
     });
   });
 });

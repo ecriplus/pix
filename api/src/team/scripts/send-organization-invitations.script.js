@@ -20,6 +20,7 @@ const columnsSchemas = [
     name: 'role',
     schema: Joi.string()
       .trim()
+      .uppercase()
       .optional()
       .valid(...Object.values(OrganizationInvitation.RoleType), ''),
   },
@@ -54,6 +55,9 @@ export class SendOrganizationInvitationsScript extends Script {
         },
       },
     });
+    this.failedLines = 0;
+    this.successLines = 0;
+    this.currentLine = 0;
   }
 
   async handle({ options, logger, sendOrganizationInvitation = usecases.createOrganizationInvitationByAdmin }) {
@@ -62,16 +66,24 @@ export class SendOrganizationInvitationsScript extends Script {
     let batchCount = 1;
     for (const batch of batches) {
       logger.info(`Batch #${batchCount++}`);
-      batch.map(async (invitation) => {
+
+      for (const invitation of batch) {
         if (!dryRun) {
-          await sendOrganizationInvitation({
-            organizationId: invitation['Organization ID'],
-            email: invitation.email,
-            locale: invitation.locale,
-            role: invitation.role || null,
-          });
+          this.currentLine++;
+          try {
+            await sendOrganizationInvitation({
+              organizationId: invitation['Organization ID'],
+              email: invitation.email,
+              locale: invitation.locale,
+              role: invitation.role || null,
+            });
+            this.successLines++;
+          } catch (error) {
+            this.failedLines++;
+            logger.error(`Error on line ${this.currentLine}, ${error}`);
+          }
         }
-      });
+      }
       await setTimeout(throttleDelay);
       if (dryRun) {
         logger.info('Dry run, no action');
@@ -80,7 +92,10 @@ export class SendOrganizationInvitationsScript extends Script {
     if (dryRun) {
       logger.info(`${file.length} invitations will be processed`);
     } else {
-      logger.info(`${file.length} invitations processed`);
+      logger.info(`${this.successLines} of ${file.length} invitations processed`);
+      if (this.failedLines) {
+        throw new Error(`There are ${this.failedLines} errors in the process`);
+      }
     }
   }
 }

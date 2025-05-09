@@ -29,7 +29,7 @@ describe('Shared | Unit | Application | Parsers', function () {
       // then
       expect(result).to.deep.equal([
         { foo: 'hello', bar: 'world@email.com' },
-        { foo: 'baz', bar: 'boom@email.com' },
+        { foo: 'baz', bar: 'someone@example.net' },
       ]);
     });
 
@@ -47,7 +47,7 @@ describe('Shared | Unit | Application | Parsers', function () {
 
       // then
       expect(error).to.be.instanceOf(Joi.ValidationError);
-      expect(error.message).to.equal('"value" must be a valid email');
+      expect(error.message).to.equal('BOOMEMAIL "value" must be a valid email');
     });
   });
 
