@@ -1,5 +1,20 @@
 # Pix Changelog
 
+## v5.108.0 (12/05/2025)
+
+
+### :rocket: Amélioration
+- [#12247](https://github.com/1024pix/pix/pull/12247) [FEATURE] Réinitialiser le numéro de séquence lors du démarrage d'un passage dans Pix App (PIX-17710).
+
+### :building_construction: Tech
+- [#12027](https://github.com/1024pix/pix/pull/12027) [TECH] Supprimer le code du feature toggle isPixAdminNewSidebarEnabled (PIX-17458).
+- [#12203](https://github.com/1024pix/pix/pull/12203) [TECH] Déplacer les Banner Alert dans le PixAppLayout de PixApp (PIX-17724).
+
+### :bug: Correction
+- [#12222](https://github.com/1024pix/pix/pull/12222) [BUGFIX] Ne pas interrompre le script d'envoi d'invitations en masse à rejoindre une organisation (PIX-16645).
+- [#12224](https://github.com/1024pix/pix/pull/12224) [BUGFIX] Corriger le calcul de résultat d'une étape partiellement atteinte (PIX-17751).
+- [#12213](https://github.com/1024pix/pix/pull/12213) [BUGFIX] Ne plus retourner d'erreur BDD lors d'une violation de contrainte sur un double insertion de feature sur un learner (PIX-17734).
+
 ## v5.107.0 (09/05/2025)
 
 
