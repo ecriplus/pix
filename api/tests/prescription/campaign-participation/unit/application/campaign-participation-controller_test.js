@@ -1,7 +1,6 @@
 import { campaignParticipationController } from '../../../../../src/prescription/campaign-participation/application/campaign-participation-controller.js';
 import { usecases } from '../../../../../src/prescription/campaign-participation/domain/usecases/index.js';
 import { LOCALE } from '../../../../../src/shared/domain/constants.js';
-import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
 
 const { FRENCH_SPOKEN } = LOCALE;
@@ -388,9 +387,6 @@ describe('Unit | Application | Controller | Campaign-Participation', function ()
         auth: { credentials: { userId } },
       };
 
-      sinon.stub(DomainTransaction, 'execute').callsFake((lambda) => {
-        return lambda();
-      });
       sinon.stub(usecases, 'deleteCampaignParticipation');
       usecases.deleteCampaignParticipation.resolves();
 

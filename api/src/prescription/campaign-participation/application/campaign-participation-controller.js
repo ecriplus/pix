@@ -1,4 +1,3 @@
-import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { extractLocaleFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as anonymisedCampaignAssessmentSerializer from '../infrastructure/serializers/jsonapi/anonymised-campaign-assessment-serializer.js';
@@ -73,12 +72,10 @@ const getCampaignAssessmentParticipation = async function (request) {
 const deleteParticipation = async function (request, h) {
   const { userId } = request.auth.credentials;
   const { id, campaignParticipationId } = request.params;
-  await DomainTransaction.execute(async () => {
-    await usecases.deleteCampaignParticipation({
-      userId,
-      campaignId: id,
-      campaignParticipationId,
-    });
+  await usecases.deleteCampaignParticipation({
+    userId,
+    campaignId: id,
+    campaignParticipationId,
   });
   return h.response({}).code(204);
 };

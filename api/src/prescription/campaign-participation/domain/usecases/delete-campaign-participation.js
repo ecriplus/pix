@@ -1,4 +1,6 @@
-const deleteCampaignParticipation = async function ({
+import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
+
+const deleteCampaignParticipation = withTransaction(async function ({
   userId,
   campaignId,
   campaignParticipationId,
@@ -17,6 +19,6 @@ const deleteCampaignParticipation = async function ({
     campaignParticipation.delete(userId, isAnonymizationWithDeletionEnabled);
     await campaignParticipationRepository.remove(campaignParticipation.dataToUpdateOnDeletion);
   }
-};
+});
 
 export { deleteCampaignParticipation };
