@@ -2,8 +2,11 @@ const deleteCampaignParticipation = async function ({
   userId,
   campaignId,
   campaignParticipationId,
+  featureToggles,
   campaignParticipationRepository,
 }) {
+  const isAnonymizationWithDeletionEnabled = await featureToggles.get('isAnonymizationWithDeletionEnabled');
+
   const campaignParticipations =
     await campaignParticipationRepository.getAllCampaignParticipationsInCampaignForASameLearner({
       campaignId,
@@ -11,9 +14,8 @@ const deleteCampaignParticipation = async function ({
     });
 
   for (const campaignParticipation of campaignParticipations) {
-    campaignParticipation.delete(userId);
-    const { id, deletedAt, deletedBy } = campaignParticipation;
-    await campaignParticipationRepository.remove({ id, deletedAt, deletedBy });
+    campaignParticipation.delete(userId, isAnonymizationWithDeletionEnabled);
+    await campaignParticipationRepository.remove(campaignParticipation.dataToUpdateOnDeletion);
   }
 };
 

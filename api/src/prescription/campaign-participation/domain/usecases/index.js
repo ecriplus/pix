@@ -13,6 +13,7 @@ import * as stageRepository from '../../../../evaluation/infrastructure/reposito
 import * as authenticationMethodRepository from '../../../../identity-access-management/infrastructure/repositories/authentication-method.repository.js';
 import * as userRepository from '../../../../identity-access-management/infrastructure/repositories/user.repository.js';
 import { config } from '../../../../shared/config.js';
+import { featureToggles } from '../../../../shared/infrastructure/feature-toggles/index.js';
 import * as areaRepository from '../../../../shared/infrastructure/repositories/area-repository.js';
 import * as assessmentRepository from '../../../../shared/infrastructure/repositories/assessment-repository.js';
 import * as badgeForCalculationRepository from '../../../../shared/infrastructure/repositories/badge-for-calculation-repository.js';
@@ -45,6 +46,7 @@ import * as participationsForUserManagementRepository from '../../infrastructure
 import * as poleEmploiSendingRepository from '../../infrastructure/repositories/pole-emploi-sending-repository.js';
 
 /**
+ * @typedef { import ('../../../../shared/infrastructure/feature-toggles/index.js')} FeatureToggles
  * @typedef { import ('../../../../shared/infrastructure/repositories/area-repository.js')} AreaRepository
  * @typedef { import ('../../../../shared/infrastructure/repositories/assessment-repository.js')} AssessmentRepository
  * @typedef { import ('../../../../evaluation/infrastructure/repositories/badge-acquisition-repository.js')} BadgeAcquisitionRepository
@@ -108,6 +110,7 @@ const dependencies = {
   compareStagesAndAcquiredStages,
   competenceEvaluationRepository,
   competenceRepository,
+  featureToggles,
   knowledgeElementRepository: injectedSharedRepositories.knowledgeElementRepository,
   knowledgeElementSnapshotRepository,
   learningContentRepository,
