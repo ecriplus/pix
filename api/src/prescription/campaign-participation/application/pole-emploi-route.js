@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { jwtApplicationAuthenticationStrategyName } from '../../../shared/infrastructure/authentication-strategy-names.js';
 import { poleEmploiEnvoisDoc } from '../../../shared/infrastructure/open-api-doc/pole-emploi/envois-doc.js';
 import { erreurDoc } from '../../../shared/infrastructure/open-api-doc/pole-emploi/erreur-doc.js';
 import { poleEmploiController } from './pole-emploi-controller.js';
@@ -10,7 +11,10 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/pole-emploi/envois',
       config: {
-        auth: { strategy: 'jwt-application', access: { scope: 'pole-emploi-participants-result' } },
+        auth: {
+          strategy: jwtApplicationAuthenticationStrategyName,
+          access: { scope: 'pole-emploi-participants-result' },
+        },
         handler: poleEmploiController.getSendings,
         notes: [
           '- **API Pôle emploi qui nécessite une authentification de type client credential grant**\n' +

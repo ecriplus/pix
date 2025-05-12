@@ -4,6 +4,7 @@ import {
   certificationVerificationCodeType,
   studentIdentifierType,
 } from '../../../shared/domain/types/identifiers-type.js';
+import { jwtApplicationAuthenticationStrategyName } from '../../../shared/infrastructure/authentication-strategy-names.js';
 import { responseObjectErrorDoc } from '../../../shared/infrastructure/open-api-doc/response-object-error-doc.js';
 import { parcoursupController } from './parcoursup-controller.js';
 
@@ -13,7 +14,7 @@ const register = async function (server) {
       method: 'POST',
       path: '/api/application/parcoursup/certification/search',
       config: {
-        auth: { strategy: 'jwt-application', access: { scope: 'parcoursup' } },
+        auth: { strategy: jwtApplicationAuthenticationStrategyName, access: { scope: 'parcoursup' } },
         validate: {
           payload: Joi.alternatives()
             .try(

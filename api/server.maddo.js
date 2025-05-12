@@ -5,9 +5,9 @@ import { parse } from 'neoqs';
 import { setupErrorHandling } from './config/server-setup-error-handling.js';
 import { databaseConnections } from './db/database-connections.js';
 import { knex } from './db/knex-database-connection.js';
-import { authentication } from './lib/infrastructure/authentication.js';
 import * as parcoursupRoutes from './src/certification/results/application/parcoursup-route.js';
 import { identityAccessManagementRoutes } from './src/identity-access-management/application/routes.js';
+import * as serverAuthentication from './src/identity-access-management/infrastructure/server-authentication.js';
 import * as campaignsRoutes from './src/maddo/application/campaigns-routes.js';
 import * as organizationsRoutes from './src/maddo/application/organizations-routes.js';
 import * as replicationsRoutes from './src/maddo/application/replications-routes.js';
@@ -166,8 +166,8 @@ const setupDeserialization = function (server) {
 };
 
 const setupAuthentication = function (server) {
-  server.auth.scheme(authentication.schemes.jwt.name, authentication.schemes.jwt.scheme);
-  const jwtApplicationStrategy = authentication.strategies.jwtApplication;
+  server.auth.scheme(serverAuthentication.schemes.jwt.name, serverAuthentication.schemes.jwt.scheme);
+  const jwtApplicationStrategy = serverAuthentication.strategies.jwtApplication;
   server.auth.strategy(
     jwtApplicationStrategy.name,
     jwtApplicationStrategy.schemeName,
