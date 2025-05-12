@@ -47,6 +47,7 @@ export const rewardUser = async ({
         if (userHasSucceedQuest) {
           await rewardRepository.reward({ userId, rewardId: quest.rewardId });
           rewardIds.push(quest.rewardId);
+          break;
         }
       }
     }
