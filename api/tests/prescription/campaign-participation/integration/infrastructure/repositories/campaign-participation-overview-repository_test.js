@@ -53,6 +53,277 @@ describe('Integration | Repository | Campaign Participation Overview', function 
     await databaseBuilder.commit();
   });
 
+  describe('#findByOrganizationLearnerId', function () {
+    it('retrieves information about campaign participation, campaign and organization', async function () {
+      const { id: organizationId } = databaseBuilder.factory.buildOrganization({ name: 'Organization ABCD' });
+      const { id: campaignId } = databaseBuilder.factory.buildCampaign({
+        title: 'Campaign ABCD',
+        name: 'Campaign Name DEF',
+        code: 'ABCD',
+        organizationId,
+        targetProfileId: targetProfile.id,
+      });
+      const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({ organizationId, userId }).id;
+      databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'recSkillId1' });
+      const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
+        organizationLearnerId,
+        userId,
+        campaignId,
+        createdAt: new Date('2020-01-01'),
+        sharedAt: new Date('2020-01-02'),
+        validatedSkillsCount: 1,
+        status: CampaignParticipationStatuses.SHARED,
+        masteryRate: 0.1,
+      });
+      databaseBuilder.factory.buildAssessment({
+        campaignParticipationId: participationId,
+        state: Assessment.states.COMPLETED,
+      });
+      await databaseBuilder.commit();
+
+      const [campaignParticipation] = await campaignParticipationOverviewRepository.findByOrganizationLearnerId({
+        organizationLearnerId,
+      });
+
+      expect(campaignParticipation).to.deep.include({
+        id: participationId,
+        createdAt: new Date('2020-01-01'),
+        sharedAt: new Date('2020-01-02'),
+        isShared: true,
+        campaignCode: 'ABCD',
+        campaignTitle: 'Campaign ABCD',
+        campaignName: 'Campaign Name DEF',
+        organizationName: 'Organization ABCD',
+        masteryRate: 0.1,
+        totalStagesCount: undefined,
+        validatedStagesCount: undefined,
+        status: 'SHARED',
+      });
+    });
+
+    it('should retrieve all campaign participation of the organization learner', async function () {
+      const { id: organizationLearnerId, organizationId } = databaseBuilder.factory.buildOrganizationLearner({
+        userId,
+      });
+      const { id: otherOrganizationLearnerId, organizationId: otherOrganizationId } =
+        databaseBuilder.factory.buildOrganizationLearner({ userId });
+      const { id: campaign1Id } = databaseBuilder.factory.buildCampaign({
+        targetProfileId: targetProfile.id,
+        organizationId,
+      });
+      databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign1Id, skillId: 'recSkillId1' });
+      const { id: campaign2Id } = databaseBuilder.factory.buildCampaign({
+        targetProfileId: targetProfile.id,
+        organizationId,
+      });
+      databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign2Id, skillId: 'recSkillId1' });
+      const { id: campaign3Id } = databaseBuilder.factory.buildCampaign({
+        targetProfileId: targetProfile.id,
+        organizationId: otherOrganizationId,
+      });
+      databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign3Id, skillId: 'recSkillId1' });
+      const { id: participation1Id } = campaignParticipationOverviewFactory.build({
+        userId,
+        organizationLearnerId,
+        campaignId: campaign1Id,
+      });
+      const { id: participation2Id } = campaignParticipationOverviewFactory.build({
+        userId,
+        organizationLearnerId,
+        campaignId: campaign2Id,
+      });
+      campaignParticipationOverviewFactory.build({
+        userId,
+        organizationLearnerId: otherOrganizationLearnerId,
+        campaignId: campaign3Id,
+      });
+      await databaseBuilder.commit();
+
+      const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByOrganizationLearnerId({
+        organizationLearnerId,
+      });
+      const campaignParticipationUserIds = _.map(campaignParticipationOverviews, 'id');
+
+      expect(campaignParticipationUserIds).to.exactlyContain([participation1Id, participation2Id]);
+    });
+
+    it('should retrieve only campaign participation linked to ASSESSMENT', async function () {
+      const { id: organizationLearnerId, organizationId } = databaseBuilder.factory.buildOrganizationLearner({
+        userId,
+      });
+      const { id: campaign1Id } = databaseBuilder.factory.buildCampaign({
+        targetProfileId: targetProfile.id,
+        organizationId,
+      });
+      databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign1Id, skillId: 'recSkillId1' });
+      const { id: campaign2Id } = databaseBuilder.factory.buildCampaign({
+        type: CampaignTypes.PROFILES_COLLECTION,
+        organizationId,
+      });
+      const { id: participation1Id } = campaignParticipationOverviewFactory.build({
+        userId,
+        organizationLearnerId,
+        campaignId: campaign1Id,
+      });
+      databaseBuilder.factory.buildCampaignParticipation({ userId, campaignId: campaign2Id });
+
+      await databaseBuilder.commit();
+
+      const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByOrganizationLearnerId({
+        organizationLearnerId,
+      });
+
+      expect(campaignParticipationOverviews.length).to.equal(1);
+      expect(campaignParticipationOverviews[0].id).to.equal(participation1Id);
+    });
+
+    it('retrieves information about the most recent campaign participation of multipleSending campaign', async function () {
+      const { id: organizationLearnerId, organizationId } = databaseBuilder.factory.buildOrganizationLearner({
+        userId,
+      });
+      const { id: campaignId } = databaseBuilder.factory.buildCampaign({
+        targetProfileId: targetProfile.id,
+        organizationId,
+        multipleSendings: true,
+      });
+      databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'recSkillId1' });
+      const { id: oldParticipationId } = databaseBuilder.factory.buildCampaignParticipation({
+        userId,
+        organizationLearnerId,
+        campaignId,
+        isImproved: true,
+      });
+      const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
+        userId,
+        organizationLearnerId,
+        campaignId,
+      });
+      databaseBuilder.factory.buildAssessment({
+        userId,
+        campaignParticipationId: oldParticipationId,
+        state: Assessment.states.COMPLETED,
+        createdAt: new Date('2020-01-01'),
+      });
+      databaseBuilder.factory.buildAssessment({
+        userId,
+        campaignParticipationId: participationId,
+        state: Assessment.states.COMPLETED,
+        createdAt: new Date('2020-01-03'),
+      });
+      await databaseBuilder.commit();
+
+      const [campaignParticipation] = await campaignParticipationOverviewRepository.findByOrganizationLearnerId({
+        organizationLearnerId,
+      });
+
+      expect(campaignParticipation.id).to.equal(participationId);
+    });
+
+    it('retrieves information about the most recent assessment of campaign participation', async function () {
+      const { id: organizationLearnerId, organizationId } = databaseBuilder.factory.buildOrganizationLearner({
+        userId,
+      });
+      const { id: campaignId } = databaseBuilder.factory.buildCampaign({
+        targetProfileId: targetProfile.id,
+        organizationId,
+      });
+      databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'recSkillId1' });
+      const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
+        userId,
+        organizationLearnerId,
+        campaignId,
+        status: CampaignParticipationStatuses.TO_SHARE,
+      });
+      databaseBuilder.factory.buildAssessment({
+        userId,
+        campaignParticipationId: participationId,
+        state: Assessment.states.ABORTED,
+        createdAt: new Date('2020-01-01'),
+      });
+      databaseBuilder.factory.buildAssessment({
+        userId,
+        campaignParticipationId: participationId,
+        state: Assessment.states.STARTED,
+        createdAt: new Date('2020-01-02'),
+      });
+      databaseBuilder.factory.buildAssessment({
+        userId,
+        campaignParticipationId: participationId,
+        state: Assessment.states.COMPLETED,
+        createdAt: new Date('2020-01-03'),
+      });
+      await databaseBuilder.commit();
+
+      const [campaignParticipation] = await campaignParticipationOverviewRepository.findByOrganizationLearnerId({
+        organizationLearnerId,
+      });
+
+      expect(campaignParticipation.status).to.equal(CampaignParticipationStatuses.TO_SHARE);
+    });
+
+    it('retrieves the delete date', async function () {
+      const { id: organizationLearnerId, organizationId } = databaseBuilder.factory.buildOrganizationLearner({
+        userId,
+      });
+      const deletedAt = new Date('2022-03-05');
+      const { id: campaignId } = databaseBuilder.factory.buildCampaign({
+        organizationId,
+        targetProfileId: targetProfile.id,
+      });
+      databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'recSkillId1' });
+      const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
+        userId,
+        organizationLearnerId,
+        campaignId,
+        status: CampaignParticipationStatuses.TO_SHARE,
+        deletedAt,
+      });
+      databaseBuilder.factory.buildAssessment({
+        userId,
+        campaignParticipationId: participationId,
+        state: Assessment.states.ABORTED,
+      });
+      await databaseBuilder.commit();
+
+      const [campaignParticipation] = await campaignParticipationOverviewRepository.findByOrganizationLearnerId({
+        organizationLearnerId,
+      });
+
+      expect(campaignParticipation.disabledAt).to.deep.equal(deletedAt);
+    });
+
+    it('retrieves archived date', async function () {
+      const { id: organizationLearnerId, organizationId } = databaseBuilder.factory.buildOrganizationLearner({
+        userId,
+      });
+      const archivedAt = new Date('2020-05-26T09:54:00Z');
+      const { id: campaignId } = databaseBuilder.factory.buildCampaign({
+        targetProfileId: targetProfile.id,
+        organizationId,
+        archivedAt,
+      });
+      databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'recSkillId1' });
+      const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
+        userId,
+        organizationLearnerId,
+        campaignId,
+        status: CampaignParticipationStatuses.TO_SHARE,
+      });
+      databaseBuilder.factory.buildAssessment({
+        userId,
+        campaignParticipationId: participationId,
+        state: Assessment.states.ABORTED,
+      });
+      await databaseBuilder.commit();
+
+      const [campaignParticipation] = await campaignParticipationOverviewRepository.findByOrganizationLearnerId({
+        organizationLearnerId,
+      });
+
+      expect(campaignParticipation.disabledAt).to.deep.equal(archivedAt);
+    });
+  });
+
   describe('#findByUserIdWithFilters', function () {
     context('when there is no filter', function () {
       it('retrieves information about campaign participation, campaign and organization', async function () {
