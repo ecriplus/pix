@@ -190,7 +190,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
   });
 
   module('when users clicks on the "Continue" button', function () {
-    test('should display options buttons to answer', async function (assert) {
+    test('should display options buttons to answer and send a flashcards verso seen event', async function (assert) {
       // given
       const { flashcards } = _getFlashcards();
 
@@ -202,10 +202,17 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
       // then
       assert.ok(screen.getByText(t('pages.modulix.flashcards.answerDirection')));
       assert.ok(screen.getByText(t('pages.modulix.buttons.flashcards.answers.no')));
+
+      assert.ok(
+        passageEventsService.record.calledWith({
+          type: 'FLASHCARDS_VERSO_SEEN',
+          data: { cardId: 'e1de6394-ff88-4de3-8834-a40057a50ff4', elementId: '71de6394-ff88-4de3-8834-a40057a50ff4' },
+        }),
+      );
     });
 
     module('when the user self-assesses their response', function () {
-      test('should display the next card and send self-assessment', async function (assert) {
+      test('should display the next card and send self-assessment event', async function (assert) {
         // given
         const { flashcards } = _getFlashcards();
 
@@ -225,6 +232,17 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
         assert.ok(screen.getByText('Qui a écrit le Dormeur du Val ?'));
         assert.ok(screen.getByText(t('pages.modulix.flashcards.position', { currentCardPosition: 2, totalCards: 2 })));
         assert.true(onSelfAssessmentStub.calledOnce);
+
+        assert.ok(
+          passageEventsService.record.calledWith({
+            type: 'FLASHCARDS_CARD_AUTO_ASSESSED',
+            data: {
+              autoAssessment: 'no',
+              cardId: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
+              elementId: '71de6394-ff88-4de3-8834-a40057a50ff4',
+            },
+          }),
+        );
       });
     });
 
@@ -253,6 +271,27 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
     });
   });
 
+  module('when user clicks on "See again" button', function () {
+    test('should send a flashcards recto reviewed event', async function (assert) {
+      // given
+      const { flashcards } = _getFlashcards();
+
+      // when
+      await render(<template><ModulixFlashcards @flashcards={{flashcards}} /></template>);
+      await clickByName(t('pages.modulix.buttons.flashcards.start'));
+      await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
+      await clickByName(t('pages.modulix.buttons.flashcards.seeAgain'));
+
+      // then
+      assert.ok(
+        passageEventsService.record.calledWith({
+          type: 'FLASHCARDS_RECTO_REVIEWED',
+          data: { cardId: 'e1de6394-ff88-4de3-8834-a40057a50ff4', elementId: '71de6394-ff88-4de3-8834-a40057a50ff4' },
+        }),
+      );
+    });
+  });
+
   module('when users reaches the end of the deck', function () {
     test('should display the counters for each answer', async function (assert) {
       // given
@@ -278,7 +317,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
   });
 
   module('when user clicks on the "Retry" button', function () {
-    test('should display intro card', async function (assert) {
+    test('should display intro card and send flashcards retried event', async function (assert) {
       // given
       const { flashcards } = _getFlashcards();
 
@@ -299,6 +338,12 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
 
       // then
       assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.flashcards.start') })).exists();
+      assert.ok(
+        passageEventsService.record.calledWith({
+          type: 'FLASHCARDS_RETRIED',
+          data: { elementId: '71de6394-ff88-4de3-8834-a40057a50ff4' },
+        }),
+      );
     });
 
     module('when user click on the "start" button', function () {

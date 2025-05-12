@@ -744,9 +744,9 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const module = store.createRecord('module', { id: 'module-id', title: 'Module title', grains: [grain1] });
       const passage = store.createRecord('passage');
 
-      const createRecordMock = sinon.mock();
-      createRecordMock.returns({ save: function () {} });
-      store.createRecord = createRecordMock;
+      const createRecordStub = sinon.stub();
+      createRecordStub.returns({ save: function () {} });
+      store.createRecord = createRecordStub;
 
       await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
 

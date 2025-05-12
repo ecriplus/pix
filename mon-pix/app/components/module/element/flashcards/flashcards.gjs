@@ -75,6 +75,13 @@ export default class ModulixFlashcards extends Component {
     this.currentCardIndex = 0;
     this.displayedSideName = 'recto';
     this.counters = { ...INITIAL_COUNTERS_VALUE };
+
+    this.passageEvents.record({
+      type: 'FLASHCARDS_RETRIED',
+      data: {
+        elementId: this.args.flashcards.id,
+      },
+    });
   }
 
   @action
@@ -92,6 +99,14 @@ export default class ModulixFlashcards extends Component {
   @action
   flipCard() {
     this.displayedSideName = this.displayedSideName === 'recto' ? 'verso' : 'recto';
+    const eventType = this.displayedSideName === 'recto' ? 'FLASHCARDS_RECTO_REVIEWED' : 'FLASHCARDS_VERSO_SEEN';
+    this.passageEvents.record({
+      type: eventType,
+      data: {
+        cardId: this.currentCard.id,
+        elementId: this.args.flashcards.id,
+      },
+    });
   }
 
   incrementCounterFor(userAssessment) {
@@ -117,6 +132,16 @@ export default class ModulixFlashcards extends Component {
       cardId: this.currentCard.id,
     };
     this.args.onSelfAssessment(selfAssessmentData);
+
+    this.passageEvents.record({
+      type: 'FLASHCARDS_CARD_AUTO_ASSESSED',
+      data: {
+        autoAssessment: userAssessment,
+        cardId: this.currentCard.id,
+        elementId: this.args.flashcards.id,
+      },
+    });
+
     this.incrementCounterFor(userAssessment);
     this.goToNextCard();
 

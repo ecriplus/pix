@@ -7,7 +7,7 @@ import { PassageEventWithElement } from './PassageEventWithElement.js';
 
 const AutoAssessmentEnumValues = Object.freeze({
   YES: 'yes',
-  MAYBE: 'maybe',
+  ALMOST: 'almost',
   NO: 'no',
 });
 
@@ -74,7 +74,7 @@ class FlashcardsCardAutoAssessedEvent extends PassageEventWithElement {
     assertEnumValue(
       AutoAssessmentEnumValues,
       autoAssessment,
-      'The autoAssessment value must be one of these : [‘yes‘, ‘maybe‘, ‘no‘]',
+      'The autoAssessment value must be one of these : [‘yes‘, ‘almost‘, ‘no‘]',
     );
 
     this.elementId = elementId;
