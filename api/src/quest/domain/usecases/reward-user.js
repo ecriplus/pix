@@ -24,26 +24,30 @@ export const rewardUser = async ({
     const rewardIds = rewards.map((reward) => reward.rewardId);
 
     for (const quest of quests) {
-      const dataForQuest = eligibilities
+      const dataForQuests = eligibilities
         .map((eligibility) => new DataForQuest({ eligibility }))
-        .find((dataForQuest) => quest.isEligible(dataForQuest));
+        .filter((dataForQuest) => quest.isEligible(dataForQuest));
 
-      if (!dataForQuest) {
+      if (dataForQuests.length === 0) {
         continue;
       }
 
       if (rewardIds.includes(quest.rewardId)) {
         continue;
       }
-      const campaignParticipationIds = quest.findCampaignParticipationIdsContributingToQuest(dataForQuest);
-      const targetProfileIds = quest.findTargetProfileIdsWithoutCampaignParticipationContributingToQuest(dataForQuest);
-      const success = await successRepository.find({ userId, campaignParticipationIds, targetProfileIds });
-      dataForQuest.success = success;
-      const userHasSucceedQuest = quest.isSuccessful(dataForQuest);
 
-      if (userHasSucceedQuest) {
-        await rewardRepository.reward({ userId, rewardId: quest.rewardId });
-        rewardIds.push(quest.rewardId);
+      for (const dataForQuest of dataForQuests) {
+        const campaignParticipationIds = quest.findCampaignParticipationIdsContributingToQuest(dataForQuest);
+        const targetProfileIds =
+          quest.findTargetProfileIdsWithoutCampaignParticipationContributingToQuest(dataForQuest);
+        const success = await successRepository.find({ userId, campaignParticipationIds, targetProfileIds });
+        dataForQuest.success = success;
+        const userHasSucceedQuest = quest.isSuccessful(dataForQuest);
+
+        if (userHasSucceedQuest) {
+          await rewardRepository.reward({ userId, rewardId: quest.rewardId });
+          rewardIds.push(quest.rewardId);
+        }
       }
     }
   } catch (error) {

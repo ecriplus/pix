@@ -13,6 +13,7 @@ const userId = 1234;
 const setupContextWithProfileSkillQuest = async ({
   userId,
   isEligible = true,
+  hasSecondLearner = false,
   hasValidatedKnowledgeElements = true,
   hasAlreadySucceededTheQuest = false,
 }) => {
@@ -40,6 +41,12 @@ const setupContextWithProfileSkillQuest = async ({
   userKnowledgeElements.map(databaseBuilder.factory.buildKnowledgeElement);
 
   const organization = databaseBuilder.factory.buildOrganization({ type: userOrganization });
+  if (hasSecondLearner) {
+    databaseBuilder.factory.buildOrganizationLearner({
+      userId,
+      organizationId: databaseBuilder.factory.buildOrganization({ type: userOrganization }).id,
+    });
+  }
   const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner({
     userId,
     organizationId: organization.id,
@@ -226,6 +233,22 @@ describe('Quest | Integration | Domain | Usecases | RewardUser', function () {
     context('when user is eligible and meets success requirements', function () {
       beforeEach(async function () {
         await setupContextWithProfileSkillQuest({ userId });
+      });
+
+      it('should reward the user', async function () {
+        //when
+        await usecases.rewardUser({ userId });
+
+        // then
+        const profileRewards = await knex(PROFILE_REWARDS_TABLE_NAME).where({ userId });
+        expect(profileRewards).to.have.lengthOf(1);
+        expect(profileRewards[0].userId).to.equal(userId);
+      });
+    });
+
+    context('when user is eligible twice and meets success requirements in second learner', function () {
+      beforeEach(async function () {
+        await setupContextWithProfileSkillQuest({ userId, hasSecondLearner: true });
       });
 
       it('should reward the user', async function () {
