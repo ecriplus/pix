@@ -59,9 +59,10 @@ describe('Integration | UseCases | find-organization-learners-with-participation
 
   it('should return organization learners list and their campaign participations', async function () {
     // given
+    const userId = databaseBuilder.factory.buildUser().id;
     const organization = databaseBuilder.factory.buildOrganization();
     const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
-      userId: databaseBuilder.factory.buildUser().id,
+      userId,
       organizationId: organization.id,
       division: '5eme',
     });
@@ -80,6 +81,19 @@ describe('Integration | UseCases | find-organization-learners-with-participation
       userId: organizationLearner.userId,
     });
 
+    const secondOrganization = databaseBuilder.factory.buildOrganization();
+    const secondOrganizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+      userId,
+      organizationId: secondOrganization.id,
+      division: '5eme',
+    });
+
+    const campaignParticipation3 = databaseBuilder.factory.buildCampaignParticipation({
+      campaignId: databaseBuilder.factory.buildCampaign({ organizationId: secondOrganization.id }).id,
+      organizationLearnerId: secondOrganizationLearner.id,
+      userId: secondOrganizationLearner.userId,
+    });
+
     await databaseBuilder.commit();
 
     // when
@@ -92,7 +106,7 @@ describe('Integration | UseCases | find-organization-learners-with-participation
     });
 
     // then
-    expect(organizationLearnersWithParticipations).to.have.lengthOf(1);
+    expect(organizationLearnersWithParticipations).to.have.lengthOf(2);
 
     expect(organizationLearnersWithParticipations[0].organizationLearner).to.be.an.instanceOf(OrganizationLearner);
     expect(organizationLearnersWithParticipations[0].organizationLearner.id).to.equal(organizationLearner.id);
@@ -111,5 +125,17 @@ describe('Integration | UseCases | find-organization-learners-with-participation
       (participation) => participation.id,
     );
     expect(participationOverviewIds).to.have.members([campaignParticipation1.id, campaignParticipation2.id]);
+
+    expect(organizationLearnersWithParticipations[1].organizationLearner).to.be.an.instanceOf(OrganizationLearner);
+    expect(organizationLearnersWithParticipations[1].organizationLearner.id).to.equal(secondOrganizationLearner.id);
+
+    expect(organizationLearnersWithParticipations[1].organization).to.be.an.instanceOf(Organization);
+    expect(organizationLearnersWithParticipations[1].organization.id).to.equal(secondOrganization.id);
+
+    expect(organizationLearnersWithParticipations[1].campaignParticipations).to.have.lengthOf(1);
+    expect(organizationLearnersWithParticipations[1].campaignParticipations[0]).to.be.an.instanceOf(
+      CampaignParticipationOverview,
+    );
+    expect(organizationLearnersWithParticipations[1].campaignParticipations[0].id).to.equal(campaignParticipation3.id);
   });
 });
