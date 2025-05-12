@@ -1,5 +1,7 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
+import t from 'ember-intl/helpers/t';
 import CertificationsList from 'mon-pix/components/certifications-list';
-import NoCertificationPanel from 'mon-pix/components/no-certification-panel';
+
 <template>
   <div class="user-certifications-panel">
     {{#if @certifications}}
@@ -7,9 +9,9 @@ import NoCertificationPanel from 'mon-pix/components/no-certification-panel';
         <CertificationsList @certifications={{@certifications}} />
       </div>
     {{else}}
-      <div class="user-certifications-panel__no-certification-panel">
-        <NoCertificationPanel />
-      </div>
+      <PixBlock class="no-certification-panel">
+        {{t "pages.certifications-list.no-certification.text"}}
+      </PixBlock>
     {{/if}}
   </div>
 </template>

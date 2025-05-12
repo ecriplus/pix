@@ -1,0 +1,11 @@
+@use 'pix-design-tokens/typography';
+
+.no-certification-panel {
+  @extend %pix-title-xs;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--pix-spacing-8x) * 2);
+  text-align: center;
+}

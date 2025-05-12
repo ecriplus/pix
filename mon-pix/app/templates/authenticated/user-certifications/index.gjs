@@ -1,6 +1,6 @@
 import t from 'ember-intl/helpers/t';
+import UserCertificationsPanel from 'mon-pix/components/certifications/list/user-certifications-panel';
 import PageTitle from 'mon-pix/components/ui/page-title';
-import UserCertificationsPanel from 'mon-pix/components/user-certifications-panel';
 
 <template>
   <main id="main" role="main" class="global-page-container">
