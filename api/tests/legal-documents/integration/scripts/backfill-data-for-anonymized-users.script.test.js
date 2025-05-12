@@ -1,4 +1,4 @@
-import { BackfillDataForAnonymizedUsersScript } from '../../../../src/legal-documents/scripts/backfill-data-for-anonymized-users-script.js';
+import { BackfillDataForAnonymizedUsersScript } from '../../../../src/legal-documents/scripts/backfill-data-for-anonymized-users.script.js';
 import { logger } from '../../../../src/shared/infrastructure/utils/logger.js';
 import { databaseBuilder, expect, knex } from '../../../test-helper.js';
 
@@ -59,8 +59,8 @@ describe('Integration | LegalDocuments | Scripts | backfill-data-for-anonymized-
       .where({ userId: notAnonymousUser.id })
       .first();
 
-    expect(foundUser1Acceptances.acceptedAt.toISOString()).to.deep.equal('2023-03-01T00:00:00.000Z');
-    expect(foundUser2Acceptances.acceptedAt.toISOString()).to.deep.equal('2022-02-01T00:00:00.000Z');
+    expect(foundUser1Acceptances).to.be.undefined;
+    expect(foundUser2Acceptances).to.be.undefined;
     expect(foundNonAnonymizedUserAcceptances.acceptedAt.toISOString()).to.deep.equal('2022-02-22T22:22:22.000Z');
   });
 });
