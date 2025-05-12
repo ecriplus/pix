@@ -33,12 +33,64 @@ describe('Unit | Domain | Models | CampaignParticipation', function () {
 
     it('updates attributes deletedAt and deletedBy', function () {
       const userId = 4567;
-      const campaignParticipation = new CampaignParticipation({ deletedAt: null, deletedBy: null });
+      const campaignParticipation = new CampaignParticipation({ userId: 666, deletedAt: null, deletedBy: null });
 
       campaignParticipation.delete(userId);
 
+      expect(campaignParticipation.loggerContext).to.equal('DELETION');
+      expect(campaignParticipation.userId).to.equal(666);
       expect(campaignParticipation.deletedAt).to.deep.equal(now);
       expect(campaignParticipation.deletedBy).to.deep.equal(userId);
+    });
+
+    it('remove userId on anomizationEnabled', function () {
+      const userId = 4567;
+      const campaignParticipation = new CampaignParticipation({ userId: 666, deletedAt: null, deletedBy: null });
+
+      campaignParticipation.delete(userId, true);
+
+      expect(campaignParticipation.loggerContext).to.equal('DELETION');
+      expect(campaignParticipation.userId).to.equal(null);
+      expect(campaignParticipation.deletedAt).to.deep.equal(now);
+      expect(campaignParticipation.deletedBy).to.deep.equal(userId);
+    });
+  });
+
+  describe('anonymize', function () {
+    it('updates userId', function () {
+      const campaignParticipation = new CampaignParticipation({
+        userId: 666,
+        participantExternalId: 'thisismyemailbuddy@buddy.org',
+        deletedAt: null,
+        deletedBy: null,
+      });
+
+      campaignParticipation.anonymize();
+
+      expect(campaignParticipation.loggerContext).to.equal('ANONYMIZATION');
+      expect(campaignParticipation.userId).to.equal(null);
+      expect(campaignParticipation.participantExternalId).to.equal(null);
+    });
+  });
+
+  describe('dataToUpdateOnDeletion', function () {
+    it('should return payload to send on repository with specific field', function () {
+      const campaignParticipation = new CampaignParticipation({
+        userId: 666,
+        participantExternalId: 'thisismyemailbuddy@buddy.org',
+        deletedAt: new Date('2024-04-03'),
+        deletedBy: 777,
+      });
+
+      expect(campaignParticipation.dataToUpdateOnDeletion).to.deep.equal({
+        id: campaignParticipation.id,
+        attributes: {
+          userId: campaignParticipation.userId,
+          participantExternalId: campaignParticipation.participantExternalId,
+          deletedAt: campaignParticipation.deletedAt,
+          deletedBy: campaignParticipation.deletedBy,
+        },
+      });
     });
   });
 

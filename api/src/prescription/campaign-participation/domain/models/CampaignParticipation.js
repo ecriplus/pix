@@ -10,6 +10,8 @@ import { CampaignParticipationStatuses } from '../../../shared/domain/constants.
 import { CampaignParticiationInvalidStatus, CampaignParticipationDeletedError } from '../errors.js';
 
 class CampaignParticipation {
+  #loggerContext;
+
   constructor({
     id,
     createdAt,
@@ -71,6 +73,22 @@ class CampaignParticipation {
     return _.get(this, 'campaign.id', null);
   }
 
+  get loggerContext() {
+    return this.#loggerContext;
+  }
+
+  get dataToUpdateOnDeletion() {
+    return {
+      id: this.id,
+      attributes: {
+        deletedAt: this.deletedAt,
+        deletedBy: this.deletedBy,
+        userId: this.userId,
+        participantExternalId: this.participantExternalId,
+      },
+    };
+  }
+
   share() {
     this._canBeShared();
     this.sharedAt = new Date();
@@ -82,9 +100,22 @@ class CampaignParticipation {
     this.status = CampaignParticipationStatuses.STARTED;
   }
 
-  delete(userId) {
+  anonymize() {
+    this.participantExternalId = null;
+    this.userId = null;
+
+    this.#loggerContext = 'ANONYMIZATION';
+  }
+
+  delete(userId, isAnonymizedEnabled = false) {
+    if (isAnonymizedEnabled) {
+      this.anonymize();
+    }
+
     this.deletedAt = new Date();
     this.deletedBy = userId;
+
+    this.#loggerContext = 'DELETION';
   }
 
   _canBeImproved() {
