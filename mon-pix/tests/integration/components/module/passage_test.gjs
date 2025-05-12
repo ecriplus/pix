@@ -701,6 +701,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       metrics.add = sinon.stub();
 
       const store = this.owner.lookup('service:store');
+      const passageEvents = this.owner.lookup('service:passage-events');
       const firstCard = {
         id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
         recto: {
@@ -747,6 +748,8 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const createRecordStub = sinon.stub();
       createRecordStub.returns({ save: function () {} });
       store.createRecord = createRecordStub;
+
+      passageEvents.record = sinon.stub();
 
       await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
 

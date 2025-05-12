@@ -1,7 +1,9 @@
 import Service, { service } from '@ember/service';
+import ENV from 'mon-pix/config/environment';
 
 export default class PassageEvents extends Service {
   @service store;
+  @service requestManager;
 
   passageId = null;
   sequenceNumber = 1;
@@ -14,16 +16,19 @@ export default class PassageEvents extends Service {
   async record({ type, data }) {
     this.sequenceNumber++;
 
-    const passageEventsCollection = this.store.createRecord('passage-events-collection');
-    passageEventsCollection.events = [
+    const events = [
       {
         type,
-        passageId: this.passageId,
-        sequenceNumber: this.sequenceNumber,
-        occurredAt: new Date().getTime(),
+        'passage-id': this.passageId,
+        'sequence-number': this.sequenceNumber,
+        'occurred-at': new Date().getTime(),
         ...data,
       },
     ];
-    passageEventsCollection.save();
+    return this.requestManager.request({
+      url: `${ENV.APP.API_HOST}/api/passage-events`,
+      method: 'POST',
+      body: JSON.stringify({ data: { attributes: { events } } }),
+    });
   }
 }
