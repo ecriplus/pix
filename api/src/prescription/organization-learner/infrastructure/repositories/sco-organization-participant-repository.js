@@ -141,7 +141,6 @@ const findPaginatedFilteredScoParticipants = async function ({ organizationId, f
             .as('campaignName'),
 
           knex('campaign-participations')
-            .join('campaigns', 'campaigns.id', 'campaignId')
             .select('campaign-participations.status')
             .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
             .and.whereNull('campaign-participations.deletedAt')
@@ -161,7 +160,6 @@ const findPaginatedFilteredScoParticipants = async function ({ organizationId, f
             .as('campaignType'),
 
           knex('campaign-participations')
-            .join('campaigns', 'campaigns.id', 'campaignId')
             .select('campaign-participations.createdAt')
             .whereRaw('"organizationLearnerId" = "view-active-organization-learners"."id"')
             .and.whereNull('campaign-participations.deletedAt')
