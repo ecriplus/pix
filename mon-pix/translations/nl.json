@@ -916,7 +916,8 @@
           "title": "Behaalde certificering"
         }
       },
-      "title": "Mijn certificaten"
+      "title": "Mijn certificaten",
+      "description": "Krijg toegang tot al je Pix-certificaten. Bekijk details en download je certificaten."
     },
     "challenge": {
       "actions": {

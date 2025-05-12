@@ -899,6 +899,7 @@
       "title": "Rejoindre une session de certification"
     },
     "certifications-list": {
+      "description": "Accédez à l’ensemble de vos certifications Pix. Consultez les détails et téléchargez vos certificats.",
       "header": {
         "certification-center": "centre de certification",
         "date": "date",

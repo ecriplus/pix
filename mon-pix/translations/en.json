@@ -899,6 +899,7 @@
       "title": "Join a certification session"
     },
     "certifications-list": {
+      "description": "Access all your Pix certifications. View details and download your certificates.",
       "header": {
         "certification-center": "certification centre",
         "date": "date",
