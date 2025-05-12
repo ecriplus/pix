@@ -17,6 +17,12 @@ export default {
     defaultValue: true,
     tags: ['team-prescription', 'frontend'],
   },
+  isAnonymizationWithDeletionEnabled: {
+    type: 'boolean',
+    description: 'Used to enable anonymization and deletion on prescriber context',
+    defaultValue: false,
+    tags: ['team-prescription', 'pix-api', 'backend'],
+  },
   isNewAccountRecoveryEnabled: {
     type: 'boolean',
     description: 'Using and testing feature account recovery process',
