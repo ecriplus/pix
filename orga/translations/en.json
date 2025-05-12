@@ -274,7 +274,10 @@
   },
   "components": {
     "analysis-per-tubes-and-competences": {
-      "detailed-positioning": "Detailed positioning",
+      "detailed-positioning":{
+        "description":"Average level achieved by participants by topic out of the maximum level achievable in this campaign.",
+        "title" : "Detailed positioning"
+      },
       "gauge": {
         "label": "Level {reachedLevel} of {maxLevel}"
       },
@@ -312,6 +315,11 @@
     },
     "date": {
       "no-date": "No date yet"
+    },
+    "global-positioning": {
+      "description": "Average level achieved by participants out of the maximum level achievable in this campaign.",
+      "gauge-label": "On this test, your participants achieved an average level of {reachedLevel} out of a maximum reachable level of {maxLevel}.",
+      "title": "Global positioning"
     },
     "group": {
       "SCO": "Class",
@@ -539,6 +547,14 @@
         "title": "List of participants"
       },
       "title": "Activity"
+    },
+    "campaign-analysis": {
+      "description": {
+        "explanation": "Each test assesses a selection of digital skills from the Pix reference framework. Positioning reflects the average level achieved by participants in relation to the maximum level achievable on the test.",
+        "nota-bene": "All the data presented comes from shared and undeleted participation in assessment campaigns, and is updated in real time.",
+        "resume": "Analyse, overall and by topic, the positioning of your participants."
+      },
+      "title": "Analysis"
     },
     "campaign-creation": {
       "actions": {

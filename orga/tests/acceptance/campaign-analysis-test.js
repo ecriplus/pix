@@ -67,7 +67,7 @@ module('Acceptance | Campaign Analysis', function (hooks) {
     assert.ok(
       screen.getByRole('heading', {
         level: 2,
-        name: t('components.analysis-per-tubes-and-competences.detailed-positioning'),
+        name: t('components.analysis-per-tubes-and-competences.detailed-positioning.title'),
       }),
     );
   });

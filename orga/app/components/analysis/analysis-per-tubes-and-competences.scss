@@ -4,6 +4,12 @@
   &__positioning-title {
     @extend %pix-title-s;
 
+    margin-bottom: var(--pix-spacing-1x);
+  }
+
+  &__positioning-description {
+    @extend %pix-body-s;
+
     margin-bottom: var(--pix-spacing-6x);
   }
 

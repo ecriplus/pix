@@ -35,9 +35,10 @@ module('Integration | Component | analysis-per-tubes-and-competences', function 
       assert.ok(
         screen.getByRole('heading', {
           level: 2,
-          name: t('components.analysis-per-tubes-and-competences.detailed-positioning'),
+          name: t('components.analysis-per-tubes-and-competences.detailed-positioning.title'),
         }),
       );
+      assert.ok(screen.getByText(t('components.analysis-per-tubes-and-competences.detailed-positioning.description')));
       assert.ok(screen.getByRole('table', { name: '1 - mon super titre de competence 1' }));
       assert.ok(screen.getByRole('table', { name: '2 - mon super titre de competence 2' }));
     });

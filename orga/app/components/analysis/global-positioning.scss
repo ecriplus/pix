@@ -1,0 +1,17 @@
+@use 'pix-design-tokens/typography';
+
+.global-positioning {
+  margin-bottom: var(--pix-spacing-10x);
+
+  &__title {
+    @extend %pix-title-xs;
+
+    margin-bottom: var(--pix-spacing-1x);
+  }
+
+  &__description {
+    @extend %pix-body-s;
+
+    margin-bottom: var(--pix-spacing-4x);
+  }
+}

@@ -274,7 +274,10 @@
   },
   "components": {
     "analysis-per-tubes-and-competences": {
-      "detailed-positioning": "Gedetailleerde positionering",
+      "detailed-positioning":{
+        "description":"Gemiddeld niveau behaald door deelnemers per onderwerp van het maximaal haalbare niveau in deze campagne.",
+        "title" : "Gedetailleerde positionering"
+      },
       "gauge": {
         "label": "Niveau {reachedLevel} van {maxLevel}"
       },
@@ -312,6 +315,11 @@
     },
     "date": {
       "no-date": "Nog geen datum"
+    },
+    "global-positioning":{
+      "title":"Wereldwijde positionering",
+      "description":"Gemiddeld niveau bereikt door deelnemers van het maximaal haalbare niveau in deze campagne.",
+      "gauge-label":"Bij deze test behaalden je deelnemers een gemiddeld niveau van {bereiktLevel} uit een maximaal haalbaar niveau van {maxLevel}."
     },
     "group": {
       "SCO": "Klas",
@@ -503,6 +511,14 @@
         "title": "Lijst van deelnemers"
       },
       "title": "Activiteit"
+    },
+    "campaign-analysis": {
+      "title": "Uitleg",
+      "description": {
+        "resume": "Analyseer, globaal en per onderwerp, de positionering van je deelnemers.",
+        "explanation": "Elke toets beoordeelt een selectie van digitale vaardigheden uit het Pix referentiekader. De positionering weerspiegelt het gemiddelde niveau dat deelnemers hebben bereikt ten opzichte van het maximaal haalbare niveau op de toets.",
+        "nota-bene": "Alle gepresenteerde gegevens zijn afkomstig van gedeelde en niet-verwijderde deelname aan beoordelingscampagnes en worden in realtime bijgewerkt."
+      }
     },
     "campaign-creation": {
       "actions": {

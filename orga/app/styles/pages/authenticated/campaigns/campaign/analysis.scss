@@ -1,0 +1,11 @@
+@use 'pix-design-tokens/typography';
+
+.analysis-description {
+  @extend %pix-body-s;
+
+  margin-bottom: var(--pix-spacing-8x);
+
+  &__resume {
+    font-weight: var(--pix-font-bold);
+  }
+}
