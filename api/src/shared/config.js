@@ -136,7 +136,6 @@ const schema = Joi.object({
   FT_ALWAYS_OK_VALIDATE_NEXT_CHALLENGE: Joi.string().optional().valid('true', 'false'),
   FT_ENABLE_NEED_TO_ADJUST_CERTIFICATION_ACCESSIBILITY: Joi.string().optional().valid('true', 'false'),
   FT_ENABLE_TEXT_TO_SPEECH_BUTTON: Joi.string().optional().valid('true', 'false'),
-  FT_PIX_COMPANION_ENABLED: Joi.string().optional().valid('true', 'false'),
   KNEX_ASYNC_STACKTRACE_ENABLED: Joi.string().optional().valid('true', 'false'),
   LCMS_API_KEY: Joi.string().requiredForApi(),
   LCMS_API_URL: Joi.string().uri().requiredForApi(),
@@ -302,7 +301,6 @@ const configuration = (function () {
         process.env.FT_ENABLE_NEED_TO_ADJUST_CERTIFICATION_ACCESSIBILITY,
       ),
       isOppsyDisabled: toBoolean(process.env.FT_OPPSY_DISABLED),
-      isPixCompanionEnabled: toBoolean(process.env.FT_PIX_COMPANION_ENABLED),
       isTextToSpeechButtonEnabled: toBoolean(process.env.FT_ENABLE_TEXT_TO_SPEECH_BUTTON),
       setupEcosystemBeforeStart: toBoolean(process.env.FT_SETUP_ECOSYSTEM_BEFORE_START) || false,
       showNewResultPage: toBoolean(process.env.FT_SHOW_NEW_RESULT_PAGE),
@@ -517,7 +515,6 @@ const configuration = (function () {
     config.featureToggles.isDirectMetricsEnabled = false;
     config.featureToggles.isNeedToAdjustCertificationAccessibilityEnabled = false;
     config.featureToggles.isOppsyDisabled = false;
-    config.featureToggles.isPixCompanionEnabled = false;
     config.featureToggles.isTextToSpeechButtonEnabled = false;
     config.featureToggles.showNewResultPage = false;
 

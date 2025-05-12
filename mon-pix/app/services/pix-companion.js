@@ -1,5 +1,6 @@
 import Service, { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import ENV from 'mon-pix/config/environment';
 
 const MINIMAL_VERSION_FOR_CERTIFICATION_SESSION = [0, 0, 5];
 
@@ -12,25 +13,25 @@ export default class PixCompanion extends Service {
   #eventTarget = new EventTarget();
 
   startCertification(windowRef = window) {
-    if (!this.featureToggles.featureToggles.isPixCompanionEnabled) return;
+    if (ENV.companion.disabled) return;
     windowRef.dispatchEvent(new CustomEvent('pix:certification:start'));
     windowRef.postMessage({ event: 'pix:certification:start' }, windowRef.location.origin);
   }
 
   stopCertification(windowRef = window) {
-    if (!this.featureToggles.featureToggles.isPixCompanionEnabled) return;
+    if (ENV.companion.disabled) return;
     windowRef.dispatchEvent(new CustomEvent('pix:certification:stop'));
     windowRef.postMessage({ event: 'pix:certification:stop' }, windowRef.location.origin);
   }
 
   startCheckingExtensionIsEnabled(windowRef = window) {
-    if (!this.featureToggles.featureToggles.isPixCompanionEnabled) return;
+    if (ENV.companion.disabled) return;
     this.checkExtensionIsEnabled(windowRef);
     this.#checkExtensionIsEnabledInterval = windowRef.setInterval(() => this.checkExtensionIsEnabled(windowRef), 1000);
   }
 
   stopCheckingExtensionIsEnabled(windowRef = window) {
-    if (!this.featureToggles.featureToggles.isPixCompanionEnabled) return;
+    if (ENV.companion.disabled) return;
     windowRef.clearInterval(this.#checkExtensionIsEnabledInterval);
   }
 
@@ -75,7 +76,7 @@ export default class PixCompanion extends Service {
   }
 
   get isExtensionEnabled() {
-    if (!this.featureToggles.featureToggles.isPixCompanionEnabled) return true;
+    if (ENV.companion.disabled) return true;
     return this._isExtensionEnabled;
   }
 

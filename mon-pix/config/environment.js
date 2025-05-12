@@ -113,6 +113,10 @@ module.exports = function (environment) {
       matomoUrl: process.env.WEB_ANALYTICS_URL,
     },
 
+    companion: {
+      disabled: false,
+    },
+
     '@sentry/ember': {
       disablePerformance: true,
       sentry: {
@@ -147,6 +151,8 @@ module.exports = function (environment) {
     ENV.APP.LOG_TRANSITIONS = false;
     ENV.APP.LOG_TRANSITIONS_INTERNAL = false;
     ENV.APP.LOG_VIEW_LOOKUPS = false;
+
+    ENV.companion.disabled = true;
   }
 
   if (environment === 'test') {
@@ -166,6 +172,8 @@ module.exports = function (environment) {
     ENV.APP.FT_FOCUS_CHALLENGE_ENABLED = true;
     ENV.APP.AUTONOMOUS_COURSES_ORGANIZATION_ID = 999;
     ENV.metrics.enabled = false;
+
+    ENV.companion.disabled = true;
   }
 
   if (environment === 'production') {

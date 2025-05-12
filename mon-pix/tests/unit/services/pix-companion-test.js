@@ -1,4 +1,5 @@
 import { setupTest } from 'ember-qunit';
+import ENV from 'mon-pix/config/environment';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -8,7 +9,11 @@ module('Unit | Service | pix-companion', function (hooks) {
 
   hooks.beforeEach(function () {
     pixCompanion = this.owner.lookup('service:pix-companion');
-    pixCompanion.featureToggles = { featureToggles: { isPixCompanionEnabled: true } };
+    ENV.companion.disabled = false;
+  });
+
+  hooks.afterEach(function () {
+    ENV.companion.disabled = true;
   });
 
   module('#startCertification', function () {
@@ -29,10 +34,10 @@ module('Unit | Service | pix-companion', function (hooks) {
       assert.ok(true);
     });
 
-    module('when the feature toggle isPixCompanionEnabled is false', function () {
+    module('when Pix Companion is disabled', function () {
       test('do nothing', async function (assert) {
         // Given
-        pixCompanion.featureToggles.featureToggles.isPixCompanionEnabled = false;
+        ENV.companion.disabled = true;
         const windowStub = {
           dispatchEvent: sinon.stub(),
           postMessage: sinon.stub(),
@@ -68,10 +73,10 @@ module('Unit | Service | pix-companion', function (hooks) {
       assert.ok(true);
     });
 
-    module('when the feature toggle isPixCompanionEnabled is false', function () {
+    module('when Pix Companion is disabled', function () {
       test('do nothing', async function (assert) {
         // Given
-        pixCompanion.featureToggles.featureToggles.isPixCompanionEnabled = false;
+        ENV.companion.disabled = true;
         const windowStub = {
           dispatchEvent: sinon.stub(),
           postMessage: sinon.stub(),
@@ -147,7 +152,7 @@ module('Unit | Service | pix-companion', function (hooks) {
   });
 
   module('#startCheckingExtensionIsEnabled', function () {
-    module('when the feature toggle isPixCompanionEnabled is false', function () {
+    module('when Pix Companion is disabled', function () {
       test('do nothing', async function (assert) {
         // Given
         const windowStub = {
@@ -157,7 +162,7 @@ module('Unit | Service | pix-companion', function (hooks) {
           setInterval: sinon.stub(),
           setTimeout: sinon.stub(),
         };
-        pixCompanion.featureToggles.featureToggles.isPixCompanionEnabled = false;
+        ENV.companion.disabled = true;
 
         // When
         pixCompanion.startCheckingExtensionIsEnabled(windowStub);
@@ -175,13 +180,13 @@ module('Unit | Service | pix-companion', function (hooks) {
   });
 
   module('#stopCheckingExtensionIsEnabled', function () {
-    module('when the feature toggle isPixCompanionEnabled is false', function () {
+    module('when Pix Companion is disabled', function () {
       test('do nothing', async function (assert) {
         // Given
         const windowStub = {
           clearInterval: sinon.stub(),
         };
-        pixCompanion.featureToggles.featureToggles.isPixCompanionEnabled = false;
+        ENV.companion.disabled = true;
 
         // When
         pixCompanion.stopCheckingExtensionIsEnabled(windowStub);
@@ -194,10 +199,10 @@ module('Unit | Service | pix-companion', function (hooks) {
   });
 
   module('#isExtensionEnabled', function () {
-    module('when the feature toggle isPixCompanionEnabled is false', function () {
+    module('when Pix Companion is disabled', function () {
       test('always returns true', function (assert) {
         // Given
-        pixCompanion.featureToggles.featureToggles.isPixCompanionEnabled = false;
+        ENV.companion.disabled = true;
 
         // When
         pixCompanion._isExtensionEnabled = false;
