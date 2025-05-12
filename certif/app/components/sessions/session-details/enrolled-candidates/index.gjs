@@ -37,10 +37,6 @@ export default class EnrolledCandidates extends Component {
   @tracked certificationCandidateInEditModal = null;
   @tracked showNewCandidateModal = false;
 
-  get shouldDisplayAccessibilityAdjustmentNeededFeature() {
-    return this.featureToggles.featureToggles?.isNeedToAdjustCertificationAccessibilityEnabled;
-  }
-
   get caption() {
     if (this.args.shouldDisplayScoStudentRegistration) {
       return this.intl.t('pages.sessions.detail.candidates.list.without-details-description');
@@ -403,16 +399,14 @@ export default class EnrolledCandidates extends Component {
               {{this.formattedCandidateExtratimePercentage candidate.extraTimePercentage}}
             </:cell>
           </PixTableColumn>
-          {{#if this.shouldDisplayAccessibilityAdjustmentNeededFeature}}
-            <PixTableColumn @context={{context}} class='table__column--small'>
-              <:header>
-                {{t 'common.forms.certification-labels.accessibility'}}
-              </:header>
-              <:cell>
-                {{candidate.accessibilityAdjustmentNeededLabel}}
-              </:cell>
-            </PixTableColumn>
-          {{/if}}
+          <PixTableColumn @context={{context}} class='table__column--small'>
+            <:header>
+              {{t 'common.forms.certification-labels.accessibility'}}
+            </:header>
+            <:cell>
+              {{candidate.accessibilityAdjustmentNeededLabel}}
+            </:cell>
+          </PixTableColumn>
           <PixTableColumn @context={{context}} class='table__column'>
             <:header>
               <span class='certification-candidates-table__selected-subscriptions'>
@@ -455,32 +449,30 @@ export default class EnrolledCandidates extends Component {
                     {{t 'pages.sessions.detail.candidates.list.actions.details.label'}}
                   </PixButton>
                 {{/unless}}
-                {{#if this.shouldDisplayAccessibilityAdjustmentNeededFeature}}
-                  {{#if candidate.isLinked}}
-                    <PixTooltip @position='left' @isInline={{true}} @id='tooltip-edit-student-button'>
-                      <:triggerElement>
-                        <PixIconButton
-                          @iconName='edit'
-                          @plainIcon={{true}}
-                          @ariaLabel='{{t
-                            "pages.sessions.detail.candidates.list.actions.edit.extra-information"
-                          }} {{candidate.firstName}} {{candidate.lastName}}'
-                          disabled
-                          aria-describedby='tooltip-edit-student-button'
-                        />
-                      </:triggerElement>
-                      <:tooltip>{{t 'pages.sessions.detail.candidates.list.actions.edit.tooltip'}}</:tooltip>
-                    </PixTooltip>
-                  {{else}}
-                    <PixIconButton
-                      @iconName='edit'
-                      @plainIcon={{true}}
-                      {{on 'click' (fn this.openEditCertificationCandidateDetailsModal candidate)}}
-                      @ariaLabel='{{t
-                        "pages.sessions.detail.candidates.list.actions.edit.extra-information"
-                      }} {{candidate.firstName}} {{candidate.lastName}}'
-                    />
-                  {{/if}}
+                {{#if candidate.isLinked}}
+                  <PixTooltip @position='left' @isInline={{true}} @id='tooltip-edit-student-button'>
+                    <:triggerElement>
+                      <PixIconButton
+                        @iconName='edit'
+                        @plainIcon={{true}}
+                        @ariaLabel='{{t
+                          "pages.sessions.detail.candidates.list.actions.edit.extra-information"
+                        }} {{candidate.firstName}} {{candidate.lastName}}'
+                        disabled
+                        aria-describedby='tooltip-edit-student-button'
+                      />
+                    </:triggerElement>
+                    <:tooltip>{{t 'pages.sessions.detail.candidates.list.actions.edit.tooltip'}}</:tooltip>
+                  </PixTooltip>
+                {{else}}
+                  <PixIconButton
+                    @iconName='edit'
+                    @plainIcon={{true}}
+                    {{on 'click' (fn this.openEditCertificationCandidateDetailsModal candidate)}}
+                    @ariaLabel='{{t
+                      "pages.sessions.detail.candidates.list.actions.edit.extra-information"
+                    }} {{candidate.firstName}} {{candidate.lastName}}'
+                  />
                 {{/if}}
                 {{#if candidate.isLinked}}
                   <PixTooltip @position='left' @isInline={{true}} @id='tooltip-delete-student-button'>

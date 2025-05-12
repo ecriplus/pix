@@ -26,7 +26,6 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'is-async-quest-rewarding-calculation-enabled': false,
             'is-direct-metrics-enabled': false,
             'is-new-account-recovery-enabled': false,
-            'is-need-to-adjust-certification-accessibility-enabled': false,
             'is-oppsy-disabled': false,
             'is-pix-app-new-layout-enabled': false,
             'is-quest-enabled': true,

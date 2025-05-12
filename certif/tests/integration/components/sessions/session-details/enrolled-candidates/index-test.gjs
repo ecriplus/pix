@@ -30,14 +30,8 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
     class CurrentUserStub extends Service {
       currentAllowedCertificationCenterAccess = currentAllowedCertificationCenterAccess;
     }
-    class FeatureTogglesStub extends Service {
-      featureToggles = store.createRecord('feature-toggle', {
-        isNeedToAdjustCertificationAccessibilityEnabled: false,
-      });
-    }
 
     this.owner.register('service:current-user', CurrentUserStub);
-    this.owner.register('service:feature-toggles', FeatureTogglesStub);
   });
 
   test('it should have an accessible table description', async function (assert) {
@@ -106,7 +100,7 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
     );
 
     // then
-    assert.dom(screen.queryByRole('columnheader', { name: 'Accessibilité' })).doesNotExist();
+    assert.dom(screen.getByRole('columnheader', { name: 'Accessibilité' })).exists();
     assert.dom(screen.getByRole('cell', { name: certificationCandidates[0].lastName })).exists();
     assert.dom(screen.getByRole('cell', { name: certificationCandidates[0].firstName })).exists();
     assert.dom(screen.getByRole('cell', { name: certificationCandidates[0].resultRecipientEmail })).exists();
@@ -234,7 +228,7 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
     });
   });
 
-  module('when feature toggle isNeedToAdjustCertificationAccessibilityEnabled is true', function (hooks) {
+  module('when candidate needs accessibility adjusted certification', function (hooks) {
     hooks.beforeEach(async function () {
       store = this.owner.lookup('service:store');
       const currentAllowedCertificationCenterAccess = store.createRecord('allowed-certification-center-access', {
@@ -247,13 +241,6 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
         currentAllowedCertificationCenterAccess = currentAllowedCertificationCenterAccess;
       }
       this.owner.register('service:current-user', CurrentUserStub);
-
-      class FeatureTogglesStub extends Service {
-        featureToggles = store.createRecord('feature-toggle', {
-          isNeedToAdjustCertificationAccessibilityEnabled: true,
-        });
-      }
-      this.owner.register('service:feature-toggles', FeatureTogglesStub);
     });
 
     test('it display candidates with an edit button', async function (assert) {
@@ -288,78 +275,7 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
       );
     });
 
-    module('when candidate needs accessibility adjusted certification', function () {
-      test('should display candidate needs accessibility adjusted certification', async function (assert) {
-        // given
-        const candidate = _buildCertificationCandidate({
-          accessibilityAdjustmentNeeded: true,
-        });
-
-        const countries = [store.createRecord('country', { name: 'CANADA', code: 99401 })];
-        const certificationCandidates = [store.createRecord('certification-candidate', candidate)];
-
-        // when
-        const screen = await render(
-          <template>
-            <EnrolledCandidates
-              @sessionId='1'
-              @certificationCandidates={{certificationCandidates}}
-              @countries={{countries}}
-            />
-          </template>,
-        );
-
-        // then
-        assert.dom(screen.getByRole('columnheader', { name: 'Accessibilité' })).exists();
-        assert.dom(screen.getByRole('cell', { name: 'Oui' })).exists();
-      });
-    });
-
-    module('when candidate doesnt need accessibility adjusted certification', function () {
-      test('should display candidate doesnt need accessibility adjusted certification', async function (assert) {
-        // given
-        const candidate = _buildCertificationCandidate({
-          accessibilityAdjustmentNeeded: false,
-        });
-
-        const countries = [store.createRecord('country', { name: 'CANADA', code: 99401 })];
-        const certificationCandidates = [store.createRecord('certification-candidate', candidate)];
-
-        // when
-        const screen = await render(
-          <template>
-            <EnrolledCandidates
-              @sessionId='1'
-              @certificationCandidates={{certificationCandidates}}
-              @countries={{countries}}
-            />
-          </template>,
-        );
-
-        // then
-        assert.dom(screen.getByRole('columnheader', { name: 'Accessibilité' })).exists();
-        assert.dom(screen.getByRole('cell', { name: '-' })).exists();
-      });
-    });
-  });
-
-  module('when feature toggle isNeedToAdjustCertificationAccessibilityEnabled is false', function (hooks) {
-    hooks.beforeEach(async function () {
-      store = this.owner.lookup('service:store');
-      const currentAllowedCertificationCenterAccess = store.createRecord('allowed-certification-center-access', {
-        id: '456',
-        name: 'Center',
-        type: 'PRO',
-      });
-
-      class CurrentUserStub extends Service {
-        currentAllowedCertificationCenterAccess = currentAllowedCertificationCenterAccess;
-      }
-
-      this.owner.register('service:current-user', CurrentUserStub);
-    });
-
-    test('should not display accessibility adjusted certification needed information', async function (assert) {
+    test('should display candidate needs accessibility adjusted certification', async function (assert) {
       // given
       const candidate = _buildCertificationCandidate({
         accessibilityAdjustmentNeeded: true,
@@ -367,8 +283,6 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
 
       const countries = [store.createRecord('country', { name: 'CANADA', code: 99401 })];
       const certificationCandidates = [store.createRecord('certification-candidate', candidate)];
-      const displayComplementaryCertification = sinon.stub();
-      const complementaryCertifications = [];
 
       // when
       const screen = await render(
@@ -376,25 +290,26 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
           <EnrolledCandidates
             @sessionId='1'
             @certificationCandidates={{certificationCandidates}}
-            @displayComplementaryCertification={{displayComplementaryCertification}}
             @countries={{countries}}
-            @complementaryCertifications={{complementaryCertifications}}
           />
         </template>,
       );
 
       // then
-      assert.dom(screen.queryByRole('columnheader', { name: 'Accessibilité' })).doesNotExist();
-      assert.dom(screen.queryByRole('cell', { name: 'Oui' })).doesNotExist();
+      assert.dom(screen.getByRole('columnheader', { name: 'Accessibilité' })).exists();
+      assert.dom(screen.getByRole('cell', { name: 'Oui' })).exists();
     });
+  });
 
-    test('it does not display candidates with an edit button', async function (assert) {
+  module('when candidate doesnt need accessibility adjusted certification', function () {
+    test('should display candidate doesnt need accessibility adjusted certification', async function (assert) {
       // given
-      const certificationCandidates = [
-        _buildCertificationCandidate({ id: '1' }),
-        _buildCertificationCandidate({ id: '2', firstName: 'Lara', lastName: 'Pafromage', isLinked: true }),
-      ].map((candidateData) => store.createRecord('certification-candidate', candidateData));
+      const candidate = _buildCertificationCandidate({
+        accessibilityAdjustmentNeeded: false,
+      });
+
       const countries = [store.createRecord('country', { name: 'CANADA', code: 99401 })];
+      const certificationCandidates = [store.createRecord('certification-candidate', candidate)];
 
       // when
       const screen = await render(
@@ -408,8 +323,8 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
       );
 
       // then
-      assert.dom(screen.queryByRole('button', { name: 'Editer le candidat Eddy Taurial' })).doesNotExist();
-      assert.dom(screen.queryByRole('button', { name: 'Editer le candidat Lara Pafromage' })).doesNotExist();
+      assert.dom(screen.getByRole('columnheader', { name: 'Accessibilité' })).exists();
+      assert.dom(screen.getByRole('cell', { name: '-' })).exists();
     });
   });
 
