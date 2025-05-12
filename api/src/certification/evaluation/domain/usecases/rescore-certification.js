@@ -6,6 +6,7 @@ import CertificationRescored from '../events/CertificationRescored.js';
 export const rescoreCertification = async ({
   certificationCourseId,
   locale,
+  juryId,
   certificationAssessmentRepository,
   evaluationSessionRepository,
   services,
@@ -31,7 +32,7 @@ export const rescoreCertification = async ({
   }
 
   return services.handleV3CertificationScoring({
-    event: new CertificationRescored({ certificationCourseId }),
+    event: new CertificationRescored({ certificationCourseId, juryId }),
     certificationAssessment,
     locale,
     dependencies: { findByCertificationCourseIdAndAssessmentId: services.findByCertificationCourseIdAndAssessmentId },

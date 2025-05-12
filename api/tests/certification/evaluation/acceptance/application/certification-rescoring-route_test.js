@@ -143,6 +143,7 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
       expect(descOrderedAssessmentResults).to.have.length(2);
       const [lastAssessmentResult] = descOrderedAssessmentResults;
       expect(lastAssessmentResult.pixScore).to.be.equal(55);
+      expect(lastAssessmentResult.juryId).to.be.equal(user.id);
     });
   });
 });
