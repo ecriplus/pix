@@ -5,6 +5,10 @@ export default class CreateAssessmentRoute extends Route {
   @service store;
   @service router;
 
+  buildRouteInfoMetadata() {
+    return { blockPageview: true };
+  }
+
   model(params) {
     return this.store.findRecord('course', params.course_id);
   }

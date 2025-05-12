@@ -13,6 +13,10 @@ export default class ResumeRoute extends Route {
   competenceLeveled = null;
   assessmentHasNoMoreQuestions = false;
 
+  buildRouteInfoMetadata() {
+    return { blockPageview: true };
+  }
+
   async beforeModel(transition) {
     this.hasSeenCheckpoint = transition.to.queryParams.hasSeenCheckpoint;
     this.campaignCode = transition.to.queryParams.campaignCode;

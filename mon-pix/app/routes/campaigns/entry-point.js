@@ -12,6 +12,10 @@ export default class EntryPoint extends Route {
   @service store;
   @service metrics;
 
+  buildRouteInfoMetadata() {
+    return { blockPageview: true };
+  }
+
   async beforeModel() {
     if (this.session.isAuthenticated && this.currentUser.user.isAnonymous) {
       await this.session.invalidate();

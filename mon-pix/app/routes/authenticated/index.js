@@ -4,6 +4,10 @@ import { service } from '@ember/service';
 export default class AuthenticatedIndexRoute extends Route {
   @service router;
 
+  buildRouteInfoMetadata() {
+    return { blockPageview: true };
+  }
+
   redirect() {
     this.router.replaceWith('authenticated.user-dashboard');
   }

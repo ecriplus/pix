@@ -2,6 +2,7 @@ import { action } from '@ember/object';
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import ENV from 'mon-pix/config/environment';
+
 export default class ApplicationRoute extends Route {
   @service authentication;
   @service featureToggles;
@@ -15,20 +16,15 @@ export default class ApplicationRoute extends Route {
 
   constructor() {
     super(...arguments);
-    const stripIdFromPageUrl = (url) => {
-      const id = /(\w+\d+\w+|(?!recommandes)(rec\w+))/g;
-      // TODO les routes qui finissent par un id
-      // ex: /assessments/_ID_/challenges/0
-      return url.replace(id, '_ID_');
-    };
 
     const trackRouteChange = (transition) => {
-      if (transition.to.metadata?.blockPageview) {
+      if (!transition.to || transition.to.metadata?.blockPageview) {
         return;
       }
-      const routeName = this.router.currentRouteName || 'unknown';
-      const page = stripIdFromPageUrl(this.router.currentURL);
-      this.metrics.trackPage({ page, routeName });
+      const params = extractParamsFromRouteInfo(transition.to);
+
+      const page = redactUrlForAnalytics(this.router.currentURL, params);
+      this.metrics.trackPage({ plausibleAttributes: { u: page } });
     };
     this.router.on('routeDidChange', trackRouteChange);
   }
@@ -70,6 +66,7 @@ export default class ApplicationRoute extends Route {
   deactivate() {
     this.#stopPolling();
   }
+
   @action
   error(error) {
     this.#stopPolling();
@@ -88,4 +85,18 @@ export default class ApplicationRoute extends Route {
       this.poller = null;
     }
   }
+}
+
+export function redactUrlForAnalytics(url, params) {
+  const splittedUrl = url.split('/');
+  const redactedUrl = splittedUrl.map((token) => {
+    return params.includes(token) ? '_ID_' : token;
+  });
+  return redactedUrl.join('/');
+}
+
+function extractParamsFromRouteInfo(routeInfo, params = []) {
+  return routeInfo.parent == null
+    ? params
+    : extractParamsFromRouteInfo(routeInfo.parent, params.concat(Object.values(routeInfo.params)));
 }

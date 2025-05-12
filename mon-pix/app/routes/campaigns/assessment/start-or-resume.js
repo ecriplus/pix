@@ -17,6 +17,10 @@ export default class EvaluationStartOrResumeRoute extends Route {
     return this.modelFor('campaigns.assessment');
   }
 
+  buildRouteInfoMetadata() {
+    return { blockPageview: true };
+  }
+
   async redirect({ assessment, campaign }) {
     if (this._shouldShowTutorial(assessment, campaign.isForAbsoluteNovice)) {
       this.router.replaceWith('campaigns.assessment.tutorial', campaign.code);

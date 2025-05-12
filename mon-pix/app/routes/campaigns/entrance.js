@@ -9,6 +9,10 @@ export default class Entrance extends Route {
   @service session;
   @service router;
 
+  buildRouteInfoMetadata() {
+    return { blockPageview: true };
+  }
+
   beforeModel(transition) {
     if (!transition.from) {
       return this.router.replaceWith('campaigns.entry-point');

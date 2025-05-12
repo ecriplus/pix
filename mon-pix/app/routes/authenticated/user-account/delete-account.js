@@ -5,6 +5,10 @@ export default class DeleteAccountRoute extends Route {
   @service router;
   @service store;
 
+  buildRouteInfoMetadata() {
+    return { blockPageview: true };
+  }
+
   async model() {
     const user = this.modelFor('authenticated.user-account');
     return { user };

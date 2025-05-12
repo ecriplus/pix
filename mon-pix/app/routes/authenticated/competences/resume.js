@@ -7,6 +7,10 @@ export default class ResumeRoute extends Route {
 
   competenceId = null;
 
+  buildRouteInfoMetadata() {
+    return { blockPageview: true };
+  }
+
   model(params, transition) {
     const competenceId = transition.to.parent.params.competence_id;
     return this.store.queryRecord('competence-evaluation', { competenceId, startOrResume: true });
