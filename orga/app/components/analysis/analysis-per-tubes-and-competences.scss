@@ -27,6 +27,10 @@
     width: 65%;
   }
 
+  &__level-column {
+    width: 10%;
+  }
+
   &__tube-title {
     @extend %pix-body-s;
 
