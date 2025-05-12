@@ -23,10 +23,6 @@ const attachChildOrganizationToOrganization = withTransaction(
       });
 
       _assertParentOrganizationIsNotChildOrganization(parentOrganizationForAdmin);
-      _assertChildOrganizationHaveSameTypeAsParentOrganization({
-        childOrganizationForAdmin,
-        parentOrganizationForAdmin,
-      });
 
       childOrganizationForAdmin.updateParentOrganizationId(parentOrganizationId);
 
@@ -57,24 +53,6 @@ function _assertChildOrganizationNotAlreadyAttached(childOrganizationForAdmin) {
       message: 'Unable to attach already attached child organization',
       meta: {
         childOrganizationId: childOrganizationForAdmin.id,
-      },
-    });
-  }
-}
-
-function _assertChildOrganizationHaveSameTypeAsParentOrganization({
-  childOrganizationForAdmin,
-  parentOrganizationForAdmin,
-}) {
-  if (childOrganizationForAdmin.type !== parentOrganizationForAdmin.type) {
-    throw new UnableToAttachChildOrganizationToParentOrganizationError({
-      code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_WITHOUT_SAME_TYPE',
-      message: 'Unable to attach child organization with a different type as the parent organization',
-      meta: {
-        childOrganizationId: childOrganizationForAdmin.id,
-        childOrganizationType: childOrganizationForAdmin.type,
-        parentOrganizationId: parentOrganizationForAdmin.id,
-        parentOrganizationType: parentOrganizationForAdmin.type,
       },
     });
   }
