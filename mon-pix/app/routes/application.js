@@ -88,11 +88,14 @@ export default class ApplicationRoute extends Route {
 }
 
 export function redactUrlForAnalytics(url, params) {
-  const splittedUrl = url.split('/');
-  const redactedUrl = splittedUrl.map((token) => {
-    return params.includes(token) ? '_ID_' : token;
-  });
-  return redactedUrl.join('/');
+  const [base, queryParams] = url.split('?');
+  const redactedUrl = base
+    .split('/')
+    .map((token) => {
+      return params.includes(token) ? '_ID_' : token;
+    })
+    .join('/');
+  return queryParams ? `${redactedUrl}?${queryParams}` : redactedUrl;
 }
 
 function extractParamsFromRouteInfo(routeInfo, params = []) {

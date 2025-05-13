@@ -28,6 +28,11 @@ module('Unit | Route | application', function (hooks) {
           params: ['competence123', '789'],
           expected: '/competences/_ID_/resultats/_ID_',
         },
+        {
+          actual: '/competences/competence123/resultats/789?id=789',
+          params: ['competence123', '789'],
+          expected: '/competences/_ID_/resultats/_ID_?id=789',
+        },
       ],
       function (assert, input) {
         const redatedUrl = redactUrlForAnalytics(input.actual, input.params);

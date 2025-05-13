@@ -46,7 +46,6 @@ module('Acceptance | Application', function (hooks) {
       assert.ok(
         metricService.trackPage.calledOnceWithExactly({
           plausibleAttributes: { u: '/accueil' },
-          routeName: 'authenticated.user-dashboard',
         }),
       );
     });
@@ -77,7 +76,6 @@ module('Acceptance | Application', function (hooks) {
       await visit('/assessments/1/challenges/0');
       sinon.assert.calledOnceWithExactly(metricService.trackPage, {
         plausibleAttributes: { u: '/assessments/_ID_/challenges/_ID_' },
-        routeName: 'assessments.challenge',
       });
       assert.ok(true);
     });
@@ -91,7 +89,25 @@ module('Acceptance | Application', function (hooks) {
       // then
       sinon.assert.calledOnceWithExactly(metricService.trackPage, {
         plausibleAttributes: { u: '/connexion' },
-        routeName: 'authentication.login',
+      });
+
+      assert.ok(true);
+    });
+
+    test('should forward query params', async function (assert) {
+      // given
+      const metricService = this.owner.lookup('service:metrics');
+      server.create('assessment', 'ofCompetenceEvaluationType', {
+        id: 1,
+      });
+      server.create('challenge', 'forCompetenceEvaluation', 'QROCM', {});
+
+      // when
+      await visit('/assessments/1/challenges/0?id=1');
+
+      // then
+      sinon.assert.calledOnceWithExactly(metricService.trackPage, {
+        plausibleAttributes: { u: '/assessments/_ID_/challenges/_ID_?id=1' },
       });
 
       assert.ok(true);
