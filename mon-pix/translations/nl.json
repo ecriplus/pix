@@ -479,13 +479,20 @@
       "update-sco-record": {
         "fill-password": "Voer je wachtwoord in en Pix is van jou!",
         "form": {
+          "authentication-methods-removal-notice": "Na deze stap kun je niet meer inloggen met { connections }.",
+          "choose-password": "Kies een wachtwoord om verder te gaan met Pix.",
           "email-label": "E-mailadres",
           "errors": {
             "empty-password": "Het wachtwoordveld is verplicht.",
             "invalid-password": "Je wachtwoord moet minstens 8 tekens lang zijn en minstens één hoofdletter, één kleine letter en één cijfer bevatten."
           },
           "login-button": "Inloggen",
-          "password-label": "Wachtwoord"
+          "new-connection-info": "Maak je geen zorgen, het enige wat je hoeft te doen om weer in te loggen is je e-mailadres en het wachtwoord te gebruiken dat je hier hebt ingesteld.",
+          "password-label": "Wachtwoord",
+          "sco-connections":{
+            "gar": "het Mediacenter",
+            "username":  "je Pix-school-ID"
+          }
         },
         "welcome-message": "Welkom terug { firstName }!"
       }

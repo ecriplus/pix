@@ -475,13 +475,20 @@
       "update-sco-record": {
         "fill-password": "Enter your password and Pix is yours !",
         "form": {
+          "authentication-methods-removal-notice": "After this step, you will no longer be able to log in using { connections }.",
+          "choose-password": "Choose a password to continue enjoying Pix.",
           "email-label": "E-mail address",
           "errors": {
             "empty-password": "The password field is mandatory.",
             "invalid-password": "Your password must be at least 8 characters long and contain at least one upper case letter, one lower case letter and one number."
           },
           "login-button": "I want to connect",
-          "password-label": "Password"
+          "new-connection-info": "Don't worry, all you have to do to log back in is use your email address and the password you set here.",
+          "password-label": "Password",
+          "sco-connections": {
+            "gar": "the Mediacentre",
+            "username": "your Pix school ID"
+          }
         },
         "welcome-message": "Welcome back { firstName } !"
       }

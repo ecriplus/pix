@@ -475,13 +475,20 @@
       "update-sco-record": {
         "fill-password": "Saisissez un mot de passe et Pix est à vous !",
         "form": {
+          "authentication-methods-removal-notice": "Après cette étape, vous ne pourrez plus vous connecter avec { connections }.",
+          "choose-password": "Choisissez un mot de passe pour continuer à profiter de Pix.",
           "email-label": "Adresse e-mail",
           "errors": {
             "empty-password": "Le champ mot de passe est obligatoire.",
             "invalid-password": "Votre mot de passe doit contenir 8 caractères au minimum et comporter au moins une majuscule, une minuscule et un chiffre."
           },
           "login-button": "Je me connecte",
-          "password-label": "Mot de passe"
+          "new-connection-info": "Pas d’inquiétude, pour vous reconnecter il suffira désormais d’utiliser votre adresse email et le mot de passe défini ici.",
+          "password-label": "Mot de passe",
+          "sco-connections": {
+            "gar": "le Médiacentre",
+            "username": "votre identifiant scolaire Pix"
+          }
         },
         "welcome-message": "Bon retour parmi nous { firstName } !"
       }
