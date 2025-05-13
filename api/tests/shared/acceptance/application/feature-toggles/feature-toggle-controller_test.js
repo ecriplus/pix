@@ -29,7 +29,6 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'is-need-to-adjust-certification-accessibility-enabled': false,
             'is-oppsy-disabled': false,
             'is-pix-app-new-layout-enabled': false,
-            'is-pix-companion-enabled': false,
             'is-quest-enabled': true,
             'is-self-account-deletion-enabled': true,
             'is-text-to-speech-button-enabled': false,
