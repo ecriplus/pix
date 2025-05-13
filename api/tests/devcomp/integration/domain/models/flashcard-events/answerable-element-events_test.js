@@ -1,5 +1,4 @@
 import { QCUDeclarativeAnsweredEvent } from '../../../../../../src/devcomp/domain/models/passage-events/answerable-element-events.js';
-import { FlashcardsVersoSeenEvent } from '../../../../../../src/devcomp/domain/models/passage-events/flashcard-events.js';
 import { DomainError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
 

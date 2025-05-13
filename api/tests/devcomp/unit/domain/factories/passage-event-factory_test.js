@@ -181,6 +181,7 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
           sequenceNumber: 3,
           elementId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
           type: 'QCU_DECLARATIVE_ANSWERED',
+          answer: 'Tous les mercredis',
         };
         // when
         const builtEvent = PassageEventFactory.build(rawEvent);
