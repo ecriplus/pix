@@ -21,21 +21,41 @@ il n'y a qu'un type d'erreur et pas de mapping.
 
 ## Pratiques à suivre
 
-Il faut privilégier :
+### Ce qu’il faut privilégier
+
 * l'ajout d'une propriété `code` et le traitement côté client, par `code` en
   priorité par rapport à la propriété `status`. Il faut
   réserver les status pour les couches HTTP/réseau hors de l'application.
 * l'ajout d'une propriété `meta` pour ajouter des informations supplémentaires lorsque nécessaire
 * un nom finissant par `Error` pour standardiser
 
-Il ne faut pas :
-* mettre un texte traduit
-* mettre un code dans le constructeur qui incite à le changer
-* mal utiliser les codes HTTP pour faire de la discrimination entre erreur
-* mettre des informations dans le `meta` qui divulgueraient des informations
-  menaçant la sécurité des applications (stacktrace de l'erreur indiquant des
-  chemins de fichiers sur le conteneur permettant des attaques, des IP de
-  conteneurs, des informations sur les utilisateurs trouvés ou non, etc.)
+### Ce qu’il faut éviter
+
+* Il ne faut pas mettre de texte traduit dans une erreur.
+
+* Il ne faut pas mettre un argument `code` dans les constructeurs des erreurs,
+  mais plutôt créer des classes d’erreur dédiées chacune porteuse d’un `code`
+  unique.
+
+  L’objectif est de standardiser et d’unifier les `code` des erreurs pour
+  pouvoir les traiter de manière efficace et le plus possible standardisée dans
+  les Fronts, sans avoir à gérer autant de cas de `code` qu’il y a de usecase
+  dans le Back.
+
+  En effet donner la possibilité de spécifier un `code` dans le constructeur
+  laisserait penser que, plutôt que d’hériter du `code` de la classe, changer le
+  `code` d’une erreur à son instanciation est une bonne pratique. Or lorsque les
+  erreurs du Back sont propagées aux Fronts le type de la classe est perdu et
+  seul le `code` est préservé.
+
+* Il ne faut pas mal utiliser les codes HTTP pour faire de la discrimination
+  entre erreur.
+
+* Il ne faut pas mettre des informations dans le `meta` qui divulgueraient des
+  informations menaçant la sécurité des applications (stacktrace de l'erreur
+  indiquant des chemins de fichiers sur le conteneur permettant des attaques,
+  des IP de conteneurs, des informations sur les utilisateurs trouvés ou non,
+  etc.).
 
 
 Bon :
