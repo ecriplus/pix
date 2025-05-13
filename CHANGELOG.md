@@ -1,5 +1,26 @@
 # Pix Changelog
 
+## v5.109.0 (13/05/2025)
+
+
+### :rocket: Amélioration
+- [#12252](https://github.com/1024pix/pix/pull/12252) [FEATURE] Affichage du positionnement global sur la nouvelle page d'analyse de campagne (PIX-17026).
+- [#12264](https://github.com/1024pix/pix/pull/12264) [FEATURE] Ajout d'un boolean pour activer/désactiver la nouvelle suppression (PIX-17706).
+- [#12244](https://github.com/1024pix/pix/pull/12244) [FEATURE] : Envoyer tous les passage events de type FLASHCARDS au service passage-events (PIX-17779).
+- [#12226](https://github.com/1024pix/pix/pull/12226) [FEATURE] Alignement du footer sur le contenu (pix-17757).
+- [#12225](https://github.com/1024pix/pix/pull/12225) [FEATURE] Changement logo marianne (PIX-17399).
+
+### :building_construction: Tech
+- [#12242](https://github.com/1024pix/pix/pull/12242) [TECH] Optimisation de requête.
+- [#12238](https://github.com/1024pix/pix/pull/12238) [TECH] Ajout du juryId sur la route de rescoring (PIX-17781).
+
+### :arrow_up: Montée de version
+- [#12266](https://github.com/1024pix/pix/pull/12266) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.31 (orga).
+- [#12261](https://github.com/1024pix/pix/pull/12261) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.31 (mon-pix).
+- [#12259](https://github.com/1024pix/pix/pull/12259) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.31 (junior).
+- [#12256](https://github.com/1024pix/pix/pull/12256) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.31 (certif).
+- [#12255](https://github.com/1024pix/pix/pull/12255) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.31 (admin).
+
 ## v5.108.0 (12/05/2025)
 
 
