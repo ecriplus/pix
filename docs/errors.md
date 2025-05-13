@@ -67,6 +67,16 @@ class AuthenticationKeyExpiredError extends DomainError {
 }
 ```
 
+Bon :
+```javascript
+class TagNotFoundError extends DomainError {
+  constructor(meta) {
+    super('Tag does not exist', 'TAG_NOT_FOUND');
+    if (meta) this.meta = meta;
+  }
+}
+```
+
 Pas bon :
 ```javascript
 class UncancellableCertificationCenterInvitation extends DomainError {
