@@ -23,3 +23,12 @@ jobs:
           changelogTitle: "# Pix Changelog"
         env:
           GITHUB_TOKEN: ${{ secrets.PIX_SERVICE_ACTIONS_TOKEN }}
+      - name: Notify to a slack channel
+        if: env.new_release_published == 'true'
+        uses: slackapi/slack-github-action@v2.0.0
+        with:
+          method: chat.postMessage
+          token: ${{ secrets.SLACK_RELEASE_BOT_TOKEN }}
+          payload: |
+            channel: ${{ secrets.SLACK_RELEASE_CHANNEL_ID }}
+            text: "Coucou :wave:\nLa v${{ env.new_release_version }} est en recette jusqu’à demain matin @team-po\nMettez vos messages en :thread:"
