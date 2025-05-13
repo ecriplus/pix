@@ -245,6 +245,25 @@
                   "solution": "2"
                 }
               ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "09dc17f9-142b-4e19-bcbe-bfde4e170d3l",
+                  "type": "qcu-declarative",
+                  "instruction": "<p>Pix est découpé en 6 domaines.</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "Vrai"
+                    },
+                    {
+                      "id": "2",
+                      "content": "Faux"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }

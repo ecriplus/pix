@@ -41,6 +41,7 @@ export function getElements(modules) {
     'image',
     'qcm',
     'qcu',
+    'qcu-declarative',
     'qrocm',
     'separator',
     'text',
