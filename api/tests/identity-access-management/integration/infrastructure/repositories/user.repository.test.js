@@ -1714,6 +1714,25 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(updatedUser.updatedAt).to.deep.equal(now);
       });
 
+      context('when username is null', function () {
+        it('still updates the username with the null username', async function () {
+          // given
+          const user = databaseBuilder.factory.buildUser({
+            username: 'monutilisateur',
+          });
+          await databaseBuilder.commit();
+
+          // when
+          const updatedUser = await userRepository.updateUsername({
+            id: user.id,
+            username: null,
+          });
+
+          // then
+          expect(updatedUser.username).to.equal(null);
+        });
+      });
+
       it('throws UserNotFoundError when user id not found', async function () {
         // given
         const wrongUserId = 0;
