@@ -5,7 +5,7 @@ export default class AuthenticatedIndexRoute extends Route {
   @service router;
 
   buildRouteInfoMetadata() {
-    return { blockPageview: true };
+    return { doNotTrackPage: true };
   }
 
   redirect() {

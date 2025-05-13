@@ -6,7 +6,7 @@ export default class ProfilesCollectionCampaignsStartOrResumeRoute extends Route
   @service router;
 
   buildRouteInfoMetadata() {
-    return { blockPageview: true };
+    return { doNotTrackPage: true };
   }
 
   beforeModel(transition) {

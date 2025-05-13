@@ -8,7 +8,7 @@ export default class ResumeRoute extends Route {
   competenceId = null;
 
   buildRouteInfoMetadata() {
-    return { blockPageview: true };
+    return { doNotTrackPage: true };
   }
 
   model(params, transition) {

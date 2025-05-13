@@ -11,7 +11,7 @@ export default class AccessRoute extends Route {
   @service oidcIdentityProviders;
 
   buildRouteInfoMetadata() {
-    return { blockPageview: true };
+    return { doNotTrackPage: true };
   }
 
   beforeModel(transition) {

@@ -18,7 +18,7 @@ export default class EvaluationStartOrResumeRoute extends Route {
   }
 
   buildRouteInfoMetadata() {
-    return { blockPageview: true };
+    return { doNotTrackPage: true };
   }
 
   async redirect({ assessment, campaign }) {

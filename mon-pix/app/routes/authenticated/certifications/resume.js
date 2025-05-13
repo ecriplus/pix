@@ -6,7 +6,7 @@ export default class ResumeRoute extends Route {
   @service router;
 
   buildRouteInfoMetadata() {
-    return { blockPageview: true };
+    return { doNotTrackPage: true };
   }
 
   model(params) {

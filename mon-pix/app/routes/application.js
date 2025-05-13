@@ -18,7 +18,7 @@ export default class ApplicationRoute extends Route {
     super(...arguments);
 
     const trackRouteChange = (transition) => {
-      if (!transition.to || transition.to.metadata?.blockPageview) {
+      if (!transition.to || transition.to.metadata?.doNotTrackPage) {
         return;
       }
       const params = extractParamsFromRouteInfo(transition.to);

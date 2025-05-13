@@ -14,7 +14,7 @@ export default class ResumeRoute extends Route {
   assessmentHasNoMoreQuestions = false;
 
   buildRouteInfoMetadata() {
-    return { blockPageview: true };
+    return { doNotTrackPage: true };
   }
 
   async beforeModel(transition) {

@@ -13,7 +13,7 @@ export default class EntryPoint extends Route {
   @service metrics;
 
   buildRouteInfoMetadata() {
-    return { blockPageview: true };
+    return { doNotTrackPage: true };
   }
 
   async beforeModel() {

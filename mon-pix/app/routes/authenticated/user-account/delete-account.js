@@ -6,7 +6,7 @@ export default class DeleteAccountRoute extends Route {
   @service store;
 
   buildRouteInfoMetadata() {
-    return { blockPageview: true };
+    return { doNotTrackPage: true };
   }
 
   async model() {
