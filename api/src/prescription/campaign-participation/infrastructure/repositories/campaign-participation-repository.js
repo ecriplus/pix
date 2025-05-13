@@ -132,9 +132,9 @@ const getCampaignParticipationsForOrganizationLearner = async function ({ organi
   );
 };
 
-const remove = async function ({ id, deletedAt, deletedBy }) {
+const remove = async function ({ id, attributes }) {
   const knexConn = DomainTransaction.getConnection();
-  return await knexConn('campaign-participations').where({ id }).update({ deletedAt, deletedBy });
+  return await knexConn('campaign-participations').where({ id }).update(attributes);
 };
 
 const findInfoByCampaignId = async function (campaignId) {

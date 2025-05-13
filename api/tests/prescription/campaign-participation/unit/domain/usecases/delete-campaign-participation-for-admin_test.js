@@ -79,8 +79,10 @@ describe('Unit | UseCase | delete-campaign-participation-for-admin', function ()
       });
       expect(campaignParticipationRepository.remove).to.have.been.calledWithExactly({
         id: deletedCampaignParticipation.id,
-        deletedAt: deletedCampaignParticipation.deletedAt,
-        deletedBy: deletedCampaignParticipation.deletedBy,
+        attributes: {
+          deletedAt: deletedCampaignParticipation.deletedAt,
+          deletedBy: deletedCampaignParticipation.deletedBy,
+        },
       });
     });
   });
