@@ -61,12 +61,12 @@ const register = async function (server) {
     },
     {
       method: 'DELETE',
-      path: '/api/campaigns/{id}/campaign-participations/{campaignParticipationId}',
+      path: '/api/campaigns/{campaignId}/campaign-participations/{campaignParticipationId}',
       config: {
         pre: [{ method: securityPreHandlers.checkAuthorizationToManageCampaign }],
         validate: {
           params: Joi.object({
-            id: identifiersType.campaignId,
+            campaignId: identifiersType.campaignId,
             campaignParticipationId: identifiersType.campaignParticipationId,
           }),
         },

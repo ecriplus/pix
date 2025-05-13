@@ -71,10 +71,10 @@ const getCampaignAssessmentParticipation = async function (request) {
 
 const deleteParticipation = async function (request, h) {
   const { userId } = request.auth.credentials;
-  const { id, campaignParticipationId } = request.params;
+  const { campaignId, campaignParticipationId } = request.params;
   await usecases.deleteCampaignParticipation({
     userId,
-    campaignId: id,
+    campaignId,
     campaignParticipationId,
   });
   return h.response({}).code(204);

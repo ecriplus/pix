@@ -383,7 +383,7 @@ describe('Unit | Application | Controller | Campaign-Participation', function ()
       const campaignId = 6;
       const userId = 2;
       const request = {
-        params: { id: campaignId, campaignParticipationId },
+        params: { campaignId, campaignParticipationId },
         auth: { credentials: { userId } },
       };
 
