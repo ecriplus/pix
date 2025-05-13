@@ -1,6 +1,5 @@
 import { clickByName, clickByText, render } from '@1024pix/ember-testing-library';
 import { click, tab } from '@ember/test-helpers';
-import { t } from 'ember-intl/test-support';
 import ModulixNavbar from 'mon-pix/components/module/layout/navbar';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -136,21 +135,12 @@ module('Integration | Component | Module | Navbar', function (hooks) {
       await waitForDialog();
 
       // then
-      assert.strictEqual(
-        screen.getByRole('button', { name: 'Découverte' }).textContent.trim(),
-        t('pages.modulix.grain.tag.discovery'),
-      );
-      assert.strictEqual(
-        screen.getByRole('button', { name: 'Activité' }).textContent.trim(),
-        t('pages.modulix.grain.tag.activity'),
-      );
-      assert.strictEqual(
-        screen.getByRole('button', { name: 'Leçon' }).textContent.trim(),
-        t('pages.modulix.grain.tag.lesson'),
-      );
-      assert.dom(screen.getByRole('button', { name: 'Leçon' })).hasAria('current', 'step');
+      assert.strictEqual(screen.getByRole('button', { name: 'Grain title 1' }).textContent.trim(), 'Grain title 1');
+      assert.strictEqual(screen.getByRole('button', { name: 'Grain title 2' }).textContent.trim(), 'Grain title 2');
+      assert.strictEqual(screen.getByRole('button', { name: 'Grain title 3' }).textContent.trim(), 'Grain title 3');
+      assert.dom(screen.getByRole('button', { name: 'Grain title 3' })).hasAria('current', 'step');
 
-      assert.dom(screen.queryByRole('button', { name: "Récap'" })).doesNotExist();
+      assert.dom(screen.queryByRole('button', { name: 'Grain title 4' })).doesNotExist();
     });
 
     test('should allow tabulation in sidebar', async function (assert) {
@@ -177,13 +167,13 @@ module('Integration | Component | Module | Navbar', function (hooks) {
 
       // then
       await tab();
-      assert.strictEqual(document.activeElement.textContent.trim(), t('pages.modulix.grain.tag.discovery'));
+      assert.strictEqual(document.activeElement.textContent.trim(), 'Grain title 1');
 
       await tab();
-      assert.strictEqual(document.activeElement.textContent.trim(), t('pages.modulix.grain.tag.activity'));
+      assert.strictEqual(document.activeElement.textContent.trim(), 'Grain title 2');
 
       await tab();
-      assert.strictEqual(document.activeElement.textContent.trim(), t('pages.modulix.grain.tag.lesson'));
+      assert.strictEqual(document.activeElement.textContent.trim(), 'Grain title 3');
     });
 
     module('when user clicks on grain’s type', function () {
@@ -209,12 +199,12 @@ module('Integration | Component | Module | Navbar', function (hooks) {
         );
         await clickByName('Afficher les étapes du module');
         await waitForDialog();
-        await clickByText('Activité');
+        await clickByText('Grain title 2');
 
         // then
         sinon.assert.calledOnce(goToGrainSpy);
         sinon.assert.calledWithExactly(goToGrainSpy, '234-abc');
-        assert.strictEqual(document.activeElement.textContent.trim(), t('pages.modulix.grain.tag.activity'));
+        assert.strictEqual(document.activeElement.textContent.trim(), 'Grain title 2');
         assert.ok(true);
       });
 
@@ -240,7 +230,7 @@ module('Integration | Component | Module | Navbar', function (hooks) {
         );
         await clickByName('Afficher les étapes du module');
         await waitForDialog();
-        await clickByText('Activité');
+        await clickByText('Grain title 2');
         await waitForDialogClose();
 
         // then
@@ -252,10 +242,10 @@ module('Integration | Component | Module | Navbar', function (hooks) {
 
 function createModule(owner) {
   const store = owner.lookup('service:store');
-  const grain1 = store.createRecord('grain', { title: 'Grain title', type: 'discovery', id: '123-abc' });
-  const grain2 = store.createRecord('grain', { title: 'Grain title', type: 'activity', id: '234-abc' });
-  const grain3 = store.createRecord('grain', { title: 'Grain title', type: 'lesson', id: '345-abc' });
-  const grain4 = store.createRecord('grain', { title: 'Grain title', type: 'summary', id: '456-abc' });
+  const grain1 = store.createRecord('grain', { title: 'Grain title 1', type: 'discovery', id: '123-abc' });
+  const grain2 = store.createRecord('grain', { title: 'Grain title 2', type: 'activity', id: '234-abc' });
+  const grain3 = store.createRecord('grain', { title: 'Grain title 3', type: 'lesson', id: '345-abc' });
+  const grain4 = store.createRecord('grain', { title: 'Grain title 4', type: 'summary', id: '456-abc' });
   return store.createRecord('module', {
     title: 'Didacticiel',
     grains: [grain1, grain2, grain3, grain4],
