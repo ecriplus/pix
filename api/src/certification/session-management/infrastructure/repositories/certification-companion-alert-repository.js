@@ -3,7 +3,6 @@ import {
   CertificationCompanionLiveAlert,
   CertificationCompanionLiveAlertStatus,
 } from '../../../shared/domain/models/CertificationCompanionLiveAlert.js';
-const TABLE_NAME = 'certification-companion-live-alerts';
 
 /**
  *
@@ -14,27 +13,23 @@ const TABLE_NAME = 'certification-companion-live-alerts';
  * @param {import('knex').Knex} options.knex
  */
 export async function getOngoingAlert({ sessionId, userId }, { knex = DomainTransaction.getConnection() } = {}) {
-  const alert = await knex
-    .select(`${TABLE_NAME}.*`)
-    .first()
-    .from('certification-courses')
+  const alert = await knex('certification-companion-live-alerts')
+    .select('certification-companion-live-alerts.*')
     .join('assessments', function () {
-      this.on('assessments.userId', '=', 'certification-courses.userId').andOn(
-        'assessments.certificationCourseId',
-        '=',
-        'certification-courses.id',
+      this.on('assessments.id', 'certification-companion-live-alerts.assessmentId').andOnVal(
+        'assessments.userId',
+        userId,
       );
     })
-    .join(TABLE_NAME, function () {
-      this.on(`${TABLE_NAME}.assessmentId`, '=', 'assessments.id').andOnVal(
-        `${TABLE_NAME}.status`,
-        '=',
-        CertificationCompanionLiveAlertStatus.ONGOING,
+    .join('certification-courses', function () {
+      this.on('certification-courses.id', 'assessments.certificationCourseId').andOnVal(
+        'certification-courses.sessionId',
+        sessionId,
       );
     })
-    .where('certification-courses.sessionId', '=', sessionId)
-    .andWhere('certification-courses.userId', '=', userId)
-    .forUpdate(TABLE_NAME);
+    .where({ 'certification-companion-live-alerts.status': CertificationCompanionLiveAlertStatus.ONGOING })
+    .first()
+    .forUpdate('certification-companion-live-alerts');
 
   if (!alert) return null;
 
@@ -47,7 +42,7 @@ export async function getOngoingAlert({ sessionId, userId }, { knex = DomainTran
  * @param {import('knex').Knex} options.knex
  */
 export async function update({ id, status }, { knex = DomainTransaction.getConnection() } = {}) {
-  await knex(TABLE_NAME)
+  await knex('certification-companion-live-alerts')
     .update({
       status,
       updatedAt: knex.fn.now(),
