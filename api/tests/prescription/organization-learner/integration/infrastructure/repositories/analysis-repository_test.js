@@ -57,7 +57,7 @@ describe('Integration | Infrastructure | Repository | Analysis', function () {
         nb_tubes_in_competence: 1,
       });
 
-      datamartBuilder.commit();
+      await datamartBuilder.commit();
 
       // when
       const result = await analysisRepository.findByTubes({ organizationId: 111 });
