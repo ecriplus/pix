@@ -96,6 +96,27 @@ describe('Acceptance | API | Campaign Participations', function () {
     });
   });
 
+  describe('DELETE /api/admin/campaigns/{campaignId/campaign-participations/{campaignParticipationId}', function () {
+    it('should return 204 HTTP status code', async function () {
+      // given
+      const superAdmin = await insertUserWithRoleSuperAdmin();
+      const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation();
+      await databaseBuilder.commit();
+
+      options = {
+        method: 'DELETE',
+        url: `/api/admin/campaigns/${campaignParticipation.campaignId}/campaign-participations/${campaignParticipation.id}`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(204);
+    });
+  });
+
   describe('GET /api/campaign-participations/{id}/analyses', function () {
     let campaignParticipation;
 
