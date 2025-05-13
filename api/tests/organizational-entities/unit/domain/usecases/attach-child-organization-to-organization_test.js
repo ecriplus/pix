@@ -117,52 +117,6 @@ describe('Unit | Organizational Entities | Domain | UseCases | attach-child-orga
       });
     });
 
-    context('when attaching child organization without the same type as parent organization', function () {
-      it('throws an UnableToAttachChildOrganizationToParentOrganization error', async function () {
-        // given
-        const childOrganization = domainBuilder.buildOrganizationForAdmin({
-          id: 123,
-          name: 'Child SCO Organization',
-          type: 'SCO',
-        });
-        const parentOrganization = domainBuilder.buildOrganizationForAdmin({
-          id: 1,
-          name: 'Parent PRO Organization',
-          type: 'PRO',
-        });
-        const childOrganizationId = childOrganization.id;
-        const childOrganizationType = childOrganization.type;
-        const parentOrganizationId = parentOrganization.id;
-        const parentOrganizationType = parentOrganization.type;
-
-        organizationForAdminRepository.get.onCall(0).resolves(childOrganization);
-        organizationForAdminRepository.get.onCall(1).resolves(parentOrganization);
-        organizationForAdminRepository.findChildrenByParentOrganizationId.resolves([]);
-
-        // when
-        const error = await catchErr(attachChildOrganizationToOrganization)({
-          childOrganizationIds: '123',
-          parentOrganizationId,
-          organizationForAdminRepository,
-        });
-
-        // then
-        expect(organizationForAdminRepository.get).to.have.been.calledTwice;
-        expect(organizationForAdminRepository.update).to.not.have.been.called;
-        expect(error).to.be.instanceOf(UnableToAttachChildOrganizationToParentOrganizationError);
-        expect(error.message).to.equal(
-          'Unable to attach child organization with a different type as the parent organization',
-        );
-        expect(error.code).to.equal('UNABLE_TO_ATTACH_CHILD_ORGANIZATION_WITHOUT_SAME_TYPE');
-        expect(error.meta).to.deep.equal({
-          childOrganizationId,
-          childOrganizationType,
-          parentOrganizationId,
-          parentOrganizationType,
-        });
-      });
-    });
-
     context('when the child organization is already parent', function () {
       it('throws an UnableToAttachChildOrganizationToParentOrganization error', async function () {
         // given

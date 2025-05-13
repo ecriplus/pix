@@ -69,10 +69,6 @@ module('Unit | Controller | authenticated/organizations/get/children', function 
           message: `Impossible d'attacher une organisation fille à une autre organisation fille.`,
         },
         {
-          code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_WITHOUT_SAME_TYPE',
-          message: `Vérifiez et sélectionnez une organisation fille qui correspond au type de l'organisation mère.`,
-        },
-        {
           code: 'UNABLE_TO_ATTACH_PARENT_ORGANIZATION_AS_CHILD_ORGANIZATION',
           message: `Impossible d'attacher une organisation mère en tant qu'organisation fille.`,
         },
