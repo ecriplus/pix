@@ -31,7 +31,7 @@ import TagLevel from '../statistics/tag-level';
       @data={{levelsPerCompetence.levelsPerTube}}
     >
       <:columns as |tubeLevel context|>
-        <PixTableColumn @context={{context}}>
+        <PixTableColumn @context={{context}} class="analysis-per-tubes-and-competences__description-column">
           <:header>
             {{t "components.analysis-per-tubes-and-competences.table.column.tubes"}}
           </:header>
@@ -59,7 +59,7 @@ import TagLevel from '../statistics/tag-level';
           </:cell>
         </PixTableColumn>
 
-        <PixTableColumn @context={{context}}>
+        <PixTableColumn @context={{context}} class="analysis-per-tubes-and-competences__level-column">
           <:header>
             {{t "components.analysis-per-tubes-and-competences.table.column.level"}}
           </:header>

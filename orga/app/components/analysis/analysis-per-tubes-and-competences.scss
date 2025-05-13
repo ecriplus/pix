@@ -23,6 +23,14 @@
     margin-bottom: var(--pix-spacing-6x);
   }
 
+  &__description-column {
+    width: 65%;
+  }
+
+  &__level-column {
+    width: 10%;
+  }
+
   &__tube-title {
     @extend %pix-body-s;
 
