@@ -185,29 +185,6 @@ const register = async function (server) {
     },
     {
       method: 'DELETE',
-      path: '/api/admin/campaign-participations/{id}',
-      config: {
-        pre: [
-          {
-            method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([
-                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-                securityPreHandlers.checkAdminMemberHasRoleSupport,
-              ])(request, h),
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            id: identifiersType.campaignParticipationId,
-          }),
-        },
-        handler: campaignParticipationController.deleteCampaignParticipationForAdmin,
-        notes: ['- Permet à un administrateur de supprimer une participation à une campagne'],
-        tags: ['api', 'campaign-participations', 'deprecated'],
-      },
-    },
-    {
-      method: 'DELETE',
       path: '/api/admin/campaigns/{campaignId}/campaign-participations/{campaignParticipationId}',
       config: {
         pre: [
