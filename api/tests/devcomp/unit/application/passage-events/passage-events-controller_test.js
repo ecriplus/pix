@@ -17,11 +17,11 @@ describe('Unit | Devcomp | Application | Passage-Events | Controller', function 
         recordPassageEvents: sinon.stub(),
       };
       usecases.recordPassageEvents.resolves();
-      const created = sinon.stub();
+      const code = sinon.stub();
       const userId = 123;
       sinon.stub(requestResponseUtils, 'extractUserIdFromRequest').returns(userId);
       const hStub = {
-        response: () => ({ created }),
+        response: () => ({ code }),
       };
 
       // when
@@ -36,7 +36,7 @@ describe('Unit | Devcomp | Application | Passage-Events | Controller', function 
         events: deserializedPayload,
         userId,
       });
-      expect(created).to.have.been.calledOnce;
+      expect(code).to.have.been.calledOnce;
     });
     context('when recordPassageEvents usecase throws domain error', function () {
       it('should throw a "BadRequestError"', async function () {
