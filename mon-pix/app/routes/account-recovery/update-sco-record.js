@@ -9,8 +9,11 @@ export default class UpdateScoRecordRoute extends Route {
   async model(params) {
     const temporaryKey = params.temporary_key;
     try {
-      const { email, firstName } = await this.store.queryRecord('account-recovery-demand', { temporaryKey });
-      return { email, firstName, temporaryKey };
+      const { email, firstName, hasScoUsername, hasGarAuthenticationMethod } = await this.store.queryRecord(
+        'account-recovery-demand',
+        { temporaryKey },
+      );
+      return { email, firstName, temporaryKey, hasScoUsername, hasGarAuthenticationMethod };
     } catch (error) {
       const status = get(error, 'errors[0].status', '');
       const code = get(error, 'errors[0].code', '');

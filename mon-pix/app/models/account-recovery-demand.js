@@ -5,6 +5,8 @@ export default class AccountRecoveryDemand extends Model {
   @attr('string') ineIna;
   @attr('string') firstName;
   @attr('string') lastName;
+  @attr('string') hasScoUsername;
+  @attr('string') hasGarAuthenticationMethod;
   @attr('date-only') birthdate;
   @attr('string') email;
   @attr('string') password;
@@ -18,6 +20,8 @@ export default class AccountRecoveryDemand extends Model {
       const payload = this.serialize();
       delete payload.data.attributes.password;
       delete payload.data.attributes['temporary-key'];
+      delete payload.data.attributes['has-sco-username'];
+      delete payload.data.attributes['has-gar-authentication-method'];
       return payload;
     },
   });
