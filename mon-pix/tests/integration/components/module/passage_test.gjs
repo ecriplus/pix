@@ -1324,19 +1324,19 @@ module('Integration | Component | Module | Passage', function (hooks) {
     });
   });
 
-  module('when user clicks on grain’s title in sidebar', function () {
+  module('when user clicks on grain’s type in sidebar', function () {
     test('should focus and scroll on matching grain element', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       const element = { type: 'text', isAnswerable: false, content: 'Ceci est un grain dans un test d‘intégration' };
       const grain1 = store.createRecord('grain', {
-        title: 'Grain title 1',
+        title: 'Grain title',
         type: 'discovery',
         id: '123-abc',
         components: [{ type: 'element', element }],
       });
       const grain2 = store.createRecord('grain', {
-        title: 'Grain title 2',
+        title: 'Grain title',
         type: 'activity',
         id: '234-abc',
         components: [{ type: 'element', element }],
@@ -1353,7 +1353,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
       await clickByName('Afficher les étapes du module');
       await waitForDialog();
-      const item = screen.getByRole('button', { name: 'Grain title 1' });
+      const item = screen.getByRole('button', { name: 'Découverte' });
       await click(item);
 
       //  then
@@ -1365,13 +1365,13 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const store = this.owner.lookup('service:store');
       const element = { type: 'text', isAnswerable: false, content: 'Ceci est un grain dans un test d‘intégration' };
       const grain1 = store.createRecord('grain', {
-        title: 'Grain title 1',
+        title: 'Grain title',
         type: 'discovery',
         id: '123-abc',
         components: [{ type: 'element', element }],
       });
       const grain2 = store.createRecord('grain', {
-        title: 'Grain title 2',
+        title: 'Grain title',
         type: 'activity',
         id: '234-abc',
         components: [{ type: 'element', element }],
@@ -1388,7 +1388,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
       await clickByName('Afficher les étapes du module');
       await waitForDialog();
-      const item = screen.getByRole('button', { name: 'Grain title 1' });
+      const item = screen.getByRole('button', { name: 'Découverte' });
       await click(item);
 
       // then

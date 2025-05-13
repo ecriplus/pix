@@ -34,15 +34,15 @@ export default class ModulixNavbar extends Component {
     this.sidebarOpened = false;
   }
 
-  get grainsWithIdAndTitle() {
+  get grainsWithIdAndTranslatedType() {
     return this.args.grainsToDisplay.map((grain) => ({
-      title: grain.title,
+      type: this.intl.t(`pages.modulix.grain.tag.${grain.type}`),
       id: grain.id,
     }));
   }
 
   get currentGrainIndex() {
-    return this.grainsWithIdAndTitle.length - 1;
+    return this.grainsWithIdAndTranslatedType.length - 1;
   }
 
   @action
@@ -79,7 +79,7 @@ export default class ModulixNavbar extends Component {
       <:content>
         <nav>
           <ul>
-            {{#each this.grainsWithIdAndTitle as |grain index|}}
+            {{#each this.grainsWithIdAndTranslatedType as |grain index|}}
               <li>
                 <button
                   type="button"
@@ -87,7 +87,7 @@ export default class ModulixNavbar extends Component {
                   aria-current={{if (eq index this.currentGrainIndex) "step"}}
                   {{on "click" (fn this.onMenuItemClick grain.id)}}
                 >
-                  {{grain.title}}
+                  {{grain.type}}
                 </button>
               </li>
             {{/each}}
