@@ -333,6 +333,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
               'verification-code': 'P-SUPERCODE',
               'max-reachable-level-on-certification-date': 6,
               version: SESSIONS_VERSIONS.V3,
+              'algorithm-engine-version': AlgorithmEngineVersion.V3,
             },
             relationships: {
               'result-competence-tree': {

@@ -77,12 +77,11 @@ const findPrivateCertificatesByUserId = async function ({ userId }) {
     .groupBy('certification-courses.id', 'sessions.id', 'assessment-results.id')
     .orderBy('certification-courses.createdAt', 'DESC');
 
-  const privateCertificates = certificationCourseDTOs.map((certificationCourseDTO) =>
+  return certificationCourseDTOs.map((certificationCourseDTO) =>
     _toDomainForPrivateCertificate({
       certificationCourseDTO,
     }),
   );
-  return privateCertificates;
 };
 
 const getPrivateCertificate = async function (id, { locale } = {}) {
@@ -179,6 +178,7 @@ function _selectPrivateCertificates() {
     userId: 'certification-courses.userId',
     date: 'certification-courses.createdAt',
     verificationCode: 'certification-courses.verificationCode',
+    algorithmEngineVersion: 'certification-courses.version',
     deliveredAt: 'sessions.publishedAt',
     certificationCenter: 'sessions.certificationCenter',
     maxReachableLevelOnCertificationDate: 'certification-courses.maxReachableLevelOnCertificationDate',
@@ -287,27 +287,24 @@ async function _toDomainForCertificationAttestation({ certificationCourseDTO, co
 }
 
 function _toDomainForPrivateCertificate({ certificationCourseDTO, competenceTree, certifiedBadges = [] }) {
+  let resultCompetenceTree = null;
+
   if (competenceTree) {
     const competenceMarks = _.compact(certificationCourseDTO.competenceMarks).map(
       (competenceMark) => new CompetenceMark({ ...competenceMark }),
     );
 
-    const resultCompetenceTree = ResultCompetenceTree.generateTreeFromCompetenceMarks({
+    resultCompetenceTree = ResultCompetenceTree.generateTreeFromCompetenceMarks({
       competenceTree,
       competenceMarks,
       certificationId: certificationCourseDTO.id,
       assessmentResultId: certificationCourseDTO.assessmentResultId,
     });
-
-    return PrivateCertificate.buildFrom({
-      ...certificationCourseDTO,
-      resultCompetenceTree,
-      certifiedBadgeImages: certifiedBadges,
-    });
   }
 
   return PrivateCertificate.buildFrom({
     ...certificationCourseDTO,
+    resultCompetenceTree,
     certifiedBadgeImages: certifiedBadges,
   });
 }

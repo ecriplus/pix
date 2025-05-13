@@ -22,6 +22,7 @@ const buildPrivateCertificate = function ({
   verificationCode = 'P-BBBCCCDD',
   maxReachableLevelOnCertificationDate = 5,
   version = SESSIONS_VERSIONS.V3,
+  algorithmEngineVersion = SESSIONS_VERSIONS.V3,
 } = {}) {
   const juryComment = new JuryComment({
     commentByAutoJury,
@@ -47,6 +48,7 @@ const buildPrivateCertificate = function ({
     verificationCode,
     maxReachableLevelOnCertificationDate,
     version,
+    algorithmEngineVersion,
   });
 };
 
@@ -69,6 +71,7 @@ buildPrivateCertificate.cancelled = function ({
   verificationCode,
   maxReachableLevelOnCertificationDate,
   version,
+  algorithmEngineVersion,
 }) {
   return buildPrivateCertificate({
     id,
@@ -90,6 +93,7 @@ buildPrivateCertificate.cancelled = function ({
     maxReachableLevelOnCertificationDate,
     status: PrivateCertificate.status.CANCELLED,
     version,
+    algorithmEngineVersion,
   });
 };
 
@@ -112,6 +116,7 @@ buildPrivateCertificate.validated = function ({
   verificationCode,
   maxReachableLevelOnCertificationDate,
   version,
+  algorithmEngineVersion,
 }) {
   return buildPrivateCertificate({
     id,
@@ -133,6 +138,7 @@ buildPrivateCertificate.validated = function ({
     maxReachableLevelOnCertificationDate,
     status: PrivateCertificate.status.VALIDATED,
     version,
+    algorithmEngineVersion,
   });
 };
 
@@ -155,6 +161,7 @@ buildPrivateCertificate.rejected = function ({
   verificationCode,
   maxReachableLevelOnCertificationDate,
   version,
+  algorithmEngineVersion,
 }) {
   return buildPrivateCertificate({
     id,
@@ -176,6 +183,7 @@ buildPrivateCertificate.rejected = function ({
     maxReachableLevelOnCertificationDate,
     status: PrivateCertificate.status.REJECTED,
     version,
+    algorithmEngineVersion,
   });
 };
 
@@ -198,6 +206,7 @@ buildPrivateCertificate.error = function ({
   verificationCode,
   maxReachableLevelOnCertificationDate,
   version,
+  algorithmEngineVersion,
 }) {
   return buildPrivateCertificate({
     id,
@@ -219,6 +228,7 @@ buildPrivateCertificate.error = function ({
     maxReachableLevelOnCertificationDate,
     status: PrivateCertificate.status.ERROR,
     version,
+    algorithmEngineVersion,
   });
 };
 
@@ -241,6 +251,7 @@ buildPrivateCertificate.started = function ({
   verificationCode,
   maxReachableLevelOnCertificationDate,
   version,
+  algorithmEngineVersion,
 }) {
   return buildPrivateCertificate({
     id,
@@ -262,6 +273,7 @@ buildPrivateCertificate.started = function ({
     maxReachableLevelOnCertificationDate,
     status: PrivateCertificate.status.STARTED,
     version,
+    algorithmEngineVersion,
   });
 };
 

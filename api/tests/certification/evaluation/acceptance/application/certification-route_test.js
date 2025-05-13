@@ -1,4 +1,5 @@
 import { generateCertificateVerificationCode } from '../../../../../src/certification/evaluation/domain/services/verify-certificate-code-service.js';
+import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { AutoJuryCommentKeys } from '../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { SESSIONS_VERSIONS } from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { Assessment } from '../../../../../src/shared/domain/models/index.js';
@@ -135,6 +136,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
       const expectedBody = {
         data: {
           attributes: {
+            'algorithm-engine-version': AlgorithmEngineVersion.V2,
             birthdate: certificationCourse.birthdate,
             birthplace: certificationCourse.birthplace,
             'certification-center': session.certificationCenter,
@@ -387,6 +389,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
             type: 'certifications',
             id: `${certificationCourse.id}`,
             attributes: {
+              'algorithm-engine-version': AlgorithmEngineVersion.V2,
               birthdate: certificationCourse.birthdate,
               birthplace: certificationCourse.birthplace,
               'certification-center': session.certificationCenter,
@@ -477,6 +480,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
             type: 'certifications',
             id: `${certificationCourse.id}`,
             attributes: {
+              'algorithm-engine-version': AlgorithmEngineVersion.V3,
               birthdate: certificationCourse.birthdate,
               birthplace: certificationCourse.birthplace,
               'certification-center': session.certificationCenter,

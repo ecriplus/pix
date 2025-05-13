@@ -1655,6 +1655,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         pixScore: 51,
         commentForCandidate: 'Il aime beaucoup les mangues, et ça se voit !',
         version: SESSIONS_VERSIONS.V3,
+        algorithmEngineVersion: AlgorithmEngineVersion.V3,
       };
 
       const { certificationCourseId } = await _buildValidPrivateCertificate(privateCertificateData);
@@ -1712,6 +1713,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         pixScore: 51,
         commentForCandidate: 'Il aime beaucoup les mangues, et ça se voit !',
         version: SESSIONS_VERSIONS.V3,
+        algorithmEngineVersion: AlgorithmEngineVersion.V3,
       };
 
       const { certificationCourseId } = await _buildValidPrivateCertificateWithSeveralResults(privateCertificateData);
@@ -2307,6 +2309,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
             },
           ],
           version: SESSIONS_VERSIONS.V3,
+          algorithmEngineVersion: AlgorithmEngineVersion.V3,
         };
 
         const { certificationCourseId } = await _buildValidPrivateCertificateWithAcquiredAndNotAcquiredBadges({
@@ -2981,6 +2984,7 @@ async function _buildValidPrivateCertificate(privateCertificateData, buildCompet
     maxReachableLevelOnCertificationDate: privateCertificateData.maxReachableLevelOnCertificationDate,
     sessionId,
     userId: privateCertificateData.userId,
+    version: AlgorithmEngineVersion.V3,
   }).id;
   const assessmentResultId = databaseBuilder.factory.buildAssessmentResult.last({
     certificationCourseId,
@@ -3022,6 +3026,7 @@ async function _buildValidPrivateCertificateWithSeveralResults(privateCertificat
     maxReachableLevelOnCertificationDate: privateCertificateData.maxReachableLevelOnCertificationDate,
     sessionId,
     userId: privateCertificateData.userId,
+    version: AlgorithmEngineVersion.V3,
   }).id;
   const { id: lastAssessmentResultId } = databaseBuilder.factory.buildAssessmentResult.last({
     certificationCourseId,
@@ -3179,6 +3184,7 @@ async function _buildValidPrivateCertificateWithAcquiredAndNotAcquiredBadges({
     maxReachableLevelOnCertificationDate: privateCertificateData.maxReachableLevelOnCertificationDate,
     sessionId,
     userId: privateCertificateData.userId,
+    version: AlgorithmEngineVersion.V3,
   }).id;
   databaseBuilder.factory.buildAssessmentResult.last({
     certificationCourseId,
