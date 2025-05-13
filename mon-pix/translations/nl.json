@@ -612,6 +612,10 @@
       }
     },
     "certificate": {
+      "actions": {
+        "download-attestation": "Mijn certificaat downloaden",
+        "download-certificate": "Mijn certificaat downloaden"
+      },
       "congratulations": "Congratulations!",
       "progressbar-explanation": "Progress bar indicating the level you have reached ( {level}, i.e. level {globalLevelLabel} ) out of a maximum attainable level of 7 ( Expert 1 level )",
       "global": {
@@ -661,7 +665,7 @@
       "professionalizing-warning": "Het Pix-certificaat wordt door France Compétences erkend als een professionele kwalificatie zodra een minimale score van 120 pix is behaald.",
       "title": "Pix-certificaat",
       "verification-code": {
-        "share": "Share your certificate",
+        "share": "Deel uw certificaat",
         "information": "Your unique verification code",
         "alt": "Kopieer",
         "copied": "Code gekopieerd!",

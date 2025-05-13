@@ -613,7 +613,8 @@
     },
     "certificate": {
       "actions": {
-        "download": "Télécharger mon certificat"
+        "download-attestation": "Télécharger mon attestation",
+        "download-certificate": "Télécharger mon certificat"
       },
       "back-link": "Retour à mes certifications",
       "candidate": "Candidat :",

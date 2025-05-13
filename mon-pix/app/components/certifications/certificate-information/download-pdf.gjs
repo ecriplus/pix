@@ -33,13 +33,20 @@ export default class DownloadPdf extends Component {
     }
   }
 
+  get downloadButtonLabel() {
+    if (this.args.certificate.algorithmEngineVersion === 3) {
+      return this.intl.t('pages.certificate.actions.download-certificate');
+    }
+    return this.intl.t('pages.certificate.actions.download-attestation');
+  }
+
   <template>
     <section class="download-pdf">
       <h2 class="download-pdf__title">
         {{t "pages.certificate.verification-code.share"}}
       </h2>
       <PixButton @triggerAction={{this.downloadAttestation}} @iconBefore="download">
-        {{t "pages.certificate.actions.download"}}
+        {{this.downloadButtonLabel}}
       </PixButton>
 
       {{#if this.errorMessage}}

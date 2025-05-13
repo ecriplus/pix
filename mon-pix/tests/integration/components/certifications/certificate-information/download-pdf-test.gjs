@@ -12,7 +12,7 @@ import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 module('Integration | Component | Certifications | Certificate information | download pdf', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  test('should display verification code information', async function (assert) {
+  test('should display certificate information', async function (assert) {
     // given
     const store = this.owner.lookup('service:store');
     const certification = store.createRecord('certification', {
@@ -26,6 +26,7 @@ module('Integration | Component | Certifications | Certificate information | dow
       pixScore: 12,
       maxReachableLevelOnCertificationDate: new Date('2018-02-15T15:15:52Z'),
       verificationCode: 'P-1871389473',
+      algorithmEngineVersion: 3,
     });
     this.set('certification', certification);
 
@@ -35,12 +36,46 @@ module('Integration | Component | Certifications | Certificate information | dow
     );
 
     // then
-    assert.dom(screen.getByRole('button', { name: t('pages.certificate.actions.download') })).exists();
+    assert.dom(screen.getByRole('button', { name: t('pages.certificate.actions.download-certificate') })).exists();
     assert.dom(screen.getByRole('button', { name: t('pages.certificate.verification-code.copy') })).exists();
     assert
       .dom(screen.getByRole('heading', { name: t('pages.certificate.verification-code.share'), level: 2 }))
       .exists();
     assert.dom(screen.getByText(certification.verificationCode)).exists();
+  });
+
+  module('when algorithm engine version is v2', function () {
+    test('should display attestation on download button', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const certification = store.createRecord('certification', {
+        birthdate: '2000-01-22',
+        birthplace: 'Paris',
+        firstName: 'Jean',
+        lastName: 'Bon',
+        certificationDate: new Date('2018-02-15T15:15:52Z'),
+        deliveredAt: new Date('2018-02-17T15:15:52Z'),
+        certificationCenter: 'Université de Lyon',
+        pixScore: 12,
+        maxReachableLevelOnCertificationDate: new Date('2018-02-15T15:15:52Z'),
+        verificationCode: 'P-1871389473',
+        algorithmEngineVersion: 2,
+      });
+      this.set('certification', certification);
+
+      // when
+      const screen = await render(
+        hbs`<Certifications::CertificateInformation::downloadPdf @certificate={{this.certification}} />`,
+      );
+
+      // then
+      assert.dom(screen.getByRole('button', { name: t('pages.certificate.actions.download-attestation') })).exists();
+      assert.dom(screen.getByRole('button', { name: t('pages.certificate.verification-code.copy') })).exists();
+      assert
+        .dom(screen.getByRole('heading', { name: t('pages.certificate.verification-code.share'), level: 2 }))
+        .exists();
+      assert.dom(screen.getByText(certification.verificationCode)).exists();
+    });
   });
 
   module('when there is an error during the download of the attestation', function () {
@@ -68,6 +103,7 @@ module('Integration | Component | Certifications | Certificate information | dow
         certificationCenter: 'Université de Lyon',
         pixScore: 12,
         maxReachableLevelOnCertificationDate: new Date('2018-02-15T15:15:52Z'),
+        algorithmEngineVersion: 3,
       });
       this.set('certification', certification);
 
@@ -76,7 +112,7 @@ module('Integration | Component | Certifications | Certificate information | dow
       );
 
       // when
-      await click(screen.getByRole('button', { name: t('pages.certificate.actions.download') }));
+      await click(screen.getByRole('button', { name: t('pages.certificate.actions.download-certificate') }));
 
       // then
       assert.ok(screen.getByText(t('common.error')));
