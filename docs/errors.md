@@ -32,7 +32,7 @@ Il ne faut pas :
 * mettre un texte traduit
 * mettre un code dans le constructeur qui incite à le changer
 * mal utiliser les codes HTTP pour faire de la discrimination entre erreur
-* mettre des informations dans le `meta` qui divilgueraient des informations
+* mettre des informations dans le `meta` qui divulgueraient des informations
   menaçant la sécurité des applications (stacktrace de l'erreur indiquant des
   chemins de fichiers sur le conteneur permettant des attaques, des IP de
   conteneurs, des informations sur les utilisateurs trouvés ou non, etc.)
