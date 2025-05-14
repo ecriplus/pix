@@ -1,8 +1,10 @@
 import _ from 'lodash';
 
 import * as badgeAcquisitionRepository from '../../../../../src/evaluation/infrastructure/repositories/badge-acquisition-repository.js';
+import { deleteUserIdOnNonCertifiableBadgesForCampaignParticipations } from '../../../../../src/evaluation/infrastructure/repositories/badge-acquisition-repository.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+const { buildBadge, buildBadgeAcquisition, buildUser, buildCampaignParticipation } = databaseBuilder.factory;
 
 describe('Integration | Repository | Badge Acquisition', function () {
   describe('#createOrUpdate', function () {
@@ -360,6 +362,101 @@ describe('Integration | Repository | Badge Acquisition', function () {
           badge2.id,
         ]);
       });
+    });
+  });
+
+  describe('#deleteUserIdOnNonCertifiableBadgesForCampaignParticipations', function () {
+    let firstUserId;
+    let secondUserId;
+    let thirdUserId;
+
+    let firstUserCampaignParticipationId;
+    let secondUserCampaignParticipationId;
+
+    let badgeAcquisitionForFirstUserWithNonCertifiableBadgeId;
+    let badgeAcquisitionForFirstUserWithCertifiableBadgeId;
+    let badgeAcquisitionForSecondUserWithNonCertifiableBadgeId;
+    let badgeAcquisitionForSecondUserWithCertifiableBadgeId;
+    let badgeAcquisitionForThirdUserWithNonCertifiableBadgeId;
+
+    beforeEach(async function () {
+      const nonCertifiableBadgeId = buildBadge({ isCertifiable: false }).id;
+      const certifiableBadgeId = buildBadge({ isCertifiable: true }).id;
+
+      firstUserId = buildUser().id;
+      secondUserId = buildUser().id;
+      thirdUserId = buildUser().id;
+
+      firstUserCampaignParticipationId = buildCampaignParticipation({ userId: firstUserId }).id;
+      secondUserCampaignParticipationId = buildCampaignParticipation({ userId: secondUserId }).id;
+      const thirdUserCampaignParticipationId = buildCampaignParticipation({ userId: thirdUserId }).id;
+
+      badgeAcquisitionForFirstUserWithNonCertifiableBadgeId = buildBadgeAcquisition({
+        badgeId: nonCertifiableBadgeId,
+        userId: firstUserId,
+        campaignParticipationId: firstUserCampaignParticipationId,
+      }).id;
+
+      badgeAcquisitionForFirstUserWithCertifiableBadgeId = buildBadgeAcquisition({
+        badgeId: certifiableBadgeId,
+        userId: firstUserId,
+        campaignParticipationId: firstUserCampaignParticipationId,
+      }).id;
+
+      badgeAcquisitionForSecondUserWithNonCertifiableBadgeId = buildBadgeAcquisition({
+        badgeId: nonCertifiableBadgeId,
+        userId: secondUserId,
+        campaignParticipationId: secondUserCampaignParticipationId,
+      }).id;
+
+      badgeAcquisitionForSecondUserWithCertifiableBadgeId = buildBadgeAcquisition({
+        badgeId: certifiableBadgeId,
+        userId: secondUserId,
+        campaignParticipationId: secondUserCampaignParticipationId,
+      }).id;
+
+      badgeAcquisitionForThirdUserWithNonCertifiableBadgeId = buildBadgeAcquisition({
+        badgeId: nonCertifiableBadgeId,
+        userId: thirdUserId,
+        campaignParticipationId: thirdUserCampaignParticipationId,
+      }).id;
+      await databaseBuilder.commit();
+    });
+
+    it('should delete userId for non certifiable badges for the given campaignParticipationIds', async function () {
+      await deleteUserIdOnNonCertifiableBadgesForCampaignParticipations([
+        firstUserCampaignParticipationId,
+        secondUserCampaignParticipationId,
+      ]);
+
+      const badgeAcquisitions = await knex('badge-acquisitions')
+        .whereIn('id', [
+          badgeAcquisitionForFirstUserWithNonCertifiableBadgeId,
+          badgeAcquisitionForSecondUserWithNonCertifiableBadgeId,
+          badgeAcquisitionForThirdUserWithNonCertifiableBadgeId,
+        ])
+        .orderBy('id', 'ASC');
+
+      expect(badgeAcquisitions[0].userId).to.be.null;
+      expect(badgeAcquisitions[1].userId).to.be.null;
+      expect(badgeAcquisitions[2].userId).to.be.equal(thirdUserId);
+    });
+
+    it('should not delete userId for certifiable badges', async function () {
+      await deleteUserIdOnNonCertifiableBadgesForCampaignParticipations([
+        firstUserCampaignParticipationId,
+        secondUserCampaignParticipationId,
+      ]);
+
+      const badgeAcquisitions = await knex('badge-acquisitions')
+        .whereIn('id', [
+          badgeAcquisitionForFirstUserWithCertifiableBadgeId,
+          badgeAcquisitionForSecondUserWithCertifiableBadgeId,
+        ])
+        .orderBy('id', 'ASC');
+
+      expect(badgeAcquisitions[0].userId).to.be.equal(firstUserId);
+      expect(badgeAcquisitions[1].userId).to.be.equal(secondUserId);
     });
   });
 });

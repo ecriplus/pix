@@ -2,6 +2,9 @@ import { usecases } from '../../../../../../src/prescription/campaign-participat
 import { featureToggles } from '../../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
+const { buildUser, buildTargetProfile, buildBadge, buildCampaignParticipation, buildBadgeAcquisition, buildCampaign } =
+  databaseBuilder.factory;
+
 describe('Integration | UseCases | delete-campaign-participation', function () {
   let clock, now;
 
@@ -109,6 +112,73 @@ describe('Integration | UseCases | delete-campaign-participation', function () {
       expect(campaignParticipaton.participantExternalId).to.equal(null);
       expect(campaignParticipaton.deletedAt).to.deep.equal(now);
       expect(campaignParticipaton.deletedBy).to.equal(adminUserId);
+    });
+  });
+
+  context('when there are badges linked to the campaign participations', function () {
+    let badgesAcquisitions;
+
+    let campaignParticipationId;
+    let certifiableBadge;
+    let nonCertifiableBadge;
+    let userId;
+
+    before(async function () {
+      // given
+      const adminUserId = buildUser().id;
+      const targetProfileId = buildTargetProfile().id;
+      nonCertifiableBadge = buildBadge({
+        targetProfileId,
+        isCertifiable: false,
+      });
+      certifiableBadge = buildBadge({
+        targetProfileId,
+        isCertifiable: true,
+      });
+      const campaignId = buildCampaign({ targetProfileId }).id;
+      userId = buildUser().id;
+      campaignParticipationId = buildCampaignParticipation({
+        campaignId,
+        userId,
+      }).id;
+
+      buildBadgeAcquisition({
+        badgeId: certifiableBadge.id,
+        campaignParticipationId,
+        userId,
+      });
+      buildBadgeAcquisition({
+        badgeId: nonCertifiableBadge.id,
+        campaignParticipationId,
+        userId,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      await usecases.deleteCampaignParticipation({
+        userId: adminUserId,
+        campaignId,
+        campaignParticipationId,
+      });
+
+      badgesAcquisitions = await knex('badge-acquisitions').where({
+        campaignParticipationId,
+      });
+    });
+
+    it('should delete userId on non certifiable badgesAcquisitions', function () {
+      const nonCertifiableBadgeAcquisition = badgesAcquisitions.find(
+        (badgeAcquisition) => badgeAcquisition.badgeId === nonCertifiableBadge.id,
+      );
+      expect(nonCertifiableBadgeAcquisition.userId).to.be.null;
+    });
+
+    it('should not delete userId on certifiable badgesAcquisitions', function () {
+      const certifiableBadgeAcquisition = badgesAcquisitions.find(
+        (badgeAcquisition) => badgeAcquisition.badgeId === certifiableBadge.id,
+      );
+      expect(certifiableBadgeAcquisition.userId).to.equal(userId);
     });
   });
 });
