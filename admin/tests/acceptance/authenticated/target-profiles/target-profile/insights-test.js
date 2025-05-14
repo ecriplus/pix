@@ -624,8 +624,11 @@ module('Acceptance | Target Profile Insights', function (hooks) {
         });
         await click(selectLevelTubeThematicUnNiveauDeux[0]);
         await screen.findByRole('listbox');
-        await click(screen.getByRole('option', { name: '2' }));
-        await waitForElementToBeRemoved(() => screen.queryByRole('listbox'));
+
+        await Promise.all([
+          waitForElementToBeRemoved(() => screen.queryByRole('listbox')),
+          click(screen.getByRole('option', { name: '2' })),
+        ]);
 
         const selectLevelTubeThematicDeuxNiveauQuatre = screen.getAllByRole('button', {
           name: 'Sélection du niveau du sujet suivant : Mon tube thématique 2 de niveau quatre',

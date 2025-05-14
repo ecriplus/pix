@@ -46,13 +46,24 @@
     },
     "filters": {
       "actions": {
-        "clear": "Effacer les filtres"
+        "clear": "Effacer les filtres",
+        "load": "Charger"
+      },
+      "common": {
+        "internal-identifier": "ID Technique",
+        "selector": "Selecteur"
       },
       "target-profile": {
         "label": "Catégorie",
         "placeholder": "Pix+, Autres..."
       },
-      "title": "Filtres"
+      "title": "Filtres",
+      "users": {
+        "email": "Adresse e-mail",
+        "firstname": "Prénom",
+        "lastname": "Nom",
+        "username": "Identifiant de connexion"
+      }
     },
     "forms": {
       "loading": "Chargement...",
@@ -1135,6 +1146,8 @@
       }
     },
     "users-list": {
+      "main-title": "Liste des utilisateurs",
+      "page-title": "Utilisateurs",
       "query": {
         "contains": "Contient",
         "exact": "Exacte"

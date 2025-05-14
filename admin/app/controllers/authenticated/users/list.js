@@ -11,13 +11,6 @@ export default class ListController extends Controller {
 
   queryParams = ['pageNumber', 'pageSize', 'id', 'firstName', 'lastName', 'email', 'username', 'queryType'];
 
-  get queryTypes() {
-    return [
-      { value: 'CONTAINS', label: this.intl.t('pages.users-list.query.contains') },
-      { value: 'EXACT_QUERY', label: this.intl.t('pages.users-list.query.exact') },
-    ];
-  }
-
   @tracked pageNumber = DEFAULT_PAGE_NUMBER;
   @tracked queryType = DEFAULT_QUERY_TYPE;
   @tracked pageSize = 10;
@@ -35,7 +28,7 @@ export default class ListController extends Controller {
   @tracked queryTypeForm = DEFAULT_QUERY_TYPE;
 
   @action
-  async refreshModel(event) {
+  async refreshUsersList(event) {
     event.preventDefault();
     this.id = this.idForm;
     this.firstName = this.firstNameForm;

@@ -46,13 +46,24 @@
     },
     "filters": {
       "actions": {
-        "clear": "Clear filters"
+        "clear": "Clear filters",
+        "load": "Search"
+      },
+      "common": {
+        "internal-identifier": "Internal ID",
+        "selector": "Selector"
       },
       "target-profile": {
         "label": "Category",
         "placeholder": "Pix+, Other ..."
       },
-      "title": "Filters"
+      "title": "Filters",
+      "users": {
+        "email": "Email address",
+        "firstname": "Firstname",
+        "lastname": "lastname",
+        "username": "username"
+      }
     },
     "forms": {
       "loading": "Loading...",
@@ -1135,6 +1146,8 @@
       }
     },
     "users-list": {
+      "main-title": "Users list",
+      "page-title": "Users",
       "query": {
         "contains": "Contient",
         "exact": "Exacte"
