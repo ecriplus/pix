@@ -1,7 +1,6 @@
 import { Script } from '../../shared/application/scripts/script.js';
 import { ScriptRunner } from '../../shared/application/scripts/script-runner.js';
 import { DomainTransaction } from '../../shared/domain/DomainTransaction.js';
-import { anonymizeGeneralizeDate } from '../../shared/infrastructure/utils/date-utils.js';
 
 export class BackfillDataForAnonymizedUsersScript extends Script {
   constructor() {
@@ -28,10 +27,7 @@ export class BackfillDataForAnonymizedUsersScript extends Script {
     logger.info(`Found ${rows.length} anonymized rows to ${dryRun ? 'process (dry run)' : 'update'}`);
     if (!dryRun) {
       for (const row of rows) {
-        const generalizedDate = anonymizeGeneralizeDate(row.acceptedAt);
-        await knexConnection('legal-document-version-user-acceptances')
-          .where('id', row.id)
-          .update({ acceptedAt: generalizedDate });
+        await knexConnection('legal-document-version-user-acceptances').where('id', row.id).del();
       }
       logger.info(`✅ Successfully updated ${rows.length} rows.`);
     } else {
