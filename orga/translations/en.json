@@ -64,7 +64,7 @@
   },
   "banners": {
     "certification": {
-      "message": "'<strong>'Certifications :'</strong>' n’oubliez pas de '<'a href={documentationLink} class=\"{linkClasses}\" target=\"_blank\" rel=\"noopener noreferrer\"'>'finaliser les sessions dans Pix Certif'</a>' puis de télécharger les attestations ici via l'onglet “Certifications” avant la rentrée {year}."
+      "message": "'<strong>'Certifications :'</strong>' Please don't forget to '<'a href={documentationLink} class=\"{linkClasses}\" target=\"_blank\" rel=\"noopener noreferrer\"'>'to finalize your sessions in Pix Certif'</a>' and to download the certificates via the \"Certifications\" tab before the start of the {year} academic year."
     },
     "import": {
       "message": "The main stages of the school year :",
@@ -873,7 +873,7 @@
       "documentation-link": "https://cloud.pix.fr/s/dqCoeH8q4fjWZjq",
       "documentation-link-label": "Interpreting the results",
       "documentation-link-notice": "Follow this link to find indications on how to interpret the results: ",
-      "download-attestations-button": "Download attestations",
+      "download-attestations-button": "Download certificates",
       "download-button": "Export the results",
       "errors": {
         "invalid-division": "The class {selectedDivision} does not exist.",

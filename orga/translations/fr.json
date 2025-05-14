@@ -64,7 +64,7 @@
   },
   "banners": {
     "certification": {
-      "message": "'<strong>'Certifications :'</strong>' n’oubliez pas de '<'a href={documentationLink} class=\"{linkClasses}\" target=\"_blank\" rel=\"noopener noreferrer\"'>'finaliser les sessions dans Pix Certif'</a>' puis de télécharger les attestations ici via l'onglet “Certifications” avant la rentrée {year}."
+      "message": "'<strong>'Certifications :'</strong>' n’oubliez pas de '<'a href={documentationLink} class=\"{linkClasses}\" target=\"_blank\" rel=\"noopener noreferrer\"'>'finaliser les sessions dans Pix Certif'</a>' puis de télécharger les certificats via l'onglet “Certifications” avant la rentrée {year}."
     },
     "import": {
       "message": "Les grandes étapes de l’année dans l’enseignement scolaire :",
@@ -869,18 +869,18 @@
       "title": "Campagnes"
     },
     "certifications": {
-      "description": "Sélectionnez la classe pour laquelle vous souhaitez exporter les résultats de certification (.csv) ou télécharger les attestations (.pdf).'<br>' Vous pouvez filtrer cette liste en renseignant le nom de la classe directement dans le champ.",
+      "description": "Sélectionnez la classe pour laquelle vous souhaitez exporter les résultats de certification (.csv) ou télécharger les certificats (.pdf).\n Vous pouvez filtrer cette liste en renseignant le nom de la classe directement dans le champ.",
       "documentation-link": "https://cloud.pix.fr/s/8pJqgNNntwDtsDY",
       "documentation-link-label": "Interprétation des résultats",
       "documentation-link-notice": "Vous trouverez en suivant ce lien quelques éléments pour interpréter les résultats : ",
-      "download-attestations-button": "Télécharger les attestations",
+      "download-attestations-button": "Télécharger les certificats",
       "download-button": "Exporter les résultats",
       "errors": {
         "invalid-division": "La classe {selectedDivision} n'existe pas.",
-        "no-certificates": "Aucune attestation de certification pour la classe {selectedDivision}.",
+        "no-certificates": "Aucun certificat pour la classe {selectedDivision}.",
         "no-results": "Aucun résultat de certification pour la classe {selectedDivision}."
       },
-      "no-students-imported-yet": "Dans cet onglet, vous retrouverez les résultats et les attestations de certification des élèves. Vous devez, dans un premier temps, importer la base élèves de votre établissement. ",
+      "no-students-imported-yet": "Dans cet onglet, vous retrouverez les résultats et les certificats des élèves. Vous devez, dans un premier temps, importer la base élèves de votre établissement. ",
       "select-label": "Classe",
       "title": "Résultats de certification"
     },
