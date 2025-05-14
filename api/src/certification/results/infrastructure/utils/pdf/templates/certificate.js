@@ -174,6 +174,6 @@ export default function generateV3AttestationTemplate({ pdf, data, translate }) 
   }
 
   function _formatText(content) {
-    return content.replaceAll('&#x2F;', '/');
+    return content.replaceAll('&#x2F;', '/').replaceAll('&#39;', "'");
   }
 }
