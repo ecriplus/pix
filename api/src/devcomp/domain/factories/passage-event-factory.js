@@ -1,4 +1,5 @@
 import { DomainError } from '../../../shared/domain/errors.js';
+import { QCUDeclarativeAnsweredEvent } from '../models/passage-events/answerable-element-events.js';
 import {
   FlashcardsCardAutoAssessedEvent,
   FlashcardsRectoReviewedEvent,
@@ -25,6 +26,8 @@ class PassageEventFactory {
         return new FlashcardsRectoReviewedEvent(eventData);
       case 'FLASHCARDS_RETRIED':
         return new FlashcardsRetriedEvent(eventData);
+      case 'QCU_DECLARATIVE_ANSWERED':
+        return new QCUDeclarativeAnsweredEvent(eventData);
       default:
         throw new DomainError(`Passage event with type ${eventData.type} does not exist`);
     }

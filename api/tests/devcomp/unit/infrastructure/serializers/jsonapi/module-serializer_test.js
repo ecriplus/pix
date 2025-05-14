@@ -11,6 +11,7 @@ import { Flashcards } from '../../../../../../src/devcomp/domain/models/element/
 import { Image } from '../../../../../../src/devcomp/domain/models/element/Image.js';
 import { QCM } from '../../../../../../src/devcomp/domain/models/element/QCM.js';
 import { QCU } from '../../../../../../src/devcomp/domain/models/element/QCU.js';
+import { QCUDeclarative } from '../../../../../../src/devcomp/domain/models/element/QCU-declarative.js';
 import { QROCM } from '../../../../../../src/devcomp/domain/models/element/QROCM.js';
 import { Separator } from '../../../../../../src/devcomp/domain/models/element/Separator.js';
 import { Text } from '../../../../../../src/devcomp/domain/models/element/Text.js';
@@ -202,6 +203,30 @@ function getComponents() {
       }),
     }),
     new ComponentElement({
+      element: new QCUDeclarative({
+        id: 'af447a7b-6790-4b3b-b83e-296e6618ca31',
+        proposals: [
+          {
+            id: '1',
+            content: 'plop',
+            feedback: {
+              state: '',
+              diagnosis: 'blabla',
+            },
+          },
+          {
+            id: '2',
+            content: 'bam',
+            feedback: {
+              state: '',
+              diagnosis: 'blabla',
+            },
+          },
+        ],
+        instruction: 'question declarative',
+      }),
+    }),
+    new ComponentElement({
       element: new QCM({
         id: '2000',
         proposals: [
@@ -357,6 +382,34 @@ function getAttributesComponents() {
           },
         ],
         type: 'qcu',
+      },
+    },
+    {
+      type: 'element',
+      element: {
+        id: 'af447a7b-6790-4b3b-b83e-296e6618ca31',
+        instruction: 'question declarative',
+        isAnswerable: true,
+        locales: undefined,
+        proposals: [
+          {
+            content: 'plop',
+            id: '1',
+            feedback: {
+              state: '',
+              diagnosis: 'blabla',
+            },
+          },
+          {
+            content: 'bam',
+            id: '2',
+            feedback: {
+              state: '',
+              diagnosis: 'blabla',
+            },
+          },
+        ],
+        type: 'qcu-declarative',
       },
     },
     {
