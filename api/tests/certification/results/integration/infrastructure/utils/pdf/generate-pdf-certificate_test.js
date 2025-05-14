@@ -136,7 +136,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certification Attestat
         verificationCode: 'P-SOMECODE',
         maxReachableLevelOnCertificationDate: 5,
         deliveredAt: new Date('2021-05-05'),
-        certificationCenter: 'Centre des poules bien dodues',
+        certificationCenter: "L'université du Pix /",
         pixScore: 256,
         sessionId: 789,
       }),
