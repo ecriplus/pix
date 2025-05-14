@@ -13,7 +13,7 @@ const recordPassageEvents = async function ({ events, userId, passageRepository,
 async function _validatePassage({ event, userId, passageRepository, passageEventRepository }) {
   const passage = await passageRepository.get({ passageId: event.passageId });
 
-  if (passage.terminatedAt != null) {
+  if (passage.terminatedAt != null && event.type !== 'PASSAGE_TERMINATED') {
     throw new DomainError(`Passage with id ${event.id} is terminated.`);
   }
 

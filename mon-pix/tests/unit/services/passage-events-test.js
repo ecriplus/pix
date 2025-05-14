@@ -46,11 +46,8 @@ module('Unit | Services | PassageEvents', function (hooks) {
       // given
       const passageEventService = this.owner.lookup('service:passageEvents');
 
-      const store = this.owner.lookup('service:store');
-      sinon.stub(store, 'createRecord');
-      const saveStub = sinon.stub().resolves({});
-      const passageEventCollection = { save: saveStub };
-      store.createRecord.returns(passageEventCollection);
+      const requestManager = this.owner.lookup('service:request-manager');
+      const requestStub = sinon.stub(requestManager, 'request');
       passageEventService.initialize({ passageId: 1 });
 
       // when
@@ -62,28 +59,33 @@ module('Unit | Services | PassageEvents', function (hooks) {
       });
 
       // then
-      assert.deepEqual(passageEventCollection.events, [
-        {
-          type: 'FlashcardsStartedEvent',
-          passageId: 1,
-          occurredAt: 1556419320000,
-          elementId: '04287d5b-285e-4a67-9fb1-3adbf95deb2f',
-          sequenceNumber: 2,
-        },
-      ]);
-      assert.true(saveStub.called);
+      sinon.assert.calledWithExactly(requestStub, {
+        url: 'http://localhost:3000/api/passage-events',
+        method: 'POST',
+        body: JSON.stringify({
+          data: {
+            attributes: {
+              events: [
+                {
+                  type: 'FlashcardsStartedEvent',
+                  'passage-id': 1,
+                  'sequence-number': 2,
+                  'occurred-at': now.getTime(),
+                  elementId: '04287d5b-285e-4a67-9fb1-3adbf95deb2f',
+                },
+              ],
+            },
+          },
+        }),
+      });
+      assert.ok(true);
     });
 
     test('it should increment sequenceNumber when called multiple times', async function (assert) {
       // given
       const passageEventService = this.owner.lookup('service:passageEvents');
-
-      const store = this.owner.lookup('service:store');
-      const passageEventCollection1 = { save: sinon.stub() };
-      const passageEventCollection2 = { save: sinon.stub() };
-      sinon.stub(store, 'createRecord');
-      store.createRecord.onCall(0).returns(passageEventCollection1);
-      store.createRecord.onCall(1).returns(passageEventCollection2);
+      const requestManager = this.owner.lookup('service:request-manager');
+      const requestStub = sinon.stub(requestManager, 'request');
       passageEventService.initialize({ passageId: 1 });
 
       // when
@@ -101,9 +103,45 @@ module('Unit | Services | PassageEvents', function (hooks) {
           elementId: '04287d5b-285e-4a67-9fb1-3adbf95deb2f',
         },
       });
-
-      assert.strictEqual(passageEventCollection1.events[0].sequenceNumber, 2);
-      assert.strictEqual(passageEventCollection2.events[0].sequenceNumber, 3);
+      sinon.assert.calledWithExactly(requestStub.getCall(0), {
+        url: 'http://localhost:3000/api/passage-events',
+        method: 'POST',
+        body: JSON.stringify({
+          data: {
+            attributes: {
+              events: [
+                {
+                  type: 'FlashcardsStartedEvent',
+                  'passage-id': 1,
+                  'sequence-number': 2,
+                  'occurred-at': now.getTime(),
+                  elementId: '04287d5b-285e-4a67-9fb1-3adbf95deb2f',
+                },
+              ],
+            },
+          },
+        }),
+      });
+      sinon.assert.calledWithExactly(requestStub.getCall(1), {
+        url: 'http://localhost:3000/api/passage-events',
+        method: 'POST',
+        body: JSON.stringify({
+          data: {
+            attributes: {
+              events: [
+                {
+                  type: 'FlashcardsRectoSeenEvent',
+                  'passage-id': 1,
+                  'sequence-number': 3,
+                  'occurred-at': now.getTime(),
+                  elementId: '04287d5b-285e-4a67-9fb1-3adbf95deb2f',
+                },
+              ],
+            },
+          },
+        }),
+      });
+      assert.ok(true);
     });
   });
 });

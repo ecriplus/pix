@@ -1,5 +1,4 @@
 import { PassageDoesNotExistError, PassageTerminatedError } from '../../../../../src/devcomp/domain/errors.js';
-import { PassageTerminatedEvent } from '../../../../../src/devcomp/domain/models/passage-events/passage-events.js';
 import { terminatePassage } from '../../../../../src/devcomp/domain/usecases/terminate-passage.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
@@ -51,18 +50,13 @@ describe('Unit | Devcomp | Domain | UseCases | terminate-passage', function () {
         expect(error).to.be.instanceof(PassageTerminatedError);
       });
 
-      it('should call terminate method and update passage and return it, then record an event', async function () {
+      it('should call terminate method and update passage and return it', async function () {
         // given
         const passageId = 1234;
-        const sequenceNumber = 1;
-        const occurredAt = new Date('2025-01-01');
 
         const passageRepository = {
           get: sinon.stub(),
           update: sinon.stub(),
-        };
-        const passageEventRepository = {
-          record: sinon.stub(),
         };
 
         const passage = {
@@ -77,21 +71,15 @@ describe('Unit | Devcomp | Domain | UseCases | terminate-passage', function () {
         };
         passageRepository.update.withArgs({ passage }).resolves(updatedPassage);
 
-        const event = new PassageTerminatedEvent({ passageId, occurredAt, sequenceNumber });
-
         // when
         const returnedPassage = await terminatePassage({
           passageId,
-          occurredAt,
-          sequenceNumber,
           passageRepository,
-          passageEventRepository,
         });
 
         // then
         expect(passage.terminate).to.have.been.calledOnce;
         expect(returnedPassage).to.equal(updatedPassage);
-        expect(passageEventRepository.record).to.have.been.calledOnceWithExactly(event);
       });
     });
   });

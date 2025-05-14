@@ -10,7 +10,7 @@ const create = async function (request, h, { usecases, passageEventSerializer })
       userId: requestResponseUtils.extractUserIdFromRequest(request),
     });
 
-    return h.response().created();
+    return h.response().code(204);
   } catch (error) {
     if (error instanceof DomainError) {
       throw new BadRequestError(error);

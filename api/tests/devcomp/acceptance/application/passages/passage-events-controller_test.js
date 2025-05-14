@@ -36,7 +36,7 @@ describe('Acceptance | Controller | passage-events-controller', function () {
       });
 
       // then
-      expect(response.statusCode).to.equal(201);
+      expect(response.statusCode).to.equal(204);
 
       const createdEvent = await knex('passage-events').where({ passageId: passage.id, sequenceNumber: 1 }).first();
       expect(createdEvent).to.not.be.undefined;
