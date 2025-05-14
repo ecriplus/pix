@@ -10,9 +10,11 @@ import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | administration/organizations-batch-archive', function (hooks) {
   setupIntlRenderingTest(hooks);
+  let requestManagerService;
 
   hooks.beforeEach(function () {
-    sinon.stub(window, 'fetch');
+    requestManagerService = this.owner.lookup('service:requestManager');
+    sinon.stub(requestManagerService, 'request');
   });
 
   hooks.afterEach(function () {
@@ -23,11 +25,8 @@ module('Integration | Component | administration/organizations-batch-archive', f
     test('it displays a success notification', async function (assert) {
       // given
       const file = new Blob(['foo'], { type: `valid-file` });
-      window.fetch.resolves(
-        _fetchResponse({
-          status: 204,
-        }),
-      );
+
+      requestManagerService.request.resolves({ response: { ok: true, status: 204 } });
 
       // when
       const screen = await render(<template><OrganizationsBatchArchive /><PixToastContainer /></template>);
@@ -48,25 +47,20 @@ module('Integration | Component | administration/organizations-batch-archive', f
       // given
       const file = new Blob(['foo'], { type: `valid-file` });
 
-      window.fetch.resolves(
-        _fetchResponse({
-          body: {
-            errors: [
-              {
-                status: '422',
-                title: "Un souci avec l'archivage des organisations",
-                code: 'ARCHIVE_ORGANIZATIONS_IN_BATCH_ERROR',
-                detail: `Erreur lors de l'archivage`,
-                meta: {
-                  currentLine: 2,
-                  totalLines: 4,
-                },
-              },
-            ],
+      requestManagerService.request.rejects({
+        errors: [
+          {
+            status: '422',
+            title: "Un souci avec l'archivage des organisations",
+            code: 'ARCHIVE_ORGANIZATIONS_IN_BATCH_ERROR',
+            detail: `Erreur lors de l'archivage`,
+            meta: {
+              currentLine: 2,
+              totalLines: 4,
+            },
           },
-          status: 422,
-        }),
-      );
+        ],
+      });
 
       // when
       const screen = await render(<template><OrganizationsBatchArchive /><PixToastContainer /></template>);
@@ -87,12 +81,3 @@ module('Integration | Component | administration/organizations-batch-archive', f
     });
   });
 });
-
-function _fetchResponse({ body, status }) {
-  return new window.Response(JSON.stringify(body), {
-    status,
-    headers: {
-      'Content-type': 'application/json',
-    },
-  });
-}

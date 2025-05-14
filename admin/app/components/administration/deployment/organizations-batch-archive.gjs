@@ -3,20 +3,33 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
+import ENV from 'pix-admin/config/environment';
 
 import AdministrationBlockLayout from '../block-layout';
 
 export default class OrganizationsBatchArchive extends Component {
   @service intl;
   @service pixToast;
+  @service requestManager;
   @service router;
   @service store;
 
   @action
   async archiveOrganizations(files) {
-    const adapter = this.store.adapterFor('organization');
+    if (!files || files.length === 0) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', files[0]);
+
     try {
-      await adapter.archiveOrganizations(files);
+      await this.requestManager.request({
+        url: `${ENV.APP.API_HOST}/api/admin/organizations/batch-archive`,
+        method: 'POST',
+        body: formData,
+      });
+
       this.pixToast.sendSuccessNotification({
         message: this.intl.t('components.administration.organizations-batch-archive.notifications.success'),
       });
