@@ -31,4 +31,4 @@ jobs:
           token: ${{ secrets.SLACK_RELEASE_BOT_TOKEN }}
           payload: |
             channel: ${{ secrets.SLACK_RELEASE_CHANNEL_ID }}
-            text: "Coucou :wave:\nLa v${{ env.new_release_version }} est en recette jusqu’à demain matin @team-po\nMettez vos messages en :thread:"
+            text: "Coucou :wave:\nLa v${{ env.new_release_version }} est en recette @team-po\nMettez vos messages en :thread:"
