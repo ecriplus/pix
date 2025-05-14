@@ -253,6 +253,9 @@
           },
           "legend": "Vereiste informatie voor registratie."
         }
+      },
+      "sso-selection-form": {
+        "should-display-account-recovery-banner": "Student? Als je dat nog niet hebt gedaan, '<'a href=\"{url}\"'>'ga naar de pagina om je Pix account te herstellen'</a>' en bewaar je voortgang."
       }
     },
     "campaigns": {

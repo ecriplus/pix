@@ -253,6 +253,9 @@
           },
           "legend": "Información necesaria para la inscripción."
         }
+      },
+      "sso-selection-form": {
+        "should-display-account-recovery-banner": "¿Estudiante? Si aún no lo ha hecho, '<'a href=\"{url}\"'>'acceda a la página para recuperar su cuenta Pix'</a>' y mantenga su progreso."
       }
     },
     "campaigns": {
