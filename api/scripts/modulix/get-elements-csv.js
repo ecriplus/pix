@@ -46,6 +46,7 @@ export function getElements(modules) {
     'separator',
     'text',
     'video',
+    'custom',
   ];
 
   const elements = [];
