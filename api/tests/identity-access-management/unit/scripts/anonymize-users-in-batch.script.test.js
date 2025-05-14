@@ -24,12 +24,15 @@ describe('Unit | Identities Access Management | Scripts | Anonymize users in bat
         // when
         await script.handle({
           options: {
-            file,
+            file: async (callback) => {
+              await callback(file);
+            },
             dryRun: true,
             anonymizerId: 1234,
           },
           logger,
           anonymizeUser,
+          delay: 0,
         });
 
         // then
@@ -45,12 +48,15 @@ describe('Unit | Identities Access Management | Scripts | Anonymize users in bat
         // when
         await script.handle({
           options: {
-            file,
+            file: async (callback) => {
+              await callback(file);
+            },
             dryRun: false,
             anonymizerId: 1234,
           },
           logger,
           anonymizeUser,
+          delay: 0,
         });
 
         // then
@@ -69,12 +75,15 @@ describe('Unit | Identities Access Management | Scripts | Anonymize users in bat
           await expect(
             script.handle({
               options: {
-                file,
+                file: async (callback) => {
+                  await callback(file);
+                },
                 dryRun: false,
                 anonymizerId: 1234,
               },
               logger,
               anonymizeUser,
+              delay: 0,
             }),
           ).to.be.rejectedWith('There was some errors during the process.');
 
