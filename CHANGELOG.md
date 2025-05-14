@@ -1,5 +1,25 @@
 # Pix Changelog
 
+## v5.110.0 (14/05/2025)
+
+
+### :rocket: Amélioration
+- [#12271](https://github.com/1024pix/pix/pull/12271) [FEATURE] Aligner les columns de tableaux dans la page d'analyse de résultats (PIX-17803).
+- [#12248](https://github.com/1024pix/pix/pull/12248) [FEATURE] Envoyer une notification Slack suite à une release.
+- [#12270](https://github.com/1024pix/pix/pull/12270) [FEATURE] Afficher les titres des grains dans la navbar (PIX-17587).
+
+### :building_construction: Tech
+- [#12241](https://github.com/1024pix/pix/pull/12241) [TECH] optimisation d'une requête certif.
+- [#12258](https://github.com/1024pix/pix/pull/12258) [TECH] Déplacer le feature toggle Companion dans le front mon-pix (PIX-17805).
+
+### :bug: Correction
+- [#12260](https://github.com/1024pix/pix/pull/12260) [BUGFIX] Corriger le script de rattrapage de données sur la suppression des dates (PIX-17731).
+- [#12279](https://github.com/1024pix/pix/pull/12279) [BUGFIX] Ajout d'un await manquant dans un test sur la page du taux de couverture (PIX-17811).
+- [#12263](https://github.com/1024pix/pix/pull/12263) [BUGFIX] Retirer la contrainte qui veut qu'une organisation fille ait le même type que l'organisation mère (PIX-17775).
+
+### :coffee: Autre
+- [#12275](https://github.com/1024pix/pix/pull/12275) Revert "[FEATURE] Afficher les titres des grains dans la navbar (PIX-17587)" (PIX-17587).
+
 ## v5.109.0 (13/05/2025)
 
 
