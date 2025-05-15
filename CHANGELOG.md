@@ -1,5 +1,22 @@
 # Pix Changelog
 
+## v5.111.0 (15/05/2025)
+
+
+### :rocket: Amélioration
+- [#12290](https://github.com/1024pix/pix/pull/12290) [FEATURE] Modifier le message de la notification Slack post release.
+- [#12278](https://github.com/1024pix/pix/pull/12278) [FEATURE] Ajouter le type d'élément custom dans le get-element-csv (PIX-17426).
+- [#12249](https://github.com/1024pix/pix/pull/12249) [FEATURE] Traiter les événements "PASSAGE_TERMINATED" comme les autres enregistrements de traces d'apprentissage (PIX-17663)(PIX-16729).
+- [#12276](https://github.com/1024pix/pix/pull/12276) [FEATURE] Support nouveau type d'element `qcu-declarative`(PIX-17683).
+
+### :building_construction: Tech
+- [#12214](https://github.com/1024pix/pix/pull/12214) [TECH] Vraie simulation de certification V3 dans les seeds.
+- [#12211](https://github.com/1024pix/pix/pull/12211) [TECH] Utiliser Stages acquisitions dans la page des Résultats d'une campagne de type ASSESSMENT (Pix-17297).
+- [#12262](https://github.com/1024pix/pix/pull/12262) [TECH] Supprimer le feature-toggle ADJUST_CERTIFICATION_ACCESSIBILITY (PIX-17723).
+
+### :bug: Correction
+- [#12289](https://github.com/1024pix/pix/pull/12289) [BUGFIX] Encoder les apostrophes dans les PDF v3 (PIX-17829).
+
 ## v5.110.0 (14/05/2025)
 
 
