@@ -1715,6 +1715,10 @@
       "qcu": {
         "direction": "Select a single answer."
       },
+      "qcuDeclarative": {
+        "complementaryInstruction": "Select a single answer.",
+        "direction": "There is no right or wrong answer."
+      },
       "qrocm": {
         "direction": "Fill in the {count, plural, =1 {blank} other {blanks}}."
       },

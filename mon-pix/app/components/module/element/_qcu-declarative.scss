@@ -1,0 +1,36 @@
+@use 'pix-design-tokens/typography';
+
+.element-qcu-declarative {
+  width: 100%;
+  padding: var(--pix-spacing-6x);
+  padding-bottom: var(--pix-spacing-10x);
+
+  &__instruction {
+    @extend %pix-body-m;
+
+    font-weight: var(--pix-font-bold);
+  }
+
+  &__complementary-instruction {
+    @extend %pix-body-s;
+
+    margin: var(--pix-spacing-3x) 0;
+    color: var(--pix-neutral-500);
+  }
+
+  &__proposals {
+    display:flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-3x);
+    margin-top: var(--pix-spacing-4x);
+  }
+
+  &__feedback {
+    @extend %pix-body-l;
+
+    padding: var(--pix-spacing-6x);
+    color: var(--pix-neutral-0);
+    background: var(--pix-neutral-800);
+    border-radius: var(--pix-spacing-4x);
+  }
+}

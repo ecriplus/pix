@@ -1715,6 +1715,10 @@
       "qcu": {
         "direction": "Sélectionnez une seule réponse."
       },
+      "qcuDeclarative": {
+        "complementaryInstruction": "Il n’y a pas de bonne ou de mauvaise réponse.",
+        "direction": "Sélectionnez une seule réponse."
+      },
       "qrocm": {
         "direction": "Remplissez {count, plural, =1 {le champ vide} other {les champs vides}}."
       },
