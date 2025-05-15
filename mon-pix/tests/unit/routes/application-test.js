@@ -1,45 +1,11 @@
 import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
-import { redactUrlForAnalytics } from 'mon-pix/routes/application.js';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 module('Unit | Route | application', function (hooks) {
   setupTest(hooks);
 
-  module('#redactUrlForAnalytics', function () {
-    test.each(
-      'should rewrite url with redacted IDs',
-      [
-        { actual: '/candidat/123/informations', params: ['123'], expected: '/candidat/_ID_/informations' },
-        { actual: '/candidat/1/informations', params: ['1'], expected: '/candidat/_ID_/informations' },
-        {
-          actual: '/competences/rec123/resultats/0',
-          params: ['rec123', '0'],
-          expected: '/competences/_ID_/resultats/_ID_',
-        },
-        {
-          actual: '/competences/rec123/resultats/789',
-          params: ['rec123', '789'],
-          expected: '/competences/_ID_/resultats/_ID_',
-        },
-        {
-          actual: '/competences/competence123/resultats/789',
-          params: ['competence123', '789'],
-          expected: '/competences/_ID_/resultats/_ID_',
-        },
-        {
-          actual: '/competences/competence123/resultats/789?id=789',
-          params: ['competence123', '789'],
-          expected: '/competences/_ID_/resultats/_ID_?id=789',
-        },
-      ],
-      function (assert, input) {
-        const redatedUrl = redactUrlForAnalytics(input.actual, input.params);
-        assert.strictEqual(redatedUrl, input.expected);
-      },
-    );
-  });
   test('hides the splash when the route is activated', function (assert) {
     // Given
     const SplashServiceStub = Service.create({

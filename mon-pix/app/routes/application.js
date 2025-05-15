@@ -10,7 +10,7 @@ export default class ApplicationRoute extends Route {
   @service oidcIdentityProviders;
   @service session;
   @service splash;
-  @service metrics;
+  @service pixMetrics;
   @service store;
   @service router;
 
@@ -21,10 +21,7 @@ export default class ApplicationRoute extends Route {
       if (!transition.to || transition.to.metadata?.doNotTrackPage) {
         return;
       }
-      const params = extractParamsFromRouteInfo(transition.to);
-
-      const page = redactUrlForAnalytics(this.router.currentURL, params);
-      this.metrics.trackPage({ plausibleAttributes: { u: page } });
+      this.pixMetrics.trackPage();
     };
     this.router.on('routeDidChange', trackRouteChange);
   }
@@ -85,21 +82,4 @@ export default class ApplicationRoute extends Route {
       this.poller = null;
     }
   }
-}
-
-export function redactUrlForAnalytics(url, params) {
-  const [base, queryParams] = url.split('?');
-  const redactedUrl = base
-    .split('/')
-    .map((token) => {
-      return params.includes(token) ? '_ID_' : token;
-    })
-    .join('/');
-  return queryParams ? `${redactedUrl}?${queryParams}` : redactedUrl;
-}
-
-function extractParamsFromRouteInfo(routeInfo, params = []) {
-  return routeInfo.parent == null
-    ? params
-    : extractParamsFromRouteInfo(routeInfo.parent, params.concat(Object.values(routeInfo.params)));
 }
