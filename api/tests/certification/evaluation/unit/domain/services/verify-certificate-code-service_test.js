@@ -9,7 +9,7 @@ describe('Unit | Service | VerifyCertificateCode', function () {
     // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
     // eslint-disable-next-line mocha/no-setup-in-describe
     _.times(100, () =>
-      it('should return a certification code containing 8 digits/letters except 0, 1 and vowels', async function () {
+      it('should return a certification code containing 8 digits/uppercase letters except 0, 1 and vowels', async function () {
         // given
         const certificationCourseRepositoryStub = {
           isVerificationCodeAvailable: sinon.stub().resolves(true),

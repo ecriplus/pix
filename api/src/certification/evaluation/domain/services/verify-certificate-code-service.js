@@ -10,7 +10,7 @@ const NB_CHAR = 8;
 const NB_OF_TRIALS = 1000;
 
 function _generateCode() {
-  return 'P-' + _.times(NB_CHAR, _randomCharacter).join('');
+  return 'P-' + _.times(NB_CHAR, _randomCharacter).join('').toUpperCase();
 }
 
 function _randomCharacter() {
