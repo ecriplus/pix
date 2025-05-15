@@ -72,7 +72,8 @@ const createInBatch = async function (request, h) {
 
 const archiveInBatch = async function (request, h) {
   const userId = extractUserIdFromRequest(request);
-  const organizationIds = await csvSerializer.deserializeForOrganizationBatchArchive(request.payload.path);
+
+  const organizationIds = await csvSerializer.deserializeForOrganizationBatchArchive(request.payload.file.path);
   await usecases.archiveOrganizationsInBatch({ organizationIds, userId });
 
   return h.response().code(204);

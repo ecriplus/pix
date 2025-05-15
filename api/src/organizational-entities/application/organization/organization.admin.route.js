@@ -254,6 +254,7 @@ const register = async function (server) {
         ],
         payload: {
           maxBytes: MAX_FILE_SIZE_UPLOAD,
+          multipart: true,
           output: 'file',
           failAction: (request, h) => {
             return sendJsonApiError(
