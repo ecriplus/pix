@@ -723,14 +723,14 @@
               {
                 "input": "pix-birth",
                 "type": "input",
-                "inputType": "text",
+                "inputType": "number",
                 "size": 10,
                 "display": "inline",
                 "placeholder": "",
                 "ariaLabel": "Année à trouver",
                 "defaultValue": "",
                 "tolerances": [],
-                "solutions": ["2016"]
+                "solutions": [2016]
               }
             ],
             "feedbacks": {
