@@ -4,10 +4,13 @@ import Service, { service } from '@ember/service';
 const FR_FEATURED_IDENTITY_PROVIDER_CODE = 'POLE_EMPLOI';
 const ORG_FEATURED_IDENTITY_PROVIDER_CODE = 'FWB';
 const FEATURED_IDENTITY_PROVIDER_CODES = [FR_FEATURED_IDENTITY_PROVIDER_CODE, ORG_FEATURED_IDENTITY_PROVIDER_CODE];
+const FER_IDENTITY_PROVIDER_CODE = 'FER';
+const USER_ACCOUNT_RECOVERY_FOR_IDENTITY_PROVIDER_CODES = [FER_IDENTITY_PROVIDER_CODE];
 
 export default class OidcIdentityProviders extends Service {
   @service store;
   @service currentDomain;
+  @service featureToggles;
 
   get list() {
     return this.store.peekAll('oidc-identity-provider');
@@ -49,5 +52,12 @@ export default class OidcIdentityProviders extends Service {
     oidcIdentityProviders.forEach((oidcIdentityProvider) => {
       this[oidcIdentityProvider.id] = oidcIdentityProvider;
     });
+  }
+
+  shouldDisplayAccountRecoveryBanner(identityProviderCode) {
+    return (
+      this.featureToggles.featureToggles.isNewAccountRecoveryEnabled &&
+      USER_ACCOUNT_RECOVERY_FOR_IDENTITY_PROVIDER_CODES.includes(identityProviderCode)
+    );
   }
 }
