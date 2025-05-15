@@ -1,5 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -23,7 +24,7 @@ export default class SsoSelectionForm extends Component {
   }
 
   get providers() {
-    return this.oidcIdentityProviders.list?.filter((provider) => !EXCLUDED_PROVIDER_CODES.includes(provider.code));
+    return this.oidcIdentityProviders.list.filter((provider) => !EXCLUDED_PROVIDER_CODES.includes(provider.code));
   }
 
   get hasSelectedProvider() {
@@ -35,6 +36,17 @@ export default class SsoSelectionForm extends Component {
     if (!provider) return null;
 
     return provider.organizationName;
+  }
+
+  get shouldDisplayAccountRecoveryBanner() {
+    const provider = this.oidcIdentityProviders.list.find((provider) => provider.id === this.selectedProviderId);
+    if (!provider) return false;
+
+    return this.oidcIdentityProviders.shouldDisplayAccountRecoveryBanner(provider.code);
+  }
+
+  get accountRecoveryUrl() {
+    return this.router.urlFor('account-recovery');
   }
 
   <template>
@@ -50,6 +62,15 @@ export default class SsoSelectionForm extends Component {
       <OidcProviderSelector @providers={{this.providers}} @onProviderChange={{this.onProviderChange}} />
 
       {{#if this.hasSelectedProvider}}
+        {{#if this.shouldDisplayAccountRecoveryBanner}}
+          <PixNotificationAlert class="sso-selection-form__should-display-account-recovery-banner">
+            {{t
+              "components.authentication.sso-selection-form.should-display-account-recovery-banner"
+              url=this.accountRecoveryUrl
+              htmlSafe=true
+            }}
+          </PixNotificationAlert>
+        {{/if}}
         <PixButtonLink
           aria-describedby="signin-message"
           @route="authentication.login-oidc"

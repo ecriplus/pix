@@ -16,4 +16,10 @@
 
     color: var(--pix-neutral-500);
   }
+
+  &__should-display-account-recovery-banner {
+    a {
+      text-decoration: underline;
+    }
+  }
 }

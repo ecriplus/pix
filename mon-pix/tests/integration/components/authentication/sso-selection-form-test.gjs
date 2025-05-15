@@ -12,9 +12,13 @@ class OidcProvidersServiceStub extends Service {
     return [
       { id: 'cem', code: 'CEM', organizationName: 'ConnectEtMoi', isVisible: true },
       { id: 'sc', code: 'SC', organizationName: 'StarConnect', isVisible: true },
+      { id: 'fer', code: 'FER', organizationName: 'FER', isVisible: true },
       { id: 'hidden1', code: 'FWB', organizationName: 'Not displayed provider 1', isVisible: true },
       { id: 'hidden2', code: 'GOOGLE', organizationName: 'Not displayed provider 2', isVisible: true },
     ];
+  }
+  shouldDisplayAccountRecoveryBanner(identityProviderCode) {
+    return identityProviderCode == 'FER';
   }
 }
 
@@ -57,7 +61,7 @@ module('Integration | Component | Authentication | SsoSelectionForm', function (
   });
 
   test('it excludes some providers', async function (assert) {
-    //when
+    // when
     const screen = await render(<template><SsoSelectionForm /></template>);
     await clickByName(t('components.authentication.oidc-provider-selector.label'));
     await screen.findByRole('listbox');
@@ -66,6 +70,17 @@ module('Integration | Component | Authentication | SsoSelectionForm', function (
     const options = await screen.findAllByRole('option');
     const optionsLabels = options.map((option) => option.innerText);
 
-    assert.deepEqual(optionsLabels, ['ConnectEtMoi', 'StarConnect']);
+    assert.deepEqual(optionsLabels, ['ConnectEtMoi', 'FER', 'StarConnect']);
+  });
+
+  test('it displays an account recovery banner if SSO is FER', async function (assert) {
+    // when
+    const screen = await render(<template><SsoSelectionForm /></template>);
+    await clickByName(t('components.authentication.oidc-provider-selector.label'));
+    await screen.findByRole('listbox');
+    await click(screen.getByRole('option', { name: 'FER' }));
+
+    // then
+    assert.dom(screen.getByText(/récupérer.*compte/i)).exists();
   });
 });
