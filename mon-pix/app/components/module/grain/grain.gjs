@@ -190,6 +190,7 @@ export default class ModuleGrain extends Component {
               <div class="grain-card-content__element">
                 <Element
                   @element={{component.element}}
+                  @passageId={{@passage.id}}
                   @onImageAlternativeTextOpen={{@onImageAlternativeTextOpen}}
                   @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
                   @onElementAnswer={{@onElementAnswer}}

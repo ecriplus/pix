@@ -1,5 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
@@ -9,6 +10,16 @@ import { isEmbedAllowedOrigin } from '../../../utils/embed-allowed-origins';
 import ModuleElement from './module-element';
 
 export default class ModulixEmbed extends ModuleElement {
+  constructor(...args) {
+    super(...args);
+
+    this.messageHandler = this._receiveEmbedMessage.bind(this);
+    window.addEventListener('message', this.messageHandler);
+  }
+
+  @service
+  embedApiProxy;
+
   @tracked
   isSimulatorLaunched = false;
   embedHeight = this.args.embed.height;
@@ -34,11 +45,6 @@ export default class ModulixEmbed extends ModuleElement {
   startSimulator() {
     this.isSimulatorLaunched = true;
     this.iframe.focus();
-
-    this.messageHandler = this._receiveEmbedMessage.bind(this);
-    if (this.args.embed.isCompletionRequired) {
-      window.addEventListener('message', this.messageHandler);
-    }
   }
 
   get permissionToClipboardWrite() {
@@ -51,13 +57,27 @@ export default class ModulixEmbed extends ModuleElement {
   _receiveEmbedMessage(event) {
     if (!this._messageIsFromCurrentElementSimulator(event)) return;
     if (!isEmbedAllowedOrigin(event.origin)) return;
+
     const message = this._getMessageFromEventData(event);
-    if (message && message.answer && message.from === 'pix') {
-      this.args.onAnswer({
-        userResponse: [message.answer],
-        element: this.args.embed,
-      });
+
+    if (message?.from !== 'pix') return;
+
+    if (message.type === 'init') {
+      if (message.enableFetchFromApi) {
+        const [requestsPort] = event.ports;
+
+        this.embedApiProxy.forward(this, requestsPort, `/api/passages/${this.args.passageId}/embed/`);
+      }
     }
+
+    if (!this.args.embed.isCompletionRequired) return;
+    if (message.type) return;
+    if (!message.answer) return;
+
+    this.args.onAnswer({
+      userResponse: [message.answer],
+      element: this.args.embed,
+    });
   }
 
   _messageIsFromCurrentElementSimulator(event) {
@@ -68,8 +88,7 @@ export default class ModulixEmbed extends ModuleElement {
     if (typeof event.data === 'object') {
       return event.data;
     }
-
-    return {};
+    return null;
   }
 
   willDestroy() {
