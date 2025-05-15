@@ -456,9 +456,10 @@ function routes() {
   });
   this.patch('/admin/organizations/:id');
 
-  this.delete('/admin/campaign-participations/:id', (schema, request) => {
-    const participationId = request.params.id;
-    const participation = schema.userParticipations.findBy({ campaignParticipationId: participationId });
+  this.delete('/admin/campaigns/:campaignId/campaign-participations/:campaignParticipationId', (schema, request) => {
+    const campaignParticipationId = request.params.campaignParticipationId;
+    const campaignId = request.params.campaignId;
+    const participation = schema.userParticipations.findBy({ campaignParticipationId, campaignId });
     participation.update({
       deletedAt: new Date('2012-12-12'),
     });

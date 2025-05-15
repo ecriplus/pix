@@ -17,7 +17,7 @@ const deleteCampaignParticipationForAdmin = withTransaction(async function ({
   for (const campaignParticipation of campaignParticipations) {
     campaignParticipation.delete(userId);
     const { id, deletedAt, deletedBy } = campaignParticipation;
-    await campaignParticipationRepository.remove({ id, deletedAt, deletedBy });
+    await campaignParticipationRepository.remove({ id, attributes: { deletedAt, deletedBy } });
   }
 });
 

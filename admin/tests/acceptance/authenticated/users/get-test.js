@@ -266,7 +266,8 @@ module('Acceptance | authenticated/users/get', function (hooks) {
     test('marks participation as deleted', async function (assert) {
       // given
       const userParticipation = this.server.create('user-participation', {
-        campaignParticipation: 123,
+        campaignParticipationId: 123,
+        campaignId: 1,
         deletedAt: null,
       });
       const user = server.create('user');

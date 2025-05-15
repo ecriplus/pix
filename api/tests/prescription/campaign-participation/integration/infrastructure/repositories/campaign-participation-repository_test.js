@@ -574,6 +574,84 @@ describe('Integration | Repository | Campaign Participation', function () {
     });
   });
 
+  describe('#remove', function () {
+    it('should mark as deleted given participation', async function () {
+      const ownerId = databaseBuilder.factory.buildUser().id;
+      const participantUserId = databaseBuilder.factory.buildUser().id;
+      const { id: campaignId } = databaseBuilder.factory.buildCampaign({ ownerId });
+      const { id: otherCampaignId } = databaseBuilder.factory.buildCampaign({ ownerId });
+
+      const campaignParticipationToDelete = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId,
+        deletedAt: null,
+        deletedBy: null,
+        userId: participantUserId,
+        participantExternalId: 'ollalalalal',
+      });
+      const campaignParticipationStillActive = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: otherCampaignId,
+        deletedAt: null,
+        deletedBy: null,
+        userId: participantUserId,
+        participantExternalId: 'ollalalalal',
+      });
+
+      await databaseBuilder.commit();
+
+      const deletedAt = new Date('2022-11-01T23:00:00Z');
+
+      await campaignParticipationRepository.remove({
+        id: campaignParticipationToDelete.id,
+        attributes: {
+          deletedAt,
+          deletedBy: ownerId,
+        },
+      });
+
+      const deletedCampaignParticipation = await knex('campaign-participations').whereNotNull('deletedAt').first();
+
+      expect(deletedCampaignParticipation.id).to.be.equal(campaignParticipationToDelete.id);
+
+      const activeCampaignParticipation = await knex('campaign-participations').whereNull('deletedAt').first();
+
+      expect(activeCampaignParticipation.id).to.be.equal(campaignParticipationStillActive.id);
+    });
+
+    it('should update the campaign-participations with deletedAt and deletedBy attributes', async function () {
+      const ownerId = databaseBuilder.factory.buildUser().id;
+      const participantUserId = databaseBuilder.factory.buildUser().id;
+      const { id: campaignId } = databaseBuilder.factory.buildCampaign({ ownerId });
+      const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId,
+        deletedAt: null,
+        deletedBy: null,
+        userId: participantUserId,
+        participantExternalId: 'ollalalalal',
+      });
+
+      await databaseBuilder.commit();
+
+      const deletedAt = new Date('2022-11-01T23:00:00Z');
+
+      await campaignParticipationRepository.remove({
+        id: campaignParticipation.id,
+        attributes: {
+          participantExternalId: null,
+          userId: null,
+          deletedAt,
+          deletedBy: ownerId,
+        },
+      });
+
+      const deletedCampaignParticipation = await knex('campaign-participations').first();
+
+      expect(deletedCampaignParticipation.participantExternalId).to.be.null;
+      expect(deletedCampaignParticipation.userId).to.be.null;
+      expect(deletedCampaignParticipation.deletedAt).to.deep.equal(new Date('2022-11-01T23:00:00Z'));
+      expect(deletedCampaignParticipation.deletedBy).to.deep.equal(ownerId);
+    });
+  });
+
   describe('#getAllCampaignParticipationsInCampaignForASameLearner', function () {
     let campaignId;
     let organizationLearnerId;
@@ -640,32 +718,6 @@ describe('Integration | Repository | Campaign Participation', function () {
           campaignParticipationImproved.id,
           campaignParticipationToDelete.id,
         ]);
-      });
-    });
-
-    describe('#delete', function () {
-      it('should update the campaign-participations with deletedAt and deletedBy attributes', async function () {
-        const ownerId = databaseBuilder.factory.buildUser().id;
-        const { id: campaignId } = databaseBuilder.factory.buildCampaign({ ownerId });
-        const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({ campaignId });
-
-        await databaseBuilder.commit();
-
-        campaignParticipation.deletedAt = new Date('2022-11-01T23:00:00Z');
-        campaignParticipation.deletedBy = ownerId;
-
-        await DomainTransaction.execute(() => {
-          return campaignParticipationRepository.remove({
-            id: campaignParticipation.id,
-            deletedAt: campaignParticipation.deletedAt,
-            deletedBy: campaignParticipation.deletedBy,
-          });
-        });
-
-        const deletedCampaignParticipation = await knex('campaign-participations').first();
-
-        expect(deletedCampaignParticipation.deletedAt).to.deep.equal(new Date('2022-11-01T23:00:00Z'));
-        expect(deletedCampaignParticipation.deletedBy).to.deep.equal(ownerId);
       });
     });
 

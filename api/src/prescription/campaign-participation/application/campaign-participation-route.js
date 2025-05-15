@@ -61,12 +61,12 @@ const register = async function (server) {
     },
     {
       method: 'DELETE',
-      path: '/api/campaigns/{id}/campaign-participations/{campaignParticipationId}',
+      path: '/api/campaigns/{campaignId}/campaign-participations/{campaignParticipationId}',
       config: {
         pre: [{ method: securityPreHandlers.checkAuthorizationToManageCampaign }],
         validate: {
           params: Joi.object({
-            id: identifiersType.campaignId,
+            campaignId: identifiersType.campaignId,
             campaignParticipationId: identifiersType.campaignParticipationId,
           }),
         },
@@ -202,6 +202,30 @@ const register = async function (server) {
           }),
         },
         handler: campaignParticipationController.deleteCampaignParticipationForAdmin,
+        notes: ['- Permet à un administrateur de supprimer une participation à une campagne'],
+        tags: ['api', 'campaign-participations', 'deprecated'],
+      },
+    },
+    {
+      method: 'DELETE',
+      path: '/api/admin/campaigns/{campaignId}/campaign-participations/{campaignParticipationId}',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+              ])(request, h),
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            campaignParticipationId: identifiersType.campaignParticipationId,
+            campaignId: identifiersType.campaignId,
+          }),
+        },
+        handler: campaignParticipationController.deleteParticipation,
         notes: ['- Permet à un administrateur de supprimer une participation à une campagne'],
         tags: ['api', 'campaign-participations'],
       },
