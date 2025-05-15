@@ -24,15 +24,15 @@ export const rewardUser = async ({
     const rewardIds = rewards.map((reward) => reward.rewardId);
 
     for (const quest of quests) {
+      if (rewardIds.includes(quest.rewardId)) {
+        continue;
+      }
+
       const dataForQuests = eligibilities
         .map((eligibility) => new DataForQuest({ eligibility }))
         .filter((dataForQuest) => quest.isEligible(dataForQuest));
 
       if (dataForQuests.length === 0) {
-        continue;
-      }
-
-      if (rewardIds.includes(quest.rewardId)) {
         continue;
       }
 
