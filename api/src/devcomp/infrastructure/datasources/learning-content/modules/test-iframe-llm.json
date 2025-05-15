@@ -1,0 +1,51 @@
+{
+  "id": "8f148ad1-fc14-4de8-a776-5224c1db1d70",
+  "slug": "test-iframe-llm",
+  "title": "Iframe LLM",
+  "isBeta": true,
+  "details": {
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "description": "<p>Ce module est dédié à des tests internes à Pix.</p><p>Il contient normalement l'intégralité des fonctionnalités disponibles à date.</p>",
+    "duration": 5,
+    "level": "Débutant",
+    "tabletSupport": "inconvenient",
+    "objectives": ["Non régression fonctionnelle"]
+  },
+  "grains": [
+    {
+      "id": "a39ce6eb-f3db-447f-808f-aa6a06432012",
+      "type": "lesson",
+      "title": "test qcu-declarative",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "52af6cab-07df-4962-abc5-20cf95d5a5ba",
+            "type": "text",
+            "content": "<p>Voici une iframe :</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "9c8a0dc3-4e8e-4cf9-ab37-3280931c7aba",
+            "type": "embed",
+            "isCompletionRequired": false,
+            "title": "LLM",
+            "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?lang=fr&mode=cma2ihhoa000bwg011i86qb30",
+            "instruction": "<p>LLM</p>",
+            "height": 600
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "e32c01a8-7ae1-4c6d-9a16-6487c7c52d04",
+            "type": "text",
+            "content": "<p>Elles ne sont autorisées qu'en béta.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
