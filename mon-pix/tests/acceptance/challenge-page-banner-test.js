@@ -80,7 +80,7 @@ module('Acceptance | Challenge page banner', function (hooks) {
         class MetricsStubService extends Service {
           trackPage = sinon.stub();
           trackEvent = sinon.stub();
-          initialize = sinon.stub();
+          context = {};
         }
         this.owner.register('service:metrics', MetricsStubService);
 

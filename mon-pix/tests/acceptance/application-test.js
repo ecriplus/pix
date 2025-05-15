@@ -28,6 +28,7 @@ module('Acceptance | Application', function (hooks) {
     hooks.beforeEach(async function () {
       class MetricServiceStub extends Service {
         trackPage = sinon.stub();
+        context = {};
       }
 
       this.owner.register('service:metrics', MetricServiceStub);

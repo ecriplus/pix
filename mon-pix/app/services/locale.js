@@ -17,6 +17,7 @@ export default class LocaleService extends Service {
   @service currentDomain;
   @service intl;
   @service dayjs;
+  @service metrics;
 
   isSupportedLocale(locale) {
     try {
@@ -46,6 +47,7 @@ export default class LocaleService extends Service {
   }
 
   setLocale(locale) {
+    this.metrics.context.locale = locale;
     this.intl.setLocale(locale);
     this.dayjs.setLocale(locale);
   }

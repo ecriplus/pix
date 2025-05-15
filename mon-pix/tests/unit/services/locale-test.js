@@ -11,10 +11,12 @@ module('Unit | Services | locale', function (hooks) {
   let currentDomainService;
   let dayjsService;
   let intlService;
+  let metricsService;
 
   hooks.beforeEach(function () {
     localeService = this.owner.lookup('service:locale');
     cookiesService = this.owner.lookup('service:cookies');
+
     sinon.stub(cookiesService, 'write');
     sinon.stub(cookiesService, 'exists');
     currentDomainService = this.owner.lookup('service:currentDomain');
@@ -25,6 +27,9 @@ module('Unit | Services | locale', function (hooks) {
 
     intlService = this.owner.lookup('service:intl');
     sinon.stub(intlService, 'setLocale');
+
+    metricsService = this.owner.lookup('service:metrics');
+    sinon.stub(metricsService, 'context').value({});
   });
 
   module('#isSupportedLocale', function () {
@@ -190,7 +195,7 @@ module('Unit | Services | locale', function (hooks) {
       // then
       sinon.assert.calledWith(intlService.setLocale, locale);
       sinon.assert.calledWith(dayjsService.setLocale, locale);
-      assert.ok(true);
+      assert.strictEqual(metricsService.context.locale, locale);
     });
   });
 });
