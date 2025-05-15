@@ -6,7 +6,9 @@ import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js
 import { CampaignParticipationStatuses, CampaignTypes } from '../../../shared/domain/constants.js';
 
 const findByUserIdWithFilters = async function ({ userId, states, page }) {
-  const queryBuilder = _findByUserId({ userId });
+  const queryBuilder = _getQueryBuilder((qb) => {
+    qb.where('campaign-participations.userId', userId);
+  });
 
   if (states && states.length > 0) {
     _filterByStates(queryBuilder, states);
@@ -21,9 +23,16 @@ const findByUserIdWithFilters = async function ({ userId, states, page }) {
   };
 };
 
-export { findByUserIdWithFilters };
+const findByOrganizationLearnerId = async ({ organizationLearnerId }) => {
+  const results = await _getQueryBuilder((qb) => {
+    qb.where('campaign-participations.organizationLearnerId', organizationLearnerId);
+  });
+  return results.map((result) => new CampaignParticipationOverview(result));
+};
 
-function _findByUserId({ userId }) {
+export { findByOrganizationLearnerId, findByUserIdWithFilters };
+
+function _getQueryBuilder(callback) {
   const knexConn = DomainTransaction.getConnection();
 
   return knexConn
@@ -51,8 +60,8 @@ function _findByUserId({ userId }) {
         .whereIn('campaigns.type', [CampaignTypes.ASSESSMENT, CampaignTypes.EXAM])
         .where('campaigns.isForAbsoluteNovice', false)
         .whereNot('organizations.id', constants.AUTONOMOUS_COURSES_ORGANIZATION_ID)
-        .where('campaign-participations.userId', userId)
-        .where('campaign-participations.isImproved', false);
+        .where('campaign-participations.isImproved', false)
+        .where(callback);
     })
     .from('campaign-participation-overviews')
     .orderByRaw(_computeCampaignParticipationOrder())

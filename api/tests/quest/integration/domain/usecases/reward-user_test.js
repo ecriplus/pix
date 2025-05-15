@@ -13,6 +13,7 @@ const userId = 1234;
 const setupContextWithProfileSkillQuest = async ({
   userId,
   isEligible = true,
+  hasSecondLearner = false,
   hasValidatedKnowledgeElements = true,
   hasAlreadySucceededTheQuest = false,
 }) => {
@@ -40,6 +41,12 @@ const setupContextWithProfileSkillQuest = async ({
   userKnowledgeElements.map(databaseBuilder.factory.buildKnowledgeElement);
 
   const organization = databaseBuilder.factory.buildOrganization({ type: userOrganization });
+  if (hasSecondLearner) {
+    databaseBuilder.factory.buildOrganizationLearner({
+      userId,
+      organizationId: databaseBuilder.factory.buildOrganization({ type: userOrganization }).id,
+    });
+  }
   const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner({
     userId,
     organizationId: organization.id,
@@ -236,6 +243,114 @@ describe('Quest | Integration | Domain | Usecases | RewardUser', function () {
         const profileRewards = await knex(PROFILE_REWARDS_TABLE_NAME).where({ userId });
         expect(profileRewards).to.have.lengthOf(1);
         expect(profileRewards[0].userId).to.equal(userId);
+      });
+    });
+
+    context('when user is eligible twice and meets success requirements in second learner', function () {
+      beforeEach(async function () {
+        await setupContextWithProfileSkillQuest({ userId, hasSecondLearner: true });
+      });
+
+      it('should reward the user', async function () {
+        //when
+        await usecases.rewardUser({ userId });
+
+        // then
+        const profileRewards = await knex(PROFILE_REWARDS_TABLE_NAME).where({ userId });
+        expect(profileRewards).to.have.lengthOf(1);
+        expect(profileRewards[0].userId).to.equal(userId);
+      });
+    });
+
+    context('when user is eligible with two organization learner for the same quest', function () {
+      let userId;
+      beforeEach(async function () {
+        userId = databaseBuilder.factory.buildUser().id;
+        const questOrganization = 'PRO';
+        const userKnowledgeElements = [
+          {
+            userId,
+            skillId: 'skillId1',
+            status: VALIDATED,
+          },
+          {
+            userId,
+            skillId: 'skillId2',
+            status: VALIDATED,
+          },
+          {
+            userId,
+            skillId: 'skillId3',
+            status: VALIDATED,
+          },
+        ];
+        userKnowledgeElements.map(databaseBuilder.factory.buildKnowledgeElement);
+
+        const firstOrganization = databaseBuilder.factory.buildOrganization({ type: questOrganization });
+        const secondOrganization = databaseBuilder.factory.buildOrganization({ type: questOrganization });
+
+        [firstOrganization.id, secondOrganization.id].forEach((organizationId) => {
+          const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner({
+            userId,
+            organizationId,
+          });
+
+          const { id: campaignId } = databaseBuilder.factory.buildCampaign({
+            organizationId,
+          });
+          const { id: secondCampaignId } = databaseBuilder.factory.buildCampaign({
+            organizationId,
+          });
+
+          databaseBuilder.factory.buildCampaignParticipation({
+            campaignId,
+            organizationLearnerId,
+            userId,
+          });
+          databaseBuilder.factory.buildCampaignParticipation({
+            campaignId: secondCampaignId,
+            organizationLearnerId,
+            userId,
+          });
+        });
+
+        const rewardId = databaseBuilder.factory.buildAttestation().id;
+
+        databaseBuilder.factory.buildQuest({
+          rewardId,
+          eligibilityRequirements: [
+            {
+              requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
+              comparison: REQUIREMENT_COMPARISONS.ALL,
+              data: {
+                type: {
+                  data: questOrganization,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
+                },
+              },
+            },
+          ],
+          successRequirements: [
+            {
+              requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
+              data: {
+                skillIds: ['skillId1', 'skillId2', 'skillId3'],
+                threshold: 50,
+              },
+            },
+          ],
+        });
+
+        await databaseBuilder.commit();
+      });
+
+      it('should reward the user only once', async function () {
+        //when
+        await usecases.rewardUser({ userId });
+
+        // then
+        const profileRewards = await knex(PROFILE_REWARDS_TABLE_NAME).where({ userId });
+        expect(profileRewards).to.have.lengthOf(1);
       });
     });
 

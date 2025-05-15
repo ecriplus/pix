@@ -28,9 +28,8 @@ const findOrganizationLearnersWithParticipations = withTransaction(async functio
   return Promise.all(
     organizationLearners.map(async (organizationLearner) => {
       const organization = await organizationRepository.get(organizationLearner.organizationId);
-      const campaignParticipationOverviews = await _getCampaignParticipationOverviewsWithoutPagination({
-        userId: organizationLearner.userId,
-        campaignParticipationOverviewRepository,
+      const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByOrganizationLearnerId({
+        organizationLearnerId: organizationLearner.id,
       });
       const tags = await tagRepository.findByIds(organization.tags.map((tag) => tag.id));
 
@@ -44,26 +43,4 @@ const findOrganizationLearnersWithParticipations = withTransaction(async functio
   );
 });
 
-async function _getCampaignParticipationOverviewsWithoutPagination({
-  userId,
-  campaignParticipationOverviewRepository,
-}) {
-  const allCampaignParticipationOverviews = [];
-  let call = 1;
-  let totalPages;
-
-  do {
-    const { campaignParticipationOverviews, pagination } =
-      await campaignParticipationOverviewRepository.findByUserIdWithFilters({
-        userId,
-        page: { number: call, size: 100 },
-      });
-    totalPages = pagination.pageCount;
-    allCampaignParticipationOverviews.push(...campaignParticipationOverviews);
-    call++;
-  } while (call <= totalPages);
-
-  return allCampaignParticipationOverviews;
-}
-
-export { _getCampaignParticipationOverviewsWithoutPagination, findOrganizationLearnersWithParticipations };
+export { findOrganizationLearnersWithParticipations };

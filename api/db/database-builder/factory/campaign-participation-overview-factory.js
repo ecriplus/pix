@@ -10,6 +10,7 @@ import { buildUser } from './build-user.js';
 const { STARTED, SHARED, TO_SHARE } = CampaignParticipationStatuses;
 
 const build = function ({
+  organizationLearnerId,
   userId,
   createdAt,
   sharedAt,
@@ -23,6 +24,7 @@ const build = function ({
   const status = assessmentState === Assessment.states.COMPLETED ? TO_SHARE : STARTED;
 
   const campaignParticipation = buildCampaignParticipation({
+    organizationLearnerId,
     userId,
     campaignId,
     createdAt: createdAt,
