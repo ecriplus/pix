@@ -41,7 +41,10 @@ export const getCertificationResultForParcoursup = async ({
       birthdate,
     });
   } else if (verificationCode) {
-    certifications = await certificationParcoursupRepository.getByVerificationCode({ verificationCode });
+    const upperCasedVerificationCode = verificationCode.toUpperCase();
+    certifications = await certificationParcoursupRepository.getByVerificationCode({
+      verificationCode: upperCasedVerificationCode,
+    });
   }
 
   if (certifications.length !== 1) {
