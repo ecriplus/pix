@@ -1,6 +1,7 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { LinkTo } from '@ember/routing';
+import { t } from 'ember-intl';
 import { not } from 'ember-truth-helpers';
 
 import { formatDate } from '../../helpers/format-date';
@@ -182,7 +183,7 @@ function getFormattedDate(param) {
               @isDisabled={{not @sessionModel.isPublished}}
               @iconBefore="download"
             >
-              Télécharger les attestations
+              {{t "pages.sessions.informations.actions.download-certificates"}}
             </PixButton>
           </div>
         </div>
