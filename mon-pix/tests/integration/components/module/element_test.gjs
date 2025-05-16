@@ -224,6 +224,26 @@ module('Integration | Component | Module | Element', function (hooks) {
     assert.dom(screen.queryByRole('button', { name: 'Vérifier' })).exists();
   });
 
+  test('should display an element with a qcu declarative element', async function (assert) {
+    // given
+    const element = {
+      id: 'd0690f26-978c-41c3-9a21-da931857739c',
+      instruction: 'Instruction',
+      proposals: [
+        { id: '1', content: 'prop1' },
+        { id: '2', content: 'prop2' },
+      ],
+      type: 'qcu-declarative',
+    };
+
+    // when
+    const screen = await render(<template><ModulixElement @element={{element}} /></template>);
+
+    // then
+    assert.ok(screen.getByText('Il n’y a pas de bonne ou de mauvaise réponse.'));
+    assert.ok(screen.getByRole('button', { name: element.proposals[0].content }));
+  });
+
   test('should display an element with a qcm element', async function (assert) {
     // given
     const element = {

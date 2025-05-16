@@ -22,6 +22,7 @@ export default class ModuleGrain extends Component {
     'flashcards',
     'image',
     'qcu',
+    'qcu-declarative',
     'qcm',
     'qrocm',
     'separator',
