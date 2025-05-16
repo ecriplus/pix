@@ -10,10 +10,12 @@ const config = {
       // --no-sandbox is needed when running Chrome inside a container
       process.env.CI ? '--no-sandbox' : null,
       '--headless',
+      '--disable-gpu',
       '--disable-dev-shm-usage',
       '--disable-software-rasterizer',
+      '--disable-accelerated-2d-canvas',
       '--mute-audio',
-      '--remote-debugging-port=0',
+      '--remote-debugging-port=9222',
       '--window-size=1440,900',
     ].filter(Boolean),
   },
@@ -24,9 +26,9 @@ const config = {
 module.exports = process.env.CI
   ? {
       ...config,
-      reporter: "xunit",
+      reporter: 'xunit',
       report_file: `${
-        process.env.RESULTS_PATH ?? "./test-results/"
+        process.env.RESULTS_PATH ?? './test-results/'
       }/report.xml`,
     }
   : config;
