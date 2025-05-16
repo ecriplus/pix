@@ -1,5 +1,5 @@
 import * as moduleUnderTest from '../../../../lib/application/sco-organization-learners/index.js';
-import { scoOrganizationLearnerController } from '../../../../lib/application/sco-organization-learners/sco-organization-learner-controller.js';
+import { libScoOrganizationLearnerController } from '../../../../lib/application/sco-organization-learners/sco-organization-learner-controller.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
 import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
 
@@ -8,16 +8,16 @@ describe('Integration | Application | Route | sco-organization-learners', functi
 
   beforeEach(async function () {
     sinon
-      .stub(scoOrganizationLearnerController, 'generateUsername')
+      .stub(libScoOrganizationLearnerController, 'generateUsername')
       .callsFake((request, h) => h.response('ok').code(200));
     sinon
       .stub(securityPreHandlers, 'checkUserBelongsToScoOrganizationAndManagesStudents')
       .callsFake((request, h) => h.response(true));
     sinon
-      .stub(scoOrganizationLearnerController, 'updatePassword')
+      .stub(libScoOrganizationLearnerController, 'updatePassword')
       .callsFake((request, h) => h.response('ok').code(200));
     sinon
-      .stub(scoOrganizationLearnerController, 'generateUsernameWithTemporaryPassword')
+      .stub(libScoOrganizationLearnerController, 'generateUsernameWithTemporaryPassword')
       .callsFake((request, h) => h.response('ok').code(200));
 
     httpTestServer = new HttpTestServer();

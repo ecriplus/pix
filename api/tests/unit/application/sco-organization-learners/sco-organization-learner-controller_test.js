@@ -1,5 +1,5 @@
-import { scoOrganizationLearnerController } from '../../../../lib/application/sco-organization-learners/sco-organization-learner-controller.js';
-import { usecases } from '../../../../lib/domain/usecases/index.js';
+import { scoOrganizationLearnerController } from '../../../../src/identity-access-management/application/organization-learner-account-recovery/organization-learner-account-recovery.controller.js';
+import { usecases } from '../../../../src/identity-access-management/domain/usecases/index.js';
 import { expect, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Application | Controller | sco-organization-learner', function () {
