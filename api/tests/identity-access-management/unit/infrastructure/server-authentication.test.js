@@ -1,11 +1,15 @@
-import { authentication, validateClientApplication, validateUser } from '../../../lib/infrastructure/authentication.js';
-import { RevokedUserAccess } from '../../../src/identity-access-management/domain/models/RevokedUserAccess.js';
-import { revokedUserAccessRepository } from '../../../src/identity-access-management/infrastructure/repositories/revoked-user-access.repository.js';
-import { ForwardedOriginError } from '../../../src/identity-access-management/infrastructure/utils/network.js';
-import { tokenService } from '../../../src/shared/domain/services/token-service.js';
-import { expect, sinon } from '../../test-helper.js';
+import { RevokedUserAccess } from '../../../../src/identity-access-management/domain/models/RevokedUserAccess.js';
+import { revokedUserAccessRepository } from '../../../../src/identity-access-management/infrastructure/repositories/revoked-user-access.repository.js';
+import {
+  schemes,
+  validateClientApplication,
+  validateUser,
+} from '../../../../src/identity-access-management/infrastructure/server-authentication.js';
+import { ForwardedOriginError } from '../../../../src/identity-access-management/infrastructure/utils/network.js';
+import { tokenService } from '../../../../src/shared/domain/services/token-service.js';
+import { expect, sinon } from '../../../test-helper.js';
 
-describe('Unit | Infrastructure | Authentication', function () {
+describe('Unit | Identity Access Management | Infrastructure | serverAuthentication', function () {
   beforeEach(function () {
     sinon.stub(tokenService, 'extractTokenFromAuthChain');
     sinon.stub(tokenService, 'getDecodedToken');
@@ -18,7 +22,7 @@ describe('Unit | Infrastructure | Authentication', function () {
       const h = { authenticated: sinon.stub() };
 
       // when
-      const { authenticate } = authentication.schemes.jwt.scheme(undefined, {
+      const { authenticate } = schemes.jwt.scheme(undefined, {
         key: 'dummy-secret',
         validate: sinon.stub(),
       });
@@ -42,7 +46,7 @@ describe('Unit | Infrastructure | Authentication', function () {
         tokenService.extractTokenFromAuthChain.withArgs('Bearer').returns(null);
 
         // when
-        const { authenticate } = authentication.schemes.jwt.scheme(undefined, {
+        const { authenticate } = schemes.jwt.scheme(undefined, {
           key: 'dummy-secret',
           validate: sinon.stub(),
         });
@@ -68,7 +72,7 @@ describe('Unit | Infrastructure | Authentication', function () {
         tokenService.getDecodedToken.withArgs('token', 'dummy-secret').returns(false);
 
         // when
-        const { authenticate } = authentication.schemes.jwt.scheme(undefined, {
+        const { authenticate } = schemes.jwt.scheme(undefined, {
           key: 'dummy-secret',
           validate: sinon.stub(),
         });
@@ -102,7 +106,7 @@ describe('Unit | Infrastructure | Authentication', function () {
         });
 
         // when
-        const { authenticate } = authentication.schemes.jwt.scheme(undefined, {
+        const { authenticate } = schemes.jwt.scheme(undefined, {
           key: 'dummy-secret',
           validate: (decodedAccessToken, options) =>
             validateUser(decodedAccessToken, {
@@ -140,7 +144,7 @@ describe('Unit | Infrastructure | Authentication', function () {
           });
 
           // when
-          const { authenticate } = authentication.schemes.jwt.scheme(undefined, {
+          const { authenticate } = schemes.jwt.scheme(undefined, {
             key: 'dummy-secret',
             validate: (decodedAccessToken, options) =>
               validateUser(decodedAccessToken, {
@@ -182,7 +186,7 @@ describe('Unit | Infrastructure | Authentication', function () {
           });
 
           // when
-          const { authenticate } = authentication.schemes.jwt.scheme(undefined, {
+          const { authenticate } = schemes.jwt.scheme(undefined, {
             key: 'dummy-secret',
             validate: (decodedAccessToken, options) =>
               validateUser(decodedAccessToken, {
@@ -219,7 +223,7 @@ describe('Unit | Infrastructure | Authentication', function () {
           });
 
           // when & then
-          const { authenticate } = authentication.schemes.jwt.scheme(undefined, {
+          const { authenticate } = schemes.jwt.scheme(undefined, {
             key: 'dummy-secret',
             validate: (decodedAccessToken, options) =>
               validateUser(decodedAccessToken, {
@@ -249,7 +253,7 @@ describe('Unit | Infrastructure | Authentication', function () {
           });
 
           // when
-          const { authenticate } = authentication.schemes.jwt.scheme(undefined, {
+          const { authenticate } = schemes.jwt.scheme(undefined, {
             key: 'dummy-secret',
             validate: (decodedAccessToken, options) =>
               validateUser(decodedAccessToken, {
@@ -285,7 +289,7 @@ describe('Unit | Infrastructure | Authentication', function () {
         tokenService.extractTokenFromAuthChain.withArgs('Bearer token').returns('token');
         tokenService.getDecodedToken.withArgs('token', 'dummy-secret').returns(decodedAccessToken);
 
-        const { authenticate } = authentication.schemes.jwt.scheme(undefined, {
+        const { authenticate } = schemes.jwt.scheme(undefined, {
           key: 'dummy-secret',
           validate: validateClientApplication,
         });
@@ -307,7 +311,7 @@ describe('Unit | Infrastructure | Authentication', function () {
         tokenService.extractTokenFromAuthChain.withArgs('Bearer token').returns('token');
         tokenService.getDecodedToken.withArgs('token', 'dummy-secret').returns(decodedAccessToken);
 
-        const { authenticate } = authentication.schemes.jwt.scheme(undefined, {
+        const { authenticate } = schemes.jwt.scheme(undefined, {
           key: 'dummy-secret',
           validate: validateClientApplication,
         });

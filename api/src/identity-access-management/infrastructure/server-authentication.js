@@ -1,10 +1,14 @@
 import boom from '@hapi/boom';
 
-import { revokedUserAccessRepository } from '../../src/identity-access-management/infrastructure/repositories/revoked-user-access.repository.js';
-import { getForwardedOrigin } from '../../src/identity-access-management/infrastructure/utils/network.js';
-import { config } from '../../src/shared/config.js';
-import { tokenService } from '../../src/shared/domain/services/token-service.js';
-import { monitoringTools } from '../../src/shared/infrastructure/monitoring-tools.js';
+import { config } from '../../shared/config.js';
+import { tokenService } from '../../shared/domain/services/token-service.js';
+import {
+  jwtApplicationAuthenticationStrategyName,
+  jwtUserAuthenticationStrategyName,
+} from '../../shared/infrastructure/authentication-strategy-names.js';
+import { monitoringTools } from '../../shared/infrastructure/monitoring-tools.js';
+import { revokedUserAccessRepository } from '../infrastructure/repositories/revoked-user-access.repository.js';
+import { getForwardedOrigin } from '../infrastructure/utils/network.js';
 
 const schemes = {
   jwt: {
@@ -19,7 +23,7 @@ const schemes = {
 
 const strategies = {
   jwtUser: {
-    name: 'jwt-user',
+    name: jwtUserAuthenticationStrategyName,
     schemeName: schemes.jwt.name,
     configuration: {
       key: config.authentication.secret,
@@ -29,18 +33,13 @@ const strategies = {
   },
 
   jwtApplication: {
-    name: 'jwt-application',
+    name: jwtApplicationAuthenticationStrategyName,
     schemeName: schemes.jwt.name,
     configuration: {
       key: config.authentication.secret,
       validate: validateClientApplication,
     },
   },
-};
-
-const authentication = {
-  schemes,
-  strategies,
 };
 
 async function validateUser(decodedAccessToken, { request, revokedUserAccessRepository }) {
@@ -73,7 +72,7 @@ async function validateUser(decodedAccessToken, { request, revokedUserAccessRepo
   return { isValid: true, credentials: { userId: decodedAccessToken.user_id } };
 }
 
-export async function validateClientApplication(decodedAccessToken) {
+async function validateClientApplication(decodedAccessToken) {
   if (!decodedAccessToken.client_id) {
     return { isValid: false };
   }
@@ -118,4 +117,4 @@ function authenticateJWT({ key, validate }) {
   };
 }
 
-export { authentication, validateUser };
+export { schemes, strategies, validateClientApplication, validateUser };

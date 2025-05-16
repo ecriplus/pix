@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { jwtApplicationAuthenticationStrategyName } from '../../../shared/infrastructure/authentication-strategy-names.js';
 import { responseObjectErrorDoc } from '../../../shared/infrastructure/open-api-doc/response-object-error-doc.js';
 import { certificationsResultsDoc } from '../infrastructure/open-api-doc/livret-scolaire/certifications-results-doc.js';
 import { livretScolaireController } from './livret-scolaire-controller.js';
@@ -10,7 +11,10 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/organizations/{uai}/certifications',
       config: {
-        auth: { strategy: 'jwt-application', access: { scope: 'organizations-certifications-result' } },
+        auth: {
+          strategy: jwtApplicationAuthenticationStrategyName,
+          access: { scope: 'organizations-certifications-result' },
+        },
         handler: livretScolaireController.getCertificationsByOrganizationUAI,
         notes: [
           '- **API for LSU/LSL qui nécessite une authentification de type client credential grant**\n' +

@@ -3,6 +3,7 @@ import Joi from 'joi';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
+import { jwtApplicationAuthenticationStrategyName } from '../../../shared/infrastructure/authentication-strategy-names.js';
 import { organizationPlaceController } from './organization-place-controller.js';
 
 const register = async (server) => {
@@ -149,7 +150,7 @@ const register = async (server) => {
       method: 'GET',
       path: '/api/data/organization-places',
       config: {
-        auth: { strategy: 'jwt-application', access: { scope: 'statistics' } },
+        auth: { strategy: jwtApplicationAuthenticationStrategyName, access: { scope: 'statistics' } },
         handler: organizationPlaceController.getDataOrganizationsPlacesStatistics,
         tags: ['api', 'organization-places', 'data'],
         notes: [

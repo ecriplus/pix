@@ -5,7 +5,6 @@ import { parse } from 'neoqs';
 import { setupErrorHandling } from './config/server-setup-error-handling.js';
 import { databaseConnections } from './db/database-connections.js';
 import { knex } from './db/knex-database-connection.js';
-import { authentication } from './lib/infrastructure/authentication.js';
 import { routes } from './lib/routes.js';
 import { bannerRoutes } from './src/banner/routes.js';
 import {
@@ -22,6 +21,7 @@ import { certificationSessionRoutes } from './src/certification/session-manageme
 import { devcompRoutes } from './src/devcomp/routes.js';
 import { evaluationRoutes } from './src/evaluation/routes.js';
 import { identityAccessManagementRoutes } from './src/identity-access-management/application/routes.js';
+import * as serverAuthentication from './src/identity-access-management/infrastructure/server-authentication.js';
 import { learningContentRoutes } from './src/learning-content/routes.js';
 import { Metrics } from './src/monitoring/infrastructure/metrics.js';
 import { organizationalEntitiesRoutes } from './src/organizational-entities/application/routes.js';
@@ -213,11 +213,11 @@ const setupDeserialization = function (server) {
 };
 
 const setupAuthentication = function (server) {
-  server.auth.scheme(authentication.schemes.jwt.name, authentication.schemes.jwt.scheme);
-  Object.values(authentication.strategies).forEach((strategy) => {
+  server.auth.scheme(serverAuthentication.schemes.jwt.name, serverAuthentication.schemes.jwt.scheme);
+  Object.values(serverAuthentication.strategies).forEach((strategy) => {
     server.auth.strategy(strategy.name, strategy.schemeName, strategy.configuration);
   });
-  server.auth.default(authentication.strategies.jwtUser.name);
+  server.auth.default(serverAuthentication.strategies.jwtUser.name);
 };
 
 const setupRoutesAndPlugins = async function (server) {

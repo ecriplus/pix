@@ -2,7 +2,7 @@ import Hapi from '@hapi/hapi';
 import { parse } from 'neoqs';
 
 import { setupErrorHandling } from '../../../config/server-setup-error-handling.js';
-import { authentication } from '../../../lib/infrastructure/authentication.js';
+import * as serverAuthentication from '../../../src/identity-access-management/infrastructure/server-authentication.js';
 import { deserializer } from '../../../src/shared/infrastructure/serializers/jsonapi/deserializer.js';
 import { handleFailAction } from '../../../src/shared/validate.js';
 
@@ -55,11 +55,11 @@ class HttpTestServer {
   }
 
   setupAuthentication() {
-    this.hapiServer.auth.scheme(authentication.schemes.jwt.name, authentication.schemes.jwt.scheme);
-    Object.values(authentication.strategies).forEach((strategy) =>
+    this.hapiServer.auth.scheme(serverAuthentication.schemes.jwt.name, serverAuthentication.schemes.jwt.scheme);
+    Object.values(serverAuthentication.strategies).forEach((strategy) =>
       this.hapiServer.auth.strategy(strategy.name, strategy.schemeName, strategy.configuration),
     );
-    this.hapiServer.auth.default(authentication.strategies.jwtUser.name);
+    this.hapiServer.auth.default(serverAuthentication.strategies.jwtUser.name);
   }
 
   setupDeserialization() {
