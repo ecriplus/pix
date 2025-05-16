@@ -1,40 +1,13 @@
 import PixBlock from '@1024pix/pix-ui/components/pix-block';
-import { action } from '@ember/object';
-import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
 
 import parseISODateOnly from '../../../utils/parse-iso-date-only';
 
 export default class HeaderDetails extends Component {
-  @service intl;
-  @service fileSaver;
-  @service session;
-  @service currentDomain;
-
-  @tracked tooltipText = this.intl.t('pages.certificate.verification-code.copy');
-  @tracked attestationDownloadErrorMessage = null;
-
   get birthdateMidnightLocalTime() {
     return parseISODateOnly(this.args.certificate.birthdate);
-  }
-
-  @action
-  async downloadAttestation() {
-    this.attestationDownloadErrorMessage = null;
-    const certificationId = this.args.certificate.id;
-    const lang = this.intl.primaryLocale;
-
-    const url = `/api/attestation/${certificationId}?isFrenchDomainExtension=${this.currentDomain.isFranceDomain}&lang=${lang}`;
-
-    const token = this.session.data.authenticated.access_token;
-    try {
-      await this.fileSaver.save({ url, token });
-    } catch {
-      this.attestationDownloadErrorMessage = this.intl.t('common.error');
-    }
   }
 
   <template>

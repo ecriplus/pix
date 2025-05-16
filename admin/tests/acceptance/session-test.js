@@ -133,7 +133,7 @@ module('Acceptance | Session pages', function (hooks) {
             const screen = await visit('/sessions/2');
 
             // then
-            assert.dom(screen.getByRole('button', { name: 'Télécharger les attestations' })).hasAttribute('disabled');
+            assert.dom(screen.getByRole('button', { name: 'Télécharger les certificats' })).hasAttribute('disabled');
           });
         });
 
@@ -150,7 +150,7 @@ module('Acceptance | Session pages', function (hooks) {
 
             // then
             assert
-              .dom(screen.getByRole('button', { name: 'Télécharger les attestations' }))
+              .dom(screen.getByRole('button', { name: 'Télécharger les certificats' }))
               .doesNotHaveAttribute('disabled');
           });
         });

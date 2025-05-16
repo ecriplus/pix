@@ -54,7 +54,7 @@ module('Acceptance | Certifications page', function (hooks) {
         // then
         assert.ok(
           screen.getByText(
-            'Dans cet onglet, vous retrouverez les résultats et les attestations de certification des élèves. Vous devez, dans un premier temps, importer la base élèves de votre établissement.',
+            'Dans cet onglet, vous retrouverez les résultats et les certificats des élèves. Vous devez, dans un premier temps, importer la base élèves de votre établissement.',
           ),
         );
       });
@@ -76,7 +76,7 @@ module('Acceptance | Certifications page', function (hooks) {
         // then
         assert.ok(
           screen.getByText(
-            'Sélectionnez la classe pour laquelle vous souhaitez exporter les résultats de certification (.csv) ou télécharger les attestations (.pdf). Vous pouvez filtrer cette liste en renseignant le nom de la classe directement dans le champ.',
+            'Sélectionnez la classe pour laquelle vous souhaitez exporter les résultats de certification (.csv) ou télécharger les certificats (.pdf). Vous pouvez filtrer cette liste en renseignant le nom de la classe directement dans le champ.',
           ),
         );
         assert.ok(screen.getByText('Exporter les résultats'));
