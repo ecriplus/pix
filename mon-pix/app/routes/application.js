@@ -54,7 +54,12 @@ export default class ApplicationRoute extends Route {
   @action
   error(error) {
     this.#stopPolling();
-    const isUnauthorizedError = error?.errors?.some((err) => err.status === '401');
+
+    const has403WithHTMLContentTypeError = () => {
+      return error?.errors?.some((err) => err.status === '403') && error?.error.includes('Payload (text/html;');
+    };
+
+    const isUnauthorizedError = has403WithHTMLContentTypeError() || error?.errors?.some((err) => err.status === '401');
     return !isUnauthorizedError;
   }
 

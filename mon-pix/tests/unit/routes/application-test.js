@@ -90,4 +90,51 @@ module('Unit | Route | application', function (hooks) {
       assert.ok(true);
     });
   });
+
+  module('error', function () {
+    module('when the error is a 401', function () {
+      test('should return false to prevent ember error handling', async function (assert) {
+        // given
+        const route = this.owner.lookup('route:application');
+
+        const currentError = { errors: [{ status: '401' }] };
+
+        // when
+        const err = await route.error(currentError);
+
+        // then
+        assert.false(err);
+      });
+    });
+
+    module('when the error is a 403 with HTML content-type', function () {
+      test('should return false to prevent ember error handling', async function (assert) {
+        // given
+        const route = this.owner.lookup('route:application');
+
+        const currentError = { error: '...Payload (text/html;...', errors: [{ status: '403' }] };
+
+        // when
+        const err = await route.error(currentError);
+
+        // then
+        assert.false(err);
+      });
+    });
+
+    module('when the error is not a 401 or a a 403 with HTML content-type', function () {
+      test('should return true to keep ember error handling', async function (assert) {
+        // given
+        const route = this.owner.lookup('route:application');
+
+        const currentError = { errors: [{ status: '404' }] };
+
+        // when
+        const err = await route.error(currentError);
+
+        // then
+        assert.true(err);
+      });
+    });
+  });
 });
