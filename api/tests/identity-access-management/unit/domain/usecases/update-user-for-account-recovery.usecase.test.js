@@ -3,6 +3,7 @@ import { AuthenticationMethod } from '../../../../../src/identity-access-managem
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { updateUserForAccountRecovery } from '../../../../../src/identity-access-management/domain/usecases/update-user-for-account-recovery.usecase.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
+import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | update-user-for-account-recovery', function () {
@@ -23,6 +24,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-for
       hasIdentityProviderPIX: sinon.stub(),
       create: sinon.stub(),
       updatePassword: sinon.stub(),
+      removeByUserIdAndIdentityProvider: sinon.stub(),
     };
     scoAccountRecoveryService = {
       retrieveAndValidateAccountRecoveryDemand: sinon.stub(),
@@ -222,6 +224,66 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-for
         email: 'newemail@example.net',
         emailConfirmedAt: now,
         lastTermsOfServiceValidatedAt: now,
+      },
+    };
+    expect(userRepository.updateWithEmailConfirmed).to.have.been.calledWithExactly(expectedParams);
+  });
+
+  it('sets username to null and removes GAR authentication method', async function () {
+    // given
+    await featureToggles.set('isNewAccountRecoveryEnabled', true);
+    const temporaryKey = 'temporarykey';
+    const password = 'pix123';
+    const hashedPassword = 'hashedpassword';
+    const newEmail = 'newemail@example.net';
+    const emailConfirmedAt = now;
+
+    const user = domainBuilder.buildUser({
+      id: 1234,
+      email: null,
+      username: 'manuella.philippe0702',
+    });
+    const userUpdate = new User({
+      ...user,
+      cgu: true,
+      email: newEmail,
+      emailConfirmedAt,
+      username: null,
+    });
+
+    scoAccountRecoveryService.retrieveAndValidateAccountRecoveryDemand.resolves({ userId: user.id, newEmail });
+    cryptoService.hashPassword.resolves(hashedPassword);
+    authenticationMethodRepository.hasIdentityProviderPIX.resolves(true);
+    userRepository.updateWithEmailConfirmed.resolves(userUpdate);
+
+    sinon.stub(DomainTransaction, 'execute').callsFake((lambda) => {
+      return lambda();
+    });
+
+    // when
+    await updateUserForAccountRecovery({
+      password,
+      temporaryKey,
+      userRepository,
+      authenticationMethodRepository,
+      scoAccountRecoveryService,
+      cryptoService,
+      accountRecoveryDemandRepository,
+    });
+
+    // then
+    expect(authenticationMethodRepository.removeByUserIdAndIdentityProvider).to.have.been.calledWith({
+      userId: user.id,
+      identityProvider: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
+    });
+    const expectedParams = {
+      id: 1234,
+      userAttributes: {
+        cgu: true,
+        email: 'newemail@example.net',
+        emailConfirmedAt: now,
+        lastTermsOfServiceValidatedAt: now,
+        username: null,
       },
     };
     expect(userRepository.updateWithEmailConfirmed).to.have.been.calledWithExactly(expectedParams);
