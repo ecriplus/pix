@@ -656,6 +656,133 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
     });
   });
 
+  describe('POST /api/admin/organizations/batch-archive', function () {
+    context('success case', function () {
+      it('returns a 204 http request', async function () {
+        const adminMember = databaseBuilder.factory.buildUser.withRole();
+        const organizationId1 = databaseBuilder.factory.buildOrganization({ archivedAt: null, archivedBy: null }).id;
+        const organizationId2 = databaseBuilder.factory.buildOrganization({ archivedAt: null, archivedBy: null }).id;
+        await databaseBuilder.commit();
+
+        const csvData = `ID de l'organisation\n${organizationId1}\n${organizationId2}\n`;
+
+        const boundary = 'simple-boundary-12345';
+
+        const payloadBuffer = _createMultipartPayload({
+          boundary,
+          filename: 'organizations.csv',
+          fieldName: 'file',
+          contentType: 'text/csv',
+          content: csvData,
+        });
+
+        const headers = {
+          ...generateAuthenticatedUserRequestHeaders({ userId: adminMember.id }),
+          'Content-Type': `multipart/form-data; boundary=${boundary}`,
+        };
+
+        const response = await server.inject({
+          method: 'POST',
+          url: `/api/admin/organizations/batch-archive`,
+          headers,
+          payload: payloadBuffer,
+        });
+
+        expect(response.statusCode).to.equal(204);
+
+        const archivedOrganization1 = await knex('organizations').where({ id: organizationId1 }).first();
+        const archivedOrganization2 = await knex('organizations').where({ id: organizationId2 }).first();
+
+        expect(archivedOrganization1.archivedBy).to.deep.equal(adminMember.id);
+        expect(archivedOrganization2.archivedBy).to.deep.equal(adminMember.id);
+        expect(archivedOrganization1.archivedAt).not.to.be.null;
+        expect(archivedOrganization2.archivedAt).not.to.be.null;
+      });
+    });
+
+    context('error cases', function () {
+      it('returns an error with meta info', async function () {
+        // given
+        const adminMember = databaseBuilder.factory.buildUser.withRole();
+        const organizationId1 = databaseBuilder.factory.buildOrganization({
+          archivedAt: null,
+          archivedBy: null,
+        }).id;
+        const organizationId2 = databaseBuilder.factory.buildOrganization({
+          archivedAt: null,
+          archivedBy: null,
+        }).id;
+
+        const nonExistingOrganizationId1 = 7895;
+        const nonExistingOrganizationId2 = 8513;
+
+        await databaseBuilder.commit();
+
+        const csvData =
+          `ID de l'organisation\n` +
+          `${organizationId1}\n` +
+          `${organizationId2}\n` +
+          `${nonExistingOrganizationId1}\n` +
+          `${nonExistingOrganizationId2}\n`;
+
+        const boundary = 'simple-boundary-12345';
+
+        const payloadBuffer = _createMultipartPayload({
+          boundary,
+          filename: 'organizations.csv',
+          fieldName: 'file',
+          contentType: 'text/csv',
+          content: csvData,
+        });
+
+        const headers = {
+          ...generateAuthenticatedUserRequestHeaders({ userId: adminMember.id }),
+          'Content-Type': `multipart/form-data; boundary=${boundary}`,
+        };
+
+        // when
+        const response = await server.inject({
+          method: 'POST',
+          url: `/api/admin/organizations/batch-archive`,
+          headers,
+          payload: payloadBuffer,
+        });
+
+        // then
+        const archivedOrganization1 = await knex('organizations').where({ id: organizationId1 }).first();
+        const archivedOrganization2 = await knex('organizations').where({ id: organizationId2 }).first();
+
+        expect(response.statusCode).to.equal(422);
+        expect(response.result.errors[0].code).to.deep.equal('ARCHIVE_ORGANIZATIONS_IN_BATCH_ERROR');
+        expect(response.result.errors[0].meta).to.deep.equal({
+          currentLine: 3,
+          totalLines: 4,
+        });
+        expect(archivedOrganization1.archivedBy).to.deep.equal(adminMember.id);
+        expect(archivedOrganization2.archivedBy).to.deep.equal(adminMember.id);
+        expect(archivedOrganization1.archivedAt).not.to.be.null;
+        expect(archivedOrganization2.archivedAt).not.to.be.null;
+      });
+
+      it('fails when the file payload is too large', async function () {
+        const buffer = Buffer.alloc(1048576 * 22, 'B'); // > 10 Mo buffer
+        const adminMember = databaseBuilder.factory.buildUser.withRole();
+
+        const options = {
+          method: 'POST',
+          url: '/api/admin/organizations/batch-archive',
+          headers: generateAuthenticatedUserRequestHeaders({ userId: adminMember.id }),
+          payload: buffer,
+        };
+
+        const response = await server.inject(options);
+        expect(response.statusCode).to.equal(413);
+        expect(response.result.errors[0].code).to.equal('PAYLOAD_TOO_LARGE');
+        expect(response.result.errors[0].meta.maxSize).to.equal('20');
+      });
+    });
+  });
+
   describe('GET /api/admin/organizations/add-organization-features/template', function () {
     it('responds with a 200', async function () {
       // given
@@ -1171,3 +1298,18 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
     });
   });
 });
+
+function _createMultipartPayload({ boundary, filename, fieldName, contentType, content }) {
+  return Buffer.from(
+    [
+      `--${boundary}`,
+      `Content-Disposition: form-data; name="${fieldName}"; filename="${filename}"`,
+      `Content-Type: ${contentType}`,
+      '',
+      content,
+      `--${boundary}--`,
+      '',
+    ].join('\r\n'),
+    'utf-8',
+  );
+}

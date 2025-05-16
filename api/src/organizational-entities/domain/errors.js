@@ -20,6 +20,13 @@ class ArchiveCertificationCentersInBatchError extends DomainError {
   }
 }
 
+class ArchiveOrganizationsInBatchError extends DomainError {
+  constructor({ meta } = {}) {
+    super('Error during organizations batch archiving', 'ARCHIVE_ORGANIZATIONS_IN_BATCH_ERROR');
+    this.meta = meta;
+  }
+}
+
 class DpoEmailInvalid extends DomainError {
   constructor({ code = 'DPO_EMAIL_INVALID', message = 'DPO email invalid', meta } = {}) {
     super(message);
@@ -69,6 +76,7 @@ class FeatureParamsNotProcessable extends DomainError {
 
 export {
   ArchiveCertificationCentersInBatchError,
+  ArchiveOrganizationsInBatchError,
   DpoEmailInvalid,
   FeatureNotFound,
   FeatureParamsNotProcessable,
