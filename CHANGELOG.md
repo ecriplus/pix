@@ -1,5 +1,17 @@
 # Pix Changelog
 
+## v5.112.0 (16/05/2025)
+
+
+### :rocket: Amélioration
+- [#12269](https://github.com/1024pix/pix/pull/12269) [FEATURE] Permettre la suppression d'une campaign-participation avec anonymisation (Pix-17709).
+
+### :building_construction: Tech
+- [#12292](https://github.com/1024pix/pix/pull/12292) [TECH] Automatiser la création de version Jira à la création d’un nouveau tag .
+
+### :bug: Correction
+- [#12272](https://github.com/1024pix/pix/pull/12272) [BUGFIX] Corrige un bug qui permettait la prise en compte de participations à des campagnes d'autres organisations dans les quêtes (PIX-17783).
+
 ## v5.111.0 (15/05/2025)
 
 
