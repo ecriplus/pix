@@ -1,15 +1,17 @@
+import fs from 'node:fs';
+
 import Joi from 'joi';
 
-import { checkCsvHeader, parseCsvWithHeader } from '../../infrastructure/helpers/csv.js';
+import { checkCsvHeader, parseCsvWithHeader, streamCsv } from '../../infrastructure/helpers/csv.js';
 
 /**
  * Create a parser for a CSV file with the given column schema
- * @param {Record<string, Joi.Schema>} columnSchema
+ * @param {Record<string, Joi.Schema>} columnSchemas
  * @returns {Promise<Array<Record<string, any>>>} parsed data
  */
-export function csvFileParser(columnSchema = []) {
+export function csvFileParser(columnSchemas = []) {
   return async (filePath) => {
-    const columnNames = columnSchema.map((column) => column.name);
+    const columnNames = columnSchemas.map((column) => column.name);
 
     await checkCsvHeader({ filePath, requiredFieldNames: columnNames });
 
@@ -17,13 +19,75 @@ export function csvFileParser(columnSchema = []) {
       header: true,
       skipEmptyLines: true,
       transform: (value, columnName) => {
-        const column = columnSchema.find((column) => column.name === columnName);
+        const column = columnSchemas.find((column) => column.name === columnName);
 
         if (!column) return value;
 
         return Joi.attempt(value, column.schema, value);
       },
     });
+  };
+}
+
+/**
+ * Stream CSV file by chunk with the given column schema
+ * @param {Record<string, Joi.Schema>} columnSchemas
+ * @returns {Promise<Function>} function to process each chunk
+ */
+export function csvFileStreamer(columnSchemas = []) {
+  return async (filePath) => {
+    return async (onChunk, chunkSize = 1) => {
+      const dataStream = fs.createReadStream(filePath);
+      const parseStream = await streamCsv({ header: true, skipEmptyLines: true });
+      dataStream.pipe(parseStream);
+
+      let chunk = [];
+      let processing = Promise.resolve();
+
+      return new Promise((resolve, reject) => {
+        parseStream.on('data', (row) => {
+          try {
+            const validatedRow = Joi.attempt(
+              row,
+              Joi.object().keys(
+                columnSchemas.reduce((acc, column) => {
+                  acc[column.name] = column.schema;
+                  return acc;
+                }, {}),
+              ),
+              row,
+            );
+
+            chunk.push(validatedRow);
+
+            if (chunk.length >= chunkSize) {
+              const chunkCopy = [...chunk];
+              chunk = [];
+              processing = processing.then(() => onChunk(chunkCopy));
+            }
+          } catch (error) {
+            parseStream.destroy();
+            reject(error);
+          }
+        });
+
+        parseStream.on('finish', () => {
+          processing
+            .then(() => {
+              if (chunk.length > 0) {
+                return onChunk(chunk);
+              }
+            })
+            .then(() => resolve(true))
+            .catch(reject);
+        });
+
+        parseStream.on('error', (error) => {
+          parseStream.destroy();
+          reject(error);
+        });
+      });
+    };
   };
 }
 

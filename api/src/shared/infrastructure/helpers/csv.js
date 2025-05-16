@@ -87,6 +87,10 @@ async function parseCsvData(cleanedData, options) {
   return data;
 }
 
+async function streamCsv(options) {
+  return papa.parse(papa.NODE_STREAM_INPUT, options);
+}
+
 const csvHelper = { checkCsvHeader, parseCsvWithHeader, parseCsvData, readCsvFile };
 
-export { checkCsvHeader, csvHelper, parseCsvData, parseCsvWithHeader };
+export { checkCsvHeader, csvHelper, parseCsvData, parseCsvWithHeader, streamCsv };

@@ -12,7 +12,7 @@ import { usecases } from '../domain/usecases/index.js';
 const DEFAULT_BATCH_SIZE = 200;
 const DEFAULT_THROTTE_DELAY = 1000;
 
-const columnsSchemas = [
+const columnSchemas = [
   { name: 'Organization ID', schema: Joi.number() },
   { name: 'email', schema: Joi.string().trim().replace(' ', '').lowercase().email() },
   { name: 'locale', schema: Joi.string().trim().lowercase() },
@@ -41,7 +41,7 @@ export class SendOrganizationInvitationsScript extends Script {
           type: 'string',
           describe: 'The file path',
           demandOption: true,
-          coerce: csvFileParser(columnsSchemas),
+          coerce: csvFileParser(columnSchemas),
         },
         batchSize: {
           type: 'number',

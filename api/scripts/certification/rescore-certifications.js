@@ -8,7 +8,7 @@ import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
 import { handlersAsServices } from '../../src/shared/domain/events/index.js';
 
-const columnsSchemas = [{ name: 'certificationCourseId', schema: Joi.number() }];
+const columnSchemas = [{ name: 'certificationCourseId', schema: Joi.number() }];
 
 export class RescoreCertificationScript extends Script {
   constructor(services = handlersAsServices) {
@@ -21,7 +21,7 @@ export class RescoreCertificationScript extends Script {
           describe:
             'CSV File with only one column with certification-courses.id (integer) to process. Need `certificationCourseId`',
           demandOption: true,
-          coerce: csvFileParser(columnsSchemas),
+          coerce: csvFileParser(columnSchemas),
         },
       },
     });

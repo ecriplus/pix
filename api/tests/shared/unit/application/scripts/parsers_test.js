@@ -6,6 +6,7 @@ import {
   commaSeparatedNumberParser,
   commaSeparatedStringParser,
   csvFileParser,
+  csvFileStreamer,
   isoDateParser,
 } from '../../../../../src/shared/application/scripts/parsers.js';
 import { catchErr, expect } from '../../../../test-helper.js';
@@ -17,37 +18,115 @@ describe('Shared | Unit | Application | Parsers', function () {
     it('parses a CSV with the given schema', async function () {
       // given
       const validFilePath = `${__dirname}files/valid.csv`;
-      const columnsSchema = [
+      const columnSchemas = [
         { name: 'foo', schema: Joi.string() },
         { name: 'bar', schema: Joi.string().email() },
       ];
 
       // when
-      const parser = csvFileParser(columnsSchema);
+      const parser = csvFileParser(columnSchemas);
       const result = await parser(validFilePath);
 
       // then
       expect(result).to.deep.equal([
         { foo: 'hello', bar: 'world@email.com' },
         { foo: 'baz', bar: 'someone@example.net' },
+        { foo: 'bob', bar: 'john@example.net' },
       ]);
     });
 
     it('throws an error when CSV is invalid', async function () {
       // given
       const invalidFilePath = `${__dirname}files/invalid.csv`;
-      const columnsSchema = [
+      const columnSchemas = [
         { name: 'foo', schema: Joi.string() },
         { name: 'bar', schema: Joi.string().email() },
       ];
 
       // when
-      const parser = csvFileParser(columnsSchema);
+      const parser = csvFileParser(columnSchemas);
       const error = await catchErr(parser)(invalidFilePath);
 
       // then
       expect(error).to.be.instanceOf(Joi.ValidationError);
       expect(error.message).to.equal('BOOMEMAIL "value" must be a valid email');
+    });
+  });
+
+  describe('csvFileStreamer', function () {
+    it('streams a CSV by row with the given schema', async function () {
+      // given
+      const validFilePath = `${__dirname}files/valid.csv`;
+      const columnSchemas = [
+        { name: 'foo', schema: Joi.string() },
+        { name: 'bar', schema: Joi.string().email() },
+      ];
+
+      // when
+      const streamer = await csvFileStreamer(columnSchemas);
+      const fileStream = await streamer(validFilePath);
+
+      const chunks = [];
+      await fileStream((chunk) => {
+        chunks.push(chunk);
+      });
+
+      // then
+      expect(chunks).to.deep.equal([
+        [{ foo: 'hello', bar: 'world@email.com' }],
+        [{ foo: 'baz', bar: 'someone@example.net' }],
+        [{ foo: 'bob', bar: 'john@example.net' }],
+      ]);
+    });
+
+    it('streams a CSV by chunk with the given schema', async function () {
+      // given
+      const validFilePath = `${__dirname}files/valid.csv`;
+      const columnSchemas = [
+        { name: 'foo', schema: Joi.string() },
+        { name: 'bar', schema: Joi.string().email() },
+      ];
+
+      // when
+      const chunkSize = 2;
+      const streamer = await csvFileStreamer(columnSchemas);
+      const fileStream = await streamer(validFilePath);
+
+      const chunks = [];
+      await fileStream((chunk) => {
+        chunks.push(chunk);
+      }, chunkSize);
+
+      // then
+      expect(chunks).to.deep.equal([
+        [
+          { foo: 'hello', bar: 'world@email.com' },
+          { foo: 'baz', bar: 'someone@example.net' },
+        ],
+        [{ foo: 'bob', bar: 'john@example.net' }],
+      ]);
+    });
+
+    it('throws an error when CSV is invalid', async function () {
+      // given
+      const invalidFilePath = `${__dirname}files/invalid.csv`;
+      const columnSchemas = [
+        { name: 'foo', schema: Joi.string() },
+        { name: 'bar', schema: Joi.string().email() },
+      ];
+
+      // when
+      const streamer = await csvFileStreamer(columnSchemas);
+      const fileStream = await streamer(invalidFilePath);
+
+      const chunks = [];
+      const error = await catchErr(fileStream)((chunk) => {
+        chunks.push(chunk);
+      });
+
+      // then
+      expect(error).to.be.instanceOf(Joi.ValidationError);
+      expect(error.message).to.equal('"bar" must be a valid email');
     });
   });
 
