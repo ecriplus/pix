@@ -16,7 +16,9 @@ const blockInputSchema = Joi.object({
     .unique()
     .items(Joi.string().valid('t1', 't2', 't3'))
     .required(),
-  solutions: Joi.array().items(Joi.string().min(1).required()).required(),
+  solutions: Joi.array()
+    .items(Joi.alternatives(Joi.string().min(1).required(), Joi.number().min(1).required()))
+    .required(),
 }).required();
 
 const blockSelectSchema = Joi.object({
