@@ -9,7 +9,7 @@ import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js
 
 describe('Integration | Identity Access Management | Domain | UseCase | anonymize-user', function () {
   let clock;
-  const now = new Date('2003-04-05T03:04:05Z');
+  const now = new Date('2024-04-05T03:04:05Z');
 
   beforeEach(function () {
     clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
@@ -107,7 +107,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
 
     const anonymizedUser = await knex('users').where({ id: user.id }).first();
     expect(anonymizedUser.createdAt.toISOString()).to.equal('2012-12-01T00:00:00.000Z');
-    expect(anonymizedUser.updatedAt.toISOString()).to.equal('2023-03-01T00:00:00.000Z');
+    expect(anonymizedUser.updatedAt.toISOString()).to.equal('2024-04-01T00:00:00.000Z');
     expect(anonymizedUser.firstName).to.equal('(anonymised)');
     expect(anonymizedUser.lastName).to.equal('(anonymised)');
     expect(anonymizedUser.email).to.be.null;

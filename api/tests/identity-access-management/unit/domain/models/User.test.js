@@ -655,6 +655,17 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
   });
 
   describe('#anonymize', function () {
+    let clock;
+    const now = new Date('2023-09-19T01:02:03Z');
+
+    beforeEach(function () {
+      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    });
+
+    afterEach(async function () {
+      clock.restore();
+    });
+
     it('anonymizes user info', function () {
       // given
       const adminId = 1;
@@ -680,7 +691,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
       expect(anonymizedUser.lastPixCertifTermsOfServiceValidatedAt).to.be.null;
       expect(anonymizedUser.lastDataProtectionPolicySeenAt).to.be.null;
       expect(anonymizedUser.createdAt.toISOString()).to.equal('2012-12-01T00:00:00.000Z');
-      expect(anonymizedUser.updatedAt.toISOString()).to.equal('2023-03-01T00:00:00.000Z');
+      expect(anonymizedUser.updatedAt.toISOString()).to.equal('2023-09-01T00:00:00.000Z');
     });
   });
 });
