@@ -8,7 +8,7 @@ import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
 import { Assessment } from '../../src/shared/domain/models/index.js';
 
-const columnsSchemas = [
+const columnSchemas = [
   { name: 'certificationChallengeId', schema: Joi.number() },
   { name: 'answerId', schema: Joi.number() },
   { name: 'completionDate', schema: Joi.string() },
@@ -25,7 +25,7 @@ export class FixDoubledAnswers extends Script {
           describe:
             'CSV File with three columns with certificationChallengeIds (integer), answerIds (integer) and completion date (string) to process',
           demandOption: true,
-          coerce: csvFileParser(columnsSchemas),
+          coerce: csvFileParser(columnSchemas),
         },
         assessmentId: {
           type: 'integer',

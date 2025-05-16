@@ -7,7 +7,8 @@ import { Script } from '../../shared/application/scripts/script.js';
 import { ScriptRunner } from '../../shared/application/scripts/script-runner.js';
 import { DomainTransaction } from '../../shared/domain/DomainTransaction.js';
 import { evaluationUsecases } from '../domain/usecases/index.js';
-const columnsSchemas = [
+
+const columnSchemas = [
   { name: 'targetProfileId', schema: Joi.number().integer().positive().required() },
   { name: 'level', schema: Joi.number().integer().min(0).required() },
   { name: 'title', schema: Joi.string().max(255).required() },
@@ -24,7 +25,7 @@ class AddMultipleLevelStagesScript extends Script {
           type: 'string',
           describe: 'CSV File containing multiple stages to add',
           demandOption: true,
-          coerce: csvFileParser(columnsSchemas),
+          coerce: csvFileParser(columnSchemas),
         },
       },
     });

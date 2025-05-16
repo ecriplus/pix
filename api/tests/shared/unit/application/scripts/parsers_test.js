@@ -18,13 +18,13 @@ describe('Shared | Unit | Application | Parsers', function () {
     it('parses a CSV with the given schema', async function () {
       // given
       const validFilePath = `${__dirname}files/valid.csv`;
-      const columnsSchema = [
+      const columnSchemas = [
         { name: 'foo', schema: Joi.string() },
         { name: 'bar', schema: Joi.string().email() },
       ];
 
       // when
-      const parser = csvFileParser(columnsSchema);
+      const parser = csvFileParser(columnSchemas);
       const result = await parser(validFilePath);
 
       // then
@@ -38,13 +38,13 @@ describe('Shared | Unit | Application | Parsers', function () {
     it('throws an error when CSV is invalid', async function () {
       // given
       const invalidFilePath = `${__dirname}files/invalid.csv`;
-      const columnsSchema = [
+      const columnSchemas = [
         { name: 'foo', schema: Joi.string() },
         { name: 'bar', schema: Joi.string().email() },
       ];
 
       // when
-      const parser = csvFileParser(columnsSchema);
+      const parser = csvFileParser(columnSchemas);
       const error = await catchErr(parser)(invalidFilePath);
 
       // then
@@ -57,13 +57,13 @@ describe('Shared | Unit | Application | Parsers', function () {
     it('streams a CSV by row with the given schema', async function () {
       // given
       const validFilePath = `${__dirname}files/valid.csv`;
-      const columnsSchema = [
+      const columnSchemas = [
         { name: 'foo', schema: Joi.string() },
         { name: 'bar', schema: Joi.string().email() },
       ];
 
       // when
-      const streamer = await csvFileStreamer(columnsSchema);
+      const streamer = await csvFileStreamer(columnSchemas);
       const fileStream = await streamer(validFilePath);
 
       const chunks = [];
@@ -82,14 +82,14 @@ describe('Shared | Unit | Application | Parsers', function () {
     it('streams a CSV by chunk with the given schema', async function () {
       // given
       const validFilePath = `${__dirname}files/valid.csv`;
-      const columnsSchema = [
+      const columnSchemas = [
         { name: 'foo', schema: Joi.string() },
         { name: 'bar', schema: Joi.string().email() },
       ];
 
       // when
       const chunkSize = 2;
-      const streamer = await csvFileStreamer(columnsSchema);
+      const streamer = await csvFileStreamer(columnSchemas);
       const fileStream = await streamer(validFilePath);
 
       const chunks = [];
@@ -110,13 +110,13 @@ describe('Shared | Unit | Application | Parsers', function () {
     it('throws an error when CSV is invalid', async function () {
       // given
       const invalidFilePath = `${__dirname}files/invalid.csv`;
-      const columnsSchema = [
+      const columnSchemas = [
         { name: 'foo', schema: Joi.string() },
         { name: 'bar', schema: Joi.string().email() },
       ];
 
       // when
-      const streamer = await csvFileStreamer(columnsSchema);
+      const streamer = await csvFileStreamer(columnSchemas);
       const fileStream = await streamer(invalidFilePath);
 
       const chunks = [];

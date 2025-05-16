@@ -5,7 +5,7 @@ import { Script } from '../../shared/application/scripts/script.js';
 import { ScriptRunner } from '../../shared/application/scripts/script-runner.js';
 import { usecases } from '../domain/usecases/index.js';
 
-const columnsSchemas = [
+const columnSchemas = [
   { name: 'certificationCenterId', schema: Joi.number() },
   { name: 'firstName', schema: Joi.string().trim().optional() },
   { name: 'lastName', schema: Joi.string().trim().optional() },
@@ -22,7 +22,7 @@ export class AddOrUpdateCertificationCentersDpoInfoScript extends Script {
           type: 'string',
           describe: 'CSV File to process',
           demandOption: true,
-          coerce: csvFileParser(columnsSchemas),
+          coerce: csvFileParser(columnSchemas),
         },
       },
     });

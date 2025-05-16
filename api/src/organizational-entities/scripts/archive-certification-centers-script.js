@@ -5,7 +5,7 @@ import { Script } from '../../shared/application/scripts/script.js';
 import { ScriptRunner } from '../../shared/application/scripts/script-runner.js';
 import { usecases } from '../domain/usecases/index.js';
 
-const columnsSchemas = [
+const columnSchemas = [
   { name: 'certificationCenterId', schema: Joi.number().required() },
   { name: 'archivedBy', schema: Joi.number().required() },
 ];
@@ -20,7 +20,7 @@ export class ArchiveCertificationCentersScript extends Script {
           type: 'string',
           describe: 'The file path',
           demandOption: true,
-          coerce: csvFileParser(columnsSchemas),
+          coerce: csvFileParser(columnSchemas),
         },
         dryRun: {
           type: 'boolean',
