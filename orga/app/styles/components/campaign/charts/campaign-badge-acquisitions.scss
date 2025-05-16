@@ -2,32 +2,32 @@
 @use 'pix-design-tokens/breakpoints';
 
 .badge-acquisitions {
+  width: 100%;
+
   @include breakpoints.device-is('desktop') {
     width: calc(53% - var(--pix-spacing-6x));
   }
 
-  width: 100%;
-
   &__list {
-  display: grid;
-  grid-row-gap: var(--pix-spacing-1x);
-  grid-column-gap: var(--pix-spacing-4x);
-  grid-template-rows: repeat(1, 1fr);
-  grid-template-columns: repeat(2, 1fr);
-  width: fit-content;
+    display: grid;
+    grid-row-gap: var(--pix-spacing-1x);
+    grid-column-gap: var(--pix-spacing-4x);
+    grid-template-rows: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    width: fit-content;
 
-  li:nth-child(4n) {
-    flex-basis: 100%;
-}
-}
+    li:nth-child(4n) {
+      flex-basis: 100%;
+    }
+  }
 
-&__count{
-  @extend %pix-title-xs;
-}
+  &__count{
+    @extend %pix-title-xs;
+  }
 
-&__percentage {
-  @extend %pix-body-xs;
-}
+  &__percentage {
+    @extend %pix-body-xs;
+  }
 
   &__list-item {
     display: flex;
@@ -41,5 +41,5 @@
       height: 36px;
     }
 
-    }
+  }
 }

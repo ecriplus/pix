@@ -1,15 +1,15 @@
 @use 'pix-design-tokens/breakpoints';
 
 .stats {
-  @include breakpoints.device-is('desktop') {
-    flex-direction: row;
-  }
-
   display: flex;
   flex-direction: column;
   gap: var(--pix-spacing-6x);
   align-items: stretch;
   margin-bottom: var(--pix-spacing-6x);
+
+  @include breakpoints.device-is('desktop') {
+    flex-direction: row;
+  }
 }
 
 .participants {
