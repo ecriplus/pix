@@ -1,7 +1,7 @@
-import PixGauge from '@1024pix/pix-ui/components/pix-gauge';
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { t } from 'ember-intl';
+import CoverRateGauge from 'pix-orga/components/statistics/cover-rate-gauge';
 
 import TagLevel from '../statistics/tag-level';
 
@@ -46,16 +46,7 @@ import TagLevel from '../statistics/tag-level';
             {{t "components.analysis-per-tubes-and-competences.table.column.positioning"}}
           </:header>
           <:cell>
-            <PixGauge
-              @isSmall={{true}}
-              @maxLevel={{tubeLevel.maxLevel}}
-              @reachedLevel={{tubeLevel.meanLevel}}
-              @label={{t
-                "components.analysis-per-tubes-and-competences.gauge.label"
-                maxLevel=tubeLevel.maxLevel
-                reachedLevel=tubeLevel.meanLevel
-              }}
-            />
+            <CoverRateGauge @hideMaxMin={{true}} @userLevel={{tubeLevel.meanLevel}} @tubeLevel={{tubeLevel.maxLevel}} />
           </:cell>
         </PixTableColumn>
 

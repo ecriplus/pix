@@ -18,6 +18,10 @@ export default class CoverRateGauge extends Component {
     return this.formatNumber(this.args.tubeLevel);
   }
 
+  get translation() {
+    return this.args.label || 'pages.statistics.gauge.label';
+  }
+
   formatNumber = (str) => {
     const num = Number(str);
     const oneDigitNum = num.toFixed(1);
@@ -36,18 +40,20 @@ export default class CoverRateGauge extends Component {
     <div class="cover-rate-gauge">
       <div class="cover-rate-gauge__container">
         <div
+          aria-hidden="true"
           class="cover-rate-gauge__level cover-rate-gauge__level--tube-level"
           style={{this.getGaugeSizeStyle this.tubeLevel withExtraPercentage=true}}
         >
           {{this.tubeLevel}}
         </div>
-        <div class="cover-rate-gauge__background">
+        <div class="cover-rate-gauge__background {{if @hideMaxMin ' cover-rate-gauge__background--hide-max-min'}}">
           <label for={{this.id}} class="screen-reader-only">{{t
-              "pages.statistics.gauge.label"
+              this.translation
               userLevel=this.userLevel
               tubeLevel=this.tubeLevel
             }}</label>
           <progress
+            aria-hidden="true"
             class="cover-rate-gauge__progress"
             id={{this.id}}
             max={{this.tubeLevel}}
@@ -58,6 +64,7 @@ export default class CoverRateGauge extends Component {
           </progress>
         </div>
         <div
+          aria-hidden="true"
           class="cover-rate-gauge__level cover-rate-gauge__level--user-level"
           style={{this.getGaugeSizeStyle this.userLevel withExtraPercentage=true}}
         >
