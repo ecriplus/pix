@@ -11,8 +11,9 @@ jobs:
 
     steps:
       - name: Get tag name and current date
-        run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-             echo "TODAY=$(date +%Y-%m-%d)" >> $GITHUB_ENV
+        run: |
+          echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+          echo "TODAY=$(date +%Y-%m-%d)" >> $GITHUB_ENV
 
 
       - name: Create version in Jira
