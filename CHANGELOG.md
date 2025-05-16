@@ -1,5 +1,20 @@
 # Pix Changelog
 
+## v5.113.0 (16/05/2025)
+
+
+### :rocket: Amélioration
+- [#12285](https://github.com/1024pix/pix/pull/12285) [FEATURE] Supprimer les méthode d'authentifications GAR et nom d'utilisateur lors de la sortie du sco (PIX-17509).
+- [#12288](https://github.com/1024pix/pix/pull/12288) [FEATURE] Streamer/Batch les lignes CSV du script d'anonymisation (PIX-17830).
+
+### :building_construction: Tech
+- [#12307](https://github.com/1024pix/pix/pull/12307) [TECH] Séparer 2 commandes dans la github action de création de version jira.
+- [#12268](https://github.com/1024pix/pix/pull/12268) [TECH] Migration DDD : migration de api/lib/infrastructure/authentication.js vers src/ (PIX-17797).
+- [#12295](https://github.com/1024pix/pix/pull/12295) [TECH] Retirer le script de rattrapage de donnée sur l'anonymisation (PIX-17841).
+
+### :arrow_up: Montée de version
+- [#12309](https://github.com/1024pix/pix/pull/12309) [BUMP] Update dependency @1024pix/pix-ui to ^55.18.2 (orga).
+
 ## v5.112.0 (16/05/2025)
 
 
