@@ -147,7 +147,7 @@ class User {
     return new User({
       ...this,
       createdAt: anonymizeGeneralizeDate(this.createdAt),
-      updatedAt: anonymizeGeneralizeDate(this.updatedAt),
+      updatedAt: anonymizeGeneralizeDate(new Date()),
       firstName: '(anonymised)',
       lastName: '(anonymised)',
       email: null,
