@@ -89,6 +89,7 @@
 
       .mission-name {
         @extend %pix-title-xs;
+
         min-height: 62px;
         margin-bottom: var(--pix-spacing-3x);
         text-align: center;
