@@ -52,7 +52,7 @@ module('Integration | Component | Module | Details', function (hooks) {
         sinon.assert.calledWithExactly(metrics.add, {
           event: 'custom-event',
           'pix-event-category': 'Modulix',
-          'pix-event-action': `Détails du module : ${module.id}`,
+          'pix-event-action': `Détails du module : ${module.slug}`,
           'pix-event-name': `Click sur le bouton Commencer un passage`,
         });
         assert.ok(true);
@@ -88,7 +88,7 @@ module('Integration | Component | Module | Details', function (hooks) {
           sinon.assert.calledWithExactly(metrics.add, {
             event: 'custom-event',
             'pix-event-category': 'Modulix',
-            'pix-event-action': `Détails du module : ${module.id}`,
+            'pix-event-action': `Détails du module : ${module.slug}`,
             'pix-event-name': `Click sur le bouton Commencer un passage`,
           });
           assert.ok(true);
@@ -123,7 +123,7 @@ module('Integration | Component | Module | Details', function (hooks) {
           sinon.assert.calledWithExactly(metrics.add, {
             event: 'custom-event',
             'pix-event-category': 'Modulix',
-            'pix-event-action': `Détails du module : ${module.id}`,
+            'pix-event-action': `Détails du module : ${module.slug}`,
             'pix-event-name': `Ouvre la modale d'alerte de largeur d'écran`,
           });
           assert.ok(true);
@@ -170,7 +170,7 @@ module('Integration | Component | Module | Details', function (hooks) {
             sinon.assert.calledWithExactly(metrics.add, {
               event: 'custom-event',
               'pix-event-category': 'Modulix',
-              'pix-event-action': `Détails du module : ${module.id}`,
+              'pix-event-action': `Détails du module : ${module.slug}`,
               'pix-event-name': `Click sur le bouton Commencer un passage en petit écran`,
             });
             assert.ok(true);
@@ -217,7 +217,7 @@ module('Integration | Component | Module | Details', function (hooks) {
             sinon.assert.calledWithExactly(metrics.add, {
               event: 'custom-event',
               'pix-event-category': 'Modulix',
-              'pix-event-action': `Détails du module : ${module.id}`,
+              'pix-event-action': `Détails du module : ${module.slug}`,
               'pix-event-name': `Ferme la modale d'alerte de largeur d'écran`,
             });
             assert.ok(true);

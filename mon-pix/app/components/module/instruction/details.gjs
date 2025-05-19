@@ -27,7 +27,7 @@ export default class ModulixDetails extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
-      'pix-event-action': `Détails du module : ${this.args.module.id}`,
+      'pix-event-action': `Détails du module : ${this.args.module.slug}`,
       'pix-event-name': `Click sur le bouton Commencer un passage`,
     });
     this.router.transitionTo('module.passage', this.args.module.id);
@@ -38,7 +38,7 @@ export default class ModulixDetails extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
-      'pix-event-action': `Détails du module : ${this.args.module.id}`,
+      'pix-event-action': `Détails du module : ${this.args.module.slug}`,
       'pix-event-name': `Click sur le bouton Commencer un passage en petit écran`,
     });
     this.router.transitionTo('module.passage', this.args.module.id);
@@ -49,7 +49,7 @@ export default class ModulixDetails extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
-      'pix-event-action': `Détails du module : ${this.args.module.id}`,
+      'pix-event-action': `Détails du module : ${this.args.module.slug}`,
       'pix-event-name': `Ouvre la modale d'alerte de largeur d'écran`,
     });
     this.isSmallScreenModalOpen = true;
@@ -60,7 +60,7 @@ export default class ModulixDetails extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
-      'pix-event-action': `Détails du module : ${this.args.module.id}`,
+      'pix-event-action': `Détails du module : ${this.args.module.slug}`,
       'pix-event-name': `Ferme la modale d'alerte de largeur d'écran`,
     });
     this.isSmallScreenModalOpen = false;

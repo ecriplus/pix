@@ -331,7 +331,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
           sinon.assert.calledWithExactly(metrics.add, {
             event: 'custom-event',
             'pix-event-category': 'Modulix',
-            'pix-event-action': `Passage du module : ${module.id}`,
+            'pix-event-action': `Passage du module : ${module.slug}`,
             'pix-event-name': `Click sur le bouton Étape 0 sur 1 de la barre de navigation`,
           });
           assert.ok(true);
@@ -405,7 +405,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
           sinon.assert.calledWithExactly(metrics.add, {
             event: 'custom-event',
             'pix-event-category': 'Modulix',
-            'pix-event-action': `Passage du module : ${module.id}`,
+            'pix-event-action': `Passage du module : ${module.slug}`,
             'pix-event-name': `Click sur le bouton Étape 1 sur 1 de la barre de navigation`,
           });
           assert.ok(true);
@@ -478,7 +478,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       sinon.assert.calledWithExactly(metrics.add, {
         event: 'custom-event',
         'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.id}`,
+        'pix-event-action': `Passage du module : ${module.slug}`,
         'pix-event-name': `Click sur le bouton passer du grain : ${grain1.id}`,
       });
       assert.ok(true);
@@ -612,7 +612,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       sinon.assert.calledWithExactly(metrics.add, {
         event: 'custom-event',
         'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.id}`,
+        'pix-event-action': `Passage du module : ${module.slug}`,
         'pix-event-name': `Click sur le bouton continuer du grain : ${grain1.id}`,
       });
       assert.ok(true);
@@ -702,7 +702,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       sinon.assert.calledWithExactly(metrics.add, {
         event: 'custom-event',
         'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.id}`,
+        'pix-event-action': `Passage du module : ${module.slug}`,
         'pix-event-name': `Click sur le bouton vérifier de l'élément : ${qcuElement.id}`,
       });
       assert.ok(true);
@@ -738,7 +738,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       sinon.assert.calledWithExactly(metrics.add, {
         event: 'custom-event',
         'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.id}`,
+        'pix-event-action': `Passage du module : ${module.slug}`,
         'pix-event-name': `Click sur le bouton réessayer de l'élément : ${element.id}`,
       });
       assert.ok(true);
@@ -818,7 +818,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       sinon.assert.calledOnceWithExactly(metrics.add, {
         event: 'custom-event',
         'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.id}`,
+        'pix-event-action': `Passage du module : ${module.slug}`,
         'pix-event-name': `Click sur le bouton 'no' de la flashcard : ${firstCard.id}`,
       });
       assert.ok(true);
@@ -857,7 +857,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       sinon.assert.calledWithExactly(metrics.add, {
         event: 'custom-event',
         'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.id}`,
+        'pix-event-action': `Passage du module : ${module.slug}`,
         'pix-event-name': `Click sur le bouton alternative textuelle : ${element.id}`,
       });
       assert.ok(true);
@@ -899,7 +899,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
         sinon.assert.calledWithExactly(metrics.add, {
           event: 'custom-event',
           'pix-event-category': 'Modulix',
-          'pix-event-action': `Passage du module : ${module.id}`,
+          'pix-event-action': `Passage du module : ${module.slug}`,
           'pix-event-name': `Click sur le bouton alternative textuelle : ${imageElement.id}`,
         });
         assert.ok(true);
@@ -940,7 +940,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       sinon.assert.calledWithExactly(metrics.add, {
         event: 'custom-event',
         'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.id}`,
+        'pix-event-action': `Passage du module : ${module.slug}`,
         'pix-event-name': `Click sur le bouton transcription : ${element.id}`,
       });
       assert.ok(true);
@@ -983,7 +983,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
         sinon.assert.calledWithExactly(metrics.add, {
           event: 'custom-event',
           'pix-event-category': 'Modulix',
-          'pix-event-action': `Passage du module : ${module.id}`,
+          'pix-event-action': `Passage du module : ${module.slug}`,
           'pix-event-name': `Click sur le bouton transcription : ${videoElement.id}`,
         });
         assert.ok(true);
@@ -1025,7 +1025,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       sinon.assert.calledWithExactly(metrics.add, {
         event: 'custom-event',
         'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.id}`,
+        'pix-event-action': `Passage du module : ${module.slug}`,
         'pix-event-name': `Click sur le bouton suivant de l'étape 1 du stepper dans le grain : ${grain.id}`,
       });
       assert.ok(true);
@@ -1193,7 +1193,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       sinon.assert.calledWithExactly(metrics.add, {
         event: 'custom-event',
         'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.id}`,
+        'pix-event-action': `Passage du module : ${module.slug}`,
         'pix-event-name': `Click sur le bouton Play : ${videoElement.id}`,
       });
       assert.ok(true);
@@ -1238,7 +1238,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
         sinon.assert.calledWithExactly(metrics.add, {
           event: 'custom-event',
           'pix-event-category': 'Modulix',
-          'pix-event-action': `Passage du module : ${module.id}`,
+          'pix-event-action': `Passage du module : ${module.slug}`,
           'pix-event-name': `Click sur le bouton Play : ${videoElement.id}`,
         });
         assert.ok(true);
@@ -1287,7 +1287,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       sinon.assert.calledWithExactly(metrics.add, {
         event: 'custom-event',
         'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.id}`,
+        'pix-event-action': `Passage du module : ${module.slug}`,
         'pix-event-name': `Click sur le bouton Télécharger au format ${downloadedFormat} de ${downloadElement.id}`,
       });
       assert.ok(true);
@@ -1333,7 +1333,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
         sinon.assert.calledWithExactly(metrics.add, {
           event: 'custom-event',
           'pix-event-category': 'Modulix',
-          'pix-event-action': `Passage du module : ${module.id}`,
+          'pix-event-action': `Passage du module : ${module.slug}`,
           'pix-event-name': `Click sur le bouton Télécharger au format ${downloadedFormat} de ${downloadElement.id}`,
         });
         assert.ok(true);
@@ -1384,7 +1384,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       sinon.assert.calledWithExactly(metrics.add, {
         event: 'custom-event',
         'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.id}`,
+        'pix-event-action': `Passage du module : ${module.slug}`,
         'pix-event-name': `Click sur le bouton Terminer du grain : ${grain.id}`,
       });
       sinon.assert.calledWithExactly(passageEventsService.record, {
@@ -1428,7 +1428,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       sinon.assert.calledWithExactly(metrics.add, {
         event: 'custom-event',
         'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.id}`,
+        'pix-event-action': `Passage du module : ${module.slug}`,
         'pix-event-name': `Click sur le bouton Étape 1 sur 2 de la barre de navigation`,
       });
       assert.ok(true);
@@ -1508,7 +1508,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       sinon.assert.calledWithExactly(metrics.add, {
         event: 'custom-event',
         'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.id}`,
+        'pix-event-action': `Passage du module : ${module.slug}`,
         'pix-event-name': `Click sur le grain ${grain1.id} de la barre de navigation`,
       });
       assert.ok(true);
@@ -1552,7 +1552,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       sinon.assert.calledWithExactly(metrics.add, {
         event: 'custom-event',
         'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.id}`,
+        'pix-event-action': `Passage du module : ${module.slug}`,
         'pix-event-name': `Ouverture de l'élément Expand : ${expandElement.id}`,
       });
       assert.ok(true);
@@ -1597,7 +1597,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
         sinon.assert.calledWithExactly(metrics.add, {
           event: 'custom-event',
           'pix-event-category': 'Modulix',
-          'pix-event-action': `Passage du module : ${module.id}`,
+          'pix-event-action': `Passage du module : ${module.slug}`,
           'pix-event-name': `Ouverture de l'élément Expand : ${expandElement.id}`,
         });
         assert.ok(true);
@@ -1645,7 +1645,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       sinon.assert.calledWithExactly(metrics.add, {
         event: 'custom-event',
         'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.id}`,
+        'pix-event-action': `Passage du module : ${module.slug}`,
         'pix-event-name': `Fermeture de l'élément Expand : ${expandElement.id}`,
       });
       assert.ok(true);

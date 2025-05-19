@@ -56,7 +56,7 @@ export default class ModulePassage extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.id}`,
+      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
       'pix-event-name': `Click sur le bouton passer du grain : ${currentGrain.id}`,
     });
   }
@@ -70,7 +70,7 @@ export default class ModulePassage extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.id}`,
+      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
       'pix-event-name': `Click sur le bouton continuer du grain : ${currentGrain.id}`,
     });
   }
@@ -82,7 +82,7 @@ export default class ModulePassage extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.id}`,
+      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
       'pix-event-name': `Click sur le bouton suivant de l'étape ${currentStepPosition} du stepper dans le grain : ${currentGrain.id}`,
     });
   }
@@ -117,7 +117,7 @@ export default class ModulePassage extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.id}`,
+      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
       'pix-event-name': `Click sur le bouton Terminer du grain : ${grainId}`,
     });
     this.passageEvents.record({
@@ -141,7 +141,7 @@ export default class ModulePassage extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.id}`,
+      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
       'pix-event-name': `Click sur le bouton vérifier de l'élément : ${answerData.element.id}`,
     });
   }
@@ -151,7 +151,7 @@ export default class ModulePassage extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.id}`,
+      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
       'pix-event-name': `Click sur le bouton '${userAssessment}' de la flashcard : ${cardId}`,
     });
   }
@@ -161,7 +161,7 @@ export default class ModulePassage extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.id}`,
+      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
       'pix-event-name': `Click sur le bouton réessayer de l'élément : ${answerData.element.id}`,
     });
   }
@@ -171,7 +171,7 @@ export default class ModulePassage extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.id}`,
+      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
       'pix-event-name': `Click sur le bouton alternative textuelle : ${imageElementId}`,
     });
   }
@@ -181,7 +181,7 @@ export default class ModulePassage extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.id}`,
+      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
       'pix-event-name': `Click sur le bouton transcription : ${videoElementId}`,
     });
   }
@@ -191,7 +191,7 @@ export default class ModulePassage extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.id}`,
+      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
       'pix-event-name': `Click sur le bouton Play : ${elementId}`,
     });
   }
@@ -201,7 +201,7 @@ export default class ModulePassage extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.id}`,
+      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
       'pix-event-name': `Click sur le bouton Télécharger au format ${downloadedFormat} de ${elementId}`,
     });
   }
@@ -211,7 +211,7 @@ export default class ModulePassage extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.id}`,
+      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
       'pix-event-name': `Click sur le bouton Étape ${this.navbarCurrentPassageStep} sur ${this.displayableGrainsInNavbar.length} de la barre de navigation`,
     });
   }
@@ -224,7 +224,7 @@ export default class ModulePassage extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.id}`,
+      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
       'pix-event-name': `Click sur le grain ${grainId} de la barre de navigation`,
     });
   }
@@ -235,7 +235,7 @@ export default class ModulePassage extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.id}`,
+      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
       'pix-event-name': `${eventToggle} de l'élément Expand : ${elementId}`,
     });
   }
