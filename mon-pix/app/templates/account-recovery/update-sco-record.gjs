@@ -28,6 +28,8 @@ import PixLogo from 'mon-pix/components/pix-logo';
               @email={{@model.email}}
               @updateRecord={{@controller.updateRecord}}
               @isLoading={{@controller.isLoading}}
+              @hasScoUsername={{@model.hasScoUsername}}
+              @hasGarAuthenticationMethod={{@model.hasGarAuthenticationMethod}}
             />
           {{/if}}
         </div>

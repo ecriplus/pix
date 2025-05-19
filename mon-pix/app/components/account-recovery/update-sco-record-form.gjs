@@ -5,10 +5,12 @@ import PixInputPassword from '@1024pix/pix-ui/components/pix-input-password';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { htmlSafe } from '@ember/template';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import t from 'ember-intl/helpers/t';
 import not from 'ember-truth-helpers/helpers/not';
+import or from 'ember-truth-helpers/helpers/or';
 import isEmpty from 'lodash/isEmpty';
 
 import isPasswordValid from '../../utils/password-validator';
@@ -34,11 +36,27 @@ export default class UpdateScoRecordFormComponent extends Component {
     <h1 class="account-recovery__content--title">
       {{t "pages.account-recovery.update-sco-record.welcome-message" firstName=@firstName}}
     </h1>
-
-    <p class="account-recovery__content--information-text--details">
-      {{t "pages.account-recovery.update-sco-record.fill-password"}}
-    </p>
-
+    {{#if this.isNewAccountRecoveryEnabled}}
+      <p id="choose-password" class="account-recovery__content--information-text--details">
+        {{t "pages.account-recovery.update-sco-record.form.choose-password"}}
+      </p>
+      {{#if (or @hasGarAuthenticationMethod @hasScoUsername)}}
+        <p id="removal-notice" class="account-recovery__content--information-text--details">
+          {{t
+            "pages.account-recovery.update-sco-record.form.authentication-methods-removal-notice"
+            connections=this.scoConnectionsText
+            htmlSafe=true
+          }}
+        </p>
+        <p id="new-connection-info" class="account-recovery__content--information-text--details">
+          {{t "pages.account-recovery.update-sco-record.form.new-connection-info"}}
+        </p>
+      {{/if}}
+    {{else}}
+      <p class="account-recovery__content--information-text--details">
+        {{t "pages.account-recovery.update-sco-record.fill-password"}}
+      </p>
+    {{/if}}
     <form onSubmit={{this.submitUpdate}} class="account-recovery__content--form">
       <div class="account-recovery__content--form-fields">
         <PixInput @id="email" @value={{@email}} @disabled={{true}}>
@@ -83,7 +101,7 @@ export default class UpdateScoRecordFormComponent extends Component {
   </template>
   @service intl;
   @service url;
-
+  @service featureToggles;
   @tracked cguAndProtectionPoliciesAccepted = false;
   @tracked password = '';
   @tracked passwordValidation = new PasswordValidation();
@@ -103,6 +121,38 @@ export default class UpdateScoRecordFormComponent extends Component {
       this.cguAndProtectionPoliciesAccepted &&
       !this.args.isLoading
     );
+  }
+
+  get isNewAccountRecoveryEnabled() {
+    return this.featureToggles.featureToggles?.isNewAccountRecoveryEnabled;
+  }
+
+  get scoConnectionsText() {
+    const scoConnectionsTextParts = [];
+    const usernameConnection = this.intl.t('pages.account-recovery.update-sco-record.form.sco-connections.username');
+    const garConnection = this.intl.t('pages.account-recovery.update-sco-record.form.sco-connections.gar');
+    if (this.args.hasGarAuthenticationMethod) {
+      scoConnectionsTextParts.push(garConnection);
+    }
+    if (this.args.hasScoUsername) {
+      scoConnectionsTextParts.push(usernameConnection);
+    }
+    if (scoConnectionsTextParts.length === 0) {
+      return '';
+    }
+    const listFormatter = new Intl.ListFormat(this.intl.primaryLocale, {
+      style: 'long',
+      type: 'conjunction',
+    });
+    const formattedListParts = listFormatter.formatToParts(scoConnectionsTextParts);
+    const htmlParts = formattedListParts.map((part) => {
+      if (part.type === 'element') {
+        return `<strong>${part.value}</strong>`;
+      } else {
+        return part.value;
+      }
+    });
+    return htmlSafe(htmlParts.join(''));
   }
 
   @action
