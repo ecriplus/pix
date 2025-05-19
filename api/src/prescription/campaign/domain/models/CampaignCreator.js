@@ -1,6 +1,7 @@
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { CampaignTypes } from '../../../shared/domain/constants.js';
 import {
+  CampaignTypeError,
   OrganizationNotAuthorizedMultipleSendingAssessmentToCreateCampaignError,
   OrganizationNotAuthorizedToCreateCampaignError,
   UserNotAuthorizedToCreateCampaignError,
@@ -18,6 +19,10 @@ class CampaignCreator {
 
   createCampaign(campaignAttributes) {
     const { type, targetProfileId, multipleSendings, organizationId } = campaignAttributes;
+
+    if (!Object.values(CampaignTypes).includes(type)) {
+      throw new CampaignTypeError(type);
+    }
 
     if (type === CampaignTypes.ASSESSMENT) {
       this.#checkAssessmentCampaignCreationAllowed(targetProfileId);

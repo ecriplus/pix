@@ -6,6 +6,7 @@ import {
   emptySession,
   headers,
 } from '../../../../certification/shared/infrastructure/utils/csv/sessions-import.js';
+import { CampaignTypes } from '../../../../prescription/shared/domain/constants.js';
 import { FileValidationError } from '../../../domain/errors.js';
 import { csvHelper } from '../../helpers/csv.js';
 import { convertDateValue } from '../../utils/date-utils.js';
@@ -286,6 +287,7 @@ async function parseForCampaignsImport(cleanedData, { parseCsvData } = csvHelper
     name: data['Nom de la campagne*'],
     targetProfileId: data['Identifiant du profil cible*'],
     externalIdLabel: data["Libellé de l'identifiant externe"],
+    type: data['Type de campagne'] || CampaignTypes.ASSESSMENT,
     externalIdType:
       data["Libellé de l'identifiant externe"]?.trim()?.length > 0
         ? data["Type de l'identifiant externe"] || 'STRING'

@@ -41,6 +41,7 @@ describe('Unit | UseCase | campaign-administration | create-campaigns', function
     campaignsToCreate = [
       {
         organizationId: organization.id,
+        type: 'ASSESSMENT',
         name: 'My Campaign',
         targetProfileId: 3,
         creatorId: 2,
@@ -48,6 +49,7 @@ describe('Unit | UseCase | campaign-administration | create-campaigns', function
       },
       {
         organizationId: otherOrganization.id,
+        type: 'ASSESSMENT',
         name: 'My other Campaign',
         targetProfileId: 3,
         creatorId: 1,

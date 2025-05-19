@@ -1,5 +1,3 @@
-import { CampaignTypes } from '../../../shared/domain/constants.js';
-
 const createCampaigns = async function ({
   campaignsToCreate,
   campaignAdministrationRepository,
@@ -18,7 +16,6 @@ const createCampaigns = async function ({
 
     const campaignToCreate = await campaignCreator.createCampaign({
       ...campaign,
-      type: CampaignTypes.ASSESSMENT,
       code: generatedCampaignCode,
     });
     enrichedCampaignsData.push(campaignToCreate);

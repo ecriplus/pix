@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { emptySession } from '../../../../../../src/certification/shared/infrastructure/utils/csv/sessions-import.js';
+import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { FileValidationError } from '../../../../../../src/shared/domain/errors.js';
 import * as csvSerializer from '../../../../../../src/shared/infrastructure/serializers/csv/csv-serializer.js';
 import { logger } from '../../../../../../src/shared/infrastructure/utils/logger.js';
@@ -1505,11 +1506,11 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
 
   describe('#parseForCampaignsImport', function () {
     const headerCsv =
-      "Identifiant de l'organisation*;Nom de la campagne*;Identifiant du profil cible*;Libellé de l'identifiant externe;Identifiant du créateur*;Titre du parcours;Descriptif du parcours;Envoi multiple;Identifiant du propriétaire*;Texte de la page de fin de parcours;Texte du bouton de la page de fin de parcours;URL du bouton de la page de fin de parcours\n";
+      "Identifiant de l'organisation*;Type de campagne;Nom de la campagne*;Identifiant du profil cible*;Libellé de l'identifiant externe;Identifiant du créateur*;Titre du parcours;Descriptif du parcours;Envoi multiple;Identifiant du propriétaire*;Texte de la page de fin de parcours;Texte du bouton de la page de fin de parcours;URL du bouton de la page de fin de parcours\n";
 
     it('should return parsed campaign data', async function () {
       // given
-      const csv = `${headerCsv}1;chaussette;1234;numéro étudiant;789;titre 1;descriptif 1;Oui;45\n2;chapeau;1234;identifiant;666;titre 2;descriptif 2;Non;77\n3;chausson;1234;;123;titre 3;descriptif 3;Non;88;Bravo !;Cliquez ici;https://hmpg.net/`;
+      const csv = `${headerCsv}1;;chaussette;1234;numéro étudiant;789;titre 1;descriptif 1;Oui;45\n2;ASSESSMENT;chapeau;1234;identifiant;666;titre 2;descriptif 2;Non;77\n3;EXAM;chausson;1234;;123;titre 3;descriptif 3;Non;88;Bravo !;Cliquez ici;https://hmpg.net/`;
 
       // when
       const parsedData = await csvSerializer.parseForCampaignsImport(csv);
@@ -1518,6 +1519,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
       const expectedParsedData = [
         {
           organizationId: 1,
+          type: CampaignTypes.ASSESSMENT,
           name: 'chaussette',
           targetProfileId: 1234,
           externalIdLabel: 'numéro étudiant',
@@ -1533,6 +1535,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
         },
         {
           organizationId: 2,
+          type: 'ASSESSMENT',
           name: 'chapeau',
           targetProfileId: 1234,
           externalIdLabel: 'identifiant',
@@ -1548,6 +1551,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
         },
         {
           organizationId: 3,
+          type: 'EXAM',
           name: 'chausson',
           targetProfileId: 1234,
           externalIdLabel: '',
@@ -1568,7 +1572,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
     describe('when organizationId field is not valid', function () {
       it('should throw an error when empty', async function () {
         // given
-        const campaignWithoutOrganizationIdCsv = `${headerCsv};chaussette;1234;numéro étudiant;789`;
+        const campaignWithoutOrganizationIdCsv = `${headerCsv};;chaussette;1234;numéro étudiant;789`;
 
         // when
         const error = await catchErr(csvSerializer.parseForCampaignsImport)(campaignWithoutOrganizationIdCsv);
@@ -1581,7 +1585,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
 
       it('should throw an error when not a number', async function () {
         // given
-        const campaignWithoutOrganizationIdCsv = `${headerCsv};not valid;chaussette;1234;numéro étudiant;789`;
+        const campaignWithoutOrganizationIdCsv = `${headerCsv};;not valid;chaussette;1234;numéro étudiant;789`;
 
         // when
         const error = await catchErr(csvSerializer.parseForCampaignsImport)(campaignWithoutOrganizationIdCsv);
@@ -1596,7 +1600,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
     describe('when targetProfileId field is not valid', function () {
       it('should throw an error when empty', async function () {
         // given
-        const campaignWithoutTargetProfileIdCsv = `${headerCsv}1;chaussette;;numéro étudiant;789`;
+        const campaignWithoutTargetProfileIdCsv = `${headerCsv}1;;chaussette;;numéro étudiant;789`;
 
         // when
         const error = await catchErr(csvSerializer.parseForCampaignsImport)(campaignWithoutTargetProfileIdCsv);
@@ -1624,7 +1628,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
     describe('when creatorId field is not valid', function () {
       it('should throw an error when empty', async function () {
         // given
-        const campaignWithoutCreatorIdCsv = `${headerCsv}1;chaussette;1234;numéro étudiant;;`;
+        const campaignWithoutCreatorIdCsv = `${headerCsv}1;;chaussette;1234;numéro étudiant;;`;
 
         // when
         const error = await catchErr(csvSerializer.parseForCampaignsImport)(campaignWithoutCreatorIdCsv);
@@ -1637,7 +1641,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
 
       it('should throw an error when not a number', async function () {
         // given
-        const campaignWithoutCreatorIdCsv = `${headerCsv}1;chaussette;1234;not valid;numéro étudiant;not valid`;
+        const campaignWithoutCreatorIdCsv = `${headerCsv}1;;chaussette;1234;not valid;numéro étudiant;not valid`;
 
         // when
         const error = await catchErr(csvSerializer.parseForCampaignsImport)(campaignWithoutCreatorIdCsv);
@@ -1652,7 +1656,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
     describe('when ownerId field is not valid', function () {
       it('should throw an error when empty', async function () {
         // given
-        const campaignWithoutOwnerIdCsv = `${headerCsv}1;chaussette;1234;numéro étudiant;12;titre;descriptif;false;;`;
+        const campaignWithoutOwnerIdCsv = `${headerCsv}1;;chaussette;1234;numéro étudiant;12;titre;descriptif;false;;`;
 
         // when
         const error = await catchErr(csvSerializer.parseForCampaignsImport)(campaignWithoutOwnerIdCsv);
@@ -1665,7 +1669,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
 
       it('should throw an error when not a number', async function () {
         // given
-        const campaignWithBadNumberForOwnerIdCsv = `${headerCsv}1;chaussette;1234;idpixlabel;1234;titre;descriptif;false;not a number`;
+        const campaignWithBadNumberForOwnerIdCsv = `${headerCsv}1;;chaussette;1234;idpixlabel;1234;titre;descriptif;false;not a number`;
 
         // when
         const error = await catchErr(csvSerializer.parseForCampaignsImport)(campaignWithBadNumberForOwnerIdCsv);
@@ -1680,7 +1684,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
     describe('when name field is not valid', function () {
       it('should throw an error', async function () {
         // given
-        const campaignWithoutNameCsv = `${headerCsv}1;;1234;numéro étudiant`;
+        const campaignWithoutNameCsv = `${headerCsv}1;;;1234;numéro étudiant`;
 
         // when
         const error = await catchErr(csvSerializer.parseForCampaignsImport)(campaignWithoutNameCsv);
@@ -1708,6 +1712,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           const expectedParsedData = [
             {
               organizationId: 1,
+              type: CampaignTypes.ASSESSMENT,
               name: 'chaussette',
               targetProfileId: 1234,
               externalIdLabel: 'numéro étudiant',
@@ -1726,10 +1731,10 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
         });
       });
 
-      describe('if externalIdType i not present', function () {
+      describe('if externalIdType is not present', function () {
         it('should default to STRING', async function () {
           // given
-          const csv = `${headerCsv}1;chaussette;1234;numéro étudiant;789;titre 1;descriptif 1;Oui;45`;
+          const csv = `${headerCsv}1;;chaussette;1234;numéro étudiant;789;titre 1;descriptif 1;Oui;45`;
 
           // when
           const parsedData = await csvSerializer.parseForCampaignsImport(csv);
@@ -1738,6 +1743,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           const expectedParsedData = [
             {
               organizationId: 1,
+              type: CampaignTypes.ASSESSMENT,
               name: 'chaussette',
               targetProfileId: 1234,
               externalIdLabel: 'numéro étudiant',
