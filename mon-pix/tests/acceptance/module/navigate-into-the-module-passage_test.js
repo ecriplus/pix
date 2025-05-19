@@ -116,7 +116,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
       });
       server.create('passage', {
         id: '122',
-        moduleId: module.id,
+        moduleId: module.slug,
       });
 
       // when
