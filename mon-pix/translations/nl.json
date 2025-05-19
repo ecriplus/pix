@@ -1704,6 +1704,10 @@
       "qcu": {
         "direction": "Kies één antwoord"
       },
+      "qcuDeclarative": {
+        "complementaryInstruction": "Kies één antwoord",
+        "direction": "There is no right or wrong answer."
+      },
       "qrocm": {
         "direction": "Vul de lege velden in."
       },

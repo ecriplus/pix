@@ -9,6 +9,7 @@ import FlashcardsElement from 'mon-pix/components/module/element/flashcards/flas
 import ImageElement from 'mon-pix/components/module/element/image';
 import QcmElement from 'mon-pix/components/module/element/qcm';
 import QcuElement from 'mon-pix/components/module/element/qcu';
+import QcuDeclarativeElement from 'mon-pix/components/module/element/qcu-declarative';
 import QrocmElement from 'mon-pix/components/module/element/qrocm';
 import SeparatorElement from 'mon-pix/components/module/element/separator';
 import TextElement from 'mon-pix/components/module/element/text';
@@ -46,6 +47,8 @@ export default class ModulixElement extends Component {
         @onRetry={{@onElementRetry}}
         @correction={{this.getLastCorrectionForElement @element}}
       />
+    {{else if (eq @element.type "qcu-declarative")}}
+      <QcuDeclarativeElement @element={{@element}} />
     {{else if (eq @element.type "qcm")}}
       <QcmElement
         @element={{@element}}

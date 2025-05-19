@@ -1,0 +1,114 @@
+import { render } from '@1024pix/ember-testing-library';
+import { click } from '@ember/test-helpers';
+import ModuleQcuDeclarative from 'mon-pix/components/module/element/qcu-declarative';
+import { module, test } from 'qunit';
+import sinon from 'sinon';
+
+import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+
+module('Integration | Component | Module | QCUDeclarative', function (hooks) {
+  setupIntlRenderingTest(hooks);
+
+  test('it should display an instruction, a complementary instruction and a list of proposals', async function (assert) {
+    // given
+    const instruction = '<p>Quand faut-il mouiller sa brosse à dents&nbsp;?</p>';
+    const complementaryInstruction = 'Il n’y a pas de bonne ou de mauvaise réponse.';
+    const proposals = [
+      {
+        id: '1',
+        content: 'Avant de mettre le dentifrice',
+        feedback: {
+          state: '',
+          diagnosis: "<p>C'est l'approche de la plupart des gens.</p>",
+        },
+      },
+      {
+        id: '2',
+        content: 'Après avoir mis le dentifrice',
+        feedback: {
+          state: '',
+          diagnosis: '<p>Possible, mais attention à ne pas faire tomber le dentifrice !</p>',
+        },
+      },
+      {
+        id: '3',
+        content: 'Pendant que le dentifrice est mis',
+        feedback: {
+          state: '',
+          diagnosis: '<p>Digne des plus grands acrobates !</p>',
+        },
+      },
+    ];
+
+    const qcuDeclarativeElement = { instruction, proposals };
+
+    // when
+    const screen = await render(<template><ModuleQcuDeclarative @element={{qcuDeclarativeElement}} /></template>);
+
+    // then
+    assert.ok(screen.getByText('Quand faut-il mouiller sa brosse à dents ?'));
+    assert.ok(screen.getByText(complementaryInstruction));
+    assert.ok(screen.getByRole('button', { name: proposals[0].content }));
+    assert.ok(screen.getByRole('button', { name: proposals[1].content }));
+    assert.ok(screen.getByRole('button', { name: proposals[2].content }));
+  });
+
+  module('when user clicks on one of the proposals', function () {
+    test('it should show feedback, disable proposal buttons and send an event', async function (assert) {
+      // given
+      const passageEventService = this.owner.lookup('service:passageEvents');
+      const passageEventRecordStub = sinon.stub(passageEventService, 'record');
+
+      const instruction = '<p>De quoi le ‘oui‘ a-t-il besoin pour gagner ?</p>';
+
+      const proposals = [
+        {
+          id: '1',
+          content: 'Du ‘oui‘',
+          feedback: {
+            state: '',
+            diagnosis: "<p>C'est l'approche de la plupart des gens.</p>",
+          },
+        },
+        {
+          id: '2',
+          content: 'Du ‘non‘',
+          feedback: {
+            state: '',
+            diagnosis: '<p>Possible, mais attention à ne pas faire une rafarinade !</p>',
+          },
+        },
+        {
+          id: '3',
+          content: 'Du ‘peut-être‘',
+          feedback: {
+            state: '',
+            diagnosis: '<p>Digne des plus grands acrobates !</p>',
+          },
+        },
+      ];
+
+      const qcuDeclarativeElement = { instruction, proposals };
+
+      // when
+      const screen = await render(<template><ModuleQcuDeclarative @element={{qcuDeclarativeElement}} /></template>);
+      const button1 = screen.getByRole('button', { name: proposals[0].content });
+      await click(button1);
+
+      // then
+      const button2 = screen.getByRole('button', { name: proposals[1].content });
+      const button3 = screen.getByRole('button', { name: proposals[2].content });
+      assert.dom(button1).isDisabled();
+      assert.dom(button2).isDisabled();
+      assert.dom(button3).isDisabled();
+      assert.ok(screen.getByText("C'est l'approche de la plupart des gens."));
+      sinon.assert.calledWithExactly(passageEventRecordStub, {
+        type: 'QCU_DECLARATIVE_ANSWERED',
+        data: {
+          elementId: qcuDeclarativeElement.id,
+          answer: proposals[0].content,
+        },
+      });
+    });
+  });
+});

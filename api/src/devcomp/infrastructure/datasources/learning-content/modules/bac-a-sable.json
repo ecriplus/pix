@@ -13,6 +13,71 @@
   },
   "grains": [
     {
+      "id": "a39ce6eb-f3db-447f-808f-aa6a06b940c9",
+      "type": "lesson",
+      "title": "test qcu-declarative",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "6a6944be-a8a3-4138-b5dc-af664cf40b07",
+            "type": "qcu-declarative",
+            "instruction": "<p>Quand faut-il mouiller sa brosse à dents&nbsp;?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "Avant de mettre le dentifrice",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>C'est l'approche de la plupart des gens.</p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "Après avoir mis le dentifrice",
+                "feedback": {
+                  "state":  "",
+                  "diagnosis": "<p>Possible, mais attention à ne pas faire tomber le dentifrice !</p>"
+                }
+              },
+              {
+                "id": "3",
+                "content": "Pendant que le dentifrice est mis",
+                "feedback": {
+                  "state":  "",
+                  "diagnosis": "<p>Digne des plus grands acrobates !</p>"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "52af6cab-07df-4962-abc5-20cf95d5eb5a",
+            "type": "text",
+            "content": "<p>Voici une iframe :</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "f00133f5-0653-425b-a25f-3c9604820529",
+            "type": "text",
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/cartes2.html\" height=\"420\"></iframe>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "e32c01a8-7ae1-4c6d-9a16-6487c7c504d2",
+            "type": "text",
+            "content": "<p>Elles ne sont autorisées qu'en béta.</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "f312c33d-e7c9-4a69-9ba0-913957b8f7dd",
       "type": "discovery",
       "title": "Voici un grain de découverte",
@@ -143,71 +208,6 @@
             "id": "08a8b1ea-4771-48ef-a5a5-665c664ba673",
             "type": "text",
             "content": "<p>Bonjour et bienvenue dans le bac à sable de Modulix. Vous allez pouvoir facilement découvrir comment fonctionne ce nouveau produit Pix.<br>C'est partix !</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "a39ce6eb-f3db-447f-808f-aa6a06b940c9",
-      "type": "lesson",
-      "title": "test qcu-declarative",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "6a6944be-a8a3-4138-b5dc-af664cf40b07",
-            "type": "qcu-declarative",
-            "instruction": "<p>Quand faut-il mouiller sa brosse à dents&nbsp;?</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "Avant de mettre le dentifrice",
-                "feedback": {
-                  "state": "",
-                  "diagnosis": "<p>C'est l'approche de la plupart des gens.</p>"
-                }
-              },
-              {
-                "id": "2",
-                "content": "Après avoir mis le dentifrice",
-                "feedback": {
-                  "state":  "",
-                  "diagnosis": "<p>Possible, mais attention à ne pas faire tomber le dentifrice !</p>"
-                }
-              },
-              {
-                "id": "3",
-                "content": "Pendant que le dentifrice est mis",
-                "feedback": {
-                  "state":  "",
-                  "diagnosis": "<p>Digne des plus grands acrobates !</p>"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "52af6cab-07df-4962-abc5-20cf95d5eb5a",
-            "type": "text",
-            "content": "<p>Voici une iframe :</p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "f00133f5-0653-425b-a25f-3c9604820529",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/cartes2.html\" height=\"420\"></iframe>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "e32c01a8-7ae1-4c6d-9a16-6487c7c504d2",
-            "type": "text",
-            "content": "<p>Elles ne sont autorisées qu'en béta.</p>"
           }
         }
       ]

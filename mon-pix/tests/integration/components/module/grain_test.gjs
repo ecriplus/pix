@@ -164,6 +164,33 @@ module('Integration | Component | Module | Grain', function (hooks) {
       });
     });
 
+    module('when element is a qcu-declarative', function () {
+      test('should display qcu-declarative element', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const qcuDeclarativeElement = {
+          instruction: 'instruction',
+          proposals: ['prop1', 'prop2'],
+          type: 'qcu-declarative',
+          isAnswerable: true,
+        };
+        const grain = store.createRecord('grain', {
+          title: 'Grain title',
+          components: [{ type: 'element', element: qcuDeclarativeElement }],
+        });
+        this.set('grain', grain);
+        const passage = store.createRecord('passage');
+        this.set('passage', passage);
+
+        // when
+        const screen = await render(hbs`
+          <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} />`);
+
+        // then
+        assert.ok(screen.getByText('Il n’y a pas de bonne ou de mauvaise réponse.'));
+      });
+    });
+
     module('when element is a qrocm', function () {
       test('should display qrocm element', async function (assert) {
         // given
