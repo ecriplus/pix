@@ -10,14 +10,6 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Global | App Layout', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  hooks.beforeEach(function () {
-    class FeatureTogglesStub extends Service {
-      featureToggles = { isPixAppNewLayoutEnabled: true };
-    }
-
-    this.owner.register('service:featureToggles', FeatureTogglesStub);
-  });
-
   module('navigation', function () {
     test('it should exist 2 skip links', async function (assert) {
       // given & when
