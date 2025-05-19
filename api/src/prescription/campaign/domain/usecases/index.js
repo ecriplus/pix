@@ -13,6 +13,7 @@ import * as userRepository from '../../../../identity-access-management/infrastr
 import * as organizationFeatureApi from '../../../../organizational-entities/application/api/organization-features-api.js';
 import * as codeGenerator from '../../../../shared/domain/services/code-generator.js';
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
+import { featureToggles } from '../../../../shared/infrastructure/feature-toggles/index.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
 import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
@@ -86,7 +87,6 @@ const dependencies = {
   campaignAssessmentParticipationResultListRepository,
   campaignCollectiveResultRepository,
   campaignCreatorRepository,
-
   campaignManagementRepository,
   campaignParticipantActivityRepository,
   campaignParticipationInfoRepository,
@@ -100,6 +100,7 @@ const dependencies = {
   codeGenerator,
   competenceRepository,
   divisionRepository,
+  featureToggles,
   groupRepository,
   knowledgeElementRepository,
   knowledgeElementSnapshotRepository,
