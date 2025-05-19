@@ -1,4 +1,4 @@
-import Service, { inject as service } from '@ember/service';
+import Service, { service } from '@ember/service';
 import config from 'pix-certif/config/environment';
 import languages from 'pix-certif/languages';
 
