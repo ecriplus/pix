@@ -1,5 +1,21 @@
 # Pix Changelog
 
+# [5.114.0](https://github.com/1024pix/pix/compare/v5.113.0...v5.114.0) (2025-05-19)
+
+### :rocket: Amélioration
+
+- [#12265](https://github.com/1024pix/pix/pull/12265) Ajouter une action "Archiver en masse des organisations" dans Pix Admin (PIX-17151) 
+- [#12310](https://github.com/1024pix/pix/pull/12310) Améliorer le design des modules (PIX-17833) 
+- [#12257](https://github.com/1024pix/pix/pull/12257) Faire usage du mot attestation pour les certificats V2 sur Pix App (PIX-17507). 
+
+### :building_construction: Tech
+
+- [#12300](https://github.com/1024pix/pix/pull/12300) :wastebasket: Suppression de la construction du graphique Sankey pour le suivi de migration des bounded context 
+- [#12299](https://github.com/1024pix/pix/pull/12299) :wastebasket: Supprime un controller inutilisé 
+- [#12314](https://github.com/1024pix/pix/pull/12314) Correction de deprecation SCSS dans Pix Orga 
+- [#12301](https://github.com/1024pix/pix/pull/12301) Correction des flakies causés par Chrome Headless 
+- [#12298](https://github.com/1024pix/pix/pull/12298) Mise à jour des packages sur PixOrga (PIX-17866)
+
 ## v5.113.0 (16/05/2025)
 
 
