@@ -20,18 +20,13 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
   describe('#save', function () {
     it('saves the given certification center', async function () {
       // given
-      const certificationCenterId = 1;
       const certificationCenterName = 'CertificationCenterName';
       const certificationCenterType = 'SCO';
-
-      const center = databaseBuilder.factory.buildCertificationCenter({
-        id: certificationCenterId,
-        name: certificationCenterName,
-        type: certificationCenterType,
-      });
+      const userId = databaseBuilder.factory.buildUser().id;
+      await databaseBuilder.commit();
 
       const certificationCenterForAdmin = new CenterForAdmin({
-        center,
+        center: { name: certificationCenterName, type: certificationCenterType, createdBy: userId },
       });
 
       // when
@@ -42,6 +37,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       expect(savedCertificationCenter.id).to.exist;
       expect(savedCertificationCenter.name).to.equal(certificationCenterName);
       expect(savedCertificationCenter.type).to.equal(certificationCenterType);
+      expect(savedCertificationCenter.createdBy).to.equal(userId);
     });
   });
 
