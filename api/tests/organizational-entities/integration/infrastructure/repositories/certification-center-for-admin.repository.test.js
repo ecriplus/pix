@@ -64,7 +64,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
       // then
       const updatedCertificationCenter = await knex('certification-centers').select().where({ id: center.id }).first();
-      expect(_.omit(updatedCertificationCenter, 'isV3Pilot')).to.deep.equal({
+      expect(_.omit(updatedCertificationCenter, 'isV3Pilot', 'createdBy')).to.deep.equal({
         ...center,
         name: 'Great Oak Certification Center',
         updatedAt: updatedCertificationCenter.updatedAt,
@@ -105,7 +105,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       const nonArchivedCertificationCenter = await knex('certification-centers')
         .where({ id: otherCertificationCenter.id })
         .first();
-      expect(_.omit(nonArchivedCertificationCenter, 'isV3Pilot')).to.deep.equal(
+      expect(_.omit(nonArchivedCertificationCenter, 'isV3Pilot', 'createdBy')).to.deep.equal(
         _.omit(otherCertificationCenter, 'isV3Pilot'),
       );
     });
