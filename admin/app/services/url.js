@@ -1,4 +1,4 @@
-import Service, { inject as service } from '@ember/service';
+import Service, { service } from '@ember/service';
 import ENV from 'pix-admin/config/environment';
 
 export default class Url extends Service {
