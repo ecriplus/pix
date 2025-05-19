@@ -4,7 +4,11 @@ import { computed } from '@ember/object';
 import { service } from '@ember/service';
 import Model, { attr, belongsTo } from '@ember-data/model';
 
-export const ACQUIRED = 'acquired';
+export const assessmentResultStatus = {
+  CANCELLED: 'cancelled',
+  VALIDATED: 'validated',
+  REJECTED: 'rejected',
+};
 
 const professionalizingDate = new Date('2022-01-01');
 

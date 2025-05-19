@@ -899,31 +899,25 @@
       "title": "Rejoindre une session de certification"
     },
     "certifications-list": {
+      "buttons": {
+        "details": "Voir le détails",
+        "download-attestation": "Télécharger l'attestation",
+        "download-certificate": "Télécharger le certificat"
+      },
+      "comment": "Commentaire :",
       "description": "Accédez à l’ensemble de vos certifications Pix. Consultez les détails et téléchargez vos certificats.",
-      "header": {
-        "certification-center": "centre de certification",
-        "date": "date",
-        "score": "score pix",
-        "status": "statut"
+      "information": {
+        "certification-center": "Centre de certification :",
+        "date": "Date de passage :"
       },
       "no-certification": {
         "text": "Vous n'avez pas encore de certification Pix"
       },
       "statuses": {
-        "cancelled": {
-          "title": "Certification annulée"
-        },
-        "fail": {
-          "action": "Afficher le détail",
-          "title": "Certification non obtenue"
-        },
-        "not-published": {
-          "title": "En attente du résultat"
-        },
-        "success": {
-          "action": "voir les résultats",
-          "title": "Certification obtenue"
-        }
+        "cancelled": "Annulée",
+        "not-published": "En attente du résultat",
+        "rejected": "Non-obtenue",
+        "validated": "Obtenue"
       },
       "title": "Mes certifications"
     },

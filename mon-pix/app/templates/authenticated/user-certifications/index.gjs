@@ -1,5 +1,5 @@
 import t from 'ember-intl/helpers/t';
-import UserCertificationsPanel from 'mon-pix/components/certifications/list/user-certifications-panel';
+import Panel from 'mon-pix/components/certifications/list/panel';
 import PageTitle from 'mon-pix/components/ui/page-title';
 
 <template>
@@ -9,6 +9,6 @@ import PageTitle from 'mon-pix/components/ui/page-title';
       <:subtitle>{{t "pages.certifications-list.description"}}</:subtitle>
     </PageTitle>
 
-    <UserCertificationsPanel @certifications={{@model}} />
+    <Panel @certifications={{@model}} />
   </main>
 </template>

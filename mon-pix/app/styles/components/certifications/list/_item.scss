@@ -1,0 +1,68 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/fonts';
+
+.certification-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+
+  &__information {
+    @extend %pix-body-s;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-6x);
+    align-items: start;
+
+    ul {
+      display: grid;
+      gap: var(--pix-spacing-1x);
+    }
+  }
+
+  &__hexagon {
+    @extend %pix-title-xs;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75px;
+    height: 85px;
+    text-align: center;
+    background: url('/images/certificate/pix-score-hexagon.svg') no-repeat;
+  }
+}
+
+.certification-item-information {
+  &--bold {
+    font-weight: var(--pix-font-bold);
+  }
+}
+
+.certification-item-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-2x);
+  align-items: start;
+  justify-content: start;
+
+  li {
+    width: fit-content;
+  }
+
+  @include breakpoints.device-is('desktop') {
+    flex-direction: row;
+    gap: var(--pix-spacing-4x);
+  }
+}
+
+.certification-item-comment {
+  @extend %pix-body-s;
+
+  color: var(--pix-neutral-500);
+  font-style: italic;
+}
+
+.certification-item-error {
+  margin-bottom: var(--pix-spacing-2x);
+}
