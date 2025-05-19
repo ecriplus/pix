@@ -28,7 +28,11 @@ export default class EvaluationResultsTabsTrainings extends Component {
   }
 
   get canShareResults() {
-    return this.args.isSharableCampaign && !this.args.isParticipationShared;
+    return (
+      !this.args.campaignParticipationResult.isDisabled &&
+      this.args.isSharableCampaign &&
+      !this.args.isParticipationShared
+    );
   }
 
   @action
