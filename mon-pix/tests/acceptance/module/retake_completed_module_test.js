@@ -52,6 +52,7 @@ module('Acceptance | Module | Routes | retakeCompletedModule', function (hooks) 
 
     server.create('module', {
       id: 'bien-ecrire-son-adresse-mail',
+      slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
       details: { tabletSupport: 'comfortable' },
       grains: [grain1, grain2],

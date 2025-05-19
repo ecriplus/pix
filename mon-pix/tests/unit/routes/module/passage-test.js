@@ -49,7 +49,7 @@ module('Unit | Route | modules | passage', function (hooks) {
 
     const route = this.owner.lookup('route:module.passage');
     const store = this.owner.lookup('service:store');
-    const module = { id: 'my-module' };
+    const module = { id: 'my-module', slug: 'my-module' };
 
     route.modelFor = sinon.stub();
     route.modelFor.withArgs('module').returns(module);

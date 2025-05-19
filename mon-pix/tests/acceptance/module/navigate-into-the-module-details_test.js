@@ -17,6 +17,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleDetails', function (
       // given
       server.create('module', {
         id: 'bien-ecrire-son-adresse-mail',
+        slug: 'bien-ecrire-son-adresse-mail',
         title: 'Bien écrire son adresse mail',
         grains: [],
         details: {
@@ -43,6 +44,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleDetails', function (
 
       server.create('module', {
         id: 'bien-ecrire-son-adresse-mail',
+        slug: 'bien-ecrire-son-adresse-mail',
         title: 'Bien écrire son adresse mail',
         grains: [grain],
         details: {

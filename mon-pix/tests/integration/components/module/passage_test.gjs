@@ -313,7 +313,11 @@ module('Integration | Component | Module | Passage', function (hooks) {
           });
           const grain2 = store.createRecord('grain', { components: [{ type: 'element', element: qcuElement }] });
 
-          const module = store.createRecord('module', { title: 'Module title', grains: [grain1, grain2] });
+          const module = store.createRecord('module', {
+            slug: 'module-slug',
+            title: 'Module title',
+            grains: [grain1, grain2],
+          });
           const passage = store.createRecord('passage');
 
           const metrics = this.owner.lookup('service:metrics');
@@ -352,7 +356,11 @@ module('Integration | Component | Module | Passage', function (hooks) {
             components: [{ type: 'element', element: qcuElement }],
           });
 
-          const module = store.createRecord('module', { title: 'Module title', grains: [grain1, grain2] });
+          const module = store.createRecord('module', {
+            slug: 'module-slug',
+            title: 'Module title',
+            grains: [grain1, grain2],
+          });
           const passage = store.createRecord('passage');
 
           // when
@@ -379,7 +387,11 @@ module('Integration | Component | Module | Passage', function (hooks) {
             components: [{ type: 'element', element: qcuElement }],
           });
 
-          const module = store.createRecord('module', { title: 'Module title', grains: [grain1, grain2] });
+          const module = store.createRecord('module', {
+            slug: 'module-slug',
+            title: 'Module title',
+            grains: [grain1, grain2],
+          });
           const passage = store.createRecord('passage');
 
           const metrics = this.owner.lookup('service:metrics');
@@ -416,7 +428,11 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const grain1 = store.createRecord('grain', { components: [{ type: 'element', element: qcuElement }] });
       const grain2 = store.createRecord('grain', { components: [{ type: 'element', element: textElement }] });
 
-      const module = store.createRecord('module', { title: 'Module title', grains: [grain1, grain2] });
+      const module = store.createRecord('module', {
+        slug: 'module-slug',
+        title: 'Module title',
+        grains: [grain1, grain2],
+      });
       const passage = store.createRecord('passage');
 
       await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
@@ -443,7 +459,11 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const grain1 = store.createRecord('grain', { components: [{ type: 'element', element: qcuElement }] });
       const grain2 = store.createRecord('grain', { components: [{ type: 'element', element: textElement }] });
 
-      const module = store.createRecord('module', { title: 'Module title', grains: [grain1, grain2] });
+      const module = store.createRecord('module', {
+        slug: 'module-slug',
+        title: 'Module title',
+        grains: [grain1, grain2],
+      });
       const passage = store.createRecord('passage');
 
       await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
@@ -479,7 +499,11 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const grain1 = store.createRecord('grain', { components: [{ type: 'element', element: text1Element }] });
       const grain2 = store.createRecord('grain', { components: [{ type: 'element', element: text2Element }] });
 
-      const module = store.createRecord('module', { title: 'Module title', grains: [grain1, grain2] });
+      const module = store.createRecord('module', {
+        slug: 'module-slug',
+        title: 'Module title',
+        grains: [grain1, grain2],
+      });
       const passage = store.createRecord('passage');
 
       const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
@@ -503,7 +527,11 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const grain1 = store.createRecord('grain', { components: [{ type: 'element', element: text1Element }] });
       const grain2 = store.createRecord('grain', { components: [{ type: 'element', element: text2Element }] });
 
-      const module = store.createRecord('module', { title: 'Module title', grains: [grain1, grain2] });
+      const module = store.createRecord('module', {
+        slug: 'module-slug',
+        title: 'Module title',
+        grains: [grain1, grain2],
+      });
       const passage = store.createRecord('passage');
 
       const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
@@ -525,7 +553,11 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const grain2 = store.createRecord('grain', { components: [{ type: 'element', element: text2Element }] });
       const grain3 = store.createRecord('grain', { components: [{ type: 'element', element: text3Element }] });
 
-      const module = store.createRecord('module', { title: 'Module title', grains: [grain1, grain2, grain3] });
+      const module = store.createRecord('module', {
+        slug: 'module-slug',
+        title: 'Module title',
+        grains: [grain1, grain2, grain3],
+      });
       const passage = store.createRecord('passage');
 
       const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
@@ -561,7 +593,11 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const grain1 = store.createRecord('grain', { components: [{ type: 'element', element: text1Element }] });
       const grain2 = store.createRecord('grain', { components: [{ type: 'element', element: text2Element }] });
 
-      const module = store.createRecord('module', { title: 'Module title', grains: [grain1, grain2] });
+      const module = store.createRecord('module', {
+        slug: 'module-slug',
+        title: 'Module title',
+        grains: [grain1, grain2],
+      });
       const passage = store.createRecord('passage');
 
       await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
@@ -602,7 +638,12 @@ module('Integration | Component | Module | Passage', function (hooks) {
       };
       const grain1 = store.createRecord('grain', { components: [{ type: 'element', element: qcuElement }] });
 
-      const module = store.createRecord('module', { id: 'module-id', title: 'Module title', grains: [grain1] });
+      const module = store.createRecord('module', {
+        id: 'module-id',
+        slug: 'module-slug',
+        title: 'Module title',
+        grains: [grain1],
+      });
       const passage = store.createRecord('passage', { id: 'passage-id' });
 
       const saveStub = sinon.stub();
@@ -639,7 +680,12 @@ module('Integration | Component | Module | Passage', function (hooks) {
       };
       const grain1 = store.createRecord('grain', { components: [{ type: 'element', element: qcuElement }] });
 
-      const module = store.createRecord('module', { id: 'module-id', title: 'Module title', grains: [grain1] });
+      const module = store.createRecord('module', {
+        id: 'module-id',
+        slug: 'module-slug',
+        title: 'Module title',
+        grains: [grain1],
+      });
       const passage = store.createRecord('passage');
 
       const createRecordMock = sinon.mock();
@@ -673,7 +719,12 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const store = this.owner.lookup('service:store');
       const element = { id: 'qcu-id', type: 'qcu', isAnswerable: true };
       const grain = store.createRecord('grain', { title: 'Grain title', components: [{ type: 'element', element }] });
-      const module = store.createRecord('module', { id: 'module-id', title: 'Module title', grains: [grain] });
+      const module = store.createRecord('module', {
+        id: 'module-id',
+        slug: 'module-slug',
+        title: 'Module title',
+        grains: [grain],
+      });
       const passage = store.createRecord('passage');
 
       const correction = store.createRecord('correction-response', { status: 'ko' });
@@ -742,7 +793,12 @@ module('Integration | Component | Module | Passage', function (hooks) {
 
       const grain1 = store.createRecord('grain', { components: [{ type: 'element', element: flashcardsElement }] });
 
-      const module = store.createRecord('module', { id: 'module-id', title: 'Module title', grains: [grain1] });
+      const module = store.createRecord('module', {
+        id: 'module-id',
+        slug: 'module-slug',
+        title: 'Module title',
+        grains: [grain1],
+      });
       const passage = store.createRecord('passage');
 
       const createRecordStub = sinon.stub();
@@ -785,7 +841,12 @@ module('Integration | Component | Module | Passage', function (hooks) {
         alternativeText: "Dessin d'un ordinateur dans un univers spatial.",
       };
       const grain = store.createRecord('grain', { title: 'Grain title', components: [{ type: 'element', element }] });
-      const module = store.createRecord('module', { id: 'module-id', title: 'Module title', grains: [grain] });
+      const module = store.createRecord('module', {
+        id: 'module-id',
+        slug: 'module-slug',
+        title: 'Module title',
+        grains: [grain],
+      });
       const passage = store.createRecord('passage');
 
       // when
@@ -822,7 +883,12 @@ module('Integration | Component | Module | Passage', function (hooks) {
           id: '123',
           components: [{ type: 'stepper', steps: [step] }],
         });
-        const module = store.createRecord('module', { id: 'module-id', title: 'Module title', grains: [grain] });
+        const module = store.createRecord('module', {
+          id: 'module-id',
+          slug: 'module-slug',
+          title: 'Module title',
+          grains: [grain],
+        });
         const passage = store.createRecord('passage');
 
         // when
@@ -858,7 +924,12 @@ module('Integration | Component | Module | Passage', function (hooks) {
         transcription: '<p>transcription</p>',
       };
       const grain = store.createRecord('grain', { title: 'Grain title', components: [{ type: 'element', element }] });
-      const module = store.createRecord('module', { id: 'module-id', title: 'Module title', grains: [grain] });
+      const module = store.createRecord('module', {
+        id: 'module-id',
+        slug: 'module-slug',
+        title: 'Module title',
+        grains: [grain],
+      });
       const passage = store.createRecord('passage');
 
       // when
@@ -896,7 +967,12 @@ module('Integration | Component | Module | Passage', function (hooks) {
           id: '123',
           components: [{ type: 'stepper', steps: [step] }],
         });
-        const module = store.createRecord('module', { id: 'module-id', title: 'Module title', grains: [grain] });
+        const module = store.createRecord('module', {
+          id: 'module-id',
+          slug: 'module-slug',
+          title: 'Module title',
+          grains: [grain],
+        });
         const passage = store.createRecord('passage');
 
         // when
@@ -928,7 +1004,12 @@ module('Integration | Component | Module | Passage', function (hooks) {
         components: [{ type: 'stepper', steps: [step1, step2] }],
       });
 
-      const module = store.createRecord('module', { id: '1', title: 'Module title', grains: [grain] });
+      const module = store.createRecord('module', {
+        id: '1',
+        slug: 'module-slug',
+        title: 'Module title',
+        grains: [grain],
+      });
       const passage = store.createRecord('passage');
       const onStepperNextStepButtonName = t('pages.modulix.buttons.stepper.next.ariaLabel');
 
@@ -958,7 +1039,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const element = { type: 'text', isAnswerable: false };
       const grain = store.createRecord('grain', { title: 'Grain title', components: [{ type: 'element', element }] });
 
-      const module = store.createRecord('module', { title: 'Module title', grains: [grain] });
+      const module = store.createRecord('module', { slug: 'module-slug', title: 'Module title', grains: [grain] });
       const passage = store.createRecord('passage');
 
       // when
@@ -983,7 +1064,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
             components: [{ type: 'element', element: qcuElement }],
           });
 
-          const module = store.createRecord('module', { title: 'Module title', grains: [grain] });
+          const module = store.createRecord('module', { slug: 'module-slug', title: 'Module title', grains: [grain] });
           const passage = store.createRecord('passage');
 
           // when
@@ -1008,7 +1089,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
             components: [{ type: 'element', element: qcuElement }],
           });
 
-          const module = store.createRecord('module', { title: 'Module title', grains: [grain] });
+          const module = store.createRecord('module', { slug: 'module-slug', title: 'Module title', grains: [grain] });
           const passage = store.createRecord('passage');
 
           // when
@@ -1036,7 +1117,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
             components: [{ type: 'stepper', steps: [{ elements: [textElement] }, { elements: [qcuElement] }] }],
           });
 
-          const module = store.createRecord('module', { title: 'Module title', grains: [grain] });
+          const module = store.createRecord('module', { slug: 'module-slug', title: 'Module title', grains: [grain] });
           const passage = store.createRecord('passage');
 
           // when
@@ -1058,7 +1139,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
             components: [{ type: 'stepper', steps: [{ elements: [text1Element] }, { elements: [text2Element] }] }],
           });
 
-          const module = store.createRecord('module', { title: 'Module title', grains: [grain] });
+          const module = store.createRecord('module', { slug: 'module-slug', title: 'Module title', grains: [grain] });
           const passage = store.createRecord('passage');
 
           // when
@@ -1092,7 +1173,12 @@ module('Integration | Component | Module | Passage', function (hooks) {
         components: [{ type: 'element', element: videoElement }],
       });
 
-      const module = store.createRecord('module', { id: '1', title: 'Module title', grains: [grain] });
+      const module = store.createRecord('module', {
+        id: '1',
+        slug: 'module-slug',
+        title: 'Module title',
+        grains: [grain],
+      });
       const passage = store.createRecord('passage');
 
       await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
@@ -1133,7 +1219,12 @@ module('Integration | Component | Module | Passage', function (hooks) {
           title: 'Grain title',
           components: [{ type: 'element', element: videoElement }],
         });
-        const module = store.createRecord('module', { id: 'module-id', title: 'Module title', grains: [grain] });
+        const module = store.createRecord('module', {
+          id: 'module-id',
+          slug: 'module-slug',
+          title: 'Module title',
+          grains: [grain],
+        });
         const passage = store.createRecord('passage');
         await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
         const video = find(`#${videoElement.id}`);
@@ -1173,7 +1264,12 @@ module('Integration | Component | Module | Passage', function (hooks) {
         components: [{ type: 'element', element: downloadElement }],
       });
 
-      const module = store.createRecord('module', { id: '1', title: 'Module title', grains: [grain] });
+      const module = store.createRecord('module', {
+        id: '1',
+        slug: 'module-slug',
+        title: 'Module title',
+        grains: [grain],
+      });
       const passage = store.createRecord('passage');
 
       const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
@@ -1215,7 +1311,12 @@ module('Integration | Component | Module | Passage', function (hooks) {
           title: 'Grain title',
           components: [{ type: 'element', element: downloadElement }],
         });
-        const module = store.createRecord('module', { id: 'module-id', title: 'Module title', grains: [grain] });
+        const module = store.createRecord('module', {
+          id: 'module-id',
+          slug: 'module-slug',
+          title: 'Module title',
+          grains: [grain],
+        });
         const passage = store.createRecord('passage');
         const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
 
@@ -1268,6 +1369,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
 
       const module = store.createRecord('module', {
         id: 'module-title',
+        slug: 'module-slug',
         title: 'Module title',
         grains: [grain],
       });
@@ -1311,6 +1413,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       });
       const module = store.createRecord('module', {
         title: 'Didacticiel',
+        slug: 'module-slug',
         grains: [grain1, grain2],
       });
       const passage = store.createRecord('passage');
@@ -1351,6 +1454,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       });
       const module = store.createRecord('module', {
         title: 'Didacticiel',
+        slug: 'module-slug',
         grains: [grain1, grain2],
       });
       const passage = store.createRecord('passage');
@@ -1386,6 +1490,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       });
       const module = store.createRecord('module', {
         title: 'Didacticiel',
+        slug: 'module-slug',
         grains: [grain1, grain2],
       });
       const passage = store.createRecord('passage');
@@ -1430,6 +1535,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
 
       const module = store.createRecord('module', {
         title: 'Didacticiel',
+        slug: 'module-slug',
         grains: [grain],
       });
       const passage = store.createRecord('passage');
@@ -1474,6 +1580,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
 
         const module = store.createRecord('module', {
           title: 'Didacticiel',
+          slug: 'module-slug',
           grains: [grain],
         });
         const passage = store.createRecord('passage');
@@ -1518,6 +1625,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
 
       const module = store.createRecord('module', {
         title: 'Didacticiel',
+        slug: 'module-slug',
         grains: [grain],
       });
       const passage = store.createRecord('passage');

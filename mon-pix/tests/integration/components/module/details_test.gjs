@@ -22,7 +22,7 @@ module('Integration | Component | Module | Details', function (hooks) {
       level: 'Débutant',
       objectives: ['Objectif 1'],
     };
-    const module = store.createRecord('module', { title: 'Module title', details });
+    const module = store.createRecord('module', { slug: 'module-slug', title: 'Module title', details });
 
     // when
     const screen = await render(<template><ModulixDetails @module={{module}} /></template>);
@@ -263,7 +263,12 @@ function prepareDetailsComponentContext(tabletSupport, breakpoint = 'desktop') {
     objectives: ['Objectif 1'],
     tabletSupport,
   };
-  const module = store.createRecord('module', { id: 'module-title', title: 'Module title', details });
+  const module = store.createRecord('module', {
+    id: 'module-title',
+    slug: 'module-slug',
+    title: 'Module title',
+    details,
+  });
   setBreakpoint(breakpoint);
 
   return { router, metrics, store, details, module };
