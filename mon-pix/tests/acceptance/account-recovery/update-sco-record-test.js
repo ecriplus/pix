@@ -1,10 +1,14 @@
+/* eslint ember/no-classic-classes: 0 */
+
 import { visit } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import { click, currentURL, fillIn, settled } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { Response } from 'miragejs';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import { clickByLabel } from '../../helpers/click-by-label';
 import setupIntl from '../../helpers/setup-intl';
@@ -384,6 +388,39 @@ module('Acceptance | account-recovery | UpdateScoRecordRoute', function (hooks) 
       );
       assert.ok(screen.getByText(t('common.api-error-messages.internal-server-error')));
       assert.ok(screen.getByRole('link', { name: t('navigation.back-to-homepage') }));
+    });
+  });
+
+  module('when feature toggle isNewAccountRecovery is enabled', function (hooks) {
+    let replaceLocationStub;
+
+    hooks.beforeEach(async function () {
+      replaceLocationStub = sinon.stub().resolves();
+      this.owner.register(
+        'service:location',
+        Service.extend({
+          replace: replaceLocationStub,
+        }),
+      );
+    });
+
+    test('should display on reset passord form a quit button redirecting to login page ', async function (assert) {
+      // given
+      class FeatureTogglesStub extends Service {
+        featureToggles = { isNewAccountRecoveryEnabled: true };
+        async load() {}
+      }
+      this.owner.register('service:featureToggles', FeatureTogglesStub);
+
+      const temporaryKey = '6fe76ea1bb34a1d17e7b2253ee0f7f4b2bc66ddde37d50ee661cbbf3c00cfdc9';
+
+      // when
+      const screen = await visit(`/recuperer-mon-compte/${temporaryKey}`);
+      await settled();
+      await click(screen.getByText(t('common.actions.quit')));
+
+      // then
+      assert.ok(replaceLocationStub.calledWith('/?lang=fr'));
     });
   });
 });

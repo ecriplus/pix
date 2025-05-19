@@ -46,6 +46,11 @@
         position: relative;
         max-width: 400px;
       }
+
+      &-quit-button-container{
+        max-width: 400px;
+      }
+
     }
 
     &--image {
@@ -137,7 +142,7 @@
 
     &--actions {
       display: flex;
-      margin-top: 32px;
+      margin-top: 24px;
 
       button:first-child {
         margin-right: 32px;

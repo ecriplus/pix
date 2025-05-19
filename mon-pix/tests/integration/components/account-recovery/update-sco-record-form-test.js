@@ -118,6 +118,7 @@ module('Integration | Component | account-recovery | update-sco-record', functio
         });
         assert.ok(submitButton);
         assert.true(submitButton.disabled);
+        assert.ok(screen.getByText(t('common.actions.quit')));
         assert.dom(screen.getByRole('checkbox', { name: t('common.cgu.label') })).exists();
         assert.ok(screen.getByRole('link', { name: t('common.cgu.cgu') }));
         assert.ok(screen.getByRole('link', { name: t('common.cgu.data-protection-policy') }));

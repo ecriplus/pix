@@ -1,4 +1,5 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixInputPassword from '@1024pix/pix-ui/components/pix-input-password';
@@ -92,12 +93,21 @@ export default class UpdateScoRecordFormComponent extends Component {
         <PixButton
           @type="submit"
           @isDisabled={{not this.isSubmitButtonEnabled}}
-          class="account-recovery__content--actions update-sco-record-form__submit"
+          class="account-recovery__content--actions update-sco-record-form__buttons"
         >
           {{t "pages.account-recovery.update-sco-record.form.login-button"}}
         </PixButton>
       </div>
     </form>
+
+    {{#if this.isNewAccountRecoveryEnabled}}
+
+      <div class="account-recovery__content--form-quit-button-container">
+        <PixButtonLink @route="logout" class="account-recovery__content--actions update-sco-record-form__buttons">
+          {{t "common.actions.quit"}}
+        </PixButtonLink>
+      </div>
+    {{/if}}
   </template>
   @service intl;
   @service url;
