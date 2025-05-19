@@ -45,15 +45,6 @@ module('Integration | Component | account-recovery | update-sco-record', functio
         screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label'), { exact: false }),
       );
 
-    const submitButton = screen.getByRole('button', {
-      name: t('pages.account-recovery.update-sco-record.form.login-button'),
-    });
-    assert.ok(submitButton);
-    assert.true(submitButton.disabled);
-
-    assert.dom(screen.getByRole('checkbox', { name: t('common.cgu.label') })).exists();
-    assert.ok(screen.getByRole('link', { name: t('common.cgu.cgu') }));
-    assert.ok(screen.getByRole('link', { name: t('common.cgu.data-protection-policy') }));
       const submitButton = screen.getByRole('button', {
         name: t('pages.account-recovery.update-sco-record.form.login-button'),
       });
