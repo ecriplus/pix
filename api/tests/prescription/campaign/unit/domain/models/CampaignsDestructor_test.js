@@ -64,7 +64,7 @@ describe('CampaignsDestructor', function () {
     it('deletes campaigns and campaign participations', function () {
       const participations = [new CampaignParticipation()];
       const organizationId = 7;
-      const campaigns = [new Campaign({ organizationId })];
+      const campaigns = [new Campaign({ organizationId, name: 'Ma campagne' })];
 
       const destructor = new CampaignsDestructor({
         userId: 1,
@@ -77,7 +77,29 @@ describe('CampaignsDestructor', function () {
       destructor.delete();
 
       expect(destructor.campaigns[0].isDeleted).to.be.true;
+      expect(destructor.campaigns[0].name).to.equal('Ma campagne');
       expect(destructor.campaignParticipations[0].isDeleted).to.be.true;
+    });
+
+    it('should anonymize when flag is true', function () {
+      const participations = [new CampaignParticipation({ participantExternalId: 'externalId', userId: 'userId' })];
+      const organizationId = 7;
+      const campaigns = [new Campaign({ organizationId, name: 'Ma campagne', title: 'Mon titre' })];
+      const isAnonymizationWithDeletionEnabled = true;
+      const destructor = new CampaignsDestructor({
+        userId: 1,
+        organizationId,
+        membership: new OrganizationMembership({ isAdmin: true }),
+        campaignsToDelete: campaigns,
+        campaignParticipationsToDelete: participations,
+      });
+
+      destructor.delete(isAnonymizationWithDeletionEnabled);
+
+      expect(destructor.campaigns[0].name).to.equal('(anonymized)');
+      expect(destructor.campaigns[0].title).to.be.null;
+      expect(destructor.campaignParticipations[0].userId).to.be.null;
+      expect(destructor.campaignParticipations[0].participantExternalId).to.be.null;
     });
   });
 });
