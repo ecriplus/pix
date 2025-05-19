@@ -80,7 +80,7 @@ module('Integration | Component | analysis-per-tubes-and-competences', function 
       assert.ok(filledTable.getByRole('cell', { name: 'tube 1 cp 1 desc tube 1 cp 1' }));
       assert.ok(
         filledTable.getByRole('cell', {
-          name: t('components.analysis-per-tubes-and-competences.gauge.label', { reachedLevel: 2, maxLevel: 8 }),
+          name: t('pages.statistics.gauge.label', { userLevel: 2, tubeLevel: 8 }),
         }),
       );
       assert.ok(filledTable.getByRole('cell', { name: t('pages.statistics.level.novice') }));
@@ -88,7 +88,7 @@ module('Integration | Component | analysis-per-tubes-and-competences', function 
       assert.ok(filledTable.getByRole('cell', { name: 'tube 2 cp 1 desc tube 2 cp 1' }));
       assert.ok(
         filledTable.getByRole('cell', {
-          name: t('components.analysis-per-tubes-and-competences.gauge.label', { reachedLevel: 3.45, maxLevel: 4 }),
+          name: t('pages.statistics.gauge.label', { userLevel: 3.5, tubeLevel: 4 }),
         }),
       );
       assert.ok(filledTable.getByRole('cell', { name: t('pages.statistics.level.advanced') }));

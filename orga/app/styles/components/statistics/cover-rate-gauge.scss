@@ -1,7 +1,6 @@
 .cover-rate-gauge {
   display: grid;
   align-items: center;
-  justify-content: center;
   width: 100%;
   height: 3.5rem;
 }
@@ -28,13 +27,13 @@
 
   --level-text-spacing-from-gauge: -12px;
 
-  &:before {
+  &:not(.cover-rate-gauge__background--hide-max-min):before {
     position: absolute;
     left: var(--level-text-spacing-from-gauge);
     content: '0';
   }
 
-  &:after {
+  &:not(.cover-rate-gauge__background--hide-max-min):after {
     position: absolute;
     right: var(--level-text-spacing-from-gauge);
     content: '7';
