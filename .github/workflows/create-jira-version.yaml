@@ -1,21 +1,14 @@
 name: Create Jira Version
 
 on:
-  push:
-    tags:
-      - '*' 
+  release:
+    types: [published]
 
 jobs:
   create-jira-version:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get tag name and current date
-        run: |
-          echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-          echo "TODAY=$(date +%Y-%m-%d)" >> $GITHUB_ENV
-
-
       - name: Create version in Jira
         run: |
           AUTH_HEADER=$(echo -n "${{ secrets.JIRA_USER_EMAIL }}:${{ secrets.JIRA_API_TOKEN }}" | base64)
@@ -24,8 +17,8 @@ jobs:
             -H "Content-Type: application/json" \
             --url "${{ secrets.JIRA_BASE_URL }}/rest/api/3/version" \
             -d '{
-              "name": "${{ env.TAG_NAME }}",
+              "name": "${{ github.event.release.tag_name }}",
               "project": "${{ secrets.JIRA_PROJECT_KEY }}",
-              "startDate": "${{ env.TODAY }}",
+              "startDate": "$(date +%Y-%m-%d)",
               "released": false
             }'
