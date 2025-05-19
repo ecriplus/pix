@@ -89,7 +89,7 @@ class Campaign {
     return !this.archivedAt && !this.deletedAt;
   }
 
-  delete(userId) {
+  delete(userId, isAnonymizationWithDeletionEnabled = false) {
     if (this.deletedAt) {
       throw new DeletedCampaignError();
     }
@@ -99,6 +99,17 @@ class Campaign {
 
     this.deletedAt = new Date();
     this.deletedBy = userId;
+
+    if (isAnonymizationWithDeletionEnabled) {
+      this.name = '(anonymized)';
+      this.title = null;
+      this.customLandingPageText = null;
+      this.externalIdHelpImageUrl = null;
+      this.alternativeTextToExternalIdHelpImage = null;
+      this.customResultPageText = null;
+      this.customResultPageButtonText = null;
+      this.customResultPageButtonUrl = null;
+    }
   }
 
   archive(archivedAt, archivedBy) {
