@@ -30,7 +30,7 @@ export default class ModulixDetails extends Component {
       'pix-event-action': `Détails du module : ${this.args.module.slug}`,
       'pix-event-name': `Click sur le bouton Commencer un passage`,
     });
-    this.router.transitionTo('module.passage', this.args.module.id);
+    this.router.transitionTo('module.passage', this.args.module.slug);
   }
 
   @action
@@ -41,7 +41,7 @@ export default class ModulixDetails extends Component {
       'pix-event-action': `Détails du module : ${this.args.module.slug}`,
       'pix-event-name': `Click sur le bouton Commencer un passage en petit écran`,
     });
-    this.router.transitionTo('module.passage', this.args.module.id);
+    this.router.transitionTo('module.passage', this.args.module.slug);
   }
 
   @action

@@ -67,7 +67,7 @@ module('Integration | Component | Module | Details', function (hooks) {
         await click(screen.getByRole('button', { name: t('pages.modulix.details.startModule') }));
 
         // then
-        sinon.assert.calledWithExactly(router.transitionTo, 'module.passage', module.id);
+        sinon.assert.calledWithExactly(router.transitionTo, 'module.passage', module.slug);
         assert.ok(true);
       });
     });
@@ -103,7 +103,7 @@ module('Integration | Component | Module | Details', function (hooks) {
           await click(screen.getByRole('button', { name: t('pages.modulix.details.startModule') }));
 
           // then
-          sinon.assert.calledWithExactly(router.transitionTo, 'module.passage', module.id);
+          sinon.assert.calledWithExactly(router.transitionTo, 'module.passage', module.slug);
           assert.ok(true);
         });
       });
@@ -192,7 +192,7 @@ module('Integration | Component | Module | Details', function (hooks) {
             );
 
             // then
-            sinon.assert.calledWithExactly(router.transitionTo, 'module.passage', module.id);
+            sinon.assert.calledWithExactly(router.transitionTo, 'module.passage', module.slug);
             assert.ok(true);
           });
         });
