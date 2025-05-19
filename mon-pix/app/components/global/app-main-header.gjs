@@ -1,6 +1,6 @@
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import { LinkTo } from '@ember/routing';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 

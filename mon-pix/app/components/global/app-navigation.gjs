@@ -2,7 +2,7 @@ import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixNavigation from '@1024pix/pix-ui/components/pix-navigation';
 import PixNavigationButton from '@1024pix/pix-ui/components/pix-navigation-button';
 import PixNavigationSeparator from '@1024pix/pix-ui/components/pix-navigation-separator';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 

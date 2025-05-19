@@ -1,4 +1,4 @@
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
 const FRENCH_FRANCE_LOCALE = 'fr-fr';
 
