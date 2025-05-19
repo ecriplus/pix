@@ -1,4 +1,4 @@
-import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
 import PixProgressBar from '@1024pix/pix-ui/components/pix-progress-bar';
 import PixSidebar from '@1024pix/pix-ui/components/pix-sidebar';
 import { fn } from '@ember/helper';
@@ -58,14 +58,11 @@ export default class ModulixNavbar extends Component {
       aria-label={{t "pages.modulix.flashcards.navigation.longCurrentStep" current=@currentStep total=@totalSteps}}
     >
       <div class="module-navbar__content">
-        <PixButton
+        <PixIconButton
           @triggerAction={{this.openSidebar}}
-          @iconBefore="book"
-          @variant="secondary"
-          aria-label={{t "pages.modulix.sidebar.button"}}
-        >
-          {{t "pages.modulix.flashcards.navigation.shortCurrentStep" current=@currentStep total=@totalSteps}}
-        </PixButton>
+          @iconName="book"
+          @ariaLabel={{t "pages.modulix.sidebar.button"}}
+        />
         <PixProgressBar @hidePercentage={{true}} @isDecorative={{true}} @value={{this.progressValue}} />
       </div>
     </nav>

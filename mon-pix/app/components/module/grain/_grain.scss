@@ -62,6 +62,11 @@ $grain-card-border-radius: var(--pix-spacing-4x);
     padding: var(--pix-spacing-2x) 0;
     border-top: 0 solid var(--pix-neutral-100);
     border-radius: 0 0 $grain-card-border-radius $grain-card-border-radius;
+
+    &__with-skip-button {
+      display: flex;
+      justify-content: flex-end;
+    }
   }
 
   &--summary {
@@ -72,12 +77,6 @@ $grain-card-border-radius: var(--pix-spacing-4x);
   &--challenge {
     padding: var(--pix-spacing-6x);
     background: var(--modulix-challenge-card-background);
-  }
-
-  &--transition {
-    @extend %pix-title-xs;
-
-    font-weight: var(--pix-font-medium);
   }
 }
 
