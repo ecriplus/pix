@@ -7,7 +7,7 @@ export default class ModulePassageRoute extends Route {
 
   async model() {
     const module = this.modelFor('module');
-    const passage = await this.store.createRecord('passage', { moduleId: module.slug }).save({
+    const passage = await this.store.createRecord('passage', { moduleId: module.id }).save({
       adapterOptions: {
         occurredAt: new Date().getTime(),
         sequenceNumber: 1,

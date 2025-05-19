@@ -49,7 +49,7 @@ module('Unit | Route | modules | passage', function (hooks) {
 
     const route = this.owner.lookup('route:module.passage');
     const store = this.owner.lookup('service:store');
-    const module = { id: 'my-module', slug: 'my-module' };
+    const module = { id: 'module-id', slug: 'module-slug' };
 
     route.modelFor = sinon.stub();
     route.modelFor.withArgs('module').returns(module);
@@ -57,7 +57,7 @@ module('Unit | Route | modules | passage', function (hooks) {
     const save = sinon.stub();
     save.resolves(passage);
 
-    store.createRecord.withArgs('passage', { moduleId: 'my-module' }).returns({ save: save });
+    store.createRecord.withArgs('passage', { moduleId: 'module-id' }).returns({ save: save });
 
     const passageEventService = this.owner.lookup('service:passage-events');
     passageEventService.initialize = sinon.stub();
