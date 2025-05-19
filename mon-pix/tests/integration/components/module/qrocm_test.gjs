@@ -127,7 +127,7 @@ module('Integration | Component | Module | QROCM', function (hooks) {
         { content: '<span>Ma première proposition</span>', type: 'text' },
         {
           input: 'symbole',
-          inputType: 'text',
+          inputType: 'number',
           display: 'inline',
           size: 1,
           placeholder: '',
@@ -169,7 +169,7 @@ module('Integration | Component | Module | QROCM', function (hooks) {
       }),
     );
     assert.dom(screen.getByText('Ma première proposition')).exists({ count: 1 });
-    assert.ok(screen.queryByRole('textbox', { name: 'input-aria' }));
+    assert.ok(screen.queryByRole('spinbutton', { name: 'input-aria' }));
     assert.ok(screen.queryByText("l'identifiant"));
     assert.dom('.element-qrocm-proposals__input--inline').exists({ count: 2 });
   });
