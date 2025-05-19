@@ -20,7 +20,7 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
       const moduleRepositoryStub = {
         getById: sinon.stub(),
       };
-      moduleRepositoryStub.getById.withArgs(moduleId).throws(new NotFoundError());
+      moduleRepositoryStub.getById.withArgs({ id: moduleId }).throws(new NotFoundError());
 
       // when
       const error = await catchErr(createPassage)({ moduleId, moduleRepository: moduleRepositoryStub });
@@ -92,7 +92,7 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
     const moduleRepositoryStub = {
       getById: sinon.stub(),
     };
-    moduleRepositoryStub.getById.withArgs(module.id).resolves(module);
+    moduleRepositoryStub.getById.withArgs({ id: module.id }).resolves(module);
     const passageRepositoryStub = {
       save: sinon.stub(),
     };

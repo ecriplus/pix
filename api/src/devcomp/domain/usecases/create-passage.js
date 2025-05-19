@@ -19,7 +19,7 @@ const createPassage = withTransaction(async function ({
 
 async function _getModule({ id, moduleRepository }) {
   try {
-    return await moduleRepository.getById(id);
+    return await moduleRepository.getById({ id });
   } catch (e) {
     if (e instanceof NotFoundError) {
       throw new ModuleDoesNotExistError();
