@@ -25,7 +25,11 @@ const archiveInBatch = async function (request, h) {
 };
 
 const create = async function (request) {
-  const certificationCenter = certificationCenterForAdminSerializer.deserialize(request.payload);
+  const userId = extractUserIdFromRequest(request);
+  const certificationCenter = certificationCenterForAdminSerializer.deserialize({
+    data: request.payload.data,
+    createdBy: userId,
+  });
   const complementaryCertificationIds =
     request.payload.data.relationships?.habilitations?.data.map(
       (complementaryCertification) => complementaryCertification.id,

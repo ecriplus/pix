@@ -10,6 +10,11 @@ describe('Unit | Organizational Entities | Application | Controller | Admin | ce
     context('when payload contains all certification center fields', function () {
       beforeEach(function () {
         request = {
+          auth: {
+            credentials: {
+              userId: 123,
+            },
+          },
           payload: {
             data: {
               attributes: {
@@ -56,6 +61,7 @@ describe('Unit | Organizational Entities | Application | Controller | Admin | ce
           habilitations: [],
           isComplementaryAlonePilot: true,
           name: 'name',
+          createdBy: 123,
           type: 'PRO',
         };
         const dataProtectionOfficer = {
@@ -75,9 +81,15 @@ describe('Unit | Organizational Entities | Application | Controller | Admin | ce
         });
       });
     });
+
     context('when payload contains only required fields', function () {
       beforeEach(function () {
         request = {
+          auth: {
+            credentials: {
+              userId: 123,
+            },
+          },
           payload: {
             data: {
               attributes: {
@@ -103,6 +115,7 @@ describe('Unit | Organizational Entities | Application | Controller | Admin | ce
           externalId: null,
           name: 'name',
           type: 'PRO',
+          createdBy: 123,
         };
         const dataProtectionOfficer = {};
         const expectedCenterForAdmin = new CenterForAdmin({
