@@ -44,6 +44,21 @@ const terminate = async function (request, h, { usecases, passageSerializer }) {
   return passageSerializer.serialize(updatedPassage);
 };
 
-const passageController = { create, verifyAndSaveAnswer, terminate };
+const startEmbedLlmChat = async function (request, h, { usecases }) {
+  const { configId } = request.payload;
+  const userId = request.auth.credentials.userId;
+  const passageId = request.params.passageId;
+  const startedChatDTO = await usecases.startEmbedLlmChat({ configId, userId, passageId });
+
+  return h
+    .response({
+      inputMaxChars: startedChatDTO.inputMaxChars,
+      inputMaxPrompts: startedChatDTO.inputMaxPrompts,
+      chatId: startedChatDTO.id,
+    })
+    .code(201);
+};
+
+const passageController = { create, verifyAndSaveAnswer, terminate, startEmbedLlmChat };
 
 export { passageController };

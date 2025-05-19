@@ -1,10 +1,16 @@
+import { STORAGE_PREFIX } from '../../../../../src/llm/application/api/llm-api.js';
+import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import {
   createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
   knex,
+  nock,
+  sinon,
 } from '../../../../test-helper.js';
+
+const llmChatsTemporaryStorage = temporaryStorage.withPrefix(STORAGE_PREFIX);
 
 describe('Acceptance | Controller | passage-controller', function () {
   let server;
@@ -208,6 +214,71 @@ describe('Acceptance | Controller | passage-controller', function () {
         expect(response.statusCode).to.equal(200);
         const { terminatedAt } = await knex('passages').where({ id: passage.id }).first();
         expect(terminatedAt).to.be.not.null;
+      });
+    });
+  });
+
+  describe('POST /api/passages/{passageId}/embed/llm/chats', function () {
+    let clock, now, user;
+
+    beforeEach(async function () {
+      user = databaseBuilder.factory.buildUser();
+      databaseBuilder.factory.buildPassage({ id: 111, userId: user.id }).id;
+      now = new Date('2023-10-05T18:02:00Z');
+      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+      await databaseBuilder.commit();
+    });
+
+    afterEach(async function () {
+      clock.restore();
+      await llmChatsTemporaryStorage.flushAll();
+    });
+
+    context('when user is not authentified', function () {
+      it('should throw a 401', async function () {
+        // when
+        const response = await server.inject({
+          method: 'POST',
+          url: '/api/passages/111/embed/llm/chats',
+          payload: { configId: 'c1SuperConfig2Lespace' },
+        });
+
+        expect(response.statusCode).to.equal(401);
+      });
+    });
+
+    context('when user is authentified', function () {
+      it('should start a new chat', async function () {
+        // given
+        const config = {
+          llm: {
+            historySize: 123,
+          },
+          challenge: {
+            inputMaxChars: 456,
+            inputMaxPrompts: 789,
+          },
+        };
+        const llmApiScope = nock('https://llm-test.pix.fr/api')
+          .get('/configurations/c1SuperConfig2Lespace')
+          .reply(200, config);
+
+        // when
+        const response = await server.inject({
+          method: 'POST',
+          url: '/api/passages/111/embed/llm/chats',
+          payload: { configId: 'c1SuperConfig2Lespace' },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+        });
+
+        // then
+        expect(response.statusCode).to.equal(201);
+        expect(response.result).to.deep.equal({
+          chatId: `p111-${now.getMilliseconds()}`,
+          inputMaxChars: 456,
+          inputMaxPrompts: 789,
+        });
+        expect(llmApiScope.isDone()).to.be.true;
       });
     });
   });

@@ -77,6 +77,28 @@ const register = async function (server) {
         tags: ['api', 'passages'],
       },
     },
+    {
+      method: 'POST',
+      path: '/api/passages/{passageId}/embed/llm/chats',
+      config: {
+        validate: {
+          params: Joi.object({
+            passageId: identifiersType.passageId.required(),
+          }).required(),
+          payload: Joi.object({
+            configId: Joi.string().required(),
+          }).required(),
+          options: {
+            allowUnknown: true,
+          },
+        },
+        handler: handlerWithDependencies(passageController.startEmbedLlmChat),
+        tags: ['api', 'passages', 'embed', 'llm'],
+        notes: [
+          "Cette route permet de démarrer une conversation avec un LLM dans le cadre de la réalisation d'un embed LLM dans un modulix",
+        ],
+      },
+    },
   ]);
 };
 

@@ -328,6 +328,12 @@ const configuration = (function () {
       url: _removeTrailingSlashFromUrl(process.env.CYPRESS_LCMS_API_URL || process.env.LCMS_API_URL || ''),
       apiKey: process.env.CYPRESS_LCMS_API_KEY || process.env.LCMS_API_KEY,
     },
+    llm: {
+      temporaryStorage: {
+        expirationDelaySeconds: parseInt(process.env.LLM_CHAT_TEMPORARY_STORAGE_EXP_DELAY_SECONDS, 10) || 43200,
+      },
+      getConfigurationUrl: _removeTrailingSlashFromUrl(process.env.LLM_API_GET_CONFIGURATIONS_URL || ''),
+    },
     logging: {
       enabled: toBoolean(process.env.LOG_ENABLED),
       logLevel: process.env.LOG_LEVEL || 'info',
@@ -492,7 +498,9 @@ const configuration = (function () {
     config.lcms.apiKey = 'test-api-key';
     config.lcms.url = 'https://lcms-test.pix.fr/api';
 
-    config.domain.tldFr = '.fr';
+    config.llm.getConfigurationUrl = 'https://llm-test.pix.fr/api/configurations';
+    config.llm.temporaryStorage.expirationDelaySeconds = 1;
+
     config.domain.tldOrg = '.org';
     config.domain.pix = 'https://pix';
     config.domain.pixOrga = 'https://orga.pix';
