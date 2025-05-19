@@ -47,6 +47,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
           type: 'modules',
           id: slug,
           attributes: {
+            slug,
             title,
             'is-beta': isBeta,
             details,
@@ -105,6 +106,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
       const expectedJson = {
         data: {
           attributes: {
+            slug,
             title: 'Bien écrire son adresse mail',
             'is-beta': isBeta,
             version,

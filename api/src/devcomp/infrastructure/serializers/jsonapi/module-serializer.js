@@ -7,6 +7,7 @@ function serialize(module) {
     transform(module) {
       return {
         id: module.slug,
+        slug: module.slug,
         title: module.title,
         isBeta: module.isBeta,
         version: module.version,
@@ -21,7 +22,7 @@ function serialize(module) {
         }),
       };
     },
-    attributes: ['title', 'isBeta', 'version', 'grains', 'details'],
+    attributes: ['slug', 'title', 'isBeta', 'version', 'grains', 'details'],
     grains: {
       ref: 'id',
       includes: true,
