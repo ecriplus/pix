@@ -6,7 +6,7 @@ function serialize(module) {
   return new Serializer('module', {
     transform(module) {
       return {
-        id: module.slug,
+        id: module.id,
         slug: module.slug,
         title: module.title,
         isBeta: module.isBeta,

@@ -45,7 +45,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
       const expectedJson = {
         data: {
           type: 'modules',
-          id: slug,
+          id,
           attributes: {
             slug,
             title,
@@ -112,7 +112,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
             version,
             details,
           },
-          id: 'bien-ecrire-son-adresse-mail',
+          id: 'id',
           relationships: {
             grains: {
               data: [
