@@ -1,4 +1,4 @@
-import Service, { inject as service } from '@ember/service';
+import Service, { service } from '@ember/service';
 
 // TODO: Manage this through the API
 const FR_FEATURED_IDENTITY_PROVIDER_CODE = 'POLE_EMPLOI';

@@ -1,4 +1,4 @@
-import Service, { inject as service } from '@ember/service';
+import Service, { service } from '@ember/service';
 import ENV from 'mon-pix/config/environment';
 
 const ENGLISH_INTERNATIONAL_LOCALE = 'en';
