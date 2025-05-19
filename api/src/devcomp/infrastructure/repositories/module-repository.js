@@ -6,6 +6,20 @@ import { ModuleFactory } from '../factories/module-factory.js';
 
 const memoizedModuleVersions = new Map();
 
+async function getById({ id, moduleDatasource }) {
+  try {
+    const moduleData = await moduleDatasource.getById(id);
+    const version = _computeModuleVersion(moduleData);
+
+    return ModuleFactory.build({ ...moduleData, version });
+  } catch (e) {
+    if (e instanceof LearningContentResourceNotFound) {
+      throw new NotFoundError();
+    }
+    throw e;
+  }
+}
+
 async function getBySlug({ slug, moduleDatasource }) {
   try {
     const moduleData = await moduleDatasource.getBySlug(slug);
@@ -35,4 +49,4 @@ function _computeModuleVersion(moduleData) {
   return memoizedModuleVersions.get(moduleData.slug);
 }
 
-export { getBySlug, list };
+export { getById, getBySlug, list };
