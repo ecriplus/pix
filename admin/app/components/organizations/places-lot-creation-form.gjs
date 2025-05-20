@@ -7,9 +7,7 @@ import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import dayjs from 'dayjs';
-import pick from 'ember-composable-helpers/helpers/pick';
 import { t } from 'ember-intl';
-import set from 'ember-set-helper/helpers/set';
 import get from 'lodash/get';
 
 const categories = [
@@ -60,6 +58,26 @@ export default class PlacesLotCreationForm extends Component {
     this.category = newValue;
   }
 
+  @action
+  onCountChange(event) {
+    this.count = event.target.value;
+  }
+
+  @action
+  onActivationDateChange(event) {
+    this.activationDate = event.target.value;
+  }
+
+  @action
+  onExpirationDateChange(event) {
+    this.expirationDate = event.target.value;
+  }
+
+  @action
+  onReferenceChange(event) {
+    this.reference = event.target.value;
+  }
+
   getCategoryByValue(value) {
     if (value) {
       return find(this.categories, { value });
@@ -78,7 +96,7 @@ export default class PlacesLotCreationForm extends Component {
             <PixInput
               class={{if @errors.count "form-control is-invalid" "form-control"}}
               @value={{this.count}}
-              {{on "input" (pick "target.value" (set this "count"))}}
+              {{on "input" this.onCountChange}}
             ><:label>Nombre :</:label></PixInput>
 
             {{#if @errors.count}}
@@ -93,7 +111,7 @@ export default class PlacesLotCreationForm extends Component {
               class={{if @errors.activationDate "form-control is-invalid" "form-control"}}
               @value={{this.activationDate}}
               @requiredLabel={{true}}
-              {{on "input" (pick "target.value" (set this "activationDate"))}}
+              {{on "input" this.onActivationDateChange}}
             ><:label>Date d'activation</:label></PixInput>
 
             {{#if @errors.activationDate}}
@@ -107,7 +125,7 @@ export default class PlacesLotCreationForm extends Component {
               class={{if @errors.expirationDate "form-control is-invalid" "form-control"}}
               type="date"
               @value={{this.expirationDate}}
-              {{on "input" (pick "target.value" (set this "expirationDate"))}}
+              {{on "input" this.onExpirationDateChange}}
             ><:label>Date d'expiration</:label></PixInput>
 
             {{#if @errors.expirationDate}}
@@ -134,7 +152,7 @@ export default class PlacesLotCreationForm extends Component {
               class={{if @errors.reference "form-control is-invalid" "form-control"}}
               maxlength="255"
               @requiredLabel={{true}}
-              {{on "input" (pick "target.value" (set this "reference"))}}
+              {{on "input" this.onReferenceChange}}
             ><:label>Référence</:label></PixInput>
 
             {{#if @errors.reference}}
