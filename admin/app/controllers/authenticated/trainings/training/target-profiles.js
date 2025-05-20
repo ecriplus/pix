@@ -20,6 +20,11 @@ export default class TrainingDetailsTargetProfilesController extends Controller 
   }
 
   @action
+  onChangeTargetProfilesToAttach(event) {
+    this.targetProfilesToAttach = event.target.value;
+  }
+
+  @action
   async attachTargetProfiles(e) {
     e.preventDefault();
     if (this.noTargetProfilesToAttach) return;
