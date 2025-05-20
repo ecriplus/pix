@@ -151,10 +151,6 @@ module.exports = function (environment) {
     'ember-cli-mirage': {
       usingProxy: true,
     },
-
-    'ember-component-css': {
-      namespacing: false,
-    },
   };
 
   if (environment === 'development') {

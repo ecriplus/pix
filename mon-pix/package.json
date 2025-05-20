@@ -80,7 +80,6 @@
     "ember-cli-inject-live-reload": "^2.1.0",
     "ember-cli-mirage": "^3.0.3",
     "ember-cli-sass": "^11.0.1",
-    "ember-component-css": "^0.8.1",
     "ember-cookies": "^1.0.0",
     "ember-data": "^5.3.8",
     "ember-dayjs": "^0.12.0",
