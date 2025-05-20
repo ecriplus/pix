@@ -10,9 +10,7 @@ import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import pick from 'ember-composable-helpers/helpers/pick';
 import { t } from 'ember-intl';
-import set from 'ember-set-helper/helpers/set';
 import { not } from 'ember-truth-helpers';
 import uniq from 'lodash/uniq';
 
@@ -38,6 +36,11 @@ export default class OrganizationTargetProfilesSectionComponent extends Componen
   @action
   canDetachTargetProfile({ canDetach }) {
     return canDetach;
+  }
+
+  @action
+  onTargetProfilesToAttachChange(event) {
+    this.targetProfilesToAttach = event.target.value;
   }
 
   @action
@@ -147,7 +150,7 @@ export default class OrganizationTargetProfilesSectionComponent extends Componen
               @value={{this.targetProfilesToAttach}}
               class="organization-sub-form__input form-field__text form-control"
               placeholder="1, 2"
-              {{on "input" (pick "target.value" (set this "targetProfilesToAttach"))}}
+              {{on "input" this.onTargetProfilesToAttachChange}}
             />
             <PixButton @type="submit" @size="small" @isDisabled={{this.isDisabled}}>
               {{t "common.actions.validate"}}
