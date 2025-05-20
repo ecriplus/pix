@@ -247,7 +247,7 @@ const requiredFieldNamesForCampaignsImport = {
 const optionalFieldNamesForCampaignsImport = {
   externalIdLabel: "Libellé de l'identifiant externe",
   externalIdType: "Type de l'identifiant externe",
-  type: 'Type de campagne',
+  type: 'Type de campagne (Evaluation, Examen)',
   title: 'Titre du parcours',
   customLandingPageText: 'Descriptif du parcours',
   multipleSendings: 'Envoi multiple',
@@ -293,6 +293,14 @@ async function parseForCampaignsImport(cleanedData, { parseCsvData } = csvHelper
           'CSV_CONTENT_NOT_VALID',
           `${value === '' ? '"empty"' : value} is not a valid value for "${columnName}"`,
         );
+      }
+      if (columnName === optionalFieldNamesForCampaignsImport.type) {
+        if (value === 'Evaluation') {
+          return CampaignTypes.ASSESSMENT;
+        }
+        if (value === 'Examen') {
+          return CampaignTypes.EXAM;
+        }
       }
       return value;
     },

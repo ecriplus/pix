@@ -1506,7 +1506,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
 
   describe('#parseForCampaignsImport', function () {
     const headerCsv =
-      "Identifiant de l'organisation*;Type de campagne;Nom de la campagne*;Identifiant du profil cible*;Libellé de l'identifiant externe;Identifiant du créateur*;Titre du parcours;Descriptif du parcours;Envoi multiple;Identifiant du propriétaire*;Texte de la page de fin de parcours;Texte du bouton de la page de fin de parcours;URL du bouton de la page de fin de parcours\n";
+      "Identifiant de l'organisation*;Type de campagne (Evaluation, Examen);Nom de la campagne*;Identifiant du profil cible*;Libellé de l'identifiant externe;Identifiant du créateur*;Titre du parcours;Descriptif du parcours;Envoi multiple;Identifiant du propriétaire*;Texte de la page de fin de parcours;Texte du bouton de la page de fin de parcours;URL du bouton de la page de fin de parcours\n";
 
     it('should return parsed campaign data', async function () {
       // given
@@ -1693,6 +1693,157 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
         expect(error).to.be.instanceOf(FileValidationError);
         expect(error.code).to.equal('CSV_CONTENT_NOT_VALID');
         expect(error.meta).to.equal('"empty" is not a valid value for "Nom de la campagne*"');
+      });
+    });
+
+    describe('when type is provided', function () {
+      describe('if type is present', function () {
+        it('should default handle ASSESSMENT', async function () {
+          // given
+          const csv = `${headerCsv}1;ASSESSMENT;chaussette;1234;numéro étudiant;789;titre 1;descriptif 1;Oui;45`;
+
+          // when
+          const parsedData = await csvSerializer.parseForCampaignsImport(csv);
+
+          // then
+          const expectedParsedData = [
+            {
+              organizationId: 1,
+              type: CampaignTypes.ASSESSMENT,
+              name: 'chaussette',
+              targetProfileId: 1234,
+              externalIdLabel: 'numéro étudiant',
+              externalIdType: 'STRING',
+              title: 'titre 1',
+              customLandingPageText: 'descriptif 1',
+              creatorId: 789,
+              multipleSendings: true,
+              ownerId: 45,
+              customResultPageText: null,
+              customResultPageButtonText: null,
+              customResultPageButtonUrl: null,
+            },
+          ];
+          expect(parsedData).to.have.deep.members(expectedParsedData);
+        });
+
+        it('should default handle Evaluation', async function () {
+          // given
+          const csv = `${headerCsv}1;Evaluation;chaussette;1234;numéro étudiant;789;titre 1;descriptif 1;Oui;45`;
+
+          // when
+          const parsedData = await csvSerializer.parseForCampaignsImport(csv);
+
+          // then
+          const expectedParsedData = [
+            {
+              organizationId: 1,
+              type: CampaignTypes.ASSESSMENT,
+              name: 'chaussette',
+              targetProfileId: 1234,
+              externalIdLabel: 'numéro étudiant',
+              externalIdType: 'STRING',
+              title: 'titre 1',
+              customLandingPageText: 'descriptif 1',
+              creatorId: 789,
+              multipleSendings: true,
+              ownerId: 45,
+              customResultPageText: null,
+              customResultPageButtonText: null,
+              customResultPageButtonUrl: null,
+            },
+          ];
+          expect(parsedData).to.have.deep.members(expectedParsedData);
+        });
+
+        it('should default handle EXAM', async function () {
+          // given
+          const csv = `${headerCsv}1;EXAM;chaussette;1234;numéro étudiant;789;titre 1;descriptif 1;Oui;45`;
+
+          // when
+          const parsedData = await csvSerializer.parseForCampaignsImport(csv);
+
+          // then
+          const expectedParsedData = [
+            {
+              organizationId: 1,
+              type: CampaignTypes.EXAM,
+              name: 'chaussette',
+              targetProfileId: 1234,
+              externalIdLabel: 'numéro étudiant',
+              externalIdType: 'STRING',
+              title: 'titre 1',
+              customLandingPageText: 'descriptif 1',
+              creatorId: 789,
+              multipleSendings: true,
+              ownerId: 45,
+              customResultPageText: null,
+              customResultPageButtonText: null,
+              customResultPageButtonUrl: null,
+            },
+          ];
+          expect(parsedData).to.have.deep.members(expectedParsedData);
+        });
+
+        it('should default handle Examen', async function () {
+          // given
+          const csv = `${headerCsv}1;Examen;chaussette;1234;numéro étudiant;789;titre 1;descriptif 1;Oui;45`;
+
+          // when
+          const parsedData = await csvSerializer.parseForCampaignsImport(csv);
+
+          // then
+          const expectedParsedData = [
+            {
+              organizationId: 1,
+              type: CampaignTypes.EXAM,
+              name: 'chaussette',
+              targetProfileId: 1234,
+              externalIdLabel: 'numéro étudiant',
+              externalIdType: 'STRING',
+              title: 'titre 1',
+              customLandingPageText: 'descriptif 1',
+              creatorId: 789,
+              multipleSendings: true,
+              ownerId: 45,
+              customResultPageText: null,
+              customResultPageButtonText: null,
+              customResultPageButtonUrl: null,
+            },
+          ];
+          expect(parsedData).to.have.deep.members(expectedParsedData);
+        });
+      });
+
+      describe('if type is not present', function () {
+        it('should default to ASSESSMENT', async function () {
+          // given
+          const csv = `${headerCsv}1;;chaussette;1234;numéro étudiant;789;titre 1;descriptif 1;Oui;45`;
+
+          // when
+          const parsedData = await csvSerializer.parseForCampaignsImport(csv);
+
+          // then
+          const expectedParsedData = [
+            {
+              organizationId: 1,
+              type: CampaignTypes.ASSESSMENT,
+              name: 'chaussette',
+              targetProfileId: 1234,
+              externalIdLabel: 'numéro étudiant',
+              externalIdType: 'STRING',
+              title: 'titre 1',
+              customLandingPageText: 'descriptif 1',
+              creatorId: 789,
+              multipleSendings: true,
+              ownerId: 45,
+              customResultPageText: null,
+              customResultPageButtonText: null,
+              customResultPageButtonUrl: null,
+            },
+          ];
+          expect(parsedData).to.have.deep.members(expectedParsedData);
+        });
       });
     });
 
