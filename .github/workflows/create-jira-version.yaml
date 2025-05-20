@@ -16,9 +16,9 @@ jobs:
             -H "Authorization: Basic $AUTH_HEADER" \
             -H "Content-Type: application/json" \
             --url "${{ secrets.JIRA_BASE_URL }}/rest/api/3/version" \
-            -d '{
-              "name": "${{ github.event.release.tag_name }}",
-              "project": "${{ secrets.JIRA_PROJECT_KEY }}",
-              "startDate": "$(date +%Y-%m-%d)",
-              "released": false
-            }'
+            -d "{
+              \"name\": \"${{ github.event.release.tag_name }}\",
+              \"project\": \"${{ secrets.JIRA_PROJECT_KEY }}\",
+              \"startDate\": \"$(date +%Y-%m-%d)\",
+              \"released\": false
+            }"
