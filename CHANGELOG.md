@@ -1,5 +1,33 @@
 # Pix Changelog
 
+# [5.115.0](https://github.com/1024pix/pix/compare/v5.114.0...v5.115.0) (2025-05-20)
+
+### :rocket: Amélioration
+
+- [#12308](https://github.com/1024pix/pix/pull/12308) Ajout du QCU déclaratif côté Front (PIX-17684) 
+- [#12319](https://github.com/1024pix/pix/pull/12319) Ajouter une colone createdBy à la table certification-centers (PIX-17899) 
+- [#12286](https://github.com/1024pix/pix/pull/12286) Anonymiser les badges lors de la suppression des participations (PIX-17712) 
+- [#12303](https://github.com/1024pix/pix/pull/12303) Empêcher Ember de gérer les erreurs 403 de type HTML dans PixApp (PIX-17835). 
+- [#12304](https://github.com/1024pix/pix/pull/12304) Mettre à jour et generaliser updatedAt à l'anonymisation (PIX-17867) 
+- [#12282](https://github.com/1024pix/pix/pull/12282) Modifier l'affichage de la dernière page de récupération de compte (PIX-17505) 
+- [#12312](https://github.com/1024pix/pix/pull/12312) Modulix - QROCM : corriger choix input pour autoriser Number (PIX-17424) 
+- [#12313](https://github.com/1024pix/pix/pull/12313) Permettre d'anonymiser au grain d'une campagne lors de la suppression de celle-ci (PIX-17847) 
+- [#12305](https://github.com/1024pix/pix/pull/12305) Utilise le composant CoverRateGauge dans la table d'analyse des resultats par sujets / compétences (PIX-17857) 
+
+### :bug: Correction
+
+- [#12324](https://github.com/1024pix/pix/pull/12324) Afficher les CF dans "Mes formations" quand l'envoi des résultats est désactivé (PIX-17581) 
+- [#12320](https://github.com/1024pix/pix/pull/12320) Changer le déclencheur de l'action 
+- [#12323](https://github.com/1024pix/pix/pull/12323) Corriger la mention du groupe dans le message slack envoyé par le workflow de release. 
+- [#12318](https://github.com/1024pix/pix/pull/12318) Mauvais wording lors du signalement d'une épreuve avec pièce jointe (PIX-17677) 
+
+### :building_construction: Tech
+
+- [#12311](https://github.com/1024pix/pix/pull/12311) Mise à jour de librairies sur Pix-Certif. 
+- [#12284](https://github.com/1024pix/pix/pull/12284) Nettoyage de code inutil suite et fin de (PIX-17709) 
+- [#12316](https://github.com/1024pix/pix/pull/12316) Remplacer inject par service de l'import @ember/service 
+- [#12322](https://github.com/1024pix/pix/pull/12322) Remplacer l'utilisation du slug d'un module par l'id (PIX-17701)
+
 # [5.114.0](https://github.com/1024pix/pix/compare/v5.113.0...v5.114.0) (2025-05-19)
 
 ### :rocket: Amélioration
