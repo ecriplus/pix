@@ -5,4 +5,5 @@ export default class FeatureToggle extends Model {
   @attr('boolean') isPixAppNewLayoutEnabled;
   @attr('boolean') isQuestEnabled;
   @attr('boolean') isV3CertificationPageEnabled;
+  @attr('boolean') isNewAccountRecoveryEnabled;
 }

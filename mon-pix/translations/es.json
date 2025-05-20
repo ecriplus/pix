@@ -479,13 +479,20 @@
       "update-sco-record": {
         "fill-password": "¡Introduce tu contraseña y Pix será tuyo!",
         "form": {
+          "authentication-methods-removal-notice": "Después de este paso, ya no podrá iniciar sesión utilizando { connections }.",
+          "choose-password": "Elige una contraseña para seguir disfrutando de Pix.",
           "email-label": "Dirección de correo electrónico",
           "errors": {
             "empty-password": "El campo contraseña es obligatorio.",
             "invalid-password": "Tu contraseña debe tener al menos 8 caracteres y contener como mínimo una letra mayúscula, una letra minúscula y un dígito."
           },
           "login-button": "Iniciar sesión",
-          "password-label": "Contraseña"
+          "new-connection-info": "No te preocupes, todo lo que tienes que hacer para volver a conectarte es utilizar tu dirección de correo electrónico y la contraseña que estableciste aquí.",
+          "password-label": "Contraseña",
+          "sco-connections":{
+            "gar": "el Mediacentre",
+            "username":  "su identificación escolar Pix"
+          }
         },
         "welcome-message": "¡Te damos de nuevo la bienvenida, { firstName }!"
       }
