@@ -43,14 +43,18 @@
       position: relative;
 
       &-fields {
-        position: relative;
-        max-width: 400px;
-      }
+        display: flex;
+        flex-direction: column;
+        width: 100%;
 
-      &-quit-button-container{
-        max-width: 400px;
+        @include breakpoints.device-is('desktop') {
+          max-width: 400px;
+        }
       }
+    }
 
+    &-quit-button-container{
+      max-width: 400px;
     }
 
     &--image {
