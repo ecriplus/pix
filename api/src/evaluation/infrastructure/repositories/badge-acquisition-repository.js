@@ -24,6 +24,19 @@ const createOrUpdate = async function ({ badgeAcquisitionsToCreate = [] }) {
   }
 };
 
+/**
+ * @param {number[]} campaignParticipationIds
+ */
+const deleteUserIdOnNonCertifiableBadgesForCampaignParticipations = async (campaignParticipationIds) => {
+  const knexConnection = DomainTransaction.getConnection();
+  return knexConnection(BADGE_ACQUISITIONS_TABLE)
+    .update({ userId: null })
+    .updateFrom(BADGE_TABLE)
+    .where(`${BADGE_ACQUISITIONS_TABLE}.badgeId`, knex.raw('??', [`${BADGE_TABLE}.id`]))
+    .where(`${BADGE_TABLE}.isCertifiable`, '=', false)
+    .whereIn(`${BADGE_ACQUISITIONS_TABLE}.campaignParticipationId`, campaignParticipationIds);
+};
+
 const getAcquiredBadgeIds = async function ({ badgeIds, userId }) {
   const knexConn = DomainTransaction.getConnection();
   return knexConn(BADGE_ACQUISITIONS_TABLE).pluck('badgeId').where({ userId }).whereIn('badgeId', badgeIds);
@@ -60,6 +73,7 @@ const getAcquiredBadgesByCampaignParticipations = async function ({ campaignPart
 
 export {
   createOrUpdate,
+  deleteUserIdOnNonCertifiableBadgesForCampaignParticipations,
   getAcquiredBadgeIds,
   getAcquiredBadgesByCampaignParticipations,
   getAcquiredBadgesForCampaignParticipations,
