@@ -52,11 +52,22 @@ describe('Campaign', function () {
 
   describe('#delete', function () {
     it('deletes the campaign', function () {
-      const campaign = new Campaign({ id: 1, code: 'ABC123' });
+      // given
+      const campaign = new Campaign({ id: 1, code: 'ABC123', name: 'Nom de Campagne', title: 'Titre de campagne' });
+      const isAnonymizationWithDeletionEnabled = false;
 
-      campaign.delete(1);
+      // when
+      campaign.delete(777, isAnonymizationWithDeletionEnabled);
 
-      expect(campaign).to.deep.includes({ id: 1, code: 'ABC123', deletedAt: now, deletedBy: 1 });
+      // then
+      expect(campaign).to.deep.includes({
+        id: 1,
+        code: 'ABC123',
+        name: 'Nom de Campagne',
+        title: 'Titre de campagne',
+        deletedAt: now,
+        deletedBy: 777,
+      });
     });
 
     context('when the campaign is already deleted', function () {
@@ -76,6 +87,36 @@ describe('Campaign', function () {
         const error = await catchErr(campaign.delete, campaign)();
 
         expect(error).to.be.an.instanceOf(ObjectValidationError);
+      });
+    });
+
+    context('when anonymization flag is true', function () {
+      it('anonymize datas', async function () {
+        // given
+        const campaign = new Campaign({
+          name: 'Ma campagne',
+          title: 'Title',
+          customLandingPageText: 'customLandingPageText',
+          externalIdHelpImageUrl: 'externalIdHelpImageUrl',
+          alternativeTextToExternalIdHelpImage: 'alternativeTextToExternalIdHelpImage',
+          customResultPageText: 'customResultPageText',
+          customResultPageButtonText: 'customResultPageButtonText',
+          customResultPageButtonUrl: 'customResultPageButtonUrl',
+        });
+        const isAnonymizationWithDeletionEnabled = true;
+
+        // when
+        campaign.delete(1, isAnonymizationWithDeletionEnabled);
+
+        // then
+        expect(campaign.name).to.equal('(anonymized)');
+        expect(campaign.title).to.be.null;
+        expect(campaign.customLandingPageText).to.be.null;
+        expect(campaign.externalIdHelpImageUrl).to.be.null;
+        expect(campaign.alternativeTextToExternalIdHelpImage).to.be.null;
+        expect(campaign.customResultPageText).to.be.null;
+        expect(campaign.customResultPageButtonText).to.be.null;
+        expect(campaign.customResultPageButtonUrl).to.be.null;
       });
     });
   });

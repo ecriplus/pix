@@ -42,9 +42,11 @@ class CampaignsDestructor {
       throw new ObjectValidationError('User does not have right to delete some campaigns.');
   }
 
-  delete() {
-    this.#campaignParticipationsToDelete.forEach((campaignParticipation) => campaignParticipation.delete(this.#userId));
-    this.#campaignsToDelete.forEach((campaign) => campaign.delete(this.#userId));
+  delete(isAnonymizationWithDeletionEnabled = false) {
+    this.#campaignParticipationsToDelete.forEach((campaignParticipation) =>
+      campaignParticipation.delete(this.#userId, isAnonymizationWithDeletionEnabled),
+    );
+    this.#campaignsToDelete.forEach((campaign) => campaign.delete(this.#userId, isAnonymizationWithDeletionEnabled));
   }
 
   get campaignParticipations() {

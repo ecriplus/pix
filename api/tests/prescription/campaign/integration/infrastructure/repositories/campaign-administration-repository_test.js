@@ -717,46 +717,6 @@ describe('Integration | Repository | Campaign Administration', function () {
     });
   });
 
-  describe('#batchUpdate', function () {
-    let clock;
-    const frozenTime = new Date('1992-07-07');
-
-    beforeEach(async function () {
-      clock = sinon.useFakeTimers({ now: frozenTime, toFake: ['Date'] });
-    });
-
-    afterEach(function () {
-      clock.restore();
-    });
-
-    it('should update campaigns', async function () {
-      const user = databaseBuilder.factory.buildUser();
-      const firstCampaign = new Campaign(databaseBuilder.factory.buildCampaign());
-      const secondCampaign = new Campaign(databaseBuilder.factory.buildCampaign());
-
-      await databaseBuilder.commit();
-      // given
-      firstCampaign.delete(user.id);
-      secondCampaign.delete(user.id);
-
-      // when
-      await campaignAdministrationRepository.batchUpdate([firstCampaign, secondCampaign]);
-
-      const firstCampaignUpdated = await campaignAdministrationRepository.get(firstCampaign.id);
-      const secondCampaignUpdated = await campaignAdministrationRepository.get(secondCampaign.id);
-
-      // then
-      expect(firstCampaignUpdated).to.deep.include({
-        deletedAt: frozenTime,
-        deletedBy: user.id,
-      });
-      expect(secondCampaignUpdated).to.deep.include({
-        deletedAt: frozenTime,
-        deletedBy: user.id,
-      });
-    });
-  });
-
   describe('#update', function () {
     let campaign;
 
@@ -828,6 +788,108 @@ describe('Integration | Repository | Campaign Administration', function () {
       expect(campaignSaved.archivedAt).to.deep.equal(archivedAt);
       expect(campaignSaved.customLandingPageText).to.equal('New text');
       expect(campaignSaved.ownerId).to.equal(newOwnerId);
+    });
+  });
+
+  describe('#remove', function () {
+    let campaign, userId;
+    let clock;
+    const frozenTime = new Date('1992-07-07');
+
+    beforeEach(function () {
+      clock = sinon.useFakeTimers({ now: frozenTime, toFake: ['Date'] });
+
+      campaign = new Campaign(
+        databaseBuilder.factory.buildCampaign({
+          name: 'Campaign name',
+          title: 'Campaign title',
+          customLandingPageText: 'customLandingPageText',
+          externalIdHelpImageUrl: 'externalIdHelpImageUrl',
+          alternativeTextToExternalIdHelpImage: 'alternativeTextToExternalIdHelpImage',
+          customResultPageText: 'customResultPageText',
+          customResultPageButtonText: 'customResultPageButtonText',
+          customResultPageButtonUrl: 'customResultPageButtonUrl',
+          multipleSendings: true,
+          isForAbsoluteNovice: false,
+        }),
+      );
+      userId = databaseBuilder.factory.buildUser().id;
+
+      return databaseBuilder.commit();
+    });
+
+    afterEach(function () {
+      clock.restore();
+    });
+
+    it('should remove the correct campaign', async function () {
+      // given
+      const isAnonymizationWithDeletionEnabled = true;
+      campaign.delete(userId, isAnonymizationWithDeletionEnabled);
+
+      const anotherCampaign = databaseBuilder.factory.buildCampaign({
+        name: 'Another Campaign',
+        title: 'Another title',
+      });
+      await databaseBuilder.commit();
+
+      // when
+      await campaignAdministrationRepository.remove([campaign]);
+
+      // then
+      const removedCampaign = await knex.from('campaigns').where({ id: campaign.id }).first();
+      const notRemovedCampaign = await knex.from('campaigns').where({ id: anotherCampaign.id }).first();
+
+      expect(removedCampaign.name).to.equal('(anonymized)');
+      expect(removedCampaign.deletedAt).to.deep.equal(frozenTime);
+      expect(removedCampaign.deletedBy).to.equal(userId);
+      expect(notRemovedCampaign.name).to.equal('Another Campaign');
+      expect(notRemovedCampaign.title).to.equal('Another title');
+      expect(notRemovedCampaign.deletedBy).to.be.null;
+      expect(notRemovedCampaign.deletedAt).to.be.null;
+    });
+
+    it('should remove campaign deletion attributes fields', async function () {
+      // given
+      const isAnonymizationWithDeletionEnabled = true;
+
+      campaign.delete(userId, isAnonymizationWithDeletionEnabled);
+
+      // when
+      await campaignAdministrationRepository.remove([campaign]);
+      const campaignRemoved = await knex.from('campaigns').where({ id: campaign.id }).first();
+
+      // then
+      expect(campaignRemoved.id).to.equal(campaign.id);
+      expect(campaignRemoved.name).to.equal('(anonymized)');
+      expect(campaignRemoved.title).to.be.null;
+      expect(campaignRemoved.customLandingPageText).to.be.null;
+      expect(campaignRemoved.alternativeTextToExternalIdHelpImage).to.be.null;
+      expect(campaignRemoved.customResultPageText).to.be.null;
+      expect(campaignRemoved.customResultPageButtonText).to.be.null;
+      expect(campaignRemoved.customResultPageButtonUrl).to.be.null;
+      expect(campaignRemoved.deletedBy).to.equal(userId);
+      expect(campaignRemoved.deletedAt).to.deep.equal(frozenTime);
+    });
+
+    it('should not update other fields', async function () {
+      // given
+      const isAnonymizationWithDeletionEnabled = true;
+
+      campaign.updateFields({
+        multipleSendings: false,
+        type: 'PROFILE_COLLECTION',
+      });
+      campaign.delete(userId, isAnonymizationWithDeletionEnabled);
+
+      // when
+      await campaignAdministrationRepository.remove([campaign]);
+      const campaignRemoved = await knex.from('campaigns').where({ id: campaign.id }).first();
+
+      // then
+      expect(campaignRemoved.id).to.equal(campaign.id);
+      expect(campaignRemoved.multipleSendings).to.be.true;
+      expect(campaignRemoved.type).to.equal('ASSESSMENT');
     });
   });
 

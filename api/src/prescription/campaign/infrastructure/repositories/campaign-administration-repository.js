@@ -64,17 +64,34 @@ const get = async function (id) {
 };
 
 const update = async function (campaign) {
+  return _update(campaign, CAMPAIGN_ATTRIBUTES);
+};
+
+const CAMPAIGN_DELETION_ATTRIBUTES = [
+  'name',
+  'title',
+  'customLandingPageText',
+  'externalIdHelpImageUrl',
+  'alternativeTextToExternalIdHelpImage',
+  'customResultPageText',
+  'customResultPageButtonText',
+  'customResultPageButtonUrl',
+  'deletedAt',
+  'deletedBy',
+];
+
+const remove = async function (campaigns) {
+  return Promise.all(campaigns.map((campaign) => _update(campaign, CAMPAIGN_DELETION_ATTRIBUTES)));
+};
+
+const _update = async function (campaign, attributes) {
   const knexConn = DomainTransaction.getConnection();
   const [editedCampaign] = await knexConn('campaigns')
     .where({ id: campaign.id })
-    .update(_.pick(campaign, CAMPAIGN_ATTRIBUTES))
+    .update(_.pick(campaign, attributes))
     .returning('*');
 
   return new Campaign(editedCampaign);
-};
-
-const batchUpdate = async function (campaigns) {
-  return Promise.all(campaigns.map((campaign) => update(campaign)));
 };
 
 const save = async function (campaigns, dependencies = { skillRepository }) {
@@ -173,12 +190,12 @@ const archiveCampaigns = function (campaignIds, userId) {
 
 export {
   archiveCampaigns,
-  batchUpdate,
   get,
   getByCode,
   getByIds,
   isCodeAvailable,
   isFromSameOrganization,
+  remove,
   save,
   swapCampaignCodes,
   update,

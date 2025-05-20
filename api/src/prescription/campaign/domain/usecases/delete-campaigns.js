@@ -4,6 +4,7 @@ const deleteCampaigns = async ({
   userId,
   organizationId,
   campaignIds,
+  featureToggles,
   organizationMembershipRepository,
   campaignAdministrationRepository,
   campaignParticipationRepository,
@@ -12,6 +13,8 @@ const deleteCampaigns = async ({
   const campaignsToDelete = await campaignAdministrationRepository.getByIds(campaignIds);
   const campaignParticipationsToDelete = await campaignParticipationRepository.getByCampaignIds(campaignIds);
 
+  const isAnonymizationWithDeletionEnabled = await featureToggles.get('isAnonymizationWithDeletionEnabled');
+
   const campaignDestructor = new CampaignsDestructor({
     campaignsToDelete,
     campaignParticipationsToDelete,
@@ -19,10 +22,10 @@ const deleteCampaigns = async ({
     organizationId,
     membership,
   });
-  campaignDestructor.delete();
+  campaignDestructor.delete(isAnonymizationWithDeletionEnabled);
 
   await campaignParticipationRepository.batchUpdate(campaignParticipationsToDelete);
-  await campaignAdministrationRepository.batchUpdate(campaignsToDelete);
+  await campaignAdministrationRepository.remove(campaignsToDelete);
 };
 
 export { deleteCampaigns };
