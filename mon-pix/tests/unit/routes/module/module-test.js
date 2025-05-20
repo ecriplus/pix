@@ -20,8 +20,8 @@ module('Unit | Route | modules | module', function (hooks) {
 
     const module = Symbol('the-module');
 
-    store.findRecord = sinon.stub();
-    store.findRecord.withArgs('module', 'the-module').resolves(module);
+    store.queryRecord = sinon.stub();
+    store.queryRecord.withArgs('module', { slug: 'the-module' }).resolves(module);
 
     // when
     const model = await route.model({ slug: 'the-module' });
