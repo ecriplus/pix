@@ -8,10 +8,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import pick from 'ember-composable-helpers/helpers/pick';
-import toggle from 'ember-composable-helpers/helpers/toggle';
 import { t } from 'ember-intl';
-import set from 'ember-set-helper/helpers/set';
 import { not } from 'ember-truth-helpers';
 
 import SafeMarkdownToHtml from '../safe-markdown-to-html';
@@ -95,6 +92,20 @@ export default class Badge extends Component {
   }
 
   @action
+  onFormInputChange(name) {
+    return (event) => {
+      this.form[name] = event.target.value;
+    };
+  }
+
+  @action
+  onFormCheckToggle(name) {
+    return () => {
+      this.form[name] = !this.form[name];
+    };
+  }
+
+  @action
   toggleEditMode() {
     this.editMode = !this.editMode;
     if (this.editMode) {
@@ -103,13 +114,15 @@ export default class Badge extends Component {
   }
 
   _initForm() {
-    this.form.title = this.args.badge.title;
-    this.form.key = this.args.badge.key;
-    this.form.message = this.args.badge.message;
-    this.form.altMessage = this.args.badge.altMessage;
-    this.form.isCertifiable = this.args.badge.isCertifiable;
-    this.form.isAlwaysVisible = this.args.badge.isAlwaysVisible;
-    this.form.imageName = this.imageName;
+    this.form = {
+      title: this.args.badge.title,
+      key: this.args.badge.key,
+      message: this.args.badge.message,
+      altMessage: this.args.badge.altMessage,
+      isCertifiable: this.args.badge.isCertifiable,
+      isAlwaysVisible: this.args.badge.isAlwaysVisible,
+      imageName: this.imageName,
+    };
   }
 
   <template>
@@ -127,7 +140,7 @@ export default class Badge extends Component {
                 class="form-control"
                 @value={{this.form.title}}
                 @requiredLabel={{true}}
-                {{on "input" (pick "target.value" (set this "form.title"))}}
+                {{on "input" (this.onFormInputChange "title")}}
               ><:label>Titre</:label></PixInput>
             </div>
             <div class="badge-edit-form__field">
@@ -135,7 +148,7 @@ export default class Badge extends Component {
                 class="form-control"
                 @value={{this.form.key}}
                 @requiredLabel={{true}}
-                {{on "input" (pick "target.value" (set this "form.key"))}}
+                {{on "input" (this.onFormInputChange "key")}}
               ><:label>Clé</:label></PixInput>
             </div>
             <div class="badge-edit-form__field">
@@ -143,7 +156,7 @@ export default class Badge extends Component {
                 class="form-control"
                 @value={{this.form.message}}
                 rows="4"
-                {{on "input" (pick "target.value" (set this "form.message"))}}
+                {{on "input" (this.onFormInputChange "message")}}
               ><:label>Message</:label></PixTextarea>
             </div>
             <div class="badge-edit-form__field">
@@ -151,7 +164,7 @@ export default class Badge extends Component {
                 class="form-control"
                 @value={{this.form.imageName}}
                 @requiredLabel={{t "common.forms.mandatory"}}
-                {{on "input" (pick "target.value" (set this "form.imageName"))}}
+                {{on "input" (this.onFormInputChange "imageName")}}
               ><:label>Nom de l'image (svg)</:label></PixInput>
             </div>
             <div class="badge-edit-form__field">
@@ -159,7 +172,7 @@ export default class Badge extends Component {
                 class="form-control"
                 @value={{this.form.altMessage}}
                 @requiredLabel={{t "common.forms.mandatory"}}
-                {{on "input" (pick "target.value" (set this "form.altMessage"))}}
+                {{on "input" (this.onFormInputChange "altMessage")}}
               ><:label>Message Alternatif</:label></PixInput>
             </div>
             <div class="badge-edit-form__checkboxes">
@@ -167,7 +180,7 @@ export default class Badge extends Component {
                 <PixCheckbox
                   @checked={{this.form.isCertifiable}}
                   @variant="tile"
-                  {{on "change" (toggle "form.isCertifiable" this)}}
+                  {{on "change" (this.onFormCheckToggle "isCertifiable")}}
                 ><:label>Certifiable</:label></PixCheckbox>
               </div>
               <div>
@@ -175,7 +188,7 @@ export default class Badge extends Component {
                   @type="checkbox"
                   @checked={{this.form.isAlwaysVisible}}
                   @variant="tile"
-                  {{on "change" (toggle "form.isAlwaysVisible" this)}}
+                  {{on "change" (this.onFormCheckToggle "isAlwaysVisible")}}
                 ><:label>Lacunes</:label></PixCheckbox>
               </div>
             </div>
