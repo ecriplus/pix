@@ -8,9 +8,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import pick from 'ember-composable-helpers/helpers/pick';
 import { t } from 'ember-intl';
-import set from 'ember-set-helper/helpers/set';
 
 import contains from '../../helpers/contains.js';
 import { types } from '../../models/certification-center';
@@ -32,6 +30,13 @@ export default class InformationEdit extends Component {
 
   get availableHabilitations() {
     return this.args.availableHabilitations?.sortBy('id');
+  }
+
+  @action
+  onFormInputChange(name) {
+    return (event) => {
+      this.form.set(name, event.target.value);
+    };
   }
 
   @action
@@ -91,7 +96,7 @@ export default class InformationEdit extends Component {
         class={{if this.form.validations.attrs.name.isInValid "form-control is-invalid" "form-control"}}
         @value={{this.form.name}}
         @requiredLabel={{true}}
-        {{on "input" (pick "target.value" (set this "form.name"))}}
+        {{on "input" (this.onFormInputChange "name")}}
       >
         <:label>Nom du centre</:label>
       </PixInput>
@@ -116,7 +121,7 @@ export default class InformationEdit extends Component {
       <PixInput
         class={{if this.form.validations.attrs.externalId.isInvalid "form-control is-invalid" "form-control"}}
         @value={{this.form.externalId}}
-        {{on "input" (pick "target.value" (set this "form.externalId"))}}
+        {{on "input" (this.onFormInputChange "externalId")}}
       >
         <:label>Identifiant externe</:label>
       </PixInput>
@@ -134,7 +139,7 @@ export default class InformationEdit extends Component {
           "form-control"
         }}
         @value={{this.form.dataProtectionOfficerFirstName}}
-        {{on "input" (pick "target.value" (set this "form.dataProtectionOfficerFirstName"))}}
+        {{on "input" (this.onFormInputChange "dataProtectionOfficerFirstName")}}
       >
         <:label>Prénom du <abbr title="Délégué à la protection des données">DPO</abbr></:label>
       </PixInput>
@@ -152,7 +157,7 @@ export default class InformationEdit extends Component {
           "form-control"
         }}
         @value={{this.form.dataProtectionOfficerLastName}}
-        {{on "input" (pick "target.value" (set this "form.dataProtectionOfficerLastName"))}}
+        {{on "input" (this.onFormInputChange "dataProtectionOfficerLastName")}}
       ><:label>Nom du <abbr title="Délégué à la protection des données">DPO</abbr></:label></PixInput>
 
       {{#if this.form.validations.attrs.dataProtectionOfficerLastName.isInvalid}}
@@ -168,7 +173,7 @@ export default class InformationEdit extends Component {
           "form-control"
         }}
         @value={{this.form.dataProtectionOfficerEmail}}
-        {{on "input" (pick "target.value" (set this "form.dataProtectionOfficerEmail"))}}
+        {{on "input" (this.onFormInputChange "dataProtectionOfficerEmail")}}
       ><:label>Adresse e-mail du <abbr title="Délégué à la protection des données">DPO</abbr></:label></PixInput>
 
       {{#if this.form.validations.attrs.dataProtectionOfficerEmail.isInvalid}}
