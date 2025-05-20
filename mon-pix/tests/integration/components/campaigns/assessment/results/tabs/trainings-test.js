@@ -27,6 +27,11 @@ module('Integration | Components | Campaigns | Assessment | Evaluation Results T
         duration: { days: 2 },
       });
 
+      const campaignParticipationResult = {
+        isDisabled: false,
+      };
+
+      this.set('campaignParticipationResult', campaignParticipationResult);
       this.set('trainings', [training1, training2]);
 
       // when
@@ -34,6 +39,50 @@ module('Integration | Components | Campaigns | Assessment | Evaluation Results T
         hbs`<Campaigns::Assessment::Results::EvaluationResultsTabs::Trainings
   @trainings={{this.trainings}}
   @isSharableCampaign={{false}}
+  @campaignParticipationResult={{this.campaignParticipationResult}}
+/>`,
+      );
+
+      // then
+      assert.dom(screen.getByRole('heading', { name: t('pages.skill-review.tabs.trainings.title') })).isVisible();
+      assert.dom(screen.getByText(t('pages.skill-review.tabs.trainings.description'))).isVisible();
+
+      assert.strictEqual(screen.getAllByRole('link').length, 2);
+      assert.dom(screen.getByText('Mon super training')).isVisible();
+      assert.dom(screen.getByText('Mon autre super training')).isVisible();
+
+      assert.dom(screen.queryByRole('dialog')).doesNotExist();
+    });
+  });
+
+  module('when campaign is archived', function () {
+    test('it should display the trainings list', async function (assert) {
+      // given
+
+      const store = this.owner.lookup('service:store');
+      const training1 = store.createRecord('training', {
+        title: 'Mon super training',
+        link: 'https://exemple.net/',
+        duration: { days: 2 },
+      });
+      const training2 = store.createRecord('training', {
+        title: 'Mon autre super training',
+        link: 'https://exemple.net/',
+        duration: { days: 2 },
+      });
+
+      const campaignParticipationResult = {
+        isDisabled: true,
+      };
+
+      this.set('campaignParticipationResult', campaignParticipationResult);
+      this.set('trainings', [training1, training2]);
+
+      // when
+      const screen = await render(
+        hbs`<Campaigns::Assessment::Results::EvaluationResultsTabs::Trainings
+  @trainings={{this.trainings}}
+  @campaignParticipationResult={{this.campaignParticipationResult}}
 />`,
       );
 
@@ -66,6 +115,11 @@ module('Integration | Components | Campaigns | Assessment | Evaluation Results T
           duration: { days: 2 },
         });
 
+        const campaignParticipationResult = {
+          isDisabled: false,
+        };
+
+        this.set('campaignParticipationResult', campaignParticipationResult);
         this.set('trainings', [training1, training2]);
 
         // when
@@ -74,6 +128,7 @@ module('Integration | Components | Campaigns | Assessment | Evaluation Results T
   @trainings={{this.trainings}}
   @isParticipationShared={{true}}
   @isSharableCampaign={{true}}
+  @campaignParticipationResult={{this.campaignParticipationResult}}
 />`,
         );
 
@@ -101,6 +156,12 @@ module('Integration | Components | Campaigns | Assessment | Evaluation Results T
         onResultsSharedStub = sinon.stub();
         this.set('onResultsShared', onResultsSharedStub);
 
+        const campaignParticipationResult = {
+          isDisabled: false,
+        };
+
+        this.set('campaignParticipationResult', campaignParticipationResult);
+
         // when
         screen = await render(
           hbs`<Campaigns::Assessment::Results::EvaluationResultsTabs::Trainings
@@ -109,6 +170,7 @@ module('Integration | Components | Campaigns | Assessment | Evaluation Results T
   @campaignParticipationResultId={{this.campaignParticipationResultId}}
   @campaignId={{this.campaignId}}
   @onResultsShared={{this.onResultsShared}}
+  @campaignParticipationResult={{this.campaignParticipationResult}}
 />`,
         );
       });
