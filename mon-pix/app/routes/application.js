@@ -10,15 +10,27 @@ export default class ApplicationRoute extends Route {
   @service oidcIdentityProviders;
   @service session;
   @service splash;
-  @service metrics;
+  @service pixMetrics;
   @service store;
+  @service router;
+
+  constructor() {
+    super(...arguments);
+
+    const trackRouteChange = (transition) => {
+      if (!transition.to || transition.to.metadata?.doNotTrackPage) {
+        return;
+      }
+      this.pixMetrics.trackPage();
+    };
+    this.router.on('routeDidChange', trackRouteChange);
+  }
 
   activate() {
     this.splash.hide();
   }
 
   async beforeModel(transition) {
-    this.metrics.initialize();
     await this.session.setup();
 
     await this.featureToggles.load().catch();
@@ -51,6 +63,7 @@ export default class ApplicationRoute extends Route {
   deactivate() {
     this.#stopPolling();
   }
+
   @action
   error(error) {
     this.#stopPolling();

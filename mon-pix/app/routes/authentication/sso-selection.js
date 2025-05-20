@@ -10,6 +10,10 @@ export default class SsoSelectionRoute extends Route {
   controllerName = 'authentication.sso-selection';
   templateName = 'authentication.sso-selection';
 
+  buildRouteInfoMetadata() {
+    return { doNotTrackPage: !this.currentDomain.isFranceDomain };
+  }
+
   redirect() {
     if (this.currentDomain.isFranceDomain) return;
 

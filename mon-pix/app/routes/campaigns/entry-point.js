@@ -12,6 +12,10 @@ export default class EntryPoint extends Route {
   @service store;
   @service metrics;
 
+  buildRouteInfoMetadata() {
+    return { doNotTrackPage: true };
+  }
+
   async beforeModel() {
     if (this.session.isAuthenticated && this.currentUser.user.isAnonymous) {
       await this.session.invalidate();
@@ -37,7 +41,7 @@ export default class EntryPoint extends Route {
       this.campaignStorage.set(campaign.code, 'participantExternalId', participantExternalId);
     }
     if (queryParams.retry) {
-      this.metrics.add({
+      this.metrics.trackEvent({
         event: 'custom-event',
         'pix-event-category': 'Campagnes',
         'pix-event-action': 'Retenter la campagne',
@@ -46,7 +50,7 @@ export default class EntryPoint extends Route {
       this.campaignStorage.set(campaign.code, 'retry', transition.to.queryParams.retry);
     }
     if (queryParams.reset) {
-      this.metrics.add({
+      this.metrics.trackEvent({
         event: 'custom-event',
         'pix-event-category': 'Campagnes',
         'pix-event-action': 'Remise à zéro de la campagne',

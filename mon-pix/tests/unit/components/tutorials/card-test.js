@@ -210,7 +210,7 @@ module('Unit | Component | Tutorial | card item', function (hooks) {
     test('should push event on click', function (assert) {
       // given
       const metrics = this.owner.lookup('service:metrics');
-      metrics.add = sinon.stub();
+      metrics.trackEvent = sinon.stub();
       const tutorialTitle = 'Mon super tutoriel';
       component = createGlimmerComponent('tutorials/card', {
         tutorial: { ...tutorial, title: tutorialTitle, link: 'https://exemple.net/' },
@@ -222,7 +222,7 @@ module('Unit | Component | Tutorial | card item', function (hooks) {
       component.trackAccess();
 
       // then
-      sinon.assert.calledWithExactly(metrics.add, {
+      sinon.assert.calledWithExactly(metrics.trackEvent, {
         event: 'custom-event',
         'pix-event-category': 'Accès tuto',
         'pix-event-action': `Click depuis : ${currentRouteName}`,

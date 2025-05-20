@@ -81,7 +81,7 @@ export default class EvaluationResultsHero extends Component {
       const adapter = this.store.adapterFor('campaign-participation-result');
       await adapter.beginImprovement(campaignParticipationResult.id);
 
-      this.metrics.add({
+      this.metrics.trackEvent({
         event: 'custom-event',
         'pix-event-category': 'Fin de parcours',
         'pix-event-action': 'Amélioration des résultats',
@@ -113,7 +113,7 @@ export default class EvaluationResultsHero extends Component {
       campaignParticipationResult.isShared = true;
       campaignParticipationResult.canImprove = false;
 
-      this.metrics.add({
+      this.metrics.trackEvent({
         event: 'custom-event',
         'pix-event-category': 'Fin de parcours',
         'pix-event-action': 'Envoi des résultats',
@@ -133,7 +133,7 @@ export default class EvaluationResultsHero extends Component {
 
   @action
   handleBackToHomepageDisplay() {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Fin de parcours',
       'pix-event-action': 'Sortie de parcours',
@@ -143,7 +143,7 @@ export default class EvaluationResultsHero extends Component {
 
   @action
   handleBackToHomepageClick() {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Fin de parcours',
       'pix-event-action': 'Sortie de parcours',

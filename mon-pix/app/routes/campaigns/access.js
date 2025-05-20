@@ -10,6 +10,10 @@ export default class AccessRoute extends Route {
   @service store;
   @service oidcIdentityProviders;
 
+  buildRouteInfoMetadata() {
+    return { doNotTrackPage: true };
+  }
+
   beforeModel(transition) {
     if (!transition.from) {
       return this.router.replaceWith('campaigns.entry-point');

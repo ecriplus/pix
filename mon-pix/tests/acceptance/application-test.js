@@ -4,6 +4,9 @@ import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { setupIntl } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
+
+import { authenticate } from '../helpers/authentication';
 
 module('Acceptance | Application', function (hooks) {
   setupApplicationTest(hooks);
@@ -12,11 +15,104 @@ module('Acceptance | Application', function (hooks) {
 
   hooks.beforeEach(async function () {
     this.owner.lookup('service:store');
+
     class FeatureTogglesStub extends Service {
       featureToggles = { isPixAppNewLayoutEnabled: true };
       load = async function () {};
     }
+
     this.owner.register('service:featureToggles', FeatureTogglesStub);
+  });
+
+  module('analytics', function (hooks) {
+    hooks.beforeEach(async function () {
+      class MetricServiceStub extends Service {
+        trackPage = sinon.stub();
+        context = {};
+      }
+
+      this.owner.register('service:metrics', MetricServiceStub);
+    });
+
+    test('should trackPage', async function (assert) {
+      // given
+      const metricService = this.owner.lookup('service:metrics');
+      const user = this.server.create('user', 'withEmail');
+      await authenticate(user);
+
+      // when
+      await visit('/');
+
+      // then
+      assert.ok(
+        metricService.trackPage.calledOnceWithExactly({
+          plausibleAttributes: { u: '/accueil' },
+        }),
+      );
+    });
+
+    test('should not track redirected page', async function (assert) {
+      // given
+      const metricService = this.owner.lookup('service:metrics');
+      server.create('assessment', 'ofCompetenceEvaluationType', {
+        id: 1,
+      });
+      server.create('challenge', 'forCompetenceEvaluation', 'QROCM', {});
+
+      // when
+      await visit('/competences/1/evaluer');
+
+      // then
+      assert.ok(metricService.trackPage.calledOnce);
+    });
+
+    test('should rewrite id in URL', async function (assert) {
+      // given
+      server.create('assessment', 'ofCompetenceEvaluationType', {
+        id: 1,
+      });
+      server.create('challenge', 'forCompetenceEvaluation', 'QROCM', {});
+
+      const metricService = this.owner.lookup('service:metrics');
+      await visit('/assessments/1/challenges/0');
+      sinon.assert.calledOnceWithExactly(metricService.trackPage, {
+        plausibleAttributes: { u: '/assessments/_ID_/challenges/_ID_' },
+      });
+      assert.ok(true);
+    });
+
+    test('should ignore unknown route', async function (assert) {
+      // given
+      const metricService = this.owner.lookup('service:metrics');
+      // when
+      await visit('/unknown-url');
+
+      // then
+      sinon.assert.calledOnceWithExactly(metricService.trackPage, {
+        plausibleAttributes: { u: '/connexion' },
+      });
+
+      assert.ok(true);
+    });
+
+    test('should forward query params', async function (assert) {
+      // given
+      const metricService = this.owner.lookup('service:metrics');
+      server.create('assessment', 'ofCompetenceEvaluationType', {
+        id: 1,
+      });
+      server.create('challenge', 'forCompetenceEvaluation', 'QROCM', {});
+
+      // when
+      await visit('/assessments/1/challenges/0?id=1');
+
+      // then
+      sinon.assert.calledOnceWithExactly(metricService.trackPage, {
+        plausibleAttributes: { u: '/assessments/_ID_/challenges/_ID_?id=1' },
+      });
+
+      assert.ok(true);
+    });
   });
 
   module('When there are no information banners', function () {

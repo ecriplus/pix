@@ -1,4 +1,5 @@
 'use strict';
+
 require('dotenv').config();
 
 function _getEnvironmentVariableAsNumber({ environmentVariableName, defaultValue, minValue }) {
@@ -117,6 +118,17 @@ module.exports = function (environment) {
       disabled: false,
     },
 
+    metricsAdapters: [
+      {
+        name: 'PlausibleAdapter',
+        environments: analyticsEnabled ? ['all'] : [],
+        config: {
+          siteId: process.env.ANALYTICS_SITE_ID,
+          scriptUrl: process.env.ANALYTICS_SCRIPT_URL,
+        },
+      },
+    ],
+
     '@sentry/ember': {
       disablePerformance: true,
       sentry: {
@@ -179,6 +191,5 @@ module.exports = function (environment) {
   if (environment === 'production') {
     // here you can enable a production-specific feature
   }
-
   return ENV;
 };

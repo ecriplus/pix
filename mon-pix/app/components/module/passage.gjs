@@ -53,7 +53,7 @@ export default class ModulePassage extends Component {
 
     this.addNextGrainToDisplay();
 
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -67,7 +67,7 @@ export default class ModulePassage extends Component {
 
     this.addNextGrainToDisplay();
 
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -79,7 +79,7 @@ export default class ModulePassage extends Component {
   onStepperNextStep(currentStepPosition) {
     const currentGrain = this.displayableGrains[this.currentGrainIndex];
 
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -114,7 +114,7 @@ export default class ModulePassage extends Component {
   async onModuleTerminate({ grainId }) {
     const adapter = this.store.adapterFor('passage');
     await adapter.terminate({ passageId: this.args.passage.id });
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -138,7 +138,7 @@ export default class ModulePassage extends Component {
         adapterOptions: { passageId: this.args.passage.id },
       });
 
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -148,7 +148,7 @@ export default class ModulePassage extends Component {
 
   @action
   async onSelfAssessment({ userAssessment, cardId }) {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -158,7 +158,7 @@ export default class ModulePassage extends Component {
 
   @action
   async onElementRetry(answerData) {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -168,7 +168,7 @@ export default class ModulePassage extends Component {
 
   @action
   async onImageAlternativeTextOpen(imageElementId) {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -178,7 +178,7 @@ export default class ModulePassage extends Component {
 
   @action
   async onVideoTranscriptionOpen(videoElementId) {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -188,7 +188,7 @@ export default class ModulePassage extends Component {
 
   @action
   async onVideoPlay({ elementId }) {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -198,7 +198,7 @@ export default class ModulePassage extends Component {
 
   @action
   async onFileDownload({ elementId, downloadedFormat }) {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -208,7 +208,7 @@ export default class ModulePassage extends Component {
 
   @action
   async onSidebarOpen() {
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -221,7 +221,7 @@ export default class ModulePassage extends Component {
     const element = document.getElementById(`grain_${grainId}`);
     this.modulixAutoScroll.focusAndScroll(element);
 
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -232,7 +232,7 @@ export default class ModulePassage extends Component {
   @action
   async onExpandToggle({ elementId, isOpen }) {
     const eventToggle = isOpen ? 'Ouverture' : 'Fermeture';
-    this.metrics.add({
+    this.metrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,

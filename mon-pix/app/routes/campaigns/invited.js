@@ -6,6 +6,10 @@ export default class InvitedRoute extends Route {
   @service session;
   @service router;
 
+  buildRouteInfoMetadata() {
+    return { doNotTrackPage: true };
+  }
+
   beforeModel(transition) {
     if (!transition.from) {
       return this.router.replaceWith('campaigns.entry-point');

@@ -78,8 +78,9 @@ module('Acceptance | Challenge page banner', function (hooks) {
       test("should display text-to-speech button in challenge instruction when it's been activated in the banner", async function (assert) {
         // given
         class MetricsStubService extends Service {
-          add = sinon.stub();
-          initialize = sinon.stub();
+          trackPage = sinon.stub();
+          trackEvent = sinon.stub();
+          context = {};
         }
         this.owner.register('service:metrics', MetricsStubService);
 

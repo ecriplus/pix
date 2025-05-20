@@ -5,6 +5,10 @@ export default class ProfilesCollectionCampaignsStartOrResumeRoute extends Route
   @service session;
   @service router;
 
+  buildRouteInfoMetadata() {
+    return { doNotTrackPage: true };
+  }
+
   beforeModel(transition) {
     this.session.requireAuthenticationAndApprovedTermsOfService(transition);
   }
