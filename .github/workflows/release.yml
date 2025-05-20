@@ -22,7 +22,7 @@ jobs:
         with:
           changelogTitle: "# Pix Changelog"
         env:
-          GITHUB_TOKEN: ${{ secrets.PIX_SERVICE_ACTIONS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PIX_SERVICE_RELEASE_ACTION_TOKEN }}
       - name: Notify to a slack channel
         if: env.new_release_published == 'true'
         uses: slackapi/slack-github-action@v2.0.0
