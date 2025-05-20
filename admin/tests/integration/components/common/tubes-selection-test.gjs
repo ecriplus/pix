@@ -1,4 +1,4 @@
-import { clickByName, render } from '@1024pix/ember-testing-library';
+import { clickByName, render, within } from '@1024pix/ember-testing-library';
 import { click, triggerEvent } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import TubesSelection from 'pix-admin/components/common/tubes-selection';
@@ -53,7 +53,7 @@ module('Integration | Component | Common::TubesSelection', function (hooks) {
     await clickByName('1 · Titre domaine');
     await clickByName('1 Titre competence');
     await clickByName(/Sélection du niveau du sujet suivant : Tube 1/);
-    await click(screen.getAllByText('4').find((item) => item.tabIndex === 0));
+    await click(within(await screen.findByRole('listbox')).getByRole('option', { name: '4' }));
 
     // then
     assert.dom(screen.getByLabelText('@tubeName1 : Tube 1')).isChecked();
@@ -68,7 +68,7 @@ module('Integration | Component | Common::TubesSelection', function (hooks) {
     await clickByName('1 · Titre domaine');
     await clickByName('1 Titre competence');
     await clickByName(/Sélection du niveau du sujet suivant : Tube 1/);
-    await click(screen.getAllByText('4').find((item) => item.tabIndex === 0));
+    await click(within(await screen.findByRole('listbox')).getByRole('option', { name: '4' }));
     await click(screen.getByLabelText('@tubeName1 : Tube 1'));
 
     // then
