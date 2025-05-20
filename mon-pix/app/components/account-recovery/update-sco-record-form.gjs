@@ -101,12 +101,9 @@ export default class UpdateScoRecordFormComponent extends Component {
     </form>
 
     {{#if this.isNewAccountRecoveryEnabled}}
-
-      <div class="account-recovery__content--form-quit-button-container">
-        <PixButtonLink @route="logout" class="account-recovery__content--actions update-sco-record-form__buttons">
-          {{t "common.actions.quit"}}
-        </PixButtonLink>
-      </div>
+      <PixButtonLink @route="logout" class="account-recovery__content--actions update-sco-record-form__buttons">
+        {{t "common.actions.quit"}}
+      </PixButtonLink>
     {{/if}}
   </template>
   @service intl;
