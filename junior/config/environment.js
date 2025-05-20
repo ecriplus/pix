@@ -63,9 +63,5 @@ module.exports = function (environment) {
     ENV.APP.CHALLENGE_DISPLAY_DELAY = 0;
     ENV.metrics.enabled = false;
   }
-
-  ENV['ember-component-css'] = {
-    namespacing: false,
-  };
   return ENV;
 };
