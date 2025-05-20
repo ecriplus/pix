@@ -6,9 +6,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import pick from 'ember-composable-helpers/helpers/pick';
 import { t } from 'ember-intl';
-import set from 'ember-set-helper/helpers/set';
 import isInteger from 'lodash/isInteger';
 
 import StageLevelSelect from './stage-level-select';
@@ -61,6 +59,16 @@ export default class UpdateStage extends Component {
     event.preventDefault();
     if ([this.thresholdStatus, this.titleStatus].includes('error')) return;
     await this._updateStage();
+  }
+
+  @action
+  onPrescriberTitleChange(event) {
+    this.prescriberTitle = event.target.value;
+  }
+
+  @action
+  onPrescriberDescriptionChange(event) {
+    this.prescriberDescription = event.target.value;
   }
 
   @action
@@ -172,7 +180,7 @@ export default class UpdateStage extends Component {
             class="form-control"
             @value={{this.prescriberTitle}}
             maxlength="255"
-            {{on "input" (pick "target.value" (set this "prescriberTitle"))}}
+            {{on "input" this.onPrescriberTitleChange}}
           ><:label>
               Titre pour le prescripteur
             </:label></PixInput>
@@ -181,7 +189,7 @@ export default class UpdateStage extends Component {
             class="form-control"
             @value={{this.prescriberDescription}}
             rows="4"
-            {{on "input" (pick "target.value" (set this "prescriberDescription"))}}
+            {{on "input" this.onPrescriberDescriptionChange}}
           ><:label>
               Description pour le prescripteur
             </:label></PixTextarea>
