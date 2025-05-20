@@ -1,4 +1,5 @@
 @use '../../globals/fonts';
+@use 'pix-design-tokens/typography';
 
 .mission-card {
   &__container {
@@ -87,11 +88,10 @@
       margin-top: var(--pix-spacing-2x);
 
       .mission-name {
+        @extend %pix-title-xs;
+
         min-height: 62px;
         margin-bottom: var(--pix-spacing-3x);
-        font-weight: 800;
-        font-size: 22.38px;
-        line-height: normal;
         text-align: center;
 
         p {
