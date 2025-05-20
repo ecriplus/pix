@@ -106,16 +106,6 @@ const updateParticipantExternalId = async function (request, h) {
   return h.response({}).code(204);
 };
 
-const deleteCampaignParticipationForAdmin = async function (request, h) {
-  const { userId } = request.auth.credentials;
-  const { id: campaignParticipationId } = request.params;
-  await usecases.deleteCampaignParticipationForAdmin({
-    userId,
-    campaignParticipationId,
-  });
-  return h.response({}).code(204);
-};
-
 const getCampaignParticipationsForOrganizationLearner = async function (
   request,
   h,
@@ -188,7 +178,6 @@ const getUserCampaignAssessmentResult = async function (
 };
 
 const campaignParticipationController = {
-  deleteCampaignParticipationForAdmin,
   deleteParticipation,
   findPaginatedParticipationsForCampaignManagement,
   getAnalysis,

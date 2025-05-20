@@ -195,43 +195,6 @@ describe('Unit | Application | Router | campaign-participation-router ', functio
     });
   });
 
-  describe('DELETE /api/admin/campaign-participations/{id}', function () {
-    it('should return an HTTP status code 200', async function () {
-      // given
-      sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
-      sinon.stub(campaignParticipationController, 'deleteCampaignParticipationForAdmin').resolves('ok');
-      const httpTestServer = new HttpTestServer();
-      await httpTestServer.register(moduleUnderTest);
-
-      // when
-      const response = await httpTestServer.request('DELETE', '/api/admin/campaign-participations/2');
-
-      // then
-      sinon.assert.calledOnce(securityPreHandlers.hasAtLeastOneAccessOf);
-      sinon.assert.calledOnce(campaignParticipationController.deleteCampaignParticipationForAdmin);
-      expect(response.statusCode).to.equal(200);
-    });
-
-    it('should return an HTTP status code 403', async function () {
-      // given
-      sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns((request, h) =>
-        h
-          .response({ errors: new Error('') })
-          .code(403)
-          .takeover(),
-      );
-      const httpTestServer = new HttpTestServer();
-      await httpTestServer.register(moduleUnderTest);
-
-      // when
-      const response = await httpTestServer.request('DELETE', '/api/admin/campaign-participations/2');
-
-      // then
-      sinon.assert.calledOnce(securityPreHandlers.hasAtLeastOneAccessOf);
-      expect(response.statusCode).to.equal(403);
-    });
-  });
-
   describe('DELETE /api/admin/campaigns/{campaignId}/campaign-participations/{campaignParticipationId}', function () {
     it('should return an HTTP status code 200', async function () {
       // given
