@@ -94,10 +94,6 @@ const _update = async function (campaign, attributes) {
   return new Campaign(editedCampaign);
 };
 
-const batchUpdate = async function (campaigns) {
-  return Promise.all(campaigns.map((campaign) => update(campaign)));
-};
-
 const save = async function (campaigns, dependencies = { skillRepository }) {
   const trx = await knex.transaction();
   const campaignsToCreate = _.isArray(campaigns) ? campaigns : [campaigns];
