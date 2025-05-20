@@ -996,7 +996,7 @@
                   },
                   "open-failure": {
                     "label": "No puedo abrir el archivo en un ordenador",
-                    "solution": "Para superar esta prueba, puedes utilizar la suite LibreOffice, gratuita y disponible para PC y Mac. Contiene Libre Office Writer (equivalente a Word) y Libre Office Calc (equivalente a Excel).'<a href=\"https://fr.libreoffice.org/download/telecharger-libreoffice\">'Descargar Libre Office'</a>'"
+                    "solution": "Si no puedes abrir un archivo, consulta la '<a href=\"https://pix.org/en/help-how-to-open-modify-find-a-downloaded-file-in-a-pix-question\">' documentación de ayuda'</a>' situada bajo el botón de descarga. Allí encontrarás programas o herramientas en línea recomendadas."
                   }
                 },
                 "embed-displayed-on-desktop-with-problems": {

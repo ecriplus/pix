@@ -1000,7 +1000,7 @@
                   },
                   "open-failure": {
                     "label": "Ik kan het bestand niet openen op een computer",
-                    "solution": "Om voor deze test te slagen, kun je de LibreOffice-suite gebruiken, die gratis is en beschikbaar voor pc's en Macs. Het bevat Libre Office Writer (gelijkwaardig aan Word) en Libre Office Calc (gelijkwaardig aan Excel).'<a href=\"https://fr.libreoffice.org/download/telecharger-libreoffice\">'Download Libre Office'</a>'"
+                    "solution": "Als je een bestand niet kunt openen, raadpleeg dan de '<a href=\"https://pix.org/nl-be/support/particulier/particulier/een-gedownload-bestand-openen-wijzigen-of-ophalen\">'helpdocumentatie'</a>' onder de downloadknop. Je vindt er aanbevolen software of online hulpmiddelen."
                   }
                 },
                 "embed-displayed-on-desktop-with-problems": {
