@@ -6,24 +6,20 @@ import { ModuleFactory } from '../factories/module-factory.js';
 
 const memoizedModuleVersions = new Map();
 
-async function getBySlug({ slug, moduleDatasource }) {
-  try {
-    const moduleData = await moduleDatasource.getBySlug(slug);
-    const version = _computeModuleVersion(moduleData);
+async function getById({ id, moduleDatasource }) {
+  return await _getModule({ ref: 'id', moduleDatasource, query: id });
+}
 
-    return ModuleFactory.build({ ...moduleData, version });
-  } catch (e) {
-    if (e instanceof LearningContentResourceNotFound) {
-      throw new NotFoundError();
-    }
-    throw e;
-  }
+async function getBySlug({ slug, moduleDatasource }) {
+  return await _getModule({ ref: 'slug', moduleDatasource, query: slug });
 }
 
 async function list({ moduleDatasource }) {
   const modulesData = await moduleDatasource.list();
   return modulesData.map((moduleData) => ModuleFactory.build(moduleData));
 }
+
+export { getById, getBySlug, list };
 
 function _computeModuleVersion(moduleData) {
   if (!memoizedModuleVersions.has(moduleData.slug)) {
@@ -35,4 +31,17 @@ function _computeModuleVersion(moduleData) {
   return memoizedModuleVersions.get(moduleData.slug);
 }
 
-export { getBySlug, list };
+async function _getModule({ ref, moduleDatasource, query }) {
+  try {
+    const method = ref === 'id' ? moduleDatasource.getById : moduleDatasource.getBySlug;
+    const moduleData = await method(query);
+    const version = _computeModuleVersion(moduleData);
+
+    return ModuleFactory.build({ ...moduleData, version });
+  } catch (e) {
+    if (e instanceof LearningContentResourceNotFound) {
+      throw new NotFoundError();
+    }
+    throw e;
+  }
+}

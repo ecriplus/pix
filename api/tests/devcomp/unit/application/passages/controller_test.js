@@ -7,7 +7,7 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
     it('should call createPassage and recordPassageEvents use-cases and return serialized passage', async function () {
       // given
       const serializedPassage = Symbol('serialized modules');
-      const moduleSlug = Symbol('module-slug');
+      const moduleId = Symbol('module-id');
       const moduleVersion = Symbol('module-version');
       const occurredAtDate = new Date('2025-04-29');
       const occurredAt = occurredAtDate.getTime();
@@ -30,7 +30,7 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
         payload: {
           data: {
             attributes: {
-              'module-id': moduleSlug,
+              'module-id': moduleId,
               'module-version': moduleVersion,
               'occurred-at': occurredAt,
               'sequence-number': sequenceNumber,
@@ -54,7 +54,7 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
         createPassage: sinon.stub(),
         recordPassageEvents: sinon.stub(),
       };
-      usecases.createPassage.withArgs({ moduleSlug, userId }).returns(passage);
+      usecases.createPassage.withArgs({ moduleId, userId }).returns(passage);
 
       // when
       await passageController.create(request, hStub, {

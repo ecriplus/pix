@@ -2,14 +2,14 @@ import { requestResponseUtils } from '../../../shared/infrastructure/utils/reque
 
 const create = async function (request, h, { usecases, passageSerializer }) {
   const {
-    'module-id': moduleSlug,
+    'module-id': moduleId,
     'module-version': moduleVersion,
     'occurred-at': occurredAt,
     'sequence-number': sequenceNumber,
   } = request.payload.data.attributes;
   const userId = requestResponseUtils.extractUserIdFromRequest(request);
   const passage = await usecases.createPassage({
-    moduleSlug,
+    moduleId,
     userId,
   });
 

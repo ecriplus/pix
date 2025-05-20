@@ -15,15 +15,15 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
   describe('when module does not exist', function () {
     it('should throw a ModuleDoesNotExist error', async function () {
       // given
-      const moduleSlug = 'module-that-does-not-exist';
+      const moduleId = '4c2161c3-41ee-412d-a0ed-8f8f2082ca82';
 
       const moduleRepositoryStub = {
-        getBySlug: sinon.stub(),
+        getById: sinon.stub(),
       };
-      moduleRepositoryStub.getBySlug.withArgs({ slug: moduleSlug }).throws(new NotFoundError());
+      moduleRepositoryStub.getById.withArgs({ id: moduleId }).throws(new NotFoundError());
 
       // when
-      const error = await catchErr(createPassage)({ moduleSlug, moduleRepository: moduleRepositoryStub });
+      const error = await catchErr(createPassage)({ moduleId, moduleRepository: moduleRepositoryStub });
 
       // then
       expect(error).to.be.instanceOf(ModuleDoesNotExistError);
@@ -36,7 +36,7 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
       const userId = Symbol('userId');
 
       const moduleRepositoryStub = {
-        getBySlug: sinon.stub(),
+        getById: sinon.stub(),
       };
       const userRepositoryStub = {
         get: sinon.stub(),
@@ -90,9 +90,9 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
     };
     userRepositoryStub.get.withArgs(userId).resolves();
     const moduleRepositoryStub = {
-      getBySlug: sinon.stub(),
+      getById: sinon.stub(),
     };
-    moduleRepositoryStub.getBySlug.withArgs({ slug: moduleSlug }).resolves(module);
+    moduleRepositoryStub.getById.withArgs({ id: module.id }).resolves(module);
     const passageRepositoryStub = {
       save: sinon.stub(),
     };
@@ -100,7 +100,7 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
 
     // when
     const result = await createPassage({
-      moduleSlug,
+      moduleId,
       userId,
       passageRepository: passageRepositoryStub,
       moduleRepository: moduleRepositoryStub,

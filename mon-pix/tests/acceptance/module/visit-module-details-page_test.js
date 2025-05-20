@@ -14,6 +14,7 @@ module('Acceptance | Module | Routes | details', function (hooks) {
     // given
     const module = server.create('module', {
       id: 'bien-ecrire-son-adresse-mail',
+      slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
       isBeta: false,
       details: {
@@ -42,6 +43,7 @@ module('Acceptance | Module | Routes | details', function (hooks) {
       // given
       server.create('module', {
         id: 'bien-ecrire-son-adresse-mail',
+        slug: 'bien-ecrire-son-adresse-mail',
         title: 'Bien écrire son adresse mail',
         isBeta: true,
         details: {
@@ -69,6 +71,7 @@ module('Acceptance | Module | Routes | details', function (hooks) {
     });
     server.create('module', {
       id: 'bien-ecrire-son-adresse-mail',
+      slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
       details: {
         image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',

@@ -15,6 +15,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
 
       server.create('module', {
         id: 'bien-ecrire-son-adresse-mail',
+        slug: 'bien-ecrire-son-adresse-mail',
         title: 'Bien écrire son adresse mail',
         grains,
       });
@@ -42,6 +43,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
 
         server.create('module', {
           id: 'bien-ecrire-son-adresse-mail',
+          slug: 'bien-ecrire-son-adresse-mail',
           title: 'Bien écrire son adresse mail',
           grains,
         });
@@ -69,6 +71,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
 
         server.create('module', {
           id: 'bien-ecrire-son-adresse-mail',
+          slug: 'bien-ecrire-son-adresse-mail',
           title: 'Bien écrire son adresse mail',
           grains,
         });
@@ -107,12 +110,13 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
       });
       const module = server.create('module', {
         id: 'bien-ecrire-son-adresse-mail',
+        slug: 'bien-ecrire-son-adresse-mail',
         title: 'Bien écrire son adresse mail',
         grains: [grain1],
       });
       server.create('passage', {
         id: '122',
-        moduleId: module.id,
+        moduleId: module.slug,
       });
 
       // when

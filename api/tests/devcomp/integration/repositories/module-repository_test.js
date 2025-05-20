@@ -8,6 +8,113 @@ import { NotFoundError } from '../../../../src/shared/domain/errors.js';
 import { catchErr, expect, sinon } from '../../../test-helper.js';
 
 describe('Integration | DevComp | Repositories | ModuleRepository', function () {
+  describe('#getById', function () {
+    describe('errors', function () {
+      it('should throw a NotFoundError if the module does not exist', async function () {
+        // given
+        const nonExistingModuleSlug = 'uuid-dresser-des-pokemons';
+
+        // when
+        const error = await catchErr(moduleRepository.getById)({ slug: nonExistingModuleSlug, moduleDatasource });
+
+        // then
+        expect(error).to.be.instanceOf(NotFoundError);
+      });
+
+      it('should throw a NotFoundError if the module instanciation throw an error', async function () {
+        // given
+        const moduleDatasourceStub = {
+          getById: async () => {
+            return {
+              id: 1,
+              slug: 'module-with-error',
+            };
+          },
+        };
+
+        // when
+        const error = await catchErr(moduleRepository.getById)({
+          id: 1,
+          moduleDatasource: moduleDatasourceStub,
+        });
+
+        // then
+        expect(error).not.to.be.instanceOf(NotFoundError);
+      });
+    });
+
+    it('should return a Module instance with its version', async function () {
+      const existingModuleId = 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d';
+      const expectedFoundModule = {
+        id: existingModuleId,
+        slug: 'existingModuleSlug',
+        title: 'Bien écrire son adresse mail',
+        isBeta: true,
+        details: {
+          image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
+          description:
+            'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
+          duration: 12,
+          level: 'Débutant',
+          tabletSupport: 'comfortable',
+          objectives: [
+            'Écrire une adresse mail correctement, en évitant les erreurs courantes',
+            'Connaître les parties d’une adresse mail et les identifier sur des exemples',
+            'Comprendre les fonctions des parties d’une adresse mail',
+          ],
+        },
+        grains: [
+          {
+            id: 'z1f3c8c7-6d5c-4c6c-9c4d-1a3d8f7e9f5d',
+            type: 'lesson',
+            title: 'Explications : les parties d’une adresse mail',
+            components: [
+              {
+                type: 'element',
+                element: {
+                  id: 'd9e8a7b6-5c4d-3e2f-1a0b-9f8e7d6c5b4a',
+                  type: 'text',
+                  content:
+                    "<h3 class='screen-reader-only'>L'arobase</h3><p>L’arobase est dans toutes les adresses mails. Il sépare l’identifiant et le fournisseur d’adresse mail.</p><p><span aria-hidden='true'>🇬🇧</span> En anglais, ce symbole se lit <i lang='en'>“at”</i> qui veut dire “chez”.</p><p><span aria-hidden='true'>🤔</span> Le saviez-vous : c’est un symbole qui était utilisé bien avant l’informatique ! Par exemple, pour compter des quantités.</p>",
+                },
+              },
+            ],
+          },
+        ],
+      };
+      const moduleDatasourceStub = {
+        getById: sinon.stub(),
+      };
+      moduleDatasourceStub.getById.withArgs(existingModuleId).resolves(expectedFoundModule);
+      sinon.spy(ModuleFactory, 'build');
+
+      const version = Symbol('version');
+      const digestStub = sinon.stub().returns(version);
+      const updateStub = sinon.stub();
+      const createHashStub = sinon.stub(crypto, 'createHash').returns({
+        copy: () => {
+          return {
+            digest: digestStub,
+          };
+        },
+        update: updateStub,
+      });
+
+      // when
+      const module = await moduleRepository.getById({
+        id: existingModuleId,
+        moduleDatasource: moduleDatasourceStub,
+      });
+
+      // then
+      expect(ModuleFactory.build).to.have.been.calledWith({ ...expectedFoundModule, version });
+      expect(module).to.be.instanceof(Module);
+      expect(createHashStub).to.have.been.calledOnceWith('sha256');
+      expect(updateStub).to.have.been.calledOnceWith(JSON.stringify(expectedFoundModule));
+      expect(digestStub).to.have.been.calledOnceWith('hex');
+    });
+  });
+
   describe('#getBySlug', function () {
     describe('errors', function () {
       it('should throw a NotFoundError if the module does not exist', async function () {
@@ -21,7 +128,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         expect(error).to.be.instanceOf(NotFoundError);
       });
 
-      it('should throw an Error if the module instanciation throw an error', async function () {
+      it('should throw a NotFoundError if the module instanciation throw an error', async function () {
         // given
         const moduleSlug = 'incomplete-module';
         const moduleDatasourceStub = {

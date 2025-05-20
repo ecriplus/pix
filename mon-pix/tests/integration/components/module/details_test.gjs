@@ -22,7 +22,7 @@ module('Integration | Component | Module | Details', function (hooks) {
       level: 'Débutant',
       objectives: ['Objectif 1'],
     };
-    const module = store.createRecord('module', { title: 'Module title', details });
+    const module = store.createRecord('module', { slug: 'module-slug', title: 'Module title', details });
 
     // when
     const screen = await render(<template><ModulixDetails @module={{module}} /></template>);
@@ -52,7 +52,7 @@ module('Integration | Component | Module | Details', function (hooks) {
         sinon.assert.calledWithExactly(metrics.add, {
           event: 'custom-event',
           'pix-event-category': 'Modulix',
-          'pix-event-action': `Détails du module : ${module.id}`,
+          'pix-event-action': `Détails du module : ${module.slug}`,
           'pix-event-name': `Click sur le bouton Commencer un passage`,
         });
         assert.ok(true);
@@ -67,7 +67,7 @@ module('Integration | Component | Module | Details', function (hooks) {
         await click(screen.getByRole('button', { name: t('pages.modulix.details.startModule') }));
 
         // then
-        sinon.assert.calledWithExactly(router.transitionTo, 'module.passage', module.id);
+        sinon.assert.calledWithExactly(router.transitionTo, 'module.passage', module.slug);
         assert.ok(true);
       });
     });
@@ -88,7 +88,7 @@ module('Integration | Component | Module | Details', function (hooks) {
           sinon.assert.calledWithExactly(metrics.add, {
             event: 'custom-event',
             'pix-event-category': 'Modulix',
-            'pix-event-action': `Détails du module : ${module.id}`,
+            'pix-event-action': `Détails du module : ${module.slug}`,
             'pix-event-name': `Click sur le bouton Commencer un passage`,
           });
           assert.ok(true);
@@ -103,7 +103,7 @@ module('Integration | Component | Module | Details', function (hooks) {
           await click(screen.getByRole('button', { name: t('pages.modulix.details.startModule') }));
 
           // then
-          sinon.assert.calledWithExactly(router.transitionTo, 'module.passage', module.id);
+          sinon.assert.calledWithExactly(router.transitionTo, 'module.passage', module.slug);
           assert.ok(true);
         });
       });
@@ -123,7 +123,7 @@ module('Integration | Component | Module | Details', function (hooks) {
           sinon.assert.calledWithExactly(metrics.add, {
             event: 'custom-event',
             'pix-event-category': 'Modulix',
-            'pix-event-action': `Détails du module : ${module.id}`,
+            'pix-event-action': `Détails du module : ${module.slug}`,
             'pix-event-name': `Ouvre la modale d'alerte de largeur d'écran`,
           });
           assert.ok(true);
@@ -170,7 +170,7 @@ module('Integration | Component | Module | Details', function (hooks) {
             sinon.assert.calledWithExactly(metrics.add, {
               event: 'custom-event',
               'pix-event-category': 'Modulix',
-              'pix-event-action': `Détails du module : ${module.id}`,
+              'pix-event-action': `Détails du module : ${module.slug}`,
               'pix-event-name': `Click sur le bouton Commencer un passage en petit écran`,
             });
             assert.ok(true);
@@ -192,7 +192,7 @@ module('Integration | Component | Module | Details', function (hooks) {
             );
 
             // then
-            sinon.assert.calledWithExactly(router.transitionTo, 'module.passage', module.id);
+            sinon.assert.calledWithExactly(router.transitionTo, 'module.passage', module.slug);
             assert.ok(true);
           });
         });
@@ -217,7 +217,7 @@ module('Integration | Component | Module | Details', function (hooks) {
             sinon.assert.calledWithExactly(metrics.add, {
               event: 'custom-event',
               'pix-event-category': 'Modulix',
-              'pix-event-action': `Détails du module : ${module.id}`,
+              'pix-event-action': `Détails du module : ${module.slug}`,
               'pix-event-name': `Ferme la modale d'alerte de largeur d'écran`,
             });
             assert.ok(true);
@@ -263,7 +263,12 @@ function prepareDetailsComponentContext(tabletSupport, breakpoint = 'desktop') {
     objectives: ['Objectif 1'],
     tabletSupport,
   };
-  const module = store.createRecord('module', { id: 'module-title', title: 'Module title', details });
+  const module = store.createRecord('module', {
+    id: 'module-title',
+    slug: 'module-slug',
+    title: 'Module title',
+    details,
+  });
   setBreakpoint(breakpoint);
 
   return { router, metrics, store, details, module };
