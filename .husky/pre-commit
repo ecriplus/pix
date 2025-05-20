@@ -1,7 +1,0 @@
-#!/bin/sh
-
-set -e
-
-.husky/protect-branch
-.husky/lint
-.husky/detect-learning-content

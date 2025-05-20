@@ -62,8 +62,6 @@
     "lint:scripts": "eslint --ignore-pattern **/compose.yaml scripts",
     "lint:yaml": "eslint --fix .circleci/*.yml .github/**/*.yaml",
     "lint:docs": "find ./docs -type f -name '*.md' | xargs -L1 markdown-link-check --quiet --config ./docs/link--check-config.json ",
-    "local:add-optional-checks": "husky",
-    "local:remove-optional-checks": "git config --unset core.hooksPath",
     "preinstall": "npx check-engine",
     "dev": "run-p --print-label dev:api dev:mon-pix dev:orga dev:junior dev:certif dev:admin",
     "dev:admin": "cd admin && npm run dev",
@@ -110,8 +108,6 @@
     "eslint-plugin-n": "^17.17.0",
     "eslint-plugin-prettier": "^5.2.5",
     "eslint-plugin-unicorn": "^58.0.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^15.5.0",
     "prettier-plugin-ember-template-tag": "^2.0.4",
     "typescript-eslint": "^8.28.0"
   },
