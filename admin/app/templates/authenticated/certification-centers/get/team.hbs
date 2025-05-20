@@ -12,7 +12,7 @@
         aria-label="Adresse e-mail du nouveau membre"
         class="form-field__text form-control"
         placeholder="membre@inviter.net"
-        {{on "input" (pick "target.value" (set this "userEmailToAdd"))}}
+        {{on "input" this.onChangeUserEmail}}
         {{on "focusout" this.updateEmailErrorMessage}}
       />
 
