@@ -236,16 +236,33 @@ async function deserializeForOrganizationBatchArchive(file, { checkCsvHeader, re
   return parsedData.map((data) => data[columnName]);
 }
 
-const requiredFieldNamesForCampaignsImport = [
-  "Identifiant de l'organisation*",
-  'Nom de la campagne*',
-  'Identifiant du profil cible*',
-  'Identifiant du propriétaire*',
-  'Identifiant du créateur*',
+const requiredFieldNamesForCampaignsImport = {
+  organizationId: "Identifiant de l'organisation*",
+  name: 'Nom de la campagne*',
+  targetProfileId: 'Identifiant du profil cible*',
+  ownerId: 'Identifiant du propriétaire*',
+  creatorId: 'Identifiant du créateur*',
+};
+
+const optionalFieldNamesForCampaignsImport = {
+  externalIdLabel: "Libellé de l'identifiant externe",
+  externalIdType: "Type de l'identifiant externe",
+  type: 'Type de campagne',
+  title: 'Titre du parcours',
+  customLandingPageText: 'Descriptif du parcours',
+  multipleSendings: 'Envoi multiple',
+  customResultPageText: 'Texte de la page de fin de parcours',
+  customResultPageButtonText: 'Texte du bouton de la page de fin de parcours',
+  customResultPageButtonUrl: 'URL du bouton de la page de fin de parcours',
+};
+
+const fieldNamesForCampaignsImport = [
+  ...Object.values(requiredFieldNamesForCampaignsImport),
+  ...Object.values(optionalFieldNamesForCampaignsImport),
 ];
 
 async function deserializeForCampaignsImport(file, { checkCsvHeader, readCsvFile, parseCsvData } = csvHelper) {
-  await checkCsvHeader({ filePath: file, requiredFieldNames: requiredFieldNamesForCampaignsImport });
+  await checkCsvHeader({ filePath: file, requiredFieldNames: Object.values(requiredFieldNamesForCampaignsImport) });
 
   const cleanedData = await readCsvFile(file);
   return parseForCampaignsImport(cleanedData, { parseCsvData });
@@ -263,15 +280,15 @@ async function parseForCampaignsImport(cleanedData, { parseCsvData } = csvHelper
       }
       if (
         [
-          "Identifiant de l'organisation*",
-          'Identifiant du profil cible*',
-          'Identifiant du créateur*',
-          'Identifiant du propriétaire*',
+          requiredFieldNamesForCampaignsImport.organizationId,
+          requiredFieldNamesForCampaignsImport.targetProfileId,
+          requiredFieldNamesForCampaignsImport.creatorId,
+          requiredFieldNamesForCampaignsImport.ownerId,
         ].includes(columnName)
       ) {
         value = parseInt(value, 10);
       }
-      if (requiredFieldNamesForCampaignsImport.includes(columnName) && !value) {
+      if (Object.values(requiredFieldNamesForCampaignsImport).includes(columnName) && !value) {
         throw new FileValidationError(
           'CSV_CONTENT_NOT_VALID',
           `${value === '' ? '"empty"' : value} is not a valid value for "${columnName}"`,
@@ -283,23 +300,24 @@ async function parseForCampaignsImport(cleanedData, { parseCsvData } = csvHelper
   const data = await parseCsvData(cleanedData, batchCampaignsOptionsWithHeader);
 
   return data.map((data) => ({
-    organizationId: data["Identifiant de l'organisation*"],
-    name: data['Nom de la campagne*'],
-    targetProfileId: data['Identifiant du profil cible*'],
-    externalIdLabel: data["Libellé de l'identifiant externe"],
-    type: data['Type de campagne'] || CampaignTypes.ASSESSMENT,
+    organizationId: data[requiredFieldNamesForCampaignsImport.organizationId],
+    name: data[requiredFieldNamesForCampaignsImport.name],
+    targetProfileId: data[requiredFieldNamesForCampaignsImport.targetProfileId],
+    externalIdLabel: data[optionalFieldNamesForCampaignsImport.externalIdLabel],
+    type: data[optionalFieldNamesForCampaignsImport.type] || CampaignTypes.ASSESSMENT,
     externalIdType:
-      data["Libellé de l'identifiant externe"]?.trim()?.length > 0
-        ? data["Type de l'identifiant externe"] || 'STRING'
+      data[optionalFieldNamesForCampaignsImport.externalIdLabel]?.trim()?.length > 0
+        ? data[optionalFieldNamesForCampaignsImport.externalIdType] || 'STRING'
         : '',
-    creatorId: data['Identifiant du créateur*'],
-    title: data['Titre du parcours'],
-    customLandingPageText: data['Descriptif du parcours'],
-    multipleSendings: data['Envoi multiple'].toLowerCase() === 'oui' ? true : false,
-    ownerId: data['Identifiant du propriétaire*'],
-    customResultPageText: data['Texte de la page de fin de parcours'] || null,
-    customResultPageButtonText: data['Texte du bouton de la page de fin de parcours'] || null,
-    customResultPageButtonUrl: data['URL du bouton de la page de fin de parcours'] || null,
+    creatorId: data[requiredFieldNamesForCampaignsImport.creatorId],
+    title: data[optionalFieldNamesForCampaignsImport.title],
+    customLandingPageText: data[optionalFieldNamesForCampaignsImport.customLandingPageText],
+    multipleSendings:
+      data[optionalFieldNamesForCampaignsImport.multipleSendings].toLowerCase() === 'oui' ? true : false,
+    ownerId: data[requiredFieldNamesForCampaignsImport.ownerId],
+    customResultPageText: data[optionalFieldNamesForCampaignsImport.customResultPageText] || null,
+    customResultPageButtonText: data[optionalFieldNamesForCampaignsImport.customResultPageButtonText] || null,
+    customResultPageButtonUrl: data[optionalFieldNamesForCampaignsImport.customResultPageButtonUrl] || null,
   }));
 }
 
@@ -515,8 +533,8 @@ export {
   deserializeForOrganizationBatchArchive,
   deserializeForOrganizationsImport,
   deserializeForSessionsImport,
+  fieldNamesForCampaignsImport,
   parseForCampaignsImport,
-  requiredFieldNamesForCampaignsImport,
   serializeLine,
   verifyColumnsValueAgainstConstraints,
 };
