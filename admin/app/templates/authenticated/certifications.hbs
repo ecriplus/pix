@@ -11,7 +11,7 @@
         aria-label="Rechercher une session avec un identifiant"
         @type="text"
         @value={{this.inputId}}
-        {{on "input" (pick "target.value" (set this "inputId"))}}
+        {{on "input" this.onChangeInputId}}
       />
       <PixButton @size="small" @type="submit">{{t "pages.certifications.actions.load.label"}}</PixButton>
     </form>

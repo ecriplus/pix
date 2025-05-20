@@ -18,6 +18,10 @@ export default class CertificationsController extends Controller {
     this.router.transitionTo(routeName, certifId);
   }
 
+  @action onChangeInputId(event) {
+    this.inputId = event.target.value;
+  }
+
   get pageTitle() {
     const certifTitle = this.intl.t('pages.certifications.certification.title');
 
