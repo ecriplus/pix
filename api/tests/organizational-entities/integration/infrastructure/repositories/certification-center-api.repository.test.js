@@ -1,4 +1,4 @@
-import { repositories } from '../../../../../src/organizational-entities/domain/usecases/index.js';
+import { repositories } from '../../../../../src/organizational-entities/infrastructure/repositories/index.js';
 import { CertificationCenterInvitation } from '../../../../../src/team/domain/models/CertificationCenterInvitation.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 

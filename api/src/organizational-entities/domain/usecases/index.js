@@ -88,4 +88,4 @@ const usecasesWithoutInjectedDependencies = {
  */
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
 
-export { repositories, usecases };
+export { usecases };
