@@ -1,18 +1,8 @@
 .user-list-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--pix-spacing-2x);
-  justify-content: flex-end;
+  margin-bottom: var(--pix-spacing-3x);
 
   .pix-select {
     min-width: 7.5rem;
-    margin-right: var(--pix-spacing-2x);
-  }
-
-  .pix-select .pix-icon {
-    width: 1.315rem;
-    height: 1.315rem;
-
   }
 
   &__input--small {

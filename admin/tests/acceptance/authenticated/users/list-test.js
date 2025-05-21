@@ -168,7 +168,7 @@ module('Acceptance | authenticated/users | list', function (hooks) {
 
           // when
           const screen = await visit('/users/list?firstName=emma&lastName=sardine&email=emma@example.net');
-          await click(screen.getByRole('button', { name: 'Vider les champs de recherche' }));
+          await click(screen.getByRole('button', { name: t('common.filters.actions.clear') }));
 
           // then
           assert.strictEqual(currentURL(), '/users/list');
@@ -185,23 +185,28 @@ module('Acceptance | authenticated/users | list', function (hooks) {
             identifiant: 'emma123',
           });
           const screen = await visit('/users/list');
-          await click(screen.getByRole('button', { name: 'Contient' }));
+
+          await click(screen.getByRole('button', { name: t('common.filters.common.selector') }));
           await screen.findByRole('listbox');
-          await click(screen.getByRole('option', { name: 'Exacte' }));
-          await fillIn(screen.getByRole('textbox', { name: 'Nom' }), 'sardine');
-          await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail' }), 'emma@example.net');
-          await fillIn(screen.getByRole('textbox', { name: 'Identifiant' }), 'emma123');
+          await click(screen.getByRole('option', { name: t('pages.users-list.query.exact') }));
+          await fillIn(screen.getByRole('textbox', { name: t('common.filters.users.lastname') }), 'sardine');
+          await fillIn(screen.getByRole('textbox', { name: t('common.filters.users.email') }), 'emma@example.net');
+          await fillIn(screen.getByRole('textbox', { name: t('common.filters.users.username') }), 'emma123');
 
           // when
-          await click(screen.getByRole('button', { name: 'Vider les champs de recherche' }));
+          await click(screen.getByRole('button', { name: t('common.filters.actions.clear') }));
 
           // then
-          assert.dom(screen.getByRole('textbox', { name: 'Prénom' })).hasNoValue();
-          assert.dom(screen.getByRole('textbox', { name: 'Nom' })).hasNoValue();
-          assert.dom(screen.getByRole('textbox', { name: 'Adresse e-mail' })).hasNoValue();
-          assert.dom(screen.getByRole('textbox', { name: 'Identifiant' })).hasNoValue();
-          assert.dom(screen.getByRole('button', { name: 'Contient' })).exists();
-          assert.dom(screen.queryByRole('button', { name: 'Exacte' })).doesNotExist();
+          assert.dom(screen.getByRole('textbox', { name: t('common.filters.users.firstname') })).hasNoValue();
+          assert.dom(screen.getByRole('textbox', { name: t('common.filters.users.lastname') })).hasNoValue();
+          assert.dom(screen.getByRole('textbox', { name: t('common.filters.users.email') })).hasNoValue();
+          assert.dom(screen.getByRole('textbox', { name: t('common.filters.users.username') })).hasNoValue();
+
+          await click(screen.getByRole('button', { name: t('common.filters.common.selector') }));
+          await screen.findByRole('listbox');
+
+          assert.ok(screen.getByRole('option', { name: t('pages.users-list.query.contains'), selected: true }));
+          assert.ok(screen.getByRole('option', { name: t('pages.users-list.query.exact'), selected: false }));
         });
 
         test('should let empty fields on search', async function (assert) {
@@ -215,20 +220,20 @@ module('Acceptance | authenticated/users | list', function (hooks) {
             identifiant: 'emma123',
           });
           const screen = await visit('/users/list');
-          await fillIn(screen.getByRole('textbox', { name: 'Nom' }), 'sardine');
-          await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail' }), 'emma@example.net');
-          await fillIn(screen.getByRole('textbox', { name: 'Identifiant' }), 'emma123');
+          await fillIn(screen.getByRole('textbox', { name: t('common.filters.users.lastname') }), 'sardine');
+          await fillIn(screen.getByRole('textbox', { name: t('common.filters.users.email') }), 'emma@example.net');
+          await fillIn(screen.getByRole('textbox', { name: t('common.filters.users.username') }), 'emma123');
 
           // when
-          await click(screen.getByRole('button', { name: 'Vider les champs de recherche' }));
-          await click(screen.getByRole('button', { name: 'Charger' }));
+          await click(screen.getByRole('button', { name: t('common.filters.actions.clear') }));
+          await click(screen.getByRole('button', { name: t('common.filters.actions.load') }));
 
           // then
           assert.strictEqual(currentURL(), '/users/list');
-          assert.dom(screen.getByRole('textbox', { name: 'Prénom' })).hasNoValue();
-          assert.dom(screen.getByRole('textbox', { name: 'Nom' })).hasNoValue();
-          assert.dom(screen.getByRole('textbox', { name: 'Adresse e-mail' })).hasNoValue();
-          assert.dom(screen.getByRole('textbox', { name: 'Identifiant' })).hasNoValue();
+          assert.dom(screen.getByRole('textbox', { name: t('common.filters.users.firstname') })).hasNoValue();
+          assert.dom(screen.getByRole('textbox', { name: t('common.filters.users.lastname') })).hasNoValue();
+          assert.dom(screen.getByRole('textbox', { name: t('common.filters.users.email') })).hasNoValue();
+          assert.dom(screen.getByRole('textbox', { name: t('common.filters.users.username') })).hasNoValue();
         });
       });
     });
