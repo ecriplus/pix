@@ -22,6 +22,14 @@ class OrganizationLearnerList {
       throw new CouldNotDeleteLearnersError();
     }
   }
+
+  getDeletableOrganizationLearners(organizationLearnerIdsToDelete) {
+    return organizationLearnerIdsToDelete.filter((organizationLearnerId) => {
+      return this.organizationLearners
+        .map((organizationLearner) => organizationLearner.id)
+        .includes(organizationLearnerId);
+    });
+  }
 }
 
 export { OrganizationLearnerList };

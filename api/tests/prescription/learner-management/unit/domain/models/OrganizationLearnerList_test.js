@@ -55,4 +55,42 @@ describe('Unit | Models | OrganizationLearnerListFormat', function () {
       }).to.not.throw();
     });
   });
+
+  describe('#getDeletableOrganizationLearners', function () {
+    context('when all given organizationLearnerIds are not from organization', function () {
+      it('should return an empty array', function () {
+        // given
+        const payload = {
+          organizationId: 777,
+          organizationLearners: [{ id: 123 }, { id: 345 }],
+        };
+
+        const organizationLearnerList = new OrganizationLearnerList(payload);
+
+        // when
+        const result = organizationLearnerList.getDeletableOrganizationLearners([789]);
+
+        // then
+        expect(result).to.be.empty;
+      });
+    });
+
+    context('when some organizationLearnerIds belong to organization', function () {
+      it('should return only learner in organization', function () {
+        // given
+        const payload = {
+          organizationId: 777,
+          organizationLearners: [{ id: 123 }, { id: 345 }],
+        };
+
+        const organizationLearnerList = new OrganizationLearnerList(payload);
+
+        // when
+        const result = organizationLearnerList.getDeletableOrganizationLearners([123, 789]);
+
+        // then
+        expect(result).to.be.deep.equal([123]);
+      });
+    });
+  });
 });
