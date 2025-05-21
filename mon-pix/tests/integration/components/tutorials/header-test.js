@@ -1,5 +1,4 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
@@ -8,13 +7,6 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Tutorials | Header', function (hooks) {
   setupIntlRenderingTest(hooks);
-
-  hooks.beforeEach(function () {
-    class RouterStub extends Service {
-      currentRouteName = 'authenticated.user-tutorials.recommended';
-    }
-    this.owner.register('service:router', RouterStub);
-  });
 
   test('renders the header', async function (assert) {
     // when
