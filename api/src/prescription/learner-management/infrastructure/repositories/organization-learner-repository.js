@@ -271,7 +271,6 @@ const countByUserId = async function (userId) {
   return count;
 };
 
-// copied from api/lib/repositories/organization-learner-repository-test.js-
 const findByUserId = async function ({ userId }) {
   const knexConn = DomainTransaction.getConnection();
   const rawOrganizationLearners = await knexConn
