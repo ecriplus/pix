@@ -1,0 +1,5 @@
+@use 'pix-design-tokens/colors';
+
+message-conversation::part(conversation) {
+  background-color: var(--pix-primary-10);
+}
