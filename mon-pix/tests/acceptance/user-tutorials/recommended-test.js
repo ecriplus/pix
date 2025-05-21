@@ -108,11 +108,11 @@ module('Acceptance | User-tutorials | Recommended', function (hooks) {
           server.createList('tutorial', 1);
           const screen = await visit('/mes-tutos/recommandes?competences=1&pageNumber=1');
 
-          // when
+          // when / then
           await click(screen.getByRole('link', { name: 'Enregistrés' }));
-          await click(screen.getByRole('link', { name: 'Recommandés' }));
+          assert.strictEqual(currentURL(), '/mes-tutos/enregistres');
 
-          // then
+          await click(screen.getByRole('link', { name: 'Recommandés' }));
           assert.strictEqual(currentURL(), '/mes-tutos/recommandes');
         });
       });
