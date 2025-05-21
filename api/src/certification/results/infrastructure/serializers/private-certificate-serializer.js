@@ -48,6 +48,7 @@ const attributes = [
   'verificationCode',
   'maxReachableLevelOnCertificationDate',
   'version',
+  'algorithmEngineVersion',
 ];
 
 const serialize = function (certificate, { translate }) {

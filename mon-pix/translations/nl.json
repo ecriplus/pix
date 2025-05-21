@@ -891,30 +891,25 @@
       "title": "Doe mee aan een certificeringssessie"
     },
     "certifications-list": {
-      "header": {
-        "certification-center": "Certificeringscentrum",
-        "date": "Datum",
-        "score": "pix score",
-        "status": "Status"
-      },
+      "comment": "Opmerking :",
+      "description": "Krijg toegang tot al je Pix-certificaten. Bekijk details en download je certificaten.",
       "no-certification": {
-        "text": "Je hebt nog geen certificering."
+        "text": "Je hebt nog geen Pix-certificering"
+      },
+      "buttons" : {
+        "details": "Zie details",
+        "download-certificate": "Het certificaat downloaden",
+        "download-attestation": "Het certificaat downloaden"
       },
       "statuses": {
-        "cancelled": {
-          "title": "Certificering geannuleerd"
-        },
-        "fail": {
-          "action": "Details tonen",
-          "title": "Certificaat niet behaald"
-        },
-        "not-published": {
-          "title": "In afwachting van resultaten"
-        },
-        "success": {
-          "action": "bekijk de resultaten",
-          "title": "Behaalde certificering"
-        }
+        "cancelled": "Geannuleerd",
+        "rejected": "Niet verkregen",
+        "not-published": "In afwachting van resultaten",
+        "validated": "Verkregen"
+      },
+      "information": {
+        "certification-center": "Certificeringscentrum :",
+        "date": "Datum bezoek :"
       },
       "title": "Mijn certificaten"
     },

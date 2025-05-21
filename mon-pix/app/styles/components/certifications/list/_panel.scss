@@ -1,0 +1,27 @@
+@use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/breakpoints';
+
+.certifications-panel {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--pix-spacing-4x);
+
+  @include breakpoints.device-is('tablet') {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.certifications-panel-item {
+  display: grid;
+  gap: var(--pix-spacing-4x);
+}
+
+.no-certification-panel {
+  @extend %pix-title-xs;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--pix-spacing-8x) * 2);
+  text-align: center;
+}

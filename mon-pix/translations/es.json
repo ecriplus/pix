@@ -887,30 +887,25 @@
       "title": "Unirse a una sesión de certificación"
     },
     "certifications-list": {
-      "header": {
-        "certification-center": "centro de certificación",
-        "date": "fecha",
-        "score": "puntuación pix",
-        "status": "estado"
-      },
+      "comment": "Comentario:",
+      "description": "Acceda a todas sus certificaciones Pix. Consulta los detalles y descarga tus certificados.",
       "no-certification": {
-        "text": "Aún no tienes certificación."
+        "text": "Aún no tienes Pix certificación"
+      },
+      "buttons" : {
+        "details": "Ver detalles",
+        "download-certificate": "Descargar certificado",
+        "download-attestation": "Descargar certificado"
       },
       "statuses": {
-        "cancelled": {
-          "title": "Certificación cancelada"
-        },
-        "fail": {
-          "action": "Mostrar detalles",
-          "title": "Certificación no obtenida"
-        },
-        "not-published": {
-          "title": "A la espera del resultado"
-        },
-        "success": {
-          "action": "ver los resultados",
-          "title": "Certificación obtenida"
-        }
+        "cancelled": "Cancelado",
+        "rejected": "No obtenido",
+        "not-published": "Resultados pendientes",
+        "validated": "Obtenido"
+      },
+      "information": {
+        "certification-center": "Centro de certificación :",
+        "date": "Fecha del examen :"
       },
       "title": "Mis certificaciones"
     },

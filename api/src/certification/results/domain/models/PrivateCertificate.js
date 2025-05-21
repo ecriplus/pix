@@ -33,6 +33,7 @@ class PrivateCertificate {
    * @param {string} props.verificationCode
    * @param {Date} props.maxReachableLevelOnCertificationDate
    * @param {number} props.version
+   * @param {AlgorithmEngineVersion} props.algorithmEngineVersion
    */
   constructor({
     id,
@@ -53,6 +54,7 @@ class PrivateCertificate {
     verificationCode,
     maxReachableLevelOnCertificationDate,
     version,
+    algorithmEngineVersion,
   } = {}) {
     this.id = id;
     this.firstName = firstName;
@@ -72,6 +74,7 @@ class PrivateCertificate {
     this.verificationCode = verificationCode;
     this.maxReachableLevelOnCertificationDate = maxReachableLevelOnCertificationDate;
     this.version = version;
+    this.algorithmEngineVersion = algorithmEngineVersion;
   }
 
   /**
@@ -99,6 +102,7 @@ class PrivateCertificate {
     assessmentResultStatus,
     isCancelled,
     version,
+    algorithmEngineVersion,
   }) {
     const status = _computeStatus(assessmentResultStatus, isCancelled);
     const juryComment = new JuryComment({
@@ -125,6 +129,7 @@ class PrivateCertificate {
       maxReachableLevelOnCertificationDate,
       status,
       version,
+      algorithmEngineVersion,
     });
   }
 
