@@ -1,3 +1,7 @@
+/**
+ * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
+ */
+
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { ComplementaryCertification } from '../../domain/models/ComplementaryCertification.js';
@@ -24,6 +28,20 @@ const getByLabel = async function ({ label }) {
   return _toDomain(complementaryCertification);
 };
 
+/**
+ * @param {ComplementaryCertificationKey} key
+ * @returns {Promise<ComplementaryCertification>}
+ */
+const getByKey = async function (key) {
+  const complementaryCertification = await knex.from('complementary-certifications').where({ key }).first();
+
+  if (!complementaryCertification) {
+    throw new NotFoundError('Complementary certification does not exist');
+  }
+
+  return _toDomain(complementaryCertification);
+};
+
 const getById = async function ({ id }) {
   const complementaryCertification = await knex.from('complementary-certifications').where({ id }).first();
 
@@ -34,4 +52,4 @@ const getById = async function ({ id }) {
   return _toDomain(complementaryCertification);
 };
 
-export { findAll, getById, getByLabel };
+export { findAll, getById, getByKey, getByLabel };
