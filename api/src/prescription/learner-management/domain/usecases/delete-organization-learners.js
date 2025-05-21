@@ -7,14 +7,14 @@ const deleteOrganizationLearners = async function ({
   organizationLearnerRepository,
   campaignParticipationRepository,
 }) {
-  const organizationLearnerIdsFromOrganization =
+  const organizationLearnersFromOrganization =
     await organizationLearnerRepository.findOrganizationLearnersByOrganizationId({
       organizationId,
     });
 
   const organizationLearnerList = new OrganizationLearnerList({
     organizationId,
-    organizationLearnerIds: organizationLearnerIdsFromOrganization,
+    organizationLearners: organizationLearnersFromOrganization,
   });
 
   organizationLearnerList.canDeleteOrganizationLearners(organizationLearnerIds, userId);

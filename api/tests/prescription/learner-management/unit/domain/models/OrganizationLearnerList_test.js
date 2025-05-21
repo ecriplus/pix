@@ -9,7 +9,7 @@ describe('Unit | Models | OrganizationLearnerListFormat', function () {
       //when
       const payload = {
         organizationId: Symbol('organizationId'),
-        organizationLearnerIds: Symbol('organizationLearnerList'),
+        organizationLearners: Symbol('organizationLearnerList'),
       };
       const organizationLearnerList = new OrganizationLearnerList(payload);
       // then
@@ -23,7 +23,7 @@ describe('Unit | Models | OrganizationLearnerListFormat', function () {
       //when
       const payload = {
         organizationId: 777,
-        organizationLearnerIds: [123, 345],
+        organizationLearners: [{ id: 123 }, { id: 345 }],
       };
 
       const organizationLearnerList = new OrganizationLearnerList(payload);
@@ -41,12 +41,12 @@ describe('Unit | Models | OrganizationLearnerListFormat', function () {
       );
     });
 
-    it('should not throw when lists are identical', function () {
+    it('should not throw when given ids belongs to list', function () {
       const userId = Symbol('123');
 
       const payload = {
         organizationId: Symbol('organizationId'),
-        organizationLearnerIds: [123, 345],
+        organizationLearners: [{ id: 123 }, { id: 345 }, { id: 567 }],
       };
 
       expect(() => {
