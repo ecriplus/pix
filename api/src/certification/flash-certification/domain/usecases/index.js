@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import * as challengeRepository from '../../../../shared/infrastructure/repositories/challenge-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
+import { complementaryCertificationRepository } from '../../../shared/infrastructure/repositories/complementary-certification-repository.js';
 import * as sharedFlashAlgorithmConfigurationRepository from '../../../shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as flashAlgorithmConfigurationRepository from '../../infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as flashAlgorithmService from '../services/algorithm-methods/flash.js';
@@ -21,6 +22,7 @@ const dependencies = {
   challengeRepository,
   flashAlgorithmConfigurationRepository,
   sharedFlashAlgorithmConfigurationRepository,
+  complementaryCertificationRepository,
   flashAlgorithmService,
 };
 
