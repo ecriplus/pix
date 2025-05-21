@@ -12,6 +12,7 @@ import {
   CertificationCandidateOnFinalizedSessionError,
   CertificationCandidatesError,
 } from '../../../../shared/domain/errors.js';
+import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import * as mailCheckImplementation from '../../../../shared/mail/infrastructure/services/mail-check.js';
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../../../shared/domain/constants/certification-candidates-errors.js';
 import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
@@ -58,6 +59,7 @@ export async function addCandidateToSession({
       cleaCertificationId: cleaCertification.id,
     });
   } catch (error) {
+    logger.error(error);
     throw new CertificationCandidatesError({
       code: error.code,
       meta: { value: error.meta },

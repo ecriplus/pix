@@ -18,6 +18,7 @@ import { usecases as teamUsecases } from '../../../../../src/team/domain/usecase
 import * as tooling from '../../common/tooling/index.js';
 import { acceptPixOrgaTermsOfService } from '../../common/tooling/legal-documents.js';
 import {
+  CERTIFICATION_SCO_EXTERNAL_ID,
   PUBLISHED_SCO_SESSION,
   SIMPLE_SCO_CERTIFICATION_CENTER_ID,
   SIMPLE_SCO_CERTIFICATION_USER_ID,
@@ -44,7 +45,7 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
   /**
    * 1. Create the certification session
    */
-  const externalId = 'SCO_CERTIFICATION_ORGANIZATION';
+  const externalId = CERTIFICATION_SCO_EXTERNAL_ID;
 
   const organizationMember = databaseBuilder.factory.buildUser.withRawPassword({
     id: SIMPLE_SCO_ORGANIZATION_MEMBER_ID,
@@ -199,7 +200,7 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
       certificationCenterId: certificationCenterForAdmin.id,
       address: 'Rennes',
       room: '28D',
-      examiner: 'Johnny Douw',
+      examiner: 'Jean Prea-demarrer',
       date: '2024-01-30',
       time: '14:30',
       description: 'SCO session with candidates ready to start',
@@ -226,7 +227,7 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
       certificationCenterId: certificationCenterForAdmin.id,
       address: 'Montpellier',
       room: '9C',
-      examiner: 'Jeanne Vieve',
+      examiner: 'Anne-Cess Ionfinie',
       date: dayjs().format('YYYY-MM-DD'),
       time: '12:30',
       description: 'SCO session with published results',
