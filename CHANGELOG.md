@@ -1,5 +1,37 @@
 # Pix Changelog
 
+# [5.116.0](https://github.com/1024pix/pix/compare/v5.115.0...v5.116.0) (2025-05-21)
+
+### :rocket: Amélioration
+
+- [#12325](https://github.com/1024pix/pix/pull/12325) Ajoute la colonne "Type de campagne" dans la création de campagnes en masse (PIX-17859) 
+- [#12277](https://github.com/1024pix/pix/pull/12277) Appliquer le nouveau design de la liste des certifications sur Pix App (PIX-17664). 
+- [#12349](https://github.com/1024pix/pix/pull/12349) Créer la table des référentiels cadres (PIX-17884). 
+
+### :bug: Correction
+
+- [#12331](https://github.com/1024pix/pix/pull/12331) Corriger l'import des modifiers provenant de PixUI (PIX-17922) 
+- [#12346](https://github.com/1024pix/pix/pull/12346) Corriger l'interpolation des variables dans la github action de création de version jira 
+- [#12317](https://github.com/1024pix/pix/pull/12317) Pix Junior - Bouton hors du cadre des cartes de mission (PIX-17854) 
+
+### :building_construction: Tech
+
+- [#12343](https://github.com/1024pix/pix/pull/12343) Corriger une injection de dépendances dans les tests qui était mal réalisée 
+- [#12254](https://github.com/1024pix/pix/pull/12254) Migrer le suivi matomo vers plausible sur mon-pix 
+- [#12334](https://github.com/1024pix/pix/pull/12334) Modifier le token github utilisé par le workflow de release 
+- [#12333](https://github.com/1024pix/pix/pull/12333) Suppression de Husky et Lint-staged 
+- [#12332](https://github.com/1024pix/pix/pull/12332) Suppression des blueprints custom EmberJS 
+- [#12296](https://github.com/1024pix/pix/pull/12296) Supprimer le script pour archiver en masse des centres de certification (PIX-17843) 
+
+### :arrow_up: Montée de version
+
+- [#12327](https://github.com/1024pix/pix/pull/12327) Update dependency @1024pix/pix-ui to ^55.18.2 (admin) 
+- [#12328](https://github.com/1024pix/pix/pull/12328) Update dependency @1024pix/pix-ui to ^55.18.2 (certif) 
+- [#12329](https://github.com/1024pix/pix/pull/12329) Update dependency @1024pix/pix-ui to ^55.18.2 (junior) 
+- [#12330](https://github.com/1024pix/pix/pull/12330) Update dependency @1024pix/pix-ui to ^55.18.2 (mon-pix) 
+- [#12337](https://github.com/1024pix/pix/pull/12337) Update dependency @1024pix/pix-ui to ^55.19.0 (admin) 
+- [#12338](https://github.com/1024pix/pix/pull/12338) Update dependency @1024pix/pix-ui to ^55.19.0 (orga)
+
 # [5.115.0](https://github.com/1024pix/pix/compare/v5.114.0...v5.115.0) (2025-05-20)
 
 ### :rocket: Amélioration
