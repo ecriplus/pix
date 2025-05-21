@@ -8,7 +8,7 @@ const deleteOrganizationLearners = async function ({
   campaignParticipationRepository,
 }) {
   const organizationLearnerIdsFromOrganization =
-    await organizationLearnerRepository.findOrganizationLearnerIdsByOrganizationId({
+    await organizationLearnerRepository.findOrganizationLearnersByOrganizationId({
       organizationId,
     });
 

@@ -11,7 +11,7 @@ import {
   findAllCommonLearnersFromOrganizationId,
   findAllCommonOrganizationLearnerByReconciliationInfos,
   findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId,
-  findOrganizationLearnerIdsByOrganizationId,
+  findOrganizationLearnersByOrganizationId,
   getLearnerInfo,
   getOrganizationLearnerForAdmin,
   reconcileUserByNationalStudentIdAndOrganizationId,
@@ -1766,42 +1766,51 @@ describe('Integration | Repository | Organization Learner Management | Organizat
     });
   });
 
-  describe('#findOrganizationLearnerIdsByOrganizationId', function () {
+  describe('#findOrganizationLearnersByOrganizationId', function () {
     let myOrganizationId;
     let otherOrganizationId;
-    let organizationLearnerId;
+    let organizationLearner;
 
     beforeEach(async function () {
       myOrganizationId = databaseBuilder.factory.buildOrganization().id;
       otherOrganizationId = databaseBuilder.factory.buildOrganization().id;
-      organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
+      organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
         organizationId: myOrganizationId,
-      }).id;
+      });
       databaseBuilder.factory.buildOrganizationLearner({
         organizationId: otherOrganizationId,
       }).id;
       await databaseBuilder.commit();
     });
 
-    it('should return one learner', async function () {
-      const results = await findOrganizationLearnerIdsByOrganizationId({
+    it('should return learners list', async function () {
+      const otherOrganizationLearner = databaseBuilder.factory.buildOrganizationLearner({
         organizationId: myOrganizationId,
       });
-      expect(results).to.deep.equal([organizationLearnerId]);
+      await databaseBuilder.commit();
+      const results = await findOrganizationLearnersByOrganizationId({
+        organizationId: myOrganizationId,
+      });
+
+      expect(results).to.deep.members([
+        new OrganizationLearner(organizationLearner),
+        new OrganizationLearner(otherOrganizationLearner),
+      ]);
+      expect(results[0]).instanceOf(OrganizationLearner);
     });
 
     it('should not return deleted learner', async function () {
       databaseBuilder.factory.buildOrganizationLearner({
         organizationId: myOrganizationId,
         deletedAt: new Date('2020-04-05'),
-      }).id;
+      });
 
       await databaseBuilder.commit();
 
-      const results = await findOrganizationLearnerIdsByOrganizationId({
+      const results = await findOrganizationLearnersByOrganizationId({
         organizationId: myOrganizationId,
       });
-      expect(results).to.deep.equal([organizationLearnerId]);
+      expect(results).to.deep.equal([new OrganizationLearner(organizationLearner)]);
     });
   });
 

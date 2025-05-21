@@ -283,9 +283,10 @@ const findByUserId = async function ({ userId }) {
   return rawOrganizationLearners.map((rawOrganizationLearner) => new OrganizationLearner(rawOrganizationLearner));
 };
 
-const findOrganizationLearnerIdsByOrganizationId = function ({ organizationId }) {
+const findOrganizationLearnersByOrganizationId = async function ({ organizationId }) {
   const knexConnection = DomainTransaction.getConnection();
-  return knexConnection('view-active-organization-learners').where({ organizationId }).select('id').pluck('id');
+  const organizationLearners = await knexConnection('view-active-organization-learners').where({ organizationId });
+  return organizationLearners.map((organizationLearner) => _toDomain(organizationLearner));
 };
 
 const reconcileUserToOrganizationLearner = async function ({ userId, organizationLearnerId }) {
@@ -331,6 +332,10 @@ async function getLearnerInfo(organizationLearnerId) {
   return new OrganizationLearner(organizationLearner);
 }
 
+function _toDomain(result) {
+  return new OrganizationLearner(result);
+}
+
 /**
  * @function
  * @name findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId
@@ -353,7 +358,7 @@ export {
   findAllCommonOrganizationLearnerByReconciliationInfos,
   findByUserId,
   findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId,
-  findOrganizationLearnerIdsByOrganizationId,
+  findOrganizationLearnersByOrganizationId,
   getLearnerInfo,
   getOrganizationLearnerForAdmin,
   reconcileUserByNationalStudentIdAndOrganizationId,

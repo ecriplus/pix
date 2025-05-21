@@ -20,9 +20,9 @@ describe('Unit | UseCase | Organization Learners Management | Delete Organizatio
     };
     organizationLearnerRepository = {
       removeByIds: sinon.stub(),
-      findOrganizationLearnerIdsByOrganizationId: sinon.stub().returns(organizationLearnerIds),
+      findOrganizationLearnersByOrganizationId: sinon.stub().returns(organizationLearnerIds),
     };
-    organizationLearnerRepository.findOrganizationLearnerIdsByOrganizationId.resolves(organizationLearnerIds);
+    organizationLearnerRepository.findOrganizationLearnersByOrganizationId.resolves(organizationLearnerIds);
   });
 
   it('should delete organization learners and their participations when all learners belong to organization', async function () {
@@ -40,7 +40,7 @@ describe('Unit | UseCase | Organization Learners Management | Delete Organizatio
 
     expect(canDeleteStub).to.have.been.calledWith(organizationLearnerIds, userId);
 
-    expect(organizationLearnerRepository.findOrganizationLearnerIdsByOrganizationId).to.have.been.calledWithExactly({
+    expect(organizationLearnerRepository.findOrganizationLearnersByOrganizationId).to.have.been.calledWithExactly({
       organizationId,
     });
 
@@ -72,7 +72,7 @@ describe('Unit | UseCase | Organization Learners Management | Delete Organizatio
 
     expect(canDeleteStub).to.have.been.calledWith(organizationLearnerIdsPayload, userId);
 
-    expect(organizationLearnerRepository.findOrganizationLearnerIdsByOrganizationId).to.have.been.calledWithExactly({
+    expect(organizationLearnerRepository.findOrganizationLearnersByOrganizationId).to.have.been.calledWithExactly({
       organizationId,
     });
 
