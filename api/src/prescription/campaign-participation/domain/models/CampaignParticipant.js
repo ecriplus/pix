@@ -4,8 +4,8 @@ import {
 } from '../../../../shared/domain/errors.js';
 import { EntityValidationError, ForbiddenAccess } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
-import { OrganizationLearner } from '../../../../shared/domain/models/OrganizationLearner.js';
 import * as emailValidationService from '../../../../shared/domain/services/email-validation-service.js';
+import { OrganizationLearner } from '../../../learner-management/domain/models/OrganizationLearner.js';
 import { CampaignExternalIdTypes } from '../../../shared/domain/constants.js';
 import { CampaignParticipation } from './CampaignParticipation.js';
 

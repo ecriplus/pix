@@ -1,4 +1,4 @@
-import { OrganizationLearner } from '../../../../../src/shared/domain/models/OrganizationLearner.js';
+import { OrganizationLearner } from '../../../../../src/prescription/learner-management/domain/models/OrganizationLearner.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 
 const findOneByUserIdAndOrganizationId = async function ({ userId, organizationId }) {

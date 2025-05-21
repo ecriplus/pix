@@ -1,8 +1,9 @@
 import range from 'lodash/range.js';
 
-import { MINIMUM_CERTIFIABLE_COMPETENCES_FOR_CERTIFIABILITY } from '../../../../src/shared/domain/constants.js';
-import { OrganizationLearner, PlacementProfile } from '../../../../src/shared/domain/models/index.js';
-import { domainBuilder, expect } from '../../../test-helper.js';
+import { OrganizationLearner } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationLearner.js';
+import { MINIMUM_CERTIFIABLE_COMPETENCES_FOR_CERTIFIABILITY } from '../../../../../../src/shared/domain/constants.js';
+import { PlacementProfile } from '../../../../../../src/shared/domain/models/index.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | OrganizationLearner', function () {
   describe('#updateCertificability', function () {

@@ -86,7 +86,6 @@ import { KnowledgeElement } from './KnowledgeElement.js';
 import { LearningContent } from './LearningContent.js';
 import { AreaForAdmin, CompetenceForAdmin, ThematicForAdmin, TubeForAdmin } from './LearningContentForAdmin.js';
 import { Membership } from './Membership.js';
-import { OrganizationLearner } from './OrganizationLearner.js';
 import { OrganizationMemberIdentity } from './OrganizationMemberIdentity.js';
 import { OrganizationTag } from './OrganizationTag.js';
 import { PartnerCertificationScoring } from './PartnerCertificationScoring.js';
@@ -179,7 +178,6 @@ export {
   Organization,
   OrganizationForAdmin,
   OrganizationInvitation,
-  OrganizationLearner,
   OrganizationMemberIdentity,
   OrganizationPlacesLotForManagement,
   OrganizationsToAttachToTargetProfile,

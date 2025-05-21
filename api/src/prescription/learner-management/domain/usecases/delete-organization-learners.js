@@ -18,6 +18,7 @@ const deleteOrganizationLearners = async function ({
   });
 
   organizationLearnerList.canDeleteOrganizationLearners(organizationLearnerIds, userId);
+
   await campaignParticipationRepository.removeByOrganizationLearnerIds({
     organizationLearnerIds,
     userId,
