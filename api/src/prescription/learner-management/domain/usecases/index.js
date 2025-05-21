@@ -15,7 +15,6 @@ import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import * as membershipRepository from '../../../../team/infrastructure/repositories/membership.repository.js';
 import * as campaignRepository from '../../../campaign/infrastructure/repositories/campaign-repository.js';
 import * as registrationOrganizationLearnerRepository from '../../../organization-learner/infrastructure/repositories/registration-organization-learner-repository.js';
-import * as campaignParticipationRepository from '../../infrastructure/repositories/campaign-participation-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
 import { importCommonOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-common-organization-learners-job-repository.js';
 import { importOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-organization-learners-job-repository.js';
@@ -59,7 +58,7 @@ import { importStorage } from '../../infrastructure/storage/import-storage.js';
  * @typedef {import ('../../infrastructure/repositories/jobs/validate-organization-learners-import-file-job-repository.js')} ValidateOrganizationImportFileJobRepository
  */
 const dependencies = {
-  campaignParticipationRepository,
+  campaignParticipationRepository: repositories.campaignParticipationRepository,
   campaignRepository,
   importCommonOrganizationLearnersJobRepository,
   importOrganizationLearnersJobRepository,
