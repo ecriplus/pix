@@ -97,10 +97,6 @@ const TARGET_PROFILE_TUBES = [
       level: 2,
     },
     {
-      id: 'reccqGUKgzIOK8f9U',
-      level: 2,
-    },
-    {
       id: 'recBbCIEKgrQi7eb6',
       level: 2,
     },
@@ -118,10 +114,6 @@ const TARGET_PROFILE_TUBES = [
       id: 'recs1vdbHxX8X55G9',
       level: 2,
     },
-    {
-      id: 'reccqGUKgzIOK8f9U',
-      level: 2,
-    },
   ],
   [
     {
@@ -132,26 +124,13 @@ const TARGET_PROFILE_TUBES = [
       id: 'recpe7Y8Wq2D56q6I',
       level: 2,
     },
-    {
-      id: 'recPOjwrHFhM21yGE',
-      level: 2,
-    },
   ],
 ];
 
 const CAMPAIGN_SKILLS = [
-  [
-    'recb0ZHKckwrnZeb8',
-    'recgOc2OreHCosoRp',
-    'skill28d761IHIaQs6c',
-    'skill1Jk1w9oDk9twVU',
-    'skill1uRSMtd7N6THAn',
-    'skill1KIPisxUY59N2w',
-    'skill1XYyr7gZO4VdHG',
-    'skill26VkJRWfPciwSG',
-  ],
-  ['recb0ZHKckwrnZeb8', 'recgOc2OreHCosoRp', 'skill28d761IHIaQs6c', 'skill1Jk1w9oDk9twVU'],
-  ['skill1uRSMtd7N6THAn', 'skill1KIPisxUY59N2w', 'skill1XYyr7gZO4VdHG', 'skill26VkJRWfPciwSG'],
+  ['reczOCGv8pz976Acl', 'skill1QAVccgLO16Rx8', 'skill2wQfMYrOHlL6HI', 'skillX5Rpk2rucNfnF'],
+  ['skill1QAVccgLO16Rx8', 'skill2wQfMYrOHlL6HI', 'skillX5Rpk2rucNfnF'],
+  ['reczOCGv8pz976Acl'],
 ];
 
 const buildUsers = (databaseBuilder) => USERS.map((user) => databaseBuilder.factory.buildUser.withRawPassword(user));
@@ -291,10 +270,10 @@ const buildTargetProfiles = (databaseBuilder, organization) =>
       ownerOrganizationId: organization.id,
     });
 
-    tubes.map(({ tubeId, level }) =>
+    tubes.map(({ id, level }) =>
       databaseBuilder.factory.buildTargetProfileTube({
         targetProfileId: targetProfile.id,
-        tubeId,
+        tubeId: id,
         level,
       }),
     );
