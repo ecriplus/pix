@@ -1,5 +1,5 @@
+import { OrganizationLearner } from '../../../../../../../src/prescription/learner-management/domain/models/OrganizationLearner.js';
 import * as serializer from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/jsonapi/sco-organization-learner-serializer.js';
-import { OrganizationLearner } from '../../../../../../../src/shared/domain/models/index.js';
 import { expect } from '../../../../../../test-helper.js';
 
 describe('Unit | Serializer | JSONAPI | sco-organization-learner-serializer', function () {
