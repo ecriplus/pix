@@ -132,6 +132,19 @@ const getCampaignParticipationsForOrganizationLearner = async function ({ organi
   );
 };
 
+const getAllCampaignParticipationsForOrganizationLearner = async function ({ organizationLearnerId }) {
+  const knexConn = DomainTransaction.getConnection();
+  const campaignParticipations = await knexConn('campaign-participations')
+    .where({
+      organizationLearnerId,
+    })
+    .whereNull('deletedAt')
+    .whereNull('deletedBy')
+    .orderBy('createdAt', 'desc');
+
+  return campaignParticipations.map((campaignParticipation) => new CampaignParticipation(campaignParticipation));
+};
+
 const remove = async function ({ id, attributes }) {
   const knexConn = DomainTransaction.getConnection();
   return await knexConn('campaign-participations').where({ id }).update(attributes);
@@ -286,6 +299,7 @@ export {
   findInfoByCampaignId,
   findOneByCampaignIdAndUserId,
   get,
+  getAllCampaignParticipationsForOrganizationLearner,
   getAllCampaignParticipationsInCampaignForASameLearner,
   getByCampaignIds,
   getCampaignParticipationsCountByUserId,

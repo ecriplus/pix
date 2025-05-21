@@ -889,6 +889,74 @@ describe('Integration | Repository | Campaign Participation', function () {
     });
   });
 
+  describe('#getAllCampaignParticipationsForOrganizationLearner', function () {
+    let organizationLearnerId;
+    let organizationId;
+
+    beforeEach(async function () {
+      organizationId = databaseBuilder.factory.buildOrganization().id;
+      organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({ organizationId }).id;
+    });
+
+    context('should return empty participations', function () {
+      it('When campaign participation are deleted', async function () {
+        databaseBuilder.factory.buildCampaignParticipation({
+          organizationLearnerId,
+          deletedAt: new Date('2022-05-01'),
+        });
+        // add a participation from another user
+        databaseBuilder.factory.buildCampaignParticipation();
+
+        await databaseBuilder.commit();
+
+        const participations = await campaignParticipationRepository.getAllCampaignParticipationsForOrganizationLearner(
+          {
+            organizationLearnerId,
+          },
+        );
+
+        expect(participations).lengthOf(0);
+      });
+
+      it('If no participation found', async function () {
+        // add a participation from another user
+        databaseBuilder.factory.buildCampaignParticipation();
+
+        await databaseBuilder.commit();
+
+        const participations = await campaignParticipationRepository.getAllCampaignParticipationsForOrganizationLearner(
+          {
+            organizationLearnerId,
+          },
+        );
+
+        expect(participations).to.lengthOf(0);
+      });
+    });
+
+    it('should return CampaignParticipation objects', async function () {
+      const lastCampaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+        organizationLearnerId,
+        status: SHARED,
+        isImproved: false,
+      });
+
+      await databaseBuilder.commit();
+
+      const participations = await campaignParticipationRepository.getAllCampaignParticipationsForOrganizationLearner({
+        organizationLearnerId,
+      });
+
+      expect(participations[0]).instanceOf(CampaignParticipation);
+      const { id, sharedAt, status } = participations[0];
+      expect({ id, sharedAt, status }).to.deep.equal({
+        id: lastCampaignParticipation.id,
+        sharedAt: lastCampaignParticipation.sharedAt,
+        status: SHARED,
+      });
+    });
+  });
+
   describe('#findInfoByCampaignId', function () {
     let campaign1;
     let campaign2;
