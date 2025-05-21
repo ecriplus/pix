@@ -39,8 +39,8 @@ class OrganizationLearnerIdentityNotFoundError extends DomainError {
 }
 
 class MissingOrInvalidCredentialsError extends DomainError {
-  constructor(message = 'Missing or invalid credentials') {
-    super(message);
+  constructor() {
+    super('Missing or invalid credentials', 'MISSING_OR_INVALID_CREDENTIALS');
   }
 }
 
