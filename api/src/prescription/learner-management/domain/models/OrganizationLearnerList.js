@@ -7,28 +7,19 @@ class OrganizationLearnerList {
     this.organizationLearners = organizationLearners;
   }
 
-  canDeleteOrganizationLearners(organizationLearnerIdsToValidate, userId) {
-    const organizationLearnersNotBelongingToOrganization = organizationLearnerIdsToValidate.filter(
-      (organizationLearnerId) => {
-        return !this.organizationLearners
-          .map((organizationLearner) => organizationLearner.id)
-          .includes(organizationLearnerId);
-      },
-    );
-    if (organizationLearnersNotBelongingToOrganization.length !== 0) {
+  getDeletableOrganizationLearners(organizationLearnerIdsToDelete, userId) {
+    const organizationLearnersInOrganization = this.organizationLearners.filter((organizationLearner) => {
+      return organizationLearnerIdsToDelete.includes(organizationLearner.id);
+    });
+
+    if (organizationLearnersInOrganization.length !== organizationLearnerIdsToDelete.length) {
       logger.error(
-        `User id ${userId} could not delete organization learners because learner id ${organizationLearnersNotBelongingToOrganization.join(',')} don't belong to organization id ${this.organizationId} "`,
+        `User id ${userId} could not delete organization learners because some learner id in (${organizationLearnerIdsToDelete.join(',')}) don't belong to organization id ${this.organizationId}`,
       );
       throw new CouldNotDeleteLearnersError();
     }
-  }
 
-  getDeletableOrganizationLearners(organizationLearnerIdsToDelete) {
-    return organizationLearnerIdsToDelete.filter((organizationLearnerId) => {
-      return this.organizationLearners
-        .map((organizationLearner) => organizationLearner.id)
-        .includes(organizationLearnerId);
-    });
+    return organizationLearnersInOrganization;
   }
 }
 

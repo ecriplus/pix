@@ -1,6 +1,6 @@
 import { OrganizationLearnerList } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationLearnerList.js';
 import { deleteOrganizationLearners } from '../../../../../../src/prescription/learner-management/domain/usecases/delete-organization-learners.js';
-import { catchErr, expect, sinon } from '../../../../../test-helper.js';
+import { expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | Organization Learners Management | Delete Organization Learners', function () {
   let campaignParticipationRepository;
@@ -8,13 +8,16 @@ describe('Unit | UseCase | Organization Learners Management | Delete Organizatio
   let organizationLearnerIds;
   let organizationId;
   let userId;
-  let canDeleteStub;
+  let getDeletableOrganizationLearnersStub;
 
   beforeEach(function () {
     userId = 777;
     organizationId = 123;
     organizationLearnerIds = [123, 456, 789];
-    canDeleteStub = sinon.stub(OrganizationLearnerList.prototype, 'canDeleteOrganizationLearners');
+    getDeletableOrganizationLearnersStub = sinon.stub(
+      OrganizationLearnerList.prototype,
+      'getDeletableOrganizationLearners',
+    );
     campaignParticipationRepository = {
       removeByOrganizationLearnerIds: sinon.stub(),
     };
@@ -27,7 +30,7 @@ describe('Unit | UseCase | Organization Learners Management | Delete Organizatio
 
   it('should delete organization learners and their participations when all learners belong to organization', async function () {
     // given
-    canDeleteStub.withArgs(organizationLearnerIds);
+    getDeletableOrganizationLearnersStub.withArgs(organizationLearnerIds).returns(organizationLearnerIds);
 
     // when
     await deleteOrganizationLearners({
@@ -38,7 +41,7 @@ describe('Unit | UseCase | Organization Learners Management | Delete Organizatio
       organizationLearnerRepository,
     });
 
-    expect(canDeleteStub).to.have.been.calledWith(organizationLearnerIds, userId);
+    expect(getDeletableOrganizationLearnersStub).to.have.been.calledWith(organizationLearnerIds);
 
     expect(organizationLearnerRepository.findOrganizationLearnersByOrganizationId).to.have.been.calledWithExactly({
       organizationId,
@@ -56,13 +59,13 @@ describe('Unit | UseCase | Organization Learners Management | Delete Organizatio
     });
   });
 
-  it('should not delete organization learners and their participations when all learners do not belong to organization', async function () {
+  it('should not delete organization learners and participations of learners which do not belong to the organization', async function () {
     // given
     const organizationLearnerIdsPayload = [123, 456, 789, 101];
-    canDeleteStub.withArgs(organizationLearnerIdsPayload).throws();
+    getDeletableOrganizationLearnersStub.withArgs(organizationLearnerIdsPayload).returns(organizationLearnerIds);
 
     // when
-    await catchErr(deleteOrganizationLearners)({
+    await deleteOrganizationLearners({
       organizationLearnerIds: organizationLearnerIdsPayload,
       userId,
       organizationId,
@@ -70,14 +73,20 @@ describe('Unit | UseCase | Organization Learners Management | Delete Organizatio
       organizationLearnerRepository,
     });
 
-    expect(canDeleteStub).to.have.been.calledWith(organizationLearnerIdsPayload, userId);
+    expect(getDeletableOrganizationLearnersStub).to.have.been.calledWith(organizationLearnerIdsPayload);
 
     expect(organizationLearnerRepository.findOrganizationLearnersByOrganizationId).to.have.been.calledWithExactly({
       organizationId,
     });
 
-    expect(campaignParticipationRepository.removeByOrganizationLearnerIds).to.not.have.been.called;
+    expect(campaignParticipationRepository.removeByOrganizationLearnerIds).to.have.been.calledWithExactly({
+      organizationLearnerIds,
+      userId,
+    });
 
-    expect(organizationLearnerRepository.removeByIds).to.not.have.been.called;
+    expect(organizationLearnerRepository.removeByIds).to.have.been.calledWithExactly({
+      organizationLearnerIds,
+      userId,
+    });
   });
 });
