@@ -4,9 +4,10 @@ const { Serializer } = jsonapiSerializer;
 
 import { CenterForAdmin } from '../../../../domain/models/CenterForAdmin.js';
 
-const deserialize = function ({ data }) {
+const deserialize = function ({ data, createdBy }) {
   const center = {
     createdAt: null,
+    createdBy,
     externalId: data.attributes['external-id'],
     habilitations: [],
     id: data.id,

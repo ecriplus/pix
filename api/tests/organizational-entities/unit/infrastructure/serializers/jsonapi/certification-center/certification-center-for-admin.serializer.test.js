@@ -34,6 +34,7 @@ describe('Unit | Organizational Entities | Infrastructure | Serializer | JSONAPI
       type: 'SCO',
       externalId: '12345',
       createdAt: null,
+      createdBy: 123,
       habilitations: [],
       archivedAt: null,
       isComplementaryAlonePilot: false,
@@ -45,14 +46,21 @@ describe('Unit | Organizational Entities | Infrastructure | Serializer | JSONAPI
 
   describe('#deserialize', function () {
     it('should convert a JSON API data into a CertificationCenterForAdmin model object', function () {
+      // given
+      const createdBy = 123;
+
       // when
-      const deserializedCertificationCenterForAdmin = serializer.deserialize(certificationCenterJsonApi);
+      const deserializedCertificationCenterForAdmin = serializer.deserialize({
+        data: certificationCenterJsonApi.data,
+        createdBy,
+      });
 
       // then
       const expectedCertificationCenterForAdmin = domainBuilder.buildCenterForAdmin({
         center: {
           ...centerForAdmin,
           id: '123',
+          createdBy: 123,
         },
         archivistFullName,
         dataProtectionOfficer,
