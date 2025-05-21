@@ -93,6 +93,10 @@ module.exports = function (environment) {
           CODE: '504',
           I18N_KEY: 'common.api-error-messages.gateway-timeout-error',
         },
+        MISSING_OR_INVALID_CREDENTIALS: {
+          CODE: '401',
+          I18N_KEY: 'common.api-error-messages.login-unauthorized-error',
+        },
       },
       AUTHENTICATED_SOURCE_FROM_GAR: 'external',
       COOKIE_LOCALE_LIFESPAN_IN_SECONDS: 31536000, // 1 year in seconds

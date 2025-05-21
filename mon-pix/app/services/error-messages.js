@@ -35,6 +35,9 @@ const ERROR_CODE_MAPPING = {
       return { localeNotSupported: error.meta.locale };
     },
   },
+  MISSING_OR_INVALID_CREDENTIALS: {
+    i18nKey: 'common.api-error-messages.login-unauthorized-error',
+  },
 };
 
 const HTTP_STATUS_MAPPING = {
