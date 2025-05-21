@@ -78,10 +78,18 @@ class UserNotAuthorizedToCreateCampaignError extends DomainError {
   }
 }
 
+class CampaignTypeError extends DomainError {
+  constructor(campaignType) {
+    const message = `Le type de campagne ${campaignType} n'est pas supporté.`;
+    super(message);
+  }
+}
+
 export {
   ArchivedCampaignError,
   CampaignCodeFormatError,
   CampaignParticipationDoesNotBelongToUser,
+  CampaignTypeError,
   CampaignUniqueCodeError,
   DeletedCampaignError,
   IsForAbsoluteNoviceUpdateError,

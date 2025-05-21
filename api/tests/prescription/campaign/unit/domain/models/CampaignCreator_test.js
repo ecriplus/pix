@@ -1,4 +1,5 @@
 import {
+  CampaignTypeError,
   OrganizationNotAuthorizedMultipleSendingAssessmentToCreateCampaignError,
   OrganizationNotAuthorizedToCreateCampaignError,
   UserNotAuthorizedToCreateCampaignError,
@@ -49,6 +50,28 @@ describe('Unit | Domain | Models | CampaignCreator', function () {
   });
 
   describe('#createCampaign', function () {
+    describe('when campaign type is not supported', function () {
+      it('throws a CampaignTypeError', async function () {
+        const error = await catchErr(function () {
+          const availableTargetProfileIds = [1, 2];
+          const creator = new CampaignCreator({ availableTargetProfileIds, organizationFeatures });
+          const campaignData = {
+            name: 'campagne utilisateur',
+            type: 'WRONG TYPE',
+            creatorId: 1,
+            ownerId: 1,
+            organizationId: 2,
+            targetProfileId: 2,
+            multipleSendings: true,
+          };
+
+          creator.createCampaign(campaignData);
+        })();
+
+        expect(error).to.be.an.instanceOf(CampaignTypeError);
+      });
+    });
+
     describe('when the creator is allowed to create the campaign', function () {
       it('creates the campaign', function () {
         const availableTargetProfileIds = [1, 2];

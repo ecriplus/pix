@@ -12,7 +12,7 @@ import * as campaignManagementSerializer from '../infrastructure/serializers/jso
 import * as campaignReportSerializer from '../infrastructure/serializers/jsonapi/campaign-report-serializer.js';
 
 const getTemplateForCreateCampaigns = (request, h) => {
-  const fields = csvSerializer.requiredFieldNamesForCampaignsImport;
+  const fields = csvSerializer.fieldNamesForCampaignsImport;
   const csvTemplateFileContent = generateCSVTemplate(fields);
 
   return h
