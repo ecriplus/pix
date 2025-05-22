@@ -63,4 +63,17 @@ describe('Certification | Results | Unit | Application | Certification Route', f
       expect(response.statusCode).to.equal(403);
     });
   });
+
+  describe('GET /api/shared-certifications', function () {
+    it('return 400 when the verification code is missing', async function () {
+      // given
+      sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
+
+      // when
+      const response = await httpTestServer.request('POST', '/api/shared-certifications');
+
+      // then
+      expect(response.statusCode).to.equal(400);
+    });
+  });
 });

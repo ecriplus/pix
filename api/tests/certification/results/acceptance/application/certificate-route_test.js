@@ -745,21 +745,6 @@ describe('Certification | Results | Acceptance | Application | Certification', f
     });
 
     context('when the given verificationCode is incorrect', function () {
-      it('should return 500 HTTP status code when param is missing', async function () {
-        // given
-        options = {
-          method: 'POST',
-          url: '/api/shared-certifications',
-          payload: {},
-        };
-
-        // when
-        const response = await server.inject(options);
-
-        // then
-        expect(response.statusCode).to.equal(500);
-      });
-
       it('should return notFound 404 HTTP status code when param is incorrect', async function () {
         // given
         const verificationCode = 'P-12345678';
