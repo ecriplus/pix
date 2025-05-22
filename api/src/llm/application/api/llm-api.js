@@ -1,14 +1,13 @@
 import { config } from '../../../shared/config.js';
 import { temporaryStorage } from '../../../shared/infrastructure/key-value-storages/index.js';
-import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
+import { ConfigurationNotFoundError } from '../../domain/errors.js';
 import { LLMChat } from '../../domain/models/LLMChat.js';
+import * as configurationRepository from '../../infrastructure/repositories/configuration-repository.js';
 import { LLMChatDTO } from './models/LLMChatDTO.js';
 import { LLMChatResponseDTO } from './models/LLMChatResponseDTO.js';
 
 export const STORAGE_PREFIX = 'llm-chats';
 const llmChatsTemporaryStorage = temporaryStorage.withPrefix(STORAGE_PREFIX);
-
-const logger = child('llm:api', { event: SCOPES.LLM });
 
 /**
  * @typedef LLMChatDTO
@@ -29,20 +28,16 @@ const logger = child('llm:api', { event: SCOPES.LLM });
  */
 export async function startChat({ configId, prefixIdentifier }) {
   if (!configId) {
-    return null;
+    throw new ConfigurationNotFoundError('null id provided');
   }
+  const configuration = await configurationRepository.get(configId);
   const chatId = generateId(prefixIdentifier);
-  const llmConfiguration = await getLLMConfiguration(configId);
-  if (!llmConfiguration) {
-    return null;
-  }
-
   const newChat = new LLMChat({
     id: chatId,
     llmConfigurationId: configId,
-    historySize: llmConfiguration.llm.historySize,
-    inputMaxChars: llmConfiguration.challenge.inputMaxChars,
-    inputMaxPrompts: llmConfiguration.challenge.inputMaxPrompts,
+    historySize: configuration.llm.historySize,
+    inputMaxChars: configuration.challenge.inputMaxChars,
+    inputMaxPrompts: configuration.challenge.inputMaxPrompts,
   });
   await llmChatsTemporaryStorage.save({
     key: newChat.id,
@@ -78,25 +73,4 @@ export async function prompt({ chatId, message }) {
 function generateId(prefixIdentifier) {
   const nowMs = new Date().getMilliseconds();
   return `${prefixIdentifier}-${nowMs}`;
-}
-
-async function getLLMConfiguration(configId) {
-  const url = config.llm.getConfigurationUrl + '/' + configId;
-  try {
-    const response = await fetch(url);
-    const statusCode = parseInt(response.status);
-    const jsonResponse = response.body ? await response.json() : '';
-    if (statusCode === 200) {
-      return jsonResponse;
-    }
-    if (statusCode === 404) {
-      logger.error(`No config found for id ${configId}`);
-      return null;
-    }
-    logger.error(`code (${statusCode}): ${JSON.stringify(jsonResponse, undefined, 2)}}`);
-    return null;
-  } catch (err) {
-    logger.error(err);
-    return null;
-  }
 }

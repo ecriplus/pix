@@ -3,15 +3,13 @@ import {
   SessionWithAbortReasonOnCompletedCertificationCourseError,
   SessionWithoutStartedCertificationError,
 } from '../../../../src/certification/session-management/domain/errors.js';
+import * as LLMDomainErrors from '../../../../src/llm/domain/errors.js';
 import { SiecleXmlImportError } from '../../../../src/prescription/learner-management/domain/errors.js';
 import * as DomainErrors from '../../../../src/shared/domain/errors.js';
 import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
 
 describe('Integration | API | Controller Error', function () {
-  let server;
-  // TODO: Fix this the next time the file is edited.
-  // eslint-disable-next-line mocha/no-setup-in-describe
-  const routeHandler = sinon.stub();
+  let server, routeHandler;
 
   const routeUrl = '/test_route';
   const request = { method: 'GET', url: routeUrl };
@@ -27,6 +25,7 @@ describe('Integration | API | Controller Error', function () {
   }
 
   before(async function () {
+    routeHandler = sinon.stub();
     const moduleUnderTest = {
       name: 'test-route',
       register: async function (server) {
@@ -100,6 +99,14 @@ describe('Integration | API | Controller Error', function () {
       );
       expect(responseCode(response)).to.equal('INVALID_SESSION_RESULT_TOKEN');
     });
+
+    it('responds Bad Request when a LLMDomainErrors.ConfigurationNotFoundError error occurs', async function () {
+      routeHandler.throws(new LLMDomainErrors.ConfigurationNotFoundError('someConfigId'));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
+      expect(responseDetail(response)).to.equal('The configuration of id "someConfigId" does not exist');
+    });
   });
 
   context('403 Forbidden', function () {
@@ -124,6 +131,18 @@ describe('Integration | API | Controller Error', function () {
       expect(responseDetail(response)).to.equal(
         "Cet utilisateur n'est pas autorisé à récupérer les résultats de la campagne.",
       );
+    });
+  });
+
+  context('503 Service Unavailable', function () {
+    const SERVICE_UNAVAILABLE_ERROR = 503;
+
+    it('responds Service Unavailable when a LLMDomainErrors.LLMApiError error occurs', async function () {
+      routeHandler.throws(new LLMDomainErrors.LLMApiError('some error message'));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(SERVICE_UNAVAILABLE_ERROR);
+      expect(responseDetail(response)).to.equal('Something went wrong when reaching the LLM Api : some error message');
     });
   });
 });

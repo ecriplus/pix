@@ -40,26 +40,6 @@ describe('Unit | Devcomp | Domain | UseCases | start-embed-llm-chat', function (
     });
   });
 
-  context('when chat could not be created', function () {
-    it('should throw a DomainError', async function () {
-      // given
-      passageRepository.get.withArgs({ passageId }).resolves(
-        new Passage({
-          id: passageId,
-          userId,
-        }),
-      );
-      llmApi.startChat.withArgs({ configId, prefixIdentifier: 'p123456' }).resolves(null);
-
-      // when
-      const err = await catchErr(startEmbedLlmChat)({ configId, passageId, userId, llmApi, passageRepository });
-
-      // then
-      expect(err).to.be.instanceOf(DomainError);
-      expect(err.message).to.equal('Error when starting chat with LLM');
-    });
-  });
-
   context('success case', function () {
     it('should return the newly created chat', async function () {
       // given
