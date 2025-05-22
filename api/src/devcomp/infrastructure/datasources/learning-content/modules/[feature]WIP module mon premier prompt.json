@@ -1,0 +1,491 @@
+{
+  "id": "cf183961-e85a-421d-a316-05870191ff82",
+  "slug": "ia-premier-prompt",
+  "title": "Mon premier prompt !",
+  "isBeta": true,
+  "details": {
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "description": "<p>Les IA conversationnelles comme Le Chat, ChatGPT, Gemini, DeepSeek, etc. vous en avez déjà entendu parler, mais savez vous comment on l’utilise ? Le secret tient en un mot : prompt. Mais c’est quoi au juste ? C'est ce qu'on va découvrir dans ce module.</p>",
+    "duration": 10,
+    "level": "Débutant",
+    "objectives": [
+      "<p>Savoir ce qu’est un prompt</p>",
+      "<p>Formuler des prompts clairs et précis pour des tâches de base</p>",
+      "<p>Vérifier la réponse de l’IA et lui demander des précisions si nécessaire</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "grains": [
+    {
+      "id": "1ab1964a-9967-4739-9004-c5e2c9de36f0",
+      "type": "discovery",
+      "title": "Accroche",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "663586ee-338f-434d-a0bb-a46fa2d80635",
+            "type": "embed",
+            "isCompletionRequired": false,
+            "title": "",
+            "url": "https://1024pix.github.io/atelier-contenus/NAI/NomAssoYogaaRoulettes.html",
+            "instruction": "<p>Lisez&nbsp;attentivement la discussion entre Gustave et Maëlle.</p>",
+            "solution": "",
+            "height": 500
+          }
+        }
+      ]
+    },
+    {
+      "id": "94156810-5197-4cd7-b58c-86cde94d6323",
+      "type": "discovery",
+      "title": "Activité découverte",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "a89cbfef-8266-4bfd-a8d9-142999989c1b",
+            "type": "text",
+            "content": "<p>Gustave a suivi le conseil de Maëlle. Il a demandé à une IA conversationnelle &nbsp;de lui donner des idées de noms pour son association. Découvrez ci-dessous sa discussion avec l’IA.</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "88af557c-e8f8-4bce-bc72-4f3aa35262fa",
+            "type": "embed",
+            "isCompletionRequired": false,
+            "title": "Découverte de l'interface IA",
+            "url": "https://1024pix.github.io/atelier-contenus/NAI/decouverteinterfaceIA.html",
+            "instruction": "<p>Explorez l’interface en cliquant sur les différentes parties et répondez à la question.</p>",
+            "solution": "",
+            "height": 600
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "4cd2311c-6c89-4d04-9087-1b874a412882",
+            "type": "qcu",
+            "instruction": "<p>Dans cette discussion, lequel parmi ces trois textes est le prompt ?&nbsp;</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>Des idées de noms pour une association de yoga à roulettes ?</p>",
+                "feedback": {
+                  "state": "<p>Bien vu !&nbsp;</p>",
+                  "diagnosis": "<p>En effet, le prompt est la question posée ou la consigne donnée à l'IA pour obtenir une réponse.</p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "<p>Bien sûr, voici quelques idées de noms pour une association de yoga à roulettes.</p>",
+                "feedback": {
+                  "state": "<p>Et non !</p>",
+                  "diagnosis": "<p>C'est la résponse donnée par l'IA à la question que lui a posé Gustave. La question de Gustave c'est le prompt !</p>"
+                }
+              },
+              {
+                "id": "3",
+                "content": "<p>Ecrivez votre message ici.</p>",
+                "feedback": {
+                  "state": "<p>Et non !</p>",
+                  "diagnosis": "<p>C'est la zone de saisie.&nbsp;Gustave écrit ses prompts dans cette zone, c'est-à-dire, les questions ou consignes&nbsp;données à l'IA.</p>"
+                }
+              }
+            ],
+            "solution": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "63c077cf-0a98-4526-b946-8ee3c28afeec",
+      "type": "lesson",
+      "title": "Leçon 1",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "6080355f-69c8-4803-a7e2-b301556ac9e3",
+            "type": "text",
+            "content": "<ul><li>Le prompt est la question posée ou la consigne donnée à l’IA conversationnelle 🤖.</li><li>Les réponses de l’IA conversationnelle &nbsp;s'affichent comme dans une conversation de messagerie instantanée.&nbsp;</li><li>Il y a toujours une zone pour saisir le prompt suivant.</li></ul>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "d50b83d9-4966-4480-be2b-18c5063b5457",
+      "type": "transition",
+      "title": "1er texte de transition",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "7f1f3b24-7160-405c-8e88-fdd69b131ddf",
+            "type": "text",
+            "content": "<p>Maintenant que vous savez vous repérer dans l’interface, nous allons voir comment écrire un prompt&nbsp;!📝</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "29e32ca5-8ad5-49bf-a9bb-104d0172e662",
+      "type": "activity",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "4f730efe-b5ff-4d66-ba0d-b0105d347dc4",
+            "type": "embed",
+            "isCompletionRequired": false,
+            "title": "",
+            "url": "https://1024pix.github.io/atelier-contenus/NAI/observationreponseia.html",
+            "instruction": "<p>Glissez chaque prompt dans le champ de saisie et observez la réponse de l’IA conversationnelle .<br><br></p>",
+            "solution": "",
+            "height": 500
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "d7c97543-452a-4777-9f6e-7d33e3d0d077",
+            "type": "qcm",
+            "instruction": "<p>D’après vos observations, quelle affirmation correspond le mieux à votre expérience ?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>L’IA conversationnelle donne toujours la même réponse, peu importe la question.</p>"
+              },
+              {
+                "id": "2",
+                "content": "<p>On pose des questions à l’IA conversationnelle en utilisant des mots-clés précis.</p>"
+              },
+              {
+                "id": "3",
+                "content": "<p>On parle à l’IA conversationnelle comme on parle avec une autre personne.</p>"
+              },
+              {
+                "id": "4",
+                "content": "<p>On parle à l’IA conversationnelle comme on le ferait avec un moteur de recherche.</p>"
+              },
+              {
+                "id": "5",
+                "content": "<p>Les réponses de l’IA conversationnelle sont différentes selon les questions posées.</p>"
+              },
+              {
+                "id": "6",
+                "content": "<p>L’IA conversationnelle répond toujours, mais parfois sans lien avec la question.</p><p><br></p>"
+              }
+            ],
+            "feedbacks": {
+              "valid": {
+                "state": "<p>Bravo !</p>",
+                "diagnosis": ""
+              },
+              "invalid": {
+                "state": "<p>Oups, reessayez !</p>",
+                "diagnosis": ""
+              }
+            },
+            "solutions": [
+              "3",
+              "5"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "2f0b42f0-02a3-4133-8401-ec270f2ca315",
+      "type": "lesson",
+      "title": "Leçon 2",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "90cd34bf-4182-4c72-ab1a-22ea98ab9c46",
+            "type": "text",
+            "content": "<p>Comme vous avez pu le voir, il est possible de faire des demandes variées à l’IA conversationnelle.&nbsp; <br>La demande est exprimée en <strong>langage courant</strong>, pas besoin de connaître des commandes spéciales ! 💬 <br>Pour que l’IA comprenne bien la demande, il est faut être <strong>précis</strong>.&nbsp; <br>📌Une bonne façon d’être précis c’est d’utiliser des <strong>verbes d’actions</strong> :&nbsp; “lister”, “traduire”, “résumer”, etc.<br><br></p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ba2c3789-f2bd-46e6-a1ca-38dd47088df8",
+      "type": "transition",
+      "title": "2e texte de transition",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "1ad822c8-cf06-43b8-adf4-9acc12f22fff",
+            "type": "text",
+            "content": "<p>Dans certains cas, utiliser un verbe adapté ne suffit pas😅. Il faut aussi donner des éléments décrivant le résultat que l’on veut obtenir. Voyons cela ensemble !</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a39e914f-631d-491c-a4d8-14df1686de2c",
+      "type": "activity",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "0a0f1cf5-3f03-448c-b551-93d51482ab33",
+            "type": "text",
+            "content": "<p>Gustave veut une recette de gâteau pour 10 personnes🍰.  Il est allergique au chocolat🍫.</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "19a2c102-618f-497d-b68f-48a9bb72d1d7",
+            "type": "embed",
+            "isCompletionRequired": false,
+            "title": "",
+            "url": "https://1024pix.github.io/atelier-contenus/NAI/Promptgateaupistache.html",
+            "instruction": "<p> Testez les trois prompts suivants.&nbsp;</p><p>Observez les réponses de l’IA conversationnelle et répondez à la question ci-dessous.<br><br></p>",
+            "solution": "",
+            "height": 400
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "ee3bd7af-b9d4-432d-a6a2-78bada14d03a",
+            "type": "qcu",
+            "instruction": "<p>D’après vos observations, quelle est la meilleur option ?<br><br></p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>Prompt 1</p>",
+                "feedback": {
+                  "state": "<p>Mauvaise réponse !</p>",
+                  "diagnosis": "<p>L’IA conversationnelle&nbsp; ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut préciser tous les éléments importants de la demande dans le prompt.<br><br></p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "<p>Prompt 2</p>",
+                "feedback": {
+                  "state": "<p>Mauvaise réponse !</p>",
+                  "diagnosis": "<p>L’IA conversationnelle&nbsp; ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut préciser tous les éléments importants de la demande dans le prompt.<br><br></p>"
+                }
+              },
+              {
+                "id": "3",
+                "content": "<p>Prompt 3</p>",
+                "feedback": {
+                  "state": "<p>Bonne réponse !</p>",
+                  "diagnosis": "<p>En effet, ce prompt contient des éléments précis : la phrase contient un verbe, le nombre de personnes et les ingrédients à supprimer.</p>"
+                }
+              }
+            ],
+            "solution": "3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "8d975832-e974-4253-bb75-3a3d3636f52c",
+      "type": "lesson",
+      "title": "Leçon 3",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "29fbfaf4-e1f9-4f19-9bbb-38f8a712e352",
+            "type": "text",
+            "content": "<p>📌Une autre façon d’être précis c’est de donner à l’IA conversationnelle autant d’<strong>informations</strong> que possible. Cela donne du contexte.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "d6d77cc3-71d7-4b18-a74d-d39424ca6b0a",
+      "type": "activity",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "b001a5e6-0916-4aa2-b4e7-0ad3d412ed2c",
+            "type": "image",
+            "url": "https://i.imgur.com/3gVWWpO.png",
+            "alt": "",
+            "alternativeText": "<p>Pix IA LLM</p><p>Biennvenue sur Pix IA LLM</p><p>Prompt : Je veux adopter un animal. J'habite en appartement. Quelles sont les 5 meillaures options ?</p><p>Réponse IA : Voici cinq options d'animaux adaptés à la vie en appartement :</p><p>1. Chat</p><p>2. Poisson</p><p>3. Lapin</p><p>4. Crocodile</p><p>5. Hamster</p><p><br></p><p>Zone de saisie du prompt : Écrivez votre message ici</p><p>Bouton \"Envoyer\"</p>",
+            "legend": "",
+            "licence": ""
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "85194ba2-923f-4907-9842-381361271bdc",
+            "type": "qcu",
+            "instruction": "<p>Selon vous, la liste d’animaux donnée par l’IA conversationnelle ci-dessous répond bien à la demande?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>La réponse de l'IA conversationnelle est adaptée à la demande</p>",
+                "feedback": {
+                  "state": "<p>Pas exactement</p>",
+                  "diagnosis": "<p>Êtes-vous bien sûr que la réponse de l’IA conversationnelle respecte ce qui est demandé dans le prompt&nbsp;?</p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "<p>La réponse de l'IA conversationnelle n'est pas adaptée à la demande</p>",
+                "feedback": {
+                  "state": "<p>Bien vu !</p>",
+                  "diagnosis": "<p>La réponse de l’IA conversationnelle n’est pas adaptée : adopter un crocodile n'est pas une bonne option pour quelqu’un qui habite en appartement, c'est dangereux et même illégal !<br><br></p>"
+                }
+              },
+              {
+                "id": "3",
+                "content": "<p>Je ne sais pas</p>",
+                "feedback": {
+                  "state": "<p>Petit coup de pouce !</p>",
+                  "diagnosis": "<p>Regardez bien, la réponse de l’IA conversationnelle ne respecte pas ce qui est demandé dans le prompt : le crocodile n'est pas l'animal le plus adapté pour un appartement !</p>"
+                }
+              }
+            ],
+            "solution": "2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "7f3868a0-f259-4394-9bbb-d04b34c55366",
+      "type": "lesson",
+      "title": "Leçon 4",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "ebd5d937-c04e-47da-98b2-7ddde874cb50",
+            "type": "text",
+            "content": "<p>Même si le prompt est clair et précis, et que la réponse paraît bien rédigée, <strong>une IA conversationnelle peut se tromper</strong>😓. Il faut TOUJOURS relire et vérifier la réponse.&nbsp; </p><p>💡On peut continuer la conversation pour lui faire <strong>corriger</strong>.<br><br></p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "1ec0a8c6-ed7a-4e91-b886-7dc192490bb7",
+      "type": "summary",
+      "title": "Recap",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "33210c11-0e87-4d93-9190-089654d57ee4",
+            "type": "text",
+            "content": "<p>📌 Résumons l’essentiel avant de passer à la suite : <br></p><ul><li>Un prompt (instruction ou requête en français) est une <strong>question</strong> que l’on pose ou une <strong>consigne</strong> que l’on donne à l'IA conversationnelle pour qu’elle produise une réponse🧑‍💻.</li><li>Un prompt s’écrit en <strong>langage courant</strong>, comme si on parlait à un autre être humain🗣️.</li><li>Plus la <strong>demande est claire et précise</strong>, plus la réponse de l'IA conversationnelle&nbsp;est adaptée et pertinente🤓.&nbsp;<ul><li>On peut utiliser des <strong>verbes d’action</strong> comme “Traduis”, “Liste”, “Résume”, etc.</li><li>On peut ajouter des <strong>informations supplémentaires</strong> pour donner un contexte.</li></ul></li><li>Il est important de <strong>toujours relire la réponse</strong> de l'IA conversationnelle &nbsp;pour vérifier qu'elle répond bien à la demande🕵️.</li><li>Si la réponse de l’IA conversationnelle ne convient pas, il faut <strong>reformuler</strong> son prompt pour mieux guider l'IA📝.</li></ul>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "227201e2-d165-401d-a9b2-2fc6294205db",
+      "type": "transition",
+      "title": "3e texte de transition",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "ae11054b-571a-4577-8554-c2731f729647",
+            "type": "text",
+            "content": "<p>Vous connaissez maintenant les règles de base pour formuler un prompt. À vous d’appliquer ces règles&nbsp;!🙌</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bdbe0b99-02d8-48a9-951f-1e85e2ea25d8",
+      "type": "activity",
+      "title": "Drag&Drop",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "63c7f73f-b9b1-4c9b-a983-29b5dc8030b9",
+            "type": "embed",
+            "isCompletionRequired": false,
+            "title": "",
+            "url": "https://1024pix.github.io/atelier-contenus/NAI/glisserdeposerlesbonsverbes.html",
+            "instruction": "<p>Glissez le verbe qui convient le plus pour compléter chaque prompt ci-dessous.</p>",
+            "solution": "",
+            "height": 500
+          }
+        }
+      ]
+    },
+    {
+      "id": "2078a0df-7a93-4dc1-97b8-33705eb70cac",
+      "type": "activity",
+      "title": "Swipe",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "45d57981-7773-420a-b5b5-dbbab33848e4",
+            "type": "text",
+            "content": "<p>À vous de jouer !</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "8a38252f-3ae3-48b0-ad3b-014ca1a95858",
+            "type": "embed",
+            "isCompletionRequired": false,
+            "title": "",
+            "url": "https://1024pix.github.io/atelier-contenus/NAI/SwipePromptClairetprecis.html",
+            "instruction": "<p>Lisez le prompt et dites s’il est clair et précis ou flou et vague en cliquant sur le bouton correspondant !</p>",
+            "solution": "",
+            "height": 600
+          }
+        }
+      ]
+    },
+    {
+      "id": "cea108c3-9bab-406c-be58-dd976b1680bc",
+      "type": "transition",
+      "title": "4e texte de transition",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "bd373d86-9859-4f63-a693-bec98c2e7300",
+            "type": "text",
+            "content": "<p>Tu as appris à parler à une IA conversationnelle👏.Maintenant, place à la pratique : voyons si tu peux obtenir la réponse voulue !</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "140fd885-4562-4a9c-a19a-cae9cc0715b9",
+      "type": "challenge",
+      "title": "Activité défi",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "f30fee84-9b24-4f58-b216-375817170298",
+            "type": "embed",
+            "isCompletionRequired": false,
+            "title": "",
+            "url": "https://app.pocllm.pix.digital/config/cma2ihhoa000bwg011i86qb30/preview",
+            "instruction": "<p>Écrivez un prompt à l’IA conversationnelle ci-dessous pour qu’elle crée un poème sur votre animal préféré.<br><br></p>",
+            "solution": "",
+            "height": 500
+          }
+        }
+      ]
+    }
+  ]
+}
