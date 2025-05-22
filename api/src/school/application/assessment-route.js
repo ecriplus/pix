@@ -64,6 +64,15 @@ const register = async function (server) {
         tags: ['api'],
       },
     },
+    {
+      method: 'POST',
+      path: '/api/pix1d/assessments/preview',
+      config: {
+        auth: false,
+        handler: assessmentController.createAssessmentPreviewForPix1d,
+        tags: ['api', 'pix1d', 'assessment'],
+      },
+    },
   ]);
 };
 const name = 'assessment-pix1d-api';
