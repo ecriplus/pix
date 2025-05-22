@@ -207,16 +207,6 @@ export default class ModulePassage extends Component {
   }
 
   @action
-  async onSidebarOpen() {
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
-      'pix-event-name': `Click sur le bouton Étape ${this.navbarCurrentPassageStep} sur ${this.displayableGrainsInNavbar.length} de la barre de navigation`,
-    });
-  }
-
-  @action
   async goToGrain(grainId) {
     const element = document.getElementById(`grain_${grainId}`);
     this.modulixAutoScroll.focusAndScroll(element);
@@ -249,9 +239,6 @@ export default class ModulePassage extends Component {
       @currentStep={{this.navbarCurrentPassageStep}}
       @totalSteps={{this.displayableGrainsInNavbar.length}}
       @module={{@module}}
-      @grainsToDisplay={{this.grainsToDisplayInNavbar}}
-      @goToGrain={{this.goToGrain}}
-      @onSidebarOpen={{this.onSidebarOpen}}
     />
 
     <main class="module-passage">
