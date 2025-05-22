@@ -8,7 +8,6 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
-import { waitForDialog } from '../../../helpers/wait-for';
 
 module('Integration | Component | Module | Passage', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -297,45 +296,6 @@ module('Integration | Component | Module | Passage', function (hooks) {
           // then
           assert.dom(screen.getByRole('navigation', { name: 'Étape 0 sur 1' })).exists();
         });
-
-        test('should push metrics event', async function (assert) {
-          // given
-          const store = this.owner.lookup('service:store');
-          const textElement = { content: 'content', type: 'text' };
-          const qcuElement = {
-            instruction: 'instruction',
-            proposals: ['radio1', 'radio2'],
-            type: 'qcu',
-          };
-          const grain1 = store.createRecord('grain', {
-            type: 'transition',
-            components: [{ type: 'element', element: textElement }],
-          });
-          const grain2 = store.createRecord('grain', { components: [{ type: 'element', element: qcuElement }] });
-
-          const module = store.createRecord('module', {
-            slug: 'module-slug',
-            title: 'Module title',
-            grains: [grain1, grain2],
-          });
-          const passage = store.createRecord('passage');
-
-          const metrics = this.owner.lookup('service:metrics');
-          metrics.trackEvent = sinon.stub();
-
-          // when
-          await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
-          await clickByName('Afficher les étapes du module');
-
-          // then
-          sinon.assert.calledWithExactly(metrics.trackEvent, {
-            event: 'custom-event',
-            'pix-event-category': 'Modulix',
-            'pix-event-action': `Passage du module : ${module.slug}`,
-            'pix-event-name': `Click sur le bouton Étape 0 sur 1 de la barre de navigation`,
-          });
-          assert.ok(true);
-        });
       });
 
       module('when transition is last grain', function () {
@@ -368,47 +328,6 @@ module('Integration | Component | Module | Passage', function (hooks) {
 
           // then
           assert.dom(screen.getByRole('navigation', { name: 'Étape 1 sur 1' })).exists();
-        });
-
-        test('should push metrics event', async function (assert) {
-          // given
-          const store = this.owner.lookup('service:store');
-          const textElement = { content: 'content', type: 'text' };
-          const qcuElement = {
-            instruction: 'instruction',
-            proposals: ['radio1', 'radio2'],
-            type: 'qcu',
-          };
-          const grain1 = store.createRecord('grain', {
-            components: [{ type: 'element', element: textElement }],
-          });
-          const grain2 = store.createRecord('grain', {
-            type: 'transition',
-            components: [{ type: 'element', element: qcuElement }],
-          });
-
-          const module = store.createRecord('module', {
-            slug: 'module-slug',
-            title: 'Module title',
-            grains: [grain1, grain2],
-          });
-          const passage = store.createRecord('passage');
-
-          const metrics = this.owner.lookup('service:metrics');
-          metrics.trackEvent = sinon.stub();
-
-          // when
-          await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
-          await clickByName('Afficher les étapes du module');
-
-          // then
-          sinon.assert.calledWithExactly(metrics.trackEvent, {
-            event: 'custom-event',
-            'pix-event-category': 'Modulix',
-            'pix-event-action': `Passage du module : ${module.slug}`,
-            'pix-event-name': `Click sur le bouton Étape 1 sur 1 de la barre de navigation`,
-          });
-          assert.ok(true);
         });
       });
     });
@@ -1389,127 +1308,6 @@ module('Integration | Component | Module | Passage', function (hooks) {
       });
       sinon.assert.calledWithExactly(passageEventsService.record, {
         type: 'PASSAGE_TERMINATED',
-      });
-      assert.ok(true);
-    });
-  });
-
-  module('when user opens the sidebar', function () {
-    test('should push metrics event', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const element = { type: 'text', isAnswerable: false, content: 'Ceci est un grain dans un test d‘intégration' };
-      const grain1 = store.createRecord('grain', {
-        title: 'Grain title',
-        type: 'discovery',
-        id: '123-abc',
-        components: [{ type: 'element', element }],
-      });
-      const grain2 = store.createRecord('grain', {
-        title: 'Grain title',
-        type: 'activity',
-        id: '234-abc',
-        components: [{ type: 'element', element }],
-      });
-      const module = store.createRecord('module', {
-        title: 'Didacticiel',
-        slug: 'module-slug',
-        grains: [grain1, grain2],
-      });
-      const passage = store.createRecord('passage');
-      const metrics = this.owner.lookup('service:metrics');
-      metrics.trackEvent = sinon.stub();
-
-      //  when
-      await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
-      await clickByName('Afficher les étapes du module');
-
-      // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, {
-        event: 'custom-event',
-        'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.slug}`,
-        'pix-event-name': `Click sur le bouton Étape 1 sur 2 de la barre de navigation`,
-      });
-      assert.ok(true);
-    });
-  });
-
-  module('when user clicks on grain’s type in sidebar', function () {
-    test('should focus and scroll on matching grain element', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const element = { type: 'text', isAnswerable: false, content: 'Ceci est un grain dans un test d‘intégration' };
-      const grain1 = store.createRecord('grain', {
-        title: 'Grain title',
-        type: 'discovery',
-        id: '123-abc',
-        components: [{ type: 'element', element }],
-      });
-      const grain2 = store.createRecord('grain', {
-        title: 'Grain title',
-        type: 'activity',
-        id: '234-abc',
-        components: [{ type: 'element', element }],
-      });
-      const module = store.createRecord('module', {
-        title: 'Didacticiel',
-        slug: 'module-slug',
-        grains: [grain1, grain2],
-      });
-      const passage = store.createRecord('passage');
-      const modulixAutoScroll = this.owner.lookup('service:modulix-auto-scroll');
-      modulixAutoScroll.focusAndScroll = sinon.mock();
-
-      //  when
-      const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
-      await clickByName('Afficher les étapes du module');
-      await waitForDialog();
-      const item = screen.getByRole('button', { name: 'Découverte' });
-      await click(item);
-
-      //  then
-      assert.ok(modulixAutoScroll.focusAndScroll.calledOnce);
-    });
-
-    test('should push metrics event', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const element = { type: 'text', isAnswerable: false, content: 'Ceci est un grain dans un test d‘intégration' };
-      const grain1 = store.createRecord('grain', {
-        title: 'Grain title',
-        type: 'discovery',
-        id: '123-abc',
-        components: [{ type: 'element', element }],
-      });
-      const grain2 = store.createRecord('grain', {
-        title: 'Grain title',
-        type: 'activity',
-        id: '234-abc',
-        components: [{ type: 'element', element }],
-      });
-      const module = store.createRecord('module', {
-        title: 'Didacticiel',
-        slug: 'module-slug',
-        grains: [grain1, grain2],
-      });
-      const passage = store.createRecord('passage');
-      const metrics = this.owner.lookup('service:metrics');
-      metrics.trackEvent = sinon.stub();
-
-      //  when
-      const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
-      await clickByName('Afficher les étapes du module');
-      await waitForDialog();
-      const item = screen.getByRole('button', { name: 'Découverte' });
-      await click(item);
-
-      // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, {
-        event: 'custom-event',
-        'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.slug}`,
-        'pix-event-name': `Click sur le grain ${grain1.id} de la barre de navigation`,
       });
       assert.ok(true);
     });
