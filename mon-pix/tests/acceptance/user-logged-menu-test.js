@@ -1,3 +1,4 @@
+import { within } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { setupApplicationTest } from 'ember-qunit';
@@ -18,7 +19,12 @@ module('Acceptance | User account', function (hooks) {
 
       // when
       await click(screen.getByRole('button', { name: 'Henri Consulter mes informations' }));
-      await click(screen.getByRole('link', { name: 'Mes parcours' }));
+
+      await click(
+        await within(
+          screen.getByRole('button', { name: 'Henri Consulter mes informations' }).closest('div'),
+        ).findByRole('link', { name: 'Mes parcours' }),
+      );
 
       // then
       assert.strictEqual(currentURL(), '/mes-parcours');

@@ -33,9 +33,9 @@ export default class AppNavigation extends Component {
   <template>
     <PixNavigation
       class="app-navigation"
-      @navigationAriaLabel="{{t 'navigation.nav-bar.aria-label'}}"
-      @openLabel="{{t 'navigation.nav-bar.open'}}"
-      @closeLabel="{{t 'navigation.nav-bar.close'}}"
+      @navigationAriaLabel={{t "navigation.nav-bar.aria-label"}}
+      @openLabel={{t "navigation.nav-bar.open"}}
+      @closeLabel={{t "navigation.nav-bar.close"}}
     >
       <:brand>
         {{#if this.isFrenchLocale}}

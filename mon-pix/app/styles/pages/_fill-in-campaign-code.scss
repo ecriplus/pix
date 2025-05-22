@@ -21,6 +21,10 @@
     @extend %pix-body-l;
   }
 
+  &__switcher {
+    width: fit-content;
+  }
+
   &__form {
     display: flex;
     flex-direction: column;

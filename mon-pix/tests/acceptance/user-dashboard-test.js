@@ -59,7 +59,7 @@ module('Acceptance | User dashboard page', function (hooks) {
 
         // then
         assert.notOk(screen.queryByText('Hermione Granger'));
-        assert.ok(screen.getByText(t('navigation.not-logged.sign-in')));
+        assert.strictEqual(currentURL(), '/deconnexion');
       });
     });
 

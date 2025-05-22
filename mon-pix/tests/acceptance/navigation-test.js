@@ -1,7 +1,7 @@
 import { visit } from '@1024pix/ember-testing-library';
-// eslint-disable-next-line no-restricted-imports
-import { click, currentURL, find } from '@ember/test-helpers';
+import { click, currentURL } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
@@ -27,38 +27,36 @@ module('Acceptance | Navbar', function (hooks) {
     [
       {
         initialRoute: '/certifications',
-        initialNavigationItem: 2,
+        initialLabel: 'navigation.main.start-certification',
         expectedRoute: '/accueil',
-        targetedNavigationItem: 0,
+        targetLabel: 'navigation.main.dashboard',
       },
       {
         initialRoute: '/accueil',
-        initialNavigationItem: 0,
+        initialLabel: 'navigation.main.dashboard',
         expectedRoute: '/certifications',
-        targetedNavigationItem: 2,
+        targetLabel: 'navigation.main.start-certification',
       },
     ].forEach((userNavigation) => {
       test(`should redirect from "${userNavigation.initialRoute}" to "${userNavigation.expectedRoute}"`, async function (assert) {
         // given
-        await visit(userNavigation.initialRoute);
+        const screen = await visit(userNavigation.initialRoute);
 
         assert.ok(
-          find('.navbar-desktop-header-container__menu')
-            .children[0].children[userNavigation.initialNavigationItem].children[0].getAttribute('class')
+          screen
+            .getByRole('link', { name: t(userNavigation.initialLabel) })
+            .getAttribute('class')
             .includes('active'),
         );
-
         // when
-        await click(
-          find('.navbar-desktop-header-container__menu').children[0].children[userNavigation.targetedNavigationItem]
-            .children[0],
-        );
+        await click(screen.getByRole('link', { name: t(userNavigation.targetLabel) }));
 
         // then
         assert.strictEqual(currentURL(), userNavigation.expectedRoute);
         assert.ok(
-          find('.navbar-desktop-header-container__menu')
-            .children[0].children[userNavigation.targetedNavigationItem].children[0].getAttribute('class')
+          screen
+            .getByRole('link', { name: t(userNavigation.targetLabel) })
+            .getAttribute('class')
             .includes('active'),
         );
       });

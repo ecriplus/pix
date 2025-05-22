@@ -136,7 +136,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
             screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
             campaign.code,
           );
-          await clickByLabel(t('pages.fill-in-campaign-code.start'));
+          await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
 
           // then
           assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
@@ -149,7 +149,8 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
             screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
             campaign.code,
           );
-          await clickByLabel(t('pages.fill-in-campaign-code.start'));
+
+          await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
 
           // when
           await clickByLabel('Je commence');
@@ -169,7 +170,8 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
             screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
             campaign.code,
           );
-          await clickByLabel(t('pages.fill-in-campaign-code.start'));
+
+          await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
 
           // then
           assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);

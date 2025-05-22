@@ -4,6 +4,7 @@ import PixCode from '@1024pix/pix-ui/components/pix-code';
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
@@ -56,11 +57,6 @@ export default class CampaignCodeForm extends Component {
     this.validationStatus = 'default';
     this.validationErrorMessage = null;
     this.args.clearErrors();
-  }
-
-  @action
-  disconnect() {
-    this.session.invalidate();
   }
 
   @action
@@ -122,15 +118,19 @@ export default class CampaignCodeForm extends Component {
       {{#if this.showWarningMessage}}
         <div class="fill-in-campaign-code__warning">
           <span>{{this.warningMessage}}</span>
-          <a href="#" class="link" {{on "click" this.disconnect}}>
+          <LinkTo @route="logout" class="link">
             {{t "pages.fill-in-campaign-code.warning-message-logout"}}
-          </a>
+          </LinkTo>
         </div>
       {{/if}}
 
     </PixBlock>
     {{#if this.canDisplayLanguageSwitcher}}
-      <LanguageSwitcher @selectedLanguage={{@selectedLanguage}} @onLanguageChange={{@onLanguageChange}} />
+      <LanguageSwitcher
+        @selectedLanguage={{@selectedLanguage}}
+        @onLanguageChange={{@onLanguageChange}}
+        class="fill-in-campaign-code__switcher"
+      />
     {{/if}}
   </template>
 }
