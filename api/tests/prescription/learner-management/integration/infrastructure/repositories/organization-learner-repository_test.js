@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 import { OrganizationLearnerCertificabilityNotUpdatedError } from '../../../../../../src/prescription/learner-management/domain/errors.js';
 import { CommonOrganizationLearner } from '../../../../../../src/prescription/learner-management/domain/models/CommonOrganizationLearner.js';
+import { OrganizationLearner } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationLearner.js';
 import { OrganizationLearnerForAdmin } from '../../../../../../src/prescription/learner-management/domain/read-models/OrganizationLearnerForAdmin.js';
 import {
   addOrUpdateOrganizationOfOrganizationLearners,
@@ -16,6 +17,7 @@ import {
   getOrganizationLearnerForAdmin,
   reconcileUserByNationalStudentIdAndOrganizationId,
   reconcileUserToOrganizationLearner,
+  remove,
   removeByIds,
   saveCommonOrganizationLearners,
   update,
@@ -27,7 +29,6 @@ import {
   OrganizationLearnersCouldNotBeSavedError,
   UserCouldNotBeReconciledError,
 } from '../../../../../../src/shared/domain/errors.js';
-import { OrganizationLearner } from '../../../../../../src/shared/domain/models/index.js';
 import * as organizationLearnerRepository from '../../../../../../src/shared/infrastructure/repositories/organization-learner-repository.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
@@ -159,6 +160,35 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       const learners = await knex('view-active-organization-learners').where({ organizationId });
       expect(learners).to.have.lengthOf(1);
       expect(learners[0].id).to.equal(thirdOrganisationLearnerId);
+    });
+  });
+
+  describe('#remove', function () {
+    it('update given organization learner', async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser().id;
+      const deletedAt = new Date('2023-01-01');
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+        firstName: 'firstName',
+        organizationId,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      organizationLearner.deletedBy = userId;
+      organizationLearner.deletedAt = deletedAt;
+
+      await remove(organizationLearner);
+
+      // then
+      const organizationLearnerResult = await knex('organization-learners')
+        .where({ id: organizationLearner.id })
+        .first();
+
+      expect(organizationLearnerResult.deletedBy).to.equal(userId);
+      expect(organizationLearnerResult.deletedAt).to.deep.equal(deletedAt);
     });
   });
 

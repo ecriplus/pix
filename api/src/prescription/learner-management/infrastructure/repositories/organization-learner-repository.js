@@ -331,6 +331,12 @@ async function getLearnerInfo(organizationLearnerId) {
   return new OrganizationLearner(organizationLearner);
 }
 
+const remove = async ({ id, deletedBy, deletedAt }) => {
+  const knexConn = DomainTransaction.getConnection();
+
+  return knexConn('organization-learners').where('id', id).update({ deletedAt, deletedBy, updatedAt: deletedAt });
+};
+
 function _toDomain(result) {
   return new OrganizationLearner(result);
 }
@@ -362,6 +368,7 @@ export {
   getOrganizationLearnerForAdmin,
   reconcileUserByNationalStudentIdAndOrganizationId,
   reconcileUserToOrganizationLearner,
+  remove,
   removeByIds,
   saveCommonOrganizationLearners,
   update,

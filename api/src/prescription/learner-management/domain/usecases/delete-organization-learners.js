@@ -17,19 +17,19 @@ const deleteOrganizationLearners = async function ({
     organizationLearners: organizationLearnersFromOrganization,
   });
 
-  const organizationLearnersToDelete = organizationLearnerList.getDeletableOrganizationLearners(organizationLearnerIds);
+  const organizationLearnersToDelete = organizationLearnerList.getDeletableOrganizationLearners(
+    organizationLearnerIds,
+    userId,
+  );
 
   for (const organizationLearner of organizationLearnersToDelete) {
     await campaignParticipationRepository.removeByOrganizationLearnerId({
       organizationLearnerId: organizationLearner.id,
       userId,
     });
+    organizationLearner.delete(userId);
+    await organizationLearnerRepository.remove(organizationLearner);
   }
-
-  await organizationLearnerRepository.removeByIds({
-    organizationLearnerIds: organizationLearnersToDelete.map(({ id }) => id),
-    userId,
-  });
 };
 
 export { deleteOrganizationLearners };
