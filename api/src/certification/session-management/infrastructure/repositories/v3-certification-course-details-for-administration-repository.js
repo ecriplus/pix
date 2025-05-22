@@ -6,23 +6,25 @@ import { V3CertificationChallengeLiveAlertForAdministration } from '../../domain
 import { V3CertificationCourseDetailsForAdministration } from '../../domain/models/V3CertificationCourseDetailsForAdministration.js';
 
 const getV3DetailsByCertificationCourseId = async function ({ certificationCourseId }) {
-  const liveAlertsDTO = await knex
-    .with('validated-live-alerts', (queryBuilder) => {
-      queryBuilder
-        .select('*')
-        .from('certification-challenge-live-alerts')
-        .where({ status: CertificationChallengeLiveAlertStatus.VALIDATED });
-    })
+  const liveAlertsDTO = await knex('certification-challenge-live-alerts')
     .select({
-      id: 'validated-live-alerts.id',
-      challengeId: 'validated-live-alerts.challengeId',
+      id: 'certification-challenge-live-alerts.id',
+      challengeId: 'certification-challenge-live-alerts.challengeId',
       issueReportSubcategory: 'certification-issue-reports.subcategory',
     })
-    .from('assessments')
-    .leftJoin('validated-live-alerts', 'validated-live-alerts.assessmentId', 'assessments.id')
-    .leftJoin('certification-issue-reports', 'certification-issue-reports.liveAlertId', 'validated-live-alerts.id')
-    .where({ 'assessments.certificationCourseId': certificationCourseId })
-    .orderBy('validated-live-alerts.createdAt', 'ASC');
+    .join('assessments', function () {
+      this.on('assessments.id', 'certification-challenge-live-alerts.assessmentId').andOnVal(
+        'assessments.certificationCourseId',
+        certificationCourseId,
+      );
+    })
+    .leftJoin(
+      'certification-issue-reports',
+      'certification-issue-reports.liveAlertId',
+      'certification-challenge-live-alerts.id',
+    )
+    .where('certification-challenge-live-alerts.status', CertificationChallengeLiveAlertStatus.VALIDATED)
+    .orderBy('certification-challenge-live-alerts.createdAt', 'ASC');
 
   // isCancelled will be removed
   const certificationCourseDTO = await knex
