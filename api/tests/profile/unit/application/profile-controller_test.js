@@ -38,46 +38,4 @@ describe('Profile | Unit | Controller | profile-controller', function () {
       expect(usecases.getUserProfile).to.have.been.calledWithExactly({ userId, locale });
     });
   });
-
-  describe('#shareProfileReward', function () {
-    beforeEach(function () {
-      sinon.stub(usecases, 'shareProfileReward').resolves();
-    });
-
-    it('should call the expected usecase', async function () {
-      // given
-      const profileRewardId = '11';
-      const campaignParticipationId = '22';
-      const userId = '33';
-
-      const request = {
-        auth: {
-          credentials: {
-            userId,
-          },
-        },
-        params: {
-          userId,
-        },
-        payload: {
-          data: {
-            attributes: {
-              profileRewardId,
-              campaignParticipationId,
-            },
-          },
-        },
-      };
-
-      // when
-      await profileController.shareProfileReward(request, hFake);
-
-      // then
-      expect(usecases.shareProfileReward).to.have.been.calledWithExactly({
-        userId,
-        profileRewardId,
-        campaignParticipationId,
-      });
-    });
-  });
 });

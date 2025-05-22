@@ -192,26 +192,19 @@ module('Integration | Components | Campaigns | Assessment | Evaluation Results T
       });
 
       module('when clicking on the share results button', function (hooks) {
-        let campaignParticipationResultService;
-
+        let shareStub;
         hooks.beforeEach(function () {
+          const store = this.owner.lookup('service:store');
+          sinon.stub(store, 'adapterFor');
+          shareStub = sinon.stub();
+          store.adapterFor.returns({ share: shareStub });
+
           stubCurrentUserService(this.owner, { id: '1' });
-          campaignParticipationResultService = this.owner.lookup('service:campaign-participation-result');
         });
 
-        test('it should call the campaignParticipationResult service', async function (assert) {
-          // given
-          const campaignParticipationResultServiceStub = sinon.stub(campaignParticipationResultService, 'share');
-
-          // when
-          await click(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') }));
-
-          // then
-          assert.true(campaignParticipationResultServiceStub.calledOnce);
-        });
         test('it should call the onResultsShared function', async function (assert) {
           // given
-          sinon.stub(campaignParticipationResultService, 'share');
+          shareStub.resolves();
 
           // when
           await click(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') }));
@@ -223,7 +216,7 @@ module('Integration | Components | Campaigns | Assessment | Evaluation Results T
         module('when share action fails', function () {
           test('it should display an error message', async function (assert) {
             // given
-            sinon.stub(campaignParticipationResultService, 'share').rejects();
+            shareStub.rejects();
 
             // when
             await click(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') }));

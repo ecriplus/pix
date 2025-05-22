@@ -58,15 +58,17 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
     module('when clicking on shared results button', function () {
       test('it should call onResultsShared', async function (assert) {
         // given
-        const campaignParticipationResultService = this.owner.lookup('service:campaign-participation-result');
-        sinon.stub(campaignParticipationResultService, 'share');
+        const store = this.owner.lookup('service:store');
+        sinon.stub(store, 'adapterFor');
+        const shareStub = sinon.stub();
+        store.adapterFor.returns({ share: shareStub });
 
         // when
         await click(screen.queryByRole('tab', { name: 'Formations' }));
         await click(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') }));
 
         // then
-        assert.true(onResultsSharedStub.calledOnce);
+        assert.true(shareStub.calledOnce);
       });
     });
   });

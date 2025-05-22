@@ -18,18 +18,9 @@ const getProfileForAdmin = function (request, h, dependencies = { profileSeriali
   return usecases.getUserProfile({ userId, locale }).then(dependencies.profileSerializer.serialize);
 };
 
-const shareProfileReward = async function (request, h) {
-  const userId = request.params.userId;
-  const { profileRewardId, campaignParticipationId } = request.payload.data.attributes;
-
-  await usecases.shareProfileReward({ userId, profileRewardId, campaignParticipationId });
-  return h.response().code(201);
-};
-
 const profileController = {
   getProfile,
   getProfileForAdmin,
-  shareProfileReward,
 };
 
 export { profileController };

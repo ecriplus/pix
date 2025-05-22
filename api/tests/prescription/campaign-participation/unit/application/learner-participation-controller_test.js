@@ -5,7 +5,14 @@ import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js'
 
 describe('Unit | Application | Controller | Learner-Participation', function () {
   describe('#shareCampaignResult', function () {
-    let dependencies, userId, campaignParticipationId, request;
+    let dependencies,
+      userId,
+      campaignParticipationId,
+      request,
+      questUsecasesStub,
+      profileUsecasesStub,
+      questResultId,
+      profileRewardId;
 
     beforeEach(function () {
       userId = Symbol('userId');
@@ -27,11 +34,18 @@ describe('Unit | Application | Controller | Learner-Participation', function () 
       sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
         return callback();
       });
+      questResultId = Symbol('abc');
+      profileRewardId = Symbol('123');
+      questUsecasesStub = {
+        getQuestResultsForCampaignParticipation: sinon.stub().resolves([{ questResultId, profileRewardId }]),
+      };
+      profileUsecasesStub = { shareProfileReward: sinon.stub().resolves() };
       sinon.stub(DomainTransaction, 'getConnection');
     });
 
-    it('should call the usecase to share campaign result', async function () {
+    it('should call the usecase to share campaign result and get results for a possible quest', async function () {
       // given
+      dependencies = { questUsecases: questUsecasesStub, profileUsecases: profileUsecasesStub };
       usecases.shareCampaignResult.resolves();
 
       // when
@@ -39,6 +53,32 @@ describe('Unit | Application | Controller | Learner-Participation', function () 
 
       // then
       expect(usecases.shareCampaignResult).to.have.been.calledOnceWithExactly({ userId, campaignParticipationId });
+    });
+
+    context('when the participation is linked to a quest', function () {
+      it('should call the usecase to share profile reward', async function () {
+        // given
+        const questResult = { questResultId, profileRewardId };
+        dependencies = { questUsecases: questUsecasesStub, profileUsecases: profileUsecasesStub };
+        usecases.shareCampaignResult.resolves();
+        questUsecasesStub.getQuestResultsForCampaignParticipation.resolves([questResult]);
+        profileUsecasesStub.shareProfileReward.resolves();
+
+        // when
+        await learnerParticipationController.shareCampaignResult(request, hFake, dependencies);
+
+        // then
+        expect(usecases.shareCampaignResult).to.have.been.calledOnceWithExactly({ userId, campaignParticipationId });
+        expect(questUsecasesStub.getQuestResultsForCampaignParticipation).to.have.been.calledOnceWithExactly({
+          userId,
+          campaignParticipationId,
+        });
+        expect(profileUsecasesStub.shareProfileReward).to.have.been.calledOnceWithExactly({
+          userId,
+          profileRewardId,
+          campaignParticipationId,
+        });
+      });
     });
 
     context('when the request comes from a different user', function () {

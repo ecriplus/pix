@@ -60,36 +60,6 @@ const register = async function (server) {
         tags: ['api', 'user', 'profile'],
       },
     },
-    {
-      method: 'POST',
-      path: '/api/users/{userId}/profile/share-reward',
-      config: {
-        pre: [
-          {
-            method: securityPreHandlers.checkRequestedUserIsAuthenticatedUser,
-            assign: 'requestedUserIsAuthenticatedUser',
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            userId: identifiersType.userId,
-          }),
-          payload: Joi.object({
-            data: {
-              attributes: {
-                campaignParticipationId: identifiersType.campaignParticipationId,
-                profileRewardId: identifiersType.profileRewardId,
-              },
-            },
-          }),
-        },
-        handler: profileController.shareProfileReward,
-        notes: [
-          "- Cette route permet à un utilisateur de partager l'obtention de son attestation avec une organisation\n",
-        ],
-        tags: ['api', 'user', 'profile', 'reward'],
-      },
-    },
   ];
 
   server.route([...adminRoutes, ...userRoutes]);
