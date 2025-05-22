@@ -1,5 +1,18 @@
 # Pix Changelog
 
+# [5.117.0](https://github.com/1024pix/pix/compare/v5.116.0...v5.117.0) (2025-05-22)
+
+### :rocket: Amélioration
+
+- [#12294](https://github.com/1024pix/pix/pull/12294) Ajouter le PixFilterBanner sur la page Utilisateur dans PixAdmin (PIX-17287) 
+
+### :building_construction: Tech
+
+- [#12108](https://github.com/1024pix/pix/pull/12108) :truck: Déplace le cas d'utilisation `create preview assessment` vers le repertoire `src/shared/` 
+- [#12342](https://github.com/1024pix/pix/pull/12342) Corrige le lockfile pour qu'il soit cohérent avec le fichier package.json 
+- [#12354](https://github.com/1024pix/pix/pull/12354) Revenir à la version 55.18.1 de `pix-ui` sur `mon-pix` et `junior` 
+- [#12336](https://github.com/1024pix/pix/pull/12336) Suppression de dépendances non utilisées dans App/Admin/Junior
+
 # [5.116.0](https://github.com/1024pix/pix/compare/v5.115.0...v5.116.0) (2025-05-21)
 
 ### :rocket: Amélioration
