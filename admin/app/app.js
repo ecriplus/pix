@@ -1,6 +1,3 @@
-import 'flatpickr';
-import 'flatpickr/dist/l10n';
-
 import Application from '@ember/application';
 import loadInitializers from 'ember-load-initializers';
 import config from 'pix-admin/config/environment';
