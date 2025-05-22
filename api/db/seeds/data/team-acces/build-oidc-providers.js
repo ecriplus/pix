@@ -17,17 +17,9 @@ const defaultNotVisibleOidcProviderProperties = Object.assign(
   defaultVisibleOidcProviderProperties,
 );
 
-const defaultOidcProviderForPixAdminProperties = Object.assign(
-  {
-    enabledForPixAdmin: true,
-  },
-  defaultVisibleOidcProviderProperties,
-);
-
 export async function buildOidcProviders(databaseBuilder) {
   await _buildVisibleOidcProviders(databaseBuilder);
   await _buildNotVisibleOidcProviders(databaseBuilder);
-  await _buildOidcProvidersForPixAdmin(databaseBuilder);
   await _buildOidcProvidersFromEnv(databaseBuilder);
 }
 
@@ -95,24 +87,6 @@ async function _buildNotVisibleOidcProviders(databaseBuilder) {
         redirectUri: 'https://app.dev.pix.org/connexion/seeds-not-visible-2-oidc-example-net',
       },
       defaultNotVisibleOidcProviderProperties,
-    ),
-  );
-}
-
-async function _buildOidcProvidersForPixAdmin(databaseBuilder) {
-  await databaseBuilder.factory.buildOidcProvider(
-    Object.assign(
-      {
-        identityProvider: 'OIDC_EXAMPLE_NET_FOR_PIX_ADMIN_FROM_SEEDS',
-        organizationName: 'OIDC Example for Pix Admin from seeds',
-        slug: 'seeds-for-pix-admin-oidc-example-net',
-        source: 'seeds-for-pix-admin-oidc-example-net',
-        clientId: 'for-pix-admin-XXX',
-        clientSecret: 'for-pix-admin-YYY',
-        openidConfigurationUrl: 'https://seeds-for-pix-admin.oidc.example.net/.well-known/openid-configuration',
-        redirectUri: 'https://app.dev.pix.org/connexion/seeds-for-pix-admin-oidc-example-net',
-      },
-      defaultOidcProviderForPixAdminProperties,
     ),
   );
 }
