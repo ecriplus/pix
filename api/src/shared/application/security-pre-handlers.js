@@ -8,8 +8,11 @@ import * as checkCampaignParticipationBelongsToUserUsecase from '../../prescript
 import * as isSchoolSessionActive from '../../school/application/usecases/is-school-session-active.js';
 import { ForbiddenAccess, NotFoundError } from '../domain/errors.js';
 import { Organization } from '../domain/models/index.js';
+import { featureToggles } from '../infrastructure/feature-toggles/index.js';
 import * as organizationRepository from '../infrastructure/repositories/organization-repository.js';
+import * as errorSerializer from '../infrastructure/serializers/jsonapi/error-serializer.js';
 import { PromiseUtils } from '../infrastructure/utils/promise-utils.js';
+import { HttpErrors } from './http-errors.js';
 import * as checkUserIsAdminOfCertificationCenterWithCertificationCenterInvitationIdUseCase from './usecases/check-user-is-admin-of-certification-center-with-certification-center-invitation-id.js';
 import * as checkUserIsAdminOfCertificationCenterWithCertificationCenterMembershipIdUseCase from './usecases/check-user-is-admin-of-certification-center-with-certification-center-membership-id.js';
 import * as checkAdminMemberHasRoleCertifUseCase from './usecases/checkAdminMemberHasRoleCertif.js';
@@ -34,7 +37,6 @@ import * as checkUserIsMemberOfCertificationCenterUsecase from './usecases/check
 import * as checkUserIsMemberOfCertificationCenterSessionUsecase from './usecases/checkUserIsMemberOfCertificationCenterSession.js';
 import * as checkUserOwnsCertificationCourseUseCase from './usecases/checkUserOwnsCertificationCourse.js';
 import * as checkUserIsMemberOfAnOrganizationUseCase from './validator/checkUserIsMemberOfAnOrganization.js';
-
 const { Error: JSONAPIError } = jsonapiSerializer;
 const { has } = lodash;
 
@@ -59,6 +61,11 @@ function _replyNotFoundError(h) {
   });
 
   return h.response(jsonApiError).code(errorHttpStatusCode).takeover();
+}
+
+function replyServiceNotAvailableError(h) {
+  const error = new HttpErrors.ServiceUnavailableError();
+  return h.response(errorSerializer.serialize(error)).code(error.status);
 }
 
 async function checkIfUserIsBlocked(
@@ -776,6 +783,18 @@ async function checkOrganizationHasFeature(request, h, dependencies = { checkOrg
   }
 }
 
+async function checkFeatureToggleIsEnabled(h, featureKey) {
+  try {
+    const isEnabled = await featureToggles.get(featureKey);
+    if (isEnabled) {
+      return h.response(true);
+    }
+    return replyServiceNotAvailableError(h);
+  } catch {
+    return replyServiceNotAvailableError(h);
+  }
+}
+
 function _noOrganizationFound(error) {
   return error instanceof NotFoundError;
 }
@@ -815,6 +834,7 @@ const securityPreHandlers = {
   checkUserIsMemberOfCertificationCenterSessionFromCertificationIssueReportId,
   checkUserOwnsCertificationCourse,
   makeCheckOrganizationHasFeature,
+  checkFeatureToggleIsEnabled,
 };
 
 export { securityPreHandlers };

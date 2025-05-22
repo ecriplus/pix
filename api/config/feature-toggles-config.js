@@ -65,4 +65,10 @@ export default {
     defaultValue: false,
     tags: ['team-junior'],
   },
+  isEmbedLLMEnabled: {
+    type: 'boolean',
+    description: 'Allow embeds with LLM prompts to interact with the LLM API and start a conversation',
+    defaultValue: false,
+    tags: ['modulix', 'team-contenu', 'llm', 'embed', 'pix-app'],
+  },
 };

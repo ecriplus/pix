@@ -1,6 +1,7 @@
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
 import { NotFoundError } from '../../../../src/shared/domain/errors.js';
 import { tokenService } from '../../../../src/shared/domain/services/token-service.js';
+import { featureToggles } from '../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../test-helper.js';
 
 describe('Shared | Unit | Application | SecurityPreHandlers', function () {
@@ -2010,6 +2011,45 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
 
         expect(response.statusCode).to.equal(403);
         expect(response.isTakeOver).to.be.true;
+      });
+    });
+  });
+
+  describe('#checkFeatureToggleIsEnabled', function () {
+    context('when feature toggle is enabled', function () {
+      it('should authorize access', async function () {
+        await featureToggles.set('isEmbedLLMEnabled', true);
+
+        const response = await securityPreHandlers.checkFeatureToggleIsEnabled(hFake, 'isEmbedLLMEnabled');
+
+        expect(response.source).to.be.true;
+      });
+    });
+
+    context('when feature toggle is disabled', function () {
+      it('should authorize access', async function () {
+        await featureToggles.set('isEmbedLLMEnabled', false);
+
+        const response = await securityPreHandlers.checkFeatureToggleIsEnabled(hFake, 'isEmbedLLMEnabled');
+
+        expect(response.statusCode).to.equal(503);
+        expect(response.source).to.deep.equal({
+          errors: [{ status: '503', title: 'ServiceUnavailable' }],
+        });
+      });
+    });
+
+    context('when feature toggle does not exist', function () {
+      it('should authorize access', async function () {
+        const response = await securityPreHandlers.checkFeatureToggleIsEnabled(
+          hFake,
+          'SiVousAvezAppeléVotreFeatureCommeCa,CaCraintChangezDeNom',
+        );
+
+        expect(response.statusCode).to.equal(503);
+        expect(response.source).to.deep.equal({
+          errors: [{ status: '503', title: 'ServiceUnavailable' }],
+        });
       });
     });
   });
