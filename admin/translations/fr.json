@@ -886,6 +886,7 @@
       "api-error-messages": {
         "login-no-permission": "Vous n'avez pas les droits pour vous connecter."
       },
+      "authenticate-with-sso-provider": "S’identifier avec {ssoProviderName}",
       "button": "Je me connecte",
       "fields": {
         "email": {
@@ -894,9 +895,6 @@
         "password": {
           "label": "Mot de passe"
         }
-      },
-      "google": {
-        "label": "Se connecter avec Google"
       },
       "title": "L'accès à Pix Admin est limité aux administrateurs de la plateforme"
     },

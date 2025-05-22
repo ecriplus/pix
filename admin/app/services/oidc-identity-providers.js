@@ -7,6 +7,10 @@ export default class OidcIdentityProviders extends Service {
     return this.store.peekAll('oidc-identity-provider').toArray();
   }
 
+  get hasIdentityProviders() {
+    return this.list.length > 0;
+  }
+
   async loadAllAvailableIdentityProviders() {
     await this.store.findAll('oidc-identity-provider');
   }
