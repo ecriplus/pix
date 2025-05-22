@@ -128,7 +128,6 @@ export async function findActiveFlashCompatible({
   if (complementaryCertificationId) {
     const complementaryCertificationChallenges = await knex
       .from('certification-frameworks-challenges')
-      .select('*')
       .where({ complementaryCertificationId });
 
     const complementaryCertificationChallengesIds = complementaryCertificationChallenges.map(
@@ -139,18 +138,9 @@ export async function findActiveFlashCompatible({
       return knex.whereIn('id', complementaryCertificationChallengesIds).orderBy('id');
     };
 
-    challengeDtos = await getInstance().find(cacheKey, findCallback);
-
-    challengeDtos = challengeDtos.map((challenge) => {
-      const currentComplementaryCertificationChallenge = complementaryCertificationChallenges.find(
-        ({ challengeId }) => challengeId === challenge.id,
-      );
-
-      return {
-        ...challenge,
-        alpha: currentComplementaryCertificationChallenge.alpha,
-        delta: currentComplementaryCertificationChallenge.delta,
-      };
+    challengeDtos = decorateWithCertificationCalibration({
+      challengeDtos: await getInstance().find(cacheKey, findCallback),
+      complementaryCertificationChallenges,
     });
   } else {
     if (accessibilityAdjustmentNeeded) {
@@ -178,6 +168,20 @@ export async function findActiveFlashCompatible({
   return challengesDtosWithSkills.map(([challengeDto, skill]) =>
     toDomain({ challengeDto, skill, successProbabilityThreshold }),
   );
+}
+
+function decorateWithCertificationCalibration({ challengeDtos, complementaryCertificationChallenges }) {
+  return challengeDtos.map((challenge) => {
+    const { alpha, delta } = complementaryCertificationChallenges.find(
+      ({ challengeId }) => challengeId === challenge.id,
+    );
+
+    return {
+      ...challenge,
+      alpha,
+      delta,
+    };
+  });
 }
 
 export async function findFlashCompatibleWithoutLocale({ useObsoleteChallenges } = {}) {
