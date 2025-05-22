@@ -170,6 +170,22 @@ module('Integration | Component | Authentication | LoginForm', function (hooks) 
       const errorMessageLink = screen.getByRole('link', { name: 'contactez-nous' });
       assert.dom(errorMessageLink).hasAttribute('href', 'https://support.pix.org/support/tickets/new');
     });
+
+    module('when the given password is incorrect', function () {
+      test('it erases the password field', async function (assert) {
+        // given
+        sessionService.authenticateUser.rejects(
+          _buildApiReponseError({ status: 401, errorCode: 'MISSING_OR_INVALID_CREDENTIALS' }),
+        );
+        await fillByLabel(t(I18N_KEYS.passwordInput), 'JeMeLoggue1024');
+
+        // when
+        await clickByName(t(I18N_KEYS.submitButton));
+
+        // then
+        assert.dom(screen.getByLabelText(t(I18N_KEYS.passwordInput))).hasValue('');
+      });
+    });
   });
 
   module('When a http error occurred', function (hooks) {

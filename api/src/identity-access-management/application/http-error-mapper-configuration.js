@@ -27,7 +27,7 @@ const authenticationDomainErrorMappingConfiguration = [
   },
   {
     name: MissingOrInvalidCredentialsError.name,
-    httpErrorFn: (error) => new HttpErrors.UnauthorizedError(error.message),
+    httpErrorFn: (error) => new HttpErrors.UnauthorizedError(error.message, error.code),
   },
   {
     name: MissingUserAccountError.name,

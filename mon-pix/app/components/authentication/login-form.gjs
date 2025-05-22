@@ -122,6 +122,12 @@ export default class LoginForm extends Component {
           },
         };
         break;
+      case 'MISSING_OR_INVALID_CREDENTIALS':
+        this.password = null;
+        this.globalError = {
+          key: ENV.APP.API_ERROR_MESSAGES.MISSING_OR_INVALID_CREDENTIALS.I18N_KEY,
+        };
+        break;
       default: {
         const properties = HTTP_ERROR_MESSAGES[responseError.status] || HTTP_ERROR_MESSAGES['default'];
         if (!HTTP_ERROR_MESSAGES[responseError.status]) {
@@ -171,6 +177,7 @@ export default class LoginForm extends Component {
             @id="password"
             name="password"
             {{on "input" this.updatePassword}}
+            @value={{this.password}}
             @validationStatus={{this.validation.password.status}}
             @errorMessage={{t this.validation.password.error}}
             autocomplete="current-password"
