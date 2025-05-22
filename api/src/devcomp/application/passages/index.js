@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { handlerWithDependencies } from '../../infrastructure/utils/handlerWithDependencies.js';
 import { passageController } from './controller.js';
@@ -81,6 +82,13 @@ const register = async function (server) {
       method: 'POST',
       path: '/api/passages/{passageId}/embed/llm/chats',
       config: {
+        pre: [
+          {
+            method: (request, h) => {
+              return securityPreHandlers.checkFeatureToggleIsEnabled(h, 'isEmbedLLMEnabled');
+            },
+          },
+        ],
         validate: {
           params: Joi.object({
             passageId: identifiersType.passageId.required(),

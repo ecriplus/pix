@@ -501,6 +501,7 @@ const configuration = (function () {
     config.llm.getConfigurationUrl = 'https://llm-test.pix.fr/api/configurations';
     config.llm.temporaryStorage.expirationDelaySeconds = 1;
 
+    config.domain.tldFr = '.fr';
     config.domain.tldOrg = '.org';
     config.domain.pix = 'https://pix';
     config.domain.pixOrga = 'https://orga.pix';

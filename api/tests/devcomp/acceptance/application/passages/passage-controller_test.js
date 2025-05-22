@@ -1,4 +1,5 @@
 import { STORAGE_PREFIX } from '../../../../../src/llm/application/api/llm-api.js';
+import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import {
   createServer,
@@ -234,8 +235,12 @@ describe('Acceptance | Controller | passage-controller', function () {
       await llmChatsTemporaryStorage.flushAll();
     });
 
-    context('when user is not authentified', function () {
-      it('should throw a 401', async function () {
+    context('when feature toggle is disabled', function () {
+      beforeEach(function () {
+        return featureToggles.set('isEmbedLLMEnabled', false);
+      });
+
+      it('should throw a 503', async function () {
         // when
         const response = await server.inject({
           method: 'POST',
@@ -247,38 +252,57 @@ describe('Acceptance | Controller | passage-controller', function () {
       });
     });
 
-    context('when user is authentified', function () {
-      it('should start a new chat', async function () {
-        // given
-        const config = {
-          llm: {
-            historySize: 123,
-          },
-          challenge: {
+    context('when feature toggle is enabled', function () {
+      beforeEach(function () {
+        return featureToggles.set('isEmbedLLMEnabled', true);
+      });
+
+      context('when user is not authentified', function () {
+        it('should throw a 401', async function () {
+          // when
+          const response = await server.inject({
+            method: 'POST',
+            url: '/api/passages/111/embed/llm/chats',
+            payload: { configId: 'c1SuperConfig2Lespace' },
+          });
+
+          expect(response.statusCode).to.equal(401);
+        });
+      });
+
+      context('when user is authentified', function () {
+        it('should start a new chat', async function () {
+          // given
+          const config = {
+            llm: {
+              historySize: 123,
+            },
+            challenge: {
+              inputMaxChars: 456,
+              inputMaxPrompts: 789,
+            },
+          };
+          const llmApiScope = nock('https://llm-test.pix.fr/api')
+            .get('/configurations/c1SuperConfig2Lespace')
+            .reply(200, config);
+
+          // when
+          const response = await server.inject({
+            method: 'POST',
+            url: '/api/passages/111/embed/llm/chats',
+            payload: { configId: 'c1SuperConfig2Lespace' },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+          });
+
+          // then
+          expect(response.statusCode).to.equal(201);
+          expect(response.result).to.deep.equal({
+            chatId: `p111-${now.getMilliseconds()}`,
             inputMaxChars: 456,
             inputMaxPrompts: 789,
-          },
-        };
-        const llmApiScope = nock('https://llm-test.pix.fr/api')
-          .get('/configurations/c1SuperConfig2Lespace')
-          .reply(200, config);
-
-        // when
-        const response = await server.inject({
-          method: 'POST',
-          url: '/api/passages/111/embed/llm/chats',
-          payload: { configId: 'c1SuperConfig2Lespace' },
-          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+          });
+          expect(llmApiScope.isDone()).to.be.true;
         });
-
-        // then
-        expect(response.statusCode).to.equal(201);
-        expect(response.result).to.deep.equal({
-          chatId: `p111-${now.getMilliseconds()}`,
-          inputMaxChars: 456,
-          inputMaxPrompts: 789,
-        });
-        expect(llmApiScope.isDone()).to.be.true;
       });
     });
   });
