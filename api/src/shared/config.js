@@ -138,6 +138,8 @@ const schema = Joi.object({
   KNEX_ASYNC_STACKTRACE_ENABLED: Joi.string().optional().valid('true', 'false'),
   LCMS_API_KEY: Joi.string().requiredForApi(),
   LCMS_API_URL: Joi.string().uri().requiredForApi(),
+  LLM_API_GET_CONFIGURATIONS_URL: Joi.string().optional(),
+  LLM_CHAT_TEMPORARY_STORAGE_EXP_DELAY_SECONDS: Joi.string().optional(),
   LOG_ENABLED: Joi.string().required().valid('true', 'false'),
   LOG_FOR_HUMANS: Joi.string().optional().valid('true', 'false'),
   LOG_LEVEL: Joi.string().optional().valid('silent', 'fatal', 'error', 'warn', 'info', 'debug', 'trace'),
@@ -330,9 +332,9 @@ const configuration = (function () {
     },
     llm: {
       temporaryStorage: {
-        expirationDelaySeconds: parseInt(process.env.LLM_CHAT_TEMPORARY_STORAGE_EXP_DELAY_SECONDS, 10) || 43200,
+        expirationDelaySeconds: ms(process.env.LLM_CHAT_TEMPORARY_STORAGE_EXP_DELAY_SECONDS ?? '12h'),
       },
-      getConfigurationUrl: _removeTrailingSlashFromUrl(process.env.LLM_API_GET_CONFIGURATIONS_URL || ''),
+      getConfigurationUrl: _removeTrailingSlashFromUrl(process.env.LLM_API_GET_CONFIGURATIONS_URL ?? ''),
     },
     logging: {
       enabled: toBoolean(process.env.LOG_ENABLED),

@@ -7,7 +7,7 @@ import { LLMChatDTO } from './models/LLMChatDTO.js';
 export const STORAGE_PREFIX = 'llm-chats';
 const llmChatsTemporaryStorage = temporaryStorage.withPrefix(STORAGE_PREFIX);
 
-const logger = child('llm:api', { event: SCOPES.LEARNING_CONTENT });
+const logger = child('llm:api', { event: SCOPES.LLM });
 
 /**
  * @typedef LLMChatDTO
@@ -58,18 +58,23 @@ function generateId(prefixIdentifier) {
 
 async function getLLMConfiguration(configId) {
   const url = config.llm.getConfigurationUrl + '/' + configId;
-  const response = await fetch(url);
-  const statusCode = parseInt(response.status);
-  const jsonResponse = response.body ? await response.json() : '';
-  if (statusCode === 200) {
-    return jsonResponse;
-  }
-  if (statusCode === 404) {
-    logger.error(`No config found for id ${configId}`);
+  try {
+    const response = await fetch(url);
+    const statusCode = parseInt(response.status);
+    const jsonResponse = response.body ? await response.json() : '';
+    if (statusCode === 200) {
+      return jsonResponse;
+    }
+    if (statusCode === 404) {
+      logger.error(`No config found for id ${configId}`);
+      return null;
+    }
+    logger.error(`code (${statusCode}): ${JSON.stringify(jsonResponse, undefined, 2)}}`);
+    return null;
+  } catch (err) {
+    logger.error(err);
     return null;
   }
-  logger.error(`code (${statusCode}): ${JSON.stringify(jsonResponse, undefined, 2)}}`);
-  return null;
 }
 
 function toApi(llmChat) {

@@ -2015,12 +2015,12 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
     });
   });
 
-  describe('#checkFeatureToggleIsEnabled', function () {
+  describe('#checkLLMChatIsEnabled', function () {
     context('when feature toggle is enabled', function () {
       it('should authorize access', async function () {
         await featureToggles.set('isEmbedLLMEnabled', true);
 
-        const response = await securityPreHandlers.checkFeatureToggleIsEnabled(hFake, 'isEmbedLLMEnabled');
+        const response = await securityPreHandlers.checkLLMChatIsEnabled(hFake, 'isEmbedLLMEnabled');
 
         expect(response.source).to.be.true;
       });
@@ -2030,7 +2030,7 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
       it('should authorize access', async function () {
         await featureToggles.set('isEmbedLLMEnabled', false);
 
-        const response = await securityPreHandlers.checkFeatureToggleIsEnabled(hFake, 'isEmbedLLMEnabled');
+        const response = await securityPreHandlers.checkLLMChatIsEnabled(hFake, 'isEmbedLLMEnabled');
 
         expect(response.statusCode).to.equal(503);
         expect(response.source).to.deep.equal({
@@ -2041,7 +2041,7 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
 
     context('when feature toggle does not exist', function () {
       it('should authorize access', async function () {
-        const response = await securityPreHandlers.checkFeatureToggleIsEnabled(
+        const response = await securityPreHandlers.checkLLMChatIsEnabled(
           hFake,
           'SiVousAvezAppeléVotreFeatureCommeCa,CaCraintChangezDeNom',
         );

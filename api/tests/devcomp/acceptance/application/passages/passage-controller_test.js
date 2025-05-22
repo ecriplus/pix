@@ -235,12 +235,8 @@ describe('Acceptance | Controller | passage-controller', function () {
       await llmChatsTemporaryStorage.flushAll();
     });
 
-    context('when feature toggle is disabled', function () {
-      beforeEach(function () {
-        return featureToggles.set('isEmbedLLMEnabled', false);
-      });
-
-      it('should throw a 503', async function () {
+    context('when user is not authenticated', function () {
+      it('should throw a 401', async function () {
         // when
         const response = await server.inject({
           method: 'POST',
@@ -252,25 +248,12 @@ describe('Acceptance | Controller | passage-controller', function () {
       });
     });
 
-    context('when feature toggle is enabled', function () {
-      beforeEach(function () {
-        return featureToggles.set('isEmbedLLMEnabled', true);
-      });
-
-      context('when user is not authentified', function () {
-        it('should throw a 401', async function () {
-          // when
-          const response = await server.inject({
-            method: 'POST',
-            url: '/api/passages/111/embed/llm/chats',
-            payload: { configId: 'c1SuperConfig2Lespace' },
-          });
-
-          expect(response.statusCode).to.equal(401);
+    context('when user is authenticated', function () {
+      context('when feature toggle is enabled', function () {
+        beforeEach(function () {
+          return featureToggles.set('isEmbedLLMEnabled', true);
         });
-      });
 
-      context('when user is authentified', function () {
         it('should start a new chat', async function () {
           // given
           const config = {
@@ -302,6 +285,23 @@ describe('Acceptance | Controller | passage-controller', function () {
             inputMaxPrompts: 789,
           });
           expect(llmApiScope.isDone()).to.be.true;
+        });
+      });
+
+      context('when feature toggle is disabled', function () {
+        beforeEach(function () {
+          return featureToggles.set('isEmbedLLMEnabled', false);
+        });
+        it('should throw a 503 status code', async function () {
+          // when
+          const response = await server.inject({
+            method: 'POST',
+            url: '/api/passages/111/embed/llm/chats',
+            payload: { configId: 'c1SuperConfig2Lespace' },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+          });
+
+          expect(response.statusCode).to.equal(503);
         });
       });
     });
