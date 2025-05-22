@@ -1,5 +1,5 @@
 import { prompt, startChat } from '../../../../../src/llm/application/api/llm-api.js';
-import { ConfigurationNotFoundError } from '../../../../../src/llm/domain/errors.js';
+import { ChatNotFoundError, ConfigurationNotFoundError } from '../../../../../src/llm/domain/errors.js';
 import { CHAT_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
 import { CONFIGURATION_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/configuration-repository.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
@@ -9,6 +9,11 @@ const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
 const configurationTemporaryStorage = temporaryStorage.withPrefix(CONFIGURATION_STORAGE_PREFIX);
 
 describe('LLM | Integration | Application | API | llm', function () {
+  afterEach(async function () {
+    await chatTemporaryStorage.flushAll();
+    await configurationTemporaryStorage.flushAll();
+  });
+
   describe('#startChat', function () {
     let clock, now;
 
@@ -19,8 +24,6 @@ describe('LLM | Integration | Application | API | llm', function () {
 
     afterEach(async function () {
       clock.restore();
-      await chatTemporaryStorage.flushAll();
-      await configurationTemporaryStorage.flushAll();
     });
 
     context('when no config id provided', function () {
@@ -76,8 +79,18 @@ describe('LLM | Integration | Application | API | llm', function () {
   });
 
   describe('#prompt', function () {
-    afterEach(async function () {
-      await chatTemporaryStorage.flushAll();
+    context('when no chat id provided', function () {
+      it('should throw a ChatNotFoundError', async function () {
+        // given
+        const chatId = null;
+
+        // when
+        const err = await catchErr(prompt)({ chatId, message: 'un message' });
+
+        // then
+        expect(err).to.be.instanceOf(ChatNotFoundError);
+        expect(err.message).to.equal('The chat of id "null id provided" does not exist');
+      });
     });
 
     it('should return the newly created chat', async function () {

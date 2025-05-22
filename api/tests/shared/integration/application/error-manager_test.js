@@ -107,6 +107,14 @@ describe('Integration | API | Controller Error', function () {
       expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
       expect(responseDetail(response)).to.equal('The configuration of id "someConfigId" does not exist');
     });
+
+    it('responds Bad Request when a LLMDomainErrors.ChatNotFoundError error occurs', async function () {
+      routeHandler.throws(new LLMDomainErrors.ChatNotFoundError('someChatId'));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
+      expect(responseDetail(response)).to.equal('The chat of id "someChatId" does not exist');
+    });
   });
 
   context('403 Forbidden', function () {

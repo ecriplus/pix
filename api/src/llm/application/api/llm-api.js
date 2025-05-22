@@ -1,4 +1,4 @@
-import { ConfigurationNotFoundError } from '../../domain/errors.js';
+import { ChatNotFoundError, ConfigurationNotFoundError } from '../../domain/errors.js';
 import { Chat } from '../../domain/models/Chat.js';
 import * as chatRepository from '../../infrastructure/repositories/chat-repository.js';
 import * as configurationRepository from '../../infrastructure/repositories/configuration-repository.js';
@@ -59,6 +59,11 @@ export async function startChat({ configId, prefixIdentifier }) {
  * @returns {Promise<LLMChatResponseDTO>}
  */
 export async function prompt({ chatId, message }) {
+  if (!chatId) {
+    throw new ChatNotFoundError('null id provided');
+  }
+  const chat = await chatRepository.get(chatId);
+  const configuration = await configurationRepository.get(chat.configurationId);
   return new LLMChatResponseDTO({ message: `${message} BIEN RECU dans chat ${chatId}` });
 }
 
