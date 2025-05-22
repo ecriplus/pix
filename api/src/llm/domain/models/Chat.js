@@ -1,7 +1,7 @@
-export class LLMChat {
-  constructor({ id, llmConfigurationId, historySize, inputMaxChars, inputMaxPrompts }) {
+export class Chat {
+  constructor({ id, configurationId, historySize, inputMaxChars, inputMaxPrompts }) {
     this.id = id;
-    this.llmConfigurationId = llmConfigurationId;
+    this.configurationId = configurationId;
     this.historySize = historySize;
     this.inputMaxChars = inputMaxChars;
     this.inputMaxPrompts = inputMaxPrompts;
@@ -10,7 +10,7 @@ export class LLMChat {
   toDTO() {
     return {
       id: this.id,
-      llmConfigurationId: this.llmConfigurationId,
+      configurationId: this.configurationId,
       historySize: this.historySize,
       inputMaxChars: this.inputMaxChars,
       inputMaxPrompts: this.inputMaxPrompts,

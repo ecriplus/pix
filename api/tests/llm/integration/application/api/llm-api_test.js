@@ -1,10 +1,11 @@
-import { prompt, startChat, STORAGE_PREFIX } from '../../../../../src/llm/application/api/llm-api.js';
+import { prompt, startChat } from '../../../../../src/llm/application/api/llm-api.js';
 import { ConfigurationNotFoundError } from '../../../../../src/llm/domain/errors.js';
+import { CHAT_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
 import { CONFIGURATION_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/configuration-repository.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import { catchErr, expect, nock, sinon } from '../../../../test-helper.js';
 
-const llmChatsTemporaryStorage = temporaryStorage.withPrefix(STORAGE_PREFIX);
+const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
 const configurationTemporaryStorage = temporaryStorage.withPrefix(CONFIGURATION_STORAGE_PREFIX);
 
 describe('LLM | Integration | Application | API | llm', function () {
@@ -18,7 +19,7 @@ describe('LLM | Integration | Application | API | llm', function () {
 
     afterEach(async function () {
       clock.restore();
-      await llmChatsTemporaryStorage.flushAll();
+      await chatTemporaryStorage.flushAll();
       await configurationTemporaryStorage.flushAll();
     });
 
@@ -63,9 +64,9 @@ describe('LLM | Integration | Application | API | llm', function () {
           inputMaxPrompts: 789,
         });
         expect(llmApiScope.isDone()).to.be.true;
-        expect(await llmChatsTemporaryStorage.get(`someUniquePrefix-${now.getMilliseconds()}`)).to.deep.equal({
+        expect(await chatTemporaryStorage.get(`someUniquePrefix-${now.getMilliseconds()}`)).to.deep.equal({
           id: `someUniquePrefix-${now.getMilliseconds()}`,
-          llmConfigurationId: 'uneConfigQuiExist',
+          configurationId: 'uneConfigQuiExist',
           historySize: 123,
           inputMaxChars: 456,
           inputMaxPrompts: 789,
@@ -76,7 +77,7 @@ describe('LLM | Integration | Application | API | llm', function () {
 
   describe('#prompt', function () {
     afterEach(async function () {
-      await llmChatsTemporaryStorage.flushAll();
+      await chatTemporaryStorage.flushAll();
     });
 
     it('should return the newly created chat', async function () {

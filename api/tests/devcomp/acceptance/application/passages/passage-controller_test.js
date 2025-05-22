@@ -1,4 +1,5 @@
-import { STORAGE_PREFIX } from '../../../../../src/llm/application/api/llm-api.js';
+import { CHAT_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
+import { CONFIGURATION_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/configuration-repository.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import {
@@ -11,7 +12,8 @@ import {
   sinon,
 } from '../../../../test-helper.js';
 
-const llmChatsTemporaryStorage = temporaryStorage.withPrefix(STORAGE_PREFIX);
+const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
+const configurationTemporaryStorage = temporaryStorage.withPrefix(CONFIGURATION_STORAGE_PREFIX);
 
 describe('Acceptance | Controller | passage-controller', function () {
   let server;
@@ -232,7 +234,8 @@ describe('Acceptance | Controller | passage-controller', function () {
 
     afterEach(async function () {
       clock.restore();
-      await llmChatsTemporaryStorage.flushAll();
+      await chatTemporaryStorage.flushAll();
+      await configurationTemporaryStorage.flushAll();
     });
 
     context('when user is not authenticated', function () {
@@ -317,7 +320,8 @@ describe('Acceptance | Controller | passage-controller', function () {
     });
 
     afterEach(async function () {
-      await llmChatsTemporaryStorage.flushAll();
+      await chatTemporaryStorage.flushAll();
+      await configurationTemporaryStorage.flushAll();
     });
 
     context('when user is not authenticated', function () {

@@ -1,13 +1,9 @@
-import { config } from '../../../shared/config.js';
-import { temporaryStorage } from '../../../shared/infrastructure/key-value-storages/index.js';
 import { ConfigurationNotFoundError } from '../../domain/errors.js';
-import { LLMChat } from '../../domain/models/LLMChat.js';
+import { Chat } from '../../domain/models/Chat.js';
+import * as chatRepository from '../../infrastructure/repositories/chat-repository.js';
 import * as configurationRepository from '../../infrastructure/repositories/configuration-repository.js';
 import { LLMChatDTO } from './models/LLMChatDTO.js';
 import { LLMChatResponseDTO } from './models/LLMChatResponseDTO.js';
-
-export const STORAGE_PREFIX = 'llm-chats';
-const llmChatsTemporaryStorage = temporaryStorage.withPrefix(STORAGE_PREFIX);
 
 /**
  * @typedef LLMChatDTO
@@ -32,18 +28,14 @@ export async function startChat({ configId, prefixIdentifier }) {
   }
   const configuration = await configurationRepository.get(configId);
   const chatId = generateId(prefixIdentifier);
-  const newChat = new LLMChat({
+  const newChat = new Chat({
     id: chatId,
-    llmConfigurationId: configId,
+    configurationId: configId,
     historySize: configuration.llm.historySize,
     inputMaxChars: configuration.challenge.inputMaxChars,
     inputMaxPrompts: configuration.challenge.inputMaxPrompts,
   });
-  await llmChatsTemporaryStorage.save({
-    key: newChat.id,
-    value: newChat.toDTO(),
-    expirationDelaySeconds: config.llm.temporaryStorage.expirationDelaySeconds,
-  });
+  await chatRepository.save(newChat);
   return new LLMChatDTO({
     id: newChat.id,
     inputMaxChars: newChat.inputMaxChars,
