@@ -15,7 +15,6 @@ import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { service } from '@ember/service';
 import pick from 'ember-composable-helpers/helpers/pick';
-import EmberFlatpickr from 'ember-flatpickr/components/ember-flatpickr';
 import set from 'ember-set-helper/helpers/set';
 import { eq, or } from 'ember-truth-helpers';
 
@@ -105,8 +104,8 @@ export default class CandidateEditModal extends Component {
   }
 
   @action
-  updateBirthdate(_, lastSelectedDateFormatted) {
-    this.birthdate = lastSelectedDateFormatted;
+  onChangeBirthdate(event) {
+    this.birthdate = event.target.value;
   }
 
   @action
@@ -251,18 +250,9 @@ export default class CandidateEditModal extends Component {
           </div>
 
           <div class="candidate-edit-modal--content__field">
-            <label for="birthdate">
-              Date de naissance
-            </label>
-            <EmberFlatpickr
-              id="birthdate"
-              @altFormat="d/m/Y"
-              @altInput={{true}}
-              @onChange={{this.updateBirthdate}}
-              @dateFormat="Y-m-d"
-              @locale="fr"
-              @date={{or this.birthdate ""}}
-            />
+            <PixInput class="input" type="date" @value={{or this.birthdate ""}} {{on "input" this.onChangeBirthdate}}>
+              <:label>Date de naissance</:label>
+            </PixInput>
           </div>
 
           <div class="candidate-edit-modal--content__field">
