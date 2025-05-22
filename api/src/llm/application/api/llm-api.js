@@ -3,6 +3,7 @@ import { temporaryStorage } from '../../../shared/infrastructure/key-value-stora
 import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
 import { LLMChat } from '../../domain/models/LLMChat.js';
 import { LLMChatDTO } from './models/LLMChatDTO.js';
+import { LLMChatResponseDTO } from './models/LLMChatResponseDTO.js';
 
 export const STORAGE_PREFIX = 'llm-chats';
 const llmChatsTemporaryStorage = temporaryStorage.withPrefix(STORAGE_PREFIX);
@@ -48,7 +49,30 @@ export async function startChat({ configId, prefixIdentifier }) {
     value: newChat.toDTO(),
     expirationDelaySeconds: config.llm.temporaryStorage.expirationDelaySeconds,
   });
-  return toApi(newChat);
+  return new LLMChatDTO({
+    id: newChat.id,
+    inputMaxChars: newChat.inputMaxChars,
+    inputMaxPrompts: newChat.inputMaxPrompts,
+  });
+}
+
+/**
+ * @typedef LLMChatResponseDTO
+ * @type {object}
+ * @property {string} message
+ */
+
+/**
+ * @function
+ * @name prompt
+ *
+ * @param {Object} params
+ * @param {string} params.chatId
+ * @param {string} params.message
+ * @returns {Promise<LLMChatResponseDTO>}
+ */
+export async function prompt({ chatId, message }) {
+  return new LLMChatResponseDTO({ message: `${message} BIEN RECU dans chat ${chatId}` });
 }
 
 function generateId(prefixIdentifier) {
@@ -75,12 +99,4 @@ async function getLLMConfiguration(configId) {
     logger.error(err);
     return null;
   }
-}
-
-function toApi(llmChat) {
-  return new LLMChatDTO({
-    id: llmChat.id,
-    inputMaxChars: llmChat.inputMaxChars,
-    inputMaxPrompts: llmChat.inputMaxPrompts,
-  });
 }

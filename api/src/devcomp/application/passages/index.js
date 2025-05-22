@@ -105,6 +105,34 @@ const register = async function (server) {
         ],
       },
     },
+    {
+      method: 'POST',
+      path: '/api/passages/{passageId}/embed/llm/chats/{chatId}/messages',
+      config: {
+        pre: [
+          {
+            method: checkLLMChatIsEnabled,
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            passageId: identifiersType.passageId.required(),
+            chatId: Joi.string().required(),
+          }).required(),
+          payload: Joi.object({
+            message: Joi.string().required(),
+          }).required(),
+          options: {
+            allowUnknown: true,
+          },
+        },
+        handler: handlerWithDependencies(passageController.promptToLLMChat),
+        tags: ['api', 'passages', 'embed', 'llm', 'prompt'],
+        notes: [
+          "Cette route permet de prompt le LLM dans une conversation existante dans le cadre de la réalisation d'un embed LLM dans un modulix",
+        ],
+      },
+    },
   ]);
 };
 

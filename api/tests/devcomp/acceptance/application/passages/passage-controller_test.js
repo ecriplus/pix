@@ -306,4 +306,72 @@ describe('Acceptance | Controller | passage-controller', function () {
       });
     });
   });
+
+  describe('POST /api/passages/{passageId}/embed/llm/chats/{chatId}/messages', function () {
+    let user;
+
+    beforeEach(async function () {
+      user = databaseBuilder.factory.buildUser();
+      databaseBuilder.factory.buildPassage({ id: 111, userId: user.id }).id;
+      await databaseBuilder.commit();
+    });
+
+    afterEach(async function () {
+      await llmChatsTemporaryStorage.flushAll();
+    });
+
+    context('when user is not authenticated', function () {
+      it('should throw a 401', async function () {
+        // when
+        const response = await server.inject({
+          method: 'POST',
+          url: '/api/passages/111/embed/llm/chats/cSomeChatId123/messages',
+          payload: { message: 'Quelle est la recette de la ratatouille ?' },
+        });
+
+        expect(response.statusCode).to.equal(401);
+      });
+    });
+
+    context('when user is authenticated', function () {
+      context('when feature toggle is enabled', function () {
+        beforeEach(function () {
+          return featureToggles.set('isEmbedLLMEnabled', true);
+        });
+
+        it('should post message and get the LLM response', async function () {
+          // when
+          const response = await server.inject({
+            method: 'POST',
+            url: '/api/passages/111/embed/llm/chats/cSomeChatId123/messages',
+            payload: { message: 'Quelle est la recette de la ratatouille ?' },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+          });
+
+          // then
+          expect(response.statusCode).to.equal(201);
+          expect(response.result).to.deep.equal({
+            message: `Quelle est la recette de la ratatouille ? BIEN RECU dans chat cSomeChatId123`,
+          });
+        });
+      });
+
+      context('when feature toggle is disabled', function () {
+        beforeEach(function () {
+          return featureToggles.set('isEmbedLLMEnabled', false);
+        });
+        it('should throw a 503 status code', async function () {
+          // when
+          const response = await server.inject({
+            method: 'POST',
+            url: '/api/passages/111/embed/llm/chats/cSomeChatId123/messages',
+            payload: { message: 'Quelle est la recette de la ratatouille ?' },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+          });
+
+          expect(response.statusCode).to.equal(503);
+        });
+      });
+    });
+  });
 });
