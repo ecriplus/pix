@@ -29,6 +29,11 @@ export default class AuthenticatedCertificationCentersGetTeamController extends 
   }
 
   @action
+  onChangeUserEmail(event) {
+    this.userEmailToAdd = event.target.value;
+  }
+
+  @action
   updateEmailErrorMessage() {
     this.errorMessage = this._getEmailErrorMessage(this.userEmailToAdd);
   }

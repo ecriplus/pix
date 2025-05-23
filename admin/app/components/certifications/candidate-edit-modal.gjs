@@ -14,8 +14,6 @@ import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { service } from '@ember/service';
-import pick from 'ember-composable-helpers/helpers/pick';
-import set from 'ember-set-helper/helpers/set';
 import { eq, or } from 'ember-truth-helpers';
 
 export default class CandidateEditModal extends Component {
@@ -101,6 +99,31 @@ export default class CandidateEditModal extends Component {
     } else if (this.isPostalCodeOptionSelected) {
       this.birthInseeCode = '';
     }
+  }
+
+  @action
+  onChangeFirstName(event) {
+    this.firstName = event.target.value;
+  }
+
+  @action
+  onChangeLastName(event) {
+    this.lastName = event.target.value;
+  }
+
+  @action
+  onChangeBirthInseeCode(event) {
+    this.birthInseeCode = event.target.value;
+  }
+
+  @action
+  onChangeBirthPostalCode(event) {
+    this.birthPostalCode = event.target.value;
+  }
+
+  @action
+  onChangeBirthCity(event) {
+    this.birthCity = event.target.value;
   }
 
   @action
@@ -210,21 +233,15 @@ export default class CandidateEditModal extends Component {
           </p>
 
           <div class="candidate-edit-modal--content__field">
-            <PixInput
-              class="input"
-              @value={{this.lastName}}
-              {{on "input" (pick "target.value" (set this "lastName"))}}
-              required
-            ><:label>Nom de famille</:label></PixInput>
+            <PixInput class="input" @value={{this.lastName}} {{on "input" this.onChangeLastName}} required>
+              <:label>Nom de famille</:label>
+            </PixInput>
           </div>
 
           <div class="candidate-edit-modal--content__field">
-            <PixInput
-              class="input"
-              @value={{this.firstName}}
-              required
-              {{on "input" (pick "target.value" (set this "firstName"))}}
-            ><:label>Prénom</:label></PixInput>
+            <PixInput class="input" @value={{this.firstName}} {{on "input" this.onChangeFirstName}} required>
+              <:label>Prénom</:label>
+            </PixInput>
           </div>
 
           <div class="candidate-edit-modal--content__field-radio-button">
@@ -297,10 +314,12 @@ export default class CandidateEditModal extends Component {
                 class="input"
                 @value={{this.birthInseeCode}}
                 required
-                {{on "input" (pick "target.value" (set this "birthInseeCode"))}}
-              ><:label>
+                {{on "input" this.onChangeBirthInseeCode}}
+              >
+                <:label>
                   Code Insee de naissance
-                </:label></PixInput>
+                </:label>
+              </PixInput>
             </div>
           {{/if}}
 
@@ -310,23 +329,22 @@ export default class CandidateEditModal extends Component {
                 class="input"
                 @value={{this.birthPostalCode}}
                 required
-                {{on "input" (pick "target.value" (set this "birthPostalCode"))}}
-              ><:label>
+                {{on "input" this.onChangeBirthPostalCode}}
+              >
+                <:label>
                   Code postal de naissance
-                </:label></PixInput>
+                </:label>
+              </PixInput>
             </div>
           {{/if}}
 
           {{#if this.isBirthCityRequired}}
             <div class="candidate-edit-modal--content__field">
-              <PixInput
-                class="input"
-                @value={{this.birthCity}}
-                required
-                {{on "input" (pick "target.value" (set this "birthCity"))}}
-              ><:label>
+              <PixInput class="input" @value={{this.birthCity}} {{on "input" this.onChangeBirthCity}} required>
+                <:label>
                   Commune de naissance
-                </:label></PixInput>
+                </:label>
+              </PixInput>
             </div>
           {{/if}}
         </form>

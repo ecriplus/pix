@@ -7,9 +7,7 @@ import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import pick from 'ember-composable-helpers/helpers/pick';
 import { t } from 'ember-intl';
-import set from 'ember-set-helper/helpers/set';
 import get from 'lodash/get';
 import ENV from 'pix-admin/config/environment';
 
@@ -50,6 +48,16 @@ export default class LoginForm extends Component {
     } catch (responseError) {
       this._handleApiError(responseError);
     }
+  }
+
+  @action
+  onEmailChange(event) {
+    this.email = event.target.value;
+  }
+
+  @action
+  onPasswordChange(event) {
+    this.password = event.target.value;
   }
 
   _handleApiError(responseError) {
@@ -132,12 +140,7 @@ export default class LoginForm extends Component {
             </PixNotificationAlert>
           {{/if}}
         {{else}}
-          <PixInput
-            required="true"
-            @value={{this.email}}
-            autocomplete="true"
-            {{on "input" (pick "target.value" (set this "email"))}}
-          >
+          <PixInput required="true" @value={{this.email}} autocomplete="true" {{on "input" this.onEmailChange}}>
             <:label>{{t "pages.login.fields.email.label"}} </:label>
           </PixInput>
 
@@ -146,7 +149,7 @@ export default class LoginForm extends Component {
             type="password"
             @value={{this.password}}
             autocomplete="true"
-            {{on "input" (pick "target.value" (set this "password"))}}
+            {{on "input" this.onPasswordChange}}
           >
             <:label>{{t "pages.login.fields.password.label"}} </:label>
           </PixInput>

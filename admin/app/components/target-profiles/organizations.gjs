@@ -5,9 +5,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import pick from 'ember-composable-helpers/helpers/pick';
 import { t } from 'ember-intl';
-import set from 'ember-set-helper/helpers/set';
 import uniq from 'lodash/uniq';
 
 import ListItems from '../organizations/list-items';
@@ -32,6 +30,16 @@ export default class Organizations extends Component {
 
   get isDisabledAttachOrganizations() {
     return this.organizationsToAttach === '';
+  }
+
+  @action
+  onOrganizationsToAttachChange(event) {
+    this.organizationsToAttach = event.target.value;
+  }
+
+  @action
+  onExistingTargetProfileChange(event) {
+    this.existingTargetProfile = event.target.value;
   }
 
   @action
@@ -129,7 +137,7 @@ export default class Organizations extends Component {
               class="form-field__text form-control"
               placeholder="1, 2"
               aria-describedby="attach-organizations-info"
-              {{on "input" (pick "target.value" (set this "organizationsToAttach"))}}
+              {{on "input" this.onOrganizationsToAttachChange}}
             />
             <p id="attach-organizations-info" hidden>Ids des organisations, séparés par une virgule</p>
             <PixButton
@@ -153,7 +161,7 @@ export default class Organizations extends Component {
               class="form-field__text form-control"
               placeholder="1135"
               aria-describedby="attach-organizations-from-existing-target-profile-info"
-              {{on "input" (pick "target.value" (set this "existingTargetProfile"))}}
+              {{on "input" this.onExistingTargetProfileChange}}
             />
             <p id="attach-organizations-from-existing-target-profile-info" hidden>Id du profil cible existant</p>
             <PixButton

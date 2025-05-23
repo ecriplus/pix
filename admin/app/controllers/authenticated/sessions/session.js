@@ -10,6 +10,11 @@ export default class SessionController extends Controller {
   @tracked inputId;
 
   @action
+  onChangeInputId(event) {
+    this.inputId = event.target.value;
+  }
+
+  @action
   loadSession(event) {
     event.preventDefault();
     const sessionId = trim(this.inputId);

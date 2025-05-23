@@ -4,9 +4,7 @@ import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import pick from 'ember-composable-helpers/helpers/pick';
 import { t } from 'ember-intl';
-import set from 'ember-set-helper/helpers/set';
 
 import CertificationInfoField from '../info-field';
 
@@ -25,6 +23,11 @@ export default class Comments extends Component {
     if (hasBeenSaved) {
       this.cancelJuryCommentEdition();
     }
+  }
+
+  @action
+  onJuryCommentChange(event) {
+    this.commentByJury = event.target.value;
   }
 
   @action
@@ -57,7 +60,7 @@ export default class Comments extends Component {
               id="certification-commentByJury"
               @value={{@certification.commentByJury}}
               class="form-control"
-              {{on "input" (pick "target.value" (set this "commentByJury"))}}
+              {{on "input" this.onJuryCommentChange}}
             />
           {{else}}
             <p>Notes internes Jury Pix :</p>

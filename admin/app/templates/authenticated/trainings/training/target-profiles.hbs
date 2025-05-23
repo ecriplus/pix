@@ -12,7 +12,7 @@
             @screenReaderOnly={{true}}
             class="training-sub-form__input form-field__text form-control"
             placeholder="1, 2"
-            {{on "input" (pick "target.value" (set this "targetProfilesToAttach"))}}
+            {{on "input" this.onChangeTargetProfilesToAttach}}
           >
             <:label>ID du ou des profil(s) cible(s)</:label>
           </PixInput>
