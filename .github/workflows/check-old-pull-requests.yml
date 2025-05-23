@@ -1,0 +1,43 @@
+name: Check Inactive Pull Requests
+
+on:
+  schedule:
+    # Runs every Monday at 9:00 AM
+    - cron: '0 9 * * 1'
+  # Allow manual execution
+  workflow_dispatch:
+
+permissions:
+  pull-requests: write
+  issues: write
+
+jobs:
+  check-inactive-prs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Close old pull requests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ONE_MONTH_AGO=$(date -d "30 days ago" +%Y-%m-%dT%H:%M:%SZ)
+          echo "Searching opened pull requests from $ONE_MONTH_AGO"
+          OPENED_PRS=$(gh pr list --json number,createdAt,title --limit 100)
+          PR_COUNT=$(echo "$OPENED_PRS" | jq '. | length')
+          echo "Found $PR_COUNT PRs opened"
+
+          echo "$OPENED_PRS" | jq -c '.[]' | while read -r PR; do
+              PR_NUMBER=$(echo "$PR" | jq -r '.number')
+              PR_TITLE=$(echo "$PR" | jq -r '.title')
+              UPDATED_AT=$(echo "$PR" | jq -r '.updatedAt')
+
+              if [[ "$UPDATED_AT" < "$ONE_MONTH_AGO" ]]; then
+              echo "PR #$PR_NUMBER ($PR_TITLE) inactive from $UPDATED_AT"
+
+              gh pr close "$PR_NUMBER" --comment "Cette pull request est ouverte depuis un mois. Assurez-vous de sa pertinance avant de la rouvrir." --delete-branch
+
+              echo "Closed pull request #$PR_NUMBER"
+              fi
+          done
