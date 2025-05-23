@@ -19,7 +19,8 @@
       "login-unauthorized-error": "L'adresse e-mail ou l'identifiant et/ou le mot de passe saisis sont incorrects.",
       "login-user-blocked-error": "Votre compte est bloqué car vous avez effectué trop de tentatives de connexion. Pour le débloquer, '<'a href=\"{url}\"'>'contactez-nous'</a>'.",
       "login-user-temporary-blocked-error": "Vous avez effectué trop de tentatives de connexion. Réessayez plus tard ou cliquez sur '<'a href=\"{url}\"'>'mot de passe oublié'</a>' pour le réinitialiser.",
-      "organization-not-found-error": "L’organisation \"{organizationId}\" n’existe pas."
+      "organization-not-found-error": "L’organisation \"{organizationId}\" n’existe pas.",
+      "pix-admin-login-from-password-disabled-error": "La connexion par email et mot de passe est désactivée. Utilisez un SSO pour vous connecter."
     },
     "fields": {
       "createdAt": "date de création",
