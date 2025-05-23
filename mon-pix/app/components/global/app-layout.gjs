@@ -44,7 +44,6 @@ export default class AppLayout extends Component {
         {{#if this.displayAppMainHeader}}
           <AppMainHeader />
         {{/if}}
-
         {{yield}}
       </:main>
       <:footer>

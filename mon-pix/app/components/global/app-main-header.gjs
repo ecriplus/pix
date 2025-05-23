@@ -14,7 +14,7 @@ export default class AppMainHeader extends Component {
   }
 
   <template>
-    <section class="app-main-header" ...attributes>
+    <header class="app-main-header" ...attributes>
       <LinkTo
         class="app-main-header__user-pix-score"
         @route="authenticated.profile"
@@ -31,6 +31,6 @@ export default class AppMainHeader extends Component {
         {{t "navigation.main.code"}}
       </PixButtonLink>
       <UserLoggedMenu />
-    </section>
+    </header>
   </template>
 }

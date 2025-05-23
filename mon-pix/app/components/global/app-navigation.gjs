@@ -42,7 +42,7 @@ export default class AppNavigation extends Component {
           <img
             class="app-navigation__logo-republique-fr"
             src="/images/logo/logo-de-la-republique-francaise-blanc.svg"
-            alt="{{t 'common.french-republic'}}"
+            alt={{t "common.french-republic"}}
           />
         {{/if}}
         <PixLogo @color="white" />
