@@ -1,5 +1,27 @@
 # Pix Changelog
 
+# [5.118.0](https://github.com/1024pix/pix/compare/v5.117.0...v5.118.0) (2025-05-23)
+
+### :rocket: Amélioration
+
+- [#12353](https://github.com/1024pix/pix/pull/12353) Afficher les POIC dans Modulix (PIX-17941) 
+- [#12232](https://github.com/1024pix/pix/pull/12232) Rendre générique le/les SSO utilisé(s) pour l'accès à Pix Admin (pouvoir utiliser ProConnect) (PIX-17895) 
+- [#12350](https://github.com/1024pix/pix/pull/12350) Supprimer la sidebar (PIX-17935) 
+- [#12347](https://github.com/1024pix/pix/pull/12347) Vider le champ mot de passe de la mire de connexion Pix App en cas d'erreur (PIX-17928) 
+
+### :building_construction: Tech
+
+- [#12114](https://github.com/1024pix/pix/pull/12114) :truck: Déplace le cas d'utilisation `completeAssessment` vers le répertoire `src/evaluation/` 
+- [#12115](https://github.com/1024pix/pix/pull/12115) :truck: Déplace le cas d'utilisation `getCorrectionForAnswer` vers `src/evaluation/` 
+- [#12215](https://github.com/1024pix/pix/pull/12215) Ajouter un workflow pour gérer les vieilles pull requests 
+- [#12280](https://github.com/1024pix/pix/pull/12280) Améliorer des requêtes SQL des live-alerts (PIX-17318). 
+- [#12359](https://github.com/1024pix/pix/pull/12359) Remplacer ember-flatpickr par un input date natif dans PixAdmin 
+- [#12363](https://github.com/1024pix/pix/pull/12363) Supprimer la seed SSO OIDC PixAdmin 
+
+### :arrow_up: Montée de version
+
+- [#12364](https://github.com/1024pix/pix/pull/12364) Update dependency @1024pix/pix-ui to ^55.19.2 (mon-pix)
+
 # [5.117.0](https://github.com/1024pix/pix/compare/v5.116.0...v5.117.0) (2025-05-22)
 
 ### :rocket: Amélioration
