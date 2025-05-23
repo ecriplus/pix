@@ -1,7 +1,7 @@
 import 'dotenv/config';
 
 import { knex } from '../../db/knex-database-connection.js';
-import { usecases } from '../../lib/domain/usecases/index.js';
+import { evaluationUsecases } from '../../src/evaluation/domain/usecases/index.js';
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
 import { LOCALE } from '../../src/shared/domain/constants.js';
@@ -24,7 +24,7 @@ export class CompleteAssessment extends Script {
     });
   }
 
-  async handle({ options, logger, completeAssessment = usecases.completeAssessment }) {
+  async handle({ options, logger, completeAssessment = evaluationUsecases.completeAssessment }) {
     const { assessmentId } = options;
     this.logger = logger;
 

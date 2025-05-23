@@ -3,17 +3,13 @@
  */
 import { Serializer as JSONAPISerializer } from 'jsonapi-serializer';
 
-import { usecases } from '../../../../lib/domain/usecases/index.js';
 import { usecases as certificationUsecases } from '../../../certification/session-management/domain/usecases/index.js';
-import { usecases as devcompUsecases } from '../../../devcomp/domain/usecases/index.js';
 import { Answer } from '../../../evaluation/domain/models/Answer.js';
 import { evaluationUsecases } from '../../../evaluation/domain/usecases/index.js';
 import * as competenceEvaluationSerializer from '../../../evaluation/infrastructure/serializers/jsonapi/competence-evaluation-serializer.js';
-import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { AssessmentEndedError } from '../../domain/errors.js';
 import { sharedUsecases } from '../../domain/usecases/index.js';
-import { featureToggles } from '../../infrastructure/feature-toggles/index.js';
 import * as assessmentRepository from '../../infrastructure/repositories/assessment-repository.js';
 import * as assessmentSerializer from '../../infrastructure/serializers/jsonapi/assessment-serializer.js';
 import * as challengeSerializer from '../../infrastructure/serializers/jsonapi/challenge-serializer.js';
@@ -56,24 +52,6 @@ const getNextChallenge = async function (request) {
     }
     throw error;
   }
-};
-
-const completeAssessment = async function (request) {
-  const assessmentId = request.params.id;
-  const locale = extractLocaleFromRequest(request);
-
-  await DomainTransaction.execute(async () => {
-    const assessment = await usecases.completeAssessment({ assessmentId, locale });
-    await evaluationUsecases.handleBadgeAcquisition({ assessment });
-    await evaluationUsecases.handleStageAcquisition({ assessment });
-    if (assessment.userId && (await featureToggles.get('isQuestEnabled'))) {
-      await questUsecases.rewardUser({ userId: assessment.userId });
-    }
-
-    await devcompUsecases.handleTrainingRecommendation({ assessment, locale });
-  });
-
-  return null;
 };
 
 const updateLastChallengeState = async function (request) {
@@ -157,7 +135,6 @@ const assessmentController = {
   save,
   get,
   getNextChallenge,
-  completeAssessment,
   updateLastChallengeState,
   findCompetenceEvaluations,
   autoValidateNextChallenge,

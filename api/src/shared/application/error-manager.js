@@ -9,7 +9,7 @@ import {
   SendingEmailToRefererError,
   SendingEmailToResultRecipientError,
 } from '../../certification/session-management/domain/errors.js';
-import { EmptyAnswerError } from '../../evaluation/domain/errors.js';
+import { AlreadyRatedAssessmentError, EmptyAnswerError } from '../../evaluation/domain/errors.js';
 import { UnableToAttachChildOrganizationToParentOrganizationError } from '../../organizational-entities/domain/errors.js';
 import { ArchivedCampaignError, DeletedCampaignError } from '../../prescription/campaign/domain/errors.js';
 import { CampaignParticipationDeletedError } from '../../prescription/campaign-participation/domain/errors.js';
@@ -262,7 +262,7 @@ function _mapToHttpError(error) {
   if (error instanceof SharedDomainErrors.AccountRecoveryUserAlreadyConfirmEmail) {
     return new HttpErrors.ConflictError(error.message);
   }
-  if (error instanceof SharedDomainErrors.AlreadyRatedAssessmentError) {
+  if (error instanceof AlreadyRatedAssessmentError) {
     return new HttpErrors.PreconditionFailedError('Assessment is already rated.');
   }
   if (error instanceof SharedDomainErrors.NotEnoughDaysPassedBeforeResetCampaignParticipationError) {

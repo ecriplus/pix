@@ -1,11 +1,13 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { certificationCompletedJobRepository } from '../../../../lib/infrastructure/repositories/jobs/certification-completed-job-repository.js';
 import * as courseRepository from '../../../../src/shared/infrastructure/repositories/course-repository.js';
 import * as certificationEvaluationCandidateRepository from '../../../certification/evaluation/infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationChallengeLiveAlertRepository from '../../../certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
 import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as campaignParticipationRepository from '../../../prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
+import { participationCompletedJobRepository } from '../../../prescription/campaign-participation/infrastructure/repositories/jobs/participation-completed-job-repository.js';
 import * as targetProfileAdministrationRepository from '../../../prescription/target-profile/infrastructure/repositories/target-profile-administration-repository.js';
 import * as targetProfileRepository from '../../../prescription/target-profile/infrastructure/repositories/target-profile-repository.js';
 import * as answerRepository from '../../../shared/infrastructure/repositories/answer-repository.js';
@@ -48,6 +50,7 @@ const usecasesWithoutInjectedDependencies = {
 const dependencies = {
   algorithmDataFetcherService,
   answerJobRepository,
+  certificationCompletedJobRepository,
   answerRepository,
   areaRepository,
   assessmentRepository,
@@ -83,6 +86,7 @@ const dependencies = {
   getNewAcquiredStagesService,
   convertLevelStagesIntoThresholdsService,
   getMasteryPercentageService,
+  participationCompletedJobRepository,
 };
 
 const evaluationUsecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);

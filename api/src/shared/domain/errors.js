@@ -629,12 +629,6 @@ class AlreadyExistingInvitationError extends DomainError {
   }
 }
 
-class AlreadyRatedAssessmentError extends DomainError {
-  constructor(message = 'Cette évaluation a déjà été évaluée.') {
-    super(message);
-  }
-}
-
 class AlreadyRegisteredEmailAndUsernameError extends DomainError {
   constructor(message = 'Cette adresse e-mail et cet identifiant sont déjà utilisés.') {
     super(message);
@@ -1028,7 +1022,6 @@ export {
   AlreadyExistingEntityError,
   AlreadyExistingInvitationError,
   AlreadyExistingMembershipError,
-  AlreadyRatedAssessmentError,
   AlreadyRegisteredEmailAndUsernameError,
   AlreadyRegisteredEmailError,
   AlreadyRegisteredUsernameError,
