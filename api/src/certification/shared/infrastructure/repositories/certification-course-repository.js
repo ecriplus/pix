@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
-import { config } from '../../../../shared/config.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/index.js';
@@ -82,8 +81,7 @@ async function get({ id }) {
       knexConn,
     );
 
-    certificationCourseDTO.numberOfChallenges =
-      configuration?.maximumAssessmentLength ?? config.v3Certification.numberOfChallengesPerCourse;
+    certificationCourseDTO.numberOfChallenges = configuration.maximumAssessmentLength;
 
     ({ accessibilityAdjustmentNeeded } = await knexConn('certification-candidates')
       .select('accessibilityAdjustmentNeeded')
@@ -172,8 +170,7 @@ async function findOneCertificationCourseByUserIdAndSessionId({ userId, sessionI
       knexConn,
     );
 
-    certificationCourseDTO.numberOfChallenges =
-      configuration?.maximumAssessmentLength ?? config.v3Certification.numberOfChallengesPerCourse;
+    certificationCourseDTO.numberOfChallenges = configuration.maximumAssessmentLength;
   }
 
   return _toDomain({

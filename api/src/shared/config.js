@@ -450,8 +450,8 @@ const configuration = (function () {
       expirationDelaySeconds: ms(process.env.EMAIL_VALIDATION_DEMAND_TEMPORARY_STORAGE_LIFESPAN || '3d') / 1000,
     },
     v3Certification: {
-      numberOfChallengesPerCourse: parseInt(process.env.V3_CERTIFICATION_NUMBER_OF_CHALLENGES_PER_COURSE, 10) || 20,
-      defaultProbabilityToPickChallenge: parseInt(process.env.DEFAULT_PROBABILITY_TO_PICK_CHALLENGE, 10) || 51,
+      numberOfChallengesPerCourse: 32,
+      defaultProbabilityToPickChallenge: 51,
       defaultCandidateCapacity: -3,
       challengesBetweenSameCompetence: 2,
       scoring: {

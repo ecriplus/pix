@@ -203,6 +203,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
         it('should return the last challenge the user has seen before leaving the session', async function () {
           const user = databaseBuilder.factory.buildUser({ id: userId });
           const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+          databaseBuilder.factory.buildFlashAlgorithmConfiguration();
           const sessionId = databaseBuilder.factory.buildSession({
             certificationCenterId,
             version: SESSIONS_VERSIONS.V3,

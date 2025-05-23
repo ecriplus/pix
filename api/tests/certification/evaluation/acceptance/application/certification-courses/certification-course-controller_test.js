@@ -1,6 +1,5 @@
 import { CertificationIssueReportCategory } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
 import { SESSIONS_VERSIONS } from '../../../../../../src/certification/shared/domain/models/SessionVersion.js';
-import { config } from '../../../../../../src/shared/config.js';
 import { KnowledgeElement } from '../../../../../../src/shared/domain/models/index.js';
 import {
   createServer,
@@ -348,7 +347,7 @@ describe('Acceptance | API | Certification Course', function () {
           it('should have created a v3 certification course without any challenges', async function () {
             // given
             const { options, userId, sessionId } = _createRequestOptions({ version: SESSIONS_VERSIONS.V3 });
-            _createNonExistingCertifCourseSetup({ learningContent, userId, sessionId });
+            const { flashConfiguration } = _createNonExistingCertifCourseSetup({ learningContent, userId, sessionId });
             await databaseBuilder.commit();
 
             // when
@@ -358,7 +357,7 @@ describe('Acceptance | API | Certification Course', function () {
             const [certificationCourse] = await knex('certification-courses').where({ userId, sessionId });
             expect(certificationCourse.version).to.equal(SESSIONS_VERSIONS.V3);
             expect(response.result.data.attributes).to.include({
-              'nb-challenges': config.v3Certification.numberOfChallengesPerCourse,
+              'nb-challenges': flashConfiguration.maximumAssessmentLength,
             });
           });
         });
@@ -504,6 +503,7 @@ function _createRequestOptions(
 function _createNonExistingCertifCourseSetup({ learningContent, sessionId, userId }) {
   const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
   databaseBuilder.factory.learningContent.build(learningContentObjects);
+  const flashConfiguration = databaseBuilder.factory.buildFlashAlgorithmConfiguration();
   const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({
     sessionId,
     userId,
@@ -529,6 +529,7 @@ function _createNonExistingCertifCourseSetup({ learningContent, sessionId, userI
 
   return {
     certificationCandidate,
+    flashConfiguration,
   };
 }
 

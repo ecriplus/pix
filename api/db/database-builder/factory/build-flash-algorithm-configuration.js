@@ -1,13 +1,12 @@
-import { config } from '../../../src/shared/config.js';
 import { databaseBuffer } from '../database-buffer.js';
 
 const buildFlashAlgorithmConfiguration = function ({
-  maximumAssessmentLength = config.v3Certification.numberOfChallengesPerCourse,
+  maximumAssessmentLength = 20,
   challengesBetweenSameCompetence = null,
   limitToOneQuestionPerTube = null,
   enablePassageByAllCompetences = false,
   variationPercent = null,
-  createdAt = new Date(),
+  createdAt = new Date('2018-01-01'),
 } = {}) {
   const values = {
     maximumAssessmentLength,
