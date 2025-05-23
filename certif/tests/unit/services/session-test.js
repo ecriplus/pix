@@ -218,7 +218,7 @@ module('Unit | Service | session', function (hooks) {
 
         module('when user is loaded', function () {
           module('when user language is not available', function () {
-            test('sets the locale to English international', function (assert) {
+            test('sets the locale to the default locale', function (assert) {
               // given
               const userLocale = 'my-new-language-code-here';
 
@@ -226,7 +226,7 @@ module('Unit | Service | session', function (hooks) {
               service.handleLocale({ isFranceDomain, localeFromQueryParam, userLocale });
 
               // then
-              assert.true(localeService.setLocale.calledWith(ENGLISH_INTERNATIONAL_LOCALE));
+              assert.true(localeService.setLocale.calledWith(DEFAULT_LOCALE));
               assert.true(service.data.localeNotSupported);
               assert.strictEqual(service.data.localeNotSupportedBannerClosed, undefined);
             });
@@ -277,7 +277,7 @@ module('Unit | Service | session', function (hooks) {
             });
 
             module('when user profile language is not supported', function () {
-              test(`sets the locale to english`, function (assert) {
+              test('sets the locale to the default locale', function (assert) {
                 // given
                 const localeFromQueryParam = 'an invalid locale';
                 const userLocale = 'not supported locale';
@@ -286,7 +286,7 @@ module('Unit | Service | session', function (hooks) {
                 service.handleLocale({ isFranceDomain, localeFromQueryParam, userLocale });
 
                 // then
-                assert.true(localeService.setLocale.calledWith(ENGLISH_INTERNATIONAL_LOCALE));
+                assert.true(localeService.setLocale.calledWith(DEFAULT_LOCALE));
               });
             });
           });

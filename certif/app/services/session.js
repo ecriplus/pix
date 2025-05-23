@@ -2,7 +2,7 @@ import { service } from '@ember/service';
 import { runTask } from 'ember-lifeline';
 import SessionService from 'ember-simple-auth/services/session';
 import {
-  ENGLISH_INTERNATIONAL_LOCALE,
+  DEFAULT_LOCALE,
   FRENCH_FRANCE_LOCALE,
   FRENCH_INTERNATIONAL_LOCALE,
   SUPPORTED_LANGUAGES,
@@ -49,12 +49,12 @@ export default class CurrentSessionService extends SessionService {
     }
 
     if (!userLocale) {
-      this.locale.setLocale(FRENCH_INTERNATIONAL_LOCALE);
+      this.locale.setLocale(DEFAULT_LOCALE);
       return;
     }
 
     const localeNotSupported = !SUPPORTED_LANGUAGES.includes(userLocale);
-    const locale = localeNotSupported ? ENGLISH_INTERNATIONAL_LOCALE : userLocale;
+    const locale = localeNotSupported ? DEFAULT_LOCALE : userLocale;
 
     this.data.localeNotSupported = localeNotSupported;
     this.locale.setLocale(locale);
