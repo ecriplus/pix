@@ -48,7 +48,6 @@
     "@1024pix/stylelint-config": "^5.1.31",
     "@babel/eslint-parser": "^7.19.1",
     "@ember/optional-features": "^2.0.0",
-    "@ember/string": "^3.1.1",
     "@ember/test-helpers": "^4.0.0",
     "@embroider/compat": "^3.2.0",
     "@embroider/core": "^3.2.0",
