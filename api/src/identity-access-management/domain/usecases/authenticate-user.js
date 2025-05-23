@@ -1,8 +1,14 @@
 import { PIX_ADMIN, PIX_ORGA } from '../../../authorization/domain/constants.js';
+import { config } from '../../../shared/config.js';
 import { ForbiddenAccess, UserNotFoundError } from '../../../shared/domain/errors.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
 import { createWarningConnectionEmail } from '../emails/create-warning-connection.email.js';
-import { MissingOrInvalidCredentialsError, PasswordNotMatching, UserShouldChangePasswordError } from '../errors.js';
+import {
+  MissingOrInvalidCredentialsError,
+  PasswordNotMatching,
+  PixAdminLoginFromPasswordDisabledError,
+  UserShouldChangePasswordError,
+} from '../errors.js';
 import { RefreshToken } from '../models/RefreshToken.js';
 
 /**
@@ -45,6 +51,9 @@ const authenticateUser = async function ({
   requestedApplication,
   audience,
 }) {
+  if (!config.authentication.permitPixAdminLoginFromPassword && requestedApplication.isPixAdmin) {
+    throw new PixAdminLoginFromPasswordDisabledError();
+  }
   try {
     const user = await pixAuthenticationService.getUserByUsernameAndPassword({
       username,

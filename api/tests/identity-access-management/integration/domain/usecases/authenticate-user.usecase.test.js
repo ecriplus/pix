@@ -1,14 +1,19 @@
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import {
   MissingOrInvalidCredentialsError,
+  PixAdminLoginFromPasswordDisabledError,
   UserShouldChangePasswordError,
 } from '../../../../../src/identity-access-management/domain/errors.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
+import { config } from '../../../../../src/shared/config.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | authenticate-user', function () {
+  beforeEach(function () {
+    config.authentication.permitPixAdminLoginFromPassword = true;
+  });
   context('when authentication succeeds', function () {
     let clock;
 
@@ -269,6 +274,28 @@ describe('Integration | Identity Access Management | Domain | UseCase | authenti
         await expect(
           usecases.authenticateUser({ username: email, password: wrongPassword, audience }),
         ).to.be.rejectedWith(MissingOrInvalidCredentialsError);
+      });
+    });
+
+    context('when authentication from pix admin is disabled', function () {
+      beforeEach(function () {
+        config.authentication.permitPixAdminLoginFromPassword = false;
+      });
+
+      it('throws a PixAdmiLoginFromPasswordDisabledError', async function () {
+        // given
+        const email = 'user_exists@example.net';
+        const password = 'some password';
+        databaseBuilder.factory.buildUser.withRawPassword({ email, rawPassword: password });
+        await databaseBuilder.commit();
+
+        const audience = 'https://admin.pix.fr';
+        const requestedApplication = RequestedApplication.fromOrigin(audience);
+
+        // when & then
+        await expect(
+          usecases.authenticateUser({ username: email, password, requestedApplication, audience }),
+        ).to.be.rejectedWith(PixAdminLoginFromPasswordDisabledError);
       });
     });
 
