@@ -273,20 +273,35 @@
     "no-content": "Geen inhoud"
   },
   "components": {
-    "analysis-per-tubes-and-competences": {
-      "detailed-positioning":{
-        "description":"Gemiddeld niveau behaald door deelnemers per onderwerp van het maximaal haalbare niveau in deze campagne.",
-        "title" : "Gedetailleerde positionering"
-      },
-      "gauge": {
-        "label": "Niveau {reachedLevel} van {maxLevel}"
-      },
+    "analysis-per-tube-or-competence": {
+      "title": "Gedetailleerde positionering",
+      "toggle": {
+        "label": "Bekijken door:",
+        "label-tubes": "Onderwerpen",
+        "label-competences": "Competenties"
+      }
+    },
+    "analysis-per-tube": {
+      "description": "Gemiddeld niveau behaald door deelnemers per onderwerp van het maximaal haalbare niveau in deze campagne.",
+      "cover-rate-gauge-label": "Over het onderwerp hebben je deelnemers een niveau van {bereiktLevel} gehaald uit een maximaal haalbaar niveau van {maxLevel}.",
       "table": {
         "caption": "{index} - {name}",
         "column": {
           "level": "Niveau",
           "positioning": "Positionering",
-          "tubes": "Onderwerpnaam en -beschrijving"
+          "tubes": "Naam en beschrijving van het onderwerp"
+        }
+      }
+    },
+    "analysis-per-competence": {
+      "description": "Gemiddeld niveau behaald door deelnemers per competentie van het maximaal haalbare niveau in deze campagne.",
+      "cover-rate-gauge-label": "Je deelnemers hebben een niveau bereikt van {reachedLevel} uit een maximaal haalbaar niveau van {maxLevel}.",
+      "table": {
+        "caption": "Competenties",
+        "column": {
+          "level": "Niveau",
+          "positioning": "Positionering",
+          "competences": "Naam en beschrijving van de competentie"
         }
       }
     },
@@ -312,6 +327,9 @@
     },
     "certificability": {
       "placeholder-select": "Certificeerbaar / Niet certificeerbaar"
+    },
+    "cover-rate-gauge": {
+      "label": "Op deze campagne hebben je deelnemers een niveau bereikt van {bereiktLevel} uit een maximaal haalbaar niveau van {maxLevel}."
     },
     "date": {
       "no-date": "Nog geen datum"
@@ -1520,9 +1538,6 @@
       "before-date": "op",
       "description": "De tabel hieronder laat zien hoe je deelnemers per onderwerp zijn gepositioneerd.'<br>' Positionering geeft het gemiddelde niveau van je deelnemers weer ten opzichte van het maximale niveau dat ze hadden kunnen bereiken.'<br>' Deze gegevens houden rekening met alle deelnames die zijn gedeeld als onderdeel van de evaluatiecampagnes van je organisatie en die niet zijn verwijderd.",
       "empty-state": "Geen gegevens beschikbaar",
-      "gauge": {
-        "label": "Je deelnemers behaalden een {userLevel} op een maximaal haalbaar niveau van {tubeLevel}."
-      },
       "level": {
         "advanced": "Geavanceerd",
         "expert": "Expert",

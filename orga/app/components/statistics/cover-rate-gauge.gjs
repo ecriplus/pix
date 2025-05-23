@@ -10,16 +10,16 @@ export default class CoverRateGauge extends Component {
     return guidFor(this);
   }
 
-  get userLevel() {
+  get reachedLevel() {
     return this.formatNumber(this.args.userLevel);
   }
 
-  get tubeLevel() {
+  get maxLevel() {
     return this.formatNumber(this.args.tubeLevel);
   }
 
   get translation() {
-    return this.args.label || 'pages.statistics.gauge.label';
+    return this.args.label || 'components.cover-rate-gauge.label';
   }
 
   formatNumber = (str) => {
@@ -42,33 +42,33 @@ export default class CoverRateGauge extends Component {
         <div
           aria-hidden="true"
           class="cover-rate-gauge__level cover-rate-gauge__level--tube-level"
-          style={{this.getGaugeSizeStyle this.tubeLevel withExtraPercentage=true}}
+          style={{this.getGaugeSizeStyle this.maxLevel withExtraPercentage=true}}
         >
-          {{this.tubeLevel}}
+          {{this.maxLevel}}
         </div>
         <div class="cover-rate-gauge__background {{if @hideMaxMin ' cover-rate-gauge__background--hide-max-min'}}">
-          <label for={{this.id}} class="screen-reader-only">{{t
-              this.translation
-              userLevel=this.userLevel
-              tubeLevel=this.tubeLevel
-            }}</label>
+
+          <label for={{this.id}} class="screen-reader-only">
+            {{t this.translation reachedLevel=this.reachedLevel maxLevel=this.maxLevel}}
+          </label>
+
           <progress
             aria-hidden="true"
             class="cover-rate-gauge__progress"
             id={{this.id}}
-            max={{this.tubeLevel}}
-            value={{this.userLevel}}
-            style={{this.getGaugeSizeStyle this.tubeLevel withExtraPercentage=false}}
+            max={{this.maxLevel}}
+            value={{this.reachedLevel}}
+            style={{this.getGaugeSizeStyle this.maxLevel withExtraPercentage=false}}
           >
-            {{this.userLevel}}
+            {{this.reachedLevel}}
           </progress>
         </div>
         <div
           aria-hidden="true"
           class="cover-rate-gauge__level cover-rate-gauge__level--user-level"
-          style={{this.getGaugeSizeStyle this.userLevel withExtraPercentage=true}}
+          style={{this.getGaugeSizeStyle this.reachedLevel withExtraPercentage=true}}
         >
-          {{this.userLevel}}
+          {{this.reachedLevel}}
         </div>
       </div>
     </div>

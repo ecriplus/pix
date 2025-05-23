@@ -273,14 +273,21 @@
     }
   },
   "components": {
-    "analysis-per-tubes-and-competences": {
-      "detailed-positioning":{
-        "description":"Average level achieved by participants by topic out of the maximum level achievable in this campaign.",
-        "title" : "Detailed positioning"
-      },
-      "gauge": {
-        "label": "Level {reachedLevel} of {maxLevel}"
-      },
+    "analysis-per-competence": {
+      "cover-rate-gauge-label": "Your participants have achieved a level of {reachedLevel} out of a maximum attainable level of {maxLevel}.",
+      "description": "Average level achieved by participants per competence out of the maximum level attainable in this campaign.",
+      "table": {
+        "caption": "Competences",
+        "column": {
+          "competences": "Competence name and description",
+          "level": "Level",
+          "positioning": "Positioning"
+        }
+      }
+    },
+    "analysis-per-tube": {
+      "cover-rate-gauge-label": "On the subject your participants have obtained a level of {reachedLevel} out of a maximum attainable level of {maxLevel}.",
+      "description": "Average level achieved by participants per subject out of the maximum level attainable in this campaign.",
       "table": {
         "caption": "{index} - {name}",
         "column": {
@@ -288,6 +295,14 @@
           "positioning": "Positioning",
           "tubes": "Subject name and description"
         }
+      }
+    },
+    "analysis-per-tube-or-competence": {
+      "title": "Detailed positioning",
+      "toggle": {
+        "label": "View by:",
+        "label-competences": "Competences",
+        "label-tubes": "Subjects"
       }
     },
     "campaign": {
@@ -312,6 +327,9 @@
       "content": "To be eligible for certification, the participant must have achieved level 1 in at least 5 different competences.",
       "from-collect-notice": "their Pix profile needs to be submitted through a profile collection campaign. If the participant has already submitted their profile, the date and status of the last submission are displayed.",
       "from-compute-certificability": "This status is updated both automatically (every 24 hours) and during profile collection campaigns."
+    },
+    "cover-rate-gauge": {
+      "label": "On this campaign, your participants have achieved a level of {reachedLevel} out of a maximum attainable level of {maxLevel}."
     },
     "date": {
       "no-date": "No date yet"
@@ -1518,9 +1536,6 @@
       "before-date": "on",
       "description": "The table below shows how your participants are positioned by subject.'<br>' Positioning reflects the average level of your participants in relation to the maximum level they could have reached.'<br>' This data takes into account all participations shared as part of your organisation's evaluation campaigns that have not been deleted.",
       "empty-state": "No data available",
-      "gauge": {
-        "label": "On the topic, your participants achieved a level of {userLevel} out of a maximum reachable level of {tubeLevel}."
-      },
       "level": {
         "advanced": "Advanced",
         "expert": "Expert",
