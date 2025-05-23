@@ -7,7 +7,7 @@ import {
   MaxPromptsReachedError,
   TooLargeMessageInputError,
 } from '../../../../../src/llm/domain/errors.js';
-import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
+import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
 import { CHAT_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
 import { CONFIGURATION_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/configuration-repository.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
@@ -78,7 +78,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         expect(await chatTemporaryStorage.get(`someUniquePrefix-${now.getMilliseconds()}`)).to.deep.equal({
           id: `someUniquePrefix-${now.getMilliseconds()}`,
           configurationId: 'uneConfigQuiExist',
-          currentCountPrompt: 0,
+          messages: [],
         });
       });
     });
@@ -105,7 +105,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         const chat = new Chat({
           id: 'chatId',
           configurationId: 'uneConfigQuiExist',
-          currentCountPrompt: 0,
+          messages: [],
         });
         await chatTemporaryStorage.save({
           key: 'chatId',
@@ -134,12 +134,16 @@ describe('LLM | Integration | Application | API | llm', function () {
     });
 
     context('when max prompts is reached', function () {
-      it('should throw a MaxPromptsReachedError', async function () {
+      it('should ignore messages from LLM', async function () {
         // given
         const chat = new Chat({
           id: 'chatId',
           configurationId: 'uneConfigQuiExist',
-          currentCountPrompt: 3,
+          messages: [
+            new Message({ content: 'coucou LLM1', isFromUser: false }),
+            new Message({ content: 'coucou LLM2', isFromUser: false }),
+            new Message({ content: 'coucou user', isFromUser: true }),
+          ],
         });
         await chatTemporaryStorage.save({
           key: chat.id,
@@ -154,7 +158,44 @@ describe('LLM | Integration | Application | API | llm', function () {
             },
             challenge: {
               inputMaxChars: 255,
-              inputMaxPrompts: 3,
+              inputMaxPrompts: 2,
+            },
+          });
+
+        // when
+        const llmMessage = await prompt({ chatId: 'chatId', message: 'un message' });
+
+        // then
+        expect(llmMessage).to.deep.equal({
+          message: `un message BIEN RECU dans chat chatId`,
+        });
+      });
+
+      it('should throw a MaxPromptsReachedError when user prompts exceed max', async function () {
+        // given
+        const chat = new Chat({
+          id: 'chatId',
+          configurationId: 'uneConfigQuiExist',
+          messages: [
+            new Message({ content: 'coucou user1', isFromUser: true }),
+            new Message({ content: 'coucou LLM2', isFromUser: false }),
+            new Message({ content: 'coucou user2', isFromUser: true }),
+          ],
+        });
+        await chatTemporaryStorage.save({
+          key: chat.id,
+          value: chat.toDTO(),
+          expirationDelaySeconds: ms('24h'),
+        });
+        nock('https://llm-test.pix.fr/api')
+          .get('/configurations/uneConfigQuiExist')
+          .reply(200, {
+            llm: {
+              historySize: 123,
+            },
+            challenge: {
+              inputMaxChars: 255,
+              inputMaxPrompts: 2,
             },
           });
 
@@ -172,7 +213,10 @@ describe('LLM | Integration | Application | API | llm', function () {
       const chat = new Chat({
         id: 'chatId',
         configurationId: 'uneConfigQuiExist',
-        currentCountPrompt: 3,
+        messages: [
+          new Message({ content: 'coucou user1', isFromUser: true }),
+          new Message({ content: 'coucou LLM1', isFromUser: false }),
+        ],
       });
       await chatTemporaryStorage.save({
         key: chat.id,
@@ -200,7 +244,12 @@ describe('LLM | Integration | Application | API | llm', function () {
       expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
         id: 'chatId',
         configurationId: 'uneConfigQuiExist',
-        currentCountPrompt: 4,
+        messages: [
+          { content: 'coucou user1', isFromUser: true },
+          { content: 'coucou LLM1', isFromUser: false },
+          { content: 'un message', isFromUser: true },
+          { content: 'un message BIEN RECU dans chat chatId', isFromUser: false },
+        ],
       });
     });
   });

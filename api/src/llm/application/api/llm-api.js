@@ -36,7 +36,7 @@ export async function startChat({ configId, prefixIdentifier }) {
   const newChat = new Chat({
     id: chatId,
     configurationId: configId,
-    currentCountPrompt: 0,
+    messages: [],
   });
   await chatRepository.save(newChat);
   return new LLMChatDTO({
@@ -70,12 +70,13 @@ export async function prompt({ chatId, message }) {
   if (message.length > getInputMaxCharsFromConfiguration(configuration)) {
     throw new TooLargeMessageInputError();
   }
-  if (chat.currentCountPrompt >= getInputMaxPromptsFromConfiguration(configuration)) {
+  if (chat.currentPromptsCount >= getInputMaxPromptsFromConfiguration(configuration)) {
     throw new MaxPromptsReachedError();
   }
-  chat.currentCountPrompt += 1;
+  chat.addUserMessage(message);
+  chat.addLLMMessage(`${message} BIEN RECU dans chat ${chatId}`);
   await chatRepository.save(chat);
-  return new LLMChatResponseDTO({ message: `${message} BIEN RECU dans chat ${chatId}` });
+  return new LLMChatResponseDTO({ message: chat.latestLLMMessage });
 }
 
 function generateId(prefixIdentifier) {

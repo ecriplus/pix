@@ -1,5 +1,5 @@
 import { ChatNotFoundError } from '../../../../../src/llm/domain/errors.js';
-import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
+import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
 import { CHAT_STORAGE_PREFIX, get, save } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import { catchErr, expect } from '../../../../test-helper.js';
@@ -17,7 +17,10 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
       const chat = new Chat({
         id: 'someChatId',
         configurationId: 'someConfigurationId',
-        currentCountPrompt: 1,
+        messages: [
+          new Message({ content: 'je suis user', isFromUser: true }),
+          new Message({ content: 'je suis LLM', isFromUser: false }),
+        ],
       });
 
       // when
@@ -27,7 +30,10 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
       expect(await chatTemporaryStorage.get('someChatId')).to.deep.equal({
         id: 'someChatId',
         configurationId: 'someConfigurationId',
-        currentCountPrompt: 1,
+        messages: [
+          { content: 'je suis user', isFromUser: true },
+          { content: 'je suis LLM', isFromUser: false },
+        ],
       });
     });
   });
@@ -44,7 +50,10 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           const chat = new Chat({
             id: 'someChatId',
             configurationId: 'someConfigurationId',
-            currentCountPrompt: 1,
+            messages: [
+              new Message({ content: 'je suis user', isFromUser: true }),
+              new Message({ content: 'je suis LLM', isFromUser: false }),
+            ],
           });
           await save(chat);
 
@@ -64,7 +73,10 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         const chat = new Chat({
           id: 'someChatId',
           configurationId: 'someConfigurationId',
-          currentCountPrompt: 1,
+          messages: [
+            new Message({ content: 'je suis user', isFromUser: true }),
+            new Message({ content: 'je suis LLM', isFromUser: false }),
+          ],
         });
         await save(chat);
 
