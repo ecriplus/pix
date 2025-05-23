@@ -1829,6 +1829,31 @@ describe('Integration | Repository | challenge-repository', function () {
       challengesLC.push(challengeData08_skill03_qcu_archive_notFlashCompatible_fr_noEmbedJson);
     });
 
+    context('when complementary certification given', function () {
+      it('returns flash compatible challenge that link to complementary', async function () {
+        const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification.droit({});
+
+        databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+
+        const certificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationId: complementaryCertification.id,
+          challengeId: challengesLC[0].id,
+        });
+
+        await databaseBuilder.commit();
+
+        const flashCompatibleChallenges = await challengeRepository.findActiveFlashCompatible({
+          complementaryCertificationId: complementaryCertification.id,
+          locale: 'fr',
+        });
+
+        expect(flashCompatibleChallenges).to.have.lengthOf(1);
+        expect(flashCompatibleChallenges[0].id).to.equal(challengesLC[0].id);
+        expect(flashCompatibleChallenges[0].discriminant).to.equal(certificationFrameworksChallenge.alpha);
+        expect(flashCompatibleChallenges[0].difficulty).to.equal(certificationFrameworksChallenge.delta);
+      });
+    });
+
     context('when locale is not defined', function () {
       it('should throw an Error', async function () {
         // given
@@ -1842,6 +1867,7 @@ describe('Integration | Repository | challenge-repository', function () {
         expect(err.message).to.equal('Locale shall be defined');
       });
     });
+
     context('when locale is defined', function () {
       context('when no active flash compatible challenges found', function () {
         it('should return an empty array', async function () {
@@ -1858,6 +1884,7 @@ describe('Integration | Repository | challenge-repository', function () {
           expect(challenges).to.deep.equal([]);
         });
       });
+
       context('when active flash compatible challenges found', function () {
         it('should return the challenges', async function () {
           // given

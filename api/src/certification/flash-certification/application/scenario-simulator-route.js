@@ -2,6 +2,7 @@ import Joi from 'joi';
 
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { LOCALE } from '../../../shared/domain/constants.js';
+import { ComplementaryCertificationKeys } from '../../shared/domain/models/ComplementaryCertificationKeys.js';
 import { scenarioSimulatorController } from './scenario-simulator-controller.js';
 
 const register = async (server) => {
@@ -32,6 +33,7 @@ const register = async (server) => {
                 .valid(...Object.values(LOCALE))
                 .lowercase()
                 .required(),
+              complementaryCertificationKey: Joi.string().valid(...Object.values(ComplementaryCertificationKeys)),
             })
             .required(),
         },

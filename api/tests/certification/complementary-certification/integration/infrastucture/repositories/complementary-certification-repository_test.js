@@ -119,6 +119,47 @@ describe('Integration | Certification | Repository | complementary-certification
     });
   });
 
+  describe('#getByKey', function () {
+    context('when the complementary certification does not exist', function () {
+      it('should throw a NotFoundError', async function () {
+        // given
+        const unknownComplementaryCertificationKey = 'UNKNOWN_KEY';
+
+        // when
+        const error = await catchErr(complementaryCertificationRepository.getByKey)(
+          unknownComplementaryCertificationKey,
+        );
+
+        // then
+        expect(error).to.be.instanceOf(NotFoundError);
+        expect(error.message).to.equal('Complementary certification does not exist');
+      });
+    });
+
+    it('should return the complementary certification by its key', async function () {
+      // given
+      const keyToSearch = 'EDU_1ER_DEGRE';
+      const expectedComplementaryCertification = domainBuilder.buildComplementaryCertification({
+        id: 1,
+        key: keyToSearch,
+      });
+      databaseBuilder.factory.buildComplementaryCertification(expectedComplementaryCertification);
+
+      databaseBuilder.factory.buildComplementaryCertification({
+        id: 3,
+        key: 'EDU_2ND_DEGRE',
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const complementaryCertification = await complementaryCertificationRepository.getByKey(keyToSearch);
+
+      // then
+      expect(complementaryCertification).to.deep.equal(expectedComplementaryCertification);
+    });
+  });
+
   describe('#getById', function () {
     context('when the complementary certification does not exist', function () {
       it('should throw a NotFoundError', async function () {

@@ -1,3 +1,4 @@
+import { knex } from '../../../../db/knex-database-connection.js';
 import { httpAgent } from '../../../../src/shared/infrastructure/http-agent.js';
 import * as skillRepository from '../../../shared/infrastructure/repositories/skill-repository.js';
 import { config } from '../../config.js';
@@ -117,34 +118,70 @@ export async function findActiveFlashCompatible({
   locale,
   successProbabilityThreshold = config.features.successProbabilityThreshold,
   accessibilityAdjustmentNeeded = false,
+  complementaryCertificationId,
 } = {}) {
   _assertLocaleIsDefined(locale);
   const cacheKey = `findActiveFlashCompatible({ locale: ${locale}, accessibilityAdjustmentNeeded: ${accessibilityAdjustmentNeeded} })`;
-  let findCallback;
-  if (accessibilityAdjustmentNeeded) {
-    findCallback = (knex) =>
-      knex
-        .whereRaw('?=ANY(??)', [locale, 'locales'])
-        .where('status', VALIDATED_STATUS)
-        .whereNotNull('alpha')
-        .whereNotNull('delta')
-        .whereIn('accessibility1', ACCESSIBLE_STATUSES)
-        .whereIn('accessibility2', ACCESSIBLE_STATUSES)
-        .orderBy('id');
+  let challengeDtos;
+
+  if (complementaryCertificationId) {
+    challengeDtos = await _findChallengesForComplementaryCertification({ complementaryCertificationId, cacheKey });
   } else {
-    findCallback = (knex) =>
-      knex
-        .whereRaw('?=ANY(??)', [locale, 'locales'])
-        .where('status', VALIDATED_STATUS)
-        .whereNotNull('alpha')
-        .whereNotNull('delta')
-        .orderBy('id');
+    challengeDtos = await _findChallengesForCoreCertification({ locale, accessibilityAdjustmentNeeded, cacheKey });
   }
-  const challengeDtos = await getInstance().find(cacheKey, findCallback);
   const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
   return challengesDtosWithSkills.map(([challengeDto, skill]) =>
     toDomain({ challengeDto, skill, successProbabilityThreshold }),
   );
+}
+
+async function _findChallengesForComplementaryCertification({ complementaryCertificationId, cacheKey }) {
+  const complementaryCertificationChallenges = await knex
+    .from('certification-frameworks-challenges')
+    .where({ complementaryCertificationId });
+
+  const complementaryCertificationChallengesIds = complementaryCertificationChallenges.map(
+    ({ challengeId }) => challengeId,
+  );
+
+  const findCallback = async (knex) => {
+    return knex.whereIn('id', complementaryCertificationChallengesIds).orderBy('id');
+  };
+
+  return decorateWithCertificationCalibration({
+    challengeDtos: await getInstance().find(cacheKey, findCallback),
+    complementaryCertificationChallenges,
+  });
+}
+
+function _findChallengesForCoreCertification({ locale, accessibilityAdjustmentNeeded, cacheKey }) {
+  const findCallback = (knex) =>
+    knex
+      .whereRaw('?=ANY(??)', [locale, 'locales'])
+      .where('status', VALIDATED_STATUS)
+      .whereNotNull('alpha')
+      .whereNotNull('delta')
+      .modify((queryBuilder) => {
+        if (accessibilityAdjustmentNeeded) {
+          queryBuilder.whereIn('accessibility1', ACCESSIBLE_STATUSES).whereIn('accessibility2', ACCESSIBLE_STATUSES);
+        }
+      })
+      .orderBy('id');
+  return getInstance().find(cacheKey, findCallback);
+}
+
+function decorateWithCertificationCalibration({ challengeDtos, complementaryCertificationChallenges }) {
+  return challengeDtos.map((challenge) => {
+    const { alpha, delta } = complementaryCertificationChallenges.find(
+      ({ challengeId }) => challengeId === challenge.id,
+    );
+
+    return {
+      ...challenge,
+      alpha,
+      delta,
+    };
+  });
 }
 
 export async function findFlashCompatibleWithoutLocale({ useObsoleteChallenges } = {}) {
