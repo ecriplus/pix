@@ -17,9 +17,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
       const chat = new Chat({
         id: 'someChatId',
         configurationId: 'someConfigurationId',
-        historySize: 'some historySize',
-        inputMaxChars: 'some inputMaxChars',
-        inputMaxPrompts: 'some inputMaxPrompts',
+        currentCountPrompt: 1,
       });
 
       // when
@@ -29,9 +27,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
       expect(await chatTemporaryStorage.get('someChatId')).to.deep.equal({
         id: 'someChatId',
         configurationId: 'someConfigurationId',
-        historySize: 'some historySize',
-        inputMaxChars: 'some inputMaxChars',
-        inputMaxPrompts: 'some inputMaxPrompts',
+        currentCountPrompt: 1,
       });
     });
   });
@@ -48,9 +44,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           const chat = new Chat({
             id: 'someChatId',
             configurationId: 'someConfigurationId',
-            historySize: 'some historySize',
-            inputMaxChars: 'some inputMaxChars',
-            inputMaxPrompts: 'some inputMaxPrompts',
+            currentCountPrompt: 1,
           });
           await save(chat);
 
@@ -70,9 +64,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         const chat = new Chat({
           id: 'someChatId',
           configurationId: 'someConfigurationId',
-          historySize: 'some historySize',
-          inputMaxChars: 'some inputMaxChars',
-          inputMaxPrompts: 'some inputMaxPrompts',
+          currentCountPrompt: 1,
         });
         await save(chat);
 

@@ -140,6 +140,14 @@ describe('Integration | API | Controller Error', function () {
         "Cet utilisateur n'est pas autorisé à récupérer les résultats de la campagne.",
       );
     });
+
+    it('responds Forbidden when a LLMDomainErrors.MaxPromptsReachedError error occurs', async function () {
+      routeHandler.throws(new LLMDomainErrors.MaxPromptsReachedError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
+      expect(responseDetail(response)).to.equal("You've reached the max prompts authorized");
+    });
   });
 
   context('503 Service Unavailable', function () {
@@ -162,7 +170,7 @@ describe('Integration | API | Controller Error', function () {
       const response = await server.requestObject(request);
 
       expect(response.statusCode).to.equal(PAYLOAD_TOO_LARGE_ERROR);
-      expect(responseDetail(response)).to.equal("You've reach the max characters input");
+      expect(responseDetail(response)).to.equal("You've reached the max characters input");
     });
   });
 });

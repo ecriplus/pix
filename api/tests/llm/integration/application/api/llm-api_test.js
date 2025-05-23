@@ -4,12 +4,12 @@ import { prompt, startChat } from '../../../../../src/llm/application/api/llm-ap
 import {
   ChatNotFoundError,
   ConfigurationNotFoundError,
+  MaxPromptsReachedError,
   TooLargeMessageInputError,
 } from '../../../../../src/llm/domain/errors.js';
 import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
 import { CHAT_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
 import { CONFIGURATION_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/configuration-repository.js';
-import { config } from '../../../../../src/shared/config.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import { catchErr, expect, nock, sinon } from '../../../../test-helper.js';
 
@@ -78,9 +78,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         expect(await chatTemporaryStorage.get(`someUniquePrefix-${now.getMilliseconds()}`)).to.deep.equal({
           id: `someUniquePrefix-${now.getMilliseconds()}`,
           configurationId: 'uneConfigQuiExist',
-          historySize: 123,
-          inputMaxChars: 456,
-          inputMaxPrompts: 789,
+          currentCountPrompt: 0,
         });
       });
     });
@@ -104,46 +102,105 @@ describe('LLM | Integration | Application | API | llm', function () {
     context('when max characters is reached', function () {
       it('should throw a TooLargeMessageInputError', async function () {
         // given
-        const chatId = 'chatId';
         const chat = new Chat({
-          id: chatId,
+          id: 'chatId',
           configurationId: 'uneConfigQuiExist',
+          currentCountPrompt: 0,
         });
-        const config = {
-          llm: {
-            historySize: 123,
-          },
-          challenge: {
-            inputMaxChars: 5,
-            inputMaxPrompts: 789,
-          },
-        };
+        await chatTemporaryStorage.save({
+          key: 'chatId',
+          value: chat.toDTO(),
+          expirationDelaySeconds: ms('24h'),
+        });
+        nock('https://llm-test.pix.fr/api')
+          .get('/configurations/uneConfigQuiExist')
+          .reply(200, {
+            llm: {
+              historySize: 123,
+            },
+            challenge: {
+              inputMaxChars: 5,
+              inputMaxPrompts: 789,
+            },
+          });
 
-        const chatsTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
-        await chatsTemporaryStorage.save({
+        // when
+        const err = await catchErr(prompt)({ chatId: 'chatId', message: 'un message' });
+
+        // then
+        expect(err).to.be.instanceOf(TooLargeMessageInputError);
+        expect(err.message).to.equal("You've reached the max characters input");
+      });
+    });
+
+    context('when max prompts is reached', function () {
+      it('should throw a MaxPromptsReachedError', async function () {
+        // given
+        const chat = new Chat({
+          id: 'chatId',
+          configurationId: 'uneConfigQuiExist',
+          currentCountPrompt: 3,
+        });
+        await chatTemporaryStorage.save({
           key: chat.id,
           value: chat.toDTO(),
           expirationDelaySeconds: ms('24h'),
         });
-
-        nock('https://llm-test.pix.fr/api').get('/configurations/uneConfigQuiExist').reply(200, config);
+        nock('https://llm-test.pix.fr/api')
+          .get('/configurations/uneConfigQuiExist')
+          .reply(200, {
+            llm: {
+              historySize: 123,
+            },
+            challenge: {
+              inputMaxChars: 255,
+              inputMaxPrompts: 3,
+            },
+          });
 
         // when
-        const err = await catchErr(prompt)({ chatId, message: 'un message' });
+        const err = await catchErr(prompt)({ chatId: 'chatId', message: 'un message' });
 
         // then
-        expect(err).to.be.instanceOf(TooLargeMessageInputError);
-        expect(err.message).to.equal("You've reach the max characters input");
+        expect(err).to.be.instanceOf(MaxPromptsReachedError);
+        expect(err.message).to.equal("You've reached the max prompts authorized");
       });
     });
 
     it('should return the newly created chat', async function () {
+      // given
+      const chat = new Chat({
+        id: 'chatId',
+        configurationId: 'uneConfigQuiExist',
+        currentCountPrompt: 3,
+      });
+      await chatTemporaryStorage.save({
+        key: chat.id,
+        value: chat.toDTO(),
+        expirationDelaySeconds: ms('24h'),
+      });
+      nock('https://llm-test.pix.fr/api')
+        .get('/configurations/uneConfigQuiExist')
+        .reply(200, {
+          llm: {
+            historySize: 123,
+          },
+          challenge: {
+            inputMaxChars: 255,
+            inputMaxPrompts: 100,
+          },
+        });
       // when
-      const chatResponseDTO = await prompt({ chatId: 'un chat id', message: 'un message' });
+      const chatResponseDTO = await prompt({ chatId: 'chatId', message: 'un message' });
 
       // then
       expect(chatResponseDTO).to.deep.equal({
-        message: `un message BIEN RECU dans chat un chat id`,
+        message: `un message BIEN RECU dans chat chatId`,
+      });
+      expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
+        id: 'chatId',
+        configurationId: 'uneConfigQuiExist',
+        currentCountPrompt: 4,
       });
     });
   });

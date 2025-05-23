@@ -1,4 +1,9 @@
-import { ChatNotFoundError, ConfigurationNotFoundError, TooLargeMessageInputError } from '../../domain/errors.js';
+import {
+  ChatNotFoundError,
+  ConfigurationNotFoundError,
+  MaxPromptsReachedError,
+  TooLargeMessageInputError,
+} from '../../domain/errors.js';
 import { Chat } from '../../domain/models/Chat.js';
 import * as chatRepository from '../../infrastructure/repositories/chat-repository.js';
 import * as configurationRepository from '../../infrastructure/repositories/configuration-repository.js';
@@ -31,15 +36,13 @@ export async function startChat({ configId, prefixIdentifier }) {
   const newChat = new Chat({
     id: chatId,
     configurationId: configId,
-    historySize: configuration.llm.historySize,
-    inputMaxChars: configuration.challenge.inputMaxChars,
-    inputMaxPrompts: configuration.challenge.inputMaxPrompts,
+    currentCountPrompt: 0,
   });
   await chatRepository.save(newChat);
   return new LLMChatDTO({
     id: newChat.id,
-    inputMaxChars: newChat.inputMaxChars,
-    inputMaxPrompts: newChat.inputMaxPrompts,
+    inputMaxChars: getInputMaxCharsFromConfiguration(configuration),
+    inputMaxPrompts: getInputMaxPromptsFromConfiguration(configuration),
   });
 }
 
@@ -64,13 +67,26 @@ export async function prompt({ chatId, message }) {
   }
   const chat = await chatRepository.get(chatId);
   const configuration = await configurationRepository.get(chat.configurationId);
-  if (message.length > configuration.challenge.inputMaxChars) throw new TooLargeMessageInputError();
-
-  //maxChars et maxPrompts atteint + save history de conv au fur et à mesure
+  if (message.length > getInputMaxCharsFromConfiguration(configuration)) {
+    throw new TooLargeMessageInputError();
+  }
+  if (chat.currentCountPrompt >= getInputMaxPromptsFromConfiguration(configuration)) {
+    throw new MaxPromptsReachedError();
+  }
+  chat.currentCountPrompt += 1;
+  await chatRepository.save(chat);
   return new LLMChatResponseDTO({ message: `${message} BIEN RECU dans chat ${chatId}` });
 }
 
 function generateId(prefixIdentifier) {
   const nowMs = new Date().getMilliseconds();
   return `${prefixIdentifier}-${nowMs}`;
+}
+
+function getInputMaxCharsFromConfiguration(configuration) {
+  return configuration.challenge.inputMaxChars;
+}
+
+function getInputMaxPromptsFromConfiguration(configuration) {
+  return configuration.challenge.inputMaxPrompts;
 }

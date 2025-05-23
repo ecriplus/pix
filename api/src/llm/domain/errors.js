@@ -20,6 +20,12 @@ export class ChatNotFoundError extends DomainError {
 
 export class TooLargeMessageInputError extends DomainError {
   constructor() {
-    super("You've reach the max characters input");
+    super("You've reached the max characters input");
+  }
+}
+
+export class MaxPromptsReachedError extends DomainError {
+  constructor() {
+    super("You've reached the max prompts authorized");
   }
 }

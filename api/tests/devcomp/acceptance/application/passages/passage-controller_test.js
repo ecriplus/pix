@@ -1,3 +1,6 @@
+import ms from 'ms';
+
+import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
 import { CHAT_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
 import { CONFIGURATION_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/configuration-repository.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
@@ -338,28 +341,6 @@ describe('Acceptance | Controller | passage-controller', function () {
     });
 
     context('when user is authenticated', function () {
-      context('when feature toggle is enabled', function () {
-        beforeEach(function () {
-          return featureToggles.set('isEmbedLLMEnabled', true);
-        });
-
-        it('should post message and get the LLM response', async function () {
-          // when
-          const response = await server.inject({
-            method: 'POST',
-            url: '/api/passages/111/embed/llm/chats/cSomeChatId123/messages',
-            payload: { message: 'Quelle est la recette de la ratatouille ?' },
-            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
-          });
-
-          // then
-          expect(response.statusCode).to.equal(201);
-          expect(response.result).to.deep.equal({
-            message: `Quelle est la recette de la ratatouille ? BIEN RECU dans chat cSomeChatId123`,
-          });
-        });
-      });
-
       context('when feature toggle is disabled', function () {
         beforeEach(function () {
           return featureToggles.set('isEmbedLLMEnabled', false);
@@ -374,6 +355,51 @@ describe('Acceptance | Controller | passage-controller', function () {
           });
 
           expect(response.statusCode).to.equal(503);
+        });
+      });
+
+      context('when feature toggle is enabled', function () {
+        beforeEach(function () {
+          return featureToggles.set('isEmbedLLMEnabled', true);
+        });
+
+        it('should post message and get the LLM response', async function () {
+          // given
+          const chat = new Chat({
+            id: 'chatId',
+            configurationId: 'uneConfigQuiExist',
+            currentCountPrompt: 0,
+          });
+          await chatTemporaryStorage.save({
+            key: 'cSomeChatId123',
+            value: chat.toDTO(),
+            expirationDelaySeconds: ms('24h'),
+          });
+          nock('https://llm-test.pix.fr/api')
+            .get('/configurations/uneConfigQuiExist')
+            .reply(200, {
+              llm: {
+                historySize: 123,
+              },
+              challenge: {
+                inputMaxChars: 999,
+                inputMaxPrompts: 999,
+              },
+            });
+
+          // when
+          const response = await server.inject({
+            method: 'POST',
+            url: '/api/passages/111/embed/llm/chats/cSomeChatId123/messages',
+            payload: { message: 'Quelle est la recette de la ratatouille ?' },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+          });
+
+          // then
+          expect(response.statusCode).to.equal(201);
+          expect(response.result).to.deep.equal({
+            message: `Quelle est la recette de la ratatouille ? BIEN RECU dans chat cSomeChatId123`,
+          });
         });
       });
     });

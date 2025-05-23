@@ -1,19 +1,15 @@
 export class Chat {
-  constructor({ id, configurationId, historySize, inputMaxChars, inputMaxPrompts }) {
+  constructor({ id, configurationId, currentCountPrompt }) {
     this.id = id;
     this.configurationId = configurationId;
-    this.historySize = historySize;
-    this.inputMaxChars = inputMaxChars;
-    this.inputMaxPrompts = inputMaxPrompts;
+    this.currentCountPrompt = currentCountPrompt;
   }
 
   toDTO() {
     return {
       id: this.id,
       configurationId: this.configurationId,
-      historySize: this.historySize,
-      inputMaxChars: this.inputMaxChars,
-      inputMaxPrompts: this.inputMaxPrompts,
+      currentCountPrompt: this.currentCountPrompt,
     };
   }
 }
