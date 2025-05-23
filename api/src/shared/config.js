@@ -335,6 +335,7 @@ const configuration = (function () {
         expirationDelaySeconds: ms(process.env.LLM_CHAT_TEMPORARY_STORAGE_EXP_DELAY_SECONDS ?? '12h'),
       },
       getConfigurationUrl: _removeTrailingSlashFromUrl(process.env.LLM_API_GET_CONFIGURATIONS_URL ?? ''),
+      postPromptUrl: _removeTrailingSlashFromUrl(process.env.LLM_API_POST_PROMPT_URL ?? ''),
     },
     logging: {
       enabled: toBoolean(process.env.LOG_ENABLED),
@@ -501,6 +502,7 @@ const configuration = (function () {
     config.lcms.url = 'https://lcms-test.pix.fr/api';
 
     config.llm.getConfigurationUrl = 'https://llm-test.pix.fr/api/configurations';
+    config.llm.postPromptUrl = 'https://llm-test.pix.fr/api/chat';
     config.llm.temporaryStorage.expirationDelaySeconds = 1;
 
     config.domain.tldFr = '.fr';

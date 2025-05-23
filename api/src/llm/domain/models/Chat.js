@@ -22,6 +22,10 @@ export class Chat {
     return this.messages.filter((message) => message.isFromUser).length;
   }
 
+  get history() {
+    return this.messages.map((message) => message.content);
+  }
+
   toDTO() {
     return {
       id: this.id,

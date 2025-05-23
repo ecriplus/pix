@@ -1,3 +1,4 @@
+import { config } from '../../../shared/config.js';
 import {
   ChatNotFoundError,
   ConfigurationNotFoundError,
@@ -73,8 +74,19 @@ export async function prompt({ chatId, message }) {
   if (chat.currentPromptsCount >= getInputMaxPromptsFromConfiguration(configuration)) {
     throw new MaxPromptsReachedError();
   }
+
+  const url = config.llm.postPromptUrl;
+  const response = await fetch(url, {
+    method: 'POST',
+    body: JSON.stringify({
+      message,
+      configuration,
+      history: chat.history,
+    }),
+  });
+  const llmResponse = await response.json();
   chat.addUserMessage(message);
-  chat.addLLMMessage(`${message} BIEN RECU dans chat ${chatId}`);
+  chat.addLLMMessage(llmResponse.message);
   await chatRepository.save(chat);
   return new LLMChatResponseDTO({ message: chat.latestLLMMessage });
 }

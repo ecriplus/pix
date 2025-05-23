@@ -208,7 +208,7 @@ describe('LLM | Integration | Application | API | llm', function () {
       });
     });
 
-    it('should return the newly created chat', async function () {
+    it('should return the llm response', async function () {
       // given
       const chat = new Chat({
         id: 'chatId',
@@ -234,12 +234,28 @@ describe('LLM | Integration | Application | API | llm', function () {
             inputMaxPrompts: 100,
           },
         });
+      nock('https://llm-test.pix.fr/api')
+        .post('/chat', {
+          configuration: {
+            llm: {
+              historySize: 123,
+            },
+            challenge: {
+              inputMaxChars: 255,
+              inputMaxPrompts: 100,
+            },
+          },
+          history: ['coucou user1', 'coucou LLM1'],
+          message: 'un message',
+        })
+        .reply(201, { message: 'je suis le LLM bonjour' });
+
       // when
       const chatResponseDTO = await prompt({ chatId: 'chatId', message: 'un message' });
 
       // then
       expect(chatResponseDTO).to.deep.equal({
-        message: `un message BIEN RECU dans chat chatId`,
+        message: `je suis le LLM bonjour`,
       });
       expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
         id: 'chatId',
@@ -248,7 +264,7 @@ describe('LLM | Integration | Application | API | llm', function () {
           { content: 'coucou user1', isFromUser: true },
           { content: 'coucou LLM1', isFromUser: false },
           { content: 'un message', isFromUser: true },
-          { content: 'un message BIEN RECU dans chat chatId', isFromUser: false },
+          { content: 'je suis le LLM bonjour', isFromUser: false },
         ],
       });
     });

@@ -366,9 +366,9 @@ describe('Acceptance | Controller | passage-controller', function () {
         it('should post message and get the LLM response', async function () {
           // given
           const chat = new Chat({
-            id: 'chatId',
+            id: 'cSomeChatId123',
             configurationId: 'uneConfigQuiExist',
-            currentCountPrompt: 0,
+            messages: [],
           });
           await chatTemporaryStorage.save({
             key: 'cSomeChatId123',
@@ -386,6 +386,21 @@ describe('Acceptance | Controller | passage-controller', function () {
                 inputMaxPrompts: 999,
               },
             });
+          nock('https://llm-test.pix.fr/api')
+            .post('/chat', {
+              configuration: {
+                llm: {
+                  historySize: 123,
+                },
+                challenge: {
+                  inputMaxChars: 999,
+                  inputMaxPrompts: 999,
+                },
+              },
+              history: [],
+              message: 'Quelle est la recette de la ratatouille ?',
+            })
+            .reply(201, { message: 'je la garde pour moi' });
 
           // when
           const response = await server.inject({
@@ -398,7 +413,7 @@ describe('Acceptance | Controller | passage-controller', function () {
           // then
           expect(response.statusCode).to.equal(201);
           expect(response.result).to.deep.equal({
-            message: `Quelle est la recette de la ratatouille ? BIEN RECU dans chat cSomeChatId123`,
+            message: `je la garde pour moi`,
           });
         });
       });
