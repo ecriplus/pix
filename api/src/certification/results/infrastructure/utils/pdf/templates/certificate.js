@@ -191,13 +191,13 @@ const generateV2AttestationTemplate = function ({ pdf, data, translate, isFrench
     .font('Nunito-Bold')
     .fontSize(35)
     .fillColor('#253858')
-    .text(translate('certification.attestation.v2.title'), 254, 21);
+    .text(translate('certification.certificate.v2.title'), 254, 21);
 
   pdf
     .font('Roboto-Regular')
     .fontSize(12)
     .fillColor('#253858')
-    .text(translate('certification.attestation.v2.description'), 0, 79, {
+    .text(translate('certification.certificate.v2.description'), 0, 79, {
       width: pdf.page.width,
       align: 'center',
     });
@@ -209,22 +209,22 @@ const generateV2AttestationTemplate = function ({ pdf, data, translate, isFrench
     .font('Roboto-Regular')
     .fontSize(10)
     .fillColor('#253858')
-    .text(translate('certification.attestation.v2.main-content.first-and-last-names'), 157, 118, { continued: true })
+    .text(translate('certification.certificate.v2.main-content.first-and-last-names'), 157, 118, { continued: true })
     .font('Roboto-Medium')
     .text(`${data.firstName} ${data.lastName}`)
     .moveDown(0.4)
     .font('Roboto-Regular')
-    .text(translate('certification.attestation.v2.main-content.birth'), { continued: true })
+    .text(translate('certification.certificate.v2.main-content.birth'), { continued: true })
     .font('Roboto-Medium')
-    .text(`${birthdate} ${translate('certification.attestation.v2.main-content.from-birthplace')} ${data.birthplace}`)
+    .text(`${birthdate} ${translate('certification.certificate.v2.main-content.from-birthplace')} ${data.birthplace}`)
     .moveDown(0.4)
     .font('Roboto-Regular')
-    .text(translate('certification.attestation.v2.main-content.certification-center'), { continued: true })
+    .text(translate('certification.certificate.v2.main-content.certification-center'), { continued: true })
     .font('Roboto-Medium')
     .text(data.certificationCenter)
     .moveDown(0.4)
     .font('Roboto-Regular')
-    .text(translate('certification.attestation.v2.main-content.delivered-at'), { continued: true })
+    .text(translate('certification.certificate.v2.main-content.delivered-at'), { continued: true })
     .font('Roboto-Medium')
     .text(deliveredAt);
 
@@ -238,7 +238,7 @@ const generateV2AttestationTemplate = function ({ pdf, data, translate, isFrench
       .font('Roboto-Regular')
       .fontSize(8)
       .fillColor('#6b778b')
-      .text(translate('certification.attestation.v2.main-content.professionalizing-certification-message'), 157, 185, {
+      .text(translate('certification.certificate.v2.main-content.professionalizing-certification-message'), 157, 185, {
         width: 300,
       });
   }
@@ -257,7 +257,7 @@ const generateV2AttestationTemplate = function ({ pdf, data, translate, isFrench
     .fontSize(8)
     .fillColor('#253858')
     .text(
-      translate('certification.attestation.v2.score-content.max-reachable-level-indication', {
+      translate('certification.certificate.v2.score-content.max-reachable-level-indication', {
         maxReachableScore: data.maxReachableScore,
         maxReachableLevelOnCertificationDate: data.maxReachableLevelOnCertificationDate,
       }),
@@ -268,7 +268,7 @@ const generateV2AttestationTemplate = function ({ pdf, data, translate, isFrench
 
   if (data.maxReachableLevelOnCertificationDate < MAX_LEVEL) {
     pdf.text(
-      translate('certification.attestation.v2.score-content.absolute-max-level-indication'),
+      translate('certification.certificate.v2.score-content.absolute-max-level-indication'),
       55,
       pdf.page.height - 43,
       { height: 5 },
@@ -280,13 +280,13 @@ const generateV2AttestationTemplate = function ({ pdf, data, translate, isFrench
     .font('Roboto-Regular')
     .fontSize(10)
     .fillColor('#253858')
-    .text(translate('certification.attestation.v2.qr-code-content.title'), 345, 225, { width: 200 });
+    .text(translate('certification.certificate.v2.qr-code-content.title'), 345, 225, { width: 200 });
 
   pdf
     .font('Roboto-Regular')
     .fontSize(10)
     .fillColor('#253858')
-    .text(translate('certification.attestation.v2.qr-code-content.verification-code'), 345, 250, {
+    .text(translate('certification.certificate.v2.qr-code-content.verification-code'), 345, 250, {
       width: 195,
       align: 'center',
     })
@@ -300,15 +300,15 @@ const generateV2AttestationTemplate = function ({ pdf, data, translate, isFrench
     .moveDown(1.2)
     .fontSize(8)
     .fillColor('#253858')
-    .text(translate('certification.attestation.v2.qr-code-content.link.description'), {
+    .text(translate('certification.certificate.v2.qr-code-content.link.description'), {
       width: 195,
       align: 'center',
     })
     .moveDown(0.2)
     .font('Roboto-Medium')
     .fillColor('#095dec')
-    .text(translate('certification.attestation.v2.qr-code-content.link.label'), {
-      link: translate('certification.attestation.v2.qr-code-content.link.url'),
+    .text(translate('certification.certificate.v2.qr-code-content.link.label'), {
+      link: translate('certification.certificate.v2.qr-code-content.link.url'),
       width: 195,
       align: 'center',
     });
@@ -318,13 +318,13 @@ const generateV2AttestationTemplate = function ({ pdf, data, translate, isFrench
     .font('Roboto-Regular')
     .fontSize(10)
     .fillColor('#253858')
-    .text(translate('certification.attestation.v2.signature'), 345, 602);
+    .text(translate('certification.certificate.v2.signature'), 345, 602);
 
   pdf
     .font('Roboto-Regular')
     .fontSize(8)
     .fillColor('#253858')
-    .text(translate('certification.attestation.v2.not-a-certificate'), 0, pdf.page.height - 17, {
+    .text(translate('certification.certificate.v2.not-a-certificate'), 0, pdf.page.height - 17, {
       width: pdf.page.width,
       height: 10,
       align: 'center',
@@ -336,7 +336,7 @@ const generateV2AttestationTemplate = function ({ pdf, data, translate, isFrench
       .font('Roboto-Regular')
       .fontSize(10)
       .fillColor('#253858')
-      .text(translate('certification.attestation.v2.complementary-certification-title'), 345, 338);
+      .text(translate('certification.certificate.v2.complementary-certification-title'), 345, 338);
 
     pdf.roundedRect(343, 355, 197, 160, 5).fillOpacity(0.8).fill('#ffffff');
 
@@ -361,7 +361,7 @@ const generateV2AttestationTemplate = function ({ pdf, data, translate, isFrench
     .fontSize(10)
     .fillColor('#253858')
     .text(
-      translate('certification.attestation.v2.competences-content.title', {
+      translate('certification.certificate.v2.competences-content.title', {
         maxReachableLevelOnCertificationDate: data.maxReachableLevelOnCertificationDate,
       }),
       55,
@@ -375,7 +375,7 @@ const generateV2AttestationTemplate = function ({ pdf, data, translate, isFrench
       .fillColor('#253858')
       .text(data.resultCompetenceTree.areas[index].title, 65, y);
 
-    pdf.text(translate('certification.attestation.v2.competences-content.level'), 276, y);
+    pdf.text(translate('certification.certificate.v2.competences-content.level'), 276, y);
   });
 
   __fillCompetences({ parameters: [272, 295, 319], areaNumber: 0 });

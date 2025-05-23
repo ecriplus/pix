@@ -15,7 +15,7 @@ const generate = ({ certificates, i18n, isFrenchDomainExtension }) => {
   });
 
   doc.info = {
-    Title: i18n.__('certification-confirmation.file-metadata.title'),
+    Title: i18n.__('certification.certificate.file-metadata.title'),
     Author: 'Pix',
     Keywords: 'v2',
     CreationDate: new Date(),

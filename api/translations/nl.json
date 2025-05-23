@@ -12,7 +12,11 @@
     }
   },
   "certification": {
-    "attestation": {
+    "certificate": {
+      "file-name": "certificering-pix-{deliveredAt}.pdf",
+      "file-metadata": {
+        "title": "Pix certificering"
+      },
       "v2": {
         "competences-content": {
           "level": "Niveau",
@@ -31,7 +35,7 @@
         "not-a-certificate": "Dit document is geen certificaat",
         "qr-code-content": {
           "link": {
-            "description": Gebruik deze code op de website :",
+            "description": "Gebruik deze code op de website :",
             "label": "app.pix.org/verification-certificat?lang=nl",
             "url": "https://app.pix.org/verification-certificat?lang=nl"
           },
@@ -268,16 +272,6 @@
       "yourCertificationCenter": "Uw certificeringscentrum"
     },
     "subject": "Uitnodiging voor Pix Certif"
-  },
-  "certification-confirmation": {
-    "absolute-max-level-indication": "Als de 8 niveaus van de Pix-opslagplaats beschikbaar zijn, zal dit maximumaantal 1024 pixels zijn.",
-    "file-name": "certificering-pix-{deliveredAt}.pdf",
-    "file-metadata": {
-      "title": "Pix certificering"
-    },
-    "from-birthplace": "naar {birthplace}",
-    "max-level": "(niveaus op {maxReachableLevelOnCertificationDate})",
-    "max-reachable-level-indication": "* Op de datum waarop deze certificering werd behaald, was het maximaal haalbare aantal pix { maxReachableScore }, wat overeenkomt met het niveau { maxReachableLevelOnCertificationDate }."
   },
   "certification-result-email": {
     "params": {

@@ -156,6 +156,10 @@
   },
   "certification": {
     "certificate": {
+      "file-metadata": {
+        "title": "Certification(s) Pix"
+      },
+      "file-name": "certification-pix-{deliveredAt}.pdf",
       "v2": {
         "competences-content": {
           "level": "Niveau",
@@ -164,11 +168,11 @@
         "complementary-certification-title": "Autre certification obtenue",
         "description": "Ce document atteste l’obtention d’une certification Pix",
         "main-content": {
-          "from-birthplace": " à ",
           "birth": "Date et lieu de naissance : ",
           "certification-center": "Centre de certification : ",
           "delivered-at": "Délivrée le : ",
           "first-and-last-names": "Prénom et nom : ",
+          "from-birthplace": " à ",
           "professionalizing-certification-message": "Le certificat Pix est reconnu comme professionnalisant par France compétences à compter d’un score minimal de 120 PIX"
         },
         "not-a-certificate": "Ce document n'est pas un certificat",
@@ -272,16 +276,6 @@
       "yourCertificationCenter": "Votre centre de certification"
     },
     "subject": "Invitation à rejoindre Pix Certif"
-  },
-  "certification-confirmation": {
-    "absolute-max-level-indication": "Lorsque les 8 niveaux du référentiel Pix seront disponibles, ce nombre maximum sera de 1024 pix.",
-    "file-metadata": {
-      "title": "Certification(s) Pix"
-    },
-    "file-name": "certification-pix-{deliveredAt}.pdf",
-    "from-birthplace": " à { birthplace }",
-    "max-level": "(niveaux sur { maxReachableLevelOnCertificationDate })",
-    "max-reachable-level-indication": "* À la date d’obtention de cette certification, le nombre maximum de pix atteignable était de { maxReachableScore }, correspondant au niveau { maxReachableLevelOnCertificationDate }."
   },
   "certification-result-email": {
     "params": {

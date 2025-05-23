@@ -139,23 +139,23 @@ describe('Integration | Infrastructure | Utils | Pdf | V2 Certificate Pdf', func
     // then
     const content = await _getPDFContent(pdfBuffer);
 
-    expect(content).to.include(translate('certification.attestation.v2.title'));
-    expect(content).to.include(translate('certification.attestation.v2.description'));
+    expect(content).to.include(translate('certification.certificate.v2.title'));
+    expect(content).to.include(translate('certification.certificate.v2.description'));
 
-    expect(content).to.include(translate('certification.attestation.v2.main-content.first-and-last-names'));
+    expect(content).to.include(translate('certification.certificate.v2.main-content.first-and-last-names'));
     expect(content).to.include(`${certificates[0].firstName} ${certificates[0].lastName}`);
-    expect(content).to.include(translate('certification.attestation.v2.main-content.certification-center'));
+    expect(content).to.include(translate('certification.certificate.v2.main-content.certification-center'));
     expect(content).to.include(`${certificates[0].certificationCenter}`);
-    expect(content).to.include(translate('certification.attestation.v2.main-content.birth'));
+    expect(content).to.include(translate('certification.certificate.v2.main-content.birth'));
     expect(content).to.include(
       `${dayjs(certificates[0].birthdate).format('DD/MM/YYYY')} à ${certificates[0].birthplace}`,
     );
-    expect(content).to.include(translate('certification.attestation.v2.main-content.delivered-at'));
+    expect(content).to.include(translate('certification.certificate.v2.main-content.delivered-at'));
     expect(content).to.include(`${dayjs(certificates[0].deliveredAt).format('DD/MM/YYYY')}`);
 
-    expect(content).to.include(translate('certification.attestation.v2.qr-code-content.title'));
-    expect(content).to.include(translate('certification.attestation.v2.qr-code-content.verification-code'));
-    expect(content).to.include(translate('certification.attestation.v2.qr-code-content.link.description'));
+    expect(content).to.include(translate('certification.certificate.v2.qr-code-content.title'));
+    expect(content).to.include(translate('certification.certificate.v2.qr-code-content.verification-code'));
+    expect(content).to.include(translate('certification.certificate.v2.qr-code-content.link.description'));
     expect(content).to.include(`${certificates[0].verificationCode}`);
 
     expect(content).to.include(`${certificates[0].pixScore}`);
@@ -251,7 +251,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V2 Certificate Pdf', func
 
       // then
       const content = await _getPDFContent(pdfBuffer);
-      expect(content).to.include(translate('certification.attestation.v2.score-content.absolute-max-level-indication'));
+      expect(content).to.include(translate('certification.certificate.v2.score-content.absolute-max-level-indication'));
     });
   });
 
@@ -276,7 +276,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V2 Certificate Pdf', func
       // then
       const content = await _getPDFContent(pdfBuffer);
       expect(content).to.not.include(
-        translate('certification.attestation.v2.score-content.absolute-max-level-indication'),
+        translate('certification.certificate.v2.score-content.absolute-max-level-indication'),
       );
     });
   });
@@ -308,7 +308,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V2 Certificate Pdf', func
 
       // then
       const content = await _getPDFContent(pdfBuffer);
-      expect(content).to.include(translate('certification.attestation.v2.complementary-certification-title'));
+      expect(content).to.include(translate('certification.certificate.v2.complementary-certification-title'));
       expect(content).to.include(translate('Vous avez réussi !'));
     });
 

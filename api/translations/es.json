@@ -12,7 +12,11 @@
     }
   },
   "certification": {
-    "attestation": {
+    "certificate": {
+      "file-name": "certification-pix-{deliveredAt}.pdf",
+      "file-metadata": {
+        "title": "Pix certificacion confirmación"
+      },
       "v2": {
         "competences-content": {
           "level": "Nivel",
@@ -268,16 +272,6 @@
       "yourCertificationCenter": "Su centro de certificación"
     },
     "subject": "Invitación a unirse a Pix Certif"
-  },
-  "certification-confirmation": {
-    "absolute-max-level-indication": "Cuando estén disponibles los 8 niveles del repositorio de píxeles, este número máximo será de 1024 píxeles.",
-    "file-name": "certification-pix-{deliveredAt}.pdf",
-    "file-metadata": {
-      "title": "Pix certificacion confirmación"
-    },
-    "from-birthplace": "a { birthplace }",
-    "max-level": "(niveles en { maxReachableLevelOnCertificationDate })",
-    "max-reachable-level-indication": "* En la fecha en que se obtuvo esta certificación, el número máximo de píxeles alcanzables era { maxReachableScore }, correspondiente al nivel { maxReachableLevelOnCertificationDate }."
   },
   "certification-result-email": {
     "params": {

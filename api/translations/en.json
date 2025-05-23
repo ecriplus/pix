@@ -155,7 +155,11 @@
     "yes-or-empty": "(\"yes\" or leave blank)"
   },
   "certification": {
-    "attestation": {
+    "certificate": {
+      "file-metadata": {
+        "title": "Pix certification confirmation"
+      },
+      "file-name": "pix-certification-{deliveredAt}.pdf",
       "v2": {
         "competences-content": {
           "level": "Level",
@@ -268,16 +272,6 @@
       "yourCertificationCenter": "Your certification centre"
     },
     "subject": "Invitation to join Pix Certif"
-  },
-  "certification-confirmation": {
-    "absolute-max-level-indication": "When the 8 levels of the Pix framework will be available, that maximum number will be of 1024 pix.",
-    "file-metadata": {
-      "title": "Pix certification confirmation"
-    },
-    "file-name": "pix-certification-{deliveredAt}.pdf",
-    "from-birthplace": " in { birthplace }",
-    "max-level": "(levels on { maxReachableLevelOnCertificationDate })",
-    "max-reachable-level-indication": "* At the date of the successful completion of this certification, the number of acheivable pix was { maxReachableScore }, corresponding to a level { maxReachableLevelOnCertificationDate }."
   },
   "certification-result-email": {
     "params": {

@@ -16,7 +16,7 @@ import { Certificate } from '../../domain/models/v3/Certificate.js';
 import { CertifiedBadge } from '../../domain/read-models/CertifiedBadge.js';
 import * as competenceTreeRepository from './competence-tree-repository.js';
 
-const findByDivisionForScoIsManagingStudentsOrganization = async function ({ organizationId, division }) {
+const findByDivisionForScoIsManagingStudentsOrganization = async function ({ organizationId, division, locale }) {
   const certificationCourseDTOs = await _selectCertificationCourseDTOs()
     .select({ organizationLearnerId: 'view-active-organization-learners.id' })
     .innerJoin('certification-candidates', function () {
@@ -41,7 +41,7 @@ const findByDivisionForScoIsManagingStudentsOrganization = async function ({ org
     .groupBy('view-active-organization-learners.id', 'certification-courses.id', 'sessions.id', 'assessment-results.id')
     .orderBy('certification-courses.createdAt', 'DESC');
 
-  const competenceTree = await competenceTreeRepository.get();
+  const competenceTree = await competenceTreeRepository.get({ locale });
 
   const mostRecentCertificationsPerOrganizationLearner =
     _filterMostRecentCertificationCoursePerOrganizationLearner(certificationCourseDTOs);
