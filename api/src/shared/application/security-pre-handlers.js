@@ -34,7 +34,6 @@ import * as checkUserIsMemberOfCertificationCenterUsecase from './usecases/check
 import * as checkUserIsMemberOfCertificationCenterSessionUsecase from './usecases/checkUserIsMemberOfCertificationCenterSession.js';
 import * as checkUserOwnsCertificationCourseUseCase from './usecases/checkUserOwnsCertificationCourse.js';
 import * as checkUserIsMemberOfAnOrganizationUseCase from './validator/checkUserIsMemberOfAnOrganization.js';
-
 const { Error: JSONAPIError } = jsonapiSerializer;
 const { has } = lodash;
 

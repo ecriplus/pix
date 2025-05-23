@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { checkLLMChatIsEnabled } from '../../../llm/application/pre-handlers/index.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { handlerWithDependencies } from '../../infrastructure/utils/handlerWithDependencies.js';
 import { passageController } from './controller.js';
@@ -75,6 +76,33 @@ const register = async function (server) {
         handler: handlerWithDependencies(passageController.terminate),
         notes: ['- Permet de marquer un passage comme terminé'],
         tags: ['api', 'passages'],
+      },
+    },
+    {
+      method: 'POST',
+      path: '/api/passages/{passageId}/embed/llm/chats',
+      config: {
+        pre: [
+          {
+            method: checkLLMChatIsEnabled,
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            passageId: identifiersType.passageId.required(),
+          }).required(),
+          payload: Joi.object({
+            configId: Joi.string().required(),
+          }).required(),
+          options: {
+            allowUnknown: true,
+          },
+        },
+        handler: handlerWithDependencies(passageController.startEmbedLlmChat),
+        tags: ['api', 'passages', 'embed', 'llm'],
+        notes: [
+          "Cette route permet de démarrer une conversation avec un LLM dans le cadre de la réalisation d'un embed LLM dans un modulix",
+        ],
       },
     },
   ]);

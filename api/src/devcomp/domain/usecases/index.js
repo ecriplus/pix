@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 
 import * as targetProfileTrainingRepository from '../../../../lib/infrastructure/repositories/target-profile-training-repository.js';
 import * as userRepository from '../../../identity-access-management/infrastructure/repositories/user.repository.js';
+import * as llmApi from '../../../llm/application/api/llm-api.js';
 import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as campaignParticipationRepository from '../../../prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
 import * as targetProfileRepository from '../../../prescription/target-profile/infrastructure/repositories/target-profile-repository.js';
@@ -27,6 +28,7 @@ const dependencies = {
   targetProfileTrainingRepository,
   skillRepository,
   userRepository,
+  llmApi,
 };
 
 const usecasesWithoutInjectedDependencies = {

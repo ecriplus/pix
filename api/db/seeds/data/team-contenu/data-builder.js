@@ -29,6 +29,11 @@ async function teamContenuDataBuilder({ databaseBuilder }) {
   await _createProfilesCollectionCampaign(databaseBuilder);
   await _createCertifiableUser(databaseBuilder);
   await _createPerfectProfileUser(databaseBuilder);
+  // data for LLM
+  databaseBuilder.factory.buildPassage({
+    moduleId: 'coucouMaman',
+    userId: PERFECT_PROFILE_USER_ID,
+  });
 }
 
 export { teamContenuDataBuilder };
