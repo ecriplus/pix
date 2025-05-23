@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { LOCALE } from '../../../shared/domain/constants.js';
-import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
+import { certificationVerificationCodeType, identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { certificateController } from './certificate-controller.js';
 
 const { FRENCH_SPOKEN, ENGLISH_SPOKEN } = LOCALE;
@@ -99,7 +99,9 @@ const register = async function (server) {
       config: {
         validate: {
           payload: Joi.object({
-            verificationCode: Joi.string().min(10).max(10),
+            verificationCode: certificationVerificationCodeType
+              .required()
+              .description('Code de vérification du certificat Pix à vérifier'),
           }),
         },
         auth: false,

@@ -87,17 +87,18 @@ describe('Certification | Results | Unit | Domain | UseCase | getCertificationRe
     context('with a verification code', function () {
       it('returns matching certification', async function () {
         // given
-        const verificationCode = 'P-1234567A';
+        const verificationCode = 'P-123b5c7a';
+        const upperCasedVerificationCode = 'P-123B5C7A';
         const certificationParcoursupRepository = {
           getByVerificationCode: sinon.stub(),
         };
 
         const expectedCertification = domainBuilder.certification.results.parcoursup.buildCertificationResult({
-          verificationCode,
+          verificationCode: upperCasedVerificationCode,
         });
         certificationParcoursupRepository.getByVerificationCode
           .withArgs({
-            verificationCode,
+            verificationCode: upperCasedVerificationCode,
           })
           .resolves([expectedCertification]);
 

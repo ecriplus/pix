@@ -206,7 +206,7 @@ async function isVerificationCodeAvailable({ verificationCode }) {
 
   const exist = await knexConn('certification-courses')
     .select('id')
-    .whereRaw('UPPER(??)=?', ['verificationCode', verificationCode.toUpperCase()])
+    .where('verificationCode', verificationCode)
     .first();
 
   return !exist;

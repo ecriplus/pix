@@ -4,8 +4,9 @@ import { config } from '../../../../shared/config.js';
 import { CertificateVerificationCodeGenerationTooManyTrials } from '../../../../shared/domain/errors.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
 
-const availableCharacters =
-  `${config.availableCharacterForCode.numbers}${config.availableCharacterForCode.letters}`.split('');
+const availableCharacters = `${config.availableCharacterForCode.numbers}${config.availableCharacterForCode.letters}`
+  .toUpperCase()
+  .split('');
 const NB_CHAR = 8;
 const NB_OF_TRIALS = 1000;
 
