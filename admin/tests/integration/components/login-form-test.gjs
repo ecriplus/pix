@@ -172,6 +172,33 @@ module('Integration | Component | login-form', function (hooks) {
       assert.dom(screen.getByText(t(ApiErrorMessages.LOGIN_UNAUTHORIZED.I18N_KEY))).exists();
     });
 
+    test('should display good error message when login with username and password is disabled', async function (assert) {
+      // given
+      const errorResponse = {
+        status: Number(ApiErrorMessages.PIX_ADMIN_LOGIN_FROM_PASSWORD_DISABLED.CODE),
+        responseJSON: {
+          errors: [
+            {
+              status: ApiErrorMessages.PIX_ADMIN_LOGIN_FROM_PASSWORD_DISABLED.CODE,
+              code: 'PIX_ADMIN_LOGIN_FROM_PASSWORD_DISABLED',
+              detail: ApiErrorMessages.PIX_ADMIN_LOGIN_FROM_PASSWORD_DISABLED.I18N_KEY,
+            },
+          ],
+        },
+      };
+      sessionStub.authenticate = () => reject(errorResponse);
+
+      const screen = await render(<template><LoginForm /></template>);
+
+      // when
+      await fillByLabel('Adresse e-mail', 'pix@example.net');
+      await fillByLabel('Mot de passe', 'JeMeLoggue1024');
+      await clickByName('Je me connecte');
+
+      // then
+      assert.dom(screen.getByText(t(ApiErrorMessages.PIX_ADMIN_LOGIN_FROM_PASSWORD_DISABLED.I18N_KEY))).exists();
+    });
+
     test('should display good error message when an error 400 occurred', async function (assert) {
       // given
       const errorResponse = {
