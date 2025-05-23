@@ -153,4 +153,16 @@ describe('Integration | API | Controller Error', function () {
       expect(responseDetail(response)).to.equal('Something went wrong when reaching the LLM Api : some error message');
     });
   });
+
+  context('413 Payload Too Large', function () {
+    const PAYLOAD_TOO_LARGE_ERROR = 413;
+
+    it('responds Payload too large when a LLMDomainErrors.TooLargeMessageInputError error occurs', async function () {
+      routeHandler.throws(new LLMDomainErrors.TooLargeMessageInputError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(PAYLOAD_TOO_LARGE_ERROR);
+      expect(responseDetail(response)).to.equal("You've reach the max characters input");
+    });
+  });
 });

@@ -1,4 +1,4 @@
-import { ChatNotFoundError, ConfigurationNotFoundError } from '../../domain/errors.js';
+import { ChatNotFoundError, ConfigurationNotFoundError, TooLargeMessageInputError } from '../../domain/errors.js';
 import { Chat } from '../../domain/models/Chat.js';
 import * as chatRepository from '../../infrastructure/repositories/chat-repository.js';
 import * as configurationRepository from '../../infrastructure/repositories/configuration-repository.js';
@@ -64,6 +64,9 @@ export async function prompt({ chatId, message }) {
   }
   const chat = await chatRepository.get(chatId);
   const configuration = await configurationRepository.get(chat.configurationId);
+  if (message.length > configuration.challenge.inputMaxChars) throw new TooLargeMessageInputError();
+
+  //maxChars et maxPrompts atteint + save history de conv au fur et à mesure
   return new LLMChatResponseDTO({ message: `${message} BIEN RECU dans chat ${chatId}` });
 }
 

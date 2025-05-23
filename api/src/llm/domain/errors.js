@@ -17,3 +17,9 @@ export class ChatNotFoundError extends DomainError {
     super(`The chat of id "${id}" does not exist`);
   }
 }
+
+export class TooLargeMessageInputError extends DomainError {
+  constructor() {
+    super("You've reach the max characters input");
+  }
+}

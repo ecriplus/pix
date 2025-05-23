@@ -1,7 +1,15 @@
+import ms from 'ms';
+
 import { prompt, startChat } from '../../../../../src/llm/application/api/llm-api.js';
-import { ChatNotFoundError, ConfigurationNotFoundError } from '../../../../../src/llm/domain/errors.js';
+import {
+  ChatNotFoundError,
+  ConfigurationNotFoundError,
+  TooLargeMessageInputError,
+} from '../../../../../src/llm/domain/errors.js';
+import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
 import { CHAT_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
 import { CONFIGURATION_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/configuration-repository.js';
+import { config } from '../../../../../src/shared/config.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import { catchErr, expect, nock, sinon } from '../../../../test-helper.js';
 
@@ -90,6 +98,42 @@ describe('LLM | Integration | Application | API | llm', function () {
         // then
         expect(err).to.be.instanceOf(ChatNotFoundError);
         expect(err.message).to.equal('The chat of id "null id provided" does not exist');
+      });
+    });
+
+    context('when max characters is reached', function () {
+      it('should throw a TooLargeMessageInputError', async function () {
+        // given
+        const chatId = 'chatId';
+        const chat = new Chat({
+          id: chatId,
+          configurationId: 'uneConfigQuiExist',
+        });
+        const config = {
+          llm: {
+            historySize: 123,
+          },
+          challenge: {
+            inputMaxChars: 5,
+            inputMaxPrompts: 789,
+          },
+        };
+
+        const chatsTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
+        await chatsTemporaryStorage.save({
+          key: chat.id,
+          value: chat.toDTO(),
+          expirationDelaySeconds: ms('24h'),
+        });
+
+        nock('https://llm-test.pix.fr/api').get('/configurations/uneConfigQuiExist').reply(200, config);
+
+        // when
+        const err = await catchErr(prompt)({ chatId, message: 'un message' });
+
+        // then
+        expect(err).to.be.instanceOf(TooLargeMessageInputError);
+        expect(err.message).to.equal("You've reach the max characters input");
       });
     });
 

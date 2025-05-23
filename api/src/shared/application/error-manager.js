@@ -494,6 +494,10 @@ function _mapToHttpError(error) {
     return new HttpErrors.ServiceUnavailableError(error.message, error.code);
   }
 
+  if (error instanceof LLMDomainErrors.TooLargeMessageInputError) {
+    return new HttpErrors.PayloadTooLargeError(error.message, error.code);
+  }
+
   if (error instanceof LLMDomainErrors.ChatNotFoundError) {
     return new HttpErrors.BadRequestError(error.message, error.code);
   }
