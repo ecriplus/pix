@@ -91,7 +91,7 @@ module('Integration | Component | analysis-per-tubes-and-competences', function 
           name: t('pages.statistics.gauge.label', { userLevel: 3.5, tubeLevel: 4 }),
         }),
       );
-      assert.ok(filledTable.getByRole('cell', { name: t('pages.statistics.level.advanced') }));
+      assert.ok(filledTable.getByRole('cell', { name: t('pages.statistics.level.independent') }));
 
       assert.ok(
         filledTable.getByRole('columnheader', {

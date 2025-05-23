@@ -4,8 +4,8 @@ import { t } from 'ember-intl';
 
 const MAX_LEVEL = {
   novice: 3,
-  independent: 4,
-  advanced: 6,
+  independent: 5,
+  advanced: 7,
 };
 
 export default class TagLevel extends Component {
