@@ -100,7 +100,8 @@ describe('Acceptance | Script | Get Elements as CSV', function () {
 "30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t12\t5\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t"Les 3 piliers de Pix"\t"bac-a-sable"\t"6282925d-4775-4bca-b513-4c3009ec5886"
 "c23436d4-6261-49f1-b50d-13a547529c29"\t"qrocm"\t13\t6\t"4ce2a31a-6584-4dae-87c6-d08b58d0f3b9"\t"Connaissez-vous bien Pix"\t"bac-a-sable"\t"6282925d-4775-4bca-b513-4c3009ec5886"
 "0e3315fd-98ad-492f-9046-4aa867495d84"\t"embed"\t14\t7\t"46577fb1-aadb-49ba-b3fd-721a11da8eb4"\t"Embed non-auto"\t"bac-a-sable"\t"6282925d-4775-4bca-b513-4c3009ec5886"
-"0e3315fd-98ad-492f-9046-4aa867495d85"\t"custom"\t15\t8\t"46577fb1-aadb-49ba-b3fd-721a11da8eb5"\t"Elément custom"\t"bac-a-sable"\t"6282925d-4775-4bca-b513-4c3009ec5886"`);
+"0e3315fd-98ad-492f-9046-4aa867495d85"\t"custom"\t15\t8\t"46577fb1-aadb-49ba-b3fd-721a11da8eb5"\t"Elément custom"\t"bac-a-sable"\t"6282925d-4775-4bca-b513-4c3009ec5886"
+"ed795d29-5f04-499c-a9c8-4019125c5cb1"\t"qab"\t16\t9\t"cf436761-f56d-4b01-83f9-942afe9ce72c"\t"test qab"\t"bac-a-sable"\t"6282925d-4775-4bca-b513-4c3009ec5886"`);
     });
   });
 });

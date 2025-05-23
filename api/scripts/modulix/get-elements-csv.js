@@ -39,6 +39,7 @@ export function getElements(modules) {
     'expand',
     'flashcards',
     'image',
+    'qab',
     'qcm',
     'qcu',
     'qcu-declarative',
