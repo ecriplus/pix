@@ -156,6 +156,38 @@
   },
   "certification": {
     "attestation": {
+      "v2": {
+        "competences-content": {
+          "level": "Level",
+          "title": "Certified competences (levels on { maxReachableLevelOnCertificationDate })"
+        },
+        "complementary-certification-title": "Other certification obtained",
+        "description": "This document confirms the successful completion of a Pix certification",
+        "main-content": {
+          "birth": "Date and place of birth: ",
+          "certification-center": "Certification centre: ",
+          "delivered-at": "Issued on: ",
+          "first-and-last-names": "First name and last name: ",
+          "from-birthplace": " on ",
+          "professionalizing-certification-message": "Le certificat Pix est reconnu comme professionnalisant par France compétences à compter d’un score minimal de 120 PIX"
+        },
+        "not-a-certificate": "This document isn’t a certificate",
+        "qr-code-content": {
+          "link": {
+            "description": "Use this code on the site:",
+            "label": "app.pix.org/verification-certificat?lang=en",
+            "url": "https://app.pix.org/verification-certificat?lang=en"
+          },
+          "title": "Check the authenticity of the certification",
+          "verification-code": "Verification code"
+        },
+        "score-content": {
+          "absolute-max-level-indication": "When the 8 levels of the Pix framework will be available, that maximum number will be of 1024 pix.",
+          "max-reachable-level-indication": "* At the date of the successful completion of this certification, the number of acheivable pix was { maxReachableScore }, corresponding to a level { maxReachableLevelOnCertificationDate }."
+        },
+        "signature": "Pix GIP Director, Benjamin Marteau",
+        "title": "Confirmation"
+      },
       "v3": {
         "complementary-content": {
           "title": "Complementary certification obtained:"

@@ -13,6 +13,38 @@
   },
   "certification": {
     "attestation": {
+      "v2": {
+        "competences-content": {
+          "level": "Niveau",
+          "title": "Gecertificeerde vaardigheden (niveaus op {maxReachableLevelOnCertificationDate})"
+        },
+        "complementary-certification-title": "Andere behaalde certificering",
+        "description": "Dit document verklaart dat Pix",
+        "main-content": {
+          "from-birthplace": " naar ",
+          "birth": "Geboortedatum en -plaats : ",
+          "certification-center": "Certificeringscentrum : ",
+          "delivered-at": "Uitgegeven op : ",
+          "first-and-last-names": "Voornaam en achternaam : ",
+          "professionalizing-certification-message": "Le certificat Pix est reconnu comme professionnalisant par France compétences à compter d’un score minimal de 120 PIX"
+        },
+        "not-a-certificate": "Dit document is geen certificaat",
+        "qr-code-content": {
+          "link": {
+            "description": Gebruik deze code op de website :",
+            "label": "app.pix.org/verification-certificat?lang=nl",
+            "url": "https://app.pix.org/verification-certificat?lang=nl"
+          },
+          "title": "Controleer de echtheid van de certificering",
+          "verification-code": "Verificatiecode"
+        },
+        "score-content": {
+          "absolute-max-level-indication": "Als de 8 niveaus van de Pix-opslagplaats beschikbaar zijn, zal dit maximumaantal 1024 pixels zijn.",
+          "max-reachable-level-indication": "* Op de datum waarop deze certificering werd behaald, was het maximaal haalbare aantal pix { maxReachableScore }, wat overeenkomt met het niveau { maxReachableLevelOnCertificationDate }."
+        },
+        "signature": "Benjamin Marteau, directeur van GIP Pix",
+        "title": "Getuigschrift"
+      },
       "v3": {
         "main-content": {
           "birth": "né(e) le : {birthdate} à {birthplace}",

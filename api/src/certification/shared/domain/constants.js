@@ -25,4 +25,3 @@ export const SUBSCRIPTION_TYPES = Object.freeze({
 });
 
 export const DEFAULT_SESSION_DURATION_MINUTES = 105;
-export const CURRENT_CERTIFICATION_VERSION = 2;
