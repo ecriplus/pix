@@ -94,34 +94,180 @@ module('Integration | Component | Module | Embed', function (hooks) {
     });
 
     module('when a message is received', function () {
-      module('when embed does not require completion', function () {
-        test('should not call the onAnswer method', async function (assert) {
-          // given
-          const embed = {
-            id: 'id',
-            title: 'Simulateur',
-            isCompletionRequired: false,
-            url: 'https://example.org',
-            height: 800,
-          };
-          const onElementAnswerStub = sinon.stub();
-          const screen = await render(
-            <template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>,
-          );
-          await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
+      module('when message data has no type property', function () {
+        module('when embed requires completion', function () {
+          test('should call the onAnswer method', async function (assert) {
+            // given
+            const embed = {
+              id: 'id',
+              title: 'Simulateur',
+              isCompletionRequired: true,
+              url: 'https://example.org',
+              height: 800,
+            };
+            const onElementAnswerStub = sinon.stub();
+            const screen = await render(
+              <template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>,
+            );
+            await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
 
-          // when
-          const iframe = screen.getByTitle('Simulateur');
-          const event = new MessageEvent('message', {
-            data: { answer: 'toto', from: 'pix' },
-            origin: 'https://epreuves.pix.fr',
-            source: iframe.contentWindow,
+            // when
+            const iframe = screen.getByTitle('Simulateur');
+            const event = new MessageEvent('message', {
+              data: { answer: 'toto', from: 'pix' },
+              origin: 'https://epreuves.pix.fr',
+              source: iframe.contentWindow,
+            });
+            window.dispatchEvent(event);
+
+            // then
+            sinon.assert.called(onElementAnswerStub);
+            assert.ok(true);
           });
-          window.dispatchEvent(event);
+        });
 
-          // then
-          sinon.assert.notCalled(onElementAnswerStub);
-          assert.ok(true);
+        module('when embed does not require completion', function () {
+          test('should not call the onAnswer method', async function (assert) {
+            // given
+            const embed = {
+              id: 'id',
+              title: 'Simulateur',
+              isCompletionRequired: false,
+              url: 'https://example.org',
+              height: 800,
+            };
+            const onElementAnswerStub = sinon.stub();
+            const screen = await render(
+              <template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>,
+            );
+            await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
+
+            // when
+            const iframe = screen.getByTitle('Simulateur');
+            const event = new MessageEvent('message', {
+              data: { answer: 'toto', from: 'pix' },
+              origin: 'https://epreuves.pix.fr',
+              source: iframe.contentWindow,
+            });
+            window.dispatchEvent(event);
+
+            // then
+            sinon.assert.notCalled(onElementAnswerStub);
+            assert.ok(true);
+          });
+        });
+
+        module('when message has no answer', function () {
+          test('should not call the onAnswer method', async function (assert) {
+            // given
+            const embed = {
+              id: 'id',
+              title: 'Simulateur',
+              isCompletionRequired: true,
+              url: 'https://example.org',
+              height: 800,
+            };
+            const onElementAnswerStub = sinon.stub();
+            const screen = await render(
+              <template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>,
+            );
+            await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
+
+            // when
+            const iframe = screen.getByTitle('Simulateur');
+            const event = new MessageEvent('message', {
+              data: { start: 'true', from: 'pix' },
+              origin: 'https://epreuves.pix.fr',
+              source: iframe.contentWindow,
+            });
+            window.dispatchEvent(event);
+
+            // then
+            sinon.assert.notCalled(onElementAnswerStub);
+            assert.ok(true);
+          });
+        });
+      });
+
+      module('when message data has type init', function () {
+        module('when message data has enableFetchFromApi=true', function () {
+          test('should call embed api proxy service', async function (assert) {
+            // given
+            const embed = {
+              id: 'id',
+              title: 'Simulateur',
+              isCompletionRequired: true,
+              url: 'https://example.org',
+              height: 800,
+            };
+            const passageId = '5729837548';
+            const requestsPort = new MessageChannel().port1;
+            const forwardStub = sinon.stub();
+            this.owner.register(
+              'service:embed-api-proxy',
+              {
+                forward: forwardStub,
+              },
+              { instantiate: false },
+            );
+            const screen = await render(
+              <template><ModulixEmbed @embed={{embed}} @passageId={{passageId}} /></template>,
+            );
+            await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
+
+            // when
+            const iframe = screen.getByTitle('Simulateur');
+            const event = new MessageEvent('message', {
+              data: { type: 'init', from: 'pix', enableFetchFromApi: true },
+              origin: 'https://epreuves.pix.fr',
+              source: iframe.contentWindow,
+              ports: [requestsPort],
+            });
+            window.dispatchEvent(event);
+
+            // then
+            sinon.assert.calledWith(forwardStub, sinon.match.object, requestsPort, `/api/passages/${passageId}/embed/`);
+            assert.ok(true);
+          });
+        });
+
+        module('when message data has enableFetchFromApi=false', function () {
+          test('should not call embed api proxy service', async function (assert) {
+            // given
+            const embed = {
+              id: 'id',
+              title: 'Simulateur',
+              isCompletionRequired: true,
+              url: 'https://example.org',
+              height: 800,
+            };
+            const passageId = '5729837548';
+            const forwardStub = sinon.stub();
+            this.owner.register(
+              'service:embed-api-proxy',
+              {
+                forward: forwardStub,
+              },
+              { instantiate: false },
+            );
+            const screen = await render(
+              <template><ModulixEmbed @embed={{embed}} @passageId={{passageId}} /></template>,
+            );
+            await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
+
+            // when
+            const iframe = screen.getByTitle('Simulateur');
+            const event = new MessageEvent('message', {
+              data: { type: 'init', from: 'pix', enableFetchFromApi: false },
+              origin: 'https://epreuves.pix.fr',
+              source: iframe.contentWindow,
+            });
+            window.dispatchEvent(event);
+
+            // then
+            sinon.assert.notCalled(forwardStub);
+            assert.ok(true);
+          });
         });
       });
 
@@ -145,37 +291,6 @@ module('Integration | Component | Module | Embed', function (hooks) {
           const iframe = screen.getByTitle('Simulateur');
           const event = new MessageEvent('message', {
             data: { answer: 'toto', from: 'nsa' },
-            origin: 'https://epreuves.pix.fr',
-            source: iframe.contentWindow,
-          });
-          window.dispatchEvent(event);
-
-          // then
-          sinon.assert.notCalled(onElementAnswerStub);
-          assert.ok(true);
-        });
-      });
-
-      module('when message is not an answer', function () {
-        test('should not call the onAnswer method', async function (assert) {
-          // given
-          const embed = {
-            id: 'id',
-            title: 'Simulateur',
-            isCompletionRequired: true,
-            url: 'https://example.org',
-            height: 800,
-          };
-          const onElementAnswerStub = sinon.stub();
-          const screen = await render(
-            <template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>,
-          );
-          await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
-
-          // when
-          const iframe = screen.getByTitle('Simulateur');
-          const event = new MessageEvent('message', {
-            data: { start: 'true', from: 'pix' },
             origin: 'https://epreuves.pix.fr',
             source: iframe.contentWindow,
           });
@@ -244,37 +359,6 @@ module('Integration | Component | Module | Embed', function (hooks) {
 
           // then
           sinon.assert.notCalled(onElementAnswerStub);
-          assert.ok(true);
-        });
-      });
-
-      module('otherwise when everything is ok', function () {
-        test('should call the onAnswer method', async function (assert) {
-          // given
-          const embed = {
-            id: 'id',
-            title: 'Simulateur',
-            isCompletionRequired: true,
-            url: 'https://example.org',
-            height: 800,
-          };
-          const onElementAnswerStub = sinon.stub();
-          const screen = await render(
-            <template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>,
-          );
-          await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
-
-          // when
-          const iframe = screen.getByTitle('Simulateur');
-          const event = new MessageEvent('message', {
-            data: { answer: 'toto', from: 'pix' },
-            origin: 'https://epreuves.pix.fr',
-            source: iframe.contentWindow,
-          });
-          window.dispatchEvent(event);
-
-          // then
-          sinon.assert.called(onElementAnswerStub);
           assert.ok(true);
         });
       });
