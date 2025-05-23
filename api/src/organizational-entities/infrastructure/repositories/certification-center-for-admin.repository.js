@@ -8,6 +8,7 @@ const save = async function (certificationCenter) {
     name: certificationCenter.name,
     type: certificationCenter.type,
     externalId: certificationCenter.externalId,
+    createdBy: certificationCenter.createdBy,
   });
   return _toDomain(certificationCenterCreated);
 };
@@ -55,6 +56,7 @@ function _toDomain(certificationCenterDTO) {
       name: certificationCenterDTO.name,
       externalId: certificationCenterDTO.externalId,
       createdAt: certificationCenterDTO.createdAt,
+      createdBy: certificationCenterDTO.createdBy,
       updatedAt: certificationCenterDTO.updatedAt,
       isComplementaryAlonePilot: undefined,
     },

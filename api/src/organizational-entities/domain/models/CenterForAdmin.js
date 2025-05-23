@@ -10,6 +10,7 @@ class CenterForAdmin {
    * @param {string} params.center.name
    * @param {string} params.center.externalId
    * @param {Date} params.center.createdAt
+   * @param {number} params.center.createdBy
    * @param {Date} params.center.updatedAt
    * @param {Date} params.center.archivedAt
    * @param {number} params.archivistFullName
@@ -25,6 +26,7 @@ class CenterForAdmin {
     this.name = center.name;
     this.externalId = center.externalId;
     this.createdAt = center.createdAt;
+    this.createdBy = center.createdBy;
     this.updatedAt = center.updatedAt;
     this.archivedAt = center.archivedAt;
     this.archivistFullName = archivistFullName;
