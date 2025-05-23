@@ -5,6 +5,7 @@ import { decodeIfValid } from '../../../../src/shared/domain/services/token-serv
 import { createServer, databaseBuilder, expect, knex } from '../../../test-helper.js';
 
 const { ROLES } = PIX_ADMIN;
+import { config } from '../../../../src/shared/config.js';
 
 describe('Acceptance | Identity Access Management | Route | Token', function () {
   let server;
@@ -21,6 +22,7 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
     let userId;
 
     beforeEach(async function () {
+      config.authentication.permitPixAdminLoginFromPassword = true;
       userId = databaseBuilder.factory.buildUser.withRawPassword({
         email: userEmailAddress,
         rawPassword: userPassword,
