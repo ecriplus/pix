@@ -1,7 +1,6 @@
 import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
-import { setFlatpickrDate } from 'ember-flatpickr/test-support/helpers';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -60,7 +59,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
       // then
       assert.dom(screen.getByRole('textbox', { name: 'Prénom' })).hasValue('Fabrice');
       assert.dom(screen.getByRole('textbox', { name: 'Nom de famille' })).hasValue('Gadjo');
-      assert.dom('#birthdate').hasValue('2000-12-15');
+      assert.dom(screen.getByLabelText('Date de naissance')).hasValue('2000-12-15');
     });
 
     module('#sex', function () {
@@ -214,7 +213,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
 
       await fillByLabel('Nom de famille', 'Belmans');
       await fillByLabel('Prénom', 'Gideona');
-      setFlatpickrDate('#birthdate', new Date('1861-03-17'));
+      await fillByLabel('Date de naissance', '1861-03-17');
       await clickByName('Femme');
 
       await click(screen.getByRole('button', { name: 'Pays de naissance' }));
@@ -231,7 +230,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
       // then
       assert.dom(screen.getByRole('textbox', { name: 'Prénom' })).hasValue('Fabrice');
       assert.dom(screen.getByRole('textbox', { name: 'Nom de famille' })).hasValue('Gadjo');
-      assert.dom('#birthdate').hasValue('2000-12-15');
+      assert.dom(screen.getByLabelText('Date de naissance')).hasValue('2000-12-15');
       assert.dom(screen.getByRole('radio', { name: 'Homme' })).isChecked();
       assert.dom(screen.queryByRole('textbox', { name: 'Code Insee de naissance' })).doesNotExist();
       assert.dom(screen.queryByRole('textbox', { name: 'Code postal de naissance' })).doesNotExist();
@@ -261,7 +260,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
       );
       await fillByLabel('Nom de famille', 'Belmans');
       await fillByLabel('Prénom', 'Gideona');
-      setFlatpickrDate('#birthdate', new Date('1861-03-17'));
+      await fillByLabel('Date de naissance', '1861-03-17');
       await clickByName('Femme');
 
       await click(screen.getByRole('button', { name: 'Pays de naissance' }));
@@ -341,7 +340,7 @@ module('Integration | Component | certifications/candidate-edit-modal', function
       );
       await fillByLabel('Nom de famille', 'Belmans');
       await fillByLabel('Prénom', 'Gideon');
-      setFlatpickrDate('#birthdate', new Date('1861-03-17'));
+      await fillByLabel('Date de naissance', '1861-03-17');
       await clickByName('Homme');
 
       await click(screen.getByRole('button', { name: 'Pays de naissance' }));
