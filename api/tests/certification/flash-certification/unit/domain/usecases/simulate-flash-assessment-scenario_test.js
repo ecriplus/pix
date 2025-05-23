@@ -29,9 +29,9 @@ describe('#simulateFlashAssessmentScenario', function () {
       );
 
       expect(challengeRepositoryStub.findActiveFlashCompatible).to.have.been.calledOnceWithExactly({
-        locale,
-        accessibilityAdjustmentNeeded,
         complementaryCertificationId: complementaryCertification.id,
+        locale,
+        accessibilityAdjustmentNeeded: undefined,
       });
     });
   });

@@ -24,23 +24,119 @@ export async function simulateFlashAssessmentScenario({
   accessibilityAdjustmentNeeded,
   complementaryCertificationKey,
 }) {
-  const complementaryCertification = complementaryCertificationKey
-    ? await complementaryCertificationRepository.getByKey(complementaryCertificationKey)
-    : null;
+  if (complementaryCertificationKey) {
+    return _simulateComplementaryCertificationScenario({
+      complementaryCertificationKey,
+      challengeRepository,
+      complementaryCertificationRepository,
+      flashAlgorithmService,
+      sharedFlashAlgorithmConfigurationRepository,
+      pickChallenge,
+      pickAnswerStatus,
+      initialCapacity,
+      variationPercent,
+      locale,
+    });
+  } else {
+    return _simulateCoreCertificationScenario({
+      locale,
+      accessibilityAdjustmentNeeded,
+      challengeRepository,
+      flashAlgorithmService,
+      sharedFlashAlgorithmConfigurationRepository,
+      pickChallenge,
+      pickAnswerStatus,
+      initialCapacity,
+      variationPercent,
+    });
+  }
+}
 
-  const challenges = await challengeRepository.findActiveFlashCompatible({
+async function _simulateComplementaryCertificationScenario({
+  locale,
+  complementaryCertificationKey,
+  pickChallenge,
+  pickAnswerStatus,
+  initialCapacity,
+  variationPercent,
+  challengeRepository,
+  flashAlgorithmService,
+  complementaryCertificationRepository,
+  sharedFlashAlgorithmConfigurationRepository,
+}) {
+  const complementaryCertification = await complementaryCertificationRepository.getByKey(complementaryCertificationKey);
+
+  const challenges = await _getChallenges({
+    locale,
+    challengeRepository,
+    complementaryCertification,
+  });
+
+  const mostRecentAlgorithmConfiguration = await sharedFlashAlgorithmConfigurationRepository.getMostRecent();
+
+  return _simulation({
+    challenges,
+    mostRecentAlgorithmConfiguration,
+    flashAlgorithmService,
+    pickChallenge,
+    pickAnswerStatus,
+    initialCapacity,
+    variationPercent,
+  });
+}
+
+async function _simulateCoreCertificationScenario({
+  pickChallenge,
+  pickAnswerStatus,
+  initialCapacity,
+  variationPercent,
+  challengeRepository,
+  sharedFlashAlgorithmConfigurationRepository,
+  flashAlgorithmService,
+  locale,
+  accessibilityAdjustmentNeeded,
+}) {
+  const challenges = await _getChallenges({
+    challengeRepository,
+    locale,
+    accessibilityAdjustmentNeeded,
+  });
+
+  const mostRecentAlgorithmConfiguration = await sharedFlashAlgorithmConfigurationRepository.getMostRecent();
+
+  return _simulation({
+    challenges,
+    mostRecentAlgorithmConfiguration,
+    flashAlgorithmService,
+    pickChallenge,
+    pickAnswerStatus,
+    initialCapacity,
+    variationPercent,
+  });
+}
+
+function _getChallenges({ challengeRepository, locale, accessibilityAdjustmentNeeded, complementaryCertification }) {
+  return challengeRepository.findActiveFlashCompatible({
     locale,
     accessibilityAdjustmentNeeded,
     complementaryCertificationId: complementaryCertification?.id,
   });
+}
 
-  const configurationUsedInProduction = await sharedFlashAlgorithmConfigurationRepository.getMostRecent();
-
+function _simulation({
+  challenges,
+  mostRecentAlgorithmConfiguration,
+  flashAlgorithmService,
+  pickChallenge,
+  pickAnswerStatus,
+  initialCapacity,
+  variationPercent,
+}) {
   const flashAssessmentAlgorithm = new FlashAssessmentAlgorithm({
     flashAlgorithmImplementation: flashAlgorithmService,
     configuration: new FlashAssessmentAlgorithmConfiguration({
-      ...configurationUsedInProduction,
-      variationPercent: variationPercent ?? configurationUsedInProduction.variationPercent,
+      ...mostRecentAlgorithmConfiguration,
+      variationPercent: variationPercent ?? mostRecentAlgorithmConfiguration.variationPercent,
     }),
   });
 
