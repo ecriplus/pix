@@ -8,6 +8,7 @@ import {
   MissingUserAccountError,
   PasswordNotMatching,
   PasswordResetDemandNotFoundError,
+  PixAdminLoginFromPasswordDisabledError,
   UserCantBeCreatedError,
   UserShouldChangePasswordError,
 } from '../domain/errors.js';
@@ -40,6 +41,10 @@ const authenticationDomainErrorMappingConfiguration = [
   {
     name: PasswordResetDemandNotFoundError.name,
     httpErrorFn: (error) => new HttpErrors.NotFoundError(error.message),
+  },
+  {
+    name: PixAdminLoginFromPasswordDisabledError.name,
+    httpErrorFn: (error) => new HttpErrors.UnauthorizedError(error.message, error.code),
   },
   {
     name: UserCantBeCreatedError.name,
