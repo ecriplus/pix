@@ -8,8 +8,4 @@ const removeByOrganizationLearnerIds = function ({ organizationLearnerIds, userI
     .update({ deletedAt: new Date(), deletedBy: userId });
 };
 
-const removeByOrganizationLearnerId = function ({ organizationLearnerId, userId, campaignParticipationApi }) {
-  return campaignParticipationApi.deleteAllForOrganizationLearner({ organizationLearnerId, userId });
-};
-
-export { removeByOrganizationLearnerId, removeByOrganizationLearnerIds };
+export { removeByOrganizationLearnerIds };

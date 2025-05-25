@@ -5,7 +5,9 @@ const deleteOrganizationLearners = async function ({
   userId,
   organizationId,
   organizationLearnerRepository,
-  campaignParticipationRepository,
+  featureToggles,
+  campaignParticipationRepositoryfromBC,
+  badgeAcquisitionRepository,
 }) {
   const organizationLearnersFromOrganization =
     await organizationLearnerRepository.findOrganizationLearnersByOrganizationId({
@@ -23,12 +25,25 @@ const deleteOrganizationLearners = async function ({
   );
 
   for (const organizationLearner of organizationLearnersToDelete) {
-    await campaignParticipationRepository.removeByOrganizationLearnerId({
-      organizationLearnerId: organizationLearner.id,
-      userId,
-    });
     organizationLearner.delete(userId);
     await organizationLearnerRepository.remove(organizationLearner);
+
+    const isAnonymizationWithDeletionEnabled = await featureToggles.get('isAnonymizationWithDeletionEnabled');
+
+    const campaignParticipations =
+      await campaignParticipationRepositoryfromBC.getAllCampaignParticipationsForOrganizationLearner({
+        organizationLearnerId: organizationLearner.id,
+      });
+
+    for (const campaignParticipation of campaignParticipations) {
+      campaignParticipation.delete(userId, isAnonymizationWithDeletionEnabled);
+      await campaignParticipationRepositoryfromBC.remove(campaignParticipation.dataToUpdateOnDeletion);
+    }
+
+    const campaignParticipationIds = campaignParticipations.map(({ id }) => id);
+    await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
+      campaignParticipationIds,
+    );
   }
 };
 
