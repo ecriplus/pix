@@ -109,7 +109,7 @@
           "element": {
             "id": "6080355f-69c8-4803-a7e2-b301556ac9e3",
             "type": "text",
-            "content": "<ul><li>Le prompt est la question posée ou la consigne donnée à l’IA conversationnelle 🤖.</li><li>Les réponses de l’IA conversationnelle &nbsp;s'affichent comme dans une conversation de messagerie instantanée.&nbsp;</li><li>Il y a toujours une zone pour saisir le prompt suivant.</li></ul>"
+            "content": "<ul><li>Le prompt est la question posée ou la consigne donnée à l’IA conversationnelle 🤖.</li><li>Les réponses de l’IA conversationnelle s'affichent comme dans une conversation de messagerie instantanée.&nbsp;</li><li>Il y a toujours une zone pour saisir le prompt suivant.</li></ul>"
           }
         }
       ]
