@@ -173,6 +173,42 @@ module('Integration | Component | Certifications | Certificate | Competences det
     });
   });
 
+  module('when a level is -1', function () {
+    test('should not display the level', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const area2 = store.createRecord('area', {
+        code: 2,
+        id: 'recs7Gpf90ln8NCv7',
+        name: '2. Deuxième domaine',
+        title: 'Domaine 2',
+        resultCompetences: [
+          store.createRecord('result-competence', {
+            index: '1.1',
+            name: 'Competence 1 du domaine 2',
+            level: -1,
+          }),
+        ],
+      });
+
+      const resultCompetenceTree = store.createRecord('result-competence-tree', {
+        areas: [area2],
+      });
+      const certification = store.createRecord('certification', {
+        resultCompetenceTree,
+      });
+      // when
+      const screen = await render(<template><CompetencesDetails @certificate={{certification}} /></template>);
+
+      // then
+      const tabpanel = screen.getByRole('tabpanel', { name: 'Domaine 2' });
+      const displayedCompetences = within(tabpanel).getAllByRole('listitem');
+      assert.dom(within(displayedCompetences[0]).getByText('Competence 1 du domaine 2')).exists();
+      assert.dom(within(displayedCompetences[0]).getByText('-')).exists();
+      assert.dom(within(displayedCompetences[0]).queryByText('-1')).doesNotExist();
+    });
+  });
+
   test('should update tabpanel on tab click', async function (assert) {
     // given
     const store = this.owner.lookup('service:store');

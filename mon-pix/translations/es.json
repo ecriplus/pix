@@ -108,6 +108,7 @@
       "nl": "Holandés"
     },
     "level": "nivel",
+    "no-level": "No nivel",
     "loading": {
       "default": "Cargando",
       "results": "Preparación de tus resultados",

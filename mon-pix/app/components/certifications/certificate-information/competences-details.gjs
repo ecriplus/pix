@@ -7,7 +7,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
-import { eq } from 'ember-truth-helpers';
+import { eq, gte } from 'ember-truth-helpers';
 
 export default class CertificateCompetencesDetails extends Component {
   @service url;
@@ -114,7 +114,11 @@ export default class CertificateCompetencesDetails extends Component {
                 {{#each area.resultCompetences as |resultCompetence|}}
                   <li data-competence-index={{resultCompetence.index}}>
                     <span>{{resultCompetence.name}}</span>
-                    <span><small class="sr-only">{{t "common.level"}}</small>{{resultCompetence.level}}</span>
+                    {{#if (gte resultCompetence.level 0)}}
+                      <span><small class="sr-only">{{t "common.level"}}</small>{{resultCompetence.level}}</span>
+                    {{else}}
+                      <span>-<small class="sr-only">{{t "common.no-level"}}</small></span>
+                    {{/if}}
                   </li>
                 {{/each}}
               </ol>

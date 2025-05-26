@@ -1,6 +1,11 @@
 @use 'pix-design-tokens/typography';
 
 .v2-complementary-certification-details-image {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-2x);
+  align-items: center;
+  justify-content: center;
   text-align: center;
 
   img {

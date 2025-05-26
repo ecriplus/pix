@@ -108,6 +108,7 @@
       "nl": "Nederlands"
     },
     "level": "niveau",
+    "no-level": "Geen niveau",
     "loading": {
       "default": "Bezig met laden",
       "results": "Je resultaten voorbereiden",
