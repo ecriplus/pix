@@ -53,24 +53,6 @@ function _removeNonCanonicalChars(str) {
   return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
-function toArrayOfFixedLengthStringsConservingWords(str, maxLength) {
-  const result = [];
-  const words = str.split(' ');
-  let index = 0;
-  words.forEach((word) => {
-    if (!result[index]) {
-      result[index] = '';
-    }
-    if (result[index].length + word.length <= maxLength) {
-      result[index] += `${word} `;
-    } else {
-      index++;
-      result[index] = `${word} `;
-    }
-  });
-  return result.map((str) => str.trim());
-}
-
 function normalizeAndRemoveAccents(str) {
   return str
     .normalize('NFD')
@@ -91,5 +73,4 @@ export {
   normalizeAndRemoveAccents,
   normalizeAndSortChars,
   splitIntoWordsAndRemoveBackspaces,
-  toArrayOfFixedLengthStringsConservingWords,
 };
