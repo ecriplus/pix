@@ -76,6 +76,9 @@ export default class LoginForm extends Component {
           htmlSafe: true,
         });
         break;
+      case 'PIX_ADMIN_LOGIN_FROM_PASSWORD_DISABLED':
+        this.errorMessage = this.intl.t(ENV.APP.API_ERROR_MESSAGES.PIX_ADMIN_LOGIN_FROM_PASSWORD_DISABLED.I18N_KEY);
+        break;
       default:
         this.errorMessage = this.intl.t(this._getI18nKeyByStatus(responseError.status));
     }

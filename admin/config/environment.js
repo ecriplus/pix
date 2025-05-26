@@ -45,6 +45,10 @@ module.exports = function (environment) {
           CODE: '401',
           I18N_KEY: 'common.api-error-messages.login-unauthorized-error',
         },
+        PIX_ADMIN_LOGIN_FROM_PASSWORD_DISABLED: {
+          CODE: '401',
+          I18N_KEY: 'common.api-error-messages.pix-admin-login-from-password-disabled-error',
+        },
         USER_IS_TEMPORARY_BLOCKED: {
           CODE: '403',
           I18N_KEY: 'common.api-error-messages.login-user-temporary-blocked-error',

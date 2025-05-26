@@ -205,6 +205,7 @@ const configuration = (function () {
       revokedUserAccessLifespanMs: ms(process.env.REVOKED_USER_ACCESS_LIFESPAN || '7d'),
       tokenForStudentReconciliationLifespan: '1h',
       passwordResetTokenLifespan: '1h',
+      permitPixAdminLoginFromPassword: toBoolean(process.env.PIX_ADMIN_LOGIN_FROM_PASSWORD_ENABLED),
     },
     authenticationSession: {
       temporaryStorage: {
@@ -556,6 +557,7 @@ const configuration = (function () {
     config.temporaryKey.secret = 'the-password-must-be-at-least-32-characters-long';
 
     config.temporaryStorage.redisUrl = process.env.TEST_REDIS_URL;
+    config.authentication.permitPixAdminLoginFromPassword = false;
 
     config.saml.accessTokenLifespanMs = 1000;
 

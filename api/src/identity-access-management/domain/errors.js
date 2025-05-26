@@ -70,6 +70,12 @@ class PasswordResetDemandNotFoundError extends DomainError {
   }
 }
 
+class PixAdminLoginFromPasswordDisabledError extends DomainError {
+  constructor() {
+    super('PixAdminLoginFromPassword disabled. Use SSO authentication.', 'PIX_ADMIN_LOGIN_FROM_PASSWORD_DISABLED');
+  }
+}
+
 class UserCantBeCreatedError extends DomainError {
   constructor(message = "L'utilisateur ne peut pas être créé") {
     super(message);
@@ -114,6 +120,7 @@ export {
   OrganizationLearnerNotBelongToOrganizationIdentityError,
   PasswordNotMatching,
   PasswordResetDemandNotFoundError,
+  PixAdminLoginFromPasswordDisabledError,
   RevokeUntilMustBeAnInstanceOfDate,
   UserCantBeCreatedError,
   UserIdIsRequiredError,
