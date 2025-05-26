@@ -6,6 +6,7 @@ import { embedElementSchema } from './element/embed-schema.js';
 import { expandElementSchema } from './element/expand-schema.js';
 import { flashcardsElementSchema } from './element/flashcards-schema.js';
 import { imageElementSchema } from './element/image-schema.js';
+import { qabElementSchema } from './element/qab-schema.js';
 import { qcmElementSchema } from './element/qcm-schema.js';
 import { qcuDeclarativeElementSchema } from './element/qcu-declarative-schema.js';
 import { qcuElementSchema } from './element/qcu-schema.js';
@@ -32,6 +33,7 @@ const elementSchema = Joi.alternatives().conditional('.type', {
     { is: 'expand', then: expandElementSchema },
     { is: 'flashcards', then: flashcardsElementSchema },
     { is: 'image', then: imageElementSchema },
+    { is: 'qab', then: qabElementSchema },
     { is: 'qcu', then: qcuElementSchema },
     { is: 'qcu-declarative', then: qcuDeclarativeElementSchema },
     { is: 'qcm', then: qcmElementSchema },

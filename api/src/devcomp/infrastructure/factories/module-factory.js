@@ -14,6 +14,7 @@ import { Expand } from '../../domain/models/element/Expand.js';
 import { Card } from '../../domain/models/element/flashcards/Card.js';
 import { Flashcards } from '../../domain/models/element/flashcards/Flashcards.js';
 import { Image } from '../../domain/models/element/Image.js';
+import { QAB } from '../../domain/models/element/qab/QAB.js';
 import { QCM } from '../../domain/models/element/QCM.js';
 import { QCU } from '../../domain/models/element/QCU.js';
 import { QCUDeclarative } from '../../domain/models/element/QCU-declarative.js';
@@ -105,6 +106,8 @@ export class ModuleFactory {
         return ModuleFactory.#buildText(element);
       case 'video':
         return ModuleFactory.#buildVideo(element);
+      case 'qab':
+        return new QAB(element);
       case 'qcm':
         return ModuleFactory.#buildQCM(element);
       case 'qcu':

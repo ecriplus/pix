@@ -4,6 +4,7 @@ import { Step } from '../../../../../src/devcomp/domain/models/component/Step.js
 import { Download } from '../../../../../src/devcomp/domain/models/element/Download.js';
 import { Embed } from '../../../../../src/devcomp/domain/models/element/Embed.js';
 import { Image } from '../../../../../src/devcomp/domain/models/element/Image.js';
+import { QAB } from '../../../../../src/devcomp/domain/models/element/qab/QAB.js';
 import { QCM } from '../../../../../src/devcomp/domain/models/element/QCM.js';
 import { QCU } from '../../../../../src/devcomp/domain/models/element/QCU.js';
 import { QCUDeclarative } from '../../../../../src/devcomp/domain/models/element/QCU-declarative.js';
@@ -931,6 +932,49 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         expect(expand.content).to.equal(expectedExpand.content);
         expect(expand.title).to.equal(expectedExpand.title);
         expect(expand.type).to.equal(expectedExpand.type);
+      });
+
+      it('should instantiate a Module with a ComponentElement which contains a QAB Element', function () {
+        // given
+        const moduleData = {
+          id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          slug: 'title',
+          title: 'title',
+          isBeta: true,
+          details: {
+            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            description: 'Description',
+            duration: 5,
+            level: 'Débutant',
+            tabletSupport: 'comfortable',
+            objectives: ['Objective 1'],
+          },
+          grains: [
+            {
+              id: 'cf436761-f56d-4b01-83f9-942afe9ce72c',
+              type: 'lesson',
+              title: 'test qab',
+              components: [
+                {
+                  type: 'element',
+                  element: {
+                    id: 'ed795d29-5f04-499c-a9c8-4019125c5cb1',
+                    type: 'qab',
+                    instruction:
+                      '<p><strong>Maintenant, entraînez-vous sur des exemples concrets !</strong> </p> <p> Pour chaque exemple, choisissez si l’affirmation est <strong>vraie</strong> ou <strong>fausse</strong>.</p>',
+                    cards: [],
+                  },
+                },
+              ],
+            },
+          ],
+        };
+
+        // when
+        const module = ModuleFactory.build(moduleData);
+
+        // then
+        expect(module.grains[0].components[0].element).to.be.instanceOf(QAB);
       });
     });
 

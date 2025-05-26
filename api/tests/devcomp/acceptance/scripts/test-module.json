@@ -414,6 +414,48 @@
           }
         }
       ]
+    },
+    {
+      "id": "cf436761-f56d-4b01-83f9-942afe9ce72c",
+      "type": "lesson",
+      "title": "test qab",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "ed795d29-5f04-499c-a9c8-4019125c5cb1",
+            "type": "qab",
+            "instruction": "<p><strong>Maintenant, entraînez-vous sur des exemples concrets !</strong> </p> <p> Pour chaque exemple, choisissez si l’affirmation est <strong>vraie</strong> ou <strong>fausse</strong>.</p>",
+            "cards": [
+              {
+                "id": "e222b060-7c18-4ee2-afe2-2ae27c28946a",
+                "image": {
+                  "url": "https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg",
+                  "altText": ""
+                },
+                "text": "Les boules de pétanques sont creuses ?",
+                "proposalA": "Vrai",
+                "proposalB": "Faux",
+                "solution": "A"
+              },
+              {
+                "id": "57056894-8e1b-4da9-96b6-0bd4187412b8",
+                "text": "Les chiens ne transpirent pas.",
+                "proposalA": "Vrai",
+                "proposalB": "Faux",
+                "solution": "B"
+              },
+              {
+                "id": "57056894-8e1b-4da9-96b6-0bd4187412b8",
+                "text": "Quel est l'organe qui rougit ?",
+                "proposalA": "L'estomac",
+                "proposalB": "Le coeur",
+                "solution": "B"
+              }
+            ]
+          }
+        }
+      ]
     }
   ]
 }
