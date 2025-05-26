@@ -30,10 +30,10 @@ describe('Integration | Infrastructure | Repository | Certification', function (
     },
   ];
 
-  describe('#getCertificationAttestation', function () {
+  describe('#getCertificate', function () {
     it('should throw a NotFoundError when certification attestation does not exist', async function () {
       // when
-      const error = await catchErr(certificateRepository.getCertificationAttestation)({ certificationCourseId: 123 });
+      const error = await catchErr(certificateRepository.getCertificate)({ certificationCourseId: 123 });
 
       // then
       expect(error).to.be.instanceOf(NotFoundError);
@@ -69,7 +69,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       await databaseBuilder.commit();
 
       // when
-      const error = await catchErr(certificateRepository.getCertificationAttestation)({
+      const error = await catchErr(certificateRepository.getCertificate)({
         certificationCourseId: certificationAttestationData.id,
       });
 
@@ -107,7 +107,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       await databaseBuilder.commit();
 
       // when
-      const error = await catchErr(certificateRepository.getCertificationAttestation)({
+      const error = await catchErr(certificateRepository.getCertificate)({
         certificationCourseId: certificationAttestationData.id,
       });
 
@@ -145,7 +145,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       await databaseBuilder.commit();
 
       // when
-      const error = await catchErr(certificateRepository.getCertificationAttestation)({
+      const error = await catchErr(certificateRepository.getCertificate)({
         certificationCourseId: certificationAttestationData.id,
       });
 
@@ -183,7 +183,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       await databaseBuilder.commit();
 
       // when
-      const error = await catchErr(certificateRepository.getCertificationAttestation)({
+      const error = await catchErr(certificateRepository.getCertificate)({
         certificationCourseId: certificationAttestationData.id,
       });
 
@@ -226,7 +226,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       await databaseBuilder.commit();
 
       // when
-      const certificationAttestation = await certificateRepository.getCertificationAttestation({
+      const certificationAttestation = await certificateRepository.getCertificate({
         certificationCourseId: certificationAttestationData.id,
       });
 
@@ -272,7 +272,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         await databaseBuilder.commit();
 
         // when
-        const certificationAttestation = await certificateRepository.getCertificationAttestation({
+        const certificationAttestation = await certificateRepository.getCertificate({
           certificationCourseId: 123,
         });
 
@@ -363,7 +363,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         await mockLearningContent(learningContentObjects);
 
         // when
-        const certificationAttestation = await certificateRepository.getCertificationAttestation({
+        const certificationAttestation = await certificateRepository.getCertificate({
           certificationCourseId: 123,
         });
 
@@ -481,7 +481,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           await databaseBuilder.commit();
 
           // when
-          const certificationAttestation = await certificateRepository.getCertificationAttestation({
+          const certificationAttestation = await certificateRepository.getCertificate({
             certificationCourseId: 123,
           });
 
@@ -585,7 +585,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
             await mockLearningContent(learningContentObjects);
 
             // when
-            const certificationAttestation = await certificateRepository.getCertificationAttestation({
+            const certificationAttestation = await certificateRepository.getCertificate({
               certificationCourseId: 123,
               locale,
             });
@@ -674,7 +674,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
               await databaseBuilder.commit();
 
               // when
-              const certificationAttestation = await certificateRepository.getCertificationAttestation({
+              const certificationAttestation = await certificateRepository.getCertificate({
                 certificationCourseId: 123,
                 locale,
               });
@@ -723,7 +723,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           await databaseBuilder.commit();
 
           // when
-          const certificationAttestation = await certificateRepository.getCertificationAttestation({
+          const certificationAttestation = await certificateRepository.getCertificate({
             certificationCourseId: 123,
           });
 
@@ -771,7 +771,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           await databaseBuilder.commit();
 
           // when
-          const certificationAttestation = await certificateRepository.getCertificationAttestation({
+          const certificationAttestation = await certificateRepository.getCertificate({
             certificationCourseId: 123,
           });
 

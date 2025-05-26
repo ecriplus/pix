@@ -7,7 +7,7 @@ describe('Unit | UseCase | get-certification-attestation-for-session', function 
 
   beforeEach(function () {
     certificateRepository = {
-      getCertificationAttestation: sinon.stub(),
+      getCertificate: sinon.stub(),
     };
     certificationCourseRepository = {
       findCertificationCoursesBySessionId: sinon.stub(),
@@ -53,12 +53,8 @@ describe('Unit | UseCase | get-certification-attestation-for-session', function 
     certificationCourseRepository.findCertificationCoursesBySessionId
       .withArgs({ sessionId: 11 })
       .resolves([certificationCourse1, certificationCourse2]);
-    certificateRepository.getCertificationAttestation
-      .withArgs({ certificationCourseId: 1 })
-      .resolves(certificationAttestation1);
-    certificateRepository.getCertificationAttestation
-      .withArgs({ certificationCourseId: 2 })
-      .resolves(certificationAttestation2);
+    certificateRepository.getCertificate.withArgs({ certificationCourseId: 1 }).resolves(certificationAttestation1);
+    certificateRepository.getCertificate.withArgs({ certificationCourseId: 2 }).resolves(certificationAttestation2);
 
     // when
     const actualCertificationAttestations = await getCertificationAttestationsForSession({
@@ -127,7 +123,7 @@ describe('Unit | UseCase | get-certification-attestation-for-session', function 
       certificationCourseRepository.findCertificationCoursesBySessionId
         .withArgs({ sessionId: 13 })
         .resolves([certificationCourse]);
-      certificateRepository.getCertificationAttestation.withArgs({ certificationCourseId: 3 }).resolves();
+      certificateRepository.getCertificate.withArgs({ certificationCourseId: 3 }).resolves();
 
       // when
       const error = await catchErr(getCertificationAttestationsForSession)({

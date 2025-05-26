@@ -25,7 +25,7 @@ const getCertificateByVerificationCode = async function (
   const certificationCourse = await usecases.getCertificationCourseByVerificationCode({ verificationCode });
 
   if (certificationCourse.isV3() && (await featureToggles.get('isV3CertificationPageEnabled'))) {
-    certificate = await usecases.getCertificationAttestation({
+    certificate = await usecases.getCertificate({
       certificationCourseId: certificationCourse.getId(),
       locale,
     });
@@ -52,7 +52,7 @@ const getCertificate = async function (
 
   let certificate;
   if (certificationCourse.isV3() && (await featureToggles.get('isV3CertificationPageEnabled'))) {
-    certificate = await usecases.getCertificationAttestation({
+    certificate = await usecases.getCertificate({
       certificationCourseId: certificationCourse.getId(),
       locale,
     });
@@ -91,7 +91,7 @@ const getPDFCertificate = async function (
     throw new UnauthorizedError();
   }
 
-  const certificate = await usecases.getCertificationAttestation({ certificationCourseId });
+  const certificate = await usecases.getCertificate({ certificationCourseId });
 
   if (certificate instanceof Certificate) {
     const fileName = i18n.__('certification-confirmation.file-name', {

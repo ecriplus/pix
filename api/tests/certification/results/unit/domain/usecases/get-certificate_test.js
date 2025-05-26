@@ -1,15 +1,15 @@
-import { getCertificationAttestation } from '../../../../../../src/certification/results/domain/usecases/get-certification-attestation.js';
+import { getCertificate } from '../../../../../../src/certification/results/domain/usecases/get-certificate.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-describe('Unit | UseCase | get-certification-attestation', function () {
+describe('Unit | UseCase | get-certificate', function () {
   let certificateRepository, certificationCourseRepository;
 
   beforeEach(function () {
-    certificateRepository = { getCertificationAttestation: sinon.stub() };
+    certificateRepository = { getCertificate: sinon.stub() };
     certificationCourseRepository = { get: sinon.stub() };
   });
 
-  it('should return the certification attestation enhanced with result competence tree', async function () {
+  it('should return the certificate enhanced with result competence tree', async function () {
     // given
     const locale = 'fr';
 
@@ -20,12 +20,12 @@ describe('Unit | UseCase | get-certification-attestation', function () {
     });
     const certificationCourse = domainBuilder.buildCertificationCourse({ id: 123 });
     certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
-    certificateRepository.getCertificationAttestation
+    certificateRepository.getCertificate
       .withArgs({ certificationCourseId: 123, locale })
       .resolves(certificationAttestation);
 
     // when
-    const actualCertificationAttestation = await getCertificationAttestation({
+    const actualCertificate = await getCertificate({
       certificationCourseId: 123,
       locale,
       certificateRepository,
@@ -33,10 +33,10 @@ describe('Unit | UseCase | get-certification-attestation', function () {
     });
 
     // then
-    const expectedCertificationAttestation = domainBuilder.buildCertificationAttestation({
+    const expectedCertificate = domainBuilder.buildCertificationAttestation({
       id: 123,
       resultCompetenceTree,
     });
-    expect(actualCertificationAttestation).to.deep.equal(expectedCertificationAttestation);
+    expect(actualCertificate).to.deep.equal(expectedCertificate);
   });
 });
