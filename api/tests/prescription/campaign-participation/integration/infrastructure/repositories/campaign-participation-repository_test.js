@@ -458,7 +458,7 @@ describe('Integration | Repository | Campaign Participation', function () {
       databaseBuilder.factory.buildCampaignParticipation({
         userId: otherUserId,
       });
-      databaseBuilder.commit();
+      await databaseBuilder.commit();
 
       // when
       const result = await campaignParticipationRepository.getCampaignParticipationsCountByUserId({ userId });
@@ -470,9 +470,7 @@ describe('Integration | Repository | Campaign Participation', function () {
 
   describe('#update', function () {
     it('save the changes of the campaignParticipation', async function () {
-      const campaignParticipationId = 12;
       const campaignParticipationToUpdate = databaseBuilder.factory.buildCampaignParticipation({
-        id: campaignParticipationId,
         status: STARTED,
         sharedAt: null,
       });
@@ -488,7 +486,7 @@ describe('Integration | Repository | Campaign Participation', function () {
       });
 
       const campaignParticipation = await knex('campaign-participations')
-        .where({ id: campaignParticipationId })
+        .where({ id: campaignParticipationToUpdate.id })
         .first();
 
       expect(campaignParticipation.sharedAt).to.deep.equals(new Date('2021-01-01'));
@@ -496,10 +494,8 @@ describe('Integration | Repository | Campaign Participation', function () {
     });
 
     it('should not update campaignId', async function () {
-      const campaignParticipationId = 12;
       const campaignId = databaseBuilder.factory.buildCampaign().id;
       const campaignParticipationToUpdate = databaseBuilder.factory.buildCampaignParticipation({
-        id: campaignParticipationId,
         campaignId,
         status: STARTED,
         sharedAt: null,
@@ -513,7 +509,7 @@ describe('Integration | Repository | Campaign Participation', function () {
       });
 
       const campaignParticipation = await knex('campaign-participations')
-        .where({ id: campaignParticipationId })
+        .where({ id: campaignParticipationToUpdate.id })
         .first();
 
       expect(campaignParticipation.campaignId).to.equal(campaignId);
