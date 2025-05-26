@@ -33,21 +33,5 @@ module('Integration | Component | Analysis | global-positioning', function (hook
         }),
       );
     });
-    test('the gauge should have stepLabels', async function (assert) {
-      // given
-      const data = {
-        maxReachableLevel: 4,
-        meanReachedLevel: 2,
-      };
-
-      // when
-      const screen = await render(<template><GlobalPositioning @data={{data}} /></template>);
-
-      // then
-      assert.ok(screen.getByText(t('pages.statistics.level.novice')));
-      assert.ok(screen.getByText(t('pages.statistics.level.independent')));
-      assert.ok(screen.getByText(t('pages.statistics.level.advanced')));
-      assert.ok(screen.getByText(t('pages.statistics.level.expert')));
-    });
   });
 });

@@ -7,22 +7,12 @@ import { t } from 'ember-intl';
 export default class GlobalPositioning extends Component {
   @service intl;
 
-  get stepLabels() {
-    return [
-      this.intl.t('pages.statistics.level.novice'),
-      this.intl.t('pages.statistics.level.independent'),
-      this.intl.t('pages.statistics.level.advanced'),
-      this.intl.t('pages.statistics.level.expert'),
-    ];
-  }
-
   <template>
     <PixBlock class="global-positioning" @variant="orga">
       <h2 class="global-positioning__title">{{t "components.global-positioning.title"}}</h2>
       <p class="global-positioning__description">{{t "components.global-positioning.description"}}</p>
       <PixGauge
         @isSmall={{false}}
-        @stepLabels={{this.stepLabels}}
         @maxLevel={{@data.maxReachableLevel}}
         @reachedLevel={{@data.meanReachedLevel}}
         @label={{t
