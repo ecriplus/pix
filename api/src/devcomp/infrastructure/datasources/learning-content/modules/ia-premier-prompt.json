@@ -66,9 +66,35 @@
           "type": "element",
           "element": {
             "id": "4cd2311c-6c89-4d04-9087-1b874a412882",
-            "type": "custom",
-            "tagName": "",
-            "props": {}
+            "type": "qcu",
+            "instruction": "<p>Dans cette discussion, lequel parmi ces trois textes est le prompt ?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>Des idées de noms pour une association de yoga à roulettes ?</p>",
+                "feedback": {
+                  "state": "<p>Bien vu !&nbsp;</p>",
+                  "diagnosis": "<p>En effet, le prompt c'est la question posée ou la consigne donnée à l'IA conversationnelle.</p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "<p>Bien sûr, voici quelques idées de noms pour une association de yoga&nbsp;:</p><p>1. Yoga en mouvement</p><p>2. Roulez en Paix</p><p>3.&nbsp;Équilibre sur Roues</p><p>4. Yoga en Roue Libre</p>",
+                "feedback": {
+                  "state": "<p>Et non !&nbsp;</p>",
+                  "diagnosis": "<p>C'est la réponse donnée par l'IA conversationnelle. Le prompt c'est la question posée ou la consigne donnée à l'IA conversationnelle.</p>"
+                }
+              },
+              {
+                "id": "3",
+                "content": "<p>Ecrivez votre message ici.</p>",
+                "feedback": {
+                  "state": "<p>Et non !</p>",
+                  "diagnosis": "<p>C'est la zone de saisie, pour écrire les prompts ! Le prompt c'est la question posée ou la consigne donnée à l'IA conversationnelle.</p>"
+                }
+              }
+            ],
+            "solution": "1"
           }
         }
       ]
