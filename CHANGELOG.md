@@ -1,5 +1,21 @@
 # Pix Changelog
 
+# [5.119.0](https://github.com/1024pix/pix/compare/v5.118.0...v5.119.0) (2025-05-26)
+
+### :rocket: Amélioration
+
+- [#12345](https://github.com/1024pix/pix/pull/12345) Création d'un endpoint côté API pour démarrer une conversation avec le LLM dans le cadre d'une épreuve avec un embed de prompt LLM (PIX-17903) 
+- [#12321](https://github.com/1024pix/pix/pull/12321) Enregistrer createdBy à la création d’un Centre de certification (PIX-16186) 
+- [#12352](https://github.com/1024pix/pix/pull/12352) Exécution du simulateur de déroulé sur des certifications complémentaires (PIX-17936). 
+- [#12360](https://github.com/1024pix/pix/pull/12360) Modifier les valeurs pour l'affichage des niveaux dans les tags (PIX-17967) 
+
+### :building_construction: Tech
+
+- [#12283](https://github.com/1024pix/pix/pull/12283) Améliore la partie SQL de la vérification du code de certification (Pix-17791) 
+- [#12335](https://github.com/1024pix/pix/pull/12335) Créer un script de suppression des méthodes de connexion pour les anciens utilisateurs scolaires (PIX-17515). 
+- [#12358](https://github.com/1024pix/pix/pull/12358) Récupérer la configuration de l'algo v3 dans la BDD (PIX-17937). 
+- [#12339](https://github.com/1024pix/pix/pull/12339) Remplacer des helpers dans admin par du code natif
+
 # [5.118.0](https://github.com/1024pix/pix/compare/v5.117.0...v5.118.0) (2025-05-23)
 
 ### :rocket: Amélioration
