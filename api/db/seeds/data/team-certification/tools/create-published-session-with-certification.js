@@ -66,6 +66,12 @@ export default async function publishSessionWithValidatedCertification({
     pickAnswerStatus,
   });
 
+  let timePad = 1;
+  let challengeDate = dayjs();
+  const getNewSecondPad = () => {
+    challengeDate = challengeDate.add(`${timePad++ % 60}`, 'seconds');
+    return challengeDate;
+  };
   for (const simulatedChallenge of simulatedCertification) {
     databaseBuilder.factory.buildCertificationChallenge({
       associatedSkillName: simulatedChallenge.challenge.skill.name,
@@ -73,8 +79,8 @@ export default async function publishSessionWithValidatedCertification({
       challengeId: simulatedChallenge.challenge.id,
       competenceId: simulatedChallenge.challenge.skill.competenceId,
       courseId: certificationCourse._id,
-      createdAt: session.date,
-      updatedAt: session.date,
+      createdAt: getNewSecondPad(),
+      updatedAt: getNewSecondPad(),
       isNeutralized: false,
       hasBeenSkippedAutomatically: false,
       certifiableBadgeKey: null,
@@ -87,10 +93,11 @@ export default async function publishSessionWithValidatedCertification({
       result: simulatedChallenge.answerStatus,
       assessmentId: assessment.id,
       challengeId: simulatedChallenge.challenge.id,
-      createdAt: session.date,
-      updatedAt: session.date,
+      createdAt: getNewSecondPad(),
+      updatedAt: getNewSecondPad(),
       timeout: null,
       resultDetails: 'dummy value',
+      timeSpent: 10,
     });
   }
 
