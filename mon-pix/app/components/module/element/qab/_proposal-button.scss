@@ -1,0 +1,85 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
+.qab-proposal-button {
+  --qab-proposal-border-color: var(--pix-primary-700);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-2x);
+  align-items: flex-start;
+  min-width: 240px;
+  padding: var(--pix-spacing-3x);
+  background: var(--pix-primary-10);
+  border: 1px solid var(--qab-proposal-border-color);
+  border-radius: var(--pix-spacing-2x);
+  box-shadow: 0 -2px 0 0 var(--qab-proposal-border-color) inset, 0 2px 0 0 var(--qab-proposal-border-color) inset;
+
+  &:active, &:focus {
+    --qab-proposal-border-color: var(--pix-primary-300);
+  }
+
+  &:active, &:focus, &:hover {
+    background: linear-gradient(0deg, rgba(var(--pix-primary-100-inline), 0.50) 0%, rgba(var(--pix-primary-100-inline), 0.50) 100%);
+  }
+
+  &[disabled] {
+    --qab-proposal-border-color: var(--pix-primary-100);
+
+    background: var(--pix-neutral-20);
+    cursor: not-allowed;
+  }
+
+  &--selected.qab-proposal-button--success {
+    --qab-proposal-border-color: var(--pix-success-700);
+
+    background: var(--pix-success-50);
+  }
+
+  &--selected.qab-proposal-button--error {
+    --qab-proposal-border-color: var(--pix-error-700);
+
+    background: var(--pix-error-50);
+  }
+
+  &__option {
+    @extend %pix-body-xs;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    color: var(--pix-primary-300);
+    font-weight: var(--pix-font-bold);
+    font-family: Nunito, sans-serif;
+    background: var(--pix-neutral-0);
+    border: 1px solid var(--pix-primary-100);
+    border-radius: var(--pix-spacing-1x);
+  }
+
+  &__text {
+    @extend %pix-body-m;
+
+    color: var(--pix-neutral-800);
+    font-weight: var(--pix-font-bold);
+  }
+
+  &__icon {
+    position: absolute;
+    top: -6px;
+    right: -5px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@include breakpoints.device-is('mobile') {
+  .qab-proposal-button {
+    flex-direction: row;
+    gap: var(--pix-spacing-6x);
+    align-items: center;
+  }
+}
+
