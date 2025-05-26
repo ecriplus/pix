@@ -1,5 +1,5 @@
 import { config } from '../../../../src/shared/config.js';
-import { createServer, expect } from '../../../test-helper.js';
+import { createMaddoServer, createServer, expect } from '../../../test-helper.js';
 
 describe('Acceptance | Controller | Open Api', function () {
   // Increase the test timeout because swagger.json endpoints can be long to generate/respond.
@@ -7,11 +7,11 @@ describe('Acceptance | Controller | Open Api', function () {
 
   let server;
 
-  beforeEach(async function () {
-    server = await createServer();
-  });
-
   context('Internal API definitons', function () {
+    beforeEach(async function () {
+      server = await createServer();
+    });
+
     context('Pix API', function () {
       describe('GET /api/swagger.json', function () {
         it('should respond with a 200', async function () {
@@ -183,6 +183,10 @@ describe('Acceptance | Controller | Open Api', function () {
   });
 
   context('API Manager definitions', function () {
+    beforeEach(async function () {
+      server = await createMaddoServer();
+    });
+
     context('Parcoursup', function () {
       describe('GET /documentation/parcoursup/openapi.json', function () {
         it('should respond with a 200', async function () {
@@ -221,6 +225,49 @@ describe('Acceptance | Controller | Open Api', function () {
             // then
             expect(response.statusCode).to.equal(200);
             expect(response.result).to.contain('Pix Parcoursup Open Api');
+          });
+        });
+      });
+    });
+
+    context('Maddo', function () {
+      describe('GET /documentation/maddo/openapi.json', function () {
+        it('should respond with a 200', async function () {
+          // given
+          const options = {
+            method: 'GET',
+            url: '/documentation/maddo/openapi.json',
+            headers: {},
+          };
+          // when
+          const response = await server.inject(options);
+
+          // then
+          expect(response.statusCode).to.equal(200);
+          expect(response.result.info.title).to.deep.equal('Api de mise à disposition de données Pix');
+          expect(response.result.servers[0].url).to.equal(config.apiManager.url);
+        });
+      });
+
+      context('Documentation page', function () {
+        beforeEach(async function () {
+          await server.start();
+        });
+
+        describe('GET /documentation/maddo', function () {
+          it('should respond with a 200', async function () {
+            // given
+            const options = {
+              method: 'GET',
+              url: '/documentation/maddo',
+            };
+
+            // when
+            const response = await server.inject(options);
+
+            // then
+            expect(response.statusCode).to.equal(200);
+            expect(response.result).to.contain('Api de mise à disposition de données Pix');
           });
         });
       });

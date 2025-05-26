@@ -17,7 +17,7 @@ import { config } from './src/shared/config.js';
 import { installHapiHook } from './src/shared/infrastructure/async-local-storage.js';
 import { plugins } from './src/shared/infrastructure/plugins/index.js';
 import { deserializer } from './src/shared/infrastructure/serializers/jsonapi/deserializer.js';
-import { swaggers } from './src/shared/swaggers.js';
+import { maddoSwaggers } from './src/shared/swaggers.js';
 import { handleFailAction } from './src/shared/validate.js';
 
 installHapiHook();
@@ -194,7 +194,7 @@ const setupRoutesAndPlugins = async function (server) {
 };
 
 const setupOpenApiSpecification = async function (server) {
-  for (const swaggerRegisterArgs of swaggers) {
+  for (const swaggerRegisterArgs of maddoSwaggers) {
     await server.register(...swaggerRegisterArgs);
   }
 };

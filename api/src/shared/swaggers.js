@@ -107,12 +107,12 @@ class ApiManagerAccess extends PixOpenApiBaseDefinition {
     }
 
     // Api Manager documentation are all grouped under same endpoint
-    super({ endpoint: '/documentation' });
+    super({ endpoint: `/documentation/${appIdentifier}` });
 
     // Group Swagger static assets under our app endpoint
-    this.swaggerConfiguration.documentationPath = `/${appIdentifier}`;
-    this.swaggerConfiguration.swaggerUIPath = `/${appIdentifier}/`;
-    this.swaggerConfiguration.jsonPath = `/${appIdentifier}/openapi.json`;
+    this.swaggerConfiguration.documentationPath = '/';
+    this.swaggerConfiguration.swaggerUIPath = '/';
+    this.swaggerConfiguration.jsonPath = '/openapi.json';
     this.swaggerConfiguration.uiOptions.url = `${this.endpoint}${this.swaggerConfiguration.jsonPath}`;
 
     // UI won't display the internal api base path externally
@@ -154,6 +154,15 @@ class Parcoursup extends ApiManagerAccess {
   }
 }
 
+class Maddo extends ApiManagerAccess {
+  constructor() {
+    super({ appIdentifier: 'maddo' });
+    this.swaggerConfiguration.info.title = 'Api de mise à disposition de données Pix';
+    this.swaggerConfiguration.grouping = 'tags';
+    this.swaggerConfiguration.tagsGroupingFilter = (tag) => !['api', 'maddo'].includes(tag);
+  }
+}
+
 const buildHapiPlugin = (clazz) => {
   const apiDefinition = new clazz();
 
@@ -168,4 +177,6 @@ const buildHapiPlugin = (clazz) => {
   ];
 };
 
-export const swaggers = [PixAPI, AuthorizationServer, LivretScolaire, PoleEmploi, Parcoursup].map(buildHapiPlugin);
+export const swaggers = [PixAPI, AuthorizationServer, LivretScolaire, PoleEmploi].map(buildHapiPlugin);
+
+export const maddoSwaggers = [Maddo, Parcoursup].map(buildHapiPlugin);
