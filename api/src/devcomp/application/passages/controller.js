@@ -62,9 +62,9 @@ const startEmbedLlmChat = async function (request, h, { usecases }) {
 const promptToLLMChat = async function (request, h, { usecases }) {
   try {
     const { passageId, chatId } = request.params;
-    const { message } = request.payload;
+    const { prompt } = request.payload;
     const userId = request.auth.credentials.userId;
-    const llmResponse = await usecases.promptToLLMChat({ passageId, chatId, userId, message });
+    const llmResponse = await usecases.promptToLLMChat({ passageId, chatId, userId, prompt });
 
     return h
       .response({

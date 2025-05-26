@@ -120,7 +120,7 @@ const register = async function (server) {
             chatId: Joi.string().required(),
           }).required(),
           payload: Joi.object({
-            message: Joi.string().required(),
+            prompt: Joi.string().required(),
           }).required(),
           options: {
             allowUnknown: true,

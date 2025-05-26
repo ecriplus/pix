@@ -9,7 +9,7 @@ describe('Unit | Devcomp | Domain | UseCases | prompt-to-llm-chat', function () 
   const chatId = 'unChatId';
   const passageId = 123456;
   const userId = 456789;
-  const message = 'message entrée';
+  const prompt = 'message entrée';
 
   beforeEach(function () {
     llmApi = {
@@ -33,7 +33,7 @@ describe('Unit | Devcomp | Domain | UseCases | prompt-to-llm-chat', function () 
       );
 
       // when
-      const err = await catchErr(promptToLLMChat)({ chatId, passageId, userId, message, llmApi, passageRepository });
+      const err = await catchErr(promptToLLMChat)({ chatId, passageId, userId, prompt, llmApi, passageRepository });
 
       // then
       expect(err).to.be.instanceOf(DomainError);
@@ -50,10 +50,10 @@ describe('Unit | Devcomp | Domain | UseCases | prompt-to-llm-chat', function () 
           userId,
         }),
       );
-      llmApi.prompt.withArgs({ chatId, message }).resolves(null);
+      llmApi.prompt.withArgs({ chatId, message: prompt }).resolves(null);
 
       // when
-      const err = await catchErr(promptToLLMChat)({ chatId, passageId, userId, message, llmApi, passageRepository });
+      const err = await catchErr(promptToLLMChat)({ chatId, passageId, userId, prompt, llmApi, passageRepository });
 
       // then
       expect(err).to.be.instanceOf(DomainError);
@@ -70,14 +70,14 @@ describe('Unit | Devcomp | Domain | UseCases | prompt-to-llm-chat', function () 
           userId,
         }),
       );
-      llmApi.prompt.withArgs({ chatId, message }).resolves(
+      llmApi.prompt.withArgs({ chatId, message: prompt }).resolves(
         new LLMChatResponseDTO({
           message: 'message du llm',
         }),
       );
 
       // when
-      const llmResponse = await promptToLLMChat({ chatId, passageId, userId, message, llmApi, passageRepository });
+      const llmResponse = await promptToLLMChat({ chatId, passageId, userId, prompt, llmApi, passageRepository });
 
       // then
       expect(llmResponse).to.equal('message du llm');

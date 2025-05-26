@@ -333,7 +333,7 @@ describe('Acceptance | Controller | passage-controller', function () {
         const response = await server.inject({
           method: 'POST',
           url: '/api/passages/111/embed/llm/chats/cSomeChatId123/messages',
-          payload: { message: 'Quelle est la recette de la ratatouille ?' },
+          payload: { prompt: 'Quelle est la recette de la ratatouille ?' },
         });
 
         expect(response.statusCode).to.equal(401);
@@ -350,7 +350,7 @@ describe('Acceptance | Controller | passage-controller', function () {
           const response = await server.inject({
             method: 'POST',
             url: '/api/passages/111/embed/llm/chats/cSomeChatId123/messages',
-            payload: { message: 'Quelle est la recette de la ratatouille ?' },
+            payload: { prompt: 'Quelle est la recette de la ratatouille ?' },
             headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           });
 
@@ -406,7 +406,7 @@ describe('Acceptance | Controller | passage-controller', function () {
           const response = await server.inject({
             method: 'POST',
             url: '/api/passages/111/embed/llm/chats/cSomeChatId123/messages',
-            payload: { message: 'Quelle est la recette de la ratatouille ?' },
+            payload: { prompt: 'Quelle est la recette de la ratatouille ?' },
             headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           });
 
