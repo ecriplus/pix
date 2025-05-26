@@ -63,7 +63,6 @@ export default class LoginForm extends Component {
   _handleApiError(responseError) {
     const errors = get(responseError, 'responseJSON.errors');
     const error = Array.isArray(errors) && errors.length > 0 && errors[0];
-    console.log(error);
     switch (error?.code) {
       case 'USER_IS_TEMPORARY_BLOCKED':
         this.errorMessage = this.intl.t(ENV.APP.API_ERROR_MESSAGES.USER_IS_TEMPORARY_BLOCKED.I18N_KEY, {
