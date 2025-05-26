@@ -40,10 +40,12 @@ const deleteOrganizationLearners = async function ({
       await campaignParticipationRepositoryfromBC.remove(campaignParticipation.dataToUpdateOnDeletion);
     }
 
-    const campaignParticipationIds = campaignParticipations.map(({ id }) => id);
-    await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
-      campaignParticipationIds,
-    );
+    if (isAnonymizationWithDeletionEnabled) {
+      const campaignParticipationIds = campaignParticipations.map(({ id }) => id);
+      await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
+        campaignParticipationIds,
+      );
+    }
   }
 };
 
