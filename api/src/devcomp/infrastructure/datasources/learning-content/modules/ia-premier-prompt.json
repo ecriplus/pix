@@ -222,7 +222,7 @@
           "element": {
             "id": "1ad822c8-cf06-43b8-adf4-9acc12f22fff",
             "type": "text",
-            "content": "<p>Dans certains cas, utiliser un verbe adapté ne suffit pas😅. Il faut aussi donner des éléments décrivant le résultat que l’on veut obtenir. Voyons cela ensemble !</p>"
+            "content": "<p>Dans certains cas, utiliser un verbe adapté ne suffit pas.😅 Il faut aussi donner des éléments décrivant le résultat que l’on veut obtenir. Voyons cela ensemble !</p>"
           }
         }
       ]
@@ -237,7 +237,7 @@
           "element": {
             "id": "0a0f1cf5-3f03-448c-b551-93d51482ab33",
             "type": "text",
-            "content": "<p>Gustave veut une recette de gâteau pour 10 personnes.🍰 Il est allergique au chocolat.🍫</p>"
+            "content": "<p>Cette fois-ci, Gustave veut une recette de gâteau pour 10 personnes.🍰 Il est allergique au chocolat.🍫</p>"
           }
         },
         {
@@ -258,7 +258,7 @@
           "element": {
             "id": "ee3bd7af-b9d4-432d-a6a2-78bada14d03a",
             "type": "qcu",
-            "instruction": "<p>D’après vos observations, quelle est la meilleur option ?<br><br></p>",
+            "instruction": "<p>D’après vos observations, lequel parmis ces prompts exprime au mieux le besoin de Gustave ?<br><br></p>",
             "proposals": [
               {
                 "id": "1",
