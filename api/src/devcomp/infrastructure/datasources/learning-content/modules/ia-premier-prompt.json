@@ -432,14 +432,6 @@
         {
           "type": "element",
           "element": {
-            "id": "45d57981-7773-420a-b5b5-dbbab33848e4",
-            "type": "text",
-            "content": "<p>À vous de jouer !</p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
             "id": "8a38252f-3ae3-48b0-ad3b-014ca1a95858",
             "type": "embed",
             "isCompletionRequired": false,
@@ -462,7 +454,7 @@
           "element": {
             "id": "bd373d86-9859-4f63-a693-bec98c2e7300",
             "type": "text",
-            "content": "<p>Tu as appris à parler à une IA conversationnelle👏.Maintenant, place à la pratique&nbsp;: voyons si tu peux obtenir la réponse voulue !</p>"
+            "content": "<p>Vous avez appris à parler à une IA conversationnelle👏 Maintenant, place à la pratique&nbsp;: voyons si vous pouvez obtenir la réponse voulue !</p>"
           }
         }
       ]
