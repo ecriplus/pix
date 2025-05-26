@@ -7,6 +7,7 @@ import EmbedElement from 'mon-pix/components/module/element/embed';
 import ExpandElement from 'mon-pix/components/module/element/expand';
 import FlashcardsElement from 'mon-pix/components/module/element/flashcards/flashcards';
 import ImageElement from 'mon-pix/components/module/element/image';
+import QabElement from 'mon-pix/components/module/element/qab/qab';
 import QcmElement from 'mon-pix/components/module/element/qcm';
 import QcuElement from 'mon-pix/components/module/element/qcu';
 import QcuDeclarativeElement from 'mon-pix/components/module/element/qcu-declarative';
@@ -63,6 +64,8 @@ export default class ModulixElement extends Component {
         @onRetry={{@onElementRetry}}
         @correction={{this.getLastCorrectionForElement @element}}
       />
+    {{else if (eq @element.type "qab")}}
+      <QabElement @element={{@element}} />
     {{/if}}
   </template>
 }

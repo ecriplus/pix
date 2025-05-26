@@ -355,4 +355,33 @@ module('Integration | Component | Module | Element', function (hooks) {
     // then
     assert.dom(screen.getByRole('button', { name: 'Commencer' })).exists();
   });
+
+  test('should display an element with a qab element', async function (assert) {
+    // given
+    const element = {
+      id: 'ed795d29-5f04-499c-a9c8-4019125c5cb1',
+      type: 'qab',
+      instruction:
+        '<p><strong>Maintenant, entraînez-vous sur des exemples concrets !</strong> </p> <p> Pour chaque exemple, choisissez si l’affirmation est <strong>vraie</strong> ou <strong>fausse</strong>.</p>',
+      cards: [
+        {
+          id: 'e222b060-7c18-4ee2-afe2-2ae27c28946a',
+          image: {
+            url: 'https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg',
+            altText: '',
+          },
+          text: 'Les boules de pétanques sont creuses.',
+          proposalA: 'Vrai',
+          proposalB: 'Faux',
+          solution: 'A',
+        },
+      ],
+    };
+
+    // when
+    const screen = await render(<template><ModulixElement @element={{element}} /></template>);
+
+    // then
+    assert.dom(screen.getByRole('button', { name: 'Option A: Vrai' })).exists();
+  });
 });
