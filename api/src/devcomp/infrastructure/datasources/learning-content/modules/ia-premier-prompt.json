@@ -109,7 +109,7 @@
           "element": {
             "id": "6080355f-69c8-4803-a7e2-b301556ac9e3",
             "type": "text",
-            "content": "<ul><li>Le prompt est la question posée ou la consigne donnée à l’IA conversationnelle 🤖.</li><li>Les réponses de l’IA conversationnelle s'affichent comme dans une conversation de messagerie instantanée.&nbsp;</li><li>Il y a toujours une zone pour saisir le prompt suivant.</li></ul>"
+            "content": "<ul><li>Le prompt est la question posée ou la consigne donnée à l’IA conversationnelle.🤖</li><li>Les réponses de l’IA conversationnelle s'affichent comme dans une conversation de messagerie instantanée.&nbsp;</li><li>Il y a toujours une zone pour saisir le prompt suivant.</li></ul>"
           }
         }
       ]
@@ -237,7 +237,7 @@
           "element": {
             "id": "0a0f1cf5-3f03-448c-b551-93d51482ab33",
             "type": "text",
-            "content": "<p>Gustave veut une recette de gâteau pour 10 personnes🍰.  Il est allergique au chocolat🍫.</p>"
+            "content": "<p>Gustave veut une recette de gâteau pour 10 personnes.🍰 Il est allergique au chocolat.🍫</p>"
           }
         },
         {
@@ -369,7 +369,7 @@
           "element": {
             "id": "ebd5d937-c04e-47da-98b2-7ddde874cb50",
             "type": "text",
-            "content": "<p>Même si le prompt est clair et précis, et que la réponse paraît bien rédigée, <strong>une IA conversationnelle peut se tromper</strong>😓. Il faut TOUJOURS relire et vérifier la réponse.&nbsp; </p><p>💡On peut continuer la conversation pour lui faire <strong>corriger</strong>.<br><br></p>"
+            "content": "<p>Même si le prompt est clair et précis, et que la réponse paraît bien rédigée, <strong>une IA conversationnelle peut se tromper</strong>.😓 Il faut TOUJOURS relire et vérifier la réponse.&nbsp; </p><p>💡On peut continuer la conversation pour lui faire <strong>corriger</strong>.<br><br></p>"
           }
         }
       ]
@@ -384,7 +384,7 @@
           "element": {
             "id": "33210c11-0e87-4d93-9190-089654d57ee4",
             "type": "text",
-            "content": "<p>📌 Résumons l’essentiel avant de passer à la suite&nbsp;: <br></p><ul><li>Un prompt (instruction ou requête en français) est une <strong>question</strong> que l’on pose ou une <strong>consigne</strong> que l’on donne à l'IA conversationnelle pour qu’elle produise une réponse🧑‍💻.</li><li>Un prompt s’écrit en <strong>langage courant</strong>, comme si on parlait à un autre être humain🗣️.</li><li>Plus la <strong>demande est claire et précise</strong>, plus la réponse de l'IA conversationnelle&nbsp;est adaptée et pertinente🤓.&nbsp;<ul><li>On peut utiliser des <strong>verbes d’action</strong> comme “Traduis”, “Liste”, “Résume”, etc.</li><li>On peut ajouter des <strong>informations supplémentaires</strong> pour donner un contexte.</li></ul></li><li>Il est important de <strong>toujours relire la réponse</strong> de l'IA conversationnelle &nbsp;pour vérifier qu'elle répond bien à la demande🕵️.</li><li>Si la réponse de l’IA conversationnelle ne convient pas, il faut <strong>reformuler</strong> son prompt pour mieux guider l'IA📝.</li></ul>"
+            "content": "<p>📌 Résumons l’essentiel avant de passer à la suite&nbsp;: <br></p><ul><li>Un prompt (instruction ou requête en français) est une <strong>question</strong> que l’on pose ou une <strong>consigne</strong> que l’on donne à l'IA conversationnelle pour qu’elle produise une réponse.🧑‍💻</li><li>Un prompt s’écrit en <strong>langage courant</strong>, comme si on parlait à un autre être humain.🗣️</li><li>Plus la <strong>demande est claire et précise</strong>, plus la réponse de l'IA conversationnelle&nbsp;est adaptée et pertinente.🤓&nbsp;<ul><li>On peut utiliser des <strong>verbes d’action</strong> comme “Traduis”, “Liste”, “Résume”, etc.</li><li>On peut ajouter des <strong>informations supplémentaires</strong> pour donner un contexte.</li></ul></li><li>Il est important de <strong>toujours relire la réponse</strong> de l'IA conversationnelle &nbsp;pour vérifier qu'elle répond bien à la demande.🕵️</li><li>Si la réponse de l’IA conversationnelle ne convient pas, il faut <strong>reformuler</strong> son prompt pour mieux guider l'IA.📝</li></ul>"
           }
         }
       ]
