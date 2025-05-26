@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import i18n from 'i18n';
 
 import { usecases as enrolmentUseCases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
@@ -18,9 +19,9 @@ import { LANGUAGES_CODE } from '../../../../../src/shared/domain/services/langua
  * @param {number} params.sessionId
  * @param {number} params.candidateId
  * @param {number} params.pixScoreTarget - WARNING: final certification pix score will vary
- *                                   because simulation simulates a few user errors
+ *                                         because simulation simulates a few user errors
  */
-export default async function publishSessionWithCompletedValidatedCertification({
+export default async function publishSessionWithValidatedCertification({
   databaseBuilder,
   sessionId,
   candidateId,
@@ -36,8 +37,17 @@ export default async function publishSessionWithCompletedValidatedCertification(
     locale: LANGUAGES_CODE.FRENCH,
   });
 
+  // Change certification-course creation date to show better counters on UI
+  await databaseBuilder
+    .knex('certification-courses')
+    .where('id', certificationCourse._id)
+    .update({
+      createdAt: dayjs().subtract(1, 'hour'),
+    });
+
   const assessment = certificationCourse._assessment;
 
+  // We simulate a certification in order to get the right capacity for a specific pix score
   const { capacity } = await scoringUseCases.simulateCapacityFromScore({
     score: pixScoreTarget,
     date: new Date(),
@@ -46,13 +56,22 @@ export default async function publishSessionWithCompletedValidatedCertification(
   const pickChallenge = pickChallengeService.getChallengePicker(
     config.v3Certification.defaultProbabilityToPickChallenge,
   );
+
+  // stopAtChallenge helps to simulate less answer to trigger degradation, and a check reports at finalization
   const simulatedCertification = await flashUseCases.simulateFlashAssessmentScenario({
     locale: LOCALE.FRENCH_SPOKEN,
+    initialCapacity: config.v3Certification.defaultCandidateCapacity,
+    stopAtChallenge: config.v3Certification.numberOfChallengesPerCourse - 1,
     pickChallenge,
     pickAnswerStatus,
-    initialCapacity: config.v3Certification.defaultCandidateCapacity,
   });
 
+  let timePad = 1;
+  let challengeDate = dayjs();
+  const getNewSecondPad = () => {
+    challengeDate = challengeDate.add(`${timePad++ % 60}`, 'seconds');
+    return challengeDate;
+  };
   for (const simulatedChallenge of simulatedCertification) {
     databaseBuilder.factory.buildCertificationChallenge({
       associatedSkillName: simulatedChallenge.challenge.skill.name,
@@ -60,8 +79,8 @@ export default async function publishSessionWithCompletedValidatedCertification(
       challengeId: simulatedChallenge.challenge.id,
       competenceId: simulatedChallenge.challenge.skill.competenceId,
       courseId: certificationCourse._id,
-      createdAt: session.date,
-      updatedAt: session.date,
+      createdAt: getNewSecondPad(),
+      updatedAt: getNewSecondPad(),
       isNeutralized: false,
       hasBeenSkippedAutomatically: false,
       certifiableBadgeKey: null,
@@ -74,10 +93,11 @@ export default async function publishSessionWithCompletedValidatedCertification(
       result: simulatedChallenge.answerStatus,
       assessmentId: assessment.id,
       challengeId: simulatedChallenge.challenge.id,
-      createdAt: session.date,
-      updatedAt: session.date,
+      createdAt: getNewSecondPad(),
+      updatedAt: getNewSecondPad(),
       timeout: null,
       resultDetails: 'dummy value',
+      timeSpent: 10,
     });
   }
 

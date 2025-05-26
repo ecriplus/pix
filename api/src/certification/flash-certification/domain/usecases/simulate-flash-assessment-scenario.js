@@ -10,6 +10,7 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
 /**
  * @param {Object} params
  * @param {ComplementaryCertificationKeys} params.complementaryCertificationKey
+ * @param {number} params.stopAtChallenge - force scenario to stop at challenge before maximumAssessmentLength
  */
 export async function simulateFlashAssessmentScenario({
   locale,
@@ -23,6 +24,7 @@ export async function simulateFlashAssessmentScenario({
   complementaryCertificationRepository,
   accessibilityAdjustmentNeeded,
   complementaryCertificationKey,
+  stopAtChallenge,
 }) {
   if (complementaryCertificationKey) {
     return _simulateComplementaryCertificationScenario({
@@ -36,6 +38,7 @@ export async function simulateFlashAssessmentScenario({
       initialCapacity,
       variationPercent,
       locale,
+      stopAtChallenge,
     });
   } else {
     return _simulateCoreCertificationScenario({
@@ -48,6 +51,7 @@ export async function simulateFlashAssessmentScenario({
       pickAnswerStatus,
       initialCapacity,
       variationPercent,
+      stopAtChallenge,
     });
   }
 }
@@ -63,6 +67,7 @@ async function _simulateComplementaryCertificationScenario({
   flashAlgorithmService,
   complementaryCertificationRepository,
   sharedFlashAlgorithmConfigurationRepository,
+  stopAtChallenge,
 }) {
   const complementaryCertification = await complementaryCertificationRepository.getByKey(complementaryCertificationKey);
 
@@ -82,6 +87,7 @@ async function _simulateComplementaryCertificationScenario({
     pickAnswerStatus,
     initialCapacity,
     variationPercent,
+    stopAtChallenge,
   });
 }
 
@@ -95,6 +101,7 @@ async function _simulateCoreCertificationScenario({
   flashAlgorithmService,
   locale,
   accessibilityAdjustmentNeeded,
+  stopAtChallenge,
 }) {
   const challenges = await _getChallenges({
     challengeRepository,
@@ -112,6 +119,7 @@ async function _simulateCoreCertificationScenario({
     pickAnswerStatus,
     initialCapacity,
     variationPercent,
+    stopAtChallenge,
   });
 }
 
@@ -131,12 +139,14 @@ function _simulation({
   pickAnswerStatus,
   initialCapacity,
   variationPercent,
+  stopAtChallenge,
 }) {
   const flashAssessmentAlgorithm = new FlashAssessmentAlgorithm({
     flashAlgorithmImplementation: flashAlgorithmService,
     configuration: new FlashAssessmentAlgorithmConfiguration({
       ...mostRecentAlgorithmConfiguration,
       variationPercent: variationPercent ?? mostRecentAlgorithmConfiguration.variationPercent,
+      maximumAssessmentLength: stopAtChallenge ?? mostRecentAlgorithmConfiguration.maximumAssessmentLength,
     }),
   });
 

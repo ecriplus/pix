@@ -169,6 +169,25 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
       expect(parsedResponse[0].simulationReport[0].numberOfAvailableChallenges).to.exist;
     });
 
+    describe('when the stopAtChallenge parameter is given', function () {
+      it('should return a report that contains the targeted number of challenges', async function () {
+        // given
+        options.headers = adminAuthorizationHeaders;
+        options.payload = {
+          ...validPayload,
+          stopAtChallenge: 1,
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response).to.have.property('statusCode', 200);
+        const parsedResponse = parseJsonStream(response);
+        expect(parsedResponse[0].simulationReport).to.have.lengthOf(1);
+      });
+    });
+
     describe('when there is no connected user', function () {
       it('should return status code 401', async function () {
         // given

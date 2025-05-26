@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 import { Candidate } from '../../../../../src/certification/enrolment/domain/models/Candidate.js';
 import { CenterTypes } from '../../../../../src/certification/enrolment/domain/models/CenterTypes.js';
 import { Subscription } from '../../../../../src/certification/enrolment/domain/models/Subscription.js';
@@ -16,13 +18,14 @@ import { usecases as teamUsecases } from '../../../../../src/team/domain/usecase
 import * as tooling from '../../common/tooling/index.js';
 import { acceptPixOrgaTermsOfService } from '../../common/tooling/legal-documents.js';
 import {
+  CERTIFICATION_SCO_EXTERNAL_ID,
   PUBLISHED_SCO_SESSION,
   SIMPLE_SCO_CERTIFICATION_CENTER_ID,
   SIMPLE_SCO_CERTIFICATION_USER_ID,
   SIMPLE_SCO_ORGANIZATION_MEMBER_ID,
   STARTED_SCO_SESSION,
 } from '../constants.js';
-import publishSessionWithCompletedValidatedCertification from '../tools/create-published-session-with-completed-validated-certification.js';
+import publishSessionWithValidatedCertification from '../tools/create-published-session-with-certification.js';
 
 /**
  * --- CERTIFICATION CASE ---
@@ -30,13 +33,19 @@ import publishSessionWithCompletedValidatedCertification from '../tools/create-p
  * The goal here is to reproduce the most simple certification case:
  *   - I'm a SCO user with a certifiable account
  *   - I'm able to start a certification course
- *   - The organization is Sco and managing students
+ *   - The organization is SCO and managing students
+ *
+ *  Quick start :
+ *    - Pix Certif user : sco-managing-students-v3@example.net
+ *    - Pix App user    : certifiable-sco-user@example.net
+ *    - Pix Admin user    : superadmin@example.net
+ *    - Pix Orga user   : sco-managing-students-v3@example.net
  */
 export default async function simpleScoManagingStudentsCertificationCase({ databaseBuilder }) {
   /**
    * 1. Create the certification session
    */
-  const externalId = 'SCO_CERTIFICATION_ORGANIZATION';
+  const externalId = CERTIFICATION_SCO_EXTERNAL_ID;
 
   const organizationMember = databaseBuilder.factory.buildUser.withRawPassword({
     id: SIMPLE_SCO_ORGANIZATION_MEMBER_ID,
@@ -191,8 +200,8 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
       certificationCenterId: certificationCenterForAdmin.id,
       address: 'Rennes',
       room: '28D',
-      examiner: 'Johnny Douw',
-      date: '2025-01-30',
+      examiner: 'Jean Prea-demarrer',
+      date: '2024-01-30',
       time: '14:30',
       description: 'SCO session with candidates ready to start',
     },
@@ -218,8 +227,8 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
       certificationCenterId: certificationCenterForAdmin.id,
       address: 'Montpellier',
       room: '9C',
-      examiner: 'Jeanne Vieve',
-      date: '2024-12-19',
+      examiner: 'Anne-Cess Ionfinie',
+      date: dayjs().format('YYYY-MM-DD'),
       time: '12:30',
       description: 'SCO session with published results',
     },
@@ -235,7 +244,7 @@ export default async function simpleScoManagingStudentsCertificationCase({ datab
     normalizeStringFnc: normalize,
   });
 
-  await publishSessionWithCompletedValidatedCertification({
+  await publishSessionWithValidatedCertification({
     databaseBuilder,
     sessionId: PUBLISHED_SCO_SESSION,
     candidateId: publishedScoCandidateId,
