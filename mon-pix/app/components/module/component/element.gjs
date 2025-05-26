@@ -31,7 +31,7 @@ export default class ModulixElement extends Component {
     {{else if (eq @element.type "download")}}
       <DownloadElement @download={{@element}} @onDownload={{@onFileDownload}} />
     {{else if (eq @element.type "embed")}}
-      <EmbedElement @embed={{@element}} @onAnswer={{@onElementAnswer}} />
+      <EmbedElement @embed={{@element}} @passageId={{@passageId}} @onAnswer={{@onElementAnswer}} />
     {{else if (eq @element.type "custom")}}
       <CustomElement @component={{@element}} @onAnswer={{@onElementAnswer}} />
     {{else if (eq @element.type "expand")}}
