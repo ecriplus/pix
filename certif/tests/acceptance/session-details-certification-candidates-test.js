@@ -1,4 +1,4 @@
-import { visit, within } from '@1024pix/ember-testing-library';
+import { visit, waitFor, within } from '@1024pix/ember-testing-library';
 import { click, currentURL, fillIn, find, settled, triggerEvent } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { setupIntl } from 'ember-intl/test-support';
@@ -671,11 +671,13 @@ module('Acceptance | Session Details Certification Candidates', function (hooks)
     await fillIn(screen.getByRole('textbox', { name: 'Code INSEE de naissance *' }), '75100');
     await fillIn(screen.getByRole('textbox', { name: 'Temps majoré (%)' }), '20');
     await click(screen.getByRole('button', { name: 'Tarification part Pix *' }));
-    await click(
-      await screen.findByRole('option', {
+    let paymentOption;
+    await waitFor(async () => {
+      paymentOption = await screen.findByRole('option', {
         name: 'Gratuite',
-      }),
-    );
+      });
+    });
+    await click(paymentOption);
     await fillIn(
       screen.getByRole('textbox', { name: 'E-mail du destinataire des résultats (formateur, enseignant...)' }),
       'email.destinataire@example.net',
