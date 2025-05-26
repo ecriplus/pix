@@ -20,11 +20,12 @@ const deleteCampaignParticipation = withTransaction(async function ({
     campaignParticipation.delete(userId, isAnonymizationWithDeletionEnabled);
     await campaignParticipationRepository.remove(campaignParticipation.dataToUpdateOnDeletion);
   }
-
-  const campaignParticipationIds = campaignParticipations.map(({ id }) => id);
-  await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
-    campaignParticipationIds,
-  );
+  if (isAnonymizationWithDeletionEnabled) {
+    const campaignParticipationIds = campaignParticipations.map(({ id }) => id);
+    await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
+      campaignParticipationIds,
+    );
+  }
 });
 
 export { deleteCampaignParticipation };
