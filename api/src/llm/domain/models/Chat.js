@@ -13,17 +13,8 @@ export class Chat {
     this.messages.push(new Message({ content: message, isFromUser: false }));
   }
 
-  get latestLLMMessage() {
-    const lastLLMMessage = this.messages.findLast((message) => !message.isFromUser);
-    return lastLLMMessage?.content ?? null;
-  }
-
   get currentPromptsCount() {
     return this.messages.filter((message) => message.isFromUser).length;
-  }
-
-  get history() {
-    return this.messages.map((message) => message.content);
   }
 
   toDTO() {

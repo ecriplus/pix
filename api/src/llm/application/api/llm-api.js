@@ -1,4 +1,3 @@
-import { config } from '../../../shared/config.js';
 import {
   ChatNotFoundError,
   ConfigurationNotFoundError,
@@ -8,8 +7,8 @@ import {
 import { Chat } from '../../domain/models/Chat.js';
 import * as chatRepository from '../../infrastructure/repositories/chat-repository.js';
 import * as configurationRepository from '../../infrastructure/repositories/configuration-repository.js';
+import * as promptRepository from '../../infrastructure/repositories/prompt-repository.js';
 import { LLMChatDTO } from './models/LLMChatDTO.js';
-import { LLMChatResponseDTO } from './models/LLMChatResponseDTO.js';
 
 /**
  * @typedef LLMChatDTO
@@ -60,7 +59,7 @@ export async function startChat({ configId, prefixIdentifier }) {
  * @param {Object} params
  * @param {string} params.chatId
  * @param {string} params.message
- * @returns {Promise<LLMChatResponseDTO>}
+ * @returns {Promise<module:stream.internal.PassThrough>}
  */
 export async function prompt({ chatId, message }) {
   if (!chatId) {
@@ -75,20 +74,12 @@ export async function prompt({ chatId, message }) {
     throw new MaxPromptsReachedError();
   }
 
-  const url = config.llm.postPromptUrl;
-  const response = await fetch(url, {
-    method: 'POST',
-    body: JSON.stringify({
-      message,
-      configuration,
-      history: chat.history,
-    }),
+  return promptRepository.prompt({
+    message,
+    configuration,
+    chat,
+    onLLMResponseReceived: addMessagesToChat(chat, message, chatRepository),
   });
-  const llmResponse = await response.json();
-  chat.addUserMessage(message);
-  chat.addLLMMessage(llmResponse.message);
-  await chatRepository.save(chat);
-  return new LLMChatResponseDTO({ message: chat.latestLLMMessage });
 }
 
 function generateId(prefixIdentifier) {
@@ -102,4 +93,12 @@ function getInputMaxCharsFromConfiguration(configuration) {
 
 function getInputMaxPromptsFromConfiguration(configuration) {
   return configuration.challenge.inputMaxPrompts;
+}
+
+function addMessagesToChat(chat, prompt, chatRepository) {
+  return async (llmMessage) => {
+    chat.addUserMessage(prompt);
+    chat.addLLMMessage(llmMessage);
+    await chatRepository.save(chat);
+  };
 }

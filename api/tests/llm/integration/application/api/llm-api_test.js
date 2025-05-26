@@ -1,3 +1,5 @@
+import { Readable } from 'node:stream';
+
 import ms from 'ms';
 
 import { prompt, startChat } from '../../../../../src/llm/application/api/llm-api.js';
@@ -208,7 +210,7 @@ describe('LLM | Integration | Application | API | llm', function () {
       });
     });
 
-    it('should return the llm response', async function () {
+    it('should return a stream which will contain the llm response', async function () {
       // given
       const chat = new Chat({
         id: 'chatId',
@@ -245,18 +247,32 @@ describe('LLM | Integration | Application | API | llm', function () {
               inputMaxPrompts: 100,
             },
           },
-          history: ['coucou user1', 'coucou LLM1'],
+          history: [
+            { content: 'coucou user1', role: 'user' },
+            { content: 'coucou LLM1', role: 'assistant' },
+          ],
           message: 'un message',
         })
-        .reply(201, { message: 'je suis le LLM bonjour' });
+        .reply(
+          200,
+          Readable.from([
+            '15:{"message":"coucou c\'est super"}',
+            '25:{"message":"\nle couscous c plutot bon"}',
+            '75:{"jecrois":{"que":"jaifini"}}',
+          ]),
+        );
 
       // when
-      const chatResponseDTO = await prompt({ chatId: 'chatId', message: 'un message' });
+      const stream = await prompt({ chatId: 'chatId', message: 'un message' });
 
       // then
-      expect(chatResponseDTO).to.deep.equal({
-        message: `je suis le LLM bonjour`,
-      });
+      const parts = [];
+      const decoder = new TextDecoder();
+      for await (const chunk of stream) {
+        parts.push(decoder.decode(chunk));
+      }
+      const llmResponse = parts.join('');
+      expect(llmResponse).to.deep.equal("data: coucou c'est super\n\ndata: \nle couscous c plutot bon\n\n");
       expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
         id: 'chatId',
         configurationId: 'uneConfigQuiExist',
@@ -264,7 +280,7 @@ describe('LLM | Integration | Application | API | llm', function () {
           { content: 'coucou user1', isFromUser: true },
           { content: 'coucou LLM1', isFromUser: false },
           { content: 'un message', isFromUser: true },
-          { content: 'je suis le LLM bonjour', isFromUser: false },
+          { content: "coucou c'est super\nle couscous c plutot bon", isFromUser: false },
         ],
       });
     });

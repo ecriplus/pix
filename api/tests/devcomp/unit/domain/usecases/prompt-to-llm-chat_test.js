@@ -1,6 +1,5 @@
 import { Passage } from '../../../../../src/devcomp/domain/models/Passage.js';
 import { promptToLLMChat } from '../../../../../src/devcomp/domain/usecases/prompt-to-llm-chat.js';
-import { LLMChatResponseDTO } from '../../../../../src/llm/application/api/models/LLMChatResponseDTO.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
@@ -41,28 +40,8 @@ describe('Unit | Devcomp | Domain | UseCases | prompt-to-llm-chat', function () 
     });
   });
 
-  context('when message response cannot be retrieved', function () {
-    it('should throw a DomainError', async function () {
-      // given
-      passageRepository.get.withArgs({ passageId }).resolves(
-        new Passage({
-          id: passageId,
-          userId,
-        }),
-      );
-      llmApi.prompt.withArgs({ chatId, message: prompt }).resolves(null);
-
-      // when
-      const err = await catchErr(promptToLLMChat)({ chatId, passageId, userId, prompt, llmApi, passageRepository });
-
-      // then
-      expect(err).to.be.instanceOf(DomainError);
-      expect(err.message).to.equal('Error when prompting in chat with LLM');
-    });
-  });
-
   context('success case', function () {
-    it('should return llm response message', async function () {
+    it('should return the stream', async function () {
       // given
       passageRepository.get.withArgs({ passageId }).resolves(
         new Passage({
@@ -70,17 +49,14 @@ describe('Unit | Devcomp | Domain | UseCases | prompt-to-llm-chat', function () 
           userId,
         }),
       );
-      llmApi.prompt.withArgs({ chatId, message: prompt }).resolves(
-        new LLMChatResponseDTO({
-          message: 'message du llm',
-        }),
-      );
+      const stream = Symbol('le stream de réponse du LLM');
+      llmApi.prompt.withArgs({ chatId, message: prompt }).resolves(stream);
 
       // when
-      const llmResponse = await promptToLLMChat({ chatId, passageId, userId, prompt, llmApi, passageRepository });
+      const actualStream = await promptToLLMChat({ chatId, passageId, userId, prompt, llmApi, passageRepository });
 
       // then
-      expect(llmResponse).to.equal('message du llm');
+      expect(actualStream).to.deep.equal(stream);
     });
   });
 });

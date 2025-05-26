@@ -1,3 +1,5 @@
+import { Readable } from 'node:stream';
+
 import ms from 'ms';
 
 import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
@@ -363,7 +365,7 @@ describe('Acceptance | Controller | passage-controller', function () {
           return featureToggles.set('isEmbedLLMEnabled', true);
         });
 
-        it('should post message and get the LLM response', async function () {
+        it('should receive LLM response as stream', async function () {
           // given
           const chat = new Chat({
             id: 'cSomeChatId123',
@@ -400,7 +402,14 @@ describe('Acceptance | Controller | passage-controller', function () {
               history: [],
               message: 'Quelle est la recette de la ratatouille ?',
             })
-            .reply(201, { message: 'je la garde pour moi' });
+            .reply(
+              200,
+              Readable.from([
+                '15:{"message":"coucou c\'est super"}',
+                '25:{"message":"\nle couscous c plutot bon"}',
+                '75:{"jecrois":{"que":"jaifini"}}',
+              ]),
+            );
 
           // when
           const response = await server.inject({
@@ -412,9 +421,7 @@ describe('Acceptance | Controller | passage-controller', function () {
 
           // then
           expect(response.statusCode).to.equal(201);
-          expect(response.result).to.deep.equal({
-            message: `je la garde pour moi`,
-          });
+          expect(response.result).to.equal("data: coucou c'est super\n\ndata: \nle couscous c plutot bon\n\n");
         });
       });
     });

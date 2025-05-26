@@ -24,7 +24,7 @@ export async function get(id) {
     logger.error(`error when trying to reach LLM API : ${err}`);
     throw new LLMApiError(err.toString());
   }
-  const statusCode = parseInt(response.status);
+  const statusCode = response.status;
   const jsonResponse = response.body ? await response.json() : '';
   if (statusCode === 200) {
     await configurationTemporaryStorage.save({
@@ -39,5 +39,6 @@ export async function get(id) {
   }
   const errorStr = JSON.stringify(jsonResponse, undefined, 2);
   logger.error(`error when reaching LLM API : code (${statusCode}) - ${errorStr}`);
+
   throw new LLMApiError(`code (${statusCode}) - ${errorStr}`);
 }
