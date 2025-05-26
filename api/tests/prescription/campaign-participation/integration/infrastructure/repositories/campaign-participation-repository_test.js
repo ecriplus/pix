@@ -458,7 +458,7 @@ describe('Integration | Repository | Campaign Participation', function () {
       databaseBuilder.factory.buildCampaignParticipation({
         userId: otherUserId,
       });
-      databaseBuilder.commit();
+      await databaseBuilder.commit();
 
       // when
       const result = await campaignParticipationRepository.getCampaignParticipationsCountByUserId({ userId });
