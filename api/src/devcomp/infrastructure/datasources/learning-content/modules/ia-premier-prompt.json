@@ -1,11 +1,11 @@
 {
   "id": "cf183961-e85a-421d-a316-05870191ff82",
   "slug": "ia-premier-prompt",
-  "title": "Mon premier prompt !",
+  "title": "Mon premier prompt !",
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Les IA conversationnelles comme Le Chat, ChatGPT, Gemini, DeepSeek, etc. vous en avez déjà entendu parler, mais savez vous comment on l’utilise ? Le secret tient en un mot : prompt. Mais c’est quoi au juste ? C'est ce qu'on va découvrir dans ce module.</p>",
+    "description": "<p>Les IA conversationnelles comme Le Chat, ChatGPT, Gemini, DeepSeek, etc. vous en avez déjà entendu parler, mais savez vous comment on l’utilise ? Le secret tient en un mot&nbsp;: prompt. Mais c’est quoi au juste ? C'est ce qu'on va découvrir dans ce module.</p>",
     "duration": 10,
     "level": "Débutant",
     "objectives": [
@@ -66,35 +66,9 @@
           "type": "element",
           "element": {
             "id": "4cd2311c-6c89-4d04-9087-1b874a412882",
-            "type": "qcu",
-            "instruction": "<p>Dans cette discussion, lequel parmi ces trois textes est le prompt ?&nbsp;</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "<p>Des idées de noms pour une association de yoga à roulettes ?</p>",
-                "feedback": {
-                  "state": "<p>Bien vu !&nbsp;</p>",
-                  "diagnosis": "<p>En effet, le prompt est la question posée ou la consigne donnée à l'IA pour obtenir une réponse.</p>"
-                }
-              },
-              {
-                "id": "2",
-                "content": "<p>Bien sûr, voici quelques idées de noms pour une association de yoga à roulettes.</p>",
-                "feedback": {
-                  "state": "<p>Et non !</p>",
-                  "diagnosis": "<p>C'est la résponse donnée par l'IA à la question que lui a posé Gustave. La question de Gustave c'est le prompt !</p>"
-                }
-              },
-              {
-                "id": "3",
-                "content": "<p>Ecrivez votre message ici.</p>",
-                "feedback": {
-                  "state": "<p>Et non !</p>",
-                  "diagnosis": "<p>C'est la zone de saisie.&nbsp;Gustave écrit ses prompts dans cette zone, c'est-à-dire, les questions ou consignes&nbsp;données à l'IA.</p>"
-                }
-              }
-            ],
-            "solution": ""
+            "type": "custom",
+            "tagName": "",
+            "props": {}
           }
         }
       ]
@@ -109,7 +83,7 @@
           "element": {
             "id": "6080355f-69c8-4803-a7e2-b301556ac9e3",
             "type": "text",
-            "content": "<ul><li>Le prompt est la question posée ou la consigne donnée à l’IA conversationnelle 🤖.</li><li>Les réponses de l’IA conversationnelle &nbsp;s'affichent comme dans une conversation de messagerie instantanée.&nbsp;</li><li>Il y a toujours une zone pour saisir le prompt suivant.</li></ul>"
+            "content": "<ul><li>Le prompt est la question posée ou la consigne donnée à l’IA conversationnelle 🤖.</li><li>Les réponses de l’IA conversationnelle &nbsp;s'affichent comme dans une conversation de messagerie instantanée.&nbsp;</li><li>Il y a toujours une zone pour saisir le prompt suivant.</li></ul>"
           }
         }
       ]
@@ -152,7 +126,7 @@
           "element": {
             "id": "d7c97543-452a-4777-9f6e-7d33e3d0d077",
             "type": "qcm",
-            "instruction": "<p>D’après vos observations, quelle affirmation correspond le mieux à votre expérience ?</p>",
+            "instruction": "<p>D’après vos observations, quelle affirmation correspond le mieux à votre expérience ?</p>",
             "proposals": [
               {
                 "id": "1",
@@ -176,16 +150,16 @@
               },
               {
                 "id": "6",
-                "content": "<p>L’IA conversationnelle répond toujours, mais parfois sans lien avec la question.</p><p><br></p>"
+                "content": "<p>L’IA conversationnelle répond toujours, mais parfois sans lien avec la question.</p>"
               }
             ],
             "feedbacks": {
               "valid": {
-                "state": "<p>Bravo !</p>",
+                "state": "<p>Bravo !</p>",
                 "diagnosis": ""
               },
               "invalid": {
-                "state": "<p>Oups, reessayez !</p>",
+                "state": "<p>Oups, reessayez !</p>",
                 "diagnosis": ""
               }
             },
@@ -207,7 +181,7 @@
           "element": {
             "id": "90cd34bf-4182-4c72-ab1a-22ea98ab9c46",
             "type": "text",
-            "content": "<p>Comme vous avez pu le voir, il est possible de faire des demandes variées à l’IA conversationnelle.&nbsp; <br>La demande est exprimée en <strong>langage courant</strong>, pas besoin de connaître des commandes spéciales ! 💬 <br>Pour que l’IA comprenne bien la demande, il est faut être <strong>précis</strong>.&nbsp; <br>📌Une bonne façon d’être précis c’est d’utiliser des <strong>verbes d’actions</strong> :&nbsp; “lister”, “traduire”, “résumer”, etc.<br><br></p>"
+            "content": "<p>Comme vous avez pu le voir, il est possible de faire des demandes variées à l’IA conversationnelle.&nbsp; <br>La demande est exprimée en <strong>langage courant</strong>, pas besoin de connaître des commandes spéciales ! 💬 <br>Pour que l’IA comprenne bien la demande, il est faut être <strong>précis</strong>.&nbsp; <br>📌Une bonne façon d’être précis c’est d’utiliser des <strong>verbes d’actions</strong>&nbsp;:&nbsp; “lister”, “traduire”, “résumer”, etc.<br><br></p>"
           }
         }
       ]
@@ -222,7 +196,7 @@
           "element": {
             "id": "1ad822c8-cf06-43b8-adf4-9acc12f22fff",
             "type": "text",
-            "content": "<p>Dans certains cas, utiliser un verbe adapté ne suffit pas😅. Il faut aussi donner des éléments décrivant le résultat que l’on veut obtenir. Voyons cela ensemble !</p>"
+            "content": "<p>Dans certains cas, utiliser un verbe adapté ne suffit pas😅. Il faut aussi donner des éléments décrivant le résultat que l’on veut obtenir. Voyons cela ensemble !</p>"
           }
         }
       ]
@@ -258,13 +232,13 @@
           "element": {
             "id": "ee3bd7af-b9d4-432d-a6a2-78bada14d03a",
             "type": "qcu",
-            "instruction": "<p>D’après vos observations, quelle est la meilleur option ?<br><br></p>",
+            "instruction": "<p>D’après vos observations, quelle est la meilleur option ?<br><br></p>",
             "proposals": [
               {
                 "id": "1",
                 "content": "<p>Prompt 1</p>",
                 "feedback": {
-                  "state": "<p>Mauvaise réponse !</p>",
+                  "state": "<p>Mauvaise réponse !</p>",
                   "diagnosis": "<p>L’IA conversationnelle&nbsp; ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut préciser tous les éléments importants de la demande dans le prompt.<br><br></p>"
                 }
               },
@@ -272,7 +246,7 @@
                 "id": "2",
                 "content": "<p>Prompt 2</p>",
                 "feedback": {
-                  "state": "<p>Mauvaise réponse !</p>",
+                  "state": "<p>Mauvaise réponse !</p>",
                   "diagnosis": "<p>L’IA conversationnelle&nbsp; ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut préciser tous les éléments importants de la demande dans le prompt.<br><br></p>"
                 }
               },
@@ -280,8 +254,8 @@
                 "id": "3",
                 "content": "<p>Prompt 3</p>",
                 "feedback": {
-                  "state": "<p>Bonne réponse !</p>",
-                  "diagnosis": "<p>En effet, ce prompt contient des éléments précis : la phrase contient un verbe, le nombre de personnes et les ingrédients à supprimer.</p>"
+                  "state": "<p>Bonne réponse !</p>",
+                  "diagnosis": "<p>En effet, ce prompt contient des éléments précis&nbsp;: la phrase contient un verbe, le nombre de personnes et les ingrédients à supprimer.</p>"
                 }
               }
             ],
@@ -317,7 +291,7 @@
             "type": "image",
             "url": "https://i.imgur.com/3gVWWpO.png",
             "alt": "",
-            "alternativeText": "<p>Pix IA LLM</p><p>Biennvenue sur Pix IA LLM</p><p>Prompt : Je veux adopter un animal. J'habite en appartement. Quelles sont les 5 meillaures options ?</p><p>Réponse IA : Voici cinq options d'animaux adaptés à la vie en appartement :</p><p>1. Chat</p><p>2. Poisson</p><p>3. Lapin</p><p>4. Crocodile</p><p>5. Hamster</p><p><br></p><p>Zone de saisie du prompt : Écrivez votre message ici</p><p>Bouton \"Envoyer\"</p>",
+            "alternativeText": "<p>Pix IA LLM</p><p>Biennvenue sur Pix IA LLM</p><p>Prompt&nbsp;: Je veux adopter un animal. J'habite en appartement. Quelles sont les 5 meillaures options ?</p><p>Réponse IA&nbsp;: Voici cinq options d'animaux adaptés à la vie en appartement&nbsp;:</p><p>1. Chat</p><p>2. Poisson</p><p>3. Lapin</p><p>4. Crocodile</p><p>5. Hamster</p><p>Zone de saisie du prompt&nbsp;: Écrivez votre message ici</p><p>Bouton \"Envoyer\"</p>",
             "legend": "",
             "licence": ""
           }
@@ -341,16 +315,16 @@
                 "id": "2",
                 "content": "<p>La réponse de l'IA conversationnelle n'est pas adaptée à la demande</p>",
                 "feedback": {
-                  "state": "<p>Bien vu !</p>",
-                  "diagnosis": "<p>La réponse de l’IA conversationnelle n’est pas adaptée : adopter un crocodile n'est pas une bonne option pour quelqu’un qui habite en appartement, c'est dangereux et même illégal !<br><br></p>"
+                  "state": "<p>Bien vu !</p>",
+                  "diagnosis": "<p>La réponse de l’IA conversationnelle n’est pas adaptée&nbsp;: adopter un crocodile n'est pas une bonne option pour quelqu’un qui habite en appartement, c'est dangereux et même illégal !<br><br></p>"
                 }
               },
               {
                 "id": "3",
                 "content": "<p>Je ne sais pas</p>",
                 "feedback": {
-                  "state": "<p>Petit coup de pouce !</p>",
-                  "diagnosis": "<p>Regardez bien, la réponse de l’IA conversationnelle ne respecte pas ce qui est demandé dans le prompt : le crocodile n'est pas l'animal le plus adapté pour un appartement !</p>"
+                  "state": "<p>Petit coup de pouce !</p>",
+                  "diagnosis": "<p>Regardez bien, la réponse de l’IA conversationnelle ne respecte pas ce qui est demandé dans le prompt&nbsp;: le crocodile n'est pas l'animal le plus adapté pour un appartement !</p>"
                 }
               }
             ],
@@ -384,7 +358,7 @@
           "element": {
             "id": "33210c11-0e87-4d93-9190-089654d57ee4",
             "type": "text",
-            "content": "<p>📌 Résumons l’essentiel avant de passer à la suite : <br></p><ul><li>Un prompt (instruction ou requête en français) est une <strong>question</strong> que l’on pose ou une <strong>consigne</strong> que l’on donne à l'IA conversationnelle pour qu’elle produise une réponse🧑‍💻.</li><li>Un prompt s’écrit en <strong>langage courant</strong>, comme si on parlait à un autre être humain🗣️.</li><li>Plus la <strong>demande est claire et précise</strong>, plus la réponse de l'IA conversationnelle&nbsp;est adaptée et pertinente🤓.&nbsp;<ul><li>On peut utiliser des <strong>verbes d’action</strong> comme “Traduis”, “Liste”, “Résume”, etc.</li><li>On peut ajouter des <strong>informations supplémentaires</strong> pour donner un contexte.</li></ul></li><li>Il est important de <strong>toujours relire la réponse</strong> de l'IA conversationnelle &nbsp;pour vérifier qu'elle répond bien à la demande🕵️.</li><li>Si la réponse de l’IA conversationnelle ne convient pas, il faut <strong>reformuler</strong> son prompt pour mieux guider l'IA📝.</li></ul>"
+            "content": "<p>📌 Résumons l’essentiel avant de passer à la suite&nbsp;: <br></p><ul><li>Un prompt (instruction ou requête en français) est une <strong>question</strong> que l’on pose ou une <strong>consigne</strong> que l’on donne à l'IA conversationnelle pour qu’elle produise une réponse🧑‍💻.</li><li>Un prompt s’écrit en <strong>langage courant</strong>, comme si on parlait à un autre être humain🗣️.</li><li>Plus la <strong>demande est claire et précise</strong>, plus la réponse de l'IA conversationnelle&nbsp;est adaptée et pertinente🤓.&nbsp;<ul><li>On peut utiliser des <strong>verbes d’action</strong> comme “Traduis”, “Liste”, “Résume”, etc.</li><li>On peut ajouter des <strong>informations supplémentaires</strong> pour donner un contexte.</li></ul></li><li>Il est important de <strong>toujours relire la réponse</strong> de l'IA conversationnelle &nbsp;pour vérifier qu'elle répond bien à la demande🕵️.</li><li>Si la réponse de l’IA conversationnelle ne convient pas, il faut <strong>reformuler</strong> son prompt pour mieux guider l'IA📝.</li></ul>"
           }
         }
       ]
@@ -434,7 +408,7 @@
           "element": {
             "id": "45d57981-7773-420a-b5b5-dbbab33848e4",
             "type": "text",
-            "content": "<p>À vous de jouer !</p>"
+            "content": "<p>À vous de jouer !</p>"
           }
         },
         {
@@ -445,7 +419,7 @@
             "isCompletionRequired": false,
             "title": "",
             "url": "https://1024pix.github.io/atelier-contenus/NAI/SwipePromptClairetprecis.html",
-            "instruction": "<p>Lisez le prompt et dites s’il est clair et précis ou flou et vague en cliquant sur le bouton correspondant !</p>",
+            "instruction": "<p>Lisez le prompt et dites s’il est clair et précis ou flou et vague en cliquant sur le bouton correspondant !</p>",
             "solution": "",
             "height": 600
           }
@@ -462,7 +436,7 @@
           "element": {
             "id": "bd373d86-9859-4f63-a693-bec98c2e7300",
             "type": "text",
-            "content": "<p>Tu as appris à parler à une IA conversationnelle👏.Maintenant, place à la pratique : voyons si tu peux obtenir la réponse voulue !</p>"
+            "content": "<p>Tu as appris à parler à une IA conversationnelle👏.Maintenant, place à la pratique&nbsp;: voyons si tu peux obtenir la réponse voulue !</p>"
           }
         }
       ]
