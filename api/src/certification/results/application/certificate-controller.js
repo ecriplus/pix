@@ -131,7 +131,7 @@ const getSessionCertificates = async function (
 
   const sessionId = request.params.sessionId;
   const isFrenchDomainExtension = request.query.isFrenchDomainExtension;
-  const certificates = await usecases.getCertificationAttestationsForSession({
+  const certificates = await usecases.getCertificatesForSession({
     sessionId,
   });
 

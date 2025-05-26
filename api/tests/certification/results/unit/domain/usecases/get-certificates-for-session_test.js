@@ -1,8 +1,8 @@
-import { getCertificationAttestationsForSession } from '../../../../../../src/certification/results/domain/usecases/get-certification-attestations-for-session.js';
+import { getCertificatesForSession } from '../../../../../../src/certification/results/domain/usecases/get-certificates-for-session.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-describe('Unit | UseCase | get-certification-attestation-for-session', function () {
+describe('Unit | UseCase | get-certificates-for-session', function () {
   let certificateRepository, certificationCourseRepository;
 
   beforeEach(function () {
@@ -14,12 +14,12 @@ describe('Unit | UseCase | get-certification-attestation-for-session', function 
     };
   });
 
-  it('should return multiple certification attestations enhanced with result competence tree for a sessions', async function () {
+  it('should return multiple certificates enhanced with result competence tree for a sessions', async function () {
     // given
     domainBuilder.certification.sessionManagement.buildSession({
       id: 11,
       finalizedAt: new Date('2020-01-02T14:00:00Z'),
-      certificationCenter: 'Centre des deux attestations',
+      certificationCenter: 'Centre des deux certificats',
     });
 
     const certificationCourse1 = domainBuilder.buildCertificationCourse({
@@ -29,11 +29,11 @@ describe('Unit | UseCase | get-certification-attestation-for-session', function 
       completedAt: '2020-01-01',
     });
     domainBuilder.buildResultCompetenceTree({ id: 'firstResultTreeId' });
-    const certificationAttestation1 = domainBuilder.buildCertificationAttestation({
+    const certificate1 = domainBuilder.buildCertificationAttestation({
       id: 1,
       userId: 101,
       resultCompetenceTree: 'firstResultTreeId',
-      certificationCenter: 'Centre des deux attestations',
+      certificationCenter: 'Centre des deux certificats',
     });
 
     const certificationCourse2 = domainBuilder.buildCertificationCourse({
@@ -43,43 +43,43 @@ describe('Unit | UseCase | get-certification-attestation-for-session', function 
       completedAt: '2020-01-01',
     });
     domainBuilder.buildResultCompetenceTree({ id: 'secondResultTreeId' });
-    const certificationAttestation2 = domainBuilder.buildCertificationAttestation({
+    const certificate2 = domainBuilder.buildCertificationAttestation({
       id: 2,
       userId: 102,
       resultCompetenceTree: 'secondResultTreeId',
-      certificationCenter: 'Centre des deux attestations',
+      certificationCenter: 'Centre des deux certificats',
     });
 
     certificationCourseRepository.findCertificationCoursesBySessionId
       .withArgs({ sessionId: 11 })
       .resolves([certificationCourse1, certificationCourse2]);
-    certificateRepository.getCertificate.withArgs({ certificationCourseId: 1 }).resolves(certificationAttestation1);
-    certificateRepository.getCertificate.withArgs({ certificationCourseId: 2 }).resolves(certificationAttestation2);
+    certificateRepository.getCertificate.withArgs({ certificationCourseId: 1 }).resolves(certificate1);
+    certificateRepository.getCertificate.withArgs({ certificationCourseId: 2 }).resolves(certificate2);
 
     // when
-    const actualCertificationAttestations = await getCertificationAttestationsForSession({
+    const actualCertificates = await getCertificatesForSession({
       sessionId: 11,
       certificateRepository,
       certificationCourseRepository,
     });
 
     // then
-    const expectedCertificationAttestations = [
+    const expectedCertificates = [
       domainBuilder.buildCertificationAttestation({
         id: 1,
         userId: 101,
         resultCompetenceTree: 'firstResultTreeId',
-        certificationCenter: 'Centre des deux attestations',
+        certificationCenter: 'Centre des deux certificats',
       }),
       domainBuilder.buildCertificationAttestation({
         id: 2,
         userId: 102,
         resultCompetenceTree: 'secondResultTreeId',
-        certificationCenter: 'Centre des deux attestations',
+        certificationCenter: 'Centre des deux certificats',
       }),
     ];
 
-    expect(actualCertificationAttestations).to.deep.equal(expectedCertificationAttestations);
+    expect(actualCertificates).to.deep.equal(expectedCertificates);
   });
 
   describe('when there is no certification courses for the session', function () {
@@ -94,7 +94,7 @@ describe('Unit | UseCase | get-certification-attestation-for-session', function 
       certificationCourseRepository.findCertificationCoursesBySessionId.withArgs({ sessionId: 12 }).resolves([]);
 
       // when
-      const error = await catchErr(getCertificationAttestationsForSession)({
+      const error = await catchErr(getCertificatesForSession)({
         sessionId: 12,
         certificateRepository,
         certificationCourseRepository,
@@ -105,7 +105,7 @@ describe('Unit | UseCase | get-certification-attestation-for-session', function 
     });
   });
 
-  describe('when there is no certification attestations for the session', function () {
+  describe('when there is no certificate for the session', function () {
     it('should throw a NotFoundError', async function () {
       // given
       domainBuilder.certification.sessionManagement.buildSession({
@@ -126,7 +126,7 @@ describe('Unit | UseCase | get-certification-attestation-for-session', function 
       certificateRepository.getCertificate.withArgs({ certificationCourseId: 3 }).resolves();
 
       // when
-      const error = await catchErr(getCertificationAttestationsForSession)({
+      const error = await catchErr(getCertificatesForSession)({
         sessionId: 13,
         certificateRepository,
         certificationCourseRepository,

@@ -500,7 +500,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         };
 
         sinon
-          .stub(usecases, 'getCertificationAttestationsForSession')
+          .stub(usecases, 'getCertificatesForSession')
           .withArgs({
             sessionId: session.id,
           })
@@ -564,7 +564,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         };
 
         sinon
-          .stub(usecases, 'getCertificationAttestationsForSession')
+          .stub(usecases, 'getCertificatesForSession')
           .withArgs({
             sessionId: session.id,
           })
