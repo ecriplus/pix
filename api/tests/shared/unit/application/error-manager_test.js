@@ -1,4 +1,5 @@
 import { AdminMemberError } from '../../../../src/authorization/domain/errors.js';
+import { CertificateGenerationError } from '../../../../src/certification/results/domain/errors.js';
 import { CsvWithNoSessionDataError } from '../../../../src/certification/session-management/domain/errors.js';
 import { authenticationDomainErrorMappingConfiguration } from '../../../../src/identity-access-management/application/http-error-mapper-configuration.js';
 import { UnableToAttachChildOrganizationToParentOrganizationError } from '../../../../src/organizational-entities/domain/errors.js';
@@ -13,7 +14,6 @@ import {
   CampaignTypeError,
   CandidateNotAuthorizedToJoinSessionError,
   CandidateNotAuthorizedToResumeCertificationTestError,
-  CertificationAttestationGenerationError,
   CertificationCandidateNotFoundError,
   CertificationCandidateOnFinalizedSessionError,
   CertificationEndedByFinalizationError,
@@ -301,9 +301,9 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       });
     });
 
-    it('should instantiate UnprocessableEntityError when CertificationAttestationGenerationError', async function () {
+    it('should instantiate UnprocessableEntityError when CertificateGenerationError', async function () {
       // given
-      const error = new CertificationAttestationGenerationError();
+      const error = new CertificateGenerationError();
       sinon.stub(HttpErrors, 'UnprocessableEntityError');
       const params = { request: {}, h: hFake, error };
 

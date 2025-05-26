@@ -2,6 +2,7 @@ import url from 'node:url';
 
 import PDFDocument from 'pdfkit';
 
+import { CertificateGenerationError } from '../../../domain/errors.js';
 import { generateV2AttestationTemplate } from './templates/certificate.js';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -35,12 +36,16 @@ const generate = ({ certificates, i18n, isFrenchDomainExtension }) => {
       doc.addPage();
     }
 
-    generateV2AttestationTemplate({
-      pdf: doc,
-      data: certificate,
-      translate: i18n.__,
-      isFrenchDomainExtension,
-    });
+    try {
+      generateV2AttestationTemplate({
+        pdf: doc,
+        data: certificate,
+        translate: i18n.__,
+        isFrenchDomainExtension,
+      });
+    } catch {
+      throw new CertificateGenerationError();
+    }
   });
 
   doc.end();

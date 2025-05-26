@@ -114,12 +114,6 @@ class CertificationCandidateNotFoundError extends DomainError {
   }
 }
 
-class CertificationAttestationGenerationError extends DomainError {
-  constructor(message = "Une erreur est survenue durant la génération de l'attestation.") {
-    super(message);
-  }
-}
-
 class CsvImportError extends DomainError {
   constructor(code, meta) {
     super('An error occurred during CSV import');
@@ -1044,7 +1038,6 @@ export {
   CantImproveCampaignParticipationError,
   CertificateVerificationCodeGenerationTooManyTrials,
   CertificationAlgorithmVersionError,
-  CertificationAttestationGenerationError,
   CertificationBadgeForbiddenDeletionError,
   CertificationCandidateByPersonalInfoNotFoundError,
   CertificationCandidateByPersonalInfoTooManyMatchesError,
