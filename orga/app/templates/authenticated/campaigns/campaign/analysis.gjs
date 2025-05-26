@@ -1,6 +1,6 @@
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
-import AnalysisPerTubesAndCompetences from 'pix-orga/components/analysis/analysis-per-tubes-and-competences';
+import AnalysisPerTubeOrCompetence from 'pix-orga/components/analysis/analysis-per-tube-or-competence';
 import GlobalPositioning from 'pix-orga/components/analysis/global-positioning';
 import Competences from 'pix-orga/components/campaign/analysis/competences';
 import Recommendations from 'pix-orga/components/campaign/analysis/recommendations';
@@ -16,7 +16,7 @@ import EmptyState from 'pix-orga/components/campaign/empty-state';
         <p>{{t "pages.campaign-analysis.description.nota-bene"}}</p>
       </div>
       <GlobalPositioning @data={{@model.analysisData}} />
-      <AnalysisPerTubesAndCompetences @data={{@model.analysisData}} />
+      <AnalysisPerTubeOrCompetence @data={{@model.analysisData}} />
     {{else}}
       <h2 class="screen-reader-only">{{t "pages.campaign-review.title"}}</h2>
       <Recommendations

@@ -9,3 +9,65 @@
     font-weight: var(--pix-font-bold);
   }
 }
+
+
+.analysis-per-tube-or-competence {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h2 {
+      @extend %pix-title-s;
+
+    }
+
+    margin-bottom: var(--pix-spacing-1x);
+  }
+}
+
+.analysis {
+
+  &__description {
+    @extend %pix-body-s;
+
+    margin-bottom: var(--pix-spacing-6x);
+  }
+
+  &__table {
+    margin-bottom: var(--pix-spacing-6x);
+  }
+
+  &__description-column {
+    width: 65%;
+  }
+
+  &__level-column {
+    width: 10%;
+  }
+
+  &__competence-title, &__tube-title {
+    @extend %pix-body-s;
+
+    display: block;
+    margin-bottom: var(--pix-spacing-2x);
+    font-weight: var(--pix-font-bold);
+  }
+
+  &__competence-description, &__tube-description {
+    @extend %pix-body-s;
+
+    display: block;
+  }
+
+  &__competence-title {
+    @extend %pix-title-xxs;
+
+    margin-bottom: var(--pix-spacing-3x);
+  }
+
+}
+
+
+
+

@@ -273,14 +273,21 @@
     }
   },
   "components": {
-    "analysis-per-tubes-and-competences": {
-      "detailed-positioning":{
-        "description":"Niveau moyen atteint par les participants par sujet sur le niveau maximal accessible dans cette campagne.",
-        "title" : "Positionnement détaillé"
-      },
-      "gauge": {
-        "label": "Niveau {reachedLevel} sur {maxLevel}"
-      },
+    "analysis-per-competence": {
+      "cover-rate-gauge-label": "Sur la compétence vos participants ont obtenu un niveau de {reachedLevel} sur un niveau maximum atteignable de {maxLevel}.",
+      "description": "Niveau moyen atteint par les participants par compétence sur le niveau maximal accessible dans cette campagne.",
+      "table": {
+        "caption": "Compétences",
+        "column": {
+          "competences": "Nom et descriptif de la compétence",
+          "level": "Niveau",
+          "positioning": "Positionnement"
+        }
+      }
+    },
+    "analysis-per-tube": {
+      "cover-rate-gauge-label": "Sur le sujet vos participants ont obtenu un niveau de {reachedLevel} sur un niveau maximum atteignable de {maxLevel}.",
+      "description": "Niveau moyen atteint par les participants par sujet sur le niveau maximal accessible dans cette campagne.",
       "table": {
         "caption": "{index} - {name}",
         "column": {
@@ -288,6 +295,14 @@
           "positioning": "Positionnement",
           "tubes": "Nom et descriptif du sujet"
         }
+      }
+    },
+    "analysis-per-tube-or-competence": {
+      "title": "Positionnement détaillé",
+      "toggle": {
+        "label": "Vue par:",
+        "label-competences": "Compétences",
+        "label-tubes": "Sujets"
       }
     },
     "campaign": {
@@ -312,6 +327,9 @@
       "content": "La certificabilité signifie que le participant a atteint le niveau 1 dans au moins 5 compétences différentes.",
       "from-collect-notice": "L'information provient des campagnes de collecte de profil réalisées par ce dernier. Si le participant a déjà envoyé son profil, on affiche la date ainsi que le statut du dernier envoi.",
       "from-compute-certificability": "Ce statut est mis à jour automatiquement (toutes les 24h) et lors des campagnes de collectes de profils."
+    },
+    "cover-rate-gauge": {
+      "label": "Sur cette campagne, vos participants ont obtenu un niveau de {reachedLevel} sur un niveau maximum atteignable de {maxLevel}."
     },
     "date": {
       "no-date": "Pas encore de date"
@@ -1518,9 +1536,6 @@
       "before-date": "au",
       "description": "Le tableau ci-dessous vous permet de visualiser le positionnement de vos participants par sujet.'<br>' Le positionnement rend compte du niveau moyen de vos participants sur le niveau maximum qu’ils auraient pu atteindre.'<br>' Ces données tiennent compte de toutes les participations partagées dans le cadre des campagnes d’évaluation non supprimées de votre organisation.",
       "empty-state": "Aucune donnée disponible",
-      "gauge": {
-        "label": "Sur le sujet vos participants ont obtenu un niveau de {userLevel} sur un niveau maximum atteignable de {tubeLevel}."
-      },
       "level": {
         "advanced": "Avancé",
         "expert": "Expert",

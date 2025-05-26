@@ -1,15 +1,15 @@
 import { render, within } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
-import AnalysisPerTubesAndCompetences from 'pix-orga/components/analysis/analysis-per-tubes-and-competences';
+import AnalysisPerTube from 'pix-orga/components/analysis/analysis-per-tube';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | analysis-per-tubes-and-competences', function (hooks) {
+module('Integration | Component | analysis-per-tube', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  module('display analysis by competence and tubes', function () {
-    test('it should display all table ', async function (assert) {
+  module('display analysis by tube', function () {
+    test('it should display all tables', async function (assert) {
       // given
       const campaignAnalysisByTubesAndCompetence = {
         levelsPerCompetence: [
@@ -28,17 +28,11 @@ module('Integration | Component | analysis-per-tubes-and-competences', function 
 
       // when
       const screen = await render(
-        <template><AnalysisPerTubesAndCompetences @data={{campaignAnalysisByTubesAndCompetence}} /></template>,
+        <template><AnalysisPerTube @data={{campaignAnalysisByTubesAndCompetence}} /></template>,
       );
 
       // then
-      assert.ok(
-        screen.getByRole('heading', {
-          level: 2,
-          name: t('components.analysis-per-tubes-and-competences.detailed-positioning.title'),
-        }),
-      );
-      assert.ok(screen.getByText(t('components.analysis-per-tubes-and-competences.detailed-positioning.description')));
+      assert.ok(screen.getByText(t('components.analysis-per-tube.description')));
       assert.ok(screen.getByRole('table', { name: '1 - mon super titre de competence 1' }));
       assert.ok(screen.getByRole('table', { name: '2 - mon super titre de competence 2' }));
     });
@@ -52,7 +46,7 @@ module('Integration | Component | analysis-per-tubes-and-competences', function 
             name: 'mon super titre de competence 1',
             levelsPerTube: [
               { title: 'tube 1 cp 1', description: 'desc tube 1 cp 1', maxLevel: 8, meanLevel: 2 },
-              { title: 'tube 2 cp 1', description: 'desc tube 2 cp 1', maxLevel: 4, meanLevel: 3.45 },
+              { title: 'tube 2 cp 1', description: 'desc tube 2 cp 1', maxLevel: 4, meanLevel: 3.5 },
             ],
           },
           {
@@ -65,7 +59,7 @@ module('Integration | Component | analysis-per-tubes-and-competences', function 
 
       // when
       const screen = await render(
-        <template><AnalysisPerTubesAndCompetences @data={{campaignAnalysisByTubesAndCompetence}} /></template>,
+        <template><AnalysisPerTube @data={{campaignAnalysisByTubesAndCompetence}} /></template>,
       );
 
       // then
@@ -74,13 +68,14 @@ module('Integration | Component | analysis-per-tubes-and-competences', function 
 
       assert.ok(
         filledTable.getByRole('columnheader', {
-          name: t('components.analysis-per-tubes-and-competences.table.column.tubes'),
+          name: t('components.analysis-per-tube.table.column.tubes'),
         }),
       );
       assert.ok(filledTable.getByRole('cell', { name: 'tube 1 cp 1 desc tube 1 cp 1' }));
+
       assert.ok(
         filledTable.getByRole('cell', {
-          name: t('pages.statistics.gauge.label', { userLevel: 2, tubeLevel: 8 }),
+          name: t('components.analysis-per-tube.cover-rate-gauge-label', { reachedLevel: 2, maxLevel: 8 }),
         }),
       );
       assert.ok(filledTable.getByRole('cell', { name: t('pages.statistics.level.novice') }));
@@ -88,19 +83,19 @@ module('Integration | Component | analysis-per-tubes-and-competences', function 
       assert.ok(filledTable.getByRole('cell', { name: 'tube 2 cp 1 desc tube 2 cp 1' }));
       assert.ok(
         filledTable.getByRole('cell', {
-          name: t('pages.statistics.gauge.label', { userLevel: 3.5, tubeLevel: 4 }),
+          name: t('components.analysis-per-tube.cover-rate-gauge-label', { reachedLevel: 3.5, maxLevel: 4 }),
         }),
       );
       assert.ok(filledTable.getByRole('cell', { name: t('pages.statistics.level.independent') }));
 
       assert.ok(
         filledTable.getByRole('columnheader', {
-          name: t('components.analysis-per-tubes-and-competences.table.column.positioning'),
+          name: t('components.analysis-per-tube.table.column.positioning'),
         }),
       );
       assert.ok(
         filledTable.getByRole('columnheader', {
-          name: t('components.analysis-per-tubes-and-competences.table.column.level'),
+          name: t('components.analysis-per-tube.table.column.level'),
         }),
       );
 
