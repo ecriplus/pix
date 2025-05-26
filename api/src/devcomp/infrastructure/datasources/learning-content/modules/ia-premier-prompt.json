@@ -27,10 +27,10 @@
             "id": "663586ee-338f-434d-a0bb-a46fa2d80635",
             "type": "embed",
             "isCompletionRequired": false,
-            "title": "",
+            "title": "InterfaceIA",
             "url": "https://1024pix.github.io/atelier-contenus/NAI/NomAssoYogaaRoulettes.html",
             "instruction": "<p>Lisez&nbsp;attentivement la discussion entre Gustave et Maëlle.</p>",
-            "solution": "",
+            "solution": "<p></p>",
             "height": 500
           }
         }
@@ -58,7 +58,7 @@
             "title": "Découverte de l'interface IA",
             "url": "https://1024pix.github.io/atelier-contenus/NAI/decouverteinterfaceIA.html",
             "instruction": "<p>Explorez l’interface en cliquant sur les différentes parties et répondez à la question.</p>",
-            "solution": "",
+            "solution": "<p></p>",
             "height": 600
           }
         },
@@ -106,7 +106,7 @@
     {
       "id": "29e32ca5-8ad5-49bf-a9bb-104d0172e662",
       "type": "activity",
-      "title": "",
+      "title": "activité découverte 2",
       "components": [
         {
           "type": "element",
@@ -114,10 +114,10 @@
             "id": "4f730efe-b5ff-4d66-ba0d-b0105d347dc4",
             "type": "embed",
             "isCompletionRequired": false,
-            "title": "",
+            "title": "SimulateurLLM",
             "url": "https://1024pix.github.io/atelier-contenus/NAI/observationreponseia.html",
             "instruction": "<p>Glissez chaque prompt dans le champ de saisie et observez la réponse de l’IA conversationnelle .<br><br></p>",
-            "solution": "",
+            "solution": "<p></p>",
             "height": 500
           }
         },
@@ -204,7 +204,7 @@
     {
       "id": "a39e914f-631d-491c-a4d8-14df1686de2c",
       "type": "activity",
-      "title": "",
+      "title": "activité découverte 3",
       "components": [
         {
           "type": "element",
@@ -220,10 +220,10 @@
             "id": "19a2c102-618f-497d-b68f-48a9bb72d1d7",
             "type": "embed",
             "isCompletionRequired": false,
-            "title": "",
+            "title": "Précision du prompt",
             "url": "https://1024pix.github.io/atelier-contenus/NAI/Promptgateaupistache.html",
             "instruction": "<p> Testez les trois prompts suivants.&nbsp;</p><p>Observez les réponses de l’IA conversationnelle et répondez à la question ci-dessous.<br><br></p>",
-            "solution": "",
+            "solution": "<p></p>",
             "height": 400
           }
         },
@@ -282,7 +282,7 @@
     {
       "id": "d6d77cc3-71d7-4b18-a74d-d39424ca6b0a",
       "type": "activity",
-      "title": "",
+      "title": "activité découverte 4",
       "components": [
         {
           "type": "element",
@@ -381,7 +381,7 @@
     {
       "id": "bdbe0b99-02d8-48a9-951f-1e85e2ea25d8",
       "type": "activity",
-      "title": "Drag&Drop",
+      "title": "activité application",
       "components": [
         {
           "type": "element",
@@ -389,10 +389,10 @@
             "id": "63c7f73f-b9b1-4c9b-a983-29b5dc8030b9",
             "type": "embed",
             "isCompletionRequired": false,
-            "title": "",
+            "title": "Drag&droplebonverbe",
             "url": "https://1024pix.github.io/atelier-contenus/NAI/glisserdeposerlesbonsverbes.html",
             "instruction": "<p>Glissez le verbe qui convient le plus pour compléter chaque prompt ci-dessous.</p>",
-            "solution": "",
+            "solution": "<p></p>",
             "height": 500
           }
         }
@@ -401,7 +401,7 @@
     {
       "id": "2078a0df-7a93-4dc1-97b8-33705eb70cac",
       "type": "activity",
-      "title": "Swipe",
+      "title": "activité application 2",
       "components": [
         {
           "type": "element",
@@ -417,10 +417,10 @@
             "id": "8a38252f-3ae3-48b0-ad3b-014ca1a95858",
             "type": "embed",
             "isCompletionRequired": false,
-            "title": "",
+            "title": "Swipe prompt",
             "url": "https://1024pix.github.io/atelier-contenus/NAI/SwipePromptClairetprecis.html",
             "instruction": "<p>Lisez le prompt et dites s’il est clair et précis ou flou et vague en cliquant sur le bouton correspondant !</p>",
-            "solution": "",
+            "solution": "<p></p>",
             "height": 600
           }
         }
@@ -452,10 +452,10 @@
             "id": "f30fee84-9b24-4f58-b216-375817170298",
             "type": "embed",
             "isCompletionRequired": false,
-            "title": "",
+            "title": "Urilisation d'un véritable LLM",
             "url": "https://app.pocllm.pix.digital/config/cma2ihhoa000bwg011i86qb30/preview",
             "instruction": "<p>Écrivez un prompt à l’IA conversationnelle ci-dessous pour qu’elle crée un poème sur votre animal préféré.<br><br></p>",
-            "solution": "",
+            "solution": "<p></p>",
             "height": 500
           }
         }
