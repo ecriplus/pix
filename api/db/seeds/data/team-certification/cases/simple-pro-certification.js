@@ -9,17 +9,15 @@ import {
   CertificationCenter,
   types as certificationCenterTypes,
 } from '../../../../../src/shared/domain/models/CertificationCenter.js';
-import { LANGUAGES_CODE } from '../../../../../src/shared/domain/services/language-service.js';
 import { normalize } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
 import { usecases as teamUsecases } from '../../../../../src/team/domain/usecases/index.js';
-import * as tooling from '../../common/tooling/index.js';
 import {
   PRO_CERTIFICATION_CENTER_EXTERNAL_ID,
   PRO_CERTIFICATION_CENTER_ID,
   PUBLISHED_PRO_SESSION,
-  SIMPLE_PRO_CERTIFICATION_USER_ID,
   STARTED_PRO_SESSION,
 } from '../constants.js';
+import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
 import { CommonPixCertifOrganization } from '../shared/common-organisation.js';
 import publishSessionWithValidatedCertification from '../tools/create-published-session-with-certification.js';
 
@@ -32,82 +30,70 @@ import publishSessionWithValidatedCertification from '../tools/create-published-
  *   - The candidate can directly enter a session on Pix App
  *
  *  Quick start :
- *    - Pix Certif user : pro-v3@example.net
+ *    - Pix Certif user : certif-prescriptor@example.net
  *    - Pix App user    : certifiable-pro@example.net
  *    - Pix Admin user  : superadmin@example.net
- *    - Pix Orga user   : certif-pix-orga-member@example.net
+ *    - Pix Orga user   : certif-prescriptor@example.net
  */
 export class ProSeed {
-  organizationMember;
-
   constructor({ databaseBuilder }) {
     this.databaseBuilder = databaseBuilder;
   }
 
   async #addOrganization() {
-    const useCommonOrga = await CommonPixCertifOrganization.getInstance({ databaseBuilder: this.databaseBuilder });
-    this.organizationMember = useCommonOrga.organizationMember;
+    const commonOrgaService = await CommonPixCertifOrganization.getInstance({ databaseBuilder: this.databaseBuilder });
+    return commonOrgaService.organizationMember;
   }
 
-  async create() {
-    await this.#addOrganization();
-
-    // Certification center
-    const certificationCenter = new CertificationCenter({
-      id: PRO_CERTIFICATION_CENTER_ID,
-      name: 'PRO Certification Center',
-      type: certificationCenterTypes.PRO,
-      externalId: PRO_CERTIFICATION_CENTER_EXTERNAL_ID,
-      createdAt: new Date('2022-01-30'),
-      habilitations: [],
-      isV3Pilot: true,
-    });
-
-    const certificationCenterForAdmin = await organizationalEntitiesUsecases.createCertificationCenter({
-      certificationCenter,
+  async #addCertifCenter({ organizationMember }) {
+    const certificationCenter = await organizationalEntitiesUsecases.createCertificationCenter({
+      certificationCenter: new CertificationCenter({
+        id: PRO_CERTIFICATION_CENTER_ID,
+        name: 'PRO Certification Center',
+        type: certificationCenterTypes.PRO,
+        externalId: PRO_CERTIFICATION_CENTER_EXTERNAL_ID,
+        createdAt: new Date('2022-01-30'),
+        habilitations: [],
+        isV3Pilot: true,
+      }),
       complementaryCertificationIds: [],
     });
 
     await teamUsecases.createCertificationCenterMembershipByEmail({
-      certificationCenterId: certificationCenterForAdmin.id,
-      email: this.organizationMember.email,
+      certificationCenterId: certificationCenter.id,
+      email: organizationMember.email,
     });
 
-    /**
-     * 2. Create the certifiable users
-     */
-    const userAbleToStartCertification = this.databaseBuilder.factory.buildUser.withRawPassword({
-      id: SIMPLE_PRO_CERTIFICATION_USER_ID,
-      firstName: 'PRO-user',
-      lastName: 'Certifiable',
-      email: 'certifiable-pro@example.net',
-      cgu: true,
-      lang: LANGUAGES_CODE.FRENCH,
-      lastTermsOfServiceValidatedAt: new Date(),
-    });
+    return certificationCenter;
+  }
 
-    await tooling.profile.createCertifiableProfile({
-      databaseBuilder: this.databaseBuilder,
-      userId: userAbleToStartCertification.id,
-    });
+  async #addCertifiableUser() {
+    const certifiableUserService = await CommonCertifiableUser.getInstance({ databaseBuilder: this.databaseBuilder });
+    return certifiableUserService.certifiableUser;
+  }
+
+  async create() {
+    const organizationMember = await this.#addOrganization();
+    const certificationCenter = await this.#addCertifCenter({ organizationMember });
+    const certifiableUser = await this.#addCertifiableUser();
 
     await this.databaseBuilder.commit();
 
     // Transform this user into a certification candidate
     const candidate = new Candidate({
       authorizedToStart: true,
-      firstName: userAbleToStartCertification.firstName,
-      lastName: userAbleToStartCertification.lastName,
+      firstName: certifiableUser.firstName,
+      lastName: certifiableUser.lastName,
       sex: 'F',
       birthdate: new Date('2000-10-30'),
       birthCountry: 'France',
       birthINSEECode: '75115',
-      email: userAbleToStartCertification.email,
+      email: certifiableUser.email,
       isLinked: true,
       hasSeenCertificationInstructions: false,
       accessibilityAdjustmentNeeded: false,
       subscriptions: [Subscription.buildCore({ certificationCandidateId: null })],
-      userId: userAbleToStartCertification.id,
+      userId: certifiableUser.id,
       billingMode: BILLING_MODES.FREE,
     });
 
@@ -116,9 +102,9 @@ export class ProSeed {
      */
 
     const startedProSession = await enrolmentUseCases.createSession({
-      userId: this.organizationMember.id,
+      userId: organizationMember.id,
       session: {
-        certificationCenterId: certificationCenterForAdmin.id,
+        certificationCenterId: certificationCenter.id,
         address: 'Lyon',
         room: '69A',
         examiner: 'Jean Prea-demarrer',
@@ -143,9 +129,9 @@ export class ProSeed {
      */
 
     const publishedScoSession = await enrolmentUseCases.createSession({
-      userId: this.organizationMember.id,
+      userId: organizationMember.id,
       session: {
-        certificationCenterId: certificationCenterForAdmin.id,
+        certificationCenterId: certificationCenter.id,
         address: 'Lyon',
         room: '69A',
         examiner: 'Anne-Cess Ionfinie',

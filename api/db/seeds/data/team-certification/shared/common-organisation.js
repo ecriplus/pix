@@ -10,7 +10,7 @@ import { SHARED_ORGANIZATION_EXTERNAL_ID, SHARED_ORGANIZATION_USER_ID } from '..
 
 /**
  * Default Certification organization
- *    - Pix Orga user   : certif-pix-orga-member@example.net
+ *    - Pix Orga user   : certif-prescriptor@example.net
  */
 export class CommonPixCertifOrganization {
   organization;
@@ -34,7 +34,7 @@ export class CommonPixCertifOrganization {
       id: SHARED_ORGANIZATION_USER_ID,
       firstName: 'Certif',
       lastName: 'Pix Orga member',
-      email: 'certif-pix-orga-member@example.net',
+      email: 'certif-prescriptor@example.net',
       cgu: true,
       lang: LANGUAGES_CODE.FRENCH,
       lastTermsOfServiceValidatedAt: new Date(),

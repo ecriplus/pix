@@ -6,7 +6,7 @@ import { CERTIFIABLE_SUCCESS_USER_ID } from './constants.js';
 import { setupConfigurations } from './setup-configuration.js';
 
 async function teamCertificationDataBuilder({ databaseBuilder }) {
-  await _createSuccessCertifiableUser({ databaseBuilder });
+  //await _createSuccessCertifiableUser({ databaseBuilder });
   await setupConfigurations({ databaseBuilder });
 
   // Cases

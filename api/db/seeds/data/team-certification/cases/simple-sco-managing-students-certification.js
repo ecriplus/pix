@@ -11,13 +11,13 @@ import {
 import { LANGUAGES_CODE } from '../../../../../src/shared/domain/services/language-service.js';
 import { normalize } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
 import { usecases as teamUsecases } from '../../../../../src/team/domain/usecases/index.js';
-import * as tooling from '../../common/tooling/index.js';
 import {
   PUBLISHED_SCO_SESSION,
   SCO_CERTIFICATION_CENTER_EXTERNAL_ID,
   SCO_CERTIFICATION_CENTER_ID,
   STARTED_SCO_SESSION,
 } from '../constants.js';
+import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
 import { CommonPixCertifOrganization } from '../shared/common-organisation.js';
 import publishSessionWithValidatedCertification from '../tools/create-published-session-with-certification.js';
 
@@ -30,16 +30,12 @@ import publishSessionWithValidatedCertification from '../tools/create-published-
  *   - The organization is SCO and managing students
  *
  *  Quick start :
- *    - Pix Certif user : sco-managing-students-v3@example.net
+ *    - Pix Certif user : certif-prescriptor@example.net
  *    - Pix App user    : certifiable-sco-user@example.net
- *    - Pix Admin user    : superadmin@example.net
- *    - Pix Orga user   : certif-pix-orga-member@example.net
+ *    - Pix Admin user  : superadmin@example.net
+ *    - Pix Orga user   : certif-prescriptor@example.net
  */
 export class ScoManagingStudent {
-  organization;
-  organizationMember;
-  organizationMembership;
-
   constructor({ databaseBuilder }) {
     this.databaseBuilder = databaseBuilder;
   }
@@ -79,58 +75,54 @@ export class ScoManagingStudent {
   }
 
   async #addOrganization() {
-    const useCommonOrga = await CommonPixCertifOrganization.getInstance({ databaseBuilder: this.databaseBuilder });
-    this.organization = useCommonOrga.organization;
-    this.organizationMember = useCommonOrga.organizationMember;
-    this.organizationMembership = useCommonOrga.organizationMembership;
+    const commonOrgaService = await CommonPixCertifOrganization.getInstance({ databaseBuilder: this.databaseBuilder });
+    return {
+      organization: commonOrgaService.organization,
+      organizationMember: commonOrgaService.organizationMember,
+    };
   }
 
-  async create() {
-    await this.#addOrganization();
-
-    // Certification center
-    const certificationCenter = new CertificationCenter({
-      id: SIMPLE_SCO_CERTIFICATION_CENTER_ID,
-      name: 'Sco Certification Center #1',
-      type: certificationCenterTypes.SCO,
-      externalId: SCO_CERTIFICATION_CENTER_EXTERNAL_ID,
-      createdAt: new Date('2022-01-30'),
-      habilitations: [],
-    });
-
-    const certificationCenterForAdmin = await organizationalEntitiesUsecases.createCertificationCenter({
-      certificationCenter,
+  async #addCertifCenter({ organizationMember }) {
+    const certificationCenter = await organizationalEntitiesUsecases.createCertificationCenter({
+      certificationCenter: new CertificationCenter({
+        id: SCO_CERTIFICATION_CENTER_ID,
+        name: 'SCO Certification Center',
+        type: certificationCenterTypes.SCO,
+        externalId: SCO_CERTIFICATION_CENTER_EXTERNAL_ID,
+        createdAt: new Date('2022-01-30'),
+        habilitations: [],
+      }),
       complementaryCertificationIds: [],
     });
 
-    await teamUsecases.createCertificationCenterMembershipForScoOrganizationAdminMember({
-      membership: this.organizationMembership,
+    const certificationCenterMember = await teamUsecases.createCertificationCenterMembershipByEmail({
+      certificationCenterId: certificationCenter.id,
+      email: organizationMember.email,
     });
+
+    return { certificationCenter, certificationCenterMember };
+  }
+
+  async #addCertifiableUser() {
+    const certifiableUserService = await CommonCertifiableUser.getInstance({ databaseBuilder: this.databaseBuilder });
+    return certifiableUserService.certifiableUser;
+  }
+
+  async create() {
+    const { organization, organizationMember, organizationMembership } = await this.#addOrganization();
+    const certificationCenter = await this.#addCertifCenter({ organizationMembership });
+    const certifiableUser = await this.#addCertifiableUser();
 
     /**
      * 2. Create the certifiable user
      */
-    const scoUser = this.databaseBuilder.factory.buildUser.withRawPassword({
-      id: SIMPLE_SCO_CERTIFICATION_USER_ID,
-      firstName: 'SCO-user',
-      lastName: 'Certifiable',
-      email: 'certifiable-sco-user@example.net',
-      cgu: true,
-      lang: LANGUAGES_CODE.FRENCH,
-      lastTermsOfServiceValidatedAt: new Date(),
-    });
-
-    await tooling.profile.createCertifiableProfile({
-      databaseBuilder: this.databaseBuilder,
-      userId: scoUser.id,
-    });
 
     const organizationLearner = this.databaseBuilder.factory.buildOrganizationLearner({
-      userId: scoUser.id,
-      organizationId: this.organization.id,
-      firstName: scoUser.firstName,
-      lastName: scoUser.lastName,
-      email: scoUser.email,
+      userId: certifiableUser.id,
+      organizationId: organization.id,
+      firstName: certifiableUser.firstName,
+      lastName: certifiableUser.lastName,
+      email: certifiableUser.email,
       division: 'Terminal',
       sex: 'F',
       birthdate: '2000-01-01',
@@ -158,7 +150,7 @@ export class ScoManagingStudent {
         birthProvinceCode: null,
         division: '6eme',
         isDisabled: false,
-        organizationId: this.organization.id,
+        organizationId: organization.id,
         createdAt: new Date(),
         updatedAt: new Date(),
       });
@@ -173,7 +165,7 @@ export class ScoManagingStudent {
         birthProvinceCode: null,
         division: 'Terminal',
         isDisabled: false,
-        organizationId: this.organization.id,
+        organizationId: organization.id,
         createdAt: new Date(),
         updatedAt: new Date(),
       });
@@ -196,7 +188,7 @@ export class ScoManagingStudent {
       hasSeenCertificationInstructions: false,
       accessibilityAdjustmentNeeded: false,
       subscriptions: [Subscription.buildCore({ certificationCandidateId: null })],
-      userId: scoUser.id,
+      userId: certifiableUser.id,
     });
 
     /**
@@ -204,9 +196,9 @@ export class ScoManagingStudent {
      */
 
     const startedScoSession = await enrolmentUseCases.createSession({
-      userId: this.organizationMember.id,
+      userId: organizationMember.id,
       session: {
-        certificationCenterId: certificationCenterForAdmin.id,
+        certificationCenterId: certificationCenter.id,
         address: 'Rennes',
         room: '28D',
         examiner: 'Jean Prea-demarrer',
@@ -231,9 +223,9 @@ export class ScoManagingStudent {
      */
 
     const publishedScoSession = await enrolmentUseCases.createSession({
-      userId: this.organizationMember.id,
+      userId: organizationMember.id,
       session: {
-        certificationCenterId: certificationCenterForAdmin.id,
+        certificationCenterId: certificationCenter.id,
         address: 'Montpellier',
         room: '9C',
         examiner: 'Anne-Cess Ionfinie',
