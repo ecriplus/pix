@@ -1,0 +1,36 @@
+@use 'pix-design-tokens/breakpoints';
+
+.element-qab {
+  display: flex;
+  justify-content: center;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-6x);
+  }
+
+  &__cards {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__proposals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--pix-spacing-3x);
+    justify-content: center;
+    max-width: 240px;
+    margin: auto;
+  }
+}
+
+@include breakpoints.device-is('tablet') {
+  .element-qab {
+    &__proposals {
+      gap: calc(var(--pix-spacing-10x) * 2);
+      max-width: none;
+    }
+  }
+}
+
