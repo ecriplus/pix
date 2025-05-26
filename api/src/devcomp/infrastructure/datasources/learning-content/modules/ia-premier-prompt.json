@@ -142,7 +142,7 @@
             "isCompletionRequired": false,
             "title": "SimulateurLLM",
             "url": "https://1024pix.github.io/atelier-contenus/NAI/observationreponseia.html",
-            "instruction": "<p>Glissez chaque prompt dans le champ de saisie et observez la réponse de l’IA conversationnelle .<br><br></p>",
+            "instruction": "<p>Glissez chaque prompt dans le champ de saisie et observez la réponse de l’IA conversationnelle.<br><br></p>",
             "solution": "<p></p>",
             "height": 500
           }
