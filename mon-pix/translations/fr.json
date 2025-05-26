@@ -490,7 +490,7 @@
             "username": "votre identifiant scolaire Pix"
           }
         },
-        "welcome-message": "Bon retour parmi nous { firstName } !"
+        "welcome-message": "Bon retour parmi nous { firstName } !"
       }
     },
     "assessment-banner": {
