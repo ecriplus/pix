@@ -5,7 +5,10 @@ import path from 'node:path';
 import * as url from 'node:url';
 
 import dayjs from 'dayjs';
+
+import { ComplementaryCertificationKeys } from '../../../../../shared/domain/models/ComplementaryCertificationKeys.js';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+const __badgesDirname = url.fileURLToPath(new URL('../badges/', import.meta.url));
 
 /**
  * @param {Object} params
@@ -171,6 +174,20 @@ export default function generateV3AttestationTemplate({ pdf, data, translate }) 
       .font('Roboto-Regular')
       .fontSize(9.5)
       .text(globalLevelDescription);
+  }
+
+  if (data.acquiredComplementaryCertification) {
+    pdf
+      .font('Nunito-Bold')
+      .fontSize(11)
+      .fillColor('#253858')
+      .text(translate('certification.attestation.v3.complementary-content.title'), 530, 470, {
+        width: 250,
+      });
+    pdf.image(path.resolve(__badgesDirname, `${ComplementaryCertificationKeys.CLEA}.png`), 628, 490, {
+      width: 50,
+      height: 50,
+    });
   }
 
   function _formatText(content) {
