@@ -60,17 +60,47 @@ describe('Unit | Domain | Models | OrganizationLearner', function () {
       clock.restore();
     });
 
-    it('should update deteledAt, deletedBy', function () {
-      // given
-      const userId = 123;
-      const organizationLearner = new OrganizationLearner();
+    context('when withAnonymisation is false', function () {
+      it('should update deteledAt, deletedBy', function () {
+        // given
+        const adminUserId = 123;
+        const organizationLearner = domainBuilder.buildOrganizationLearner({
+          birthdate: new Date('2005-10-03'),
+          userId: 456,
+          deletedAt: null,
+          deletedBy: null,
+        });
 
-      // when
-      organizationLearner.delete(userId);
+        // when
+        organizationLearner.delete(adminUserId, false);
 
-      // then
-      expect(organizationLearner.deletedAt).to.deep.equal(now);
-      expect(organizationLearner.deletedBy).to.equal(userId);
+        // then
+        expect(organizationLearner.updatedAt).to.deep.equal(now);
+        expect(organizationLearner.deletedAt).to.deep.equal(now);
+        expect(organizationLearner.deletedBy).to.equal(adminUserId);
+        expect(organizationLearner.userId).to.equal(organizationLearner.userId);
+        expect(organizationLearner.firstName).to.equal(organizationLearner.firstName);
+        expect(organizationLearner.lastName).to.equal(organizationLearner.lastName);
+        expect(organizationLearner.birthDate).to.equal(organizationLearner.birthDate);
+        expect(organizationLearner.preferredLastName).to.equal(organizationLearner.preferredLastName);
+        expect(organizationLearner.middleName).to.equal(organizationLearner.middleName);
+        expect(organizationLearner.thirdName).to.equal(organizationLearner.thirdName);
+        expect(organizationLearner.birthCity).to.equal(organizationLearner.birthCity);
+        expect(organizationLearner.birthCityCode).to.equal(organizationLearner.birthCityCode);
+        expect(organizationLearner.birthProvinceCode).to.equal(organizationLearner.birthProvinceCode);
+        expect(organizationLearner.birthCountryCode).to.equal(organizationLearner.birthCountryCode);
+        expect(organizationLearner.status).to.equal(organizationLearner.status);
+        expect(organizationLearner.nationalStudentId).to.equal(organizationLearner.nationalStudentId);
+        expect(organizationLearner.division).to.equal(organizationLearner.division);
+        expect(organizationLearner.sex).to.equal(organizationLearner.sex);
+        expect(organizationLearner.email).to.equal(organizationLearner.email);
+        expect(organizationLearner.studentNumber).to.equal(organizationLearner.studentNumber);
+        expect(organizationLearner.department).to.equal(organizationLearner.department);
+        expect(organizationLearner.educationalTeam).to.equal(organizationLearner.educationalTeam);
+        expect(organizationLearner.group).to.equal(organizationLearner.group);
+        expect(organizationLearner.diploma).to.equal(organizationLearner.diploma);
+        expect(organizationLearner.nationalApprenticeId).to.equal(organizationLearner.nationalApprenticeId);
+      });
     });
   });
 });
