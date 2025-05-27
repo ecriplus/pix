@@ -52,8 +52,8 @@ export default class Item extends Component {
     return { color: 'green', content: this.intl.t('pages.certifications-list.statuses.validated') };
   }
 
-  get shouldDisplayComment() {
-    return (this.isRejected || this.isCancelled) && this.args.certification.commentForCandidate;
+  get notObtainedCertificationWithComment() {
+    return (this.isRejected || this.isCancelled) && this.args.certification.commentForCandidate && this.isPublished;
   }
 
   get pixScore() {
@@ -103,40 +103,40 @@ export default class Item extends Component {
       </div>
     </div>
     <div>
-      {{#if this.isPublished}}
-        {{#if this.shouldDisplayComment}}
-          <p class="certification-item-comment">{{t "pages.certifications-list.comment"}}
-            {{@certification.commentForCandidate}}</p>
-        {{else}}
-          {{#if this.errorMessage}}
-            <PixNotificationAlert @type="error" @withIcon={{true}} class="certification-item-error">
-              <p>{{this.errorMessage}}</p>
-            </PixNotificationAlert>
-          {{/if}}
+      {{#if this.notObtainedCertificationWithComment}}
+        <p class="certification-item-comment">{{t "pages.certifications-list.comment"}}
+          {{@certification.commentForCandidate}}</p>
 
-          <ul class="certification-item-buttons">
-            <li>
-              <PixButtonLink
-                @variant="secondary"
-                @route="authenticated.user-certifications.get"
-                @model={{@certification.id}}
-                @iconBefore="eye"
-              >
-                {{t "pages.certifications-list.buttons.details"}}
-              </PixButtonLink>
-            </li>
-            <li>
-              <PixButton
-                @triggerAction={{this.downloadAttestation}}
-                @loadingColor="grey"
-                @iconBefore="download"
-                @variant="tertiary"
-              >
-                {{this.downloadLabel}}
-              </PixButton>
-            </li>
-          </ul>
+      {{/if}}
+      {{#if this.isValidated}}
+        {{#if this.errorMessage}}
+          <PixNotificationAlert @type="error" @withIcon={{true}} class="certification-item-error">
+            <p>{{this.errorMessage}}</p>
+          </PixNotificationAlert>
         {{/if}}
+
+        <ul class="certification-item-buttons">
+          <li>
+            <PixButtonLink
+              @variant="secondary"
+              @route="authenticated.user-certifications.get"
+              @model={{@certification.id}}
+              @iconBefore="eye"
+            >
+              {{t "pages.certifications-list.buttons.details"}}
+            </PixButtonLink>
+          </li>
+          <li>
+            <PixButton
+              @triggerAction={{this.downloadAttestation}}
+              @loadingColor="grey"
+              @iconBefore="download"
+              @variant="tertiary"
+            >
+              {{this.downloadLabel}}
+            </PixButton>
+          </li>
+        </ul>
       {{/if}}
     </div>
   </template>
