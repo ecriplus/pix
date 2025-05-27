@@ -1,8 +1,8 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
+import ENV from 'pix-admin/config/environment';
 
-export const DEFAULT_LOCALE = ENGLISH_INTERNATIONAL_LOCALE;
-export const ENGLISH_INTERNATIONAL_LOCALE = 'en';
+export const { DEFAULT_LOCALE } = ENV.APP;
 export const FRENCH_INTERNATIONAL_LOCALE = 'fr';
 
 export default class ApplicationRoute extends Route {
