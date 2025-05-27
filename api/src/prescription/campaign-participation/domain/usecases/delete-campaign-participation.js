@@ -25,6 +25,7 @@ const deleteCampaignParticipation = withTransaction(async function ({
     await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
       campaignParticipationIds,
     );
+    // on détache les assessment
   }
 });
 

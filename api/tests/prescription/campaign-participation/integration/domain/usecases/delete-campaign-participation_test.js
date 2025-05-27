@@ -1,9 +1,18 @@
 import { usecases } from '../../../../../../src/prescription/campaign-participation/domain/usecases/index.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { featureToggles } from '../../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
-const { buildUser, buildTargetProfile, buildBadge, buildCampaignParticipation, buildBadgeAcquisition, buildCampaign } =
-  databaseBuilder.factory;
+const {
+  buildUser,
+  buildAssessment,
+  buildOrganizationLearner,
+  buildTargetProfile,
+  buildBadge,
+  buildCampaignParticipation,
+  buildBadgeAcquisition,
+  buildCampaign,
+} = databaseBuilder.factory;
 
 describe('Integration | UseCases | delete-campaign-participation', function () {
   let clock, now;
@@ -220,6 +229,85 @@ describe('Integration | UseCases | delete-campaign-participation', function () {
         (badgeAcquisition) => badgeAcquisition.badgeId === certifiableBadge.id,
       );
       expect(certifiableBadgeAcquisition.userId).to.equal(userId);
+    });
+  });
+
+  context('when there is assessment linked to campaing participation', function () {
+    let campaignId;
+    let campaignParticipationId;
+    let adminUserId;
+    let userId;
+    let assessment1;
+    let organizationLearnerId;
+
+    beforeEach(async function () {
+      // given
+      adminUserId = buildUser().id;
+      campaignId = buildCampaign().id;
+      userId = buildUser().id;
+      organizationLearnerId = buildOrganizationLearner({ userId }).id;
+      campaignParticipationId = buildCampaignParticipation({
+        userId,
+        campaignId,
+        organizationLearnerId,
+      }).id;
+      assessment1 = buildAssessment({ userId, campaignParticipationId, type: Assessment.types.CAMPAIGN });
+      await databaseBuilder.commit();
+    });
+    context('when feature toggle `isAnonymizationWithDeletionEnabled` is false', function () {
+      it('should not detach assesmment', async function () {
+        // given
+        await featureToggles.set('isAnonymizationWithDeletionEnabled', false);
+
+        // when
+        await usecases.deleteCampaignParticipation({
+          userId: adminUserId,
+          campaignId,
+          campaignParticipationId,
+        });
+
+        // then
+        const assessmentInDb = await knex('assessments').where({ id: assessment1.id }).first();
+        expect(assessmentInDb.campaignParticipationId).equal(campaignParticipationId);
+      });
+    });
+    context('when feature toggle `isAnonymizationWithDeletionEnabled` is true', function () {
+      it('should detach assesmments', async function () {
+        // given
+        await featureToggles.set('isAnonymizationWithDeletionEnabled', false);
+        const assessment2 = buildAssessment({
+          userId,
+          campaignParticipationId,
+          type: Assessment.types.CAMPAIGN,
+          isImproving: true,
+        });
+        const otherCampaignParticipationId = buildCampaignParticipation({
+          organizationLearnerId,
+          userId,
+        }).id;
+        const otherAssessment = buildAssessment({
+          userId,
+          campaignParticipationId: otherCampaignParticipationId,
+          type: Assessment.types.CAMPAIGN,
+          isImproving: true,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        await usecases.deleteCampaignParticipation({
+          userId: adminUserId,
+          campaignId,
+          campaignParticipationId,
+        });
+
+        // then
+        const assessmentsInDb = await knex('assessments').whereIn('id', [assessment1.id, assessment2.id]);
+        assessmentsInDb.forEach((assessment) => {
+          expect(assessment.campaignParticipationId).null;
+        });
+        const otherAssessmentsInDb = await knex('assessments').where('id', otherAssessment.id).first();
+        expect(otherAssessmentsInDb.campaignParticipationId).equal(otherAssessment.campaignParticipationId);
+      });
     });
   });
 });
