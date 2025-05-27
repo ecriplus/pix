@@ -27,7 +27,6 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'is-direct-metrics-enabled': false,
             'is-new-account-recovery-enabled': false,
             'is-oppsy-disabled': false,
-            'is-pix-app-new-layout-enabled': false,
             'is-quest-enabled': true,
             'is-self-account-deletion-enabled': true,
             'is-text-to-speech-button-enabled': false,

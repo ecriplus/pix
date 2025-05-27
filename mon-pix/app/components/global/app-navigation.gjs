@@ -33,16 +33,16 @@ export default class AppNavigation extends Component {
   <template>
     <PixNavigation
       class="app-navigation"
-      @navigationAriaLabel="{{t 'navigation.nav-bar.aria-label'}}"
-      @openLabel="{{t 'navigation.nav-bar.open'}}"
-      @closeLabel="{{t 'navigation.nav-bar.close'}}"
+      @navigationAriaLabel={{t "navigation.nav-bar.aria-label"}}
+      @openLabel={{t "navigation.nav-bar.open"}}
+      @closeLabel={{t "navigation.nav-bar.close"}}
     >
       <:brand>
         {{#if this.isFrenchLocale}}
           <img
             class="app-navigation__logo-republique-fr"
             src="/images/logo/logo-de-la-republique-francaise-blanc.svg"
-            alt="{{t 'common.french-republic'}}"
+            alt={{t "common.french-republic"}}
           />
         {{/if}}
         <PixLogo @color="white" />

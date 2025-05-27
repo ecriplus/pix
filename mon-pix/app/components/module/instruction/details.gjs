@@ -138,7 +138,7 @@ export default class ModulixDetails extends Component {
               <PixIcon
                 @name="stopwatch"
                 class="module-details-infos-indications-category-title__icon"
-                @ariaHidden="true"
+                @ariaHidden={{true}}
               />{{t "pages.modulix.details.duration"}}
             </div>
             <p>{{t "pages.modulix.details.durationValue" htmlSafe=true duration=@module.details.duration}}</p>
@@ -148,7 +148,7 @@ export default class ModulixDetails extends Component {
               <PixIcon
                 @name="barsUp"
                 class="module-details-infos-indications-category-title__icon"
-                @ariaHidden="true"
+                @ariaHidden={{true}}
               />{{t "pages.modulix.details.level"}}
             </div>
             <p>{{@module.details.level}}</p>

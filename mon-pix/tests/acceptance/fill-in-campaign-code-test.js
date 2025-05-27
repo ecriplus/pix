@@ -25,14 +25,13 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
     test('should disconnect when clicking on the link', async function (assert) {
       // given
       await authenticate(user);
-      const screen = await visit('/campagnes');
+      await visit('/campagnes');
 
       // when
       await clickByLabel(t('pages.fill-in-campaign-code.warning-message-logout'));
 
       // then
-      assert.notOk(screen.queryByText(user.firstName));
-      assert.ok(screen.getByRole('link', { name: t('navigation.not-logged.sign-in') }));
+      assert.strictEqual(currentURL(), '/deconnexion');
     });
   });
 

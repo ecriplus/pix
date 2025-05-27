@@ -15,13 +15,6 @@ module('Acceptance | Application', function (hooks) {
 
   hooks.beforeEach(async function () {
     this.owner.lookup('service:store');
-
-    class FeatureTogglesStub extends Service {
-      featureToggles = { isPixAppNewLayoutEnabled: true };
-      load = async function () {};
-    }
-
-    this.owner.register('service:featureToggles', FeatureTogglesStub);
   });
 
   module('analytics', function (hooks) {

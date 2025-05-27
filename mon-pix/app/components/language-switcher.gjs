@@ -9,6 +9,7 @@ const FRENCH_LANGUAGE = 'fr';
 export default class LanguageSwitcher extends Component {
   <template>
     <PixSelect
+      ...attributes
       class="language-switcher"
       @id="language-switcher"
       @iconName="globe"
