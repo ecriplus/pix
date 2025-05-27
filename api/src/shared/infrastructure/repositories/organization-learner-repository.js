@@ -1,8 +1,8 @@
 import { knex } from '../../../../db/knex-database-connection.js';
+import { OrganizationLearner } from '../../../prescription/learner-management/domain/models/OrganizationLearner.js';
 import { ORGANIZATION_FEATURE } from '../../domain/constants.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { OrganizationLearnerNotFound, UserNotFoundError } from '../../domain/errors.js';
-import { OrganizationLearner } from '../../domain/models/OrganizationLearner.js';
 import { ParticipantRepartition } from '../../domain/models/ParticipantRepartition.js';
 import { fetchPage } from '../utils/knex-utils.js';
 

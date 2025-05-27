@@ -1,10 +1,10 @@
 import dayjs from 'dayjs';
 import _ from 'lodash';
 
+import { OrganizationLearner } from '../../../../../src/prescription/learner-management/domain/models/OrganizationLearner.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { OrganizationLearnerNotFound, UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { OrganizationLearner } from '../../../../../src/shared/domain/models/index.js';
 import * as organizationLearnerRepository from '../../../../../src/shared/infrastructure/repositories/organization-learner-repository.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 

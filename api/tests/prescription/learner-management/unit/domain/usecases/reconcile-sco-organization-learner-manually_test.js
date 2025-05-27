@@ -1,3 +1,4 @@
+import { OrganizationLearner } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationLearner.js';
 import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import {
   CampaignCodeError,
@@ -5,7 +6,6 @@ import {
   OrganizationLearnerAlreadyLinkedToUserError,
   UserShouldNotBeReconciledOnAnotherAccountError,
 } from '../../../../../../src/shared/domain/errors.js';
-import { OrganizationLearner } from '../../../../../../src/shared/domain/models/OrganizationLearner.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | reconcile-sco-organization-learner-manually', function () {

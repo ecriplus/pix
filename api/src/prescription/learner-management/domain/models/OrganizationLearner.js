@@ -55,6 +55,11 @@ class OrganizationLearner {
     this.certifiableAt = placementProfile.profileDate;
     this.isCertifiable = placementProfile.isCertifiable();
   }
+
+  delete(userId) {
+    this.deletedAt = new Date();
+    this.deletedBy = userId;
+  }
 }
 
 OrganizationLearner.STATUS = STATUS;

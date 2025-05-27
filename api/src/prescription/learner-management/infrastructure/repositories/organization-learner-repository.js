@@ -6,10 +6,10 @@ import {
   OrganizationLearnersCouldNotBeSavedError,
   UserCouldNotBeReconciledError,
 } from '../../../../shared/domain/errors.js';
-import { OrganizationLearner } from '../../../../shared/domain/models/index.js';
 import * as organizationLearnerRepository from '../../../../shared/infrastructure/repositories/organization-learner-repository.js';
 import { OrganizationLearnerCertificabilityNotUpdatedError } from '../../domain/errors.js';
 import { CommonOrganizationLearner } from '../../domain/models/CommonOrganizationLearner.js';
+import { OrganizationLearner } from '../../domain/models/OrganizationLearner.js';
 import { OrganizationLearnerForAdmin } from '../../domain/read-models/OrganizationLearnerForAdmin.js';
 import * as studentRepository from './student-repository.js';
 
@@ -271,7 +271,6 @@ const countByUserId = async function (userId) {
   return count;
 };
 
-// copied from api/lib/repositories/organization-learner-repository-test.js-
 const findByUserId = async function ({ userId }) {
   const knexConn = DomainTransaction.getConnection();
   const rawOrganizationLearners = await knexConn
@@ -283,9 +282,10 @@ const findByUserId = async function ({ userId }) {
   return rawOrganizationLearners.map((rawOrganizationLearner) => new OrganizationLearner(rawOrganizationLearner));
 };
 
-const findOrganizationLearnerIdsByOrganizationId = function ({ organizationId }) {
+const findOrganizationLearnersByOrganizationId = async function ({ organizationId }) {
   const knexConnection = DomainTransaction.getConnection();
-  return knexConnection('view-active-organization-learners').where({ organizationId }).select('id').pluck('id');
+  const organizationLearners = await knexConnection('view-active-organization-learners').where({ organizationId });
+  return organizationLearners.map((organizationLearner) => _toDomain(organizationLearner));
 };
 
 const reconcileUserToOrganizationLearner = async function ({ userId, organizationLearnerId }) {
@@ -331,6 +331,16 @@ async function getLearnerInfo(organizationLearnerId) {
   return new OrganizationLearner(organizationLearner);
 }
 
+const remove = async ({ id, deletedBy, deletedAt }) => {
+  const knexConn = DomainTransaction.getConnection();
+
+  return knexConn('organization-learners').where('id', id).update({ deletedAt, deletedBy, updatedAt: deletedAt });
+};
+
+function _toDomain(result) {
+  return new OrganizationLearner(result);
+}
+
 /**
  * @function
  * @name findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId
@@ -353,11 +363,12 @@ export {
   findAllCommonOrganizationLearnerByReconciliationInfos,
   findByUserId,
   findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId,
-  findOrganizationLearnerIdsByOrganizationId,
+  findOrganizationLearnersByOrganizationId,
   getLearnerInfo,
   getOrganizationLearnerForAdmin,
   reconcileUserByNationalStudentIdAndOrganizationId,
   reconcileUserToOrganizationLearner,
+  remove,
   removeByIds,
   saveCommonOrganizationLearners,
   update,

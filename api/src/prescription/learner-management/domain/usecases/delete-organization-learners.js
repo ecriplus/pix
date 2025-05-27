@@ -5,25 +5,48 @@ const deleteOrganizationLearners = async function ({
   userId,
   organizationId,
   organizationLearnerRepository,
-  campaignParticipationRepository,
+  featureToggles,
+  campaignParticipationRepositoryfromBC,
+  badgeAcquisitionRepository,
 }) {
-  const organizationLearnerIdsFromOrganization =
-    await organizationLearnerRepository.findOrganizationLearnerIdsByOrganizationId({
+  const organizationLearnersFromOrganization =
+    await organizationLearnerRepository.findOrganizationLearnersByOrganizationId({
       organizationId,
     });
 
   const organizationLearnerList = new OrganizationLearnerList({
     organizationId,
-    organizationLearnerIds: organizationLearnerIdsFromOrganization,
+    organizationLearners: organizationLearnersFromOrganization,
   });
 
-  organizationLearnerList.canDeleteOrganizationLearners(organizationLearnerIds, userId);
-  await campaignParticipationRepository.removeByOrganizationLearnerIds({
+  const organizationLearnersToDelete = organizationLearnerList.getDeletableOrganizationLearners(
     organizationLearnerIds,
     userId,
-  });
+  );
 
-  await organizationLearnerRepository.removeByIds({ organizationLearnerIds, userId });
+  for (const organizationLearner of organizationLearnersToDelete) {
+    organizationLearner.delete(userId);
+    await organizationLearnerRepository.remove(organizationLearner);
+
+    const isAnonymizationWithDeletionEnabled = await featureToggles.get('isAnonymizationWithDeletionEnabled');
+
+    const campaignParticipations =
+      await campaignParticipationRepositoryfromBC.getAllCampaignParticipationsForOrganizationLearner({
+        organizationLearnerId: organizationLearner.id,
+      });
+
+    for (const campaignParticipation of campaignParticipations) {
+      campaignParticipation.delete(userId, isAnonymizationWithDeletionEnabled);
+      await campaignParticipationRepositoryfromBC.remove(campaignParticipation.dataToUpdateOnDeletion);
+    }
+
+    if (isAnonymizationWithDeletionEnabled) {
+      const campaignParticipationIds = campaignParticipations.map(({ id }) => id);
+      await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
+        campaignParticipationIds,
+      );
+    }
+  }
 };
 
 export { deleteOrganizationLearners };

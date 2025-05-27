@@ -117,15 +117,16 @@ describe('Integration | UseCases | delete-campaign-participation', function () {
 
   context('when there are badges linked to the campaign participations', function () {
     let badgesAcquisitions;
-
+    let adminUserId;
+    let campaignId;
     let campaignParticipationId;
     let certifiableBadge;
     let nonCertifiableBadge;
     let userId;
 
-    before(async function () {
+    beforeEach(async function () {
       // given
-      const adminUserId = buildUser().id;
+      adminUserId = buildUser().id;
       const targetProfileId = buildTargetProfile().id;
       nonCertifiableBadge = buildBadge({
         targetProfileId,
@@ -135,7 +136,7 @@ describe('Integration | UseCases | delete-campaign-participation', function () {
         targetProfileId,
         isCertifiable: true,
       });
-      const campaignId = buildCampaign({ targetProfileId }).id;
+      campaignId = buildCampaign({ targetProfileId }).id;
       userId = buildUser().id;
       campaignParticipationId = buildCampaignParticipation({
         campaignId,
@@ -154,7 +155,55 @@ describe('Integration | UseCases | delete-campaign-participation', function () {
       });
 
       await databaseBuilder.commit();
+    });
 
+    context('when feature toggle `isAnonymizationWithDeletionEnabled` is true', function () {
+      it('should delete userId on non certifiable badgesAcquisitions', async function () {
+        // given
+        await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
+
+        // when
+        await usecases.deleteCampaignParticipation({
+          userId: adminUserId,
+          campaignId,
+          campaignParticipationId,
+        });
+
+        // then
+        badgesAcquisitions = await knex('badge-acquisitions').where({
+          campaignParticipationId,
+        });
+        const nonCertifiableBadgeAcquisition = badgesAcquisitions.find(
+          (badgeAcquisition) => badgeAcquisition.badgeId === nonCertifiableBadge.id,
+        );
+        expect(nonCertifiableBadgeAcquisition.userId).to.be.null;
+      });
+    });
+
+    context('when feature toggle `isAnonymizationWithDeletionEnabled` is false', function () {
+      it('should not delete userId on non certifiable badgesAcquisitions', async function () {
+        // given
+        await featureToggles.set('isAnonymizationWithDeletionEnabled', false);
+
+        // when
+        await usecases.deleteCampaignParticipation({
+          userId: adminUserId,
+          campaignId,
+          campaignParticipationId,
+        });
+
+        // then
+        badgesAcquisitions = await knex('badge-acquisitions').where({
+          campaignParticipationId,
+        });
+        const nonCertifiableBadgeAcquisition = badgesAcquisitions.find(
+          (badgeAcquisition) => badgeAcquisition.badgeId === nonCertifiableBadge.id,
+        );
+        expect(nonCertifiableBadgeAcquisition.userId).to.equal(userId);
+      });
+    });
+
+    it('should not delete userId on certifiable badgesAcquisitions', async function () {
       // when
       await usecases.deleteCampaignParticipation({
         userId: adminUserId,
@@ -162,19 +211,11 @@ describe('Integration | UseCases | delete-campaign-participation', function () {
         campaignParticipationId,
       });
 
+      // then
       badgesAcquisitions = await knex('badge-acquisitions').where({
         campaignParticipationId,
       });
-    });
 
-    it('should delete userId on non certifiable badgesAcquisitions', function () {
-      const nonCertifiableBadgeAcquisition = badgesAcquisitions.find(
-        (badgeAcquisition) => badgeAcquisition.badgeId === nonCertifiableBadge.id,
-      );
-      expect(nonCertifiableBadgeAcquisition.userId).to.be.null;
-    });
-
-    it('should not delete userId on certifiable badgesAcquisitions', function () {
       const certifiableBadgeAcquisition = badgesAcquisitions.find(
         (badgeAcquisition) => badgeAcquisition.badgeId === certifiableBadge.id,
       );

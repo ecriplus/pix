@@ -9,7 +9,7 @@ describe('Unit | Models | OrganizationLearnerListFormat', function () {
       //when
       const payload = {
         organizationId: Symbol('organizationId'),
-        organizationLearnerIds: Symbol('organizationLearnerList'),
+        organizationLearners: Symbol('organizationLearnerList'),
       };
       const organizationLearnerList = new OrganizationLearnerList(payload);
       // then
@@ -17,42 +17,46 @@ describe('Unit | Models | OrganizationLearnerListFormat', function () {
     });
   });
 
-  describe('#can delete organization learners ', function () {
-    it('should throw when lists are different', function () {
-      sinon.stub(logger, 'error');
-      //when
-      const payload = {
-        organizationId: 777,
-        organizationLearnerIds: [123, 345],
-      };
+  describe('#getDeletableOrganizationLearners', function () {
+    context('when all given organizationLearnerIds are from organization', function () {
+      it('should return organization learners', function () {
+        // given
+        const payload = {
+          organizationId: 777,
+          organizationLearners: [{ id: 123 }, { id: 345 }],
+        };
 
-      const organizationLearnerList = new OrganizationLearnerList(payload);
+        const organizationLearnerList = new OrganizationLearnerList(payload);
 
-      const result = catchErrSync(organizationLearnerList.canDeleteOrganizationLearners, organizationLearnerList)(
-        [456, 123],
-        'userIdSample',
-      );
+        // when
+        const result = organizationLearnerList.getDeletableOrganizationLearners([345]);
 
-      expect(result).to.be.instanceof(CouldNotDeleteLearnersError);
-      expect(
-        logger.error.calledWithExactly(
-          `User id userIdSample could not delete organization learners because learner id 345 don't belong to organization id 777`,
-        ),
-      );
+        // then
+        expect(result).to.be.deep.equal([{ id: 345 }]);
+      });
     });
 
-    it('should not throw when lists are identical', function () {
-      const userId = Symbol('123');
+    context('when some organizationLearnerIds belong to organization', function () {
+      it('should throw', function () {
+        sinon.stub(logger, 'error');
+        //when
+        const payload = {
+          organizationId: 777,
+          organizationLearners: [{ id: 123 }, { id: 345 }],
+        };
 
-      const payload = {
-        organizationId: Symbol('organizationId'),
-        organizationLearnerIds: [123, 345],
-      };
-
-      expect(() => {
         const organizationLearnerList = new OrganizationLearnerList(payload);
-        organizationLearnerList.canDeleteOrganizationLearners([123, 345], userId);
-      }).to.not.throw();
+
+        const result = catchErrSync(organizationLearnerList.getDeletableOrganizationLearners, organizationLearnerList)(
+          [456, 123],
+          'userIdSample',
+        );
+
+        expect(result).to.be.instanceof(CouldNotDeleteLearnersError);
+        expect(logger.error).to.have.calledWithExactly(
+          "User id userIdSample could not delete organization learners because some learner id in (456,123) don't belong to organization id 777",
+        );
+      });
     });
   });
 });
