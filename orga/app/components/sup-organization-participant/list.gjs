@@ -238,8 +238,6 @@ const SupActionBar = <template>
             count=@count
           }}</p>
         <p>{{t "pages.sup-organization-participants.deletion-modal.content.main-campaign-prevent" count=@count}}</p>
-        <p>{{t "pages.sup-organization-participants.deletion-modal.content.main-participation-access" count=@count}}</p>
-        <p>{{t "pages.sup-organization-participants.deletion-modal.content.main-new-campaign-access" count=@count}}</p>
         <p><strong>{{t "pages.sup-organization-participants.deletion-modal.content.footer" count=@count}}</strong></p>
       </:content>
     </DeletionModal>
