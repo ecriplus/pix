@@ -39,6 +39,8 @@ services:
     container_name: pix-e2e-monpix
     user: node
     image: node:22.14.0
+    environment:
+      DEFAULT_LOCALE: fr
     command: npx ember serve --proxy http://api:3000
     volumes:
       - ../..:/code
