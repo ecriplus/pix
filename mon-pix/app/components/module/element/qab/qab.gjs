@@ -5,9 +5,16 @@ import QabCard from 'mon-pix/components/module/element/qab/qab-card';
 import { htmlUnsafe } from '../../../../helpers/html-unsafe';
 import ModuleElement from '../module-element';
 
+import { action } from '@ember/object';
+
 export default class ModuleQab extends ModuleElement {
   get currentCard() {
     return this.element.cards[0];
+  }
+
+  @action
+  isProposalSolution(option) {
+    return this.currentCard.solution === option;
   }
 
   <template>
@@ -21,8 +28,8 @@ export default class ModuleQab extends ModuleElement {
           <QabCard @card={{this.currentCard}} />
         </div>
         <div class="element-qab__proposals">
-          <QabProposalButton @text={{this.currentCard.proposalA}} @option="A" />
-          <QabProposalButton @text={{this.currentCard.proposalB}} @option="B" />
+          <QabProposalButton @text={{this.currentCard.proposalA}} @option="A" @isSolution={{this.isSolution "A"}} />
+          <QabProposalButton @text={{this.currentCard.proposalB}} @option="B" @isSolution={{this.isSolution "B"}} />
         </div>
       </fieldset>
     </form>
