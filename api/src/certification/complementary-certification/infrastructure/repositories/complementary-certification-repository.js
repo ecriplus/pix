@@ -3,6 +3,7 @@
  */
 
 import { knex } from '../../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { ComplementaryCertification } from '../../domain/models/ComplementaryCertification.js';
 
@@ -33,7 +34,8 @@ const getByLabel = async function ({ label }) {
  * @returns {Promise<ComplementaryCertification>}
  */
 const getByKey = async function (key) {
-  const complementaryCertification = await knex.from('complementary-certifications').where({ key }).first();
+  const knexConn = DomainTransaction.getConnection();
+  const complementaryCertification = await knexConn.from('complementary-certifications').where({ key }).first();
 
   if (!complementaryCertification) {
     throw new NotFoundError('Complementary certification does not exist');

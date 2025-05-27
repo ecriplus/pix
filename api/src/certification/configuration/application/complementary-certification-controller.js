@@ -13,8 +13,17 @@ const searchAttachableTargetProfilesForComplementaryCertifications = async funct
   return attachableTargetProfilesSerializer.serialize(attachableTargetProfiles);
 };
 
+const createConsolidatedFramework = async function (request, h) {
+  const { complementaryCertificationKey } = request.params;
+  const { tubeIds } = request.payload.data.attributes;
+  await usecases.createConsolidatedFramework({ complementaryCertificationKey, tubeIds });
+
+  return h.response().code(201);
+};
+
 const complementaryCertificationController = {
   findComplementaryCertifications,
   searchAttachableTargetProfilesForComplementaryCertifications,
+  createConsolidatedFramework,
 };
 export { complementaryCertificationController };
