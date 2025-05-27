@@ -311,7 +311,7 @@
                       }
                     }
                   ],
-                  "solution": ""
+                  "solution": "2"
                 }
               ]
             }
@@ -329,7 +329,7 @@
           "element": {
             "id": "30de711c-6587-4889-98ff-153941624049",
             "type": "text",
-            "content": "<p>Pour répondre, une <strong>IA conversationnelle</strong>, comme chatGPT, <strong>construit sa réponse comme si elle complétait le texte</strong>  de l’utilisateur.&nbsp; </p><p>Pour cela, elle cherche les mots qui ont <strong>le plus de chance d'apparaître</strong> (les plus probables) et choisit l’un de ces mots. </p><p>Elle répète cette méthode <strong>mot après mot</strong>.</p>"
+            "content": "<p>Pour répondre, une <strong>IA conversationnelle</strong>, comme chatGPT, <strong>construit sa réponse comme si elle complétait le texte</strong>  de l’utilisateur.&nbsp; </p><p>Pour cela, elle cherche les mots qui ont <strong>le plus de chance d'apparaître</strong> (les plus probables) et choisit l’un de ces mots. </p><p>Elle répète cette méthode <strong>mot après mot</strong>.<br>[IMAGE TEMPORAIRE]</p>"
           }
         },
         {
@@ -337,7 +337,7 @@
           "element": {
             "id": "11937beb-d6b8-4b6c-97ca-90653f93b85c",
             "type": "image",
-            "url": "",
+            "url": "https://i.imgur.com/kHTWMp7.png",
             "alt": "TODO",
             "alternativeText": "<p>TODO</p>",
             "legend": "",
@@ -712,15 +712,6 @@
             "id": "de48659c-5799-4a9f-9d74-3676e78c094b",
             "type": "text",
             "content": "<p>Pour finir ce module, voyons quelle sera votre bonne résolution pour votre prochaine utilisation de chatGPT, Gemini ou d’une autre IA conversationnelle ! 💫</p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "576d922e-3927-4381-a5bc-6f6fed07f73a",
-            "type": "custom",
-            "tagName": "",
-            "props": {}
           }
         }
       ]
