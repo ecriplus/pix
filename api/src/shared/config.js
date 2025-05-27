@@ -336,6 +336,7 @@ const configuration = (function () {
       },
       getConfigurationUrl: _removeTrailingSlashFromUrl(process.env.LLM_API_GET_CONFIGURATIONS_URL ?? ''),
       postPromptUrl: _removeTrailingSlashFromUrl(process.env.LLM_API_POST_PROMPT_URL ?? ''),
+      authSecret: process.env.LLM_API_JWT_SECRET,
     },
     logging: {
       enabled: toBoolean(process.env.LOG_ENABLED),
@@ -504,6 +505,7 @@ const configuration = (function () {
     config.llm.getConfigurationUrl = 'https://llm-test.pix.fr/api/configurations';
     config.llm.postPromptUrl = 'https://llm-test.pix.fr/api/chat';
     config.llm.temporaryStorage.expirationDelaySeconds = 1;
+    config.llm.authSecret = 'Le secret dans les tests';
 
     config.domain.tldFr = '.fr';
     config.domain.tldOrg = '.org';

@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import ms from 'ms';
 
 import { config } from '../../../shared/config.js';
@@ -19,7 +20,11 @@ export async function get(id) {
   const url = config.llm.getConfigurationUrl + '/' + id;
   let response;
   try {
-    response = await fetch(url);
+    response = await fetch(url, {
+      headers: {
+        authorization: `Bearer ${jwt.sign('foo', config.llm.authSecret)}`,
+      },
+    });
   } catch (err) {
     logger.error(`error when trying to reach LLM API : ${err}`);
     throw new LLMApiError(err.toString());

@@ -1,5 +1,7 @@
 import { PassThrough, pipeline, Transform } from 'node:stream';
 
+import jwt from 'jsonwebtoken';
+
 import { config } from '../../../shared/config.js';
 import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
 import { LLMApiError } from '../../domain/errors.js';
@@ -45,8 +47,8 @@ async function postUserPrompt({ message, configuration, chat }) {
   const historySize = configuration.llm.historySize;
   const messagesToForward = chat.messages.slice(-historySize).map(toHistoryMessage);
   const payload = JSON.stringify({
-    message,
-    configuration,
+    prompt: message,
+    configurationId: chat.configurationId,
     history: messagesToForward,
   });
   let response;
@@ -56,6 +58,7 @@ async function postUserPrompt({ message, configuration, chat }) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        authorization: `Bearer ${jwt.sign('foo', config.llm.authSecret)}`,
       },
       body: payload,
     });
@@ -63,7 +66,7 @@ async function postUserPrompt({ message, configuration, chat }) {
     logger.error(`error when trying to reach LLM API : ${err}`);
     throw new LLMApiError(err.toString());
   }
-  if (response.status !== 200) {
+  if (response.status !== 201) {
     const jsonErr = await response.json();
     const errorStr = JSON.stringify(jsonErr, undefined, 2);
     logger.error(`error when reaching LLM API : code (${response.status}) - ${errorStr}`);

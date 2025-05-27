@@ -101,8 +101,8 @@ describe('LLM | Integration | Application | API | llm', function () {
       });
     });
 
-    context('when max characters is reached', function () {
-      it('should throw a TooLargeMessageInputError', async function () {
+    context('checking maxChars limit', function () {
+      it('should throw a TooLargeMessageInputError when maxChars is exceeded', async function () {
         // given
         const chat = new Chat({
           id: 'chatId',
@@ -135,8 +135,8 @@ describe('LLM | Integration | Application | API | llm', function () {
       });
     });
 
-    context('when max prompts is reached', function () {
-      it('should ignore messages from LLM', async function () {
+    context('checking maxPrompts limit', function () {
+      it('should ignore messages from LLM when checking for maxPrompts limit', async function () {
         // given
         const chat = new Chat({
           id: 'chatId',
@@ -163,14 +163,29 @@ describe('LLM | Integration | Application | API | llm', function () {
               inputMaxPrompts: 2,
             },
           });
+        nock('https://llm-test.pix.fr/api')
+          .post('/chat', {
+            configurationId: 'uneConfigQuiExist',
+            history: [
+              { content: 'coucou LLM1', role: 'assistant' },
+              { content: 'coucou LLM2', role: 'assistant' },
+              { content: 'coucou user', role: 'user' },
+            ],
+            prompt: 'un message',
+          })
+          .reply(201, Readable.from(['15:{"message":"salut"}']));
 
         // when
-        const llmMessage = await prompt({ chatId: 'chatId', message: 'un message' });
+        const stream = await prompt({ chatId: 'chatId', message: 'un message' });
 
         // then
-        expect(llmMessage).to.deep.equal({
-          message: `un message BIEN RECU dans chat chatId`,
-        });
+        const parts = [];
+        const decoder = new TextDecoder();
+        for await (const chunk of stream) {
+          parts.push(decoder.decode(chunk));
+        }
+        const llmResponse = parts.join('');
+        expect(llmResponse).to.deep.equal('data: salut\n\n');
       });
 
       it('should throw a MaxPromptsReachedError when user prompts exceed max', async function () {
@@ -238,23 +253,15 @@ describe('LLM | Integration | Application | API | llm', function () {
         });
       nock('https://llm-test.pix.fr/api')
         .post('/chat', {
-          configuration: {
-            llm: {
-              historySize: 123,
-            },
-            challenge: {
-              inputMaxChars: 255,
-              inputMaxPrompts: 100,
-            },
-          },
+          configurationId: 'uneConfigQuiExist',
           history: [
             { content: 'coucou user1', role: 'user' },
             { content: 'coucou LLM1', role: 'assistant' },
           ],
-          message: 'un message',
+          prompt: 'un message',
         })
         .reply(
-          200,
+          201,
           Readable.from([
             '15:{"message":"coucou c\'est super"}',
             '25:{"message":"\nle couscous c plutot bon"}',

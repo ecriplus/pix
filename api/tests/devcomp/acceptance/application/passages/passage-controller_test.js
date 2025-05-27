@@ -390,20 +390,12 @@ describe('Acceptance | Controller | passage-controller', function () {
             });
           nock('https://llm-test.pix.fr/api')
             .post('/chat', {
-              configuration: {
-                llm: {
-                  historySize: 123,
-                },
-                challenge: {
-                  inputMaxChars: 999,
-                  inputMaxPrompts: 999,
-                },
-              },
+              configurationId: 'uneConfigQuiExist',
               history: [],
-              message: 'Quelle est la recette de la ratatouille ?',
+              prompt: 'Quelle est la recette de la ratatouille ?',
             })
             .reply(
-              200,
+              201,
               Readable.from([
                 '15:{"message":"coucou c\'est super"}',
                 '25:{"message":"\nle couscous c plutot bon"}',
