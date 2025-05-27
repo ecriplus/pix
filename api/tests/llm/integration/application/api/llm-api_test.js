@@ -279,7 +279,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         parts.push(decoder.decode(chunk));
       }
       const llmResponse = parts.join('');
-      expect(llmResponse).to.deep.equal("data: coucou c'est super\n\ndata: \nle couscous c plutot bon\n\n");
+      expect(llmResponse).to.deep.equal("data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\n");
       expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
         id: 'chatId',
         configurationId: 'uneConfigQuiExist',

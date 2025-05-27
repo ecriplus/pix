@@ -413,7 +413,9 @@ describe('Acceptance | Controller | passage-controller', function () {
 
           // then
           expect(response.statusCode).to.equal(201);
-          expect(response.result).to.equal("data: coucou c'est super\n\ndata: \nle couscous c plutot bon\n\n");
+          expect(response.result).to.deep.equal(
+            "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\n",
+          );
         });
       });
     });

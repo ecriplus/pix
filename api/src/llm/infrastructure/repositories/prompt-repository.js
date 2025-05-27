@@ -111,5 +111,10 @@ export function extractMessages(chunk) {
 }
 
 export function toEventStreamData(messages) {
-  return 'data: ' + messages.join('') + '\n\n';
+  return messages
+    .map((message) => {
+      const formattedMessage = message.replaceAll('\n', '\ndata: ');
+      return `data: ${formattedMessage}\n\n`;
+    })
+    .join('');
 }
