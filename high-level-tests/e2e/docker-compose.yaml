@@ -28,6 +28,8 @@ services:
     user: node
     # renovate datasource=node-version depName=node
     image: node:22.14.0
+    environment:
+      DEFAULT_LOCALE: fr
     command: npx ember serve --proxy http://api:3000
     volumes:
       - ../..:/code

@@ -607,6 +607,7 @@ jobs:
           command: npm run build
           environment:
             BUILD_ENVIRONMENT: development
+            DEFAULT_LOCALE: fr
             JOBS: 2
       - save_cache:
           key: v7-orga-npm-{{ checksum "cachekey" }}
