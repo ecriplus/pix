@@ -28,12 +28,12 @@ function buildOrganizationLearner({
   deletedBy = null,
   createdAt = new Date('2020-01-01'),
   email = 'pix@example.net',
-  studentNumber = '12356',
+  studentNumber,
   department = 'faculté',
   educationalTeam = '2ieme année Licence éco',
   group = 'L1',
   diploma = 'Non reconnu',
-  nationalApprenticeId = '123456781',
+  nationalApprenticeId = null,
   attributes = {},
 } = {}) {
   return new OrganizationLearner({
