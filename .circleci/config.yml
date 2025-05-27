@@ -814,6 +814,17 @@ jobs:
     working_directory: ~/pix/high-level-tests/e2e
     steps:
       - browser-tools/install-chrome
+      - run:
+          name: Manual safety start of X11 server
+          command: |
+            set +e
+            Xvfb :99 -screen 0 1280x1024x24 2>/dev/null
+            if [ $? -eq 0 ]; then
+              echo "Xvfb started successfully"
+            else
+              echo "Xvfb is already running"
+            fi
+          background: true
       - attach_workspace:
           at: ~/pix
       - run: cat package*.json > cachekey
@@ -884,6 +895,17 @@ jobs:
     working_directory: ~/pix/high-level-tests/e2e
     steps:
       - browser-tools/install-chrome
+      - run:
+          name: Manual safety start of X11 server
+          command: |
+            set +e
+            Xvfb :99 -screen 0 1280x1024x24 2>/dev/null
+            if [ $? -eq 0 ]; then
+              echo "Xvfb started successfully"
+            else
+              echo "Xvfb is already running"
+            fi
+          background: true
       - attach_workspace:
           at: ~/pix
       - run: cat package*.json > cachekey
