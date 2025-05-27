@@ -1,5 +1,30 @@
 # Pix Changelog
 
+# [5.120.0](https://github.com/1024pix/pix/compare/v5.119.0...v5.120.0) (2025-05-27)
+
+### :rocket: Amélioration
+
+- [#12367](https://github.com/1024pix/pix/pull/12367) Afficher l'analyse des resultats par competence. (PIX-17675) 
+- [#12344](https://github.com/1024pix/pix/pull/12344) Ajouter la possibilité de désactiver l'authentification par mot de passe sur Pix admin (PIX-17820) 
+- [#12374](https://github.com/1024pix/pix/pull/12374) Communication entre Pix App et l’embed pix-llm (PIX-17788) 
+- [#12373](https://github.com/1024pix/pix/pull/12373) Créer le nouvel élément Question A/B (QAB) dans l'API (PIX-17831) 
+- [#12382](https://github.com/1024pix/pix/pull/12382) Supprimer les stepsLabels et avoir toutes les jauges sur 8 niveaux (PIX-18033) 
+
+### :bug: Correction
+
+- [#12348](https://github.com/1024pix/pix/pull/12348) Corriger le champ "Adresse email" du formulaire de sortie du sco (PIX-17516) 
+
+### :building_construction: Tech
+
+- [#12372](https://github.com/1024pix/pix/pull/12372) Correction test flaky certif (PIX-17996). 
+- [#12377](https://github.com/1024pix/pix/pull/12377) Exposer la doc de l’API MaDDo sur /documentation/maddo 
+- [#12381](https://github.com/1024pix/pix/pull/12381) Flaky sur le repo campaign participation 
+- [#12369](https://github.com/1024pix/pix/pull/12369) Nettoyage de dépendances et packages.json de PixAdmin 
+- [#12253](https://github.com/1024pix/pix/pull/12253) Passer le feature toggle du bouton de vocalisation au nouveau système 
+- [#12366](https://github.com/1024pix/pix/pull/12366) Préparer l'anonymisation complète des organisations learners (PIX-17849).  
+- [#12326](https://github.com/1024pix/pix/pull/12326) Retirer l'ancienne navbar de Pix app (PIX-17994). 
+- [#12357](https://github.com/1024pix/pix/pull/12357) Seeds PRO pour certif (PIX-17295).
+
 # [5.119.0](https://github.com/1024pix/pix/compare/v5.118.0...v5.119.0) (2025-05-26)
 
 ### :rocket: Amélioration
