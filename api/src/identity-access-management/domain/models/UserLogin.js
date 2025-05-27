@@ -22,8 +22,25 @@ class UserLogin {
     this.lastLoggedAt = lastLoggedAt;
   }
 
+  get remainingAttempts() {
+    if (this.failureCount > config.login.blockingLimitFailureCount) {
+      return 0;
+    }
+    return config.login.blockingLimitFailureCount - this.failureCount + 1;
+  }
+
+  get shouldWarnRemainingAttempts() {
+    const warnLimit = config.login.temporaryBlockingThresholdFailureCount;
+    return this.remainingAttempts >= 0 && this.remainingAttempts <= warnLimit;
+  }
+
   incrementFailureCount() {
     this.failureCount++;
+  }
+
+  computeBlockingDurationMs() {
+    const commonRatio = Math.pow(2, this.failureCount / config.login.temporaryBlockingThresholdFailureCount - 1);
+    return config.login.temporaryBlockingBaseTimeMs * commonRatio;
   }
 
   hasFailedAtLeastOnce() {
@@ -47,8 +64,7 @@ class UserLogin {
   }
 
   markUserAsTemporarilyBlocked() {
-    const commonRatio = Math.pow(2, this.failureCount / config.login.temporaryBlockingThresholdFailureCount - 1);
-    this.temporaryBlockedUntil = new Date(Date.now() + config.login.temporaryBlockingBaseTimeMs * commonRatio);
+    this.temporaryBlockedUntil = new Date(Date.now() + this.computeBlockingDurationMs());
   }
 
   isUserMarkedAsTemporaryBlocked() {

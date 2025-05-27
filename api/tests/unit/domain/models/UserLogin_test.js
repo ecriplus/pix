@@ -14,6 +14,56 @@ describe('Unit | Domain | Models | UserLogin', function () {
     clock.restore();
   });
 
+  describe('#remainingAttempts', function () {
+    it('returns remaining attempts before blocking', function () {
+      // given
+      const { blockingLimitFailureCount } = config.login;
+      const userLogin = new UserLogin({ userId: 666, failureCount: 0 });
+
+      // when
+      const remainingAttempts = userLogin.remainingAttempts;
+
+      // then
+      expect(remainingAttempts).to.equal(blockingLimitFailureCount + 1);
+    });
+
+    it('returns 0 when failure count is greater than blocking limit', function () {
+      // given
+      const { blockingLimitFailureCount } = config.login;
+      const userLogin = new UserLogin({ userId: 666, failureCount: blockingLimitFailureCount + 1 });
+
+      // when
+      const remainingAttempts = userLogin.remainingAttempts;
+
+      // then
+      expect(remainingAttempts).to.equal(0);
+    });
+  });
+
+  describe('#shouldWarnRemainingAttempts', function () {
+    it('returns true to warn remaining attempts is reaching final block', function () {
+      // given
+      const userLogin = new UserLogin({ userId: 666, failureCount: 25 });
+
+      // when
+      const shouldWarnRemainingAttempts = userLogin.shouldWarnRemainingAttempts;
+
+      // then
+      expect(shouldWarnRemainingAttempts).to.equal(true);
+    });
+
+    it('returns false when remaining attempts is not reaching final block yet', function () {
+      // given
+      const userLogin = new UserLogin({ userId: 666, failureCount: 15 });
+
+      // when
+      const shouldWarnRemainingAttempts = userLogin.shouldWarnRemainingAttempts;
+
+      // then
+      expect(shouldWarnRemainingAttempts).to.equal(false);
+    });
+  });
+
   describe('#incrementFailureCount', function () {
     it('increments failure count', function () {
       // given
@@ -24,6 +74,32 @@ describe('Unit | Domain | Models | UserLogin', function () {
 
       // then
       expect(userLogin.failureCount).to.equal(1);
+    });
+  });
+
+  describe('#computeBlockingDurationMs', function () {
+    it('returns the blocking duration in milliseconds based on 10 failures', function () {
+      // given
+      const userLogin = new UserLogin({ userId: 666, failureCount: 10 });
+
+      // when
+      const blockingDuration = userLogin.computeBlockingDurationMs();
+
+      // then
+      const expectedDurationMs = 120000; // 2 minutes in milliseconds
+      expect(blockingDuration).to.equal(expectedDurationMs);
+    });
+
+    it('returns the blocking duration in milliseconds based on 20 failures', function () {
+      // given
+      const userLogin = new UserLogin({ userId: 666, failureCount: 20 });
+
+      // when
+      const blockingDuration = userLogin.computeBlockingDurationMs();
+
+      // then
+      const expectedDurationMs = 240000; // 4 minutes in milliseconds
+      expect(blockingDuration).to.equal(expectedDurationMs);
     });
   });
 

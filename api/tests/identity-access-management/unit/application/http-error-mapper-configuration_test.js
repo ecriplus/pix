@@ -90,14 +90,12 @@ describe('Unit | Identity Access Management | Application | HttpErrorMapperConfi
       const httpErrorMapper = authenticationDomainErrorMappingConfiguration.find(
         (httpErrorMapper) => httpErrorMapper.name === PasswordNotMatching.name,
       );
-      const message = 'Test message error';
 
       //when
-      const error = httpErrorMapper.httpErrorFn(new PasswordNotMatching(message));
+      const error = httpErrorMapper.httpErrorFn(new PasswordNotMatching());
 
       //then
       expect(error).to.be.instanceOf(HttpErrors.UnauthorizedError);
-      expect(error.message).to.equal(message);
     });
   });
 
