@@ -4,7 +4,7 @@
   "title": " ChatGPT ne sait pas vraiment ce qu’il dit !",
   "isBeta": true,
   "details": {
-    "image": "",
+    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
     "description": "<p>Mistral, chatGPT et Gemini, sont des Intelligences Artificielles (IA) conversationnelles&nbsp;: un utilisateur peut discuter avec ces IA et avoir des réponses à ses demandes.&nbsp; <br>Ces IA peuvent résumer un texte, inventer des histoires, etc. Et ça, sur globalement tous les sujets ! <br>Dans ce module, vous allez découvrir comment une IA conversationnelle réussit toujours à donner une réponse à un utilisateur… sans vraiment savoir ce qu’elle dit !<br><br></p>",
     "duration": 10,
     "level": "Débutant",
