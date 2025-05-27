@@ -5,6 +5,12 @@ export default {
     defaultValue: false,
     tags: ['frontend'],
   },
+  isTextToSpeechButtonEnabled: {
+    type: 'boolean',
+    description: 'Enable the text to speech button on challenges',
+    defaultValue: true,
+    tags: ['frontend'],
+  },
   isAsyncQuestRewardingCalculationEnabled: {
     type: 'boolean',
     description: 'Used to switch between synchronous and asynchronous mode for quest reward calculation',
