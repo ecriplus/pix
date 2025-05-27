@@ -27,7 +27,7 @@ describe('Integration | Application | Route | sco-organization-learners', functi
               'first-name': 'Robert',
               'last-name': 'Smith',
               birthdate: '2012-12-12',
-              'campaign-code': 'RESTRICTD',
+              'organization-id': 123,
             },
           },
         };
@@ -47,7 +47,7 @@ describe('Integration | Application | Route | sco-organization-learners', functi
               'first-name': 'Robert ',
               'last-name': 'Smith',
               birthdate: '2012-12-12',
-              'campaign-code': 'RESTRICTD',
+              'organization-id': 123,
             },
           },
         };
@@ -77,7 +77,7 @@ describe('Integration | Application | Route | sco-organization-learners', functi
               'first-name': INVALID_FIRSTNAME,
               'last-name': 'Smith',
               birthdate: '2012-12-12',
-              'campaign-code': 'RESTRICTD',
+              'organization-id': 123,
             },
           },
         };
@@ -98,7 +98,7 @@ describe('Integration | Application | Route | sco-organization-learners', functi
               'first-name': 'Robert',
               'last-name': INVALID_LASTNAME,
               birthdate: '2012-12-12',
-              'campaign-code': 'RESTRICTD',
+              'organization-id': 123,
             },
           },
         };
@@ -121,7 +121,7 @@ describe('Integration | Application | Route | sco-organization-learners', functi
               'first-name': 'Robert',
               'last-name': 'Smith',
               birthdate: INVALID_BIRTHDATE,
-              'campaign-code': 'RESTRICTD',
+              'organization-id': 123,
             },
           },
         };
@@ -142,7 +142,7 @@ describe('Integration | Application | Route | sco-organization-learners', functi
               'first-name': 'Robert',
               'last-name': 'Smith',
               birthdate: INVALID_BIRTHDATE,
-              'campaign-code': 'RESTRICTD',
+              'organization-id': 123,
             },
           },
         };
@@ -163,7 +163,7 @@ describe('Integration | Application | Route | sco-organization-learners', functi
               'first-name': 'Robert',
               'last-name': 'Smith',
               birthdate: INVALID_BIRTHDATE,
-              'campaign-code': 'RESTRICTD',
+              'organization-id': 123,
             },
           },
         };
@@ -175,16 +175,16 @@ describe('Integration | Application | Route | sco-organization-learners', functi
         expect(response.statusCode).to.equal(422);
       });
 
-      it('should return an error when there is an invalid campaign code attribute in the payload', async function () {
+      it('should return an error when there is an invalid organizationId attribute in the payload', async function () {
         // given
-        const INVALID_CAMPAIGNCODE = '';
+        const INVALID_ORGANIZAION_ID = '';
         const payload = {
           data: {
             attributes: {
               'first-name': 'Robert',
               'last-name': 'Smith',
               birthdate: '2012-12-12',
-              'campaign-code': INVALID_CAMPAIGNCODE,
+              'organization-id': INVALID_ORGANIZAION_ID,
             },
           },
         };

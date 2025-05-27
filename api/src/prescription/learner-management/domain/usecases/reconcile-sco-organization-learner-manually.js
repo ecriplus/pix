@@ -2,7 +2,6 @@ import lodash from 'lodash';
 
 import { STUDENT_RECONCILIATION_ERRORS } from '../../../../shared/domain/constants.js';
 import {
-  CampaignCodeError,
   OrganizationLearnerAlreadyLinkedToUserError,
   UserShouldNotBeReconciledOnAnotherAccountError,
 } from '../../../../shared/domain/errors.js';
@@ -10,10 +9,9 @@ import {
 const { isEmpty } = lodash;
 
 const reconcileScoOrganizationLearnerManually = async function ({
-  campaignCode,
+  organizationId,
   reconciliationInfo,
   withReconciliation,
-  campaignRepository,
   libOrganizationLearnerRepository,
   organizationLearnerRepository,
   registrationOrganizationLearnerRepository,
@@ -22,14 +20,9 @@ const reconcileScoOrganizationLearnerManually = async function ({
   obfuscationService,
   userReconciliationService,
 }) {
-  const campaign = await campaignRepository.getByCode(campaignCode);
-  if (!campaign) {
-    throw new CampaignCodeError();
-  }
-
   const organizationLearnerOfUserAccessingCampaign =
     await userReconciliationService.findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo({
-      organizationId: campaign.organizationId,
+      organizationId,
       reconciliationInfo,
       organizationLearnerRepository: libOrganizationLearnerRepository,
     });
@@ -43,7 +36,7 @@ const reconcileScoOrganizationLearnerManually = async function ({
 
   await _checkIfAnotherStudentIsAlreadyReconciledWithTheSameOrganizationAndUser(
     reconciliationInfo.id,
-    campaign.organizationId,
+    organizationId,
     registrationOrganizationLearnerRepository,
   );
 

@@ -15,7 +15,6 @@ describe('Acceptance | Route | sco-organization-management-route', function () {
 
   describe('POST /api/sco-organization-learners/association', function () {
     let organization;
-    let campaign;
     let options;
     let organizationLearner;
     let user;
@@ -39,7 +38,6 @@ describe('Acceptance | Route | sco-organization-management-route', function () {
         userId: null,
         nationalStudentId: 'francegall123',
       });
-      campaign = databaseBuilder.factory.buildCampaign({ organizationId: organization.id });
 
       await databaseBuilder.commit();
     });
@@ -50,7 +48,7 @@ describe('Acceptance | Route | sco-organization-management-route', function () {
         options.headers = generateAuthenticatedUserRequestHeaders({ userId: user.id });
         options.payload.data = {
           attributes: {
-            'campaign-code': campaign.code,
+            'organization-id': organization.id,
             'first-name': organizationLearner.firstName,
             'last-name': organizationLearner.lastName,
             birthdate: organizationLearner.birthdate,
@@ -84,7 +82,7 @@ describe('Acceptance | Route | sco-organization-management-route', function () {
           options.headers = generateAuthenticatedUserRequestHeaders({ userId: user.id });
           options.payload.data = {
             attributes: {
-              'campaign-code': campaign.code,
+              'organization-id': organization.id,
               'first-name': organizationLearner.firstName,
               'last-name': organizationLearner.lastName,
               birthdate: organizationLearner.birthdate,
