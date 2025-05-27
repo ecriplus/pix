@@ -1,5 +1,6 @@
 import * as certificateRepository from '../../../../../../src/certification/results/infrastructure/repositories/certificate-repository.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
+import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { SESSIONS_VERSIONS } from '../../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
@@ -43,8 +44,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       // given
       const certificationAttestationData = {
         id: 123,
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -81,7 +82,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       // given
       const certificationAttestationData = {
         id: 123,
-        firstName: 'Sarah Michelle',
+        firstName: 'Sarah Mi',
         lastName: 'Gellar',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
@@ -119,8 +120,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       // given
       const certificationAttestationData = {
         id: 123,
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: false,
@@ -157,7 +158,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       // given
       const certificationAttestationData = {
         id: 123,
-        firstName: 'Sarah Michelle',
+        firstName: 'Sarah Mi',
         lastName: 'Gellar',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
@@ -197,8 +198,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       await mockLearningContent(learningContentObjects);
       const certificationAttestationData = {
         id: 123,
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -245,8 +246,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
 
         const certificationAttestationData = {
           id: 123,
-          firstName: 'Sarah Michelle',
-          lastName: 'Gellar',
+          firstName: 'Sarah Mi',
+          lastName: 'Gell',
           birthdate: '1977-04-14',
           birthplace: 'Saint-Ouen',
           isPublished: true,
@@ -287,8 +288,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         // given
         const certificationAttestationData = {
           id: 123,
-          firstName: 'Sarah Michelle',
-          lastName: 'Gellar',
+          firstName: 'Sarah Mi',
+          lastName: 'Gell',
           birthdate: '1977-04-14',
           birthplace: 'Saint-Ouen',
           isPublished: true,
@@ -382,8 +383,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           await mockLearningContent(learningContentObjects);
           const certificationAttestationData = {
             id: 123,
-            firstName: 'Sarah Michelle',
-            lastName: 'Gellar',
+            firstName: 'Sarah Mi',
+            lastName: 'Gell',
             birthdate: '1977-04-14',
             birthplace: 'Saint-Ouen',
             isPublished: true,
@@ -506,8 +507,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
 
             const certificationAttestationData = {
               id: 123,
-              firstName: 'Sarah Michelle',
-              lastName: 'Gellar',
+              firstName: 'Sarah Mi',
+              lastName: 'Gell',
               birthdate: '1977-04-14',
               birthplace: 'Saint-Ouen',
               isPublished: true,
@@ -611,6 +612,83 @@ describe('Integration | Infrastructure | Repository | Certification', function (
             });
             expect(certificationAttestation).to.deepEqualInstance(expectedCertificationAttestation);
           });
+
+          context('when a complementary certification is acquired', function () {
+            it('should return a V3Certificate with complementary', async function () {
+              // given
+              await featureToggles.set('isV3CertificationAttestationEnabled', true);
+              await featureToggles.set('isV3CertificationPageEnabled', true);
+
+              const locale = 'en';
+
+              const certificationAttestationData = {
+                id: 123,
+                isPublished: true,
+                userId: 456,
+                date: new Date('2020-01-01'),
+                deliveredAt: new Date('2021-05-05'),
+                pixScore: 51,
+                sessionId: 789,
+              };
+              const version = _buildSession({
+                userId: certificationAttestationData.userId,
+                sessionId: certificationAttestationData.sessionId,
+                publishedAt: certificationAttestationData.deliveredAt,
+              });
+              const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+                id: certificationAttestationData.id,
+                isPublished: certificationAttestationData.isPublished,
+                isCancelled: false,
+                createdAt: certificationAttestationData.date,
+                sessionId: certificationAttestationData.sessionId,
+                userId: certificationAttestationData.userId,
+                version,
+              }).id;
+              databaseBuilder.factory.buildAssessmentResult.last({
+                certificationCourseId,
+                pixScore: certificationAttestationData.pixScore,
+                status: AssessmentResult.status.VALIDATED,
+              }).id;
+
+              const badgeId = databaseBuilder.factory.buildBadge().id;
+              const complementaryCertificationId = databaseBuilder.factory.buildComplementaryCertification({
+                key: ComplementaryCertificationKeys.CLEA,
+              }).id;
+
+              const complementaryCertificationBadgeId = databaseBuilder.factory.buildComplementaryCertificationBadge({
+                badgeId,
+                complementaryCertificationId,
+              }).id;
+              const { id: complementaryCertificationCourseId } =
+                databaseBuilder.factory.buildComplementaryCertificationCourse({
+                  certificationCourseId,
+                  complementaryCertificationId,
+                  complementaryCertificationBadgeId,
+                });
+              databaseBuilder.factory.buildComplementaryCertificationCourseResult({
+                complementaryCertificationCourseId,
+                complementaryCertificationBadgeId,
+                acquired: true,
+              });
+
+              await databaseBuilder.commit();
+
+              // when
+              const certificationAttestation = await certificateRepository.getCertificationAttestation({
+                certificationCourseId: 123,
+                locale,
+              });
+
+              // then
+              expect(certificationAttestation.acquiredComplementaryCertification).to.deep.equal({
+                imageUrl: 'http://badge-image-url.fr',
+                isTemporaryBadge: false,
+                label: 'Label par defaut',
+                message: null,
+                stickerUrl: 'http://stiker-url.fr',
+              });
+            });
+          });
         });
 
         it('should return a Certificate', async function () {
@@ -621,8 +699,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
 
           const certificationAttestationData = {
             id: 123,
-            firstName: 'Sarah Michelle',
-            lastName: 'Gellar',
+            firstName: 'Sarah Mi',
+            lastName: 'Gell',
             birthdate: '1977-04-14',
             birthplace: 'Saint-Ouen',
             isPublished: true,
@@ -669,8 +747,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
 
           const certificationAttestationData = {
             id: 123,
-            firstName: 'Sarah Michelle',
-            lastName: 'Gellar',
+            firstName: 'Sarah Mi',
+            lastName: 'Gell',
             birthdate: '1977-04-14',
             birthplace: 'Saint-Ouen',
             isPublished: true,
@@ -713,8 +791,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       databaseBuilder.factory.buildOrganization({ id: 456, type: 'SCO', isManagingStudents: true });
       const certificationAttestationData = {
         id: 123,
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -760,8 +838,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       databaseBuilder.factory.buildOrganization({ id: 123, type: 'SUP', isManagingStudents: false });
       const certificationAttestationData = {
         id: 123,
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -807,8 +885,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       databaseBuilder.factory.buildOrganization({ id: 123, type: 'SCO', isManagingStudents: true });
       const certificationAttestationData = {
         id: 123,
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -854,8 +932,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       databaseBuilder.factory.buildOrganization({ id: 123, type: 'SCO', isManagingStudents: true });
       const certificationAttestationData = {
         id: 123,
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -901,8 +979,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       databaseBuilder.factory.buildOrganization({ id: 123, type: 'SCO', isManagingStudents: true });
       const certificationAttestationData = {
         id: 123,
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -948,8 +1026,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       databaseBuilder.factory.buildOrganization({ id: 123, type: 'SCO', isManagingStudents: true });
       const certificationAttestationData = {
         id: 123,
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: false,
@@ -1016,7 +1094,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       const certificationAttestationDataB = {
         id: 123,
         firstName: 'Laura',
-        lastName: 'Gellar',
+        lastName: 'Gell',
         birthdate: '1990-01-04',
         birthplace: 'Torreilles',
         isPublished: true,
@@ -1034,8 +1112,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       };
       const certificationAttestationDataC = {
         id: 789,
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -1137,7 +1215,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       const certificationAttestationDataB = {
         id: 123,
         firstName: 'Laura',
-        lastName: 'Gellar',
+        lastName: 'Gell',
         birthdate: '1990-01-04',
         birthplace: 'Torreilles',
         isPublished: true,
@@ -1155,8 +1233,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       };
       const certificationAttestationDataC = {
         id: 789,
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -1244,8 +1322,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         databaseBuilder.factory.buildOrganization({ id: 123, type: 'SCO', isManagingStudents: true });
         const certificationAttestationData = {
           id: 123,
-          firstName: 'Sarah Michelle',
-          lastName: 'Gellar',
+          firstName: 'Sarah Mi',
+          lastName: 'Gell',
           birthdate: '1977-04-14',
           birthplace: 'Saint-Ouen',
           isPublished: true,
@@ -1340,8 +1418,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       }).id;
       const certificationAttestationDataOldest = {
         id: 123,
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -1359,8 +1437,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       };
       const certificationAttestationDataNewest = {
         id: 456,
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -1434,8 +1512,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const privateCertificateData = {
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -1482,8 +1560,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const privateCertificateData = {
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -1536,8 +1614,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const privateCertificateData = {
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: false,
@@ -1588,8 +1666,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const privateCertificateData = {
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -1640,8 +1718,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const privateCertificateData = {
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -1699,8 +1777,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const privateCertificateData = {
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -1744,8 +1822,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const privateCertificateData = {
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -1794,8 +1872,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const privateCertificateData = {
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -1848,8 +1926,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const privateCertificateData = {
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isCancelled: false,
@@ -1901,8 +1979,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const privateCertificateData = {
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -1958,8 +2036,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
 
       const userId = databaseBuilder.factory.buildUser().id;
       const privateCertificateData = {
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -1996,8 +2074,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
 
         const userId = databaseBuilder.factory.buildUser().id;
         const privateCertificateData = {
-          firstName: 'Sarah Michelle',
-          lastName: 'Gellar',
+          firstName: 'Sarah Mi',
+          lastName: 'Gell',
           birthdate: '1977-04-14',
           birthplace: 'Saint-Ouen',
           isPublished: true,
@@ -2033,8 +2111,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
 
         const userId = databaseBuilder.factory.buildUser().id;
         const privateCertificateData = {
-          firstName: 'Sarah Michelle',
-          lastName: 'Gellar',
+          firstName: 'Sarah Mi',
+          lastName: 'Gell',
           birthdate: '1977-04-14',
           birthplace: 'Saint-Ouen',
           isPublished: true,
@@ -2143,8 +2221,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
 
         const userId = databaseBuilder.factory.buildUser().id;
         const privateCertificateData = {
-          firstName: 'Sarah Michelle',
-          lastName: 'Gellar',
+          firstName: 'Sarah Mi',
+          lastName: 'Gell',
           birthdate: '1977-04-14',
           birthplace: 'Saint-Ouen',
           isPublished: true,
@@ -2278,8 +2356,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
 
         const userId = databaseBuilder.factory.buildUser().id;
         const privateCertificateData = {
-          firstName: 'Sarah Michelle',
-          lastName: 'Gellar',
+          firstName: 'Sarah Mi',
+          lastName: 'Gell',
           birthdate: '1977-04-14',
           birthplace: 'Saint-Ouen',
           isPublished: true,
@@ -2378,8 +2456,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const shareableCertificateData = {
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -2425,8 +2503,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const shareableCertificateData = {
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -2477,8 +2555,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const shareableCertificateData = {
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: false,
@@ -2529,8 +2607,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const shareableCertificateData = {
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
+        firstName: 'Sarah Mi',
+        lastName: 'Gell',
         birthdate: '1977-04-14',
         birthplace: 'Saint-Ouen',
         isPublished: true,
@@ -2583,8 +2661,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         const userId = databaseBuilder.factory.buildUser().id;
         const shareableCertificateData = {
           id: 123,
-          firstName: 'Sarah Michelle',
-          lastName: 'Gellar',
+          firstName: 'Sarah Mi',
+          lastName: 'Gell',
           birthdate: '1977-04-14',
           birthplace: 'Saint-Ouen',
           isPublished: true,
@@ -2694,8 +2772,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         const userId = databaseBuilder.factory.buildUser().id;
         const shareableCertificateData = {
           id: 123,
-          firstName: 'Sarah Michelle',
-          lastName: 'Gellar',
+          firstName: 'Sarah Mi',
+          lastName: 'Gell',
           birthdate: '1977-04-14',
           birthplace: 'Saint-Ouen',
           isPublished: true,
@@ -2829,8 +2907,8 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         const userId = databaseBuilder.factory.buildUser().id;
         const shareableCertificateData = {
           id: 123,
-          firstName: 'Sarah Michelle',
-          lastName: 'Gellar',
+          firstName: 'Sarah Mi',
+          lastName: 'Gell',
           birthdate: '1977-04-14',
           birthplace: 'Saint-Ouen',
           isPublished: true,

@@ -74,6 +74,7 @@ describe('Unit | Serializer | JSONAPI | certificate-serializer', function () {
             'certified-badge-images': ['/img/1', '/img/2'],
             'max-reachable-level-on-certification-date': 6,
             version: SESSIONS_VERSIONS.V3,
+            'acquired-complementary-certification': undefined,
           },
           relationships: {
             'result-competence-tree': {
@@ -182,6 +183,7 @@ describe('Unit | Serializer | JSONAPI | certificate-serializer', function () {
         const shareableCertificate = domainBuilder.certification.results.buildCertificate({
           id: 123,
           resultCompetenceTree,
+          acquiredComplementaryCertification: { imageUrl: 'http://example.com/' },
         });
         const translate = getI18n().__;
 
@@ -207,6 +209,7 @@ describe('Unit | Serializer | JSONAPI | certificate-serializer', function () {
             'global-description-label': shareableCertificate.globalLevel.getDescriptionLabel(translate),
             level: '1',
             'certification-date': new Date('2015-10-03T01:02:03Z'),
+            'acquired-complementary-certification': 'http://example.com/',
           },
           relationships: {
             'result-competence-tree': {
