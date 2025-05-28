@@ -1,5 +1,3 @@
-import queryString from 'query-string';
-
 import ApplicationAdapter from './application';
 
 export default class SessionAdapter extends ApplicationAdapter {
@@ -10,8 +8,11 @@ export default class SessionAdapter extends ApplicationAdapter {
   findHasMany(store, snapshot, url, relationship) {
     url = this.urlPrefix(url, this.buildURL(snapshot.modelName, snapshot.id, null, 'findHasMany'));
     if (relationship.type === 'jury-certification-summary' && snapshot.adapterOptions) {
-      const options = queryString.stringify(snapshot.adapterOptions);
-      url += '?' + options;
+      const params = new URLSearchParams();
+      for (const [key, value] of Object.entries(snapshot.adapterOptions)) {
+        if (value) params.append(key, value);
+      }
+      url += '?' + params.toString();
     }
 
     return this.ajax(url, 'GET');
