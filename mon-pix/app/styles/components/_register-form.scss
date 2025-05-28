@@ -21,6 +21,10 @@
     font-family: fonts.$font-roboto;
   }
 
+  &__login-mode-container {
+    margin-bottom: var(--pix-spacing-3x);
+  }
+
   &__required-inputs {
     color: var(--pix-neutral-500);
     font-weight: var(--pix-font-normal);
@@ -67,7 +71,6 @@
   &-username-container {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
 
     &__label {
       color: var(--pix-neutral-800);

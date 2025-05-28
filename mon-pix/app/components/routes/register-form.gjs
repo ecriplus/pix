@@ -156,7 +156,7 @@ export default class RegisterForm extends Component {
       <hr />
 
       <label class="register-form__login-options">{{t "pages.login-or-register.register-form.options.text"}}</label>
-      <div id="login-mode-container">
+      <div id="login-mode-container" class="register-form__login-mode-container">
         <PixToggleDeprecated
           @valueFirstLabel={{t "pages.login-or-register.register-form.options.username"}}
           @valueSecondLabel={{t "pages.login-or-register.register-form.options.email"}}
