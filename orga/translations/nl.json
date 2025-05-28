@@ -505,13 +505,13 @@
         "title": "De deelname van <strong>{firstName} {lastName}</strong> verwijderen?",
         "warning": {
           "assessment-campaign-participation": {
-            "shared-participation": "De deelnemer kan niet meer deelnemen aan deze campagne.",
-            "started-participation": "De deelnemer kan de campagne nog wel voltooien, maar kan de resultaten niet meer opsturen, noch opnieuw deelnemen aan de campagne.",
-            "to-share-participation": "Deelnemer kan de resultaten niet opsturen en kan ook niet opnieuw deelnemen aan de campagne."
+            "shared-participation": "De deelnemer heeft geen toegang meer tot de resultaten van deze test.",
+            "started-participation": "De deelnemer kan deze test niet voltooien.",
+            "to-share-participation": "The Participant will not be able to send in their results."
           },
           "profiles-collection-campaign-participation": {
-            "shared-participation": "De deelnemer kan niet meer deelnemen aan deze profielverzameling.",
-            "to-share-participation": "De deelnemer kan zijn/haar profiel niet doorsturen en kan ook niet opnieuw deelnemen aan deze profielverzameling."
+            "shared-participation": "De deelnemer zal niet langer kunnen deelnemen aan deze profielverzameling.",
+            "to-share-participation": "Deelnemers kunnen hun profiel niet verzenden."
           }
         }
       },
@@ -1223,8 +1223,6 @@
           "footer": "Houd er rekening mee dat deze actie onomkeerbaar is.",
           "header": "{count, plural, =1 {Deze deelnemer is niet meer zichtbaar} other {Deze deelnemers zijn niet meer zichtbaar}} in Pix Orga.",
           "main-campaign-prevent": "Dit heeft invloed op de resultaten en analyses van de campagnes die {count, plural, =1 {hij/zij heeft} other {zij hebben}} uitgevoerd.",
-          "main-new-campaign-access": "Maar {count, plural, =1 {hij/zij kan} other {zij kunnen}} deelnemen aan nieuwe campagnes.",
-          "main-participation-access": "{count, plural, =1 {Hij/zij kan niet} other {Zij kunnen niet}} meer deelnemen aan nieuwe campagnes waaraan {count, plural, =1 {hij/zij had} other {ze hadden}} deelgenomen in het verleden.",
           "main-participation-prevent": "Alle campagne-items {count, plural, =1 {van hem} other {van hen}} worden verwijderd. "
         },
         "title": "{count, plural, =1 {Verwijder '<strong>'{firstname} {lastname}’</strong>' uit jouw deelnemers?} other {Weet je zeker dat je '<strong>'{count}'</strong>'}} deelnemers wilt verwijderen?"
@@ -1574,8 +1572,6 @@
           "footer": "Houd er rekening mee dat deze actie onomkeerbaar is.",
           "header": "{count, plural, =1 {Deze student is niet meer zichtbaar} other {Deze studenten zijn niet meer zichtbaar}} in Pix Orga.",
           "main-campaign-prevent": "Dit heeft invloed op de resultaten en analyses van de campagnes die {count, plural, =1 {hij/zij heeft} other {zij hebben}} uitgevoerd.",
-          "main-new-campaign-access": "Maar {count, plural, =1 {hij/zij kan} other {zij kunnen}} deelnemen aan nieuwe campagnes.",
-          "main-participation-access": "{count, plural, =1 {Hij/zij kan niet} other {Zij kunnen niet}} meer deelnemen aan nieuwe campagnes waaraan {count, plural, =1 {hij/zij had} other {ze hadden}} deelgenomen in het verleden.",
           "main-participation-prevent": "Alle campagne-items {count, plural, =1 {van hem} other {van hen}} worden verwijderd."
         },
         "title": "{count, plural, =1 {Verwijder '<strong>'{firstname} {lastname}'</strong>' uit je studenten?} other {Weet je zeker dat je '<strong>'{count}'</strong>'}} studenten wilt verwijderen?"

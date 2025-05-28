@@ -474,14 +474,6 @@ const DeletionModal = <template>
           "pages.organization-participants.deletion-modal.content.main-campaign-prevent"
           count=@selectedParticipants.length
         }}</p>
-      <p>{{t
-          "pages.organization-participants.deletion-modal.content.main-participation-access"
-          count=@selectedParticipants.length
-        }}</p>
-      <p>{{t
-          "pages.organization-participants.deletion-modal.content.main-new-campaign-access"
-          count=@selectedParticipants.length
-        }}</p>
       <p><strong>{{t
             "pages.organization-participants.deletion-modal.content.footer"
             count=@selectedParticipants.length

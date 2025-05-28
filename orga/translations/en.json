@@ -541,9 +541,9 @@
         "title": "Delete the participation of <strong>{firstName} {lastName}</strong>?",
         "warning": {
           "assessment-campaign-participation": {
-            "shared-participation": "The participant will not be able to take the test again.",
-            "started-participation": "The participant will be able to complete their customised test but will no longer be able to submit their results. They will also not be able to participate in the campaign again.",
-            "to-share-participation": "The participant will no longer be able to submit their results nor to take the test again."
+            "shared-participation": "The participant will no longer be able to access the results of this test.",
+            "started-participation": "The participant will not be able to complete this test.",
+            "to-share-participation": "The Participant will not be able to send in their results."
           },
           "profiles-collection-campaign-participation": {
             "shared-participation": "The participant will no longer be able to submit their profile through this campaign.",
@@ -847,7 +847,7 @@
         "delete-button": "Delete",
         "error-message": "{count, plural, =1 {An error has occurred. the campaign has not been deleted from the list.} other {An error has occurred. The {count} selected campaigns have not been deleted from the list}}",
         "information": "{count, plural, =1 {{count} selected campaign} other {{count} selected campaigns}}",
-        "success-message": "{count, plural, =1 {The campaign has successfully been deleted from the list.} other {The {count} selected campaigns have successfully been deleted from the list.}}"
+        "success-message": "{count, plural, =1 {The campaign (and the results) has successfully been deleted from the list.} other {The {count} selected campaigns (and the results) have successfully been deleted from the list.}}"
       },
       "deletion-modal": {
         "confirmation-checkbox": "I confirm that I have understood the impacts of the {count} deletions",
@@ -1168,8 +1168,6 @@
           "footer": "Please note that this action is irreversible.",
           "header": "{count, plural, =1 {This participant} other {These participants}} will no longer be visible in Pix Orga.",
           "main-campaign-prevent": "This will have an impact on the results and analytics of your campaigns.",
-          "main-new-campaign-access": "However, they will still be able to take part in new campaigns.",
-          "main-participation-access": "They  will no longer be able to take part in any previous campaigns.",
           "main-participation-prevent": "All their participations to campaigns will be deleted."
         },
         "title": "Delete '<strong>'{count, plural, =1 {{firstname} {lastname}} other {{count}}}'</strong>' {count, plural, =1 {of your} other {selected}} participants?"
@@ -1574,8 +1572,6 @@
           "footer": "Please note that this action is irreversible.",
           "header": "{count, plural, =1 {This student} other {These students}} will no longer be visible in Pix Orga.",
           "main-campaign-prevent": "This will have an impact on the results and analytics of your campaigns.",
-          "main-new-campaign-access": "However, they will still be able to take part in new campaigns.",
-          "main-participation-access": "They  will no longer be able to take part in any previous campaigns.",
           "main-participation-prevent": "All their participations to campaigns will be deleted."
         },
         "title": "Delete '<strong>'{count, plural, =1 {{firstname} {lastname}} other {{count}}}'</strong>' {count, plural, =1 {of your} other {selected}} students?"
