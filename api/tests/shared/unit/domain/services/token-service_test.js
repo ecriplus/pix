@@ -132,7 +132,7 @@ describe('Unit | Shared | Domain | Services | Token Service', function () {
       const source = 'external';
 
       sinon.stub(settings.authentication, 'secret').value(secret);
-      sinon.stub(settings.authentication, 'accessTokenLifespanMs').value(1000);
+      sinon.stub(settings.saml, 'accessTokenLifespanMs').value(1000);
       const accessToken = 'valid access token';
       const audience = 'https://app.pix.fr';
       const payload = { user_id: userId, source, aud: audience };

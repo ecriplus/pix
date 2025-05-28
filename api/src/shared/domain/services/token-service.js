@@ -1,5 +1,3 @@
-import { env } from 'node:process';
-
 import jsonwebtoken from 'jsonwebtoken';
 
 import { config } from '../../../../src/shared/config.js';
@@ -134,13 +132,7 @@ function decodeIfValid(token) {
 function getDecodedToken(token, secret = config.authentication.secret) {
   try {
     return jsonwebtoken.verify(token, secret);
-  } catch (error) {
-    // TODO: Remove this debug used to investigate a flaky test when the cause is found
-    if (env.DEBUG == 'pix:token-service:invalid-token') {
-      // eslint-disable-next-line no-console
-      console.error(`token: "${token}"`, error);
-    }
-
+  } catch {
     return false;
   }
 }
