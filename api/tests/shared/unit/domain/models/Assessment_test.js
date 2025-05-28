@@ -1,8 +1,9 @@
 import { CertificationChallengeLiveAlertStatus } from '../../../../../src/certification/shared/domain/models/CertificationChallengeLiveAlert.js';
 import { CertificationCompanionLiveAlertStatus } from '../../../../../src/certification/shared/domain/models/CertificationCompanionLiveAlert.js';
+import { Campaign } from '../../../../../src/prescription/campaign/domain/models/Campaign.js';
 import { CampaignTypes } from '../../../../../src/prescription/shared/domain/constants.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Domain | Models | Assessment', function () {
   describe('#constructor', function () {
@@ -209,6 +210,37 @@ describe('Unit | Domain | Models | Assessment', function () {
       // then
       expect(assessment.state).to.be.equal('completed');
       expect(assessment.userId).to.be.equal(2);
+    });
+  });
+
+  describe('#detachCampaignParticipation', function () {
+    let clock, now;
+
+    beforeEach(function () {
+      now = new Date(2023, 3, 3);
+      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    });
+
+    afterEach(function () {
+      clock.restore();
+    });
+
+    it('should return the same object without info on campaign and participation', function () {
+      // given
+      const assessment = new Assessment({
+        state: 'started',
+        userId: 2,
+        campaignParticipationId: 123,
+        campaign: new Campaign({ id: 111 }),
+        updatedAt: new Date('2000-01-12'),
+      });
+
+      // when
+      assessment.detachCampaignParticipation();
+
+      // then
+      expect(assessment.campaignParticipationId).null;
+      expect(assessment.updatedAt).deep.equal(now);
     });
   });
 

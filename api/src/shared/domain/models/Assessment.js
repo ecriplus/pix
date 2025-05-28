@@ -219,6 +219,11 @@ class Assessment {
     this.companionLiveAlerts = companionLiveAlerts;
   }
 
+  detachCampaignParticipation() {
+    this.campaignParticipationId = null;
+    this.updatedAt = new Date();
+  }
+
   get hasLastQuestionBeenFocusedOut() {
     return this.lastQuestionState === Assessment.statesOfLastQuestion.FOCUSEDOUT;
   }
