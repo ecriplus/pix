@@ -24,11 +24,11 @@ const deleteOrganizationLearners = async function ({
     userId,
   );
 
-  for (const organizationLearner of organizationLearnersToDelete) {
-    organizationLearner.delete(userId);
-    await organizationLearnerRepository.remove(organizationLearner);
+  const isAnonymizationWithDeletionEnabled = await featureToggles.get('isAnonymizationWithDeletionEnabled');
 
-    const isAnonymizationWithDeletionEnabled = await featureToggles.get('isAnonymizationWithDeletionEnabled');
+  for (const organizationLearner of organizationLearnersToDelete) {
+    organizationLearner.delete(userId, isAnonymizationWithDeletionEnabled);
+    await organizationLearnerRepository.remove(organizationLearner.dataToUpdateOnDeletion);
 
     const campaignParticipations =
       await campaignParticipationRepositoryfromBC.getAllCampaignParticipationsForOrganizationLearner({

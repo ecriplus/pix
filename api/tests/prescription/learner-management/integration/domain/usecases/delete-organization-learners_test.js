@@ -16,8 +16,16 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
     adminUserId = databaseBuilder.factory.buildUser().id;
     organizationId = databaseBuilder.factory.buildOrganization().id;
     campaign = databaseBuilder.factory.buildCampaign({ organizationId, type: CampaignTypes.ASSESSMENT });
-    organizationLearner1 = databaseBuilder.factory.buildOrganizationLearner({ organizationId });
-    organizationLearner2 = databaseBuilder.factory.buildOrganizationLearner({ organizationId });
+    organizationLearner1 = databaseBuilder.factory.buildOrganizationLearner({
+      organizationId,
+      firstName: 'POUET',
+      birthdate: '2020-05-12',
+    });
+    organizationLearner2 = databaseBuilder.factory.buildOrganizationLearner({
+      organizationId,
+      firstName: 'TEUOP',
+      birthdate: '2020-12-12',
+    });
     campaignParticipation1 = databaseBuilder.factory.buildCampaignParticipation({
       organizationLearnerId: organizationLearner1.id,
       participantExternalId,
@@ -96,7 +104,31 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
       ]);
       expect(deletedLearners).lengthOf(2);
       deletedLearners.forEach((learner) => {
-        expect(learner.deletedAt).to.deep.equal(now);
+        expect(learner.firstName).to.equal('(anonymized)');
+        expect(learner.lastName).to.equal('(anonymized)');
+        expect(learner.preferredLastName).null;
+        expect(learner.middleName).null;
+        expect(learner.thirdName).null;
+        expect(learner.birthdate).equal('2020-01-01');
+        expect(learner.birthCity).null;
+        expect(learner.birthCityCode).null;
+        expect(learner.birthProvinceCode).null;
+        expect(learner.birthCountryCode).null;
+        expect(learner.status).null;
+        expect(learner.nationalStudentId).null;
+        expect(learner.nationalApprenticeId).null;
+        expect(learner.division).null;
+        expect(learner.sex).null;
+        expect(learner.email).null;
+        expect(learner.studentNumber).null;
+        expect(learner.department).null;
+        expect(learner.educationalTeam).null;
+        expect(learner.group).null;
+        expect(learner.diploma).null;
+        expect(learner.userId).null;
+        expect(learner.isDisabled).equal(false);
+        expect(learner.updatedAt).deep.equal(now);
+        expect(learner.deletedAt).deep.equal(now);
         expect(learner.deletedBy).to.deep.equal(adminUserId);
       });
 

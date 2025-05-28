@@ -56,6 +56,7 @@ const buildOrganizationLearner = function ({
   MEFCode = '10010012110',
   status = 'ST',
   nationalStudentId = null,
+  nationalApprenticeId = null,
   division = '6eme',
   studentNumber = null,
   email = 'supermail@example.net',
@@ -72,6 +73,7 @@ const buildOrganizationLearner = function ({
   deletedAt = null,
   isCertifiable = null,
   certifiableAt = null,
+  attributes = null,
 } = {}) {
   organizationId = _.isUndefined(organizationId) ? buildOrganization().id : organizationId;
   userId = _.isUndefined(userId) ? buildUser().id : userId;
@@ -92,6 +94,7 @@ const buildOrganizationLearner = function ({
     MEFCode,
     status,
     nationalStudentId,
+    nationalApprenticeId,
     division,
     studentNumber,
     email,
@@ -108,6 +111,7 @@ const buildOrganizationLearner = function ({
     deletedAt,
     isCertifiable,
     certifiableAt,
+    attributes,
   };
 
   return databaseBuffer.pushInsertable({

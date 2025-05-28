@@ -24,6 +24,17 @@ function buildOrganizationLearner({
   updatedAt = new Date('2020-01-01'),
   certifiableAt = null,
   isCertifiable = null,
+  deletedAt = null,
+  deletedBy = null,
+  createdAt = new Date('2020-01-01'),
+  email = 'pix@example.net',
+  studentNumber,
+  department = 'faculté',
+  educationalTeam = '2ieme année Licence éco',
+  group = 'L1',
+  diploma = 'Non reconnu',
+  nationalApprenticeId = null,
+  attributes = {},
 } = {}) {
   return new OrganizationLearner({
     id,
@@ -48,6 +59,17 @@ function buildOrganizationLearner({
     organizationId: organization.id,
     certifiableAt,
     isCertifiable,
+    deletedAt,
+    deletedBy,
+    createdAt,
+    email,
+    studentNumber,
+    department,
+    educationalTeam,
+    group,
+    diploma,
+    nationalApprenticeId,
+    attributes,
   });
 }
 
