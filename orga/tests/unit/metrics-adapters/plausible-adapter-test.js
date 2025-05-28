@@ -1,5 +1,5 @@
 import { setupTest } from 'ember-qunit';
-import PlausibleAdapter from 'mon-pix/metrics-adapters/plausible-adapter';
+import PlausibleAdapter from 'pix-orga/metrics-adapters/plausible-adapter';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 module('Unit | MetricsAdapter | plausible-adapter', function (hooks) {
