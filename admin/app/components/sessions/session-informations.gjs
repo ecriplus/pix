@@ -85,26 +85,20 @@ function getFormattedDate(param) {
       <ul class="session-info__list">
         <li class="session-info__list-item">
           <span>Nombre de certification(s) démarrée(s) :</span>
-          <span
-            data-test-id="session-info__number-of-started-certifications"
-          >{{@sessionModel.numberOfStartedCertifications}}</span>
+          <span>{{@sessionModel.numberOfStartedCertifications}}</span>
         </li>
         {{#if @sessionModel.finalizedAt}}
           <li class="session-info__list-item">
             <span>Nombre de signalement(s) impactant(s) non résolu(s) :</span>
-            <span
-              data-test-id="session-info__number-of-impactful-reports"
-            >{{@sessionModel.numberOfImpactfullIssueReports}}</span>
+            <span>{{@sessionModel.numberOfImpactfullIssueReports}}</span>
           </li>
           <li class="session-info__list-item">
             <span>Nombre de signalement(s) :</span>
-            <span
-              data-test-id="session-info__number-of-issue-reports"
-            >{{@sessionModel.totalNumberOfIssueReports}}</span>
+            <span>{{@sessionModel.totalNumberOfIssueReports}}</span>
           </li>
           <li class="session-info__list-item">
             <span>Nombre de certification(s) en erreur :</span>
-            <span data-test-id="session-info__number-of-scoring-errors">{{@sessionModel.numberOfScoringErrors}}</span>
+            <span>{{@sessionModel.numberOfScoringErrors}}</span>
           </li>
           {{#if @sessionModel.hasComplementaryInfo}}
             <li class="session-info__list-item">
