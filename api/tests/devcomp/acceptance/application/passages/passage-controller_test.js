@@ -368,12 +368,12 @@ describe('Acceptance | Controller | passage-controller', function () {
         it('should receive LLM response as stream', async function () {
           // given
           const chat = new Chat({
-            id: 'cSomeChatId123',
+            id: 'p111SomeChatId123',
             configurationId: 'uneConfigQuiExist',
             messages: [],
           });
           await chatTemporaryStorage.save({
-            key: 'cSomeChatId123',
+            key: 'p111SomeChatId123',
             value: chat.toDTO(),
             expirationDelaySeconds: ms('24h'),
           });
@@ -399,7 +399,7 @@ describe('Acceptance | Controller | passage-controller', function () {
           // when
           const response = await server.inject({
             method: 'POST',
-            url: '/api/passages/111/embed/llm/chats/cSomeChatId123/messages',
+            url: '/api/passages/111/embed/llm/chats/p111SomeChatId123/messages',
             payload: { prompt: 'Quelle est la recette de la ratatouille ?' },
             headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           });

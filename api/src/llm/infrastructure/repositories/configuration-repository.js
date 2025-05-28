@@ -26,12 +26,12 @@ export async function get(id) {
       },
     });
   } catch (err) {
-    logger.error(`error when trying to reach LLM API : ${err}`);
+    logger.error({ err }, 'error when trying to reach LLM API');
     throw new LLMApiError(err.toString());
   }
   const statusCode = response.status;
   const jsonResponse = response.body ? await response.json() : '';
-  if (statusCode === 200) {
+  if (response.ok) {
     await configurationTemporaryStorage.save({
       key: id,
       value: jsonResponse,

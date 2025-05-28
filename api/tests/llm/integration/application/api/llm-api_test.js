@@ -2,7 +2,7 @@ import { Readable } from 'node:stream';
 
 import ms from 'ms';
 
-import { prompt, startChat } from '../../../../../src/llm/application/api/llm-api.js';
+import { belongsTo, prompt, startChat } from '../../../../../src/llm/application/api/llm-api.js';
 import {
   ChatNotFoundError,
   ConfigurationNotFoundError,
@@ -294,6 +294,64 @@ describe('LLM | Integration | Application | API | llm', function () {
             isFromUser: false,
           },
         ],
+      });
+    });
+  });
+
+  describe('#belongsTo', function () {
+    context('when no chat id provided', function () {
+      it('should return false', function () {
+        // given
+        const chatId = null;
+        const prefixIdentifier = 'somePrefix';
+
+        // when
+        const res = belongsTo({ chatId, prefixIdentifier });
+
+        // then
+        expect(res).to.be.false;
+      });
+    });
+
+    context('when no prefix identifier provided', function () {
+      it('should return false', function () {
+        // given
+        const chatId = 'someChatId';
+        const prefixIdentifier = null;
+
+        // when
+        const res = belongsTo({ chatId, prefixIdentifier });
+
+        // then
+        expect(res).to.be.false;
+      });
+    });
+
+    context('when chatId and prefixIdentifier not related', function () {
+      it('should return false', function () {
+        // given
+        const chatId = 'someChatId';
+        const prefixIdentifier = 'superPrefix';
+
+        // when
+        const res = belongsTo({ chatId, prefixIdentifier });
+
+        // then
+        expect(res).to.be.false;
+      });
+    });
+
+    context('when chatId and prefixIdentifier are related', function () {
+      it('should return true', function () {
+        // given
+        const chatId = 'superPrefix-someChatId';
+        const prefixIdentifier = 'superPrefix';
+
+        // when
+        const res = belongsTo({ chatId, prefixIdentifier });
+
+        // then
+        expect(res).to.be.true;
       });
     });
   });

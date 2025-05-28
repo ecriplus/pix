@@ -82,6 +82,25 @@ export async function prompt({ chatId, message }) {
   });
 }
 
+/**
+ * @function
+ * @name belongsTo
+ *
+ * @param {Object} params
+ * @param {string} params.chatId
+ * @param {string} params.prefixIdentifier
+ * @returns {boolean}
+ */
+export function belongsTo({ chatId, prefixIdentifier }) {
+  if (!chatId) {
+    return false;
+  }
+  if (!prefixIdentifier) {
+    return false;
+  }
+  return chatId.startsWith(prefixIdentifier);
+}
+
 function generateId(prefixIdentifier) {
   const nowMs = new Date().getMilliseconds();
   return `${prefixIdentifier}-${nowMs}`;
