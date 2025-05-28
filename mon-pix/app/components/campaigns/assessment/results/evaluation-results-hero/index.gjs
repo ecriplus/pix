@@ -23,7 +23,6 @@ export default class EvaluationResultsHero extends Component {
   @service store;
   @service tabManager;
   @service featureToggles;
-  @service campaignParticipationResult;
 
   @tracked hasGlobalError = false;
   @tracked isButtonLoading = false;
@@ -106,7 +105,7 @@ export default class EvaluationResultsHero extends Component {
 
       const campaignParticipationResult = this.args.campaignParticipationResult;
 
-      await this.campaignParticipationResult.share(campaignParticipationResult, this.args.questResults);
+      await this.store.adapterFor('campaign-participation-result').share(campaignParticipationResult.id);
 
       this.args.onResultsShared();
 

@@ -94,9 +94,10 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
         this.model.campaignParticipationResult.competenceResults = [Symbol('competences')];
         this.model.campaign.isForAbsoluteNovice = false;
 
-        const campaignParticipationResultService = this.owner.lookup('service:campaign-participation-result');
-        const shareStub = sinon.stub(campaignParticipationResultService, 'share');
-        shareStub.resolves();
+        const store = this.owner.lookup('service:store');
+        sinon.stub(store, 'adapterFor');
+        const shareStub = sinon.stub();
+        store.adapterFor.returns({ share: shareStub });
 
         // when
         screen = await render(hbs`<Routes::Campaigns::Assessment::EvaluationResults @model={{this.model}} />`);
@@ -131,9 +132,9 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
         this.model.campaign.isForAbsoluteNovice = false;
 
         const store = this.owner.lookup('service:store');
-        const adapter = store.adapterFor('campaign-participation-result');
-        const shareStub = sinon.stub(adapter, 'share');
-        shareStub.resolves();
+        sinon.stub(store, 'adapterFor');
+        const shareStub = sinon.stub();
+        store.adapterFor.returns({ share: shareStub });
 
         // when
         screen = await render(hbs`<Routes::Campaigns::Assessment::EvaluationResults @model={{this.model}} />`);

@@ -12,6 +12,7 @@ export default class EvaluationResultsTabsTrainings extends Component {
   @service currentUser;
   @service metrics;
   @service campaignParticipationResult;
+  @service store;
 
   @tracked isShareResultsLoading = false;
   @tracked isShareResultsError = false;
@@ -42,7 +43,7 @@ export default class EvaluationResultsTabsTrainings extends Component {
       this.isShareResultsLoading = true;
 
       const campaignParticipationResultToShare = this.args.campaignParticipationResult;
-      await this.campaignParticipationResult.share(campaignParticipationResultToShare, this.args.questResults);
+      await this.store.adapterFor('campaign-participation-result').share(campaignParticipationResultToShare.id);
       this.args.onResultsShared();
 
       campaignParticipationResultToShare.isShared = true;

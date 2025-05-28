@@ -57,10 +57,13 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           class CurrentUserStub extends Service {
             user = { isAnonymous: true };
           }
+
           this.owner.register('service:currentUser', CurrentUserStub);
+
           class FeatureTogglesStub extends Service {
             featureToggles = { isQuestEnabled: false };
           }
+
           this.owner.register('service:featureToggles', FeatureTogglesStub);
 
           this.set('campaign', {
@@ -104,6 +107,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           class CurrentUserStub extends Service {
             user = { isAnonymous: false };
           }
+
           this.owner.register('service:currentUser', CurrentUserStub);
 
           test('it should not display the quest result if the flag is true', async function (assert) {
@@ -111,6 +115,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
             class FeatureTogglesStub extends Service {
               featureToggles = { isQuestEnabled: true };
             }
+
             this.owner.register('service:featureToggles', FeatureTogglesStub);
 
             this.set('campaign', {
@@ -153,6 +158,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
             class FeatureTogglesStub extends Service {
               featureToggles = { isQuestEnabled: true };
             }
+
             this.owner.register('service:featureToggles', FeatureTogglesStub);
 
             this.set('campaign', {
@@ -334,91 +340,6 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
           assert.dom(screen.getByText(t('pages.skill-review.hero.explanations.improve'))).exists();
           assert.dom(screen.getByRole('button', { name: t('pages.skill-review.actions.improve') })).exists();
-        });
-
-        module('when there are quest results', function (hooks) {
-          let shareProfileReward;
-
-          hooks.beforeEach(async function () {
-            const store = this.owner.lookup('service:store');
-            const adapter = store.adapterFor('campaign-participation-result');
-            shareProfileReward = sinon.stub(adapter, 'shareProfileReward');
-            shareProfileReward.resolves();
-          });
-
-          test('it should call the shareProfileReward adapter method', async function (assert) {
-            // given
-            const profileRewardId = 12;
-            this.set('questResults', [
-              {
-                obtained: true,
-                profileRewardId,
-                reward: { key: 'sixth-grade-attestation-template' },
-              },
-            ]);
-
-            // when
-            screen = await render(
-              hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @questResults={{this.questResults}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{true}}
-/>`,
-            );
-            await click(screen.getByRole('button', { name: t('pages.skill-review.actions.send') }));
-
-            // then
-            assert.ok(shareProfileReward.calledOnce);
-            sinon.assert.calledWithExactly(shareProfileReward, campaignParticipationResult.id, profileRewardId);
-          });
-
-          test('it should not call the shareProfileReward adapter method if quest result is not obtained', async function (assert) {
-            // given
-            this.set('questResults', [
-              {
-                obtained: false,
-                profileRewardId: null,
-                reward: { key: 'sixth-grade-attestation-template' },
-              },
-            ]);
-
-            // when
-            screen = await render(
-              hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @questResults={{this.questResults}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{true}}
-/>`,
-            );
-            await click(screen.getByRole('button', { name: t('pages.skill-review.actions.send') }));
-
-            // then
-            assert.ok(shareProfileReward.notCalled);
-          });
-        });
-
-        module('when there are no quest results', function () {
-          test('it should not call the shareProfileReward adapter method', async function (assert) {
-            // given
-            const store = this.owner.lookup('service:store');
-            const adapter = store.adapterFor('campaign-participation-result');
-            const shareProfileReward = sinon.stub(adapter, 'shareProfileReward');
-
-            // when
-            const screen = await render(
-              hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{true}}
-/>`,
-            );
-            await click(screen.getByRole('button', { name: t('pages.skill-review.actions.send') }));
-
-            // then
-            assert.ok(shareProfileReward.notCalled);
-          });
         });
       });
     });

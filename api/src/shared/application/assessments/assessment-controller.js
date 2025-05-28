@@ -7,6 +7,7 @@ import { usecases as certificationUsecases } from '../../../certification/sessio
 import { Answer } from '../../../evaluation/domain/models/Answer.js';
 import { evaluationUsecases } from '../../../evaluation/domain/usecases/index.js';
 import * as competenceEvaluationSerializer from '../../../evaluation/infrastructure/serializers/jsonapi/competence-evaluation-serializer.js';
+import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { AssessmentEndedError } from '../../domain/errors.js';
 import { sharedUsecases } from '../../domain/usecases/index.js';
@@ -121,6 +122,7 @@ const autoValidateNextChallenge = async function (request, h) {
       forceOKAnswer: true,
     });
   }
+  await questUsecases.rewardUser({ userId });
   return h.response().code(204);
 };
 
