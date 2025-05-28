@@ -156,6 +156,33 @@ module('Integration | Component | item', function (hooks) {
           .doesNotExist();
       });
     });
+
+    module('when the certification is rejected or cancelled without comment', function () {
+      test('should not display the details and download button', async function (assert) {
+        //given
+        const store = this.owner.lookup('service:store');
+        const certification = store.createRecord('certification', {
+          date: new Date('2018-02-15T15:15:52Z'),
+          deliveredAt: new Date('2018-02-17T15:15:52Z'),
+          certificationCenter: 'Université de Lyon',
+          isPublished: true,
+          pixScore: 34,
+          status: 'rejected',
+          commentForCandidate: null,
+        });
+
+        // when
+        const screen = await render(<template><Item @certification={{certification}} /></template>);
+
+        // then
+        assert.ok(screen.getByText(t('pages.certifications-list.statuses.rejected')));
+        assert.dom(screen.queryByText(t('pages.certifications-list.comment'))).doesNotExist();
+        assert.dom(screen.queryByText(t('pages.certifications-list.buttons.details'))).doesNotExist();
+        assert
+          .dom(screen.queryByRole('button', { name: t('pages.certifications-list.buttons.download-attestation') }))
+          .doesNotExist();
+      });
+    });
   });
 
   module('when algorithm engine version is v2', function () {

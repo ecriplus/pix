@@ -51,6 +51,7 @@ const attributes = [
   'level',
   'certificationDate',
   'verificationCode',
+  'acquiredComplementaryCertification',
 ];
 
 const serialize = function ({ certificate, translate }) {
@@ -69,6 +70,7 @@ const serialize = function ({ certificate, translate }) {
       return {
         ...certificate,
         ...globalLevel,
+        acquiredComplementaryCertification: certificate.acquiredComplementaryCertification?.imageUrl,
       };
     },
     typeForAttribute,

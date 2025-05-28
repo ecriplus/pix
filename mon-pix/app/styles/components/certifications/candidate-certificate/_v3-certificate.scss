@@ -18,6 +18,22 @@
       gap: var(--pix-spacing-8x);
     }
   }
+
+  &__complementary {
+    @extend %pix-body-l;
+
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--pix-spacing-6x);
+
+    @include breakpoints.device-is('desktop') {
+      flex-direction: row;
+
+      .certificate-competences-details {
+        flex: 2;
+      }
+    }
+  }
 }
 
 .v3-candidate-certificate-information {
@@ -29,5 +45,35 @@
     @extend %pix-title-xs;
 
     margin-bottom: var(--pix-spacing-4x);
+  }
+}
+
+.v3-candidate-certificate-complementary{
+  &__title {
+    @extend %pix-title-xs;
+  }
+
+  &__description {
+    @extend %pix-body-m;
+
+    padding: var(--pix-spacing-2x) 0;
+    color: var(--pix-neutral-900);
+  }
+
+  &__information {
+    margin-top: var(--pix-spacing-4x);
+  }
+}
+
+.v3-complementary-certification-details-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  img {
+    width: 130px;
+    height: 130px;
   }
 }

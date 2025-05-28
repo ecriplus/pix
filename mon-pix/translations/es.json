@@ -108,6 +108,7 @@
       "nl": "Holandés"
     },
     "level": "nivel",
+    "no-level": "No nivel",
     "loading": {
       "default": "Cargando",
       "results": "Preparación de tus resultados",
@@ -659,7 +660,8 @@
       },
       "complementary": {
         "alternative": "Certificación complementaria",
-        "title": "No hay ninguna certificación obtenida"
+        "title": "No hay ninguna certificación obtenida",
+        "clea": "Certificación CléA Numérique by Pix"
       },
       "exam-date": "Fecha de presentación:",
       "hexagon-score": {

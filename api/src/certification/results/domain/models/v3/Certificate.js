@@ -1,3 +1,6 @@
+/**
+ * @typedef {import ('../../read-models/CertifiedBadge.js').CertifiedBadge} CertifiedBadge
+ */
 import { MAX_REACHABLE_SCORE } from '../../../../../shared/domain/constants.js';
 import { CERTIFICATE_LEVELS } from './CertificateLevels.js';
 import { GlobalCertificationLevel } from './GlobalCertificationLevel.js';
@@ -17,6 +20,7 @@ export class Certificate {
    * @param {Array<ResultCompetenceTree>} props.resultCompetenceTree
    * @param {AlgorithmEngineVersion} props.algorithmEngineVersion
    * @param {Date} props.certificationDate - date of certification
+   * @param {CertifiedBadge} props.acquiredComplementaryCertification
    */
   constructor({
     id,
@@ -31,6 +35,7 @@ export class Certificate {
     resultCompetenceTree,
     algorithmEngineVersion,
     certificationDate,
+    acquiredComplementaryCertification,
   } = {}) {
     this.id = id;
     this.firstName = firstName;
@@ -46,6 +51,7 @@ export class Certificate {
     this.resultCompetenceTree = this.globalLevel ? resultCompetenceTree : null;
     this.algorithmEngineVersion = algorithmEngineVersion;
     this.certificationDate = certificationDate;
+    this.acquiredComplementaryCertification = acquiredComplementaryCertification;
   }
 
   #findLevel() {

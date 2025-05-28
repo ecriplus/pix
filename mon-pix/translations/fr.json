@@ -116,6 +116,7 @@
     "new-information-banner": {
       "close-label": "Fermer la bannière"
     },
+    "no-level": "Aucun niveau",
     "or": "ou",
     "pagination": {
       "action": {
@@ -646,6 +647,7 @@
       },
       "complementary": {
         "alternative": "Certification complémentaire",
+        "clea": "Certification CléA Numérique by Pix",
         "title": "Autre certification obtenue"
       },
       "congratulations": "Félicitations !",
@@ -903,7 +905,7 @@
     },
     "certifications-list": {
       "buttons": {
-        "details": "Voir le détails",
+        "details": "Voir le détail",
         "download-attestation": "Télécharger l'attestation",
         "download-certificate": "Télécharger le certificat"
       },

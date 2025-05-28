@@ -108,6 +108,7 @@
       "nl": "Nederlands"
     },
     "level": "niveau",
+    "no-level": "Geen niveau",
     "loading": {
       "default": "Bezig met laden",
       "results": "Je resultaten voorbereiden",
@@ -663,7 +664,8 @@
       },
       "complementary": {
         "alternative": "Aanvullende certificering",
-        "title": "Andere behaalde certificering"
+        "title": "Andere behaalde certificering",
+        "clea": "Certificering CléA Numérique by Pix"
       },
       "exam-date": "Datum bezoek :",
       "hexagon-score": {
