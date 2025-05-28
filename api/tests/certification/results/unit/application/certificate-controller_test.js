@@ -626,7 +626,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         };
 
         sinon
-          .stub(usecases, 'findCertificationAttestationsForDivision')
+          .stub(usecases, 'findCertificatesForDivision')
           .withArgs({
             division,
             organizationId,
@@ -676,7 +676,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         };
 
         sinon
-          .stub(usecases, 'findCertificationAttestationsForDivision')
+          .stub(usecases, 'findCertificatesForDivision')
           .withArgs({
             division,
             organizationId,
