@@ -4,6 +4,11 @@ import { service } from '@ember/service';
 export default class IndexRoute extends Route {
   @service router;
   @service currentUser;
+
+  buildRouteInfoMetadata() {
+    return { doNotTrackPage: true };
+  }
+
   beforeModel() {
     return this.router.replaceWith(this.currentUser.homePage);
   }

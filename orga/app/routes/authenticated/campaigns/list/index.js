@@ -5,6 +5,10 @@ export default class IndexRoute extends Route {
   @service router;
   @service currentUser;
 
+  buildRouteInfoMetadata() {
+    return { doNotTrackPage: true };
+  }
+
   beforeModel() {
     if (!this.currentUser.canAccessCampaignsPage) {
       return this.router.replaceWith(this.currentUser.homePage);

@@ -5,7 +5,7 @@ export default class NotFoundRoute extends Route {
   @service router;
 
   buildRouteInfoMetadata() {
-    return { blockPageview: true };
+    return { doNotTrackPage: true };
   }
 
   afterModel(model, transition) {
