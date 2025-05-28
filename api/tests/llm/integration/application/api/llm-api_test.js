@@ -173,7 +173,7 @@ describe('LLM | Integration | Application | API | llm', function () {
             ],
             prompt: 'un message',
           })
-          .reply(201, Readable.from(['15:{"message":"salut"}']));
+          .reply(201, Readable.from(['19:{"message":"salut"}']));
 
         // when
         const stream = await prompt({ chatId: 'chatId', message: 'un message' });
@@ -263,9 +263,9 @@ describe('LLM | Integration | Application | API | llm', function () {
         .reply(
           201,
           Readable.from([
-            '15:{"message":"coucou c\'est super"}',
-            '25:{"message":"\nle couscous c plutot bon"}',
-            '75:{"jecrois":{"que":"jaifini"}}',
+            '60:{"ceci":"nest pas important","message":"coucou c\'est super"}',
+            '40:{"message":"\\nle couscous c plutot bon"}47:{"message":" mais la paella c pas mal aussi\\n"}',
+            '29:{"jecrois":{"que":"jaifini"}}',
           ]),
         );
 
@@ -279,7 +279,9 @@ describe('LLM | Integration | Application | API | llm', function () {
         parts.push(decoder.decode(chunk));
       }
       const llmResponse = parts.join('');
-      expect(llmResponse).to.deep.equal("data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\n");
+      expect(llmResponse).to.deep.equal(
+        "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n",
+      );
       expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
         id: 'chatId',
         configurationId: 'uneConfigQuiExist',
@@ -287,7 +289,10 @@ describe('LLM | Integration | Application | API | llm', function () {
           { content: 'coucou user1', isFromUser: true },
           { content: 'coucou LLM1', isFromUser: false },
           { content: 'un message', isFromUser: true },
-          { content: "coucou c'est super\nle couscous c plutot bon", isFromUser: false },
+          {
+            content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+            isFromUser: false,
+          },
         ],
       });
     });

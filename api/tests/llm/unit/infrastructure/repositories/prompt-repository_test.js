@@ -1,37 +1,49 @@
 import {
-  extractMessages,
+  findObjects,
   toEventStreamData,
 } from '../../../../../src/llm/infrastructure/repositories/prompt-repository.js';
 import { expect } from '../../../../test-helper.js';
 
-describe('LLM | Integration | Infrastructure | Repositories | prompt', function () {
-  describe('#extractMessages', function () {
-    it('should identify the messages even with special characters inside of them', async function () {
-      const str1 =
-        '13:{"message":"\\aeza\\"\\"{}()\'"}56:{"message":"\\"\\"{}()Izhoidze156:{\\"message\\":\\"troll\\"\'"}584:{"truc":{"machin":"oui"}}';
-      const messages = extractMessages(str1);
+describe('LLM | Unit | Infrastructure | Repositories | prompt', function () {
+  describe('#findObjects', function () {
+    it('should extract the content of "messages" key in each object found in the string', async function () {
+      // given
+      const incomingStr =
+        '14:{"message":""}25:{"truc":{"machin":"oui"}}83:{"quelquechose":"de different {\\"message\\":\\"feinte !\\"","message":"aeza\\"\\"{}()\'"}57:{"message":"\\"\\"{}()Izhoidze156:{\\"message\\":\\"troll\\"\'"}25:{"truc":{"machin":"oui"}}';
 
-      expect(messages).to.deep.equal(['\\aeza\\"\\"{}()\'', '\\"\\"{}()Izhoidze156:{\\"message\\":\\"troll\\"\'']);
+      // when
+      const messages = findObjects(incomingStr);
+
+      // then
+      expect(messages).to.deep.equal([
+        { message: '' },
+        { truc: { machin: 'oui' } },
+        { quelquechose: 'de different {"message":"feinte !"', message: 'aeza""{}()\'' },
+        { message: '""{}()Izhoidze156:{"message":"troll"\'' },
+        { truc: { machin: 'oui' } },
+      ]);
     });
   });
 
   describe('#toEventStreamData', function () {
-    it('should return the message formatted as required for an Event Stream Data', function () {
-      // given
-      const messages = [
-        'mon super message',
-        ' qui tient sur une ligne.\n',
-        'Je suis une ligne\net je suis une 2e ligne.',
-        'pouet\n\npouet',
-        '\nune dernière ligne\n',
-      ];
-
+    it('should wrap the message _message_ in data: _message_\n\n', function () {
       // when
-      const formattedMessages = toEventStreamData(messages);
+      const formattedMessage = toEventStreamData('Coucou les amis comment ça va ?');
 
       // then
-      expect(formattedMessages).to.deep.equal(
-        'data: mon super message\n\ndata:  qui tient sur une ligne.\ndata: \n\ndata: Je suis une ligne\ndata: et je suis une 2e ligne.\n\ndata: pouet\ndata: \ndata: pouet\n\ndata: \ndata: une dernière ligne\ndata: \n\n',
+      expect(formattedMessage).to.equal('data: Coucou les amis comment ça va ?\n\n');
+    });
+
+    it('should replace "\n" with "\ndata: " to comply with event stream data', function () {
+      // given
+      const message = '\n des retours à \n la ligne \n\n dans tous les sens\n';
+
+      // when
+      const formattedMessage = toEventStreamData(message);
+
+      // then
+      expect(formattedMessage).to.equal(
+        'data: \ndata:  des retours à \ndata:  la ligne \ndata: \ndata:  dans tous les sens\ndata: \n\n',
       );
     });
   });

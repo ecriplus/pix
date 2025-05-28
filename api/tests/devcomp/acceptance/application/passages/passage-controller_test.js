@@ -394,14 +394,7 @@ describe('Acceptance | Controller | passage-controller', function () {
               history: [],
               prompt: 'Quelle est la recette de la ratatouille ?',
             })
-            .reply(
-              201,
-              Readable.from([
-                '15:{"message":"coucou c\'est super"}',
-                '25:{"message":"\nle couscous c plutot bon"}',
-                '75:{"jecrois":{"que":"jaifini"}}',
-              ]),
-            );
+            .reply(201, Readable.from(['32:{"message":"coucou c\'est super"}']));
 
           // when
           const response = await server.inject({
@@ -413,9 +406,7 @@ describe('Acceptance | Controller | passage-controller', function () {
 
           // then
           expect(response.statusCode).to.equal(201);
-          expect(response.result).to.deep.equal(
-            "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\n",
-          );
+          expect(response.result).to.deep.equal("data: coucou c'est super\n\n");
         });
       });
     });

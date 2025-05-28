@@ -10,18 +10,29 @@ const logger = child('llm:api', { event: SCOPES.LLM });
 export async function prompt({ message, configuration, chat, onLLMResponseReceived }) {
   const readableStream = await postUserPrompt({ message, configuration, chat });
 
-  let completeLLMMessage = '';
-  const transformLLMResponseToDataEventStream = new Transform({
-    writableObjectMode: false,
+  const decoder = new TextDecoder();
+  const transformFindObjects = new Transform({
+    objectMode: true,
     transform(chunk, _encoding, callback) {
-      const decoder = new TextDecoder();
-      const messages = extractMessages(decoder.decode(chunk));
-      if (messages.length === 0) {
-        callback(null, '');
+      const objects = findObjects(decoder.decode(chunk));
+      for (const object of objects) {
+        this.push(object);
+      }
+      callback();
+    },
+  });
+
+  let completeLLMMessage = '';
+  const transformConvertObjectToEventStreamData = new Transform({
+    objectMode: true,
+    transform(chunk, _encoding, callback) {
+      const { message } = chunk;
+      if (!message) {
+        callback();
         return;
       }
-      completeLLMMessage += messages.join('');
-      const data = toEventStreamData(messages);
+      completeLLMMessage += message;
+      const data = toEventStreamData(message);
       callback(null, data);
     },
   });
@@ -30,16 +41,22 @@ export async function prompt({ message, configuration, chat, onLLMResponseReceiv
   writableStream.on('error', (err) => {
     logger.error(`error while streaming response: ${err}`);
   });
-  pipeline(readableStream, transformLLMResponseToDataEventStream, writableStream, async (err) => {
-    if (err) {
-      logger.error(`error in pipeline: ${err}`);
-      if (!writableStream.closed && !writableStream.errored) {
-        writableStream.end('Error while streaming response from LLM');
+  pipeline(
+    readableStream,
+    transformFindObjects,
+    transformConvertObjectToEventStreamData,
+    writableStream,
+    async (err) => {
+      if (err) {
+        logger.error(`error in pipeline: ${err}`);
+        if (!writableStream.closed && !writableStream.errored) {
+          writableStream.end('Error while streaming response from LLM');
+        }
+      } else {
+        await onLLMResponseReceived(completeLLMMessage);
       }
-    } else {
-      await onLLMResponseReceived(completeLLMMessage);
-    }
-  });
+    },
+  );
   return writableStream;
 }
 
@@ -82,39 +99,20 @@ function toHistoryMessage(message) {
   };
 }
 
-export function extractMessages(chunk) {
-  const messages = [];
-  let currentWord = '';
-  let isReadingMessage = false;
-  let previousCharWasAntislash = false;
-  const regexStartMessage = /}?\d+:\{"message":"/;
-  for (const char of chunk) {
-    currentWord += char;
-    if (isReadingMessage) {
-      if (!previousCharWasAntislash && char === '"') {
-        messages.push(currentWord.slice(0, -1));
-        isReadingMessage = false;
-        currentWord = '';
-        previousCharWasAntislash = false;
-        continue;
-      }
-
-      previousCharWasAntislash = char === '\\';
-    } else {
-      if (currentWord.match(regexStartMessage)?.length > 0) {
-        isReadingMessage = true;
-        currentWord = '';
-      }
-    }
-  }
-  return messages;
+export function toEventStreamData(message) {
+  const formattedMessage = message.replaceAll('\n', '\ndata: ');
+  return `data: ${formattedMessage}\n\n`;
 }
 
-export function toEventStreamData(messages) {
-  return messages
-    .map((message) => {
-      const formattedMessage = message.replaceAll('\n', '\ndata: ');
-      return `data: ${formattedMessage}\n\n`;
-    })
-    .join('');
+export function findObjects(str) {
+  const objects = [];
+  while (str.length > 0) {
+    const [numberAsStr, ...otherParts] = str.split(':');
+    const objectLength = parseInt(numberAsStr);
+    const strLeft = otherParts.join(':');
+    objects.push(strLeft.slice(0, objectLength));
+    str = strLeft.slice(objectLength);
+  }
+
+  return objects.map((obj) => JSON.parse(obj));
 }
