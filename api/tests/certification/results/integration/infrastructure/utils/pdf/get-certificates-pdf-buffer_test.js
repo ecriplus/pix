@@ -14,6 +14,8 @@ import { isSameBinary } from '../../../../../../tooling/binary-comparator.js';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 describe('Integration | Infrastructure | Utils | Pdf | getCertificatesPdfBuffer', function () {
+  this.timeout(10000); // Some pdf-lib operations can be slow, especially on CI
+
   beforeEach(async function () {
     _makePdfLibPredictable();
 
