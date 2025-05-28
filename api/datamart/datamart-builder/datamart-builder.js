@@ -43,7 +43,7 @@ class DatamartBuilder {
   async clean() {
     let rawQuery = '';
 
-    ['certification_results', 'sco_certification_results'].forEach((tableName) => {
+    ['certification_results', 'sco_certification_results', 'organizations_cover_rates'].forEach((tableName) => {
       rawQuery += `DELETE FROM ${tableName};`;
     });
 
