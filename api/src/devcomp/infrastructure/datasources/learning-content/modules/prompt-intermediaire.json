@@ -2,7 +2,7 @@
   "id": "7a38c90d-9937-4497-bee3-fe58541af420",
   "slug": "prompt-intermediaire",
   "title": "J'améliore mon prompt !",
-  "isBeta": false,
+  "isBeta": true,
   "details": {
     "image": "",
     "description": "<p>Les IA génératives (ChatGPT, LeChat, DeepSeek….) permettent de répondre à une grande variété de nos demandes, mais la qualité de leurs réponses dépend beaucoup des questions qu’on leur pose !&nbsp; </p><p>Dans ce module, vous allez apprendre à formuler des prompts efficaces pour répondre à vos besoins.<br></p>",
