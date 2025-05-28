@@ -164,31 +164,88 @@ describe('Integration | Repository | Organization Learner Management | Organizat
   });
 
   describe('#remove', function () {
+    let clock;
+    const now = new Date('2023-02-02');
+
+    beforeEach(function () {
+      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    });
+
+    afterEach(function () {
+      clock.restore();
+    });
+
     it('update given organization learner', async function () {
       // given
-      const userId = databaseBuilder.factory.buildUser().id;
-      const deletedAt = new Date('2023-01-01');
+      const adminUserId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
-        firstName: 'firstName',
+      const organizationLearnerFromDB = databaseBuilder.factory.buildOrganizationLearner({
         organizationId,
+        lastName: 'Richard',
+        preferredLastName: 'Maurice',
+        firstName: 'jean',
+        middleName: 'paul',
+        thirdName: 'pierre',
+        sex: 'M',
+        MEFCode: '12',
+        birthdate: '2001-05-06',
+        birthCity: 'Mans',
+        birthCityCode: '12345',
+        birthProvinceCode: '45',
+        birthCountryCode: '18',
+        status: 'AP',
+        nationalStudentId: '12314543',
+        division: '6eme ROUGE',
+        updatedAt: new Date('1999-01-01'),
+        email: 'littlepeas@vegatable.org',
+        studentNumber: '9876543',
+        department: '51',
+        educationalTeam: 'Core',
+        group: 'B',
+        diploma: 'pujze, peozaeza; pzaezae',
+        nationalApprenticeId: '123456432',
+        deletedBy: null,
+        deletedAt: null,
       });
 
       await databaseBuilder.commit();
 
       // when
-      organizationLearner.deletedBy = userId;
-      organizationLearner.deletedAt = deletedAt;
+      const organizationLearner = domainBuilder.buildOrganizationLearner(organizationLearnerFromDB);
+      organizationLearner.delete(adminUserId, true);
 
-      await remove(organizationLearner);
+      await remove(organizationLearner.dataToUpdateOnDeletion);
 
       // then
       const organizationLearnerResult = await knex('organization-learners')
         .where({ id: organizationLearner.id })
         .first();
 
-      expect(organizationLearnerResult.deletedBy).to.equal(userId);
-      expect(organizationLearnerResult.deletedAt).to.deep.equal(deletedAt);
+      expect(organizationLearnerResult.MEFCode).equal('12');
+      expect(organizationLearnerResult.lastName).equal('(anonymized)');
+      expect(organizationLearnerResult.firstName).equal('(anonymized)');
+      expect(organizationLearnerResult.preferredLastName).null;
+      expect(organizationLearnerResult.middleName).null;
+      expect(organizationLearnerResult.thirdName).null;
+      expect(organizationLearnerResult.sex).null;
+      expect(organizationLearnerResult.birthdate).deep.equal('2001-01-01');
+      expect(organizationLearnerResult.birthCity).null;
+      expect(organizationLearnerResult.birthCityCode).null;
+      expect(organizationLearnerResult.birthProvinceCode).null;
+      expect(organizationLearnerResult.birthCountryCode).null;
+      expect(organizationLearnerResult.status).null;
+      expect(organizationLearnerResult.nationalStudentId).null;
+      expect(organizationLearnerResult.division).null;
+      expect(organizationLearnerResult.updatedAt).deep.equal(now);
+      expect(organizationLearnerResult.email).null;
+      expect(organizationLearnerResult.studentNumber).null;
+      expect(organizationLearnerResult.department).null;
+      expect(organizationLearnerResult.educationalTeam).null;
+      expect(organizationLearnerResult.group).null;
+      expect(organizationLearnerResult.diploma).null;
+      expect(organizationLearnerResult.nationalApprenticeId).null;
+      expect(organizationLearnerResult.deletedBy).equal(adminUserId);
+      expect(organizationLearnerResult.deletedAt).deep.equal(now);
     });
   });
 
@@ -429,9 +486,45 @@ describe('Integration | Repository | Organization Learner Management | Organizat
           organizationId,
         });
         expect(actualOrganizationLearners).to.have.lengthOf(1);
-        expect(
-          _.omit(actualOrganizationLearners[0], ['updatedAt', 'id', 'certifiableAt', 'isCertifiable']),
-        ).to.deep.equal(_.omit(firstOrganizationLearner, ['updatedAt', 'id', 'certifiableAt', 'isCertifiable']));
+        expect({
+          lastName: firstOrganizationLearner.lastName,
+          preferredLastName: firstOrganizationLearner.preferredLastName,
+          firstName: firstOrganizationLearner.firstName,
+          middleName: firstOrganizationLearner.middleName,
+          thirdName: firstOrganizationLearner.thirdName,
+          sex: firstOrganizationLearner.sex,
+          birthdate: firstOrganizationLearner.birthdate,
+          birthCity: firstOrganizationLearner.birthCity,
+          birthCityCode: firstOrganizationLearner.birthCityCode,
+          birthProvinceCode: firstOrganizationLearner.birthProvinceCode,
+          birthCountryCode: firstOrganizationLearner.birthCountryCode,
+          MEFCode: firstOrganizationLearner.MEFCode,
+          status: firstOrganizationLearner.status,
+          nationalStudentId: firstOrganizationLearner.nationalStudentId,
+          division: firstOrganizationLearner.division,
+          userId: firstOrganizationLearner.userId,
+          isDisabled: firstOrganizationLearner.isDisabled,
+          organizationId: firstOrganizationLearner.organizationId,
+        }).deep.equal({
+          lastName: actualOrganizationLearners[0].lastName,
+          preferredLastName: actualOrganizationLearners[0].preferredLastName,
+          firstName: actualOrganizationLearners[0].firstName,
+          middleName: actualOrganizationLearners[0].middleName,
+          thirdName: actualOrganizationLearners[0].thirdName,
+          sex: actualOrganizationLearners[0].sex,
+          birthdate: actualOrganizationLearners[0].birthdate,
+          birthCity: actualOrganizationLearners[0].birthCity,
+          birthCityCode: actualOrganizationLearners[0].birthCityCode,
+          birthProvinceCode: actualOrganizationLearners[0].birthProvinceCode,
+          birthCountryCode: actualOrganizationLearners[0].birthCountryCode,
+          MEFCode: actualOrganizationLearners[0].MEFCode,
+          status: actualOrganizationLearners[0].status,
+          nationalStudentId: actualOrganizationLearners[0].nationalStudentId,
+          division: actualOrganizationLearners[0].division,
+          userId: actualOrganizationLearners[0].userId,
+          isDisabled: actualOrganizationLearners[0].isDisabled,
+          organizationId: actualOrganizationLearners[0].organizationId,
+        });
       });
     });
 
