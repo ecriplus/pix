@@ -34,7 +34,7 @@ export default class StudentScoController extends Controller {
     return this.store
       .createRecord('sco-organization-learner', {
         userId: this.currentUser.user.id,
-        campaignCode: this.model.code,
+        organizationId: this.model.organizationId,
       })
       .save({ adapterOptions: { tryReconciliation: true } });
   }
