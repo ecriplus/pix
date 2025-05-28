@@ -52,8 +52,20 @@ module('Integration | Component | Module | QAB', function (hooks) {
     });
   });
 
-  module('when users answers the QAB', function () {
-    module('when users chooses proposal A', function () {
+  module('when user answers a card', function () {
+    test('it should display the next card', async function (assert) {
+      // given
+      const qabElement = _getQabElement();
+
+      // when
+      const screen = await render(<template><ModuleQabElement @element={{qabElement}} /></template>);
+      await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
+
+      // then
+      assert.dom(await screen.findByText('Les chiens ne transpirent pas.', {}, { timeout: NEXT_CARD_DELAY })).exists();
+    });
+
+    module('when user chooses proposal A', function () {
       test('should display proposal A as selected and card status as success', async function (assert) {
         // given
         const qabElement = _getQabElement();
@@ -112,6 +124,13 @@ function _getQabElement(solution = 'A') {
         proposalA: 'Vrai',
         proposalB: 'Faux',
         solution,
+      },
+      {
+        id: '57056894-8e1b-4da9-96b6-0bd4187412b8',
+        text: 'Les chiens ne transpirent pas.',
+        proposalA: 'Vrai',
+        proposalB: 'Faux',
+        solution: 'B',
       },
     ],
   };

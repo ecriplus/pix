@@ -6,12 +6,15 @@ import QabCard from 'mon-pix/components/module/element/qab/qab-card';
 import { htmlUnsafe } from '../../../../helpers/html-unsafe';
 import ModuleElement from '../module-element';
 
+export const NEXT_CARD_DELAY = 2000;
+
 export default class ModuleQab extends ModuleElement {
   @tracked selectedOption = null;
   @tracked currentCardStatus = '';
+  @tracked currentCardIndex = 0;
 
   get currentCard() {
-    return this.element.cards[0];
+    return this.element.cards[this.currentCardIndex];
   }
 
   @action
@@ -29,10 +32,20 @@ export default class ModuleQab extends ModuleElement {
   }
 
   @action
+  goToNextCard() {
+    if (this.currentCardIndex + 1 < this.element.cards.length) {
+      this.currentCardIndex++;
+      this.currentCardStatus = '';
+      this.selectedOption = null;
+    }
+  }
+
+  @action
   onSubmit(event) {
     event.preventDefault();
     this.selectedOption = event.submitter.value;
-    this.currentStatus = this.selectedOption === this.currentCard.solution ? 'success' : 'error';
+    this.currentCardStatus = this.selectedOption === this.currentCard.solution ? 'success' : 'error';
+    window.setTimeout(() => this.goToNextCard(), NEXT_CARD_DELAY);
   }
 
   <template>
