@@ -8,6 +8,7 @@ const deleteOrganizationLearners = async function ({
   featureToggles,
   campaignParticipationRepositoryfromBC,
   badgeAcquisitionRepository,
+  assessmentRepository,
 }) {
   const organizationLearnersFromOrganization =
     await organizationLearnerRepository.findOrganizationLearnersByOrganizationId({
@@ -45,6 +46,11 @@ const deleteOrganizationLearners = async function ({
       await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
         campaignParticipationIds,
       );
+      const assessments = await assessmentRepository.getByCampaignParticipationIds(campaignParticipationIds);
+      for (const assessment of assessments) {
+        assessment.detachCampaignParticipation();
+        await assessmentRepository.updateCampaignParticipationId(assessment);
+      }
     }
   }
 };

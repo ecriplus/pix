@@ -1,5 +1,6 @@
 import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { featureToggles } from '../../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
@@ -83,11 +84,15 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
   });
 
   context('when feature toggle `isAnonymizationWithDeletionEnabled` is true', function () {
-    it('should delete and anonymize all campaignParticipations', async function () {
+    it('should delete and anonymize learner and all theirs campaignParticipations', async function () {
       // given
       await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
-      databaseBuilder.factory.buildOrganizationLearner({ organizationId });
-
+      const otherLearner = databaseBuilder.factory.buildOrganizationLearner();
+      const otherParticipation = databaseBuilder.factory.buildCampaignParticipation({
+        organizationLearnerId: otherLearner.id,
+        participantExternalId,
+        userId: otherLearner.userId,
+      });
       await databaseBuilder.commit();
 
       // when
@@ -98,10 +103,7 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
       });
 
       // then
-      const deletedLearners = await knex('organization-learners').whereIn('id', [
-        organizationLearner1.id,
-        organizationLearner2.id,
-      ]);
+      const deletedLearners = await knex('organization-learners').where({ organizationId });
       expect(deletedLearners).lengthOf(2);
       deletedLearners.forEach((learner) => {
         expect(learner.firstName).to.equal('(anonymized)');
@@ -132,14 +134,71 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
         expect(learner.deletedBy).to.deep.equal(adminUserId);
       });
 
+      const otherLearnerFromDb = await knex('organization-learners').where({ id: otherLearner.id }).first();
+      expect(otherLearnerFromDb.firstName).equal(otherLearner.firstName);
+      expect(otherLearnerFromDb.lastName).equal(otherLearner.lastName);
+      expect(otherLearnerFromDb.userId).equal(otherLearner.userId);
+
       const results = await knex('campaign-participations').where({ organizationLearnerId: organizationLearner1.id });
       expect(results).to.have.lengthOf(2);
       results.forEach((campaignParticipaton) => {
-        expect(campaignParticipaton.userId).to.equal(null);
-        expect(campaignParticipaton.participantExternalId).to.equal(null);
+        expect(campaignParticipaton.userId).null;
+        expect(campaignParticipaton.participantExternalId).null;
         expect(campaignParticipaton.deletedAt).to.deep.equal(now);
         expect(campaignParticipaton.deletedBy).to.equal(adminUserId);
       });
+
+      const otherParticipationFromDB = await knex('campaign-participations')
+        .where({ id: otherParticipation.id })
+        .first();
+      expect(otherParticipationFromDB.participantExternalId).not.null;
+      expect(otherParticipationFromDB.userId).not.null;
+    });
+
+    it('should detach assessments for deleted campaignParticipations', async function () {
+      // given
+      await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
+
+      const otherLearner = databaseBuilder.factory.buildOrganizationLearner({ organizationId });
+      const otherParticipation = databaseBuilder.factory.buildCampaignParticipation({
+        organizationLearnerId: otherLearner.id,
+        participantExternalId,
+        userId: otherLearner.userId,
+      });
+      const assessment1 = databaseBuilder.factory.buildAssessment({
+        id: 1,
+        campaignParticipationId: campaignParticipation1.id,
+        isImproved: false,
+        type: Assessment.types.CAMPAIGN,
+      });
+      const assessment2 = databaseBuilder.factory.buildAssessment({
+        id: 2,
+        campaignParticipationId: campaignParticipation1.id,
+        isImproved: true,
+        type: Assessment.types.CAMPAIGN,
+      });
+
+      databaseBuilder.factory.buildAssessment({
+        id: 4,
+        campaignParticipationId: otherParticipation.id,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      await usecases.deleteOrganizationLearners({
+        userId: adminUserId,
+        organizationLearnerIds: [organizationLearner1.id, organizationLearner2.id],
+        organizationId,
+      });
+
+      // then
+      const deletedLearners = await knex('organization-learners').whereNull('userId');
+      expect(deletedLearners).lengthOf(2);
+      expect(deletedLearners.map(({ id }) => id)).deep.equal([organizationLearner1.id, organizationLearner2.id]);
+
+      const assessments = await knex('assessments').whereNull('campaignParticipationId').orderBy('id');
+      expect(assessments).lengthOf(2);
+      expect(assessments.map(({ id }) => id)).deep.equal([assessment1.id, assessment2.id]);
     });
   });
 
