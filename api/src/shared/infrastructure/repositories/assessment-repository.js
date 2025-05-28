@@ -189,6 +189,14 @@ const setAssessmentsAsStarted = async function ({ assessmentIds }) {
     .update({ state: Assessment.states.STARTED, updatedAt: new Date() });
 };
 
+const getByCampaignParticipationIds = async function (campaignParticipationIds = []) {
+  const knexConn = DomainTransaction.getConnection();
+  const assessments = await knexConn('assessments')
+    .whereIn('campaignParticipationId', campaignParticipationIds)
+    .orderBy('id', 'asc');
+  return assessments.map((assessment) => new Assessment({ ...assessment }));
+};
+
 export {
   _updateStateById,
   abortByAssessmentId,
@@ -198,6 +206,7 @@ export {
   findNotAbortedCampaignAssessmentsByUserId,
   get,
   getByAssessmentIdAndUserId,
+  getByCampaignParticipationIds,
   getByCertificationCandidateId,
   getWithAnswers,
   ownedByUser,
