@@ -232,7 +232,7 @@ describe('Integration | UseCases | delete-campaign-participation', function () {
     });
   });
 
-  context('when there is assessment linked to campaing participation', function () {
+  context('when there is assessment linked to campaign participation', function () {
     let campaignId;
     let campaignParticipationId;
     let adminUserId;
@@ -272,9 +272,9 @@ describe('Integration | UseCases | delete-campaign-participation', function () {
       });
     });
     context('when feature toggle `isAnonymizationWithDeletionEnabled` is true', function () {
-      it('should detach assesmments', async function () {
+      it('should detach assessments', async function () {
         // given
-        await featureToggles.set('isAnonymizationWithDeletionEnabled', false);
+        await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
         const assessment2 = buildAssessment({
           userId,
           campaignParticipationId,
