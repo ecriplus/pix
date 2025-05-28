@@ -1,0 +1,34 @@
+import Service, { service } from '@ember/service';
+
+export default class PixMetricsService extends Service {
+  @service metrics;
+  @service router;
+
+  trackEvent({ event: _, 'pix-event-name': eventName, ...props }) {
+    const url = this.getRedactedPageUrl();
+    this.metrics.trackEvent({ eventName, plausibleAttributes: { u: url }, ...props });
+  }
+
+  trackPage(props) {
+    const url = this.getRedactedPageUrl();
+    this.metrics.trackPage({ plausibleAttributes: { u: url }, ...props });
+  }
+
+  getRedactedPageUrl() {
+    const params = extractParamsFromRouteInfo(this.router.currentRoute);
+    const currentUrl = this.router.currentURL;
+    const [base, queryParams] = currentUrl.split('?');
+    const redactedUrl = base
+      .split('/')
+      .map((token) => {
+        return params.includes(token) ? '_ID_' : token;
+      })
+      .join('/');
+    return queryParams ? `${redactedUrl}?${queryParams}` : redactedUrl;
+  }
+}
+
+const extractParamsFromRouteInfo = (routeInfo = {}, params = []) =>
+  !routeInfo?.parent
+    ? params
+    : extractParamsFromRouteInfo(routeInfo.parent, params.concat(Object.values(routeInfo.params)));
