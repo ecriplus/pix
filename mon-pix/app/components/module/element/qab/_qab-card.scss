@@ -1,0 +1,67 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
+.qab-card {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 240px;
+  min-height: 380px;
+  padding: var(--pix-spacing-3x);
+  background: var(--pix-neutral-0);
+  border-radius: var(--pix-spacing-3x);
+  box-shadow: 8px 8px 28px 0 rgb(0 0 0 / 25%);
+
+  &__container {
+    --qab-card-content-border-color: var(--pix-primary-300);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: var(--pix-spacing-6x);
+    border: var(--pix-spacing-2x) solid var(--qab-card-content-border-color);
+    border-radius: var(--radius-s, 8px);
+
+    &--error {
+      --qab-card-content-border-color: var(--pix-error-500);
+    }
+
+    &--success {
+      --qab-card-content-border-color: var(--pix-success-300);
+    }
+  }
+}
+
+.qab-card-container-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-4x);
+  max-width: 152px;
+
+  &__image {
+    border-radius: var(--pix-spacing-2x);
+  }
+
+  &__text {
+    @extend %pix-title-s;
+
+    color: var(--pix-neutral-900);
+    text-align: center;
+  }
+}
+
+@include breakpoints.device-is('tablet') {
+  .qab-card {
+    max-width: none;
+  }
+
+  .qab-card-container-content {
+    max-width: none;
+
+    &__image {
+      max-width: 300px;
+      margin: auto;
+    }
+  }
+}

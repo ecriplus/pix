@@ -1701,6 +1701,10 @@
         "showJson": "Show JSON",
         "textarea-label": "Contenido del módulo"
       },
+      "qab": {
+        "correct-answer": "Respuesta correcta",
+        "incorrect-answer": "Respuesta incorrecta"
+      },
       "qcm": {
         "direction": "Seleccione varias respuestas."
       },

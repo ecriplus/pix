@@ -1716,6 +1716,10 @@
         "showJson": "Show JSON",
         "textarea-label": "Module content"
       },
+      "qab": {
+        "correct-answer": "Correct answer",
+        "incorrect-answer": "Incorrect answer"
+      },
       "qcm": {
         "direction": "Select several answers."
       },

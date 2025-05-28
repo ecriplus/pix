@@ -1705,6 +1705,10 @@
         "showJson": "Show JSON",
         "textarea-label": "Inhoud module"
       },
+      "qab": {
+        "correct-answer": "Correct antwoord",
+        "incorrect-answer": "Onjuist antwoord"
+      },
       "qcm": {
         "direction": "Kies meerdere antwoorden."
       },
