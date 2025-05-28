@@ -612,6 +612,53 @@ describe('Integration | Infrastructure | Repositories | assessment-repository', 
     });
   });
 
+  describe('#updateCampaignParticipationId', function () {
+    it('should update assessment', async function () {
+      // given
+      const participation = databaseBuilder.factory.buildCampaignParticipation();
+      const initialCreatedAt = new Date('2020-01-01');
+      const assessment = databaseBuilder.factory.buildAssessment({
+        state: Assessment.states.STARTED,
+        lastQuestionDate: new Date('2020-01-10'),
+        lastChallengeId: 'rechallenge1',
+        campaignParticipationId: participation.id,
+        updatedAt: new Date('2020-01-01'),
+        createdAt: initialCreatedAt,
+        lastQuestionState: null,
+      });
+      await databaseBuilder.commit();
+
+      assessment.campaignParticipationId = null;
+      assessment.state = Assessment.states.ABORTED;
+      assessment.updatedAt = new Date('2020-01-12');
+      // when
+      await assessmentRepository.updateCampaignParticipationId(assessment);
+
+      // then
+      const assessmentInDb = await knex('assessments').where('id', assessment.id).first();
+
+      expect(assessmentInDb.campaignParticipationId).null;
+      expect(assessmentInDb.updatedAt).deep.equal(new Date('2020-01-12'));
+      expect(assessmentInDb.state).equal(Assessment.states.STARTED);
+    });
+
+    context('when assessment does not exist', function () {
+      it('should return null', async function () {
+        const notExistingAssessmentId = 1;
+
+        // when
+        const result = await assessmentRepository.updateCampaignParticipationId({
+          id: notExistingAssessmentId,
+          campaingParticipationId: 123,
+          updatedAt: new Date('2020-12-02'),
+        });
+
+        // then
+        expect(result).to.equal(null);
+      });
+    });
+  });
+
   describe('#updateLastQuestionDate', function () {
     it('should update lastQuestionDate', async function () {
       // given

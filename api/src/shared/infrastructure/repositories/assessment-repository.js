@@ -197,6 +197,15 @@ const getByCampaignParticipationIds = async function (campaignParticipationIds =
   return assessments.map((assessment) => new Assessment({ ...assessment }));
 };
 
+const updateCampaignParticipationId = async function (assessment) {
+  const knexConn = DomainTransaction.getConnection();
+  const [assessmentUpdated] = await knexConn('assessments')
+    .update({ campaignParticipationId: assessment.campaignParticipationId, updatedAt: assessment.updatedAt })
+    .where('id', assessment.id)
+    .returning('*');
+  if (!assessmentUpdated) return null;
+};
+
 export {
   _updateStateById,
   abortByAssessmentId,
@@ -212,6 +221,7 @@ export {
   ownedByUser,
   save,
   setAssessmentsAsStarted,
+  updateCampaignParticipationId,
   updateLastQuestionDate,
   updateLastQuestionState,
   updateWhenNewChallengeIsAsked,
