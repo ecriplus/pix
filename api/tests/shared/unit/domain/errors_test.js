@@ -15,8 +15,8 @@ describe('Unit | Shared | Domain | Errors', function () {
     expect(errors.UserNotAuthorizedToUpdatePasswordError).to.exist;
   });
 
-  it('should export NoCertificationAttestationForDivisionError', function () {
-    expect(errors.NoCertificationAttestationForDivisionError).to.exist;
+  it('should export NoCertificateForDivisionError', function () {
+    expect(errors.NoCertificateForDivisionError).to.exist;
   });
 
   it('should export an EmailModificationDemandNotFoundOrExpiredError', function () {

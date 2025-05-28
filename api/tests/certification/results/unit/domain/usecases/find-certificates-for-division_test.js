@@ -1,5 +1,5 @@
 import { findCertificationAttestationsForDivision } from '../../../../../../src/certification/results/domain/usecases/find-certification-attestations-for-division.js';
-import { NoCertificationAttestationForDivisionError } from '../../../../../../src/shared/domain/errors.js';
+import { NoCertificateForDivisionError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | find-certification-attestations-for-division', function () {
@@ -58,7 +58,7 @@ describe('Unit | UseCase | find-certification-attestations-for-division', functi
   });
 
   describe('when there is no attestation', function () {
-    it('should throw a NoCertificationAttestationForDivisionError', async function () {
+    it('should throw a NoCertificateForDivisionError', async function () {
       // given
       certificateRepository.findByDivisionForScoIsManagingStudentsOrganization
         .withArgs({ organizationId: 1234, division: '3b' })
@@ -72,7 +72,7 @@ describe('Unit | UseCase | find-certification-attestations-for-division', functi
       });
 
       // then
-      expect(error).to.be.an.instanceOf(NoCertificationAttestationForDivisionError);
+      expect(error).to.be.an.instanceOf(NoCertificateForDivisionError);
     });
   });
 });
