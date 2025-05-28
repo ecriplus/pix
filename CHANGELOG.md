@@ -1,5 +1,20 @@
 # Pix Changelog
 
+# [5.121.0](https://github.com/1024pix/pix/compare/v5.120.0...v5.121.0) (2025-05-28)
+
+### :rocket: Amélioration
+
+- [#12291](https://github.com/1024pix/pix/pull/12291) Inviter les utilisateurs d'un SSO sup à récupérer leur ancien compte sco  (PIX-17510) 
+
+### :bug: Correction
+
+- [#12370](https://github.com/1024pix/pix/pull/12370) Récompense de quête non partagée avec l'organisation (PIX-17944) 
+
+### :building_construction: Tech
+
+- [#12390](https://github.com/1024pix/pix/pull/12390) Correction du flaky sur la route Saml POST (PIX-18045) 
+- [#12383](https://github.com/1024pix/pix/pull/12383) E2E flakies: s'assurer que le serveur X11 est démarré sur la CI
+
 # [5.120.0](https://github.com/1024pix/pix/compare/v5.119.0...v5.120.0) (2025-05-27)
 
 ### :rocket: Amélioration
