@@ -253,6 +253,9 @@
           },
           "legend": "Information required for sign up."
         }
+      },
+      "sso-selection-form": {
+        "should-display-account-recovery-banner": "Student? If you have not yet done so, '<'a href=\"{url}\"'>'access the page to recover your Pix account'</a>' and keep your progress."
       }
     },
     "campaigns": {

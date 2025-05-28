@@ -284,4 +284,40 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
       });
     });
   });
+
+  module('shouldDisplayAccountRecoveryBanner', function () {
+    test('returns true if SSO code is in USER_ACCOUNT_RECOVERY_FOR_IDENTITY_PROVIDER_CODES', async function (assert) {
+      // given
+      class FeatureTogglesStub extends Service {
+        featureToggles = { isNewAccountRecoveryEnabled: true };
+      }
+      this.owner.register('service:featureToggles', FeatureTogglesStub);
+      const oidcIdentityProvidersService = this.owner.lookup('service:oidcIdentityProviders');
+
+      // when
+      const shouldDisplayAccountRecoveryBanner =
+        await oidcIdentityProvidersService.shouldDisplayAccountRecoveryBanner('FER');
+
+      // then
+      assert.true(shouldDisplayAccountRecoveryBanner);
+    });
+
+    module('when feature toggle is set to false', function () {
+      test('returns false if feature toggle is inactive', async function (assert) {
+        // given
+        class FeatureTogglesStub extends Service {
+          featureToggles = { isNewAccountRecoveryEnabled: false };
+        }
+        this.owner.register('service:featureToggles', FeatureTogglesStub);
+        const oidcIdentityProvidersService = this.owner.lookup('service:oidcIdentityProviders');
+
+        // when
+        const shouldDisplayAccountRecoveryBanner =
+          await oidcIdentityProvidersService.shouldDisplayAccountRecoveryBanner('FER');
+
+        // then
+        assert.false(shouldDisplayAccountRecoveryBanner);
+      });
+    });
+  });
 });
