@@ -623,7 +623,7 @@
       }
     },
     "certificate": {
-      "congratulations": "Congratulations!",
+      "congratulations": "¡Felicidades!",
       "global": {
         "explanation": {
           "default": "You've reached {globalLevelLabel} level of Pix Certification!",
@@ -649,14 +649,19 @@
       "back-link": "Volver a mis certificaciones",
       "candidate-birth": "Nacido/a el {birthdate}",
       "candidate-birth-complete": "Nacido/a el {birthdate} en {birthplace}",
-      "certification-center": "Centro de certificación:",
-      "delivered-at": "Date of issue:",
-      "certification-date": "Exam date:",
-      "candidate": "Candidate:",
+      "certification-center": "Centro de certificación :",
+      "delivered-at": "Fecha de emisión :",
+      "subtitle": "(niveles de {maxReachableLevel})",
+      "details": {
+        "competences": {
+          "description": "Tu puntuación Pix da una estimación de tu nivel en las 16 competencias digitales.",
+          "title": "Su perfil de competencias digitales"
+        }
+      },
+      "certification-date": "Fecha de examen :",
+      "candidate": "Candidato :",
       "competences": {
-        "information": "Tu puntuación certificada se ha calculado a partir de tus respuestas durante el proceso de certificación. Por lo tanto, puede diferir del número de Pix que aparece en tu perfil. El día de tu certificación, era posible alcanzar el nivel {maxReachableLevelOnCertificationDate} de competencias y {maxReachablePixCountOnCertificationDate} pix como máximo.",
-        "subtitle": "(niveles de {maxReachableLevel})",
-        "title": "Competencias certificadas"
+        "information": "Tu puntuación certificada se ha calculado a partir de tus respuestas durante el proceso de certificación. Por lo tanto, puede diferir del número de Pix que aparece en tu perfil. El día de tu certificación, era posible alcanzar el nivel {maxReachableLevelOnCertificationDate} de competencias y {maxReachablePixCountOnCertificationDate} pix como máximo."
       },
       "complementary": {
         "alternative": "Certificación complementaria",
