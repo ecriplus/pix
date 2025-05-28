@@ -558,8 +558,6 @@ const configuration = (function () {
     config.temporaryStorage.redisUrl = process.env.TEST_REDIS_URL;
     config.authentication.permitPixAdminLoginFromPassword = false;
 
-    config.saml.accessTokenLifespanMs = 1000;
-
     config.cpf.storage = {
       cpfExports: {
         client: {
