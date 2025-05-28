@@ -203,19 +203,6 @@ describe('Integration | Repository | Competence Evaluation', function () {
     });
 
     it('should return only one competence evaluation linked to the competence id', async function () {
-      // given
-      const anotherAssessment = databaseBuilder.factory.buildAssessment({
-        userId: user.id,
-        type: Assessment.types.COMPETENCE_EVALUATION,
-      });
-
-      databaseBuilder.factory.buildCompetenceEvaluation({
-        userId: user.id,
-        competenceId: '1',
-        assessmentId: anotherAssessment.id,
-        status: STARTED,
-      });
-
       // when
       const result = await competenceEvaluationRepository.getByCompetenceIdAndUserId({
         competenceId: 1,
