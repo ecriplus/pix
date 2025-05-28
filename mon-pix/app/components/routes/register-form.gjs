@@ -164,7 +164,7 @@ export default class RegisterForm extends Component {
         />
       </div>
 
-      <form {{on "submit" this.register}} autocomplete="off">
+      <form {{on "submit" this.register}} autocomplete="off" class="register-form">
         {{#if this.loginWithUsername}}
           <div id="register-username-container" class="register-form-username-container">
             <label class="register-form-username-container__label">
