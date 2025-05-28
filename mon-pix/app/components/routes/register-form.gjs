@@ -209,21 +209,14 @@ export default class RegisterForm extends Component {
           </div>
         {{/if}}
 
-        <div class="register-button-container">
+        <div class="register-form__action-form-buttons">
           <PixButton id="submit-registration" @type="submit" @isLoading={{this.isLoading}}>
             {{t "pages.login-or-register.register-form.button-form"}}
           </PixButton>
+          <PixButton @triggerAction={{this.resetForm}} @variant="secondary" @iconBefore="arrowLeft">
+            {{t "pages.login-or-register.register-form.not-me"}}
+          </PixButton>
         </div>
-
-        <PixButton
-          @triggerAction={{this.resetForm}}
-          @variant="secondary"
-          @iconBefore="arrowLeft"
-          class="register-form__reset-form-button"
-        >
-          {{t "pages.login-or-register.register-form.not-me"}}
-        </PixButton>
-
         <p class="legal-notice">
           {{t "pages.login-or-register.register-form.rgpd-legal-notice"}}
           <a
