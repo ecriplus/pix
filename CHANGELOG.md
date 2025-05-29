@@ -1,5 +1,32 @@
 # Pix Changelog
 
+# [5.122.0](https://github.com/1024pix/pix/compare/v5.121.0...v5.122.0) (2025-05-29)
+
+### :rocket: Amélioration
+
+- [#12384](https://github.com/1024pix/pix/pull/12384) Afficher CLEA dans le certificat V3 sur Pix App (PIX-17892). 
+- [#12385](https://github.com/1024pix/pix/pull/12385) Anonymiser les données d'un participant à la suppression de celui-ci (PIX-17488). 
+
+### :building_construction: Tech
+
+- [#12407](https://github.com/1024pix/pix/pull/12407) Augmenter le timeout sur des tests de generation PDF 
+- [#12401](https://github.com/1024pix/pix/pull/12401) Modifier la table certification-frameworks-challenges (PIX-18054). 
+- [#12393](https://github.com/1024pix/pix/pull/12393) Ne pas declencher la CI à chaque ajout/suppression de label 
+- [#12220](https://github.com/1024pix/pix/pull/12220) Retirer phrase du dépôt 
+- [#12395](https://github.com/1024pix/pix/pull/12395) Vide la table `organizations_cover_rates` après chaque test. 
+
+### :arrow_up: Montée de version
+
+- [#12397](https://github.com/1024pix/pix/pull/12397) Update dependency @1024pix/eslint-plugin to ^2.1.5 (api) 
+- [#12399](https://github.com/1024pix/pix/pull/12399) Update dependency @1024pix/eslint-plugin to ^2.1.5 (audit-logger) 
+- [#12402](https://github.com/1024pix/pix/pull/12402) Update dependency @1024pix/eslint-plugin to ^2.1.5 (certif) 
+- [#12405](https://github.com/1024pix/pix/pull/12405) Update dependency @1024pix/eslint-plugin to ^2.1.5 (dossier racine) 
+- [#12409](https://github.com/1024pix/pix/pull/12409) Update dependency @1024pix/eslint-plugin to ^2.1.5 (e2e-playwright) 
+- [#12410](https://github.com/1024pix/pix/pull/12410) Update dependency @1024pix/eslint-plugin to ^2.1.5 (junior) 
+- [#12411](https://github.com/1024pix/pix/pull/12411) Update dependency @1024pix/eslint-plugin to ^2.1.5 (mon-pix) 
+- [#12412](https://github.com/1024pix/pix/pull/12412) Update dependency @1024pix/eslint-plugin to ^2.1.5 (orga) 
+- [#12267](https://github.com/1024pix/pix/pull/12267) Update dependency webpack to v5.99.9 (junior)
+
 # [5.121.0](https://github.com/1024pix/pix/compare/v5.120.0...v5.121.0) (2025-05-28)
 
 ### :rocket: Amélioration
