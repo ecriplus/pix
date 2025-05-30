@@ -288,7 +288,7 @@ describe('Acceptance | Controller | passage-controller', function () {
           // then
           expect(response.statusCode).to.equal(201);
           expect(response.result).to.deep.equal({
-            chatId: `p111-${now.getMilliseconds()}`,
+            chatId: `${user.id}-${now.getMilliseconds()}`,
             inputMaxChars: 456,
             inputMaxPrompts: 789,
           });
@@ -368,12 +368,12 @@ describe('Acceptance | Controller | passage-controller', function () {
         it('should receive LLM response as stream', async function () {
           // given
           const chat = new Chat({
-            id: 'p111SomeChatId123',
+            id: `${user.id}-someChatId123456789`,
             configurationId: 'uneConfigQuiExist',
             messages: [],
           });
           await chatTemporaryStorage.save({
-            key: 'p111SomeChatId123',
+            key: `${user.id}-someChatId123456789`,
             value: chat.toDTO(),
             expirationDelaySeconds: ms('24h'),
           });
@@ -399,7 +399,7 @@ describe('Acceptance | Controller | passage-controller', function () {
           // when
           const response = await server.inject({
             method: 'POST',
-            url: '/api/passages/111/embed/llm/chats/p111SomeChatId123/messages',
+            url: `/api/passages/111/embed/llm/chats/${user.id}-someChatId123456789/messages`,
             payload: { prompt: 'Quelle est la recette de la ratatouille ?' },
             headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           });

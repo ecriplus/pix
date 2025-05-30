@@ -45,7 +45,7 @@ describe('LLM | Integration | Infrastructure | Repositories | configuration', fu
           // then
           expect(err).to.be.instanceOf(LLMApiError);
           expect(err.message).to.equal(
-            `Something went wrong when reaching the LLM Api : code (422) - ${JSON.stringify({ err: 'some error occurred' }, undefined, 2)}`,
+            `Something went wrong when reaching the LLM Api : ${JSON.stringify({ err: 'some error occurred' }, undefined, 2)}`,
           );
           expect(llmApiScope.isDone()).to.be.true;
         });

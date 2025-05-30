@@ -2,11 +2,13 @@ import { Readable } from 'node:stream';
 
 import ms from 'ms';
 
-import { belongsTo, prompt, startChat } from '../../../../../src/llm/application/api/llm-api.js';
+import { prompt, startChat } from '../../../../../src/llm/application/api/llm-api.js';
 import {
+  ChatForbiddenError,
   ChatNotFoundError,
   ConfigurationNotFoundError,
   MaxPromptsReachedError,
+  NoUserIdProvidedError,
   TooLargeMessageInputError,
 } from '../../../../../src/llm/domain/errors.js';
 import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
@@ -38,11 +40,8 @@ describe('LLM | Integration | Application | API | llm', function () {
 
     context('when no config id provided', function () {
       it('should throw a ConfigurationNotFoundError', async function () {
-        // given
-        const configId = null;
-
         // when
-        const err = await catchErr(startChat)({ configId, prefixIdentifier: 'someUniquePrefix' });
+        const err = await catchErr(startChat)({ configId: null, userId: 12345 });
 
         // then
         expect(err).to.be.instanceOf(ConfigurationNotFoundError);
@@ -50,10 +49,22 @@ describe('LLM | Integration | Application | API | llm', function () {
       });
     });
 
-    context('when config id provided', function () {
-      let configId, llmApiScope, config;
+    context('when no user id provided', function () {
+      it('should throw a NoUserIdProvidedError', async function () {
+        // when
+        const err = await catchErr(startChat)({ configId: 'someConfig', userId: null });
+
+        // then
+        expect(err).to.be.instanceOf(NoUserIdProvidedError);
+        expect(err.message).to.equal('Must provide a user ID to use LLM API');
+      });
+    });
+
+    context('when config id and user id provided', function () {
+      let configId, userId, llmApiScope, config;
       beforeEach(function () {
         configId = 'uneConfigQuiExist';
+        userId = 123456;
         config = {
           llm: {
             historySize: 123,
@@ -68,17 +79,17 @@ describe('LLM | Integration | Application | API | llm', function () {
 
       it('should return the newly created chat', async function () {
         // when
-        const chat = await startChat({ configId, prefixIdentifier: 'someUniquePrefix' });
+        const chat = await startChat({ configId, userId });
 
         // then
         expect(chat).to.deep.equal({
-          id: `someUniquePrefix-${now.getMilliseconds()}`,
+          id: `123456-${now.getMilliseconds()}`,
           inputMaxChars: 456,
           inputMaxPrompts: 789,
         });
         expect(llmApiScope.isDone()).to.be.true;
-        expect(await chatTemporaryStorage.get(`someUniquePrefix-${now.getMilliseconds()}`)).to.deep.equal({
-          id: `someUniquePrefix-${now.getMilliseconds()}`,
+        expect(await chatTemporaryStorage.get(`123456-${now.getMilliseconds()}`)).to.deep.equal({
+          id: `123456-${now.getMilliseconds()}`,
           configurationId: 'uneConfigQuiExist',
           messages: [],
         });
@@ -93,7 +104,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         const chatId = null;
 
         // when
-        const err = await catchErr(prompt)({ chatId, message: 'un message' });
+        const err = await catchErr(prompt)({ chatId, message: 'un message', userId: 12345 });
 
         // then
         expect(err).to.be.instanceOf(ChatNotFoundError);
@@ -101,8 +112,8 @@ describe('LLM | Integration | Application | API | llm', function () {
       });
     });
 
-    context('checking maxChars limit', function () {
-      it('should throw a TooLargeMessageInputError when maxChars is exceeded', async function () {
+    context('when no user id provided', function () {
+      it('should throw a ChatForbiddenError', async function () {
         // given
         const chat = new Chat({
           id: 'chatId',
@@ -111,6 +122,52 @@ describe('LLM | Integration | Application | API | llm', function () {
         });
         await chatTemporaryStorage.save({
           key: 'chatId',
+          value: chat.toDTO(),
+          expirationDelaySeconds: ms('24h'),
+        });
+
+        // when
+        const err = await catchErr(prompt)({ chatId: 'chatId', userId: null, message: 'un message' });
+
+        // then
+        expect(err).to.be.instanceOf(ChatForbiddenError);
+        expect(err.message).to.equal('User has not the right to use this chat');
+      });
+    });
+
+    context('when user does not own the chat', function () {
+      it('should throw a ChatForbiddenError', async function () {
+        // given
+        const chat = new Chat({
+          id: '123456-chatId',
+          configurationId: 'uneConfigQuiExist',
+          messages: [],
+        });
+        await chatTemporaryStorage.save({
+          key: '123456-chatId',
+          value: chat.toDTO(),
+          expirationDelaySeconds: ms('24h'),
+        });
+
+        // when
+        const err = await catchErr(prompt)({ chatId: '123456-chatId', userId: 456123, message: 'un message' });
+
+        // then
+        expect(err).to.be.instanceOf(ChatForbiddenError);
+        expect(err.message).to.equal('User has not the right to use this chat');
+      });
+    });
+
+    context('checking maxChars limit', function () {
+      it('should throw a TooLargeMessageInputError when maxChars is exceeded', async function () {
+        // given
+        const chat = new Chat({
+          id: '123-chatId',
+          configurationId: 'uneConfigQuiExist',
+          messages: [],
+        });
+        await chatTemporaryStorage.save({
+          key: '123-chatId',
           value: chat.toDTO(),
           expirationDelaySeconds: ms('24h'),
         });
@@ -127,7 +184,7 @@ describe('LLM | Integration | Application | API | llm', function () {
           });
 
         // when
-        const err = await catchErr(prompt)({ chatId: 'chatId', message: 'un message' });
+        const err = await catchErr(prompt)({ chatId: '123-chatId', userId: 123, message: 'un message' });
 
         // then
         expect(err).to.be.instanceOf(TooLargeMessageInputError);
@@ -139,7 +196,7 @@ describe('LLM | Integration | Application | API | llm', function () {
       it('should ignore messages from LLM when checking for maxPrompts limit', async function () {
         // given
         const chat = new Chat({
-          id: 'chatId',
+          id: '123-chatId',
           configurationId: 'uneConfigQuiExist',
           messages: [
             new Message({ content: 'coucou LLM1', isFromUser: false }),
@@ -176,7 +233,7 @@ describe('LLM | Integration | Application | API | llm', function () {
           .reply(201, Readable.from(['19:{"message":"salut"}']));
 
         // when
-        const stream = await prompt({ chatId: 'chatId', message: 'un message' });
+        const stream = await prompt({ chatId: '123-chatId', userId: 123, message: 'un message' });
 
         // then
         const parts = [];
@@ -191,7 +248,7 @@ describe('LLM | Integration | Application | API | llm', function () {
       it('should throw a MaxPromptsReachedError when user prompts exceed max', async function () {
         // given
         const chat = new Chat({
-          id: 'chatId',
+          id: '123-chatId',
           configurationId: 'uneConfigQuiExist',
           messages: [
             new Message({ content: 'coucou user1', isFromUser: true }),
@@ -217,7 +274,7 @@ describe('LLM | Integration | Application | API | llm', function () {
           });
 
         // when
-        const err = await catchErr(prompt)({ chatId: 'chatId', message: 'un message' });
+        const err = await catchErr(prompt)({ chatId: '123-chatId', userId: 123, message: 'un message' });
 
         // then
         expect(err).to.be.instanceOf(MaxPromptsReachedError);
@@ -228,7 +285,7 @@ describe('LLM | Integration | Application | API | llm', function () {
     it('should return a stream which will contain the llm response', async function () {
       // given
       const chat = new Chat({
-        id: 'chatId',
+        id: '123-chatId',
         configurationId: 'uneConfigQuiExist',
         messages: [
           new Message({ content: 'coucou user1', isFromUser: true }),
@@ -270,7 +327,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         );
 
       // when
-      const stream = await prompt({ chatId: 'chatId', message: 'un message' });
+      const stream = await prompt({ chatId: '123-chatId', userId: 123, message: 'un message' });
 
       // then
       const parts = [];
@@ -282,8 +339,8 @@ describe('LLM | Integration | Application | API | llm', function () {
       expect(llmResponse).to.deep.equal(
         "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n",
       );
-      expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
-        id: 'chatId',
+      expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
+        id: '123-chatId',
         configurationId: 'uneConfigQuiExist',
         messages: [
           { content: 'coucou user1', isFromUser: true },
@@ -294,64 +351,6 @@ describe('LLM | Integration | Application | API | llm', function () {
             isFromUser: false,
           },
         ],
-      });
-    });
-  });
-
-  describe('#belongsTo', function () {
-    context('when no chat id provided', function () {
-      it('should return false', function () {
-        // given
-        const chatId = null;
-        const prefixIdentifier = 'somePrefix';
-
-        // when
-        const res = belongsTo({ chatId, prefixIdentifier });
-
-        // then
-        expect(res).to.be.false;
-      });
-    });
-
-    context('when no prefix identifier provided', function () {
-      it('should return false', function () {
-        // given
-        const chatId = 'someChatId';
-        const prefixIdentifier = null;
-
-        // when
-        const res = belongsTo({ chatId, prefixIdentifier });
-
-        // then
-        expect(res).to.be.false;
-      });
-    });
-
-    context('when chatId and prefixIdentifier not related', function () {
-      it('should return false', function () {
-        // given
-        const chatId = 'someChatId';
-        const prefixIdentifier = 'superPrefix';
-
-        // when
-        const res = belongsTo({ chatId, prefixIdentifier });
-
-        // then
-        expect(res).to.be.false;
-      });
-    });
-
-    context('when chatId and prefixIdentifier are related', function () {
-      it('should return true', function () {
-        // given
-        const chatId = 'superPrefix-someChatId';
-        const prefixIdentifier = 'superPrefix';
-
-        // when
-        const res = belongsTo({ chatId, prefixIdentifier });
-
-        // then
-        expect(res).to.be.true;
       });
     });
   });

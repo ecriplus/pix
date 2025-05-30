@@ -29,21 +29,40 @@ export async function get(id) {
     logger.error({ err }, 'error when trying to reach LLM API');
     throw new LLMApiError(err.toString());
   }
-  const statusCode = response.status;
-  const jsonResponse = response.body ? await response.json() : '';
+  const contentType = response.headers.get('Content-Type');
   if (response.ok) {
-    await configurationTemporaryStorage.save({
-      key: id,
-      value: jsonResponse,
-      expirationDelaySeconds: CONFIGURATION_EXPIRATION_DELAY_SECONDS,
-    });
-    return jsonResponse;
+    if (contentType === 'application/json') {
+      const jsonResponse = await response.json();
+      await configurationTemporaryStorage.save({
+        key: id,
+        value: jsonResponse,
+        expirationDelaySeconds: CONFIGURATION_EXPIRATION_DELAY_SECONDS,
+      });
+      return jsonResponse;
+    }
+    throw new LLMApiError('unexpected content-type response');
   }
-  if (statusCode === 404) {
+  const { status, err } = await handleFetchErrors(response);
+  if (status === 404) {
     throw new ConfigurationNotFoundError(id);
+  } else {
+    logger.error({ err }, `error when reaching LLM API : code ${status}`);
+    throw new LLMApiError(err);
   }
-  const errorStr = JSON.stringify(jsonResponse, undefined, 2);
-  logger.error(`error when reaching LLM API : code (${statusCode}) - ${errorStr}`);
+}
 
-  throw new LLMApiError(`code (${statusCode}) - ${errorStr}`);
+async function handleFetchErrors(response) {
+  const contentType = response.headers.get('Content-Type');
+  let err = 'no error message provided';
+  if (response.body) {
+    if (contentType === 'application/json') {
+      err = JSON.stringify(await response.json(), undefined, 2);
+    } else {
+      err = await response.text();
+    }
+  }
+  return {
+    status: response.status,
+    err,
+  };
 }

@@ -6,6 +6,12 @@ export class ConfigurationNotFoundError extends DomainError {
   }
 }
 
+export class NoUserIdProvidedError extends DomainError {
+  constructor() {
+    super('Must provide a user ID to use LLM API');
+  }
+}
+
 export class LLMApiError extends DomainError {
   constructor(errorStr) {
     super(`Something went wrong when reaching the LLM Api : ${errorStr}`);
@@ -15,6 +21,12 @@ export class LLMApiError extends DomainError {
 export class ChatNotFoundError extends DomainError {
   constructor(id) {
     super(`The chat of id "${id}" does not exist`);
+  }
+}
+
+export class ChatForbiddenError extends DomainError {
+  constructor() {
+    super('User has not the right to use this chat');
   }
 }
 

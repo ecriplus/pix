@@ -49,7 +49,7 @@ describe('Unit | Devcomp | Domain | UseCases | start-embed-llm-chat', function (
           userId,
         }),
       );
-      llmApi.startChat.withArgs({ configId, prefixIdentifier: 'p123456' }).resolves(
+      llmApi.startChat.withArgs({ configId, userId }).resolves(
         new LLMChatDTO({
           id: 'someChatId',
           inputMaxChars: 123,

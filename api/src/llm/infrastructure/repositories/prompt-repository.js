@@ -83,13 +83,29 @@ async function postUserPrompt({ message, configuration, chat }) {
     logger.error(`error when trying to reach LLM API : ${err}`);
     throw new LLMApiError(err.toString());
   }
-  if (response.status !== 201) {
-    const jsonErr = await response.json();
-    const errorStr = JSON.stringify(jsonErr, undefined, 2);
-    logger.error(`error when reaching LLM API : code (${response.status}) - ${errorStr}`);
-    throw new LLMApiError(`code (${response.status}) - ${errorStr}`);
+  if (response.ok) {
+    return response.body;
   }
-  return response.body;
+
+  const { status, err } = await handleFetchErrors(response);
+  logger.error({ err }, `error when reaching LLM API : code ${status}`);
+  throw new LLMApiError(err);
+}
+
+async function handleFetchErrors(response) {
+  const contentType = response.headers.get('Content-Type');
+  let err = 'no error message provided';
+  if (response.body) {
+    if (contentType === 'application/json') {
+      err = JSON.stringify(await response.json(), undefined, 2);
+    } else {
+      err = await response.text();
+    }
+  }
+  return {
+    status: response.status,
+    err,
+  };
 }
 
 function toHistoryMessage(message) {

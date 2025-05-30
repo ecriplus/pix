@@ -13,13 +13,11 @@ describe('Unit | Devcomp | Domain | UseCases | prompt-to-llm-chat', function () 
   beforeEach(function () {
     llmApi = {
       prompt: sinon.stub(),
-      belongsTo: sinon.stub(),
     };
     passageRepository = {
       get: sinon.stub(),
     };
     llmApi.prompt.throws(new Error('llmapi-prompt: Unexpected call'));
-    llmApi.belongsTo.throws(new Error('llmapi-belongsTo: Unexpected call'));
     passageRepository.get.throws(new Error('passageRepository-get: Unexpected call'));
   });
 
@@ -42,26 +40,6 @@ describe('Unit | Devcomp | Domain | UseCases | prompt-to-llm-chat', function () 
     });
   });
 
-  context('when chat does not belong to passage', function () {
-    it('should throw a DomainError', async function () {
-      // given
-      passageRepository.get.withArgs({ passageId }).resolves(
-        new Passage({
-          id: passageId,
-          userId: userId,
-        }),
-      );
-      llmApi.belongsTo.withArgs({ chatId, prefixIdentifier: `p${passageId}` }).returns(false);
-
-      // when
-      const err = await catchErr(promptToLLMChat)({ chatId, passageId, userId, prompt, llmApi, passageRepository });
-
-      // then
-      expect(err).to.be.instanceOf(DomainError);
-      expect(err.message).to.equal('This chat does not belong to this passage');
-    });
-  });
-
   context('success case', function () {
     it('should return the stream', async function () {
       // given
@@ -71,9 +49,8 @@ describe('Unit | Devcomp | Domain | UseCases | prompt-to-llm-chat', function () 
           userId,
         }),
       );
-      llmApi.belongsTo.withArgs({ chatId, prefixIdentifier: `p${passageId}` }).returns(true);
       const stream = Symbol('le stream de réponse du LLM');
-      llmApi.prompt.withArgs({ chatId, message: prompt }).resolves(stream);
+      llmApi.prompt.withArgs({ chatId, userId, message: prompt }).resolves(stream);
 
       // when
       const actualStream = await promptToLLMChat({ chatId, passageId, userId, prompt, llmApi, passageRepository });

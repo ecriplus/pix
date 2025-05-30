@@ -115,6 +115,14 @@ describe('Integration | API | Controller Error', function () {
       expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
       expect(responseDetail(response)).to.equal('The chat of id "someChatId" does not exist');
     });
+
+    it('responds Bad Request when a LLMDomainErrors.NoUserIdProvidedError error occurs', async function () {
+      routeHandler.throws(new LLMDomainErrors.NoUserIdProvidedError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
+      expect(responseDetail(response)).to.equal('Must provide a user ID to use LLM API');
+    });
   });
 
   context('403 Forbidden', function () {
@@ -147,6 +155,14 @@ describe('Integration | API | Controller Error', function () {
 
       expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
       expect(responseDetail(response)).to.equal("You've reached the max prompts authorized");
+    });
+
+    it('responds Forbidden when a LLMDomainErrors.ChatForbiddenError error occurs', async function () {
+      routeHandler.throws(new LLMDomainErrors.ChatForbiddenError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
+      expect(responseDetail(response)).to.equal('User has not the right to use this chat');
     });
   });
 

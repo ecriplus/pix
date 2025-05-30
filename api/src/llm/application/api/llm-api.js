@@ -1,7 +1,9 @@
 import {
+  ChatForbiddenError,
   ChatNotFoundError,
   ConfigurationNotFoundError,
   MaxPromptsReachedError,
+  NoUserIdProvidedError,
   TooLargeMessageInputError,
 } from '../../domain/errors.js';
 import { Chat } from '../../domain/models/Chat.js';
@@ -24,15 +26,18 @@ import { LLMChatDTO } from './models/LLMChatDTO.js';
  *
  * @param {Object} params
  * @param {string} params.configId
- * @param {string} params.prefixIdentifier
+ * @param {string} params.userId
  * @returns {Promise<LLMChatDTO>}
  */
-export async function startChat({ configId, prefixIdentifier }) {
+export async function startChat({ configId, userId }) {
   if (!configId) {
     throw new ConfigurationNotFoundError('null id provided');
   }
+  if (!userId) {
+    throw new NoUserIdProvidedError();
+  }
   const configuration = await configurationRepository.get(configId);
-  const chatId = generateId(prefixIdentifier);
+  const chatId = generateId(userId);
   const newChat = new Chat({
     id: chatId,
     configurationId: configId,
@@ -58,14 +63,18 @@ export async function startChat({ configId, prefixIdentifier }) {
  *
  * @param {Object} params
  * @param {string} params.chatId
+ * @param {string} params.userId
  * @param {string} params.message
  * @returns {Promise<module:stream.internal.PassThrough>}
  */
-export async function prompt({ chatId, message }) {
+export async function prompt({ chatId, userId, message }) {
   if (!chatId) {
     throw new ChatNotFoundError('null id provided');
   }
   const chat = await chatRepository.get(chatId);
+  if (!userId || !chat.id.startsWith(userId)) {
+    throw new ChatForbiddenError();
+  }
   const configuration = await configurationRepository.get(chat.configurationId);
   if (message.length > getInputMaxCharsFromConfiguration(configuration)) {
     throw new TooLargeMessageInputError();
@@ -82,28 +91,9 @@ export async function prompt({ chatId, message }) {
   });
 }
 
-/**
- * @function
- * @name belongsTo
- *
- * @param {Object} params
- * @param {string} params.chatId
- * @param {string} params.prefixIdentifier
- * @returns {boolean}
- */
-export function belongsTo({ chatId, prefixIdentifier }) {
-  if (!chatId) {
-    return false;
-  }
-  if (!prefixIdentifier) {
-    return false;
-  }
-  return chatId.startsWith(prefixIdentifier);
-}
-
-function generateId(prefixIdentifier) {
+function generateId(userId) {
   const nowMs = new Date().getMilliseconds();
-  return `${prefixIdentifier}-${nowMs}`;
+  return `${userId}-${nowMs}`;
 }
 
 function getInputMaxCharsFromConfiguration(configuration) {
