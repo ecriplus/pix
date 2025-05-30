@@ -1,4 +1,10 @@
-import { STORAGE_PREFIX } from '../../../../../src/llm/application/api/llm-api.js';
+import { Readable } from 'node:stream';
+
+import ms from 'ms';
+
+import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
+import { CHAT_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
+import { CONFIGURATION_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/configuration-repository.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import {
@@ -11,7 +17,8 @@ import {
   sinon,
 } from '../../../../test-helper.js';
 
-const llmChatsTemporaryStorage = temporaryStorage.withPrefix(STORAGE_PREFIX);
+const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
+const configurationTemporaryStorage = temporaryStorage.withPrefix(CONFIGURATION_STORAGE_PREFIX);
 
 describe('Acceptance | Controller | passage-controller', function () {
   let server;
@@ -232,7 +239,8 @@ describe('Acceptance | Controller | passage-controller', function () {
 
     afterEach(async function () {
       clock.restore();
-      await llmChatsTemporaryStorage.flushAll();
+      await chatTemporaryStorage.flushAll();
+      await configurationTemporaryStorage.flushAll();
     });
 
     context('when user is not authenticated', function () {
@@ -280,7 +288,7 @@ describe('Acceptance | Controller | passage-controller', function () {
           // then
           expect(response.statusCode).to.equal(201);
           expect(response.result).to.deep.equal({
-            chatId: `p111-${now.getMilliseconds()}`,
+            chatId: `${user.id}-${now.getMilliseconds()}`,
             inputMaxChars: 456,
             inputMaxPrompts: 789,
           });
@@ -302,6 +310,103 @@ describe('Acceptance | Controller | passage-controller', function () {
           });
 
           expect(response.statusCode).to.equal(503);
+        });
+      });
+    });
+  });
+
+  describe('POST /api/passages/{passageId}/embed/llm/chats/{chatId}/messages', function () {
+    let user;
+
+    beforeEach(async function () {
+      user = databaseBuilder.factory.buildUser();
+      databaseBuilder.factory.buildPassage({ id: 111, userId: user.id }).id;
+      await databaseBuilder.commit();
+    });
+
+    afterEach(async function () {
+      await chatTemporaryStorage.flushAll();
+      await configurationTemporaryStorage.flushAll();
+    });
+
+    context('when user is not authenticated', function () {
+      it('should throw a 401', async function () {
+        // when
+        const response = await server.inject({
+          method: 'POST',
+          url: '/api/passages/111/embed/llm/chats/cSomeChatId123/messages',
+          payload: { prompt: 'Quelle est la recette de la ratatouille ?' },
+        });
+
+        expect(response.statusCode).to.equal(401);
+      });
+    });
+
+    context('when user is authenticated', function () {
+      context('when feature toggle is disabled', function () {
+        beforeEach(function () {
+          return featureToggles.set('isEmbedLLMEnabled', false);
+        });
+        it('should throw a 503 status code', async function () {
+          // when
+          const response = await server.inject({
+            method: 'POST',
+            url: '/api/passages/111/embed/llm/chats/cSomeChatId123/messages',
+            payload: { prompt: 'Quelle est la recette de la ratatouille ?' },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+          });
+
+          expect(response.statusCode).to.equal(503);
+        });
+      });
+
+      context('when feature toggle is enabled', function () {
+        beforeEach(function () {
+          return featureToggles.set('isEmbedLLMEnabled', true);
+        });
+
+        it('should receive LLM response as stream', async function () {
+          // given
+          const chat = new Chat({
+            id: `${user.id}-someChatId123456789`,
+            configurationId: 'uneConfigQuiExist',
+            messages: [],
+          });
+          await chatTemporaryStorage.save({
+            key: `${user.id}-someChatId123456789`,
+            value: chat.toDTO(),
+            expirationDelaySeconds: ms('24h'),
+          });
+          nock('https://llm-test.pix.fr/api')
+            .get('/configurations/uneConfigQuiExist')
+            .reply(200, {
+              llm: {
+                historySize: 123,
+              },
+              challenge: {
+                inputMaxChars: 999,
+                inputMaxPrompts: 999,
+              },
+            });
+          nock('https://llm-test.pix.fr/api')
+            .post('/chat', {
+              configurationId: 'uneConfigQuiExist',
+              history: [],
+              prompt: 'Quelle est la recette de la ratatouille ?',
+            })
+            .reply(201, Readable.from(['32:{"message":"coucou c\'est super"}']));
+
+          // when
+          const response = await server.inject({
+            method: 'POST',
+            url: `/api/passages/111/embed/llm/chats/${user.id}-someChatId123456789/messages`,
+            payload: { prompt: 'Quelle est la recette de la ratatouille ?' },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+          });
+
+          // then
+          expect(response.statusCode).to.equal(201);
+          expect(response.result).to.deep.equal("data: coucou c'est super\n\n");
         });
       });
     });

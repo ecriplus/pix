@@ -1,8 +1,8 @@
 import { DomainError } from '../../../shared/domain/errors.js';
 
-export async function startEmbedLlmChat({ configId, userId, passageId, llmApi, passageRepository }) {
+export async function promptToLLMChat({ userId, passageId, chatId, prompt, llmApi, passageRepository }) {
   await checkIfPassageBelongsToUser(passageId, userId, passageRepository);
-  return await llmApi.startChat({ configId, userId });
+  return llmApi.prompt({ chatId, userId, message: prompt });
 }
 
 async function checkIfPassageBelongsToUser(passageId, userId, passageRepository) {

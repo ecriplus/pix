@@ -1,23 +1,23 @@
 import { Passage } from '../../../../../src/devcomp/domain/models/Passage.js';
-import { startEmbedLlmChat } from '../../../../../src/devcomp/domain/usecases/start-embed-llm-chat.js';
-import { LLMChatDTO } from '../../../../../src/llm/application/api/models/LLMChatDTO.js';
+import { promptToLLMChat } from '../../../../../src/devcomp/domain/usecases/prompt-to-llm-chat.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Devcomp | Domain | UseCases | start-embed-llm-chat', function () {
+describe('Unit | Devcomp | Domain | UseCases | prompt-to-llm-chat', function () {
   let llmApi, passageRepository;
-  const configId = 'uneConfig';
+  const chatId = 'unChatId';
   const passageId = 123456;
   const userId = 456789;
+  const prompt = 'message entrée';
 
   beforeEach(function () {
     llmApi = {
-      startChat: sinon.stub(),
+      prompt: sinon.stub(),
     };
     passageRepository = {
       get: sinon.stub(),
     };
-    llmApi.startChat.throws(new Error('llmapi-startchat: Unexpected call'));
+    llmApi.prompt.throws(new Error('llmapi-prompt: Unexpected call'));
     passageRepository.get.throws(new Error('passageRepository-get: Unexpected call'));
   });
 
@@ -32,7 +32,7 @@ describe('Unit | Devcomp | Domain | UseCases | start-embed-llm-chat', function (
       );
 
       // when
-      const err = await catchErr(startEmbedLlmChat)({ configId, passageId, userId, llmApi, passageRepository });
+      const err = await catchErr(promptToLLMChat)({ chatId, passageId, userId, prompt, llmApi, passageRepository });
 
       // then
       expect(err).to.be.instanceOf(DomainError);
@@ -41,7 +41,7 @@ describe('Unit | Devcomp | Domain | UseCases | start-embed-llm-chat', function (
   });
 
   context('success case', function () {
-    it('should return the newly created chat', async function () {
+    it('should return the stream', async function () {
       // given
       passageRepository.get.withArgs({ passageId }).resolves(
         new Passage({
@@ -49,23 +49,14 @@ describe('Unit | Devcomp | Domain | UseCases | start-embed-llm-chat', function (
           userId,
         }),
       );
-      llmApi.startChat.withArgs({ configId, userId }).resolves(
-        new LLMChatDTO({
-          id: 'someChatId',
-          inputMaxChars: 123,
-          inputMaxPrompts: 456,
-        }),
-      );
+      const stream = Symbol('le stream de réponse du LLM');
+      llmApi.prompt.withArgs({ chatId, userId, message: prompt }).resolves(stream);
 
       // when
-      const chat = await startEmbedLlmChat({ configId, passageId, userId, llmApi, passageRepository });
+      const actualStream = await promptToLLMChat({ chatId, passageId, userId, prompt, llmApi, passageRepository });
 
       // then
-      expect(chat).to.deep.equal({
-        id: 'someChatId',
-        inputMaxChars: 123,
-        inputMaxPrompts: 456,
-      });
+      expect(actualStream).to.deep.equal(stream);
     });
   });
 });

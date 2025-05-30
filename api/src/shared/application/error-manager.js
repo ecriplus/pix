@@ -10,6 +10,7 @@ import {
   SendingEmailToResultRecipientError,
 } from '../../certification/session-management/domain/errors.js';
 import { AlreadyRatedAssessmentError, EmptyAnswerError } from '../../evaluation/domain/errors.js';
+import * as LLMDomainErrors from '../../llm/domain/errors.js';
 import { UnableToAttachChildOrganizationToParentOrganizationError } from '../../organizational-entities/domain/errors.js';
 import { ArchivedCampaignError, DeletedCampaignError } from '../../prescription/campaign/domain/errors.js';
 import { CampaignParticipationDeletedError } from '../../prescription/campaign-participation/domain/errors.js';
@@ -483,6 +484,34 @@ function _mapToHttpError(error) {
 
   if (error instanceof SharedDomainErrors.InvalidSessionResultTokenError) {
     return new HttpErrors.BadRequestError(error.message, error.code);
+  }
+
+  if (error instanceof LLMDomainErrors.ConfigurationNotFoundError) {
+    return new HttpErrors.BadRequestError(error.message, error.code);
+  }
+
+  if (error instanceof LLMDomainErrors.LLMApiError) {
+    return new HttpErrors.ServiceUnavailableError(error.message, error.code);
+  }
+
+  if (error instanceof LLMDomainErrors.TooLargeMessageInputError) {
+    return new HttpErrors.PayloadTooLargeError(error.message, error.code);
+  }
+
+  if (error instanceof LLMDomainErrors.MaxPromptsReachedError) {
+    return new HttpErrors.ForbiddenError(error.message, error.code);
+  }
+
+  if (error instanceof LLMDomainErrors.ChatNotFoundError) {
+    return new HttpErrors.BadRequestError(error.message, error.code);
+  }
+
+  if (error instanceof LLMDomainErrors.NoUserIdProvidedError) {
+    return new HttpErrors.BadRequestError(error.message, error.code);
+  }
+
+  if (error instanceof LLMDomainErrors.ChatForbiddenError) {
+    return new HttpErrors.ForbiddenError(error.message, error.code);
   }
 
   return new HttpErrors.BaseHttpError(error.message);

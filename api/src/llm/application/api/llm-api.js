@@ -1,13 +1,16 @@
-import { config } from '../../../shared/config.js';
-import { temporaryStorage } from '../../../shared/infrastructure/key-value-storages/index.js';
-import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
-import { LLMChat } from '../../domain/models/LLMChat.js';
+import {
+  ChatForbiddenError,
+  ChatNotFoundError,
+  ConfigurationNotFoundError,
+  MaxPromptsReachedError,
+  NoUserIdProvidedError,
+  TooLargeMessageInputError,
+} from '../../domain/errors.js';
+import { Chat } from '../../domain/models/Chat.js';
+import * as chatRepository from '../../infrastructure/repositories/chat-repository.js';
+import * as configurationRepository from '../../infrastructure/repositories/configuration-repository.js';
+import * as promptRepository from '../../infrastructure/repositories/prompt-repository.js';
 import { LLMChatDTO } from './models/LLMChatDTO.js';
-
-export const STORAGE_PREFIX = 'llm-chats';
-const llmChatsTemporaryStorage = temporaryStorage.withPrefix(STORAGE_PREFIX);
-
-const logger = child('llm:api', { event: SCOPES.LLM });
 
 /**
  * @typedef LLMChatDTO
@@ -23,64 +26,88 @@ const logger = child('llm:api', { event: SCOPES.LLM });
  *
  * @param {Object} params
  * @param {string} params.configId
- * @param {string} params.prefixIdentifier
+ * @param {string} params.userId
  * @returns {Promise<LLMChatDTO>}
  */
-export async function startChat({ configId, prefixIdentifier }) {
+export async function startChat({ configId, userId }) {
   if (!configId) {
-    return null;
+    throw new ConfigurationNotFoundError('null id provided');
   }
-  const chatId = generateId(prefixIdentifier);
-  const llmConfiguration = await getLLMConfiguration(configId);
-  if (!llmConfiguration) {
-    return null;
+  if (!userId) {
+    throw new NoUserIdProvidedError();
   }
-
-  const newChat = new LLMChat({
+  const configuration = await configurationRepository.get(configId);
+  const chatId = generateId(userId);
+  const newChat = new Chat({
     id: chatId,
-    llmConfigurationId: configId,
-    historySize: llmConfiguration.llm.historySize,
-    inputMaxChars: llmConfiguration.challenge.inputMaxChars,
-    inputMaxPrompts: llmConfiguration.challenge.inputMaxPrompts,
+    configurationId: configId,
+    messages: [],
   });
-  await llmChatsTemporaryStorage.save({
-    key: newChat.id,
-    value: newChat.toDTO(),
-    expirationDelaySeconds: config.llm.temporaryStorage.expirationDelaySeconds,
-  });
-  return toApi(newChat);
-}
-
-function generateId(prefixIdentifier) {
-  const nowMs = new Date().getMilliseconds();
-  return `${prefixIdentifier}-${nowMs}`;
-}
-
-async function getLLMConfiguration(configId) {
-  const url = config.llm.getConfigurationUrl + '/' + configId;
-  try {
-    const response = await fetch(url);
-    const statusCode = parseInt(response.status);
-    const jsonResponse = response.body ? await response.json() : '';
-    if (statusCode === 200) {
-      return jsonResponse;
-    }
-    if (statusCode === 404) {
-      logger.error(`No config found for id ${configId}`);
-      return null;
-    }
-    logger.error(`code (${statusCode}): ${JSON.stringify(jsonResponse, undefined, 2)}}`);
-    return null;
-  } catch (err) {
-    logger.error(err);
-    return null;
-  }
-}
-
-function toApi(llmChat) {
+  await chatRepository.save(newChat);
   return new LLMChatDTO({
-    id: llmChat.id,
-    inputMaxChars: llmChat.inputMaxChars,
-    inputMaxPrompts: llmChat.inputMaxPrompts,
+    id: newChat.id,
+    inputMaxChars: getInputMaxCharsFromConfiguration(configuration),
+    inputMaxPrompts: getInputMaxPromptsFromConfiguration(configuration),
   });
+}
+
+/**
+ * @typedef LLMChatResponseDTO
+ * @type {object}
+ * @property {string} message
+ */
+
+/**
+ * @function
+ * @name prompt
+ *
+ * @param {Object} params
+ * @param {string} params.chatId
+ * @param {string} params.userId
+ * @param {string} params.message
+ * @returns {Promise<module:stream.internal.PassThrough>}
+ */
+export async function prompt({ chatId, userId, message }) {
+  if (!chatId) {
+    throw new ChatNotFoundError('null id provided');
+  }
+  const chat = await chatRepository.get(chatId);
+  if (!userId || !chat.id.startsWith(userId)) {
+    throw new ChatForbiddenError();
+  }
+  const configuration = await configurationRepository.get(chat.configurationId);
+  if (message.length > getInputMaxCharsFromConfiguration(configuration)) {
+    throw new TooLargeMessageInputError();
+  }
+  if (chat.currentPromptsCount >= getInputMaxPromptsFromConfiguration(configuration)) {
+    throw new MaxPromptsReachedError();
+  }
+
+  return promptRepository.prompt({
+    message,
+    configuration,
+    chat,
+    onLLMResponseReceived: addMessagesToChat(chat, message, chatRepository),
+  });
+}
+
+function generateId(userId) {
+  const nowMs = new Date().getMilliseconds();
+  return `${userId}-${nowMs}`;
+}
+
+function getInputMaxCharsFromConfiguration(configuration) {
+  return configuration.challenge.inputMaxChars;
+}
+
+function getInputMaxPromptsFromConfiguration(configuration) {
+  return configuration.challenge.inputMaxPrompts;
+}
+
+function addMessagesToChat(chat, prompt, chatRepository) {
+  return async (llmMessage) => {
+    chat.addUserMessage(prompt);
+    chat.addLLMMessage(llmMessage);
+    await chatRepository.save(chat);
+  };
 }

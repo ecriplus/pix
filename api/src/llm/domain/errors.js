@@ -1,0 +1,43 @@
+import { DomainError } from '../../shared/domain/errors.js';
+
+export class ConfigurationNotFoundError extends DomainError {
+  constructor(id) {
+    super(`The configuration of id "${id}" does not exist`);
+  }
+}
+
+export class NoUserIdProvidedError extends DomainError {
+  constructor() {
+    super('Must provide a user ID to use LLM API');
+  }
+}
+
+export class LLMApiError extends DomainError {
+  constructor(errorStr) {
+    super(`Something went wrong when reaching the LLM Api : ${errorStr}`);
+  }
+}
+
+export class ChatNotFoundError extends DomainError {
+  constructor(id) {
+    super(`The chat of id "${id}" does not exist`);
+  }
+}
+
+export class ChatForbiddenError extends DomainError {
+  constructor() {
+    super('User has not the right to use this chat');
+  }
+}
+
+export class TooLargeMessageInputError extends DomainError {
+  constructor() {
+    super("You've reached the max characters input");
+  }
+}
+
+export class MaxPromptsReachedError extends DomainError {
+  constructor() {
+    super("You've reached the max prompts authorized");
+  }
+}

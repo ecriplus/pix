@@ -59,6 +59,14 @@ const startEmbedLlmChat = async function (request, h, { usecases }) {
     .code(201);
 };
 
-const passageController = { create, verifyAndSaveAnswer, terminate, startEmbedLlmChat };
+const promptToLLMChat = async function (request, h, { usecases }) {
+  const { passageId, chatId } = request.params;
+  const { prompt } = request.payload;
+  const userId = request.auth.credentials.userId;
+  const llmResponse = await usecases.promptToLLMChat({ passageId, chatId, userId, prompt });
+  return h.response(llmResponse).type('text/event-stream').code(201);
+};
+
+const passageController = { create, verifyAndSaveAnswer, terminate, startEmbedLlmChat, promptToLLMChat };
 
 export { passageController };
