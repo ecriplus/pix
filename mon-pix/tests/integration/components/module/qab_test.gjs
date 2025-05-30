@@ -1,12 +1,22 @@
-import { render, waitFor } from '@1024pix/ember-testing-library';
+import { render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import ModuleQabElement, { NEXT_CARD_DELAY } from 'mon-pix/components/module/element/qab/qab';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Module | QAB', function (hooks) {
   setupIntlRenderingTest(hooks);
+  let clock;
+
+  hooks.beforeEach(function () {
+    clock = sinon.useFakeTimers();
+  });
+
+  hooks.afterEach(function () {
+    clock.restore();
+  });
 
   test('it should display a QAB with a single card with two proposal', async function (assert) {
     // given
@@ -60,9 +70,10 @@ module('Integration | Component | Module | QAB', function (hooks) {
       // when
       const screen = await render(<template><ModuleQabElement @element={{qabElement}} /></template>);
       await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
+      await clock.tickAsync(NEXT_CARD_DELAY);
 
       // then
-      assert.dom(await screen.findByText('Les chiens ne transpirent pas.', {}, { timeout: NEXT_CARD_DELAY })).exists();
+      assert.dom(screen.getByText('Les chiens ne transpirent pas.')).exists();
     });
 
     module('when user chooses proposal A', function () {
@@ -113,12 +124,32 @@ module('Integration | Component | Module | QAB', function (hooks) {
         // when
         const screen = await render(<template><ModuleQabElement @element={{qabElement}} /></template>);
         await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
-        await waitFor(() => screen.getByText('Les chiens ne transpirent pas.'), { timeout: NEXT_CARD_DELAY });
-        await click(await screen.findByRole('button', { name: 'Option A: Vrai' }, { timeout: NEXT_CARD_DELAY }));
+        await clock.tickAsync(NEXT_CARD_DELAY);
+        await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
+        await clock.tickAsync(NEXT_CARD_DELAY);
 
         // then
-        assert.dom(await screen.findByText('Votre score : 1/2', {}, { timeout: NEXT_CARD_DELAY })).exists();
-        assert.dom(await screen.findByRole('button', { name: 'Réessayer' }, { timeout: NEXT_CARD_DELAY })).exists();
+        assert.dom(screen.getByText('Votre score : 1/2')).exists();
+        assert.dom(screen.getByRole('button', { name: 'Réessayer' })).exists();
+      });
+
+      module('when user clicks the retry button', function () {
+        test('should reset the component and display the first card', async function (assert) {
+          // given
+          const qabElement = _getQabElement();
+
+          // when
+          const screen = await render(<template><ModuleQabElement @element={{qabElement}} /></template>);
+          await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
+          await clock.tickAsync(NEXT_CARD_DELAY);
+          await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
+          await clock.tickAsync(NEXT_CARD_DELAY);
+          await click(screen.getByRole('button', { name: 'Réessayer' }));
+
+          // then
+          assert.dom(screen.getByText('Maintenant, entraînez-vous sur des exemples concrets !')).exists();
+          assert.dom(screen.getByText('Les boules de pétanques sont creuses.')).exists();
+        });
       });
     });
   });

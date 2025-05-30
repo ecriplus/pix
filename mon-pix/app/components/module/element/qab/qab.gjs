@@ -7,7 +7,7 @@ import QabScoreCard from 'mon-pix/components/module/element/qab/qab-score-card';
 import { htmlUnsafe } from '../../../../helpers/html-unsafe';
 import ModuleElement from '../module-element';
 
-export const NEXT_CARD_DELAY = 100;
+export const NEXT_CARD_DELAY = 2000;
 
 export default class ModuleQab extends ModuleElement {
   @tracked selectedOption = null;
@@ -61,6 +61,13 @@ export default class ModuleQab extends ModuleElement {
     window.setTimeout(() => this.goToNextCard(), NEXT_CARD_DELAY);
   }
 
+  @action
+  onRetry() {
+    this.currentStep = 'cards';
+    this.currentCardIndex = 0;
+    this.score = 0;
+  }
+
   get shouldDisplayCards() {
     return this.currentStep === 'cards';
   }
@@ -80,7 +87,7 @@ export default class ModuleQab extends ModuleElement {
             <QabCard @card={{this.currentCard}} @status={{this.currentCardStatus}} />
           {{/if}}
           {{#if this.shouldDisplayScore}}
-            <QabScoreCard @score={{this.score}} @total={{this.numberOfCards}} />
+            <QabScoreCard @score={{this.score}} @total={{this.numberOfCards}} @onRetry={{this.onRetry}} />
           {{/if}}
         </div>
         {{#if this.shouldDisplayCards}}
