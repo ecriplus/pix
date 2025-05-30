@@ -5,7 +5,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Les IA conversationnelles comme Le Chat, ChatGPT, Gemini ou encore DeepSeek, vous en avez déjà entendu parler. Mais, savez-vous comment on les utilise ? Le secret tient en un mot : prompt. Mais, c’est quoi au juste un prompt ? C'est ce que vous allez découvrir dans ce module.</p>",
+    "description": "<p>Les IA conversationnelles comme Le Chat, ChatGPT, Gemini ou encore DeepSeek, vous en avez déjà entendu parler. Mais, savez-vous comment on les utilise ? Le secret tient en un mot&nbsp;: prompt. Mais, c’est quoi au juste un prompt ? C'est ce que vous allez découvrir dans ce module.</p>",
     "duration": 10,
     "level": "Débutant",
     "objectives": [
@@ -21,6 +21,14 @@
       "type": "discovery",
       "title": "Accroche",
       "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "09245327-cd08-4874-b006-1018c3b6b419",
+            "type": "text",
+            "content": "<p>Gustave cherche un nom pour son association. Il demande conseil à son amie Maëlle. Découvrez leur discussion.</p>"
+          }
+        },
         {
           "type": "element",
           "element": {
@@ -41,7 +49,7 @@
           "element": {
             "id": "a89cbfef-8266-4bfd-a8d9-142999989c1b",
             "type": "text",
-            "content": "<p>Gustave a suivi le conseil de Maëlle. Il a demandé à une IA conversationnelle &nbsp;de lui donner des idées de noms pour son association. Découvrez ci-dessous sa discussion avec l’IA.</p>"
+            "content": "<p>Gustave a suivi le conseil de Maëlle. Il a demandé à une IA conversationnelle de lui donner des idées de noms pour son association. Voici sa discussion avec l’IA. Cliquez sur les différentes zones de la conversation pour en apprendre plus.</p>"
           }
         },
         {
@@ -57,14 +65,14 @@
           "element": {
             "id": "4cd2311c-6c89-4d04-9087-1b874a412882",
             "type": "qcu",
-            "instruction": "<p>Dans cette discussion, lequel parmi ces trois textes est le prompt ?</p>",
+            "instruction": "<p>Parmi les messages de cette discussion, lequel est le prompt ?</p>",
             "proposals": [
               {
                 "id": "1",
                 "content": "<p>Des idées de noms pour une association de yoga à roulettes ?</p>",
                 "feedback": {
                   "state": "<p>Bien vu !&nbsp;</p>",
-                  "diagnosis": "<p>En effet, le prompt c'est la question posée ou la consigne donnée à l'IA conversationnelle.</p>"
+                  "diagnosis": "<p>En effet, le prompt, c'est la question posée ou la consigne donnée à l'IA conversationnelle.</p>"
                 }
               },
               {
@@ -72,15 +80,15 @@
                 "content": "<p>Bien sûr, voici quelques idées de noms pour une association de yoga&nbsp;:</p><p>1. Yoga en mouvement</p><p>2. Roulez en Paix</p><p>3.&nbsp;Équilibre sur Roues</p><p>4. Yoga en Roue Libre</p>",
                 "feedback": {
                   "state": "<p>Et non !&nbsp;</p>",
-                  "diagnosis": "<p>C'est la réponse donnée par l'IA conversationnelle. Le prompt c'est la question posée ou la consigne donnée à l'IA conversationnelle.</p>"
+                  "diagnosis": "<p>C'est la réponse donnée par l'IA conversationnelle. Le prompt, c'est la question posée ou la consigne donnée à l'IA conversationnelle.</p>"
                 }
               },
               {
                 "id": "3",
-                "content": "<p>Ecrivez votre message ici.</p>",
+                "content": "<p>Écrivez votre message ici.</p>",
                 "feedback": {
                   "state": "<p>Et non !</p>",
-                  "diagnosis": "<p>C'est la zone de saisie, pour écrire les prompts ! Le prompt c'est la question posée ou la consigne donnée à l'IA conversationnelle.</p>"
+                  "diagnosis": "<p>C'est la zone pour écrire les prompts ! Le prompt, c'est la question posée ou la consigne donnée à l'IA conversationnelle.</p>"
                 }
               }
             ],
@@ -114,7 +122,7 @@
           "element": {
             "id": "7f1f3b24-7160-405c-8e88-fdd69b131ddf",
             "type": "text",
-            "content": "<p>Maintenant que vous savez vous repérer dans l’interface, nous allons voir comment écrire un prompt&nbsp;!📝</p>"
+            "content": "<p>Maintenant que vous savez vous repérer dans une conversation avec une IA, nous allons voir comment rédiger un prompt&nbsp;!📝</p>"
           }
         }
       ]
