@@ -1707,7 +1707,7 @@
       },
       "qab": {
         "correct-answer": "Correct antwoord",
-        "incorrect-answer": "Onjuist antwoord"
+        "incorrect-answer": "Onjuist antwoord",
         "retry": "Probeer het opnieuw",
         "your_score": "Je score : {score}/{totalScore}"
       },

@@ -1,5 +1,5 @@
-import { render } from '@1024pix/ember-testing-library';
-import { click, find } from '@ember/test-helpers';
+import { render, waitFor } from '@1024pix/ember-testing-library';
+import { click } from '@ember/test-helpers';
 import ModuleQabElement, { NEXT_CARD_DELAY } from 'mon-pix/components/module/element/qab/qab';
 import { module, test } from 'qunit';
 
@@ -102,6 +102,23 @@ module('Integration | Component | Module | QAB', function (hooks) {
         assert.dom(screen.getByRole('button', { name: 'Option B: Faux' })).hasClass('qab-proposal-button--selected');
         assert.dom(screen.getByRole('button', { name: 'Option B: Faux' })).isDisabled();
         assert.dom(screen.getByRole('status')).hasText('Mauvaise réponse.');
+      });
+    });
+
+    module('when user answers the last card', function () {
+      test('should display the score card', async function (assert) {
+        // given
+        const qabElement = _getQabElement();
+
+        // when
+        const screen = await render(<template><ModuleQabElement @element={{qabElement}} /></template>);
+        await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
+        await waitFor(() => screen.getByText('Les chiens ne transpirent pas.'), { timeout: NEXT_CARD_DELAY });
+        await click(await screen.findByRole('button', { name: 'Option A: Vrai' }, { timeout: NEXT_CARD_DELAY }));
+
+        // then
+        assert.dom(await screen.findByText('Votre score : 1/2', {}, { timeout: NEXT_CARD_DELAY })).exists();
+        assert.dom(await screen.findByRole('button', { name: 'Réessayer' }, { timeout: NEXT_CARD_DELAY })).exists();
       });
     });
   });

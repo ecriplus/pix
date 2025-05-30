@@ -2,16 +2,23 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import QabProposalButton from 'mon-pix/components/module/element/qab/proposal-button';
 import QabCard from 'mon-pix/components/module/element/qab/qab-card';
+import QabScoreCard from 'mon-pix/components/module/element/qab/qab-score-card';
 
 import { htmlUnsafe } from '../../../../helpers/html-unsafe';
 import ModuleElement from '../module-element';
 
-export const NEXT_CARD_DELAY = 2000;
+export const NEXT_CARD_DELAY = 100;
 
 export default class ModuleQab extends ModuleElement {
   @tracked selectedOption = null;
+  @tracked currentStep = 'cards'; // 'cards' | 'score'
   @tracked currentCardStatus = '';
   @tracked currentCardIndex = 0;
+  @tracked score = 0;
+
+  get numberOfCards() {
+    return this.element.cards.length;
+  }
 
   get currentCard() {
     return this.element.cards[this.currentCardIndex];
@@ -33,10 +40,12 @@ export default class ModuleQab extends ModuleElement {
 
   @action
   goToNextCard() {
-    if (this.currentCardIndex + 1 < this.element.cards.length) {
-      this.currentCardIndex++;
-      this.currentCardStatus = '';
-      this.selectedOption = null;
+    this.currentCardIndex = this.currentCardIndex + 1;
+    this.currentCardStatus = '';
+    this.selectedOption = null;
+
+    if (this.currentCardIndex >= this.numberOfCards) {
+      this.currentStep = 'score';
     }
   }
 
@@ -44,8 +53,20 @@ export default class ModuleQab extends ModuleElement {
   onSubmit(event) {
     event.preventDefault();
     this.selectedOption = event.submitter.value;
-    this.currentCardStatus = this.selectedOption === this.currentCard.solution ? 'success' : 'error';
+    this.currentCardStatus = 'error';
+    if (this.selectedOption === this.currentCard.solution) {
+      this.score++;
+      this.currentCardStatus = 'success';
+    }
     window.setTimeout(() => this.goToNextCard(), NEXT_CARD_DELAY);
+  }
+
+  get shouldDisplayCards() {
+    return this.currentStep === 'cards';
+  }
+
+  get shouldDisplayScore() {
+    return this.currentStep === 'score';
   }
 
   <template>
@@ -55,24 +76,31 @@ export default class ModuleQab extends ModuleElement {
           {{htmlUnsafe this.element.instruction}}
         </div>
         <div class="element-qab__cards">
-          <QabCard @card={{this.currentCard}} @status={{this.currentCardStatus}} />
+          {{#if this.shouldDisplayCards}}
+            <QabCard @card={{this.currentCard}} @status={{this.currentCardStatus}} />
+          {{/if}}
+          {{#if this.shouldDisplayScore}}
+            <QabScoreCard @score={{this.score}} @total={{this.numberOfCards}} />
+          {{/if}}
         </div>
-        <div class="element-qab__proposals">
-          <QabProposalButton
-            @text={{this.currentCard.proposalA}}
-            @option="A"
-            @isSolution={{this.isProposalSolution "A"}}
-            @isSelected={{this.isProposalSelected "A"}}
-            @isDisabled={{this.isAnswered}}
-          />
-          <QabProposalButton
-            @text={{this.currentCard.proposalB}}
-            @option="B"
-            @isSolution={{this.isProposalSolution "B"}}
-            @isSelected={{this.isProposalSelected "B"}}
-            @isDisabled={{this.isAnswered}}
-          />
-        </div>
+        {{#if this.shouldDisplayCards}}
+          <div class="element-qab__proposals">
+            <QabProposalButton
+              @text={{this.currentCard.proposalA}}
+              @option="A"
+              @isSolution={{this.isProposalSolution "A"}}
+              @isSelected={{this.isProposalSelected "A"}}
+              @isDisabled={{this.isAnswered}}
+            />
+            <QabProposalButton
+              @text={{this.currentCard.proposalB}}
+              @option="B"
+              @isSolution={{this.isProposalSolution "B"}}
+              @isSelected={{this.isProposalSelected "B"}}
+              @isDisabled={{this.isAnswered}}
+            />
+          </div>
+        {{/if}}
       </fieldset>
     </form>
   </template>

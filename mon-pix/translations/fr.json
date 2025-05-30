@@ -1718,7 +1718,7 @@
       },
       "qab": {
         "correct-answer": "Bonne réponse !",
-        "incorrect-answer": "Mauvaise réponse."
+        "incorrect-answer": "Mauvaise réponse.",
         "retry": "Réessayer",
         "your_score": "Votre score : {score}/{total}"
       },
