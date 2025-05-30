@@ -1,5 +1,11 @@
 # Pix Changelog
 
+# [5.123.0](https://github.com/1024pix/pix/compare/v5.122.0...v5.123.0) (2025-05-30)
+
+### :rocket: Amélioration
+
+- [#12400](https://github.com/1024pix/pix/pull/12400) Permettre de créer un référentiel cadre (PIX-18046).
+
 # [5.122.0](https://github.com/1024pix/pix/compare/v5.121.0...v5.122.0) (2025-05-29)
 
 ### :rocket: Amélioration
