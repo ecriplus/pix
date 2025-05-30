@@ -1719,6 +1719,8 @@
       "qab": {
         "correct-answer": "Correct answer",
         "incorrect-answer": "Incorrect answer"
+        "retry": "Retry",
+        "your_score": "Your score: {score}/{total}"
       },
       "qcm": {
         "direction": "Select several answers."

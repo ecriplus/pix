@@ -1704,6 +1704,8 @@
       "qab": {
         "correct-answer": "Respuesta correcta",
         "incorrect-answer": "Respuesta incorrecta"
+        "retry": "Volver a intentarlo",
+        "your_score": "Tu puntuación : {score}/{total}"
       },
       "qcm": {
         "direction": "Seleccione varias respuestas."

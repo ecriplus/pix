@@ -1,0 +1,25 @@
+@use 'pix-design-tokens/typography';
+
+.qab-score-card {
+  .qab-card__container {
+    flex-direction: column;
+    gap: var(--pix-spacing-4x);
+    background: var(--pix-primary-700);
+    border-color: var(--pix-primary-700);
+  }
+
+  &__title {
+    @extend %pix-title-m;
+
+    color: var(--pix-neutral-0);
+    font-weight: 900;
+    text-align: center;
+  }
+
+  &__retry-button {
+    padding: var(--pix-spacing-4x) var(--pix-spacing-10x);
+    font-weight: var(--pix-font-bold);
+    background: var(--pix-primary-10);
+    border-radius: var(--modulix-radius-s);
+  }
+}
