@@ -1,6 +1,8 @@
 import Joi from 'joi';
 
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
+import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
+import { ComplementaryCertificationKeys } from '../../shared/domain/models/ComplementaryCertificationKeys.js';
 import { complementaryCertificationController } from './complementary-certification-controller.js';
 
 const register = async function (server) {
@@ -54,6 +56,40 @@ const register = async function (server) {
         notes: [
           'Cette route est restreinte aux utilisateurs authentifiés avec le rôle Super Admin, Support et Métier',
           'Elle renvoie les profils cibles qui peuvent être attachés à un certification complémentaire.',
+        ],
+      },
+    },
+    {
+      method: 'POST',
+      path: '/api/admin/complementary-certifications/{complementaryCertificationKey}/consolidated-framework',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([securityPreHandlers.checkAdminMemberHasRoleSuperAdmin])(
+                request,
+                h,
+              ),
+            assign: 'hasRoleSuperAdmin',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            complementaryCertificationKey: Joi.string().valid(...Object.values(ComplementaryCertificationKeys)),
+          }),
+          payload: Joi.object({
+            data: {
+              attributes: {
+                tubeIds: Joi.array().items(identifiersType.tubeId).min(1).unique().required(),
+              },
+            },
+          }),
+        },
+        handler: complementaryCertificationController.createConsolidatedFramework,
+        tags: ['api', 'admin'],
+        notes: [
+          'Cette route est restreinte aux utilisateurs authentifiés avec le rôle Super Admin',
+          'Elle permet de créer un nouveau référentiel cadre pour une complémentaire à partir de sujets',
         ],
       },
     },
