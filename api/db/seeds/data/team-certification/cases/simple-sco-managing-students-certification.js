@@ -20,6 +20,8 @@ import {
 import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
 import { CommonPixCertifOrganization } from '../shared/common-organisation.js';
 import publishSessionWithValidatedCertification from '../tools/create-published-session-with-certification.js';
+import {SessionEnrolment} from '../../../../../src/certification/enrolment/domain/models/SessionEnrolment.js';
+import addSession from '../tools/create-session.js';
 
 /**
  * --- CERTIFICATION CASE ---
@@ -108,6 +110,23 @@ export class ScoManagingStudent {
     return certifiableUserService.certifiableUser;
   }
 
+  async #addReadyToStartSession({ certificationCenterMember, certificationCenter }) {
+    return addSession({
+      databaseBuilder: this.databaseBuilder,
+      createdByUserId: certificationCenterMember.user.id,
+      forceSessionId: STARTED_SCO_SESSION,
+      session: new SessionEnrolment({
+        certificationCenterId: certificationCenter.id,
+        address: 'Rennes',
+        room: '28D',
+        examiner: 'Jean Prea-demarrer',
+        date: '2024-01-30',
+        time: '14:30',
+        description: 'SCO session with candidates ready to start',
+      }),
+    });
+  }
+
   async create() {
     const { organization, organizationMember, organizationMembership } = await this.#addOrganization();
     const certificationCenter = await this.#addCertifCenter({ organizationMembership });
@@ -116,6 +135,8 @@ export class ScoManagingStudent {
     /**
      * 2. Create the certifiable user
      */
+
+    await this.#addReadyToStartSession({ certificationCenterMember: organizationMember, certificationCenter });
 
     const organizationLearner = this.databaseBuilder.factory.buildOrganizationLearner({
       userId: certifiableUser.id,
@@ -189,27 +210,6 @@ export class ScoManagingStudent {
       accessibilityAdjustmentNeeded: false,
       subscriptions: [Subscription.buildCore({ certificationCandidateId: null })],
       userId: certifiableUser.id,
-    });
-
-    /**
-     * 4. Initialize session with candidates ready to enter the certification
-     */
-
-    const startedScoSession = await enrolmentUseCases.createSession({
-      userId: organizationMember.id,
-      session: {
-        certificationCenterId: certificationCenter.id,
-        address: 'Rennes',
-        room: '28D',
-        examiner: 'Jean Prea-demarrer',
-        date: '2024-01-30',
-        time: '14:30',
-        description: 'SCO session with candidates ready to start',
-      },
-    });
-    await this.databaseBuilder.knex('sessions').where('id', startedScoSession.id).update({
-      id: STARTED_SCO_SESSION,
-      accessCode: 'AZERTY',
     });
 
     await enrolmentUseCases.addCandidateToSession({

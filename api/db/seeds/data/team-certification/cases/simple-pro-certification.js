@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 
 import { Candidate } from '../../../../../src/certification/enrolment/domain/models/Candidate.js';
+import { SessionEnrolment } from '../../../../../src/certification/enrolment/domain/models/SessionEnrolment.js';
 import { Subscription } from '../../../../../src/certification/enrolment/domain/models/Subscription.js';
 import { usecases as enrolmentUseCases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
 import { BILLING_MODES } from '../../../../../src/certification/shared/domain/constants.js';
@@ -20,6 +21,7 @@ import {
 import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
 import { CommonPixCertifOrganization } from '../shared/common-organisation.js';
 import publishSessionWithValidatedCertification from '../tools/create-published-session-with-certification.js';
+import addSession from '../tools/create-session.js';
 
 /**
  * --- CERTIFICATION CASE ---
@@ -38,6 +40,34 @@ import publishSessionWithValidatedCertification from '../tools/create-published-
 export class ProSeed {
   constructor({ databaseBuilder }) {
     this.databaseBuilder = databaseBuilder;
+  }
+
+  async create() {
+    const organizationMember = await this.#addOrganization();
+    const { certificationCenter, certificationCenterMember } = await this.#addCertifCenter({ organizationMember });
+    const certifiableUser = await this.#addCertifiableUser();
+
+    /**
+     * Session with candidat ready to start his certification
+     */
+    const sessionReadyToStart = await this.#addReadyToStartSession({ certificationCenterMember, certificationCenter });
+    await this.#addCandidateToSession({ pixAppUser: certifiableUser, session: sessionReadyToStart });
+
+    /**
+     * Session with a published certification
+     */
+    const sessionToPublish = await this.#addSessionToPublish({ certificationCenterMember, certificationCenter });
+    const candidateToPublish = await this.#addCandidateToSession({
+      pixAppUser: certifiableUser,
+      session: sessionToPublish,
+    });
+
+    await publishSessionWithValidatedCertification({
+      databaseBuilder: this.databaseBuilder,
+      sessionId: PUBLISHED_PRO_SESSION,
+      candidateId: candidateToPublish.id,
+      pixScoreTarget: 250,
+    });
   }
 
   async #addOrganization() {
@@ -59,12 +89,12 @@ export class ProSeed {
       complementaryCertificationIds: [],
     });
 
-    await teamUsecases.createCertificationCenterMembershipByEmail({
+    const certificationCenterMember = await teamUsecases.createCertificationCenterMembershipByEmail({
       certificationCenterId: certificationCenter.id,
       email: organizationMember.email,
     });
 
-    return certificationCenter;
+    return { certificationCenter, certificationCenterMember };
   }
 
   async #addCertifiableUser() {
@@ -72,38 +102,12 @@ export class ProSeed {
     return certifiableUserService.certifiableUser;
   }
 
-  async create() {
-    const organizationMember = await this.#addOrganization();
-    const certificationCenter = await this.#addCertifCenter({ organizationMember });
-    const certifiableUser = await this.#addCertifiableUser();
-
-    await this.databaseBuilder.commit();
-
-    // Transform this user into a certification candidate
-    const candidate = new Candidate({
-      authorizedToStart: true,
-      firstName: certifiableUser.firstName,
-      lastName: certifiableUser.lastName,
-      sex: 'F',
-      birthdate: new Date('2000-10-30'),
-      birthCountry: 'France',
-      birthINSEECode: '75115',
-      email: certifiableUser.email,
-      isLinked: true,
-      hasSeenCertificationInstructions: false,
-      accessibilityAdjustmentNeeded: false,
-      subscriptions: [Subscription.buildCore({ certificationCandidateId: null })],
-      userId: certifiableUser.id,
-      billingMode: BILLING_MODES.FREE,
-    });
-
-    /**
-     * 4. Initialize session with candidates ready to enter the certification
-     */
-
-    const startedProSession = await enrolmentUseCases.createSession({
-      userId: organizationMember.id,
-      session: {
+  async #addReadyToStartSession({ certificationCenterMember, certificationCenter }) {
+    return addSession({
+      databaseBuilder: this.databaseBuilder,
+      createdByUserId: certificationCenterMember.user.id,
+      forceSessionId: STARTED_PRO_SESSION,
+      session: new SessionEnrolment({
         certificationCenterId: certificationCenter.id,
         address: 'Lyon',
         room: '69A',
@@ -111,26 +115,16 @@ export class ProSeed {
         date: '2024-02-11',
         time: '09:10',
         description: 'PRO session with candidate ready to start',
-      },
+      }),
     });
-    await this.databaseBuilder.knex('sessions').where('id', startedProSession.id).update({
-      id: STARTED_PRO_SESSION,
-      accessCode: 'AZERTY',
-    });
+  }
 
-    await enrolmentUseCases.addCandidateToSession({
-      sessionId: STARTED_PRO_SESSION,
-      candidate: new Candidate(candidate), // Warning: usecase modifies the entry model...
-      normalizeStringFnc: normalize,
-    });
-
-    /**
-     * 5. Initialize session that have been published
-     */
-
-    const publishedScoSession = await enrolmentUseCases.createSession({
-      userId: organizationMember.id,
-      session: {
+  async #addSessionToPublish({ certificationCenterMember, certificationCenter }) {
+    return addSession({
+      databaseBuilder: this.databaseBuilder,
+      createdByUserId: certificationCenterMember.user.id,
+      forceSessionId: PUBLISHED_PRO_SESSION,
+      session: new SessionEnrolment({
         certificationCenterId: certificationCenter.id,
         address: 'Lyon',
         room: '69A',
@@ -138,24 +132,34 @@ export class ProSeed {
         date: dayjs().format('YYYY-MM-DD'),
         time: '16:30',
         description: 'PRO session with published results',
-      },
+      }),
     });
-    await this.databaseBuilder.knex('sessions').where('id', publishedScoSession.id).update({
-      id: PUBLISHED_PRO_SESSION,
-      accessCode: 'AZERTY',
+  }
+
+  async #addCandidateToSession({ pixAppUser, session }) {
+    const candidate = new Candidate({
+      authorizedToStart: true,
+      firstName: pixAppUser.firstName,
+      lastName: pixAppUser.lastName,
+      sex: 'F',
+      birthdate: new Date('2000-10-30'),
+      birthCountry: 'France',
+      birthINSEECode: '75115',
+      email: pixAppUser.email,
+      isLinked: true,
+      hasSeenCertificationInstructions: false,
+      accessibilityAdjustmentNeeded: false,
+      subscriptions: [Subscription.buildCore({ certificationCandidateId: null })],
+      userId: pixAppUser.id,
+      billingMode: BILLING_MODES.FREE,
     });
 
-    const publishedScoCandidateId = await enrolmentUseCases.addCandidateToSession({
-      sessionId: PUBLISHED_PRO_SESSION,
+    const candidateId = await enrolmentUseCases.addCandidateToSession({
+      sessionId: session.id,
       candidate: new Candidate(candidate), // Warning: usecase modifies the entry model...
       normalizeStringFnc: normalize,
     });
 
-    await publishSessionWithValidatedCertification({
-      databaseBuilder: this.databaseBuilder,
-      sessionId: PUBLISHED_PRO_SESSION,
-      candidateId: publishedScoCandidateId,
-      pixScoreTarget: 250,
-    });
+    return enrolmentUseCases.getCandidate({ certificationCandidateId: candidateId });
   }
 }
