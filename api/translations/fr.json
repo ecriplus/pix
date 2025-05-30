@@ -157,6 +157,9 @@
   "certification": {
     "attestation": {
       "v3": {
+        "complementary-content": {
+          "title": "Certification complémentaire obtenue :"
+        },
         "main-content": {
           "birth": "né(e) le : {birthdate} à {birthplace}",
           "certification-center": "Centre de certification : {certificationCenter}",
