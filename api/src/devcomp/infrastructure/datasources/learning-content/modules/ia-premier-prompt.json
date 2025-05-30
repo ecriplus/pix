@@ -5,13 +5,13 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Les IA conversationnelles comme Le Chat, ChatGPT, Gemini, DeepSeek, etc. vous en avez déjà entendu parler, mais savez vous comment on l’utilise ? Le secret tient en un mot&nbsp;: prompt. Mais c’est quoi au juste ? C'est ce qu'on va découvrir dans ce module.</p>",
+    "description": "<p>Les IA conversationnelles comme Le Chat, ChatGPT, Gemini ou encore DeepSeek, vous en avez déjà entendu parler. Mais, savez-vous comment on les utilise ? Le secret tient en un mot : prompt. Mais, c’est quoi au juste un prompt ? C'est ce que vous allez découvrir dans ce module.</p>",
     "duration": 10,
     "level": "Débutant",
     "objectives": [
       "<p>Savoir ce qu’est un prompt</p>",
       "<p>Formuler des prompts clairs et précis pour des tâches de base</p>",
-      "<p>Vérifier la réponse de l’IA et lui demander des précisions si nécessaire</p>"
+      "<p>Vérifier la réponse de l’IA conversationnelle et lui demander des précisions si nécessaire</p>"
     ],
     "tabletSupport": "comfortable"
   },
