@@ -1,4 +1,4 @@
-import { findCertificationAttestationsForDivision } from '../../../../../../src/certification/results/domain/usecases/find-certification-attestations-for-division.js';
+import { findCertificatesForDivision } from '../../../../../../src/certification/results/domain/usecases/find-certificates-for-division.js';
 import { NoCertificateForDivisionError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
@@ -32,7 +32,7 @@ describe('Unit | UseCase | find-certification-attestations-for-division', functi
       .resolves([certificationAttestation1, certificationAttestation2]);
 
     // when
-    const actualCertificationAttestations = await findCertificationAttestationsForDivision({
+    const actualCertificationAttestations = await findCertificatesForDivision({
       organizationId: 1234,
       division: '3b',
       certificateRepository,
@@ -65,7 +65,7 @@ describe('Unit | UseCase | find-certification-attestations-for-division', functi
         .resolves([]);
 
       // when
-      const error = await catchErr(findCertificationAttestationsForDivision)({
+      const error = await catchErr(findCertificatesForDivision)({
         organizationId: 1234,
         division: '3b',
         certificateRepository,

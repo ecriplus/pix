@@ -174,7 +174,7 @@ const downloadDivisionCertificates = async function (
   const { i18n } = request;
   const { division, isFrenchDomainExtension } = request.query;
 
-  const certificates = await usecases.findCertificationAttestationsForDivision({
+  const certificates = await usecases.findCertificatesForDivision({
     organizationId,
     division,
   });
