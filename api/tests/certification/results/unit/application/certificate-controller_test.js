@@ -34,9 +34,9 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           sinon.stub(usecases, 'getCertificationCourseByVerificationCode');
           usecases.getCertificationCourseByVerificationCode.resolves(certificationCourse);
 
-          sinon.stub(usecases, 'getCertificationAttestation');
+          sinon.stub(usecases, 'getCertificate');
           const certificate = Symbol('certificate');
-          usecases.getCertificationAttestation.resolves(certificate);
+          usecases.getCertificate.resolves(certificate);
 
           sinon.stub(usecases, 'getShareableCertificate');
 
@@ -50,7 +50,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           expect(usecases.getCertificationCourseByVerificationCode).calledOnceWithExactly({
             verificationCode: 'P-123456BB',
           });
-          expect(usecases.getCertificationAttestation).calledOnceWithExactly({
+          expect(usecases.getCertificate).calledOnceWithExactly({
             certificationCourseId: certificationCourse.getId(),
             locale,
           });
@@ -70,7 +70,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
           sinon.stub(usecases, 'getShareableCertificate');
           sinon.stub(usecases, 'getCertificationCourseByVerificationCode');
-          sinon.stub(usecases, 'getCertificationAttestation');
+          sinon.stub(usecases, 'getCertificate');
           usecases.getShareableCertificate
             .withArgs({ verificationCode: 'P-123456BB', locale })
             .resolves(Symbol('certificate'));
@@ -92,7 +92,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
             certificationCourseId: certificationCourse.getId(),
             locale,
           });
-          expect(usecases.getCertificationAttestation).to.not.have.been.calledOnce;
+          expect(usecases.getCertificate).to.not.have.been.calledOnce;
         });
       });
     });
@@ -107,7 +107,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         const certificateSerializerStub = { serialize: sinon.stub() };
         sinon.stub(usecases, 'getShareableCertificate');
         sinon.stub(usecases, 'getCertificationCourseByVerificationCode');
-        sinon.stub(usecases, 'getCertificationAttestation');
+        sinon.stub(usecases, 'getCertificate');
         usecases.getShareableCertificate
           .withArgs({ verificationCode: 'P-123456BB', locale })
           .resolves(Symbol('certificate'));
@@ -129,7 +129,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           certificationCourseId: certificationCourse.getId(),
           locale,
         });
-        expect(usecases.getCertificationAttestation).to.not.have.been.calledOnce;
+        expect(usecases.getCertificate).to.not.have.been.calledOnce;
       });
     });
   });
@@ -210,8 +210,8 @@ describe('Certification | Results | Unit | Application | certificate-controller'
             .withArgs({ certificationCourseId })
             .resolves(certificationCourse);
 
-          sinon.stub(usecases, 'getCertificationAttestation');
-          usecases.getCertificationAttestation.withArgs({ certificationCourseId, locale }).resolves(certificate);
+          sinon.stub(usecases, 'getCertificate');
+          usecases.getCertificate.withArgs({ certificationCourseId, locale }).resolves(certificate);
 
           const certificateSerializerStub = {
             serialize: sinon.stub(),
@@ -407,7 +407,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
 
         const v3CertificationAttestation = domainBuilder.certification.results.buildCertificate();
         sinon
-          .stub(usecases, 'getCertificationAttestation')
+          .stub(usecases, 'getCertificate')
           .withArgs({ certificationCourseId: request.params.certificationCourseId })
           .resolves(v3CertificationAttestation);
 
@@ -461,7 +461,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         const filename = 'certification-pix-20181003.pdf';
 
         sinon
-          .stub(usecases, 'getCertificationAttestation')
+          .stub(usecases, 'getCertificate')
           .withArgs({ certificationCourseId: request.params.certificationCourseId })
           .resolves(certificationAttestation);
 

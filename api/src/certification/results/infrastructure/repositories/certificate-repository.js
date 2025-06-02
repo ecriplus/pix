@@ -17,7 +17,7 @@ import { CertifiedBadge } from '../../domain/read-models/CertifiedBadge.js';
 import * as competenceTreeRepository from './competence-tree-repository.js';
 
 const findByDivisionForScoIsManagingStudentsOrganization = async function ({ organizationId, division }) {
-  const certificationCourseDTOs = await _selectCertificationAttestations()
+  const certificationCourseDTOs = await _selectCertificationCourseDTOs()
     .select({ organizationLearnerId: 'view-active-organization-learners.id' })
     .innerJoin('certification-candidates', function () {
       this.on({ 'certification-candidates.sessionId': 'certification-courses.sessionId' }).andOn({
@@ -55,8 +55,8 @@ const findByDivisionForScoIsManagingStudentsOrganization = async function ({ org
   );
 };
 
-const getCertificationAttestation = async function ({ certificationCourseId, locale }) {
-  const certificationCourseDTO = await _selectCertificationAttestations()
+const getCertificate = async function ({ certificationCourseId, locale }) {
+  const certificationCourseDTO = await _selectCertificationCourseDTOs()
     .where('certification-courses.id', '=', certificationCourseId)
     .groupBy('certification-courses.id', 'sessions.id', 'assessment-results.id')
     .first();
@@ -129,12 +129,12 @@ const getShareableCertificate = async function ({ certificationCourseId, locale 
 export {
   findByDivisionForScoIsManagingStudentsOrganization,
   findPrivateCertificatesByUserId,
-  getCertificationAttestation,
+  getCertificate,
   getPrivateCertificate,
   getShareableCertificate,
 };
 
-function _selectCertificationAttestations() {
+function _selectCertificationCourseDTOs() {
   // isCancelled will be removed
   return _getCertificateQuery()
     .select({

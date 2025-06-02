@@ -54,7 +54,7 @@ async function main() {
     const certificationAttestations = compact(
       await PromiseUtils.mapSeries(certificationCourses, async (certificationCourse) => {
         try {
-          return await certificateRepository.getCertificationAttestation({
+          return await certificateRepository.getCertificate({
             certificationCourseId: certificationCourse.getId(),
           });
         } catch (error) {
