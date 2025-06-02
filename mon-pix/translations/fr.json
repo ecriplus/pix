@@ -432,7 +432,7 @@
         },
         "send-email-confirmation": {
           "check-spam": "Si vous ne voyez pas cet e-mail, vérifiez vos courriers indésirables.",
-          "return": "Retour",
+          "return": "Revenir vers Pix",
           "send-email": "Nous venons de vous adresser un mail qui vous permettra de choisir un mot de passe. Vous pouvez consulter dès maintenant votre messagerie.",
           "title": "Récupération de votre compte Pix"
         },

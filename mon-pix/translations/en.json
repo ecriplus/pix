@@ -432,7 +432,7 @@
         },
         "send-email-confirmation": {
           "check-spam": "If you don't see this e-mail, check your spam folder.",
-          "return": "Back",
+          "return": "Back to Pix",
           "send-email": "We have just sent you an email to enable you to choose a password. You can now check your mailbox.",
           "title": "Recovering your Pix account"
         },

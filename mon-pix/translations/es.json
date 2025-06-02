@@ -436,7 +436,7 @@
         },
         "send-email-confirmation": {
           "check-spam": "Si no ves este correo electrónico, comprueba tu carpeta de correo no deseado.",
-          "return": "Volver",
+          "return": "Volver a Pix",
           "send-email": "Acabamos de enviarte un correo electrónico para que puedas elegir una contraseña. Ya puedes consultar tu buzón.",
           "title": "Restablecimiento de tu cuenta Pix"
         },
