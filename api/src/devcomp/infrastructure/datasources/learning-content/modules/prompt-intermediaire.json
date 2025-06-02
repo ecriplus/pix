@@ -332,7 +332,7 @@
           "element": {
             "id": "c4a6a0a4-bbc8-4462-9098-af1e9d453cf3",
             "type": "text",
-            "content": "<p>Sans indication, l'IA choisira elle-même un format, qui peut ne pas correspondre &nbsp; à ce que vous attendez.</p><p>Préciser le format attendu dans le prompt permet de gagner beaucoup de temps&nbsp;:&nbsp; </p><p>il peut s’agir d’un texte, d’un tableau, d’une liste, d’un plan détaillé… </p><p>On peut aussi préciser des contraintes dans ce format, par exemple&nbsp;:&nbsp; </p><ul><li>un texte d’une longueur maximale de 10 lignes, </li><li>un plan détaillé en précisant la structure, le nombre de parties et le titre.</li></ul><p>Bon à savoir&nbsp;: Vous pouvez aussi demander à l’IA de partir d’un exemple et de le reproduire.<br><br></p>"
+            "content": "<p>Sans indication, l'IA choisira elle-même un format, qui peut ne pas correspondre&nbsp;à ce que vous attendez.&nbsp;🤔​</p><p>Préciser le <strong>format</strong> attendu dans le prompt permet de gagner beaucoup de temps&nbsp;:&nbsp; </p><p>il peut s’agir d’un <strong>texte</strong>, d’un <strong>tableau</strong>, d’une <strong>liste</strong>, d’un <strong>plan détaillé</strong>… </p><p>On peut aussi préciser des <strong>contraintes </strong>dans ce format, par exemple&nbsp;:&nbsp; </p><ul><li>un texte d’une <strong>longueur maximale</strong> de 10 lignes, </li><li>un plan détaillé <strong>en précisant la structure</strong>, le nombre de parties et le titre.</li></ul><p>💡Bon à savoir&nbsp;: Vous pouvez aussi demander à l’IA de partir d’un <strong>exemple </strong>et de le reproduire.<br><br></p>"
           }
         }
       ]
