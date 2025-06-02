@@ -21,6 +21,7 @@ import * as userValidator from '../../../shared/domain/validators/user-validator
 import { httpAgent } from '../../../shared/infrastructure/http-agent.js';
 import { adminMemberRepository } from '../../../shared/infrastructure/repositories/admin-member.repository.js';
 import * as organizationLearnerRepository from '../../../shared/infrastructure/repositories/organization-learner-repository.js';
+import * as organizationRepository from '../../../shared/infrastructure/repositories/organization-repository.js';
 import * as userLoginRepository from '../../../shared/infrastructure/repositories/user-login-repository.js';
 import * as codeUtils from '../../../shared/infrastructure/utils/code-utils.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
@@ -76,6 +77,7 @@ const repositories = {
   membershipRepository,
   oidcProviderRepository,
   organizationLearnerRepository,
+  organizationRepository,
   prescriptionOrganizationLearnerRepository,
   privacyUsersApiRepository,
   refreshTokenRepository,

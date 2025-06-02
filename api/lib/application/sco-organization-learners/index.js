@@ -8,8 +8,8 @@ import {
   UnprocessableEntityError,
 } from '../../../src/shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../src/shared/application/security-pre-handlers.js';
-import { identifiersType, studentIdentifierType } from '../../../src/shared/domain/types/identifiers-type.js';
-import { scoOrganizationLearnerController } from './sco-organization-learner-controller.js';
+import { identifiersType } from '../../../src/shared/domain/types/identifiers-type.js';
+import { libScoOrganizationLearnerController } from './sco-organization-learner-controller.js';
 
 const register = async function (server) {
   server.route([
@@ -18,7 +18,7 @@ const register = async function (server) {
       path: '/api/sco-organization-learners/possibilities',
       config: {
         auth: false,
-        handler: scoOrganizationLearnerController.generateUsername,
+        handler: libScoOrganizationLearnerController.generateUsername,
         validate: {
           options: {
             allowUnknown: true,
@@ -54,7 +54,7 @@ const register = async function (server) {
             assign: 'belongsToScoOrganizationAndManageStudents',
           },
         ],
-        handler: scoOrganizationLearnerController.updatePassword,
+        handler: libScoOrganizationLearnerController.updatePassword,
         validate: {
           options: {
             allowUnknown: true,
@@ -91,7 +91,7 @@ const register = async function (server) {
             assign: 'belongsToScoOrganizationAndManageStudents',
           },
         ],
-        handler: scoOrganizationLearnerController.batchGenerateOrganizationLearnersUsernameWithTemporaryPassword,
+        handler: libScoOrganizationLearnerController.batchGenerateOrganizationLearnersUsernameWithTemporaryPassword,
         validate: {
           options: {
             allowUnknown: true,
@@ -128,7 +128,7 @@ const register = async function (server) {
             assign: 'belongsToScoOrganizationAndManageStudents',
           },
         ],
-        handler: scoOrganizationLearnerController.generateUsernameWithTemporaryPassword,
+        handler: libScoOrganizationLearnerController.generateUsernameWithTemporaryPassword,
         validate: {
           options: {
             allowUnknown: true,
@@ -145,31 +145,6 @@ const register = async function (server) {
         notes: [
           "- Génère un identifiant pour l'élève avec un mot de passe temporaire \n" +
             "- La demande de génération d'identifiant doit être effectuée par un membre de l'organisation à laquelle appartient l'élève.",
-        ],
-        tags: ['api', 'sco-organization-learners'],
-      },
-    },
-    {
-      method: 'POST',
-      path: '/api/sco-organization-learners/account-recovery',
-      config: {
-        auth: false,
-        handler: scoOrganizationLearnerController.checkScoAccountRecovery,
-        validate: {
-          payload: Joi.object({
-            data: {
-              attributes: {
-                'first-name': Joi.string().empty(Joi.string().regex(/^\s*$/)).required(),
-                'last-name': Joi.string().empty(Joi.string().regex(/^\s*$/)).required(),
-                'ine-ina': studentIdentifierType,
-                birthdate: Joi.date().format('YYYY-MM-DD').required(),
-              },
-            },
-          }).options({ allowUnknown: true }),
-        },
-        notes: [
-          "- Recherche d'un ancien élève par son ine/ina, prénom, nom, date de naissance \n" +
-            '- On renvoie les informations permettant de récupérer son compte Pix.',
         ],
         tags: ['api', 'sco-organization-learners'],
       },

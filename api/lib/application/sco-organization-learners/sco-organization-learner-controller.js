@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 
-import * as studentInformationForAccountRecoverySerializer from '../../../src/identity-access-management/infrastructure/serializers/jsonapi/student-information-for-account-recovery.serializer.js';
 import * as scoOrganizationLearnerSerializer from '../../../src/prescription/learner-management/infrastructure/serializers/jsonapi/sco-organization-learner-serializer.js';
 import { DomainTransaction } from '../../../src/shared/domain/DomainTransaction.js';
 import { usecases } from '../../domain/usecases/index.js';
@@ -62,24 +61,6 @@ const generateUsernameWithTemporaryPassword = async function (
   return h.response(dependencies.scoOrganizationLearnerSerializer.serializeCredentialsForDependent(result)).code(200);
 };
 
-const checkScoAccountRecovery = async function (
-  request,
-  h,
-  dependencies = { studentInformationForAccountRecoverySerializer },
-) {
-  const studentInformation = await dependencies.studentInformationForAccountRecoverySerializer.deserialize(
-    request.payload,
-  );
-
-  const studentInformationForAccountRecovery = await usecases.checkScoAccountRecovery({
-    studentInformation,
-  });
-
-  return h.response(
-    dependencies.studentInformationForAccountRecoverySerializer.serialize(studentInformationForAccountRecovery),
-  );
-};
-
 const batchGenerateOrganizationLearnersUsernameWithTemporaryPassword = async function (request, h) {
   const payload = request.payload.data.attributes;
   const userId = request.auth.credentials.userId;
@@ -106,12 +87,11 @@ const batchGenerateOrganizationLearnersUsernameWithTemporaryPassword = async fun
     .header('Content-Disposition', `attachment; filename=${generatedCsvContentFileName}`);
 };
 
-const scoOrganizationLearnerController = {
+const libScoOrganizationLearnerController = {
   generateUsername,
   updatePassword,
   generateUsernameWithTemporaryPassword,
-  checkScoAccountRecovery,
   batchGenerateOrganizationLearnersUsernameWithTemporaryPassword,
 };
 
-export { scoOrganizationLearnerController };
+export { libScoOrganizationLearnerController };
