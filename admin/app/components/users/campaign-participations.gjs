@@ -139,7 +139,7 @@ export default class CampaignParticipation extends Component {
     {{/if}}
 
     <ConfirmPopup
-      @message="Vous êtes sur le point de supprimer la ou les participation(s) de {{this.participationToDelete.organizationLearnerFullName}} (y compris celles améliorées), celle-ci ne sera plus visible ni comprise dans les statistiques de la campagne de Pix Orga. Le participant pourra terminer son parcours mais ne pourra plus envoyer ses résultats. Il ne pourra pas non plus participer de nouveau à cette campagne."
+      @message="Vous êtes sur le point de supprimer la ou les participation(s) de {{this.participationToDelete.organizationLearnerFullName}} (y compris celles améliorées), celle-ci ne sera plus visible ni comprise dans les statistiques de la campagne de Pix Orga. Le participant ne pourra plus terminer son parcours, ni envoyer ses résultats. Il pourra de nouveau participer à cette campagne."
       @title="Supprimer cette participation ?"
       @submitTitle="Oui, je supprime"
       @submitButtonType="danger"
