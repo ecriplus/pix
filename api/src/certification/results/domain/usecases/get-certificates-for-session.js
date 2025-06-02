@@ -4,18 +4,14 @@ import isEmpty from 'lodash/isEmpty.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
 
-const getCertificationAttestationsForSession = async function ({
-  sessionId,
-  certificateRepository,
-  certificationCourseRepository,
-}) {
+const getCertificatesForSession = async function ({ sessionId, certificateRepository, certificationCourseRepository }) {
   const certificationCourses = await certificationCourseRepository.findCertificationCoursesBySessionId({ sessionId });
 
   if (isEmpty(certificationCourses)) {
     throw new NotFoundError();
   }
 
-  const certificationAttestations = compact(
+  const certificates = compact(
     await PromiseUtils.mapSeries(certificationCourses, async (certificationCourse) => {
       try {
         return await certificateRepository.getCertificate({
@@ -29,11 +25,11 @@ const getCertificationAttestationsForSession = async function ({
     }),
   );
 
-  if (isEmpty(certificationAttestations)) {
-    throw new NotFoundError('No certification attestations found');
+  if (isEmpty(certificates)) {
+    throw new NotFoundError('No certificats found');
   }
 
-  return certificationAttestations;
+  return certificates;
 };
 
-export { getCertificationAttestationsForSession };
+export { getCertificatesForSession };
