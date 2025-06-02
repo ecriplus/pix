@@ -6,7 +6,7 @@ import { usecases } from '../../domain/usecases/index.js';
 
 const generateUsername = async function (request, h, dependencies = { scoOrganizationLearnerSerializer }) {
   const payload = request.payload.data.attributes;
-  const { 'campaign-code': campaignCode } = payload;
+  const { 'organization-id': organizationId } = payload;
 
   const studentInformation = {
     firstName: payload['first-name'],
@@ -14,12 +14,11 @@ const generateUsername = async function (request, h, dependencies = { scoOrganiz
     birthdate: payload['birthdate'],
   };
 
-  const username = await usecases.generateUsername({ campaignCode, studentInformation });
+  const username = await usecases.generateUsername({ organizationId, studentInformation });
 
   const scoOrganizationLearner = {
     ...studentInformation,
     username,
-    campaignCode,
   };
 
   return h

@@ -26,10 +26,10 @@ const register = async function (server) {
           payload: Joi.object({
             data: {
               attributes: {
-                'first-name': Joi.string().empty(Joi.string().regex(/^\s*$/)).required(),
-                'last-name': Joi.string().empty(Joi.string().regex(/^\s*$/)).required(),
+                'first-name': Joi.string().trim().empty(null).required(),
+                'last-name': Joi.string().trim().empty(null).required(),
                 birthdate: Joi.date().format('YYYY-MM-DD').raw().required(),
-                'campaign-code': Joi.string().empty(Joi.string().regex(/^\s*$/)).required(),
+                'organization-id': Joi.number().empty(null).required(),
               },
             },
           }),

@@ -1,6 +1,5 @@
 import { usecases } from '../../../../lib/domain/usecases/index.js';
 import {
-  CampaignCodeError,
   OrganizationLearnerAlreadyLinkedToUserError,
   OrganizationLearnerNotFound,
 } from '../../../../src/shared/domain/errors.js';
@@ -13,7 +12,6 @@ describe('Unit | UseCase | generate-username', function () {
   const organizationId = 1;
   const organizationLearnerId = 1;
 
-  let campaignRepository;
   let userRepository;
   let organizationLearnerRepository;
   let studentRepository;
@@ -21,13 +19,10 @@ describe('Unit | UseCase | generate-username', function () {
   let obfuscationService;
   let userReconciliationService;
 
-  let campaignCode;
   let studentInformation;
   let organizationLearner;
 
   beforeEach(function () {
-    campaignCode = 'RESTRICTD';
-
     organizationLearner = domainBuilder.buildOrganizationLearner({ organizationId, id: organizationLearnerId });
     studentInformation = {
       id: 1,
@@ -36,9 +31,6 @@ describe('Unit | UseCase | generate-username', function () {
       birthdate: '1992-02-02',
     };
 
-    campaignRepository = {
-      getByCode: sinon.stub(),
-    };
     userRepository = {
       getForObfuscation: sinon.stub(),
     };
@@ -55,32 +47,6 @@ describe('Unit | UseCase | generate-username', function () {
       findMatchingCandidateIdForGivenUser: sinon.stub(),
       createUsernameByUser: sinon.stub(),
     };
-
-    campaignRepository.getByCode
-      .withArgs(campaignCode)
-      .resolves(domainBuilder.buildCampaign({ organization: { id: organizationId } }));
-  });
-
-  context('When there is no campaign with the given code', function () {
-    it('should throw a campaign code error', async function () {
-      // given
-      campaignRepository.getByCode.withArgs(campaignCode).resolves(null);
-
-      // when
-      const result = await catchErr(generateUsername)({
-        studentInformation,
-        campaignCode,
-        campaignRepository,
-        organizationLearnerRepository,
-        userReconciliationService,
-        obfuscationService,
-        userRepository,
-        studentRepository,
-      });
-
-      // then
-      expect(result).to.be.instanceof(CampaignCodeError);
-    });
   });
 
   context('When no organizationLearner found matching organization and birthdate', function () {
@@ -91,8 +57,7 @@ describe('Unit | UseCase | generate-username', function () {
       // when
       const result = await catchErr(generateUsername)({
         studentInformation,
-        campaignCode,
-        campaignRepository,
+        organizationId,
         organizationLearnerRepository,
         userReconciliationService,
         obfuscationService,
@@ -117,8 +82,7 @@ describe('Unit | UseCase | generate-username', function () {
       // when
       const result = await catchErr(generateUsername)({
         studentInformation,
-        campaignCode,
-        campaignRepository,
+        organizationId,
         organizationLearnerRepository,
         userReconciliationService,
         obfuscationService,
@@ -150,8 +114,7 @@ describe('Unit | UseCase | generate-username', function () {
         // when
         const result = await catchErr(generateUsername)({
           studentInformation,
-          campaignCode,
-          campaignRepository,
+          organizationId,
           organizationLearnerRepository,
           userReconciliationService,
           obfuscationService,
@@ -184,8 +147,7 @@ describe('Unit | UseCase | generate-username', function () {
         // when
         const result = await catchErr(generateUsername)({
           studentInformation,
-          campaignCode,
-          campaignRepository,
+          organizationId,
           organizationLearnerRepository,
           userReconciliationService,
           obfuscationService,
@@ -218,8 +180,7 @@ describe('Unit | UseCase | generate-username', function () {
         // when
         const result = await catchErr(generateUsername)({
           studentInformation,
-          campaignCode,
-          campaignRepository,
+          organizationId,
           organizationLearnerRepository,
           userReconciliationService,
           obfuscationService,
@@ -255,8 +216,7 @@ describe('Unit | UseCase | generate-username', function () {
         // when
         const result = await catchErr(generateUsername)({
           studentInformation,
-          campaignCode,
-          campaignRepository,
+          organizationId,
           organizationLearnerRepository,
           userReconciliationService,
           obfuscationService,
@@ -290,8 +250,7 @@ describe('Unit | UseCase | generate-username', function () {
         // when
         const result = await catchErr(generateUsername)({
           studentInformation,
-          campaignCode,
-          campaignRepository,
+          organizationId,
           organizationLearnerRepository,
           userReconciliationService,
           obfuscationService,
@@ -325,8 +284,7 @@ describe('Unit | UseCase | generate-username', function () {
         // when
         const result = await catchErr(generateUsername)({
           studentInformation,
-          campaignCode,
-          campaignRepository,
+          organizationId,
           organizationLearnerRepository,
           userReconciliationService,
           obfuscationService,
@@ -358,8 +316,7 @@ describe('Unit | UseCase | generate-username', function () {
       // when
       await generateUsername({
         studentInformation,
-        campaignCode,
-        campaignRepository,
+        organizationId,
         organizationLearnerRepository,
         userReconciliationService,
         obfuscationService,

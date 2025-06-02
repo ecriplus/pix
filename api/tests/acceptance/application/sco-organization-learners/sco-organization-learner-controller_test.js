@@ -19,9 +19,6 @@ describe('Acceptance | Controller | sco-organization-learners', function () {
         isManagingStudents: true,
         type: 'SCO',
       });
-      const campaignCode = databaseBuilder.factory.buildCampaign({
-        organizationId: organization.id,
-      }).code;
       const user = databaseBuilder.factory.buildUser();
       const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
         organizationId: organization.id,
@@ -40,7 +37,7 @@ describe('Acceptance | Controller | sco-organization-learners', function () {
         payload: {
           data: {
             attributes: {
-              'campaign-code': campaignCode,
+              'organization-id': organization.id,
               'first-name': organizationLearner.firstName,
               'last-name': organizationLearner.lastName,
               birthdate: organizationLearner.birthdate,

@@ -67,6 +67,11 @@ export default class AccessRoute extends Route {
     return (
       campaign.isRestricted &&
       campaign.organizationType === 'SCO' &&
+      /**  Two types of reconciliation exist : one with legacy import system and one with generic import feature.
+       * Here, we want to use the legacy one for SCO users. In legacy import system, there are no reconciliation fields configuration (there are always the same).
+       * Backend side, we check if reconciliation fields have been configured thanks to isReconciliationRequired variable.
+       * (Therefore, the name of the variable is not really accurate.)
+       */
       !campaign.isReconciliationRequired &&
       !this.session.isAuthenticated &&
       (!isAuthenticatedByGar || hasUserSeenJoinPage)
