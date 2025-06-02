@@ -37,6 +37,7 @@ module.exports = function (environment) {
       // when it is created
       API_HOST: process.env.API_HOST || '',
       APPLICATION_NAME: process.env.APP || 'pix-app-local',
+      DEFAULT_LOCALE: process.env.DEFAULT_LOCALE || 'en',
       FT_FOCUS_CHALLENGE_ENABLED: _isFeatureEnabled(process.env.FT_FOCUS_CHALLENGE_ENABLED) || false,
       isTimerCountdownEnabled: true,
       LOAD_EXTERNAL_SCRIPT: true,
@@ -170,6 +171,8 @@ module.exports = function (environment) {
   if (environment === 'test') {
     // Testem prefers this...
     ENV.locationType = 'none';
+
+    ENV.APP.DEFAULT_LOCALE = 'fr';
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;

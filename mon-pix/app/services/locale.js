@@ -1,12 +1,12 @@
 import Service, { service } from '@ember/service';
-import config from 'mon-pix/config/environment';
+import ENV from 'mon-pix/config/environment';
 import languages from 'mon-pix/languages';
 
-const { COOKIE_LOCALE_LIFESPAN_IN_SECONDS } = config.APP;
+const { COOKIE_LOCALE_LIFESPAN_IN_SECONDS } = ENV.APP;
 export const FRENCH_INTERNATIONAL_LOCALE = 'fr';
 export const ENGLISH_INTERNATIONAL_LOCALE = 'en';
 export const FRENCH_FRANCE_LOCALE = 'fr-FR';
-export const DEFAULT_LOCALE = FRENCH_INTERNATIONAL_LOCALE;
+export const { DEFAULT_LOCALE } = ENV.APP;
 
 const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'fr-BE', 'fr-FR', 'nl-BE', 'nl'];
 

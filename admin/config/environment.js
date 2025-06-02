@@ -36,6 +36,7 @@ module.exports = function (environment) {
     APP: {
       API_HOST: process.env.API_HOST || '',
       PIX_APP_URL_WITHOUT_EXTENSION: process.env.PIX_APP_URL_WITHOUT_EXTENSION || 'https://app.pix.',
+      DEFAULT_LOCALE: process.env.DEFAULT_LOCALE || 'en',
       API_ERROR_MESSAGES: {
         BAD_REQUEST: {
           CODE: '400',
@@ -137,6 +138,8 @@ module.exports = function (environment) {
     // Testem prefers this...
     ENV.locationType = 'none';
     ENV.APP.API_HOST = 'http://localhost:3000';
+
+    ENV.APP.DEFAULT_LOCALE = 'fr';
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;

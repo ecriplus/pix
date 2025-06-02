@@ -1,17 +1,25 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
+import ENV from 'pix-admin/config/environment';
 
-const defaultLocale = 'fr';
+export const { DEFAULT_LOCALE } = ENV.APP;
+export const FRENCH_INTERNATIONAL_LOCALE = 'fr';
 
 export default class ApplicationRoute extends Route {
   @service session;
   @service intl;
+  @service currentDomain;
   @service currentUser;
   @service featureToggles;
 
   async beforeModel() {
     await this.session.setup();
-    this.intl.setLocale([defaultLocale]);
+
+    if (this.currentDomain.isFranceDomain) {
+      this.intl.setLocale(FRENCH_INTERNATIONAL_LOCALE);
+    } else {
+      this.intl.setLocale(DEFAULT_LOCALE);
+    }
 
     await this.featureToggles.load();
 
