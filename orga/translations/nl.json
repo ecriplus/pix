@@ -282,7 +282,7 @@
       }
     },
     "analysis-per-tube": {
-      "description": "Gemiddeld niveau behaald door deelnemers per onderwerp van het maximaal haalbare niveau in deze campagne.",
+      "description": "Hieronder vind je de campagneonderwerpen en hun beschrijvingen, evenals de standpunten van de deelnemers.",
       "cover-rate-gauge-label": "Over het onderwerp hebben je deelnemers een niveau van {reachedLevel} gehaald uit een maximaal haalbaar niveau van {maxLevel}.",
       "table": {
         "caption": "{index} - {name}",
@@ -294,7 +294,7 @@
       }
     },
     "analysis-per-competence": {
-      "description": "Gemiddeld niveau behaald door deelnemers per competentie van het maximaal haalbare niveau in deze campagne.",
+      "description": "Hieronder staan de campagnevaardigheden en hun beschrijvingen, evenals de positionering van de deelnemers.",
       "cover-rate-gauge-label": "Je deelnemers hebben een niveau bereikt van {reachedLevel} uit een maximaal haalbaar niveau van {maxLevel}.",
       "table": {
         "caption": "Competenties",
@@ -336,7 +336,7 @@
     },
     "global-positioning":{
       "title":"Wereldwijde positionering",
-      "description":"Gemiddeld niveau bereikt door deelnemers van het maximaal haalbare niveau in deze campagne.",
+      "description":"De algehele positionering is het gemiddelde niveau dat deelnemers hebben bereikt (paarse balk) vergeleken met het maximum dat ze in deze campagne hadden kunnen bereiken (witte balk).",
       "gauge-label":"Bij deze test behaalden je deelnemers een gemiddeld niveau van {reachedLevel} uit een maximaal haalbaar niveau van {maxLevel}."
     },
     "group": {
@@ -531,12 +531,26 @@
       "title": "Activiteit"
     },
     "campaign-analysis": {
-      "title": "Uitleg",
+      "second-title":"Analyse van resultaten",
       "description": {
-        "resume": "Analyseer, globaal en per onderwerp, de positionering van je deelnemers.",
-        "explanation": "Elke toets beoordeelt een selectie van digitale vaardigheden uit het Pix referentiekader. De positionering weerspiegelt het gemiddelde niveau dat deelnemers hebben bereikt ten opzichte van het maximaal haalbare niveau op de toets.",
-        "nota-bene": "Alle gepresenteerde gegevens zijn afkomstig van gedeelde en niet-verwijderde deelname aan beoordelingscampagnes en worden in realtime bijgewerkt."
-      }
+        "explanation": "Elke toets beoordeelt een selectie van digitale vaardigheden uit het Pix referentiekader. De positionering geeft het gemiddelde niveau weer dat deelnemers hebben bereikt ten opzichte van het maximaal haalbare niveau op de toets.",
+        "nota-bene": "Alle gepresenteerde gegevens zijn afkomstig van gedeelde en niet verwijderde deelname aan beoordelingscampagnes en worden in realtime bijgewerkt.",
+        "resume": "Analyseer, globaal en per onderwerp, de positionering van je deelnemers aan deze campagne, die een selectie van onderwerpen uit het Pix-referentiekader omvat."
+      },
+      "levels-correspondence": {
+        "title": "Correspondentie tussen niveaus",
+        "infos": {
+          "text": "Meer weten over niveaus.",
+          "link":"https://pix.org/nl-be/scores-en-niveaus"
+        },
+        "levels":{
+          "advanced": "5 of 6: Advanced level",
+          "beginner": "1 of 2: Beginnersniveau",
+          "expert": "7 of 8: Expert level",
+          "independent": "3 of 4: Independent level"
+        }
+      },
+      "title": "Uitleg"
     },
     "campaign-creation": {
       "actions": {

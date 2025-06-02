@@ -23,6 +23,11 @@ module('Integration | Template | analysis', function (hooks) {
       assert.ok(screen.getByText(t('pages.campaign-analysis.description.resume')));
       assert.ok(screen.getByText(t('pages.campaign-analysis.description.explanation')));
       assert.ok(screen.getByText(t('pages.campaign-analysis.description.nota-bene')));
+      assert.ok(screen.getByText(t('pages.campaign-analysis.levels-correspondence.levels.beginner')));
+      assert.ok(screen.getByText(t('pages.campaign-analysis.levels-correspondence.levels.independent')));
+      assert.ok(screen.getByText(t('pages.campaign-analysis.levels-correspondence.levels.advanced')));
+      assert.ok(screen.getByText(t('pages.campaign-analysis.levels-correspondence.levels.expert')));
+      assert.ok(screen.getByRole('link', { name: t('pages.campaign-analysis.levels-correspondence.infos.text') }));
     });
   });
 });
