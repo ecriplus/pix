@@ -324,41 +324,20 @@ describe('Acceptance | API | Certification Course', function () {
           expect(response.statusCode).to.equal(201);
         });
 
-        it('should have created a V2 certification course', async function () {
+        it('should have created a v3 certification course without any challenges', async function () {
           // given
-          const { options, userId, sessionId } = _createRequestOptions();
-          _createNonExistingCertifCourseSetup({ learningContent, userId, sessionId });
-
+          const { options, userId, sessionId } = _createRequestOptions({ version: SESSIONS_VERSIONS.V3 });
+          const { flashConfiguration } = _createNonExistingCertifCourseSetup({ learningContent, userId, sessionId });
           await databaseBuilder.commit();
 
           // when
           response = await server.inject(options);
 
           // then
-          const certificationCourses = await knex('certification-courses').where({ userId, sessionId });
-          expect(certificationCourses).to.have.lengthOf(1);
-          expect(certificationCourses[0].version).to.equal(SESSIONS_VERSIONS.V2);
+          const [certificationCourse] = await knex('certification-courses').where({ userId, sessionId });
+          expect(certificationCourse.version).to.equal(SESSIONS_VERSIONS.V3);
           expect(response.result.data.attributes).to.include({
-            'nb-challenges': 2,
-          });
-        });
-
-        context('when the session is v3', function () {
-          it('should have created a v3 certification course without any challenges', async function () {
-            // given
-            const { options, userId, sessionId } = _createRequestOptions({ version: SESSIONS_VERSIONS.V3 });
-            const { flashConfiguration } = _createNonExistingCertifCourseSetup({ learningContent, userId, sessionId });
-            await databaseBuilder.commit();
-
-            // when
-            response = await server.inject(options);
-
-            // then
-            const [certificationCourse] = await knex('certification-courses').where({ userId, sessionId });
-            expect(certificationCourse.version).to.equal(SESSIONS_VERSIONS.V3);
-            expect(response.result.data.attributes).to.include({
-              'nb-challenges': flashConfiguration.maximumAssessmentLength,
-            });
+            'nb-challenges': flashConfiguration.maximumAssessmentLength,
           });
         });
 
@@ -382,40 +361,6 @@ describe('Acceptance | API | Certification Course', function () {
           expect(certificationCourses[0].birthdate).to.equal(certificationCandidate.birthdate);
           expect(certificationCourses[0].birthplace).to.equal(certificationCandidate.birthCity);
           expect(certificationCourses[0].externalId).to.equal(certificationCandidate.externalId);
-        });
-
-        it('should have only fr-fr challenges associated with certification-course', async function () {
-          // given
-          const { options, userId, sessionId } = _createRequestOptions();
-          _createNonExistingCertifCourseSetup({ learningContent, userId, sessionId });
-          await databaseBuilder.commit();
-
-          // when
-          await server.inject(options);
-
-          // then
-          const certificationChallenges = await knex('certification-challenges');
-          expect(certificationChallenges).to.have.lengthOf(2);
-          expect(certificationChallenges[0].challengeId).to.equal('recChallenge5_1_1');
-          expect(certificationChallenges[1].challengeId).to.equal('recChallenge5_0_0');
-        });
-      });
-
-      context('when locale is en', function () {
-        it('should have only en challenges associated with certification-course', async function () {
-          // given
-          const { options, userId, sessionId } = _createRequestOptions({ locale: 'en' });
-          _createNonExistingCertifCourseSetup({ learningContent, userId, sessionId });
-          await databaseBuilder.commit();
-
-          // when
-          response = await server.inject(options);
-
-          // then
-          const certificationChallenges = await knex('certification-challenges');
-          expect(certificationChallenges).to.have.lengthOf(2);
-          expect(certificationChallenges[0].challengeId).to.equal('recChallenge6_1_0');
-          expect(certificationChallenges[1].challengeId).to.equal('recChallenge6_0_0');
         });
       });
     });

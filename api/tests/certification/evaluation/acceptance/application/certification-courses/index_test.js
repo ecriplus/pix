@@ -254,9 +254,11 @@ describe('Acceptance | Route | Certification Courses', function () {
         const certificationCourse = await knex('certification-courses').select().where({ userId: 1 });
         expect(certificationCourse).to.exist;
       });
+
       it('should return CREATED (201) and a certification course', async function () {
         // given
         databaseBuilder.factory.buildUser({ id: 1 });
+        databaseBuilder.factory.buildFlashAlgorithmConfiguration();
         databaseBuilder.factory.buildSession({ id: 2, accessCode: 'FMKP39' });
         const candidate = databaseBuilder.factory.buildCertificationCandidate({
           sessionId: 2,
