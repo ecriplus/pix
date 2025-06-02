@@ -1,11 +1,11 @@
 {
   "id": "71618929-fcc9-415e-a3f3-9582545d7a78",
   "slug": "tmp-ia-fonctionnement-debut",
-  "title": " ChatGPT ne sait pas vraiment ce qu’il dit !",
+  "title": "ChatGPT, Gemini, Le Chat : comment font-ils pour répondre à nos demandes ?",
   "isBeta": true,
   "details": {
-    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
-    "description": "<p>Mistral, chatGPT et Gemini, sont des Intelligences Artificielles (IA) conversationnelles&nbsp;: un utilisateur peut discuter avec ces IA et avoir des réponses à ses demandes.&nbsp; <br>Ces IA peuvent résumer un texte, inventer des histoires, etc. Et ça, sur globalement tous les sujets ! <br>Dans ce module, vous allez découvrir comment une IA conversationnelle réussit toujours à donner une réponse à un utilisateur… sans vraiment savoir ce qu’elle dit !<br><br></p>",
+    "image": "",
+    "description": "<p>ChatGPT, Gemini ou encore Le Chat sont des Intelligences Artificielles (IA) conversationnelles&nbsp;: un utilisateur peut discuter avec ces IA et avoir des réponses à ses demandes.&nbsp; <br>Ces IA peuvent résumer un texte, inventer des histoires, etc. Et ça, sur globalement tous les sujets ! <br>Dans ce module, vous allez découvrir comment une IA conversationnelle réussit toujours à donner une réponse à un utilisateur… mais pas toujours la bonne !<br><br></p>",
     "duration": 10,
     "level": "Débutant",
     "objectives": [
@@ -68,7 +68,7 @@
                 "content": "<p>Je ne sais pas.</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Pas toujours facile de décider. En tout cas, chatGPT répondrait sûrement quelque chose pour aider Bob à s’organiser.</p>"
+                  "diagnosis": "<p>Vous avez eu du mal à vous décider ? En tout cas, chatGPT répondrait sûrement quelque chose pour aider Bob à s’organiser.</p>"
                 }
               }
             ],
@@ -102,7 +102,7 @@
           "element": {
             "id": "19304202-614f-494c-8312-69b04cb9589f",
             "type": "text",
-            "content": "<p>Pour préparer ses vacances, Bob veut connaître&nbsp;:&nbsp; </p>\n<ul>\n    <li>les horaires de train de demain pour aller de Rennes à Brest,</li>\n    <li>des endroits à visiter à Brest.</li>\n</ul>\n<p>Il utilise deux chatbots différents pour avoir de l’aide&nbsp;: un “ancien” chatbot (sans IA) et un “nouveau” chatbot (avec IA). </p><p><strong>👉 Lancez les conversations et observez les réponses des deux chatbots.</strong><br></p>"
+            "content": "<p>Pour préparer ses vacances, Bob veut connaître&nbsp;:&nbsp; </p>\n<ul>\n    <li>les horaires de train de demain pour aller de Rennes à Brest,</li>\n    <li>des endroits à visiter à Brest.</li>\n</ul>\n<p>Il utilise deux chatbots différents pour avoir de l’aide.</p><p><strong>👉 Lancez les conversations et observez les réponses des deux chatbots.</strong><br></p>"
           }
         },
         {
@@ -125,7 +125,7 @@
                 "content": "<p>le premier chatbot (conversation 1)</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p><strong>Pas tout à fait</strong>, ce chatbot n’a pas pu répondre à la deuxième question de Bob. Alors que l’autre si ! Ce chatbot n’utilise pas d’IA.</p>"
+                  "diagnosis": "<p><strong>Pas tout à fait</strong>, ce chatbot n’a pas pu répondre à la deuxième question de Bob. Il n'utilise pas d'IA générative. Alors que l’autre si ! .</p>"
                 }
               },
               {
@@ -133,7 +133,7 @@
                 "content": "<p>le deuxième chatbot&nbsp;(conversation 2)</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p><strong>Oui</strong>, ce chatbot a répondu aux demandes de Bob, contrairement à l’autre. C’est ce chatbot qui utilise de l’IA&nbsp;: c’est une IA conversationnelle.</p>"
+                  "diagnosis": "<p><strong>Oui</strong>, ce chatbot a répondu aux demandes de Bob, contrairement à l’autre. C’est ce chatbot qui utilise de l’IA générative.</p>"
                 }
               },
               {
@@ -168,7 +168,7 @@
           "element": {
             "id": "898ab86a-15d3-468f-a0fd-eb1644e7aef6",
             "type": "text",
-            "content": "<p>Une <strong>IA conversationnelle</strong>, comme chatGPT, &nbsp;est capable de <strong>répondre à des demandes sur beaucoup de sujets différents</strong> (transport, visites, cuisine …).&nbsp; </p><p>✔️ Un utilisateur peut dialoguer avec elle de façon naturelle. Les réponses sont spécifiques aux demandes (sujets, longueur de la réponse, …).<br></p>"
+            "content": "<p>Un chatbot est capable de répondre à des demandes écrites, comme si on écrivait à quelqu'un.<br>Certains d'entre eux, comme chatGPT ou Le Chat, sont <strong>capables de répondre de façon pertinente sur des sujets très variés</strong> (transport, visites, cuisine …). Ils sont basés sur de l'<strong>intelligence artificielle générative</strong></p>"
           }
         },
         {
@@ -183,7 +183,7 @@
           "element": {
             "id": "984bbfce-c558-432a-9746-22fee645e643",
             "type": "text",
-            "content": "<p>Par contre, les <strong>chatbots sans IA générative</strong> répondent <strong>seulement sur un sujet précis</strong>, avec des <strong>réponses</strong> qui sont <strong>souvent préparées à l’avance</strong> par des personnes.&nbsp; </p><p>✖️ Un utilisateur ne peut pas dialoguer avec eux de façon naturelle. Les réponses ne sont pas spécifiques aux demandes.<br></p>"
+            "content": "<p><strong>Bon à savoir</strong><br>L'“Intelligence artificielle“ (IA), ce sont les technologies qui permettent aux ordinateurs de réaliser des tâches que les hommes et les femmes réalisent grâce à leur intelligence humaine.</p>"
           }
         }
       ]
@@ -266,7 +266,7 @@
                 {
                   "id": "4c59286a-4fe4-4991-a8a7-023fd736c3a5",
                   "type": "text",
-                  "content": "<p>Pour une IA conversationnelle, c’est un peu le même principe&nbsp;: elle construit une réponse en complétant le texte mot après mot. <br>Voyons cela en détails, en reprenant l’exemple de la crêpe👇<br></p>"
+                  "content": "<p>Pour une IA conversationnelle, c’est un peu le même principe&nbsp;: elle construit une réponse en complétant le texte mot après mot. <br>Voyons cela en détails, en reprenant l’exemple de la crêpe.👇<br></p>"
                 },
                 {
                   "id": "cccad926-00ec-456b-be8d-d864ad4b1ba8",
@@ -288,7 +288,7 @@
                     },
                     {
                       "id": "2",
-                      "content": "<p>Elle choisit des mots  probables.</p>",
+                      "content": "<p>Elle choisit des mots probables.</p>",
                       "feedback": {
                         "state": "",
                         "diagnosis": "<p><strong>Oui !&nbsp;</strong>Le mot choisi n’est pas toujours le plus probable.</p>"
@@ -436,7 +436,7 @@
           "element": {
             "id": "56de1931-9f60-483b-a46a-7669b4f3ee2b",
             "type": "text",
-            "content": "<p><strong>[en attente FTO-PYO]</strong></p><p>Cet entraînement consiste à lui donner des textes pour qu’elle les analyse. </p><p>Dans ces textes, le programme va compter le nombre de fois où les mots sont présents.&nbsp;</p><p>Il va aussi réaliser d'autres calculs similaires sur ces textes.</p><p>Et comme ça, le programme connaît des listes de mots très utilisés dans ces textes.<br></p>"
+            "content": "<p>Cet entraînement consiste à lui donner des textes pour qu’elle les analyse. </p><p>Dans ces textes, le programme va compter le nombre de fois où les mots sont présents, selon les phrases dans lesquelles ces mots se trouvent.&nbsp;</p><p>Il va aussi réaliser d'autres calculs similaires sur ces textes.</p><p>Et comme ça, le programme connaît des listes de mots très utilisés dans ces textes et dans un certain contexte.</p>"
           }
         }
       ]
@@ -532,7 +532,7 @@
           "element": {
             "id": "68e15092-f116-4829-b56a-cbc2501bb272",
             "type": "text",
-            "content": "<p>Si on donne à une IA conversationnelle des <strong>milliards de textes variés pour s’entraîner</strong>, elle pourra apporter des <strong>réponses intéressantes à presque toutes les demandes</strong> des utilisateurs.&nbsp; </p><p>✔️ Par exemple, chatGPT ou Mistral sont entraînées sur  des textes disponibles sur internet&nbsp;: articles Wikipédia, forum, blogs, revues scientifiques, … </p><p>❗Par contre, si on ne donne pas assez de textes à une IA conversationnelle pour s’entraîner, il y a des choses qu’elle ne “saura” pas. Elle ne pourra répondre qu’avec les informations qu’elle a rencontrées dans ces textes. <br></p>"
+            "content": "<p>Si on donne à une IA conversationnelle des <strong>milliards de textes variés pour s’entraîner</strong>, elle pourra apporter des <strong>réponses pertinentes à presque toutes les demandes</strong> des utilisateurs.&nbsp; </p><p>✔️ Par exemple, chatGPT ou Mistral sont entraînées sur  des textes disponibles sur internet&nbsp;: articles Wikipédia, forum, blogs, revues scientifiques, … </p><br><p>❗Par contre, si on ne donne pas assez de textes à une IA conversationnelle pour s’entraîner, il y a des choses qu’elle ne “saura” pas. Par exemple, sans texte d'entraînement sur les crêpes au nutella, elle ne saura pas que c'est une recette très appréciée.</p>"
           }
         }
       ]
@@ -547,7 +547,7 @@
           "element": {
             "id": "3263a709-65bf-4a6e-8ab7-4e1ef5b4c4a2",
             "type": "text",
-            "content": "<p><strong>⚠️ Attention&nbsp;: les textes sur internet ont parfois des erreurs.</strong> Et une IA conversationnelle ne repère&nbsp;pas ces erreurs pendant l’entraînement. </p><p>Elle peut donc <strong>reproduire ces erreurs dans ses réponses.</strong> <br></p><p>🔍 C’est important de le répéter&nbsp;: vérifiez toujours ce qu’une IA conversationnelle écrit. <br></p>"
+            "content": "<p><strong>⚠️ Attention&nbsp;: les textes sur internet ont parfois des erreurs.</strong> Et une IA conversationnelle ne repère&nbsp;pas ces erreurs pendant l’entraînement. Elle peut donc <strong>reproduire ces erreurs dans ses réponses.</strong></p><br><p>Elle peut aussi faire des erreurs en essayant de répondre à des questions, même si la réponse n'est pas directement dans ses textes d'entraînement</p><p>🔍 C’est important de le répéter&nbsp;: vérifiez toujours ce qu’une IA conversationnelle écrit. <br></p>"
           }
         }
       ]
@@ -583,44 +583,134 @@
       ]
     },
     {
-      "id": "e6a803ca-aad3-4c39-a048-5fc5c61bb345",
+      "id": "86673ff6-f7d9-41be-8455-33050d1329ec",
       "type": "activity",
       "title": "-",
       "components": [
         {
           "type": "element",
           "element": {
-            "id": "14c2cbff-f160-4c7a-9384-e19b1b4c92f0",
-            "type": "qcu",
-            "instruction": "<p>Comment une IA conversationnelle répond-elle à la demande d’un utilisateur ?</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "<p>Elle construit sa réponse mot après mot, en partant du texte de l'utilisateur.</p>",
-                "feedback": {
-                  "state": "<p>Bonne réponse 🎉</p>",
-                  "diagnosis": ""
-                }
-              },
-              {
-                "id": "2",
-                "content": "<p>Elle choisit  une phrase préparée à l'avance, en cherchant dans ses données.</p>",
-                "feedback": {
-                  "state": "<p>Mauvaise réponse</p>",
-                  "diagnosis": "<p>Contrairement à des chatbot “classiques”, une IA conversationnelle n’a pas de phrases préparées à l’avance. </p><p>Ce qui lui permet de répondre à des sujets très variés. </p><p>Vous pouvez ré-essayer. ↩️</p>"
-                }
-              },
-              {
-                "id": "3",
-                "content": "<p>Elle copie-colle des phrases pertinentes, en cherchant sur internet.</p>",
-                "feedback": {
-                  "state": "<p>Mauvaise réponse</p>",
-                  "diagnosis": "<p>Les réponses ne sont pas copiées sur des pages internet. </p><p>Les IA conversationnelles peuvent par exemple inventer des histoires complètement nouvelles !</p><p>Vous pouvez ré-essayer. ↩️</p>"
-                }
-              }
-            ],
-            "solution": "1"
+            "id": "b7ddb35b-fbef-4559-bcf9-33438c76f4d2",
+            "type": "text",
+            "content": "<p>Pour chaque affirmation ci-dessous, choisissez si elle est vraie ou fausse.</p>"
           }
+        },
+        {
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "937b80a6-976b-45ed-99e8-6c3666a6e8f3",
+                  "type": "qcu",
+                  "instruction": "<p>Les IA conversationnelles sont entraînées uniquement sur les articles de Wikipédia.</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>vrai</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse</p>",
+                        "diagnosis": ""
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>faux</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse !</p>",
+                        "diagnosis": ""
+                      }
+                    }
+                  ],
+                  "solution": "2"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "0766f3f4-b188-4f11-9fbd-6474e2c85814",
+                  "type": "qcu",
+                  "instruction": "<p>Une IA conversationnelle construit sa réponse mot après mot, en partant du texte de l'utilisateur.</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>vrai</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse !</p>",
+                        "diagnosis": ""
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>faux</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse</p>",
+                        "diagnosis": ""
+                      }
+                    }
+                  ],
+                  "solution": "1"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "7a072ae2-8ca5-4aa3-bc03-7c14b89c9b5f",
+                  "type": "qcu",
+                  "instruction": "<p>Pour répondre à une demande, l’IA conversationnelle prend en compte le contexte de la demande.</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>vrai</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse</p>",
+                        "diagnosis": ""
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>faux</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse</p>",
+                        "diagnosis": ""
+                      }
+                    }
+                  ],
+                  "solution": "1"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "cdf5e26b-ad95-4794-80e0-1760b2abce03",
+                  "type": "qcu",
+                  "instruction": "<p>Les réponses d’une IA conversationnelle sont toujours correctes.</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>vrai</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse</p>",
+                        "diagnosis": ""
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>faux</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse !</p>",
+                        "diagnosis": ""
+                      }
+                    }
+                  ],
+                  "solution": "2"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -682,21 +772,6 @@
               }
             ],
             "solution": "3"
-          }
-        }
-      ]
-    },
-    {
-      "id": "6e02e3b0-797f-49f1-98c9-7a076db93f75",
-      "type": "activity",
-      "title": "-",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "8a030205-7996-45aa-80b9-9b7fc98d1e3d",
-            "type": "text",
-            "content": "<p><strong>POIC vrai-faux (3)</strong></p><ul><li>Les IA conversationnelles sont entraînées uniquement sur les articles de Wikipédia.</li><li>Une IA conversationnelle est entraînée avec des milliards de textes.</li><li>Les réponses d’une IA conversationnelle sont toujours correctes</li></ul><br>"
           }
         }
       ]
