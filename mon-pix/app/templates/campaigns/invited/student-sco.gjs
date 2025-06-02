@@ -13,6 +13,7 @@ import AssociateScoStudentForm from 'mon-pix/components/routes/campaigns/invited
       <div class="join-restricted-campaign">
         <AssociateScoStudentForm
           @organizationName={{@model.organizationName}}
+          @organizationId={{@model.organizationId}}
           @campaignCode={{@model.code}}
           @onSubmit={{@controller.reconcile}}
         />

@@ -129,7 +129,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
         module('When campaign is restricted and SCO', function (hooks) {
           hooks.beforeEach(function () {
-            campaign = server.create('campaign', { isRestricted: true, organizationType: 'SCO' });
+            campaign = server.create('campaign', { isRestricted: true, organizationType: 'SCO', organizationId: 1 });
           });
 
           module('When the student has an account but is not reconciled', function () {
@@ -159,7 +159,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
                   return { data: null };
                 });
                 server.create('sco-organization-learner', {
-                  campaignCode: campaign.code,
+                  organizationId: campaign.organizationId,
                 });
                 const screen = await visit('/campagnes');
 
@@ -482,7 +482,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
       module('When campaign is restricted and SCO', function (hooks) {
         hooks.beforeEach(function () {
-          campaign = server.create('campaign', { isRestricted: true, organizationType: 'SCO' });
+          campaign = server.create('campaign', { isRestricted: true, organizationType: 'SCO', organizationId: 1 });
         });
 
         module('When association is not already done', function () {
@@ -507,7 +507,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               return { data: null };
             });
             server.create('sco-organization-learner', {
-              campaignCode: campaign.code,
+              organizationId: campaign.organizationId,
             });
 
             // when
@@ -561,7 +561,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
         module('When association is already done', function (hooks) {
           hooks.beforeEach(function () {
             server.create('sco-organization-learner', {
-              campaignCode: campaign.code,
+              organizationId: campaign.organizationId,
             });
           });
 
@@ -770,7 +770,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
     module('When user is logged in an external platform', function () {
       module('When campaign is restricted and SCO', function (hooks) {
         hooks.beforeEach(function () {
-          campaign = server.create('campaign', { isRestricted: true, organizationType: 'SCO' });
+          campaign = server.create('campaign', { isRestricted: true, organizationType: 'SCO', organizationId: 1 });
         });
 
         module('When association is not already done and reconciliation token is provided', function () {
@@ -947,7 +947,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
           test('should begin campaign participation if GAR authentication method has been added', async function (assert) {
             // given
             server.create('sco-organization-learner', {
-              campaignCode: campaign.code,
+              organizationId: campaign.organizationId,
             });
 
             const screen = await visit(`/campagnes?externalUser=${externalUserToken}`);
@@ -1117,7 +1117,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               });
 
               server.create('sco-organization-learner', {
-                campaignCode: campaign.code,
+                organizationId: campaign.organizationId,
               });
 
               // when

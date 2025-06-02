@@ -80,11 +80,11 @@ export default class AssociateScoStudentForm extends Component {
   _createScoOrganizationLearnerRecord() {
     const { firstName, lastName, birthdate } = this.attributes;
     return this.store.createRecord('sco-organization-learner', {
-      id: this.args.campaignCode + '_' + lastName,
+      id: this.args.organizationId + '_' + lastName,
       firstName,
       lastName,
       birthdate,
-      campaignCode: this.args.campaignCode,
+      organizationId: this.args.organizationId,
     });
   }
 
