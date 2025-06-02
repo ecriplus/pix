@@ -191,6 +191,45 @@ module('Integration | Component | Module | Grain', function (hooks) {
       });
     });
 
+    module('when element is a qab', function () {
+      test('should display qab element', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const qabElement = {
+          id: 'ed795d29-5f04-499c-a9c8-4019125c5cb1',
+          type: 'qab',
+          instruction: '<p><strong>Maintenant, entraînez-vous sur des exemples concrets !</strong></p>',
+          cards: [
+            {
+              id: 'e222b060-7c18-4ee2-afe2-2ae27c28946a',
+              image: {
+                url: 'https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg',
+                altText: '',
+              },
+              text: 'Les boules de pétanques sont creuses.',
+              proposalA: 'Vrai',
+              proposalB: 'Faux',
+              solution: 'A',
+            },
+          ],
+        };
+        const grain = store.createRecord('grain', {
+          title: 'Grain title',
+          components: [{ type: 'element', element: qabElement }],
+        });
+        this.set('grain', grain);
+        const passage = store.createRecord('passage');
+        this.set('passage', passage);
+
+        // when
+        const screen = await render(hbs`
+          <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} />`);
+
+        // then
+        assert.ok(screen.getByText('Les boules de pétanques sont creuses.'));
+      });
+    });
+
     module('when element is a qrocm', function () {
       test('should display qrocm element', async function (assert) {
         // given
