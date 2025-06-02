@@ -28,14 +28,15 @@ import addSession from '../tools/create-session.js';
  *
  * The goal here is to reproduce one certification case:
  *   - The organization is PRO
- *   - A session with several candidates
- *   - The candidate can directly enter a session on Pix App
+ *   - I'm a pix app user with a certifiable account
+ *   - I'm able to start a certification course
+ *   - I have previously obtained a certif PRO with ~250 pix
  *
  *  Quick start :
+ *    - Pix App user    : certif-success@example.net
  *    - Pix Certif user : certif-prescriptor@example.net
- *    - Pix App user    : certifiable-pro@example.net
- *    - Pix Admin user  : superadmin@example.net
  *    - Pix Orga user   : certif-prescriptor@example.net
+ *    - Pix Admin user  : superadmin@example.net
  */
 export class ProSeed {
   constructor({ databaseBuilder }) {
