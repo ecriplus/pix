@@ -167,7 +167,7 @@ function _mapToHttpError(error) {
   if (error instanceof AdminMemberError) {
     return new HttpErrors.UnprocessableEntityError(error.message, error.code);
   }
-  if (error instanceof SharedDomainErrors.NoCertificationAttestationForDivisionError) {
+  if (error instanceof SharedDomainErrors.NoCertificateForDivisionError) {
     return new HttpErrors.BadRequestError(error.message);
   }
   if (error instanceof OrganizationCantGetPlacesStatisticsError) {

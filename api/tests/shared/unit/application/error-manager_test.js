@@ -27,7 +27,7 @@ import {
   LocaleFormatError,
   LocaleNotSupportedError,
   MultipleOrganizationLearnersWithDifferentNationalStudentIdError,
-  NoCertificationAttestationForDivisionError,
+  NoCertificateForDivisionError,
   NotEnoughDaysPassedBeforeResetCampaignParticipationError,
   NotFoundError,
   OidcError,
@@ -327,9 +327,9 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       expect(HttpErrors.BadRequestError).to.have.been.calledWithExactly(error.message, error.code);
     });
 
-    it('should instantiate BadRequestError when NoCertificationAttestationForDivisionError', async function () {
+    it('should instantiate BadRequestError when NoCertificateForDivisionError', async function () {
       // given
-      const error = new NoCertificationAttestationForDivisionError(1);
+      const error = new NoCertificateForDivisionError(1);
       sinon.stub(HttpErrors, 'BadRequestError');
       const params = { request: {}, h: hFake, error };
 
@@ -337,9 +337,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       await handle(params.request, params.h, params.error);
 
       // then
-      expect(HttpErrors.BadRequestError).to.have.been.calledWithExactly(
-        'Aucune attestation de certification pour la classe 1.',
-      );
+      expect(HttpErrors.BadRequestError).to.have.been.calledWithExactly('Aucun certificat pour la classe 1.');
     });
 
     it('should instantiate BaseHttpError when UnauthorizedError', async function () {

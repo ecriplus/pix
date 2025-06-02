@@ -471,9 +471,9 @@ class MissingBadgeCriterionError extends DomainError {
   }
 }
 
-class NoCertificationAttestationForDivisionError extends DomainError {
+class NoCertificateForDivisionError extends DomainError {
   constructor(division) {
-    const message = `Aucune attestation de certification pour la classe ${division}.`;
+    const message = `Aucun certificat pour la classe ${division}.`;
     super(message);
   }
 }
@@ -1098,7 +1098,7 @@ export {
   ModelValidationError,
   MultipleOrganizationLearnersWithDifferentNationalStudentIdError,
   NoCampaignParticipationForUserAndCampaign,
-  NoCertificationAttestationForDivisionError,
+  NoCertificateForDivisionError,
   NoOrganizationToAttach,
   NoSkillsInCampaignError,
   NoStagesForCampaign,
