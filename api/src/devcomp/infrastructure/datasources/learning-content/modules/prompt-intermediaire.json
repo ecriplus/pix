@@ -5,11 +5,11 @@
   "isBeta": true,
   "details": {
     "image": "",
-    "description": "<p>Les IA génératives (ChatGPT, LeChat, DeepSeek….) permettent de répondre à une grande variété de nos demandes, mais la qualité de leurs réponses dépend beaucoup des questions qu’on leur pose !&nbsp; </p><p>Dans ce module, vous allez apprendre à formuler des prompts efficaces pour répondre à vos besoins.<br></p>",
+    "description": "<p>Les IA génératives (ChatGPT, LeChat, DeepSeek…) permettent de répondre à une grande variété de nos demandes.</p><p> Mais la qualité de leurs réponses dépend beaucoup des questions qu’on leur pose.&nbsp; </p><p>Dans ce module, vous allez apprendre à formuler des prompts efficaces pour répondre à vos besoins.<br><br></p>",
     "duration": 10,
     "level": "Intermédiaire",
     "objectives": [
-      "<p>1. Ecrire des prompts efficaces<br></p>",
+      "<p>1. Écrire des prompts efficaces<br></p>",
       "<p>2. Évaluer de manière critique la réponse de l’IA générative<br></p>"
     ],
     "tabletSupport": "comfortable"
@@ -25,7 +25,7 @@
           "element": {
             "id": "339e443a-9eb7-476c-8689-9a7714c31607",
             "type": "text",
-            "content": "<p>Gustave organise un tournoi de volley. 🏐 </p><p>Il veut gagner du temps pour l’organisation et demande à une IA d’écrire l’invitation aux participants. </p><p>Mais il est déçu du résultat…<br><br></p>"
+            "content": "<p>Gustave organise un tournoi de volley. 🏐</p><p>Il veut gagner du temps et demande à une IA générative d’écrire à sa place l’invitation aux participants. </p><p>Mais il est déçu du résultat… <br><br></p>"
           }
         }
       ]
@@ -55,7 +55,7 @@
           "element": {
             "id": "052ed96d-d123-49a0-b7aa-fb8c2d220ca8",
             "type": "text",
-            "content": "<p>La qualité de la réponse de l’IA dépend de la qualité du prompt. Voyons comment faire un prompt efficace !<br></p>"
+            "content": "<p>La réponse de l’IA dépend de la qualité du prompt. Voyons comment faire un prompt efficace.</p>"
           }
         }
       ]
@@ -70,7 +70,7 @@
           "element": {
             "id": "3f36edd3-42cd-4cf3-9063-1ad75166871c",
             "type": "text",
-            "content": "<p>Le prompt de Gustave était&nbsp;: “Écris une invitation au tournoi\"<br></p>"
+            "content": "<p>Le prompt de Gustave était&nbsp;: «&nbsp;Écris une invitation au tournoi.&nbsp;»</p>"
           }
         },
         {
@@ -91,19 +91,19 @@
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>l’objet&nbsp;: au tournoi de volley</p>"
+                "content": "<p>l’objet&nbsp;: «&nbsp;le tournoi de volley&nbsp;»</p>"
               },
               {
                 "id": "2",
-                "content": "<p>la date&nbsp;: samedi prochain</p>"
+                "content": "<p>la date&nbsp;: «&nbsp;samedi prochain&nbsp;»</p>"
               },
               {
                 "id": "3",
-                "content": "<p>le lieu&nbsp;: au gymnase des 3 sapins</p>"
+                "content": "<p>le lieu&nbsp;: «&nbsp;le gymnase des 3 sapins&nbsp;»</p>"
               },
               {
                 "id": "4",
-                "content": "<p>les destinataires&nbsp;: les membres du club</p>"
+                "content": "<p>les destinataires&nbsp;: «&nbsp;les membres du club&nbsp;»</p>"
               }
             ],
             "feedbacks": {
@@ -131,7 +131,7 @@
           "element": {
             "id": "504fb0c6-f40a-403c-9471-e4fb0512e9cd",
             "type": "text",
-            "content": "<p>Un prompt efficace donne toujours un contexte&nbsp;: il donne à l'IA des précisions sur la situation&nbsp;: le lieu, le moment, l’objectif, etc.&nbsp; <br>Sans contexte, l'IA risque de répondre de façon vague ou hors sujet.<br></p>"
+            "content": "<p>Un prompt bien formulé donne toujours à l’IA un contexte, c’est-à-dire des précisions sur la situation&nbsp;: le lieu, le moment, l’objectif, etc.&nbsp; <br>Sans contexte, l'IA risque de répondre de façon vague ou hors sujet.<br></p>"
           }
         }
       ]
@@ -146,7 +146,7 @@
           "element": {
             "id": "77fa2e62-b572-40ed-ad92-2b6433efaf45",
             "type": "text",
-            "content": "<p>Gustave a envoyé les invitations pour le tournoi, il a hâte !&nbsp; Mais certaines personnes n’ont pas encore répondu….&nbsp; <br>Il veut écrire un message de relance mais il hésite sur comment le formuler. 🤔 <br>Teste différents tons grâce à l'intelligence artificielle !<br></p>"
+            "content": "<p>Gustave a envoyé les invitations pour le tournoi. Il a hâte !&nbsp; Mais certaines personnes ne lui ont pas encore répondu…&nbsp; <br>Il veut écrire un message de relance mais il hésite sur la manière de le formuler.🤔 <br>Testez différents tons de messages avec l’IA.</p>"
           }
         },
         {
@@ -185,15 +185,15 @@
                 "content": "<p>celui avec un ton décalé</p>",
                 "feedback": {
                   "state": "<p>Un choix audacieux !</p>",
-                  "diagnosis": "<p><strong>Un choix audacieux !</strong> Au final, Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi. </p>"
+                  "diagnosis": "<p><strong>Un choix original !</strong> Au final, Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi. </p>"
                 }
               },
               {
                 "id": "4",
-                "content": "<p>aucun ne me plait<br></p>",
+                "content": "<p>aucun ne me plaît</p>",
                 "feedback": {
                   "state": "<p>Pas de souci !</p>",
-                  "diagnosis": "<p><strong>Pas de souci !</strong> Il en existe beaucoup d’autres&nbsp;: enfantin, sarcastique… Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi ! </p>"
+                  "diagnosis": "<p><strong>Pas de souci !</strong> Il existe beaucoup d’autres tons&nbsp;: enfantin, ironique, poétique… </p><p>Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi ! </p>"
                 }
               }
             ]
@@ -211,7 +211,7 @@
           "element": {
             "id": "267f28d2-4540-427a-a775-c15c380c3d4b",
             "type": "text",
-            "content": "<p>On peut modifier le ton d’un prompt en précisant&nbsp;:</p><ul><li> à qui on veut s’adresser, </li><li>de quelle manière (avec humour, de manière concise, pédagogue, professionnelle, etc.),</li><li>un rôle à jouer (“tu es un poète”, “en tant que coach sportif”, “comme un professeur”, etc.)<br></li></ul>"
+            "content": "<p>On peut modifier le ton d’un prompt en précisant&nbsp;:&nbsp; </p><ul><li>à qui on veut s’adresser,&nbsp;</li><li>de quelle manière (avec humour, de manière brève, pédagogue, professionnelle, etc.),</li><li>un rôle à jouer («&nbsp;tu es un poète&nbsp;», «&nbsp;en tant que coach sportif&nbsp;», «&nbsp;comme un professeur&nbsp;», etc.).</li></ul>"
           }
         }
       ]
@@ -226,7 +226,7 @@
           "element": {
             "id": "c4eb68ca-743f-49a0-901c-c753fda586ad",
             "type": "text",
-            "content": "<p>Gustave coache des joueurs en vue du tournoi qui approche...&nbsp;&nbsp;</p><p>Pendant un match, il a pris des notes d’observation des joueurs. Il veut organiser ces notes, comme la dernière fois&nbsp;: </p>"
+            "content": "<p>Gustave coache des joueurs en vue du tournoi qui approche.&nbsp; </p><p>Pendant un match, il a pris des notes d’observation sur les joueurs. </p><p>Il veut organiser ses notes, comme il l’a fait la dernière fois dans le tableau ci-dessous&nbsp;:<br><br></p>"
           }
         },
         {
@@ -256,12 +256,12 @@
                 {
                   "id": "0a85e665-4add-468c-b192-0db443410dc8",
                   "type": "text",
-                  "content": "<p>Gustave demande à l’IA d’organiser ses notes.</p><p>Il a commencé à écrire son prompt&nbsp;:&nbsp;</p><p>“Voici ma prise de note&nbsp;:\n</p><p>- Austin – service canon… réception fragile\n</p><p>- Clément saute haut ++ / smashs souvent dehors\n</p><p>- Adelita – réflexes solides / parle peu\n</p><p>- Kamel&nbsp; – 2 services ratés, bon retour aprèsbloc </p><p>\n- Clément – gros impact au filet\n</p><p>- Austin – en retard sur une réception → point perdu\n</p><p>- Adelita lit bien le jeu, toujours bien placé\n</p><p>- Kamel sauve une balle compliquée – top réflexe\n</p><p>- Clément attaque souvent dans le bloc</p><p>Kamel encourage après erreur – bon état d’esprit\n- </p><p>Austin sorti fin 4e set – agacé\n</p><p>Organise mes notes sous forme de ...\"</p>"
+                  "content": "<p>Gustave demande à l’IA d’organiser ses notes. Il a commencé à écrire son prompt&nbsp;:&nbsp; <br>“Voici ma prise de note&nbsp;: <br>- Austin – service canon, réception fragile </p><p>- Clément saute haut ++ / smashs souvent dehors </p><p>- Adelita – réflexes solides / parle peu </p><p>- Kamel&nbsp; – 2 services ratés, bon retour après bloc </p><p>- Clément – gros impact au filet </p><p>- Austin – en retard sur une réception → point perdu </p><p>- Adelita lit bien le jeu, toujours bien placée </p><p>- Kamel sauve une balle compliquée – top réflexe </p><p>- Clément attaque souvent dans le bloc </p><p>- Kamel encourage après erreur – bon état d’esprit&nbsp; -</p><p> Austin sorti fin 4e set – agacé</p><p><br>Organise mes notes sous forme de ...<br><br></p>"
                 },
                 {
                   "id": "22bff52e-1760-45a8-9d89-e441a679eda4",
                   "type": "qrocm",
-                  "instruction": "<p>A ton avis, quel sera le prochain mot dans son prompt ?</p>",
+                  "instruction": "<p>À votre avis, quel sera le prochain mot du prompt de Gustave ?</p>",
                   "proposals": [
                     {
                       "input": "CV1pzGeay4eJi1g7",
@@ -300,7 +300,7 @@
                 {
                   "id": "9f7254d9-2290-4f25-a8db-360c52d83048",
                   "type": "text",
-                  "content": "<p>Le tableau obtenu par Gustave ne correspond pas vraiment à ces attentes…&nbsp;</p><p>Précisez le prompt pour obtenir un tableau similaire à celui de la dernière fois.</p>"
+                  "content": "<p>Le tableau obtenu par Gustave ne correspond pas vraiment à ses attentes.&nbsp; </p><p>Précisez son prompt pour obtenir un tableau similaire à celui de la dernière fois.<br><br></p>"
                 },
                 {
                   "id": "a8cdd8be-ed20-4d41-b1ea-277f8a7bd5c5",
@@ -314,7 +314,7 @@
                 {
                   "id": "c0a360e7-e44a-4a02-a796-b7a968f40c7e",
                   "type": "text",
-                  "content": "<p>A vous de jouer en utilisant <strong><a href=\"https://app.pocllm.pix.digital/config/cmb7p4yfj0001sk01m4rq19c3/preview\" target=\"_blank\">cette IA</a></strong> !&nbsp; </p>"
+                  "content": "<p>À vous de jouer en utilisant&nbsp;<strong><a href=\"https://app.pocllm.pix.digital/config/cmb7p4yfj0001sk01m4rq19c3/preview\" target=\"_blank\">cette IA</a></strong> !&nbsp; </p>"
                 }
               ]
             }
@@ -332,7 +332,7 @@
           "element": {
             "id": "c4a6a0a4-bbc8-4462-9098-af1e9d453cf3",
             "type": "text",
-            "content": "<p>Préciser le format attendu dans le prompt permet de gagner beaucoup de temps&nbsp;: </p><ul><li>il peut s’agir d’un texte, d’un tableau, d’une liste, d’un plan détaillé…</li></ul><p>On peut aussi préciser des contraintes dans ce format, par exemple&nbsp;:</p><ul><li>un texte d’une longueur maximale de 10 lignes</li><li>un plan détaillé en précisant la structure, le nombre de parties et le titre</li></ul><p><br>Tu peux aussi demander à l’intelligence artificielle de partir d’un exemple et de le reproduire !<br></p>"
+            "content": "<p>Sans indication, l'IA choisira elle-même un format, qui peut ne pas correspondre &nbsp; à ce que vous attendez.</p><p>Préciser le format attendu dans le prompt permet de gagner beaucoup de temps&nbsp;:&nbsp; </p><p>il peut s’agir d’un texte, d’un tableau, d’une liste, d’un plan détaillé… </p><p>On peut aussi préciser des contraintes dans ce format, par exemple&nbsp;:&nbsp; </p><ul><li>un texte d’une longueur maximale de 10 lignes, </li><li>un plan détaillé en précisant la structure, le nombre de parties et le titre.</li></ul><p>Bon à savoir&nbsp;: Vous pouvez aussi demander à l’IA de partir d’un exemple et de le reproduire.<br><br></p>"
           }
         }
       ]
@@ -347,7 +347,7 @@
           "element": {
             "id": "17178f53-901f-4547-9f8a-bfc40990214d",
             "type": "text",
-            "content": "<p>📌 Résumons l’essentiel avant de passer à la suite&nbsp;: </p><ul><li>Un prompt efficace donne toujours <strong>un contexte</strong>&nbsp;: il donne à l'IA des précisions sur la situation&nbsp;: le lieu, le moment, l’objectif, etc.&nbsp;Sans contexte, l'IA risque de répondre de façon vague ou hors sujet.&nbsp;🎯</li><li>Préciser le <strong>format attendu</strong> dans votre prompt aide l'IA à structurer sa réponse selon vos besoins&nbsp;: liste, paragraphe, tableau, plan détaillé...Sans indication, l'IA choisira elle-même un format, qui peut ne pas correspondre &nbsp; à ce que vous attendez.&nbsp;📋</li><li>Le <strong>ton </strong>d’un prompt guide le style de la réponse&nbsp;: sérieux, amical, professionnel, humoristique… Préciser le ton attendu permet à l'IA d'adapter la forme de son discours au public visé.&nbsp;💬</li><li>Attribuer un <strong>rôle </strong>ou une identité à l'IA aide à obtenir des réponses mieux ciblées, plus adaptées au besoin&nbsp;: l’IA ajuste la forme de sa réponse et son niveau de détail selon le personnage que vous lui donnez.&nbsp;🤠</li></ul><p><br><strong>⚠️ Important&nbsp;&nbsp;:</strong> </p><p>Une réponse peut paraître claire et bien tournée… mais contenir des <strong>erreurs</strong>.&nbsp; Relire, c’est une étape essentielle avant de s’en inspirer, de la diffuser ou de la présenter.<br><br></p>"
+            "content": "<p>📌 Résumons l’essentiel avant de passer à la suite&nbsp;: </p><ul><li>Un prompt efficace donne toujours <strong>un contexte</strong>&nbsp;: il donne à l'IA des précisions sur la situation&nbsp;: le lieu, le moment, l’objectif... 🎯</li><li>Préciser le <strong>format attendu</strong> dans votre prompt aide l'IA à structurer sa réponse selon vos besoins&nbsp;: liste, paragraphe, tableau, plan détaillé...&nbsp;📋</li><li>Le <strong>ton </strong>d’un prompt guide le style de la réponse&nbsp;: sérieux, amical, professionnel, humoristique… 💬</li><li>Attribuer un <strong>rôle </strong>ou une identité à l'IA aide à obtenir des réponses mieux ciblées, plus adaptées au besoin&nbsp;: l’IA ajuste la forme de sa réponse et son niveau de détail selon le personnage que vous lui donnez.&nbsp;🤠</li></ul><p><br><strong>⚠️ Important&nbsp;&nbsp;:</strong> </p><p>Une réponse peut paraître claire et bien formulée mais quand même contenir des <strong>erreurs</strong>.&nbsp; </p><p>Relire la réponse de l’IA est une étape essentielle avant de s’en inspirer, de la diffuser ou de la présenter à quelqu’un.<br><br></p>"
           }
         }
       ]
@@ -362,7 +362,7 @@
           "element": {
             "id": "bfd964cd-dcb6-4bf6-8bde-182a05b75795",
             "type": "text",
-            "content": "<p>Grâce à ces conseils, Gustave a amélioré ses techniques pour parler à l’IA.&nbsp; <br></p><p>Pour chaque prompt, sélectionne tous les éléments du prompt qui le rendent clair.<br></p>"
+            "content": "<p>Grâce à ces conseils, Gustave a amélioré ses techniques pour parler à l’IA.&nbsp;</p><p><br>Pour chaque prompt, sélectionnez tous les éléments qui rendent le prompt clair.</p>"
           }
         },
         {
@@ -373,7 +373,7 @@
                 {
                   "id": "ae9cf536-d7b2-423f-872d-b20fc1217716",
                   "type": "text",
-                  "content": "<p>“En tant que coach de volley, propose un plan détaillé avec des exercices pour un entraînement d’une heure pour des enfants de 6 à 8 ans qui sont débutants.”<br></p>"
+                  "content": "<p>«&nbsp;En tant que coach de volley, propose un plan détaillé avec des exercices pour un entraînement d’une heure pour des enfants de 6 à 8 ans qui sont débutants.&nbsp;»<br></p>"
                 },
                 {
                   "id": "90b420d2-029d-4718-b865-8636cbb2daab",
@@ -400,7 +400,7 @@
                   "feedbacks": {
                     "valid": {
                       "state": "<p>Bien joué ! 🎉<br></p>",
-                      "diagnosis": "<p>Tous ces éléments rendent ce prompt clair ! Et il n’est pas toujours nécessaire de les mettre tous !<br></p>"
+                      "diagnosis": "<p>Tous ces éléments rendent ce prompt clair. Mais il n’est pas toujours nécessaire de les mettre tous.</p>"
                     },
                     "invalid": {
                       "state": "<p>Mauvaise réponse.<br></p>",
@@ -416,7 +416,7 @@
                 {
                   "id": "f64e341e-4e3b-4088-827d-9f353b869749",
                   "type": "text",
-                  "content": "<p>“Rédige un formulaire d’inscription formel pour une association de volley-ball qui fait des cours annuels de 2 séances&nbsp;: le mercredi et le vendredi à destination des joueurs adultes loisir ”</p>"
+                  "content": "<p>«&nbsp;Rédige un formulaire d’inscription formel pour une association de volley-ball qui fait des cours annuels de 2 séances&nbsp;: le mercredi et le vendredi, à destination des joueurs adultes loisirs.&nbsp;»<br></p>"
                 },
                 {
                   "id": "63e08249-f5bf-4ba0-93c1-9c864caab99b",
@@ -443,11 +443,11 @@
                   "feedbacks": {
                     "valid": {
                       "state": "<p>Bravo ! 🎉<br></p>",
-                      "diagnosis": "<p>Tous ces éléments rendent ce prompt clair ! Et il n’est pas toujours nécessaire de les mettre tous !<br></p>"
+                      "diagnosis": "<p>Tous ces éléments rendent ce prompt clair. Mais il n’est pas toujours nécessaire de les mettre tous.</p>"
                     },
                     "invalid": {
                       "state": "<p>Mauvaise réponse.<br></p>",
-                      "diagnosis": "<p>Ici, le format est le formulaire d’inscription, le ton est formel et le contexte toutes les informations sur l’association, son public et la fréquence de ses cours.<br></p>"
+                      "diagnosis": "<p>Ici, le format est le formulaire d’inscription, le ton est formel et le contexte correspond à toutes les informations sur l’association, son public et la fréquence des cours.<br></p>"
                     }
                   },
                   "solutions": ["1", "2", "3"]
@@ -459,7 +459,7 @@
                 {
                   "id": "40644c94-0cfe-407d-98d3-bf6b10a605dc",
                   "type": "text",
-                  "content": "<p>“Décris un match de volley à la plage, comme si tu étais Molière\"</p>"
+                  "content": "<p>«&nbsp;Décris un match de volley à la plage, comme si tu étais le célèbre écrivain Molière.&nbsp;»<br></p>"
                 },
                 {
                   "id": "c11fd7b8-645a-43b7-80cd-a1953fe4180b",
@@ -486,11 +486,11 @@
                   "feedbacks": {
                     "valid": {
                       "state": "<p>Bonne réponse ! 🎉<br></p>",
-                      "diagnosis": "<p>Ces éléments rendent ce prompt clair ! Et il n’est pas toujours nécessaire de les mettre tous !<br></p>"
+                      "diagnosis": "<p>Ces éléments rendent ce prompt clair. Mais il n’est pas toujours nécessaire de les mettre tous.</p>"
                     },
                     "invalid": {
                       "state": "<p>Mauvaise réponse.<br></p>",
-                      "diagnosis": "<p>Ici, le rôle est Molière et le contexte du match de volley à la plage.<br></p>"
+                      "diagnosis": "<p>Ici, le rôle est Molière et le contexte, celui du match de volley à la plage.<br></p>"
                     }
                   },
                   "solutions": ["1", "4"]
@@ -502,7 +502,7 @@
                 {
                   "id": "5176e4d0-394a-4e27-a754-f675ee325595",
                   "type": "text",
-                  "content": "<p>“En tant qu’humoriste, propose un court discours amusant (2 à 3 minutes) pour le pot de départ d’un joueur de volley de ton équipe qui déménage dans une autre ville, inclus ses grandes qualités (humour, adresse, leadership) et ses petits défauts (impatient et bavard) ”</p>"
+                  "content": "<p>«&nbsp;En tant qu’humoriste, propose un court discours amusant (2 à 3 minutes) pour le pot de départ d’un joueur de volley de ton équipe qui déménage dans une autre ville. Inclus ses grandes qualités (humour, adresse, leadership) et ses petits défauts (impatient et bavard).&nbsp;»</p>"
                 },
                 {
                   "id": "bf5ec9f6-31ce-44ad-b880-5694072cd0e4",
@@ -529,11 +529,11 @@
                   "feedbacks": {
                     "valid": {
                       "state": "<p>Bien joué !</p>",
-                      "diagnosis": "<p>Tous ces éléments rendent ce prompt clair ! Et il n’est pas toujours nécessaire de les mettre tous !<br></p>"
+                      "diagnosis": "<p>Tous ces éléments rendent ce prompt clair. Mais il n’est pas toujours nécessaire de les mettre tous.<br></p>"
                     },
                     "invalid": {
                       "state": "<p>Mauvaise réponse.<br></p>",
-                      "diagnosis": "<p>Ici, l’humoriste est le rôle, le format est un court discours, le ton est amusant et le contexte, le pot de départ d’un joueur de volley est détaillé avec des éléments utiles comme les qualités et les défauts.<br></p>"
+                      "diagnosis": "<p>Ici, l’humoriste est le rôle, le format est un court discours, le ton est amusant. Le contexte est le pot de départ d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</p>"
                     }
                   },
                   "solutions": ["1", "2", "3", "4"]
@@ -554,7 +554,7 @@
           "element": {
             "id": "01b2936a-534d-4d85-ab77-6ecd53b84683",
             "type": "text",
-            "content": "<p>Gustave est content car le tournoi de l’été a été un succès !&nbsp;🌞</p><p><br>Pour chaque édition, il publie sur le site du gymnase une actualité à sa manière.<br>Ses précédentes publications sont disponibles ci-dessous&nbsp;:<br></p>"
+            "content": "<p>Gustave est content ; le tournoi de l’été a été un succès !&nbsp;🌞</p><p>Pour chaque édition du tournoi, il crée une publication sur le site du gymnase, à sa manière…</p><p>Ses précédentes publications sont disponibles ci-dessous&nbsp;:<br></p>"
           }
         },
         {
@@ -570,7 +570,7 @@
           "element": {
             "id": "52c9f208-8f95-4926-a64e-214041a834d2",
             "type": "text",
-            "content": "<p>Écrivez l’actualité du tournoi de l’été à la façon des précédentes actualités de Gustave et en vous basant sur la photo illustrant le tournoi.</p>"
+            "content": "<p>À votre tour d’écrire l’<strong>actualité du tournoi de l’été</strong> à la façon des précédentes actualités de Gustave et en vous basant sur la photo illustrant le tournoi.</p>"
           }
         },
         {
