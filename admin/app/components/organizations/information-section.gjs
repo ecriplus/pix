@@ -1,8 +1,8 @@
+import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import fileQueue from 'ember-file-upload/helpers/file-queue';
 
 import ArchivingConfirmationModal from './archiving-confirmation-modal';
 import InformationSectionEdit from './information-section-edit';
@@ -14,11 +14,16 @@ export default class OrganizationInformationSection extends Component {
   @tracked showArchivingConfirmationModal = false;
 
   @action
-  updateLogo(file) {
-    return file.readAsDataURL().then((b64) => {
-      this.args.organization.logoUrl = b64;
-      return this.args.onLogoUpdated();
-    });
+  onLogoUpload(event) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.args.organization.logoUrl = reader.result;
+      this.args.onLogoUpdated();
+    };
+    reader.readAsDataURL(file);
   }
 
   @action
@@ -50,11 +55,9 @@ export default class OrganizationInformationSection extends Component {
               <img src="{{this.rootURL}}/logo-placeholder.png" alt="" role="presentation" />
             {{/if}}
 
-            {{#let (fileQueue name="photos" onFileAdded=this.updateLogo) as |queue|}}
-              <label class="file-upload">
-                <input type="file" accept="image/*" hidden {{queue.selectFile}} />
-              </label>
-            {{/let}}
+            <label class="file-upload">
+              <input type="file" accept="image/*" hidden {{on "change" this.onLogoUpload}} />
+            </label>
           </figure>
         </div>
 

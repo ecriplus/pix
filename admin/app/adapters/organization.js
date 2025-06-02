@@ -1,5 +1,3 @@
-import queryString from 'query-string';
-
 import ApplicationAdapter from './application';
 
 export default class OrganizationAdapter extends ApplicationAdapter {
@@ -18,8 +16,11 @@ export default class OrganizationAdapter extends ApplicationAdapter {
     url = this.urlPrefix(url, this.buildURL(snapshot.modelName, snapshot.id, null, 'findHasMany'));
 
     if (relationship.type === 'organization-membership' && snapshot.adapterOptions) {
-      const options = queryString.stringify(snapshot.adapterOptions);
-      url = `${this.host}/${this.namespace}/organizations/${snapshot.id}/memberships?${options}`;
+      const params = new URLSearchParams();
+      for (const [key, value] of Object.entries(snapshot.adapterOptions)) {
+        if (value) params.append(key, value);
+      }
+      url = `${this.host}/${this.namespace}/organizations/${snapshot.id}/memberships?${params.toString()}`;
     }
 
     return this.ajax(url, 'GET');

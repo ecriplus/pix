@@ -50,9 +50,9 @@ module('Integration | Component | routes/authenticated/sessions/session | inform
 
       // then
       assert.dom(screen.queryByText('Commentaire global :')).doesNotExist();
-      assert.dom('[data-test-id="session-info__number-of-impactful-reports"]').doesNotExist();
-      assert.dom('[data-test-id="session-info__number-of-issue-reports"]').doesNotExist();
-      assert.dom('[data-test-id="session-info__number-of-scoring-errors"]').doesNotExist();
+      assert.dom(screen.queryByText('Nombre de signalement(s) impactant(s) non résolu(s) :')).doesNotExist();
+      assert.dom(screen.queryByText('Nombre de signalement(s) :')).doesNotExist();
+      assert.dom(screen.queryByText('Nombre de certification(s) en erreur :')).doesNotExist();
     });
 
     test('it does not render the action buttons', async function (assert) {
@@ -100,13 +100,15 @@ module('Integration | Component | routes/authenticated/sessions/session | inform
       const session = _buildSessionWithTwoJuryCertificationSummary({}, server);
 
       // when
-      await visit(`/sessions/${session.id}`);
+      const screen = await visit(`/sessions/${session.id}`);
 
       // when
-      assert.dom('[data-test-id="session-info__number-of-started-certifications"]').hasText('1');
-      assert.dom('[data-test-id="session-info__number-of-impactful-reports"]').hasText('2');
-      assert.dom('[data-test-id="session-info__number-of-issue-reports"]').hasText('3');
-      assert.dom('[data-test-id="session-info__number-of-scoring-errors"]').hasText('4');
+      assert.dom(screen.queryByText('Nombre de certification(s) démarrée(s) :').parentElement).includesText('1');
+      assert
+        .dom(screen.queryByText('Nombre de signalement(s) impactant(s) non résolu(s) :').parentElement)
+        .includesText('2');
+      assert.dom(screen.queryByText('Nombre de signalement(s) :').parentElement).includesText('3');
+      assert.dom(screen.queryByText('Nombre de certification(s) en erreur :').parentElement).includesText('4');
     });
 
     test('it renders the examinerGlobalComment if any', async function (assert) {
