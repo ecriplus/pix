@@ -12,14 +12,14 @@ export default class CampaignTabs extends Component {
   @service notifications;
   @service fileSaver;
   @service session;
-  @service metrics;
+  @service pixMetrics;
 
   @action
   async exportData() {
     try {
       const token = this.session.data.authenticated.access_token;
       await this.fileSaver.save({ url: this.args.campaign.urlToResult, token });
-      this.metrics.add({
+      this.pixMetrics.trackEvent({
         event: 'custom-event',
         'pix-event-category': 'Campagnes',
         'pix-event-action': "Cliquer sur le bouton d'export des résultats d'une campagne",

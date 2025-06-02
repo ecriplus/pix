@@ -10,7 +10,6 @@ export default class ApplicationRoute extends Route {
   @service currentUser;
   @service session;
   @service intl;
-  @service metrics;
   @service pixMetrics;
   @service router;
 

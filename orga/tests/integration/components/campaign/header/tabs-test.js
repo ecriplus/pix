@@ -31,6 +31,9 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
     }
     this.owner.register('service:session', sessionService);
 
+    const metrics = this.owner.lookup('service:pix-metrics');
+    sinon.stub(metrics, 'trackEvent');
+
     ENV.APP.API_HOST = 'https://myapp.com';
     access_token = Symbol('ACCESS_TOKEN');
     store = this.owner.lookup('service:store');
@@ -144,20 +147,15 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
       );
     });
 
-    test('it should push matomo event when user clicks on export button', async function (assert) {
-      const add = sinon.stub();
-
-      class MetricsStubService extends Service {
-        add = add;
-      }
-      this.owner.register('service:metrics', MetricsStubService);
+    test('it should push analytic event when user clicks on export button', async function (assert) {
+      const pixMetrics = this.owner.lookup('service:pix-metrics');
 
       const screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
 
       // when
       await click(screen.getByRole('button', { name: t('pages.campaign.actions.export-results') }));
 
-      sinon.assert.calledWithExactly(add, {
+      sinon.assert.calledWithExactly(pixMetrics.trackEvent, {
         event: 'custom-event',
         'pix-event-category': 'Campagnes',
         'pix-event-action': "Cliquer sur le bouton d'export des résultats d'une campagne",

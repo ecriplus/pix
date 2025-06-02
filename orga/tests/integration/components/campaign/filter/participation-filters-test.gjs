@@ -553,8 +553,8 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         const selectedUnacquiredBadges = [];
         const selectedBadges = [];
 
-        const metrics = this.owner.lookup('service:metrics');
-        metrics.add = sinon.stub();
+        const metrics = this.owner.lookup('service:pix-metrics');
+        metrics.trackEvent = sinon.stub();
 
         // when
         const screen = await render(
@@ -581,7 +581,7 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         // then
         assert.ok(triggerFiltering.calledWith('unacquiredBadges', ['badge1']));
 
-        sinon.assert.calledWithExactly(metrics.add, {
+        sinon.assert.calledWithExactly(metrics.trackEvent, {
           event: 'custom-event',
           'pix-event-category': 'Campagnes',
           'pix-event-action': 'Filtrer les participations',
@@ -602,8 +602,8 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         const selectedBadges = [];
         const selectedUnacquiredBadges = [];
 
-        const metrics = this.owner.lookup('service:metrics');
-        metrics.add = sinon.stub();
+        const metrics = this.owner.lookup('service:pix-metrics');
+        metrics.trackEvent = sinon.stub();
 
         // when
         const screen = await render(
@@ -627,7 +627,7 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         // then
         assert.ok(triggerFiltering.calledWith('badges', ['badge1']));
 
-        sinon.assert.calledWithExactly(metrics.add, {
+        sinon.assert.calledWithExactly(metrics.trackEvent, {
           event: 'custom-event',
           'pix-event-category': 'Campagnes',
           'pix-event-action': 'Filtrer les participations',
@@ -713,8 +713,8 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         const selectedUnacquiredBadges = [];
         const selectedBadges = [];
 
-        const metrics = this.owner.lookup('service:metrics');
-        metrics.add = sinon.stub();
+        const metrics = this.owner.lookup('service:pix-metrics');
+        metrics.trackEvent = sinon.stub();
 
         // when
         const screen = await render(
@@ -741,7 +741,7 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         // then
         assert.ok(triggerFiltering.calledWith('unacquiredBadges', ['badge1']));
 
-        sinon.assert.calledWithExactly(metrics.add, {
+        sinon.assert.calledWithExactly(metrics.trackEvent, {
           event: 'custom-event',
           'pix-event-category': 'Campagnes',
           'pix-event-action': 'Filtrer les participations',
@@ -762,8 +762,8 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         const selectedBadges = [];
         const selectedUnacquiredBadges = [];
 
-        const metrics = this.owner.lookup('service:metrics');
-        metrics.add = sinon.stub();
+        const metrics = this.owner.lookup('service:pix-metrics');
+        metrics.trackEvent = sinon.stub();
 
         // when
         const screen = await render(
@@ -787,7 +787,7 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         // then
         assert.ok(triggerFiltering.calledWith('badges', ['badge1']));
 
-        sinon.assert.calledWithExactly(metrics.add, {
+        sinon.assert.calledWithExactly(metrics.trackEvent, {
           event: 'custom-event',
           'pix-event-category': 'Campagnes',
           'pix-event-action': 'Filtrer les participations',

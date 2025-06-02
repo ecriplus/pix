@@ -18,7 +18,7 @@ const debounceTime = ENV.pagination.debounce;
 export default class ParticipationFilters extends Component {
   @service intl;
   @service currentUser;
-  @service metrics;
+  @service pixMetrics;
 
   @tracked stages = [];
   @tracked isStagesLoading = true;
@@ -153,7 +153,7 @@ export default class ParticipationFilters extends Component {
   onSelectBadge(badges) {
     this.args.onFilter('badges', badges);
 
-    this.metrics.add({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Campagnes',
       'pix-event-action': 'Filtrer les participations',
@@ -165,7 +165,7 @@ export default class ParticipationFilters extends Component {
   onSelectUnacquiredBadge(unacquiredBadges) {
     this.args.onFilter('unacquiredBadges', unacquiredBadges);
 
-    this.metrics.add({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Campagnes',
       'pix-event-action': 'Filtrer les participations',

@@ -29,6 +29,6 @@ export default class PixMetricsService extends Service {
 }
 
 const extractParamsFromRouteInfo = (routeInfo = {}, params = []) =>
-  !routeInfo?.parent
-    ? params
-    : extractParamsFromRouteInfo(routeInfo.parent, params.concat(Object.values(routeInfo.params)));
+  routeInfo?.parent
+    ? extractParamsFromRouteInfo(routeInfo.parent, params.concat(Object.values(routeInfo.params)))
+    : params;
