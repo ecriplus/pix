@@ -174,15 +174,15 @@
               },
               {
                 "id": "2",
-                "content": "<p>celui avec un ton formel</p>",
+                "content": "<p>celui avec un ton sérieux </p>",
                 "feedback": {
-                  "state": "<p>Un choix sérieux !</p>",
-                  "diagnosis": "<p><strong>Un choix sérieux !</strong> Au final, Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi.</p>"
+                  "state": "<p>Un choix sage !</p>",
+                  "diagnosis": "<p><strong>Un choix sage !</strong> Au final, Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi.</p>"
                 }
               },
               {
                 "id": "3",
-                "content": "<p>celui avec un ton décalé</p>",
+                "content": "<p>celui avec un ton drôle </p>",
                 "feedback": {
                   "state": "<p>Un choix audacieux !</p>",
                   "diagnosis": "<p><strong>Un choix original !</strong> Au final, Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi. </p>"
