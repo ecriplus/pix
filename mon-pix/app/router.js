@@ -1,9 +1,3 @@
-/* eslint ember/classic-decorator-hooks: 0 */
-/* eslint ember/no-actions-hash: 0 */
-/* eslint ember/no-classic-classes: 0 */
-/* eslint ember/no-classic-components: 0 */
-/* eslint ember/require-tagless-components: 0 */
-
 import EmberRouter from '@ember/routing/router';
 
 import config from './config/environment';
@@ -12,7 +6,8 @@ export default class Router extends EmberRouter {
   location = config.locationType;
   rootURL = config.rootURL;
 
-  init() {
+  constructor() {
+    super(...arguments);
     this.on('routeDidChange', () => {
       window.scrollTo(0, 0);
     });
