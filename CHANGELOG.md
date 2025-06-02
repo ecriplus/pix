@@ -1,5 +1,20 @@
 # Pix Changelog
 
+# [5.124.0](https://github.com/1024pix/pix/compare/v5.123.0...v5.124.0) (2025-06-02)
+
+### :rocket: Amélioration
+
+- [#12398](https://github.com/1024pix/pix/pull/12398) Afficher la complémentaire dans le PDF du certificat en cas de passage de la double certification en V3 (PIX-17891).  
+- [#12361](https://github.com/1024pix/pix/pull/12361) Ajout d'un endpoint pour poursuivre une conversation avec le LLM (PIX-17904) 
+- [#12417](https://github.com/1024pix/pix/pull/12417) Ajout d’un module de démonstration de ChatPix (PIX-17786) 
+- [#12406](https://github.com/1024pix/pix/pull/12406) Modifier le texte de la modale de suppression de participation dans PixAdmin (PIX-18058) 
+
+### :building_construction: Tech
+
+- [#12302](https://github.com/1024pix/pix/pull/12302) :truck: Déplace la route et le cas d'utilisation `ScoOrganizationLearnerAccountRecovery` 
+- [#12378](https://github.com/1024pix/pix/pull/12378) :truck: Retire l'utilisation du mot `attestation` du cas d'utilisation de récupération d'un certificat (PIX-18024) 
+- [#12391](https://github.com/1024pix/pix/pull/12391) :truck: Utilise le terme `certificat` plutôt que `attestation` dans une erreur (PIX-18051)
+
 # [5.123.0](https://github.com/1024pix/pix/compare/v5.122.0...v5.123.0) (2025-05-30)
 
 ### :rocket: Amélioration
