@@ -114,7 +114,7 @@ const register = async (server) => {
           payload: Joi.object({
             data: {
               attributes: {
-                'campaign-code': Joi.string().empty(Joi.string().regex(/^\s*$/)).required(),
+                'organization-id': Joi.number().required(),
               },
               type: 'sco-organization-learners',
             },

@@ -4,16 +4,16 @@ import { decodeToken } from 'mon-pix/helpers/jwt';
 export default function index(config) {
   config.post('/sco-organization-learners/association', (schema, request) => {
     const params = JSON.parse(request.requestBody);
-    const campaignCode = params.data.attributes['campaign-code'];
+    const organizationId = params.data.attributes['organization-id'];
     const birthdate = params.data.attributes.birthdate;
-    return schema.scoOrganizationLearners.create({ campaignCode, birthdate });
+    return schema.scoOrganizationLearners.create({ organizationId, birthdate });
   });
 
   config.post('/sco-organization-learners/association/auto', (schema, request) => {
     const params = JSON.parse(request.requestBody);
-    const campaignCode = params.data.attributes['campaign-code'];
+    const organizationId = params.data.attributes['organization-id'];
 
-    const scoOrganizationLearner = schema.scoOrganizationLearners.findBy({ campaignCode });
+    const scoOrganizationLearner = schema.scoOrganizationLearners.findBy({ organizationId });
     return scoOrganizationLearner
       ? scoOrganizationLearner
       : new Response(

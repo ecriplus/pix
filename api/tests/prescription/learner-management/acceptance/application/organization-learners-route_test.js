@@ -228,7 +228,6 @@ describe('Acceptance | Prescription | learner management | Application | organiz
   describe('POST /api/sco-organization-learners/association/auto', function () {
     const nationalStudentId = '12345678AZ';
     let organization;
-    let campaign;
     let options;
     let user;
 
@@ -243,7 +242,7 @@ describe('Acceptance | Prescription | learner management | Application | organiz
 
       user = databaseBuilder.factory.buildUser();
       organization = databaseBuilder.factory.buildOrganization();
-      campaign = databaseBuilder.factory.buildCampaign({ organizationId: organization.id });
+      databaseBuilder.factory.buildCampaign({ organizationId: organization.id });
       databaseBuilder.factory.buildOrganizationLearner({
         organizationId: organization.id,
         userId: null,
@@ -261,7 +260,7 @@ describe('Acceptance | Prescription | learner management | Application | organiz
       options.headers = generateAuthenticatedUserRequestHeaders({ userId: user.id });
       options.payload.data = {
         attributes: {
-          'campaign-code': campaign.code,
+          'organization-id': organization.id,
         },
         type: 'sco-organization-learners',
       };

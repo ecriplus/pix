@@ -52,10 +52,10 @@ const reconcileScoOrganizationLearnerAutomatically = async function (
 ) {
   const authenticatedUserId = request.auth.credentials.userId;
   const payload = request.payload.data.attributes;
-  const campaignCode = payload['campaign-code'];
+  const organizationId = payload['organization-id'];
   const organizationLearner = await usecases.reconcileScoOrganizationLearnerAutomatically({
     userId: authenticatedUserId,
-    campaignCode,
+    organizationId,
   });
 
   return h.response(dependencies.scoOrganizationLearnerSerializer.serializeIdentity(organizationLearner));
