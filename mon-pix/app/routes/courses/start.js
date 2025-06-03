@@ -15,6 +15,6 @@ export default class CreateAssessmentRoute extends Route {
 
   async redirect(course) {
     const assessment = await this.store.createRecord('assessment', { course, type: 'DEMO' }).save();
-    return this.router.replaceWith('assessments.resume', assessment.id);
+    this.router.replaceWith('assessments.resume', assessment.id);
   }
 }
