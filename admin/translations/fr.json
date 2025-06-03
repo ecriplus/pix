@@ -242,6 +242,19 @@
         "quest-creator": "Créer ta Quête",
         "title": "Création et modification de quêtes",
         "upload-button": "Importer un fichier CSV"
+      },
+      "user-quest-checker": {
+        "description": "Vérifier si un utilisateur répond aux critères d'éligibilité et de succès d'une quête",
+        "form": {
+          "quest-id-input-label": "Id de la quête",
+          "submit-button": "Vérifier",
+          "user-id-input-label": "Id de l'utilisateur"
+        },
+        "messages": {
+          "error": "Cet utilisateur n'est pas encore en capacité de valider cette quête",
+          "success": "Cet utilisateur est en capacité de valider cette quête"
+        },
+        "title": "Vérification de possibilité de complétion de quête"
       }
     },
     "autonomous-courses": {
