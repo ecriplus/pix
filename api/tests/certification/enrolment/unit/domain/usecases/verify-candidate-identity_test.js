@@ -1,5 +1,4 @@
 import { verifyCandidateIdentity } from '../../../../../../src/certification/enrolment/domain/usecases/verify-candidate-identity.js';
-import { SESSIONS_VERSIONS } from '../../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { types } from '../../../../../../src/organizational-entities/domain/models/Organization.js';
 import {
   CertificationCandidateByPersonalInfoNotFoundError,
@@ -61,7 +60,6 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | verify-candidate
     // given
     const session = domainBuilder.certification.enrolment.buildSession({
       id: sessionId,
-      version: SESSIONS_VERSIONS.V3,
       certificationCenterId,
     });
     const matchingCandidate = domainBuilder.certification.enrolment.buildCandidate({
@@ -107,34 +105,31 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | verify-candidate
     expect(result).to.deep.equal(matchingCandidate);
   });
 
-  context('when certification is V3', function () {
-    context('when user language is not available for certification', function () {
-      it('should throw a LanguageNotSupportedError', async function () {
-        // given
-        sessionRepository.get.withArgs({ id: sessionId }).resolves(
-          domainBuilder.certification.enrolment.buildSession({
-            id: sessionId,
-            version: SESSIONS_VERSIONS.V3,
-            certificationCenterId,
-          }),
-        );
-        userRepository.get.withArgs({ id: userId }).resolves(
-          domainBuilder.certification.enrolment.buildUser({
-            id: userId,
-            lang: 'Le blop blop martien du sud',
-          }),
-        );
-        languageService.isLanguageAvailableForV3Certification.returns(false);
+  context('when user language is not available for certification', function () {
+    it('should throw a LanguageNotSupportedError', async function () {
+      // given
+      sessionRepository.get.withArgs({ id: sessionId }).resolves(
+        domainBuilder.certification.enrolment.buildSession({
+          id: sessionId,
+          certificationCenterId,
+        }),
+      );
+      userRepository.get.withArgs({ id: userId }).resolves(
+        domainBuilder.certification.enrolment.buildUser({
+          id: userId,
+          lang: 'Le blop blop martien du sud',
+        }),
+      );
+      languageService.isLanguageAvailableForV3Certification.returns(false);
 
-        // when
-        const error = await catchErr(verifyCandidateIdentity)({
-          ...dependencies,
-        });
-
-        // then
-        expect(error).to.be.instanceof(LanguageNotSupportedError);
-        expect(error.message).to.equal('Given language is not supported : "Le blop blop martien du sud"');
+      // when
+      const error = await catchErr(verifyCandidateIdentity)({
+        ...dependencies,
       });
+
+      // then
+      expect(error).to.be.instanceof(LanguageNotSupportedError);
+      expect(error.message).to.equal('Given language is not supported : "Le blop blop martien du sud"');
     });
   });
 
@@ -151,7 +146,6 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | verify-candidate
       sessionRepository.get.withArgs({ id: sessionId }).resolves(
         domainBuilder.certification.enrolment.buildSession({
           id: sessionId,
-          version: SESSIONS_VERSIONS.V2,
           certificationCenterId,
         }),
       );
@@ -188,7 +182,6 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | verify-candidate
       sessionRepository.get.withArgs({ id: sessionId }).resolves(
         domainBuilder.certification.enrolment.buildSession({
           id: sessionId,
-          version: SESSIONS_VERSIONS.V2,
           certificationCenterId,
         }),
       );
@@ -224,6 +217,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | verify-candidate
     context('when matching candidate is already reconciled to another user', function () {
       it('should throw a UnexpectedUserAccountError', async function () {
         // given
+        languageService.isLanguageAvailableForV3Certification.returns(true);
         userRepository.get.withArgs({ id: userId }).resolves(
           domainBuilder.certification.enrolment.buildUser({
             id: userId,
@@ -239,7 +233,6 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | verify-candidate
         sessionRepository.get.withArgs({ id: sessionId }).resolves(
           domainBuilder.certification.enrolment.buildSession({
             id: sessionId,
-            version: SESSIONS_VERSIONS.V2,
             certificationCenterId,
           }),
         );
@@ -276,6 +269,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | verify-candidate
     context('when matching candidate is already reconciled to given user', function () {
       it('should return a succes indicating no reconciliation done', async function () {
         // given
+        languageService.isLanguageAvailableForV3Certification.returns(true);
         userRepository.get.withArgs({ id: userId }).resolves(
           domainBuilder.certification.enrolment.buildUser({
             id: userId,
@@ -291,7 +285,6 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | verify-candidate
         sessionRepository.get.withArgs({ id: sessionId }).resolves(
           domainBuilder.certification.enrolment.buildSession({
             id: sessionId,
-            version: SESSIONS_VERSIONS.V2,
             certificationCenterId,
           }),
         );
@@ -328,6 +321,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | verify-candidate
     context('when user is already reconciled to another matching candidate within the same session', function () {
       it('should throw a UserAlreadyLinkedToCandidateInSessionError', async function () {
         // given
+        languageService.isLanguageAvailableForV3Certification.returns(true);
         userRepository.get.withArgs({ id: userId }).resolves(
           domainBuilder.certification.enrolment.buildUser({
             id: userId,
@@ -343,7 +337,6 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | verify-candidate
         sessionRepository.get.withArgs({ id: sessionId }).resolves(
           domainBuilder.certification.enrolment.buildSession({
             id: sessionId,
-            version: SESSIONS_VERSIONS.V2,
             certificationCenterId,
           }),
         );
@@ -386,6 +379,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | verify-candidate
         context('when matching candidate is not related to a reconcilied learner', function () {
           it('should throw a MatchingReconciledStudentNotFoundError', async function () {
             // given
+            languageService.isLanguageAvailableForV3Certification.returns(true);
             const matchingOrganization = domainBuilder.certification.enrolment.buildMatchingOrganization({
               type: types.SCO,
               isManagingStudents: true,
@@ -406,7 +400,6 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | verify-candidate
             sessionRepository.get.withArgs({ id: sessionId }).resolves(
               domainBuilder.certification.enrolment.buildSession({
                 id: sessionId,
-                version: SESSIONS_VERSIONS.V2,
                 certificationCenterId,
               }),
             );
