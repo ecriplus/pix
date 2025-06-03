@@ -6,6 +6,7 @@ import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransa
 import {
   CertificationEndedByFinalizationError,
   CertificationEndedBySupervisorError,
+  ChallengeAlreadyAnsweredError,
   ChallengeNotAskedError,
 } from '../../../../../src/shared/domain/errors.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
@@ -52,6 +53,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       userId,
       lastQuestionDate: nowDate,
       type: Assessment.types.CERTIFICATION,
+      answers: [],
     });
     answer = domainBuilder.buildAnswer({ assessmentId: assessment.id, value: correctAnswerValue, challengeId });
     answer.id = undefined;
@@ -75,6 +77,25 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
 
   afterEach(async function () {
     clock.restore();
+  });
+
+  context('when an answer for that challenge has already been provided', function () {
+    it('should fail because ChallengeAlreadyAnsweredError', async function () {
+      // given
+      assessment.answers = [domainBuilder.buildAnswer({ challengeId: answer.challengeId })];
+
+      // when
+      const error = await catchErr(saveAndCorrectAnswerForCertification)({
+        answer,
+        userId,
+        assessment,
+        locale,
+        ...dependencies,
+      });
+
+      // then
+      expect(error).to.be.an.instanceOf(ChallengeAlreadyAnsweredError);
+    });
   });
 
   context('when an answer for that challenge is not for an asked challenge', function () {
@@ -124,6 +145,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
         userId,
         lastQuestionDate: nowDate,
         state: Assessment.states.ENDED_DUE_TO_FINALIZATION,
+        answers: [],
       });
 
       // when
@@ -193,6 +215,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
           userId,
           type: Assessment.types.CERTIFICATION,
           lastQuestionDate: nowDate,
+          answers: [],
         });
 
         challengeRepository.get.resolves(challenge);
@@ -253,7 +276,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
 
     beforeEach(function () {
       answer = domainBuilder.buildAnswer();
-      assessment = domainBuilder.buildAssessment({ userId: userId + 1 });
+      assessment = domainBuilder.buildAssessment({ userId: userId + 1, answers: [] });
     });
 
     it('should throw an error if no userId is passed', function () {
@@ -281,6 +304,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
         userId,
         lastQuestionDate: new Date('2021-03-11T11:00:00Z'),
         type: Assessment.types.CERTIFICATION,
+        answers: [],
       });
       answerSaved = domainBuilder.buildAnswer(answer);
       answerSaved.timeSpent = 5;
@@ -320,6 +344,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
         userId,
         lastQuestionDate: new Date('2021-03-11T11:00:00Z'),
         type: Assessment.types.CERTIFICATION,
+        answers: [],
       });
       answerSaved = domainBuilder.buildAnswer(focusedOutAnswer);
       answerRepository.save.resolves(answerSaved);
@@ -367,6 +392,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
           userId,
           lastQuestionDate: new Date('2021-03-11T11:00:00Z'),
           type: Assessment.types.CERTIFICATION,
+          answers: [],
         });
         certificationEvaluationCandidateRepository.findByAssessmentId
           .withArgs({ assessmentId: assessment.id })
@@ -437,6 +463,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
           userId,
           lastQuestionDate: new Date('2021-03-11T11:00:00Z'),
           type: Assessment.types.CERTIFICATION,
+          answers: [],
         });
         certificationEvaluationCandidateRepository.findByAssessmentId
           .withArgs({ assessmentId: assessment.id })
@@ -499,6 +526,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
           userId,
           lastQuestionDate: nowDate,
           state: Assessment.states.STARTED,
+          answers: [],
         });
         const answer = domainBuilder.buildAnswer({ challengeId: challenge.id });
         const certificationChallengeLiveAlert = domainBuilder.buildCertificationChallengeLiveAlert({
@@ -534,6 +562,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
           userId,
           lastQuestionDate: nowDate,
           state: Assessment.states.STARTED,
+          answers: [],
         });
         const answer = domainBuilder.buildAnswer({ challengeId: challenge.id });
         const certificationChallengeLiveAlert = domainBuilder.buildCertificationChallengeLiveAlert({
@@ -575,6 +604,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
         userId,
         lastQuestionDate: new Date('2021-03-11T11:00:00Z'),
         type: Assessment.types.COMPETENCE_EVALUATION,
+        answers: [],
       });
 
       // when
@@ -605,6 +635,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
         userId,
         lastQuestionDate: new Date('2021-03-11T11:00:00Z'),
         type: Assessment.types.CERTIFICATION,
+        answers: [],
       });
       const answerSaved = domainBuilder.buildAnswer(emptyAnswer);
       answerRepository.save.resolves(answerSaved);
