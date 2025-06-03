@@ -1,5 +1,28 @@
 # Pix Changelog
 
+# [5.125.0](https://github.com/1024pix/pix/compare/v5.124.0...v5.125.0) (2025-06-03)
+
+### :rocket: Amélioration
+
+- [#12403](https://github.com/1024pix/pix/pull/12403) Détacher les assessments quand on supprime une participation (PIX-18047). 
+- [#12415](https://github.com/1024pix/pix/pull/12415) Gérer la modalité Question A/B (QAB) dans le front (PIX-18000) 
+- [#12375](https://github.com/1024pix/pix/pull/12375) Sur le domaine pix.org mettre "en" comme fallback de locale sur tous les frontaux (PIX-17758) 
+- [#12371](https://github.com/1024pix/pix/pull/12371) Vocaliser le changement d'étape sur un module (PIX-17934) (PIX-17910) 
+
+### :bug: Correction
+
+- [#12413](https://github.com/1024pix/pix/pull/12413) Actualiser les informations d'une invitation à rejoindre un centre de certification lorsqu'on réinvite un utilisateur (PIX-18064) 
+- [#12408](https://github.com/1024pix/pix/pull/12408) Corrections graphiques sur le formulaire d'inscription / connexion d'une campagne SCO (PIX-17926) 
+
+### :building_construction: Tech
+
+- [#12392](https://github.com/1024pix/pix/pull/12392) :truck: Renomme le cas d'utilisation `findCertificationAttestationForDivision` sans le terme `attestation` (pix-18052) 
+- [#12380](https://github.com/1024pix/pix/pull/12380) :truck: Renommer le cas d'utilisation `get-certification-attestations-for-session` pour enlever `attestations` (PIX-18028) 
+- [#12418](https://github.com/1024pix/pix/pull/12418) Bump des dépendances de linters et formatters Pix Admin 
+- [#12423](https://github.com/1024pix/pix/pull/12423) Mise à jour de dépendances Pix Admin 
+- [#12404](https://github.com/1024pix/pix/pull/12404) Remplacer certaines dependances de Pix Admin 
+- [#12420](https://github.com/1024pix/pix/pull/12420) Retirer des commentaires de linter pour retirer les erreurs (PIX-18077).
+
 # [5.124.0](https://github.com/1024pix/pix/compare/v5.123.0...v5.124.0) (2025-06-02)
 
 ### :rocket: Amélioration
