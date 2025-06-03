@@ -4,6 +4,8 @@
   width: 100%;
   padding: var(--pix-spacing-6x);
   padding-bottom: var(--pix-spacing-10x);
+  background-color: rgb(var(--pix-primary-100-inline), 0.6);
+  border-radius: var(--pix-spacing-4x) var(--pix-spacing-4x) 0 0;
 
   &__instruction {
     @extend %pix-body-m;
@@ -15,7 +17,7 @@
     @extend %pix-body-s;
 
     margin: var(--pix-spacing-3x) 0;
-    color: var(--pix-neutral-500);
+    color: var(--pix-neutral-800);
   }
 
   &__proposals {
@@ -31,6 +33,6 @@
     padding: var(--pix-spacing-6x);
     color: var(--pix-neutral-0);
     background: var(--pix-neutral-800);
-    border-radius: var(--pix-spacing-4x);
+    border-radius: 0 0 var(--pix-spacing-4x) var(--pix-spacing-4x);
   }
 }
