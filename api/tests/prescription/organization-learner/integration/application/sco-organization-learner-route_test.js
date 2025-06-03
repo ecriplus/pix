@@ -34,7 +34,7 @@ describe('Integration | Application | Route | sco-organization-learners', functi
       payload = {
         data: {
           attributes: {
-            'campaign-code': 'RESTRICTD',
+            'organization-id': 123,
             'external-user-token': 'external-user-token',
             birthdate: '1948-12-21',
             'access-token': null,
@@ -44,18 +44,16 @@ describe('Integration | Application | Route | sco-organization-learners', functi
       };
     });
 
-    it('should return a 400 Bad Request when campaignCode is missing', async function () {
+    it('should return a 400 Bad Request when organizationId is missing', async function () {
       // given
-      payload.data.attributes['campaign-code'] = '';
+      payload.data.attributes['organization-id'] = undefined;
 
       // when
       response = await httpTestServer.request(method, url, payload);
 
       // then
       expect(response.statusCode).to.equal(400);
-      expect(JSON.parse(response.payload).errors[0].detail).to.equal(
-        '"data.attributes.campaign-code" is not allowed to be empty',
-      );
+      expect(JSON.parse(response.payload).errors[0].detail).to.equal('"data.attributes.organization-id" is required');
     });
 
     it('should return 400 Bad Request when external-user-token is missing', async function () {
@@ -101,7 +99,7 @@ describe('Integration | Application | Route | sco-organization-learners', functi
         payload = {
           data: {
             attributes: {
-              'campaign-code': 'RESTRICTD',
+              'organization-id': 123,
               'first-name': 'Robert',
               'last-name': 'Smith',
               birthdate: '2012-12-12',
@@ -146,9 +144,9 @@ describe('Integration | Application | Route | sco-organization-learners', functi
         expect(response.statusCode).to.equal(400);
       });
 
-      it('should return 400 when campaignCode is empty', async function () {
+      it('should return 400 when organizationId is empty', async function () {
         // given
-        payload.data.attributes['campaign-code'] = '';
+        payload.data.attributes['organization-id'] = undefined;
 
         // when
         response = await httpTestServer.request(method, url, payload);
