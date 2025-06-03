@@ -2,11 +2,7 @@ import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 const Joi = BaseJoi.extend(JoiDate);
 
-import {
-  BadRequestError,
-  sendJsonApiError,
-  UnprocessableEntityError,
-} from '../../../src/shared/application/http-errors.js';
+import { sendJsonApiError, UnprocessableEntityError } from '../../../src/shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../src/shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../../src/shared/domain/types/identifiers-type.js';
 import { libScoOrganizationLearnerController } from './sco-organization-learner-controller.js';
@@ -40,43 +36,6 @@ const register = async function (server) {
         notes: [
           '- Elle permet de savoir si un élève identifié par son nom, prénom et date de naissance est inscrit à ' +
             "l'organisation détenant la campagne. Cet élève n'est, de plus, pas encore associé à l'organisation.",
-        ],
-        tags: ['api', 'sco-organization-learners'],
-      },
-    },
-    {
-      method: 'POST',
-      path: '/api/sco-organization-learners/batch-username-password-generate',
-      config: {
-        pre: [
-          {
-            method: securityPreHandlers.checkUserBelongsToScoOrganizationAndManagesStudents,
-            assign: 'belongsToScoOrganizationAndManageStudents',
-          },
-        ],
-        handler: libScoOrganizationLearnerController.batchGenerateOrganizationLearnersUsernameWithTemporaryPassword,
-        validate: {
-          options: {
-            allowUnknown: true,
-          },
-          payload: Joi.object({
-            data: {
-              attributes: {
-                'organization-id': identifiersType.campaignId,
-                'organization-learners-id': Joi.array().items(identifiersType.organizationLearnerId),
-              },
-            },
-          }),
-          failAction: (request, h) => {
-            return sendJsonApiError(
-              new BadRequestError('The server could not understand the request due to invalid syntax.'),
-              h,
-            );
-          },
-        },
-        notes: [
-          '- Génère les identifiants et les mots de passe à usage unique des élèves dont les identifiants sont passés en paramètre dans un fichier CSV\n' +
-            "- La demande de génération doit être effectuée par un membre de l'organisation à laquelle appartiennent les élèves.",
         ],
         tags: ['api', 'sco-organization-learners'],
       },
