@@ -144,7 +144,6 @@ describe('Unit | UseCase | finalize-session', function () {
 
     context('When the certificationReports are valid', function () {
       let now;
-      let clock;
 
       beforeEach(function () {
         const validReportForFinalization = domainBuilder.buildCertificationReport({
@@ -162,14 +161,8 @@ describe('Unit | UseCase | finalize-session', function () {
           .resolves(updatedSession);
       });
 
-      afterEach(function () {
-        clock.restore();
-      });
-
       it('should finalize session with expected arguments', async function () {
         // given
-        clock = sinon.useFakeTimers({ now: new Date('2019-01-01T05:06:07Z'), toFake: ['Date'] });
-        now = new Date(clock.now);
         const validReportForFinalization = domainBuilder.buildCertificationReport({
           examinerComment: 'signalement sur le candidat',
           isCompleted: true,
@@ -183,7 +176,6 @@ describe('Unit | UseCase | finalize-session', function () {
             examinerGlobalComment,
             hasIncident,
             hasJoiningIssue,
-            finalizedAt: now,
           })
           .resolves(updatedSession);
 
@@ -206,7 +198,6 @@ describe('Unit | UseCase | finalize-session', function () {
             examinerGlobalComment,
             hasIncident,
             hasJoiningIssue,
-            finalizedAt: now,
           }),
         ).to.be.true;
       });
@@ -220,7 +211,6 @@ describe('Unit | UseCase | finalize-session', function () {
           date: '2019-12-12',
           time: '16:00:00',
         });
-        clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
         const validReportForFinalization = domainBuilder.buildCertificationReport({
           examinerComment: 'signalement sur le candidat',
           isCompleted: true,
@@ -234,7 +224,6 @@ describe('Unit | UseCase | finalize-session', function () {
             examinerGlobalComment,
             hasIncident,
             hasJoiningIssue,
-            finalizedAt: now,
           })
           .resolves(updatedSession);
 
