@@ -2,58 +2,116 @@
 @use 'pix-design-tokens/typography';
 
 .certification-ender {
-  width: calc(100% - 16px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-10x);
+  align-items: flex-start;
+  justify-content: center;
   max-width: 990px;
   margin: -150px auto;
-  padding-top: 10px;
   overflow: hidden;
-  line-height: 1.875rem;
-  background-color: var(--pix-neutral-0);
 
+  @include breakpoints.device-is('tablet') {
+    gap: var(--pix-spacing-6x);
+  }
+
+  &__finished-test {
+    @include breakpoints.device-is('tablet') {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+  }
+
+  &__results {
+    display: flex;
+    flex-direction: column;
+    padding: var(--pix-spacing-4x) var(--pix-spacing-6x);
+    background-color: var(--pix-neutral-20);
+    border-radius: 10px;
+
+    @include breakpoints.device-is('tablet') {
+      padding: var(--pix-spacing-6x) var(--pix-spacing-12x);
+    }
+  }
+}
+
+.certification-ender-results {
+  &__disclaimer {
+    margin-bottom: var(--pix-spacing-2x);
+    color: var(--pix-success-700);
+    text-transform: uppercase;
+
+    @extend %pix-title-xs;
+  }
+
+  &__title {
+    margin-bottom: 6px;
+    color: var(--pix-neutral-900);
+
+    @extend %pix-body-l;
+  }
+
+  &__steps {
+    color: var(--pix-neutral-500);
+
+    @extend %pix-body-s;
+  }
+}
+
+.certification-ender-finished-test {
   &__image {
     display: block;
     height: 168px;
     margin: auto;
-  }
-
-  &__finished-test {
-    margin-bottom: 40px;
-  }
-
-  &__candidate {
-    margin: 32px 16px 0;
-    text-align: center;
-  }
-
-  &__candidate-name {
-    display: block;
-    color: var(--pix-neutral-500);
-
-    @extend %pix-body-l;
 
     @include breakpoints.device-is('tablet') {
-      display: flex;
-      gap: var(--pix-spacing-1x);
-      align-items: center;
+      order: 2;
+      height: 250px;
+      margin: 0;
     }
   }
 
-  &__candidate-title {
-    color: var(--pix-success-700);
+  &__candidate {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-2x);
+    align-items: center;
+    margin-top: var(--pix-spacing-4x);
+    text-align: center;
 
-    @extend %pix-title-m;
+    @include breakpoints.device-is('tablet') {
+      align-items: flex-start;
+      order: 1;
+      width: 55%;
+      text-align: left;
+    }
   }
+}
 
-  &__candidate-message {
-    width: 272px;
-    margin: 16px auto auto;
-    color: var(--pix-neutral-100);
+.certification-ender-candidate {
+  &__name {
+    display: flex;
+    gap: var(--pix-spacing-1x);
+    color: var(--pix-neutral-500);
 
     @extend %pix-body-l;
   }
 
+  &__title {
+    color: var(--pix-success-700);
+
+    @extend %pix-title-l;
+  }
+
+  &__message {
+    color: var(--pix-neutral-500);
+
+    @extend %pix-body-s;
+  }
+
   &__remote-certification {
-    margin-top: 16px;
+    margin-top: var(--pix-spacing-4x);
 
     .pix-notification-alert {
       &__content {
@@ -62,108 +120,10 @@
     }
   }
 
-  .pix-button {
-    display: inline-flex;
-  }
-
-  &__candidate-action-disconnect {
-    margin: 16px 0;
-  }
-
-  &__candidate-disconnect-tip {
-    display: block;
-    width: 272px;
-    margin: auto;
+  &__disconnect-tip {
+    padding-top: var(--pix-spacing-3x);
     color: var(--pix-neutral-500);
 
     @extend %pix-body-s;
-  }
-
-  &__results {
-    margin: 8px;
-    padding: 16px 24px;
-    background-color: var(--pix-neutral-20);
-    border-radius: 10px;
-    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%);
-  }
-
-  &__results-disclaimer {
-    margin-bottom: 8px;
-    color: var(--pix-success-700);
-    font-weight: var(--pix-font-bold);
-    text-transform: uppercase;
-
-    @extend %pix-body-s;
-  }
-
-  &__results-title {
-    margin-bottom: 6px;
-    color: var(--pix-neutral-900);
-
-    @extend %pix-body-l;
-  }
-
-  &__results-steps {
-    color: var(--pix-neutral-500);
-
-    @extend %pix-body-s;
-  }
-}
-
-@include breakpoints.device-is('tablet') {
-
-  .certification-ender {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-
-    &__finished-test {
-      display: flex;
-      align-items: center;
-      width: 100%;
-    }
-
-    &__image {
-      order: 2;
-      height: 250px;
-      margin: 0;
-    }
-
-    &__candidate {
-      order: 1;
-      width: 55%;
-      margin: 64px 56px 16px;
-      text-align: left;
-    }
-
-    &__candidate-message {
-      width: auto;
-    }
-
-    &__candidate-disconnect-tip {
-      width: auto;
-    }
-
-    &__candidate-title {
-      font-size: 3rem;
-    }
-
-    &__results {
-      display: flex;
-      flex-direction: row;
-      padding: 24px 48px;
-    }
-
-    &__results-example {
-      display: flex;
-      align-items: center;
-      width: 40%;
-      padding-right: 45px;
-    }
-
-    &__results-instructions {
-      width: 60%;
-    }
   }
 }
