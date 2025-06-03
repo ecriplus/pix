@@ -156,7 +156,7 @@ export default class RegisterForm extends Component {
       <hr />
 
       <label class="register-form__login-options">{{t "pages.login-or-register.register-form.options.text"}}</label>
-      <div id="login-mode-container">
+      <div id="login-mode-container" class="register-form__login-mode-container">
         <PixToggleDeprecated
           @valueFirstLabel={{t "pages.login-or-register.register-form.options.username"}}
           @valueSecondLabel={{t "pages.login-or-register.register-form.options.email"}}
@@ -164,7 +164,7 @@ export default class RegisterForm extends Component {
         />
       </div>
 
-      <form {{on "submit" this.register}} autocomplete="off">
+      <form {{on "submit" this.register}} autocomplete="off" class="register-form">
         {{#if this.loginWithUsername}}
           <div id="register-username-container" class="register-form-username-container">
             <label class="register-form-username-container__label">
@@ -209,21 +209,14 @@ export default class RegisterForm extends Component {
           </div>
         {{/if}}
 
-        <div class="register-button-container">
+        <div class="register-form__action-form-buttons">
           <PixButton id="submit-registration" @type="submit" @isLoading={{this.isLoading}}>
             {{t "pages.login-or-register.register-form.button-form"}}
           </PixButton>
+          <PixButton @triggerAction={{this.resetForm}} @variant="secondary" @iconBefore="arrowLeft">
+            {{t "pages.login-or-register.register-form.not-me"}}
+          </PixButton>
         </div>
-
-        <PixButton
-          @triggerAction={{this.resetForm}}
-          @variant="secondary"
-          @iconBefore="arrowLeft"
-          class="register-form__reset-form-button"
-        >
-          {{t "pages.login-or-register.register-form.not-me"}}
-        </PixButton>
-
         <p class="legal-notice">
           {{t "pages.login-or-register.register-form.rgpd-legal-notice"}}
           <a

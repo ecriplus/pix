@@ -21,6 +21,10 @@
     font-family: fonts.$font-roboto;
   }
 
+  &__login-mode-container {
+    margin-bottom: var(--pix-spacing-3x);
+  }
+
   &__required-inputs {
     color: var(--pix-neutral-500);
     font-weight: var(--pix-font-normal);
@@ -45,11 +49,12 @@
     border: none;
   }
 
-  &__reset-form-button {
+  &__action-form-buttons {
     display: flex;
-    gap: 6px;
+    flex-direction: column;
+    gap: var(--pix-spacing-4x);
     width: 100%;
-    margin-top: 10px;
+    margin-top: var(--pix-spacing-3x);
   }
 
   &__error {
@@ -66,7 +71,6 @@
   &-username-container {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
 
     &__label {
       color: var(--pix-neutral-800);
