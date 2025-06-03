@@ -13,6 +13,16 @@ const findAll = async () => {
   return toDomain(quests);
 };
 
+const findById = async ({ questId }) => {
+  const knexConn = DomainTransaction.getConnection();
+
+  const quest = await knexConn('quests').where('id', questId).first();
+
+  if (!quest) return null;
+
+  return new Quest(quest);
+};
+
 // envisager de mettre tableau vide en valeur par défaut des requirements si pas renseigné pour pas péter le code
 // ensuite
 const saveInBatch = async ({ quests }) => {
@@ -39,4 +49,4 @@ const deleteByIds = async ({ questIds }) => {
   return knexConn('quests').whereIn('id', questIds).delete();
 };
 
-export { deleteByIds, findAll, saveInBatch };
+export { deleteByIds, findAll, findById, saveInBatch };
