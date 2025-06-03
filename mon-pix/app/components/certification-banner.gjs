@@ -3,12 +3,20 @@ import t from 'ember-intl/helpers/t';
 import startCase from 'lodash/startCase';
 
 export default class CertificationBanner extends Component {
+  get candidateFullName() {
+    const firstName = this.args.certification.get('firstName');
+    const lastName = this.args.certification.get('lastName');
+    return `${startCase(firstName)} ${lastName.toUpperCase()}`;
+  }
+
   <template>
     <div class="assessment-banner--certification {{if @shouldBlurBanner 'blur-banner'}}" role="banner">
       <div class="assessment-banner-container">
         <img class="assessment-banner__pix-logo" src="/images/pix-logo-blanc.svg" alt />
         <div class="assessment-banner__splitter"></div>
-        <h1 class="assessment-banner__title">{{this.candidateFullName}}</h1>
+        {{#if @certification}}
+          <h1 class="assessment-banner__title">{{this.candidateFullName}}</h1>
+        {{/if}}
 
         <div class="certification-number">
           <div class="certification-number__label">{{t
@@ -19,13 +27,4 @@ export default class CertificationBanner extends Component {
       </div>
     </div>
   </template>
-  get candidateFullName() {
-    let fullName = '';
-    if (this.args && this.args.certification) {
-      const firstName = this.args.certification.get('firstName');
-      const lastName = this.args.certification.get('lastName');
-      fullName = `${startCase(firstName)} ${lastName.toUpperCase()}`;
-    }
-    return fullName;
-  }
 }
