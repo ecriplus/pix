@@ -21,7 +21,7 @@ module('Unit | Route | Assessments | Challenge', function (hooks) {
     id: 'assessment_id',
     get: sinon.stub().callsFake(() => 'ASSESSMENT_TYPE'),
     type: 'PLACEMENT',
-    answers: [],
+    orderedChallengeIdsAnswered: [],
   };
 
   const model = {
@@ -81,6 +81,7 @@ module('Unit | Route | Assessments | Challenge', function (hooks) {
           answers: [],
           type: 'PREVIEW',
           isPreview: true,
+          orderedChallengeIdsAnswered: [],
         };
         route.modelFor.returns(assessmentForPreview);
       });
@@ -117,36 +118,29 @@ module('Unit | Route | Assessments | Challenge', function (hooks) {
       });
     });
 
-    module('when the asked challenges is already answered', function (hooks) {
-      let answer;
-
+    module('when the asked challenge is already answered', function (hooks) {
       hooks.beforeEach(function () {
-        answer = {
-          id: '3',
-          challenge: {
-            id: 'oldRecId',
-            get: () => 'oldRecId',
-          },
-        };
         const assessmentWithAnswers = {
-          answers: [answer],
           type: 'COMPETENCE',
+          orderedChallengeIdsAnswered: ['recId'],
         };
         route.modelFor.returns(assessmentWithAnswers);
       });
 
-      test('should use challenge from answer', async function (assert) {
+      test('should get challenge from its id', async function (assert) {
         // given
+        const challenge = { id: 'recId' };
         const params = {
           challengeId: 'recId',
           challenge_number: 0,
         };
+        storeStub.findRecord.resolves(challenge);
 
         // when
         const model = await route.model(params);
 
         // then
-        assert.strictEqual(model.challenge, answer.challenge);
+        assert.strictEqual(model.challenge, challenge);
       });
     });
   });

@@ -38,8 +38,6 @@ export default class ResumeRoute extends Route {
       return this._routeToResults(assessment);
     }
 
-    await assessment.answers.reload();
-
     if (assessment.hasCheckpoints) {
       return this._resumeAssessmentWithCheckpoint(assessment);
     }
@@ -83,7 +81,7 @@ export default class ResumeRoute extends Route {
   _parseState(assessment) {
     const userHasSeenCheckpoint = this.hasSeenCheckpoint;
 
-    const quantityOfAnswersInAssessment = assessment.get('answers.length');
+    const quantityOfAnswersInAssessment = assessment.orderedChallengeIdsAnswered.length;
     const userHasReachedCheckpoint =
       quantityOfAnswersInAssessment > 0 &&
       quantityOfAnswersInAssessment % ENV.APP.NUMBER_OF_CHALLENGES_BETWEEN_TWO_CHECKPOINTS === 0;

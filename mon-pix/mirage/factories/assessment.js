@@ -25,6 +25,10 @@ export default Factory.extend({
     return true;
   },
 
+  orderedChallengeIdsAnswered() {
+    return [];
+  },
+
   withStartedState: trait({
     state: 'started',
   }),
