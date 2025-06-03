@@ -33,7 +33,17 @@ const createOrUpdateQuestsInBatch = async function (request, h) {
   return h.response().code(204);
 };
 
+const checkUserQuest = async function (request, h) {
+  const result = await usecases.checkUserQuest({
+    questId: request.payload.data.attributes['quest-id'],
+    userId: request.payload.data.attributes['user-id'],
+  });
+
+  return h.response({ data: { attributes: { 'is-successful': result } } }).code(200);
+};
+
 const questController = {
+  checkUserQuest,
   getQuestResults,
   createOrUpdateQuestsInBatch,
   getTemplateForCreateOrUpdateQuestsInBatch,
