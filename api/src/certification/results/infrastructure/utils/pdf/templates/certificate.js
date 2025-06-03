@@ -39,13 +39,13 @@ export default function generateV3AttestationTemplate({ pdf, data, translate }) 
     .font('Nunito-Bold')
     .fontSize(45)
     .fillColor('#253858')
-    .text(translate('certification.attestation.v3.main-content.title'), 82, 150, { width: 380 });
+    .text(translate('certification.certificate.v3.main-content.title'), 82, 150, { width: 380 });
   pdf
     .font('Roboto-Regular')
     .fontSize(11)
     .text(
       _formatText(
-        translate('certification.attestation.v3.main-content.certification-center', {
+        translate('certification.certificate.v3.main-content.certification-center', {
           certificationCenter: data.certificationCenter,
         }),
       ),
@@ -58,7 +58,7 @@ export default function generateV3AttestationTemplate({ pdf, data, translate }) 
   pdf
     .font('Roboto-Regular')
     .fontSize(11)
-    .text(translate('certification.attestation.v3.main-content.delivered-at.label'), 82, 249)
+    .text(translate('certification.certificate.v3.main-content.delivered-at.label'), 82, 249)
     .moveDown(0.5);
   pdf
     .font('Nunito-Bold')
@@ -74,7 +74,7 @@ export default function generateV3AttestationTemplate({ pdf, data, translate }) 
     .fontSize(11)
     .text(
       _formatText(
-        translate('certification.attestation.v3.main-content.birth', {
+        translate('certification.certificate.v3.main-content.birth', {
           birthdate,
           birthplace: data.birthplace,
         }),
@@ -85,7 +85,7 @@ export default function generateV3AttestationTemplate({ pdf, data, translate }) 
     .fontSize(11)
     .text(
       _formatText(
-        translate('certification.attestation.v3.main-content.delivered-at.date', {
+        translate('certification.certificate.v3.main-content.delivered-at.date', {
           deliveredAt,
         }),
       ),
@@ -96,19 +96,19 @@ export default function generateV3AttestationTemplate({ pdf, data, translate }) 
     .font('Roboto-Regular')
     .fontSize(10)
     .fillColor('#6b778b')
-    .text(translate('certification.attestation.v3.main-content.signature'), 82, 440);
+    .text(translate('certification.certificate.v3.main-content.signature'), 82, 440);
 
   // QR code content
   pdf.font('Roboto-Medium').fontSize(11).fillColor('#5e6c84').text(data.verificationCode, 142, 467).moveDown(0.25);
   pdf
     .font('Roboto-Regular')
     .fontSize(8.25)
-    .text(translate('certification.attestation.v3.qr-code-content.explanation'), {
+    .text(translate('certification.certificate.v3.qr-code-content.explanation'), {
       continued: true,
       width: 137,
     })
-    .text(translate('certification.attestation.v3.qr-code-content.link.label'), {
-      link: translate('certification.attestation.v3.qr-code-content.link.url'),
+    .text(translate('certification.certificate.v3.qr-code-content.link.label'), {
+      link: translate('certification.certificate.v3.qr-code-content.link.url'),
     });
 
   // Score content
@@ -133,7 +133,7 @@ export default function generateV3AttestationTemplate({ pdf, data, translate }) 
       .font('Roboto-Regular')
       .fontSize(11)
       .fillColor('#6b778b')
-      .text(translate('certification.attestation.v3.score-content.global-level'), 550, 195, {
+      .text(translate('certification.certificate.v3.score-content.global-level'), 550, 195, {
         width: 205,
         align: 'center',
       });
@@ -163,7 +163,7 @@ export default function generateV3AttestationTemplate({ pdf, data, translate }) 
       .font('Nunito-Bold')
       .fontSize(11)
       .fillColor('#253858')
-      .text(translate('certification.attestation.v3.score-content.level-explanation'), 530, 250, {
+      .text(translate('certification.certificate.v3.score-content.level-explanation'), 530, 250, {
         width: 250,
       })
       .moveDown(0.5)
@@ -181,7 +181,7 @@ export default function generateV3AttestationTemplate({ pdf, data, translate }) 
       .font('Nunito-Bold')
       .fontSize(11)
       .fillColor('#253858')
-      .text(translate('certification.attestation.v3.complementary-content.title'), 530, 470, {
+      .text(translate('certification.certificate.v3.complementary-content.title'), 530, 470, {
         width: 250,
       });
     pdf.image(path.resolve(__badgesDirname, `${ComplementaryCertificationKeys.CLEA}.png`), 628, 490, {
