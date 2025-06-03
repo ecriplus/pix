@@ -1,14 +1,12 @@
 import { createAccountCreationEmail } from '../../../../../../src/identity-access-management/domain/emails/create-account-creation.email.js';
 import { createAndReconcileUserToOrganizationLearner } from '../../../../../../src/prescription/organization-learner/domain/usecases/create-and-reconcile-user-to-organization-learner.js';
-import { config } from '../../../../../../src/shared/config.js';
 import {
+  AlreadyRegisteredEmailError,
   AlreadyRegisteredUsernameError,
-  CampaignCodeError,
+  EntityValidationError,
   NotFoundError,
   OrganizationLearnerAlreadyLinkedToUserError,
 } from '../../../../../../src/shared/domain/errors.js';
-import { AlreadyRegisteredEmailError } from '../../../../../../src/shared/domain/errors.js';
-import { EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | create-and-reconcile-user-to-organization-learner', function () {
@@ -18,11 +16,10 @@ describe('Unit | UseCase | create-and-reconcile-user-to-organization-learner', f
   const locale = 'fr-fr';
   const token = '00000000-0000-0000-0000-00000000';
 
-  let campaignCode;
   let userAttributes;
+  let redirectionUrl;
 
   let authenticationMethodRepository;
-  let campaignRepository;
   let emailRepository;
   let emailValidationDemandRepository;
   let organizationLearnerRepository;
@@ -37,7 +34,7 @@ describe('Unit | UseCase | create-and-reconcile-user-to-organization-learner', f
   let userValidator;
 
   beforeEach(function () {
-    campaignCode = 'ABCD12';
+    redirectionUrl = 'https://pixapp/campaigns/ABCDEFGHI';
     userAttributes = {
       firstName: 'Joe',
       lastName: 'Poe',
@@ -45,7 +42,6 @@ describe('Unit | UseCase | create-and-reconcile-user-to-organization-learner', f
     };
 
     authenticationMethodRepository = {};
-    campaignRepository = { getByCode: sinon.stub() };
     emailRepository = { sendEmailAsync: sinon.stub() };
     emailValidationDemandRepository = { save: sinon.stub().resolves(token) };
     organizationLearnerRepository = {};
@@ -65,45 +61,12 @@ describe('Unit | UseCase | create-and-reconcile-user-to-organization-learner', f
     passwordValidator = { validate: sinon.stub() };
     userValidator = { validate: sinon.stub() };
 
-    campaignRepository.getByCode
-      .withArgs(campaignCode)
-      .resolves(domainBuilder.buildCampaign({ organization: { id: organizationId } }));
     userRepository.isUsernameAvailable.resolves();
     userRepository.checkIfEmailIsAvailable.resolves();
     emailRepository.sendEmailAsync.resolves();
 
     passwordValidator.validate.returns();
     userValidator.validate.returns();
-  });
-
-  context('When there is no campaign with the given code', function () {
-    it('should throw a campaign code error', async function () {
-      // given
-      campaignRepository.getByCode.withArgs(campaignCode).resolves(null);
-
-      // when
-      const result = await catchErr(createAndReconcileUserToOrganizationLearner)({
-        campaignCode,
-        locale,
-        password,
-        userAttributes,
-        authenticationMethodRepository,
-        campaignRepository,
-        emailValidationDemandRepository,
-        organizationLearnerRepository,
-        userRepository,
-        cryptoService,
-        emailRepository,
-        obfuscationService,
-        userReconciliationService,
-        userService,
-        passwordValidator,
-        userValidator,
-      });
-
-      // then
-      expect(result).to.be.instanceof(CampaignCodeError);
-    });
   });
 
   context('When no organizationLearner found', function () {
@@ -115,12 +78,12 @@ describe('Unit | UseCase | create-and-reconcile-user-to-organization-learner', f
 
       // when
       const result = await catchErr(createAndReconcileUserToOrganizationLearner)({
-        campaignCode,
+        organizationId,
+        redirectionUrl,
         locale,
         password,
         userAttributes,
         authenticationMethodRepository,
-        campaignRepository,
         emailValidationDemandRepository,
         organizationLearnerRepository,
         userRepository,
@@ -189,12 +152,12 @@ describe('Unit | UseCase | create-and-reconcile-user-to-organization-learner', f
 
           // when
           const error = await catchErr(createAndReconcileUserToOrganizationLearner)({
-            campaignCode,
+            organizationId,
+            redirectionUrl,
             locale,
             password,
             userAttributes,
             authenticationMethodRepository,
-            campaignRepository,
             emailValidationDemandRepository,
             organizationLearnerRepository,
             userRepository,
@@ -220,12 +183,12 @@ describe('Unit | UseCase | create-and-reconcile-user-to-organization-learner', f
 
           // when
           const error = await catchErr(createAndReconcileUserToOrganizationLearner)({
-            campaignCode,
+            organizationId,
+            redirectionUrl,
             locale,
             password,
             userAttributes,
             authenticationMethodRepository,
-            campaignRepository,
             emailValidationDemandRepository,
             organizationLearnerRepository,
             userRepository,
@@ -251,12 +214,12 @@ describe('Unit | UseCase | create-and-reconcile-user-to-organization-learner', f
         it('should create user and associate organizationLearner', async function () {
           // when
           const result = await createAndReconcileUserToOrganizationLearner({
-            campaignCode,
+            organizationId,
+            redirectionUrl,
             locale,
             password,
             userAttributes,
             authenticationMethodRepository,
-            campaignRepository,
             emailValidationDemandRepository,
             organizationLearnerRepository,
             userRepository,
@@ -280,17 +243,17 @@ describe('Unit | UseCase | create-and-reconcile-user-to-organization-learner', f
             firstName: userAttributes.firstName,
             locale,
             token,
-            redirectionUrl: `${config.domain.pixApp + config.domain.tldFr}/campagnes/${campaignCode}`,
+            redirectionUrl,
           });
 
           // when
           await createAndReconcileUserToOrganizationLearner({
-            campaignCode,
+            organizationId,
+            redirectionUrl,
             locale,
             password,
             userAttributes,
             authenticationMethodRepository,
-            campaignRepository,
             emailValidationDemandRepository,
             organizationLearnerRepository,
             userRepository,
@@ -317,12 +280,12 @@ describe('Unit | UseCase | create-and-reconcile-user-to-organization-learner', f
 
             // when
             const error = await catchErr(createAndReconcileUserToOrganizationLearner)({
-              campaignCode,
+              organizationId,
+              redirectionUrl,
               locale,
               password,
               userAttributes,
               authenticationMethodRepository,
-              campaignRepository,
               emailValidationDemandRepository,
               organizationLearnerRepository,
               userRepository,
@@ -355,12 +318,12 @@ describe('Unit | UseCase | create-and-reconcile-user-to-organization-learner', f
 
           // when
           const error = await catchErr(createAndReconcileUserToOrganizationLearner)({
-            campaignCode,
+            organizationId,
+            redirectionUrl,
             locale,
             password,
             userAttributes,
             authenticationMethodRepository,
-            campaignRepository,
             emailValidationDemandRepository,
             organizationLearnerRepository,
             userRepository,
@@ -382,12 +345,12 @@ describe('Unit | UseCase | create-and-reconcile-user-to-organization-learner', f
         it('should create user and associate organizationLearner', async function () {
           // when
           const result = await createAndReconcileUserToOrganizationLearner({
-            campaignCode,
+            organizationId,
+            redirectionUrl,
             locale,
             password,
             userAttributes,
             authenticationMethodRepository,
-            campaignRepository,
             emailValidationDemandRepository,
             organizationLearnerRepository,
             userRepository,
@@ -413,12 +376,12 @@ describe('Unit | UseCase | create-and-reconcile-user-to-organization-learner', f
 
             // when
             const error = await catchErr(createAndReconcileUserToOrganizationLearner)({
-              campaignCode,
+              organizationId,
+              redirectionUrl,
               locale,
               password,
               userAttributes,
               authenticationMethodRepository,
-              campaignRepository,
               emailValidationDemandRepository,
               organizationLearnerRepository,
               userRepository,
