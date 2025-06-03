@@ -9,8 +9,8 @@
     "duration": 10,
     "level": "Intermédiaire",
     "objectives": [
-      "<p>1. Écrire des prompts efficaces<br></p>",
-      "<p>2. Évaluer de manière critique la réponse de l’IA générative<br></p>"
+      "<p>Écrire des prompts efficaces<br></p>",
+      "<p> Évaluer de manière critique la réponse de l’IA générative<br></p>"
     ],
     "tabletSupport": "comfortable"
   },
@@ -174,15 +174,15 @@
               },
               {
                 "id": "2",
-                "content": "<p>celui avec un ton sérieux </p>",
+                "content": "<p>celui avec un ton formel</p>",
                 "feedback": {
-                  "state": "<p>Un choix sage !</p>",
-                  "diagnosis": "<p><strong>Un choix sage !</strong> Au final, Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi.</p>"
+                  "state": "<p>Un choix sérieux !</p>",
+                  "diagnosis": "<p><strong>Un choix sérieux !</strong> Au final, Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi.</p>"
                 }
               },
               {
                 "id": "3",
-                "content": "<p>celui avec un ton drôle </p>",
+                "content": "<p>celui avec un ton décalé</p>",
                 "feedback": {
                   "state": "<p>Un choix audacieux !</p>",
                   "diagnosis": "<p><strong>Un choix original !</strong> Au final, Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi. </p>"
@@ -347,7 +347,7 @@
           "element": {
             "id": "17178f53-901f-4547-9f8a-bfc40990214d",
             "type": "text",
-            "content": "<p>📌 Résumons l’essentiel avant de passer à la suite&nbsp;: </p><ul><li>Un prompt efficace donne toujours <strong>un contexte</strong>&nbsp;: il donne à l'IA des précisions sur la situation&nbsp;: le lieu, le moment, l’objectif... 🎯</li><li>Préciser le <strong>format attendu</strong> dans votre prompt aide l'IA à structurer sa réponse selon vos besoins&nbsp;: liste, paragraphe, tableau, plan détaillé...&nbsp;📋</li><li>Le <strong>ton </strong>d’un prompt guide le style de la réponse&nbsp;: sérieux, amical, professionnel, humoristique… 💬</li><li>Attribuer un <strong>rôle </strong>ou une identité à l'IA aide à obtenir des réponses mieux ciblées, plus adaptées au besoin&nbsp;: l’IA ajuste la forme de sa réponse et son niveau de détail selon le personnage que vous lui donnez.&nbsp;🤠</li></ul><p><br><strong>⚠️ Important&nbsp;&nbsp;:</strong> </p><p>Une réponse peut paraître claire et bien formulée mais quand même contenir des <strong>erreurs</strong>.&nbsp; </p><p>Relire la réponse de l’IA est une étape essentielle avant de s’en inspirer, de la diffuser ou de la présenter à quelqu’un.<br><br></p>"
+            "content": "<p>📌 Résumons l’essentiel avant de passer à la suite&nbsp;: </p><ul><li>Un prompt efficace donne toujours <strong>un contexte.</strong>&nbsp;Il donne à l'IA des précisions sur la situation&nbsp;: le lieu, le moment, l’objectif... 🎯</li><li>Préciser le <strong>format attendu</strong> dans votre prompt aide l'IA à structurer sa réponse selon vos besoins&nbsp;: liste, paragraphe, tableau, plan détaillé...&nbsp;📋</li><li>Le <strong>ton </strong>d’un prompt guide le style de la réponse&nbsp;: sérieux, amical, professionnel, humoristique… 💬</li><li>Attribuer un <strong>rôle </strong>ou une identité à l'IA aide à obtenir des réponses mieux ciblées, plus adaptées au besoin&nbsp;: l’IA ajuste la forme de sa réponse et son niveau de détail selon le personnage que vous lui donnez.&nbsp;🤠</li></ul><p><br><strong>⚠️ Important&nbsp;&nbsp;:</strong> </p><p>Une réponse peut paraître claire et bien formulée mais quand même contenir des <strong>erreurs</strong>.&nbsp; </p><p>Relire la réponse de l’IA est une étape essentielle avant de s’en inspirer, de la diffuser ou de la présenter à quelqu’un.<br><br></p>"
           }
         }
       ]
