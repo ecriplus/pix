@@ -19,13 +19,6 @@ export default class ModulePassage extends Component {
   displayableGrains = this.args.module.grains.filter((grain) => ModuleGrain.getSupportedComponents(grain).length > 0);
   @tracked grainsToDisplay = this.displayableGrains.length > 0 ? [this.displayableGrains[0]] : [];
 
-  displayableGrainsInNavbar = this.displayableGrains.filter((grain) => grain.type !== 'transition');
-  @tracked grainsToDisplayInNavbar = this.grainsToDisplay.filter((grain) => grain.type !== 'transition');
-
-  get navbarCurrentPassageStep() {
-    return this.grainsToDisplayInNavbar.length;
-  }
-
   @action
   hasGrainJustAppeared(index) {
     if (this.grainsToDisplay.length === 1) {
@@ -94,10 +87,6 @@ export default class ModulePassage extends Component {
 
     const nextGrain = this.displayableGrains[this.currentGrainIndex + 1];
     this.grainsToDisplay = [...this.grainsToDisplay, nextGrain];
-
-    if (nextGrain.type !== 'transition') {
-      this.grainsToDisplayInNavbar = [...this.grainsToDisplayInNavbar, nextGrain];
-    }
   }
 
   @action
@@ -236,8 +225,8 @@ export default class ModulePassage extends Component {
       <BetaBanner />
     {{/if}}
     <ModuleNavbar
-      @currentStep={{this.navbarCurrentPassageStep}}
-      @totalSteps={{this.displayableGrainsInNavbar.length}}
+      @currentStep={{this.currentPassageStep}}
+      @totalSteps={{this.displayableGrains.length}}
       @module={{@module}}
     />
 
