@@ -82,6 +82,34 @@ const register = async function (server) {
         ],
       },
     },
+    {
+      method: 'POST',
+      path: '/api/admin/check-user-quest',
+      config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        validate: {
+          payload: Joi.object({
+            data: {
+              attributes: {
+                'user-id': identifiersType.userId,
+                'quest-id': identifiersType.questId,
+              },
+            },
+          }),
+        },
+        handler: questController.checkUserQuest,
+        tags: ['api', 'admin', 'quests'],
+        notes: [
+          'Cette route est restreinte aux utilisateurs authentifiés',
+          'Elle permet de vérifier si un utilisateur valide une quête',
+        ],
+      },
+    },
   ]);
 };
 const name = 'quest-api';
