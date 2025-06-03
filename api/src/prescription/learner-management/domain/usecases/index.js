@@ -9,6 +9,7 @@ import * as placementProfileService from '../../../../shared/domain/services/pla
 import * as userReconciliationService from '../../../../shared/domain/services/user-reconciliation-service.js';
 import { featureToggles } from '../../../../shared/infrastructure/feature-toggles/index.js';
 import { logErrorWithCorrelationIds } from '../../../../shared/infrastructure/monitoring-tools.js';
+import * as assessmentRepository from '../../../../shared/infrastructure/repositories/assessment-repository.js';
 import * as libOrganizationLearnerRepository from '../../../../shared/infrastructure/repositories/organization-learner-repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
@@ -32,6 +33,7 @@ import * as organizationLearnerRepository from '../../infrastructure/repositorie
 import * as studentRepository from '../../infrastructure/repositories/student-repository.js';
 import * as supOrganizationLearnerRepository from '../../infrastructure/repositories/sup-organization-learner-repository.js';
 import { importStorage } from '../../infrastructure/storage/import-storage.js';
+
 /**
  * @typedef {import ('../../infrastructure/repositories/organization-feature-repository.js')} CampaignParticipationRepository
  * @typedef {import ('../../../campaign/infrastructure/repositories/campaign-repository.js')} CampaignRepository
@@ -60,6 +62,7 @@ import { importStorage } from '../../infrastructure/storage/import-storage.js';
  * @typedef {import ('../../infrastructure/repositories/jobs/validate-organization-learners-import-file-job-repository.js')} ValidateOrganizationImportFileJobRepository
  */
 const dependencies = {
+  assessmentRepository,
   campaignParticipationRepository: repositories.campaignParticipationRepository,
   campaignRepository,
   importCommonOrganizationLearnersJobRepository,

@@ -5,7 +5,7 @@ import { buildUser } from './build-user.js';
 
 const buildAssessmentFromParticipation = function (campaignParticipation, organizationLearner, user) {
   const userId = buildUser(user).id;
-  const organizationLearnerId = buildOrganizationLearner(organizationLearner).id;
+  const organizationLearnerId = buildOrganizationLearner({ ...organizationLearner, userId }).id;
   const campaignParticipationId = buildCampaignParticipation({
     ...campaignParticipation,
     userId,

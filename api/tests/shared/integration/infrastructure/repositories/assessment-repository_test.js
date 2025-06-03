@@ -166,6 +166,69 @@ describe('Integration | Infrastructure | Repositories | assessment-repository', 
     });
   });
 
+  describe('#getByCampaignParticipationIds', function () {
+    let assessment1, assessment1Improved, assessment2;
+    let participation1, participation2;
+
+    beforeEach(async function () {
+      const campaignId = databaseBuilder.factory.buildCampaign({ code: 'COUCOUYVO' }).id;
+      participation1 = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId,
+      });
+      participation2 = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId,
+      });
+
+      assessment1 = databaseBuilder.factory.buildAssessment({
+        id: 1,
+        type: Assessment.types.CAMPAIGN,
+        campaignParticipationId: participation1.id,
+      });
+      assessment1Improved = databaseBuilder.factory.buildAssessment({
+        id: 2,
+        type: Assessment.types.CAMPAIGN,
+        campaignParticipationId: participation1.id,
+        isImproving: true,
+      });
+      assessment2 = databaseBuilder.factory.buildAssessment({
+        id: 3,
+        type: Assessment.types.CAMPAIGN,
+        campaignParticipationId: participation2.id,
+      });
+      await databaseBuilder.commit();
+    });
+
+    it('should return assessments', async function () {
+      // when
+      const assessments = await assessmentRepository.getByCampaignParticipationIds([
+        participation1.id,
+        participation2.id,
+      ]);
+
+      // then
+      expect(assessments).lengthOf(3);
+      assessments.forEach((assessment) => {
+        expect(assessment).to.be.an.instanceOf(Assessment);
+      });
+      expect(assessments[0].id).deep.equal(assessment1.id);
+      expect(assessments[0].campaignParticipationId).equal(participation1.id);
+      expect(assessments[1].id).equal(assessment1Improved.id);
+      expect(assessments[1].campaignParticipationId).equal(participation1.id);
+      expect(assessments[2].id).equal(assessment2.id);
+      expect(assessments[2].campaignParticipationId).equal(participation2.id);
+    });
+
+    context('when there is no assessment', function () {
+      it('should return an empty array', async function () {
+        // when
+        const assessments = await assessmentRepository.getByCampaignParticipationIds([assessment1.id]);
+
+        // then
+        expect(assessments).lengthOf(0);
+      });
+    });
+  });
+
   describe('#findLastCompletedAssessmentsForEachCompetenceByUser', function () {
     let johnUserId;
     let laylaUserId;
@@ -546,6 +609,53 @@ describe('Integration | Infrastructure | Repositories | assessment-repository', 
 
       // then
       expect(ownedByUser).to.be.false;
+    });
+  });
+
+  describe('#updateCampaignParticipationId', function () {
+    it('should update assessment', async function () {
+      // given
+      const participation = databaseBuilder.factory.buildCampaignParticipation();
+      const initialCreatedAt = new Date('2020-01-01');
+      const assessment = databaseBuilder.factory.buildAssessment({
+        state: Assessment.states.STARTED,
+        lastQuestionDate: new Date('2020-01-10'),
+        lastChallengeId: 'rechallenge1',
+        campaignParticipationId: participation.id,
+        updatedAt: new Date('2020-01-01'),
+        createdAt: initialCreatedAt,
+        lastQuestionState: null,
+      });
+      await databaseBuilder.commit();
+
+      assessment.campaignParticipationId = null;
+      assessment.state = Assessment.states.ABORTED;
+      assessment.updatedAt = new Date('2020-01-12');
+      // when
+      await assessmentRepository.updateCampaignParticipationId(assessment);
+
+      // then
+      const assessmentInDb = await knex('assessments').where('id', assessment.id).first();
+
+      expect(assessmentInDb.campaignParticipationId).null;
+      expect(assessmentInDb.updatedAt).deep.equal(new Date('2020-01-12'));
+      expect(assessmentInDb.state).equal(Assessment.states.STARTED);
+    });
+
+    context('when assessment does not exist', function () {
+      it('should return null', async function () {
+        const notExistingAssessmentId = 1;
+
+        // when
+        const result = await assessmentRepository.updateCampaignParticipationId({
+          id: notExistingAssessmentId,
+          campaingParticipationId: 123,
+          updatedAt: new Date('2020-12-02'),
+        });
+
+        // then
+        expect(result).to.equal(null);
+      });
     });
   });
 

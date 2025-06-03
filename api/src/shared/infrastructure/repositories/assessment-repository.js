@@ -189,6 +189,23 @@ const setAssessmentsAsStarted = async function ({ assessmentIds }) {
     .update({ state: Assessment.states.STARTED, updatedAt: new Date() });
 };
 
+const getByCampaignParticipationIds = async function (campaignParticipationIds = []) {
+  const knexConn = DomainTransaction.getConnection();
+  const assessments = await knexConn('assessments')
+    .whereIn('campaignParticipationId', campaignParticipationIds)
+    .orderBy('id', 'asc');
+  return assessments.map((assessment) => new Assessment({ ...assessment }));
+};
+
+const updateCampaignParticipationId = async function (assessment) {
+  const knexConn = DomainTransaction.getConnection();
+  const [assessmentUpdated] = await knexConn('assessments')
+    .update({ campaignParticipationId: assessment.campaignParticipationId, updatedAt: assessment.updatedAt })
+    .where('id', assessment.id)
+    .returning('*');
+  if (!assessmentUpdated) return null;
+};
+
 export {
   _updateStateById,
   abortByAssessmentId,
@@ -198,11 +215,13 @@ export {
   findNotAbortedCampaignAssessmentsByUserId,
   get,
   getByAssessmentIdAndUserId,
+  getByCampaignParticipationIds,
   getByCertificationCandidateId,
   getWithAnswers,
   ownedByUser,
   save,
   setAssessmentsAsStarted,
+  updateCampaignParticipationId,
   updateLastQuestionDate,
   updateLastQuestionState,
   updateWhenNewChallengeIsAsked,
