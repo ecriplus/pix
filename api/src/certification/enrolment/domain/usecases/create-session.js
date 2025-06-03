@@ -5,7 +5,6 @@
  * @typedef {import ("./index.js").SessionCodeService} SessionCodeService
  */
 
-import { SESSIONS_VERSIONS } from '../../../shared/domain/models/SessionVersion.js';
 import { SessionEnrolment } from '../models/SessionEnrolment.js';
 
 /**
@@ -32,14 +31,11 @@ const createSession = async function ({
     id: certificationCenterId,
   });
 
-  const defaultVersion = SESSIONS_VERSIONS.V3;
-
   const domainSession = new SessionEnrolment({
     ...session,
     accessCode,
     certificationCenter: certificationCenterName,
     certificationCandidates: [],
-    version: defaultVersion,
     createdBy: userId,
   });
 

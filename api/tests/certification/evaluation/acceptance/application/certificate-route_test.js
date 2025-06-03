@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
 import { generateCertificateVerificationCode } from '../../../../../src/certification/evaluation/domain/services/verify-certificate-code-service.js';
-import { SESSIONS_VERSIONS } from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
+import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { Assessment } from '../../../../../src/shared/domain/models/index.js';
 import { AssessmentResult, Membership } from '../../../../../src/shared/domain/models/index.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
@@ -217,7 +217,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
             const session = databaseBuilder.factory.buildSession({
               id: 123,
               publishedAt: new Date('2018-12-01T01:02:03Z'),
-              version: SESSIONS_VERSIONS.V3,
+              version: AlgorithmEngineVersion.V3,
             });
             const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
               id: 1234,
@@ -328,7 +328,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
         const { session } = await _buildDatabaseCertification({
           userId: superAdmin.id,
           sessionId,
-          sessionVersion: SESSIONS_VERSIONS.V3,
+          sessionVersion: AlgorithmEngineVersion.V3,
         });
         await databaseBuilder.commit();
 
@@ -449,7 +449,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
         });
 
         const session = databaseBuilder.factory.buildSession({
-          version: SESSIONS_VERSIONS.V3,
+          version: AlgorithmEngineVersion.V3,
           publishedAt: new Date(),
         });
 
@@ -509,7 +509,7 @@ async function _buildDatabaseCertification({
   userId,
   certificationCourseId = 10,
   sessionId = 12,
-  sessionVersion = SESSIONS_VERSIONS.V2,
+  sessionVersion = AlgorithmEngineVersion.V2,
 }) {
   const session = databaseBuilder.factory.buildSession({
     id: sessionId,

@@ -1,5 +1,5 @@
 import { CertificationAttestation } from '../../../../src/certification/results/domain/models/CertificationAttestation.js';
-import { SESSIONS_VERSIONS } from '../../../../src/certification/shared/domain/models/SessionVersion.js';
+import { AlgorithmEngineVersion } from '../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 
 const buildCertificationAttestation = function ({
   id = 1,
@@ -17,7 +17,7 @@ const buildCertificationAttestation = function ({
   verificationCode = 'P-SOMECODE',
   certifiedBadges = [],
   resultCompetenceTree = null,
-  version = SESSIONS_VERSIONS.V3,
+  version = AlgorithmEngineVersion.V3,
 } = {}) {
   return new CertificationAttestation({
     id,

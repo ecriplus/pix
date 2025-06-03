@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
-import { SESSIONS_VERSIONS } from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import {
   CLEA_COMPLEMENTARY_CERTIFICATION_ID,
@@ -383,7 +382,7 @@ async function createPublishedScoSession({
     juryCommentAuthorId,
     juryCommentedAt,
     invigilatorPassword,
-    version: SESSIONS_VERSIONS.V3,
+    version: AlgorithmEngineVersion.V3,
   });
   databaseBuilder.factory.buildFinalizedSession({
     sessionId,

@@ -1,5 +1,4 @@
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
-import { SESSIONS_VERSIONS } from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import {
   createServer,
@@ -88,7 +87,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
           const sessionId = databaseBuilder.factory.buildSession({
             certificationCenterId,
-            version: SESSIONS_VERSIONS.V3,
+            version: AlgorithmEngineVersion.V3,
           }).id;
           databaseBuilder.factory.buildFlashAlgorithmConfiguration();
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
@@ -153,7 +152,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
           const sessionId = databaseBuilder.factory.buildSession({
             certificationCenterId,
-            version: SESSIONS_VERSIONS.V3,
+            version: AlgorithmEngineVersion.V3,
           }).id;
           databaseBuilder.factory.buildFlashAlgorithmConfiguration();
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
@@ -206,7 +205,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           databaseBuilder.factory.buildFlashAlgorithmConfiguration();
           const sessionId = databaseBuilder.factory.buildSession({
             certificationCenterId,
-            version: SESSIONS_VERSIONS.V3,
+            version: AlgorithmEngineVersion.V3,
           }).id;
           const candidate = databaseBuilder.factory.buildCertificationCandidate({
             userId: user.id,

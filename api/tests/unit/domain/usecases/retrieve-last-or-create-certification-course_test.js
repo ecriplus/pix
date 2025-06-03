@@ -3,7 +3,6 @@ import { SessionNotAccessible } from '../../../../src/certification/session-mana
 import { ComplementaryCertificationCourse } from '../../../../src/certification/session-management/domain/models/ComplementaryCertificationCourse.js';
 import { AlgorithmEngineVersion } from '../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationCourse } from '../../../../src/certification/shared/domain/models/CertificationCourse.js';
-import { SESSIONS_VERSIONS } from '../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { LOCALE, MAX_REACHABLE_LEVEL } from '../../../../src/shared/domain/constants.js';
 import { DomainTransaction } from '../../../../src/shared/domain/DomainTransaction.js';
 import {
@@ -451,7 +450,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 const user = domainBuilder.buildUser({ id: 2, lang: LOCALE.FRENCH_SPOKEN });
                 const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
                   accessCode: 'accessCode',
-                  version: SESSIONS_VERSIONS.V3,
+                  version: AlgorithmEngineVersion.V3,
                 });
 
                 sessionRepository.get.withArgs({ id: foundSession.id }).resolves(foundSession);

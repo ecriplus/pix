@@ -5,7 +5,6 @@ import * as sessionForSupervisingRepository from '../../../../../../src/certific
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationChallengeLiveAlertStatus } from '../../../../../../src/certification/shared/domain/models/CertificationChallengeLiveAlert.js';
 import { CertificationCompanionLiveAlertStatus } from '../../../../../../src/certification/shared/domain/models/CertificationCompanionLiveAlert.js';
-import { SESSIONS_VERSIONS } from '../../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/index.js';
 import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
@@ -246,7 +245,7 @@ describe('Integration | Repository | SessionForSupervising', function () {
       // given
       databaseBuilder.factory.buildCertificationCenter({ name: 'Toto', id: 1234 });
       const session = databaseBuilder.factory.buildSession({
-        version: SESSIONS_VERSIONS.V3,
+        version: AlgorithmEngineVersion.V3,
         certificationCenter: 'Tour Gamma',
         room: 'Salle A',
         examiner: 'Monsieur Examinateur',

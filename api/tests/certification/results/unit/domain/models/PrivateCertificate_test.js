@@ -1,7 +1,6 @@
 import { PrivateCertificate } from '../../../../../../src/certification/results/domain/models/PrivateCertificate.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
-import { SESSIONS_VERSIONS } from '../../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import {
   AssessmentResult,
   status as assessmentResultStatuses,
@@ -31,7 +30,7 @@ describe('Unit | Domain | Models | PrivateCertificate', function () {
         resultCompetenceTree: null,
         verificationCode: 'someVerifCode',
         maxReachableLevelOnCertificationDate: 5,
-        version: SESSIONS_VERSIONS.V3,
+        version: AlgorithmEngineVersion.V3,
         algorithmEngineVersion: AlgorithmEngineVersion.V3,
       };
     });

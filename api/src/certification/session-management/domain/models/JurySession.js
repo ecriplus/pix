@@ -1,6 +1,5 @@
 /**
  * @typedef {import ('./CertificationOfficer.js').CertificationOfficer} CertificationOfficer
- * @typedef {import ('../../../shared/domain/models/SessionVersion.js').SESSIONS_VERSIONS} SESSIONS_VERSIONS
  * @typedef {import ('../read-models/JurySessionCounters.js').JurySessionCounters} JurySessionCounters
  */
 
@@ -30,7 +29,7 @@ class JurySession {
    * @param {CertificationOfficer} props.juryCommentAuthor
    * @param {boolean} props.hasIncident
    * @param {bollean} props.hasJoiningIssue
-   * @param {SESSIONS_VERSIONS} props.version
+   * @param {number} props.version
    * @param {JurySessionCounters} props.counters - session statistics
    */
   constructor({
