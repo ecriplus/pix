@@ -8,7 +8,16 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
     it('should convert an Assessment model object (of type CERTIFICATION) into JSON API data', function () {
       //given
       const certificationCourseId = 1;
-      const assessment = domainBuilder.buildAssessment({ type: Assessment.types.CERTIFICATION, certificationCourseId });
+      const answers = [
+        domainBuilder.buildAnswer({ id: 123, challengeId: 'challenge0' }),
+        domainBuilder.buildAnswer({ id: 456, challengeId: 'challenge1' }),
+        domainBuilder.buildAnswer({ id: 789, challengeId: 'challenge2' }),
+      ];
+      const assessment = domainBuilder.buildAssessment({
+        type: Assessment.types.CERTIFICATION,
+        certificationCourseId,
+        answers,
+      });
       assessment.hasCheckpoints = false;
       assessment.showProgressBar = false;
       assessment.showLevelup = false;
@@ -32,12 +41,21 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
             'has-checkpoints': false,
             'show-question-counter': true,
             'code-campaign': undefined,
+            'ordered-challenge-ids-answered': ['challenge0', 'challenge1', 'challenge2'],
           },
           relationships: {
             answers: {
               data: [
                 {
-                  id: assessment.answers[0].id.toString(),
+                  id: '123',
+                  type: 'answers',
+                },
+                {
+                  id: '456',
+                  type: 'answers',
+                },
+                {
+                  id: '789',
                   type: 'answers',
                 },
               ],

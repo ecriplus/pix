@@ -173,6 +173,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
           'show-levelup': false,
           'show-progress-bar': false,
           'show-question-counter': true,
+          'ordered-challenge-ids-answered': [],
         },
         relationships: {
           course: {
@@ -235,8 +236,16 @@ describe('Acceptance | API | assessment-controller-get', function () {
         type: Assessment.types.PREVIEW,
       }).id;
 
-      answer1 = databaseBuilder.factory.buildAnswer({ assessmentId, challengeId: 'rec1' });
-      answer2 = databaseBuilder.factory.buildAnswer({ assessmentId, challengeId: 'rec2' });
+      answer1 = databaseBuilder.factory.buildAnswer({
+        assessmentId,
+        challengeId: 'rec1',
+        createdAt: new Date('2020-01-01'),
+      });
+      answer2 = databaseBuilder.factory.buildAnswer({
+        assessmentId,
+        challengeId: 'rec2',
+        createdAt: new Date('2020-01-02'),
+      });
 
       await databaseBuilder.commit();
     });
@@ -300,6 +309,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
           'show-levelup': false,
           'show-progress-bar': false,
           'show-question-counter': true,
+          'ordered-challenge-ids-answered': ['rec1', 'rec2'],
         },
         relationships: {
           course: { data: { type: 'courses', id: courseId } },
