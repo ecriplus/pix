@@ -4,7 +4,7 @@
   "title": "J'améliore mon prompt !",
   "isBeta": true,
   "details": {
-    "image": "",
+    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
     "description": "<p>Les IA génératives (ChatGPT, LeChat, DeepSeek…) permettent de répondre à une grande variété de nos demandes.</p><p> Mais la qualité de leurs réponses dépend beaucoup des questions qu’on leur pose.&nbsp; </p><p>Dans ce module, vous allez apprendre à formuler des prompts efficaces pour répondre à vos besoins.<br><br></p>",
     "duration": 10,
     "level": "Intermédiaire",
@@ -71,15 +71,6 @@
             "id": "3f36edd3-42cd-4cf3-9063-1ad75166871c",
             "type": "text",
             "content": "<p>Le prompt de Gustave était&nbsp;: «&nbsp;Écris une invitation au tournoi.&nbsp;»</p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "9cd9c78b-1561-4f0d-ba02-086c5aa76da7",
-            "type": "custom",
-            "tagName": "",
-            "props": {}
           }
         },
         {
