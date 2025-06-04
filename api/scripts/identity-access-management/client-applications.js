@@ -37,7 +37,8 @@ class ClientApplicationsScript extends Script {
             jurisdiction: {
               description:
                 'Jurisdiction definition, currently, only an object like `{ "rules": [{ "name": "tags", "value": ["tag name"] }] }` is supported. \nThe juridiction restricts the data access to organizations tagged with specified "tag name".',
-              demandOption: true,
+              demandOption: false,
+              default: null,
               type: 'object',
             },
           },

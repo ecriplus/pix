@@ -30,7 +30,9 @@ export const clientApplicationRepository = {
         .required()
         .min(1),
     });
-    await jurisdictionSchema.validateAsync(jurisdiction);
+    if (jurisdiction) {
+      await jurisdictionSchema.validateAsync(jurisdiction);
+    }
     await knex.insert({ name, clientId, clientSecret, scopes, jurisdiction }).into(TABLE_NAME);
   },
 
