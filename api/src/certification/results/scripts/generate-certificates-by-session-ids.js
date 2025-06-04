@@ -66,7 +66,7 @@ async function main() {
     );
 
     if (isEmpty(certificates)) {
-      logger.error(`Pas de certificat trouvée pour la session ${sessionId}.`);
+      logger.error(`Pas de certificat trouvé pour la session ${sessionId}.`);
       continue;
     }
 
