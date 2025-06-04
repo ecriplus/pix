@@ -29,6 +29,7 @@ const createUserAndReconcileToOrganizationLearnerFromExternalUser = async functi
 
   return h.response(dependencies.scoOrganizationLearnerSerializer.serializeExternal(scoOrganizationLearner)).code(200);
 };
+
 const createAndReconcileUserToOrganizationLearner = async function (
   request,
   h,
@@ -58,9 +59,28 @@ const createAndReconcileUserToOrganizationLearner = async function (
 
   return h.response().code(204);
 };
+
+const updatePassword = async function (request, h, dependencies = { scoOrganizationLearnerSerializer }) {
+  const payload = request.payload.data.attributes;
+  const userId = request.auth.credentials.userId;
+  const organizationId = payload['organization-id'];
+  const organizationLearnerId = payload['organization-learner-id'];
+
+  const scoOrganizationLearner = await usecases.updateOrganizationLearnerDependentUserPassword({
+    userId,
+    organizationId,
+    organizationLearnerId,
+  });
+
+  return h
+    .response(dependencies.scoOrganizationLearnerSerializer.serializeCredentialsForDependent(scoOrganizationLearner))
+    .code(200);
+};
+
 const scoOrganizationLearnerController = {
   createUserAndReconcileToOrganizationLearnerFromExternalUser,
   createAndReconcileUserToOrganizationLearner,
+  updatePassword,
 };
 
 export { scoOrganizationLearnerController };

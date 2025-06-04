@@ -1,11 +1,18 @@
 import { scoOrganizationLearnerController } from '../../../../../src/prescription/organization-learner/application/sco-organization-learner-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/organization-learner/application/sco-organization-learner-route.js';
+import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Application | Route | sco-organization-learners', function () {
   let httpTestServer;
 
   beforeEach(async function () {
+    sinon
+      .stub(securityPreHandlers, 'checkUserBelongsToScoOrganizationAndManagesStudents')
+      .callsFake((request, h) => h.response(true));
+    sinon
+      .stub(scoOrganizationLearnerController, 'updatePassword')
+      .callsFake((request, h) => h.response('ok').code(200));
     sinon
       .stub(scoOrganizationLearnerController, 'createUserAndReconcileToOrganizationLearnerFromExternalUser')
       .callsFake((request, h) => h.response('ok').code(200));
@@ -226,6 +233,28 @@ describe('Integration | Application | Route | sco-organization-learners', functi
           expect(response.statusCode).to.equal(400);
         });
       });
+    });
+  });
+
+  describe('POST /api/sco-organization-learners/password-update', function () {
+    it('should succeed', async function () {
+      // given
+      const method = 'POST';
+      const url = '/api/sco-organization-learners/password-update';
+      const payload = {
+        data: {
+          attributes: {
+            'organization-learner-id': 1,
+            'organization-id': 3,
+          },
+        },
+      };
+
+      // when
+      const response = await httpTestServer.request(method, url, payload);
+
+      // then
+      expect(response.statusCode).to.equal(200);
     });
   });
 });

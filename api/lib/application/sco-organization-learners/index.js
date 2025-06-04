@@ -46,43 +46,6 @@ const register = async function (server) {
     },
     {
       method: 'POST',
-      path: '/api/sco-organization-learners/password-update',
-      config: {
-        pre: [
-          {
-            method: securityPreHandlers.checkUserBelongsToScoOrganizationAndManagesStudents,
-            assign: 'belongsToScoOrganizationAndManageStudents',
-          },
-        ],
-        handler: libScoOrganizationLearnerController.updatePassword,
-        validate: {
-          options: {
-            allowUnknown: true,
-          },
-          payload: Joi.object({
-            data: {
-              attributes: {
-                'organization-id': identifiersType.campaignId,
-                'organization-learner-id': identifiersType.organizationLearnerId,
-              },
-            },
-          }),
-          failAction: (request, h) => {
-            return sendJsonApiError(
-              new BadRequestError('The server could not understand the request due to invalid syntax.'),
-              h,
-            );
-          },
-        },
-        notes: [
-          "- Met à jour le mot de passe d'un utilisateur identifié par son identifiant élève\n" +
-            "- La demande de modification du mot de passe doit être effectuée par un membre de l'organisation à laquelle appartient l'élève.",
-        ],
-        tags: ['api', 'sco-organization-learners'],
-      },
-    },
-    {
-      method: 'POST',
       path: '/api/sco-organization-learners/batch-username-password-generate',
       config: {
         pre: [
