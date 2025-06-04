@@ -76,6 +76,21 @@ const deleteParticipation = async function (request, h) {
     userId,
     campaignId,
     campaignParticipationId,
+    userRole: 'ORGA_ADMIN',
+    client: 'PIX_ORGA',
+  });
+  return h.response({}).code(204);
+};
+
+const deleteParticipationFromAdmin = async function (request, h) {
+  const { userId } = request.auth.credentials;
+  const { campaignId, campaignParticipationId } = request.params;
+  await usecases.deleteCampaignParticipation({
+    userId,
+    campaignId,
+    campaignParticipationId,
+    userRole: 'SUPER_ADMIN',
+    client: 'PIX_ADMIN',
   });
   return h.response({}).code(204);
 };
@@ -179,6 +194,7 @@ const getUserCampaignAssessmentResult = async function (
 
 const campaignParticipationController = {
   deleteParticipation,
+  deleteParticipationFromAdmin,
   findPaginatedParticipationsForCampaignManagement,
   getAnalysis,
   getAnonymisedCampaignAssessments,
