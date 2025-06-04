@@ -12,8 +12,7 @@ export default class StudentScoRoute extends Route {
 
   async model() {
     const campaign = this.modelFor('campaigns');
-    const baseUrl = window.location.protocol + '//' + window.location.host;
-    const redirectionUrl = baseUrl + this.router.urlFor('campaigns', { code: campaign.code });
+    const redirectionUrl = this.session.redirectionUrl;
     return {
       campaign,
       redirectionUrl,
