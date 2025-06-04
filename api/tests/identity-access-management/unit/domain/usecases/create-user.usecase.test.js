@@ -2,10 +2,8 @@ import { createAccountCreationEmail } from '../../../../../src/identity-access-m
 import { InvalidOrAlreadyUsedEmailError } from '../../../../../src/identity-access-management/domain/errors.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { createUser } from '../../../../../src/identity-access-management/domain/usecases/create-user.usecase.js';
-import { config } from '../../../../../src/shared/config.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { EntityValidationError } from '../../../../../src/shared/domain/errors.js';
-import { urlBuilder } from '../../../../../src/shared/infrastructure/utils/url-builder.js';
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | create-user', function () {
@@ -434,6 +432,11 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
 
     context('step send account creation email to user', function () {
       const user = new User({ email: userEmail, locale: localeFromHeader });
+      let redirectionUrl;
+
+      beforeEach(function () {
+        redirectionUrl = 'https://pixapp/campagnes/ABCDEFGHI';
+      });
 
       it('should send the account creation email', async function () {
         // given
@@ -443,7 +446,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
           firstName: user.firstName,
           locale: localeFromHeader,
           token,
-          redirectionUrl: `${config.domain.pixApp + config.domain.tldFr}/campagnes/${campaignCode}`,
+          redirectionUrl,
         });
 
         // when
@@ -451,9 +454,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
           user,
           localeFromHeader,
           password,
-          campaignCode,
+          redirectionUrl,
           authenticationMethodRepository,
-          campaignRepository,
           emailRepository,
           emailValidationDemandRepository,
           userRepository,
@@ -546,7 +548,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
       // given
       campaignRepository.getByCode.resolves({ organizationId: 1 });
       const redirectionUrl = 'https://redirect.uri';
-      sinon.stub(urlBuilder, 'getCampaignUrl').returns(redirectionUrl);
       emailRepository.sendEmailAsync.resolves();
 
       const expectedEmail = createAccountCreationEmail({
@@ -562,9 +563,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
         user,
         localeFromHeader,
         password,
-        campaignCode,
+        redirectionUrl,
         authenticationMethodRepository,
-        campaignRepository,
         emailRepository,
         emailValidationDemandRepository,
         userRepository,
