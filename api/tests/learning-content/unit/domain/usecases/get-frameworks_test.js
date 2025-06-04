@@ -1,5 +1,5 @@
-import { usecases } from '../../../../lib/domain/usecases/index.js';
-import { expect, sinon } from '../../../test-helper.js';
+import { usecases } from '../../../../../src/learning-content/domain/usecases/index.js';
+import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | get-frameworks', function () {
   let frameworkRepository;

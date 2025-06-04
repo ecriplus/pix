@@ -1,5 +1,5 @@
-import { frameworksController } from '../../../../lib/application/frameworks/frameworks-controller.js';
-import * as moduleUnderTest from '../../../../lib/application/frameworks/index.js';
+import { frameworksController } from '../../../../src/learning-content/application/frameworks-controller.js';
+import * as moduleUnderTest from '../../../../src/learning-content/application/frameworks-route.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
 import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer, sinon } from '../../../test-helper.js';
 
