@@ -29,14 +29,14 @@ i18n.configure({
 
 /**
  * Avant de lancer le script, remplacer la variable DATABASE_URL par l'url de la base de réplication
- * Usage: LOG_LEVEL=info NODE_TLS_REJECT_UNAUTHORIZED='0' PGSSLMODE=require node scripts/certification/generate-certification-attestations-by-session-ids.js 86781
+ * Usage: LOG_LEVEL=info NODE_TLS_REJECT_UNAUTHORIZED='0' PGSSLMODE=require node scripts/certification/generate-certificates-by-session-ids.js 86781
  */
 async function main() {
-  logger.info("Début du script de génération d'attestations pour une session.");
+  logger.info('Début du script de génération de certificats pour une session.');
 
   if (process.argv.length <= 2) {
     logger.info(
-      'Usage: NODE_TLS_REJECT_UNAUTHORIZED="0" PGSSLMODE=require node scripts/generate-certification-attestations-by-session-id.js 1234,5678,9012',
+      'Usage: NODE_TLS_REJECT_UNAUTHORIZED="0" PGSSLMODE=require node scripts/generate-certificates-by-session-id.js 1234,5678,9012',
     );
     return;
   }
@@ -51,7 +51,7 @@ async function main() {
       continue;
     }
 
-    const certificationAttestations = compact(
+    const certificates = compact(
       await PromiseUtils.mapSeries(certificationCourses, async (certificationCourse) => {
         try {
           return await certificateRepository.getCertificate({
@@ -65,19 +65,19 @@ async function main() {
       }),
     );
 
-    if (isEmpty(certificationAttestations)) {
-      logger.error(`Pas d'attestation trouvée pour la session ${sessionId}.`);
+    if (isEmpty(certificates)) {
+      logger.error(`Pas de certificat trouvé pour la session ${sessionId}.`);
       continue;
     }
 
-    logger.info(`${certificationAttestations.length} attestations récupérées pour la session ${sessionId}.`);
+    logger.info(`${certificates.length} certificats récupérées pour la session ${sessionId}.`);
 
     const { buffer } = await getCertificatesPdfBuffer({
-      certificates: certificationAttestations,
+      certificates: certificates,
       i18n,
     });
 
-    const filename = `attestation-pix-session-${sessionId}.pdf`;
+    const filename = `certificats-pix-session-${sessionId}.pdf`;
     logger.info(`Génération du fichier pdf ${filename}.`);
 
     await fs.promises.writeFile(filename, buffer);
