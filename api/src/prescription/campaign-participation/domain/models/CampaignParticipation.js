@@ -6,7 +6,7 @@ import {
   CantImproveCampaignParticipationError,
 } from '../../../../../src/shared/domain/errors.js';
 import { ArchivedCampaignError } from '../../../campaign/domain/errors.js';
-import { CampaignParticipationStatuses } from '../../../shared/domain/constants.js';
+import { CampaignParticipationLoggerContext, CampaignParticipationStatuses } from '../../../shared/domain/constants.js';
 import { CampaignParticiationInvalidStatus, CampaignParticipationDeletedError } from '../errors.js';
 
 class CampaignParticipation {
@@ -104,7 +104,7 @@ class CampaignParticipation {
     this.participantExternalId = null;
     this.userId = null;
 
-    this.#loggerContext = 'ANONYMIZATION';
+    this.#loggerContext = CampaignParticipationLoggerContext.ANONYMIZATION;
   }
 
   delete(userId, isAnonymizedEnabled = false) {
@@ -115,7 +115,7 @@ class CampaignParticipation {
     this.deletedAt = new Date();
     this.deletedBy = userId;
 
-    this.#loggerContext = 'DELETION';
+    this.#loggerContext = CampaignParticipationLoggerContext.DELETION;
   }
 
   _canBeImproved() {

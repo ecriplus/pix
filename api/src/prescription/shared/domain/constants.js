@@ -15,4 +15,9 @@ const CampaignExternalIdTypes = {
   EMAIL: 'EMAIL',
 };
 
-export { CampaignExternalIdTypes, CampaignParticipationStatuses, CampaignTypes };
+const CampaignParticipationLoggerContext = {
+  DELETION: 'CAMPAIGN_PARTICIPATION_DELETION',
+  ANONYMIZATION: 'CAMPAIGN_PARTICIPATION_ANONYMIZATION',
+};
+
+export { CampaignExternalIdTypes, CampaignParticipationLoggerContext, CampaignParticipationStatuses, CampaignTypes };
