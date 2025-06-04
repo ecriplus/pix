@@ -8,7 +8,11 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Unit | Controller | authenticated/attestations', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  module('#downloadAttestations', function () {
+  module('#downloadAttestations', function (hooks) {
+    hooks.beforeEach(function () {
+      const metrics = this.owner.lookup('service:pix-metrics');
+      sinon.stub(metrics, 'trackEvent');
+    });
     module('when there are selected divisions', function () {
       test('should call the file-saver service with the right parameters', async function (assert) {
         // given
@@ -56,15 +60,14 @@ module('Unit | Controller | authenticated/attestations', function (hooks) {
         );
       });
       test('should call send metrics when download button is clicked', async function (assert) {
-        const metrics = this.owner.lookup('service:metrics');
-        metrics.add = sinon.stub();
+        const metrics = this.owner.lookup('service:pix-metrics');
         const controller = this.owner.lookup('controller:authenticated/attestations');
         const selectedDivision = ['3èmea'];
 
         //when
         await controller.downloadAttestations(SIXTH_GRADE_ATTESTATION_KEY, selectedDivision);
 
-        sinon.assert.calledWithExactly(metrics.add, {
+        sinon.assert.calledWithExactly(metrics.trackEvent, {
           event: 'custom-event',
           'pix-event-category': 'Attestations',
           'pix-event-action': 'Cliquer sur le bouton Télécharger sur la page Attestations',

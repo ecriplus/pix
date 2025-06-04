@@ -10,10 +10,22 @@ export default class ApplicationRoute extends Route {
   @service currentUser;
   @service session;
   @service intl;
-  @service metrics;
+  @service pixMetrics;
+  @service router;
+
+  constructor() {
+    super(...arguments);
+
+    const trackRouteChange = (transition) => {
+      if (!transition.to || transition.to.metadata?.doNotTrackPage) {
+        return;
+      }
+      this.pixMetrics.trackPage();
+    };
+    this.router.on('routeDidChange', trackRouteChange);
+  }
 
   async beforeModel(transition) {
-    this.metrics.initialize();
     await this.session.setup();
     await this.featureToggles.load();
     const isFranceDomain = this.currentDomain.isFranceDomain;

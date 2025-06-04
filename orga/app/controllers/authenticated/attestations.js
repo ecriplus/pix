@@ -9,7 +9,7 @@ export default class AuthenticatedAttestationsController extends Controller {
   @service fileSaver;
   @service session;
   @service currentUser;
-  @service metrics;
+  @service pixMetrics;
   @service notifications;
   @service intl;
 
@@ -46,7 +46,7 @@ export default class AuthenticatedAttestationsController extends Controller {
   }
 
   sendMetrics() {
-    this.metrics.add({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Attestations',
       'pix-event-action': 'Cliquer sur le bouton Télécharger sur la page Attestations',

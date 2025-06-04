@@ -1,13 +1,126 @@
 import { visit } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { setupIntl } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
+
+import authenticateSession from '../helpers/authenticate-session';
+import { createPrescriberByUser, createUserWithMembershipAndTermsOfServiceAccepted } from '../helpers/test-init';
 
 module('Application', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
   setupIntl(hooks, 'fr');
+
+  module('analytics', function (hooks) {
+    hooks.beforeEach(async function () {
+      class MetricServiceStub extends Service {
+        trackPage = sinon.stub();
+        context = {};
+      }
+
+      this.owner.register('service:metrics', MetricServiceStub);
+    });
+
+    test('should trackPage', async function (assert) {
+      // given
+      const metricService = this.owner.lookup('service:metrics');
+
+      const user = createUserWithMembershipAndTermsOfServiceAccepted();
+      createPrescriberByUser({ user });
+      await authenticateSession(user.id);
+
+      // when
+      await visit('/campagnes/les-miennes');
+
+      // then
+      assert.ok(
+        metricService.trackPage.calledOnceWithExactly({
+          plausibleAttributes: { u: '/campagnes/les-miennes' },
+        }),
+      );
+    });
+
+    test('should not track redirected page', async function (assert) {
+      // given
+      const metricService = this.owner.lookup('service:metrics');
+
+      const user = createUserWithMembershipAndTermsOfServiceAccepted();
+      createPrescriberByUser({ user });
+      await authenticateSession(user.id);
+
+      // when
+      await visit('/');
+
+      // then
+      assert.ok(metricService.trackPage.calledOnce);
+    });
+
+    test('should rewrite id in URL', async function (assert) {
+      // given
+      const user = createUserWithMembershipAndTermsOfServiceAccepted();
+      createPrescriberByUser({ user });
+      await authenticateSession(user.id);
+
+      server.create('campaign', {
+        id: 1,
+        ownerId: user.id,
+        ownerLastName: user.lastName,
+        ownerFirstName: user.firstName,
+      });
+
+      const metricService = this.owner.lookup('service:metrics');
+
+      await visit('/campagnes/1/parametres');
+      sinon.assert.calledOnceWithExactly(metricService.trackPage, {
+        plausibleAttributes: { u: '/campagnes/_ID_/parametres' },
+      });
+      assert.ok(true);
+    });
+
+    test('should ignore unknown route', async function (assert) {
+      // given
+      const metricService = this.owner.lookup('service:metrics');
+      // when
+      await visit('/unknown-url');
+
+      // then
+      sinon.assert.calledOnceWithExactly(metricService.trackPage, {
+        plausibleAttributes: { u: '/connexion' },
+      });
+
+      assert.ok(true);
+    });
+
+    test('should forward query params', async function (assert) {
+      // given
+      const user = createUserWithMembershipAndTermsOfServiceAccepted();
+      createPrescriberByUser({ user });
+      await authenticateSession(user.id);
+
+      server.create('campaign', {
+        id: 1,
+        ownerId: user.id,
+        ownerLastName: user.lastName,
+        ownerFirstName: user.firstName,
+      });
+
+      const metricService = this.owner.lookup('service:metrics');
+      server.create('campaign', { id: 1 });
+
+      // when
+      await visit('/campagnes/1/resultats-evaluation?groups=["1ere A"]');
+
+      // then
+      sinon.assert.calledOnceWithExactly(metricService.trackPage, {
+        plausibleAttributes: { u: '/campagnes/_ID_/resultats-evaluation?groups=["1ere A"]' },
+      });
+
+      assert.ok(true);
+    });
+  });
 
   module('When there are no information banners', function () {
     test('it should not display any banner', async function (assert) {

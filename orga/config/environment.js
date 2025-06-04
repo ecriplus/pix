@@ -125,6 +125,16 @@ module.exports = function (environment) {
       enabled: analyticsEnabled,
       matomoUrl: process.env.WEB_ANALYTICS_URL,
     },
+    metricsAdapters: [
+      {
+        name: 'PlausibleAdapter',
+        environments: analyticsEnabled ? ['all'] : [],
+        config: {
+          siteId: process.env.ANALYTICS_SITE_ID,
+          scriptUrl: process.env.ANALYTICS_SCRIPT_URL,
+        },
+      },
+    ],
   };
 
   if (environment === 'development') {

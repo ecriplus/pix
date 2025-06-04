@@ -2,6 +2,7 @@ import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import Scommunication from 'pix-orga/components/banner/sco-communication';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
@@ -26,14 +27,12 @@ module('Integration | Component | Banner::Sco-communication', function (hooks) {
             isSCOManagingStudents = true;
           }
 
-          class Router extends Service {
-            currentRouteName = route;
-          }
-
           test('should render the banner', async function (assert) {
             // given
             this.owner.register('service:current-user', CurrentUserStub);
-            this.owner.register('service:router', Router);
+
+            const router = this.owner.lookup('service:router');
+            sinon.stub(router, 'currentRouteName').value(route);
             // when
             const screen = await render(<template><Scommunication /></template>);
 
