@@ -1,5 +1,20 @@
 # Pix Changelog
 
+# [5.126.0](https://github.com/1024pix/pix/compare/v5.125.0...v5.126.0) (2025-06-04)
+
+### :rocket: Amélioration
+
+- [#12416](https://github.com/1024pix/pix/pull/12416) Remplacer Matomo par Plausible (PIX-18037). 
+
+### :arrow_up: Montée de version
+
+- [#12437](https://github.com/1024pix/pix/pull/12437) Update dependency @1024pix/epreuves-components to ^0.2.1 (junior) 
+- [#12438](https://github.com/1024pix/pix/pull/12438) Update dependency @1024pix/epreuves-components to ^0.2.1 (mon-pix) 
+- [#12432](https://github.com/1024pix/pix/pull/12432) Update dependency @1024pix/stylelint-config to ^5.1.32 (certif) 
+- [#12433](https://github.com/1024pix/pix/pull/12433) Update dependency @1024pix/stylelint-config to ^5.1.32 (junior) 
+- [#12435](https://github.com/1024pix/pix/pull/12435) Update dependency @1024pix/stylelint-config to ^5.1.32 (mon-pix) 
+- [#12436](https://github.com/1024pix/pix/pull/12436) Update dependency @1024pix/stylelint-config to ^5.1.32 (orga)
+
 # [5.125.0](https://github.com/1024pix/pix/compare/v5.124.0...v5.125.0) (2025-06-03)
 
 ### :rocket: Amélioration
