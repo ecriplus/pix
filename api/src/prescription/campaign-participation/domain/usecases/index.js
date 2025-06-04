@@ -11,6 +11,7 @@ import * as competenceEvaluationRepository from '../../../../evaluation/infrastr
 import * as stageAcquisitionRepository from '../../../../evaluation/infrastructure/repositories/stage-acquisition-repository.js';
 import * as stageRepository from '../../../../evaluation/infrastructure/repositories/stage-repository.js';
 import * as authenticationMethodRepository from '../../../../identity-access-management/infrastructure/repositories/authentication-method.repository.js';
+import { eventLoggingJobRepository } from '../../../../identity-access-management/infrastructure/repositories/jobs/event-logging-job.repository.js';
 import * as userRepository from '../../../../identity-access-management/infrastructure/repositories/user.repository.js';
 import { config } from '../../../../shared/config.js';
 import { featureToggles } from '../../../../shared/infrastructure/feature-toggles/index.js';
@@ -44,7 +45,6 @@ import { participantResultsSharedRepository } from '../../infrastructure/reposit
 import * as participationsForCampaignManagementRepository from '../../infrastructure/repositories/participations-for-campaign-management-repository.js';
 import * as participationsForUserManagementRepository from '../../infrastructure/repositories/participations-for-user-management-repository.js';
 import * as poleEmploiSendingRepository from '../../infrastructure/repositories/pole-emploi-sending-repository.js';
-
 /**
  * @typedef { import ('../../../../shared/infrastructure/feature-toggles/index.js')} FeatureToggles
  * @typedef { import ('../../../../shared/infrastructure/repositories/area-repository.js')} AreaRepository
@@ -110,6 +110,7 @@ const dependencies = {
   compareStagesAndAcquiredStages,
   competenceEvaluationRepository,
   competenceRepository,
+  eventLoggingJobRepository,
   featureToggles,
   knowledgeElementRepository: injectedSharedRepositories.knowledgeElementRepository,
   knowledgeElementSnapshotRepository,
