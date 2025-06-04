@@ -3,7 +3,7 @@ import Joi from 'joi';
 import { CampaignParticipationLoggerContext } from '../../../../prescription/shared/domain/constants.js';
 import { EntityValidationError } from '../../../../shared/domain/errors.js';
 
-const CLIENTS = ['PIX_ADMIN', 'PIX_APP', 'PIX_ORGA'];
+const CLIENTS = ['PIX_ADMIN', 'PIX_APP', 'PIX_ORGA', 'SCRIPT'];
 const ACTIONS = [
   'ANONYMIZATION',
   'ANONYMIZATION_GAR',

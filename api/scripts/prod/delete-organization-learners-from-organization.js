@@ -65,6 +65,8 @@ export class DeleteOrganizationLearnersFromOrganizationScript extends Script {
         organizationLearnerIds: organizationLearnerToDeleteIds,
         userId: engineeringUserId,
         organizationId,
+        userRole: 'SUPER_ADMIN',
+        client: 'SCRIPT',
       });
 
       if (executeAnonymization) {

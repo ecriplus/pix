@@ -39,5 +39,11 @@ export const deleteOrganizationLearnerBeforeImportFeature = withTransaction(asyn
 
   const organizationLearnerIds = await usecases.findOrganizationLearnersBeforeImportFeature({ organizationId });
 
-  return usecases.deleteOrganizationLearners({ userId, organizationId, organizationLearnerIds });
+  return usecases.deleteOrganizationLearners({
+    userId,
+    organizationId,
+    organizationLearnerIds,
+    userRole: 'SUPER_ADMIN',
+    client: 'PIX_ADMIN',
+  });
 });

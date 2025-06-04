@@ -12,6 +12,8 @@ const deleteOrganizationLearners = async function (request, h) {
       organizationLearnerIds: listLearners,
       userId: authenticatedUserId,
       organizationId,
+      userRole: 'ORGA_ADMIN',
+      client: 'PIX_ORGA',
     });
   });
   return h.response().code(200);
