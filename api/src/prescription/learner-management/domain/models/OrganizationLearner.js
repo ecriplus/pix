@@ -1,5 +1,7 @@
 import dayjs from 'dayjs';
 
+import { OrganizationLearnerLoggerContext } from '../../../shared/domain/constants.js';
+
 const STATUS = {
   STUDENT: 'ST',
   APPRENTICE: 'AP',
@@ -87,7 +89,7 @@ class OrganizationLearner {
   }
 
   anonymize() {
-    this.#loggerContext = 'ORGANIZATION_LEARNER_ANONYMIZATION';
+    this.#loggerContext = OrganizationLearnerLoggerContext.ANONYMIZATION;
     this.firstName = '(anonymized)';
     this.lastName = '(anonymized)';
     this.preferredLastName = null;
@@ -121,7 +123,7 @@ class OrganizationLearner {
   delete(userId, isAnonymizedWithDeletionEnabled) {
     if (isAnonymizedWithDeletionEnabled) {
       this.anonymize();
-      this.#loggerContext = 'ORGANIZATION_LEARNER_DELETION';
+      this.#loggerContext = OrganizationLearnerLoggerContext.DELETION;
     }
 
     this.deletedAt = new Date();

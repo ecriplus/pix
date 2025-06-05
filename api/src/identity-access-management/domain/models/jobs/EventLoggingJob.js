@@ -1,6 +1,9 @@
 import Joi from 'joi';
 
-import { CampaignParticipationLoggerContext } from '../../../../prescription/shared/domain/constants.js';
+import {
+  CampaignParticipationLoggerContext,
+  OrganizationLearnerLoggerContext,
+} from '../../../../prescription/shared/domain/constants.js';
 import { EntityValidationError } from '../../../../shared/domain/errors.js';
 
 const CLIENTS = ['PIX_ADMIN', 'PIX_APP', 'PIX_ORGA', 'SCRIPT'];
@@ -9,6 +12,7 @@ const ACTIONS = [
   'ANONYMIZATION_GAR',
   'EMAIL_CHANGED',
   ...Object.values(CampaignParticipationLoggerContext),
+  ...Object.values(OrganizationLearnerLoggerContext),
 ];
 const ROLES = ['SUPER_ADMIN', 'SUPPORT', 'USER', 'ORGA_ADMIN'];
 

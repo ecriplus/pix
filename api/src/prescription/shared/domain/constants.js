@@ -20,4 +20,15 @@ const CampaignParticipationLoggerContext = {
   ANONYMIZATION: 'CAMPAIGN_PARTICIPATION_ANONYMIZATION',
 };
 
-export { CampaignExternalIdTypes, CampaignParticipationLoggerContext, CampaignParticipationStatuses, CampaignTypes };
+const OrganizationLearnerLoggerContext = {
+  DELETION: 'ORGANIZATION_LEARNER_DELETION',
+  ANONYMIZATION: 'ORGANIZATION_LEARNER_ANONYMIZATION',
+};
+
+export {
+  CampaignExternalIdTypes,
+  CampaignParticipationLoggerContext,
+  CampaignParticipationStatuses,
+  CampaignTypes,
+  OrganizationLearnerLoggerContext,
+};
