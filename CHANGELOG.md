@@ -1,5 +1,11 @@
 # Pix Changelog
 
+## [5.126.1](https://github.com/1024pix/pix/compare/v5.126.0...v5.126.1) (2025-06-05)
+
+### :building_construction: Tech
+
+- [#12443](https://github.com/1024pix/pix/pull/12443) :truck: Renomme le script de génération de certificats par id de session (pix-18092)
+
 # [5.126.0](https://github.com/1024pix/pix/compare/v5.125.0...v5.126.0) (2025-06-04)
 
 ### :rocket: Amélioration
