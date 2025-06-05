@@ -5,6 +5,8 @@ import { service } from '@ember/service';
 export default class StudentScoController extends Controller {
   @service campaignStorage;
   @service router;
+  @service accessStorage;
+  @service session;
 
   @action
   async reconcile(scoOrganizationLearner, adapterOptions) {
@@ -18,5 +20,13 @@ export default class StudentScoController extends Controller {
     this.campaignStorage.set(this.model.code, 'associationDone', true);
     this.router.transitionTo('campaigns.invited.fill-in-participant-external-id', this.model.code);
     return;
+  }
+
+  @action
+  async goToConnectionPage() {
+    this.session.set('skipRedirectAfterSessionInvalidation', true);
+    await this.session.invalidate();
+    this.accessStorage.set(this.model.organizationId, 'hasUserSeenJoinPage', true);
+    this.router.replaceWith('campaigns.access', this.model.code);
   }
 }

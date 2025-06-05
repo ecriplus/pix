@@ -7,6 +7,7 @@ export default class EntryPoint extends Route {
   @service currentUser;
   @service currentDomain;
   @service campaignStorage;
+  @service accessStorage;
   @service session;
   @service router;
   @service store;
@@ -27,8 +28,8 @@ export default class EntryPoint extends Route {
   }
 
   async afterModel(campaign, transition) {
+    this.accessStorage.clear(campaign.organizationId);
     this.campaignStorage.clear(campaign.code);
-
     // TODO: Change this when identity providers target apps are managed through the API
     if (campaign.identityProvider === 'FWB' && this.currentDomain.isFranceDomain && !this.currentDomain.isLocalhost) {
       const redirectUrl = this.currentDomain.convertUrlToOrgDomain();

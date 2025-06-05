@@ -7,12 +7,14 @@ export default class LogoutRoute extends Route {
   @service session;
   @service url;
   @service campaignStorage;
+  @service accessStorage;
   @service router;
   @service location;
 
   beforeModel() {
     this.session.revokeGarExternalUserToken();
     this.campaignStorage.clearAll();
+    this.accessStorage.clearAll();
 
     if (this.session.isAuthenticated) {
       if (this.session.data.authenticated.source === AUTHENTICATED_SOURCE_FROM_GAR) {

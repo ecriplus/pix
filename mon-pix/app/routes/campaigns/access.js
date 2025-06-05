@@ -6,6 +6,7 @@ export default class AccessRoute extends Route {
   @service currentUser;
   @service session;
   @service campaignStorage;
+  @service accessStorage;
   @service router;
   @service store;
   @service oidcIdentityProviders;
@@ -63,7 +64,7 @@ export default class AccessRoute extends Route {
 
   _shouldLoginToAccessSCORestrictedCampaign(campaign) {
     const isAuthenticatedByGar = this.session.isAuthenticatedByGar;
-    const hasUserSeenJoinPage = this.campaignStorage.get(campaign.code, 'hasUserSeenJoinPage');
+    const hasUserSeenJoinPage = this.accessStorage.get(campaign.organizationId, 'hasUserSeenJoinPage');
     return (
       campaign.isRestricted &&
       campaign.organizationType === 'SCO' &&

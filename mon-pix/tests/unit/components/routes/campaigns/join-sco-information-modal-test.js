@@ -1,11 +1,8 @@
-import Service from '@ember/service';
 import { t } from 'ember-intl/test-support';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
-import sinon from 'sinon';
 
 import createComponent from '../../../../helpers/create-glimmer-component';
-import { stubSessionService } from '../../../../helpers/service-stubs.js';
 import setupIntl from '../../../../helpers/setup-intl';
 
 module('Unit | Component | routes/campaigns/join-sco-information-modal', function (hooks) {
@@ -157,32 +154,6 @@ module('Unit | Component | routes/campaigns/join-sco-information-modal', functio
         // then
         assert.deepEqual(component.message, expectedWarningMessage);
       });
-    });
-  });
-
-  module('#goToCampaignConnectionForm', function () {
-    test('should not redirect user to login page when session is invalidated', function (assert) {
-      // given
-      const component = createComponent('routes/campaigns/join-sco-information-modal');
-
-      const sessionStub = stubSessionService(this.owner);
-
-      class CampaignStorageStub extends Service {
-        set = sinon.stub();
-      }
-
-      this.owner.register('service:campaignStorage', CampaignStorageStub);
-
-      const routerObserver = this.owner.lookup('service:router');
-      routerObserver.replaceWith = sinon.stub();
-
-      // when
-      component.goToCampaignConnectionForm();
-
-      // then
-      sinon.assert.calledOnce(sessionStub.invalidate);
-      assert.true(sessionStub.skipRedirectAfterSessionInvalidation);
-      assert.ok(true);
     });
   });
 });

@@ -14,7 +14,7 @@ import AssociateScoStudentForm from 'mon-pix/components/routes/campaigns/invited
         <AssociateScoStudentForm
           @organizationName={{@model.organizationName}}
           @organizationId={{@model.organizationId}}
-          @campaignCode={{@model.code}}
+          @goToConnectionPage={{@controller.goToConnectionPage}}
           @onSubmit={{@controller.reconcile}}
         />
       </div>
