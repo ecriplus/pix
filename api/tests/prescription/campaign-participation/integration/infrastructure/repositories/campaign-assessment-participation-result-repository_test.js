@@ -5,6 +5,7 @@ import { catchErr, databaseBuilder, expect, mockLearningContent } from '../../..
 
 const { ENGLISH_SPOKEN, FRENCH_SPOKEN } = LOCALE;
 
+import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 
 describe('Integration | Repository | Campaign Assessment Participation Result', function () {
@@ -93,27 +94,33 @@ describe('Integration | Repository | Campaign Assessment Participation Result', 
 
         databaseBuilder.factory.buildAssessment({ campaignParticipationId, userId });
 
-        databaseBuilder.factory.buildKnowledgeElement({
+        const ke1 = databaseBuilder.factory.buildKnowledgeElement({
           userId,
           skillId: 'skill1',
           competenceId: 'rec1',
           createdAt: new Date('2020-01-01'),
           status: KnowledgeElement.StatusType.VALIDATED,
         });
-        databaseBuilder.factory.buildKnowledgeElement({
+        const ke2 = databaseBuilder.factory.buildKnowledgeElement({
           userId,
           skillId: 'skill2',
           competenceId: 'rec2',
           createdAt: new Date('2020-01-01'),
           status: KnowledgeElement.StatusType.INVALIDATED,
         });
-        databaseBuilder.factory.buildKnowledgeElement({
+        const ke3 = databaseBuilder.factory.buildKnowledgeElement({
           userId,
           skillId: 'skill3',
           competenceId: 'rec2',
           createdAt: new Date('2020-01-01'),
           status: KnowledgeElement.StatusType.VALIDATED,
         });
+
+        databaseBuilder.factory.buildKnowledgeElementSnapshot({
+          campaignParticipationId,
+          snapshot: new KnowledgeElementCollection([ke1, ke2, ke3]).toSnapshot(),
+        });
+
         return databaseBuilder.commit();
       });
 

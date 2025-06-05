@@ -1,7 +1,7 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import * as learningContentRepository from '../../../../../lib/infrastructure/repositories/learning-content-repository.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
-import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
+import * as knowledgeElementSnapshotRepository from '../../../campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
 import { CampaignAssessmentParticipationResult } from '../../domain/models/CampaignAssessmentParticipationResult.js';
 
 const getByCampaignIdAndCampaignParticipationId = async function ({ campaignId, campaignParticipationId, locale }) {
@@ -49,11 +49,10 @@ async function _fetchCampaignAssessmentParticipationResultAttributesFromCampaign
 }
 
 async function _buildCampaignAssessmentParticipationResults(result, campaignLearningContent) {
-  const knowledgeElementsGroupedByUser = await knowledgeElementRepository.findAssessedByUserIdAndLimitDateQuery({
-    userId: result.userId,
-    limitDate: result.sharedAt,
-  });
-  const knowledgeElements = Object.values(knowledgeElementsGroupedByUser).flat();
+  const snapshots = await knowledgeElementSnapshotRepository.findByCampaignParticipationIds([
+    result.campaignParticipationId,
+  ]);
+  const knowledgeElements = snapshots[result.campaignParticipationId] || [];
   const validatedTargetedKnowledgeElementsCountByCompetenceId =
     campaignLearningContent.countValidatedTargetedKnowledgeElementsByCompetence(knowledgeElements);
 
