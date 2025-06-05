@@ -4,7 +4,7 @@ import { securityPreHandlers } from '../../../../../src/shared/application/secur
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Prescription | Admin Campaign Participation | Router', function () {
-  describe('GET /api/admin/users/{id}/participations', function () {
+  describe('GET /api/admin/users/{userId}/participations', function () {
     beforeEach(function () {
       sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin');
       sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleCertif');
