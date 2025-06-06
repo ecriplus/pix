@@ -1,23 +1,24 @@
 @use 'pix-design-tokens/typography';
 
 .confirmation-step-account-information {
+  margin-bottom: var(--pix-spacing-3x);
   padding: 0;
   list-style: none;
 }
 
 .confirmation-step-account-information__field {
   max-width: 400px;
-  height: 65px;
-  margin-bottom: 8px;
+  height: 80px;
+  margin-bottom: var(--pix-spacing-2x);
   padding: 12px 20px;
   color: var(--pix-neutral-800);
   font-weight: 500;
   background: var(--pix-neutral-20);
-  border-radius: 8px;
+  border-radius: var(--pix-spacing-2x);
 
   & > div:first-of-type {
     @extend %pix-body-m;
 
-    margin-bottom: 6px;
+    margin-bottom: var(--pix-spacing-2x);
   }
 }

@@ -436,7 +436,7 @@
         },
         "send-email-confirmation": {
           "check-spam": "Als je deze e-mail niet ziet, controleer dan je spammap.",
-          "return": "Terug",
+          "return": "Terug naar Pix",
           "send-email": "We hebben je zojuist een e-mail gestuurd waarmee je een wachtwoord kunt kiezen. Je kunt nu je mailbox controleren.",
           "title": "Je Pix-account herstellen"
         },

@@ -83,6 +83,10 @@
 
       &--content {
         max-width: 450px;
+
+        .pix-input {
+          width: 100%;
+        }
       }
     }
 
@@ -143,11 +147,13 @@
 
     &--actions {
       display: flex;
+      flex-direction: column;
+      flex-grow:1;
       max-width: 400px;
       margin-top: 18px;
 
       button:first-child {
-        margin-right: 32px;
+        margin-bottom: var(--pix-spacing-3x)
       }
     }
   }
