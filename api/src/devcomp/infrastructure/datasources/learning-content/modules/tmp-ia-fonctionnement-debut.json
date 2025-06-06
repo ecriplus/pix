@@ -271,7 +271,7 @@
                 {
                   "id": "cccad926-00ec-456b-be8d-d864ad4b1ba8",
                   "type": "text",
-                  "content": "<p><a href=\"https://chatgpt.com/canvas/shared/682f3a0e4f7481919b89f52413d53c76\" target=\"_blank\">POIC #2</a></p>"
+                  "content": "<iframe title=\"conversation 1\" src=\"https://1024pix.github.io/atelier-contenus/RPE/ia-fonctionnement-debutant-poi2.html\" height=\"450\"></iframe>"
                 },
                 {
                   "id": "fe0257bb-baa6-4c93-8341-4ee38a6a1a25",
@@ -386,7 +386,7 @@
           "element": {
             "id": "af3739f4-b77e-4d2b-8795-947da458b59b",
             "type": "text",
-            "content": "<p>Avant d’utiliser une IA conversationnelle, il faut que son programme soit entraîné.</p><p><strong>POIC #3&nbsp;: à venir (FTO-PYO)</strong></p>"
+            "content": "<iframe title=\"conversation 1\" src=\"https://1024pix.github.io/atelier-contenus/RPE/ia-fonctionnement-debutant-poi3.html\" height=\"450\"></iframe>"
           }
         },
         {
@@ -459,7 +459,7 @@
           "element": {
             "id": "8427ab75-3075-469f-8d9a-2a3c477b31f2",
             "type": "text",
-            "content": "<p><strong><a href=\"https://chatgpt.com/canvas/shared/682efa3dfba481918596a93b473ca920\" target=\"_blank\">POIC #4</a></strong></p>"
+            "content": "<iframe title=\"conversation 1\" src=\"https://1024pix.github.io/atelier-contenus/RPE/ia-fonctionnement-debutant-poi4.html\" height=\"450\"></iframe>"
           }
         },
         {
