@@ -44,12 +44,19 @@ const doesUserHaveCertificationCenterMembershipForSession = async function ({ us
   return Boolean(sessions.length);
 };
 
-const finalize = async function ({ id, examinerGlobalComment, hasIncident, hasJoiningIssue, finalizedAt }) {
+const finalize = async function ({ id, examinerGlobalComment, hasIncident, hasJoiningIssue }) {
   const knexConn = DomainTransaction.getConnection();
+
   const [finalizedSession] = await knexConn('sessions')
     .where({ id })
-    .update({ examinerGlobalComment, hasIncident, hasJoiningIssue, finalizedAt })
+    .update({
+      examinerGlobalComment,
+      hasIncident,
+      hasJoiningIssue,
+      finalizedAt: knexConn.fn.now(),
+    })
     .returning('*');
+
   return new SessionManagement(finalizedSession);
 };
 

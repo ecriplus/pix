@@ -195,35 +195,33 @@ describe('Integration | Repository | Certification | session | SessionManagement
   });
 
   describe('#finalize', function () {
-    let id;
+    let sessionToFinalize;
     const examinerGlobalComment = '';
     const hasIncident = false;
     const hasJoiningIssue = true;
-    const finalizedAt = new Date('2017-09-01T12:14:33Z');
 
     beforeEach(function () {
-      id = databaseBuilder.factory.buildSession({ finalizedAt: null }).id;
-
+      sessionToFinalize = databaseBuilder.factory.buildSession({ finalizedAt: null });
       return databaseBuilder.commit();
     });
 
     it('should return an updated SessionManagement domain object', async function () {
       // when
       const sessionSaved = await sessionRepository.finalize({
-        id,
+        id: sessionToFinalize.id,
         examinerGlobalComment,
         hasIncident,
         hasJoiningIssue,
-        finalizedAt,
       });
 
       // then
       expect(sessionSaved).to.be.an.instanceof(SessionManagement);
-      expect(sessionSaved.id).to.deep.equal(id);
+      expect(sessionSaved.id).to.deep.equal(sessionToFinalize.id);
       expect(sessionSaved.examinerGlobalComment).to.deep.equal(examinerGlobalComment);
       expect(sessionSaved.hasIncident).to.deep.equal(hasIncident);
       expect(sessionSaved.hasJoiningIssue).to.deep.equal(hasJoiningIssue);
       expect(sessionSaved.status).to.deep.equal(SESSION_STATUSES.FINALIZED);
+      expect(sessionSaved.finalizedAt).to.be.an.instanceof(Date);
     });
   });
 

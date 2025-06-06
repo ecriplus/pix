@@ -73,7 +73,6 @@ const finalizeSession = async function ({
   const finalizedSession = await sessionRepository.finalize({
     id: sessionId,
     examinerGlobalComment,
-    finalizedAt: new Date(),
     hasIncident,
     hasJoiningIssue,
   });
