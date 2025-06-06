@@ -93,6 +93,27 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(applications[2]).to.deep.contain(application2);
     });
 
+    it('should insert a new client application with no given jurisdiction', async function () {
+      // given
+      const newApplication = {
+        name: 'appli0',
+        clientId: 'clientId-appli0',
+        clientSecret: 'secret-app0',
+        scopes: ['scope0'],
+        jurisdiction: null,
+      };
+
+      // when
+      await clientApplicationRepository.create(newApplication);
+
+      // then
+      const applications = await knex.select().from('client_applications').orderBy('name');
+      expect(applications).to.have.lengthOf(3);
+      expect(applications[0]).to.deep.contain(newApplication);
+      expect(applications[1]).to.deep.contain(application1);
+      expect(applications[2]).to.deep.contain(application2);
+    });
+
     it('should not insert a client application with invalid juridiction json format', async function () {
       // given
       const newApplication = {
