@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import * as learningContentRepository from '../../../../../lib/infrastructure/repositories/learning-content-repository.js';
 import * as stageCollectionRepository from '../../../../../lib/infrastructure/repositories/user-campaign-results/stage-collection-repository.js';
 import * as tutorialRepository from '../../../../devcomp/infrastructure/repositories/tutorial-repository.js';
+import * as userRecommendedTrainingRepository from '../../../../devcomp/infrastructure/repositories/user-recommended-training-repository.js';
 import * as compareStagesAndAcquiredStages from '../../../../evaluation/domain/services/stages/stage-and-stage-acquisition-comparison-service.js';
 import * as badgeAcquisitionRepository from '../../../../evaluation/infrastructure/repositories/badge-acquisition-repository.js';
 import * as badgeRepository from '../../../../evaluation/infrastructure/repositories/badge-repository.js';
@@ -80,6 +81,7 @@ import * as poleEmploiSendingRepository from '../../infrastructure/repositories/
  * @typedef { import ('../../../../../lib/infrastructure/repositories/user-campaign-results/stage-collection-repository.js')} StageCollectionRepository
  * @typedef { import ('../../../../evaluation/infrastructure/repositories/stage-repository.js')} StageRepository
  * @typedef { import ('../../../../devcomp/infrastructure/repositories/tutorial-repository.js')} TutorialRepository
+ * @typedef { import ('../../../../devcomp/infrastructure/repositories/user-recommended-training-repository.js')} UserRecommendedTrainingRepository
  */
 
 function requirePoleEmploiNotifier() {
@@ -131,6 +133,7 @@ const dependencies = {
   stageRepository,
   tutorialRepository,
   userRepository,
+  userRecommendedTrainingRepository,
 };
 
 const path = dirname(fileURLToPath(import.meta.url));

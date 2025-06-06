@@ -12,6 +12,7 @@ const deleteCampaignParticipation = withTransaction(async function ({
   campaignParticipationRepository,
   eventLoggingJobRepository,
   assessmentRepository,
+  userRecommendedTrainingRepository,
 }) {
   const isAnonymizationWithDeletionEnabled = await featureToggles.get('isAnonymizationWithDeletionEnabled');
 
@@ -43,6 +44,8 @@ const deleteCampaignParticipation = withTransaction(async function ({
     await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
       campaignParticipationIds,
     );
+    await userRecommendedTrainingRepository.deleteCampaignParticipationIds({ campaignParticipationIds });
+
     const assessments = await assessmentRepository.getByCampaignParticipationIds(campaignParticipationIds);
     for (const assessment of assessments) {
       assessment.detachCampaignParticipation();
