@@ -25,7 +25,7 @@ module('Unit | Component | routes/campaigns/invited/associate-sco-student-form',
     eventStub = { preventDefault: sinon.stub() };
     component = createComponent('routes/campaigns/invited/associate-sco-student-form', {
       onSubmit: onSubmitStub,
-      campaignCode: 123,
+      organizationId: 123,
     });
     component.store = storeStub;
     component.session = sessionStub;
@@ -53,11 +53,11 @@ module('Unit | Component | routes/campaigns/invited/associate-sco-student-form',
 
       // then
       sinon.assert.calledWith(storeStub.createRecord, 'sco-organization-learner', {
-        id: `${component.args.campaignCode}_${attributes.lastName}`,
+        id: `${component.args.organizationId}_${attributes.lastName}`,
         firstName: attributes.firstName,
         lastName: attributes.lastName,
         birthdate: attributes.birthdate,
-        campaignCode: component.args.campaignCode,
+        organizationId: component.args.organizationId,
       });
       assert.ok(true);
     });
@@ -290,11 +290,11 @@ module('Unit | Component | routes/campaigns/invited/associate-sco-student-form',
 
       // then
       sinon.assert.calledWith(storeStub.createRecord, 'sco-organization-learner', {
-        id: `${component.args.campaignCode}_${component.attributes.lastName}`,
+        id: `${component.args.organizationId}_${component.attributes.lastName}`,
         firstName: component.attributes.firstName,
         lastName: component.attributes.lastName,
         birthdate: component.attributes.birthdate,
-        campaignCode: component.args.campaignCode,
+        organizationId: component.args.organizationId,
       });
       assert.ok(true);
     });

@@ -10,7 +10,7 @@ module('Unit | Controller | campaigns | join | student-sco', function (hooks) {
   let controller;
   let sessionStub;
   let currentUserStub;
-  const campaignCode = 'AZERTY999';
+  const organizationId = 123;
   const expectedUserId = 1;
 
   hooks.beforeEach(function () {
@@ -27,7 +27,7 @@ module('Unit | Controller | campaigns | join | student-sco', function (hooks) {
       },
     };
 
-    controller.set('model', { code: campaignCode });
+    controller.set('model', { organizationId });
     controller.set('session', sessionStub);
     controller.set('currentUser', currentUserStub);
   });
@@ -67,11 +67,11 @@ module('Unit | Controller | campaigns | join | student-sco', function (hooks) {
         save: sinon.stub(),
       };
 
-      const expectedCampaignCode = campaignCode;
+      const expectedOrganizationId = organizationId;
 
       const expectedStoreOptions = {
         arg1: 'sco-organization-learner',
-        arg2: { userId: expectedUserId, campaignCode: expectedCampaignCode },
+        arg2: { userId: expectedUserId, organizationId: expectedOrganizationId },
       };
       const expectedSaveOptions = { adapterOptions: { tryReconciliation: true } };
 

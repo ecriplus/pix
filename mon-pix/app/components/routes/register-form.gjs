@@ -298,11 +298,11 @@ export default class RegisterForm extends Component {
     }
 
     this.scoOrganizationLearner = this.store.createRecord('sco-organization-learner', {
-      id: this.args.campaignCode + '_' + this.lastName,
+      id: this.args.organizationId + '_' + this.lastName,
       firstName: this.firstName,
       lastName: this.lastName,
       birthdate: this.birthdate,
-      campaignCode: this.args.campaignCode,
+      organizationId: this.args.organizationId,
     });
 
     return this.scoOrganizationLearner.save({ adapterOptions: { searchForMatchingStudent: true } }).then(

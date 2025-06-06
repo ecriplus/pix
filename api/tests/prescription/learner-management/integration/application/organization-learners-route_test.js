@@ -247,7 +247,7 @@ describe('Integration | Application | Organization Learners Management | Routes'
       const payload = {
         data: {
           attributes: {
-            'campaign-code': 'RESTRICTD',
+            'organization-id': 123,
           },
         },
       };
@@ -259,13 +259,13 @@ describe('Integration | Application | Organization Learners Management | Routes'
       expect(response.statusCode).to.equal(204);
     });
 
-    it('should return an error when there is an invalid campaign code attribute in the payload', async function () {
+    it('should return an error when there is an invalid organization id attribute in the payload', async function () {
       // given
-      const INVALID_CAMPAIGNCODE = '';
+      const INVALID_ORGANIZATIONID = '';
       const payload = {
         data: {
           attributes: {
-            'campaign-code': INVALID_CAMPAIGNCODE,
+            'organization-id': INVALID_ORGANIZATIONID,
           },
         },
       };

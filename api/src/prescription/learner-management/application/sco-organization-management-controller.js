@@ -64,7 +64,7 @@ const reconcileScoOrganizationLearnerManually = async function (
 ) {
   const authenticatedUserId = request.auth.credentials.userId;
   const payload = request.payload.data.attributes;
-  const campaignCode = payload['campaign-code'];
+  const organizationId = payload['organization-id'];
   const withReconciliation = request.query.withReconciliation === 'true';
 
   const reconciliationInfo = {
@@ -75,7 +75,7 @@ const reconcileScoOrganizationLearnerManually = async function (
   };
 
   const organizationLearner = await usecases.reconcileScoOrganizationLearnerManually({
-    campaignCode,
+    organizationId,
     reconciliationInfo,
     withReconciliation,
   });

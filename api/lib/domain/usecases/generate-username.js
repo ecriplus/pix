@@ -2,7 +2,6 @@ import lodash from 'lodash';
 
 import { STUDENT_RECONCILIATION_ERRORS } from '../../../src/shared/domain/constants.js';
 import {
-  CampaignCodeError,
   OrganizationLearnerAlreadyLinkedToUserError,
   OrganizationLearnerNotFound,
 } from '../../../src/shared/domain/errors.js';
@@ -11,21 +10,15 @@ const { find, get } = lodash;
 
 const generateUsername = async function ({
   studentInformation,
-  campaignCode,
-  campaignRepository,
+  organizationId,
   organizationLearnerRepository,
   userReconciliationService,
   obfuscationService,
   userRepository,
   studentRepository,
 }) {
-  const campaign = await campaignRepository.getByCode(campaignCode);
-  if (!campaign) {
-    throw new CampaignCodeError(`Le code campagne ${campaignCode} n'existe pas.`);
-  }
-
   const matchedOrganizationLearner = await findMatchedOrganizationLearnerForGivenOrganizationIdAndStudentInfo({
-    organizationId: campaign.organizationId,
+    organizationId,
     studentInformation,
     organizationLearnerRepository,
     userReconciliationService,

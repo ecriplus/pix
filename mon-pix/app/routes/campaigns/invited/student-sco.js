@@ -28,7 +28,7 @@ export default class StudentScoRoute extends Route {
         organizationLearner = await this.store
           .createRecord('sco-organization-learner', {
             userId: this.currentUser.user.id,
-            campaignCode: campaign.code,
+            organizationId: campaign.organizationId,
           })
           .save({ adapterOptions: { tryReconciliation: true } });
       } catch (error) {

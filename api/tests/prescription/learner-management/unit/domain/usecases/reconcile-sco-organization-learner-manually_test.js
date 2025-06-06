@@ -1,7 +1,6 @@
 import { OrganizationLearner } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationLearner.js';
 import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import {
-  CampaignCodeError,
   NotFoundError,
   OrganizationLearnerAlreadyLinkedToUserError,
   UserShouldNotBeReconciledOnAnotherAccountError,
@@ -9,9 +8,6 @@ import {
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | reconcile-sco-organization-learner-manually', function () {
-  let campaignCode;
-
-  let campaignRepository;
   let organizationLearnerRepository;
   let registrationOrganizationLearnerRepository;
   let userReconciliationService;
@@ -22,7 +18,6 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
   const organizationLearnerId = 1;
 
   beforeEach(function () {
-    campaignCode = 'ABCD12';
     organizationLearner = domainBuilder.buildOrganizationLearner({ organizationId, id: organizationLearnerId });
     user = {
       id: 1,
@@ -31,9 +26,6 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
       birthdate: '02/02/1992',
     };
 
-    campaignRepository = {
-      getByCode: sinon.stub(),
-    };
     organizationLearnerRepository = {
       reconcileUserToOrganizationLearner: sinon.stub(),
     };
@@ -49,51 +41,32 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
     };
   });
 
-  context('When there is no campaign with the given code', function () {
-    it('should throw a campaign code error', async function () {
+  context('When there is no organization nor organizationLearner with the given organizationId', function () {
+    it('should throw a NotFoundError', async function () {
       // given
-      campaignRepository.getByCode.withArgs(campaignCode).resolves(null);
+      userReconciliationService.findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo
+        .withArgs({
+          organizationId,
+          reconciliationInfo: user,
+          organizationLearnerRepository: libOrganizationLearnerRepository,
+        })
+        .throws(new NotFoundError());
 
       // when
       const result = await catchErr(usecases.reconcileScoOrganizationLearnerManually)({
-        libOrganizationLearnerRepository,
-        reconciliationInfo: user,
-        campaignCode,
-        campaignRepository,
-      });
-
-      // then
-      expect(result).to.be.instanceof(CampaignCodeError);
-    });
-  });
-
-  context('When no organizationLearner found', function () {
-    it('should throw a Not Found error', async function () {
-      // given
-      campaignRepository.getByCode.withArgs(campaignCode).resolves(domainBuilder.buildCampaign({ organizationId }));
-      userReconciliationService.findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo.throws(
-        new NotFoundError('Error message'),
-      );
-
-      // when
-      const result = await catchErr(usecases.reconcileScoOrganizationLearnerManually)({
-        libOrganizationLearnerRepository,
-        reconciliationInfo: user,
-        campaignCode,
-        campaignRepository,
         userReconciliationService,
+        libOrganizationLearnerRepository,
+        reconciliationInfo: user,
+        organizationId,
       });
-
       // then
       expect(result).to.be.instanceof(NotFoundError);
-      expect(result.message).to.equal('Error message');
     });
   });
 
   context('When student has already a reconciled account', function () {
     it('should return a OrganizationLearnerAlreadyLinkedToUser error', async function () {
       // given
-      campaignRepository.getByCode.withArgs(campaignCode).resolves(domainBuilder.buildCampaign({ organizationId }));
       userReconciliationService.findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo.resolves(
         organizationLearner,
       );
@@ -105,8 +78,7 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
       const result = await catchErr(usecases.reconcileScoOrganizationLearnerManually)({
         libOrganizationLearnerRepository,
         reconciliationInfo: user,
-        campaignCode,
-        campaignRepository,
+        organizationId,
         userReconciliationService,
       });
 
@@ -129,7 +101,6 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
 
       const exceptedErrorMessage =
         'Un autre étudiant est déjà réconcilié dans la même organisation et avec le même compte utilisateur';
-      campaignRepository.getByCode.withArgs(campaignCode).resolves(domainBuilder.buildCampaign({ organizationId }));
       userReconciliationService.findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo.resolves(
         organizationLearner,
       );
@@ -145,8 +116,7 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
       const result = await catchErr(usecases.reconcileScoOrganizationLearnerManually)({
         libOrganizationLearnerRepository,
         reconciliationInfo: user,
-        campaignCode,
-        campaignRepository,
+        organizationId,
         userReconciliationService,
         organizationLearnerRepository,
         registrationOrganizationLearnerRepository,
@@ -172,7 +142,6 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
             birthdate: '07/12/1996',
           };
 
-          const campaign = domainBuilder.buildCampaign();
           const currentOrganizationLearner = domainBuilder.buildOrganizationLearner({
             id: 7,
             birthdate: '07/12/1996',
@@ -187,7 +156,6 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
             organizationId: previousOrganizationId,
           });
 
-          campaignRepository.getByCode.resolves(campaign);
           userReconciliationService.findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo.resolves(
             currentOrganizationLearner,
           );
@@ -201,8 +169,7 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
             libOrganizationLearnerRepository,
             reconciliationInfo,
             withReconciliation: true,
-            campaignCode,
-            campaignRepository,
+            organizationId,
             userReconciliationService,
             organizationLearnerRepository,
             registrationOrganizationLearnerRepository,
@@ -228,7 +195,6 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
             birthdate: '07/12/1996',
           };
 
-          const campaign = domainBuilder.buildCampaign();
           const currentOrganizationLearner = domainBuilder.buildOrganizationLearner({
             id: 7,
             birthdate: '08/10/1980',
@@ -243,7 +209,6 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
             organizationId: previousOrganizationId,
           });
 
-          campaignRepository.getByCode.resolves(campaign);
           userReconciliationService.findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo.resolves(
             currentOrganizationLearner,
           );
@@ -256,8 +221,7 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
             libOrganizationLearnerRepository,
             reconciliationInfo,
             withReconciliation: true,
-            campaignCode,
-            campaignRepository,
+            organizationId,
             userReconciliationService,
             organizationLearnerRepository,
             registrationOrganizationLearnerRepository,
@@ -284,7 +248,6 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
           birthdate: '07/12/1996',
         };
 
-        const campaign = domainBuilder.buildCampaign();
         const currentOrganizationLearner = domainBuilder.buildOrganizationLearner({
           id: 7,
           birthdate: '07/12/1996',
@@ -299,7 +262,6 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
           organizationId: previousOrganizationId,
         });
 
-        campaignRepository.getByCode.resolves(campaign);
         userReconciliationService.findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo.resolves(
           currentOrganizationLearner,
         );
@@ -313,8 +275,7 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
           libOrganizationLearnerRepository,
           reconciliationInfo,
           withReconciliation: true,
-          campaignCode,
-          campaignRepository,
+          organizationId,
           userReconciliationService,
           organizationLearnerRepository,
           registrationOrganizationLearnerRepository,
@@ -340,7 +301,6 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
           birthdate: '07/12/1996',
         };
 
-        const campaign = domainBuilder.buildCampaign();
         const currentOrganizationLearner = domainBuilder.buildOrganizationLearner({
           id: 7,
           birthdate: '07/12/1996',
@@ -355,7 +315,6 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
           organizationId: previousOrganizationId,
         });
 
-        campaignRepository.getByCode.resolves(campaign);
         userReconciliationService.findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo.resolves(
           currentOrganizationLearner,
         );
@@ -369,8 +328,7 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
           libOrganizationLearnerRepository,
           reconciliationInfo,
           withReconciliation: true,
-          campaignCode,
-          campaignRepository,
+          organizationId,
           userReconciliationService,
           organizationLearnerRepository,
           registrationOrganizationLearnerRepository,
@@ -399,7 +357,6 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
               birthdate: '07/12/1996',
             };
 
-            const campaign = domainBuilder.buildCampaign();
             const currentOrganizationLearner = domainBuilder.buildOrganizationLearner({
               id: 7,
               birthdate: '08/10/1980',
@@ -421,7 +378,6 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
               organizationId: previousOrganizationId,
             });
 
-            campaignRepository.getByCode.resolves(campaign);
             userReconciliationService.findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo.resolves(
               currentOrganizationLearner,
             );
@@ -436,8 +392,7 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
               libOrganizationLearnerRepository,
               reconciliationInfo,
               withReconciliation: true,
-              campaignCode,
-              campaignRepository,
+              organizationId,
               userReconciliationService,
               organizationLearnerRepository,
               registrationOrganizationLearnerRepository,
@@ -460,7 +415,6 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
               birthdate: '07/12/1996',
             };
 
-            const campaign = domainBuilder.buildCampaign();
             const currentOrganizationLearner = domainBuilder.buildOrganizationLearner({
               id: 7,
               birthdate: '07/12/1996',
@@ -482,7 +436,6 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
               organizationId: previousOrganizationId,
             });
 
-            campaignRepository.getByCode.resolves(campaign);
             userReconciliationService.findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo.resolves(
               currentOrganizationLearner,
             );
@@ -497,8 +450,7 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
               libOrganizationLearnerRepository,
               reconciliationInfo,
               withReconciliation: true,
-              campaignCode,
-              campaignRepository,
+              organizationId,
               userReconciliationService,
               organizationLearnerRepository,
               registrationOrganizationLearnerRepository,
@@ -524,9 +476,7 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
       organizationLearner.userId = user.id;
       organizationLearner.firstName = user.firstName;
       organizationLearner.lastName = user.lastName;
-      campaignRepository.getByCode
-        .withArgs(campaignCode)
-        .resolves(domainBuilder.buildCampaign({ organization: { id: organizationId } }));
+
       userReconciliationService.findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo.resolves(
         organizationLearner,
       );
@@ -544,8 +494,7 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
         libOrganizationLearnerRepository,
         reconciliationInfo: user,
         withReconciliation,
-        campaignCode,
-        campaignRepository,
+        organizationId,
         userReconciliationService,
         organizationLearnerRepository,
         registrationOrganizationLearnerRepository,
@@ -564,9 +513,6 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
       organizationLearner.userId = user.id;
       organizationLearner.firstName = user.firstName;
       organizationLearner.lastName = user.lastName;
-      campaignRepository.getByCode
-        .withArgs(campaignCode)
-        .resolves(domainBuilder.buildCampaign({ organization: { id: organizationId } }));
       userReconciliationService.findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo.resolves(
         organizationLearner,
       );
@@ -578,8 +524,7 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
         libOrganizationLearnerRepository,
         reconciliationInfo: user,
         withReconciliation,
-        campaignCode,
-        campaignRepository,
+        organizationId,
         userReconciliationService,
         organizationLearnerRepository,
         registrationOrganizationLearnerRepository,
