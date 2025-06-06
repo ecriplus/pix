@@ -26,7 +26,14 @@ const hasRecommendedTrainings = async function ({ userId }) {
   return Boolean(result);
 };
 
-export { findByCampaignParticipationId, hasRecommendedTrainings, save };
+const deleteCampaignParticipationIds = async ({ campaignParticipationIds }) => {
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
+    .update({ campaignParticipationId: null })
+    .whereIn('campaignParticipationId', campaignParticipationIds);
+};
+
+export { deleteCampaignParticipationIds, findByCampaignParticipationId, hasRecommendedTrainings, save };
 
 function _toDomain(training) {
   return new UserRecommendedTraining({ ...training });
