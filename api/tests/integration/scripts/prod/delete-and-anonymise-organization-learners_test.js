@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 
+import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { DeleteAndAnonymiseOrgnizationLearnerScript } from '../../../../scripts/prod/delete-and-anonymise-organization-learners.js';
 import { databaseBuilder, knex } from '../../../test-helper.js';
 
@@ -218,10 +219,11 @@ describe('DeleteAndAnonymiseOrgnizationLearnerScript', function () {
         });
 
         // then
-        const anonymizedRecommendedTrainingResults =
-          await knex('user-recommended-trainings').whereNull('campaignParticipationId');
+        const anonymizedRecommendedTrainingResults = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME).whereNull(
+          'campaignParticipationId',
+        );
 
-        const otherRecommendedTrainingResults = await knex('user-recommended-trainings').where({
+        const otherRecommendedTrainingResults = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME).where({
           campaignParticipationId: otherParticipation.id,
         });
 

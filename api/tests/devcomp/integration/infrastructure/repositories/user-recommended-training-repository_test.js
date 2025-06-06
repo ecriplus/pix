@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { UserRecommendedTraining } from '../../../../../src/devcomp/domain/read-models/UserRecommendedTraining.js';
 import * as userRecommendedTrainingRepository from '../../../../../src/devcomp/infrastructure/repositories/user-recommended-training-repository.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
@@ -19,7 +20,7 @@ describe('Integration | Repository | user-recommended-training-repository', func
       await userRecommendedTrainingRepository.save(userRecommendedTraining);
 
       // then
-      const persistedUserRecommendedTraining = await knex('user-recommended-trainings')
+      const persistedUserRecommendedTraining = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
         .where({
           userId: userRecommendedTraining.userId,
           trainingId: userRecommendedTraining.trainingId,
@@ -50,7 +51,7 @@ describe('Integration | Repository | user-recommended-training-repository', func
       expect(async () => {
         await saveSameUserRecommendedTraining();
 
-        const updatedUserRecommendedTraining = await knex('user-recommended-trainings')
+        const updatedUserRecommendedTraining = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
           .where({
             id: userRecommendedTraining.id,
           })

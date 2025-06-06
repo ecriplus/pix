@@ -1,3 +1,4 @@
+import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { removeByOrganizationLearnerIds } from '../../src/prescription/learner-management/infrastructure/repositories/campaign-participation-repository.js';
 import { removeByIds } from '../../src/prescription/learner-management/infrastructure/repositories/organization-learner-repository.js';
 import { commaSeparatedNumberParser } from '../../src/shared/application/scripts/parsers.js';
@@ -77,7 +78,7 @@ async function detachAssessments(participationIds, updatedAt) {
 
 async function detachRecommendedTrainings(participationIds, updatedAt) {
   const knexConnection = DomainTransaction.getConnection();
-  await knexConnection('user-recommended-trainings')
+  await knexConnection(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
     .update({ campaignParticipationId: null, updatedAt })
     .whereIn('campaignParticipationId', participationIds);
 }
