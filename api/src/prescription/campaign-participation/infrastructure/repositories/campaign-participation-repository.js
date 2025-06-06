@@ -52,10 +52,6 @@ const update = async function (campaignParticipation) {
     .update(pick(campaignParticipation, CAMPAIGN_PARTICIPATION_ATTRIBUTES));
 };
 
-const batchUpdate = async function (campaignParticipations) {
-  return Promise.all(campaignParticipations.map((campaignParticipation) => update(campaignParticipation)));
-};
-
 const getLocked = async function (id) {
   const knexConn = DomainTransaction.getConnection();
 
@@ -295,7 +291,6 @@ async function getSharedParticipationIds(campaignId) {
 }
 
 export {
-  batchUpdate,
   findInfoByCampaignId,
   findOneByCampaignIdAndUserId,
   get,

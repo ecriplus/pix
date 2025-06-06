@@ -5,6 +5,7 @@ import {
 } from '../../../../../../src/prescription/campaign-participation/domain/errors.js';
 import { CampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipation.js';
 import {
+  CampaignParticipationLoggerContext,
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
@@ -37,7 +38,7 @@ describe('Unit | Domain | Models | CampaignParticipation', function () {
 
       campaignParticipation.delete(userId);
 
-      expect(campaignParticipation.loggerContext).to.equal('DELETION');
+      expect(campaignParticipation.loggerContext).to.equal(CampaignParticipationLoggerContext.DELETION);
       expect(campaignParticipation.userId).to.equal(666);
       expect(campaignParticipation.deletedAt).to.deep.equal(now);
       expect(campaignParticipation.deletedBy).to.deep.equal(userId);
@@ -49,7 +50,7 @@ describe('Unit | Domain | Models | CampaignParticipation', function () {
 
       campaignParticipation.delete(userId, true);
 
-      expect(campaignParticipation.loggerContext).to.equal('DELETION');
+      expect(campaignParticipation.loggerContext).to.equal(CampaignParticipationLoggerContext.DELETION);
       expect(campaignParticipation.userId).to.equal(null);
       expect(campaignParticipation.deletedAt).to.deep.equal(now);
       expect(campaignParticipation.deletedBy).to.deep.equal(userId);
@@ -67,7 +68,7 @@ describe('Unit | Domain | Models | CampaignParticipation', function () {
 
       campaignParticipation.anonymize();
 
-      expect(campaignParticipation.loggerContext).to.equal('ANONYMIZATION');
+      expect(campaignParticipation.loggerContext).to.equal(CampaignParticipationLoggerContext.ANONYMIZATION);
       expect(campaignParticipation.userId).to.equal(null);
       expect(campaignParticipation.participantExternalId).to.equal(null);
     });

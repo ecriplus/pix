@@ -2,6 +2,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import * as badgeAcquisitionRepository from '../../../../evaluation/infrastructure/repositories/badge-acquisition-repository.js';
+import { eventLoggingJobRepository } from '../../../../identity-access-management/infrastructure/repositories/jobs/event-logging-job.repository.js';
 import * as userRepository from '../../../../identity-access-management/infrastructure/repositories/user.repository.js';
 import * as organizationFeatureApi from '../../../../organizational-entities/application/api/organization-features-api.js';
 import * as obfuscationService from '../../../../shared/domain/services/obfuscation-service.js';
@@ -33,7 +34,6 @@ import * as organizationLearnerRepository from '../../infrastructure/repositorie
 import * as studentRepository from '../../infrastructure/repositories/student-repository.js';
 import * as supOrganizationLearnerRepository from '../../infrastructure/repositories/sup-organization-learner-repository.js';
 import { importStorage } from '../../infrastructure/storage/import-storage.js';
-
 /**
  * @typedef {import ('../../infrastructure/repositories/organization-feature-repository.js')} CampaignParticipationRepository
  * @typedef {import ('../../../campaign/infrastructure/repositories/campaign-repository.js')} CampaignRepository
@@ -65,6 +65,7 @@ const dependencies = {
   assessmentRepository,
   campaignParticipationRepository: repositories.campaignParticipationRepository,
   campaignRepository,
+  eventLoggingJobRepository,
   importCommonOrganizationLearnersJobRepository,
   importOrganizationLearnersJobRepository,
   importScoCsvOrganizationLearnersJobRepository,

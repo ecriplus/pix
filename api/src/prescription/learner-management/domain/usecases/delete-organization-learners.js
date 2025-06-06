@@ -1,14 +1,19 @@
+import { EventLoggingJob } from '../../../../identity-access-management/domain/models/jobs/EventLoggingJob.js';
+import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { OrganizationLearnerList } from '../models/OrganizationLearnerList.js';
 
-const deleteOrganizationLearners = async function ({
+const deleteOrganizationLearners = withTransaction(async function ({
   organizationLearnerIds,
   userId,
   organizationId,
+  userRole,
+  client,
   organizationLearnerRepository,
   featureToggles,
   campaignParticipationRepositoryfromBC,
   badgeAcquisitionRepository,
   assessmentRepository,
+  eventLoggingJobRepository,
 }) {
   const organizationLearnersFromOrganization =
     await organizationLearnerRepository.findOrganizationLearnersByOrganizationId({
@@ -39,6 +44,19 @@ const deleteOrganizationLearners = async function ({
     for (const campaignParticipation of campaignParticipations) {
       campaignParticipation.delete(userId, isAnonymizationWithDeletionEnabled);
       await campaignParticipationRepositoryfromBC.remove(campaignParticipation.dataToUpdateOnDeletion);
+
+      if (isAnonymizationWithDeletionEnabled) {
+        await eventLoggingJobRepository.performAsync(
+          new EventLoggingJob({
+            client,
+            action: campaignParticipation.loggerContext,
+            role: userRole,
+            userId: userId,
+            targetUserId: campaignParticipation.id,
+            data: {},
+          }),
+        );
+      }
     }
 
     if (isAnonymizationWithDeletionEnabled) {
@@ -53,6 +71,6 @@ const deleteOrganizationLearners = async function ({
       }
     }
   }
-};
+});
 
 export { deleteOrganizationLearners };

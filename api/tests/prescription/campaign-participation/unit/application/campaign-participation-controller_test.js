@@ -398,6 +398,36 @@ describe('Unit | Application | Controller | Campaign-Participation', function ()
         campaignParticipationId,
         campaignId,
         userId,
+        userRole: 'ORGA_ADMIN',
+        client: 'PIX_ORGA',
+      });
+    });
+  });
+
+  describe('#deleteParticipationFromAdmin', function () {
+    it('should call the usecase to delete the campaignParticipation', async function () {
+      // given
+      const campaignParticipationId = 1;
+      const campaignId = 6;
+      const userId = 2;
+      const request = {
+        params: { campaignId, campaignParticipationId },
+        auth: { credentials: { userId } },
+      };
+
+      sinon.stub(usecases, 'deleteCampaignParticipation');
+      usecases.deleteCampaignParticipation.resolves();
+
+      // when
+      await campaignParticipationController.deleteParticipationFromAdmin(request, hFake);
+
+      // then
+      expect(usecases.deleteCampaignParticipation).to.have.been.calledOnceWith({
+        campaignParticipationId,
+        campaignId,
+        userId,
+        userRole: 'SUPER_ADMIN',
+        client: 'PIX_ADMIN',
       });
     });
   });

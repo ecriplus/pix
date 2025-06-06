@@ -1,3 +1,4 @@
+import { EventLoggingJob } from '../../../../identity-access-management/domain/models/jobs/EventLoggingJob.js';
 import { CampaignsDestructor } from '../models/CampaignsDestructor.js';
 
 const deleteCampaigns = async ({
@@ -8,6 +9,7 @@ const deleteCampaigns = async ({
   organizationMembershipRepository,
   campaignAdministrationRepository,
   campaignParticipationRepository,
+  eventLoggingJobRepository,
 }) => {
   const membership = await organizationMembershipRepository.getByUserIdAndOrganizationId({ userId, organizationId });
   const campaignsToDelete = await campaignAdministrationRepository.getByIds(campaignIds);
@@ -24,7 +26,23 @@ const deleteCampaigns = async ({
   });
   campaignDestructor.delete(isAnonymizationWithDeletionEnabled);
 
-  await campaignParticipationRepository.batchUpdate(campaignParticipationsToDelete);
+  campaignDestructor.campaignParticipations.forEach(async (campaignParticipation) => {
+    await campaignParticipationRepository.update(campaignParticipation);
+
+    if (isAnonymizationWithDeletionEnabled) {
+      await eventLoggingJobRepository.performAsync(
+        new EventLoggingJob({
+          client: 'PIX_ORGA',
+          action: campaignParticipation.loggerContext,
+          role: 'ORGA_ADMIN',
+          userId: userId,
+          targetUserId: campaignParticipation.id,
+          data: {},
+        }),
+      );
+    }
+  });
+
   await campaignAdministrationRepository.remove(campaignsToDelete);
 };
 

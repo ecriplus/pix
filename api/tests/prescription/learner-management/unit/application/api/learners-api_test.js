@@ -81,7 +81,9 @@ describe('Unit | Prescription | learner management | Api | learners', function (
       const organizationLearnerIds = Symbol('organizationLearnerIds');
 
       findOrganizationLearnersBeforeImportFeatureStub.withArgs({ organizationId }).resolves(organizationLearnerIds);
-      deleteOrganizationLearnersStub.withArgs({ userId, organizationId, organizationLearnerIds }).resolves();
+      deleteOrganizationLearnersStub
+        .withArgs({ userId, organizationId, organizationLearnerIds, userRole: 'SUPER_ADMIN', client: 'PIX_ADMIN' })
+        .resolves();
 
       // when
       await deleteOrganizationLearnerBeforeImportFeature({ userId, organizationId });

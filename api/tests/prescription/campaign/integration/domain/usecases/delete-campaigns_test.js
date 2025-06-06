@@ -1,6 +1,8 @@
+import { EventLoggingJob } from '../../../../../../src/identity-access-management/domain/models/jobs/EventLoggingJob.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
 import * as campaignAdministrationRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/campaign-administration-repository.js';
 import * as campaignParticipationRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
+import { CampaignParticipationLoggerContext } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { featureToggles } from '../../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { databaseBuilder, expect, sinon } from '../../../../../test-helper.js';
 
@@ -59,6 +61,7 @@ describe('Integration | UseCases | delete-campaign', function () {
 
       // when
       await usecases.deleteCampaigns({ userId, organizationId, campaignIds: [campaignId] });
+
       const updatedCampaign = await campaignAdministrationRepository.get(campaignId);
       const updatedCampaignParticipation = await campaignParticipationRepository.get(campaignParticipationId.id);
 
@@ -71,6 +74,8 @@ describe('Integration | UseCases | delete-campaign', function () {
       expect(updatedCampaignParticipation.userId).to.equal(campaignParticipationId.userId);
       expect(updatedCampaignParticipation.deletedAt).to.deep.equal(now);
       expect(updatedCampaignParticipation.deletedBy).to.equal(userId);
+
+      await expect(EventLoggingJob.name).to.have.been.performed.withJobsCount(0);
     });
 
     it('should also anonymize when flag is true', async function () {
@@ -87,15 +92,16 @@ describe('Integration | UseCases | delete-campaign', function () {
       const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
         campaignId,
         participantExternalId: 'externalId',
-      });
+      }).id;
       await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
 
       await databaseBuilder.commit();
 
       // when
       await usecases.deleteCampaigns({ userId, organizationId, campaignIds: [campaignId] });
+
       const updatedCampaign = await campaignAdministrationRepository.get(campaignId);
-      const updatedCampaignParticipation = await campaignParticipationRepository.get(campaignParticipationId.id);
+      const updatedCampaignParticipation = await campaignParticipationRepository.get(campaignParticipationId);
 
       // then
       expect(updatedCampaign.deletedAt).to.deep.equal(now);
@@ -106,6 +112,16 @@ describe('Integration | UseCases | delete-campaign', function () {
       expect(updatedCampaignParticipation.deletedBy).to.equal(userId);
       expect(updatedCampaignParticipation.participantExternalId).to.be.null;
       expect(updatedCampaignParticipation.userId).to.be.null;
+
+      await expect(EventLoggingJob.name).to.have.been.performed.withJobPayload({
+        client: 'PIX_ORGA',
+        action: CampaignParticipationLoggerContext.DELETION,
+        role: 'ORGA_ADMIN',
+        userId: userId,
+        occurredAt: now.toISOString(),
+        targetUserId: campaignParticipationId,
+        data: {},
+      });
     });
   });
 });
