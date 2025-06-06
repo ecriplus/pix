@@ -34,6 +34,7 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'should-display-new-analysis-page': false,
             'show-new-result-page': false,
             'is-v3-certification-page-enabled': false,
+            'upgrade-to-real-user-enabled': false,
           },
         },
       };
