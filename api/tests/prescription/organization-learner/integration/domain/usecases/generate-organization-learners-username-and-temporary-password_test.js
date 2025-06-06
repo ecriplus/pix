@@ -1,13 +1,13 @@
-import { generateOrganizationLearnersUsernameAndTemporaryPassword } from '../../../../lib/domain/usecases/generate-organization-learners-username-and-temporary-password.js';
-import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
-import * as authenticationMethodRepository from '../../../../src/identity-access-management/infrastructure/repositories/authentication-method.repository.js';
-import { organizationLearnerIdentityRepository } from '../../../../src/identity-access-management/infrastructure/repositories/organization-learner-identity.repository.js';
-import * as userRepository from '../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
-import { UserNotAuthorizedToUpdatePasswordError } from '../../../../src/shared/domain/errors.js';
-import { OrganizationLearnerPasswordResetDTO } from '../../../../src/shared/domain/models/OrganizationLearnerPasswordResetDTO.js';
-import * as userReconciliationService from '../../../../src/shared/domain/services/user-reconciliation-service.js';
-import * as organizationRepository from '../../../../src/shared/infrastructure/repositories/organization-repository.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../../src/identity-access-management/domain/constants/identity-providers.js';
+import * as authenticationMethodRepository from '../../../../../../src/identity-access-management/infrastructure/repositories/authentication-method.repository.js';
+import { organizationLearnerIdentityRepository } from '../../../../../../src/identity-access-management/infrastructure/repositories/organization-learner-identity.repository.js';
+import * as userRepository from '../../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
+import { generateOrganizationLearnersUsernameAndTemporaryPassword } from '../../../../../../src/prescription/organization-learner/domain/usecases/generate-organization-learners-username-and-temporary-password.js';
+import { UserNotAuthorizedToUpdatePasswordError } from '../../../../../../src/shared/domain/errors.js';
+import { OrganizationLearnerPasswordResetDTO } from '../../../../../../src/shared/domain/models/OrganizationLearnerPasswordResetDTO.js';
+import * as userReconciliationService from '../../../../../../src/shared/domain/services/user-reconciliation-service.js';
+import * as organizationRepository from '../../../../../../src/shared/infrastructure/repositories/organization-repository.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Integration | UseCases | generate organization learners username and temporary password', function () {
   const hashedPassword = '21fedcba';

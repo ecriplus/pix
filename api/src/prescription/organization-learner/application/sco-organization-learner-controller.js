@@ -1,7 +1,10 @@
+import dayjs from 'dayjs';
+
 import {
   getForwardedOrigin,
   RequestedApplication,
 } from '../../../identity-access-management/infrastructure/utils/network.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import * as scoOrganizationLearnerSerializer from '../../learner-management/infrastructure/serializers/jsonapi/sco-organization-learner-serializer.js';
 import { usecases } from '../domain/usecases/index.js';
@@ -60,6 +63,32 @@ const createAndReconcileUserToOrganizationLearner = async function (
   return h.response().code(204);
 };
 
+const batchGenerateOrganizationLearnersUsernameWithTemporaryPassword = async function (request, h) {
+  const payload = request.payload.data.attributes;
+  const userId = request.auth.credentials.userId;
+  const organizationId = payload['organization-id'];
+  const organizationLearnersId = payload['organization-learners-id'];
+
+  const generatedCsvContent = await DomainTransaction.execute(async () => {
+    const organizationLearnersPasswordResets = await usecases.generateOrganizationLearnersUsernameAndTemporaryPassword({
+      userId,
+      organizationId,
+      organizationLearnersId,
+    });
+    return usecases.generateResetOrganizationLearnersPasswordCsvContent({
+      organizationLearnersPasswordResets,
+    });
+  });
+
+  const dateWithTime = dayjs().locale('fr').format('YYYYMMDD_HHmm');
+  const generatedCsvContentFileName = `${dateWithTime}_organization_learners_password_reset.csv`;
+
+  return h
+    .response(generatedCsvContent)
+    .header('Content-Type', 'text/csv;charset=utf-8')
+    .header('Content-Disposition', `attachment; filename=${generatedCsvContentFileName}`);
+};
+
 const updatePassword = async function (request, h, dependencies = { scoOrganizationLearnerSerializer }) {
   const payload = request.payload.data.attributes;
   const userId = request.auth.credentials.userId;
@@ -81,6 +110,7 @@ const scoOrganizationLearnerController = {
   createUserAndReconcileToOrganizationLearnerFromExternalUser,
   createAndReconcileUserToOrganizationLearner,
   updatePassword,
+  batchGenerateOrganizationLearnersUsernameWithTemporaryPassword,
 };
 
 export { scoOrganizationLearnerController };

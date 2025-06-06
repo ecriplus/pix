@@ -4,7 +4,7 @@ import { securityPreHandlers } from '../../../../../src/shared/application/secur
 import { NotFoundError, UserNotAuthorizedToUpdatePasswordError } from '../../../../../src/shared/domain/errors.js';
 import { domainBuilder, expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
-describe('Integration | Application | sco-organization-learners | sco-organization-learner-controller', function () {
+describe('Integration | Application | Controller | sco-organization-learners', function () {
   let sandbox;
   let httpTestServer;
 
@@ -94,6 +94,60 @@ describe('Integration | Application | sco-organization-learners | sco-organizati
 
           // then
           expect(response.statusCode).to.equal(403);
+        });
+      });
+    });
+  });
+
+  describe('#batchGenerateOrganizationLearnersUsernameWithTemporaryPassword', function () {
+    context('Error cases', function () {
+      context('when an UserNotAuthorizedToUpdatePasswordError error is thrown ', function () {
+        it('resolves a 403 Http Response with code and message in payload', async function () {
+          // given
+          const userId = 100000;
+          const organizationId = 100001;
+          const organizationLearnersId = [100002, 100003];
+          const message = `User ${userId} does not have permissions to update passwords of students in organization ${organizationId}`;
+          const code = 'ORGANIZATION_LEARNER_WITHOUT_USERNAME';
+          const expectedErrorResult = {
+            code,
+            detail: message,
+            status: '403',
+            title: 'Forbidden',
+          };
+
+          securityPreHandlers.checkUserBelongsToScoOrganizationAndManagesStudents.callsFake((request, h) =>
+            h.response(true),
+          );
+          const payload = {
+            data: {
+              attributes: {
+                'organization-learners-id': organizationLearnersId,
+                'organization-id': organizationId,
+              },
+            },
+          };
+          const auth = {
+            credentials: {
+              userId: userId,
+            },
+            strategy: {},
+          };
+
+          sinon
+            .stub(usecases, 'generateOrganizationLearnersUsernameAndTemporaryPassword')
+            .rejects(new UserNotAuthorizedToUpdatePasswordError(message, code));
+
+          // when
+          const response = await httpTestServer.request(
+            'POST',
+            '/api/sco-organization-learners/batch-username-password-generate',
+            payload,
+            auth,
+          );
+          // then
+          expect(response.statusCode).to.equal(403);
+          expect(response.result.errors[0]).to.deep.equal(expectedErrorResult);
         });
       });
     });

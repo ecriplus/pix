@@ -112,6 +112,43 @@ const register = async function (server) {
         tags: ['api', 'sco-organization-learners'],
       },
     },
+    {
+      method: 'POST',
+      path: '/api/sco-organization-learners/batch-username-password-generate',
+      config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkUserBelongsToScoOrganizationAndManagesStudents,
+            assign: 'belongsToScoOrganizationAndManageStudents',
+          },
+        ],
+        handler: scoOrganizationLearnerController.batchGenerateOrganizationLearnersUsernameWithTemporaryPassword,
+        validate: {
+          options: {
+            allowUnknown: true,
+          },
+          payload: Joi.object({
+            data: {
+              attributes: {
+                'organization-id': identifiersType.campaignId,
+                'organization-learners-id': Joi.array().items(identifiersType.organizationLearnerId),
+              },
+            },
+          }),
+          failAction: (request, h) => {
+            return sendJsonApiError(
+              new BadRequestError('The server could not understand the request due to invalid syntax.'),
+              h,
+            );
+          },
+        },
+        notes: [
+          '- Génère les identifiants et les mots de passe à usage unique des élèves dont les identifiants sont passés en paramètre dans un fichier CSV\n' +
+            "- La demande de génération doit être effectuée par un membre de l'organisation à laquelle appartiennent les élèves.",
+        ],
+        tags: ['api', 'sco-organization-learners'],
+      },
+    },
   ]);
 };
 

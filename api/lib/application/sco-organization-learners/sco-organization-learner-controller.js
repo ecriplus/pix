@@ -1,7 +1,4 @@
-import dayjs from 'dayjs';
-
 import * as scoOrganizationLearnerSerializer from '../../../src/prescription/learner-management/infrastructure/serializers/jsonapi/sco-organization-learner-serializer.js';
-import { DomainTransaction } from '../../../src/shared/domain/DomainTransaction.js';
 import { usecases } from '../../domain/usecases/index.js';
 
 const generateUsername = async function (request, h, dependencies = { scoOrganizationLearnerSerializer }) {
@@ -43,36 +40,9 @@ const generateUsernameWithTemporaryPassword = async function (
   return h.response(dependencies.scoOrganizationLearnerSerializer.serializeCredentialsForDependent(result)).code(200);
 };
 
-const batchGenerateOrganizationLearnersUsernameWithTemporaryPassword = async function (request, h) {
-  const payload = request.payload.data.attributes;
-  const userId = request.auth.credentials.userId;
-  const organizationId = payload['organization-id'];
-  const organizationLearnersId = payload['organization-learners-id'];
-
-  const generatedCsvContent = await DomainTransaction.execute(async () => {
-    const organizationLearnersPasswordResets = await usecases.generateOrganizationLearnersUsernameAndTemporaryPassword({
-      userId,
-      organizationId,
-      organizationLearnersId,
-    });
-    return usecases.generateResetOrganizationLearnersPasswordCsvContent({
-      organizationLearnersPasswordResets,
-    });
-  });
-
-  const dateWithTime = dayjs().locale('fr').format('YYYYMMDD_HHmm');
-  const generatedCsvContentFileName = `${dateWithTime}_organization_learners_password_reset.csv`;
-
-  return h
-    .response(generatedCsvContent)
-    .header('Content-Type', 'text/csv;charset=utf-8')
-    .header('Content-Disposition', `attachment; filename=${generatedCsvContentFileName}`);
-};
-
 const libScoOrganizationLearnerController = {
   generateUsername,
   generateUsernameWithTemporaryPassword,
-  batchGenerateOrganizationLearnersUsernameWithTemporaryPassword,
 };
 
 export { libScoOrganizationLearnerController };
