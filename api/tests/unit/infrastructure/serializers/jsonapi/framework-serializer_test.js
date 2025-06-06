@@ -1,4 +1,4 @@
-import * as serializer from '../../../../../lib/infrastructure/serializers/jsonapi/framework-serializer.js';
+import * as serializer from '../../../../../src/learning-content/infrastructure/serializers/framework-serializer.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Serializer | JSONAPI | framework-serializer', function () {

@@ -1,5 +1,9 @@
 import { lcmsClient } from '../../../shared/infrastructure/lcms-client.js';
+import * as sharedAreaRepository from '../../../shared/infrastructure/repositories/area-repository.js';
+import * as sharedFrameworkRepository from '../../../shared/infrastructure/repositories/framework-repository.js';
 import * as sharedSkillRepository from '../../../shared/infrastructure/repositories/skill-repository.js';
+import * as sharedThematicRepository from '../../../shared/infrastructure/repositories/thematic-repository.js';
+import * as sharedTubeRepository from '../../../shared/infrastructure/repositories/tube-repository.js';
 import { areaRepository } from '../../infrastructure/repositories/area-repository.js';
 import { challengeRepository } from '../../infrastructure/repositories/challenge-repository.js';
 import { competenceRepository } from '../../infrastructure/repositories/competence-repository.js';
@@ -14,20 +18,24 @@ import { tubeRepository } from '../../infrastructure/repositories/tube-repositor
 import { tutorialRepository } from '../../infrastructure/repositories/tutorial-repository.js';
 
 export const dependencies = {
-  frameworkRepository,
   areaRepository,
-  competenceRepository,
-  thematicRepository,
-  tubeRepository,
-  skillRepository,
-  sharedSkillRepository,
   challengeRepository,
+  competenceRepository,
   courseRepository,
-  tutorialRepository,
-  missionRepository,
+  frameworkRepository,
+  lcmsClient,
   lcmsCreateReleaseJobRepository,
   lcmsRefreshCacheJobRepository,
-  lcmsClient,
+  missionRepository,
+  sharedAreaRepository,
+  sharedFrameworkRepository,
+  sharedSkillRepository,
+  sharedThematicRepository,
+  sharedTubeRepository,
+  skillRepository,
+  thematicRepository,
+  tubeRepository,
+  tutorialRepository,
 };
 
 /** @typedef {typeof dependencies} Dependencies */
