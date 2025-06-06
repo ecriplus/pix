@@ -44,7 +44,7 @@ module('Acceptance | Session List', function (hooks) {
 
       // then
       assert.strictEqual(currentURL(), '/sessions/list');
-      assert.dom(screen.getByText('Sessions à traiter V3 (10)')).exists();
+      assert.dom(screen.getByText(`${t('pages.sessions.list.required-actions.v3')} (10)`)).exists();
     });
 
     module('#Pagination', function (hooks) {
