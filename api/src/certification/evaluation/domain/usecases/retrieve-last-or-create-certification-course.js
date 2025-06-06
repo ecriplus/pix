@@ -25,7 +25,6 @@ import { SessionNotAccessible } from '../../../session-management/domain/errors.
 import { ComplementaryCertificationCourse } from '../../../session-management/domain/models/ComplementaryCertificationCourse.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationCourse } from '../../../shared/domain/models/CertificationCourse.js';
-import { SessionVersion } from '../../../shared/domain/models/SessionVersion.js';
 
 const { features } = config;
 
@@ -36,13 +35,12 @@ const { features } = config;
  * @param {CertificationCandidateRepository} params.sharedCertificationCandidateRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {UserRepository} params.userRepository
- * @param {PlacementProfileService} params.placementProfileService
  * @param {CertificationCenterRepository} params.certificationCenterRepository
  * @param {CertificationBadgesService} params.certificationBadgesService
  * @param {CertificationChallengesService} params.certificationChallengesService
  * @param {VerifyCertificateCodeService} params.verifyCertificateCodeService
  */
-const retrieveLastOrCreateCertificationCourse = async function ({
+export const retrieveLastOrCreateCertificationCourse = async function ({
   accessCode,
   sessionId,
   userId,
@@ -54,7 +52,6 @@ const retrieveLastOrCreateCertificationCourse = async function ({
   certificationCenterRepository,
   userRepository,
   certificationChallengesService,
-  placementProfileService,
   certificationBadgesService,
   verifyCertificateCodeService,
   languageService,
@@ -104,34 +101,17 @@ const retrieveLastOrCreateCertificationCourse = async function ({
     userRepository,
     languageService,
     certificationChallengesService,
-    placementProfileService,
     verifyCertificateCodeService,
     certificationBadgesService,
   });
 };
 
-export { retrieveLastOrCreateCertificationCourse };
-
-/**
- * @param {Object} params
- * @param {SessionVersion} params.sessionVersion
- * @param {CertificationCandidate} params.certificationCandidate
- * @returns {AlgorithmEngineVersion}
- */
-function _selectCertificationAlgorithmEngine({ sessionVersion, certificationCandidate }) {
-  if (!SessionVersion.isV3(sessionVersion)) {
-    return AlgorithmEngineVersion.V2;
-  }
-
-  if (certificationCandidate.isEnrolledToComplementaryOnly()) {
-    return AlgorithmEngineVersion.V2;
-  }
-
-  return AlgorithmEngineVersion.V3;
-}
-
 function _validateUserLanguage(languageService, userLanguage) {
-  return CertificationCourse.isLanguageAvailableForV3Certification(languageService, userLanguage);
+  const isUserLanguageValid = CertificationCourse.isLanguageAvailableForV3Certification(languageService, userLanguage);
+
+  if (!isUserLanguageValid) {
+    throw new LanguageNotSupportedError(userLanguage);
+  }
 }
 
 function _validateSessionAccess(session, accessCode) {
@@ -174,7 +154,6 @@ async function _blockCandidateFromRestartingWithoutExplicitValidation(
  * @param {Object} params
  * @param {Session} params.session
  * @param {CertificationCourseRepository} params.certificationCourseRepository
- * @param {PlacementProfileService} params.placementProfileService
  * @param {CertificationCenterRepository} params.certificationCenterRepository
  * @param {UserRepository} params.userRepository
  * @param {CertificationBadgesService} params.certificationBadgesService
@@ -194,21 +173,11 @@ async function _startNewCertification({
   userRepository,
   certificationChallengesService,
   languageService,
-  placementProfileService,
   certificationBadgesService,
   verifyCertificateCodeService,
 }) {
-  let lang;
-  if (SessionVersion.isV3(session.version)) {
-    const user = await userRepository.get({ id: userId });
-    const isUserLanguageValid = _validateUserLanguage(languageService, user.lang);
-
-    if (!isUserLanguageValid) {
-      throw new LanguageNotSupportedError(user.lang);
-    }
-
-    lang = user.lang;
-  }
+  const user = await userRepository.get({ id: userId });
+  _validateUserLanguage(languageService, user.lang);
 
   const challengesForCertification = [];
 
@@ -243,27 +212,6 @@ async function _startNewCertification({
     }
   }
 
-  const algorithmEngineVersion = _selectCertificationAlgorithmEngine({
-    sessionVersion: session.version,
-    certificationCandidate,
-  });
-
-  let challengesForPixCertification = [];
-
-  if (_shouldPickCoreReferentialChallenges({ algorithmEngineVersion, certificationCandidate })) {
-    const placementProfile = await placementProfileService.getPlacementProfile({
-      userId,
-      limitDate: certificationCandidate.reconciledAt,
-      version: algorithmEngineVersion,
-    });
-
-    challengesForPixCertification = await certificationChallengesService.pickCertificationChallenges(
-      placementProfile,
-      locale,
-    );
-    challengesForCertification.push(...challengesForPixCertification);
-  }
-
   // Above operations are potentially slow so that two simultaneous calls of this function might overlap 😿
   // In case the simultaneous call finished earlier than the current one, we want to return its result
   const certificationCourseCreatedMeanwhile = await _getCertificationCourseIfCreatedMeanwhile(
@@ -286,21 +234,8 @@ async function _startNewCertification({
     certificationChallenges: challengesForCertification,
     verifyCertificateCodeService,
     complementaryCertificationCourseData,
-    algorithmEngineVersion,
-    lang,
+    lang: user.lang,
   });
-}
-
-/**
- * @param {Object} params
- * @param {AlgorithmEngineVersion} params.algorithmEngineVersion
- * @param {CertificationCandidate} params.certificationCandidate
- * @returns {boolean}
- */
-function _shouldPickCoreReferentialChallenges({ algorithmEngineVersion, certificationCandidate }) {
-  return (
-    !AlgorithmEngineVersion.isV3(algorithmEngineVersion) && !certificationCandidate.isEnrolledToComplementaryOnly()
-  );
 }
 
 /**
@@ -331,7 +266,6 @@ async function _createCertificationCourse({
   userId,
   certificationChallenges,
   complementaryCertificationCourseData,
-  algorithmEngineVersion,
   lang,
 }) {
   const verificationCode = await verifyCertificateCodeService.generateCertificateVerificationCode();
@@ -345,7 +279,7 @@ async function _createCertificationCourse({
     maxReachableLevelOnCertificationDate: features.maxReachableLevel,
     complementaryCertificationCourses,
     verificationCode,
-    algorithmEngineVersion,
+    algorithmEngineVersion: AlgorithmEngineVersion.V3,
     lang,
   });
 
