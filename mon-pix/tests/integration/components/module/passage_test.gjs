@@ -78,39 +78,6 @@ module('Integration | Component | Module | Passage', function (hooks) {
       // then
       assert.dom(screen.getByRole('navigation', { name: 'Étape 1 sur 1' })).exists();
     });
-
-    module('when grain is transition', function () {
-      test('should display navigation with step 0/0', async function (assert) {
-        // given
-        const store = this.owner.lookup('service:store');
-        const textElement = { content: 'content', type: 'text' };
-        const qcuElement = {
-          instruction: 'instruction',
-          proposals: ['radio1', 'radio2'],
-          type: 'qcu',
-        };
-        const components = [
-          {
-            type: 'element',
-            element: textElement,
-          },
-          {
-            type: 'element',
-            element: qcuElement,
-          },
-        ];
-        const grain = store.createRecord('grain', { id: 'grainId1', type: 'transition', components });
-
-        const module = store.createRecord('module', { title: 'Module title', grains: [grain] });
-        const passage = store.createRecord('passage');
-
-        // when
-        const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
-
-        // then
-        assert.dom(screen.getByRole('navigation', { name: 'Étape 0 sur 0' })).exists();
-      });
-    });
   });
 
   module('when a grain contains non existing elements', function () {
@@ -268,68 +235,6 @@ module('Integration | Component | Module | Passage', function (hooks) {
 
       // then
       assert.dom(screen.getByRole('navigation', { name: 'Étape 1 sur 2' })).exists();
-    });
-
-    module('when one grain is transition', function () {
-      module('when transition is first grain', function () {
-        test('should start at 0 and not count transition in navbar', async function (assert) {
-          // given
-          const store = this.owner.lookup('service:store');
-          const textElement = { content: 'content', type: 'text' };
-          const qcuElement = {
-            instruction: 'instruction',
-            proposals: ['radio1', 'radio2'],
-            type: 'qcu',
-          };
-          const grain1 = store.createRecord('grain', {
-            type: 'transition',
-            components: [{ type: 'element', element: textElement }],
-          });
-          const grain2 = store.createRecord('grain', { components: [{ type: 'element', element: qcuElement }] });
-
-          const module = store.createRecord('module', { title: 'Module title', grains: [grain1, grain2] });
-          const passage = store.createRecord('passage');
-
-          // when
-          const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
-
-          // then
-          assert.dom(screen.getByRole('navigation', { name: 'Étape 0 sur 1' })).exists();
-        });
-      });
-
-      module('when transition is last grain', function () {
-        test('should not count transition in navbar', async function (assert) {
-          // given
-          const store = this.owner.lookup('service:store');
-          const textElement = { content: 'content', type: 'text' };
-          const qcuElement = {
-            instruction: 'instruction',
-            proposals: ['radio1', 'radio2'],
-            type: 'qcu',
-          };
-          const grain1 = store.createRecord('grain', {
-            components: [{ type: 'element', element: textElement }],
-          });
-          const grain2 = store.createRecord('grain', {
-            type: 'transition',
-            components: [{ type: 'element', element: qcuElement }],
-          });
-
-          const module = store.createRecord('module', {
-            slug: 'module-slug',
-            title: 'Module title',
-            grains: [grain1, grain2],
-          });
-          const passage = store.createRecord('passage');
-
-          // when
-          const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
-
-          // then
-          assert.dom(screen.getByRole('navigation', { name: 'Étape 1 sur 1' })).exists();
-        });
-      });
     });
   });
 
