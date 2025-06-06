@@ -24,7 +24,7 @@ import ModuleBetaBanner from 'mon-pix/components/module/layout/beta-banner';
         <PixButtonLink
           @size="large"
           target="_blank"
-          @href="https://form-eu.123formbuilder.com/71180/modulix-experimentation?2850087={{@passage.id}}"
+          @href="https://form-eu.123formbuilder.com/82940/votre-avis-sur-les-modules-de-formation-pix?2850087={{@passage.id}}"
         >
           {{t "pages.modulix.recap.goToForm"}}
         </PixButtonLink>
