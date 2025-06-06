@@ -1,5 +1,23 @@
 # Pix Changelog
 
+# [5.127.0](https://github.com/1024pix/pix/compare/v5.126.1...v5.127.0) (2025-06-06)
+
+### :rocket: Amélioration
+
+- [#12396](https://github.com/1024pix/pix/pull/12396) Arrêter d'utiliser le campaignCode sur les routes liées au model ScoOrganizationLearner de mon-pix (Pix-18050) 
+- [#12452](https://github.com/1024pix/pix/pull/12452) Permettre la création d'un `client-application` sans juridiction via le script dédié. 
+- [#12340](https://github.com/1024pix/pix/pull/12340) Utiliser le webcomponent `message-conversation` à la place de la vidéo (PIX-17921) 
+
+### :bug: Correction
+
+- [#12425](https://github.com/1024pix/pix/pull/12425) Ajustements graphiques et textuels pour la sortie du sco (PIX-18044) 
+- [#12460](https://github.com/1024pix/pix/pull/12460) Corriger l'affichage du progress bar sur PixOrga (PIX-17762). 
+
+### :building_construction: Tech
+
+- [#12459](https://github.com/1024pix/pix/pull/12459) Mise à jour des dépendances PixAdmin (build and intl) 
+- [#12419](https://github.com/1024pix/pix/pull/12419) Supprimer la version de session dans le usecase retrieve-last-or-create-certification-course (PIX-18075).
+
 ## [5.126.1](https://github.com/1024pix/pix/compare/v5.126.0...v5.126.1) (2025-06-05)
 
 ### :building_construction: Tech
