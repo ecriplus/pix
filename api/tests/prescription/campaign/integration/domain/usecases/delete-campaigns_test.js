@@ -5,6 +5,8 @@ import * as campaignParticipationRepository from '../../../../../../src/prescrip
 import { CampaignParticipationLoggerContext } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { featureToggles } from '../../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { databaseBuilder, expect, sinon } from '../../../../../test-helper.js';
+const { buildCampaign, buildCampaignParticipation, buildMembership, buildOrganization, buildUser } =
+  databaseBuilder.factory;
 
 describe('Integration | UseCases | delete-campaign', function () {
   describe('success case', function () {
@@ -22,11 +24,11 @@ describe('Integration | UseCases | delete-campaign', function () {
 
     it('should not throw', async function () {
       // given
-      const userId = databaseBuilder.factory.buildUser().id;
-      const organizationId = databaseBuilder.factory.buildOrganization().id;
-      databaseBuilder.factory.buildMembership({ userId, organizationId, organizationRole: 'MEMBER' });
-      const campaignId = databaseBuilder.factory.buildCampaign({ ownerId: userId, organizationId }).id;
-      databaseBuilder.factory.buildCampaignParticipation({ campaignId });
+      const userId = buildUser().id;
+      const organizationId = buildOrganization().id;
+      buildMembership({ userId, organizationId, organizationRole: 'MEMBER' });
+      const campaignId = buildCampaign({ ownerId: userId, organizationId }).id;
+      buildCampaignParticipation({ campaignId });
 
       await databaseBuilder.commit();
       let error;
@@ -42,16 +44,16 @@ describe('Integration | UseCases | delete-campaign', function () {
 
     it('should delete campaign for given id and participation associated', async function () {
       // given
-      const userId = databaseBuilder.factory.buildUser().id;
-      const organizationId = databaseBuilder.factory.buildOrganization().id;
-      databaseBuilder.factory.buildMembership({ userId, organizationId, organizationRole: 'MEMBER' });
-      const campaignId = databaseBuilder.factory.buildCampaign({
+      const userId = buildUser().id;
+      const organizationId = buildOrganization().id;
+      buildMembership({ userId, organizationId, organizationRole: 'MEMBER' });
+      const campaignId = buildCampaign({
         ownerId: userId,
         organizationId,
         name: 'nom de campagne',
         title: 'titre de campagne',
       }).id;
-      const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+      const campaignParticipationId = buildCampaignParticipation({
         campaignId,
         participantExternalId: 'externalId',
       });
@@ -80,16 +82,16 @@ describe('Integration | UseCases | delete-campaign', function () {
 
     it('should also anonymize when flag is true', async function () {
       // given
-      const userId = databaseBuilder.factory.buildUser().id;
-      const organizationId = databaseBuilder.factory.buildOrganization().id;
-      databaseBuilder.factory.buildMembership({ userId, organizationId, organizationRole: 'MEMBER' });
-      const campaignId = databaseBuilder.factory.buildCampaign({
+      const userId = buildUser().id;
+      const organizationId = buildOrganization().id;
+      buildMembership({ userId, organizationId, organizationRole: 'MEMBER' });
+      const campaignId = buildCampaign({
         ownerId: userId,
         organizationId,
         name: 'nom de campagne',
         title: 'titre de campagne',
       }).id;
-      const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+      const campaignParticipationId = buildCampaignParticipation({
         campaignId,
         participantExternalId: 'externalId',
       }).id;
