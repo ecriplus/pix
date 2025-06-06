@@ -26,7 +26,7 @@ const deleteCampaigns = async ({
   });
   campaignDestructor.delete(isAnonymizationWithDeletionEnabled);
 
-  campaignDestructor.campaignParticipations.forEach(async (campaignParticipation) => {
+  for (const campaignParticipation of campaignDestructor.campaignParticipations) {
     await campaignParticipationRepository.update(campaignParticipation);
 
     if (isAnonymizationWithDeletionEnabled) {
@@ -41,7 +41,7 @@ const deleteCampaigns = async ({
         }),
       );
     }
-  });
+  }
 
   await campaignAdministrationRepository.remove(campaignsToDelete);
 };
