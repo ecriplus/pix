@@ -329,7 +329,7 @@
           "element": {
             "id": "30de711c-6587-4889-98ff-153941624049",
             "type": "text",
-            "content": "<p>Pour répondre, une <strong>IA conversationnelle</strong>, comme chatGPT, <strong>construit sa réponse comme si elle complétait le texte</strong>  de l’utilisateur.&nbsp; </p><p>Pour cela, elle cherche les mots qui ont <strong>le plus de chance d'apparaître</strong> (les plus probables) et choisit l’un de ces mots. </p><p>Elle répète cette méthode <strong>mot après mot</strong>.<br>[IMAGE TEMPORAIRE]</p>"
+            "content": "<p>Pour répondre, une <strong>IA conversationnelle</strong>, comme chatGPT, <strong>construit sa réponse comme si elle complétait le texte</strong>  de l’utilisateur.&nbsp; </p><p>Pour cela, elle cherche les mots qui ont <strong>le plus de chance d'apparaître</strong> (les plus probables) et choisit l’un de ces mots. </p><p>Elle répète cette méthode <strong>mot après mot</strong>.</p>"
           }
         },
         {
@@ -337,9 +337,9 @@
           "element": {
             "id": "11937beb-d6b8-4b6c-97ca-90653f93b85c",
             "type": "image",
-            "url": "https://i.imgur.com/kHTWMp7.png",
-            "alt": "TODO",
-            "alternativeText": "<p>TODO</p>",
+            "url": "https://i.imgur.com/m1e42Vd.png",
+            "alt": "image décrite dans l'aternative textuelle",
+            "alternativeText": "",
             "legend": "",
             "licence": ""
           }
