@@ -15,7 +15,6 @@ import {
   UserAlreadyLinkedToCandidateInSessionError,
 } from '../../../../shared/domain/errors.js';
 import { CertificationCourse } from '../../../shared/domain/models/CertificationCourse.js';
-import { SessionVersion } from '../../../shared/domain/models/SessionVersion.js';
 
 /**
  * @param {Object} params
@@ -40,13 +39,12 @@ export const verifyCandidateIdentity = async ({
 }) => {
   const user = await userRepository.get({ id: userId });
 
-  const session = await sessionRepository.get({ id: sessionId });
+  const isUserLanguageValid = CertificationCourse.isLanguageAvailableForV3Certification(languageService, user.lang);
+  if (!isUserLanguageValid) {
+    throw new LanguageNotSupportedError(user.lang);
+  }
 
-  await validateUserLanguage({
-    languageService,
-    user,
-    session,
-  });
+  const session = await sessionRepository.get({ id: sessionId });
 
   const candidatesInSession = await candidateRepository.findBySessionId({ sessionId: session.id });
 
@@ -82,16 +80,6 @@ export const verifyCandidateIdentity = async ({
 
   return candidate;
 };
-
-async function validateUserLanguage({ languageService, user, session }) {
-  if (SessionVersion.isV3(session.version)) {
-    const isUserLanguageValid = CertificationCourse.isLanguageAvailableForV3Certification(languageService, user.lang);
-
-    if (!isUserLanguageValid) {
-      throw new LanguageNotSupportedError(user.lang);
-    }
-  }
-}
 
 /**
  * @param {Object} params
