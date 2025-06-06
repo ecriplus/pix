@@ -1,6 +1,6 @@
 import lodash from 'lodash';
 
-import { UserNotAuthorizedToUpdatePasswordError } from '../../../src/shared/domain/errors.js';
+import { UserNotAuthorizedToUpdatePasswordError } from '../../../../shared/domain/errors.js';
 
 const { isEmpty } = lodash;
 

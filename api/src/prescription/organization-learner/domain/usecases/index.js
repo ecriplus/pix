@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 
 import * as campaignRepository from '../../../../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as userReconciliationService from '../../../../../src/shared/domain/services/user-reconciliation-service.js';
+import * as passwordGenerator from '../../../../identity-access-management/domain/services/password-generator.service.js';
 import * as authenticationMethodRepository from '../../../../identity-access-management/infrastructure/repositories/authentication-method.repository.js';
 import { emailValidationDemandRepository } from '../../../../identity-access-management/infrastructure/repositories/email-validation-demand.repository.js';
 import { lastUserApplicationConnectionsRepository } from '../../../../identity-access-management/infrastructure/repositories/last-user-application-connections.repository.js';
@@ -59,6 +60,7 @@ const dependencies = {
   organizationLearnerFeatureRepository,
   organizationLearnerImportFormatRepository,
   organizationFeaturesAPI,
+  passwordGenerator,
   campaignRepository,
   campaignParticipationOverviewRepository,
   registrationOrganizationLearnerRepository,

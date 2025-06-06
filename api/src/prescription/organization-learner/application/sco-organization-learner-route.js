@@ -7,6 +7,9 @@ import { config } from '../../../shared/config.js';
 
 const { passwordValidationPattern } = config.account;
 
+import { BadRequestError, sendJsonApiError } from '../../../shared/application/http-errors.js';
+import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
+import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { scoOrganizationLearnerController } from './sco-organization-learner-controller.js';
 
 const register = async function (server) {
@@ -68,6 +71,43 @@ const register = async function (server) {
         notes: [
           "Cette route crée un utilisateur et l'associe à l'élève trouvé au sein de l'organisation à laquelle " +
             'appartient la campagne spécifiée',
+        ],
+        tags: ['api', 'sco-organization-learners'],
+      },
+    },
+    {
+      method: 'POST',
+      path: '/api/sco-organization-learners/password-update',
+      config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkUserBelongsToScoOrganizationAndManagesStudents,
+            assign: 'belongsToScoOrganizationAndManageStudents',
+          },
+        ],
+        handler: scoOrganizationLearnerController.updatePassword,
+        validate: {
+          options: {
+            allowUnknown: true,
+          },
+          payload: Joi.object({
+            data: {
+              attributes: {
+                'organization-id': identifiersType.campaignId,
+                'organization-learner-id': identifiersType.organizationLearnerId,
+              },
+            },
+          }),
+          failAction: (request, h) => {
+            return sendJsonApiError(
+              new BadRequestError('The server could not understand the request due to invalid syntax.'),
+              h,
+            );
+          },
+        },
+        notes: [
+          "- Met à jour le mot de passe d'un utilisateur identifié par son identifiant élève\n" +
+            "- La demande de modification du mot de passe doit être effectuée par un membre de l'organisation à laquelle appartient l'élève.",
         ],
         tags: ['api', 'sco-organization-learners'],
       },

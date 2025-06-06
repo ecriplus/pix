@@ -14,9 +14,6 @@ describe('Integration | Application | Route | sco-organization-learners', functi
       .stub(securityPreHandlers, 'checkUserBelongsToScoOrganizationAndManagesStudents')
       .callsFake((request, h) => h.response(true));
     sinon
-      .stub(libScoOrganizationLearnerController, 'updatePassword')
-      .callsFake((request, h) => h.response('ok').code(200));
-    sinon
       .stub(libScoOrganizationLearnerController, 'generateUsernameWithTemporaryPassword')
       .callsFake((request, h) => h.response('ok').code(200));
 
@@ -182,28 +179,6 @@ describe('Integration | Application | Route | sco-organization-learners', functi
 
       // then
       expect(response.statusCode).to.equal(422);
-    });
-  });
-
-  describe('POST /api/sco-organization-learners/password-update', function () {
-    it('should succeed', async function () {
-      // given
-      const method = 'POST';
-      const url = '/api/sco-organization-learners/password-update';
-      const payload = {
-        data: {
-          attributes: {
-            'organization-learner-id': 1,
-            'organization-id': 3,
-          },
-        },
-      };
-
-      // when
-      const response = await httpTestServer.request(method, url, payload);
-
-      // then
-      expect(response.statusCode).to.equal(200);
     });
   });
 
