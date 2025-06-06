@@ -9,6 +9,7 @@ import * as badgeAcquisitionRepository from '../../../../evaluation/infrastructu
 import * as badgeRepository from '../../../../evaluation/infrastructure/repositories/badge-repository.js';
 import * as stageAcquisitionRepository from '../../../../evaluation/infrastructure/repositories/stage-acquisition-repository.js';
 import * as stageRepository from '../../../../evaluation/infrastructure/repositories/stage-repository.js';
+import { eventLoggingJobRepository } from '../../../../identity-access-management/infrastructure/repositories/jobs/event-logging-job.repository.js';
 import * as userRepository from '../../../../identity-access-management/infrastructure/repositories/user.repository.js';
 import * as organizationFeatureApi from '../../../../organizational-entities/application/api/organization-features-api.js';
 import * as codeGenerator from '../../../../shared/domain/services/code-generator.js';
@@ -100,6 +101,7 @@ const dependencies = {
   codeGenerator,
   competenceRepository,
   divisionRepository,
+  eventLoggingJobRepository,
   featureToggles,
   groupRepository,
   knowledgeElementRepository,
