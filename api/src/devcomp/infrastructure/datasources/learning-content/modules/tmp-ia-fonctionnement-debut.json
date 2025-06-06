@@ -386,42 +386,7 @@
           "element": {
             "id": "af3739f4-b77e-4d2b-8795-947da458b59b",
             "type": "text",
-            "content": "<iframe title=\"conversation 1\" src=\"https://1024pix.github.io/atelier-contenus/RPE/ia-fonctionnement-debutant-poi3.html\" height=\"600\"></iframe>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "34836a1a-3900-4724-990f-da2fc97ad9d5",
-            "type": "qcu",
-            "instruction": "<p>Que peut-on dire de l'entraînement d'une IA ?&nbsp;</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "<p>La réponse 1</p>",
-                "feedback": {
-                  "state": "",
-                  "diagnosis": "<p>-</p>"
-                }
-              },
-              {
-                "id": "2",
-                "content": "<p>La réponse 2</p>",
-                "feedback": {
-                  "state": "",
-                  "diagnosis": "<p>-</p>"
-                }
-              },
-              {
-                "id": "3",
-                "content": "<p>La réponse 3</p>",
-                "feedback": {
-                  "state": "",
-                  "diagnosis": "<p>-</p>"
-                }
-              }
-            ],
-            "solution": "3"
+            "content": "<p>Le secret : l'<strong>entraînement</strong>, qui consiste à analyser des textes. Voici un exemple simple : </p><iframe title=\"conversation 1\" src=\"https://1024pix.github.io/atelier-contenus/RPE/ia-fonctionnement-debutant-poi3.html\" height=\"600\"></iframe>"
           }
         }
       ]
@@ -436,7 +401,7 @@
           "element": {
             "id": "56de1931-9f60-483b-a46a-7669b4f3ee2b",
             "type": "text",
-            "content": "<p>Cet entraînement consiste à lui donner des textes pour qu’elle les analyse. </p><p>Dans ces textes, le programme va compter le nombre de fois où les mots sont présents, selon les phrases dans lesquelles ces mots se trouvent.&nbsp;</p><p>Il va aussi réaliser d'autres calculs similaires sur ces textes.</p><p>Et comme ça, le programme connaît des listes de mots très utilisés dans ces textes et dans un certain contexte.</p>"
+            "content": "<p>Entraîner le programme d'une IA consiste à lui donner des textes pour qu’elle les analyse. </p><p>Dans ces textes, le programme va compter le nombre de fois où les mots sont présents, selon les phrases dans lesquelles ces mots se trouvent.&nbsp;</p><p>Il va aussi réaliser d'autres calculs similaires sur ces textes.</p><p>Et comme ça, le programme connaît des listes de mots très utilisés dans ces textes, pour un certain contexte.</p>"
           }
         }
       ]
