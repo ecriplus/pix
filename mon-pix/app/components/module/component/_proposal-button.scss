@@ -29,7 +29,7 @@
   &[disabled]:not(.proposal-button--selected) {
     --state-border-color: var(--pix-neutral-100);
 
-    background: rgb(var(--pix-success-100-inline), 0.4);
+    background: var(--pix-primary-100);
     border-color: var(--state-border-color);
   }
 }
