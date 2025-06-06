@@ -1,5 +1,5 @@
 # renovate datasource=node-version depName=node
-FROM node:22.14.0
+FROM node:22.16.0
 # To run chrome headless with no-sandbox.
 ENV CI 1
 

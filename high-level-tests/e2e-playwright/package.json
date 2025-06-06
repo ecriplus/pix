@@ -12,7 +12,7 @@
     "url": "https://github.com/1024pix/pix"
   },
   "engines": {
-    "node": "^22.15.0"
+    "node": "^22.16.0"
   },
   "scripts": {
     "test": "playwright test",
