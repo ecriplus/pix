@@ -434,6 +434,8 @@ describe('Integration | UseCases | delete-campaign-participation', function () {
           userId: adminUserId,
           campaignId,
           campaignParticipationId,
+          userRole: 'ORGA_ADMIN',
+          client: 'PIX_ORGA',
         });
 
         //then
@@ -455,6 +457,8 @@ describe('Integration | UseCases | delete-campaign-participation', function () {
           userId: adminUserId,
           campaignId,
           campaignParticipationId,
+          userRole: 'ORGA_ADMIN',
+          client: 'PIX_ORGA',
         });
 
         //then

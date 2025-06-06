@@ -1,12 +1,19 @@
+import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { EventLoggingJob } from '../../../../../../src/identity-access-management/domain/models/jobs/EventLoggingJob.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
 import * as campaignAdministrationRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/campaign-administration-repository.js';
 import * as campaignParticipationRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
 import { CampaignParticipationLoggerContext } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { featureToggles } from '../../../../../../src/shared/infrastructure/feature-toggles/index.js';
-import { databaseBuilder, expect, sinon } from '../../../../../test-helper.js';
-const { buildCampaign, buildCampaignParticipation, buildMembership, buildOrganization, buildUser } =
-  databaseBuilder.factory;
+import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+const {
+  buildCampaign,
+  buildCampaignParticipation,
+  buildMembership,
+  buildUserRecommendedTraining,
+  buildOrganization,
+  buildUser,
+} = databaseBuilder.factory;
 
 describe('Integration | UseCases | delete-campaign', function () {
   describe('success case', function () {
@@ -123,6 +130,64 @@ describe('Integration | UseCases | delete-campaign', function () {
         occurredAt: now.toISOString(),
         targetUserId: campaignParticipationId,
         data: {},
+      });
+    });
+
+    context('when there are user-recommended-trainings linked to campaign participations', function () {
+      let adminUserId, campaignParticipationId, userId, userRecommendedTrainingId, campaignId, organizationId;
+
+      beforeEach(async function () {
+        //given
+        adminUserId = buildUser().id;
+        userId = buildUser().id;
+        organizationId = buildOrganization().id;
+        buildMembership({ userId: adminUserId, organizationId, organizationRole: 'ADMIN' });
+        campaignId = buildCampaign({ organizationId }).id;
+        campaignParticipationId = buildCampaignParticipation({ userId, campaignId, organizationId }).id;
+        userRecommendedTrainingId = buildUserRecommendedTraining({ userId, campaignParticipationId }).id;
+
+        await databaseBuilder.commit();
+      });
+      context('when feature toggle `isAnonymizationWithDeletionEnabled` is true', function () {
+        it('should delete campaignParticipationId', async function () {
+          //given
+          await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
+
+          //when
+          await usecases.deleteCampaigns({
+            userId: adminUserId,
+            campaignIds: [campaignId],
+            organizationId,
+          });
+
+          //then
+          const userRecommendedTrainingAnonymized = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
+            .where('id', userRecommendedTrainingId)
+            .first();
+
+          expect(userRecommendedTrainingAnonymized.campaignParticipationId).to.be.null;
+        });
+      });
+
+      context('when feature toggle `isAnonymizationWithDeletionEnabled` is false', function () {
+        it('should not delete campaignParticipationId', async function () {
+          //given
+          await featureToggles.set('isAnonymizationWithDeletionEnabled', false);
+
+          //when
+          await usecases.deleteCampaigns({
+            userId: adminUserId,
+            campaignIds: [campaignId],
+            organizationId,
+          });
+
+          //then
+          const userRecommendedTrainingAnonymized = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
+            .where('id', userRecommendedTrainingId)
+            .first();
+
+          expect(userRecommendedTrainingAnonymized.campaignParticipationId).to.equal(campaignParticipationId);
+        });
       });
     });
   });
