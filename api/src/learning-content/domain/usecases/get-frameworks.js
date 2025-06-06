@@ -1,5 +1,5 @@
-const getFrameworks = async function ({ frameworkRepository }) {
-  return frameworkRepository.list();
+const getFrameworks = async function ({ sharedFrameworkRepository }) {
+  return sharedFrameworkRepository.list();
 };
 
 export { getFrameworks };

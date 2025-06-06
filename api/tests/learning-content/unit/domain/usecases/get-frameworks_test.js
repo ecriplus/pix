@@ -2,20 +2,20 @@ import { usecases } from '../../../../../src/learning-content/domain/usecases/in
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | get-frameworks', function () {
-  let frameworkRepository;
+  let sharedFrameworkRepository;
 
   beforeEach(function () {
-    frameworkRepository = {
+    sharedFrameworkRepository = {
       list: sinon.stub(),
     };
   });
 
-  it('should call frameworkRepository.list', async function () {
+  it('should call sharedFrameworkRepository.list', async function () {
     // when
     await usecases.getFrameworks({
-      frameworkRepository,
+      sharedFrameworkRepository,
     });
 
-    expect(frameworkRepository.list).to.have.been.called;
+    expect(sharedFrameworkRepository.list).to.have.been.called;
   });
 });
