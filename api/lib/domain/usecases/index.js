@@ -63,7 +63,6 @@ import { organizationInvitationService } from '../../../src/team/domain/services
 import { certificationCenterMembershipRepository } from '../../../src/team/infrastructure/repositories/certification-center-membership.repository.js';
 import * as membershipRepository from '../../../src/team/infrastructure/repositories/membership.repository.js';
 import { organizationInvitationRepository } from '../../../src/team/infrastructure/repositories/organization-invitation.repository.js';
-import { repositories } from '../../infrastructure/repositories/index.js';
 import { certificationCompletedJobRepository } from '../../infrastructure/repositories/jobs/certification-completed-job-repository.js';
 import * as learningContentConversionService from '../services/learning-content/learning-content-conversion-service.js';
 
@@ -112,7 +111,6 @@ const dependencies = {
   competenceEvaluationRepository,
   competenceRepository,
   config,
-  correctionRepository: repositories.correctionRepository,
   courseRepository,
   cryptoService,
   dataProtectionOfficerRepository,
@@ -146,13 +144,8 @@ const dependencies = {
   targetProfileSummaryForAdminRepository,
   thematicRepository,
   tokenService,
-  trainingRepository: repositories.trainingRepository,
-  trainingTriggerRepository: repositories.trainingTriggerRepository,
   tubeRepository,
-  tutorialEvaluationRepository: repositories.tutorialEvaluationRepository,
-  tutorialRepository: repositories.tutorialRepository,
   userLoginRepository,
-  userRecommendedTrainingRepository: repositories.userRecommendedTrainingRepository,
   userReconciliationService,
   userRepository,
   userService,
