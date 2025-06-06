@@ -7,7 +7,9 @@ import QabScoreCard from 'mon-pix/components/module/element/qab/qab-score-card';
 import { htmlUnsafe } from '../../../../helpers/html-unsafe';
 import ModuleElement from '../module-element';
 
-export const NEXT_CARD_DELAY = 2000;
+const NEXT_CARD_REMOVE_DELAY = 400;
+const NEXT_CARD_TRANSITION_DELAY = 1600;
+export const NEXT_CARD_DELAY = NEXT_CARD_TRANSITION_DELAY + NEXT_CARD_REMOVE_DELAY;
 
 export default class ModuleQab extends ModuleElement {
   @tracked selectedOption = null;
@@ -17,6 +19,8 @@ export default class ModuleQab extends ModuleElement {
   @tracked score = 0;
   @tracked displayedCards = [];
   @tracked cardStatuses = new Map();
+  @tracked removedCards = new Map();
+
   constructor() {
     super(...arguments);
     this.displayedCards = this.element.cards;
@@ -46,6 +50,10 @@ export default class ModuleQab extends ModuleElement {
 
   @action
   goToNextCard() {
+    this.removedCards.set(this.currentCard.id, true);
+    this.removedCards = new Map(this.removedCards);
+
+    window.setTimeout(() => {
       this.displayedCards = this.displayedCards.slice(1);
       this.currentCardStatus = '';
       this.selectedOption = null;
@@ -53,6 +61,7 @@ export default class ModuleQab extends ModuleElement {
       if (this.displayedCards.length === 0) {
         this.currentStep = 'score';
       }
+    }, NEXT_CARD_REMOVE_DELAY);
   }
 
   @action
@@ -68,13 +77,13 @@ export default class ModuleQab extends ModuleElement {
     this.cardStatuses.set(this.currentCard.id, this.currentCardStatus);
     this.cardStatuses = new Map(this.cardStatuses);
 
-    window.setTimeout(() => this.goToNextCard(), NEXT_CARD_DELAY);
+    window.setTimeout(() => this.goToNextCard(), NEXT_CARD_TRANSITION_DELAY);
   }
 
   @action
   onRetry() {
     this.currentStep = 'cards';
-    this.currentCardIndex = 0;
+    this.removedCards = new Map();
     this.cardStatuses = new Map();
     this.displayedCards = this.element.cards;
     this.score = 0;
@@ -93,6 +102,11 @@ export default class ModuleQab extends ModuleElement {
     return this.cardStatuses.get(card.id) || '';
   }
 
+  @action
+  isCardRemoved(card) {
+    return this.removedCards.get(card.id) || false;
+  }
+
   <template>
     <form onSubmit={{this.onSubmit}} class="element-qab" aria-describedby="instruction-{{this.element.id}}">
       <fieldset class="element-qab__container">
@@ -102,7 +116,7 @@ export default class ModuleQab extends ModuleElement {
         <div class="element-qab__cards">
           {{#if this.shouldDisplayCards}}
             {{#each this.displayedCards as |card|}}
-              <QabCard @card={{card}} @status={{this.getCardStatus card}} />
+              <QabCard @card={{card}} @isRemoved={{this.isCardRemoved card}} @status={{this.getCardStatus card}} />
             {{/each}}
           {{/if}}
           {{#if this.shouldDisplayScore}}

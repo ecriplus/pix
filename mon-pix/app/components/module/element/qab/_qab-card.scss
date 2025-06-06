@@ -43,6 +43,11 @@
     transform: scale(0.5) translateY(77%);
   }
 
+  &--removed {
+    translate: -100vw -10vh;
+    rotate: -20deg;
+  }
+
   &__container {
     --qab-card-content-border-color: var(--pix-primary-300);
 
@@ -61,6 +66,12 @@
     &--success {
       --qab-card-content-border-color: var(--pix-success-300);
     }
+  }
+
+  &--without-transition {
+    transition: none;
+    translate: none;
+    rotate: none;
   }
 }
 

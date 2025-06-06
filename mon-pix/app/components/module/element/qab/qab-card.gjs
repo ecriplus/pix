@@ -14,8 +14,17 @@ export default class QabCard extends Component {
     return this.args.card.image?.url?.length > 0;
   }
 
+  get userPrefersReducedMotion() {
+    const userPrefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    return userPrefersReducedMotion.matches;
+  }
+
   <template>
-    <div class="qab-card">
+    <div
+      class="qab-card
+        {{if @isRemoved 'qab-card--removed'}}
+        {{if this.userPrefersReducedMotion 'qab-card--without-transition'}}"
+    >
       {{#if this.isSuccess}}
         <p role="status" class="sr-only"> {{t "pages.modulix.qab.correct-answer"}} </p>
       {{/if}}
