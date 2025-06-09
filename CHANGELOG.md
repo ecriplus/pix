@@ -1,5 +1,35 @@
 # Pix Changelog
 
+# [5.128.0](https://github.com/1024pix/pix/compare/v5.127.0...v5.128.0) (2025-06-09)
+
+### :rocket: Amélioration
+
+- [#12451](https://github.com/1024pix/pix/pull/12451) Ajouter l'audit logger dans la suppression d'une participation d'une campagne (Pix-17975). 
+- [#12429](https://github.com/1024pix/pix/pull/12429) Edition du fond pour le QCU déclaratif (PIX-17906) 
+- [#12476](https://github.com/1024pix/pix/pull/12476) Modulix - remplacer le questionnaire en fin de module (PIX-18061) 
+- [#12441](https://github.com/1024pix/pix/pull/12441) Revoir le comportement de la barre de progression du module (PIX-18090) 
+
+### :building_construction: Tech
+
+- [#12440](https://github.com/1024pix/pix/pull/12440)  :truck: Déplace la route `batch usename password generate` vers `src/prescription/organization-learner` (Pix-17851) 
+- [#12450](https://github.com/1024pix/pix/pull/12450) :truck: Déplace la route de mise à jour de mot de passe pour l'organisationLearner (pix-17852) 
+- [#12453](https://github.com/1024pix/pix/pull/12453) :truck: Déplace les routes de `framework` vers `src/learning-content/` 
+- [#12439](https://github.com/1024pix/pix/pull/12439) Ne plus avoir de code spécifique v3 dans le usecase verify-candidate-identity (PIX-18091). 
+- [#12434](https://github.com/1024pix/pix/pull/12434) Rendre la date de finalisation de session dépendante de la BDD (PIX-17939). 
+- [#12473](https://github.com/1024pix/pix/pull/12473) Utiliser une boucle for pour exécuter du code asynchrone (PIX-18810) 
+
+### :arrow_up: Montée de version
+
+- [#12466](https://github.com/1024pix/pix/pull/12466) Update dependency @1024pix/pix-ui to ^55.21.0 (certif) 
+- [#12468](https://github.com/1024pix/pix/pull/12468) Update dependency @1024pix/pix-ui to ^55.21.0 (junior) 
+- [#12470](https://github.com/1024pix/pix/pull/12470) Update dependency @1024pix/pix-ui to ^55.21.0 (mon-pix) 
+- [#12471](https://github.com/1024pix/pix/pull/12471) Update dependency @1024pix/pix-ui to ^55.21.0 (orga) 
+- [#12477](https://github.com/1024pix/pix/pull/12477) Update dependency @1024pix/pix-ui to ^55.21.1 (certif) 
+- [#12478](https://github.com/1024pix/pix/pull/12478) Update dependency @1024pix/pix-ui to ^55.21.1 (junior) 
+- [#12480](https://github.com/1024pix/pix/pull/12480) Update dependency @1024pix/pix-ui to ^55.21.1 (mon-pix) 
+- [#12481](https://github.com/1024pix/pix/pull/12481) Update dependency @1024pix/pix-ui to ^55.21.1 (orga) 
+- [#12293](https://github.com/1024pix/pix/pull/12293) Update node
+
 # [5.127.0](https://github.com/1024pix/pix/compare/v5.126.1...v5.127.0) (2025-06-06)
 
 ### :rocket: Amélioration
