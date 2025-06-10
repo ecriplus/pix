@@ -240,81 +240,91 @@
       "title": "",
       "components": [
         {
-          "type": "stepper",
-          "steps": [
-            {
-              "elements": [
-                {
-                  "id": "0a85e665-4add-468c-b192-0db443410dc8",
-                  "type": "text",
-                  "content": "<p>Gustave demande à l’IA d’organiser ses notes. Il a commencé à écrire son prompt&nbsp;:&nbsp; <br>“Voici ma prise de note&nbsp;: <br>- Austin – service canon, réception fragile </p><p>- Clément saute haut ++ / smashs souvent dehors </p><p>- Adelita – réflexes solides / parle peu </p><p>- Kamel&nbsp; – 2 services ratés, bon retour après bloc </p><p>- Clément – gros impact au filet </p><p>- Austin – en retard sur une réception → point perdu </p><p>- Adelita lit bien le jeu, toujours bien placée </p><p>- Kamel sauve une balle compliquée – top réflexe </p><p>- Clément attaque souvent dans le bloc </p><p>- Kamel encourage après erreur – bon état d’esprit&nbsp; -</p><p> Austin sorti fin 4e set – agacé</p><p><br>Organise mes notes sous forme de ...<br><br></p>"
-                },
-                {
-                  "id": "22bff52e-1760-45a8-9d89-e441a679eda4",
-                  "type": "qrocm",
-                  "instruction": "<p>À votre avis, quel sera le prochain mot du prompt de Gustave ?</p>",
-                  "proposals": [
-                    {
-                      "input": "CV1pzGeay4eJi1g7",
-                      "type": "input",
-                      "inputType": "text",
-                      "size": 8,
-                      "display": "inline",
-                      "placeholder": "un seul mot",
-                      "ariaLabel": "champs à remplir",
-                      "defaultValue": "",
-                      "tolerances": [
-                        "t1",
-                        "t2",
-                        "t3"
-                      ],
-                      "solutions": [
-                        "tableau"
-                      ]
-                    }
-                  ],
-                  "feedbacks": {
-                    "valid": {
-                      "state": "<p>Bien vu !&nbsp;<br></p>",
-                      "diagnosis": "<p>Il est utile de préciser le format dans un prompt, ici, un tableau.<br></p>"
-                    },
-                    "invalid": {
-                      "state": "<p>Et non…<br></p>",
-                      "diagnosis": "<p>Il est utile de préciser le format dans un prompt, ici, un tableau. C’est le format qu’avait utilisé Gustave la dernière fois.<br></p>"
-                    }
-                  }
-                }
-              ]
-            },
-            {
-              "elements": [
-                {
-                  "id": "9f7254d9-2290-4f25-a8db-360c52d83048",
-                  "type": "text",
-                  "content": "<p>Le tableau obtenu par Gustave ne correspond pas vraiment à ses attentes.&nbsp; </p><p>Précisez son prompt pour obtenir un tableau similaire à celui de la dernière fois.<br><br></p>"
-                },
-                {
-                  "id": "a8cdd8be-ed20-4d41-b1ea-277f8a7bd5c5",
-                  "type": "image",
-                  "url": "https://i.imgur.com/NObT42V.png",
-                  "alt": "",
-                  "alternativeText": "",
-                  "legend": "",
-                  "licence": ""
-                },
-                {
-                  "id": "c0a360e7-e44a-4a02-a796-b7a968f40c7e",
-                  "type": "text",
-                  "content": "<p>À vous de jouer en utilisant&nbsp;<strong>cette IA</strong> !&nbsp; </p>"
-                },
-                {
-                  "id": "8bffec8d-b6c7-48ed-8d3d-5af8d094247e",
-                  "type": "text",
-                  "content": "<iframe title=\"dnd\" src=\"https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmb7p4yfj0001sk01m4rq19c3\" height=\"800\"></iframe>"
-                }
-              ]
+          "type": "element",
+          "element": {
+            "id": "0a85e665-4add-468c-b192-0db443410dc8",
+            "type": "text",
+            "content": "<p>Gustave demande à l’IA d’organiser ses notes. Il a commencé à écrire son prompt&nbsp;:&nbsp; <br>“Voici ma prise de note&nbsp;: <br>- Austin – service canon, réception fragile </p><p>- Clément saute haut ++ / smashs souvent dehors </p><p>- Adelita – réflexes solides / parle peu </p><p>- Kamel&nbsp; – 2 services ratés, bon retour après bloc </p><p>- Clément – gros impact au filet </p><p>- Austin – en retard sur une réception → point perdu </p><p>- Adelita lit bien le jeu, toujours bien placée </p><p>- Kamel sauve une balle compliquée – top réflexe </p><p>- Clément attaque souvent dans le bloc </p><p>- Kamel encourage après erreur – bon état d’esprit&nbsp; -</p><p> Austin sorti fin 4e set – agacé</p><p><br>Organise mes notes sous forme de ...<br><br></p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "22bff52e-1760-45a8-9d89-e441a679eda4",
+            "type": "qrocm",
+            "instruction": "<p>À votre avis, quel sera le prochain mot du prompt de Gustave ?</p>",
+            "proposals": [
+              {
+                "input": "CV1pzGeay4eJi1g7",
+                "type": "input",
+                "inputType": "text",
+                "size": 8,
+                "display": "inline",
+                "placeholder": "un seul mot",
+                "ariaLabel": "champs à remplir",
+                "defaultValue": "",
+                "tolerances": ["t1", "t2", "t3"],
+                "solutions": ["tableau"]
+              }
+            ],
+            "feedbacks": {
+              "valid": {
+                "state": "<p>Bien vu !&nbsp;<br></p>",
+                "diagnosis": "<p>Il est utile de préciser le format dans un prompt, ici, un tableau.<br></p>"
+              },
+              "invalid": {
+                "state": "<p>Et non…<br></p>",
+                "diagnosis": "<p>Il est utile de préciser le format dans un prompt, ici, un tableau. C’est le format qu’avait utilisé Gustave la dernière fois.<br></p>"
+              }
             }
-          ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "936f3c2e-947e-43c4-8230-bb320ba53036",
+      "type": "lesson",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "9f7254d9-2290-4f25-a8db-360c52d83048",
+            "type": "text",
+            "content": "<p>Le tableau obtenu par Gustave ne correspond pas vraiment à ses attentes.&nbsp; </p><p>Précisez son prompt pour obtenir un tableau similaire à celui de la dernière fois.<br><br></p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "a8cdd8be-ed20-4d41-b1ea-277f8a7bd5c5",
+            "type": "image",
+            "url": "https://i.imgur.com/NObT42V.png",
+            "alt": "",
+            "alternativeText": "",
+            "legend": "",
+            "licence": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "154ad788-50ff-4a8c-abf1-a22307d4d2f8",
+      "type": "activity",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "8bffec8d-b6c7-48ed-8d3d-5af8d094247e",
+            "type": "embed",
+            "isCompletionRequired": false,
+            "title": "Simulateur LLM",
+            "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmb7p4yfj0001sk01m4rq19c3",
+            "instruction": "<p>À vous de jouer en utilisant&nbsp;<strong>cette IA</strong> !&nbsp; </p>",
+            "solution": "<p></p>",
+            "height": 800
+          }
         }
       ]
     },
@@ -584,17 +594,14 @@
         {
           "type": "element",
           "element": {
-            "id": "a6271120-a495-43e5-88f8-7e58c322dcb7",
-            "type": "text",
-            "content": "<p>Utilisez&nbsp;<strong>cette IA</strong> pour le faire, à vous de jouer !<br></p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
             "id": "fbe1b91f-a423-45f5-8329-1cd50f436944",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmao5mw2q000vwg014ljde4km\" height=\"800\"></iframe>"
+            "type": "embed",
+            "isCompletionRequired": false,
+            "title": "Simulateur LLM",
+            "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmao5mw2q000vwg014ljde4km",
+            "instruction": "<p>Utilisez&nbsp;<strong>cette IA</strong> pour le faire, à vous de jouer !</p>",
+            "solution": "<p></p>",
+            "height": 800
           }
         },
         {
