@@ -8,9 +8,11 @@ import { eq } from 'ember-truth-helpers';
 import Element from 'mon-pix/components/module/component/element';
 import Stepper from 'mon-pix/components/module/component/stepper';
 import didInsert from 'mon-pix/modifiers/modifier-did-insert';
+import { TrackedSet } from 'tracked-built-ins';
 
 export default class ModuleGrain extends Component {
   @service modulixAutoScroll;
+  @tracked answeredElements = new TrackedSet();
 
   grain = this.args.grain;
 
@@ -31,6 +33,8 @@ export default class ModuleGrain extends Component {
     'video',
   ];
   static AVAILABLE_GRAIN_TYPES = ['lesson', 'activity', 'discovery', 'challenge', 'summary', 'transition'];
+
+  static LOCALLY_ANSWERABLE_ELEMENTS = ['qab', 'qcu-declarative', 'flashcards'];
 
   @tracked isStepperFinished = this.hasStepper === false;
 
@@ -146,7 +150,7 @@ export default class ModuleGrain extends Component {
 
   get allElementsAreAnswered() {
     return this.answerableElements.every((element) => {
-      return this.args.passage.hasAnswerAlreadyBeenVerified(element);
+      return this.args.passage.hasAnswerAlreadyBeenVerified(element) || this.answeredElements.has(element.id);
     });
   }
 
@@ -162,6 +166,17 @@ export default class ModuleGrain extends Component {
   @action
   async onModuleTerminate() {
     await this.args.onModuleTerminate({ grainId: this.args.grain.id });
+  }
+
+  @action
+  async onElementAnswer(answerData) {
+    if (ModuleGrain.LOCALLY_ANSWERABLE_ELEMENTS.includes(answerData.element.type)) {
+      const elementId = answerData.element.id;
+      this.answeredElements.add(elementId);
+      return;
+    }
+
+    await this.args.onElementAnswer(answerData);
   }
 
   get hasTitle() {
@@ -194,7 +209,7 @@ export default class ModuleGrain extends Component {
                   @passageId={{@passage.id}}
                   @onImageAlternativeTextOpen={{@onImageAlternativeTextOpen}}
                   @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
-                  @onElementAnswer={{@onElementAnswer}}
+                  @onElementAnswer={{this.onElementAnswer}}
                   @onElementRetry={{@onElementRetry}}
                   @onSelfAssessment={{@onSelfAssessment}}
                   @onVideoPlay={{@onVideoPlay}}
