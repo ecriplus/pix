@@ -125,7 +125,7 @@
                 "content": "<p>le premier chatbot (conversation 1)</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p><strong>Pas tout à fait</strong>, ce chatbot n’a pas pu répondre à la deuxième question de Bob. Il n'utilise pas d'IA générative. Alors que l’autre si ! .</p>"
+                  "diagnosis": "<p><strong>Pas tout à fait</strong>, ce chatbot n’a pas pu répondre à la deuxième question de Bob. Il n'utilise pas d'IA générative. Alors que l’autre si !</p>"
                 }
               },
               {
@@ -183,7 +183,7 @@
           "element": {
             "id": "984bbfce-c558-432a-9746-22fee645e643",
             "type": "text",
-            "content": "<p><strong>Bon à savoir</strong><br>L'“Intelligence artificielle“ (IA), ce sont les technologies qui permettent aux ordinateurs de réaliser des tâches que les hommes et les femmes réalisent grâce à leur intelligence humaine.</p>"
+            "content": "<p><strong>Bon à savoir</strong><br>L'“Intelligence artificielle“ (IA) générative désigne les techniques utilisées par les logiciels capables de générer du texte, des images, des vidéos ou des sons, en réponse à des demandes (appelées requêtes, ou <i>prompt</i> en anglais).</p>"
           }
         }
       ]
@@ -482,7 +482,7 @@
           "element": {
             "id": "4c3ccd1f-bf4b-48f4-9495-5dc428a1d576",
             "type": "text",
-            "content": "<p>En fait, la première IA conversationnelle n’a été entraînée qu’avec des textes parut avant 2016.</p><p>On voit bien l’importance d’entraîner une IA avec des textes variés et à jour !</p>"
+            "content": "<p>En fait, la première IA conversationnelle n’a été entraînée qu’avec des textes parus avant 2016.</p><p>On voit bien l’importance d’entraîner une IA avec des textes variés et à jour !</p>"
           }
         }
       ]
@@ -758,15 +758,15 @@
     },
     {
       "id": "bbd7f431-1475-4f7a-8d53-99771395bb44",
-      "type": "challenge",
+      "type": "activity",
       "title": "-",
       "components": [
         {
           "type": "element",
           "element": {
-            "id": "ec65c82d-ebe9-4879-95c1-35749a09ca38",
-            "type": "qcu",
-            "instruction": "<p>[QCU déclaratif]</p><p>La prochaine fois que vous utiliserez une IA conversationnelle, que ferez-vous ?</p>",
+            "id": "546fcfcd-a7a8-4290-bde6-a8cc203013f3",
+            "type": "qcu-declarative",
+            "instruction": "<p>La prochaine fois que vous utiliserez une IA conversationnelle, que ferez-vous ?</p>",
             "proposals": [
               {
                 "id": "1",
@@ -800,8 +800,7 @@
                   "diagnosis": "<p><strong>Pas toujours facile de choisir !</strong> </p><p>Souvenez-vous qu’une IA conversationnelle peut faire des erreurs. Il faut donc toujours vérifier ses réponses.</p>"
                 }
               }
-            ],
-            "solution": "3"
+            ]
           }
         }
       ]
