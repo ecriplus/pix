@@ -1,16 +1,16 @@
 import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
-const Joi = BaseJoi.extend(JoiDate);
 import XRegExp from 'xregexp';
-
-import { config } from '../../../shared/config.js';
-
-const { passwordValidationPattern } = config.account;
 
 import { BadRequestError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
+import { config } from '../../../shared/config.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { scoOrganizationLearnerController } from './sco-organization-learner-controller.js';
+
+const Joi = BaseJoi.extend(JoiDate);
+
+const { passwordValidationPattern } = config.account;
 
 const register = async function (server) {
   server.route([
@@ -60,7 +60,8 @@ const register = async function (server) {
                 'first-name': Joi.string().empty(Joi.string().regex(/^\s*$/)).required(),
                 'last-name': Joi.string().empty(Joi.string().regex(/^\s*$/)).required(),
                 birthdate: Joi.date().format('YYYY-MM-DD').raw().required(),
-                'campaign-code': Joi.string().empty(Joi.string().regex(/^\s*$/)).required(),
+                'organization-id': Joi.number().empty(null).required(),
+                'redirection-url': Joi.string().uri().empty(null).required(),
                 password: Joi.string().pattern(XRegExp(passwordValidationPattern)).required(),
                 'with-username': Joi.boolean().required(),
                 username: Joi.string().pattern(XRegExp('^([a-z]+[.]+[a-z]+[0-9]{4})$')).allow(null),

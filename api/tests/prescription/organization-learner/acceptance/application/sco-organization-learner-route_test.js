@@ -195,7 +195,6 @@ describe('Prescription | Organization Learner | Acceptance | Application | sco-o
 
   describe('POST /api/sco-organization-learners/dependent', function () {
     let organization;
-    let campaign;
     let organizationLearner;
 
     beforeEach(async function () {
@@ -206,7 +205,6 @@ describe('Prescription | Organization Learner | Acceptance | Application | sco-o
         userId: null,
         nationalStudentId: 'salut',
       });
-      campaign = databaseBuilder.factory.buildCampaign({ organizationId: organization.id });
       await databaseBuilder.commit();
     });
 
@@ -219,7 +217,8 @@ describe('Prescription | Organization Learner | Acceptance | Application | sco-o
           payload: {
             data: {
               attributes: {
-                'campaign-code': campaign.code,
+                'organization-id': organization.id,
+                'redirection-url': 'https://pixapp/campaigns/ABCDEFGHI',
                 'first-name': organizationLearner.firstName,
                 'last-name': organizationLearner.lastName,
                 birthdate: organizationLearner.birthdate,
@@ -245,7 +244,8 @@ describe('Prescription | Organization Learner | Acceptance | Application | sco-o
           payload: {
             data: {
               attributes: {
-                'campaign-code': campaign.code,
+                'organization-id': organization.id,
+                'redirection-url': 'https://pixapp/campaigns/ABCDEFGHI',
                 'first-name': organizationLearner.firstName,
                 'last-name': organizationLearner.lastName,
                 birthdate: organizationLearner.birthdate,

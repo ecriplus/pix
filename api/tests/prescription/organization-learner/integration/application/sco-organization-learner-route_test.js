@@ -144,9 +144,9 @@ describe('Integration | Application | Route | sco-organization-learners', functi
         expect(response.statusCode).to.equal(400);
       });
 
-      it('should return 400 when organizationId is empty', async function () {
+      it('should return 400 when organizationId is null', async function () {
         // given
-        payload.data.attributes['organization-id'] = undefined;
+        payload.data.attributes['organization-id'] = null;
 
         // when
         response = await httpTestServer.request(method, url, payload);
