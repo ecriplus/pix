@@ -116,6 +116,10 @@ class OrganizationLearner {
     this.educationalTeam = null;
     this.group = null;
     this.diploma = null;
+    this.detachUser();
+  }
+
+  detachUser() {
     this.userId = null;
     this.updatedAt = new Date();
   }

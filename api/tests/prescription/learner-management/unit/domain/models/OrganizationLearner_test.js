@@ -193,4 +193,27 @@ describe('Unit | Domain | Models | OrganizationLearner', function () {
       });
     });
   });
+
+  describe('#detachUser', function () {
+    let clock;
+    let now;
+
+    beforeEach(function () {
+      now = new Date('2025-01-01');
+      clock = sinon.useFakeTimers(now, 'Date');
+    });
+
+    afterEach(function () {
+      clock.restore();
+    });
+
+    it('should detach userId', function () {
+      const organizationLearner = domainBuilder.buildOrganizationLearner({
+        userId: 456,
+      });
+      organizationLearner.detachUser();
+      expect(organizationLearner.userId).null;
+      expect(organizationLearner.updatedAt).deep.equal(now);
+    });
+  });
 });
