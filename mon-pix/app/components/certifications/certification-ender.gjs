@@ -1,3 +1,4 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
@@ -7,62 +8,54 @@ import t from 'ember-intl/helpers/t';
 import CertificationBanner from 'mon-pix/components/certification-banner';
 
 export default class CertificationEnder extends Component {
+  @service currentUser;
+
   <template>
     <CertificationBanner @certificationNumber={{@certificationNumber}} />
 
-    <div class="certification-ender rounded-panel result-content">
-
+    <PixBlock class="certification-ender">
       <div class="certification-ender__finished-test">
         <img
           src="/images/illustrations/certification-ender/test-completed.svg"
           alt
-          class="certification-ender__image"
+          class="certification-ender-finished-test__image"
         />
-        <div class="certification-ender__candidate">
-          <p class="certification-ender__candidate-name">
+        <div class="certification-ender-finished-test__candidate">
+          <p class="certification-ender-candidate__name">
             <PixIcon @name="userCircle" @plainIcon={{true}} @ariaHidden={{true}} />
             {{this.currentUser.user.fullName}}
           </p>
-          <h1 class="certification-ender__candidate-title">{{t "pages.certification-ender.candidate.title"}}</h1>
+          <h1 class="certification-ender-candidate__title">{{t "pages.certification-ender.candidate.title"}}</h1>
           {{#if @isEndedBySupervisor}}
-            <div class="certification-ender__candidate-message">
+            <p class="certification-ender-candidate__message">
               {{t "pages.certification-ender.candidate.ended-by-supervisor"}}
-            </div>
+            </p>
           {{/if}}
           {{#if @hasBeenEndedDueToFinalization}}
-            <div class="certification-ender__candidate-message">
+            <p class="certification-ender-candidate__message">
               {{t "pages.certification-ender.candidate.ended-due-to-finalization"}}
-            </div>
+            </p>
           {{/if}}
-          <PixButtonLink @route="logout" @variant="primary" class="certification-ender__candidate-action-disconnect">
+          <PixButtonLink @route="logout" @variant="primary">
             {{t "pages.certification-ender.candidate.disconnect"}}
           </PixButtonLink>
-          <div class="certification-ender__candidate-disconnect-tip">
+          <p class="certification-ender-candidate__disconnect-tip">
             {{t "pages.certification-ender.candidate.disconnect-tip"}}
-          </div>
-          <PixNotificationAlert @withIcon="true" class="certification-ender__remote-certification">
+          </p>
+          <PixNotificationAlert @withIcon="true" class="certification-ender-candidate__remote-certification">
             {{t "pages.certification-ender.candidate.remote-certification"}}
           </PixNotificationAlert>
         </div>
       </div>
+
       <div class="certification-ender__results">
-        <img
-          src="/images/illustrations/certification-ender/results-example.svg"
-          alt
-          class="certification-ender__results-example"
-        />
-        <div class="certification-ender__results-instructions">
-          <div class="certification-ender__results-disclaimer">{{t
-              "pages.certification-ender.results.disclaimer"
-            }}</div>
-          <div class="certification-ender__results-title">
-            {{t "pages.certification-ender.results.title"}}
-          </div>
-          <div class="certification-ender__results-steps">{{t "pages.certification-ender.results.step-1"}}</div>
-          <div class="certification-ender__results-steps">{{t "pages.certification-ender.results.step-2"}}</div>
-        </div>
+        <h2 class="certification-ender-results__disclaimer">{{t "pages.certification-ender.results.disclaimer"}}</h2>
+        <p class="certification-ender-results__title">
+          {{t "pages.certification-ender.results.title"}}
+        </p>
+        <p class="certification-ender-results__steps">{{t "pages.certification-ender.results.step-1"}}</p>
+        <p class="certification-ender-results__steps">{{t "pages.certification-ender.results.step-2"}}</p>
       </div>
-    </div>
+    </PixBlock>
   </template>
-  @service currentUser;
 }

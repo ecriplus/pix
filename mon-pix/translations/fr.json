@@ -705,10 +705,10 @@
         "title": "Test terminé !"
       },
       "results": {
-        "disclaimer": "Vos résultats, en attente de validation par les équipes Pix, seront bientôt disponibles depuis votre compte Pix",
-        "step-1": "Il vous suffit de vous connecter à votre compte Pix, vous pourrez retrouver vos résultats dans votre profil, rubrique \"Mes certifications\" (accessible en cliquant sur votre prénom en haut à droite de l'écran).",
-        "step-2": "Vous pourrez télécharger votre attestation de certification et la partager, ou encore communiquer le code de vérification à utiliser sur le site de Pix.",
-        "title": "Consulter et partager mes résultats de certification ?"
+        "disclaimer": "Vos résultats, en attente de validation par les équipes Pix, seront bientôt disponibles sur votre compte Pix",
+        "step-1": "Connectez-vous à votre compte Pix et retrouvez vos résultats dans la rubrique \"Mes certifications\" (accessible en cliquant sur votre prénom en haut à droite de l'écran).",
+        "step-2": "Vous pourrez télécharger votre certificat et le partager, ou encore communiquer le code de vérification à utiliser sur le site de Pix.",
+        "title": "Comment consulter et partager mes résultats de certification ?"
       }
     },
     "certification-instructions": {
