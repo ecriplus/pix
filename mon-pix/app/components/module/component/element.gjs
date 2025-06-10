@@ -49,7 +49,7 @@ export default class ModulixElement extends Component {
         @correction={{this.getLastCorrectionForElement @element}}
       />
     {{else if (eq @element.type "qcu-declarative")}}
-      <QcuDeclarativeElement @element={{@element}} />
+      <QcuDeclarativeElement @element={{@element}} @onAnswer={{@onElementAnswer}} />
     {{else if (eq @element.type "qcm")}}
       <QcmElement
         @element={{@element}}

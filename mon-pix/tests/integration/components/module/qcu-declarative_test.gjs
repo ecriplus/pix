@@ -30,13 +30,15 @@ module('Integration | Component | Module | QCUDeclarative', function (hooks) {
       // given
       const passageEventService = this.owner.lookup('service:passageEvents');
       const passageEventRecordStub = sinon.stub(passageEventService, 'record');
+      const onAnswerStub = sinon.stub();
 
       const qcuDeclarativeElement = _getQcuDeclarativeElement();
       const { proposals } = qcuDeclarativeElement;
 
-
       // when
-      const screen = await render(<template><ModuleQcuDeclarative @element={{qcuDeclarativeElement}} /></template>);
+      const screen = await render(
+        <template><ModuleQcuDeclarative @element={{qcuDeclarativeElement}} @onAnswer={{onAnswerStub}} /></template>,
+      );
       const button1 = screen.getByRole('button', { name: proposals[0].content });
       await click(button1);
 
@@ -54,6 +56,28 @@ module('Integration | Component | Module | QCUDeclarative', function (hooks) {
           answer: proposals[0].content,
         },
       });
+    });
+    test('it should call "onAnswer" function pass as argument', async function (assert) {
+      // given
+      const passageEventService = this.owner.lookup('service:passageEvents');
+      sinon.stub(passageEventService, 'record');
+      const onAnswerStub = sinon.stub();
+
+      const qcuDeclarativeElement = _getQcuDeclarativeElement();
+      const { proposals } = qcuDeclarativeElement;
+
+      // when
+      const screen = await render(
+        <template><ModuleQcuDeclarative @element={{qcuDeclarativeElement}} @onAnswer={{onAnswerStub}} /></template>,
+      );
+      const button1 = screen.getByRole('button', { name: proposals[0].content });
+      await click(button1);
+
+      // then
+      sinon.assert.calledWithExactly(onAnswerStub, {
+        element: qcuDeclarativeElement,
+      });
+      assert.ok(true);
     });
   });
 });

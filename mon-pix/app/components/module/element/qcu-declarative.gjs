@@ -37,6 +37,8 @@ export default class ModuleQcuDeclarative extends ModuleElement {
         answer: this.selectedProposalAnswer,
       },
     });
+
+    await this.args.onAnswer({ element: this.element });
   }
 
   get isAnswered() {
