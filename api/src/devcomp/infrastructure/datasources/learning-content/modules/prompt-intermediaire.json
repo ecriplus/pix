@@ -305,7 +305,12 @@
                 {
                   "id": "c0a360e7-e44a-4a02-a796-b7a968f40c7e",
                   "type": "text",
-                  "content": "<p>À vous de jouer en utilisant&nbsp;<strong><a href=\"https://app.pocllm.pix.digital/config/cmb7p4yfj0001sk01m4rq19c3/preview\" target=\"_blank\">cette IA</a></strong> !&nbsp; </p>"
+                  "content": "<p>À vous de jouer en utilisant&nbsp;<strong>cette IA</strong> !&nbsp; </p>"
+                },
+                {
+                  "id": "8bffec8d-b6c7-48ed-8d3d-5af8d094247e",
+                  "type": "text",
+                  "content": "<iframe title=\"dnd\" src=\"https://app.pocllm.pix.digital/config/cmb7p4yfj0001sk01m4rq19c3\" height=\"800\"></iframe>"
                 }
               ]
             }
@@ -581,7 +586,23 @@
           "element": {
             "id": "a6271120-a495-43e5-88f8-7e58c322dcb7",
             "type": "text",
-            "content": "<p>Utilisez&nbsp;<a href=\"https://app.pocllm.pix.digital/config/cmao5mw2q000vwg014ljde4km/preview\" target=\"_blank\"><strong>cette IA</strong></a> pour le faire, à vous de jouer !<br></p>"
+            "content": "<p>Utilisez&nbsp;<strong>cette IA</strong> pour le faire, à vous de jouer !<br></p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "fbe1b91f-a423-45f5-8329-1cd50f436944",
+            "type": "text",
+            "content": "<iframe title=\"dnd\" src=\"https://app.pocllm.pix.digital/config/cmao5mw2q000vwg014ljde4km\" height=\"800\"></iframe>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "e553af3a-34e3-4238-be9c-d40466cf43dd",
+            "type": "text",
+            "content": "<p><span aria-hidden=\"\\&quot;true\\&quot;\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p>\n<details>\n    <summary>Indice 1</summary>\n    <p>Avez-vous pensé à décrire le format voulu ?</p>\n</details>\n<details>\n    <summary>Indice 2</summary>\n    <p>Avez-vous vérifié que le résultat comportait bien la bonne équipe vainqueur ? </p>\n</details>\n<details>\n    <summary>Indice 3</summary>\n    <p> Avez-vous vérifié que le résultat comportait bien les chiffres clés des participants et des bénévoles ?</p>\n</details>"
           }
         }
       ]
