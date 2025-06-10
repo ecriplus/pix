@@ -1,0 +1,107 @@
+{
+  "id": "d03cef94-74af-463d-8901-c886b48d6e0b",
+  "slug": "tmp-ia-int-mgo",
+  "title": "Comment chatGPT a-t-il appris à discuter ?",
+  "isBeta": false,
+  "details": {
+    "image": "",
+    "description": "<p>Les systèmes d'IA génératives&nbsp;sont capables de tenir des conversations étonnamment naturelles. Mais comment en sont-ils arrivées là ? Ce module vous emmène dans les coulisses de leur apprentissage : des montagnes de textes analysés aux techniques d’entraînement sophistiquées qui leur ont permis de comprendre, prédire et générer le langage humain.</p>",
+    "duration": 10,
+    "level": "Intermédiaire",
+    "objectives": [
+      "<p>Connaître les différentes étapes de l'entraînement des IA génératives</p>",
+      "<p>Comprendre l’étape de raffinement avec des humains</p>",
+      "<p>Garder un esprit critique</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "grains": [
+    {
+      "id": "bcd0baab-5d74-4e09-bfd5-6a01573f3366",
+      "type": "discovery",
+      "title": "Impressionnant ?",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "028bb087-c3b6-43a6-93b7-e6a36d332a78",
+            "type": "text",
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/MGO/ia-int-accroche.html\" height=\"800\"></iframe>\n"
+          }
+        }
+      ]
+    },
+    {
+      "id": "375bab8e-3de8-4121-b29f-3e35039e2cec",
+      "type": "lesson",
+      "title": "Que peut-on dire",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "cc7708a8-c68a-44a9-ac54-6f1d5b1b6f4e",
+            "type": "qcu-declarative",
+            "instruction": "<p>Que peut-on dire de ce chatbot ?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>il est impressionnant,&nbsp;il parle très bien,&nbsp;il est incollable,&nbsp;il cherche toujours à aider,il n'est jamais contrariantje n’en pense rien de particulier</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": ""
+                }
+              },
+              {
+                "id": "2",
+                "content": "<p>il parle très bien</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": ""
+                }
+              },
+              {
+                "id": "3",
+                "content": "<p>il est incollable</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": ""
+                }
+              },
+              {
+                "id": "4",
+                "content": "<p>il cherche toujours à aider</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": ""
+                }
+              },
+              {
+                "id": "5",
+                "content": "<p>je n’en pense rien de particulier</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": ""
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "1c26e335-bb20-4d0d-80ae-0ba7599b7495",
+      "type": "transition",
+      "title": "Transition 1",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "4d4f3ac6-99e0-417c-9a5c-38fc11487264",
+            "type": "text",
+            "content": "<p>Une IA générative parvient à simuler une discussion  comme un humain qui aurait réponse à tout. Comment a-t-elle appris à faire cela ? C’est ce que nous allons découvrir ensemble.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
