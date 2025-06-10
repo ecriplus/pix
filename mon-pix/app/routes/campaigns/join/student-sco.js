@@ -21,6 +21,6 @@ export default class StudentScoRoute extends Route {
   }
 
   setupController(controller, model) {
-    controller.displayRegisterForm = !this.accessStorage.get(model.campaign.organizationId, 'hasUserSeenJoinPage');
+    controller.displayRegisterForm = !this.accessStorage.hasUserSeenJoinPage(model.campaign.organizationId);
   }
 }

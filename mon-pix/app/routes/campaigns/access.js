@@ -64,7 +64,7 @@ export default class AccessRoute extends Route {
 
   _shouldLoginToAccessSCORestrictedCampaign(campaign) {
     const isAuthenticatedByGar = this.session.isAuthenticatedByGar;
-    const hasUserSeenJoinPage = this.accessStorage.get(campaign.organizationId, 'hasUserSeenJoinPage');
+    const hasUserSeenJoinPage = this.accessStorage.hasUserSeenJoinPage(campaign.organizationId);
     return (
       campaign.isRestricted &&
       campaign.organizationType === 'SCO' &&

@@ -26,7 +26,7 @@ export default class StudentScoController extends Controller {
   async goToConnectionPage() {
     this.session.set('skipRedirectAfterSessionInvalidation', true);
     await this.session.invalidate();
-    this.accessStorage.set(this.model.organizationId, 'hasUserSeenJoinPage', true);
+    this.accessStorage.setHasUserSeenJoinPage(this.model.organizationId, true);
     this.router.replaceWith('campaigns.access', this.model.code);
   }
 }
