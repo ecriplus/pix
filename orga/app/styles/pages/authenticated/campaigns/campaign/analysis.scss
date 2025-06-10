@@ -1,14 +1,44 @@
 @use 'pix-design-tokens/typography';
 
+
+.result-analysis {
+  &__title {
+    @extend %pix-title-s;
+
+    margin-bottom: var(--pix-spacing-1x);
+  }
+
+  &__global-information {
+    display: flex;
+    flex-direction: row;
+    gap: var(--pix-spacing-1x);
+    margin-bottom: var(--pix-spacing-10x);
+
+  }
+
+  &__global-positioning-explanation {
+    @extend %pix-body-s;
+
+    white-space: nowrap;
+
+    ul {
+      padding-left:var(--pix-spacing-6x);
+      list-style-type: circle;
+    }
+  }
+}
+
 .analysis-description {
   @extend %pix-body-s;
 
   margin-bottom: var(--pix-spacing-8x);
 
+
   &__resume {
     font-weight: var(--pix-font-bold);
   }
 }
+
 
 
 .analysis-per-tube-or-competence {
@@ -67,7 +97,3 @@
   }
 
 }
-
-
-
-

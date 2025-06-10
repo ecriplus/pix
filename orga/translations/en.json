@@ -275,7 +275,7 @@
   "components": {
     "analysis-per-competence": {
       "cover-rate-gauge-label": "Your participants have achieved a level of {reachedLevel} out of a maximum attainable level of {maxLevel}.",
-      "description": "Average level achieved by participants per competence out of the maximum level attainable in this campaign.",
+      "description": "Below are the campaign competences and their descriptions, as well as the positioning of the participants.",
       "table": {
         "caption": "Competences",
         "column": {
@@ -287,7 +287,7 @@
     },
     "analysis-per-tube": {
       "cover-rate-gauge-label": "On the subject your participants have obtained a level of {reachedLevel} out of a maximum attainable level of {maxLevel}.",
-      "description": "Average level achieved by participants per subject out of the maximum level attainable in this campaign.",
+      "description": "Below are the campaign topics and their descriptions, as well as the positioning of the participants.",
       "table": {
         "caption": "{index} - {name}",
         "column": {
@@ -335,7 +335,7 @@
       "no-date": "No date yet"
     },
     "global-positioning": {
-      "description": "Average level achieved by participants out of the maximum level achievable in this campaign.",
+      "description": "Overall positioning is the average level achieved by participants (purple bar) compared with the maximum they could have achieved in this campaign (white bar).",
       "gauge-label": "On this test, your participants achieved an average level of {reachedLevel} out of a maximum reachable level of {maxLevel}.",
       "title": "Global positioning"
     },
@@ -570,8 +570,22 @@
       "description": {
         "explanation": "Each test assesses a selection of digital skills from the Pix reference framework. Positioning reflects the average level achieved by participants in relation to the maximum level achievable on the test.",
         "nota-bene": "All the data presented comes from shared and undeleted participation in assessment campaigns, and is updated in real time.",
-        "resume": "Analyse, overall and by topic, the positioning of your participants."
+        "resume": "Analyse, overall and by topic, the positioning of your participants in this campaign, which covers a selection of subjects from the Pix reference framework."
       },
+      "levels-correspondence": {
+        "infos": {
+          "link": "https://pix.org/en/understand-certification-results",
+          "text": "Find out more about levels."
+        },
+        "levels": {
+          "advanced": "5 or 6: Advanced level",
+          "beginner": "1 or 2: Novice level",
+          "expert": "7 or 8: Expert level",
+          "independent": "3 or 4: Independent level"
+        },
+        "title": "levels correspondence"
+      },
+      "second-title": "Results Analysis",
       "title": "Analysis"
     },
     "campaign-creation": {
