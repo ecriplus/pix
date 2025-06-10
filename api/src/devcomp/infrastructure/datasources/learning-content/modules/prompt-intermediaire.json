@@ -310,7 +310,7 @@
                 {
                   "id": "8bffec8d-b6c7-48ed-8d3d-5af8d094247e",
                   "type": "text",
-                  "content": "<iframe title=\"dnd\" src=\"https://app.pocllm.pix.digital/config/cmb7p4yfj0001sk01m4rq19c3\" height=\"800\"></iframe>"
+                  "content": "<iframe title=\"dnd\" src=\"https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmb7p4yfj0001sk01m4rq19c3" height=\"800\"></iframe>"
                 }
               ]
             }
@@ -594,7 +594,7 @@
           "element": {
             "id": "fbe1b91f-a423-45f5-8329-1cd50f436944",
             "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://app.pocllm.pix.digital/config/cmao5mw2q000vwg014ljde4km\" height=\"800\"></iframe>"
+            "content": "<iframe title=\"dnd\" src=\"https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmao5mw2q000vwg014ljde4km" height=\"800\"></iframe>"
           }
         },
         {
