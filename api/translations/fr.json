@@ -155,7 +155,7 @@
     "yes-or-empty": "(\"oui\" ou laisser vide)"
   },
   "certification": {
-    "attestation": {
+    "certificate": {
       "v3": {
         "complementary-content": {
           "title": "Certification complémentaire obtenue :"

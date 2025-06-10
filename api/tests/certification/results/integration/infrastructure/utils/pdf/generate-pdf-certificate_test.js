@@ -119,7 +119,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certification Attestat
       expect(pageContent).to.include('Vous avez des pratiques numériques simples');
       expect(pageContent).to.include('Vous savez naviguer sur le Web');
       expect(pageContent).to.include(`${certificates[index].maxReachableScore}`);
-      expect(pageContent).to.not.include(translate('certification.attestation.v3.complementary-content.title'));
+      expect(pageContent).to.not.include(translate('certification.certificate.v3.complementary-content.title'));
     });
   });
 
@@ -257,7 +257,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certification Attestat
       const text = await page.getTextContent();
       const content = text.items.map((item) => item.str).join(' ');
 
-      expect(content).to.include(translate('certification.attestation.v3.complementary-content.title'));
+      expect(content).to.include(translate('certification.certificate.v3.complementary-content.title'));
     });
   });
 });
