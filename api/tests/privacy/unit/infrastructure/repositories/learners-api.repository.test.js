@@ -1,5 +1,8 @@
-import { hasBeenLearner } from '../../../../../src/privacy/infrastructure/repositories/learners-api.repository.js';
-import { expect } from '../../../../test-helper.js';
+import {
+  anonymizeByUserId,
+  hasBeenLearner,
+} from '../../../../../src/privacy/infrastructure/repositories/learners-api.repository.js';
+import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Privacy | Infrastructure | Repositories | learners-api', function () {
   describe('#hasBeenLearner', function () {
@@ -16,6 +19,21 @@ describe('Unit | Privacy | Infrastructure | Repositories | learners-api', functi
 
       // then
       expect(result).to.be.true;
+    });
+  });
+
+  describe('#anonymizeByUserId', function () {
+    it('anonymize learners and theirs participations attached to a userId', async function () {
+      // given
+      const dependencies = {
+        learnersApi: {
+          anonymizeByUserId: sinon.stub(),
+        },
+      };
+      // when
+      await anonymizeByUserId({ userId: 123, dependencies });
+      // then
+      expect(dependencies.learnersApi.anonymizeByUserId).calledOnceWithExactly({ userId: 123 });
     });
   });
 });
