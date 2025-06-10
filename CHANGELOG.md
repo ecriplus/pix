@@ -1,5 +1,28 @@
 # Pix Changelog
 
+# [5.129.0](https://github.com/1024pix/pix/compare/v5.128.0...v5.129.0) (2025-06-10)
+
+### :rocket: Amélioration
+
+- [#12456](https://github.com/1024pix/pix/pull/12456) Ajouter l'historisation des actions lors de la suppression de prescrits (PIX-17974). 
+- [#12464](https://github.com/1024pix/pix/pull/12464) Ajouter un feature toggle pour conserver ses pix après avoir participé à une campagne et s'être créé un compte (PIX-18015) 
+- [#12442](https://github.com/1024pix/pix/pull/12442) Amélioration de la page de fin de certif sur Pix App (17963). 
+- [#12388](https://github.com/1024pix/pix/pull/12388) WIP module IAG fonctionnement novice tmp-ia-fonctionnement-debut 
+
+### :bug: Correction
+
+- [#12461](https://github.com/1024pix/pix/pull/12461) Utiliser les knowledge element snapshot pour l'affichage des résultats individuel d'un prescrit dans PixOrga (PIX-17964). 
+
+### :building_construction: Tech
+
+- [#12454](https://github.com/1024pix/pix/pull/12454) :truck: Déplace le repository à propos des badges de certification vers `src/certification/shared/` 
+- [#12444](https://github.com/1024pix/pix/pull/12444) :truck: Renomme les clefs de traduction d'attestation de certification (PIX-18093) 
+- [#12467](https://github.com/1024pix/pix/pull/12467) :wastebasket: nettoyage des fichiers index du répertoire `lib/` 
+- [#12485](https://github.com/1024pix/pix/pull/12485) Corriger la trad nl (PIX-18126) 
+- [#12351](https://github.com/1024pix/pix/pull/12351) Refacto des attestations V2 (PIX-17940). 
+- [#12430](https://github.com/1024pix/pix/pull/12430) Rendre le processus de connexion depuis un mediacentre agnostique des campagnes (PIX-18087) 
+- [#12448](https://github.com/1024pix/pix/pull/12448) Supprimer le model API SessionVersion (PIX-18095).
+
 # [5.128.0](https://github.com/1024pix/pix/compare/v5.127.0...v5.128.0) (2025-06-09)
 
 ### :rocket: Amélioration
