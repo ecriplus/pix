@@ -283,7 +283,7 @@
     },
     "analysis-per-tube": {
       "description": "Gemiddeld niveau behaald door deelnemers per onderwerp van het maximaal haalbare niveau in deze campagne.",
-      "cover-rate-gauge-label": "Over het onderwerp hebben je deelnemers een niveau van {bereiktLevel} gehaald uit een maximaal haalbaar niveau van {maxLevel}.",
+      "cover-rate-gauge-label": "Over het onderwerp hebben je deelnemers een niveau van {reachedLevel} gehaald uit een maximaal haalbaar niveau van {maxLevel}.",
       "table": {
         "caption": "{index} - {name}",
         "column": {
@@ -329,7 +329,7 @@
       "placeholder-select": "Certificeerbaar / Niet certificeerbaar"
     },
     "cover-rate-gauge": {
-      "label": "Op deze campagne hebben je deelnemers een niveau bereikt van {bereiktLevel} uit een maximaal haalbaar niveau van {maxLevel}."
+      "label": "Op deze campagne hebben je deelnemers een niveau bereikt van {reachedLevel} uit een maximaal haalbaar niveau van {maxLevel}."
     },
     "date": {
       "no-date": "Nog geen datum"
@@ -337,7 +337,7 @@
     "global-positioning":{
       "title":"Wereldwijde positionering",
       "description":"Gemiddeld niveau bereikt door deelnemers van het maximaal haalbare niveau in deze campagne.",
-      "gauge-label":"Bij deze test behaalden je deelnemers een gemiddeld niveau van {bereiktLevel} uit een maximaal haalbaar niveau van {maxLevel}."
+      "gauge-label":"Bij deze test behaalden je deelnemers een gemiddeld niveau van {reachedLevel} uit een maximaal haalbaar niveau van {maxLevel}."
     },
     "group": {
       "SCO": "Klas",
