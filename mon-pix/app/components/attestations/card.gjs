@@ -1,8 +1,8 @@
 import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixButton from '@1024pix/pix-ui/components/pix-button';
-import { fn } from '@ember/helper';
+import {fn} from '@ember/helper';
 import dayjs from 'dayjs';
-import { t } from 'ember-intl';
+import {t} from 'ember-intl';
 
 const ATTESTATION_TYPES = {
   PARENTHOOD: 'PARENTHOOD',
@@ -48,7 +48,7 @@ function getAttesttationIcon(type) {
       @iconBefore="download"
       class="attestation-card__button"
     >
-      {{t "pages.certificate.actions.download"}}
+      {{t "pages.certificate.actions.download-attestation"}}
     </PixButton>
   </PixBlock>
 </template>
