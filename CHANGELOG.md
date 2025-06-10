@@ -1,5 +1,14 @@
 # Pix Changelog
 
+## v5.130.0 (10/06/2025)
+
+
+### :rocket: Amélioration
+- [#12362](https://github.com/1024pix/pix/pull/12362) [FEATURE] WIP module mon premier prompt.
+- [#12394](https://github.com/1024pix/pix/pull/12394) [FEATURE] WIP Create prompt-intermediaire.json.
+- [#12297](https://github.com/1024pix/pix/pull/12297) [FEATURE] WIP Création d'un module sur les Deepfakes.
+- [#12486](https://github.com/1024pix/pix/pull/12486) [FEATURE] Dernières corrections modules tmp-ia-fonctionnement-debut.json.
+
 # [5.129.0](https://github.com/1024pix/pix/compare/v5.128.0...v5.129.0) (2025-06-10)
 
 ### :rocket: Amélioration
