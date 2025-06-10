@@ -268,10 +268,7 @@ async function _toDomainForCertificationAttestation({ certificationCourseDTO, co
     assessmentResultId: certificationCourseDTO.assessmentResultId,
   });
 
-  if (
-    AlgorithmEngineVersion.isV3(certificationCourseDTO.version) &&
-    (await featureToggles.get('isV3CertificationAttestationEnabled'))
-  ) {
+  if (AlgorithmEngineVersion.isV3(certificationCourseDTO.version)) {
     return new Certificate({
       ...certificationCourseDTO,
       certificationDate: certificationCourseDTO.date,

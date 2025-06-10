@@ -35,12 +35,6 @@ export default {
     defaultValue: false,
     tags: ['team-acces', 'frontend'],
   },
-  isV3CertificationAttestationEnabled: {
-    description: 'Used to enable new certification attestation for V3',
-    type: 'boolean',
-    defaultValue: false,
-    tags: ['team-certification'],
-  },
   isSelfAccountDeletionEnabled: {
     description: 'Toggle self account deletion feature',
     type: 'boolean',
