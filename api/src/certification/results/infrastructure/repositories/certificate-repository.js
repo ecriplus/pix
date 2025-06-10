@@ -10,7 +10,7 @@ import {
   ShareableCertificate,
 } from '../../../../shared/domain/models/index.js';
 import { featureToggles } from '../../../../shared/infrastructure/feature-toggles/index.js';
-import { SessionVersion } from '../../../shared/domain/models/SessionVersion.js';
+import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationAttestation } from '../../domain/models/CertificationAttestation.js';
 import { Certificate } from '../../domain/models/v3/Certificate.js';
 import { CertifiedBadge } from '../../domain/read-models/CertifiedBadge.js';
@@ -269,7 +269,7 @@ async function _toDomainForCertificationAttestation({ certificationCourseDTO, co
   });
 
   if (
-    SessionVersion.isV3(certificationCourseDTO.version) &&
+    AlgorithmEngineVersion.isV3(certificationCourseDTO.version) &&
     (await featureToggles.get('isV3CertificationAttestationEnabled'))
   ) {
     return new Certificate({

@@ -1,5 +1,5 @@
 import { SessionEnrolment } from '../../../../../../src/certification/enrolment/domain/models/SessionEnrolment.js';
-import { SESSIONS_VERSIONS } from '../../../../../../src/certification/shared/domain/models/SessionVersion.js';
+import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CERTIFICATION_CENTER_TYPES } from '../../../../../../src/shared/domain/constants.js';
 
 const buildSession = function ({
@@ -23,7 +23,7 @@ const buildSession = function ({
   assignedCertificationOfficerId = null,
   invigilatorPassword = 'PIX212',
   certificationCandidates = [],
-  version = SESSIONS_VERSIONS.V3,
+  version = AlgorithmEngineVersion.V3,
   createdBy = null,
 } = {}) {
   return new SessionEnrolment({

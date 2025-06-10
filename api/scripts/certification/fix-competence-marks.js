@@ -1,7 +1,7 @@
 import 'dotenv/config';
 
 import { knex } from '../../db/knex-database-connection.js';
-import { SESSIONS_VERSIONS } from '../../src/certification/shared/domain/models/SessionVersion.js';
+import { AlgorithmEngineVersion } from '../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
 import { PIX_ORIGIN } from '../../src/shared/domain/constants.js';
@@ -123,7 +123,7 @@ export class FixCompetenceMarksScript extends Script {
         'public.assessments.certificationCourseId',
       )
       .innerJoin('public.sessions', 'public.sessions.id', 'public.certification-courses.sessionId')
-      .where('public.sessions.version', '=', SESSIONS_VERSIONS.V3)
+      .where('public.sessions.version', '=', AlgorithmEngineVersion.V3)
       .andWhere('public.assessments.type', '=', Assessment.types.CERTIFICATION)
       .andWhere('learningcontent.competences.origin', '!=', PIX_ORIGIN)
       .andWhere('public.competence-marks.id', '>', cursorId)

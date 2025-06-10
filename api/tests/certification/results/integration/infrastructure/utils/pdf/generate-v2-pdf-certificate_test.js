@@ -5,8 +5,8 @@ import dayjs from 'dayjs';
 import { getDocument } from 'pdfjs-dist';
 
 import { generate } from '../../../../../../../src/certification/results/infrastructure/utils/pdf/generate-v2-pdf-certificate.js';
+import { AlgorithmEngineVersion } from '../../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ComplementaryCertificationKeys } from '../../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { SESSIONS_VERSIONS } from '../../../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect } from '../../../../../../test-helper.js';
 import { buildCompetenceMark } from '../../../../../../tooling/domain-builder/factory/index.js';
@@ -25,7 +25,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V2 Certificate Pdf', func
     // given
     const certificate = domainBuilder.buildCertificationAttestation({
       id: 1,
-      version: SESSIONS_VERSIONS.V2,
+      version: AlgorithmEngineVersion.V2,
       firstName: 'Jean',
       lastName: 'Bon',
       resultCompetenceTree: _buildResultCompetenceTree(),
@@ -52,11 +52,11 @@ describe('Integration | Infrastructure | Utils | Pdf | V2 Certificate Pdf', func
     // given
     const certificates = [
       domainBuilder.buildCertificationAttestation({
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
         resultCompetenceTree: _buildResultCompetenceTree(),
       }),
       domainBuilder.buildCertificationAttestation({
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
         resultCompetenceTree: _buildResultCompetenceTree(),
       }),
     ];
@@ -78,7 +78,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V2 Certificate Pdf', func
     const certificates = [
       domainBuilder.buildCertificationAttestation({
         id: 1,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
         firstName: 'Jean',
         lastName: 'Bon',
         resultCompetenceTree: _buildResultCompetenceTree(),
@@ -119,7 +119,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V2 Certificate Pdf', func
     // given
     const certificate = domainBuilder.buildCertificationAttestation({
       id: 1,
-      version: SESSIONS_VERSIONS.V2,
+      version: AlgorithmEngineVersion.V2,
       firstName: 'Jean',
       lastName: 'Bon',
       resultCompetenceTree: _buildResultCompetenceTree(),
@@ -168,7 +168,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V2 Certificate Pdf', func
         // given
         const certificate = domainBuilder.buildCertificationAttestation({
           id: 1,
-          version: SESSIONS_VERSIONS.V2,
+          version: AlgorithmEngineVersion.V2,
           firstName: 'Jean',
           lastName: 'Bon',
           deliveredAt: new Date('2017-10-03T01:02:03Z'),
@@ -191,7 +191,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V2 Certificate Pdf', func
         // given
         const certificate = domainBuilder.buildCertificationAttestation({
           id: 1,
-          version: SESSIONS_VERSIONS.V2,
+          version: AlgorithmEngineVersion.V2,
           firstName: 'Jean',
           lastName: 'Bon',
           deliveredAt: new Date('2023-10-03T01:02:03Z'),
@@ -213,7 +213,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V2 Certificate Pdf', func
       // given
       const certificate = domainBuilder.buildCertificationAttestation({
         id: 1,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
         firstName: 'Jean',
         lastName: 'Bon',
         deliveredAt: new Date('2023-10-03T01:02:03Z'),
@@ -236,7 +236,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V2 Certificate Pdf', func
       // given
       const certificate = domainBuilder.buildCertificationAttestation({
         id: 1,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
         firstName: 'Jean',
         lastName: 'Bon',
         deliveredAt: new Date('2017-10-03T01:02:03Z'),
@@ -260,7 +260,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V2 Certificate Pdf', func
       // given
       const certificate = domainBuilder.buildCertificationAttestation({
         id: 1,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
         firstName: 'Jean',
         lastName: 'Bon',
         deliveredAt: new Date('2017-10-03T01:02:03Z'),
@@ -286,7 +286,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V2 Certificate Pdf', func
       // given
       const certificate = domainBuilder.buildCertificationAttestation({
         id: 1,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
         firstName: 'Jean',
         lastName: 'Bon',
         deliveredAt: new Date('2017-10-03T01:02:03Z'),
@@ -316,7 +316,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V2 Certificate Pdf', func
       // given
       const certificate = domainBuilder.buildCertificationAttestation({
         id: 1,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
         firstName: 'Jean',
         lastName: 'Bon',
         deliveredAt: new Date('2017-10-03T01:02:03Z'),

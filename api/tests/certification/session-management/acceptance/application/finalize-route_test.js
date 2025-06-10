@@ -3,7 +3,6 @@ import {
   CertificationIssueReportCategory,
   CertificationIssueReportSubcategories,
 } from '../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
-import { SESSIONS_VERSIONS } from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { AnswerStatus, Assessment, AssessmentResult } from '../../../../../src/shared/domain/models/index.js';
 import {
   createServer,
@@ -413,7 +412,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
         it('should set the finalized session as publishable', async function () {
           // given
           const userId = databaseBuilder.factory.buildUser().id;
-          const session = databaseBuilder.factory.buildSession({ version: SESSIONS_VERSIONS.V3 });
+          const session = databaseBuilder.factory.buildSession({ version: AlgorithmEngineVersion.V3 });
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
             userId,
             sessionId: session.id,
@@ -495,7 +494,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
           // given
           const abortReason = 'candidate';
           const userId = databaseBuilder.factory.buildUser().id;
-          const session = databaseBuilder.factory.buildSession({ version: SESSIONS_VERSIONS.V3 });
+          const session = databaseBuilder.factory.buildSession({ version: AlgorithmEngineVersion.V3 });
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
             userId,
             sessionId: session.id,

@@ -1,7 +1,7 @@
 import { ResultCompetence } from '../../../../../../src/certification/results/domain/models/ResultCompetence.js';
 import { ResultCompetenceTree } from '../../../../../../src/certification/results/domain/models/ResultCompetenceTree.js';
 import * as serializer from '../../../../../../src/certification/results/infrastructure/serializers/certificate-serializer.js';
-import { SESSIONS_VERSIONS } from '../../../../../../src/certification/shared/domain/models/SessionVersion.js';
+import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
@@ -50,7 +50,7 @@ describe('Unit | Serializer | JSONAPI | certificate-serializer', function () {
           certifiedBadgeImages: ['/img/1', '/img/2'],
           resultCompetenceTree,
           maxReachableLevelOnCertificationDate: 6,
-          version: SESSIONS_VERSIONS.V3,
+          version: AlgorithmEngineVersion.V3,
         });
         const translate = getI18n().__;
 
@@ -73,7 +73,7 @@ describe('Unit | Serializer | JSONAPI | certificate-serializer', function () {
             'pix-score': 456,
             'certified-badge-images': ['/img/1', '/img/2'],
             'max-reachable-level-on-certification-date': 6,
-            version: SESSIONS_VERSIONS.V3,
+            version: AlgorithmEngineVersion.V3,
             'acquired-complementary-certification': undefined,
           },
           relationships: {

@@ -3,7 +3,6 @@ import dayjs from 'dayjs';
 import { certificateController } from '../../../../../src/certification/results/application/certificate-controller.js';
 import { usecases } from '../../../../../src/certification/results/domain/usecases/index.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
-import { SESSIONS_VERSIONS } from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { usecases as certificationSharedUsecases } from '../../../../../src/certification/shared/domain/usecases/index.js';
 import { UnauthorizedError } from '../../../../../src/shared/application/http-errors.js';
 import { LANGUAGES_CODE } from '../../../../../src/shared/domain/services/language-service.js';
@@ -303,7 +302,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         certifiedBadgeImages: [],
         verificationCode: 'P-SUPERCODE',
         maxReachableLevelOnCertificationDate: 6,
-        version: SESSIONS_VERSIONS.V3,
+        version: AlgorithmEngineVersion.V3,
       });
       sinon.stub(usecases, 'findUserPrivateCertificates');
       usecases.findUserPrivateCertificates.withArgs({ userId }).resolves([privateCertificate1]);
@@ -332,7 +331,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
               'certified-badge-images': [],
               'verification-code': 'P-SUPERCODE',
               'max-reachable-level-on-certification-date': 6,
-              version: SESSIONS_VERSIONS.V3,
+              version: AlgorithmEngineVersion.V3,
               'algorithm-engine-version': AlgorithmEngineVersion.V3,
             },
             relationships: {
@@ -618,7 +617,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
 
         const v3Certificate = domainBuilder.certification.results.buildCertificate();
         const v2Certificate = domainBuilder.buildCertificationAttestation({
-          version: SESSIONS_VERSIONS.V2,
+          version: AlgorithmEngineVersion.V2,
         });
         const generatedPdf = Symbol('Stream');
 

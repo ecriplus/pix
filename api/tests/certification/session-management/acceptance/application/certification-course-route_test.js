@@ -1,5 +1,4 @@
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
-import { SESSIONS_VERSIONS } from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { Assessment } from '../../../../../src/shared/domain/models/index.js';
 import {
   createServer,
@@ -270,7 +269,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
 
       const session = databaseBuilder.factory.buildSession({
         publishedAt: new Date('2018-12-01T01:02:03Z'),
-        version: SESSIONS_VERSIONS.V3,
+        version: AlgorithmEngineVersion.V3,
       });
 
       const certificationCourse = databaseBuilder.factory.buildCertificationCourse({

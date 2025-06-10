@@ -2,7 +2,6 @@ import * as certificateRepository from '../../../../../../src/certification/resu
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
-import { SESSIONS_VERSIONS } from '../../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { AssessmentResult, CertificationAttestation } from '../../../../../../src/shared/domain/models/index.js';
 import { featureToggles } from '../../../../../../src/shared/infrastructure/feature-toggles/index.js';
@@ -212,7 +211,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         pixScore: 51,
         certifiedBadges: [],
         sessionId: 789,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
       };
 
       _buildSession({
@@ -220,7 +219,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         sessionId: certificationAttestationData.sessionId,
         publishedAt: certificationAttestationData.deliveredAt,
         certificationCenter: certificationAttestationData.certificationCenter,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
       });
       _buildCertificationAttestationWithSeveralResults(certificationAttestationData);
       await databaseBuilder.commit();
@@ -266,7 +265,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           sessionId: certificationAttestationData.sessionId,
           publishedAt: certificationAttestationData.deliveredAt,
           certificationCenter: certificationAttestationData.certificationCenter,
-          version: SESSIONS_VERSIONS.V2,
+          version: AlgorithmEngineVersion.V2,
         });
         _buildValidCertificationAttestation(certificationAttestationData, false, version);
         await databaseBuilder.commit();
@@ -308,7 +307,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           sessionId: certificationAttestationData.sessionId,
           publishedAt: certificationAttestationData.deliveredAt,
           certificationCenter: certificationAttestationData.certificationCenter,
-          version: SESSIONS_VERSIONS.V2,
+          version: AlgorithmEngineVersion.V2,
         });
         const assessmentResultId = _buildValidCertificationAttestation(certificationAttestationData, false, version);
 
@@ -412,7 +411,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
               },
             ],
             sessionId: 789,
-            version: SESSIONS_VERSIONS.V2,
+            version: AlgorithmEngineVersion.V2,
           };
 
           const version = _buildSession({
@@ -420,7 +419,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
             sessionId: certificationAttestationData.sessionId,
             publishedAt: certificationAttestationData.deliveredAt,
             certificationCenter: certificationAttestationData.certificationCenter,
-            version: SESSIONS_VERSIONS.V2,
+            version: AlgorithmEngineVersion.V2,
           });
           _buildValidCertificationAttestation(certificationAttestationData, false, version);
           const badge1Id = databaseBuilder.factory.buildBadge({ key: 'PIX_TEST_1' }).id;
@@ -1089,7 +1088,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         cleaCertificationImagePath: null,
         pixPlusDroitCertificationImagePath: null,
         sessionId: 777,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
       };
       const certificationAttestationDataB = {
         id: 123,
@@ -1108,7 +1107,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         cleaCertificationImagePath: null,
         pixPlusDroitCertificationImagePath: null,
         sessionId: 999,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
       };
       const certificationAttestationDataC = {
         id: 789,
@@ -1127,28 +1126,28 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         cleaCertificationImagePath: null,
         pixPlusDroitCertificationImagePath: null,
         sessionId: 888,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
       };
       const firstSessionVersion = _buildSession({
         userId: certificationAttestationDataA.userId,
         sessionId: certificationAttestationDataA.sessionId,
         publishedAt: certificationAttestationDataA.deliveredAt,
         certificationCenter: certificationAttestationDataA.certificationCenter,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
       });
       const secondSessionVersion = _buildSession({
         userId: certificationAttestationDataC.userId,
         sessionId: certificationAttestationDataC.sessionId,
         publishedAt: certificationAttestationDataC.deliveredAt,
         certificationCenter: certificationAttestationDataC.certificationCenter,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
       });
       const thirdSessionVersion = _buildSession({
         userId: certificationAttestationDataB.userId,
         sessionId: certificationAttestationDataB.sessionId,
         publishedAt: certificationAttestationDataB.deliveredAt,
         certificationCenter: certificationAttestationDataB.certificationCenter,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
       });
       _buildValidCertificationAttestation(certificationAttestationDataA, false, firstSessionVersion);
       _buildValidCertificationAttestation(certificationAttestationDataB, false, secondSessionVersion);
@@ -1210,7 +1209,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         cleaCertificationImagePath: null,
         pixPlusDroitCertificationImagePath: null,
         sessionId: 777,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
       };
       const certificationAttestationDataB = {
         id: 123,
@@ -1229,7 +1228,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         cleaCertificationImagePath: null,
         pixPlusDroitCertificationImagePath: null,
         sessionId: 999,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
       };
       const certificationAttestationDataC = {
         id: 789,
@@ -1248,28 +1247,28 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         cleaCertificationImagePath: null,
         pixPlusDroitCertificationImagePath: null,
         sessionId: 888,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
       };
       const firstSessionVersion = _buildSession({
         userId: certificationAttestationDataA.userId,
         sessionId: certificationAttestationDataA.sessionId,
         publishedAt: certificationAttestationDataA.deliveredAt,
         certificationCenter: certificationAttestationDataA.certificationCenter,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
       });
       const secondSessionVersion = _buildSession({
         userId: certificationAttestationDataC.userId,
         sessionId: certificationAttestationDataC.sessionId,
         publishedAt: certificationAttestationDataC.deliveredAt,
         certificationCenter: certificationAttestationDataC.certificationCenter,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
       });
       const thirdSessionVersion = _buildSession({
         userId: certificationAttestationDataB.userId,
         sessionId: certificationAttestationDataB.sessionId,
         publishedAt: certificationAttestationDataB.deliveredAt,
         certificationCenter: certificationAttestationDataB.certificationCenter,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
       });
       _buildValidCertificationAttestation(certificationAttestationDataA, false, firstSessionVersion);
       _buildValidCertificationAttestation(certificationAttestationDataB, false, secondSessionVersion);
@@ -1337,7 +1336,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           cleaCertificationImagePath: null,
           pixPlusDroitCertificationImagePath: null,
           sessionId: 789,
-          version: SESSIONS_VERSIONS.V2,
+          version: AlgorithmEngineVersion.V2,
         };
         databaseBuilder.factory.buildUser({ id: 456 });
         databaseBuilder.factory.buildOrganizationLearner({
@@ -1375,7 +1374,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           publishedAt: new Date('2021-05-07'),
           certificationCenter: 'Centre des poules bien dodues',
           certificationCenterId,
-          version: SESSIONS_VERSIONS.V2,
+          version: AlgorithmEngineVersion.V2,
         });
         _buildCertificationAttestationWithSeveralResults(
           certificationAttestationDataRejected,
@@ -1433,7 +1432,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         cleaCertificationImagePath: null,
         pixPlusDroitCertificationImagePath: null,
         sessionId: 789,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
       };
       const certificationAttestationDataNewest = {
         id: 456,
@@ -1452,21 +1451,21 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         cleaCertificationImagePath: null,
         pixPlusDroitCertificationImagePath: null,
         sessionId: 999,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
       };
       const firstSessionVersion = _buildSession({
         userId: certificationAttestationDataOldest.userId,
         sessionId: certificationAttestationDataOldest.sessionId,
         publishedAt: certificationAttestationDataOldest.deliveredAt,
         certificationCenter: certificationAttestationDataOldest.certificationCenter,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
       });
       const secondSessionVersion = _buildSession({
         userId: certificationAttestationDataNewest.userId,
         sessionId: certificationAttestationDataNewest.sessionId,
         publishedAt: certificationAttestationDataNewest.deliveredAt,
         certificationCenter: certificationAttestationDataNewest.certificationCenter,
-        version: SESSIONS_VERSIONS.V2,
+        version: AlgorithmEngineVersion.V2,
       });
       _buildValidCertificationAttestation(certificationAttestationDataOldest, false, firstSessionVersion);
       _buildValidCertificationAttestation(certificationAttestationDataNewest, false, secondSessionVersion);
@@ -1573,14 +1572,14 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         deliveredAt: new Date('2021-05-05'),
         certificationCenter: 'Centre des poules bien dodues',
         pixScore: 51,
-        version: SESSIONS_VERSIONS.V3,
+        version: AlgorithmEngineVersion.V3,
       };
       const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
       const sessionId = databaseBuilder.factory.buildSession({
         publishedAt: privateCertificateData.deliveredAt,
         certificationCenter: privateCertificateData.certificationCenter,
         certificationCenterId,
-        version: SESSIONS_VERSIONS.V3,
+        version: AlgorithmEngineVersion.V3,
       }).id;
       const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
         firstName: privateCertificateData.firstName,
@@ -1732,7 +1731,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         certificationCenter: 'Centre des poules bien dodues',
         pixScore: 51,
         commentForCandidate: 'Il aime beaucoup les mangues, et ça se voit !',
-        version: SESSIONS_VERSIONS.V3,
+        version: AlgorithmEngineVersion.V3,
         algorithmEngineVersion: AlgorithmEngineVersion.V3,
       };
 
@@ -1790,7 +1789,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         certificationCenter: 'Centre des poules bien dodues',
         pixScore: 51,
         commentForCandidate: 'Il aime beaucoup les mangues, et ça se voit !',
-        version: SESSIONS_VERSIONS.V3,
+        version: AlgorithmEngineVersion.V3,
         algorithmEngineVersion: AlgorithmEngineVersion.V3,
       };
 
@@ -2050,7 +2049,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         certificationCenter: 'Centre des poules bien dodues',
         pixScore: 51,
         commentForCandidate: 'Il aime beaucoup les mangues, et ça se voit !',
-        version: SESSIONS_VERSIONS.V3,
+        version: AlgorithmEngineVersion.V3,
       };
 
       const { certificationCourseId } = await _buildValidPrivateCertificate(privateCertificateData);
@@ -2386,7 +2385,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
               message: 'temporary message badge 2',
             },
           ],
-          version: SESSIONS_VERSIONS.V3,
+          version: AlgorithmEngineVersion.V3,
           algorithmEngineVersion: AlgorithmEngineVersion.V3,
         };
 
@@ -2673,7 +2672,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           deliveredAt: new Date('2021-05-05'),
           certificationCenter: 'Centre des poules bien dodues',
           pixScore: 51,
-          version: SESSIONS_VERSIONS.V3,
+          version: AlgorithmEngineVersion.V3,
         };
 
         const { certificationCourseId, assessmentResultId } = await _buildValidShareableCertificate(
@@ -2784,7 +2783,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           deliveredAt: new Date('2021-05-05'),
           certificationCenter: 'Centre des poules bien dodues',
           pixScore: 51,
-          version: SESSIONS_VERSIONS.V3,
+          version: AlgorithmEngineVersion.V3,
         };
 
         const { certificationCourseId, assessmentResultId } = await _buildValidShareableCertificate(
@@ -2919,7 +2918,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           deliveredAt: new Date('2021-05-05'),
           certificationCenter: 'Centre des poules bien dodues',
           pixScore: 51,
-          version: SESSIONS_VERSIONS.V3,
+          version: AlgorithmEngineVersion.V3,
           certifiedBadgeImages: [
             {
               imageUrl: 'https://images.pix.fr/badge1.svg',
@@ -3048,7 +3047,7 @@ async function _buildValidPrivateCertificate(privateCertificateData, buildCompet
     publishedAt: privateCertificateData.deliveredAt,
     certificationCenter: privateCertificateData.certificationCenter,
     certificationCenterId,
-    version: SESSIONS_VERSIONS.V3,
+    version: AlgorithmEngineVersion.V3,
   }).id;
   const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
     firstName: privateCertificateData.firstName,
@@ -3090,7 +3089,7 @@ async function _buildValidPrivateCertificateWithSeveralResults(privateCertificat
     publishedAt: privateCertificateData.deliveredAt,
     certificationCenter: privateCertificateData.certificationCenter,
     certificationCenterId,
-    version: SESSIONS_VERSIONS.V3,
+    version: AlgorithmEngineVersion.V3,
   }).id;
   const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
     firstName: privateCertificateData.firstName,
@@ -3159,7 +3158,7 @@ function _buildValidCertificationAttestation(
   return assessmentResultId;
 }
 
-function _buildSession({ userId, sessionId, publishedAt, certificationCenter, version = SESSIONS_VERSIONS.V3 }) {
+function _buildSession({ userId, sessionId, publishedAt, certificationCenter, version = AlgorithmEngineVersion.V3 }) {
   databaseBuilder.factory.buildUser({ id: userId });
   const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
   databaseBuilder.factory.buildSession({
@@ -3248,7 +3247,7 @@ async function _buildValidPrivateCertificateWithAcquiredAndNotAcquiredBadges({
     publishedAt: privateCertificateData.deliveredAt,
     certificationCenter: privateCertificateData.certificationCenter,
     certificationCenterId,
-    version: SESSIONS_VERSIONS.V3,
+    version: AlgorithmEngineVersion.V3,
   }).id;
   const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
     firstName: privateCertificateData.firstName,

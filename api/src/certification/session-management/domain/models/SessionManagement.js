@@ -1,5 +1,5 @@
 import { SESSION_STATUSES } from '../../../shared/domain/constants.js';
-import { SESSIONS_VERSIONS } from '../../../shared/domain/models/SessionVersion.js';
+import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 
 const NO_EXAMINER_GLOBAL_COMMENT = null;
 
@@ -24,7 +24,7 @@ class SessionManagement {
     certificationCenterId,
     assignedCertificationOfficerId,
     invigilatorPassword,
-    version = SESSIONS_VERSIONS.V2,
+    version = AlgorithmEngineVersion.V3,
     createdBy,
   } = {}) {
     this.id = id;

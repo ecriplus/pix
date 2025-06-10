@@ -1,6 +1,5 @@
 import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
-import { SESSIONS_VERSIONS } from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { Assessment } from '../../../../../src/shared/domain/models/index.js';
 import { AssessmentResult } from '../../../../../src/shared/domain/models/index.js';
 import { AnswerStatus } from '../../../../../src/shared/domain/models/index.js';
@@ -65,7 +64,7 @@ describe('Certification | Session-management | Acceptance | Application | Routes
         // given
         const juryMember = databaseBuilder.factory.buildUser.withRole({ roles: PIX_ADMIN.ROLES.SUPER_ADMIN });
         const session = databaseBuilder.factory.buildSession({
-          version: SESSIONS_VERSIONS.V2,
+          version: AlgorithmEngineVersion.V2,
           finalizedAt: new Date('2024-01-15'),
         });
         const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
@@ -159,7 +158,7 @@ describe('Certification | Session-management | Acceptance | Application | Routes
         // given
         const juryMember = databaseBuilder.factory.buildUser.withRole({ roles: PIX_ADMIN.ROLES.SUPER_ADMIN });
         const session = databaseBuilder.factory.buildSession({
-          version: SESSIONS_VERSIONS.V3,
+          version: AlgorithmEngineVersion.V3,
           finalizedAt: new Date('2024-01-15'),
         });
         const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
@@ -288,7 +287,7 @@ describe('Certification | Session-management | Acceptance | Application | Routes
       // given
       const juryMember = databaseBuilder.factory.buildUser.withRole({ roles: PIX_ADMIN.ROLES.SUPER_ADMIN });
       const session = databaseBuilder.factory.buildSession({
-        version: SESSIONS_VERSIONS.V3,
+        version: AlgorithmEngineVersion.V3,
         finalizedAt: new Date('2024-01-15'),
       });
       const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
