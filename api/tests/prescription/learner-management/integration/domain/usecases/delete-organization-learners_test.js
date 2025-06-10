@@ -1,3 +1,4 @@
+import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { EventLoggingJob } from '../../../../../../src/identity-access-management/domain/models/jobs/EventLoggingJob.js';
 import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import {
@@ -8,6 +9,16 @@ import {
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { featureToggles } from '../../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+
+const {
+  buildMembership,
+  buildOrganization,
+  buildCampaign,
+  buildCampaignParticipation,
+  buildUser,
+  buildOrganizationLearner,
+  buildUserRecommendedTraining,
+} = databaseBuilder.factory;
 
 describe('Integration | UseCase | Organization Learners Management | Delete Organization Learners', function () {
   let organizationId;
@@ -414,6 +425,83 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
           (badgeAcquisition) => badgeAcquisition.badgeId === certifiableBadge.id,
         );
         expect(certifiableBadgeAcquisition.userId).to.equal(campaignParticipation1.userId);
+      });
+    });
+  });
+
+  context('when there are user-recommended-trainings linked to campaign participations', function () {
+    let adminUserId,
+      campaignParticipationId,
+      userId,
+      userRecommendedTrainingId,
+      campaignId,
+      organizationId,
+      organizationLearner;
+
+    beforeEach(async function () {
+      //given
+      adminUserId = buildUser().id;
+      userId = buildUser().id;
+      campaignId = buildCampaign().id;
+      buildMembership({ userId: adminUserId, organizationId: buildOrganization().id, organizationRole: 'ADMIN' });
+
+      organizationId = buildOrganization().id;
+
+      organizationLearner = buildOrganizationLearner({ organizationId, userId });
+
+      campaignParticipationId = buildCampaignParticipation({
+        userId,
+        campaignId,
+        organizationLearnerId: organizationLearner.id,
+      }).id;
+
+      userRecommendedTrainingId = buildUserRecommendedTraining({ userId, campaignParticipationId }).id;
+
+      await databaseBuilder.commit();
+    });
+    context('when feature toggle `isAnonymizationWithDeletionEnabled` is true', function () {
+      it('should delete campaignParticipationId', async function () {
+        //given
+        await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
+
+        //when
+        await usecases.deleteOrganizationLearners({
+          organizationLearnerIds: [organizationLearner.id],
+          userId: adminUserId,
+          organizationId,
+          userRole: 'ORGA_ADMIN',
+          client: 'PIX_ORGA',
+        });
+
+        //then
+        const userRecommendedTrainingAnonymized = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
+          .where('id', userRecommendedTrainingId)
+          .first();
+
+        expect(userRecommendedTrainingAnonymized.campaignParticipationId).to.be.null;
+      });
+    });
+
+    context('when feature toggle `isAnonymizationWithDeletionEnabled` is false', function () {
+      it('should not delete campaignParticipationId', async function () {
+        //given
+        await featureToggles.set('isAnonymizationWithDeletionEnabled', false);
+
+        //when
+        await usecases.deleteOrganizationLearners({
+          organizationLearnerIds: [organizationLearner.id],
+          userId: adminUserId,
+          organizationId,
+          userRole: 'ADMIN',
+          client: 'ORGA_ADMIN',
+        });
+
+        //then
+        const userRecommendedTrainingAnonymized = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
+          .where('id', userRecommendedTrainingId)
+          .first();
+
+        expect(userRecommendedTrainingAnonymized.campaignParticipationId).to.equal(campaignParticipationId);
       });
     });
   });
