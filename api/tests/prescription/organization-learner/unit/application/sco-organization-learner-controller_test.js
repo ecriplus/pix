@@ -28,7 +28,7 @@ describe('Prescription | Unit | Application | Controller | sco-organization-lear
           data: {
             attributes: {
               birthdate: '01-01-2000',
-              'campaign-code': 'BADGES123',
+              'organization-id': 123,
               'external-user-token': '123SamlId',
             },
           },
@@ -62,7 +62,7 @@ describe('Prescription | Unit | Application | Controller | sco-organization-lear
         'first-name': 'Robert',
         'last-name': 'Smith',
         birthdate: '2012-12-12',
-        'campaign-code': 'RESTRICTD',
+        'organization-id': 123,
         password: 'P@ssw0rd',
         username: 'robert.smith1212',
         'with-username': true,
