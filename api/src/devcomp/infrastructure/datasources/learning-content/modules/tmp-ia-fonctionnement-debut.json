@@ -183,7 +183,7 @@
           "element": {
             "id": "984bbfce-c558-432a-9746-22fee645e643",
             "type": "text",
-            "content": "<p><strong>Bon à savoir</strong><br>L'“Intelligence artificielle“ (IA) générative désigne l'ensemble des  logiciels qui sont capables de générer du texte, des images, des vidéos ou des sons, en réponse à des demandes (appelées requêtes, ou <i>prompt</i> en anglais).</p>"
+            "content": "<p><strong>Bon à savoir</strong><br>L'“Intelligence artificielle“ (IA) générative désigne les techniques utilisées par les logiciels capables de générer du texte, des images, des vidéos ou des sons, en réponse à des demandes (appelées requêtes, ou <i>prompt</i> en anglais).</p>"
           }
         }
       ]
