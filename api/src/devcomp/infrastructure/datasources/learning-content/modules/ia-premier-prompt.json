@@ -488,7 +488,7 @@
             "type": "embed",
             "isCompletionRequired": false,
             "title": "Utilisation d'un véritable LLM",
-            "url": "https://app.pocllm.pix.digital/config/cma2ihhoa000bwg011i86qb30/preview",
+            "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cma2ihhoa000bwg011i86qb30",
             "instruction": "<p>Écrivez un prompt à l’IA conversationnelle ci-dessous pour qu’elle crée un poème sur votre animal préféré.<br><br></p>",
             "solution": "<p></p>",
             "height": 500
