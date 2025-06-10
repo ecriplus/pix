@@ -36,6 +36,19 @@ const deleteOrganizationLearners = withTransaction(async function ({
     organizationLearner.delete(userId, isAnonymizationWithDeletionEnabled);
     await organizationLearnerRepository.remove(organizationLearner.dataToUpdateOnDeletion);
 
+    if (isAnonymizationWithDeletionEnabled) {
+      await eventLoggingJobRepository.performAsync(
+        new EventLoggingJob({
+          client,
+          action: organizationLearner.loggerContext,
+          role: userRole,
+          userId,
+          targetUserId: organizationLearner.id,
+          data: {},
+        }),
+      );
+    }
+
     const campaignParticipations =
       await campaignParticipationRepositoryfromBC.getAllCampaignParticipationsForOrganizationLearner({
         organizationLearnerId: organizationLearner.id,

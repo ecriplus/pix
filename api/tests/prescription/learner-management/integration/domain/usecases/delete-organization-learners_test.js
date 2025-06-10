@@ -3,6 +3,7 @@ import { usecases } from '../../../../../../src/prescription/learner-management/
 import {
   CampaignParticipationLoggerContext,
   CampaignTypes,
+  OrganizationLearnerLoggerContext,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { featureToggles } from '../../../../../../src/shared/infrastructure/feature-toggles/index.js';
@@ -322,15 +323,26 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
       });
 
       // then
-      await expect(EventLoggingJob.name).to.have.been.performed.withJobPayload({
-        client: 'PIX_ORGA',
-        action: CampaignParticipationLoggerContext.DELETION,
-        role: 'ORGA_ADMIN',
-        userId: adminUserId,
-        occurredAt: now.toISOString(),
-        targetUserId: campaignParticipation1.id,
-        data: {},
-      });
+      await expect(EventLoggingJob.name).to.have.been.performed.withJobPayloads([
+        {
+          client: 'PIX_ORGA',
+          action: OrganizationLearnerLoggerContext.DELETION,
+          role: 'ORGA_ADMIN',
+          userId: adminUserId,
+          occurredAt: now.toISOString(),
+          targetUserId: organizationLearner1.id,
+          data: {},
+        },
+        {
+          client: 'PIX_ORGA',
+          action: CampaignParticipationLoggerContext.DELETION,
+          role: 'ORGA_ADMIN',
+          userId: adminUserId,
+          occurredAt: now.toISOString(),
+          targetUserId: campaignParticipation1.id,
+          data: {},
+        },
+      ]);
     });
 
     context('when there are badges linked to the campaign participations', function () {
