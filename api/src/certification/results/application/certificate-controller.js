@@ -10,7 +10,7 @@ import { usecases } from '../domain/usecases/index.js';
 import * as certificateSerializer from '../infrastructure/serializers/certificate-serializer.js';
 import * as privateCertificateSerializer from '../infrastructure/serializers/private-certificate-serializer.js';
 import * as v3CertificationAttestationPdf from '../infrastructure/utils/pdf/generate-pdf-certificate.js';
-import { getCertificatesPdfBuffer } from '../infrastructure/utils/pdf/get-certificates-pdf-buffer.js';
+import * as v2CertificationAttestationPdf from '../infrastructure/utils/pdf/generate-v2-pdf-certificate.js';
 
 const getCertificateByVerificationCode = async function (
   request,
@@ -78,12 +78,13 @@ const findUserCertificates = async function (request) {
 const getPDFCertificate = async function (
   request,
   h,
-  dependencies = { getCertificatesPdfBuffer, v3CertificationAttestationPdf },
+  dependencies = { v2CertificationAttestationPdf, v3CertificationAttestationPdf },
 ) {
   const userId = request.auth.credentials.userId;
   const certificationCourseId = request.params.certificationCourseId;
   const { i18n } = request;
   const { isFrenchDomainExtension } = request.query;
+  const locale = i18n.getLocale();
 
   const certificationCourse = await certificationSharedUsecases.getCertificationCourse({ certificationCourseId });
 
@@ -91,13 +92,13 @@ const getPDFCertificate = async function (
     throw new UnauthorizedError();
   }
 
-  const certificate = await usecases.getCertificate({ certificationCourseId });
+  const certificate = await usecases.getCertificate({ certificationCourseId, locale });
+
+  const fileName = i18n.__('certification.certificate.file-name', {
+    deliveredAt: dayjs(certificate.deliveredAt).format('YYYYMMDD'),
+  });
 
   if (certificate instanceof Certificate) {
-    const fileName = i18n.__('certification-confirmation.file-name', {
-      deliveredAt: dayjs(certificate.deliveredAt).format('YYYYMMDD'),
-    });
-
     return h
       .response(
         dependencies.v3CertificationAttestationPdf.generate({
@@ -110,14 +111,15 @@ const getPDFCertificate = async function (
       .header('Content-Type', 'application/pdf');
   }
 
-  const { buffer, fileName } = await dependencies.getCertificatesPdfBuffer({
-    certificates: [certificate],
-    isFrenchDomainExtension,
-    i18n,
-  });
-
   return h
-    .response(buffer)
+    .response(
+      dependencies.v2CertificationAttestationPdf.generate({
+        certificates: [certificate],
+        i18n,
+        isFrenchDomainExtension,
+      }),
+    )
+    .code(200)
     .header('Content-Disposition', `attachment; filename=${fileName}`)
     .header('Content-Type', 'application/pdf');
 };
@@ -125,7 +127,7 @@ const getPDFCertificate = async function (
 const getSessionCertificates = async function (
   request,
   h,
-  dependencies = { getCertificatesPdfBuffer, v3CertificationAttestationPdf },
+  dependencies = { v2CertificationAttestationPdf, v3CertificationAttestationPdf },
 ) {
   const { i18n } = request;
 
@@ -135,11 +137,11 @@ const getSessionCertificates = async function (
     sessionId,
   });
 
-  if (certificates.every((certificate) => certificate instanceof Certificate)) {
-    const translatedFileName = i18n.__('certification-confirmation.file-name', {
-      deliveredAt: dayjs(certificates[0].deliveredAt).format('YYYYMMDD'),
-    });
+  const translatedFileName = i18n.__('certification.certificate.file-name', {
+    deliveredAt: dayjs(certificates[0].deliveredAt).format('YYYYMMDD'),
+  });
 
+  if (certificates.every((certificate) => certificate instanceof Certificate)) {
     return h
       .response(
         dependencies.v3CertificationAttestationPdf.generate({
@@ -152,38 +154,39 @@ const getSessionCertificates = async function (
       .header('Content-Type', 'application/pdf');
   }
 
-  const { buffer } = await dependencies.getCertificatesPdfBuffer({
-    certificates,
-    isFrenchDomainExtension,
-    i18n,
-  });
-
-  const fileName = `certification-pix-session-${sessionId}.pdf`;
   return h
-    .response(buffer)
-    .header('Content-Disposition', `attachment; filename=${fileName}`)
+    .response(
+      dependencies.v2CertificationAttestationPdf.generate({
+        certificates,
+        i18n,
+        isFrenchDomainExtension,
+      }),
+    )
+    .header('Content-Disposition', `attachment; filename=session-${sessionId}-${translatedFileName}`)
     .header('Content-Type', 'application/pdf');
 };
 
 const downloadDivisionCertificates = async function (
   request,
   h,
-  dependencies = { getCertificatesPdfBuffer, v3CertificationAttestationPdf },
+  dependencies = { v2CertificationAttestationPdf, v3CertificationAttestationPdf },
 ) {
   const organizationId = request.params.organizationId;
   const { i18n } = request;
   const { division, isFrenchDomainExtension } = request.query;
+  const locale = i18n.getLocale();
 
   const certificates = await usecases.findCertificatesForDivision({
     organizationId,
     division,
+    locale,
   });
 
   if (certificates.some((certificate) => certificate instanceof Certificate)) {
     const v3Certificates = certificates.filter((certificate) => certificate instanceof Certificate);
     const normalizedDivision = normalizeAndRemoveAccents(division);
 
-    const translatedFileName = i18n.__('certification-confirmation.file-name', {
+    const translatedFileName = i18n.__('certification.certificate.file-name', {
       deliveredAt: dayjs(certificates[0].deliveredAt).format('YYYYMMDD'),
     });
 
@@ -199,17 +202,17 @@ const downloadDivisionCertificates = async function (
       .header('Content-Type', 'application/pdf');
   }
 
-  const { buffer } = await dependencies.getCertificatesPdfBuffer({
-    certificates,
-    isFrenchDomainExtension,
-    i18n,
-  });
-
   const now = dayjs();
   const fileName = `${now.format('YYYYMMDD')}_attestations_${division}.pdf`;
 
   return h
-    .response(buffer)
+    .response(
+      dependencies.v2CertificationAttestationPdf.generate({
+        certificates,
+        i18n,
+        isFrenchDomainExtension,
+      }),
+    )
     .header('Content-Disposition', `attachment; filename=${fileName}`)
     .header('Content-Type', 'application/pdf');
 };

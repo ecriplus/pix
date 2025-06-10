@@ -12,4 +12,10 @@ class NoCertificationResultForDivision extends DomainError {
   }
 }
 
-export { MoreThanOneMatchingCertificationError, NoCertificationResultForDivision };
+class CertificateGenerationError extends DomainError {
+  constructor(message = 'An error has occurred during PDF generation') {
+    super(message);
+  }
+}
+
+export { CertificateGenerationError, MoreThanOneMatchingCertificationError, NoCertificationResultForDivision };

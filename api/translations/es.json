@@ -12,7 +12,43 @@
     }
   },
   "certification": {
-    "attestation": {
+    "certificate": {
+      "file-name": "certification-pix-{deliveredAt}.pdf",
+      "file-metadata": {
+        "title": "Pix certificacion confirmación"
+      },
+      "v2": {
+        "competences-content": {
+          "level": "Nivel",
+          "title": "Competencias certificadas (niveles en { maxReachableLevelOnCertificationDate })"
+        },
+        "complementary-certification-title": "Otra certificación obtenida",
+        "description": "Este documento certifica que ha obtenido la certificación Pix",
+        "main-content": {
+          "from-birthplace": " en ",
+          "birth": "Fecha y lugar de nacimiento : ",
+          "certification-center": "Centro de certificación : ",
+          "delivered-at": "Publicado el : ",
+          "first-and-last-names": "Nombre y apellidos : ",
+          "professionalizing-certification-message": "Le certificat Pix est reconnu comme professionnalisant par France compétences à compter d’un score minimal de 120 PIX"
+        },
+        "not-a-certificate": "Este documento no es un certificado",
+        "qr-code-content": {
+          "link": {
+            "description": "Utilice este código en el sitio web :",
+            "label": "app.pix.org/verification-certificat?lang=es",
+            "url": "https://app.pix.org/verification-certificat?lang=es"
+          },
+          "title": "Comprobar la autenticidad de la certificación",
+          "verification-code": "Código de verificación"
+        },
+        "score-content": {
+          "absolute-max-level-indication": "Cuando estén disponibles los 8 niveles del repositorio de píxeles, este número máximo será de 1024 píxeles.",
+          "max-reachable-level-indication": "* En la fecha en que se obtuvo esta certificación, el número máximo de píxeles alcanzables era { maxReachableScore }, correspondiente al nivel { maxReachableLevelOnCertificationDate }."
+        },
+        "signature": "Benjamin Marteau, director del GIP Pix",
+        "title": "Certificado"
+      },
       "v3": {
         "main-content": {
           "birth": "né(e) le : {birthdate} à {birthplace}",
@@ -236,16 +272,6 @@
       "yourCertificationCenter": "Su centro de certificación"
     },
     "subject": "Invitación a unirse a Pix Certif"
-  },
-  "certification-confirmation": {
-    "absolute-max-level-indication": "Cuando estén disponibles los 8 niveles del repositorio de píxeles, este número máximo será de 1024 píxeles.",
-    "file-name": "certification-pix-{deliveredAt}.pdf",
-    "file-metadata": {
-      "title": "Pix certificacion confirmación"
-    },
-    "from-birthplace": "a { birthplace }",
-    "max-level": "(niveles en { maxReachableLevelOnCertificationDate })",
-    "max-reachable-level-indication": "* En la fecha en que se obtuvo esta certificación, el número máximo de píxeles alcanzables era { maxReachableScore }, correspondiente al nivel { maxReachableLevelOnCertificationDate }."
   },
   "certification-result-email": {
     "params": {

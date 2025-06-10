@@ -4,6 +4,7 @@ import _ from 'lodash';
 import * as translations from '../../../translations/index.js';
 import { AdminMemberError } from '../../authorization/domain/errors.js';
 import { ChallengeAlreadyAnsweredError } from '../../certification/evaluation/domain/errors.js';
+import { CertificateGenerationError } from '../../certification/results/domain/errors.js';
 import {
   CsvWithNoSessionDataError,
   SendingEmailToRefererError,
@@ -134,7 +135,7 @@ function _mapToHttpError(error) {
   if (error instanceof SharedDomainErrors.AssessmentEndedError) {
     return new HttpErrors.BaseHttpError(error.message);
   }
-  if (error instanceof SharedDomainErrors.CertificationAttestationGenerationError) {
+  if (error instanceof CertificateGenerationError) {
     return new HttpErrors.UnprocessableEntityError(error.message);
   }
   if (error instanceof SharedDomainErrors.UserCouldNotBeReconciledError) {

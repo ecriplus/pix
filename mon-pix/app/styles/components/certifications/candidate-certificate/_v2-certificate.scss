@@ -48,7 +48,11 @@
       align-items: flex-start;
 
       .certificate-competences-details {
-        width: 100%;
+        flex: 2;
+      }
+
+      .v2-candidate-certificate-complementary-information__details {
+        flex: 1;
       }
     }
   }

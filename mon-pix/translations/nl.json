@@ -627,40 +627,44 @@
         "download-attestation": "Mijn certificaat downloaden",
         "download-certificate": "Mijn certificaat downloaden"
       },
-      "congratulations": "Congratulations!",
-      "progressbar-explanation": "Progress bar indicating the level you have reached ( {level}, i.e. level {globalLevelLabel} ) out of a maximum attainable level of 7 ( Expert 1 level )",
+      "congratulations": "Gefeliciteerd!",
+      "progressbar-explanation": "oortgangsbalk die aangeeft welk niveau je hebt bereikt ( {level}, i.e. level {globalLevelLabel} ) van het maximaal haalbare niveau van 7 (niveau Expert 1)",
       "global": {
         "labels": {
-          "advanced": "Advanced",
+          "advanced": "Geavanceerd",
           "beginner": "Beginner",
           "expert": "Expert",
-          "independent": "Independent",
-          "level": "Your level"
+          "independent": "Onafhankelijk",
+          "level": "Jouw niveau"
         },
         "explanation": {
-          "default": "You've reached {globalLevelLabel} level of Pix Certification!",
-          "pre-beginner-level": "You have completed your Pix Certification test, but your results do not allow you to obtain the first level."
+          "default": "Je hebt het {globalLevelLabel} niveau van Pix Certification bereikt!",
+          "pre-beginner-level": "Je hebt je Pix-certificeringstest afgerond, maar je resultaten staan je niet toe om het eerste niveau te behalen."
         }
       },
       "certification-value": {
         "paragraphs": {
-          "1": "Officially recognised, Pix Certification attests to your mastery of digital skills. You'll be joining a community of millions of certified users. Congratulations on this important step in your career!",
-          "2": "Your certified score has been calculated on the basis of your answers during the certification process. It may therefore differ from the number of pix shown in your profile.",
-          "3": "On the day of your certification, it was possible to reach level 7 and a maximum of 895 pix (Expert 1 level)."
+          "1": "Pix certificering is officieel erkend en getuigt van je beheersing van digitale vaardigheden. Je wordt lid van een gemeenschap van miljoenen gecertificeerde gebruikers. Gefeliciteerd met deze belangrijke stap in je carrière!",
+          "2": "Je gecertificeerde score is berekend op basis van je antwoorden tijdens het certificeringsproces. Deze kan daarom afwijken van het aantal pix dat in je profiel wordt getoond.",
+          "3": "Op de dag van je certificering was het mogelijk om niveau 7 en maximaal 895 pix te bereiken (niveau Expert 1)."
         }
       },
       "attestation": "Mijn certificaat downloaden",
       "back-link": "Terug naar mijn certificaten",
       "candidate-birth": "Geboren op {birthdate}",
-      "candidate-birth-complete": "Geboren op {birthdate} te {birthplace}.",
+      "candidate-birth-complete": "Geboren op {birthdate} te {birthplace}",
       "certification-center": "Certificeringscentrum :",
-      "delivered-at": "Date of issue:",
-      "certification-date": "Exam date:",
-      "candidate": "Candidate:",
+      "delivered-at": "Datum van uitgifte :",
+      "certification-date": "Examendatum :",
+      "candidate": "Kandidaat :",
       "competences": {
-        "information": "Je gecertificeerde score is berekend op basis van je antwoorden tijdens het certificeringsproces. Deze kan daarom afwijken van het aantal Pix dat wordt weergegeven in je profiel. Op de dag van je certificering was het mogelijk om het {maxReachableLevelOnCertificationDate} vaardigheidsniveau en {maxReachablePixCountOnCertificationDate} pix maximaal te behalen.",
-        "subtitle": "(niveaus op {maxReachableLevel})",
-        "title": "Gecertificeerde vaardigheden"
+        "information": "Je gecertificeerde score is berekend op basis van je antwoorden tijdens het certificeringsproces. Deze kan daarom afwijken van het aantal Pix dat wordt weergegeven in je profiel. Op de dag van je certificering was het mogelijk om het {maxReachableLevelOnCertificationDate} vaardigheidsniveau en {maxReachablePixCountOnCertificationDate} pix maximaal te behalen."
+      },
+      "details": {
+        "competences": {
+          "description": "Je Pix-score geeft een schatting van je niveau in de 16 digitale vaardigheden.",
+          "title": "Je digitale vaardigheidsprofiel"
+        }
       },
       "complementary": {
         "alternative": "Aanvullende certificering",
@@ -678,7 +682,7 @@
       "title": "Pix-certificaat",
       "verification-code": {
         "share": "Deel uw certificaat",
-        "information": "Your unique verification code",
+        "information": "Je unieke verificatiecode",
         "alt": "Kopieer",
         "copied": "Code gekopieerd!",
         "copy": "Kopieer de code",

@@ -1,6 +1,3 @@
-import { readFile } from 'node:fs/promises';
-import * as url from 'node:url';
-
 import dayjs from 'dayjs';
 
 import { generateCertificateVerificationCode } from '../../../../../src/certification/evaluation/domain/services/verify-certificate-code-service.js';
@@ -16,7 +13,6 @@ import {
   insertUserWithRoleSuperAdmin,
   learningContentBuilder,
   mockLearningContent,
-  nock,
 } from '../../../../test-helper.js';
 
 describe('Certification | Results | Acceptance | Application | Routes | certification-attestation', function () {
@@ -24,13 +20,14 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
     const learningContent = [
       {
         id: 'recvoGdo7z2z7pXWa',
+        frameworkId: 'Pix',
         code: '1',
         name: '1. Information et données',
         title_i18n: { fr: 'Information et données' },
         color: 'jaffa',
         competences: [
           {
-            id: 'recsvLz0W2ShyfD63',
+            id: 'Pix',
             name_i18n: { fr: 'Mener une recherche et une veille d’information' },
             index: '1.1',
             tubes: [
@@ -55,6 +52,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
           },
           {
             id: 'recNv8qhaY887jQb2',
+            frameworkId: 'Pix',
             name_i18n: { fr: 'Gérer des données' },
             index: '1.2',
             tubes: [
@@ -79,6 +77,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
           },
           {
             id: 'recIkYm646lrGvLNT',
+            frameworkId: 'Pix',
             name_i18n: { fr: 'Traiter des données' },
             index: '1.3',
             tubes: [
@@ -103,15 +102,107 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
           },
         ],
       },
+      {
+        id: 'recoB4JYOBS1PCxhh',
+        frameworkId: 'Pix',
+        code: '2',
+        name: '2. Communication et collaboration',
+        competences: [
+          {
+            id: 'recDH19F7kKrfL3Ii',
+            name_i18n: { fr: 'Interagir' },
+            index: '2.1',
+          },
+          {
+            id: 'recgxqQfz3BqEbtzh',
+            name_i18n: { fr: 'Partager et publier' },
+            index: '2.2',
+          },
+          {
+            id: 'recMiZPNl7V1hyE1d',
+            name_i18n: { fr: 'Collaborer' },
+            index: '2.3',
+          },
+          {
+            id: 'recFpYXCKcyhLI3Nu',
+            name_i18n: { fr: "S'insérer" },
+            index: '2.4',
+          },
+        ],
+      },
+      {
+        id: 'recOdC9UDVJbAXHAm',
+        frameworkId: 'Pix',
+        code: '3',
+        name: '3. Création de contenu',
+        competences: [
+          {
+            id: 'recOdC9UDVJbAXHAm',
+            name_i18n: { fr: 'Dev des docs' },
+            index: '3.1',
+          },
+          {
+            id: 'recbDTF8KwupqkeZ6',
+            name_i18n: { fr: 'Dev des docs mult' },
+            index: '3.2',
+          },
+          {
+            id: 'recHmIWG6D0huq6Kx',
+            name_i18n: { fr: 'Adapt' },
+            index: '3.3',
+          },
+          {
+            id: 'rece6jYwH4WEw549z',
+            name_i18n: { fr: 'Programmer' },
+            index: '3.4',
+          },
+        ],
+      },
+      {
+        id: 'recUcSnS2lsOhFIeE',
+        frameworkId: 'Pix',
+        code: '4',
+        name: '4. Protection et sécurité',
+        competences: [
+          {
+            id: 'rec6rHqas39zvLZep',
+            name_i18n: { fr: 'Dev des docs' },
+            index: '4.1',
+          },
+          {
+            id: 'recofJCxg0NqTqTdP',
+            name_i18n: { fr: 'Dev des docs mult' },
+            index: '4.2',
+          },
+          {
+            id: 'recfr0ax8XrfvJ3ER',
+            name_i18n: { fr: 'Adapt' },
+            index: '4.3',
+          },
+        ],
+      },
+      {
+        id: 'recnrCmBiPXGbgIyQ',
+        frameworkId: 'Pix',
+        code: '5',
+        name: '5. Environnement numérique',
+        competences: [
+          {
+            id: 'recIhdrmCuEmCDAzj',
+            name_i18n: { fr: 'Dev des docs' },
+            index: '5.1',
+          },
+          {
+            id: 'recudHE5Omrr10qrx',
+            name_i18n: { fr: 'Dev des docs mult' },
+            index: '5.2',
+          },
+        ],
+      },
     ];
 
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
     await mockLearningContent(learningContentObjects);
-
-    const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-    nock('http://tarte.fr')
-      .get('/sticker.pdf')
-      .reply(200, () => readFile(`${__dirname}/sticker.pdf`));
   });
 
   describe('GET /api/attestation/{certificationCourseId}', function () {
@@ -204,7 +295,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
       it('should return 200 HTTP status code and the certification', async function () {
         // given
         const superAdmin = await insertUserWithRoleSuperAdmin();
-        await _buildDatabaseCertification({ userId: superAdmin.id, sessionId: 4567 });
+        const { session } = await _buildDatabaseCertification({ userId: superAdmin.id, sessionId: 4567 });
         await databaseBuilder.commit();
 
         const server = await createServer();
@@ -219,7 +310,9 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
         // then
         expect(response.statusCode).to.equal(200);
         expect(response.headers['content-type']).to.equal('application/pdf');
-        expect(response.headers['content-disposition']).to.include('filename=certification-pix');
+        expect(response.headers['content-disposition']).to.equal(
+          `attachment; filename=session-${session.id}-certification-pix-${dayjs(session.publishedAt).format('YYYYMMDD')}.pdf`,
+        );
         expect(response.file).not.to.be.null;
       });
     });
@@ -292,7 +385,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
           isCancelled: false,
         });
 
-        const badge = databaseBuilder.factory.buildBadge({ key: 'a badge' });
+        databaseBuilder.factory.buildBadge({ key: 'a badge' });
 
         const assessment = databaseBuilder.factory.buildAssessment({
           userId: candidate.userId,
@@ -312,7 +405,6 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
           area_code: '1',
           competence_code: '1.3',
           assessmentResultId: assessmentResult.id,
-          acquiredComplementaryCertifications: [badge.key],
         });
 
         await databaseBuilder.commit();
@@ -433,7 +525,7 @@ async function _buildDatabaseCertification({
     isTemporaryBadge: false,
     label: 'tarte à la mirabelle',
     certificateMessage: 'Miam',
-    stickerUrl: 'http://tarte.fr/sticker.pdf',
+    stickerUrl: 'http://example.net/stickers/macaron_pixclea.pdf',
   });
   const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
     sessionId: session.id,

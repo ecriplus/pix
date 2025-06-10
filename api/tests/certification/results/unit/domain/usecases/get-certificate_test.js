@@ -2,24 +2,16 @@ import { getCertificate } from '../../../../../../src/certification/results/doma
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | get-certificate', function () {
-  let certificateRepository, certificationCourseRepository;
-
-  beforeEach(function () {
-    certificateRepository = { getCertificate: sinon.stub() };
-    certificationCourseRepository = { get: sinon.stub() };
-  });
-
   it('should return the certificate enhanced with result competence tree', async function () {
     // given
     const locale = 'fr';
-
+    const certificateRepository = { getCertificate: sinon.stub() };
     const resultCompetenceTree = domainBuilder.buildResultCompetenceTree({ id: 'myResultTreeId' });
     const certificationAttestation = domainBuilder.buildCertificationAttestation({
       id: 123,
       resultCompetenceTree,
     });
-    const certificationCourse = domainBuilder.buildCertificationCourse({ id: 123 });
-    certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
+    domainBuilder.buildCertificationCourse({ id: 123 });
     certificateRepository.getCertificate
       .withArgs({ certificationCourseId: 123, locale })
       .resolves(certificationAttestation);
@@ -29,7 +21,6 @@ describe('Unit | UseCase | get-certificate', function () {
       certificationCourseId: 123,
       locale,
       certificateRepository,
-      certificationCourseRepository,
     });
 
     // then

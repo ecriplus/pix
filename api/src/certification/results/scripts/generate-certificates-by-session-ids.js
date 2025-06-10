@@ -18,7 +18,8 @@ import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { PromiseUtils } from '../../../shared/infrastructure/utils/promise-utils.js';
 import * as certificationCourseRepository from '../../shared/infrastructure/repositories/certification-course-repository.js';
 import * as certificateRepository from '../infrastructure/repositories/certificate-repository.js';
-import { getCertificatesPdfBuffer } from '../infrastructure/utils/pdf/get-certificates-pdf-buffer.js';
+import * as v2CertificationAttestationPdf from '../infrastructure/utils/pdf/generate-v2-pdf-certificate.js';
+
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const directory = path.resolve(path.join(__dirname, '../../../../translations'));
@@ -72,8 +73,8 @@ async function main() {
 
     logger.info(`${certificates.length} certificats récupérées pour la session ${sessionId}.`);
 
-    const { buffer } = await getCertificatesPdfBuffer({
-      certificates: certificates,
+    const { buffer } = await v2CertificationAttestationPdf.generate({
+      certificates,
       i18n,
     });
 
