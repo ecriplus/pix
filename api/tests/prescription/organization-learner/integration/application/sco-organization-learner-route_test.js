@@ -34,7 +34,7 @@ describe('Integration | Application | Route | sco-organization-learners', functi
       payload = {
         data: {
           attributes: {
-            'organization-id': 123,
+            'organization-id': 1,
             'external-user-token': 'external-user-token',
             birthdate: '1948-12-21',
             'access-token': null,
@@ -99,7 +99,7 @@ describe('Integration | Application | Route | sco-organization-learners', functi
         payload = {
           data: {
             attributes: {
-              'organization-id': 123,
+              'organization-id': 1,
               'first-name': 'Robert',
               'last-name': 'Smith',
               birthdate: '2012-12-12',
