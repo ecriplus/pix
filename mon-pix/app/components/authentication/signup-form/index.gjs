@@ -8,19 +8,12 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import get from 'lodash/get';
-import ENV from 'mon-pix/config/environment';
 import isEmailValid from 'mon-pix/utils/email-validator.js';
 import { FormValidation } from 'mon-pix/utils/form-validation';
 import isPasswordValid, { PASSWORD_RULES } from 'mon-pix/utils/password-validator.js';
 
 import NewPasswordInput from '../new-password-input';
 import CguCheckbox from './cgu-checkbox';
-
-const HTTP_ERROR_MESSAGES = {
-  400: { key: ENV.APP.API_ERROR_MESSAGES.BAD_REQUEST.I18N_KEY },
-  504: { key: ENV.APP.API_ERROR_MESSAGES.GATEWAY_TIMEOUT.I18N_KEY },
-  default: { key: 'common.api-error-messages.login-unexpected-error', values: { htmlSafe: true } },
-};
 
 const VALIDATION_ERRORS = {
   firstName: 'components.authentication.signup-form.fields.firstname.error',
@@ -38,6 +31,7 @@ export default class SignupForm extends Component {
   @service session;
   @service intl;
   @service url;
+  @service errorMessages;
 
   @tracked isLoading = false;
   @tracked globalError = null;
@@ -115,35 +109,14 @@ export default class SignupForm extends Component {
       return this.validation.setErrorsFromApi(errors);
     }
 
-    switch (error?.code) {
-      case 'INVALID_LOCALE_FORMAT':
-        this.globalError = {
-          key: 'components.authentication.signup-form.errors.invalid-locale-format',
-          values: { invalidLocale: error.meta.locale },
-        };
-        return;
-      case 'LOCALE_NOT_SUPPORTED':
-        this.globalError = {
-          key: 'components.authentication.signup-form.errors.locale-not-supported',
-          values: { localeNotSupported: error.meta.locale },
-        };
-        return;
-      default: {
-        const properties = HTTP_ERROR_MESSAGES[statusCode] || HTTP_ERROR_MESSAGES['default'];
-        if (!HTTP_ERROR_MESSAGES[statusCode]) {
-          properties.values.supportHomeUrl = this.url.supportHomeUrl;
-        }
-        this.globalError = properties;
-        return;
-      }
-    }
+    this.globalError = this.errorMessages.getAuthenticationErrorMessage(error);
   }
 
   <template>
     <form {{on "submit" this.handleSignup}} class="signup-form">
       {{#if this.globalError}}
         <PixNotificationAlert @type="error" @withIcon="true" role="alert">
-          {{t this.globalError.key this.globalError.values}}
+          {{this.globalError}}
         </PixNotificationAlert>
       {{/if}}
 

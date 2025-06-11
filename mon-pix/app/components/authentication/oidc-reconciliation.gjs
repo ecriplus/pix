@@ -132,7 +132,7 @@ export default class OidcReconciliationComponent extends Component {
         hostSlug: 'user/reconcile',
       });
     } catch (responseError) {
-      this.reconcileErrorMessage = this.errorMessages.getErrorMessage(responseError);
+      this.reconcileErrorMessage = this.errorMessages.getAuthenticationErrorMessage(responseError);
     } finally {
       this.isLoading = false;
     }

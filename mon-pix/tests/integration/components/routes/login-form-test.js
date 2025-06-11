@@ -41,7 +41,7 @@ module('Integration | Component | routes/login-form', function (hooks) {
     await click(screen.getByRole('button', { name: t('pages.login-or-register.login-form.button') }));
 
     // then
-    assert.dom(screen.getByText(t('pages.login-or-register.login-form.error'))).exists();
+    assert.dom(screen.getByText(t('common.api-error-messages.login-unauthorized-error'))).exists();
   });
 
   test('should display password when user click', async function (assert) {
@@ -188,17 +188,7 @@ module('Integration | Component | routes/login-form', function (hooks) {
 
     test('should display the default error message if update fails with other http error', async function (assert) {
       // given
-      const expectedErrorMessage =
-        'Une erreur interne est survenue, nos équipes sont en train de résoudre le problème. Veuillez réessayer ultérieurement.';
-      const apiReturn = {
-        errors: [
-          {
-            status: 500,
-            detail: expectedErrorMessage,
-          },
-        ],
-      };
-      addGarAuthenticationMethodToUserStub.rejects(apiReturn);
+      addGarAuthenticationMethodToUserStub.rejects({ errors: [{ status: 500 }] });
 
       this.set('addGarAuthenticationMethodToUser', addGarAuthenticationMethodToUserStub);
 
@@ -213,7 +203,7 @@ module('Integration | Component | routes/login-form', function (hooks) {
       await click(screen.getByRole('button', { name: t('pages.login-or-register.login-form.button') }));
 
       // then
-      assert.dom(screen.getByText(expectedErrorMessage)).exists();
+      assert.dom(screen.getByText(/Impossible de se connecter\. Veuillez réessayer dans quelques instants/)).exists();
     });
 
     test('should display the specific error message if update fails with http error 409 and code UNEXPECTED_USER_ACCOUNT', async function (assert) {

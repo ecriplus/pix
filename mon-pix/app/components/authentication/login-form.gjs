@@ -10,16 +10,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import get from 'lodash/get';
-import ENV from 'mon-pix/config/environment';
 import { FormValidation } from 'mon-pix/utils/form-validation';
-
-const HTTP_ERROR_MESSAGES = {
-  400: { key: ENV.APP.API_ERROR_MESSAGES.BAD_REQUEST.I18N_KEY },
-  401: { key: ENV.APP.API_ERROR_MESSAGES.LOGIN_UNAUTHORIZED.I18N_KEY },
-  422: { key: ENV.APP.API_ERROR_MESSAGES.BAD_REQUEST.I18N_KEY },
-  504: { key: ENV.APP.API_ERROR_MESSAGES.GATEWAY_TIMEOUT.I18N_KEY },
-  default: { key: 'common.api-error-messages.login-unexpected-error', values: { htmlSafe: true } },
-};
 
 const VALIDATION_ERRORS = {
   login: 'components.authentication.login-form.fields.login.error',
@@ -32,6 +23,7 @@ export default class LoginForm extends Component {
   @service storage;
   @service store;
   @service router;
+  @service errorMessages;
 
   @tracked login = null;
   @tracked password = null;
@@ -84,59 +76,18 @@ export default class LoginForm extends Component {
 
   async _handleApiError(responseError) {
     const errors = get(responseError, 'responseJSON.errors');
-    const error = Array.isArray(errors) && errors.length > 0 && errors[0];
+    const error = Array.isArray(errors) && errors.length > 0 ? errors[0] : null;
 
-    switch (error?.code) {
-      case 'INVALID_LOCALE_FORMAT':
-        this.globalError = {
-          key: 'pages.sign-up.errors.invalid-locale-format',
-          values: { invalidLocale: error.meta.locale },
-        };
-        break;
-      case 'LOCALE_NOT_SUPPORTED':
-        this.globalError = {
-          key: 'pages.sign-up.errors.locale-not-supported',
-          values: { localeNotSupported: error.meta.locale },
-        };
-        break;
-      case 'SHOULD_CHANGE_PASSWORD': {
-        const passwordResetToken = error.meta;
-        await this._updateExpiredPassword(passwordResetToken);
-        break;
-      }
-      case 'USER_IS_TEMPORARY_BLOCKED':
-        this.globalError = {
-          key: ENV.APP.API_ERROR_MESSAGES.USER_IS_TEMPORARY_BLOCKED.I18N_KEY,
-          values: {
-            url: '/mot-de-passe-oublie',
-            htmlSafe: true,
-          },
-        };
-        break;
-      case 'USER_IS_BLOCKED':
-        this.globalError = {
-          key: ENV.APP.API_ERROR_MESSAGES.USER_IS_BLOCKED.I18N_KEY,
-          values: {
-            url: 'https://support.pix.org/support/tickets/new',
-            htmlSafe: true,
-          },
-        };
-        break;
-      case 'MISSING_OR_INVALID_CREDENTIALS':
-        this.password = null;
-        this.globalError = {
-          key: ENV.APP.API_ERROR_MESSAGES.MISSING_OR_INVALID_CREDENTIALS.I18N_KEY,
-        };
-        break;
-      default: {
-        const properties = HTTP_ERROR_MESSAGES[responseError.status] || HTTP_ERROR_MESSAGES['default'];
-        if (!HTTP_ERROR_MESSAGES[responseError.status]) {
-          properties.values.supportHomeUrl = this.url.supportHomeUrl;
-        }
-        this.globalError = properties;
-        return;
-      }
+    if (error?.code === 'SHOULD_CHANGE_PASSWORD') {
+      const passwordResetToken = error.meta;
+      return this._updateExpiredPassword(passwordResetToken);
     }
+
+    if (['MISSING_OR_INVALID_CREDENTIALS', 'USER_IS_TEMPORARY_BLOCKED'].includes(error?.code)) {
+      this.password = null;
+    }
+
+    this.globalError = this.errorMessages.getAuthenticationErrorMessage(error);
   }
 
   async _updateExpiredPassword(passwordResetToken) {
@@ -148,7 +99,7 @@ export default class LoginForm extends Component {
     <form {{on "submit" this.signin}} class="authentication-login-form">
       {{#if this.globalError}}
         <PixNotificationAlert @type="error" @withIcon={{true}} role="alert">
-          {{t this.globalError.key this.globalError.values}}
+          {{this.globalError}}
         </PixNotificationAlert>
       {{/if}}
 

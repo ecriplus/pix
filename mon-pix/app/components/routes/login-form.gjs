@@ -9,7 +9,6 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import t from 'ember-intl/helpers/t';
 import get from 'lodash/get';
-import ENV from 'mon-pix/config/environment';
 
 export default class LoginForm extends Component {
   <template>
@@ -69,6 +68,7 @@ export default class LoginForm extends Component {
   @service router;
   @service currentUser;
   @service intl;
+  @service errorMessages;
 
   @tracked login = null;
   @tracked password = null;
@@ -145,45 +145,16 @@ export default class LoginForm extends Component {
   }
 
   _manageErrorsApi(errorsApi) {
-    const defaultErrorMessage = this.intl.t('common.api-error-messages.internal-server-error');
-    const errorMessageStatusCode4xx = this.intl.t('common.api-error-messages.bad-request-error');
-    const invalidCredentialsErrorMessage = this.intl.t('pages.login-or-register.login-form.error');
-    const unexpectedUserAccountErrorMessage = this.intl.t(
-      'pages.login-or-register.login-form.unexpected-user-account-error',
-    );
-
-    let errorMessage = defaultErrorMessage;
     const error = errorsApi?.responseJSON || errorsApi;
     const errorCode = get(error, 'errors[0].code');
-    const errorStatus = get(error, 'errors[0].status');
 
-    switch (errorCode) {
-      case 'USER_IS_TEMPORARY_BLOCKED':
-        errorMessage = this.intl.t(ENV.APP.API_ERROR_MESSAGES.USER_IS_TEMPORARY_BLOCKED.I18N_KEY, {
-          url: '/mot-de-passe-oublie',
-          htmlSafe: true,
-        });
-
-        break;
-      case 'USER_IS_BLOCKED':
-        errorMessage = this.intl.t(ENV.APP.API_ERROR_MESSAGES.USER_IS_BLOCKED.I18N_KEY, {
-          url: 'https://support.pix.org/support/tickets/new',
-          htmlSafe: true,
-        });
-        break;
-      case 'UNEXPECTED_USER_ACCOUNT':
-        errorMessage = unexpectedUserAccountErrorMessage + get(error, 'errors[0].meta.value');
-        break;
-      default:
-        if (errorStatus && errorStatus.toString().startsWith('4')) {
-          if (errorStatus === '401') {
-            errorMessage = invalidCredentialsErrorMessage;
-          } else {
-            errorMessage = errorMessageStatusCode4xx;
-          }
-        }
+    if (errorCode === 'UNEXPECTED_USER_ACCOUNT') {
+      const unexpectedUserAccountErrorMessage = this.intl.t(
+        'pages.login-or-register.login-form.unexpected-user-account-error',
+      );
+      this.errorMessage = unexpectedUserAccountErrorMessage + get(error, 'errors[0].meta.value');
+    } else {
+      this.errorMessage = this.errorMessages.getAuthenticationErrorMessage(error);
     }
-
-    this.errorMessage = errorMessage;
   }
 }

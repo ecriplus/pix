@@ -208,7 +208,7 @@ export default class LoginOrRegisterOidcComponent extends Component {
     try {
       await this.args.onLogin({ enteredEmail: this.email, enteredPassword: this.password });
     } catch (responseError) {
-      this.loginErrorMessage = this.errorMessages.getErrorMessage(responseError);
+      this.loginErrorMessage = this.errorMessages.getAuthenticationErrorMessage(responseError);
     } finally {
       this.isLoginLoading = false;
     }
@@ -232,7 +232,7 @@ export default class LoginOrRegisterOidcComponent extends Component {
       });
     } catch (responseError) {
       const error = get(responseError, 'errors[0]');
-      this.registerErrorMessage = this.errorMessages.getErrorMessage(error);
+      this.registerErrorMessage = this.errorMessages.getAuthenticationErrorMessage(error);
     } finally {
       this.isRegisterLoading = false;
     }

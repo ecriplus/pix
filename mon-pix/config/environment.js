@@ -78,6 +78,10 @@ module.exports = function (environment) {
           CODE: '403',
           I18N_KEY: 'common.api-error-messages.login-user-temporary-blocked-error',
         },
+        USER_IS_TEMPORARY_BLOCKED_WITH_USERNAME: {
+          CODE: '403',
+          I18N_KEY: 'common.api-error-messages.login-user-temporary-blocked-with-username-error',
+        },
         USER_IS_BLOCKED: {
           CODE: '403',
           I18N_KEY: 'common.api-error-messages.login-user-blocked-error',
@@ -97,6 +101,18 @@ module.exports = function (environment) {
         MISSING_OR_INVALID_CREDENTIALS: {
           CODE: '401',
           I18N_KEY: 'common.api-error-messages.login-unauthorized-error',
+        },
+        MISSING_OR_INVALID_CREDENTIALS_WITH_USERNAME: {
+          CODE: '401',
+          I18N_KEY: 'common.api-error-messages.login-unauthorized-with-user-name-error',
+        },
+        MISSING_OR_INVALID_CREDENTIALS_REMAINING_ATTEMPTS_WITH_USERNAME: {
+          CODE: '401',
+          I18N_KEY: 'common.api-error-messages.login-unauthorized-remaining-attempts-with-user-name-error',
+        },
+        MISSING_OR_INVALID_CREDENTIALS_REMAINING_ATTEMPTS: {
+          CODE: '401',
+          I18N_KEY: 'common.api-error-messages.login-unauthorized-remaining-attempts-error',
         },
       },
       AUTHENTICATED_SOURCE_FROM_GAR: 'external',
