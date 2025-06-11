@@ -247,7 +247,7 @@ describe('Integration | Application | Organization Learners Management | Routes'
       const payload = {
         data: {
           attributes: {
-            'organization-id': 123,
+            'organization-id': 1,
           },
         },
       };

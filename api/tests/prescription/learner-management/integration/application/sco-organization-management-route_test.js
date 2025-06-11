@@ -27,7 +27,7 @@ describe('Integration | Application | Route | sco-organization-learners', functi
               'first-name': 'Robert',
               'last-name': 'Smith',
               birthdate: '2012-12-12',
-              'organization-id': 123,
+              'organization-id': 1,
             },
           },
         };
@@ -47,7 +47,7 @@ describe('Integration | Application | Route | sco-organization-learners', functi
               'first-name': 'Robert ',
               'last-name': 'Smith',
               birthdate: '2012-12-12',
-              'organization-id': 123,
+              'organization-id': 1,
             },
           },
         };
@@ -77,7 +77,7 @@ describe('Integration | Application | Route | sco-organization-learners', functi
               'first-name': INVALID_FIRSTNAME,
               'last-name': 'Smith',
               birthdate: '2012-12-12',
-              'organization-id': 123,
+              'organization-id': 1,
             },
           },
         };
@@ -98,7 +98,7 @@ describe('Integration | Application | Route | sco-organization-learners', functi
               'first-name': 'Robert',
               'last-name': INVALID_LASTNAME,
               birthdate: '2012-12-12',
-              'organization-id': 123,
+              'organization-id': 1,
             },
           },
         };
@@ -121,7 +121,7 @@ describe('Integration | Application | Route | sco-organization-learners', functi
               'first-name': 'Robert',
               'last-name': 'Smith',
               birthdate: INVALID_BIRTHDATE,
-              'organization-id': 123,
+              'organization-id': 1,
             },
           },
         };
@@ -142,7 +142,7 @@ describe('Integration | Application | Route | sco-organization-learners', functi
               'first-name': 'Robert',
               'last-name': 'Smith',
               birthdate: INVALID_BIRTHDATE,
-              'organization-id': 123,
+              'organization-id': 1,
             },
           },
         };
@@ -163,7 +163,7 @@ describe('Integration | Application | Route | sco-organization-learners', functi
               'first-name': 'Robert',
               'last-name': 'Smith',
               birthdate: INVALID_BIRTHDATE,
-              'organization-id': 123,
+              'organization-id': 1,
             },
           },
         };

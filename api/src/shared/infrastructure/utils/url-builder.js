@@ -20,28 +20,6 @@ function getPixAppBaseUrl(locale) {
 
 /**
  * @param {string} locale
- * @param {string} campaignCode
- * @returns {string|null} - Campaign URL according to the locale
- */
-function getCampaignUrl(locale, campaignCode) {
-  if (!campaignCode) {
-    return null;
-  }
-
-  switch (locale) {
-    case LOCALE.FRENCH_SPOKEN:
-      return `${PIX_APP_DOMAIN_ORG}/campagnes/${campaignCode}/?lang=fr`;
-    case LOCALE.ENGLISH_SPOKEN:
-      return `${PIX_APP_DOMAIN_ORG}/campagnes/${campaignCode}/?lang=en`;
-    case LOCALE.DUTCH_SPOKEN:
-      return `${PIX_APP_DOMAIN_ORG}/campagnes/${campaignCode}/?lang=nl`;
-    default:
-      return `${PIX_APP_DOMAIN_FR}/campagnes/${campaignCode}`;
-  }
-}
-
-/**
- * @param {string} locale
  * @param {string} redirectUrl - URL to redirect the user to after email validation
  * @param {string} token
  * @returns {string} - generated URL to validate user account email
@@ -61,7 +39,6 @@ function getEmailValidationUrl({ locale, redirectUrl, token } = {}) {
  * @typedef UrlBuilder
  */
 export const urlBuilder = {
-  getCampaignUrl,
   getEmailValidationUrl,
   getPixAppBaseUrl,
 };

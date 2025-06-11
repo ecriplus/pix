@@ -33,52 +33,6 @@ describe('Unit | Shared | Infrastructure | Utils | url-builder', function () {
     });
   });
 
-  describe('#getCampaignUrl', function () {
-    it('returns null if campaignCode is not defined', function () {
-      expect(urlBuilder.getCampaignUrl('fr', null)).to.be.null;
-    });
-
-    describe('when campaignCode is defined', function () {
-      const campaignCode = 'AZERTY123';
-
-      it('returns campaignUrl with fr domain when locale is not supported', function () {
-        expect(urlBuilder.getCampaignUrl('ru', campaignCode)).to.be.equal(
-          `${config.domain.pixApp + config.domain.tldFr}/campagnes/${campaignCode}`,
-        );
-      });
-
-      it('returns campaignUrl with fr domain when locale is not defined', function () {
-        expect(urlBuilder.getCampaignUrl(undefined, campaignCode)).to.be.equal(
-          `${config.domain.pixApp + config.domain.tldFr}/campagnes/${campaignCode}`,
-        );
-      });
-
-      it('returns campaignUrl with fr domain when locale is fr-fr', function () {
-        expect(urlBuilder.getCampaignUrl('fr-fr', campaignCode)).to.be.equal(
-          `${config.domain.pixApp + config.domain.tldFr}/campagnes/${campaignCode}`,
-        );
-      });
-
-      it('returns campaignUrl with org domain when locale is fr', function () {
-        expect(urlBuilder.getCampaignUrl('fr', campaignCode)).to.be.equal(
-          `${config.domain.pixApp + config.domain.tldOrg}/campagnes/${campaignCode}/?lang=fr`,
-        );
-      });
-
-      it('returns campaignUrl with org domain when locale is en', function () {
-        expect(urlBuilder.getCampaignUrl('en', campaignCode)).to.be.equal(
-          `${config.domain.pixApp + config.domain.tldOrg}/campagnes/${campaignCode}/?lang=en`,
-        );
-      });
-
-      it('returns campaignUrl with org domain when locale is nl', function () {
-        expect(urlBuilder.getCampaignUrl('nl', campaignCode)).to.be.equal(
-          `${config.domain.pixApp + config.domain.tldOrg}/campagnes/${campaignCode}/?lang=nl`,
-        );
-      });
-    });
-  });
-
   describe('getEmailValidationUrl', function () {
     context('when locale is given', function () {
       it('returns email validation URL with domain .org', function () {
