@@ -100,10 +100,13 @@ class CampaignParticipation {
     this.status = CampaignParticipationStatuses.STARTED;
   }
 
+  detachUser() {
+    this.userId = null;
+  }
+
   anonymize() {
     this.participantExternalId = null;
-    this.userId = null;
-
+    this.detachUser();
     this.#loggerContext = CampaignParticipationLoggerContext.ANONYMIZATION;
   }
 

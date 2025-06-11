@@ -348,4 +348,16 @@ describe('Unit | Domain | Models | CampaignParticipation', function () {
       });
     });
   });
+
+  describe('#detachUser', function () {
+    it('should remove userId', function () {
+      const campaignParticipation = new CampaignParticipation({
+        userId: 666,
+      });
+
+      campaignParticipation.detachUser();
+
+      expect(campaignParticipation.userId).to.be.null;
+    });
+  });
 });

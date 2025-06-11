@@ -7,6 +7,7 @@ import { LegalDocumentType } from '../../../../../src/legal-documents/domain/mod
 import { usecases } from '../../../../../src/privacy/domain/usecases/index.js';
 import { config } from '../../../../../src/shared/config.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 const { PIX_ORGA } = LegalDocumentService.VALUES;
@@ -37,6 +38,8 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
     anonymizes certification center membership lastAccessedAt,
     and anonymizes user`, async function () {
     // given
+    await featureToggles.set('isAnonymizationWithDeletionEnabled', false);
+
     const user = databaseBuilder.factory.buildUser({
       createdAt: new Date('2012-12-12T12:12:12Z'),
       updatedAt: new Date('2023-03-23T23:23:23Z'),
@@ -159,7 +162,58 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
     const lastUserApplicationConnection = await knex('last-user-application-connections').where({ userId }).first();
     expect(lastUserApplicationConnection.lastLoggedAt.toISOString()).to.equal('2023-03-01T00:00:00.000Z');
   });
+  context('when featureFlag isAnonymizationWithDeletionEnabled is true', function () {
+    it('should anonymised learner', async function () {
+      // given
+      await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
 
+      const user = databaseBuilder.factory.buildUser({
+        createdAt: new Date('2012-12-12T12:12:12Z'),
+        updatedAt: new Date('2023-03-23T23:23:23Z'),
+      });
+      const admin = databaseBuilder.factory.buildUser.withRole();
+      const userId = user.id;
+      const anonymizedByUserId = admin.id;
+
+      databaseBuilder.factory.buildMembership({
+        userId,
+        lastAccessedAt: new Date('2023-03-23T23:23:23Z'),
+      });
+
+      const managingStudentsOrga = databaseBuilder.factory.buildOrganization({ isManagingStudents: true });
+      const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+        userId,
+        firstName: 'Jacqueline',
+        lastName: 'Colson',
+        email: 'jaquelinecolson@presque.fr',
+        organizationId: managingStudentsOrga.id,
+      });
+      const campaign = databaseBuilder.factory.buildCampaign({ organizationId: managingStudentsOrga.id });
+
+      databaseBuilder.factory.buildCampaignParticipation({
+        userId,
+        participantExternalId: 'jaquelinecolson',
+        campaignId: campaign.id,
+        organizationLearnerId: organizationLearner.id,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      await usecases.anonymizeUser({
+        userId,
+        anonymizedByUserId,
+        anonymizedByUserRole: PIX_ADMIN.ROLES.SUPER_ADMIN,
+        client: 'PIX_ADMIN',
+      });
+
+      // then
+      const organizationLearners = await knex('organization-learners').where({ userId });
+      expect(organizationLearners).to.have.lengthOf(0);
+
+      const participations = await knex('campaign-participations').where({ userId });
+      expect(participations).lengthOf(0);
+    });
+  });
   context('when anonymizedByUserId does not exist', function () {
     it('throws an error and does not anonymize the user', async function () {
       // given

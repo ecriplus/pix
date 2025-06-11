@@ -1,4 +1,5 @@
 import {
+  anonymizeByUserId,
   deleteOrganizationLearnerBeforeImportFeature,
   hasBeenLearner,
 } from '../../../../../../src/prescription/learner-management/application/api/learners-api.js';
@@ -91,6 +92,26 @@ describe('Unit | Prescription | learner management | Api | learners', function (
       // then
       expect(findOrganizationLearnersBeforeImportFeatureStub).to.have.been.calledOnce;
       expect(deleteOrganizationLearnersStub).to.have.been.calledOnce;
+    });
+  });
+
+  describe('#anonymizeByUserId', function () {
+    beforeEach(function () {
+      sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
+        return callback();
+      });
+    });
+
+    it('should call anonymizeUser usecase with correct parameters', async function () {
+      // given
+      const anonymizeUserStub = sinon.stub(usecases, 'anonymizeUser').resolves();
+      const userId = 1;
+
+      // when
+      await anonymizeByUserId({ userId });
+
+      // then
+      expect(anonymizeUserStub).to.have.been.calledOnceWith({ userId });
     });
   });
 });
