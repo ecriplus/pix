@@ -11,42 +11,14 @@ module('Integration | Component | Module | QCUDeclarative', function (hooks) {
 
   test('it should display an instruction, a complementary instruction and a list of proposals', async function (assert) {
     // given
-    const instruction = '<p>Quand faut-il mouiller sa brosse à dents&nbsp;?</p>';
-    const complementaryInstruction = 'Il n’y a pas de bonne ou de mauvaise réponse.';
-    const proposals = [
-      {
-        id: '1',
-        content: 'Avant de mettre le dentifrice',
-        feedback: {
-          state: '',
-          diagnosis: "<p>C'est l'approche de la plupart des gens.</p>",
-        },
-      },
-      {
-        id: '2',
-        content: 'Après avoir mis le dentifrice',
-        feedback: {
-          state: '',
-          diagnosis: '<p>Possible, mais attention à ne pas faire tomber le dentifrice !</p>',
-        },
-      },
-      {
-        id: '3',
-        content: 'Pendant que le dentifrice est mis',
-        feedback: {
-          state: '',
-          diagnosis: '<p>Digne des plus grands acrobates !</p>',
-        },
-      },
-    ];
-
-    const qcuDeclarativeElement = { instruction, proposals };
+    const qcuDeclarativeElement = _getQcuDeclarativeElement();
+    const { complementaryInstruction, proposals } = qcuDeclarativeElement;
 
     // when
     const screen = await render(<template><ModuleQcuDeclarative @element={{qcuDeclarativeElement}} /></template>);
 
     // then
-    assert.ok(screen.getByText('Quand faut-il mouiller sa brosse à dents ?'));
+    assert.ok(screen.getByText('De quoi le ‘oui‘ a-t-il besoin pour gagner ?'));
     assert.ok(screen.getByText(complementaryInstruction));
     assert.ok(screen.getByRole('button', { name: proposals[0].content }));
     assert.ok(screen.getByRole('button', { name: proposals[1].content }));
@@ -59,36 +31,9 @@ module('Integration | Component | Module | QCUDeclarative', function (hooks) {
       const passageEventService = this.owner.lookup('service:passageEvents');
       const passageEventRecordStub = sinon.stub(passageEventService, 'record');
 
-      const instruction = '<p>De quoi le ‘oui‘ a-t-il besoin pour gagner ?</p>';
+      const qcuDeclarativeElement = _getQcuDeclarativeElement();
+      const { proposals } = qcuDeclarativeElement;
 
-      const proposals = [
-        {
-          id: '1',
-          content: 'Du ‘oui‘',
-          feedback: {
-            state: '',
-            diagnosis: "<p>C'est l'approche de la plupart des gens.</p>",
-          },
-        },
-        {
-          id: '2',
-          content: 'Du ‘non‘',
-          feedback: {
-            state: '',
-            diagnosis: '<p>Possible, mais attention à ne pas faire une rafarinade !</p>',
-          },
-        },
-        {
-          id: '3',
-          content: 'Du ‘peut-être‘',
-          feedback: {
-            state: '',
-            diagnosis: '<p>Digne des plus grands acrobates !</p>',
-          },
-        },
-      ];
-
-      const qcuDeclarativeElement = { instruction, proposals };
 
       // when
       const screen = await render(<template><ModuleQcuDeclarative @element={{qcuDeclarativeElement}} /></template>);
@@ -112,3 +57,37 @@ module('Integration | Component | Module | QCUDeclarative', function (hooks) {
     });
   });
 });
+
+function _getQcuDeclarativeElement() {
+  const instruction = '<p>De quoi le ‘oui‘ a-t-il besoin pour gagner ?</p>';
+  const complementaryInstruction = 'Il n’y a pas de bonne ou de mauvaise réponse.';
+
+  const proposals = [
+    {
+      id: '1',
+      content: 'Du ‘oui‘',
+      feedback: {
+        state: '',
+        diagnosis: "<p>C'est l'approche de la plupart des gens.</p>",
+      },
+    },
+    {
+      id: '2',
+      content: 'Du ‘non‘',
+      feedback: {
+        state: '',
+        diagnosis: '<p>Possible, mais attention à ne pas faire une rafarinade !</p>',
+      },
+    },
+    {
+      id: '3',
+      content: 'Du ‘peut-être‘',
+      feedback: {
+        state: '',
+        diagnosis: '<p>Digne des plus grands acrobates !</p>',
+      },
+    },
+  ];
+
+  return { instruction, complementaryInstruction, proposals };
+}
