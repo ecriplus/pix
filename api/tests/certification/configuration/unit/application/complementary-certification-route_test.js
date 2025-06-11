@@ -93,7 +93,7 @@ describe('Certification | Configuration | Unit | Application | Router | compleme
         const response = await httpTestServer.request(
           'POST',
           `/api/admin/complementary-certifications/${ComplementaryCertificationKeys.PIX_PLUS_DROIT}/consolidated-framework`,
-          { data: { attributes: { tubeIds: ['challId'] } } },
+          { data: { attributes: { tubeIds: ['tubeId'] } } },
         );
 
         // then
