@@ -39,7 +39,7 @@ describe('Unit | Worker', function () {
 
       // then
       expect(jobQueueStub.register).to.have.been.calledWithExactly(
-        new Metrics({ config: { featureToggles: { isDirectMetricsEnabled: false } } }),
+        new Metrics({ config: { metrics: { isDirectMetricsEnabled: false } } }),
         UserAnonymizedEventLoggingJob.name,
         UserAnonymizedEventLoggingJobController,
       );
@@ -60,7 +60,7 @@ describe('Unit | Worker', function () {
 
       // then
       expect(jobQueueStub.register).to.have.been.calledWithExactly(
-        new Metrics({ config: { featureToggles: { isDirectMetricsEnabled: false } } }),
+        new Metrics({ config: { metrics: { isDirectMetricsEnabled: false } } }),
         'legyNameForUserAnonymizedEventLoggingJobController',
         UserAnonymizedEventLoggingJobController,
       );
@@ -81,7 +81,7 @@ describe('Unit | Worker', function () {
 
       // then
       expect(jobQueueStub.register).to.have.been.calledWithExactly(
-        new Metrics({ config: { featureToggles: { isDirectMetricsEnabled: false } } }),
+        new Metrics({ config: { metrics: { isDirectMetricsEnabled: false } } }),
         ValidateOrganizationImportFileJob.name,
         ValidateOrganizationLearnersImportFileJobController,
       );

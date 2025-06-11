@@ -298,7 +298,6 @@ const configuration = (function () {
       isAlwaysOkValidateNextChallengeEndpointEnabled: toBoolean(
         process.env.FT_ALWAYS_OK_VALIDATE_NEXT_CHALLENGE_ENDPOINT,
       ),
-      isDirectMetricsEnabled: toBoolean(process.env.FT_ENABLE_DIRECT_METRICS),
       isOppsyDisabled: toBoolean(process.env.FT_OPPSY_DISABLED),
       setupEcosystemBeforeStart: toBoolean(process.env.FT_SETUP_ECOSYSTEM_BEFORE_START) || false,
       showNewResultPage: toBoolean(process.env.FT_SHOW_NEW_RESULT_PAGE),
@@ -390,6 +389,7 @@ const configuration = (function () {
     },
     metrics: {
       flushIntervalSeconds: _getNumber(process.env.DIRECT_METRICS_FLUSH_INTERVAL, 5),
+      isDirectMetricsEnabled: toBoolean(process.env.FT_ENABLE_DIRECT_METRICS),
     },
     partner: {
       fetchTimeOut: ms(process.env.FETCH_TIMEOUT_MILLISECONDS || '20s'),
@@ -523,7 +523,7 @@ const configuration = (function () {
 
     config.featureToggles.deprecatePoleEmploiPushNotification = false;
     config.featureToggles.isAlwaysOkValidateNextChallengeEndpointEnabled = false;
-    config.featureToggles.isDirectMetricsEnabled = false;
+    config.metrics.isDirectMetricsEnabled = false;
     config.featureToggles.isOppsyDisabled = false;
     config.featureToggles.isTextToSpeechButtonEnabled = false;
     config.featureToggles.showNewResultPage = false;

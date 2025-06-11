@@ -32,7 +32,7 @@ const createMaddoServer = async () => {
 
   if (logOpsMetrics) {
     // OPS metrics via direct metrics
-    if (config.featureToggles.isDirectMetricsEnabled) await enableOpsMetrics(server, metrics);
+    if (config.metrics.isDirectMetricsEnabled) await enableOpsMetrics(server, metrics);
     // OPS metrics via Oppsy
     if (!config.featureToggles.isOppsyDisabled) await enableLegacyOpsMetrics(server);
   }
