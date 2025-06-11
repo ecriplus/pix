@@ -11,40 +11,55 @@ import setupIntlRenderingTest from '../../../../../helpers/setup-intl-rendering'
 module('Integration | Component | routes/campaigns/invited/associate-sup-student-form', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  const organizationId = 1;
   let storeStub;
   let saveStub;
   let routerObserver;
+  let setAssociationDoneStub;
 
   hooks.beforeEach(function () {
     stubSessionService(this.owner, { isAuthenticated: false });
     routerObserver = this.owner.lookup('service:router');
     routerObserver.transitionTo = sinon.stub();
     saveStub = sinon.stub();
+    setAssociationDoneStub = sinon.stub();
+
     storeStub = class StoreStub extends Service {
       createRecord = () => ({
         save: saveStub,
         unloadRecord: () => sinon.stub(),
       });
     };
+    class AccessStorageStub extends Service {
+      setAssociationDone = setAssociationDoneStub;
+    }
     this.owner.register('service:store', storeStub);
+    this.owner.register('service:access-storage', AccessStorageStub);
   });
 
   module('when user fill the form correctly', function () {
     test('should save form', async function (assert) {
       // given
-      const screen = await render(hbs`<Routes::Campaigns::Invited::AssociateSupStudentForm @campaignCode={{123}} />`);
+      this.set('organizationId', organizationId);
+      const screen = await render(
+        hbs`<Routes::Campaigns::Invited::AssociateSupStudentForm @campaignCode={{123}} @organizationId={{this.organizationId}} />`,
+      );
 
       // when
       await _fillInputsAndValidate({ screen });
 
       // then
       sinon.assert.calledWithExactly(saveStub);
+      sinon.assert.calledWithExactly(setAssociationDoneStub, organizationId, true);
       assert.ok(true);
     });
 
     test('should transition to fill-in-participant-external-id', async function (assert) {
       // given
-      const screen = await render(hbs`<Routes::Campaigns::Invited::AssociateSupStudentForm @campaignCode={{123}} />`);
+      this.set('organizationId', organizationId);
+      const screen = await render(
+        hbs`<Routes::Campaigns::Invited::AssociateSupStudentForm @campaignCode={{123}} @organizationId={{this.organizationId}} />`,
+      );
 
       // when
       await _fillInputsAndValidate({ screen });
@@ -63,7 +78,10 @@ module('Integration | Component | routes/campaigns/invited/associate-sup-student
     test('should display server error', async function (assert) {
       // given
       saveStub.rejects();
-      const screen = await render(hbs`<Routes::Campaigns::Invited::AssociateSupStudentForm @campaignCode={{123}} />`);
+      this.set('organizationId', organizationId);
+      const screen = await render(
+        hbs`<Routes::Campaigns::Invited::AssociateSupStudentForm @campaignCode={{123}} @organizationId={{this.organizationId}} />`,
+      );
 
       // when
       await _fillInputsAndValidate({ screen });
