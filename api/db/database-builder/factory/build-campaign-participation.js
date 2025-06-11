@@ -26,7 +26,9 @@ const buildCampaignParticipation = function ({
   isCertifiable = null,
 } = {}) {
   userId = _.isUndefined(userId) ? buildUser().id : userId;
-  organizationLearnerId = _.isUndefined(organizationLearnerId) ? buildOrganizationLearner().id : organizationLearnerId;
+  organizationLearnerId = _.isUndefined(organizationLearnerId)
+    ? buildOrganizationLearner({ userId }).id
+    : organizationLearnerId;
   campaignId = _.isUndefined(campaignId) ? buildCampaign().id : campaignId;
   const isShared = status === SHARED;
   sharedAt = isShared ? sharedAt : null;
