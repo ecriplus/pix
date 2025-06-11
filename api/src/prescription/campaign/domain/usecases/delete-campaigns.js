@@ -6,6 +6,8 @@ const deleteCampaigns = async ({
   organizationId,
   campaignIds,
   featureToggles,
+  assessmentRepository,
+  badgeAcquisitionRepository,
   organizationMembershipRepository,
   campaignAdministrationRepository,
   campaignParticipationRepository,
@@ -50,6 +52,14 @@ const deleteCampaigns = async ({
     await userRecommendedTrainingRepository.deleteCampaignParticipationIds({
       campaignParticipationIds,
     });
+    await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
+      campaignParticipationIds,
+    );
+    const assessments = await assessmentRepository.getByCampaignParticipationIds(campaignParticipationIds);
+    for (const assessment of assessments) {
+      assessment.detachCampaignParticipation();
+      await assessmentRepository.updateCampaignParticipationId(assessment);
+    }
   }
 
   await campaignAdministrationRepository.remove(campaignsToDelete);
