@@ -1,5 +1,18 @@
 # Pix Changelog
 
+## v5.132.0 (11/06/2025)
+
+
+### :rocket: Amélioration
+- [#12431](https://github.com/1024pix/pix/pull/12431) [FEATURE] Couper le lien entre user-recommended-training et la participation lors de la suppression de celle-ci (PIX-18049).
+
+### :building_construction: Tech
+- [#12483](https://github.com/1024pix/pix/pull/12483) [TECH] Ajouter un test d'intégration pour le usecase updateUserForAccountRecovery.
+- [#12493](https://github.com/1024pix/pix/pull/12493) [TECH] Renomme une chaine de caractère dans un test.
+- [#12494](https://github.com/1024pix/pix/pull/12494) [TECH] Corriger le test flaky sur le filter utilisateur dans PixAdmin (PIX-18163).
+- [#12445](https://github.com/1024pix/pix/pull/12445) [TECH] Eviter d'appeler le endpoint GET /api/answers?assessmentId="assessmentId" pour gérer des affichages concernant le numéro d'épreuve courant côté PixApp.
+- [#12495](https://github.com/1024pix/pix/pull/12495) [TECH] Supprimer la méthode lock du RedisClient.
+
 # [5.131.0](https://github.com/1024pix/pix/compare/v5.130.0...v5.131.0) (2025-06-11)
 
 ### :rocket: Amélioration
