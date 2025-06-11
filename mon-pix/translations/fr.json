@@ -56,9 +56,13 @@
       "gateway-timeout-error": "Le service subit des ralentissements. Veuillez réessayer ultérieurement.",
       "internal-server-error": "Une erreur interne est survenue, nos équipes sont en train de résoudre le problème. Veuillez réessayer ultérieurement.",
       "login-unauthorized-error": "L'adresse e-mail ou l'identifiant et/ou le mot de passe saisis sont incorrects.",
+      "login-unauthorized-remaining-attempts-error": "Attention : il vous reste {remainingAttempts, plural, =0 {0 tentative} =1 {1 tentative} other {# tentatives}} avant le blocage définitif de votre compte Pix.",
+      "login-unauthorized-remaining-attempts-with-user-name-error": "Attention : il vous reste {remainingAttempts, plural, =0 {0 tentative} =1 {1 tentative} other {# tentatives}} avant le blocage définitif de votre compte Pix.'<br>'En cas d’oubli, '<strong>'contactez votre enseignant'</strong>' pour réinitialiser votre mot de passe et/ou récupérer votre identifiant.",
+      "login-unauthorized-with-user-name-error": "L'identifiant et/ou le mot de passe saisis sont incorrects.'<br>'En cas d’oubli, '<strong>'contactez votre enseignant'</strong>' pour réinitialiser votre mot de passe et/ou récupérer votre identifiant.",
       "login-unexpected-error": "Impossible de se connecter. Veuillez réessayer dans quelques instants. Si le problème persiste, '<'a href=\"{supportHomeUrl}\" target=\"blank\"'>'contactez-nous via le centre d’aide'</a>'.",
       "login-user-blocked-error": "Votre compte est bloqué car vous avez effectué trop de tentatives de connexion. Pour le débloquer, '<'a href=\"{url}\"'>'contactez-nous'</a>'.",
-      "login-user-temporary-blocked-error": "Vous avez effectué trop de tentatives de connexion. Réessayez plus tard ou cliquez sur '<'a href=\"{url}\"'>'mot de passe oublié'</a>' pour le réinitialiser."
+      "login-user-temporary-blocked-error": "Vous avez effectué trop de tentatives de connexion, votre compte Pix est bloqué temporairement pendant {blockingDurationMinutes} minutes. Réessayez plus tard ou cliquez sur '<'a href=\"{url}\"'>'mot de passe oublié'</a>' pour le réinitialiser.",
+      "login-user-temporary-blocked-with-username-error": "Vous avez effectué trop de tentatives de connexion, votre compte Pix est bloqué temporairement pendant {blockingDurationMinutes} minutes.'<br>'En cas d’oubli, '<strong>'contactez votre enseignant'</strong>' pour réinitialiser votre mot de passe et/ou récupérer votre identifiant."
     },
     "cgu": {
       "cgu": "conditions d'utilisation",
@@ -232,9 +236,7 @@
           "submit": "Je m'inscris"
         },
         "errors": {
-          "invalid-locale-format": "Votre locale \"{invalidLocale}\" n'est pas dans le bon format.",
-          "invalid-or-already-used-email": "Adresse e-mail invalide ou déjà utilisée",
-          "locale-not-supported": "Votre locale \"{localeNotSupported}\" n'est actuellement pas supportée."
+          "invalid-or-already-used-email": "Adresse e-mail invalide ou déjà utilisée"
         },
         "fields": {
           "email": {
@@ -1501,7 +1503,6 @@
       "invitation": "{ organizationName } vous invite à rejoindre Pix",
       "login-form": {
         "button": "Se connecter",
-        "error": "L'adresse e-mail ou l'identifiant et/ou le mot de passe saisis sont incorrects",
         "fields": {
           "login": {
             "label": "Adresse e-mail ou identifiant"

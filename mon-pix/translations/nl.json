@@ -56,9 +56,13 @@
       "gateway-timeout-error": "De service ondervindt vertragingen. Probeer het later nog eens.",
       "internal-server-error": "Er is een interne fout opgetreden. Onze teams zijn bezig het probleem op te lossen. Probeer het later nog eens.",
       "login-unauthorized-error": "Het e-mailadres of de ingevoerde gebruikersnaam en/of wachtwoord zijn onjuist.",
+      "login-unauthorized-remaining-attempts-error": "Waarschuwing: je hebt {remainingAttempts, plural, =0 {0 poging} =1 {1 poging} other {# pogingen}} over voordat je Pix account permanent geblokkeerd wordt.",
+      "login-unauthorized-remaining-attempts-with-user-name-error": "Waarschuwing: je hebt {remainingAttempts, plural, =0 {0 poging} =1 {1 poging} other {# pogingen}}over voordat je Pix account permanent geblokkeerd wordt.'<br>'Als je je wachtwoord bent vergeten, '<strong>'neem contact op met je docent'</strong>' om je wachtwoord opnieuw in te stellen en/of je aanmelding te herstellen.",
+      "login-unauthorized-with-user-name-error": "Het e-mailadres of de ingevoerde gebruikersnaam en/of wachtwoord zijn onjuist.'<br>'Als je je wachtwoord bent vergeten, '<strong>'neem contact op met je docent'</strong>' om je wachtwoord opnieuw in te stellen en/of je aanmelding te herstellen.",
       "login-unexpected-error": "Kan geen verbinding maken. Probeer het over enkele ogenblikken opnieuw. Als het probleem zich blijft voordoen, '<'a href=\"{supportHomeUrl}\" target=\"blank\"'>'neem dan contact met ons op'</a>'.",
       "login-user-blocked-error": "Je account is geblokkeerd omdat je te veel verbindingspogingen hebt gedaan. U kunt de blokkering opheffen door '<'a href=\"{url}\"'>'contact us'</a>'.",
-      "login-user-temporary-blocked-error": "Je hebt te veel inlogpogingen gedaan. Probeer het later nog eens of klik op '<'a href=\"{url}\"'>'wachtwoord vergeten'</a>' om het opnieuw in te stellen."
+      "login-user-temporary-blocked-error": "Je hebt te veel inlogpogingen gedaan, je Pix-account is tijdelijk geblokkeerd voor {blockingDurationMinutes} minuten. Probeer het later nog eens of klik op '<'a href=\"{url}\"'>'wachtwoord vergeten'</a>' om het opnieuw in te stellen.",
+      "login-user-temporary-blocked-with-username-error": "Je hebt te veel inlogpogingen gedaan, je Pix-account is tijdelijk geblokkeerd voor {blockingDurationMinutes} minuten.'<br>'Als je je wachtwoord bent vergeten, '<strong>'neem contact op met je docent'</strong>' om je wachtwoord opnieuw in te stellen en/of je aanmelding te herstellen."
     },
     "cgu": {
       "cgu": "gebruiksvoorwaarden",
@@ -232,9 +236,7 @@
           "submit": "Registreren"
         },
         "errors": {
-          "invalid-locale-format": "Uw locale \"{invalidLocale}\" heeft de verkeerde indeling.",
-          "invalid-or-already-used-email": "Ongeldig of al gebruikt e-mailadres",
-          "locale-not-supported": "Uw \"{localeNotSupported}\" locale wordt momenteel niet ondersteund."
+          "invalid-or-already-used-email": "Ongeldig of al gebruikt e-mailadres"
         },
         "fields": {
           "email": {
@@ -368,7 +370,7 @@
     }
   },
   "pages": {
-    "attestations" : {
+    "attestations": {
       "title": "Mijn getuigschriften",
       "subtitle": "Krijg toegang tot al je Pix-certificaten en download ze."
     },
@@ -493,9 +495,9 @@
           "login-button": "Inloggen",
           "new-connection-info": "Maak je geen zorgen, het enige wat je hoeft te doen om weer in te loggen is je e-mailadres en het wachtwoord te gebruiken dat je hier hebt ingesteld.",
           "password-label": "Wachtwoord",
-          "sco-connections":{
+          "sco-connections": {
             "gar": "het Mediacenter",
-            "username":  "je Pix-school-ID"
+            "username": "je Pix-school-ID"
           }
         },
         "welcome-message": "Welkom terug { firstName }!"
@@ -905,7 +907,7 @@
       "no-certification": {
         "text": "Je hebt nog geen Pix-certificering"
       },
-      "buttons" : {
+      "buttons": {
         "details": "Zie details",
         "download-certificate": "Het certificaat downloaden",
         "download-attestation": "Het certificaat downloaden"
@@ -1526,7 +1528,6 @@
       "invitation": "{ organizationName } nodigt je uit om je aan te sluiten bij Pix",
       "login-form": {
         "button": "Inloggen",
-        "error": "Het e-mailadres of de ingevoerde gebruikersnaam en/of wachtwoord zijn onjuist",
         "fields": {
           "login": {
             "label": "E-mailadres of gebruikersnaam"

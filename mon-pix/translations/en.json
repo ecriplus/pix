@@ -56,9 +56,13 @@
       "gateway-timeout-error": "The service is being slow. Please try again later.",
       "internal-server-error": "An error occurred, our teams are working on finding a solution. Please try again later.",
       "login-unauthorized-error": "There was an error in the email address or username/password entered.",
+      "login-unauthorized-remaining-attempts-error": "Warning: you have {remainingAttempts, plural, =0 {0 attempts} =1 {1 attempt} other {# attempts}} left before your Pix account is permanently blocked.",
+      "login-unauthorized-remaining-attempts-with-user-name-error": "Warning: you have {remainingAttempts, plural, =0 {0 attempts} =1 {1 attempt} other {# attempts}} left before your Pix account is permanently blocked.'<br>'If you forget your password, '<strong>'contact your teacher'</strong>' to reset your password and/or recover your login.",
+      "login-unauthorized-with-user-name-error": "There was an error in the email address or username/password entered.'<br>'If you forget your password, '<strong>'contact your teacher'</strong>' to reset your password and/or recover your login.",
       "login-unexpected-error": "Unable to connect. Please try again in a few moments. If the problem persists, '<'a href=\"{supportHomeUrl}\" target=\"blank\"'>'please contact us via the help center'</a>'.",
-      "login-user-blocked-error": "Your account has reached the maximum number of failed login attempts and has been temporarily blocked. Please '<'a href=\"{url}\"'>'contact us'</a>' to unblock it.",
-      "login-user-temporary-blocked-error": "You have reached too many failed login attempts. Please try again later or '<'a href=\"{url}\"'>'reset your password here'</a>'."
+      "login-user-blocked-error": "Your account has reached the maximum number of failed login attempts and has been blocked. Please '<'a href=\"{url}\"'>'contact us'</a>' to unblock it.",
+      "login-user-temporary-blocked-error": "You have made too many login attempts, your Pix account is temporarily blocked for {blockingDurationMinutes} minutes. Try again later or click on '<'a href=\"{url}\"'>'forgotten password'</a>' to reset it.",
+      "login-user-temporary-blocked-with-username-error": "You have made too many login attempts, your Pix account is temporarily blocked for {blockingDurationMinutes} minutes.'<br>'If you forget your password, '<strong>'contact your teacher'</strong>' to reset your password and/or recover your login."
     },
     "cgu": {
       "cgu": "Pix terms of use",
@@ -232,9 +236,7 @@
           "submit": "Sign up"
         },
         "errors": {
-          "invalid-locale-format": "Provided locale \"{invalidLocale}\" has an invalid format.",
-          "invalid-or-already-used-email": "Invalid or already used e-mail address",
-          "locale-not-supported": "Provided locale \"{localeNotSupported}\" isn't currently supported."
+          "invalid-or-already-used-email": "Invalid or already used e-mail address"
         },
         "fields": {
           "email": {
@@ -1501,7 +1503,6 @@
       "invitation": "{ organizationName }",
       "login-form": {
         "button": "Log in",
-        "error": "There was an error in the email address or username/password entered.",
         "fields": {
           "login": {
             "label": "Email address or username"
