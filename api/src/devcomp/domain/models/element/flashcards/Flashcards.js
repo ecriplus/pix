@@ -9,6 +9,7 @@ class Flashcards extends Element {
     this.instruction = instruction;
     this.setIntroImage(introImage);
     this.cards = cards.map(({ id, recto, verso }) => new Card({ id, recto, verso }));
+    this.isAnswerable = true;
   }
 
   setIntroImage(introImage) {

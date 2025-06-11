@@ -8,6 +8,7 @@ function validateFlashcards(flashcards, expectedFlashcards) {
   expect(flashcards.title).to.equal(expectedFlashcards.title);
   expect(flashcards.instruction).to.equal(expectedFlashcards.instruction);
   expect(flashcards.introImage.url).to.equal(expectedFlashcards.introImage.url);
+  expect(flashcards.isAnswerable).to.equal(true);
   validateCard(flashcards.cards[0], expectedFlashcards.cards[0]);
 }
 
