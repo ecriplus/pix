@@ -329,6 +329,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
           title: "Introduction à l'adresse e-mail",
           instruction: '<p>...</p>',
           introImage: { url: 'https://images.pix.fr/modulix/placeholder-details.svg' },
+          isAnswerable: true,
           cards: [
             {
               id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
