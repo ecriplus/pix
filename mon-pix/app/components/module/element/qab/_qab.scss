@@ -11,8 +11,10 @@
   }
 
   &__cards {
-    display: flex;
+    display: grid;
+    grid-template-areas: 'center';
     justify-content: center;
+    margin-bottom: var(--pix-spacing-12x);
   }
 
   &__proposals {
@@ -23,6 +25,10 @@
     max-width: 240px;
     margin: auto;
   }
+}
+
+.element-qab-cards {
+  margin-bottom: var(--pix-spacing-6x);
 }
 
 @include breakpoints.device-is('tablet') {

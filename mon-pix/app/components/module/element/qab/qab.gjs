@@ -7,7 +7,9 @@ import QabScoreCard from 'mon-pix/components/module/element/qab/qab-score-card';
 import { htmlUnsafe } from '../../../../helpers/html-unsafe';
 import ModuleElement from '../module-element';
 
-export const NEXT_CARD_DELAY = 2000;
+const NEXT_CARD_REMOVE_DELAY = 400;
+const NEXT_CARD_TRANSITION_DELAY = 1600;
+export const NEXT_CARD_DELAY = NEXT_CARD_TRANSITION_DELAY + NEXT_CARD_REMOVE_DELAY;
 
 export default class ModuleQab extends ModuleElement {
   @tracked selectedOption = null;
@@ -15,13 +17,21 @@ export default class ModuleQab extends ModuleElement {
   @tracked currentCardStatus = '';
   @tracked currentCardIndex = 0;
   @tracked score = 0;
+  @tracked displayedCards = [];
+  @tracked cardStatuses = new Map();
+  @tracked removedCards = new Map();
+
+  constructor() {
+    super(...arguments);
+    this.displayedCards = this.element.cards;
+  }
 
   get numberOfCards() {
     return this.element.cards.length;
   }
 
   get currentCard() {
-    return this.element.cards[this.currentCardIndex];
+    return this.displayedCards[0];
   }
 
   @action
@@ -40,13 +50,18 @@ export default class ModuleQab extends ModuleElement {
 
   @action
   goToNextCard() {
-    this.currentCardIndex = this.currentCardIndex + 1;
-    this.currentCardStatus = '';
-    this.selectedOption = null;
+    this.removedCards.set(this.currentCard.id, true);
+    this.removedCards = new Map(this.removedCards);
 
-    if (this.currentCardIndex >= this.numberOfCards) {
-      this.currentStep = 'score';
-    }
+    window.setTimeout(() => {
+      this.displayedCards = this.displayedCards.slice(1);
+      this.currentCardStatus = '';
+      this.selectedOption = null;
+
+      if (this.displayedCards.length === 0) {
+        this.currentStep = 'score';
+      }
+    }, NEXT_CARD_REMOVE_DELAY);
   }
 
   @action
@@ -58,13 +73,19 @@ export default class ModuleQab extends ModuleElement {
       this.score++;
       this.currentCardStatus = 'success';
     }
-    window.setTimeout(() => this.goToNextCard(), NEXT_CARD_DELAY);
+
+    this.cardStatuses.set(this.currentCard.id, this.currentCardStatus);
+    this.cardStatuses = new Map(this.cardStatuses);
+
+    window.setTimeout(() => this.goToNextCard(), NEXT_CARD_TRANSITION_DELAY);
   }
 
   @action
   onRetry() {
     this.currentStep = 'cards';
-    this.currentCardIndex = 0;
+    this.removedCards = new Map();
+    this.cardStatuses = new Map();
+    this.displayedCards = this.element.cards;
     this.score = 0;
   }
 
@@ -76,6 +97,16 @@ export default class ModuleQab extends ModuleElement {
     return this.currentStep === 'score';
   }
 
+  @action
+  getCardStatus(card) {
+    return this.cardStatuses.get(card.id) || '';
+  }
+
+  @action
+  isCardRemoved(card) {
+    return this.removedCards.get(card.id) || false;
+  }
+
   <template>
     <form onSubmit={{this.onSubmit}} class="element-qab" aria-describedby="instruction-{{this.element.id}}">
       <fieldset class="element-qab__container">
@@ -84,7 +115,9 @@ export default class ModuleQab extends ModuleElement {
         </div>
         <div class="element-qab__cards">
           {{#if this.shouldDisplayCards}}
-            <QabCard @card={{this.currentCard}} @status={{this.currentCardStatus}} />
+            {{#each this.displayedCards as |card|}}
+              <QabCard @card={{card}} @isRemoved={{this.isCardRemoved card}} @status={{this.getCardStatus card}} />
+            {{/each}}
           {{/if}}
           {{#if this.shouldDisplayScore}}
             <QabScoreCard @score={{this.score}} @total={{this.numberOfCards}} @onRetry={{this.onRetry}} />

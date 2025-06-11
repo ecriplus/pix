@@ -43,10 +43,35 @@
                 "solution": "B"
               },
               {
-                "id": "57056894-8e1b-4da9-96b6-0bd4187412b8",
+                "id": "04bab312-160d-41b1-a5c9-017d563aef3a",
                 "text": "Quel est l'organe qui rougit ?",
                 "proposalA": "L'estomac",
                 "proposalB": "Le coeur",
+                "solution": "A"
+              },
+              {
+                "id": "1d1c33e3-e27d-4161-bfcc-529ea1aa573f",
+                "image": {
+                  "url": "https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg",
+                  "altText": ""
+                },
+                "text": "Les dauphins sont des poissons.",
+                "proposalA": "Vrai",
+                "proposalB": "Faux",
+                "solution": "B"
+              },
+              {
+                "id": "4420c9f6-ae21-4401-a16c-41296d898a66",
+                "text": "La Terre est plus proche du Soleil que Mars.",
+                "proposalA": "Vrai",
+                "proposalB": "Faux",
+                "solution": "B"
+              },
+              {
+                "id": "52d99648-5904-4a66-9fb8-476ba4da9465",
+                "text": "L’eau bout à 100°C au niveau de la mer.",
+                "proposalA": "Vrai",
+                "proposalB": "Faux",
                 "solution": "A"
               }
             ]
