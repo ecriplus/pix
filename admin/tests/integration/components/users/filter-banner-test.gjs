@@ -188,9 +188,10 @@ module('Integration | Component | users | filter-banner', function (hooks) {
 
       await screen.findByRole('listbox');
 
-      await click(screen.getByRole('option', { name: t('pages.users-list.query.contains') }));
-
-      await waitForElementToBeRemoved(() => screen.queryByRole('listbox'));
+      await Promise.all([
+        waitForElementToBeRemoved(() => screen.queryByRole('listbox')),
+        click(screen.getByRole('option', { name: t('pages.users-list.query.contains') })),
+      ]);
 
       // then
       assert.ok(onChangeQueryType.calledOnce);
