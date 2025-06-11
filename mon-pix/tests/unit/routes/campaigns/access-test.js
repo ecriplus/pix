@@ -19,10 +19,13 @@ module('Unit | Route | Access', function (hooks) {
     route = this.owner.lookup('route:campaigns.access');
     route.modelFor = sinon.stub().returns(campaign);
     route.campaignStorage = { get: sinon.stub() };
+    route.accessStorage = { hasUserSeenJoinPage: sinon.stub() };
     route.router = { replaceWith: sinon.stub(), transitionTo: sinon.stub() };
+
     class OidcIdentityProvidersStub extends Service {
       list = [];
     }
+
     this.owner.register('service:oidcIdentityProviders', OidcIdentityProvidersStub);
   });
 
@@ -158,7 +161,7 @@ module('Unit | Route | Access', function (hooks) {
         route.session = sessionStub;
         campaign.isRestricted = true;
         campaign.organizationType = 'SCO';
-        route.campaignStorage.get.withArgs(campaign.code, 'hasUserSeenJoinPage').returns(true);
+        route.accessStorage.hasUserSeenJoinPage.withArgs(campaign.organizationId).returns(true);
 
         // when
         await route.beforeModel({ from: 'campaigns.campaign-landing-page' });

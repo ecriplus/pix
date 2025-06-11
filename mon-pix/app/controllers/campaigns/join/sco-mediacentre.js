@@ -6,6 +6,8 @@ export default class ScoMediacentreController extends Controller {
   @service session;
   @service currentUser;
   @service campaignStorage;
+  @service accessStorage;
+  @service router;
 
   @action
   async createAndReconcile(externalUser) {
@@ -17,5 +19,13 @@ export default class ScoMediacentreController extends Controller {
     await this.currentUser.load();
 
     this.campaignStorage.set(this.model.code, 'associationDone', true);
+  }
+
+  @action
+  async goToConnectionPage() {
+    this.session.set('skipRedirectAfterSessionInvalidation', true);
+    await this.session.invalidate();
+    this.accessStorage.setHasUserSeenJoinPage(this.model.organizationId, true);
+    this.router.replaceWith('campaigns.access', this.model.code);
   }
 }

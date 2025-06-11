@@ -22,6 +22,7 @@ module('Unit | Route | Entry Point', function (hooks) {
     route.router = { replaceWith: sinon.stub() };
     route.modelFor = sinon.stub();
     route.campaignStorage = { set: sinon.stub(), clear: sinon.stub() };
+    route.accessStorage = { clear: sinon.stub() };
     route.session = { isAuthenticated: false, invalidate: sinon.stub() };
     route.currentUser = { user: {} };
   });
@@ -75,12 +76,13 @@ module('Unit | Route | Entry Point', function (hooks) {
       transition = { to: { queryParams: {} } };
     });
 
-    test('should erase campaign storage', async function (assert) {
+    test('should erase campaign and access storage', async function (assert) {
       //given/when
-      await route.afterModel({ code: 'CODE' }, transition);
+      await route.afterModel({ code: 'CODE', organizationId: 1 }, transition);
 
       //then
       sinon.assert.calledWith(route.campaignStorage.clear, 'CODE');
+      sinon.assert.calledWith(route.accessStorage.clear, 1);
       assert.ok(true);
     });
 

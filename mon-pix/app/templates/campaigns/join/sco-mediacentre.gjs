@@ -14,7 +14,7 @@ import AssociateScoStudentWithMediacentreForm from 'mon-pix/components/routes/ca
         <AssociateScoStudentWithMediacentreForm
           @organizationName={{@model.organizationName}}
           @organizationId={{@model.organizationId}}
-          @campaignCode={{@model.code}}
+          @goToConnectionPage={{@controller.goToConnectionPage}}
           @onSubmit={{@controller.createAndReconcile}}
         />
       </div>

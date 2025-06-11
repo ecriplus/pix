@@ -64,7 +64,7 @@ export default class JoinScoInformationModal extends Component {
               {{t "common.actions.quit"}}
             </PixButton>
             {{#if this.displayContinueButton}}
-              <PixButton @triggerAction={{this.goToCampaignConnectionForm}}>
+              <PixButton @triggerAction={{@goToConnectionPage}}>
                 {{t "pages.join.sco.continue-with-pix"}}
               </PixButton>
             {{/if}}
@@ -113,13 +113,5 @@ export default class JoinScoInformationModal extends Component {
   async goToHome() {
     await this.session.invalidate();
     return window.location.replace(this.url.homeUrl);
-  }
-
-  @action
-  async goToCampaignConnectionForm() {
-    this.session.set('skipRedirectAfterSessionInvalidation', true);
-    await this.session.invalidate();
-    this.campaignStorage.set(this.args.campaignCode, 'hasUserSeenJoinPage', true);
-    this.router.replaceWith('campaigns.access', this.args.campaignCode);
   }
 }

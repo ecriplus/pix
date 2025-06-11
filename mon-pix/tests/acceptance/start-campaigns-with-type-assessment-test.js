@@ -41,6 +41,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
             campaign = server.create('campaign', {
               externalIdLabel: 'email',
               externaIdType: 'EMAIL',
+              organizationId: 1,
               type: ASSESSMENT,
             });
             const screen = await startCampaignByCode(campaign.code);
@@ -72,7 +73,12 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
           module('When campaign is not restricted', function () {
             test('should redirect to assessment', async function (assert) {
               // given
-              campaign = server.create('campaign', { isRestricted: false, externalIdLabel: 'toto', type: ASSESSMENT });
+              campaign = server.create('campaign', {
+                isRestricted: false,
+                externalIdLabel: 'toto',
+                type: ASSESSMENT,
+                organizationId: 1,
+              });
               const screen = await startCampaignByCodeAndExternalId(campaign.code);
               await _fillInputsToCreateUserPixAccount({ prescritUser, screen, t });
 
@@ -85,6 +91,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
             test('should redirect to assessment', async function (assert) {
               // given
               campaign = server.create('campaign', 'restricted', {
+                organizationId: 1,
                 externalIdLabel: 'toto',
                 organizationType: 'SCO',
                 type: ASSESSMENT,
@@ -123,7 +130,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
       module('When campaign does not have external id', function () {
         test('should redirect to assessment after signup', async function (assert) {
           // given & when
-          campaign = server.create('campaign', { externalIdLabel: null, type: ASSESSMENT });
+          campaign = server.create('campaign', { externalIdLabel: null, type: ASSESSMENT, organizationId: 1 });
           const screen = await startCampaignByCode(campaign.code);
           await _fillInputsToCreateUserPixAccount({ prescritUser, screen, t });
 
@@ -135,7 +142,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
       module('When campaign does not have external id but a participant external id is set in the url', function () {
         test('should redirect to assessment after signup', async function (assert) {
           // given & when
-          campaign = server.create('campaign', { type: ASSESSMENT });
+          campaign = server.create('campaign', { type: ASSESSMENT, organizationId: 1 });
           const screen = await startCampaignByCodeAndExternalId(campaign.code);
           await _fillInputsToCreateUserPixAccount({ prescritUser, screen, t });
 
@@ -147,7 +154,12 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
       module('When campaign does not require external id and is for absolute novice', function () {
         test('should redirect to signup page when starting a campaign', async function (assert) {
           // given & when
-          campaign = server.create('campaign', { externalIdLabel: null, type: ASSESSMENT, isForAbsoluteNovice: true });
+          campaign = server.create('campaign', {
+            externalIdLabel: null,
+            type: ASSESSMENT,
+            isForAbsoluteNovice: true,
+            organizationId: 1,
+          });
           await visit(`/campagnes/${campaign.code}`);
 
           // then
@@ -164,7 +176,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
       module('When campaign is not restricted', function () {
         test('should redirect to landing page', async function (assert) {
           // when
-          campaign = server.create('campaign', { type: ASSESSMENT });
+          campaign = server.create('campaign', { type: ASSESSMENT, organizationId: 1 });
           const screen = await visit(`/campagnes/${campaign.code}`);
 
           // then
@@ -182,6 +194,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
               externalIdLabel: 'nom de naissance de maman',
               type: ASSESSMENT,
               organizationType: 'SCO',
+              organizationId: 1,
             });
             const screen = await visit(`/campagnes/${campaign.code}`);
             await click(screen.getByRole('button', { name: 'Je commence' }));
@@ -207,7 +220,11 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
         module('When participant external id is not set in the url', function () {
           test('should go to the tutorial when the user fill in his id', async function (assert) {
             // given
-            campaign = server.create('campaign', { externalIdLabel: 'nom de naissance de maman', type: ASSESSMENT });
+            campaign = server.create('campaign', {
+              externalIdLabel: 'nom de naissance de maman',
+              type: ASSESSMENT,
+              organizationId: 1,
+            });
             const screen = await startCampaignByCode(campaign.code);
 
             // when
@@ -220,7 +237,11 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
 
           test('should start the assessment when the user has seen tutorial', async function (assert) {
             // given
-            campaign = server.create('campaign', { externalIdLabel: 'nom de naissance de maman', type: ASSESSMENT });
+            campaign = server.create('campaign', {
+              externalIdLabel: 'nom de naissance de maman',
+              type: ASSESSMENT,
+              organizationId: 1,
+            });
             const screen = await startCampaignByCode(campaign.code);
 
             // when
@@ -238,7 +259,12 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
             // given & when
             const externalId256Characters =
               '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef';
-            campaign = server.create('campaign', { isRestricted: false, externalIdLabel: 'toto', type: ASSESSMENT });
+            campaign = server.create('campaign', {
+              isRestricted: false,
+              externalIdLabel: 'toto',
+              type: ASSESSMENT,
+              organizationId: 1,
+            });
             await startCampaignByCodeAndExternalId(campaign.code, externalId256Characters);
 
             // then
@@ -249,7 +275,11 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
         module('When participant external id is set in the url', function () {
           test('should redirect to assessment', async function (assert) {
             // given
-            campaign = server.create('campaign', { externalIdLabel: 'nom de naissance de maman', type: ASSESSMENT });
+            campaign = server.create('campaign', {
+              externalIdLabel: 'nom de naissance de maman',
+              type: ASSESSMENT,
+              organizationId: 1,
+            });
 
             // when
             await startCampaignByCodeAndExternalId(campaign.code);
@@ -260,7 +290,11 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
 
           test('should start the assessment when the user has seen tutorial', async function (assert) {
             // given
-            campaign = server.create('campaign', { externalIdLabel: 'nom de naissance de maman', type: ASSESSMENT });
+            campaign = server.create('campaign', {
+              externalIdLabel: 'nom de naissance de maman',
+              type: ASSESSMENT,
+              organizationId: 1,
+            });
             const screen = await startCampaignByCodeAndExternalId(campaign.code);
 
             // when
@@ -275,7 +309,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
       module('When campaign does not have external id', function () {
         test('should redirect to tutorial after clicking on start button in landing page', async function (assert) {
           // given
-          campaign = server.create('campaign', { externalIdLabel: null, type: ASSESSMENT });
+          campaign = server.create('campaign', { externalIdLabel: null, type: ASSESSMENT, organizationId: 1 });
           const screen = await visit(`campagnes/${campaign.code}`);
 
           // when
@@ -289,7 +323,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
       module('When campaign does not have external id but a participant external id is set in the url', function () {
         test('should redirect to tutorial after clicking on start button in landing page', async function (assert) {
           // given
-          campaign = server.create('campaign', { externalIdLabel: null, type: ASSESSMENT });
+          campaign = server.create('campaign', { externalIdLabel: null, type: ASSESSMENT, organizationId: 1 });
           const screen = await visit(`/campagnes/${campaign.code}?participantExternalId=a73at01r3`);
 
           // when
@@ -303,7 +337,12 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
       module('When campaign does not have external id and is for absolute novice', function () {
         test('should redirect to assessment when starting a campaign', async function (assert) {
           // given & when
-          campaign = server.create('campaign', { externalIdLabel: null, type: ASSESSMENT, isForAbsoluteNovice: true });
+          campaign = server.create('campaign', {
+            externalIdLabel: null,
+            type: ASSESSMENT,
+            isForAbsoluteNovice: true,
+            organizationId: 1,
+          });
           await visit(`campagnes/${campaign.code}`);
 
           // then
@@ -316,7 +355,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
         module('when the campaign allows multiple participations', function () {
           test('should redirect to assessment when retrying the campaign', async function (assert) {
             // given
-            campaign = server.create('campaign', { type: ASSESSMENT, multipleSendings: true });
+            campaign = server.create('campaign', { type: ASSESSMENT, multipleSendings: true, organizationId: 1 });
             const assessment = server.create('assessment', {
               type: 'CAMPAIGN',
               state: 'completed',
@@ -343,7 +382,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
         module('when the campaign does not allow multiple participations', function () {
           test('should redirect to assessment results when retrying the campaign', async function (assert) {
             // given
-            campaign = server.create('campaign', { type: ASSESSMENT, multipleSendings: false });
+            campaign = server.create('campaign', { type: ASSESSMENT, multipleSendings: false, organizationId: 1 });
             const assessment = server.create('assessment', {
               type: 'CAMPAIGN',
               state: 'completed',

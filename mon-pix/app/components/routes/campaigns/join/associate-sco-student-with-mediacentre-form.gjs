@@ -9,7 +9,6 @@ import { decodeToken } from 'mon-pix/helpers/jwt';
 export default class AssociateScoStudentWithMediacentreForm extends Component {
   <template>
     <ScoForm
-      @campaignCode={{@campaignCode}}
       @organizationName={{@organizationName}}
       @areNamesDisabled={{true}}
       @firstName={{this.firstName}}
@@ -20,7 +19,7 @@ export default class AssociateScoStudentWithMediacentreForm extends Component {
 
     {{#if this.displayInformationModal}}
       <JoinScoInformationModal
-        @campaignCode={{@campaignCode}}
+        @goToConnectionPage={{@goToConnectionPage}}
         @reconciliationError={{this.reconciliationError}}
         @reconciliationWarning={{this.reconciliationWarning}}
         @closeModal={{this.closeModal}}

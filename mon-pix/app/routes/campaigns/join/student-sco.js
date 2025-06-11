@@ -3,6 +3,7 @@ import { service } from '@ember/service';
 
 export default class StudentScoRoute extends Route {
   @service campaignStorage;
+  @service accessStorage;
   @service session;
   @service router;
 
@@ -20,6 +21,6 @@ export default class StudentScoRoute extends Route {
   }
 
   setupController(controller, model) {
-    controller.displayRegisterForm = !this.campaignStorage.get(model.campaign.code, 'hasUserSeenJoinPage');
+    controller.displayRegisterForm = !this.accessStorage.hasUserSeenJoinPage(model.campaign.organizationId);
   }
 }

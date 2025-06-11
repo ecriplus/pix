@@ -246,7 +246,6 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               };
               return new Response(200, {}, studentFoundWithUsernameGenerated);
             });
-
             this.server.post('sco-organization-learners/dependent', () => {
               const emailAlreadyExistResponse = {
                 errors: [
@@ -275,7 +274,6 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
             //go to email-based authentication window
             await click(screen.getByText('Mon adresse e-mail'));
-
             await fillIn(screen.getByLabelText('Adresse e-mail', { exact: false }), prescritUser.email);
             await fillIn(screen.getByLabelText('Mot de passe', { exact: false }), 'pix123');
 
