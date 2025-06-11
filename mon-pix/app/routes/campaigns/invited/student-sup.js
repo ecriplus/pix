@@ -3,7 +3,7 @@ import { service } from '@ember/service';
 
 export default class StudentSupRoute extends Route {
   @service currentUser;
-  @service campaignStorage;
+  @service accessStorage;
   @service store;
   @service session;
   @service router;
@@ -23,7 +23,7 @@ export default class StudentSupRoute extends Route {
     });
 
     if (organizationLearner) {
-      this.campaignStorage.set(campaign.code, 'associationDone', true);
+      this.accessStorage.setAssociationDone(campaign.organizationId, true);
       this.router.replaceWith('campaigns.invited.fill-in-participant-external-id', campaign.code);
     }
   }

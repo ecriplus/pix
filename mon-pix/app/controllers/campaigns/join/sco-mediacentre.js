@@ -5,7 +5,6 @@ import { service } from '@ember/service';
 export default class ScoMediacentreController extends Controller {
   @service session;
   @service currentUser;
-  @service campaignStorage;
   @service accessStorage;
   @service router;
 
@@ -18,7 +17,7 @@ export default class ScoMediacentreController extends Controller {
     await this.session.authenticate('authenticator:oauth2', { token: response.accessToken });
     await this.currentUser.load();
 
-    this.campaignStorage.set(this.model.code, 'associationDone', true);
+    this.accessStorage.setAssociationDone(this.model.organizationId, true);
   }
 
   @action

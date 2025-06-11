@@ -6,11 +6,13 @@ module('Unit | Controller | campaigns/invited/student-sco', function (hooks) {
   setupTest(hooks);
 
   let controller;
+  const organizationId = 1;
 
   hooks.beforeEach(function () {
     controller = this.owner.lookup('controller:campaigns.invited.student-sco');
+    controller.accessStorage = { setAssociationDone: sinon.stub() };
     controller.router = { transitionTo: sinon.stub() };
-    controller.set('model', { code: 'AZERTY999' });
+    controller.set('model', { code: 'AZERTY999', organizationId });
   });
 
   module('#reconcile', function (hooks) {
@@ -47,6 +49,7 @@ module('Unit | Controller | campaigns/invited/student-sco', function (hooks) {
 
         // then
         sinon.assert.calledOnce(scoOrganizationLearner.save);
+        sinon.assert.calledWithExactly(controller.accessStorage.setAssociationDone, organizationId, true);
         sinon.assert.calledWith(
           controller.router.transitionTo,
           'campaigns.invited.fill-in-participant-external-id',

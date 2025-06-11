@@ -3,7 +3,6 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 
 export default class StudentScoController extends Controller {
-  @service campaignStorage;
   @service router;
   @service accessStorage;
   @service session;
@@ -17,7 +16,7 @@ export default class StudentScoController extends Controller {
       return;
     }
 
-    this.campaignStorage.set(this.model.code, 'associationDone', true);
+    this.accessStorage.setAssociationDone(this.model.organizationId, true);
     this.router.transitionTo('campaigns.invited.fill-in-participant-external-id', this.model.code);
     return;
   }
