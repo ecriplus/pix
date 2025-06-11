@@ -77,7 +77,6 @@
     "pino": "^9.0.0",
     "pino-pretty": "^13.0.0",
     "randomstring": "^1.2.2",
-    "redlock": "^4.2.0",
     "samlify": "^2.8.5",
     "sax": "^1.2.4",
     "saxpath": "^0.6.5",
