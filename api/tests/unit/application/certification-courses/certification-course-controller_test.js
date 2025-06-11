@@ -91,7 +91,7 @@ describe('Unit | Controller | certification-course-controller', function () {
         .resolves(certificationCourse);
       certificationCourseSerializer.serialize.withArgs(certificationCourse).resolves(certificationCourse);
       const request = {
-        params: { id: certificationCourseId },
+        params: { certificationCourseId },
         headers: generateAuthenticatedUserRequestHeaders({ userId }),
         auth: { credentials: { userId } },
       };

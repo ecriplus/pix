@@ -688,7 +688,7 @@ async function checkUserOwnsCertificationCourse(
   }
 
   const userId = request.auth.credentials.userId;
-  const certificationCourseId = request.params.id;
+  const certificationCourseId = request.params.certificationCourseId;
 
   try {
     const ownsCertificationCourse = await dependencies.checkUserOwnsCertificationCourseUseCase.execute({

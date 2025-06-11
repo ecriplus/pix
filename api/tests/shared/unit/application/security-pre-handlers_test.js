@@ -1873,15 +1873,16 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
     context('Successful case', function () {
       it('should authorize access to resource when the user owns the certification course', async function () {
         // given
+        const preHandlerStub = sinon.stub();
         const checkUserOwnsCertificationCourseUseCaseStub = {
-          execute: sinon.stub().resolves(true),
+          execute: preHandlerStub.resolves(true),
         };
 
         // when
         const response = await securityPreHandlers.checkUserOwnsCertificationCourse(
           {
             auth: { credentials: { accessToken: 'valid.access.token', userId: 123 } },
-            params: { id: 7 },
+            params: { certificationCourseId: 7 },
           },
           hFake,
           {
@@ -1891,39 +1892,24 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
 
         // then
         expect(response.source).to.be.true;
+        expect(preHandlerStub).to.have.been.calledOnceWithExactly({ userId: 123, certificationCourseId: 7 });
       });
     });
 
     context('Error cases', function () {
-      it('should forbid resource access when user was not previously authenticated', async function () {
-        // given
-        const checkUserOwnsCertificationCourseUseCaseStub = {
-          execute: sinon.stub(),
-        };
-
-        // when
-        const response = await securityPreHandlers.checkUserOwnsCertificationCourse(
-          { auth: { credentials: {} }, params: { id: 5678 } },
-          hFake,
-          {
-            checkUserOwnsCertificationCourseUseCase: checkUserOwnsCertificationCourseUseCaseStub,
-          },
-        );
-
-        // then
-        expect(response.statusCode).to.equal(403);
-        expect(response.isTakeOver).to.be.true;
-      });
-
       it('should forbid resource access when user does not own the certification course', async function () {
         // given
+        const preHandlerStub = sinon.stub();
         const checkUserOwnsCertificationCourseUseCaseStub = {
-          execute: sinon.stub().resolves(false),
+          execute: preHandlerStub.resolves(false),
         };
 
         // when
         const response = await securityPreHandlers.checkUserOwnsCertificationCourse(
-          { auth: { credentials: { accessToken: 'valid.access.token', userId: 1 } }, params: { id: 5678 } },
+          {
+            auth: { credentials: { accessToken: 'valid.access.token', userId: 1 } },
+            params: { certificationCourseId: 5678 },
+          },
           hFake,
           {
             checkUserOwnsCertificationCourseUseCase: checkUserOwnsCertificationCourseUseCaseStub,
@@ -1933,17 +1919,22 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
         // then
         expect(response.statusCode).to.equal(403);
         expect(response.isTakeOver).to.be.true;
+        expect(preHandlerStub).to.have.been.calledOnceWithExactly({ userId: 1, certificationCourseId: 5678 });
       });
 
       it('should forbid resource access when an error is thrown by use case', async function () {
         // given
+        const preHandlerStub = sinon.stub();
         const checkUserOwnsCertificationCourseUseCaseStub = {
-          execute: sinon.stub().rejects(new Error('Some error')),
+          execute: preHandlerStub.rejects(new Error('Some error')),
         };
 
         // when
         const response = await securityPreHandlers.checkUserOwnsCertificationCourse(
-          { auth: { credentials: { accessToken: 'valid.access.token', userId: 1 } }, params: { id: 5678 } },
+          {
+            auth: { credentials: { accessToken: 'valid.access.token', userId: 1 } },
+            params: { certificationCourseId: 5678 },
+          },
           hFake,
           {
             checkUserOwnsCertificationCourseUseCase: checkUserOwnsCertificationCourseUseCaseStub,
@@ -1953,6 +1944,7 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
         // then
         expect(response.statusCode).to.equal(403);
         expect(response.isTakeOver).to.be.true;
+        expect(preHandlerStub).to.have.been.calledOnceWithExactly({ userId: 1, certificationCourseId: 5678 });
       });
     });
   });
