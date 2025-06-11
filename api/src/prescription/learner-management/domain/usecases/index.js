@@ -1,6 +1,7 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import * as userRecommendedTrainingRepository from '../../../../devcomp/infrastructure/repositories/user-recommended-training-repository.js';
 import * as badgeAcquisitionRepository from '../../../../evaluation/infrastructure/repositories/badge-acquisition-repository.js';
 import { eventLoggingJobRepository } from '../../../../identity-access-management/infrastructure/repositories/jobs/event-logging-job.repository.js';
 import * as userRepository from '../../../../identity-access-management/infrastructure/repositories/user.repository.js';
@@ -88,6 +89,7 @@ const dependencies = {
   studentRepository,
   supOrganizationLearnerRepository,
   userReconciliationService,
+  userRecommendedTrainingRepository,
   badgeAcquisitionRepository,
   userRepository,
   validateCommonOrganizationImportFileJobRepository,

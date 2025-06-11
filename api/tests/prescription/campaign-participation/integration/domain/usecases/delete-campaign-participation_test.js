@@ -1,3 +1,4 @@
+import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { EventLoggingJob } from '../../../../../../src/identity-access-management/domain/models/jobs/EventLoggingJob.js';
 import { usecases } from '../../../../../../src/prescription/campaign-participation/domain/usecases/index.js';
 import { CampaignParticipationLoggerContext } from '../../../../../../src/prescription/shared/domain/constants.js';
@@ -5,8 +6,16 @@ import { Assessment } from '../../../../../../src/shared/domain/models/Assessmen
 import { featureToggles } from '../../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
-const { buildAssessment, buildTargetProfile, buildBadge, buildCampaignParticipation, buildBadgeAcquisition } =
-  databaseBuilder.factory;
+const {
+  buildAssessment,
+  buildTargetProfile,
+  buildBadge,
+  buildUser,
+  buildCampaignParticipation,
+  buildUserRecommendedTraining,
+  buildCampaign,
+  buildBadgeAcquisition,
+} = databaseBuilder.factory;
 
 describe('Integration | UseCases | delete-campaign-participation', function () {
   let clock, now;
@@ -399,6 +408,65 @@ describe('Integration | UseCases | delete-campaign-participation', function () {
         });
         const otherAssessmentsInDb = await knex('assessments').where('id', otherAssessment.id).first();
         expect(otherAssessmentsInDb.campaignParticipationId).equal(otherAssessment.campaignParticipationId);
+      });
+    });
+  });
+
+  context('when there are user-recommended-trainings linked to campaign participations', function () {
+    let adminUserId, campaignParticipationId, userId, userRecommendedTrainingId, campaignId;
+    beforeEach(async function () {
+      //given
+      adminUserId = buildUser().id;
+      userId = buildUser().id;
+      campaignId = buildCampaign().id;
+      campaignParticipationId = buildCampaignParticipation({ userId, campaignId }).id;
+      userRecommendedTrainingId = buildUserRecommendedTraining({ userId, campaignParticipationId }).id;
+
+      await databaseBuilder.commit();
+    });
+    context('when feature toggle `isAnonymizationWithDeletionEnabled` is true', function () {
+      it('should delete campaignParticipationId', async function () {
+        //given
+        await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
+
+        //when
+        await usecases.deleteCampaignParticipation({
+          userId: adminUserId,
+          campaignId,
+          campaignParticipationId,
+          userRole: 'ORGA_ADMIN',
+          client: 'PIX_ORGA',
+        });
+
+        //then
+        const userRecommendedTrainingAnonymized = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
+          .where('id', userRecommendedTrainingId)
+          .first();
+
+        expect(userRecommendedTrainingAnonymized.campaignParticipationId).to.be.null;
+      });
+    });
+
+    context('when feature toggle `isAnonymizationWithDeletionEnabled` is false', function () {
+      it('should not delete campaignParticipationId', async function () {
+        //given
+        await featureToggles.set('isAnonymizationWithDeletionEnabled', false);
+
+        //when
+        await usecases.deleteCampaignParticipation({
+          userId: adminUserId,
+          campaignId,
+          campaignParticipationId,
+          userRole: 'ORGA_ADMIN',
+          client: 'PIX_ORGA',
+        });
+
+        //then
+        const userRecommendedTrainingAnonymized = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
+          .where('id', userRecommendedTrainingId)
+          .first();
+
+        expect(userRecommendedTrainingAnonymized.campaignParticipationId).to.equal(campaignParticipationId);
       });
     });
   });

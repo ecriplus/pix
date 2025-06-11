@@ -1,3 +1,4 @@
+import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { usecases } from '../../src/prescription/learner-management/domain/usecases/index.js';
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
@@ -150,7 +151,7 @@ export class DeleteOrganizationLearnersFromOrganizationScript extends Script {
 
   async #detachRecommendedTrainings({ campaignParticipationsIds, updatedAt }) {
     const knexConnection = DomainTransaction.getConnection();
-    await knexConnection('user-recommended-trainings')
+    await knexConnection(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
       .update({ campaignParticipationId: null, updatedAt })
       .whereIn('campaignParticipationId', campaignParticipationsIds);
   }

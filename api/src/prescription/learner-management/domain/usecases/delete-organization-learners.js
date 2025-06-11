@@ -14,6 +14,7 @@ const deleteOrganizationLearners = withTransaction(async function ({
   badgeAcquisitionRepository,
   assessmentRepository,
   eventLoggingJobRepository,
+  userRecommendedTrainingRepository,
 }) {
   const organizationLearnersFromOrganization =
     await organizationLearnerRepository.findOrganizationLearnersByOrganizationId({
@@ -82,6 +83,8 @@ const deleteOrganizationLearners = withTransaction(async function ({
         assessment.detachCampaignParticipation();
         await assessmentRepository.updateCampaignParticipationId(assessment);
       }
+
+      await userRecommendedTrainingRepository.deleteCampaignParticipationIds({ campaignParticipationIds });
     }
   }
 });

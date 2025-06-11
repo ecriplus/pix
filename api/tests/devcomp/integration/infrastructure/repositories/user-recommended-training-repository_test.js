@@ -1,7 +1,9 @@
 import _ from 'lodash';
 
+import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { UserRecommendedTraining } from '../../../../../src/devcomp/domain/read-models/UserRecommendedTraining.js';
 import * as userRecommendedTrainingRepository from '../../../../../src/devcomp/infrastructure/repositories/user-recommended-training-repository.js';
+import { deleteCampaignParticipationIds } from '../../../../../src/devcomp/infrastructure/repositories/user-recommended-training-repository.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Repository | user-recommended-training-repository', function () {
@@ -19,7 +21,7 @@ describe('Integration | Repository | user-recommended-training-repository', func
       await userRecommendedTrainingRepository.save(userRecommendedTraining);
 
       // then
-      const persistedUserRecommendedTraining = await knex('user-recommended-trainings')
+      const persistedUserRecommendedTraining = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
         .where({
           userId: userRecommendedTraining.userId,
           trainingId: userRecommendedTraining.trainingId,
@@ -50,7 +52,7 @@ describe('Integration | Repository | user-recommended-training-repository', func
       expect(async () => {
         await saveSameUserRecommendedTraining();
 
-        const updatedUserRecommendedTraining = await knex('user-recommended-trainings')
+        const updatedUserRecommendedTraining = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
           .where({
             id: userRecommendedTraining.id,
           })
@@ -191,6 +193,51 @@ describe('Integration | Repository | user-recommended-training-repository', func
 
       // then
       expect(result).to.equal(false);
+    });
+  });
+
+  describe(deleteCampaignParticipationIds.name, function () {
+    it('should set campaignParticipationId to null for given campaignParticipationIds', async function () {
+      // given
+      const campaignParticipation1 = databaseBuilder.factory.buildCampaignParticipation();
+      const campaignParticipation2 = databaseBuilder.factory.buildCampaignParticipation();
+      const campaignParticipation3 = databaseBuilder.factory.buildCampaignParticipation();
+
+      const userRecommendedTraining1 = databaseBuilder.factory.buildUserRecommendedTraining({
+        campaignParticipationId: campaignParticipation1.id,
+        userId: campaignParticipation1.userId,
+      });
+      const userRecommendedTraining2 = databaseBuilder.factory.buildUserRecommendedTraining({
+        campaignParticipationId: campaignParticipation2.id,
+        userId: campaignParticipation2.userId,
+      });
+      const userRecommendedTraining3 = databaseBuilder.factory.buildUserRecommendedTraining({
+        campaignParticipationId: campaignParticipation3.id,
+        userId: campaignParticipation3.userId,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      await userRecommendedTrainingRepository.deleteCampaignParticipationIds({
+        campaignParticipationIds: [campaignParticipation1.id, campaignParticipation2.id],
+      });
+
+      // then
+      const updatedUserRecommendedTrainings = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME).whereIn('id', [
+        userRecommendedTraining1.id,
+        userRecommendedTraining2.id,
+      ]);
+
+      expect(updatedUserRecommendedTrainings).to.have.lengthOf(2);
+      updatedUserRecommendedTrainings.forEach((training) => {
+        expect(training.campaignParticipationId).to.be.null;
+      });
+
+      const otherRecommendedTraining = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
+        .where('id', userRecommendedTraining3.id)
+        .first();
+
+      expect(otherRecommendedTraining.campaignParticipationId).to.equal(campaignParticipation3.id);
     });
   });
 });

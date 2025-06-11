@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { CertificationCompletedJob } from '../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import * as badgeAcquisitionRepository from '../../../../../src/evaluation/infrastructure/repositories/badge-acquisition-repository.js';
 import {
@@ -638,7 +639,7 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
         });
 
         // then
-        const recommendedTraining = await knex('user-recommended-trainings')
+        const recommendedTraining = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
           .where({
             userId: user.id,
             trainingId: training.id,

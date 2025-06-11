@@ -1,3 +1,4 @@
+import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { EventLoggingJob } from '../../../../../../src/identity-access-management/domain/models/jobs/EventLoggingJob.js';
 import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import {
@@ -9,6 +10,19 @@ import { Assessment } from '../../../../../../src/shared/domain/models/Assessmen
 import { featureToggles } from '../../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
+const {
+  buildMembership,
+  buildOrganization,
+  buildCampaign,
+  buildCampaignParticipation,
+  buildUser,
+  buildBadge,
+  buildAssessment,
+  buildBadgeAcquisition,
+  buildOrganizationLearner,
+  buildUserRecommendedTraining,
+} = databaseBuilder.factory;
+
 describe('Integration | UseCase | Organization Learners Management | Delete Organization Learners', function () {
   let organizationId;
   let campaign;
@@ -19,20 +33,20 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
   let now, clock;
 
   beforeEach(async function () {
-    adminUserId = databaseBuilder.factory.buildUser().id;
-    organizationId = databaseBuilder.factory.buildOrganization().id;
-    campaign = databaseBuilder.factory.buildCampaign({ organizationId, type: CampaignTypes.ASSESSMENT });
-    organizationLearner1 = databaseBuilder.factory.buildOrganizationLearner({
+    adminUserId = buildUser().id;
+    organizationId = buildOrganization().id;
+    campaign = buildCampaign({ organizationId, type: CampaignTypes.ASSESSMENT });
+    organizationLearner1 = buildOrganizationLearner({
       organizationId,
       firstName: 'POUET',
       birthdate: '2020-05-12',
     });
-    organizationLearner2 = databaseBuilder.factory.buildOrganizationLearner({
+    organizationLearner2 = buildOrganizationLearner({
       organizationId,
       firstName: 'TEUOP',
       birthdate: '2020-12-12',
     });
-    campaignParticipation1 = databaseBuilder.factory.buildCampaignParticipation({
+    campaignParticipation1 = buildCampaignParticipation({
       organizationLearnerId: organizationLearner1.id,
       participantExternalId,
       userId: organizationLearner1.userId,
@@ -55,14 +69,14 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
 
     it('should delete given organizationLearners with their related participations', async function () {
       // given
-      databaseBuilder.factory.buildCampaignParticipation({
+      buildCampaignParticipation({
         organizationLearnerId: organizationLearner1.id,
         participantExternalId,
         isImproved: true,
         userId: organizationLearner1.userId,
       });
 
-      databaseBuilder.factory.buildOrganizationLearner({ organizationId });
+      buildOrganizationLearner({ organizationId });
       await databaseBuilder.commit();
 
       // when
@@ -116,21 +130,21 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
 
       beforeEach(async function () {
         // given
-        nonCertifiableBadge = databaseBuilder.factory.buildBadge({
+        nonCertifiableBadge = buildBadge({
           targetProfileId: campaign.targetProfileId,
           isCertifiable: false,
         });
-        certifiableBadge = databaseBuilder.factory.buildBadge({
+        certifiableBadge = buildBadge({
           targetProfileId: campaign.targetProfileId,
           isCertifiable: true,
         });
 
-        databaseBuilder.factory.buildBadgeAcquisition({
+        buildBadgeAcquisition({
           badgeId: certifiableBadge.id,
           campaignParticipationId: campaignParticipation1.id,
           userId: campaignParticipation1.userId,
         });
-        databaseBuilder.factory.buildBadgeAcquisition({
+        buildBadgeAcquisition({
           badgeId: nonCertifiableBadge.id,
           campaignParticipationId: campaignParticipation1.id,
           userId: campaignParticipation1.userId,
@@ -189,15 +203,15 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
 
     it('should delete and anonymize learner and all theirs campaignParticipations', async function () {
       // given
-      databaseBuilder.factory.buildCampaignParticipation({
+      buildCampaignParticipation({
         organizationLearnerId: organizationLearner1.id,
         participantExternalId,
         isImproved: true,
         userId: organizationLearner1.userId,
       });
 
-      const otherLearner = databaseBuilder.factory.buildOrganizationLearner();
-      const otherParticipation = databaseBuilder.factory.buildCampaignParticipation({
+      const otherLearner = buildOrganizationLearner();
+      const otherParticipation = buildCampaignParticipation({
         organizationLearnerId: otherLearner.id,
         participantExternalId,
         userId: otherLearner.userId,
@@ -268,26 +282,26 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
 
     it('should detach assessments for deleted campaignParticipations', async function () {
       // given
-      const otherLearner = databaseBuilder.factory.buildOrganizationLearner({ organizationId });
-      const otherParticipation = databaseBuilder.factory.buildCampaignParticipation({
+      const otherLearner = buildOrganizationLearner({ organizationId });
+      const otherParticipation = buildCampaignParticipation({
         organizationLearnerId: otherLearner.id,
         participantExternalId,
         userId: otherLearner.userId,
       });
-      const assessment1 = databaseBuilder.factory.buildAssessment({
+      const assessment1 = buildAssessment({
         id: 1,
         campaignParticipationId: campaignParticipation1.id,
         isImproved: false,
         type: Assessment.types.CAMPAIGN,
       });
-      const assessment2 = databaseBuilder.factory.buildAssessment({
+      const assessment2 = buildAssessment({
         id: 2,
         campaignParticipationId: campaignParticipation1.id,
         isImproved: true,
         type: Assessment.types.CAMPAIGN,
       });
 
-      databaseBuilder.factory.buildAssessment({
+      buildAssessment({
         id: 4,
         campaignParticipationId: otherParticipation.id,
       });
@@ -352,21 +366,21 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
 
       beforeEach(async function () {
         // given
-        nonCertifiableBadge = databaseBuilder.factory.buildBadge({
+        nonCertifiableBadge = buildBadge({
           targetProfileId: campaign.targetProfileId,
           isCertifiable: false,
         });
-        certifiableBadge = databaseBuilder.factory.buildBadge({
+        certifiableBadge = buildBadge({
           targetProfileId: campaign.targetProfileId,
           isCertifiable: true,
         });
 
-        databaseBuilder.factory.buildBadgeAcquisition({
+        buildBadgeAcquisition({
           badgeId: certifiableBadge.id,
           campaignParticipationId: campaignParticipation1.id,
           userId: campaignParticipation1.userId,
         });
-        databaseBuilder.factory.buildBadgeAcquisition({
+        buildBadgeAcquisition({
           badgeId: nonCertifiableBadge.id,
           campaignParticipationId: campaignParticipation1.id,
           userId: campaignParticipation1.userId,
@@ -414,6 +428,83 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
           (badgeAcquisition) => badgeAcquisition.badgeId === certifiableBadge.id,
         );
         expect(certifiableBadgeAcquisition.userId).to.equal(campaignParticipation1.userId);
+      });
+    });
+  });
+
+  context('when there are user-recommended-trainings linked to campaign participations', function () {
+    let adminUserId,
+      campaignParticipationId,
+      userId,
+      userRecommendedTrainingId,
+      campaignId,
+      organizationId,
+      organizationLearner;
+
+    beforeEach(async function () {
+      //given
+      adminUserId = buildUser().id;
+      userId = buildUser().id;
+      campaignId = buildCampaign().id;
+      buildMembership({ userId: adminUserId, organizationId: buildOrganization().id, organizationRole: 'ADMIN' });
+
+      organizationId = buildOrganization().id;
+
+      organizationLearner = buildOrganizationLearner({ organizationId, userId });
+
+      campaignParticipationId = buildCampaignParticipation({
+        userId,
+        campaignId,
+        organizationLearnerId: organizationLearner.id,
+      }).id;
+
+      userRecommendedTrainingId = buildUserRecommendedTraining({ userId, campaignParticipationId }).id;
+
+      await databaseBuilder.commit();
+    });
+    context('when feature toggle `isAnonymizationWithDeletionEnabled` is true', function () {
+      it('should delete campaignParticipationId', async function () {
+        //given
+        await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
+
+        //when
+        await usecases.deleteOrganizationLearners({
+          organizationLearnerIds: [organizationLearner.id],
+          userId: adminUserId,
+          organizationId,
+          userRole: 'ORGA_ADMIN',
+          client: 'PIX_ORGA',
+        });
+
+        //then
+        const userRecommendedTrainingAnonymized = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
+          .where('id', userRecommendedTrainingId)
+          .first();
+
+        expect(userRecommendedTrainingAnonymized.campaignParticipationId).to.be.null;
+      });
+    });
+
+    context('when feature toggle `isAnonymizationWithDeletionEnabled` is false', function () {
+      it('should not delete campaignParticipationId', async function () {
+        //given
+        await featureToggles.set('isAnonymizationWithDeletionEnabled', false);
+
+        //when
+        await usecases.deleteOrganizationLearners({
+          organizationLearnerIds: [organizationLearner.id],
+          userId: adminUserId,
+          organizationId,
+          userRole: 'ADMIN',
+          client: 'ORGA_ADMIN',
+        });
+
+        //then
+        const userRecommendedTrainingAnonymized = await knex(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
+          .where('id', userRecommendedTrainingId)
+          .first();
+
+        expect(userRecommendedTrainingAnonymized.campaignParticipationId).to.equal(campaignParticipationId);
       });
     });
   });

@@ -5,6 +5,7 @@ import * as learningContentRepository from '../../../../../lib/infrastructure/re
 import * as stageCollectionRepository from '../../../../../lib/infrastructure/repositories/user-campaign-results/stage-collection-repository.js';
 import * as campaignRepository from '../../../../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as tutorialRepository from '../../../../devcomp/infrastructure/repositories/tutorial-repository.js';
+import * as userRecommendedTrainingRepository from '../../../../devcomp/infrastructure/repositories/user-recommended-training-repository.js';
 import * as badgeAcquisitionRepository from '../../../../evaluation/infrastructure/repositories/badge-acquisition-repository.js';
 import * as badgeRepository from '../../../../evaluation/infrastructure/repositories/badge-repository.js';
 import * as stageAcquisitionRepository from '../../../../evaluation/infrastructure/repositories/stage-acquisition-repository.js';
@@ -119,6 +120,7 @@ const dependencies = {
   targetProfileRepository: campaignRepositories.targetProfileRepository, // TODO
   tutorialRepository,
   userRepository,
+  userRecommendedTrainingRepository,
   campaignMediaComplianceService,
 };
 

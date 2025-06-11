@@ -9,6 +9,7 @@ const deleteCampaigns = async ({
   organizationMembershipRepository,
   campaignAdministrationRepository,
   campaignParticipationRepository,
+  userRecommendedTrainingRepository,
   eventLoggingJobRepository,
 }) => {
   const membership = await organizationMembershipRepository.getByUserIdAndOrganizationId({ userId, organizationId });
@@ -41,6 +42,14 @@ const deleteCampaigns = async ({
         }),
       );
     }
+  }
+
+  if (isAnonymizationWithDeletionEnabled) {
+    const campaignParticipationIds = campaignParticipationsToDelete.map(({ id }) => id);
+
+    await userRecommendedTrainingRepository.deleteCampaignParticipationIds({
+      campaignParticipationIds,
+    });
   }
 
   await campaignAdministrationRepository.remove(campaignsToDelete);
