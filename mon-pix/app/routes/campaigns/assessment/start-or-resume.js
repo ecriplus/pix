@@ -32,7 +32,7 @@ export default class EvaluationStartOrResumeRoute extends Route {
   _shouldShowTutorial(assessment, isCampaignForAbsoluteNovice) {
     return (
       !this.userHasJustConsultedTutorial &&
-      assessment.answers?.length === 0 &&
+      assessment.orderedChallengeIdsAnswered.length === 0 &&
       !assessment.isCompleted &&
       !this.currentUser.user.hasSeenAssessmentInstructions &&
       !isCampaignForAbsoluteNovice

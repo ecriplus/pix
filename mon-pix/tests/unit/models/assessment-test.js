@@ -18,7 +18,7 @@ module('Unit | Model | Assessment', function (hooks) {
 
     test('should return an empty array when no answers has been given', function (assert) {
       // given
-      const assessment = store.createRecord('assessment', { answers: [] });
+      const assessment = store.createRecord('assessment', { answers: [], orderedChallengeIdsAnswered: [] });
 
       // when
       const answersSinceLastCheckpoints = assessment.answersSinceLastCheckpoints;
@@ -30,7 +30,7 @@ module('Unit | Model | Assessment', function (hooks) {
     test('should return the one answer when only one answer has been given', function (assert) {
       // given
       const answer = store.createRecord('answer');
-      const assessment = store.createRecord('assessment');
+      const assessment = store.createRecord('assessment', { orderedChallengeIdsAnswered: [answer.challengeId] });
       const answers = [answer];
       assessment.answers = answers;
 
@@ -45,7 +45,9 @@ module('Unit | Model | Assessment', function (hooks) {
       // given
       const answers = newAnswers(store, 7);
       const [answer6, answer7] = answers.slice(5);
-      const assessment = store.createRecord('assessment');
+      const assessment = store.createRecord('assessment', {
+        orderedChallengeIdsAnswered: answers.map((answer) => answer.challengeId),
+      });
       assessment.answers = answers;
 
       // when
@@ -59,7 +61,9 @@ module('Unit | Model | Assessment', function (hooks) {
       // given
       const answers = newAnswers(store, 10);
       const [answer6, answer7, answer8, answer9, answer10] = answers.slice(5);
-      const assessment = store.createRecord('assessment');
+      const assessment = store.createRecord('assessment', {
+        orderedChallengeIdsAnswered: answers.map((answer) => answer.challengeId),
+      });
       assessment.answers = answers;
 
       // when
@@ -73,7 +77,9 @@ module('Unit | Model | Assessment', function (hooks) {
       // given
       const answers = newAnswers(store, 11);
       const answer11 = answers[10];
-      const assessment = store.createRecord('assessment');
+      const assessment = store.createRecord('assessment', {
+        orderedChallengeIdsAnswered: answers.map((answer) => answer.challengeId),
+      });
       assessment.answers = answers;
 
       // when

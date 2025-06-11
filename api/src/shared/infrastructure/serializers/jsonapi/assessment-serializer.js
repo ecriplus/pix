@@ -34,6 +34,8 @@ const serialize = function (assessments) {
         assessment.course = { id: currentAssessment.courseId };
       }
 
+      // ordered in the repository call
+      assessment.orderedChallengeIdsAnswered = assessment.answers?.map((answer) => answer.challengeId) ?? [];
       return assessment;
     },
     attributes: [
@@ -55,6 +57,7 @@ const serialize = function (assessments) {
       'hasCheckpoints',
       'showLevelup',
       'showQuestionCounter',
+      'orderedChallengeIdsAnswered',
     ],
     answers: {
       ref: 'id',

@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import { Answer } from '../../../evaluation/domain/models/Answer.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
-import { ChallengeAlreadyAnsweredError, NotFoundError } from '../../domain/errors.js';
+import { NotFoundError } from '../../domain/errors.js';
 import * as answerStatusDatabaseAdapter from '../adapters/answer-status-database-adapter.js';
 
 function _adaptAnswerToDb(answer) {
@@ -96,12 +96,6 @@ const findChallengeIdsFromAnswerIds = async function (ids) {
 const save = async function ({ answer }) {
   const knexConn = DomainTransaction.getConnection();
   const answerForDB = _adaptAnswerToDb(answer);
-  const alreadySavedAnswer = await knexConn('answers')
-    .select('id')
-    .where({ challengeId: answer.challengeId, assessmentId: answer.assessmentId });
-  if (alreadySavedAnswer.length !== 0) {
-    throw new ChallengeAlreadyAnsweredError();
-  }
   const [savedAnswerDTO] = await knexConn('answers').insert(answerForDB).returning(COLUMNS);
   return _toDomain(savedAnswerDTO);
 };

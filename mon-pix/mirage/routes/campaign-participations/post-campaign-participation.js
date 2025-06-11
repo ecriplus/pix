@@ -47,6 +47,7 @@ export default function (schema, request) {
     showProgressBar: campaign.type === 'ASSESSMENT',
     showLevelup: campaign.type === 'ASSESSMENT',
     showQuestionCounter: campaign.type === 'ASSESSMENT',
+    orderedChallengeIdsAnswered: [],
   };
 
   const assessment = schema.assessments.create(newAssessment);

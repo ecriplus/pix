@@ -106,7 +106,7 @@ describe('Unit | Controller | answer-controller', function () {
         challengeId,
         focusedOut,
       });
-      assessmentRepository = { get: sinon.stub() };
+      assessmentRepository = { getWithAnswers: sinon.stub() };
       deserializedAnswer.id = undefined;
       deserializedAnswer.timeSpent = undefined;
       answerSerializerStub.serialize.returns(serializedAnswer);
@@ -126,7 +126,7 @@ describe('Unit | Controller | answer-controller', function () {
       it('should call appropriate usecase when assessment is of type COMPETENCE_EVALUATION', async function () {
         // given
         const assessment = domainBuilder.buildAssessment({ type: Assessment.types.COMPETENCE_EVALUATION });
-        assessmentRepository.get.withArgs(assessmentId).resolves(assessment);
+        assessmentRepository.getWithAnswers.withArgs(assessmentId).resolves(assessment);
 
         // when
         response = await answerController.save(request, hFake, {
@@ -150,7 +150,7 @@ describe('Unit | Controller | answer-controller', function () {
       it('should call appropriate usecase when assessment is of type CAMPAIGN', async function () {
         // given
         const assessment = domainBuilder.buildAssessment({ type: Assessment.types.CAMPAIGN });
-        assessmentRepository.get.withArgs(assessmentId).resolves(assessment);
+        assessmentRepository.getWithAnswers.withArgs(assessmentId).resolves(assessment);
 
         // when
         response = await answerController.save(request, hFake, {
@@ -174,7 +174,7 @@ describe('Unit | Controller | answer-controller', function () {
       it('should call appropriate usecase when assessment is of type CERTIFICATION', async function () {
         // given
         const assessment = domainBuilder.buildAssessment({ type: Assessment.types.CERTIFICATION });
-        assessmentRepository.get.withArgs(assessmentId).resolves(assessment);
+        assessmentRepository.getWithAnswers.withArgs(assessmentId).resolves(assessment);
 
         // when
         response = await answerController.save(request, hFake, {
@@ -198,7 +198,7 @@ describe('Unit | Controller | answer-controller', function () {
       it('should call appropriate usecase when assessment is of type DEMO', async function () {
         // given
         const assessment = domainBuilder.buildAssessment({ type: Assessment.types.DEMO });
-        assessmentRepository.get.withArgs(assessmentId).resolves(assessment);
+        assessmentRepository.getWithAnswers.withArgs(assessmentId).resolves(assessment);
 
         // when
         response = await answerController.save(request, hFake, {
@@ -222,7 +222,7 @@ describe('Unit | Controller | answer-controller', function () {
       it('should call appropriate usecase when assessment is of type PREVIEW', async function () {
         // given
         const assessment = domainBuilder.buildAssessment({ type: Assessment.types.PREVIEW });
-        assessmentRepository.get.withArgs(assessmentId).resolves(assessment);
+        assessmentRepository.getWithAnswers.withArgs(assessmentId).resolves(assessment);
 
         // when
         response = await answerController.save(request, hFake, {
@@ -246,7 +246,7 @@ describe('Unit | Controller | answer-controller', function () {
 
     context('quests', function () {
       beforeEach(function () {
-        assessmentRepository.get.resolves(
+        assessmentRepository.getWithAnswers.resolves(
           domainBuilder.buildAssessment({ type: Assessment.types.COMPETENCE_EVALUATION }),
         );
         sinon.stub(config, 'featureToggles');

@@ -2,7 +2,7 @@ import { EmptyAnswerError } from '../../../../../src/evaluation/domain/errors.js
 import * as correctionService from '../../../../../src/evaluation/domain/services/correction-service.js';
 import { saveAndCorrectAnswerForDemoAndPreview } from '../../../../../src/evaluation/domain/usecases/save-and-correct-answer-for-demo-and-preview.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import { ChallengeNotAskedError } from '../../../../../src/shared/domain/errors.js';
+import { ChallengeAlreadyAnsweredError, ChallengeNotAskedError } from '../../../../../src/shared/domain/errors.js';
 import { AnswerStatus, Assessment } from '../../../../../src/shared/domain/models/index.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
@@ -33,6 +33,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-d
     assessment = domainBuilder.buildAssessment({
       lastQuestionDate: nowDate,
       type: Assessment.types.DEMO,
+      answers: [],
     });
     answer = domainBuilder.buildAnswer({ assessmentId: assessment.id, value: correctAnswerValue, challengeId });
     answer.id = undefined;
@@ -54,6 +55,24 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-d
 
   afterEach(async function () {
     clock.restore();
+  });
+
+  context('when an answer for that challenge has already been provided', function () {
+    it('should fail because ChallengeAlreadyAnsweredError', async function () {
+      // given
+      assessment.answers = [domainBuilder.buildAnswer({ challengeId: answer.challengeId })];
+
+      // when
+      const error = await catchErr(saveAndCorrectAnswerForDemoAndPreview)({
+        answer,
+        assessment,
+        locale,
+        ...dependencies,
+      });
+
+      // then
+      expect(error).to.be.an.instanceOf(ChallengeAlreadyAnsweredError);
+    });
   });
 
   context('when an answer for that challenge is not for an asked challenge', function () {
@@ -141,6 +160,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-d
       assessment = domainBuilder.buildAssessment({
         lastQuestionDate: new Date('2021-03-11T11:00:00Z'),
         type: Assessment.types.DEMO,
+        answers: [],
       });
       answerSaved = domainBuilder.buildAnswer(answer);
       answerSaved.timeSpent = 5;
@@ -175,6 +195,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-d
       assessment = domainBuilder.buildAssessment({
         lastQuestionDate: new Date('2021-03-11T11:00:00Z'),
         type: Assessment.types.CERTIFICATION,
+        answers: [],
       });
       answerSaved = domainBuilder.buildAnswer(focusedOutAnswer);
       answerRepository.save.resolves(answerSaved);
@@ -207,6 +228,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-d
       assessment = domainBuilder.buildAssessment({
         lastQuestionDate: new Date('2021-03-11T11:00:00Z'),
         type: Assessment.types.DEMO,
+        answers: [],
       });
 
       // when
@@ -235,6 +257,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-d
       assessment = domainBuilder.buildAssessment({
         lastQuestionDate: new Date('2021-03-11T11:00:00Z'),
         type: Assessment.types.DEMO,
+        answers: [],
       });
       const answerSaved = domainBuilder.buildAnswer(emptyAnswer);
       answerRepository.save.resolves(answerSaved);

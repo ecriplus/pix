@@ -98,14 +98,6 @@ export default class Item extends Component {
     return ENV.APP.FT_FOCUS_CHALLENGE_ENABLED && this.args.challenge.focused;
   }
 
-  async _findOrCreateAnswer(challenge, assessment) {
-    let answer = (await assessment.answers).find((answer) => answer.challenge.get('id') === challenge.id);
-    if (!answer) {
-      answer = this.store.createRecord('answer', { assessment, challenge });
-    }
-    return answer;
-  }
-
   _isAssessmentEndedBySupervisorOrByFinalization(error) {
     return (
       error?.errors?.[0]?.detail === 'Le surveillant a mis fin à votre test de certification.' ||
@@ -121,7 +113,7 @@ export default class Item extends Component {
 
     this.args.onChallengeSubmit();
 
-    const answer = await this._findOrCreateAnswer(challenge, assessment);
+    const answer = this.store.createRecord('answer', { assessment, challenge });
     answer.setProperties({
       value: answerValue.trim(),
       timeout: answerTimeout,
@@ -130,6 +122,7 @@ export default class Item extends Component {
 
     try {
       await answer.save();
+      assessment.orderedChallengeIdsAnswered.push(challenge.id);
 
       let queryParams = { queryParams: {} };
       const levelup = await answer.get('levelup');

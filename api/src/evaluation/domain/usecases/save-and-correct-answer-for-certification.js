@@ -2,6 +2,7 @@ import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import {
   CertificationEndedByFinalizationError,
   CertificationEndedBySupervisorError,
+  ChallengeAlreadyAnsweredError,
   ForbiddenAccess,
 } from '../../../shared/domain/errors.js';
 import { ChallengeNotAskedError } from '../../../shared/domain/errors.js';
@@ -26,6 +27,9 @@ const saveAndCorrectAnswerForCertification = withTransaction(async function ({
   }
   if (assessment.hasBeenEndedDueToFinalization()) {
     throw new CertificationEndedByFinalizationError();
+  }
+  if (assessment.answers.some((existingAnswer) => existingAnswer.challengeId === answer.challengeId)) {
+    throw new ChallengeAlreadyAnsweredError();
   }
   if (assessment.lastChallengeId && assessment.lastChallengeId != answer.challengeId) {
     throw new ChallengeNotAskedError();

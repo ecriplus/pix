@@ -16,6 +16,7 @@ export default function (schema, request) {
       showProgressBar: true,
       showLevelup: false,
       showQuestionCounter: true,
+      orderedChallengeIdsAnswered: [],
     });
   }
 

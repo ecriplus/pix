@@ -26,6 +26,7 @@ export default class Assessment extends Model {
   @attr('boolean') showProgressBar;
   @attr('boolean') showLevelup;
   @attr('boolean') showQuestionCounter;
+  @attr orderedChallengeIdsAnswered;
 
   // references
   @attr('string') competenceId;
@@ -61,6 +62,6 @@ export default class Assessment extends Model {
   }
 
   get currentChallengeNumber() {
-    return this.hasMany('answers').value().length;
+    return this.orderedChallengeIdsAnswered.length;
   }
 }

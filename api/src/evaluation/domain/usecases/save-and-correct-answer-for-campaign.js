@@ -1,6 +1,6 @@
 import { AnswerJob } from '../../../quest/domain/models/AnwserJob.js';
 import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
-import { ForbiddenAccess } from '../../../shared/domain/errors.js';
+import { ChallengeAlreadyAnsweredError, ForbiddenAccess } from '../../../shared/domain/errors.js';
 import { ChallengeNotAskedError } from '../../../shared/domain/errors.js';
 import { KnowledgeElement } from '../../../shared/domain/models/index.js';
 import { EmptyAnswerError } from '../errors.js';
@@ -24,6 +24,9 @@ const saveAndCorrectAnswerForCampaign = withTransaction(async function ({
 } = {}) {
   if (assessment.userId !== userId) {
     throw new ForbiddenAccess('User is not allowed to add an answer for this assessment.');
+  }
+  if (assessment.answers.some((existingAnswer) => existingAnswer.challengeId === answer.challengeId)) {
+    throw new ChallengeAlreadyAnsweredError();
   }
   if (assessment.lastChallengeId && assessment.lastChallengeId !== answer.challengeId) {
     throw new ChallengeNotAskedError();

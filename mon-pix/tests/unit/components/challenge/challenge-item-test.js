@@ -54,29 +54,6 @@ module('Unit | Component | Challenge | Item', function (hooks) {
       answerToChallengeOne.rollbackAttributes = sinon.stub();
     });
 
-    module('when the answer is already known', function () {
-      test('should not create a new answer', async function (assert) {
-        // given
-        const component = createGlimmerComponent('challenge/item', {
-          challenge: challengeOne,
-          onChallengeSubmit: onChallengeSubmitStub,
-        });
-        component.router = { transitionTo: sinon.stub().returns() };
-        component.store = {
-          createRecord: createRecordStub,
-        };
-        const assessment = EmberObject.create({ answers: [answerToChallengeOne] });
-        assessment.get = sinon.stub().returns({ findBy: sinon.stub().returns(answerToChallengeOne) });
-        queryRecordStub.resolves(nextChallenge);
-
-        // when
-        await component.answerValidated(challengeOne, assessment, answerValue, answerFocusedOut);
-
-        // then
-        sinon.assert.notCalled(createRecordStub);
-        assert.ok(true);
-      });
-    });
     module('when no answer was given', function () {
       test('should create an answer', async function (assert) {
         // given
@@ -90,7 +67,7 @@ module('Unit | Component | Challenge | Item', function (hooks) {
         component.store = {
           createRecord: createRecordStub,
         };
-        const assessment = EmberObject.create({ answers: [] });
+        const assessment = EmberObject.create({ orderedChallengeIdsAnswered: [] });
         assessment.get = sinon.stub().returns({ findBy: sinon.stub().returns() });
         queryRecordStub.resolves(nextChallenge);
 
@@ -108,7 +85,7 @@ module('Unit | Component | Challenge | Item', function (hooks) {
 
     test('should update the answer with the timeout', async function (assert) {
       // given
-      const assessment = EmberObject.create({ answers: [answerToChallengeOne] });
+      const assessment = EmberObject.create({ orderedChallengeIdsAnswered: [] });
       createRecordStub.returns(answerToChallengeOne);
       queryRecordStub.resolves(nextChallenge);
       const component = createGlimmerComponent('challenge/item', {
@@ -138,7 +115,7 @@ module('Unit | Component | Challenge | Item', function (hooks) {
       // given
       const answerValue = '  exemple \n ';
       const answerValueWithoutUselessChar = 'exemple';
-      const assessment = EmberObject.create({ answers: [answerToChallengeOne] });
+      const assessment = EmberObject.create({ orderedChallengeIdsAnswered: [] });
       createRecordStub.returns(answerToChallengeOne);
       queryRecordStub.resolves(nextChallenge);
       const component = createGlimmerComponent('challenge/item', {
@@ -167,7 +144,7 @@ module('Unit | Component | Challenge | Item', function (hooks) {
     module('when there is an ongoing live alert', function () {
       test('it should not save the answer', async function (assert) {
         // given
-        const assessment = EmberObject.create({ answers: [answerToChallengeOne], hasOngoingChallengeLiveAlert: true });
+        const assessment = EmberObject.create({ orderedChallengeIdsAnswered: [], hasOngoingChallengeLiveAlert: true });
         const component = createGlimmerComponent('challenge/item', {
           challenge: challengeOne,
           onChallengeSubmit: onChallengeSubmitStub,
@@ -191,7 +168,7 @@ module('Unit | Component | Challenge | Item', function (hooks) {
     module('when saving succeeds', function () {
       test('should redirect to assessment-resume route', async function (assert) {
         // given
-        const assessment = EmberObject.create({ answers: [answerToChallengeOne] });
+        const assessment = EmberObject.create({ orderedChallengeIdsAnswered: [] });
         const component = createGlimmerComponent('challenge/item', {
           challenge: challengeOne,
           onChallengeSubmit: onChallengeSubmitStub,
@@ -201,6 +178,7 @@ module('Unit | Component | Challenge | Item', function (hooks) {
         component.store = {
           createRecord: createRecordStub,
         };
+        createRecordStub.returns(answerToChallengeOne);
 
         // when
         await component.answerValidated(challengeOne, assessment, answerValue, answerFocusedOut, answerTimeout);
@@ -224,7 +202,7 @@ module('Unit | Component | Challenge | Item', function (hooks) {
           answerToChallengeOneWithLevelUp.rollbackAttributes = sinon.stub();
           createRecordStub.returns(answerToChallengeOneWithLevelUp);
           queryRecordStub.resolves(nextChallenge);
-          assessment = EmberObject.create({ answers: [answerToChallengeOneWithLevelUp] });
+          assessment = EmberObject.create({ orderedChallengeIdsAnswered: [] });
         });
 
         test('should redirect to assessment-resume route with level up information', async function (assert) {
@@ -311,17 +289,21 @@ module('Unit | Component | Challenge | Item', function (hooks) {
         // given
         const error = { message: 'error' };
         answerToChallengeOne.save = sinon.stub().rejects(error);
-        const assessment = EmberObject.create({ answers: [answerToChallengeOne] });
+        createRecordStub.returns(answerToChallengeOne);
+        const assessment = EmberObject.create({ orderedChallengeIdsAnswered: [] });
         const component = createGlimmerComponent('challenge/item', {
           challenge: challengeOne,
           onChallengeSubmit: onChallengeSubmitStub,
         });
+        component.store = {
+          createRecord: createRecordStub,
+        };
         const transitionToStub = sinon.stub().returns();
         component.router = { transitionTo: transitionToStub };
 
         // when / then
         return component.answerValidated
-          .call(null, challengeOne, assessment, answerValue, answerFocusedOut, answerTimeout)
+          .call(challengeOne, challengeOne, assessment, answerValue, answerFocusedOut, answerTimeout)
           .then(function () {
             throw new Error('was supposed to fail');
           })
@@ -343,14 +325,18 @@ module('Unit | Component | Challenge | Item', function (hooks) {
           ],
         };
         answerToChallengeOne.save = sinon.stub().rejects(error);
+        createRecordStub.returns(answerToChallengeOne);
         const certificationCourse = EmberObject.create({});
-        const assessment = EmberObject.create({ answers: [answerToChallengeOne], certificationCourse });
+        const assessment = EmberObject.create({ orderedChallengeIdsAnswered: [], certificationCourse });
 
         // when
         const component = createGlimmerComponent('challenge/item', {
           challenge: challengeOne,
           onChallengeSubmit: onChallengeSubmitStub,
         });
+        component.store = {
+          createRecord: createRecordStub,
+        };
         const transitionToStub = sinon.stub().returns();
         component.router = { transitionTo: transitionToStub };
 

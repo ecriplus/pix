@@ -12,14 +12,13 @@ export default class ChallengeRoute extends Route {
   async model(params) {
     const assessment = await this.modelFor('assessments');
     await assessment.certificationCourse;
-    await assessment.answers;
 
     let challenge;
     const currentChallengeNumber = parseInt(params.challenge_number);
-    const isBackToPreviousChallenge = currentChallengeNumber < assessment.answers.length;
+    const isBackToPreviousChallenge = currentChallengeNumber < assessment.orderedChallengeIdsAnswered.length;
     if (isBackToPreviousChallenge) {
-      const answers = await assessment.answers;
-      challenge = await answers[currentChallengeNumber].challenge;
+      const challengeId = assessment.orderedChallengeIdsAnswered.at(currentChallengeNumber);
+      challenge = await this.store.findRecord('challenge', challengeId);
     } else {
       if (assessment.isPreview && params.challengeId) {
         challenge = await this.store.findRecord('challenge', params.challengeId);

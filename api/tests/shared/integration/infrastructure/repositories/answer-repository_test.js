@@ -1,7 +1,7 @@
-import { ChallengeAlreadyAnsweredError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
 import * as answerRepository from '../../../../../src/shared/infrastructure/repositories/answer-repository.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | Repository | answerRepository', function () {
   describe('#get', function () {
@@ -420,33 +420,6 @@ describe('Integration | Repository | answerRepository', function () {
       // then
       const answerInDB = await answerRepository.get(savedAnswer.id);
       expect(savedAnswer).to.deepEqualInstance(answerInDB);
-    });
-
-    context('when there is already an answer for one challenge in one assessment', function () {
-      it('should not have saved anything', async function () {
-        // given
-        const assessmentId = 123;
-        const answerToSave = domainBuilder.buildAnswer({
-          id: null,
-          assessmentId,
-          challengeId: 'challengeId',
-        });
-        databaseBuilder.factory.buildAssessment({ id: assessmentId });
-        const alreadyCreatedAnswerId = databaseBuilder.factory.buildAnswer({
-          challengeId: 'challengeId',
-          assessmentId,
-        }).id;
-        await databaseBuilder.commit();
-
-        // when
-        const error = await catchErr(answerRepository.save)({ answer: answerToSave });
-
-        // then
-        expect(error).to.be.instanceOf(ChallengeAlreadyAnsweredError);
-        const answerInDB = await knex('answers');
-        expect(answerInDB).to.have.lengthOf(1);
-        expect(answerInDB[0].id).to.be.equal(alreadyCreatedAnswerId);
-      });
     });
   });
 });

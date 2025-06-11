@@ -13,7 +13,6 @@ module('Unit | Route | Assessments | Resume', function (hooks) {
   let queryRecordStub;
 
   hooks.beforeEach(function () {
-    // define stubs
     findRecordStub = sinon.stub();
     queryRecordStub = sinon.stub();
     storeStub = Service.create({
@@ -32,7 +31,13 @@ module('Unit | Route | Assessments | Resume', function (hooks) {
     hooks.beforeEach(function () {
       const answers = EmberObject.create();
       answers.reload = sinon.stub().resolves();
-      assessment = EmberObject.create({ id: '123', isDemo: true, competenceId: 'recCompetenceId', answers });
+      assessment = EmberObject.create({
+        id: '123',
+        isDemo: true,
+        competenceId: 'recCompetenceId',
+        answers,
+        orderedChallengeIdsAnswered: ['someChallengeId'],
+      });
       assessment.save = sinon.stub().resolves();
     });
 
@@ -55,6 +60,7 @@ module('Unit | Route | Assessments | Resume', function (hooks) {
         module('when checkpoint is reached', function (hooks) {
           hooks.beforeEach(function () {
             assessment.answers = [{}, {}, {}, {}, {}];
+            assessment.orderedChallengeIdsAnswered = ['chal1', 'chal2', 'chal3', 'chal4', 'chal5'];
             assessment.answers.reload = sinon.stub().resolves();
           });
 

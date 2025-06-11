@@ -14,7 +14,7 @@ const save = async function (
   const answer = dependencies.answerSerializer.deserialize(request.payload);
   const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
   const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
-  const assessment = await dependencies.assessmentRepository.get(answer.assessmentId);
+  const assessment = await dependencies.assessmentRepository.getWithAnswers(answer.assessmentId);
   let correctedAnswer;
   if (assessment.isCompetenceEvaluation()) {
     correctedAnswer = await evaluationUsecases.saveAndCorrectAnswerForCompetenceEvaluation({

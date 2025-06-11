@@ -18,6 +18,6 @@ export default class ResumeRoute extends Route {
 
   async redirect(competenceEvaluation) {
     const assessment = await competenceEvaluation.assessment;
-    return this.router.replaceWith('assessments.resume', assessment.id);
+    this.router.replaceWith('assessments.resume', assessment.id);
   }
 }
