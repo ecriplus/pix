@@ -199,6 +199,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
           id: 'ed795d29-5f04-499c-a9c8-4019125c5cb1',
           type: 'qab',
           instruction: '<p><strong>Maintenant, entraînez-vous sur des exemples concrets !</strong></p>',
+          isAnswerable: true,
           cards: [
             {
               id: 'e222b060-7c18-4ee2-afe2-2ae27c28946a',

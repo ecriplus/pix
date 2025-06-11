@@ -117,18 +117,25 @@ module('Integration | Component | Module | QAB', function (hooks) {
     });
 
     module('when user answers the last card', function () {
-      test('should display the score card', async function (assert) {
+      test('should display the score card and call "onAnswer" function passed as argument', async function (assert) {
         // given
         const qabElement = _getQabElement();
+        const onAnswerStub = sinon.stub();
 
         // when
-        const screen = await render(<template><ModuleQabElement @element={{qabElement}} /></template>);
+        const screen = await render(
+          <template><ModuleQabElement @element={{qabElement}} @onAnswer={{onAnswerStub}} /></template>,
+        );
         await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
         await clock.tickAsync(NEXT_CARD_DELAY);
         await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
         await clock.tickAsync(NEXT_CARD_DELAY);
 
         // then
+        sinon.assert.calledWithExactly(onAnswerStub, {
+          element: qabElement,
+        });
+
         assert.dom(screen.getByText('Votre score : 1/2')).exists();
         assert.dom(screen.getByRole('button', { name: 'Réessayer' })).exists();
       });
@@ -137,9 +144,12 @@ module('Integration | Component | Module | QAB', function (hooks) {
         test('should reset the component and display the first card', async function (assert) {
           // given
           const qabElement = _getQabElement();
+          const onAnswerStub = sinon.stub();
 
           // when
-          const screen = await render(<template><ModuleQabElement @element={{qabElement}} /></template>);
+          const screen = await render(
+            <template><ModuleQabElement @element={{qabElement}} @onAnswer={{onAnswerStub}} /></template>,
+          );
           await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
           await clock.tickAsync(NEXT_CARD_DELAY);
           await click(screen.getByRole('button', { name: 'Option A: Vrai' }));

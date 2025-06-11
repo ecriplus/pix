@@ -49,23 +49,29 @@ export default class ModuleQab extends ModuleElement {
   }
 
   @action
-  goToNextCard() {
+  async goToNextCard() {
     this.removedCards.set(this.currentCard.id, true);
     this.removedCards = new Map(this.removedCards);
 
-    window.setTimeout(() => {
+    window.setTimeout(async () => {
       this.displayedCards = this.displayedCards.slice(1);
       this.currentCardStatus = '';
       this.selectedOption = null;
 
       if (this.displayedCards.length === 0) {
         this.currentStep = 'score';
+        await this.onAnswer();
       }
     }, NEXT_CARD_REMOVE_DELAY);
   }
 
   @action
-  onSubmit(event) {
+  async onAnswer() {
+    await this.args.onAnswer({ element: this.element });
+  }
+
+  @action
+  async onSubmit(event) {
     event.preventDefault();
     this.selectedOption = event.submitter.value;
     this.currentCardStatus = 'error';
@@ -77,7 +83,7 @@ export default class ModuleQab extends ModuleElement {
     this.cardStatuses.set(this.currentCard.id, this.currentCardStatus);
     this.cardStatuses = new Map(this.cardStatuses);
 
-    window.setTimeout(() => this.goToNextCard(), NEXT_CARD_TRANSITION_DELAY);
+    window.setTimeout(async () => await this.goToNextCard(), NEXT_CARD_TRANSITION_DELAY);
   }
 
   @action
