@@ -253,22 +253,6 @@ describe('Certification | Results | Acceptance | Application | Certification', f
       expect(response.statusCode).to.equal(200);
       expect(response.result).to.deep.equal(expectedBody);
     });
-
-    it('should return notFound 404 HTTP status code when user is not owner of the certification', async function () {
-      // given
-      const unauthenticatedUserId = userId + 1;
-      options = {
-        method: 'GET',
-        url: `/api/certifications/${certificationCourse.id}`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId: unauthenticatedUserId }),
-      };
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      expect(response.statusCode).to.equal(404);
-    });
   });
 
   describe('GET /api/certifications', function () {

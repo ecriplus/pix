@@ -15,13 +15,43 @@ describe('Certification | Results | Unit | Application | Certification Route', f
   });
 
   describe('GET /api/certifications/{certificationCourseId}', function () {
-    it('should exist', async function () {
-      sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
+    it('should reject access if not authenticated', async function () {
+      // given
+      const certificationCourseId = 3695;
+      sinon
+        .stub(securityPreHandlers, 'checkUserOwnsCertificationCourse')
+        .callsFake((_, h) => h.response().code(403).takeover());
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
       // when
-      const response = await httpTestServer.request('GET', '/api/certifications/1');
+
+      const response = await httpTestServer.request('GET', `/api/certifications/${certificationCourseId}`);
 
       // then
-      expect(response.statusCode).to.equal(200);
+      sinon.assert.calledOnce(securityPreHandlers.checkUserOwnsCertificationCourse);
+      expect(response.statusCode).to.equal(403);
+    });
+
+    it('should reject access to a certification that does not belong to the current user', async function () {
+      // given
+      const userId = 123;
+      const certificationCourseId = 3695;
+      sinon
+        .stub(securityPreHandlers, 'checkUserOwnsCertificationCourse')
+        .callsFake((_, h) => h.response().code(403).takeover());
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      // when
+
+      const response = await httpTestServer.request('GET', `/api/certifications/${certificationCourseId}`, {
+        auth: { credentials: { userId } },
+      });
+
+      // then
+      sinon.assert.calledOnce(securityPreHandlers.checkUserOwnsCertificationCourse);
+      expect(response.statusCode).to.equal(403);
     });
   });
 

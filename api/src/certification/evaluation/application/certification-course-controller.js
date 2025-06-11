@@ -22,7 +22,7 @@ const save = async function (request, h, dependencies = { extractLocaleFromReque
 };
 
 const get = async function (request, h, dependencies = { certificationCourseSerializer }) {
-  const certificationCourseId = request.params.id;
+  const { certificationCourseId } = request.params;
   const certificationCourse = await certificationSharedUsecases.getCertificationCourse({ certificationCourseId });
   return dependencies.certificationCourseSerializer.serialize(certificationCourse);
 };
