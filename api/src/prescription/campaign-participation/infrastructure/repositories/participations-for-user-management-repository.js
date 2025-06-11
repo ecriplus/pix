@@ -29,6 +29,7 @@ const findByUserId = async function (userId) {
           'campaign-participations.organizationLearnerId',
         )
         .where('assessments.userId', userId)
+        .where('assessments.isImproving', false)
         .where('assessments.type', Assessment.types.CAMPAIGN)
         .union(function () {
           // using UNION will remove lines having the exact same attibutes
@@ -61,25 +62,14 @@ const findByUserId = async function (userId) {
       'status',
       'campaignId',
       'campaignCode',
-      knex.raw('min("createdAt") as "createdAt"'),
+      'createdAt',
       'sharedAt',
       'deletedAt',
-      knex.raw('max("updatedAt") as "updatedAt"'),
+      'updatedAt',
       'organizationLearnerFirstName',
       'organizationLearnerLastName',
     ])
     .from('participations')
-    .groupBy(
-      'campaignParticipationId',
-      'participantExternalId',
-      'status',
-      'campaignId',
-      'campaignCode',
-      'sharedAt',
-      'deletedAt',
-      'organizationLearnerFirstName',
-      'organizationLearnerLastName',
-    )
     .orderBy('createdAt', 'desc')
     .orderBy('campaignCode', 'asc')
     .orderBy('sharedAt', 'desc');
