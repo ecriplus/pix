@@ -1,5 +1,4 @@
 import Redis from 'ioredis';
-import Redlock from 'redlock';
 
 import { logger } from './logger.js';
 
@@ -15,13 +14,6 @@ class RedisClient {
     this._client.on('end', () => logger.info({ redisClient: this._clientName }, 'Disconnected from server'));
     this._client.on('error', (err) => logger.error({ redisClient: this._clientName, err }, 'Error encountered'));
 
-    this._clientWithLock = new Redlock(
-      [this._client],
-      // As said in the doc, setting retryCount to 0 and treating a failure as the resource being "locked"
-      // is a good practice
-      { retryCount: 0 },
-    );
-
     this.ttl = this._wrapWithPrefix(this._client.ttl).bind(this._client);
     this.get = this._wrapWithPrefix(this._client.get).bind(this._client);
     this.incr = this._wrapWithPrefix(this._client.incr).bind(this._client);
@@ -36,7 +28,6 @@ class RedisClient {
     this.keys = this._wrapWithPrefix(this._client.keys).bind(this._client);
     this.ping = this._client.ping.bind(this._client);
     this.flushall = this._client.flushall.bind(this._client);
-    this.lock = this._clientWithLock.lock.bind(this._clientWithLock);
   }
 
   _wrapWithPrefix(fn) {
