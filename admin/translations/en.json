@@ -954,21 +954,21 @@
             "aria-label": "Filtrer les sessions en sélectionnant un type de centre de certification"
           },
           "version": {
-            "aria-label": "Filtrer les sessions par leur version",
+            "aria-label": "Filter sessions by certification version",
             "label": "Version"
           }
         },
         "required-actions": {
-          "v2": "Sessions with required actions",
-          "v3": "V3 sessions with required actions"
+          "v2": "V2 — Sessions with required actions",
+          "v3": "V3 — Sessions with required actions"
         },
         "to-be-published": {
-          "v2": "Sessions to be published",
-          "v3": "V3 sessions to be published"
+          "v2": "V2 — Sessions to be published",
+          "v3": "V3 — Sessions to be published"
         }
       },
       "table": {
-        "caption": "Tableau listant les sessions de certification. Il indique l'identifiant unique, le nom du centre de certification auquel il appartient, l'identifiant externe, la catégorie, le statut, les dates de passage, de finalisation et de publication et la version de la session.",
+        "caption": "Table listing the certification sessions. It indicates the unique identifier, the name of the certification centre to which it belongs, the external identifier, the category, the status, the passing, finalisation and publication dates and the certification version.",
         "headers": {
           "certification-name": "Centre de certification",
           "external-id": "Identifiant externe",
@@ -978,7 +978,7 @@
           "session-date": "Date de session",
           "status": "Statut",
           "type": "Catégorie",
-          "version": "Version de la session"
+          "version": "Certification version"
         },
         "required-actions": {
           "caption": "Liste des sessions nécessitant un traitement par un interne Pix. Contient l'identifiant unique de la session, le nom du centre de certification, la date de finalisation et le nom de l'interne en charge du traitement.",

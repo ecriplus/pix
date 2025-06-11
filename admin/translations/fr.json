@@ -954,21 +954,21 @@
             "aria-label": "Filtrer les sessions en sélectionnant un type de centre de certification"
           },
           "version": {
-            "aria-label": "Filtrer les sessions par leur version",
+            "aria-label": "Filtrer les sessions par version de certification",
             "label": "Version"
           }
         },
         "required-actions": {
-          "v2": "Sessions à traiter V2",
-          "v3": "Sessions à traiter V3"
+          "v2": "V2 — Sessions à traiter",
+          "v3": "V3 — Sessions à traiter"
         },
         "to-be-published": {
-          "v2": "Sessions à publier V2",
-          "v3": "Sessions à publier V3"
+          "v2": "V2 — Sessions à publier",
+          "v3": "V3 — Sessions à publier"
         }
       },
       "table": {
-        "caption": "Tableau listant les sessions de certification. Il indique l'identifiant unique, le nom du centre de certification auquel il appartient, l'identifiant externe, la catégorie, le statut, les dates de passage, de finalisation et de publication et la version de la session.",
+        "caption": "Tableau listant les sessions de certification. Il indique l'identifiant unique, le nom du centre de certification auquel il appartient, l'identifiant externe, la catégorie, le statut, les dates de passage, de finalisation et de publication et la version de certification.",
         "headers": {
           "certification-name": "Centre de certification",
           "external-id": "Identifiant externe",
@@ -978,7 +978,7 @@
           "session-date": "Date de session",
           "status": "Statut",
           "type": "Catégorie",
-          "version": "Version de la session"
+          "version": "Version de certification"
         },
         "required-actions": {
           "caption": "Liste des sessions nécessitant un traitement par un interne Pix. Contient l'identifiant unique de la session, le nom du centre de certification, la date de finalisation et le nom de l'interne en charge du traitement.",
