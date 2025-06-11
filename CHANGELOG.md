@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.131.0](https://github.com/1024pix/pix/compare/v5.130.0...v5.131.0) (2025-06-11)
+
+### :rocket: Amélioration
+
+- [#12447](https://github.com/1024pix/pix/pull/12447) Améliorer les transitions entre les cartes de la modalité Question A/B (QAB) (PIX-18069) 
+- [#12428](https://github.com/1024pix/pix/pull/12428) Anonymiser le prescrit quand on anonymise un utilisateur (PIX-17850). 
+- [#12426](https://github.com/1024pix/pix/pull/12426) Modifier les wordings de la page d'analyse de résultats de campagne (PIX-17836). 
+- [#12472](https://github.com/1024pix/pix/pull/12472) Ne plus parler de session de version dans admin (PIX-18109). 
+- [#12449](https://github.com/1024pix/pix/pull/12449) Remplacer le campaignCode par un organizationId et redirectionUrl dans le usecase createAndReconcileUserToOrganizationLearner (PIX-18094) 
+
+### :bug: Correction
+
+- [#12458](https://github.com/1024pix/pix/pull/12458) Afficher 1 ligne par participation supprimé sur la page Participants dans PixAdmin (PIX-18080). 
+- [#12491](https://github.com/1024pix/pix/pull/12491) Traduction manquante sur Mes attestations (PIX-18156) 
+
+### :arrow_up: Montée de version
+
+- [#12482](https://github.com/1024pix/pix/pull/12482) Update dependency ember-source to ~6.4.0 (junior)
+
 ## v5.130.0 (10/06/2025)
 
 
