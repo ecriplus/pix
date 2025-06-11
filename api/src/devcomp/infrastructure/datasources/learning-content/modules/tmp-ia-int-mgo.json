@@ -48,7 +48,7 @@
                 "content": "<p>il est impressionnant</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": ""
+                  "diagnosis": "diag"
                 }
               },
               {
@@ -56,7 +56,7 @@
                 "content": "<p>il parle très bien</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": ""
+                  "diagnosis": "diag"
                 }
               },
               {
@@ -64,7 +64,7 @@
                 "content": "<p>il est incollable</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": ""
+                  "diagnosis": "diag"
                 }
               },
               {
@@ -72,7 +72,7 @@
                 "content": "<p>il cherche toujours à aider</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": ""
+                  "diagnosis": "diag"
                 }
               },
               {
@@ -80,7 +80,7 @@
                 "content": "<p>je n’en pense rien de particulier</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": ""
+                  "diagnosis": "diag"
                 }
               }
             ]
