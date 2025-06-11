@@ -81,7 +81,7 @@ const createServer = async () => {
     // OPS metrics via direct metrics
     if (config.metrics.isDirectMetricsEnabled) await enableOpsMetrics(server, metrics);
     // OPS metrics via Oppsy
-    if (!config.featureToggles.isOppsyDisabled) await enableLegacyOpsMetrics(server);
+    if (!config.metrics.isOppsyDisabled) await enableLegacyOpsMetrics(server);
   }
 
   setupErrorHandling(server);

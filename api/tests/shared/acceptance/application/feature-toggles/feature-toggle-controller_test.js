@@ -25,7 +25,6 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'is-always-ok-validate-next-challenge-endpoint-enabled': false,
             'is-async-quest-rewarding-calculation-enabled': false,
             'is-new-account-recovery-enabled': false,
-            'is-oppsy-disabled': false,
             'is-quest-enabled': true,
             'is-self-account-deletion-enabled': true,
             'is-text-to-speech-button-enabled': false,
