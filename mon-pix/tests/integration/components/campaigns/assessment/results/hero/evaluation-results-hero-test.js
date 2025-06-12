@@ -289,6 +289,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
               masteryRate: 0.75,
               reachedStage: { acquired: 4, total: 5 },
             });
+
             // when
             const screen = await render(
               hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
@@ -298,6 +299,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
   @isSharableCampaign={{true}}
 />`,
             );
+
             // then
             assert.ok(screen.getByRole('button', { name: t('pages.skill-review.actions.send') }));
             assert.notOk(screen.queryByText(t('pages.sign-up.save-progress-message')));
@@ -578,28 +580,72 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
   module('when campaign results should not be shared', function () {
     module('when there is no custom link', function () {
       module('when user is anonymous', function () {
-        test('it should display only a connection link', async function (assert) {
-          // given
-          stubCurrentUserService(this.owner, { isAnonymous: true });
+        module('when feature toggle upgradeToRealUserEnabled is true ', function () {
+          test('it should display only an inscription link', async function (assert) {
+            // given
+            class FeatureTogglesStub extends Service {
+              featureToggles = { upgradeToRealUserEnabled: true };
+            }
 
-          this.set('campaign', { hasCustomResultPageButton: false });
-          this.set('campaignParticipationResult', { masteryRate: 0.75 });
+            this.owner.register('service:featureToggles', FeatureTogglesStub);
 
-          // when
-          const screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
+            stubCurrentUserService(this.owner, { isAnonymous: true });
+
+            this.set('campaign', { hasCustomResultPageButton: false });
+            this.set('campaignParticipationResult', { masteryRate: 0.75 });
+
+            // when
+            const screen = await render(
+              hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
   @campaign={{this.campaign}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
   @isSharableCampaign={{false}}
 />`,
-          );
+            );
 
-          // then
-          assert.dom(screen.queryByText(t('pages.skill-review.hero.explanations.send-results'))).doesNotExist();
+            // then
+            assert.dom(screen.queryByText(t('pages.sign-up.save-progress-message'))).exists();
+            assert.dom(screen.getByRole('link', { name: t('pages.sign-up.actions.sign-up-on-pix') })).exists();
+            assert
+              .dom(screen.queryByRole('button', { name: t('pages.skill-review.hero.see-trainings') }))
+              .doesNotExist();
+            assert.dom(screen.queryByText(t('pages.skill-review.hero.explanations.send-results'))).doesNotExist();
+            assert.dom(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') })).doesNotExist();
+          });
+        });
+        module('when feature toggle upgradeToRealUserEnabled is false', function () {
+          test('it should display only a connection link', async function (assert) {
+            // given
+            class FeatureTogglesStub extends Service {
+              featureToggles = { upgradeToRealUserEnabled: false };
+            }
 
-          assert.dom(screen.getByRole('link', { name: t('common.actions.login') })).exists();
-          assert.dom(screen.queryByRole('button', { name: t('pages.skill-review.hero.see-trainings') })).doesNotExist();
-          assert.dom(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') })).doesNotExist();
+            this.owner.register('service:featureToggles', FeatureTogglesStub);
+
+            stubCurrentUserService(this.owner, { isAnonymous: true });
+
+            this.set('campaign', { hasCustomResultPageButton: false });
+            this.set('campaignParticipationResult', { masteryRate: 0.75 });
+
+            // when
+            const screen = await render(
+              hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
+  @campaign={{this.campaign}}
+  @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{false}}
+/>`,
+            );
+
+            // then
+            assert.dom(screen.getByRole('link', { name: t('navigation.back-to-homepage') })).exists();
+            assert
+              .dom(screen.queryByRole('button', { name: t('pages.skill-review.hero.see-trainings') }))
+              .doesNotExist();
+            assert.dom(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') })).doesNotExist();
+            assert.dom(screen.queryByText(t('pages.skill-review.hero.explanations.send-results'))).doesNotExist();
+            assert.dom(screen.queryByText(t('pages.sign-up.save-progress-message'))).doesNotExist();
+            assert.dom(screen.queryByRole('link', { name: t('pages.sign-up.actions.sign-up-on-pix') })).doesNotExist();
+          });
         });
       });
 
@@ -621,11 +667,12 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           );
 
           // then
-          assert.dom(screen.queryByText(t('pages.skill-review.hero.explanations.send-results'))).doesNotExist();
-
           assert.dom(screen.getByRole('link', { name: t('navigation.back-to-homepage') })).exists();
+          assert.dom(screen.queryByText(t('pages.skill-review.hero.explanations.send-results'))).doesNotExist();
           assert.dom(screen.queryByRole('button', { name: t('pages.skill-review.hero.see-trainings') })).doesNotExist();
           assert.dom(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') })).doesNotExist();
+          assert.dom(screen.queryByText(t('pages.sign-up.save-progress-message'))).doesNotExist();
+          assert.dom(screen.queryByRole('link', { name: t('pages.sign-up.actions.sign-up-on-pix') })).doesNotExist();
         });
       });
     });
@@ -715,8 +762,10 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           // given
           const pendingPromise = new Promise(() => {});
           beginImprovementStub.resolves(pendingPromise);
+
           // when
           await click(screen.getByRole('button', { name: t('pages.skill-review.actions.improve') }));
+
           // then
           assert.notOk(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') }));
           assert.notOk(screen.queryByRole('button', { name: t('pages.skill-review.actions.improve') }));
@@ -726,8 +775,10 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           // given
           const pendingPromise = new Promise(() => {});
           beginImprovementStub.resolves(pendingPromise);
+
           // when
           await click(screen.getByRole('button', { name: t('pages.skill-review.actions.send') }));
+
           // then
           assert.notOk(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') }));
           assert.notOk(screen.queryByRole('button', { name: t('pages.skill-review.actions.improve') }));
@@ -753,6 +804,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
           // when
           await click(screen.getByRole('button', { name: t('pages.skill-review.actions.improve') }));
+
           // then
           assert.dom(screen.queryByText(t('pages.skill-review.error'))).exists();
           assert.dom(screen.getByText(t('pages.skill-review.hero.explanations.improve'))).exists();

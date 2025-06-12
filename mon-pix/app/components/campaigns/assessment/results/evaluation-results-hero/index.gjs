@@ -63,6 +63,12 @@ export default class EvaluationResultsHero extends Component {
     return this.featureToggles.featureToggles?.upgradeToRealUserEnabled && this.currentUser.user.isAnonymous;
   }
 
+  get dynamicRoute() {
+    return this.featureToggles.featureToggles?.upgradeToRealUserEnabled && this.currentUser.user.isAnonymous
+      ? 'inscription'
+      : 'authentication.login';
+  }
+
   get hasQuestResults() {
     return this.args.questResults && this.args.questResults.length > 0;
   }
@@ -275,9 +281,16 @@ export default class EvaluationResultsHero extends Component {
           {{else}}
             {{#unless @campaign.hasCustomResultPageButton}}
               {{this.handleBackToHomepageDisplay}}
-              <PixButtonLink @route="authentication.login" @size="large" onclick={{this.handleBackToHomepageClick}}>
-                {{if this.currentUser.user.isAnonymous (t "common.actions.login") (t "navigation.back-to-homepage")}}
-              </PixButtonLink>
+              {{#if this.isUserAnonymousAndUpgradeToRealUserEnabled}}
+                <p>{{t "pages.sign-up.save-progress-message"}}</p>
+                <PixButtonLink @route={{this.dynamicRoute}} @size="large" onclick={{this.handleBackToHomepageClick}}>
+                  {{t "pages.sign-up.actions.sign-up-on-pix"}}
+                </PixButtonLink>
+              {{else}}
+                <PixButtonLink @route="authentication.login" @size="large" onclick={{this.handleBackToHomepageClick}}>
+                  {{t "navigation.back-to-homepage"}}
+                </PixButtonLink>
+              {{/if}}
             {{/unless}}
           {{/if}}
 
