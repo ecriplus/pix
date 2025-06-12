@@ -10,18 +10,22 @@ module('Unit | Route | campaigns/invited/student-sco', function (hooks) {
     test('should redirect to campaigns.invited.fill-in-participant-external-id when an association already exists', async function (assert) {
       // given
       const route = this.owner.lookup('route:campaigns.invited.student-sco');
-      const campaign = { code: 'campaignCode' };
+      const campaign = { code: 'campaignCode', organizationId: 1 };
       route.paramsFor = sinon.stub().returns(campaign);
+      const user = { id: 'id' };
+      const queryRecordStub = sinon.stub();
       route.set(
         'store',
         Service.create({
-          queryRecord: sinon.stub().resolves('a student user association'),
+          queryRecord: queryRecordStub
+            .withArgs({ organizationId: campaign.organizationId, userId: user.id })
+            .resolves('a student user association'),
         }),
       );
       route.set(
         'currentUser',
         Service.create({
-          user: { id: 'id' },
+          user,
         }),
       );
       route.router = { replaceWith: sinon.stub() };
