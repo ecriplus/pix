@@ -3,6 +3,8 @@ import _ from 'lodash';
 import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { CertificationCompletedJob } from '../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import * as badgeAcquisitionRepository from '../../../../../src/evaluation/infrastructure/repositories/badge-acquisition-repository.js';
+import { CHAT_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
+import { CONFIGURATION_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/configuration-repository.js';
 import {
   CRITERION_COMPARISONS,
   REQUIREMENT_COMPARISONS,
@@ -10,6 +12,8 @@ import {
 } from '../../../../../src/quest/domain/models/Quest.js';
 import { LOCALE } from '../../../../../src/shared/domain/constants.js';
 import { Assessment, TrainingTrigger } from '../../../../../src/shared/domain/models/index.js';
+import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
+import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import {
   createServer,
   databaseBuilder,
@@ -18,7 +22,12 @@ import {
   knex,
   learningContentBuilder,
   mockLearningContent,
+  nock,
+  sinon,
 } from '../../../../test-helper.js';
+
+const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
+const configurationTemporaryStorage = temporaryStorage.withPrefix(CONFIGURATION_STORAGE_PREFIX);
 
 describe('Acceptance | Controller | assessment-controller-complete-assessment', function () {
   let options;
@@ -732,6 +741,95 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
               locale: LOCALE.FRENCH_FRANCE,
             });
           });
+        });
+      });
+    });
+  });
+
+  describe('POST /api/assessments/{assessmentId}/embed/llm/chats', function () {
+    let clock, now, user;
+
+    beforeEach(async function () {
+      user = databaseBuilder.factory.buildUser();
+      databaseBuilder.factory.buildAssessment({ id: 111, userId: user.id }).id;
+      now = new Date('2023-10-05T18:02:00Z');
+      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+      await databaseBuilder.commit();
+    });
+
+    afterEach(async function () {
+      clock.restore();
+      await chatTemporaryStorage.flushAll();
+      await configurationTemporaryStorage.flushAll();
+    });
+
+    context('when user is not authenticated', function () {
+      it('should throw a 401', async function () {
+        // when
+        const response = await server.inject({
+          method: 'POST',
+          url: '/api/assessments/111/embed/llm/chats',
+          payload: { configId: 'c1SuperConfig2Lespace' },
+        });
+
+        expect(response.statusCode).to.equal(401);
+      });
+    });
+
+    context('when user is authenticated', function () {
+      context('when feature toggle is enabled', function () {
+        beforeEach(function () {
+          return featureToggles.set('isEmbedLLMEnabled', true);
+        });
+
+        it('should start a new chat', async function () {
+          // given
+          const config = {
+            llm: {
+              historySize: 123,
+            },
+            challenge: {
+              inputMaxChars: 456,
+              inputMaxPrompts: 789,
+            },
+          };
+          const llmApiScope = nock('https://llm-test.pix.fr/api')
+            .get('/configurations/c1SuperConfig2Lespace')
+            .reply(200, config);
+
+          // when
+          const response = await server.inject({
+            method: 'POST',
+            url: '/api/assessments/111/embed/llm/chats',
+            payload: { configId: 'c1SuperConfig2Lespace' },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+          });
+
+          // then
+          expect(response.statusCode).to.equal(201);
+          expect(response.result).to.deep.equal({
+            chatId: `${user.id}-${now.getMilliseconds()}`,
+            inputMaxChars: 456,
+            inputMaxPrompts: 789,
+          });
+          expect(llmApiScope.isDone()).to.be.true;
+        });
+      });
+
+      context('when feature toggle is disabled', function () {
+        beforeEach(function () {
+          return featureToggles.set('isEmbedLLMEnabled', false);
+        });
+        it('should throw a 503 status code', async function () {
+          // when
+          const response = await server.inject({
+            method: 'POST',
+            url: '/api/assessments/111/embed/llm/chats',
+            payload: { configId: 'c1SuperConfig2Lespace' },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+          });
+
+          expect(response.statusCode).to.equal(503);
         });
       });
     });
