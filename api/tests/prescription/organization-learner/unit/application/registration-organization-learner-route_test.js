@@ -14,7 +14,7 @@ describe('Unit | Application | Router | organization-learner-router', function (
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
 
-      const url = '/api/organization-learners?userId=1&campaignCode=ABCDEF123';
+      const url = '/api/organization-learners?userId=1&organizationId=1';
 
       // when
       const response = await httpTestServer.request(method, url);

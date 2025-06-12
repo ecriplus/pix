@@ -4,12 +4,11 @@ import * as organizationLearnerIdentitySerializer from '../infrastructure/serial
 const findAssociation = async function (request, h, dependencies = { organizationLearnerIdentitySerializer }) {
   const authenticatedUserId = request.auth.credentials.userId;
 
-  const requestedUserId = parseInt(request.query.userId);
-  const organizationId = request.query.organizationId;
+  const { userId, organizationId } = request.query;
 
   const organizationLearner = await usecases.findAssociationBetweenUserAndOrganizationLearner({
     authenticatedUserId,
-    requestedUserId,
+    requestedUserId: userId,
     organizationId,
   });
 
