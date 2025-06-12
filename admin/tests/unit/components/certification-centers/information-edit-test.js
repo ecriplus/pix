@@ -19,7 +19,7 @@ module('Unit | Component | certification-centers/information-edit', function (ho
     });
   });
 
-  module('#availableHabilitations', function () {
+  module('#sortedHabilitations', function () {
     test('it should return a sorted list of available habilitations', async function (assert) {
       // given
       const component = createGlimmerComponent('component:certification-centers/information-edit', {
@@ -33,16 +33,16 @@ module('Unit | Component | certification-centers/information-edit', function (ho
       });
 
       // when & then
-      assert.strictEqual(component.availableHabilitations.length, 3);
-      assert.strictEqual(component.availableHabilitations[0].id, 1);
-      assert.strictEqual(component.availableHabilitations[2].id, 321);
+      assert.strictEqual(component.sortedHabilitations.length, 3);
+      assert.strictEqual(component.sortedHabilitations[0].id, 1);
+      assert.strictEqual(component.sortedHabilitations[2].id, 321);
     });
   });
 
-  module('#selectCertificationCenterType', function () {
+  module('#onTypeChange', function () {
     test('it should update the certification center type', function (assert) {
       // given & when
-      component.selectCertificationCenterType('My Super Duper Type');
+      component.onTypeChange('My Super Duper Type');
 
       // then
       assert.strictEqual(component.form.type, 'My Super Duper Type');

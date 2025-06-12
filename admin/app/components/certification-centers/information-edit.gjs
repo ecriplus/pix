@@ -4,81 +4,66 @@ import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
-import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import sortBy from 'lodash/sortBy';
 
-import contains from '../../helpers/contains.js';
 import { types } from '../../models/certification-center';
 
 export default class InformationEdit extends Component {
   @service store;
-  @tracked habilitations = [];
+  @tracked selectedHabilitations = [];
   certificationCenterTypes = types;
 
   constructor() {
     super(...arguments);
     this.form = this.store.createRecord('certification-center-form');
-    Promise.resolve(this.args.certificationCenter.habilitations).then((habilitations) => {
-      this.habilitations = habilitations;
-    });
-
-    this._initForm();
+    this.loadForm();
   }
 
-  get availableHabilitations() {
+  get sortedHabilitations() {
     return sortBy(this.args.availableHabilitations, 'id');
   }
 
-  @action
-  onFormInputChange(name) {
-    return (event) => {
-      this.form.set(name, event.target.value);
-    };
-  }
+  onFormInputChange = (name) => (event) => {
+    this.form.set(name, event.target.value);
+  };
 
-  @action
-  selectCertificationCenterType(value) {
+  onTypeChange = (value) => {
     this.form.set('type', value ? value.trim() : value);
-  }
+  };
 
-  @action
-  async updateGrantedHabilitation(habilitation) {
-    const habilitations = await this.form.habilitations;
-    if (habilitations.includes(habilitation)) {
-      const index = habilitations.indexOf(habilitation);
-      habilitations.splice(index, 1);
+  onToggleHabilitation = (habilitation) => {
+    const index = this.selectedHabilitations.findIndex((h) => h.id === habilitation.id);
+    if (index !== -1) {
+      this.selectedHabilitations.splice(index, 1);
+      this.selectedHabilitations = [...this.selectedHabilitations];
     } else {
-      habilitations.push(habilitation);
+      this.selectedHabilitations = [...this.selectedHabilitations, habilitation];
     }
-  }
+  };
 
-  @action
-  async updateCertificationCenter(event) {
+  isSelectedHabilitation = (habilitation) => {
+    const index = this.selectedHabilitations.findIndex((h) => h.id === habilitation.id);
+    return index !== -1;
+  };
+
+  save = async (event) => {
     event.preventDefault();
 
     const { validations } = await this.form.validate();
-    if (!validations.isValid) {
-      return;
-    }
-    const habilitations = await this.form.habilitations;
-    this.args.certificationCenter.set('name', this.form.name);
-    this.args.certificationCenter.set('externalId', !this.form.externalId ? null : this.form.externalId);
-    this.args.certificationCenter.set('type', this.form.type);
-    this.args.certificationCenter.set('habilitations', habilitations);
-    this.args.certificationCenter.set('dataProtectionOfficerFirstName', this.form.dataProtectionOfficerFirstName);
-    this.args.certificationCenter.set('dataProtectionOfficerLastName', this.form.dataProtectionOfficerLastName);
-    this.args.certificationCenter.set('dataProtectionOfficerEmail', this.form.dataProtectionOfficerEmail);
+    if (!validations.isValid) return;
 
+    this.applyFormToModel();
     this.args.toggleEditMode();
     return this.args.onSubmit();
-  }
+  };
 
-  async _initForm() {
-    const habilitations = await this.args.certificationCenter.habilitations;
+  loadForm = async () => {
+    this.selectedHabilitations = await this.args.certificationCenter.habilitations;
+
     const properties = this.args.certificationCenter.getProperties(
       'name',
       'externalId',
@@ -87,12 +72,25 @@ export default class InformationEdit extends Component {
       'dataProtectionOfficerLastName',
       'dataProtectionOfficerEmail',
     );
-    this.form.setProperties({ ...properties, habilitations });
-  }
+
+    this.form.setProperties(properties);
+  };
+
+  applyFormToModel = () => {
+    this.args.certificationCenter.setProperties({
+      name: this.form.name,
+      externalId: this.form.externalId || null,
+      type: this.form.type,
+      habilitations: this.selectedHabilitations,
+      dataProtectionOfficerFirstName: this.form.dataProtectionOfficerFirstName,
+      dataProtectionOfficerLastName: this.form.dataProtectionOfficerLastName,
+      dataProtectionOfficerEmail: this.form.dataProtectionOfficerEmail,
+    });
+  };
 
   <template>
     <h2 class="certification-center-information__edit-title">Modifier un centre de certification</h2>
-    <form class="form certification-center-information__edit-form" onsubmit={{this.updateCertificationCenter}}>
+    <form class="form certification-center-information__edit-form" onsubmit={{this.save}}>
 
       <PixInput
         class={{if this.form.validations.attrs.name.isInValid "form-control is-invalid" "form-control"}}
@@ -113,7 +111,7 @@ export default class InformationEdit extends Component {
         @options={{this.certificationCenterTypes}}
         @placeholder="-- Choisissez --"
         @value={{this.form.type}}
-        @onChange={{this.selectCertificationCenterType}}
+        @onChange={{this.onTypeChange}}
         @errorMessage={{this.form.validations.attrs.type.message}}
       >
         <:label>Type</:label>
@@ -186,11 +184,11 @@ export default class InformationEdit extends Component {
 
       <span class="field-label">Habilitations aux certifications complémentaires</span>
       <ul class="form-field certification-center-information__edit-form__habilitations-checkbox-list">
-        {{#each this.availableHabilitations as |habilitation|}}
+        {{#each this.sortedHabilitations as |habilitation|}}
           <li class="habilitation-entry">
             <PixCheckbox
-              @checked={{contains habilitation this.habilitations}}
-              {{on "change" (fn this.updateGrantedHabilitation habilitation)}}
+              @checked={{this.isSelectedHabilitation habilitation}}
+              {{on "change" (fn this.onToggleHabilitation habilitation)}}
             >
               <:label>
                 {{habilitation.label}}
