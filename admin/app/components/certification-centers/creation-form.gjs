@@ -4,69 +4,96 @@ import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { concat, fn } from '@ember/helper';
 import { on } from '@ember/modifier';
-import { action } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import sortBy from 'lodash/sortBy';
 
 import { types } from '../../models/certification-center';
 
-export default class CertificationCenterForm extends Component {
-  @tracked habilitations = [];
+export default class CreationForm extends Component {
+  @service pixToast;
+  @service router;
+  @service store;
+
+  @tracked name = '';
+  @tracked type = '';
+  @tracked externalId = '';
+  @tracked dataProtectionOfficerFirstName = '';
+  @tracked dataProtectionOfficerLastName = '';
+  @tracked dataProtectionOfficerEmail = '';
+  @tracked selectedHabilitations = [];
+
   certificationCenterTypes = types;
 
-  constructor() {
-    super(...arguments);
-    Promise.resolve(this.args.certificationCenter.habilitations).then((habilitations) => {
-      this.habilitations = habilitations;
-    });
-  }
-  @action
-  handleCenterNameChange(event) {
-    this.args.certificationCenter.name = event.target.value;
+  get sortedHabilitations() {
+    return sortBy(this.args.habilitations, 'id');
   }
 
-  @action
-  handleExternalIdChange(event) {
-    this.args.certificationCenter.externalId = event.target.value;
-  }
+  onNameChange = (event) => {
+    this.name = event.target.value;
+  };
 
-  @action
-  handleDataProtectionOfficerFirstNameChange(event) {
-    this.args.certificationCenter.dataProtectionOfficerFirstName = event.target.value;
-  }
+  onTypeChange = (value) => {
+    this.type = value;
+  };
 
-  @action
-  handleDataProtectionOfficerLastNameChange(event) {
-    this.args.certificationCenter.dataProtectionOfficerLastName = event.target.value;
-  }
+  onExternalIdChange = (event) => {
+    this.externalId = event.target.value;
+  };
 
-  @action
-  handleDataProtectionOfficerEmailChange(event) {
-    this.args.certificationCenter.dataProtectionOfficerEmail = event.target.value;
-  }
+  onDataProtectionOfficerFirstNameChange = (event) => {
+    this.dataProtectionOfficerFirstName = event.target.value;
+  };
 
-  @action
-  selectCertificationCenterType(value) {
-    this.args.certificationCenter.type = value;
-  }
+  onDataProtectionOfficerLastNameChange = (event) => {
+    this.dataProtectionOfficerLastName = event.target.value;
+  };
 
-  @action
-  updateGrantedHabilitation(habilitation) {
-    const index = this.habilitations.indexOf(habilitation);
+  onDataProtectionOfficerEmailChange = (event) => {
+    this.dataProtectionOfficerEmail = event.target.value;
+  };
+
+  onToggleHabilitation = (habilitation) => {
+    const index = this.selectedHabilitations.findIndex((h) => h.id === habilitation.id);
     if (index !== -1) {
-      this.habilitations.splice(index, 1);
+      this.selectedHabilitations.splice(index, 1);
+      this.selectedHabilitations = [...this.selectedHabilitations];
     } else {
-      this.habilitations.push(habilitation);
+      this.selectedHabilitations = [...this.selectedHabilitations, habilitation];
     }
-  }
+  };
+
+  save = async (event) => {
+    event.preventDefault();
+
+    const record = this.store.createRecord('certification-center', {
+      name: this.name,
+      type: this.type,
+      externalId: this.externalId?.trim() ? this.externalId : null,
+      dataProtectionOfficerFirstName: this.dataProtectionOfficerFirstName,
+      dataProtectionOfficerLastName: this.dataProtectionOfficerLastName,
+      dataProtectionOfficerEmail: this.dataProtectionOfficerEmail,
+      habilitations: [...this.selectedHabilitations],
+    });
+
+    try {
+      await record.save();
+      this.pixToast.sendSuccessNotification({ message: 'Le centre de certification a été créé avec succès.' });
+      this.router.transitionTo('authenticated.certification-centers.get', record.id);
+    } catch (error) {
+      const message = error?.errors ? error.errors?.map((e) => e.detail).join(', ') : 'Une erreur est survenue.';
+      this.pixToast.sendErrorNotification({ message });
+    }
+  };
 
   <template>
-    <form class="form certification-center-form" {{on "submit" @onSubmit}}>
+    <form class="form certification-center-form" {{on "submit" this.save}}>
 
       <PixInput
         @id="certificationCenterName"
-        onchange={{this.handleCenterNameChange}}
+        onchange={{this.onNameChange}}
         class="form-field"
         required={{true}}
         aria-required={{true}}
@@ -79,9 +106,9 @@ export default class CertificationCenterForm extends Component {
           @options={{this.certificationCenterTypes}}
           @placeholder="-- Choisissez --"
           @hideDefaultOption={{true}}
-          @onChange={{this.selectCertificationCenterType}}
-          @value={{@certificationCenter.type}}
-          required={{true}}
+          @onChange={{this.onTypeChange}}
+          @value={{this.type}}
+          @required={{true}}
           aria-required={{true}}
         >
           <:label>Type d'établissement</:label>
@@ -89,13 +116,13 @@ export default class CertificationCenterForm extends Component {
         </PixSelect>
       </div>
 
-      <PixInput @id="certificationCenterExternalId" onchange={{this.handleExternalIdChange}} class="form-field">
+      <PixInput @id="certificationCenterExternalId" onchange={{this.onExternalIdChange}} class="form-field">
         <:label>Identifiant externe</:label>
       </PixInput>
 
       <PixInput
         @id="dataProtectionOfficerFirstName"
-        {{on "change" this.handleDataProtectionOfficerFirstNameChange}}
+        {{on "change" this.onDataProtectionOfficerFirstNameChange}}
         class="form-field"
       >
         <:label>Prénom du DPO</:label>
@@ -103,7 +130,7 @@ export default class CertificationCenterForm extends Component {
 
       <PixInput
         @id="dataProtectionOfficerLastName"
-        {{on "change" this.handleDataProtectionOfficerLastNameChange}}
+        {{on "change" this.onDataProtectionOfficerLastNameChange}}
         class="form-field"
       >
         <:label>Nom du DPO</:label>
@@ -111,7 +138,7 @@ export default class CertificationCenterForm extends Component {
 
       <PixInput
         @id="dataProtectionOfficerEmail"
-        {{on "change" this.handleDataProtectionOfficerEmailChange}}
+        {{on "change" this.onDataProtectionOfficerEmailChange}}
         class="form-field"
       >
         <:label>Adresse e-mail du DPO</:label>
@@ -120,12 +147,12 @@ export default class CertificationCenterForm extends Component {
       <section>
         <h2 class="habilitations-title">Habilitations aux certifications complémentaires</h2>
         <ul class="form-field habilitations-checkbox-list">
-          {{#each @habilitations as |habilitation index|}}
+          {{#each this.sortedHabilitations as |habilitation index|}}
             <li class="habilitation-entry">
               <PixCheckbox
                 @id={{concat "habilitation_" index}}
                 @size="small"
-                onChange={{fn this.updateGrantedHabilitation habilitation}}
+                onChange={{fn this.onToggleHabilitation habilitation}}
               >
                 <:label>{{habilitation.label}}</:label>
               </PixCheckbox>
