@@ -12,7 +12,7 @@ describe('Integration | Monitoring | Infrastructure | metrics', function () {
         process.env.DATADOG_API_KEY = 'API_KEY';
         process.env.DEBUG = 'metrics';
 
-        const config = { featureToggles: { isDirectMetricsEnabled: false }, infra: { containerName: 'web-1' } };
+        const config = { metrics: { isDirectMetricsEnabled: false }, infra: { containerName: 'web-1' } };
         nock('https://api.datadog_fake.com').post('/api/v1/series').reply(200);
 
         // when
@@ -32,7 +32,7 @@ describe('Integration | Monitoring | Infrastructure | metrics', function () {
         process.env.DATADOG_API_KEY = 'API_KEY';
         process.env.DEBUG = 'metrics';
 
-        const config = { featureToggles: { isDirectMetricsEnabled: true }, infra: { containerName: 'web-1' } };
+        const config = { metrics: { isDirectMetricsEnabled: true }, infra: { containerName: 'web-1' } };
         nock('https://api.datadog_fake.com').post('/api/v1/series').reply(200);
 
         // when

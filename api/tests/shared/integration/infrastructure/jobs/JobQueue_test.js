@@ -46,11 +46,7 @@ describe('Integration | Infrastructure | Jobs | JobQueue', function () {
           }
         };
 
-        jobQueue.register(
-          new Metrics({ config: { featureToggles: { isDirectMetricsEnabled: false } } }),
-          name,
-          handler,
-        );
+        jobQueue.register(new Metrics({ config: { metrics: { isDirectMetricsEnabled: false } } }), name, handler);
       });
 
       return promise;

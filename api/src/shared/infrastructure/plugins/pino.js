@@ -82,7 +82,7 @@ const plugin = {
     server.events.on('response', (request) => {
       const info = request.info;
 
-      const shouldLog = !config.featureToggles.isDirectMetricsEnabled;
+      const shouldLog = !config.metrics.isDirectMetricsEnabled;
 
       if (shouldLog || request.raw.res.statusCode != 200) {
         logger.info(

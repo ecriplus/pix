@@ -9,12 +9,12 @@ export class Metrics {
   static metricDefinitions = {};
 
   constructor({ config }) {
-    if (!config.featureToggles.isDirectMetricsEnabled) {
+    if (!config.metrics.isDirectMetricsEnabled) {
       logger.info('Metric initialisation : no reporter => no metrics sent');
       metrics.init({ reporter: new metrics.reporters.NullReporter(), flushIntervalSeconds: 0 });
     }
 
-    if (config.featureToggles.isDirectMetricsEnabled) {
+    if (config.metrics.isDirectMetricsEnabled) {
       logger.info('Metric initialisation : linked to Datadog');
       metrics.init({
         host: config.infra.containerName,
