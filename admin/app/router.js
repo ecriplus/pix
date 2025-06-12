@@ -12,9 +12,12 @@ export default class Router extends EmberRouter {
     super(...arguments);
     this.on('routeDidChange', (transition) => {
       if (transition.from && transition.to.name !== transition.from.name) {
+        const isTransitionFromCreateOrUpdate = ['.edit', '.new', '.update'].every((route) =>
+          transition.from.name.includes(route),
+        );
         const isFromSameParent = transition.to.parent.name.includes(transition.from.parent.name);
 
-        if (!isFromSameParent) {
+        if (!isFromSameParent && isTransitionFromCreateOrUpdate) {
           this.pixToast.removeAllNotifications();
         }
         window.scrollTo(0, 0);
@@ -37,10 +40,10 @@ Router.map(function () {
       this.route('new');
       this.route('list');
       this.route('get', { path: '/:organization_id' }, function () {
-        this.route('all-tags');
-        this.route('campaigns');
         this.route('team');
         this.route('target-profiles');
+        this.route('campaigns');
+        this.route('all-tags');
         this.route('places', function () {
           this.route('list', { path: '/' });
           this.route('new');

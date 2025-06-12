@@ -636,8 +636,11 @@ module('Acceptance | Target Profile Insights', function (hooks) {
 
         await click(selectLevelTubeThematicDeuxNiveauQuatre[1]);
         await screen.findByRole('listbox');
-        await click(screen.getByRole('option', { name: '3' }));
-        await waitForElementToBeRemoved(() => screen.queryByRole('listbox'));
+
+        await Promise.all([
+          waitForElementToBeRemoved(() => screen.queryByRole('listbox')),
+          click(screen.getByRole('option', { name: '3' })),
+        ]);
 
         await clickByName('Enregistrer le badge');
         await clickByName('Voir le détail du badge Mon nouveau badge');
