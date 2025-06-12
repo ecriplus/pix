@@ -10,7 +10,7 @@ module('Unit | Service | Access Storage', function (hooks) {
   });
 
   module('#hasUserSeenJoinPage', function () {
-    test(`returns false as default value`, function (assert) {
+    test('returns false as default value', function (assert) {
       const service = this.owner.lookup('service:access-storage');
       const organizationId = 1;
 
@@ -22,11 +22,32 @@ module('Unit | Service | Access Storage', function (hooks) {
     test('returns true when it has been set to true', function (assert) {
       const service = this.owner.lookup('service:access-storage');
       const organizationId = 1;
-      service.setHasUserSeenJoinPage(organizationId, true);
+      service.setHasUserSeenJoinPage(organizationId);
 
       const hasUserSeenJoinPage = service.hasUserSeenJoinPage(organizationId);
 
       assert.ok(hasUserSeenJoinPage);
+    });
+  });
+
+  module('associationDone', function () {
+    test('returns false as default value', function (assert) {
+      const service = this.owner.lookup('service:access-storage');
+      const organizationId = 1;
+
+      const isAssociationDone = service.isAssociationDone(organizationId);
+
+      assert.false(isAssociationDone);
+    });
+
+    test('returns true when it has been set to true', function (assert) {
+      const service = this.owner.lookup('service:access-storage');
+      const organizationId = 1;
+      service.setAssociationDone(organizationId);
+
+      const isAssociationDone = service.isAssociationDone(organizationId);
+
+      assert.ok(isAssociationDone);
     });
   });
 });

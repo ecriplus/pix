@@ -147,7 +147,7 @@ export default class AssociateSupStudentForm extends Component {
   </template>
   @service store;
   @service intl;
-  @service campaignStorage;
+  @service accessStorage;
   @service router;
 
   @tracked firstName = '';
@@ -258,7 +258,7 @@ export default class AssociateSupStudentForm extends Component {
 
     try {
       await supOrganizationLearner.save();
-      this.campaignStorage.set(this.args.campaignCode, 'associationDone', true);
+      this.accessStorage.setAssociationDone(this.args.organizationId);
       this.router.transitionTo('campaigns.invited.fill-in-participant-external-id', this.args.campaignCode);
       return;
     } catch (errorResponse) {

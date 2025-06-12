@@ -7,7 +7,7 @@ import LearnerReconciliation from '../../../campaigns/invited/learner-reconcilia
 
 export default class InvitedWrapper extends Component {
   @service store;
-  @service campaignStorage;
+  @service accessStorage;
   @service router;
   @service intl;
 
@@ -32,7 +32,7 @@ export default class InvitedWrapper extends Component {
     try {
       await organizationLearner.save();
 
-      this.campaignStorage.set(this.args.model.code, 'associationDone', true);
+      this.accessStorage.setAssociationDone(this.args.model.organizationId);
       return this.router.transitionTo('campaigns.invited.fill-in-participant-external-id', this.args.model.code);
     } catch (errorResponse) {
       this.handleError(errorResponse);

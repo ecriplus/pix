@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 
 export default class InvitedRoute extends Route {
-  @service campaignStorage;
+  @service accessStorage;
   @service session;
   @service router;
 
@@ -23,7 +23,7 @@ export default class InvitedRoute extends Route {
   }
 
   afterModel(campaign) {
-    const associationDone = this.campaignStorage.get(campaign.code, 'associationDone');
+    const associationDone = this.accessStorage.isAssociationDone(campaign.organizationId);
 
     if (this.shouldAssociateInformation(campaign, associationDone)) {
       this.router.replaceWith('campaigns.invited.reconciliation', campaign.code);

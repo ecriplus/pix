@@ -6,15 +6,17 @@ import createGlimmerComponent from '../../../../../helpers/create-glimmer-compon
 
 module('Unit | Component | Pages | Campaigns | Invited | Reconciliation', function (hooks) {
   setupTest(hooks);
-  let createRecordStub, component, model, campaignCode;
+  let createRecordStub, component, model, campaignCode, organizationId;
   hooks.beforeEach(function () {
     campaignCode = Symbol('code');
+    organizationId = Symbol(1);
     createRecordStub = {
       unloadRecord: sinon.stub(),
       save: sinon.stub(),
     };
     model = {
       code: campaignCode,
+      organizationId,
     };
 
     component = createGlimmerComponent('pages/campaigns/invited/reconciliation', { model });
@@ -22,8 +24,8 @@ module('Unit | Component | Pages | Campaigns | Invited | Reconciliation', funct
     component.store = {
       createRecord: sinon.stub(),
     };
-    component.campaignStorage = {
-      set: sinon.stub(),
+    component.accessStorage = {
+      setAssociationDone: sinon.stub(),
     };
   });
 
@@ -46,10 +48,7 @@ module('Unit | Component | Pages | Campaigns | Invited | Reconciliation', funct
 
     assert.true(createRecordStub.save.called, 'called save');
     assert.true(createRecordStub.unloadRecord.called, 'called unloadRecord');
-    assert.true(
-      component.campaignStorage.set.calledWithExactly(campaignCode, 'associationDone', true),
-      'called campaignStorage',
-    );
+    assert.true(component.accessStorage.setAssociationDone.calledWithExactly(organizationId), 'called accessStorage');
     assert.true(
       component.router.transitionTo.calledWithExactly(
         'campaigns.invited.fill-in-participant-external-id',
@@ -75,7 +74,7 @@ module('Unit | Component | Pages | Campaigns | Invited | Reconciliation', funct
     // then
     assert.true(createRecordStub.save.called, 'call save method');
     assert.true(createRecordStub.unloadRecord.called, 'call unloadRecord record');
-    assert.true(component.campaignStorage.set.notCalled, 'not called campaignStorage');
+    assert.true(component.accessStorage.setAssociationDone.notCalled, 'not called accessStorage');
     assert.true(component.router.transitionTo.notCalled, 'not called transitionTo');
   });
 

@@ -5,7 +5,6 @@ import { service } from '@ember/service';
 export default class ScoMediacentreController extends Controller {
   @service session;
   @service currentUser;
-  @service campaignStorage;
   @service accessStorage;
   @service router;
 
@@ -18,14 +17,14 @@ export default class ScoMediacentreController extends Controller {
     await this.session.authenticate('authenticator:oauth2', { token: response.accessToken });
     await this.currentUser.load();
 
-    this.campaignStorage.set(this.model.code, 'associationDone', true);
+    this.accessStorage.setAssociationDone(this.model.organizationId);
   }
 
   @action
   async goToConnectionPage() {
     this.session.set('skipRedirectAfterSessionInvalidation', true);
     await this.session.invalidate();
-    this.accessStorage.setHasUserSeenJoinPage(this.model.organizationId, true);
+    this.accessStorage.setHasUserSeenJoinPage(this.model.organizationId);
     this.router.replaceWith('campaigns.access', this.model.code);
   }
 }

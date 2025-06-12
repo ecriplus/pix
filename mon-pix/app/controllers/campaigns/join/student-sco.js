@@ -5,7 +5,7 @@ import { tracked } from '@glimmer/tracking';
 
 export default class StudentScoController extends Controller {
   @service currentUser;
-  @service campaignStorage;
+  @service accessStorage;
   @service session;
   @service store;
 
@@ -27,7 +27,7 @@ export default class StudentScoController extends Controller {
     await this.currentUser.load();
     await this._reconcileUser();
 
-    this.campaignStorage.set(this.model.campaign.code, 'associationDone', true);
+    this.accessStorage.setAssociationDone(this.model.campaign.organizationId);
   }
 
   _reconcileUser() {

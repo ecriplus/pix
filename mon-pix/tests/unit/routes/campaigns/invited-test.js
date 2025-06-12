@@ -12,7 +12,7 @@ module('Unit | Route | Invited', function (hooks) {
     route = this.owner.lookup('route:campaigns.invited');
     route.modelFor = sinon.stub();
     route.router = { replaceWith: sinon.stub(), transitionTo: sinon.stub() };
-    route.campaignStorage = { get: sinon.stub() };
+    route.accessStorage = { isAssociationDone: sinon.stub() };
     route.session.requireAuthenticationAndApprovedTermsOfService = sinon.stub();
   });
 
@@ -53,9 +53,10 @@ module('Unit | Route | Invited', function (hooks) {
         //given
         campaign = EmberObject.create({
           isReconciliationRequired: true,
+          organizationId: 1,
         });
 
-        route.campaignStorage.get.withArgs(campaign.code, 'associationDone').returns(false);
+        route.accessStorage.isAssociationDone.withArgs(campaign.organizationId).returns(false);
 
         //when
         await route.afterModel(campaign);
@@ -72,9 +73,10 @@ module('Unit | Route | Invited', function (hooks) {
         //given
         campaign = EmberObject.create({
           isReconciliationRequired: true,
+          organizationId: 1,
         });
 
-        route.campaignStorage.get.withArgs(campaign.code, 'associationDone').returns(true);
+        route.accessStorage.isAssociationDone.withArgs(campaign.organizationId).returns(true);
 
         //when
         await route.afterModel(campaign);
@@ -94,8 +96,9 @@ module('Unit | Route | Invited', function (hooks) {
         campaign = EmberObject.create({
           isRestricted: true,
           isOrganizationSCO: true,
+          organizationId: 1,
         });
-        route.campaignStorage.get.withArgs(campaign.code, 'associationDone').returns(false);
+        route.accessStorage.isAssociationDone.withArgs(campaign.organizationId).returns(false);
 
         //when
         await route.afterModel(campaign);
@@ -113,8 +116,9 @@ module('Unit | Route | Invited', function (hooks) {
         campaign = EmberObject.create({
           isRestricted: true,
           isOrganizationSCO: true,
+          organizationId: 1,
         });
-        route.campaignStorage.get.withArgs(campaign.code, 'associationDone').returns(true);
+        route.accessStorage.isAssociationDone.withArgs(campaign.organizationId).returns(true);
 
         //when
         await route.afterModel(campaign);
@@ -134,8 +138,9 @@ module('Unit | Route | Invited', function (hooks) {
         campaign = EmberObject.create({
           isRestricted: true,
           isOrganizationSUP: true,
+          organizationId: 1,
         });
-        route.campaignStorage.get.withArgs(campaign.code, 'associationDone').returns(false);
+        route.accessStorage.isAssociationDone.withArgs(campaign.organizationId).returns(false);
 
         //when
         await route.afterModel(campaign);
@@ -153,8 +158,9 @@ module('Unit | Route | Invited', function (hooks) {
         campaign = EmberObject.create({
           isRestricted: true,
           isOrganizationSUP: true,
+          organizationId: 1,
         });
-        route.campaignStorage.get.withArgs(campaign.code, 'associationDone').returns(true);
+        route.accessStorage.isAssociationDone.withArgs(campaign.organizationId).returns(true);
 
         //when
         await route.afterModel(campaign);
@@ -170,9 +176,10 @@ module('Unit | Route | Invited', function (hooks) {
 
     test('should redirect to fill in participant external otherwise', async function (assert) {
       //given
-      route.campaignStorage.get.withArgs(campaign.code, 'associationDone').returns(false);
+      route.accessStorage.isAssociationDone.withArgs(campaign.organizationId).returns(false);
       campaign = EmberObject.create({
         isRestricted: false,
+        organizationId: 1,
       });
 
       //when
