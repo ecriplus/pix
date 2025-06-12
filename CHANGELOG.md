@@ -1,5 +1,25 @@
 # Pix Changelog
 
+# [5.133.0](https://github.com/1024pix/pix/compare/v5.132.0...v5.133.0) (2025-06-12)
+
+### :rocket: Amélioration
+
+- [#12504](https://github.com/1024pix/pix/pull/12504) Détacher les campaignParticipation supprimés des assessments et des badges non certifiants (PIX-18164). 
+- [#12501](https://github.com/1024pix/pix/pull/12501) Enlever un mot d'une description (PIX-18168) 
+
+### :bug: Correction
+
+- [#12503](https://github.com/1024pix/pix/pull/12503) Modification CHANGELOG (PIX-18161). 
+
+### :building_construction: Tech
+
+- [#12463](https://github.com/1024pix/pix/pull/12463) :truck: Déplace `PrescriberRoleReporitory` vers `src/shared/` 
+- [#12424](https://github.com/1024pix/pix/pull/12424) Bump Audit-logger dependencies 
+- [#12508](https://github.com/1024pix/pix/pull/12508) Corriger le workflow pour fermer les PRs inactive depuis un mois 
+- [#12462](https://github.com/1024pix/pix/pull/12462) Déplace le flag hasUserSeenJoinPage dans un storage spécifique à la logique d'accès (PIX-18100) 
+- [#12505](https://github.com/1024pix/pix/pull/12505) Passer les feature toggles de metric à des variables d'environnement classique 
+- [#12479](https://github.com/1024pix/pix/pull/12479) Suppression de plusieurs script Certif plus utilisés (PIX-16999).
+
 ## v5.132.0 (11/06/2025)
 
 
