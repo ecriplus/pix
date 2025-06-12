@@ -1,7 +1,6 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import * as targetProfileTrainingRepository from '../../../../lib/infrastructure/repositories/target-profile-training-repository.js';
 import * as userRepository from '../../../identity-access-management/infrastructure/repositories/user.repository.js';
 import * as llmApi from '../../../llm/application/api/llm-api.js';
 import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
@@ -14,6 +13,7 @@ import * as tubeRepository from '../../../shared/infrastructure/repositories/tub
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
+import * as targetProfileTrainingRepository from '../../infrastructure/repositories/target-profile-training-repository.js';
 
 const path = dirname(fileURLToPath(import.meta.url));
 

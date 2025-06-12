@@ -1,4 +1,4 @@
-import { DomainTransaction } from '../../../src/shared/domain/DomainTransaction.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 const TABLE_NAME = 'target-profile-trainings';
 
 const create = async function ({ trainingId, targetProfileIds }) {
