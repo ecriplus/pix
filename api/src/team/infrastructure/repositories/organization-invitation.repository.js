@@ -126,6 +126,25 @@ const updateModificationDate = async function (id) {
   return new OrganizationInvitation(organizationInvitation);
 };
 
+/**
+ * @param organizationInvitation
+ * @returns {Promise<OrganizationInvitation>}
+ */
+const update = async function (organizationInvitation) {
+  const [updatedOrganizationInvitation] = await knex('organization-invitations')
+    .where({ id: organizationInvitation.id })
+    .update({
+      ...organizationInvitation,
+      updatedAt: new Date(),
+    })
+    .returning('*');
+
+  if (!updatedOrganizationInvitation) {
+    throw new NotFoundError(`Organization invitation of id ${organizationInvitation.id} is not found.`);
+  }
+  return new OrganizationInvitation(updatedOrganizationInvitation);
+};
+
 export const organizationInvitationRepository = {
   create,
   findOnePendingByOrganizationIdAndEmail,
@@ -135,4 +154,5 @@ export const organizationInvitationRepository = {
   markAsAccepted,
   markAsCancelled,
   updateModificationDate,
+  update,
 };

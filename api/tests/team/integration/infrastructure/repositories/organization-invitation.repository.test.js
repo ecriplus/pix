@@ -353,4 +353,45 @@ describe('Integration | Team | Infrastructure | Repository | organization-invita
       expect(error).to.be.instanceOf(NotFoundError);
     });
   });
+
+  describe('#update', function () {
+    it('updates information in organization invitation', async function () {
+      // given
+      const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation({
+        locale: 'en',
+        role: Membership.roles.MEMBER,
+      });
+      await databaseBuilder.commit();
+
+      const updatedLocale = 'fr';
+      const updatedRole = Membership.roles.ADMIN;
+
+      // when
+      const updatedOrganizationInvitation = await organizationInvitationRepository.update({
+        ...organizationInvitation,
+        locale: updatedLocale,
+        role: updatedRole,
+      });
+
+      // then
+      expect(updatedOrganizationInvitation).to.be.instanceOf(OrganizationInvitation);
+      expect(updatedOrganizationInvitation.id).to.equal(organizationInvitation.id);
+      expect(updatedOrganizationInvitation.locale).to.equal(updatedLocale);
+      expect(updatedOrganizationInvitation.role).to.equal(updatedRole);
+      expect(updatedOrganizationInvitation.updatedAt).to.deep.equal(now);
+    });
+
+    it('throws an error if organization invitation is not found', async function () {
+      // when
+      const error = await catchErr(organizationInvitationRepository.update)({
+        id: 1234,
+        locale: 'fr',
+        role: Membership.roles.ADMIN,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(NotFoundError);
+      expect(error.message).to.equal('Organization invitation of id 1234 is not found.');
+    });
+  });
 });
