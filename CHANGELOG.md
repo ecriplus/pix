@@ -13,6 +13,10 @@
 - [#12445](https://github.com/1024pix/pix/pull/12445) [TECH] Eviter d'appeler le endpoint GET /api/answers?assessmentId="assessmentId" pour gérer des affichages concernant le numéro d'épreuve courant côté PixApp.
 - [#12495](https://github.com/1024pix/pix/pull/12495) [TECH] Supprimer la méthode lock du RedisClient.
 
+### :bug: Correction
+
+- [#12503](https://github.com/1024pix/pix/pull/12503) [BUGFIX]  Commit cc99f99cb82860928355efcac4a3012629b2f769
+
 # [5.131.0](https://github.com/1024pix/pix/compare/v5.130.0...v5.131.0) (2025-06-11)
 
 ### :rocket: Amélioration
