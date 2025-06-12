@@ -24,20 +24,28 @@ jobs:
         run: |
           ONE_MONTH_AGO=$(date -d "30 days ago" +%Y-%m-%dT%H:%M:%SZ)
           echo "Searching opened pull requests from $ONE_MONTH_AGO"
-          OPENED_PRS=$(gh pr list --json number,createdAt,title --limit 100)
+          OPENED_PRS=$(gh pr list --json number,updatedAt,isDraft --limit 100)
           PR_COUNT=$(echo "$OPENED_PRS" | jq '. | length')
           echo "Found $PR_COUNT PRs opened"
 
           echo "$OPENED_PRS" | jq -c '.[]' | while read -r PR; do
-              PR_NUMBER=$(echo "$PR" | jq -r '.number')
-              PR_TITLE=$(echo "$PR" | jq -r '.title')
-              UPDATED_AT=$(echo "$PR" | jq -r '.updatedAt')
+            PR_NUMBER=$(echo "$PR" | jq -r '.number')
+            UPDATED_AT=$(echo "$PR" | jq -r '.updatedAt')
+            IS_DRAFT=$(echo "$PR" | jq -r '.isDraft')
 
-              if [[ "$UPDATED_AT" < "$ONE_MONTH_AGO" ]]; then
-              echo "PR #$PR_NUMBER ($PR_TITLE) inactive from $UPDATED_AT"
+            if [[ "$IS_DRAFT" == "true" ]]; then
+              echo "[#$PR_NUMBER] skip draft"
+              continue
+            fi
 
-              gh pr close "$PR_NUMBER" --comment "Cette pull request est ouverte depuis un mois. Assurez-vous de sa pertinance avant de la rouvrir." --delete-branch
+            if [[ "$UPDATED_AT" < "$ONE_MONTH_AGO" ]]; then
+              echo "[#$PR_NUMBER] inactive PR since $UPDATED_AT"
 
-              echo "Closed pull request #$PR_NUMBER"
-              fi
+              gh pr close "$PR_NUMBER" --comment "Cette pull request a été fermée car elle est inactive depuis un mois. Vous pouvez la réouvrir ou la mettre en draft pour éviter qu'elle ne soit refermée." --delete-branch
+
+              echo "[#$PR_NUMBER] PR closed."
+            else
+              echo "[#$PR_NUMBER] active PR since $UPDATED_AT"
+            fi
           done
+          echo "All inactive pull requests have been processed."
