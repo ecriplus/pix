@@ -1,5 +1,4 @@
 import {
-  CampaignCodeError,
   OrganizationLearnerDisabledError,
   UserNotAuthorizedToAccessEntityError,
 } from '../../../../shared/domain/errors.js';
@@ -7,22 +6,16 @@ import {
 const findAssociationBetweenUserAndOrganizationLearner = async function ({
   authenticatedUserId,
   requestedUserId,
-  campaignCode,
-  campaignRepository,
+  organizationId,
   registrationOrganizationLearnerRepository,
 }) {
   if (authenticatedUserId !== requestedUserId) {
     throw new UserNotAuthorizedToAccessEntityError();
   }
 
-  const campaign = await campaignRepository.getByCode(campaignCode);
-  if (!campaign) {
-    throw new CampaignCodeError();
-  }
-
   const organizationLearner = await registrationOrganizationLearnerRepository.findOneByUserIdAndOrganizationId({
     userId: authenticatedUserId,
-    organizationId: campaign.organizationId,
+    organizationId,
   });
 
   if (organizationLearner && organizationLearner.isDisabled) {

@@ -5,12 +5,12 @@ const findAssociation = async function (request, h, dependencies = { organizatio
   const authenticatedUserId = request.auth.credentials.userId;
 
   const requestedUserId = parseInt(request.query.userId);
-  const campaignCode = request.query.campaignCode;
+  const organizationId = request.query.organizationId;
 
   const organizationLearner = await usecases.findAssociationBetweenUserAndOrganizationLearner({
     authenticatedUserId,
     requestedUserId,
-    campaignCode,
+    organizationId,
   });
 
   return h.response(dependencies.organizationLearnerIdentitySerializer.serialize(organizationLearner)).code(200);

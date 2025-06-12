@@ -17,11 +17,9 @@ describe('Acceptance | Application | registration-organization-learner-route', f
     let user;
     let organization;
     let organizationLearner;
-    let campaignCode;
 
     beforeEach(async function () {
       organization = databaseBuilder.factory.buildOrganization({ isManagingStudents: true });
-      campaignCode = databaseBuilder.factory.buildCampaign({ organizationId: organization.id, code: 'YUTR789' }).code;
       user = databaseBuilder.factory.buildUser();
       organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
         firstName: 'josé',
@@ -34,7 +32,7 @@ describe('Acceptance | Application | registration-organization-learner-route', f
       await databaseBuilder.commit();
       options = {
         method: 'GET',
-        url: `/api/organization-learners?userId=${user.id}&campaignCode=${campaignCode}`,
+        url: `/api/organization-learners?userId=${user.id}&organizationId=${organization.id}`,
         headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
     });
