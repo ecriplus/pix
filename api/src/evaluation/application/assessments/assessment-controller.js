@@ -37,8 +37,17 @@ const startEmbedLlmChat = async function (request, h, { usecases } = { usecases:
     .code(201);
 };
 
+const promptToLLMChat = async function (request, h, { usecases }  = { usecases: evaluationUsecases }) {
+  const { assessmentId, chatId } = request.params;
+  const { prompt } = request.payload;
+  const userId = request.auth.credentials.userId;
+  const llmResponse = await usecases.promptToLLMChat({ assessmentId, chatId, userId, prompt });
+  return h.response(llmResponse).type('text/event-stream').code(201);
+};
+
 const assessmentController = {
   completeAssessment,
+  promptToLLMChat,
   startEmbedLlmChat,
 };
 
