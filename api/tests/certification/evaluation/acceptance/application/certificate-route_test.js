@@ -4,7 +4,6 @@ import { generateCertificateVerificationCode } from '../../../../../src/certific
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { Assessment } from '../../../../../src/shared/domain/models/index.js';
 import { AssessmentResult, Membership } from '../../../../../src/shared/domain/models/index.js';
-import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import {
   createServer,
   databaseBuilder,
@@ -208,67 +207,36 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
   describe('GET /api/attestation/{certificationCourseId}', function () {
     context('when user own the certification', function () {
       context('when session version is V3', function () {
-        context('when isV3CertificationAttestationEnabled feature toggle is truthy', function () {
-          it('should return 200 HTTP status code and the certification', async function () {
-            // given
-            await featureToggles.set('isV3CertificationAttestationEnabled', true);
-            const userId = databaseBuilder.factory.buildUser().id;
-
-            const session = databaseBuilder.factory.buildSession({
-              id: 123,
-              publishedAt: new Date('2018-12-01T01:02:03Z'),
-              version: AlgorithmEngineVersion.V3,
-            });
-            const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
-              id: 1234,
-              sessionId: session.id,
-              userId,
-              isPublished: true,
-              verificationCode: await generateCertificateVerificationCode(),
-            });
-            const assessment = databaseBuilder.factory.buildAssessment({
-              userId,
-              certificationCourseId: certificationCourse.id,
-              type: Assessment.types.CERTIFICATION,
-              state: Assessment.states.COMPLETED,
-            });
-            databaseBuilder.factory.buildAssessmentResult.last({
-              certificationCourseId: certificationCourse.id,
-              assessmentId: assessment.id,
-              level: 1,
-              pixScore: 23,
-              status: AssessmentResult.status.VALIDATED,
-            });
-
-            await databaseBuilder.commit();
-
-            const server = await createServer();
-
-            // when
-            const response = await server.inject({
-              method: 'GET',
-              url: `/api/attestation/${certificationCourse.id}?isFrenchDomainExtension=true&lang=fr`,
-              headers: generateAuthenticatedUserRequestHeaders({ userId }),
-            });
-
-            // then
-            expect(response.statusCode).to.equal(200);
-            expect(response.headers['content-type']).to.equal('application/pdf');
-
-            const filename = `filename=certification-pix-20181201.pdf`;
-            expect(response.headers['content-disposition']).to.include(filename);
-
-            const fileFormat = response.result.substring(1, 4);
-            expect(fileFormat).to.equal('PDF');
-          });
-        });
-      });
-
-      context('when session version is V2', function () {
         it('should return 200 HTTP status code and the certification', async function () {
           // given
           const userId = databaseBuilder.factory.buildUser().id;
-          await _buildDatabaseCertification({ userId, certificationCourseId: 1234 });
+
+          const session = databaseBuilder.factory.buildSession({
+            id: 123,
+            publishedAt: new Date('2018-12-01T01:02:03Z'),
+            version: AlgorithmEngineVersion.V3,
+          });
+          const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
+            id: 1234,
+            sessionId: session.id,
+            userId,
+            isPublished: true,
+            verificationCode: await generateCertificateVerificationCode(),
+          });
+          const assessment = databaseBuilder.factory.buildAssessment({
+            userId,
+            certificationCourseId: certificationCourse.id,
+            type: Assessment.types.CERTIFICATION,
+            state: Assessment.states.COMPLETED,
+          });
+          databaseBuilder.factory.buildAssessmentResult.last({
+            certificationCourseId: certificationCourse.id,
+            assessmentId: assessment.id,
+            level: 1,
+            pixScore: 23,
+            status: AssessmentResult.status.VALIDATED,
+          });
+
           await databaseBuilder.commit();
 
           const server = await createServer();
@@ -276,22 +244,50 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
           // when
           const response = await server.inject({
             method: 'GET',
-            url: '/api/attestation/1234?isFrenchDomainExtension=true&lang=fr',
+            url: `/api/attestation/${certificationCourse.id}?isFrenchDomainExtension=true&lang=fr`,
             headers: generateAuthenticatedUserRequestHeaders({ userId }),
           });
 
           // then
           expect(response.statusCode).to.equal(200);
           expect(response.headers['content-type']).to.equal('application/pdf');
-          expect(response.headers['content-disposition']).to.include('filename=certification-pix');
-          expect(response.file).not.to.be.null;
+
+          const filename = `filename=certification-pix-20181201.pdf`;
+          expect(response.headers['content-disposition']).to.include(filename);
+
+          const fileFormat = response.result.substring(1, 4);
+          expect(fileFormat).to.equal('PDF');
         });
+      });
+    });
+
+    context('when session version is V2', function () {
+      it('should return 200 HTTP status code and the certification', async function () {
+        // given
+        const userId = databaseBuilder.factory.buildUser().id;
+        await _buildDatabaseCertification({ userId, certificationCourseId: 1234 });
+        await databaseBuilder.commit();
+
+        const server = await createServer();
+
+        // when
+        const response = await server.inject({
+          method: 'GET',
+          url: '/api/attestation/1234?isFrenchDomainExtension=true&lang=fr',
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        });
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.headers['content-type']).to.equal('application/pdf');
+        expect(response.headers['content-disposition']).to.include('filename=certification-pix');
+        expect(response.file).not.to.be.null;
       });
     });
   });
 
   describe('GET /api/admin/sessions/{sessionId}/attestations', function () {
-    describe('when the session version is V2', function () {
+    context('when the session version is V2', function () {
       it('should return 200 HTTP status code and the certification', async function () {
         // given
         const superAdmin = await insertUserWithRoleSuperAdmin();
@@ -317,10 +313,9 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
       });
     });
 
-    describe('when the session version is V3', function () {
+    context('when the session version is V3', function () {
       it('should return 200 HTTP status code and the certification', async function () {
         // given
-        await featureToggles.set('isV3CertificationAttestationEnabled', true);
         const superAdmin = await insertUserWithRoleSuperAdmin();
 
         const sessionId = 4567;
@@ -353,7 +348,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
   });
 
   describe('GET /api/organizations/{organizationId}/certification-attestations', function () {
-    describe('when the session version is V2', function () {
+    context('when the session version is V2', function () {
       it('should return HTTP status 200 and a PDF', async function () {
         // given
         const adminIsManagingStudent = databaseBuilder.factory.buildUser.withRawPassword();
@@ -427,11 +422,9 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
       });
     });
 
-    describe('when the session version is V3', function () {
+    context('when the session version is V3', function () {
       it('should return HTTP status 200', async function () {
         // given
-        await featureToggles.set('isV3CertificationAttestationEnabled', true);
-
         const adminIsManagingStudent = databaseBuilder.factory.buildUser.withRawPassword();
 
         const organization = databaseBuilder.factory.buildOrganization({ type: 'SCO', isManagingStudents: true });
