@@ -299,7 +299,6 @@ const configuration = (function () {
         process.env.FT_ALWAYS_OK_VALIDATE_NEXT_CHALLENGE_ENDPOINT,
       ),
       setupEcosystemBeforeStart: toBoolean(process.env.FT_SETUP_ECOSYSTEM_BEFORE_START) || false,
-      showNewResultPage: toBoolean(process.env.FT_SHOW_NEW_RESULT_PAGE),
     },
     hapi: {
       options: {},
@@ -526,7 +525,6 @@ const configuration = (function () {
     config.metrics.isDirectMetricsEnabled = false;
     config.metrics.isOppsyDisabled = false;
     config.featureToggles.isTextToSpeechButtonEnabled = false;
-    config.featureToggles.showNewResultPage = false;
 
     config.lti.authorizedPlatforms = ['https://moodle.example.net'];
     config.lti.jwkModulusLength = 2048;
