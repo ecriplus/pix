@@ -26,9 +26,7 @@ async function _setupEcosystem() {
 }
 
 const start = async function () {
-  if (config.featureToggles.setupEcosystemBeforeStart) {
-    await _setupEcosystem();
-  }
+  await _setupEcosystem();
   server = await createServer();
   await server.start();
 };
