@@ -1,11 +1,9 @@
 import Joi from 'joi';
 
-import { handlerWithDependencies } from '../../../devcomp/infrastructure/utils/handlerWithDependencies.js';
 import { checkLLMChatIsEnabled } from '../../../llm/application/pre-handlers/index.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { assessmentAuthorization } from '../pre-handlers/assessment-authorization.js';
 import { assessmentController } from './assessment-controller.js';
-import { passageController } from "../../../devcomp/application/passages/controller.js";
 
 const register = async function (server) {
   const routes = [

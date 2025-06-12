@@ -1,8 +1,12 @@
+import { Readable } from 'node:stream';
+
 import _ from 'lodash';
+import ms from 'ms';
 
 import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { CertificationCompletedJob } from '../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import * as badgeAcquisitionRepository from '../../../../../src/evaluation/infrastructure/repositories/badge-acquisition-repository.js';
+import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
 import { CHAT_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
 import { CONFIGURATION_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/configuration-repository.js';
 import {
@@ -25,9 +29,6 @@ import {
   nock,
   sinon,
 } from '../../../../test-helper.js';
-import { Chat } from "../../../../../src/llm/domain/models/Chat.js";
-import ms from "ms";
-import { Readable } from "node:stream";
 
 const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
 const configurationTemporaryStorage = temporaryStorage.withPrefix(CONFIGURATION_STORAGE_PREFIX);
@@ -934,7 +935,6 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
       });
     });
   });
-
 });
 
 function _buildValidAnswersAndCertificationChallenges({

@@ -1,6 +1,6 @@
-import { Assessment } from '../../../../../src/shared/domain/models/index.js';
 import { promptToLLMChat } from '../../../../../src/evaluation/domain/usecases/prompt-to-llm-chat.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
+import { Assessment } from '../../../../../src/shared/domain/models/index.js';
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Eval | Domain | UseCases | prompt-to-llm-chat', function () {
@@ -32,7 +32,14 @@ describe('Unit | Eval | Domain | UseCases | prompt-to-llm-chat', function () {
       );
 
       // when
-      const err = await catchErr(promptToLLMChat)({ chatId, assessmentId, userId, prompt, llmApi, assessmentRepository: assessmentRepository });
+      const err = await catchErr(promptToLLMChat)({
+        chatId,
+        assessmentId,
+        userId,
+        prompt,
+        llmApi,
+        assessmentRepository: assessmentRepository,
+      });
 
       // then
       expect(err).to.be.instanceOf(DomainError);
@@ -53,7 +60,14 @@ describe('Unit | Eval | Domain | UseCases | prompt-to-llm-chat', function () {
       llmApi.prompt.withArgs({ chatId, userId, message: prompt }).resolves(stream);
 
       // when
-      const actualStream = await promptToLLMChat({ chatId, assessmentId, userId, prompt, llmApi, assessmentRepository: assessmentRepository });
+      const actualStream = await promptToLLMChat({
+        chatId,
+        assessmentId,
+        userId,
+        prompt,
+        llmApi,
+        assessmentRepository: assessmentRepository,
+      });
 
       // then
       expect(actualStream).to.deep.equal(stream);

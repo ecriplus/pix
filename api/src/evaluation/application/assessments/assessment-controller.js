@@ -37,7 +37,7 @@ const startEmbedLlmChat = async function (request, h, { usecases } = { usecases:
     .code(201);
 };
 
-const promptToLLMChat = async function (request, h, { usecases }  = { usecases: evaluationUsecases }) {
+const promptToLLMChat = async function (request, h, { usecases } = { usecases: evaluationUsecases }) {
   const { assessmentId, chatId } = request.params;
   const { prompt } = request.payload;
   const userId = request.auth.credentials.userId;
