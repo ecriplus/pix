@@ -1,6 +1,6 @@
-import { usecases as devcompUsecases } from '../../../src/devcomp/domain/usecases/index.js';
-import * as trainingSerializer from '../../../src/devcomp/infrastructure/serializers/jsonapi/training-serializer.js';
-import { extractLocaleFromRequest } from '../../../src/shared/infrastructure/utils/request-response-utils.js';
+import { extractLocaleFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { usecases as devcompUsecases } from '../../domain/usecases/index.js';
+import * as trainingSerializer from '../../infrastructure/serializers/jsonapi/training-serializer.js';
 
 const findTrainings = async function (request, h, dependencies = { trainingSerializer }) {
   const { userId } = request.auth.credentials;
