@@ -1,6 +1,9 @@
+import { fileURLToPath } from 'node:url';
+
 import pixRecommendedConfig from '@1024pix/eslint-plugin/config';
 import babelParser from '@babel/eslint-parser';
 import { fixupPluginRules } from '@eslint/compat';
+import { includeIgnoreFile } from '@eslint/compat';
 import chai from 'eslint-plugin-chai-expect';
 import i18nJsonPlugin from 'eslint-plugin-i18n-json';
 import _import from 'eslint-plugin-import-x';
@@ -12,7 +15,10 @@ import unicorn from 'eslint-plugin-unicorn';
 
 const nonPhraseGeneratedFiles = ['translations/en.json', 'translations/fr.json'];
 
+const gitignorePath = fileURLToPath(new URL('.gitignore', import.meta.url));
+
 export default [
+  includeIgnoreFile(gitignorePath),
   ...pixRecommendedConfig,
   prettierRecommendedConfig,
   nRecommendedConfig.configs['flat/recommended'],
