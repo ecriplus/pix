@@ -39,7 +39,7 @@ module('Unit | Component | Pages | Campaigns | Invited | Reconciliation', funct
     const reconciliationInfos = Symbol('reconciliationInfos');
     component.store.createRecord
       .withArgs('organization-learner', {
-        campaignCode,
+        organizationId,
         reconciliationInfos,
       })
       .returns(createRecordStub);
@@ -63,7 +63,7 @@ module('Unit | Component | Pages | Campaigns | Invited | Reconciliation', funct
     const reconciliationInfos = Symbol('reconciliationInfos');
     component.store.createRecord
       .withArgs('organization-learner', {
-        campaignCode,
+        organizationId,
         reconciliationInfos,
       })
       .returns(createRecordStub);
@@ -83,7 +83,7 @@ module('Unit | Component | Pages | Campaigns | Invited | Reconciliation', funct
     const reconciliationInfos = Symbol('reconciliationInfos');
     component.store.createRecord
       .withArgs('organization-learner', {
-        campaignCode,
+        organizationId,
         reconciliationInfos,
       })
       .returns(createRecordStub);
