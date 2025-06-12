@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { knex } from '../../../../db/knex-database-connection.js';
 import { Organization } from '../../../organizational-entities/domain/models/Organization.js';
 import { Tag } from '../../../organizational-entities/domain/models/Tag.js';
@@ -55,54 +53,6 @@ function _setSearchFiltersForQueryBuilder(qb, filter) {
   }
 }
 
-const create = function (organization) {
-  const organizationRawData = _.pick(organization, [
-    'name',
-    'type',
-    'logoUrl',
-    'externalId',
-    'provinceCode',
-    'email',
-    'isManagingStudents',
-    'createdBy',
-    'documentationUrl',
-  ]);
-
-  return knex(ORGANIZATIONS_TABLE_NAME)
-    .insert(organizationRawData)
-    .returning('*')
-    .then(([organization]) => _toDomain(organization));
-};
-
-const update = async function (organization) {
-  const organizationRawData = _.pick(organization, [
-    'name',
-    'type',
-    'logoUrl',
-    'externalId',
-    'provinceCode',
-    'isManagingStudents',
-    'email',
-    'credit',
-    'documentationUrl',
-    'showSkills',
-  ]);
-
-  const [organizationDB] = await knex(ORGANIZATIONS_TABLE_NAME)
-    .update(organizationRawData)
-    .where({ id: organization.id })
-    .returning('*');
-
-  const tagsDB = await knex('tags')
-    .select(['tags.id', 'tags.name'])
-    .join('organization-tags', 'organization-tags.tagId', 'tags.id')
-    .where('organization-tags.organizationId', organizationDB.id);
-
-  const tags = tagsDB.map((tagDB) => new Tag(tagDB));
-
-  return _toDomain({ ...organizationDB, tags });
-};
-
 const get = async function (id) {
   const knexConn = DomainTransaction.getConnection();
 
@@ -135,22 +85,6 @@ const getIdByCertificationCenterId = async function (certificationCenterId) {
   if (organizationIds.length !== 1)
     throw new NotFoundError(`Not found organization for certification center id ${certificationCenterId}`);
   return organizationIds[0];
-};
-
-const findByExternalIdsFetchingIdsOnly = async function (externalIds) {
-  const organizationsDB = await knex(ORGANIZATIONS_TABLE_NAME)
-    .whereInArray('externalId', externalIds)
-    .select(['id', 'externalId']);
-
-  return organizationsDB.map((model) => _toDomain(model));
-};
-
-const findScoOrganizationsByUai = async function ({ uai }) {
-  const organizationsDB = await knex(ORGANIZATIONS_TABLE_NAME)
-    .where({ type: Organization.types.SCO })
-    .whereRaw('LOWER("externalId") = ? ', `${uai.toLowerCase()}`);
-
-  return organizationsDB.map((model) => _toDomain(model));
 };
 
 const findActiveScoOrganizationsByExternalId = async function (externalId) {
@@ -199,13 +133,9 @@ const getOrganizationsWithPlacesManagementFeatureEnabled = async function () {
 };
 
 export {
-  create,
   findActiveScoOrganizationsByExternalId,
-  findByExternalIdsFetchingIdsOnly,
   findPaginatedFilteredByTargetProfile,
-  findScoOrganizationsByUai,
   get,
   getIdByCertificationCenterId,
   getOrganizationsWithPlacesManagementFeatureEnabled,
-  update,
 };
