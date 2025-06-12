@@ -12,7 +12,7 @@ module('Unit | Route | Invited', function (hooks) {
     route = this.owner.lookup('route:campaigns.invited');
     route.modelFor = sinon.stub();
     route.router = { replaceWith: sinon.stub(), transitionTo: sinon.stub() };
-    route.accessStorage = { associationDone: sinon.stub() };
+    route.accessStorage = { isAssociationDone: sinon.stub() };
     route.session.requireAuthenticationAndApprovedTermsOfService = sinon.stub();
   });
 
@@ -56,7 +56,7 @@ module('Unit | Route | Invited', function (hooks) {
           organizationId: 1,
         });
 
-        route.accessStorage.associationDone.withArgs(campaign.organizationId).returns(false);
+        route.accessStorage.isAssociationDone.withArgs(campaign.organizationId).returns(false);
 
         //when
         await route.afterModel(campaign);
@@ -76,7 +76,7 @@ module('Unit | Route | Invited', function (hooks) {
           organizationId: 1,
         });
 
-        route.accessStorage.associationDone.withArgs(campaign.organizationId).returns(true);
+        route.accessStorage.isAssociationDone.withArgs(campaign.organizationId).returns(true);
 
         //when
         await route.afterModel(campaign);
@@ -98,7 +98,7 @@ module('Unit | Route | Invited', function (hooks) {
           isOrganizationSCO: true,
           organizationId: 1,
         });
-        route.accessStorage.associationDone.withArgs(campaign.organizationId).returns(false);
+        route.accessStorage.isAssociationDone.withArgs(campaign.organizationId).returns(false);
 
         //when
         await route.afterModel(campaign);
@@ -118,7 +118,7 @@ module('Unit | Route | Invited', function (hooks) {
           isOrganizationSCO: true,
           organizationId: 1,
         });
-        route.accessStorage.associationDone.withArgs(campaign.organizationId).returns(true);
+        route.accessStorage.isAssociationDone.withArgs(campaign.organizationId).returns(true);
 
         //when
         await route.afterModel(campaign);
@@ -140,7 +140,7 @@ module('Unit | Route | Invited', function (hooks) {
           isOrganizationSUP: true,
           organizationId: 1,
         });
-        route.accessStorage.associationDone.withArgs(campaign.organizationId).returns(false);
+        route.accessStorage.isAssociationDone.withArgs(campaign.organizationId).returns(false);
 
         //when
         await route.afterModel(campaign);
@@ -160,7 +160,7 @@ module('Unit | Route | Invited', function (hooks) {
           isOrganizationSUP: true,
           organizationId: 1,
         });
-        route.accessStorage.associationDone.withArgs(campaign.organizationId).returns(true);
+        route.accessStorage.isAssociationDone.withArgs(campaign.organizationId).returns(true);
 
         //when
         await route.afterModel(campaign);
@@ -176,7 +176,7 @@ module('Unit | Route | Invited', function (hooks) {
 
     test('should redirect to fill in participant external otherwise', async function (assert) {
       //given
-      route.accessStorage.associationDone.withArgs(campaign.organizationId).returns(false);
+      route.accessStorage.isAssociationDone.withArgs(campaign.organizationId).returns(false);
       campaign = EmberObject.create({
         isRestricted: false,
         organizationId: 1,

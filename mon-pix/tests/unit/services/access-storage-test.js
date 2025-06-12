@@ -22,7 +22,7 @@ module('Unit | Service | Access Storage', function (hooks) {
     test('returns true when it has been set to true', function (assert) {
       const service = this.owner.lookup('service:access-storage');
       const organizationId = 1;
-      service.setHasUserSeenJoinPage(organizationId, true);
+      service.setHasUserSeenJoinPage(organizationId);
 
       const hasUserSeenJoinPage = service.hasUserSeenJoinPage(organizationId);
 
@@ -35,19 +35,19 @@ module('Unit | Service | Access Storage', function (hooks) {
       const service = this.owner.lookup('service:access-storage');
       const organizationId = 1;
 
-      const associationDone = service.associationDone(organizationId);
+      const isAssociationDone = service.isAssociationDone(organizationId);
 
-      assert.false(associationDone);
+      assert.false(isAssociationDone);
     });
 
     test('returns true when it has been set to true', function (assert) {
       const service = this.owner.lookup('service:access-storage');
       const organizationId = 1;
-      service.setAssociationDone(organizationId, true);
+      service.setAssociationDone(organizationId);
 
-      const associationDone = service.associationDone(organizationId);
+      const isAssociationDone = service.isAssociationDone(organizationId);
 
-      assert.ok(associationDone);
+      assert.ok(isAssociationDone);
     });
   });
 });

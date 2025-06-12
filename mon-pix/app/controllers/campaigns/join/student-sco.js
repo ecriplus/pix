@@ -27,7 +27,7 @@ export default class StudentScoController extends Controller {
     await this.currentUser.load();
     await this._reconcileUser();
 
-    this.accessStorage.setAssociationDone(this.model.campaign.organizationId, true);
+    this.accessStorage.setAssociationDone(this.model.campaign.organizationId);
   }
 
   _reconcileUser() {

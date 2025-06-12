@@ -30,9 +30,11 @@ module('Integration | Component | routes/campaigns/invited/associate-sup-student
         unloadRecord: () => sinon.stub(),
       });
     };
+
     class AccessStorageStub extends Service {
       setAssociationDone = setAssociationDoneStub;
     }
+
     this.owner.register('service:store', storeStub);
     this.owner.register('service:access-storage', AccessStorageStub);
   });
@@ -50,7 +52,7 @@ module('Integration | Component | routes/campaigns/invited/associate-sup-student
 
       // then
       sinon.assert.calledWithExactly(saveStub);
-      sinon.assert.calledWithExactly(setAssociationDoneStub, organizationId, true);
+      sinon.assert.calledWithExactly(setAssociationDoneStub, organizationId);
       assert.ok(true);
     });
 

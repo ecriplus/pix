@@ -16,7 +16,7 @@ export default class StudentScoController extends Controller {
       return;
     }
 
-    this.accessStorage.setAssociationDone(this.model.organizationId, true);
+    this.accessStorage.setAssociationDone(this.model.organizationId);
     this.router.transitionTo('campaigns.invited.fill-in-participant-external-id', this.model.code);
     return;
   }
@@ -25,7 +25,7 @@ export default class StudentScoController extends Controller {
   async goToConnectionPage() {
     this.session.set('skipRedirectAfterSessionInvalidation', true);
     await this.session.invalidate();
-    this.accessStorage.setHasUserSeenJoinPage(this.model.organizationId, true);
+    this.accessStorage.setHasUserSeenJoinPage(this.model.organizationId);
     this.router.replaceWith('campaigns.access', this.model.code);
   }
 }

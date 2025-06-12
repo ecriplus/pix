@@ -48,10 +48,7 @@ module('Unit | Component | Pages | Campaigns | Invited | Reconciliation', funct
 
     assert.true(createRecordStub.save.called, 'called save');
     assert.true(createRecordStub.unloadRecord.called, 'called unloadRecord');
-    assert.true(
-      component.accessStorage.setAssociationDone.calledWithExactly(organizationId, true),
-      'called accessStorage',
-    );
+    assert.true(component.accessStorage.setAssociationDone.calledWithExactly(organizationId), 'called accessStorage');
     assert.true(
       component.router.transitionTo.calledWithExactly(
         'campaigns.invited.fill-in-participant-external-id',

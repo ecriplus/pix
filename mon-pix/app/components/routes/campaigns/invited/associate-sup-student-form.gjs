@@ -258,7 +258,7 @@ export default class AssociateSupStudentForm extends Component {
 
     try {
       await supOrganizationLearner.save();
-      this.accessStorage.setAssociationDone(this.args.organizationId, true);
+      this.accessStorage.setAssociationDone(this.args.organizationId);
       this.router.transitionTo('campaigns.invited.fill-in-participant-external-id', this.args.campaignCode);
       return;
     } catch (errorResponse) {

@@ -39,7 +39,7 @@ export default class StudentScoRoute extends Route {
     }
 
     if (organizationLearner) {
-      this.accessStorage.setAssociationDone(campaign.organizationId, true);
+      this.accessStorage.setAssociationDone(campaign.organizationId);
       this.router.replaceWith('campaigns.invited.fill-in-participant-external-id', campaign.code);
     }
   }

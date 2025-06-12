@@ -23,7 +23,7 @@ export default class InvitedRoute extends Route {
   }
 
   afterModel(campaign) {
-    const associationDone = this.accessStorage.associationDone(campaign.organizationId);
+    const associationDone = this.accessStorage.isAssociationDone(campaign.organizationId);
 
     if (this.shouldAssociateInformation(campaign, associationDone)) {
       this.router.replaceWith('campaigns.invited.reconciliation', campaign.code);

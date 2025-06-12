@@ -32,7 +32,7 @@ export default class InvitedWrapper extends Component {
     try {
       await organizationLearner.save();
 
-      this.accessStorage.setAssociationDone(this.args.model.organizationId, true);
+      this.accessStorage.setAssociationDone(this.args.model.organizationId);
       return this.router.transitionTo('campaigns.invited.fill-in-participant-external-id', this.args.model.code);
     } catch (errorResponse) {
       this.handleError(errorResponse);

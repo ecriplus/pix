@@ -49,7 +49,7 @@ module('Unit | Controller | campaigns/invited/student-sco', function (hooks) {
 
         // then
         sinon.assert.calledOnce(scoOrganizationLearner.save);
-        sinon.assert.calledWithExactly(controller.accessStorage.setAssociationDone, organizationId, true);
+        sinon.assert.calledWithExactly(controller.accessStorage.setAssociationDone, organizationId);
         sinon.assert.calledWith(
           controller.router.transitionTo,
           'campaigns.invited.fill-in-participant-external-id',
