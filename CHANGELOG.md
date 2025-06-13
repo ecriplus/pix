@@ -1,5 +1,32 @@
 # Pix Changelog
 
+# [5.134.0](https://github.com/1024pix/pix/compare/v5.133.0...v5.134.0) (2025-06-13)
+
+### :rocket: Amélioration
+
+- [#12525](https://github.com/1024pix/pix/pull/12525) Créer routes pour l'intégration du LLM dans le contexte de l'évaluation (PIX-18171) 
+
+### :bug: Correction
+
+- [#12469](https://github.com/1024pix/pix/pull/12469) Récupération des erreurs lors de l'exécution du script fix-validated-live-alerts (PIX-18107). 
+
+### :rewind: Retour en arrière
+
+- [#12526](https://github.com/1024pix/pix/pull/12526) Revert "[BUMP] Update dependency @1024pix/epreuves-components to ^0.3.0 (mon-pix)"
+
+### :building_construction: Tech
+
+- [#12498](https://github.com/1024pix/pix/pull/12498) :hammer: Création d'un référentiel cadre à partir d'un profil cible (PIX-18131) 
+- [#12506](https://github.com/1024pix/pix/pull/12506) :truck: Déplace `target-profile-training-repository` vers `src/devcomp/` 
+- [#12510](https://github.com/1024pix/pix/pull/12510) Ajouter la permission pour le contenu dans le workflow qui ferme les PRs inactive depuis un mois 
+- [#12502](https://github.com/1024pix/pix/pull/12502) Déplace l'information `associationDone` dans l'access-storage (PIX-18167). 
+- [#12421](https://github.com/1024pix/pix/pull/12421) Enlever les sources junior du container RA front 
+- [#12484](https://github.com/1024pix/pix/pull/12484) Supprimer le feature-toggle isV3CertificationAttestationEnabled (PIX-17340). 
+
+### :arrow_up: Montée de version
+
+- [#12520](https://github.com/1024pix/pix/pull/12520) Update dependency @1024pix/epreuves-components to ^0.3.0 (mon-pix)
+
 # [5.133.0](https://github.com/1024pix/pix/compare/v5.132.0...v5.133.0) (2025-06-12)
 
 ### :rocket: Amélioration
