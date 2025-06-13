@@ -19,9 +19,6 @@ export default class Information extends Component {
   <template>
     <section class="page-section">
       <div class="content-text content-text--small complementary-certification-details">
-        <h1 class="complementary-certification-details__title">Certification complémentaire</h1>
-
-        <span class="complementary-certification-details__label">{{@complementaryCertification.label}}</span>
         {{#if @currentTargetProfile}}
           <LinkToCurrentTargetProfile @model={{@currentTargetProfile}} />
         {{/if}}
