@@ -524,7 +524,6 @@ const configuration = (function () {
     config.featureToggles.isAlwaysOkValidateNextChallengeEndpointEnabled = false;
     config.metrics.isDirectMetricsEnabled = false;
     config.metrics.isOppsyDisabled = false;
-    config.featureToggles.isTextToSpeechButtonEnabled = false;
 
     config.lti.authorizedPlatforms = ['https://moodle.example.net'];
     config.lti.jwkModulusLength = 2048;
