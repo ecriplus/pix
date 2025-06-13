@@ -36,6 +36,7 @@ import * as campaignParticipationOverviewRepository from '../../../campaign-part
 import * as organizationLearnerImportFormatRepository from '../../../learner-management/infrastructure/repositories/organization-learner-import-format-repository.js';
 import * as prescriptionOrganizationLearnerRepository from '../../../learner-management/infrastructure/repositories/organization-learner-repository.js';
 import * as studentRepository from '../../../learner-management/infrastructure/repositories/student-repository.js';
+import * as analysisRepository from '../../infrastructure/repositories/analysis-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
 import * as organizationLearnerActivityRepository from '../../infrastructure/repositories/organization-learner-activity-repository.js';
 import * as organizationLearnerFeatureRepository from '../../infrastructure/repositories/organization-learner-feature-repository.js';
@@ -45,7 +46,7 @@ import * as scoOrganizationParticipantRepository from '../../infrastructure/repo
 import * as supOrganizationParticipantRepository from '../../infrastructure/repositories/sup-organization-participant-repository.js';
 
 const dependencies = {
-  analysisRepository: repositories.analysisRepository,
+  analysisRepository,
   divisionRepository,
   cryptoService,
   emailValidationDemandRepository,
@@ -59,6 +60,7 @@ const dependencies = {
   organizationParticipantRepository,
   organizationLearnerActivityRepository,
   organizationLearnerRepository: repositories.organizationLearnerRepository,
+  organizationToJoinRepository: repositories.organizationToJoinRepository,
   organizationLearnerFeatureRepository,
   organizationLearnerIdentityRepository,
   organizationLearnerImportFormatRepository,

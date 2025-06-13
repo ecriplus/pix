@@ -77,6 +77,19 @@ export const getByCampaignParticipationId = async (campaignParticipationId) => {
 };
 
 /**
+ * @function
+ * @name getByCode
+ *
+ * @param {number} code
+ * @param {locale} string
+ * @returns {Promise<Campaign>}
+ */
+export const getByCode = async (code, locale) => {
+  const getCampaign = await usecases.getCampaignByCode({ code, locale });
+  return new Campaign(getCampaign);
+};
+
+/**
  * @typedef UpdateCampaignPayload
  * @type {object}
  * @property {number} campaignId
