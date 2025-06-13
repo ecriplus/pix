@@ -23,7 +23,7 @@ export class User {
     const map = new Map();
 
     const filename =
-      transformStringForFileName(this.firstName) + '_' + transformStringForFileName(this.lastName) + '_' + Date.now();
+      transformStringForFileName(this.lastName) + '_' + transformStringForFileName(this.firstName) + '_' + Date.now();
 
     map.set('firstName', this.firstName);
     map.set('lastName', this.lastName);
