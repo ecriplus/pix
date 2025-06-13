@@ -66,11 +66,14 @@ export class FixValidatedLiveAlertCertificationChallengeIds extends Script {
 
     let hasNext = true;
     let cursorId = 0;
+    let currentCourseId;
 
+    const errors = [];
+    let courseIds;
     do {
       const transaction = await knex.transaction();
       try {
-        const courseIds = await this.#getCourseIds({
+        courseIds = await this.#getCourseIds({
           cursorId,
           batchSize,
           startingFromDate,
@@ -79,6 +82,7 @@ export class FixValidatedLiveAlertCertificationChallengeIds extends Script {
         });
 
         for (const currentCourse of courseIds) {
+          currentCourseId = currentCourse.id;
           const results = await this.fixCertificationCapacities({ courseId: currentCourse.id, transaction });
 
           this.logger.debug({ results });
@@ -93,8 +97,17 @@ export class FixValidatedLiveAlertCertificationChallengeIds extends Script {
         cursorId = courseIds.at(-1)?.id;
         await this.delay(delayInMs);
       } catch (error) {
-        await transaction.rollback();
-        throw error;
+        errors.push({ currentCourseId, error });
+        cursorId = courseIds.at(-1)?.id;
+      } finally {
+        if (errors.length > 0) {
+          this.logger.info({
+            errors,
+          });
+          await transaction.rollback();
+        } else {
+          await transaction.commit();
+        }
       }
     } while (hasNext);
 
