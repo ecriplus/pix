@@ -1,3 +1,4 @@
+import { getMessageConversationSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/custom/message-conversation.sample.js';
 import { getDownloadSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/download.sample.js';
 import { getEmbedSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/embed.sample.js';
 import { getFlashcardsSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/flashcards.sample.js';
@@ -9,6 +10,7 @@ import { getSeparatorSample } from '../../../../../../../src/devcomp/infrastruct
 import { getTextSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/text.sample.js';
 import { getVideoSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/video.sample.js';
 import { expect } from '../../../../../../test-helper.js';
+import { customElementSchema } from './element/custom-element-schema.js';
 import { downloadElementSchema } from './element/download-schema.js';
 import { embedElementSchema } from './element/embed-schema.js';
 import { flashcardsElementSchema } from './element/flashcards-schema.js';
@@ -24,6 +26,17 @@ import { grainSchema, moduleSchema } from './module-schema.js';
 
 describe('Unit | Infrastructure | Datasources | Learning Content | Module Datasource | format validation', function () {
   describe('when element has a valid structure', function () {
+    describe('when element is a custom element', function () {
+      it('should validate sample custom message-conversation structure', async function () {
+        try {
+          await customElementSchema.validateAsync(getMessageConversationSample(), { abortEarly: false });
+        } catch (joiError) {
+          const formattedError = joiErrorParser.format(joiError);
+          expect(joiError).to.equal(undefined, formattedError);
+        }
+      });
+    });
+
     it('should validate sample download structure', async function () {
       try {
         await downloadElementSchema.validateAsync(getDownloadSample(), { abortEarly: false });
