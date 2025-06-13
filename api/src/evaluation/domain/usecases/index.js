@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { certificationCompletedJobRepository } from '../../../../lib/infrastructure/repositories/jobs/certification-completed-job-repository.js';
 import * as certificationEvaluationCandidateRepository from '../../../certification/evaluation/infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationChallengeLiveAlertRepository from '../../../certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
+import * as llmApi from '../../../llm/application/api/llm-api.js';
 import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as campaignParticipationRepository from '../../../prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
 import { participationCompletedJobRepository } from '../../../prescription/campaign-participation/infrastructure/repositories/jobs/participation-completed-job-repository.js';
@@ -76,6 +77,7 @@ const dependencies = {
   getCompetenceLevel,
   improvementService,
   knowledgeElementRepository: injectedSharedRepositories.knowledgeElementRepository,
+  llmApi,
   pickChallengeService,
   scorecardService,
   skillRepository,
