@@ -44,7 +44,7 @@ describe('Unit | Profile | Domain | Models | User', function () {
     // then
     expect(form.get('firstName')).to.deep.equal(user.firstName);
     expect(form.get('lastName')).to.deep.equal(user.lastName);
-    expect(form.get('filename')).to.deep.equal('theo_courant_' + Date.now());
+    expect(form.get('filename')).to.deep.equal('courant_theo_' + Date.now());
     expect(form.get('date')).to.deep.equal('02/10/2024');
   });
 });
