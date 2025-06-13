@@ -211,12 +211,17 @@ function getCustomErrorMessage(rules) {
 function getAlternativeSwitchCaseJsonSchema(switchCase) {
   const childJsonSchema = convertFromType(switchCase.then);
 
-  const optionalTitle = getOptionalTitleBasedOnChildrenType(switchCase);
+  const optionalTitle =
+    getOptionalTitleBasedOnChildrenType(switchCase) || getOptionalTitleBasedOnSiblingTagName(switchCase);
   if (optionalTitle !== undefined) {
     childJsonSchema.title = optionalTitle;
   }
 
   return childJsonSchema;
+}
+
+function getOptionalTitleBasedOnSiblingTagName(switchCase) {
+  return switchCase.is?.allow[1];
 }
 
 function getOptionalTitleBasedOnChildrenType(switchCase) {

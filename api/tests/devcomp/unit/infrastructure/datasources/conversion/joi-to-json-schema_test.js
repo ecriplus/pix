@@ -307,7 +307,7 @@ describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema'
     });
 
     describe('Joi.alternatives.conditional', function () {
-      it('should convert conditional deep ref switch is/then to JSON Schema', function () {
+      it('should convert conditional deep ref switch is/then to JSON Schema and add title if an allowed property exist', function () {
         const joiSchema = Joi.alternatives().conditional('.sport', {
           switch: [
             {
@@ -345,6 +345,7 @@ describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema'
                 },
               },
               required: ['sport', 'value'],
+              title: 'handball',
               type: 'object',
             },
             {
@@ -359,6 +360,7 @@ describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema'
                 },
               },
               required: ['sport', 'value'],
+              title: 'volleyball',
               type: 'object',
             },
           ],
