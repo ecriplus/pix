@@ -133,7 +133,7 @@ export default class QrocmIndSolutionPanel extends Component {
         const answerOutcome = this._computeAnswerOutcome(answers[block.input], resultDetails[block.input]);
         const inputClass = this._computeInputClass(answerOutcome);
         const ariaLabel = this._computeAriaLabel(answerOutcome);
-        if (answers[block.input] === '') {
+        if (answers[block.input] == undefined || answers[block.input] === '') {
           answers[block.input] = this.intl.t('pages.result-item.aband');
         }
         block.ariaLabel = ariaLabel;
@@ -147,7 +147,7 @@ export default class QrocmIndSolutionPanel extends Component {
   }
 
   _computeAnswerOutcome(inputFieldValue, resultDetail) {
-    if (inputFieldValue === '') {
+    if (inputFieldValue == undefined || inputFieldValue === '') {
       return 'empty';
     }
     return resultDetail === true ? 'ok' : 'ko';
