@@ -373,6 +373,7 @@
     },
     "complementary-certifications": {
       "item": {
+        "complementary-certification": "Certification complémentaire",
         "framework": "Référentiel cadre",
         "navigation": {
           "aria-label": "Navigation de la section certification complémentaire"

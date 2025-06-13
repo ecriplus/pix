@@ -373,6 +373,7 @@
     },
     "complementary-certifications": {
       "item": {
+        "complementary-certification": "Complementary certification",
         "framework": "Consolidated framework",
         "navigation": {
           "aria-label": "Navigation of the complementary certification section"
@@ -406,7 +407,7 @@
           "title": "Historique des profils cibles rattachés"
         }
       },
-      "title": "Toutes les certifications complémentaires"
+      "title": "All complementary certifications"
     },
     "layout": {
       "menu-bar": {
