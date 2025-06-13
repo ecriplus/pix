@@ -1,10 +1,11 @@
 import { render } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
-import { find } from '@ember/test-helpers';
+import { click, find } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import ENV from 'mon-pix/config/environment';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import { clickByLabel } from '../../helpers/click-by-label';
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
@@ -86,7 +87,7 @@ module('Integration | Component | Challenge Embed Simulator', function (hooks) {
       });
 
       // when
-      screen = await render(hbs`<ChallengeEmbedSimulator @embedDocument={{this.embedDocument}} />`);
+      screen = await render(hbs`<ChallengeEmbedSimulator @embedDocument={{this.embedDocument}} @assessmentId='123' />`);
     });
 
     test('should have an height that is the one defined in the referential', function (assert) {
@@ -169,6 +170,66 @@ module('Integration | Component | Challenge Embed Simulator', function (hooks) {
           await new Promise((resolve) => setTimeout(resolve, 0));
 
           assert.dom(screen.queryByText(t('pages.challenge.embed-simulator.actions.reset'))).doesNotExist();
+        });
+      });
+
+      module('when message data has enableFetchFromApi=true', function () {
+        test('should call embed api proxy service', async function (assert) {
+          // given
+          const requestsPort = new MessageChannel().port1;
+          const forwardStub = sinon.stub();
+          this.owner.register(
+            'service:embed-api-proxy',
+            {
+              forward: forwardStub,
+            },
+            { instantiate: false },
+          );
+
+          await click(screen.getByText(t('pages.challenge.embed-simulator.actions.launch')));
+
+          // when
+          const iframe = screen.getByTitle('Embed simulator');
+          const event = new MessageEvent('message', {
+            data: { type: 'init', from: 'pix', enableFetchFromApi: true },
+            origin: 'https://epreuves.pix.fr',
+            source: iframe.contentWindow,
+            ports: [requestsPort],
+          });
+          window.dispatchEvent(event);
+
+          // then
+          sinon.assert.calledWith(forwardStub, sinon.match.object, requestsPort, `/api/assessments/123/embed/`);
+          assert.ok(true);
+        });
+      });
+
+      module('when message data has enableFetchFromApi=false', function () {
+        test('should not call embed api proxy service', async function (assert) {
+          // given
+          const forwardStub = sinon.stub();
+          this.owner.register(
+            'service:embed-api-proxy',
+            {
+              forward: forwardStub,
+            },
+            { instantiate: false },
+          );
+
+          await click(screen.getByText(t('pages.challenge.embed-simulator.actions.launch')));
+
+          // when
+          const iframe = screen.getByTitle('Embed simulator');
+          const event = new MessageEvent('message', {
+            data: { type: 'init', from: 'pix', enableFetchFromApi: false },
+            origin: 'https://epreuves.pix.fr/',
+            source: iframe.contentWindow,
+          });
+          window.dispatchEvent(event);
+
+          // then
+          sinon.assert.notCalled(forwardStub);
+          assert.ok(true);
         });
       });
     });

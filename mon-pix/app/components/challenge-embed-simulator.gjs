@@ -2,6 +2,7 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import { htmlSafe } from '@ember/template';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
@@ -62,6 +63,10 @@ export default class ChallengeEmbedSimulator extends Component {
       </div>
     </div>
   </template>
+
+  @service
+  embedApiProxy;
+
   @tracked
   isLoadingEmbed = true;
 
@@ -108,9 +113,15 @@ export default class ChallengeEmbedSimulator extends Component {
 
     iframe.addEventListener('load', loadListener);
 
-    thisComponent._embedMessageListener = ({ origin, data }) => {
+    thisComponent._embedMessageListener = ({ origin, data, ports }) => {
       if (!isEmbedAllowedOrigin(origin)) return;
       if (isInitMessage(data)) {
+        if (data.enableFetchFromApi) {
+          const [requestsPort] = ports;
+
+          this.embedApiProxy.forward(this, requestsPort, `/api/assessments/${this.args.assessmentId}/embed/`);
+        }
+
         if (data.autoLaunch || thisComponent.isSimulatorLaunched) {
           thisComponent.launchSimulator();
         }

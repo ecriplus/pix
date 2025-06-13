@@ -141,7 +141,7 @@ export default class ChallengeStatement extends Component {
       {{/if}}
 
       {{#if @challenge.hasValidEmbedDocument}}
-        <ChallengeEmbedSimulator @embedDocument={{this.challengeEmbedDocument}} />
+        <ChallengeEmbedSimulator @embedDocument={{this.challengeEmbedDocument}} @assessmentId={{@assessment.id}} />
       {{/if}}
 
       {{#if @challenge.alternativeInstruction}}
