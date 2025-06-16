@@ -35,33 +35,11 @@ import * as organizationLearnerRepository from '../../infrastructure/repositorie
 import * as studentRepository from '../../infrastructure/repositories/student-repository.js';
 import * as supOrganizationLearnerRepository from '../../infrastructure/repositories/sup-organization-learner-repository.js';
 import { importStorage } from '../../infrastructure/storage/import-storage.js';
+
 /**
- * @typedef {import ('../../infrastructure/repositories/organization-feature-repository.js')} CampaignParticipationRepository
- * @typedef {import ('../../../campaign/infrastructure/repositories/campaign-repository.js')} CampaignRepository
- * @typedef {import ('../../infrastructure/repositories/jobs/import-organization-learners-job-repository.js')} ImportOrganizationLearnersJobRepository
- * @typedef {import ('../../infrastructure/storage/import-storage.js')} ImportStorage
- * @typedef {import ('../../infrastructure/repositories/jobs/import-sup-organization-learners-job-repository.js')} ImportSupOrganizationLearnersJobRepository
- * @typedef {import ('../../infrastructure/repositories/jobs/import-sco-csv-organization-learners-job-repository.js')} importScoCsvOrganizationLearnersJobRepository
- * @typedef {import ('../../../../../lib/infrastructure/repositories/organization-learner-repository.js')} libOrganizationLearnerRepository
- * @typedef {import ('../../../../shared/infrastructure/monitoring-tools.js')} LogErrorWithCorrelationIds
- * @typedef {import ('../../../../shared/infrastructure/utils/logger.js')} loggger
- * @typedef {import ('../../../../team/infrastructure/repositories/membership-repository.js')} MembershipRepository
- * @typedef {import ('../../../../shared/domain/services/obfuscation-service.js')} obfuscationService
- * @typedef {import ('../../../../organizational-entities/application/api/organization-features-api.js')} OrganizationFeatureApi
- * @typedef {import ('../../infrastructure/repositories/organization-feature-repository.js')} OrganizationFeatureRepository
- * @typedef {import ('../../infrastructure/repositories/organization-import-repository.js')} OrganizationImportRepository
- * @typedef {import ('../../infrastructure/repositories/organization-learner-import-format-repository.js')} OrganizationLearnerImportFormatRepository
- * @typedef {import ('../../infrastructure/repositories/organization-learner-repository.js')} OrganizationLearnerRepository
- * @typedef {import ('../../../../shared/infrastructure/repositories/organization-repository.js')} OrganizationRepository
- * @typedef {import ('../../../../shared/domain/services/placement-profile-service.js')} placementProfileService
- * @typedef {import('../../../organization-learner/infrastructure/repositories/registration-organization-learner-repository.js')} registrationOrganizationLearnerRepository
- * @typedef {import ('../../infrastructure/repositories/student-repository.js')} studentRepository
- * @typedef {import ('../../infrastructure/repositories/sup-organization-learner-repository.js')} SupOrganizationLearnerRepository
- * @typedef {import ('../../../../shared/domain/services/user-reconciliation-service.js')} UserReconciliationService
- * @typedef {import('../../../../identity-access-management/infrastructure/repositories/user.repository.js')} userRepository
- * @typedef {import('../../infrastructure/repositories/jobs/validate-csv-organization-learners-import-file-job-repository.js')} validateCsvOrganizationImportFileJobRepository
- * @typedef {import ('../../infrastructure/repositories/jobs/validate-organization-learners-import-file-job-repository.js')} ValidateOrganizationImportFileJobRepository
+ * @typedef {dependencies} PrescriptionLearnerManagementDependencies
  */
+
 const dependencies = {
   assessmentRepository,
   campaignParticipationRepository: repositories.campaignParticipationRepository,
@@ -121,6 +99,8 @@ const usecasesWithoutInjectedDependencies = {
  * @property {deleteOrganizationLearners} deleteOrganizationLearners
  * @property {dissociateUserFromOrganizationLearner} dissociateUserFromOrganizationLearner
  * @property {getOrganizationImportStatus} getOrganizationImportStatus
+ * @property {getOrganizationImport} getOrganizationImport
+ * @property {getDeltaOrganizationLearnerIds} getDeltaOrganizationLearnerIds
  * @property {getOrganizationLearnersCsvTemplate} getOrganizationLearnersCsvTemplate
  * @property {handlePayloadTooLargeError} handlePayloadTooLargeError
  * @property {importOrganizationLearnersFromSIECLECSVFormat} importOrganizationLearnersFromSIECLECSVFormat
