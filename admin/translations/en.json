@@ -372,6 +372,14 @@
       }
     },
     "complementary-certifications": {
+      "item": {
+        "complementary-certification": "Complementary certification",
+        "framework": "Consolidated framework",
+        "navigation": {
+          "aria-label": "Navigation of the complementary certification section"
+        },
+        "target-profile": "Target profile"
+      },
       "list": {
         "caption": "Liste des certifications complémentaires, comprenant l'identifiant unique et le nom.",
         "id": "ID",
@@ -399,7 +407,7 @@
           "title": "Historique des profils cibles rattachés"
         }
       },
-      "title": "Toutes les certifications complémentaires"
+      "title": "All complementary certifications"
     },
     "layout": {
       "menu-bar": {

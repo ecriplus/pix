@@ -1,0 +1,20 @@
+@use 'pix-design-tokens/typography';
+
+.complementary-certification-header {
+  &__title {
+    small {
+      display: block;
+      margin-bottom: var(--pix-spacing-3x);
+      color: var(--pix-neutral-500);
+      text-transform: uppercase;
+
+      @extend %pix-body-s;
+    }
+
+    span {
+      color: var(--pix-neutral-800);
+
+      @extend %pix-title-s;
+    }
+  }
+}

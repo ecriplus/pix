@@ -12,7 +12,7 @@ module('Integration | Component | complementary-certifications/target-profiles/i
     const currentUser = this.owner.lookup('service:currentUser');
     currentUser.adminMember = { isSuperAdmin: true };
     const complementaryCertification = store.createRecord('complementary-certification', {
-      label: 'MARIANNE CERTIF',
+      label: 'Pix+ Droit',
       targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3 }],
     });
     const currentTargetProfile = complementaryCertification.currentTargetProfiles[0];
@@ -28,9 +28,7 @@ module('Integration | Component | complementary-certifications/target-profiles/i
     );
 
     // then
-    assert.dom(screen.getByRole('heading', { name: 'Certification complémentaire' })).exists();
     assert.dom(screen.getByRole('link', { name: 'ALEX TARGET' })).exists();
-    assert.dom(screen.getByText('MARIANNE CERTIF')).exists();
   });
 
   module('when there is multiple current target profiles', function () {

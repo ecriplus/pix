@@ -1,0 +1,19 @@
+{{page-title "Certification complémentaire " @model.id " | Pix Admin" replace=true}}
+
+<ComplementaryCertifications::Item::Header @complementaryCertificationLabel={{@model.label}} />
+
+<PixTabs
+  class="complementary-certification__tabs"
+  @ariaLabel={{t "components.complementary-certifications.item.navigation.aria-label"}}
+>
+  <LinkTo @route="authenticated.complementary-certifications.item.framework">
+    {{t "components.complementary-certifications.item.framework"}}
+  </LinkTo>
+  <LinkTo @route="authenticated.complementary-certifications.item.target-profile">
+    {{t "components.complementary-certifications.item.target-profile"}}
+  </LinkTo>
+</PixTabs>
+
+<main class="page-body complementary-certification">
+  {{outlet}}
+</main>

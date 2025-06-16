@@ -5,27 +5,6 @@
   flex-direction: column;
   gap: 15px;
 
-  &__title {
-    color: var(--pix-neutral-500);
-    font-weight: 400;
-    font-size: 12px;
-
-    @extend %pix-title-xs;
-
-    line-height: 18px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-  }
-
-
-  &__label {
-    color: var(--pix-neutral-800);
-    font-weight: 500;
-    font-size: 28px;
-    line-height: 36px;
-    letter-spacing: -0.04em;
-  }
-
   &__badges-title,
   &__history-title {
     padding-bottom: var(--pix-spacing-4x);
