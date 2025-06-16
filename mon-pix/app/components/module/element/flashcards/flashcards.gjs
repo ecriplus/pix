@@ -113,20 +113,26 @@ export default class ModulixFlashcards extends Component {
     this.counters[userAssessment]++;
   }
 
-  goToNextCard() {
+  async goToNextCard() {
     if (this.currentCardIndex < this.numberOfCards - 1) {
       this.currentCardIndex++;
       this.displayedSideName = 'recto';
     } else {
       this.currentStep = 'outro';
+      await this.onAnswer();
     }
+  }
+
+  @action
+  async onAnswer() {
+    await this.args.onAnswer({ element: this.args.flashcards });
   }
 
   @action
   noop() {}
 
   @action
-  onSelfAssessment(userAssessment) {
+  async onSelfAssessment(userAssessment) {
     const selfAssessmentData = {
       userAssessment,
       cardId: this.currentCard.id,
@@ -143,7 +149,7 @@ export default class ModulixFlashcards extends Component {
     });
 
     this.incrementCounterFor(userAssessment);
-    this.goToNextCard();
+    await this.goToNextCard();
 
     const elementToFocus = document.querySelector('.element-flashcards');
     elementToFocus.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'start' });

@@ -40,7 +40,11 @@ export default class ModulixElement extends Component {
     {{else if (eq @element.type "separator")}}
       <SeparatorElement />
     {{else if (eq @element.type "flashcards")}}
-      <FlashcardsElement @flashcards={{@element}} @onSelfAssessment={{@onSelfAssessment}} />
+      <FlashcardsElement
+        @flashcards={{@element}}
+        @onAnswer={{@onElementAnswer}}
+        @onSelfAssessment={{@onSelfAssessment}}
+      />
     {{else if (eq @element.type "qcu")}}
       <QcuElement
         @element={{@element}}
@@ -49,7 +53,7 @@ export default class ModulixElement extends Component {
         @correction={{this.getLastCorrectionForElement @element}}
       />
     {{else if (eq @element.type "qcu-declarative")}}
-      <QcuDeclarativeElement @element={{@element}} />
+      <QcuDeclarativeElement @element={{@element}} @onAnswer={{@onElementAnswer}} />
     {{else if (eq @element.type "qcm")}}
       <QcmElement
         @element={{@element}}
@@ -65,7 +69,7 @@ export default class ModulixElement extends Component {
         @correction={{this.getLastCorrectionForElement @element}}
       />
     {{else if (eq @element.type "qab")}}
-      <QabElement @element={{@element}} />
+      <QabElement @element={{@element}} @onAnswer={{@onElementAnswer}} />
     {{/if}}
   </template>
 }

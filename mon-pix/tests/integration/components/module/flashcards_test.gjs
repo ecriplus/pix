@@ -247,16 +247,21 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
     });
 
     module('then user gives an answer for the last card', function () {
-      test('should display the outro card', async function (assert) {
+      test('should display the outro card and call "onAnswer" function passed as argument', async function (assert) {
         // given
         const { flashcards } = _getFlashcards();
 
+        const onAnswerStub = sinon.stub();
         const onSelfAssessmentStub = sinon.stub();
 
         // when
         const screen = await render(
           <template>
-            <ModulixFlashcards @flashcards={{flashcards}} @onSelfAssessment={{onSelfAssessmentStub}} />
+            <ModulixFlashcards
+              @flashcards={{flashcards}}
+              @onAnswer={{onAnswerStub}}
+              @onSelfAssessment={{onSelfAssessmentStub}}
+            />
           </template>,
         );
         await clickByName(t('pages.modulix.buttons.flashcards.start'));
@@ -266,6 +271,10 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
         await clickByName(t('pages.modulix.buttons.flashcards.answers.yes'));
 
         // then
+        sinon.assert.calledWithExactly(onAnswerStub, {
+          element: flashcards,
+        });
+
         assert.ok(screen.getByText('Terminé'));
       });
     });
@@ -297,11 +306,18 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
       // given
       const { flashcards } = _getFlashcards();
 
+      const onAnswerStub = sinon.stub();
       const onSelfAssessment = sinon.stub();
 
       // when
       const screen = await render(
-        <template><ModulixFlashcards @flashcards={{flashcards}} @onSelfAssessment={{onSelfAssessment}} /></template>,
+        <template>
+          <ModulixFlashcards
+            @flashcards={{flashcards}}
+            @onAnswer={{onAnswerStub}}
+            @onSelfAssessment={{onSelfAssessment}}
+          />
+        </template>,
       );
       await clickByName(t('pages.modulix.buttons.flashcards.start'));
       await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
@@ -321,12 +337,17 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
       // given
       const { flashcards } = _getFlashcards();
 
+      const onAnswerStub = sinon.stub();
       const onSelfAssessmentStub = sinon.stub();
 
       // when
       const screen = await render(
         <template>
-          <ModulixFlashcards @flashcards={{flashcards}} @onSelfAssessment={{onSelfAssessmentStub}} />
+          <ModulixFlashcards
+            @flashcards={{flashcards}}
+            @onAnswer={{onAnswerStub}}
+            @onSelfAssessment={{onSelfAssessmentStub}}
+          />
         </template>,
       );
       await clickByName(t('pages.modulix.buttons.flashcards.start'));
@@ -351,12 +372,17 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
         // given
         const { flashcards, firstCard } = _getFlashcards();
 
+        const onAnswerStub = sinon.stub();
         const onSelfAssessmentStub = sinon.stub();
 
         // when
         const screen = await render(
           <template>
-            <ModulixFlashcards @flashcards={{flashcards}} @onSelfAssessment={{onSelfAssessmentStub}} />
+            <ModulixFlashcards
+              @flashcards={{flashcards}}
+              @onAnswer={{onAnswerStub}}
+              @onSelfAssessment={{onSelfAssessmentStub}}
+            />
           </template>,
         );
         await clickByName(t('pages.modulix.buttons.flashcards.start'));

@@ -226,6 +226,7 @@ function getComponents() {
           },
         ],
         instruction: 'question declarative',
+        isAnswerable: true,
       }),
     }),
     new ComponentElement({
@@ -502,7 +503,7 @@ function getAttributesComponents() {
       type: 'element',
       element: {
         id: '7',
-        isAnswerable: false,
+        isAnswerable: true,
         title: 'title',
         instruction: 'instruction',
         introImage: {

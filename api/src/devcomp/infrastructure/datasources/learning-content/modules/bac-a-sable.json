@@ -117,53 +117,13 @@
               }
             ]
           }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "52af6cab-07df-4962-abc5-20cf95d5eb5a",
-            "type": "text",
-            "content": "<p>Voici une iframe :</p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "f00133f5-0653-425b-a25f-3c9604820529",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/cartes2.html\" height=\"420\"></iframe>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "32e9196a-d854-4553-bb93-5a341213f6e2",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/videoCaroline.html\" height=\"800\"></iframe>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "a5e32f35-889c-45aa-8151-2da532de4eeb",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/objectif.html\" height=\"600\"></iframe>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "e32c01a8-7ae1-4c6d-9a16-6487c7c504d2",
-            "type": "text",
-            "content": "<p>Elles ne sont autorisées qu'en béta.</p>"
-          }
         }
       ]
     },
     {
-      "id": "f312c33d-e7c9-4a69-9ba0-913957b8f7dd",
-      "type": "discovery",
-      "title": "Voici un grain de découverte",
+      "id": "628bd37d-e5da-411f-9b06-1035b073411b",
+      "type": "lesson",
+      "title": "test flashcards",
       "components": [
         {
           "type": "element",
@@ -217,7 +177,61 @@
               }
             ]
           }
+        }
+      ]
+    },
+    {
+      "id": "df111992-ff3a-4c3f-ae5a-78bc359af23c",
+      "type": "lesson",
+      "title": "test POI",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "52af6cab-07df-4962-abc5-20cf95d5eb5a",
+            "type": "text",
+            "content": "<p>Voici une iframe :</p>"
+          }
         },
+        {
+          "type": "element",
+          "element": {
+            "id": "f00133f5-0653-425b-a25f-3c9604820529",
+            "type": "text",
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/cartes2.html\" height=\"420\"></iframe>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "32e9196a-d854-4553-bb93-5a341213f6e2",
+            "type": "text",
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/videoCaroline.html\" height=\"800\"></iframe>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "a5e32f35-889c-45aa-8151-2da532de4eeb",
+            "type": "text",
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/objectif.html\" height=\"600\"></iframe>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "e32c01a8-7ae1-4c6d-9a16-6487c7c504d2",
+            "type": "text",
+            "content": "<p>Elles ne sont autorisées qu'en béta.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "f312c33d-e7c9-4a69-9ba0-913957b8f7dd",
+      "type": "discovery",
+      "title": "Voici un grain de découverte",
+      "components": [
         {
           "type": "element",
           "element": {

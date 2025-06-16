@@ -5,6 +5,7 @@ class QAB {
     this.id = id;
     this.type = type;
     this.instruction = instruction;
+    this.isAnswerable = true;
     this.cards = cards.map((card) => new QABCard(card));
   }
 }

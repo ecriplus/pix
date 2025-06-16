@@ -40,6 +40,7 @@ describe('Unit | Devcomp | Domain | Models | Element | QAB', function () {
       expect(qab.id).equal('a4e36fa9-dc56-4fd3-a7f2-708cf94b1728');
       expect(qab.type).equal('qab');
       expect(qab.instruction).equal('instruction');
+      expect(qab.isAnswerable).equal(true);
       expect(qab.cards).deep.equal([
         new QABCard({
           id: 'f2a601fa-a5a2-4c75-90bf-74977acb89b4',

@@ -1,5 +1,5 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
-import { findAll } from '@ember/test-helpers';
+import { click, findAll } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import ModuleGrain from 'mon-pix/components/module/grain/grain';
@@ -199,6 +199,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
           id: 'ed795d29-5f04-499c-a9c8-4019125c5cb1',
           type: 'qab',
           instruction: '<p><strong>Maintenant, entraînez-vous sur des exemples concrets !</strong></p>',
+          isAnswerable: true,
           cards: [
             {
               id: 'e222b060-7c18-4ee2-afe2-2ae27c28946a',
@@ -328,6 +329,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
           title: "Introduction à l'adresse e-mail",
           instruction: '<p>...</p>',
           introImage: { url: 'https://images.pix.fr/modulix/placeholder-details.svg' },
+          isAnswerable: true,
           cards: [
             {
               id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
@@ -413,10 +415,48 @@ module('Integration | Component | Module | Grain', function (hooks) {
         test('should display continue button', async function (assert) {
           // given
           const store = this.owner.lookup('service:store');
+          const passageEventService = this.owner.lookup('service:passage-events');
+          sinon.stub(passageEventService, 'record');
           const element = { id: 'qcu-id', type: 'qcu', isAnswerable: true };
+          const qcuDeclarativeElement = {
+            id: '6a6944be-a8a3-4138-b5dc-af664cf40b07',
+            isAnswerable: true,
+            type: 'qcu-declarative',
+            instruction: '<p>Quand faut-il mouiller sa brosse à dents&nbsp;?</p>',
+            proposals: [
+              {
+                id: '1',
+                content: 'Avant de mettre le dentifrice',
+                feedback: {
+                  state: '',
+                  diagnosis: "<p>C'est l'approche de la plupart des gens.</p>",
+                },
+              },
+              {
+                id: '2',
+                content: 'Après avoir mis le dentifrice',
+                feedback: {
+                  state: '',
+                  diagnosis: '<p>Possible, mais attention à ne pas faire tomber le dentifrice !</p>',
+                },
+              },
+              {
+                id: '3',
+                content: 'Pendant que le dentifrice est mis',
+                feedback: {
+                  state: '',
+                  diagnosis: '<p>Digne des plus grands acrobates !</p>',
+                },
+              },
+            ],
+          };
+
           const grain = store.createRecord('grain', {
             title: '1st Grain title',
-            components: [{ type: 'element', element }],
+            components: [
+              { type: 'element', element },
+              { type: 'element', element: qcuDeclarativeElement },
+            ],
           });
           store.createRecord('module', { grains: [grain] });
           this.set('grain', grain);
@@ -429,6 +469,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
           // when
           const screen = await render(hbs`
             <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}} @passage={{this.passage}} />`);
+          await click(screen.getByRole('button', { name: qcuDeclarativeElement.proposals[0].content }));
 
           // then
           assert.dom(screen.queryByRole('button', { name: 'Continuer' })).exists();
@@ -459,6 +500,28 @@ module('Integration | Component | Module | Grain', function (hooks) {
     });
 
     module('when at least one element has not been answered', function () {
+      module('when this element is a locally answerable element', function () {
+        test('should not display continue button', async function (assert) {
+          // given
+          const store = this.owner.lookup('service:store');
+          const element = { type: 'qcu-declarative', isAnswerable: true };
+          const grain = store.createRecord('grain', {
+            title: 'Grain title',
+            components: [{ type: 'element', element }],
+          });
+          this.set('grain', grain);
+          const passage = store.createRecord('passage');
+          this.set('passage', passage);
+
+          // when
+          const screen = await render(hbs`
+            <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}} @passage={{this.passage}} />`);
+
+          // then
+          assert.dom(screen.queryByRole('button', { name: 'Continuer' })).doesNotExist();
+        });
+      });
+
       module('when canMoveToNextGrain is true', function () {
         test('should not display continue button', async function (assert) {
           // given
@@ -1498,6 +1561,83 @@ module('Integration | Component | Module | Grain', function (hooks) {
               assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.grain.continue') })).exists();
             });
           });
+        });
+      });
+    });
+
+    module('when there are locally answerable elements in stepper', function () {
+      module('when elements have not been answered', function () {
+        test('should not display continue button', async function (assert) {
+          const store = this.owner.lookup('service:store');
+          const passage = store.createRecord('passage');
+          const onElementRetryStub = sinon.stub();
+          const onStepperNextStepStub = sinon.stub();
+
+          const qabElement = {
+            id: 'ed795d29-5f04-499c-a9c8-4019125c5cb1',
+            type: 'qab',
+            instruction:
+              '<p><strong>Maintenant, entraînez-vous sur des exemples concrets !</strong> </p> <p> Pour chaque exemple, choisissez si l’affirmation est <strong>vraie</strong> ou <strong>fausse</strong>.</p>',
+            isAnswerable: true,
+            cards: [
+              {
+                id: 'e222b060-7c18-4ee2-afe2-2ae27c28946a',
+                image: {
+                  url: 'https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg',
+                  altText: '',
+                },
+                text: 'Les boules de pétanques sont creuses.',
+                proposalA: 'Vrai',
+                proposalB: 'Faux',
+                solution: 'A',
+              },
+              {
+                id: '57056894-8e1b-4da9-96b6-0bd4187412b8',
+                text: 'Les chiens ne transpirent pas.',
+                proposalA: 'Vrai',
+                proposalB: 'Faux',
+                solution: 'B',
+              },
+            ],
+          };
+
+          const steps = [
+            {
+              elements: [qabElement],
+            },
+            {
+              elements: [
+                {
+                  id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                  type: 'text',
+                  content: '<p>Text 2</p>',
+                  isAnswerable: false,
+                },
+              ],
+            },
+          ];
+
+          const grain = {
+            title: 'Grain title',
+            components: [
+              {
+                type: 'stepper',
+                steps,
+              },
+            ],
+          };
+
+          this.set('grain', grain);
+          this.set('passage', passage);
+          this.set('onElementRetry', onElementRetryStub);
+          this.set('onStepperNextStep', onStepperNextStepStub);
+
+          // when
+          const screen = await render(hbs`
+          <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}} @onStepperNextStep={{this.onStepperNextStep}} />`);
+
+          // then
+          assert.dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.grain.continue') })).doesNotExist();
         });
       });
     });

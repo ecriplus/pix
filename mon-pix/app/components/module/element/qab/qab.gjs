@@ -3,6 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import QabProposalButton from 'mon-pix/components/module/element/qab/proposal-button';
 import QabCard from 'mon-pix/components/module/element/qab/qab-card';
 import QabScoreCard from 'mon-pix/components/module/element/qab/qab-score-card';
+import { TrackedArray, TrackedMap } from 'tracked-built-ins';
 
 import { htmlUnsafe } from '../../../../helpers/html-unsafe';
 import ModuleElement from '../module-element';
@@ -17,13 +18,13 @@ export default class ModuleQab extends ModuleElement {
   @tracked currentCardStatus = '';
   @tracked currentCardIndex = 0;
   @tracked score = 0;
-  @tracked displayedCards = [];
-  @tracked cardStatuses = new Map();
-  @tracked removedCards = new Map();
+  @tracked displayedCards;
+  @tracked cardStatuses = new TrackedMap();
+  @tracked removedCards = new TrackedMap();
 
   constructor() {
     super(...arguments);
-    this.displayedCards = this.element.cards;
+    this.displayedCards = new TrackedArray(this.element.cards);
   }
 
   get numberOfCards() {
@@ -49,23 +50,28 @@ export default class ModuleQab extends ModuleElement {
   }
 
   @action
-  goToNextCard() {
+  async goToNextCard() {
     this.removedCards.set(this.currentCard.id, true);
-    this.removedCards = new Map(this.removedCards);
 
-    window.setTimeout(() => {
-      this.displayedCards = this.displayedCards.slice(1);
+    window.setTimeout(async () => {
+      this.displayedCards.shift();
       this.currentCardStatus = '';
       this.selectedOption = null;
 
       if (this.displayedCards.length === 0) {
         this.currentStep = 'score';
+        await this.onAnswer();
       }
     }, NEXT_CARD_REMOVE_DELAY);
   }
 
   @action
-  onSubmit(event) {
+  async onAnswer() {
+    await this.args.onAnswer({ element: this.element });
+  }
+
+  @action
+  async onSubmit(event) {
     event.preventDefault();
     this.selectedOption = event.submitter.value;
     this.currentCardStatus = 'error';
@@ -75,17 +81,15 @@ export default class ModuleQab extends ModuleElement {
     }
 
     this.cardStatuses.set(this.currentCard.id, this.currentCardStatus);
-    this.cardStatuses = new Map(this.cardStatuses);
-
-    window.setTimeout(() => this.goToNextCard(), NEXT_CARD_TRANSITION_DELAY);
+    window.setTimeout(async () => await this.goToNextCard(), NEXT_CARD_TRANSITION_DELAY);
   }
 
   @action
   onRetry() {
     this.currentStep = 'cards';
-    this.removedCards = new Map();
-    this.cardStatuses = new Map();
-    this.displayedCards = this.element.cards;
+    this.removedCards.clear();
+    this.cardStatuses.clear();
+    this.displayedCards = new TrackedArray(this.element.cards);
     this.score = 0;
   }
 
