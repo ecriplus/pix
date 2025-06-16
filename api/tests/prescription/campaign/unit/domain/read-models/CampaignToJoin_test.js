@@ -151,22 +151,4 @@ describe('Unit | Domain | Models | CampaignToJoin', function () {
       expect(campaignToJoin.isReconciliationRequired).to.be.true;
     });
   });
-
-  describe('#setMediaCompliance', function () {
-    it('should return given campaign media compliance', function () {
-      // given
-      const campaignToJoin = domainBuilder.buildCampaignToJoin({
-        isMobileCompliant: false,
-        isTabletCompliant: false,
-      });
-
-      // when
-      const campaignMediaCompliance = { isMobileCompliant: true, isTabletCompliant: true };
-      campaignToJoin.setMediaCompliance(campaignMediaCompliance);
-
-      // then
-      expect(campaignToJoin.isMobileCompliant).to.be.true;
-      expect(campaignToJoin.isTabletCompliant).to.be.true;
-    });
-  });
 });

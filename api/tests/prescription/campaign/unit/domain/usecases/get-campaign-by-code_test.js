@@ -11,8 +11,7 @@ describe('Unit | UseCase | get-campaign-by-code', function () {
     organizationId,
     campaignToJoinRepositoryStub,
     campaignToJoinModelStub,
-    organizationLearnerImportFormatRepositoryStub,
-    campaignMediaComplianceServiceStub;
+    organizationLearnerImportFormatRepositoryStub;
 
   beforeEach(function () {
     code = Symbol('CODE');
@@ -25,15 +24,10 @@ describe('Unit | UseCase | get-campaign-by-code', function () {
     campaignToJoinModelStub = {
       type: CampaignTypes.ASSESSMENT,
       setReconciliationFields: sinon.stub(),
-      setMediaCompliance: sinon.stub(),
     };
 
     organizationLearnerImportFormatRepositoryStub = {
       get: sinon.stub(),
-    };
-
-    campaignMediaComplianceServiceStub = {
-      getMediaCompliance: sinon.stub(),
     };
   });
 
@@ -47,13 +41,11 @@ describe('Unit | UseCase | get-campaign-by-code', function () {
       locale,
       campaignToJoinRepository: campaignToJoinRepositoryStub,
       organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
-      campaignMediaComplianceService: campaignMediaComplianceServiceStub,
     });
 
     // then
     expect(actualCampaignToJoin).to.deep.equal(campaignToJoinModelStub);
     expect(organizationLearnerImportFormatRepositoryStub.get.notCalled).to.be.true;
-    expect(campaignMediaComplianceServiceStub.getMediaCompliance.called).to.be.true;
   });
 
   it('should call import format when isRestricted Campaign', async function () {
@@ -70,7 +62,6 @@ describe('Unit | UseCase | get-campaign-by-code', function () {
       locale,
       campaignToJoinRepository: campaignToJoinRepositoryStub,
       organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
-      campaignMediaComplianceService: campaignMediaComplianceServiceStub,
     });
 
     // then
@@ -94,7 +85,6 @@ describe('Unit | UseCase | get-campaign-by-code', function () {
       locale,
       campaignToJoinRepository: campaignToJoinRepositoryStub,
       organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
-      campaignMediaComplianceService: campaignMediaComplianceServiceStub,
     });
 
     // then
