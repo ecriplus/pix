@@ -41,7 +41,6 @@ import * as divisionRepository from '../../infrastructure/repositories/division-
 import * as groupRepository from '../../infrastructure/repositories/group-repository.js';
 import { repositories as campaignRepositories } from '../../infrastructure/repositories/index.js';
 import * as knowledgeElementSnapshotRepository from '../../infrastructure/repositories/knowledge-element-snapshot-repository.js';
-import * as campaignMediaComplianceService from '../services/campaign-media-compliance-service.js';
 import * as campaignUpdateValidator from '../validators/campaign-update-validator.js';
 
 const dependencies = {
@@ -85,7 +84,6 @@ const dependencies = {
   tutorialRepository,
   userRepository,
   userRecommendedTrainingRepository,
-  campaignMediaComplianceService,
 };
 
 const path = dirname(fileURLToPath(import.meta.url));
