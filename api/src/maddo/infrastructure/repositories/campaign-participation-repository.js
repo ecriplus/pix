@@ -3,7 +3,7 @@ import { CampaignParticipation } from '../../domain/models/CampaignParticipation
 import { TubeCoverage } from '../../domain/models/TubeCoverage.js';
 
 export async function findByCampaignId(campaignId, clientId) {
-  const campaignParticipations = await campaignsAPI.getCampaignParticipations({ campaignId });
+  const { models: campaignParticipations } = await campaignsAPI.getCampaignParticipations({ campaignId });
   return campaignParticipations.map((rawCampaign) => toDomain(rawCampaign, clientId, campaignId));
 }
 
