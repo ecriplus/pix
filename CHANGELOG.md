@@ -1,5 +1,36 @@
 # Pix Changelog
 
+# [5.135.0](https://github.com/1024pix/pix/compare/v5.134.0...v5.135.0) (2025-06-16)
+
+### :rocket: Amélioration
+
+- [#12535](https://github.com/1024pix/pix/pull/12535) Ajouter l'élément Custom message-conversation à la validation Joi (PIX-18220) 
+- [#12527](https://github.com/1024pix/pix/pull/12527) Communication avec l’embed pix-llm dans une épreuve (PIX-18172) 
+- [#12507](https://github.com/1024pix/pix/pull/12507) Création d'un script pour calculer la dette liée aux médias Modulix (PIX-18177) 
+- [#12530](https://github.com/1024pix/pix/pull/12530) Créer la page Référentiel cadre sur Pix Admin (PIX-18186). 
+- [#12532](https://github.com/1024pix/pix/pull/12532) Echanger le nom et le prénom du user dans le nom de l'attestation (PIX-17951) 
+- [#12516](https://github.com/1024pix/pix/pull/12516) Gérer le bouton "Continuer" pour les modalités QAB, QCU déclarative et flashcards (PIX-18067) 
+- [#12356](https://github.com/1024pix/pix/pull/12356) Pouvoir vérifier depuis Pix Admin si un utilisateur est en capacité de valider une quête (PIX-18008) 
+
+### :bug: Correction
+
+- [#12540](https://github.com/1024pix/pix/pull/12540) Corriger les liens de fiches récap des modules premieres-marches 
+- [#12524](https://github.com/1024pix/pix/pull/12524) Problème d'affichage sur l'écran de réponse QROCM (PIX-18176) 
+
+### :building_construction: Tech
+
+- [#12509](https://github.com/1024pix/pix/pull/12509) :truck: Déplace la route `Campaign-participation` vers `src/devcomp/` 
+- [#11800](https://github.com/1024pix/pix/pull/11800) Correction des deprecations EmberJs sur Pix Admin 
+- [#12522](https://github.com/1024pix/pix/pull/12522) Retirer le feature toggle showNewResultPage 
+- [#12519](https://github.com/1024pix/pix/pull/12519) Supprimer le campaignCode dans l'appel à la route /api/organization-learners (PIX-18191) 
+
+### :arrow_up: Montée de version
+
+- [#12537](https://github.com/1024pix/pix/pull/12537) Update dependency @1024pix/epreuves-components to ^0.3.1 (junior) 
+- [#12531](https://github.com/1024pix/pix/pull/12531) Update dependency @1024pix/epreuves-components to ^0.3.1 (mon-pix) 
+- [#12492](https://github.com/1024pix/pix/pull/12492) Update dependency postgres to v16.9 
+- [#12446](https://github.com/1024pix/pix/pull/12446) Update dependency redis to v7.2.9
+
 # [5.134.0](https://github.com/1024pix/pix/compare/v5.133.0...v5.134.0) (2025-06-13)
 
 ### :rocket: Amélioration
