@@ -11,14 +11,14 @@ import {
 } from '../../../../../src/shared/domain/models/CertificationCenter.js';
 import { normalize } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
 import { usecases as teamUsecases } from '../../../../../src/team/domain/usecases/index.js';
+import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
+import { CommonPixCertifOrganization } from '../shared/common-organisation.js';
 import {
   PUBLISHED_SCO_SESSION,
   SCO_CERTIFICATION_CENTER_EXTERNAL_ID,
   SCO_CERTIFICATION_CENTER_ID,
   STARTED_SCO_SESSION,
-} from '../constants.js';
-import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
-import { CommonPixCertifOrganization } from '../shared/common-organisation.js';
+} from '../shared/constants.js';
 import publishSessionWithValidatedCertification from '../tools/create-published-session-with-certification.js';
 import addSession from '../tools/create-session.js';
 

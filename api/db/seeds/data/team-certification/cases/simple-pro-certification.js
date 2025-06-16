@@ -12,14 +12,14 @@ import {
 } from '../../../../../src/shared/domain/models/CertificationCenter.js';
 import { normalize } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
 import { usecases as teamUsecases } from '../../../../../src/team/domain/usecases/index.js';
+import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
+import { CommonPixCertifOrganization } from '../shared/common-organisation.js';
 import {
   PRO_CERTIFICATION_CENTER_EXTERNAL_ID,
   PRO_CERTIFICATION_CENTER_ID,
   PUBLISHED_PRO_SESSION,
   STARTED_PRO_SESSION,
-} from '../constants.js';
-import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
-import { CommonPixCertifOrganization } from '../shared/common-organisation.js';
+} from '../shared/constants.js';
 import publishSessionWithValidatedCertification from '../tools/create-published-session-with-certification.js';
 import addSession from '../tools/create-session.js';
 

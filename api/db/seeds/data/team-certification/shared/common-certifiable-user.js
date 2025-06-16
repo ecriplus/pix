@@ -1,6 +1,6 @@
 import { LANGUAGES_CODE } from '../../../../../src/shared/domain/services/language-service.js';
 import { createCertifiableProfile } from '../../common/tooling/profile-tooling.js';
-import { CERTIFIABLE_SUCCESS_USER_ID } from '../constants.js';
+import { CERTIFIABLE_SUCCESS_USER_ID } from './constants.js';
 
 /**
  * Default Certification Pix App certifiable user

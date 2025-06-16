@@ -6,7 +6,7 @@ import { Membership } from '../../../../../src/shared/domain/models/Membership.j
 import { LANGUAGES_CODE } from '../../../../../src/shared/domain/services/language-service.js';
 import { usecases as teamUsecases } from '../../../../../src/team/domain/usecases/index.js';
 import { acceptPixOrgaTermsOfService } from '../../common/tooling/legal-documents.js';
-import { SHARED_ORGANIZATION_EXTERNAL_ID, SHARED_ORGANIZATION_USER_ID } from '../constants.js';
+import { SHARED_ORGANIZATION_EXTERNAL_ID, SHARED_ORGANIZATION_USER_ID } from './constants.js';
 
 /**
  * Default Certification organization
