@@ -211,7 +211,8 @@ function getCustomErrorMessage(rules) {
 function getAlternativeSwitchCaseJsonSchema(switchCase) {
   const childJsonSchema = convertFromType(switchCase.then);
 
-  const optionalTitle = getOptionalTitleBasedOnKey(switchCase.then, 'type');
+  const optionalTitle =
+    getOptionalTitleBasedOnChildrenType(switchCase) || getOptionalTitleBasedOnSiblingTagName(switchCase);
   if (optionalTitle !== undefined) {
     childJsonSchema.title = optionalTitle;
   }
@@ -219,8 +220,12 @@ function getAlternativeSwitchCaseJsonSchema(switchCase) {
   return childJsonSchema;
 }
 
-function getOptionalTitleBasedOnKey(joiDescribedObject, keyName) {
-  return joiDescribedObject.keys[keyName]?.allow[0];
+function getOptionalTitleBasedOnSiblingTagName(switchCase) {
+  return switchCase.is?.allow[1];
+}
+
+function getOptionalTitleBasedOnChildrenType(switchCase) {
+  return switchCase.then.keys.type?.allow[0];
 }
 
 function findRule(rules, ruleName) {
