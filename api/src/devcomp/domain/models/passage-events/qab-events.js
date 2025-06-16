@@ -19,4 +19,10 @@ class QABCardAnsweredEvent extends PassageEventWithElement {
   }
 }
 
-export { QABCardAnsweredEvent };
+class QABCardRetriedEvent extends PassageEventWithElement {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }) {
+    super({ id, type: 'QAB_CARD_RETRIED', occurredAt, createdAt, passageId, sequenceNumber, elementId });
+  }
+}
+
+export { QABCardAnsweredEvent, QABCardRetriedEvent };
