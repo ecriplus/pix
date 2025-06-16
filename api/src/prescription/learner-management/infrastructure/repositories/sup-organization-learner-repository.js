@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { OrganizationLearnersCouldNotBeSavedError } from '../../domain/errors.js';
 import { OrganizationLearner } from '../../domain/models/OrganizationLearner.js';
 
@@ -50,38 +51,25 @@ const addStudents = async function (supOrganizationLearners) {
   await _upsertStudents(knex, supOrganizationLearners);
 };
 
-const replaceStudents = async function (organizationId, supOrganizationLearners, userId) {
-  const studentNumberList = supOrganizationLearners.map((learner) => learner.studentNumber);
-  await knex.transaction(async (transaction) => {
-    await _deleteOrganizationLearnersNotInList(transaction, organizationId, studentNumberList, userId);
-    await _upsertStudents(transaction, supOrganizationLearners);
-  });
-};
-
 export {
   addStudents,
   findOneByStudentNumber,
   findOneByStudentNumberAndBirthdate,
-  replaceStudents,
+  getOrganizationLearnerIdsNotInList,
   updateStudentNumber,
 };
 
-async function _deleteOrganizationLearnersNotInList(queryBuilder, organizationId, studentNumberList, userId) {
-  const deletedOrganizationLearners = await queryBuilder('organization-learners')
-    .update({ deletedBy: userId, deletedAt: knex.raw('CURRENT_TIMESTAMP') })
+async function getOrganizationLearnerIdsNotInList({ organizationId, studentNumberList }) {
+  const knexConn = DomainTransaction.getConnection();
+
+  return knexConn('organization-learners')
+    .select('id')
     .where({ organizationId })
     .whereNull('deletedAt')
     .where(function () {
       this.whereNotIn('studentNumber', studentNumberList).orWhereNull('studentNumber');
     })
-    .returning('*');
-
-  const deletedOrganizationLearnerIds = deletedOrganizationLearners.map((deletedLearner) => deletedLearner.id);
-
-  await queryBuilder('campaign-participations')
-    .update({ deletedBy: userId, deletedAt: knex.raw('CURRENT_TIMESTAMP') })
-    .whereIn('organizationLearnerId', deletedOrganizationLearnerIds)
-    .whereNull('deletedAt');
+    .pluck('id');
 }
 
 async function _upsertStudents(queryBuilder, supOrganizationLearners) {
