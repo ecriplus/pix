@@ -16,9 +16,17 @@ const searchAttachableTargetProfilesForComplementaryCertifications = async funct
 const createConsolidatedFramework = async function (request, h) {
   const { complementaryCertificationKey } = request.params;
   const { tubeIds } = request.payload.data.attributes;
+
   await usecases.createConsolidatedFramework({ complementaryCertificationKey, tubeIds });
 
-  return h.response().code(201);
+  return h
+    .response({
+      data: {
+        id: complementaryCertificationKey,
+        type: 'certification-consolidated-framework',
+      },
+    })
+    .code(201);
 };
 
 const complementaryCertificationController = {

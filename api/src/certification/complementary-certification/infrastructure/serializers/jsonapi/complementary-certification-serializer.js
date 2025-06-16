@@ -8,6 +8,7 @@ const serializeForAdmin = function (complementaryCertification) {
       const targetProfilesHistory = complementaryCertification.targetProfilesHistory ?? [];
       return {
         id: complementaryCertification.id,
+        key: complementaryCertification.key,
         label: complementaryCertification.label,
         hasExternalJury: complementaryCertification.hasExternalJury,
         targetProfilesHistory: targetProfilesHistory.map((targetProfile) => ({
@@ -25,7 +26,7 @@ const serializeForAdmin = function (complementaryCertification) {
         })),
       };
     },
-    attributes: ['label', 'hasExternalJury', 'targetProfilesHistory'],
+    attributes: ['key', 'label', 'hasExternalJury', 'targetProfilesHistory'],
   }).serialize(complementaryCertification);
 };
 

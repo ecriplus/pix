@@ -213,6 +213,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
           id: '1',
           attributes: {
             label: 'Pix+ Édu 2nd degré',
+            key: 'EDU_2ND_DEGRE',
             'has-external-jury': true,
             'target-profiles-history': [
               {
@@ -283,6 +284,8 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
 
       // then
       expect(response.statusCode).to.equal(201);
+      expect(response.result.data.type).to.equal('certification-consolidated-framework');
+      expect(response.result.data.id).to.exist;
 
       const consolidatedFramework = await knex('certification-frameworks-challenges')
         .select('alpha', 'delta', 'challengeId', 'complementaryCertificationId')

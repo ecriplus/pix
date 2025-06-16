@@ -6,9 +6,7 @@ describe('Integration | Repository | complementary-certification-for-target-prof
   describe('#getById', function () {
     it('should return the complementary certification by its id', async function () {
       // given
-      const complementaryCertificationId = 1;
-      databaseBuilder.factory.buildComplementaryCertification({
-        id: complementaryCertificationId,
+      const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
         label: 'Pix+ Édu 1er degré',
         hasExternalJury: true,
       });
@@ -16,18 +14,17 @@ describe('Integration | Repository | complementary-certification-for-target-prof
       await databaseBuilder.commit();
 
       // when
-      const complementaryCertification = await complementaryCertificationForTargetProfileAttachmentRepository.getById({
-        complementaryCertificationId,
-      });
+      const retrievedComplementaryCertification =
+        await complementaryCertificationForTargetProfileAttachmentRepository.getById({
+          complementaryCertificationId: complementaryCertification.id,
+        });
 
       // then
       const expectedComplementaryCertification =
         domainBuilder.buildComplementaryCertificationForTargetProfileAttachment({
-          id: 1,
-          label: 'Pix+ Édu 1er degré',
-          hasExternalJury: true,
+          ...complementaryCertification,
         });
-      expect(complementaryCertification).to.deepEqualInstance(expectedComplementaryCertification);
+      expect(retrievedComplementaryCertification).to.deepEqualInstance(expectedComplementaryCertification);
     });
 
     describe('when complementary certification does not exist', function () {
