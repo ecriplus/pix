@@ -44,7 +44,7 @@ export default class OrganizationAllTags extends Component {
   @action
   async addTagToOrganization(tagToAdd) {
     const tags = await this.args.model.organization.tags;
-    tags.pushObject(tagToAdd);
+    tags.push(tagToAdd);
     await this.args.model.organization.save();
     this.selectedTag = tagToAdd;
     this.recentlyUsedTags = await this.store.query('tag', { tagId: tagToAdd.id, recentlyUsedTags: true });
@@ -54,7 +54,7 @@ export default class OrganizationAllTags extends Component {
   @action
   async addRecentlyUsedTagToOrganization(tagToAdd) {
     const tags = await this.args.model.organization.tags;
-    tags.pushObject(tagToAdd);
+    tags.push(tagToAdd);
     await this.args.model.organization.save();
     tagToAdd.isTagAssignedToOrganization = true;
   }
@@ -62,7 +62,7 @@ export default class OrganizationAllTags extends Component {
   @action
   async removeTagToOrganization(tagToRemove) {
     const tags = await this.args.model.organization.tags;
-    tags.removeObject(tagToRemove);
+    tags.splice(tags.indexOf(tagToRemove), 1);
     await this.args.model.organization.save();
     this.selectedTag = null;
     this.recentlyUsedTags = null;

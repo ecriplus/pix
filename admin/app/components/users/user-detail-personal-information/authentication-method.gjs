@@ -36,7 +36,7 @@ export default class AuthenticationMethod extends Component {
   }
 
   get hasPixAuthenticationMethod() {
-    return this.authenticationMethods.any((authenticationMethod) => authenticationMethod.identityProvider === 'PIX');
+    return this.authenticationMethods.some((authenticationMethod) => authenticationMethod.identityProvider === 'PIX');
   }
 
   get shouldChangePassword() {
@@ -47,19 +47,19 @@ export default class AuthenticationMethod extends Component {
   get hasEmailAuthenticationMethod() {
     return (
       this.args.user.email &&
-      this.authenticationMethods.any((authenticationMethod) => authenticationMethod.identityProvider === 'PIX')
+      this.authenticationMethods.some((authenticationMethod) => authenticationMethod.identityProvider === 'PIX')
     );
   }
 
   get hasUsernameAuthenticationMethod() {
     return (
       this.args.user.username &&
-      this.authenticationMethods.any((authenticationMethod) => authenticationMethod.identityProvider === 'PIX')
+      this.authenticationMethods.some((authenticationMethod) => authenticationMethod.identityProvider === 'PIX')
     );
   }
 
   get hasGarAuthenticationMethod() {
-    return this.authenticationMethods.any((authenticationMethod) => authenticationMethod.identityProvider === 'GAR');
+    return this.authenticationMethods.some((authenticationMethod) => authenticationMethod.identityProvider === 'GAR');
   }
 
   get isAllowedToRemoveEmailAuthenticationMethod() {
@@ -100,7 +100,7 @@ export default class AuthenticationMethod extends Component {
 
   get userOidcAuthenticationMethods() {
     return this.oidcIdentityProviders.list.map((oidcIdentityProvider) => {
-      const userHasThisOidcAuthenticationMethod = this.authenticationMethods.any(
+      const userHasThisOidcAuthenticationMethod = this.authenticationMethods.some(
         (authenticationMethod) => authenticationMethod.identityProvider === oidcIdentityProvider.code,
       );
 
@@ -164,7 +164,7 @@ export default class AuthenticationMethod extends Component {
       this.showAlreadyExistingEmailError = false;
     } catch (response) {
       const errors = response.errors;
-      const emailAlreadyExistingError = errors.any(
+      const emailAlreadyExistingError = errors.some(
         (error) => error.status === '400' && error.code === 'ACCOUNT_WITH_EMAIL_ALREADY_EXISTS',
       );
 

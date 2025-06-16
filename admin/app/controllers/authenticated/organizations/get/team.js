@@ -45,7 +45,7 @@ export default class GetTeamController extends Controller {
     const emailInLowerCase = email.toLowerCase();
     const matchingUsers = await this.store.query('user', { filter: { email: emailInLowerCase } });
     // GET /users?filter[email] makes an approximative request ("LIKE %email%") and not a strict request
-    return matchingUsers.findBy('email', emailInLowerCase);
+    return matchingUsers.find((user) => user.email === emailInLowerCase);
   }
 
   @action

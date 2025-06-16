@@ -110,30 +110,22 @@ export default class CertificationInformationsController extends Controller {
   }
 
   // Private methods
-  _copyCompetences() {
-    return cloneDeep(this.certification.competencesWithMark);
-  }
-
-  _removeFromArray(array, element) {
-    const index = array.indexOf(element);
-    array.splice(index, 1);
-  }
-
   _updatePropForCompetence(competenceCode, value, propName, linkedPropName) {
-    const competences = this._copyCompetences();
+    const competences = cloneDeep(this.certification.competencesWithMark);
     const competence = find(competences, { competence_code: competenceCode });
     if (competence) {
       if (value.trim().length === 0) {
         if (competence[linkedPropName]) {
           competence[propName] = null;
         } else {
-          this._removeFromArray(competences, competence);
+          const index = competences.indexOf(competence);
+          competences.splice(index, 1);
         }
       } else {
         competence[propName] = parseInt(value);
       }
     } else if (value.trim().length > 0) {
-      competences.addObject({
+      competences.push({
         competence_code: competenceCode,
         [propName]: parseInt(value),
         area_code: competenceCode.substr(0, 1),

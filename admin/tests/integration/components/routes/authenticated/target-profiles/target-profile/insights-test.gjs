@@ -15,7 +15,7 @@ module('Integration | Component | routes/authenticated/target-profiles/target-pr
 
     test('it should display the badges title and an empty list', async function (assert) {
       // given
-      const stageCollection = { stages: [] };
+      const stageCollection = { stages: Promise.resolve([]) };
 
       // when
       const screen = await render(
@@ -29,7 +29,7 @@ module('Integration | Component | routes/authenticated/target-profiles/target-pr
 
     test('it should display the stages title and an empty list', async function (assert) {
       // given
-      const stageCollection = { stages: [] };
+      const stageCollection = { stages: Promise.resolve([]) };
 
       // when
       const screen = await render(

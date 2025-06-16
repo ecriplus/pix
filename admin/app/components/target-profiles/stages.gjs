@@ -21,16 +21,55 @@ export default class Stages extends Component {
   @service intl;
   @service pixToast;
 
-  @tracked
-  stageType = undefined;
-
+  @tracked stageType = undefined;
   @tracked stages = [];
 
   constructor() {
     super(...arguments);
-    Promise.resolve(this.args.stageCollection.stages).then((stages) => {
+    this.args.stageCollection.stages.then((stages) => {
       this.stages = stages;
     });
+  }
+
+  get sortedStages() {
+    const currentStages = this.stages.filter((stage) => !stage.isBeingCreated);
+    const newStages = this.stages.filter((stage) => stage.isBeingCreated);
+    return [
+      ...currentStages.sort((stageA, stageB) => {
+        let stageAValue, stageBValue;
+        if (this.isLevelType) {
+          stageAValue = stageA.isFirstSkill ? 0.5 : stageA.level;
+          stageBValue = stageB.isFirstSkill ? 0.5 : stageB.level;
+        } else {
+          stageAValue = stageA.isFirstSkill ? 0.5 : stageA.threshold;
+          stageBValue = stageB.isFirstSkill ? 0.5 : stageB.threshold;
+        }
+        return stageAValue - stageBValue;
+      }),
+      ...newStages,
+    ];
+  }
+
+  get hasStages() {
+    return this.stages.length > 0;
+  }
+
+  get hasAvailableStages() {
+    const allNewStages = this.stages.filter((stage) => stage.isBeingCreated) || [];
+
+    return (this.isLevelType && this.availableLevels.length > allNewStages.length) || !this.isLevelType;
+  }
+
+  get hasNewStage() {
+    return this.stages.some((stage) => stage.isBeingCreated);
+  }
+
+  get newStages() {
+    return this.stages.filter((stage) => stage.isBeingCreated);
+  }
+
+  get canAddNewStage() {
+    return !this.args.hasLinkedCampaign;
   }
 
   get availableLevels() {
@@ -44,29 +83,16 @@ export default class Stages extends Component {
   }
 
   get isLevelType() {
-    return this.args.stageCollection.isLevelType;
-  }
-
-  get hasNewStage() {
-    return this.stages.any((stage) => stage.isBeingCreated);
-  }
-
-  get newStages() {
-    return this.stages.filter((stage) => stage.isBeingCreated);
+    const zeroStage = this.stages.find((stage) => stage.isZeroStage);
+    return zeroStage?.isTypeLevel;
   }
 
   get columnNameByStageType() {
     return this.isLevelType ? LEVEL_COLUMN_NAME : THRESHOLD_COLUMN_NAME;
   }
 
-  get hasAvailableStages() {
-    const allNewStages = this.stages.filter((stage) => stage.isBeingCreated) || [];
-
-    return (this.isLevelType && this.availableLevels.length > allNewStages.length) || !this.isLevelType;
-  }
-
   get mustChooseStageType() {
-    return !this.args.stageCollection.hasStages;
+    return !this.hasStages;
   }
 
   get collectionHasNonZeroStages() {
@@ -80,6 +106,18 @@ export default class Stages extends Component {
     return this.stages.find((stage) => stage.isFirstSkill);
   }
 
+  get isStageTypeLevelChecked() {
+    return this.stageType === 'level';
+  }
+
+  get isStageTypeThresholdChecked() {
+    return this.stageType === 'threshold';
+  }
+
+  get isAddStageDisabled() {
+    return (this.mustChooseStageType && this.stageType == null) || !this.hasAvailableStages;
+  }
+
   @action
   addFirstSkillStage() {
     const stage = this.store.createRecord('stage', {
@@ -89,7 +127,7 @@ export default class Stages extends Component {
       title: null,
       message: null,
     });
-    this.stages.pushObject(stage);
+    this.stages = [...this.stages, stage];
   }
 
   @action
@@ -117,28 +155,12 @@ export default class Stages extends Component {
         message: null,
       });
     }
-    this.stages.pushObject(stage);
+    this.stages = [...this.stages, stage];
   }
 
   @action
   onStageTypeChange(event) {
     this.stageType = event.target.value;
-  }
-
-  get isStageTypeLevelChecked() {
-    return this.stageType === 'level';
-  }
-
-  get isStageTypeThresholdChecked() {
-    return this.stageType === 'threshold';
-  }
-
-  get isAddStageDisabled() {
-    return (this.mustChooseStageType && this.stageType == null) || !this.hasAvailableStages;
-  }
-
-  get canAddNewStage() {
-    return !this.args.hasLinkedCampaign;
   }
 
   @action
@@ -148,13 +170,7 @@ export default class Stages extends Component {
     try {
       await this.args.stageCollection.save({ adapterOptions: { stages: this.stages } });
       await this.args.targetProfile.reload();
-      this.store
-        .peekAll('stage')
-        .filter(({ id }) => !id)
-        .forEach((stage) => {
-          this.stages.removeObject(stage);
-          stage.deleteRecord();
-        });
+      this.stages = await this.args.stageCollection.stages;
       this.pixToast.sendSuccessNotification({ message: 'Palier(s) ajouté(s) avec succès.' });
     } catch (error) {
       const genericErrorMessage = this.intl.t('common.notifications.generic-error');
@@ -165,19 +181,25 @@ export default class Stages extends Component {
 
   @action
   removeStage(stage) {
+    const index = this.stages.indexOf(stage);
+    if (index !== -1) {
+      this.stages.splice(index, 1);
+      this.stages = [...this.stages];
+    }
     stage.deleteRecord();
   }
 
   @action
   async deleteStage(stage) {
-    this.stages.removeObject(stage);
-    stage.deleteRecord();
+    this.removeStage(stage);
     await this.args.stageCollection.save({ adapterOptions: { stages: this.stages } });
   }
 
   @action
   cancelStagesCreation() {
-    this.newStages.forEach((stage) => stage.deleteRecord());
+    for (const stage of this.newStages) {
+      this.removeStage(stage);
+    }
   }
 
   @action
@@ -203,7 +225,7 @@ export default class Stages extends Component {
                 </tr>
               </thead>
               <tbody>
-                {{#each @stageCollection.sortedStages as |stage index|}}
+                {{#each this.sortedStages as |stage index|}}
                   {{#if stage.isBeingCreated}}
                     <NewStage
                       @index={{index}}
@@ -260,7 +282,7 @@ export default class Stages extends Component {
             >
               Nouveau palier
             </PixButton>
-            {{#if @stageCollection.hasStages}}
+            {{#if this.hasStages}}
               <PixTooltip @id="tooltip-stage" @isWide="true">
                 <:triggerElement>
                   <PixButton

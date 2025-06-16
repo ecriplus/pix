@@ -6,9 +6,7 @@
 <main class="page-body">
   <section class="page-section">
     <CertificationCenters::CreationForm
-      @certificationCenter={{@model.certificationCenter}}
       @habilitations={{@model.habilitations}}
-      @onSubmit={{this.addCertificationCenter}}
       @onCancel={{this.goBackToCertificationCentersList}}
     />
   </section>

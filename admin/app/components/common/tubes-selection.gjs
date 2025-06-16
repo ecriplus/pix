@@ -80,18 +80,17 @@ export default class TubesSelection extends Component {
     if (this.selectedTubeIds.includes(tube.id)) {
       return;
     }
-    this.selectedTubeIds.pushObject(tube.id);
+    this.selectedTubeIds = [...this.selectedTubeIds, tube.id];
 
     this._triggerOnChange();
   }
 
   @action
   uncheckTube(tube) {
-    const index = this.selectedTubeIds.indexOf(tube.id);
-    if (index === -1) {
+    if (!this.selectedTubeIds.includes(tube.id)) {
       return;
     }
-    this.selectedTubeIds.removeAt(index);
+    this.selectedTubeIds = this.selectedTubeIds.filter((id) => id !== tube.id);
 
     this._triggerOnChange();
   }
@@ -113,7 +112,7 @@ export default class TubesSelection extends Component {
         this.selectedFrameworks.map(async (framework) => {
           if (framework.areas.isFulfilled) await framework.areas.reload();
           const frameworkAreas = await framework.areas;
-          return frameworkAreas.toArray();
+          return [...frameworkAreas];
         }),
       )
     ).flat();

@@ -3,10 +3,11 @@ import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { LinkTo } from '@ember/routing';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
+import sortBy from 'lodash/sortBy';
 
 export default class List extends Component {
   get sortedComplementaryCertifications() {
-    return this.args.complementaryCertifications.sortBy('label');
+    return sortBy(this.args.complementaryCertifications, 'label');
   }
 
   <template>

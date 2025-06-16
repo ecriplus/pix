@@ -13,7 +13,7 @@ export default class Thematic extends Component {
   }
 
   get isChecked() {
-    return this.thematicTubes.any(({ id }) => this.selectedTubeIds.includes(id));
+    return this.thematicTubes.some(({ id }) => this.selectedTubeIds.includes(id));
   }
 
   get isIndeterminate() {

@@ -17,21 +17,18 @@ export default class Criteria extends Component {
   @tracked hasCampaignCriterion = false;
   @tracked hasCappedTubesCriteria = false;
 
+  @tracked cappedTubesCriteria = [];
+
+  constructor(owner, args) {
+    super(owner, args);
+    this.cappedTubesCriteria = [...(this.args.badge.cappedTubesCriteria ?? [])];
+  }
+
   @action
   onHasCampaignCriterionChange(e) {
     this.hasCampaignCriterion = e.target.checked;
     if (!this.hasCampaignCriterion) {
       this.args.badge.campaignThreshold = null;
-    }
-  }
-
-  @action
-  onHasCappedTubesCriteriaChange(e) {
-    this.hasCappedTubesCriteria = e.target.checked;
-    if (this.hasCappedTubesCriteria) {
-      this.args.badge.cappedTubesCriteria.pushObject({});
-    } else {
-      this.args.badge.cappedTubesCriteria.clear();
     }
   }
 
@@ -57,12 +54,25 @@ export default class Criteria extends Component {
 
   @action
   addCappedTubeCriterion() {
-    this.args.badge.cappedTubesCriteria.pushObject({});
+    this.cappedTubesCriteria = [...this.cappedTubesCriteria, {}];
+    this._syncToModel();
   }
 
   @action
   removeCappedTubeCriterion(index) {
-    this.args.badge.cappedTubesCriteria.removeAt(index);
+    this.cappedTubesCriteria = this.cappedTubesCriteria.filter((_, i) => i !== index);
+    this._syncToModel();
+  }
+
+  @action
+  onHasCappedTubesCriteriaChange(e) {
+    this.hasCappedTubesCriteria = e.target.checked;
+    this.cappedTubesCriteria = e.target.checked ? [{}] : [];
+    this._syncToModel();
+  }
+
+  _syncToModel() {
+    this.args.badge.cappedTubesCriteria = [...this.cappedTubesCriteria];
   }
 
   <template>
@@ -95,7 +105,7 @@ export default class Criteria extends Component {
         <CampaignCriterion @onThresholdChange={{this.onCampaignThresholdChange}} />
       {{/if}}
       {{#if this.hasCappedTubesCriteria}}
-        {{#each @badge.cappedTubesCriteria as |criterion index|}}
+        {{#each this.cappedTubesCriteria as |criterion index|}}
           <CappedTubesCriterion
             @id={{concat "cappedTubeCriterion" index}}
             @areas={{@areas}}

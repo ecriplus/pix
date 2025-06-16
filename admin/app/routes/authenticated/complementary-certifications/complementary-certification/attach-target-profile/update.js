@@ -23,10 +23,4 @@ export default class AttachTargetProfileRoute extends Route {
       currentTargetProfile: complementaryCertification.currentTargetProfiles?.find(({ id }) => id === targetProfileId),
     };
   }
-
-  resetController(controller, isExiting) {
-    if (isExiting) {
-      controller.onReset();
-    }
-  }
 }

@@ -6,6 +6,7 @@ import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import sortBy from 'lodash/sortBy';
 
 import Areas from '../../common/tubes-selection/areas';
 
@@ -22,7 +23,7 @@ export default class CappedTubesCriterion extends Component {
   }
 
   get areas() {
-    return this.areasList.sortBy('code');
+    return sortBy(this.areasList, 'code');
   }
 
   @action
@@ -30,18 +31,17 @@ export default class CappedTubesCriterion extends Component {
     if (this.selectedTubeIds.includes(tube.id)) {
       return;
     }
-    this.selectedTubeIds.pushObject(tube.id);
+    this.selectedTubeIds = [...this.selectedTubeIds, tube.id];
 
     this._triggerOnChange();
   }
 
   @action
   uncheckTube(tube) {
-    const index = this.selectedTubeIds.indexOf(tube.id);
-    if (index === -1) {
+    if (!this.selectedTubeIds.includes(tube.id)) {
       return;
     }
-    this.selectedTubeIds.removeAt(index);
+    this.selectedTubeIds = this.selectedTubeIds.filter((id) => id !== tube.id);
 
     this._triggerOnChange();
   }
@@ -72,10 +72,10 @@ export default class CappedTubesCriterion extends Component {
     return (
       this.areasList
         .flatMap((area) => {
-          const competences = area.hasMany('competences').value().toArray();
+          const competences = [...area.hasMany('competences').value()];
           return competences.flatMap((competence) => {
-            const thematics = competence.hasMany('thematics').value().toArray();
-            return thematics.flatMap((thematic) => thematic.hasMany('tubes').value().toArray());
+            const thematics = [...competence.hasMany('thematics').value()];
+            return thematics.flatMap((thematic) => [...thematic.hasMany('tubes').value()]);
           });
         })
         .filter((tube) => this.selectedTubeIds.includes(tube.id)) ?? []

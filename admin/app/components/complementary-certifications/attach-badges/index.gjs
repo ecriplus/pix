@@ -79,11 +79,12 @@ export default class AttachBadges extends Component {
     try {
       const complementaryCertification = this.args.complementaryCertification;
 
-      const complementaryCertificationBadges = this.store.peekAll('complementary-certification-badge').toArray();
+      const complementaryCertificationBadges = [...this.store.peekAll('complementary-certification-badge')];
 
-      complementaryCertificationBadges.forEach((complementaryCertificationBadge) => {
-        complementaryCertification.complementaryCertificationBadges.removeObject(complementaryCertificationBadge);
-      });
+      complementaryCertification.complementaryCertificationBadges =
+        complementaryCertification.complementaryCertificationBadges.filter((badge) => {
+          return !complementaryCertificationBadges.includes(badge);
+        });
 
       this.#targetProfileBadges.forEach((badge, badgeId) => {
         const aBadge = this.store.createRecord('complementary-certification-badge', {
@@ -97,7 +98,7 @@ export default class AttachBadges extends Component {
           stickerUrl: badge['certificate-sticker'],
           minimumEarnedPix: badge['minimum-earned-pix'],
         });
-        complementaryCertification.complementaryCertificationBadges.pushObject(aBadge);
+        complementaryCertification.complementaryCertificationBadges.push(aBadge);
       });
 
       await complementaryCertification.save({

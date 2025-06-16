@@ -21,10 +21,4 @@ export default class AttachTargetProfileNewRoute extends Route {
       currentTargetProfile: null,
     };
   }
-
-  resetController(controller, isExiting) {
-    if (isExiting) {
-      controller.onReset();
-    }
-  }
 }

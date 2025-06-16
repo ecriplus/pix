@@ -1,4 +1,5 @@
 import Model, { attr, hasMany } from '@ember-data/model';
+import sortBy from 'lodash/sortBy';
 
 export default class Competence extends Model {
   @attr() name;
@@ -7,6 +8,6 @@ export default class Competence extends Model {
   @hasMany('thematic', { async: true, inverse: null }) thematics;
 
   get sortedThematics() {
-    return this.hasMany('thematics').value().sortBy('index');
+    return sortBy(this.hasMany('thematics').value(), 'index');
   }
 }
