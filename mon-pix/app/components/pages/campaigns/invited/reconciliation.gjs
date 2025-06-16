@@ -25,7 +25,7 @@ export default class InvitedWrapper extends Component {
     this.isLoading = true;
     this.errorMessage = null;
     const organizationLearner = this.store.createRecord('organization-learner', {
-      campaignCode: this.args.model.code,
+      organizationId: this.args.model.organizationId,
       reconciliationInfos,
     });
 

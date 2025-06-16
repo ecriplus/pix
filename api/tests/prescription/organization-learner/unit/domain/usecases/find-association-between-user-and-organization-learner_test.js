@@ -1,7 +1,6 @@
 import { OrganizationLearner } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationLearner.js';
 import { findAssociationBetweenUserAndOrganizationLearner } from '../../../../../../src/prescription/organization-learner/domain/usecases/find-association-between-user-and-organization-learner.js';
 import {
-  CampaignCodeError,
   OrganizationLearnerDisabledError,
   UserNotAuthorizedToAccessEntityError,
 } from '../../../../../../src/shared/domain/errors.js';
@@ -9,21 +8,15 @@ import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-help
 
 describe('Unit | UseCase | find-association-between-user-and-organization-learner', function () {
   let organizationLearnerReceivedStub;
-  let getCampaignStub;
   let organizationLearner;
   let organization;
   let userId;
-  let campaign;
-  let campaignRepository;
   let registrationOrganizationLearnerRepository;
 
   beforeEach(function () {
     userId = domainBuilder.buildUser().id;
     organization = domainBuilder.buildOrganization();
-    campaign = domainBuilder.buildCampaign({ organizationId: organization.id });
     organizationLearner = domainBuilder.buildOrganizationLearner({ organization, userId });
-    campaignRepository = { getByCode: sinon.stub() };
-    getCampaignStub = campaignRepository.getByCode.throws('unexpected call');
     registrationOrganizationLearnerRepository = { findOneByUserIdAndOrganizationId: sinon.stub() };
     organizationLearnerReceivedStub =
       registrationOrganizationLearnerRepository.findOneByUserIdAndOrganizationId.throws('unexpected call');
@@ -32,15 +25,13 @@ describe('Unit | UseCase | find-association-between-user-and-organization-learne
   describe('There is an organizationLearner linked to the given userId', function () {
     it('should call findOneByUserIdAndOrganizationId', async function () {
       // given
-      getCampaignStub.withArgs(campaign.code).resolves(campaign);
-      organizationLearnerReceivedStub.resolves({});
+      organizationLearnerReceivedStub.withArgs({ userId, organizationId: organization.id }).resolves({});
 
       // when
       await findAssociationBetweenUserAndOrganizationLearner({
         authenticatedUserId: userId,
         requestedUserId: userId,
-        campaignCode: campaign.code,
-        campaignRepository,
+        organizationId: organization.id,
         registrationOrganizationLearnerRepository,
       });
 
@@ -50,7 +41,6 @@ describe('Unit | UseCase | find-association-between-user-and-organization-learne
 
     it('should return the OrganizationLearner', async function () {
       // given
-      getCampaignStub.withArgs(campaign.code).resolves(campaign);
       organizationLearnerReceivedStub
         .withArgs({ userId, organizationId: organization.id })
         .resolves(organizationLearner);
@@ -59,8 +49,7 @@ describe('Unit | UseCase | find-association-between-user-and-organization-learne
       const result = await findAssociationBetweenUserAndOrganizationLearner({
         authenticatedUserId: userId,
         requestedUserId: userId,
-        campaignCode: campaign.code,
-        campaignRepository,
+        organizationId: organization.id,
         registrationOrganizationLearnerRepository,
       });
 
@@ -70,39 +59,16 @@ describe('Unit | UseCase | find-association-between-user-and-organization-learne
     });
   });
 
-  describe('There is no organizationLearner linked to the given userId', function () {
+  describe('There is no organizationLearner linked to the given userId for the given organizationId', function () {
     it('should return null', async function () {
       // given
-      getCampaignStub.withArgs(campaign.code).resolves(campaign);
       organizationLearnerReceivedStub.withArgs({ userId, organizationId: organization.id }).resolves(null);
 
       // when
       const result = await findAssociationBetweenUserAndOrganizationLearner({
         authenticatedUserId: userId,
         requestedUserId: userId,
-        campaignCode: campaign.code,
-        campaignRepository,
-        registrationOrganizationLearnerRepository,
-      });
-
-      // then
-      expect(result).to.equal(null);
-    });
-  });
-
-  describe('There is no organizationLearner linked to the organization owning the campaign', function () {
-    it('should return null', async function () {
-      // given
-      const otherCampaign = domainBuilder.buildCampaign();
-      getCampaignStub.withArgs(campaign.code).resolves(otherCampaign);
-      organizationLearnerReceivedStub.withArgs({ userId, organizationId: otherCampaign.organizationId }).resolves(null);
-
-      // when
-      const result = await findAssociationBetweenUserAndOrganizationLearner({
-        authenticatedUserId: userId,
-        requestedUserId: userId,
-        campaignCode: campaign.code,
-        campaignRepository,
+        organizationId: organization.id,
         registrationOrganizationLearnerRepository,
       });
 
@@ -119,7 +85,6 @@ describe('Unit | UseCase | find-association-between-user-and-organization-learne
         userId,
         isDisabled: true,
       });
-      getCampaignStub.withArgs(campaign.code).resolves(campaign);
       organizationLearnerReceivedStub
         .withArgs({ userId, organizationId: organization.id })
         .resolves(disabledOrganizationLearner);
@@ -128,8 +93,7 @@ describe('Unit | UseCase | find-association-between-user-and-organization-learne
       const result = await catchErr(findAssociationBetweenUserAndOrganizationLearner)({
         authenticatedUserId: userId,
         requestedUserId: userId,
-        campaignCode: campaign.code,
-        campaignRepository,
+        organizationId: organization.id,
         registrationOrganizationLearnerRepository,
       });
 
@@ -141,39 +105,18 @@ describe('Unit | UseCase | find-association-between-user-and-organization-learne
   describe('The authenticated user is not the same as requested user', function () {
     it('should return the repositories error', async function () {
       // given
-      getCampaignStub.withArgs(campaign.code).resolves(campaign);
       organizationLearnerReceivedStub.withArgs({ userId, organizationId: organization.id }).resolves(null);
 
       // when
       const result = await catchErr(findAssociationBetweenUserAndOrganizationLearner)({
         authenticatedUserId: '999',
         requestedUserId: userId,
-        campaignCode: campaign.code,
-        campaignRepository,
+        organizationId: organization.id,
         registrationOrganizationLearnerRepository,
       });
 
       // then
       expect(result).to.be.instanceof(UserNotAuthorizedToAccessEntityError);
-    });
-  });
-
-  describe('There is no campaign with the given code', function () {
-    it('should throw a campaign code error', async function () {
-      // given
-      getCampaignStub.withArgs(campaign.code).resolves(null);
-
-      // when
-      const result = await catchErr(findAssociationBetweenUserAndOrganizationLearner)({
-        authenticatedUserId: userId,
-        requestedUserId: userId,
-        campaignCode: campaign.code,
-        campaignRepository,
-        registrationOrganizationLearnerRepository,
-      });
-
-      // then
-      expect(result).to.be.instanceof(CampaignCodeError);
     });
   });
 });

@@ -1,3 +1,6 @@
+import Joi from 'joi';
+
+import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { registrationOrganizationLearnerController } from './registration-organization-learner-controller.js';
 
 const register = async function (server) {
@@ -13,6 +16,12 @@ const register = async function (server) {
             '- L’id demandé doit correspondre à celui de l’utilisateur authentifié',
         ],
         tags: ['api', 'organization-learners'],
+        validate: {
+          query: Joi.object({
+            userId: identifiersType.userId,
+            organizationId: identifiersType.organizationId,
+          }),
+        },
       },
     },
   ]);

@@ -20,7 +20,7 @@ export default class StudentScoRoute extends Route {
   async afterModel(campaign) {
     let organizationLearner = await this.store.queryRecord('organization-learner-identity', {
       userId: this.currentUser.user.id,
-      campaignCode: campaign.code,
+      organizationId: campaign.organizationId,
     });
 
     if (!organizationLearner) {

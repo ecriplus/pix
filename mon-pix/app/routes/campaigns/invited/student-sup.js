@@ -19,7 +19,7 @@ export default class StudentSupRoute extends Route {
   async afterModel(campaign) {
     const organizationLearner = await this.store.queryRecord('organization-learner-identity', {
       userId: this.currentUser.user.id,
-      campaignCode: campaign.code,
+      organizationId: campaign.organizationId,
     });
 
     if (organizationLearner) {
