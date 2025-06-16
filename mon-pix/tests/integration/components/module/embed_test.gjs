@@ -1,4 +1,5 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 // eslint-disable-next-line no-restricted-imports
 import { find } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
@@ -228,6 +229,49 @@ module('Integration | Component | Module | Embed', function (hooks) {
             // then
             sinon.assert.calledWith(forwardStub, sinon.match.object, requestsPort, `/api/passages/${passageId}/embed/`);
             assert.ok(true);
+          });
+
+          module('when is in preview mode', function () {
+            test('should not call embed api proxy service', async function (assert) {
+              // given
+              const embed = {
+                id: 'id',
+                title: 'Simulateur',
+                isCompletionRequired: true,
+                url: 'https://example.org',
+                height: 800,
+              };
+              const passageId = null;
+              const forwardStub = sinon.stub();
+              this.owner.register(
+                'service:embed-api-proxy',
+                {
+                  forward: forwardStub,
+                },
+                { instantiate: false },
+              );
+              class PreviewModeServiceStub extends Service {
+                isEnabled = true;
+              }
+              this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+              const screen = await render(
+                <template><ModulixEmbed @embed={{embed}} @passageId={{passageId}} /></template>,
+              );
+              await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
+
+              // when
+              const iframe = screen.getByTitle('Simulateur');
+              const event = new MessageEvent('message', {
+                data: { type: 'init', from: 'pix', enableFetchFromApi: true },
+                origin: 'https://epreuves.pix.fr',
+                source: iframe.contentWindow,
+              });
+              window.dispatchEvent(event);
+
+              // then
+              sinon.assert.notCalled(forwardStub);
+              assert.ok(true);
+            });
           });
         });
 

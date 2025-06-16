@@ -20,6 +20,9 @@ export default class ModulixEmbed extends ModuleElement {
   @service
   embedApiProxy;
 
+  @service
+  modulixPreviewMode;
+
   @tracked
   isSimulatorLaunched = false;
   embedHeight = this.args.embed.height;
@@ -64,6 +67,10 @@ export default class ModulixEmbed extends ModuleElement {
 
     if (message.type === 'init') {
       if (message.enableFetchFromApi) {
+        if (this.modulixPreviewMode.isEnabled) {
+          return;
+        }
+
         const [requestsPort] = event.ports;
 
         this.embedApiProxy.forward(this, requestsPort, `/api/passages/${this.args.passageId}/embed/`);
