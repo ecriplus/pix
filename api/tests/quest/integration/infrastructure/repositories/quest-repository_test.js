@@ -89,6 +89,33 @@ describe('Quest | Integration | Repository | quest', function () {
     });
   });
 
+  describe('#findById', function () {
+    it('should return a quest if quest exist', async function () {
+      // given
+      const questId = 1;
+      databaseBuilder.factory.buildQuest({ id: questId });
+      await databaseBuilder.commit();
+
+      // when
+      const quest = await questRepository.findById({ questId });
+
+      // then
+      expect(quest).to.be.an.instanceof(Quest);
+      expect(quest.id).to.equal(1);
+    });
+
+    it('should return null if quest does not exist', async function () {
+      // given
+      const questId = 1;
+
+      // when
+      const quest = await questRepository.findById({ questId });
+
+      // then
+      expect(quest).to.be.null;
+    });
+  });
+
   describe('#deleteByIds', function () {
     it('should delete quest given ids', async function () {
       // given

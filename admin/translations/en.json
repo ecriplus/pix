@@ -242,6 +242,19 @@
         "quest-creator": "Create your quest",
         "title": "Create and update quests",
         "upload-button": "Import CSV file"
+      },
+      "user-quest-checker": {
+        "description": "Check whether a user meets the eligibility and success criteria for a quest",
+        "form": {
+          "quest-id-input-label": "Quest Id",
+          "submit-button": "Check",
+          "user-id-input-label": "user Id"
+        },
+        "messages": {
+          "error": "This user is not yet able to validate this quest.",
+          "success": "This user is already able to validate this quest"
+        },
+        "title": "Checking whether a quest can be completed"
       }
     },
     "autonomous-courses": {
