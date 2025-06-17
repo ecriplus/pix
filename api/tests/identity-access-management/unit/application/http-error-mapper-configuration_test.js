@@ -4,7 +4,6 @@ import {
   DifferentExternalIdentifierError,
   MissingOrInvalidCredentialsError,
   MissingUserAccountError,
-  PasswordNotMatching,
   PasswordResetDemandNotFoundError,
   UserCantBeCreatedError,
   UserShouldChangePasswordError,
@@ -81,21 +80,6 @@ describe('Unit | Identity Access Management | Application | HttpErrorMapperConfi
 
       //then
       expect(error).to.be.instanceOf(HttpErrors.BadRequestError);
-    });
-  });
-
-  context('when mapping "PasswordNotMatching"', function () {
-    it('returns an UnauthorizedError Http Error', function () {
-      //given
-      const httpErrorMapper = authenticationDomainErrorMappingConfiguration.find(
-        (httpErrorMapper) => httpErrorMapper.name === PasswordNotMatching.name,
-      );
-
-      //when
-      const error = httpErrorMapper.httpErrorFn(new PasswordNotMatching());
-
-      //then
-      expect(error).to.be.instanceOf(HttpErrors.UnauthorizedError);
     });
   });
 

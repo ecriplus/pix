@@ -6,7 +6,6 @@ import {
   InvalidOrAlreadyUsedEmailError,
   MissingOrInvalidCredentialsError,
   MissingUserAccountError,
-  PasswordNotMatching,
   PasswordResetDemandNotFoundError,
   PixAdminLoginFromPasswordDisabledError,
   UserCantBeCreatedError,
@@ -33,10 +32,6 @@ const authenticationDomainErrorMappingConfiguration = [
   {
     name: MissingUserAccountError.name,
     httpErrorFn: (error) => new HttpErrors.BadRequestError(error.message),
-  },
-  {
-    name: PasswordNotMatching.name,
-    httpErrorFn: (error) => new HttpErrors.UnauthorizedError(error.message),
   },
   {
     name: PasswordResetDemandNotFoundError.name,
