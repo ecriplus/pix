@@ -140,7 +140,13 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
         await component.register();
 
         // then
-        assert.strictEqual(component.registerErrorMessage, `${t('common.error')}`);
+        assert.deepEqual(
+          component.registerErrorMessage,
+          t('common.api-error-messages.login-unexpected-error', {
+            supportHomeUrl: 'https://pix.org/fr/support',
+            htmlSafe: true,
+          }),
+        );
       });
 
       test('displays a default error message', async function (assert) {
@@ -158,7 +164,13 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
 
         // then
         assert.false(component.isRegisterLoading);
-        assert.strictEqual(component.registerErrorMessage, t('common.error'));
+        assert.deepEqual(
+          component.registerErrorMessage,
+          t('common.api-error-messages.login-unexpected-error', {
+            supportHomeUrl: 'https://pix.org/fr/support',
+            htmlSafe: true,
+          }),
+        );
       });
     });
 
@@ -318,7 +330,9 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
           const component = createGlimmerComponent('authentication/login-or-register-oidc');
 
           const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
-          sessionService.authenticate.rejects({ errors: [{ status: '403', code: 'USER_IS_TEMPORARY_BLOCKED' }] });
+          sessionService.authenticate.rejects({
+            errors: [{ status: '403', code: 'USER_IS_TEMPORARY_BLOCKED', meta: { blockingDurationMs: 60000 } }],
+          });
 
           component.args.identityProviderSlug = 'super-idp';
           component.args.authenticationKey = 'super-key';
@@ -332,6 +346,7 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
             component.registerErrorMessage,
             t('common.api-error-messages.login-user-temporary-blocked-error', {
               url: '/mot-de-passe-oublie',
+              blockingDurationMinutes: 1,
               htmlSafe: true,
             }),
           );
@@ -377,7 +392,13 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
 
         // then
         assert.false(component.isLoginLoading);
-        assert.strictEqual(component.loginErrorMessage, t('common.error'));
+        assert.deepEqual(
+          component.loginErrorMessage,
+          t('common.api-error-messages.login-unexpected-error', {
+            supportHomeUrl: 'https://pix.org/fr/support',
+            htmlSafe: true,
+          }),
+        );
       });
     });
 

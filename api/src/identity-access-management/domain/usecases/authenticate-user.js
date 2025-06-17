@@ -107,8 +107,10 @@ const authenticateUser = async function ({
 
     return { accessToken, refreshToken: refreshToken.value, expirationDelaySeconds };
   } catch (error) {
-    if (error instanceof UserNotFoundError || error instanceof PasswordNotMatching) {
+    if (error instanceof UserNotFoundError) {
       throw new MissingOrInvalidCredentialsError();
+    } else if (error instanceof PasswordNotMatching) {
+      throw new MissingOrInvalidCredentialsError(error.meta);
     } else {
       throw error;
     }

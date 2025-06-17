@@ -199,7 +199,7 @@ module('Integration | Component | Authentication | SignupForm | index', function
       await clickByName(t(I18N_KEYS.submitButton));
 
       // then
-      const errorMessage = t('components.authentication.signup-form.errors.invalid-locale-format', {
+      const errorMessage = t('pages.sign-up.errors.invalid-locale-format', {
         invalidLocale: 'foo',
       });
       assert.dom(screen.getByText(errorMessage)).exists();
@@ -215,7 +215,7 @@ module('Integration | Component | Authentication | SignupForm | index', function
       await clickByName(t(I18N_KEYS.submitButton));
 
       // then
-      const errorMessage = t('components.authentication.signup-form.errors.locale-not-supported', {
+      const errorMessage = t('pages.sign-up.errors.locale-not-supported', {
         localeNotSupported: 'foo',
       });
       assert.dom(screen.getByText(errorMessage)).exists();

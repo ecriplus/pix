@@ -39,8 +39,13 @@ class OrganizationLearnerIdentityNotFoundError extends DomainError {
 }
 
 class MissingOrInvalidCredentialsError extends DomainError {
-  constructor() {
+  constructor(meta = {}) {
     super('Missing or invalid credentials', 'MISSING_OR_INVALID_CREDENTIALS');
+    this.meta = {};
+    this.meta.isLoginFailureWithUsername = meta?.isLoginFailureWithUsername ?? false;
+    if (meta?.remainingAttempts) {
+      this.meta = meta.remainingAttempts;
+    }
   }
 }
 
@@ -51,8 +56,9 @@ class MissingUserAccountError extends DomainError {
 }
 
 class PasswordNotMatching extends DomainError {
-  constructor(message = 'Wrong password.') {
-    super(message);
+  constructor(meta) {
+    super();
+    this.meta = meta;
   }
 }
 

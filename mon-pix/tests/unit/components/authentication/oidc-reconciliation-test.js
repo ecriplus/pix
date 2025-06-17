@@ -202,7 +202,14 @@ module('Unit | Component | authentication | oidc-reconciliation', function (hook
           await component.reconcile();
 
           // then
-          assert.strictEqual(component.reconcileErrorMessage, t('common.error'));
+          assert.deepEqual(
+            component.reconcileErrorMessage,
+            t('common.api-error-messages.login-unexpected-error', {
+              supportHomeUrl: 'https://pix.org/fr/support',
+              htmlSafe: true,
+            }),
+          );
+
           assert.false(component.isLoading);
         });
       });

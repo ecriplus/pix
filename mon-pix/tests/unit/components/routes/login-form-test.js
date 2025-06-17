@@ -75,11 +75,7 @@ module('Unit | Component | routes/login-form', function (hooks) {
           // given
           sessionStub.authenticate.rejects({
             responseJSON: {
-              errors: [
-                {
-                  code: 'USER_IS_TEMPORARY_BLOCKED',
-                },
-              ],
+              errors: [{ code: 'USER_IS_TEMPORARY_BLOCKED', meta: { blockingDurationMs: 60000 } }],
             },
           });
 
@@ -89,6 +85,7 @@ module('Unit | Component | routes/login-form', function (hooks) {
           // then
           const expectedErrorMessage = t(ENV.APP.API_ERROR_MESSAGES.USER_IS_TEMPORARY_BLOCKED.I18N_KEY, {
             url: '/mot-de-passe-oublie',
+            blockingDurationMinutes: 1,
             htmlSafe: true,
           });
           assert.deepEqual(component.errorMessage, expectedErrorMessage);

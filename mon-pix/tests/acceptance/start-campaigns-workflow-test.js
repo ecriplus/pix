@@ -1083,12 +1083,9 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
             // then
             assert.ok(currentURL().includes(`/campagnes/${campaign.code}/rejoindre/identification`));
+
             assert
-              .dom(
-                screen.getByText(
-                  'Une erreur interne est survenue, nos équipes sont en train de résoudre le problème. Veuillez réessayer ultérieurement.',
-                ),
-              )
+              .dom(screen.getByText(/Impossible de se connecter\. Veuillez réessayer dans quelques instants/))
               .exists();
           });
 

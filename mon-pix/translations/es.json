@@ -56,9 +56,13 @@
       "gateway-timeout-error": "El servicio está experimentando ralentizaciones. Vuelve a intentarlo más tarde.",
       "internal-server-error": "Se ha producido un error interno. Nuestros equipos están resolviendo el problema. Vuelve a intentarlo más tarde.",
       "login-unauthorized-error": "La dirección de correo electrónico o el nombre de usuario y/o la contraseña introducidos son incorrectos.",
+      "login-unauthorized-remaining-attempts-error": "Advertencia: le quedan {remainingAttempts, plural, =0 {0 intento} =1 {1 intento} other {# intentos}} antes de que su cuenta Pix sea bloqueada permanentemente.",
+      "login-unauthorized-remaining-attempts-with-user-name-error": "Advertencia: le quedan {remainingAttempts, plural, =0 {0 intento} =1 {1 intento} other {# intentos}} antes de que su cuenta Pix sea bloqueada permanentemente.'<br>'Si olvidas tu contraseña, '<strong>'ponte en contacto con tu profesor'</strong>' para restablecerla y/o recuperar tu inicio de sesión.",
+      "login-unauthorized-with-user-name-error": "La dirección de correo electrónico o el nombre de usuario y/o la contraseña introducidos son incorrectos.'<br>'Si olvidas tu contraseña, '<strong>'ponte en contacto con tu profesor'</strong>' para restablecerla y/o recuperar tu inicio de sesión.",
       "login-unexpected-error": "No se ha podido conectar. Por favor, inténtelo de nuevo en unos momentos. Si el problema persiste, '<'a href=\"{supportHomeUrl}\" target=\"blank\"'>'póngase en contacto con nosotros'</a>'.",
       "login-user-blocked-error": "Tu cuenta está bloqueada porque has realizado demasiados intentos de conexión. Para desbloquearla, '<'a href=\"{url}\"'>'ponte en contacto con nosotros'</a>'.",
-      "login-user-temporary-blocked-error": "Has realizado demasiados intentos de conexión. Inténtalo de nuevo más tarde o haz clic en '<'a href=\"{url}\"'>'contraseña olvidada'</a>' para restablecerla."
+      "login-user-temporary-blocked-error": "Ha realizado demasiados intentos de inicio de sesión, su cuenta Pix está temporalmente bloqueada durante {blockingDurationMinutes} minutos. Inténtalo de nuevo más tarde o haz clic en '<'a href=\"{url}\"'>'contraseña olvidada'</a>' para restablecerla.",
+      "login-user-temporary-blocked-with-username-error": "Ha realizado demasiados intentos de inicio de sesión, su cuenta Pix está temporalmente bloqueada durante {blockingDurationMinutes} minutos.'<br>'Si olvidas tu contraseña, '<strong>'ponte en contacto con tu profesor'</strong>' para restablecerla y/o recuperar tu inicio de sesión."
     },
     "cgu": {
       "cgu": "condiciones de uso",
@@ -232,9 +236,7 @@
           "submit": "Crear cuenta"
         },
         "errors": {
-          "invalid-locale-format": "Tu configuración local «{invalidLocale}» tiene un formato incorrecto.",
-          "invalid-or-already-used-email": "Dirección de correo electrónico no válida o ya utilizada",
-          "locale-not-supported": "Tu configuración local «{localeNotSupported}» no es compatible actualmente."
+          "invalid-or-already-used-email": "Dirección de correo electrónico no válida o ya utilizada"
         },
         "fields": {
           "email": {
@@ -368,7 +370,7 @@
     }
   },
   "pages": {
-    "attestations" : {
+    "attestations": {
       "title": "Mis títulos",
       "subtitle": "Acceda a todos sus certificados Pix y descárguelos."
     },
@@ -493,9 +495,9 @@
           "login-button": "Iniciar sesión",
           "new-connection-info": "No te preocupes, todo lo que tienes que hacer para volver a conectarte es utilizar tu dirección de correo electrónico y la contraseña que estableciste aquí.",
           "password-label": "Contraseña",
-          "sco-connections":{
+          "sco-connections": {
             "gar": "el Mediacentre",
-            "username":  "su identificación escolar Pix"
+            "username": "su identificación escolar Pix"
           }
         },
         "welcome-message": "¡Te damos de nuevo la bienvenida, { firstName }!"
@@ -902,7 +904,7 @@
       "no-certification": {
         "text": "Aún no tienes Pix certificación"
       },
-      "buttons" : {
+      "buttons": {
         "details": "Ver detalles",
         "download-certificate": "Descargar certificado",
         "download-attestation": "Descargar certificado"
@@ -1523,7 +1525,6 @@
       "invitation": "{ organizationName } te invita a unirte a Pix",
       "login-form": {
         "button": "Conectarse",
-        "error": "La dirección de correo electrónico o el nombre de usuario y/o la contraseña introducidos son incorrectos",
         "fields": {
           "login": {
             "label": "Dirección de correo electrónico o nombre de usuario"

@@ -38,6 +38,11 @@ async function getUserByUsernameAndPassword({
       }
 
       await dependencies.userLoginRepository.update(userLogin);
+
+      throw new PasswordNotMatching({
+        remainingAttempts: userLogin.shouldWarnRemainingAttempts ? userLogin.remainingAttempts : null,
+        isLoginFailureWithUsername: username === foundUser.username,
+      });
     }
 
     throw error;

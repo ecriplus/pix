@@ -112,7 +112,7 @@ function _mapToHttpError(error) {
     return new HttpErrors.ForbiddenError('Utilisateur non autorisé à accéder à la ressource');
   }
   if (error instanceof SharedDomainErrors.UserIsTemporaryBlocked) {
-    return new HttpErrors.ForbiddenError(error.message, error.code);
+    return new HttpErrors.ForbiddenError(error.message, error.code, error.meta);
   }
   if (error instanceof SharedDomainErrors.UserHasAlreadyLeftSCO) {
     return new HttpErrors.ForbiddenError(error.message);
@@ -124,7 +124,7 @@ function _mapToHttpError(error) {
     return new HttpErrors.NotFoundError(error.message);
   }
   if (error instanceof SharedDomainErrors.UserIsBlocked) {
-    return new HttpErrors.ForbiddenError(error.message, error.code);
+    return new HttpErrors.ForbiddenError(error.message, error.code, error.meta);
   }
   if (error instanceof SharedDomainErrors.UserAlreadyLinkedToCandidateInSessionError) {
     return new HttpErrors.ForbiddenError("L'utilisateur est déjà lié à un candidat dans cette session.");

@@ -1,72 +1,103 @@
 import Service, { service } from '@ember/service';
 import get from 'lodash/get';
+import ENV from 'mon-pix/config/environment';
 
-const ERROR_CODE_MAPPING = {
+const DEFAULT_MESSAGE = { i18nKey: 'common.error' };
+
+const HTTP_STATUS_MAPPING = {
+  400: { i18nKey: ENV.APP.API_ERROR_MESSAGES.BAD_REQUEST.I18N_KEY },
+  401: { i18nKey: ENV.APP.API_ERROR_MESSAGES.LOGIN_UNAUTHORIZED.I18N_KEY },
+  409: { i18nKey: 'pages.login-or-register-oidc.error.account-conflict' },
+  422: { i18nKey: ENV.APP.API_ERROR_MESSAGES.BAD_REQUEST.I18N_KEY },
+  504: { i18nKey: ENV.APP.API_ERROR_MESSAGES.GATEWAY_TIMEOUT.I18N_KEY },
+};
+
+const AUTHENTICATION_ERROR_CODES_MAPPING = {
   EXPIRED_AUTHENTICATION_KEY: {
     i18nKey: 'pages.login-or-register-oidc.error.expired-authentication-key',
   },
-  USER_IS_TEMPORARY_BLOCKED: {
-    i18nKey: 'common.api-error-messages.login-user-temporary-blocked-error',
-    formatOptionsFn: () => {
-      return {
-        url: '/mot-de-passe-oublie',
-        htmlSafe: true,
-      };
-    },
-  },
-  USER_IS_BLOCKED: {
-    i18nKey: 'common.api-error-messages.login-user-blocked-error',
-    formatOptionsFn: () => {
-      return {
-        url: 'https://support.pix.org/support/tickets/new',
-        htmlSafe: true,
-      };
-    },
-  },
   INVALID_LOCALE_FORMAT: {
     i18nKey: 'pages.sign-up.errors.invalid-locale-format',
-    formatOptionsFn: (error) => {
-      return { invalidLocale: error.meta.locale };
-    },
+    getOptions: (error) => ({ invalidLocale: error.meta.locale }),
   },
   LOCALE_NOT_SUPPORTED: {
     i18nKey: 'pages.sign-up.errors.locale-not-supported',
-    formatOptionsFn: (error) => {
-      return { localeNotSupported: error.meta.locale };
+    getOptions: (error) => ({ localeNotSupported: error.meta.locale }),
+  },
+  USER_IS_TEMPORARY_BLOCKED: {
+    getI18nKey: (error) => {
+      if (error.meta?.isLoginFailureWithUsername) {
+        return ENV.APP.API_ERROR_MESSAGES.USER_IS_TEMPORARY_BLOCKED_WITH_USERNAME.I18N_KEY;
+      }
+      return ENV.APP.API_ERROR_MESSAGES.USER_IS_TEMPORARY_BLOCKED.I18N_KEY;
     },
+    getOptions: (error) => ({
+      url: '/mot-de-passe-oublie',
+      blockingDurationMinutes: error.meta?.blockingDurationMs / 1000 / 60,
+      htmlSafe: true,
+    }),
+  },
+  USER_IS_BLOCKED: {
+    i18nKey: ENV.APP.API_ERROR_MESSAGES.USER_IS_BLOCKED.I18N_KEY,
+    getOptions: (_error) => ({
+      url: 'https://support.pix.org/support/tickets/new',
+      htmlSafe: true,
+    }),
   },
   MISSING_OR_INVALID_CREDENTIALS: {
-    i18nKey: 'common.api-error-messages.login-unauthorized-error',
+    getI18nKey: (error) => {
+      if (error.meta?.isLoginFailureWithUsername) {
+        if (error.meta?.remainingAttempts > 0) {
+          return ENV.APP.API_ERROR_MESSAGES.MISSING_OR_INVALID_CREDENTIALS_REMAINING_ATTEMPTS_WITH_USERNAME.I18N_KEY;
+        }
+        return ENV.APP.API_ERROR_MESSAGES.MISSING_OR_INVALID_CREDENTIALS_WITH_USERNAME.I18N_KEY;
+      }
+
+      if (error.meta?.remainingAttempts > 0) {
+        return ENV.APP.API_ERROR_MESSAGES.MISSING_OR_INVALID_CREDENTIALS_REMAINING_ATTEMPTS.I18N_KEY;
+      }
+      return ENV.APP.API_ERROR_MESSAGES.MISSING_OR_INVALID_CREDENTIALS.I18N_KEY;
+    },
+    getOptions: (error) => ({ remainingAttempts: error.meta?.remainingAttempts, htmlSafe: true }),
   },
 };
 
-const HTTP_STATUS_MAPPING = {
-  401: {
-    i18nKey: 'pages.login-or-register-oidc.error.login-unauthorized-error',
-  },
-  409: {
-    i18nKey: 'pages.login-or-register-oidc.error.account-conflict',
-  },
+const AUTHENTICATION_DEFAULT_MESSAGE = {
+  i18nKey: 'common.api-error-messages.login-unexpected-error',
+  getOptions: (_error, { url }) => ({ supportHomeUrl: url.supportHomeUrl, htmlSafe: true }),
 };
 
 export default class ErrorMessagesService extends Service {
   @service intl;
+  @service url;
 
-  getErrorMessage(error) {
-    error = get(error, 'errors[0]') || error;
-    const mapping = ERROR_CODE_MAPPING[error.code] || HTTP_STATUS_MAPPING[error.status];
+  getHttpErrorMessage(originalError, defaultMessage = DEFAULT_MESSAGE) {
+    const error = get(originalError, 'errors[0]') || originalError;
 
-    let i18nKey;
-    let formatOptionsFn;
-    let formatOptions;
-    if (mapping) {
-      ({ i18nKey, formatOptionsFn } = mapping);
-      formatOptions = formatOptionsFn && formatOptionsFn(error);
-    } else {
-      i18nKey = 'common.error';
+    const message = HTTP_STATUS_MAPPING[error?.status];
+
+    return this.#formatError(error, message || defaultMessage);
+  }
+
+  getAuthenticationErrorMessage(originalError) {
+    const error = get(originalError, 'errors[0]') || originalError;
+
+    const message = AUTHENTICATION_ERROR_CODES_MAPPING[error?.code];
+
+    if (!message) {
+      return this.getHttpErrorMessage(originalError, AUTHENTICATION_DEFAULT_MESSAGE);
     }
 
-    const message = this.intl.t(i18nKey, formatOptions);
-    return message;
+    return this.#formatError(error, message);
+  }
+
+  #formatError(error, message) {
+    const { i18nKey, getI18nKey, getOptions } = message;
+    const options = getOptions ? getOptions(error, { url: this.url }) : {};
+
+    if (getI18nKey) {
+      return this.intl.t(getI18nKey(error), options);
+    }
+    return this.intl.t(i18nKey, options);
   }
 }

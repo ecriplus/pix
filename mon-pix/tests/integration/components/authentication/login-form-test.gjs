@@ -99,7 +99,7 @@ module('Integration | Component | Authentication | LoginForm', function (hooks) 
     test('it displays error message for invalid local', async function (assert) {
       // given
       sessionService.authenticateUser.rejects(
-        _buildApiReponseError({ errorCode: 'INVALID_LOCALE_FORMAT', meta: { locale: 'foo' } }),
+        _buildApiResponseError({ errorCode: 'INVALID_LOCALE_FORMAT', meta: { locale: 'foo' } }),
       );
 
       // when
@@ -113,7 +113,7 @@ module('Integration | Component | Authentication | LoginForm', function (hooks) 
     test('it displays error message for local not supported', async function (assert) {
       // given
       sessionService.authenticateUser.rejects(
-        _buildApiReponseError({ errorCode: 'LOCALE_NOT_SUPPORTED', meta: { locale: 'foo' } }),
+        _buildApiResponseError({ errorCode: 'LOCALE_NOT_SUPPORTED', meta: { locale: 'foo' } }),
       );
 
       // when
@@ -130,7 +130,7 @@ module('Integration | Component | Authentication | LoginForm', function (hooks) 
       sinon.stub(routerService, 'replaceWith');
       const passwordResetToken = 'reset-token';
       sessionService.authenticateUser.rejects(
-        _buildApiReponseError({ errorCode: 'SHOULD_CHANGE_PASSWORD', meta: passwordResetToken }),
+        _buildApiResponseError({ errorCode: 'SHOULD_CHANGE_PASSWORD', meta: passwordResetToken }),
       );
 
       // when
@@ -143,13 +143,15 @@ module('Integration | Component | Authentication | LoginForm', function (hooks) 
 
     test('it displays error message for a user with a temporary blocked account', async function (assert) {
       // given
-      sessionService.authenticateUser.rejects(_buildApiReponseError({ errorCode: 'USER_IS_TEMPORARY_BLOCKED' }));
+      sessionService.authenticateUser.rejects(
+        _buildApiResponseError({ errorCode: 'USER_IS_TEMPORARY_BLOCKED', meta: { blockingDurationMs: 60000 } }),
+      );
 
       // when
       await clickByName(t(I18N_KEYS.submitButton));
 
       // then
-      const errorMessage = 'Vous avez effectué trop de tentatives de connexion.';
+      const errorMessage = 'Vous avez effectué trop de tentatives de connexion';
       assert.dom(screen.getByText(errorMessage, { exact: false })).exists();
 
       const errorMessageLink = screen.getByRole('link', { name: 'mot de passe oublié' });
@@ -158,7 +160,7 @@ module('Integration | Component | Authentication | LoginForm', function (hooks) 
 
     test('it displays error message for a user with a blocked account', async function (assert) {
       // given
-      sessionService.authenticateUser.rejects(_buildApiReponseError({ errorCode: 'USER_IS_BLOCKED' }));
+      sessionService.authenticateUser.rejects(_buildApiResponseError({ errorCode: 'USER_IS_BLOCKED' }));
 
       // when
       await clickByName(t(I18N_KEYS.submitButton));
@@ -175,7 +177,7 @@ module('Integration | Component | Authentication | LoginForm', function (hooks) 
       test('it erases the password field', async function (assert) {
         // given
         sessionService.authenticateUser.rejects(
-          _buildApiReponseError({ status: 401, errorCode: 'MISSING_OR_INVALID_CREDENTIALS' }),
+          _buildApiResponseError({ status: 401, errorCode: 'MISSING_OR_INVALID_CREDENTIALS' }),
         );
         await fillByLabel(t(I18N_KEYS.passwordInput), 'JeMeLoggue1024');
 
@@ -196,7 +198,7 @@ module('Integration | Component | Authentication | LoginForm', function (hooks) 
 
     test('it displays error message for 400 HTTP status code', async function (assert) {
       // given
-      sessionService.authenticateUser.rejects(_buildApiReponseError({ status: 400 }));
+      sessionService.authenticateUser.rejects(_buildApiResponseError({ status: 400 }));
 
       // when
       await clickByName(t(I18N_KEYS.submitButton));
@@ -208,7 +210,7 @@ module('Integration | Component | Authentication | LoginForm', function (hooks) 
 
     test('it displays error message for 401 HTTP status code', async function (assert) {
       // given
-      sessionService.authenticateUser.rejects(_buildApiReponseError({ status: 401 }));
+      sessionService.authenticateUser.rejects(_buildApiResponseError({ status: 401 }));
 
       // when
       await clickByName(t(I18N_KEYS.submitButton));
@@ -220,7 +222,7 @@ module('Integration | Component | Authentication | LoginForm', function (hooks) 
 
     test('it displays error message for 422 HTTP status code', async function (assert) {
       // given
-      sessionService.authenticateUser.rejects(_buildApiReponseError({ status: 422 }));
+      sessionService.authenticateUser.rejects(_buildApiResponseError({ status: 422 }));
 
       // when
       await clickByName(t(I18N_KEYS.submitButton));
@@ -232,7 +234,7 @@ module('Integration | Component | Authentication | LoginForm', function (hooks) 
 
     test('it displays error message for 504 HTTP status code', async function (assert) {
       // given
-      sessionService.authenticateUser.rejects(_buildApiReponseError({ status: 504 }));
+      sessionService.authenticateUser.rejects(_buildApiResponseError({ status: 504 }));
 
       // when
       await clickByName(t(I18N_KEYS.submitButton));
@@ -245,7 +247,7 @@ module('Integration | Component | Authentication | LoginForm', function (hooks) 
     test('it displays error message for other HTTP status code', async function (assert) {
       // given
       sinon.stub(urlService, 'supportHomeUrl').value('http://support.example.net');
-      sessionService.authenticateUser.rejects(_buildApiReponseError({ status: 500 }));
+      sessionService.authenticateUser.rejects(_buildApiResponseError({ status: 500 }));
 
       // when
       await clickByName(t(I18N_KEYS.submitButton));
@@ -260,6 +262,6 @@ module('Integration | Component | Authentication | LoginForm', function (hooks) 
   });
 });
 
-function _buildApiReponseError({ status = 400, errorCode, meta }) {
-  return { status, responseJSON: { errors: [{ code: errorCode, meta }] } };
+function _buildApiResponseError({ status = 400, errorCode, meta }) {
+  return { status, responseJSON: { errors: [{ code: errorCode, meta, status }] } };
 }

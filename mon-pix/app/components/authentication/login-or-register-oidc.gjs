@@ -208,7 +208,14 @@ export default class LoginOrRegisterOidcComponent extends Component {
     try {
       await this.args.onLogin({ enteredEmail: this.email, enteredPassword: this.password });
     } catch (responseError) {
-      this.loginErrorMessage = this.errorMessages.getErrorMessage(responseError);
+      const errors = get(responseError, 'errors');
+      const error = Array.isArray(errors) && errors.length > 0 ? errors[0] : null;
+
+      if (['MISSING_OR_INVALID_CREDENTIALS', 'USER_IS_TEMPORARY_BLOCKED'].includes(error?.code)) {
+        this.password = null;
+      }
+
+      this.loginErrorMessage = this.errorMessages.getAuthenticationErrorMessage(responseError);
     } finally {
       this.isLoginLoading = false;
     }
@@ -232,7 +239,7 @@ export default class LoginOrRegisterOidcComponent extends Component {
       });
     } catch (responseError) {
       const error = get(responseError, 'errors[0]');
-      this.registerErrorMessage = this.errorMessages.getErrorMessage(error);
+      this.registerErrorMessage = this.errorMessages.getAuthenticationErrorMessage(error);
     } finally {
       this.isRegisterLoading = false;
     }
