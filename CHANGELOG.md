@@ -1,5 +1,30 @@
 # Pix Changelog
 
+# [5.136.0](https://github.com/1024pix/pix/compare/v5.135.0...v5.136.0) (2025-06-17)
+
+### :rocket: Amélioration
+
+- [#12514](https://github.com/1024pix/pix/pull/12514) Ajouter la suppression de participations / assessment / badge / trainings lors de la suppression d'un import SUP (PIX-18074) 
+- [#12513](https://github.com/1024pix/pix/pull/12513) Faire disparaître les élements du toaster automatiquement lors du changement de page sur Pix Admin (PIX-18169). 
+- [#12387](https://github.com/1024pix/pix/pull/12387) Nouveaux messages d'erreur lors d'une tentative de connexion (PIX-17949) 
+- [#12554](https://github.com/1024pix/pix/pull/12554) Support des web-components Vue >=3.5.15 (PIX-18219) 
+
+### :bug: Correction
+
+- [#12547](https://github.com/1024pix/pix/pull/12547) Éviter d'appeller le LLM en mode preview (PIX-18295) 
+
+### :building_construction: Tech
+
+- [#12555](https://github.com/1024pix/pix/pull/12555) Suppression d'un script inutilisé. 
+- [#12542](https://github.com/1024pix/pix/pull/12542) Suppression du service Campaign Media Compliance (PIX-18206). 
+
+### :arrow_up: Montée de version
+
+- [#12551](https://github.com/1024pix/pix/pull/12551) Update dependency @1024pix/epreuves-components to ^0.4.0 (junior) 
+- [#12552](https://github.com/1024pix/pix/pull/12552) Update dependency @1024pix/epreuves-components to ^0.4.0 (mon-pix) 
+- [#12553](https://github.com/1024pix/pix/pull/12553) Update dependency ember-source to ~6.5.0 (junior) 
+- [#12539](https://github.com/1024pix/pix/pull/12539) Update slackapi/slack-github-action action to v2.1.0 (workflows)
+
 # [5.135.0](https://github.com/1024pix/pix/compare/v5.134.0...v5.135.0) (2025-06-16)
 
 ### :rocket: Amélioration
