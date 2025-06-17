@@ -45,7 +45,7 @@
     "cypress-split": "^1.24.14",
     "cypress-visual-regression": "^5.0.2",
     "eslint": "^9.0.0",
-    "eslint-plugin-cypress": "^4.0.0",
+    "eslint-plugin-cypress": "^5.0.0",
     "npm-run-all2": "7.0.2"
   },
   "dependencies": {
