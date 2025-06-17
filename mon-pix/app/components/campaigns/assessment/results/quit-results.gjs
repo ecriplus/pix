@@ -9,20 +9,20 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
 export default class QuitResults extends Component {
-  @tracked showModal = false;
+  @tracked showSendResultModal = false;
 
   get shouldShareCampaignResults() {
     return this.args.isSharableCampaign && !this.args.isCampaignShared;
   }
 
   @action
-  toggleModal() {
-    this.showModal = !this.showModal;
+  toggleSendResultModal() {
+    this.showSendResultModal = !this.showSendResultModal;
   }
 
   <template>
     {{#if this.shouldShareCampaignResults}}
-      <button class="evaluation-results-header__back-link" type="button" {{on "click" this.toggleModal}}>
+      <button class="evaluation-results-header__back-link" type="button" {{on "click" this.toggleSendResultModal}}>
         {{t "pages.skill-review.actions.back-to-pix"}}
       </button>
     {{else}}
@@ -32,8 +32,8 @@ export default class QuitResults extends Component {
     {{/if}}
     <PixModal
       @title={{t "pages.evaluation-results.quit-results.modal.title"}}
-      @onCloseButtonClick={{this.toggleModal}}
-      @showModal={{this.showModal}}
+      @onCloseButtonClick={{this.toggleSendResultModal}}
+      @showModal={{this.showSendResultModal}}
     >
       <:content>
         <p class="quit-results__first-paragraph">{{t
@@ -44,7 +44,7 @@ export default class QuitResults extends Component {
 
       <:footer>
         <div class="quit-results__footer">
-          <PixButton @variant="secondary" @triggerAction={{this.toggleModal}}>
+          <PixButton @variant="secondary" @triggerAction={{this.toggleSendResultModal}}>
             {{t "pages.evaluation-results.quit-results.modal.actions.cancel-to-share"}}
           </PixButton>
 
