@@ -1,7 +1,10 @@
 import EmberRouter from '@ember/routing/router';
+import { service } from '@ember/service';
 import config from 'pix-admin/config/environment';
 
 export default class Router extends EmberRouter {
+  @service pixToast;
+
   location = config.locationType;
   rootURL = config.rootURL;
 
@@ -9,6 +12,14 @@ export default class Router extends EmberRouter {
     super(...arguments);
     this.on('routeDidChange', (transition) => {
       if (transition.from && transition.to.name !== transition.from.name) {
+        const isTransitionFromCreateOrUpdate = ['.edit', '.new', '.update'].every((route) =>
+          transition.from.name.includes(route),
+        );
+        const isFromSameParent = transition.to.parent.name.includes(transition.from.parent.name);
+
+        if (!isFromSameParent && isTransitionFromCreateOrUpdate) {
+          this.pixToast.removeAllNotifications();
+        }
         window.scrollTo(0, 0);
       }
     });
