@@ -1,17 +1,25 @@
-import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import { eq } from 'ember-truth-helpers';
+
+import didRender from '../../../modifiers/did-render';
 
 export default class EmbeddedWebComponent extends Component {
+  #customElement;
+  #handleAnswer = (event) => this.args.setAnswerValue(event.detail[0]);
+
   @action
-  handleAnswer(event) {
-    this.args.setAnswerValue(event.detail[0]);
+  mountCustomElement(container) {
+    this.#customElement = document.createElement(this.args.tagName);
+    Object.assign(this.#customElement, this.args.props);
+    this.#customElement.addEventListener('answer', this.#handleAnswer);
+    this.#customElement.dataset.testid = this.args.tagName;
+    container.append(this.#customElement);
   }
 
-  <template>
-    {{#if (eq @tagName "qcu-image")}}
-      <qcu-image props={{@props}} {{on "answer" this.handleAnswer}} data-testid={{@tagName}} />
-    {{/if}}
-  </template>
+  willDestroy(...args) {
+    super.willDestroy(...args);
+    this.#customElement.removeEventListener('answer', this.#handleAnswer);
+  }
+
+  <template><div {{didRender this.mountCustomElement}} /></template>
 }
