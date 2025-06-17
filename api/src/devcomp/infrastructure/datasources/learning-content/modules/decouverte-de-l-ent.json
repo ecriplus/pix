@@ -5,7 +5,7 @@
   "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
-    "description": "<p>Aujourd’hui, le numérique fait partie du quotidien des familles, à la maison comme à l’école&#8239;! <span aria-hidden=\"true\">🎒</span></p><p>Dans ce module, partez à la découverte de l’espace numérique de travail (ENT), l’outil numérique utilisé dans les établissements scolaires.</p>",
+    "description": "<p>Aujourd’hui, le numérique fait partie du quotidien des familles, à la maison comme à l’école ! <span aria-hidden=\"true\">🎒</span></p><p>Dans ce module, partez à la découverte de l’espace numérique de travail (ENT), l’outil numérique utilisé dans les établissements scolaires.</p>",
     "duration": 10,
     "level": "Débutant",
     "objectives": [
@@ -26,7 +26,7 @@
           "element": {
             "id": "d14837d6-8c5c-4071-931e-8cccc99aca2e",
             "type": "text",
-            "content": "<p>Ava vient de finir sa première semaine au collège.<span aria-hidden=\"true\">\uD83C\uDF92</span></p><p>À la maison, Ava raconte sa journée à son père, Martin.</p><p>Lancez la vidéo pour voir leur discussion. ▶\uFE0F </p>"
+            "content": "<p>Ava vient de finir sa première semaine au collège.<span aria-hidden=\"true\">🎒</span></p><p>À la maison, Ava raconte sa journée à son père, Martin.</p><p>Lancez la vidéo pour voir leur discussion. ▶️ </p>"
           }
         }
       ]
@@ -40,8 +40,12 @@
           "type": "element",
           "element": {
             "id": "9a56f908-7132-46d3-815c-a0190bec1c04",
-            "type": "text",
-            "content": "<iframe width=\"700\" height=\"400\" src=\"https://www.youtube.com/embed/FQXk-uT2DHk?si=ZFI3eoThE1EXPG8_\" title=\"Discussion\"></iframe>"
+            "type": "video",
+            "title": "Retour du collège",
+            "url": "https://assets.pix.org/modules/decouverte-ent/intro_conversation.mp4",
+            "poster": "https://assets.pix.org/modules/decouverte-ent/intro_conversation.jpg",
+            "subtitles": "https://assets.pix.org/modules/decouverte-ent/intro_conversation.vtt",
+            "transcription": "<p>Conversation entre Martin et sa fille Ava&nbsp;:&nbsp;</p><p>Martin&nbsp;: Alors Ava ? Cette journée ?<br>Ava&nbsp;: Super, papa ! Mais je suis quand même contente d’être en week-end…<br>Martin&nbsp;: Tu as des devoirs pour la semaine prochaine ?<br>Ava&nbsp;: Oui, le prof a mis les devoirs en ligne !<br>Martin&nbsp;: En ligne ?</p>"
           }
         },
         {
@@ -57,13 +61,13 @@
           "element": {
             "id": "d881a6a8-374b-448d-b167-6db06712f34d",
             "type": "qcu",
-            "instruction": "<p>Où Martin peut-il regarder les devoirs d’Ava&#8239;?</p>",
+            "instruction": "<p>Où Martin peut-il regarder les devoirs d’Ava ?</p>",
             "proposals": [
               {
                 "id": "1",
                 "content": "<p>sur l'espace numérique de travail</p>",
                 "feedback": {
-                  "state": "Bonne réponse&#8239;! 🎉",
+                  "state": "<p>Bonne réponse ! 🎉</p>",
                   "diagnosis": "<p>L’ENT est l’espace numérique de travail du collège, accessible en ligne.</p>"
                 }
               },
@@ -116,7 +120,7 @@
             "type": "image",
             "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_schema.png",
             "alt": "",
-            "alternativeText": "<p>Image avec : </p><ul><li>au centre, un ordinateur et un smartphone qui affichent l'écran d'accueil d'un ENT</li><li>autour de l'ordinateur et du smartphone, avec des flèches dans leur direction, un groupe de parents, un groupe d'élèves, un groupe de professeurs, un groupe de personnels d'éducation.</li></ul>"
+            "alternativeText": "<p>Image avec&nbsp;: </p><ul><li>au centre, un ordinateur et un smartphone qui affichent l'écran d'accueil d'un ENT</li><li>autour de l'ordinateur et du smartphone, avec des flèches dans leur direction, un groupe de parents, un groupe d'élèves, un groupe de professeurs, un groupe de personnels d'éducation.</li></ul>"
           }
         },
         {
@@ -141,7 +145,7 @@
             "type": "image",
             "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_accueil.jpg",
             "alt": "",
-            "alternativeText": "<p>Page d'accueil d'un ENT :</p><ul>    <li>à gauche, un menu latéral avec les applications&nbsp; : <ul>            <li>Accueil, Messagerie, Cahier de texte, Emploi du temps, Documents, Actualités</li>        </ul>    </li>    <li>au centre, un accès rapide : <ul>            <li>à l'emploi du temps, au travail à faire et au suivi des notes</li>        </ul>    </li>    <li>en haut à droite, l'accès au compte personnel de Martin Pommard<br></li></ul>"
+            "alternativeText": "<p>Page d'accueil d'un ENT&nbsp;:</p><ul>    <li>à gauche, un menu latéral avec les applications&nbsp;&nbsp;: <ul>            <li>Accueil, Messagerie, Cahier de texte, Emploi du temps, Documents, Actualités</li>        </ul>    </li>    <li>au centre, un accès rapide&nbsp;: <ul>            <li>à l'emploi du temps, au travail à faire et au suivi des notes</li>        </ul>    </li>    <li>en haut à droite, l'accès au compte personnel de Martin Pommard<br></li></ul>"
           }
         },
         {
@@ -179,7 +183,7 @@
           "element": {
             "id": "b490bd76-fde6-4876-98d5-ccf81964e739",
             "type": "text",
-            "content": "<p>Voyons si vous avez retenu l’essentiel. 🎯</p>"
+            "content": "<p>Voyons si vous avez retenu l’essentiel. 🎯</p>"
           }
         }
       ]
@@ -211,7 +215,7 @@
                       "id": "1",
                       "content": "<p>vrai</p>",
                       "feedback": {
-                        "state": "Bonne réponse&#8239;! 🎉",
+                        "state": "<p>Bonne réponse ! 🎉</p>",
                         "diagnosis": "<p>L’ENT est accessible sur ordinateur, smartphone et tablette.</p>"
                       }
                     },
@@ -239,7 +243,7 @@
                       "id": "1",
                       "content": "<p>vrai</p>",
                       "feedback": {
-                        "state": "Bonne réponse&#8239;! 🎉",
+                        "state": "<p>Bonne réponse ! 🎉</p>",
                         "diagnosis": "<p>Les informations pour se connecter sont fournies en début d’année par le collège.</p>"
                       }
                     },
@@ -275,7 +279,7 @@
                       "id": "2",
                       "content": "<p>faux</p>",
                       "feedback": {
-                        "state": "Bonne réponse&#8239;! 🎉",
+                        "state": "<p>Bonne réponse ! 🎉</p>",
                         "diagnosis": "<p>En fonction de leur département, les collèges n’utilisent pas le même ENT.</p>"
                       }
                     }
@@ -298,7 +302,7 @@
           "element": {
             "id": "0468f3c9-f946-4309-9768-4fda3f28a4b2",
             "type": "text",
-            "content": "<h3><span aria-hidden=\"true\"> 📌 </span> Résumons avant de passer à la suite&nbsp;:</h3><ul>    <li>L’ENT est utilisé par les parents, les élèves, les professeurs et les personnels d’éducation.</li>    <li>Vous pouvez accéder à l’ENT avec un identifiant et un mot de passe, fournis par l'établissement scolaire, depuis un ordinateur, une tablette, un smartphone.</li>    <li>Tous les établissements scolaires n'utilisent pas le même ENT. Les ENT proposent tous des fonctionnalités qui se ressemblent&nbsp;: messagerie, emploi du temps, cahier de textes, ...</li></ul>"
+            "content": "<h3><span aria-hidden=\"true\"> 📌 </span> Résumons avant de passer à la suite&nbsp;:</h3><ul>    <li>L’ENT est utilisé par les parents, les élèves, les professeurs et les personnels d’éducation.</li>    <li>Vous pouvez accéder à l’ENT avec un identifiant et un mot de passe, fournis par l'établissement scolaire, depuis un ordinateur, une tablette, un smartphone.</li>    <li>Tous les établissements scolaires n'utilisent pas le même ENT. Les ENT proposent tous des fonctionnalités qui se ressemblent&nbsp;: messagerie, emploi du temps, cahier de textes, ...</li></ul>"
           }
         }
       ]
@@ -313,7 +317,7 @@
           "element": {
             "id": "caf7638d-71d4-47d5-955f-a628eb12d756",
             "type": "text",
-            "content": "<p>Maintenant à vous de jouer&#8239;!<br>Découvrez 3 fonctionnalités de l’ENT de Martin, et aidez-le à les utiliser.</p>"
+            "content": "<p>Maintenant à vous de jouer !<br>Découvrez 3 fonctionnalités de l’ENT de Martin, et aidez-le à les utiliser.</p>"
           }
         }
       ]
@@ -341,12 +345,12 @@
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_applis.jpg",
                   "alt": "",
-                  "alternativeText": "<p>Page «&nbsp;Mes applis&nbsp;» d'un ENT avec la liste des applications disponibles :&nbsp;</p><ul>    <li>Messagerie</li>    <li>Cahier de textes</li>    <li>Emploi du temps</li>    <li>Documents</li>    <li>Blog</li></ul>"
+                  "alternativeText": "<p>Page «&nbsp;Mes applis&nbsp;» d'un ENT avec la liste des applications disponibles&nbsp;:&nbsp;</p><ul>    <li>Messagerie</li>    <li>Cahier de textes</li>    <li>Emploi du temps</li>    <li>Documents</li>    <li>Blog</li></ul>"
                 },
                 {
                   "id": "dacb6bd7-a151-4b00-bca8-4de1ab39891a",
                   "type": "qcu",
-                  "instruction": "<p>Martin veut savoir à quelle heure Ava a cours de sport.</p><p>Quelle fonctionnalité doit-il utiliser&#8239;?</p>",
+                  "instruction": "<p>Martin veut savoir à quelle heure Ava a cours de sport.</p><p>Quelle fonctionnalité doit-il utiliser ?</p>",
                   "proposals": [
                     {
                       "id": "1",
@@ -368,7 +372,7 @@
                       "id": "3",
                       "content": "<p>l'emploi du temps</p>",
                       "feedback": {
-                        "state": "Bonne réponse&#8239;! 🎉",
+                        "state": "<p>Bonne réponse ! 🎉</p>",
                         "diagnosis": "<p>L’emploi du temps permet de connaître les cours d’Ava heure par heure, jour par jour.</p>"
                       }
                     },
@@ -400,26 +404,26 @@
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_message.jpg",
                   "alt": "",
-                  "alternativeText": "<p>Page «&nbsp;Actualités&nbsp;» d'un ENT :</p><ul>    <li>à gauche, un menu latéral avec les applications&nbsp; :        <ul>            <li> Accueil, </li>            <li>Messagerie (2), </li>            <li>Cahier de texte, </li>            <li>Emploi du temps, </li>            <li>Documents, </li>            <li>Actualités            </li>        </ul>    </li>    <li>        au centre, un accès rapide à 3 actualités concernant le collège</li>    <li>        à droite, l'accès au compte personnel de Martin Pommard et un menu mes applis avec : <ul>            <li>Messagerie (2), </li>            <li>Cahier de textes, </li>            <li>Emploi du temps<br><br></li>        </ul>    </li></ul>"
+                  "alternativeText": "<p>Page «&nbsp;Actualités&nbsp;» d'un ENT&nbsp;:</p><ul>    <li>à gauche, un menu latéral avec les applications&nbsp;&nbsp;:        <ul>            <li> Accueil, </li>            <li>Messagerie (2), </li>            <li>Cahier de texte, </li>            <li>Emploi du temps, </li>            <li>Documents, </li>            <li>Actualités            </li>        </ul>    </li>    <li>        au centre, un accès rapide à 3 actualités concernant le collège</li>    <li>        à droite, l'accès au compte personnel de Martin Pommard et un menu mes applis avec&nbsp;: <ul>            <li>Messagerie (2), </li>            <li>Cahier de textes, </li>            <li>Emploi du temps<br><br></li>        </ul>    </li></ul>"
                 },
                 {
                   "id": "d83eba7d-cfe9-4e7b-ada6-fbcbaa17be23",
                   "type": "qcu",
-                  "instruction": "<p><strong>Combien de messages non lus Martin a-t-il&#8239;?</strong></p>",
+                  "instruction": "<p><strong>Combien de messages non lus Martin a-t-il ?</strong></p>",
                   "proposals": [
                     {
                       "id": "1",
                       "content": "<p>1</p>",
                       "feedback": {
                         "state": "Mauvaise réponse.",
-                        "diagnosis": "<p>Il y a 1 publication à lire sur le blog. Ce ne sont pas des messages reçus.</p><p>Avez-vous cherché l’icône de la messagerie&#8239;?</p>"
+                        "diagnosis": "<p>Il y a 1 publication à lire sur le blog. Ce ne sont pas des messages reçus.</p><p>Avez-vous cherché l’icône de la messagerie ?</p>"
                       }
                     },
                     {
                       "id": "2",
                       "content": "<p>2</p>",
                       "feedback": {
-                        "state": "Bonne réponse&#8239;! 🎉",
+                        "state": "<p>Bonne réponse ! 🎉</p>",
                         "diagnosis": "<p>La messagerie de l’ENT est l’outil à privilégier pour contacter l’établissement scolaire.</p>"
                       }
                     },
@@ -428,7 +432,7 @@
                       "content": "<p>3</p>",
                       "feedback": {
                         "state": "Mauvaise réponse.",
-                        "diagnosis": "<p>Il y a 3 publications dans le fil de nouveautés. Ce ne sont pas des messages reçus.</p><p>Avez-vous cherché l’icône de la messagerie&#8239;?</p>"
+                        "diagnosis": "<p>Il y a 3 publications dans le fil de nouveautés. Ce ne sont pas des messages reçus.</p><p>Avez-vous cherché l’icône de la messagerie ?</p>"
                       }
                     }
                   ],
@@ -443,12 +447,12 @@
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_devoirs.jpg",
                   "alt": "",
-                  "alternativeText": "<p>Page « Cahier de texte&nbsp;» d'un ENT :</p><ul>    <li>&nbsp;un menu latéral avec les applications&nbsp; :        <ul>            <li> Accueil, </li>            <li>Messagerie (2), </li>            <li>Cahier de texte, </li>            <li>Emploi du temps, </li>            <li>Documents, </li>            <li>Actualités            </li>        </ul>    </li>    <li>au centre, cahier de texte de l'élève avec les cours et devoirs à venir : <ul>            <li>Vendredi 6 septembre :&nbsp;<ul><li>Histoire-géographie - 6ème B - L'empire romain</li><li>Mathématiques - 6ème B - Les ensembles de nombres</li></ul></li><li>Lundi 9 septembre :&nbsp;<ul><li>Mathématiques - 6ème B - Exercice donné le 06/09/2024 - à faire</li><li>Français - 6ème B - Les compléments circonstanciels</li></ul></li><li>Mardi 10 septembre :&nbsp;<ul><li>Mathématiques - 6ème B - Les ensembles de nombres</li><li>Français - 6ème B - Devoir à la maison donné le 05/09/2024 - à faire</li></ul></li>        </ul>    </li>    <li>en haut à droite, l'accès au compte personnel de Martin Pommard<br></li></ul>"
+                  "alternativeText": "<p>Page «&nbsp;Cahier de texte&nbsp;» d'un ENT&nbsp;:</p><ul>    <li>&nbsp;un menu latéral avec les applications&nbsp;&nbsp;:        <ul>            <li> Accueil, </li>            <li>Messagerie (2), </li>            <li>Cahier de texte, </li>            <li>Emploi du temps, </li>            <li>Documents, </li>            <li>Actualités            </li>        </ul>    </li>    <li>au centre, cahier de texte de l'élève avec les cours et devoirs à venir&nbsp;: <ul>            <li>Vendredi 6 septembre&nbsp;:&nbsp;<ul><li>Histoire-géographie - 6ème B - L'empire romain</li><li>Mathématiques - 6ème B - Les ensembles de nombres</li></ul></li><li>Lundi 9 septembre&nbsp;:&nbsp;<ul><li>Mathématiques - 6ème B - Exercice donné le 06/09/2024 - à faire</li><li>Français - 6ème B - Les compléments circonstanciels</li></ul></li><li>Mardi 10 septembre&nbsp;:&nbsp;<ul><li>Mathématiques - 6ème B - Les ensembles de nombres</li><li>Français - 6ème B - Devoir à la maison donné le 05/09/2024 - à faire</li></ul></li>        </ul>    </li>    <li>en haut à droite, l'accès au compte personnel de Martin Pommard<br></li></ul>"
                 },
                 {
                   "id": "85ef8964-a248-4a9d-a087-091a4aefd30a",
                   "type": "qcu",
-                  "instruction": "<p><strong>Dans quelle matière Ava a-t-elle des devoirs à rendre pour mardi&#8239;?</strong></p>",
+                  "instruction": "<p><strong>Dans quelle matière Ava a-t-elle des devoirs à rendre pour mardi ?</strong></p>",
                   "proposals": [
                     {
                       "id": "1",
@@ -470,7 +474,7 @@
                       "id": "2",
                       "content": "<p>Français</p>",
                       "feedback": {
-                        "state": "Bonne réponse&#8239;! 🎉",
+                        "state": "<p>Bonne réponse ! 🎉</p>",
                         "diagnosis": "<p>La professeure de Français a indiqué dans le cahier de textes qu’Ava a un devoir à la maison à rendre mardi.</p>"
                       }
                     }
@@ -515,8 +519,12 @@
           "type": "element",
           "element": {
             "id": "b3cba471-c794-4a39-b044-5b084b468341",
-            "type": "text",
-            "content": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/Fp9IIvX7Z7o?si=BvGOl7ST3ho-x-o5\" title=\"Discussion\"></iframe>"
+            "type": "video",
+            "title": "Les différents comptes de L'ENT",
+            "url": "https://assets.pix.org/modules/decouverte-ent/differents-comptes.mp4",
+            "poster": "https://assets.pix.org/modules/decouverte-ent/differents-comptes.jpg",
+            "subtitles": "https://assets.pix.org/modules/decouverte-ent/differents-comptes.vtt",
+            "transcription": "<p>ENT, focus sur le compte parent. <br>Conversation entre Ava et son père, Martin&nbsp;: </p><p>Ava&nbsp;: Hey papa ! T'as vu le message sur l'ENT ? C'est le CPE Monsieur Rossi qui te l'a envoyé !<br>Martin&nbsp;: Le CPE ? Mais je savais pas que le CPE pouvait utiliser l'ENT.<br><br>Voix off&nbsp;: Et oui, le CPE aussi utilise l'ENT. Comme beaucoup d'autres personnes au collège d'ailleurs. Mais il n'a pas accès aux mêmes fonctionnalités que Martin,&nbsp;le père d'Ava.<br>Chaque personne qui utilise un ENT se connecte à son compte personnel, mais tout le monde n'a pas accès aux mêmes fonctionnalités selon son rôle. Il y a donc différents types de compte pour les parents, pour les élèves, pour les enseignants et pour les personnels d'éducation. Chaque personne a accès uniquement aux fonctionnalités qui la concernent. <br><br>Avec le compte parent, il est par exemple possible de voir l'emploi du temps de son enfant ou ses notes, mais pas de les modifier. Les modifications sont réservées aux enseignants et aux personnels d'éducation. Le compte parent permet aussi de suivre les devoirs donnés à son enfant, mais pas de les rendre à sa place. C'est à l'enfant de le faire avec son compte élève.<br><br>  Pour finir, avec le compte parent, il est aussi possible de contacter l'établissement scolaire grâce à la messagerie de l'ENT. Pour ça, le parent doit être connecté à son propre compte et non à celui de son enfant. De cette manière, l'enseignant qui recevra le message saura qui lui écrit. Il n'y aura pas de confusion. </p><p>Voici quelques conseils pratiques pour l'utilisation de la messagerie du compte Parent. Ce compte est à utiliser pour des sujets uniquement liés à la scolarité de ses enfants. Les messages envoyés doivent être courts en précisant l'objet de la demande. Évitez les messages tardifs ou le week end et attendre un délai raisonnable pour recevoir une réponse. La messagerie de l'ENT n'est pas toujours consultée immédiatement.&nbsp;En cas d'urgence, il vaut mieux contacter directement le secrétariat de l'établissement en suivant les procédures du règlement intérieur.<br><br>Que ce soit la messagerie, l'emploi du temps ou bien d'autres fonctionnalités, L'ENT est un outil précieux pour Martin et pour tous les parents.</p>"
           }
         }
       ]
@@ -571,7 +579,7 @@
                       "id": "2",
                       "content": "<p>Je n’utilise pas mon compte parent.</p>",
                       "feedback": {
-                        "state": "Bonne réponse&#8239;! 🎉",
+                        "state": "<p>Bonne réponse ! 🎉</p>",
                         "diagnosis": "<p>Votre enfant doit se connecter à son propre compte pour rendre son devoir.</p>"
                       }
                     }
@@ -591,7 +599,7 @@
                       "id": "1",
                       "content": "<p>J'utilise mon compte parent.</p>",
                       "feedback": {
-                        "state": "Bonne réponse&#8239;! 🎉",
+                        "state": "<p>Bonne réponse ! 🎉</p>",
                         "diagnosis": "<p>La messagerie de l’ENT permet de contacter facilement les professeurs.<br>Utilisez votre compte pour envoyer un message en votre nom.</p>"
                       }
                     },
@@ -627,7 +635,7 @@
                       "id": "2",
                       "content": "<p>Je n'utilise pas mon compte parent.</p>",
                       "feedback": {
-                        "state": "Bonne réponse&#8239;! 🎉",
+                        "state": "<p>Bonne réponse ! 🎉</p>",
                         "diagnosis": "<p>L'utilisation de la messagerie est réservée à des sujets liés à la scolarité de vos enfants.</p>"
                       }
                     }
@@ -650,7 +658,7 @@
           "element": {
             "id": "66760ae7-c076-48b8-b71a-e92787a47da4",
             "type": "text",
-            "content": "<p>Maintenant, testez votre mémoire. 🎯</p>"
+            "content": "<p>Maintenant, testez votre mémoire. 🎯</p>"
           }
         }
       ]
@@ -673,7 +681,7 @@
           "element": {
             "id": "d0c79a9f-1c62-4b9b-9bf3-629746823287",
             "type": "flashcards",
-            "instruction": "<p><br></p>",
+            "instruction": "<p></p>",
             "title": "L'espace numérique de travail",
             "introImage": {
               "url": "https://images.pix.fr/modulix/didactitiel/intro-flashcards.png"
@@ -685,7 +693,7 @@
                   "image": {
                     "url": "https://images.pix.fr/modulix/recto-flashcards.png"
                   },
-                  "text": "Qu'est ce qu'un ENT ?"
+                  "text": "Qu'est ce qu'un ENT ?"
                 },
                 "verso": {
                   "image": {
@@ -700,7 +708,7 @@
                   "image": {
                     "url": "https://images.pix.fr/modulix/recto-flashcards.png"
                   },
-                  "text": "Quelles personnes peuvent utiliser l'ENT d'un établissement scolaire ?"
+                  "text": "Quelles personnes peuvent utiliser l'ENT d'un établissement scolaire ?"
                 },
                 "verso": {
                   "image": {
@@ -715,7 +723,7 @@
                   "image": {
                     "url": "https://images.pix.fr/modulix/recto-flashcards.png"
                   },
-                  "text": "Quel compte un parent doit-il utiliser pour envoyer un message à un enseignant sur l'ENT ?"
+                  "text": "Quel compte un parent doit-il utiliser pour envoyer un message à un enseignant sur l'ENT ?"
                 },
                 "verso": {
                   "image": {
@@ -730,7 +738,7 @@
                   "image": {
                     "url": "https://images.pix.fr/modulix/recto-flashcards.png"
                   },
-                  "text": "Quelle fonctionnalité de l'ENT permet de consulter les devoirs de son enfant ?"
+                  "text": "Quelle fonctionnalité de l'ENT permet de consulter les devoirs de son enfant ?"
                 },
                 "verso": {
                   "image": {
