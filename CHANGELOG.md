@@ -1,5 +1,27 @@
 # Pix Changelog
 
+## [5.136.1](https://github.com/1024pix/pix/compare/v5.136.0...v5.136.1) (2025-06-17)
+
+### :bug: Correction
+
+- [#12571](https://github.com/1024pix/pix/pull/12571) Corriger les niveaux des tags dans la page analyse et statistiques (PIX-18322) 
+
+### :building_construction: Tech
+
+- [#12534](https://github.com/1024pix/pix/pull/12534) Création de la table des challenges calibrés dans le datamart (PIX-18232). 
+- [#12570](https://github.com/1024pix/pix/pull/12570) Supprimer l’utilisation du WebComponent cartes-a-retourner 
+
+### :arrow_up: Montée de version
+
+- [#12561](https://github.com/1024pix/pix/pull/12561) Update adobe/s3mock Docker tag to v4 (.circleci) 
+- [#12563](https://github.com/1024pix/pix/pull/12563) Update adobe/s3mock Docker tag to v4 (docker) 
+- [#12564](https://github.com/1024pix/pix/pull/12564) Update adobe/s3mock Docker tag to v4 (dossier racine) 
+- [#12414](https://github.com/1024pix/pix/pull/12414) Update dependency @1024pix/pix-ui to ^55.21.1 (admin) 
+- [#12565](https://github.com/1024pix/pix/pull/12565) Update dependency babel-plugin-ember-template-compilation to v3 (junior) 
+- [#12557](https://github.com/1024pix/pix/pull/12557) Update dependency bcrypt to v6 (api) 
+- [#12567](https://github.com/1024pix/pix/pull/12567) Update dependency ember-cp-validations to v7 (admin) 
+- [#12569](https://github.com/1024pix/pix/pull/12569) Update dependency eslint-plugin-cypress to v5 (e2e)
+
 # [5.136.0](https://github.com/1024pix/pix/compare/v5.135.0...v5.136.0) (2025-06-17)
 
 ### :rocket: Amélioration
