@@ -18,7 +18,7 @@ const messageConversationPropsSchema = Joi.object({
 const customElementSchema = Joi.object({
   id: uuidSchema,
   type: Joi.string().valid('custom').required(),
-  tagName: Joi.string().valid('message-conversation', 'cartes-a-retourner', 'qcu-image').required(),
+  tagName: Joi.string().valid('message-conversation', 'qcu-image').required(),
   props: Joi.alternatives()
     .conditional('tagName', {
       switch: [{ is: 'message-conversation', then: messageConversationPropsSchema }],

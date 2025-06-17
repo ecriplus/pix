@@ -103,7 +103,7 @@
                 "id": "2",
                 "content": "Après avoir mis le dentifrice",
                 "feedback": {
-                  "state":  "",
+                  "state": "",
                   "diagnosis": "<p>Possible, mais attention à ne pas faire tomber le dentifrice !</p>"
                 }
               },
@@ -111,7 +111,7 @@
                 "id": "3",
                 "content": "Pendant que le dentifrice est mis",
                 "feedback": {
-                  "state":  "",
+                  "state": "",
                   "diagnosis": "<p>Digne des plus grands acrobates !</p>"
                 }
               }
@@ -319,7 +319,7 @@
           "element": {
             "id": "96e2457d-54d3-461a-97e4-69180a30bfb7",
             "type": "text",
-            "content": "<p>Voici un web component, développé à la va-vite pour la démo :</p>"
+            "content": "<p>Voici un web component :</p>"
           }
         },
         {
@@ -327,25 +327,54 @@
           "element": {
             "id": "cfec5a0e-2ed5-462f-8974-e5ca25faae39",
             "type": "custom",
-            "tagName": "cartes-a-retourner",
+            "tagName": "message-conversation",
             "props": {
-              "cardsPerLine": 4,
-              "cards": [
+              "title": "Confessions nocturnes",
+              "messages": [
                 {
-                  "frontImageUrl": "https://i.imgur.com/ynIpt6T.png",
-                  "backImageUrl": "https://i.imgur.com/prjj6bH.png"
+                  "userName": "Mel",
+                  "direction": "outgoing",
+                  "content": "Ouais c'est qui là ?"
                 },
                 {
-                  "frontImageUrl": "https://i.imgur.com/Gcy9yUl.png",
-                  "backImageUrl": "https://i.imgur.com/HVZcy58.png"
+                  "userName": "Vita",
+                  "direction": "incoming",
+                  "content": "Mel, c'est Vi ouvre moi."
                 },
                 {
-                  "frontImageUrl": "https://i.imgur.com/k2istl3.png",
-                  "backImageUrl": "https://i.imgur.com/ww44Phm.png"
+                  "userName": "Mel",
+                  "direction": "outgoing",
+                  "content": "Ça va Vi ?"
                 },
                 {
-                  "frontImageUrl": "https://i.imgur.com/6MLS2tU.png",
-                  "backImageUrl": "https://i.imgur.com/chQSy0B.png"
+                  "userName": "Mel",
+                  "direction": "outgoing",
+                  "content": "T'as l'air bizarre. Qu'est ce qu'il y a ?"
+                },
+                {
+                  "userName": "Vita",
+                  "direction": "incoming",
+                  "content": "Non, ça va pas non."
+                },
+                {
+                  "userName": "Mel",
+                  "direction": "outgoing",
+                  "content": "Ben dis-moi, qu'est qu'il y a ?"
+                },
+                {
+                  "userName": "Vita",
+                  "direction": "incoming",
+                  "content": "Mel, assieds-toi faut que je te parle..."
+                },
+                {
+                  "userName": "Vita",
+                  "direction": "incoming",
+                  "content": "J'ai passé ma journée dans le noir."
+                },
+                {
+                  "userName": "Vita",
+                  "direction": "incoming",
+                  "content": "Mel, je le sens, je le sais, je le suis, il se fout de moi..."
                 }
               ]
             }
