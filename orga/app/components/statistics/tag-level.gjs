@@ -10,11 +10,13 @@ const MAX_LEVEL = {
 
 export default class TagLevel extends Component {
   get category() {
-    const parsedLevel = Math.ceil(parseFloat(this.args.level));
-    if (parsedLevel < MAX_LEVEL.novice) return 'pages.statistics.level.novice';
-    if (parsedLevel < MAX_LEVEL.independent) return 'pages.statistics.level.independent';
-    if (parsedLevel < MAX_LEVEL.advanced) return 'pages.statistics.level.advanced';
-    return 'pages.statistics.level.expert';
+    const parsedLevel = Number(this.args.level);
+
+    const intlKey = 'pages.statistics.level.';
+    if (parsedLevel < MAX_LEVEL.novice) return intlKey + 'novice';
+    if (parsedLevel < MAX_LEVEL.independent) return intlKey + 'independent';
+    if (parsedLevel < MAX_LEVEL.advanced) return intlKey + 'advanced';
+    return intlKey + 'expert';
   }
 
   <template>
