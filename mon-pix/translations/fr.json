@@ -1367,7 +1367,16 @@
     },
     "evaluation-results": {
       "quit-results": {
-        "modal": {
+        "leave-without-signup-modal": {
+          "actions": {
+            "cancel": "Annuler",
+            "leave": "Oui, quitter le parcours"
+          },
+          "content-information": "En quittant ce parcours sans vous inscrire, vous ne pourrez pas valider votre progression.",
+          "content-instruction": "Voulez-vous continuer ?",
+          "title": "Quitter et revenir sur pix.fr ?"
+        },
+        "send-result-modal": {
           "actions": {
             "cancel-to-share": "Rester pour envoyer",
             "quit-without-sharing": "Quitter sans envoyer"

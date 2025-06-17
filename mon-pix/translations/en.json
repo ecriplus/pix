@@ -1366,8 +1366,17 @@
       "first-title": "Oops, an error occurred!"
     },
     "evaluation-results": {
+      "leave-without-signup-modal": {
+          "actions": {
+            "cancel": "Cancel",
+            "leave": "Yes, leave the course"
+          },
+          "content-information": "If you leave this course without registering, you will not be able to validate your progress.",
+          "content-instruction": "Would you like to continue?",
+          "title": "Leave and return to Pix?"
+        },
       "quit-results": {
-        "modal": {
+        "send-result-modal": {
           "actions": {
             "cancel-to-share": "Rester pour envoyer",
             "quit-without-sharing": "Quitter sans envoyer"

@@ -1362,7 +1362,16 @@
     },
     "evaluation-results": {
       "quit-results": {
-        "modal": {
+        "leave-without-signup-modal": {
+          "actions": {
+            "cancel": "Cancelar",
+            "leave": "Sí, dejar el curso"
+          },
+          "content-information": "Si abandona este curso sin inscribirse, no podrá validar su progreso.",
+          "content-instruction": "¿Quiere continuar?",
+          "title": "¿Salir y volver a Pix?"
+        },
+        "send-result-modal": {
           "actions": {
             "cancel-to-share": "Permanecer para enviar",
             "quit-without-sharing": "Salir sin enviar"
