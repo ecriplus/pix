@@ -102,6 +102,13 @@ export default class ModuleQab extends ModuleElement {
     this.cardStatuses.clear();
     this.displayedCards = new TrackedArray(this.element.cards);
     this.score = 0;
+
+    this.passageEvents.record({
+      type: 'QAB_CARD_RETRIED',
+      data: {
+        elementId: this.element.id,
+      },
+    });
   }
 
   get shouldDisplayCards() {

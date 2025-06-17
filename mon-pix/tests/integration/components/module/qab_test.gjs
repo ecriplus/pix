@@ -154,7 +154,7 @@ module('Integration | Component | Module | QAB', function (hooks) {
       });
 
       module('when user clicks the retry button', function () {
-        test('should reset the component and display the first card', async function (assert) {
+        test('should reset the component, display the first card and send an event', async function (assert) {
           // given
           const qabElement = _getQabElement();
           const onAnswerStub = sinon.stub();
@@ -170,8 +170,20 @@ module('Integration | Component | Module | QAB', function (hooks) {
           await click(screen.getByRole('button', { name: 'Réessayer' }));
 
           // then
+
+          assert.dom(screen.getByText('Les chiens ne transpirent pas.')).exists();
           assert.dom(screen.getByText('Maintenant, entraînez-vous sur des exemples concrets !')).exists();
           assert.dom(screen.getByText('Les boules de pétanques sont creuses.')).exists();
+
+          const recordQabCardRetriedCall = passageEventRecordStub.getCall(2);
+          assert.deepEqual(recordQabCardRetriedCall.args, [
+            {
+              type: 'QAB_CARD_RETRIED',
+              data: {
+                elementId: qabElement.id,
+              },
+            },
+          ]);
         });
       });
     });
