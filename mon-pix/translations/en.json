@@ -1917,6 +1917,7 @@
       "abstract": "You have mastered '<strong>'{rate, number, ::percent}'</strong><br>' of the competences tested.",
       "abstract-title": "Your result for this customised test",
       "actions": {
+        "back-to-pix": "Leave and return to Pix",
         "continue": "Continue my Pix experience",
         "improve": "Try again",
         "send": "Submit my results"

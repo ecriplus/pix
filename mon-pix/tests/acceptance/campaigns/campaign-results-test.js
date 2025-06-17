@@ -84,7 +84,7 @@ module('Acceptance | Campaigns | Results', function (hooks) {
           const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
 
           // when
-          await click(await screen.findByRole('link', { name: 'Quitter' }));
+          await click(await screen.findByRole('link', { name: 'Quitter et revenir sur Pix' }));
 
           // then
           assert.strictEqual(currentURL(), '/accueil');
@@ -101,7 +101,7 @@ module('Acceptance | Campaigns | Results', function (hooks) {
           const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
 
           // when
-          await click(await screen.findByRole('button', { name: 'Quitter' }));
+          await click(await screen.findByRole('button', { name: 'Quitter et revenir sur Pix' }));
 
           // then
           const modalTitle = await screen.findByRole('heading', {

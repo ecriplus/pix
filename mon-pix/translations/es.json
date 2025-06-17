@@ -1909,6 +1909,7 @@
       "abstract": "Has dominado el '<strong>'{rate, number, ::percent}'</strong><br>'de las competencias evaluadas.",
       "abstract-title": "Tu resultado para este test",
       "actions": {
+        "back-to-pix": "Salir y volver a Pix",
         "continue": "Continúa tu experiencia Pix",
         "improve": "Lo vuelvo a intentar",
         "send": "Envío mis resultados"

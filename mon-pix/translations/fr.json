@@ -1917,6 +1917,7 @@
       "abstract": "Vous maîtrisez '<strong>'{rate, number, ::percent}'</strong><br>'des compétences testées.",
       "abstract-title": "Votre résultat pour ce parcours",
       "actions": {
+        "back-to-pix": "Quitter et revenir sur Pix",
         "continue": "Continuez votre expérience Pix",
         "improve": "Je retente",
         "send": "J'envoie mes résultats"

@@ -20,7 +20,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Quit Resul
       assert.ok(
         screen
           .getByRole('link', {
-            name: 'Quitter',
+            name: t('pages.skill-review.actions.back-to-pix'),
           })
           .getAttribute('href')
           .includes('/'),
@@ -39,7 +39,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Quit Resul
       assert.ok(
         screen
           .getByRole('link', {
-            name: 'Quitter',
+            name: t('pages.skill-review.actions.back-to-pix'),
           })
           .getAttribute('href')
           .includes('/'),
@@ -55,7 +55,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Quit Resul
       );
 
       // then
-      assert.dom(screen.getByRole('button', { name: 'Quitter' })).exists();
+      assert.dom(screen.getByRole('button', { name: t('pages.skill-review.actions.back-to-pix') })).exists();
     });
 
     module('when the quit button is clicked', function () {
@@ -66,7 +66,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Quit Resul
         );
 
         // when
-        await click(screen.getByRole('button', { name: 'Quitter' }));
+        await click(screen.getByRole('button', { name: t('pages.skill-review.actions.back-to-pix') }));
 
         // then
         const modalTitle = await screen.findByRole('heading', {

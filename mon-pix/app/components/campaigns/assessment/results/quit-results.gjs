@@ -23,11 +23,11 @@ export default class QuitResults extends Component {
   <template>
     {{#if this.shouldShareCampaignResults}}
       <button class="evaluation-results-header__back-link" type="button" {{on "click" this.toggleModal}}>
-        {{t "common.actions.quit"}}
+        {{t "pages.skill-review.actions.back-to-pix"}}
       </button>
     {{else}}
       <LinkTo @route="authenticated" class="evaluation-results-header__back-link">
-        {{t "common.actions.quit"}}
+        {{t "pages.skill-review.actions.back-to-pix"}}
       </LinkTo>
     {{/if}}
     <PixModal
