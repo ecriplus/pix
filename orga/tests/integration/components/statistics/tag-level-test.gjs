@@ -9,45 +9,31 @@ module('Integration | Component | Statistics | TagLevel', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   module('#get category', function () {
-    test('when level is lower than 3 it should return novice', async function (assert) {
-      //given
-      const level = 2;
+    const intlKey = 'pages.statistics.level.';
 
-      //when
-      const screen = await render(<template><TagLevel @level={{level}} /></template>);
+    const testData = [
+      { level: 0.1, expectedText: intlKey + 'novice' },
+      { level: 2, expectedText: intlKey + 'novice' },
+      { level: 3.4, expectedText: intlKey + 'independent' },
+      { level: 4, expectedText: intlKey + 'independent' },
+      { level: 4.1, expectedText: intlKey + 'independent' },
+      { level: 5, expectedText: intlKey + 'advanced' },
+      { level: 6, expectedText: intlKey + 'advanced' },
+      { level: 6.5, expectedText: intlKey + 'advanced' },
+      { level: 7, expectedText: intlKey + 'expert' },
+    ];
 
-      //then
-      assert.ok(screen.getByText(t('pages.statistics.level.novice')));
-    });
-    test('when level is lower than 5 it should return independent', async function (assert) {
-      //given
-      const level = 4;
+    testData.forEach((item) => {
+      test(`when level is ${item.level} it should return ${item.expectedText}`, async function (assert) {
+        //given
+        const level = item.level;
 
-      //when
-      const screen = await render(<template><TagLevel @level={{level}} /></template>);
+        //when
+        const screen = await render(<template><TagLevel @level={{level}} /></template>);
 
-      //then
-      assert.ok(screen.getByText(t('pages.statistics.level.independent')));
-    });
-    test('when level is lower than 7 it should return advanced', async function (assert) {
-      //given
-      const level = 6;
-
-      //when
-      const screen = await render(<template><TagLevel @level={{level}} /></template>);
-
-      //then
-      assert.ok(screen.getByText(t('pages.statistics.level.advanced')));
-    });
-    test('when level is upper or equal 7 it should return expert', async function (assert) {
-      //given
-      const level = 7;
-
-      //when
-      const screen = await render(<template><TagLevel @level={{level}} /></template>);
-
-      //then
-      assert.ok(screen.getByText(t('pages.statistics.level.expert')));
+        //then
+        assert.ok(screen.getByText(t(item.expectedText)));
+      });
     });
   });
 });
