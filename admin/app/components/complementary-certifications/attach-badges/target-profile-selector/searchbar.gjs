@@ -1,5 +1,5 @@
-import onEnterAction from '@1024pix/pix-ui/addon/modifiers/on-enter-action';
-import onSpaceAction from '@1024pix/pix-ui/addon/modifiers/on-space-action';
+import onEnterAction from '@1024pix/pix-ui/app/modifiers/on-enter-action';
+import onSpaceAction from '@1024pix/pix-ui/app/modifiers/on-space-action';
 import PixSearchInput from '@1024pix/pix-ui/components/pix-search-input';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
