@@ -130,7 +130,7 @@
     {
       "id": "d50b83d9-4966-4480-be2b-18c5063b5457",
       "type": "transition",
-      "title": "1er texte de transition",
+      "title": "texte de transition 2",
       "components": [
         {
           "type": "element",
@@ -223,7 +223,7 @@
     {
       "id": "ba2c3789-f2bd-46e6-a1ca-38dd47088df8",
       "type": "transition",
-      "title": "2e texte de transition",
+      "title": "texte de transition 3",
       "components": [
         {
           "type": "element",
@@ -403,7 +403,7 @@
     {
       "id": "227201e2-d165-401d-a9b2-2fc6294205db",
       "type": "transition",
-      "title": "3e texte de transition",
+      "title": "texte de transition 4",
       "components": [
         {
           "type": "element",
@@ -464,7 +464,7 @@
     {
       "id": "cea108c3-9bab-406c-be58-dd976b1680bc",
       "type": "transition",
-      "title": "4e texte de transition",
+      "title": "texte de transition 5",
       "components": [
         {
           "type": "element",
