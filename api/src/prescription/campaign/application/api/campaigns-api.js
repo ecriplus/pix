@@ -1,3 +1,5 @@
+import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { DEFAULT_PAGINATION } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { AssessmentCampaignParticipation } from '../../domain/read-models/CampaignParticipation.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { Campaign } from './models/Campaign.js';
@@ -183,3 +185,38 @@ export const getCampaignParticipations = async function ({ campaignId, page }) {
     meta,
   };
 };
+
+/**
+ * @typedef DeleteActiveCampaignPayload
+ * @type {object}
+ * @property {number} organizationId
+ * @property {Array<number>} campaignIds
+ * @property {number} userId
+ * @property {PageDefinition} page
+ */
+
+/**
+ * @function
+ * @name deleteActiveCampaigns
+ *
+ * @param {DeleteActiveCampaignPayload} payload
+ * @returns {Promise<void>}
+ */
+export const deleteActiveCampaigns = withTransaction(
+  async ({
+    userId,
+    organizationId,
+    page = { size: DEFAULT_PAGINATION.PAGE_SIZE, number: DEFAULT_PAGINATION.PAGE },
+  }) => {
+    let campaignIdsToDelete = [];
+    let results;
+    do {
+      results = await usecases.findPaginatedCampaignManagements({ organizationId, page });
+      campaignIdsToDelete = campaignIdsToDelete.concat(
+        results.models.flatMap(({ id, deletedAt }) => (deletedAt ? [] : [id])),
+      );
+      page.number = results.meta.page + 1;
+    } while (results.models.length > 0);
+    await usecases.deleteCampaigns({ userId, organizationId, campaignIds: campaignIdsToDelete });
+  },
+);
