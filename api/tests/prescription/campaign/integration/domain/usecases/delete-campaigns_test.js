@@ -1,4 +1,5 @@
 import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
+import { PIX_ADMIN } from '../../../../../../src/authorization/domain/constants.js';
 import { EventLoggingJob } from '../../../../../../src/identity-access-management/domain/models/jobs/EventLoggingJob.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
 import * as campaignAdministrationRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/campaign-administration-repository.js';
@@ -17,6 +18,7 @@ const {
   buildMembership,
   buildUserRecommendedTraining,
   buildOrganization,
+  buildPixAdminRole,
   buildUser,
   buildTargetProfile,
   buildCampaignFeature,
@@ -37,7 +39,7 @@ describe('Integration | UseCases | delete-campaign', function () {
       clock.restore();
     });
 
-    it('should not throw', async function () {
+    it('should not throw when user is owner of the campaign', async function () {
       // given
       const userId = buildUser().id;
       const organizationId = buildOrganization().id;
@@ -46,15 +48,31 @@ describe('Integration | UseCases | delete-campaign', function () {
       buildCampaignParticipation({ campaignId });
 
       await databaseBuilder.commit();
-      let error;
-      try {
-        await usecases.deleteCampaigns({ userId, organizationId, campaignIds: [campaignId] });
-      } catch (e) {
-        error = e;
-      }
 
       // when & then
-      expect(error).to.be.undefined;
+      await expect(usecases.deleteCampaigns({ userId, organizationId, campaignIds: [campaignId] })).fulfilled;
+    });
+
+    // eslint-disable-next-line mocha/no-setup-in-describe
+    [PIX_ADMIN.ROLES.METIER, PIX_ADMIN.ROLES.SUPPORT, PIX_ADMIN.ROLES.SUPER_ADMIN].forEach((role) => {
+      it(`should not throw when user's PixAdmin role is ${role}`, async function () {
+        // given
+        const adminUserId = buildUser().id;
+        buildPixAdminRole({ userId: adminUserId, role });
+
+        const userId = buildUser().id;
+        const organizationId = buildOrganization().id;
+        buildMembership({ userId, organizationId, organizationRole: 'MEMBER' });
+
+        const campaignId = buildCampaign({ ownerId: userId, organizationId }).id;
+        buildCampaignParticipation({ campaignId });
+
+        await databaseBuilder.commit();
+
+        // when & then
+        await expect(usecases.deleteCampaigns({ userId: adminUserId, organizationId, campaignIds: [campaignId] }))
+          .fulfilled;
+      });
     });
 
     it('should delete campaign for given id', async function () {
