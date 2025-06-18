@@ -66,7 +66,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleRecap', function (ho
         assert.ok(screen.queryByRole('link', { name: t('pages.modulix.recap.goToHomepage') }));
         assert.strictEqual(
           formLink.getAttribute('href'),
-          `https://form-eu.123formbuilder.com/82940/votre-avis-sur-les-modules-de-formation-pix?2850087=${passage.id}`,
+          `https://form-eu.123formbuilder.com/82940/votre-avis-sur-les-modules-de-formation-pix?3285978=${passage.id}`,
         );
       });
     });
