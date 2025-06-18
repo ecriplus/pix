@@ -33,6 +33,10 @@
 
 @include breakpoints.device-is('tablet') {
   .element-qab {
+    &__cards {
+      justify-content: normal;
+    }
+
     &__proposals {
       gap: calc(var(--pix-spacing-10x) * 2);
       max-width: none;
