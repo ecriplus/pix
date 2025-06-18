@@ -72,7 +72,12 @@ export default class CreationForm extends Component {
     <form>
       <section>
         {{#if this.frameworks.length}}
-          <TubesSelection @frameworks={{this.frameworks}} @onChange={{this.onTubesSelectionChange}} />
+          <TubesSelection
+            @frameworks={{this.frameworks}}
+            @onChange={{this.onTubesSelectionChange}}
+            @displaySkillDifficultyAvailability={{true}}
+            @displaySkillDifficultySelection={{false}}
+          />
           <ul class="framework-creation-form__buttons">
             <li>
               <PixButton @triggerAction={{this.onSubmit}} @isDisabled={{if this.selectedTubes.length false true}}>

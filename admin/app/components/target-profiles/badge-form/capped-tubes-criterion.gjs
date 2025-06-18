@@ -22,6 +22,10 @@ export default class CappedTubesCriterion extends Component {
     });
   }
 
+  get displaySkillDifficultySelection() {
+    return this.args.displaySkillDifficultySelection ?? true;
+  }
+
   get areas() {
     return sortBy(this.areasList, 'code');
   }
@@ -113,6 +117,7 @@ export default class CappedTubesCriterion extends Component {
           @uncheckTube={{this.uncheckTube}}
           @setLevelTube={{this.setLevelTube}}
           @displayDeviceCompatibility={{true}}
+          @displaySkillDifficultySelection={{this.displaySkillDifficultySelection}}
         />
       </main>
     </section>

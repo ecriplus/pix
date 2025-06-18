@@ -19,6 +19,7 @@ import Competence from './competence';
               @tubeLevels={{@tubeLevels}}
               @displayDeviceCompatibility={{@displayDeviceCompatibility}}
               @displaySkillDifficultyAvailability={{@displaySkillDifficultyAvailability}}
+              @displaySkillDifficultySelection={{@displaySkillDifficultySelection}}
             />
           {{/each}}
         </:content>

@@ -262,7 +262,11 @@ export default class Badge extends Component {
             </h2>
             {{#each this.cappedTubesCriteria as |criterion|}}
               <div class="card">
-                <CappedTubesCriterion @criterion={{criterion}} @targetProfile={{@targetProfile}} />
+                <CappedTubesCriterion
+                  @criterion={{criterion}}
+                  @targetProfile={{@targetProfile}}
+                  @displaySkillDifficultySelection={{false}}
+                />
               </div>
             {{/each}}
           {{/if}}

@@ -102,6 +102,7 @@ export default class Competence extends Component {
                         @tubeLevels={{@tubeLevels}}
                         @displayDeviceCompatibility={{@displayDeviceCompatibility}}
                         @displaySkillDifficultyAvailability={{@displaySkillDifficultyAvailability}}
+                        @displaySkillDifficultySelection={{@displaySkillDifficultySelection}}
                       />
                     </tr>
                   {{/each}}
