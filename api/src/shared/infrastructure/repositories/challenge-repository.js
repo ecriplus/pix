@@ -118,14 +118,14 @@ export async function findActiveFlashCompatible({
   locale,
   successProbabilityThreshold = config.features.successProbabilityThreshold,
   accessibilityAdjustmentNeeded = false,
-  complementaryCertificationId,
+  complementaryCertificationKey,
 } = {}) {
   _assertLocaleIsDefined(locale);
   const cacheKey = `findActiveFlashCompatible({ locale: ${locale}, accessibilityAdjustmentNeeded: ${accessibilityAdjustmentNeeded} })`;
   let challengeDtos;
 
-  if (complementaryCertificationId) {
-    challengeDtos = await _findChallengesForComplementaryCertification({ complementaryCertificationId, cacheKey });
+  if (complementaryCertificationKey) {
+    challengeDtos = await _findChallengesForComplementaryCertification({ complementaryCertificationKey, cacheKey });
   } else {
     challengeDtos = await _findChallengesForCoreCertification({ locale, accessibilityAdjustmentNeeded, cacheKey });
   }
@@ -135,10 +135,10 @@ export async function findActiveFlashCompatible({
   );
 }
 
-async function _findChallengesForComplementaryCertification({ complementaryCertificationId, cacheKey }) {
+async function _findChallengesForComplementaryCertification({ complementaryCertificationKey, cacheKey }) {
   const complementaryCertificationChallenges = await knex
     .from('certification-frameworks-challenges')
-    .where({ complementaryCertificationId });
+    .where({ complementaryCertificationKey });
 
   const complementaryCertificationChallengesIds = complementaryCertificationChallenges.map(
     ({ challengeId }) => challengeId,

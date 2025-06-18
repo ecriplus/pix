@@ -34,7 +34,7 @@ describe('Integration | Scripts | Certification | target-profile-to-calibrated-f
     const frameworksChallenges = await knex('certification-frameworks-challenges');
     expect(frameworksChallenges).to.have.length(1);
     expect(frameworksChallenges[0].challengeId).to.equal(learningContent.challenges[0].id);
-    expect(frameworksChallenges[0].complementaryCertificationId).to.equal(complementaryCertification.id);
+    expect(frameworksChallenges[0].complementaryCertificationKey).to.equal(complementaryCertification.key);
     expect(frameworksChallenges[0].createdAt).to.be.instanceOf(Date);
     expect(frameworksChallenges[0].alpha).to.be.null;
     expect(frameworksChallenges[0].delta).to.be.null;
