@@ -1,3 +1,4 @@
+import { PIX_ADMIN } from '../../../../../../src/authorization/domain/constants.js';
 import { Campaign } from '../../../../../../src/prescription/campaign/domain/models/Campaign.js';
 import { CampaignsDestructor } from '../../../../../../src/prescription/campaign/domain/models/CampaignsDestructor.js';
 import { OrganizationMembership } from '../../../../../../src/prescription/campaign/domain/read-models/OrganizationMembership.js';
@@ -6,6 +7,22 @@ import { ObjectValidationError } from '../../../../../../src/shared/domain/error
 import { expect } from '../../../../../test-helper.js';
 
 describe('CampaignsDestructor', function () {
+  describe('when user has an allowed PixAdmin Role', function () {
+    // eslint-disable-next-line mocha/no-setup-in-describe
+    [PIX_ADMIN.ROLES.SUPER_ADMIN, PIX_ADMIN.ROLES.SUPPORT, PIX_ADMIN.ROLES.METIER].forEach((role) => {
+      it(`should not throws for ${role} role`, function () {
+        expect(
+          () =>
+            new CampaignsDestructor({
+              userId: 1,
+              campaignsToDelete: [new Campaign({ ownerId: 2 })],
+              pixAdminRole: role,
+            }),
+        ).not.throws();
+      });
+    });
+  });
+
   describe('when datas are invalid', function () {
     it('throws an error when some campaigns does not belong to organization', function () {
       try {
@@ -25,6 +42,19 @@ describe('CampaignsDestructor', function () {
           membership: new OrganizationMembership({ isAdmin: false }),
           userId: 1,
           campaignsToDelete: [new Campaign({ ownerId: 2 })],
+        });
+      } catch (error) {
+        expect(error).to.be.instanceOf(ObjectValidationError);
+        expect(error.message).to.equal('User does not have right to delete some campaigns.');
+      }
+    });
+
+    it('throws an error when user is CERTIF AdminMember', function () {
+      try {
+        new CampaignsDestructor({
+          userId: 3,
+          campaignsToDelete: [new Campaign({ ownerId: 2 })],
+          adminMemberRole: PIX_ADMIN.ROLES.CERTIF,
         });
       } catch (error) {
         expect(error).to.be.instanceOf(ObjectValidationError);

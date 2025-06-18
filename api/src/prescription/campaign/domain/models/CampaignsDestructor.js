@@ -1,3 +1,4 @@
+import { PIX_ADMIN } from '../../../../authorization/domain/constants.js';
 import { ObjectValidationError } from '../../../../shared/domain/errors.js';
 
 /**
@@ -12,6 +13,7 @@ class CampaignsDestructor {
   #userId;
   #organizationId;
   #membership;
+  #pixAdminRole;
 
   /**
    * @param {Object} params
@@ -21,12 +23,13 @@ class CampaignsDestructor {
    * @param {number} params.organizationId - organizationId to check if campaigns belongs to given organizationId
    * @param {OrganizationMembership} params.membership - class with property isAdmin to check is user is admin in organization or not
    */
-  constructor({ campaignsToDelete, campaignParticipationsToDelete, userId, organizationId, membership }) {
+  constructor({ campaignsToDelete, campaignParticipationsToDelete, userId, organizationId, membership, pixAdminRole }) {
     this.#campaignsToDelete = campaignsToDelete;
     this.#campaignParticipationsToDelete = campaignParticipationsToDelete;
     this.#userId = userId;
     this.#organizationId = organizationId;
     this.#membership = membership;
+    this.#pixAdminRole = pixAdminRole;
     this.#validate();
   }
 
@@ -35,10 +38,15 @@ class CampaignsDestructor {
     const isAllCampaignsBelongsToOrganization = this.#campaignsToDelete.every(
       (campaign) => campaign.organizationId === this.#organizationId,
     );
+    const isAllowedPixAdminRole = [
+      PIX_ADMIN.ROLES.SUPER_ADMIN,
+      PIX_ADMIN.ROLES.SUPPORT,
+      PIX_ADMIN.ROLES.METIER,
+    ].includes(this.#pixAdminRole);
 
     if (!isAllCampaignsBelongsToOrganization)
       throw new ObjectValidationError('Some campaigns does not belong to organization.');
-    if (!this.#membership.isAdmin && !isUserOwnerOfAllCampaigns)
+    if (!this.#membership?.isAdmin && !isUserOwnerOfAllCampaigns && !isAllowedPixAdminRole)
       throw new ObjectValidationError('User does not have right to delete some campaigns.');
   }
 
