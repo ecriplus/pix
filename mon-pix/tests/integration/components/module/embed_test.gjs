@@ -313,6 +313,39 @@ module('Integration | Component | Module | Embed', function (hooks) {
             assert.ok(true);
           });
         });
+
+        module('when message data has rebootable=false', function () {
+          test('should not display reset button', async function (assert) {
+            // given
+            const embed = {
+              id: 'id',
+              title: 'Simulateur',
+              isCompletionRequired: true,
+              url: 'https://example.org',
+              height: 800,
+            };
+            const passageId = '5729837548';
+            const screen = await render(
+              <template><ModulixEmbed @embed={{embed}} @passageId={{passageId}} /></template>,
+            );
+
+            // when
+            const iframe = screen.getByTitle('Simulateur');
+            const event = new MessageEvent('message', {
+              data: { type: 'init', from: 'pix', rebootable: false },
+              origin: 'https://epreuves.pix.fr',
+              source: iframe.contentWindow,
+            });
+            window.dispatchEvent(event);
+
+            await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
+
+            // then
+            assert
+              .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.embed.reset.ariaLabel') }))
+              .doesNotExist();
+          });
+        });
       });
 
       module('when message is not from pix', function () {
