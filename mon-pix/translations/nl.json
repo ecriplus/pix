@@ -1881,7 +1881,7 @@
       "actions": {
         "login": "Inloggen",
         "submit": "Registreren",
-        "sign-up-on-Pix": "Inschrijven bij Pix"
+        "sign-up-on-pix": "Inschrijven bij Pix"
       },
       "errors": {
         "invalid-locale-format": "Uw locale \"{invalidLocale}\" heeft de verkeerde indeling.",

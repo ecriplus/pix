@@ -1878,7 +1878,7 @@
       "actions": {
         "login": "Iniciar sesión",
         "submit": "Crear cuenta",
-        "sign-up-on-Pix": "Crear cuenta en Pix"
+        "sign-up-on-pix": "Crear cuenta en Pix"
       },
       "errors": {
         "invalid-locale-format": "Tu configuración local «{invalidLocale}» tiene un formato incorrecto.",

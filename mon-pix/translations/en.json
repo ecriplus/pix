@@ -1885,7 +1885,7 @@
     "sign-up": {
       "actions": {
         "login": "Log in",
-        "sign-up-on-Pix": "Sign up for Pix",
+        "sign-up-on-pix": "Sign up for Pix",
         "submit": "Sign up"
       },
       "errors": {
