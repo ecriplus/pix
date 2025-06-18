@@ -3,22 +3,25 @@ import { TubeResultForKnowledgeElementSnapshots } from './TubeResultForKnowledge
 
 class CampaignResultLevelsPerTubesAndCompetences {
   #tubesWithLevels;
+  #competencesWithLevels;
 
-  constructor({ campaignId, learningContent, knowledgeElementsByParticipation } = {}) {
+  constructor({ campaignId, learningContent } = {}) {
     this.id = campaignId;
     this.learningContent = learningContent;
-    this.knowledgeElementSnapshots = Object.values(knowledgeElementsByParticipation);
-    this.#tubesWithLevels = this.#getTubesWithLevels(learningContent.tubes);
-  }
 
-  #getTubesWithLevels(tubes) {
-    return tubes.map((tube) => {
+    this.#tubesWithLevels = learningContent.tubes.map((tube) => {
       return new TubeResultForKnowledgeElementSnapshots({
         tube,
         competence: this.learningContent.competences.find((competence) => competence.id === tube.competenceId),
-        knowledgeElementSnapshots: this.knowledgeElementSnapshots,
       });
     });
+
+    this.#competencesWithLevels = this.learningContent.competences.map(
+      (competence) =>
+        new CompetenceResultForKnowledgeElementSnapshots({
+          competence,
+        }),
+    );
   }
 
   get levelsPerTube() {
@@ -26,12 +29,7 @@ class CampaignResultLevelsPerTubesAndCompetences {
   }
 
   get levelsPerCompetence() {
-    return this.learningContent.competences.map((competence) => {
-      return new CompetenceResultForKnowledgeElementSnapshots({
-        competence,
-        knowledgeElementSnapshots: this.knowledgeElementSnapshots,
-      });
-    });
+    return this.#competencesWithLevels;
   }
 
   get maxReachableLevel() {
@@ -40,6 +38,15 @@ class CampaignResultLevelsPerTubesAndCompetences {
 
   get meanReachedLevel() {
     return averageBy(this.levelsPerTube, 'meanLevel');
+  }
+
+  addKnowledgeElementSnapshots(knowledgeElementSnapshots) {
+    this.#competencesWithLevels.forEach((competenceResult) =>
+      competenceResult.addKnowledgeElementSnapshots(Object.values(knowledgeElementSnapshots)),
+    );
+    this.#tubesWithLevels.forEach((tubesWithLevel) =>
+      tubesWithLevel.addKnowledgeElementSnapshots(Object.values(knowledgeElementSnapshots)),
+    );
   }
 }
 

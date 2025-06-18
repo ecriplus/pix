@@ -14,11 +14,12 @@ const getResultLevelsPerTubesAndCompetences = async ({
 
   const learningContent = await learningContentRepository.findByCampaignId(campaignId, locale);
 
-  return new CampaignResultLevelsPerTubesAndCompetences({
+  const campaignResult = new CampaignResultLevelsPerTubesAndCompetences({
     campaignId,
     learningContent,
-    knowledgeElementsByParticipation,
   });
+  campaignResult.addKnowledgeElementSnapshots(knowledgeElementsByParticipation);
+  return campaignResult;
 };
 
 export { getResultLevelsPerTubesAndCompetences };

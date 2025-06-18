@@ -92,19 +92,17 @@ class CampaignReport {
   }
 
   setCoverRate(campaignResultLevelsPerTubesAndCompetences) {
-    this.tubes = campaignResultLevelsPerTubesAndCompetences.levelsPerTube.map(
-      ({ id, competenceId, competenceName, title, description, meanLevel, maxLevel }) => {
-        return new TubeCoverage({
-          id,
-          competenceId,
-          competenceName,
-          title,
-          description,
-          maxLevel,
-          reachedLevel: meanLevel,
-        });
-      },
-    );
+    this.tubes = campaignResultLevelsPerTubesAndCompetences.levelsPerTube.map((tube) => {
+      return new TubeCoverage({
+        id: tube.id,
+        competenceId: tube.competenceId,
+        competenceName: tube.competenceName,
+        title: tube.title,
+        description: tube.description,
+        maxLevel: tube.maxLevel,
+        reachedLevel: tube.meanLevel,
+      });
+    });
   }
 
   /**

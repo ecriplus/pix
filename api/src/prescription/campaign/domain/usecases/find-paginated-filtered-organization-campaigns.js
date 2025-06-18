@@ -1,4 +1,7 @@
+import _ from 'lodash';
+
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { CHUNK_SIZE_CAMPAIGN_RESULT_PROCESSING } from '../../../../shared/infrastructure/constants.js';
 import { CampaignResultLevelsPerTubesAndCompetences } from '../models/CampaignResultLevelsPerTubesAndCompetences.js';
 
 const findPaginatedFilteredOrganizationCampaigns = withTransaction(async function ({
@@ -45,15 +48,19 @@ async function computeCoverRate(
   { campaignParticipationRepository, knowledgeElementSnapshotRepository, learningContentRepository },
 ) {
   const campaignParticipationIds = await campaignParticipationRepository.getSharedParticipationIds(campaignReportId);
-
-  const knowledgeElementsByParticipation =
-    await knowledgeElementSnapshotRepository.findByCampaignParticipationIds(campaignParticipationIds);
+  const campaignParticipationIdsChunks = _.chunk(campaignParticipationIds, CHUNK_SIZE_CAMPAIGN_RESULT_PROCESSING);
 
   const learningContent = await learningContentRepository.findByCampaignId(campaignReportId, locale);
   const campaignResultLevelPerTubesAndCompetences = new CampaignResultLevelsPerTubesAndCompetences({
     campaignId: campaignReportId,
     learningContent,
-    knowledgeElementsByParticipation,
   });
+
+  for (const chunk of campaignParticipationIdsChunks) {
+    const knowledgeElementsByParticipation =
+      await knowledgeElementSnapshotRepository.findByCampaignParticipationIds(chunk);
+    campaignResultLevelPerTubesAndCompetences.addKnowledgeElementSnapshots(knowledgeElementsByParticipation);
+  }
+
   return campaignResultLevelPerTubesAndCompetences;
 }

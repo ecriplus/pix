@@ -82,9 +82,9 @@ describe('Unit | Domain | Models | TubeResultForKnowledgeElementSnapshots', func
         const tubeResult = new TubeResultForKnowledgeElementSnapshots({
           tube,
           competence,
-          knowledgeElementSnapshots,
         });
 
+        tubeResult.addKnowledgeElementSnapshots(knowledgeElementSnapshots);
         //then
         expect(tubeResult.id).equal(tube.id);
         expect(tubeResult.competenceId).equal(tube.competenceId);
@@ -103,7 +103,6 @@ describe('Unit | Domain | Models | TubeResultForKnowledgeElementSnapshots', func
         const tubeResult = new TubeResultForKnowledgeElementSnapshots({
           tube,
           competence,
-          knowledgeElementSnapshots: [],
         });
 
         //then
