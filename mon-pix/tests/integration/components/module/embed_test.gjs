@@ -470,6 +470,38 @@ module('Integration | Component | Module | Embed', function (hooks) {
         .dom(await screen.queryByRole('button', { name: t('pages.modulix.buttons.embed.start.ariaLabel') }))
         .doesNotExist();
     });
+  });
+
+  module('when embed send its height', function () {
+    test('should set embed with value of height attribute', async function (assert) {
+      // given
+      const embed = {
+        id: 'id',
+        title: 'Simulateur',
+        isCompletionRequired: true,
+        url: 'https://example.org',
+        height: 800,
+      };
+      const passageId = '5729837548';
+      const screen = await render(<template><ModulixEmbed @embed={{embed}} @passageId={{passageId}} /></template>);
+      await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      // when
+      const iframe = screen.getByTitle('Simulateur');
+      const event = new MessageEvent('message', {
+        data: { type: 'height', from: 'pix', height: 400 },
+        origin: 'https://epreuves.pix.fr',
+        source: iframe.contentWindow,
+      });
+
+      window.dispatchEvent(event);
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      // then
+      assert.strictEqual(iframe.style.getPropertyValue('height'), '400px');
+    });
+  });
 
   module('when user clicks on reset button', function () {
     test('should focus on the iframe', async function (assert) {

@@ -14,6 +14,7 @@ export default class ModulixEmbed extends ModuleElement {
     super(...args);
 
     this.messageHandler = this._receiveEmbedMessage.bind(this);
+    this.embedHeight = this.args.embed.height;
     window.addEventListener('message', this.messageHandler);
   }
 
@@ -29,7 +30,9 @@ export default class ModulixEmbed extends ModuleElement {
   @tracked
   isSimulatorRebootable = true;
 
-  embedHeight = this.args.embed.height;
+  @tracked
+  embedHeight;
+
   iframe;
   messageHandler = null;
 
@@ -72,6 +75,10 @@ export default class ModulixEmbed extends ModuleElement {
     const message = this._getMessageFromEventData(event);
 
     if (message?.from !== 'pix') return;
+
+    if (message.type === 'height') {
+      this.embedHeight = message.height;
+    }
 
     if (message.type === 'init') {
       if (message.enableFetchFromApi) {
