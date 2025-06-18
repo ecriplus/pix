@@ -227,7 +227,7 @@ module('Integration | Component | Module | Embed', function (hooks) {
             window.dispatchEvent(event);
 
             // then
-            sinon.assert.calledWith(forwardStub, sinon.match.object, requestsPort, `/api/passages/${passageId}/embed/`);
+            sinon.assert.calledWith(forwardStub, sinon.match.object, requestsPort, passageId, 'passage');
             assert.ok(true);
           });
 
