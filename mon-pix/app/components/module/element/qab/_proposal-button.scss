@@ -28,7 +28,7 @@
     --qab-proposal-border-color: var(--pix-primary-100);
 
     background: var(--pix-neutral-20);
-    cursor: not-allowed;
+    cursor: wait;
   }
 
   &--selected.qab-proposal-button--success {
