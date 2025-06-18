@@ -56,8 +56,9 @@ describe('Unit | Serializer | JSONAPI | complementary-certification-serializer',
           type: 'complementary-certifications',
           id: '11',
           attributes: {
-            label: 'Pix+Edu',
-            'has-external-jury': true,
+            key: complementaryCertificationTargetProfileHistory.key,
+            label: complementaryCertificationTargetProfileHistory.label,
+            'has-external-jury': complementaryCertificationTargetProfileHistory.hasExternalJury,
             'target-profiles-history': [
               {
                 id: 999,

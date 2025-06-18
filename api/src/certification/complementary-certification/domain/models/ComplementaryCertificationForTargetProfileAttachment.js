@@ -1,6 +1,7 @@
 class ComplementaryCertificationForTargetProfileAttachment {
-  constructor({ id, label, hasExternalJury }) {
+  constructor({ id, key, label, hasExternalJury }) {
     this.id = id;
+    this.key = key;
     this.label = label;
     this.hasExternalJury = hasExternalJury;
   }

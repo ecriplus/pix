@@ -6,7 +6,7 @@ import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { module, test } from 'qunit';
 
-module('Acceptance | Complementary certifications | Complementary certification | item ', function (hooks) {
+module('Acceptance | Complementary certifications | Complementary certification | Item', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
@@ -27,7 +27,7 @@ module('Acceptance | Complementary certifications | Complementary certification 
       name: t('components.complementary-certifications.item.navigation.aria-label'),
     });
     assert.ok(
-      within(navigation).getByRole('link', { name: t('components.complementary-certifications.item.framework') }),
+      within(navigation).getByRole('link', { name: t('components.complementary-certifications.item.framework.tab') }),
     );
     assert.ok(
       within(navigation).getByRole('link', { name: t('components.complementary-certifications.item.target-profile') }),
