@@ -1,5 +1,30 @@
 # Pix Changelog
 
+# [5.137.0](https://github.com/1024pix/pix/compare/v5.136.1...v5.137.0) (2025-06-18)
+
+### :rocket: Amélioration
+
+- [#12499](https://github.com/1024pix/pix/pull/12499) Ajouter un bouton d'inscription à la fin d'un parcours anonyme (PIX-18016) 
+- [#12465](https://github.com/1024pix/pix/pull/12465) Enlever les titres de grain de l'interface de Modulix (PIX-17911) 
+- [#12562](https://github.com/1024pix/pix/pull/12562) Enregistrer les traces d'apprentissages pour les Questions A/B (QAB) (PIX-18001) 
+- [#12550](https://github.com/1024pix/pix/pull/12550) Générer un token de vérification pour les utilisateurs anonymes (PIX-18021) 
+- [#12541](https://github.com/1024pix/pix/pull/12541) Remplir l'onglet profil cible dans la page des complémentaires sur Pix Admin (PIX-18187). 
+- [#12558](https://github.com/1024pix/pix/pull/12558) Retourner les participations de campagnes par page (PIX-18218). 
+
+### :bug: Correction
+
+- [#12578](https://github.com/1024pix/pix/pull/12578) Corriger des clés de traduction du bouton "s'inscrire" en nl, es, en (PIX-18326) 
+
+### :building_construction: Tech
+
+- [#12529](https://github.com/1024pix/pix/pull/12529) :truck: Déplace la route `generate username with temporary password` vers `src/prescription/` (pix-17853) 
+- [#12544](https://github.com/1024pix/pix/pull/12544) Ajout d'une section "Process de traduction" sur la documentation 
+- [#12536](https://github.com/1024pix/pix/pull/12536) Supprimer le feature toggle isNewAccountRecoveryEnabled (PIX-17518) 
+
+### :arrow_up: Montée de version
+
+- [#12576](https://github.com/1024pix/pix/pull/12576) Update nginx Docker tag to v1.27.5
+
 ## [5.136.1](https://github.com/1024pix/pix/compare/v5.136.0...v5.136.1) (2025-06-17)
 
 ### :bug: Correction
