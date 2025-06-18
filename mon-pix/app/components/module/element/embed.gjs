@@ -87,6 +87,10 @@ export default class ModulixEmbed extends ModuleElement {
       if (!message.rebootable) {
         this.isSimulatorRebootable = false;
       }
+
+      if (message.autoLaunch) {
+        this.startSimulator();
+      }
     }
 
     if (!this.args.embed.isCompletionRequired) return;
