@@ -48,7 +48,31 @@ export default class EmbedApiProxyService extends Service {
     }
   }
 
+  /**
+   * @param {string} url
+   * @param {string} urlPrefix
+   */
+  buildURL(url, urlPrefix) {
+    url = url.trim();
+    if (/^https?:\/\//.test(url)) throw new Error('invalid URL');
+
+    url = urlPrefix + trimLeadingSlashes(url);
+
+    const { pathname: urlPath } = new URL(url, window.location);
+    const { pathname: urlPrefixPath } = new URL(urlPrefix, window.location);
+    if (!urlPath.startsWith(urlPrefixPath)) throw new Error('invalid URL');
+
+    return url;
+  }
+
   get headers() {
     return getOwner(this).lookup('adapter:application').headers;
   }
+}
+
+function trimLeadingSlashes(path) {
+  while (path.startsWith('/')) {
+    path = path.slice(1);
+  }
+  return path;
 }

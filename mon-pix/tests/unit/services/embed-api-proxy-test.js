@@ -151,4 +151,74 @@ module('Unit | Services | embed api proxy', function (hooks) {
       });
     });
   });
+
+  module('#buildURL', function () {
+    test('it should prefix URL with prefix', function (assert) {
+      // given
+      const url = 'chat/456';
+      const urlPrefix = '/api/passages/123/embed/';
+
+      // when
+      const actualURL = embedApiProxy.buildURL(url, urlPrefix);
+
+      // then
+      assert.strictEqual(actualURL, '/api/passages/123/embed/chat/456');
+    });
+
+    module('when URL has leading slashes', function () {
+      test('it should trim leading slashes', function (assert) {
+        // given
+        const url = '///chat/456';
+        const urlPrefix = '/api/passages/123/embed/';
+
+        // when
+        const actualURL = embedApiProxy.buildURL(url, urlPrefix);
+
+        // then
+        assert.strictEqual(actualURL, '/api/passages/123/embed/chat/456');
+      });
+    });
+
+    module('when URL prefix includes host', function () {
+      test('it should keep host', function (assert) {
+        // given
+        const url = 'chat/456';
+        const urlPrefix = 'https://api.example.com/api/passages/123/embed/';
+
+        // when
+        const actualURL = embedApiProxy.buildURL(url, urlPrefix);
+
+        // then
+        assert.strictEqual(actualURL, 'https://api.example.com/api/passages/123/embed/chat/456');
+      });
+    });
+
+    module('when URL goes out of prefix', function () {
+      test('it should throw an error', function (assert) {
+        // given
+        const url = '../chat/456';
+        const urlPrefix = '/api/passages/123/embed/';
+
+        // when
+        const call = () => embedApiProxy.buildURL(url, urlPrefix);
+
+        // then
+        assert.throws(call, new Error('invalid URL'));
+      });
+    });
+
+    module('when URL includes host', function () {
+      test('it should throw an error', function (assert) {
+        // given
+        const url = 'https://example.com/should/not/work';
+        const urlPrefix = '/api/passages/123/embed/';
+
+        // when
+        const call = () => embedApiProxy.buildURL(url, urlPrefix);
+
+        // then
+        assert.throws(call, new Error('invalid URL'));
+      });
+    });
+  });
 });
