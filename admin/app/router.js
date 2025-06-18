@@ -108,15 +108,11 @@ Router.map(function () {
 
     this.route('complementary-certifications', function () {
       this.route('list');
-      this.route('item', { path: '/item/:complementary_certification_id' }, function () {
+      this.route('item', { path: '/:complementary_certification_id' }, function () {
         this.route('framework', function () {
           this.route('new');
         });
-        this.route('target-profile');
-      });
-      this.route('complementary-certification', { path: '/:complementary_certification_id' }, function () {
-        this.route('details');
-        this.route('attach-target-profile', function () {
+        this.route('target-profile', function () {
           this.route('update', { path: '/:target_profile_id' });
           this.route('new');
         });

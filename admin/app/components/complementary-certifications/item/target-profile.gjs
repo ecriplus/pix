@@ -3,9 +3,9 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 
-import BadgesList from '../target-profiles/badges-list';
-import History from '../target-profiles/history';
-import Information from '../target-profiles/information';
+import BadgesList from './target-profile/badges-list';
+import History from './target-profile/history';
+import Information from './target-profile/information';
 
 export default class TargetProfile extends Component {
   @service router;
@@ -21,7 +21,8 @@ export default class TargetProfile extends Component {
   }
 
   async #onMount() {
-    const currentComplementaryCertificationId = this.router.currentRoute.parent.params.complementary_certification_id;
+    const currentComplementaryCertificationId =
+      this.router.currentRoute.parent.parent.params.complementary_certification_id;
     this.complementaryCertification = await this.store.peekRecord(
       'complementary-certification',
       currentComplementaryCertificationId,

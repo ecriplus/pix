@@ -69,7 +69,7 @@ export default class AttachBadges extends Component {
 
   @action
   async onCancel() {
-    this.router.transitionTo('authenticated.complementary-certifications.complementary-certification.details');
+    this.router.transitionTo('authenticated.complementary-certifications.item.target-profile');
   }
 
   @action
@@ -109,7 +109,7 @@ export default class AttachBadges extends Component {
         },
       });
 
-      this.router.transitionTo('authenticated.complementary-certifications.complementary-certification.details');
+      this.router.transitionTo('authenticated.complementary-certifications.item.target-profile');
 
       this.pixToast.sendSuccessNotification({
         message: `Profil cible rattaché à la certification ${complementaryCertification.label} mis à jour avec succès !`,
