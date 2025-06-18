@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-import * as complementaryCertificationCourseResultRepository from '../../../../lib/infrastructure/repositories/complementary-certification-course-result-repository.js';
-import { ComplementaryCertificationCourseResult } from '../../../../src/certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../test-helper.js';
+import * as complementaryCertificationCourseResultRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/complementary-certification-course-result-repository.js';
+import { ComplementaryCertificationCourseResult } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | complementary-certification-courses-result-repository', function () {
   describe('#save', function () {
