@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { UnknownCampaignId } from '../../../../../../src/prescription/campaign/domain/errors.js';
 import { Campaign } from '../../../../../../src/prescription/campaign/domain/models/Campaign.js';
 import * as campaignAdministrationRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/campaign-administration-repository.js';
+import { deleteExternalIdLabelFromCampaigns } from '../../../../../../src/prescription/campaign/infrastructure/repositories/campaign-administration-repository.js';
 import { CampaignExternalIdTypes, CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants.js';
 import { catchErr, databaseBuilder, expect, knex, mockLearningContent, sinon } from '../../../../../test-helper.js';
@@ -1034,6 +1035,91 @@ describe('Integration | Repository | Campaign Administration', function () {
 
       // when
       expect(call).to.not.throw();
+    });
+  });
+
+  describe(deleteExternalIdLabelFromCampaigns.name, function () {
+    let campaignWithJustTheExternalIdFeatureId;
+    let campaignWithExternalIdFeatureAndAnOtherOneId;
+    let campaignWithTheExternalFeatureIdNotPassedInTheFunction;
+    let externalIdFeatureId;
+    let otherFeatureId;
+
+    beforeEach(async function () {
+      const { buildFeature, buildCampaign, buildCampaignFeature } = databaseBuilder.factory;
+
+      // build the features
+      externalIdFeatureId = buildFeature({ key: CAMPAIGN_FEATURES.EXTERNAL_ID.key }).id;
+      otherFeatureId = buildFeature({ key: 'NOT_EXTERNAL_ID' }).id;
+
+      // build three campaigns
+      campaignWithJustTheExternalIdFeatureId = buildCampaign().id;
+      campaignWithExternalIdFeatureAndAnOtherOneId = buildCampaign().id;
+      campaignWithTheExternalFeatureIdNotPassedInTheFunction = buildCampaign().id;
+
+      const params = { type: 'STRING', label: 'externalIdLabel' };
+
+      // assign the features to the campaigns
+      buildCampaignFeature({
+        featureId: externalIdFeatureId,
+        params,
+        campaignId: campaignWithJustTheExternalIdFeatureId,
+      });
+      buildCampaignFeature({
+        featureId: externalIdFeatureId,
+        params,
+        campaignId: campaignWithExternalIdFeatureAndAnOtherOneId,
+      });
+      buildCampaignFeature({
+        featureId: externalIdFeatureId,
+        params,
+        campaignId: campaignWithTheExternalFeatureIdNotPassedInTheFunction,
+      });
+
+      buildCampaignFeature({
+        featureId: otherFeatureId,
+        params,
+        campaignId: campaignWithExternalIdFeatureAndAnOtherOneId,
+      });
+
+      await databaseBuilder.commit();
+    });
+
+    it('should delete the proper campaign feature param', async function () {
+      //when
+      await deleteExternalIdLabelFromCampaigns([
+        campaignWithJustTheExternalIdFeatureId,
+        campaignWithExternalIdFeatureAndAnOtherOneId,
+      ]);
+
+      // then
+      const campaignFeatures = await knex('campaign-features');
+
+      expect(campaignFeatures.length).to.equal(4);
+
+      const campaignFeaturesThatShouldHaveBeenUpdated = campaignFeatures.filter(
+        (campaignFeature) =>
+          campaignFeature.featureId === externalIdFeatureId &&
+          (campaignFeature.campaignId === campaignWithJustTheExternalIdFeatureId ||
+            campaignFeature.campaignId === campaignWithExternalIdFeatureAndAnOtherOneId),
+      );
+
+      expect(campaignFeaturesThatShouldHaveBeenUpdated).to.have.lengthOf(2);
+
+      campaignFeaturesThatShouldHaveBeenUpdated.forEach((campaignFeature) => {
+        expect(campaignFeature.params).to.not.have.property('label');
+      });
+
+      const campaignFeatureThatShouldBeUntouched = campaignFeatures.filter(
+        (campaignFeature) =>
+          campaignFeature.campaignId === campaignWithTheExternalFeatureIdNotPassedInTheFunction ||
+          campaignFeature.featureId === otherFeatureId,
+      );
+      expect(campaignFeatureThatShouldBeUntouched).to.have.lengthOf(2);
+
+      campaignFeatureThatShouldBeUntouched.forEach((campaignFeature) => {
+        expect(campaignFeature.params).to.have.property('label', 'externalIdLabel');
+      });
     });
   });
 });
