@@ -1,4 +1,5 @@
 import { ComplementaryCertification } from '../../../certification/complementary-certification/domain/models/ComplementaryCertification.js';
+import { PartnerCertificationScoring } from '../../../certification/evaluation/domain/models/PartnerCertificationScoring.js';
 import { AssessmentSimulator } from '../../../certification/flash-certification/domain/models/AssessmentSimulator.js';
 import { FlashAssessmentAlgorithm } from '../../../certification/flash-certification/domain/models/FlashAssessmentAlgorithm.js';
 import { CertificationAttestation } from '../../../certification/results/domain/models/CertificationAttestation.js';
@@ -73,9 +74,6 @@ import { Competence } from './Competence.js';
 import { CompetenceResult } from './CompetenceResult.js';
 import { CompetenceTree } from './CompetenceTree.js';
 import { ComplementaryCertificationHabilitation } from './ComplementaryCertificationHabilitation.js';
-import { ComplementaryCertificationScoringCriteria } from './ComplementaryCertificationScoringCriteria.js';
-import { ComplementaryCertificationScoringWithComplementaryReferential } from './ComplementaryCertificationScoringWithComplementaryReferential.js';
-import { ComplementaryCertificationScoringWithoutComplementaryReferential } from './ComplementaryCertificationScoringWithoutComplementaryReferential.js';
 import { Correction } from './Correction.js';
 import { Course } from './Course.js';
 import { EmailingAttempt } from './EmailingAttempt.js';
@@ -88,7 +86,6 @@ import { AreaForAdmin, CompetenceForAdmin, ThematicForAdmin, TubeForAdmin } from
 import { Membership } from './Membership.js';
 import { OrganizationMemberIdentity } from './OrganizationMemberIdentity.js';
 import { OrganizationTag } from './OrganizationTag.js';
-import { PartnerCertificationScoring } from './PartnerCertificationScoring.js';
 import { PlacementProfile } from './PlacementProfile.js';
 import { ReproducibilityRate } from './ReproducibilityRate.js';
 import { ScoringSimulation } from './ScoringSimulation.js';
@@ -160,9 +157,6 @@ export {
   ComplementaryCertification,
   ComplementaryCertificationCourseResult,
   ComplementaryCertificationHabilitation,
-  ComplementaryCertificationScoringCriteria,
-  ComplementaryCertificationScoringWithComplementaryReferential,
-  ComplementaryCertificationScoringWithoutComplementaryReferential,
   Correction,
   Course,
   DataProtectionOfficer,

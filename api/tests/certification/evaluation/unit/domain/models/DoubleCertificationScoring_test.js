@@ -1,6 +1,6 @@
-import { domainBuilder, expect } from '../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
-describe('Unit | Domain | Models | ComplementaryCertificationScoringWithoutComplementaryReferential', function () {
+describe('Unit | Certification | Evaluation | Domain | Models | DoubleCertificationScoring', function () {
   context('#isAcquired', function () {
     context('reproducibility rate is equal or greater than minimum reproducibility rate', function () {
       const minimumReproducibilityRate = 70;
@@ -11,13 +11,12 @@ describe('Unit | Domain | Models | ComplementaryCertificationScoringWithoutCompl
         context('pix score is equal or greater than minimum earned pix', function () {
           it('should return true', async function () {
             // given
-            const cleaCertificationScoring =
-              await _buildComplementaryCertificationScoringWithoutComplementaryReferential({
-                reproducibilityRate,
-                minimumReproducibilityRate,
-                pixScore: 120,
-                minimumEarnedPix: 120,
-              });
+            const cleaCertificationScoring = await _buildDoubleCertificationScoring({
+              reproducibilityRate,
+              minimumReproducibilityRate,
+              pixScore: 120,
+              minimumEarnedPix: 120,
+            });
 
             // when
             const hasAcquiredCertif = cleaCertificationScoring.isAcquired();
@@ -30,13 +29,12 @@ describe('Unit | Domain | Models | ComplementaryCertificationScoringWithoutCompl
         context('pix score is lower than minimum earned pix', function () {
           it('should return false', async function () {
             // given
-            const cleaCertificationScoring =
-              await _buildComplementaryCertificationScoringWithoutComplementaryReferential({
-                reproducibilityRate,
-                minimumReproducibilityRate,
-                pixScore: 119,
-                minimumEarnedPix: 120,
-              });
+            const cleaCertificationScoring = await _buildDoubleCertificationScoring({
+              reproducibilityRate,
+              minimumReproducibilityRate,
+              pixScore: 119,
+              minimumEarnedPix: 120,
+            });
 
             // when
             const hasAcquiredCertif = cleaCertificationScoring.isAcquired();
@@ -57,13 +55,12 @@ describe('Unit | Domain | Models | ComplementaryCertificationScoringWithoutCompl
         context('pix score is equal or greater than minimum earned pix', function () {
           it('should return false', async function () {
             // given
-            const cleaCertificationScoring =
-              await _buildComplementaryCertificationScoringWithoutComplementaryReferential({
-                reproducibilityRate,
-                minimumReproducibilityRate,
-                pixScore: 120,
-                minimumEarnedPix: 120,
-              });
+            const cleaCertificationScoring = await _buildDoubleCertificationScoring({
+              reproducibilityRate,
+              minimumReproducibilityRate,
+              pixScore: 120,
+              minimumEarnedPix: 120,
+            });
 
             // when
             const hasAcquiredCertif = cleaCertificationScoring.isAcquired();
@@ -76,13 +73,12 @@ describe('Unit | Domain | Models | ComplementaryCertificationScoringWithoutCompl
         context('pix score is lower than minimum earned pix', function () {
           it('should return false', async function () {
             // given
-            const cleaCertificationScoring =
-              await _buildComplementaryCertificationScoringWithoutComplementaryReferential({
-                reproducibilityRate,
-                minimumReproducibilityRate,
-                pixScore: 119,
-                minimumEarnedPix: 120,
-              });
+            const cleaCertificationScoring = await _buildDoubleCertificationScoring({
+              reproducibilityRate,
+              minimumReproducibilityRate,
+              pixScore: 119,
+              minimumEarnedPix: 120,
+            });
 
             // when
             const hasAcquiredCertif = cleaCertificationScoring.isAcquired();
@@ -95,13 +91,12 @@ describe('Unit | Domain | Models | ComplementaryCertificationScoringWithoutCompl
         context('pix core certification is not acquired', function () {
           it('should return false', async function () {
             // given
-            const cleaCertificationScoring =
-              await _buildComplementaryCertificationScoringWithoutComplementaryReferential({
-                reproducibilityRate,
-                minimumReproducibilityRate,
-                minimumEarnedPix: 120,
-                hasAcquiredPixCertification: false,
-              });
+            const cleaCertificationScoring = await _buildDoubleCertificationScoring({
+              reproducibilityRate,
+              minimumReproducibilityRate,
+              minimumEarnedPix: 120,
+              hasAcquiredPixCertification: false,
+            });
 
             // when
             const hasAcquiredCertification = cleaCertificationScoring.isAcquired();
@@ -115,7 +110,7 @@ describe('Unit | Domain | Models | ComplementaryCertificationScoringWithoutCompl
   });
 });
 
-function _buildComplementaryCertificationScoringWithoutComplementaryReferential({
+function _buildDoubleCertificationScoring({
   reproducibilityRate = 0,
   pixScore = 0,
   minimumEarnedPix,
@@ -126,7 +121,7 @@ function _buildComplementaryCertificationScoringWithoutComplementaryReferential(
   const complementaryCertificationCourseId = 999;
   const complementaryCertificationBadgeId = 99;
 
-  return domainBuilder.buildComplementaryCertificationScoringWithoutComplementaryReferential({
+  return domainBuilder.certification.evaluation.buildDoubleCertificationScoring({
     complementaryCertificationCourseId,
     certificationCourseId,
     reproducibilityRate,

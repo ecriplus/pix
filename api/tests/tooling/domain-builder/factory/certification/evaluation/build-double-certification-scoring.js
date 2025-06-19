@@ -1,6 +1,6 @@
-import { ComplementaryCertificationScoringWithoutComplementaryReferential } from '../../../../src/shared/domain/models/ComplementaryCertificationScoringWithoutComplementaryReferential.js';
+import { DoubleCertificationScoring } from '../../../../../../src/certification/evaluation/domain/models/DoubleCertificationScoring.js';
 
-const buildComplementaryCertificationScoringWithoutComplementaryReferential = function ({
+export const buildDoubleCertificationScoring = function ({
   complementaryCertificationCourseId = 99,
   complementaryCertificationBadgeId = 60,
   certificationCourseId = 42,
@@ -10,7 +10,7 @@ const buildComplementaryCertificationScoringWithoutComplementaryReferential = fu
   minimumReproducibilityRate,
   hasAcquiredPixCertification = true,
 } = {}) {
-  return new ComplementaryCertificationScoringWithoutComplementaryReferential({
+  return new DoubleCertificationScoring({
     complementaryCertificationCourseId,
     complementaryCertificationBadgeId,
     certificationCourseId,
@@ -21,5 +21,3 @@ const buildComplementaryCertificationScoringWithoutComplementaryReferential = fu
     hasAcquiredPixCertification,
   });
 };
-
-export { buildComplementaryCertificationScoringWithoutComplementaryReferential };

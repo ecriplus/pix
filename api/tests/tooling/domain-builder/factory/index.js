@@ -55,7 +55,6 @@ import { buildCertificationIssueReport } from './build-certification-issue-repor
 import { buildCertificationOfficer } from './build-certification-officer.js';
 import { buildCertificationPointOfContact } from './build-certification-point-of-contact.js';
 import { buildCertificationReport } from './build-certification-report.js';
-import { buildCertificationRescoringCompletedEvent } from './build-certification-rescoring-completed-event.js';
 import { buildCertificationResult } from './build-certification-result.js';
 import { buildCertificationScoringCompletedEvent } from './build-certification-scoring-completed-event.js';
 import { buildCertificationSessionCandidate } from './build-certification-session-candidate.js';
@@ -82,8 +81,6 @@ import { buildComplementaryCertificationCourseResultForJuryCertificationWithExte
 import { buildComplementaryCertificationForSupervising } from './build-complementary-certification-for-supervising.js';
 import { buildComplementaryCertificationForTargetProfileAttachment } from './build-complementary-certification-for-target-profile-attachment.js';
 import { buildComplementaryCertificationHabilitation } from './build-complementary-certification-habilitation.js';
-import { buildComplementaryCertificationScoringCriteria } from './build-complementary-certification-scoring-criteria.js';
-import { buildComplementaryCertificationScoringWithoutComplementaryReferential } from './build-complementary-certification-scoring-without-complementary-referential.js';
 import { buildComplementaryCertificationTargetProfileHistory } from './build-complementary-certification-target-profile-history-for-admin.js';
 import {
   buildComplementaryCertificationBadge as buildCertificationComplementaryCertificationBadge,
@@ -118,7 +115,6 @@ import { buildOrganizationPlacesLotManagement } from './build-organization-place
 import { buildOrganizationTag } from './build-organization-tag.js';
 import { buildOrganizationsToAttachToTargetProfile } from './build-organizations-to-attach-to-target-profile.js';
 import { buildParticipationForCampaignManagement } from './build-participation-for-campaign-management.js';
-import { buildComplementaryCertificationScoringWithComplementaryReferential } from './build-pix-plus-certification-scoring.js';
 import { buildPlacementProfile } from './build-placement-profile.js';
 import { buildPoleEmploiSending } from './build-pole-emploi-sending.js';
 import { buildPrescriber } from './build-prescriber.js';
@@ -190,6 +186,10 @@ import { buildUserEnrolment } from './certification/enrolment/build-user.js';
 import { buildUserCertificationEligibility } from './certification/enrolment/build-user-certification-eligibility.js';
 import { buildV3CertificationEligibility } from './certification/enrolment/build-v3-certification-eligibility.js';
 import { buildEvaluationCandidate } from './certification/evaluation/build-candidate.js';
+import { buildComplementaryCertificationScoringCriteria } from './certification/evaluation/build-complementary-certification-scoring-criteria.js';
+import { buildComplementaryCertificationScoringWithoutComplementaryReferential } from './certification/evaluation/build-complementary-certification-scoring-without-complementary-referential.js';
+import { buildDoubleCertificationScoring } from './certification/evaluation/build-double-certification-scoring.js';
+import { buildComplementaryCertificationScoringWithComplementaryReferential } from './certification/evaluation/build-pix-plus-certification-scoring.js';
 import { buildResultsSession } from './certification/evaluation/build-session.js';
 import { buildFlashAssessmentAlgorithm } from './certification/flash-certification/build-flash-assessment-algorithm.js';
 import { buildGlobalCertificationLevel } from './certification/results/build-global-mesh-level.js';
@@ -260,6 +260,10 @@ const certification = {
   evaluation: {
     buildCandidate: buildEvaluationCandidate,
     buildResultsSession,
+    buildComplementaryCertificationScoringCriteria,
+    buildComplementaryCertificationScoringWithoutComplementaryReferential,
+    buildComplementaryCertificationScoringWithComplementaryReferential,
+    buildDoubleCertificationScoring,
   },
   sessionManagement: {
     buildCertificationSessionComplementaryCertification,
@@ -370,7 +374,6 @@ export {
   buildCertificationOfficer,
   buildCertificationPointOfContact,
   buildCertificationReport,
-  buildCertificationRescoringCompletedEvent,
   buildCertificationResult,
   buildCertificationScoringCompletedEvent,
   buildCertifiedArea,
@@ -397,9 +400,6 @@ export {
   buildComplementaryCertificationForSupervising,
   buildComplementaryCertificationForTargetProfileAttachment,
   buildComplementaryCertificationHabilitation,
-  buildComplementaryCertificationScoringCriteria,
-  buildComplementaryCertificationScoringWithComplementaryReferential,
-  buildComplementaryCertificationScoringWithoutComplementaryReferential,
   buildComplementaryCertificationTargetProfileHistory,
   buildComplementarySubscription,
   buildCoreSubscription,

@@ -16,13 +16,17 @@ import * as assessmentResultRepository from '../../../../shared/infrastructure/r
 import * as challengeRepository from '../../../../shared/infrastructure/repositories/challenge-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
+import * as certificationAssessmentRepository from '../../../shared/infrastructure/repositories/certification-assessment-repository.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
 import * as competenceMarkRepository from '../../../shared/infrastructure/repositories/competence-mark-repository.js';
+import * as complementaryCertificationBadgesRepository from '../../../shared/infrastructure/repositories/complementary-certification-badge-repository.js';
+import * as complementaryCertificationCourseResultRepository from '../../../shared/infrastructure/repositories/complementary-certification-course-result-repository.js';
 import * as flashAlgorithmConfigurationRepository from '../../../shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as scoringConfigurationRepository from '../../../shared/infrastructure/repositories/scoring-configuration-repository.js';
 import * as certificationAssessmentHistoryRepository from '../../infrastructure/repositories/certification-assessment-history-repository.js';
 import * as certificationCandidateRepository from '../../infrastructure/repositories/certification-candidate-repository.js';
 import * as challengeCalibrationRepository from '../../infrastructure/repositories/challenge-calibration-repository.js';
+import * as complementaryCertificationScoringCriteriaRepository from '../../infrastructure/repositories/complementary-certification-scoring-criteria-repository.js';
 
 /**
  * Using {@link https://jsdoc.app/tags-type "Closure Compiler's syntax"} to document injected dependencies
@@ -44,6 +48,10 @@ import * as challengeCalibrationRepository from '../../infrastructure/repositori
  * @typedef {placementProfileService} PlacementProfileService
  * @typedef {scoringCertificationService} ScoringCertificationService
  * @typedef {certificationCandidateRepository} CertificationCandidateRepository
+ * @typedef {complementaryCertificationBadgesRepository} ComplementaryCertificationBadgesRepository
+ * @typedef {certificationAssessmentRepository} CertificationAssessmentRepository
+ * @typedef {complementaryCertificationCourseResultRepository} ComplementaryCertificationCourseResultRepository *
+ * @typedef {complementaryCertificationScoringCriteriaRepository} ComplementaryCertificationScoringCriteriaRepository
  */
 const dependencies = {
   assessmentResultRepository,
@@ -63,6 +71,10 @@ const dependencies = {
   scoringService,
   scoringCertificationService,
   certificationCandidateRepository,
+  complementaryCertificationBadgesRepository,
+  certificationAssessmentRepository,
+  complementaryCertificationCourseResultRepository,
+  complementaryCertificationScoringCriteriaRepository,
 };
 
 const path = dirname(fileURLToPath(import.meta.url));

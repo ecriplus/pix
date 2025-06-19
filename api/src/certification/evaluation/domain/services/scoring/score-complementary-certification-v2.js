@@ -1,33 +1,34 @@
-import { CertificationScoringCompleted } from '../../../certification/evaluation/domain/events/CertificationScoringCompleted.js';
-import { ComplementaryCertificationCourseResult } from '../../../certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
-import { AnswerCollectionForScoring } from '../models/AnswerCollectionForScoring.js';
-import { ComplementaryCertificationScoringWithComplementaryReferential } from '../models/ComplementaryCertificationScoringWithComplementaryReferential.js';
-import { ComplementaryCertificationScoringWithoutComplementaryReferential } from '../models/ComplementaryCertificationScoringWithoutComplementaryReferential.js';
-import { ReproducibilityRate } from '../models/ReproducibilityRate.js';
-import { CertificationRescoringCompleted } from './CertificationRescoringCompleted.js';
-import { checkEventTypes } from './check-event-types.js';
+/**
+ * @typedef {import('../index.js').AssessmentResultRepository} AssessmentResultRepository
+ * @typedef {import('../index.js').CertificationAssessmentRepository} CertificationAssessmentRepository
+ * @typedef {import('../index.js').CertificationAssessmentHistoryRepository} ComplementaryCertificationCourseResultRepository
+ * @typedef {import('../index.js').CertificationCourseRepository} CertificationCourseRepository
+ * @typedef {import('../index.js').ComplementaryCertificationBadgesRepository} ComplementaryCertificationBadgesRepository
+ */
 
-const eventTypes = [CertificationScoringCompleted, CertificationRescoringCompleted];
+import { AnswerCollectionForScoring } from '../../../../../shared/domain/models/AnswerCollectionForScoring.js';
+import { ReproducibilityRate } from '../../../../../shared/domain/models/ReproducibilityRate.js';
+import { ComplementaryCertificationCourseResult } from '../../../../shared/domain/models/ComplementaryCertificationCourseResult.js';
+import { ComplementaryCertificationScoringWithComplementaryReferential } from '../../models/ComplementaryCertificationScoringWithComplementaryReferential.js';
+import { ComplementaryCertificationScoringWithoutComplementaryReferential } from '../../models/ComplementaryCertificationScoringWithoutComplementaryReferential.js';
 
-async function handleComplementaryCertificationsScoring({
-  event,
+/**
+ * @param {Object} params
+ * @param {AssessmentResultRepository} params.assessmentResultRepository
+ * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
+ * @param {ComplementaryCertificationCourseResultRepository} params.complementaryCertificationCourseResultRepository
+ * @param {CertificationCourseRepository} params.certificationCourseRepository
+ * @param {ComplementaryCertificationBadgesRepository} params.complementaryCertificationBadgesRepository
+ */
+export async function scoreComplementaryCertificationV2({
+  certificationCourseId,
+  complementaryCertificationScoringCriteria,
   assessmentResultRepository,
   certificationAssessmentRepository,
   complementaryCertificationCourseResultRepository,
-  complementaryCertificationScoringCriteriaRepository,
   certificationCourseRepository,
   complementaryCertificationBadgesRepository,
 }) {
-  checkEventTypes(event, eventTypes);
-  const certificationCourseId = event.certificationCourseId;
-
-  const [complementaryCertificationScoringCriteria] =
-    await complementaryCertificationScoringCriteriaRepository.findByCertificationCourseId({ certificationCourseId });
-
-  if (!complementaryCertificationScoringCriteria) {
-    return;
-  }
-
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
   const assessmentResult = await assessmentResultRepository.getByCertificationCourseId({ certificationCourseId });
 
@@ -270,6 +271,3 @@ function _buildComplementaryCertificationScoringWithReferential({
 function _isNextLowerLevel(badgeLevel) {
   return ({ level }) => badgeLevel - level === 1;
 }
-
-handleComplementaryCertificationsScoring.eventTypes = eventTypes;
-export { handleComplementaryCertificationsScoring };
