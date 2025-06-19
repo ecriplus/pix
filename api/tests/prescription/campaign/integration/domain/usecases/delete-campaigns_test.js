@@ -3,6 +3,7 @@ import { EventLoggingJob } from '../../../../../../src/identity-access-managemen
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
 import * as campaignAdministrationRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/campaign-administration-repository.js';
 import { CampaignParticipationLoggerContext } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { featureToggles } from '../../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
@@ -18,6 +19,8 @@ const {
   buildOrganization,
   buildUser,
   buildTargetProfile,
+  buildCampaignFeature,
+  buildFeature,
 } = databaseBuilder.factory;
 
 describe('Integration | UseCases | delete-campaign', function () {
@@ -536,6 +539,68 @@ describe('Integration | UseCases | delete-campaign', function () {
             const otherAssessmentsInDb = await knex('assessments').where('id', otherAssessment.id).first();
             expect(otherAssessmentsInDb.campaignParticipationId).equal(otherAssessment.campaignParticipationId);
           });
+        });
+      });
+    });
+
+    context('With external id campaign feature', function () {
+      let campaignId;
+      let adminUserId;
+      let organizationId;
+
+      beforeEach(async function () {
+        const featureId = buildFeature({
+          key: CAMPAIGN_FEATURES.EXTERNAL_ID.key,
+        }).id;
+
+        adminUserId = buildUser().id;
+        organizationId = buildOrganization().id;
+        buildMembership({ userId: adminUserId, organizationId, organizationRole: 'ADMIN' });
+        campaignId = buildCampaign({ organizationId }).id;
+        buildCampaignFeature({ campaignId, featureId, params: { label: 'External ID', type: 'email' } });
+
+        await databaseBuilder.commit();
+      });
+
+      context('when feature toggle `isAnonymizationWithDeletionEnabled` is false', function () {
+        beforeEach(async function () {
+          await featureToggles.set('isAnonymizationWithDeletionEnabled', false);
+        });
+
+        it('should not empty external id label param', async function () {
+          // when
+          await usecases.deleteCampaigns({
+            userId: adminUserId,
+            campaignIds: [campaignId],
+            organizationId,
+          });
+
+          // then
+          const results = await knex('campaign-features').where({ campaignId });
+
+          expect(results).to.have.lengthOf(1);
+          expect(results[0].params).to.deep.equal({ type: 'email', label: 'External ID' });
+        });
+      });
+
+      context('when feature toggle `isAnonymizationWithDeletionEnabled` is true', function () {
+        beforeEach(async function () {
+          await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
+        });
+
+        it('should empty external id label param', async function () {
+          // when
+          await usecases.deleteCampaigns({
+            userId: adminUserId,
+            campaignIds: [campaignId],
+            organizationId,
+          });
+
+          // then
+          const results = await knex('campaign-features').where({ campaignId });
+
+          expect(results).to.have.lengthOf(1);
+          expect(results[0].params).to.not.have.property('label');
         });
       });
     });
