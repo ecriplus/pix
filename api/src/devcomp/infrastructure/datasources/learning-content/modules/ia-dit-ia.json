@@ -44,9 +44,68 @@
         {
           "type": "element",
           "element": {
-            "id": "a27b96cf-a0a7-45df-866a-313a1bd6caaf",
-            "type": "text",
-            "content": "<p>À votre avis, de quand date l’intelligence artificielle ?&nbsp;⌛</p>\n<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-frise.html\" height=\"300\"></iframe>"
+            "id": "8de9c100-b1a7-4134-9a67-01918610bc80",
+            "type": "qcu",
+            "instruction": "<p>À votre avis, de quand date l’intelligence artificielle ?&nbsp;⌛</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>1950-1960</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Oui, en effet l’expression “intelligence artificielle” naît en 1956. A cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain.</p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "<p>1960-1970</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Presque ! L’expression “intelligence artificielle” naît en 1956. A cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain.</p>"
+                }
+              },
+              {
+                "id": "3",
+                "content": "<p>1970-1980</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Pas mal, mais c'est encore plus ancien ! L’expression “intelligence artificielle” naît en 1956. A cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain.</p>"
+                }
+              },
+              {
+                "id": "4",
+                "content": "<p>1980-1990</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Pas mal, mais c'est encore plus ancien ! L’expression “intelligence artificielle” naît en 1956. A cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain.</p>"
+                }
+              },
+              {
+                "id": "5",
+                "content": "<p>1990-2000</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Et non, c'est beaucoup plus ancien ! L’expression “intelligence artificielle” naît en 1956. A cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain.</p>"
+                }
+              },
+              {
+                "id": "6",
+                "content": "<p>2000-2010</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Et non, c'est beaucoup plus ancien ! L’expression “intelligence artificielle” naît en 1956. A cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain.</p>"
+                }
+              },
+              {
+                "id": "7",
+                "content": "<p>après 2010</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Et non, c'est beaucoup plus ancien ! L’expression “intelligence artificielle” naît en 1956. A cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain.</p>"
+                }
+              }
+            ],
+            "solution": "1"
           }
         }
       ]
@@ -61,7 +120,7 @@
           "element": {
             "id": "3c870d58-e8dd-4129-9348-159975b1fc69",
             "type": "text",
-            "content": "<p>À cause de la récente popularité de chatGPT, on a l’impression que l’IA c’est nouveau. Mais pas du tout !&nbsp; l’IA ça date ! 🦣&nbsp;<br>Et si on regardait plus précisément ce qu'est l'IA ? Pour cela, partons de l’ordinateur ! </p>"
+            "content": "<p>À cause de la récente popularité de chatGPT, on a l’impression que l’IA c’est nouveau. Mais pas du tout !&nbsp; l’IA ça date ! 🦣&nbsp;<br>Et si on regardait plus précisément ce qu'est l'IA ? <br></p>"
           }
         }
       ]
@@ -99,7 +158,7 @@
           "element": {
             "id": "d4c2fcb1-74b0-474e-8bda-470c83ced9c2",
             "type": "text",
-            "content": "<p>Aujourd’hui les ordinateurs sont capables de réaliser toutes sortes de tâches&nbsp;: <br>👀 Des tâches que nous faisons sans y penser comme reconnaître un chien dans une image.&nbsp;<br>🧠 Et des tâches qui nous demandent plus de concentration comme résoudre des problèmes de maths.</p><p><br>Le <strong>domaine scientifique</strong> qui a permis ces progrès se nomme <strong>l’intelligence artificielle</strong>. D’autres sciences et techniques y ont contribué&nbsp;: l’informatique, l’électronique, la robotique, les statistiques, les sciences cognitives, les neurosciences, etc.</p>"
+            "content": "<p>Aujourd’hui les ordinateurs sont capables de réaliser toutes sortes de tâches : <br>👀 Des tâches que nous faisons sans y penser comme reconnaître un chien dans une image.&nbsp;<br>🧠 Et des tâches qui nous demandent plus de concentration comme résoudre des problèmes de maths.<br></p><p>Le <strong>domaine scientifique</strong> qui a permis ces progrès se nomme <strong>l’intelligence artificielle</strong>. D’autres sciences et techniques y ont contribué&nbsp;: l’informatique, l’électronique, la robotique, les statistiques, les sciences cognitives, les neurosciences, etc.</p>"
           }
         }
       ]
@@ -129,7 +188,7 @@
           "element": {
             "id": "8dba133c-906f-4793-939f-015df7d2acce",
             "type": "text",
-            "content": "<p>Mariam est équipée de nombreux appareils électroniques. Explorez son salon pour trouver les services et les objets qui utilisent&nbsp;de l’IA.</p>"
+            "content": "<p>Mariam est équipée de nombreux appareils électroniques. Explorez son salon pour trouver les services et les objets qui utilisent&nbsp; de l’IA.&nbsp;<br></p>"
           }
         },
         {
@@ -165,11 +224,11 @@
             "feedbacks": {
               "valid": {
                 "state": "",
-                "diagnosis": "<p>C'est ça !L'IA est présente dans de nombreux objets et services du quotidien.&nbsp;</p>"
+                "diagnosis": "<p>C'est ça !&nbsp;</p>"
               },
               "invalid": {
                 "state": "",
-                "diagnosis": "<p>Et non, explorez de nouveau le salon de Mariam, l'IA est présente dans de nombreux objets et services du quotidien.</p>"
+                "diagnosis": "<p>Et non, explorez de nouveau le salon de Mariam, l'IA est présente dans de nombreux cas.</p>"
               }
             }
           }
@@ -186,7 +245,7 @@
           "element": {
             "id": "bfe6d7e1-8282-4a34-a659-c189ea396feb",
             "type": "text",
-            "content": "<p>De nombreux <strong>objets et services numériques du quotidien</strong> utilisent des logiciels d’intelligence artificielle.</p><p><br>Certains logiciels sont <strong>spécialisés </strong>dans un <strong>type de tâche</strong>&nbsp;: reconnaître des images et leur contenu, reconnaître des sons et leur contenu, recommander des contenus adaptés à des besoins, prédire des tendances dans des données.&nbsp;🔮</p><p><br>D’autres logiciels deviennent de plus en plus <strong>généralistes</strong>. C’est le cas de chatGPT ou Le chat qui sont capables de traduire des textes, tenir une conversation, résumer des articles, créer une image, programmer, résoudre des problèmes de maths, etc.&nbsp;🦾<br></p>"
+            "content": "<p>De nombreux objets et <strong>services numériques du quotidien</strong> utilisent des logiciels d’intelligence artificielle.</p><p><br>Certains logiciels sont <strong>spécialisés </strong>dans un <strong>type de tâche</strong>&nbsp;: reconnaître des images et leur contenu, reconnaître des sons et leur contenu, recommander des contenus adaptés à des besoins, prédire des tendances dans des données.&nbsp;🔮</p><p><br>D’autres logiciels deviennent de plus en plus <strong>généralistes</strong>. C’est le cas de chatGPT ou Le chat qui sont capables de traduire des textes, tenir une conversation, résumer des articles, créer une image, programmer, résoudre des problèmes de maths, etc.&nbsp;🦾<br></p>"
           }
         }
       ]
@@ -216,7 +275,7 @@
           "element": {
             "id": "a2b1291d-6043-4582-ac69-337835330c07",
             "type": "text",
-            "content": "<p>Prenons le cas de<strong> la reconnaissance d’image</strong>.&nbsp;🔎🖼️</p><p>Retournez les cartes ci-dessous pour découvrir comment la reconnaissance d'image est utilisée dans différents secteurs d'activité.</p>"
+            "content": "<p>Prenons le cas de<strong> la reconnaissance d’image</strong>.&nbsp;🔎🖼️</p><p>Retournez les cartes ci-dessous pour découvrir comment est utilisé la reconnaissance d'image dans différents secteurs d'activité.</p>"
           }
         },
         {
@@ -254,7 +313,7 @@
           "element": {
             "id": "715a385e-dcfb-4001-9e5d-5b00ab365221",
             "type": "text",
-            "content": "<p>Voici les points principaux à retenir&nbsp;:&nbsp;</p><ul><li><strong>L’intelligence artificielle est un domaine scientifique</strong> qui étudie comment permettre à des machines d’imiter les mécanismes de l’intelligence pour réaliser toutes sortes de tâches.&nbsp;🔬</li><li><strong>Certains logiciels d’IA sont spécialisés dans un type de tâches</strong>&nbsp;:&nbsp; la reconnaissance d’image, la recommandation de contenu, la prédiction, etc. <strong>D’autres sont plus généralistes</strong> comme les IA génératives.&nbsp;👩‍💻</li><li>Les techniques d’IA sont utilisées dans <strong>des objets et services de notre quotidien</strong>. Leur utilisation permet de faire de nombreux progrès.&nbsp;📈</li></ul>"
+            "content": "<p>Voici les points principaux à retenir :&nbsp;</p><ul><li><strong>L’intelligence artificielle est un domaine scientifique</strong> qui étudie comment permettre à des machines d’imiter les mécanismes de l’intelligence.&nbsp;🔬</li><li>Certains logiciels d’IA sont <strong>spécialisés dans un type de tâches</strong>&nbsp;:&nbsp; la reconnaissance d’image, la recommandation de contenu, la prédiction, etc. D’autres sont plus <strong>généralistes</strong> et peuvent générer des contenus variés.&nbsp;👩‍💻</li><li>Les techniques d’IA sont utilisées dans <strong>des outils et services de notre quotidien</strong>. Leur utilisation permet de faire de nombreux progrès.&nbsp;📈</li></ul>"
           }
         }
       ]
@@ -329,218 +388,25 @@
       ]
     },
     {
-      "id": "24445c57-5f45-4ead-8767-936c43913403",
+      "id": "ad658376-7f8b-4f86-af0f-a9b80585e699",
       "type": "activity",
-      "title": " Activité d'application - 2 : Types d'IA",
+      "title": "Activité d'application - 2 : Types d'algorithmes d'IA",
       "components": [
         {
           "type": "element",
           "element": {
             "id": "b2dc8d40-47cd-4f67-af34-b66ef6506b57",
             "type": "text",
-            "content": "<p>Identifiez dans quel type de tâche sont spécialisées les IA utilisées dans différentes situations.</p>"
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-algos.html\" height=\"650\"></iframe>"
           }
         },
         {
-          "type": "stepper",
-          "steps": [
-            {
-              "elements": [
-                {
-                  "id": "850a37d1-7433-4924-8123-2abdde878c29",
-                  "type": "text",
-                  "content": "<p>🎤 Une application retrouve la titre d'une musique que vous lui chantez.</p>"
-                },
-                {
-                  "id": "05a30b10-ac62-40a5-961b-9f3f3e831da0",
-                  "type": "qcu",
-                  "instruction": "<p>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
-                  "proposals": [
-                    {
-                      "id": "1",
-                      "content": "<p>la reconnaissance du son</p>",
-                      "feedback": {
-                        "state": "<p>Bonne réponse ! 🎉</p>",
-                        "diagnosis": ""
-                      }
-                    },
-                    {
-                      "id": "2",
-                      "content": "<p>la reconnaissance d’image</p>",
-                      "feedback": {
-                        "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": ""
-                      }
-                    },
-                    {
-                      "id": "3",
-                      "content": "<p>la recommandation de contenu</p>",
-                      "feedback": {
-                        "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": ""
-                      }
-                    },
-                    {
-                      "id": "4",
-                      "content": "<p>la génération de contenu</p>",
-                      "feedback": {
-                        "state": "<p>Mauvaise réponse</p>",
-                        "diagnosis": ""
-                      }
-                    }
-                  ],
-                  "solution": "1"
-                }
-              ]
-            },
-            {
-              "elements": [
-                {
-                  "id": "2923d129-126b-4d5d-92e6-8e82dc34dd62",
-                  "type": "text",
-                  "content": "<p>❓ Un LLM (terme à modifier) répond à vos questions sur n'importe quel sujet.</p>"
-                },
-                {
-                  "id": "f2e08b74-e487-40cc-935b-87ad6a2f4b54",
-                  "type": "qcu",
-                  "instruction": "<p>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
-                  "proposals": [
-                    {
-                      "id": "1",
-                      "content": "<p>la reconnaissance du son</p>",
-                      "feedback": {
-                        "state": "<p>Mauvaise réponse</p>",
-                        "diagnosis": ""
-                      }
-                    },
-                    {
-                      "id": "2",
-                      "content": "<p>la reconnaissance d’image</p>",
-                      "feedback": {
-                        "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": ""
-                      }
-                    },
-                    {
-                      "id": "3",
-                      "content": "<p>la recommandation de contenu</p>",
-                      "feedback": {
-                        "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": ""
-                      }
-                    },
-                    {
-                      "id": "4",
-                      "content": "<p>la génération de contenu</p>",
-                      "feedback": {
-                        "state": "<p>Bonne réponse ! 🎉</p>",
-                        "diagnosis": ""
-                      }
-                    }
-                  ],
-                  "solution": "4"
-                }
-              ]
-            },
-            {
-              "elements": [
-                {
-                  "id": "d7e5b9dd-7757-4590-a978-f386921006e1",
-                  "type": "text",
-                  "content": "<p>▶️ Un site vous propose de nouveaux contenus suite au visionnage d’une vidéo.</p>"
-                },
-                {
-                  "id": "d6644a42-0b76-4e9c-8595-43c2da89cb9b",
-                  "type": "qcu",
-                  "instruction": "<p>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
-                  "proposals": [
-                    {
-                      "id": "1",
-                      "content": "<p>la reconnaissance du son</p>",
-                      "feedback": {
-                        "state": "<p>Mauvaise réponse</p>",
-                        "diagnosis": ""
-                      }
-                    },
-                    {
-                      "id": "2",
-                      "content": "<p>la reconnaissance d’image</p>",
-                      "feedback": {
-                        "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": ""
-                      }
-                    },
-                    {
-                      "id": "3",
-                      "content": "<p>la recommandation de contenu</p>",
-                      "feedback": {
-                        "state": "<p>Bonne réponse ! 🎉</p>",
-                        "diagnosis": ""
-                      }
-                    },
-                    {
-                      "id": "4",
-                      "content": "<p>la génération de contenu</p>",
-                      "feedback": {
-                        "state": "<p>Bonne réponse ! 🎉</p>",
-                        "diagnosis": ""
-                      }
-                    }
-                  ],
-                  "solution": "3"
-                }
-              ]
-            },
-            {
-              "elements": [
-                {
-                  "id": "3725b06d-8c5a-4b6f-971a-c14481dd7d76",
-                  "type": "text",
-                  "content": "<p>🏷️ Un logiciel ajoute automatiquement des mots clés à des photographies.</p>"
-                },
-                {
-                  "id": "e67d64c3-9912-4046-9f03-46059c51247c",
-                  "type": "qcu",
-                  "instruction": "<p>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
-                  "proposals": [
-                    {
-                      "id": "1",
-                      "content": "<p>la reconnaissance du son</p>",
-                      "feedback": {
-                        "state": "<p>Mauvaise réponse</p>",
-                        "diagnosis": ""
-                      }
-                    },
-                    {
-                      "id": "2",
-                      "content": "<p>la reconnaissance d’image</p>",
-                      "feedback": {
-                        "state": "<p>Bonne réponse ! 🎉</p>",
-                        "diagnosis": ""
-                      }
-                    },
-                    {
-                      "id": "3",
-                      "content": "<p>la recommandation de contenu</p>",
-                      "feedback": {
-                        "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": ""
-                      }
-                    },
-                    {
-                      "id": "4",
-                      "content": "<p>la génération de contenu</p>",
-                      "feedback": {
-                        "state": "<p>Mauvaise réponse</p>",
-                        "diagnosis": ""
-                      }
-                    }
-                  ],
-                  "solution": "2"
-                }
-              ]
-            }
-          ]
+          "type": "element",
+          "element": {
+            "id": "b16e82b6-b42e-4815-ae5b-f65a83b322aa",
+            "type": "text",
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-algos-dd.html\" height=\"950\"></iframe>"
+          }
         }
       ]
     },
@@ -554,7 +420,7 @@
           "element": {
             "id": "97501ed5-7d0c-4b3e-ad58-498d7d4dbc44",
             "type": "text",
-            "content": "<p>À vous de jouer.</p>"
+            "content": "<p>Maintenant, vous en savez plus sur l’intelligence artificielle et les types de tâches pour lesquelles elle est utilisée.</p>"
           }
         }
       ]
