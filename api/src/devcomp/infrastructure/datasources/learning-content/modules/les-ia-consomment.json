@@ -716,7 +716,7 @@
               },
               {
                 "type": "text",
-                "content": "<span>.&nbsp; <br><br>Elles ont besoin de beaucoup&nbsp;</span>"
+                "content": "<span>.&nbsp; <br><br><br>Elles ont besoin de beaucoup&nbsp;</span>"
               },
               {
                 "input": "trou 2",
@@ -746,7 +746,7 @@
               },
               {
                 "type": "text",
-                "content": "<span>pour être fabriquées.</p><p><br></p><p>Les </span>"
+                "content": "<span>pour être fabriquées.<br><br><br>Les </span>"
               },
               {
                 "input": "trou 3",
@@ -776,7 +776,7 @@
               },
               {
                 "type": "text",
-                "content": "<span>sont composés de milliers de puces.</p><p><br></p><p>Un supercalculateur est est immense ordinateur qui regroupe des </span>"
+                "content": "<span>sont composés de milliers de puces.<br><br><br>Un supercalculateur est est immense ordinateur qui regroupe des </span>"
               },
               {
                 "input": "trou 4",
@@ -806,7 +806,7 @@
               },
               {
                 "type": "text",
-                "content": "<span>de puces spécialisées IA.</p><p><br></p><p>Leur fonctionnement demande beaucoup</span>"
+                "content": "<span>de puces spécialisées IA.<br><br><br>Leur fonctionnement demande beaucoup</span>"
               },
               {
                 "input": "trou 5",
@@ -836,7 +836,7 @@
               },
               {
                 "type": "text",
-                "content": "<span>.</p><p><br></p><p>Pour fonctionner, ils ont aussi besoin d’être </span>"
+                "content": "<span>.<br><br><br>Pour fonctionner, ils ont aussi besoin d’être </span>"
               },
               {
                 "input": "trou 6",
