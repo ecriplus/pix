@@ -1,5 +1,27 @@
 # Pix Changelog
 
+# [5.138.0](https://github.com/1024pix/pix/compare/v5.137.0...v5.138.0) (2025-06-19)
+
+### :rocket: Amélioration
+
+- [#12546](https://github.com/1024pix/pix/pull/12546) Ajout du formulaire de création de référentiel cadre (PIX-18188). 
+- [#12580](https://github.com/1024pix/pix/pull/12580) Ajouter l'animation des cartes vers la droite lorsque la réponse est incorrecte pour les QAB (PIX-18117) 
+- [#12582](https://github.com/1024pix/pix/pull/12582) Masquer le sélecteur de niveau lors de la création du référentiel cadre d'un Pix+ sur Admin (PIX-18189). 
+
+### :bug: Correction
+
+- [#12583](https://github.com/1024pix/pix/pull/12583) Corriger le lien 123formbuilder de la page de récap (PIX-18328) 
+
+### :building_construction: Tech
+
+- [#12593](https://github.com/1024pix/pix/pull/12593) Rend disponible les routes LSU/LSL via maddo. 
+- [#12543](https://github.com/1024pix/pix/pull/12543) Unification de la date de création des challenges d'un référentiel cadre (PIX-18284). 
+
+### :arrow_up: Montée de version
+
+- [#12585](https://github.com/1024pix/pix/pull/12585) Update dependency @1024pix/epreuves-components to ^0.4.2 (junior) 
+- [#12587](https://github.com/1024pix/pix/pull/12587) Update dependency @1024pix/epreuves-components to ^0.4.2 (mon-pix)
+
 # [5.137.0](https://github.com/1024pix/pix/compare/v5.136.1...v5.137.0) (2025-06-18)
 
 ### :rocket: Amélioration
