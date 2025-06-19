@@ -390,8 +390,16 @@
     {
       "id": "ad658376-7f8b-4f86-af0f-a9b80585e699",
       "type": "activity",
-      "title": "Activité d'application - 2 : Types d'algorithmes d'IA",
+      "title": "Activité d'application - 2 : Types d'IA",
       "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "b0237af6-468a-4f07-ac43-d7dd8afb2d17",
+            "type": "text",
+            "content": "<p>Identifiez dans quel type de tâche sont spécialisées les IA utilisées dans différentes situations.</p>"
+          }
+        },
         {
           "type": "element",
           "element": {
@@ -420,7 +428,7 @@
           "element": {
             "id": "97501ed5-7d0c-4b3e-ad58-498d7d4dbc44",
             "type": "text",
-            "content": "<p>Maintenant, vous en savez plus sur l’intelligence artificielle et les types de tâches pour lesquelles elle est utilisée.</p>"
+            "content": "<p>[à rédiger]</p>"
           }
         }
       ]
