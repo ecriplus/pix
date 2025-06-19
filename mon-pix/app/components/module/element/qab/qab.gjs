@@ -145,8 +145,8 @@ export default class ModuleQab extends ModuleElement {
             <QabScoreCard @score={{this.score}} @total={{this.numberOfCards}} @onRetry={{this.onRetry}} />
           {{/if}}
         </div>
-        {{#if this.shouldDisplayCards}}
-          <div class="element-qab__proposals">
+        <div class="element-qab__proposals {{unless this.shouldDisplayCards 'element-qab__proposals--empty'}}">
+          {{#if this.shouldDisplayCards}}
             <QabProposalButton
               @text={{this.currentCard.proposalA}}
               @option="A"
@@ -161,8 +161,8 @@ export default class ModuleQab extends ModuleElement {
               @isSelected={{this.isProposalSelected "B"}}
               @isDisabled={{this.isAnswered}}
             />
-          </div>
-        {{/if}}
+          {{/if}}
+        </div>
       </fieldset>
     </form>
   </template>
