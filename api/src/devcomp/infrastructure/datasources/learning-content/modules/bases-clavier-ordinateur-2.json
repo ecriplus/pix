@@ -99,7 +99,7 @@
             "id": "8c18c2f0-b9f0-4ca6-8a77-92fb0604dbb9",
             "type": "expand",
             "title": "Indice 2",
-            "content": "<p>Les touches nécessaires pour écrire la phrase sont indiquées dans l’image ci-dessous.</p><img src=\"https://i.imgur.com/KosRqGF.png\" alt=\"Les touches essentielles du clavier. Les lettres, les accents, effacer et entrée, l'espace et les flèches directionelles.\">"
+            "content": "<p>Les touches nécessaires pour écrire la phrase sont indiquées dans l’image ci-dessous.</p><img src=\"https://assets.pix.org/draft/modules/KosRqGF.png\" alt=\"Les touches essentielles du clavier. Les lettres, les accents, effacer et entrée, l'espace et les flèches directionelles.\">"
           }
         }
       ]
@@ -144,7 +144,7 @@
           "element": {
             "id": "e7cd9a3d-1632-41e8-82ce-b41995b8ca36",
             "type": "image",
-            "url": "https://i.imgur.com/odFZeVB.png",
+            "url": "https://assets.pix.org/draft/modules/odFZeVB.png",
             "alt": "Schéma d'un clavier, les deux touches majuscules sont en couleur.",
             "alternativeText": "<p>Il y a deux touches majuscules sur le clavier, une à gauche, et une à droite. Chacune comporte le symbole d'une flèche vers le haut.</p>",
             "legend": "",
@@ -179,7 +179,7 @@
           "element": {
             "id": "1eeb0af4-2f24-42fc-a051-8c0dc46ac17f",
             "type": "image",
-            "url": "https://i.imgur.com/uO0tdrA.jpeg",
+            "url": "https://assets.pix.org/draft/modules/uO0tdrA.jpeg",
             "alt": "Dessin d'un clavier, une main appuie sur majuscule, l'autre main appuie sur le touche P.",
             "alternativeText": "",
             "legend": "",
@@ -267,7 +267,7 @@
           "element": {
             "id": "8825fd1b-f7d3-4ace-bf5e-8637f8c308e4",
             "type": "image",
-            "url": "https://i.imgur.com/54F0jFf.jpeg",
+            "url": "https://assets.pix.org/draft/modules/54F0jFf.jpeg",
             "alt": "Schéma d'une touche comportant deux caractères. ",
             "alternativeText": "<ul><li>Quand on appuie sur cette touche en appuyant en même temps sur la touche Majuscule, c'est le 1 (qui est présent en haut de la touche) qui est tapé à l'écran.</li><li>Quand on appuie seulement sur cette touche, c'est le &amp; (qui est présent en bas de la touche) qui est tapé à l'écran.</li></ul>",
             "legend": "",
@@ -287,7 +287,7 @@
           "element": {
             "id": "27c7290b-825a-4ee6-ab05-2cbab46a891f",
             "type": "image",
-            "url": "https://i.imgur.com/AJIoLZu.jpeg",
+            "url": "https://assets.pix.org/draft/modules/AJIoLZu.jpeg",
             "alt": "Dessin d'un clavier, une main appuie sur la touche majuscule, l'autre sur la touche du point d'interrogation et de la virgule.",
             "alternativeText": "",
             "legend": "",
@@ -300,7 +300,7 @@
             "id": "863077ce-8e5e-438a-b82f-2b4afc723ef0",
             "type": "expand",
             "title": "🤔 Bon à savoir",
-            "content": "<p>Certains claviers ont un pavé numérique à droite des flèches directionnelles. Le pavé numérique contient des touches supplémentaires avec tous les chiffres. Vous pouvez l’utiliser pour taper les chiffres sans utiliser la touche majuscule.</p><img src=\"http://www.image-heberg.fr/files/17380845144190712148.jpg\" alt=\"Clavier comprenant un pavé numérique\">"
+            "content": "<p>Certains claviers ont un pavé numérique à droite des flèches directionnelles. Le pavé numérique contient des touches supplémentaires avec tous les chiffres. Vous pouvez l’utiliser pour taper les chiffres sans utiliser la touche majuscule.</p><img src=\"https://assets.pix.org/draft/modules/17380845144190712148.jpg\" alt=\"Clavier comprenant un pavé numérique\">"
           }
         }
       ]
@@ -331,7 +331,7 @@
           "element": {
             "id": "425252e0-7cf9-4031-8e28-6079d0d147a7",
             "type": "image",
-            "url": "https://i.imgur.com/CqlU8D0.jpeg",
+            "url": "https://assets.pix.org/draft/modules/CqlU8D0.jpeg",
             "alt": "la phrase \"Coucou, peux-tu mettre ces 3 pommes à cet endroit ?\" est écrite",
             "alternativeText": "<p>Coucou, peux-tu mettre ces 3 pommes à cet endroit ?</p>",
             "legend": "",
@@ -397,7 +397,7 @@
           "element": {
             "id": "c85c5493-3d5a-4665-b835-48310caa4d1d",
             "type": "image",
-            "url": "https://i.imgur.com/dcAPp7x.png",
+            "url": "https://assets.pix.org/draft/modules/dcAPp7x.png",
             "alt": "",
             "alternativeText": "",
             "legend": "",
@@ -417,7 +417,7 @@
           "element": {
             "id": "172ad359-9878-4308-940a-5cdf64019769",
             "type": "image",
-            "url": "https://i.imgur.com/XbaDcLl.jpeg",
+            "url": "https://assets.pix.org/draft/modules/XbaDcLl.jpeg",
             "alt": "",
             "alternativeText": "",
             "legend": "",
@@ -437,7 +437,7 @@
           "element": {
             "id": "6c7f82e6-5630-4f60-bf6d-a5509e1247ca",
             "type": "image",
-            "url": "https://i.imgur.com/LnTMLS7.jpeg",
+            "url": "https://assets.pix.org/draft/modules/LnTMLS7.jpeg",
             "alt": "",
             "alternativeText": "",
             "legend": "",
@@ -517,7 +517,7 @@
           "element": {
             "id": "2db48eb5-d71e-4050-9aeb-0aab60d10da6",
             "type": "image",
-            "url": "https://i.imgur.com/dH03MS3.png",
+            "url": "https://assets.pix.org/draft/modules/dH03MS3.png",
             "alt": "Carte d'identité de Jean-Tobias Piéchaud",
             "alternativeText": "<p>Carte d'identité contenant les informations suivantes :</p><ul><li>Piéchaud, </li><li>Jean-Tobias </li><li>26/03/1984</li><li>téléphone : 06 39 98 12 74</li><li>mail : j-t.piechaud@pixmail.org</li></ul>",
             "legend": "",
@@ -572,7 +572,7 @@
           "element": {
             "id": "c90b7a08-fbc8-4f6a-bd94-8bab7e5a809e",
             "type": "image",
-            "url": "https://i.imgur.com/ta6lSjJ.jpeg",
+            "url": "https://assets.pix.org/draft/modules/ta6lSjJ.jpeg",
             "alt": "",
             "alternativeText": "<ul><li>Pour taper un caractère en haut de la touche, il faut appuyer sur la touche majuscule ⇧ en même temps que la touche du caractère.</li><li>Pour taper un caractère en bas à gauche de la touche, il faut uniquement appuyer sur la touche du caractère.</li><li>Pour taper un caractère en bas à droite de la touche,&nbsp; il faut appuyer sur la touche Alt Gr en même temps que la touche du caractère.</li><li>Pour taper une majuscule, il faut appuyer sur la touche majuscule ⇧ en même temps que la touche lettre.</li></ul>",
             "legend": "",

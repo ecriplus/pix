@@ -49,7 +49,7 @@
           "element": {
             "id": "c849cbc5-931e-4a00-ae6a-083e2ff0614d",
             "type": "image",
-            "url": "https://i.imgur.com/GHeUZvS.jpeg",
+            "url": "https://assets.pix.org/draft/modules/GHeUZvS.jpeg",
             "alt": "-",
             "alternativeText": "<ul><li>Les souris avec un fil : photographies de 4 souris avec fil de taille, forme et couleur différentes.</li><li>Les souris sans fil : photographies de 3 souris sans fil différentes reliées par des connecteurs USB Bluetooth .</li></ul>"
           }
@@ -99,7 +99,7 @@
             "type": "video",
             "title": "Prendre en main la souris",
             "url": "https://videos.pix.fr/modulix/utiliser-souris-ordinateur-1/souris_prise_en_main.mp4",
-            "poster": "https://i.imgur.com/lA2jUAY.jpeg",
+            "poster": "https://assets.pix.org/draft/modules/lA2jUAY.jpeg",
             "subtitles": "",
             "transcription": ""
           }
@@ -186,7 +186,7 @@
             "type": "video",
             "title": "Déplacer la souris",
             "url": "https://videos.pix.fr/modulix/utiliser-souris-ordinateur-1/deplacer_la_souris.mp4",
-            "poster": "https://i.imgur.com/jC8keAF.jpeg",
+            "poster": "https://assets.pix.org/draft/modules/jC8keAF.jpeg",
             "subtitles": "",
             "transcription": ""
           }
@@ -371,7 +371,7 @@
           "element": {
             "id": "4ec66bb9-f016-48c3-9653-56d7ae04d1b9",
             "type": "image",
-            "url": "https://i.imgur.com/8DuRmCV.gif",
+            "url": "https://assets.pix.org/draft/modules/8DuRmCV.gif",
             "alt": "",
             "alternativeText": ""
           }
@@ -404,7 +404,7 @@
           "element": {
             "id": "4cd1c225-f5da-43c2-af29-7d2bfa340b07",
             "type": "image",
-            "url": "https://i.imgur.com/y23SQFf.gif",
+            "url": "https://assets.pix.org/draft/modules/y23SQFf.gif",
             "alt": "",
             "alternativeText": ""
           }
@@ -505,7 +505,7 @@
           "element": {
             "id": "1ad8190f-46b6-43b5-82b1-cd81640b1700",
             "type": "image",
-            "url": "https://i.imgur.com/G6t4f0c.png",
+            "url": "https://assets.pix.org/draft/modules/G6t4f0c.png",
             "alt": "",
             "alternativeText": "<p>image des 4 formes de pointeur les plus courantes : la flèche, la main, la barre verticale, et la roue ou le sablier.</p>"
           }

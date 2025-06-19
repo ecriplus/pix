@@ -175,7 +175,7 @@
           "element": {
             "id": "f7429e02-e27c-4f12-ba79-80785ad66925",
             "type": "text",
-            "content": "<p>🗝️ Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous :&nbsp;</p><details><summary>Indice 1</summary>Cliquez sur Nouveau message en haut à gauche pour créer un mail.</details><details><summary>Indice 2</summary>Complétez les 3 champs avec les textes écrits dans la consigne.</details><details><summary>Solution</summary><p>Voici les étapes à suivre : </p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"425\" height=\"790\" src=\"https://www.image-heberg.fr/files/1738339954456303332.gif\"></iframe></details>"
+            "content": "<p>🗝️ Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous :&nbsp;</p><details><summary>Indice 1</summary>Cliquez sur Nouveau message en haut à gauche pour créer un mail.</details><details><summary>Indice 2</summary>Complétez les 3 champs avec les textes écrits dans la consigne.</details><details><summary>Solution</summary><p>Voici les étapes à suivre : </p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"425\" height=\"790\" src=\"https://assets.pix.org/draft/modules/1738339954456303332.gif\"></iframe></details>"
           }
         }
       ]
@@ -317,7 +317,7 @@
           "element": {
             "id": "b6014eed-5edc-4010-ad7a-1e5410044f6d",
             "type": "image",
-            "url": "https://i.imgur.com/GXJ6ihZ.png",
+            "url": "https://assets.pix.org/draft/modules/GXJ6ihZ.png",
             "alt": "",
             "alternativeText": "<p>Le champ Objet permet de donner un titre au mail. Il permet de vite connaître le sujet du mail. Le champ De indique la personne qui envoie le mail. Le champ À indique la personne qui reçoit le mail.</p>"
           }
@@ -357,7 +357,7 @@
           "element": {
             "id": "2ddc4d66-3323-401b-b8ee-4f56bcd9c794",
             "type": "image",
-            "url": "https://i.imgur.com/iQWPTJW.png",
+            "url": "https://assets.pix.org/draft/modules/iQWPTJW.png",
             "alt": "",
             "alternativeText": "<ul><li>22 octobre 2024 (il y a 8 jours)</li> <li>De : michel@pixmail.com</li> <li>À :leo@laposte.net; anna@gmail.com; hamed@orange.fr</li><li> Objet : Costume pour le 27 octobre</li> <li>Bonjour à tous, Pensez à amener vos costumes de chevaliers pour la dernière scène. Pas besoin de prévenir Jennifer, Marine, Clément et Rayan : ils seront absents. Rendez-vous comme d'habitude au 7 rue Babylone à 18h.À bientôt ! Le Théâtre Lumière</li></ul>"
           }
