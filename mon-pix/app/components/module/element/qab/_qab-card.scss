@@ -2,6 +2,8 @@
 @use 'pix-design-tokens/typography';
 
 .qab-card {
+  --qab-card-content-border-color: var(--pix-primary-300);
+
   display: grid;
   grid-area: center;
   width: 100%;
@@ -43,14 +45,7 @@
     transform: scale(0.5) translateY(77%);
   }
 
-  &--removed {
-    translate: -100vw -10vh;
-    rotate: -20deg;
-  }
-
   &__container {
-    --qab-card-content-border-color: var(--pix-primary-300);
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,14 +53,24 @@
     padding: var(--pix-spacing-6x);
     border: var(--pix-spacing-2x) solid var(--qab-card-content-border-color);
     border-radius: var(--radius-s, 8px);
+  }
 
-    &--error {
-      --qab-card-content-border-color: var(--pix-error-500);
-    }
-
-    &--success {
+  &--success {
       --qab-card-content-border-color: var(--pix-success-300);
-    }
+  }
+
+  &--error {
+      --qab-card-content-border-color: var(--pix-error-500);
+  }
+
+  &--success.qab-card--removed {
+    translate: -100vw -10vh;
+    rotate: -20deg;
+  }
+
+  &--error.qab-card--removed {
+    translate: 100vw -10vh;
+    rotate: -20deg;
   }
 
   &--without-transition {

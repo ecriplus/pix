@@ -23,7 +23,9 @@ export default class QabCard extends Component {
     <div
       class="qab-card
         {{if @isRemoved 'qab-card--removed'}}
-        {{if this.userPrefersReducedMotion 'qab-card--without-transition'}}"
+        {{if this.userPrefersReducedMotion 'qab-card--without-transition'}}
+        {{if this.isSuccess 'qab-card--success'}}
+        {{if this.isError 'qab-card--error'}}"
     >
       {{#if this.isSuccess}}
         <p role="status" class="sr-only"> {{t "pages.modulix.qab.correct-answer"}} </p>
@@ -31,11 +33,7 @@ export default class QabCard extends Component {
       {{#if this.isError}}
         <p role="status" class="sr-only"> {{t "pages.modulix.qab.incorrect-answer"}} </p>
       {{/if}}
-      <div
-        class="qab-card__container
-          {{if this.isSuccess 'qab-card__container--success'}}
-          {{if this.isError 'qab-card__container--error'}}"
-      >
+      <div class="qab-card__container">
         <div class="qab-card-container-content {{if this.hasImage 'qab-card-container-content--with-image'}}">
           {{#if this.hasImage}}
             <img class="qab-card-container-content__image" src={{@card.image.url}} alt={{@card.image.altText}} />
