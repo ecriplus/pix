@@ -44,6 +44,14 @@
         {
           "type": "element",
           "element": {
+            "id": "a27b96cf-a0a7-45df-866a-313a1bd6caaf",
+            "type": "text",
+            "content": "<p>À votre avis, de quand date l’intelligence artificielle ?&nbsp;⌛</p>\n<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-frise.html\" height=\"300\"></iframe>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
             "id": "8de9c100-b1a7-4134-9a67-01918610bc80",
             "type": "qcu",
             "instruction": "<p>À votre avis, de quand date l’intelligence artificielle ?&nbsp;⌛</p>",
@@ -107,15 +115,7 @@
             ],
             "solution": "1"
           }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "a27b96cf-a0a7-45df-866a-313a1bd6caaf",
-            "type": "text",
-            "content": "<p>À votre avis, de quand date l’intelligence artificielle ?&nbsp;⌛</p>\n<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-frise.html\" height=\"300\"></iframe>"
-          }
-        }
+        }      
       ]
     },
     {
