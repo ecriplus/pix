@@ -2,13 +2,11 @@
 
 .framework__creation-button {
   display: inline-flex;
-  margin-top: var(--pix-spacing-6x);
 }
 
 .framework-creation-form__title {
   @extend %pix-title-s;
 
-  margin-top: var(--pix-spacing-6x);
   margin-bottom: var(--pix-spacing-4x);
   color: var(--pix-neutral-800);
 }
