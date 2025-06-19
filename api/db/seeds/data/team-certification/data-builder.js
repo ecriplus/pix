@@ -1,40 +1,14 @@
-import * as tooling from '../common/tooling/index.js';
-import { acceptPixOrgaTermsOfService } from '../common/tooling/legal-documents.js';
-import proCertificationCase from './cases/simple-pro-certification.js';
-import simpleScoManagingStudentsCertificationCase from './cases/simple-sco-managing-students-certification.js';
-import { CERTIFIABLE_SUCCESS_USER_ID } from './constants.js';
-import { setupConfigurations } from './setup-configuration.js';
+import { ProSeed } from './cases/simple-pro-certification.js';
+import { ScoManagingStudent } from './cases/simple-sco-managing-students-certification.js';
+import { setupConfigurations } from './shared/setup-configuration.js';
 
 async function teamCertificationDataBuilder({ databaseBuilder }) {
-  await _createSuccessCertifiableUser({ databaseBuilder });
+  // Pix platform configuration
   await setupConfigurations({ databaseBuilder });
 
   // Cases
-  await simpleScoManagingStudentsCertificationCase({ databaseBuilder });
-  await proCertificationCase({ databaseBuilder });
+  await new ProSeed({ databaseBuilder }).create();
+  await new ScoManagingStudent({ databaseBuilder }).create();
 }
 
 export { teamCertificationDataBuilder };
-
-async function _createSuccessCertifiableUser({ databaseBuilder }) {
-  const userId = databaseBuilder.factory.buildUser.withRawPassword({
-    id: CERTIFIABLE_SUCCESS_USER_ID,
-    firstName: 'Certifiable',
-    lastName: 'Certif',
-    email: 'certif-success@example.net',
-    cgu: true,
-    lang: 'fr',
-    lastTermsOfServiceValidatedAt: new Date(),
-    mustValidateTermsOfService: false,
-    pixCertifTermsOfServiceAccepted: false,
-    hasSeenAssessmentInstructions: false,
-    shouldChangePassword: false,
-  }).id;
-
-  acceptPixOrgaTermsOfService(databaseBuilder, CERTIFIABLE_SUCCESS_USER_ID);
-
-  await tooling.profile.createPerfectProfile({
-    databaseBuilder,
-    userId,
-  });
-}
