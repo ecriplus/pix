@@ -114,10 +114,9 @@
             "id": "9cb3a20f-cedf-45c9-8910-1e8086fdd728",
             "type": "embed",
             "isCompletionRequired": false,
-            "title": "",
+            "title": "embed puissance de calcul",
             "url": "https://1024pix.github.io/atelier-contenus/FRI/comparaison_puissance_calcul_puces_jauges.html",
             "instruction": "<p>Cliquez sur \"Commencer\" pour voir la puissance de calculs des appareils courants</p>",
-            "solution": "-",
             "height": 800
           }
         },
@@ -413,7 +412,6 @@
             "title": "Simulation alimentation supercalculateur",
             "url": "https://1024pix.github.io/atelier-contenus/FRI/IAEnvironnementAlimentation11.html",
             "instruction": "<p>Cliquez sur \"Commencer\" pour visualiser les besoins en énergie pour l'entraînement d'une IA.</p>",
-            "solution": "",
             "height": 600
           }
         }
@@ -488,7 +486,6 @@
             "title": "Charge supercalculateur",
             "url": "https://1024pix.github.io/atelier-contenus/FRI/IAEnvironnementInference.html",
             "instruction": "<p>Un supercalculateur traite les demandes des utilisateurs. <strong>Plus les demandes sont complexes et nombreuses, plus il doit être puissant</strong>. Il ne peut pas tout traiter !</p><p>Comparez la charge de calcul supportée par le supercalculateur <strong>en faisant varier les prompts et le nombre de requêtes</strong>. Puis répondez aux questions suivantes.<br><br></p>",
-            "solution": "",
             "height": 550
           }
         },
@@ -608,7 +605,7 @@
           "element": {
             "id": "5d68cc81-8755-4887-9c28-30dfbe4286da",
             "type": "image",
-            "url": "",
+            "url": "https://images.pix.fr/modulix/placeholder-details.svg",
             "alt": "-",
             "alternativeText": "<p>Évaluation</p>",
             "legend": "",
@@ -713,9 +710,7 @@
                     "content": "calculatrices"
                   }
                 ],
-                "solutions": [
-                  "1"
-                ]
+                "solutions": ["1"]
               }
             ],
             "feedbacks": {
@@ -796,7 +791,6 @@
             "title": "Transfert",
             "url": "https://1024pix.github.io/atelier-contenus/FRI/IAEnvironnementTransfert04.html",
             "instruction": "<p>Maintenant, essayons de voir à quoi correspond la consommation d’énergie de <strong>votre utilisation de l’IA</strong>.</p>",
-            "solution": "-",
             "height": 800
           }
         }
