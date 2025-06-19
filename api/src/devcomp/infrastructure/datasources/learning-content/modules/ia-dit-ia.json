@@ -158,7 +158,7 @@
           "element": {
             "id": "d4c2fcb1-74b0-474e-8bda-470c83ced9c2",
             "type": "text",
-            "content": "<p>Aujourd’hui les ordinateurs sont capables de réaliser toutes sortes de tâches : <br>👀 Des tâches que nous faisons sans y penser comme reconnaître un chien dans une image.&nbsp;<br>🧠 Et des tâches qui nous demandent plus de concentration comme résoudre des problèmes de maths.<br></p><p>Le <strong>domaine scientifique</strong> qui a permis ces progrès se nomme <strong>l’intelligence artificielle</strong>. D’autres sciences et techniques y ont contribué&nbsp;: l’informatique, l’électronique, la robotique, les statistiques, les sciences cognitives, les neurosciences, etc.</p>"
+            "content": "<p>Aujourd’hui les ordinateurs sont capables de réaliser toutes sortes de tâches : <br>👀 Des tâches que nous faisons sans y penser comme reconnaître un chien dans une image.&nbsp;<br>🧠 Et des tâches qui nous demandent plus de concentration comme résoudre des problèmes de maths.</p><p><br>Le <strong>domaine scientifique</strong> qui a permis ces progrès se nomme <strong>l’intelligence artificielle</strong>. D’autres sciences et techniques y ont contribué&nbsp;: l’informatique, l’électronique, la robotique, les statistiques, les sciences cognitives, les neurosciences, etc.</p>"
           }
         }
       ]
@@ -188,7 +188,7 @@
           "element": {
             "id": "8dba133c-906f-4793-939f-015df7d2acce",
             "type": "text",
-            "content": "<p>Mariam est équipée de nombreux appareils électroniques. Explorez son salon pour trouver les services et les objets qui utilisent&nbsp; de l’IA.&nbsp;<br></p>"
+            "content": "<p>Mariam est équipée de nombreux appareils électroniques. Explorez son salon pour trouver les services et les objets qui utilisent&nbsp;de l’IA.</p>"
           }
         },
         {
@@ -313,7 +313,7 @@
           "element": {
             "id": "715a385e-dcfb-4001-9e5d-5b00ab365221",
             "type": "text",
-            "content": "<p>Voici les points principaux à retenir :&nbsp;</p><ul><li><strong>L’intelligence artificielle est un domaine scientifique</strong> qui étudie comment permettre à des machines d’imiter les mécanismes de l’intelligence.&nbsp;🔬</li><li>Certains logiciels d’IA sont <strong>spécialisés dans un type de tâches</strong>&nbsp;:&nbsp; la reconnaissance d’image, la recommandation de contenu, la prédiction, etc. D’autres sont plus <strong>généralistes</strong> et peuvent générer des contenus variés.&nbsp;👩‍💻</li><li>Les techniques d’IA sont utilisées dans <strong>des outils et services de notre quotidien</strong>. Leur utilisation permet de faire de nombreux progrès.&nbsp;📈</li></ul>"
+            "content": "<p>Voici les points principaux à retenir :&nbsp;</p><ul><li><strong>L’intelligence artificielle est un domaine scientifique</strong> qui étudie comment permettre à des machines d’imiter les mécanismes de l’intelligence.&nbsp;🔬</li><li><strong>Certains logiciels d’IA sont spécialisés dans un type de tâches</strong>&nbsp;:&nbsp; la reconnaissance d’image, la recommandation de contenu, la prédiction, etc. <strong>D’autres sont plus généralistes</strong> comme les IA génératives.&nbsp;👩‍💻</li><li>Les techniques d’IA sont utilisées dans <strong>des outils et services de notre quotidien</strong>. Leur utilisation permet de faire de nombreux progrès.&nbsp;📈</li></ul>"
           }
         }
       ]
