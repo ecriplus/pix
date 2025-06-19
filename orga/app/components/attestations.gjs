@@ -114,12 +114,13 @@ class OtherAttestations extends Component {
 
 class SixthGrade extends Component {
   @tracked selectedDivisions = [];
+  @tracked isLoading = false;
 
   @action
-  onSubmit(event) {
-    event.preventDefault();
-
-    this.args.onSubmit(SIXTH_GRADE_ATTESTATION_KEY, this.selectedDivisions);
+  async onSubmit() {
+    this.isLoading = true;
+    await this.args.onSubmit(SIXTH_GRADE_ATTESTATION_KEY, this.selectedDivisions);
+    this.isLoading = false;
   }
 
   @action
@@ -128,15 +129,14 @@ class SixthGrade extends Component {
   }
 
   get isDisabled() {
-    return !this.selectedDivisions.length;
+    return !this.selectedDivisions.length || this.isLoading;
   }
 
   <template>
     <p class="attestations-page__text">
       {{t "pages.attestations.divisions-description"}}
     </p>
-
-    <form class="attestations-page__action" {{on "submit" this.onSubmit}}>
+    <div class="attestations-page__action">
       <PixMultiSelect
         @isSearchable={{true}}
         @options={{@divisions}}
@@ -147,9 +147,9 @@ class SixthGrade extends Component {
         <:label>{{t "pages.attestations.select-divisions-label"}}</:label>
         <:default as |option|>{{option.label}}</:default>
       </PixMultiSelect>
-      <PixButton @type="submit" @size="small" @isDisabled={{this.isDisabled}}>
+      <PixButton @triggerAction={{this.onSubmit}} @size="small" @isDisabled={{this.isDisabled}}>
         {{t "pages.attestations.download-attestations-button"}}
       </PixButton>
-    </form>
+    </div>
   </template>
 }

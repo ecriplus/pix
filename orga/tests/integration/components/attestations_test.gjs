@@ -98,8 +98,6 @@ module('Integration | Component | Attestations', function (hooks) {
         name: t('pages.attestations.download-attestations-button'),
       });
 
-      // we need to get out of input choice to click on download button, so we have to click again on the multiselect to close it
-      await click(multiSelect);
       await click(downloadButton);
 
       // then
