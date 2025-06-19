@@ -47,20 +47,22 @@ const findUserForOidcReconciliation = async function ({
       (authenticationMethod) => authenticationMethod.identityProvider === identityProvider,
     );
 
-    const isSameExternalIdentifier =
-      oidcAuthenticationMethod?.externalIdentifier === sessionContentAndUserInfo.userInfo.externalIdentityId;
-    if (oidcAuthenticationMethod && !isSameExternalIdentifier) {
-      monitoringTools.logErrorWithCorrelationIds({
-        message: 'Different externalIdentifier (sub)',
-        context: 'oidc',
-        data: {
-          externalIdentifier: sessionContentAndUserInfo.userInfo.externalIdentityId,
-          previousExternalIdentifier: oidcAuthenticationMethod.externalIdentifier,
-        },
-        team: 'acces',
-      });
+    if (oidcAuthenticationMethod) {
+      const isDifferentFromPreviousExternalIdentifier =
+        sessionContentAndUserInfo.userInfo.externalIdentityId != oidcAuthenticationMethod.externalIdentifier;
+      if (isDifferentFromPreviousExternalIdentifier) {
+        monitoringTools.logErrorWithCorrelationIds({
+          message: 'Different externalIdentifier (sub)',
+          context: 'oidc',
+          data: {
+            externalIdentifier: sessionContentAndUserInfo.userInfo.externalIdentityId,
+            previousExternalIdentifier: oidcAuthenticationMethod.externalIdentifier,
+          },
+          team: 'acces',
+        });
 
-      throw new DifferentExternalIdentifierError();
+        throw new DifferentExternalIdentifierError();
+      }
     }
 
     sessionContentAndUserInfo.userInfo.userId = foundUser.id;
