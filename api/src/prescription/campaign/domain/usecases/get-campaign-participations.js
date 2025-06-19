@@ -50,8 +50,8 @@ function computeTubes(campaignId, campaignParticipation, learningContent, knowle
   const campaignResultLevelPerTubesAndCompetences = new CampaignResultLevelsPerTubesAndCompetences({
     campaignId,
     learningContent,
-    knowledgeElementsByParticipation,
   });
+  campaignResultLevelPerTubesAndCompetences.addKnowledgeElementSnapshots(knowledgeElementsByParticipation);
   return campaignResultLevelPerTubesAndCompetences.levelsPerTube.map(
     ({ id, competenceId, competenceName, title, description, meanLevel, maxLevel }) => {
       return new TubeCoverage({

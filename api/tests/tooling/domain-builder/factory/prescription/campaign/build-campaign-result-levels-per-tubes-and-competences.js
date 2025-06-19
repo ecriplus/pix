@@ -62,10 +62,11 @@ function buildCampaignResultLevelsPerTubesAndCompetences() {
     participationId1: new KnowledgeElementCollection([user1ke1]).latestUniqNonResetKnowledgeElements,
     participationId2: new KnowledgeElementCollection([user2ke1]).latestUniqNonResetKnowledgeElements,
   };
-  return new CampaignResultLevelsPerTubesAndCompetences({
+  const campaignResult = new CampaignResultLevelsPerTubesAndCompetences({
     campaignId: 1,
     learningContent,
-    knowledgeElementsByParticipation: keData,
   });
+  campaignResult.addKnowledgeElementSnapshots(keData);
+  return campaignResult;
 }
 export { buildCampaignResultLevelsPerTubesAndCompetences };

@@ -111,8 +111,8 @@ describe('Unit | Domain | Models | CampaignResultLevelPerTubesAndCompetences', f
       const campaignResult = new CampaignResultLevelsPerTubesAndCompetences({
         campaignId: 1,
         learningContent,
-        knowledgeElementsByParticipation: keData,
       });
+      campaignResult.addKnowledgeElementSnapshots(keData);
 
       expect(campaignResult.levelsPerTube).to.deep.equal([
         {
@@ -140,8 +140,8 @@ describe('Unit | Domain | Models | CampaignResultLevelPerTubesAndCompetences', f
       const campaignResult = new CampaignResultLevelsPerTubesAndCompetences({
         campaignId: 1,
         learningContent,
-        knowledgeElementsByParticipation: keData,
       });
+      campaignResult.addKnowledgeElementSnapshots(keData);
 
       expect(campaignResult.levelsPerCompetence[0].id).to.deep.equal('competence1');
       expect(campaignResult.levelsPerCompetence[0].index).to.deep.equal('1.1');
@@ -162,8 +162,9 @@ describe('Unit | Domain | Models | CampaignResultLevelPerTubesAndCompetences', f
       const campaignResult = new CampaignResultLevelsPerTubesAndCompetences({
         campaignId: 1,
         learningContent,
-        knowledgeElementsByParticipation: keData,
       });
+      campaignResult.addKnowledgeElementSnapshots(Object.values(keData));
+
       expect(campaignResult.maxReachableLevel).equal(3);
     });
 
@@ -171,8 +172,9 @@ describe('Unit | Domain | Models | CampaignResultLevelPerTubesAndCompetences', f
       const campaignResult = new CampaignResultLevelsPerTubesAndCompetences({
         campaignId: 1,
         learningContent,
-        knowledgeElementsByParticipation: keData,
       });
+      campaignResult.addKnowledgeElementSnapshots(Object.values(keData));
+
       expect(campaignResult.meanReachedLevel).equal(1.25);
     });
   });

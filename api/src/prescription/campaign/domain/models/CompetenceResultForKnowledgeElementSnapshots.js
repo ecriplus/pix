@@ -1,6 +1,8 @@
 import { TubeResultForKnowledgeElementSnapshots } from './TubeResultForKnowledgeElementSnapshots.js';
 
 class CompetenceResultForKnowledgeElementSnapshots {
+  #tubeResults;
+
   id;
   index;
   name;
@@ -8,17 +10,23 @@ class CompetenceResultForKnowledgeElementSnapshots {
   meanLevel;
   maxLevel;
 
-  constructor({ competence, knowledgeElementSnapshots } = {}) {
-    const tubeResults = competence.tubes.map(
-      (tube) => new TubeResultForKnowledgeElementSnapshots({ tube, knowledgeElementSnapshots, competence }),
+  constructor({ competence } = {}) {
+    this.#tubeResults = competence.tubes.map(
+      (tube) => new TubeResultForKnowledgeElementSnapshots({ tube, competence }),
     );
 
     this.id = competence.id;
     this.index = competence.index;
     this.name = competence.name;
     this.description = competence.description;
-    this.maxLevel = averageBy(tubeResults, 'maxLevel');
-    this.meanLevel = averageBy(tubeResults, 'meanLevel');
+  }
+
+  addKnowledgeElementSnapshots(knowledgeElementSnapshots) {
+    this.#tubeResults.forEach((tubesWithLevel) =>
+      tubesWithLevel.addKnowledgeElementSnapshots(knowledgeElementSnapshots),
+    );
+    this.maxLevel = averageBy(this.#tubeResults, 'maxLevel');
+    this.meanLevel = averageBy(this.#tubeResults, 'meanLevel');
   }
 }
 
