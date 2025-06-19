@@ -8,7 +8,7 @@
   --modulix-radius-s: 8px;
   --modulix-radius: 16px;
   --modulix-radius-l: 24px;
-  --modulix-z-index-above-all: 2;
+  --modulix-z-index-above-all: 10;
 
   flex-grow: 1;
   color: var(--pix-neutral-900);
@@ -16,7 +16,7 @@
 }
 
 .modulix-beta-banner {
-  --modulix-z-index-above-all: 2;
+  --modulix-z-index-above-all: 10;
 
   z-index: var(--modulix-z-index-above-all);
 }
