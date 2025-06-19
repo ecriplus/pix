@@ -13,6 +13,7 @@ import * as campaignsRoutes from './src/maddo/application/campaigns-routes.js';
 import * as organizationsRoutes from './src/maddo/application/organizations-routes.js';
 import * as replicationsRoutes from './src/maddo/application/replications-routes.js';
 import { Metrics } from './src/monitoring/infrastructure/metrics.js';
+import * as franceTravailRoutes from './src/prescription/campaign-participation/application/pole-emploi-route.js';
 import * as healthcheckRoutes from './src/shared/application/healthcheck/index.js';
 import { config } from './src/shared/config.js';
 import { installHapiHook } from './src/shared/infrastructure/async-local-storage.js';
@@ -185,6 +186,7 @@ const setupRoutesAndPlugins = async function (server) {
     organizationsRoutes,
     replicationsRoutes,
     parcoursupRoutes,
+    franceTravailRoutes,
     livretScolaireRoutes,
   ];
   const routesWithOptions = routes.map((route) => ({
