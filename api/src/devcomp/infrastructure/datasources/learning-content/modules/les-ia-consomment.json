@@ -686,7 +686,7 @@
             "proposals": [
               {
                 "type": "text",
-                "content": "<span><p>Ce qui permet à l’IA de réaliser des calculs, ce sont ses</p></span>"
+                "content": "<span>Ce qui permet à l’IA de réaliser des calculs, ce sont ses</span>"
               },
               {
                 "input": "trou1",
@@ -716,7 +716,7 @@
               },
               {
                 "type": "text",
-                "content": "<span><p>.&nbsp; <br><br>Elles ont besoin de beaucoup&nbsp;</p></span>"
+                "content": "<span>.&nbsp; <br><br>Elles ont besoin de beaucoup&nbsp;</span>"
               },
               {
                 "input": "trou 2",
@@ -746,7 +746,7 @@
               },
               {
                 "type": "text",
-                "content": "</span><p>pour être fabriquées.</p><p><br></p><p>Les </p></span>"
+                "content": "<span>pour être fabriquées.</p><p><br></p><p>Les </span>"
               },
               {
                 "input": "trou 3",
@@ -776,7 +776,7 @@
               },
               {
                 "type": "text",
-                "content": "</span><p>sont composés de milliers de puces.</p><p><br></p><p>Un supercalculateur est est immense ordinateur qui regroupe des </p></span>"
+                "content": "<span>sont composés de milliers de puces.</p><p><br></p><p>Un supercalculateur est est immense ordinateur qui regroupe des </span>"
               },
               {
                 "input": "trou 4",
@@ -806,7 +806,7 @@
               },
               {
                 "type": "text",
-                "content": "</span><p>de puces spécialisées IA.</p><p><br></p><p>Leur fonctionnement demande beaucoup</p></span>"
+                "content": "<span>de puces spécialisées IA.</p><p><br></p><p>Leur fonctionnement demande beaucoup</span>"
               },
               {
                 "input": "trou 5",
@@ -836,7 +836,7 @@
               },
               {
                 "type": "text",
-                "content": "</span><p>.</p><p><br></p><p>Pour fonctionner, ils ont aussi besoin d’être </p></span>"
+                "content": "<span>.</p><p><br></p><p>Pour fonctionner, ils ont aussi besoin d’être </span>"
               },
               {
                 "input": "trou 6",
@@ -866,7 +866,7 @@
               },
               {
                 "type": "text",
-                "content": "</span><p>, et cela consomme encore davantage.</p></span>"
+                "content": "<span>, et cela consomme encore davantage.</span>"
               }
             ],
             "feedbacks": {
