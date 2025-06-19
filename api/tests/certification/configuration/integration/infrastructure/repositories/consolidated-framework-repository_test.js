@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import * as consolidatedFrameworkRepository from '../../../../../../src/certification/configuration/infrastructure/repositories/consolidated-framework-repository.js';
 import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
@@ -31,21 +33,23 @@ describe('Certification | Configuration | Integration | Repository | consolidate
         'challengeId',
         'alpha',
         'delta',
+        'createdAt',
       );
-      expect(consolidatedFrameworkInDB).to.deep.equal([
-        {
-          complementaryCertificationId: complementaryCertification.id,
-          challengeId: challenge1.id,
-          alpha: null,
-          delta: null,
-        },
-        {
-          complementaryCertificationId: complementaryCertification.id,
-          challengeId: challenge2.id,
-          alpha: null,
-          delta: null,
-        },
-      ]);
+
+      expect(consolidatedFrameworkInDB).to.have.lengthOf(2);
+      expect(_.omit(consolidatedFrameworkInDB[0], 'createdAt')).to.deep.equal({
+        complementaryCertificationId: complementaryCertification.id,
+        challengeId: challenge1.id,
+        alpha: null,
+        delta: null,
+      });
+      expect(_.omit(consolidatedFrameworkInDB[1], 'createdAt')).to.deep.equal({
+        complementaryCertificationId: complementaryCertification.id,
+        challengeId: challenge2.id,
+        alpha: null,
+        delta: null,
+      });
+      expect(consolidatedFrameworkInDB[0].createdAt).to.deep.equal(consolidatedFrameworkInDB[1].createdAt);
     });
   });
 });

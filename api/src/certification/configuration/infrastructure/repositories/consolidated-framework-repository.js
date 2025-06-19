@@ -11,7 +11,5 @@ export async function create({ complementaryCertificationKey, challenges }) {
     challengeId: challenge.id,
   }));
 
-  for (const challengeDTO of challengesDTO) {
-    await knexConn('certification-frameworks-challenges').insert({ ...challengeDTO });
-  }
+  await knexConn('certification-frameworks-challenges').insert(challengesDTO);
 }
