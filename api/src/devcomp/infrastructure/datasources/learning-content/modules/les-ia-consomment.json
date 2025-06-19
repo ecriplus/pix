@@ -680,9 +680,9 @@
         {
           "type": "element",
           "element": {
-            "id": "4fd2e1d5-8514-44bf-859c-475d021942b3",
+            "id": "a13aff9b-96c9-4dbb-b90a-757b31f391a0",
             "type": "qrocm",
-            "instruction": "<p>Remplissez le texte à trous</p>",
+            "instruction": "<p>Complétez les textes suivants :</p>",
             "proposals": [
               {
                 "type": "text",
@@ -699,7 +699,7 @@
                 "options": [
                   {
                     "id": "1",
-                    "content": "Puces"
+                    "content": "puces"
                   },
                   {
                     "id": "2",
@@ -710,17 +710,173 @@
                     "content": "calculatrices"
                   }
                 ],
-                "solutions": ["1"]
+                "solutions": [
+                  "1"
+                ]
+              },
+              {
+                "type": "text",
+                "content": "<p>.&nbsp; <br><br>Elles ont besoin de beaucoup&nbsp;</p>"
+              },
+              {
+                "input": "trou 2",
+                "type": "select",
+                "display": "inline",
+                "placeholder": "-Sélectionner-",
+                "ariaLabel": "sélectionner",
+                "defaultValue": "",
+                "tolerances": [],
+                "options": [
+                  {
+                    "id": "1",
+                    "content": "d’utilisateurs"
+                  },
+                  {
+                    "id": "2",
+                    "content": "de ressources naturelles"
+                  },
+                  {
+                    "id": "3",
+                    "content": "de puissance de calcul"
+                  }
+                ],
+                "solutions": [
+                  "2"
+                ]
+              },
+              {
+                "type": "text",
+                "content": "<p>pour être fabriquées.</p><p><br></p><p>Les </p>"
+              },
+              {
+                "input": "trou 3",
+                "type": "select",
+                "display": "inline",
+                "placeholder": "-Sélectionner-",
+                "ariaLabel": "sélectionner",
+                "defaultValue": "",
+                "tolerances": [],
+                "options": [
+                  {
+                    "id": "1",
+                    "content": "prompts "
+                  },
+                  {
+                    "id": "2",
+                    "content": "métaux "
+                  },
+                  {
+                    "id": "3",
+                    "content": "supercalculateurs "
+                  }
+                ],
+                "solutions": [
+                  "3"
+                ]
+              },
+              {
+                "type": "text",
+                "content": "<p>sont composés de milliers de puces.</p><p><br></p><p>Un supercalculateur est est immense ordinateur qui regroupe des </p>"
+              },
+              {
+                "input": "trou 4",
+                "type": "select",
+                "display": "inline",
+                "placeholder": "-Sélectionner-",
+                "ariaLabel": "sélectionner",
+                "defaultValue": "",
+                "tolerances": [],
+                "options": [
+                  {
+                    "id": "1",
+                    "content": "centaines"
+                  },
+                  {
+                    "id": "2",
+                    "content": "milliers "
+                  },
+                  {
+                    "id": "3",
+                    "content": "millions "
+                  }
+                ],
+                "solutions": [
+                  "2"
+                ]
+              },
+              {
+                "type": "text",
+                "content": "<p>de puces spécialisées IA.</p><p><br></p><p>Leur fonctionnement demande beaucoup</p>"
+              },
+              {
+                "input": "trou 5",
+                "type": "select",
+                "display": "inline",
+                "placeholder": "-Sélectionner-",
+                "ariaLabel": "sélectionner",
+                "defaultValue": "",
+                "tolerances": [],
+                "options": [
+                  {
+                    "id": "1",
+                    "content": "de ressources naturelles"
+                  },
+                  {
+                    "id": "2",
+                    "content": "d'énergie"
+                  },
+                  {
+                    "id": "3",
+                    "content": "de place"
+                  }
+                ],
+                "solutions": [
+                  "1"
+                ]
+              },
+              {
+                "type": "text",
+                "content": "<p>.</p><p><br></p><p>Pour fonctionner, ils ont aussi besoin d’être </p>"
+              },
+              {
+                "input": "trou 6",
+                "type": "select",
+                "display": "inline",
+                "placeholder": "-Sélectionner-",
+                "ariaLabel": "sélectionner",
+                "defaultValue": "",
+                "tolerances": [],
+                "options": [
+                  {
+                    "id": "1",
+                    "content": "rassurés "
+                  },
+                  {
+                    "id": "2",
+                    "content": "refroidis "
+                  },
+                  {
+                    "id": "3",
+                    "content": "réchauffés "
+                  }
+                ],
+                "solutions": [
+                  "2"
+                ]
+              },
+              {
+                "type": "text",
+                "content": "<p>, et cela consomme encore davantage.</p>"
               }
             ],
             "feedbacks": {
               "valid": {
-                "state": "<p><br></p>",
-                "diagnosis": "<p>-</p>"
+                "state": "Bonnes réponses ! 🎉",
+                "diagnosis": ""
               },
               "invalid": {
-                "state": "<p><br></p>",
-                "diagnosis": "<p>-<br></p><p><br></p>"
+                "state": "Mauvaise réponse.",
+                "diagnosis": "N'hésitez pas à consulter le récapitulatif pour vous aider à remplir le texte ☝️"
               }
             }
           }
