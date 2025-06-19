@@ -4,7 +4,6 @@ import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecase
 import { usecases as questUsecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { config } from '../../../../../src/shared/config.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import * as events from '../../../../../src/shared/domain/events/index.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Controller | assessment-controller', function () {
@@ -26,7 +25,6 @@ describe('Unit | Controller | assessment-controller', function () {
       sinon.stub(questUsecases, 'rewardUser');
       evaluationUsecases.completeAssessment.resolves(assessment);
       evaluationUsecases.handleBadgeAcquisition.resolves();
-      sinon.stub(events.eventDispatcher, 'dispatch');
     });
 
     it('should call the completeAssessment use case', async function () {

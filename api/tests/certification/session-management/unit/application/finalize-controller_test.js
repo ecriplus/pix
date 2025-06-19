@@ -1,7 +1,6 @@
 import { finalizeController } from '../../../../../src/certification/session-management/application/finalize-controller.js';
 import { usecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import * as events from '../../../../../src/shared/domain/events/index.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Unit | Application | Controller | Finalize', function () {
@@ -45,7 +44,7 @@ describe('Certification | Session Management | Unit | Application | Controller |
       });
 
       // when
-      await finalizeController.finalize(request, hFake, { certificationReportSerializer, events });
+      await finalizeController.finalize(request, hFake, { certificationReportSerializer });
 
       // then
       expect(usecases.finalizeSession).to.have.been.calledWithExactly({

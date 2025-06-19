@@ -9,7 +9,6 @@ import { repositories as campaignRepositories } from '../../../prescription/camp
 import * as campaignParticipationRepository from '../../../prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
 import * as prescriptionOrganizationLearnerRepository from '../../../prescription/learner-management/infrastructure/repositories/organization-learner-repository.js';
 import { config } from '../../../shared/config.js';
-import { eventBus } from '../../../shared/domain/events/index.js';
 import { cryptoService } from '../../../shared/domain/services/crypto-service.js';
 import { mailService } from '../../../shared/domain/services/mail-service.js';
 import * as obfuscationService from '../../../shared/domain/services/obfuscation-service.js';
@@ -116,7 +115,7 @@ const utils = {
   httpAgent,
 };
 
-const dependencies = Object.assign({ config, codeUtils }, eventBus, repositories, services, validators, utils);
+const dependencies = Object.assign({ config, codeUtils }, repositories, services, validators, utils);
 
 const usecasesWithoutInjectedDependencies = {
   ...(await importNamedExportsFromDirectory({ path: join(path, './'), ignoredFileNames: ['index.js'] })),
