@@ -1,4 +1,4 @@
-import { render } from '@1024pix/ember-testing-library';
+import { render, within } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import CreationForm from 'pix-admin/components/complementary-certifications/item/framework/creation-form';
 import { module, test } from 'qunit';
@@ -43,6 +43,9 @@ module('Integration | Component | complementary-certifications/item/framework/cr
     await click(screen.getByLabelText('@tubeName1 : Tube 1'));
 
     // then
+    const table = screen.getByRole('table', { name: 'Sélection des sujets' });
+    assert.ok(within(table).getByRole('columnheader', { name: 'Niveau' }));
+    assert.ok(within(table).getByRole('columnheader', { name: 'Compatibilité' }));
     assert.ok(
       screen.getByRole('heading', {
         name: t('components.complementary-certifications.item.framework.creation-form.title', {

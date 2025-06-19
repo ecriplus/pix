@@ -4,7 +4,7 @@ import { module, test } from 'qunit';
 
 import setupIntlRenderingTest, { t } from '../../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | complementary-certifications/item/target-profile', function (hooks) {
+module('Integration | Component | complementary-certifications/item/framework', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   test('it should display a creation form button for framework', async function (assert) {
