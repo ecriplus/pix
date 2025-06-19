@@ -19,8 +19,8 @@ import {
   SCO_CERTIFICATION_CENTER_ID,
   STARTED_SCO_SESSION,
 } from '../shared/constants.js';
-import publishSessionWithValidatedCertification from '../tools/create-published-session-with-certification.js';
-import addSession from '../tools/create-session.js';
+import addSession from '../tools/add-session.js';
+import publishSessionWithValidatedCertification from '../tools/publish-session-with-validated-certification.js';
 
 /**
  * --- CERTIFICATION CASE ---
@@ -38,6 +38,8 @@ import addSession from '../tools/create-session.js';
  *    - Pix Admin user  : superadmin@example.net
  */
 export class ScoManagingStudent {
+  static USER_BIRTHDATE = '2000-01-01';
+
   constructor({ databaseBuilder }) {
     this.databaseBuilder = databaseBuilder;
   }
@@ -106,8 +108,7 @@ export class ScoManagingStudent {
   }
 
   async #addCertifiableUser({ organization }) {
-    const certifiableUserService = await CommonCertifiableUser.getInstance({ databaseBuilder: this.databaseBuilder });
-    const certifiableUser = certifiableUserService.certifiableUser;
+    const { certifiableUser } = await CommonCertifiableUser.getInstance({ databaseBuilder: this.databaseBuilder });
 
     const organizationLearner = await this.databaseBuilder.factory.buildOrganizationLearner({
       userId: certifiableUser.id,
@@ -117,7 +118,7 @@ export class ScoManagingStudent {
       email: certifiableUser.email,
       division: 'Terminal',
       sex: 'F',
-      birthdate: '2000-01-01',
+      birthdate: ScoManagingStudent.USER_BIRTHDATE,
       isCertifiable: true,
       isDisabled: false,
       certifiableAt: new Date('2022-01-30'),
@@ -151,7 +152,7 @@ export class ScoManagingStudent {
       firstName: pixAppUser.firstName,
       lastName: pixAppUser.lastName,
       sex: 'F',
-      birthdate: new Date('2000-10-30'),
+      birthdate: new Date(ScoManagingStudent.USER_BIRTHDATE),
       birthCountry: 'France',
       birthINSEECode: '75115',
       email: pixAppUser.email,

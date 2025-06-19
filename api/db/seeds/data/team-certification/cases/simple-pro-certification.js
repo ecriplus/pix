@@ -20,8 +20,8 @@ import {
   PUBLISHED_PRO_SESSION,
   STARTED_PRO_SESSION,
 } from '../shared/constants.js';
-import publishSessionWithValidatedCertification from '../tools/create-published-session-with-certification.js';
-import addSession from '../tools/create-session.js';
+import addSession from '../tools/add-session.js';
+import publishSessionWithValidatedCertification from '../tools/publish-session-with-validated-certification.js';
 
 /**
  * --- CERTIFICATION CASE ---
@@ -99,8 +99,8 @@ export class ProSeed {
   }
 
   async #addCertifiableUser() {
-    const certifiableUserService = await CommonCertifiableUser.getInstance({ databaseBuilder: this.databaseBuilder });
-    return certifiableUserService.certifiableUser;
+    const { certifiableUser } = await CommonCertifiableUser.getInstance({ databaseBuilder: this.databaseBuilder });
+    return certifiableUser;
   }
 
   async #addReadyToStartSession({ certificationCenterMember, certificationCenter }) {
