@@ -225,8 +225,12 @@
           "type": "element",
           "element": {
             "id": "ccaefecd-db35-40ea-a6f9-8d42fb907e63",
-            "type": "text",
-            "content": "<iframe title=\"carteagratter\" src=\"https://epreuves.pix.fr/fr/puzzle/example.html\" height=\"445\"></iframe>"
+            "type": "embed",
+            "isCompletionRequired": false,
+            "title": "Carte à gratter",
+            "url": "https://epreuves.pix.fr/fr/puzzle/example.html",
+            "instruction": "<p>Instruction</p>",
+            "height": 445
           }
         }
       ]
