@@ -5,6 +5,7 @@ import { parse } from 'neoqs';
 import { setupErrorHandling } from './config/server-setup-error-handling.js';
 import { databaseConnections } from './db/database-connections.js';
 import { knex } from './db/knex-database-connection.js';
+import * as livretScolaireRoutes from './src/certification/results/application/livret-scolaire-route.js';
 import * as parcoursupRoutes from './src/certification/results/application/parcoursup-route.js';
 import { identityAccessManagementRoutes } from './src/identity-access-management/application/routes.js';
 import * as serverAuthentication from './src/identity-access-management/infrastructure/server-authentication.js';
@@ -184,6 +185,7 @@ const setupRoutesAndPlugins = async function (server) {
     organizationsRoutes,
     replicationsRoutes,
     parcoursupRoutes,
+    livretScolaireRoutes,
   ];
   const routesWithOptions = routes.map((route) => ({
     plugin: route,
