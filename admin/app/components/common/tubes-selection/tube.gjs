@@ -85,17 +85,19 @@ export default class Tube extends Component {
     </td>
     <td class="table__column--center">
       <div class="level-selection">
-        <PixSelect
-          @screenReaderOnly={{true}}
-          @options={{this.levelOptions}}
-          @value={{this.selectedLevel}}
-          @onChange={{this.setLevelTube}}
-          @placeholder="À sélectionner"
-          @hideDefaultOption={{true}}
-          class="tubes-selection__level-select"
-        >
-          <:label>Sélection du niveau du sujet suivant : {{@tube.practicalTitle}}</:label>
-        </PixSelect>
+        {{#if @displaySkillDifficultySelection}}
+          <PixSelect
+            @screenReaderOnly={{true}}
+            @options={{this.levelOptions}}
+            @value={{this.selectedLevel}}
+            @onChange={{this.setLevelTube}}
+            @placeholder="À sélectionner"
+            @hideDefaultOption={{true}}
+            class="tubes-selection__level-select"
+          >
+            <:label>Sélection du niveau du sujet suivant : {{@tube.practicalTitle}}</:label>
+          </PixSelect>
+        {{/if}}
         {{#if @displaySkillDifficultyAvailability}}
           <div class="skill-availability">
             {{#each this.skillAvailabilityMap as |skillAvailability|}}

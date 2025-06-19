@@ -61,6 +61,10 @@ export default class TubesSelection extends Component {
     });
   }
 
+  get displaySkillDifficultySelection() {
+    return this.args.displaySkillDifficultySelection ?? true;
+  }
+
   get selectedFrameworks() {
     return this.args.frameworks.filter((framework) => this.selectedFrameworkIds.includes(framework.id));
   }
@@ -265,6 +269,7 @@ export default class TubesSelection extends Component {
           @tubeLevels={{this.tubeLevels}}
           @displayDeviceCompatibility={{@displayDeviceCompatibility}}
           @displaySkillDifficultyAvailability={{@displaySkillDifficultyAvailability}}
+          @displaySkillDifficultySelection={{this.displaySkillDifficultySelection}}
         />
       {{/if}}
     </div>

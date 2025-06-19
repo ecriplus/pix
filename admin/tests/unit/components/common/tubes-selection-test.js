@@ -8,11 +8,11 @@ import createComponent from '../../../helpers/create-glimmer-component';
 module('Unit | Component | common/tubes-selection', function (hooks) {
   setupTest(hooks);
 
-  let component;
+  let component, frameworks;
 
   hooks.beforeEach(function () {
     const store = this.owner.lookup('service:store');
-    const frameworks = [
+    frameworks = [
       store.createRecord('framework', { name: 'Pix', id: 'id1' }),
       store.createRecord('framework', { name: 'framework2', id: 'id2' }),
     ];
@@ -252,6 +252,58 @@ module('Unit | Component | common/tubes-selection', function (hooks) {
           level: 8,
         },
       ]);
+    });
+  });
+
+  module('#displaySkillDifficultySelection', function () {
+    module('when skill difficulty selection param is true', function () {
+      test('it should return true', async function (assert) {
+        // given
+        const component = createComponent('component:common/tubes-selection', {
+          displaySkillDifficultySelection: true,
+          frameworks,
+          onChange: sinon.stub(),
+        });
+
+        // when
+        const result = component.displaySkillDifficultySelection;
+
+        // then
+        assert.true(result);
+      });
+    });
+
+    module('when skill difficulty selection param is false', function () {
+      test('it should return false', async function (assert) {
+        // given
+        const component = createComponent('component:common/tubes-selection', {
+          displaySkillDifficultySelection: false,
+          frameworks,
+          onChange: sinon.stub(),
+        });
+
+        // when
+        const result = component.displaySkillDifficultySelection;
+
+        // then
+        assert.false(result);
+      });
+    });
+
+    module('when skill difficulty selection param is not defined', function () {
+      test('it should return true', async function (assert) {
+        // given
+        const component = createComponent('component:common/tubes-selection', {
+          frameworks,
+          onChange: sinon.stub(),
+        });
+
+        // when
+        const result = component.displaySkillDifficultySelection;
+
+        // then
+        assert.true(result);
+      });
     });
   });
 });
