@@ -2,6 +2,7 @@ import { CertificationJuryDone } from '../../../../../../src/certification/sessi
 import { CertificationAssessment } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { SessionFinalized } from '../../../../../../src/certification/session-management/domain/read-models/SessionFinalized.js';
 import { processAutoJury } from '../../../../../../src/certification/session-management/domain/usecases/process-auto-jury.js';
+import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ABORT_REASONS } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import {
   CertificationIssueReportCategory,
@@ -48,7 +49,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         ],
         certificationChallenges: [challengeToBeNeutralized1, challengeToBeNeutralized2, challengeNotToBeNeutralized],
       });
-      const certificationCourse = domainBuilder.buildCertificationCourse();
+      const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgorithmEngineVersion.V2 });
       const certificationIssueReport = domainBuilder.buildCertificationIssueReport({
         category: CertificationIssueReportCategory.IN_CHALLENGE,
         subcategory: CertificationIssueReportSubcategories.WEBSITE_BLOCKED,
@@ -107,7 +108,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         ],
         certificationChallenges: [challengeToBeNeutralized1],
       });
-      const certificationCourse = domainBuilder.buildCertificationCourse();
+      const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgorithmEngineVersion.V2 });
       const certificationIssueReport1 = domainBuilder.buildCertificationIssueReport({
         category: CertificationIssueReportCategory.IN_CHALLENGE,
         subcategory: CertificationIssueReportSubcategories.WEBSITE_BLOCKED,
@@ -158,6 +159,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
           id: 4567,
           completedAt: null,
           abortReason: ABORT_REASONS.CANDIDATE,
+          version: AlgorithmEngineVersion.V2,
         });
         certificationCourseRepository.findCertificationCoursesBySessionId
           .withArgs({ sessionId: 1234 })
@@ -218,6 +220,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
           const certificationCourse = domainBuilder.buildCertificationCourse({
             completedAt: null,
             abortReason: ABORT_REASONS.CANDIDATE,
+            version: AlgorithmEngineVersion.V2,
           });
           certificationCourseRepository.findCertificationCoursesBySessionId
             .withArgs({ sessionId: 1234 })
@@ -284,6 +287,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
           const certificationCourse = domainBuilder.buildCertificationCourse({
             completedAt: null,
             abortReason: ABORT_REASONS.TECHNICAL,
+            version: AlgorithmEngineVersion.V2,
           });
           certificationCourseRepository.findCertificationCoursesBySessionId
             .withArgs({ sessionId: 1234 })
@@ -354,6 +358,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         const certificationCourse = domainBuilder.buildCertificationCourse({
           completedAt: null,
           abortReason: ABORT_REASONS.CANDIDATE,
+          version: AlgorithmEngineVersion.V2,
         });
         certificationCourseRepository.findCertificationCoursesBySessionId
           .withArgs({ sessionId: 1234 })
@@ -440,7 +445,11 @@ describe('Unit | UseCase | process-auto-jury', function () {
           ],
           certificationChallenges: [challengeToBeNeutralized1, challengeToBeNeutralized2, challengeNotToBeNeutralized],
         });
-        const certificationCourse = domainBuilder.buildCertificationCourse({ id: 4567, sessionId: 1234 });
+        const certificationCourse = domainBuilder.buildCertificationCourse({
+          id: 4567,
+          sessionId: 1234,
+          version: AlgorithmEngineVersion.V2,
+        });
         const certificationIssueReport = domainBuilder.buildCertificationIssueReport({
           category: CertificationIssueReportCategory.IN_CHALLENGE,
           subcategory: CertificationIssueReportSubcategories.IMAGE_NOT_DISPLAYING,

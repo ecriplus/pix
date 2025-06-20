@@ -266,8 +266,8 @@ describe('Unit | Certification | Evaluation | UseCases | rescore-v3-certificatio
     });
 
     context('when it is a complementary certification', function () {
-      // eslint-disable-next-line mocha/no-skipped-tests
-      xit('should trigger complementary certification scoring', async function () {
+      it('should trigger complementary certification scoring', async function () {
+        this.skip('');
         // given
         const certificationCourseStartDate = new Date('2022-01-01');
         const certificationAssessment = domainBuilder.buildCertificationAssessment({
