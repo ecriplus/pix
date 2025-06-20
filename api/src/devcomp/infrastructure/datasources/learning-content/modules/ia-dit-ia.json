@@ -468,7 +468,7 @@
                   "content": "<p>❓ Un LLM (terme à modifier) répond à vos questions sur n'importe quel sujet.</p>"
                 },
                 {
-                  "id": "05a30b10-ac62-40a5-961b-9f3f3e831da0",
+                  "id": "f2e08b74-e487-40cc-935b-87ad6a2f4b54",
                   "type": "qcu",
                   "instruction": "<p>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
                   "proposals": [
@@ -517,7 +517,7 @@
                   "content": "<p>▶️ Un site vous propose de nouveaux contenus suite au visionnage d’une vidéo.</p>"
                 },
                 {
-                  "id": "05a30b10-ac62-40a5-961b-9f3f3e831da0",
+                  "id": "d6644a42-0b76-4e9c-8595-43c2da89cb9b",
                   "type": "qcu",
                   "instruction": "<p>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
                   "proposals": [
@@ -566,7 +566,7 @@
                   "content": "<p>🏷️ Un logiciel ajoute automatiquement des mots clés à des photographies.</p>"
                 },
                 {
-                  "id": "05a30b10-ac62-40a5-961b-9f3f3e831da0",
+                  "id": "e67d64c3-9912-4046-9f03-46059c51247c",
                   "type": "qcu",
                   "instruction": "<p>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
                   "proposals": [
