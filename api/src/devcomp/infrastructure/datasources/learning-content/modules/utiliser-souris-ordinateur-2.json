@@ -79,7 +79,7 @@
           "element": {
             "id": "0d588342-d473-4fd7-b995-f127177b493d",
             "type": "image",
-            "url": "https://i.imgur.com/17Ab5i5.gif",
+            "url": "https://assets.pix.org/draft/modules/17Ab5i5.gif",
             "alt": "",
             "alternativeText": ""
           }
@@ -269,7 +269,7 @@
           "element": {
             "id": "fc75b4ab-d92d-4ae9-8387-8bb3d683a99c",
             "type": "image",
-            "url": "https://i.imgur.com/Vm7UCzY.gif",
+            "url": "https://assets.pix.org/draft/modules/Vm7UCzY.gif",
             "alt": "",
             "alternativeText": ""
           }
@@ -296,7 +296,7 @@
             "type": "video",
             "title": "Effectuer un double-clic avec la souris",
             "url": "https://videos.pix.fr/modulix/utiliser-souris-ordinateur-1/souris_double_clic.mp4",
-            "poster": "https://i.imgur.com/N51HDsO.jpeg",
+            "poster": "https://assets.pix.org/draft/modules/N51HDsO.jpeg",
             "subtitles": "",
             "transcription": ""
           }
@@ -451,7 +451,7 @@
                 {
                   "id": "d3a9fae5-986c-4710-b53f-6775474bab4c",
                   "type": "image",
-                  "url": "https://i.imgur.com/aNtakNA.gif",
+                  "url": "https://assets.pix.org/draft/modules/aNtakNA.gif",
                   "alt": "",
                   "alternativeText": ""
                 }
@@ -469,7 +469,7 @@
                   "type": "video",
                   "title": "Utiliser le clic droit de la souris",
                   "url": "https://videos.pix.fr/modulix/utiliser-souris-ordinateur-1/souris_clic_droit.mp4",
-                  "poster": "https://i.imgur.com/Fxj4UcZ.jpeg",
+                  "poster": "https://assets.pix.org/draft/modules/Fxj4UcZ.jpeg",
                   "subtitles": "",
                   "transcription": ""
                 }

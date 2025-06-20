@@ -49,7 +49,7 @@
                 {
                   "id": "f71cc4ee-e90c-43dc-ade2-2f94cc7a9444",
                   "type": "image",
-                  "url": "https://i.imgur.com/SpFqjX9.jpeg",
+                  "url": "https://assets.pix.org/draft/modules/SpFqjX9.jpeg",
                   "alt": "Feuille de calcul avec un tableau à 6 colonnes. Chaque ligne représente un enfant : son prénom, son nom, son équipe, le temps réalisé à la course d'orientation, le score aux fléchettes et la réponse apportée au quiz.",
                   "alternativeText": "<p>Feuille de calcul avec un tableau à 6 colonnes. Chaque ligne représente un enfant : son prénom, son nom, son équipe, le temps réalisé à la course d'orientation, le score aux fléchettes et la réponse apportée au quiz.</p>"
                 },
@@ -178,7 +178,7 @@
                 {
                   "id": "f37f93e5-8b78-40b1-9628-1b07e49de08d",
                   "type": "image",
-                  "url": "https://i.imgur.com/0dvoxXo.jpeg",
+                  "url": "https://assets.pix.org/draft/modules/0dvoxXo.jpeg",
                   "alt": "",
                   "alternativeText": "<p>Infographie des options de filtre et de tri dans les logiciel de tableurs :</p><ul><li>Filtre, pour afficher seulement certaines lignes.</li><li>Tri croissant et Tri décroissant, pour trier le tableau sur une seule colonne.</li><li>Tri multicritère, pour trier le tableau sur plusieurs colonnes.</li></ul>"
                 }
@@ -366,7 +366,7 @@
           "element": {
             "id": "82815beb-6dc8-4caf-8c26-2454ffde5458",
             "type": "text",
-            "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, cliquez sur les indices ci-dessous :</p><p><br></p><details><summary>Indice 1</summary><p>En fonction de votre logiciel, le vocabulaire de tri peut être différent :</p><ul><li>La fenêtre peut s’appeler «&nbsp;Trier&nbsp;», «&nbsp;Tri personnalisé&nbsp;» ou «&nbsp;Options avancées de tri&nbsp;».</li><li>Un critère de tri peut aussi s’appeler «&nbsp;Clé de tri&nbsp;» ou «&nbsp;Niveau de tri&nbsp;».</li><li>«&nbsp;Croissant&nbsp;» peut être écrit «&nbsp;Du plus petit au plus grand&nbsp;» ou «&nbsp;A-Z&nbsp;».</li></ul></details><details><summary>Indice 2</summary><p>Pour ouvrir la fenêtre de tri sur le logiciel LibreOffice, voici la manipulation à effectuer</p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"640\" height=\"400\" src=\"https://www.hebergeur-image.com/upload/88.125.115.216-67530fa7a5525.gif\"></iframe></details><details><summary>Indice 3</summary><ul><li>Commencez par sélectionner «&nbsp;<strong>Score aux fléchettes</strong>&nbsp;» dans votre premier critère de tri. Attribuez-lui un classement <strong>«&nbsp;Décroissant&nbsp;»</strong>.</li><li>Puis, sélectionnez <strong>«&nbsp;Réponse au quiz&nbsp;»</strong> dans votre second critère de tri. Attribuez-lui le classement <strong>«&nbsp;Croissant&nbsp;»</strong> </li></ul></details>"
+            "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, cliquez sur les indices ci-dessous :</p><p><br></p><details><summary>Indice 1</summary><p>En fonction de votre logiciel, le vocabulaire de tri peut être différent :</p><ul><li>La fenêtre peut s’appeler «&nbsp;Trier&nbsp;», «&nbsp;Tri personnalisé&nbsp;» ou «&nbsp;Options avancées de tri&nbsp;».</li><li>Un critère de tri peut aussi s’appeler «&nbsp;Clé de tri&nbsp;» ou «&nbsp;Niveau de tri&nbsp;».</li><li>«&nbsp;Croissant&nbsp;» peut être écrit «&nbsp;Du plus petit au plus grand&nbsp;» ou «&nbsp;A-Z&nbsp;».</li></ul></details><details><summary>Indice 2</summary><p>Pour ouvrir la fenêtre de tri sur le logiciel LibreOffice, voici la manipulation à effectuer</p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"640\" height=\"400\" src=\"https://assets.pix.org/draft/modules/88.125.115.216-67530fa7a5525.gif\"></iframe></details><details><summary>Indice 3</summary><ul><li>Commencez par sélectionner «&nbsp;<strong>Score aux fléchettes</strong>&nbsp;» dans votre premier critère de tri. Attribuez-lui un classement <strong>«&nbsp;Décroissant&nbsp;»</strong>.</li><li>Puis, sélectionnez <strong>«&nbsp;Réponse au quiz&nbsp;»</strong> dans votre second critère de tri. Attribuez-lui le classement <strong>«&nbsp;Croissant&nbsp;»</strong> </li></ul></details>"
           }
         }
       ]
@@ -404,7 +404,7 @@
                 {
                   "id": "f5142469-61c8-422e-9c26-5f408ce33992",
                   "type": "image",
-                  "url": "https://i.imgur.com/xxKAMeR.gif",
+                  "url": "https://assets.pix.org/draft/modules/xxKAMeR.gif",
                   "alt": "",
                   "alternativeText": "<p>Gif animé. Quand la case « La plage contient des étiquettes de colonne » n'est pas cochée, les colonnes proposées dans la liste déroulante sont A, B, C, etc. Quand la case est cochée, la liste déroulante propose les étiquettes de colonnes « Prénom », « Nom », « Equipe », etc.</p>"
                 },
@@ -425,7 +425,7 @@
                 {
                   "id": "37ac6388-e4b2-41ac-af3a-bc1219c0f23c",
                   "type": "image",
-                  "url": "https://i.imgur.com/DJdRtpA.jpeg",
+                  "url": "https://assets.pix.org/draft/modules/DJdRtpA.jpeg",
                   "alt": "",
                   "alternativeText": ""
                 }
@@ -441,7 +441,7 @@
                 {
                   "id": "8dff7246-9c67-45c9-b5bd-801d12008587",
                   "type": "image",
-                  "url": "https://i.imgur.com/pXPntis.jpeg",
+                  "url": "https://assets.pix.org/draft/modules/pXPntis.jpeg",
                   "alt": "",
                   "alternativeText": ""
                 }
@@ -560,7 +560,7 @@
           "element": {
             "id": "9c101788-40c6-4343-95e4-fcac920c96b7",
             "type": "text",
-            "content": "<p><span aria-hidden=\"true\">❓</span> Si vous avez besoin d’aide, cliquez sur les indices ci-dessous :</p><p><br></p><details><summary>Indice 1</summary><p>Voici le résultat que vous devriez obtenir. Observez bien les colonnes pour trouver l'ordre des critères de tri.</p><iframe id=\"inlineFrameExample2\" title=\"Inline Frame Example\" width=\"640\" height=\"401\" src=\"https://www.hebergeur-image.com/upload/88.125.115.216-67727d49bec01.png\"> </iframe></details><details><summary>Indice 2</summary><p>Il y a 3 critères de tri nécessaires au classement de Sarah.<br>L’énoncé vous permet de trouver l’ordre des critères de tri suivant&nbsp;:</p> <ol> <li>L’étape la plus importante est bien sûr : la découverte du trésor</li> <li>La seconde épreuve est le nombre d’énigmes réussies</li> <li>Le troisième critère est le temps au labyrinthe</li> </ol><p>Ensuite, comparez l’ordre des critères de tri au tableau de l’indice 2 et déterminez le classement de chaque colonne.</p> </details>"
+            "content": "<p><span aria-hidden=\"true\">❓</span> Si vous avez besoin d’aide, cliquez sur les indices ci-dessous :</p><p><br></p><details><summary>Indice 1</summary><p>Voici le résultat que vous devriez obtenir. Observez bien les colonnes pour trouver l'ordre des critères de tri.</p><iframe id=\"inlineFrameExample2\" title=\"Inline Frame Example\" width=\"640\" height=\"401\" src=\"https://assets.pix.org/draft/modules/88.125.115.216-67727d49bec01.png\"> </iframe></details><details><summary>Indice 2</summary><p>Il y a 3 critères de tri nécessaires au classement de Sarah.<br>L’énoncé vous permet de trouver l’ordre des critères de tri suivant&nbsp;:</p> <ol> <li>L’étape la plus importante est bien sûr : la découverte du trésor</li> <li>La seconde épreuve est le nombre d’énigmes réussies</li> <li>Le troisième critère est le temps au labyrinthe</li> </ol><p>Ensuite, comparez l’ordre des critères de tri au tableau de l’indice 2 et déterminez le classement de chaque colonne.</p> </details>"
           }
         }
       ]

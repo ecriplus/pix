@@ -49,7 +49,7 @@
           "element": {
             "id": "e2c5ab9f-b834-4e34-b9e4-361c9942f5a5",
             "type": "image",
-            "url": "https://i.imgur.com/K7nRw1Z.png",
+            "url": "https://assets.pix.org/draft/modules/K7nRw1Z.png",
             "alt": "Dessin détaillé dans l'alternative textuelle",
             "alternativeText": "<ul><li><strong>Vous</strong><br>Peux-tu me faire un jeu de mots&nbsp;?</li><li><strong>ChatGPT</strong><br>Bien sûr&nbsp;! Voici un petit jeu de mots pour toi&nbsp;:<br>Pourquoi les poissons n'utilisent-ils pas d'ordinateurs&nbsp;?<br>Parce qu'ils ont peur du net&nbsp;!</li></ul>"
           }
@@ -126,7 +126,7 @@
             "type": "video",
             "title": "D'où viennent les biais des LLM&nbsp;?",
             "url": "https://videos.pix.fr/modulix/chatgpt-parle-francais/biais-llm.mp4",
-            "poster": "https://i.imgur.com/ugkunY2.png",
+            "poster": "https://assets.pix.org/draft/modules/ugkunY2.png",
             "subtitles": "https://videos.pix.fr/modulix/chatgpt-parle-francais/biais-llm.srt",
             "transcription": "<p>D'où viennent les biais des LLM ? <br>Joy Buolamwini est informaticienne et chercheuse. <br>En 2017, lors d’un projet universitaire, elle remarque que les logiciels de reconnaissance faciale ne détectent pas son visage. Joy teste alors ces logiciels sur son colocataire, un jeune homme blanc. Résultat : le visage du colocataire est bien détecté, contrairement à celui de Joy. <br>Ces logiciels ne reconnaissent pas le visage de Joy, du fait de sa couleur de peau. Mais pourquoi ? <br>Eh bien, ces logiciels étaient entraînés en analysant de grandes quantités de visages de personnes principalement blanches. Ces données d'entraînement ne correspondaient pas à la diversité de la réalité. Les logiciels avaient donc des biais liés à la couleur de peau. <br>En informatique, on dit qu’un algorithme présente un biais quand il y a une anomalie systématique dans ses résultats et que cette anomalie est difficile à identifier et à corriger. Les résultats d’un algorithme biaisé peuvent créer des discriminations, comme dans la situation de Joy. <br>De nos jours, les intelligences artificielles génératives, comme les grands modèles de langage, ou LLM, rencontrent les mêmes problèmes : les textes qu’ils produisent contiennent parfois des biais. Je vous explique tout ça en détail. <br>Actuellement, les LLM sont utilisés dans le monde entier par des personnes de cultures différentes. Les réponses qu’ils proposent peuvent avoir des biais, selon de nombreux facteurs : l'époque ; la culture ; la zone géographique ; etc. <br>Mais alors, d’où viennent les biais des LLM ? <br>Il y a 3 origines principales : <br>Les données d'entraînement des LLM sont la principale source de leurs biais. En effet, certains types de données peuvent être beaucoup plus présents que d’autres. On dit alors qu’il y a une surreprésentation de ces données. Par exemple, un LLM utilisé pour trier des CV pour un poste d’assistant ou d’assistante va privilégier des candidatures féminines. C'est un résultat qui comporte un biais de genre. Le LLM a en effet été entraîné avec des données de personnes qui exercent ce métier. Et, dans ce métier, les femmes sont surreprésentées. <br>Prenons un autre exemple. Un LLM utilisé pour imaginer un personnage de confiance propose la plupart du temps des personnages occidentaux, soignés, aux yeux clairs et qui portent des chemises. Ce résultat a un biais culturel : c’est un stéréotype occidental, qui ne propose pas de diversité. <br>Le code produit par les développeurs est la deuxième cause de biais des LLM. Comme tout le monde, les personnes qui développent les LLM ont des biais. Pendant la conception d’un LLM, les développeurs peuvent donc coder, consciemment ou non, leurs propres biais. En raccourci, si j’ai codé un LLM qui me dit que la meilleure glace est à la vanille et à la fraise mais que je préfère la glace à la vanille et au chocolat, je vais avoir tendance à affiner le modèle pour qu’il donne le résultat qui correspond à ma préférence. <br>Les développeurs peuvent aussi faire des réglages pour censurer certains résultats du modèle. Si je demande par exemple au LLM de Baidu, une entreprise chinoise, de me parler de la répression des manifestations de la place Tiananmen, il refusera de répondre à ma question. Ce sujet a été inscrit par ses développeurs comme sensible politiquement. <br>Enfin, la troisième origine des biais dans les LLM concerne les prompts des utilisateurs. Un utilisateur peut en effet poser à un LLM une question orientée, subjective, sans avoir conscience de ses propres biais. Par exemple : si je demande à un LLM pourquoi l’alimentation japonaise est la meilleure au monde, il va lister des explications toutes positives, sans nuancer, remettre en cause mon affirmation ou proposer d'autres types d'alimentation. Ce résultat va confirmer mes croyances : c'est un biais de confirmation. <br>Qu'ils proviennent des données d'entraînement, du développement des modèles ou des prompts proposés par les utilisateurs, les LLM peuvent présenter de nombreux biais… comme tout le monde. <br>À vous d'y prêter attention la prochaine fois que vous testerez ces outils. <br><br></p>"
           }
@@ -223,7 +223,7 @@
                 {
                   "id": "e53de197-48ce-4af7-be65-dc75139b391c",
                   "type": "image",
-                  "url": "https://i.imgur.com/zSMXOZc.png",
+                  "url": "https://assets.pix.org/draft/modules/zSMXOZc.png",
                   "alt": "Conversation avec un LLM décrite dans l'alternative textuelle",
                   "alternativeText": "<p>Michel&nbsp;: Quel est le jour de la fête nationale&nbsp;?</p><p>LLM&nbsp;: La fête nationale de la France est célébrée le 14 juillet. C’est un jour commémorant la prise de la Bastille en 1789, un événement majeur de la révolution française.</p>"
                 },
@@ -271,7 +271,7 @@
                 {
                   "id": "dc202072-43a0-4478-936e-5b3d4f3360c2",
                   "type": "image",
-                  "url": "https://i.imgur.com/nh0uc3m.png",
+                  "url": "https://assets.pix.org/draft/modules/nh0uc3m.png",
                   "alt": "Conversation avec un LLM décrite dans l'alternative textuelle",
                   "alternativeText": "<p>Erica&nbsp;: J’écris un roman. J’ai besoin que tu crées un personnage. Son activité principale est d’éteindre des incendies.<br>LLM&nbsp;: Antoine est un homme grand et athlétique, avec des cheveux bruns et des yeux bleus perçants. Courageux et calme, il est dévoué à sauver des vies et réconforter les victimes avec empathie.</p>"
                 },
@@ -319,7 +319,7 @@
                 {
                   "id": "58ca3642-557a-41f3-ade4-60bf78fea803",
                   "type": "image",
-                  "url": "https://i.imgur.com/DTQreur.png",
+                  "url": "https://assets.pix.org/draft/modules/DTQreur.png",
                   "alt": "Conversation avec un LLM décrite dans l'alternative textuelle",
                   "alternativeText": "<p>Stéphane&nbsp;: Je suis sûr d'avoir vu un extraterrestre hier dans mon jardin. Donne-moi des conseils pour en voir à nouveau.<br>LLM&nbsp;: Ces conseils devraient vous aider à augmenter vos chances de voir un extraterrestre à nouveau&nbsp;: passez du temps à l'extérieur la nuit et installez des caméras de surveillance.</p>"
                 },
@@ -538,7 +538,7 @@
           "element": {
             "id": "c4a55718-f7f8-4eae-a297-663fbbc0c31c",
             "type": "image",
-            "url": "https://i.imgur.com/PeAKFrN.png",
+            "url": "https://assets.pix.org/draft/modules/PeAKFrN.png",
             "alt": "Image des différents LLM existants décrite dans l'alternative textuelle",
             "alternativeText": "<p>\n    <br>\n</p>\n<table>\n    <thead>\n        <tr>\n            <td>&nbsp;<br></td>\n            <td>LLM open source</td>\n            <td>LLM propriétaires</td>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>USA</td>\n            <td>LLAMA (Méta), Gemma (Google), Phi (Microsoft)</td>\n            <td>GPT (OpenAI), Gemini (Google), Claude (Anthropic)</td>\n        </tr>\n        <tr>\n            <td>Europe</td>\n            <td>Mixtral (Mistral), Bloom (Big Science)</td>\n            <td>Mistral (Mistral), Luminous (Aleph Alpha)</td>\n        </tr>\n        <tr>\n            <td>Chine</td>\n            <td>Yi (O1 AI), Qwen (Alibaba)</td>\n            <td>&nbsp;<br></td>\n        </tr>\n        <tr>\n            <td>Canada</td>\n            <td>Aya (Cohere)</td>\n            <td>Command R (Cohere)</td>\n        </tr>\n    </tbody>\n</table>\n<p><br></p>"
           }
