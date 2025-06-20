@@ -69,10 +69,10 @@ class OtherAttestations extends Component {
   }
 
   @action
-  onSubmit(event) {
+  async onSubmit(event) {
     event.preventDefault();
 
-    this.args.onSubmit(this.selectedAttestation, []);
+    await this.args.onSubmit(this.selectedAttestation, []);
     this.selectedAttestation = null;
   }
 
