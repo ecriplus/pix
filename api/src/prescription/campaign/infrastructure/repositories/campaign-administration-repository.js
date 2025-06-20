@@ -188,6 +188,22 @@ const archiveCampaigns = function (campaignIds, userId) {
   });
 };
 
+/**
+ * Deletes the external ID label from campaigns features.
+ *
+ * @param {number[]} campaignIds - The IDs of the campaigns to update.
+ * @returns {Promise<void>}
+ */
+export const deleteExternalIdLabelFromCampaigns = (campaignIds) => {
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn('campaign-features')
+    .update('params', knex.raw("params - 'label'"))
+    .updateFrom('features')
+    .where('features.id', '=', knex.raw('??', ['campaign-features.featureId']))
+    .where('features.key', '=', CAMPAIGN_FEATURES.EXTERNAL_ID.key)
+    .whereIn('campaign-features.campaignId', campaignIds);
+};
+
 export {
   archiveCampaigns,
   get,

@@ -60,6 +60,10 @@ const deleteCampaigns = async ({
       assessment.detachCampaignParticipation();
       await assessmentRepository.updateCampaignParticipationId(assessment);
     }
+
+    const campaignIdsToDelete = campaignDestructor.campaigns.map(({ id }) => id);
+
+    await campaignAdministrationRepository.deleteExternalIdLabelFromCampaigns(campaignIdsToDelete);
   }
 
   await campaignAdministrationRepository.remove(campaignsToDelete);
