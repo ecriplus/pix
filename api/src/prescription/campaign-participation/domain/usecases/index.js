@@ -2,7 +2,6 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import * as learningContentRepository from '../../../../../lib/infrastructure/repositories/learning-content-repository.js';
-import * as stageCollectionRepository from '../../../../../lib/infrastructure/repositories/user-campaign-results/stage-collection-repository.js';
 import * as tutorialRepository from '../../../../devcomp/infrastructure/repositories/tutorial-repository.js';
 import * as userRecommendedTrainingRepository from '../../../../devcomp/infrastructure/repositories/user-recommended-training-repository.js';
 import * as compareStagesAndAcquiredStages from '../../../../evaluation/domain/services/stages/stage-and-stage-acquisition-comparison-service.js';
@@ -27,6 +26,7 @@ import { injectDependencies } from '../../../../shared/infrastructure/utils/depe
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as campaignRepository from '../../../campaign/infrastructure/repositories/campaign-repository.js';
 import * as knowledgeElementSnapshotRepository from '../../../campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
+import * as stageCollectionRepository from '../../../campaign/infrastructure/repositories/stage-collection-repository.js';
 import * as targetProfileRepository from '../../../target-profile/infrastructure/repositories/target-profile-repository.js';
 import * as disabledPoleEmploiNotifier from '../../infrastructure/externals/pole-emploi/disabled-pole-emploi-notifier.js';
 import * as poleEmploiNotifier from '../../infrastructure/externals/pole-emploi/pole-emploi-notifier.js';
