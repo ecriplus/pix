@@ -425,7 +425,7 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "<p>des algorithmes de reconnaissance du son</p>",
+                      "content": "<p>la reconnaissance du son</p>",
                       "feedback": {
                         "state": "<p>Bonne réponse ! 🎉</p>",
                         "diagnosis": ""
@@ -433,7 +433,7 @@
                     },
                     {
                       "id": "2",
-                      "content": "<p>des algorithmes de reconnaissance d’image</p>",
+                      "content": "<p>la reconnaissance d’image</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
                         "diagnosis": ""
@@ -441,7 +441,7 @@
                     },
                     {
                       "id": "3",
-                      "content": "<p>des algorithmes de recommandation de contenu</p>",
+                      "content": "<p>la recommandation de contenu</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
                         "diagnosis": ""
@@ -449,7 +449,7 @@
                     },
                     {
                       "id": "4",
-                      "content": "<p>des algorithmes de génération de contenu</p>",
+                      "content": "<p>la génération de contenu</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse</p>",
                         "diagnosis": ""
@@ -474,7 +474,7 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "<p>des algorithmes de reconnaissance du son</p>",
+                      "content": "<p>la reconnaissance du son</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse</p>",
                         "diagnosis": ""
@@ -482,7 +482,7 @@
                     },
                     {
                       "id": "2",
-                      "content": "<p>des algorithmes de reconnaissance d’image</p>",
+                      "content": "<p>la reconnaissance d’image</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
                         "diagnosis": ""
@@ -490,7 +490,7 @@
                     },
                     {
                       "id": "3",
-                      "content": "<p>des algorithmes de recommandation de contenu</p>",
+                      "content": "<p>la recommandation de contenu</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
                         "diagnosis": ""
@@ -498,7 +498,7 @@
                     },
                     {
                       "id": "4",
-                      "content": "<p>des algorithmes de génération de contenu</p>",
+                      "content": "<p>la génération de contenu</p>",
                       "feedback": {
                         "state": "<p>Bonne réponse ! 🎉</p>",
                         "diagnosis": ""
@@ -523,7 +523,7 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "<p>des algorithmes de reconnaissance du son</p>",
+                      "content": "<p>la reconnaissance du son</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse</p>",
                         "diagnosis": ""
@@ -531,7 +531,7 @@
                     },
                     {
                       "id": "2",
-                      "content": "<p>des algorithmes de reconnaissance d’image</p>",
+                      "content": "<p>la reconnaissance d’image</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
                         "diagnosis": ""
@@ -539,7 +539,7 @@
                     },
                     {
                       "id": "3",
-                      "content": "<p>des algorithmes de recommandation de contenu</p>",
+                      "content": "<p>la recommandation de contenu</p>",
                       "feedback": {
                         "state": "<p>Bonne réponse ! 🎉</p>",
                         "diagnosis": ""
@@ -547,7 +547,7 @@
                     },
                     {
                       "id": "4",
-                      "content": "<p>des algorithmes de génération de contenu</p>",
+                      "content": "<p>la génération de contenu</p>",
                       "feedback": {
                         "state": "<p>Bonne réponse ! 🎉</p>",
                         "diagnosis": ""
@@ -572,7 +572,7 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "<p>des algorithmes de reconnaissance du son</p>",
+                      "content": "<p>la reconnaissance du son</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse</p>",
                         "diagnosis": ""
@@ -580,7 +580,7 @@
                     },
                     {
                       "id": "2",
-                      "content": "<p>des algorithmes de reconnaissance d’image</p>",
+                      "content": "<p>la reconnaissance d’image</p>",
                       "feedback": {
                         "state": "<p>Bonne réponse ! 🎉</p>",
                         "diagnosis": ""
@@ -588,7 +588,7 @@
                     },
                     {
                       "id": "3",
-                      "content": "<p>des algorithmes de recommandation de contenu</p>",
+                      "content": "<p>la recommandation de contenu</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
                         "diagnosis": ""
@@ -596,7 +596,7 @@
                     },
                     {
                       "id": "4",
-                      "content": "<p>des algorithmes de génération de contenu</p>",
+                      "content": "<p>la génération de contenu</p>",
                       "feedback": {
                         "state": "<p>Bonne réponse ! 🎉</p>",
                         "diagnosis": ""
