@@ -83,7 +83,7 @@ describe('LLM | Integration | Application | API | llm', function () {
           llmApiScope = nock('https://llm-test.pix.fr/api').get('/configurations/uneConfigQuiExist').reply(200, config);
         });
 
-        it('should return the newly created chat with attachment info', async function () {
+        it('should return the newly created chat with attachment info, diminushing inputMaxPrompts by one', async function () {
           // when
           const chat = await startChat({ configId, userId });
 
@@ -92,7 +92,7 @@ describe('LLM | Integration | Application | API | llm', function () {
             id: `123456-${now.getMilliseconds()}`,
             attachmentName: 'file.txt',
             inputMaxChars: 456,
-            inputMaxPrompts: 789,
+            inputMaxPrompts: 788,
           });
           expect(llmApiScope.isDone()).to.be.true;
           expect(await chatTemporaryStorage.get(`123456-${now.getMilliseconds()}`)).to.deep.equal({

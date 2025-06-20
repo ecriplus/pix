@@ -3,6 +3,6 @@ export function serialize(llmChatDTO) {
     inputMaxChars: llmChatDTO.inputMaxChars,
     inputMaxPrompts: llmChatDTO.inputMaxPrompts,
     attachmentName: llmChatDTO.attachmentName,
-    chatId: llmChatDTO.id
-  }
+    chatId: llmChatDTO.id,
+  };
 }

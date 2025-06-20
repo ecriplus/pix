@@ -818,7 +818,7 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
           expect(response.result).to.deep.equal({
             chatId: `${user.id}-${now.getMilliseconds()}`,
             inputMaxChars: 456,
-            inputMaxPrompts: 789,
+            inputMaxPrompts: 788,
             attachmentName: 'file.txt',
           });
           expect(llmApiScope.isDone()).to.be.true;

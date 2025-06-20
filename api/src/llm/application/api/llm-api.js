@@ -105,7 +105,8 @@ function getInputMaxCharsFromConfiguration(configuration) {
 }
 
 function getInputMaxPromptsFromConfiguration(configuration) {
-  return configuration.challenge.inputMaxPrompts;
+  const inputMaxPrompts = configuration.challenge.inputMaxPrompts;
+  return configuration.attachment?.name ? inputMaxPrompts - 1 : inputMaxPrompts;
 }
 
 function getAttachmentContextAndName(configuration) {
