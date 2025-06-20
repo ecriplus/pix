@@ -1,5 +1,5 @@
 /**
- * @typedef {import('../events/AutoJuryDone.js').AutoJuryDone} AutoJuryDone
+ * @typedef {import('../read-models/SessionFinalized.js').SessionFinalized} SessionFinalized
  *  @typedef {import('./index.js').JuryCertificationSummaryRepository} JuryCertificationSummaryRepository
  *  @typedef {import('./index.js').FinalizedSessionRepository} FinalizedSessionRepository
  */
@@ -8,26 +8,26 @@ import { FinalizedSession } from '../models/FinalizedSession.js';
 
 /**
  * @param {Object} params
- * @param {AutoJuryDone} params.autoJuryDone
+ * @param {SessionFinalized} params.sessionFinalized
  * @param {JuryCertificationSummaryRepository} params.juryCertificationSummaryRepository
  * @param {FinalizedSessionRepository} params.finalizedSessionRepository
  */
 export const registerPublishableSession = async ({
-  autoJuryDone,
+  sessionFinalized,
   juryCertificationSummaryRepository,
   finalizedSessionRepository,
 }) => {
   const juryCertificationSummaries = await juryCertificationSummaryRepository.findBySessionId({
-    sessionId: autoJuryDone.sessionId,
+    sessionId: sessionFinalized.sessionId,
   });
 
   const finalizedSession = FinalizedSession.from({
-    sessionId: autoJuryDone.sessionId,
-    finalizedAt: autoJuryDone.finalizedAt,
-    certificationCenterName: autoJuryDone.certificationCenterName,
-    sessionDate: autoJuryDone.sessionDate,
-    sessionTime: autoJuryDone.sessionTime,
-    hasExaminerGlobalComment: autoJuryDone.hasExaminerGlobalComment,
+    sessionId: sessionFinalized.sessionId,
+    finalizedAt: sessionFinalized.finalizedAt,
+    certificationCenterName: sessionFinalized.certificationCenterName,
+    sessionDate: sessionFinalized.sessionDate,
+    sessionTime: sessionFinalized.sessionTime,
+    hasExaminerGlobalComment: sessionFinalized.hasExaminerGlobalComment,
     juryCertificationSummaries,
   });
 

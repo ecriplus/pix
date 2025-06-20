@@ -3,7 +3,6 @@
  */
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
-import { AutoJuryDone } from '../events/AutoJuryDone.js';
 import { CertificationJuryDone } from '../events/CertificationJuryDone.js';
 import { CertificationAssessment } from '../models/CertificationAssessment.js';
 import { CertificationIssueReportResolutionAttempt } from '../models/CertificationIssueReportResolutionAttempt.js';
@@ -14,7 +13,7 @@ import { CertificationIssueReportResolutionStrategies } from '../models/Certific
  * @param {CertificationRescoringRepository} params.certificationRescoringRepository
  */
 export async function processAutoJury({
-  sessionFinalized,
+  sessionId,
   certificationIssueReportRepository,
   certificationAssessmentRepository,
   certificationCourseRepository,
@@ -22,7 +21,7 @@ export async function processAutoJury({
   certificationRescoringRepository,
 }) {
   const certificationCourses = await certificationCourseRepository.findCertificationCoursesBySessionId({
-    sessionId: sessionFinalized.sessionId,
+    sessionId,
   });
 
   for (const certificationCourse of certificationCourses) {
@@ -52,15 +51,6 @@ export async function processAutoJury({
       });
     }
   }
-
-  return new AutoJuryDone({
-    sessionId: sessionFinalized.sessionId,
-    finalizedAt: sessionFinalized.finalizedAt,
-    certificationCenterName: sessionFinalized.certificationCenterName,
-    sessionDate: sessionFinalized.sessionDate,
-    sessionTime: sessionFinalized.sessionTime,
-    hasExaminerGlobalComment: sessionFinalized.hasExaminerGlobalComment,
-  });
 }
 
 /**

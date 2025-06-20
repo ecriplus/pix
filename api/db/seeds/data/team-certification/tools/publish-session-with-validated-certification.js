@@ -121,9 +121,9 @@ export default async function publishSessionWithValidatedCertification({
     certificationReports: [report],
   });
 
-  const autoJuryDone = await sessionManagementUseCases.processAutoJury({ sessionFinalized });
+  await sessionManagementUseCases.processAutoJury({ sessionId: sessionFinalized.sessionId });
 
-  await sessionManagementUseCases.registerPublishableSession({ autoJuryDone });
+  await sessionManagementUseCases.registerPublishableSession({ sessionFinalized });
 
   await databaseBuilder.commit();
 

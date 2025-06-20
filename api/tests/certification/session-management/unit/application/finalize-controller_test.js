@@ -1,4 +1,5 @@
 import { finalizeController } from '../../../../../src/certification/session-management/application/finalize-controller.js';
+import { SessionFinalized } from '../../../../../src/certification/session-management/domain/read-models/SessionFinalized.js';
 import { usecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
@@ -9,8 +10,7 @@ describe('Certification | Session Management | Unit | Application | Controller |
       // given
       const sessionId = 1;
       const aCertificationReport = Symbol('a certficication report');
-      const sessionFinalized = Symbol('sessionFinalized');
-      const autoJuryDone = Symbol('autoJuryDone');
+      const sessionFinalized = new SessionFinalized({ sessionId });
       const examinerGlobalComment = 'It was a fine session my dear';
       const hasIncident = true;
       const hasJoiningIssue = true;
@@ -37,7 +37,7 @@ describe('Certification | Session Management | Unit | Application | Controller |
       const certificationReportSerializer = { deserialize: sinon.stub() };
       certificationReportSerializer.deserialize.resolves(aCertificationReport);
       sinon.stub(usecases, 'finalizeSession').resolves(sessionFinalized);
-      sinon.stub(usecases, 'processAutoJury').resolves(autoJuryDone);
+      sinon.stub(usecases, 'processAutoJury').resolves();
       sinon.stub(usecases, 'registerPublishableSession').resolves();
       sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
         return callback();
@@ -55,9 +55,9 @@ describe('Certification | Session Management | Unit | Application | Controller |
         certificationReports: [aCertificationReport],
       });
       expect(usecases.processAutoJury).to.have.been.calledWithExactly({
-        sessionFinalized,
+        sessionId,
       });
-      expect(usecases.registerPublishableSession).to.have.been.calledWithExactly({ autoJuryDone });
+      expect(usecases.registerPublishableSession).to.have.been.calledWithExactly({ sessionFinalized });
     });
   });
 });

@@ -22,9 +22,9 @@ const finalize = async function (request, h, dependencies = { certificationRepor
       certificationReports,
     });
 
-    const autoJuryDone = await usecases.processAutoJury({ sessionFinalized });
+    await usecases.processAutoJury({ sessionId: sessionFinalized.sessionId });
 
-    await usecases.registerPublishableSession({ autoJuryDone });
+    await usecases.registerPublishableSession({ sessionFinalized });
   });
 
   return h.response().code(200);

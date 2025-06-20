@@ -1,8 +1,10 @@
-import { AutoJuryDone } from '../../../../../../src/certification/session-management/domain/events/AutoJuryDone.js';
 import { FinalizedSession } from '../../../../../../src/certification/session-management/domain/models/FinalizedSession.js';
 import { JuryCertificationSummary } from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
+import { SessionFinalized } from '../../../../../../src/certification/session-management/domain/read-models/SessionFinalized.js';
 import { registerPublishableSession } from '../../../../../../src/certification/session-management/domain/usecases/register-publishable-session.js';
+import { CertificationIssueReportSubcategories } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
 import { status as assessmentResultStatuses } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
+import { CertificationIssueReportCategory } from '../../../../../../src/shared/domain/models/index.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 const juryCertificationSummaryRepository = { findBySessionId: sinon.stub() };
@@ -15,7 +17,7 @@ const dependencies = {
 describe('Unit | UseCase |  register-publishable-session', function () {
   it('saves a finalized session', async function () {
     // given
-    const autoJuryDone = new AutoJuryDone({
+    const sessionFinalized = new SessionFinalized({
       sessionId: 1234,
       finalizedAt: new Date(),
       hasExaminerGlobalComment: false,
@@ -35,8 +37,8 @@ describe('Unit | UseCase |  register-publishable-session', function () {
       cleaCertificationStatus: 'not_passed',
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
-          category: 'NON_IMPACTFUL_CATEGORY',
-          subcategory: 'NON_IMPACTFUL_SUBCATEGORY',
+          category: CertificationIssueReportCategory.NON_BLOCKING_TECHNICAL_ISSUE,
+          subcategory: CertificationIssueReportSubcategories.EXTRA_TIME_PERCENTAGE,
         }),
       ],
     });
@@ -47,25 +49,25 @@ describe('Unit | UseCase |  register-publishable-session', function () {
     const finalizedSessionFromSpy = sinon.spy(FinalizedSession, 'from');
 
     // when
-    await registerPublishableSession({ autoJuryDone, ...dependencies });
+    await registerPublishableSession({ sessionFinalized, ...dependencies });
 
     // then
     expect(finalizedSessionFromSpy).to.have.been.calledOnceWithExactly({
-      sessionId: autoJuryDone.sessionId,
-      finalizedAt: autoJuryDone.finalizedAt,
-      certificationCenterName: autoJuryDone.certificationCenterName,
-      sessionDate: autoJuryDone.sessionDate,
-      sessionTime: autoJuryDone.sessionTime,
+      sessionId: sessionFinalized.sessionId,
+      finalizedAt: sessionFinalized.finalizedAt,
+      certificationCenterName: sessionFinalized.certificationCenterName,
+      sessionDate: sessionFinalized.sessionDate,
+      sessionTime: sessionFinalized.sessionTime,
       hasExaminerGlobalComment: false,
       juryCertificationSummaries: [juryCertificationSummary],
     });
     expect(finalizedSessionRepository.save).to.have.been.calledWithExactly({
       finalizedSession: new FinalizedSession({
-        sessionId: autoJuryDone.sessionId,
-        finalizedAt: autoJuryDone.finalizedAt,
-        certificationCenterName: autoJuryDone.certificationCenterName,
-        sessionDate: autoJuryDone.sessionDate,
-        sessionTime: autoJuryDone.sessionTime,
+        sessionId: sessionFinalized.sessionId,
+        finalizedAt: sessionFinalized.finalizedAt,
+        certificationCenterName: sessionFinalized.certificationCenterName,
+        sessionDate: sessionFinalized.sessionDate,
+        sessionTime: sessionFinalized.sessionTime,
         isPublishable: true,
         publishedAt: null,
       }),

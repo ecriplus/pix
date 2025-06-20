@@ -18,6 +18,7 @@ import { SessionFinalized } from '../read-models/SessionFinalized.js';
  * @param {SessionRepository} params.sessionRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {CertificationReportRepository} params.certificationReportRepository
+ * @return {Promise<SessionFinalized>}
  */
 const finalizeSession = async function ({
   sessionId,
