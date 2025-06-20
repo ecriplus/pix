@@ -73,7 +73,7 @@ export default class ModulixEmbed extends ModuleElement {
 
         const [requestsPort] = event.ports;
 
-        this.embedApiProxy.forward(this, requestsPort, `/api/passages/${this.args.passageId}/embed/`);
+        this.embedApiProxy.forward(this, requestsPort, this.args.passageId, 'passage');
       }
     }
 

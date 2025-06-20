@@ -1,7 +1,8 @@
 import { destroy, registerDestructor } from '@ember/destroyable';
 import EmberObject from '@ember/object';
-import Adapter from '@ember-data/adapter';
 import { setupTest } from 'ember-qunit';
+import PassageAdapter from 'mon-pix/adapters/passage';
+import EmbedApiProxyService from 'mon-pix/services/embed-api-proxy';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -9,16 +10,19 @@ module('Unit | Services | embed api proxy', function (hooks) {
   setupTest(hooks);
 
   let embedApiProxy;
+  let urlForFindRecordStub = sinon.stub();
 
   hooks.beforeEach(function () {
+    urlForFindRecordStub = sinon.stub().returns('/api/passages/123');
     this.owner.register(
-      'adapter:application',
-      class ApplicationAdapter extends Adapter {
+      'adapter:passage',
+      class extends PassageAdapter {
         get headers() {
           return {
             Authorization: 'Bearer oursier 🐻',
           };
         }
+        urlForFindRecord = urlForFindRecordStub;
       },
     );
 
@@ -35,7 +39,7 @@ module('Unit | Services | embed api proxy', function (hooks) {
       };
 
       // when
-      embedApiProxy.forward({}, requestsPort, '/api');
+      embedApiProxy.forward({}, requestsPort, '123', 'passage');
 
       // then
       sinon.assert.calledWith(requestsPort.addEventListener, 'message', sinon.match.func);
@@ -56,7 +60,7 @@ module('Unit | Services | embed api proxy', function (hooks) {
       });
 
       // when
-      embedApiProxy.forward(context, requestsPort, '/api/');
+      embedApiProxy.forward(context, requestsPort, '123', 'passage');
       destroy(context);
       await contextDestroyed;
 
@@ -94,11 +98,14 @@ module('Unit | Services | embed api proxy', function (hooks) {
       // when
       await embedApiProxy.handleMessageEvent(event, {
         fetch: fetchStub,
-        urlPrefix: '/api/',
+        modelName: 'passage',
+        id: '123',
       });
 
       // then
-      sinon.assert.calledWith(fetchStub, '/api/test', {
+      sinon.assert.calledOnceWithExactly(urlForFindRecordStub, '123', 'passage');
+
+      sinon.assert.calledWith(fetchStub, '/api/passages/123/embed/test', {
         method: 'POST',
         headers: {
           Authorization: 'Bearer oursier 🐻',
@@ -140,14 +147,94 @@ module('Unit | Services | embed api proxy', function (hooks) {
         // when
         await embedApiProxy.handleMessageEvent(event, {
           fetch: fetchStub,
-          urlPrefix: '/api/',
+          modelName: 'passage',
+          id: '123',
         });
 
         // then
+        sinon.assert.calledOnceWithExactly(urlForFindRecordStub, '123', 'passage');
+
+        sinon.assert.calledWith(fetchStub, '/api/passages/123/embed/test', {
+          method: 'POST',
+          headers: {
+            Authorization: 'Bearer oursier 🐻',
+          },
+        });
+
         sinon.assert.calledWith(postMessageStub, {
           error: 'connection reset by pear 🍐',
         });
         assert.ok(true);
+      });
+    });
+  });
+
+  module('#buildURL', function () {
+    test('it should prefix URL with prefix', function (assert) {
+      // given
+      const url = 'chat/456';
+      const urlPrefix = '/api/passages/123/embed/';
+
+      // when
+      const actualURL = EmbedApiProxyService.buildURL(url, urlPrefix);
+
+      // then
+      assert.strictEqual(actualURL, '/api/passages/123/embed/chat/456');
+    });
+
+    module('when URL has leading slashes', function () {
+      test('it should trim leading slashes', function (assert) {
+        // given
+        const url = '///chat/456';
+        const urlPrefix = '/api/passages/123/embed/';
+
+        // when
+        const actualURL = EmbedApiProxyService.buildURL(url, urlPrefix);
+
+        // then
+        assert.strictEqual(actualURL, '/api/passages/123/embed/chat/456');
+      });
+    });
+
+    module('when URL prefix includes host', function () {
+      test('it should keep host', function (assert) {
+        // given
+        const url = 'chat/456';
+        const urlPrefix = 'https://api.example.com/api/passages/123/embed/';
+
+        // when
+        const actualURL = EmbedApiProxyService.buildURL(url, urlPrefix);
+
+        // then
+        assert.strictEqual(actualURL, 'https://api.example.com/api/passages/123/embed/chat/456');
+      });
+    });
+
+    module('when URL goes out of prefix', function () {
+      test('it should throw an error', function (assert) {
+        // given
+        const url = '../chat/456';
+        const urlPrefix = '/api/passages/123/embed/';
+
+        // when
+        const call = () => EmbedApiProxyService.buildURL(url, urlPrefix);
+
+        // then
+        assert.throws(call, new Error('invalid URL'));
+      });
+    });
+
+    module('when URL includes host', function () {
+      test('it should throw an error', function (assert) {
+        // given
+        const url = 'https://example.com/should/not/work';
+        const urlPrefix = '/api/passages/123/embed/';
+
+        // when
+        const call = () => EmbedApiProxyService.buildURL(url, urlPrefix);
+
+        // then
+        assert.throws(call, new Error('invalid URL'));
       });
     });
   });

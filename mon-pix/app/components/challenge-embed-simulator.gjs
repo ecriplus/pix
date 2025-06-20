@@ -119,7 +119,7 @@ export default class ChallengeEmbedSimulator extends Component {
         if (data.enableFetchFromApi) {
           const [requestsPort] = ports;
 
-          this.embedApiProxy.forward(this, requestsPort, `/api/assessments/${this.args.assessmentId}/embed/`);
+          this.embedApiProxy.forward(this, requestsPort, this.args.assessmentId, 'assessment');
         }
 
         if (data.autoLaunch || thisComponent.isSimulatorLaunched) {

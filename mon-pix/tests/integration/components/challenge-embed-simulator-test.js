@@ -199,7 +199,7 @@ module('Integration | Component | Challenge Embed Simulator', function (hooks) {
           window.dispatchEvent(event);
 
           // then
-          sinon.assert.calledWith(forwardStub, sinon.match.object, requestsPort, `/api/assessments/123/embed/`);
+          sinon.assert.calledWith(forwardStub, sinon.match.object, requestsPort, '123', 'assessment');
           assert.ok(true);
         });
       });

@@ -3,8 +3,8 @@ import { getOwner } from '@ember/owner';
 import Service from '@ember/service';
 
 export default class EmbedApiProxyService extends Service {
-  forward(context, requestsPort, urlPrefix) {
-    requestsPort.addEventListener('message', (event) => this.handleMessageEvent(event, { urlPrefix }));
+  forward(context, requestsPort, id, modelName) {
+    requestsPort.addEventListener('message', (event) => this.handleMessageEvent(event, { id, modelName }));
 
     requestsPort.start();
 
@@ -13,10 +13,13 @@ export default class EmbedApiProxyService extends Service {
     });
   }
 
-  async handleMessageEvent(event, { fetch = window.fetch, urlPrefix }) {
+  async handleMessageEvent(event, { fetch = window.fetch, modelName, id }) {
+    const adapter = getOwner(this).lookup(`adapter:${modelName}`);
+
     let { url } = event.data;
-    if (url.startsWith('/')) url = url.slice(1);
-    url = urlPrefix + url;
+
+    const urlPrefix = `${adapter.urlForFindRecord(id, modelName)}/embed/`;
+    url = EmbedApiProxyService.buildURL(url, urlPrefix);
 
     const { init } = event.data;
 
@@ -27,7 +30,7 @@ export default class EmbedApiProxyService extends Service {
         ...init,
         headers: {
           ...init.headers,
-          ...this.headers,
+          ...adapter.headers,
         },
       });
 
@@ -48,7 +51,27 @@ export default class EmbedApiProxyService extends Service {
     }
   }
 
-  get headers() {
-    return getOwner(this).lookup('adapter:application').headers;
+  /**
+   * @param {string} url
+   * @param {string} urlPrefix
+   */
+  static buildURL(url, urlPrefix) {
+    url = url.trim();
+    if (/^https?:\/\//.test(url)) throw new Error('invalid URL');
+
+    url = urlPrefix + trimLeadingSlashes(url);
+
+    const { pathname: urlPath } = new URL(url, window.location);
+    const { pathname: urlPrefixPath } = new URL(urlPrefix, window.location);
+    if (!urlPath.startsWith(urlPrefixPath)) throw new Error('invalid URL');
+
+    return url;
   }
+}
+
+function trimLeadingSlashes(path) {
+  while (path.startsWith('/')) {
+    path = path.slice(1);
+  }
+  return path;
 }
