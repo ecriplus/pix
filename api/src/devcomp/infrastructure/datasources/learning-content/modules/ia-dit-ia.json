@@ -61,7 +61,7 @@
           "element": {
             "id": "3c870d58-e8dd-4129-9348-159975b1fc69",
             "type": "text",
-            "content": "<p>À cause de la récente popularité de chatGPT, on a l’impression que l’IA c’est nouveau. Mais pas du tout !&nbsp; l’IA ça date ! 🦣&nbsp;<br>Et si on regardait plus précisément ce qu'est l'IA ? <br></p>"
+            "content": "<p>À cause de la récente popularité de chatGPT, on a l’impression que l’IA c’est nouveau. Mais pas du tout !&nbsp; l’IA ça date ! 🦣&nbsp;<br>Et si on regardait plus précisément ce qu'est l'IA ? Pour cela, partons de l’ordinateur ! </p>"
           }
         }
       ]
@@ -99,7 +99,7 @@
           "element": {
             "id": "d4c2fcb1-74b0-474e-8bda-470c83ced9c2",
             "type": "text",
-            "content": "<p>Aujourd’hui les ordinateurs sont capables de réaliser toutes sortes de tâches : <br>👀 Des tâches que nous faisons sans y penser comme reconnaître un chien dans une image.&nbsp;<br>🧠 Et des tâches qui nous demandent plus de concentration comme résoudre des problèmes de maths.</p><p><br>Le <strong>domaine scientifique</strong> qui a permis ces progrès se nomme <strong>l’intelligence artificielle</strong>. D’autres sciences et techniques y ont contribué&nbsp;: l’informatique, l’électronique, la robotique, les statistiques, les sciences cognitives, les neurosciences, etc.</p>"
+            "content": "<p>Aujourd’hui les ordinateurs sont capables de réaliser toutes sortes de tâches&nbsp;: <br>👀 Des tâches que nous faisons sans y penser comme reconnaître un chien dans une image.&nbsp;<br>🧠 Et des tâches qui nous demandent plus de concentration comme résoudre des problèmes de maths.</p><p><br>Le <strong>domaine scientifique</strong> qui a permis ces progrès se nomme <strong>l’intelligence artificielle</strong>. D’autres sciences et techniques y ont contribué&nbsp;: l’informatique, l’électronique, la robotique, les statistiques, les sciences cognitives, les neurosciences, etc.</p>"
           }
         }
       ]
@@ -186,7 +186,7 @@
           "element": {
             "id": "bfe6d7e1-8282-4a34-a659-c189ea396feb",
             "type": "text",
-            "content": "<p>De nombreux objets et <strong>services numériques du quotidien</strong> utilisent des logiciels d’intelligence artificielle.</p><p><br>Certains logiciels sont <strong>spécialisés </strong>dans un <strong>type de tâche</strong>&nbsp;: reconnaître des images et leur contenu, reconnaître des sons et leur contenu, recommander des contenus adaptés à des besoins, prédire des tendances dans des données.&nbsp;🔮</p><p><br>D’autres logiciels deviennent de plus en plus <strong>généralistes</strong>. C’est le cas de chatGPT ou Le chat qui sont capables de traduire des textes, tenir une conversation, résumer des articles, créer une image, programmer, résoudre des problèmes de maths, etc.&nbsp;🦾<br></p>"
+            "content": "<p>De nombreux <strong>objets et services numériques du quotidien</strong> utilisent des logiciels d’intelligence artificielle.</p><p><br>Certains logiciels sont <strong>spécialisés </strong>dans un <strong>type de tâche</strong>&nbsp;: reconnaître des images et leur contenu, reconnaître des sons et leur contenu, recommander des contenus adaptés à des besoins, prédire des tendances dans des données.&nbsp;🔮</p><p><br>D’autres logiciels deviennent de plus en plus <strong>généralistes</strong>. C’est le cas de chatGPT ou Le chat qui sont capables de traduire des textes, tenir une conversation, résumer des articles, créer une image, programmer, résoudre des problèmes de maths, etc.&nbsp;🦾<br></p>"
           }
         }
       ]
@@ -254,7 +254,7 @@
           "element": {
             "id": "715a385e-dcfb-4001-9e5d-5b00ab365221",
             "type": "text",
-            "content": "<p>Voici les points principaux à retenir :&nbsp;</p><ul><li><strong>L’intelligence artificielle est un domaine scientifique</strong> qui étudie comment permettre à des machines d’imiter les mécanismes de l’intelligence.&nbsp;🔬</li><li><strong>Certains logiciels d’IA sont spécialisés dans un type de tâches</strong>&nbsp;:&nbsp; la reconnaissance d’image, la recommandation de contenu, la prédiction, etc. <strong>D’autres sont plus généralistes</strong> comme les IA génératives.&nbsp;👩‍💻</li><li>Les techniques d’IA sont utilisées dans <strong>des outils et services de notre quotidien</strong>. Leur utilisation permet de faire de nombreux progrès.&nbsp;📈</li></ul>"
+            "content": "<p>Voici les points principaux à retenir&nbsp;:&nbsp;</p><ul><li><strong>L’intelligence artificielle est un domaine scientifique</strong> qui étudie comment permettre à des machines d’imiter les mécanismes de l’intelligence.&nbsp;🔬</li><li><strong>Certains logiciels d’IA sont spécialisés dans un type de tâches</strong>&nbsp;:&nbsp; la reconnaissance d’image, la recommandation de contenu, la prédiction, etc. <strong>D’autres sont plus généralistes</strong> comme les IA génératives.&nbsp;👩‍💻</li><li>Les techniques d’IA sont utilisées dans <strong>des objets et services de notre quotidien</strong>. Leur utilisation permet de faire de nombreux progrès.&nbsp;📈</li></ul>"
           }
         }
       ]
@@ -328,7 +328,7 @@
         }
       ]
     },
-     {
+    {
       "id": "24445c57-5f45-4ead-8767-936c43913403",
       "type": "activity",
       "title": " Activité d'application - 2 : Types d'IA",
@@ -531,7 +531,7 @@
                       "id": "4",
                       "content": "<p>la génération de contenu</p>",
                       "feedback": {
-                        "state": "<p>Bonne réponse ! 🎉</p>",
+                        "state": "<p>Mauvaise réponse</p>",
                         "diagnosis": ""
                       }
                     }
@@ -618,6 +618,47 @@
                 "diagnosis": "<p>Ce sont des algorithmes de reconnaissance d'images qui ont permis cette découverte.</p>"
               }
             }
+          }
+        }
+      ]
+    },
+    {
+      "id": "6589bd5c-b120-4f5f-a089-62922f54de59",
+      "type": "activity",
+      "title": "Transfert",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "7289c873-1f53-4e62-8ed0-5462618547dd",
+            "type": "qcu-declarative",
+            "instruction": "<p>Maintenant, vous en savez plus sur ce qu'est l'intelligence artificielle.<br>Dans votre quotidien, utilisez-vous des objets avec de l’intelligence artificielle ?&nbsp;<br><br></p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>oui</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Pas étonnant ! L'intelligence artificielle est présente&nbsp;dans de nombreux objets et services de notre quotidien.</p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "<p>non</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Étonnant ! L'intelligence artificielle est présente&nbsp;dans de nombreux objets et services de notre quotidien.</p>"
+                }
+              },
+              {
+                "id": "3",
+                "content": "<p>je ne suis pas sûr.</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Si vous n'êtes pas sûr, il y a de grande chance que ce soit le cas.&nbsp;L'intelligence artificielle est présente&nbsp;dans de nombreux objets et services de notre quotidien.</p>"
+                }
+              }
+            ]
           }
         }
       ]
