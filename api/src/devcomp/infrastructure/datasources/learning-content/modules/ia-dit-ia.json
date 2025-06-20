@@ -395,34 +395,219 @@
         }
       ]
     },
-    {
-      "id": "ad658376-7f8b-4f86-af0f-a9b80585e699",
+     {
+      "id": "24445c57-5f45-4ead-8767-936c43913403",
       "type": "activity",
-      "title": "Activité d'application - 2 : Types d'IA",
+      "title": " Activité d'application - 2 : Types d'IA",
       "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "b0237af6-468a-4f07-ac43-d7dd8afb2d17",
-            "type": "text",
-            "content": "<p>Identifiez dans quel type de tâche sont spécialisées les IA utilisées dans différentes situations.</p>"
-          }
-        },
         {
           "type": "element",
           "element": {
             "id": "b2dc8d40-47cd-4f67-af34-b66ef6506b57",
             "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-algos.html\" height=\"650\"></iframe>"
+            "content": "<p>Identifiez dans quel type de tâche sont spécialisées les IA utilisées dans différentes situations.</p>"
           }
         },
         {
-          "type": "element",
-          "element": {
-            "id": "b16e82b6-b42e-4815-ae5b-f65a83b322aa",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-algos-dd.html\" height=\"950\"></iframe>"
-          }
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "850a37d1-7433-4924-8123-2abdde878c29",
+                  "type": "text",
+                  "content": "<p>🎤 Une application retrouve la titre d'une musique que vous lui chantez.</p>"
+                },
+                {
+                  "id": "05a30b10-ac62-40a5-961b-9f3f3e831da0",
+                  "type": "qcu",
+                  "instruction": "<p>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>des algorithmes de reconnaissance du son</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse ! 🎉</p>",
+                        "diagnosis": ""
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>des algorithmes de reconnaissance d’image</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": ""
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>des algorithmes de recommandation de contenu</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": ""
+                      }
+                    },
+                    {
+                      "id": "4",
+                      "content": "<p>des algorithmes de génération de contenu</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse</p>",
+                        "diagnosis": ""
+                      }
+                    }
+                  ],
+                  "solution": "1"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "2923d129-126b-4d5d-92e6-8e82dc34dd62",
+                  "type": "text",
+                  "content": "<p>❓ Un LLM (terme à modifier) répond à vos questions sur n'importe quel sujet.</p>"
+                },
+                {
+                  "id": "05a30b10-ac62-40a5-961b-9f3f3e831da0",
+                  "type": "qcu",
+                  "instruction": "<p>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>des algorithmes de reconnaissance du son</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse</p>",
+                        "diagnosis": ""
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>des algorithmes de reconnaissance d’image</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": ""
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>des algorithmes de recommandation de contenu</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": ""
+                      }
+                    },
+                    {
+                      "id": "4",
+                      "content": "<p>des algorithmes de génération de contenu</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse ! 🎉</p>",
+                        "diagnosis": ""
+                      }
+                    }
+                  ],
+                  "solution": "4"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "d7e5b9dd-7757-4590-a978-f386921006e1",
+                  "type": "text",
+                  "content": "<p>▶️ Un site vous propose de nouveaux contenus suite au visionnage d’une vidéo.</p>"
+                },
+                {
+                  "id": "05a30b10-ac62-40a5-961b-9f3f3e831da0",
+                  "type": "qcu",
+                  "instruction": "<p>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>des algorithmes de reconnaissance du son</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse</p>",
+                        "diagnosis": ""
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>des algorithmes de reconnaissance d’image</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": ""
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>des algorithmes de recommandation de contenu</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse ! 🎉</p>",
+                        "diagnosis": ""
+                      }
+                    },
+                    {
+                      "id": "4",
+                      "content": "<p>des algorithmes de génération de contenu</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse ! 🎉</p>",
+                        "diagnosis": ""
+                      }
+                    }
+                  ],
+                  "solution": "3"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "3725b06d-8c5a-4b6f-971a-c14481dd7d76",
+                  "type": "text",
+                  "content": "<p>🏷️ Un logiciel ajoute automatiquement des mots clés à des photographies.</p>"
+                },
+                {
+                  "id": "05a30b10-ac62-40a5-961b-9f3f3e831da0",
+                  "type": "qcu",
+                  "instruction": "<p>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>des algorithmes de reconnaissance du son</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse</p>",
+                        "diagnosis": ""
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>des algorithmes de reconnaissance d’image</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse ! 🎉</p>",
+                        "diagnosis": ""
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>des algorithmes de recommandation de contenu</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": ""
+                      }
+                    },
+                    {
+                      "id": "4",
+                      "content": "<p>des algorithmes de génération de contenu</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse ! 🎉</p>",
+                        "diagnosis": ""
+                      }
+                    }
+                  ],
+                  "solution": "2"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
