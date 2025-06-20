@@ -14,6 +14,7 @@ export default class ModulixEmbed extends ModuleElement {
     super(...args);
 
     this.messageHandler = this._receiveEmbedMessage.bind(this);
+    this.embedHeight = this.args.embed.height;
     window.addEventListener('message', this.messageHandler);
   }
 
@@ -25,7 +26,13 @@ export default class ModulixEmbed extends ModuleElement {
 
   @tracked
   isSimulatorLaunched = false;
-  embedHeight = this.args.embed.height;
+
+  @tracked
+  isSimulatorRebootable = true;
+
+  @tracked
+  embedHeight;
+
   iframe;
   messageHandler = null;
 
@@ -42,6 +49,10 @@ export default class ModulixEmbed extends ModuleElement {
 
   get heightStyle() {
     return htmlUnsafe(`height: ${this.embedHeight}px`);
+  }
+
+  get resetButtonDisplayed() {
+    return this.isSimulatorLaunched && this.isSimulatorRebootable;
   }
 
   @action
@@ -65,6 +76,10 @@ export default class ModulixEmbed extends ModuleElement {
 
     if (message?.from !== 'pix') return;
 
+    if (message.type === 'height') {
+      this.embedHeight = message.height;
+    }
+
     if (message.type === 'init') {
       if (message.enableFetchFromApi) {
         if (this.modulixPreviewMode.isEnabled) {
@@ -74,6 +89,14 @@ export default class ModulixEmbed extends ModuleElement {
         const [requestsPort] = event.ports;
 
         this.embedApiProxy.forward(this, requestsPort, this.args.passageId, 'passage');
+      }
+
+      if (!message.rebootable) {
+        this.isSimulatorRebootable = false;
+      }
+
+      if (message.autoLaunch) {
+        this.startSimulator();
       }
     }
 
@@ -135,7 +158,7 @@ export default class ModulixEmbed extends ModuleElement {
         {{/unless}}
       </div>
 
-      {{#if this.isSimulatorLaunched}}
+      {{#if this.resetButtonDisplayed}}
         <div class="element-embed__reset">
           <PixButton
             @iconBefore="refresh"

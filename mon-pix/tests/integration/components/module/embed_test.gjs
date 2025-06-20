@@ -313,6 +313,39 @@ module('Integration | Component | Module | Embed', function (hooks) {
             assert.ok(true);
           });
         });
+
+        module('when message data has rebootable=false', function () {
+          test('should not display reset button', async function (assert) {
+            // given
+            const embed = {
+              id: 'id',
+              title: 'Simulateur',
+              isCompletionRequired: true,
+              url: 'https://example.org',
+              height: 800,
+            };
+            const passageId = '5729837548';
+            const screen = await render(
+              <template><ModulixEmbed @embed={{embed}} @passageId={{passageId}} /></template>,
+            );
+
+            // when
+            const iframe = screen.getByTitle('Simulateur');
+            const event = new MessageEvent('message', {
+              data: { type: 'init', from: 'pix', rebootable: false },
+              origin: 'https://epreuves.pix.fr',
+              source: iframe.contentWindow,
+            });
+            window.dispatchEvent(event);
+
+            await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
+
+            // then
+            assert
+              .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.embed.reset.ariaLabel') }))
+              .doesNotExist();
+          });
+        });
       });
 
       module('when message is not from pix', function () {
@@ -406,6 +439,67 @@ module('Integration | Component | Module | Embed', function (hooks) {
           assert.ok(true);
         });
       });
+    });
+  });
+
+  module('when embed send autolaunch configuration with a true value', function () {
+    test('should hide the start button', async function (assert) {
+      // given
+      const embed = {
+        id: 'id',
+        title: 'Simulateur',
+        isCompletionRequired: true,
+        url: 'https://example.org',
+        height: 800,
+      };
+      const passageId = '5729837548';
+      const screen = await render(<template><ModulixEmbed @embed={{embed}} @passageId={{passageId}} /></template>);
+
+      // when
+      const iframe = screen.getByTitle('Simulateur');
+      const event = new MessageEvent('message', {
+        data: { type: 'init', from: 'pix', autoLaunch: true },
+        origin: 'https://epreuves.pix.fr',
+        source: iframe.contentWindow,
+      });
+      window.dispatchEvent(event);
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      // then
+      assert
+        .dom(await screen.queryByRole('button', { name: t('pages.modulix.buttons.embed.start.ariaLabel') }))
+        .doesNotExist();
+    });
+  });
+
+  module('when embed send its height', function () {
+    test('should set embed with value of height attribute', async function (assert) {
+      // given
+      const embed = {
+        id: 'id',
+        title: 'Simulateur',
+        isCompletionRequired: true,
+        url: 'https://example.org',
+        height: 800,
+      };
+      const passageId = '5729837548';
+      const screen = await render(<template><ModulixEmbed @embed={{embed}} @passageId={{passageId}} /></template>);
+      await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      // when
+      const iframe = screen.getByTitle('Simulateur');
+      const event = new MessageEvent('message', {
+        data: { type: 'height', from: 'pix', height: 400 },
+        origin: 'https://epreuves.pix.fr',
+        source: iframe.contentWindow,
+      });
+
+      window.dispatchEvent(event);
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      // then
+      assert.strictEqual(iframe.style.getPropertyValue('height'), '400px');
     });
   });
 
