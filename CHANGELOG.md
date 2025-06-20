@@ -1,5 +1,17 @@
 # Pix Changelog
 
+# [5.140.0](https://github.com/1024pix/pix/compare/v5.139.0...v5.140.0) (2025-06-20)
+
+### :rocket: Amélioration
+
+- [#12595](https://github.com/1024pix/pix/pull/12595) Anonymiser les pix label lors la suppresion d'une campagne (PIX-18286) 
+
+### :building_construction: Tech
+
+- [#12600](https://github.com/1024pix/pix/pull/12600) Ajout d'un log en cas de différence entre le sub récupéré et le précédent (externalIdentifier) (PIX-18360) 
+- [#12605](https://github.com/1024pix/pix/pull/12605) Corriger le message slack 
+- [#12592](https://github.com/1024pix/pix/pull/12592) Suppression de la complementaryCertificationId au profit de complementaryCertificationKey dans la table certification-frameworks-challenges
+
 # [5.139.0](https://github.com/1024pix/pix/compare/v5.138.0...v5.139.0) (2025-06-20)
 
 ### :rocket: Amélioration
