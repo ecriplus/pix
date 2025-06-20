@@ -1,5 +1,22 @@
 # Pix Changelog
 
+# [5.139.0](https://github.com/1024pix/pix/compare/v5.138.0...v5.139.0) (2025-06-20)
+
+### :rocket: Amélioration
+
+- [#12598](https://github.com/1024pix/pix/pull/12598) Traiter les retours design sur l'élément QAB (PIX-18160) 
+
+### :bug: Correction
+
+- [#12586](https://github.com/1024pix/pix/pull/12586) Réparer la récupération des données de campagnes volumineuses (PIX-18335) 
+- [#12589](https://github.com/1024pix/pix/pull/12589) Restreindre les URLs d’API disponibles pour les Embeds (PIX-18327) 
+
+### :building_construction: Tech
+
+- [#12591](https://github.com/1024pix/pix/pull/12591) Mettre à jour le message Slack pour indiquer seulement que la mise en recette est lancée 
+- [#12355](https://github.com/1024pix/pix/pull/12355) Passage de l'event de scoring de l'event dispatcher vers un usecase (PIX-17807). 
+- [#12548](https://github.com/1024pix/pix/pull/12548) Simplification des seeds Certification (PIX-17640).
+
 # [5.138.0](https://github.com/1024pix/pix/compare/v5.137.0...v5.138.0) (2025-06-19)
 
 ### :rocket: Amélioration
