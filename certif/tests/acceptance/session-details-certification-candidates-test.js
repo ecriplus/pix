@@ -177,7 +177,7 @@ module('Acceptance | Session Details Certification Candidates', function (hooks)
         assert.dom(within(modal).getByText('EXTERNAL-ID')).exists();
       });
 
-      module('when center is v3 pilot', function (hooks) {
+      module('common cases', function (hooks) {
         let allowedCertificationCenterAccess;
         let certificationPointOfContact;
         let session;

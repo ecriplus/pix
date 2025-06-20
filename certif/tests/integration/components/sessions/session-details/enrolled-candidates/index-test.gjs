@@ -24,7 +24,6 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
         { id: '0', label: 'Certif complémentaire 1', key: 'COMP_1' },
         { id: '1', label: 'Certif complémentaire 2', key: 'COMP_2' },
       ],
-      isComplementaryAlonePilot: false,
     });
 
     class CurrentUserStub extends Service {
@@ -468,71 +467,28 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
     });
   });
 
-  module('when certification center has core complementary compatibility enabled', function () {
-    test('it should display tooltip in the header of selected certification column', async function (assert) {
-      //given
-      const store = this.owner.lookup('service:store');
-      class CurrentUserStub extends Service {
-        currentAllowedCertificationCenterAccess = store.createRecord('allowed-certification-center-access', {
-          habilitations: [
-            { id: '0', label: 'Certif complémentaire 1', key: 'COMP_1' },
-            { id: '1', label: 'Certif complémentaire 2', key: 'COMP_2' },
-          ],
-          isComplementaryAlonePilot: true,
-        });
-      }
-      this.owner.register('service:current-user', CurrentUserStub);
-      const candidate = _buildCertificationCandidate({
-        subscriptions: [],
-      });
-
-      const certificationCandidates = [store.createRecord('certification-candidate', candidate)];
-      const countries = [store.createRecord('country', { name: 'CANADA', code: 99401 })];
-
-      // when
-      const screen = await render(
-        <template>
-          <EnrolledCandidates
-            @sessionId='1'
-            @certificationCandidates={{certificationCandidates}}
-            @countries={{countries}}
-          />
-        </template>,
-      );
-      const tooltipLabel = screen.getByText(t('pages.sessions.detail.candidates.list.compatibility-tooltip'), {
-        options: { exact: false },
-      });
-      await click(tooltipLabel);
-
-      // then
-      assert.dom(tooltipLabel).isVisible();
+  test('it should NOT display tooltip in the header of selected certification column', async function (assert) {
+    //given
+    const candidate = _buildCertificationCandidate({
+      subscriptions: [],
     });
-  });
 
-  module('when certification center has NOT core complementary compatibility enabled', function () {
-    test('it should NOT display tooltip in the header of selected certification column', async function (assert) {
-      //given
-      const candidate = _buildCertificationCandidate({
-        subscriptions: [],
-      });
+    const certificationCandidates = [store.createRecord('certification-candidate', candidate)];
+    const countries = [store.createRecord('country', { name: 'CANADA', code: 99401 })];
 
-      const certificationCandidates = [store.createRecord('certification-candidate', candidate)];
-      const countries = [store.createRecord('country', { name: 'CANADA', code: 99401 })];
+    // when
+    const screen = await render(
+      <template>
+        <EnrolledCandidates
+          @sessionId='1'
+          @certificationCandidates={{certificationCandidates}}
+          @countries={{countries}}
+        />
+      </template>,
+    );
 
-      // when
-      const screen = await render(
-        <template>
-          <EnrolledCandidates
-            @sessionId='1'
-            @certificationCandidates={{certificationCandidates}}
-            @countries={{countries}}
-          />
-        </template>,
-      );
-
-      // then
-      assert.dom(screen.queryByLabelText("Informations concernant l'inscription en certification.")).doesNotExist();
-    });
+    // then
+    assert.dom(screen.queryByLabelText("Informations concernant l'inscription en certification.")).doesNotExist();
   });
 });
 

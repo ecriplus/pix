@@ -14,8 +14,8 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import inputmask from 'ember-inputmask5/modifiers/inputmask';
 import { t } from 'ember-intl';
-import { COMPLEMENTARY_KEYS, SUBSCRIPTION_TYPES } from 'pix-certif/models/subscription';
 
+import { SUBSCRIPTION_TYPES } from '../../../../models/subscription';
 import CandidateCreationModalComplementaryList from './candidate-creation-modal-complementary-list';
 
 const FRANCE_INSEE_CODE = '99100';
@@ -33,10 +33,6 @@ export default class CandidateCreationModal extends Component {
 
   get complementaryCertificationsHabilitations() {
     return this.currentUser.currentAllowedCertificationCenterAccess?.habilitations;
-  }
-
-  get isComplementaryAlonePilot() {
-    return !!this.currentUser.currentAllowedCertificationCenterAccess?.isComplementaryAlonePilot;
   }
 
   get billingMenuPlaceholder() {
@@ -159,9 +155,6 @@ export default class CandidateCreationModal extends Component {
   };
 
   updateComplementaryCertification = (complementaryCertification) => {
-    if (!this.currentUser.currentAllowedCertificationCenterAccess.isCoreComplementaryCompatibilityEnabled) {
-      return this._updateComplementaryCertification_old(complementaryCertification);
-    }
     if (complementaryCertification?.key) {
       this.args.candidateData.subscriptions = [
         {
@@ -169,29 +162,10 @@ export default class CandidateCreationModal extends Component {
           complementaryCertificationId: complementaryCertification.id,
         },
       ];
-      if (complementaryCertification?.key === COMPLEMENTARY_KEYS.CLEA) {
-        this.args.candidateData.subscriptions.push({
-          complementaryCertificationId: null,
-          type: SUBSCRIPTION_TYPES.CORE,
-        });
-      }
     } else {
       this.args.candidateData.subscriptions = [];
     }
   };
-
-  _updateComplementaryCertification_old(complementaryCertification) {
-    if (complementaryCertification?.key) {
-      this.args.candidateData.subscriptions = [
-        {
-          type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-          complementaryCertificationId: complementaryCertification.id,
-        },
-      ];
-    } else {
-      this.args.candidateData.subscriptions = [];
-    }
-  }
 
   onFormSubmit = async (event) => {
     event.preventDefault();

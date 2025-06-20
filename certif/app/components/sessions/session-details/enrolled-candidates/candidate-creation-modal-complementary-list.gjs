@@ -5,33 +5,25 @@ import { on } from '@ember/modifier';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
-import { COMPLEMENTARY_KEYS } from 'pix-certif/models/subscription';
+
+import { COMPLEMENTARY_KEYS } from '../../../../models/subscription';
 
 export default class CandidateCreationModalComplementaryList extends Component {
   @service currentUser;
   @service intl;
 
   fieldsetLegend = () => {
-    if (this.currentUser.currentAllowedCertificationCenterAccess.isCoreComplementaryCompatibilityEnabled) {
-      return this.intl.t(`common.forms.certification-labels.additional-certification`);
-    }
     return this.intl.t(`common.forms.certification-labels.additional-certification-old`);
   };
 
   firstInputLabel = () => {
-    if (this.currentUser.currentAllowedCertificationCenterAccess.isCoreComplementaryCompatibilityEnabled) {
-      return this.intl.t('common.forms.certification-labels.pix-certification');
-    }
-
     return this.intl.t('common.labels.candidate.none');
   };
 
   complementaryLabel = (complementaryCertificationHabilitation) => {
     const { key, label } = complementaryCertificationHabilitation;
-    if (
-      this.currentUser.currentAllowedCertificationCenterAccess.isCoreComplementaryCompatibilityEnabled &&
-      key === COMPLEMENTARY_KEYS.CLEA
-    ) {
+
+    if (key === COMPLEMENTARY_KEYS.CLEA) {
       return this.intl.t('common.forms.certification-labels.dual-certification-clea');
     }
 

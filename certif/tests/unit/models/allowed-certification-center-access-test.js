@@ -195,26 +195,4 @@ module('Unit | Model | allowed-certification-center-access', function (hooks) {
       assert.false(model.hasHabilitations);
     });
   });
-
-  module('#get isCoreComplementaryCompatibilityEnabled', function () {
-    test('should return true when the certification center is complementary alone pilot', function (assert) {
-      // given
-      const model = store.createRecord('allowed-certification-center-access', {
-        isComplementaryAlonePilot: true,
-      });
-
-      // then
-      assert.true(model.isCoreComplementaryCompatibilityEnabled);
-    });
-
-    test('should return false when the certification center is not complementary alone pilot', function (assert) {
-      // given
-      const model = store.createRecord('allowed-certification-center-access', {
-        isComplementaryAlonePilot: false,
-      });
-
-      // then
-      assert.false(model.isCoreComplementaryCompatibilityEnabled);
-    });
-  });
 });
