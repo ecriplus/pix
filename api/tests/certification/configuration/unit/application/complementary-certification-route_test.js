@@ -103,6 +103,31 @@ describe('Certification | Configuration | Unit | Application | Router | compleme
     });
   });
 
+  describe('PATCH /api/admin/complementary-certifications/{complementaryCertificationKey}/consolidated-framework', function () {
+    describe('when the user authenticated has no role', function () {
+      it('should return 403 HTTP status code', async function () {
+        // given
+        sinon
+          .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
+          .returns((request, h) => h.response().code(403).takeover());
+        sinon.stub(complementaryCertificationController, 'createConsolidatedFramework').returns('ok');
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        const response = await httpTestServer.request(
+          'PATCH',
+          `/api/admin/complementary-certifications/${ComplementaryCertificationKeys.PIX_PLUS_DROIT}/consolidated-framework`,
+          { data: { attributes: { createdAt: new Date(), calibrationId: '1234' } } },
+        );
+
+        // then
+        expect(response.statusCode).to.equal(403);
+        sinon.assert.notCalled(complementaryCertificationController.createConsolidatedFramework);
+      });
+    });
+  });
+
   describe('GET /api/admin/complementary-certifications/{complementaryCertificationKey}/current-consolidated-framework', function () {
     describe('when the user authenticated has no role', function () {
       it('should return 403 HTTP status code', async function () {

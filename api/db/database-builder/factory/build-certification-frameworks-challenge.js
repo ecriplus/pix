@@ -10,7 +10,7 @@ const buildCertificationFrameworksChallenge = function ({
   difficulty = 3.5,
   complementaryCertificationKey,
   challengeId,
-  createdAt,
+  createdAt = new Date(),
 } = {}) {
   complementaryCertificationKey = _.isUndefined(complementaryCertificationKey)
     ? buildComplementaryCertification().key
