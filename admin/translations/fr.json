@@ -748,17 +748,7 @@
           },
           "title": "Habilitations aux certifications complémentaires"
         },
-        "is-archived-warning": "Archivé le {archivedAt} par {archivedBy}.",
-        "pilot-features": {
-          "is-complementary-alone-pilot": {
-            "aria-label": {
-              "active": "Est pilote phase test compatibilité Pix v3 / Pix+",
-              "inactive": "N'est pas phase test compatibilité Pix v3 / Pix+"
-            },
-            "label": "phase test compatibilité Pix v3 / Pix+"
-          },
-          "title": "Fonctionnalités pilotes"
-        }
+        "is-archived-warning": "Archivé le {archivedAt} par {archivedBy}."
       },
       "notifications": {
         "failure": {

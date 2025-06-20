@@ -1,5 +1,4 @@
 import { render } from '@1024pix/ember-testing-library';
-import { t } from 'ember-intl/test-support';
 import InformationView from 'pix-admin/components/certification-centers/information-view';
 import { module, test } from 'qunit';
 
@@ -65,61 +64,5 @@ module('Integration | Component | certification-centers/information-view', funct
 
     // then
     assert.dom(screen.getByText('Tableau de bord')).exists();
-  });
-
-  module('certification center is complementary alone pilot', function () {
-    test('it should display that the certification center is complementary alone pilot', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-
-      const certificationCenter = store.createRecord('certification-center', {
-        type: 'SCO',
-        isComplementaryAlonePilot: true,
-      });
-
-      // when
-      const screen = await render(
-        <template><InformationView @certificationCenter={{certificationCenter}} /></template>,
-      );
-
-      // then
-      assert
-        .dom(
-          screen.getByLabelText(
-            t(
-              'pages.certification-centers.information-view.pilot-features.is-complementary-alone-pilot.aria-label.active',
-            ),
-          ),
-        )
-        .exists();
-    });
-  });
-
-  module('certification center is NOT complementary alone pilot', function () {
-    test('it should display that the certification center is NOT complementary alone pilot', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-
-      const certificationCenter = store.createRecord('certification-center', {
-        type: 'SCO',
-        isComplementaryAlonePilot: false,
-      });
-
-      // when
-      const screen = await render(
-        <template><InformationView @certificationCenter={{certificationCenter}} /></template>,
-      );
-
-      // then
-      assert
-        .dom(
-          screen.getByLabelText(
-            t(
-              'pages.certification-centers.information-view.pilot-features.is-complementary-alone-pilot.aria-label.inactive',
-            ),
-          ),
-        )
-        .exists();
-    });
   });
 });
