@@ -106,11 +106,6 @@
     }
   }
 
-  &__divider {
-    margin: var(--pix-spacing-2x) 0;
-    border-bottom: 0.05rem solid var(--pix-neutral-100);
-  }
-
   &__list {
     display: grid;
     grid-template-columns: 170px auto;
