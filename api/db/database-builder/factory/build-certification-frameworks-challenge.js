@@ -8,12 +8,12 @@ const buildCertificationFrameworksChallenge = function ({
   id = databaseBuffer.getNextId(),
   alpha = 2.2,
   delta = 3.5,
-  complementaryCertificationId,
+  complementaryCertificationKey,
   challengeId,
 } = {}) {
-  complementaryCertificationId = _.isUndefined(complementaryCertificationId)
-    ? buildComplementaryCertification().id
-    : complementaryCertificationId;
+  complementaryCertificationKey = _.isUndefined(complementaryCertificationKey)
+    ? buildComplementaryCertification().key
+    : complementaryCertificationKey;
 
   challengeId = _.isUndefined(challengeId) ? buildChallenge().id : challengeId;
 
@@ -21,7 +21,7 @@ const buildCertificationFrameworksChallenge = function ({
     id,
     alpha,
     delta,
-    complementaryCertificationId,
+    complementaryCertificationKey,
     challengeId,
   };
 

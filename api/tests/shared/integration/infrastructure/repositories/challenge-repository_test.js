@@ -1836,14 +1836,14 @@ describe('Integration | Repository | challenge-repository', function () {
         databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
 
         const certificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationId: complementaryCertification.id,
+          complementaryCertificationKey: complementaryCertification.key,
           challengeId: challengesLC[0].id,
         });
 
         await databaseBuilder.commit();
 
         const flashCompatibleChallenges = await challengeRepository.findActiveFlashCompatible({
-          complementaryCertificationId: complementaryCertification.id,
+          complementaryCertificationKey: complementaryCertification.key,
           locale: 'fr',
         });
 
