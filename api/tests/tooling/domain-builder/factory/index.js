@@ -168,7 +168,6 @@ import { buildV3CertificationCourseDetailsForAdministration } from './build-v3-c
 import { buildValidation } from './build-validation.js';
 import { buildValidator } from './build-validator.js';
 import { buildCenter as buildConfigurationCenter } from './certification/configuration/build-center.js';
-import { buildCenterPilotFeatures } from './certification/configuration/build-center-pilot-features.js';
 import { buildConsolidatedFramework } from './certification/configuration/build-consolidated-framework.js';
 import { buildCandidate } from './certification/enrolment/build-candidate.js';
 import { buildCertificationEligibilityEnrolment } from './certification/enrolment/build-certification-eligibility.js';
@@ -230,7 +229,6 @@ const banner = {
 const certification = {
   configuration: {
     buildCenter: buildConfigurationCenter,
-    buildCenterPilotFeatures,
     buildConsolidatedFramework,
   },
   complementary: {

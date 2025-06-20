@@ -15,7 +15,6 @@ const deserialize = function ({ data, createdBy }) {
     type: data.attributes.type,
     archivedAt: data.attributes['archived-at'],
     archivistFullName: data.attributes['archivist-full-name'],
-    isComplementaryAlonePilot: data.attributes['is-complementary-alone-pilot'],
   };
   const dataProtectionOfficer = {
     firstName: data.attributes['data-protection-officer-first-name'],
@@ -30,7 +29,7 @@ const deserialize = function ({ data, createdBy }) {
   });
 };
 
-const serialize = function (certificationCenter, certificationCenterPilotFeatures) {
+const serialize = function (certificationCenter) {
   return new Serializer('certification-centers', {
     attributes: [
       'name',
@@ -44,7 +43,6 @@ const serialize = function (certificationCenter, certificationCenterPilotFeature
       'dataProtectionOfficerLastName',
       'dataProtectionOfficerEmail',
       'habilitations',
-      'isComplementaryAlonePilot',
     ],
     typeForAttribute: (attribute) => {
       if (attribute === 'habilitations') return 'complementary-certifications';
@@ -64,7 +62,7 @@ const serialize = function (certificationCenter, certificationCenterPilotFeature
       ref: 'complementaryCertificationId',
       attributes: ['key', 'label'],
     },
-  }).serialize({ ...certificationCenter, ...certificationCenterPilotFeatures });
+  }).serialize({ ...certificationCenter });
 };
 
 export { deserialize, serialize };
