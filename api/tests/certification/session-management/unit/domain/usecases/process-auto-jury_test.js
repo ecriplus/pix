@@ -23,7 +23,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
       certificationCourseRepository = { findCertificationCoursesBySessionId: sinon.stub() };
       certificationIssueReportRepository = { findByCertificationCourseId: sinon.stub(), save: sinon.stub() };
       certificationAssessmentRepository = { getByCertificationCourseId: sinon.stub(), save: sinon.stub() };
-      certificationRescoringRepository = { execute: sinon.stub() };
+      certificationRescoringRepository = { rescoreV2Certification: sinon.stub() };
       challengeRepository = { get: sinon.stub() };
     });
 
@@ -202,7 +202,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
       });
 
       // then
-      expect(certificationRescoringRepository.execute).to.have.been.calledOnceWithExactly({
+      expect(certificationRescoringRepository.rescoreV2Certification).to.have.been.calledOnceWithExactly({
         event: new CertificationJuryDone({
           certificationCourseId: certificationCourse.getId(),
         }),
@@ -248,7 +248,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         });
 
         // then
-        expect(certificationRescoringRepository.execute).to.have.been.calledOnceWithExactly({
+        expect(certificationRescoringRepository.rescoreV2Certification).to.have.been.calledOnceWithExactly({
           event: new CertificationJuryDone({
             certificationCourseId: certificationCourse.getId(),
           }),
@@ -562,7 +562,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
       certificationCourseRepository = { findCertificationCoursesBySessionId: sinon.stub() };
       certificationIssueReportRepository = { findByCertificationCourseId: sinon.stub(), save: sinon.stub() };
       certificationAssessmentRepository = { getByCertificationCourseId: sinon.stub(), save: sinon.stub() };
-      certificationRescoringRepository = { execute: sinon.stub() };
+      certificationRescoringRepository = { rescoreV3Certification: sinon.stub() };
     });
 
     it('returns an AutoJuryDone event as last event', async function () {
@@ -646,7 +646,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         .withArgs({ certificationCourseId: certificationCourse.getId() })
         .resolves(certificationAssessment);
       certificationAssessmentRepository.save.resolves();
-      certificationRescoringRepository.execute.resolves();
+      certificationRescoringRepository.rescoreV3Certification.resolves();
 
       const sessionFinalized = new SessionFinalized({
         sessionId: 1234,
@@ -667,7 +667,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
       });
 
       // then
-      expect(certificationRescoringRepository.execute).to.have.been.calledOnceWithExactly({
+      expect(certificationRescoringRepository.rescoreV3Certification).to.have.been.calledOnceWithExactly({
         event: new CertificationJuryDone({
           certificationCourseId: certificationCourse.getId(),
         }),
@@ -702,7 +702,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         });
 
         // then
-        expect(certificationRescoringRepository.execute).to.have.been.calledOnceWithExactly({
+        expect(certificationRescoringRepository.rescoreV3Certification).to.have.been.calledOnceWithExactly({
           event: new CertificationJuryDone({
             certificationCourseId: certificationCourse.getId(),
           }),
@@ -820,7 +820,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         });
 
         // then
-        expect(certificationRescoringRepository.execute).to.have.been.calledOnceWithExactly({
+        expect(certificationRescoringRepository.rescoreV3Certification).to.have.been.calledOnceWithExactly({
           event: new CertificationJuryDone({
             certificationCourseId: certificationCourse.getId(),
           }),
@@ -857,7 +857,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         });
 
         // then
-        expect(certificationRescoringRepository.execute).to.have.been.calledOnceWithExactly({
+        expect(certificationRescoringRepository.rescoreV3Certification).to.have.been.calledOnceWithExactly({
           event: new CertificationJuryDone({
             certificationCourseId: certificationCourse.getId(),
           }),
@@ -909,7 +909,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         });
 
         // then
-        expect(certificationRescoringRepository.execute).to.not.have.been.calledOnce;
+        expect(certificationRescoringRepository.rescoreV3Certification).to.not.have.been.calledOnce;
       });
     });
   });

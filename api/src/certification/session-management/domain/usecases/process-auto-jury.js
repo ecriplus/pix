@@ -63,6 +63,10 @@ export async function processAutoJury({
   });
 }
 
+/**
+ * @param {Object} params
+ * @param {CertificationRescoringRepository} params.certificationRescoringRepository
+ */
 async function _handleAutoJuryV2({
   certificationCourse,
   certificationIssueReportRepository,
@@ -90,7 +94,7 @@ async function _handleAutoJuryV2({
       certificationCourseId: certificationCourse.getId(),
     });
 
-    await certificationRescoringRepository.execute({
+    await certificationRescoringRepository.rescoreV2Certification({
       event: certificationJuryDoneEvent,
     });
   }
@@ -115,7 +119,7 @@ async function _handleAutoJuryV3({
       certificationCourseId: certificationCourse.getId(),
     });
 
-    await certificationRescoringRepository.execute({
+    await certificationRescoringRepository.rescoreV3Certification({
       event: certificationJuryDoneEvent,
     });
   }

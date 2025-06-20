@@ -6,11 +6,23 @@
 
 /**
  * @param {Object} params
- * @param {CertificationCancelled|CertificationUncancelled} params.event
+ * @param {CertificationJuryDone|CertificationCourseRejected|CertificationCourseUnrejected|CertificationCancelled|CertificationRescored|CertificationUncancelled} params.event
  * @param {CertificationEvaluationApi} params.certificationEvaluationApi
  * @returns {Promise<void>}
  */
-export const execute = async ({ event, certificationEvaluationApi }) => {
+export const rescoreV3Certification = async ({ event, certificationEvaluationApi }) => {
+  return certificationEvaluationApi.rescoreCertification({
+    event,
+  });
+};
+
+/**
+ * @param {Object} params
+ * @param {ChallengeNeutralized|ChallengeDeneutralized|CertificationJuryDone|CertificationCourseRejected|CertificationCourseUnrejected|CertificationCancelled|CertificationRescored|CertificationUncancelled} params.event
+ * @param {CertificationEvaluationApi} params.certificationEvaluationApi
+ * @returns {Promise<void>}
+ */
+export const rescoreV2Certification = async ({ event, certificationEvaluationApi }) => {
   return certificationEvaluationApi.rescoreCertification({
     event,
   });

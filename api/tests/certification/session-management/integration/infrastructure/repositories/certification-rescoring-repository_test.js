@@ -4,13 +4,28 @@ import CertificationCancelled from '../../../../../../src/shared/domain/events/C
 import { catchErr, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | certification-rescoring-repository', function () {
-  describe('#execute', function () {
+  describe('#rescoreV2Certification', function () {
     it('should trigger a rescoring', async function () {
       // given
       const certificationCancelledEvent = new CertificationCancelled({ certificationCourseId: 444, juryId: 555 });
 
       // when
-      const error = await catchErr(sessionRepositories.certificationRescoringRepository.execute)({
+      const error = await catchErr(sessionRepositories.certificationRescoringRepository.rescoreV2Certification)({
+        event: certificationCancelledEvent,
+      });
+
+      // then
+      expect(error).to.deepEqualInstance(new NotFoundError('Certification course does not exist'));
+    });
+  });
+
+  describe('#rescoreV3Certification', function () {
+    it('should trigger a rescoring', async function () {
+      // given
+      const certificationCancelledEvent = new CertificationCancelled({ certificationCourseId: 444, juryId: 555 });
+
+      // when
+      const error = await catchErr(sessionRepositories.certificationRescoringRepository.rescoreV3Certification)({
         event: certificationCancelledEvent,
       });
 

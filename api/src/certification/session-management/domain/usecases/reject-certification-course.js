@@ -1,3 +1,4 @@
+import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationCourseRejected } from '../events/CertificationCourseRejected.js';
 
 export const rejectCertificationCourse = async ({
@@ -10,7 +11,13 @@ export const rejectCertificationCourse = async ({
   certificationCourse.rejectForFraud();
   await certificationCourseRepository.update({ certificationCourse });
 
-  await certificationRescoringRepository.execute({
-    event: new CertificationCourseRejected({ certificationCourseId, juryId }),
-  });
+  const event = new CertificationCourseRejected({ certificationCourseId, juryId });
+
+  if (AlgorithmEngineVersion.isV3(certificationCourse.getVersion())) {
+    return certificationRescoringRepository.rescoreV3Certification({ event });
+  }
+
+  if (AlgorithmEngineVersion.isV2(certificationCourse.getVersion())) {
+    return certificationRescoringRepository.rescoreV2Certification({ event });
+  }
 };

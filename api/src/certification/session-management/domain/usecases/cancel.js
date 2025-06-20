@@ -6,6 +6,7 @@
 
 import CertificationCancelled from '../../../../../src/shared/domain/events/CertificationCancelled.js';
 import { NotFinalizedSessionError } from '../../../../shared/domain/errors.js';
+import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 
 /**
  * @param {Object} params
@@ -32,7 +33,13 @@ export const cancel = async function ({
     juryId,
   });
 
-  await certificationRescoringRepository.execute({ event });
+  if (AlgorithmEngineVersion.isV3(certificationCourse.getVersion())) {
+    await certificationRescoringRepository.rescoreV3Certification({ event });
+  }
+
+  if (AlgorithmEngineVersion.isV2(certificationCourse.getVersion())) {
+    await certificationRescoringRepository.rescoreV2Certification({ event });
+  }
 
   // Note: update after event to ensure we doing it well, even when rescoring. Needeed this only for v2 certification
   certificationCourse.cancel();

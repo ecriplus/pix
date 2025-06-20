@@ -6,6 +6,7 @@
 
 import { NotFinalizedSessionError } from '../../../../shared/domain/errors.js';
 import CertificationUncancelled from '../../../../shared/domain/events/CertificationUncancelled.js';
+import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 
 /**
  * @param {Object} params
@@ -36,5 +37,11 @@ export const uncancel = async function ({
     juryId,
   });
 
-  return certificationRescoringRepository.execute({ event });
+  if (AlgorithmEngineVersion.isV3(certificationCourse.getVersion())) {
+    return certificationRescoringRepository.rescoreV3Certification({ event });
+  }
+
+  if (AlgorithmEngineVersion.isV2(certificationCourse.getVersion())) {
+    return certificationRescoringRepository.rescoreV2Certification({ event });
+  }
 };
