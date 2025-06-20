@@ -116,7 +116,13 @@ class ApiManagerAccess extends PixOpenApiBaseDefinition {
     this.swaggerConfiguration.uiOptions.url = `${this.endpoint}${this.swaggerConfiguration.jsonPath}`;
 
     // UI won't display the internal api base path externally
-    this.swaggerConfiguration.basePath = '/api/application';
+    this.swaggerConfiguration.pathReplacements = [
+      {
+        replaceIn: 'all',
+        pattern: /api\/(?:application\/)?/,
+        replacement: '',
+      },
+    ];
     this.#addExternalPartnersAccess();
   }
 
