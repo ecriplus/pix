@@ -31,7 +31,6 @@ export async function addCandidateToSession({
   candidate,
   sessionRepository,
   candidateRepository,
-  centerRepository,
   certificationCpfService,
   certificationCpfCountryRepository,
   certificationCpfCityRepository,
@@ -41,8 +40,6 @@ export async function addCandidateToSession({
 }) {
   candidate.sessionId = sessionId;
   const session = await sessionRepository.get({ id: sessionId });
-  const center = await centerRepository.getById({ id: session.certificationCenterId });
-  const isCoreComplementaryCompatibilityEnabled = center.isCoreComplementaryCompatibilityEnabled;
 
   if (!session.canEnrolCandidate) {
     throw new CertificationCandidateOnFinalizedSessionError();
@@ -55,7 +52,6 @@ export async function addCandidateToSession({
   try {
     candidate.validate({
       isSco: session.isSco,
-      isCoreComplementaryCompatibilityEnabled,
       cleaCertificationId: cleaCertification.id,
     });
   } catch (error) {

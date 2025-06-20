@@ -58,7 +58,6 @@ function _toDomain(certificationCenterDTO) {
       createdAt: certificationCenterDTO.createdAt,
       createdBy: certificationCenterDTO.createdBy,
       updatedAt: certificationCenterDTO.updatedAt,
-      isComplementaryAlonePilot: undefined,
     },
   });
 }

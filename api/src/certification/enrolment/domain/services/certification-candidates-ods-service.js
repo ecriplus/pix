@@ -26,7 +26,6 @@ async function extractCertificationCandidatesFromCandidatesImportSheet({
 }) {
   const translate = i18n.__;
   const center = await centerRepository.getById({ id: session.certificationCenterId });
-  const isCoreComplementaryCompatibilityEnabled = center.isCoreComplementaryCompatibilityEnabled;
   const candidateImportStructs = getTransformationStructsForPixCertifCandidatesImport({
     i18n,
     habilitations: center.habilitations,
@@ -82,7 +81,6 @@ async function extractCertificationCandidatesFromCandidatesImportSheet({
       hasPixPlusEdu2ndDegre,
       hasPixPlusProSante,
       complementaryCertificationsInDB,
-      isCoreComplementaryCompatibilityEnabled,
     });
 
     if (cpfBirthInformation.hasFailed()) {
@@ -142,23 +140,15 @@ async function extractCertificationCandidatesFromCandidatesImportSheet({
       (complementaryCertification) => complementaryCertification.key === ComplementaryCertificationKeys.CLEA,
     );
     try {
-      candidate.validate({ isSco, isCoreComplementaryCompatibilityEnabled, cleaCertificationId: cleaCertification.id });
+      candidate.validate({ isSco, cleaCertificationId: cleaCertification.id });
       _checkForDuplication(candidate);
     } catch (error) {
       if (error?.code?.includes('subscriptions')) {
-        if (isCoreComplementaryCompatibilityEnabled) {
-          throw new CertificationCandidatesError({
-            code: CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_WRONG_SUBSCRIPTIONS_COMPATIBILITY.code,
-            message: 'A candidate cannot have more than one subscription to a certification',
-            meta: { line },
-          });
-        } else {
-          throw new CertificationCandidatesError({
-            code: CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_MAX_ONE_COMPLEMENTARY_CERTIFICATION.code,
-            message: 'A candidate cannot have more than one complementary certification',
-            meta: { line },
-          });
-        }
+        throw new CertificationCandidatesError({
+          code: CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_MAX_ONE_COMPLEMENTARY_CERTIFICATION.code,
+          message: 'A candidate cannot have more than one complementary certification',
+          meta: { line },
+        });
       }
       throw new CertificationCandidatesError({
         code: error.code,
@@ -234,17 +224,13 @@ function _buildSubscriptions({
   hasPixPlusEdu2ndDegre,
   hasPixPlusProSante,
   complementaryCertificationsInDB,
-  isCoreComplementaryCompatibilityEnabled,
 }) {
-  const subscriptions = [];
   const complementaryCertificationsByKey = _.keyBy(complementaryCertificationsInDB, 'key');
-  if (!isCoreComplementaryCompatibilityEnabled) {
-    subscriptions.push(Subscription.buildCore({ certificationCandidateId: null }));
-  }
+
+  const subscriptions = [];
+  subscriptions.push(Subscription.buildCore({ certificationCandidateId: null }));
+
   if (hasCleaNumerique) {
-    if (isCoreComplementaryCompatibilityEnabled) {
-      subscriptions.push(Subscription.buildCore({ certificationCandidateId: null }));
-    }
     subscriptions.push(
       _buildComplementaryCertification(complementaryCertificationsByKey[ComplementaryCertificationKeys.CLEA].id),
     );

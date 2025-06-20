@@ -1,6 +1,5 @@
 import lodash from 'lodash';
 
-import { CERTIFICATION_FEATURES } from '../../../../../src/certification/shared/domain/constants.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { anonymousUserTokenRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/anonymous-user-token.repository.js';
 import { emailValidationDemandRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/email-validation-demand.repository.js';
@@ -1109,23 +1108,6 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         complementaryCertificationId: complementaryCertification.id,
       });
 
-      // Pilot complementary
-      const certificationCenterComplementaryAlonePilotId = databaseBuilder.factory.buildCertificationCenter({
-        externalId: 'PILOT123',
-      }).id;
-      const complementaryAlonePilotFeatureId = databaseBuilder.factory.buildFeature(
-        CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE,
-      ).id;
-      databaseBuilder.factory.buildCertificationCenterFeature({
-        certificationCenterId: certificationCenterComplementaryAlonePilotId,
-        featureId: complementaryAlonePilotFeatureId,
-      });
-      const certificationCenterMembershipComplementaryAlonePilotId =
-        databaseBuilder.factory.buildCertificationCenterMembership({
-          userId,
-          certificationCenterId: certificationCenterComplementaryAlonePilotId,
-        }).id;
-
       await databaseBuilder.commit();
       const options = {
         method: 'GET',
@@ -1148,10 +1130,6 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
               id: certificationCenterMembershipId.toString(),
               type: 'certification-center-membership',
             },
-            {
-              id: certificationCenterMembershipComplementaryAlonePilotId.toString(),
-              type: 'certification-center-membership',
-            },
           ],
         },
       });
@@ -1172,7 +1150,6 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
             'is-access-blocked-college': false,
             'is-access-blocked-lycee': false,
             'is-related-to-managing-students-organization': false,
-            'is-complementary-alone-pilot': false,
             name: 'some name',
             'pix-certif-sco-blocked-access-date-college': null,
             'pix-certif-sco-blocked-access-date-lycee': null,
@@ -1183,38 +1160,10 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
           type: 'allowed-certification-center-access',
         },
         {
-          attributes: {
-            'external-id': 'PILOT123',
-            habilitations: [],
-            'is-access-blocked-aefe': false,
-            'is-access-blocked-agri': false,
-            'is-access-blocked-college': false,
-            'is-access-blocked-lycee': false,
-            'is-related-to-managing-students-organization': false,
-            'is-complementary-alone-pilot': true,
-            name: 'some name',
-            'pix-certif-sco-blocked-access-date-college': null,
-            'pix-certif-sco-blocked-access-date-lycee': null,
-            'related-organization-tags': [],
-            type: 'SUP',
-          },
-          id: certificationCenterComplementaryAlonePilotId.toString(),
-          type: 'allowed-certification-center-access',
-        },
-        {
           id: certificationCenterMembershipId.toString(),
           type: 'certification-center-membership',
           attributes: {
             'certification-center-id': certificationCenterId,
-            'user-id': userId,
-            role: 'MEMBER',
-          },
-        },
-        {
-          id: certificationCenterMembershipComplementaryAlonePilotId.toString(),
-          type: 'certification-center-membership',
-          attributes: {
-            'certification-center-id': certificationCenterComplementaryAlonePilotId,
             'user-id': userId,
             role: 'MEMBER',
           },

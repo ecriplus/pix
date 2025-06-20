@@ -1,7 +1,4 @@
-import {
-  CERTIFICATION_FEATURES,
-  SUBSCRIPTION_TYPES,
-} from '../../../../../src/certification/shared/domain/constants.js';
+import { SUBSCRIPTION_TYPES } from '../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { CertificationCandidate } from '../../../../../src/shared/domain/models/index.js';
 import { clearResolveMx, setResolveMx } from '../../../../../src/shared/mail/infrastructure/services/mail-check.js';
@@ -192,13 +189,6 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
             type: 'PRO',
             externalId: 'EXTERNAL_ID',
           });
-        const complementaryAlonePilotFeatureId = databaseBuilder.factory.buildFeature(
-          CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE,
-        ).id;
-        databaseBuilder.factory.buildCertificationCenterFeature({
-          certificationCenterId,
-          featureId: complementaryAlonePilotFeatureId,
-        });
 
         sessionId = databaseBuilder.factory.buildSession({ certificationCenterId, certificationCenter }).id;
         databaseBuilder.factory.buildCertificationCenterMembership({ userId, certificationCenterId });

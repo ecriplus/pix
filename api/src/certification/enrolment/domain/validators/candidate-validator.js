@@ -4,15 +4,6 @@ const Joi = BaseJoi.extend(JoiDate);
 import { BILLING_MODES, SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../../../shared/domain/constants/certification-candidates-errors.js';
 
-const tempSubscriptionSchema = Joi.object({
-  type: Joi.string().required().valid(SUBSCRIPTION_TYPES.CORE, SUBSCRIPTION_TYPES.COMPLEMENTARY),
-  complementaryCertificationId: Joi.when('type', {
-    is: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-    then: Joi.number().required(),
-    otherwise: Joi.any().valid(null).allow(null),
-  }),
-});
-
 const alternativeCoreOnly = Joi.array()
   .length(1)
   .items({
@@ -49,7 +40,6 @@ const alternativeClea = Joi.array()
 const schemaForCompatibilitySubscriptions = Joi.alternatives()
   .match('one')
   .try(alternativeCoreOnly, alternativeComplementaryOnly, alternativeClea);
-const oldSubscriptionsSchema = Joi.array().min(1).items(tempSubscriptionSchema).unique('type').required();
 
 const schema = Joi.object({
   firstName: Joi.string().trim().required().empty(['', null]).messages({
@@ -90,11 +80,7 @@ const schema = Joi.object({
       'number.base': CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_SESSION_ID_NOT_A_NUMBER.code,
     }),
   }),
-  subscriptions: Joi.alternatives().conditional(Joi.ref('$isCoreComplementaryCompatibilityEnabled'), {
-    is: true,
-    then: schemaForCompatibilitySubscriptions,
-    otherwise: oldSubscriptionsSchema,
-  }),
+  subscriptions: schemaForCompatibilitySubscriptions,
   billingMode: Joi.when('$isSco', {
     is: false,
     then: Joi.string()

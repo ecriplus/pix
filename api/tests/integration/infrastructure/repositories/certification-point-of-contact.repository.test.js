@@ -1,5 +1,4 @@
 import * as centerRepository from '../../../../src/certification/enrolment/infrastructure/repositories/center-repository.js';
-import { CERTIFICATION_FEATURES } from '../../../../src/certification/shared/domain/constants.js';
 import * as certificationPointOfContactRepository from '../../../../src/identity-access-management/infrastructure/repositories/certification-point-of-contact.repository.js';
 import { Organization } from '../../../../src/organizational-entities/domain/models/Organization.js';
 import { NotFoundError } from '../../../../src/shared/domain/errors.js';
@@ -111,7 +110,6 @@ describe('Integration | Identity Access Management |  Repository | Certification
           habilitations: [],
           isRelatedToManagingStudentsOrganization: false,
           relatedOrganizationTags: [],
-          features: [],
         },
       ];
 
@@ -736,47 +734,6 @@ describe('Integration | Identity Access Management |  Repository | Certification
           // then
           expect(certificationPointOfContact).to.deepEqualInstance(expectedCertificationPointOfContact);
         });
-      });
-    });
-
-    context('when the certification center is a complementary alone pilot', function () {
-      it('return isComplementaryAlonePilot', async function () {
-        // given
-        const complementaryAlonePilotFeatureId = databaseBuilder.factory.buildFeature(
-          CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE,
-        ).id;
-        databaseBuilder.factory.buildCertificationCenterFeature({
-          certificationCenterId: certificationCenter.id,
-          featureId: complementaryAlonePilotFeatureId,
-        });
-
-        await databaseBuilder.commit();
-
-        // when
-        const { authorizedCenterIds, certificationPointOfContactDTO } =
-          await certificationPointOfContactRepository.getAuthorizedCenterIds(userWithMembership.id);
-        const centerList = await Promise.all(
-          authorizedCenterIds.map((authorizedCenterId) => centerRepository.getById({ id: authorizedCenterId })),
-        );
-        const allowedCertificationCenterAccesses =
-          await certificationPointOfContactRepository.getAllowedCenterAccesses(centerList);
-        const certificationPointOfContact = await certificationPointOfContactRepository.getPointOfContact({
-          userId: userWithMembership.id,
-          certificationPointOfContactDTO,
-          allowedCertificationCenterAccesses,
-        });
-
-        // then
-        expect(certificationPointOfContact.allowedCertificationCenterAccesses).to.deep.equal([
-          domainBuilder.buildAllowedCertificationCenterAccess({
-            id: certificationCenter.id,
-            type: certificationCenter.type,
-            name: certificationCenter.name,
-            externalId: certificationCenter.externalId,
-            isComplementaryAlonePilot: true,
-            features: [CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE.key],
-          }),
-        ]);
       });
     });
   });

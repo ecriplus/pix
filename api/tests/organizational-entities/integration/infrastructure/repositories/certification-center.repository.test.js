@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import { CERTIFICATION_FEATURES } from '../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { CertificationCenter } from '../../../../../src/organizational-entities/domain/models/CertificationCenter.js';
 import * as certificationCenterRepository from '../../../../../src/organizational-entities/infrastructure/repositories/certification-center.repository.js';
@@ -58,7 +57,6 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           type: 'PRO',
           externalId: 'EX123',
           habilitations: [],
-          features: [],
           archivedAt: null,
           archivedBy: null,
           updatedAt: now,
@@ -140,50 +138,6 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           type: 'PRO',
           externalId: 'EX123',
           habilitations: [firstHabilitation, secondHabilitation],
-          features: [],
-          archivedAt: null,
-          archivedBy: null,
-          updatedAt: now,
-          createdAt: now,
-        });
-        expect(result).to.deepEqualInstance(expectedCenter);
-      });
-    });
-
-    context('when the certification center is a feature pilot', function () {
-      it('returns the information', async function () {
-        // given
-        const centerId = 1;
-        databaseBuilder.factory.buildCertificationCenter({
-          id: centerId,
-          type: CertificationCenter.types.PRO,
-          archivedAt: null,
-          archivedBy: null,
-          updatedAt: now,
-          createdAt: now,
-        });
-        const feature = databaseBuilder.factory.buildFeature({
-          key: CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE.key,
-        });
-        databaseBuilder.factory.buildCertificationCenterFeature({
-          certificationCenterId: centerId,
-          featureId: feature.id,
-        });
-        await databaseBuilder.commit();
-
-        // when
-        const result = await certificationCenterRepository.getById({
-          id: centerId,
-        });
-
-        // then
-        const expectedCenter = new CertificationCenter({
-          id: centerId,
-          name: 'some name',
-          type: 'PRO',
-          externalId: 'EX123',
-          habilitations: [],
-          features: [CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE.key],
           archivedAt: null,
           archivedBy: null,
           updatedAt: now,
@@ -243,7 +197,6 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
             label: droit.label,
           }),
         ],
-        features: [],
       });
       expect(result).to.deepEqualInstance(expectedCenter);
     });

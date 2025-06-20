@@ -6,10 +6,7 @@ import * as certificationCandidatesOdsService from '../../../../../../../src/cer
 import * as centerRepository from '../../../../../../../src/certification/enrolment/infrastructure/repositories/center-repository.js';
 import * as certificationCpfCityRepository from '../../../../../../../src/certification/enrolment/infrastructure/repositories/certification-cpf-city-repository.js';
 import * as certificationCpfCountryRepository from '../../../../../../../src/certification/enrolment/infrastructure/repositories/certification-cpf-country-repository.js';
-import {
-  BILLING_MODES,
-  CERTIFICATION_FEATURES,
-} from '../../../../../../../src/certification/shared/domain/constants.js';
+import { BILLING_MODES } from '../../../../../../../src/certification/shared/domain/constants.js';
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../../../../../../../src/certification/shared/domain/constants/certification-candidates-errors.js';
 import { ComplementaryCertificationKeys } from '../../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import * as certificationCpfService from '../../../../../../../src/certification/shared/domain/services/certification-cpf-service.js';
@@ -280,197 +277,72 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
       });
     });
 
-    context('when isCoreComplementaryCompatibilityEnabled false for center', function () {
-      it('should return extracted and validated certification candidates with complementary certification', async function () {
-        // given
-        mailCheck.checkDomainIsValid.resolves();
-        const pixPlusDroitComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
-          label: 'Pix+ Droit',
-          key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
-        });
-        const pixPlusEdu1erDegreComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
-          label: 'Pix+ Édu 1er degré',
-          key: ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
-        });
-        const pixPlusEdu2ndDegreComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
-          label: 'Pix+ Édu 2nd degré',
-          key: ComplementaryCertificationKeys.PIX_PLUS_EDU_2ND_DEGRE,
-        });
-        const PixPlusProSanteComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
-          label: 'Pix+ Pro Santé',
-          key: ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE,
-        });
-
-        const certificationCenterId = databaseBuilder.factory.buildCertificationCenter({}).id;
-        databaseBuilder.factory.buildComplementaryCertificationHabilitation({
-          certificationCenterId,
-          complementaryCertificationId: cleaComplementaryCertification.id,
-        });
-        databaseBuilder.factory.buildComplementaryCertificationHabilitation({
-          certificationCenterId,
-          complementaryCertificationId: pixPlusDroitComplementaryCertification.id,
-        });
-        databaseBuilder.factory.buildComplementaryCertificationHabilitation({
-          certificationCenterId,
-          complementaryCertificationId: pixPlusEdu1erDegreComplementaryCertification.id,
-        });
-        databaseBuilder.factory.buildComplementaryCertificationHabilitation({
-          certificationCenterId,
-          complementaryCertificationId: pixPlusEdu2ndDegreComplementaryCertification.id,
-        });
-        databaseBuilder.factory.buildComplementaryCertificationHabilitation({
-          certificationCenterId,
-          complementaryCertificationId: PixPlusProSanteComplementaryCertification.id,
-        });
-
-        const userId = databaseBuilder.factory.buildUser().id;
-        databaseBuilder.factory.buildCertificationCenterMembership({ userId, certificationCenterId });
-        const sessionData = databaseBuilder.factory.buildSession({ certificationCenterId });
-        const session = domainBuilder.certification.enrolment.buildSession(sessionData);
-
-        await databaseBuilder.commit();
-
-        const odsFilePath = `${__dirname}/attendance_sheet_extract_with_complementary_certifications_ok_test.ods`;
-        const odsBuffer = await readFile(odsFilePath);
-        candidateList = _buildCandidateList({
-          sessionId: sessionData.id,
-          complementaryCertifications: [
-            pixPlusEdu1erDegreComplementaryCertification,
-            pixPlusDroitComplementaryCertification,
-            cleaComplementaryCertification,
-            pixPlusEdu2ndDegreComplementaryCertification,
-            PixPlusProSanteComplementaryCertification,
-          ],
-        });
-        const expectedCandidates = candidateList.map(domainBuilder.certification.enrolment.buildCandidate);
-
-        // when
-        const actualCandidates =
-          await certificationCandidatesOdsService.extractCertificationCandidatesFromCandidatesImportSheet({
-            i18n,
-            session,
-            odsBuffer,
-            certificationCpfService,
-            certificationCpfCountryRepository,
-            certificationCpfCityRepository,
-            centerRepository,
-            complementaryCertificationRepository,
-            isSco: false,
-            mailCheck,
-          });
-
-        // then
-        expect(actualCandidates).to.deep.equal(expectedCandidates);
+    it('should return extracted and validated certification candidates with complementary certification', async function () {
+      // given
+      mailCheck.checkDomainIsValid.resolves();
+      const pixPlusDroitComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
+        label: 'Pix+ Droit',
+        key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
       });
-    });
-
-    context('when isCoreComplementaryCompatibilityEnabled true for center', function () {
-      let pixPlusEdu1erDegreComplementaryCertification,
-        pixPlusDroitComplementaryCertification,
-        pixPlusEdu2ndDegreComplementaryCertification,
-        PixPlusProSanteComplementaryCertification;
-      let sessionData, session;
-
-      beforeEach(function () {
-        mailCheck.checkDomainIsValid.resolves();
-        pixPlusDroitComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
-          label: 'Pix+ Droit',
-          key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
-        });
-        pixPlusEdu1erDegreComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
-          label: 'Pix+ Édu 1er degré',
-          key: ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
-        });
-        pixPlusEdu2ndDegreComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
-          label: 'Pix+ Édu 2nd degré',
-          key: ComplementaryCertificationKeys.PIX_PLUS_EDU_2ND_DEGRE,
-        });
-        PixPlusProSanteComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
-          label: 'Pix+ Pro Santé',
-          key: ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE,
-        });
-        const certificationCenterId = databaseBuilder.factory.buildCertificationCenter({}).id;
-        const complementaryAlonePilotFeatureId = databaseBuilder.factory.buildFeature(
-          CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE,
-        ).id;
-        databaseBuilder.factory.buildCertificationCenterFeature({
-          certificationCenterId,
-          featureId: complementaryAlonePilotFeatureId,
-        });
-        databaseBuilder.factory.buildComplementaryCertificationHabilitation({
-          certificationCenterId,
-          complementaryCertificationId: cleaComplementaryCertification.id,
-        });
-        databaseBuilder.factory.buildComplementaryCertificationHabilitation({
-          certificationCenterId,
-          complementaryCertificationId: pixPlusDroitComplementaryCertification.id,
-        });
-        databaseBuilder.factory.buildComplementaryCertificationHabilitation({
-          certificationCenterId,
-          complementaryCertificationId: pixPlusEdu1erDegreComplementaryCertification.id,
-        });
-        databaseBuilder.factory.buildComplementaryCertificationHabilitation({
-          certificationCenterId,
-          complementaryCertificationId: pixPlusEdu2ndDegreComplementaryCertification.id,
-        });
-        databaseBuilder.factory.buildComplementaryCertificationHabilitation({
-          certificationCenterId,
-          complementaryCertificationId: PixPlusProSanteComplementaryCertification.id,
-        });
-
-        const userId = databaseBuilder.factory.buildUser().id;
-        databaseBuilder.factory.buildCertificationCenterMembership({ userId, certificationCenterId });
-        sessionData = databaseBuilder.factory.buildSession({ certificationCenterId });
-        session = domainBuilder.certification.enrolment.buildSession(sessionData);
-
-        return databaseBuilder.commit();
+      const pixPlusEdu1erDegreComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
+        label: 'Pix+ Édu 1er degré',
+        key: ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
+      });
+      const pixPlusEdu2ndDegreComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
+        label: 'Pix+ Édu 2nd degré',
+        key: ComplementaryCertificationKeys.PIX_PLUS_EDU_2ND_DEGRE,
+      });
+      const PixPlusProSanteComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
+        label: 'Pix+ Pro Santé',
+        key: ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE,
       });
 
-      it('should return extracted and validated certification candidates with appropriate certification subscription', async function () {
-        // given
-        const odsFilePath = `${__dirname}/attendance_sheet_extract_with_complementary_certifications_compatibility_ok_test.ods`;
-        const odsBuffer = await readFile(odsFilePath);
-        candidateList = _buildCandidateList({
-          sessionId: sessionData.id,
-          complementaryCertifications: [
-            pixPlusEdu1erDegreComplementaryCertification,
-            pixPlusDroitComplementaryCertification,
-            cleaComplementaryCertification,
-            pixPlusEdu2ndDegreComplementaryCertification,
-            PixPlusProSanteComplementaryCertification,
-          ],
-          ftEnabled: true,
-        });
-        const expectedCandidates = candidateList.map(domainBuilder.certification.enrolment.buildCandidate);
-
-        // when
-        const actualCandidates =
-          await certificationCandidatesOdsService.extractCertificationCandidatesFromCandidatesImportSheet({
-            i18n,
-            session,
-            odsBuffer,
-            certificationCpfService,
-            certificationCpfCountryRepository,
-            certificationCpfCityRepository,
-            centerRepository,
-            complementaryCertificationRepository,
-            isSco: false,
-            mailCheck,
-          });
-
-        // then
-        expect(actualCandidates).to.deep.equal(expectedCandidates);
+      const certificationCenterId = databaseBuilder.factory.buildCertificationCenter({}).id;
+      databaseBuilder.factory.buildComplementaryCertificationHabilitation({
+        certificationCenterId,
+        complementaryCertificationId: cleaComplementaryCertification.id,
+      });
+      databaseBuilder.factory.buildComplementaryCertificationHabilitation({
+        certificationCenterId,
+        complementaryCertificationId: pixPlusDroitComplementaryCertification.id,
+      });
+      databaseBuilder.factory.buildComplementaryCertificationHabilitation({
+        certificationCenterId,
+        complementaryCertificationId: pixPlusEdu1erDegreComplementaryCertification.id,
+      });
+      databaseBuilder.factory.buildComplementaryCertificationHabilitation({
+        certificationCenterId,
+        complementaryCertificationId: pixPlusEdu2ndDegreComplementaryCertification.id,
+      });
+      databaseBuilder.factory.buildComplementaryCertificationHabilitation({
+        certificationCenterId,
+        complementaryCertificationId: PixPlusProSanteComplementaryCertification.id,
       });
 
-      it('should throw an error', async function () {
-        // given
-        const odsFilePath = `${__dirname}/attendance_sheet_extract_with_complementary_certifications_compatibility_ko_test.ods`;
-        const odsBuffer = await readFile(odsFilePath);
+      const userId = databaseBuilder.factory.buildUser().id;
+      databaseBuilder.factory.buildCertificationCenterMembership({ userId, certificationCenterId });
+      const sessionData = databaseBuilder.factory.buildSession({ certificationCenterId });
+      const session = domainBuilder.certification.enrolment.buildSession(sessionData);
 
-        // when
-        const error = await catchErr(
-          certificationCandidatesOdsService.extractCertificationCandidatesFromCandidatesImportSheet,
-        )({
+      await databaseBuilder.commit();
+
+      const odsFilePath = `${__dirname}/attendance_sheet_extract_with_complementary_certifications_ok_test.ods`;
+      const odsBuffer = await readFile(odsFilePath);
+      candidateList = _buildCandidateList({
+        sessionId: sessionData.id,
+        complementaryCertifications: [
+          pixPlusEdu1erDegreComplementaryCertification,
+          pixPlusDroitComplementaryCertification,
+          cleaComplementaryCertification,
+          pixPlusEdu2ndDegreComplementaryCertification,
+          PixPlusProSanteComplementaryCertification,
+        ],
+      });
+      const expectedCandidates = candidateList.map(domainBuilder.certification.enrolment.buildCandidate);
+
+      // when
+      const actualCandidates =
+        await certificationCandidatesOdsService.extractCertificationCandidatesFromCandidatesImportSheet({
           i18n,
           session,
           odsBuffer,
@@ -483,17 +355,8 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
           mailCheck,
         });
 
-        // then
-        expect(error).to.deepEqualInstance(
-          new CertificationCandidatesError({
-            code: CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_WRONG_SUBSCRIPTIONS_COMPATIBILITY.code,
-            message: 'A candidate cannot have more than one subscription to a certification',
-            meta: {
-              line: 14,
-            },
-          }),
-        );
-      });
+      // then
+      expect(actualCandidates).to.deep.equal(expectedCandidates);
     });
   });
 

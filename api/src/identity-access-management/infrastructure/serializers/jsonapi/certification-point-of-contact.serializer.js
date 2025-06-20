@@ -34,7 +34,6 @@ const serialize = function (certificationPointOfContact) {
         'isAccessBlockedAgri',
         'relatedOrganizationTags',
         'habilitations',
-        'isComplementaryAlonePilot',
         'pixCertifScoBlockedAccessDateLycee',
         'pixCertifScoBlockedAccessDateCollege',
       ],
@@ -70,7 +69,6 @@ const serialize = function (certificationPointOfContact) {
             isAccessBlockedLycee: access.isAccessBlockedLycee(),
             isAccessBlockedAEFE: access.isAccessBlockedAEFE(),
             isAccessBlockedAgri: access.isAccessBlockedAgri(),
-            isComplementaryAlonePilot: access.isComplementaryAlonePilot,
             pixCertifScoBlockedAccessDateCollege: access.pixCertifScoBlockedAccessDateCollege,
             pixCertifScoBlockedAccessDateLycee: access.pixCertifScoBlockedAccessDateLycee,
           };

@@ -78,7 +78,6 @@ const validateSessions = async function ({
         complementaryCertificationRepository,
         translate,
         sessionsImportValidationService,
-        isCoreComplementaryCompatibilityEnabled: center.isCoreComplementaryCompatibilityEnabled,
       });
 
       session.certificationCandidates = validatedCandidates;
@@ -112,7 +111,6 @@ async function _createValidCertificationCandidates({
   complementaryCertificationRepository,
   translate,
   sessionsImportValidationService,
-  isCoreComplementaryCompatibilityEnabled,
 }) {
   const { uniqueCandidates, duplicateCandidateErrors } =
     sessionsImportValidationService.getUniqueCandidates(candidatesDTO);
@@ -133,7 +131,6 @@ async function _createValidCertificationCandidates({
         subscriptionLabels: candidateDTO.subscriptionLabels,
         line: candidateDTO.line,
         complementaryCertificationRepository,
-        isCoreComplementaryCompatibilityEnabled,
       });
 
     certificationCandidateErrors.push(...certificationCandidateComplementaryErrors);

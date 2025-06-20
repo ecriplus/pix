@@ -1,5 +1,4 @@
 import { addCandidateToSession } from '../../../../../../src/certification/enrolment/domain/usecases/add-candidate-to-session.js';
-import { CERTIFICATION_FEATURES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../../../../../../src/certification/shared/domain/constants/certification-candidates-errors.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { CpfBirthInformationValidation } from '../../../../../../src/certification/shared/domain/services/certification-cpf-service.js';
@@ -56,11 +55,7 @@ describe('Certification | Enrolment | Unit | UseCase | add-candidate-to-session'
       ]),
     };
     mailCheck = { checkDomainIsValid: sinon.stub() };
-    centerRepository.getById.resolves(
-      domainBuilder.certification.enrolment.buildCenter({
-        features: [CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE.key],
-      }),
-    );
+    centerRepository.getById.resolves(domainBuilder.certification.enrolment.buildCenter());
     normalizeStringFnc = (str) => str;
     dependencies = {
       sessionRepository,
@@ -313,38 +308,36 @@ describe('Certification | Enrolment | Unit | UseCase | add-candidate-to-session'
               expect(id).to.equal(159);
             });
 
-            context('isCoreComplementaryCompatibilityEnabled is false for center', function () {
-              it('should insert the candidate and return the id', async function () {
-                // given
-                centerRepository.getById.resolves(domainBuilder.certification.enrolment.buildCenter({}));
-                candidateToEnroll.subscriptions = [
-                  domainBuilder.buildCoreSubscription({
-                    certificationCandidateId: null,
-                  }),
-                ];
-                const correctedCandidateToEnroll = domainBuilder.certification.enrolment.buildCandidate({
-                  ...candidateToEnroll,
-                  sessionId,
-                  birthCountry: 'COUNTRY',
-                  birthINSEECode: 'INSEE_CODE',
-                  birthPostalCode: null,
-                  birthCity: 'CITY',
-                  subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
-                });
-                candidateRepository.insert.resolves(159);
-
-                // when
-                const id = await addCandidateToSession({
-                  sessionId,
-                  candidate: candidateToEnroll,
-                  ...dependencies,
-                  isCompatibilityEnabled: false,
-                });
-
-                // then
-                expect(candidateRepository.insert).to.have.been.calledWithExactly(correctedCandidateToEnroll);
-                expect(id).to.equal(159);
+            it('should insert the candidate and return the id', async function () {
+              // given
+              centerRepository.getById.resolves(domainBuilder.certification.enrolment.buildCenter({}));
+              candidateToEnroll.subscriptions = [
+                domainBuilder.buildCoreSubscription({
+                  certificationCandidateId: null,
+                }),
+              ];
+              const correctedCandidateToEnroll = domainBuilder.certification.enrolment.buildCandidate({
+                ...candidateToEnroll,
+                sessionId,
+                birthCountry: 'COUNTRY',
+                birthINSEECode: 'INSEE_CODE',
+                birthPostalCode: null,
+                birthCity: 'CITY',
+                subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
               });
+              candidateRepository.insert.resolves(159);
+
+              // when
+              const id = await addCandidateToSession({
+                sessionId,
+                candidate: candidateToEnroll,
+                ...dependencies,
+                isCompatibilityEnabled: false,
+              });
+
+              // then
+              expect(candidateRepository.insert).to.have.been.calledWithExactly(correctedCandidateToEnroll);
+              expect(id).to.equal(159);
             });
           });
         });

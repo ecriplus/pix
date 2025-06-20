@@ -1,5 +1,4 @@
 import { Habilitation } from '../../../certification/enrolment/domain/models/Habilitation.js';
-import { CERTIFICATION_FEATURES } from '../../../certification/shared/domain/constants.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { fetchPage } from '../../../shared/infrastructure/utils/knex-utils.js';
@@ -13,7 +12,6 @@ export async function getById({ id }) {
       name: 'certification-centers.name',
       type: 'certification-centers.type',
       externalId: 'certification-centers.externalId',
-      features: knexConn.raw('array_remove(array_agg(DISTINCT "certificationCenterFeatures"."key"), NULL)'),
       createdAt: 'certification-centers.createdAt',
       updatedAt: 'certification-centers.updatedAt',
       archivedAt: 'certification-centers.archivedAt',
@@ -29,26 +27,6 @@ export async function getById({ id }) {
       'complementary-certifications',
       'complementary-certification-habilitations.complementaryCertificationId',
       'complementary-certifications.id',
-    )
-    .leftJoin(
-      _getCertificationCenterFeatures({ id }),
-      'certification-centers.id',
-      'certificationCenterFeatures.certificationCenterId',
-    )
-    .leftJoin(
-      function () {
-        this.select('certificationCenterId')
-          .from('certification-center-features')
-          .innerJoin('features', function () {
-            this.on('certification-center-features.featureId', 'features.id').andOnVal(
-              'features.key',
-              CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE.key,
-            );
-          })
-          .as('complementaryCertificationAloneFeature');
-      },
-      'complementaryCertificationAloneFeature.certificationCenterId',
-      'certification-centers.id',
     )
     .where('certification-centers.id', '=', id)
     .groupBy('certification-centers.id')
@@ -88,17 +66,6 @@ export const findPaginatedFiltered = async ({ filter, page }) => {
 
   return { models: certificationCenters.map((certificationCenter) => _toDomain({ certificationCenter })), pagination };
 };
-
-function _getCertificationCenterFeatures({ id }) {
-  return (builder) => {
-    return builder
-      .select('certification-center-features.certificationCenterId', 'features.key')
-      .from('certification-center-features')
-      .innerJoin('features', 'features.id', 'certification-center-features.featureId')
-      .where('certification-center-features.certificationCenterId', '=', id)
-      .as('certificationCenterFeatures');
-  };
-}
 
 const _toDomain = ({ certificationCenter, habilitationsDTO }) => {
   const habilitations = habilitationsDTO

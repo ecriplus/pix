@@ -23,7 +23,6 @@ export class CenterForAdminFactory {
         createdAt: undefined,
         updatedAt: undefined,
         archivedAt: center.archivedAt,
-        isComplementaryAlonePilot: center.isComplementaryAlonePilot,
       },
       archivistFullName,
       dataProtectionOfficer: {

@@ -26,7 +26,6 @@ describe('Unit | Organizational Entities | Domain | Models | Factories | CenterF
           externalId: center.externalId,
           createdAt: undefined,
           updatedAt: undefined,
-          isComplementaryAlonePilot: center.isComplementaryAlonePilot,
         },
         dataProtectionOfficer: {
           firstName: dataProtectionOfficer.firstName,

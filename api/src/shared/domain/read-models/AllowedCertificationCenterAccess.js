@@ -1,4 +1,3 @@
-import { CERTIFICATION_FEATURES } from '../../../certification/shared/domain/constants.js';
 import { config } from '../../config.js';
 
 const { features } = config;
@@ -9,7 +8,6 @@ class AllowedCertificationCenterAccess {
     this.id = center.id;
     this.name = center.name;
     this.externalId = center.externalId;
-    this.features = center.features;
     this.type = center.type;
     this.habilitations = center.habilitations;
     this.#isInWhitelist = !!center.isInWhitelist;
@@ -74,10 +72,6 @@ class AllowedCertificationCenterAccess {
 
   get pixCertifScoBlockedAccessDateCollege() {
     return features.pixCertifScoBlockedAccessDateCollege ?? null;
-  }
-
-  get isComplementaryAlonePilot() {
-    return this.features.includes(CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE.key);
   }
 }
 
