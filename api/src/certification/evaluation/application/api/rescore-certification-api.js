@@ -12,12 +12,23 @@ import { usecases } from '../../domain/usecases/index.js';
 
 /**
  * @function
- * @name rescoreCertification
+ * @name rescoreV3Certification
  *
  * @param {ChallengeNeutralized|ChallengeDeneutralized|CertificationJuryDone|CertificationCourseRejected|CertificationCourseUnrejected|CertificationCancelled|CertificationRescored|CertificationUncancelled} params.event
  *
  * @returns {Promise<void>}
  */
-export const rescoreCertification = async ({ event }) => {
-  return usecases.handleCertificationRescoring({ event });
+export const rescoreV3Certification = async ({ event }) => {
+  return usecases.rescoreV3Certification({ event });
+};
+/**
+ * @function
+ * @name rescoreV2Certification
+ *
+ * @param {ChallengeNeutralized|ChallengeDeneutralized|CertificationJuryDone|CertificationCourseRejected|CertificationCourseUnrejected|CertificationCancelled|CertificationRescored|CertificationUncancelled} params.event
+ *
+ * @returns {Promise<void>}
+ */
+export const rescoreV2Certification = async ({ event }) => {
+  return usecases.rescoreV2Certification({ event });
 };

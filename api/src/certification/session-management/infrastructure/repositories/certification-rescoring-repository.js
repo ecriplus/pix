@@ -11,7 +11,7 @@
  * @returns {Promise<void>}
  */
 export const rescoreV3Certification = async ({ event, certificationEvaluationApi }) => {
-  return certificationEvaluationApi.rescoreCertification({
+  return certificationEvaluationApi.rescoreV3Certification({
     event,
   });
 };
@@ -23,7 +23,7 @@ export const rescoreV3Certification = async ({ event, certificationEvaluationApi
  * @returns {Promise<void>}
  */
 export const rescoreV2Certification = async ({ event, certificationEvaluationApi }) => {
-  return certificationEvaluationApi.rescoreCertification({
+  return certificationEvaluationApi.rescoreV2Certification({
     event,
   });
 };

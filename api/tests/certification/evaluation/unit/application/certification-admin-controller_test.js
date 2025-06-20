@@ -22,7 +22,7 @@ describe('Certification | Evaluation | Unit | Application | Controller | certifi
       sinon
         .stub(usecases, 'neutralizeChallenge')
         .resolves(new ChallengeNeutralized({ certificationCourseId: 1, juryId: 7 }));
-      sinon.stub(usecases, 'handleCertificationRescoring').resolves();
+      sinon.stub(usecases, 'rescoreV2Certification').resolves();
 
       // when
       const response = await certificationAdminController.neutralizeChallenge(request, hFake);
@@ -33,7 +33,7 @@ describe('Certification | Evaluation | Unit | Application | Controller | certifi
         challengeRecId: 'rec43mpMIR5dUzdjh',
         juryId: 7,
       });
-      expect(usecases.handleCertificationRescoring).to.have.been.calledOnceWithExactly({
+      expect(usecases.rescoreV2Certification).to.have.been.calledOnceWithExactly({
         event: new ChallengeNeutralized({ certificationCourseId: 1, juryId: 7 }),
       });
       expect(response.statusCode).to.equal(204);
@@ -57,7 +57,7 @@ describe('Certification | Evaluation | Unit | Application | Controller | certifi
       sinon
         .stub(usecases, 'deneutralizeChallenge')
         .resolves(new ChallengeDeneutralized({ certificationCourseId: 1, juryId: 7 }));
-      sinon.stub(usecases, 'handleCertificationRescoring').resolves();
+      sinon.stub(usecases, 'rescoreV2Certification').resolves();
 
       // when
       const response = await certificationAdminController.deneutralizeChallenge(request, hFake);
@@ -68,7 +68,7 @@ describe('Certification | Evaluation | Unit | Application | Controller | certifi
         challengeRecId: 'rec43mpMIR5dUzdjh',
         juryId: 7,
       });
-      expect(usecases.handleCertificationRescoring).to.have.been.calledOnceWithExactly({
+      expect(usecases.rescoreV2Certification).to.have.been.calledOnceWithExactly({
         event: new ChallengeDeneutralized({ certificationCourseId: 1, juryId: 7 }),
       });
       expect(response.statusCode).to.equal(204);

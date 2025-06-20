@@ -17,7 +17,6 @@ import { AssessmentResultFactory } from '../../../scoring/domain/models/factorie
 import { SessionAlreadyPublishedError } from '../../../session-management/domain/errors.js';
 import { CertificationCourseRejected } from '../../../session-management/domain/events/CertificationCourseRejected.js';
 import { CertificationJuryDone } from '../../../session-management/domain/events/CertificationJuryDone.js';
-import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import CertificationRescored from '../events/CertificationRescored.js';
 import { ChallengeDeneutralized } from '../events/ChallengeDeneutralized.js';
 import { ChallengeNeutralized } from '../events/ChallengeNeutralized.js';
@@ -49,7 +48,7 @@ const eventTypes = [
  * @throws {NotFinalizedSessionError}
  * @throws {SessionAlreadyPublishedError}
  */
-async function handleCertificationRescoring({
+export const rescoreV2Certification = async ({
   event,
   assessmentResultRepository,
   certificationAssessmentRepository,
@@ -58,7 +57,7 @@ async function handleCertificationRescoring({
   evaluationSessionRepository,
   scoringCertificationService,
   services,
-}) {
+}) => {
   checkEventTypes(event, eventTypes);
 
   const certificationCourseId = event.certificationCourseId;
@@ -73,16 +72,6 @@ async function handleCertificationRescoring({
     return;
   }
 
-  if (AlgorithmEngineVersion.isV3(certificationAssessment.version)) {
-    return _handleV3CertificationScoring({
-      certificationAssessment,
-      event,
-      locale: event.locale,
-      certificationCourseRepository,
-      services,
-    });
-  }
-
   return _handleV2CertificationScoring({
     scoringCertificationService,
     certificationAssessment,
@@ -92,7 +81,7 @@ async function handleCertificationRescoring({
     complementaryCertificationScoringCriteriaRepository,
     services,
   });
-}
+};
 
 /**
  * @param {Object} params
@@ -165,26 +154,6 @@ async function _handleV2CertificationScoring({
   }
 }
 
-async function _handleV3CertificationScoring({
-  certificationAssessment,
-  event,
-  locale,
-  certificationCourseRepository,
-  services,
-}) {
-  const certificationCourse = await services.handleV3CertificationScoring({
-    event,
-    certificationAssessment,
-    locale,
-    dependencies: { findByCertificationCourseIdAndAssessmentId: services.findByCertificationCourseIdAndAssessmentId },
-  });
-
-  // isCancelled will be removed
-  if (certificationCourse.isCancelled()) {
-    await certificationCourseRepository.update({ certificationCourse });
-  }
-}
-
 async function _toggleCertificationCourseCancellationIfNotTrustableOrLackOfAnswersForTechnicalReason({
   certificationCourse,
   hasEnoughNonNeutralizedChallengesToBeTrusted,
@@ -222,6 +191,3 @@ async function _saveResultAfterCertificationComputeError({
     assessmentResult,
   });
 }
-
-handleCertificationRescoring.eventTypes = eventTypes;
-export { handleCertificationRescoring };
