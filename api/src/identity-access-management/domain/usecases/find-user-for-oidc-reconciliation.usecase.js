@@ -1,4 +1,5 @@
 import { UserNotFoundError } from '../../../shared/domain/errors.js';
+import { monitoringTools } from '../../../shared/infrastructure/monitoring-tools.js';
 import {
   AuthenticationKeyExpired,
   DifferentExternalIdentifierError,
@@ -46,10 +47,22 @@ const findUserForOidcReconciliation = async function ({
       (authenticationMethod) => authenticationMethod.identityProvider === identityProvider,
     );
 
-    const isSameExternalIdentifier =
-      oidcAuthenticationMethod?.externalIdentifier === sessionContentAndUserInfo.userInfo.externalIdentityId;
-    if (oidcAuthenticationMethod && !isSameExternalIdentifier) {
-      throw new DifferentExternalIdentifierError();
+    if (oidcAuthenticationMethod) {
+      const isDifferentFromPreviousExternalIdentifier =
+        sessionContentAndUserInfo.userInfo.externalIdentityId != oidcAuthenticationMethod.externalIdentifier;
+      if (isDifferentFromPreviousExternalIdentifier) {
+        monitoringTools.logErrorWithCorrelationIds({
+          message: 'Different externalIdentifier (sub)',
+          context: 'oidc',
+          data: {
+            externalIdentifier: sessionContentAndUserInfo.userInfo.externalIdentityId,
+            previousExternalIdentifier: oidcAuthenticationMethod.externalIdentifier,
+          },
+          team: 'acces',
+        });
+
+        throw new DifferentExternalIdentifierError();
+      }
     }
 
     sessionContentAndUserInfo.userInfo.userId = foundUser.id;
