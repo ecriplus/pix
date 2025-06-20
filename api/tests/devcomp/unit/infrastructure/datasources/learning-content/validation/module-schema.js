@@ -16,6 +16,25 @@ import { textElementSchema } from './element/text-schema.js';
 import { videoElementSchema } from './element/video-schema.js';
 import { htmlNotAllowedSchema, htmlSchema, uuidSchema } from './utils.js';
 
+const ALLOWED_ELEMENTS_SCHEMA = [
+  { is: 'custom', then: customElementSchema },
+  { is: 'download', then: downloadElementSchema },
+  { is: 'embed', then: embedElementSchema },
+  { is: 'expand', then: expandElementSchema },
+  { is: 'flashcards', then: flashcardsElementSchema },
+  { is: 'image', then: imageElementSchema },
+  { is: 'qab', then: qabElementSchema },
+  { is: 'qcu', then: qcuElementSchema },
+  { is: 'qcu-declarative', then: qcuDeclarativeElementSchema },
+  { is: 'qcm', then: qcmElementSchema },
+  { is: 'qrocm', then: qrocmElementSchema },
+  { is: 'separator', then: separatorElementSchema },
+  { is: 'text', then: textElementSchema },
+  { is: 'video', then: videoElementSchema },
+];
+
+const ELEMENTS_FORBIDDEN_IN_STEPPER = ['embed', 'flashcards', 'qab'];
+
 const moduleDetailsSchema = Joi.object({
   image: Joi.string().uri().required(),
   description: htmlSchema.required(),
@@ -26,38 +45,11 @@ const moduleDetailsSchema = Joi.object({
 });
 
 const elementSchema = Joi.alternatives().conditional('.type', {
-  switch: [
-    { is: 'custom', then: customElementSchema },
-    { is: 'download', then: downloadElementSchema },
-    { is: 'embed', then: embedElementSchema },
-    { is: 'expand', then: expandElementSchema },
-    { is: 'flashcards', then: flashcardsElementSchema },
-    { is: 'image', then: imageElementSchema },
-    { is: 'qab', then: qabElementSchema },
-    { is: 'qcu', then: qcuElementSchema },
-    { is: 'qcu-declarative', then: qcuDeclarativeElementSchema },
-    { is: 'qcm', then: qcmElementSchema },
-    { is: 'qrocm', then: qrocmElementSchema },
-    { is: 'separator', then: separatorElementSchema },
-    { is: 'text', then: textElementSchema },
-    { is: 'video', then: videoElementSchema },
-  ],
+  switch: ALLOWED_ELEMENTS_SCHEMA,
 });
 
 const stepperElementSchema = Joi.alternatives().conditional('.type', {
-  switch: [
-    { is: 'custom', then: customElementSchema },
-    { is: 'download', then: downloadElementSchema },
-    { is: 'expand', then: expandElementSchema },
-    { is: 'image', then: imageElementSchema },
-    { is: 'qcu', then: qcuElementSchema },
-    { is: 'qcu-declarative', then: qcuDeclarativeElementSchema },
-    { is: 'qcm', then: qcmElementSchema },
-    { is: 'qrocm', then: qrocmElementSchema },
-    { is: 'separator', then: separatorElementSchema },
-    { is: 'text', then: textElementSchema },
-    { is: 'video', then: videoElementSchema },
-  ],
+  switch: ALLOWED_ELEMENTS_SCHEMA.filter((elementSchema) => !ELEMENTS_FORBIDDEN_IN_STEPPER.includes(elementSchema.is)),
 });
 
 const componentElementSchema = Joi.object({
