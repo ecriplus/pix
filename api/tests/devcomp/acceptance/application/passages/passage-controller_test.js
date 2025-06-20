@@ -272,6 +272,10 @@ describe('Acceptance | Controller | passage-controller', function () {
               inputMaxChars: 456,
               inputMaxPrompts: 789,
             },
+            attachment: {
+              name: 'file.txt',
+              context: 'context',
+            },
           };
           const llmApiScope = nock('https://llm-test.pix.fr/api')
             .get('/configurations/c1SuperConfig2Lespace')
@@ -291,6 +295,7 @@ describe('Acceptance | Controller | passage-controller', function () {
             chatId: `${user.id}-${now.getMilliseconds()}`,
             inputMaxChars: 456,
             inputMaxPrompts: 789,
+            attachmentName: 'file.txt',
           });
           expect(llmApiScope.isDone()).to.be.true;
         });

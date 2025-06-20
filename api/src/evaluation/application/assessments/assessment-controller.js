@@ -2,6 +2,7 @@ import { usecases as devcompUsecases } from '../../../devcomp/domain/usecases/in
 import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
 import { config } from '../../../shared/config.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import * as llmChatSerializer from '../../../shared/infrastructure/serializers/llm-chat-serializer.js';
 import { extractLocaleFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { evaluationUsecases } from '../../domain/usecases/index.js';
 
@@ -28,13 +29,7 @@ const startEmbedLlmChat = async function (request, h, { usecases } = { usecases:
   const userId = request.auth.credentials.userId;
   const assessmentId = request.params.assessmentId;
   const startedChatDTO = await usecases.startEmbedLlmChat({ configId, userId, assessmentId });
-  return h
-    .response({
-      inputMaxChars: startedChatDTO.inputMaxChars,
-      inputMaxPrompts: startedChatDTO.inputMaxPrompts,
-      chatId: startedChatDTO.id,
-    })
-    .code(201);
+  return h.response(llmChatSerializer.serialize(startedChatDTO)).code(201);
 };
 
 const promptToLLMChat = async function (request, h, { usecases } = { usecases: evaluationUsecases }) {

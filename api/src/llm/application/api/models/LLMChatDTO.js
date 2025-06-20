@@ -1,7 +1,8 @@
 export class LLMChatDTO {
-  constructor({ id, inputMaxChars, inputMaxPrompts }) {
+  constructor({ id, attachmentName, inputMaxChars, inputMaxPrompts }) {
     this.id = id;
     this.inputMaxChars = inputMaxChars;
     this.inputMaxPrompts = inputMaxPrompts;
+    this.attachmentName = attachmentName;
   }
 }
