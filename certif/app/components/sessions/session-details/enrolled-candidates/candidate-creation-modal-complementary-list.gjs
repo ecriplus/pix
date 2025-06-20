@@ -13,11 +13,11 @@ export default class CandidateCreationModalComplementaryList extends Component {
   @service intl;
 
   fieldsetLegend = () => {
-    return this.intl.t(`common.forms.certification-labels.additional-certification-old`);
+    return this.intl.t(`common.forms.certification-labels.additional-certification`);
   };
 
   firstInputLabel = () => {
-    return this.intl.t('common.labels.candidate.none');
+    return this.intl.t('common.forms.certification-labels.pix-certification');
   };
 
   complementaryLabel = (complementaryCertificationHabilitation) => {

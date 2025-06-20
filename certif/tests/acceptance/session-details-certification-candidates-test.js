@@ -643,7 +643,7 @@ module('Acceptance | Session Details Certification Candidates', function (hooks)
               );
 
               await fillIn(screen.getByLabelText('Code de prépaiement'), '12345');
-              await click(screen.getByRole('radio', { name: 'Aucune' }));
+              await click(screen.getByRole('radio', { name: 'Certification Pix' }));
 
               // when
               await click(screen.getByRole('button', { name: 'Inscrire le candidat' }));
@@ -683,7 +683,7 @@ module('Acceptance | Session Details Certification Candidates', function (hooks)
       'email.destinataire@example.net',
     );
     await fillIn(screen.getByRole('textbox', { name: 'E-mail de convocation' }), 'email.convocation@example.net');
-    await click(screen.getByRole('radio', { name: 'Aucune' }));
+    await click(screen.getByRole('radio', { name: 'Certification Pix' }));
   }
 });
 /* eslint-enable ember/no-settled-after-test-helper */
