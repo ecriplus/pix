@@ -167,6 +167,81 @@ module('Unit | Services | embed api proxy', function (hooks) {
         assert.ok(true);
       });
     });
+
+    module('when postMessage throws a DataCloneError', function () {
+      test('it should postMessage the response as an ArrayBuffer', async function (assert) {
+        // given
+        class DataCloneError extends Error {
+          name = 'DataCloneError';
+        }
+        const postMessageStub = sinon.stub().onFirstCall().throws(new DataCloneError());
+        const request = {
+          url: '/test',
+          init: {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: '{ "prompt": "salut!" }',
+          },
+        };
+        const event = {
+          data: request,
+          ports: [{ postMessage: postMessageStub }],
+        };
+        const headers = {
+          'content-type': 'text/event-stream',
+        };
+        const arrayBuffer = Symbol('arrayBuffer');
+        class MockResponse extends Response {
+          async arrayBuffer() {
+            return arrayBuffer;
+          }
+        }
+        const response = new MockResponse('mon body', {
+          headers: new Headers(headers),
+          status: 200,
+        });
+        const fetchStub = sinon.stub().resolves(response);
+
+        // when
+        await embedApiProxy.handleMessageEvent(event, {
+          fetch: fetchStub,
+          modelName: 'passage',
+          id: '123',
+        });
+
+        // then
+        sinon.assert.calledOnceWithExactly(urlForFindRecordStub, '123', 'passage');
+
+        sinon.assert.calledWith(fetchStub, '/api/passages/123/embed/test', {
+          method: 'POST',
+          headers: {
+            Authorization: 'Bearer oursier 🐻',
+            'content-type': 'application/json',
+          },
+          body: '{ "prompt": "salut!" }',
+        });
+
+        sinon.assert.calledWith(
+          postMessageStub.firstCall,
+          {
+            body: response.body,
+            init: {
+              headers,
+              status: response.status,
+            },
+          },
+          [response.body],
+        );
+        sinon.assert.calledWith(postMessageStub.secondCall, {
+          body: arrayBuffer,
+          init: {
+            headers,
+            status: response.status,
+          },
+        });
+        assert.ok(true);
+      });
+    });
   });
 
   module('#buildURL', function () {

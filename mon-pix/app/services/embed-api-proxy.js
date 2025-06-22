@@ -34,16 +34,31 @@ export default class EmbedApiProxyService extends Service {
         },
       });
 
-      responsePort.postMessage(
-        {
-          body: response.body,
-          init: {
-            headers: Object.fromEntries(response.headers),
-            status: response.status,
+      try {
+        responsePort.postMessage(
+          {
+            body: response.body,
+            init: {
+              headers: Object.fromEntries(response.headers),
+              status: response.status,
+            },
           },
-        },
-        [response.body],
-      );
+          [response.body],
+        );
+      } catch (error) {
+        // WORKAROUND: In Safari ReadableStream is not transferable
+        if (error.name === 'DataCloneError') {
+          responsePort.postMessage({
+            body: await response.arrayBuffer(),
+            init: {
+              headers: Object.fromEntries(response.headers),
+              status: response.status,
+            },
+          });
+        } else {
+          throw error;
+        }
+      }
     } catch (error) {
       responsePort.postMessage({
         error: error.message,
