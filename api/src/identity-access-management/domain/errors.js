@@ -44,7 +44,7 @@ class MissingOrInvalidCredentialsError extends DomainError {
     this.meta = {};
     this.meta.isLoginFailureWithUsername = meta?.isLoginFailureWithUsername ?? false;
     if (meta?.remainingAttempts) {
-      this.meta = meta.remainingAttempts;
+      this.meta.remainingAttempts = meta.remainingAttempts;
     }
   }
 }
