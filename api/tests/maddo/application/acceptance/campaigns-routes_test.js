@@ -395,6 +395,7 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
           campaignId: campaign.id,
           status: CampaignParticipationStatuses.STARTED,
           participantExternalId: 'started after 1',
+          masteryRate: null,
           createdAt: new Date('2025-01-03'),
         });
 
@@ -423,8 +424,8 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
           masteryRate: 0.1,
           validatedSkillsCount: 10,
           participantExternalId: 'shared after 1',
-          createdAt: new Date('2025-01-01'),
-          sharedAt: new Date('2025-01-03'),
+          createdAt: new Date('2025-01-04'),
+          sharedAt: new Date('2025-01-05'),
         });
 
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
