@@ -93,6 +93,21 @@ describe('Integration | Application | campaign-api', function () {
         status: CampaignParticipationStatuses.STARTED,
         organizationLearnerId: organizationLearner2.id,
         userId: organizationLearner2.userId,
+        createdAt: new Date('2025-01-02'),
+      });
+
+      const organizationLearner3 = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId: organizationLearner1.organizationId,
+        lastName: 'zoé',
+      });
+
+      databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaign.id,
+        status: CampaignParticipationStatuses.STARTED,
+        organizationLearnerId: organizationLearner3.id,
+        userId: organizationLearner3.userId,
+        participantExternalId: 'participation before date filter',
+        createdAt: new Date('2024-12-03'),
       });
 
       await databaseBuilder.commit();
@@ -102,6 +117,7 @@ describe('Integration | Application | campaign-api', function () {
         campaignId: campaign.id,
         locale: 'fr',
         page: { size: 2, number: 1 },
+        since: new Date('2024-12-25'),
       });
 
       // then
