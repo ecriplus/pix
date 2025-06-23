@@ -38,20 +38,19 @@ export async function startChat({ configId, userId }) {
   }
   const configuration = await configurationRepository.get(configId);
   const chatId = generateId(userId);
-  const { name: attachmentName, context: attachmentContext } = getAttachmentContextAndName(configuration);
   const newChat = new Chat({
     id: chatId,
-    configurationId: configId,
-    attachmentName,
-    attachmentContext,
+    configurationId: configuration.id,
+    attachmentName: configuration.attachmentName,
+    attachmentContext: configuration.attachmentContext,
     messages: [],
   });
   await chatRepository.save(newChat);
   return new LLMChatDTO({
     id: newChat.id,
-    attachmentName,
-    inputMaxChars: getInputMaxCharsFromConfiguration(configuration),
-    inputMaxPrompts: getInputMaxPromptsFromConfiguration(configuration),
+    attachmentName: configuration.attachmentName,
+    inputMaxChars: configuration.inputMaxChars,
+    inputMaxPrompts: configuration.inputMaxPrompts,
   });
 }
 
@@ -81,10 +80,10 @@ export async function prompt({ chatId, userId, message, attachmentName: _ }) {
     throw new ChatForbiddenError();
   }
   const configuration = await configurationRepository.get(chat.configurationId);
-  if (message.length > getInputMaxCharsFromConfiguration(configuration)) {
+  if (message.length > configuration.inputMaxChars) {
     throw new TooLargeMessageInputError();
   }
-  if (chat.currentPromptsCount >= getInputMaxPromptsFromConfiguration(configuration)) {
+  if (chat.currentPromptsCount >= configuration.inputMaxPrompts) {
     throw new MaxPromptsReachedError();
   }
 
@@ -99,19 +98,6 @@ export async function prompt({ chatId, userId, message, attachmentName: _ }) {
 function generateId(userId) {
   const nowMs = new Date().getMilliseconds();
   return `${userId}-${nowMs}`;
-}
-
-function getInputMaxCharsFromConfiguration(configuration) {
-  return configuration.challenge.inputMaxChars;
-}
-
-function getInputMaxPromptsFromConfiguration(configuration) {
-  const inputMaxPrompts = configuration.challenge.inputMaxPrompts;
-  return configuration.attachment?.name ? inputMaxPrompts - 1 : inputMaxPrompts;
-}
-
-function getAttachmentContextAndName(configuration) {
-  return configuration.attachment ?? { name: null, context: null };
 }
 
 function addMessagesToChat(chat, prompt, chatRepository) {

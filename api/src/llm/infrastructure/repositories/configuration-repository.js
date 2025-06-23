@@ -5,17 +5,28 @@ import { config } from '../../../shared/config.js';
 import { temporaryStorage } from '../../../shared/infrastructure/key-value-storages/index.js';
 import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
 import { ConfigurationNotFoundError, LLMApiError } from '../../domain/errors.js';
+import { Configuration } from '../../domain/models/Configuration.js';
 
 export const CONFIGURATION_STORAGE_PREFIX = 'llm-configurations';
 const configurationTemporaryStorage = temporaryStorage.withPrefix(CONFIGURATION_STORAGE_PREFIX);
 const CONFIGURATION_EXPIRATION_DELAY_SECONDS = ms('1h');
 
 const logger = child('llm:api', { event: SCOPES.LLM });
+/**
+ * @typedef {import('../../domain/Configuration').Configuration} Configuration
+ */
 
+/**
+ * @function
+ * @name get
+ *
+ * @param {string} id
+ * @returns {Promise<Configuration>}
+ */
 export async function get(id) {
   const cachedConfiguration = await configurationTemporaryStorage.get(id);
   if (cachedConfiguration) {
-    return cachedConfiguration;
+    return toDomainFromCache(cachedConfiguration);
   }
   const url = config.llm.getConfigurationUrl + '/' + id;
   let response;
@@ -33,12 +44,13 @@ export async function get(id) {
   if (response.ok) {
     if (contentType === 'application/json') {
       const jsonResponse = await response.json();
+      const configuration = toDomainFromLLMApi(id, jsonResponse);
       await configurationTemporaryStorage.save({
         key: id,
-        value: jsonResponse,
+        value: configuration.toDTO(),
         expirationDelaySeconds: CONFIGURATION_EXPIRATION_DELAY_SECONDS,
       });
-      return jsonResponse;
+      return configuration;
     }
     throw new LLMApiError('unexpected content-type response');
   }
@@ -65,4 +77,19 @@ async function handleFetchErrors(response) {
     status: response.status,
     err,
   };
+}
+
+function toDomainFromLLMApi(id, configurationDTO) {
+  return new Configuration({
+    id,
+    historySize: configurationDTO?.llm?.historySize ?? null,
+    inputMaxChars: configurationDTO?.challenge?.inputMaxChars ?? null,
+    inputMaxPrompts: configurationDTO?.challenge?.inputMaxPrompts ?? null,
+    attachmentName: configurationDTO?.attachment?.name ?? null,
+    attachmentContext: configurationDTO?.attachment?.context ?? null,
+  });
+}
+
+function toDomainFromCache(configurationDTO) {
+  return new Configuration(configurationDTO);
 }

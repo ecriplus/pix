@@ -6,6 +6,17 @@ import { Chat, Message } from '../../domain/models/Chat.js';
 export const CHAT_STORAGE_PREFIX = 'llm-chats';
 const chatsTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
 
+/**
+ * @typedef {import('../../domain/Chat').Chat} Chat
+ */
+
+/**
+ * @function
+ * @name save
+ *
+ * @param {Chat} chat
+ * @returns {Promise<void>}
+ */
 export async function save(chat) {
   await chatsTemporaryStorage.save({
     key: chat.id,
@@ -14,6 +25,13 @@ export async function save(chat) {
   });
 }
 
+/**
+ * @function
+ * @name get
+ *
+ * @param {string} id
+ * @returns {Promise<Chat>}
+ */
 export async function get(id) {
   const chatDTO = await chatsTemporaryStorage.get(id);
   if (!chatDTO) {

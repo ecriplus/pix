@@ -7,6 +7,22 @@ import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
 import { LLMApiError } from '../../domain/errors.js';
 const logger = child('llm:api', { event: SCOPES.LLM });
 
+/**
+ * @typedef {import('../../domain/Configuration').Configuration} Configuration
+ * @typedef {import('../../domain/Chat').Chat} Chat
+ */
+
+/**
+ * @function
+ * @name prompt
+ *
+ * @param {Object} params
+ * @param {string} params.message
+ * @param {Configuration} params.configuration
+ * @param {Chat} params.chat
+ * @param {Function} params.onLLMResponseReceived Callback called when LLM response has been completely retrieved. Will be called asynchronously with one parameter: the complete LLM message
+ * @returns {Promise<module:stream.internal.PassThrough>}
+ */
 export async function prompt({ message, configuration, chat, onLLMResponseReceived }) {
   const readableStream = await postUserPrompt({ message, configuration, chat });
 
@@ -61,11 +77,10 @@ export async function prompt({ message, configuration, chat, onLLMResponseReceiv
 }
 
 async function postUserPrompt({ message, configuration, chat }) {
-  const historySize = configuration.llm.historySize;
-  const messagesToForward = chat.messages.slice(-historySize).map(toHistoryMessage);
+  const messagesToForward = chat.messages.slice(-configuration.historySize).map(toHistoryMessage);
   const payload = JSON.stringify({
     prompt: message,
-    configurationId: chat.configurationId,
+    configurationId: configuration.id,
     history: messagesToForward,
   });
   let response;
