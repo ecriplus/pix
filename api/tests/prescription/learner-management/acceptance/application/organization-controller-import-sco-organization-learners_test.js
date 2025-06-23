@@ -81,8 +81,8 @@ describe('Acceptance | Application | organization-controller-import-sco-organiza
           `;
           const buffer = iconv.encode(input, 'UTF-8');
 
-          (options.url = `/api/organizations/${organizationId}/sco-organization-learners/import-siecle?format=csv`),
-            (options.payload = buffer);
+          options.url = `/api/organizations/${organizationId}/sco-organization-learners/import-siecle?format=csv`;
+          options.payload = buffer;
         });
 
         it('should respond with a 204 - no content', async function () {
