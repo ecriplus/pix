@@ -19,6 +19,7 @@ describe('Unit | Team | Domain | Service | organization-invitation', function ()
     organizationInvitationRepository = {
       create: sinon.stub(),
       findOnePendingByOrganizationIdAndEmail: sinon.stub(),
+      update: sinon.stub(),
       updateModificationDate: sinon.stub(),
     };
     organizationRepository = {
@@ -80,12 +81,14 @@ describe('Unit | Team | Domain | Service | organization-invitation', function ()
         const locale = 'fr-fr';
         const organization = domainBuilder.buildOrganization();
         const organizationInvitation = new OrganizationInvitation({
+          id: 123456,
           role: Membership.roles.MEMBER,
           status: 'pending',
           code,
         });
 
         organizationInvitationRepository.findOnePendingByOrganizationIdAndEmail.resolves(organizationInvitation);
+        organizationInvitationRepository.update.resolves({ id: 123456 });
         organizationRepository.get.resolves(organization);
 
         // when
@@ -103,7 +106,7 @@ describe('Unit | Team | Domain | Service | organization-invitation', function ()
           email: userEmailAddress,
           organizationName: organization.name,
           organizationInvitationId: organizationInvitation.id,
-          code,
+          code: undefined,
           locale,
           tags,
         };
