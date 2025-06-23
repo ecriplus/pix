@@ -22,7 +22,7 @@
   height: var(--gauge-height);
   padding: 0 2px;
   line-height: 20px;
-  background-color: rgba(var(--pix-neutral-900-inline), 0.1);
+  background-color: rgb(var(--pix-neutral-900-inline), 0.1);
   border-radius: 3.125rem;
 
   --level-text-spacing-from-gauge: -12px;
