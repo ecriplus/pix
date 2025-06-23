@@ -2,11 +2,11 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import * as learningContentConversionService from '../../../../../lib/domain/services/learning-content/learning-content-conversion-service.js';
-import * as learningContentRepository from '../../../../../lib/infrastructure/repositories/learning-content-repository.js';
 import { adminMemberRepository } from '../../../../shared/infrastructure/repositories/admin-member.repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
+import * as learningContentRepository from '../../../shared/infrastructure/repositories/learning-content-repository.js';
 import * as targetProfileRepository from '../../../target-profile/infrastructure/repositories/target-profile-repository.js';
 import * as organizationsToAttachToTargetProfileRepository from '../../infrastructure/repositories/organizations-to-attach-to-target-profile-repository.js';
 import * as targetProfileAdministrationRepository from '../../infrastructure/repositories/target-profile-administration-repository.js';
