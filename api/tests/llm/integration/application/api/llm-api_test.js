@@ -9,6 +9,7 @@ import {
   ConfigurationNotFoundError,
   MaxPromptsReachedError,
   NoAttachmentNeededError,
+  NoAttachmentNorMessageProvidedError,
   NoUserIdProvidedError,
   TooLargeMessageInputError,
 } from '../../../../../src/llm/domain/errors.js';
@@ -484,8 +485,45 @@ describe('LLM | Integration | Application | API | llm', function () {
       });
       context('when no prompt is provided', function () {
         context('when no attachmentName is provided', function () {
-          it('should TODO', function () {
-            expect(false).to.be.true;
+          it('should throw a NoAttachmentNorMessageProvidedError', async function () {
+            // given
+            const chat = new Chat({
+              id: '123-chatId',
+              configurationId: 'uneConfigQuiExist',
+              messages: [
+                new Message({ content: 'coucou user1', isFromUser: true }),
+                new Message({ content: 'coucou LLM2', isFromUser: false }),
+              ],
+            });
+            await chatTemporaryStorage.save({
+              key: chat.id,
+              value: chat.toDTO(),
+              expirationDelaySeconds: ms('24h'),
+            });
+            const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
+              .get('/configurations/uneConfigQuiExist')
+              .reply(200, {
+                llm: {
+                  historySize: 123,
+                },
+                challenge: {
+                  inputMaxChars: 255,
+                  inputMaxPrompts: 255,
+                },
+              });
+
+            // when
+            const err = await catchErr(prompt)({
+              chatId: '123-chatId',
+              userId: 123,
+              message: null,
+              attachmentName: null,
+            });
+
+            // then
+            expect(err).to.be.instanceOf(NoAttachmentNorMessageProvidedError);
+            expect(err.message).to.equal('At least a message or an attachment, if applicable, must be provided');
+            expect(llmConfigurationScope.isDone()).to.be.true;
           });
         });
         context('when attachmentName is provided', function () {

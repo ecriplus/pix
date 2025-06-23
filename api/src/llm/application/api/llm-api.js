@@ -4,6 +4,7 @@ import {
   ConfigurationNotFoundError,
   MaxPromptsReachedError,
   NoAttachmentNeededError,
+  NoAttachmentNorMessageProvidedError,
   NoUserIdProvidedError,
   TooLargeMessageInputError,
 } from '../../domain/errors.js';
@@ -83,6 +84,9 @@ export async function prompt({ chatId, userId, message, attachmentName }) {
   const configuration = await configurationRepository.get(chat.configurationId);
   if (attachmentName && !configuration.hasAttachment) {
     throw new NoAttachmentNeededError();
+  }
+  if (!attachmentName && !message) {
+    throw new NoAttachmentNorMessageProvidedError();
   }
   if (message.length > configuration.inputMaxChars) {
     throw new TooLargeMessageInputError();
