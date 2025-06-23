@@ -2,7 +2,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import url from 'node:url';
 
 import dayjs from 'dayjs';
-import { getDocument } from 'pdfjs-dist';
+import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs';
 
 import { generate } from '../../../../../../../src/certification/results/infrastructure/utils/pdf/generate-v2-pdf-certificate.js';
 import { AlgorithmEngineVersion } from '../../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
