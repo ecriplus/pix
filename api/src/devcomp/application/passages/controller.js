@@ -1,3 +1,4 @@
+import * as llmChatSerializer from '../../../shared/infrastructure/serializers/llm-chat-serializer.js';
 import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
 
 const create = async function (request, h, { usecases, passageSerializer }) {
@@ -50,13 +51,7 @@ const startEmbedLlmChat = async function (request, h, { usecases }) {
   const passageId = request.params.passageId;
   const startedChatDTO = await usecases.startEmbedLlmChat({ configId, userId, passageId });
 
-  return h
-    .response({
-      inputMaxChars: startedChatDTO.inputMaxChars,
-      inputMaxPrompts: startedChatDTO.inputMaxPrompts,
-      chatId: startedChatDTO.id,
-    })
-    .code(201);
+  return h.response(llmChatSerializer.serialize(startedChatDTO)).code(201);
 };
 
 const promptToLLMChat = async function (request, h, { usecases }) {

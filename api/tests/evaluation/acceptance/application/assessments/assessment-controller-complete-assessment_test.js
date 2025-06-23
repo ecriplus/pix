@@ -796,6 +796,10 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
               inputMaxChars: 456,
               inputMaxPrompts: 789,
             },
+            attachment: {
+              name: 'file.txt',
+              context: 'context',
+            },
           };
           const llmApiScope = nock('https://llm-test.pix.fr/api')
             .get('/configurations/c1SuperConfig2Lespace')
@@ -814,7 +818,8 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
           expect(response.result).to.deep.equal({
             chatId: `${user.id}-${now.getMilliseconds()}`,
             inputMaxChars: 456,
-            inputMaxPrompts: 789,
+            inputMaxPrompts: 788,
+            attachmentName: 'file.txt',
           });
           expect(llmApiScope.isDone()).to.be.true;
         });

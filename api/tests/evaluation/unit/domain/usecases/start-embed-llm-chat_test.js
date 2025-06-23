@@ -1,5 +1,4 @@
 import { startEmbedLlmChat } from '../../../../../src/evaluation/domain/usecases/start-embed-llm-chat.js';
-import { LLMChatDTO } from '../../../../../src/llm/application/api/models/LLMChatDTO.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../src/shared/domain/models/index.js';
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
@@ -49,23 +48,14 @@ describe('Unit | Eval | Domain | UseCases | start-embed-llm-chat', function () {
           userId,
         }),
       );
-      llmApi.startChat.withArgs({ configId, userId }).resolves(
-        new LLMChatDTO({
-          id: 'someChatId',
-          inputMaxChars: 123,
-          inputMaxPrompts: 456,
-        }),
-      );
+      const someLLMChatDTO = Symbol('LLMCHATDTO');
+      llmApi.startChat.withArgs({ configId, userId }).resolves(someLLMChatDTO);
 
       // when
       const chat = await startEmbedLlmChat({ configId, assessmentId, userId, llmApi, assessmentRepository });
 
       // then
-      expect(chat).to.deep.equal({
-        id: 'someChatId',
-        inputMaxChars: 123,
-        inputMaxPrompts: 456,
-      });
+      expect(chat).to.deep.equal(someLLMChatDTO);
     });
   });
 });

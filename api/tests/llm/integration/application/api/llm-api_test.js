@@ -62,36 +62,84 @@ describe('LLM | Integration | Application | API | llm', function () {
 
     context('when config id and user id provided', function () {
       let configId, userId, llmApiScope, config;
-      beforeEach(function () {
-        configId = 'uneConfigQuiExist';
-        userId = 123456;
-        config = {
-          llm: {
-            historySize: 123,
-          },
-          challenge: {
+
+      context('when config has an attachment', function () {
+        beforeEach(function () {
+          configId = 'uneConfigQuiExist';
+          userId = 123456;
+          config = {
+            llm: {
+              historySize: 123,
+            },
+            challenge: {
+              inputMaxChars: 456,
+              inputMaxPrompts: 789,
+            },
+            attachment: {
+              name: 'file.txt',
+              context: '**coucou**',
+            },
+          };
+          llmApiScope = nock('https://llm-test.pix.fr/api').get('/configurations/uneConfigQuiExist').reply(200, config);
+        });
+
+        it('should return the newly created chat with attachment info, diminushing inputMaxPrompts by one', async function () {
+          // when
+          const chat = await startChat({ configId, userId });
+
+          // then
+          expect(chat).to.deep.equal({
+            id: `123456-${now.getMilliseconds()}`,
+            attachmentName: 'file.txt',
             inputMaxChars: 456,
-            inputMaxPrompts: 789,
-          },
-        };
-        llmApiScope = nock('https://llm-test.pix.fr/api').get('/configurations/uneConfigQuiExist').reply(200, config);
+            inputMaxPrompts: 788,
+          });
+          expect(llmApiScope.isDone()).to.be.true;
+          expect(await chatTemporaryStorage.get(`123456-${now.getMilliseconds()}`)).to.deep.equal({
+            id: `123456-${now.getMilliseconds()}`,
+            attachmentName: 'file.txt',
+            attachmentContext: '**coucou**',
+            configurationId: 'uneConfigQuiExist',
+            messages: [],
+          });
+        });
       });
 
-      it('should return the newly created chat', async function () {
-        // when
-        const chat = await startChat({ configId, userId });
-
-        // then
-        expect(chat).to.deep.equal({
-          id: `123456-${now.getMilliseconds()}`,
-          inputMaxChars: 456,
-          inputMaxPrompts: 789,
+      context('when config has no attachment', function () {
+        beforeEach(function () {
+          configId = 'uneConfigQuiExist';
+          userId = 123456;
+          config = {
+            llm: {
+              historySize: 123,
+            },
+            challenge: {
+              inputMaxChars: 456,
+              inputMaxPrompts: 789,
+            },
+          };
+          llmApiScope = nock('https://llm-test.pix.fr/api').get('/configurations/uneConfigQuiExist').reply(200, config);
         });
-        expect(llmApiScope.isDone()).to.be.true;
-        expect(await chatTemporaryStorage.get(`123456-${now.getMilliseconds()}`)).to.deep.equal({
-          id: `123456-${now.getMilliseconds()}`,
-          configurationId: 'uneConfigQuiExist',
-          messages: [],
+
+        it('should return the newly created chat with attachment info', async function () {
+          // when
+          const chat = await startChat({ configId, userId });
+
+          // then
+          expect(chat).to.deep.equal({
+            id: `123456-${now.getMilliseconds()}`,
+            attachmentName: null,
+            inputMaxChars: 456,
+            inputMaxPrompts: 789,
+          });
+          expect(llmApiScope.isDone()).to.be.true;
+          expect(await chatTemporaryStorage.get(`123456-${now.getMilliseconds()}`)).to.deep.equal({
+            id: `123456-${now.getMilliseconds()}`,
+            attachmentName: null,
+            attachmentContext: null,
+            configurationId: 'uneConfigQuiExist',
+            messages: [],
+          });
         });
       });
     });

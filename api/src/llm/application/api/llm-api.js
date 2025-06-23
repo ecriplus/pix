@@ -38,14 +38,18 @@ export async function startChat({ configId, userId }) {
   }
   const configuration = await configurationRepository.get(configId);
   const chatId = generateId(userId);
+  const { name: attachmentName, context: attachmentContext } = getAttachmentContextAndName(configuration);
   const newChat = new Chat({
     id: chatId,
     configurationId: configId,
+    attachmentName,
+    attachmentContext,
     messages: [],
   });
   await chatRepository.save(newChat);
   return new LLMChatDTO({
     id: newChat.id,
+    attachmentName,
     inputMaxChars: getInputMaxCharsFromConfiguration(configuration),
     inputMaxPrompts: getInputMaxPromptsFromConfiguration(configuration),
   });
@@ -101,7 +105,12 @@ function getInputMaxCharsFromConfiguration(configuration) {
 }
 
 function getInputMaxPromptsFromConfiguration(configuration) {
-  return configuration.challenge.inputMaxPrompts;
+  const inputMaxPrompts = configuration.challenge.inputMaxPrompts;
+  return configuration.attachment?.name ? inputMaxPrompts - 1 : inputMaxPrompts;
+}
+
+function getAttachmentContextAndName(configuration) {
+  return configuration.attachment ?? { name: null, context: null };
 }
 
 function addMessagesToChat(chat, prompt, chatRepository) {
