@@ -165,7 +165,7 @@
             "feedbacks": {
               "valid": {
                 "state": "",
-                "diagnosis": "<p>C'est ça !L'IA est présente dans de nombreux appareils et services du quotidien.&nbsp;</p>"
+                "diagnosis": "<p>C'est ça ! L'IA est présente dans de nombreux appareils et services du quotidien.&nbsp;</p>"
               },
               "invalid": {
                 "state": "",
