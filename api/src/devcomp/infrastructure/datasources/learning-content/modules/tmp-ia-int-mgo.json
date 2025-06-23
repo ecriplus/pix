@@ -1,15 +1,15 @@
 {
   "id": "d03cef94-74af-463d-8901-c886b48d6e0b",
   "slug": "tmp-ia-int-mgo",
-  "title": "Comment chatGPT a-t-il appris à discuter ?",
+  "title": "Comment chatGPT a-t-il appris à discuter ?",
   "isBeta": false,
   "details": {
     "image": "",
-    "description": "<p>Les systèmes d'IA génératives&nbsp;sont capables de tenir des conversations étonnamment naturelles. Mais comment en sont-ils arrivées là ? Ce module vous emmène dans les coulisses de leur apprentissage : des montagnes de textes analysés aux techniques d’entraînement sophistiquées qui leur ont permis de comprendre, prédire et générer le langage humain.</p>",
+    "description": "<p>Les systèmes d'IA génératives&nbsp;sont capables de tenir des conversations étonnamment naturelles. Mais comment en sont-ils arrivées là ? Ce module vous emmène dans les coulisses de leur apprentissage&nbsp;: des montagnes de textes analysés aux techniques d’entraînement sophistiquées qui leur ont permis de comprendre, prédire et générer le langage humain.</p>",
     "duration": 10,
     "level": "Intermédiaire",
     "objectives": [
-      "<p>Connaître les différentes étapes de l'entraînement des IA génératives</p>",
+      "",
       "<p>Comprendre l’étape de raffinement avec des humains</p>",
       "<p>Garder un esprit critique</p>"
     ],
@@ -19,7 +19,7 @@
     {
       "id": "bcd0baab-5d74-4e09-bfd5-6a01573f3366",
       "type": "discovery",
-      "title": "Impressionnant ?",
+      "title": "Impressionnant ?",
       "components": [
         {
           "type": "element",
@@ -41,46 +41,30 @@
           "element": {
             "id": "cc7708a8-c68a-44a9-ac54-6f1d5b1b6f4e",
             "type": "qcu-declarative",
-            "instruction": "<p>Que peut-on dire de ce chatbot ?</p>",
+            "instruction": "<p>Qu’est ce qui vous paraît le plus remarquable à propos de ce logiciel ?</p>",
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>il est impressionnant</p>",
+                "content": "<p>il a l’air incollable</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "diag"
+                  "diagnosis": "<p>diag</p>"
                 }
               },
               {
                 "id": "2",
-                "content": "<p>il parle très bien</p>",
+                "content": "<p>il s’exprime comme un humain</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "diag"
+                  "diagnosis": "<p>diag</p>"
                 }
               },
               {
                 "id": "3",
-                "content": "<p>il est incollable</p>",
-                "feedback": {
-                  "state": "",
-                  "diagnosis": "diag"
-                }
-              },
-              {
-                "id": "4",
-                "content": "<p>il cherche toujours à aider</p>",
-                "feedback": {
-                  "state": "",
-                  "diagnosis": "diag"
-                }
-              },
-              {
-                "id": "5",
                 "content": "<p>je n’en pense rien de particulier</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "diag"
+                  "diagnosis": "<p>diag</p>"
                 }
               }
             ]
@@ -98,10 +82,159 @@
           "element": {
             "id": "4d4f3ac6-99e0-417c-9a5c-38fc11487264",
             "type": "text",
-            "content": "<p>Une IA générative parvient à simuler une discussion  comme un humain qui aurait réponse à tout. Comment a-t-elle appris à faire cela ? C’est ce que nous allons découvrir ensemble.</p>"
+            "content": "<p>Une IA générative parvient à simuler une discussion  comme un humain qui aurait réponse à tout. Comment a-t-elle appris à faire cela ? C’est ce que nous allons découvrir ensemble.</p>"
           }
         }
       ]
+    },
+    {
+      "id": "5166145e-6e9c-4fb5-b781-a08749f576c8",
+      "type": "activity",
+      "title": "Découverte 1",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "2d943050-b29c-4398-a336-143f3173c51a",
+            "type": "text",
+            "content": "<p>L’IA générative doit d’abord s’entraîner à <strong>produire du texte</strong> compréhensible par un humain.&nbsp;</p>\n<p>Pour commencer, cliquez sur \"Entraîner l'IA avec ces données\"</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "31c675be-3455-4f95-a044-99ddde1e4694",
+      "type": "lesson",
+      "title": "Découverte 1 Activité 1",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "575b7423-919a-4e5c-9bc9-4c98c30bdc2f",
+            "type": "text",
+            "content": "<iframe title=\"pretraining\" src=\"https://1024pix.github.io/atelier-contenus/MGO/ia-dec-pretraining.html\" height=\"800\"></iframe>\""
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "87e8de3c-dfa9-4a5d-91d8-ae8a703d7772",
+            "type": "qrocm",
+            "instruction": "<p>À votre avis, quel mot cette IA générative va-t-elle choisir pour compléter cette phrase ?</p><p>En Océanie, l'animal le plus courant est le&nbsp;</p>",
+            "proposals": [
+              {
+                "input": "Choisissez",
+                "type": "select",
+                "display": "inline",
+                "placeholder": "Choisissez",
+                "ariaLabel": "",
+                "defaultValue": "",
+                "tolerances": [],
+                "options": [
+                  {
+                    "id": "",
+                    "content": ""
+                  },
+                  {
+                    "id": "1",
+                    "content": "kangourou"
+                  },
+                  {
+                    "id": "2",
+                    "content": "koala"
+                  },
+                  {
+                    "id": "3",
+                    "content": "wallaby"
+                  }
+                ],
+                "solutions": [
+                  "2"
+                ]
+              }
+            ],
+            "feedbacks": {
+              "valid": {
+                "state": "<p>L’IA va probablement répondre \"koala\"&nbsp;🐨</p>",
+                "diagnosis": "<p>Pendant cette étape de l’entraînement, elle a bien remarqué que le mot “koala” apparaît souvent en même temps que “animaux”, “océanie”, etc.</p>"
+              },
+              "invalid": {
+                "state": "<p>L’IA va probablement répondre \"koala\"&nbsp;🐨</p>",
+                "diagnosis": "<p>Observez attentivement la taille du cercle nommé \"koala\" par rapport à celui qui représente \"kangourou\" ou \"wallaby\".</p>"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "20a54ce5-2e41-42f5-8848-474a139c68fb",
+      "type": "lesson",
+      "title": "Dec 1 Lesson 1",
+      "components": [
+        {
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "4386b458-46cb-45e9-8d1b-1e840cb2f7c3",
+                  "type": "text",
+                  "content": "<p>Pour apprendre à une IA générative à produire du langage, on lui donne des <strong>milliards de textes</strong>.</p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "93d127a7-e179-40cd-9273-ce7a23007a39",
+                  "type": "text",
+                  "content": "<p>Des mots sont cachés et l’IA s’entraîne à les <strong>deviner</strong>.</p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "3cdf627f-2ad0-42e8-a529-696936905830",
+                  "type": "text",
+                  "content": "<p>Elle mémorise quels mots apparaissent souvent ensemble.</p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "94b60d31-b5dc-4621-a38f-de8eb5553813",
+                  "type": "text",
+                  "content": "<p>Il faut l'entraîner sur beaucoup de <strong>textes variés</strong>, pour améliorer son vocabulaire, son style et sa capacité à discuter sur tous les sujets.</p>"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "544845f9-f93c-43d0-85e6-87d825b00444",
+      "type": "transition",
+      "title": "Transition 2",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "3e76071c-b053-42a3-8145-c7defd93f748",
+            "type": "text",
+            "content": "<p>Maintenant, l’IA générative est capable de prédire la suite d’un texte. 🔮\n<br>\nMais ce n’est pas la même chose que discuter, ou rédiger une lettre de motivation. Comment apprend-elle à faire tout ça ? \n</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "8920c989-5e53-457b-b0ab-b33f921f689e",
+      "type": "activity",
+      "title": "Découverte 2 Activité 2",
+      "components": []
     }
   ]
 }
