@@ -55,7 +55,7 @@ module('Acceptance | Complementary certifications | list ', function (hooks) {
       assert.dom(screen.getByText('TOINE')).exists({ count: 1 });
     });
 
-    test('it should redirect to complementary certification details on click ', async function (assert) {
+    test('it should redirect to complementary certification framework details on click ', async function (assert) {
       // given
       server.create('complementary-certification', {
         id: 1,
@@ -75,7 +75,7 @@ module('Acceptance | Complementary certifications | list ', function (hooks) {
       await click(screen.getByRole('link', { name: 'TOINE' }));
 
       // then
-      assert.strictEqual(currentURL(), '/complementary-certifications/1/details');
+      assert.strictEqual(currentURL(), '/complementary-certifications/1/framework');
     });
   });
 });

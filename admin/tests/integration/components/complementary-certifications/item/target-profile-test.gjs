@@ -33,7 +33,7 @@ module('Integration | Component | complementary-certifications/item/target-profi
 
     sinon
       .stub(serviceRouter, 'currentRoute')
-      .value({ parent: { params: { complementary_certification_id: complementaryCertification.id } } });
+      .value({ parent: { parent: { params: { complementary_certification_id: complementaryCertification.id } } } });
 
     // when
     const screen = await render(<template><TargetProfile /></template>);

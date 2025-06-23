@@ -77,6 +77,7 @@ export default class CreationForm extends Component {
             @onChange={{this.onTubesSelectionChange}}
             @displaySkillDifficultyAvailability={{true}}
             @displaySkillDifficultySelection={{false}}
+            @displayDeviceCompatibility={{true}}
           />
           <ul class="framework-creation-form__buttons">
             <li>
