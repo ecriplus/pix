@@ -33,7 +33,7 @@ const ALLOWED_ELEMENTS_SCHEMA = [
   { is: 'video', then: videoElementSchema },
 ];
 
-const ELEMENTS_FORBIDDEN_IN_STEPPER = ['embed', 'flashcards', 'qab'];
+const ELEMENTS_FORBIDDEN_IN_STEPPER = ['flashcards', 'qab'];
 
 const moduleDetailsSchema = Joi.object({
   image: Joi.string().uri().required(),
