@@ -17,6 +17,7 @@ const register = async function (server) {
             campaignId: identifiersType.campaignId,
           }),
           query: Joi.object({
+            since: Joi.date().iso(),
             page: Joi.object({
               number: Joi.number().integer().empty('').allow(null).optional(),
               size: Joi.number().integer().max(200).empty('').allow(null).optional(),
