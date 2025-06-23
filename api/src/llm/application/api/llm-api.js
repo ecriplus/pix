@@ -3,6 +3,7 @@ import {
   ChatNotFoundError,
   ConfigurationNotFoundError,
   MaxPromptsReachedError,
+  NoAttachmentNeededError,
   NoUserIdProvidedError,
   TooLargeMessageInputError,
 } from '../../domain/errors.js';
@@ -71,7 +72,7 @@ export async function startChat({ configId, userId }) {
  * @param {string|null|undefined} params.attachmentName
  * @returns {Promise<module:stream.internal.PassThrough>}
  */
-export async function prompt({ chatId, userId, message, attachmentName: _ }) {
+export async function prompt({ chatId, userId, message, attachmentName }) {
   if (!chatId) {
     throw new ChatNotFoundError('null id provided');
   }
@@ -80,6 +81,9 @@ export async function prompt({ chatId, userId, message, attachmentName: _ }) {
     throw new ChatForbiddenError();
   }
   const configuration = await configurationRepository.get(chat.configurationId);
+  if (attachmentName && !configuration.hasAttachment) {
+    throw new NoAttachmentNeededError();
+  }
   if (message.length > configuration.inputMaxChars) {
     throw new TooLargeMessageInputError();
   }

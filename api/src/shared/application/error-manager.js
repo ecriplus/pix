@@ -515,6 +515,10 @@ function _mapToHttpError(error) {
     return new HttpErrors.ForbiddenError(error.message, error.code);
   }
 
+  if (error instanceof LLMDomainErrors.NoAttachmentNeededError) {
+    return new HttpErrors.BadRequestError(error.message, error.code);
+  }
+
   return new HttpErrors.BaseHttpError(error.message);
 }
 

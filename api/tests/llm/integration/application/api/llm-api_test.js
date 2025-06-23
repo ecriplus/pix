@@ -8,6 +8,7 @@ import {
   ChatNotFoundError,
   ConfigurationNotFoundError,
   MaxPromptsReachedError,
+  NoAttachmentNeededError,
   NoUserIdProvidedError,
   TooLargeMessageInputError,
 } from '../../../../../src/llm/domain/errors.js';
@@ -418,8 +419,48 @@ describe('LLM | Integration | Application | API | llm', function () {
         });
         context('when attachmentName is provided', function () {
           context('when no attachmentName is expected for the given configuration', function () {
-            it('should TODO', function () {
-              expect(false).to.be.true;
+            it('should throw a NoAttachmentNeededError', async function () {
+              // given
+              const chat = new Chat({
+                id: '123-chatId',
+                configurationId: 'uneConfigQuiExist',
+                messages: [
+                  new Message({ content: 'coucou user1', isFromUser: true }),
+                  new Message({ content: 'coucou LLM2', isFromUser: false }),
+                  new Message({ content: 'coucou user2', isFromUser: true }),
+                ],
+              });
+              await chatTemporaryStorage.save({
+                key: chat.id,
+                value: chat.toDTO(),
+                expirationDelaySeconds: ms('24h'),
+              });
+              const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
+                .get('/configurations/uneConfigQuiExist')
+                .reply(200, {
+                  llm: {
+                    historySize: 123,
+                  },
+                  challenge: {
+                    inputMaxChars: 255,
+                    inputMaxPrompts: 2,
+                  },
+                });
+
+              // when
+              const err = await catchErr(prompt)({
+                chatId: '123-chatId',
+                userId: 123,
+                message: 'un message',
+                attachmentName: 'un_attachment.pdf',
+              });
+
+              // then
+              expect(err).to.be.instanceOf(NoAttachmentNeededError);
+              expect(err.message).to.equal(
+                'Attachment has been provided but is not expected for the given configuration',
+              );
+              expect(llmConfigurationScope.isDone()).to.be.true;
             });
           });
           context('when attachmentName is not the expected one for the given configuration', function () {
@@ -449,8 +490,48 @@ describe('LLM | Integration | Application | API | llm', function () {
         });
         context('when attachmentName is provided', function () {
           context('when no attachmentName is expected for the given configuration', function () {
-            it('should TODO', function () {
-              expect(false).to.be.true;
+            it('should throw a NoAttachmentNeededError', async function () {
+              // given
+              const chat = new Chat({
+                id: '123-chatId',
+                configurationId: 'uneConfigQuiExist',
+                messages: [
+                  new Message({ content: 'coucou user1', isFromUser: true }),
+                  new Message({ content: 'coucou LLM2', isFromUser: false }),
+                  new Message({ content: 'coucou user2', isFromUser: true }),
+                ],
+              });
+              await chatTemporaryStorage.save({
+                key: chat.id,
+                value: chat.toDTO(),
+                expirationDelaySeconds: ms('24h'),
+              });
+              const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
+                .get('/configurations/uneConfigQuiExist')
+                .reply(200, {
+                  llm: {
+                    historySize: 123,
+                  },
+                  challenge: {
+                    inputMaxChars: 255,
+                    inputMaxPrompts: 2,
+                  },
+                });
+
+              // when
+              const err = await catchErr(prompt)({
+                chatId: '123-chatId',
+                userId: 123,
+                message: null,
+                attachmentName: 'un_attachment.pdf',
+              });
+
+              // then
+              expect(err).to.be.instanceOf(NoAttachmentNeededError);
+              expect(err.message).to.equal(
+                'Attachment has been provided but is not expected for the given configuration',
+              );
+              expect(llmConfigurationScope.isDone()).to.be.true;
             });
           });
           context('when attachmentName is not the expected one for the given configuration', function () {

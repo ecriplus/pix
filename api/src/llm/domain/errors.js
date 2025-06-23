@@ -41,3 +41,9 @@ export class MaxPromptsReachedError extends DomainError {
     super("You've reached the max prompts authorized");
   }
 }
+
+export class NoAttachmentNeededError extends DomainError {
+  constructor() {
+    super('Attachment has been provided but is not expected for the given configuration');
+  }
+}
