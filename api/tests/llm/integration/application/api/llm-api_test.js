@@ -560,9 +560,111 @@ describe('LLM | Integration | Application | API | llm', function () {
               });
             });
             context('when the context for this attachmentName has not been added yet', function () {
-              it.skip('should TODO', function () {
-                expect(false).to.be.true;
-              });
+              it(
+                'should return a stream which will contain the attachment event and the llm response while ' +
+                  'adding the attachment context in the conversation',
+                async function () {
+                  // given
+                  const chat = new Chat({
+                    id: '123-chatId',
+                    configurationId: 'uneConfigQuiExist',
+                    messages: [
+                      new Message({ content: 'coucou user1', isFromUser: true }),
+                      new Message({ content: 'coucou LLM1', isFromUser: false }),
+                    ],
+                  });
+                  await chatTemporaryStorage.save({
+                    key: chat.id,
+                    value: chat.toDTO(),
+                    expirationDelaySeconds: ms('24h'),
+                  });
+                  const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
+                    .get('/configurations/uneConfigQuiExist')
+                    .reply(200, {
+                      llm: {
+                        historySize: 123,
+                      },
+                      challenge: {
+                        inputMaxChars: 255,
+                        inputMaxPrompts: 100,
+                      },
+                      attachment: {
+                        name: 'expected_file.txt',
+                        context: 'add me in the chat !',
+                      },
+                    });
+                  const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
+                    .post('/chat', {
+                      configurationId: 'uneConfigQuiExist',
+                      history: [
+                        { content: 'coucou user1', role: 'user' },
+                        { content: 'coucou LLM1', role: 'assistant' },
+                        {
+                          content:
+                            'Ajoute le fichier fictif "expected_file.txt" à ton contexte. Voici le contenu du fichier :\nadd me in the chat !',
+                          role: 'user',
+                        },
+                        {
+                          content: 'Le contenu du fichier fictif a été ajouté au contexte.',
+                          role: 'assistant',
+                        },
+                      ],
+                      prompt: 'un message',
+                    })
+                    .reply(
+                      201,
+                      Readable.from([
+                        '60:{"ceci":"nest pas important","message":"coucou c\'est super"}',
+                        '40:{"message":"\\nle couscous c plutot bon"}47:{"message":" mais la paella c pas mal aussi\\n"}',
+                        '29:{"jecrois":{"que":"jaifini"}}',
+                      ]),
+                    );
+
+                  // when
+                  const stream = await prompt({
+                    chatId: '123-chatId',
+                    userId: 123,
+                    message: 'un message',
+                    attachmentName: 'expected_file.txt',
+                  });
+
+                  // then
+                  const parts = [];
+                  const decoder = new TextDecoder();
+                  for await (const chunk of stream) {
+                    parts.push(decoder.decode(chunk));
+                  }
+                  const llmResponse = parts.join('');
+                  const attachmentMessage = 'event: attachment\ndata:\n\n';
+                  const llmMessage =
+                    "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n";
+                  expect(llmResponse).to.deep.equal(attachmentMessage + llmMessage);
+                  expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
+                    id: '123-chatId',
+                    configurationId: 'uneConfigQuiExist',
+                    messages: [
+                      { content: 'coucou user1', isFromUser: true },
+                      { content: 'coucou LLM1', isFromUser: false },
+                      {
+                        content:
+                          'Ajoute le fichier fictif "expected_file.txt" à ton contexte. Voici le contenu du fichier :\nadd me in the chat !',
+                        isFromUser: true,
+                      },
+                      {
+                        content: 'Le contenu du fichier fictif a été ajouté au contexte.',
+                        isFromUser: false,
+                      },
+                      { content: 'un message', isFromUser: true },
+                      {
+                        content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+                        isFromUser: false,
+                      },
+                    ],
+                  });
+                  expect(llmConfigurationScope.isDone()).to.be.true;
+                  expect(llmPostPromptScope.isDone()).to.be.true;
+                },
+              );
             });
           });
         });
@@ -726,9 +828,76 @@ describe('LLM | Integration | Application | API | llm', function () {
               });
             });
             context('when the context for this attachmentName has not been added yet', function () {
-              it.skip('should TODO', function () {
-                expect(false).to.be.true;
-              });
+              it(
+                'should return a stream which will contain the attachment event while ' +
+                  'adding the attachment context in the conversation',
+                async function () {
+                  // given
+                  const chat = new Chat({
+                    id: '123-chatId',
+                    configurationId: 'uneConfigQuiExist',
+                    messages: [
+                      new Message({ content: 'coucou user1', isFromUser: true }),
+                      new Message({ content: 'coucou LLM1', isFromUser: false }),
+                    ],
+                  });
+                  await chatTemporaryStorage.save({
+                    key: chat.id,
+                    value: chat.toDTO(),
+                    expirationDelaySeconds: ms('24h'),
+                  });
+                  const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
+                    .get('/configurations/uneConfigQuiExist')
+                    .reply(200, {
+                      llm: {
+                        historySize: 123,
+                      },
+                      challenge: {
+                        inputMaxChars: 255,
+                        inputMaxPrompts: 100,
+                      },
+                      attachment: {
+                        name: 'expected_file.txt',
+                        context: 'add me in the chat !',
+                      },
+                    });
+
+                  // when
+                  const stream = await prompt({
+                    chatId: '123-chatId',
+                    userId: 123,
+                    message: null,
+                    attachmentName: 'expected_file.txt',
+                  });
+
+                  // then
+                  const parts = [];
+                  const decoder = new TextDecoder();
+                  for await (const chunk of stream) {
+                    parts.push(decoder.decode(chunk));
+                  }
+                  const llmResponse = parts.join('');
+                  expect(llmResponse).to.deep.equal('event: attachment\ndata:\n\n');
+                  expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
+                    id: '123-chatId',
+                    configurationId: 'uneConfigQuiExist',
+                    messages: [
+                      { content: 'coucou user1', isFromUser: true },
+                      { content: 'coucou LLM1', isFromUser: false },
+                      {
+                        content:
+                          'Ajoute le fichier fictif "expected_file.txt" à ton contexte. Voici le contenu du fichier :\nadd me in the chat !',
+                        isFromUser: true,
+                      },
+                      {
+                        content: 'Le contenu du fichier fictif a été ajouté au contexte.',
+                        isFromUser: false,
+                      },
+                    ],
+                  });
+                  expect(llmConfigurationScope.isDone()).to.be.true;
+                },
+              );
             });
           });
         });

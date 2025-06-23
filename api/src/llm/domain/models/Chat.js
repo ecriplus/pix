@@ -13,6 +13,18 @@ export class Chat {
     }
   }
 
+  addAttachmentContextMessages(attachmentName, attachmentContext) {
+    const content =
+      'Ajoute le fichier fictif "' +
+      attachmentName +
+      '" à ton contexte. Voici le contenu du fichier :\n' +
+      attachmentContext;
+    this.messages.push(new Message({ content, isFromUser: true }));
+    this.messages.push(
+      new Message({ content: 'Le contenu du fichier fictif a été ajouté au contexte.', isFromUser: false }),
+    );
+  }
+
   addLLMMessage(message) {
     if (message) {
       this.messages.push(new Message({ content: message, isFromUser: false }));
