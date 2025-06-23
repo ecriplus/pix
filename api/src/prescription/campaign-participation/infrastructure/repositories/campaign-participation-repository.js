@@ -147,7 +147,7 @@ const remove = async function ({ id, attributes }) {
   return await knexConn('campaign-participations').where({ id }).update(attributes);
 };
 
-const findInfoByCampaignId = async function (campaignId, page) {
+const findInfoByCampaignId = async function ({ campaignId, page }) {
   const knexConn = DomainTransaction.getConnection();
   const query = knexConn('campaign-participations')
     .select([
