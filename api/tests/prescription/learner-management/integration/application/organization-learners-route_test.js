@@ -43,10 +43,10 @@ describe('Integration | Application | Organization Learners Management | Routes'
       const simpleUserId = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildMembership({ organizationId, userId: simpleUserId, organizationRole: 'MEMBER' });
       await databaseBuilder.commit();
-      (headers = generateAuthenticatedUserRequestHeaders({ userId: simpleUserId })),
-        (payload = {
-          listLearners: [123],
-        });
+      headers = generateAuthenticatedUserRequestHeaders({ userId: simpleUserId });
+      payload = {
+        listLearners: [123],
+      };
 
       // when
       const response = await httpTestServer.request(method, url, payload, null, headers);
