@@ -8,11 +8,13 @@ const logger = child('llm:api', { event: SCOPES.LLM });
  * @function
  * @name fromLLMResponse
  *
- * @param {ReadableStream} llmResponse
- * @param {Function} onLLMResponseReceived Callback called when LLM response has been completely retrieved. Will be called asynchronously with one parameter: the complete LLM message
+ * @param {Object} params
+ * @param {ReadableStream|null} params.llmResponse
+ * @param {Function} params.onLLMResponseReceived Callback called when LLM response has been completely retrieved. Will be called asynchronously with one parameter: the complete LLM message
+ * @param {Boolean} params.shouldSendAttachmentEventMessage
  * @returns {Promise<module:stream.internal.PassThrough>}
  */
-export async function fromLLMResponse(llmResponse, onLLMResponseReceived) {
+export async function fromLLMResponse({ llmResponse, onLLMResponseReceived, shouldSendAttachmentEventMessage }) {
   const decoder = new TextDecoder();
   const transformFindObjects = new Transform({
     objectMode: true,
@@ -44,17 +46,37 @@ export async function fromLLMResponse(llmResponse, onLLMResponseReceived) {
   writableStream.on('error', (err) => {
     logger.error(`error while streaming response: ${err}`);
   });
-  pipeline(llmResponse, transformFindObjects, transformConvertObjectToEventStreamData, writableStream, async (err) => {
-    if (err) {
-      logger.error(`error in pipeline: ${err}`);
-      if (!writableStream.closed && !writableStream.errored) {
-        writableStream.end('Error while streaming response from LLM');
+  if (shouldSendAttachmentEventMessage) {
+    writableStream.write(getAttachmentEventMessage());
+  }
+  const readableStream = llmResponse ?? emptyReadable();
+  pipeline(
+    readableStream,
+    transformFindObjects,
+    transformConvertObjectToEventStreamData,
+    writableStream,
+    async (err) => {
+      if (err) {
+        logger.error(`error in pipeline: ${err}`);
+        if (!writableStream.closed && !writableStream.errored) {
+          writableStream.end('Error while streaming response from LLM');
+        }
+      } else {
+        await onLLMResponseReceived(completeLLMMessage);
       }
-    } else {
-      await onLLMResponseReceived(completeLLMMessage);
-    }
-  });
+    },
+  );
   return writableStream;
+}
+
+function getAttachmentEventMessage() {
+  return 'event: attachment\ndata:\n\n';
+}
+
+function emptyReadable() {
+  const readableStream = new PassThrough();
+  readableStream.end();
+  return readableStream;
 }
 
 export function toEventStreamData(message) {

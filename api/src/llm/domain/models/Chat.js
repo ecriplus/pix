@@ -8,11 +8,15 @@ export class Chat {
   }
 
   addUserMessage(message) {
-    this.messages.push(new Message({ content: message, isFromUser: true }));
+    if (message) {
+      this.messages.push(new Message({ content: message, isFromUser: true }));
+    }
   }
 
   addLLMMessage(message) {
-    this.messages.push(new Message({ content: message, isFromUser: false }));
+    if (message) {
+      this.messages.push(new Message({ content: message, isFromUser: false }));
+    }
   }
 
   get currentPromptsCount() {

@@ -89,20 +89,27 @@ export async function prompt({ chatId, userId, message, attachmentName }) {
   if (!attachmentName && !message) {
     throw new NoAttachmentNorMessageProvidedError();
   }
-  if (message.length > configuration.inputMaxChars) {
-    throw new TooLargeMessageInputError();
-  }
-  if (chat.currentPromptsCount >= configuration.inputMaxPrompts) {
-    throw new MaxPromptsReachedError();
+  let readableStream = null;
+  if (message) {
+    if (message.length > configuration.inputMaxChars) {
+      throw new TooLargeMessageInputError();
+    }
+    if (chat.currentPromptsCount >= configuration.inputMaxPrompts) {
+      throw new MaxPromptsReachedError();
+    }
+
+    readableStream = await promptRepository.prompt({
+      message,
+      configuration,
+      chat,
+    });
   }
 
-  const llmResponseStream = await promptRepository.prompt({
-    message,
-    configuration,
-    chat,
+  return toEventStream.fromLLMResponse({
+    llmResponse: readableStream,
+    onLLMResponseReceived: addMessagesToChat(chat, message, chatRepository),
+    shouldSendAttachmentEventMessage: Boolean(attachmentName),
   });
-
-  return toEventStream.fromLLMResponse(llmResponseStream, addMessagesToChat(chat, message, chatRepository));
 }
 
 function generateId(userId) {
