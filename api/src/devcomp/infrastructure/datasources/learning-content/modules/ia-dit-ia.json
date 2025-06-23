@@ -254,7 +254,7 @@
           "element": {
             "id": "715a385e-dcfb-4001-9e5d-5b00ab365221",
             "type": "text",
-            "content": "<p>Voici les points principaux à retenir&nbsp;:&nbsp;</p><ul><li><strong>L’intelligence artificielle est un domaine scientifique</strong> qui étudie comment permettre à des machines d’imiter les mécanismes de l’intelligence pour réaliser toutes sortes de tâches.&nbsp;🔬</li><li><strong>Certains logiciels d’IA sont spécialisés dans un type de tâches</strong>&nbsp;:&nbsp; la reconnaissance d’image, la recommandation de contenu, la prédiction, etc. <strong>D’autres sont plus généralistes</strong> comme les IA génératives.&nbsp;👩‍💻</li><li>Les logiciels d’IA sont utilisés dans <strong>des appareils et services de notre quotidien</strong>. Leur utilisation permet de faire de nombreux progrès.&nbsp;📈</li></ul>"
+            "content": "<p>Voici les points principaux à retenir&nbsp;:&nbsp;</p><ul><li><strong>L’intelligence artificielle est un domaine scientifique</strong> qui étudie comment permettre à des machines d’imiter les mécanismes de l’intelligence pour réaliser toutes sortes de tâches.&nbsp;🔬</li><li><strong>Certains logiciels d’IA sont spécialisés dans un type de tâches</strong> comme la reconnaissance d’image par exemple. D'autres comme <strong>les IA génératives réalisent différentes tâches</strong>.&nbsp;👩‍💻</li><li>Les logiciels d’IA sont utilisés dans <strong>des appareils et services de notre quotidien</strong>. Leur utilisation permet de faire de nombreux progrès.&nbsp;📈</li></ul>"
           }
         }
       ]
@@ -303,7 +303,7 @@
               },
               {
                 "id": "0c3e3cbb-68a7-46d4-a9d6-5afd7e92ee2d",
-                "text": "L’informatique contribue aux progrès de l’IA.",
+                "text": "Certains services en ligne utilisent l’IA pour recommander des contenus.",
                 "image": {
                   "url": "",
                   "altText": ""
