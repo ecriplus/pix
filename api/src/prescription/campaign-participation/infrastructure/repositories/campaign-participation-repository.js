@@ -147,7 +147,7 @@ const remove = async function ({ id, attributes }) {
   return await knexConn('campaign-participations').where({ id }).update(attributes);
 };
 
-const findInfoByCampaignId = async function ({ campaignId, page }) {
+const findInfoByCampaignId = async function ({ campaignId, page, since }) {
   const knexConn = DomainTransaction.getConnection();
   const query = knexConn('campaign-participations')
     .select([
@@ -168,6 +168,17 @@ const findInfoByCampaignId = async function ({ campaignId, page }) {
     .orderBy('lastName', 'ASC')
     .orderBy('firstName', 'ASC')
     .orderBy('createdAt', 'DESC');
+
+  if (since !== undefined) {
+    const sinceDate = new Date(since);
+    query.where(function () {
+      this.where('campaign-participations.sharedAt', '>', sinceDate).orWhere(
+        'campaign-participations.createdAt',
+        '>',
+        sinceDate,
+      );
+    });
+  }
 
   const { results, pagination } = await fetchPage(query, page);
 

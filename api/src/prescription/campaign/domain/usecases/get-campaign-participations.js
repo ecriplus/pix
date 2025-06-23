@@ -10,6 +10,7 @@ const getCampaignParticipations = async function ({
   campaignId,
   locale,
   page,
+  since,
   campaignRepository,
   campaignParticipationRepository,
   knowledgeElementSnapshotRepository,
@@ -19,6 +20,7 @@ const getCampaignParticipations = async function ({
   const { models: participations, meta } = await campaignParticipationRepository.findInfoByCampaignId({
     campaignId,
     page,
+    since,
   });
 
   if (campaign.isProfilesCollection) {

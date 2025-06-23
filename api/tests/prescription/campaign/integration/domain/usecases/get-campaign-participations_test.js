@@ -23,7 +23,7 @@ describe('Integration | UseCase | get-campaign-participations', function () {
       const tube = databaseBuilder.factory.learningContent.buildTube({ competenceId: competence.id });
       const skillId = databaseBuilder.factory.learningContent.buildSkill({ tubeId: tube.id, status: 'actif' }).id;
 
-      const organizationLearner1 = databaseBuilder.factory.buildOrganizationLearner();
+      const organizationLearner1 = databaseBuilder.factory.buildOrganizationLearner({ lastName: 'Albert' });
       const campaign = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.ASSESSMENT });
       databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId });
       const participation1 = databaseBuilder.factory.buildCampaignParticipation({
@@ -33,6 +33,8 @@ describe('Integration | UseCase | get-campaign-participations', function () {
         masteryRate: 0.1,
         pixScore: 42,
         validatedSkillsCount: 10,
+        createdAt: new Date('2020-01-03'),
+        sharedAt: new Date('2020-01-03'),
       });
       const ke = databaseBuilder.factory.buildKnowledgeElement({
         status: KnowledgeElement.StatusType.VALIDATED,
@@ -46,6 +48,7 @@ describe('Integration | UseCase | get-campaign-participations', function () {
       });
 
       const organizationLearner2 = databaseBuilder.factory.buildOrganizationLearner({
+        lastName: 'Michele',
         organizationId: organizationLearner1.organizationId,
       });
       databaseBuilder.factory.buildCampaignParticipation({
@@ -55,10 +58,18 @@ describe('Integration | UseCase | get-campaign-participations', function () {
         masteryRate: null,
         pixScore: null,
         validatedSkillsCount: null,
+        createdAt: new Date('2020-01-03'),
       });
       databaseBuilder.factory.buildCampaignParticipation({
         status: CampaignParticipationStatuses.STARTED,
         masteryRate: 0.5,
+        createdAt: new Date('2020-01-04'),
+      });
+
+      databaseBuilder.factory.buildCampaignParticipation({
+        status: CampaignParticipationStatuses.STARTED,
+        masteryRate: 0.5,
+        createdAt: new Date('2020-01-01'),
       });
 
       await databaseBuilder.commit();
@@ -67,12 +78,13 @@ describe('Integration | UseCase | get-campaign-participations', function () {
         size: 1,
         number: 1,
       };
-
+      const since = new Date('2020-01-02').getTime();
       // when
       const { models, meta } = await usecases.getCampaignParticipations({
         campaignId: campaign.id,
         locale: FRENCH_SPOKEN,
         page,
+        since,
       });
 
       // then

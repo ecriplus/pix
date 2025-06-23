@@ -1058,10 +1058,12 @@ describe('Integration | Repository | Campaign Participation', function () {
       });
 
       it('should return the division of the school registration linked to the campaign', async function () {
+        // given & when
         const { models: campaignParticipationInfos } = await campaignParticipationRepository.findInfoByCampaignId({
           campaignId: campaign.id,
         });
 
+        // then
         expect(campaignParticipationInfos).to.have.lengthOf(1);
         expect(campaignParticipationInfos[0].division).to.equal('3eme');
       });
@@ -1121,25 +1123,100 @@ describe('Integration | Repository | Campaign Participation', function () {
       });
     });
 
-    context('pagination', function () {
-      it('should use given page and return pagination metadata', async function () {
-        // given
-        const campaignId = campaign1.id;
-        const page = { number: 2, size: 10 };
+    context('filters', function () {
+      context('pagination', function () {
+        it('should use given page and return pagination metadata', async function () {
+          // given
+          const campaignId = campaign1.id;
+          const page = { number: 2, size: 10 };
 
-        // when
-        const { models: participationResultDatas, meta } = await campaignParticipationRepository.findInfoByCampaignId({
-          campaignId,
-          page,
+          // when
+          const { models: participationResultDatas, meta } = await campaignParticipationRepository.findInfoByCampaignId(
+            {
+              campaignId,
+              page,
+            },
+          );
+
+          // then
+          expect(participationResultDatas).lengthOf(0);
+          expect(meta).to.deep.equal({
+            page: 2,
+            pageCount: 1,
+            pageSize: 10,
+            rowCount: 1,
+          });
         });
+      });
 
-        // then
-        expect(participationResultDatas).lengthOf(0);
-        expect(meta).to.deep.equal({
-          page: 2,
-          pageCount: 1,
-          pageSize: 10,
-          rowCount: 1,
+      context('since', function () {
+        it('should return created and updated campaign-participations after a given date', async function () {
+          // given
+          const campaignId = databaseBuilder.factory.buildCampaign().id;
+          const since = new Date('2025-01-02').getTime();
+          databaseBuilder.factory.buildCampaignParticipation({
+            campaignId,
+            status: CampaignParticipationStatuses.STARTED,
+            participantExternalId: 'started before 1',
+            createdAt: new Date('2025-01-01'),
+          });
+          const participationCreatedAfterDate = databaseBuilder.factory.buildCampaignParticipation({
+            campaignId,
+            status: CampaignParticipationStatuses.STARTED,
+            participantExternalId: 'started after 1',
+            createdAt: new Date('2025-01-03'),
+          });
+
+          databaseBuilder.factory.buildCampaignParticipation({
+            campaignId,
+            status: CampaignParticipationStatuses.SHARED,
+            masteryRate: 0.1,
+            validatedSkillsCount: 10,
+            participantExternalId: 'shared before 1',
+            createdAt: new Date('2025-01-01'),
+            sharedAt: new Date('2025-01-01'),
+          });
+
+          const participationSharedAfterDate = databaseBuilder.factory.buildCampaignParticipation({
+            campaignId,
+            status: CampaignParticipationStatuses.SHARED,
+            masteryRate: 0.1,
+            validatedSkillsCount: 10,
+            participantExternalId: 'shared after 1',
+            createdAt: new Date('2025-01-01'),
+            sharedAt: new Date('2025-01-03'),
+          });
+
+          databaseBuilder.factory.buildCampaignParticipation({
+            status: CampaignParticipationStatuses.STARTED,
+            participantExternalId: 'started after 1 but in another campaign',
+            createdAt: new Date('2025-01-03'),
+          });
+
+          databaseBuilder.factory.buildCampaignParticipation({
+            campaignId,
+            status: CampaignParticipationStatuses.SHARED,
+            masteryRate: 0.1,
+            validatedSkillsCount: 10,
+            participantExternalId: 'deleted external id 1',
+            createdAt: new Date('2024-01-02'),
+            sharedAt: new Date('2024-01-03'),
+            deletedAt: new Date('2025-01-04'),
+          });
+          await databaseBuilder.commit();
+
+          // when
+          const { models: participationResultData } = await campaignParticipationRepository.findInfoByCampaignId({
+            campaignId,
+            since,
+          });
+
+          // then
+          expect(participationResultData).lengthOf(2);
+          expect(participationResultData.map(({ id }) => id)).to.deep.members([
+            participationCreatedAfterDate.id,
+            participationSharedAfterDate.id,
+          ]);
         });
       });
     });
