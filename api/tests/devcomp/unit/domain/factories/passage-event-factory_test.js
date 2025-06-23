@@ -9,7 +9,10 @@ import {
   FlashcardsStartedEvent,
   FlashcardsVersoSeenEvent,
 } from '../../../../../src/devcomp/domain/models/passage-events/flashcard-events.js';
-import { GrainContinuedEvent } from '../../../../../src/devcomp/domain/models/passage-events/grain-events.js';
+import {
+  GrainContinuedEvent,
+  GrainSkippedEvent,
+} from '../../../../../src/devcomp/domain/models/passage-events/grain-events.js';
 import {
   PassageStartedEvent,
   PassageTerminatedEvent,
@@ -249,6 +252,24 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
 
         // then
         expect(builtEvent).to.be.instanceOf(GrainContinuedEvent);
+      });
+    });
+
+    describe('when given a GRAIN_SKIPPED event', function () {
+      it('should return a GrainContinuedEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 3,
+          grainId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
+          type: 'GRAIN_SKIPPED',
+        };
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(GrainSkippedEvent);
       });
     });
   });
