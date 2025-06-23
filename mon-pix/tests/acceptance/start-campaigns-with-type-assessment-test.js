@@ -46,11 +46,9 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
             });
             const screen = await startCampaignByCode(campaign.code);
             await _fillInputsToCreateUserPixAccount({ prescritUser, screen, t });
-
             // when
             await fillIn(screen.getByRole('textbox', { name: /email/ }), 'monmail@truc.fr');
             await click(screen.getByRole('button', { name: 'Continuer' }));
-
             // then
             assert.ok(currentURL().includes('/didacticiel'));
           });
@@ -96,9 +94,17 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
                 organizationType: 'SCO',
                 type: ASSESSMENT,
               });
+              server.create('organization-to-join', {
+                isRestricted: true,
+                id: 1,
+                type: 'SCO',
+                reconciliationFields: [],
+                code: campaign.code,
+              });
               const screen = await visit(`/campagnes/${campaign.code}?participantExternalId=a73at01r3`);
 
               assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
+
               await click(screen.getByRole('button', { name: 'Je commence' }));
 
               // when
@@ -190,11 +196,15 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
           test('should redirect to tutoriel page', async function (assert) {
             // given
             campaign = server.create('campaign', {
-              isRestricted: true,
               externalIdLabel: 'nom de naissance de maman',
               type: ASSESSMENT,
-              organizationType: 'SCO',
               organizationId: 1,
+            });
+            server.create('organization-to-join', {
+              isRestricted: true,
+              type: 'SCO',
+              id: 1,
+              code: campaign.code,
             });
             const screen = await visit(`/campagnes/${campaign.code}`);
             await click(screen.getByRole('button', { name: 'Je commence' }));

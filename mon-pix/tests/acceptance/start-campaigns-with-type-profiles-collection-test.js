@@ -38,9 +38,14 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
           test('should redirect to send profile page after completion of external id', async function (assert) {
             // then
             campaign = server.create('campaign', {
+              organizationId: 1,
               type: PROFILES_COLLECTION,
               externalIdLabel: 'Adresse e-mail',
               externaIdType: 'EMAIL',
+            });
+            server.create('organization-to-join', {
+              id: 1,
+              code: campaign.code,
             });
             const screen = await startCampaignByCode(campaign.code);
             await fillIn(screen.getByRole('textbox', { name: FIRST_NAME_INPUT_LABEL }), campaignParticipant.firstName);
@@ -89,20 +94,26 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
               //given
               campaign = server.create('campaign', {
                 type: PROFILES_COLLECTION,
-                isRestricted: true,
                 externalIdLabel: 'toto',
-                organizationType: 'SCO',
+              });
+              server.create('organization-to-join', {
+                id: 1,
+                code: campaign.code,
+                isRestricted: true,
+                type: 'SCO',
               });
               const screen = await visit(`/campagnes/${campaign.code}?participantExternalId=a73at01r3`);
               assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
-              await click(screen.getByRole('button', { name: "C'est parti !" }));
 
+              await click(screen.getByRole('button', { name: "C'est parti !" }));
               // when
               await click(screen.getByRole('button', { name: 'Se connecter' }));
+
               await fillIn(
                 screen.getByLabelText('Adresse e-mail ou identifiant', { exact: false }),
                 campaignParticipant.email,
               );
+
               await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), campaignParticipant.password);
 
               await click(screen.getByRole('button', { name: 'Se connecter' }));
@@ -181,10 +192,15 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
       module('When campaign is restricted', function (hooks) {
         hooks.beforeEach(function () {
           campaign = server.create('campaign', {
+            organizationId: 1,
             type: PROFILES_COLLECTION,
-            isRestricted: true,
             externalIdLabel: 'nom de naissance de maman',
-            organizationType: 'SCO',
+          });
+          server.create('organization-to-join', {
+            id: 1,
+            type: 'SCO',
+            isRestricted: true,
+            code: campaign.code,
           });
         });
 
@@ -249,7 +265,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
               await click(screen.getByRole('button', { name: 'Continuer avec mon compte Pix' }));
 
               //then
-              assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/rejoindre/identification`);
+              assert.strictEqual(currentURL(), `/organisations/${campaign.code}/rejoindre/identification`);
               assert.ok(screen.getByRole('button', { name: 'Se connecter' }));
             });
           });

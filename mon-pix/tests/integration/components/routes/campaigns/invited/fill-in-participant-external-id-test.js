@@ -31,7 +31,7 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
 
       // given
       const screen = await render(
-        hbs`<Routes::Campaigns::Invited::FillInParticipantExternalId
+        hbs`<Routes::Campaigns::FillInParticipantExternalId
   @campaign={{this.campaign}}
   @onSubmit={{this.onSubmitStub}}
   @onCancel={{this.onCancelStub}}
@@ -54,7 +54,7 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
 
       // given
       await render(
-        hbs`<Routes::Campaigns::Invited::FillInParticipantExternalId
+        hbs`<Routes::Campaigns::FillInParticipantExternalId
   @campaign={{this.campaign}}
   @onSubmit={{this.onSubmitStub}}
   @onCancel={{this.onCancelStub}}
@@ -75,7 +75,7 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
 
     this.set('campaign', campaign);
     const screen = await render(
-      hbs`<Routes::Campaigns::Invited::FillInParticipantExternalId
+      hbs`<Routes::Campaigns::FillInParticipantExternalId
   @campaign={{this.campaign}}
   @onSubmit={{this.onSubmitStub}}
   @onCancel={{this.onCancelStub}}
@@ -100,7 +100,7 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
 
     this.set('campaign', campaign);
     const screen = await render(
-      hbs`<Routes::Campaigns::Invited::FillInParticipantExternalId
+      hbs`<Routes::Campaigns::FillInParticipantExternalId
   @campaign={{this.campaign}}
   @onSubmit={{this.onSubmitStub}}
   @onCancel={{this.onCancelStub}}
@@ -125,7 +125,7 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
 
       this.set('campaign', campaign);
       const screen = await render(
-        hbs`<Routes::Campaigns::Invited::FillInParticipantExternalId
+        hbs`<Routes::Campaigns::FillInParticipantExternalId
   @campaign={{this.campaign}}
   @onSubmit={{this.onSubmitStub}}
   @onCancel={{this.onCancelStub}}
@@ -155,7 +155,7 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
 
       this.set('campaign', campaign);
       const screen = await render(
-        hbs`<Routes::Campaigns::Invited::FillInParticipantExternalId
+        hbs`<Routes::Campaigns::FillInParticipantExternalId
   @campaign={{this.campaign}}
   @onSubmit={{this.onSubmitStub}}
   @onCancel={{this.onCancelStub}}
@@ -192,7 +192,7 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
 
           // given
           const screen = await render(
-            hbs`<Routes::Campaigns::Invited::FillInParticipantExternalId
+            hbs`<Routes::Campaigns::FillInParticipantExternalId
   @campaign={{this.campaign}}
   @onSubmit={{this.onSubmitStub}}
   @onCancel={{this.onCancelStub}}
@@ -214,7 +214,7 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
 
         // given
         const screen = await render(
-          hbs`<Routes::Campaigns::Invited::FillInParticipantExternalId
+          hbs`<Routes::Campaigns::FillInParticipantExternalId
   @campaign={{this.campaign}}
   @onSubmit={{this.onSubmitStub}}
   @onCancel={{this.onCancelStub}}
@@ -232,7 +232,7 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
 
         // given
         const screen = await render(
-          hbs`<Routes::Campaigns::Invited::FillInParticipantExternalId
+          hbs`<Routes::Campaigns::FillInParticipantExternalId
   @campaign={{this.campaign}}
   @onSubmit={{this.onSubmitStub}}
   @onCancel={{this.onCancelStub}}
@@ -265,7 +265,7 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
 
         // given & when
         const screen = await render(
-          hbs`<Routes::Campaigns::Invited::FillInParticipantExternalId
+          hbs`<Routes::Campaigns::FillInParticipantExternalId
   @campaign={{this.campaign}}
   @onSubmit={{this.onSubmitStub}}
   @onCancel={{this.onCancelStub}}
@@ -283,7 +283,7 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
 
         // given
         const screen = await render(
-          hbs`<Routes::Campaigns::Invited::FillInParticipantExternalId
+          hbs`<Routes::Campaigns::FillInParticipantExternalId
   @campaign={{this.campaign}}
   @onSubmit={{this.onSubmitStub}}
   @onCancel={{this.onCancelStub}}

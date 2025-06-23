@@ -16,7 +16,7 @@ export default class CampaignLandingPageRoute extends Route {
 
   afterModel(campaign) {
     if (campaign.isForAbsoluteNovice) {
-      this.router.replaceWith('campaigns.access', campaign.code);
+      this.router.replaceWith('organizations.access', campaign.code);
     }
   }
 }

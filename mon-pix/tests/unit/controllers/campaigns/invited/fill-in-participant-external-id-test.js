@@ -13,7 +13,7 @@ module('Unit | Controller | Campaigns | Invited | FillInParticipantExternalId', 
   let controller;
 
   hooks.beforeEach(function () {
-    controller = this.owner.lookup('controller:campaigns/invited/fill-in-participant-external-id');
+    controller = this.owner.lookup('controller:campaigns/fill-in-participant-external-id');
     controller.set('model', model);
     controller.router = { transitionTo: sinon.stub() };
   });

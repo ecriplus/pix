@@ -74,7 +74,7 @@ module('Unit | Route | login-oidc', function (hooks) {
         test('should store the intent url in session data nextUrl', async function (assert) {
           // given
           const sessionStub = Service.create({
-            attemptedTransition: { intent: { url: '/campagnes/PIXOIDC01/acces' } },
+            attemptedTransition: { intent: { url: '/organisations/PIXOIDC01/acces' } },
             authenticate: sinon.stub().resolves(),
             data: {},
           });
@@ -91,14 +91,14 @@ module('Unit | Route | login-oidc', function (hooks) {
           await route.beforeModel(transition);
 
           // then
-          assert.strictEqual(sessionStub.data.nextURL, '/campagnes/PIXOIDC01/acces');
+          assert.strictEqual(sessionStub.data.nextURL, '/organisations/PIXOIDC01/acces');
         });
 
         test('should build the url from the intent name and contexts in session data nextUrl', async function (assert) {
           // given
           const authenticateStub = sinon.stub().resolves();
           const sessionStub = Service.create({
-            attemptedTransition: { intent: { name: 'campaigns.access', contexts: ['PIXOIDC01'] } },
+            attemptedTransition: { intent: { name: 'organizations.access', contexts: ['PIXOIDC01'] } },
             authenticate: authenticateStub,
             data: {},
           });
@@ -116,7 +116,7 @@ module('Unit | Route | login-oidc', function (hooks) {
           await route.beforeModel(transition);
 
           // then
-          sinon.assert.calledWith(route.router.urlFor, 'campaigns.access', 'PIXOIDC01');
+          sinon.assert.calledWith(route.router.urlFor, 'organizations.access', 'PIXOIDC01');
           assert.ok(true);
         });
       });
@@ -124,7 +124,7 @@ module('Unit | Route | login-oidc', function (hooks) {
       test('clears previous session data and redirects user to identity provider login page', async function (assert) {
         // given
         const sessionStub = Service.create({
-          attemptedTransition: { intent: { url: '/campagnes/PIXOIDC01/acces' } },
+          attemptedTransition: { intent: { url: '/organisations/PIXOIDC01/acces' } },
           authenticate: sinon.stub().resolves(),
           data: { nextURL: '/previous-url' },
         });
@@ -142,7 +142,7 @@ module('Unit | Route | login-oidc', function (hooks) {
 
         // then
         assert.true(route.location.assign.calledWithMatch('https://oidc/connexion'));
-        assert.deepEqual(sessionStub.data, { nextURL: '/campagnes/PIXOIDC01/acces' });
+        assert.deepEqual(sessionStub.data, { nextURL: '/organisations/PIXOIDC01/acces' });
       });
     });
   });
@@ -154,10 +154,12 @@ module('Unit | Route | login-oidc', function (hooks) {
         slug: 'oidc-partner',
         code: 'OIDC_PARTNER',
       };
+
       class OidcIdentityProvidersStub extends Service {
         'oidc-partner' = oidcPartner;
         list = [oidcPartner];
       }
+
       this.owner.register('service:oidcIdentityProviders', OidcIdentityProvidersStub);
     });
 

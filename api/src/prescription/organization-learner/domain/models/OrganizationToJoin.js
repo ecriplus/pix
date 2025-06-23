@@ -9,4 +9,12 @@ export class OrganizationToJoin {
     this.isRestricted = organizationLearnerImportFormat != undefined || isManagingStudents;
     this.reconciliationFields = organizationLearnerImportFormat?.reconciliationFields;
   }
+
+  get hasReconciliationFields() {
+    return Array.isArray(this.reconciliationFields) && this.reconciliationFields.length > 0;
+  }
+
+  get isReconciliationRequired() {
+    return this.isRestricted && this.hasReconciliationFields;
+  }
 }

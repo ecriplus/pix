@@ -1,0 +1,23 @@
+import t from 'ember-intl/helpers/t';
+import pageTitle from 'ember-page-title/helpers/page-title';
+import AssociateScoStudentWithMediacentreForm from 'mon-pix/components/routes/organizations/join/associate-sco-student-with-mediacentre-form';
+<template>
+  {{pageTitle (t "pages.join.title")}}
+
+  <div class="background-banner-wrapper">
+    <div class="background-banner"></div>
+    <main
+      class="rounded-panel rounded-panel--strong rounded-panel--over-background-banner join-restricted-campaign__container"
+      role="main"
+    >
+      <div class="join-restricted-campaign">
+        <AssociateScoStudentWithMediacentreForm
+          @organizationName={{@model.organizationToJoin.name}}
+          @organizationId={{@model.organizationToJoin.id}}
+          @goToConnectionPage={{@controller.goToConnectionPage}}
+          @onSubmit={{@controller.createAndReconcile}}
+        />
+      </div>
+    </main>
+  </div>
+</template>

@@ -94,7 +94,8 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               );
 
               // given
-              const campaign = server.create('campaign', { isRestricted: false });
+              const campaign = server.create('campaign', { organizationId: 1 });
+              server.create('organization-to-join', { id: 1, isRestricted: false, code: campaign.code });
               const screen = await visit('/campagnes');
               await fillIn(
                 screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
@@ -135,7 +136,13 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
         module('When campaign is restricted and SCO', function (hooks) {
           hooks.beforeEach(function () {
-            campaign = server.create('campaign', { isRestricted: true, organizationType: 'SCO', organizationId: 1 });
+            campaign = server.create('campaign', { organizationId: 1 });
+            server.create('organization-to-join', {
+              id: campaign.organizationId,
+              isRestricted: true,
+              type: 'SCO',
+              code: campaign.code,
+            });
           });
 
           module('When the student has an account but is not reconciled', function () {
@@ -155,7 +162,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               await click(screen.getByRole('button', { name: 'Se connecter' }));
 
               // then
-              assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/prescrit/eleve`);
+              assert.strictEqual(currentURL(), `/organisations/${campaign.code}/prescrit/eleve`);
             });
 
             module('When student is reconciled in another organization', function () {
@@ -195,6 +202,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
                 screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
                 campaign.code,
               );
+
               await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
               await click(screen.getByRole('button', { name: 'Je commence' }));
               await click(screen.getByRole('button', { name: 'Se connecter' }));
@@ -206,7 +214,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               await click(screen.getByRole('button', { name: 'Je continue' }));
 
               // then
-              assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/prescrit/eleve`);
+              assert.strictEqual(currentURL(), `/organisations/${campaign.code}/prescrit/eleve`);
             });
           });
 
@@ -226,7 +234,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // then
-            assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/rejoindre/identification`);
+            assert.strictEqual(currentURL(), `/organisations/${campaign.code}/rejoindre/identification`);
           });
 
           test('should not alter inputs(username,password,email) when email already exists', async function (assert) {
@@ -279,7 +287,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
             await click(screen.getByRole('button', { name: "Je m'inscris" }));
             // then
-            assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/rejoindre/identification`);
+            assert.strictEqual(currentURL(), `/organisations/${campaign.code}/rejoindre/identification`);
             assert.strictEqual(screen.getByLabelText('Prénom', { exact: false }).value, prescritUser.firstName);
             assert.strictEqual(screen.getByLabelText('Adresse e-mail', { exact: false }).value, prescritUser.email);
             assert.strictEqual(screen.getByLabelText('Mot de passe', { exact: false }).value, 'pix123');
@@ -296,7 +304,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // then
-            assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/rejoindre/identification`);
+            assert.strictEqual(currentURL(), `/organisations/${campaign.code}/rejoindre/identification`);
 
             // when
             await click(screen.getByRole('button', { name: 'Se connecter' }));
@@ -304,7 +312,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Se connecter' }));
 
             // then
-            assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/prescrit/eleve`);
+            assert.strictEqual(currentURL(), `/organisations/${campaign.code}/prescrit/eleve`);
           });
 
           test('should begin campaign participation when fields are filled in and associate button is clicked', async function (assert) {
@@ -313,7 +321,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // then
-            assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/rejoindre/identification`);
+            assert.strictEqual(currentURL(), `/organisations/${campaign.code}/rejoindre/identification`);
 
             // when
             await click(screen.getByRole('button', { name: 'Se connecter' }));
@@ -321,7 +329,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Se connecter' }));
 
             // then
-            assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/prescrit/eleve`);
+            assert.strictEqual(currentURL(), `/organisations/${campaign.code}/prescrit/eleve`);
 
             // when
             await fillIn(screen.getByRole('textbox', { name: 'Prénom' }), 'Jane');
@@ -339,7 +347,8 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
         module('When campaign is restricted and SUP', function (hooks) {
           hooks.beforeEach(function () {
-            campaign = server.create('campaign', { isRestricted: true, organizationType: 'SUP' });
+            campaign = server.create('campaign', { organizationId: 1 });
+            server.create('organization-to-join', { id: 1, isRestricted: true, type: 'SUP', code: campaign.code });
           });
 
           test('should redirect to landing page', async function (assert) {
@@ -380,13 +389,18 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Je me connecte' }));
 
             // then
-            assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/prescrit/etudiant`);
+            assert.strictEqual(currentURL(), `/organisations/${campaign.code}/prescrit/etudiant`);
           });
         });
 
         module('When is a simplified access campaign', function (hooks) {
           hooks.beforeEach(function () {
-            campaign = server.create('campaign', { isSimplifiedAccess: true, externalIdLabel: 'Les anonymes' });
+            campaign = server.create('campaign', {
+              isSimplifiedAccess: true,
+              externalIdLabel: 'Les anonymes',
+              organizationId: 1,
+            });
+            server.create('organization-to-join', { id: campaign.organizationId, code: campaign.code });
           });
 
           test('should redirect to landing page', async function (assert) {
@@ -485,7 +499,13 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
       module('When campaign is restricted and SCO', function (hooks) {
         hooks.beforeEach(function () {
-          campaign = server.create('campaign', { isRestricted: true, organizationType: 'SCO', organizationId: 1 });
+          campaign = server.create('campaign', { organizationId: 1 });
+          server.create('organization-to-join', {
+            id: 1,
+            isRestricted: true,
+            type: 'SCO',
+            code: campaign.code,
+          });
         });
 
         module('When association is not already done', function () {
@@ -512,7 +532,6 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             server.create('sco-organization-learner', {
               organizationId: campaign.organizationId,
             });
-
             // when
             const screen = await visit(`/campagnes/${campaign.code}`);
             await click(screen.getByRole('button', { name: 'Je commence' }));
@@ -529,7 +548,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
             //then
-            assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/prescrit/eleve`);
+            assert.strictEqual(currentURL(), `/organisations/${campaign.code}/prescrit/eleve`);
           });
 
           test('should not set any field by default', async function (assert) {
@@ -591,7 +610,13 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
       module('When campaign is restricted and SUP', function (hooks) {
         hooks.beforeEach(function () {
-          campaign = server.create('campaign', { isRestricted: true, organizationType: 'SUP' });
+          campaign = server.create('campaign', { organizationId: 1, isRestricted: true, organizationType: 'SUP' });
+          server.create('organization-to-join', {
+            id: 1,
+            isRestricted: true,
+            type: 'SUP',
+            code: campaign.code,
+          });
         });
 
         test('should redirect to landing page', async function (assert) {
@@ -617,7 +642,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
           await click(screen.getByRole('button', { name: 'Je commence' }));
 
           // then
-          assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/prescrit/etudiant`);
+          assert.strictEqual(currentURL(), `/organisations/${campaign.code}/prescrit/etudiant`);
         });
 
         test('should begin campaign participation when association is done', async function (assert) {
@@ -647,7 +672,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await startCampaignByCode(campaign.code);
 
             // then
-            assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/prescrit/identifiant`);
+            assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/identifiant`);
           });
         });
 
@@ -773,7 +798,8 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
     module('When user is logged in an external platform', function () {
       module('When campaign is restricted and SCO', function (hooks) {
         hooks.beforeEach(function () {
-          campaign = server.create('campaign', { isRestricted: true, organizationType: 'SCO', organizationId: 1 });
+          campaign = server.create('campaign', { organizationId: 1 });
+          server.create('organization-to-join', { id: 1, isRestricted: true, type: 'SCO', code: campaign.code });
         });
 
         module('When association is not already done and reconciliation token is provided', function () {
@@ -817,7 +843,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // then
-            assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/rejoindre/mediacentre`);
+            assert.strictEqual(currentURL(), `/organisations/${campaign.code}/rejoindre/mediacentre`);
           });
 
           test('should set by default firstName and lastName', async function (assert) {
@@ -1008,7 +1034,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Se connecter' }));
 
             // then
-            assert.ok(currentURL().includes(`/campagnes/${campaign.code}/rejoindre/identification`));
+            assert.ok(currentURL().includes(`/organisations/${campaign.code}/rejoindre/identification`));
             assert.dom(screen.getByText('Les données que vous avez soumises ne sont pas au bon format.')).exists();
           });
 
@@ -1049,7 +1075,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Se connecter' }));
 
             // then
-            assert.ok(currentURL().includes(`/campagnes/${campaign.code}/rejoindre/identification`));
+            assert.ok(currentURL().includes(`/organisations/${campaign.code}/rejoindre/identification`));
             assert
               .dom(
                 screen.getByText(
@@ -1082,8 +1108,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Se connecter' }));
 
             // then
-            assert.ok(currentURL().includes(`/campagnes/${campaign.code}/rejoindre/identification`));
-
+            assert.ok(currentURL().includes(`/organisations/${campaign.code}/rejoindre/identification`));
             assert
               .dom(screen.getByText(/Impossible de se connecter\. Veuillez réessayer dans quelques instants/))
               .exists();

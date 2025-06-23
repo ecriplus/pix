@@ -13,7 +13,7 @@ module('Unit | Controller | Campaigns | Landing Page', function (hooks) {
   });
 
   module('#startCampaignParticipation', function () {
-    test('should redirect to route campaigns.access', function (assert) {
+    test('should redirect to route organizations.access', function (assert) {
       // given
       controller.set('model', { code: 'konami' });
 
@@ -21,7 +21,7 @@ module('Unit | Controller | Campaigns | Landing Page', function (hooks) {
       controller.actions.startCampaignParticipation.call(controller);
 
       // then
-      sinon.assert.calledWith(controller.router.transitionTo, 'campaigns.access', 'konami');
+      sinon.assert.calledWith(controller.router.transitionTo, 'organizations.access', 'konami');
       assert.ok(true);
     });
   });

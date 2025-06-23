@@ -80,7 +80,7 @@ export default class LoginOidcRoute extends Route {
       // There is two types of intent in transition (see: https://github.com/tildeio/router.js/blob/9b3d00eb923e0bbc34c44f08c6de1e05684b907a/ARCHITECTURE.md#transitionintent)
       // When the route is accessed by url (/campagnes/:code), the url is provided.
       // When the route is accessed by the submit of the campaign code,
-      // the route name (campaigns.access) and contexts ([Campaign]) are provided.
+      // the route name (organizations.access) and contexts ([Campaign]) are provided.
       let { url } = this.session.get('attemptedTransition.intent');
       const { name, contexts } = this.session.get('attemptedTransition.intent');
       if (!url) {
@@ -93,7 +93,6 @@ export default class LoginOidcRoute extends Route {
       `${ENV.APP.API_HOST}/api/oidc/authorization-url?identity_provider=${identityProvider.code}`,
     );
     const { redirectTarget: authorizationUrl } = await response.json();
-
     this.location.assign(authorizationUrl);
   }
 
