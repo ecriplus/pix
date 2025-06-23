@@ -545,21 +545,6 @@
       ]
     },
     {
-      "id": "c66c376f-421e-40d9-bfec-40982a3e819a",
-      "type": "transition",
-      "title": "Transition - 4",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "97501ed5-7d0c-4b3e-ad58-498d7d4dbc44",
-            "type": "text",
-            "content": "<p>À vous de jouer.</p>"
-          }
-        }
-      ]
-    },
-    {
       "id": "6589bd5c-b120-4f5f-a089-62922f54de59",
       "type": "activity",
       "title": "Transfert",
