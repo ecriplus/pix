@@ -1,5 +1,30 @@
 # Pix Changelog
 
+# [5.141.0](https://github.com/1024pix/pix/compare/v5.140.0...v5.141.0) (2025-06-23)
+
+### :rocket: Amélioration
+
+- [#12601](https://github.com/1024pix/pix/pull/12601) Déplacer les images hébergées en dehors de Pix vers assets.pix.org (PIX-18374) 
+- [#12588](https://github.com/1024pix/pix/pull/12588) Reconfigurer le front pour afficher les nouvelles pages de la certification complémentaire sur Admin (PIX-18189). 
+- [#12594](https://github.com/1024pix/pix/pull/12594) Supporter plus d'options de configuration d'embed par le message init dans un module (PIX-18197) 
+
+### :bug: Correction
+
+- [#12612](https://github.com/1024pix/pix/pull/12612) Afficher les bonnes urls dans la documentation OpenAPI (PIX-18396) 
+- [#12609](https://github.com/1024pix/pix/pull/12609) Pouvoir cliquer sur le bouton télécharger des attestations même si le dropdown est ouvert (PIX-17864) 
+- [#12610](https://github.com/1024pix/pix/pull/12610) Transférer les réponses LLM en ArrayBuffer pour Safari (PIX-18391) 
+
+### :building_construction: Tech
+
+- [#12603](https://github.com/1024pix/pix/pull/12603) :truck: Déplace `stage-collection-repository` vers `src/prescription/` 
+- [#12579](https://github.com/1024pix/pix/pull/12579) :truck: Déplace le `ComplementaryCertificationCourseResultRepository` vers `src/certification/`  
+- [#12602](https://github.com/1024pix/pix/pull/12602) :truck: Déplace le repository Learning Content utilisé par prescription vers `/src/prescription` 
+
+### :arrow_up: Montée de version
+
+- [#12614](https://github.com/1024pix/pix/pull/12614) Lock file maintenance (api) 
+- [#12590](https://github.com/1024pix/pix/pull/12590) Update nginx Docker tag to v1.28.0
+
 # [5.140.0](https://github.com/1024pix/pix/compare/v5.139.0...v5.140.0) (2025-06-20)
 
 ### :rocket: Amélioration
