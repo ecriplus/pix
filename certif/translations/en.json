@@ -720,9 +720,6 @@
             "finalizing": "Finalise the session",
             "update": "Edit the details for session {sessionId}"
           },
-          "finalization": {
-            "temporarily-blocked": "This session cannot be finalised at the moment. The Pix teams are working to unblock the finalization."
-          },
           "finalization-info": "The finalisation information for the session has already been transmitted to Pix.",
           "password": {
             "copy-password": "Copy the invigilator’s session password",

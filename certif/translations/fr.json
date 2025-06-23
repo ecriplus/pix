@@ -720,9 +720,6 @@
             "finalizing": "Finaliser la session",
             "update": "Modifier les informations de la session {sessionId}"
           },
-          "finalization": {
-            "temporarily-blocked": "Cette session ne peut pas être finalisée pour le moment. Les équipes de Pix travaillent au déblocage de la finalisation."
-          },
           "finalization-info": "Les informations de finalisation de la session ont déjà été transmises aux équipes de Pix.",
           "password": {
             "copy-password": "Copier le mot de passe de session pour le surveillant",
