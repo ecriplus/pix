@@ -219,7 +219,7 @@ describe('LLM | Integration | Application | API | llm', function () {
           value: chat.toDTO(),
           expirationDelaySeconds: ms('24h'),
         });
-        nock('https://llm-test.pix.fr/api')
+        const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
           .get('/configurations/uneConfigQuiExist')
           .reply(200, {
             llm: {
@@ -237,6 +237,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         // then
         expect(err).to.be.instanceOf(TooLargeMessageInputError);
         expect(err.message).to.equal("You've reached the max characters input");
+        expect(llmConfigurationScope.isDone()).to.be.true;
       });
     });
 
@@ -257,7 +258,7 @@ describe('LLM | Integration | Application | API | llm', function () {
           value: chat.toDTO(),
           expirationDelaySeconds: ms('24h'),
         });
-        nock('https://llm-test.pix.fr/api')
+        const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
           .get('/configurations/uneConfigQuiExist')
           .reply(200, {
             llm: {
@@ -268,7 +269,7 @@ describe('LLM | Integration | Application | API | llm', function () {
               inputMaxPrompts: 2,
             },
           });
-        nock('https://llm-test.pix.fr/api')
+        const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
           .post('/chat', {
             configurationId: 'uneConfigQuiExist',
             history: [
@@ -291,6 +292,8 @@ describe('LLM | Integration | Application | API | llm', function () {
         }
         const llmResponse = parts.join('');
         expect(llmResponse).to.deep.equal('data: salut\n\n');
+        expect(llmConfigurationScope.isDone()).to.be.true;
+        expect(llmPostPromptScope.isDone()).to.be.true;
       });
 
       it('should throw a MaxPromptsReachedError when user prompts exceed max', async function () {
@@ -309,7 +312,7 @@ describe('LLM | Integration | Application | API | llm', function () {
           value: chat.toDTO(),
           expirationDelaySeconds: ms('24h'),
         });
-        nock('https://llm-test.pix.fr/api')
+        const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
           .get('/configurations/uneConfigQuiExist')
           .reply(200, {
             llm: {
@@ -327,6 +330,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         // then
         expect(err).to.be.instanceOf(MaxPromptsReachedError);
         expect(err.message).to.equal("You've reached the max prompts authorized");
+        expect(llmConfigurationScope.isDone()).to.be.true;
       });
     });
 
@@ -345,7 +349,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         value: chat.toDTO(),
         expirationDelaySeconds: ms('24h'),
       });
-      nock('https://llm-test.pix.fr/api')
+      const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
         .get('/configurations/uneConfigQuiExist')
         .reply(200, {
           llm: {
@@ -356,7 +360,7 @@ describe('LLM | Integration | Application | API | llm', function () {
             inputMaxPrompts: 100,
           },
         });
-      nock('https://llm-test.pix.fr/api')
+      const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
         .post('/chat', {
           configurationId: 'uneConfigQuiExist',
           history: [
@@ -400,6 +404,8 @@ describe('LLM | Integration | Application | API | llm', function () {
           },
         ],
       });
+      expect(llmConfigurationScope.isDone()).to.be.true;
+      expect(llmPostPromptScope.isDone()).to.be.true;
     });
   });
 });
