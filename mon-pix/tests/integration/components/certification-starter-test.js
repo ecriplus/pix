@@ -148,11 +148,7 @@ module('Integration | Component | certification-starter', function (hooks) {
           );
 
           // then
-          assert.ok(
-            screen.getByText(
-              'Vous êtes inscrit à la certification complémentaire suivante en plus de la certification Pix :',
-            ),
-          );
+          assert.ok(screen.getByText('Vous êtes inscrit à la certification complémentaire suivante :'));
           assert.ok(screen.getByText('Certif complémentaire 1'));
           assert.notOk(screen.queryByText('Vous n’êtes pas éligible à'));
         });
