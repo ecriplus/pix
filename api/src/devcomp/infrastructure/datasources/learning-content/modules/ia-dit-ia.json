@@ -560,69 +560,6 @@
       ]
     },
     {
-      "id": "582f39f8-787f-4401-bc06-538cf5cd534e",
-      "type": "challenge",
-      "title": "Les rouleaux d'Herculanum",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "7e2ae8c4-0aec-4cbb-9888-e82bf3244bf5",
-            "type": "text",
-            "content": "<p>Lisez l’article ci-dessous, puis répondez à la question.</p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "d2bcb01c-fe30-4470-9ddf-a55a1cef1b1e",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-article.html\" height=\"450\"></iframe>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "4c6feef7-417a-47ef-9df5-b19aca5da5a2",
-            "type": "qrocm",
-            "instruction": "<p>L'IA utilisée pour cette découverte est spécialisée dans un type de tâches.<br>Quel est ce type de tâche ?&nbsp;</p>",
-            "proposals": [
-              {
-                "input": "1",
-                "type": "input",
-                "inputType": "text",
-                "size": 12,
-                "display": "inline",
-                "placeholder": "",
-                "ariaLabel": "Type de tâches de l'IA",
-                "defaultValue": "",
-                "tolerances": [
-                  "t1",
-                  "t2",
-                  "t3"
-                ],
-                "solutions": [
-                  "la reconnaissance d'image",
-                  "reconnaissance d'image",
-                  "reconnaissance image"
-                ]
-              }
-            ],
-            "feedbacks": {
-              "valid": {
-                "state": "<p>Bonne réponse !&nbsp;</p>",
-                "diagnosis": "<p>Ce sont des algorithmes de reconnaissance d'images qui ont permis cette découverte.</p>"
-              },
-              "invalid": {
-                "state": "<p>Mauvaise réponse.</p>",
-                "diagnosis": "<p>Ce sont des algorithmes de reconnaissance d'images qui ont permis cette découverte.</p>"
-              }
-            }
-          }
-        }
-      ]
-    },
-    {
       "id": "6589bd5c-b120-4f5f-a089-62922f54de59",
       "type": "activity",
       "title": "Transfert",
