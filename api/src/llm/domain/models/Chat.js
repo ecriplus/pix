@@ -1,10 +1,8 @@
 export class Chat {
-  constructor({ id, configurationId, attachmentName, attachmentContext, messages = [] }) {
+  constructor({ id, configurationId, messages = [] }) {
     this.id = id;
     this.configurationId = configurationId;
     this.messages = messages;
-    this.attachmentName = attachmentName;
-    this.attachmentContext = attachmentContext;
   }
 
   addUserMessage(message) {
@@ -39,8 +37,6 @@ export class Chat {
     return {
       id: this.id,
       configurationId: this.configurationId,
-      attachmentName: this.attachmentName,
-      attachmentContext: this.attachmentContext,
       messages: this.messages.map((message) => message.toDTO()),
     };
   }

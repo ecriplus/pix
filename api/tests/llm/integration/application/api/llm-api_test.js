@@ -99,8 +99,6 @@ describe('LLM | Integration | Application | API | llm', function () {
           expect(llmApiScope.isDone()).to.be.true;
           expect(await chatTemporaryStorage.get(`123456-${now.getMilliseconds()}`)).to.deep.equal({
             id: `123456-${now.getMilliseconds()}`,
-            attachmentName: 'file.txt',
-            attachmentContext: '**coucou**',
             configurationId: 'uneConfigQuiExist',
             messages: [],
           });
@@ -137,8 +135,6 @@ describe('LLM | Integration | Application | API | llm', function () {
           expect(llmApiScope.isDone()).to.be.true;
           expect(await chatTemporaryStorage.get(`123456-${now.getMilliseconds()}`)).to.deep.equal({
             id: `123456-${now.getMilliseconds()}`,
-            attachmentName: null,
-            attachmentContext: null,
             configurationId: 'uneConfigQuiExist',
             messages: [],
           });
