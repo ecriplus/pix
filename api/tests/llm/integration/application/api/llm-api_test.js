@@ -334,78 +334,144 @@ describe('LLM | Integration | Application | API | llm', function () {
       });
     });
 
-    it('should return a stream which will contain the llm response', async function () {
-      // given
-      const chat = new Chat({
-        id: '123-chatId',
-        configurationId: 'uneConfigQuiExist',
-        messages: [
-          new Message({ content: 'coucou user1', isFromUser: true }),
-          new Message({ content: 'coucou LLM1', isFromUser: false }),
-        ],
-      });
-      await chatTemporaryStorage.save({
-        key: chat.id,
-        value: chat.toDTO(),
-        expirationDelaySeconds: ms('24h'),
-      });
-      const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
-        .get('/configurations/uneConfigQuiExist')
-        .reply(200, {
-          llm: {
-            historySize: 123,
-          },
-          challenge: {
-            inputMaxChars: 255,
-            inputMaxPrompts: 100,
-          },
+    context('success cases', function () {
+      context('when a prompt is provided', function () {
+        context('when no attachmentName is provided', function () {
+          it('should return a stream which will contain the llm response', async function () {
+            // given
+            const chat = new Chat({
+              id: '123-chatId',
+              configurationId: 'uneConfigQuiExist',
+              messages: [
+                new Message({ content: 'coucou user1', isFromUser: true }),
+                new Message({ content: 'coucou LLM1', isFromUser: false }),
+              ],
+            });
+            await chatTemporaryStorage.save({
+              key: chat.id,
+              value: chat.toDTO(),
+              expirationDelaySeconds: ms('24h'),
+            });
+            const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
+              .get('/configurations/uneConfigQuiExist')
+              .reply(200, {
+                llm: {
+                  historySize: 123,
+                },
+                challenge: {
+                  inputMaxChars: 255,
+                  inputMaxPrompts: 100,
+                },
+              });
+            const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
+              .post('/chat', {
+                configurationId: 'uneConfigQuiExist',
+                history: [
+                  { content: 'coucou user1', role: 'user' },
+                  { content: 'coucou LLM1', role: 'assistant' },
+                ],
+                prompt: 'un message',
+              })
+              .reply(
+                201,
+                Readable.from([
+                  '60:{"ceci":"nest pas important","message":"coucou c\'est super"}',
+                  '40:{"message":"\\nle couscous c plutot bon"}47:{"message":" mais la paella c pas mal aussi\\n"}',
+                  '29:{"jecrois":{"que":"jaifini"}}',
+                ]),
+              );
+
+            // when
+            const stream = await prompt({
+              chatId: '123-chatId',
+              userId: 123,
+              message: 'un message',
+              attachmentName: null,
+            });
+
+            // then
+            const parts = [];
+            const decoder = new TextDecoder();
+            for await (const chunk of stream) {
+              parts.push(decoder.decode(chunk));
+            }
+            const llmResponse = parts.join('');
+            expect(llmResponse).to.deep.equal(
+              "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n",
+            );
+            expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
+              id: '123-chatId',
+              configurationId: 'uneConfigQuiExist',
+              messages: [
+                { content: 'coucou user1', isFromUser: true },
+                { content: 'coucou LLM1', isFromUser: false },
+                { content: 'un message', isFromUser: true },
+                {
+                  content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+                  isFromUser: false,
+                },
+              ],
+            });
+            expect(llmConfigurationScope.isDone()).to.be.true;
+            expect(llmPostPromptScope.isDone()).to.be.true;
+          });
         });
-      const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
-        .post('/chat', {
-          configurationId: 'uneConfigQuiExist',
-          history: [
-            { content: 'coucou user1', role: 'user' },
-            { content: 'coucou LLM1', role: 'assistant' },
-          ],
-          prompt: 'un message',
-        })
-        .reply(
-          201,
-          Readable.from([
-            '60:{"ceci":"nest pas important","message":"coucou c\'est super"}',
-            '40:{"message":"\\nle couscous c plutot bon"}47:{"message":" mais la paella c pas mal aussi\\n"}',
-            '29:{"jecrois":{"que":"jaifini"}}',
-          ]),
-        );
-
-      // when
-      const stream = await prompt({ chatId: '123-chatId', userId: 123, message: 'un message' });
-
-      // then
-      const parts = [];
-      const decoder = new TextDecoder();
-      for await (const chunk of stream) {
-        parts.push(decoder.decode(chunk));
-      }
-      const llmResponse = parts.join('');
-      expect(llmResponse).to.deep.equal(
-        "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n",
-      );
-      expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
-        id: '123-chatId',
-        configurationId: 'uneConfigQuiExist',
-        messages: [
-          { content: 'coucou user1', isFromUser: true },
-          { content: 'coucou LLM1', isFromUser: false },
-          { content: 'un message', isFromUser: true },
-          {
-            content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
-            isFromUser: false,
-          },
-        ],
+        context('when attachmentName is provided', function () {
+          context('when no attachmentName is expected for the given configuration', function () {
+            it('should TODO', function () {
+              expect(false).to.be.true;
+            });
+          });
+          context('when attachmentName is not the expected one for the given configuration', function () {
+            it('should TODO', function () {
+              expect(false).to.be.true;
+            });
+          });
+          context('when attachmentName is the expected one for the given configuration', function () {
+            context('when the context for this attachmentName has already been added', function () {
+              it('should TODO', function () {
+                expect(false).to.be.true;
+              });
+            });
+            context('when the context for this attachmentName has not been added yet', function () {
+              it('should TODO', function () {
+                expect(false).to.be.true;
+              });
+            });
+          });
+        });
       });
-      expect(llmConfigurationScope.isDone()).to.be.true;
-      expect(llmPostPromptScope.isDone()).to.be.true;
+      context('when no prompt is provided', function () {
+        context('when no attachmentName is provided', function () {
+          it('should TODO', function () {
+            expect(false).to.be.true;
+          });
+        });
+        context('when attachmentName is provided', function () {
+          context('when no attachmentName is expected for the given configuration', function () {
+            it('should TODO', function () {
+              expect(false).to.be.true;
+            });
+          });
+          context('when attachmentName is not the expected one for the given configuration', function () {
+            it('should TODO', function () {
+              expect(false).to.be.true;
+            });
+          });
+          context('when attachmentName is the expected one for the given configuration', function () {
+            context('when the context for this attachmentName has already been added', function () {
+              it('should TODO', function () {
+                expect(false).to.be.true;
+              });
+            });
+            context('when the context for this attachmentName has not been added yet', function () {
+              it('should TODO', function () {
+                expect(false).to.be.true;
+              });
+            });
+          });
+        });
+      });
     });
   });
 });

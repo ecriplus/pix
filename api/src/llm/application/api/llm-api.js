@@ -68,10 +68,11 @@ export async function startChat({ configId, userId }) {
  * @param {Object} params
  * @param {string} params.chatId
  * @param {string} params.userId
- * @param {string} params.message
+ * @param {string|null|undefined} params.message
+ * @param {string|null|undefined} params.attachmentName
  * @returns {Promise<module:stream.internal.PassThrough>}
  */
-export async function prompt({ chatId, userId, message }) {
+export async function prompt({ chatId, userId, message, attachmentName: _ }) {
   if (!chatId) {
     throw new ChatNotFoundError('null id provided');
   }
