@@ -554,14 +554,14 @@
           "element": {
             "id": "7289c873-1f53-4e62-8ed0-5462618547dd",
             "type": "qcu-declarative",
-            "instruction": "<p>Maintenant, vous en savez plus sur ce qu'est l'intelligence artificielle.<br>Dans votre quotidien, utilisez-vous des objets avec de l’intelligence artificielle ?&nbsp;<br><br></p>",
+            "instruction": "<p>Maintenant, vous en savez plus sur ce qu'est l'intelligence artificielle.<br>Dans votre quotidien, utilisez-vous des appareils avec de l’intelligence artificielle ?&nbsp;<br><br></p>",
             "proposals": [
               {
                 "id": "1",
                 "content": "<p>oui</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Pas étonnant ! L'intelligence artificielle est présente&nbsp;dans de nombreux objets et services de notre quotidien.</p>"
+                  "diagnosis": "<p>Pas étonnant ! L'intelligence artificielle est présente&nbsp;dans de nombreux appareils et services de notre quotidien.</p>"
                 }
               },
               {
@@ -569,7 +569,7 @@
                 "content": "<p>non</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Étonnant ! L'intelligence artificielle est présente&nbsp;dans de nombreux objets et services de notre quotidien.</p>"
+                  "diagnosis": "<p>Étonnant ! L'intelligence artificielle est présente&nbsp;dans de nombreux appareils et services de notre quotidien.</p>"
                 }
               },
               {
@@ -577,7 +577,7 @@
                 "content": "<p>je ne suis pas sûr.</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Si vous n'êtes pas sûr, il y a de grande chance que ce soit le cas.&nbsp;L'intelligence artificielle est présente&nbsp;dans de nombreux objets et services de notre quotidien.</p>"
+                  "diagnosis": "<p>Si vous n'êtes pas sûr, il y a de grande chance que ce soit le cas.&nbsp;L'intelligence artificielle est présente&nbsp;dans de nombreux appareils et services de notre quotidien.</p>"
                 }
               }
             ]
