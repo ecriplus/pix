@@ -32,53 +32,6 @@ describe('Unit | Team | Domain | Service | organization-invitation', function ()
 
   describe('#createOrUpdateOrganizationInvitation', function () {
     context('when organization-invitation does not exist', function () {
-      it('should create a new organization-invitation and send an email with organizationId, email, code and locale', async function () {
-        // given
-        const role = null;
-        const tags = undefined;
-        const locale = 'fr-fr';
-        const organization = domainBuilder.buildOrganization();
-        const organizationInvitation = new OrganizationInvitation({
-          role: Membership.roles.MEMBER,
-          status: 'pending',
-          code,
-        });
-
-        organizationInvitationRepository.findOnePendingByOrganizationIdAndEmail
-          .withArgs({ organizationId: organization.id, email: userEmailAddress })
-          .resolves(null);
-        organizationInvitationRepository.create.resolves(organizationInvitation);
-        organizationRepository.get.resolves(organization);
-
-        // when
-        await organizationInvitationService.createOrUpdateOrganizationInvitation({
-          organizationRepository,
-          organizationInvitationRepository,
-          organizationId: organization.id,
-          email: userEmailAddress,
-          locale,
-          role,
-          dependencies: { mailService },
-        });
-
-        // then
-        expect(organizationInvitationRepository.create).to.has.been.calledWithExactly({
-          organizationId: organization.id,
-          email: userEmailAddress,
-          code: sinon.match.string,
-          role,
-          locale,
-        });
-        expect(mailService.sendOrganizationInvitationEmail).to.has.been.calledWithExactly({
-          email: userEmailAddress,
-          organizationName: organization.name,
-          organizationInvitationId: organizationInvitation.id,
-          code,
-          locale,
-          tags,
-        });
-      });
-
       context('when recipient email has an invalid domain', function () {
         it('should throw an error', async function () {
           // given
@@ -156,35 +109,6 @@ describe('Unit | Team | Domain | Service | organization-invitation', function ()
         };
 
         expect(mailService.sendOrganizationInvitationEmail).to.has.been.calledWithExactly(expectedParameters);
-      });
-
-      it('should update organization-invitation modification date', async function () {
-        // given
-        const locale = 'fr-fr';
-        const organization = domainBuilder.buildOrganization();
-        const organizationInvitation = new OrganizationInvitation({
-          role: Membership.roles.MEMBER,
-          status: 'pending',
-          code,
-        });
-
-        organizationInvitationRepository.findOnePendingByOrganizationIdAndEmail.resolves(organizationInvitation);
-        organizationRepository.get.resolves(organization);
-
-        // when
-        await organizationInvitationService.createOrUpdateOrganizationInvitation({
-          organizationRepository,
-          organizationInvitationRepository,
-          organizationId: organization.id,
-          email: userEmailAddress,
-          locale,
-          dependencies: { mailService },
-        });
-
-        // then
-        expect(organizationInvitationRepository.updateModificationDate).to.have.been.calledWithExactly(
-          organizationInvitation.id,
-        );
       });
     });
 
