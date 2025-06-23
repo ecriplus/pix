@@ -18,4 +18,21 @@ class GrainContinuedEvent extends PassageEvent {
   }
 }
 
-export { GrainContinuedEvent };
+class GrainSkippedEvent extends PassageEvent {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, grainId }) {
+    super({
+      type: 'GRAIN_SKIPPED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      data: { grainId },
+    });
+
+    assertNotNullOrUndefined(grainId, 'The grainId property is required for a GrainSkippedEvent');
+    assertHasUuidLength(grainId, 'The grainId property should be exactly 36 characters long');
+  }
+}
+
+export { GrainContinuedEvent, GrainSkippedEvent };
