@@ -1,10 +1,7 @@
-import {
-  findObjects,
-  toEventStreamData,
-} from '../../../../../src/llm/infrastructure/repositories/prompt-repository.js';
+import { findObjects, toEventStreamData } from '../../../../../src/llm/infrastructure/streaming/to-event-stream.js';
 import { expect } from '../../../../test-helper.js';
 
-describe('LLM | Unit | Infrastructure | Repositories | prompt', function () {
+describe('LLM | Unit | Infrastructure | Streaming | ToEventStream', function () {
   describe('#findObjects', function () {
     it('should extract the content of "messages" key in each object found in the string', async function () {
       // given

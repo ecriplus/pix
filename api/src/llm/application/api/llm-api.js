@@ -12,6 +12,7 @@ import { Chat } from '../../domain/models/Chat.js';
 import * as chatRepository from '../../infrastructure/repositories/chat-repository.js';
 import * as configurationRepository from '../../infrastructure/repositories/configuration-repository.js';
 import * as promptRepository from '../../infrastructure/repositories/prompt-repository.js';
+import * as toEventStream from '../../infrastructure/streaming/to-event-stream.js';
 import { LLMChatDTO } from './models/LLMChatDTO.js';
 
 /**
@@ -95,12 +96,13 @@ export async function prompt({ chatId, userId, message, attachmentName }) {
     throw new MaxPromptsReachedError();
   }
 
-  return promptRepository.prompt({
+  const llmResponseStream = await promptRepository.prompt({
     message,
     configuration,
     chat,
-    onLLMResponseReceived: addMessagesToChat(chat, message, chatRepository),
   });
+
+  return toEventStream.fromLLMResponse(llmResponseStream, addMessagesToChat(chat, message, chatRepository));
 }
 
 function generateId(userId) {

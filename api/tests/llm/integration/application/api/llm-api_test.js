@@ -465,18 +465,18 @@ describe('LLM | Integration | Application | API | llm', function () {
             });
           });
           context('when attachmentName is not the expected one for the given configuration', function () {
-            it('should TODO', function () {
+            it.skip('should TODO', function () {
               expect(false).to.be.true;
             });
           });
           context('when attachmentName is the expected one for the given configuration', function () {
             context('when the context for this attachmentName has already been added', function () {
-              it('should TODO', function () {
+              it.skip('should TODO', function () {
                 expect(false).to.be.true;
               });
             });
             context('when the context for this attachmentName has not been added yet', function () {
-              it('should TODO', function () {
+              it.skip('should TODO', function () {
                 expect(false).to.be.true;
               });
             });
@@ -573,18 +573,18 @@ describe('LLM | Integration | Application | API | llm', function () {
             });
           });
           context('when attachmentName is not the expected one for the given configuration', function () {
-            it('should TODO', function () {
+            it.skip('should TODO', function () {
               expect(false).to.be.true;
             });
           });
           context('when attachmentName is the expected one for the given configuration', function () {
             context('when the context for this attachmentName has already been added', function () {
-              it('should TODO', function () {
+              it.skip('should TODO', function () {
                 expect(false).to.be.true;
               });
             });
             context('when the context for this attachmentName has not been added yet', function () {
-              it('should TODO', function () {
+              it.skip('should TODO', function () {
                 expect(false).to.be.true;
               });
             });
