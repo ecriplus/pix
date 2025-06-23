@@ -1,7 +1,8 @@
 export class Chat {
-  constructor({ id, configurationId, messages = [] }) {
+  constructor({ id, configurationId, hasAttachmentContextBeenAdded, messages = [] }) {
     this.id = id;
     this.configurationId = configurationId;
+    this.hasAttachmentContextBeenAdded = hasAttachmentContextBeenAdded;
     this.messages = messages;
   }
 
@@ -12,15 +13,18 @@ export class Chat {
   }
 
   addAttachmentContextMessages(attachmentName, attachmentContext) {
-    const content =
-      'Ajoute le fichier fictif "' +
-      attachmentName +
-      '" à ton contexte. Voici le contenu du fichier :\n' +
-      attachmentContext;
-    this.messages.push(new Message({ content, isFromUser: true }));
-    this.messages.push(
-      new Message({ content: 'Le contenu du fichier fictif a été ajouté au contexte.', isFromUser: false }),
-    );
+    if (!this.hasAttachmentContextBeenAdded) {
+      const content =
+        'Ajoute le fichier fictif "' +
+        attachmentName +
+        '" à ton contexte. Voici le contenu du fichier :\n' +
+        attachmentContext;
+      this.messages.push(new Message({ content, isFromUser: true }));
+      this.messages.push(
+        new Message({ content: 'Le contenu du fichier fictif a été ajouté au contexte.', isFromUser: false }),
+      );
+      this.hasAttachmentContextBeenAdded = true;
+    }
   }
 
   addLLMMessage(message) {
@@ -37,6 +41,7 @@ export class Chat {
     return {
       id: this.id,
       configurationId: this.configurationId,
+      hasAttachmentContextBeenAdded: this.hasAttachmentContextBeenAdded,
       messages: this.messages.map((message) => message.toDTO()),
     };
   }

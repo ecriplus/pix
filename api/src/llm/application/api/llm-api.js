@@ -44,6 +44,7 @@ export async function startChat({ configId, userId }) {
   const newChat = new Chat({
     id: chatId,
     configurationId: configuration.id,
+    hasAttachmentContextBeenAdded: false,
     messages: [],
   });
   await chatRepository.save(newChat);
