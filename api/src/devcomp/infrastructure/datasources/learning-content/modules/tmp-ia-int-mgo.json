@@ -112,7 +112,7 @@
           "element": {
             "id": "575b7423-919a-4e5c-9bc9-4c98c30bdc2f",
             "type": "text",
-            "content": "<iframe title=\"pretraining\" src=\"https://1024pix.github.io/atelier-contenus/MGO/ia-dec-pretraining.html\" height=\"800\"></iframe>\""
+            "content": "<iframe title=\"pretraining\" src=\"https://1024pix.github.io/atelier-contenus/MGO/ia-dec-pretraining.html\" height=\"800\"></iframe>"
           }
         },
         {
@@ -206,7 +206,7 @@
             "cards": [
               {
                 "id": "cea6f6c8-afd6-4e6b-8821-17558822a5ea",
-                "text": "Utiliser pour l'entraînement ?",
+                "text": "Utiliser pour l'entraînement ?",
                 "image": {
                   "url": "https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg",
                   "altText": ""
