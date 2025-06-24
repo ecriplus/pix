@@ -1,4 +1,4 @@
-This doc has been generated on 18/06/2025 13:26:32 with `scripts/generate-api-documentation.js`. See package.json.
+This doc has been generated on 24/06/2025 11:31:47 with `scripts/generate-api-documentation.js`. See package.json.
 
 ---
 ## Modules
@@ -78,7 +78,7 @@ This doc has been generated on 18/06/2025 13:26:32 with `scripts/generate-api-do
     * [~update(payload)](#module_CampaignApi..update) ⇒ <code>Promise.&lt;Campaign&gt;</code>
     * [~findAllForOrganization(payload)](#module_CampaignApi..findAllForOrganization) ⇒ <code>Promise.&lt;CampaignListResponse&gt;</code>
     * [~findCampaignSkillIdsForCampaignParticipations(campaignParticipationIds)](#module_CampaignApi..findCampaignSkillIdsForCampaignParticipations) ⇒ <code>Promise.&lt;Array.&lt;Number&gt;&gt;</code>
-    * [~getCampaignParticipations(payload)](#module_CampaignApi..getCampaignParticipations) ⇒ <code>Promise.&lt;(Array.&lt;AssessmentCampaignParticipationAPI&gt;\|Array.&lt;ProfilesCollectionCampaignParticipationAPI&gt;)&gt;</code>
+    * [~getCampaignParticipations(payload)](#module_CampaignApi..getCampaignParticipations) ⇒ <code>Promise.&lt;{models: (Array.&lt;AssessmentCampaignParticipationAPI&gt;\|Array.&lt;ProfilesCollectionCampaignParticipationAPI&gt;), meta: Pagination}&gt;</code>
     * [~deleteActiveCampaigns(payload)](#module_CampaignApi..deleteActiveCampaigns) ⇒ <code>Promise.&lt;void&gt;</code>
     * [~CampaignPayload](#module_CampaignApi..CampaignPayload) : <code>object</code>
     * [~UserNotAuthorizedToCreateCampaignError](#module_CampaignApi..UserNotAuthorizedToCreateCampaignError) : <code>object</code>
@@ -150,7 +150,7 @@ This doc has been generated on 18/06/2025 13:26:32 with `scripts/generate-api-do
 
 <a name="module_CampaignApi..getCampaignParticipations"></a>
 
-### CampaignApi~getCampaignParticipations(payload) ⇒ <code>Promise.&lt;(Array.&lt;AssessmentCampaignParticipationAPI&gt;\|Array.&lt;ProfilesCollectionCampaignParticipationAPI&gt;)&gt;</code>
+### CampaignApi~getCampaignParticipations(payload) ⇒ <code>Promise.&lt;{models: (Array.&lt;AssessmentCampaignParticipationAPI&gt;\|Array.&lt;ProfilesCollectionCampaignParticipationAPI&gt;), meta: Pagination}&gt;</code>
 **Kind**: inner method of [<code>CampaignApi</code>](#module_CampaignApi)  
 
 | Param | Type |
@@ -260,6 +260,8 @@ This doc has been generated on 18/06/2025 13:26:32 with `scripts/generate-api-do
 | Name | Type |
 | --- | --- |
 | campaignId | <code>number</code> | 
+| since | <code>string</code> | 
+| page | <code>PageDefinition</code> | 
 
 <a name="module_CampaignApi..DeleteActiveCampaignPayload"></a>
 

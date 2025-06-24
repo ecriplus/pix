@@ -165,6 +165,8 @@ export const findCampaignSkillIdsForCampaignParticipations = async (campaignPart
  * @typedef CampaignParticipationsPayload
  * @type {object}
  * @property {number} campaignId
+ * @property {string} since
+ * @property {PageDefinition} page
  */
 
 /**
