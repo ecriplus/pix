@@ -24,15 +24,16 @@ export default class Update extends Component {
 
   constructor() {
     super(...arguments);
-    this.form = this.store.createRecord('campaign-form');
-    this.form.name = this.args.campaign.name;
-    this.form.title = this.args.campaign.title;
-    this.form.customLandingPageText = this.args.campaign.customLandingPageText;
-    this.form.customResultPageText = this.args.campaign.customResultPageText;
-    this.form.customResultPageButtonText = this.args.campaign.customResultPageButtonText;
-    this.form.customResultPageButtonUrl = this.args.campaign.customResultPageButtonUrl;
-    this.form.multipleSendings = this.args.campaign.multipleSendings;
-    this.form.isForAbsoluteNovice = this.args.campaign.isForAbsoluteNovice;
+    this.form = this.store.createRecord('campaign-form', {
+      name: this.args.campaign.name,
+      title: this.args.campaign.title,
+      customLandingPageText: this.args.campaign.customLandingPageText,
+      customResultPageText: this.args.campaign.customResultPageText,
+      customResultPageButtonText: this.args.campaign.customResultPageButtonText,
+      customResultPageButtonUrl: this.args.campaign.customResultPageButtonUrl,
+      multipleSendings: this.args.campaign.multipleSendings,
+      isForAbsoluteNovice: this.args.campaign.isForAbsoluteNovice,
+    });
 
     this.displayIsForAbsoluteNoviceWarning = this.args.campaign.isForAbsoluteNovice;
   }

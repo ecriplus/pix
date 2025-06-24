@@ -27,7 +27,6 @@ export default class OrganizationInformationSectionEditionMode extends Component
 
   constructor() {
     super(...arguments);
-    this.form = this.store.createRecord('organization-form');
     this._initForm();
   }
 
@@ -90,7 +89,6 @@ export default class OrganizationInformationSectionEditionMode extends Component
     this.args.organization.set('credit', this.form.credit);
     this.args.organization.set('documentationUrl', this.form.documentationUrl);
     this.args.organization.set('identityProviderForCampaigns', this.form.identityProviderForCampaigns);
-
     this.args.organization.set('features', this.form.features);
 
     this.closeAndResetForm();
@@ -98,19 +96,20 @@ export default class OrganizationInformationSectionEditionMode extends Component
   }
 
   _initForm() {
-    this.form.name = this.args.organization.name;
-    this.form.externalId = this.args.organization.externalId;
-    this.form.provinceCode = this.args.organization.provinceCode;
-    this.form.dataProtectionOfficerFirstName = this.args.organization.dataProtectionOfficerFirstName;
-    this.form.dataProtectionOfficerLastName = this.args.organization.dataProtectionOfficerLastName;
-    this.form.dataProtectionOfficerEmail = this.args.organization.dataProtectionOfficerEmail;
-    this.form.email = this.args.organization.email;
-    this.form.credit = this.args.organization.credit;
-    this.form.documentationUrl = this.args.organization.documentationUrl;
-    this.form.identityProviderForCampaigns =
-      this.args.organization.identityProviderForCampaigns ?? this.noIdentityProviderOption.value;
-
-    this.form.features = structuredClone(this.args.organization.features);
+    this.form = this.store.createRecord('organization-form', {
+      name: this.args.organization.name,
+      externalId: this.args.organization.externalId,
+      provinceCode: this.args.organization.provinceCode,
+      dataProtectionOfficerFirstName: this.args.organization.dataProtectionOfficerFirstName,
+      dataProtectionOfficerLastName: this.args.organization.dataProtectionOfficerLastName,
+      dataProtectionOfficerEmail: this.args.organization.dataProtectionOfficerEmail,
+      email: this.args.organization.email,
+      credit: this.args.organization.credit,
+      documentationUrl: this.args.organization.documentationUrl,
+      identityProviderForCampaigns:
+        this.args.organization.identityProviderForCampaigns ?? this.noIdentityProviderOption.value,
+      features: structuredClone(this.args.organization.features),
+    });
   }
 
   <template>
