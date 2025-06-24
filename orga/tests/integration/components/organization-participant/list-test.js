@@ -263,6 +263,40 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
   });
 
   module('filtering cases', function () {
+    test('it should display the students number', async function (assert) {
+      // given
+      this.set('participants', [
+        {
+          lastName: 'La Terreur',
+          firstName: 'Gigi',
+          id: 34,
+        },
+        {
+          lastName: 'Terreur',
+          firstName: 'Gi',
+          id: 33,
+        },
+      ]);
+      this.set('participants.meta', {
+        rowCount: 2,
+      });
+      this.set('certificabilityFilter', []);
+      this.set('fullNameFilter', null);
+
+      // when
+      const screen = await render(
+        hbs`<OrganizationParticipant::List
+  @participants={{this.participants}}
+  @triggerFiltering={{this.noop}}
+  @onClickLearner={{this.noop}}
+  @fullName={{this.fullNameFilter}}
+  @certificabilityFilter={{this.certificabilityFilter}}
+/>`,
+      );
+
+      // then
+      assert.ok(screen.getByText(t('pages.organization-participants.filters.participations-count', { count: 2 })));
+    });
     test('it should display the filter labels', async function (assert) {
       // given
       this.set('participants', []);
