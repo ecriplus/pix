@@ -70,7 +70,7 @@ export async function fromLLMResponse({ llmResponse, onLLMResponseReceived, shou
 }
 
 function getAttachmentEventMessage() {
-  return 'event: attachment\ndata:\n\n';
+  return 'event: attachment\ndata: \n\n';
 }
 
 function emptyReadable() {

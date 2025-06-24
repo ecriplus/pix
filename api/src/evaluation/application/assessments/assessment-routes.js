@@ -69,7 +69,8 @@ const register = async function (server) {
             chatId: Joi.string().required(),
           }).required(),
           payload: Joi.object({
-            prompt: Joi.string().required(),
+            prompt: Joi.string().optional().allow('', null),
+            attachmentName: Joi.string().optional().allow('', null),
           }).required(),
           options: {
             allowUnknown: true,

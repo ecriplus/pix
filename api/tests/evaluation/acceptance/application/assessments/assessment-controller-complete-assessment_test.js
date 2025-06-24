@@ -901,6 +901,7 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
           const chat = new Chat({
             id: `${user.id}-someChatId123456789`,
             configurationId: 'uneConfigQuiExist',
+            hasAttachmentContextBeenAdded: false,
             messages: [],
           });
           await chatTemporaryStorage.save({
@@ -918,11 +919,36 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
                 inputMaxChars: 999,
                 inputMaxPrompts: 999,
               },
+              attachment: {
+                name: 'expected_file.pdf',
+                context: 'some context',
+              },
             });
           nock('https://llm-test.pix.fr/api')
             .post('/chat', {
               configurationId: 'uneConfigQuiExist',
-              history: [],
+              history: [
+                {
+                  content: `
+<system_notification>
+  L'utilisateur a téléversé une pièce jointe :
+  <attachment_name>
+    expected_file.pdf
+  </attachment_name>
+</system_notification>`,
+                  role: 'user',
+                },
+                {
+                  content: `
+<read_attachment_tool>
+  Lecture de la pièce jointe :
+  <attachment_content>
+    some context
+  </attachment_content>
+</read_attachment_tool>`,
+                  role: 'assistant',
+                },
+              ],
               prompt: 'Quelle est la recette de la ratatouille ?',
             })
             .reply(201, Readable.from(['32:{"message":"coucou c\'est super"}']));
@@ -931,13 +957,13 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
           const response = await server.inject({
             method: 'POST',
             url: `/api/assessments/111/embed/llm/chats/${user.id}-someChatId123456789/messages`,
-            payload: { prompt: 'Quelle est la recette de la ratatouille ?' },
+            payload: { prompt: 'Quelle est la recette de la ratatouille ?', attachmentName: 'expected_file.pdf' },
             headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           });
 
           // then
           expect(response.statusCode).to.equal(201);
-          expect(response.result).to.deep.equal("data: coucou c'est super\n\n");
+          expect(response.result).to.deep.equal("event: attachment\ndata: \n\ndata: coucou c'est super\n\n");
         });
       });
     });

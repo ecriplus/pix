@@ -166,6 +166,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         const chat = new Chat({
           id: 'chatId',
           configurationId: 'uneConfigQuiExist',
+          hasAttachmentContextBeenAdded: false,
           messages: [],
         });
         await chatTemporaryStorage.save({
@@ -189,6 +190,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         const chat = new Chat({
           id: '123456-chatId',
           configurationId: 'uneConfigQuiExist',
+          hasAttachmentContextBeenAdded: false,
           messages: [],
         });
         await chatTemporaryStorage.save({
@@ -212,6 +214,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         const chat = new Chat({
           id: '123-chatId',
           configurationId: 'uneConfigQuiExist',
+          hasAttachmentContextBeenAdded: false,
           messages: [],
         });
         await chatTemporaryStorage.save({
@@ -247,6 +250,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         const chat = new Chat({
           id: '123-chatId',
           configurationId: 'uneConfigQuiExist',
+          hasAttachmentContextBeenAdded: false,
           messages: [
             new Message({ content: 'coucou LLM1', isFromUser: false }),
             new Message({ content: 'coucou LLM2', isFromUser: false }),
@@ -301,6 +305,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         const chat = new Chat({
           id: '123-chatId',
           configurationId: 'uneConfigQuiExist',
+          hasAttachmentContextBeenAdded: false,
           messages: [
             new Message({ content: 'coucou user1', isFromUser: true }),
             new Message({ content: 'coucou LLM2', isFromUser: false }),
@@ -342,6 +347,7 @@ describe('LLM | Integration | Application | API | llm', function () {
             const chat = new Chat({
               id: '123-chatId',
               configurationId: 'uneConfigQuiExist',
+              hasAttachmentContextBeenAdded: false,
               messages: [
                 new Message({ content: 'coucou user1', isFromUser: true }),
                 new Message({ content: 'coucou LLM1', isFromUser: false }),
@@ -402,6 +408,7 @@ describe('LLM | Integration | Application | API | llm', function () {
             expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
               id: '123-chatId',
               configurationId: 'uneConfigQuiExist',
+              hasAttachmentContextBeenAdded: false,
               messages: [
                 { content: 'coucou user1', isFromUser: true },
                 { content: 'coucou LLM1', isFromUser: false },
@@ -423,6 +430,7 @@ describe('LLM | Integration | Application | API | llm', function () {
               const chat = new Chat({
                 id: '123-chatId',
                 configurationId: 'uneConfigQuiExist',
+                hasAttachmentContextBeenAdded: false,
                 messages: [
                   new Message({ content: 'coucou user1', isFromUser: true }),
                   new Message({ content: 'coucou LLM2', isFromUser: false }),
@@ -471,6 +479,7 @@ describe('LLM | Integration | Application | API | llm', function () {
                 const chat = new Chat({
                   id: '123-chatId',
                   configurationId: 'uneConfigQuiExist',
+                  hasAttachmentContextBeenAdded: false,
                   messages: [
                     new Message({ content: 'coucou user1', isFromUser: true }),
                     new Message({ content: 'coucou LLM1', isFromUser: false }),
@@ -529,13 +538,14 @@ describe('LLM | Integration | Application | API | llm', function () {
                   parts.push(decoder.decode(chunk));
                 }
                 const llmResponse = parts.join('');
-                const attachmentMessage = 'event: attachment\ndata:\n\n';
+                const attachmentMessage = 'event: attachment\ndata: \n\n';
                 const llmMessage =
                   "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n";
                 expect(llmResponse).to.deep.equal(attachmentMessage + llmMessage);
                 expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
                   id: '123-chatId',
                   configurationId: 'uneConfigQuiExist',
+                  hasAttachmentContextBeenAdded: false,
                   messages: [
                     { content: 'coucou user1', isFromUser: true },
                     { content: 'coucou LLM1', isFromUser: false },
@@ -642,7 +652,7 @@ describe('LLM | Integration | Application | API | llm', function () {
                     parts.push(decoder.decode(chunk));
                   }
                   const llmResponse = parts.join('');
-                  const attachmentMessage = 'event: attachment\ndata:\n\n';
+                  const attachmentMessage = 'event: attachment\ndata: \n\n';
                   const llmMessage =
                     "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n";
                   expect(llmResponse).to.deep.equal(attachmentMessage + llmMessage);
@@ -753,7 +763,7 @@ describe('LLM | Integration | Application | API | llm', function () {
                     parts.push(decoder.decode(chunk));
                   }
                   const llmResponse = parts.join('');
-                  const attachmentMessage = 'event: attachment\ndata:\n\n';
+                  const attachmentMessage = 'event: attachment\ndata: \n\n';
                   const llmMessage =
                     "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n";
                   expect(llmResponse).to.deep.equal(attachmentMessage + llmMessage);
@@ -795,6 +805,7 @@ describe('LLM | Integration | Application | API | llm', function () {
             const chat = new Chat({
               id: '123-chatId',
               configurationId: 'uneConfigQuiExist',
+              hasAttachmentContextBeenAdded: false,
               messages: [
                 new Message({ content: 'coucou user1', isFromUser: true }),
                 new Message({ content: 'coucou LLM2', isFromUser: false }),
@@ -838,6 +849,7 @@ describe('LLM | Integration | Application | API | llm', function () {
               const chat = new Chat({
                 id: '123-chatId',
                 configurationId: 'uneConfigQuiExist',
+                hasAttachmentContextBeenAdded: false,
                 messages: [
                   new Message({ content: 'coucou user1', isFromUser: true }),
                   new Message({ content: 'coucou LLM2', isFromUser: false }),
@@ -886,6 +898,7 @@ describe('LLM | Integration | Application | API | llm', function () {
                 const chat = new Chat({
                   id: '123-chatId',
                   configurationId: 'uneConfigQuiExist',
+                  hasAttachmentContextBeenAdded: false,
                   messages: [
                     new Message({ content: 'coucou user1', isFromUser: true }),
                     new Message({ content: 'coucou LLM1', isFromUser: false }),
@@ -927,10 +940,11 @@ describe('LLM | Integration | Application | API | llm', function () {
                   parts.push(decoder.decode(chunk));
                 }
                 const llmResponse = parts.join('');
-                expect(llmResponse).to.deep.equal('event: attachment\ndata:\n\n');
+                expect(llmResponse).to.deep.equal('event: attachment\ndata: \n\n');
                 expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
                   id: '123-chatId',
                   configurationId: 'uneConfigQuiExist',
+                  hasAttachmentContextBeenAdded: false,
                   messages: [
                     { content: 'coucou user1', isFromUser: true },
                     { content: 'coucou LLM1', isFromUser: false },
@@ -1003,7 +1017,7 @@ describe('LLM | Integration | Application | API | llm', function () {
                     parts.push(decoder.decode(chunk));
                   }
                   const llmResponse = parts.join('');
-                  expect(llmResponse).to.deep.equal('event: attachment\ndata:\n\n');
+                  expect(llmResponse).to.deep.equal('event: attachment\ndata: \n\n');
                   expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
                     id: '123-chatId',
                     configurationId: 'uneConfigQuiExist',
@@ -1079,7 +1093,7 @@ describe('LLM | Integration | Application | API | llm', function () {
                     parts.push(decoder.decode(chunk));
                   }
                   const llmResponse = parts.join('');
-                  expect(llmResponse).to.deep.equal('event: attachment\ndata:\n\n');
+                  expect(llmResponse).to.deep.equal('event: attachment\ndata: \n\n');
                   expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
                     id: '123-chatId',
                     configurationId: 'uneConfigQuiExist',

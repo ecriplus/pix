@@ -17,6 +17,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
       const chat = new Chat({
         id: 'someChatId',
         configurationId: 'someConfigurationId',
+        hasAttachmentContextBeenAdded: false,
         messages: [
           new Message({ content: 'je suis user', isFromUser: true }),
           new Message({ content: 'je suis LLM', isFromUser: false }),
@@ -30,6 +31,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
       expect(await chatTemporaryStorage.get('someChatId')).to.deep.equal({
         id: 'someChatId',
         configurationId: 'someConfigurationId',
+        hasAttachmentContextBeenAdded: false,
         messages: [
           { content: 'je suis user', isFromUser: true },
           { content: 'je suis LLM', isFromUser: false },
@@ -50,6 +52,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           const chat = new Chat({
             id: 'someChatId',
             configurationId: 'someConfigurationId',
+            hasAttachmentContextBeenAdded: false,
             messages: [
               new Message({ content: 'je suis user', isFromUser: true }),
               new Message({ content: 'je suis LLM', isFromUser: false }),
@@ -73,6 +76,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         const chat = new Chat({
           id: 'someChatId',
           configurationId: 'someConfigurationId',
+          hasAttachmentContextBeenAdded: false,
           messages: [
             new Message({ content: 'je suis user', isFromUser: true }),
             new Message({ content: 'je suis LLM', isFromUser: false }),
