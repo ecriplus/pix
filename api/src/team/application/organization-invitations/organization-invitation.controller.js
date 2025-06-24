@@ -109,12 +109,10 @@ const sendInvitations = async function (request, h) {
 const resendInvitation = async function (request, h) {
   const organizationId = request.params.id;
   const email = request.payload.data.attributes.email;
-  const locale = extractLocaleFromRequest(request);
 
   const organizationInvitation = await usecases.resendOrganizationInvitation({
     organizationId,
     email,
-    locale,
   });
   return h.response(organizationInvitationSerializer.serialize(organizationInvitation));
 };

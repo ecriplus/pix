@@ -1,17 +1,15 @@
 const resendOrganizationInvitation = async function ({
-  organizationId,
   email,
-  locale,
+  organizationId,
   organizationRepository,
   organizationInvitationRepository,
   organizationInvitationService,
 }) {
   return organizationInvitationService.createOrUpdateOrganizationInvitation({
+    email,
+    organizationId,
     organizationRepository,
     organizationInvitationRepository,
-    organizationId,
-    email,
-    locale,
   });
 };
 
