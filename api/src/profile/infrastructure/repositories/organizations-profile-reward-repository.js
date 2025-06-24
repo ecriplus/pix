@@ -13,6 +13,13 @@ export const save = async ({ organizationId, profileRewardId }) => {
     .ignore();
 };
 
+export const remove = async ({ organizationId, profileRewardId }) => {
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn(ORGANIZATIONS_PROFILE_REWARDS_TABLE_NAME)
+    .update({ profileRewardId: null })
+    .where({ organizationId, profileRewardId });
+};
+
 export const getByOrganizationId = async ({ attestationKey, organizationId }) => {
   const knexConn = DomainTransaction.getConnection();
   const query = knexConn('organizations-profile-rewards')
