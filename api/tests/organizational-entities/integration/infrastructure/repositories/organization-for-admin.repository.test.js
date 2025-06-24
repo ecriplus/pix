@@ -1,9 +1,10 @@
 import _ from 'lodash';
 
 import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
-import { organizationForAdminRepository } from '../../../../../src/organizational-entities/infrastructure/repositories/organization-for-admin.repository.js';
+import { repositories } from '../../../../../src/organizational-entities/infrastructure/repositories/index.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { MissingAttributesError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
 import {
   catchErr,
@@ -43,7 +44,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
         // when
         const { models: matchingOrganizations, pagination } =
-          await organizationForAdminRepository.findPaginatedFiltered({
+          await repositories.organizationForAdminRepository.findPaginatedFiltered({
             filter,
             page,
           });
@@ -70,7 +71,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
         // when
         const { models: matchingOrganizations, pagination } =
-          await organizationForAdminRepository.findPaginatedFiltered({
+          await repositories.organizationForAdminRepository.findPaginatedFiltered({
             filter,
             page,
           });
@@ -97,7 +98,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
         // when
         const { models: matchingOrganizations, pagination } =
-          await organizationForAdminRepository.findPaginatedFiltered({
+          await repositories.organizationForAdminRepository.findPaginatedFiltered({
             filter,
             page,
           });
@@ -126,7 +127,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
         // when
         const { models: matchingOrganizations, pagination } =
-          await organizationForAdminRepository.findPaginatedFiltered({
+          await repositories.organizationForAdminRepository.findPaginatedFiltered({
             filter,
             page,
           });
@@ -156,7 +157,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
         // when
         const { models: matchingOrganizations, pagination } =
-          await organizationForAdminRepository.findPaginatedFiltered({
+          await repositories.organizationForAdminRepository.findPaginatedFiltered({
             filter,
             page,
           });
@@ -174,7 +175,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
         // when
         const { models: matchingOrganizations, pagination } =
-          await organizationForAdminRepository.findPaginatedFiltered({
+          await repositories.organizationForAdminRepository.findPaginatedFiltered({
             filter,
             page,
           });
@@ -202,7 +203,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
         // when
         const { models: matchingOrganizations, pagination } =
-          await organizationForAdminRepository.findPaginatedFiltered({
+          await repositories.organizationForAdminRepository.findPaginatedFiltered({
             filter,
             page,
           });
@@ -237,7 +238,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
           // when
           const { models: matchingOrganizations, pagination } =
-            await organizationForAdminRepository.findPaginatedFiltered({
+            await repositories.organizationForAdminRepository.findPaginatedFiltered({
               filter,
               page,
             });
@@ -267,7 +268,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
         // when
         const { models: matchingOrganizations, pagination } =
-          await organizationForAdminRepository.findPaginatedFiltered({
+          await repositories.organizationForAdminRepository.findPaginatedFiltered({
             filter,
             page,
           });
@@ -294,7 +295,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
         // when
         const { models: matchingOrganizations, pagination } =
-          await organizationForAdminRepository.findPaginatedFiltered({
+          await repositories.organizationForAdminRepository.findPaginatedFiltered({
             filter,
             page,
           });
@@ -330,7 +331,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         await databaseBuilder.commit();
 
         // when
-        await organizationForAdminRepository.archive({
+        await repositories.organizationForAdminRepository.archive({
           id: organizationId,
           archivedBy: superAdminUserId,
         });
@@ -362,35 +363,134 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         expect(acceptedInvitations).to.have.lengthOf(1);
       });
 
-      it('should archive active campaigns of a given organization', async function () {
-        // given
-        const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
-        const previousDate = new Date('2021-01-01');
-        const organizationId = 1;
-        databaseBuilder.factory.buildOrganization({ id: organizationId });
+      context('when flag isAnonymizationWithDeletionEnabled is false', function () {
+        it('should archive active campaigns of a given organization', async function () {
+          // given
+          await featureToggles.set('isAnonymizationWithDeletionEnabled', false);
+          const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
+          const previousDate = new Date('2021-01-01');
+          const organizationId = 1;
+          databaseBuilder.factory.buildOrganization({ id: organizationId });
 
-        databaseBuilder.factory.buildCampaign({ id: 1, organizationId });
-        databaseBuilder.factory.buildCampaign({ id: 2, organizationId });
-        databaseBuilder.factory.buildCampaign({ organizationId, archivedAt: previousDate });
+          databaseBuilder.factory.buildCampaign({ id: 1, organizationId });
+          databaseBuilder.factory.buildCampaign({ id: 2, organizationId });
+          databaseBuilder.factory.buildCampaign({ organizationId, archivedAt: previousDate });
 
-        await databaseBuilder.commit();
+          await databaseBuilder.commit();
 
-        // when
-        await organizationForAdminRepository.archive({ id: organizationId, archivedBy: superAdminUserId });
+          // when
+          await repositories.organizationForAdminRepository.archive({
+            id: organizationId,
+            archivedBy: superAdminUserId,
+          });
 
-        // then
-        const activeCampaigns = await knex('campaigns').where({
-          archivedAt: null,
+          // then
+          const activeCampaigns = await knex('campaigns').where({
+            archivedAt: null,
+          });
+          expect(activeCampaigns).to.have.lengthOf(0);
+
+          const newlyArchivedCampaigns = await knex('campaigns').where({ archivedAt: now });
+          expect(newlyArchivedCampaigns).to.have.lengthOf(2);
+
+          const previousArchivedCampaigns = await knex('campaigns').where({ archivedAt: previousDate });
+          expect(previousArchivedCampaigns).to.have.lengthOf(1);
         });
-        expect(activeCampaigns).to.have.lengthOf(0);
-
-        const newlyArchivedCampaigns = await knex('campaigns').where({ archivedAt: now });
-        expect(newlyArchivedCampaigns).to.have.lengthOf(2);
-
-        const previousArchivedCampaigns = await knex('campaigns').where({ archivedAt: previousDate });
-        expect(previousArchivedCampaigns).to.have.lengthOf(1);
       });
 
+      context('when flag isAnonymizationWithDeletionEnabled is true', function () {
+        it('should delete active campaigns of a given organization', async function () {
+          // given
+          await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
+          const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
+          const previousDate = new Date('2021-01-01');
+          const organizationId = 1;
+          databaseBuilder.factory.buildOrganization({ id: organizationId });
+
+          databaseBuilder.factory.buildCampaign({ id: 1, organizationId });
+          databaseBuilder.factory.buildCampaign({ id: 2, organizationId });
+          databaseBuilder.factory.buildCampaign({ id: 3, organizationId, archivedAt: previousDate });
+          databaseBuilder.factory.buildCampaign({ id: 4, organizationId, deletedAt: previousDate });
+
+          await databaseBuilder.commit();
+
+          // when
+          await repositories.organizationForAdminRepository.archive({
+            id: organizationId,
+            archivedBy: superAdminUserId,
+          });
+
+          // then
+          const activeCampaigns = await knex('campaigns').whereNull('deletedAt');
+          expect(activeCampaigns).to.have.lengthOf(0);
+          const newlyArchivedCampaigns = await knex('campaigns').where({ deletedAt: now });
+          expect(newlyArchivedCampaigns).to.have.lengthOf(3);
+
+          const previousDeletedCampaigns = await knex('campaigns').where({ archivedAt: previousDate });
+          expect(previousDeletedCampaigns).to.have.lengthOf(1);
+        });
+        it('should delete organization learners', async function () {
+          // given
+          await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
+          const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
+          const previousDate = new Date('2021-01-01');
+          const organizationId = 1;
+          databaseBuilder.factory.buildOrganization({ id: organizationId });
+          databaseBuilder.factory.buildCampaign({ id: 1, organizationId });
+          databaseBuilder.factory.buildOrganizationLearner({ organizationId });
+          databaseBuilder.factory.buildOrganizationLearner({ organizationId });
+          databaseBuilder.factory.buildOrganizationLearner({ organizationId, deletedAt: previousDate });
+
+          await databaseBuilder.commit();
+
+          // when
+          await repositories.organizationForAdminRepository.archive({
+            id: organizationId,
+            archivedBy: superAdminUserId,
+          });
+
+          // then
+          const activeLearners = await knex('organization-learners').whereNull('deletedAt');
+          expect(activeLearners).to.have.lengthOf(0);
+          const deletedLearners = await knex('organization-learners').where({ deletedAt: now });
+          expect(deletedLearners).to.have.lengthOf(2);
+
+          const previousDeletedLearners = await knex('organization-learners').where({ deletedAt: previousDate });
+          expect(previousDeletedLearners).to.have.lengthOf(1);
+        });
+
+        it('#should delete campaign-participations', async function () {
+          // given
+          await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
+          const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
+          const previousDate = new Date('2021-01-01');
+          const organizationId = 1;
+          databaseBuilder.factory.buildOrganization({ id: organizationId });
+          const campaign = databaseBuilder.factory.buildCampaign({ id: 1, organizationId });
+          databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaign.id });
+          databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaign.id });
+          databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaign.id, deletedAt: previousDate });
+
+          await databaseBuilder.commit();
+
+          // when
+          await repositories.organizationForAdminRepository.archive({
+            id: organizationId,
+            archivedBy: superAdminUserId,
+          });
+
+          // then
+          const activeParticipations = await knex('campaign-participations').whereNull('deletedAt');
+          expect(activeParticipations).to.have.lengthOf(0);
+          const deletedParticipations = await knex('campaign-participations').where({ deletedAt: now });
+          expect(deletedParticipations).to.have.lengthOf(2);
+
+          const previousDeletedParticipations = await knex('campaign-participations').where({
+            deletedAt: previousDate,
+          });
+          expect(previousDeletedParticipations).to.have.lengthOf(1);
+        });
+      });
       it('should disable active members of a given organization', async function () {
         // given
         const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
@@ -408,7 +508,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         await databaseBuilder.commit();
 
         // when
-        await organizationForAdminRepository.archive({ id: organizationId, archivedBy: superAdminUserId });
+        await repositories.organizationForAdminRepository.archive({ id: organizationId, archivedBy: superAdminUserId });
 
         // then
         const activeMembers = await knex('memberships').where({ disabledAt: null });
@@ -431,7 +531,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         await databaseBuilder.commit();
 
         // when
-        await organizationForAdminRepository.archive({ id: organizationId, archivedBy: superAdminUserId });
+        await repositories.organizationForAdminRepository.archive({ id: organizationId, archivedBy: superAdminUserId });
 
         // then
         const archivedOrganization = await knex('organizations').where({ id: organizationId }).first();
@@ -450,7 +550,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         const nonExistingOrganizationId = 1;
 
         // when
-        const error = await catchErr(organizationForAdminRepository.archive)({
+        const error = await catchErr(repositories.organizationForAdminRepository.archive)({
           id: nonExistingOrganizationId,
           archivedBy: 123,
         });
@@ -470,7 +570,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         await databaseBuilder.commit();
 
         // when
-        const error = await catchErr(organizationForAdminRepository.archive)({ id: organizationId });
+        const error = await catchErr(repositories.organizationForAdminRepository.archive)({ id: organizationId });
 
         // then
         expect(error).to.be.instanceOf(MissingAttributesError);
@@ -487,7 +587,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         await databaseBuilder.commit();
 
         // when
-        const result = await organizationForAdminRepository.exist({ organizationId });
+        const result = await repositories.organizationForAdminRepository.exist({ organizationId });
 
         // then
         expect(result).to.be.true;
@@ -500,7 +600,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         const organizationId = 1234;
 
         // when
-        const result = await organizationForAdminRepository.exist({ organizationId });
+        const result = await repositories.organizationForAdminRepository.exist({ organizationId });
 
         // then
         expect(result).to.be.false;
@@ -523,7 +623,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       it('returns an empty array', async function () {
         //given
         //when
-        const children = await organizationForAdminRepository.findChildrenByParentOrganizationId({
+        const children = await repositories.organizationForAdminRepository.findChildrenByParentOrganizationId({
           parentOrganizationId,
         });
 
@@ -544,7 +644,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         await databaseBuilder.commit();
 
         // when
-        const children = await organizationForAdminRepository.findChildrenByParentOrganizationId({
+        const children = await repositories.organizationForAdminRepository.findChildrenByParentOrganizationId({
           parentOrganizationId,
         });
 
@@ -612,7 +712,9 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       await databaseBuilder.commit();
 
       // when
-      const foundOrganizationForAdmin = await organizationForAdminRepository.get({ organizationId: organization.id });
+      const foundOrganizationForAdmin = await repositories.organizationForAdminRepository.get({
+        organizationId: organization.id,
+      });
 
       // then
       const expectedOrganizationForAdmin = new OrganizationForAdmin({
@@ -659,7 +761,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       const nonExistentId = 10083;
 
       // when
-      const error = await catchErr(organizationForAdminRepository.get)({ organizationId: nonExistentId });
+      const error = await catchErr(repositories.organizationForAdminRepository.get)({ organizationId: nonExistentId });
 
       // then
       expect(error).to.be.an.instanceof(NotFoundError);
@@ -703,7 +805,9 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         await databaseBuilder.commit();
 
         // when
-        const foundOrganizationForAdmin = await organizationForAdminRepository.get({ organizationId: organization.id });
+        const foundOrganizationForAdmin = await repositories.organizationForAdminRepository.get({
+          organizationId: organization.id,
+        });
 
         // then
         const expectedOrganizationForAdmin = new OrganizationForAdmin({
@@ -764,7 +868,9 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         await databaseBuilder.commit();
 
         // when
-        const organization = await organizationForAdminRepository.get({ organizationId: insertedOrganization.id });
+        const organization = await repositories.organizationForAdminRepository.get({
+          organizationId: insertedOrganization.id,
+        });
 
         // then
         const expectedTags = [domainBuilder.buildTag({ ...tag1 }), domainBuilder.buildTag({ ...tag2 })];
@@ -802,7 +908,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         await databaseBuilder.commit();
 
         // when
-        const foundOrganizationForAdmin = await organizationForAdminRepository.get({
+        const foundOrganizationForAdmin = await repositories.organizationForAdminRepository.get({
           organizationId: insertedOrganization.id,
         });
 
@@ -860,7 +966,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       });
 
       // when
-      const savedOrganization = await organizationForAdminRepository.save({ organization });
+      const savedOrganization = await repositories.organizationForAdminRepository.save({ organization });
 
       // then
       expect(savedOrganization).to.be.instanceOf(OrganizationForAdmin);
@@ -892,7 +998,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           createdBy: superAdminUserId,
         });
 
-        const savedOrganization = await organizationForAdminRepository.save({ organization });
+        const savedOrganization = await repositories.organizationForAdminRepository.save({ organization });
 
         const savedOrganizationFeatures = await knex('organization-features')
           .where({
@@ -933,7 +1039,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
       // when
       childOrganizationForAdmin.parentOrganizationId = parentOrganizationId;
-      await organizationForAdminRepository.update({ organization: childOrganizationForAdmin });
+      await repositories.organizationForAdminRepository.update({ organization: childOrganizationForAdmin });
 
       // then
       const updatedOrganization = await knex('organizations').where({ id: childOrganization.id }).first();
@@ -960,7 +1066,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           [ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT.key]: { active: true },
         },
       });
-      await organizationForAdminRepository.update({ organization: organizationToUpdate });
+      await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
 
       // then
       const enabledFeatures = await knex('organization-features')
@@ -992,7 +1098,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         },
       });
 
-      await organizationForAdminRepository.update({ organization: organizationToUpdate });
+      await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
 
       // then
       const enabledFeatures = await knex('organization-features')
@@ -1029,7 +1135,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           [ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT.key]: { active: false },
         },
       });
-      await organizationForAdminRepository.update({ organization: organizationToUpdate });
+      await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
 
       //then
       const enabledFeatures = await knex('organization-features').whereNot({ featureId: byDefaultFeatureId });
@@ -1055,7 +1161,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
         },
       });
-      await organizationForAdminRepository.update({ organization: organizationToUpdate });
+      await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
 
       //then
       const enabledFeatures = await knex('organization-features');
@@ -1080,7 +1186,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         dataProtectionOfficerFirstName: 'Iron',
         dataProtectionOfficerLastName: 'Man',
       });
-      await organizationForAdminRepository.update({ organization: organizationToUpdate });
+      await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
 
       // then
       const dataProtectionOfficerCreated = await knex('data-protection-officers')
@@ -1118,7 +1224,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         dataProtectionOfficerFirstName: 'Iron',
         dataProtectionOfficerLastName: 'Man',
       });
-      await organizationForAdminRepository.update({ organization: organizationToUpdate });
+      await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
 
       // then
       const dataProtectionOfficerUpdated = await knex('data-protection-officers')
@@ -1150,7 +1256,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       });
 
       organizationToUpdate.tagsToAdd = tagsToAdd;
-      await organizationForAdminRepository.update({ organization: organizationToUpdate });
+      await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
 
       // then
       const addedTags = await knex('organization-tags').select('tagId', 'organizationId').where({ organizationId });
@@ -1172,7 +1278,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       });
 
       organizationToUpdate.tagsToAdd = tagsToAdd;
-      await organizationForAdminRepository.update({ organization: organizationToUpdate });
+      await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
 
       // then
       const addedTags = await knex('organization-tags').where({ organizationId });
@@ -1200,7 +1306,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       });
 
       organizationToUpdate.tagsToRemove = tagsToRemove;
-      await organizationForAdminRepository.update({ organization: organizationToUpdate });
+      await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
 
       // then
       const result = await knex('organization-tags').where({ organizationId });
@@ -1214,7 +1320,9 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       const { count: nbOrganizationsBeforeUpdate } = await knex('organizations').count('*').first();
 
       // when
-      await organizationForAdminRepository.update({ organization: new OrganizationForAdmin(organization) });
+      await repositories.organizationForAdminRepository.update({
+        organization: new OrganizationForAdmin(organization),
+      });
 
       // then
       const { count: nbOrganizationsAfterUpdate } = await knex('organizations').count('*').first();

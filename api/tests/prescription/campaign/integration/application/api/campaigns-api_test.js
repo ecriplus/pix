@@ -1,3 +1,4 @@
+import { PIX_ADMIN } from '../../../../../../src/authorization/domain/constants.js';
 import * as campaignApi from '../../../../../../src/prescription/campaign/application/api/campaigns-api.js';
 import { CampaignParticipation } from '../../../../../../src/prescription/campaign/application/api/models/CampaignParticipation.js';
 import {
@@ -6,7 +7,7 @@ import {
 } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { KnowledgeElement } from '../../../../../../src/shared/domain/models/index.js';
-import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Integration | Application | campaign-api', function () {
   describe('#findAllForOrganization', function () {
@@ -147,6 +148,67 @@ describe('Integration | Application | campaign-api', function () {
         pageSize: 2,
         rowCount: 2,
       });
+    });
+  });
+
+  describe('#deleteCampaigns', function () {
+    it('should delete campaigns and participations', async function () {
+      const admin = databaseBuilder.factory.buildUser();
+
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      databaseBuilder.factory.buildPixAdminRole({ userId: admin.id, role: PIX_ADMIN.ROLES.SUPPORT });
+
+      const campaignId = databaseBuilder.factory.buildCampaign({
+        id: 123,
+        organizationId,
+        deletedAt: null,
+        deletedBy: null,
+      }).id;
+      databaseBuilder.factory.buildCampaign({
+        id: 234,
+        organizationId,
+      });
+      databaseBuilder.factory.buildCampaign();
+
+      const learner = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId,
+        firstName: 'jacqueline',
+        lastName: 'Colson',
+        birthdate: new Date('2001-02-03'),
+      });
+      databaseBuilder.factory.buildOrganizationLearner({ organizationId });
+
+      databaseBuilder.factory.buildCampaignParticipation({
+        campaignId,
+        organizationLearnerId: learner.id,
+        userId: learner.userId,
+        participantExternalId: 'jacquelineColson@hollywood.net',
+        deletedAt: null,
+        deleteBy: null,
+        isImproved: true,
+      });
+
+      databaseBuilder.factory.buildCampaignParticipation({
+        campaignId,
+        organizationLearnerId: learner.id,
+        userId: learner.userId,
+        participantExternalId: 'jacquelineColson@hollywood.net',
+        deletedAt: null,
+        deleteBy: null,
+        improved: false,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      await campaignApi.deleteActiveCampaigns({ userId: admin.id, organizationId, page: { size: 1 } });
+
+      // then
+      const deletedCampaigns = await knex('campaigns').whereNotNull('deletedAt');
+      expect(deletedCampaigns).length(2);
+
+      const deletedParticipations = await knex('campaign-participations').whereNotNull('deletedAt');
+      expect(deletedParticipations).length(2);
     });
   });
 });

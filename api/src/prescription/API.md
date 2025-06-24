@@ -1,4 +1,4 @@
-This doc has been generated on 30/04/2025 19:35:00 with `scripts/generate-api-documentation.js`. See package.json.
+This doc has been generated on 18/06/2025 13:26:32 with `scripts/generate-api-documentation.js`. See package.json.
 
 ---
 ## Modules
@@ -19,8 +19,6 @@ This doc has been generated on 30/04/2025 19:35:00 with `scripts/generate-api-do
 ## Classes
 
 <dl>
-<dt><a href="#CampaignTubeCoverage">CampaignTubeCoverage</a></dt>
-<dd></dd>
 <dt><a href="#CampaignParticipation">CampaignParticipation</a></dt>
 <dd></dd>
 <dt><a href="#AssessmentCampaignParticipation">AssessmentCampaignParticipation</a></dt>
@@ -40,6 +38,9 @@ This doc has been generated on 30/04/2025 19:35:00 with `scripts/generate-api-do
 <dt><a href="#deleteOrganizationLearnerBeforeImportFeature">deleteOrganizationLearnerBeforeImportFeature</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
 <dd><p>delete organization learner before adding import feature</p>
 </dd>
+<dt><a href="#anonymizeByUserId">anonymizeByUserId</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
+<dd><p>Anonymize an organizationLearner and their campaignParticipations</p>
+</dd>
 </dl>
 
 ## Functions
@@ -54,11 +55,15 @@ This doc has been generated on 30/04/2025 19:35:00 with `scripts/generate-api-do
 <dl>
 <dt><a href="#CampaignListItemArgs">CampaignListItemArgs</a> : <code>object</code></dt>
 <dd></dd>
+<dt><a href="#CampaignTubeCoverageArgs">CampaignTubeCoverageArgs</a> : <code>object</code></dt>
+<dd></dd>
 <dt><a href="#CampaignParticipationArgs">CampaignParticipationArgs</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#AssessmentCampaignParticipationArgs">AssessmentCampaignParticipationArgs</a> : <code>object</code></dt>
 <dd></dd>
 <dt><a href="#ProfilesCollectionCampaignParticipationArgs">ProfilesCollectionCampaignParticipationArgs</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#TubeCoverageArgs">TubeCoverageArgs</a> : <code>Object</code></dt>
 <dd></dd>
 </dl>
 
@@ -74,6 +79,7 @@ This doc has been generated on 30/04/2025 19:35:00 with `scripts/generate-api-do
     * [~findAllForOrganization(payload)](#module_CampaignApi..findAllForOrganization) ⇒ <code>Promise.&lt;CampaignListResponse&gt;</code>
     * [~findCampaignSkillIdsForCampaignParticipations(campaignParticipationIds)](#module_CampaignApi..findCampaignSkillIdsForCampaignParticipations) ⇒ <code>Promise.&lt;Array.&lt;Number&gt;&gt;</code>
     * [~getCampaignParticipations(payload)](#module_CampaignApi..getCampaignParticipations) ⇒ <code>Promise.&lt;(Array.&lt;AssessmentCampaignParticipationAPI&gt;\|Array.&lt;ProfilesCollectionCampaignParticipationAPI&gt;)&gt;</code>
+    * [~deleteActiveCampaigns(payload)](#module_CampaignApi..deleteActiveCampaigns) ⇒ <code>Promise.&lt;void&gt;</code>
     * [~CampaignPayload](#module_CampaignApi..CampaignPayload) : <code>object</code>
     * [~UserNotAuthorizedToCreateCampaignError](#module_CampaignApi..UserNotAuthorizedToCreateCampaignError) : <code>object</code>
     * [~UpdateCampaignPayload](#module_CampaignApi..UpdateCampaignPayload) : <code>object</code>
@@ -82,6 +88,7 @@ This doc has been generated on 30/04/2025 19:35:00 with `scripts/generate-api-do
     * [~Pagination](#module_CampaignApi..Pagination) : <code>object</code>
     * [~CampaignListResponse](#module_CampaignApi..CampaignListResponse) : <code>object</code>
     * [~CampaignParticipationsPayload](#module_CampaignApi..CampaignParticipationsPayload) : <code>object</code>
+    * [~DeleteActiveCampaignPayload](#module_CampaignApi..DeleteActiveCampaignPayload) : <code>object</code>
 
 <a name="module_CampaignApi..save"></a>
 
@@ -149,6 +156,15 @@ This doc has been generated on 30/04/2025 19:35:00 with `scripts/generate-api-do
 | Param | Type |
 | --- | --- |
 | payload | <code>CampaignParticipationsPayload</code> | 
+
+<a name="module_CampaignApi..deleteActiveCampaigns"></a>
+
+### CampaignApi~deleteActiveCampaigns(payload) ⇒ <code>Promise.&lt;void&gt;</code>
+**Kind**: inner method of [<code>CampaignApi</code>](#module_CampaignApi)  
+
+| Param | Type |
+| --- | --- |
+| payload | <code>DeleteActiveCampaignPayload</code> | 
 
 <a name="module_CampaignApi..CampaignPayload"></a>
 
@@ -244,6 +260,19 @@ This doc has been generated on 30/04/2025 19:35:00 with `scripts/generate-api-do
 | Name | Type |
 | --- | --- |
 | campaignId | <code>number</code> | 
+
+<a name="module_CampaignApi..DeleteActiveCampaignPayload"></a>
+
+### CampaignApi~DeleteActiveCampaignPayload : <code>object</code>
+**Kind**: inner typedef of [<code>CampaignApi</code>](#module_CampaignApi)  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| organizationId | <code>number</code> | 
+| campaignIds | <code>Array.&lt;number&gt;</code> | 
+| userId | <code>number</code> | 
+| page | <code>PageDefinition</code> | 
 
 <a name="module_KnowledgeElementSnapshotAPI"></a>
 
@@ -559,30 +588,13 @@ Récupère les organizations-learners avec leurs participations à partir d'une 
 
 ## TubeCoverage
 **Kind**: global class  
-**Properties**
-
-| Name | Type |
-| --- | --- |
-| id | <code>string</code> | 
-| competenceId | <code>string</code> | 
-| practicalTitle | <code>string</code> | 
-| practicalDescription | <code>string</code> | 
-| maxLevel | <code>number</code> | 
-| reachedLevel | <code>number</code> | 
-
 <a name="new_TubeCoverage_new"></a>
 
 ### new TubeCoverage(args)
 
 | Param | Type |
 | --- | --- |
-| args | <code>object</code> | 
-| args.id | <code>string</code> | 
-| args.competenceId | <code>string</code> | 
-| args.practicalTitle | <code>string</code> | 
-| args.practicalDescription | <code>string</code> | 
-| args.maxLevel | <code>number</code> | 
-| args.reachedLevel | <code>number</code> | 
+| args | [<code>TubeCoverageArgs</code>](#TubeCoverageArgs) | 
 
 <a name="hasBeenLearner"></a>
 
@@ -617,6 +629,18 @@ delete organization learner before adding import feature
 | params.userId | <code>number</code> | The ID of the user wich request the action |
 | params.organizationId | <code>number</code> | The ID of the organizationId to find learner to delete |
 
+<a name="anonymizeByUserId"></a>
+
+## anonymizeByUserId ⇒ <code>Promise.&lt;void&gt;</code>
+Anonymize an organizationLearner and their campaignParticipations
+
+**Kind**: global constant  
+
+| Param | Type |
+| --- | --- |
+| params | <code>object</code> | 
+| params.userId | <code>number</code> | 
+
 <a name="hasCampaignParticipations"></a>
 
 ## hasCampaignParticipations(userId) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -641,7 +665,22 @@ delete organization learner before adding import feature
 | type | <code>string</code> | 
 | code | <code>string</code> | 
 | targetProfileName | <code>string</code> | 
-| tubes | [<code>Array.&lt;CampaignTubeCoverage&gt;</code>](#CampaignTubeCoverage) | 
+| tubes | <code>Array.&lt;CampaignTubeCoverage&gt;</code> | 
+
+<a name="CampaignTubeCoverageArgs"></a>
+
+## CampaignTubeCoverageArgs : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| id | <code>string</code> | 
+| competenceId | <code>string</code> | 
+| practicalTitle | <code>string</code> | 
+| practicalDescription | <code>string</code> | 
+| maxLevel | <code>number</code> | 
+| reachedLevel | <code>number</code> | 
 
 <a name="CampaignParticipationArgs"></a>
 
@@ -682,5 +721,20 @@ delete organization learner before adding import feature
 | Name | Type |
 | --- | --- |
 | pixScore | <code>number</code> | 
+
+<a name="TubeCoverageArgs"></a>
+
+## TubeCoverageArgs : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| id | <code>string</code> | 
+| competenceId | <code>string</code> | 
+| title | <code>string</code> | 
+| description | <code>string</code> | 
+| maxLevel | <code>number</code> | 
+| reachedLevel | <code>number</code> | 
 
 

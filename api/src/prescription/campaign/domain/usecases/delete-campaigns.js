@@ -1,4 +1,5 @@
 import { EventLoggingJob } from '../../../../identity-access-management/domain/models/jobs/EventLoggingJob.js';
+import { MembershipNotFound } from '../../../../team/application/api/errors/MembershipNotFound.js';
 import { CampaignsDestructor } from '../models/CampaignsDestructor.js';
 
 const deleteCampaigns = async ({
@@ -6,6 +7,7 @@ const deleteCampaigns = async ({
   organizationId,
   campaignIds,
   featureToggles,
+  adminMemberRepository,
   assessmentRepository,
   badgeAcquisitionRepository,
   organizationMembershipRepository,
@@ -14,7 +16,17 @@ const deleteCampaigns = async ({
   userRecommendedTrainingRepository,
   eventLoggingJobRepository,
 }) => {
-  const membership = await organizationMembershipRepository.getByUserIdAndOrganizationId({ userId, organizationId });
+  let membership;
+
+  try {
+    membership = await organizationMembershipRepository.getByUserIdAndOrganizationId({ userId, organizationId });
+  } catch (error) {
+    if (!(error instanceof MembershipNotFound)) {
+      throw error;
+    }
+  }
+  const pixAdminMember = await adminMemberRepository.get({ userId });
+
   const campaignsToDelete = await campaignAdministrationRepository.getByIds(campaignIds);
   const campaignParticipationsToDelete = await campaignParticipationRepository.getByCampaignIds(campaignIds);
 
@@ -26,6 +38,7 @@ const deleteCampaigns = async ({
     userId,
     organizationId,
     membership,
+    pixAdminRole: pixAdminMember?.role,
   });
   campaignDestructor.delete(isAnonymizationWithDeletionEnabled);
 

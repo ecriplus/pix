@@ -4,6 +4,7 @@ import { knex } from '../../../../db/knex-database-connection.js';
 import { ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { MissingAttributesError, NotFoundError } from '../../../shared/domain/errors.js';
+import { featureToggles } from '../../../shared/infrastructure/feature-toggles/index.js';
 import { fetchPage } from '../../../shared/infrastructure/utils/knex-utils.js';
 import { OrganizationInvitation } from '../../../team/domain/models/OrganizationInvitation.js';
 import { OrganizationForAdmin } from '../../domain/models/OrganizationForAdmin.js';
@@ -21,7 +22,7 @@ const ORGANIZATIONS_TABLE_NAME = 'organizations';
  * @param {string|number} params.archivedBy
  * @return {Promise<void|MissingAttributesError|NotFoundError>}
  */
-const archive = async function ({ id, archivedBy }) {
+const archive = async function ({ id, archivedBy, campaignApi, learnerApi }) {
   const organization = await knex(ORGANIZATIONS_TABLE_NAME).where({ id }).first();
   if (!organization) {
     throw new NotFoundError();
@@ -37,7 +38,16 @@ const archive = async function ({ id, archivedBy }) {
     .where({ organizationId: id, status: OrganizationInvitation.StatusType.PENDING })
     .update({ status: OrganizationInvitation.StatusType.CANCELLED, updatedAt: archiveDate });
 
-  await knex('campaigns').where({ organizationId: id, archivedAt: null }).update({ archivedAt: archiveDate });
+  const isAnonymizationWithDeletionEnabled = await featureToggles.get('isAnonymizationWithDeletionEnabled');
+  if (isAnonymizationWithDeletionEnabled) {
+    await learnerApi.deleteOrganizationLearnerBeforeImportFeature({
+      userId: archivedBy,
+      organizationId: id,
+    });
+    await campaignApi.deleteActiveCampaigns({ userId: archivedBy, organizationId: id });
+  } else {
+    await knex('campaigns').where({ organizationId: id, archivedAt: null }).update({ archivedAt: archiveDate });
+  }
 
   await knex('memberships').where({ organizationId: id, disabledAt: null }).update({ disabledAt: archiveDate });
 
