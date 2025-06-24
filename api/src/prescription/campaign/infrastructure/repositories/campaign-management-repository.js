@@ -40,6 +40,10 @@ const get = async function (campaignId) {
     .where('campaigns.id', campaignId)
     .first();
 
+  if (!campaign) {
+    return null;
+  }
+
   const externalIdFeature = await knex('campaign-features')
     .select('params')
     .join('features', 'features.id', 'featureId')

@@ -274,6 +274,16 @@ describe('Integration | Repository | Campaign-Management', function () {
         });
       });
     });
+
+    context('when the campaign does not exist', function () {
+      it('should return null', async function () {
+        // when
+        const result = await campaignManagementRepository.get(123);
+
+        // then
+        expect(result).to.be.null;
+      });
+    });
   });
 
   describe('#findPaginatedCampaignManagements', function () {
