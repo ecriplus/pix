@@ -10,13 +10,18 @@ const getCampaignParticipations = async function ({
   campaignId,
   locale,
   page,
+  since,
   campaignRepository,
   campaignParticipationRepository,
   knowledgeElementSnapshotRepository,
   learningContentRepository,
 }) {
   const campaign = await campaignRepository.get(campaignId);
-  const { models: participations, meta } = await campaignParticipationRepository.findInfoByCampaignId(campaignId, page);
+  const { models: participations, meta } = await campaignParticipationRepository.findInfoByCampaignId({
+    campaignId,
+    page,
+    since,
+  });
 
   if (campaign.isProfilesCollection) {
     return {

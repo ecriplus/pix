@@ -5,11 +5,12 @@ export async function getCampaignParticipations(
   h,
   dependencies = { getCampaignParticipations: usecases.getCampaignParticipations },
 ) {
-  const { page } = request.query;
+  const { page, since } = request.query;
   const { models: campaignParticipations, meta } = await dependencies.getCampaignParticipations({
     campaignId: request.params.campaignId,
     clientId: request.auth.credentials.client_id,
     page,
+    since,
   });
   return h
     .response({ campaignParticipations, page: { number: meta.page, size: meta.pageSize, count: meta.pageCount } })

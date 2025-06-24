@@ -352,5 +352,142 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
         ]);
       });
     });
+    context('should handle filters', function () {
+      let campaign, clientId, tube, competenceId, skillId;
+
+      beforeEach(async function () {
+        const orgaInJurisdiction = databaseBuilder.factory.buildOrganization({ name: 'orga-in-jurisdiction' });
+        databaseBuilder.factory.buildOrganization({ name: 'orga-not-in-jurisdiction' });
+
+        const tag = databaseBuilder.factory.buildTag();
+        databaseBuilder.factory.buildOrganizationTag({ organizationId: orgaInJurisdiction.id, tagId: tag.id });
+
+        clientId = 'client';
+        databaseBuilder.factory.buildClientApplication({
+          clientId: 'client',
+          jurisdiction: { rules: [{ name: 'tags', value: [tag.name] }] },
+        });
+
+        const frameworkId = databaseBuilder.factory.learningContent.buildFramework().id;
+        const areaId = databaseBuilder.factory.learningContent.buildArea({ frameworkId }).id;
+        competenceId = databaseBuilder.factory.learningContent.buildCompetence({ areaId }).id;
+        tube = databaseBuilder.factory.learningContent.buildTube({ competenceId });
+        skillId = databaseBuilder.factory.learningContent.buildSkill({ tubeId: tube.id, status: 'actif' }).id;
+
+        campaign = databaseBuilder.factory.buildCampaign({
+          type: CampaignTypes.ASSESSMENT,
+          organizationId: orgaInJurisdiction.id,
+        });
+        databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId });
+
+        await databaseBuilder.commit();
+      });
+
+      it('should returns only participation created or updated after a given date', async function () {
+        // given
+        databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign.id,
+          status: CampaignParticipationStatuses.STARTED,
+          participantExternalId: 'started before 1',
+          createdAt: new Date('2025-01-01'),
+        });
+        const participationCreatedAfterDate = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign.id,
+          status: CampaignParticipationStatuses.STARTED,
+          participantExternalId: 'started after 1',
+          masteryRate: null,
+          createdAt: new Date('2025-01-03'),
+        });
+
+        const participationSharedBefore = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign.id,
+          status: CampaignParticipationStatuses.SHARED,
+          masteryRate: 0.1,
+          validatedSkillsCount: 10,
+          participantExternalId: 'shared before 1',
+          createdAt: new Date('2025-01-01'),
+          sharedAt: new Date('2025-01-01'),
+        });
+        const ke = databaseBuilder.factory.buildKnowledgeElement({
+          status: KnowledgeElement.StatusType.VALIDATED,
+          skillId,
+          userId: participationSharedBefore.userId,
+        });
+        databaseBuilder.factory.buildKnowledgeElementSnapshot({
+          campaignParticipationId: participationSharedBefore.id,
+          snapshot: new KnowledgeElementCollection([ke]).toSnapshot(),
+        });
+
+        const participationSharedAfterDate = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign.id,
+          status: CampaignParticipationStatuses.SHARED,
+          masteryRate: 0.1,
+          validatedSkillsCount: 10,
+          participantExternalId: 'shared after 1',
+          createdAt: new Date('2025-01-04'),
+          sharedAt: new Date('2025-01-05'),
+        });
+
+        databaseBuilder.factory.buildKnowledgeElementSnapshot({
+          campaignParticipationId: participationSharedAfterDate.id,
+          snapshot: new KnowledgeElementCollection([ke]).toSnapshot(),
+        });
+
+        databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign.id,
+          status: CampaignParticipationStatuses.SHARED,
+          masteryRate: 0.1,
+          validatedSkillsCount: 10,
+          participantExternalId: 'deleted external id 1',
+          createdAt: new Date('2024-01-02'),
+          sharedAt: new Date('2024-01-03'),
+          deletedAt: new Date('2025-01-04'),
+        });
+        await databaseBuilder.commit();
+
+        const options = {
+          method: 'GET',
+          url: `/api/campaigns/${campaign.id}/participations?since=2025-01-02T01:01:01Z`,
+          headers: {
+            authorization: generateValidRequestAuthorizationHeaderForApplication(
+              clientId,
+              'pix-client',
+              'campaigns meta',
+            ),
+          },
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result.campaignParticipations).to.deep.members([
+          domainBuilder.maddo.buildCampaignParticipation({
+            ...participationSharedAfterDate,
+            clientId,
+            tubes: [
+              domainBuilder.maddo.buildTubeCoverage({
+                id: tube.id,
+                competenceId,
+                maxLevel: 2,
+                reachedLevel: 2,
+                practicalDescription: tube.practicalDescription_i18n['fr'],
+                practicalTitle: tube.practicalTitle_i18n['fr'],
+              }),
+            ],
+          }),
+          domainBuilder.maddo.buildCampaignParticipation({
+            ...participationCreatedAfterDate,
+            clientId,
+          }),
+        ]);
+        expect(response.result.page).to.deep.equal({
+          count: 1,
+          number: 1,
+          size: 10,
+        });
+      });
+    });
   });
 });

@@ -83,7 +83,7 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-profiles-collection
     organizationRepository.get.withArgs(organization.id).resolves(organization);
     competenceRepository.listPixCompetencesOnly.withArgs({ locale: 'fr' }).resolves(competences);
     campaignParticipationRepository.findInfoByCampaignId
-      .withArgs(campaign.id, { size: 1000000, number: 1 })
+      .withArgs({ campaignId: campaign.id, page: { size: 1000000, number: 1 } })
       .resolves({ models: campaignParticipationResultDatas });
     CampaignProfilesCollectionExport.prototype.export
       .withArgs(campaignParticipationResultDatas, placementProfileService)

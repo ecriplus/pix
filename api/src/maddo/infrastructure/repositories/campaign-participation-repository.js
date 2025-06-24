@@ -2,8 +2,12 @@ import * as campaignsAPI from '../../../prescription/campaign/application/api/ca
 import { CampaignParticipation } from '../../domain/models/CampaignParticipation.js';
 import { TubeCoverage } from '../../domain/models/TubeCoverage.js';
 
-export async function findByCampaignId(campaignId, clientId, page) {
-  const { models: campaignParticipations, meta } = await campaignsAPI.getCampaignParticipations({ campaignId, page });
+export async function findByCampaignId(campaignId, clientId, page, since) {
+  const { models: campaignParticipations, meta } = await campaignsAPI.getCampaignParticipations({
+    campaignId,
+    page,
+    since,
+  });
   return { models: campaignParticipations.map((rawCampaign) => toDomain(rawCampaign, clientId, campaignId)), meta };
 }
 
