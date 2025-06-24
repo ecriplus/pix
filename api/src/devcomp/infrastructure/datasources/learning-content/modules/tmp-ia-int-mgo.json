@@ -90,7 +90,7 @@
     {
       "id": "5166145e-6e9c-4fb5-b781-a08749f576c8",
       "type": "activity",
-      "title": "Découverte 1",
+      "title": "Dec 1",
       "components": [
         {
           "type": "element",
@@ -105,7 +105,7 @@
     {
       "id": "31c675be-3455-4f95-a044-99ddde1e4694",
       "type": "lesson",
-      "title": "Découverte 1 Activité 1",
+      "title": "Dec 1 Act 1",
       "components": [
         {
           "type": "element",
@@ -119,49 +119,11 @@
           "type": "element",
           "element": {
             "id": "87e8de3c-dfa9-4a5d-91d8-ae8a703d7772",
-            "type": "qrocm",
-            "instruction": "<p>À votre avis, quel mot cette IA générative va-t-elle choisir pour compléter cette phrase ?</p><p>En Océanie, l'animal le plus courant est le&nbsp;</p>",
-            "proposals": [
-              {
-                "input": "Choisissez",
-                "type": "select",
-                "display": "inline",
-                "placeholder": "Choisissez",
-                "ariaLabel": "",
-                "defaultValue": "",
-                "tolerances": [],
-                "options": [
-                  {
-                    "id": "",
-                    "content": ""
-                  },
-                  {
-                    "id": "1",
-                    "content": "kangourou"
-                  },
-                  {
-                    "id": "2",
-                    "content": "koala"
-                  },
-                  {
-                    "id": "3",
-                    "content": "wallaby"
-                  }
-                ],
-                "solutions": [
-                  "2"
-                ]
-              }
-            ],
-            "feedbacks": {
-              "valid": {
-                "state": "<p>L’IA va probablement répondre \"koala\"&nbsp;🐨</p>",
-                "diagnosis": "<p>Pendant cette étape de l’entraînement, elle a bien remarqué que le mot “koala” apparaît souvent en même temps que “animaux”, “océanie”, etc.</p>"
-              },
-              "invalid": {
-                "state": "<p>L’IA va probablement répondre \"koala\"&nbsp;🐨</p>",
-                "diagnosis": "<p>Observez attentivement la taille du cercle nommé \"koala\" par rapport à celui qui représente \"kangourou\" ou \"wallaby\".</p>"
-              }
+            "type": "custom",
+            "tagName": "message-conversation",
+            "props": {
+              "title": "",
+              "messages": []
             }
           }
         }
@@ -233,8 +195,132 @@
     {
       "id": "8920c989-5e53-457b-b0ab-b33f921f689e",
       "type": "activity",
-      "title": "Découverte 2 Activité 2",
-      "components": []
+      "title": "Dec 2 Act 2",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "6b03cc70-6198-4e2c-a994-f51ef3fcede4",
+            "type": "qab",
+            "instruction": "<p>À votre avis, de quel genre de données a-t-on besoin pour entraîner une IA à simuler une conversation ? 🤔 </p><p>Sélectionnez les exemples appropriés 👇<br><br></p>",
+            "cards": [
+              {
+                "id": "cea6f6c8-afd6-4e6b-8821-17558822a5ea",
+                "text": "Utiliser pour l'entraînement ?",
+                "image": {
+                  "url": "https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg",
+                  "altText": "Forum"
+                },
+                "proposalA": "Oui",
+                "proposalB": "Non",
+                "solution": "A"
+              },
+              {
+                "id": "667724f0-baa9-4eb5-85b1-626bd91b376d",
+                "text": "Utiliser pour l'entraînement ?",
+                "image": {
+                  "url": "https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg",
+                  "altText": "Contact"
+                },
+                "proposalA": "Oui",
+                "proposalB": "Non",
+                "solution": "B"
+              },
+              {
+                "id": "ba011fbb-8f9b-4755-868f-f79aff3e3022",
+                "text": "Utiliser pour l'entraînement ?",
+                "image": {
+                  "url": "https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg",
+                  "altText": "FAQ"
+                },
+                "proposalA": "Oui",
+                "proposalB": "Non",
+                "solution": "A"
+              },
+              {
+                "id": "438be278-98a6-47ee-a04b-cab2e2fbd3b6",
+                "text": "Utiliser pour l'entraînement ?",
+                "image": {
+                  "url": "https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg",
+                  "altText": "Article"
+                },
+                "proposalA": "Oui",
+                "proposalB": "Non",
+                "solution": "B"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "633e8926-63a6-4301-9d7f-8c89dbb9c403",
+      "type": "lesson",
+      "title": "Dec 2 Lesson 2",
+      "components": [
+        {
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "9e50b0f7-2936-46af-8171-4793c5cc65a1",
+                  "type": "text",
+                  "content": "<p>Pour qu’elle apprenne à simuler une discussion, on donne à l’IA générative beaucoup de <strong>lots de questions et réponses</strong> d'excellente qualité, choisies par les ingénieurs qui l’entraînent. C’est de l’apprentissage <strong>supervisé</strong>.</p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "7da341f7-c582-4a8a-9ea1-091fbe87ed64",
+                  "type": "text",
+                  "content": "<p>Le saviez-vous ? Wikipédia a été entièrement réécrit sous la forme de questions et de réponses pour entraîner les IA génératives !</p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "466b79fe-f4f0-4dde-824f-33c17e4420b1",
+                  "type": "text",
+                  "content": "<p>On applique le même principe pour qu’elle apprenne à faire d’autres choses comme&nbsp;: résumer un texte, écrire une lettre de motivation.</p>"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1730ff29-d07e-4ff9-8d41-ccd142d481a9",
+      "type": "transition",
+      "title": "Transition 3",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "bfc2e80e-497e-4101-9f14-f353641e22d2",
+            "type": "text",
+            "content": "<p>Ce n’est pas tout ! Une troisième étape consiste à entraîner l’IA générative à produire des réponses satisfaisantes pour les utilisateurs.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ca80fa6f-e235-441d-9c16-f3a3b18e292a",
+      "type": "lesson",
+      "title": "Dec 3 Act 3",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "227a574b-c8b4-4c52-b339-423a2e676ed8",
+            "type": "text",
+            "content": "<p>temp</p>"
+          }
+        }
+      ]
     }
   ]
 }
