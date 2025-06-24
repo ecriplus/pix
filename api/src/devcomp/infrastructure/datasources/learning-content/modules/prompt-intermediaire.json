@@ -238,7 +238,7 @@
         {
           "type": "element",
           "element": {
-            "id": "267f28d2-4540-427a-a775-c15c380c3d4b",
+            "id": "ae043fb4-a580-4c82-b6ef-041739c01870",
             "type": "text",
             "content": "<p>➡️ On peut modifier le ton d’un prompt en précisant&nbsp;:&nbsp; </p><ul><li>à qui on veut s’adresser,&nbsp;</li><li>de quelle manière (avec humour, de manière brève, pédagogue, professionnelle, etc.),</li><li>un rôle à jouer («&nbsp;tu es un poète&nbsp;», «&nbsp;en tant que coach sportif&nbsp;», «&nbsp;comme un professeur&nbsp;», etc.).</li></ul>"
           }
@@ -261,7 +261,7 @@
         {
           "type": "element",
           "element": {
-            "id": "22bff52e-1760-45a8-9d89-e441a679eda4",
+            "id": "4fd08276-0da3-4726-aa83-8ac498dcd561",
             "type": "image",
             "url": "https://assets.pix.org/draft/modules/tableaumanchette/travailmanchette.png",
             "alt": "Un tableau d'exercice pour travailler la manchette",
@@ -273,7 +273,7 @@
         {
           "type": "element",
           "element": {
-            "id": "22bff52e-1760-45a8-9d89-e441a679eda4",
+            "id": "",
             "type": "qrocm",
             "instruction": "<p>Quel est le format utilisé habituellement par Gustave ?</p><br>",
             "proposals": [
