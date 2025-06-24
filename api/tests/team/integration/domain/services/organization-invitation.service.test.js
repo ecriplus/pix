@@ -14,7 +14,7 @@ import { organizationInvitationService } from '../../../../../src/team/domain/se
 import { organizationInvitationRepository } from '../../../../../src/team/infrastructure/repositories/organization-invitation.repository.js';
 import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
 
-describe('Integration | Team | Domain | Service | organization-invitation', function () {
+describe('Integration | Team | Domain | Service | organizationInvitationService', function () {
   describe('#createOrUpdateOrganizationInvitation', function () {
     let clock;
     const now = new Date('2021-01-02');
@@ -60,27 +60,40 @@ describe('Integration | Team | Domain | Service | organization-invitation', func
       );
     });
 
-    it('re-sends an email with same code when organization invitation already exists with status pending', async function () {
-      // given
-      const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation({
-        status: OrganizationInvitation.StatusType.PENDING,
-      });
-      await databaseBuilder.commit();
+    context('when the organizationInvitation already exists with pending status', function () {
+      it('updates the organizationInvitation and re-sends an email with same code', async function () {
+        // given
+        const locale = 'fr';
+        const role = Membership.roles.MEMBER;
+        const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation({
+          status: OrganizationInvitation.StatusType.PENDING,
+          role,
+          locale,
+        });
+        await databaseBuilder.commit();
 
-      // when
-      const result = await organizationInvitationService.createOrUpdateOrganizationInvitation({
-        organizationId: organizationInvitation.organizationId,
-        email: organizationInvitation.email,
-        organizationRepository,
-        organizationInvitationRepository,
-      });
+        const newRole = Membership.roles.ADMIN;
+        const newLocale = 'en';
 
-      // then
-      const expectedOrganizationInvitation = {
-        ...organizationInvitation,
-        updatedAt: now,
-      };
-      expect(_.omit(result, 'organizationName')).to.deep.equal(expectedOrganizationInvitation);
+        // when
+        const result = await organizationInvitationService.createOrUpdateOrganizationInvitation({
+          organizationId: organizationInvitation.organizationId,
+          email: organizationInvitation.email,
+          role: newRole,
+          locale: newLocale,
+          organizationRepository,
+          organizationInvitationRepository,
+        });
+
+        // then
+        const expectedOrganizationInvitation = {
+          ...organizationInvitation,
+          role: newRole,
+          locale: newLocale,
+          updatedAt: now,
+        };
+        expect(_.omit(result, 'organizationName')).to.deep.equal(expectedOrganizationInvitation);
+      });
     });
 
     context('when recipient email has an invalid domain', function () {

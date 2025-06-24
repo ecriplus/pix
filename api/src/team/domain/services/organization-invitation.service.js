@@ -44,6 +44,12 @@ const createOrUpdateOrganizationInvitation = async ({
       role,
       locale,
     });
+  } else {
+    organizationInvitation = await organizationInvitationRepository.update({
+      id: organizationInvitation.id,
+      ...(role && { role }),
+      ...(locale && { locale }),
+    });
   }
 
   const organization = await organizationRepository.get(organizationId);
@@ -67,8 +73,7 @@ const createOrUpdateOrganizationInvitation = async ({
 
     throw new SendingEmailError(email);
   }
-
-  return await organizationInvitationRepository.updateModificationDate(organizationInvitation.id);
+  return organizationInvitation;
 };
 
 /**
