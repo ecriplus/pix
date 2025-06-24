@@ -4,12 +4,12 @@
   "title": "Comment chatGPT a-t-il appris à discuter ?",
   "isBeta": false,
   "details": {
-    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Les systèmes d'IA génératives&nbsp;sont capables de tenir des conversations étonnamment naturelles. Mais comment en sont-ils arrivées là ? Ce module vous emmène dans les coulisses de leur apprentissage&nbsp;: des montagnes de textes analysés aux techniques d’entraînement sophistiquées qui leur ont permis de comprendre, prédire et générer le langage humain.</p>",
     "duration": 10,
     "level": "Intermédiaire",
     "objectives": [
-      "<p>Comprendre les étapes d'entraînement d'un LLM</p>",
+      "<p>Comprendre les étapes de l'entraînement des LLM</p>",
       "<p>Comprendre l’étape de raffinement avec des humains</p>",
       "<p>Garder un esprit critique</p>"
     ],
@@ -187,7 +187,7 @@
           "element": {
             "id": "3e76071c-b053-42a3-8145-c7defd93f748",
             "type": "text",
-            "content": "<p>Maintenant, l’IA générative est capable de prédire la suite d’un texte. 🔮<br>Mais ce n’est pas la même chose que discuter, ou rédiger une lettre de motivation. Comment apprend-elle à faire tout ça ?</p>"
+            "content": "<p>Maintenant, l’IA générative est capable de prédire la suite d’un texte. 🔮<br>Mais ce n’est pas la même chose que discuter, ou rédiger une lettre de motivation. Comment apprend-elle à faire tout ça ? </p>"
           }
         }
       ]
@@ -202,11 +202,11 @@
           "element": {
             "id": "6b03cc70-6198-4e2c-a994-f51ef3fcede4",
             "type": "qab",
-            "instruction": "<p>À votre avis, de quel genre de données a-t-on besoin pour entraîner une IA à simuler une conversation ? 🤔</p><p>Sélectionnez les exemples appropriés 👇<br></p>",
+            "instruction": "<p>À votre avis, de quel genre de données a-t-on besoin pour entraîner une IA à simuler une conversation ? 🤔 </p><p>Sélectionnez les exemples appropriés 👇<br><br></p>",
             "cards": [
               {
                 "id": "cea6f6c8-afd6-4e6b-8821-17558822a5ea",
-                "text": "Utiliser pour l'entraînement ?",
+                "text": "Utiliser pour l'entraînement ?",
                 "image": {
                   "url": "https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg",
                   "altText": ""
@@ -309,7 +309,7 @@
     },
     {
       "id": "ca80fa6f-e235-441d-9c16-f3a3b18e292a",
-      "type": "lesson",
+      "type": "activity",
       "title": "Dec 3 Act 3",
       "components": [
         {
@@ -317,8 +317,98 @@
           "element": {
             "id": "227a574b-c8b4-4c52-b339-423a2e676ed8",
             "type": "text",
-            "content": "<p>temp</p>"
+            "content": "<iframe title=\"Preferences utilisateurs\" src=\"https://1024pix.github.io/atelier-contenus/MGO/ia-dec-pref-users\" height=\"800\"></iframe>"
           }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "cdcfa627-0948-463f-b658-c6fa5a8164fa",
+            "type": "qcu-declarative",
+            "instruction": "<p>À votre avis, quelle réponse choisiraient la plupart des utilisateurs ?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>la réponse 1</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Les gens ont tendance à préférer les réponses agréables, positives et qui ne contredisent pas la demande formulée.</p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "<p>la réponse 2</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Les gens ont tendance à préférer les réponses agréables, positives et qui ne contredisent pas la demande formulée.</p>"
+                }
+              },
+              {
+                "id": "3",
+                "content": "<p>la réponse 3</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Les gens ont tendance à préférer les réponses agréables, positives et qui ne contredisent pas la demande formulée.</p>"
+                }
+              },
+              {
+                "id": "4",
+                "content": "<p>je ne sais pas</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Les gens ont tendance à préférer les réponses agréables, positives et qui ne contredisent pas la demande formulée.</p>"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "6f78ac01-9065-4f27-9198-72dac081249a",
+      "type": "lesson",
+      "title": "Dec 3 Lesson 3",
+      "components": [
+        {
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "d55d9fe9-b12a-4351-97ab-704341f4265d",
+                  "type": "text",
+                  "content": "<p>Pour apprendre à l’IA générative à faire des réponses satisfaisantes, on utilise un système de <strong>récompense</strong>. Chacune des réponses de l’IA Gen est notée, “bien” ou “pas bien”. Elle essaye d’obtenir le plus de “bien” possible. C’est de l’apprentissage par <strong>renforcement</strong>.</p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "40570e09-028c-40e3-bc93-47d81f572c33",
+                  "type": "text",
+                  "content": "<p>Ce score est produit par des <strong>humains</strong> ! Des personnes sont rémunérées pour le faire. C’est un travail mal payé et pas très valorisant. Vous le faites aussi parfois gratuitement en cliquant sur le pouce en dessous de la réponse. </p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "33ca3432-2322-4553-844c-91afafbe2f32",
+                  "type": "text",
+                  "content": "<p>On observe que les humains ont <strong>tendance</strong> à choisir des réponses polies et agréables, mais aussi des réponses qui ne les contredisent pas, voire qui les flattent ...</p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "e3e9640d-33de-4076-ac26-2525371095bd",
+                  "type": "text",
+                  "content": "<p>Bon à savoir 💡: Ce principe d'alignement aux attentes des humains, a tendance à rendre les IA génératives <strong>complaisantes</strong>. Pour aller dans le sens de l’utilisateur, elles peuvent inventer des faits et halluciner.</p>"
+                }
+              ]
+            }
+          ]
         }
       ]
     }
