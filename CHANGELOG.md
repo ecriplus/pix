@@ -1,5 +1,27 @@
 # Pix Changelog
 
+# [5.142.0](https://github.com/1024pix/pix/compare/v5.141.0...v5.142.0) (2025-06-24)
+
+### :rocket: Amélioration
+
+- [#12581](https://github.com/1024pix/pix/pull/12581) anonymiser les campagnes et les prescrits à l'archivage d'une orga (PIX-18150) 
+- [#12620](https://github.com/1024pix/pix/pull/12620) Migrer l'événement GRAIN_CONTINUED en traces d'apprentissage (PIX-18363) 
+- [#12611](https://github.com/1024pix/pix/pull/12611) Permettre de placer des embeds dans un stepper (PIX-18198) 
+
+### :bug: Correction
+
+- [#12623](https://github.com/1024pix/pix/pull/12623) Afficher le compteur de participants (PIX-17755) 
+
+### :building_construction: Tech
+
+- [#12607](https://github.com/1024pix/pix/pull/12607) :broom: Nettoyage du fichier index des usescases de `lib/` 
+- [#12597](https://github.com/1024pix/pix/pull/12597) Suppression de l'event dispatcher 
+- [#12608](https://github.com/1024pix/pix/pull/12608) Tenir compte des informations de pièce jointe, dans le cas où une configuration en gère une, lors du démarrage d'une conversation avec LLM (PIX-18332) 
+
+### :arrow_up: Montée de version
+
+- [#12617](https://github.com/1024pix/pix/pull/12617) Lock file maintenance (orga)
+
 # [5.141.0](https://github.com/1024pix/pix/compare/v5.140.0...v5.141.0) (2025-06-23)
 
 ### :rocket: Amélioration
