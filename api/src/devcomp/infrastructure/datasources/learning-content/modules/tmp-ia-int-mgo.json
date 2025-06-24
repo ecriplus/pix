@@ -187,7 +187,7 @@
           "element": {
             "id": "3e76071c-b053-42a3-8145-c7defd93f748",
             "type": "text",
-            "content": "<p>Maintenant, l’IA générative est capable de prédire la suite d’un texte. 🔮\n<br>\nMais ce n’est pas la même chose que discuter, ou rédiger une lettre de motivation. Comment apprend-elle à faire tout ça ? \n</p>"
+            "content": "<p>Maintenant, l’IA générative est capable de prédire la suite d’un texte. 🔮<br>Mais ce n’est pas la même chose que discuter, ou rédiger une lettre de motivation. Comment apprend-elle à faire tout ça ?</p>"
           }
         }
       ]
@@ -202,7 +202,7 @@
           "element": {
             "id": "6b03cc70-6198-4e2c-a994-f51ef3fcede4",
             "type": "qab",
-            "instruction": "<p>À votre avis, de quel genre de données a-t-on besoin pour entraîner une IA à simuler une conversation ? 🤔 </p><p>Sélectionnez les exemples appropriés 👇<br><br></p>",
+            "instruction": "<p>À votre avis, de quel genre de données a-t-on besoin pour entraîner une IA à simuler une conversation ? 🤔</p><p>Sélectionnez les exemples appropriés 👇<br></p>",
             "cards": [
               {
                 "id": "cea6f6c8-afd6-4e6b-8821-17558822a5ea",
