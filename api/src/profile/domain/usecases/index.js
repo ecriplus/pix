@@ -13,7 +13,7 @@ import { PromiseUtils } from '../../../shared/infrastructure/utils/promise-utils
 import * as stringUtils from '../../../shared/infrastructure/utils/string-utils.js';
 import * as attestationRepository from '../../infrastructure/repositories/attestation-repository.js';
 import * as campaignParticipationRepository from '../../infrastructure/repositories/campaign-participation-repository.js';
-import * as organizationProfileRewardRepository from '../../infrastructure/repositories/organization-profile-reward-repository.js';
+import * as organizationProfileRewardRepository from '../../infrastructure/repositories/organizations-profile-reward-repository.js';
 import * as rewardRepository from '../../infrastructure/repositories/reward-repository.js';
 
 const path = dirname(fileURLToPath(import.meta.url));

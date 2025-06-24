@@ -3,7 +3,7 @@ import { OrganizationProfileReward } from '../../../../../src/profile/domain/mod
 import {
   getByOrganizationId,
   save,
-} from '../../../../../src/profile/infrastructure/repositories/organization-profile-reward-repository.js';
+} from '../../../../../src/profile/infrastructure/repositories/organizations-profile-reward-repository.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Profile | Integration | Infrastructure | Repository | organizations-profile-rewards-repository', function () {
@@ -103,6 +103,10 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
       databaseBuilder.factory.buildOrganizationsProfileRewards({
         organizationId,
         profileRewardId: secondProfileReward.id,
+      });
+      databaseBuilder.factory.buildOrganizationsProfileRewards({
+        organizationId,
+        profileRewardId: null,
       });
       await databaseBuilder.commit();
 
