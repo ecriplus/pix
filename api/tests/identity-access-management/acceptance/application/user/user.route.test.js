@@ -2,6 +2,7 @@ import lodash from 'lodash';
 
 import { CERTIFICATION_FEATURES } from '../../../../../src/certification/shared/domain/constants.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
+import { anonymousUserTokenRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/anonymous-user-token.repository.js';
 import { emailValidationDemandRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/email-validation-demand.repository.js';
 import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
 import { userEmailRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/user-email.repository.js';
@@ -57,7 +58,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         };
       });
 
-      it('should return status 201 with user', async function () {
+      it('returns status 201 with user', async function () {
         // given
         const pickedUserAttributes = ['first-name', 'last-name', 'email', 'username', 'cgu'];
         const expectedAttributes = {
@@ -79,7 +80,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         expect(userAttributes).to.deep.equal(expectedAttributes);
       });
 
-      it('should create user in Database', async function () {
+      it('creates user in Database', async function () {
         // given
         const pickedUserAttributes = ['firstName', 'lastName', 'email', 'username', 'cgu'];
         const expectedUser = {
@@ -146,7 +147,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         cgu: true,
       };
 
-      it('should return Unprocessable Entity (HTTP_422) with offending properties', async function () {
+      it('returns Unprocessable Entity (HTTP_422) with offending properties', async function () {
         const invalidUserAttributes = { ...validUserAttributes, 'must-validate-terms-of-service': 'not_a_boolean' };
 
         const options = {
@@ -168,6 +169,99 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         expect(response.statusCode).to.equal(422);
         expect(response.result.errors[0].title).to.equal('Invalid data attribute "mustValidateTermsOfService"');
       });
+    });
+  });
+
+  describe('PATCH /api/users/{id}', function () {
+    const email = 'john.doe@example.net';
+    const firstName = 'John';
+    const lastName = 'Doe';
+    const password = 'P@ssW0rd';
+
+    let userId;
+    let anonymousToken;
+    let requestPayload;
+
+    beforeEach(async function () {
+      const user = databaseBuilder.factory.buildUser.anonymous();
+      userId = user.id;
+      anonymousToken = await anonymousUserTokenRepository.save(userId);
+      await databaseBuilder.commit();
+
+      requestPayload = {
+        data: {
+          type: 'users',
+          id: userId,
+          attributes: {
+            'first-name': firstName,
+            'last-name': lastName,
+            email,
+            password,
+            cgu: true,
+            'anonymous-user-token': anonymousToken,
+          },
+        },
+      };
+    });
+
+    it('upgrades anonymous user to real user', async function () {
+      // when
+      const response = await server.inject({
+        method: 'PATCH',
+        url: `/api/users/${userId}`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        payload: requestPayload,
+      });
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.data.type).to.equal('users');
+      expect(response.result.data.id).to.equal(String(userId));
+
+      const attributes = response.result.data.attributes;
+      expect(attributes['first-name']).to.equal(firstName);
+      expect(attributes['last-name']).to.equal(lastName);
+      expect(attributes.email).to.equal(email);
+      expect(attributes.cgu).to.be.true;
+      expect(attributes.locale);
+      expect(attributes['is-anonymous']).to.be.false;
+    });
+
+    it('fails with 401 if user is not authenticated', async function () {
+      // when
+      const response = await server.inject({
+        method: 'PATCH',
+        url: `/api/users/${userId}`,
+        payload: requestPayload,
+      });
+
+      // then
+      expect(response.statusCode).to.equal(401);
+    });
+
+    it('fails with 401 if anonymousUserToken is invalid', async function () {
+      // given
+      const invalidPayload = {
+        ...requestPayload,
+        data: {
+          ...requestPayload.data,
+          attributes: {
+            ...requestPayload.data.attributes,
+            'anonymous-user-token': 'invalid-token',
+          },
+        },
+      };
+
+      // when
+      const response = await server.inject({
+        method: 'PATCH',
+        url: `/api/users/${userId}`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        payload: invalidPayload,
+      });
+
+      // then
+      expect(response.statusCode).to.equal(401);
     });
   });
 
@@ -687,7 +781,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         return databaseBuilder.commit();
       });
 
-      it('should respond with a 401 - unauthorized access - if user is not authenticated', async function () {
+      it('responds with a 401 - unauthorized access - if user is not authenticated', async function () {
         // given
         options.headers.authorization = 'invalid.access.token';
 
@@ -698,7 +792,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         expect(response.statusCode).to.equal(401);
       });
 
-      it('should respond with a 403 - forbidden access - if requested user is not the same as authenticated user', async function () {
+      it('responds with a 403 - forbidden access - if requested user is not the same as authenticated user', async function () {
         // given
         const otherUserId = 9999;
         options.headers = generateAuthenticatedUserRequestHeaders({ userId: otherUserId });
@@ -712,7 +806,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
     });
 
     describe('Success cases', function () {
-      it('should return the user with has seen challenge tooltip', async function () {
+      it('returns the user with has seen challenge tooltip', async function () {
         // given
         challengeType = 'focused';
         user = databaseBuilder.factory.buildUser({ hasSeenFocusedChallengeTooltip: false });
@@ -731,7 +825,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         expect(response.result.data.attributes['has-seen-focused-challenge-tooltip']).to.be.true;
       });
 
-      it('should return the user with has seen other challenges tooltip', async function () {
+      it('returns the user with has seen other challenges tooltip', async function () {
         // given
         challengeType = 'other';
         user = databaseBuilder.factory.buildUser({ hasSeenFocusedChallengeTooltip: false });
@@ -780,7 +874,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
   });
 
   describe('PUT /api/users/{id}/email/verification-code', function () {
-    it('should return 204 HTTP status code', async function () {
+    it('returns 204 HTTP status code', async function () {
       // given
       const server = await createServer();
 
@@ -818,7 +912,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       expect(response.statusCode).to.equal(204);
     });
 
-    it('should return 422 if email already exists', async function () {
+    it('returns 422 if email already exists', async function () {
       // given
       const server = await createServer();
 
@@ -856,7 +950,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       expect(response.result.errors[0].detail).to.equal('INVALID_OR_ALREADY_USED_EMAIL');
     });
 
-    it('should return 403 if requested user is not the same as authenticated user', async function () {
+    it('returns 403 if requested user is not the same as authenticated user', async function () {
       // given
       const server = await createServer();
 
@@ -895,7 +989,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       expect(response.result.errors[0].detail).to.equal('Missing or insufficient permissions.');
     });
 
-    it('should return 400 if password is not valid', async function () {
+    it('returns 400 if password is not valid', async function () {
       // given
       const server = await createServer();
 
@@ -936,7 +1030,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
   });
 
   describe('POST /api/users/{id}/update-email', function () {
-    it('should return 200 HTTP status code', async function () {
+    it('returns 200 HTTP status code', async function () {
       // given
       const server = await createServer();
 

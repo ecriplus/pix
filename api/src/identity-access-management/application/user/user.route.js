@@ -129,6 +129,45 @@ export const userRoutes = [
   },
   {
     method: 'PATCH',
+    path: '/api/users/{id}',
+    config: {
+      pre: [
+        {
+          method: (request, h) => securityPreHandlers.checkRequestedUserIsAuthenticatedUser(request, h),
+          assign: 'requestedUserIsAuthenticatedUser',
+        },
+      ],
+      validate: {
+        params: Joi.object({
+          id: identifiersType.userId,
+        }),
+        payload: Joi.object({
+          data: Joi.object({
+            attributes: Joi.object({
+              'first-name': Joi.string().required(),
+              'last-name': Joi.string().required(),
+              email: Joi.string().required(),
+              password: Joi.string().required(),
+              cgu: Joi.boolean().required(),
+              'anonymous-user-token': Joi.string().required(),
+            }).required(),
+          }).required(),
+        }),
+        options: {
+          allowUnknown: true,
+        },
+      },
+      handler: (request, h) => userController.upgradeToRealUser(request, h),
+      notes: [
+        '- **Cette route est restreinte aux utilisateurs anonymes**\n' +
+          "- Crée un compte Pix en conservant les points et l'id de l'utilisateur anonyme" +
+          '- L’id demandé doit correspondre à celui de l’utilisateur à enrichir',
+      ],
+      tags: ['identity-access-management', 'api', 'user'],
+    },
+  },
+  {
+    method: 'PATCH',
     path: '/api/users/{id}/password-update',
     config: {
       auth: false,
