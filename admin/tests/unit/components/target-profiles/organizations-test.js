@@ -32,7 +32,7 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
             id: 56,
           },
         };
-        attachOrganizations.resolves({
+        (attachOrganizations.resolves({
           data: {
             attributes: {
               'duplicated-ids': [],
@@ -40,7 +40,7 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
             },
           },
         }),
-          (component.organizationsToAttach = '1,2');
+          (component.organizationsToAttach = '1,2'));
         component.router = { replaceWith: sinon.stub() };
 
         // when
