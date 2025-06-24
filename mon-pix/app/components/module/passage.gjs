@@ -61,11 +61,11 @@ export default class ModulePassage extends Component {
 
     this.addNextGrainToDisplay();
 
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
-      'pix-event-name': `Click sur le bouton continuer du grain : ${currentGrain.id}`,
+    this.passageEvents.record({
+      type: 'GRAIN_CONTINUED',
+      data: {
+        grainId: currentGrain.id,
+      },
     });
   }
 

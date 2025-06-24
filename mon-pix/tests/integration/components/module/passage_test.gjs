@@ -12,6 +12,17 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Module | Passage', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  let passageEventService, passageEventRecordStub;
+
+  hooks.beforeEach(function () {
+    passageEventService = this.owner.lookup('service:passageEvents');
+    passageEventRecordStub = sinon.stub(passageEventService, 'record');
+  });
+
+  hooks.afterEach(function () {
+    passageEventRecordStub.restore();
+  });
+
   module('when module has one grain', function () {
     test('should display given module', async function (assert) {
       // given
@@ -409,7 +420,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       assert.strictEqual(document.activeElement, thirdGrain);
     });
 
-    test('should push event', async function (assert) {
+    test('should send an event', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       const text1Element = { content: 'content', type: 'text' };
@@ -425,19 +436,15 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const passage = store.createRecord('passage');
 
       await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
-
-      const metrics = this.owner.lookup('service:metrics');
-      metrics.trackEvent = sinon.stub();
-
       // when
       await clickByName(continueButtonName);
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, {
-        event: 'custom-event',
-        'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.slug}`,
-        'pix-event-name': `Click sur le bouton continuer du grain : ${grain1.id}`,
+      sinon.assert.calledWithExactly(passageEventRecordStub, {
+        type: 'GRAIN_CONTINUED',
+        data: {
+          grainId: grain1.id,
+        },
       });
       assert.ok(true);
     });
