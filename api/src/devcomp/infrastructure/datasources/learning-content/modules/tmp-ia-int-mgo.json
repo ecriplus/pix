@@ -4,12 +4,12 @@
   "title": "Comment chatGPT a-t-il appris à discuter ?",
   "isBeta": false,
   "details": {
-    "image": "",
+    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
     "description": "<p>Les systèmes d'IA génératives&nbsp;sont capables de tenir des conversations étonnamment naturelles. Mais comment en sont-ils arrivées là ? Ce module vous emmène dans les coulisses de leur apprentissage&nbsp;: des montagnes de textes analysés aux techniques d’entraînement sophistiquées qui leur ont permis de comprendre, prédire et générer le langage humain.</p>",
     "duration": 10,
     "level": "Intermédiaire",
     "objectives": [
-      "",
+      "<p>Comprendre les étapes d'entraînement d'un LLM</p>",
       "<p>Comprendre l’étape de raffinement avec des humains</p>",
       "<p>Garder un esprit critique</p>"
     ],
@@ -209,7 +209,7 @@
                 "text": "Utiliser pour l'entraînement ?",
                 "image": {
                   "url": "https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg",
-                  "altText": "Forum"
+                  "altText": ""
                 },
                 "proposalA": "Oui",
                 "proposalB": "Non",
@@ -220,7 +220,7 @@
                 "text": "Utiliser pour l'entraînement ?",
                 "image": {
                   "url": "https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg",
-                  "altText": "Contact"
+                  "altText": ""
                 },
                 "proposalA": "Oui",
                 "proposalB": "Non",
@@ -231,7 +231,7 @@
                 "text": "Utiliser pour l'entraînement ?",
                 "image": {
                   "url": "https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg",
-                  "altText": "FAQ"
+                  "altText": ""
                 },
                 "proposalA": "Oui",
                 "proposalB": "Non",
@@ -242,7 +242,7 @@
                 "text": "Utiliser pour l'entraînement ?",
                 "image": {
                   "url": "https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg",
-                  "altText": "Article"
+                  "altText": ""
                 },
                 "proposalA": "Oui",
                 "proposalB": "Non",
