@@ -1,11 +1,11 @@
 {
   "id": "7a38c90d-9937-4497-bee3-fe58541af420",
   "slug": "tmp-prompt-intermediaire",
-  "title": "J'améliore mon prompt !",
+  "title": "J'améliore mes prompts !",
   "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
-    "description": "<p>Les IA génératives (ChatGPT, LeChat, DeepSeek…) permettent de répondre à une grande variété de nos demandes.</p><p> Mais la qualité de leurs réponses dépend beaucoup des questions qu’on leur pose.&nbsp; </p><p>Dans ce module, vous allez apprendre à formuler des prompts efficaces pour répondre à vos besoins&nbsp;et à ajuster au fur et à mesure vos demandes pour améliorer le résultat obtenu.<br></p>",
+    "description": "<p>Les IA génératives (ChatGPT, LeChat, DeepSeek…) permettent de répondre à une grande variété de nos demandes. Mais la qualité de leurs réponses dépend beaucoup des questions qu’on leur pose.&nbsp;🤔 </p><p>Dans ce module, vous allez apprendre à formuler des prompts efficaces pour répondre à vos besoins&nbsp;et à ajuster au fur et à mesure vos demandes pour améliorer le résultat obtenu.&nbsp;🚀</p>",
     "duration": 10,
     "level": "Intermédiaire",
     "objectives": [
@@ -261,13 +261,9 @@
         {
           "type": "element",
           "element": {
-            "id": "9d99bf55-dd5b-4071-8ef0-1964d0531fc7",
-            "type": "image",
-            "url": "https://i.imgur.com/7A6I6m8.png",
-            "alt": "Travail sur la manchette",
-            "alternativeText": "<p>Tableau avec différents exercices sur la manchette par niveau.</p>",
-            "legend": "",
-            "licence": ""
+            "id": "e9490675-c4ff-427b-a780-45e5aa2a6ea9",
+            "type": "text",
+            "content": "<table class=\"editor_table\">\n    <caption class=\"sr-only\">Liste de messages</caption>\n    <thead>\n        <tr>\n            <th class=\"editor_header\" width=\"30%\" scope=\"col\"> Niveau </th>\n            <th class=\"editor_header\" width=\"45%\" scope=\"col\"> Exercice </th>\n            <th class=\"editor_header\" width=\"25%\" scope=\"col\"> Description </th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td style=\"font-weight:bold\"> Débutant </td>\n            <td> Manchette contre le mur </td>\n            <td> Le joueur fait des manchettes seul contre un mur, en gardant le ballon régulier. </td>\n        </tr>\n        <tr>\n            <td style=\"font-weight:bold\"> Intermédiaire </td>\n            <td> Triangle manchettes </td>\n            <td> Un joueur réceptionne des services puissants en manchette. </td>\n\n        </tr>\n        <tr style=\"border:1px solid grey;\">\n            <td style=\"font-weight:bold\"> Avancé </td>\n            <td> Réception de service réel </td>\n            <td> Trois joueurs forment un triangle et se passent le ballon en manchette. </td>\n        </tr>\n    </tbody>\n</table>"
           }
         },
         {
@@ -341,7 +337,7 @@
           "element": {
             "id": "6ff09171-639a-4e55-a4d5-9beb8e4afea4",
             "type": "text",
-            "content": "<p>\n    <br>\n</p>\n<p>\n</p><p></p><p><details>\n    <summary><span aria-hidden=\"true\">💡</span> L’astuce pratique</summary>\n    <p><span aria-hidden=\"true\">❌</span>Il vous arrive d'envoyer votre prompt alors que vous vouliez juste aller à la ligne ? <br> <span aria-hidden=\"true\">✅</span> Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée </p>\n</details>\n</p><p></p><p></p>\n<p><br></p>"
+            "content": "<p>\n    <br>\n</p>\n<p>\n</p><p></p><p></p><details>\n    <summary><span aria-hidden=\"true\">💡</span> L’astuce pratique</summary>\n    <p><span aria-hidden=\"true\">❌</span>Il vous arrive d'envoyer votre prompt alors que vous vouliez juste aller à la ligne ? <br> <span aria-hidden=\"true\">✅</span> Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée </p>\n</details>\n<p></p><p></p><p></p>\n<p><br></p>"
           }
         }
       ]
@@ -371,7 +367,7 @@
           "element": {
             "id": "17178f53-901f-4547-9f8a-bfc40990214d",
             "type": "text",
-            "content": "<p>📌 Résumons l’essentiel avant de passer à la suite&nbsp;: </p><ul><li>Utiliser un verbe d’<strong>action</strong> dans son prompt aide à décrire la tâche à l’IA.<ul><li>Par exemple : résume, décris, traduis, analyse…</li></ul></li><li>Un prompt efficace donne du <strong>contexte.</strong>&nbsp;Il donne à l'IA des précisions sur la situation.<ul><li>Par exemple : le lieu, le moment, l’objectif... 🎯</li></ul></li><li>Préciser le <strong>format attendu</strong> aide l'IA à structurer sa réponse selon vos besoins. <ul><li>Par exemple : une liste, un paragraphe, un tableau, un plan détaillé...&nbsp;📋</li></ul></li><li>Le <strong>ton </strong>d’un prompt guide le style de la réponse.<ul><li>Par exemple : sérieux, amical, professionnel, humoristique… 💬</li></ul></li><li>Attribuer un <strong>rôle </strong>ou une identité à l'IA peut aider à obtenir des réponses plus ciblées &nbsp;🤠</li></ul><p>Travailler avec une IA se fait le plus souvent par étape, vous pouvez préciser votre demande au fur et à mesure, et demander des corrections. 🔄</p><p><br><strong>⚠️</strong>Une réponse peut paraître claire et bien formulée mais contenir des <strong>erreurs</strong>.&nbsp;<ul><li><strong>Relire </strong>la réponse de l’IA est essentiel avant de la diffuser ou de la présenter à quelqu’un.🔍</li></ul></p>"
+            "content": "<p>📌 Résumons l’essentiel avant de passer à la suite&nbsp;: </p><ul><li>Utiliser un verbe d’<strong>action</strong> dans son prompt aide à décrire la tâche à l’IA.<ul><li>Par exemple : résume, décris, traduis, analyse…</li></ul></li><li>Un prompt efficace donne du <strong>contexte.</strong>&nbsp;Il donne à l'IA des précisions sur la situation.<ul><li>Par exemple : le lieu, le moment, l’objectif... 🎯</li></ul></li><li>Préciser le <strong>format attendu</strong> aide l'IA à structurer sa réponse selon vos besoins. <ul><li>Par exemple : une liste, un paragraphe, un tableau, un plan détaillé...&nbsp;📋</li></ul></li><li>Le <strong>ton </strong>d’un prompt guide le style de la réponse.<ul><li>Par exemple : sérieux, amical, professionnel, humoristique… 💬</li></ul></li><li>Attribuer un <strong>rôle </strong>ou une identité à l'IA peut aider à obtenir des réponses plus ciblées &nbsp;🤠</li></ul><p>Travailler avec une IA se fait le plus souvent par étape, vous pouvez préciser votre demande au fur et à mesure, et demander des corrections. 🔄</p><p><br><strong>⚠️</strong>Une réponse peut paraître claire et bien formulée mais contenir des <strong>erreurs</strong>.&nbsp;</p><ul><li><strong>Relire </strong>la réponse de l’IA est essentiel avant de la diffuser ou de la présenter à quelqu’un.🔍</li></ul><p></p>"
           }
         }
       ]
@@ -602,7 +598,7 @@
           "element": {
             "id": "e0f68d47-e46e-4ec7-b368-a95b1972151c",
             "type": "text",
-            "content": "<p>Gustave veut envoyer un <strong>compte-rendu </strong>aux personnes qui n’ont pas pû présente.</p>"
+            "content": "<p>Gustave veut envoyer un <strong>compte-rendu </strong>aux personnes qui n’ont pas pû présentes.</p>"
           }
         },
         {
@@ -623,7 +619,7 @@
           "element": {
             "id": "6df04b1d-5b20-4d74-ade1-bebfe4384c5c",
             "type": "text",
-            "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><p></p><p></p><p></p><p></p><p></p><p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte-rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details></p><p></p><p></p><p></p><p></p><p></p><p></p>"
+            "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte-rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details><p></p><p></p><p></p><p></p><p></p><p></p><p></p>"
           }
         }
       ]
@@ -662,7 +658,7 @@
           "element": {
             "id": "9fb1cf79-a154-4b71-a1e5-cea6803b950b",
             "type": "image",
-            "url": "https://i.imgur.com/pdjb2gt.png",
+            "url": "https://assets.pix.org/draft/modules/volleyraptor.png",
             "alt": "Une affiche concernant le tournoi de volley - lire l'alternative textuelle",
             "alternativeText": "<p>Une affiche concernant le tournoi de Volley. </p><p>Elle annonce l'équipe des volley-raptors vainqueur !&nbsp;</p>",
             "legend": "",
