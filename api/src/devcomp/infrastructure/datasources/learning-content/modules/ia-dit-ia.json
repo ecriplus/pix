@@ -84,7 +84,7 @@
           "element": {
             "id": "183c3094-b691-44ca-a75c-baed6b3c93c6",
             "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-ordinateur.html\" height=\"700\"></iframe>"
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-ordinateur.html\" height=\"650\"></iframe>"
           }
         }
       ]
@@ -137,7 +137,7 @@
           "element": {
             "id": "a066ebc9-7f82-439b-85c3-aa2e8686e52a",
             "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-image-interactive.html\" height=\"530\"></iframe>"
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-image-interactive.html\" height=\"520\"></iframe>"
           }
         },
         {
@@ -224,7 +224,7 @@
           "element": {
             "id": "c4a0562d-60f8-48b3-8489-2c8c195597b8",
             "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-cartes.html\" height=\"620\"></iframe>"
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-cartes.html\" height=\"600\"></iframe>"
           }
         }
       ]
