@@ -197,6 +197,32 @@ buildUser.withoutPixAuthenticationMethod = function buildUserWithoutPixAuthentic
   return user;
 };
 
+buildUser.anonymous = function buildUserAnonymous({
+  id = databaseBuffer.getNextId(),
+  firstName = '',
+  lastName = '',
+  email = null,
+  username = null,
+  cgu = false,
+  hasSeenAssessmentInstructions = true,
+  isAnonymous = true,
+} = {}) {
+  const values = {
+    id,
+    firstName,
+    lastName,
+    email,
+    username,
+    cgu,
+    hasSeenAssessmentInstructions,
+    isAnonymous,
+  };
+  return databaseBuffer.pushInsertable({
+    tableName: 'users',
+    values,
+  });
+};
+
 buildUser.withRole = function buildUserWithRole({
   id = databaseBuffer.getNextId(),
   firstName = 'Billy',

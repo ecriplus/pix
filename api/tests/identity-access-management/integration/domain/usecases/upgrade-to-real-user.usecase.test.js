@@ -1,0 +1,138 @@
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
+import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
+import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
+import { anonymousUserTokenRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/anonymous-user-token.repository.js';
+import { UnauthorizedError } from '../../../../../src/shared/application/http-errors.js';
+import { AlreadyRegisteredEmailError } from '../../../../../src/shared/domain/errors.js';
+import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+
+describe('Integration | Identity Access Management | Domain | UseCase | upgradeToRealUser', function () {
+  let clock;
+
+  beforeEach(function () {
+    const now = new Date('2024-12-25');
+    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+  });
+
+  afterEach(function () {
+    clock.restore();
+  });
+
+  it('upgrades an anonymous user to a real user', async function () {
+    // given
+    const anonymousUser = databaseBuilder.factory.buildUser.anonymous();
+    await databaseBuilder.commit();
+    const anonymousUserToken = await anonymousUserTokenRepository.save(anonymousUser.id);
+
+    const password = 'P@ssW0rd';
+    const language = 'fr';
+    const userAttributes = {
+      firstName: 'First',
+      lastName: 'Last',
+      email: 'first.last@example.net',
+      cgu: true,
+      locale: 'fr-FR',
+    };
+
+    // when
+    const realUser = await usecases.upgradeToRealUser({
+      userId: anonymousUser.id,
+      userAttributes,
+      password,
+      anonymousUserToken,
+      language,
+    });
+
+    // then
+    expect(realUser).to.be.instanceOf(User);
+    expect(realUser).to.include(userAttributes);
+    expect(realUser.isAnonymous).to.be.false;
+    expect(realUser.lastTermsOfServiceValidatedAt).to.be.instanceOf(Date);
+    expect(realUser.mustValidateTermsOfService).to.be.false;
+
+    const authenticationMethod = await knex('authentication-methods').where({ userId: realUser.id }).first();
+    expect(authenticationMethod.identityProvider).to.equal(NON_OIDC_IDENTITY_PROVIDERS.PIX.code);
+
+    await expect('SendEmailJob').to.have.been.performed.withJobsCount(1);
+  });
+
+  context('when the user is not anonymous', function () {
+    it('throws an UnauthorizedError', async function () {
+      // given
+      const realUser = databaseBuilder.factory.buildUser();
+      await databaseBuilder.commit();
+
+      // when
+      const promise = usecases.upgradeToRealUser({
+        userId: realUser.id,
+        userAttributes: {
+          firstName: 'First',
+          lastName: 'Last',
+          email: 'first.last@example.net',
+          cgu: true,
+          locale: 'fr-FR',
+        },
+        password: 'P@ssW0rd',
+        anonymousUserToken: 'anonymous-token',
+        language: 'fr',
+      });
+
+      // then
+      await expect(promise).to.be.rejectedWith(UnauthorizedError, 'User must be anonymous');
+    });
+  });
+
+  context('when the email already exists', function () {
+    it('throws an AlreadyRegisteredEmailError', async function () {
+      // given
+      const existingEmail = 'first.last@example.net';
+      databaseBuilder.factory.buildUser({ email: existingEmail });
+      const anonymousUser = databaseBuilder.factory.buildUser.anonymous();
+      await databaseBuilder.commit();
+
+      // when
+      const promise = usecases.upgradeToRealUser({
+        userId: anonymousUser.id,
+        userAttributes: {
+          firstName: 'First',
+          lastName: 'Last',
+          email: existingEmail,
+          cgu: true,
+          locale: 'fr-FR',
+        },
+        password: 'P@ssW0rd',
+        anonymousUserToken: 'anonymous-token',
+        language: 'fr',
+      });
+
+      // then
+      await expect(promise).to.be.rejectedWith(AlreadyRegisteredEmailError);
+    });
+  });
+
+  context('when the user anonymous token is invalid', function () {
+    it('throws an UnauthorizedError', async function () {
+      // given
+      const anonymousUser = databaseBuilder.factory.buildUser.anonymous();
+      await databaseBuilder.commit();
+
+      // when
+      const promise = usecases.upgradeToRealUser({
+        userId: anonymousUser.id,
+        userAttributes: {
+          firstName: 'First',
+          lastName: 'Last',
+          email: 'first.last@example.net',
+          cgu: true,
+          locale: 'fr-FR',
+        },
+        password: 'P@ssW0rd',
+        anonymousUserToken: 'invalid-anonymous-token',
+        language: 'fr',
+      });
+
+      // then
+      await expect(promise).to.be.rejectedWith(UnauthorizedError, 'Anonymous token is invalid');
+    });
+  });
+});
