@@ -261,9 +261,13 @@
         {
           "type": "element",
           "element": {
-            "id": "e9490675-c4ff-427b-a780-45e5aa2a6ea9",
-            "type": "text",
-            "content": "<table class=\"editor_table\">\n    <caption class=\"sr-only\">Liste de messages</caption>\n    <thead>\n        <tr>\n            <th class=\"editor_header\" width=\"30%\" scope=\"col\"> Niveau </th>\n            <th class=\"editor_header\" width=\"45%\" scope=\"col\"> Exercice </th>\n            <th class=\"editor_header\" width=\"25%\" scope=\"col\"> Description </th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td style=\"font-weight:bold\"> Débutant </td>\n            <td> Manchette contre le mur </td>\n            <td> Le joueur fait des manchettes seul contre un mur, en gardant le ballon régulier. </td>\n        </tr>\n        <tr>\n            <td style=\"font-weight:bold\"> Intermédiaire </td>\n            <td> Triangle manchettes </td>\n            <td> Un joueur réceptionne des services puissants en manchette. </td>\n\n        </tr>\n        <tr style=\"border:1px solid grey;\">\n            <td style=\"font-weight:bold\"> Avancé </td>\n            <td> Réception de service réel </td>\n            <td> Trois joueurs forment un triangle et se passent le ballon en manchette. </td>\n        </tr>\n    </tbody>\n</table>"
+            "id": "22bff52e-1760-45a8-9d89-e441a679eda4",
+            "type": "image",
+            "url": "https://assets.pix.org/draft/modules/tableaumanchette/travailmanchette.png",
+            "alt": "Un tableau d'exercice pour travailler la manchette",
+            "alternativeText": "<p>Un tableau avec 3 exercices pour travailler la manchette selon son niveau (débutant, intermédiaire, avancé)</p>",
+            "legend": "",
+            "licence": ""
           }
         },
         {
