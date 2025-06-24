@@ -31,4 +31,4 @@ jobs:
           token: ${{ secrets.SLACK_RELEASE_BOT_TOKEN }}
           payload: |
             channel: ${{ secrets.SLACK_RELEASE_CHANNEL_ID }}
-            text: "Coucou, Je lance la mise en recette de la version ${{ env.new_release_version }}. <!subteam^${{ secrets.PO_ID }}>\nMettez vos messages en :thread:"
+            text: "Coucou 👋, je lance la mise en recette de la version ${{ env.new_release_version }}. <!subteam^${{ secrets.PO_ID }}>\nMettez vos messages en :thread:"
