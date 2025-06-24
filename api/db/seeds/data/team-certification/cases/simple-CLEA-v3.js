@@ -7,12 +7,15 @@ import { usecases as enrolmentUseCases } from '../../../../../src/certification/
 import { BILLING_MODES } from '../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { usecases as organizationalEntitiesUsecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
+import * as prescriptionCampaignApi from '../../../../../src/prescription/campaign/application/api/campaigns-api.js';
+import { usecases as prescriptionTargetProfilesUsecases } from '../../../../../src/prescription/target-profile/domain/usecases/index.js';
 import {
   CertificationCenter,
   types as certificationCenterTypes,
 } from '../../../../../src/shared/domain/models/CertificationCenter.js';
 import { normalize } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
 import { usecases as teamUsecases } from '../../../../../src/team/domain/usecases/index.js';
+import { CLEA_COMPLEMENTARY_CERTIFICATION_ID } from '../../common/complementary-certification-builder.js';
 import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
 import { CommonPixCertifOrganization } from '../shared/common-organisation.js';
 import {
@@ -39,15 +42,20 @@ import publishSessionWithValidatedCertification from '../tools/publish-session-w
  *    - Pix Orga user   : certif-prescriptor@example.net
  *    - Pix Admin user  : superadmin@example.net
  */
-export class ProSeed {
+export class CleaV3Seed {
   constructor({ databaseBuilder }) {
     this.databaseBuilder = databaseBuilder;
   }
 
   async create() {
-    const organizationMember = await this.#addOrganization();
+    const { organization, organizationMember } = await this.#addOrganization();
     const { certificationCenter, certificationCenterMember } = await this.#addCertifCenter({ organizationMember });
     const certifiableUser = await this.#addCertifiableUser();
+
+    /**
+     * A double certification requires user to pass a campaign
+     */
+    await this.#createCampaign({ organization, organizationMember });
 
     /**
      * Session with candidat ready to start his certification
@@ -66,15 +74,24 @@ export class ProSeed {
 
     await publishSessionWithValidatedCertification({
       databaseBuilder: this.databaseBuilder,
-      sessionId: PUBLISHED_PRO_SESSION,
+      sessionId: PUBLISHED_DOUBLE_CERTIFICATION_CLEA_SESSION,
       candidateId: candidateToPublish.id,
-      pixScoreTarget: 250,
+      pixScoreTarget: 350,
     });
   }
 
   async #addOrganization() {
-    const commonOrgaService = await CommonPixCertifOrganization.getInstance({ databaseBuilder: this.databaseBuilder });
-    return commonOrgaService.organizationMember;
+    const { organization, organizationMember } = await CommonPixCertifOrganization.getInstance({
+      databaseBuilder: this.databaseBuilder,
+    });
+
+    // Attach CLEA target profile
+    prescriptionTargetProfilesUsecases.attachTargetProfilesToOrganization({
+      organizationId: organization.id,
+      targetProfileIds: [78], // TODO : replace by getTargetProfile
+    });
+
+    return { organization, organizationMember };
   }
 
   async #addCertifCenter({ organizationMember }) {
@@ -88,7 +105,7 @@ export class ProSeed {
         habilitations: [ComplementaryCertificationKeys.CLEA],
         isV3Pilot: true,
       }),
-      complementaryCertificationIds: [], // TODO : create complementary
+      complementaryCertificationIds: [CLEA_COMPLEMENTARY_CERTIFICATION_ID],
     });
 
     const certificationCenterMember = await teamUsecases.createCertificationCenterMembershipByEmail({
@@ -102,6 +119,16 @@ export class ProSeed {
   async #addCertifiableUser() {
     const { certifiableUser } = await CommonCertifiableUser.getInstance({ databaseBuilder: this.databaseBuilder });
     return certifiableUser;
+  }
+
+  async #createCampaign({ organization, organizationMember }) {
+    await prescriptionCampaignApi.save({
+      name: CleaV3Seed.name,
+      title: 'CLEA V3 Campaign',
+      targetProfileId: 78, // TODO: get complementary certification badges to get id,
+      organizationId: organization.id,
+      creatorId: organizationMember.id,
+    });
   }
 
   async #addReadyToStartSession({ certificationCenterMember, certificationCenter }) {
@@ -151,7 +178,13 @@ export class ProSeed {
       isLinked: true,
       hasSeenCertificationInstructions: false,
       accessibilityAdjustmentNeeded: false,
-      subscriptions: [Subscription.buildCore({ certificationCandidateId: null })], // TODO : add CLEA
+      subscriptions: [
+        Subscription.buildCore({ certificationCandidateId: null }),
+        Subscription.buildComplementary({
+          certificationCandidateId: null,
+          complementaryCertificationId: CLEA_COMPLEMENTARY_CERTIFICATION_ID,
+        }),
+      ],
       userId: pixAppUser.id,
       billingMode: BILLING_MODES.FREE,
     });

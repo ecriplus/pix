@@ -189,6 +189,11 @@ async function _startNewCertification({
     userId,
   });
 
+  console.log(certificationCenter.isHabilitated(ComplementaryCertificationKeys.CLEA));
+  console.log(certificationCenter.isHabilitated(ComplementaryCertificationKeys.CLEA));
+  console.log(certificationCenter.isHabilitated(ComplementaryCertificationKeys.CLEA));
+  console.log('_______________________');
+
   for (const highestCertifiableBadgeAcquisition of highestCertifiableBadgeAcquisitions) {
     const {
       complementaryCertificationKey,
@@ -197,6 +202,12 @@ async function _startNewCertification({
       campaignId,
       badgeKey,
     } = highestCertifiableBadgeAcquisition;
+
+    console.log(certificationCandidate.isGranted(complementaryCertificationKey));
+    console.log(certificationCandidate.isGranted(complementaryCertificationKey));
+    console.log(certificationCandidate.isGranted(complementaryCertificationKey));
+    console.log(certificationCandidate.isGranted(complementaryCertificationKey));
+
     if (
       certificationCenter.isHabilitated(complementaryCertificationKey) &&
       certificationCandidate.isGranted(complementaryCertificationKey)
