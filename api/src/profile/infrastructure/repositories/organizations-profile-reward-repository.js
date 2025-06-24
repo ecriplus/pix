@@ -15,10 +15,15 @@ export const save = async ({ organizationId, profileRewardId }) => {
 
 export const getByOrganizationId = async ({ attestationKey, organizationId }) => {
   const knexConn = DomainTransaction.getConnection();
-  const organizationProfileRewards = await knexConn('organizations-profile-rewards')
+  const query = knexConn('organizations-profile-rewards')
     .join('profile-rewards', 'organizations-profile-rewards.profileRewardId', '=', 'profile-rewards.id')
-    .join('attestations', 'profile-rewards.rewardId', '=', 'attestations.id')
-    .where({ organizationId, key: attestationKey });
+    .where({ organizationId });
+
+  if (attestationKey !== undefined) {
+    query.join('attestations', 'profile-rewards.rewardId', '=', 'attestations.id').where({ key: attestationKey });
+  }
+
+  const organizationProfileRewards = await query;
   return organizationProfileRewards.map(
     (organizationProfileReward) => new OrganizationProfileReward(organizationProfileReward),
   );
