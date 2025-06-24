@@ -292,8 +292,8 @@ describe('Unit | API | Campaigns', function () {
           {
             competenceId: 'competence1',
             id: 'tube1',
-            maxLevel: 1,
-            meanLevel: 0.5,
+            maxLevel: 3,
+            meanLevel: 0.3333333333333333,
             practicalDescription: 'tube 1 description',
             practicalTitle: 'tube 1',
           },

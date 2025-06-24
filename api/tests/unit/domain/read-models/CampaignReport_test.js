@@ -55,8 +55,8 @@ describe('Unit | Domain | Models | CampaignReport', function () {
           competenceName: 'compétence 1',
           description: 'tube 1 description',
           id: 'tube1',
-          maxLevel: 1,
-          reachedLevel: 0.5,
+          maxLevel: 3,
+          reachedLevel: 0.3333333333333333,
           title: 'tube 1',
         },
       ]);
