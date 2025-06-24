@@ -1,0 +1,167 @@
+import dayjs from 'dayjs';
+
+import { Candidate } from '../../../../../src/certification/enrolment/domain/models/Candidate.js';
+import { SessionEnrolment } from '../../../../../src/certification/enrolment/domain/models/SessionEnrolment.js';
+import { Subscription } from '../../../../../src/certification/enrolment/domain/models/Subscription.js';
+import { usecases as enrolmentUseCases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
+import { BILLING_MODES } from '../../../../../src/certification/shared/domain/constants.js';
+import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
+import { usecases as organizationalEntitiesUsecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
+import {
+  CertificationCenter,
+  types as certificationCenterTypes,
+} from '../../../../../src/shared/domain/models/CertificationCenter.js';
+import { normalize } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
+import { usecases as teamUsecases } from '../../../../../src/team/domain/usecases/index.js';
+import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
+import { CommonPixCertifOrganization } from '../shared/common-organisation.js';
+import {
+  CLEA_V3_CERTIFICATION_CENTER_EXTERNAL_ID,
+  PUBLISHED_CLEA_V3_SESSION,
+  PUBLISHED_PRO_SESSION,
+  STARTED_CLEA_V3_SESSION,
+} from '../shared/constants.js';
+import addSession from '../tools/add-session.js';
+import publishSessionWithValidatedCertification from '../tools/publish-session-with-validated-certification.js';
+
+/**
+ * --- CERTIFICATION CASE ---
+ *
+ * The goal here is to reproduce one certification case:
+ *   - The organization is PRO with CLEA habilitation
+ *   - I'm a pix app user with a certifiable account and the certifiable badge required for CLEA double-certification
+ *   - I'm able to start a certification course
+ *   - I have previously obtained a certif CLEA with ~350 pix
+ *
+ *  Quick start :
+ *    - Pix App user    : certif-success@example.net
+ *    - Pix Certif user : certif-prescriptor@example.net
+ *    - Pix Orga user   : certif-prescriptor@example.net
+ *    - Pix Admin user  : superadmin@example.net
+ */
+export class ProSeed {
+  constructor({ databaseBuilder }) {
+    this.databaseBuilder = databaseBuilder;
+  }
+
+  async create() {
+    const organizationMember = await this.#addOrganization();
+    const { certificationCenter, certificationCenterMember } = await this.#addCertifCenter({ organizationMember });
+    const certifiableUser = await this.#addCertifiableUser();
+
+    /**
+     * Session with candidat ready to start his certification
+     */
+    const sessionReadyToStart = await this.#addReadyToStartSession({ certificationCenterMember, certificationCenter });
+    await this.#addCandidateToSession({ pixAppUser: certifiableUser, session: sessionReadyToStart });
+
+    /**
+     * Session with a published certification
+     */
+    const sessionToPublish = await this.#addSessionToPublish({ certificationCenterMember, certificationCenter });
+    const candidateToPublish = await this.#addCandidateToSession({
+      pixAppUser: certifiableUser,
+      session: sessionToPublish,
+    });
+
+    await publishSessionWithValidatedCertification({
+      databaseBuilder: this.databaseBuilder,
+      sessionId: PUBLISHED_PRO_SESSION,
+      candidateId: candidateToPublish.id,
+      pixScoreTarget: 250,
+    });
+  }
+
+  async #addOrganization() {
+    const commonOrgaService = await CommonPixCertifOrganization.getInstance({ databaseBuilder: this.databaseBuilder });
+    return commonOrgaService.organizationMember;
+  }
+
+  async #addCertifCenter({ organizationMember }) {
+    const certificationCenter = await organizationalEntitiesUsecases.createCertificationCenter({
+      certificationCenter: new CertificationCenter({
+        id: DOUBLE_CERTIFICATION_CLEA_CERTIFICATION_CENTER_EXTERNAL_ID,
+        name: 'CLEA V3 Certification Center',
+        type: certificationCenterTypes.PRO,
+        externalId: DOUBLE_CERTIFICATION_CLEA_CERTIFICATION_CENTER_EXTERNAL_ID,
+        createdAt: new Date('2024-01-30'),
+        habilitations: [ComplementaryCertificationKeys.CLEA],
+        isV3Pilot: true,
+      }),
+      complementaryCertificationIds: [], // TODO : create complementary
+    });
+
+    const certificationCenterMember = await teamUsecases.createCertificationCenterMembershipByEmail({
+      certificationCenterId: certificationCenter.id,
+      email: organizationMember.email,
+    });
+
+    return { certificationCenter, certificationCenterMember };
+  }
+
+  async #addCertifiableUser() {
+    const { certifiableUser } = await CommonCertifiableUser.getInstance({ databaseBuilder: this.databaseBuilder });
+    return certifiableUser;
+  }
+
+  async #addReadyToStartSession({ certificationCenterMember, certificationCenter }) {
+    return addSession({
+      databaseBuilder: this.databaseBuilder,
+      createdByUserId: certificationCenterMember.user.id,
+      forceSessionId: STARTED_DOUBLE_CERTIFICATION_CLEA_SESSION,
+      session: new SessionEnrolment({
+        certificationCenterId: certificationCenter.id,
+        address: 'Valenciennes',
+        room: '59',
+        examiner: 'Jean Prea-demarrer',
+        date: '2024-06-04',
+        time: '09:10',
+        description: 'CLEA V3 session with candidate ready to start',
+      }),
+    });
+  }
+
+  async #addSessionToPublish({ certificationCenterMember, certificationCenter }) {
+    return addSession({
+      databaseBuilder: this.databaseBuilder,
+      createdByUserId: certificationCenterMember.user.id,
+      forceSessionId: PUBLISHED_DOUBLE_CERTIFICATION_CLEA_SESSION,
+      session: new SessionEnrolment({
+        certificationCenterId: certificationCenter.id,
+        address: 'Valenciennes',
+        room: '59',
+        examiner: 'Anne-Cess Ionfinie',
+        date: dayjs().format('YYYY-MM-DD'),
+        time: '16:30',
+        description: 'CLEA V3 session with published results',
+      }),
+    });
+  }
+
+  async #addCandidateToSession({ pixAppUser, session }) {
+    const candidate = new Candidate({
+      authorizedToStart: true,
+      firstName: pixAppUser.firstName,
+      lastName: pixAppUser.lastName,
+      sex: 'F',
+      birthdate: new Date('2000-10-30'),
+      birthCountry: 'France',
+      birthINSEECode: '75115',
+      email: pixAppUser.email,
+      isLinked: true,
+      hasSeenCertificationInstructions: false,
+      accessibilityAdjustmentNeeded: false,
+      subscriptions: [Subscription.buildCore({ certificationCandidateId: null })], // TODO : add CLEA
+      userId: pixAppUser.id,
+      billingMode: BILLING_MODES.FREE,
+    });
+
+    const candidateId = await enrolmentUseCases.addCandidateToSession({
+      sessionId: session.id,
+      candidate: new Candidate(candidate), // Warning: usecase modifies the entry model...
+      normalizeStringFnc: normalize,
+    });
+
+    return enrolmentUseCases.getCandidate({ certificationCandidateId: candidateId });
+  }
+}
