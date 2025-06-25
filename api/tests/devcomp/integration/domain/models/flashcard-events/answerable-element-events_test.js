@@ -32,8 +32,6 @@ describe('Integration | Devcomp | Domain | Models | passage-events | answerable-
       expect(qcuDeclarativeAnsweredEvent.createdAt).to.equal(createdAt);
       expect(qcuDeclarativeAnsweredEvent.passageId).to.equal(passageId);
       expect(qcuDeclarativeAnsweredEvent.sequenceNumber).to.equal(sequenceNumber);
-      expect(qcuDeclarativeAnsweredEvent.elementId).to.equal(elementId);
-      expect(qcuDeclarativeAnsweredEvent.answer).to.equal(answer);
       expect(qcuDeclarativeAnsweredEvent.data).to.deep.equal({ elementId, answer });
     });
 

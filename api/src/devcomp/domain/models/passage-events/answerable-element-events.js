@@ -15,9 +15,6 @@ class QCUDeclarativeAnsweredEvent extends PassageEventWithElement {
     });
 
     assertNotNullOrUndefined(answer, 'The answer is required for a QCUDeclarativeAnsweredEvent');
-
-    this.elementId = elementId;
-    this.answer = answer;
   }
 }
 
