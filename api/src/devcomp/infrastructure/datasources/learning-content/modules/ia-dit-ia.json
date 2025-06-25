@@ -61,7 +61,7 @@
           "element": {
             "id": "3c870d58-e8dd-4129-9348-159975b1fc69",
             "type": "text",
-            "content": "<p>À cause de la récente popularité de chatGPT, on a l’impression que l’IA c’est nouveau. Mais pas du tout !&nbsp; l’IA ça date ! 🦣&nbsp;<br>Et si on regardait plus précisément ce qu'est l'IA ? Pour cela, partons de l’ordinateur ! </p>"
+            "content": "<p>À cause de la récente popularité de chatGPT, on a l’impression que l’IA c’est nouveau. Mais pas du tout !&nbsp; l’IA ça date ! 🦣&nbsp;</p>"
           }
         }
       ]
@@ -76,7 +76,7 @@
           "element": {
             "id": "937b62e7-c4f5-479a-8e1f-afbe7881fa92",
             "type": "text",
-            "content": "<p>Selon vous, que peut faire un ordinateur ?</p>"
+            "content": "<p>Et si on regardait plus précisément ce qu'est l'IA ? Pour cela, partons de l’ordinateur !<br>Selon vous, que peut faire un ordinateur ?</p>"
           }
         },
         {
@@ -192,21 +192,6 @@
       ]
     },
     {
-      "id": "96bef636-2d29-45dd-9605-4e590e13a4ba",
-      "type": "transition",
-      "title": "Transition - 3",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "91820684-cf0b-4b95-acf5-16f70409f506",
-            "type": "text",
-            "content": "<p>L’IA est aussi utilisée dans des secteurs d’activité professionnelle ! Voyons quelques exemples.<br></p>"
-          }
-        }
-      ]
-    },
-    {
       "id": "7ee0c174-9a2b-413c-adee-682dc5ed1c70",
       "type": "discovery",
       "title": "Découverte - 3 : IA et secteurs d'activité",
@@ -216,7 +201,7 @@
           "element": {
             "id": "a2b1291d-6043-4582-ac69-337835330c07",
             "type": "text",
-            "content": "<p>Prenons le cas de<strong> la reconnaissance d’image</strong>.&nbsp;🔎🖼️</p><p>Retournez les cartes ci-dessous pour découvrir comment la reconnaissance d'image est utilisée dans différents secteurs d'activité.</p>"
+            "content": "<p>L’IA est aussi utilisée dans des secteurs d’activité professionnelle.<br>Voyons l'exemple de<strong> la reconnaissance d’image</strong>.&nbsp;🔎🖼️</p><p>Retournez les cartes ci-dessous pour découvrir comment la reconnaissance d'image est utilisée dans différents secteurs d'activité.</p>"
           }
         },
         {
@@ -239,7 +224,7 @@
           "element": {
             "id": "1bf335c7-a606-4e65-aa36-07adf42d3b6f",
             "type": "text",
-            "content": "<p>L’intelligence artificielle est utilisée dans tous les secteurs d’activité&nbsp;: l’agriculture,&nbsp; la culture, l’éducation, la finance, l’industrie, le loisir, la santé, la science, la sécurité, le transport, etc.</p><p><br><strong>💡 Parfois, le recours à l'intelligence artificielle permet de faire des découvertes ou des progrès importants</strong>. Par exemple&nbsp;:&nbsp;</p><ul><li>Les cancers sont mieux dépistés depuis qu'on utilise l'IA pour détecter les tumeurs.</li><li>L'influence du changement climatique sur le cycle de l'eau est mieux comprise grâce aux grandes quantités de données analysées par l'IA.</li></ul>"
+            "content": "<p>L’intelligence artificielle est utilisée dans tous les secteurs d’activité&nbsp;: l’agriculture,&nbsp; la culture, l’éducation, la finance, l’industrie, le loisir, la santé, la science, la sécurité, le transport, etc.</p><p><br><strong>💡 Parfois, l'utilisation de l'intelligence artificielle permet de faire des découvertes ou des progrès importants</strong>. Par exemple&nbsp;:&nbsp;</p><ul><li>Les cancers sont mieux dépistés depuis qu'on utilise l'IA pour détecter les tumeurs.</li><li>L'influence du changement climatique sur le cycle de l'eau est mieux comprise grâce aux grandes quantités de données analysées par l'IA.</li></ul>"
           }
         }
       ]
