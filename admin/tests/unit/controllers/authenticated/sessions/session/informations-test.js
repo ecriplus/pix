@@ -200,10 +200,10 @@ module('Unit | Controller | authenticated/sessions/session/informations', functi
       controller.model = { session };
       getDownloadLinkStub.resolves({ sessionResultsLink: 'www.jeremypluquet.com' });
 
-      const writeTextStub = sinon.stub();
-      writeTextStub.returns();
-      sinon.stub(navigator, 'clipboard').value({
-        writeText: writeTextStub,
+      const writeTextStub = sinon.stub().resolves();
+      Object.defineProperty(navigator, 'clipboard', {
+        writable: true,
+        value: { writeText: writeTextStub },
       });
       sinon.stub(window, 'setTimeout').returns();
 
