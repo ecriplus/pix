@@ -1,6 +1,7 @@
 import { PassThrough, pipeline, Transform } from 'node:stream';
 
 import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
+import * as lengthPrefixedJsonDecoderTransform from './transforms/length-prefixed-json-decoder-transform.js';
 
 const logger = child('llm:api', { event: SCOPES.LLM });
 
@@ -15,18 +16,6 @@ const logger = child('llm:api', { event: SCOPES.LLM });
  * @returns {Promise<module:stream.internal.PassThrough>}
  */
 export async function fromLLMResponse({ llmResponse, onLLMResponseReceived, shouldSendAttachmentEventMessage }) {
-  const decoder = new TextDecoder();
-  const transformFindObjects = new Transform({
-    objectMode: true,
-    transform(chunk, _encoding, callback) {
-      const objects = findObjects(decoder.decode(chunk));
-      for (const object of objects) {
-        this.push(object);
-      }
-      callback();
-    },
-  });
-
   let completeLLMMessage = '';
   const transformConvertObjectToEventStreamData = new Transform({
     objectMode: true,
@@ -52,7 +41,7 @@ export async function fromLLMResponse({ llmResponse, onLLMResponseReceived, shou
   const readableStream = llmResponse ?? emptyReadable();
   pipeline(
     readableStream,
-    transformFindObjects,
+    lengthPrefixedJsonDecoderTransform.getTransform(),
     transformConvertObjectToEventStreamData,
     writableStream,
     async (err) => {
@@ -82,17 +71,4 @@ function emptyReadable() {
 export function toEventStreamData(message) {
   const formattedMessage = message.replaceAll('\n', '\ndata: ');
   return `data: ${formattedMessage}\n\n`;
-}
-
-export function findObjects(str) {
-  const objects = [];
-  while (str.length > 0) {
-    const [numberAsStr, ...otherParts] = str.split(':');
-    const objectLength = parseInt(numberAsStr);
-    const strLeft = otherParts.join(':');
-    objects.push(strLeft.slice(0, objectLength));
-    str = strLeft.slice(objectLength);
-  }
-
-  return objects.map((obj) => JSON.parse(obj));
 }
