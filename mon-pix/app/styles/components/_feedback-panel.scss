@@ -116,7 +116,8 @@
   padding: 20px;
   font-weight: bold;
   font-size: 0.938rem;
-  word-break: break-word;
+  word-break: normal;
+  overflow-wrap: anywhere;
   background-color: var(--pix-neutral-0);
   border: dashed var(--pix-neutral-800);
 

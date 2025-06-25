@@ -5,7 +5,8 @@
   justify-content: space-between;
   padding-top: 16px;
   padding-bottom: 16px;
-  word-break: break-word;
+  word-break: normal;
+  overflow-wrap: anywhere;
   border-top: var(--pix-neutral-20) 1px solid;
 
   &--with-success-message {
