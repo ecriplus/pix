@@ -97,6 +97,14 @@
         {
           "type": "element",
           "element": {
+            "id": "0d9bafd7-0845-484f-9fd4-c4123c30377b",
+            "type": "text",
+            "content": "<p>Voici les photos de 3 personnes&nbsp;: sont-elles vraies ou fausses ?<br></p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
             "id": "9cad8650-9381-4d1e-92e5-81c68c7748a5",
             "type": "text",
             "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-deepfakes-trivisage.html\" height=\"650\"></iframe>"
@@ -117,7 +125,25 @@
                 {
                   "id": "f9466906-f64a-402f-976f-bcb773b4b3ff",
                   "type": "text",
-                  "content": "<p>Ces 3 images sont <strong>hyperréalistes </strong>mais fausses : ce sont des deepfakes.</p><p>Les deepfakes peuvent être&nbsp;:&nbsp;<br></p><ul>    <li>des vidéos▶️</li>    <li>des images&nbsp;🖼️</li>    <li>des sons&nbsp;🎙️</li><li>des textes&nbsp;🗒️</li></ul><p>Les deepfakes, hypertrucages en français, sont créés grâce à<strong> l’intelligence artificielle</strong>.</p>"
+                  "content": "<p>Ces 3 images sont <strong>hyperréalistes </strong>mais fausses&nbsp;: ce sont des deepfakes.</p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "aa9f82e9-3e4e-444b-a8ce-c10b8d07e6c7",
+                  "type": "text",
+                  "content": "<p>Les deepfakes peuvent être&nbsp;:&nbsp;<br></p><ul>    <li>des vidéos▶️</li>    <li>des images&nbsp;🖼️</li>    <li>des sons&nbsp;🎙️</li>    <li>des textes&nbsp;🗒️</li></ul>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "21ddc90b-7145-4e1d-9e29-1eeedc7be704",
+                  "type": "text",
+                  "content": "<p>Les deepfakes, hypertrucages en français, sont créés <strong>grâce à l’intelligence artificielle</strong>. Comme les intelligences artificielles s'améliorent chaque jour, il est de plus en plus <strong>difficile de reconnaître un deepfake </strong>!</p>"
                 }
               ]
             },
@@ -126,7 +152,7 @@
                 {
                   "id": "3ee0f7d8-b042-490c-8c53-036fd0078dc8",
                   "type": "text",
-                  "content": "<p>Comme les intelligences artificielles s'améliorent chaque jour, il est de plus en plus difficile de reconnaître un deepfake !<br> 👂Parfois des indices peuvent vous mettre la puce à l’oreille&nbsp;: des doigts en trop, des mouvements étranges une voix qui se modifie par moment...&nbsp;<br>🔎 Mais, <strong>observer</strong> une image, une vidéo ou écouter attentivement un son <strong>ne suffit pas pour détecter un deepfake.</strong></p>"
+                  "content": "<p> 👂Parfois des indices peuvent vous mettre la puce à l’oreille&nbsp;: des doigts en trop, des mouvements étranges une voix qui se modifie par moment...&nbsp;<br>🔎 Mais, <strong>observer</strong> une image, une vidéo ou écouter attentivement un son <strong>ne suffit pas pour détecter un deepfake.</strong></p>"
                 }
               ]
             }
@@ -159,7 +185,7 @@
           "element": {
             "id": "42d51784-c0d0-4c68-953b-059ea9052e33",
             "type": "text",
-            "content": "<p>Pour épater ses amies, Caroline a créé une vidéo où elle chante une chanson à la manière de sa chanteuse préférée. 🎶</p><p>Pour faire cette vidéo, elle a utilisé un programme d’intelligence artificielle et seulement 3 éléments. <br>Caroline est étonnée&nbsp;: elle a donné peu d’informations au programme d’intelligence artificielle pour créer la chanson.</p>"
+            "content": "<p>Avec un logiciel d'itelligence artificielle, Caroline a créé une vidéo où elle chante une chanson à la manière de sa chanteuse préférée. 🎶</p><p> Caroline est étonnée&nbsp;: elle a donné<strong> seulement 3 éléments au logiciel d’intelligence artificielle</strong> pour créer la chanson.</p>"
           }
         },
         {
@@ -178,12 +204,36 @@
       "title": "Leçon 2",
       "components": [
         {
-          "type": "element",
-          "element": {
-            "id": "739e2d05-6f43-48dc-a6dd-49306ead566b",
-            "type": "text",
-            "content": "<p>Pour créer un deepfake, un programme d’intelligence artificielle n’a pas besoin de beaucoup d’informations en entrée (une photo, un son, une courte vidéo…).</p><p>Par exemple, avec une photo et un enregistrement de quelques phrases, on peut fabriquer une vidéo d’une personne qui fait un discours. 🗣️</p><p><strong>Comme ils sont faciles à fabriquer, beaucoup de deepfakes circulent en ligne.</strong></p>"
-          }
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "70c20e08-e620-43b1-9012-582be199dfd8",
+                  "type": "text",
+                  "content": "<p>Pour créer un deepfake, un logiciel d’intelligence artificielle n’a pas besoin de beaucoup d’informations en entrée (une photo, un son, une courte vidéo…).</p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "d45164d6-6737-4959-b3ff-3848f1406285",
+                  "type": "text",
+                  "content": "<p>Par exemple, avec une photo et un enregistrement de quelques phrases, on peut fabriquer une vidéo d’une personne qui fait un discours. 🗣️</p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "c0c30bab-b295-4b93-a5c0-a2c6678a3a23",
+                  "type": "text",
+                  "content": "<p><strong>Comme ils sont faciles à fabriquer, beaucoup de deepfakes circulent en ligne.</strong></p>"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -210,6 +260,14 @@
         {
           "type": "element",
           "element": {
+            "id": "7004de22-c4af-4e4e-ac47-1e08122e6de2",
+            "type": "text",
+            "content": "<p>Pour chaque exemple de deepfake, choisissez la bonne réponse.</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
             "id": "652c79cc-b2d4-4279-9d95-8495fa81d56c",
             "type": "text",
             "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-deepfakes-objectif.html\" height=\"600\"></iframe>"
@@ -223,12 +281,45 @@
       "title": "Leçon 3",
       "components": [
         {
-          "type": "element",
-          "element": {
-            "id": "71e2b308-af2e-4d79-b557-49a5f24c9da4",
-            "type": "text",
-            "content": "<p>😱Les deepfakes sont souvent utilisés pour <strong>faire circuler de fausses informations</strong>. Dans ce cas, leurs créateurs veulent faire croire à des faits qui n’ont pas eu lieu. <br>Dans quel but ? <strong>Manipuler la population</strong> pour gagner des élections, arnaquer ou <strong>cyberharceler </strong>des personnes.<br><strong>Créés avec des intentions malveillantes, les deepfakes peuvent être dangereux.</strong></p><p><br>Des deepfakes sont aussi utilisés dans l’art ou le divertissement, sans but malveillant&nbsp;: par exemple, pour continuer de faire apparaître dans un film un acteur absent ou décédé pendant le tournage.<br>⚠️ Attention, même dans ces cas, il faut <strong>respecter le droit à l’image</strong> de la personne qui apparaît dans le deepfake.</p>"
-          }
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "e91e7efd-a663-4436-bb84-d4b4de1d1989",
+                  "type": "text",
+                  "content": "<p>😱Les deepfakes sont souvent utilisés pour <strong>faire circuler de fausses informations</strong>. Dans ce cas, leurs créateurs veulent faire croire à des faits qui n’ont pas eu lieu.</p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "efb2fb08-79c0-4afe-8d8a-361000c0d0a8",
+                  "type": "text",
+                  "content": "<p>Dans quel but ? <strong>Manipuler la population</strong> pour gagner des élections, arnaquer ou <strong>cyberharceler </strong>des personnes.<br><strong>Créés avec des intentions malveillantes, les deepfakes peuvent être dangereux.</strong></p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "3fdf70ca-0e6a-4c96-ac70-14158761aae1",
+                  "type": "text",
+                  "content": "<p>Des deepfakes sont aussi utilisés dans l’art ou le divertissement, sans but malveillant&nbsp;: par exemple, pour continuer de faire apparaître dans un film un acteur absent ou décédé pendant le tournage.</p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "1d3b8e1e-87b4-4b2e-bd57-8f00de4ed029",
+                  "type": "text",
+                  "content": "<p>⚠️ Attention, dans tous les cas, il faut <strong>respecter le droit à l’image</strong> de la personne qui apparaît dans le deepfake.</p>"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -267,7 +358,7 @@
             "type": "image",
             "url": "https://assets.pix.org/draft/modules/PUHOpPE.png",
             "alt": "",
-            "alternativeText": "<p>Une conversation dans un groupe de messagerie instantanné nommé \"Les 3ème D\"&nbsp;:&nbsp;<br>\nBrian partage une photo d'une femme manifestant avec une pancarte&nbsp;: «&nbsp;PLUS JAMAIS DE DEVOIRS !&nbsp;», suivi du message suivant&nbsp;:\n«&nbsp;Vous avez vu ! C’est Mme Martin, la prof de maths. Faut envoyer ça à tout le monde pour qu’elle soit virée ! On va lui gâcher sa vie !&nbsp;»<br>Des emojis sont visibles sous le message&nbsp;: 🔥, 💗, 😂, 😱, ➕</p>",
+            "alternativeText": "<p>Une conversation dans un groupe de messagerie instantanné nommé \"Les 3ème D\"&nbsp;:&nbsp;<br>Brian partage une photo d'une femme manifestant avec une pancarte&nbsp;: «&nbsp;PLUS JAMAIS DE DEVOIRS !&nbsp;», suivi du message suivant&nbsp;:«&nbsp;Vous avez vu ! C’est Mme Martin, la prof de maths. Faut envoyer ça à tout le monde pour qu’elle soit virée ! On va lui gâcher sa vie !&nbsp;»<br>Des emojis sont visibles sous le message&nbsp;: 🔥, 💗, 😂, 😱, ➕</p>",
             "legend": "",
             "licence": ""
           }
@@ -284,7 +375,7 @@
                 "content": "<p>Liker le message de Brian.</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Mauvaise idée ! Avant de liker une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.</p>"
+                  "diagnosis": "<p>Mauvaise idée ! Avant de liker une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin. Liker cette photo, c’est participer à du cyberharcèlement.</p>"
                 }
               },
               {
@@ -292,7 +383,7 @@
                 "content": "<p>Partager la photo à ses contacts.</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Mauvaise idée ! Avant de partager une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.</p>"
+                  "diagnosis": "<p>Mauvaise idée ! Avant de partager une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.&nbsp;Partager cette photo, c’est participer à du cyberharcèlement.</p>"
                 }
               },
               {
@@ -300,7 +391,7 @@
                 "content": "<p>Demander à Brian d’où vient cette photo.</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe !&nbsp;</p>"
+                  "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe ! La partager, comme le demande Brian, serait du cyberharcèlement.</p>"
                 }
               },
               {
@@ -308,7 +399,7 @@
                 "content": "<p>Chercher la source de l'image sur internet.</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe !</p>"
+                  "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe !&nbsp;La partager, comme le demande Brian, serait du cyberharcèlement.</p>"
                 }
               }
             ],
@@ -323,27 +414,36 @@
       "title": "Leçon 4",
       "components": [
         {
-          "type": "element",
-          "element": {
-            "id": "c0d41748-b242-47de-9c03-4296e6274100",
-            "type": "text",
-            "content": "<p>Quand vous recevez un message avec un média surprenant (trop beau pour être vrai ou énervant), prenez le temps avant de le liker ou de le partager. C’est peut-être un deepfake ! <br>🔎 <strong>Au moindre doute, ne partagez pas l'information. Mais vérifier l'information et sa source.</strong></p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "6a5495cf-6780-4bc5-b93f-164d40c38530",
-      "type": "transition",
-      "title": "Transition",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "844aedbf-6f7a-49ef-9927-14ced0f73f00",
-            "type": "text",
-            "content": "<p>Récapitulons ensemble. 🎯</p>"
-          }
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "08889a3c-0fd9-45db-bab2-ffe4a9df0778",
+                  "type": "text",
+                  "content": "<p>Quand vous recevez un message avec un média surprenant (trop beau pour être vrai, énervant ou inquiétant),<strong> prenez le temps avant de le liker ou de le partager</strong>. C’est peut-être un deepfake !</p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "ef89f877-b8a8-4279-b63a-eb1761e48d84",
+                  "type": "text",
+                  "content": "<p>Si vous partagez un deepfake créé avec de mauvaises intentions, vous pouvez répandre de <strong>fausses informations </strong>ou participer au <strong>cyberharcèlement </strong>d’une personne.</p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "bb9de561-f5e8-4c81-91a5-d9b8e570b5d0",
+                  "type": "text",
+                  "content": "<p>🔎 <strong>Au moindre doute, ne partagez pas l'information. Mais vérifier l'information et sa source.</strong></p>"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -357,22 +457,7 @@
           "element": {
             "id": "de260e53-8fc3-482c-94ba-7c43560306d9",
             "type": "text",
-            "content": "<ul><li>Un deepfake ou hypertrucage est un média (image, son, texte, vidéo) hyper réaliste mais faux&nbsp;: il est créé grâce à l’intelligence artificielle. Un deepfake est difficile à détecter. 🔎</li><li>Un deepfake demande peu de matériel et de compétence pour être créé. Il y en a donc beaucoup qui circulent en ligne. ⚠️</li><li>Un deepfake est souvent créé avec une intention malveillante&nbsp;: pour faire circuler de fausses informations, cyberharceler, arnaquer ou manipuler. 🧠</li><li>Au moindre doute face à média, il ne faut pas le partager immédiatement. Vérifiez d'abord sa source et s'il est vrai. ℹ️</li></ul><p><br>🤔 <strong>Bon à savoir&nbsp;:</strong><br>Pour limiter le risque de vous retrouver dans un deepfake,  évitez de partager des vidéos, des images de vous ou des enregistrements de votre voix.</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "507f1a34-7fe4-44fb-ae43-df1d5bdb6ccb",
-      "type": "transition",
-      "title": "Transition",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "53362da3-ce7d-401f-b9e1-6b4180a50ff3",
-            "type": "text",
-            "content": "<p>Voyons si vous avez retenu l'essentiel.</p>"
+            "content": "<p>Récapitulons ensemble. 🎯</p><ul> <li>Un deepfake est un <strong>média hyper réaliste mais faux&nbsp;: il est créé grâce à l’intelligence artificielle</strong>. Un deepfake est difficile à détecter. 🔎</li><li>Un deepfake demande peu de matériel et de compétence pour être créé. Il y en a donc<strong> beaucoup qui circulent</strong> en ligne. ⚠️</li><li>Un deepfake est <strong>souvent créé avec une intention malveillante</strong>&nbsp;: pour faire circuler de fausses informations, cyberharceler, arnaquer ou manipuler. 🧠</li><li>Au moindre doute face à média, il ne faut pas le partager immédiatement. <strong>Vérifiez d'abord sa source et s'il est vrai</strong>. ℹ️</li>   </ul><p>🤔 <strong>Bon à savoir&nbsp;:</strong><br>Pour limiter le risque de vous retrouver dans un deepfake, évitez de partager des vidéos, des images de vous ou des enregistrements de votre voix.</p>"
           }
         }
       ]
@@ -387,7 +472,7 @@
           "element": {
             "id": "73720cf9-1666-48eb-a842-81942bcffda3",
             "type": "qab",
-            "instruction": "<p>Répondez aux affirmations suivantes.</p>",
+            "instruction": "<p>Voyons si vous avez retenu l'essentiel.<br>Répondez aux affirmations suivantes.</p>",
             "cards": [
               {
                 "id": "9fb991a7-92c1-4dbc-87c2-724f22993762",
