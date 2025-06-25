@@ -11,6 +11,17 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Module | QCM', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  let passageEventService, passageEventRecordStub;
+
+  hooks.beforeEach(function () {
+    passageEventService = this.owner.lookup('service:passageEvents');
+    passageEventRecordStub = sinon.stub(passageEventService, 'record');
+  });
+
+  hooks.afterEach(function () {
+    passageEventRecordStub.restore();
+  });
+
   test('should display a QCM', async function (assert) {
     // given
     const qcmElement = {
@@ -43,7 +54,7 @@ module('Integration | Component | Module | QCM', function (hooks) {
     assert.dom(verifyButton).exists();
   });
 
-  test('should call action when verify button is clicked', async function (assert) {
+  test('should call action and send an event when verify button is clicked', async function (assert) {
     // given
     const answeredProposal = [
       { id: '1', content: 'select1' },
@@ -61,16 +72,25 @@ module('Integration | Component | Module | QCM', function (hooks) {
     };
     const userResponse = [answeredProposal[0].id, answeredProposal[1].id];
     const onAnswerSpy = sinon.spy();
-    const screen = await render(<template><ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} /></template>);
-    const verifyButton = screen.queryByRole('button', { name: 'Vérifier' });
 
     // when
+    const screen = await render(<template><ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} /></template>);
     await click(screen.getByLabelText(answeredProposal[0].content));
     await click(screen.getByLabelText(answeredProposal[1].content));
+
+    const verifyButton = screen.queryByRole('button', { name: 'Vérifier' });
     await click(verifyButton);
 
     // then
     sinon.assert.calledWith(onAnswerSpy, { userResponse, element: qcmElement });
+    sinon.assert.calledWithExactly(passageEventRecordStub, {
+      type: 'QCM_ANSWERED',
+      data: {
+        answer: [answeredProposal[0].id, answeredProposal[1].id],
+        elementId: qcmElement.id,
+        status: 'ko',
+      },
+    });
     assert.ok(true);
   });
 
