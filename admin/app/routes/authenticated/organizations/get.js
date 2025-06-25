@@ -4,12 +4,17 @@ import { service } from '@ember/service';
 export default class GetRoute extends Route {
   @service oidcIdentityProviders;
   @service store;
+  @service router;
 
   async beforeModel() {
     await this.oidcIdentityProviders.loadAllAvailableIdentityProviders();
   }
 
-  model(params) {
-    return this.store.findRecord('organization', params.organization_id, { reload: true });
+  async model(params) {
+    try {
+      return await this.store.findRecord('organization', params.organization_id, { reload: true });
+    } catch {
+      this.router.replaceWith('authenticated.organizations.list');
+    }
   }
 }
