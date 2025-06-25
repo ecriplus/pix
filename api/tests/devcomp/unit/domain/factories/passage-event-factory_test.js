@@ -46,83 +46,6 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
       });
     });
 
-    describe('when given a PASSAGE_STARTED event', function () {
-      it('should return a PassageStartedEvent instance', function () {
-        // given
-        const rawEvent = {
-          occurredAt: new Date(),
-          passageId: 2,
-          sequenceNumber: 1,
-          contentHash: 'module-version',
-          type: 'PASSAGE_STARTED',
-        };
-
-        // when
-        const builtEvent = PassageEventFactory.build(rawEvent);
-
-        // then
-        expect(builtEvent).to.be.instanceOf(PassageStartedEvent);
-      });
-    });
-
-    describe('when given a PASSAGE_TERMINATED event', function () {
-      it('should return a PassageTerminatedEvent instance', function () {
-        // given
-        const rawEvent = {
-          occurredAt: new Date(),
-          passageId: 2,
-          sequenceNumber: 1,
-          contentHash: 'module-version',
-          type: 'PASSAGE_TERMINATED',
-        };
-
-        // when
-        const builtEvent = PassageEventFactory.build(rawEvent);
-
-        // then
-        expect(builtEvent).to.be.instanceOf(PassageTerminatedEvent);
-      });
-    });
-
-    describe('when given a FLASHCARDS_STARTED event', function () {
-      it('should return a FlashcardsStartedEvent instance', function () {
-        // given
-        const rawEvent = {
-          occurredAt: new Date(),
-          passageId: 2,
-          sequenceNumber: 1,
-          elementId: '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095',
-          type: 'FLASHCARDS_STARTED',
-        };
-
-        // when
-        const builtEvent = PassageEventFactory.build(rawEvent);
-
-        // then
-        expect(builtEvent).to.be.instanceOf(FlashcardsStartedEvent);
-      });
-    });
-
-    describe('when given a FLASHCARDS_VERSO_SEEN event', function () {
-      it('should return a FlashcardsVersoSeenEvent instance', function () {
-        // given
-        const rawEvent = {
-          occurredAt: new Date(),
-          passageId: 2,
-          sequenceNumber: 1,
-          elementId: '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095',
-          cardId: 'c4675f66-97f1-4202-8aeb-0388edf102d5',
-          type: 'FLASHCARDS_VERSO_SEEN',
-        };
-
-        // when
-        const builtEvent = PassageEventFactory.build(rawEvent);
-
-        // then
-        expect(builtEvent).to.be.instanceOf(FlashcardsVersoSeenEvent);
-      });
-    });
-
     describe('when given a FLASHCARDS_AUTO_ASSESSED event', function () {
       it('should return a FlashcardsAutoAssessedEvent instance', function () {
         // given
@@ -180,22 +103,116 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
       });
     });
 
-    describe('when given a QCU_DECLARATIVE_ANSWERED event', function () {
-      it('should return a QCUDeclarativeAnsweredEvent instance', function () {
+    describe('when given a FLASHCARDS_STARTED event', function () {
+      it('should return a FlashcardsStartedEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 1,
+          elementId: '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095',
+          type: 'FLASHCARDS_STARTED',
+        };
+
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(FlashcardsStartedEvent);
+      });
+    });
+
+    describe('when given a FLASHCARDS_VERSO_SEEN event', function () {
+      it('should return a FlashcardsVersoSeenEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 1,
+          elementId: '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095',
+          cardId: 'c4675f66-97f1-4202-8aeb-0388edf102d5',
+          type: 'FLASHCARDS_VERSO_SEEN',
+        };
+
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(FlashcardsVersoSeenEvent);
+      });
+    });
+
+    describe('when given a GRAIN_CONTINUED event', function () {
+      it('should return a GrainContinuedEvent instance', function () {
         // given
         const rawEvent = {
           occurredAt: new Date(),
           passageId: 2,
           sequenceNumber: 3,
-          elementId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
-          type: 'QCU_DECLARATIVE_ANSWERED',
-          answer: 'Tous les mercredis',
+          grainId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
+          type: 'GRAIN_CONTINUED',
         };
         // when
         const builtEvent = PassageEventFactory.build(rawEvent);
 
         // then
-        expect(builtEvent).to.be.instanceOf(QCUDeclarativeAnsweredEvent);
+        expect(builtEvent).to.be.instanceOf(GrainContinuedEvent);
+      });
+    });
+
+    describe('when given a GRAIN_SKIPPED event', function () {
+      it('should return a GrainContinuedEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 3,
+          grainId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
+          type: 'GRAIN_SKIPPED',
+        };
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(GrainSkippedEvent);
+      });
+    });
+
+    describe('when given a PASSAGE_STARTED event', function () {
+      it('should return a PassageStartedEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 1,
+          contentHash: 'module-version',
+          type: 'PASSAGE_STARTED',
+        };
+
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(PassageStartedEvent);
+      });
+    });
+
+    describe('when given a PASSAGE_TERMINATED event', function () {
+      it('should return a PassageTerminatedEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 1,
+          contentHash: 'module-version',
+          type: 'PASSAGE_TERMINATED',
+        };
+
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(PassageTerminatedEvent);
       });
     });
 
@@ -237,39 +254,22 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
       });
     });
 
-    describe('when given a GRAIN_CONTINUED event', function () {
-      it('should return a GrainContinuedEvent instance', function () {
+    describe('when given a QCU_DECLARATIVE_ANSWERED event', function () {
+      it('should return a QCUDeclarativeAnsweredEvent instance', function () {
         // given
         const rawEvent = {
           occurredAt: new Date(),
           passageId: 2,
           sequenceNumber: 3,
-          grainId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
-          type: 'GRAIN_CONTINUED',
+          elementId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
+          type: 'QCU_DECLARATIVE_ANSWERED',
+          answer: 'Tous les mercredis',
         };
         // when
         const builtEvent = PassageEventFactory.build(rawEvent);
 
         // then
-        expect(builtEvent).to.be.instanceOf(GrainContinuedEvent);
-      });
-    });
-
-    describe('when given a GRAIN_SKIPPED event', function () {
-      it('should return a GrainContinuedEvent instance', function () {
-        // given
-        const rawEvent = {
-          occurredAt: new Date(),
-          passageId: 2,
-          sequenceNumber: 3,
-          grainId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
-          type: 'GRAIN_SKIPPED',
-        };
-        // when
-        const builtEvent = PassageEventFactory.build(rawEvent);
-
-        // then
-        expect(builtEvent).to.be.instanceOf(GrainSkippedEvent);
+        expect(builtEvent).to.be.instanceOf(QCUDeclarativeAnsweredEvent);
       });
     });
   });
