@@ -320,12 +320,12 @@ module('Unit | Route | login-oidc', function (hooks) {
         await route.redirect(model);
 
         // then
-        sinon.assert.calledWith(route.router.transitionTo, 'authentication.login-or-register-oidc', {
+        (sinon.assert.calledWith(route.router.transitionTo, 'authentication.login-or-register-oidc', {
           queryParams: {
             identityProviderSlug,
           },
         }),
-          assert.ok(true);
+          assert.ok(true));
       });
     });
     module('when not shouldCreateUserAccount', function () {
