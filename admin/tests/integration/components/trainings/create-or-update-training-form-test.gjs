@@ -128,12 +128,11 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
     test('should format editor logo URL with base URL on form submission', async function (assert) {
       // given
       const onSubmitStub = sinon.stub();
-      const screen = await render(
+      await render(
         <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmitStub}} @onCancel={{onCancel}} /></template>,
       );
-      
+
       // when
-      const logoInput = screen.getByLabelText('Nom du fichier du logo éditeur', { exact: false });
       await fillByLabel('Nom du fichier du logo éditeur', 'new-logo.svg', { exact: false });
       await triggerEvent('form', 'submit');
 
