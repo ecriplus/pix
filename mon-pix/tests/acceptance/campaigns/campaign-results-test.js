@@ -36,6 +36,74 @@ module('Acceptance | Campaigns | Results', function (hooks) {
       });
     });
 
+    module('when user is anonymous', function (hooks) {
+      const competenceResultName = 'Competence Nom';
+
+      hooks.beforeEach(async function () {
+        // given
+        const anonymousUser = server.create('user', 'withEmail', {
+          isAnonymous: true,
+        });
+
+        await authenticate(anonymousUser);
+        const competenceResult = server.create('competence-result', {
+          name: competenceResultName,
+          masteryPercentage: 85,
+        });
+        server.create('campaign-participation-result', {
+          id: campaignParticipation.id,
+          competenceResults: [competenceResult],
+          masteryPercentage: 85,
+        });
+      });
+
+      test('should access to the result page', async function (assert) {
+        // when
+        await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
+
+        // then
+        assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/evaluation/resultats`);
+      });
+
+      module('when the evaluation results have been shared', function () {
+        test('should open a confirm modal', async function (assert) {
+          // given
+          server.create('campaign-participation-result', {
+            id: campaignParticipation.id,
+            isShared: true,
+          });
+          const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
+
+          // when
+          await click(await screen.findByRole('button', { name: 'Quitter et revenir sur Pix' }));
+
+          // then
+          const modalTitle = await screen.findByRole('heading', {
+            name: 'Quitter et revenir sur pix.fr ?',
+          });
+          assert.ok(screen.findByRole('dialog'));
+          assert.ok(modalTitle);
+        });
+
+        test('should redirect to home page when confirm button is clicked', async function (assert) {
+          // given
+          server.create('campaign-participation-result', {
+            id: campaignParticipation.id,
+            isShared: true,
+          });
+
+          const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
+
+          // when
+          await click(await screen.findByRole('button', { name: 'Quitter et revenir sur Pix' }));
+          await click(await screen.findByRole('button', { name: 'Oui, quitter le parcours' }));
+
+          // then
+          assert.strictEqual(currentURL(), '/connexion');
+        });
+      });
+    });
+
     module('When user is logged in', function (hooks) {
       const competenceResultName = 'Competence Nom';
 
@@ -84,7 +152,7 @@ module('Acceptance | Campaigns | Results', function (hooks) {
           const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
 
           // when
-          await click(await screen.findByRole('link', { name: 'Quitter' }));
+          await click(await screen.findByRole('link', { name: 'Quitter et revenir sur Pix' }));
 
           // then
           assert.strictEqual(currentURL(), '/accueil');
@@ -101,7 +169,7 @@ module('Acceptance | Campaigns | Results', function (hooks) {
           const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
 
           // when
-          await click(await screen.findByRole('button', { name: 'Quitter' }));
+          await click(await screen.findByRole('button', { name: 'Quitter et revenir sur Pix' }));
 
           // then
           const modalTitle = await screen.findByRole('heading', {

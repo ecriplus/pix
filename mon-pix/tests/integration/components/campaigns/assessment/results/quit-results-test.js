@@ -4,10 +4,15 @@ import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 
+import { stubCurrentUserService } from '../../../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../../../helpers/setup-intl-rendering';
 
 module('Integration | Components | Campaigns | Assessment | Results | Quit Results', function (hooks) {
   setupIntlRenderingTest(hooks);
+
+  hooks.beforeEach(function () {
+    stubCurrentUserService(this.owner, { firstName: 'Alain', isAnonymous: false });
+  });
 
   module('when the campaign results are not sharable', function () {
     test('it should display a quit button link', async function (assert) {
@@ -20,7 +25,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Quit Resul
       assert.ok(
         screen
           .getByRole('link', {
-            name: 'Quitter',
+            name: t('pages.skill-review.actions.back-to-pix'),
           })
           .getAttribute('href')
           .includes('/'),
@@ -39,7 +44,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Quit Resul
       assert.ok(
         screen
           .getByRole('link', {
-            name: 'Quitter',
+            name: t('pages.skill-review.actions.back-to-pix'),
           })
           .getAttribute('href')
           .includes('/'),
@@ -55,7 +60,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Quit Resul
       );
 
       // then
-      assert.dom(screen.getByRole('button', { name: 'Quitter' })).exists();
+      assert.dom(screen.getByRole('button', { name: t('pages.skill-review.actions.back-to-pix') })).exists();
     });
 
     module('when the quit button is clicked', function () {
@@ -66,27 +71,35 @@ module('Integration | Components | Campaigns | Assessment | Results | Quit Resul
         );
 
         // when
-        await click(screen.getByRole('button', { name: 'Quitter' }));
+        await click(screen.getByRole('button', { name: t('pages.skill-review.actions.back-to-pix') }));
 
         // then
         const modalTitle = await screen.findByRole('heading', {
           name: 'Oups, vous n’avez pas encore envoyé vos résultats !',
         });
         assert.dom(modalTitle).exists();
-        assert.dom(screen.getByText(t('pages.evaluation-results.quit-results.modal.content-information')));
-        assert.dom(screen.getByText(t('pages.evaluation-results.quit-results.modal.content-instruction')));
-        assert.dom(
-          screen.getByRole('button', {
-            name: t('pages.evaluation-results.quit-results.modal.actions.cancel-to-share'),
-          }),
-        );
+        assert
+          .dom(screen.getByText(t('pages.evaluation-results.quit-results.send-result-modal.content-information')))
+          .exists();
+        assert
+          .dom(screen.getByText(t('pages.evaluation-results.quit-results.send-result-modal.content-instruction')))
+          .exists();
+
+        assert
+          .dom(
+            screen.getByRole('button', {
+              name: t('pages.evaluation-results.quit-results.send-result-modal.actions.cancel-to-share'),
+            }),
+          )
+          .exists();
+
         assert.ok(
           screen
             .getByRole('link', {
-              name: t('pages.evaluation-results.quit-results.modal.actions.quit-without-sharing'),
+              name: t('pages.evaluation-results.quit-results.send-result-modal.actions.quit-without-sharing'),
             })
             .getAttribute('href')
-            .includes('authenticated'),
+            .includes('/'),
         );
       });
     });

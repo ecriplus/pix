@@ -1365,7 +1365,16 @@
     },
     "evaluation-results": {
       "quit-results": {
-        "modal": {
+        "leave-without-signup-modal": {
+          "actions": {
+            "cancel": "Annuleren",
+            "leave": "Ja, verlaat de cursus"
+          },
+          "content-information": "Als je deze cursus verlaat zonder je te registreren, kun je je voortgang niet valideren.",
+          "content-instruction": "Wil je doorgaan?",
+          "title": "Vertrekken en terugkeren naar Pix?"
+        },
+        "send-result-modal": {
           "actions": {
             "cancel-to-share": "Blijf om te verzenden",
             "quit-without-sharing": "Stoppen zonder te verzenden"
@@ -1912,6 +1921,7 @@
       "abstract": "Je beheerst '<strong>'{rate, number, ::percent}'</strong><br>'van de getoetste vaardigheden.",
       "abstract-title": "Je resultaat voor deze route",
       "actions": {
+        "back-to-pix": "Vertrekken en terugkeren naar Pix",
         "continue": "Zet je Pix-ervaring voort",
         "improve": "Ik zal het nog eens proberen",
         "send": "Ik stuur mijn resultaten"
