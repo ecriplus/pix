@@ -189,11 +189,6 @@ async function _startNewCertification({
     userId,
   });
 
-  console.log(certificationCenter.isHabilitated(ComplementaryCertificationKeys.CLEA));
-  console.log(certificationCenter.isHabilitated(ComplementaryCertificationKeys.CLEA));
-  console.log(certificationCenter.isHabilitated(ComplementaryCertificationKeys.CLEA));
-  console.log('_______________________');
-
   for (const highestCertifiableBadgeAcquisition of highestCertifiableBadgeAcquisitions) {
     const {
       complementaryCertificationKey,
@@ -202,11 +197,6 @@ async function _startNewCertification({
       campaignId,
       badgeKey,
     } = highestCertifiableBadgeAcquisition;
-
-    console.log(certificationCandidate.isGranted(complementaryCertificationKey));
-    console.log(certificationCandidate.isGranted(complementaryCertificationKey));
-    console.log(certificationCandidate.isGranted(complementaryCertificationKey));
-    console.log(certificationCandidate.isGranted(complementaryCertificationKey));
 
     if (
       certificationCenter.isHabilitated(complementaryCertificationKey) &&
@@ -284,6 +274,7 @@ async function _createCertificationCourse({
     ({ complementaryCertificationBadgeId, complementaryCertificationId }) =>
       new ComplementaryCertificationCourse({ complementaryCertificationBadgeId, complementaryCertificationId }),
   );
+
   const newCertificationCourse = CertificationCourse.from({
     certificationCandidate,
     challenges: certificationChallenges,

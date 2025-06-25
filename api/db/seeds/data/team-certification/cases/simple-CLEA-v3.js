@@ -7,7 +7,6 @@ import { usecases as enrolmentUseCases } from '../../../../../src/certification/
 import { BILLING_MODES } from '../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { usecases as organizationalEntitiesUsecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
-import * as prescriptionCampaignApi from '../../../../../src/prescription/campaign/application/api/campaigns-api.js';
 import { usecases as prescriptionTargetProfilesUsecases } from '../../../../../src/prescription/target-profile/domain/usecases/index.js';
 import {
   CertificationCenter,
@@ -19,12 +18,12 @@ import { CLEA_COMPLEMENTARY_CERTIFICATION_ID } from '../../common/complementary-
 import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
 import { CommonPixCertifOrganization } from '../shared/common-organisation.js';
 import {
-  CLEA_V3_CERTIFICATION_CENTER_EXTERNAL_ID,
-  PUBLISHED_CLEA_V3_SESSION,
-  PUBLISHED_PRO_SESSION,
-  STARTED_CLEA_V3_SESSION,
+  DOUBLE_CERTIFICATION_CLEA_CERTIFICATION_CENTER_EXTERNAL_ID,
+  PUBLISHED_DOUBLE_CERTIFICATION_CLEA_SESSION,
+  STARTED_DOUBLE_CERTIFICATION_CLEA_SESSION,
 } from '../shared/constants.js';
 import addSession from '../tools/add-session.js';
+import obtainCleaBadgeForUser from '../tools/double-certification/obtain-clea-badge-for-user.js';
 import publishSessionWithValidatedCertification from '../tools/publish-session-with-validated-certification.js';
 
 /**
@@ -49,13 +48,15 @@ export class CleaV3Seed {
 
   async create() {
     const { organization, organizationMember } = await this.#addOrganization();
+
     const { certificationCenter, certificationCenterMember } = await this.#addCertifCenter({ organizationMember });
     const certifiableUser = await this.#addCertifiableUser();
-
-    /**
-     * A double certification requires user to pass a campaign
-     */
-    await this.#createCampaign({ organization, organizationMember });
+    await obtainCleaBadgeForUser({
+      databaseBuilder: this.databaseBuilder,
+      organizationId: organization.id,
+      organizationMemberId: organizationMember.id,
+      certifiableUserId: certifiableUser.id,
+    });
 
     /**
      * Session with candidat ready to start his certification
@@ -119,16 +120,6 @@ export class CleaV3Seed {
   async #addCertifiableUser() {
     const { certifiableUser } = await CommonCertifiableUser.getInstance({ databaseBuilder: this.databaseBuilder });
     return certifiableUser;
-  }
-
-  async #createCampaign({ organization, organizationMember }) {
-    await prescriptionCampaignApi.save({
-      name: CleaV3Seed.name,
-      title: 'CLEA V3 Campaign',
-      targetProfileId: 78, // TODO: get complementary certification badges to get id,
-      organizationId: organization.id,
-      creatorId: organizationMember.id,
-    });
   }
 
   async #addReadyToStartSession({ certificationCenterMember, certificationCenter }) {
