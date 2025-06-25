@@ -694,4 +694,53 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
       expect(anonymizedUser.updatedAt.toISOString()).to.equal('2023-09-01T00:00:00.000Z');
     });
   });
+
+  describe('#convertAnonymousToRealUser', function () {
+    let clock;
+    const now = new Date('2023-09-19T01:02:03Z');
+
+    beforeEach(function () {
+      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    });
+
+    afterEach(async function () {
+      clock.restore();
+    });
+
+    it('upgrades anonymous user to real user', function () {
+      // given
+      const anonymousUser = domainBuilder.buildUser({
+        firstName: null,
+        lastName: null,
+        email: null,
+        cgu: false,
+        lang: 'fr',
+        locale: null,
+        mustValidateTermsOfService: true,
+        hasSeenAssessmentInstructions: true,
+        isAnonymous: true,
+        memberships: null,
+        certificationMemberships: null,
+        authenticationMethods: null,
+      });
+
+      const userAttributes = {
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john.doe@example.com',
+        cgu: true,
+        locale: 'fr-FR',
+      };
+
+      // when
+      const realUser = anonymousUser.convertAnonymousToRealUser(userAttributes);
+
+      // then
+      expect(realUser.id).to.be.equal(anonymousUser.id);
+      expect(realUser).to.include(userAttributes);
+      expect(realUser.isAnonymous).to.be.false;
+      expect(realUser.mustValidateTermsOfService).to.be.false;
+      expect(realUser.lastTermsOfServiceValidatedAt).to.deep.equal(now);
+    });
+  });
 });

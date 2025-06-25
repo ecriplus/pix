@@ -161,6 +161,16 @@ class User {
     });
   }
 
+  convertAnonymousToRealUser(userAttributes) {
+    return new User({
+      ...this,
+      ...userAttributes,
+      isAnonymous: false,
+      lastTermsOfServiceValidatedAt: new Date(),
+      mustValidateTermsOfService: false,
+    });
+  }
+
   mapToDatabaseDto() {
     return {
       id: this.id,

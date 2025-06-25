@@ -225,7 +225,7 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
 
     describe('when request is valid', function () {
       describe('when there is no locale cookie', function () {
-        it('should return a serialized user and a 201 status code', async function () {
+        it('returns a serialized user and a 201 status code', async function () {
           // given
           const expectedSerializedUser = { message: 'serialized user' };
           userSerializer.serialize.returns(expectedSerializedUser);
@@ -258,7 +258,7 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
       });
 
       describe('when there is a locale cookie', function () {
-        it('should return a serialized user with "locale" attribute and a 201 status code', async function () {
+        it('returns a serialized user with "locale" attribute and a 201 status code', async function () {
           // given
           const localeFromCookie = 'fr-FR';
           const expectedSerializedUser = { message: 'serialized user', locale: localeFromCookie };
@@ -308,8 +308,89 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
     });
   });
 
+  describe('#upgradeToRealUser', function () {
+    const email = 'john.doe@example.net';
+    const firstName = 'John';
+    const lastName = 'Doe';
+    const password = 'P@ssW0rd';
+    const anonymousUserToken = 'anonymous-token';
+    const language = 'fr';
+    const locale = 'fr-FR';
+    const userId = 1;
+
+    const realUser = new User({ id: userId, email, firstName, lastName, locale });
+    const expectedSerializedUser = { message: 'serialized user' };
+
+    let dependencies;
+
+    beforeEach(function () {
+      sinon.stub(usecases, 'upgradeToRealUser').resolves(realUser);
+
+      const userSerializer = {
+        serialize: sinon.stub().returns(expectedSerializedUser),
+      };
+
+      const requestResponseUtils = {
+        extractLocaleFromRequest: sinon.stub().returns(language),
+      };
+
+      const localeService = {
+        getCanonicalLocale: sinon.stub().returns(locale),
+      };
+
+      dependencies = { userSerializer, requestResponseUtils, localeService };
+    });
+
+    afterEach(function () {
+      sinon.restore();
+    });
+
+    it('calls usecase and serializes upgraded user ', async function () {
+      // when
+      const response = await userController.upgradeToRealUser(
+        {
+          auth: { credentials: { userId } },
+          state: { locale },
+          payload: {
+            data: {
+              attributes: {
+                'first-name': firstName,
+                'last-name': lastName,
+                email,
+                password,
+                cgu: true,
+                'anonymous-user-token': anonymousUserToken,
+              },
+            },
+          },
+        },
+        hFake,
+        dependencies,
+      );
+
+      // then
+      expect(dependencies.localeService.getCanonicalLocale).to.have.been.calledWithExactly(locale);
+      expect(dependencies.requestResponseUtils.extractLocaleFromRequest).to.have.been.called;
+      expect(usecases.upgradeToRealUser).to.have.been.calledWithExactly({
+        userId,
+        userAttributes: {
+          firstName,
+          lastName,
+          email,
+          locale,
+          cgu: true,
+        },
+        password,
+        anonymousUserToken,
+        language,
+      });
+      expect(dependencies.userSerializer.serialize).to.have.been.calledWithExactly(realUser);
+      expect(response.source).to.deep.equal(expectedSerializedUser);
+    });
+  });
+
   describe('#sendVerificationCode', function () {
-    it('should call the usecase to send verification code with code, email and locale', async function () {
+    it('calls the usecase to send verification code with code, email and locale', async function () {
       // given
       sinon.stub(usecases, 'sendVerificationCode');
       usecases.sendVerificationCode.resolves();
@@ -399,7 +480,7 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
   });
 
   describe('#updateUserEmailWithValidation', function () {
-    it('should call the usecase to update user email', async function () {
+    it('calls the usecase to update user email', async function () {
       // given
       const userId = 1;
       const updatedEmail = 'new-email@example.net';
@@ -591,7 +672,7 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
       sinon.stub(usecases, 'rememberUserHasSeenChallengeTooltip');
     });
 
-    it('should remember user has seen focused challenge tooltip', async function () {
+    it('remembers user has seen focused challenge tooltip', async function () {
       // given
       challengeType = 'focused';
       request = {
@@ -609,7 +690,7 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
       expect(response).to.be.equal('ok');
     });
 
-    it('should remember user has seen other challenges tooltip', async function () {
+    it('remembers user has seen other challenges tooltip', async function () {
       // given
       challengeType = 'other';
       request = {

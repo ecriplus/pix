@@ -252,6 +252,47 @@ const rememberUserHasSeenChallengeTooltip = async function (request, h, dependen
   return dependencies.userSerializer.serialize(updatedUser);
 };
 
+/**
+ * @param request
+ * @param h
+ * @param {Object} dependencies
+ * @param {LocaleService} dependencies.localeService
+ * @param {RequestResponseUtils} dependencies.requestResponseUtils
+ * @param {UserSerializer} dependencies.userSerializer
+ * @return {Promise<*>}
+ */
+const upgradeToRealUser = async function (
+  request,
+  h,
+  dependencies = { userSerializer, requestResponseUtils, localeService },
+) {
+  const anonymousUserId = request.auth.credentials.userId;
+
+  const localeFromCookie = request.state?.locale;
+  const locale = localeFromCookie ? dependencies.localeService.getCanonicalLocale(localeFromCookie) : undefined;
+  const language = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+
+  const userAttributes = {
+    firstName: request.payload.data.attributes['first-name'],
+    lastName: request.payload.data.attributes['last-name'],
+    email: request.payload.data.attributes.email,
+    cgu: request.payload.data.attributes.cgu,
+    locale,
+  };
+
+  const password = request.payload.data.attributes.password;
+  const anonymousUserToken = request.payload.data.attributes['anonymous-user-token'];
+
+  const realUser = await usecases.upgradeToRealUser({
+    userId: anonymousUserId,
+    userAttributes,
+    password,
+    anonymousUserToken,
+    language,
+  });
+  return h.response(dependencies.userSerializer.serialize(realUser));
+};
+
 export const userController = {
   acceptPixCertifTermsOfService,
   acceptPixLastTermsOfService,
@@ -268,5 +309,6 @@ export const userController = {
   sendVerificationCode,
   updatePassword,
   updateUserEmailWithValidation,
+  upgradeToRealUser,
   validateUserAccountEmail,
 };
