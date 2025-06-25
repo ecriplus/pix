@@ -816,17 +816,6 @@ describe('LLM | Integration | Application | API | llm', function () {
               value: chat.toDTO(),
               expirationDelaySeconds: ms('24h'),
             });
-            const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
-              .get('/configurations/uneConfigQuiExist')
-              .reply(200, {
-                llm: {
-                  historySize: 123,
-                },
-                challenge: {
-                  inputMaxChars: 255,
-                  inputMaxPrompts: 255,
-                },
-              });
 
             // when
             const err = await catchErr(prompt)({
@@ -839,7 +828,6 @@ describe('LLM | Integration | Application | API | llm', function () {
             // then
             expect(err).to.be.instanceOf(NoAttachmentNorMessageProvidedError);
             expect(err.message).to.equal('At least a message or an attachment, if applicable, must be provided');
-            expect(llmConfigurationScope.isDone()).to.be.true;
           });
         });
         context('when attachmentName is provided', function () {

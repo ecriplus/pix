@@ -81,12 +81,12 @@ export async function prompt({ chatId, userId, message, attachmentName }) {
   if (!userId || !chat.id.startsWith(userId)) {
     throw new ChatForbiddenError();
   }
+  if (!attachmentName && !message) {
+    throw new NoAttachmentNorMessageProvidedError();
+  }
   const configuration = await configurationRepository.get(chat.configurationId);
   if (attachmentName && !configuration.hasAttachment) {
     throw new NoAttachmentNeededError();
-  }
-  if (!attachmentName && !message) {
-    throw new NoAttachmentNorMessageProvidedError();
   }
   if (attachmentName && attachmentName === configuration.attachmentName) {
     chat.addAttachmentContextMessages(configuration.attachmentName, configuration.attachmentContext);
