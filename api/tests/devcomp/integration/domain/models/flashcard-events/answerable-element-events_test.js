@@ -1,8 +1,46 @@
-import { QCUDeclarativeAnsweredEvent } from '../../../../../../src/devcomp/domain/models/passage-events/answerable-element-events.js';
+import {
+  EmbedAnsweredEvent,
+  QCUDeclarativeAnsweredEvent,
+} from '../../../../../../src/devcomp/domain/models/passage-events/answerable-element-events.js';
 import { DomainError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Devcomp | Domain | Models | passage-events | answerable-element-events', function () {
+  describe('#EmbedAnsweredEvent', function () {
+    it('should init and keep attributes', function () {
+      // given
+      const id = Symbol('id');
+      const occurredAt = new Date();
+      const createdAt = new Date();
+      const passageId = 2;
+      const sequenceNumber = 3;
+      const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
+      const answer = 'Courgette';
+      const status = 'ok';
+
+      // when
+      const embedAnsweredEvent = new EmbedAnsweredEvent({
+        id,
+        occurredAt,
+        createdAt,
+        passageId,
+        sequenceNumber,
+        elementId,
+        answer,
+        status,
+      });
+
+      // then
+      expect(embedAnsweredEvent.id).to.equal(id);
+      expect(embedAnsweredEvent.type).to.equal('EMBED_ANSWERED');
+      expect(embedAnsweredEvent.occurredAt).to.equal(occurredAt);
+      expect(embedAnsweredEvent.createdAt).to.equal(createdAt);
+      expect(embedAnsweredEvent.passageId).to.equal(passageId);
+      expect(embedAnsweredEvent.sequenceNumber).to.equal(sequenceNumber);
+      expect(embedAnsweredEvent.data).to.deep.equal({ elementId, answer, status });
+    });
+  });
+
   describe('#QCUDeclarativeAnsweredEvent', function () {
     it('should init and keep attributes', function () {
       // given

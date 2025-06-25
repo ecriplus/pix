@@ -1,7 +1,10 @@
 import { expect } from 'chai';
 
 import { PassageEventFactory } from '../../../../../src/devcomp/domain/factories/passage-event-factory.js';
-import { QCUDeclarativeAnsweredEvent } from '../../../../../src/devcomp/domain/models/passage-events/answerable-element-events.js';
+import {
+  EmbedAnsweredEvent,
+  QCUDeclarativeAnsweredEvent,
+} from '../../../../../src/devcomp/domain/models/passage-events/answerable-element-events.js';
 import {
   FlashcardsCardAutoAssessedEvent,
   FlashcardsRectoReviewedEvent,
@@ -43,6 +46,26 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
         // then
         expect(error).to.be.instanceof(DomainError);
         expect(error.message).to.equal('Passage event with type UNKNOWN does not exist');
+      });
+    });
+
+    describe('when given an EMBED_ANSWERED event', function () {
+      it('should return a EmbedAnsweredEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 3,
+          elementId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
+          type: 'EMBED_ANSWERED',
+          answer: 'Courgette',
+          status: 'ok',
+        };
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(EmbedAnsweredEvent);
       });
     });
 

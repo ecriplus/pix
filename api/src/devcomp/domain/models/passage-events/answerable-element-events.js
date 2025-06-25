@@ -1,5 +1,22 @@
 import { assertNotNullOrUndefined } from '../../../../shared/domain/models/asserts.js';
 import { PassageEventWithElement } from './PassageEventWithElement.js';
+import { PassageEventWithElementAnswered } from './PassageEventWithElementAnswered.js';
+
+class EmbedAnsweredEvent extends PassageEventWithElementAnswered {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId, answer, status }) {
+    super({
+      type: 'EMBED_ANSWERED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
+      answer,
+      status,
+    });
+  }
+}
 
 class QCUDeclarativeAnsweredEvent extends PassageEventWithElement {
   constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId, answer }) {
@@ -18,4 +35,4 @@ class QCUDeclarativeAnsweredEvent extends PassageEventWithElement {
   }
 }
 
-export { QCUDeclarativeAnsweredEvent };
+export { EmbedAnsweredEvent, QCUDeclarativeAnsweredEvent };

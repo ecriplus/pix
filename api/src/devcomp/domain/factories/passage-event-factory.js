@@ -1,5 +1,5 @@
 import { DomainError } from '../../../shared/domain/errors.js';
-import { QCUDeclarativeAnsweredEvent } from '../models/passage-events/answerable-element-events.js';
+import { EmbedAnsweredEvent, QCUDeclarativeAnsweredEvent } from '../models/passage-events/answerable-element-events.js';
 import {
   FlashcardsCardAutoAssessedEvent,
   FlashcardsRectoReviewedEvent,
@@ -14,6 +14,8 @@ import { QABCardAnsweredEvent, QABCardRetriedEvent } from '../models/passage-eve
 class PassageEventFactory {
   static build(eventData) {
     switch (eventData.type) {
+      case 'EMBED_ANSWERED':
+        return new EmbedAnsweredEvent(eventData);
       case 'FLASHCARDS_CARD_AUTO_ASSESSED':
         return new FlashcardsCardAutoAssessedEvent(eventData);
       case 'FLASHCARDS_RECTO_REVIEWED':
