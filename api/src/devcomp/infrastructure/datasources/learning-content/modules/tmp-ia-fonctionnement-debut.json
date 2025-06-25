@@ -536,17 +536,6 @@
                 "solution": "A"
               },
               {
-                "id": "b489c898-d93a-4992-a082-b8ff849dbdbc",
-                "text": "Pour répondre à une demande, l’IA conversationnelle prend en compte le contexte de la demande.",
-                "image": {
-                  "url": "",
-                  "altText": ""
-                },
-                "proposalA": "vrai",
-                "proposalB": "faux",
-                "solution": "A"
-              },
-              {
                 "id": "95665e37-f24c-4636-9518-a94032c7f9c8",
                 "text": "Les réponses d’une IA conversationnelle sont toujours correctes.",
                 "image": {
