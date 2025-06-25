@@ -302,4 +302,52 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       ]);
     });
   });
+
+  describe('GET /api/admin/complementary-certifications/{complementaryCertificationKey}/current-consolidated-framework', function () {
+    it('should return the current consolidated framework for given complementaryCertificationKey', async function () {
+      // given
+      const superAdmin = await insertUserWithRoleSuperAdmin();
+
+      const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
+      const tubeId = 'myTubeId';
+      const skill = databaseBuilder.factory.learningContent.buildSkill({
+        tubeId,
+        status: 'actif',
+      });
+      const tube = databaseBuilder.factory.learningContent.buildTube({ id: tubeId, skillIds: [skill.id] });
+      const challenge = databaseBuilder.factory.learningContent.buildChallenge({
+        skillId: skill.id,
+        alpha: 2.1,
+        delta: 3.4,
+        status: 'validé',
+      });
+      const certificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+        complementaryCertificationKey: complementaryCertification.key,
+        challengeId: challenge.id,
+        createdAt: new Date('2023-01-11'),
+      });
+
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: `/api/admin/complementary-certifications/${complementaryCertification.key}/current-consolidated-framework`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.data).to.deep.equal({
+        type: 'certification-consolidated-frameworks',
+        attributes: {
+          'complementary-certification-key': complementaryCertification.key,
+          'created-at': certificationFrameworksChallenge.createdAt,
+          'tube-ids': [tube.id],
+        },
+      });
+    });
+  });
 });

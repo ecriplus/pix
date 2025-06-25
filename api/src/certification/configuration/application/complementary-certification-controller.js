@@ -1,6 +1,7 @@
 import { usecases } from '../domain/usecases/index.js';
 import * as attachableTargetProfilesSerializer from '../infrastructure/serializers/attachable-target-profiles-serializer.js';
 import * as complementaryCertificationSerializer from '../infrastructure/serializers/complementary-certification-serializer.js';
+import * as certificationConsolidatedFrameworkSerializer from '../infrastructure/serializers/consolidated-framework-serializer.js';
 
 const findComplementaryCertifications = async function () {
   const complementaryCertifications = await usecases.findComplementaryCertifications();
@@ -29,9 +30,20 @@ const createConsolidatedFramework = async function (request, h) {
     .code(201);
 };
 
+const getCurrentConsolidatedFramework = async function (request) {
+  const { complementaryCertificationKey } = request.params;
+
+  const currentConsolidatedFramework = await usecases.getCurrentConsolidatedFramework({
+    complementaryCertificationKey,
+  });
+
+  return certificationConsolidatedFrameworkSerializer.serialize(currentConsolidatedFramework);
+};
+
 const complementaryCertificationController = {
   findComplementaryCertifications,
   searchAttachableTargetProfilesForComplementaryCertifications,
   createConsolidatedFramework,
+  getCurrentConsolidatedFramework,
 };
 export { complementaryCertificationController };
