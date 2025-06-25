@@ -2,8 +2,9 @@ import { ORGANIZATIONS_PROFILE_REWARDS_TABLE_NAME } from '../../../../../db/migr
 import { OrganizationProfileReward } from '../../../../../src/profile/domain/models/OrganizationProfileReward.js';
 import {
   getByOrganizationId,
+  remove,
   save,
-} from '../../../../../src/profile/infrastructure/repositories/organization-profile-reward-repository.js';
+} from '../../../../../src/profile/infrastructure/repositories/organizations-profile-reward-repository.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Profile | Integration | Infrastructure | Repository | organizations-profile-rewards-repository', function () {
@@ -104,6 +105,10 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
         organizationId,
         profileRewardId: secondProfileReward.id,
       });
+      databaseBuilder.factory.buildOrganizationsProfileRewards({
+        organizationId,
+        profileRewardId: null,
+      });
       await databaseBuilder.commit();
 
       // when
@@ -111,8 +116,8 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
 
       // then
       const expectedResults = [
-        { profileRewardId: firstProfileReward.id, organizationId },
-        { profileRewardId: secondProfileReward.id, organizationId },
+        { profileRewardId: firstProfileReward.id, organizationId, userId: firstProfileReward.userId },
+        { profileRewardId: secondProfileReward.id, organizationId, userId: secondProfileReward.userId },
       ];
 
       expect(results).to.have.lengthOf(2);
@@ -140,7 +145,9 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
       const results = await getByOrganizationId({ attestationKey, organizationId });
 
       // then
-      const expectedResults = [{ profileRewardId: firstProfileReward.id, organizationId }];
+      const expectedResults = [
+        { profileRewardId: firstProfileReward.id, organizationId, userId: firstProfileReward.userId },
+      ];
 
       expect(results).to.have.lengthOf(1);
       expect(results).to.have.deep.members(expectedResults);
@@ -153,12 +160,13 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
       const otherProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const otherOrganizationId = databaseBuilder.factory.buildOrganization().id;
-      const expectedProfileReward = new OrganizationProfileReward(
-        databaseBuilder.factory.buildOrganizationsProfileRewards({
+      const expectedProfileReward = new OrganizationProfileReward({
+        ...databaseBuilder.factory.buildOrganizationsProfileRewards({
           organizationId,
           profileRewardId: profileReward.id,
         }),
-      );
+        userId: profileReward.userId,
+      });
       databaseBuilder.factory.buildOrganizationsProfileRewards({
         organizationId: otherOrganizationId,
         profileRewardId: otherProfileReward.id,
@@ -172,6 +180,68 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
       // then
       expect(results).to.have.lengthOf(1);
       expect(results[0]).to.deep.equal(expectedProfileReward);
+    });
+
+    context('when attestationKey is not provided', function () {
+      it('should return all profile rewards for given organization', async function () {
+        // given
+        const { id: rewardId } = databaseBuilder.factory.buildAttestation();
+        const firstProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
+        const secondProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
+        const organizationId = databaseBuilder.factory.buildOrganization().id;
+        databaseBuilder.factory.buildOrganizationsProfileRewards({
+          organizationId,
+          profileRewardId: firstProfileReward.id,
+        });
+        databaseBuilder.factory.buildOrganizationsProfileRewards({
+          organizationId,
+          profileRewardId: secondProfileReward.id,
+        });
+        databaseBuilder.factory.buildOrganizationsProfileRewards({
+          organizationId,
+          profileRewardId: null,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const results = await getByOrganizationId({ organizationId });
+
+        // then
+        const expectedResults = [
+          { profileRewardId: firstProfileReward.id, organizationId, userId: firstProfileReward.userId },
+          { profileRewardId: secondProfileReward.id, organizationId, userId: secondProfileReward.userId },
+        ];
+
+        expect(results).to.have.lengthOf(2);
+        expect(results).to.have.deep.members(expectedResults);
+      });
+    });
+  });
+
+  describe('#remove', function () {
+    it('should remove profile reward', async function () {
+      // given
+      const { id: rewardId } = databaseBuilder.factory.buildAttestation();
+      const profileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
+      const otherProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const organizationProfileReward = databaseBuilder.factory.buildOrganizationsProfileRewards({
+        organizationId,
+        profileRewardId: profileReward.id,
+      });
+      databaseBuilder.factory.buildOrganizationsProfileRewards({
+        organizationId,
+        profileRewardId: otherProfileReward.id,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      await remove({ organizationId, profileRewardId: profileReward.id });
+
+      // then
+      const results = await knex('organizations-profile-rewards').whereNull('profileRewardId');
+      expect(results).to.have.lengthOf(1);
+      expect(results[0]).to.deep.equal({ id: organizationProfileReward.id, organizationId, profileRewardId: null });
     });
   });
 });

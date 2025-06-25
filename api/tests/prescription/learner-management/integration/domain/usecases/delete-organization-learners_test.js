@@ -430,6 +430,37 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
         expect(certifiableBadgeAcquisition.userId).to.equal(campaignParticipation1.userId);
       });
     });
+
+    context('when there are profile rewards link to learner', function () {
+      it('should detach profile-rewards', async function () {
+        // given
+        const learner = databaseBuilder.factory.buildOrganizationLearner({ organizationId });
+
+        const profileRewardId = databaseBuilder.factory.buildProfileReward({
+          userId: learner.userId,
+        }).id;
+
+        const organizationProfileRewards = databaseBuilder.factory.buildOrganizationsProfileRewards({
+          organizationId,
+          profileRewardId,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        await usecases.deleteOrganizationLearners({
+          userId: adminUserId,
+          organizationLearnerIds: [organizationLearner1.id, organizationLearner2.id, learner.id],
+          organizationId,
+          userRole: 'ORGA_ADMIN',
+          client: 'PIX_ORGA',
+        });
+
+        // then
+        const detachProfileRewards = await knex('organizations-profile-rewards').whereNull('profileRewardId');
+        expect(detachProfileRewards).length(1);
+        expect(detachProfileRewards[0].id).equal(organizationProfileRewards.id);
+      });
+    });
   });
 
   context('when there are user-recommended-trainings linked to campaign participations', function () {

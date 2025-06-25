@@ -15,6 +15,7 @@ const deleteOrganizationLearners = withTransaction(async function ({
   assessmentRepository,
   eventLoggingJobRepository,
   userRecommendedTrainingRepository,
+  organizationsProfileRewardRepository,
 }) {
   const organizationLearnersFromOrganization =
     await organizationLearnerRepository.findOrganizationLearnersByOrganizationId({
@@ -33,11 +34,20 @@ const deleteOrganizationLearners = withTransaction(async function ({
 
   const isAnonymizationWithDeletionEnabled = await featureToggles.get('isAnonymizationWithDeletionEnabled');
 
+  const organizationProfileRewards = await organizationsProfileRewardRepository.getByOrganizationId({ organizationId });
+
   for (const organizationLearner of organizationLearnersToDelete) {
+    const organizationLearnerRewards = organizationProfileRewards.filter(
+      (organizationProfileReward) => organizationProfileReward.userId === organizationLearner.userId,
+    );
     organizationLearner.delete(userId, isAnonymizationWithDeletionEnabled);
     await organizationLearnerRepository.remove(organizationLearner.dataToUpdateOnDeletion);
 
     if (isAnonymizationWithDeletionEnabled) {
+      for (const organizationLearnerReward of organizationLearnerRewards) {
+        await organizationsProfileRewardRepository.remove(organizationLearnerReward);
+      }
+
       await eventLoggingJobRepository.performAsync(
         new EventLoggingJob({
           client,

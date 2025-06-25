@@ -8,8 +8,8 @@ const buildOrganizationsProfileRewards = function ({
   profileRewardId,
   organizationId,
 } = {}) {
-  profileRewardId ?? buildProfileReward().id;
-  organizationId ?? buildOrganization().id;
+  if (profileRewardId === undefined) profileRewardId = buildProfileReward().id;
+  if (organizationId === undefined) organizationId = buildOrganization().id;
 
   const values = {
     id,

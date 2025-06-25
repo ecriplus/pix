@@ -1,7 +1,8 @@
 class OrganizationProfileReward {
-  constructor({ organizationId, profileRewardId }) {
+  constructor({ organizationId, profileRewardId, userId }) {
     this.profileRewardId = profileRewardId;
     this.organizationId = organizationId;
+    this.userId = userId;
   }
 }
 

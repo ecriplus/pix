@@ -6,6 +6,7 @@ import * as badgeAcquisitionRepository from '../../../../evaluation/infrastructu
 import { eventLoggingJobRepository } from '../../../../identity-access-management/infrastructure/repositories/jobs/event-logging-job.repository.js';
 import * as userRepository from '../../../../identity-access-management/infrastructure/repositories/user.repository.js';
 import * as organizationFeatureApi from '../../../../organizational-entities/application/api/organization-features-api.js';
+import * as organizationsProfileRewardRepository from '../../../../profile/infrastructure/repositories/organizations-profile-reward-repository.js';
 import * as obfuscationService from '../../../../shared/domain/services/obfuscation-service.js';
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
 import * as userReconciliationService from '../../../../shared/domain/services/user-reconciliation-service.js';
@@ -42,9 +43,12 @@ import { importStorage } from '../../infrastructure/storage/import-storage.js';
 
 const dependencies = {
   assessmentRepository,
+  badgeAcquisitionRepository,
   campaignParticipationRepository: repositories.campaignParticipationRepository,
+  campaignParticipationRepositoryfromBC,
   campaignRepository,
   eventLoggingJobRepository,
+  featureToggles,
   importCommonOrganizationLearnersJobRepository,
   importOrganizationLearnersJobRepository,
   importScoCsvOrganizationLearnersJobRepository,
@@ -54,7 +58,6 @@ const dependencies = {
   logErrorWithCorrelationIds,
   logger,
   membershipRepository,
-  campaignParticipationRepositoryfromBC,
   obfuscationService,
   organizationFeatureApi,
   organizationFeatureRepository: repositories.organizationFeatureRepository,
@@ -62,18 +65,17 @@ const dependencies = {
   organizationLearnerImportFormatRepository,
   organizationLearnerRepository,
   organizationRepository,
+  organizationsProfileRewardRepository,
   placementProfileService,
   registrationOrganizationLearnerRepository,
   studentRepository,
   supOrganizationLearnerRepository,
-  userReconciliationService,
   userRecommendedTrainingRepository,
-  badgeAcquisitionRepository,
+  userReconciliationService,
   userRepository,
   validateCommonOrganizationImportFileJobRepository,
   validateCsvOrganizationImportFileJobRepository,
   validateOrganizationImportFileJobRepository,
-  featureToggles,
 };
 
 const path = dirname(fileURLToPath(import.meta.url));
