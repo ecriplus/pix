@@ -68,6 +68,8 @@ describe('Acceptance | Application | organization-invitation-route', function ()
           'logo-url': organization.logoUrl,
           'is-restricted': true,
           'identity-provider': 'GAR',
+          'is-reconciliation-required': true,
+          'has-reconciliation-fields': true,
           'reconciliation-fields': [
             {
               name: 'COMMON_FIRSTNAME',
