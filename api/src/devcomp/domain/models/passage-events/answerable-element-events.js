@@ -18,8 +18,8 @@ class EmbedAnsweredEvent extends PassageEventWithElementAnswered {
   }
 }
 
-class QCMAnsweredEvent extends PassageEventWithElement {
-  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId, answer }) {
+class QCMAnsweredEvent extends PassageEventWithElementAnswered {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId, answer, status }) {
     super({
       type: 'QCM_ANSWERED',
       id,
@@ -28,10 +28,9 @@ class QCMAnsweredEvent extends PassageEventWithElement {
       passageId,
       sequenceNumber,
       elementId,
-      data: { answer },
+      answer,
+      status,
     });
-
-    assertNotNullOrUndefined(answer, 'The answer is required for a QCMAnsweredEvent');
   }
 }
 
@@ -68,4 +67,4 @@ class QCUDeclarativeAnsweredEvent extends PassageEventWithElement {
   }
 }
 
-export { EmbedAnsweredEvent, QCUAnsweredEvent, QCUDeclarativeAnsweredEvent };
+export { EmbedAnsweredEvent, QCMAnsweredEvent, QCUAnsweredEvent, QCUDeclarativeAnsweredEvent };

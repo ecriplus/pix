@@ -1,5 +1,6 @@
 import {
   EmbedAnsweredEvent,
+  QCMAnsweredEvent,
   QCUAnsweredEvent,
   QCUDeclarativeAnsweredEvent,
 } from '../../../../../../src/devcomp/domain/models/passage-events/answerable-element-events.js';
@@ -39,6 +40,41 @@ describe('Integration | Devcomp | Domain | Models | passage-events | answerable-
       expect(embedAnsweredEvent.passageId).to.equal(passageId);
       expect(embedAnsweredEvent.sequenceNumber).to.equal(sequenceNumber);
       expect(embedAnsweredEvent.data).to.deep.equal({ elementId, answer, status });
+    });
+  });
+
+  describe('#QCMAnsweredEvent', function () {
+    it('should init and keep attributes', function () {
+      // given
+      const id = Symbol('id');
+      const occurredAt = new Date();
+      const createdAt = new Date();
+      const passageId = 2;
+      const sequenceNumber = 3;
+      const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
+      const answer = ['2', '3', '4'];
+      const status = 'ok';
+
+      // when
+      const qcmAnsweredEvent = new QCMAnsweredEvent({
+        id,
+        occurredAt,
+        createdAt,
+        passageId,
+        sequenceNumber,
+        elementId,
+        answer,
+        status,
+      });
+
+      // then
+      expect(qcmAnsweredEvent.id).to.equal(id);
+      expect(qcmAnsweredEvent.type).to.equal('QCM_ANSWERED');
+      expect(qcmAnsweredEvent.occurredAt).to.equal(occurredAt);
+      expect(qcmAnsweredEvent.createdAt).to.equal(createdAt);
+      expect(qcmAnsweredEvent.passageId).to.equal(passageId);
+      expect(qcmAnsweredEvent.sequenceNumber).to.equal(sequenceNumber);
+      expect(qcmAnsweredEvent.data).to.deep.equal({ elementId, answer, status });
     });
   });
 
