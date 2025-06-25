@@ -13,6 +13,17 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Module | Embed', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  let passageEventService, passageEventRecordStub;
+
+  hooks.beforeEach(function () {
+    passageEventService = this.owner.lookup('service:passageEvents');
+    passageEventRecordStub = sinon.stub(passageEventService, 'record');
+  });
+
+  hooks.afterEach(function () {
+    passageEventRecordStub.restore();
+  });
+
   test('should display an embed with instruction', async function (assert) {
     // given
     const embed = {
@@ -97,7 +108,7 @@ module('Integration | Component | Module | Embed', function (hooks) {
     module('when a message is received', function () {
       module('when message data has no type property', function () {
         module('when embed requires completion', function () {
-          test('should call the onAnswer method', async function (assert) {
+          test('should call the onAnswer method and send an event', async function (assert) {
             // given
             const embed = {
               id: 'id',
@@ -123,6 +134,14 @@ module('Integration | Component | Module | Embed', function (hooks) {
 
             // then
             sinon.assert.called(onElementAnswerStub);
+            sinon.assert.calledWithExactly(passageEventRecordStub, {
+              type: 'EMBED_ANSWERED',
+              data: {
+                answer: event.data.answer,
+                elementId: embed.id,
+                status: 'ok',
+              },
+            });
             assert.ok(true);
           });
         });

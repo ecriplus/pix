@@ -24,6 +24,9 @@ export default class ModulixEmbed extends ModuleElement {
   @service
   modulixPreviewMode;
 
+  @service
+  passageEvents;
+
   @tracked
   isSimulatorLaunched = false;
 
@@ -107,6 +110,15 @@ export default class ModulixEmbed extends ModuleElement {
     this.args.onAnswer({
       userResponse: [message.answer],
       element: this.args.embed,
+    });
+
+    this.passageEvents.record({
+      type: 'EMBED_ANSWERED',
+      data: {
+        answer: message.answer,
+        elementId: this.args.embed.id,
+        status: 'ok',
+      },
     });
   }
 
