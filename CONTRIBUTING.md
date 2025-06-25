@@ -14,7 +14,7 @@ Utilisez toujours [https://github.com/1024pix/pix/issues](https://github.com/102
 
 ### Format
 
-Le format à respecter est le suivant : `[<TAG>] <DESCRIPTION> (<US_ID>).`, ex : "[FEATURE] Création de compte (PIX-987)."
+Le format à respecter est le suivant : `[<TAG>] <DESCRIPTION> (<US_ID>).`, ex : "[FEATURE] Créer des comptes (PIX-987)."
 
 ### TAG
 
