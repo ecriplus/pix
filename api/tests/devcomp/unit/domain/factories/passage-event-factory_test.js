@@ -6,6 +6,7 @@ import {
   QCMAnsweredEvent,
   QCUAnsweredEvent,
   QCUDeclarativeAnsweredEvent,
+  QROCMAnsweredEvent,
 } from '../../../../../src/devcomp/domain/models/passage-events/answerable-element-events.js';
 import {
   FlashcardsCardAutoAssessedEvent,
@@ -316,6 +317,26 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
 
         // then
         expect(builtEvent).to.be.instanceOf(QCUAnsweredEvent);
+      });
+    });
+
+    describe('when given a QROCM_ANSWERED event', function () {
+      it('should return a QCUAnsweredEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 3,
+          elementId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
+          type: 'QROCM_ANSWERED',
+          answer: 'Framboise',
+          status: 'ok',
+        };
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(QROCMAnsweredEvent);
       });
     });
 

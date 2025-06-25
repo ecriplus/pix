@@ -3,6 +3,7 @@ import {
   QCMAnsweredEvent,
   QCUAnsweredEvent,
   QCUDeclarativeAnsweredEvent,
+  QROCMAnsweredEvent,
 } from '../../../../../../src/devcomp/domain/models/passage-events/answerable-element-events.js';
 import { DomainError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
@@ -174,6 +175,41 @@ describe('Integration | Devcomp | Domain | Models | passage-events | answerable-
         expect(error).to.be.instanceOf(DomainError);
         expect(error.message).to.equal('The answer is required for a QCUDeclarativeAnsweredEvent');
       });
+    });
+  });
+
+  describe('#QROCMAnsweredEvent', function () {
+    it('should init and keep attributes', function () {
+      // given
+      const id = Symbol('id');
+      const occurredAt = new Date();
+      const createdAt = new Date();
+      const passageId = 2;
+      const sequenceNumber = 3;
+      const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
+      const answer = 'Framboise';
+      const status = 'ok';
+
+      // when
+      const qrocmAnsweredEvent = new QROCMAnsweredEvent({
+        id,
+        occurredAt,
+        createdAt,
+        passageId,
+        sequenceNumber,
+        elementId,
+        answer,
+        status,
+      });
+
+      // then
+      expect(qrocmAnsweredEvent.id).to.equal(id);
+      expect(qrocmAnsweredEvent.type).to.equal('QROCM_ANSWERED');
+      expect(qrocmAnsweredEvent.occurredAt).to.equal(occurredAt);
+      expect(qrocmAnsweredEvent.createdAt).to.equal(createdAt);
+      expect(qrocmAnsweredEvent.passageId).to.equal(passageId);
+      expect(qrocmAnsweredEvent.sequenceNumber).to.equal(sequenceNumber);
+      expect(qrocmAnsweredEvent.data).to.deep.equal({ elementId, answer, status });
     });
   });
 });

@@ -67,4 +67,20 @@ class QCUDeclarativeAnsweredEvent extends PassageEventWithElement {
   }
 }
 
-export { EmbedAnsweredEvent, QCMAnsweredEvent, QCUAnsweredEvent, QCUDeclarativeAnsweredEvent };
+class QROCMAnsweredEvent extends PassageEventWithElementAnswered {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId, answer, status }) {
+    super({
+      type: 'QROCM_ANSWERED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
+      answer,
+      status,
+    });
+  }
+}
+
+export { EmbedAnsweredEvent, QCMAnsweredEvent, QCUAnsweredEvent, QCUDeclarativeAnsweredEvent, QROCMAnsweredEvent };

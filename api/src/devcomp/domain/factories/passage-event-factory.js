@@ -4,6 +4,7 @@ import {
   QCMAnsweredEvent,
   QCUAnsweredEvent,
   QCUDeclarativeAnsweredEvent,
+  QROCMAnsweredEvent,
 } from '../models/passage-events/answerable-element-events.js';
 import {
   FlashcardsCardAutoAssessedEvent,
@@ -43,6 +44,8 @@ class PassageEventFactory {
         return new QABCardAnsweredEvent(eventData);
       case 'QAB_CARD_RETRIED':
         return new QABCardRetriedEvent(eventData);
+      case 'QROCM_ANSWERED':
+        return new QROCMAnsweredEvent(eventData);
       case 'QCM_ANSWERED':
         return new QCMAnsweredEvent(eventData);
       case 'QCU_ANSWERED':
