@@ -1,7 +1,8 @@
-import { PassThrough, pipeline, Transform } from 'node:stream';
+import { PassThrough, pipeline } from 'node:stream';
 
 import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
 import * as lengthPrefixedJsonDecoderTransform from './transforms/length-prefixed-json-decoder-transform.js';
+import * as messageObjectToEventStreamTransform from './transforms/message-object-to-event-stream-transform.js';
 
 const logger = child('llm:api', { event: SCOPES.LLM });
 
@@ -16,21 +17,6 @@ const logger = child('llm:api', { event: SCOPES.LLM });
  * @returns {Promise<module:stream.internal.PassThrough>}
  */
 export async function fromLLMResponse({ llmResponse, onLLMResponseReceived, shouldSendAttachmentEventMessage }) {
-  let completeLLMMessage = '';
-  const transformConvertObjectToEventStreamData = new Transform({
-    objectMode: true,
-    transform(chunk, _encoding, callback) {
-      const { message } = chunk;
-      if (!message) {
-        callback();
-        return;
-      }
-      completeLLMMessage += message;
-      const data = toEventStreamData(message);
-      callback(null, data);
-    },
-  });
-
   const writableStream = new PassThrough();
   writableStream.on('error', (err) => {
     logger.error(`error while streaming response: ${err}`);
@@ -39,10 +25,11 @@ export async function fromLLMResponse({ llmResponse, onLLMResponseReceived, shou
     writableStream.write(getAttachmentEventMessage());
   }
   const readableStream = llmResponse ?? emptyReadable();
+  const completeLLMMessage = [];
   pipeline(
     readableStream,
     lengthPrefixedJsonDecoderTransform.getTransform(),
-    transformConvertObjectToEventStreamData,
+    messageObjectToEventStreamTransform.getTransform(completeLLMMessage),
     writableStream,
     async (err) => {
       if (err) {
@@ -51,7 +38,7 @@ export async function fromLLMResponse({ llmResponse, onLLMResponseReceived, shou
           writableStream.end('Error while streaming response from LLM');
         }
       } else {
-        await onLLMResponseReceived(completeLLMMessage);
+        await onLLMResponseReceived(completeLLMMessage.join(''));
       }
     },
   );
@@ -66,9 +53,4 @@ function emptyReadable() {
   const readableStream = new PassThrough();
   readableStream.end();
   return readableStream;
-}
-
-export function toEventStreamData(message) {
-  const formattedMessage = message.replaceAll('\n', '\ndata: ');
-  return `data: ${formattedMessage}\n\n`;
 }
