@@ -1,6 +1,7 @@
-import { render } from '@1024pix/ember-testing-library';
+import { clickByName, render } from '@1024pix/ember-testing-library';
 import Comments from 'pix-admin/components/certifications/certification/comments';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
@@ -33,5 +34,46 @@ module('Integration | Component | Certifications | certification | Comments ', f
     assert.dom(screen.getByText("C'était super, bravo à l'organisation")).exists();
     assert.dom(screen.getByText('Notes internes Jury Pix :')).exists();
     assert.dom(screen.getByText("C'était super, le jury est content")).exists();
+  });
+
+  test('it does not close the edition panel when comment cannot be saved', async function (assert) {
+    // given
+    const store = this.owner.lookup('service:store');
+    const onJuryCommentSaveStub = sinon.stub();
+    const certification = store.createRecord('certification', {
+      commentByJury: 'Initial comment',
+    });
+
+    // when
+    const screen = await render(
+      <template><Comments @certification={{certification}} @onJuryCommentSave={{onJuryCommentSaveStub}} /></template>,
+    );
+
+    await clickByName('Modifier le commentaire jury');
+    await clickByName('Enregistrer');
+
+    // then
+    assert.dom(screen.getByRole('button', { name: 'Enregistrer' })).exists();
+  });
+
+  test('it closes the edition panel when comment is saved', async function (assert) {
+    // given
+    const store = this.owner.lookup('service:store');
+    const onJuryCommentSaveStub = sinon.stub().resolves(true);
+    const certification = store.createRecord('certification', {
+      commentByJury: 'Initial comment',
+    });
+
+    // when
+    const screen = await render(
+      <template><Comments @certification={{certification}} @onJuryCommentSave={{onJuryCommentSaveStub}} /></template>,
+    );
+
+    await clickByName('Modifier le commentaire jury');
+    await clickByName('Enregistrer');
+
+    // then
+    assert.dom(screen.queryByRole('button', { name: 'Enregistrer' })).doesNotExist();
+    assert.dom(screen.getByRole('button', { name: 'Modifier le commentaire jury' })).exists();
   });
 });
