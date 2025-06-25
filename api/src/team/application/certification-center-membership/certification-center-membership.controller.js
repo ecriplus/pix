@@ -1,6 +1,6 @@
 import { ForbiddenError } from '../../../shared/application/http-errors.js';
-import * as certificationCenterMembershipSerializer from '../../../shared/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import * as certificationCenterMembershipSerializer from '../../../team/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { certificationCenterMembershipRepository } from '../../infrastructure/repositories/certification-center-membership.repository.js';
 
