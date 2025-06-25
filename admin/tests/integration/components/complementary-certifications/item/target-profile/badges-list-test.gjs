@@ -63,4 +63,58 @@ module('Integration | Component | complementary-certifications/item/target-profi
     // then
     assert.dom(screen.getByRole('link', { name: '75' })).hasAttribute('href', '/target-profiles/85/badges/75');
   });
+
+  test('it should not display minimum earned pix when it is zero', async function (assert) {
+    // given
+    const store = this.owner.lookup('service:store');
+    const complementaryCertification = store.createRecord('complementary-certification', {
+      label: 'CERTIF',
+      targetProfilesHistory: [
+        {
+          detachedAt: null,
+          name: 'TARGET PROFILE',
+          id: 85,
+          badges: [{ id: 75, label: 'Badge Feu', level: 3, minimumEarnedPix: 0 }],
+        },
+      ],
+    });
+    const currentTargetProfile = complementaryCertification.currentTargetProfiles[0];
+
+    // when
+    const screen = await render(<template><BadgesList @currentTargetProfile={{currentTargetProfile}} /></template>);
+
+    // then
+    const table = screen.getByRole('table');
+    const badgeRow = within(table).getByRole('row', { name: 'Badge Feu Badge Feu 3 75' });
+    const cells = within(badgeRow).getAllByRole('cell');
+    const minimumEarnedPixCell = cells[3]; // The 4th cell should be the minimum earned pix column
+    assert.strictEqual(minimumEarnedPixCell.textContent.trim(), '');
+  });
+
+  test('it should display minimum earned pix when it is greater than zero', async function (assert) {
+    // given
+    const store = this.owner.lookup('service:store');
+    const complementaryCertification = store.createRecord('complementary-certification', {
+      label: 'CERTIF',
+      targetProfilesHistory: [
+        {
+          detachedAt: null,
+          name: 'TARGET PROFILE',
+          id: 85,
+          badges: [{ id: 75, label: 'Badge Feu', level: 3, minimumEarnedPix: 120 }],
+        },
+      ],
+    });
+    const currentTargetProfile = complementaryCertification.currentTargetProfiles[0];
+
+    // when
+    const screen = await render(<template><BadgesList @currentTargetProfile={{currentTargetProfile}} /></template>);
+
+    // then
+    const table = screen.getByRole('table');
+    const badgeRow = within(table).getByRole('row', { name: 'Badge Feu Badge Feu 3 120 75' });
+    const cells = within(badgeRow).getAllByRole('cell');
+    const minimumEarnedPixCell = cells[3]; // The 4th cell should be the minimum earned pix column
+    assert.strictEqual(minimumEarnedPixCell.textContent.trim(), '120');
+  });
 });
