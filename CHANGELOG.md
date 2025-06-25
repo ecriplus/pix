@@ -1,5 +1,32 @@
 # Pix Changelog
 
+# [5.143.0](https://github.com/1024pix/pix/compare/v5.142.0...v5.143.0) (2025-06-25)
+
+### :rocket: Amélioration
+
+- [#12604](https://github.com/1024pix/pix/pull/12604) Afficher une modale avant de quitter la page de fin de parcours (PIX-18023) 
+- [#12625](https://github.com/1024pix/pix/pull/12625) Ajouter un filtre sur l'api maddo pour remonter les dernières participations mise à jour (PIX-18288) 
+- [#12626](https://github.com/1024pix/pix/pull/12626) ajouter une route PATCH users/{id} pour enrichir un utilisateur anonyme avec des données d'authentification (Pix-18022) 
+- [#12639](https://github.com/1024pix/pix/pull/12639) Détacher les profile-rewards de l'organisation lors de la supression de learner (PIX-18113). 
+- [#12640](https://github.com/1024pix/pix/pull/12640) Lister par défaut les feature-toggles.  
+- [#12619](https://github.com/1024pix/pix/pull/12619) Repenser l'affichage des niveaux sur la page d'analyse de Pix Orga (PIX-18337) 
+- [#12635](https://github.com/1024pix/pix/pull/12635) v2 du module tmp-ia-fonctionnement-debut pour revue PYO 
+
+### :bug: Correction
+
+- [#12632](https://github.com/1024pix/pix/pull/12632) Corriger une typo dans le message de MER 
+- [#12528](https://github.com/1024pix/pix/pull/12528) Mettre à jour les informations d'une invitation à rejoindre une organisation lors d'un renvoie avec de nouveaux paramètres (PIX-18065) 
+- [#12621](https://github.com/1024pix/pix/pull/12621) Réparer l'affichage du nombre de tentatives de connexions restantes (PIX-18405) 
+
+### :building_construction: Tech
+
+- [#12627](https://github.com/1024pix/pix/pull/12627) Bump audit-logger dependencies 
+- [#12568](https://github.com/1024pix/pix/pull/12568) Montée de version EmberJS pour PixAdmin 
+
+### :coffee: Autre
+
+- [#12638](https://github.com/1024pix/pix/pull/12638) Corriger l'exemple de titre de PR
+
 # [5.142.0](https://github.com/1024pix/pix/compare/v5.141.0...v5.142.0) (2025-06-24)
 
 ### :rocket: Amélioration
