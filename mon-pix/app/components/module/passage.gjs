@@ -127,13 +127,6 @@ export default class ModulePassage extends Component {
       .save({
         adapterOptions: { passageId: this.args.passage.id },
       });
-
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
-      'pix-event-name': `Click sur le bouton vérifier de l'élément : ${answerData.element.id}`,
-    });
   }
 
   @action
