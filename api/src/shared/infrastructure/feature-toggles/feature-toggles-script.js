@@ -31,7 +31,7 @@ export class FeatureToggleScript extends Script {
     const { list, key, value } = options;
 
     // List all feature toggles
-    if (list) {
+    if (list || (!key && !value)) {
       const all = await featureTogglesClient.all();
       for (const [key, value] of Object.entries(all)) {
         logger.warn(`Feature toggle "${key}" is set to "${value}"`);
