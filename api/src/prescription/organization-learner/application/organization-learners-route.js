@@ -31,7 +31,7 @@ const register = async function (server) {
           '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
             '- Cette route retourne le taux de couverture par tubes pour l\'organisation"- ' +
             "- L'organisation doit avoir la feature COVER_RATE d'activée" +
-            "- L'utisateur doit être admin de l'organisation'",
+            "- L'utilisateur doit être admin de l'organisation'",
         ],
         tags: ['api', 'organization', 'analysis'],
       },
