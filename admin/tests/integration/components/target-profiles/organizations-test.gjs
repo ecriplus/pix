@@ -2,6 +2,7 @@ import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library
 import EmberObject from '@ember/object';
 import Organizations from 'pix-admin/components/target-profiles/organizations';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
@@ -220,5 +221,87 @@ module('Integration | Component | target-profiles | Organizations', function (ho
     // then
     assert.dom(screen.getByLabelText('Valider le rattachement')).isDisabled();
     assert.dom(screen.getByLabelText('Valider le rattachement à partir de ce profil cible')).isDisabled();
+  });
+
+  module('Organization attachment functionality', function (hooks) {
+    let store;
+
+    hooks.beforeEach(function () {
+      store = this.owner.lookup('service:store');
+    });
+
+    test('it should enable button when input has content', async function (assert) {
+      // given
+      const organizations = [];
+      const targetProfile = { id: 56 };
+
+      // when
+      const screen = await render(
+        <template>
+          <Organizations
+            @organizations={{organizations}}
+            @targetProfile={{targetProfile}}
+            @goToOrganizationPage={{goToOrganizationPage}}
+            @triggerFiltering={{triggerFiltering}}
+            @detachOrganizations={{detachOrganizations}}
+          />
+        </template>,
+      );
+      await fillByLabel('Rattacher une ou plusieurs organisation(s)', '1, 2');
+
+      // then
+      assert.dom(screen.getByLabelText('Valider le rattachement')).isNotDisabled();
+    });
+
+    test('it should call adapter when form is submitted', async function (assert) {
+      // given
+      const organizations = [];
+      const targetProfile = { id: 56 };
+      const adapter = store.adapterFor('target-profile');
+      const attachOrganizationsStub = sinon.stub(adapter, 'attachOrganizations').resolves({
+        data: { attributes: { 'duplicated-ids': [], 'attached-ids': [1, 2] } },
+      });
+
+      // when
+      await render(
+        <template>
+          <Organizations
+            @organizations={{organizations}}
+            @targetProfile={{targetProfile}}
+            @goToOrganizationPage={{goToOrganizationPage}}
+            @triggerFiltering={{triggerFiltering}}
+            @detachOrganizations={{detachOrganizations}}
+          />
+        </template>,
+      );
+      await fillByLabel('Rattacher une ou plusieurs organisation(s)', '1, 2');
+      await clickByName('Valider le rattachement');
+
+      // then
+      assert.ok(attachOrganizationsStub.calledWith({ organizationIds: [1, 2], targetProfileId: 56 }));
+    });
+
+    test('it should enable button for existing target profile attachment', async function (assert) {
+      // given
+      const organizations = [];
+      const targetProfile = { id: 56 };
+
+      // when
+      const screen = await render(
+        <template>
+          <Organizations
+            @organizations={{organizations}}
+            @targetProfile={{targetProfile}}
+            @goToOrganizationPage={{goToOrganizationPage}}
+            @triggerFiltering={{triggerFiltering}}
+            @detachOrganizations={{detachOrganizations}}
+          />
+        </template>,
+      );
+      await fillByLabel("Rattacher les organisations d'un profil cible existant", '123');
+
+      // then
+      assert.dom(screen.getByLabelText('Valider le rattachement à partir de ce profil cible')).isNotDisabled();
+    });
   });
 });
