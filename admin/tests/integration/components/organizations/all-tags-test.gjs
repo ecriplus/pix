@@ -52,6 +52,29 @@ module('Integration | Component | organizations/all-tags', function (hooks) {
     assert.dom(screen.getByText('POLE EMPLOI')).exists();
   });
 
+  test('it should be possible to search with accents', async function (assert) {
+    // given
+    ENV.pagination.debounce = 0;
+    const store = this.owner.lookup('service:store');
+    const tag1 = store.createRecord('tag', { name: 'ELEMENTAIRE' });
+    const tag2 = store.createRecord('tag', { name: 'PRIMAIRE' });
+    const tag3 = store.createRecord('tag', { name: 'ELECTRIQUE' });
+    const tag4 = store.createRecord('tag', { name: 'SUPERIEUR' });
+    const organization = store.createRecord('organization', { tags: [tag1] });
+
+    const model = { organization, allTags: [tag1, tag2, tag3, tag4] };
+
+    // when
+    const screen = await render(<template><AllTags @model={{model}} /></template>);
+    await fillIn(screen.getByRole('textbox', { name: 'Filtrer les tags' }), 'élé');
+
+    // then
+    assert.dom(screen.getByText('ELEMENTAIRE')).exists();
+    assert.dom(screen.getByText('ELECTRIQUE')).exists();
+    assert.dom(screen.queryByText('PRIMAIRE')).doesNotExist();
+    assert.dom(screen.queryByText('SUPERIEUR')).doesNotExist();
+  });
+
   module('when clicking on a tag', () => {
     module('when the tag is not yet associated to the organization', () => {
       test('it associates the tag to the organization and displays a recently used tags list', async function (assert) {
