@@ -26,7 +26,7 @@
           "element": {
             "id": "028bb087-c3b6-43a6-93b7-e6a36d332a78",
             "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/MGO/ia-int-accroche.html\" height=\"800\"></iframe>"
+            "content": "<iframe title=\"llm\" src=\"https://1024pix.github.io/atelier-contenus/MGO/ia-int-accroche.html\" height=\"800\"></iframe>"
           }
         }
       ]
@@ -41,14 +41,14 @@
           "element": {
             "id": "cc7708a8-c68a-44a9-ac54-6f1d5b1b6f4e",
             "type": "qcu-declarative",
-            "instruction": "<p>Qu’est ce qui vous paraît le plus remarquable à propos de ce logiciel ?</p>",
+            "instruction": "<p>Qu’est ce qui vous paraît le plus remarquable à propos de ce logiciel ?</p>",
             "proposals": [
               {
                 "id": "1",
                 "content": "<p>il a l’air incollable</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Effectivement, il est capable de répondre de façon pertinente sur des sujets très divers ! On peut aussi remarquer qu'il est possible de poser des questions et d'obtenir des réponses comme si on discutait avec un humain. 💬 </p>"
+                  "diagnosis": "<p>Effectivement, il est capable de répondre de façon pertinente sur des sujets très divers ! On peut aussi remarquer qu'il est possible de poser des questions et d'obtenir des réponses comme si on discutait avec un humain. 💬 </p>"
                 }
               },
               {
@@ -56,7 +56,7 @@
                 "content": "<p>il s’exprime comme un humain</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Effectivement, on pourrait penser qu'on discute avec un humain ! On peut aussi remarquer que les réponses sont pertinentes sur des sujets très divers. 🏊‍♀️ </p>"
+                  "diagnosis": "<p>Effectivement, on pourrait penser qu'on discute avec un humain ! On peut aussi remarquer que les réponses sont pertinentes sur des sujets très divers. 🏊‍♀️ </p>"
                 }
               },
               {
@@ -112,7 +112,7 @@
           "element": {
             "id": "575b7423-919a-4e5c-9bc9-4c98c30bdc2f",
             "type": "text",
-            "content": "<iframe title=\"pretraining\" src=\"https://1024pix.github.io/atelier-contenus/MGO/ia-dec-pretraining.html\" height=\"800\"></iframe><p>\"</p>"
+            "content": "<iframe title=\"pretraining\" src=\"https://1024pix.github.io/atelier-contenus/MGO/ia-dec-pretraining.html\" height=\"800\"></iframe>"
           }
         },
         {
@@ -231,7 +231,7 @@
                 "id": "cea6f6c8-afd6-4e6b-8821-17558822a5ea",
                 "text": "Utiliser pour l'entraînement ?",
                 "image": {
-                  "url": "https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg",
+                  "url": "https://assets.pix.org/draft/modules/ia-int-mgo/forum.png",
                   "altText": ""
                 },
                 "proposalA": "Oui",
@@ -242,7 +242,7 @@
                 "id": "667724f0-baa9-4eb5-85b1-626bd91b376d",
                 "text": "Utiliser pour l'entraînement ?",
                 "image": {
-                  "url": "https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg",
+                  "url": "https://assets.pix.org/draft/modules/ia-int-mgo/contact.png",
                   "altText": ""
                 },
                 "proposalA": "Oui",
@@ -253,7 +253,7 @@
                 "id": "ba011fbb-8f9b-4755-868f-f79aff3e3022",
                 "text": "Utiliser pour l'entraînement ?",
                 "image": {
-                  "url": "https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg",
+                  "url": "https://assets.pix.org/draft/modules/ia-int-mgo/faq.png",
                   "altText": ""
                 },
                 "proposalA": "Oui",
@@ -264,7 +264,7 @@
                 "id": "438be278-98a6-47ee-a04b-cab2e2fbd3b6",
                 "text": "Utiliser pour l'entraînement ?",
                 "image": {
-                  "url": "https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg",
+                  "url": "https://assets.pix.org/draft/modules/ia-int-mgo/article.png",
                   "altText": ""
                 },
                 "proposalA": "Oui",
@@ -348,7 +348,7 @@
           "element": {
             "id": "cdcfa627-0948-463f-b658-c6fa5a8164fa",
             "type": "qcu-declarative",
-            "instruction": "<p>À votre avis, quelle réponse choisiraient la plupart des utilisateurs ?</p>",
+            "instruction": "<p>À votre avis, quelle réponse choisiraient la plupart des utilisateurs ?</p>",
             "proposals": [
               {
                 "id": "1",
@@ -400,7 +400,7 @@
                 {
                   "id": "d55d9fe9-b12a-4351-97ab-704341f4265d",
                   "type": "text",
-                  "content": "<p>Pour apprendre à l’IA générative à faire des réponses satisfaisantes, on utilise un système de <strong>récompense</strong>. Chacune des réponses de l’IA Gen est notée, “bien” ou “pas bien”. Elle essaye d’obtenir le plus de “bien” possible. C’est de l’apprentissage par <strong>renforcement</strong>.</p>"
+                  "content": "<p>Pour apprendre à l’IA générative à faire des réponses satisfaisantes, on utilise un système de <strong>récompense</strong>. Chacune des réponses de l’IA Gen est notée, “bien” ou “pas bien”. Elle essaye d’obtenir le plus de “bien” possible. C’est de l’apprentissage par <strong>renforcement</strong>.</p>"
                 }
               ]
             },
@@ -427,7 +427,7 @@
                 {
                   "id": "e3e9640d-33de-4076-ac26-2525371095bd",
                   "type": "text",
-                  "content": "<p>Bon à savoir 💡: Ce principe d'alignement aux attentes des humains, a tendance à rendre les IA génératives <strong>complaisantes</strong>. Pour aller dans le sens de l’utilisateur, elles peuvent inventer des faits et halluciner.</p>"
+                  "content": "<p>Bon à savoir 💡: Ce principe d'alignement aux attentes des humains, a tendance à rendre les IA génératives <strong>complaisantes</strong>. Pour aller dans le sens de l’utilisateur, elles peuvent inventer des faits et halluciner.</p>"
                 }
               ]
             }
