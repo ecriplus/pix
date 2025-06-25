@@ -434,6 +434,21 @@
           ]
         }
       ]
+    },
+    {
+      "id": "32897730-80af-4901-b2c7-5aa120bebb55",
+      "type": "summary",
+      "title": "Récap",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "00bcbb9f-04ad-4748-9267-5e59b1c53dfa",
+            "type": "text",
+            "content": "<style>\n  .table-container {\n    max-width: 700px;\n    margin: auto;\n    overflow-x: auto;\n    border-radius: 1rem;\n    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);\n    background-color: white;\n    font-family: system-ui, sans-serif;\n  }\n\n  .table-container table {\n    width: 100%;\n    border-collapse: collapse;\n    text-align: left;\n  }\n\n  .table-container th,\n  .table-container td {\n    padding: 1rem;\n    border-bottom: 1px solid #e5e7eb;\n    vertical-align: top;\n  }\n\n  .table-container th,\n  .table-container td.header-col {\n    background-color: #f3f4f6;\n    font-weight: 600;\n    color: #111827;\n    text-align: left;\n    width: 20%;\n  }\n\n  .table-container td:not(.header-col) {\n    width: 26.66%;\n  }\n\n  .table-container tr:last-child td {\n    border-bottom: none;\n  }\n\n  @media (max-width: 600px) {\n    .table-container th,\n    .table-container td {\n      padding: 0.75rem;\n    }\n  }\n</style>\n  <p>📍<strong>Mémo</strong></p><br>\n  \n<div class=\"table-container\">\n  <table>\n    <tbody>\n      <tr>\n        <td class=\"header-col\">Pré-entraînement</td>\n        <td>Milliards de textes</td>\n        <td>Analyse des textes\t</td>\n        <td>Produire du texte, prédire suite d’un texte\t</td>\n      </tr>\n      <tr>\n        <td class=\"header-col\">Ajustement</td>\n        <td>Textes spécifiques (conversations …) sélectionnés par des humains</td>\n        <td>Apprentissage d’une tâche spécifique</td>\n        <td>Savoir créer du texte avec des contraintes de style, forme, etc (conversation, …)</td>\n      </tr>\n      <tr>\n        <td class=\"header-col\">Alignement</td>\n        <td>Préférences des utilisateurs</td>\n        <td>Optimisation selon les préférences des utilisateurs</td>\n        <td>Produire du texte qui plait aux utilisateurs</td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n"
+          }
+        }
+      ]
     }
   ]
 }
