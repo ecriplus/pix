@@ -383,7 +383,7 @@ describe('Acceptance | Controller | passage-controller', function () {
             value: chat.toDTO(),
             expirationDelaySeconds: ms('24h'),
           });
-          nock('https://llm-test.pix.fr/api')
+          const getConfigScope = nock('https://llm-test.pix.fr/api')
             .get('/configurations/uneConfigQuiExist')
             .reply(200, {
               llm: {
@@ -398,7 +398,7 @@ describe('Acceptance | Controller | passage-controller', function () {
                 context: 'some context',
               },
             });
-          nock('https://llm-test.pix.fr/api')
+          const promptLlmScope = nock('https://llm-test.pix.fr/api')
             .post('/chat', {
               configurationId: 'uneConfigQuiExist',
               history: [
@@ -438,6 +438,8 @@ describe('Acceptance | Controller | passage-controller', function () {
           // then
           expect(response.statusCode).to.equal(201);
           expect(response.result).to.deep.equal("event: attachment\ndata: \n\ndata: coucou c'est super\n\n");
+          expect(getConfigScope.isDone()).to.be.true;
+          expect(promptLlmScope.isDone()).to.be.true;
         });
       });
     });
