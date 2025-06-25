@@ -11,6 +11,17 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Module | QROCM', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  let passageEventService, passageEventRecordStub;
+
+  hooks.beforeEach(function () {
+    passageEventService = this.owner.lookup('service:passageEvents');
+    passageEventRecordStub = sinon.stub(passageEventService, 'record');
+  });
+
+  hooks.afterEach(function () {
+    passageEventRecordStub.restore();
+  });
+
   test('should display a block QROCM', async function (assert) {
     // given
     const qrocm = {
@@ -302,7 +313,7 @@ module('Integration | Component | Module | QROCM', function (hooks) {
       .doesNotExist();
   });
 
-  module('should call action when verify button is clicked', function () {
+  module('should call action and send an event when verify button is clicked', function () {
     test('when proposal is an input', async function (assert) {
       // given
       const qrocm = {
@@ -323,19 +334,19 @@ module('Integration | Component | Module | QROCM', function (hooks) {
         type: 'qrocm',
       };
       const userResponse = 'user-response';
-      const givenonElementAnswerSpy = sinon.spy();
-
-      const screen = await render(
-        <template><ModuleQrocm @element={{qrocm}} @onAnswer={{givenonElementAnswerSpy}} /></template>,
-      );
-      const verifyButton = screen.queryByRole('button', { name: 'Vérifier' });
+      const onElementAnswerSpy = sinon.spy();
 
       // when
+      const screen = await render(
+        <template><ModuleQrocm @element={{qrocm}} @onAnswer={{onElementAnswerSpy}} /></template>,
+      );
       await fillIn(screen.getByLabelText('Réponse 1'), userResponse);
+
+      const verifyButton = screen.queryByRole('button', { name: 'Vérifier' });
       await click(verifyButton);
 
       // then
-      sinon.assert.calledWith(givenonElementAnswerSpy, {
+      sinon.assert.calledWith(onElementAnswerSpy, {
         userResponse: [
           {
             input: 'symbole',
@@ -343,6 +354,19 @@ module('Integration | Component | Module | QROCM', function (hooks) {
           },
         ],
         element: qrocm,
+      });
+      sinon.assert.calledWithExactly(passageEventRecordStub, {
+        type: 'QROCM_ANSWERED',
+        data: {
+          answer: [
+            {
+              input: 'symbole',
+              answer: userResponse,
+            },
+          ],
+          elementId: qrocm.id,
+          status: 'ko',
+        },
       });
       assert.ok(true);
     });
@@ -375,9 +399,9 @@ module('Integration | Component | Module | QROCM', function (hooks) {
         type: 'qrocm',
       };
       const userResponse = { input: 'premiere-partie', answer: '2' };
-      const givenonElementAnswerSpy = sinon.spy();
+      const onElementAnswerSpy = sinon.spy();
       const screen = await render(
-        <template><ModuleQrocm @element={{qrocm}} @onAnswer={{givenonElementAnswerSpy}} /></template>,
+        <template><ModuleQrocm @element={{qrocm}} @onAnswer={{onElementAnswerSpy}} /></template>,
       );
       const verifyButton = screen.queryByRole('button', { name: 'Vérifier' });
 
@@ -392,7 +416,15 @@ module('Integration | Component | Module | QROCM', function (hooks) {
       await click(verifyButton);
 
       // then
-      sinon.assert.calledWith(givenonElementAnswerSpy, { userResponse: [userResponse], element: qrocm });
+      sinon.assert.calledWith(onElementAnswerSpy, { userResponse: [userResponse], element: qrocm });
+      sinon.assert.calledWithExactly(passageEventRecordStub, {
+        type: 'QROCM_ANSWERED',
+        data: {
+          answer: [userResponse],
+          elementId: qrocm.id,
+          status: 'ko',
+        },
+      });
       assert.ok(true);
     });
   });
