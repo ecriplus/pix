@@ -65,7 +65,7 @@ export default async function initUser(databaseBuilder) {
       targetProfileId: targetProfileId,
       organizationId: specificOrganizationId,
       ownerId: REAL_PIX_SUPER_ADMIN_ID,
-      code: `AUTOCOURS${i}`,
+      code: `AUTOCOUR${i}`,
       name: `Parcours autonome n°${i}`,
       title: `Titre principal du parcours autonome n°${i}`,
       customLandingPageText: `<strong>Lorem ipsum dolor sit amet</strong>, consectetur adipiscing elit. Mauris eget tortor ut diam dictum viverra quis at purus. Morbi id quam a massa blandit gravida.`,
