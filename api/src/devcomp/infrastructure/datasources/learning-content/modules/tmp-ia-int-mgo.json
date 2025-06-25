@@ -26,14 +26,14 @@
           "element": {
             "id": "028bb087-c3b6-43a6-93b7-e6a36d332a78",
             "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/MGO/ia-int-accroche.html\" height=\"800\"></iframe>\n"
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/MGO/ia-int-accroche.html\" height=\"800\"></iframe>"
           }
         }
       ]
     },
     {
       "id": "375bab8e-3de8-4121-b29f-3e35039e2cec",
-      "type": "lesson",
+      "type": "discovery",
       "title": "Que peut-on dire",
       "components": [
         {
@@ -48,7 +48,7 @@
                 "content": "<p>il a l’air incollable</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>diag</p>"
+                  "diagnosis": "<p>Effectivement, il est capable de répondre de façon pertinente sur des sujets très divers ! On peut aussi remarquer qu'il est possible de poser des questions et d'obtenir des réponses comme si on discutait avec un humain. 💬 </p>"
                 }
               },
               {
@@ -56,7 +56,7 @@
                 "content": "<p>il s’exprime comme un humain</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>diag</p>"
+                  "diagnosis": "<p>Effectivement, on pourrait penser qu'on discute avec un humain ! On peut aussi remarquer que les réponses sont pertinentes sur des sujets très divers. 🏊‍♀️ </p>"
                 }
               },
               {
@@ -64,7 +64,7 @@
                 "content": "<p>je n’en pense rien de particulier</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>diag</p>"
+                  "diagnosis": "<p>Le logiciel permet de discuter comme on le ferait avec un humain. On remarque aussi que les réponses sont pertinentes sur des sujets très variés.</p>"
                 }
               }
             ]
@@ -97,7 +97,7 @@
           "element": {
             "id": "2d943050-b29c-4398-a336-143f3173c51a",
             "type": "text",
-            "content": "<p>L’IA générative doit d’abord s’entraîner à <strong>produire du texte</strong> compréhensible par un humain.&nbsp;</p>\n<p>Pour commencer, cliquez sur \"Entraîner l'IA avec ces données\"</p>"
+            "content": "<p>L’IA générative doit d’abord s’entraîner à <strong>produire du texte</strong> compréhensible par un humain.&nbsp;</p><p>Pour commencer, cliquez sur \"Entraîner l'IA avec ces données\"</p>"
           }
         }
       ]
@@ -105,26 +105,49 @@
     {
       "id": "31c675be-3455-4f95-a044-99ddde1e4694",
       "type": "lesson",
-      "title": "Dec 1 Act 1",
+      "title": "Découverte 1 Activité 1",
       "components": [
         {
           "type": "element",
           "element": {
             "id": "575b7423-919a-4e5c-9bc9-4c98c30bdc2f",
             "type": "text",
-            "content": "<iframe title=\"pretraining\" src=\"https://1024pix.github.io/atelier-contenus/MGO/ia-dec-pretraining.html\" height=\"800\"></iframe>"
+            "content": "<iframe title=\"pretraining\" src=\"https://1024pix.github.io/atelier-contenus/MGO/ia-dec-pretraining.html\" height=\"800\"></iframe><p>\"</p>"
           }
         },
         {
           "type": "element",
           "element": {
             "id": "87e8de3c-dfa9-4a5d-91d8-ae8a703d7772",
-            "type": "custom",
-            "tagName": "message-conversation",
-            "props": {
-              "title": "",
-              "messages": []
-            }
+            "type": "qcu",
+            "instruction": "<p>À votre avis, quel mot cette IA générative va-t-elle choisir pour compléter cette phrase ?</p><p>En Océanie, l'animal le plus courant est le&nbsp;:</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>kangourou</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Observez attentivement la taille du cercle nommé \\\"koala\\\" par rapport à celui qui représente \\\"kangourou\\\".</p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "<p>koala</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Pendant cette étape de l’entraînement, elle a bien remarqué que le mot “koala” apparaît souvent en même temps que “animaux”, “océanie”, etc.</p>"
+                }
+              },
+              {
+                "id": "3",
+                "content": "<p>wallaby</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Observez attentivement la taille du cercle nommé \\\"koala\\\" par rapport à celui qui représente \\\"wallaby\\\".</p>"
+                }
+              }
+            ],
+            "solution": "2"
           }
         }
       ]
