@@ -11,6 +11,17 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Module | QCU', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  let passageEventService, passageEventRecordStub;
+
+  hooks.beforeEach(function () {
+    passageEventService = this.owner.lookup('service:passageEvents');
+    passageEventRecordStub = sinon.stub(passageEventService, 'record');
+  });
+
+  hooks.afterEach(function () {
+    passageEventRecordStub.restore();
+  });
+
   test('should display a QCU', async function (assert) {
     // given
     const qcuElement = {
@@ -43,7 +54,7 @@ module('Integration | Component | Module | QCU', function (hooks) {
     assert.dom(verifyButton).exists();
   });
 
-  test('should call action when verify button is clicked', async function (assert) {
+  test('should call action and send an event when verify button is clicked', async function (assert) {
     // given
     const answeredProposal = { id: '1', content: 'radio1' };
     const qcuElement = {
@@ -54,15 +65,24 @@ module('Integration | Component | Module | QCU', function (hooks) {
     };
     const userResponse = [answeredProposal.id];
     const onAnswerSpy = sinon.spy();
-    const screen = await render(<template><ModulixQcu @element={{qcuElement}} @onAnswer={{onAnswerSpy}} /></template>);
-    const verifyButton = screen.queryByRole('button', { name: 'Vérifier' });
 
     // when
+    const screen = await render(<template><ModulixQcu @element={{qcuElement}} @onAnswer={{onAnswerSpy}} /></template>);
     await click(screen.getByLabelText(answeredProposal.content));
+
+    const verifyButton = screen.queryByRole('button', { name: 'Vérifier' });
     await click(verifyButton);
 
     // then
     sinon.assert.calledWith(onAnswerSpy, { userResponse, element: qcuElement });
+    sinon.assert.calledWithExactly(passageEventRecordStub, {
+      type: 'QCU_ANSWERED',
+      data: {
+        answer: answeredProposal.id,
+        elementId: qcuElement.id,
+        status: 'ko',
+      },
+    });
     assert.ok(true);
   });
 
