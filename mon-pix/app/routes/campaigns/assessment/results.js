@@ -48,7 +48,9 @@ export default class ResultsRoute extends Route {
     if (!this.featureToggles.featureToggles?.isAutoShareEnabled) {
       return;
     }
-
+    if (campaignParticipationResult.isShared) {
+      return;
+    }
     await this.store.adapterFor('campaign-participation-result').share(campaignParticipationResult.id);
     campaignParticipationResult.isShared = true;
     campaignParticipationResult.canImprove = false;
