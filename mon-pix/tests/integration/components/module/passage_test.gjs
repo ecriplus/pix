@@ -281,7 +281,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       assert.strictEqual(findAll('.element-text').length, 1);
     });
 
-    test('should push event', async function (assert) {
+    test('should send an event', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       const textElement = { content: 'content', type: 'text' };
@@ -310,11 +310,11 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await clickByName(t('pages.modulix.buttons.grain.skip'));
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, {
-        event: 'custom-event',
-        'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.slug}`,
-        'pix-event-name': `Click sur le bouton passer du grain : ${grain1.id}`,
+      sinon.assert.calledWithExactly(passageEventRecordStub, {
+        type: 'GRAIN_SKIPPED',
+        data: {
+          grainId: grain1.id,
+        },
       });
       assert.ok(true);
     });

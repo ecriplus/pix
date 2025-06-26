@@ -7,7 +7,7 @@ import {
   FlashcardsStartedEvent,
   FlashcardsVersoSeenEvent,
 } from '../models/passage-events/flashcard-events.js';
-import { GrainContinuedEvent } from '../models/passage-events/grain-events.js';
+import { GrainContinuedEvent, GrainSkippedEvent } from '../models/passage-events/grain-events.js';
 import { PassageStartedEvent, PassageTerminatedEvent } from '../models/passage-events/passage-events.js';
 import { QABCardAnsweredEvent, QABCardRetriedEvent } from '../models/passage-events/qab-events.js';
 
@@ -36,6 +36,8 @@ class PassageEventFactory {
         return new QABCardRetriedEvent(eventData);
       case 'GRAIN_CONTINUED':
         return new GrainContinuedEvent(eventData);
+      case 'GRAIN_SKIPPED':
+        return new GrainSkippedEvent(eventData);
       default:
         throw new DomainError(`Passage event with type ${eventData.type} does not exist`);
     }
