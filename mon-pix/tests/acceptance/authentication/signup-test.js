@@ -181,7 +181,7 @@ module('Acceptance | authentication | Signup', function (hooks) {
       const lastName = 'Doe';
       const email = 'john.doe@email.com';
       const password = 'JeMeLoggue1024';
-      const campaign = server.create('campaign', { isRestricted: false });
+      const campaign = server.create('campaign', 'withVerifiedCode', { isRestricted: false });
 
       // when
       const screen = await visit('/campagnes');
