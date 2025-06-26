@@ -137,16 +137,6 @@ export default class ModulePassage extends Component {
   }
 
   @action
-  async onSelfAssessment({ userAssessment, cardId }) {
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
-      'pix-event-name': `Click sur le bouton '${userAssessment}' de la flashcard : ${cardId}`,
-    });
-  }
-
-  @action
   async onElementRetry(answerData) {
     this.metrics.trackEvent({
       event: 'custom-event',
@@ -251,7 +241,6 @@ export default class ModulePassage extends Component {
             @onImageAlternativeTextOpen={{this.onImageAlternativeTextOpen}}
             @onVideoTranscriptionOpen={{this.onVideoTranscriptionOpen}}
             @onElementAnswer={{this.onElementAnswer}}
-            @onSelfAssessment={{this.onSelfAssessment}}
             @onStepperNextStep={{this.onStepperNextStep}}
             @canMoveToNextGrain={{this.grainCanMoveToNextGrain index}}
             @onGrainContinue={{this.onGrainContinue}}

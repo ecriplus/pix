@@ -212,7 +212,6 @@ export default class ModuleGrain extends Component {
                   @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
                   @onElementAnswer={{this.onElementAnswer}}
                   @onElementRetry={{@onElementRetry}}
-                  @onSelfAssessment={{@onSelfAssessment}}
                   @onVideoPlay={{@onVideoPlay}}
                   @getLastCorrectionForElement={{this.getLastCorrectionForElement}}
                   @onFileDownload={{@onFileDownload}}
