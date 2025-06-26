@@ -46,7 +46,7 @@ export default class ModuleQrocm extends ModuleElement {
   }
 
   resetAnswers() {
-    this.selectedValues = undefined;
+    this.selectedValues = {};
   }
 
   get formattedProposals() {
