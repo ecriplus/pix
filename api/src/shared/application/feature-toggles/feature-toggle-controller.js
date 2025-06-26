@@ -1,13 +1,10 @@
-import { config } from '../../../../src/shared/config.js';
 import { featureToggles } from '../../infrastructure/feature-toggles/index.js';
 import * as serializer from '../../infrastructure/serializers/jsonapi/feature-toggle-serializer.js';
 
 const getActiveFeatures = async function () {
-  const legacyFeatureToggles = config.featureToggles;
+  const featureTogglesList = await featureToggles.withTag('frontend');
 
-  const newFeatureToggles = await featureToggles.withTag('frontend');
-
-  return serializer.serialize({ ...newFeatureToggles, ...legacyFeatureToggles });
+  return serializer.serialize(featureTogglesList);
 };
 
 const featureToggleController = { getActiveFeatures };
