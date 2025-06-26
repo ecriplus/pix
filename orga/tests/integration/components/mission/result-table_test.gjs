@@ -1,4 +1,4 @@
-import { render, within } from '@1024pix/ember-testing-library';
+import { getByText, render, within } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
 import ResultTable from 'pix-orga/components/mission/result-table';
 import { module, test } from 'qunit';
@@ -264,29 +264,20 @@ module('Integration | Component | Mission | ResultTable', function (hooks) {
       assert.strictEqual(cells.length, allColQuantity);
 
       const resultStepOneIndex = 3;
-
-      assert.strictEqual(
-        cells[resultStepOneIndex].innerHTML.trim(),
-        t('pages.missions.mission.table.result.step-result.reached'),
-      );
+      assert.ok(getByText(cells[resultStepOneIndex], t('pages.missions.mission.table.result.step-result.reached')));
 
       const resultStepoDoseIndex = 4;
-      assert.strictEqual(
-        cells[resultStepoDoseIndex].innerHTML.trim(),
-        t('pages.missions.mission.table.result.step-result.not-reached'),
+      assert.ok(
+        getByText(cells[resultStepoDoseIndex], t('pages.missions.mission.table.result.step-result.not-reached')),
       );
 
       const resultStepThreeIndex = 5;
-      assert.strictEqual(
-        cells[resultStepThreeIndex].innerHTML.trim(),
-        t('pages.missions.mission.table.result.step-result.partially-reached'),
+      assert.ok(
+        getByText(cells[resultStepThreeIndex], t('pages.missions.mission.table.result.step-result.partially-reached')),
       );
 
       const resultStepFourIndex = 6;
-      assert.strictEqual(
-        cells[resultStepFourIndex].innerHTML.trim(),
-        t('pages.missions.mission.table.result.step-result.undefined'),
-      );
+      assert.ok(getByText(cells[resultStepFourIndex], t('pages.missions.mission.table.result.step-result.undefined')));
     });
   });
 
