@@ -125,7 +125,7 @@
     "qunit": "^2.24.1",
     "qunit-dom": "^3.4.0",
     "sass": "^1.89.0",
-    "sinon": "^20.0.0",
+    "sinon": "^21.0.0",
     "stylelint": "^16.19.1",
     "tracked-built-ins": "^4.0.0",
     "webpack": "^5.99.8"
