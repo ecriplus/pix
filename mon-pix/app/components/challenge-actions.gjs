@@ -4,7 +4,6 @@ import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-al
 import { fn } from '@ember/helper';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 import t from 'ember-intl/helpers/t';
 import eq from 'ember-truth-helpers/helpers/eq';
 import or from 'ember-truth-helpers/helpers/or';
@@ -96,8 +95,8 @@ export default class ChallengeActions extends Component {
             <PixButton
               @variant="success"
               @triggerAction={{this.handleValidateAction}}
-              @isLoading={{this.isValidateActionLoading}}
-              @isDisabled={{or this.areActionButtonsDisabled this.isSkipActionLoading}}
+              @isLoading={{@isValidateActionLoading}}
+              @isDisabled={{or this.areActionButtonsDisabled @isSkipActionLoading}}
               @iconAfter="arrowRight"
               class="challenge-actions__action-validate"
               aria-label={{t "pages.challenge.actions.validate-go-to-next"}}
@@ -110,9 +109,9 @@ export default class ChallengeActions extends Component {
             <PixButton
               @variant="secondary"
               @triggerAction={{this.handleSkipAction}}
-              @isLoading={{this.isSkipActionLoading}}
+              @isLoading={{@isSkipActionLoading}}
               @loadingColor="grey"
-              @isDisabled={{or this.areActionButtonsDisabled this.isValidateActionLoading}}
+              @isDisabled={{or this.areActionButtonsDisabled @isValidateActionLoading}}
               class="challenge-actions__action-skip"
               aria-label={{t "pages.challenge.actions.skip-go-to-next"}}
             >
@@ -128,8 +127,6 @@ export default class ChallengeActions extends Component {
       {{/if}}
     </div>
   </template>
-  @tracked isValidateActionLoading = false;
-  @tracked isSkipActionLoading = false;
 
   get areActionButtonsDisabled() {
     return this.args.disabled || this.hasCurrentOngoingLiveAlert;
@@ -157,23 +154,11 @@ export default class ChallengeActions extends Component {
 
   @action
   async handleValidateAction(event) {
-    this.isValidateActionLoading = true;
-
-    try {
-      await this.args.validateAnswer(event);
-    } finally {
-      this.isValidateActionLoading = false;
-    }
+    await this.args.validateAnswer(event);
   }
 
   @action
   async handleSkipAction() {
-    this.isSkipActionLoading = true;
-
-    try {
-      await this.args.skipChallenge();
-    } finally {
-      this.isSkipActionLoading = false;
-    }
+    await this.args.skipChallenge();
   }
 }

@@ -55,6 +55,8 @@ export default class ChallengeItemQcm extends ChallengeItemGeneric {
       {{#if @assessment}}
         <ChallengeActions
           @challenge={{@challenge}}
+          @isValidateActionLoading={{this.isValidateActionLoading}}
+          @isSkipActionLoading={{this.isSkipActionLoading}}
           @answer={{@answer}}
           @isCertification={{@assessment.isCertification}}
           @resumeAssessment={{this.resumeAssessment}}

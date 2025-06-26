@@ -1,6 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
-import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -9,118 +9,59 @@ import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 module('Integration | Component | challenge actions', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  test('renders', async function (assert) {
-    await render(hbs`<ChallengeActions />`);
-    assert.dom('.challenge-actions__group').exists();
+  test('it should add a loading state to the button and disable the skip button', async function (assert) {
+    // given
+    this.set('isValidateActionLoading', true);
+    this.set('isSkipActionLoading', false);
+    this.set('validateActionStub', () => sinon.promise());
+
+    // when
+    const screen = await render(hbs`<ChallengeActions
+  @validateAnswer={{this.validateActionStub}}
+  @isValidateActionLoading={{this.isValidateActionLoading}}
+  @isSkipActionLoading={{this.isSkipActionLoading}}
+/>`);
+
+    // then
+    assert
+      .dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')))
+      .hasAttribute('aria-disabled', 'true');
+    assert
+      .dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')))
+      .hasAttribute('aria-disabled', 'true');
   });
 
-  module('when the validate answer button is clicked', function () {
-    test('it should add a loading state to the button and disable the skip button', async function (assert) {
-      // given
-      this.set('isValidateButtonEnabled', true);
-      this.set('isSkipButtonEnabled', true);
-      this.set('validateActionStub', () => sinon.promise());
+  test('it should add a loading state to the button and disable the validate button', async function (assert) {
+    // given
+    this.set('isValidateActionLoading', false);
+    this.set('isSkipActionLoading', true);
+    this.set('validateActionStub', () => sinon.promise());
 
-      // when
-      const screen = await render(hbs`<ChallengeActions
+    // when
+    const screen = await render(hbs`<ChallengeActions
   @validateAnswer={{this.validateActionStub}}
-  @isValidateButtonEnabled={{this.isValidateButtonEnabled}}
-  @isSkipButtonEnabled={{this.isSkipButtonEnabled}}
+  @isValidateActionLoading={{this.isValidateActionLoading}}
+  @isSkipActionLoading={{this.isSkipActionLoading}}
 />`);
 
-      const validateButton = screen.getByRole('button', { name: /Je valide/ });
-      await click(validateButton);
-
-      // then
-      assert.dom(validateButton).hasAttribute('disabled');
-      assert.dom(screen.getByRole('button', { name: /Je passe/ })).hasAttribute('disabled');
-    });
-
-    module('on request resolution or rejection', function () {
-      test('it should remove the disable states', async function (assert) {
-        // given
-        this.set('isValidateButtonEnabled', true);
-        this.set('isSkipButtonEnabled', true);
-        this.set('validateActionStub', () => sinon.promise().resolve());
-
-        // when
-        const screen = await render(hbs`<ChallengeActions
-  @validateAnswer={{this.validateActionStub}}
-  @isValidateButtonEnabled={{this.isValidateButtonEnabled}}
-  @isSkipButtonEnabled={{this.isSkipButtonEnabled}}
-/>`);
-
-        const validateButton = screen.getByRole('button', { name: /Je valide/ });
-        await click(validateButton);
-
-        // then
-        assert.dom(validateButton).hasNoAttribute('disabled');
-        assert.dom(screen.getByRole('button', { name: /Je passe/ })).hasNoAttribute('disabled');
-      });
-    });
-  });
-
-  module('when the skip button is clicked', function () {
-    test('it should add a loading state to the button and disable the validate button', async function (assert) {
-      // given
-      this.set('isValidateButtonEnabled', true);
-      this.set('isSkipButtonEnabled', true);
-      this.set('skipChallengeStub', () => sinon.promise());
-
-      // when
-      const screen = await render(hbs`<ChallengeActions
-  @skipChallenge={{this.skipChallengeStub}}
-  @isValidateButtonEnabled={{this.isValidateButtonEnabled}}
-  @isSkipButtonEnabled={{this.isSkipButtonEnabled}}
-/>`);
-
-      const skipButton = screen.getByRole('button', { name: /Je passe/ });
-      await click(skipButton);
-
-      // then
-      assert.dom(skipButton).hasAttribute('disabled');
-      assert.dom(screen.getByRole('button', { name: /Je valide/ })).hasAttribute('disabled');
-    });
-
-    module('on request resolution or rejection', function () {
-      test('it should remove the disable states', async function (assert) {
-        // given
-        this.set('isValidateButtonEnabled', true);
-        this.set('isSkipButtonEnabled', true);
-        this.set('skipChallengeStub', () => sinon.promise().reject());
-
-        // when
-        const screen = await render(hbs`<ChallengeActions
-  @skipChallenge={{this.skipChallengeStub}}
-  @isValidateButtonEnabled={{this.isValidateButtonEnabled}}
-  @isSkipButtonEnabled={{this.isSkipButtonEnabled}}
-/>`);
-
-        const skipButton = screen.getByRole('button', { name: /Je passe/ });
-        await click(skipButton);
-
-        // then
-        assert.dom(skipButton).hasNoAttribute('disabled');
-        assert.dom(screen.getByRole('button', { name: /Je valide/ })).hasNoAttribute('disabled');
-      });
-    });
+    assert
+      .dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')))
+      .hasAttribute('aria-disabled', 'true');
+    assert
+      .dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')))
+      .hasAttribute('aria-disabled', 'true');
   });
 
   module('Challenge has timed out', function () {
     test('should only display "continue" button', async function (assert) {
       // given
-      this.set('isValidateButtonEnabled', true);
       this.set('hasChallengeTimedOut', true);
-      this.set('isSkipButtonEnabled', true);
       this.set('validateActionStub', () => {});
 
       // when
-      await render(hbs`<ChallengeActions
-  @validateAnswer={{this.validateActionStub}}
-  @isValidateButtonEnabled={{this.isValidateButtonEnabled}}
-  @hasChallengeTimedOut={{this.hasChallengeTimedOut}}
-  @isSkipButtonEnabled={{this.isSkipButtonEnabled}}
-/>`);
+      await render(
+        hbs`<ChallengeActions @validateAnswer={{this.validateActionStub}} @hasChallengeTimedOut={{this.hasChallengeTimedOut}} />`,
+      );
 
       // then
       assert.dom('.challenge-actions__action-validated').doesNotExist();
@@ -134,11 +75,9 @@ module('Integration | Component | challenge actions', function (hooks) {
       module('when certification course version is 2', function () {
         test("should show certification focus out's error message", async function (assert) {
           // given
-          this.set('isValidateButtonEnabled', true);
           this.set('isCertification', true);
           this.set('hasFocusedOutOfWindow', true);
           this.set('hasChallengeTimedOut', false);
-          this.set('isSkipButtonEnabled', true);
           this.set('validateActionStub', () => {});
           this.set('certificationVersion', 2);
 
@@ -148,8 +87,6 @@ module('Integration | Component | challenge actions', function (hooks) {
   @validateAnswer={{this.validateActionStub}}
   @hasFocusedOutOfWindow={{this.hasFocusedOutOfWindow}}
   @hasChallengeTimedOut={{this.hasChallengeTimedOut}}
-  @isValidateButtonEnabled={{this.isValidateButtonEnabled}}
-  @isSkipButtonEnabled={{this.isSkipButtonEnabled}}
   @certificationVersion={{this.certificationVersion}}
 />`);
 
@@ -164,11 +101,9 @@ module('Integration | Component | challenge actions', function (hooks) {
         module('when the candidate does not need an accessibility adjustment', function () {
           test("should show a specific certification focus out's error message", async function (assert) {
             // given
-            this.set('isValidateButtonEnabled', true);
             this.set('isCertification', true);
             this.set('hasFocusedOutOfWindow', true);
             this.set('hasChallengeTimedOut', false);
-            this.set('isSkipButtonEnabled', true);
             this.set('validateActionStub', () => {});
             this.set('certificationVersion', 3);
 
@@ -178,8 +113,6 @@ module('Integration | Component | challenge actions', function (hooks) {
   @validateAnswer={{this.validateActionStub}}
   @hasFocusedOutOfWindow={{this.hasFocusedOutOfWindow}}
   @hasChallengeTimedOut={{this.hasChallengeTimedOut}}
-  @isValidateButtonEnabled={{this.isValidateButtonEnabled}}
-  @isSkipButtonEnabled={{this.isSkipButtonEnabled}}
   @certificationVersion={{this.certificationVersion}}
 />`);
 
@@ -218,11 +151,9 @@ module('Integration | Component | challenge actions', function (hooks) {
         module('when the candidate needs an accessibility adjustment', function () {
           test("should show another specific certification focus out's error message", async function (assert) {
             // given
-            this.set('isValidateButtonEnabled', true);
             this.set('isCertification', true);
             this.set('hasFocusedOutOfWindow', true);
             this.set('hasChallengeTimedOut', false);
-            this.set('isSkipButtonEnabled', true);
             this.set('validateActionStub', () => {});
             this.set('certificationVersion', 3);
             this.set('isAdjustedCourseForAccessibility', true);
@@ -233,8 +164,6 @@ module('Integration | Component | challenge actions', function (hooks) {
   @validateAnswer={{this.validateActionStub}}
   @hasFocusedOutOfWindow={{this.hasFocusedOutOfWindow}}
   @hasChallengeTimedOut={{this.hasChallengeTimedOut}}
-  @isValidateButtonEnabled={{this.isValidateButtonEnabled}}
-  @isSkipButtonEnabled={{this.isSkipButtonEnabled}}
   @certificationVersion={{this.certificationVersion}}
   @isAdjustedCourseForAccessibility={{this.isAdjustedCourseForAccessibility}}
 />`);
@@ -276,11 +205,9 @@ module('Integration | Component | challenge actions', function (hooks) {
     module('when assessent is not of type certification', function () {
       test("should show default focus out's error message", async function (assert) {
         // given
-        this.set('isValidateButtonEnabled', true);
         this.set('isCertification', false);
         this.set('hasFocusedOutOfWindow', true);
         this.set('hasChallengeTimedOut', false);
-        this.set('isSkipButtonEnabled', true);
         this.set('validateActionStub', () => {});
 
         // when
@@ -289,8 +216,6 @@ module('Integration | Component | challenge actions', function (hooks) {
   @validateAnswer={{this.validateActionStub}}
   @hasFocusedOutOfWindow={{this.hasFocusedOutOfWindow}}
   @hasChallengeTimedOut={{this.hasChallengeTimedOut}}
-  @isValidateButtonEnabled={{this.isValidateButtonEnabled}}
-  @isSkipButtonEnabled={{this.isSkipButtonEnabled}}
 />`);
 
         // then
