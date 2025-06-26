@@ -65,4 +65,10 @@ export default {
     defaultValue: false,
     tags: ['frontend', 'team-acces', 'pix-app'],
   },
+  isAutoShareEnabled: {
+    type: 'boolean',
+    description: 'Enable automatic campaign sharing.',
+    defaultValue: false,
+    tags: ['frontend', 'team-prescription', 'pix-app'],
+  },
 };
