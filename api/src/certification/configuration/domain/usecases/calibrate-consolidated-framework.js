@@ -8,6 +8,7 @@
  */
 
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { NotFoundError } from '../../../../shared/domain/errors.js';
 
 export const calibrateConsolidatedFramework = withTransaction(
   /**
@@ -31,12 +32,17 @@ export const calibrateConsolidatedFramework = withTransaction(
         complementaryCertificationKey,
         createdAt,
       });
+
     const activeCalibratedChallenges = await activeCalibratedChallengeRepository.findByComplementaryKeyAndCalibrationId(
       {
         complementaryCertificationKey,
         calibrationId,
       },
     );
+
+    if (activeCalibratedChallenges.length === 0) {
+      throw new NotFoundError(`Not found calibration (id: ${calibrationId}) for ${complementaryCertificationKey}`);
+    }
 
     consolidatedFramework.calibrationId = calibrationId;
     _calibrateChallenges(activeCalibratedChallenges, consolidatedFramework.challenges);

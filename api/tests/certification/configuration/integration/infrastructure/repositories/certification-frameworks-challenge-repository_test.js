@@ -72,7 +72,7 @@ describe('Certification | Configuration | Integration | Repository | certificati
   });
 
   describe('#save', function () {
-    it('should update framework challenges with an alpha and delta', async function () {
+    it('should update framework challenges with alpha, delta and calibrationId properties', async function () {
       // given
       const complementaryCertificationKey = ComplementaryCertificationKeys.PIX_PLUS_DROIT;
       const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
@@ -89,7 +89,7 @@ describe('Certification | Configuration | Integration | Repository | certificati
 
       const secondCertificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
         complementaryCertificationKey: complementaryCertification.key,
-        createdAt: new Date('2022-01-01T08:00:00Z'),
+        createdAt: firstCertificationFrameworksChallenge.createdAt,
         challengeId: 'rec456',
         alpha: null,
         delta: null,
@@ -99,37 +99,41 @@ describe('Certification | Configuration | Integration | Repository | certificati
 
       const firstCalibratedCertificationFrameworksChallenge =
         domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
-          ...firstCertificationFrameworksChallenge,
+          challengeId: firstCertificationFrameworksChallenge.challengeId,
           discriminant: 1.3,
           difficulty: 4.3,
         });
       const secondCalibratedCertificationFrameworksChallenge =
         domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
-          ...secondCertificationFrameworksChallenge,
+          challengeId: secondCertificationFrameworksChallenge.challengeId,
           discriminant: 3.2,
           difficulty: 1.5,
         });
 
-      const calibratedCertificationFrameworksChallenges = [
-        firstCalibratedCertificationFrameworksChallenge,
-        secondCalibratedCertificationFrameworksChallenge,
-      ];
+      const consolidatedFramework = domainBuilder.certification.configuration.buildConsolidatedFramework({
+        calibrationId: 1,
+        challenges: [firstCalibratedCertificationFrameworksChallenge, secondCalibratedCertificationFrameworksChallenge],
+        complementaryCertificationKey: complementaryCertification.key,
+        createdAt: firstCertificationFrameworksChallenge.createdAt,
+      });
 
       const expectedCalibratedFrameworkChallenges = [
         {
           ...firstCertificationFrameworksChallenge,
           alpha: firstCalibratedCertificationFrameworksChallenge.discriminant,
           delta: firstCalibratedCertificationFrameworksChallenge.difficulty,
+          calibrationId: consolidatedFramework.calibrationId,
         },
         {
           ...secondCertificationFrameworksChallenge,
           alpha: secondCalibratedCertificationFrameworksChallenge.discriminant,
           delta: secondCalibratedCertificationFrameworksChallenge.difficulty,
+          calibrationId: consolidatedFramework.calibrationId,
         },
       ];
 
       // when
-      await certificationFrameworksChallengeRepository.save(calibratedCertificationFrameworksChallenges);
+      await certificationFrameworksChallengeRepository.save(consolidatedFramework);
 
       // then
       const calibratedFrameworksChallenges = await knex('certification-frameworks-challenges');

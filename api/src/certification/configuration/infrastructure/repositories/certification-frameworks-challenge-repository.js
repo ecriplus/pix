@@ -5,9 +5,15 @@ import { CertificationFrameworksChallenge } from '../../domain/models/Certificat
 import { ConsolidatedFramework } from '../../domain/models/ConsolidatedFramework.js';
 
 /**
+ * @typedef {import ('../../domain/models/CertificationFrameworksChallenge.js').CertificationFrameworksChallenge} CertificationFrameworksChallenge
+ * @typedef {import ('../../domain/models/ConsolidatedFramework.js').ConsolidatedFramework} ComplementaryCertificationKeys
+ * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
+ */
+
+/**
  * @param {Object} params
  * @param {Date} params.createdAt
- * @param {ComplementaryCertificationKey} params.complementaryCertificationKey
+ * @param {ComplementaryCertificationKeys} params.complementaryCertificationKey
  * @returns {Promise<ConsolidatedFramework>}
  */
 export async function findByCreationDateAndComplementaryKey({ createdAt, complementaryCertificationKey }) {
@@ -29,21 +35,24 @@ export async function findByCreationDateAndComplementaryKey({ createdAt, complem
 }
 
 /**
- * @param {Array<CertificationFrameworksChallenge>} certificationFrameworksChallenges
+ * @param {Array<ConsolidatedFramework>} consolidatedFramework
  * @returns {Promise<void>}
  */
-export async function save(certificationFrameworksChallenges) {
+export async function save(consolidatedFramework) {
   const knexConn = DomainTransaction.getConnection();
 
-  for (const calibratedCertificationFrameworksChallenge of certificationFrameworksChallenges) {
-    const { discriminant, difficulty, complementaryCertificationKey, createdAt, challengeId } =
-      calibratedCertificationFrameworksChallenge;
+  for (const calibratedChallenge of consolidatedFramework.challenges) {
     await knexConn('certification-frameworks-challenges')
       .update({
-        alpha: discriminant,
-        delta: difficulty,
+        alpha: calibratedChallenge.discriminant,
+        delta: calibratedChallenge.difficulty,
+        calibrationId: consolidatedFramework.calibrationId,
       })
-      .where({ complementaryCertificationKey, createdAt, challengeId });
+      .where({
+        complementaryCertificationKey: consolidatedFramework.complementaryCertificationKey,
+        createdAt: consolidatedFramework.createdAt,
+        challengeId: calibratedChallenge.challengeId,
+      });
   }
 }
 
