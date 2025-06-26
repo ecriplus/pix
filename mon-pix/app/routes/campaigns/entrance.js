@@ -69,7 +69,7 @@ export default class Entrance extends Route {
         this.campaignStorage.set(campaign.code, 'participantExternalId', null);
         this.campaignStorage.set(campaign.code, 'error', error.detail);
         this.campaignStorage.set(campaign.code, 'previousParticipantExternalId', participantExternalId);
-        return this.router.replaceWith('campaigns.invited.fill-in-participant-external-id', campaign.code);
+        return this.router.replaceWith('campaigns.fill-in-participant-external-id', campaign.code);
       }
 
       if (error.status == 400 && error.detail.includes('participant-external-id')) {
@@ -77,7 +77,7 @@ export default class Entrance extends Route {
         this.campaignStorage.set(campaign.code, 'previousParticipantExternalId', participantExternalId);
         this.campaignStorage.set(campaign.code, 'error', 'INVALID_EXTERNAL_ID');
 
-        return this.router.replaceWith('campaigns.invited.fill-in-participant-external-id', campaign.code);
+        return this.router.replaceWith('campaigns.fill-in-participant-external-id', campaign.code);
       }
       if (error.detail === 'ORGANIZATION_LEARNER_HAS_ALREADY_PARTICIPATED') {
         return this.router.replaceWith('campaigns.existing-participation', campaign.code);

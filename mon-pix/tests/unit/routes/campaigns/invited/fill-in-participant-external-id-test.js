@@ -9,7 +9,7 @@ module('Unit | Route | campaigns/invited/fill-in-participant-external-id', funct
   let route, campaign;
 
   hooks.beforeEach(function () {
-    route = this.owner.lookup('route:campaigns.invited.fill-in-participant-external-id');
+    route = this.owner.lookup('route:campaigns.fill-in-participant-external-id');
     route.campaignStorage = { get: sinon.stub(), set: sinon.stub() };
     route.modelFor = sinon.stub();
     route.router = { replaceWith: sinon.stub() };

@@ -85,10 +85,15 @@ module('Acceptance | Campaigns | Start Campaigns with type Exam', function (hook
           module('When campaign is restricted', function () {
             test('should redirect to assessment', async function (assert) {
               // given
-              campaign = server.create('campaign', 'restricted', {
+              campaign = server.create('campaign', {
                 externalIdLabel: 'toto',
-                organizationType: 'SCO',
                 type: EXAM,
+              });
+              server.create('organization-to-join', {
+                id: 1,
+                type: 'SCO',
+                isRestricted: true,
+                code: campaign.code,
               });
               const screen = await visit(`/campagnes/${campaign.code}?participantExternalId=a73at01r3`);
 
@@ -179,10 +184,15 @@ module('Acceptance | Campaigns | Start Campaigns with type Exam', function (hook
           test('should redirect to tutoriel page', async function (assert) {
             // given
             campaign = server.create('campaign', {
-              isRestricted: true,
               externalIdLabel: 'nom de naissance de maman',
               type: EXAM,
-              organizationType: 'SCO',
+              organizationId: 1,
+            });
+            server.create('organization-to-join', {
+              id: 1,
+              type: 'SCO',
+              isRestricted: true,
+              code: campaign.code,
             });
             const screen = await visit(`/campagnes/${campaign.code}`);
             await click(screen.getByRole('button', { name: 'Je commence' }));

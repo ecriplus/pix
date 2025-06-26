@@ -13,11 +13,11 @@ export default class AccessStorage extends BaseStorage {
     super.set(organizationId, this.#hasUserSeenJoinPageKey, true);
   }
 
-  isAssociationDone(id) {
-    return super.get(id, this.#associationDoneKey) ?? false;
+  isAssociationDone(organizationId) {
+    return super.get(organizationId, this.#associationDoneKey) ?? false;
   }
 
-  setAssociationDone(id) {
-    super.set(id, this.#associationDoneKey, true);
+  setAssociationDone(organizationId) {
+    super.set(organizationId, this.#associationDoneKey, true);
   }
 }

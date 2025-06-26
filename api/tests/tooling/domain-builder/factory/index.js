@@ -215,6 +215,7 @@ import {
 import { buildUserLogin } from './identity-access-management/build-user-login.js';
 import { buildCampaignParticipation as maddoBuildCampaignParticipation } from './maddo/build-campaign-participation.js';
 import { buildTubeCoverage } from './maddo/build-tube-coverage.js';
+import { buildOrganizationDto } from './organizational-entities/build-organization-dto.js';
 import { buildCampaign as boundedContextCampaignBuildCampaign } from './prescription/campaign/build-campaign.js';
 import { buildCampaignResultLevelsPerTubesAndCompetences as boundedContextCampaignBuildCampaignResultLevelsPerTubesAndCompetences } from './prescription/campaign/build-campaign-result-levels-per-tubes-and-competences.js';
 import { buildCampaignParticipation as boundedContextCampaignParticipationBuildCampaignParticipation } from './prescription/campaign-participation/build-campaign-participation.js';
@@ -311,6 +312,10 @@ const identityAccessManagement = {
   buildUserLogin,
   buildLtiPlatformRegistration,
   buildLtiPlatformRegistrationWithPlatformConfig,
+};
+
+const organizationalEntities = {
+  buildOrganizationDto,
 };
 
 const maddo = {
@@ -493,5 +498,6 @@ export {
   devcomp,
   identityAccessManagement,
   maddo,
+  organizationalEntities,
   prescription,
 };

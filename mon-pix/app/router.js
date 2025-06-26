@@ -70,23 +70,26 @@ Router.map(function () {
 
   this.route('fill-in-certificate-verification-code', { path: '/verification-certificat' });
   this.route('fill-in-campaign-code', { path: '/campagnes' });
-
-  this.route('campaigns', { path: '/campagnes/:code' }, function () {
-    this.route('entry-point', { path: '/' });
-    this.route('archived-error', { path: '/oups' });
+  this.route('organizations', { path: '/organisations/:code' }, function () {
     this.route('access', { path: '/acces' });
-    this.route('join', { path: '/rejoindre' }, function () {
-      this.route('anonymous', { path: '/anonyme' });
-      this.route('student-sco', { path: '/identification' });
-      this.route('sco-mediacentre', { path: '/mediacentre' });
-    });
-    this.route('campaign-landing-page', { path: '/presentation' });
     this.route('invited', { path: '/prescrit' }, function () {
       this.route('reconciliation', { path: '/enregistrement' });
       this.route('student-sco', { path: '/eleve' });
       this.route('student-sup', { path: '/etudiant' });
-      this.route('fill-in-participant-external-id', { path: '/identifiant' });
     });
+    this.route('join', { path: '/rejoindre' }, function () {
+      this.route('student-sco', { path: '/identification' });
+      this.route('sco-mediacentre', { path: '/mediacentre' });
+    });
+  });
+  this.route('campaigns', { path: '/campagnes/:code' }, function () {
+    this.route('entry-point', { path: '/' });
+    this.route('archived-error', { path: '/oups' });
+    this.route('join', { path: '/rejoindre' }, function () {
+      this.route('anonymous', { path: '/anonyme' });
+    });
+    this.route('campaign-landing-page', { path: '/presentation' });
+    this.route('fill-in-participant-external-id', { path: '/identifiant' });
     this.route('entrance', { path: '/entree' });
     this.route('profiles-collection', { path: '/collecte' }, function () {
       this.route('start-or-resume', { path: '/' });

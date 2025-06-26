@@ -158,6 +158,7 @@
     "db:reset": "npm run db:prepare && npm run db:seed",
     "doc:api:prescription": "node scripts/generate-api-documentation.js src/prescription > src/prescription/API.md",
     "doc:api:team": "node scripts/generate-api-documentation.js src/team > src/team/API.md",
+    "doc:api:organizational-entities": "node scripts/generate-api-documentation.js src/organizational-entities > src/organizational-entities/API.md",
     "lint": "run-p --continue-on-error 'lint:!(ci|database|fix)'",
     "lint:ci": "run-p --continue-on-error 'lint:!(ci|fix)'",
     "lint:fix": "run-p --continue-on-error lint:*:fix",

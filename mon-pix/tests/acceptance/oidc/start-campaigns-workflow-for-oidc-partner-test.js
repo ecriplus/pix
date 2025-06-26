@@ -2,7 +2,7 @@
 
 import { visit } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { click, currentURL, fillIn, settled } from '@ember/test-helpers';
+import { click, currentURL, fillIn, settled, waitUntil } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
@@ -26,7 +26,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
       let assignLocationStub;
 
       hooks.beforeEach(function () {
-        assignLocationStub = sinon.stub().resolves();
+        assignLocationStub = sinon.stub().returns();
         this.owner.register(
           'service:location',
           Service.extend({
@@ -34,7 +34,8 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
           }),
         );
 
-        campaign = server.create('campaign', { identityProvider: 'OIDC_PARTNER' });
+        campaign = server.create('campaign', { organizationId: 1 });
+        server.create('organization-to-join', { id: 1, identityProvider: 'OIDC_PARTNER', code: campaign.code });
       });
 
       test('should redirect to landing page', async function (assert) {
@@ -59,8 +60,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
         // when
         await clickByLabel('Je commence');
 
-        await settled();
-
+        await waitUntil(() => assignLocationStub.calledWith('https://oidc/connexion/oauth2/authorize'));
         // then
         assert.ok(assignLocationStub.calledWith('https://oidc/connexion/oauth2/authorize'));
       });
@@ -84,7 +84,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
         const state = 'state';
         const session = currentSession();
         session.set('data.state', state);
-        session.set('data.nextURL', `/campagnes/${campaign.code}/acces`);
+        session.set('data.nextURL', `/organisations/${campaign.code}/acces`);
         const data = {};
         data[campaign.code] = { landingPageShown: true };
         sessionStorage.setItem('campaigns', JSON.stringify(data));
@@ -118,7 +118,8 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
             assign: assignLocationStub,
           }),
         );
-        campaign = server.create('campaign', { identityProvider: 'OIDC_PARTNER' });
+        campaign = server.create('campaign', { organizationId: 1 });
+        server.create('organization-to-join', { id: 1, identityProvider: 'OIDC_PARTNER', code: campaign.code });
       });
 
       module('When user is logged in with an oidc organization', function (hooks) {
@@ -184,7 +185,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
           // when
           await clickByLabel('Je commence');
 
-          await settled();
+          await waitUntil(() => assignLocationStub.calledWith('https://oidc/connexion/oauth2/authorize'));
 
           // then
           assert.ok(assignLocationStub.calledWith('https://oidc/connexion/oauth2/authorize'));

@@ -21,6 +21,7 @@ import getChallenges from './routes/get-challenges';
 import getCompetenceEvaluationsByAssessment from './routes/get-competence-evaluations-by-assessment';
 import getFeatureToggles from './routes/get-feature-toggles';
 import getInformationBanners from './routes/get-information-banners';
+import getOrganizationsToJoin from './routes/get-organizations-to-join';
 import getProgression from './routes/get-progression';
 import getQuestResults from './routes/get-quest-results';
 import getScorecard from './routes/get-scorecard';
@@ -125,4 +126,6 @@ function routes() {
   );
 
   this.get('/information-banners/:target', getInformationBanners);
+
+  this.get('/organizations-to-join/:code', getOrganizationsToJoin);
 }

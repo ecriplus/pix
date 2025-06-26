@@ -7,7 +7,18 @@ import { OrganizationFeaturesDTO } from './OrganizationFeaturesDTO.js';
  */
 
 /**
- * @typedef {import ('./OrganizationFeaturesDTO.js').OrganizationFeaturesDTO} OrganizationFeaturesDTO
+ * @typedef OrganizationFeatureItemDTO
+ * @type {object}
+ * @property {string} name
+ * @property {object | Array<string>}params
+ */
+
+/**
+ * @typedef OrganizationFeaturesDTO
+ * @type {object}
+ * @property {Array<OrganizationFeatureItemDTO>} features
+ * @property {boolean} hasLearnersImportFeature
+ * @property {boolean} hasOralizationFeature
  */
 
 /**

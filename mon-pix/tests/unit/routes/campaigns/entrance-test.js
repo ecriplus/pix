@@ -168,11 +168,7 @@ module('Unit | Route | Entrance', function (hooks) {
       sinon.assert.calledWith(route.campaignStorage.set, campaign.code, 'participantExternalId', null);
       sinon.assert.calledWith(route.campaignStorage.set, campaign.code, 'error', 'INVALID_EXTERNAL_ID');
       sinon.assert.calledWith(route.campaignStorage.set, campaign.code, 'previousParticipantExternalId', '1234TOTO');
-      sinon.assert.calledWith(
-        route.router.replaceWith,
-        'campaigns.invited.fill-in-participant-external-id',
-        campaign.code,
-      );
+      sinon.assert.calledWith(route.router.replaceWith, 'campaigns.fill-in-participant-external-id', campaign.code);
       assert.ok(true);
     });
 
@@ -195,11 +191,7 @@ module('Unit | Route | Entrance', function (hooks) {
       sinon.assert.calledWith(route.campaignStorage.set, campaign.code, 'participantExternalId', null);
       sinon.assert.calledWith(route.campaignStorage.set, campaign.code, 'error', 'ERROR');
       sinon.assert.calledWith(route.campaignStorage.set, campaign.code, 'previousParticipantExternalId', '1234TOTO');
-      sinon.assert.calledWith(
-        route.router.replaceWith,
-        'campaigns.invited.fill-in-participant-external-id',
-        campaign.code,
-      );
+      sinon.assert.calledWith(route.router.replaceWith, 'campaigns.fill-in-participant-external-id', campaign.code);
       assert.ok(true);
     });
     test('should abort campaign participation and redirect to already participated', async function (assert) {

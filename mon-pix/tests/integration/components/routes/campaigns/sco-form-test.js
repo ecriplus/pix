@@ -10,7 +10,7 @@ module('Integration | Component | routes/campaigns/sco-form', function (hooks) {
 
   test('should display the rgpd legal notice', async function (assert) {
     // given & when
-    const screen = await renderScreen(hbs`<Routes::Campaigns::ScoForm />`);
+    const screen = await renderScreen(hbs`<Routes::Organizations::ScoForm />`);
 
     // then
     assert.ok(screen.getByText(t('pages.join.rgpd-legal-notice')));

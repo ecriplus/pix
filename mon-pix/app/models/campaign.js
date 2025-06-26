@@ -53,8 +53,4 @@ export default class Campaign extends Model {
   get hasCustomResultPageButton() {
     return Boolean(this.customResultPageButtonUrl) && Boolean(this.customResultPageButtonText);
   }
-
-  isRestrictedByIdentityProvider(identityProviderCode) {
-    return this.identityProvider === identityProviderCode;
-  }
 }

@@ -8,7 +8,7 @@ import sinon from 'sinon';
 import { stubSessionService } from '../../../../../helpers/service-stubs.js';
 import setupIntlRenderingTest from '../../../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | routes/campaigns/invited/associate-sup-student-form', function (hooks) {
+module('Integration | Component | routes/organizations/invited/associate-sup-student-form', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   const organizationId = 1;
@@ -44,7 +44,10 @@ module('Integration | Component | routes/campaigns/invited/associate-sup-student
       // given
       this.set('organizationId', organizationId);
       const screen = await render(
-        hbs`<Routes::Campaigns::Invited::AssociateSupStudentForm @campaignCode={{123}} @organizationId={{this.organizationId}} />`,
+        hbs`<Routes::Organizations::Invited::AssociateSupStudentForm
+  @campaignCode={{123}}
+  @organizationId={{this.organizationId}}
+/>`,
       );
 
       // when
@@ -60,18 +63,17 @@ module('Integration | Component | routes/campaigns/invited/associate-sup-student
       // given
       this.set('organizationId', organizationId);
       const screen = await render(
-        hbs`<Routes::Campaigns::Invited::AssociateSupStudentForm @campaignCode={{123}} @organizationId={{this.organizationId}} />`,
+        hbs`<Routes::Organizations::Invited::AssociateSupStudentForm
+  @campaignCode={{123}}
+  @organizationId={{this.organizationId}}
+/>`,
       );
 
       // when
       await _fillInputsAndValidate({ screen });
 
       // then
-      sinon.assert.calledWithExactly(
-        routerObserver.transitionTo,
-        'campaigns.invited.fill-in-participant-external-id',
-        123,
-      );
+      sinon.assert.calledWithExactly(routerObserver.transitionTo, 'campaigns.fill-in-participant-external-id', 123);
       assert.ok(true);
     });
   });
@@ -82,7 +84,10 @@ module('Integration | Component | routes/campaigns/invited/associate-sup-student
       saveStub.rejects();
       this.set('organizationId', organizationId);
       const screen = await render(
-        hbs`<Routes::Campaigns::Invited::AssociateSupStudentForm @campaignCode={{123}} @organizationId={{this.organizationId}} />`,
+        hbs`<Routes::Organizations::Invited::AssociateSupStudentForm
+  @campaignCode={{123}}
+  @organizationId={{this.organizationId}}
+/>`,
       );
 
       // when
