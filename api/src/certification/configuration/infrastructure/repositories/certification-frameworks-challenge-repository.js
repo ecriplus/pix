@@ -1,24 +1,20 @@
+// TODO : rename file
+
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { CertificationFrameworksChallenge } from '../../domain/models/CertificationFrameworksChallenge.js';
+import { ConsolidatedFramework } from '../../domain/models/ConsolidatedFramework.js';
 
 /**
  * @param {Object} params
  * @param {Date} params.createdAt
  * @param {ComplementaryCertificationKey} params.complementaryCertificationKey
- * @returns {Promise<Array<CertificationFrameworksChallenge>>}
+ * @returns {Promise<ConsolidatedFramework>}
  */
 export async function findByCreationDateAndComplementaryKey({ createdAt, complementaryCertificationKey }) {
   const knexConn = DomainTransaction.getConnection();
 
   const certificationFrameworksChallengesDTO = await knexConn('certification-frameworks-challenges')
-    .select(
-      'id',
-      'alpha as discriminant',
-      'delta as difficulty',
-      'challengeId',
-      'createdAt',
-      'complementaryCertificationKey',
-    )
+    .select('alpha as discriminant', 'delta as difficulty', 'challengeId', 'createdAt', 'complementaryCertificationKey')
     .where({
       complementaryCertificationKey,
       createdAt,
@@ -29,9 +25,7 @@ export async function findByCreationDateAndComplementaryKey({ createdAt, complem
     return null;
   }
 
-  return certificationFrameworksChallengesDTO.map((certificationFrameworksChallengeDTO) =>
-    _toDomain({ certificationFrameworksChallengeDTO }),
-  );
+  return _toDomain({ certificationFrameworksChallengesDTO });
 }
 
 /**
@@ -53,6 +47,14 @@ export async function save(certificationFrameworksChallenges) {
   }
 }
 
-function _toDomain({ certificationFrameworksChallengeDTO }) {
-  return new CertificationFrameworksChallenge(certificationFrameworksChallengeDTO);
+function _toDomain({ certificationFrameworksChallengesDTO }) {
+  const { complementaryCertificationKey, createdAt } = certificationFrameworksChallengesDTO[0];
+
+  return new ConsolidatedFramework({
+    complementaryCertificationKey,
+    createdAt,
+    challenges: certificationFrameworksChallengesDTO.map(
+      (challenge) => new CertificationFrameworksChallenge(challenge),
+    ),
+  });
 }

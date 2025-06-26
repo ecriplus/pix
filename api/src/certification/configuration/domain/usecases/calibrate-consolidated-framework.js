@@ -1,18 +1,24 @@
 /**
  * @typedef {import ('./index.js').CertificationFrameworksChallengeRepository} CertificationFrameworksChallengeRepository
  * @typedef {import ('./index.js').ActiveCalibratedChallengeRepository} ActiveCalibratedChallengeRepository
+ * @typedef {import ('../models/ConsolidatedFramework.js').ConsolidatedFramework} ConsolidatedFramework
+ * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
  * @typedef {import ('../models/CertificationFrameworksChallenge.js').CertificationFrameworksChallenge} CertificationFrameworksChallenge
+ * @typedef {import ('../read-models/ActiveCalibratedChallenge.js').ActiveCalibratedChallenge} ActiveCalibratedChallenge
  */
 
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 
-/**
- * @param {Object} params
- * @param {CertificationFrameworksChallengeRepository} params.certificationFrameworksChallengeRepository
- * @param {ActiveCalibratedChallengeRepository} params.activeCalibratedChallengeRepository
- * @returns {Promise<void>}
- */
 export const calibrateConsolidatedFramework = withTransaction(
+  /**
+   * @param {Object} params
+   * @param {Date} params.createdAt
+   * @param {number} params.calibrationId
+   * @param {ComplementaryCertificationKeys} params.complementaryCertificationKey
+   * @param {CertificationFrameworksChallengeRepository} params.certificationFrameworksChallengeRepository
+   * @param {ActiveCalibratedChallengeRepository} params.activeCalibratedChallengeRepository
+   * @returns {Promise<void>}
+   */
   async ({
     createdAt,
     calibrationId,
@@ -20,12 +26,11 @@ export const calibrateConsolidatedFramework = withTransaction(
     certificationFrameworksChallengeRepository,
     activeCalibratedChallengeRepository,
   }) => {
-    const certificationFrameworksChallenges =
+    const consolidatedFramework =
       await certificationFrameworksChallengeRepository.findByCreationDateAndComplementaryKey({
         complementaryCertificationKey,
         createdAt,
       });
-
     const activeCalibratedChallenges = await activeCalibratedChallengeRepository.findByComplementaryKeyAndCalibrationId(
       {
         complementaryCertificationKey,
@@ -33,23 +38,24 @@ export const calibrateConsolidatedFramework = withTransaction(
       },
     );
 
-    _calibrateFramework(activeCalibratedChallenges, certificationFrameworksChallenges);
+    consolidatedFramework.calibrationId = calibrationId;
+    _calibrateChallenges(activeCalibratedChallenges, consolidatedFramework.challenges);
 
-    return certificationFrameworksChallengeRepository.save(certificationFrameworksChallenges);
+    return certificationFrameworksChallengeRepository.save(consolidatedFramework);
   },
 );
 
 /**
  * @param {Array<ActiveCalibratedChallenge>} activeCalibratedChallenges
- * @param {Array<CertificationFrameworksChallenge>} certificationFrameworksChallenges
+ * @param {Array<CertificationFrameworksChallenge>} challengesToCalibrate
  */
-const _calibrateFramework = (activeCalibratedChallenges, certificationFrameworksChallenges) => {
+const _calibrateChallenges = (activeCalibratedChallenges, challengesToCalibrate) => {
   for (let source = 0, target = 0; source < activeCalibratedChallenges.length; source++, target++) {
-    while (activeCalibratedChallenges[source].challengeId !== certificationFrameworksChallenges[target].challengeId) {
+    while (activeCalibratedChallenges[source].challengeId !== challengesToCalibrate[target].challengeId) {
       target++;
     }
 
-    const frameworkChallenge = certificationFrameworksChallenges[target];
+    const frameworkChallenge = challengesToCalibrate[target];
     frameworkChallenge.calibrate(activeCalibratedChallenges[source]);
   }
 };

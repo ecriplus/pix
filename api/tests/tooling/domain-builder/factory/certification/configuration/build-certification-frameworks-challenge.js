@@ -1,16 +1,8 @@
 import { CertificationFrameworksChallenge } from '../../../../../../src/certification/configuration/domain/models/CertificationFrameworksChallenge.js';
 
-export const buildCertificationFrameworksChallenge = function ({
-  createdAt = new Date(),
-  challengeId,
-  complementaryCertificationKey,
-  discriminant,
-  difficulty,
-} = {}) {
+export const buildCertificationFrameworksChallenge = function ({ challengeId = 'rec123', discriminant, difficulty }) {
   return new CertificationFrameworksChallenge({
-    createdAt,
     challengeId,
-    complementaryCertificationKey,
     discriminant,
     difficulty,
   });

@@ -4,7 +4,7 @@ import { ActiveCalibratedChallenge } from '../../domain/read-models/ActiveCalibr
 /**
  * @param {Object} params
  * @param {ComplementaryCertificationKey} params.complementaryCertificationKey
- * @param {Array<string>} params.challengeIds
+ * @param {number} params.calibrationId
  * @returns {Promise<Array<ActiveCalibratedChallenge>>}
  */
 export async function findByComplementaryKeyAndCalibrationId({ complementaryCertificationKey, calibrationId }) {

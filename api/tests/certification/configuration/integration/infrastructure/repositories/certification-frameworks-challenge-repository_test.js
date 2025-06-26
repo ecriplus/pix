@@ -42,18 +42,22 @@ describe('Certification | Configuration | Integration | Repository | certificati
       });
       await databaseBuilder.commit();
 
-      const expectedFrameworkChallenges = [
-        domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
-          ...firstChallengeSelected,
-          discriminant: firstChallengeSelected.alpha,
-          difficulty: firstChallengeSelected.delta,
-        }),
-        domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
-          ...secondChallengeSelected,
-          discriminant: secondChallengeSelected.alpha,
-          difficulty: secondChallengeSelected.delta,
-        }),
-      ];
+      const expectedFrameworkChallenges = domainBuilder.certification.configuration.buildConsolidatedFramework({
+        complementaryCertificationKey: complementaryCertification.key,
+        createdAt,
+        challenges: [
+          domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
+            challengeId: firstChallengeSelected.challengeId,
+            discriminant: firstChallengeSelected.alpha,
+            difficulty: firstChallengeSelected.delta,
+          }),
+          domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
+            challengeId: secondChallengeSelected.challengeId,
+            discriminant: secondChallengeSelected.alpha,
+            difficulty: secondChallengeSelected.delta,
+          }),
+        ],
+      });
 
       // when
       const certificationFrameworksChallenges =
