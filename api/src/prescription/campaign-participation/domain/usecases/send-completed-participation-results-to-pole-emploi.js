@@ -1,25 +1,15 @@
-import * as httpErrorsHelper from '../../../../../src/prescription/campaign-participation/infrastructure/errors-helper.js';
-import { httpAgent } from '../../../../shared/infrastructure/http-agent.js';
-import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import { PoleEmploiPayload } from '../../infrastructure/externals/pole-emploi/PoleEmploiPayload.js';
 import { PoleEmploiSending } from '../models/PoleEmploiSending.js';
 
 const sendCompletedParticipationResultsToPoleEmploi = async ({
   campaignParticipationId,
   assessmentRepository,
-  authenticationMethodRepository,
   campaignParticipationRepository,
   campaignRepository,
   organizationRepository,
-  poleEmploiNotifier,
   poleEmploiSendingRepository,
   targetProfileRepository,
   userRepository,
-  notifierDependencies = {
-    httpAgent,
-    httpErrorsHelper,
-    logger,
-  },
 }) => {
   if (!campaignParticipationId) return;
 
@@ -39,16 +29,10 @@ const sendCompletedParticipationResultsToPoleEmploi = async ({
       participation,
       assessment,
     });
-    const response = await poleEmploiNotifier.notify(user.id, payload, {
-      authenticationMethodRepository: authenticationMethodRepository,
-      ...notifierDependencies,
-    });
 
     const poleEmploiSending = PoleEmploiSending.buildForParticipationFinished({
       campaignParticipationId,
       payload: payload.toString(),
-      isSuccessful: response.isSuccessful,
-      responseCode: response.code,
     });
 
     return poleEmploiSendingRepository.create({ poleEmploiSending });

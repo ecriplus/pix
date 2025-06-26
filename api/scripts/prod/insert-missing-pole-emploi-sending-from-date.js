@@ -124,7 +124,6 @@ async function _buildStartSendingParticipation({ campaign, participation, user, 
   const poleEmploiSending = PoleEmploiSending.buildForParticipationStarted({
     campaignParticipationId: participation.id,
     payload: payload.toString(),
-    isSuccessful: false,
     responseCode,
   });
 
@@ -145,7 +144,6 @@ async function _buildCompletionSendingParticipation({ campaign, participation, u
   const poleEmploiSending = PoleEmploiSending.buildForParticipationFinished({
     campaignParticipationId: participation.id,
     payload: payload.toString(),
-    isSuccessful: false,
     responseCode,
   });
 
@@ -180,7 +178,6 @@ async function _buildSharingSendingParticipation({
   const poleEmploiSending = PoleEmploiSending.buildForParticipationShared({
     campaignParticipationId: participation.id,
     payload: payload.toString(),
-    isSuccessful: false,
     responseCode,
   });
 

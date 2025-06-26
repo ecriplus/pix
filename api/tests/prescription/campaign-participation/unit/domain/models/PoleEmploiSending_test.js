@@ -9,6 +9,7 @@ describe('Unit | Domain | Models | PoleEmploiSending', function () {
       expectedPoleEmploiSending = domainBuilder.buildPoleEmploiSending({
         type: PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_START,
         payload: {},
+        responseCode: '20',
       });
     });
 
@@ -25,8 +26,7 @@ describe('Unit | Domain | Models | PoleEmploiSending', function () {
       const poleEmploiSending = PoleEmploiSending.buildForParticipationStarted({
         campaignParticipationId: expectedPoleEmploiSending.campaignParticipationId,
         payload: {},
-        isSuccessful: expectedPoleEmploiSending.isSuccessful,
-        responseCode: expectedPoleEmploiSending.responseCode,
+        responseCode: '20',
       });
 
       // then
@@ -39,6 +39,7 @@ describe('Unit | Domain | Models | PoleEmploiSending', function () {
       expectedPoleEmploiSending = domainBuilder.buildPoleEmploiSending({
         type: PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_COMPLETION,
         payload: {},
+        responseCode: '18',
       });
     });
 
@@ -55,8 +56,7 @@ describe('Unit | Domain | Models | PoleEmploiSending', function () {
       const poleEmploiSending = PoleEmploiSending.buildForParticipationFinished({
         campaignParticipationId: expectedPoleEmploiSending.campaignParticipationId,
         payload: {},
-        isSuccessful: expectedPoleEmploiSending.isSuccessful,
-        responseCode: expectedPoleEmploiSending.responseCode,
+        responseCode: '18',
       });
 
       // then
@@ -69,6 +69,7 @@ describe('Unit | Domain | Models | PoleEmploiSending', function () {
       expectedPoleEmploiSending = domainBuilder.buildPoleEmploiSending({
         type: PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_SHARING,
         payload: {},
+        responseCode: '18',
       });
     });
 
@@ -85,8 +86,7 @@ describe('Unit | Domain | Models | PoleEmploiSending', function () {
       const poleEmploiSending = PoleEmploiSending.buildForParticipationShared({
         campaignParticipationId: expectedPoleEmploiSending.campaignParticipationId,
         payload: {},
-        isSuccessful: expectedPoleEmploiSending.isSuccessful,
-        responseCode: expectedPoleEmploiSending.responseCode,
+        responseCode: '18',
       });
 
       // then
