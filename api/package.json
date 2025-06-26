@@ -44,7 +44,7 @@
     "debug": "^4.3.4",
     "dotenv": "^16.0.1",
     "fast-levenshtein": "^3.0.0",
-    "file-type": "^20.0.0",
+    "file-type": "^21.0.0",
     "glob": "^11.0.0",
     "hapi-i18n": "^3.0.1",
     "hapi-swagger": "^17.0.0",
