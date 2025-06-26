@@ -19,6 +19,7 @@ describe('Unit | Domain | Service | correction-service', function () {
         expect(a).to.be.an.instanceOf(Answer);
       });
     });
+
     context('when evaluating answer forcing OK answer', function () {
       it('should return an OK corrected answer', function () {
         // given

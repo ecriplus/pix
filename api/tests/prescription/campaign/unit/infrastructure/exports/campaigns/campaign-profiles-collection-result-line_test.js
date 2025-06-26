@@ -7,8 +7,6 @@ describe('Unit | Serializer | CSV | campaign-profiles-collection-result-line', f
   describe('#toCsvLine', function () {
     let organization, campaign, competences, createdAt, sharedAt, sharedAtFormated;
 
-    // TODO: Fix this the next time the file is edited.
-    // eslint-disable-next-line mocha/no-setup-in-describe
     const translate = getI18n().__;
 
     const placementProfile = new PlacementProfile({

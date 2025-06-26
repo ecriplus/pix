@@ -271,7 +271,7 @@ describe('Unit | Domain | Events | handle-certification-rescoring', function () 
     });
 
     context('when it is a complementary certification', function () {
-      // eslint-disable-next-line mocha/no-skipped-tests
+      // eslint-disable-next-line mocha/no-pending-tests
       xit('should trigger complementary certification scoring', async function () {
         // given
         const certificationCourseStartDate = new Date('2022-01-01');

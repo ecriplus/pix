@@ -104,8 +104,6 @@ describe('Unit | Domain | Models | Certification Candidate', function () {
   });
 
   describe('parseBillingMode', function () {
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       { value: 'Gratuite', expectedTranslation: 'FREE' },
       { value: 'Payante', expectedTranslation: 'PAID' },
@@ -120,8 +118,6 @@ describe('Unit | Domain | Models | Certification Candidate', function () {
   });
 
   describe('translateBillingMode', function () {
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       { value: 'FREE', expectedTranslation: 'Gratuite' },
       { value: 'PAID', expectedTranslation: 'Payante' },

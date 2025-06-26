@@ -3,15 +3,12 @@ import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Team | Infrastructure | Serializer | JSONAPI | sco-organization-invitation', function () {
   describe('#serialize', function () {
-    // TODO: Fix this the next time the file is edited.
-    // eslint-disable-next-line mocha/no-setup-in-describe
     const invitationObject = domainBuilder.buildOrganizationInvitation();
 
     const expectedInvitationJson = {
       data: {
         type: 'sco-organization-invitations',
-        // TODO: Fix this the next time the file is edited.
-        // eslint-disable-next-line mocha/no-setup-in-describe
+
         id: invitationObject.id.toString(),
       },
     };

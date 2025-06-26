@@ -73,6 +73,7 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-compet
 
     context('when user is not related to assessment', function () {
       let requestErr;
+
       beforeEach(async function () {
         requestErr = await catchErr(getNextChallengeForCompetenceEvaluation)({
           assessment,
@@ -83,6 +84,7 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-compet
           algorithmDataFetcherService: algorithmDataFetcherServiceStub,
         });
       });
+
       it('should throw a UserNotAuthorizedToAccessEntityError error', function () {
         expect(requestErr).to.be.instanceOf(UserNotAuthorizedToAccessEntityError);
       });

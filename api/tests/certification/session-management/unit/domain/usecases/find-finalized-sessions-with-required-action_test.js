@@ -23,6 +23,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | findFi
       // then
       expect(result).to.deep.equal(sessionsWithRequiredActions);
     });
+
     context('when filtering on a specific version', function () {
       it('should get a list of publishable sessions', async function () {
         // given

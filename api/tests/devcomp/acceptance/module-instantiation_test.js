@@ -8,7 +8,6 @@ const modules = await moduleDatasource.list();
 
 describe('Acceptance | Modules', function () {
   describe('Verify modules', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     modules.forEach((moduleData) => {
       it(`module ${moduleData.slug} should respect the domain`, function () {
         try {

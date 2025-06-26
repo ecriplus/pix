@@ -77,9 +77,11 @@ describe('Acceptance | API | Smart Random Simulator', function () {
         it('should return a 200 status code', async function () {
           expect(response.statusCode).to.equal(200);
         });
+
         it('should return a challenge', async function () {
           expect(JSON.parse(response.payload).challenge.id).to.equal('challengerec1234567');
         });
+
         it('should return smart random details', async function () {
           expect(JSON.parse(response.payload).smartRandomLog).to.deep.equal({
             steps: [
@@ -178,6 +180,7 @@ describe('Acceptance | API | Smart Random Simulator', function () {
           });
         });
       });
+
       context('when the route should not return a challenge', function () {
         let options, response;
 
@@ -194,6 +197,7 @@ describe('Acceptance | API | Smart Random Simulator', function () {
         it('should return a 200 status code', async function () {
           expect(response.statusCode).to.equal(200);
         });
+
         it('should return smart random details and no challenge', async function () {
           expect(JSON.parse(response.payload).challenge).to.be.null;
           expect(JSON.parse(response.payload).smartRandomLog).to.exist;

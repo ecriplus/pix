@@ -8,7 +8,6 @@ import { expect } from '../../../../../test-helper.js';
 
 describe('CampaignsDestructor', function () {
   describe('when user has an allowed PixAdmin Role', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [PIX_ADMIN.ROLES.SUPER_ADMIN, PIX_ADMIN.ROLES.SUPPORT, PIX_ADMIN.ROLES.METIER].forEach((role) => {
       it(`should not throws for ${role} role`, function () {
         expect(

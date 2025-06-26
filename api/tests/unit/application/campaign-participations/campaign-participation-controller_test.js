@@ -1,6 +1,7 @@
 import { campaignParticipationController } from '../../../../src/devcomp/application/campaign-participations/campaign-participation-controller.js';
 import { usecases as devcompUsecases } from '../../../../src/devcomp/domain/usecases/index.js';
 import { expect, sinon } from '../../../test-helper.js';
+
 describe('Unit | Application | Controller | Campaign-Participation', function () {
   describe('#findTrainings', function () {
     let dependencies;

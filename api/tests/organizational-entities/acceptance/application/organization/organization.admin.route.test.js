@@ -141,7 +141,6 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
     });
 
     context('success cases', function () {
-      // eslint-disable-next-line mocha/no-setup-in-describe
       Object.keys(ROLES).forEach((role) => {
         context(`when user has role ${role}`, function () {
           it('returns child organizations list with a 200 HTTP status code', async function () {
@@ -896,7 +895,6 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           await databaseBuilder.commit();
         });
 
-        // eslint-disable-next-line mocha/no-setup-in-describe
         [ROLES.CERTIF, ROLES.SUPPORT, ROLES.METIER].forEach((role) => {
           context(`when user has "${role}" role`, function () {
             it('returns a 403 HTTP status code', async function () {
@@ -1207,7 +1205,6 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
     context('when user is not authorized to access the resource', function () {
       const input = `Organization ID;Organization Name;Organization External ID;Organization Parent ID;Organization Identity Provider Code;Organization Documentation URL;Organization Province Code;DPO Last Name;DPO First Name;DPO E-mail`;
 
-      // eslint-disable-next-line mocha/no-setup-in-describe
       [ROLES.CERTIF, ROLES.SUPPORT, ROLES.METIER].forEach((role) => {
         context(`when user has "${role}" role`, function () {
           it('returns a 403 HTTP status code', async function () {

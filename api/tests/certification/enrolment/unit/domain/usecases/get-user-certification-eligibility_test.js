@@ -40,6 +40,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
       pixCertificationRepository.findByUserId.resolves([]);
       complementaryCertificationBadgeWithOffsetVersionRepository.getAllWithSameTargetProfile.resolves([]);
     });
+
     context('when user is certifiable', function () {
       it('returns a user certification eligibility with is certifiable set to true', async function () {
         placementProfileService.getPlacementProfile.withArgs({ userId, limitDate }).resolves(
@@ -60,6 +61,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
         );
       });
     });
+
     context('when user is not certifiable', function () {
       it('returns a user certification eligibility with is certifiable set to false', async function () {
         placementProfileService.getPlacementProfile.withArgs({ userId, limitDate }).resolves(
@@ -82,6 +84,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
       });
     });
   });
+
   context('eligibility', function () {
     const complementaryCertificationBadgeId = 123;
 
@@ -378,12 +381,15 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
     context('when user has acquired a badge', function () {
       let complementaryCertificationKey;
       const requiredPixScore = 150;
+
       context('CLEA', function () {
         beforeEach(function () {
           complementaryCertificationKey = ComplementaryCertificationKeys.CLEA;
         });
+
         context('when acquired badge is outdated', function () {
           const isOutdated = true;
+
           beforeEach(function () {
             complementaryCertificationBadgeWithOffsetVersionRepository.getAllWithSameTargetProfile.resolves([
               domainBuilder.certification.enrolment.buildComplementaryCertificationBadge({
@@ -407,8 +413,10 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
               }),
             ]);
           });
+
           context('when user is certifiable', function () {
             const isCertifiable = true;
+
             beforeEach(function () {
               placementProfileService.getPlacementProfile.withArgs({ userId, limitDate }).resolves(
                 domainBuilder.buildPlacementProfile.buildCertifiable({
@@ -417,6 +425,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                 }),
               );
             });
+
             context('when user has an acquired certification for this badge', function () {
               it('should not be added in the eligibilities of the model', async function () {
                 // given
@@ -461,6 +470,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                 );
               });
             });
+
             context('when user has not an acquired certification for this badge', function () {
               beforeEach(function () {
                 complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([]);
@@ -486,6 +496,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                     }),
                   ]);
                 });
+
                 it('should not be added in the eligibilities of the model', async function () {
                   // given
                   certificationBadgesService.findLatestBadgeAcquisitions
@@ -516,8 +527,10 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                   );
                 });
               });
+
               context('when badge is outdated by exactly one version', function () {
                 const offsetVersion = 1;
+
                 it('returns a UserCertificationEligibility model with the outdated eligibility inside', async function () {
                   // given
                   certificationBadgesService.findLatestBadgeAcquisitions
@@ -558,8 +571,10 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
               });
             });
           });
+
           context('when user is not certifiable', function () {
             const isCertifiable = false;
+
             beforeEach(function () {
               placementProfileService.getPlacementProfile.withArgs({ userId, limitDate }).resolves(
                 domainBuilder.buildPlacementProfile({
@@ -569,6 +584,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                 }),
               );
             });
+
             context('when user has an acquired certification for this badge', function () {
               it('should not be added in the eligibilities of the model', async function () {
                 // given
@@ -614,6 +630,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                 );
               });
             });
+
             context('when user has not an acquired certification for this badge', function () {
               beforeEach(function () {
                 complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([]);
@@ -621,6 +638,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
 
               context('when badge is outdated by more than one version', function () {
                 const offsetVersion = 2;
+
                 it('should not be added in the eligibilities of the model', async function () {
                   // given
                   certificationBadgesService.findLatestBadgeAcquisitions
@@ -652,8 +670,10 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                   );
                 });
               });
+
               context('when badge is outdated by exactly one version', function () {
                 const offsetVersion = 1;
+
                 it('should not be added in the eligibilities of the model', async function () {
                   // given
                   certificationBadgesService.findLatestBadgeAcquisitions
@@ -688,8 +708,10 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
             });
           });
         });
+
         context('when acquired badge is not outdated', function () {
           const isOutdated = false;
+
           beforeEach(function () {
             complementaryCertificationBadgeWithOffsetVersionRepository.getAllWithSameTargetProfile.resolves([
               domainBuilder.certification.enrolment.buildComplementaryCertificationBadge({
@@ -699,8 +721,10 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
               }),
             ]);
           });
+
           context('when user is certifiable', function () {
             const isCertifiable = true;
+
             beforeEach(function () {
               placementProfileService.getPlacementProfile.withArgs({ userId, limitDate }).resolves(
                 domainBuilder.buildPlacementProfile.buildCertifiable({
@@ -770,10 +794,12 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                 );
               });
             });
+
             context('when user has not an acquired certification for this badge', function () {
               beforeEach(function () {
                 complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([]);
               });
+
               it('returns a UserCertificationEligibility model with the corresponding eligibility', async function () {
                 // given
                 certificationBadgesService.findLatestBadgeAcquisitions
@@ -812,8 +838,10 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
               });
             });
           });
+
           context('when user is not certifiable', function () {
             const isCertifiable = false;
+
             beforeEach(function () {
               placementProfileService.getPlacementProfile.withArgs({ userId, limitDate }).resolves(
                 domainBuilder.buildPlacementProfile({
@@ -832,6 +860,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                 }),
               ]);
             });
+
             context('when user has an acquired certification for this badge', function () {
               it('should not be added in the eligibilities of the model', async function () {
                 // given
@@ -876,6 +905,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                 );
               });
             });
+
             context('when user has not an acquired certification for this badge', function () {
               beforeEach(function () {
                 complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([]);
@@ -927,8 +957,10 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
           });
         });
       });
+
       context('not CLEA', function () {
         const isCertifiable = true;
+
         beforeEach(function () {
           placementProfileService.getPlacementProfile.withArgs({ userId, limitDate }).resolves(
             domainBuilder.buildPlacementProfile.buildCertifiable({
@@ -948,9 +980,11 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
 
         context('when user has no pix certification', function () {
           const isOutdated = false;
+
           beforeEach(function () {
             pixCertificationRepository.findByUserId.withArgs({ userId }).resolves([]);
           });
+
           it('should not be added in the eligibilities of the model', async function () {
             complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([]);
             certificationBadgesService.findLatestBadgeAcquisitions
@@ -979,10 +1013,12 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
             );
           });
         });
+
         context(
           'when user has a validated certification that is not cancelled not rejected and without the required pixscore',
           function () {
             const isOutdated = false;
+
             beforeEach(function () {
               pixCertificationRepository.findByUserId.withArgs({ userId }).resolves([
                 domainBuilder.certification.enrolment.buildPixCertification({
@@ -993,6 +1029,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                 }),
               ]);
             });
+
             it('should not be added in the eligibilities of the model', async function () {
               complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([]);
               certificationBadgesService.findLatestBadgeAcquisitions
@@ -1022,10 +1059,12 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
             });
           },
         );
+
         context(
           'when user has a validated and cancelled certification that is not rejected for fraud and with the required pixscore',
           function () {
             const isOutdated = false;
+
             beforeEach(function () {
               pixCertificationRepository.findByUserId.withArgs({ userId }).resolves([
                 domainBuilder.certification.enrolment.buildPixCertification({
@@ -1036,6 +1075,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                 }),
               ]);
             });
+
             it('should not be added in the eligibilities of the model', async function () {
               complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([]);
               certificationBadgesService.findLatestBadgeAcquisitions
@@ -1065,10 +1105,12 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
             });
           },
         );
+
         context(
           'when user has not cancelled but rejected for fraud validated pix certification with the required pix score',
           function () {
             const isOutdated = false;
+
             beforeEach(function () {
               pixCertificationRepository.findByUserId.withArgs({ userId }).resolves([
                 domainBuilder.certification.enrolment.buildPixCertification({
@@ -1079,6 +1121,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                 }),
               ]);
             });
+
             it('should not be added in the eligibilities of the model', async function () {
               complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([]);
               certificationBadgesService.findLatestBadgeAcquisitions
@@ -1108,8 +1151,10 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
             });
           },
         );
+
         context('when user has not cancelled not rejected for fraud but not validated pix certification', function () {
           const isOutdated = false;
+
           beforeEach(function () {
             pixCertificationRepository.findByUserId.withArgs({ userId }).resolves([
               domainBuilder.certification.enrolment.buildPixCertification({
@@ -1120,6 +1165,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
               }),
             ]);
           });
+
           it('should not be added in the eligibilities of the model', async function () {
             complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([]);
             certificationBadgesService.findLatestBadgeAcquisitions
@@ -1148,6 +1194,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
             );
           });
         });
+
         context('when user has a pix certification delivered validated with the required pix score', function () {
           beforeEach(function () {
             pixCertificationRepository.findByUserId.withArgs({ userId }).resolves([
@@ -1159,8 +1206,10 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
               }),
             ]);
           });
+
           context('when acquired badge is not outdated', function () {
             const isOutdated = false;
+
             context('when user has an acquired certification for this badge', function () {
               it('returns a UserCertificationEligibility model with the outdated eligibility inside', async function () {
                 // given
@@ -1211,10 +1260,12 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                 );
               });
             });
+
             context('when user has not an acquired certification for this badge', function () {
               beforeEach(function () {
                 complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([]);
               });
+
               it('returns a UserCertificationEligibility model with the outdated eligibility inside', async function () {
                 // given
                 certificationBadgesService.findLatestBadgeAcquisitions
@@ -1253,8 +1304,10 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
               });
             });
           });
+
           context('when acquired badge is outdated by one version', function () {
             const isOutdated = true;
+
             context('when user has an acquired certification for this badge', function () {
               it('should not be added in the eligibilities of the model', async function () {
                 // given
@@ -1311,10 +1364,12 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                 );
               });
             });
+
             context('when user has not an acquired certification for this badge', function () {
               beforeEach(function () {
                 complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([]);
               });
+
               it('returns a UserCertificationEligibility model with the outdated eligibility inside', async function () {
                 // given
                 certificationBadgesService.findLatestBadgeAcquisitions
@@ -1353,8 +1408,10 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
               });
             });
           });
+
           context('when acquired badge is outdated by more than one version', function () {
             const isOutdated = true;
+
             it('should not be added in the eligibilities of the model', async function () {
               // given
               complementaryCertificationBadgeWithOffsetVersionRepository.getAllWithSameTargetProfile.resolves([

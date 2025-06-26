@@ -91,6 +91,7 @@ describe('Unit | Controller | sup-organization-management-controller', function 
       expect(logErrorWithCorrelationIdsStub).to.have.been.calledWith(error);
     });
   });
+
   context('#replaceSupOrganizationLearner', function () {
     it('should call replaceSupOrganizationLearner usecase and return 200', async function () {
       const params = { id: organizationId };

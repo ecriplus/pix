@@ -14,6 +14,7 @@ describe('detect-encoding', function () {
       expect(encoding).to.equal('UTF-8');
     });
   });
+
   context('when encoding specified in the xml file', function () {
     it('should return the default encoding', async function () {
       const path = `${__dirname}files/xml/unknown-encoding.xml`;
@@ -21,6 +22,7 @@ describe('detect-encoding', function () {
       expect(encoding).to.equal('x-macthai');
     });
   });
+
   context('when the filepath point to nothing', function () {
     it('should throw an error', async function () {
       const path = `${__dirname}files/xml/unknow-file.xml`;

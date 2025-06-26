@@ -69,8 +69,6 @@ describe('Certification | Session Management | Unit | Application | Routes | Com
       expect(response.statusCode).to.equal(403);
     });
 
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [juryOptions.REJECTED, juryOptions.UNSET, 1].forEach((juryOption) =>
       it(`should accept juryLevel with value: ${juryOption}`, async function () {
         // given
@@ -103,8 +101,6 @@ describe('Certification | Session Management | Unit | Application | Routes | Com
       }),
     );
 
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       { value: 'CACA_VALUE' },
       { value: [], label: '[]' },

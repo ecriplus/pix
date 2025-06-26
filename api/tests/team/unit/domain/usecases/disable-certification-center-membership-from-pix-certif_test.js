@@ -89,6 +89,7 @@ describe('Unit | UseCase | disable-certification-center-membership', function ()
 
     context('when certification-center-membership has a role "ADMIN"', function () {
       let otherAdminMembership;
+
       beforeEach(function () {
         certificationCenterMembership.role = 'ADMIN';
         otherAdminMembership = domainBuilder.buildCertificationCenterMembership({

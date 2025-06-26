@@ -31,6 +31,7 @@ describe('Integration | UseCase | handle activity answer', function () {
         }),
     },
   });
+
   context('when last answer is ko', function () {
     context('and mission is not finished', function () {
       it('last activity is started with accurate level in started assessment', async function () {
@@ -73,6 +74,7 @@ describe('Integration | UseCase | handle activity answer', function () {
         });
       });
     });
+
     context('and mission is finished', function () {
       it('last activity keeps its level and its status is failed in completed assessment', async function () {
         const activityAnswer = domainBuilder.buildAnswer.uncorrected({
@@ -115,6 +117,7 @@ describe('Integration | UseCase | handle activity answer', function () {
       });
     });
   });
+
   context('when last answer is ok', function () {
     context('when activity is not finished', function () {
       it('last activity keeps its level and status in started assessment', async function () {
@@ -156,6 +159,7 @@ describe('Integration | UseCase | handle activity answer', function () {
         });
       });
     });
+
     context('when activity is finished', function () {
       context('and mission is not finished', function () {
         it('last activity is started with accurate level in started assessment', async function () {
@@ -202,6 +206,7 @@ describe('Integration | UseCase | handle activity answer', function () {
           });
         });
       });
+
       context('and mission is finished', function () {
         it('last activity keeps its level and its status is succeeded in completed assessment', async function () {
           const activityAnswer = domainBuilder.buildAnswer.uncorrected({
@@ -245,6 +250,7 @@ describe('Integration | UseCase | handle activity answer', function () {
       });
     });
   });
+
   context('when challenge has been skipped', function () {
     context('and mission is not finished', function () {
       it('last activity is started with accurate level in started assessment', async function () {
@@ -287,6 +293,7 @@ describe('Integration | UseCase | handle activity answer', function () {
         });
       });
     });
+
     context('and mission is finished', function () {
       it('last activity keeps its level and its status is skipped in completed assessment', async function () {
         const activityAnswer = domainBuilder.buildAnswer.uncorrected({
@@ -329,8 +336,8 @@ describe('Integration | UseCase | handle activity answer', function () {
       });
     });
   });
+
   context('when challenge belongs to unfinished tutorial and whatever answer it is', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       { name: 'correct answer', examiner: alwaysTrueExaminer },
       {

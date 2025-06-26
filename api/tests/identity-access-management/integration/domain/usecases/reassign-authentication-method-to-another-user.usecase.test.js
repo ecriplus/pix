@@ -57,6 +57,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | reassign
       lastLoggedAtFromTargetUser.getTime(),
     );
   });
+
   context('When target user already has an authentication method with same identity provider', function () {
     it('throws an error', async function () {
       // given

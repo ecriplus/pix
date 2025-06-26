@@ -68,6 +68,7 @@ describe('Integration | Repository | Certification | Complementary-certification
         expect(organizationSaved).to.exactlyContain(['lady.orgaga@example.net', 'lady.orgougou@example.net']);
       });
     });
+
     context('where there are multiple campaigns linked to the target profile', function () {
       it('should return only distinct emails', async function () {
         // given

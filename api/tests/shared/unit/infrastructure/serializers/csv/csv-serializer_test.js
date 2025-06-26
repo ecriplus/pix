@@ -7,6 +7,7 @@ import { FileValidationError } from '../../../../../../src/shared/domain/errors.
 import * as csvSerializer from '../../../../../../src/shared/infrastructure/serializers/csv/csv-serializer.js';
 import { logger } from '../../../../../../src/shared/infrastructure/utils/logger.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+
 describe('Unit | Serializer | CSV | csv-serializer', function () {
   describe('#serializeLine', function () {
     it('should quote strings', async function () {
@@ -591,6 +592,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
             expect(_omitUniqueKey(result)).to.deep.equal(expectedResult);
           });
         });
+
         context('isCoreComplementaryCompatibilityEnabled ON', function () {
           it('should return a full session object per line', function () {
             // given
@@ -767,6 +769,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
             expect(_omitUniqueKey(result)).to.deep.equal(expectedResult);
           });
         });
+
         context('isCoreComplementaryCompatibilityEnabled ON', function () {
           it('should return data', function () {
             // given
@@ -896,6 +899,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
             expect(_omitUniqueKey(result)).to.deep.equal(expectedResult);
           });
         });
+
         context('isCoreComplementaryCompatibilityEnabled ON', function () {
           it('should return a full session object with previous session information and current candidate information if any', function () {
             // given
@@ -956,7 +960,6 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
 
     describe('when there is candidate information', function () {
       describe('when there is prepayment code information', function () {
-        // eslint-disable-next-line mocha/no-setup-in-describe
         [
           { prepaymentCode: '', expectedParsedPrepaymentCode: null },
           { prepaymentCode: '1234', expectedParsedPrepaymentCode: '1234' },

@@ -67,40 +67,32 @@ describe('Unit | UseCase | complete-assessment', function () {
   });
 
   context('when assessment is not yet completed', function () {
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
-    [
-      // eslint-disable-next-line mocha/no-setup-in-describe
-      _buildCompetenceEvaluationAssessment(),
-      // eslint-disable-next-line mocha/no-setup-in-describe
-      _buildCampaignAssessment(),
-      // eslint-disable-next-line mocha/no-setup-in-describe
-      _buildCertificationAssessment(),
-    ].forEach((assessment) => {
-      // eslint-disable-next-line mocha/no-setup-in-describe
-      context(`common behavior when assessment is of type ${assessment.type}`, function () {
-        beforeEach(function () {
-          sinon.stub(assessmentRepository, 'get').withArgs(assessment.id).resolves(assessment);
-          sinon.stub(assessmentRepository, 'completeByAssessmentId').resolves();
-          sinon.stub(certificationCompletedJobRepository, 'performAsync').resolves();
-          sinon.stub(participationCompletedJobRepository, 'performAsync').resolves();
-        });
-
-        it('should complete the assessment', async function () {
-          // when
-          await completeAssessment({
-            assessmentId: assessment.id,
-            assessmentRepository,
-            campaignParticipationRepository,
-            certificationCompletedJobRepository,
-            participationCompletedJobRepository,
+    [_buildCompetenceEvaluationAssessment(), _buildCampaignAssessment(), _buildCertificationAssessment()].forEach(
+      (assessment) => {
+        context(`common behavior when assessment is of type ${assessment.type}`, function () {
+          beforeEach(function () {
+            sinon.stub(assessmentRepository, 'get').withArgs(assessment.id).resolves(assessment);
+            sinon.stub(assessmentRepository, 'completeByAssessmentId').resolves();
+            sinon.stub(certificationCompletedJobRepository, 'performAsync').resolves();
+            sinon.stub(participationCompletedJobRepository, 'performAsync').resolves();
           });
 
-          // then
-          expect(assessmentRepository.completeByAssessmentId.calledWithExactly(assessment.id)).to.be.true;
+          it('should complete the assessment', async function () {
+            // when
+            await completeAssessment({
+              assessmentId: assessment.id,
+              assessmentRepository,
+              campaignParticipationRepository,
+              certificationCompletedJobRepository,
+              participationCompletedJobRepository,
+            });
+
+            // then
+            expect(assessmentRepository.completeByAssessmentId.calledWithExactly(assessment.id)).to.be.true;
+          });
         });
-      });
-    });
+      },
+    );
 
     context('when assessment is of type CAMPAIGN', function () {
       it('should call update campaign participation status', async function () {

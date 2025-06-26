@@ -96,6 +96,7 @@ describe('Integration | Usecase | Handle Badge Acquisition', function () {
       });
     });
   });
+
   context('when campaign is of type EXAM', function () {
     it('should compute badge acquisition based on knowledge-elements from user profile', async function () {
       // given

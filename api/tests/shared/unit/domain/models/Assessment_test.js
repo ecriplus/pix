@@ -16,10 +16,8 @@ describe('Unit | Domain | Models | Assessment', function () {
       expect(assessment.method).to.equal('SMART_RANDOM');
     });
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       {
-        // eslint-disable-next-line mocha/no-setup-in-describe
         type: Assessment.types.COMPETENCE_EVALUATION,
         hasCheckpoints: true,
         showProgressBar: true,
@@ -29,7 +27,6 @@ describe('Unit | Domain | Models | Assessment', function () {
         attributes: { title: 'Ma Compétence' },
       },
       {
-        // eslint-disable-next-line mocha/no-setup-in-describe
         type: Assessment.types.CERTIFICATION,
         hasCheckpoints: false,
         showProgressBar: false,
@@ -39,7 +36,6 @@ describe('Unit | Domain | Models | Assessment', function () {
         attributes: { certificationCourseId: 'certificationCourseId' },
       },
       {
-        // eslint-disable-next-line mocha/no-setup-in-describe
         type: Assessment.types.DEMO,
         hasCheckpoints: false,
         showProgressBar: true,
@@ -49,7 +45,6 @@ describe('Unit | Domain | Models | Assessment', function () {
         attributes: { title: 'Mon Course' },
       },
       {
-        // eslint-disable-next-line mocha/no-setup-in-describe
         type: Assessment.types.PREVIEW,
         hasCheckpoints: false,
         showProgressBar: false,
@@ -59,33 +54,30 @@ describe('Unit | Domain | Models | Assessment', function () {
         attributes: {},
       },
       {
-        // eslint-disable-next-line mocha/no-setup-in-describe
         type: Assessment.types.CAMPAIGN,
-        // eslint-disable-next-line mocha/no-setup-in-describe
+
         describeInfos: CampaignTypes.ASSESSMENT,
         hasCheckpoints: true,
         showProgressBar: true,
         showLevelup: true,
         showQuestionCounter: true,
         expectedTitle: 'Ma Campagne',
-        // eslint-disable-next-line mocha/no-setup-in-describe
+
         attributes: { campaign: domainBuilder.buildCampaign({ title: 'Ma Campagne', type: CampaignTypes.ASSESSMENT }) },
       },
       {
-        // eslint-disable-next-line mocha/no-setup-in-describe
         type: Assessment.types.CAMPAIGN,
-        // eslint-disable-next-line mocha/no-setup-in-describe
+
         describeInfos: CampaignTypes.EXAM,
         hasCheckpoints: false,
         showProgressBar: false,
         showLevelup: false,
         showQuestionCounter: false,
         expectedTitle: 'Ma Campagne',
-        // eslint-disable-next-line mocha/no-setup-in-describe
+
         attributes: { campaign: domainBuilder.buildCampaign({ title: 'Ma Campagne', type: CampaignTypes.EXAM }) },
       },
       {
-        // eslint-disable-next-line mocha/no-setup-in-describe
         type: Assessment.types.CAMPAIGN,
         describeInfos: 'Anonymized assessment',
         hasCheckpoints: false,
@@ -597,8 +589,6 @@ describe('Unit | Domain | Models | Assessment', function () {
   });
 
   describe('#computeMethod', function () {
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       { assessmentType: 'PREVIEW', expectedMethod: 'CHOSEN' },
       { assessmentType: 'CERTIFICATION', expectedMethod: 'CERTIFICATION_DETERMINED' },

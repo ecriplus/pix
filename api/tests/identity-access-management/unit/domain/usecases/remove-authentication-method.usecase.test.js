@@ -230,6 +230,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | remove-authenti
       });
     });
   });
+
   context('When authentication method type is a generic OIDC SSO', function () {
     it('removes the identity provider authentication method', async function () {
       // given
@@ -255,6 +256,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | remove-authenti
       });
     });
   });
+
   context('When there is only one remaining authentication method', function () {
     it('throws a UserNotAuthorizedToRemoveAuthenticationMethod', async function () {
       // given

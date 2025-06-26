@@ -5,7 +5,6 @@ import { catchErrSync, domainBuilder, expect } from '../../../../test-helper.js'
 describe('Unit | Domain | School', function () {
   describe('#getChallengeId', function () {
     context('should return challenge id of accurate activity level in first step', function () {
-      // eslint-disable-next-line mocha/no-setup-in-describe
       [
         { activityLevel: 'TUTORIAL', expectedChallengeId: 'tutorial-challenge-id-1' },
         { activityLevel: 'TRAINING', expectedChallengeId: 'training-challenge-id-1' },
@@ -83,6 +82,7 @@ describe('Unit | Domain | School', function () {
           expect(challengeId).to.equal('tutorial-challenge-id-1_3');
         });
       });
+
       context('when there is only one version of the challenge', function () {
         it('returns the first challenge', async function () {
           const mission = domainBuilder.buildMission({
@@ -142,7 +142,6 @@ describe('Unit | Domain | School', function () {
   });
 
   describe('#getChallengeIds', function () {
-    /* eslint-disable mocha/no-setup-in-describe */
     [
       {
         stepIndex: 0,
@@ -184,7 +183,6 @@ describe('Unit | Domain | School', function () {
         activityLevel: Activity.levels.CHALLENGE,
         expectedChallengeIds: [['dare-challenge-id']],
       },
-      /* eslint-enable mocha/no-setup-in-describe */
     ].forEach(({ stepIndex, activityLevel, expectedChallengeIds }) => {
       it(`should return ${expectedChallengeIds} for level ${activityLevel} and step ${stepIndex}`, function () {
         const mission = domainBuilder.buildMission({

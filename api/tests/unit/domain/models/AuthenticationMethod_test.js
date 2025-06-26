@@ -173,6 +173,7 @@ describe('Unit | Domain | Models | AuthenticationMethod', function () {
 
     context('PixAuthenticationComplement', function () {
       let validArguments;
+
       beforeEach(function () {
         validArguments = {
           password: 'Password123',
@@ -237,6 +238,7 @@ describe('Unit | Domain | Models | AuthenticationMethod', function () {
 
     context('PoleEmploiOidcAuthenticationComplement', function () {
       let validArguments;
+
       beforeEach(function () {
         validArguments = {
           accessToken: 'accessToken',

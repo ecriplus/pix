@@ -2,7 +2,6 @@ import { Activity } from '../../../../../src/school/domain/models/Activity.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Unit | domain | Activity', function () {
-  /* eslint-disable mocha/no-setup-in-describe */
   [
     {
       level: Activity.levels.CHALLENGE,
@@ -53,7 +52,6 @@ describe('Unit | domain | Activity', function () {
       expect(activity.isTutorial).to.equal(isTutorial);
     });
   });
-  /* eslint-enable mocha/no-setup-in-describe */
 
   describe('isLevel', function () {
     context('when level is TUTORIAL', function () {
@@ -61,6 +59,7 @@ describe('Unit | domain | Activity', function () {
         const activity = new Activity({ level: 'TUTORIAL' });
         expect(activity.hasLevel(Activity.levels.TUTORIAL)).to.be.true;
       });
+
       it('return false', function () {
         const activity = new Activity({ level: 'VALIDATION' });
         expect(activity.hasLevel(Activity.levels.TUTORIAL)).to.be.false;
@@ -75,6 +74,7 @@ describe('Unit | domain | Activity', function () {
         expect(activity.isInStep).to.be.false;
       });
     });
+
     context('when stepIndex is not empty', function () {
       it('return true', function () {
         const activity = new Activity({ stepIndex: 1 });

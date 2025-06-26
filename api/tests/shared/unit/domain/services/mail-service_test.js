@@ -121,6 +121,7 @@ describe('Unit | Service | MailService', function () {
             ...mainTranslationsMapping.fr['organization-invitation-email'].params,
           });
         });
+
         it(`when locale is ${FRENCH_FRANCE}`, async function () {
           // when
           await mailService.sendOrganizationInvitationEmail({
@@ -144,6 +145,7 @@ describe('Unit | Service | MailService', function () {
             ...mainTranslationsMapping.fr['organization-invitation-email'].params,
           });
         });
+
         it('when locale is undefined', async function () {
           // when
           await mailService.sendOrganizationInvitationEmail({
@@ -167,6 +169,7 @@ describe('Unit | Service | MailService', function () {
             ...mainTranslationsMapping.fr['organization-invitation-email'].params,
           });
         });
+
         it(`when locale is ${ENGLISH_SPOKEN}`, async function () {
           // when
           await mailService.sendOrganizationInvitationEmail({

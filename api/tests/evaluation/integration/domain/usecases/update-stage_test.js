@@ -84,6 +84,7 @@ describe('Integration | Domain | UseCases | update-stage', function () {
           expect(error.message).to.equal('The stage is part of a target profile linked to a campaign');
         });
       });
+
       context('when level stage is the same', function () {
         it('should update the stage', async function () {
           // given
@@ -167,6 +168,7 @@ describe('Integration | Domain | UseCases | update-stage', function () {
           expect(error.message).to.equal('The stage is part of a target profile linked to a campaign');
         });
       });
+
       context('when threshold is the same', function () {
         it('should update the stage', async function () {
           // given

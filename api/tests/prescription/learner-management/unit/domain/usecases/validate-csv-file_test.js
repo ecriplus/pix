@@ -174,6 +174,7 @@ describe('Unit | UseCase | validateCsvFile', function () {
 
   context('when there is errors', function () {
     let importSupOrganizationLearnersJobRepositoryStub, organizationImportStub;
+
     beforeEach(function () {
       importSupOrganizationLearnersJobRepositoryStub = {
         performAsync: sinon.stub(),

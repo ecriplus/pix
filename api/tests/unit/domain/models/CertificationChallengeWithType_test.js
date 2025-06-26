@@ -4,8 +4,6 @@ import { domainBuilder, expect } from '../../../test-helper.js';
 
 describe('Unit | Domain | Models | CertificationChallengeWithType', function () {
   describe('#constructor', function () {
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
     Object.values(Type).forEach((validType) => {
       it(`should initialize CertificationChallengeWithType with type ${validType}`, function () {
         // when

@@ -121,6 +121,7 @@ describe('Integration | UseCase | get-campaign-participations', function () {
       });
     });
   });
+
   context('when campaign type is profile collection', function () {
     it('should return all participations for given campaign', async function () {
       // given

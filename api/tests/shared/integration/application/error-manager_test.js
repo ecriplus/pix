@@ -47,6 +47,7 @@ describe('Integration | API | Controller Error', function () {
 
   context('412 Precondition Failed', function () {
     const PRECONDITION_FAILED = 412;
+
     it('responds Precondition Failed when a SiecleXmlImportError error occurs', async function () {
       routeHandler.throws(new SiecleXmlImportError());
       const response = await server.requestObject(request);
@@ -135,6 +136,7 @@ describe('Integration | API | Controller Error', function () {
       expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
       expect(responseDetail(response)).to.equal('Utilisateur non autorisé à accéder à la ressource');
     });
+
     it('responds Forbidden when a UserNotAuthorizedToUpdatePasswordError error occurs', async function () {
       routeHandler.throws(
         new DomainErrors.UserNotAuthorizedToUpdatePasswordError(

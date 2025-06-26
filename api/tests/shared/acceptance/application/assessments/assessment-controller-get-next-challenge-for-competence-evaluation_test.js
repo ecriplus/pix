@@ -157,6 +157,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-compet
 
     context('When there is no more challenges to answer', function () {
       const lastChallengeId = 'lastChallengeId';
+
       beforeEach(async function () {
         databaseBuilder.factory.buildUser({ id: userId });
         databaseBuilder.factory.buildAssessment({

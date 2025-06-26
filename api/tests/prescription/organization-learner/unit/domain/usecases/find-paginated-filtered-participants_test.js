@@ -134,6 +134,7 @@ describe('Unit | UseCases | find-paginated-participants', function () {
 
       expect(result.meta.headingCustomColumns).to.be.deep.equals(['ORALIZATION']);
     });
+
     it('should add oralization value to participants', async function () {
       // given
       organizationFeaturesAPI.getAllFeaturesFromOrganization

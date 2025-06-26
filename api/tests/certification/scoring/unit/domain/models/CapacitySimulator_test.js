@@ -82,7 +82,6 @@ describe('Unit | Domain | Models | CapacitySimulator', function () {
   ];
 
   describe('#compute', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       {
         score: 111,

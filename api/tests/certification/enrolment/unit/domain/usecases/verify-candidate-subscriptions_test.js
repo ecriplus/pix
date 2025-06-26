@@ -1,5 +1,3 @@
-// eslint-disable-next-line @eslint-community/eslint-comments/disable-enable-pair
-/* eslint-disable mocha/no-setup-in-describe */
 import { CertificationCandidateEligibilityError } from '../../../../../../src/certification/enrolment/domain/errors.js';
 import { verifyCandidateSubscriptions } from '../../../../../../src/certification/enrolment/domain/usecases/verify-candidate-subscriptions.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
@@ -295,6 +293,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | verify-candidate
           expect(error).to.be.instanceOf(CertificationCandidateEligibilityError);
         });
       });
+
       context('when score is below lower level', function () {
         it('should throw CertificationCandidateEligibilityError', async function () {
           // given

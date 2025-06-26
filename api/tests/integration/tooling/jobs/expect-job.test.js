@@ -3,6 +3,7 @@ import PgBoss from 'pg-boss';
 import { JobQueue } from '../../../../src/shared/infrastructure/jobs/JobQueue.js';
 import { JobRepository } from '../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { catchErr, expect, knex } from '../../../test-helper.js';
+
 describe('Integration | Tooling | Expect Job', function () {
   describe('#withJobsCount', function () {
     it('succeeds when count of executed jobs is correct', async function () {

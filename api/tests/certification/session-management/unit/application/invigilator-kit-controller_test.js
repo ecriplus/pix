@@ -6,13 +6,10 @@ import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js'
 
 describe('Certification | Session Management | Unit | Application | Controller | Invigilator Kit', function () {
   describe('#getInvigilatorKitPdf', function () {
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    /* eslint-disable mocha/no-setup-in-describe */
     [
       { lang: LANGUAGES_CODE.ENGLISH, filename: 'invigilator-kit-1.pdf' },
       { lang: LANGUAGES_CODE.FRENCH, filename: 'kit-surveillant-1.pdf' },
     ].forEach(function ({ lang, filename }) {
-      /* eslint-enable mocha/no-setup-in-describe */
       it(`should return invigilator kit in ${lang}`, async function () {
         // given
         sinon.stub(usecases, 'getInvigilatorKitSessionInfo');

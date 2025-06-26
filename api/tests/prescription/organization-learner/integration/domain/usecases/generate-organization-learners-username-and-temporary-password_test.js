@@ -75,6 +75,7 @@ describe('Integration | UseCases | generate organization learners username and t
 
     userId = databaseBuilder.factory.buildUser().id;
   });
+
   context('When organization is of type SCO and has isManagingStudents at true', function () {
     beforeEach(function () {
       organization.type = 'SCO';
@@ -150,6 +151,7 @@ describe('Integration | UseCases | generate organization learners username and t
         expect(result).to.have.deep.members(expectedResult);
       });
     });
+
     context('When organization has GAR as identity provider', function () {
       beforeEach(async function () {
         organization.identityProviderForCampaigns = 'GAR';
@@ -203,6 +205,7 @@ describe('Integration | UseCases | generate organization learners username and t
       });
     });
   });
+
   context('Error cases', function () {
     context('when an organization learner does not belong to organization', function () {
       beforeEach(async function () {

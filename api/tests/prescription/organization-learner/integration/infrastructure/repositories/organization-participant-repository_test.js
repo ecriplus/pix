@@ -563,6 +563,7 @@ describe('Integration | Infrastructure | Repository | OrganizationParticipant', 
 
         context('sort by participation date', function () {
           let organizationLearnerId1, organizationLearnerId2, organizationLearnerId3, organizationId;
+
           context('common case', function () {
             beforeEach(async function () {
               organizationId = databaseBuilder.factory.buildOrganization().id;
@@ -2067,6 +2068,7 @@ describe('Integration | Infrastructure | Repository | OrganizationParticipant', 
 
         context('sort by participation date', function () {
           let organizationLearnerId1, organizationLearnerId2, organizationLearnerId3, organizationId;
+
           context('common case', function () {
             beforeEach(async function () {
               organizationId = databaseBuilder.factory.buildOrganization().id;

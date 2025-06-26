@@ -50,6 +50,7 @@ describe('Unit | Application | Certification | ComplementaryCertification | atta
           expect(statusCode).to.equal(200);
         });
       });
+
       context('when there is no target profile to remove', function () {
         it('should return a response with an HTTP status code 200', async function () {
           // given

@@ -59,6 +59,7 @@ describe('Integration | Repository | competence-repository', function () {
           );
         });
       });
+
       context('when no locale provided', function () {
         it('should return the competence translated in default locale FR', async function () {
           // when
@@ -105,6 +106,7 @@ describe('Integration | Repository | competence-repository', function () {
           expect(competenceName).to.equal(competenceData1.name_i18n.en);
         });
       });
+
       context('when no locale provided', function () {
         it('should return the competence name translated in default locale FR', async function () {
           // when
@@ -277,6 +279,7 @@ describe('Integration | Repository | competence-repository', function () {
           ]);
         });
       });
+
       it('should ignore null and duplicates', async function () {
         // when
         const competences = await competenceRepository.findByRecordIds({

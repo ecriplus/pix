@@ -18,11 +18,8 @@ describe('Unit | Infrastructure | Externals/Pole-Emploi | pole-emploi-notifier',
     let logger;
     let payload;
 
-    // TODO: Fix this the next time the file is edited.
-    // eslint-disable-next-line mocha/no-setup-in-describe
     const originPoleEmploiSendingUrl = settings.poleEmploi.sendingUrl;
-    // TODO: Fix this the next time the file is edited.
-    // eslint-disable-next-line mocha/no-setup-in-describe
+
     const originPoleEmploiTokenUrl = settings.poleEmploi.tokenUrl;
 
     const userId = 123;
@@ -90,6 +87,7 @@ describe('Unit | Infrastructure | Externals/Pole-Emploi | pole-emploi-notifier',
         beforeEach(function () {
           sinon.stub(settings.featureToggles, 'deprecatePoleEmploiPushNotification').value('true');
         });
+
         it('should send the notification to Pole Emploi with deprectation message', async function () {
           // given
           const expiredDate = dayjs().add(10, 'm').toDate();
@@ -124,6 +122,7 @@ describe('Unit | Infrastructure | Externals/Pole-Emploi | pole-emploi-notifier',
           });
         });
       });
+
       it('should send the notification to Pole Emploi', async function () {
         // given
         const expiredDate = dayjs().add(10, 'm').toDate();

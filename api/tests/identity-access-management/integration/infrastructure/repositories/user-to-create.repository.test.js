@@ -57,6 +57,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           expect(error).to.be.instanceOf(OrganizationLearnerAlreadyLinkedToUserError);
         });
       });
+
       context('when firstName field is not defined', function () {
         it('throws an error', async function () {
           // given
@@ -125,6 +126,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           expect(error).to.be.instanceOf(AlreadyRegisteredEmailError);
         });
       });
+
       context('when firstName field is not defined', function () {
         it('throws an error', async function () {
           // given

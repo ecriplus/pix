@@ -221,6 +221,7 @@ describe('Integration | Repository | AssessmentResult', function () {
         expect(result).to.deep.equal({ level: 5, pixScore: 9000 });
       });
     });
+
     context('when certification course has several assessment results', function () {
       it('should return the level and pixScore of the latest assessment result', async function () {
         // given
@@ -249,6 +250,7 @@ describe('Integration | Repository | AssessmentResult', function () {
         expect(pixScore).to.equal(8999);
       });
     });
+
     context('when a limit date is specified', function () {
       it('should return the level and pixScore of the latest assessment result before that date', async function () {
         // given
@@ -284,6 +286,7 @@ describe('Integration | Repository | AssessmentResult', function () {
         expect(pixScore).to.equal(8);
       });
     });
+
     context('when assessment has no assessment-result', function () {
       it('should return 0 as level and pixScore', async function () {
         // given

@@ -20,7 +20,6 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
   };
 
   context('success', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     supportedLocales.forEach((locale) => {
       context(`when locale is ${locale}`, function () {
         it('returns true', function () {
@@ -40,7 +39,6 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
     });
 
     context('when all required properties are provided', function () {
-      // eslint-disable-next-line mocha/no-setup-in-describe
       organizationTypes.forEach((organizationType) => {
         context(`when organization type is ${organizationType}`, function () {
           it('returns "true"', function () {

@@ -27,6 +27,7 @@ describe('Unit | Application | Validator | checkOrganizationHasFeature', functio
       ).to.not.throw();
     });
   });
+
   context('When organization does not have feature enabled', function () {
     it('should throw', async function () {
       // given

@@ -71,10 +71,12 @@ describe('Unit | UseCase | start-or-resume-competence-evaluation', function () {
       expect(err).to.be.instanceOf(Error);
     });
   });
+
   context('When the competence exists', function () {
     beforeEach(function () {
       competenceRepository.get.withArgs({ id: competenceId }).resolves();
     });
+
     context('When the user starts a new competence evaluation', function () {
       beforeEach(function () {
         competenceEvaluationRepository.getByCompetenceIdAndUserId.rejects(new NotFoundError());
@@ -98,6 +100,7 @@ describe('Unit | UseCase | start-or-resume-competence-evaluation', function () {
           .withArgs({ competenceEvaluation: competenceEvaluationToSave })
           .resolves(competenceEvaluation);
       });
+
       it('should return the created competence evaluation', async function () {
         const res = await usecases.startOrResumeCompetenceEvaluation({
           competenceId,
@@ -114,6 +117,7 @@ describe('Unit | UseCase | start-or-resume-competence-evaluation', function () {
       beforeEach(function () {
         competenceEvaluationRepository.getByCompetenceIdAndUserId.resolves(competenceEvaluation);
       });
+
       it('should return the existing competence evaluation', async function () {
         // given
         const res = await usecases.startOrResumeCompetenceEvaluation({
@@ -129,6 +133,7 @@ describe('Unit | UseCase | start-or-resume-competence-evaluation', function () {
 
     context('When the user restarts a competence evaluation', function () {
       let resetCompetenceEvaluation, res;
+
       beforeEach(async function () {
         resetCompetenceEvaluation = { ...competenceEvaluation, status: CompetenceEvaluation.statuses.RESET };
         competenceEvaluationRepository.getByCompetenceIdAndUserId
@@ -158,9 +163,11 @@ describe('Unit | UseCase | start-or-resume-competence-evaluation', function () {
           competenceRepository,
         });
       });
+
       it('should return the updated competenceEvaluation', function () {
         expect(res).to.deep.equal({ competenceEvaluation: updatedCompetenceEvaluation, created: false });
       });
+
       it('should have updated the status', function () {
         expect(competenceEvaluationRepository.updateStatusByUserIdAndCompetenceId).to.have.been.calledWithExactly({
           userId,
@@ -168,6 +175,7 @@ describe('Unit | UseCase | start-or-resume-competence-evaluation', function () {
           status: CompetenceEvaluation.statuses.STARTED,
         });
       });
+
       it('should have updated the assessment id to the newly created assessment id', function () {
         expect(competenceEvaluationRepository.updateAssessmentId).to.have.been.calledWithExactly({
           currentAssessmentId: competenceEvaluation.assessmentId,

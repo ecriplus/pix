@@ -226,6 +226,7 @@ describe('Integration | Application | Route | campaignParticipationRouter', func
         expect(campaignParticipationController.getAnonymisedCampaignAssessments).not.called;
       });
     });
+
     context('When userId is not an integer', function () {
       it('should return 400 - Bad request when userId is not an integer', async function () {
         // when

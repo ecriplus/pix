@@ -4,6 +4,7 @@ describe('Unit | Domain | Models | BadgeForCalculation', function () {
   describe('#shouldBeObtained', function () {
     context('when there are several criteria', function () {
       let knowledgeElements;
+
       beforeEach(function () {
         knowledgeElements = [
           domainBuilder.buildKnowledgeElement.directlyValidated({ skillId: 'recSkill1' }),

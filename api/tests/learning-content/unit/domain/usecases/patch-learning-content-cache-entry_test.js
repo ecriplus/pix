@@ -83,7 +83,6 @@ describe('Learning Content | Unit | Domain | Usecase | Patch learning content ca
   });
 
   describe('#patchLearningContentCacheEntry', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       'frameworks',
       'areas',
@@ -98,7 +97,7 @@ describe('Learning Content | Unit | Domain | Usecase | Patch learning content ca
     ].forEach((modelName) => {
       describe(`when model is ${modelName}`, function () {
         const recordId = 'recId';
-        const updatedRecord = Symbol('updated record'); // eslint-disable-line mocha/no-setup-in-describe
+        const updatedRecord = Symbol('updated record');
 
         beforeEach(function () {
           repositoriesByModel[modelName].save.withArgs(updatedRecord).resolves();

@@ -493,6 +493,7 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
 
       await databaseBuilder.commit();
     });
+
     context('when feature toggle `isAnonymizationWithDeletionEnabled` is true', function () {
       it('should delete campaignParticipationId', async function () {
         //given

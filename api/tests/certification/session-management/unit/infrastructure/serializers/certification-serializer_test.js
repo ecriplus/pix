@@ -59,7 +59,6 @@ describe('Unit | Serializer | JSONAPI | certification-serializer', function () {
       });
     });
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     EMPTY_BLANK_AND_NULL.forEach(function (examinerComment) {
       it(`should return no examiner comment if comment is "${examinerComment}"`, async function () {
         // given
@@ -175,8 +174,6 @@ describe('Unit | Serializer | JSONAPI | certification-serializer', function () {
       },
     };
 
-    // TODO: Fix this the next time the file is edited.
-    // eslint-disable-next-line mocha/no-setup-in-describe
     const certificationCourse = domainBuilder.buildCertificationCourse({
       id: 1,
       firstName: 'Freezer',

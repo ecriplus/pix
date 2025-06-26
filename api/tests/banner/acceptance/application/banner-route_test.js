@@ -32,6 +32,7 @@ describe('Acceptance | Router | banner-route', function () {
         });
       });
     });
+
     context('when a banner has been stored for given target', function () {
       it('should return the stored banner', async function () {
         // given

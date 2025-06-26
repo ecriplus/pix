@@ -143,6 +143,7 @@ describe('Unit | Domain | Type | identifier-types', function () {
           expect(error).to.be.undefined;
         });
       });
+
       context('when organizationId is empty', function () {
         it('should not throw', function () {
           // given
@@ -155,6 +156,7 @@ describe('Unit | Domain | Type | identifier-types', function () {
           expect(error).to.be.undefined;
         });
       });
+
       context('when organizationId is undefined', function () {
         it('should not throw', function () {
           // given
@@ -167,6 +169,7 @@ describe('Unit | Domain | Type | identifier-types', function () {
           expect(error).to.be.undefined;
         });
       });
+
       context('when organizationId is lower of range', function () {
         it('should reject outside of lower bound', async function () {
           // given
@@ -179,6 +182,7 @@ describe('Unit | Domain | Type | identifier-types', function () {
           expect(error.message).to.equal('"value" must be greater than or equal to 1');
         });
       });
+
       context('when organizationId is higher of range', function () {
         it('should reject outside of upper bound', async function () {
           // given

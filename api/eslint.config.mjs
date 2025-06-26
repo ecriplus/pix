@@ -84,9 +84,9 @@ export default [
       'mocha/no-hooks-for-single-case': 'off',
       'mocha/no-exclusive-tests': 'error',
       'mocha/no-pending-tests': 'error',
-      'mocha/no-skipped-tests': 'error',
       'mocha/no-top-level-hooks': 'error',
-      'mocha/no-setup-in-describe': ['error'],
+      'mocha/no-setup-in-describe': 'off',
+      'mocha/consistent-spacing-between-blocks': 'off',
     },
   },
   {

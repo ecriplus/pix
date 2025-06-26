@@ -76,6 +76,7 @@ describe('Unit | UseCase | upload-siecle-file', function () {
   context('when extracted organizationLearners informations can be imported', function () {
     context('when the file is zipped', function () {
       let rmStub;
+
       beforeEach(function () {
         rmStub = sinon.stub(fs, 'rm');
       });

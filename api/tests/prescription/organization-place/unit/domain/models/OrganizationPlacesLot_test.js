@@ -43,6 +43,7 @@ describe('Unit | Domain | Models | OrganizationPlacesLotForManagement', function
 
     context('#validation', function () {
       let initialAttributes;
+
       beforeEach(function () {
         initialAttributes = {
           organizationId: 1,
@@ -434,8 +435,6 @@ describe('Unit | Domain | Models | OrganizationPlacesLotForManagement', function
           ]);
         });
 
-        // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-        // eslint-disable-next-line mocha/no-setup-in-describe
         [
           { code: CODE_CATEGORY_T0, category: CATEGORY_FREE_RATE },
           { code: CODE_CATEGORY_T1, category: CATEGORY_PUBLIC_RATE },
@@ -482,6 +481,7 @@ describe('Unit | Domain | Models | OrganizationPlacesLotForManagement', function
             },
           ]);
         });
+
         it('it should throw an exception when createdBy is not an a number', function () {
           //given
           const attributes = {

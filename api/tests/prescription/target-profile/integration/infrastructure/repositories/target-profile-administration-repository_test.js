@@ -1100,6 +1100,7 @@ describe('Integration | Repository | Target-profile', function () {
           ];
           expect(actualTargetProfileSummaries).to.deepEqualArray(expectedTargetProfileSummaries);
         });
+
         it('should summaries target profiles belong to me', async function () {
           // given
           const organizationId = databaseBuilder.factory.buildOrganization().id;
@@ -1149,6 +1150,7 @@ describe('Integration | Repository | Target-profile', function () {
           // then
           expect(actualTargetProfileSummaries).lengthOf(0);
         });
+
         it('should return summaries within constraints', async function () {
           // given
           databaseBuilder.factory.buildOrganization({ id: 1 });

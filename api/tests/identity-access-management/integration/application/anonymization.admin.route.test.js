@@ -38,6 +38,7 @@ describe('Integration | Identity Access Management | Application | Route | Anony
         expect(response.statusCode).to.equal(403);
       });
     });
+
     context('when csv file does not have required header', function () {
       it('returns 412 HTTP status code', async function () {
         //given

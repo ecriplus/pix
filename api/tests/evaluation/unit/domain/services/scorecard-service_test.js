@@ -321,6 +321,7 @@ describe('Unit | Service | ScorecardService', function () {
           .withArgs({ userId, competenceId })
           .resolves(knowledgeElements);
       });
+
       it('should not throws when a campaign assessment has been unlink with its participation', async function () {
         const anonymizedAssessment = domainBuilder.buildAssessment.ofTypeCampaign({
           id: 98765,

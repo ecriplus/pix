@@ -352,6 +352,7 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
         ]);
       });
     });
+
     context('should handle filters', function () {
       let campaign, clientId, tube, competenceId, skillId;
 

@@ -162,6 +162,7 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
     const lastUserApplicationConnection = await knex('last-user-application-connections').where({ userId }).first();
     expect(lastUserApplicationConnection.lastLoggedAt.toISOString()).to.equal('2023-03-01T00:00:00.000Z');
   });
+
   context('when featureFlag isAnonymizationWithDeletionEnabled is true', function () {
     it('should anonymised learner', async function () {
       // given
@@ -214,6 +215,7 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
       expect(participations).lengthOf(0);
     });
   });
+
   context('when anonymizedByUserId does not exist', function () {
     it('throws an error and does not anonymize the user', async function () {
       // given

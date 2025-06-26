@@ -58,7 +58,6 @@ describe('Unit | Usecase | authenticate-application', function () {
     });
 
     context('when client scopes are different', function () {
-      // eslint-disable-next-line mocha/no-setup-in-describe
       [{ scope: 'mauvais-scope bon-scope' }, { scope: 'mauvais-scope' }].forEach(({ scope }) => {
         it(`should throw an error when scope is ${scope}`, async function () {
           const payload = {
@@ -96,7 +95,6 @@ describe('Unit | Usecase | authenticate-application', function () {
     });
 
     context('when given information is correct', function () {
-      // eslint-disable-next-line mocha/no-setup-in-describe
       [{ scope: 'bon-scope' }, { scope: 'bon-scope autre-bon-scope' }].forEach(({ scope }) => {
         it(`should return created token with scope ${scope}`, async function () {
           const payload = {

@@ -491,6 +491,7 @@ describe('Integration | Infrastructure | Utils | Ods | fillCandidatesImportSheet
       const expectedResult = await readOdsUtils.getContentXml({ odsFilePath: expectedOdsFilePath });
       expect(actualResult).to.deep.equal(expectedResult);
     });
+
     context('when some candidate have complementary certification', function () {
       it('should return a candidate import sheet with session data, candidates data prefilled', async function () {
         // given

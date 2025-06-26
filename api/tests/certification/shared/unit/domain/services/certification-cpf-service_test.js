@@ -274,6 +274,7 @@ describe('Unit | Service | Certification CPF service', function () {
               expect(result).to.deep.equal(cpfBirthInformationValidation);
             });
           });
+
           context('when birthcity is not defined', function () {
             it('should return a validation failure', async function () {
               // given
@@ -347,6 +348,7 @@ describe('Unit | Service | Certification CPF service', function () {
               expect(result).to.deep.equal(cpfBirthInformationValidation);
             });
           });
+
           context('when birthcity is not defined', function () {
             it('should return a validation failure', async function () {
               // given

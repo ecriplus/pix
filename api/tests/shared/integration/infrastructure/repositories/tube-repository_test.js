@@ -278,6 +278,7 @@ describe('Integration | Repository | tube-repository', function () {
           ]);
         });
       });
+
       it('should ignore dupes and nulls', async function () {
         // when
         const tubes = await tubeRepository.findByRecordIds([
@@ -371,6 +372,7 @@ describe('Integration | Repository | tube-repository', function () {
           ]);
         });
       });
+
       it('should ignore duplicates and nulls', async function () {
         // when
         const tubes = await tubeRepository.findActiveByRecordIds([

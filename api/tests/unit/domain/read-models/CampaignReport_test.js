@@ -3,26 +3,24 @@ import { domainBuilder, expect } from '../../../test-helper.js';
 
 describe('Unit | Domain | Models | CampaignReport', function () {
   describe('getters', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       {
         getter: 'isAssessment',
-        // eslint-disable-next-line mocha/no-setup-in-describe
+
         isTrueForType: CampaignTypes.ASSESSMENT,
       },
       {
         getter: 'isExam',
-        // eslint-disable-next-line mocha/no-setup-in-describe
+
         isTrueForType: CampaignTypes.EXAM,
       },
       {
         getter: 'isProfilesCollection',
-        // eslint-disable-next-line mocha/no-setup-in-describe
+
         isTrueForType: CampaignTypes.PROFILES_COLLECTION,
       },
     ].forEach(({ getter, isTrueForType }) => {
       describe('#' + getter, function () {
-        // eslint-disable-next-line mocha/no-setup-in-describe
         Object.values(CampaignTypes).forEach((campaignType) => {
           const expected = campaignType === isTrueForType;
           it(`should return ${expected} when campaign is of type ${campaignType}`, function () {

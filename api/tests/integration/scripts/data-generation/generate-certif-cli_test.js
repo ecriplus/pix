@@ -34,7 +34,6 @@ describe('Integration | Scripts | generate-certif-cli.js', function () {
 
   describe('#main', function () {
     context('when asking for 2 candidates', function () {
-      // eslint-disable-next-line mocha/no-setup-in-describe
       [certificationCenterSup, certificationCenterPro].forEach(({ type }) => {
         context(`when asking for ${type}`, function () {
           it(`should create 2 ${type} candidates`, async function () {

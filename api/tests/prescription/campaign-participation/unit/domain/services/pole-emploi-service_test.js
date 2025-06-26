@@ -52,6 +52,7 @@ describe('Unit | Service | Pole Emploi Service', function () {
           );
         });
       });
+
       context('when isSuccessful is false', function () {
         it('should generate a link with a query params using the filters', function () {
           const sending = {

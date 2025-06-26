@@ -147,6 +147,7 @@ describe('Unit | Privacy | Domain | UseCase | can-self-delete-account', function
     beforeEach(async function () {
       await featureToggles.set('isSelfAccountDeletionEnabled', false);
     });
+
     context('When user is eligible', function () {
       it('returns false', async function () {
         // given

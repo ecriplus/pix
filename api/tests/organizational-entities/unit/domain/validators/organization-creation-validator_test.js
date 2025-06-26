@@ -88,7 +88,6 @@ describe('Unit | Domain | Validators | organization-validator', function () {
           }
         });
 
-        // eslint-disable-next-line mocha/no-setup-in-describe
         ['SUP', 'SCO', 'PRO', 'SCO-1D'].forEach((type) => {
           it(`should not throw with ${type} as type`, function () {
             // given

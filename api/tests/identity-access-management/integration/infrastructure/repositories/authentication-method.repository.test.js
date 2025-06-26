@@ -1118,6 +1118,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(authenticationMethods).to.have.deep.members(expectedAuthenticationMethods);
       });
     });
+
     context("when user doesn't have an authentication method PIX", function () {
       it('create Pix authentication method with password for provided users list', async function () {
         // given

@@ -285,6 +285,7 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
           expect(results.data[0].sharedProfileCount).to.equal(1);
         });
       });
+
       describe('when participant has multiple participations', function () {
         it('should return the count of shared participations only', async function () {
           // given

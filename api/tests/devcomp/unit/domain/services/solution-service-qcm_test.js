@@ -15,8 +15,6 @@ describe('Unit | Devcomp | Domain | Services | SolutionServiceQCM ', function ()
       { answerValues: ['1', '2', '3'], solutionValues: ['1', '2', '3'] },
     ];
 
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
     successfulCases.forEach(({ answerValues, solutionValues }) => {
       it(
         'should return "ok" when answer is "' +
@@ -38,8 +36,6 @@ describe('Unit | Devcomp | Domain | Services | SolutionServiceQCM ', function ()
       { answerValues: ['3', '1'], solutionValues: ['1', '2'] },
     ];
 
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
     failedCases.forEach(({ answerValues, solutionValues }) => {
       it(
         'should return "ko" when answer is "' +

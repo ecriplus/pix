@@ -223,6 +223,7 @@ describe('Integration | Repository | Campaign-Management', function () {
           expect(result.sharedParticipationsCount).to.equal(0);
         });
       });
+
       context('when campaign type is PROFILES_COLLECTION', function () {
         it('should return total and shared participations count', async function () {
           //given

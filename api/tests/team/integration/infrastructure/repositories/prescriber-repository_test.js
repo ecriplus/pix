@@ -23,7 +23,7 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
     lastName: 'popopo',
     email: 'estelle.popopo@example.net',
     lang: 'fr',
-    /* eslint-disable-next-line no-sync, mocha/no-setup-in-describe */
+    /* eslint-disable-next-line no-sync */
     password: bcrypt.hashSync('A124B2C3#!', 1),
     cgu: true,
     samlId: 'some-saml-id',
@@ -226,6 +226,7 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
           expect(foundPrescriber.userOrgaSettings.currentOrganization.tags[0]).to.be.instanceOf(Tag);
         });
       });
+
       context('when organization is a school', function () {
         it('should set code into organizations associated to the prescriber', async function () {
           // given
@@ -271,6 +272,7 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
       describe('#areNewYearOrganizationLearnersImported', function () {
         context('when newYearOrganizationLearnersImportDate is defined in the env.', function () {
           let originalEnvValue;
+
           beforeEach(function () {
             originalEnvValue = settings.features.newYearOrganizationLearnersImportDate;
             settings.features.newYearOrganizationLearnersImportDate = '2020-08-15T00:00:00Z';
@@ -299,6 +301,7 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
 
         context('when newYearOrganizationLearnersImportDate is not defined in the env.', function () {
           let originalEnvValue;
+
           beforeEach(function () {
             originalEnvValue = settings.features.newYearOrganizationLearnersImportDate;
             settings.features.newYearOrganizationLearnersImportDate = null;
@@ -329,6 +332,7 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
           'when there is no organization-learners created for the organization of the user-orga-settings',
           function () {
             let originalEnvValue;
+
             beforeEach(function () {
               originalEnvValue = settings.features.newYearOrganizationLearnersImportDate;
               settings.features.newYearOrganizationLearnersImportDate = '2020-08-15T00:00:00Z';

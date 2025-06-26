@@ -57,6 +57,7 @@ describe('unzip', function () {
       });
     });
   });
+
   context('when there are files with a corrupted entry within zip', function () {
     it('throws an error', async function () {
       // given

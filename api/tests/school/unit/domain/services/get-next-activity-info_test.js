@@ -7,7 +7,6 @@ import {
 import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Domain | Pix Junior | get next activity info', function () {
-  // eslint-disable-next-line mocha/no-setup-in-describe
   [
     {
       activities: [],
@@ -221,7 +220,6 @@ describe('Unit | Domain | Pix Junior | get next activity info', function () {
       expectedActivityInfo: END_OF_MISSION,
     },
   ].forEach(({ activities, stepCount, expectedActivityInfo }) => {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     context(`when activities flow is ${JSON.stringify(activities)} in a ${stepCount} steps mission`, function () {
       it(`should return ${expectedActivityInfo.toString()}`, function () {
         const result = getNextActivityInfo({ activities: buildActivities(activities), stepCount });

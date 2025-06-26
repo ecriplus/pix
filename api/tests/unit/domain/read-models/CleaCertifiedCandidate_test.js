@@ -32,7 +32,6 @@ describe('Unit | Domain | Models | CleaCertifiedCandidate', function () {
 
   describe('#geographicAreaOfBirthCode', function () {
     describe('when the candidate is born in a foreign country', function () {
-      // eslint-disable-next-line mocha/no-setup-in-describe
       [
         {
           code: '100',

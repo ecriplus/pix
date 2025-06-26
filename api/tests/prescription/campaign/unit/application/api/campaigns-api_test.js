@@ -246,6 +246,7 @@ describe('Unit | API | Campaigns', function () {
         expect(firstCampaignListItem.tubes).to.be.undefined;
       });
     });
+
     context('when withCoverRate is true', function () {
       it('should return paginated campaign list from organizationId with cover rate', async function () {
         const organizationId = Symbol('organizationId');

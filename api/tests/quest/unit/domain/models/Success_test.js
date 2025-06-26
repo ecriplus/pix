@@ -31,6 +31,7 @@ describe('Quest | Unit | Domain | Models | Success ', function () {
         expect(masteryPercentageBroken).to.equal(0);
       });
     });
+
     context('when skill ids are provided', function () {
       it('should return the expected mastery percentage according to knowledge elements in Success model', function () {
         // given
@@ -172,6 +173,7 @@ describe('Quest | Unit | Domain | Models | Success ', function () {
         expect(masteryPercentageBroken).to.equal(0);
       });
     });
+
     context('when cappedTubes are provided', function () {
       context('when there are no dupes in tubeId/difficulty', function () {
         it('should return the expected mastery percentage according to knowledge elements by tube in Success model', function () {
@@ -216,6 +218,7 @@ describe('Quest | Unit | Domain | Models | Success ', function () {
           expect(masteryPercentage).to.be.equal(expectedMasteryPercentage);
         });
       });
+
       context('when there are several skills for the same tubeId/difficulty', function () {
         it('should only count as if there were one skill for the same tubeId/difficulty', function () {
           // given
@@ -254,6 +257,7 @@ describe('Quest | Unit | Domain | Models | Success ', function () {
             expect(masteryPercentage).to.be.equal(0);
           });
         });
+
         context('when one of them have been assessed to the user', function () {
           it('should count as if the skill is validated', function () {
             // given
@@ -274,6 +278,7 @@ describe('Quest | Unit | Domain | Models | Success ', function () {
             expect(masteryPercentage).to.be.equal(100);
           });
         });
+
         context('when some of them have been assessed to the user', function () {
           it('should count as if the skill is validated', function () {
             // given
@@ -297,6 +302,7 @@ describe('Quest | Unit | Domain | Models | Success ', function () {
             expect(masteryPercentage).to.be.equal(100);
           });
         });
+
         context('when all of them have been assessed to the user', function () {
           it('should count as if the skill is validated', function () {
             // given
@@ -321,6 +327,7 @@ describe('Quest | Unit | Domain | Models | Success ', function () {
             expect(masteryPercentage).to.be.equal(100);
           });
         });
+
         it('should return the expected mastery percentage according to knowledge elements by tube in Success model', function () {
           // given
           const success = new Success({

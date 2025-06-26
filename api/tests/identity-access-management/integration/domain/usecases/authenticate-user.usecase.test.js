@@ -14,6 +14,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | authenti
   beforeEach(function () {
     config.authentication.permitPixAdminLoginFromPassword = true;
   });
+
   context('when authentication succeeds', function () {
     let clock;
 

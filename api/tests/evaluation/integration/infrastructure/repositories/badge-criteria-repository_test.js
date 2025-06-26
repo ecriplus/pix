@@ -173,6 +173,7 @@ describe('Integration | Repository | Badge Criteria Repository', function () {
         ]);
       });
     });
+
     context('when no badge criteria exist for given badge', function () {
       it('should return no criteria', async function () {
         // given

@@ -95,7 +95,6 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         assessment = domainBuilder.buildAssessment({ id: assessmentId, type: Assessment.types.PREVIEW });
       });
 
-      /* eslint-disable mocha/no-setup-in-describe */
       [
         Assessment.states.ABORTED,
         Assessment.states.COMPLETED,
@@ -111,7 +110,6 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           expect(err).to.be.instanceOf(AssessmentEndedError);
         });
       });
-      /* eslint-enable mocha/no-setup-in-describe */
     });
 
     context('latest challenge asked', function () {
@@ -185,6 +183,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             expect(actualNextChallenge).to.deepEqualInstance(previousChallenge);
           });
         });
+
         context('when challenge is not operative', function () {
           it('should compute next challenge', async function () {
             const assessment = domainBuilder.buildAssessment({
@@ -391,6 +390,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           });
         });
       });
+
       context('updating last challenge asked', function () {
         beforeEach(function () {
           assessmentRepository_updateLastQuestionDateStub.resolves();

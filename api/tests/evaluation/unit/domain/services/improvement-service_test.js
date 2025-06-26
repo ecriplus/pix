@@ -65,6 +65,7 @@ describe('Unit | Service | ImprovementService', function () {
 
     context('when assessment is improving', function () {
       let assessment, oldKnowledgeElementsValidated, oldKnowledgeElementsInvalidated, recentKnowledgeElements;
+
       beforeEach(function () {
         const assessmentDate = '2020-07-30';
         const fiveDaysBeforeAssesmentDate = '2020-07-25';

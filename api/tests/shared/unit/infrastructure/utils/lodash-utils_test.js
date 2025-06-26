@@ -102,15 +102,12 @@ describe('Unit | Shared | infrastructure | Utils | lodash-utils', function () {
       expect(_.isBlank()).to.be.true;
     });
 
-    // TODO: Fix this the next time the file is edited.
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [null, '', ' ', '   ', '\t', '\r\n', '\n'].forEach(function (string) {
       it(`should return true if string is "${string}"`, function () {
         expect(_.isBlank(string)).to.be.true;
       });
     });
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     ['a', ' a', 'a ', ' a ', '\ta\ta'].forEach(function (string) {
       it(`should return false if string is "${string}"`, function () {
         expect(_.isBlank(string)).to.be.false;

@@ -414,6 +414,7 @@ describe('Integration | UseCases | delete-campaign-participation', function () {
 
   context('when there are user-recommended-trainings linked to campaign participations', function () {
     let adminUserId, campaignParticipationId, userId, userRecommendedTrainingId, campaignId;
+
     beforeEach(async function () {
       //given
       adminUserId = buildUser().id;
@@ -424,6 +425,7 @@ describe('Integration | UseCases | delete-campaign-participation', function () {
 
       await databaseBuilder.commit();
     });
+
     context('when feature toggle `isAnonymizationWithDeletionEnabled` is true', function () {
       it('should delete campaignParticipationId', async function () {
         //given

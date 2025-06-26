@@ -179,6 +179,7 @@ describe('Certification | Results | Unit | Application | Routes | Parcoursup', f
         // then
         expect(response.statusCode).to.equal(400);
       });
+
       it('case of ine AND organizationUai', async function () {
         const payload = {
           ine: '123456789OK',

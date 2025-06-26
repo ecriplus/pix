@@ -49,6 +49,7 @@ describe('Unit | Domain | Models | CertificationCenterInvitedUser', function () 
           expect(error.message).to.equal('Not found certification center invitation for ID 12345 and code 1234AZE');
         });
       });
+
       context('when invitation is accepted or cancelled', function () {
         it('should throw an error', async function () {
           // given

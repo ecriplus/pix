@@ -182,6 +182,7 @@ describe('Integration | Repository | area-repository', function () {
         });
         await databaseBuilder.commit();
       });
+
       context('when a locale is provided', function () {
         it('should return only areas with pix competences with entities translated in given locale when possible or fallback to default locale FR', async function () {
           // when
@@ -219,6 +220,7 @@ describe('Integration | Repository | area-repository', function () {
           ]);
         });
       });
+
       context('when no locale is provided', function () {
         it('should return only areas with pix competences with entities translated in default locale FR', async function () {
           // when
@@ -257,6 +259,7 @@ describe('Integration | Repository | area-repository', function () {
         });
       });
     });
+
     context('when there are no areas that have pix competences', function () {
       beforeEach(async function () {
         databaseBuilder.factory.learningContent.build({
@@ -326,6 +329,7 @@ describe('Integration | Repository | area-repository', function () {
           ]);
         });
       });
+
       context('when no locale is provided', function () {
         it('should return the areas with competences with all entities translated in default locale FR', async function () {
           // when
@@ -364,6 +368,7 @@ describe('Integration | Repository | area-repository', function () {
         });
       });
     });
+
     context('when no areas exist for given framework id', function () {
       it('should return an empty array', async function () {
         // when
@@ -493,6 +498,7 @@ describe('Integration | Repository | area-repository', function () {
           );
         });
       });
+
       context('when no locale is provided', function () {
         it('should return the area translated with default locale FR', async function () {
           // when
@@ -509,6 +515,7 @@ describe('Integration | Repository | area-repository', function () {
         });
       });
     });
+
     context('when no area found', function () {
       it('should throw a NotFound error', async function () {
         // when
@@ -553,6 +560,7 @@ describe('Integration | Repository | area-repository', function () {
           ]);
         });
       });
+
       context('when no locale is provided', function () {
         it('should return the areas translated in default locale FR', async function () {
           // when
@@ -574,6 +582,7 @@ describe('Integration | Repository | area-repository', function () {
         });
       });
     });
+
     context('when no areas exist for given framework id', function () {
       it('should return an empty array', async function () {
         // when

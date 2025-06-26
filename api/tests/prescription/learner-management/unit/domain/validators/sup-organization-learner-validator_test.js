@@ -10,14 +10,15 @@ describe('Unit | Domain | Sup Organization Learner Validator', function () {
     birthdate: '2020-02-01',
     organizationId: 123,
   };
+
   context('When learner is correct', function () {
     it('should return an empty array', function () {
       const errors = validateSupOrganizationLearner(learner);
       expect(errors).to.deep.equal([]);
     });
   });
+
   context('when a required field is missing', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     ['studentNumber', 'firstName', 'lastName', 'birthdate', 'organizationId'].forEach((field) => {
       it(`returns an EntityValidationError error if ${field} is missing`, function () {
         const errors = validateSupOrganizationLearner({ ...learner, [field]: undefined });
@@ -28,8 +29,8 @@ describe('Unit | Domain | Sup Organization Learner Validator', function () {
       });
     });
   });
+
   context('fields with a a max length of 255 characters', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       'studentNumber',
       'firstName',
@@ -51,6 +52,7 @@ describe('Unit | Domain | Sup Organization Learner Validator', function () {
         expect(errors[0].why).to.equal('max_length');
       });
     });
+
     it(`throw an error when email has more than 255 characters`, async function () {
       const errors = validateSupOrganizationLearner({ ...learner, email: `${'1'.repeat(256)}@email.com` });
       expect(errors).to.have.lengthOf(1);
@@ -91,6 +93,7 @@ describe('Unit | Domain | Sup Organization Learner Validator', function () {
       });
     });
   });
+
   context('multiple error on the same line', function () {
     it('throw an error with all bad element in the line', function () {
       const errors = validateSupOrganizationLearner({ ...learner, email: 'email', studentNumber: 'é&"' });

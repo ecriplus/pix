@@ -41,6 +41,7 @@ describe('Integration | Repository | activityRepository', function () {
         expect(updatedActivity.status).to.deep.equal(Activity.status.SKIPPED);
       });
     });
+
     context('when the activity does not exists', function () {
       it('should return not found error', async function () {
         // given
@@ -70,6 +71,7 @@ describe('Integration | Repository | activityRepository', function () {
         expect(error).to.be.instanceof(ActivityNotFoundError);
       });
     });
+
     context('when there is an activity for the given assessmentId', function () {
       it('should return the corresponding activity', async function () {
         //given
@@ -84,6 +86,7 @@ describe('Integration | Repository | activityRepository', function () {
         expect(activity.id).to.equal(id);
       });
     });
+
     context('when there is several activities for the given assessmentId', function () {
       it('should return the last activity', async function () {
         //given
@@ -117,6 +120,7 @@ describe('Integration | Repository | activityRepository', function () {
         expect(activities).to.be.empty;
       });
     });
+
     context('when there are activities for the given assessmentId', function () {
       it('should return the corresponding activities in antichronological order', async function () {
         //given

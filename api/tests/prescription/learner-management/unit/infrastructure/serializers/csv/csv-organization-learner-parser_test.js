@@ -42,6 +42,7 @@ describe('Unit | Infrastructure | CsvOrganizationLearnerParser', function () {
         expect(learnerSet.learners).to.have.lengthOf(2);
       });
     });
+
     context('when there are different date formats', function () {
       const columns = [
         new CsvColumn({ property: 'col1', name: 'Column 1' }),
@@ -69,6 +70,7 @@ describe('Unit | Infrastructure | CsvOrganizationLearnerParser', function () {
       const columns = [new CsvColumn({ property: 'property', name: 'ColumnLabel' })];
 
       const error = [];
+
       beforeEach(function () {
         learnerSet.addLearner = function () {
           throw error;

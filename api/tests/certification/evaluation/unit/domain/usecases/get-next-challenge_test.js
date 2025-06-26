@@ -642,7 +642,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
     context('when loading a configuration', function () {
       const competenceId = 'cmp1';
-      // eslint-disable-next-line mocha/no-setup-in-describe
+
       Object.entries({
         challengesBetweenSameCompetence: 2,
         limitToOneQuestionPerTube: true,

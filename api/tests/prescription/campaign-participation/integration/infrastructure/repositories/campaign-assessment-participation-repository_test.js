@@ -24,6 +24,7 @@ describe('Integration | Repository | Campaign Assessment Participation', functio
         sharedAt: new Date('2020-12-12'),
         masteryRate: 0.5,
       };
+
       beforeEach(async function () {
         const skill1 = { id: 'skill1' };
         const skill2 = { id: 'skill2' };
@@ -130,6 +131,7 @@ describe('Integration | Repository | Campaign Assessment Participation', functio
 
     context('When campaign participation is not shared', function () {
       let campaignParticipation, skill1;
+
       beforeEach(async function () {
         skill1 = { id: 'skill1', status: 'actif' };
         const skill2 = { id: 'skill2', status: 'actif' };
@@ -219,6 +221,7 @@ describe('Integration | Repository | Campaign Assessment Participation', functio
     context('When campaign participation is shared', function () {
       context('progression', function () {
         let userId;
+
         beforeEach(async function () {
           const skill1 = { id: 'skill1', status: 'actif' };
           const skill2 = { id: 'skill2', status: 'actif' };
@@ -408,6 +411,7 @@ describe('Integration | Repository | Campaign Assessment Participation', functio
       });
       await databaseBuilder.commit();
     });
+
     context('when userId has no assessment', function () {
       it('should return an empty array', async function () {
         const otherUser = databaseBuilder.factory.buildUser();
@@ -417,6 +421,7 @@ describe('Integration | Repository | Campaign Assessment Participation', functio
         expect(result).to.be.empty;
       });
     });
+
     context('when user has anonymised participation', function () {
       it('should return an array of DetachAssessment', async function () {
         const result = await campaignAssessmentParticipationRepository.getDetachedByUserId({ userId });

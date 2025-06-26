@@ -37,6 +37,7 @@ describe('Unit | Domain | Models | Examiner', function () {
         expect(correctedAnswer).to.be.an.instanceOf(Answer);
         expect(correctedAnswer).to.deep.equal(expectedAnswer);
       });
+
       it('should not call validator.assess', function () {
         // then
         expect(validator.assess).to.not.have.been.called;
@@ -69,6 +70,7 @@ describe('Unit | Domain | Models | Examiner', function () {
         expect(correctedAnswer).to.be.an.instanceOf(Answer);
         expect(correctedAnswer).to.deep.equal(expectedAnswer);
       });
+
       it('should call validator.assess with answer to assess validity of answer', function () {
         // then
         expect(validator.assess).to.have.been.calledWithExactly({ answer: uncorrectedAnswer, challengeFormat });
@@ -269,6 +271,7 @@ describe('Unit | Domain | Models | Examiner', function () {
         expect(correctedAnswer).to.be.an.instanceOf(Answer);
         expect(correctedAnswer).to.deep.equal(expectedAnswer);
       });
+
       it('should call validator.assess with answer to assess validity of answer', function () {
         // then
         expect(validator.assess).to.have.been.calledWithExactly({ answer: uncorrectedAnswer, challengeFormat });

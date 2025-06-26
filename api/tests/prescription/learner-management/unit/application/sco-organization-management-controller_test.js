@@ -125,6 +125,7 @@ describe('Unit | Application | Organizations | organization-controller', functio
         i18n,
       });
     });
+
     context('when file format is not supported', function () {
       it('should throw a FileValidationError', async function () {
         // given

@@ -809,6 +809,7 @@ describe('Integration | Team | Infrastructure | Repository | membership-reposito
           expect(disabledMemberships).to.deep.include.members(expectedMemberships);
         });
       });
+
       context('when there are already disabled memberships among user memberships', function () {
         it('disables only the memberships which are not yet disabled', async function () {
           // given
@@ -864,6 +865,7 @@ describe('Integration | Team | Infrastructure | Repository | membership-reposito
           expect(disabledMemberships).to.deep.include.members(expectedMemberships);
         });
       });
+
       context('when there is no membership for the specified user id', function () {
         it('does nothing', async function () {
           // given

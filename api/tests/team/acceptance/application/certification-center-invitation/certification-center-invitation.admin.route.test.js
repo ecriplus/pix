@@ -7,6 +7,7 @@ import {
   insertUserWithRoleSuperAdmin,
   sinon,
 } from '../../../../test-helper.js';
+
 describe('Acceptance | Team | Application | Route | Admin | Certification Center Invitation', function () {
   let server;
 

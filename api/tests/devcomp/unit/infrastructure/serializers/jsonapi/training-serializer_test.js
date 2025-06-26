@@ -447,7 +447,6 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | training-ser
       });
     });
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       { duration: { days: 0, hours: 0, minutes: 0 }, expectedDuration: '0d0h0m' },
       {

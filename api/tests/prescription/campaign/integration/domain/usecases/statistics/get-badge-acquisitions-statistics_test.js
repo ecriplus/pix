@@ -26,6 +26,7 @@ describe('Integration | UseCase | Statistics | get-badge-acquisitions-statistics
     context('when there are no badges for the campaign', function () {
       let userId;
       let campaignId;
+
       beforeEach(async function () {
         const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
         const organizationId = databaseBuilder.factory.buildOrganization().id;

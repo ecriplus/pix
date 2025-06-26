@@ -829,6 +829,7 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
         beforeEach(function () {
           return featureToggles.set('isEmbedLLMEnabled', false);
         });
+
         it('should throw a 503 status code', async function () {
           // when
           const response = await server.inject({
@@ -876,6 +877,7 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
         beforeEach(function () {
           return featureToggles.set('isEmbedLLMEnabled', false);
         });
+
         it('should throw a 503 status code', async function () {
           // when
           const response = await server.inject({

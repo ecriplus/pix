@@ -12,6 +12,7 @@ describe('Integration | Repository | Campaign Participation Info', function () {
     context('when there are several campaign', function () {
       let campaignParticipation1;
       let campaign1;
+
       beforeEach(async function () {
         const userId = databaseBuilder.factory.buildUser().id;
 
@@ -366,6 +367,7 @@ describe('Integration | Repository | Campaign Participation Info', function () {
 
     context('when a participant has several organization-learners', function () {
       let campaign;
+
       beforeEach(async function () {
         const otherOrganizationId = databaseBuilder.factory.buildOrganization().id;
         const organizationId = databaseBuilder.factory.buildOrganization().id;
@@ -405,6 +407,7 @@ describe('Integration | Repository | Campaign Participation Info', function () {
     context("when the participant has an organization learner for the campaign's organization", function () {
       let organizationLearner;
       let campaign;
+
       beforeEach(async function () {
         const userId = databaseBuilder.factory.buildUser().id;
         campaign = databaseBuilder.factory.buildCampaign();

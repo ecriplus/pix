@@ -52,6 +52,7 @@ describe('Unit | Domain | Read-Models | CampaignParticipationOverview', function
           expect(campaignParticipationOverview.masteryRate).to.equal(null);
         });
       });
+
       context('when the masteryRate is null', function () {
         it('should return null for the masteryRate', function () {
           // when

@@ -32,6 +32,7 @@ describe('Integration | School | Usecase | get-next-challenge', function () {
         expect(challenge).to.be.null;
       });
     });
+
     context('when last activity is started', function () {
       it('should return next challenge and update assessment', async function () {
         const { assessmentId, missionId } = databaseBuilder.factory.buildMissionAssessment();
@@ -103,6 +104,7 @@ describe('Integration | School | Usecase | get-next-challenge', function () {
         expect(updatedAssessment.lastChallengeId).to.equal('second_va_challenge_on_step_2_id');
       });
     });
+
     context('when last activity is started but has answer duplicate', function () {
       it('should return next challenge and update assessment', async function () {
         const { assessmentId, missionId } = databaseBuilder.factory.buildMissionAssessment();

@@ -1028,6 +1028,7 @@ describe('Integration | Infrastructure | Repository | sco-organization-participa
       describe('by participation count', function () {
         context('participant sort', function () {
           let organizationId, organizationLearnerId1, organizationLearnerId2, organizationLearnerId3;
+
           beforeEach(async function () {
             organizationId = databaseBuilder.factory.buildOrganization().id;
             const campaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;

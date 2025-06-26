@@ -166,6 +166,7 @@ describe('Integration | Repository | Certification Course', function () {
 
           await databaseBuilder.commit();
         });
+
         it('should retrieve certification course informations', async function () {
           // when
           const actualCertificationCourse = await certificationCourseRepository.get({
@@ -197,6 +198,7 @@ describe('Integration | Repository | Certification Course', function () {
           // then
           expect(thisCertificationCourse.toDTO().challenges).to.have.lengthOf(2);
         });
+
         context('When the certification course has one assessment', function () {
           let assessmentId;
 

@@ -6,6 +6,7 @@ import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.
 
 describe('Evaluation | Integration | Domain | Use Cases | get-next-challenge-for-campaign-assessment', function () {
   const skillIds = ['acquisTube1Niveau1', 'acquisTube1Niveau2'];
+
   context('for a campaign of type assessment with method smart_random', function () {
     it('should return the next challenge for the participant according to the user profile', async function () {
       // given
@@ -75,6 +76,7 @@ describe('Evaluation | Integration | Domain | Use Cases | get-next-challenge-for
       expect(challenge.id).to.equal(challengeData[1].id);
     });
   });
+
   context('for a campaign of type exam with method smart_random', function () {
     it('should return the next challenge for the participant according to the user snapshot for campaign', async function () {
       // given

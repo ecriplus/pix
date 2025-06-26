@@ -656,6 +656,7 @@ describe('Integration | Infrastructure | Repository | sup-organization-participa
     describe('When sup participants are sorted', function () {
       context('sorting participation count', function () {
         let organizationId, organizationLearnerId1, organizationLearnerId2, organizationLearnerId3;
+
         beforeEach(async function () {
           organizationId = databaseBuilder.factory.buildOrganization().id;
           const campaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;

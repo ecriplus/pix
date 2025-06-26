@@ -123,6 +123,7 @@ describe('Unit | Domain | Common Organization Learner Validator', function () {
         expect(errors[0].key).to.equal('nom');
         expect(errors[0].valids).to.deep.equal(expectedValues);
       });
+
       it('Should not throw an error if the value corresponding to the expected value', async function () {
         const expectedValues = ['Theotime', 'Theo-a-pas-le-time'];
         const errors = validateCommonOrganizationLearner({ nom: 'Theotime' }, [

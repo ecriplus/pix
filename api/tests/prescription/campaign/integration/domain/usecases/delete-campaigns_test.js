@@ -53,7 +53,6 @@ describe('Integration | UseCases | delete-campaign', function () {
       await expect(usecases.deleteCampaigns({ userId, organizationId, campaignIds: [campaignId] })).fulfilled;
     });
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [PIX_ADMIN.ROLES.METIER, PIX_ADMIN.ROLES.SUPPORT, PIX_ADMIN.ROLES.SUPER_ADMIN].forEach((role) => {
       it(`should not throw when user's PixAdmin role is ${role}`, async function () {
         // given
@@ -148,6 +147,7 @@ describe('Integration | UseCases | delete-campaign', function () {
 
         await databaseBuilder.commit();
       });
+
       context('when feature toggle `isAnonymizationWithDeletionEnabled` is true', function () {
         it('should delete campaignParticipationId', async function () {
           //given
@@ -199,6 +199,7 @@ describe('Integration | UseCases | delete-campaign', function () {
       let campaignParticipationId;
       let organizationLearnerId;
       let targetProfileId;
+
       beforeEach(async function () {
         adminUserId = databaseBuilder.factory.buildUser().id;
         organizationId = buildOrganization().id;

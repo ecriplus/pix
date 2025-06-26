@@ -243,6 +243,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
 
     context('when there are badges acquired', function () {
       let badge1Id, badge2Id;
+
       beforeEach(async function () {
         campaign = databaseBuilder.factory.buildAssessmentCampaignForSkills({}, [{ id: 'Skill1' }]);
         const { id: userId } = databaseBuilder.factory.buildUser({
@@ -391,6 +392,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
     context('evolution', function () {
       let userId, organizationLearnerId;
       let organizationId;
+
       beforeEach(async function () {
         userId = databaseBuilder.factory.buildUser({}).id;
 
@@ -802,6 +804,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
         databaseBuilder.factory.learningContent.build(learningContentObjects);
         await databaseBuilder.commit();
       });
+
       it('returns participants which have one badge', async function () {
         const campaignParticipation1 = databaseBuilder.factory.buildCampaignParticipation({
           campaignId: campaign.id,

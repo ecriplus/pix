@@ -53,6 +53,7 @@ describe('Integration | Application | learner-list-controller', function () {
         ]);
       });
     });
+
     context('when extrafilters are provided', function () {
       it('returns organization participants that match filters', async function () {
         const organizationId = 5678;

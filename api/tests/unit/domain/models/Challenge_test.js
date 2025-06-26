@@ -238,8 +238,6 @@ describe('Unit | Domain | Models | Challenge', function () {
       other: Validator,
     };
 
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
     Object.entries(challengeTypeAndValidators).forEach(([challengeType, associatedValidatorClass]) => {
       context(`when challenge of type: ${challengeType} exists`, function () {
         it('should return the associated validator class', function () {
@@ -340,7 +338,6 @@ describe('Unit | Domain | Models | Challenge', function () {
   });
 
   describe('#isAccessible', function () {
-    /* eslint-disable mocha/no-setup-in-describe */
     [
       { blindnessCompatibility: Accessibility.OK, colorBlindnessCompatibility: Accessibility.OK, isAccessible: true },
       { blindnessCompatibility: Accessibility.OK, colorBlindnessCompatibility: Accessibility.RAS, isAccessible: true },
@@ -350,7 +347,6 @@ describe('Unit | Domain | Models | Challenge', function () {
       { blindnessCompatibility: Accessibility.OK, colorBlindnessCompatibility: 'autre chose', isAccessible: false },
       { blindnessCompatibility: 'autre chose', colorBlindnessCompatibility: Accessibility.OK, isAccessible: false },
       { blindnessCompatibility: 'KO', colorBlindnessCompatibility: Accessibility.RAS, isAccessible: false },
-      /* eslint-enable mocha/no-setup-in-describe */
     ].forEach(({ blindnessCompatibility, colorBlindnessCompatibility, isAccessible }) => {
       context(
         `when blindnessCompatibility is ${blindnessCompatibility} and colorBlindnessCompatibility is ${colorBlindnessCompatibility}`,

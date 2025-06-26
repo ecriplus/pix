@@ -57,6 +57,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
     afterEach(function () {
       featureId = null;
     });
+
     context('when campaign has externalId feature', function () {
       it('should get correct externalIdLabel', async function () {
         const campaignToStartParticipation = buildCampaignWithSkills({
@@ -157,6 +158,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
 
       context('canReset', function () {
         let userId, organizationId, targetProfileId;
+
         beforeEach(async function () {
           organizationId = databaseBuilder.factory.buildOrganization({ isManagingStudents: false }).id;
           userId = databaseBuilder.factory.buildUser().id;
@@ -629,6 +631,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
 
     context('isRestrictedAccess', function () {
       let userId;
+
       beforeEach(async function () {
         userId = databaseBuilder.factory.buildUser().id;
 
@@ -739,6 +742,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
 
     context('when user is disabled and the orga isManagingStudent is set to false', function () {
       let learnerDisabled, otherLearnerDisabled, campaignParticipant;
+
       beforeEach(async function () {
         const orga = databaseBuilder.factory.buildOrganization({
           isManagingStudents: false,

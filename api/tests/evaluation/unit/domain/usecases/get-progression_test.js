@@ -81,6 +81,7 @@ describe('Unit | Domain | Use Cases | get-progression', function () {
 
       context('when the assessment is improving', function () {
         let knowledgeElements, knowledgeElementsFiltered;
+
         beforeEach(function () {
           assessment.state = 'improving';
           knowledgeElements = [domainBuilder.buildKnowledgeElement(), domainBuilder.buildKnowledgeElement()];
@@ -145,6 +146,7 @@ describe('Unit | Domain | Use Cases | get-progression', function () {
 
       context('when the assessment is improving because user is retrying campaign participation', function () {
         let knowledgeElements, knowledgeElementsFiltered;
+
         beforeEach(function () {
           assessment.state = 'improving';
           knowledgeElements = [domainBuilder.buildKnowledgeElement(), domainBuilder.buildKnowledgeElement()];

@@ -266,6 +266,7 @@ describe('Unit | Application | Admin Target Profiles | Routes', function () {
     beforeEach(function () {
       sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf');
     });
+
     context('when user has role "SUPER_ADMIN", "SUPPORT" or "METIER"', function () {
       it('should return a response with an HTTP status code 204', async function () {
         // given
@@ -372,6 +373,7 @@ describe('Unit | Application | Admin Target Profiles | Routes', function () {
     beforeEach(function () {
       sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf');
     });
+
     context('when user has role "SUPER_ADMIN", "SUPPORT" or "METIER"', function () {
       it('should return a response with an HTTP status code 204', async function () {
         // given
@@ -662,6 +664,7 @@ describe('Unit | Application | Admin Target Profiles | Routes', function () {
     beforeEach(function () {
       sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf');
     });
+
     context('when user has role "SUPER_ADMIN", "SUPPORT" or "METIER"', function () {
       it('should return a response with an HTTP status code 204', async function () {
         // given
@@ -783,6 +786,7 @@ describe('Unit | Application | Admin Target Profiles | Routes', function () {
     beforeEach(function () {
       sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf');
     });
+
     context('when user has role "SUPER_ADMIN", "SUPPORT" or "METIER"', function () {
       it('should return a response with an HTTP status code 204', async function () {
         // given
@@ -857,6 +861,7 @@ describe('Unit | Application | Admin Target Profiles | Routes', function () {
     beforeEach(function () {
       sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf');
     });
+
     context('when user has role "SUPER_ADMIN", "SUPPORT" or "METIER"', function () {
       it('should return a response with an HTTP status code 200', async function () {
         // given
@@ -933,6 +938,7 @@ describe('Unit | Application | Admin Target Profiles | Routes', function () {
     beforeEach(function () {
       sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf');
     });
+
     context('when user has role "SUPER_ADMIN", "SUPPORT" or "METIER"', function () {
       it('should return a response with an HTTP status code 200', async function () {
         // given

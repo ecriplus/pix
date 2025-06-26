@@ -1216,6 +1216,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
 
     context('Compute certification result for jury', function () {
       let placementProfileService;
+
       beforeEach(function () {
         certificationAssessment = domainBuilder.buildCertificationAssessment({
           ...certificationAssessmentData,
@@ -1438,6 +1439,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
 
         context('when one competence is evaluated with 3 challenges', function () {
           let placementProfileService;
+
           context('with one OK, one KO and one QROCM-dep OK', function () {
             it('should return level obtained equal to level positioned minus one', async function () {
               // Given
@@ -1515,6 +1517,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
 
     context('Calculate certification result when assessment is completed (stop on error)', function () {
       let placementProfileService;
+
       beforeEach(function () {
         certificationAssessment = domainBuilder.buildCertificationAssessment({
           ...certificationAssessmentData,
@@ -1680,6 +1683,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
 
       context('when only one challenge is asked for a competence', function () {
         let placementProfileService, certificationCandidateRepository;
+
         it('certifies a level below the estimated one if reproducibility rate is < 70%', async function () {
           // given
           const userCompetences = [
@@ -1774,6 +1778,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
 
       context('when challenges contains one QROCM-dep challenge to validate two skills', function () {
         let placementProfileService, certificationCandidateRepository;
+
         beforeEach(function () {
           const userCompetences = [
             _buildUserCompetence(competence_5, 50, 5),

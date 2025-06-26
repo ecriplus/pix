@@ -3,7 +3,6 @@ import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Shared | Domain | Services | EmailValidationService', function () {
   describe('#validateEmailSyntax', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       ['test', false],
       ['test@toto', false],

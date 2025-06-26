@@ -5,6 +5,7 @@ describe('Unit | Domain | Models | StageCollection', function () {
   context('getReachedStageIndex', function () {
     context('When stage collection has no first skill stage', function () {
       let stageCollection;
+
       beforeEach(function () {
         const campaignId = 18;
         const stages = [
@@ -70,6 +71,7 @@ describe('Unit | Domain | Models | StageCollection', function () {
 
     context('When stage collection has first skill stage', function () {
       let stageCollection;
+
       beforeEach(function () {
         const campaignId = 18;
         const stages = [
@@ -159,6 +161,7 @@ describe('Unit | Domain | Models | StageCollection', function () {
   context('getReachedStage', function () {
     context('When stage collection has no first skill stage', function () {
       let stageCollection;
+
       beforeEach(function () {
         const campaignId = 18;
         const stages = [
@@ -248,6 +251,7 @@ describe('Unit | Domain | Models | StageCollection', function () {
 
     context('When stage collection has first skill stage', function () {
       let stageCollection;
+
       beforeEach(function () {
         const campaignId = 18;
         const stages = [

@@ -1073,6 +1073,7 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
         expect(response.statusCode).to.equal(403);
         expect(response.isTakeOver).to.be.true;
       });
+
       it('should forbid resource access when user does not belong to organization but has role Super Admin', async function () {
         // given
         belongsToOrganizationStub.callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));

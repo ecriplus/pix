@@ -95,6 +95,7 @@ describe('Unit | API | Organization Learner', function () {
         expect(result.pagination).to.deep.equal({ pageSize: 1, pageCount: 1, rowCount: 1, page: 1 });
       });
     });
+
     context('when there is a filter', function () {
       it("should map the filter keys into attributes' names", async function () {
         const organizationId = 3;

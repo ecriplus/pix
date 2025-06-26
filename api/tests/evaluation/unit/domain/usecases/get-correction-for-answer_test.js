@@ -134,6 +134,7 @@ describe('Unit | UseCase | getCorrectionForAnswer', function () {
       // then
       expect(result).to.equal(correction);
     });
+
     context('when challenge is missing in the repository', function () {
       it('should throw a Not Found', async function () {
         // given

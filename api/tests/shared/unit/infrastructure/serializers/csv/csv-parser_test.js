@@ -47,6 +47,7 @@ describe('Unit | Shared | Infrastructure | Serializer | CsvParser', function () 
 
   context('File does not match requirements', function () {
     let header;
+
     beforeEach(function () {
       header = {
         columns: [
@@ -96,6 +97,7 @@ describe('Unit | Shared | Infrastructure | Serializer | CsvParser', function () 
 
   context('The file has different encoding', function () {
     let header, input;
+
     beforeEach(function () {
       header = {
         columns: [

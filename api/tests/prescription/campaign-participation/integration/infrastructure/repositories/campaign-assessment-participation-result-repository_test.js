@@ -156,6 +156,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result', 
 
     context('When given locale is fr', function () {
       const locale = FRENCH_SPOKEN;
+
       beforeEach(function () {
         campaignId = databaseBuilder.factory.buildCampaign({ type: 'ASSESSMENT' }).id;
         _buildCampaignSkills(campaignId);
@@ -183,6 +184,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result', 
 
     context('When given locale is en', function () {
       const locale = ENGLISH_SPOKEN;
+
       beforeEach(function () {
         campaignId = databaseBuilder.factory.buildCampaign({ type: 'ASSESSMENT' }).id;
         _buildCampaignSkills(campaignId);

@@ -7,6 +7,7 @@ describe('Integration | Infrastructure | Repository | Banner | information-banne
     beforeEach(async function () {
       informationBannersStorage.flushAll();
     });
+
     context('when no information banners have been stored for given id', function () {
       it('should return an empty information banner', async function () {
         const id = 'pix-target';
@@ -17,6 +18,7 @@ describe('Integration | Infrastructure | Repository | Banner | information-banne
         expect(bannerInformation).to.deep.equal(emptyBanner);
       });
     });
+
     context('when an information banner has been stored for given id', function () {
       it('should return an empty information banner', async function () {
         const id = 'pix-other-target';

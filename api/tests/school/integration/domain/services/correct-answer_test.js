@@ -74,6 +74,7 @@ describe('Integration | UseCases | correct-answer', function () {
           expect(record.result).to.deep.equal(AnswerStatus.OK);
         });
       });
+
       context('and answer is incorrect', function () {
         it('returns newly created answer with KO status', async function () {
           // given
@@ -107,6 +108,7 @@ describe('Integration | UseCases | correct-answer', function () {
         });
       });
     });
+
     it('should return error when challengeId doesnt match assessment lastChallengeId', async function () {
       const assessment = databaseBuilder.factory.buildAssessment({
         state: Assessment.states.STARTED,

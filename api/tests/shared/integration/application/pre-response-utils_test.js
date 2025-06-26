@@ -19,7 +19,6 @@ describe('Integration | Application | PreResponse-utils', function () {
       },
     ];
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     successfulCases.forEach((testCase) => {
       it(testCase.should, async function () {
         // given

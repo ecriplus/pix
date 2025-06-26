@@ -195,6 +195,7 @@ describe('Unit | Service | sessions import validation Service', function () {
           });
         });
       });
+
       context('when the session does not exist for the certification center', function () {
         it('should return a sessionErrors array that contains a non-existent session id error', async function () {
           // given
@@ -434,6 +435,7 @@ describe('Unit | Service | sessions import validation Service', function () {
         ]);
       });
     });
+
     context('when result recipient email has valid domain', function () {
       it('should return an empty certificationCandidateErrors', async function () {
         // given
@@ -457,10 +459,12 @@ describe('Unit | Service | sessions import validation Service', function () {
 
   describe('#getValidatedSubscriptionsForMassImport', function () {
     let isCoreComplementaryCompatibilityEnabled;
+
     context('isCoreComplementaryCompatibilityEnabled false', function () {
       beforeEach(function () {
         isCoreComplementaryCompatibilityEnabled = false;
       });
+
       context('when there are no subscriptions at all', function () {
         it('should return an error accordingly and no subscriptions models', async function () {
           // given
@@ -487,6 +491,7 @@ describe('Unit | Service | sessions import validation Service', function () {
           expect(subscriptions).to.be.empty;
         });
       });
+
       context('when there is a complementary subscription without core', function () {
         it('should return an error accordingly and no subscriptions models', async function () {
           // given
@@ -519,6 +524,7 @@ describe('Unit | Service | sessions import validation Service', function () {
           expect(subscriptions).to.be.empty;
         });
       });
+
       context('when there are many complementary subscriptions', function () {
         it('should return an error accordingly and no subscriptions models', async function () {
           // given
@@ -554,6 +560,7 @@ describe('Unit | Service | sessions import validation Service', function () {
           expect(subscriptions).to.be.empty;
         });
       });
+
       context('when there is only a core subscription', function () {
         it('should return no error and a core subscription', async function () {
           // given
@@ -576,6 +583,7 @@ describe('Unit | Service | sessions import validation Service', function () {
           ]);
         });
       });
+
       context('when there are a core and a complementary subscriptions', function () {
         it('should return no error and the right subscriptions', async function () {
           // given
@@ -1144,6 +1152,7 @@ describe('Unit | Service | sessions import validation Service', function () {
         expect(duplicateCandidateErrors).to.be.empty;
       });
     });
+
     context('when there are duplicates', function () {
       it('returns the filtered list with errors', function () {
         // given

@@ -228,19 +228,17 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
       });
     });
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
-      // eslint-disable-next-line mocha/no-setup-in-describe
       Assessment.types.EXAM,
-      // eslint-disable-next-line mocha/no-setup-in-describe
+
       Assessment.types.PIX1D_MISSION,
-      // eslint-disable-next-line mocha/no-setup-in-describe
+
       Assessment.types.PIX1D_MISSION,
-      // eslint-disable-next-line mocha/no-setup-in-describe
+
       Assessment.types.CERTIFICATION,
-      // eslint-disable-next-line mocha/no-setup-in-describe
+
       Assessment.types.CAMPAIGN,
-      // eslint-disable-next-line mocha/no-setup-in-describe
+
       Assessment.types.COMPETENCE_EVALUATION,
     ].forEach((campaignType) => {
       it(`should throw a DomainError when deserializing an assessment of type ${campaignType}`, function () {

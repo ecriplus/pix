@@ -413,6 +413,7 @@ describe('Integration | Repository | skill-repository', function () {
           }),
         ]);
       });
+
       it('should avoid returning duplicates', async function () {
         // when
         const skills = await skillRepository.findOperativeByCompetenceIds([
@@ -575,6 +576,7 @@ describe('Integration | Repository | skill-repository', function () {
           }),
         ]);
       });
+
       it('should avoid returning duplicates', async function () {
         // when
         const skills = await skillRepository.findOperativeByIds([
@@ -646,6 +648,7 @@ describe('Integration | Repository | skill-repository', function () {
               );
             });
           });
+
           context('when fallback asked', function () {
             it('should return skill with fallback default locale FR', async function () {
               // when
@@ -662,6 +665,7 @@ describe('Integration | Repository | skill-repository', function () {
             });
           });
         });
+
         context('when translation exist for provided locale', function () {
           it('should return skill translated', async function () {
             // when
@@ -678,6 +682,7 @@ describe('Integration | Repository | skill-repository', function () {
           });
         });
       });
+
       context('when no locale provided', function () {
         it('should return skill with default translation in locale FR', async function () {
           // when
@@ -732,6 +737,7 @@ describe('Integration | Repository | skill-repository', function () {
           }),
         ]);
       });
+
       it('should avoid returning duplicates', async function () {
         // when
         const skills = await skillRepository.findActiveByRecordIds([

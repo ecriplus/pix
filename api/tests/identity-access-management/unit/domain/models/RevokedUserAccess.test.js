@@ -29,6 +29,7 @@ describe('Unit | Identity Access Management | Domain | Model | RevokedUserAccess
         expect(result).to.equal(true);
       });
     });
+
     context('when access token is not revoked', function () {
       it('returns false', function () {
         //given

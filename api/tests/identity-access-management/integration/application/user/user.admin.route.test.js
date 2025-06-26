@@ -275,7 +275,6 @@ describe('Integration | Identity Access Management | Application | Route | Admin
   });
 
   describe('POST /api/admin/users/{id}/remove-authentication', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [CODE_IDENTITY_PROVIDER_GAR, 'EMAIL', 'USERNAME', CODE_IDENTITY_PROVIDER_POLE_EMPLOI, oidcProviderCode].forEach(
       (type) => {
         it(`returns 200 when user is "SUPER_ADMIN" and type is ${type}`, async function () {

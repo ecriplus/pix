@@ -23,8 +23,6 @@ describe('Unit | Domain | Models | SupOrganizationLearner', function () {
       });
     });
 
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
     ['firstName', 'lastName', 'birthdate', 'studentNumber'].forEach((field) => {
       it(`throw an error when ${field} is required`, async function () {
         const error = await catchErr(buildOrganizationLearner)({ ...validAttributes, [field]: undefined });
@@ -34,8 +32,6 @@ describe('Unit | Domain | Models | SupOrganizationLearner', function () {
       });
     });
 
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       'studentNumber',
       'firstName',
@@ -64,8 +60,7 @@ describe('Unit | Domain | Models | SupOrganizationLearner', function () {
       expect(error.key).to.equal('email');
       expect(error.why).to.equal('email_format');
     });
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
+
     [
       'studentNumber',
       'firstName',
@@ -133,8 +128,6 @@ describe('Unit | Domain | Models | SupOrganizationLearner', function () {
 
     context('student number', function () {
       context('when student number is not correctly formed', function () {
-        // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-        // eslint-disable-next-line mocha/no-setup-in-describe
         ['#123457', '1 23457', '1.23457', '1,23457E+11', 'gégé'].forEach((value) => {
           it(`throw an error when student number is ${value}`, async function () {
             const error = await catchErr(buildOrganizationLearner)({ ...validAttributes, studentNumber: value });
@@ -146,8 +139,6 @@ describe('Unit | Domain | Models | SupOrganizationLearner', function () {
       });
 
       context('when student number is correctly formed', function () {
-        // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-        // eslint-disable-next-line mocha/no-setup-in-describe
         ['123456', '1234aA', '1-a-B', '1_a_B'].forEach((value) => {
           it(`throw an error when student number is ${value}`, async function () {
             try {
