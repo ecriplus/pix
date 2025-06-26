@@ -1,5 +1,36 @@
 # Pix Changelog
 
+# [5.144.0](https://github.com/1024pix/pix/compare/v5.143.0...v5.144.0) (2025-06-26)
+
+### :rocket: Amélioration
+
+- [#12647](https://github.com/1024pix/pix/pull/12647) : modifs sur le module Deepfakes pour deuxième vague de panels 
+- [#12629](https://github.com/1024pix/pix/pull/12629) Ajouter une route récupérant le référentiel cadre en cours d'une complémentaire (PIX-18344). 
+- [#12545](https://github.com/1024pix/pix/pull/12545) Modifications suite panels et retours prompt-intermediaire 
+- [#12596](https://github.com/1024pix/pix/pull/12596) WIP Créa module débbutant IA, vous avez dit IA ? 
+
+### :bug: Correction
+
+- [#12641](https://github.com/1024pix/pix/pull/12641) Ne pas faire crasher l'api si l'id de la campagne n'existe pas (PIX-18062) 
+
+### :building_construction: Tech
+
+- [#12634](https://github.com/1024pix/pix/pull/12634) :card_file_box: Ajoute la colonne `calibrationId` dans la table `certification-frameworks-challenges` (PIX-18435) 
+
+### :arrow_up: Montée de version
+
+- [#12616](https://github.com/1024pix/pix/pull/12616) Lock file maintenance (mon-pix) 
+- [#12649](https://github.com/1024pix/pix/pull/12649) Update dependency @1024pix/pix-ui to ^55.23.0 (admin) 
+- [#12650](https://github.com/1024pix/pix/pull/12650) Update dependency @1024pix/pix-ui to ^55.23.0 (certif) 
+- [#12651](https://github.com/1024pix/pix/pull/12651) Update dependency @1024pix/pix-ui to ^55.23.0 (junior) 
+- [#12652](https://github.com/1024pix/pix/pull/12652) Update dependency @1024pix/pix-ui to ^55.23.0 (mon-pix) 
+- [#12653](https://github.com/1024pix/pix/pull/12653) Update dependency @1024pix/pix-ui to ^55.23.0 (orga) 
+- [#12573](https://github.com/1024pix/pix/pull/12573) Update dependency eslint-plugin-mocha to v11 (audit-logger) 
+- [#12654](https://github.com/1024pix/pix/pull/12654) Update dependency eslint-plugin-mocha to v11 (certif) 
+- [#12656](https://github.com/1024pix/pix/pull/12656) Update dependency eslint-plugin-mocha to v11 (dossier racine) 
+- [#12658](https://github.com/1024pix/pix/pull/12658) Update dependency eslint-plugin-unicorn to v59 (api) 
+- [#12659](https://github.com/1024pix/pix/pull/12659) Update dependency eslint-plugin-unicorn to v59 (audit-logger)
+
 # [5.143.0](https://github.com/1024pix/pix/compare/v5.142.0...v5.143.0) (2025-06-25)
 
 ### :rocket: Amélioration
