@@ -1,6 +1,7 @@
 import { catchErr, domainBuilder, expect } from '../../../../../test-helper.js';
 
 const id = 1;
+
 describe('Unit | Domain | Models | OrganizationsToAttachToTargetProfile', function () {
   it('should store target profile id', function () {
     const targetProfileOrganizations = domainBuilder.buildOrganizationsToAttachToTargetProfile({ id });

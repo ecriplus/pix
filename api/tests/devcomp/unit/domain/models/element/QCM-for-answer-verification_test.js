@@ -199,8 +199,6 @@ describe('Unit | Devcomp | Domain | Models | Element | QcmForAnswerVerification'
         },
       ];
 
-      // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-      // eslint-disable-next-line mocha/no-setup-in-describe
       cases.forEach((testCase) => {
         it(`${testCase.case}, should throw error`, function () {
           // given

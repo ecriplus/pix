@@ -49,6 +49,7 @@ describe('Acceptance | API | Autonomous Course', function () {
   describe('POST /api/autonomous-course', function () {
     context('When user is authenticated', function () {
       let targetProfileId;
+
       beforeEach(async function () {
         sinon.stub(constants, 'AUTONOMOUS_COURSES_ORGANIZATION_ID').value(777);
         const { id: organizationId } = databaseBuilder.factory.buildOrganization({

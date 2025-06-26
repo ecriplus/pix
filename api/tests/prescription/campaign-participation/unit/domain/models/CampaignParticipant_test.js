@@ -283,6 +283,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
     context('when the campaign is restricted', function () {
       let userIdentity;
       let restrictedCampaign;
+
       beforeEach(function () {
         userIdentity = { id: 1 };
       });
@@ -346,6 +347,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
     context('when the campaign is not restricted', function () {
       let userIdentity;
       let campaign;
+
       beforeEach(function () {
         userIdentity = { id: 1, firstName: 'Helene', lastName: 'Mouton' };
         campaign = domainBuilder.buildCampaignToStartParticipation({
@@ -411,6 +413,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
     context('when the campaign has an externalIdType', function () {
       let campaignToStartParticipation;
       let userIdentity;
+
       beforeEach(function () {
         userIdentity = { id: 1 };
         campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({ externalIdType: 'TEXT' });

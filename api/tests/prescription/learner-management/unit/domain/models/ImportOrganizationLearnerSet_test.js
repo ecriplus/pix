@@ -185,6 +185,7 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
           expect(errors[0].message).equal('Missing firstName configuration');
           expect(errors[0].code).equal(VALIDATION_ERRORS.FIRSTNAME_PROPERTY_REQUIRED);
         });
+
         it('should throw an error when there is no lastName property', async function () {
           importFormat = {
             config: {
@@ -208,6 +209,7 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
           expect(errors[0].message).equal('Missing lastName configuration');
           expect(errors[0].code).equal(VALIDATION_ERRORS.LASTNAME_PROPERTY_REQUIRED);
         });
+
         it('should throw 2 errors when there is no lastName and firstname property', async function () {
           importFormat = {
             config: {
@@ -233,6 +235,7 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
           expect(errors[1].code).equal(VALIDATION_ERRORS.LASTNAME_PROPERTY_REQUIRED);
         });
       });
+
       context('checkUnicityRule', function () {
         it('should throw an error when no unicity rules is given', async function () {
           importFormat = {
@@ -305,6 +308,7 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
           expect(() => learnerSet.addLearners([learnerAttributes, secondLearnerAttributes])).to.not.throw();
         });
       });
+
       context('checkDateRule', function () {
         beforeEach(function () {
           importFormat.config.headers = [
@@ -353,6 +357,7 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
           expect(errors[0].meta.acceptedFormat).to.equal('YYYY-MM-DD');
         });
       });
+
       context('When there are expectedValues', function () {
         it('when the value corresponds to the expectedValues, should not throw an error', async function () {
           importFormat.config.headers = [...importFormat.config.headers, { name: 'cycle' }];
@@ -430,6 +435,7 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
           expect(errors[1].meta.field).to.equal('prénom-group');
           expect(errors[1].meta.line).to.equal(3);
         });
+
         it('should throw all errors on one line', async function () {
           importFormat.config.unicityColumns = ['prénom', 'group'];
           importFormat.config.headers = [

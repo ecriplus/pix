@@ -71,6 +71,7 @@ describe('Integration | Prescription | Scripts | add-missing-knowledge-element-s
         'add-remove-knowledge-element-snapshot | Created 1 snapshots. Skipped 1 participations',
       );
     });
+
     context('when campaign participation does not exist', function () {
       it('should skip participation and log an error', async function () {
         // when
@@ -83,6 +84,7 @@ describe('Integration | Prescription | Scripts | add-missing-knowledge-element-s
         );
       });
     });
+
     context('when campaign is of type exam', function () {
       it('should skip participation and log an error', async function () {
         // given
@@ -105,6 +107,7 @@ describe('Integration | Prescription | Scripts | add-missing-knowledge-element-s
         );
       });
     });
+
     context('when there is knowledge-element after participation sharing date', function () {
       it('should save the knowledge elements before sharing date', async function () {
         // given

@@ -27,6 +27,7 @@ describe('Integration | UseCase | find-paginated-filtered-organization-campaigns
       expect(result.models[0].tubes).to.be.undefined;
     });
   });
+
   context('when cover rate is true', function () {
     it('should return paginated campaign reports for a given organization with cover rate', async function () {
       // given
@@ -87,6 +88,7 @@ describe('Integration | UseCase | find-paginated-filtered-organization-campaigns
       ]);
     });
   });
+
   context('when campaign is type profiles collect', function () {
     it('should return model Campaign Report without cover rate', async function () {
       const userId = databaseBuilder.factory.buildUser().id;

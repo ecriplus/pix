@@ -727,6 +727,7 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
         expect(result).to.be.empty;
       });
     });
+
     context('when there is no organizationLearners with these divisions', function () {
       it('should return an empty array', async function () {
         // given
@@ -746,6 +747,7 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
         expect(result).to.be.empty;
       });
     });
+
     context('when divisions is an empty array', function () {
       it('should return all learners', async function () {
         // given

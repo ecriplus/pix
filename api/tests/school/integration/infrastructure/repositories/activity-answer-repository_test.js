@@ -20,6 +20,7 @@ describe('Integration | Repository | activityAnswerRepository', function () {
         expect(lastAnswer).to.be.undefined;
       });
     });
+
     context('when there is no answer for the activity', function () {
       it('should return undefined', async function () {
         // given
@@ -39,6 +40,7 @@ describe('Integration | Repository | activityAnswerRepository', function () {
         expect(lastAnswer).to.be.undefined;
       });
     });
+
     context('when activity has some activity answers', function () {
       it('should return the activity answers ordered by creation date', async function () {
         // given

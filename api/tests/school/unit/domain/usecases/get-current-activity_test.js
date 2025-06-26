@@ -17,6 +17,7 @@ describe('Unit | Domain | Use Cases | get-current-activity', function () {
       expect(assessmentRepository.get).to.have.been.calledWithExactly(assessmentId);
     });
   });
+
   context('when assessment is in progress', function () {
     it('should call the activityRepository with an assessment id equal to id_assessment ', async function () {
       const activityRepository = { getLastActivity: sinon.stub() };

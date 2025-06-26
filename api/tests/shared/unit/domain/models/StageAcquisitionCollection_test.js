@@ -37,11 +37,13 @@ describe('Unit | Domain | Models | Stages acquisition', function () {
         expect(stageAcquisitionCollection.totalNumberOfStages).to.deep.equal(availableStages.length);
       });
     });
+
     describe('reachedStageNumber', function () {
       it('should return the correct number of stages', function () {
         expect(stageAcquisitionCollection.reachedStageNumber).to.deep.equal(5);
       });
     });
+
     describe('reachedStage', function () {
       it('should return the reached stage', function () {
         expect(stageAcquisitionCollection.reachedStage).to.be.an.instanceOf(Stage);
@@ -49,6 +51,7 @@ describe('Unit | Domain | Models | Stages acquisition', function () {
       });
     });
   });
+
   context('Stages are defined by levels', function () {
     let availableStages;
     let stagesAcquisitions;
@@ -77,11 +80,13 @@ describe('Unit | Domain | Models | Stages acquisition', function () {
         expect(stageAcquisitionCollection.totalNumberOfStages).to.deep.equal(availableStages.length);
       });
     });
+
     describe('reachedStageNumber', function () {
       it('should return the correct number of stages', function () {
         expect(stageAcquisitionCollection.reachedStageNumber).to.deep.equal(2);
       });
     });
+
     describe('reachedStage', function () {
       it('should return the reached stage', function () {
         expect(stageAcquisitionCollection.reachedStage).to.be.an.instanceOf(Stage);

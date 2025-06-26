@@ -3,7 +3,6 @@ import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | ScoringSimulator', function () {
   describe('#compute', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       {
         capacity: -10,

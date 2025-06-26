@@ -458,7 +458,6 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
           expect(response.statusCode).to.equal(400);
         });
 
-        // eslint-disable-next-line mocha/no-setup-in-describe
         [{ days: -1 }, { hours: -1 }, { hours: 24 }, { minutes: -1 }, { minutes: 60 }].forEach((duration) => {
           it(`should return 400 if the payload.duration is ${JSON.stringify(duration)}`, async function () {
             // given
@@ -773,7 +772,6 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
 
   describe('PATCH /api/admin/trainings', function () {
     describe('Security Prehandlers', function () {
-      // eslint-disable-next-line mocha/no-setup-in-describe
       [
         {
           role: 'SUPER_ADMIN',
@@ -871,7 +869,6 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
 
       describe('duration', function () {
         describe('out of range', function () {
-          // eslint-disable-next-line mocha/no-setup-in-describe
           [{ days: -1 }, { hours: -1 }, { hours: 24 }, { minutes: -1 }, { minutes: 60 }].forEach((duration) => {
             it(`should return 400 if the payload.duration is ${JSON.stringify(duration)}`, async function () {
               // given
@@ -905,7 +902,6 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
         });
 
         describe('incomplete', function () {
-          // eslint-disable-next-line mocha/no-setup-in-describe
           [
             { days: 2, hours: 2 },
             { days: 2, minutes: 2 },
@@ -947,7 +943,6 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
         });
 
         describe('success', function () {
-          // eslint-disable-next-line mocha/no-setup-in-describe
           [
             { days: 2, hours: 2, minutes: 2 },
             { days: 0, hours: 0, minutes: 0 },
@@ -1033,7 +1028,6 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
     const url = '/api/admin/training-summaries';
 
     context("when user has role 'SUPER_ADMIN', 'SUPPORT', 'METIER'", function () {
-      // eslint-disable-next-line mocha/no-setup-in-describe
       [
         {
           role: 'SUPER_ADMIN',

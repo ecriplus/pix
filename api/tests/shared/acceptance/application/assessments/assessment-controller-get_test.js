@@ -18,15 +18,12 @@ describe('Acceptance | API | assessment-controller-get', function () {
   describe('(no provided answer) GET /api/assessments/:id', function () {
     let options;
 
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    /* eslint-disable mocha/no-setup-in-describe */
     [
       Assessment.types.CERTIFICATION,
       Assessment.types.PREVIEW,
       Assessment.types.CAMPAIGN,
       Assessment.types.PIX1D_MISSION,
     ].forEach(function (type) {
-      /* eslint-enable mocha/no-setup-in-describe */
       context(`when the assessment is of type ${type}`, function () {
         it('should return 200 HTTP status code', async function () {
           // given
@@ -60,7 +57,6 @@ describe('Acceptance | API | assessment-controller-get', function () {
       });
     });
 
-    /* eslint-enable-next-line mocha/no-setup-in-describe */
     context(`when the assessment is of type DEMO`, function () {
       it('should return 200 HTTP status code', async function () {
         // given

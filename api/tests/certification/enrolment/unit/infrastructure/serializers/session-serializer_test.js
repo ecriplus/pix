@@ -71,8 +71,6 @@ describe('Unit | Certification | enrolment | Serializer | session-serializer', f
           examiner: 'Antoine Toutvenant',
           date: '2017-01-20',
           time: '14:30',
-          // TODO: Fix this the next time the file is edited.
-          // eslint-disable-next-line mocha/no-setup-in-describe
           status: SESSION_STATUSES.CREATED,
           description: '',
           'certification-center-id': 42,

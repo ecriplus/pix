@@ -34,6 +34,7 @@ describe('Integration | Usecase | init-mission-activity', function () {
         expect(activityCount).to.equal(0);
       });
     });
+
     context('when last activity is not STARTED', function () {
       context('when there is no other activities left in the mission', function () {
         it('should not create any activity', async function () {
@@ -66,6 +67,7 @@ describe('Integration | Usecase | init-mission-activity', function () {
           expect(activityCount).to.equal(1);
         });
       });
+
       context('when there is at least one activity left in the mission for the current step', function () {
         it('should create activity in the current step', async function () {
           const missionId = 12;
@@ -134,6 +136,7 @@ describe('Integration | Usecase | init-mission-activity', function () {
           expect(currentActivity.alternativeVersion).to.equal(1);
         });
       });
+
       context('when there is at least one activity left in the mission for the next step', function () {
         it('should create activity in the next step', async function () {
           const missionId = 12;
@@ -187,6 +190,7 @@ describe('Integration | Usecase | init-mission-activity', function () {
         });
       });
     });
+
     context('when last activity is undefined', function () {
       it('should create activity', async function () {
         const missionId = 12;

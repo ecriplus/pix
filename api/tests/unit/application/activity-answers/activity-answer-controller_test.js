@@ -82,6 +82,7 @@ describe('Unit | Controller | activity-answer-controller', function () {
         expect(response.statusCode).to.equal(201);
       });
     });
+
     context('when challenge is in preview', function () {
       let correctedAnswer;
 

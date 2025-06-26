@@ -264,6 +264,7 @@ describe('Quest | Integration | Domain | Usecases | RewardUser', function () {
 
     context('when user is eligible with two organization learner for the same quest', function () {
       let userId;
+
       beforeEach(async function () {
         userId = databaseBuilder.factory.buildUser().id;
         const questOrganization = 'PRO';
@@ -356,6 +357,7 @@ describe('Quest | Integration | Domain | Usecases | RewardUser', function () {
 
     context('when user is eligible at two quests with the same rewardId', function () {
       let userId;
+
       beforeEach(async function () {
         userId = databaseBuilder.factory.buildUser().id;
         const questOrganization = 'PRO';
@@ -546,6 +548,7 @@ describe('Quest | Integration | Domain | Usecases | RewardUser', function () {
 
     context('when user is eligible at two quests with the same rewardId', function () {
       let userId;
+
       beforeEach(async function () {
         userId = databaseBuilder.factory.buildUser().id;
         const questOrganization = 'PRO';

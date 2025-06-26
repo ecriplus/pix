@@ -66,6 +66,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-locale-man
   describe('GET /api/assessments/:assessment_id/next', function () {
     const assessmentId = 1;
     const userId = 1234;
+
     context('when assessment is a competence evaluation', function () {
       context('when there is one challenge in the accepted language (fr-fr)', function () {
         beforeEach(async function () {

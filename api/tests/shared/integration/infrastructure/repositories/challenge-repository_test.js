@@ -541,6 +541,7 @@ describe('Integration | Repository | challenge-repository', function () {
             );
           });
         });
+
         context('when we fail retrieving the resource', function () {
           it('should throw a NotFound error', async function () {
             // given
@@ -558,6 +559,7 @@ describe('Integration | Repository | challenge-repository', function () {
           });
         });
       });
+
       context('when the challenge has no embed as webcomponent', function () {
         it('should return the challenge', async function () {
           // when
@@ -596,6 +598,7 @@ describe('Integration | Repository | challenge-repository', function () {
           );
         });
       });
+
       context('when asking a challenge "for correction"', function () {
         it('should return a dedicated DTO for correction', async function () {
           // when
@@ -630,6 +633,7 @@ describe('Integration | Repository | challenge-repository', function () {
           expect(err).to.have.property('message', 'Épreuve introuvable');
         });
       });
+
       context('when all challenges are found', function () {
         it('should return the challenges', async function () {
           // when
@@ -690,6 +694,7 @@ describe('Integration | Repository | challenge-repository', function () {
             }),
           ]);
         });
+
         it('should allow duplicates', async function () {
           // when
           const challenges = await challengeRepository.getMany(['challengeId02', 'challengeId00', 'challengeId02']);
@@ -776,6 +781,7 @@ describe('Integration | Repository | challenge-repository', function () {
         });
       });
     });
+
     context('when locale is provided', function () {
       context('when at least one challenge is not found amongst the provided ids', function () {
         it('should throw a NotFound error', async function () {
@@ -787,6 +793,7 @@ describe('Integration | Repository | challenge-repository', function () {
           expect(err).to.have.property('message', 'Épreuve introuvable');
         });
       });
+
       context('when all challenges are found', function () {
         it('should return only the challenges for given locale', async function () {
           // when
@@ -864,6 +871,7 @@ describe('Integration | Repository | challenge-repository', function () {
         expect(err.message).to.equal('Locale shall be defined');
       });
     });
+
     context('when locale is defined', function () {
       context('when no challenges found for locale', function () {
         it('should return an empty array', async function () {
@@ -1027,6 +1035,7 @@ describe('Integration | Repository | challenge-repository', function () {
         expect(err.message).to.equal('Locale shall be defined');
       });
     });
+
     context('when locale is defined', function () {
       context('when no validated challenges found for given locale', function () {
         it('should return an empty array', async function () {
@@ -1037,6 +1046,7 @@ describe('Integration | Repository | challenge-repository', function () {
           expect(challenges).to.deep.equal([]);
         });
       });
+
       context('when validated challenges are found for given locale', function () {
         it('should return the challenges', async function () {
           // when
@@ -1163,6 +1173,7 @@ describe('Integration | Repository | challenge-repository', function () {
         expect(err.message).to.equal('Locale shall be defined');
       });
     });
+
     context('when locale is defined', function () {
       context('when no operative challenges found for given locale', function () {
         it('should return an empty array', async function () {
@@ -1173,6 +1184,7 @@ describe('Integration | Repository | challenge-repository', function () {
           expect(challenges).to.deep.equal([]);
         });
       });
+
       context('when operative challenges are found for given locale', function () {
         it('should return the challenges', async function () {
           // when
@@ -1273,6 +1285,7 @@ describe('Integration | Repository | challenge-repository', function () {
         expect(err.message).to.equal('Locale shall be defined');
       });
     });
+
     context('when locale is defined', function () {
       context('when no validated challenges found for given locale and competenceId', function () {
         it('should return an empty array', async function () {
@@ -1283,6 +1296,7 @@ describe('Integration | Repository | challenge-repository', function () {
           expect(challenges).to.deep.equal([]);
         });
       });
+
       context('when validated challenges are found for given locale and competenceId', function () {
         it('should return the challenges', async function () {
           // when
@@ -1358,6 +1372,7 @@ describe('Integration | Repository | challenge-repository', function () {
         expect(err.message).to.equal('Locale shall be defined');
       });
     });
+
     context('when locale is defined', function () {
       context('when no operative challenges found for given locale', function () {
         it('should return an empty array', async function () {
@@ -1375,6 +1390,7 @@ describe('Integration | Repository | challenge-repository', function () {
           expect(challenges).to.deep.equal([]);
         });
       });
+
       context('when operative challenges are found for given locale', function () {
         it('should return the challenges', async function () {
           // given
@@ -1480,6 +1496,7 @@ describe('Integration | Repository | challenge-repository', function () {
             }),
           ]);
         });
+
         it('should avoid duplicates', async function () {
           // given
           const skills = [
@@ -1626,6 +1643,7 @@ describe('Integration | Repository | challenge-repository', function () {
           expect(challenges).to.deep.equal([]);
         });
       });
+
       context('when flash compatible challenges found', function () {
         it('should return the challenges', async function () {
           // given
@@ -1722,6 +1740,7 @@ describe('Integration | Repository | challenge-repository', function () {
         });
       });
     });
+
     context('when excluding obsolete challenges', function () {
       context('when no flash compatible challenges found', function () {
         it('should return an empty array', async function () {
@@ -1738,6 +1757,7 @@ describe('Integration | Repository | challenge-repository', function () {
           expect(challenges).to.deep.equal([]);
         });
       });
+
       context('when flash compatible challenges found', function () {
         it('should return the challenges', async function () {
           // given
@@ -1960,6 +1980,7 @@ describe('Integration | Repository | challenge-repository', function () {
           ]);
         });
       });
+
       context('when successProbabilityThreshold is passed in parameters', function () {
         it('should override default successProbabilityThreshold with the one given in parameter', async function () {
           // given
@@ -2005,6 +2026,7 @@ describe('Integration | Repository | challenge-repository', function () {
           ]);
         });
       });
+
       context('when accessibilityAdjustmentNeeded is true', function () {
         it('should keep accessible challenges', async function () {
           // given
@@ -2093,6 +2115,7 @@ describe('Integration | Repository | challenge-repository', function () {
         expect(err.message).to.equal('Locale shall be defined');
       });
     });
+
     context('when locale is defined', function () {
       context('when no validated challenges found for given locale and skillId', function () {
         it('should return an empty array', async function () {
@@ -2103,6 +2126,7 @@ describe('Integration | Repository | challenge-repository', function () {
           expect(challenges).to.deep.equal([]);
         });
       });
+
       context('when validated challenges are found for given locale and skillId', function () {
         it('should return the challenges', async function () {
           // when

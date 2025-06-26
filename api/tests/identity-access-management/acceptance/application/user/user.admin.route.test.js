@@ -79,6 +79,7 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
         });
       });
     });
+
     context('When CONTAINS type is settled', function () {
       context('When filters match a list of users', function () {
         it('retrieves this list of users', async function () {

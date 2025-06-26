@@ -10,6 +10,7 @@ describe('Unit | Shared | Domain | Services | Language Service', function () {
         expect(languageService.assertLanguageAvailability()).to.be.undefined;
       });
     });
+
     context('when given language code is available', function () {
       it('returns nothing', function () {
         // given
@@ -19,6 +20,7 @@ describe('Unit | Shared | Domain | Services | Language Service', function () {
         expect(languageService.assertLanguageAvailability(languageCode)).to.be.undefined;
       });
     });
+
     context('when given language code is not available', function () {
       it('throws an error', function () {
         // given

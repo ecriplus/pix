@@ -704,6 +704,7 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
 
     context('when campaign is of type ASSESSMENT', function () {
       let userId, campaignId;
+
       beforeEach(async function () {
         userId = databaseBuilder.factory.buildUser().id;
         campaignId = databaseBuilder.factory.buildCampaign({
@@ -1086,6 +1087,7 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
 
     context('when campaign is of type EXAM', function () {
       let userId, campaignId;
+
       beforeEach(async function () {
         userId = databaseBuilder.factory.buildUser().id;
         campaignId = databaseBuilder.factory.buildCampaign({

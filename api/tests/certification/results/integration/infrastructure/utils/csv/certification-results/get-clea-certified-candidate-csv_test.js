@@ -49,6 +49,7 @@ describe('Integration | Application | UseCases | certification-results | get-cle
 
         expect(result).to.equal(expectedResult);
       });
+
       context('when clea certified candidates are born in french outermost region', function () {
         it('should return csvContent with correct geographic area code and correct outermost born value', async function () {
           // given
@@ -79,6 +80,7 @@ describe('Integration | Application | UseCases | certification-results | get-cle
           });
         });
       });
+
       context('when clea certified candidates are born in foreign country', function () {
         it('should return csvContent with correct foreign born value', async function () {
           // given

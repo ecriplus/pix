@@ -48,6 +48,7 @@ describe('Unit | Router | organization-import-router', function () {
       // then
       expect(response.statusCode).to.equal(400);
     });
+
     context(
       'when the user is an admin for the organization and the organization is SUP and manages students',
       function () {
@@ -78,6 +79,7 @@ describe('Unit | Router | organization-import-router', function () {
         });
       },
     );
+
     context(
       'when the user is an admin for the organization and the organization is SCO and manages students',
       function () {
@@ -108,6 +110,7 @@ describe('Unit | Router | organization-import-router', function () {
         });
       },
     );
+
     context('when the organization has learner import feature', function () {
       context('when user is admin of the organization', function () {
         it('responds 200', async function () {
@@ -135,6 +138,7 @@ describe('Unit | Router | organization-import-router', function () {
           expect(response.statusCode).to.equal(200);
         });
       });
+
       context('when user is not admin of the organization', function () {
         it('responds 403', async function () {
           // given

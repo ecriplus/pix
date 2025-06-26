@@ -170,6 +170,7 @@ describe('Integration | UseCases | play-mission', function () {
       });
     });
   });
+
   context('when an assessment is started for learner and mission', function () {
     let organizationLearnerId;
     let currentAssessment;

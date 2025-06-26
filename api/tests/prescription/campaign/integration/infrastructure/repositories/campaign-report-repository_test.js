@@ -103,7 +103,6 @@ describe('Integration | Repository | Campaign-Report', function () {
         return databaseBuilder.commit();
       });
 
-      // eslint-disable-next-line mocha/no-setup-in-describe
       [CampaignTypes.ASSESSMENT, CampaignTypes.EXAM].forEach((campaignType) => {
         context(`for campaign of type ${campaignType}`, function () {
           it('returns general information about target profile', async function () {
@@ -177,6 +176,7 @@ describe('Integration | Repository | Campaign-Report', function () {
                 expect(result.targetProfileHasStage).to.equal(true);
               });
             });
+
             context('when the target profile has no stages', function () {
               it('returns general information about stages', async function () {
                 const { id: otherTargetProfilId } = databaseBuilder.factory.buildTargetProfile();
@@ -198,6 +198,7 @@ describe('Integration | Repository | Campaign-Report', function () {
 
     context('participations', function () {
       let campaign;
+
       beforeEach(function () {
         campaign = databaseBuilder.factory.buildCampaign();
         databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId: 'skill1' });

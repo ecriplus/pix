@@ -115,7 +115,6 @@ describe('Unit | Organizational Entities | Domain | Validators | certification-c
           }
         });
 
-        // eslint-disable-next-line mocha/no-setup-in-describe
         ['SUP', 'SCO', 'PRO'].forEach((type) => {
           it(`does not throw with ${type} as type`, function () {
             // given

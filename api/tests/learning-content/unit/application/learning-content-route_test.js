@@ -47,7 +47,6 @@ describe('Unit | Route | learning-content-route', function () {
     });
 
     describe('nominal case', function () {
-      // eslint-disable-next-line mocha/no-setup-in-describe
       [
         'frameworks',
         'areas',

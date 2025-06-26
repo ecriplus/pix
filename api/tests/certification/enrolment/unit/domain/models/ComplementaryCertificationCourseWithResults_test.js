@@ -39,6 +39,7 @@ describe('Unit | Certification | Enrolment | Domain | Models | ComplementaryCert
         });
       });
     });
+
     context(' on different level', function () {
       describe('when the certification is acquired by PIX', function () {
         it('should return false', function () {

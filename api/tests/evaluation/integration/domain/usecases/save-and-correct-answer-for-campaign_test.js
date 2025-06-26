@@ -136,6 +136,7 @@ describe('Evaluation | Integration | Usecase | Save and correct answer for campa
       expect(savedAnswer).to.be.instanceOf(Answer);
     });
   });
+
   context('for campaign of type exam with method smart_random', function () {
     it('should correct answer and save both answer and knowledge-elements', async function () {
       // given

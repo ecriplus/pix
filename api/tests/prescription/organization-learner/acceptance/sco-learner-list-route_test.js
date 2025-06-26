@@ -94,6 +94,7 @@ describe('Acceptance | Application | sco-leaner-list-route', function () {
         expect(response.statusCode).to.equal(200);
         expect(response.result.data).to.deep.equal(expectedResult.data);
       });
+
       context('Certificability filter', function () {
         it('should filter certificability with one value', async function () {
           // given
@@ -125,6 +126,7 @@ describe('Acceptance | Application | sco-leaner-list-route', function () {
           expect(response.statusCode).to.equal(200);
         });
       });
+
       context('Connexion type filter', function () {
         it('should filter connexion type with one value', async function () {
           // given

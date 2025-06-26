@@ -935,6 +935,7 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
           competenceId: competence.id,
         });
       });
+
       context('when participation is shared', function () {
         context('when some stages have been reached', function () {
           it('tells highest stage reached', function () {

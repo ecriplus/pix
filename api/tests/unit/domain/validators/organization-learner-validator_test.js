@@ -31,7 +31,6 @@ describe('Unit | Domain | Organization Learner validator', function () {
     });
 
     context('required fields', function () {
-      // eslint-disable-next-line mocha/no-setup-in-describe
       [
         'firstName',
         'lastName',
@@ -55,7 +54,6 @@ describe('Unit | Domain | Organization Learner validator', function () {
     });
 
     context('fields with a a max length of 255 characters', function () {
-      // eslint-disable-next-line mocha/no-setup-in-describe
       [
         'firstName',
         'middleName',

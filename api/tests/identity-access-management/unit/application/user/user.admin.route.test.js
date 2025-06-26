@@ -221,7 +221,6 @@ describe('Unit | Identity Access Management | Application | Route | User', funct
   });
 
   describe('POST /api/admin/users/{userId}/authentication-methods/{authenticationMethodId}', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [CODE_IDENTITY_PROVIDER_GAR, CODE_IDENTITY_PROVIDER_POLE_EMPLOI, oidcProviderCode].forEach((identityProvider) => {
       it(`returns 204 when user role is "SUPER_ADMIN" and identity provider is "${identityProvider}"`, async function () {
         // given

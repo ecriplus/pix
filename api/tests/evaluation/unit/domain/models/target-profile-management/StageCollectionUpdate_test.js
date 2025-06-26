@@ -42,6 +42,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             }
           });
         });
+
         context('when collection has at least one stage without a value', function () {
           it('should throw an error', function () {
             // given
@@ -78,6 +79,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             }
           });
         });
+
         context('when collection does not have exclusively threshold stages', function () {
           it('should throw an error', function () {
             // given
@@ -123,6 +125,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             }
           });
         });
+
         context('when collection has several occurrences of the same stage threshold value', function () {
           it('should throw an error', function () {
             // given
@@ -177,6 +180,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             }
           });
         });
+
         context('when collection has at least one stage without title', function () {
           it('should throw an error', function () {
             // given
@@ -204,6 +208,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             }
           });
         });
+
         context('when collection has at least one stage without message', function () {
           it('should throw an error', function () {
             // given
@@ -231,6 +236,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             }
           });
         });
+
         context('when collection has a stage threshold that exceeds 100', function () {
           it('should throw an error', function () {
             // given
@@ -267,6 +273,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             }
           });
         });
+
         context('when collection has a stage threshold under zero', function () {
           it('should throw an error', function () {
             // given
@@ -303,6 +310,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             }
           });
         });
+
         context(
           'when input collection submit for update a stage that does not belong to the original collection',
           function () {
@@ -358,6 +366,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             });
           },
         );
+
         context('when collection has several first skill stages', function () {
           it('should throw an error', function () {
             // given
@@ -406,6 +415,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             }
           });
         });
+
         context('when collection has a first skill stage with a threshold', function () {
           it('should throw an error', function () {
             // given
@@ -444,6 +454,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
           });
         });
       });
+
       context('when in a level collection', function () {
         context('when collection has no zero stage but has some other stages', function () {
           it('should throw an error', function () {
@@ -481,6 +492,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             }
           });
         });
+
         context('when collection has at least one stage without a value', function () {
           it('should throw an error', function () {
             // given
@@ -517,6 +529,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             }
           });
         });
+
         context('when collection does not have exclusively level stages', function () {
           it('should throw an error', function () {
             // given
@@ -562,6 +575,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             }
           });
         });
+
         context('when collection has several occurrences of the same stage level value', function () {
           it('should throw an error', function () {
             // given
@@ -616,6 +630,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             }
           });
         });
+
         context('when collection has at least one stage without title', function () {
           it('should throw an error', function () {
             // given
@@ -643,6 +658,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             }
           });
         });
+
         context('when collection has at least one stage without message', function () {
           it('should throw an error', function () {
             // given
@@ -670,6 +686,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             }
           });
         });
+
         context('when collection has a stage level that exceeds max level', function () {
           it('should throw an error', function () {
             // given
@@ -715,6 +732,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             }
           });
         });
+
         context('when collection has a stage level under zero', function () {
           it('should throw an error', function () {
             // given
@@ -760,6 +778,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             }
           });
         });
+
         context(
           'when input collection submit for update a stage that does not belong to the original collection',
           function () {
@@ -815,6 +834,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             });
           },
         );
+
         context('when collection has several first skill stages', function () {
           it('should throw an error', function () {
             // given
@@ -863,6 +883,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
             }
           });
         });
+
         context('when collection has a first skill stage with a level', function () {
           it('should throw an error', function () {
             // given
@@ -902,6 +923,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
         });
       });
     });
+
     context('when business rules are valid', function () {
       context('when in a threshold collection', function () {
         it('should successfully build the collection', function () {
@@ -1080,6 +1102,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
           expect(collection).to.be.instanceOf(StageCollectionUpdate);
         });
       });
+
       context('when in a level collection', function () {
         it('should successfully build the collection', function () {
           // given
@@ -1161,6 +1184,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
           // then
           expect(collection).to.be.instanceOf(StageCollectionUpdate);
         });
+
         it('should successfully build the collection with a first skill stage', function () {
           // given
           const oldStages = [
@@ -1253,6 +1277,7 @@ describe('Unit | Domain | Models | target-profile-management/StageCollectionUpda
           expect(collection).to.be.instanceOf(StageCollectionUpdate);
         });
       });
+
       it('should successfully build an empty collection', function () {
         // given
         const oldStages = [

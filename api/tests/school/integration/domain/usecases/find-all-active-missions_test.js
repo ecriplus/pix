@@ -14,6 +14,7 @@ describe('Integration | UseCases | find-all-active-missions', function () {
   context('when active missions', function () {
     let missionValideeDB, missionExperimentaleDB;
     let organizationId;
+
     beforeEach(async function () {
       databaseBuilder.factory.learningContent.buildArea({
         id: 'areaId',

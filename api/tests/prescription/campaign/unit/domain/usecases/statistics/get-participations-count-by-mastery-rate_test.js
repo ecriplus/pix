@@ -25,6 +25,7 @@ describe('Unit | UseCase | getParticipationsCountByMasteryRate', function () {
       expect(participationsCountByMasteryRate).to.equal(expectedResultDistribution);
     });
   });
+
   context('when the user does not have access to the campaign', function () {
     it('throws an error', async function () {
       const campaignId = 12;

@@ -9,6 +9,7 @@ describe('Unit | UseCase | integrate-cpf-processing-receipts ', function () {
   context('#integrateCpfProccessingReceipts', function () {
     let cpfReceiptsStorage;
     let cpfCertificationResultRepository;
+
     beforeEach(function () {
       cpfReceiptsStorage = {
         findAll: sinon.stub(),

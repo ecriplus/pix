@@ -88,11 +88,9 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
       csvPromise = streamToPromise(writableStream);
     });
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
-      // eslint-disable-next-line mocha/no-setup-in-describe
       { type: CampaignTypes.ASSESSMENT, hideProgression: false },
-      // eslint-disable-next-line mocha/no-setup-in-describe
+
       { type: CampaignTypes.EXAM, hideProgression: true },
     ].forEach(function ({ type, hideProgression }) {
       context(`campaign of type ${type}`, function () {
@@ -137,6 +135,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
 
             await databaseBuilder.commit();
           });
+
           it('should return the correct filename', async function () {
             // given
 
@@ -234,6 +233,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
 
             await databaseBuilder.commit();
           });
+
           it('should return the complete line with participant external id', async function () {
             // given
             let csvSecondLine =
@@ -652,6 +652,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
 
         context('multiple participations', function () {
           let secondCampaignParticipation, secondParticipationDateCreatedAt, secondParticipationCreatedFormated;
+
           beforeEach(async function () {
             secondParticipationDateCreatedAt = new Date('2019-03-05T11:23:00Z');
             secondParticipationCreatedFormated = '05/03/2019 12:23';
@@ -747,6 +748,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
             });
             await databaseBuilder.commit();
           });
+
           it('should return 2 lines', async function () {
             // given
             const expectedCsvFirstCell = '\uFEFF"Nom de l\'organisation"';

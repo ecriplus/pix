@@ -11,13 +11,9 @@ describe('Unit | Serializer | CSV | campaign-profiles-collection-export', functi
     let outputStream, csvPromise, organization, campaign, competences;
 
     const placementProfileServiceStub = {
-      // TODO: Fix this the next time the file is edited.
-      // eslint-disable-next-line mocha/no-setup-in-describe
       getPlacementProfilesWithSnapshotting: sinon.stub(),
     };
 
-    // TODO: Fix this the next time the file is edited.
-    // eslint-disable-next-line mocha/no-setup-in-describe
     const translate = getI18n().__;
 
     beforeEach(function () {

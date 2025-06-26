@@ -270,6 +270,7 @@ describe('Integration | Repository | Participations-For-User-Management', functi
             organizationLearnerFullName: '-',
           });
         });
+
         it('should return only first assessment participation with deletion attributes', async function () {
           // given
           const otherAssessment = databaseBuilder.factory.buildAssessment({
@@ -331,6 +332,7 @@ describe('Integration | Repository | Participations-For-User-Management', functi
           ]);
         });
       });
+
       context('sort', function () {
         it('should sort participations by descending createdAt', async function () {
           const campaign1 = databaseBuilder.factory.buildCampaign();

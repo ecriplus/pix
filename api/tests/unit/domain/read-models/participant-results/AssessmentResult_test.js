@@ -982,8 +982,6 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
   });
 
   describe('#canImprove', function () {
-    // TODO: Fix this the next time the file is edited.
-    // eslint-disable-next-line mocha/no-setup-in-describe
     const originalConstantValue = constants.MINIMUM_DELAY_IN_DAYS_BEFORE_IMPROVING;
     const assessmentCreatedAt = new Date('2020-01-05T05:06:07Z');
     let clock;
@@ -1051,15 +1049,12 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
     });
 
     context('by campaign types', function () {
-      // eslint-disable-next-line mocha/no-setup-in-describe
       [
         {
-          // eslint-disable-next-line mocha/no-setup-in-describe
           campaignType: CampaignTypes.EXAM,
           expected: false,
         },
         {
-          // eslint-disable-next-line mocha/no-setup-in-describe
           campaignType: CampaignTypes.ASSESSMENT,
           expected: true,
         },

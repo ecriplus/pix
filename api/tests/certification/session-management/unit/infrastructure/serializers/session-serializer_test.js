@@ -77,8 +77,6 @@ describe('Unit | Certification | session-management | Serializer | session-seria
         type: 'session-managements',
         id: '12',
         attributes: {
-          // TODO: Fix this the next time the file is edited.
-          // eslint-disable-next-line mocha/no-setup-in-describe
           status: SESSION_STATUSES.CREATED,
           description: '',
           'examiner-global-comment': 'It was a fine session my dear',
@@ -120,7 +118,6 @@ describe('Unit | Certification | session-management | Serializer | session-seria
       expect(session.version).to.equal(3);
     });
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     EMPTY_BLANK_AND_NULL.forEach((examinerGlobalComment) => {
       it(`should return no examiner comment if comment is "${examinerGlobalComment}"`, function () {
         // given

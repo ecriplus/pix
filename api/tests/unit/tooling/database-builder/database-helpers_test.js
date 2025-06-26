@@ -5,7 +5,6 @@ import { expect } from '../../../test-helper.js';
 
 describe('Unit | Tooling | DatabaseBuilder | database-helpers', function () {
   describe('#getTableNameFromInsertSqlQuery', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       {
         expectedTableName: 'users',

@@ -27,6 +27,7 @@ describe('integration | scripts | update-translations', function () {
         // then
         expect(result).to.be.rejectedWith('The source file must be a JSON file');
       });
+
       it('should return an error if one target file is not a json', function () {
         // given
         const source = 'source.json';

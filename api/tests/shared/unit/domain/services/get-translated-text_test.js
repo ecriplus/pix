@@ -41,6 +41,7 @@ describe('Unit | Domain | Services | get-translated-text', function () {
         // then
         expect(result).to.equal('Ma clef');
       });
+
       it('returns null when fallback is not enabled', function () {
         // given
         const locale = 'fr-fr-';

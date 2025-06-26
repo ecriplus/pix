@@ -356,6 +356,7 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
         expect(response.statusCode).to.equal(204);
       });
     });
+
     context('Error cases', function () {
       it('throws a UserNotAuthorizedToRemoveAuthenticationMethod when usecase has thrown this error', async function () {
         // given

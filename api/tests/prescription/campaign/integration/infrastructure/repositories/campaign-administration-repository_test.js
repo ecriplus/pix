@@ -69,6 +69,7 @@ describe('Integration | Repository | Campaign Administration', function () {
 
       await databaseBuilder.commit();
     });
+
     context('when campaign is of type ASSESSMENT', function () {
       it('should save the given campaign with type ASSESSMENT', async function () {
         // given

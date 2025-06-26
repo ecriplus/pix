@@ -345,6 +345,7 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
         });
         await databaseBuilder.commit();
       });
+
       it('should return extra columns', async function () {
         await startWritingCampaignProfilesCollectionResultsToStream({
           campaignId: campaign.id,

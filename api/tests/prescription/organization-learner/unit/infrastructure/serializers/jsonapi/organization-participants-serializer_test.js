@@ -2,6 +2,7 @@ import { OrganizationParticipant } from '../../../../../../../src/prescription/o
 import * as serializer from '../../../../../../../src/prescription/organization-learner/infrastructure/serializers/jsonapi/organization-participants-serializer.js';
 import { CampaignParticipationStatuses as campaignParticipationsStatuses } from '../../../../../../../src/prescription/shared/domain/constants.js';
 import { expect } from '../../../../../../test-helper.js';
+
 describe('Unit | Serializer | JSONAPI | organization-participants-serializer', function () {
   describe('#serialize', function () {
     it('should convert an organization participant model object into JSON API data', function () {

@@ -225,26 +225,24 @@ describe('Campaign', function () {
   });
 
   describe('getters', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       {
         getter: 'isAssessment',
-        // eslint-disable-next-line mocha/no-setup-in-describe
+
         isTrueForType: CampaignTypes.ASSESSMENT,
       },
       {
         getter: 'isProfilesCollection',
-        // eslint-disable-next-line mocha/no-setup-in-describe
+
         isTrueForType: CampaignTypes.PROFILES_COLLECTION,
       },
       {
         getter: 'isExam',
-        // eslint-disable-next-line mocha/no-setup-in-describe
+
         isTrueForType: CampaignTypes.EXAM,
       },
     ].forEach(({ getter, isTrueForType }) => {
       describe('#' + getter, function () {
-        // eslint-disable-next-line mocha/no-setup-in-describe
         Object.values(CampaignTypes).forEach((campaignType) => {
           const expected = campaignType === isTrueForType;
           it(`should return ${expected} when campaign is of type ${campaignType}`, function () {

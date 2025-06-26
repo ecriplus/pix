@@ -14,6 +14,7 @@ describe('Unit | Controller | pole-emploi-controller', function () {
       sending = [{ idEnvoi: 1 }];
       poleEmploiService = { decodeCursor: sinon.stub() };
     });
+
     context('when there is a cursor in the url', function () {
       it('should return the pole emploi sending', async function () {
         // given
@@ -62,6 +63,7 @@ describe('Unit | Controller | pole-emploi-controller', function () {
         expect(error).to.be.ok;
       });
     });
+
     context('when there are filters', function () {
       context("when enErreur is 'false'", function () {
         it('should return the pole emploi sending', async function () {
@@ -81,6 +83,7 @@ describe('Unit | Controller | pole-emploi-controller', function () {
           });
         });
       });
+
       context("when enErreur is 'true'", function () {
         it('should return the pole emploi sending', async function () {
           // given

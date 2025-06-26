@@ -25,6 +25,7 @@ describe('Unit | Service | Challenge', function () {
           expect(result).to.equal(1);
         });
       });
+
       context('when there is an already played alternative version', function () {
         it('returns a version randomly between remaining alternative versions', async function () {
           const activities = [new Activity({ level: Activity.levels.TRAINING, stepIndex: 0, alternativeVersion: 0 })];
@@ -44,6 +45,7 @@ describe('Unit | Service | Challenge', function () {
           expect(result).to.equal(2);
         });
       });
+
       context('when there is an already played alternative version in another step', function () {
         it('ignores other steps already played versions and returns a version randomly between all alternative versions', async function () {
           const activities = [new Activity({ level: Activity.levels.TRAINING, stepIndex: 0, alternativeVersion: 0 })];
@@ -63,6 +65,7 @@ describe('Unit | Service | Challenge', function () {
           expect(result).to.equal(1);
         });
       });
+
       context('when there are already played alternative versions', function () {
         it('returns a version randomly between remaining alternative versions', async function () {
           const activities = [
@@ -85,6 +88,7 @@ describe('Unit | Service | Challenge', function () {
           expect(result).to.equal(0);
         });
       });
+
       context('when all alternative versions have already been played', function () {
         it('returns a version randomly between all alternative versions', async function () {
           const activities = [
@@ -136,6 +140,7 @@ describe('Unit | Service | Challenge', function () {
           expect(result).to.equal(1);
         });
       });
+
       context('when there is an already played alternative version', function () {
         it('returns a version randomly between remaining alternative versions of the 2nd challenge', async function () {
           const activities = [new Activity({ level: Activity.levels.TRAINING, stepIndex: 0, alternativeVersion: 0 })];
@@ -161,6 +166,7 @@ describe('Unit | Service | Challenge', function () {
           expect(result).to.equal(2);
         });
       });
+
       context('when there are already played alternative versions', function () {
         it('returns a version randomly between remaining alternative versions', async function () {
           const activities = [
@@ -190,6 +196,7 @@ describe('Unit | Service | Challenge', function () {
           expect(result).to.equal(0);
         });
       });
+
       context('when all alternative versions have already been played', function () {
         it('returns a version randomly between all alternative versions', async function () {
           const activities = [

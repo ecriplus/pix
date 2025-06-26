@@ -116,6 +116,7 @@ describe('Unit | UseCase | reconcile-common-organization-learner', function () {
       expect(error.reason).to.equal('IMPORT_FORMAT_NOT_FOUND');
     });
   });
+
   context('Reconciliation', function () {
     beforeEach(function () {
       // given
@@ -125,6 +126,7 @@ describe('Unit | UseCase | reconcile-common-organization-learner', function () {
         .resolves({ hasLearnersImportFeature: true });
       organizationLearnerImportFormatRepository.get.withArgs(organizationId).resolves(importFormat);
     });
+
     context('when there is no matching learner', function () {
       it('should throw a ReconcileCommonOrganizationLearnerError', async function () {
         // given

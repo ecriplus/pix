@@ -37,6 +37,7 @@ describe('Integration | Repository | Certification Challenge', function () {
   describe('#getNextNonAnsweredChallengeByCourseId', function () {
     context('no non answered certification challenge', function () {
       let certificationCourseId, assessmentId;
+
       before(async function () {
         // given
         const userId = databaseBuilder.factory.buildUser({}).id;
@@ -130,6 +131,7 @@ describe('Integration | Repository | Certification Challenge', function () {
   describe('#getNextChallengeByCourseIdForV3', function () {
     context('all certification challenges are ignored', function () {
       let certificationCourseId, challengeId;
+
       before(async function () {
         // given
         const userId = databaseBuilder.factory.buildUser({}).id;

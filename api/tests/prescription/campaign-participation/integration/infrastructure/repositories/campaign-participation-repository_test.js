@@ -1750,6 +1750,7 @@ describe('Integration | Repository | Campaign Participation', function () {
         expect(result).to.be.empty;
       });
     });
+
     context('with participation in another campaign', function () {
       it('should return an empty array', async function () {
         // given
@@ -1769,6 +1770,7 @@ describe('Integration | Repository | Campaign Participation', function () {
         expect(result).to.be.empty;
       });
     });
+
     context('with improved shared participation', function () {
       it('should return only not improved participation ', async function () {
         // given

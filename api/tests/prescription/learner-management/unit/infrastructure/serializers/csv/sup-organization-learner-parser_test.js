@@ -17,8 +17,8 @@ describe('Unit | Infrastructure | SupOrganizationLearnerParser', function () {
   context('when the header is not correctly formed', function () {
     const organizationId = 123;
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     ['Premier prénom', 'Nom de famille', 'Date de naissance (jj/mm/aaaa)', 'Numéro étudiant'].forEach((field) => {
+      //
       context(`when the ${field} column is missing`, function () {
         it('should throw an CsvImportError', async function () {
           const input = supOrganizationLearnerCsvColumns.replace(`${field}`, '').replace(';;', ';');

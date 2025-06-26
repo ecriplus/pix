@@ -145,13 +145,10 @@ describe('Unit | UseCase | attach-badges', function () {
   });
 
   context('when one or more badges do not exist', function () {
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       { label: 'no badges found', resolve: [] },
       { label: 'not all badges are certifiable', resolve: [{ badgeId: 1, level: 1, isCertifiable: true }] },
     ].forEach((assessment) => {
-      // eslint-disable-next-line mocha/no-setup-in-describe
       context(`when  ${assessment.label}`, function () {
         it('should throw a not found error', async function () {
           // given

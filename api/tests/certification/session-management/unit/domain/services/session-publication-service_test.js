@@ -246,6 +246,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
             expect(error).to.be.instanceOf(CertificationCourseNotPublishableError);
           });
         });
+
         context('when the certification is cancelled', function () {
           // DEPRECATED : will be remove when isCancelled will be remove
           it('should not throw', async function () {

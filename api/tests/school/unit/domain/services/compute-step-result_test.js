@@ -17,6 +17,7 @@ describe('Unit | Domain | Pix Junior | compute step result', function () {
       expect(result).to.equal(Assessment.results.REACHED);
     });
   });
+
   context('When the last activity is a failed VALIDATION', function () {
     it(`should return ${Assessment.results.PARTIALLY_REACHED}`, async function () {
       const lastActivity = domainBuilder.buildActivity({
@@ -30,6 +31,7 @@ describe('Unit | Domain | Pix Junior | compute step result', function () {
       expect(result).to.equal(Assessment.results.PARTIALLY_REACHED);
     });
   });
+
   context('When the last activity is a skipped VALIDATION', function () {
     it(`should return ${Assessment.results.PARTIALLY_REACHED}`, async function () {
       const lastActivity = domainBuilder.buildActivity({
@@ -43,6 +45,7 @@ describe('Unit | Domain | Pix Junior | compute step result', function () {
       expect(result).to.equal(Assessment.results.PARTIALLY_REACHED);
     });
   });
+
   context('When the last activity is a failed TRAINING', function () {
     it(`should return ${Assessment.results.NOT_REACHED}`, async function () {
       const lastActivity = domainBuilder.buildActivity({
@@ -56,6 +59,7 @@ describe('Unit | Domain | Pix Junior | compute step result', function () {
       expect(result).to.equal(Assessment.results.NOT_REACHED);
     });
   });
+
   context('When the last activity is not in a step', function () {
     it('should return undefined', async function () {
       const lastActivity = domainBuilder.buildActivity({

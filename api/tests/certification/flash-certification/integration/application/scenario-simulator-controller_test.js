@@ -219,6 +219,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
             ]);
           });
         });
+
         context('When the route is called with uppercased supported locale', function () {
           it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
             // given
@@ -276,6 +277,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
             ]);
           });
         });
+
         context('When the route is called with non supported locale', function () {
           it('should returns 400', async function () {
             // given

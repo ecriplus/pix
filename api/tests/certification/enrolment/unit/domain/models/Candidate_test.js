@@ -102,8 +102,6 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
       });
     });
 
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       { name: 'firstName', code: 'CANDIDATE_FIRST_NAME_MUST_BE_A_STRING' },
       { name: 'lastName', code: 'CANDIDATE_LAST_NAME_MUST_BE_A_STRING' },
@@ -475,6 +473,7 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
     context('compatibility core/complementary enable, should use new schema', function () {
       const cleaCertificationId = 123;
       const isCoreComplementaryCompatibilityEnabled = true;
+
       context('success cases', function () {
         it('should validate when there is only one core subscription', function () {
           // given
@@ -543,6 +542,7 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           // then
           expect(error).to.deepEqualInstanceOmitting(certificationCandidatesError, ['message', 'stack', 'meta']);
         });
+
         it('should not validate when there are two complementary', async function () {
           // given
           const candidate = domainBuilder.certification.enrolment.buildCandidate({
@@ -718,8 +718,6 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
         expect(error).to.deepEqualInstanceOmitting(certificationCandidatesError, ['message', 'stack']);
       });
 
-      // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-      // eslint-disable-next-line mocha/no-setup-in-describe
       ['FREE', 'PAID', 'PREPAID'].forEach((billingMode) => {
         it(`should not throw if billing mode is an expected value ${billingMode}`, async function () {
           // given
@@ -796,8 +794,6 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
       });
     });
 
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       { field: 'firstName', expectedCode: FIRST_NAME_ERROR_CODE },
       { field: 'lastName', expectedCode: LAST_NAME_ERROR_CODE },
@@ -993,8 +989,6 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
         });
 
         context('when billing mode is in the expected values', function () {
-          // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-          // eslint-disable-next-line mocha/no-setup-in-describe
           ['FREE', 'PAID', 'PREPAID'].forEach((billingMode) => {
             it(`should return nothing for ${billingMode}`, async function () {
               // given
@@ -1089,8 +1083,6 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
   });
 
   context('parseBillingMode', function () {
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       { value: 'Gratuite', expectedTranslation: 'FREE' },
       { value: 'Payante', expectedTranslation: 'PAID' },

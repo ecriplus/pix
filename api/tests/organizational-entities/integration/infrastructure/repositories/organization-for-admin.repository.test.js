@@ -429,6 +429,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           const previousDeletedCampaigns = await knex('campaigns').where({ archivedAt: previousDate });
           expect(previousDeletedCampaigns).to.have.lengthOf(1);
         });
+
         it('should delete organization learners', async function () {
           // given
           await featureToggles.set('isAnonymizationWithDeletionEnabled', true);
@@ -491,6 +492,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           expect(previousDeletedParticipations).to.have.lengthOf(1);
         });
       });
+
       it('should disable active members of a given organization', async function () {
         // given
         const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;

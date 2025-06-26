@@ -50,7 +50,6 @@ describe('Unit | Domain | Pix Junior | compute global result', function () {
       });
 
       context('with multiple step (first should be reached by design)', function () {
-        // eslint-disable-next-line mocha/no-setup-in-describe
         [Assessment.results.NOT_REACHED, Assessment.results.PARTIALLY_REACHED].forEach(function (status) {
           it(`should return ${Assessment.results.PARTIALLY_REACHED} if last step status is ${status}`, function () {
             const stepResults = [Assessment.results.REACHED, status];

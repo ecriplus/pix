@@ -20,6 +20,7 @@ describe('Acceptance | Route | target-profiles', function () {
   describe('POST /api/admin/target-profiles/{id}/badges', function () {
     context('Badge with capped tubes', function () {
       let user, targetProfileId;
+
       beforeEach(async function () {
         user = databaseBuilder.factory.buildUser.withRole();
         targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
@@ -167,6 +168,7 @@ describe('Acceptance | Route | target-profiles', function () {
         expect(response.statusCode).to.equal(422);
         expect(response.result).to.deep.equal(expectedError);
       });
+
       it('should not create a badge if capped tubes criterion level is not into target profile', async function () {
         const badgeCreation = {
           key: 'badge1',

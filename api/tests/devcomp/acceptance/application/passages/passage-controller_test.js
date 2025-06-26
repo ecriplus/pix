@@ -154,8 +154,6 @@ describe('Acceptance | Controller | passage-controller', function () {
         },
       ];
 
-      // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-      // eslint-disable-next-line mocha/no-setup-in-describe
       cases.forEach((testCase, i) =>
         it(`should return a valid ${testCase.case} element answer`, async function () {
           const passage = databaseBuilder.factory.buildPassage({ id: i + 1, moduleId: testCase.moduleId });
@@ -305,6 +303,7 @@ describe('Acceptance | Controller | passage-controller', function () {
         beforeEach(function () {
           return featureToggles.set('isEmbedLLMEnabled', false);
         });
+
         it('should throw a 503 status code', async function () {
           // when
           const response = await server.inject({
@@ -352,6 +351,7 @@ describe('Acceptance | Controller | passage-controller', function () {
         beforeEach(function () {
           return featureToggles.set('isEmbedLLMEnabled', false);
         });
+
         it('should throw a 503 status code', async function () {
           // when
           const response = await server.inject({

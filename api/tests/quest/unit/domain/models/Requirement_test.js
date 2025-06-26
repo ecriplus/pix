@@ -812,6 +812,7 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
           ],
         });
       });
+
       context(
         'when two skills exist for a tube and a difficulty compute fulfillement taking in account only most recent knowledge element',
         function () {

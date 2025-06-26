@@ -102,6 +102,7 @@ describe('Acceptance | Identity Access Management | Application | Route | passwo
       method: 'GET',
       url: null,
     };
+
     context('when temporaryKey is not valid', function () {
       it('replies with 401 status code', async function () {
         // given
@@ -114,6 +115,7 @@ describe('Acceptance | Identity Access Management | Application | Route | passwo
         expect(response.statusCode).to.equal(401);
       });
     });
+
     context('when temporaryKey is valid', function () {
       let temporaryKey;
 

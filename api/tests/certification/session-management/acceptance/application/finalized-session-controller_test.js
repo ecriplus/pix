@@ -34,6 +34,7 @@ describe('Certification | Session-management | Acceptance | Application | finali
 
       return databaseBuilder.commit();
     });
+
     context('When user is authorized', function () {
       beforeEach(function () {
         options.headers = generateAuthenticatedUserRequestHeaders();

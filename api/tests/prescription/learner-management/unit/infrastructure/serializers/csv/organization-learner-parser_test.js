@@ -29,7 +29,6 @@ describe('Unit | Infrastructure | OrganizationLearnerParser', function () {
       'Code sexe*',
     ];
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     fieldList.forEach((field) => {
       context(`when the ${field} column is missing`, function () {
         it('should throw an CsvImportError', async function () {
@@ -235,6 +234,7 @@ describe('Unit | Infrastructure | OrganizationLearnerParser', function () {
               status: 'AP',
             });
           });
+
           it('should throw a CsvImportError if national student id is missing', async function () {
             const input = `${organizationLearnerCsvColumns}
             ;Beatrix;The;Bride;Kiddo;Black Mamba;Féminin;01/01/1970;97422;;974;99100;AP;MEF1;Division 1;

@@ -219,6 +219,7 @@ describe('Integration | Repository | thematic-repository', function () {
           ]);
         });
       });
+
       it('should ignore nulls and duplicates', async function () {
         // when
         const thematics = await thematicRepository.findByRecordIds([

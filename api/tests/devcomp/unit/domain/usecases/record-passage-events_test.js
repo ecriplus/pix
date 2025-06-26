@@ -108,6 +108,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
         expect(passageEventRepositoryStub.record).to.not.have.been.called;
       });
     });
+
     context('when passageEvent is "passage_terminated"', function () {
       it('should not throw an error', async function () {
         // given
@@ -261,6 +262,7 @@ describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function 
         expect(error.message).to.equal('Wrong userId');
       });
     });
+
     context('when userId value in passage does not match connected user', function () {
       it('should throw an error', async function () {
         // given

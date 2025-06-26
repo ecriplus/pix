@@ -69,6 +69,7 @@ describe('Integration | Usecase | Complete Assessment', function () {
 
     context('when assessment is linked to a certification course', function () {
       let sessionId;
+
       beforeEach(async function () {
         databaseBuilder.factory.buildSession({}).id;
         userId = databaseBuilder.factory.buildUser().id;

@@ -48,7 +48,6 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
 
   describe('#validate', function () {
     context('when a status is given', function () {
-      // eslint-disable-next-line mocha/no-setup-in-describe
       forIn(AssessmentResult.status, (status, key) => {
         it(`should returns "${status}" status`, function () {
           // when

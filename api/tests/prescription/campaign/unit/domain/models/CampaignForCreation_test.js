@@ -5,7 +5,6 @@ import { catchErr, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | CampaignForCreation', function () {
   describe('#create', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [CampaignTypes.ASSESSMENT, CampaignTypes.EXAM].forEach((type) => {
       context(`when the campaign type is ${type}`, function () {
         context('when the every required field is present', function () {
@@ -29,6 +28,7 @@ describe('Unit | Domain | Models | CampaignForCreation', function () {
 
         context('when attributes are invalid', function () {
           let attributes;
+
           beforeEach(function () {
             attributes = {
               name: 'CampaignName',
@@ -188,6 +188,7 @@ describe('Unit | Domain | Models | CampaignForCreation', function () {
 
       context('when attributes are invalid', function () {
         let attributes;
+
         beforeEach(function () {
           attributes = {
             name: 'CampaignName',
@@ -308,6 +309,7 @@ describe('Unit | Domain | Models | CampaignForCreation', function () {
           expect(campaignForCreation.externalIdLabel).to.be.undefined;
           expect(campaignForCreation.externalIdType).to.be.undefined;
         });
+
         it('should save if both externalIdLabel and externalIdType are not provided', function () {
           const attributes = {
             name: 'CampaignName',
@@ -328,6 +330,7 @@ describe('Unit | Domain | Models | CampaignForCreation', function () {
           expect(campaignForCreation.externalIdType).to.be.undefined;
         });
       });
+
       context('when externalIdLabel is provided', function () {
         it('should throws if  externalIdType is empty', function () {
           const attributes = {
@@ -349,6 +352,7 @@ describe('Unit | Domain | Models | CampaignForCreation', function () {
             new CampaignForCreation(attributes);
           }).to.throw(EntityValidationError);
         });
+
         it('should throws if externalIdType is null', function () {
           const attributes = {
             name: 'CampaignName',

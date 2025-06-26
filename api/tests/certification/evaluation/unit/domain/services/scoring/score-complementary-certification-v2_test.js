@@ -31,6 +31,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
     certificationCourseRepository.get = sinon.stub();
     complementaryCertificationBadgesRepository.getAllWithSameTargetProfile = sinon.stub();
   });
+
   context('when there is a complementary referential', function () {
     it('should score the complementary certification', async function () {
       // given
@@ -98,7 +99,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
     });
 
     context('n-1 cases listing', function () {
-      /* eslint-disable mocha/no-setup-in-describe */
       const level1 = {
         minimumEarnedPix: 50,
         level: 1,
@@ -403,7 +403,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
           });
         },
       );
-      /* eslint-enable mocha/no-setup-in-describe */
     });
 
     context('scoring', function () {

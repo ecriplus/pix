@@ -25,8 +25,6 @@ describe('Certification | Enrolment | Unit | Domain | Models | SCO Certification
       });
     });
 
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
     ['firstName', 'lastName'].forEach((field) => {
       it(`should throw an error when field ${field} is not a string`, async function () {
         const error = await catchErr(buildSCOCertificationCandidate)({ ...validAttributes, [field]: 123 });
@@ -53,8 +51,6 @@ describe('Certification | Enrolment | Unit | Domain | Models | SCO Certification
       });
     });
 
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
     ['sex', 'birthINSEECode'].forEach((field) => {
       it(`should throw an error when field ${field} is not a string`, async function () {
         const error = await catchErr(buildSCOCertificationCandidate)({ ...validAttributes, [field]: 123 });
@@ -65,8 +61,6 @@ describe('Certification | Enrolment | Unit | Domain | Models | SCO Certification
       });
     });
 
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
     ['sessionId', 'organizationLearnerId'].forEach((field) => {
       it(`should throw an error when field ${field} is not a number`, async function () {
         const error = await catchErr(buildSCOCertificationCandidate)({ ...validAttributes, [field]: 'salut' });

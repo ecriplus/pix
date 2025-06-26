@@ -38,6 +38,7 @@ describe('Unit | Devcomp | Application | Passage-Events | Controller', function 
       });
       expect(code).to.have.been.calledOnce;
     });
+
     context('when recordPassageEvents usecase throws domain error', function () {
       it('should throw a "BadRequestError"', async function () {
         // given

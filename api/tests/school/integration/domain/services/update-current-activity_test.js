@@ -11,13 +11,11 @@ import * as learningContentBuilder from '../../../../tooling/learning-content-bu
 describe('Integration | UseCase | update current activity', function () {
   context('when activity level is tutorial', function () {
     context('when activity is not finished', function () {
-      // eslint-disable-next-line mocha/no-setup-in-describe
       [
-        // eslint-disable-next-line mocha/no-setup-in-describe
         { message: 'correctly answered', result: AnswerStatus.statuses.OK },
-        // eslint-disable-next-line mocha/no-setup-in-describe
+
         { message: 'wrongly answered', result: AnswerStatus.statuses.KO },
-        // eslint-disable-next-line mocha/no-setup-in-describe
+
         { message: 'skipped', result: AnswerStatus.statuses.SKIPPED },
       ].forEach(({ message, result }) =>
         it(`should not update current activity status when challenge is ${message}`, async function () {
@@ -68,13 +66,11 @@ describe('Integration | UseCase | update current activity', function () {
     });
 
     context('when activity is finished', function () {
-      // eslint-disable-next-line mocha/no-setup-in-describe
       [
-        // eslint-disable-next-line mocha/no-setup-in-describe
         { message: 'correctly answered', result: AnswerStatus.statuses.OK },
-        // eslint-disable-next-line mocha/no-setup-in-describe
+
         { message: 'wrongly answered', result: AnswerStatus.statuses.KO },
-        // eslint-disable-next-line mocha/no-setup-in-describe
+
         { message: 'skipped', result: AnswerStatus.statuses.SKIPPED },
       ].forEach(({ message, result }) =>
         it(`should update current activity with SUCCEEDED status when challenge is ${message}`, async function () {
@@ -131,6 +127,7 @@ describe('Integration | UseCase | update current activity', function () {
       );
     });
   });
+
   context('when activity level is not tutorial', function () {
     context('when last answer is ko', function () {
       it('should update current activity with FAILED status', async function () {
@@ -178,6 +175,7 @@ describe('Integration | UseCase | update current activity', function () {
         expect(currentActivity.status).equals(Activity.status.FAILED);
       });
     });
+
     context('when last answer is ok', function () {
       context('when activity is not finished', function () {
         it('should not update current activity status', async function () {
@@ -225,6 +223,7 @@ describe('Integration | UseCase | update current activity', function () {
           expect(currentActivity.status).equals(Activity.status.STARTED);
         });
       });
+
       context('when activity is not finished but has answer duplicate', function () {
         it('should not update current activity status', async function () {
           const { assessmentId, missionId } = databaseBuilder.factory.buildMissionAssessment();
@@ -332,6 +331,7 @@ describe('Integration | UseCase | update current activity', function () {
         });
       });
     });
+
     context('when challenge has been skipped', function () {
       it('should update current activity with SKIPPED status', async function () {
         const { assessmentId, missionId } = databaseBuilder.factory.buildMissionAssessment();

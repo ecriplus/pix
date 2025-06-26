@@ -4,6 +4,7 @@ import { LOCALE } from '../../../../../src/shared/domain/constants.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
 
 const { FRENCH_SPOKEN } = LOCALE;
+
 describe('Unit | Application | Controller | Campaign-Participation', function () {
   describe('#getAnonymisedCampaignAssessments', function () {
     const userId = '1';

@@ -228,6 +228,7 @@ describe('Integration | Infrastructure | Repository | sup-organization-learner-r
 
     context('When there is a matching organization learners with student number and birthdate', function () {
       let expectedOrganizationLearnerId;
+
       beforeEach(async function () {
         expectedOrganizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
           organizationId,

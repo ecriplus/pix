@@ -9,7 +9,6 @@ import { databaseBuilder, domainBuilder, expect } from '../../../../../test-help
 
 describe('Integration | Repository | Campaign', function () {
   describe('#areKnowledgeElementsResettable', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       { multipleSendings: true, areKnowledgeElementsResettable: true, expected: true },
       { multipleSendings: true, areKnowledgeElementsResettable: false, expected: false },

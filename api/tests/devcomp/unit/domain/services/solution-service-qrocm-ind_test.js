@@ -238,8 +238,7 @@ describe('Unit | Devcomp | Domain | Service | SolutionServiceQROCM-ind ', functi
         enabledTolerances: { '9lettres': ['t1', 't2', 't3'], '6lettres': ['t1', 't2', 't3'] },
       },
     ];
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
+
     successfulCases.forEach(function (testCase) {
       it(
         testCase.case +
@@ -319,8 +318,7 @@ describe('Unit | Devcomp | Domain | Service | SolutionServiceQROCM-ind ', functi
         enabledTolerances: { '9lettres': ['t1', 't2', 't3'], '6lettres': ['t1', 't2', 't3'] },
       },
     ];
-    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
+
     failingCases.forEach(function (testCase) {
       it(
         testCase.case +
@@ -460,7 +458,6 @@ describe('Unit | Devcomp | Domain | Service | SolutionServiceQROCM-ind ', functi
       },
     ];
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     allCases.forEach(function (testCase) {
       it(
         testCase.when +
@@ -574,7 +571,6 @@ describe('Unit | Devcomp | Domain | Service | SolutionServiceQROCM-ind ', functi
       },
     ];
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     allCases.forEach(function (testCase) {
       it(
         testCase.when +
@@ -688,7 +684,6 @@ describe('Unit | Devcomp | Domain | Service | SolutionServiceQROCM-ind ', functi
       },
     ];
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     allCases.forEach(function (testCase) {
       it(
         testCase.when +
@@ -802,7 +797,6 @@ describe('Unit | Devcomp | Domain | Service | SolutionServiceQROCM-ind ', functi
       },
     ];
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     allCases.forEach(function (testCase) {
       it(
         testCase.when +
@@ -916,7 +910,6 @@ describe('Unit | Devcomp | Domain | Service | SolutionServiceQROCM-ind ', functi
       },
     ];
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     allCases.forEach(function (testCase) {
       it(
         testCase.when +
@@ -1030,7 +1023,6 @@ describe('Unit | Devcomp | Domain | Service | SolutionServiceQROCM-ind ', functi
       },
     ];
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     allCases.forEach(function (testCase) {
       it(
         testCase.when +
@@ -1144,7 +1136,6 @@ describe('Unit | Devcomp | Domain | Service | SolutionServiceQROCM-ind ', functi
       },
     ];
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     allCases.forEach(function (testCase) {
       it(
         testCase.when +
@@ -1258,7 +1249,6 @@ describe('Unit | Devcomp | Domain | Service | SolutionServiceQROCM-ind ', functi
       },
     ];
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     allCases.forEach(function (testCase) {
       it(
         testCase.when +
@@ -1302,7 +1292,6 @@ describe('Unit | Devcomp | Domain | Service | SolutionServiceQROCM-ind ', functi
       },
     ];
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     allCases.forEach(function (testCase) {
       it(
         testCase.when +
@@ -1346,7 +1335,6 @@ describe('Unit | Devcomp | Domain | Service | SolutionServiceQROCM-ind ', functi
       },
     ];
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     allCases.forEach(function (testCase) {
       it(
         testCase.when +
@@ -1390,7 +1378,6 @@ describe('Unit | Devcomp | Domain | Service | SolutionServiceQROCM-ind ', functi
       },
     ];
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     allCases.forEach(function (testCase) {
       it(
         testCase.when +
@@ -1410,7 +1397,6 @@ describe('Unit | Devcomp | Domain | Service | SolutionServiceQROCM-ind ', functi
   });
 
   context('One of the qroc is a select qroc', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       {
         case: 'T3 does not work on select qroc but always on text qroc',

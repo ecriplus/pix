@@ -2052,6 +2052,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
 
         await databaseBuilder.commit();
       });
+
       it('should return the number of organizationLearners with userId', async function () {
         // when
         const result = await countByUserId(userId);

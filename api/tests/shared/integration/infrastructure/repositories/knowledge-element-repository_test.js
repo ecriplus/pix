@@ -139,6 +139,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
           expect(err.message).to.equal('Saving knowledge-elements for campaign of type undefined not implemented');
         });
       });
+
       context('when campaign is of type ASSESSMENT', function () {
         it('should save all the knowledgeElements in table "knowledge-elements"', async function () {
           // given
@@ -165,6 +166,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
           );
         });
       });
+
       context('when campaign is of type EXAM', function () {
         let clock;
 
@@ -175,6 +177,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
         afterEach(function () {
           clock.restore();
         });
+
         context('when a snapshot for this participation already exists', function () {
           it('should save the knowledge elements through an updated snapshot', async function () {
             // given
@@ -251,6 +254,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
             );
           });
         });
+
         context('when there is no snapshot for this participation', function () {
           it('should save the knowledge elements through a new snapshot', async function () {
             // given
@@ -802,6 +806,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
           expect(res).to.deep.equal([domainKE2, domainKE1]);
         });
       });
+
       context('when no limit date is provided', function () {
         it('should return the Knowledge Elements of the user regardless of date', async function () {
           // given
@@ -896,6 +901,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
           expect(res).to.deep.equal([domainKE2, domainKE1]);
         });
       });
+
       context('when no limit date is provided', function () {
         it('should return the Knowledge Elements of the user regardless of date', async function () {
           // given
@@ -1091,6 +1097,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
 
     context('KE selection', function () {
       let assessmentId, campaignParticipationId, answerId, userId;
+
       beforeEach(async function () {
         userId = databaseBuilder.factory.buildUser().id;
         const campaignId = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.ASSESSMENT }).id;

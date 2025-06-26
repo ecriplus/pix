@@ -45,7 +45,6 @@ describe('Certification | Session Management | Unit | Application | Routes | Cer
       expect(response.statusCode).to.equal(403);
     });
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       {
         condition: 'session ID params is not a number',

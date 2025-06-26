@@ -22,8 +22,6 @@ describe('Acceptance | API | Pole Emploi envois', function () {
   });
 
   describe('GET /api/pole-emploi/envois', function () {
-    // TODO: Fix this the next time the file is edited.
-    // eslint-disable-next-line mocha/no-setup-in-describe
     const originalEnv = settings.apiManager.url;
 
     before(function () {

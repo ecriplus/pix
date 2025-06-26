@@ -329,7 +329,6 @@ describe('Unit | Application | Sessions | Routes', function () {
   });
 
   describe('id validation', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       {
         condition: 'session ID params is not a number',

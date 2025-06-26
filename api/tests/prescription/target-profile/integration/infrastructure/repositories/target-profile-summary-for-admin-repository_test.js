@@ -149,6 +149,7 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
 
     context('when passing a filter', function () {
       let disciplineTargetProfile, otherTargetProfile, backToSchoolTargetProfile;
+
       beforeEach(function () {
         disciplineTargetProfile = {
           id: 1,
@@ -177,6 +178,7 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
         );
         return databaseBuilder.commit();
       });
+
       context('internalName filter', function () {
         it('should return only target profiles matching "internalName" discipline in filter', async function () {
           // given
@@ -194,6 +196,7 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
           expect(actualTargetProfileSummaries).to.deep.include(disciplineTargetProfile);
         });
       });
+
       context('id filter', function () {
         it('should return only target profiles with exact match ID', async function () {
           // given
@@ -211,6 +214,7 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
           expect(actualTargetProfileSummaries).to.deep.includes(disciplineTargetProfile);
         });
       });
+
       context('category filter', function () {
         it('should return only target profiles with matching category discipline', async function () {
           // given
@@ -244,6 +248,7 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
           // then
           expect(actualTargetProfileSummaries).to.have.lengthOf(0);
         });
+
         it('should return all result when categories is falsy', async function () {
           // given
           const filter = { categories: null };
@@ -259,6 +264,7 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
           expect(actualTargetProfileSummaries).to.have.lengthOf(3);
         });
       });
+
       context('no match', function () {
         it('should return an empty array when no records match the filter', async function () {
           // given

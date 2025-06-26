@@ -18,6 +18,7 @@ describe('Acceptance | Route | Certification Courses', function () {
   describe('POST /api/certification-courses', function () {
     context('when the certification course does not exist', function () {
       let learningContent;
+
       beforeEach(async function () {
         learningContent = [
           {
@@ -216,6 +217,7 @@ describe('Acceptance | Route | Certification Courses', function () {
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
         await mockLearningContent(learningContentObjects);
       });
+
       it('should create a certification course in database', async function () {
         // given
 

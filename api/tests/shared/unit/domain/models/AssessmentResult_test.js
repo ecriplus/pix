@@ -38,7 +38,6 @@ describe('Unit | Domain | Models | AssessmentResult', function () {
       expect(isValidated).to.be.true;
     });
 
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [AssessmentResult.status.CANCELLED, AssessmentResult.status.REJECTED, AssessmentResult.status.ERROR].forEach(
       (assessmentResultStatus) => {
         it(`should return false if the assessment result is ${assessmentResultStatus}`, function () {

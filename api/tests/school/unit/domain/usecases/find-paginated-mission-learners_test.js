@@ -33,6 +33,7 @@ describe('Unit | Domain | Use Cases | find-paginated-mission-learners', function
       expect(filteredMissionLearners).to.deep.equals([completedMissionAssessement]);
     });
   });
+
   context('filterByGlobalResult', function () {
     it('with empty mission learners, returns empty filtered array', function () {
       const filterGlobalResults = [];
@@ -59,6 +60,7 @@ describe('Unit | Domain | Use Cases | find-paginated-mission-learners', function
 
       expect(filteredMissionLearners).to.deep.equals([missionLearnerExceeded]);
     });
+
     it('mission learner should be filter when they have no result', function () {
       const missionLearnerGlobalReached = new MissionLearner({
         result: { global: 'reached' },

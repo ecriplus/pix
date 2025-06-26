@@ -24,6 +24,7 @@ describe('Unit | Domain | School', function () {
         ]);
       });
     });
+
     context('when there are students with same first names', function () {
       context('and the same division', function () {
         const tests = [
@@ -38,7 +39,6 @@ describe('Unit | Domain | School', function () {
           { lastNames: ['Abricotier', 'AbriCoteur'], expectedLastNameLetters: ['Abricoti.', 'AbriCote.'] },
         ];
 
-        // eslint-disable-next-line mocha/no-setup-in-describe
         tests.forEach(function ({ lastNames, expectedLastNameLetters }) {
           it(`for last names: [${lastNames}] should return display names: first name + [${expectedLastNameLetters}]`, async function () {
             // given
@@ -84,6 +84,7 @@ describe('Unit | Domain | School', function () {
           });
         });
       });
+
       context('but different divisions', function () {
         it('should return the learners with their first names as display names', async function () {
           // given

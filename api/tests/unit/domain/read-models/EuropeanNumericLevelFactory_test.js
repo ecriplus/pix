@@ -4,7 +4,6 @@ import { expect } from '../../../test-helper.js';
 
 describe('Unit | Domain | Read-models | EuropeanNumericLevelFactory', function () {
   describe('static #buildFromCompetenceMarks', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     ['2.2', '3.4', '4.1', '4.2', '5.1', '5.2'].forEach((competenceCode) => {
       it(`should build an EuropeanNumericLevel with for competence '${competenceCode}'`, function () {
         // given

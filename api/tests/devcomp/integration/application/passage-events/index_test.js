@@ -18,6 +18,7 @@ describe('Integration | Devcomp | Application | Module | Router | passage-events
         expect(response.statusCode).to.equal(400);
       });
     });
+
     context('when payload does not pass validation', function () {
       it('should return a 400 HTTP code error', async function () {
         // given

@@ -114,6 +114,7 @@ describe('Certification | Session Management | Unit | Application | Controller |
         // then
         expect(response).to.deep.equal(serializedFinalizedSessions);
       });
+
       context('When filtering on version number', function () {
         it('should find finalized sessions with required action', async function () {
           // given

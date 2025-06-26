@@ -36,6 +36,7 @@ describe('Integration | UseCase | find-user-anonymised-campaign-assessments', fu
       expect(result).to.be.empty;
     });
   });
+
   context('when there is anonymised participation', function () {
     it('should return results', async function () {
       // given

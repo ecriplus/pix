@@ -76,6 +76,7 @@ describe('Unit | Organizational Entities | Domain | Model | Organization', funct
         });
       },
     );
+
     context("when organization has not an 'identityProviderForCampaigns' field with Gar value", function () {
       it('returns false', function () {
         // given

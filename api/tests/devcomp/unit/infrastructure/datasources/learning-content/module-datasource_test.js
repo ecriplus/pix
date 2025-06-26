@@ -55,8 +55,6 @@ describe('Unit | Infrastructure | Datasources | Learning Content | ModuleDatasou
 
   describe('#list', function () {
     describe('modules content', function () {
-      // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-      // eslint-disable-next-line mocha/no-setup-in-describe
       modules.forEach((module) => {
         it(`module "${module.slug}" should contain a valid structure`, async function () {
           // We need to increase the timeout because the validation can be slow for large modules

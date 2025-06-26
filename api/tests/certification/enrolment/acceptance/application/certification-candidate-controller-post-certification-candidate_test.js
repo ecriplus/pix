@@ -42,6 +42,7 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
 
       return databaseBuilder.commit();
     });
+
     context('before compatibility', function () {
       let options;
       let payload;

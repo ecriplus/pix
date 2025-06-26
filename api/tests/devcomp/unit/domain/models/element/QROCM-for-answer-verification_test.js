@@ -460,7 +460,7 @@ describe('Unit | Devcomp | Domain | Models | Element | QrocMForAnswerVerificatio
           userResponse: undefined,
         },
       ];
-      // eslint-disable-next-line mocha/no-setup-in-describe
+
       cases.forEach((testCase) => {
         it(`${testCase.case}, should throw error`, function () {
           // given

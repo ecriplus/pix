@@ -32,6 +32,7 @@ describe('Integration | UseCase | find-campaign-profiles-collection-participatio
 
       await databaseBuilder.commit();
     });
+
     it('returns the list filtered by the search', async function () {
       const { data } = await usecases.findCampaignProfilesCollectionParticipationSummaries({
         userId,

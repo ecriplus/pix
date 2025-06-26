@@ -329,6 +329,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           expect(pagination).to.deep.equal(expectedPagination);
         });
       });
+
       context('when default/contains request type is settled', function () {
         context('when there are multiple users matching the same "first name" search pattern', function () {
           beforeEach(function () {
@@ -561,6 +562,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           },
         );
       });
+
       context('when exact search is required', function () {
         beforeEach(function () {
           databaseBuilder.factory.buildUser({ firstName: 'Son Gohan' });
@@ -570,6 +572,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           databaseBuilder.factory.buildUser({ firstName: 'Piccolo' });
           return databaseBuilder.commit();
         });
+
         it('returns only exact "first name" matching if given in filter', async function () {
           // given
           const filter = { firstName: 'Son Gohan' };
@@ -585,6 +588,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           // then
           expect(map(matchingUsers, 'firstName')).to.have.members(['Son Gohan']);
         });
+
         it('returns no matching if matching is fuzzy', async function () {
           // given
           const filter = { firstName: 'Go' };

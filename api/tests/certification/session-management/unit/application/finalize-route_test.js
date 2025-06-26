@@ -5,7 +5,6 @@ import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Unit | Application | Routes | Finalize', function () {
   describe('PUT /api/sessions/{sessionId}/finalization', function () {
-    // eslint-disable-next-line mocha/no-setup-in-describe
     [
       {
         condition: 'session ID params is not a number',

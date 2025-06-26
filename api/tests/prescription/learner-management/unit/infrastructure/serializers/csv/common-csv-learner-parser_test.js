@@ -77,6 +77,7 @@ describe('Unit | Infrastructure | CommonCsvLearnerParser', function () {
       // then
       expect(call).to.not.throw();
     });
+
     it('should not throw an error if encoding is included in multiple supported encoding', async function () {
       // given
       const encodedInput = iconv.encode(input, 'utf8');
@@ -148,6 +149,7 @@ describe('Unit | Infrastructure | CommonCsvLearnerParser', function () {
         // then
         expect(error[0].code).to.equal('BAD_CSV_FORMAT');
       });
+
       it('should throw an error if the is less columns than headers', async function () {
         // given
         const input = `nom;GodZilla;prénom
@@ -204,6 +206,7 @@ describe('Unit | Infrastructure | CommonCsvLearnerParser', function () {
   context('when the header is correctly formed', function () {
     context('when there are lines', function () {
       let importFormat;
+
       beforeEach(function () {
         importFormat = {
           config: {

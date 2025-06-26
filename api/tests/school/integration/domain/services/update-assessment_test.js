@@ -134,7 +134,6 @@ describe('Integration | Usecase | update-assessment', function () {
         expect(missionAssessment.result.global).to.deep.equal(Assessment.results.EXCEEDED);
       });
 
-      // eslint-disable-next-line mocha/no-setup-in-describe
       [(Activity.status.SUCCEEDED, Activity.status.FAILED, Activity.status.SKIPPED)].forEach((terminatedStatus) =>
         it(`should complete assessment when last activity status is ${terminatedStatus}`, async function () {
           const { assessmentId } = databaseBuilder.factory.buildMissionAssessment();
@@ -281,6 +280,7 @@ describe('Integration | Usecase | update-assessment', function () {
             expect(missionAssessment.result).to.be.null;
           });
         });
+
         context('when current step is after first step', function () {
           it('should not update mission assessment result', async function () {
             const missionAssessmentResult = { steps: [Assessment.results.REACHED] };

@@ -73,7 +73,6 @@ describe('Unit | Scripts | import-certification-cpf-cities.js', function () {
       });
 
       context('#when there is a word to replace in the city alternate name', function () {
-        // eslint-disable-next-line mocha/no-setup-in-describe
         [
           {
             cityName: 'DUNKERQUE',
@@ -152,7 +151,6 @@ describe('Unit | Scripts | import-certification-cpf-cities.js', function () {
       });
 
       context('#when there is a word to replace in the city name', function () {
-        // eslint-disable-next-line mocha/no-setup-in-describe
         [
           { cityName: 'STE CECILE', expectedCityName: 'SAINTE CECILE' },
           { cityName: 'ST NAZAIRE', expectedCityName: 'SAINT NAZAIRE' },
