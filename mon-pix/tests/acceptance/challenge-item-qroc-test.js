@@ -2,6 +2,7 @@ import { visit } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
 import { click, currentURL, fillIn, find, findAll, triggerEvent } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
@@ -18,14 +19,16 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
     });
 
     module('When challenge is an auto validated embed (autoReply=true)', function (hooks) {
+      let screen;
+
       hooks.beforeEach(async function () {
         // given
         this.server.create('challenge', 'forCompetenceEvaluation', 'QROC', 'withAutoReply', 'withEmbed');
         this.server.create('challenge', 'forCompetenceEvaluation', 'QROC', 'withAutoReply', 'withEmbed');
 
         // when
-        await visit(`/assessments/${assessment.id}/challenges/0`);
-        await click('.challenge-actions__action-skip-text');
+        screen = await visit(`/assessments/${assessment.id}/challenges/0`);
+        await click(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')));
       });
 
       test('should render challenge information and question', function (assert) {
@@ -36,7 +39,7 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
       test('should display the alert box when user validates without successfully finishing the embed', async function (assert) {
         // when
         assert.dom('.challenge-response__alert').doesNotExist();
-        await click(find('.challenge-actions__action-validate'));
+        await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
 
         // then
         assert.dom('.challenge-response__alert[role="alert"]').exists();
@@ -55,19 +58,21 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
         find('.embed__iframe').dispatchEvent(event);
 
         // then
-        await click('.challenge-actions__action-validate');
+        await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
         assert.ok(currentURL().includes(`/assessments/${assessment.id}/challenges/2`));
       });
     });
 
     module('When challenge is an embed (without autoreply)', function (hooks) {
+      let screen;
+
       hooks.beforeEach(async function () {
         // given
         this.server.create('challenge', 'forCompetenceEvaluation', 'QROC', 'withEmbed');
 
         // when
-        await visit(`/assessments/${assessment.id}/challenges/0`);
-        await click('.challenge-actions__action-skip-text');
+        screen = await visit(`/assessments/${assessment.id}/challenges/0`);
+        await click(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')));
       });
 
       test('should display the alert box when user validates without successfully answering', async function (assert) {
@@ -79,7 +84,7 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
         find('.embed__iframe').dispatchEvent(event);
 
         // then
-        await click('.challenge-actions__action-validate');
+        await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
         assert.strictEqual(
           find('.challenge-response__alert').textContent.trim(),
           'Pour valider, veuillez remplir le champ texte. Sinon, passez.',
@@ -107,7 +112,7 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
         // when
         await fillIn('input[data-uid="qroc-proposal-uid"]', '');
         assert.dom('.challenge-response__alert').doesNotExist();
-        await click(find('.challenge-actions__action-validate'));
+        await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
 
         // then
         assert.dom('.challenge-response__alert[role="alert"]').exists();
@@ -119,7 +124,7 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
 
       test('should hide the alert error after the user interact with input text', async function (assert) {
         // given
-        await click('.challenge-actions__action-validate');
+        await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
 
         // when
         await triggerEvent('input', 'keyup');
@@ -132,7 +137,7 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
       test('should go to checkpoint when user validated', async function (assert) {
         // when
         await fillIn('input[data-uid="qroc-proposal-uid"]', 'Test');
-        await click('.challenge-actions__action-validate');
+        await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
 
         // then
         assert.ok(currentURL().includes(`/assessments/${assessment.id}/checkpoint`));
@@ -140,6 +145,8 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
     });
 
     module('When challenge is already answered', function (hooks) {
+      let screen;
+
       hooks.beforeEach(async function () {
         // given
         this.server.create('answer', {
@@ -150,15 +157,16 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
         });
 
         // when
-        await visit(`/assessments/${assessment.id}/challenges/0`);
+        screen = await visit(`/assessments/${assessment.id}/challenges/0`);
       });
 
       test('should set the input value with the current answer and propose to continue', async function (assert) {
         // then
         assert.strictEqual(find('.challenge-response__proposal').value, 'Reponse');
-        assert.dom('.challenge-actions__action-continue').exists();
-        assert.dom('.challenge-actions__action-validate').doesNotExist();
-        assert.dom('.challenge-actions__action-skip-text').doesNotExist();
+
+        assert.ok(screen.queryByRole('button', { name: t('pages.challenge.actions.continue') }));
+        assert.dom(screen.queryByLabelText(t('pages.challenge.actions.skip-go-to-next'))).doesNotExist();
+        assert.dom(screen.queryByLabelText(t('pages.challenge.actions.validate-go-to-next'))).doesNotExist();
       });
     });
 
@@ -284,7 +292,7 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
         // when
         await fillIn('textarea[data-uid="qroc-proposal-uid"]', '');
         assert.dom('.challenge-response__alert').doesNotExist();
-        await click(find('.challenge-actions__action-validate'));
+        await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
 
         // then
         assert.dom('.challenge-response__alert[role="alert"]').exists();
@@ -296,7 +304,7 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
 
       test('should hide the alert error after the user interact with input text', async function (assert) {
         // given
-        await click('.challenge-actions__action-validate');
+        await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
 
         // when
         await triggerEvent('textarea', 'keyup');
@@ -309,7 +317,7 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
       test('should go to checkpoint when user validated', async function (assert) {
         // when
         await fillIn('textarea[data-uid="qroc-proposal-uid"]', 'Test');
-        await click('.challenge-actions__action-validate');
+        await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
 
         // then
         assert.ok(currentURL().includes(`/assessments/${assessment.id}/checkpoint`));
@@ -396,7 +404,7 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
       test('should allow selecting a value', async function (assert) {
         // given
         const screen = await visit(`/assessments/${assessment.id}/challenges/0`);
-        await click('.challenge-actions__action-validate');
+        await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
 
         // when
         await click(screen.getByRole('button', { name: /Select:/ }));
@@ -410,7 +418,7 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
       test('should hide the alert error after the user interact with input text', async function (assert) {
         // given
         const screen = await visit(`/assessments/${assessment.id}/challenges/0`);
-        await click('.challenge-actions__action-validate');
+        await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
         assert.dom('.challenge-response__alert[role="alert"]').exists();
 
         // when
@@ -431,7 +439,7 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
         await screen.findByRole('listbox');
         await click(screen.getByRole('option', { name: 'mango' }));
 
-        await click('.challenge-actions__action-validate');
+        await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
 
         // then
         assert.ok(currentURL().includes(`/assessments/${assessment.id}/checkpoint`));

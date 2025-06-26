@@ -49,7 +49,7 @@ module('Acceptance | Displaying a QROCM challenge', function (hooks) {
         await fillIn(findAll('input')[0], 'ANSWER');
         await fillIn(findAll('input')[1], '');
 
-        await click(find('.challenge-actions__action-validate'));
+        await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
 
         assert.dom('.challenge-response__alert[role="alert"]').exists();
         assert.strictEqual(
@@ -60,7 +60,7 @@ module('Acceptance | Displaying a QROCM challenge', function (hooks) {
 
       test('should hide the alert error after the user interact with input text', async function (assert) {
         // given
-        await click('.challenge-actions__action-validate');
+        await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
 
         // when
         await triggerEvent('input', 'keydown');
@@ -75,7 +75,7 @@ module('Acceptance | Displaying a QROCM challenge', function (hooks) {
         // when
         await fillIn(findAll('input')[0], 'ANSWER');
         await fillIn(findAll('input')[1], 'ANSWER');
-        await click('.challenge-actions__action-validate');
+        await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
 
         // then
         assert.ok(currentURL().includes(`/assessments/${assessment.id}/checkpoint`));
@@ -86,10 +86,10 @@ module('Acceptance | Displaying a QROCM challenge', function (hooks) {
       test('should not be able to validate with the initial option', async function (assert) {
         // given
         server.create('challenge', 'forCompetenceEvaluation', 'QROCMWithSelect');
-        await visit(`/assessments/${assessment.id}/challenges/0`);
+        const screen = await visit(`/assessments/${assessment.id}/challenges/0`);
 
         // when
-        await click(find('.challenge-actions__action-validate'));
+        await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
 
         // then
         assert.dom('.challenge-response__alert[role="alert"]').exists();
@@ -104,7 +104,7 @@ module('Acceptance | Displaying a QROCM challenge', function (hooks) {
         // when
         await clickByName('saladAriaLabel');
         await screen.findByRole('listbox');
-        await click(find('.challenge-actions__action-validate'));
+        await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
 
         // then
         assert.dom('.challenge-response__alert[role="alert"]').exists();
@@ -120,7 +120,7 @@ module('Acceptance | Displaying a QROCM challenge', function (hooks) {
         await clickByName('saladAriaLabel');
         await screen.findByRole('listbox');
         await click(screen.getByRole('option', { name: 'potato' }));
-        await click(find('.challenge-actions__action-validate'));
+        await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
 
         // then
         assert.ok(currentURL().includes(`/assessments/${assessment.id}/checkpoint`));
@@ -156,8 +156,8 @@ module('Acceptance | Displaying a QROCM challenge', function (hooks) {
         assert.true(input2.disabled);
 
         assert.ok(screen.getByRole('button', { name: t('pages.challenge.actions.continue') }));
-        assert.dom('.challenge-actions__action-validate').doesNotExist();
-        assert.dom('.challenge-actions__action-skip-text').doesNotExist();
+        assert.dom(screen.queryByLabelText(t('pages.challenge.actions.validate-go-to-next'))).doesNotExist();
+        assert.dom(screen.queryByLabelText(t('pages.challenge.actions.skip-go-to-next'))).doesNotExist();
       });
     });
 
@@ -179,8 +179,8 @@ module('Acceptance | Displaying a QROCM challenge', function (hooks) {
         assert.strictEqual(screen.getByLabelText('saladAriaLabel').innerText, 'mango');
 
         assert.dom('.challenge-actions__action-continue').exists();
-        assert.dom('.challenge-actions__action-validate').doesNotExist();
-        assert.dom('.challenge-actions__action-skip-text').doesNotExist();
+        assert.dom(screen.queryByLabelText(t('pages.challenge.actions.validate-go-to-next'))).doesNotExist();
+        assert.dom(screen.queryByLabelText(t('pages.challenge.actions.skip-go-to-next'))).doesNotExist();
       });
     });
   });

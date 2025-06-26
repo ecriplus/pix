@@ -2,6 +2,7 @@ import { visit } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
 import { click, find } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
@@ -87,13 +88,14 @@ module('Acceptance | Timed challenge', function (hooks) {
     });
 
     module('when the challenge is already timeout', function (hooks) {
+      let screen;
       hooks.beforeEach(async function () {
         // given
         assessment = server.create('assessment', 'ofCompetenceEvaluationType', 'withCurrentChallengeTimeout');
         timedChallenge = server.create('challenge', 'forCompetenceEvaluation', 'timed');
 
         // when
-        await visit(`/assessments/${assessment.id}/challenges/0`);
+        screen = await visit(`/assessments/${assessment.id}/challenges/0`);
       });
 
       test('should hide the warning button', function (assert) {
@@ -111,7 +113,7 @@ module('Acceptance | Timed challenge', function (hooks) {
 
       test('should only display continue button', function (assert) {
         assert.dom('.challenge-actions__action-skip').doesNotExist();
-        assert.dom('.challenge-actions__action-validate').doesNotExist();
+        assert.dom(screen.queryByLabelText(t('pages.challenge.actions.validate-go-to-next'))).doesNotExist();
         assert.dom('.challenge-actions__action-continue').exists();
       });
     });

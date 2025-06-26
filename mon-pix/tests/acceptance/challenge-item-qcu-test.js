@@ -46,7 +46,7 @@ module('Acceptance | Displaying a QCU challenge', function (hooks) {
 
     test('should display the alert box if user validates without checking a radio button', async function (assert) {
       // when
-      await click('.challenge-actions__action-validate');
+      await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
 
       // then
       assert.dom('.challenge-response__alert[role="alert"]').exists();
@@ -58,7 +58,7 @@ module('Acceptance | Displaying a QCU challenge', function (hooks) {
 
     test('should hide the alert error after the user interact with radio button', async function (assert) {
       // given
-      await click('.challenge-actions__action-validate');
+      await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
 
       // when
       await click(screen.getByRole('radio', { name: '2eme possibilite' }));
@@ -78,6 +78,7 @@ module('Acceptance | Displaying a QCU challenge', function (hooks) {
   });
 
   module('When challenge is already answered', function (hooks) {
+    let screen;
     hooks.beforeEach(async function () {
       // given
       server.create('answer', {
@@ -88,7 +89,7 @@ module('Acceptance | Displaying a QCU challenge', function (hooks) {
       });
 
       // when
-      await visit(`/assessments/${assessment.id}/challenges/0`);
+      screen = await visit(`/assessments/${assessment.id}/challenges/0`);
     });
 
     test('should mark radio button corresponding to the answer and propose to continue', async function (assert) {
@@ -103,9 +104,9 @@ module('Acceptance | Displaying a QCU challenge', function (hooks) {
       assert.false(radioButtons[3].checked);
       assert.true(radioButtons[3].disabled);
 
-      assert.dom('.challenge-actions__action-continue').exists();
-      assert.dom('.challenge-actions__action-validate').doesNotExist();
-      assert.dom('.challenge-actions__action-skip-text').doesNotExist();
+      assert.ok(screen.getByRole('button', { name: t('pages.challenge.actions.continue') }));
+      assert.notOk(screen.queryByLabelText(t('pages.challenge.actions.skip-go-to-next')));
+      assert.notOk(screen.queryByLabelText(t('pages.challenge.actions.validate-go-to-next')));
     });
   });
 

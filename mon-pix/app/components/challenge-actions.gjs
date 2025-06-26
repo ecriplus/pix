@@ -26,7 +26,7 @@ export default class ChallengeActions extends Component {
           @variant="primary"
           class="challenge-actions__action-continue"
         >
-          <span class="challenge-actions__action-continue-text">{{t "pages.challenge.actions.continue"}}</span>
+          {{t "pages.challenge.actions.continue"}}
         </PixButton>
 
       {{else if @hasChallengeTimedOut}}
@@ -45,9 +45,7 @@ export default class ChallengeActions extends Component {
           class="challenge-actions__action-continue"
           aria-label={{t "pages.challenge.actions.continue-go-to-next"}}
         >
-          <span class="challenge-actions__action-continue-text">
-            {{t "pages.challenge.actions.continue"}}
-          </span>
+          {{t "pages.challenge.actions.continue"}}
         </PixButton>
 
       {{else}}
@@ -101,9 +99,7 @@ export default class ChallengeActions extends Component {
               class="challenge-actions__action-validate"
               aria-label={{t "pages.challenge.actions.validate-go-to-next"}}
             >
-              <span class="challenge-actions__action-validate-text">
-                {{t "pages.challenge.actions.validate"}}
-              </span>
+              {{t "pages.challenge.actions.validate"}}
             </PixButton>
 
             <PixButton
@@ -115,9 +111,7 @@ export default class ChallengeActions extends Component {
               class="challenge-actions__action-skip"
               aria-label={{t "pages.challenge.actions.skip-go-to-next"}}
             >
-              <span class="challenge-actions__action-skip-text">
-                {{t "pages.challenge.actions.skip"}}
-              </span>
+              {{t "pages.challenge.actions.skip"}}
             </PixButton>
           </div>
           {{#if this.hasCurrentOngoingLiveAlert}}

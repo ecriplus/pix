@@ -2,6 +2,7 @@ import { visit } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
 import { click, find } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
@@ -42,8 +43,8 @@ module('Acceptance | Download an attachment from a challenge', function (hooks) 
 
   module('When the challenge does not contain an attachment', function (hooks) {
     hooks.beforeEach(async function () {
-      await visit(`/assessments/${assessment.id}/challenges/0`);
-      await click('.challenge-actions__action-skip-text');
+      const screen = await visit(`/assessments/${assessment.id}/challenges/0`);
+      await click(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')));
     });
 
     test('should hide the download section for the attachment', function (assert) {
