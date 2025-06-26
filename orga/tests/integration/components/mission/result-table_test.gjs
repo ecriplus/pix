@@ -1,4 +1,4 @@
-import { render, within, getByText } from '@1024pix/ember-testing-library';
+import { getByText, render, within } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
 import ResultTable from 'pix-orga/components/mission/result-table';
 import { module, test } from 'qunit';
