@@ -57,4 +57,144 @@ module('Integration | Component | administration/update-campaign-code', function
     );
     assert.true(notificationService.sendErrorNotification.notCalled);
   });
+
+  test('should show error notification when campaign code format is invalid', async function (assert) {
+    // given
+    const campaignId = '123';
+    const campaignCode = 'INVALID@CODE';
+
+    updateAdapterStub.withArgs({ campaignId, campaignCode }).throws({ errors: [{ code: 'CAMPAIGN_CODE_BAD_FORMAT' }] });
+
+    // when
+    const screen = await render(<template><UpdateCampaignCode /></template>);
+
+    await fillIn(
+      screen.getByLabelText(t('components.administration.update-campaign-code.form.campaignId')),
+      campaignId,
+    );
+    await fillIn(
+      screen.getByLabelText(t('components.administration.update-campaign-code.form.campaignCode')),
+      campaignCode,
+    );
+
+    await click(
+      screen.getByRole('button', {
+        name: t('components.administration.update-campaign-code.form.button'),
+      }),
+    );
+
+    // then
+    assert.true(updateAdapterStub.calledOnce);
+    assert.true(
+      notificationService.sendErrorNotification.calledOnceWithExactly({
+        message: t('components.administration.update-campaign-code.notifications.error.campaign-code-format'),
+      }),
+    );
+    assert.true(notificationService.sendSuccessNotification.notCalled);
+  });
+
+  test('should show error notification when campaign code is not unique', async function (assert) {
+    // given
+    const campaignId = '123';
+    const campaignCode = 'EXISTING';
+
+    updateAdapterStub.withArgs({ campaignId, campaignCode }).throws({ errors: [{ code: 'CAMPAIGN_CODE_NOT_UNIQUE' }] });
+
+    // when
+    const screen = await render(<template><UpdateCampaignCode /></template>);
+
+    await fillIn(
+      screen.getByLabelText(t('components.administration.update-campaign-code.form.campaignId')),
+      campaignId,
+    );
+    await fillIn(
+      screen.getByLabelText(t('components.administration.update-campaign-code.form.campaignCode')),
+      campaignCode,
+    );
+
+    await click(
+      screen.getByRole('button', {
+        name: t('components.administration.update-campaign-code.form.button'),
+      }),
+    );
+
+    // then
+    assert.true(updateAdapterStub.calledOnce);
+    assert.true(
+      notificationService.sendErrorNotification.calledOnceWithExactly({
+        message: t('components.administration.update-campaign-code.notifications.error.unique-code-error'),
+      }),
+    );
+    assert.true(notificationService.sendSuccessNotification.notCalled);
+  });
+
+  test('should show error notification when campaign ID is unknown', async function (assert) {
+    // given
+    const campaignId = '999';
+    const campaignCode = 'XYZ';
+
+    updateAdapterStub.withArgs({ campaignId, campaignCode }).throws({ errors: [{ code: 'UNKNOWN_CAMPAIGN_ID' }] });
+
+    // when
+    const screen = await render(<template><UpdateCampaignCode /></template>);
+
+    await fillIn(
+      screen.getByLabelText(t('components.administration.update-campaign-code.form.campaignId')),
+      campaignId,
+    );
+    await fillIn(
+      screen.getByLabelText(t('components.administration.update-campaign-code.form.campaignCode')),
+      campaignCode,
+    );
+
+    await click(
+      screen.getByRole('button', {
+        name: t('components.administration.update-campaign-code.form.button'),
+      }),
+    );
+
+    // then
+    assert.true(updateAdapterStub.calledOnce);
+    assert.true(
+      notificationService.sendErrorNotification.calledOnceWithExactly({
+        message: t('components.administration.update-campaign-code.notifications.error.campaign-id-error'),
+      }),
+    );
+    assert.true(notificationService.sendSuccessNotification.notCalled);
+  });
+
+  test('should show generic error notification for unknown errors', async function (assert) {
+    // given
+    const campaignId = '123';
+    const campaignCode = 'XYZ';
+
+    updateAdapterStub.withArgs({ campaignId, campaignCode }).throws({ errors: [{ code: 'UNKNOWN_ERROR' }] });
+
+    // when
+    const screen = await render(<template><UpdateCampaignCode /></template>);
+
+    await fillIn(
+      screen.getByLabelText(t('components.administration.update-campaign-code.form.campaignId')),
+      campaignId,
+    );
+    await fillIn(
+      screen.getByLabelText(t('components.administration.update-campaign-code.form.campaignCode')),
+      campaignCode,
+    );
+
+    await click(
+      screen.getByRole('button', {
+        name: t('components.administration.update-campaign-code.form.button'),
+      }),
+    );
+
+    // then
+    assert.true(updateAdapterStub.calledOnce);
+    assert.true(
+      notificationService.sendErrorNotification.calledOnceWithExactly({
+        message: t('common.notifications.generic-error'),
+      }),
+    );
+    assert.true(notificationService.sendSuccessNotification.notCalled);
+  });
 });

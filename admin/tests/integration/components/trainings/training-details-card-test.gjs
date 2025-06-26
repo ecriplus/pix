@@ -72,4 +72,37 @@ module('Integration | Component | Trainings::TrainingDetailsCard', function (hoo
     // then
     assert.dom(screen.getByText('En pause')).exists();
   });
+
+  module('Duration formatting', function () {
+    [
+      { duration: { days: 2 }, expectedResult: '2j' },
+      { duration: { hours: 2 }, expectedResult: '2h' },
+      { duration: { minutes: 2 }, expectedResult: '2min' },
+      { duration: { hours: 10, minutes: 2 }, expectedResult: '10h 2min' },
+      { duration: { days: 1, hours: 4 }, expectedResult: '1j 4h' },
+      { duration: { days: 1, minutes: 30 }, expectedResult: '1j 30min' },
+      { duration: { days: 1, hours: 4, minutes: 30 }, expectedResult: '1j 4h 30min' },
+    ].forEach(function ({ duration, expectedResult }) {
+      test(`should display "${expectedResult}" for duration ${JSON.stringify(duration)}`, async function (assert) {
+        // given
+        const trainingWithDuration = {
+          title: 'Un contenu formatif',
+          internalTitle: 'Mon titre interne',
+          link: 'https://un-contenu-formatif',
+          type: 'webinaire',
+          locale: 'fr-fr',
+          editorName: 'Un éditeur de contenu formatif',
+          editorLogoUrl: 'un-logo.svg',
+          duration,
+          isRecommendable: true,
+        };
+
+        // when
+        const screen = await render(<template><TrainingDetailsCard @training={{trainingWithDuration}} /></template>);
+
+        // then
+        assert.dom(screen.getByText(expectedResult)).exists();
+      });
+    });
+  });
 });

@@ -110,4 +110,80 @@ module('Integration | Component | actions-on-users-role-in-organization', functi
       assert.dom(screen.queryByRole('button', { name: 'Désactiver' })).doesNotExist();
     });
   });
+
+  module('Error handling', function () {
+    test('it should show error notification when update role fails', async function (assert) {
+      // given
+      class AccessControlStub extends Service {
+        hasAccessToOrganizationActionsScope = true;
+      }
+      this.owner.register('service:access-control', AccessControlStub);
+
+      const store = this.owner.lookup('service:store');
+      const organizationMembership = store.createRecord('organization-membership', {
+        role: 'ADMIN',
+        save: sinon.stub().rejects(new Error('Save failed')),
+      });
+
+      const notificationErrorStub = sinon.stub();
+      class NotificationsStub extends Service {
+        sendErrorNotification = notificationErrorStub;
+      }
+      this.owner.register('service:pixToast', NotificationsStub);
+
+      // when
+      const screen = await render(
+        <template><ActionsOnUsersRoleInOrganization @organizationMembership={{organizationMembership}} /></template>,
+      );
+      await clickByName('Modifier le rôle');
+
+      await click(screen.getByRole('button', { name: 'Sélectionner un rôle' }));
+      await screen.findByRole('listbox');
+      await click(screen.getByRole('option', { name: 'Membre' }));
+      await clickByName('Enregistrer');
+
+      // then
+      sinon.assert.calledWith(notificationErrorStub, {
+        message: 'Une erreur est survenue lors de la mise à jour du rôle du membre.',
+      });
+      assert.dom(screen.queryByRole('button', { name: 'Modifier le rôle' })).exists();
+    });
+
+    test('it should show error notification when disable membership fails', async function (assert) {
+      // given
+      class AccessControlStub extends Service {
+        hasAccessToOrganizationActionsScope = true;
+      }
+      this.owner.register('service:access-control', AccessControlStub);
+
+      const store = this.owner.lookup('service:store');
+      const organizationMembership = store.createRecord('organization-membership', {
+        role: 'ADMIN',
+        reload: sinon.stub(),
+      });
+
+      sinon.stub(organizationMembership, 'destroyRecord').rejects(new Error('Disable failed'));
+
+      const notificationErrorStub = sinon.stub();
+      class NotificationsStub extends Service {
+        sendErrorNotification = notificationErrorStub;
+      }
+      this.owner.register('service:pixToast', NotificationsStub);
+
+      // when
+      const screen = await render(
+        <template><ActionsOnUsersRoleInOrganization @organizationMembership={{organizationMembership}} /></template>,
+      );
+
+      await clickByName("Désactiver l'agent");
+      await screen.findByRole('dialog');
+      await clickByName('Confirmer');
+
+      // then
+      sinon.assert.calledWith(notificationErrorStub, {
+        message: 'Une erreur est survenue lors de la désactivation du membre.',
+      });
+      assert.ok(true);
+    });
+  });
 });

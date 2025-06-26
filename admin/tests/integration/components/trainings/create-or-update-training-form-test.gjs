@@ -1,5 +1,5 @@
-import { clickByName, render } from '@1024pix/ember-testing-library';
-import { triggerEvent } from '@ember/test-helpers';
+import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library';
+import { click, triggerEvent } from '@ember/test-helpers';
 import CreateOrUpdateTrainingForm from 'pix-admin/components/trainings/create-or-update-training-form';
 import { localeCategories, typeCategories } from 'pix-admin/models/training';
 import { module, test } from 'qunit';
@@ -104,6 +104,72 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
         .exists();
       assert.dom(screen.getByRole('button', { name: 'Annuler' })).exists();
       assert.dom(screen.getByRole('button', { name: 'Modifier le contenu formatif' })).exists();
+    });
+  });
+
+  module('Form interactions', function () {
+    test('should update form fields when user types', async function (assert) {
+      // given
+      const onSubmitStub = sinon.stub();
+      await render(
+        <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmitStub}} @onCancel={{onCancel}} /></template>,
+      );
+
+      // when
+      await fillByLabel('Titre public :', 'New Title');
+      await triggerEvent('form', 'submit');
+
+      // then
+      assert.ok(onSubmitStub.called);
+      const submittedData = onSubmitStub.getCall(0).firstArg;
+      assert.strictEqual(submittedData.title, 'New Title');
+    });
+
+    test('should format editor logo URL with base URL on form submission', async function (assert) {
+      // given
+      const onSubmitStub = sinon.stub();
+      await render(
+        <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmitStub}} @onCancel={{onCancel}} /></template>,
+      );
+
+      // when
+      await fillByLabel('Nom du fichier du logo éditeur', 'new-logo.svg', { exact: false });
+      await triggerEvent('form', 'submit');
+
+      // then
+      assert.ok(onSubmitStub.called);
+      const submittedData = onSubmitStub.getCall(0).firstArg;
+      assert.strictEqual(submittedData.editorLogoUrl, 'https://images.pix.fr/contenu-formatif/editeur/new-logo.svg');
+    });
+
+    test('should toggle isDisabled field when checkbox is clicked', async function (assert) {
+      // given
+      const model = {
+        title: 'Un contenu formatif',
+        internalTitle: 'Mon titre interne',
+        link: 'https://un-contenu-formatif',
+        type: 'webinaire',
+        locale: 'fr-fr',
+        editorName: 'Un éditeur de contenu formatif',
+        editorLogoUrl: 'https://example.net/un-logo.svg',
+        duration: { days: 0, hours: 0, minutes: 0 },
+        isDisabled: false,
+      };
+      const onSubmitStub = sinon.stub();
+      const screen = await render(
+        <template>
+          <CreateOrUpdateTrainingForm @onSubmit={{onSubmitStub}} @onCancel={{onCancel}} @model={{model}} />
+        </template>,
+      );
+
+      // when
+      await click(screen.getByLabelText('Mettre en pause'));
+      await triggerEvent('form', 'submit');
+
+      // then
+      assert.ok(onSubmitStub.called);
+      const submittedData = onSubmitStub.getCall(0).firstArg;
+      assert.true(submittedData.isDisabled);
     });
   });
 });
