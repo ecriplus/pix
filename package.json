@@ -92,7 +92,7 @@
     "domains:trust-self-signed-certificate:linux": "cd ./scripts/local-domains/ && sudo docker cp caddy:/data/caddy/pki/authorities/local/root.crt /usr/local/share/ca-certificates/root.crt && sudo update-ca-certificates --fresh"
   },
   "dependencies": {
-    "npm-run-all2": "^7.0.2"
+    "npm-run-all2": "^8.0.0"
   },
   "devDependencies": {
     "@1024pix/eslint-plugin": "^2.1.5",
