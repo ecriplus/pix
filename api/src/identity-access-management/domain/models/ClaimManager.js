@@ -50,23 +50,19 @@ export class ClaimManager {
   /**
    * @param {Record<string, string>} userInfo
    *
-   * @returns {boolean} true if required claims are missing from userInfo
+   * @returns {boolean} true if some claims are missing from userInfo
    */
   hasMissingClaims(userInfo = {}) {
-    const missingClaims = this.getMissingClaims(userInfo);
+    const missingClaims = [...this.getMissingMandatoryClaims(userInfo), ...this.#getMissingAdditionalClaims(userInfo)];
     return missingClaims.length > 0;
   }
 
   /**
    * @param {Record<string, string>} userInfo
    *
-   * @returns {string[]} missing required claims from userInfo
+   * @returns {string[]} missing mandatory claims from userInfo
    */
-  getMissingClaims(userInfo = {}) {
-    return [...this.#getMissingClaimsToMap(userInfo), ...this.#getMissingAdditionalClaims(userInfo)];
-  }
-
-  #getMissingClaimsToMap(userInfo = {}) {
+  getMissingMandatoryClaims(userInfo = {}) {
     const requiredKeys = Object.keys(this.#claimMapping);
     const mappedKeys = Object.keys(this.mapClaims(userInfo));
     return flatten(

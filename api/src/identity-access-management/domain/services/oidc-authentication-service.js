@@ -290,9 +290,9 @@ export class OidcAuthenticationService {
       throw new OidcError({ message: error.message });
     }
 
-    if (this.claimManager.hasMissingClaims(userInfo)) {
-      const missingClaims = this.claimManager.getMissingClaims(userInfo);
+    const missingClaims = this.claimManager.getMissingMandatoryClaims(userInfo);
 
+    if (missingClaims.length > 0) {
       const message = `Un ou des champs obligatoires (${missingClaims.join(
         ',',
       )}) n'ont pas été renvoyés par votre fournisseur d'identité ${this.organizationName}.`;

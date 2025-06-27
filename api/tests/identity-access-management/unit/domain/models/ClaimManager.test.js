@@ -105,18 +105,18 @@ describe('Unit | Identity Access Management | Domain | Model | ClaimManager', fu
     });
   });
 
-  describe('#getMissingClaims', function () {
-    it('returns the missing claims from user info', async function () {
+  describe('#getMissingMandatoryClaims', function () {
+    it('returns the missing mandatory claims from user info', async function () {
       // given
       const claimMapping = { firstName: ['foo'], lastName: ['bar'], id: ['sub'] };
       const additionalClaims = ['aWantedClaim', 'anotherWantedClaim'];
 
       // when
       const claimManager = new ClaimManager({ claimMapping, additionalClaims });
-      const result = claimManager.getMissingClaims({ sub: '', foo: 'foofoo', anotherWantedClaim: '' });
+      const result = claimManager.getMissingMandatoryClaims({ sub: '', foo: 'foofoo', anotherWantedClaim: '' });
 
       // then
-      expect(result).to.deep.equal(['bar', 'sub', 'aWantedClaim', 'anotherWantedClaim']);
+      expect(result).to.deep.equal(['bar', 'sub']);
     });
 
     it('returns an empty array when all claims are present from user info', async function () {
@@ -125,7 +125,7 @@ describe('Unit | Identity Access Management | Domain | Model | ClaimManager', fu
 
       // when
       const claimManager = new ClaimManager({ claimMapping });
-      const result = claimManager.getMissingClaims({ foo: 'foofoo', bar: 'barbar' });
+      const result = claimManager.getMissingMandatoryClaims({ foo: 'foofoo', bar: 'barbar' });
 
       // then
       expect(result).to.deep.equal([]);

@@ -1367,14 +1367,14 @@
     },
     "evaluation-results": {
       "leave-without-signup-modal": {
-          "actions": {
-            "cancel": "Cancel",
-            "leave": "Yes, leave the course"
-          },
-          "content-information": "If you leave this course without registering, you will not be able to validate your progress.",
-          "content-instruction": "Would you like to continue?",
-          "title": "Leave and return to Pix?"
+        "actions": {
+          "cancel": "Cancel",
+          "leave": "Yes, leave the course"
         },
+        "content-information": "If you leave this course without registering, you will not be able to validate your progress.",
+        "content-instruction": "Would you like to continue?",
+        "title": "Leave and return to Pix?"
+      },
       "quit-results": {
         "send-result-modal": {
           "actions": {
@@ -1608,11 +1608,16 @@
         "button": "Create my account",
         "description": "An account will be created based on the information sent by the organisation",
         "information": {
-          "employeeNumber": "Employee number :",
+          "FrEduFonctAdm": "Administrative function:",
+          "FrEduNumenHash": "Numen (encrypted):",
+          "discipline": "School subject:",
+          "employeeNumber": "Employee number:",
           "error": "We were unable to retrieve your identity information from the service used. We invite you to contact this organisation's IT support.",
-          "firstName": "First name :",
-          "lastName": "Last name :",
-          "population": "Population :"
+          "firstName": "First name:",
+          "lastName": "Last name:",
+          "population": "Population:",
+          "rne": "Establishment of assignment:",
+          "title": "Title:"
         },
         "title": "Sign up"
       },
