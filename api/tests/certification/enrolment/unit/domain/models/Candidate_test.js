@@ -20,7 +20,7 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
       id: 456,
       createdAt: new Date('2020-01-01'),
       firstName: 'Jean-Charles',
-      lastName: 'Quiberon',
+      lastName: 'Quiberons',
       sex: 'M',
       birthPostalCode: 'Code postal',
       birthINSEECode: 'Insee code',
@@ -390,7 +390,6 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
 
     context('compatibility core/complementary enable, should use new schema', function () {
       const cleaCertificationId = 123;
-      const isCoreComplementaryCompatibilityEnabled = true;
 
       context('success cases', function () {
         it('should validate when there is only one core subscription', function () {
@@ -401,7 +400,7 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           });
 
           // when, then
-          candidate.validate({ isCoreComplementaryCompatibilityEnabled, cleaCertificationId });
+          candidate.validate({ cleaCertificationId });
         });
 
         it('should validate when there are one core and one clea', function () {
@@ -420,7 +419,7 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           });
 
           // when, then
-          candidate.validate({ isCoreComplementaryCompatibilityEnabled, cleaCertificationId });
+          candidate.validate({ cleaCertificationId });
         });
       });
 
@@ -436,10 +435,7 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           });
 
           // when
-          const error = await catchErr(
-            candidate.validate,
-            candidate,
-          )({ cleaCertificationId, isCoreComplementaryCompatibilityEnabled });
+          const error = await catchErr(candidate.validate, candidate)({ cleaCertificationId });
 
           // then
           expect(error).to.deepEqualInstanceOmitting(certificationCandidatesError, ['message', 'stack', 'meta']);
@@ -465,10 +461,7 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           });
 
           // when
-          const error = await catchErr(
-            candidate.validate,
-            candidate,
-          )({ cleaCertificationId, isCoreComplementaryCompatibilityEnabled });
+          const error = await catchErr(candidate.validate, candidate)({ cleaCertificationId });
 
           // then
           expect(error).to.deepEqualInstanceOmitting(certificationCandidatesError, ['message', 'stack', 'meta']);
@@ -494,10 +487,7 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           });
 
           // when
-          const error = await catchErr(
-            candidate.validate,
-            candidate,
-          )({ cleaCertificationId, isCoreComplementaryCompatibilityEnabled });
+          const error = await catchErr(candidate.validate, candidate)({ cleaCertificationId });
 
           // then
           expect(error).to.deepEqualInstanceOmitting(certificationCandidatesError, ['message', 'stack', 'meta']);
@@ -521,10 +511,7 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           });
 
           // when
-          const error = await catchErr(
-            candidate.validate,
-            candidate,
-          )({ cleaCertificationId, isCoreComplementaryCompatibilityEnabled });
+          const error = await catchErr(candidate.validate, candidate)({ cleaCertificationId });
 
           // then
           expect(error).to.deepEqualInstanceOmitting(certificationCandidatesError, ['message', 'stack', 'meta']);
@@ -549,10 +536,7 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           });
 
           // when
-          const error = await catchErr(
-            candidate.validate,
-            candidate,
-          )({ cleaCertificationId, isCoreComplementaryCompatibilityEnabled });
+          const error = await catchErr(candidate.validate, candidate)({ cleaCertificationId });
 
           // then
           expect(error).to.deepEqualInstanceOmitting(certificationCandidatesError, ['message', 'stack', 'meta']);

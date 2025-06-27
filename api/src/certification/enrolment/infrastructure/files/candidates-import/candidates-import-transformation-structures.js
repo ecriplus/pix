@@ -94,25 +94,14 @@ function getTransformationStructsForPixCertifCandidatesImport({ i18n, habilitati
 }
 
 function _includeHabilitationColumns({ habilitations, transformationStruct, translate }) {
-  [
-    {
-      key: ComplementaryCertificationKeys.CLEA,
+  const habilitation = habilitations.find((habilitation) => habilitation.key === ComplementaryCertificationKeys.CLEA);
+  if (habilitation) {
+    transformationStruct.push({
+      header: `${habilitation.label}${translate('candidate-list-template.yes-or-empty')}`,
       property: 'hasCleaNumerique',
-    },
-    { key: ComplementaryCertificationKeys.PIX_PLUS_DROIT, property: 'hasPixPlusDroit' },
-    { key: ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE, property: 'hasPixPlusEdu1erDegre' },
-    { key: ComplementaryCertificationKeys.PIX_PLUS_EDU_2ND_DEGRE, property: 'hasPixPlusEdu2ndDegre' },
-    { key: ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE, property: 'hasPixPlusProSante' },
-  ].forEach(({ key, property }) => {
-    const habilitation = habilitations.find((habilitation) => habilitation.key === key);
-    if (habilitation) {
-      transformationStruct.push({
-        header: `${habilitation.label}${translate('candidate-list-template.yes-or-empty')}`,
-        property,
-        transformFn: (val) => _toBooleanIfValueEqualsOuiOrNull({ val, translate }),
-      });
-    }
-  });
+      transformFn: (val) => _toBooleanIfValueEqualsOuiOrNull({ val, translate }),
+    });
+  }
 }
 
 function _includeBillingColumns({ transformationStruct, translate }) {
