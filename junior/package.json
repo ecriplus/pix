@@ -107,7 +107,7 @@
     "showdown": "^2.1.0",
     "sinon": "^21.0.0",
     "stylelint": "^16.13.2",
-    "stylelint-order": "^6.0.4",
+    "stylelint-order": "^7.0.0",
     "tracked-built-ins": "^4.0.0",
     "webpack": "5.99.9",
     "xss": "^1.0.14"
