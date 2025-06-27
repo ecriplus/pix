@@ -10,7 +10,7 @@ const neutralizeChallenge = async function (request, h) {
     certificationCourseId,
     juryId,
   });
-  await usecases.handleCertificationRescoring({ event });
+  await usecases.rescoreV2Certification({ event });
 
   return h.response().code(204);
 };
@@ -26,7 +26,7 @@ const deneutralizeChallenge = async function (request, h) {
     juryId,
   });
 
-  await usecases.handleCertificationRescoring({ event });
+  await usecases.rescoreV2Certification({ event });
 
   return h.response().code(204);
 };

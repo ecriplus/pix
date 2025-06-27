@@ -328,6 +328,10 @@ class CertificationCourse {
     return this._challenges?.length ?? 0;
   }
 
+  isV2() {
+    return AlgorithmEngineVersion.isV2(this._version);
+  }
+
   isV3() {
     return AlgorithmEngineVersion.isV3(this._version);
   }

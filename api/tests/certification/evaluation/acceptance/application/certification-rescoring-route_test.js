@@ -1,3 +1,4 @@
+import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { config } from '../../../../../src/shared/config.js';
 import { AnswerStatus, Assessment } from '../../../../../src/shared/domain/models/index.js';
 import {
@@ -90,6 +91,7 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
         date: '2020/01/01',
         time: '12:00',
         finalizedAt: new Date('2020-01-01'),
+        version: AlgorithmEngineVersion.V3,
       }).id;
 
       databaseBuilder.factory.buildCertificationCandidate({
@@ -99,7 +101,7 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
       const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
         sessionId,
         userId: candidate.id,
-        version: 3,
+        version: AlgorithmEngineVersion.V3,
       });
 
       const assessment = databaseBuilder.factory.buildAssessment({

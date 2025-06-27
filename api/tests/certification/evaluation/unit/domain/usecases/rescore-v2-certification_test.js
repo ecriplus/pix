@@ -1,9 +1,8 @@
 import { ChallengeDeneutralized } from '../../../../../../src/certification/evaluation/domain/events/ChallengeDeneutralized.js';
 import { ChallengeNeutralized } from '../../../../../../src/certification/evaluation/domain/events/ChallengeNeutralized.js';
-import { handleCertificationRescoring } from '../../../../../../src/certification/evaluation/domain/usecases/handle-certification-rescoring.js';
+import { rescoreV2Certification } from '../../../../../../src/certification/evaluation/domain/usecases/rescore-v2-certification.js';
 import { SessionAlreadyPublishedError } from '../../../../../../src/certification/session-management/domain/errors.js';
 import { CertificationCourseRejected } from '../../../../../../src/certification/session-management/domain/events/CertificationCourseRejected.js';
-import { CertificationJuryDone } from '../../../../../../src/certification/session-management/domain/events/CertificationJuryDone.js';
 import { CertificationAssessment } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ABORT_REASONS } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
@@ -12,7 +11,7 @@ import { CertificationComputeError, NotFinalizedSessionError } from '../../../..
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/index.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-describe('Unit | Domain | Events | handle-certification-rescoring', function () {
+describe('Unit | Certification | Evaluation | UseCases | rescore-v2-certification', function () {
   describe('session is not in a publishable state', function () {
     it('should reject to do a rescoring is session is still in progress', async function () {
       // given
@@ -26,7 +25,7 @@ describe('Unit | Domain | Events | handle-certification-rescoring', function () 
       });
 
       // when
-      const error = await catchErr(handleCertificationRescoring)({
+      const error = await catchErr(rescoreV2Certification)({
         event,
         evaluationSessionRepository,
       });
@@ -50,7 +49,7 @@ describe('Unit | Domain | Events | handle-certification-rescoring', function () 
       });
 
       // when
-      const error = await catchErr(handleCertificationRescoring)({
+      const error = await catchErr(rescoreV2Certification)({
         event,
         evaluationSessionRepository,
       });
@@ -60,251 +59,6 @@ describe('Unit | Domain | Events | handle-certification-rescoring', function () 
         certificationCourseId,
       });
       expect(error).to.be.instanceOf(SessionAlreadyPublishedError);
-    });
-  });
-
-  describe('when handling a v3 certification', function () {
-    let assessmentResultRepository,
-      certificationCourseRepository,
-      certificationAssessmentRepository,
-      complementaryCertificationScoringCriteriaRepository,
-      evaluationSessionRepository,
-      scoringCertificationService,
-      services,
-      dependencies;
-
-    beforeEach(function () {
-      certificationAssessmentRepository = { getByCertificationCourseId: sinon.stub() };
-      certificationCourseRepository = { update: sinon.stub() };
-      const session = domainBuilder.certification.evaluation.buildResultsSession.finalized();
-      evaluationSessionRepository = { getByCertificationCourseId: sinon.stub().resolves(session) };
-      services = { handleV3CertificationScoring: sinon.stub(), scoreDoubleCertificationV3: sinon.stub() };
-
-      dependencies = {
-        assessmentResultRepository,
-        certificationAssessmentRepository,
-        certificationCourseRepository,
-        complementaryCertificationScoringCriteriaRepository,
-        evaluationSessionRepository,
-        scoringCertificationService,
-        services,
-      };
-    });
-
-    describe('when less than the minimum number of answers required by the config has been answered', function () {
-      describe('when the certification was not finished due to a lack of time', function () {
-        it('should save the score with a rejected status', async function () {
-          // given
-          const certificationAssessment = domainBuilder.buildCertificationAssessment({
-            version: AlgorithmEngineVersion.V3,
-          });
-          const abortedCertificationCourse = domainBuilder.buildCertificationCourse({
-            abortReason: ABORT_REASONS.CANDIDATE,
-          });
-          const { certificationCourseId } = certificationAssessment;
-
-          certificationAssessmentRepository.getByCertificationCourseId
-            .withArgs({ certificationCourseId })
-            .resolves(certificationAssessment);
-          services.handleV3CertificationScoring.resolves(abortedCertificationCourse);
-
-          const event = new CertificationJuryDone({
-            certificationCourseId,
-          });
-
-          // when
-          await handleCertificationRescoring({
-            ...dependencies,
-            event,
-          });
-
-          // then
-          expect(services.handleV3CertificationScoring).to.have.been.calledOnce;
-        });
-      });
-
-      describe('when the certification was not finished due to technical difficulties', function () {
-        it('should save the score with a rejected status and cancel the certification course', async function () {
-          // given
-          const certificationAssessment = domainBuilder.buildCertificationAssessment({
-            version: AlgorithmEngineVersion.V3,
-          });
-
-          const abortedCertificationCourse = domainBuilder.buildCertificationCourse({
-            abortReason: ABORT_REASONS.TECHNICAL,
-            isCancelled: true,
-            completedAt: null,
-          });
-          const { certificationCourseId } = certificationAssessment;
-
-          certificationAssessmentRepository.getByCertificationCourseId
-            .withArgs({ certificationCourseId })
-            .resolves(certificationAssessment);
-          services.handleV3CertificationScoring.resolves(abortedCertificationCourse);
-
-          const event = new CertificationJuryDone({
-            certificationCourseId,
-          });
-
-          // when
-          await handleCertificationRescoring({
-            ...dependencies,
-            event,
-          });
-
-          // then
-          const expectedCertificationCourse = domainBuilder.buildCertificationCourse({
-            abortReason: ABORT_REASONS.TECHNICAL,
-            isCancelled: true,
-            completedAt: null,
-          });
-          expect(certificationCourseRepository.update).to.have.been.calledOnceWithExactly({
-            certificationCourse: expectedCertificationCourse,
-          });
-          expect(services.handleV3CertificationScoring).to.have.been.calledOnce;
-        });
-      });
-    });
-
-    describe('when not all questions were answered', function () {
-      describe('when the candidate did not finish due to technical difficulties', function () {
-        it('should save the raw score', async function () {
-          // given
-          const certificationCourseStartDate = new Date('2022-01-01');
-          const certificationAssessment = domainBuilder.buildCertificationAssessment({
-            version: AlgorithmEngineVersion.V3,
-          });
-
-          const abortedCertificationCourse = domainBuilder.buildCertificationCourse({
-            abortReason: ABORT_REASONS.TECHNICAL,
-            createdAt: certificationCourseStartDate,
-          });
-          const { certificationCourseId } = certificationAssessment;
-
-          certificationAssessmentRepository.getByCertificationCourseId
-            .withArgs({ certificationCourseId })
-            .resolves(certificationAssessment);
-          services.handleV3CertificationScoring.resolves(abortedCertificationCourse);
-
-          const event = new CertificationJuryDone({
-            certificationCourseId,
-          });
-
-          // when
-          await handleCertificationRescoring({
-            ...dependencies,
-            event,
-          });
-
-          // then
-          expect(services.handleV3CertificationScoring).to.have.been.calledOnce;
-        });
-      });
-    });
-
-    describe('when all the questions were answered', function () {
-      it('should save the score', async function () {
-        // given
-        const certificationCourseStartDate = new Date('2022-01-01');
-        const certificationAssessment = domainBuilder.buildCertificationAssessment({
-          version: AlgorithmEngineVersion.V3,
-        });
-
-        const abortedCertificationCourse = domainBuilder.buildCertificationCourse({
-          abortReason: ABORT_REASONS.TECHNICAL,
-          createdAt: certificationCourseStartDate,
-        });
-        const { certificationCourseId } = certificationAssessment;
-
-        certificationAssessmentRepository.getByCertificationCourseId
-          .withArgs({ certificationCourseId })
-          .resolves(certificationAssessment);
-        services.handleV3CertificationScoring.resolves(abortedCertificationCourse);
-        const event = new CertificationJuryDone({
-          certificationCourseId,
-        });
-
-        // when
-        await handleCertificationRescoring({
-          ...dependencies,
-          event,
-        });
-
-        // then
-        expect(services.handleV3CertificationScoring).to.have.been.calledOnce;
-      });
-
-      describe('when certification is rejected for fraud', function () {
-        it('should save the score with rejected status', async function () {
-          const certificationCourseStartDate = new Date('2022-01-01');
-          // given
-          const certificationAssessment = domainBuilder.buildCertificationAssessment({
-            version: AlgorithmEngineVersion.V3,
-          });
-
-          const abortedCertificationCourse = domainBuilder.buildCertificationCourse({
-            isRejectedForFraud: true,
-            createdAt: certificationCourseStartDate,
-          });
-          const { certificationCourseId } = certificationAssessment;
-
-          certificationAssessmentRepository.getByCertificationCourseId
-            .withArgs({ certificationCourseId })
-            .resolves(certificationAssessment);
-          services.handleV3CertificationScoring.resolves(abortedCertificationCourse);
-
-          const event = new CertificationCourseRejected({
-            certificationCourseId,
-            juryId: 7,
-          });
-
-          // when
-          await handleCertificationRescoring({
-            ...dependencies,
-            event,
-          });
-
-          // then
-          expect(services.handleV3CertificationScoring).to.have.been.calledOnce;
-        });
-      });
-    });
-
-    context('when it is a complementary certification', function () {
-      // eslint-disable-next-line mocha/no-pending-tests
-      xit('should trigger complementary certification scoring', async function () {
-        // given
-        const certificationCourseStartDate = new Date('2022-01-01');
-        const certificationAssessment = domainBuilder.buildCertificationAssessment({
-          version: AlgorithmEngineVersion.V3,
-        });
-
-        const abortedCertificationCourse = domainBuilder.buildCertificationCourse({
-          abortReason: ABORT_REASONS.TECHNICAL,
-          createdAt: certificationCourseStartDate,
-        });
-        const { certificationCourseId } = certificationAssessment;
-
-        certificationAssessmentRepository.getByCertificationCourseId
-          .withArgs({ certificationCourseId })
-          .resolves(certificationAssessment);
-
-        services.handleV3CertificationScoring.resolves(abortedCertificationCourse);
-        services.scoreDoubleCertificationV3.resolves(abortedCertificationCourse);
-
-        const event = new CertificationJuryDone({
-          certificationCourseId,
-        });
-
-        // when
-        await handleCertificationRescoring({
-          ...dependencies,
-          event,
-        });
-
-        // then
-        expect(services.handleV3CertificationScoring).to.have.been.calledOnce;
-      });
     });
   });
 
@@ -395,7 +149,7 @@ describe('Unit | Domain | Events | handle-certification-rescoring', function () 
         certificationCourseRepository.update.resolves(certificationCourse);
 
         // when
-        await handleCertificationRescoring({
+        await rescoreV2Certification({
           event,
           ...dependencies,
         });
@@ -452,7 +206,7 @@ describe('Unit | Domain | Events | handle-certification-rescoring', function () 
           certificationCourseRepository.update.resolves(certificationCourse);
 
           // when
-          await handleCertificationRescoring({
+          await rescoreV2Certification({
             event,
             ...dependencies,
           });
@@ -513,7 +267,7 @@ describe('Unit | Domain | Events | handle-certification-rescoring', function () 
         certificationCourseRepository.update.resolves(certificationCourse);
 
         // when
-        await handleCertificationRescoring({
+        await rescoreV2Certification({
           event,
           ...dependencies,
         });
@@ -575,7 +329,7 @@ describe('Unit | Domain | Events | handle-certification-rescoring', function () 
           certificationCourseRepository.update.resolves(certificationCourse);
 
           // when
-          await handleCertificationRescoring({
+          await rescoreV2Certification({
             event,
             ...dependencies,
           });
@@ -639,7 +393,7 @@ describe('Unit | Domain | Events | handle-certification-rescoring', function () 
           certificationCourseRepository.update.resolves(certificationCourse);
 
           // when
-          await handleCertificationRescoring({
+          await rescoreV2Certification({
             event,
             ...dependencies,
           });
@@ -695,7 +449,7 @@ describe('Unit | Domain | Events | handle-certification-rescoring', function () 
             certificationCourseRepository.update.resolves(certificationCourse);
 
             // when
-            await handleCertificationRescoring({
+            await rescoreV2Certification({
               event,
               ...dependencies,
             });
@@ -757,7 +511,7 @@ describe('Unit | Domain | Events | handle-certification-rescoring', function () 
           .resolves(savedAssessmentResult);
 
         // when
-        await handleCertificationRescoring({
+        await rescoreV2Certification({
           event,
           ...dependencies,
         });
@@ -790,7 +544,7 @@ describe('Unit | Domain | Events | handle-certification-rescoring', function () 
           .resolves(certificationAssessment);
 
         // when
-        await handleCertificationRescoring({
+        await rescoreV2Certification({
           event,
           ...dependencies,
         });
@@ -850,7 +604,7 @@ describe('Unit | Domain | Events | handle-certification-rescoring', function () 
           .resolves([complementaryCertificationScoringCriteria]);
 
         // when
-        await handleCertificationRescoring({
+        await rescoreV2Certification({
           event,
           ...dependencies,
         });

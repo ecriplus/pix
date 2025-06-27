@@ -209,6 +209,9 @@ async function isVerificationCodeAvailable({ verificationCode }) {
   return !exist;
 }
 
+/**
+ * @returns {Promise<Array<CertificationCourse>>}
+ */
 async function findCertificationCoursesBySessionId({ sessionId }) {
   const knexConn = DomainTransaction.getConnection();
 

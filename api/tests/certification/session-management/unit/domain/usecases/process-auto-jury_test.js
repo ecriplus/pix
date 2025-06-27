@@ -1,8 +1,8 @@
-import { AutoJuryDone } from '../../../../../../src/certification/session-management/domain/events/AutoJuryDone.js';
 import { CertificationJuryDone } from '../../../../../../src/certification/session-management/domain/events/CertificationJuryDone.js';
 import { CertificationAssessment } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { SessionFinalized } from '../../../../../../src/certification/session-management/domain/read-models/SessionFinalized.js';
 import { processAutoJury } from '../../../../../../src/certification/session-management/domain/usecases/process-auto-jury.js';
+import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ABORT_REASONS } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import {
   CertificationIssueReportCategory,
@@ -23,7 +23,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
       certificationCourseRepository = { findCertificationCoursesBySessionId: sinon.stub() };
       certificationIssueReportRepository = { findByCertificationCourseId: sinon.stub(), save: sinon.stub() };
       certificationAssessmentRepository = { getByCertificationCourseId: sinon.stub(), save: sinon.stub() };
-      certificationRescoringRepository = { execute: sinon.stub() };
+      certificationRescoringRepository = { rescoreV2Certification: sinon.stub() };
       challengeRepository = { get: sinon.stub() };
     });
 
@@ -49,7 +49,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         ],
         certificationChallenges: [challengeToBeNeutralized1, challengeToBeNeutralized2, challengeNotToBeNeutralized],
       });
-      const certificationCourse = domainBuilder.buildCertificationCourse();
+      const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgorithmEngineVersion.V2 });
       const certificationIssueReport = domainBuilder.buildCertificationIssueReport({
         category: CertificationIssueReportCategory.IN_CHALLENGE,
         subcategory: CertificationIssueReportSubcategories.WEBSITE_BLOCKED,
@@ -71,7 +71,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         .withArgs({ certificationCourseId: certificationCourse.getId() })
         .resolves(certificationAssessment);
       certificationAssessmentRepository.save.resolves();
-      const sessionFinalized = new SessionFinalized({
+      const { sessionId } = new SessionFinalized({
         sessionId: 1234,
         finalizedAt: new Date(),
         hasExaminerGlobalComment: false,
@@ -82,7 +82,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
 
       // when
       await processAutoJury({
-        sessionFinalized,
+        sessionId,
         certificationIssueReportRepository,
         certificationAssessmentRepository,
         certificationCourseRepository,
@@ -96,66 +96,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
       expect(certificationAssessmentRepository.save).to.have.been.calledWithExactly(certificationAssessment);
     });
 
-    it('returns an AutoJuryDone event as last event', async function () {
-      // given
-      const now = Date.now();
-      const certificationAssessment = domainBuilder.buildCertificationAssessment({
-        certificationAnswersByDate: [
-          domainBuilder.buildAnswer({ challengeId: 'recChal123', result: AnswerStatus.SKIPPED }),
-          domainBuilder.buildAnswer({ challengeId: 'recChal456', result: AnswerStatus.KO }),
-          domainBuilder.buildAnswer({ challengeId: 'recChal789', result: AnswerStatus.OK }),
-        ],
-        certificationChallenges: [
-          domainBuilder.buildCertificationChallengeWithType({ challengeId: 'recChal123' }),
-          domainBuilder.buildCertificationChallengeWithType({ challengeId: 'recChal456' }),
-          domainBuilder.buildCertificationChallengeWithType({ challengeId: 'recChal789' }),
-        ],
-      });
-
-      const certificationCourse = domainBuilder.buildCertificationCourse();
-      certificationAssessmentRepository.getByCertificationCourseId
-        .withArgs({ certificationCourseId: certificationCourse.getId() })
-        .resolves(certificationAssessment);
-      certificationCourseRepository.findCertificationCoursesBySessionId
-        .withArgs({ sessionId: 1234 })
-        .resolves([certificationCourse]);
-      certificationIssueReportRepository.findByCertificationCourseId
-        .withArgs({ certificationCourseId: certificationCourse.getId() })
-        .resolves([]);
-
-      const sessionFinalized = new SessionFinalized({
-        sessionId: 1234,
-        finalizedAt: now,
-        hasExaminerGlobalComment: false,
-        certificationCenterName: 'A certification center name',
-        sessionDate: '2021-01-29',
-        sessionTime: '14:00',
-      });
-
-      // when
-      const autoJuryDone = await processAutoJury({
-        sessionFinalized,
-        certificationIssueReportRepository,
-        certificationAssessmentRepository,
-        certificationCourseRepository,
-        certificationRescoringRepository,
-      });
-
-      // then
-      expect(autoJuryDone).to.be.an.instanceof(AutoJuryDone);
-      expect(autoJuryDone).to.deep.equal(
-        new AutoJuryDone({
-          sessionId: 1234,
-          finalizedAt: now,
-          hasExaminerGlobalComment: false,
-          certificationCenterName: 'A certification center name',
-          sessionDate: '2021-01-29',
-          sessionTime: '14:00',
-        }),
-      );
-    });
-
-    it('publishes a CertificationJuryDone event', async function () {
+    it('scores the certification', async function () {
       // given
       const challengeToBeNeutralized1 = domainBuilder.buildCertificationChallengeWithType({
         challengeId: 'recChal123',
@@ -167,7 +108,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         ],
         certificationChallenges: [challengeToBeNeutralized1],
       });
-      const certificationCourse = domainBuilder.buildCertificationCourse();
+      const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgorithmEngineVersion.V2 });
       const certificationIssueReport1 = domainBuilder.buildCertificationIssueReport({
         category: CertificationIssueReportCategory.IN_CHALLENGE,
         subcategory: CertificationIssueReportSubcategories.WEBSITE_BLOCKED,
@@ -183,7 +124,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         .withArgs({ certificationCourseId: certificationCourse.getId() })
         .resolves(certificationAssessment);
       certificationAssessmentRepository.save.resolves();
-      const sessionFinalized = new SessionFinalized({
+      const { sessionId } = new SessionFinalized({
         sessionId: 1234,
         finalizedAt: new Date(),
         hasExaminerGlobalComment: false,
@@ -194,7 +135,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
 
       // when
       await processAutoJury({
-        sessionFinalized,
+        sessionId,
         certificationIssueReportRepository,
         certificationAssessmentRepository,
         certificationCourseRepository,
@@ -202,7 +143,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
       });
 
       // then
-      expect(certificationRescoringRepository.execute).to.have.been.calledOnceWithExactly({
+      expect(certificationRescoringRepository.rescoreV2Certification).to.have.been.calledOnceWithExactly({
         event: new CertificationJuryDone({
           certificationCourseId: certificationCourse.getId(),
         }),
@@ -218,6 +159,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
           id: 4567,
           completedAt: null,
           abortReason: ABORT_REASONS.CANDIDATE,
+          version: AlgorithmEngineVersion.V2,
         });
         certificationCourseRepository.findCertificationCoursesBySessionId
           .withArgs({ sessionId: 1234 })
@@ -229,7 +171,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
           .withArgs({ certificationCourseId: certificationCourse.getId() })
           .resolves(certificationAssessment);
         certificationAssessmentRepository.save.resolves();
-        const sessionFinalized = new SessionFinalized({
+        const { sessionId } = new SessionFinalized({
           sessionId: 1234,
           finalizedAt: new Date(),
           hasExaminerGlobalComment: false,
@@ -240,7 +182,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
 
         // when
         await processAutoJury({
-          sessionFinalized,
+          sessionId,
           certificationIssueReportRepository,
           certificationAssessmentRepository,
           certificationCourseRepository,
@@ -248,7 +190,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         });
 
         // then
-        expect(certificationRescoringRepository.execute).to.have.been.calledOnceWithExactly({
+        expect(certificationRescoringRepository.rescoreV2Certification).to.have.been.calledOnceWithExactly({
           event: new CertificationJuryDone({
             certificationCourseId: certificationCourse.getId(),
           }),
@@ -278,6 +220,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
           const certificationCourse = domainBuilder.buildCertificationCourse({
             completedAt: null,
             abortReason: ABORT_REASONS.CANDIDATE,
+            version: AlgorithmEngineVersion.V2,
           });
           certificationCourseRepository.findCertificationCoursesBySessionId
             .withArgs({ sessionId: 1234 })
@@ -289,7 +232,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
             .withArgs({ certificationCourseId: certificationCourse.getId() })
             .resolves(certificationAssessment);
           certificationAssessmentRepository.save.resolves();
-          const sessionFinalized = new SessionFinalized({
+          const { sessionId } = new SessionFinalized({
             sessionId: 1234,
             finalizedAt: new Date(),
             hasExaminerGlobalComment: false,
@@ -300,7 +243,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
 
           // when
           await processAutoJury({
-            sessionFinalized,
+            sessionId,
             certificationIssueReportRepository,
             certificationAssessmentRepository,
             certificationCourseRepository,
@@ -344,6 +287,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
           const certificationCourse = domainBuilder.buildCertificationCourse({
             completedAt: null,
             abortReason: ABORT_REASONS.TECHNICAL,
+            version: AlgorithmEngineVersion.V2,
           });
           certificationCourseRepository.findCertificationCoursesBySessionId
             .withArgs({ sessionId: 1234 })
@@ -355,7 +299,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
             .withArgs({ certificationCourseId: certificationCourse.getId() })
             .resolves(certificationAssessment);
           certificationAssessmentRepository.save.resolves();
-          const sessionFinalized = new SessionFinalized({
+          const { sessionId } = new SessionFinalized({
             sessionId: 1234,
             finalizedAt: new Date(),
             hasExaminerGlobalComment: false,
@@ -366,7 +310,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
 
           // when
           await processAutoJury({
-            sessionFinalized,
+            sessionId,
             certificationIssueReportRepository,
             certificationAssessmentRepository,
             certificationCourseRepository,
@@ -414,6 +358,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         const certificationCourse = domainBuilder.buildCertificationCourse({
           completedAt: null,
           abortReason: ABORT_REASONS.CANDIDATE,
+          version: AlgorithmEngineVersion.V2,
         });
         certificationCourseRepository.findCertificationCoursesBySessionId
           .withArgs({ sessionId: 1234 })
@@ -422,7 +367,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         certificationAssessmentRepository.getByCertificationCourseId
           .withArgs({ certificationCourseId: certificationCourse.getId() })
           .resolves(certificationAssessment);
-        const sessionFinalized = new SessionFinalized({
+        const { sessionId } = new SessionFinalized({
           sessionId: 1234,
           finalizedAt: new Date(),
           hasExaminerGlobalComment: false,
@@ -433,7 +378,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
 
         // when
         await processAutoJury({
-          sessionFinalized,
+          sessionId,
           certificationIssueReportRepository,
           certificationAssessmentRepository,
           certificationCourseRepository,
@@ -500,7 +445,11 @@ describe('Unit | UseCase | process-auto-jury', function () {
           ],
           certificationChallenges: [challengeToBeNeutralized1, challengeToBeNeutralized2, challengeNotToBeNeutralized],
         });
-        const certificationCourse = domainBuilder.buildCertificationCourse({ id: 4567, sessionId: 1234 });
+        const certificationCourse = domainBuilder.buildCertificationCourse({
+          id: 4567,
+          sessionId: 1234,
+          version: AlgorithmEngineVersion.V2,
+        });
         const certificationIssueReport = domainBuilder.buildCertificationIssueReport({
           category: CertificationIssueReportCategory.IN_CHALLENGE,
           subcategory: CertificationIssueReportSubcategories.IMAGE_NOT_DISPLAYING,
@@ -526,7 +475,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
           .withArgs({ certificationCourseId: certificationCourse.getId() })
           .resolves(certificationAssessment);
         certificationAssessmentRepository.save.resolves();
-        const sessionFinalized = new SessionFinalized({
+        const { sessionId } = new SessionFinalized({
           sessionId: 1234,
           finalizedAt: new Date(),
           hasExaminerGlobalComment: false,
@@ -537,7 +486,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
 
         // when
         await processAutoJury({
-          sessionFinalized,
+          sessionId,
           certificationIssueReportRepository,
           certificationAssessmentRepository,
           certificationCourseRepository,
@@ -562,68 +511,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
       certificationCourseRepository = { findCertificationCoursesBySessionId: sinon.stub() };
       certificationIssueReportRepository = { findByCertificationCourseId: sinon.stub(), save: sinon.stub() };
       certificationAssessmentRepository = { getByCertificationCourseId: sinon.stub(), save: sinon.stub() };
-      certificationRescoringRepository = { execute: sinon.stub() };
-    });
-
-    it('returns an AutoJuryDone event as last event', async function () {
-      // given
-      const now = Date.now();
-
-      const certificationAssessment = domainBuilder.buildCertificationAssessment({
-        version: 3,
-        certificationAnswersByDate: [
-          domainBuilder.buildAnswer({ challengeId: 'recChal123', result: AnswerStatus.SKIPPED }),
-          domainBuilder.buildAnswer({ challengeId: 'recChal456', result: AnswerStatus.KO }),
-          domainBuilder.buildAnswer({ challengeId: 'recChal789', result: AnswerStatus.OK }),
-        ],
-        certificationChallenges: [
-          domainBuilder.buildCertificationChallengeWithType({ challengeId: 'recChal123' }),
-          domainBuilder.buildCertificationChallengeWithType({ challengeId: 'recChal456' }),
-          domainBuilder.buildCertificationChallengeWithType({ challengeId: 'recChal789' }),
-        ],
-      });
-
-      const certificationCourse = domainBuilder.buildCertificationCourse({ version: 3 });
-      certificationAssessmentRepository.getByCertificationCourseId
-        .withArgs({ certificationCourseId: certificationCourse.getId() })
-        .resolves(certificationAssessment);
-      certificationCourseRepository.findCertificationCoursesBySessionId
-        .withArgs({ sessionId: 1234 })
-        .resolves([certificationCourse]);
-      certificationIssueReportRepository.findByCertificationCourseId
-        .withArgs({ certificationCourseId: certificationCourse.getId() })
-        .resolves([]);
-
-      const sessionFinalized = new SessionFinalized({
-        sessionId: 1234,
-        finalizedAt: now,
-        hasExaminerGlobalComment: false,
-        certificationCenterName: 'A certification center name',
-        sessionDate: '2021-01-29',
-        sessionTime: '14:00',
-      });
-
-      // when
-      const autoJuryDone = await processAutoJury({
-        sessionFinalized,
-        certificationIssueReportRepository,
-        certificationAssessmentRepository,
-        certificationCourseRepository,
-        certificationRescoringRepository,
-      });
-
-      // then
-      expect(autoJuryDone).to.be.an.instanceof(AutoJuryDone);
-      expect(autoJuryDone).to.deep.equal(
-        new AutoJuryDone({
-          sessionId: 1234,
-          finalizedAt: now,
-          hasExaminerGlobalComment: false,
-          certificationCenterName: 'A certification center name',
-          sessionDate: '2021-01-29',
-          sessionTime: '14:00',
-        }),
-      );
+      certificationRescoringRepository = { rescoreV3Certification: sinon.stub() };
     });
 
     it('publishes a CertificationJuryDone event', async function () {
@@ -646,9 +534,9 @@ describe('Unit | UseCase | process-auto-jury', function () {
         .withArgs({ certificationCourseId: certificationCourse.getId() })
         .resolves(certificationAssessment);
       certificationAssessmentRepository.save.resolves();
-      certificationRescoringRepository.execute.resolves();
+      certificationRescoringRepository.rescoreV3Certification.resolves();
 
-      const sessionFinalized = new SessionFinalized({
+      const { sessionId } = new SessionFinalized({
         sessionId: 1234,
         finalizedAt: new Date(),
         hasExaminerGlobalComment: false,
@@ -659,7 +547,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
 
       // when
       await processAutoJury({
-        sessionFinalized,
+        sessionId,
         certificationIssueReportRepository,
         certificationAssessmentRepository,
         certificationCourseRepository,
@@ -667,7 +555,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
       });
 
       // then
-      expect(certificationRescoringRepository.execute).to.have.been.calledOnceWithExactly({
+      expect(certificationRescoringRepository.rescoreV3Certification).to.have.been.calledOnceWithExactly({
         event: new CertificationJuryDone({
           certificationCourseId: certificationCourse.getId(),
         }),
@@ -683,7 +571,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
           certificationCourseRepository,
           certificationIssueReportRepository,
         });
-        const sessionFinalized = new SessionFinalized({
+        const { sessionId } = new SessionFinalized({
           sessionId: 1234,
           finalizedAt: new Date(),
           hasExaminerGlobalComment: false,
@@ -694,7 +582,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
 
         // when
         await processAutoJury({
-          sessionFinalized,
+          sessionId,
           certificationIssueReportRepository,
           certificationAssessmentRepository,
           certificationCourseRepository,
@@ -702,7 +590,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         });
 
         // then
-        expect(certificationRescoringRepository.execute).to.have.been.calledOnceWithExactly({
+        expect(certificationRescoringRepository.rescoreV3Certification).to.have.been.calledOnceWithExactly({
           event: new CertificationJuryDone({
             certificationCourseId: certificationCourse.getId(),
           }),
@@ -743,7 +631,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
           .withArgs({ certificationCourseId: certificationCourse.getId() })
           .resolves(certificationAssessment);
 
-        const sessionFinalized = new SessionFinalized({
+        const { sessionId } = new SessionFinalized({
           sessionId: 1234,
           finalizedAt: new Date(),
           hasExaminerGlobalComment: false,
@@ -754,7 +642,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
 
         // when
         await processAutoJury({
-          sessionFinalized,
+          sessionId,
           certificationIssueReportRepository,
           certificationAssessmentRepository,
           certificationCourseRepository,
@@ -801,7 +689,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
           certificationIssueReportRepository,
         });
 
-        const sessionFinalized = new SessionFinalized({
+        const { sessionId } = new SessionFinalized({
           sessionId: 1234,
           finalizedAt: new Date(),
           hasExaminerGlobalComment: false,
@@ -812,7 +700,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
 
         // when
         await processAutoJury({
-          sessionFinalized,
+          sessionId,
           certificationIssueReportRepository,
           certificationAssessmentRepository,
           certificationCourseRepository,
@@ -820,7 +708,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         });
 
         // then
-        expect(certificationRescoringRepository.execute).to.have.been.calledOnceWithExactly({
+        expect(certificationRescoringRepository.rescoreV3Certification).to.have.been.calledOnceWithExactly({
           event: new CertificationJuryDone({
             certificationCourseId: certificationCourse.getId(),
           }),
@@ -829,7 +717,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
     });
 
     describe('when the certification was ended due to finalization', function () {
-      it('publishes a CertificationJuryDone event', async function () {
+      it('scores the certification', async function () {
         // given
         const { certificationCourse } = _initializeV3CourseAndAssessment({
           certificationState: CertificationAssessment.states.ENDED_DUE_TO_FINALIZATION,
@@ -838,7 +726,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
           certificationIssueReportRepository,
         });
 
-        const sessionFinalized = new SessionFinalized({
+        const { sessionId } = new SessionFinalized({
           sessionId: 1234,
           finalizedAt: new Date(),
           hasExaminerGlobalComment: false,
@@ -849,7 +737,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
 
         // when
         await processAutoJury({
-          sessionFinalized,
+          sessionId,
           certificationIssueReportRepository,
           certificationAssessmentRepository,
           certificationCourseRepository,
@@ -857,7 +745,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         });
 
         // then
-        expect(certificationRescoringRepository.execute).to.have.been.calledOnceWithExactly({
+        expect(certificationRescoringRepository.rescoreV3Certification).to.have.been.calledOnceWithExactly({
           event: new CertificationJuryDone({
             certificationCourseId: certificationCourse.getId(),
           }),
@@ -890,7 +778,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
           .resolves(certificationAssessment);
 
         certificationAssessmentRepository.save.resolves();
-        const sessionFinalized = new SessionFinalized({
+        const { sessionId } = new SessionFinalized({
           sessionId: 1234,
           finalizedAt: new Date(),
           hasExaminerGlobalComment: false,
@@ -901,7 +789,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
 
         // when
         await processAutoJury({
-          sessionFinalized,
+          sessionId,
           certificationIssueReportRepository,
           certificationAssessmentRepository,
           certificationCourseRepository,
@@ -909,7 +797,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         });
 
         // then
-        expect(certificationRescoringRepository.execute).to.not.have.been.calledOnce;
+        expect(certificationRescoringRepository.rescoreV3Certification).to.not.have.been.calledOnce;
       });
     });
   });
