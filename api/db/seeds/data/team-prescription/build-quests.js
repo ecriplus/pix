@@ -18,6 +18,17 @@ import { TARGET_PROFILE_BADGES_STAGES_ID, TARGET_PROFILE_NO_BADGES_NO_STAGES_ID 
 
 const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewards:');
 
+function buildCombinedCourseQuest(databaseBuilder, organizationId) {
+  databaseBuilder.factory.buildQuest({
+    rewardType: null,
+    rewardId: null,
+    code: 'COMBINIX1',
+    organizationId,
+    eligibilityRequirements: [],
+    successRequirements: [],
+  });
+}
+
 function buildParenthoodQuest(databaseBuilder) {
   const { id: rewardId } = databaseBuilder.factory.buildAttestation({
     templateName: 'parenthood-attestation-template',
@@ -416,6 +427,7 @@ export const buildQuests = async (databaseBuilder) => {
   // Create quests
   buildSixthGradeQuests(databaseBuilder, rewardId, targetProfiles);
   buildParenthoodQuest(databaseBuilder);
+  buildCombinedCourseQuest(databaseBuilder, organization.id);
 
   // Create reward for success user
   databaseBuilder.factory.buildProfileReward({

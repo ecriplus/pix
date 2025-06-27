@@ -6,6 +6,8 @@ import { buildAttestation } from './build-attestation.js';
 
 const buildQuest = function ({
   id = databaseBuffer.getNextId(),
+  code = null,
+  organizationId = null,
   createdAt = new Date(),
   updatedAt,
   rewardType = REWARD_TYPES.ATTESTATION,
@@ -19,6 +21,8 @@ const buildQuest = function ({
 
   const values = {
     id,
+    code,
+    organizationId,
     createdAt,
     updatedAt: updatedAt ?? createdAt,
     rewardType,
