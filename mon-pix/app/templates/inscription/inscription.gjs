@@ -4,14 +4,18 @@ import pageTitle from 'ember-page-title/helpers/page-title';
 import OtherAuthenticationProviders from 'mon-pix/components/authentication/other-authentication-providers';
 import SignupForm from 'mon-pix/components/authentication/signup-form/index';
 import AuthenticationLayout from 'mon-pix/components/authentication-layout/index';
+
 <template>
   {{pageTitle (t "pages.sign-up.title")}}
 
   <AuthenticationLayout class="signup-page-layout">
+
     <:header>
-      <PixButtonLink @variant="secondary" @route="authentication.login">
-        {{t "pages.sign-up.actions.login"}}
-      </PixButtonLink>
+      {{#unless @model.isAnonymous}}
+        <PixButtonLink @variant="secondary" @route="authentication.login">
+          {{t "pages.sign-up.actions.login"}}
+        </PixButtonLink>
+      {{/unless}}
     </:header>
 
     <:content>
