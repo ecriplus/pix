@@ -2,6 +2,7 @@ import { visit } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
 import { click, find, triggerEvent } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { getPageTitle } from 'ember-page-title/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
@@ -19,6 +20,7 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
   [{ challengeType: 'QROC' }, { challengeType: 'QROCM' }, { challengeType: 'QCM' }, { challengeType: 'QCU' }].forEach(
     function (data) {
       module(`when ${data.challengeType} challenge is focused`, function () {
+        let screen;
         test('should display a specific page title', async function (assert) {
           // given
           assessment = server.create('assessment', 'ofCompetenceEvaluationType');
@@ -70,7 +72,7 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
                 server.create('challenge', 'forCompetenceEvaluation', data.challengeType, 'withFocused');
 
                 // when
-                await visit(`/assessments/${assessment.id}/challenges/0`);
+                screen = await visit(`/assessments/${assessment.id}/challenges/0`);
                 await click('.tooltip-tag-information__button');
               });
 
@@ -81,8 +83,12 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
 
               test('should enable input and buttons', async function (assert) {
                 // then
-                assert.ok(find('.challenge-actions__action-skip').getAttribute('aria-disabled').includes('false'));
-                assert.ok(find('.challenge-actions__action-validate').getAttribute('aria-disabled').includes('false'));
+                assert
+                  .dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')))
+                  .hasAttribute('aria-disabled', 'false');
+                assert
+                  .dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')))
+                  .hasAttribute('aria-disabled', 'false');
                 assert.notOk(find('[data-test="challenge-response-proposal-selector"]').getAttribute('disabled'));
               });
 
@@ -127,6 +133,8 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
           });
 
           module('when user has already seen challenge tooltip', function (hooks) {
+            let screen;
+
             hooks.beforeEach(async function () {
               const user = server.create('user', 'withEmail', {
                 hasSeenFocusedChallengeTooltip: true,
@@ -136,7 +144,7 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
               assessment = server.create('assessment', 'ofCompetenceEvaluationType');
               server.create('challenge', 'forCompetenceEvaluation', data.challengeType, 'withFocused');
 
-              await visit(`/assessments/${assessment.id}/challenges/0`);
+              screen = await visit(`/assessments/${assessment.id}/challenges/0`);
             });
 
             test('should hide the tooltip', async function (assert) {
@@ -146,8 +154,12 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
 
             test('should enable input and buttons', async function (assert) {
               // then
-              assert.ok(find('.challenge-actions__action-skip').getAttribute('aria-disabled').includes('false'));
-              assert.ok(find('.challenge-actions__action-validate').getAttribute('aria-disabled').includes('false'));
+              assert
+                .dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')))
+                .hasAttribute('aria-disabled', 'false');
+              assert
+                .dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')))
+                .hasAttribute('aria-disabled', 'false');
               assert.notOk(find('[data-test="challenge-response-proposal-selector"]').getAttribute('disabled'));
             });
           });
@@ -262,6 +274,7 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
         });
 
         module('when user has already focusedout the challenge', function (hooks) {
+          let screen;
           hooks.beforeEach(async function () {
             // given
             const user = server.create('user', 'withEmail', {
@@ -272,13 +285,17 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
             server.create('challenge', 'forCompetenceEvaluation', data.challengeType, 'withFocused');
 
             // when
-            await visit(`/assessments/${assessment.id}/challenges/0`);
+            screen = await visit(`/assessments/${assessment.id}/challenges/0`);
           });
 
           test('should enable input and buttons', async function (assert) {
             // then
-            assert.ok(find('.challenge-actions__action-skip').getAttribute('aria-disabled').includes('false'));
-            assert.ok(find('.challenge-actions__action-validate').getAttribute('aria-disabled').includes('false'));
+            assert
+              .dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')))
+              .hasAttribute('aria-disabled', 'false');
+            assert
+              .dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')))
+              .hasAttribute('aria-disabled', 'false');
             assert.notOk(find('[data-test="challenge-response-proposal-selector"]').getAttribute('disabled'));
           });
 
@@ -347,6 +364,7 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
           // eslint-disable-next-line qunit/no-identical-names
           module('when user has not answered the question', function () {
             module('when user has not seen the challenge tooltip yet', function (hooks) {
+              let screen;
               hooks.beforeEach(async function () {
                 // given
                 const user = server.create('user', 'withEmail', {
@@ -358,7 +376,7 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
                 server.create('challenge', 'forCompetenceEvaluation', data.challengeType);
 
                 // when
-                await visit(`/assessments/${assessment.id}/challenges/0`);
+                screen = await visit(`/assessments/${assessment.id}/challenges/0`);
               });
 
               test('should display a tooltip', async function (assert) {
@@ -373,7 +391,7 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
                   server.create('challenge', 'forCompetenceEvaluation', data.challengeType);
 
                   // when
-                  await visit(`/assessments/${assessment.id}/challenges/0`);
+                  screen = await visit(`/assessments/${assessment.id}/challenges/0`);
                   await click('.tooltip-tag-information__button');
                 });
 
@@ -384,16 +402,20 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
 
                 test('should enable input and buttons', async function (assert) {
                   // then
-                  assert.ok(find('.challenge-actions__action-skip').getAttribute('aria-disabled').includes('false'));
-                  assert.ok(
-                    find('.challenge-actions__action-validate').getAttribute('aria-disabled').includes('false'),
-                  );
+                  assert
+                    .dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')))
+                    .hasAttribute('aria-disabled', 'false');
+                  assert
+                    .dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')))
+                    .hasAttribute('aria-disabled', 'false');
+
                   assert.notOk(find('[data-test="challenge-response-proposal-selector"]').getAttribute('disabled'));
                 });
               });
             });
 
             module('when user has already seen challenge tooltip', function (hooks) {
+              let screen;
               hooks.beforeEach(async function () {
                 const user = server.create('user', 'withEmail', {
                   hasSeenOtherChallengesTooltip: true,
@@ -403,7 +425,7 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
                 assessment = server.create('assessment', 'ofCompetenceEvaluationType');
                 server.create('challenge', 'forCompetenceEvaluation', data.challengeType);
 
-                await visit(`/assessments/${assessment.id}/challenges/0`);
+                screen = await visit(`/assessments/${assessment.id}/challenges/0`);
               });
 
               test('should hide the overlay and tooltip', async function (assert) {
@@ -414,8 +436,13 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
 
               test('should enable input and buttons', async function (assert) {
                 // then
-                assert.ok(find('.challenge-actions__action-skip').getAttribute('aria-disabled').includes('false'));
-                assert.ok(find('.challenge-actions__action-validate').getAttribute('aria-disabled').includes('false'));
+                assert
+                  .dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')))
+                  .hasAttribute('aria-disabled', 'false');
+                assert
+                  .dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')))
+                  .hasAttribute('aria-disabled', 'false');
+
                 assert.notOk(find('[data-test="challenge-response-proposal-selector"]').getAttribute('disabled'));
               });
             });
@@ -701,10 +728,13 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
 
                 test('should enable input and buttons', async function (assert) {
                   // then
-                  assert.ok(find('.challenge-actions__action-skip').getAttribute('aria-disabled').includes('false'));
-                  assert.ok(
-                    find('.challenge-actions__action-validate').getAttribute('aria-disabled').includes('false'),
-                  );
+                  assert
+                    .dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')))
+                    .hasAttribute('aria-disabled', 'false');
+                  assert
+                    .dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')))
+                    .hasAttribute('aria-disabled', 'false');
+
                   assert.notOk(find('[data-test="challenge-response-proposal-selector"]').getAttribute('disabled'));
                 });
 

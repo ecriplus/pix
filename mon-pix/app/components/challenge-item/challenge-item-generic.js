@@ -8,6 +8,8 @@ export default class ChallengeItemGeneric extends Component {
   @service currentUser;
   @tracked hasChallengeTimedOut = this.args.assessment.hasTimeoutChallenge || false;
   @tracked errorMessage = null;
+  @tracked isValidateActionLoading = false;
+  @tracked isSkipActionLoading = false;
 
   get displayTimer() {
     return this.isTimedChallengeWithoutAnswer;
@@ -52,19 +54,24 @@ export default class ChallengeItemGeneric extends Component {
       return;
     }
 
+    this.isValidateActionLoading = true;
     this.errorMessage = null;
 
-    return this.args
-      .answerValidated(
-        this.args.challenge,
-        this.args.assessment,
-        this._getAnswerValue(),
-        this._getTimeout(),
-        this.args.hasFocusedOutOfWindow,
-      )
-      .finally(() => {
-        this.args.resetAllChallengeInfo();
-      });
+    try {
+      return this.args
+        .answerValidated(
+          this.args.challenge,
+          this.args.assessment,
+          this._getAnswerValue(),
+          this._getTimeout(),
+          this.args.hasFocusedOutOfWindow,
+        )
+        .finally(() => {
+          this.args.resetAllChallengeInfo();
+        });
+    } catch {
+      this.isValidateActionLoading = false;
+    }
   }
 
   @action
@@ -75,17 +82,23 @@ export default class ChallengeItemGeneric extends Component {
 
   @action
   skipChallenge() {
+    this.isSkipActionLoading = true;
     this.errorMessage = null;
-    return this.args
-      .answerValidated(
-        this.args.challenge,
-        this.args.assessment,
-        '#ABAND#',
-        this._getTimeout(),
-        this.args.hasFocusedOutOfWindow,
-      )
-      .finally(() => {
-        this.args.resetAllChallengeInfo();
-      });
+
+    try {
+      return this.args
+        .answerValidated(
+          this.args.challenge,
+          this.args.assessment,
+          '#ABAND#',
+          this._getTimeout(),
+          this.args.hasFocusedOutOfWindow,
+        )
+        .finally(() => {
+          this.args.resetAllChallengeInfo();
+        });
+    } catch {
+      this.isSkipActionLoading = false;
+    }
   }
 }

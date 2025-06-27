@@ -56,6 +56,8 @@ export default class ChallengeItemQcu extends ChallengeItemGeneric {
         <ChallengeActions
           @challenge={{@challenge}}
           @answer={{@answer}}
+          @isValidateActionLoading={{this.isValidateActionLoading}}
+          @isSkipActionLoading={{this.isSkipActionLoading}}
           @isCertification={{@assessment.isCertification}}
           @resumeAssessment={{this.resumeAssessment}}
           @validateAnswer={{this.validateAnswer}}

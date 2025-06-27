@@ -148,6 +148,8 @@ export default class ChallengeItemQroc extends ChallengeItemGeneric {
         <ChallengeActions
           @challenge={{@challenge}}
           @answer={{@answer}}
+          @isValidateActionLoading={{this.isValidateActionLoading}}
+          @isSkipActionLoading={{this.isSkipActionLoading}}
           @isCertification={{@assessment.isCertification}}
           @resumeAssessment={{this.resumeAssessment}}
           @isDisabled={{this.isAnswerFieldDisabled}}
