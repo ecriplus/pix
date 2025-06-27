@@ -103,7 +103,7 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
     });
 
     // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
-    // eslint-disable-next-line mocha/no-setup-in-describe
+
     [
       { name: 'firstName', code: 'CANDIDATE_FIRST_NAME_MUST_BE_A_STRING' },
       { name: 'lastName', code: 'CANDIDATE_LAST_NAME_MUST_BE_A_STRING' },
@@ -398,22 +398,6 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           const candidate = domainBuilder.certification.enrolment.buildCandidate({
             ...candidateData,
             subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
-          });
-
-          // when, then
-          candidate.validate({ isCoreComplementaryCompatibilityEnabled, cleaCertificationId });
-        });
-
-        it('should validate when there is only one complementary that is not clea', function () {
-          // given
-          const candidate = domainBuilder.certification.enrolment.buildCandidate({
-            ...candidateData,
-            subscriptions: [
-              domainBuilder.buildComplementarySubscription({
-                certificationCandidateId: null,
-                complementaryCertificationId: cleaCertificationId + 20,
-              }),
-            ],
           });
 
           // when, then

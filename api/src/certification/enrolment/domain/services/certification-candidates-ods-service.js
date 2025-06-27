@@ -217,14 +217,7 @@ function _buildComplementaryCertification(complementaryCertificationId) {
   });
 }
 
-function _buildSubscriptions({
-  hasCleaNumerique,
-  hasPixPlusDroit,
-  hasPixPlusEdu1erDegre,
-  hasPixPlusEdu2ndDegre,
-  hasPixPlusProSante,
-  complementaryCertificationsInDB,
-}) {
+function _buildSubscriptions({ hasCleaNumerique, complementaryCertificationsInDB }) {
   const complementaryCertificationsByKey = _.keyBy(complementaryCertificationsInDB, 'key');
 
   const subscriptions = [];
@@ -233,34 +226,6 @@ function _buildSubscriptions({
   if (hasCleaNumerique) {
     subscriptions.push(
       _buildComplementaryCertification(complementaryCertificationsByKey[ComplementaryCertificationKeys.CLEA].id),
-    );
-  }
-  if (hasPixPlusDroit) {
-    subscriptions.push(
-      _buildComplementaryCertification(
-        complementaryCertificationsByKey[ComplementaryCertificationKeys.PIX_PLUS_DROIT].id,
-      ),
-    );
-  }
-  if (hasPixPlusEdu1erDegre) {
-    subscriptions.push(
-      _buildComplementaryCertification(
-        complementaryCertificationsByKey[ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE].id,
-      ),
-    );
-  }
-  if (hasPixPlusEdu2ndDegre) {
-    subscriptions.push(
-      _buildComplementaryCertification(
-        complementaryCertificationsByKey[ComplementaryCertificationKeys.PIX_PLUS_EDU_2ND_DEGRE].id,
-      ),
-    );
-  }
-  if (hasPixPlusProSante) {
-    subscriptions.push(
-      _buildComplementaryCertification(
-        complementaryCertificationsByKey[ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE].id,
-      ),
     );
   }
   if (subscriptions.length === 0) {

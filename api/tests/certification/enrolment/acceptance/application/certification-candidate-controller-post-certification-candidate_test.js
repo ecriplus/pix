@@ -46,7 +46,6 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
       let sessionId;
       let userId;
       let candidate;
-      let complementaryCertificationId;
 
       beforeEach(function () {
         candidate = domainBuilder.certification.enrolment.buildCandidate({
@@ -83,9 +82,6 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
           name: 'PARIS 15',
           INSEECode: '75115',
         });
-        complementaryCertificationId = databaseBuilder.factory.buildComplementaryCertification({
-          label: 'Certif complémentaire 1',
-        }).id;
 
         payload = {
           data: {
@@ -107,7 +103,7 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
               subscriptions: [
                 {
                   type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-                  complementaryCertificationId,
+                  complementaryCertificationId: cleaCertificationId,
                 },
                 {
                   type: SUBSCRIPTION_TYPES.CORE,
@@ -150,7 +146,7 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
         expect(subscriptions).to.have.lengthOf(2);
         expect(subscriptions[0]).to.deep.equal({
           type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-          complementaryCertificationId,
+          complementaryCertificationId: cleaCertificationId,
         });
         expect(subscriptions[1]).to.deep.equal({
           type: SUBSCRIPTION_TYPES.CORE,

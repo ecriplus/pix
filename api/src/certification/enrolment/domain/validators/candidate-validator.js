@@ -12,14 +12,6 @@ const alternativeCoreOnly = Joi.array()
     complementaryCertificationId: null,
   })
   .required();
-const alternativeComplementaryOnly = Joi.array()
-  .length(1)
-  .items({
-    certificationCandidateId: Joi.number().allow(null),
-    type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-    complementaryCertificationId: Joi.number().invalid(Joi.ref('$cleaCertificationId')),
-  })
-  .required();
 const alternativeClea = Joi.array()
   .length(2)
   .items(
@@ -37,9 +29,7 @@ const alternativeClea = Joi.array()
   )
   .unique('type')
   .required();
-const schemaForCompatibilitySubscriptions = Joi.alternatives()
-  .match('one')
-  .try(alternativeCoreOnly, alternativeComplementaryOnly, alternativeClea);
+const schemaForCompatibilitySubscriptions = Joi.alternatives().match('one').try(alternativeCoreOnly, alternativeClea);
 
 const schema = Joi.object({
   firstName: Joi.string().trim().required().empty(['', null]).messages({
