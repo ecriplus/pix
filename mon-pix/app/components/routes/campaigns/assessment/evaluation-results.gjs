@@ -12,8 +12,8 @@ import QuitResults from '../../../campaigns/assessment/results/quit-results';
 
 export default class EvaluationResults extends Component {
   @service tabManager;
-
-  @tracked showEvaluationResultsModal = false;
+  // eslint-disable-next-line ember/no-tracked-properties-from-args
+  @tracked showEvaluationResultsModal = this.args.model.showTrainings;
 
   get isResultsSharedModalEnabled() {
     return this.hasTrainings;

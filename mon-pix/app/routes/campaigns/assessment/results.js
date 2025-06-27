@@ -36,7 +36,7 @@ export default class ResultsRoute extends Route {
         await this.currentUser.load();
       }
 
-      return { campaign, campaignParticipationResult, trainings, questResults };
+      return { campaign, campaignParticipationResult, showTrainings: false, trainings, questResults };
     } catch (error) {
       if (error.errors?.[0]?.status === '412') {
         this.router.transitionTo('campaigns.entry-point', campaign.code);
@@ -44,15 +44,16 @@ export default class ResultsRoute extends Route {
     }
   }
 
-  async afterModel({ campaignParticipationResult }) {
+  async afterModel(model) {
     if (!this.featureToggles.featureToggles?.isAutoShareEnabled) {
       return;
     }
-    if (campaignParticipationResult.isShared) {
+    if (model.campaignParticipationResult.isShared) {
       return;
     }
-    await this.store.adapterFor('campaign-participation-result').share(campaignParticipationResult.id);
-    campaignParticipationResult.isShared = true;
-    campaignParticipationResult.canImprove = false;
+    await this.store.adapterFor('campaign-participation-result').share(model.campaignParticipationResult.id);
+    model.campaignParticipationResult.isShared = true;
+    model.campaignParticipationResult.canImprove = false;
+    model.showTrainings = true;
   }
 }

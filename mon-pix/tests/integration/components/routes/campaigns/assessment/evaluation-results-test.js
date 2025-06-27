@@ -60,25 +60,41 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
   module('when the campaign is shared and has trainings', function (hooks) {
     hooks.beforeEach(async function () {
       // given
+      this.model.showTrainings = true;
       this.model.trainings = [{ duration: { days: 1, hours: 1, minutes: 1 } }];
       this.model.campaignParticipationResult.isShared = true;
       this.model.campaignParticipationResult.competenceResults = [Symbol('competences')];
     });
 
+    test('it should display modal before show assessment result', async function (assert) {
+      screen = await render(hbs`<Routes::Campaigns::Assessment::EvaluationResults @model={{this.model}} />`);
+
+      assert.ok(
+        screen.getByRole('dialog', { name: t('pages.skill-review.tabs.trainings.shared-results-modal.title') }),
+      );
+    });
+
     test('it should display the training button', async function (assert) {
       // when
+      this.model.showTrainings = false;
+
       screen = await render(hbs`<Routes::Campaigns::Assessment::EvaluationResults @model={{this.model}} />`);
 
       // then
-      assert.dom(screen.getByRole('button', { name: /Voir les formations/ })).isVisible();
+      assert.notOk(
+        screen.queryByRole('dialog', { name: t('pages.skill-review.tabs.trainings.shared-results-modal.title') }),
+      );
+      assert.dom(screen.getByRole('button', { name: t('pages.skill-review.hero.see-trainings') })).isVisible();
     });
 
     test('when the training button is clicked, it should set trainings tab active', async function (assert) {
+      this.model.showTrainings = false;
+
       // when
       screen = await render(hbs`<Routes::Campaigns::Assessment::EvaluationResults @model={{this.model}} />`);
 
       // then
-      await click(screen.getByRole('button', { name: /Voir les formations/ }));
+      await click(screen.getByRole('button', { name: t('pages.skill-review.hero.see-trainings') }));
       assert
         .dom(screen.getByRole('tab', { name: t('pages.skill-review.tabs.trainings.tab-label') }))
         .hasAttribute('aria-selected', 'true');
