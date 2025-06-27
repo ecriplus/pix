@@ -1,5 +1,49 @@
 # Pix Changelog
 
+# [5.145.0](https://github.com/1024pix/pix/compare/v5.144.0...v5.145.0) (2025-06-27)
+
+### :rocket: Amélioration
+
+- [#12662](https://github.com/1024pix/pix/pull/12662) Ajouter un feature flag pour l'envoi de résultats automatique (PIX-18452). 
+- [#12622](https://github.com/1024pix/pix/pull/12622) Migrer l'événement GRAIN_SKIPPED en traces d'apprentissage (PIX-18364) 
+- [#12668](https://github.com/1024pix/pix/pull/12668) Partager automatiquement les résultats de campagne (PIX-18454) 
+- [#12624](https://github.com/1024pix/pix/pull/12624) Supprimer l'appel au service metrics lorsqu'une flashcard a été répondu (PIX-18366) 
+- [#12674](https://github.com/1024pix/pix/pull/12674) Supprimer l'envoi automatique des résultats vers France Travail (PIX-18459). 
+
+### :bug: Correction
+
+- [#12644](https://github.com/1024pix/pix/pull/12644) Eviter de pouvoir cliquer deux fois sur le même bouton (PIX-18213) 
+- [#12675](https://github.com/1024pix/pix/pull/12675) Réparer la position des boutons d'action liés au candidat dans l'espace de certif (PIX-18458). 
+
+### :building_construction: Tech
+
+- [#12655](https://github.com/1024pix/pix/pull/12655) Création de la table `calibrations` dans le datamart. (PIX-18447). 
+- [#12517](https://github.com/1024pix/pix/pull/12517) Extraction des données de l'organisation à rejoindre en tant que prescrit 
+- [#12646](https://github.com/1024pix/pix/pull/12646) Ne plus remonter les anciens feature toggles dans le front 
+- [#12637](https://github.com/1024pix/pix/pull/12637) PixAdmin - migrer les tests de composants de unitaire à integration 
+- [#12645](https://github.com/1024pix/pix/pull/12645) Suppression de la colonne `calibration_id` de la table `active_calibrated_challenges` du datamart (PIX-18446). 
+
+### :arrow_up: Montée de version
+
+- [#12572](https://github.com/1024pix/pix/pull/12572) Update dependency eslint-plugin-mocha to v11 (api) 
+- [#12660](https://github.com/1024pix/pix/pull/12660) Update dependency eslint-plugin-unicorn to v59 (dossier racine) 
+- [#12661](https://github.com/1024pix/pix/pull/12661) Update dependency file-type to v21 (api) 
+- [#12663](https://github.com/1024pix/pix/pull/12663) Update dependency nodemailer to v7 (api) 
+- [#12664](https://github.com/1024pix/pix/pull/12664) Update dependency npm-run-all2 to v8 (api) 
+- [#12665](https://github.com/1024pix/pix/pull/12665) Update dependency npm-run-all2 to v8 (dossier racine) 
+- [#12666](https://github.com/1024pix/pix/pull/12666) Update dependency npm-run-all2 to v8 (e2e) 
+- [#12669](https://github.com/1024pix/pix/pull/12669) Update dependency npm-run-all2 to v8 (junior) 
+- [#12670](https://github.com/1024pix/pix/pull/12670) Update dependency npm-run-all2 to v8 (mon-pix) 
+- [#12672](https://github.com/1024pix/pix/pull/12672) Update dependency npm-run-all2 to v8 (orga) 
+- [#12673](https://github.com/1024pix/pix/pull/12673) Update dependency sinon to v21 (api) 
+- [#12676](https://github.com/1024pix/pix/pull/12676) Update dependency sinon to v21 (certif) 
+- [#12677](https://github.com/1024pix/pix/pull/12677) Update dependency sinon to v21 (junior) 
+- [#12679](https://github.com/1024pix/pix/pull/12679) Update dependency sinon to v21 (load-testing) 
+- [#12680](https://github.com/1024pix/pix/pull/12680) Update dependency sinon to v21 (mon-pix) 
+- [#12681](https://github.com/1024pix/pix/pull/12681) Update dependency sinon to v21 (orga) 
+- [#12682](https://github.com/1024pix/pix/pull/12682) Update dependency stylelint-order to v7 (junior) 
+- [#12684](https://github.com/1024pix/pix/pull/12684) Update dependency stylelint-order to v7 (mon-pix)
+
 # [5.144.0](https://github.com/1024pix/pix/compare/v5.143.0...v5.144.0) (2025-06-26)
 
 ### :rocket: Amélioration
