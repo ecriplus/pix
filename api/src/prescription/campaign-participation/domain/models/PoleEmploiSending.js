@@ -5,40 +5,37 @@ const TYPES = {
 };
 
 class PoleEmploiSending {
-  constructor({ campaignParticipationId, type, payload, isSuccessful, responseCode }) {
+  constructor({ campaignParticipationId, type, payload, responseCode = 'DISABLED' }) {
     this.campaignParticipationId = campaignParticipationId;
     this.type = type;
-    this.isSuccessful = isSuccessful;
+    this.isSuccessful = false;
     this.responseCode = responseCode;
     this.payload = payload;
   }
 
-  static buildForParticipationStarted({ campaignParticipationId, payload, isSuccessful, responseCode }) {
+  static buildForParticipationStarted({ campaignParticipationId, payload, responseCode }) {
     return new PoleEmploiSending({
       campaignParticipationId,
       type: TYPES.CAMPAIGN_PARTICIPATION_START,
       payload,
-      isSuccessful,
       responseCode,
     });
   }
 
-  static buildForParticipationFinished({ campaignParticipationId, payload, isSuccessful, responseCode }) {
+  static buildForParticipationFinished({ campaignParticipationId, payload, responseCode }) {
     return new PoleEmploiSending({
       campaignParticipationId,
       type: TYPES.CAMPAIGN_PARTICIPATION_COMPLETION,
       payload,
-      isSuccessful,
       responseCode,
     });
   }
 
-  static buildForParticipationShared({ campaignParticipationId, payload, isSuccessful, responseCode }) {
+  static buildForParticipationShared({ campaignParticipationId, payload, responseCode }) {
     return new PoleEmploiSending({
       campaignParticipationId,
       type: TYPES.CAMPAIGN_PARTICIPATION_SHARING,
       payload,
-      isSuccessful,
       responseCode,
     });
   }

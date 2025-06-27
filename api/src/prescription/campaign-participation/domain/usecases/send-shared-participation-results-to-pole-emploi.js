@@ -1,27 +1,17 @@
-import * as httpErrorsHelper from '../../../../../src/prescription/campaign-participation/infrastructure/errors-helper.js';
-import { httpAgent } from '../../../../shared/infrastructure/http-agent.js';
-import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import { PoleEmploiPayload } from '../../infrastructure/externals/pole-emploi/PoleEmploiPayload.js';
 import { PoleEmploiSending } from '../models/PoleEmploiSending.js';
 
 const sendSharedParticipationResultsToPoleEmploi = async ({
   campaignParticipationId,
-  authenticationMethodRepository,
   badgeRepository,
   badgeAcquisitionRepository,
   campaignParticipationRepository,
   campaignParticipationResultRepository,
   campaignRepository,
   organizationRepository,
-  poleEmploiNotifier,
   poleEmploiSendingRepository,
   targetProfileRepository,
   userRepository,
-  notifierDependencies = {
-    httpAgent,
-    httpErrorsHelper,
-    logger,
-  },
 }) => {
   const participation = await campaignParticipationRepository.get(campaignParticipationId);
   const campaign = await campaignRepository.get(participation.campaignId);
@@ -48,16 +38,9 @@ const sendSharedParticipationResultsToPoleEmploi = async ({
       badgeAcquiredIds,
     });
 
-    const response = await poleEmploiNotifier.notify(user.id, payload, {
-      authenticationMethodRepository,
-      ...notifierDependencies,
-    });
-
     const poleEmploiSending = PoleEmploiSending.buildForParticipationShared({
       campaignParticipationId,
       payload: payload.toString(),
-      isSuccessful: response.isSuccessful,
-      responseCode: response.code,
     });
 
     return poleEmploiSendingRepository.create({ poleEmploiSending });

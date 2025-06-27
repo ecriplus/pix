@@ -182,7 +182,7 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
           const result = await knex('pole-emploi-sendings')
             .select('type')
             .whereIn('campaignParticipationId', [firstParticipation.id, secondParticipation.id, thirdParticipation.id])
-            .where({ isSuccessful: false, responseCode: 'SCRIPT_2024-02-02_to_2024-02-04' });
+            .where({ responseCode: 'SCRIPT_2024-02-02_to_2024-02-04' });
 
           expect(result).lengthOf(0);
         });
@@ -205,7 +205,7 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
           const result = await knex('pole-emploi-sendings')
             .select('type')
             .whereIn('campaignParticipationId', [firstParticipation.id, secondParticipation.id, thirdParticipation.id])
-            .where({ isSuccessful: false, responseCode: 'SCRIPT_2024-02-02_to_2024-02-04' });
+            .where({ responseCode: 'SCRIPT_2024-02-02_to_2024-02-04' });
 
           expect(result).lengthOf(0);
         });
@@ -223,7 +223,7 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
 
           const result = await knex('pole-emploi-sendings').select('type').where({
             campaignParticipationId: participation.id,
-            isSuccessful: false,
+
             responseCode: 'SCRIPT_2024-02-02_to_2024-02-04',
             type: PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_START,
           });
@@ -245,7 +245,7 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
             .select('type')
             .where({
               campaignParticipationId: participation.id,
-              isSuccessful: false,
+
               responseCode: 'SCRIPT_2024-02-02_to_2024-02-04',
             })
             .whereIn('type', [PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_START]);
@@ -268,7 +268,7 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
             .select('type')
             .where({
               campaignParticipationId: participation.id,
-              isSuccessful: false,
+
               responseCode: 'SCRIPT_2024-02-02_to_2024-02-04',
             })
             .whereIn('type', [
@@ -293,7 +293,7 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
             .select('type')
             .where({
               campaignParticipationId: participation.id,
-              isSuccessful: false,
+
               responseCode: 'SCRIPT_2024-02-02_to_2024-02-04',
             })
             .whereIn('type', [PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_COMPLETION]);
@@ -313,7 +313,7 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
 
           const result = await knex('pole-emploi-sendings').select('type').where({
             campaignParticipationId: participation.id,
-            isSuccessful: false,
+
             responseCode: 'SCRIPT_2024-02-02_to_2024-02-04',
           });
 
@@ -336,7 +336,7 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
             .select('type')
             .where({
               campaignParticipationId: participation.id,
-              isSuccessful: false,
+
               responseCode: 'SCRIPT_2024-02-02_to_2024-02-04',
             })
             .whereIn('type', [
@@ -363,7 +363,7 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
             .select('type')
             .where({
               campaignParticipationId: participation.id,
-              isSuccessful: false,
+
               responseCode: 'SCRIPT_2024-02-02_to_2024-02-04',
             })
             .whereIn('type', [
@@ -390,7 +390,7 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
             .select('type')
             .where({
               campaignParticipationId: participation.id,
-              isSuccessful: false,
+
               responseCode: 'SCRIPT_2024-02-02_to_2024-02-04',
             })
             .whereIn('type', [
@@ -416,7 +416,7 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
             .select('type')
             .where({
               campaignParticipationId: participation.id,
-              isSuccessful: false,
+
               responseCode: 'SCRIPT_2024-02-02_to_2024-02-04',
             })
             .whereIn('type', [PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_SHARING]);
@@ -437,7 +437,7 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
 
           const result = await knex('pole-emploi-sendings').select('type').where({
             campaignParticipationId: participation.id,
-            isSuccessful: false,
+
             responseCode: 'SCRIPT_2024-02-02_to_2024-02-04',
           });
 
