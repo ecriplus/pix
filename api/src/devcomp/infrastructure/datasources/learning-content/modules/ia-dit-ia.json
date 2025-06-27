@@ -169,7 +169,7 @@
               },
               "invalid": {
                 "state": "",
-                "diagnosis": "<p>Et non. Dans le salon de Mariam il y a 6 appareils et services qui utilisent des logiciels d'IA : le thermostat, le service de vidéo à la demande sur la télévision, l'IA conversationnelle sur l'ordinateur, le robot aspirateur, l'enceinte connectée et le jeu vidéo sur la console.</p>"
+                "diagnosis": "<p>Et non. Dans le salon de Mariam, il y a 6 appareils et services qui utilisent des logiciels d'IA : le thermostat, le service de vidéo à la demande sur la télévision, l'IA conversationnelle sur l'ordinateur, le robot aspirateur, l'enceinte connectée et le jeu vidéo sur la console.</p>"
               }
             }
           }
@@ -239,7 +239,7 @@
           "element": {
             "id": "715a385e-dcfb-4001-9e5d-5b00ab365221",
             "type": "text",
-            "content": "<p>Voici les points principaux à retenir&nbsp;:&nbsp;</p><ul><li><strong>L’intelligence artificielle est un domaine scientifique</strong> qui étudie comment permettre à des machines d’imiter les mécanismes de l’intelligence pour réaliser toutes sortes de tâches.&nbsp;🔬</li><li><strong>Certains logiciels d’IA sont spécialisés dans un type de tâches</strong> comme la reconnaissance d’image par exemple. D'autres comme <strong>les IA génératives réalisent différentes tâches</strong>.&nbsp;👩‍💻</li><li>Les logiciels d’IA sont utilisés dans <strong>des appareils et services de notre quotidien</strong>.&nbsp;📱</li><li>L’utilisation de l’IA  permet de faire de nombreux progrès scientifiques.&nbsp;📈</li></ul>"
+            "content": "<p>Voici les points principaux à retenir&nbsp;:&nbsp;</p><ul><li><strong>L’intelligence artificielle est un domaine scientifique</strong> qui étudie comment permettre à des machines d’imiter les mécanismes de l’intelligence pour réaliser toutes sortes de tâches.&nbsp;🔬</li><li><strong>Certains logiciels d’IA sont spécialisés dans un type de tâches</strong> comme la reconnaissance d’image par exemple. D'autres comme <strong>les IA génératives réalisent différentes tâches</strong>.&nbsp;👩‍💻</li><li>Les logiciels d’IA sont utilisés dans <strong>des appareils et services de notre quotidien</strong>.&nbsp;📱</li><li>L’utilisation de l’IA  permet de faire de nombreux <strong>progrès scientifiques</strong>.&nbsp;📈</li></ul>"
           }
         }
       ]
@@ -334,7 +334,7 @@
                 {
                   "id": "05a30b10-ac62-40a5-961b-9f3f3e831da0",
                   "type": "qcu",
-                  "instruction": "<p>🎤 Une application retrouve la titre d'une musique que vous lui chantez.</p><p><br>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
+                  "instruction": "<h4>🎤 Une application retrouve la titre d'une musique que vous lui chantez.</h4><p><br>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
                   "proposals": [
                     {
                       "id": "1",
@@ -378,7 +378,7 @@
                 {
                   "id": "f2e08b74-e487-40cc-935b-87ad6a2f4b54",
                   "type": "qcu",
-                  "instruction": "<p>❓ Une IA conversationnelle répond à vos questions sur n'importe quel sujet.</p><p><br>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
+                  "instruction": "<h4>❓ Une IA conversationnelle répond à vos questions sur n'importe quel sujet.</h4><p><br>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
                   "proposals": [
                     {
                       "id": "1",
@@ -422,7 +422,7 @@
                 {
                   "id": "d6644a42-0b76-4e9c-8595-43c2da89cb9b",
                   "type": "qcu",
-                  "instruction": "<p>▶️ Un site vous propose de nouveaux contenus suite au visionnage d’une vidéo.</p><p><br>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
+                  "instruction": "<h4>▶️ Un site vous propose de nouveaux contenus suite au visionnage d’une vidéo.</h4><p><br>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
                   "proposals": [
                     {
                       "id": "1",
@@ -466,7 +466,7 @@
                 {
                   "id": "e67d64c3-9912-4046-9f03-46059c51247c",
                   "type": "qcu",
-                  "instruction": "<p>🏷️ Un logiciel ajoute automatiquement des mots clés à des photographies.</p><p><br>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
+                  "instruction": "<h4>🏷️ Un logiciel ajoute automatiquement des mots clés à des photographies.</h4><p><br>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
                   "proposals": [
                     {
                       "id": "1",
