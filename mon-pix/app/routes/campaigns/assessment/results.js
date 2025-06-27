@@ -6,6 +6,7 @@ export default class ResultsRoute extends Route {
   @service session;
   @service store;
   @service router;
+  @service featureToggles;
 
   beforeModel(transition) {
     this.session.requireAuthenticationAndApprovedTermsOfService(transition);
@@ -41,5 +42,17 @@ export default class ResultsRoute extends Route {
         this.router.transitionTo('campaigns.entry-point', campaign.code);
       } else throw error;
     }
+  }
+
+  async afterModel({ campaignParticipationResult }) {
+    if (!this.featureToggles.featureToggles?.isAutoShareEnabled) {
+      return;
+    }
+    if (campaignParticipationResult.isShared) {
+      return;
+    }
+    await this.store.adapterFor('campaign-participation-result').share(campaignParticipationResult.id);
+    campaignParticipationResult.isShared = true;
+    campaignParticipationResult.canImprove = false;
   }
 }

@@ -129,6 +129,25 @@ module('Acceptance | Campaigns | Results', function (hooks) {
         assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/evaluation/resultats`);
       });
 
+      module('when isAutoShareEnabled', function () {
+        test('should shared result automatically', async function (assert) {
+          // when
+          server.create('feature-toggle', {
+            id: 0,
+            isAutoShareEnabled: true,
+          });
+          server.create('campaign-participation-result', {
+            id: campaignParticipation.id,
+            isShared: false,
+          });
+          const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
+          assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/evaluation/resultats`);
+
+          // then
+          assert.ok(await screen.findByRole('link', { name: t('navigation.back-to-homepage') }));
+        });
+      });
+
       test('should display evaluation results component', async function (assert) {
         // given
 
