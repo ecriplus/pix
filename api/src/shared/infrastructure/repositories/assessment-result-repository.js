@@ -90,7 +90,8 @@ const findLatestLevelAndPixScoreByAssessmentId = async function ({ assessmentId,
 };
 
 const getByCertificationCourseId = async function ({ certificationCourseId }) {
-  const assessment = await knex('assessments')
+  const knexConn = DomainTransaction.getConnection();
+  const assessment = await knexConn('assessments')
     .select('id')
     .where({ certificationCourseId })
     .orderBy('createdAt', 'desc')
@@ -99,13 +100,13 @@ const getByCertificationCourseId = async function ({ certificationCourseId }) {
   if (assessment) {
     const assessmentId = assessment.id;
 
-    const latestAssessmentResult = await knex('assessment-results')
+    const latestAssessmentResult = await knexConn('assessment-results')
       .where({ assessmentId })
       .orderBy('createdAt', 'desc')
       .first();
 
     if (latestAssessmentResult) {
-      const competencesMarksDTO = await knex('competence-marks').where({
+      const competencesMarksDTO = await knexConn('competence-marks').where({
         assessmentResultId: latestAssessmentResult.id,
       });
 

@@ -1,5 +1,6 @@
 import { scoreDoubleCertificationV3 } from '../../../../../../../src/certification/evaluation/domain/services/scoring/score-double-certification-v3.js';
 import { ComplementaryCertificationCourseResult } from '../../../../../../../src/certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
+import { DomainTransaction } from '../../../../../../../src/shared/domain/DomainTransaction.js';
 import { domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
 
 describe('Certification | Evaluation | Unit | Domain | Services | Scoring Double Certification V3', function () {
@@ -16,6 +17,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Double
   };
 
   beforeEach(function () {
+    sinon.stub(DomainTransaction, 'execute').callsFake((lambda) => lambda());
     complementaryCertificationCourseResultRepository.save = sinon.stub();
     assessmentResultRepository.getByCertificationCourseId = sinon.stub();
     assessmentResultRepository.updateToAcquiredLowerLevelComplementaryCertification = sinon.stub();
