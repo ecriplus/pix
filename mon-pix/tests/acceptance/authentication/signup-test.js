@@ -6,6 +6,7 @@ import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { authenticate } from '../../helpers/authentication';
 import setupIntl from '../../helpers/setup-intl';
 
 const I18N_KEYS = {
@@ -36,7 +37,14 @@ module('Acceptance | authentication | Signup', function (hooks) {
     const email = 'john.doe@email.com';
     const password = 'JeMeLoggue1024';
 
+    // when
     const screen = await visit('/inscription');
+
+    //then
+    const signupHeading = screen.getByRole('heading', { name: t('pages.sign-up.first-title') });
+    assert.dom(signupHeading).exists();
+    const loginButton = screen.queryByRole('link', { name: t('pages.sign-up.actions.login') });
+    assert.dom(loginButton).exists();
 
     // when
     await fillByLabel(t(I18N_KEYS.firstNameInput), firstName);
@@ -49,6 +57,88 @@ module('Acceptance | authentication | Signup', function (hooks) {
     // then
     const homepageHeading = screen.getByRole('heading', { name: t('pages.dashboard.title') });
     assert.dom(homepageHeading).exists();
+  });
+
+  module('when feature toggle upgradeToRealUserEnabled is true', function (hooks) {
+    hooks.beforeEach(async function () {
+      server.create('feature-toggle', { id: '0', upgradeToRealUserEnabled: true });
+    });
+
+    module('when real user is authenticated', function () {
+      test('he can not access to the sign up page and is redirected to his dashboard', async function (assert) {
+        // given
+        const firstName = 'John';
+        const lastName = 'Doe';
+        const email = 'john.doe@email.com';
+
+        const user = server.create('user', { firstName, lastName, email, isAnonymous: false });
+        await authenticate(user);
+
+        // when
+        const screen = await visit('/inscription');
+
+        // then
+        const homepageHeading = screen.getByRole('heading', { name: t('pages.dashboard.title') });
+        assert.dom(homepageHeading).exists();
+      });
+    });
+
+    module('when anonymous user is authenticated', function () {
+      test('he can access the sign up page', async function (assert) {
+        // given
+        const user = server.create('user', { isAnonymous: true });
+        await authenticate(user);
+
+        // when
+        const screen = await visit('/inscription');
+
+        // then
+        const signupHeading = screen.getByRole('heading', { name: t('pages.sign-up.first-title') });
+        assert.dom(signupHeading).exists();
+        const loginButton = screen.queryByRole('link', { name: t('pages.sign-up.actions.login') });
+        assert.dom(loginButton).doesNotExist();
+      });
+    });
+  });
+
+  module('when feature toggle upgradeToRealUserEnabled is false', function (hooks) {
+    hooks.beforeEach(async function () {
+      server.create('feature-toggle', { id: '0', upgradeToRealUserEnabled: false });
+    });
+
+    module('when real user is authenticated', function () {
+      test('he can not access to the sign up page and is redirected to his dashboard', async function (assert) {
+        // given
+        const firstName = 'John';
+        const lastName = 'Doe';
+        const email = 'john.doe@email.com';
+
+        const user = server.create('user', { firstName, lastName, email, isAnonymous: false });
+        await authenticate(user);
+
+        // when
+        const screen = await visit('/inscription');
+
+        // then
+        const homepageHeading = screen.getByRole('heading', { name: t('pages.dashboard.title') });
+        assert.dom(homepageHeading).exists();
+      });
+    });
+
+    module('when anonymous user is authenticated', function () {
+      test('he can not access to the sign up page and is redirected to his dashboard', async function (assert) {
+        // given
+        const user = server.create('user', { isAnonymous: true });
+        await authenticate(user);
+
+        // when
+        const screen = await visit('/inscription');
+
+        // then
+        const homepageHeading = screen.getByRole('heading', { name: t('pages.dashboard.title') });
+        assert.dom(homepageHeading).exists();
+      });
+    });
   });
 
   module('when a new user join a campaign', function () {

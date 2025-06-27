@@ -4,12 +4,25 @@ import { service } from '@ember/service';
 export default class InscriptionRoute extends Route {
   @service session;
   @service store;
+  @service featureToggles;
+  @service router;
+  @service currentUser;
+
+  get isAnonymous() {
+    return this.currentUser?.user?.isAnonymous || false;
+  }
 
   beforeModel() {
+    if (this.featureToggles.featureToggles?.upgradeToRealUserEnabled && this.isAnonymous) {
+      return;
+    }
     this.session.prohibitAuthentication('authenticated.user-dashboard');
   }
 
   model() {
+    if (this.isAnonymous) {
+      return this.currentUser.user;
+    }
     // XXX: Model needs to be initialize with empty to handle validations on all fields from Api
     return this.store.createRecord('user', {
       lastName: '',
