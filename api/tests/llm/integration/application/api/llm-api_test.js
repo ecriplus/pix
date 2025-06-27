@@ -729,11 +729,12 @@ describe('LLM | Integration | Application | API | llm', function () {
                         { content: 'coucou LLM1', role: 'assistant' },
                         {
                           content:
-                            'Ajoute le fichier fictif "expected_file.txt" à ton contexte. Voici le contenu du fichier :\nadd me in the chat !',
+                            "\n<system_notification>\n  L'utilisateur a téléversé une pièce jointe :\n  <attachment_name>\n    expected_file.txt\n  </attachment_name>\n</system_notification>",
                           role: 'user',
                         },
                         {
-                          content: 'Le contenu du fichier fictif a été ajouté au contexte.',
+                          content:
+                            '\n<read_attachment_tool>\n  Lecture de la pièce jointe :\n  <attachment_content>\n    add me in the chat !\n  </attachment_content>\n</read_attachment_tool>',
                           role: 'assistant',
                         },
                       ],
@@ -776,11 +777,12 @@ describe('LLM | Integration | Application | API | llm', function () {
                       { content: 'coucou LLM1', isFromUser: false },
                       {
                         content:
-                          'Ajoute le fichier fictif "expected_file.txt" à ton contexte. Voici le contenu du fichier :\nadd me in the chat !',
+                          "\n<system_notification>\n  L'utilisateur a téléversé une pièce jointe :\n  <attachment_name>\n    expected_file.txt\n  </attachment_name>\n</system_notification>",
                         isFromUser: true,
                       },
                       {
-                        content: 'Le contenu du fichier fictif a été ajouté au contexte.',
+                        content:
+                          '\n<read_attachment_tool>\n  Lecture de la pièce jointe :\n  <attachment_content>\n    add me in the chat !\n  </attachment_content>\n</read_attachment_tool>',
                         isFromUser: false,
                       },
                       { content: 'un message', isFromUser: true },
@@ -1091,11 +1093,12 @@ describe('LLM | Integration | Application | API | llm', function () {
                       { content: 'coucou LLM1', isFromUser: false },
                       {
                         content:
-                          'Ajoute le fichier fictif "expected_file.txt" à ton contexte. Voici le contenu du fichier :\nadd me in the chat !',
+                          "\n<system_notification>\n  L'utilisateur a téléversé une pièce jointe :\n  <attachment_name>\n    expected_file.txt\n  </attachment_name>\n</system_notification>",
                         isFromUser: true,
                       },
                       {
-                        content: 'Le contenu du fichier fictif a été ajouté au contexte.',
+                        content:
+                          '\n<read_attachment_tool>\n  Lecture de la pièce jointe :\n  <attachment_content>\n    add me in the chat !\n  </attachment_content>\n</read_attachment_tool>',
                         isFromUser: false,
                       },
                     ],

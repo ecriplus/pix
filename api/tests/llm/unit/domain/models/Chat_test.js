@@ -160,11 +160,12 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             },
             {
               content:
-                'Ajoute le fichier fictif "winter_lyrics.txt" à ton contexte. Voici le contenu du fichier :\nJ\'étais assise sur une pierre\nDes larmes coulaient sur mon visage',
+                "\n<system_notification>\n  L'utilisateur a téléversé une pièce jointe :\n  <attachment_name>\n    winter_lyrics.txt\n  </attachment_name>\n</system_notification>",
               isFromUser: true,
             },
             {
-              content: 'Le contenu du fichier fictif a été ajouté au contexte.',
+              content:
+                "\n<read_attachment_tool>\n  Lecture de la pièce jointe :\n  <attachment_content>\n    J'étais assise sur une pierre\nDes larmes coulaient sur mon visage\n  </attachment_content>\n</read_attachment_tool>",
               isFromUser: false,
             },
           ],

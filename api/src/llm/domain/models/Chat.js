@@ -31,15 +31,22 @@ export class Chat {
    */
   addAttachmentContextMessages(attachmentName, attachmentContext) {
     if (!this.hasAttachmentContextBeenAdded) {
-      const content =
-        'Ajoute le fichier fictif "' +
-        attachmentName +
-        '" à ton contexte. Voici le contenu du fichier :\n' +
-        attachmentContext;
-      this.messages.push(new Message({ content, isFromUser: true }));
-      this.messages.push(
-        new Message({ content: 'Le contenu du fichier fictif a été ajouté au contexte.', isFromUser: false }),
-      );
+      const userContent = `
+<system_notification>
+  L'utilisateur a téléversé une pièce jointe :
+  <attachment_name>
+    ${attachmentName}
+  </attachment_name>
+</system_notification>`;
+      this.messages.push(new Message({ content: userContent, isFromUser: true }));
+      const llmContent = `
+<read_attachment_tool>
+  Lecture de la pièce jointe :
+  <attachment_content>
+    ${attachmentContext}
+  </attachment_content>
+</read_attachment_tool>`;
+      this.messages.push(new Message({ content: llmContent, isFromUser: false }));
       this.hasAttachmentContextBeenAdded = true;
     }
   }
