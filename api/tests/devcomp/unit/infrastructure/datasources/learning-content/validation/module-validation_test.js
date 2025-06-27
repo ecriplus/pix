@@ -234,6 +234,23 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
         expect(joiError.message).to.deep.equal(expectedErrorMessages.join('. '));
       }
     });
+
+    it('should throw an html validation error if text element content contains a style tag', async function () {
+      // given
+      const invalidTextElement = {
+        id: '774c4c4e-f170-4e2c-ba7a-d2fe40d053c3',
+        type: 'text',
+        content: '<style>p { color: indianred; }</style> <p>Stylé !</p>',
+      };
+
+      try {
+        await textElementSchema.validateAsync(invalidTextElement, { abortEarly: false });
+        throw new Error('Joi validation should have thrown');
+      } catch (joiError) {
+        const message = joiError.details[0].context.value.results[0].messages[0].message;
+        expect(message).to.deep.equal('Use external stylesheet with <link> instead of <style> tag');
+      }
+    });
   });
 
   describe('When module contains not allowed HTML', function () {

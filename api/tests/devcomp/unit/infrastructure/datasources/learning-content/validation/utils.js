@@ -5,7 +5,11 @@ const uuidSchema = Joi.string().guid({ version: 'uuidv4' }).required();
 
 const proposalIdSchema = Joi.string().regex(/^\d+$/);
 
-const htmlValidate = new HtmlValidate();
+const htmlValidate = new HtmlValidate({
+  rules: {
+    'no-style-tag': 'error',
+  },
+});
 const htmlSchema = Joi.string().external(htmlValidation);
 
 async function htmlValidation(value, helpers) {
