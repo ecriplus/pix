@@ -1,8 +1,119 @@
-import { QCUDeclarativeAnsweredEvent } from '../../../../../../src/devcomp/domain/models/passage-events/answerable-element-events.js';
+import {
+  EmbedAnsweredEvent,
+  QCMAnsweredEvent,
+  QCUAnsweredEvent,
+  QCUDeclarativeAnsweredEvent,
+  QROCMAnsweredEvent,
+} from '../../../../../../src/devcomp/domain/models/passage-events/answerable-element-events.js';
 import { DomainError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Devcomp | Domain | Models | passage-events | answerable-element-events', function () {
+  describe('#EmbedAnsweredEvent', function () {
+    it('should init and keep attributes', function () {
+      // given
+      const id = Symbol('id');
+      const occurredAt = new Date();
+      const createdAt = new Date();
+      const passageId = 2;
+      const sequenceNumber = 3;
+      const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
+      const answer = 'Courgette';
+      const status = 'ok';
+
+      // when
+      const embedAnsweredEvent = new EmbedAnsweredEvent({
+        id,
+        occurredAt,
+        createdAt,
+        passageId,
+        sequenceNumber,
+        elementId,
+        answer,
+        status,
+      });
+
+      // then
+      expect(embedAnsweredEvent.id).to.equal(id);
+      expect(embedAnsweredEvent.type).to.equal('EMBED_ANSWERED');
+      expect(embedAnsweredEvent.occurredAt).to.equal(occurredAt);
+      expect(embedAnsweredEvent.createdAt).to.equal(createdAt);
+      expect(embedAnsweredEvent.passageId).to.equal(passageId);
+      expect(embedAnsweredEvent.sequenceNumber).to.equal(sequenceNumber);
+      expect(embedAnsweredEvent.data).to.deep.equal({ elementId, answer, status });
+    });
+  });
+
+  describe('#QCMAnsweredEvent', function () {
+    it('should init and keep attributes', function () {
+      // given
+      const id = Symbol('id');
+      const occurredAt = new Date();
+      const createdAt = new Date();
+      const passageId = 2;
+      const sequenceNumber = 3;
+      const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
+      const answer = ['2', '3', '4'];
+      const status = 'ok';
+
+      // when
+      const qcmAnsweredEvent = new QCMAnsweredEvent({
+        id,
+        occurredAt,
+        createdAt,
+        passageId,
+        sequenceNumber,
+        elementId,
+        answer,
+        status,
+      });
+
+      // then
+      expect(qcmAnsweredEvent.id).to.equal(id);
+      expect(qcmAnsweredEvent.type).to.equal('QCM_ANSWERED');
+      expect(qcmAnsweredEvent.occurredAt).to.equal(occurredAt);
+      expect(qcmAnsweredEvent.createdAt).to.equal(createdAt);
+      expect(qcmAnsweredEvent.passageId).to.equal(passageId);
+      expect(qcmAnsweredEvent.sequenceNumber).to.equal(sequenceNumber);
+      expect(qcmAnsweredEvent.data).to.deep.equal({ elementId, answer, status });
+    });
+  });
+
+  describe('#QCUAnsweredEvent', function () {
+    it('should init and keep attributes', function () {
+      // given
+      const id = Symbol('id');
+      const occurredAt = new Date();
+      const createdAt = new Date();
+      const passageId = 2;
+      const sequenceNumber = 3;
+      const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
+      const answer = 'Poire';
+      const status = 'ok';
+
+      // when
+      const qcuAnsweredEvent = new QCUAnsweredEvent({
+        id,
+        occurredAt,
+        createdAt,
+        passageId,
+        sequenceNumber,
+        elementId,
+        answer,
+        status,
+      });
+
+      // then
+      expect(qcuAnsweredEvent.id).to.equal(id);
+      expect(qcuAnsweredEvent.type).to.equal('QCU_ANSWERED');
+      expect(qcuAnsweredEvent.occurredAt).to.equal(occurredAt);
+      expect(qcuAnsweredEvent.createdAt).to.equal(createdAt);
+      expect(qcuAnsweredEvent.passageId).to.equal(passageId);
+      expect(qcuAnsweredEvent.sequenceNumber).to.equal(sequenceNumber);
+      expect(qcuAnsweredEvent.data).to.deep.equal({ elementId, answer, status });
+    });
+  });
+
   describe('#QCUDeclarativeAnsweredEvent', function () {
     it('should init and keep attributes', function () {
       // given
@@ -32,8 +143,6 @@ describe('Integration | Devcomp | Domain | Models | passage-events | answerable-
       expect(qcuDeclarativeAnsweredEvent.createdAt).to.equal(createdAt);
       expect(qcuDeclarativeAnsweredEvent.passageId).to.equal(passageId);
       expect(qcuDeclarativeAnsweredEvent.sequenceNumber).to.equal(sequenceNumber);
-      expect(qcuDeclarativeAnsweredEvent.elementId).to.equal(elementId);
-      expect(qcuDeclarativeAnsweredEvent.answer).to.equal(answer);
       expect(qcuDeclarativeAnsweredEvent.data).to.deep.equal({ elementId, answer });
     });
 
@@ -66,6 +175,41 @@ describe('Integration | Devcomp | Domain | Models | passage-events | answerable-
         expect(error).to.be.instanceOf(DomainError);
         expect(error.message).to.equal('The answer is required for a QCUDeclarativeAnsweredEvent');
       });
+    });
+  });
+
+  describe('#QROCMAnsweredEvent', function () {
+    it('should init and keep attributes', function () {
+      // given
+      const id = Symbol('id');
+      const occurredAt = new Date();
+      const createdAt = new Date();
+      const passageId = 2;
+      const sequenceNumber = 3;
+      const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
+      const answer = 'Framboise';
+      const status = 'ok';
+
+      // when
+      const qrocmAnsweredEvent = new QROCMAnsweredEvent({
+        id,
+        occurredAt,
+        createdAt,
+        passageId,
+        sequenceNumber,
+        elementId,
+        answer,
+        status,
+      });
+
+      // then
+      expect(qrocmAnsweredEvent.id).to.equal(id);
+      expect(qrocmAnsweredEvent.type).to.equal('QROCM_ANSWERED');
+      expect(qrocmAnsweredEvent.occurredAt).to.equal(occurredAt);
+      expect(qrocmAnsweredEvent.createdAt).to.equal(createdAt);
+      expect(qrocmAnsweredEvent.passageId).to.equal(passageId);
+      expect(qrocmAnsweredEvent.sequenceNumber).to.equal(sequenceNumber);
+      expect(qrocmAnsweredEvent.data).to.deep.equal({ elementId, answer, status });
     });
   });
 });

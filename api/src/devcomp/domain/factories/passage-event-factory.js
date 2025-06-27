@@ -1,5 +1,11 @@
 import { DomainError } from '../../../shared/domain/errors.js';
-import { QCUDeclarativeAnsweredEvent } from '../models/passage-events/answerable-element-events.js';
+import {
+  EmbedAnsweredEvent,
+  QCMAnsweredEvent,
+  QCUAnsweredEvent,
+  QCUDeclarativeAnsweredEvent,
+  QROCMAnsweredEvent,
+} from '../models/passage-events/answerable-element-events.js';
 import {
   FlashcardsCardAutoAssessedEvent,
   FlashcardsRectoReviewedEvent,
@@ -14,30 +20,38 @@ import { QABCardAnsweredEvent, QABCardRetriedEvent } from '../models/passage-eve
 class PassageEventFactory {
   static build(eventData) {
     switch (eventData.type) {
-      case 'PASSAGE_STARTED':
-        return new PassageStartedEvent(eventData);
-      case 'PASSAGE_TERMINATED':
-        return new PassageTerminatedEvent(eventData);
-      case 'FLASHCARDS_STARTED':
-        return new FlashcardsStartedEvent(eventData);
-      case 'FLASHCARDS_VERSO_SEEN':
-        return new FlashcardsVersoSeenEvent(eventData);
+      case 'EMBED_ANSWERED':
+        return new EmbedAnsweredEvent(eventData);
       case 'FLASHCARDS_CARD_AUTO_ASSESSED':
         return new FlashcardsCardAutoAssessedEvent(eventData);
       case 'FLASHCARDS_RECTO_REVIEWED':
         return new FlashcardsRectoReviewedEvent(eventData);
       case 'FLASHCARDS_RETRIED':
         return new FlashcardsRetriedEvent(eventData);
-      case 'QCU_DECLARATIVE_ANSWERED':
-        return new QCUDeclarativeAnsweredEvent(eventData);
-      case 'QAB_CARD_ANSWERED':
-        return new QABCardAnsweredEvent(eventData);
-      case 'QAB_CARD_RETRIED':
-        return new QABCardRetriedEvent(eventData);
+      case 'FLASHCARDS_STARTED':
+        return new FlashcardsStartedEvent(eventData);
+      case 'FLASHCARDS_VERSO_SEEN':
+        return new FlashcardsVersoSeenEvent(eventData);
       case 'GRAIN_CONTINUED':
         return new GrainContinuedEvent(eventData);
       case 'GRAIN_SKIPPED':
         return new GrainSkippedEvent(eventData);
+      case 'PASSAGE_STARTED':
+        return new PassageStartedEvent(eventData);
+      case 'PASSAGE_TERMINATED':
+        return new PassageTerminatedEvent(eventData);
+      case 'QAB_CARD_ANSWERED':
+        return new QABCardAnsweredEvent(eventData);
+      case 'QAB_CARD_RETRIED':
+        return new QABCardRetriedEvent(eventData);
+      case 'QROCM_ANSWERED':
+        return new QROCMAnsweredEvent(eventData);
+      case 'QCM_ANSWERED':
+        return new QCMAnsweredEvent(eventData);
+      case 'QCU_ANSWERED':
+        return new QCUAnsweredEvent(eventData);
+      case 'QCU_DECLARATIVE_ANSWERED':
+        return new QCUDeclarativeAnsweredEvent(eventData);
       default:
         throw new DomainError(`Passage event with type ${eventData.type} does not exist`);
     }

@@ -4,6 +4,7 @@ import PixRadioButton from '@1024pix/pix-ui/components/pix-radio-button';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import ModulixFeedback from 'mon-pix/components/module/feedback';
@@ -13,6 +14,8 @@ import ModuleElement from './module-element';
 
 export default class ModuleQcu extends ModuleElement {
   @tracked selectedAnswerId = null;
+
+  @service passageEvents;
 
   @action
   radioClicked(proposalId) {
@@ -50,6 +53,17 @@ export default class ModuleQcu extends ModuleElement {
     }
 
     return this.correction?.isOk ? 'success' : 'error';
+  }
+
+  @action
+  async onAnswer(event) {
+    await super.onAnswer(event);
+
+    const status = this.answerIsValid ? 'ok' : 'ko';
+    this.passageEvents.record({
+      type: 'QCU_ANSWERED',
+      data: { answer: this.selectedAnswerId, elementId: this.element.id, status },
+    });
   }
 
   <template>

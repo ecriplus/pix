@@ -717,6 +717,8 @@ module('Integration | Component | Module | Grain', function (hooks) {
         ];
         function getLastCorrectionForElementStub() {}
         const onElementAnswerStub = sinon.stub();
+        const passageEventService = this.owner.lookup('service:passage-events');
+        sinon.stub(passageEventService, 'record');
         const store = this.owner.lookup('service:store');
         const grain = store.createRecord('grain', {
           components: [

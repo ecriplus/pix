@@ -4,6 +4,7 @@ import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-al
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import { t } from 'ember-intl';
 import ModulixFeedback from 'mon-pix/components/module/feedback';
 
@@ -11,6 +12,8 @@ import { htmlUnsafe } from '../../../helpers/html-unsafe';
 import ModuleElement from './module-element';
 
 export default class ModuleQcm extends ModuleElement {
+  @service passageEvents;
+
   selectedAnswerIds = new Set();
 
   get canValidateElement() {
@@ -49,6 +52,17 @@ export default class ModuleQcm extends ModuleElement {
     }
 
     return this.correction.solution.includes(proposalId) ? 'success' : 'error';
+  }
+
+  @action
+  async onAnswer(event) {
+    await super.onAnswer(event);
+
+    const status = this.answerIsValid ? 'ok' : 'ko';
+    this.passageEvents.record({
+      type: 'QCM_ANSWERED',
+      data: { answer: this.userResponse, elementId: this.element.id, status },
+    });
   }
 
   <template>

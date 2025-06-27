@@ -5,6 +5,7 @@ import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { fn, get } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { eq } from 'ember-truth-helpers';
@@ -14,6 +15,8 @@ import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 
 export default class ModuleQrocm extends ModuleElement {
   @tracked selectedValues = {};
+
+  @service passageEvents;
 
   constructor() {
     super(...arguments);
@@ -43,7 +46,7 @@ export default class ModuleQrocm extends ModuleElement {
   }
 
   resetAnswers() {
-    this.selectedValues = undefined;
+    this.selectedValues = {};
   }
 
   get formattedProposals() {
@@ -70,6 +73,17 @@ export default class ModuleQrocm extends ModuleElement {
   @action
   onSelectChanged(block, value) {
     this.#updateSelectedValues(block, value);
+  }
+
+  @action
+  async onAnswer(event) {
+    await super.onAnswer(event);
+
+    const status = this.answerIsValid ? 'ok' : 'ko';
+    this.passageEvents.record({
+      type: 'QROCM_ANSWERED',
+      data: { answer: this.userResponse, elementId: this.element.id, status },
+    });
   }
 
   #updateSelectedValues(block, value) {

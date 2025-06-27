@@ -126,7 +126,9 @@ module('Integration | Component | Module | Stepper', function (hooks) {
               ],
             },
           ];
-          function getLastCorrectionForElementStub() {}
+          const passageEventService = this.owner.lookup('service:passage-events');
+          sinon.stub(passageEventService, 'record');
+          const getLastCorrectionForElementStub = sinon.stub();
           const onElementAnswerStub = sinon.stub();
           const store = this.owner.lookup('service:store');
           const passage = store.createRecord('passage');
