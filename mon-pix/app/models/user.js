@@ -19,6 +19,7 @@ export default class User extends Model {
   @attr('string') lang;
   @attr('string') locale;
   @attr('boolean') isAnonymous;
+  @attr('string') anonymousUserToken;
   @attr('boolean') shouldSeeDataProtectionPolicyInformationBanner;
   @attr('boolean') emailConfirmed;
   @attr() lastDataProtectionPolicySeenAt;
