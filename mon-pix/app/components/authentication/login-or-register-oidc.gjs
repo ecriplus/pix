@@ -182,9 +182,8 @@ export default class LoginOrRegisterOidcComponent extends Component {
 
       Object.entries(rest).map(([key, value]) => {
         let label = `${this.intl.t(`pages.login-or-register-oidc.register-form.information.${key}`)}`;
-        const translation = `${this.intl.t(`pages.login-or-register-oidc.register-form.information.${key}`)}`;
 
-        if (translation.includes('Missing translation')) {
+        if (label.includes('Missing translation')) {
           label = `${key} :`;
         }
 
