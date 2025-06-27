@@ -129,7 +129,7 @@
           "element": {
             "id": "8dba133c-906f-4793-939f-015df7d2acce",
             "type": "text",
-            "content": "<p>Mariam est équipée de nombreux appareils électroniques.<br> Survoler l'image pour explorer son salon pour trouver les appareils et les services qui utilisent des logiciels d'intelligence artificielle.</p>"
+            "content": "<p>Mariam est équipée de nombreux appareils électroniques.<br> Survolez l'image pour explorer son salon pour trouver les appareils et les services qui utilisent des logiciels d'intelligence artificielle.</p>"
           }
         },
         {
@@ -334,7 +334,7 @@
                 {
                   "id": "05a30b10-ac62-40a5-961b-9f3f3e831da0",
                   "type": "qcu",
-                  "instruction": "<h4>🎤 Une application retrouve la titre d'une musique que vous lui chantez.</h4><p><br>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
+                  "instruction": "<h4>🎤 Une application retrouve le titre d'une musique que vous lui chantez.</h4><p><br>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
                   "proposals": [
                     {
                       "id": "1",
