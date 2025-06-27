@@ -50,7 +50,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
 
         // when
         const { claimManager } = new OidcAuthenticationService(args, { openIdClient });
-        const claims = claimManager.getMissingClaims();
+        const claims = claimManager.getMissingMandatoryClaims();
 
         // then
         expect(claims).to.deep.equal(['given_name', 'family_name', 'sub']);
@@ -64,7 +64,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
 
         // when
         const { claimManager } = new OidcAuthenticationService(args, { openIdClient });
-        const claims = claimManager.getMissingClaims();
+        const claims = claimManager.getMissingMandatoryClaims();
 
         // then
         expect(claims).to.deep.equal(['hello']);
@@ -78,10 +78,10 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
 
         // when
         const { claimManager } = new OidcAuthenticationService(args, { openIdClient });
-        const claims = claimManager.getMissingClaims();
+        const claims = claimManager.getMissingMandatoryClaims();
 
         // then
-        expect(claims).to.deep.equal(['hello', 'employeeNumber', 'studentGroup']);
+        expect(claims).to.deep.equal(['hello']);
       });
     });
   });
@@ -827,8 +827,8 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
       });
     });
 
-    context('when a custom required claim is returned empty by the UserInfo endpoint', function () {
-      it('throws an error', async function () {
+    context('when a additional claim is returned empty by the UserInfo endpoint', function () {
+      it('returns user info', async function () {
         // given
         const clientId = 'OIDC_CLIENT_ID';
         const clientSecret = 'OIDC_CLIENT_SECRET';
@@ -858,32 +858,19 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         await oidcAuthenticationService.initializeClientConfig();
 
         const accessToken = 'thisIsSerializedInformation';
-        const errorMessage = `Un ou des champs obligatoires (population) n'ont pas été renvoyés par votre fournisseur d'identité Oidc Example.`;
 
         // when
-        const error = await catchErr(
-          oidcAuthenticationService._getUserInfoFromEndpoint,
-          oidcAuthenticationService,
-        )({ accessToken, expectedSubject: 'sub-id' });
+        const pickedUserInfo = await oidcAuthenticationService._getUserInfoFromEndpoint({
+          accessToken,
+          expectedSubject: 'sub-id',
+        });
 
         // then
-        expect(error).to.be.instanceOf(OidcMissingFieldsError);
-        expect(error.message).to.be.equal(errorMessage);
-        expect(error.code).to.be.equal(OIDC_ERRORS.USER_INFO.missingFields.code);
-        expect(monitoringTools.logErrorWithCorrelationIds).to.have.been.calledWithExactly({
-          context: 'oidc',
-          data: {
-            missingFields: 'population',
-            userInfo: {
-              sub: 'sub-id',
-              given_name: 'givenName',
-              family_name: 'familyName',
-              population: '',
-            },
-          },
-          event: 'find-missing-required-claims',
-          message: errorMessage,
-          team: 'acces',
+        expect(pickedUserInfo).to.deep.equal({
+          sub: 'sub-id',
+          given_name: 'givenName',
+          family_name: 'familyName',
+          population: '',
         });
       });
     });
