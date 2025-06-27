@@ -2,15 +2,12 @@
 @use 'pix-design-tokens/typography';
 
 .session-supervising-candidate-in-list {
+  position: relative;
   margin-bottom: var(--pix-spacing-3x);
   border-radius: 4px;
   display: flex;
   @extend %pix-body-s;
   color: var(--pix-neutral-0);
-
-  @include breakpoints.device-is('tablet') {
-    position: relative;
-  }
 
   &__candidate-data {
     width: calc(100% - var(--pix-spacing-8x));

@@ -1,6 +1,4 @@
 .handle-live-alert-modal {
-  width: 800px;
-
   &__footer {
     width: 100%;
   }
@@ -8,7 +6,8 @@
   &__actions-list {
     display: flex;
     justify-content: flex-end;
-    column-gap: 16px;
+    flex-wrap: wrap;
+    gap: var(--pix-spacing-3x);
     margin-top: 16px;
   }
 }
