@@ -83,20 +83,53 @@ module('Acceptance | authentication | Signup', function (hooks) {
       });
     });
 
-    module('when anonymous user is authenticated', function () {
-      test('he can access the sign up page', async function (assert) {
-        // given
-        const user = server.create('user', { isAnonymous: true });
-        await authenticate(user);
+    module('when anonymous user is authenticated', function (hooks) {
+      let user;
+      let screen;
 
-        // when
-        const screen = await visit('/inscription');
+      hooks.beforeEach(async function () {
+        user = server.create('user', { isAnonymous: true });
+        await authenticate(user);
+      });
+
+      test('he can access the sign up page', async function (assert) {
+        // given/when
+        screen = await visit('/inscription');
 
         // then
         const signupHeading = screen.getByRole('heading', { name: t('pages.sign-up.first-title') });
         assert.dom(signupHeading).exists();
         const loginButton = screen.queryByRole('link', { name: t('pages.sign-up.actions.login') });
         assert.dom(loginButton).doesNotExist();
+      });
+
+      test('then he signs up and is redirected to dashboard', async function (assert) {
+        // given
+        server.patch('/users/:id', (schema, request) => {
+          const { id } = request.params;
+          const { data } = JSON.parse(request.requestBody);
+          user = schema.users.find(id);
+          return user.update(data.attributes);
+        });
+
+        // when
+        screen = await visit('/inscription');
+
+        await fillByLabel(t(I18N_KEYS.firstNameInput), 'Jane');
+        await fillByLabel(t(I18N_KEYS.lastNameInput), 'Doe');
+        await fillByLabel(t(I18N_KEYS.emailInput), 'jane.doe@example.net');
+        await fillByLabel(t(I18N_KEYS.passwordInput), 'p@ssW0rd');
+        await clickByName(t(I18N_KEYS.cguCheckbox));
+
+        await clickByName(t(I18N_KEYS.submitButton));
+
+        // then
+        const homepageHeading = screen.queryByRole('heading', { name: t('pages.dashboard.title') });
+        assert.dom(homepageHeading).exists();
+        assert.dom(screen.getByText('Jane')).exists();
+
+        const session = this.owner.lookup('service:session');
+        assert.strictEqual(session.data.authenticated.authenticator, 'authenticator:oauth2');
       });
     });
   });

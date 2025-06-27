@@ -32,6 +32,7 @@ export default class SignupForm extends Component {
   @service intl;
   @service url;
   @service errorMessages;
+  @service featureToggles;
 
   @tracked isLoading = false;
   @tracked globalError = null;
@@ -87,8 +88,12 @@ export default class SignupForm extends Component {
 
     try {
       user.lang = this.intl.primaryLocale;
-
+      const wasAnonymousBeforeSaving = user.isAnonymous;
       await user.save({ adapterOptions: { redirectionUrl: this.session.redirectionUrl } });
+      if (this.featureToggles.featureToggles?.upgradeToRealUserEnabled && wasAnonymousBeforeSaving) {
+        this.session.set('skipRedirectAfterSessionInvalidation', true);
+        await this.session.invalidate();
+      }
       await this.session.authenticateUser(user.email, user.password);
 
       user.password = null;
