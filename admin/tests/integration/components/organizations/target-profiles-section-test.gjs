@@ -33,7 +33,7 @@ module('Integration | Component | organizations/target-profiles-section', functi
       const screen = await render(<template><TargetProfilesSection @organization={{organization}} /></template>);
 
       // then
-      assert.dom(screen.getByRole('button', { name: 'Valider' })).isDisabled();
+      assert.dom(screen.getByRole('button', { name: 'Valider' })).hasAttribute('aria-disabled');
     });
 
     test('it calls the organization action when the input is not empty and user clicks on button', async function (assert) {

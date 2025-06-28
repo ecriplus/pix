@@ -52,7 +52,9 @@ module('Integration | Component | Badges::CampaignCriterion', function (hooks) {
         fireEvent.mouseOver(screen.getByRole('button', { name: 'Modifier le seuil de ce critère' }));
 
         // then
-        assert.true(screen.getByRole('button', { name: 'Modifier le seuil de ce critère' }).disabled);
+        assert
+          .dom(screen.getByRole('button', { name: 'Modifier le seuil de ce critère' }))
+          .hasAttribute('aria-disabled');
         assert.dom(screen.getByText(/Non modifiable car le profil cible est relié à une campagne/)).exists();
         assert.notOk(screen.queryByText(/Modification du critère d'obtention basé sur l'ensemble du profil cible/));
       });

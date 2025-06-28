@@ -204,7 +204,7 @@ module('Integration | Component | Stages', function (hooks) {
 
       // then
       assert.dom(screen.queryByRole('button', { name: 'Nouveau palier "1er acquis"' })).exists();
-      assert.dom(screen.queryByRole('button', { name: 'Nouveau palier "1er acquis"' })).hasAttribute('disabled');
+      assert.dom(screen.queryByRole('button', { name: 'Nouveau palier "1er acquis"' })).hasAttribute('aria-disabled');
     });
   });
 

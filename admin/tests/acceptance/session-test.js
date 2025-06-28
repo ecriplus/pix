@@ -133,7 +133,9 @@ module('Acceptance | Session pages', function (hooks) {
             const screen = await visit('/sessions/2');
 
             // then
-            assert.dom(screen.getByRole('button', { name: 'Télécharger les certificats' })).hasAttribute('disabled');
+            assert
+              .dom(screen.getByRole('button', { name: 'Télécharger les certificats' }))
+              .hasAttribute('aria-disabled');
           });
         });
 
@@ -151,7 +153,7 @@ module('Acceptance | Session pages', function (hooks) {
             // then
             assert
               .dom(screen.getByRole('button', { name: 'Télécharger les certificats' }))
-              .doesNotHaveAttribute('disabled');
+              .doesNotHaveAttribute('aria-disabled');
           });
         });
 

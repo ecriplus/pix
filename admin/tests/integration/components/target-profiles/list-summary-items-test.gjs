@@ -66,7 +66,7 @@ module('Integration | Component | TargetProfiles::ListSummaryItems', function (h
       // then
       const button = screen.getByRole('button', { name: t('common.filters.actions.clear'), hidden: true });
 
-      assert.true(button.disabled);
+      assert.dom(button).hasAttribute('aria-disabled');
     });
   });
   module('filter', function () {
