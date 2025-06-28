@@ -350,7 +350,7 @@ module('Integration | Component | add-student-list', function (hooks) {
 />`);
 
             // then
-            assert.dom(screen.getByRole('button', { name: 'Inscrire' })).isDisabled();
+            assert.dom(screen.getByRole('button', { name: 'Inscrire' })).hasAttribute('aria-disabled');
           });
         });
 
@@ -409,7 +409,7 @@ module('Integration | Component | add-student-list', function (hooks) {
 />`);
 
             // then
-            assert.dom(screen.getByRole('button', { name: 'Inscrire' })).isNotDisabled();
+            assert.dom(screen.getByRole('button', { name: 'Inscrire' })).doesNotHaveAttribute('aria-disabled');
           });
         });
       });

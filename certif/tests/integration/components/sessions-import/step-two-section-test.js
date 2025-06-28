@@ -198,7 +198,7 @@ module('Integration | Component | Import::StepTwoSection', function (hooks) {
       // then
       assert.dom(screen.getByRole('heading', { name: 'Importer à nouveau' })).exists();
       assert.dom(screen.getByText('Importer le modèle complété')).exists();
-      assert.dom(screen.getByRole('button', { name: 'Continuer' })).isDisabled();
+      assert.dom(screen.getByRole('button', { name: 'Continuer' })).hasAttribute('aria-disabled');
     });
   });
 

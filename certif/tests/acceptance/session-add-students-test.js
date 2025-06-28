@@ -334,9 +334,7 @@ module('Acceptance | Session Add Sco Students', function (hooks) {
           await click(screen.getByRole('link', { name: 'Inscrire des candidats' }));
 
           // then
-          assert
-            .dom(screen.getByRole('checkbox', { name: 'Candidat Alain Cendy sélectionné' }))
-            .hasAttribute('disabled');
+          assert.dom(screen.getByRole('checkbox', { name: 'Candidat Alain Cendy sélectionné' })).isDisabled();
         });
 
         module('when toggle all click', function () {

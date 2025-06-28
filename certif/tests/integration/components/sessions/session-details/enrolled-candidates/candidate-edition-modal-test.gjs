@@ -41,9 +41,9 @@ module(
       const firstNameInput = screen.getByRole('textbox', { name: 'Prénom' });
 
       assert.dom(lastNameInput).hasValue('De la fontaine');
-      assert.dom(lastNameInput).hasAttribute('disabled');
+      assert.dom(lastNameInput).isDisabled();
       assert.dom(firstNameInput).hasValue('Jean');
-      assert.dom(firstNameInput).hasAttribute('disabled');
+      assert.dom(firstNameInput).isDisabled();
       assert
         .dom(
           screen.getByRole('checkbox', {
