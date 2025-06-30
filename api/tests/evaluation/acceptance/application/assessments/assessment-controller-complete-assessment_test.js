@@ -941,7 +941,7 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
                 {
                   content: `
 <read_attachment_tool>
-  Lecture de la pièce jointe :
+  Lecture de la pièce jointe, expected_file.pdf :
   <attachment_content>
     some context
   </attachment_content>

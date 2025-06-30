@@ -41,7 +41,7 @@ export class Chat {
       this.messages.push(new Message({ content: userContent, isFromUser: true }));
       const llmContent = `
 <read_attachment_tool>
-  Lecture de la pièce jointe :
+  Lecture de la pièce jointe, ${attachmentName} :
   <attachment_content>
     ${attachmentContext}
   </attachment_content>

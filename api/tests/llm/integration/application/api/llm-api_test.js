@@ -734,7 +734,7 @@ describe('LLM | Integration | Application | API | llm', function () {
                         },
                         {
                           content:
-                            '\n<read_attachment_tool>\n  Lecture de la pièce jointe :\n  <attachment_content>\n    add me in the chat !\n  </attachment_content>\n</read_attachment_tool>',
+                            '\n<read_attachment_tool>\n  Lecture de la pièce jointe, expected_file.txt :\n  <attachment_content>\n    add me in the chat !\n  </attachment_content>\n</read_attachment_tool>',
                           role: 'assistant',
                         },
                       ],
@@ -782,7 +782,7 @@ describe('LLM | Integration | Application | API | llm', function () {
                       },
                       {
                         content:
-                          '\n<read_attachment_tool>\n  Lecture de la pièce jointe :\n  <attachment_content>\n    add me in the chat !\n  </attachment_content>\n</read_attachment_tool>',
+                          '\n<read_attachment_tool>\n  Lecture de la pièce jointe, expected_file.txt :\n  <attachment_content>\n    add me in the chat !\n  </attachment_content>\n</read_attachment_tool>',
                         isFromUser: false,
                       },
                       { content: 'un message', isFromUser: true },
@@ -1098,7 +1098,7 @@ describe('LLM | Integration | Application | API | llm', function () {
                       },
                       {
                         content:
-                          '\n<read_attachment_tool>\n  Lecture de la pièce jointe :\n  <attachment_content>\n    add me in the chat !\n  </attachment_content>\n</read_attachment_tool>',
+                          '\n<read_attachment_tool>\n  Lecture de la pièce jointe, expected_file.txt :\n  <attachment_content>\n    add me in the chat !\n  </attachment_content>\n</read_attachment_tool>',
                         isFromUser: false,
                       },
                     ],

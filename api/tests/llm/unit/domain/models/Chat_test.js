@@ -165,7 +165,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             },
             {
               content:
-                "\n<read_attachment_tool>\n  Lecture de la pièce jointe :\n  <attachment_content>\n    J'étais assise sur une pierre\nDes larmes coulaient sur mon visage\n  </attachment_content>\n</read_attachment_tool>",
+                "\n<read_attachment_tool>\n  Lecture de la pièce jointe, winter_lyrics.txt :\n  <attachment_content>\n    J'étais assise sur une pierre\nDes larmes coulaient sur mon visage\n  </attachment_content>\n</read_attachment_tool>",
               isFromUser: false,
             },
           ],
