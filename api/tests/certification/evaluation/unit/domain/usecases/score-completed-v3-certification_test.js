@@ -4,6 +4,7 @@ import {
   ABORT_REASONS,
   CertificationCourse,
 } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Certification | Evaluation | UseCases | scoreCompletedV3Certification', function () {
@@ -14,6 +15,9 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedV3Certifi
   let clock;
 
   beforeEach(function () {
+    sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
+      return callback();
+    });
     clock = sinon.useFakeTimers({ now: new Date('2019-01-01T05:06:07Z'), toFake: ['Date'] });
     now = new Date(clock.now);
 
