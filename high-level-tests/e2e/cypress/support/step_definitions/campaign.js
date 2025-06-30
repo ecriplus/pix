@@ -15,7 +15,7 @@ When(
 
 When(`j'ouvre le sujet {string}`, (tubeName) => {
   cy.contains(tubeName)
-    .closest('tr')
+    .closest("tr")
     .within(() => {
       cy.get("button").click();
     });
@@ -35,12 +35,14 @@ When(
 );
 
 Then(`je vois {int} campagne\(s\)`, (campaignsCount) => {
-  cy.findAllByRole('row').should("have.lengthOf", campaignsCount + 1);
+  cy.findAllByRole("row").should("have.lengthOf", campaignsCount + 1);
 });
 
 Then(`je vois {int} tutoriel\(s\)`, (tutorialsCount) => {
-  cy.findByRole('table', { name: "Tableau des sujets à travailler, certains présentent des colonnes supplémentaires indiquant le nombre de tutoriels existant en lien avec le sujet et un accès à ces tutoriels" }).within(() => {
-    cy.findAllByRole('listitem').should("have.lengthOf", tutorialsCount);
+  cy.findByRole("table", {
+    name: "Tableau des sujets à travailler, certains présentent des colonnes supplémentaires indiquant le nombre de tutoriels existant en lien avec le sujet et un accès à ces tutoriels",
+  }).within(() => {
+    cy.findAllByRole("listitem").should("have.lengthOf", tutorialsCount);
   });
 });
 
@@ -49,23 +51,22 @@ When(`je recherche une campagne avec le nom {string}`, (campaignSearchName) => {
 });
 
 Then(`je vois le détail de la campagne {string}`, (campaignName) => {
-  cy.findByRole('heading', { level: 1 }).contains(campaignName);
+  cy.findByRole("heading", { level: 1 }).contains(campaignName);
 });
 
 Then(`je vois {int} participants`, (numberOfParticipants) => {
-  cy.findByRole('table', {name: "Liste des participants"}).within(() => {
-    cy.findAllByRole('row').should(
-      "have.lengthOf",
-      numberOfParticipants + 1,
-    );
-  })
+  cy.findByRole("table", { name: "Liste des participants" }).within(() => {
+    cy.findAllByRole("row").should("have.lengthOf", numberOfParticipants + 1);
+  });
 });
 
 Then(`je vois {int} profils`, (numberOfProfiles) => {
-  if(numberOfProfiles === 0) {
-    cy.contains('Aucun participant pour l’instant ! Envoyez-leur le lien suivant pour rejoindre votre campagne.');
+  if (numberOfProfiles === 0) {
+    cy.contains(
+      "Aucun participant pour l’instant ! Envoyez-leur le lien suivant pour rejoindre votre campagne.",
+    );
   } else {
-    cy.findAllByRole('row').should("have.lengthOf", numberOfProfiles + 1);
+    cy.findAllByRole("row").should("have.lengthOf", numberOfProfiles + 1);
   }
 });
 
@@ -75,7 +76,7 @@ When(
     if (numberOfResultsByCompetence === 0) {
       cy.findByText("En attente de résultats");
     } else {
-      cy.findAllByRole('row').should(
+      cy.findAllByRole("row").should(
         "have.lengthOf",
         numberOfResultsByCompetence + 1,
       );
@@ -88,7 +89,7 @@ When(
   (numberOfResultsByCompetence) => {
     cy.get("[role='tabpanel'][tabindex='0']").within(() => {
       cy.get("tr").should("have.lengthOf", numberOfResultsByCompetence);
-      cy.contains("Détails des résultats")
+      cy.contains("Détails des résultats");
     });
   },
 );
@@ -122,12 +123,14 @@ Then(`je vois que j'ai partagé mon profil`, () => {
 });
 
 Then(`je vois que j'ai envoyé les résultats`, () => {
-  cy.contains("Merci d'avoir envoyé vos résultats.");
+  cy.contains("Vos résultats ont été envoyés le");
 });
 
 Then(`je vois {int} sujets`, (tubeCount) => {
-  cy.findByRole('table', { name: "Tableau des sujets à travailler, certains présentent des colonnes supplémentaires indiquant le nombre de tutoriels existant en lien avec le sujet et un accès à ces tutoriels"}).within(() => {
-    cy.findAllByRole('row').should("have.lengthOf", tubeCount + 1);
+  cy.findByRole("table", {
+    name: "Tableau des sujets à travailler, certains présentent des colonnes supplémentaires indiquant le nombre de tutoriels existant en lien avec le sujet et un accès à ces tutoriels",
+  }).within(() => {
+    cy.findAllByRole("row").should("have.lengthOf", tubeCount + 1);
   });
 });
 
@@ -135,7 +138,7 @@ Then(
   `je vois que le sujet {string} est {string}`,
   (tubeName, recommendationLevel) => {
     cy.contains(tubeName)
-      .closest('tr')
+      .closest("tr")
       .get(`[aria-label="${recommendationLevel}"]`);
   },
 );

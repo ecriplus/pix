@@ -54,6 +54,7 @@ export default class ResultsRoute extends Route {
     await this.store.adapterFor('campaign-participation-result').share(model.campaignParticipationResult.id);
     model.campaignParticipationResult.isShared = true;
     model.campaignParticipationResult.canImprove = false;
+    model.campaignParticipationResult.sharedAt = new Date();
     model.showTrainings = true;
   }
 }

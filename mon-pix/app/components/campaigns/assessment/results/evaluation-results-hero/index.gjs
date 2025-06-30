@@ -7,6 +7,9 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import dayjs from 'dayjs';
+import CustomParseFormat from 'dayjs/plugin/customParseFormat';
+import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import { t } from 'ember-intl';
 import { not } from 'ember-truth-helpers';
 import or from 'ember-truth-helpers/helpers/or';
@@ -17,8 +20,12 @@ import AttestationResult from './attestation-result';
 import CustomOrganizationBlock from './custom-organization-block';
 import RetryOrResetBlock from './retry-or-reset-block';
 
+dayjs.extend(LocalizedFormat);
+dayjs.extend(CustomParseFormat);
+
 export default class EvaluationResultsHero extends Component {
   @service currentUser;
+
   @service metrics;
   @service router;
   @service store;
@@ -73,6 +80,14 @@ export default class EvaluationResultsHero extends Component {
     return this.args.questResults && this.args.questResults.length > 0;
   }
 
+  get sharedAtDate() {
+    return dayjs(this.args.campaignParticipationResult.sharedAt).format('LL');
+  }
+
+  get sharedAtTime() {
+    return dayjs(this.args.campaignParticipationResult.sharedAt).format('LT');
+  }
+
   @action
   handleSeeTrainingsClick() {
     this.args.showTrainings();
@@ -122,6 +137,7 @@ export default class EvaluationResultsHero extends Component {
 
       campaignParticipationResult.isShared = true;
       campaignParticipationResult.canImprove = false;
+      campaignParticipationResult.sharedAt = new Date();
 
       this.metrics.trackEvent({
         event: 'custom-event',
@@ -213,8 +229,9 @@ export default class EvaluationResultsHero extends Component {
               @type="success"
               @withIcon={{true}}
             >
-              {{t "pages.skill-review.hero.shared-message"}}
+              {{t "pages.skill-review.hero.shared-message" date=this.sharedAtDate time=this.sharedAtTime}}
             </PixNotificationAlert>
+
             {{#if @hasTrainings}}
               <p class="evaluation-results-hero-details__explanations">
                 {{t "pages.skill-review.hero.explanations.trainings"}}
