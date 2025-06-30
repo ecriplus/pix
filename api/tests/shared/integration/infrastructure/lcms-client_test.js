@@ -2,14 +2,14 @@ import { lcmsClient } from '../../../../src/shared/infrastructure/lcms-client.js
 import { catchErr, expect, mockLearningContent, nock } from '../../../test-helper.js';
 
 describe('Integration | Infrastructure | LCMS Client', function () {
-  describe('#getLatestRelease', function () {
+  describe('#getRelease', function () {
     it('calls LCMS API to get learning content latest release', async function () {
       // given
       const learningContent = { models: [{ id: 'recId' }] };
       const lcmsCall = await mockLearningContent(learningContent);
 
       // when
-      const response = await lcmsClient.getLatestRelease();
+      const response = await lcmsClient.getRelease();
 
       // then
       expect(response).to.deep.equal(learningContent);
@@ -24,7 +24,7 @@ describe('Integration | Infrastructure | LCMS Client', function () {
         .reply(500);
 
       // when
-      const error = await catchErr(lcmsClient.getLatestRelease)();
+      const error = await catchErr(lcmsClient.getRelease)();
 
       // then
       expect(error).to.be.instanceOf(Error);

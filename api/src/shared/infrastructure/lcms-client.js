@@ -3,7 +3,7 @@ import { httpAgent } from './http-agent.js';
 import { logger } from './utils/logger.js';
 
 const { lcms: lcmsConfig } = config;
-const getLatestRelease = async function () {
+const getRelease = async function () {
   let signature;
 
   if (process.env.APP) {
@@ -43,6 +43,6 @@ const createRelease = async function () {
   return response.data.content;
 };
 
-const lcmsClient = { getLatestRelease, createRelease };
+const lcmsClient = { getRelease, createRelease };
 
 export { lcmsClient };

@@ -24,7 +24,7 @@ describe('Learning Content | Unit | Domain | Usecase | Refresh learning content 
       const missions = Symbol('missions');
 
       const lcmsClient = {
-        getLatestRelease: sinon.stub().resolves({
+        getRelease: sinon.stub().resolves({
           frameworks,
           areas,
           competences,
@@ -95,7 +95,7 @@ describe('Learning Content | Unit | Domain | Usecase | Refresh learning content 
       });
 
       // then
-      expect(lcmsClient.getLatestRelease).to.have.been.calledOnce;
+      expect(lcmsClient.getRelease).to.have.been.calledOnce;
 
       expect(frameworkRepository.saveMany).to.have.been.calledOnceWithExactly(frameworks);
       expect(areaRepository.saveMany).to.have.been.calledOnceWithExactly(areas);
