@@ -1,5 +1,6 @@
 import * as calibratedChallengeService from '../../../../../../../src/certification/evaluation/domain/services/scoring/calibrated-challenge-service.js';
 import { config } from '../../../../../../../src/shared/config.js';
+import { DomainTransaction } from '../../../../../../../src/shared/domain/DomainTransaction.js';
 import { domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
 import { generateChallengeList } from '../../../../../shared/fixtures/challenges.js';
 
@@ -12,6 +13,10 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
     let challengeList;
 
     beforeEach(function () {
+      sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
+        return callback();
+      });
+
       challengeList = generateChallengeList({ length: minimumAnswersRequiredToValidateACertification + 1 });
 
       challengeCalibrationRepository = {

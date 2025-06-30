@@ -12,7 +12,6 @@
  * @typedef {import('../index.js').ChallengeRepository} ChallengeRepository
  * @typedef {import('../index.js').ScoringDegradationService} ScoringDegradationService
  */
-import Debug from 'debug';
 
 import CertificationCancelled from '../../../../../../src/shared/domain/events/CertificationCancelled.js';
 import { config } from '../../../../../shared/config.js';
@@ -21,8 +20,6 @@ import { FlashAssessmentAlgorithm } from '../../../../flash-certification/domain
 import { CertificationAssessmentHistory } from '../../../../scoring/domain/models/CertificationAssessmentHistory.js';
 import { CertificationAssessmentScoreV3 } from '../../../../scoring/domain/models/CertificationAssessmentScoreV3.js';
 import { AssessmentResultFactory } from '../../../../scoring/domain/models/factories/AssessmentResultFactory.js';
-
-const debugScoringForV3Certification = Debug('pix:certif:v3:scoring');
 
 /**
  * @param {Object} params
@@ -54,9 +51,7 @@ export const handleV3CertificationScoring = async ({
   dependencies,
 }) => {
   const { certificationCourseId, id: assessmentId } = certificationAssessment;
-
   const candidateAnswers = await answerRepository.findByAssessment(assessmentId);
-  debugScoringForV3Certification(`CandidateAnswers count: ${candidateAnswers.length}`);
 
   const toBeCancelled = event instanceof CertificationCancelled;
 

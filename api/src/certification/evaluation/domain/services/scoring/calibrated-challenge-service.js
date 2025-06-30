@@ -1,38 +1,53 @@
-import Debug from 'debug';
+/**
+ * @typedef {import('../index.js').ChallengeCalibrationRepository} ChallengeCalibrationRepository
+ * @typedef {import('../index.js').ChallengeRepository} ChallengeRepository
+ * @typedef {import('../index.js').CertificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
+ */
 import differenceBy from 'lodash/differenceBy.js';
 
-const debugScoringForV3Certification = Debug('pix:certif:v3:scoring');
+import { withTransaction } from '../../../../../shared/domain/DomainTransaction.js';
 
-export const findByCertificationCourseIdAndAssessmentId = async ({
-  certificationCourseId,
-  assessmentId,
-  challengeCalibrationRepository,
-  certificationChallengeLiveAlertRepository,
-  challengeRepository,
-}) => {
-  const flashCompatibleChallenges = await challengeRepository.findFlashCompatibleWithoutLocale({
-    useObsoleteChallenges: true,
-  });
-  debugScoringForV3Certification(`FlashCompatibleChallenges count: ${flashCompatibleChallenges.length}`);
-
-  const { allChallenges, askedChallenges, challengeCalibrations } = await _findByCertificationCourseId({
-    compatibleChallenges: flashCompatibleChallenges,
+export const findByCertificationCourseIdAndAssessmentId = withTransaction(
+  /**
+   * @param {Object} params
+   * @param {ChallengeCalibrationRepository} params.challengeCalibrationRepository
+   * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
+   * @param {ChallengeRepository} params.challengeRepository
+   */
+  async ({
     certificationCourseId,
+    assessmentId,
     challengeCalibrationRepository,
+    certificationChallengeLiveAlertRepository,
     challengeRepository,
-  });
+  }) => {
+    const flashCompatibleChallenges = await challengeRepository.findFlashCompatibleWithoutLocale({
+      useObsoleteChallenges: true,
+    });
 
-  const { challengeCalibrationsWithoutLiveAlerts, askedChallengesWithoutLiveAlerts } =
-    await _removeChallengesWithValidatedLiveAlerts(
-      challengeCalibrations,
-      assessmentId,
-      askedChallenges,
-      certificationChallengeLiveAlertRepository,
-    );
+    const { allChallenges, askedChallenges, challengeCalibrations } = await _findByCertificationCourseId({
+      compatibleChallenges: flashCompatibleChallenges,
+      certificationCourseId,
+      challengeCalibrationRepository,
+      challengeRepository,
+    });
 
-  return { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts };
-};
+    const { challengeCalibrationsWithoutLiveAlerts, askedChallengesWithoutLiveAlerts } =
+      await _removeChallengesWithValidatedLiveAlerts(
+        challengeCalibrations,
+        assessmentId,
+        askedChallenges,
+        certificationChallengeLiveAlertRepository,
+      );
 
+    return { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts };
+  },
+);
+
+/**
+ * @param {Object} params
+ * @param {ChallengeCalibrationRepository} params.challengeCalibrationRepository
+ */
 const _findByCertificationCourseId = async ({
   compatibleChallenges,
   certificationCourseId,
@@ -51,13 +66,12 @@ const _findByCertificationCourseId = async ({
 
   const allChallenges = [...askedChallenges, ...flashCompatibleChallengesNotAskedInCertification];
 
-  debugScoringForV3Certification(
-    `Challenges after FlashCompatibleChallenges & CandidateAnswers merge count: ${allChallenges.length}`,
-  );
-
   return { allChallenges, askedChallenges, challengeCalibrations };
 };
 
+/**
+ * @param {CertificationChallengeLiveAlertRepository} certificationChallengeLiveAlertRepository
+ */
 async function _removeChallengesWithValidatedLiveAlerts(
   challengeCalibrations,
   assessmentId,

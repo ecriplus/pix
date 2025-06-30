@@ -48,7 +48,6 @@ import pickChallengeService from '../services/pick-challenge-service.js';
  * @typedef {scoringCertificationService} ScoringCertificationService
  * @typedef {services} Services
  */
-
 const dependencies = {
   ...sessionRepositories,
   evaluationSessionRepository,

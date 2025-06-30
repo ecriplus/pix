@@ -1,8 +1,9 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { ChallengeCalibration } from '../../../scoring/domain/read-models/ChallengeCalibration.js';
 
 export const getByCertificationCourseId = async ({ certificationCourseId }) => {
-  const challengeCalibrations = await knex('certification-challenges')
+  const knexConn = DomainTransaction.getConnection();
+  const challengeCalibrations = await knexConn('certification-challenges')
     .select({
       challengeId: 'challengeId',
       discriminant: 'discriminant',
