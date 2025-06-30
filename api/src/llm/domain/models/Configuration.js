@@ -79,6 +79,7 @@ export class Configuration {
    */
   toDTO() {
     return {
+      version: 1,
       id: this.id,
       historySize: this.#historySize,
       inputMaxChars: this.#inputMaxChars,
