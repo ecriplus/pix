@@ -23,19 +23,20 @@
       "components": [
         {
           "type": "element",
+          "element":{
+            "id": "2FFCCAB8-92ED-44D2-BF57-5551840265F0",
+            "type": "text",
+            "content": "<p>Voici un logiciel d’IA générative. Testez sa réponse avec différents prompts.</p>"
+          }
+        },
+        {
+          "type": "element",
           "element": {
             "id": "028bb087-c3b6-43a6-93b7-e6a36d332a78",
             "type": "text",
             "content": "<iframe title=\"llm\" src=\"https://1024pix.github.io/atelier-contenus/MGO/ia-int-accroche-lat.html\" height=\"800\"></iframe>"
           }
-        }
-      ]
-    },
-    {
-      "id": "375bab8e-3de8-4121-b29f-3e35039e2cec",
-      "type": "discovery",
-      "title": "Que peut-on dire",
-      "components": [
+        },
         {
           "type": "element",
           "element": {
@@ -69,7 +70,7 @@
               }
             ]
           }
-        }
+        }        
       ]
     },
     {
