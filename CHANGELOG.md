@@ -1,5 +1,32 @@
 # Pix Changelog
 
+# [5.146.0](https://github.com/1024pix/pix/compare/v5.145.0...v5.146.0) (2025-06-30)
+
+### :rocket: Amélioration
+
+- [#12697](https://github.com/1024pix/pix/pull/12697) Ajouter un minimum de CSS aux tableaux HTML insérés dans les WYSIWYG pour les rendre lisible (PIX-18502) 
+- [#12648](https://github.com/1024pix/pix/pull/12648) Migrer les événements ANSWERED en Passage Events (PIX-18444) 
+- [#12696](https://github.com/1024pix/pix/pull/12696) modif post valid 27/06/25 module IA vous avez dit IA 
+- [#12693](https://github.com/1024pix/pix/pull/12693) Permettre à un utilisateur anonyme d'être redirigé vers son dashboard après inscription (PIX-18445) 
+- [#12642](https://github.com/1024pix/pix/pull/12642) Rediriger un utilisateur anonyme vers le formulaire d'inscription après sa campagne (PIX-18026) 
+- [#12686](https://github.com/1024pix/pix/pull/12686) Rendre les claims additionels optionels (PIX-18457) 
+
+### :bug: Correction
+
+- [#12689](https://github.com/1024pix/pix/pull/12689) afficher la popup des formations, la première fois qu'on affiche les résultats de participation. (PIX-18498) 
+
+### :building_construction: Tech
+
+- [#12692](https://github.com/1024pix/pix/pull/12692) :truck: Déplacer un serializer vers le contexte `team` 
+- [#12633](https://github.com/1024pix/pix/pull/12633) Retirer la mention d'équipe dans le message Slack 
+- [#12695](https://github.com/1024pix/pix/pull/12695) Retirer les configs poleEmploi du fichier ENV (PIX-18503). 
+- [#12613](https://github.com/1024pix/pix/pull/12613) Separer le rescoring de certification pour simplifier le bugfix a venir (PIX-18353). 
+- [#12671](https://github.com/1024pix/pix/pull/12671) Suppression de la colonne `scope` et ré-ajout de `calibration_id` dans `active_calibrated_challenges` 
+
+### :arrow_up: Montée de version
+
+- [#12685](https://github.com/1024pix/pix/pull/12685) Update dependency yargs to v18 (api)
+
 # [5.145.0](https://github.com/1024pix/pix/compare/v5.144.0...v5.145.0) (2025-06-27)
 
 ### :rocket: Amélioration
