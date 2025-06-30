@@ -12,6 +12,7 @@ export default class CampaignParticipationResult extends Model {
   @attr('boolean') isDisabled;
   @attr('boolean') isShared;
   @attr('string') participantExternalId;
+  @attr('date') sharedAt;
 
   // includes
   @hasMany('campaign-participation-badge', {
