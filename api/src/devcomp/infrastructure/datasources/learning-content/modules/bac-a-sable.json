@@ -13,6 +13,21 @@
   },
   "grains": [
     {
+      "id": "f1738f85-e272-43d3-aee2-f4190be54c34",
+      "type": "lesson",
+      "title": "test table",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "774c4c4e-f170-4e2c-ba7a-d2fe40d053c3",
+            "type": "text",
+            "content": "<p>Voici un tableau :</p> <table>\n  <tbody>\n <tr>\n    <th scope=\"col\">Player</th>\n    <th scope=\"col\">Gloobles</th>\n    <th scope=\"col\">Za'taak</th>\n  </tr>\n  <tr>\n    <th scope=\"row\">TR-7</th>\n    <td>7</td>\n    <td>4,569</td>\n  </tr>\n  <tr>\n    <th scope=\"row\">Khiresh Odo</th>\n    <td>7</td>\n    <td>7,223</td>\n  </tr>\n  <tr>\n    <th scope=\"row\">Mia Oolong</th>\n    <td>9</td>\n    <td>6,219</td>\n  </tr>\n </tbody>\n </table>\n"
+          }
+        }
+      ]
+    },
+    {
       "id": "cf436761-f56d-4b01-83f9-942afe9ce72c",
       "type": "lesson",
       "title": "test qab",

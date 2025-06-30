@@ -1,0 +1,39 @@
+
+
+
+.element-text {
+  table {
+    width: 100%;
+    background: var(--pix-neutral-0);
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 1rem;
+    vertical-align: top;
+    border-bottom: 1px solid var(--pix-neutral-100);
+  }
+
+  th {
+    font-weight: var(--pix-font-bold);
+    background: var(--pix-primary-10);
+  }
+
+  th[scope="row"] {
+    text-align: left;
+  }
+
+  td {
+    width: 26.66%;
+  }
+
+  tr:last-child th, tr:last-child td {
+    border-bottom: none;
+  }
+
+  @media (max-width: 600px) {
+    th, td {
+      padding: 0.75rem;
+    }
+  }
+}
