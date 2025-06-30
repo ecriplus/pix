@@ -21,7 +21,9 @@ import AuthenticationLayout from 'mon-pix/components/authentication-layout/index
     <:content>
       <h1 class="pix-title-m">{{t "pages.sign-up.first-title"}}</h1>
       <SignupForm @user={{@model}} />
-      <OtherAuthenticationProviders @isForSignup={{true}} />
+      {{#unless @model.isAnonymous}}
+        <OtherAuthenticationProviders @isForSignup={{true}} />
+      {{/unless}}
     </:content>
   </AuthenticationLayout>
 </template>
