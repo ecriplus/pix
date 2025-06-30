@@ -3,7 +3,7 @@ import { lcmsClient } from '../../../../src/shared/infrastructure/lcms-client.js
 import { logger, SCOPES } from '../../../../src/shared/infrastructure/utils/logger.js';
 
 export async function learningContentBuilder({ databaseBuilder }) {
-  const learningContent = await lcmsClient.getLatestRelease();
+  const learningContent = await lcmsClient.getRelease();
 
   const totalCounts = Object.entries(learningContent).map(([model, entities]) => [model, entities.length]);
 

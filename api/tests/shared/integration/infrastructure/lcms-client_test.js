@@ -1,34 +1,91 @@
+import { config } from '../../../../src/shared/config.js';
 import { lcmsClient } from '../../../../src/shared/infrastructure/lcms-client.js';
 import { catchErr, expect, mockLearningContent, nock } from '../../../test-helper.js';
 
 describe('Integration | Infrastructure | LCMS Client', function () {
-  describe('#getLatestRelease', function () {
-    it('calls LCMS API to get learning content latest release', async function () {
-      // given
-      const learningContent = { models: [{ id: 'recId' }] };
-      const lcmsCall = await mockLearningContent(learningContent);
+  describe('#getRelease', function () {
+    let originalEnvValue;
+    context('when no release id is specified', function () {
+      beforeEach(function () {
+        originalEnvValue = config.lcms.releaseId;
+        config.lcms.releaseId = null;
+      });
 
-      // when
-      const response = await lcmsClient.getLatestRelease();
+      afterEach(function () {
+        config.lcms.releaseId = originalEnvValue;
+      });
 
-      // then
-      expect(response).to.deep.equal(learningContent);
-      expect(lcmsCall.isDone()).to.be.true;
+      it('calls LCMS API to get learning content latest release', async function () {
+        // given
+        const learningContent = { models: [{ id: 'fromLatestRelease' }] };
+        const lcmsCall = await mockLearningContent(learningContent);
+
+        // when
+        const response = await lcmsClient.getRelease();
+
+        // then
+        expect(response).to.deep.equal(learningContent);
+        expect(lcmsCall.isDone()).to.be.true;
+      });
+
+      it('rejects when learning content release failed to get', async function () {
+        // given
+        const lcmsCall = nock('https://lcms-test.pix.fr/api')
+          .get('/releases/latest')
+          .matchHeader('Authorization', 'Bearer test-api-key')
+          .reply(500);
+
+        // when
+        const error = await catchErr(lcmsClient.getRelease)();
+
+        // then
+        expect(error).to.be.instanceOf(Error);
+        expect(error.message).to.equal(`An error occurred while fetching https://lcms-test.pix.fr/api`);
+        expect(lcmsCall.isDone()).to.be.true;
+      });
     });
 
-    it('rejects when learning content release failed to get', async function () {
-      // given
-      nock('https://lcms-test.pix.fr/api')
-        .get('/releases/latest')
-        .matchHeader('Authorization', 'Bearer test-api-key')
-        .reply(500);
+    context('when a release id is specified', function () {
+      beforeEach(function () {
+        originalEnvValue = config.lcms.releaseId;
+        config.lcms.releaseId = 123;
+      });
 
-      // when
-      const error = await catchErr(lcmsClient.getLatestRelease)();
+      afterEach(function () {
+        config.lcms.releaseId = originalEnvValue;
+      });
 
-      // then
-      expect(error).to.be.instanceOf(Error);
-      expect(error.message).to.equal(`An error occurred while fetching https://lcms-test.pix.fr/api`);
+      it('calls LCMS API to get learning content release of specified ID', async function () {
+        // given
+        const learningContent = { models: [{ id: 'fromRelease123' }] };
+        const lcmsCall = nock('https://lcms-test.pix.fr/api')
+          .get('/releases/123')
+          .matchHeader('Authorization', 'Bearer test-api-key')
+          .reply(200, { content: learningContent });
+
+        // when
+        const response = await lcmsClient.getRelease();
+
+        // then
+        expect(response).to.deep.equal(learningContent);
+        expect(lcmsCall.isDone()).to.be.true;
+      });
+
+      it('rejects when learning content release failed to get', async function () {
+        // given
+        const lcmsCall = nock('https://lcms-test.pix.fr/api')
+          .get('/releases/123')
+          .matchHeader('Authorization', 'Bearer test-api-key')
+          .reply(500);
+
+        // when
+        const error = await catchErr(lcmsClient.getRelease)();
+
+        // then
+        expect(error).to.be.instanceOf(Error);
+        expect(error.message).to.equal(`An error occurred while fetching https://lcms-test.pix.fr/api`);
+        expect(lcmsCall.isDone()).to.be.true;
+      });
     });
   });
 

@@ -14,7 +14,7 @@ export async function refreshLearningContentCache({
   tutorialRepository,
   missionRepository,
 }) {
-  const learningContent = await lcmsClient.getLatestRelease();
+  const learningContent = await lcmsClient.getRelease();
 
   await DomainTransaction.execute(async () => {
     await frameworkRepository.saveMany(learningContent.frameworks);

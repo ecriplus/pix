@@ -3,7 +3,7 @@ import { httpAgent } from './http-agent.js';
 import { logger } from './utils/logger.js';
 
 const { lcms: lcmsConfig } = config;
-const getLatestRelease = async function () {
+const getRelease = async function () {
   let signature;
 
   if (process.env.APP) {
@@ -12,8 +12,9 @@ const getLatestRelease = async function () {
     signature = 'pix-api';
   }
 
+  const url = lcmsConfig.url + '/releases/' + (lcmsConfig.releaseId ? lcmsConfig.releaseId.toString() : 'latest');
   const response = await httpAgent.get({
-    url: lcmsConfig.url + '/releases/latest',
+    url,
     headers: { Authorization: `Bearer ${lcmsConfig.apiKey}`, Referer: signature },
   });
 
@@ -43,6 +44,6 @@ const createRelease = async function () {
   return response.data.content;
 };
 
-const lcmsClient = { getLatestRelease, createRelease };
+const lcmsClient = { getRelease, createRelease };
 
 export { lcmsClient };
