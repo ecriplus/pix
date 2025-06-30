@@ -1,6 +1,6 @@
+import { config } from '../../../../src/shared/config.js';
 import { lcmsClient } from '../../../../src/shared/infrastructure/lcms-client.js';
 import { catchErr, expect, mockLearningContent, nock } from '../../../test-helper.js';
-import { config } from '../../../../src/shared/config.js';
 
 describe('Integration | Infrastructure | LCMS Client', function () {
   describe('#getRelease', function () {
