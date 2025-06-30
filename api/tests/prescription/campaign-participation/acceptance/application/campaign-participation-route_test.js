@@ -434,11 +434,13 @@ describe('Acceptance | API | Campaign Participations', function () {
 
     let server, badge1, badge2, stage;
 
+    let recentDate;
+
     beforeEach(async function () {
       server = await createServer();
 
       const oldDate = new Date('2018-02-03');
-      const recentDate = new Date('2018-05-06');
+      recentDate = new Date('2018-05-06');
       const futureDate = new Date('2018-07-10');
       const skillIds = [
         'recSkill1',
@@ -638,6 +640,7 @@ describe('Acceptance | API | Campaign Participations', function () {
             'can-improve': false,
             'is-disabled': false,
             'participant-external-id': 'participantExternalId',
+            'shared-at': recentDate,
           },
           relationships: {
             'campaign-participation-badges': {
