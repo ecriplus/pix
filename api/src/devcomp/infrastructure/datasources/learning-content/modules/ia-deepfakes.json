@@ -29,12 +29,15 @@
             "content": "<p>Dans la vidéo suivante, on peut voir un scientifique célèbre faire une annonce importante.</p>"
           }
         },
-        {
+  {
           "type": "element",
           "element": {
             "id": "ff755fbe-52a3-45c7-b828-41c0f8d9f228",
-            "type": "text",
-            "content": "<iframe title=\"Albert Einstein - Déclaration\" width=\"560\" height=\"315\" src=\"https://assets.pix.org/draft/modules/deepfakes/declarationae.mp4\" allowfullscreen=\"\" sandbox=\"allow-same-origin allow-scripts allow-popups allow-forms\"></iframe>"
+            "type": "video",
+            "title": "La déclaration",
+            "url": "https://assets.pix.org/draft/modules/deepfakes/declarationae.mp4",
+            "subtitles": "https://assets.pix.org/draft/modules/deepfakes/declarationae.vtt",
+            "transcription": "<p>Déclaration vidéo d'Albert Einstein qui annonce que la Terre est plate en montrant une photo sur un smartphone</p>"
           }
         },
         {
