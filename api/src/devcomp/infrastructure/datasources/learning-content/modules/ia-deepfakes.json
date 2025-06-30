@@ -33,8 +33,12 @@
           "type": "element",
           "element": {
             "id": "ff755fbe-52a3-45c7-b828-41c0f8d9f228",
-            "type": "text",
-            "content": "<iframe title=\"Albert Einstein - Déclaration\" width=\"560\" height=\"315\" src=\"https://tube-numerique-educatif.apps.education.fr/videos/embed/s6ENQF1iMNMnguwr4qtk3k?title=0&amp;warningTitle=0&amp;peertubeLink=0&amp;p2p=0\" allowfullscreen=\"\" sandbox=\"allow-same-origin allow-scripts allow-popups allow-forms\"></iframe>"
+            "type": "video",
+            "title": "La déclaration",
+            "url": "https://assets.pix.org/draft/modules/deepfakes/Albert Einstein - Déclaration UHD.mp4",
+            "poster": "",
+            "subtitles": "",
+            "transcription": "<p>Un homme  qui ressemble à Albert Einstein&nbsp;dit \"Look ! The earth is flate (Regardez, la terre est plate !)\" en montrant une photo de terre plate sur son smartphone.</p>"
           }
         },
         {
