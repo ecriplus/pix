@@ -297,7 +297,8 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
             //go to username-based authentication window
             await click(screen.getByText('Mon identifiant'));
-            assert.dom(screen.getByText('first.last1010')).exists();
+            // The input label contains additional content (spaces and an HTML element) than just the label text
+            assert.dom(screen.getByRole('textbox', { name: /Mon identifiant/, value: 'first.last1010' })).exists();
             assert.strictEqual(screen.getByLabelText('Mot de passe', { exact: false }).value, 'pix123');
           });
 

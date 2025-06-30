@@ -69,23 +69,8 @@
   }
 
   &-username-container {
-    display: flex;
-    flex-direction: column;
-
-    &__label {
+    .pix-input__input {
       color: var(--pix-neutral-800);
-      font-weight: var(--pix-font-medium);
-      font-size: 0.938rem;
-      letter-spacing: 0.031rem;
-    }
-
-    &__span {
-      padding: 15px 10px;
-      color: var(--pix-neutral-100);
-      font-size: 0.875rem;
-      font-family: fonts.$font-roboto;
-      background-color: var(--pix-neutral-20);
-      border-radius: 3px;
     }
   }
 }
