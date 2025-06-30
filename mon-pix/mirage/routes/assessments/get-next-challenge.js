@@ -31,5 +31,8 @@ export default function (schema, request) {
   const nextChallengeId = first(difference(allChallengeIds, answeredChallengeIds));
   const nextChallenge = nextChallengeId ? schema.challenges.find(nextChallengeId) : null;
   assessment.nextChallenge = nextChallenge;
+
+  assessment.orderedChallengeIdsAnswered = answeredChallengeIds;
+
   return assessment;
 }
