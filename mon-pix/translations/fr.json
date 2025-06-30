@@ -1976,7 +1976,7 @@
           "title": "Améliorez vos résultats"
         },
         "see-trainings": "Voir les formations",
-        "shared-message": "Merci d'avoir envoyé vos résultats."
+        "shared-message": "Vos résultats ont été envoyés le {date} à {time}."
       },
       "improve": {
         "description": "Vous pouvez retenter certaines questions",

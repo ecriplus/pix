@@ -1976,7 +1976,7 @@
           "title": "Improve your results"
         },
         "see-trainings": "See trainings",
-        "shared-message": "Thank you for sending us your results."
+        "shared-message": "Your results were sent on {date} at {time}."
       },
       "improve": {
         "description": "You can retake some of the questions",

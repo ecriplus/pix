@@ -1966,7 +1966,7 @@
           "title": "Verbeter uw resultaten"
         },
         "see-trainings": "Bekijk de cursussen",
-        "shared-message": "Bedankt voor het sturen van je resultaten."
+        "shared-message": "Je resultaten zijn verzonden op {date} om {time}."
       },
       "improve": {
         "description": "Je kunt sommige vragen opnieuw proberen",
