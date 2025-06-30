@@ -57,10 +57,10 @@
               },
               {
                 "id": "2",
-                "content": "<p>“Oui ! combien de temps veux-tu partir ? ⛵”</p>",
+                "content": "<p>“Oui ! à partir de quand veux-tu partir ? ⛵”</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p><strong>C’est une réponse que pourrait donner chatGPT.</strong> En effet, il faut connaître la durée des vacances de Bob pour pouvoir l’aider !</p>"
+                  "diagnosis": "<p><strong>C’est une réponse que pourrait donner chatGPT.</strong> En effet, il faut savoir quand commence les vacances de Bob pour mieux l’aider !</p>"
                 }
               },
               {
@@ -329,7 +329,7 @@
           "element": {
             "id": "30de711c-6587-4889-98ff-153941624049",
             "type": "text",
-            "content": "<p>Pour répondre, une <strong>IA conversationnelle</strong>, comme chatGPT, <strong>construit sa réponse comme si elle complétait le texte</strong>  de l’utilisateur.&nbsp; </p><p>Pour cela, elle cherche les mots qui ont <strong>le plus de chance d'apparaître</strong> (les plus probables) et choisit l’un de ces mots. </p><p>Elle répète cette méthode <strong>mot après mot</strong>.</p>"
+            "content": "<p>Pour répondre, une <strong>IA conversationnelle</strong>, comme chatGPT, <strong>construit sa réponse comme si elle complétait le texte</strong>  de l’utilisateur.&nbsp; </p><p>Pour compléter ce texte, elle choisit le prochain mot selon sa probabilité d'apparaître : plus le mot est probable, plus il y a de chance que l'IA choississe ce mot.</p><p>Elle répète cette méthode <strong>mot après mot</strong>.</p>"
           }
         },
         {
@@ -661,7 +661,7 @@
                 "content": "<p>Je vérifierai les réponses avec d’autres outils (internet, livres, …).</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p><strong>C'est l'idéal !</strong> </p><p>Une IA conversationnelle permet de trouver très rapidement des informations. </p><p>Mais il est très important de vérifier ces informations ailleurs, avec d'autres sources.</p>"
+                  "diagnosis": "<p><strong>Oui, c'est important !</strong> </p><p>Une IA conversationnelle permet de trouver très rapidement des informations. </p><p>Mais il est très important de vérifier ces informations ailleurs, avec d'autres sources.</p>"
                 }
               },
               {
