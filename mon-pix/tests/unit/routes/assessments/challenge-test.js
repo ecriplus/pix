@@ -14,7 +14,7 @@ module('Unit | Route | Assessments | Challenge', function (hooks) {
   let currentUserStub;
 
   const params = {
-    challenge_id: 'challenge_id',
+    challenge_number: 0,
   };
 
   const assessment = {
@@ -33,7 +33,7 @@ module('Unit | Route | Assessments | Challenge', function (hooks) {
 
   hooks.beforeEach(function () {
     createRecordStub = sinon.stub();
-    queryRecordStub = sinon.stub().resolves(model.challenge);
+    queryRecordStub = sinon.stub();
     findRecordStub = sinon.stub();
     storeStub = EmberService.create({
       createRecord: createRecordStub,
@@ -50,29 +50,44 @@ module('Unit | Route | Assessments | Challenge', function (hooks) {
   });
 
   module('#model', function () {
-    test('should correctly call the store to find assessment and challenge', async function (assert) {
-      // when
-      await route.model(params);
+    module('when accessing an already answered challenge', function () {
+      test('should correctly call the store to find assessment and challenge', async function (assert) {
+        // given
+        model.assessment.orderedChallengeIdsAnswered = ['challengeABCDEF'];
+        findRecordStub.withArgs('challenge', 'challengeABCDEF').resolves({
+          id: 'challengeABCDEF',
+        });
+        const answer = Symbol('answer');
+        queryRecordStub
+          .withArgs('answer', { assessmentId: model.assessment.id, challengeId: 'challengeABCDEF' })
+          .resolves(answer);
 
-      // then
-      sinon.assert.calledWith(route.modelFor, 'assessments');
-      sinon.assert.calledWith(queryRecordStub, 'challenge', { assessmentId: assessment.id });
-      assert.ok(true);
-    });
-    test('should call queryRecord to find answer', async function (assert) {
-      // given
-      model.assessment.get.withArgs('isCertification').returns(false);
-      model.assessment.get.withArgs('course').returns({ getProgress: sinon.stub().returns('course') });
+        // when
+        const returnedModel = await route.model(params);
 
-      // when
-      await route.model(params);
-
-      // then
-      sinon.assert.calledWith(queryRecordStub, 'answer', {
-        assessmentId: assessment.id,
-        challengeId: model.challenge.id,
+        // then
+        sinon.assert.calledWith(route.modelFor, 'assessments');
+        sinon.assert.calledOnce(findRecordStub);
+        assert.strictEqual(returnedModel.answer, answer);
       });
-      assert.ok(true);
+    });
+
+    module('when accessing next challenge', function () {
+      test('should correctly call the store to find assessment and challenge', async function (assert) {
+        // given
+        model.assessment.orderedChallengeIdsAnswered = [];
+        const challenge = Symbol('challenge');
+        queryRecordStub.withArgs('challenge', { assessmentId: model.assessment.id }).resolves(challenge);
+
+        // when
+        const returnedModel = await route.model(params);
+
+        // then
+        sinon.assert.calledWith(route.modelFor, 'assessments');
+        sinon.assert.calledOnceWithExactly(queryRecordStub, 'challenge', { assessmentId: assessment.id });
+        assert.strictEqual(returnedModel.answer, null);
+        assert.strictEqual(returnedModel.challenge, challenge);
+      });
     });
 
     module('when the assessment is a Preview', function (hooks) {
@@ -121,7 +136,7 @@ module('Unit | Route | Assessments | Challenge', function (hooks) {
     module('when the asked challenge is already answered', function (hooks) {
       hooks.beforeEach(function () {
         const assessmentWithAnswers = {
-          type: 'COMPETENCE',
+          type: 'COMPETENCE_EVALUATION',
           orderedChallengeIdsAnswered: ['recId'],
         };
         route.modelFor.returns(assessmentWithAnswers);
@@ -131,7 +146,6 @@ module('Unit | Route | Assessments | Challenge', function (hooks) {
         // given
         const challenge = { id: 'recId' };
         const params = {
-          challengeId: 'recId',
           challenge_number: 0,
         };
         storeStub.findRecord.resolves(challenge);
