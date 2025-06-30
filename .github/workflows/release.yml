@@ -31,4 +31,4 @@ jobs:
           token: ${{ secrets.SLACK_RELEASE_BOT_TOKEN }}
           payload: |
             channel: ${{ secrets.SLACK_RELEASE_CHANNEL_ID }}
-            text: "Coucou 🙃, je lance la mise en recette de la v${{ env.NEW_RELEASE_VERSION }} !"
+            text: "Coucou 🙃, je lance la mise en recette de la v${{ env.new_release_version }} !"
