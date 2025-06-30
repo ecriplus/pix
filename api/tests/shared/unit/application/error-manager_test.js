@@ -164,9 +164,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
 
       // then
       expect(response.statusCode).to.equal(422);
-      expect(response.source).to.deep.equal({
-        errors: [],
-      });
+      expect(response.source).to.deep.equal({ errors: [{ status: '422' }] });
     });
   });
 

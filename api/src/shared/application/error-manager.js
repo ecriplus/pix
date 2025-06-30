@@ -1,4 +1,3 @@
-import jsonapiSerializer from 'jsonapi-serializer';
 import _ from 'lodash';
 
 import * as translations from '../../../translations/index.js';
@@ -22,12 +21,10 @@ import {
   UserNotMemberOfOrganizationError,
 } from '../../team/domain/errors.js';
 import * as SharedDomainErrors from '../domain/errors.js';
-import * as errorSerializer from '../infrastructure/serializers/jsonapi/error-serializer.js';
 import { extractLocaleFromRequest } from '../infrastructure/utils/request-response-utils.js';
 import { domainErrorMapper } from './domain-error-mapper.js';
 import { HttpErrors } from './http-errors.js';
 
-const { Error: JSONAPIError } = jsonapiSerializer;
 const NOT_VALID_RELATIONSHIPS = ['externalId', 'participantExternalId'];
 
 function translateMessage(locale, key) {
@@ -38,48 +35,45 @@ function translateMessage(locale, key) {
 }
 
 function _formatUndefinedAttribute({ message, locale, meta }) {
-  const error = {
-    status: '422',
+  const errorContent = {
+    message: translateMessage(locale, message),
+    code: undefined,
+    meta,
+    source: undefined,
     title: 'Invalid data attributes',
-    detail: translateMessage(locale, message),
   };
-  if (meta) {
-    error.meta = meta;
-  }
-  return error;
+
+  return new HttpErrors.InvalidEntityError(errorContent);
 }
 
 function _formatRelationship({ attribute, message, locale, meta }) {
   const relationship = attribute.replace('Id', '');
-  const error = {
-    status: '422',
+
+  const errorContent = {
+    message: translateMessage(locale, message),
+    code: undefined,
+    meta,
     source: {
       pointer: `/data/relationships/${_.kebabCase(relationship)}`,
     },
     title: `Invalid relationship "${relationship}"`,
-    detail: translateMessage(locale, message),
-    meta,
   };
-  if (meta) {
-    error.meta = meta;
-  }
-  return error;
+
+  return new HttpErrors.InvalidEntityError(errorContent);
 }
 
 function _formatAttribute({ attribute, message, locale, meta }) {
-  const error = {
-    status: '422',
+  const errorContent = {
+    message: translateMessage(locale, message),
+    code: undefined,
+    meta,
     source: {
       pointer: `/data/attributes/${_.kebabCase(attribute)}`,
     },
     title: `Invalid data attribute "${attribute}"`,
-    detail: translateMessage(locale, message),
-    meta,
   };
-  if (meta) {
-    error.meta = meta;
-  }
-  return error;
+
+  return new HttpErrors.InvalidEntityError(errorContent);
 }
 
 function _formatInvalidAttribute(locale, meta, { attribute, message }) {
@@ -530,10 +524,10 @@ function handle(request, h, error) {
   if (error instanceof SharedDomainErrors.EntityValidationError) {
     const locale = extractLocaleFromRequest(request).split('-')[0];
 
-    const jsonApiError = new JSONAPIError(
-      error.invalidAttributes?.map(_formatInvalidAttribute.bind(_formatInvalidAttribute, locale, error.meta)),
-    );
-    return h.response(jsonApiError).code(422);
+    const jsonApiError =
+      error.invalidAttributes?.map(_formatInvalidAttribute.bind(_formatInvalidAttribute, locale, error.meta)) ||
+      new HttpErrors.InvalidEntityError();
+    return HttpErrors.sendJsonApiError(jsonApiError, h);
   }
 
   const httpError = domainErrorMapper.mapToHttpError(error) ?? _mapToHttpError(error);
@@ -542,10 +536,10 @@ function handle(request, h, error) {
     httpError.meta.forEach((error) => {
       error.status = httpError.status;
     });
-    return h.response(errorSerializer.serialize(httpError.meta)).code(httpError.status);
+    return HttpErrors.sendJsonApiError(httpError.meta, h);
   }
 
-  return h.response(errorSerializer.serialize(httpError)).code(httpError.status);
+  return HttpErrors.sendJsonApiError(httpError, h);
 }
 
 export { _mapToHttpError, handle };

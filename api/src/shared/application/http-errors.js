@@ -1,10 +1,10 @@
-import jsonapiSerializer from 'jsonapi-serializer';
-
-const { Error: JSONAPIError } = jsonapiSerializer;
+import { getRequestId } from '../infrastructure/monitoring-tools.js';
+import * as errorSerializer from '../infrastructure/serializers/jsonapi/error-serializer.js';
 
 class BaseHttpError extends Error {
-  constructor(message) {
+  constructor(message, dependencies = { getRequestId }) {
     super(message);
+    this.id = dependencies.getRequestId();
     this.title = 'Default Bad Request';
     this.status = 400;
   }
@@ -16,6 +16,17 @@ class UnprocessableEntityError extends BaseHttpError {
     this.title = 'Unprocessable entity';
     this.code = code;
     this.meta = meta;
+    this.status = 422;
+  }
+}
+
+class InvalidEntityError extends BaseHttpError {
+  constructor({ message, code, meta, source, title } = {}) {
+    super(message);
+    this.title = title;
+    this.code = code;
+    this.meta = meta;
+    this.source = source;
     this.status = 422;
   }
 }
@@ -150,15 +161,15 @@ class TooManyRequestsError extends BaseHttpError {
   }
 }
 
+/**
+ *
+ * @param {import('../infrastructure/serializers/jsonapi/error-serializer.js').HttpError} httpError
+ * @param {Object} h
+ * @returns {Promise}
+ */
 function sendJsonApiError(httpError, h) {
-  const jsonApiError = new JSONAPIError({
-    status: httpError.status.toString(),
-    title: httpError.title,
-    detail: httpError.message,
-    code: httpError.code,
-    meta: httpError.meta,
-  });
-  return h.response(jsonApiError).code(httpError.status).takeover();
+  const errors = errorSerializer.serialize(httpError);
+  return h.response(errors).code(Number(errors.errors[0].status)).takeover();
 }
 
 const HttpErrors = {
@@ -179,6 +190,7 @@ const HttpErrors = {
   UnprocessableEntityError,
   TooManyRequestsError,
   InternalServerError,
+  InvalidEntityError,
 };
 
 export {
