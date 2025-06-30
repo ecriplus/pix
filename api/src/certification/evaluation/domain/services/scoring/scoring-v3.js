@@ -15,114 +15,117 @@
 
 import CertificationCancelled from '../../../../../../src/shared/domain/events/CertificationCancelled.js';
 import { config } from '../../../../../shared/config.js';
+import { withTransaction } from '../../../../../shared/domain/DomainTransaction.js';
 import { CompetenceMark } from '../../../../../shared/domain/models/index.js';
 import { FlashAssessmentAlgorithm } from '../../../../flash-certification/domain/models/FlashAssessmentAlgorithm.js';
 import { CertificationAssessmentHistory } from '../../../../scoring/domain/models/CertificationAssessmentHistory.js';
 import { CertificationAssessmentScoreV3 } from '../../../../scoring/domain/models/CertificationAssessmentScoreV3.js';
 import { AssessmentResultFactory } from '../../../../scoring/domain/models/factories/AssessmentResultFactory.js';
 
-/**
- * @param {Object} params
- * @param {AssessmentResultRepository} params.assessmentResultRepository
- * @param {CertificationCourseRepository} params.certificationCourseRepository
- * @param {CompetenceMarkRepository} params.competenceMarkRepository
- * @param {CertificationAssessmentHistoryRepository} params.certificationAssessmentHistoryRepository
- * @param {CertificationChallengeRepository} params.certificationChallengeRepository
- * @param {ScoringConfigurationRepository} params.scoringConfigurationRepository
- * @param {FlashAlgorithmConfigurationRepository} params.flashAlgorithmConfigurationRepository
- * @param {AnswerRepository} params.answerRepository
- * @param {FlashAlgorithmService} params.flashAlgorithmService
- * @param {ChallengeRepository} params.challengeRepository
- * @param {ScoringDegradationService} params.scoringDegradationService
- */
-export const handleV3CertificationScoring = async ({
-  event,
-  certificationAssessment,
-  locale,
-  answerRepository,
-  assessmentResultRepository,
-  certificationAssessmentHistoryRepository,
-  certificationCourseRepository,
-  competenceMarkRepository,
-  flashAlgorithmConfigurationRepository,
-  flashAlgorithmService,
-  scoringDegradationService,
-  scoringConfigurationRepository,
-  dependencies,
-}) => {
-  const { certificationCourseId, id: assessmentId } = certificationAssessment;
-  const candidateAnswers = await answerRepository.findByAssessment(assessmentId);
-
-  const toBeCancelled = event instanceof CertificationCancelled;
-
-  const { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts } =
-    await dependencies.findByCertificationCourseIdAndAssessmentId({
-      certificationCourseId,
-      assessmentId,
-    });
-  const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
-
-  const abortReason = certificationCourse.getAbortReason();
-
-  const configuration = await flashAlgorithmConfigurationRepository.getMostRecentBeforeDate(
-    certificationCourse.getStartDate(),
-  );
-
-  const algorithm = new FlashAssessmentAlgorithm({
-    flashAlgorithmImplementation: flashAlgorithmService,
-    configuration,
-  });
-
-  const v3CertificationScoring = await scoringConfigurationRepository.getLatestByDateAndLocale({
-    locale,
-    date: certificationCourse.getStartDate(),
-  });
-
-  const certificationAssessmentScore = CertificationAssessmentScoreV3.fromChallengesAndAnswers({
-    abortReason,
-    algorithm,
-    // The following spread operation prevents the original array to be mutated during the simulation
-    // so that in can be used during the assessment result creation
-    allAnswers: [...candidateAnswers],
-    allChallenges,
-    challenges: askedChallengesWithoutLiveAlerts,
-    maxReachableLevelOnCertificationDate: certificationCourse.getMaxReachableLevelOnCertificationDate(),
-    v3CertificationScoring,
-    scoringDegradationService,
-  });
-
-  const assessmentResult = await _createV3AssessmentResult({
-    toBeCancelled,
-    allAnswers: candidateAnswers,
+export const handleV3CertificationScoring = withTransaction(
+  /**
+   * @param {Object} params
+   * @param {AssessmentResultRepository} params.assessmentResultRepository
+   * @param {CertificationCourseRepository} params.certificationCourseRepository
+   * @param {CompetenceMarkRepository} params.competenceMarkRepository
+   * @param {CertificationAssessmentHistoryRepository} params.certificationAssessmentHistoryRepository
+   * @param {CertificationChallengeRepository} params.certificationChallengeRepository
+   * @param {ScoringConfigurationRepository} params.scoringConfigurationRepository
+   * @param {FlashAlgorithmConfigurationRepository} params.flashAlgorithmConfigurationRepository
+   * @param {AnswerRepository} params.answerRepository
+   * @param {FlashAlgorithmService} params.flashAlgorithmService
+   * @param {ChallengeRepository} params.challengeRepository
+   * @param {ScoringDegradationService} params.scoringDegradationService
+   */
+  async ({
+    event,
     certificationAssessment,
-    certificationAssessmentScore,
-    certificationCourse,
-    juryId: event?.juryId,
-  });
-
-  // isCancelled will be removed
-  if (_hasV3CertificationLacksOfAnswersForTechnicalReason({ allAnswers: candidateAnswers, certificationCourse })) {
-    certificationCourse.cancel();
-  }
-
-  const certificationAssessmentHistory = CertificationAssessmentHistory.fromChallengesAndAnswers({
-    algorithm,
-    challenges: challengeCalibrationsWithoutLiveAlerts,
-    allAnswers: candidateAnswers,
-  });
-
-  await certificationAssessmentHistoryRepository.save(certificationAssessmentHistory);
-
-  await _saveV3Result({
-    assessmentResult,
-    certificationCourseId,
-    certificationAssessmentScore,
+    locale,
+    answerRepository,
     assessmentResultRepository,
+    certificationAssessmentHistoryRepository,
+    certificationCourseRepository,
     competenceMarkRepository,
-  });
+    flashAlgorithmConfigurationRepository,
+    flashAlgorithmService,
+    scoringDegradationService,
+    scoringConfigurationRepository,
+    dependencies,
+  }) => {
+    const { certificationCourseId, id: assessmentId } = certificationAssessment;
+    const candidateAnswers = await answerRepository.findByAssessment(assessmentId);
 
-  return certificationCourse;
-};
+    const toBeCancelled = event instanceof CertificationCancelled;
+
+    const { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts } =
+      await dependencies.findByCertificationCourseIdAndAssessmentId({
+        certificationCourseId,
+        assessmentId,
+      });
+    const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
+
+    const abortReason = certificationCourse.getAbortReason();
+
+    const configuration = await flashAlgorithmConfigurationRepository.getMostRecentBeforeDate(
+      certificationCourse.getStartDate(),
+    );
+
+    const algorithm = new FlashAssessmentAlgorithm({
+      flashAlgorithmImplementation: flashAlgorithmService,
+      configuration,
+    });
+
+    const v3CertificationScoring = await scoringConfigurationRepository.getLatestByDateAndLocale({
+      locale,
+      date: certificationCourse.getStartDate(),
+    });
+
+    const certificationAssessmentScore = CertificationAssessmentScoreV3.fromChallengesAndAnswers({
+      abortReason,
+      algorithm,
+      // The following spread operation prevents the original array to be mutated during the simulation
+      // so that in can be used during the assessment result creation
+      allAnswers: [...candidateAnswers],
+      allChallenges,
+      challenges: askedChallengesWithoutLiveAlerts,
+      maxReachableLevelOnCertificationDate: certificationCourse.getMaxReachableLevelOnCertificationDate(),
+      v3CertificationScoring,
+      scoringDegradationService,
+    });
+
+    const assessmentResult = await _createV3AssessmentResult({
+      toBeCancelled,
+      allAnswers: candidateAnswers,
+      certificationAssessment,
+      certificationAssessmentScore,
+      certificationCourse,
+      juryId: event?.juryId,
+    });
+
+    // isCancelled will be removed
+    if (_hasV3CertificationLacksOfAnswersForTechnicalReason({ allAnswers: candidateAnswers, certificationCourse })) {
+      certificationCourse.cancel();
+    }
+
+    const certificationAssessmentHistory = CertificationAssessmentHistory.fromChallengesAndAnswers({
+      algorithm,
+      challenges: challengeCalibrationsWithoutLiveAlerts,
+      allAnswers: candidateAnswers,
+    });
+
+    await certificationAssessmentHistoryRepository.save(certificationAssessmentHistory);
+
+    await _saveV3Result({
+      assessmentResult,
+      certificationCourseId,
+      certificationAssessmentScore,
+      assessmentResultRepository,
+      competenceMarkRepository,
+    });
+
+    return certificationCourse;
+  },
+);
 
 function _createV3AssessmentResult({
   toBeCancelled,
@@ -178,6 +181,11 @@ function _createV3AssessmentResult({
   });
 }
 
+/**
+ * @param {Object} params
+ * @param {AssessmentResultRepository} params.assessmentResultRepository
+ * @param {CompetenceMarkRepository} params.competenceMarkRepository
+ */
 async function _saveV3Result({
   assessmentResult,
   certificationCourseId,
