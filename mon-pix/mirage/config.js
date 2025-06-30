@@ -27,6 +27,7 @@ import getQuestResults from './routes/get-quest-results';
 import getScorecard from './routes/get-scorecard';
 import getScorecardsTutorials from './routes/get-scorecards-tutorials';
 import loadUserTutorialsRoutes from './routes/get-user-tutorials';
+import getVerifiedCodes from './routes/get-verified-codes';
 import loadModuleRoutes from './routes/modules/index';
 import loadOrganizationLearnersRoutes from './routes/organization-learners/index';
 import loadPassageRoutes from './routes/passages/index';
@@ -128,4 +129,6 @@ function routes() {
   this.get('/information-banners/:target', getInformationBanners);
 
   this.get('/organizations-to-join/:code', getOrganizationsToJoin);
+
+  this.get('/verified-codes/:code', getVerifiedCodes);
 }

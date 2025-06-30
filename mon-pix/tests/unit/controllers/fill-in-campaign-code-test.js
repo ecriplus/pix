@@ -27,10 +27,17 @@ module('Unit | Controller | Fill in Campaign Code', function (hooks) {
         // given
         const campaignCode = 'LINKTOTHEPAST';
         const storeStub = {
+          findRecord: sinon
+            .stub()
+            .withArgs('verified-code', campaignCode)
+            .resolves({
+              id: campaignCode,
+              campaign: { id: 1, code: campaignCode },
+            }),
           queryRecord: sinon
             .stub()
-            .withArgs('campaign', { filter: { code: campaignCode } })
-            .resolves({ code: campaignCode, identityProvider: 'FRANCE DECONNECT' }),
+            .withArgs('organization-to-join', { code: campaignCode })
+            .resolves({ identityProvider: 'FRANCEDECONNECT' }),
         };
         controller.set('store', storeStub);
         controller.set('campaignCode', campaignCode);
@@ -50,10 +57,17 @@ module('Unit | Controller | Fill in Campaign Code', function (hooks) {
           // given
           const campaignCode = 'LINKTOTHEPAST';
           const storeStub = {
+            findRecord: sinon
+              .stub()
+              .withArgs('verified-code', campaignCode)
+              .resolves({
+                id: campaignCode,
+                campaign: { id: 1, code: campaignCode },
+              }),
             queryRecord: sinon
               .stub()
-              .withArgs('campaign', { filter: { code: campaignCode } })
-              .resolves({ code: campaignCode, identityProvider: 'GAR' }),
+              .withArgs('organization-to-join', { code: campaignCode })
+              .resolves({ identityProvider: 'GAR' }),
           };
           stubSessionService(this.owner, { isAuthenticatedByGar: true });
           controller.set('store', storeStub);
@@ -73,10 +87,17 @@ module('Unit | Controller | Fill in Campaign Code', function (hooks) {
             // given
             const campaignCode = 'LINKTOTHEPAST';
             const storeStub = {
+              findRecord: sinon
+                .stub()
+                .withArgs('verified-code', campaignCode)
+                .resolves({
+                  id: campaignCode,
+                  campaign: { id: 1, code: campaignCode },
+                }),
               queryRecord: sinon
                 .stub()
-                .withArgs('campaign', { filter: { code: campaignCode } })
-                .resolves({ code: campaignCode, identityProvider: 'GAR' }),
+                .withArgs('organization-to-join', { code: campaignCode })
+                .resolves({ identityProvider: 'GAR' }),
             };
             stubSessionService(this.owner, { isAuthenticated: true });
             controller.set('store', storeStub);
@@ -95,10 +116,17 @@ module('Unit | Controller | Fill in Campaign Code', function (hooks) {
             // given
             const campaignCode = 'LINKTOTHEPAST';
             const storeStub = {
+              findRecord: sinon
+                .stub()
+                .withArgs('verified-code', campaignCode)
+                .resolves({
+                  id: campaignCode,
+                  campaign: { id: 1, code: campaignCode },
+                }),
               queryRecord: sinon
                 .stub()
-                .withArgs('campaign', { filter: { code: campaignCode } })
-                .resolves({ code: campaignCode, identityProvider: 'GAR' }),
+                .withArgs('organization-to-join', { code: campaignCode })
+                .resolves({ identityProvider: 'GAR' }),
             };
             stubSessionService(this.owner, { isAuthenticated: false });
             controller.set('store', storeStub);
@@ -119,9 +147,9 @@ module('Unit | Controller | Fill in Campaign Code', function (hooks) {
       const campaignCode = 'azerty1';
       controller.set('campaignCode', campaignCode);
       const storeStub = {
-        queryRecord: sinon
+        findRecord: sinon
           .stub()
-          .withArgs('campaign', { filter: { code: campaignCode } })
+          .withArgs('verified-code', campaignCode)
           .rejects({ errors: [{ status: '404' }] }),
       };
       controller.set('store', storeStub);
@@ -141,9 +169,9 @@ module('Unit | Controller | Fill in Campaign Code', function (hooks) {
       const campaignCode = 'azerty1';
       controller.set('campaignCode', campaignCode);
       const storeStub = {
-        queryRecord: sinon
+        findRecord: sinon
           .stub()
-          .withArgs('campaign', { filter: { code: campaignCode } })
+          .withArgs('verified-code', campaignCode)
           .rejects({ errors: [{ status: '403' }] }),
       };
       controller.set('store', storeStub);

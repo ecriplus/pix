@@ -1,0 +1,43 @@
+import { createServer, databaseBuilder, expect } from '../../../test-helper.js';
+
+describe('Quest | Acceptance | Application | Verified Code Route ', function () {
+  let server;
+
+  beforeEach(async function () {
+    server = await createServer();
+  });
+
+  describe('GET /api/verified-codes/{id}', function () {
+    it('should return verified code with campaign link for given campaign', async function () {
+      // given
+      databaseBuilder.factory.buildOrganization({ type: 'SCO' }).id;
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId });
+      await databaseBuilder.commit();
+      const options = {
+        method: 'GET',
+        url: `/api/verified-codes/${campaign.code}`,
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result).to.deep.equal({
+        data: {
+          type: 'verified-codes',
+          id: campaign.code,
+          attributes: {},
+          relationships: {
+            campaign: {
+              links: {
+                related: `/api/campaigns?filter[code]=${campaign.code}`,
+              },
+            },
+          },
+        },
+      });
+    });
+  });
+});

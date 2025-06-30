@@ -90,4 +90,13 @@ export default Factory.extend({
       });
     },
   }),
+
+  withVerifiedCode: trait({
+    afterCreate(campaign, server) {
+      server.create('verified-code', {
+        id: campaign.code,
+        campaign,
+      });
+    },
+  }),
 });

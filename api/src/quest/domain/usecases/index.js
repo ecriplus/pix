@@ -17,6 +17,7 @@ const dependencies = {
   rewardRepository: repositories.rewardRepository,
   successRepository: repositories.successRepository,
   questRepository: repositories.questRepository,
+  campaignRepository: repositories.campaignRepository,
   logger,
 };
 

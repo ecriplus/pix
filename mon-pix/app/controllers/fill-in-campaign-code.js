@@ -33,10 +33,10 @@ export default class FillInCampaignCodeController extends Controller {
   @action
   async startCampaign(campaignCode) {
     try {
-      this.campaign = await this.store.queryRecord('campaign', {
-        filter: { code: campaignCode },
-      });
-      const isGARCampaign = this.campaign.identityProvider === IDENTITY_PROVIDER_ID_GAR;
+      this.verifiedCode = await this.store.findRecord('verified-code', campaignCode);
+      this.campaign = await this.verifiedCode.campaign;
+      const organizationToJoin = await this.store.queryRecord('organization-to-join', { code: this.verifiedCode.id });
+      const isGARCampaign = organizationToJoin.identityProvider === IDENTITY_PROVIDER_ID_GAR;
       if (_shouldShowGARModal(isGARCampaign, this.isUserAuthenticatedByGAR, this.isUserAuthenticatedByPix)) {
         this.showGARModal = true;
         return;

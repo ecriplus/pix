@@ -34,7 +34,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
           }),
         );
 
-        campaign = server.create('campaign', { organizationId: 1 });
+        campaign = server.create('campaign', 'withVerifiedCode', { organizationId: 1 });
         server.create('organization-to-join', { id: 1, identityProvider: 'OIDC_PARTNER', code: campaign.code });
       });
 
@@ -118,7 +118,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
             assign: assignLocationStub,
           }),
         );
-        campaign = server.create('campaign', { organizationId: 1 });
+        campaign = server.create('campaign', 'withVerifiedCode', { organizationId: 1 });
         server.create('organization-to-join', { id: 1, identityProvider: 'OIDC_PARTNER', code: campaign.code });
       });
 
