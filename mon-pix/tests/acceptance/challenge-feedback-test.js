@@ -15,8 +15,8 @@ module('Acceptance | Giving feedback about a challenge', function (hooks) {
   let firstChallenge;
 
   hooks.beforeEach(function () {
-    assessment = server.create('assessment', 'ofCompetenceEvaluationType');
     firstChallenge = server.create('challenge', 'forCompetenceEvaluation');
+    assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: firstChallenge });
     server.create('challenge', 'forCompetenceEvaluation');
   });
 
