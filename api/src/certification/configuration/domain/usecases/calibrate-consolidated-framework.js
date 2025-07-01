@@ -16,7 +16,7 @@ export const calibrateConsolidatedFramework = withTransaction(
    * @param {Date} params.createdAt
    * @param {number} params.calibrationId
    * @param {ComplementaryCertificationKeys} params.complementaryCertificationKey
-   * @param {CertificationFrameworksChallengeRepository} params.certificationFrameworksChallengeRepository
+   * @param {ConsolidatedFrameworkRepository} params.consolidatedFrameworkRepository
    * @param {ActiveCalibratedChallengeRepository} params.activeCalibratedChallengeRepository
    * @returns {Promise<void>}
    */
@@ -24,14 +24,13 @@ export const calibrateConsolidatedFramework = withTransaction(
     createdAt,
     calibrationId,
     complementaryCertificationKey,
-    certificationFrameworksChallengeRepository,
+    consolidatedFrameworkRepository,
     activeCalibratedChallengeRepository,
   }) => {
-    const consolidatedFramework =
-      await certificationFrameworksChallengeRepository.findByCreationDateAndComplementaryKey({
-        complementaryCertificationKey,
-        createdAt,
-      });
+    const consolidatedFramework = await consolidatedFrameworkRepository.findByCreationDateAndComplementaryKey({
+      complementaryCertificationKey,
+      createdAt,
+    });
 
     const activeCalibratedChallenges = await activeCalibratedChallengeRepository.findByComplementaryKeyAndCalibrationId(
       {
@@ -47,7 +46,7 @@ export const calibrateConsolidatedFramework = withTransaction(
     consolidatedFramework.calibrationId = calibrationId;
     _calibrateChallenges(activeCalibratedChallenges, consolidatedFramework.challenges);
 
-    return certificationFrameworksChallengeRepository.save(consolidatedFramework);
+    return consolidatedFrameworkRepository.save(consolidatedFramework);
   },
 );
 

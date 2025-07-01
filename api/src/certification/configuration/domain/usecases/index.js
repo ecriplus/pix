@@ -11,7 +11,6 @@ import * as activeCalibratedChallengeRepository from '../../infrastructure/repos
 import * as attachableTargetProfileRepository from '../../infrastructure/repositories/attachable-target-profiles-repository.js';
 import * as candidateRepository from '../../infrastructure/repositories/candidate-repository.js';
 import * as centerRepository from '../../infrastructure/repositories/center-repository.js';
-import * as certificationFrameworksChallengeRepository from '../../infrastructure/repositories/certification-frameworks-challenge-repository.js';
 import * as consolidatedFrameworkRepository from '../../infrastructure/repositories/consolidated-framework-repository.js';
 
 /**
@@ -25,7 +24,6 @@ import * as consolidatedFrameworkRepository from '../../infrastructure/repositor
  * @typedef {challengeRepository} ChallengeRepository
  * @typedef {complementaryCertificationRepository} ComplementaryCertificationRepository
  * @typedef {consolidatedFrameworkRepository} ConsolidatedFrameworkRepository
- * @typedef {certificationFrameworksChallengeRepository} CertificationFrameworksChallengeRepository
  * @typedef {skillRepository} SkillRepository
  * @typedef {tubeRepository} TubeRepository
  **/
@@ -37,7 +35,6 @@ const dependencies = {
   challengeRepository,
   complementaryCertificationRepository,
   consolidatedFrameworkRepository,
-  certificationFrameworksChallengeRepository,
   skillRepository,
   tubeRepository,
 };

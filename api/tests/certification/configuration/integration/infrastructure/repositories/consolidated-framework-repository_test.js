@@ -1,5 +1,6 @@
 import * as consolidatedFrameworkRepository from '../../../../../../src/certification/configuration/infrastructure/repositories/consolidated-framework-repository.js';
-import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Integration | Repository | consolidated-framework', function () {
   describe('#create', function () {
@@ -53,47 +54,22 @@ describe('Certification | Configuration | Integration | Repository | consolidate
       // given
       const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
 
-      const olderTube = databaseBuilder.factory.learningContent.buildTube({ id: 'olderTube' });
-      const olderSkill = databaseBuilder.factory.learningContent.buildSkill({ tubeId: olderTube.id });
-      const olderChallenge = databaseBuilder.factory.learningContent.buildChallenge({ skillId: olderSkill.id });
-
-      const expectedTube1 = databaseBuilder.factory.learningContent.buildTube({ id: 'expectedTube1' });
-      const expectedTube2 = databaseBuilder.factory.learningContent.buildTube({ id: 'expectedTube2' });
-      const expectedSkill1 = databaseBuilder.factory.learningContent.buildSkill({
-        id: 'skillId1',
-        tubeId: expectedTube1.id,
-      });
-      const expectedSkill2 = databaseBuilder.factory.learningContent.buildSkill({
-        id: 'skillId2',
-        tubeId: expectedTube2.id,
-      });
-
-      const expectedChallenge1 = databaseBuilder.factory.learningContent.buildChallenge({
-        id: 'challengeId1',
-        skillId: expectedSkill1.id,
-      });
-      const expectedChallenge2 = databaseBuilder.factory.learningContent.buildChallenge({
-        id: 'challengeId2',
-        skillId: expectedSkill2.id,
-      });
+      const challenge = databaseBuilder.factory.learningContent.buildChallenge({ id: 'challengeId1234' });
 
       databaseBuilder.factory.buildCertificationFrameworksChallenge({
         complementaryCertificationKey: complementaryCertification.key,
-        challengeId: olderChallenge.id,
         createdAt: new Date('2023-01-11'),
+        calibrationId: 123,
+        challengeId: challenge.id,
       });
 
-      const currentDate = new Date('2025-10-21');
       databaseBuilder.factory.buildCertificationFrameworksChallenge({
         complementaryCertificationKey: complementaryCertification.key,
-        challengeId: expectedChallenge1.id,
-        createdAt: currentDate,
+        createdAt: new Date('2025-06-21'),
+        calibrationId: 123,
+        challengeId: challenge.id,
       });
-      databaseBuilder.factory.buildCertificationFrameworksChallenge({
-        complementaryCertificationKey: complementaryCertification.key,
-        challengeId: expectedChallenge2.id,
-        createdAt: currentDate,
-      });
+
       await databaseBuilder.commit();
 
       // when
@@ -103,11 +79,155 @@ describe('Certification | Configuration | Integration | Repository | consolidate
         });
 
       // then
-      expect(currentConsolidatedFramework).to.deep.equal({
+      expect(_.omit(currentConsolidatedFramework, 'createdAt')).to.deep.equal({
+        calibrationId: 123,
         complementaryCertificationKey: complementaryCertification.key,
-        createdAt: currentDate,
-        tubeIds: [expectedTube1.id, expectedTube2.id],
+        challenges: [
+          {
+            challengeId: 'challengeId1234',
+            difficulty: 3.5,
+            discriminant: 2.2,
+          },
+        ],
       });
+    });
+  });
+
+  describe('#findByCreationDateAndComplementaryKey', function () {
+    it('should return null when the framework does not exist', async function () {
+      // given
+      const createdAt = new Date();
+      const complementaryCertificationKey = ComplementaryCertificationKeys.PIX_PLUS_DROIT;
+
+      // when
+      const certificationFrameworksChallenges =
+        await consolidatedFrameworkRepository.findByCreationDateAndComplementaryKey({
+          complementaryCertificationKey,
+          createdAt,
+        });
+
+      // then
+      expect(certificationFrameworksChallenges).to.deep.equal([]);
+    });
+
+    it('should return a consolidated framework sorted by challengeId', async function () {
+      // given
+      const createdAt = new Date();
+      const otherCreatedAt = new Date('2023-06-23');
+      const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
+      const secondChallengeSelected = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+        createdAt,
+        challengeId: 'rec234',
+        complementaryCertificationKey: complementaryCertification.key,
+      });
+      const firstChallengeSelected = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+        createdAt,
+        challengeId: 'rec123',
+        complementaryCertificationKey: complementaryCertification.key,
+      });
+      databaseBuilder.factory.buildCertificationFrameworksChallenge({
+        createdAt: otherCreatedAt,
+        challengeId: 'rec234',
+        complementaryCertificationKey: complementaryCertification.key,
+      });
+      await databaseBuilder.commit();
+
+      const expectedFrameworkChallenges = domainBuilder.certification.configuration.buildConsolidatedFramework({
+        complementaryCertificationKey: complementaryCertification.key,
+        createdAt,
+        challenges: [
+          domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
+            challengeId: firstChallengeSelected.challengeId,
+            discriminant: firstChallengeSelected.alpha,
+            difficulty: firstChallengeSelected.delta,
+          }),
+          domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
+            challengeId: secondChallengeSelected.challengeId,
+            discriminant: secondChallengeSelected.alpha,
+            difficulty: secondChallengeSelected.delta,
+          }),
+        ],
+      });
+
+      // when
+      const certificationFrameworksChallenges =
+        await consolidatedFrameworkRepository.findByCreationDateAndComplementaryKey({
+          complementaryCertificationKey: complementaryCertification.key,
+          createdAt,
+        });
+
+      // then
+      expect(certificationFrameworksChallenges).to.deep.equal(expectedFrameworkChallenges);
+    });
+  });
+
+  describe('#save', function () {
+    it('should update framework challenges with alpha, delta and calibrationId properties', async function () {
+      // given
+      const complementaryCertificationKey = ComplementaryCertificationKeys.PIX_PLUS_DROIT;
+      const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
+        key: complementaryCertificationKey,
+      });
+
+      const firstCertificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+        complementaryCertificationKey: complementaryCertification.key,
+        createdAt: new Date('2022-01-01T08:00:00Z'),
+        challengeId: 'rec123',
+        alpha: null,
+        delta: null,
+      });
+
+      const secondCertificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+        complementaryCertificationKey: complementaryCertification.key,
+        createdAt: firstCertificationFrameworksChallenge.createdAt,
+        challengeId: 'rec456',
+        alpha: null,
+        delta: null,
+      });
+
+      await databaseBuilder.commit();
+
+      const firstCalibratedCertificationFrameworksChallenge =
+        domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
+          challengeId: firstCertificationFrameworksChallenge.challengeId,
+          discriminant: 1.3,
+          difficulty: 4.3,
+        });
+      const secondCalibratedCertificationFrameworksChallenge =
+        domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
+          challengeId: secondCertificationFrameworksChallenge.challengeId,
+          discriminant: 3.2,
+          difficulty: 1.5,
+        });
+
+      const consolidatedFramework = domainBuilder.certification.configuration.buildConsolidatedFramework({
+        calibrationId: 1,
+        challenges: [firstCalibratedCertificationFrameworksChallenge, secondCalibratedCertificationFrameworksChallenge],
+        complementaryCertificationKey: complementaryCertification.key,
+        createdAt: firstCertificationFrameworksChallenge.createdAt,
+      });
+
+      const expectedCalibratedFrameworkChallenges = [
+        {
+          ...firstCertificationFrameworksChallenge,
+          alpha: firstCalibratedCertificationFrameworksChallenge.discriminant,
+          delta: firstCalibratedCertificationFrameworksChallenge.difficulty,
+          calibrationId: consolidatedFramework.calibrationId,
+        },
+        {
+          ...secondCertificationFrameworksChallenge,
+          alpha: secondCalibratedCertificationFrameworksChallenge.discriminant,
+          delta: secondCalibratedCertificationFrameworksChallenge.difficulty,
+          calibrationId: consolidatedFramework.calibrationId,
+        },
+      ];
+
+      // when
+      await consolidatedFrameworkRepository.save(consolidatedFramework);
+
+      // then
+      const calibratedFrameworksChallenges = await knex('certification-frameworks-challenges');
+      expect(calibratedFrameworksChallenges).to.have.deep.members(expectedCalibratedFrameworkChallenges);
     });
   });
 });

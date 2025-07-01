@@ -4,7 +4,7 @@ const { Serializer } = jsonapiSerializer;
 
 const serialize = function (consolidatedFramework) {
   return new Serializer('certification-consolidated-framework', {
-    attributes: ['complementaryCertificationKey', 'createdAt', 'tubeIds'],
+    attributes: ['complementaryCertificationKey', 'createdAt', 'challenges'],
   }).serialize(consolidatedFramework);
 };
 

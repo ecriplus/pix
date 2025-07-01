@@ -118,7 +118,7 @@ describe('Certification | Configuration | Unit | Application | Router | compleme
         const response = await httpTestServer.request(
           'PATCH',
           `/api/admin/complementary-certifications/${ComplementaryCertificationKeys.PIX_PLUS_DROIT}/consolidated-framework`,
-          { data: { attributes: { createdAt: new Date(), calibrationId: '1234' } } },
+          { data: { attributes: { createdAt: new Date(), calibrationId: 1234 } } },
         );
 
         // then
