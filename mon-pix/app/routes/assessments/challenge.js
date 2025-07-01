@@ -16,9 +16,11 @@ export default class ChallengeRoute extends Route {
     let challenge;
     const currentChallengeNumber = parseInt(params.challenge_number);
     const isBackToPreviousChallenge = currentChallengeNumber < assessment.orderedChallengeIdsAnswered.length;
+    let answer = null;
     if (isBackToPreviousChallenge) {
       const challengeId = assessment.orderedChallengeIdsAnswered.at(currentChallengeNumber);
       challenge = await this.store.findRecord('challenge', challengeId);
+      answer = await this.store.queryRecord('answer', { assessmentId: assessment.id, challengeId: challenge.id });
     } else {
       if (assessment.isPreview && params.challengeId) {
         challenge = await this.store.findRecord('challenge', params.challengeId);
@@ -43,7 +45,7 @@ export default class ChallengeRoute extends Route {
     return RSVP.hash({
       assessment,
       challenge,
-      answer: this.store.queryRecord('answer', { assessmentId: assessment.id, challengeId: challenge.id }),
+      answer,
       currentChallengeNumber,
     }).catch((err) => {
       const meta = 'errors' in err ? err.errors[0].meta : null;
