@@ -11,8 +11,8 @@ module('Acceptance | Displaying a QCM challenge', function (hooks) {
   let qcmChallenge;
 
   hooks.beforeEach(async function () {
-    assessment = server.create('assessment', 'ofCompetenceEvaluationType');
     qcmChallenge = server.create('challenge', 'forCompetenceEvaluation', 'QCM');
+    assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: qcmChallenge });
   });
 
   module('When challenge is not already answered', function (hooks) {

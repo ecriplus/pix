@@ -14,8 +14,8 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
 
   module('with input format', function (hooks) {
     hooks.beforeEach(async function () {
-      assessment = this.server.create('assessment', 'ofCompetenceEvaluationType');
       qrocChallenge = this.server.create('challenge', 'forCompetenceEvaluation', 'QROC');
+      assessment = this.server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: qrocChallenge });
     });
 
     module('When challenge is an auto validated embed (autoReply=true)', function (hooks) {
@@ -59,7 +59,7 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
 
         // then
         await click(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')));
-        assert.ok(currentURL().includes(`/assessments/${assessment.id}/challenges/2`));
+        assert.strictEqual(currentURL(), `/assessments/${assessment.id}/challenges/2`);
       });
     });
 
@@ -68,7 +68,9 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
 
       hooks.beforeEach(async function () {
         // given
-        this.server.create('challenge', 'forCompetenceEvaluation', 'QROC', 'withEmbed');
+        assessment.update({
+          nextChallenge: this.server.create('challenge', 'forCompetenceEvaluation', 'QROC', 'withEmbed'),
+        });
 
         // when
         screen = await visit(`/assessments/${assessment.id}/challenges/0`);

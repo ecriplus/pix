@@ -42,19 +42,15 @@ module('Acceptance | Common behavior to all challenges', function (hooks) {
 
   module('Challenge not answered', function (hooks) {
     let assessment;
-    let challengeBis;
 
     hooks.beforeEach(async function () {
       user = server.create('user', 'withEmail');
       await authenticate(user);
       assessment = server.create('assessment', 'ofCompetenceEvaluationType', {
         title: 'Assessment title',
-      });
-      server.create('challenge', 'forCompetenceEvaluation', 'QROCM', {
-        instruction: 'Instruction [lien](http://www.a.link.example.url)',
-      });
-      challengeBis = server.create('challenge', 'forCompetenceEvaluation', 'QROCM', {
-        instruction: 'Second instruction',
+        nextChallenge: server.create('challenge', 'forCompetenceEvaluation', 'QROCM', {
+          instruction: 'Instruction [lien](http://www.a.link.example.url)',
+        }),
       });
     });
 
@@ -69,6 +65,11 @@ module('Acceptance | Common behavior to all challenges', function (hooks) {
     });
 
     test('should display the challenge to answered instead of challenge asked', async function (assert) {
+      // given
+      const challengeBis = server.create('challenge', 'forCompetenceEvaluation', 'QROCM', {
+        instruction: 'Second instruction',
+      });
+
       // when
       const screen = await visit(`/assessments/${assessment.id}/challenges/${challengeBis.id}`);
 
@@ -157,9 +158,10 @@ module('Acceptance | Common behavior to all challenges', function (hooks) {
   module('When user is anonymous', function () {
     test('should not display home link', async function (assert) {
       //given
-      const assessment = server.create('assessment', 'ofCompetenceEvaluationType');
-      server.create('challenge', 'forCompetenceEvaluation', 'QROCM', {
-        instruction: 'Instruction [lien](http://www.a.link.example.url)',
+      const assessment = server.create('assessment', 'ofCompetenceEvaluationType', {
+        nextChallenge: server.create('challenge', 'forCompetenceEvaluation', 'QROCM', {
+          instruction: 'Instruction [lien](http://www.a.link.example.url)',
+        }),
       });
       const user = server.create('user', 'withEmail', {
         isAnonymous: true,

@@ -23,8 +23,8 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
         let screen;
         test('should display a specific page title', async function (assert) {
           // given
-          assessment = server.create('assessment', 'ofCompetenceEvaluationType');
-          server.create('challenge', 'forCompetenceEvaluation', data.challengeType, 'withFocused');
+          const challenge = server.create('challenge', 'forCompetenceEvaluation', data.challengeType, 'withFocused');
+          assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: challenge });
 
           // when
           await visit(`/assessments/${assessment.id}/challenges/0`);
@@ -42,8 +42,13 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
               });
               await authenticate(user);
 
-              assessment = server.create('assessment', 'ofCompetenceEvaluationType');
-              server.create('challenge', 'forCompetenceEvaluation', data.challengeType, 'withFocused');
+              const challenge = server.create(
+                'challenge',
+                'forCompetenceEvaluation',
+                data.challengeType,
+                'withFocused',
+              );
+              assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: challenge });
 
               // when
               await visit(`/assessments/${assessment.id}/challenges/0`);
@@ -68,8 +73,13 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
             module('when user closes tooltip', function (hooks) {
               hooks.beforeEach(async function () {
                 // given
-                assessment = server.create('assessment', 'ofCompetenceEvaluationType');
-                server.create('challenge', 'forCompetenceEvaluation', data.challengeType, 'withFocused');
+                const challenge = server.create(
+                  'challenge',
+                  'forCompetenceEvaluation',
+                  data.challengeType,
+                  'withFocused',
+                );
+                assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: challenge });
 
                 // when
                 screen = await visit(`/assessments/${assessment.id}/challenges/0`);
@@ -141,8 +151,13 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
               });
               await authenticate(user);
 
-              assessment = server.create('assessment', 'ofCompetenceEvaluationType');
-              server.create('challenge', 'forCompetenceEvaluation', data.challengeType, 'withFocused');
+              const challenge = server.create(
+                'challenge',
+                'forCompetenceEvaluation',
+                data.challengeType,
+                'withFocused',
+              );
+              assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: challenge });
 
               screen = await visit(`/assessments/${assessment.id}/challenges/0`);
             });
@@ -160,9 +175,7 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
               assert
                 .dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')))
                 .doesNotHaveAttribute('aria-disabled');
-              assert
-                .dom(find('[data-test="challenge-response-proposal-selector"]'))
-                .doesNotHaveAttribute('aria-disabled');
+              assert.dom(find('[data-test="challenge-response-proposal-selector"]')).doesNotHaveAttribute('disabled');
             });
           });
         });
@@ -209,8 +222,8 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
               );
               focusedCertificationChallengeWarningManager.reset();
 
-              assessment = server.create('assessment', 'ofCertificationType');
-              server.create('challenge', 'forCertification', data.challengeType, 'withFocused');
+              const challenge = server.create('challenge', 'forCertification', data.challengeType, 'withFocused');
+              assessment = server.create('assessment', 'ofCertificationType', { nextChallenge: challenge });
 
               const certificationCourse = server.create('certification-course', {
                 accessCode: 'ABCD12',
@@ -219,9 +232,9 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
                 firstName: 'Laura',
                 lastName: 'Bravo',
                 version: 2,
+                assessment,
               });
-              assessment = certificationCourse.assessment;
-              screen = await visit(`/assessments/${assessment.id}/challenges/0`);
+              screen = await visit(`/assessments/${certificationCourse.assessment.id}/challenges/0`);
               await click(screen.getByRole('button', { name: 'Je suis prêt' }));
               await triggerEvent(document, 'focusedout');
             });
@@ -253,8 +266,13 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
           module('when assessment is not of type certification', function (hooks) {
             hooks.beforeEach(async function () {
               // given
-              assessment = server.create('assessment', 'ofCompetenceEvaluationType');
-              server.create('challenge', 'forCompetenceEvaluation', data.challengeType, 'withFocused');
+              const challenge = server.create(
+                'challenge',
+                'forCompetenceEvaluation',
+                data.challengeType,
+                'withFocused',
+              );
+              assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: challenge });
 
               await visit(`/assessments/${assessment.id}/challenges/0`);
 
@@ -283,8 +301,10 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
               hasSeenFocusedChallengeTooltip: true,
             });
             await authenticate(user);
-            assessment = server.create('assessment', 'ofCompetenceEvaluationType', 'withCurrentChallengeUnfocus');
-            server.create('challenge', 'forCompetenceEvaluation', data.challengeType, 'withFocused');
+            const challenge = server.create('challenge', 'forCompetenceEvaluation', data.challengeType, 'withFocused');
+            assessment = server.create('assessment', 'ofCompetenceEvaluationType', 'withCurrentChallengeUnfocus', {
+              nextChallenge: challenge,
+            });
 
             // when
             screen = await visit(`/assessments/${assessment.id}/challenges/0`);
@@ -318,13 +338,27 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
           module('when user goes to another assessment', function () {
             test('should not display a warning alert saying it has been focused out', async function (assert) {
               // given
+              const focusedChallenge1 = server.create(
+                'challenge',
+                'forCompetenceEvaluation',
+                data.challengeType,
+                'withFocused',
+              );
+              const focusedChallenge2 = server.create(
+                'challenge',
+                'forCompetenceEvaluation',
+                data.challengeType,
+                'withFocused',
+              );
               const assessment1 = server.create(
                 'assessment',
                 'ofCompetenceEvaluationType',
                 'withCurrentChallengeUnfocus',
+                { nextChallenge: focusedChallenge1 },
               );
-              const assessment2 = server.create('assessment', 'ofCompetenceEvaluationType');
-              server.create('challenge', 'forCompetenceEvaluation', data.challengeType, 'withFocused');
+              const assessment2 = server.create('assessment', 'ofCompetenceEvaluationType', {
+                nextChallenge: focusedChallenge2,
+              });
               await visit(`/assessments/${assessment1.id}/challenges/0`);
 
               // when
@@ -340,8 +374,15 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
           module('when user returns to the same assessment', function () {
             test('should display a warning alert saying it has been focused out', async function (assert) {
               // given
-              const assessment = server.create('assessment', 'ofCompetenceEvaluationType');
-              server.create('challenge', 'forCompetenceEvaluation', data.challengeType, 'withFocused');
+              const challenge = server.create(
+                'challenge',
+                'forCompetenceEvaluation',
+                data.challengeType,
+                'withFocused',
+              );
+              const assessment = server.create('assessment', 'ofCompetenceEvaluationType', {
+                nextChallenge: challenge,
+              });
               await visit(`/assessments/${assessment.id}/challenges/0`);
 
               // when
@@ -356,83 +397,43 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
         });
       });
 
-      [
-        { challengeType: 'QROC' },
-        { challengeType: 'QROCM' },
-        { challengeType: 'QCM' },
-        { challengeType: 'QCU' },
-      ].forEach(function (data) {
-        module(`when ${data.challengeType} challenge is not focused`, function () {
-          // eslint-disable-next-line qunit/no-identical-names
-          module('when user has not answered the question', function () {
-            module('when user has not seen the challenge tooltip yet', function (hooks) {
-              let screen;
+      module(`when ${data.challengeType} challenge is not focused`, function () {
+        // eslint-disable-next-line qunit/no-identical-names
+        module('when user has not answered the question', function () {
+          module('when user has not seen the challenge tooltip yet', function (hooks) {
+            let screen;
+            hooks.beforeEach(async function () {
+              // given
+              const user = server.create('user', 'withEmail', {
+                hasSeenOtherChallengesTooltip: false,
+              });
+              await authenticate(user);
+
+              const challenge = server.create('challenge', 'forCompetenceEvaluation', data.challengeType);
+              assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: challenge });
+
+              // when
+              screen = await visit(`/assessments/${assessment.id}/challenges/0`);
+            });
+
+            test('should display a tooltip', async function (assert) {
+              // then
+              assert.dom('.tooltip-tag__information').exists();
+            });
+
+            module('when user closes tooltip', function (hooks) {
               hooks.beforeEach(async function () {
                 // given
-                const user = server.create('user', 'withEmail', {
-                  hasSeenOtherChallengesTooltip: false,
-                });
-                await authenticate(user);
-
-                assessment = server.create('assessment', 'ofCompetenceEvaluationType');
-                server.create('challenge', 'forCompetenceEvaluation', data.challengeType);
+                const challenge = server.create('challenge', 'forCompetenceEvaluation', data.challengeType);
+                assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: challenge });
 
                 // when
                 screen = await visit(`/assessments/${assessment.id}/challenges/0`);
+                await click('.tooltip-tag-information__button');
               });
 
-              test('should display a tooltip', async function (assert) {
+              test('should hide a tooltip', async function (assert) {
                 // then
-                assert.dom('.tooltip-tag__information').exists();
-              });
-
-              module('when user closes tooltip', function (hooks) {
-                hooks.beforeEach(async function () {
-                  // given
-                  assessment = server.create('assessment', 'ofCompetenceEvaluationType');
-                  server.create('challenge', 'forCompetenceEvaluation', data.challengeType);
-
-                  // when
-                  screen = await visit(`/assessments/${assessment.id}/challenges/0`);
-                  await click('.tooltip-tag-information__button');
-                });
-
-                test('should hide a tooltip', async function (assert) {
-                  // then
-                  assert.dom('#challenge-statement-tag--tooltip').doesNotExist();
-                });
-
-                test('should enable input and buttons', async function (assert) {
-                  // then
-                  assert
-                    .dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')))
-                    .doesNotHaveAttribute('aria-disabled');
-                  assert
-                    .dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')))
-                    .doesNotHaveAttribute('aria-disabled');
-
-                  assert.notOk(find('[data-test="challenge-response-proposal-selector"]').getAttribute('disabled'));
-                });
-              });
-            });
-
-            module('when user has already seen challenge tooltip', function (hooks) {
-              let screen;
-              hooks.beforeEach(async function () {
-                const user = server.create('user', 'withEmail', {
-                  hasSeenOtherChallengesTooltip: true,
-                });
-                await authenticate(user);
-
-                assessment = server.create('assessment', 'ofCompetenceEvaluationType');
-                server.create('challenge', 'forCompetenceEvaluation', data.challengeType);
-
-                screen = await visit(`/assessments/${assessment.id}/challenges/0`);
-              });
-
-              test('should hide the overlay and tooltip', async function (assert) {
-                // then
-                assert.dom('.challenge__overlay').doesNotExist();
                 assert.dom('#challenge-statement-tag--tooltip').doesNotExist();
               });
 
@@ -450,71 +451,99 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
             });
           });
 
-          // eslint-disable-next-line qunit/no-identical-names
-          module('when user has already answered the question', function () {
-            test('should not display the overlay, dashed-border and warning messages', async function (assert) {
-              // given
-              assessment = server.create('assessment', 'ofCompetenceEvaluationType');
-              server.create('answer', {
-                value: 'Reponse',
-                result: 'ko',
-                assessment,
-                challenge: server.create(
-                  'challenge',
-                  'forCompetenceEvaluation',
-                  `${data.challengeType}`,
-                  'withFocused',
-                ),
+          module('when user has already seen challenge tooltip', function (hooks) {
+            let screen;
+            hooks.beforeEach(async function () {
+              const user = server.create('user', 'withEmail', {
+                hasSeenOtherChallengesTooltip: true,
               });
+              await authenticate(user);
 
-              // when
-              await visit(`/assessments/${assessment.id}/challenges/0`);
-              const challengeItem = find('.challenge-item');
-              await triggerEvent(challengeItem, 'mouseleave');
+              const challenge = server.create('challenge', 'forCompetenceEvaluation', data.challengeType);
+              assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: challenge });
 
+              screen = await visit(`/assessments/${assessment.id}/challenges/0`);
+            });
+
+            test('should hide the overlay and tooltip', async function (assert) {
               // then
-              assert.dom(find('.challenge__info-alert--could-show')).doesNotExist();
-              assert.dom(find('.challenge__focused-out-overlay')).doesNotExist();
-              assert.dom(find('.challenge-actions__focused-out-of-window')).doesNotExist();
-              assert.dom(find('.challenge-actions__already-answered')).exists();
+              assert.dom('.challenge__overlay').doesNotExist();
+              assert.dom('#challenge-statement-tag--tooltip').doesNotExist();
+            });
+
+            test('should enable input and buttons', async function (assert) {
+              // then
+              assert
+                .dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')))
+                .doesNotHaveAttribute('aria-disabled');
+              assert
+                .dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')))
+                .doesNotHaveAttribute('aria-disabled');
+
+              assert.notOk(find('[data-test="challenge-response-proposal-selector"]').getAttribute('disabled'));
             });
           });
+        });
 
-          test('should not display warning block', async function (assert) {
+        // eslint-disable-next-line qunit/no-identical-names
+        module('when user has already answered the question', function () {
+          test('should not display the overlay, dashed-border and warning messages', async function (assert) {
             // given
             assessment = server.create('assessment', 'ofCompetenceEvaluationType');
-            server.create('challenge', 'forCompetenceEvaluation', data.challengeType);
+            server.create('answer', {
+              value: 'Reponse',
+              result: 'ko',
+              assessment,
+              challenge: server.create('challenge', 'forCompetenceEvaluation', `${data.challengeType}`, 'withFocused'),
+            });
 
             // when
             await visit(`/assessments/${assessment.id}/challenges/0`);
+            const challengeItem = find('.challenge-item');
+            await triggerEvent(challengeItem, 'mouseleave');
 
             // then
-            assert.dom('.challenge__info-alert').doesNotExist();
+            assert.dom(find('.challenge__info-alert--could-show')).doesNotExist();
+            assert.dom(find('.challenge__focused-out-overlay')).doesNotExist();
+            assert.dom(find('.challenge-actions__focused-out-of-window')).doesNotExist();
+            assert.dom(find('.challenge-actions__already-answered')).exists();
+          });
+        });
+
+        test('should not display warning block', async function (assert) {
+          // given
+          const challenge = server.create('challenge', 'forCompetenceEvaluation', data.challengeType);
+          assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: challenge });
+
+          // when
+          await visit(`/assessments/${assessment.id}/challenges/0`);
+
+          // then
+          assert.dom('.challenge__info-alert').doesNotExist();
+        });
+
+        module('when user has focused out of document', function (hooks) {
+          hooks.beforeEach(async function () {
+            // given
+            const user = server.create('user', 'withEmail');
+            await authenticate(user);
+            const challenge = server.create('challenge', 'forCompetenceEvaluation', data.challengeType);
+            assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: challenge });
+
+            // when
+            await visit(`/assessments/${assessment.id}/challenges/0`);
           });
 
-          module('when user has focused out of document', function (hooks) {
-            hooks.beforeEach(async function () {
-              // given
-              const user = server.create('user', 'withEmail');
-              await authenticate(user);
-              assessment = server.create('assessment', 'ofCompetenceEvaluationType');
-              server.create('challenge', 'forCompetenceEvaluation', data.challengeType);
+          test('should not display instructions', async function (assert) {
+            // then
+            assert.dom('.focused-challenge-instructions-action__confirmation-button').doesNotExist();
+          });
 
-              // when
-              await visit(`/assessments/${assessment.id}/challenges/0`);
-            });
-
-            test('should not display instructions', async function (assert) {
-              // then
-              assert.dom('.focused-challenge-instructions-action__confirmation-button').doesNotExist();
-            });
-
-            test('should not display a warning alert', async function (assert) {
-              // when
-              await triggerEvent(document, 'focusedout');
-              // then
-              assert.dom('.challenge-actions__focused-out-of-window').doesNotExist();
-            });
+          test('should not display a warning alert', async function (assert) {
+            // when
+            await triggerEvent(document, 'focusedout');
+            // then
+            assert.dom('.challenge-actions__focused-out-of-window').doesNotExist();
           });
         });
       });
@@ -533,8 +562,8 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
         );
         focusedCertificationChallengeWarningManager.reset();
 
-        assessment = server.create('assessment', 'ofCertificationType');
-        server.create('challenge', 'forCertification', 'QCM', 'withFocused');
+        const challenge1 = server.create('challenge', 'forCertification', 'QCM', 'withFocused');
+        assessment = server.create('assessment', 'ofCertificationType', { nextChallenge: challenge1 });
         server.create('challenge', 'forCertification', 'QCM', 'withFocused');
 
         const certificationCourse = server.create('certification-course', {
@@ -543,6 +572,7 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
           nbChallenges: 2,
           firstName: 'Laura',
           lastName: 'Bravo',
+          assessment,
         });
         assessment = certificationCourse.assessment;
 
@@ -572,10 +602,11 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
         );
         focusedCertificationChallengeWarningManager.reset();
 
-        assessment = server.create('assessment', 'ofCertificationType');
-        server.create('challenge', 'forCertification', 'QCM', 'withFocused');
         server.create('challenge', 'forCertification', 'QCM');
         server.create('challenge', 'forCertification', 'QCM', 'withFocused');
+        assessment = server.create('assessment', 'ofCertificationType', {
+          nextChallenge: server.create('challenge', 'forCertification', 'QCM', 'withFocused'),
+        });
 
         const certificationCourse = server.create('certification-course', {
           accessCode: 'ABCD12',
@@ -583,6 +614,7 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
           nbChallenges: 2,
           firstName: 'Laura',
           lastName: 'Bravo',
+          assessment,
         });
         assessment = certificationCourse.assessment;
 
@@ -613,8 +645,8 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
         );
         focusedCertificationChallengeWarningManager.reset();
 
-        assessment = server.create('assessment', 'ofCertificationType');
-        server.create('challenge', 'forCertification', 'QCM', 'withFocused', { timer: 60 });
+        const challenge = server.create('challenge', 'forCertification', 'QCM', 'withFocused', { timer: 60 });
+        assessment = server.create('assessment', 'ofCertificationType', { nextChallenge: challenge });
 
         const certificationCourse = server.create('certification-course', {
           accessCode: 'ABCD12',
@@ -622,6 +654,7 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
           nbChallenges: 2,
           firstName: 'Alin',
           lastName: 'Cendy',
+          assessment,
         });
         assessment = certificationCourse.assessment;
 
@@ -678,6 +711,7 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
         firstName: 'Laura',
         lastName: 'Bravo',
         version: 2,
+        assessment,
       });
       assessment = certificationCourse.assessment;
     });
@@ -686,7 +720,8 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
       function (data) {
         module(`when ${data.challengeType} challenge is focused`, function (hooks) {
           hooks.beforeEach(function () {
-            server.create('challenge', 'forCertification', data.challengeType, 'withFocused');
+            const challenge = server.create('challenge', 'forCertification', data.challengeType, 'withFocused');
+            assessment.update({ nextChallenge: challenge });
           });
           module('when user has not answered the question', function () {
             module('when user has not seen the challenge tooltip yet', function (hooks) {
@@ -798,11 +833,11 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
             type: 'CERTIFICATION',
             title: 'assessment COMPANION',
             hasOngoingCompanionLiveAlert: true,
+            nextChallenge: server.create('challenge', 'forCertification', 'QCM'),
           }),
         });
 
         assessment = certificationCourse.assessment;
-        server.create('challenge', 'forCertification', 'QCM');
 
         // when
         const screen = await visit(`/assessments/${assessment.id}/challenges/0`);
@@ -824,15 +859,15 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
 
         assessment = server.create('assessment', 'ofCertificationType');
 
-        const certificationCourse = server.create('certification-course', {
+        server.create('certification-course', {
           accessCode: 'ABCD12',
           sessionId: 1,
           nbChallenges: 1,
           firstName: 'Laura',
           lastName: 'Bravo',
           version: 3,
+          assessment,
         });
-        assessment = certificationCourse.assessment;
       });
 
       [
@@ -843,7 +878,9 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
       ].forEach(function (data) {
         module(`when ${data.challengeType} challenge is focused`, function (hooks) {
           hooks.beforeEach(function () {
-            server.create('challenge', 'forCertification', data.challengeType, 'withFocused');
+            assessment.update({
+              nextChallenge: server.create('challenge', 'forCertification', data.challengeType, 'withFocused'),
+            });
           });
           module('when user has not answered the question', function () {
             module('when user has not seen the challenge tooltip yet', function (hooks) {
@@ -939,7 +976,6 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
 
     module('when certification is adjusted', function (hooks) {
       let screen;
-      let certificationCourse;
       hooks.beforeEach(function () {
         const focusedCertificationChallengeWarningManager = this.owner.lookup(
           'service:focused-certification-challenge-warning-manager',
@@ -948,7 +984,7 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
 
         assessment = server.create('assessment', 'ofCertificationType');
 
-        certificationCourse = server.create('certification-course', {
+        server.create('certification-course', {
           accessCode: 'ABCD12',
           sessionId: 1,
           nbChallenges: 1,
@@ -956,8 +992,8 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
           lastName: 'Bravo',
           version: 3,
           isAdjustedForAccessibility: true,
+          assessment,
         });
-        assessment = certificationCourse.assessment;
       });
 
       [
@@ -968,7 +1004,9 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
       ].forEach(function (data) {
         module(`when ${data.challengeType} challenge is focused`, function (hooks) {
           hooks.beforeEach(function () {
-            server.create('challenge', 'forCertification', data.challengeType, 'withFocused');
+            assessment.update({
+              nextChallenge: server.create('challenge', 'forCertification', data.challengeType, 'withFocused'),
+            });
           });
           module('when user has not answered the question', function () {
             module('when user has not seen the challenge tooltip yet', function (hooks) {
@@ -1075,14 +1113,12 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
             type: 'CERTIFICATION',
             title: 'assessment COMPANION',
             hasOngoingCompanionLiveAlert: true,
+            nextChallenge: server.create('challenge', 'forCertification', 'QCM'),
           }),
         });
 
-        assessment = certificationCourse.assessment;
-        server.create('challenge', 'forCertification', 'QCM');
-
         // when
-        const screen = await visit(`/assessments/${assessment.id}/challenges/0`);
+        const screen = await visit(`/assessments/${certificationCourse.assessment.id}/challenges/0`);
 
         // then
         assert.dom(screen.queryByRole('button', { name: 'Signaler un problème avec la question' })).doesNotExist();
