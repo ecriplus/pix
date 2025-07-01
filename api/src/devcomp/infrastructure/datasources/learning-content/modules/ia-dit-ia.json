@@ -34,7 +34,7 @@
           "element": {
             "id": "16b6fdf3-4aee-4e4f-86b1-6a7f69241289",
             "type": "image",
-            "url": "https://i.imgur.com/mqNIXAo.png",
+            "url": "https://assets.pix.org/draft/modules/ia-dit-ia/couvia.png",
             "alt": "4 unes de la presse francophone décrites dans l'alternative textuelle",
             "alternativeText": "<p>Image montrant quatre couvertures de magazines français consacrées à l’intelligence artificielle (IA)&nbsp;:</p><ul><li>Le Nouvel Obs – Titre&nbsp;: \"Nos vies sous IA\" avec une main robotique tenant une figurine humaine.</li><li>Philosophie Magazine (Hors-série) – Titre&nbsp;: \"IA, le mythe du XXIe siècle\", avec un visage humain partiellement robotisé.</li><li>Courrier International – Titre&nbsp;: \"L’IA en roue libre\", illustré d’un cerveau humanoïde aux commandes d’un corps.</li><li>Sciences et Avenir – Titre&nbsp;: \"IA, ce qu’elle change\", avec une couverture bleue illustrant un réseau neuronal.</li></ul>",
             "legend": "",
@@ -341,7 +341,7 @@
                       "content": "<p>la reconnaissance du son</p>",
                       "feedback": {
                         "state": "<p>Bonne réponse ! 🎉</p>",
-                        "diagnosis": ""
+                        "diagnosis": "<p>De nombreuses applications proposent aujourd’hui de retrouver le titre d’une musique à partir de quelques secondes de son ou de voix.</p>"
                       }
                     },
                     {
@@ -349,7 +349,7 @@
                       "content": "<p>la reconnaissance d’image</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": ""
+                        "diagnosis": "<p>Ici, ce n’est pas une image que l’IA doit savoir reconnaître.</p>"
                       }
                     },
                     {
@@ -357,7 +357,7 @@
                       "content": "<p>la recommandation de contenu</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": ""
+                        "diagnosis": "<p>Ici, pas de recommandation de contenu. L’ia doit savoir identifier quelque chose.</p>"
                       }
                     },
                     {
@@ -365,7 +365,7 @@
                       "content": "<p>la génération de contenu</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse</p>",
-                        "diagnosis": ""
+                        "diagnosis": "<p>Ici, pas de génération de contenu. L’ia doit savoir identifier quelque chose.</p>"
                       }
                     }
                   ],
@@ -385,7 +385,7 @@
                       "content": "<p>la reconnaissance du son</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse</p>",
-                        "diagnosis": ""
+                        "diagnosis": "<p>Ici, il ne s’agit pas d’identifier quelque chose, mais de savoir produire des réponses aux demandes variées d’un utilisateur.</p>"
                       }
                     },
                     {
@@ -393,7 +393,7 @@
                       "content": "<p>la reconnaissance d’image</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": ""
+                        "diagnosis": "<p>Ici, il ne s’agit pas d’identifier quelque chose, mais de savoir produire des réponses.</p>"
                       }
                     },
                     {
@@ -401,7 +401,7 @@
                       "content": "<p>la recommandation de contenu</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": ""
+                        "diagnosis": "<p>Ici, il ne s’agit pas de recommander des nouveaux contenus à un utilisateur mais de savoir produire des réponses.</p>"
                       }
                     },
                     {
@@ -409,7 +409,7 @@
                       "content": "<p>la génération de contenu</p>",
                       "feedback": {
                         "state": "<p>Bonne réponse ! 🎉</p>",
-                        "diagnosis": ""
+                        "diagnosis": "<p>Une IA conversationnelle est conçue pour répondre à toutes les demandes des utilisateurs. Quel que soit le sujet, elle génère une réponse.</p>"
                       }
                     }
                   ],
@@ -429,7 +429,7 @@
                       "content": "<p>la reconnaissance du son</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse</p>",
-                        "diagnosis": ""
+                        "diagnosis": "<p>Ici, il ne s’agit pas d’identifier quelque chose, mais de proposer des contenus en fonction du profil d’un utilisateur.</p>"
                       }
                     },
                     {
@@ -437,7 +437,7 @@
                       "content": "<p>la reconnaissance d’image</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": ""
+                        "diagnosis": "<p>Ici, il ne s’agit pas d’identifier quelque chose, mais de proposer des contenus en fonction du profil d’un utilisateur.</p>"
                       }
                     },
                     {
@@ -445,7 +445,7 @@
                       "content": "<p>la recommandation de contenu</p>",
                       "feedback": {
                         "state": "<p>Bonne réponse ! 🎉</p>",
-                        "diagnosis": ""
+                        "diagnosis": "<p>Les IA spécialisées dans la recommandation de contenus sont largement utilisées pour personnaliser les expériences utilisateurs sur les plateformes numériques, par exemple les services de vidéos à la demande.</p>"
                       }
                     },
                     {
@@ -453,7 +453,7 @@
                       "content": "<p>la génération de contenu</p>",
                       "feedback": {
                         "state": "<p>Bonne réponse ! 🎉</p>",
-                        "diagnosis": ""
+                        "diagnosis": "<p>Ici, il ne s’agit pas de produire de nouveaux contenus, mais de proposer des contenus en fonction du profil d’un utilisateur.</p>"
                       }
                     }
                   ],
@@ -473,7 +473,7 @@
                       "content": "<p>la reconnaissance du son</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse</p>",
-                        "diagnosis": ""
+                        "diagnosis": "<p>Ici, ce n’est pas un son que l’IA doit savoir reconnaître.</p>"
                       }
                     },
                     {
@@ -481,7 +481,7 @@
                       "content": "<p>la reconnaissance d’image</p>",
                       "feedback": {
                         "state": "<p>Bonne réponse ! 🎉</p>",
-                        "diagnosis": ""
+                        "diagnosis": "<p>Les IA spécialisées dans la reconnaissance d’image sont notamment très utilisées dans le commerce en ligne pour taguer automatiquement des produits.</p>"
                       }
                     },
                     {
@@ -489,7 +489,7 @@
                       "content": "<p>la recommandation de contenu</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": ""
+                        "diagnosis": "<p>Ici, pas de recommandation de contenu. L’ia doit savoir identifier quelque chose.</p>"
                       }
                     },
                     {
@@ -497,7 +497,7 @@
                       "content": "<p>la génération de contenu</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse</p>",
-                        "diagnosis": ""
+                        "diagnosis": "<p>Ici, pas de génération de contenu. L’ia doit savoir identifier quelque chose.</p>"
                       }
                     }
                   ],
@@ -539,7 +539,7 @@
               },
               {
                 "id": "3",
-                "content": "<p>je ne suis pas sûr.</p>",
+                "content": "<p>j'hésite.</p>",
                 "feedback": {
                   "state": "",
                   "diagnosis": "<p>Vous n'êtes pas sûr, mais il y a de grandes chances que ce soit le cas. &nbsp;L'intelligence artificielle est présente&nbsp;dans de nombreux appareils et services de notre quotidien.</p>"
