@@ -11,7 +11,7 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { notEq, or } from 'ember-truth-helpers';
 import lodashGet from 'lodash/get';
-import set from 'lodash/set';
+import lodashSet from 'lodash/set';
 import Organization from 'pix-admin/models/organization';
 
 export default class OrganizationInformationSectionEditionMode extends Component {
@@ -58,7 +58,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
 
   @action
   updateFormCheckBoxValue(key) {
-    set(this.form, key, !lodashGet(this.form, key));
+    lodashSet(this.form, key, !lodashGet(this.form, key));
   }
 
   @action
