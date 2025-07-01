@@ -2075,7 +2075,7 @@
       "title": "Om de volgende keer te slagen"
     },
     "tutorial": {
-      "dot-action-title": "Weergave stap {stepNumber}/{stepsCount}",
+      "dot-action-title": "Stap {stepNumber} van {stepsCount}",
       "dots-nav-label": "Stappen uit de tutorial",
       "next": "Volgende",
       "next-title": "Volgende stap tonen",

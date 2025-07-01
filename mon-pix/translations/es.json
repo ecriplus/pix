@@ -2072,7 +2072,7 @@
       "title": "Para tener éxito la próxima vez"
     },
     "tutorial": {
-      "dot-action-title": "Paso de visualización {stepNumber}/{stepsCount}",
+      "dot-action-title": "Paso {stepNumber} de {stepsCount}",
       "dots-nav-label": "Pasos del tutorial",
       "next": "Siguiente",
       "next-title": "Mostrar siguiente paso",
