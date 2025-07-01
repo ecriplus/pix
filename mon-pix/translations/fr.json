@@ -2081,6 +2081,7 @@
       }
     },
     "tutorial": {
+      "dot-action-description": "Accéder à l'étape {stepNumber} sur {stepsCount}",
       "dot-action-title": "Etape {stepNumber} sur {stepsCount}",
       "dots-nav-label": "Étapes du didacticiel",
       "next": "Suivant",

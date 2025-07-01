@@ -2073,6 +2073,7 @@
     },
     "tutorial": {
       "dot-action-title": "Paso {stepNumber} de {stepsCount}",
+      "dot-action-description": "Acceder al paso {stepNumber} en {stepsCount}",
       "dots-nav-label": "Pasos del tutorial",
       "next": "Siguiente",
       "next-title": "Mostrar siguiente paso",

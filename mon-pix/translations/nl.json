@@ -2076,6 +2076,7 @@
     },
     "tutorial": {
       "dot-action-title": "Stap {stepNumber} van {stepsCount}",
+      "dot-action-description": "Ga naar stap {stepNumber} op {stepsCount}",
       "dots-nav-label": "Stappen uit de tutorial",
       "next": "Volgende",
       "next-title": "Volgende stap tonen",
