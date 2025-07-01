@@ -8,6 +8,7 @@ import {
   CertificationIssueReportCategory,
   CertificationIssueReportSubcategories,
 } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { AnswerStatus } from '../../../../../../src/shared/domain/models/index.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
@@ -508,13 +509,16 @@ describe('Unit | UseCase | process-auto-jury', function () {
       certificationRescoringRepository;
 
     beforeEach(function () {
+      sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
+        return callback();
+      });
       certificationCourseRepository = { findCertificationCoursesBySessionId: sinon.stub() };
       certificationIssueReportRepository = { findByCertificationCourseId: sinon.stub(), save: sinon.stub() };
       certificationAssessmentRepository = { getByCertificationCourseId: sinon.stub(), save: sinon.stub() };
       certificationRescoringRepository = { rescoreV3Certification: sinon.stub() };
     });
 
-    it('publishes a CertificationJuryDone event', async function () {
+    it('triggers a CertificationJuryDone rescoring event', async function () {
       // given
       const challenge = domainBuilder.buildCertificationChallengeWithType({
         challengeId: 'recChal123',
@@ -563,7 +567,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
     });
 
     describe('when the certification is started', function () {
-      it('publishes a CertificationJuryDone event', async function () {
+      it('triggers a CertificationJuryDone rescoring event', async function () {
         // given
         const { certificationCourse } = _initializeV3CourseAndAssessment({
           certificationState: CertificationAssessment.states.STARTED,
@@ -680,7 +684,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
     });
 
     describe('when the certification was ended by the supervisor', function () {
-      it('publishes a CertificationJuryDone event', async function () {
+      it('triggers a CertificationJuryDone rescoring event', async function () {
         // given
         const { certificationCourse } = _initializeV3CourseAndAssessment({
           certificationState: CertificationAssessment.states.ENDED_BY_SUPERVISOR,
