@@ -463,7 +463,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
           test('should redirect to "Votre surveillant a mis fin…"', async function (assert) {
             // given
             user = server.create('user', 'withEmail', 'certifiable', { hasSeenOtherChallengesTooltip: true });
-            server.create('challenge', 'forCertification');
+            const challenge = server.create('challenge', 'forCertification');
             server.create('challenge', 'forCertification');
             server.create('certification-course', {
               id: '99',
@@ -477,6 +477,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
               certificationCourseId: 99,
               type: 'CERTIFICATION',
               state: assessmentStates.STARTED,
+              nextChallenge: challenge,
             });
             server.create('certification-candidate-subscription', {
               id: '2',
@@ -547,8 +548,8 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
           // given
           user = server.create('user', 'withEmail', 'certifiable', { hasSeenOtherChallengesTooltip: true });
 
-          server.create('challenge', 'forCertification');
-
+          const challenge = server.create('challenge', 'forCertification');
+          const assessment = server.create('assessment', 'ofCertificationType', { nextChallenge: challenge });
           this.server.create('certification-course', {
             accessCode: 'ABCD12',
             sessionId: 1,
@@ -556,6 +557,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
             firstName: 'Laura',
             lastName: 'Bravo',
             version: 2,
+            assessment,
           });
           this.server.create('certification-candidate-subscription', {
             id: '2',
@@ -597,7 +599,8 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
           // given
           user = server.create('user', 'withEmail', 'certifiable', { hasSeenOtherChallengesTooltip: true });
 
-          server.create('challenge', 'forCertification');
+          const challenge = server.create('challenge', 'forCertification');
+          const assessment = server.create('assessment', 'ofCertificationType', { nextChallenge: challenge });
 
           this.server.create('certification-course', {
             accessCode: 'ABCD12',
@@ -606,6 +609,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
             firstName: 'Laura',
             lastName: 'Bravo',
             version: 3,
+            assessment,
           });
 
           this.server.create('certification-candidate-subscription', {
@@ -643,7 +647,8 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
             user = server.create('user', 'withEmail', 'certifiable', { hasSeenOtherChallengesTooltip: true });
             await authenticate(user);
 
-            server.create('challenge', 'forCertification');
+            const challenge = server.create('challenge', 'forCertification');
+            const assessment = server.create('assessment', 'ofCertificationType', { nextChallenge: challenge });
 
             this.server.create('certification-course', {
               accessCode: 'ABCD12',
@@ -652,6 +657,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
               firstName: 'Laura',
               lastName: 'Bravo',
               version: 3,
+              assessment,
             });
 
             this.server.create('certification-candidate-subscription', {
