@@ -693,8 +693,8 @@ module('Integration | Component | users | user-overview', function (hooks) {
         const screen = await render(<template><UserOverview @user={{user}} /></template>);
 
         // then
-        assert.dom(screen.getByRole('button', { name: 'Modifier' })).hasAttribute('disabled');
-        assert.dom(screen.getByRole('button', { name: 'Anonymiser cet utilisateur' })).hasAttribute('disabled');
+        assert.dom(screen.getByRole('button', { name: 'Modifier' })).hasAttribute('aria-disabled');
+        assert.dom(screen.getByRole('button', { name: 'Anonymiser cet utilisateur' })).hasAttribute('aria-disabled');
       });
 
       module('When the admin member who anonymised the user is not set in database', function () {
@@ -729,7 +729,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
 
         // then
         const anonymizeButton = await screen.findByRole('button', { name: 'Anonymiser cet utilisateur' });
-        assert.dom(anonymizeButton).isDisabled();
+        assert.dom(anonymizeButton).hasAttribute('aria-disabled');
 
         const anonymizationDisabledTooltip = await screen.getByText(
           "Vous ne pouvez pas anonymiser le compte d'un agent Pix.",

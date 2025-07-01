@@ -111,7 +111,7 @@ module('Acceptance | authenticated/certification-centers/get/team', function (ho
       await triggerEvent(input, 'focusout');
 
       // then
-      assert.dom(screen.getByRole('button', { name: 'Ajouter le membre' })).hasAttribute('disabled');
+      assert.dom(screen.getByRole('button', { name: 'Ajouter le membre' })).hasAttribute('aria-disabled');
     });
 
     test('should display error message and disable button if email is invalid', async function (assert) {
@@ -131,7 +131,7 @@ module('Acceptance | authenticated/certification-centers/get/team', function (ho
 
       // then
       assert.dom(screen.getByText("L'adresse e-mail saisie n'est pas valide.")).exists();
-      assert.dom(screen.getByRole('button', { name: 'Ajouter le membre' })).hasAttribute('disabled');
+      assert.dom(screen.getByRole('button', { name: 'Ajouter le membre' })).hasAttribute('aria-disabled');
     });
 
     test('should enable button and not display error message if email is valid', async function (assert) {

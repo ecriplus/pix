@@ -36,7 +36,7 @@ module('Integration | Component | complementary-certifications/item/framework/cr
           name: t('components.complementary-certifications.item.framework.creation-form.submit-button'),
         }),
       )
-      .isDisabled();
+      .hasAttribute('aria-disabled');
 
     await click(screen.getByText('1 · Titre domaine'));
     await click(screen.getByText('1 Titre competence'));
@@ -60,7 +60,7 @@ module('Integration | Component | complementary-certifications/item/framework/cr
           name: t('components.complementary-certifications.item.framework.creation-form.submit-button'),
         }),
       )
-      .isNotDisabled();
+      .doesNotHaveAttribute('aria-disabled');
     assert.ok(screen.getByText(t('common.actions.cancel')));
   });
 });

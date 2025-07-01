@@ -219,8 +219,10 @@ module('Integration | Component | target-profiles | Organizations', function (ho
     );
 
     // then
-    assert.dom(screen.getByLabelText('Valider le rattachement')).isDisabled();
-    assert.dom(screen.getByLabelText('Valider le rattachement à partir de ce profil cible')).isDisabled();
+    assert.dom(screen.getByLabelText('Valider le rattachement')).hasAttribute('aria-disabled');
+    assert
+      .dom(screen.getByLabelText('Valider le rattachement à partir de ce profil cible'))
+      .hasAttribute('aria-disabled');
   });
 
   module('Organization attachment functionality', function (hooks) {
@@ -250,7 +252,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
       await fillByLabel('Rattacher une ou plusieurs organisation(s)', '1, 2');
 
       // then
-      assert.dom(screen.getByLabelText('Valider le rattachement')).isNotDisabled();
+      assert.dom(screen.getByLabelText('Valider le rattachement')).doesNotHaveAttribute('aria-disabled');
     });
 
     test('it should call adapter when form is submitted', async function (assert) {
@@ -301,7 +303,9 @@ module('Integration | Component | target-profiles | Organizations', function (ho
       await fillByLabel("Rattacher les organisations d'un profil cible existant", '123');
 
       // then
-      assert.dom(screen.getByLabelText('Valider le rattachement à partir de ce profil cible')).isNotDisabled();
+      assert
+        .dom(screen.getByLabelText('Valider le rattachement à partir de ce profil cible'))
+        .doesNotHaveAttribute('aria-disabled');
     });
   });
 });

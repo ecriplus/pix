@@ -410,7 +410,7 @@ module('Integration | Component | Certifications | Certification | Information |
           const tooltipText =
             'Vous ne pouvez pas rejeter une certification publiée. Merci de dépublier la session avant de rejeter cette certification.';
 
-          assert.true(rejectButton.disabled);
+          assert.dom(rejectButton).hasAttribute('aria-disabled');
           await fireEvent.mouseOver(rejectButton);
           assert.dom(screen.getByText(tooltipText)).exists();
         });

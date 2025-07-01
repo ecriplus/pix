@@ -127,7 +127,7 @@ module('Integration | Component | certifications/header', function (hooks) {
           );
 
           // then
-          assert.dom(screen.getByRole('button', { name: 'Publier la session' })).isDisabled();
+          assert.dom(screen.getByRole('button', { name: 'Publier la session' })).hasAttribute('aria-disabled');
 
           fireEvent.mouseOver(screen.getByRole('button', { name: 'Publier la session' }));
           const tooltipText =
@@ -151,7 +151,7 @@ module('Integration | Component | certifications/header', function (hooks) {
           );
 
           // then
-          assert.dom(screen.getByRole('button', { name: 'Publier la session' })).isDisabled();
+          assert.dom(screen.getByRole('button', { name: 'Publier la session' })).hasAttribute('aria-disabled');
         });
       });
 
@@ -173,7 +173,7 @@ module('Integration | Component | certifications/header', function (hooks) {
             );
 
             // then
-            assert.dom(screen.getByRole('button', { name: 'Publier la session' })).isDisabled();
+            assert.dom(screen.getByRole('button', { name: 'Publier la session' })).hasAttribute('aria-disabled');
           });
         });
 
@@ -192,7 +192,7 @@ module('Integration | Component | certifications/header', function (hooks) {
             );
 
             // then
-            assert.dom(screen.getByRole('button', { name: 'Publier la session' })).isDisabled();
+            assert.dom(screen.getByRole('button', { name: 'Publier la session' })).hasAttribute('aria-disabled');
           });
         });
       });
@@ -212,7 +212,7 @@ module('Integration | Component | certifications/header', function (hooks) {
           );
 
           // then
-          assert.dom(screen.getByRole('button', { name: 'Publier la session' })).isNotDisabled();
+          assert.dom(screen.getByRole('button', { name: 'Publier la session' })).doesNotHaveAttribute('aria-disabled');
         });
 
         module('when confirmation modal is displayed', function () {
