@@ -9,11 +9,13 @@ import t from 'ember-intl/helpers/t';
 import eq from 'ember-truth-helpers/helpers/eq';
 import inc from 'mon-pix/helpers/inc';
 
+import didInsert from '../../../../modifiers/modifier-did-insert';
+
 export default class Steps extends Component {
   <template>
     {{#each this.steps as |step index|}}
       {{#if (eq index this.currentStep)}}
-        <div class="campaign-tutorial__title">
+        <div class="campaign-tutorial__title" tabIndex="-1" {{didInsert this.setFocus}}>
           {{step.text}}
         </div>
 
@@ -100,6 +102,11 @@ export default class Steps extends Component {
 
   get showNextButton() {
     return this.currentStep < this.steps.length - 1;
+  }
+
+  @action
+  setFocus(element) {
+    element.focus({ focusVisible: false });
   }
 
   @action
