@@ -112,4 +112,6 @@ async function _handleV3CertificationScoring({
   if (certificationCourse.isCancelled()) {
     await certificationCourseRepository.update({ certificationCourse });
   }
+
+  return services.scoreDoubleCertificationV3({ certificationCourseId: certificationCourse.getId() });
 }

@@ -3,6 +3,8 @@ import {
   CertificationIssueReportCategory,
   CertificationIssueReportSubcategories,
 } from '../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
+import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
+import { config } from '../../../../../src/shared/config.js';
 import { AnswerStatus, Assessment, AssessmentResult } from '../../../../../src/shared/domain/models/index.js';
 import {
   createServer,
@@ -58,7 +60,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
     });
 
     describe('Success case', function () {
-      describe('when session is v2', function () {
+      context('when session is v2', function () {
         beforeEach(async function () {
           ({ options, session } = await _createSession());
         });
@@ -384,9 +386,39 @@ describe('Certification | Session Management | Acceptance | Application | Route 
         });
       });
 
-      describe('when session is v3', function () {
+      context('when session is v3', function () {
         beforeEach(async function () {
           ({ options, session } = await _createSession({ version: 3 }));
+
+          const configurationCreatorId = databaseBuilder.factory.buildUser().id;
+          databaseBuilder.factory.buildCompetenceScoringConfiguration({
+            createdByUserId: configurationCreatorId,
+            configuration: [
+              {
+                competence: '1.1',
+                values: [
+                  {
+                    bounds: {
+                      max: 0,
+                      min: -5,
+                    },
+                    competenceLevel: 0,
+                  },
+                  {
+                    bounds: {
+                      max: 5,
+                      min: 0,
+                    },
+                    competenceLevel: 1,
+                  },
+                ],
+              },
+            ],
+          });
+          databaseBuilder.factory.buildScoringConfiguration({ createdByUserId: configurationCreatorId });
+          databaseBuilder.factory.buildFlashAlgorithmConfiguration();
+
+          await databaseBuilder.commit();
         });
 
         it('should update session', async function () {
@@ -607,6 +639,146 @@ describe('Certification | Session Management | Acceptance | Application | Route 
           expect(response.statusCode).to.equal(200);
           const assessment = await knex('assessments').where({ certificationCourseId }).first();
           expect(assessment.state).to.equal('endedDueToFinalization');
+        });
+
+        context('when certification is a double certification', function () {
+          let originalConfigValue;
+          beforeEach(async function () {
+            originalConfigValue = config.v3Certification.scoring.minimumAnswersRequiredToValidateACertification;
+            config.v3Certification.scoring.minimumAnswersRequiredToValidateACertification = 1;
+          });
+
+          afterEach(function () {
+            config.v3Certification.scoring.minimumAnswersRequiredToValidateACertification = originalConfigValue;
+          });
+
+          it('should acquire the double certification', async function () {
+            // given
+            const userId = databaseBuilder.factory.buildUser().id;
+
+            const cleaComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
+              key: ComplementaryCertificationKeys.CLEA,
+            });
+
+            const badgeId = databaseBuilder.factory.buildBadge({ isCertifiable: true }).id;
+            const complementaryCertificationBadgeId = databaseBuilder.factory.buildComplementaryCertificationBadge({
+              badgeId,
+              complementaryCertificationId: cleaComplementaryCertification.id,
+            }).id;
+
+            databaseBuilder.factory.buildBadgeAcquisition({
+              userId,
+              badgeId,
+              createdAt: new Date('2020-01-01'),
+            });
+
+            const session = databaseBuilder.factory.buildSession({ version: AlgorithmEngineVersion.V3 });
+            databaseBuilder.factory.buildCertificationCandidate({
+              userId,
+              sessionId: session.id,
+            });
+            const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+              userId,
+              sessionId: session.id,
+              completedAt: new Date(),
+              version: AlgorithmEngineVersion.V3,
+            }).id;
+
+            const complementaryCertificationCourseId = databaseBuilder.factory.buildComplementaryCertificationCourse({
+              certificationCourseId,
+              complementaryCertificationBadgeId,
+              complementaryCertificationId: cleaComplementaryCertification.id,
+            }).id;
+
+            databaseBuilder.factory.buildCertificationCenterMembership({
+              userId,
+              certificationCenterId: session.certificationCenterId,
+            });
+
+            const assessmentId = databaseBuilder.factory.buildAssessment({
+              certificationCourseId,
+              state: Assessment.states.STARTED,
+              type: Assessment.types.CERTIFICATION,
+            }).id;
+
+            const report = databaseBuilder.factory.buildCertificationReport({
+              certificationCourseId,
+              sessionId: session.id,
+            });
+            databaseBuilder.factory.buildCertificationIssueReport({
+              certificationCourseId,
+              category: CertificationIssueReportCategory.IN_CHALLENGE,
+              description: '',
+              subcategory: CertificationIssueReportSubcategories.EXTRA_TIME_PERCENTAGE,
+              questionNumber: 1,
+            });
+
+            const certificationChallenge = databaseBuilder.factory.buildCertificationChallenge({
+              courseId: certificationCourseId,
+              isNeutralized: false,
+              challengeId: 'recChallenge0_0_0',
+              competenceId: 'recCompetence0',
+              associatedSkillName: '@recSkill0_0',
+              associatedSkillId: 'recSkill0_0',
+              difficulty: 1,
+              discriminant: 2,
+            });
+            databaseBuilder.factory.buildAnswer({
+              assessmentId,
+              challengeId: certificationChallenge.challengeId,
+              result: AnswerStatus.OK.status,
+            });
+
+            await databaseBuilder.commit();
+
+            options = {
+              method: 'PUT',
+              payload: {
+                data: {
+                  attributes: {
+                    'examiner-global-comment': '',
+                    'has-incident': false,
+                    'has-joining-issue': false,
+                  },
+                  included: [
+                    {
+                      id: report.id,
+                      type: 'certification-reports',
+                      attributes: {
+                        'certification-course-id': report.certificationCourseId,
+                        'examiner-comment': 'What a fine lad this one',
+                        'is-completed': true,
+                        'abort-reason': 'candidate',
+                      },
+                    },
+                  ],
+                },
+              },
+              headers: generateAuthenticatedUserRequestHeaders({ userId }),
+              url: `/api/sessions/${session.id}/finalization`,
+            };
+
+            // when
+            const response = await server.inject(options);
+
+            // then
+            expect(response.statusCode).to.equal(200);
+
+            // session should be finalized
+            const finalizedSession = await knex('finalized-sessions').where({ sessionId: session.id }).first();
+            expect(finalizedSession.finalizedAt).not.to.be.null;
+            expect(finalizedSession.isPublishable).to.be.true;
+
+            const pixCoreResults = await knex('assessment-results').where({ assessmentId });
+            expect(pixCoreResults).to.have.lengthOf(1);
+
+            const cleaResult = await knex('complementary-certification-course-results').where({
+              complementaryCertificationCourseId,
+              complementaryCertificationBadgeId,
+            });
+            expect(cleaResult).to.have.lengthOf(1);
+            expect(cleaResult[0].acquired).to.be.true;
+          });
         });
       });
     });

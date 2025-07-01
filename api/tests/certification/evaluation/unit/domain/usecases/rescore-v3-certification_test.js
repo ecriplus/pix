@@ -4,10 +4,16 @@ import { CertificationCourseRejected } from '../../../../../../src/certification
 import { CertificationJuryDone } from '../../../../../../src/certification/session-management/domain/events/CertificationJuryDone.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ABORT_REASONS } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFinalizedSessionError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Certification | Evaluation | UseCases | rescore-v3-certification', function () {
+  beforeEach(function () {
+    sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
+      return callback();
+    });
+  });
   describe('session is not in a publishable state', function () {
     it('should reject to do a rescoring is session is still in progress', async function () {
       // given
@@ -265,9 +271,8 @@ describe('Unit | Certification | Evaluation | UseCases | rescore-v3-certificatio
       });
     });
 
-    context('when it is a complementary certification', function () {
+    context('when it is a double certification', function () {
       it('should trigger complementary certification scoring', async function () {
-        this.skip('');
         // given
         const certificationCourseStartDate = new Date('2022-01-01');
         const certificationAssessment = domainBuilder.buildCertificationAssessment({
@@ -299,6 +304,7 @@ describe('Unit | Certification | Evaluation | UseCases | rescore-v3-certificatio
 
         // then
         expect(services.handleV3CertificationScoring).to.have.been.calledOnce;
+        expect(services.scoreDoubleCertificationV3).to.have.been.calledOnceWithExactly({ certificationCourseId });
       });
     });
   });

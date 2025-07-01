@@ -3,6 +3,7 @@
  * @typedef {import('./index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('./index.js').CertificationAssessmentRepository} CertificationAssessmentRepository
  */
+import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
 import { CertificationJuryDone } from '../events/CertificationJuryDone.js';
@@ -95,33 +96,31 @@ async function _handleAutoJuryV2({
   }
 }
 
-/**
- * @param {Object} params
- * @param {CertificationRescoringRepository} params.certificationRescoringRepository
- * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
- */
-async function _handleAutoJuryV3({
-  certificationCourse,
-  certificationAssessmentRepository,
-  certificationRescoringRepository,
-}) {
-  const certificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
-    certificationCourseId: certificationCourse.getId(),
-  });
-  if (_v3CertificationShouldBeScored(certificationAssessment)) {
-    const certificationJuryDoneEvent = new CertificationJuryDone({
+const _handleAutoJuryV3 = withTransaction(
+  /**
+   * @param {Object} params
+   * @param {CertificationRescoringRepository} params.certificationRescoringRepository
+   * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
+   */
+  async ({ certificationCourse, certificationAssessmentRepository, certificationRescoringRepository }) => {
+    const certificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
       certificationCourseId: certificationCourse.getId(),
     });
+    if (_v3CertificationShouldBeScored(certificationAssessment)) {
+      const certificationJuryDoneEvent = new CertificationJuryDone({
+        certificationCourseId: certificationCourse.getId(),
+      });
 
-    await certificationRescoringRepository.rescoreV3Certification({
-      event: certificationJuryDoneEvent,
-    });
-  }
+      await certificationRescoringRepository.rescoreV3Certification({
+        event: certificationJuryDoneEvent,
+      });
+    }
 
-  certificationAssessment.endDueToFinalization();
+    certificationAssessment.endDueToFinalization();
 
-  await certificationAssessmentRepository.save(certificationAssessment);
-}
+    await certificationAssessmentRepository.save(certificationAssessment);
+  },
+);
 
 function _v3CertificationShouldBeScored(certificationAssessment) {
   return certificationAssessment.state !== CertificationAssessment.states.COMPLETED;
