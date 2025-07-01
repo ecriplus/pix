@@ -104,7 +104,9 @@ describe('Unit | Models | OrganizationImportDetail', function () {
         updatedAt,
         createdAt,
       });
-      expect(organizationImport.errors).to.deep.equal([{ code: 'plop', meta: 'line 2', name: 'SiecleXmlImportError' }]);
+      expect(organizationImport.errors).to.deep.equal([
+        { code: 'plop', meta: 'line 2', name: 'SiecleXmlImportError', id: null },
+      ]);
     });
   });
 });
