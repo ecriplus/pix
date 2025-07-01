@@ -75,7 +75,9 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
         const response = await server.inject(options);
         expect(response.statusCode).to.equal(200);
         expect(response.headers['content-type']).to.contain('application/json');
-        expect(response.result.data.id).to.equal('first_challenge');
+        expect(response.result.data.id).to.equal(assessmentId.toString());
+        expect(response.result.data.relationships['next-challenge'].id).to.equal('first_challenge');
+        expect(response.result.included.find(({ id }) => id === 'first_challenge')).to.exist;
       });
     });
 
