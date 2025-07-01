@@ -8,6 +8,8 @@ import {
   ChatNotFoundError,
   ConfigurationNotFoundError,
   MaxPromptsReachedError,
+  NoAttachmentNeededError,
+  NoAttachmentNorMessageProvidedError,
   NoUserIdProvidedError,
   TooLargeMessageInputError,
 } from '../../../../../src/llm/domain/errors.js';
@@ -97,9 +99,8 @@ describe('LLM | Integration | Application | API | llm', function () {
           expect(llmApiScope.isDone()).to.be.true;
           expect(await chatTemporaryStorage.get(`123456-${now.getMilliseconds()}`)).to.deep.equal({
             id: `123456-${now.getMilliseconds()}`,
-            attachmentName: 'file.txt',
-            attachmentContext: '**coucou**',
             configurationId: 'uneConfigQuiExist',
+            hasAttachmentContextBeenAdded: false,
             messages: [],
           });
         });
@@ -135,9 +136,8 @@ describe('LLM | Integration | Application | API | llm', function () {
           expect(llmApiScope.isDone()).to.be.true;
           expect(await chatTemporaryStorage.get(`123456-${now.getMilliseconds()}`)).to.deep.equal({
             id: `123456-${now.getMilliseconds()}`,
-            attachmentName: null,
-            attachmentContext: null,
             configurationId: 'uneConfigQuiExist',
+            hasAttachmentContextBeenAdded: false,
             messages: [],
           });
         });
@@ -166,6 +166,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         const chat = new Chat({
           id: 'chatId',
           configurationId: 'uneConfigQuiExist',
+          hasAttachmentContextBeenAdded: false,
           messages: [],
         });
         await chatTemporaryStorage.save({
@@ -189,6 +190,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         const chat = new Chat({
           id: '123456-chatId',
           configurationId: 'uneConfigQuiExist',
+          hasAttachmentContextBeenAdded: false,
           messages: [],
         });
         await chatTemporaryStorage.save({
@@ -212,6 +214,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         const chat = new Chat({
           id: '123-chatId',
           configurationId: 'uneConfigQuiExist',
+          hasAttachmentContextBeenAdded: false,
           messages: [],
         });
         await chatTemporaryStorage.save({
@@ -219,7 +222,7 @@ describe('LLM | Integration | Application | API | llm', function () {
           value: chat.toDTO(),
           expirationDelaySeconds: ms('24h'),
         });
-        nock('https://llm-test.pix.fr/api')
+        const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
           .get('/configurations/uneConfigQuiExist')
           .reply(200, {
             llm: {
@@ -237,6 +240,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         // then
         expect(err).to.be.instanceOf(TooLargeMessageInputError);
         expect(err.message).to.equal("You've reached the max characters input");
+        expect(llmConfigurationScope.isDone()).to.be.true;
       });
     });
 
@@ -246,6 +250,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         const chat = new Chat({
           id: '123-chatId',
           configurationId: 'uneConfigQuiExist',
+          hasAttachmentContextBeenAdded: false,
           messages: [
             new Message({ content: 'coucou LLM1', isFromUser: false }),
             new Message({ content: 'coucou LLM2', isFromUser: false }),
@@ -257,7 +262,7 @@ describe('LLM | Integration | Application | API | llm', function () {
           value: chat.toDTO(),
           expirationDelaySeconds: ms('24h'),
         });
-        nock('https://llm-test.pix.fr/api')
+        const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
           .get('/configurations/uneConfigQuiExist')
           .reply(200, {
             llm: {
@@ -268,7 +273,7 @@ describe('LLM | Integration | Application | API | llm', function () {
               inputMaxPrompts: 2,
             },
           });
-        nock('https://llm-test.pix.fr/api')
+        const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
           .post('/chat', {
             configurationId: 'uneConfigQuiExist',
             history: [
@@ -291,6 +296,8 @@ describe('LLM | Integration | Application | API | llm', function () {
         }
         const llmResponse = parts.join('');
         expect(llmResponse).to.deep.equal('data: salut\n\n');
+        expect(llmConfigurationScope.isDone()).to.be.true;
+        expect(llmPostPromptScope.isDone()).to.be.true;
       });
 
       it('should throw a MaxPromptsReachedError when user prompts exceed max', async function () {
@@ -298,6 +305,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         const chat = new Chat({
           id: '123-chatId',
           configurationId: 'uneConfigQuiExist',
+          hasAttachmentContextBeenAdded: false,
           messages: [
             new Message({ content: 'coucou user1', isFromUser: true }),
             new Message({ content: 'coucou LLM2', isFromUser: false }),
@@ -309,7 +317,7 @@ describe('LLM | Integration | Application | API | llm', function () {
           value: chat.toDTO(),
           expirationDelaySeconds: ms('24h'),
         });
-        nock('https://llm-test.pix.fr/api')
+        const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
           .get('/configurations/uneConfigQuiExist')
           .reply(200, {
             llm: {
@@ -327,78 +335,780 @@ describe('LLM | Integration | Application | API | llm', function () {
         // then
         expect(err).to.be.instanceOf(MaxPromptsReachedError);
         expect(err.message).to.equal("You've reached the max prompts authorized");
+        expect(llmConfigurationScope.isDone()).to.be.true;
       });
     });
 
-    it('should return a stream which will contain the llm response', async function () {
-      // given
-      const chat = new Chat({
-        id: '123-chatId',
-        configurationId: 'uneConfigQuiExist',
-        messages: [
-          new Message({ content: 'coucou user1', isFromUser: true }),
-          new Message({ content: 'coucou LLM1', isFromUser: false }),
-        ],
-      });
-      await chatTemporaryStorage.save({
-        key: chat.id,
-        value: chat.toDTO(),
-        expirationDelaySeconds: ms('24h'),
-      });
-      nock('https://llm-test.pix.fr/api')
-        .get('/configurations/uneConfigQuiExist')
-        .reply(200, {
-          llm: {
-            historySize: 123,
-          },
-          challenge: {
-            inputMaxChars: 255,
-            inputMaxPrompts: 100,
-          },
+    context('success cases', function () {
+      context('when a prompt is provided', function () {
+        context('when no attachmentName is provided', function () {
+          it('should return a stream which will contain the llm response', async function () {
+            // given
+            const chat = new Chat({
+              id: '123-chatId',
+              configurationId: 'uneConfigQuiExist',
+              hasAttachmentContextBeenAdded: false,
+              messages: [
+                new Message({ content: 'coucou user1', isFromUser: true }),
+                new Message({ content: 'coucou LLM1', isFromUser: false }),
+              ],
+            });
+            await chatTemporaryStorage.save({
+              key: chat.id,
+              value: chat.toDTO(),
+              expirationDelaySeconds: ms('24h'),
+            });
+            const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
+              .get('/configurations/uneConfigQuiExist')
+              .reply(200, {
+                llm: {
+                  historySize: 123,
+                },
+                challenge: {
+                  inputMaxChars: 255,
+                  inputMaxPrompts: 100,
+                },
+              });
+            const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
+              .post('/chat', {
+                configurationId: 'uneConfigQuiExist',
+                history: [
+                  { content: 'coucou user1', role: 'user' },
+                  { content: 'coucou LLM1', role: 'assistant' },
+                ],
+                prompt: 'un message',
+              })
+              .reply(
+                201,
+                Readable.from([
+                  '60:{"ceci":"nest pas important","message":"coucou c\'est super"}',
+                  '40:{"message":"\\nle couscous c plutot bon"}47:{"message":" mais la paella c pas mal aussi\\n"}',
+                  '29:{"jecrois":{"que":"jaifini"}}',
+                ]),
+              );
+
+            // when
+            const stream = await prompt({
+              chatId: '123-chatId',
+              userId: 123,
+              message: 'un message',
+              attachmentName: null,
+            });
+
+            // then
+            const parts = [];
+            const decoder = new TextDecoder();
+            for await (const chunk of stream) {
+              parts.push(decoder.decode(chunk));
+            }
+            const llmResponse = parts.join('');
+            expect(llmResponse).to.deep.equal(
+              "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n",
+            );
+            expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
+              id: '123-chatId',
+              configurationId: 'uneConfigQuiExist',
+              hasAttachmentContextBeenAdded: false,
+              messages: [
+                { content: 'coucou user1', isFromUser: true },
+                { content: 'coucou LLM1', isFromUser: false },
+                { content: 'un message', isFromUser: true },
+                {
+                  content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+                  isFromUser: false,
+                },
+              ],
+            });
+            expect(llmConfigurationScope.isDone()).to.be.true;
+            expect(llmPostPromptScope.isDone()).to.be.true;
+          });
         });
-      nock('https://llm-test.pix.fr/api')
-        .post('/chat', {
-          configurationId: 'uneConfigQuiExist',
-          history: [
-            { content: 'coucou user1', role: 'user' },
-            { content: 'coucou LLM1', role: 'assistant' },
-          ],
-          prompt: 'un message',
-        })
-        .reply(
-          201,
-          Readable.from([
-            '60:{"ceci":"nest pas important","message":"coucou c\'est super"}',
-            '40:{"message":"\\nle couscous c plutot bon"}47:{"message":" mais la paella c pas mal aussi\\n"}',
-            '29:{"jecrois":{"que":"jaifini"}}',
-          ]),
-        );
+        context('when attachmentName is provided', function () {
+          context('when no attachmentName is expected for the given configuration', function () {
+            it('should throw a NoAttachmentNeededError', async function () {
+              // given
+              const chat = new Chat({
+                id: '123-chatId',
+                configurationId: 'uneConfigQuiExist',
+                hasAttachmentContextBeenAdded: false,
+                messages: [
+                  new Message({ content: 'coucou user1', isFromUser: true }),
+                  new Message({ content: 'coucou LLM2', isFromUser: false }),
+                  new Message({ content: 'coucou user2', isFromUser: true }),
+                ],
+              });
+              await chatTemporaryStorage.save({
+                key: chat.id,
+                value: chat.toDTO(),
+                expirationDelaySeconds: ms('24h'),
+              });
+              const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
+                .get('/configurations/uneConfigQuiExist')
+                .reply(200, {
+                  llm: {
+                    historySize: 123,
+                  },
+                  challenge: {
+                    inputMaxChars: 255,
+                    inputMaxPrompts: 2,
+                  },
+                });
 
-      // when
-      const stream = await prompt({ chatId: '123-chatId', userId: 123, message: 'un message' });
+              // when
+              const err = await catchErr(prompt)({
+                chatId: '123-chatId',
+                userId: 123,
+                message: 'un message',
+                attachmentName: 'un_attachment.pdf',
+              });
 
-      // then
-      const parts = [];
-      const decoder = new TextDecoder();
-      for await (const chunk of stream) {
-        parts.push(decoder.decode(chunk));
-      }
-      const llmResponse = parts.join('');
-      expect(llmResponse).to.deep.equal(
-        "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n",
-      );
-      expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
-        id: '123-chatId',
-        configurationId: 'uneConfigQuiExist',
-        messages: [
-          { content: 'coucou user1', isFromUser: true },
-          { content: 'coucou LLM1', isFromUser: false },
-          { content: 'un message', isFromUser: true },
-          {
-            content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
-            isFromUser: false,
-          },
-        ],
+              // then
+              expect(err).to.be.instanceOf(NoAttachmentNeededError);
+              expect(err.message).to.equal(
+                'Attachment has been provided but is not expected for the given configuration',
+              );
+              expect(llmConfigurationScope.isDone()).to.be.true;
+            });
+          });
+          context('when attachmentName is not the expected one for the given configuration', function () {
+            it(
+              'should return a stream which will contain the attachment event and the llm response while ' +
+                'ignoring the invalid attachmentName by not adding anything to the context',
+              async function () {
+                // given
+                const chat = new Chat({
+                  id: '123-chatId',
+                  configurationId: 'uneConfigQuiExist',
+                  hasAttachmentContextBeenAdded: false,
+                  messages: [
+                    new Message({ content: 'coucou user1', isFromUser: true }),
+                    new Message({ content: 'coucou LLM1', isFromUser: false }),
+                  ],
+                });
+                await chatTemporaryStorage.save({
+                  key: chat.id,
+                  value: chat.toDTO(),
+                  expirationDelaySeconds: ms('24h'),
+                });
+                const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
+                  .get('/configurations/uneConfigQuiExist')
+                  .reply(200, {
+                    llm: {
+                      historySize: 123,
+                    },
+                    challenge: {
+                      inputMaxChars: 255,
+                      inputMaxPrompts: 100,
+                    },
+                    attachment: {
+                      name: 'expected_file.txt',
+                      context: 'add me in the chat !',
+                    },
+                  });
+                const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
+                  .post('/chat', {
+                    configurationId: 'uneConfigQuiExist',
+                    history: [
+                      { content: 'coucou user1', role: 'user' },
+                      { content: 'coucou LLM1', role: 'assistant' },
+                    ],
+                    prompt: 'un message',
+                  })
+                  .reply(
+                    201,
+                    Readable.from([
+                      '60:{"ceci":"nest pas important","message":"coucou c\'est super"}',
+                      '40:{"message":"\\nle couscous c plutot bon"}47:{"message":" mais la paella c pas mal aussi\\n"}',
+                      '29:{"jecrois":{"que":"jaifini"}}',
+                    ]),
+                  );
+
+                // when
+                const stream = await prompt({
+                  chatId: '123-chatId',
+                  userId: 123,
+                  message: 'un message',
+                  attachmentName: 'invalid_file.txt',
+                });
+
+                // then
+                const parts = [];
+                const decoder = new TextDecoder();
+                for await (const chunk of stream) {
+                  parts.push(decoder.decode(chunk));
+                }
+                const llmResponse = parts.join('');
+                const attachmentMessage = 'event: attachment\ndata: \n\n';
+                const llmMessage =
+                  "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n";
+                expect(llmResponse).to.deep.equal(attachmentMessage + llmMessage);
+                expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
+                  id: '123-chatId',
+                  configurationId: 'uneConfigQuiExist',
+                  hasAttachmentContextBeenAdded: false,
+                  messages: [
+                    { content: 'coucou user1', isFromUser: true },
+                    { content: 'coucou LLM1', isFromUser: false },
+                    { content: 'un message', isFromUser: true },
+                    {
+                      content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+                      isFromUser: false,
+                    },
+                  ],
+                });
+                expect(llmConfigurationScope.isDone()).to.be.true;
+                expect(llmPostPromptScope.isDone()).to.be.true;
+              },
+            );
+          });
+          context('when attachmentName is the expected one for the given configuration', function () {
+            context('when the context for this attachmentName has already been added', function () {
+              it(
+                'should return a stream which will contain the attachment event and the llm response while ' +
+                  'not adding the attachment context in the conversation a second time',
+                async function () {
+                  // given
+                  const chat = new Chat({
+                    id: '123-chatId',
+                    configurationId: 'uneConfigQuiExist',
+                    hasAttachmentContextBeenAdded: true,
+                    messages: [
+                      new Message({ content: 'coucou user1', isFromUser: true }),
+                      new Message({ content: 'coucou LLM1', isFromUser: false }),
+                      new Message({
+                        content:
+                          'Ajoute le fichier fictif "expected_file.txt" à ton contexte. Voici le contenu du fichier :\nadd me in the chat !',
+                        isFromUser: true,
+                      }),
+                      new Message({
+                        content: 'Le contenu du fichier fictif a été ajouté au contexte.',
+                        isFromUser: false,
+                      }),
+                      new Message({ content: 'coucou user2', isFromUser: true }),
+                      new Message({ content: 'coucou LLM2', isFromUser: false }),
+                    ],
+                  });
+                  await chatTemporaryStorage.save({
+                    key: chat.id,
+                    value: chat.toDTO(),
+                    expirationDelaySeconds: ms('24h'),
+                  });
+                  const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
+                    .get('/configurations/uneConfigQuiExist')
+                    .reply(200, {
+                      llm: {
+                        historySize: 123,
+                      },
+                      challenge: {
+                        inputMaxChars: 255,
+                        inputMaxPrompts: 100,
+                      },
+                      attachment: {
+                        name: 'expected_file.txt',
+                        context: 'add me in the chat !',
+                      },
+                    });
+                  const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
+                    .post('/chat', {
+                      configurationId: 'uneConfigQuiExist',
+                      history: [
+                        { content: 'coucou user1', role: 'user' },
+                        { content: 'coucou LLM1', role: 'assistant' },
+                        {
+                          content:
+                            'Ajoute le fichier fictif "expected_file.txt" à ton contexte. Voici le contenu du fichier :\nadd me in the chat !',
+                          role: 'user',
+                        },
+                        {
+                          content: 'Le contenu du fichier fictif a été ajouté au contexte.',
+                          role: 'assistant',
+                        },
+                        { content: 'coucou user2', role: 'user' },
+                        { content: 'coucou LLM2', role: 'assistant' },
+                      ],
+                      prompt: 'un message',
+                    })
+                    .reply(
+                      201,
+                      Readable.from([
+                        '60:{"ceci":"nest pas important","message":"coucou c\'est super"}',
+                        '40:{"message":"\\nle couscous c plutot bon"}47:{"message":" mais la paella c pas mal aussi\\n"}',
+                        '29:{"jecrois":{"que":"jaifini"}}',
+                      ]),
+                    );
+
+                  // when
+                  const stream = await prompt({
+                    chatId: '123-chatId',
+                    userId: 123,
+                    message: 'un message',
+                    attachmentName: 'expected_file.txt',
+                  });
+
+                  // then
+                  const parts = [];
+                  const decoder = new TextDecoder();
+                  for await (const chunk of stream) {
+                    parts.push(decoder.decode(chunk));
+                  }
+                  const llmResponse = parts.join('');
+                  const attachmentMessage = 'event: attachment\ndata: \n\n';
+                  const llmMessage =
+                    "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n";
+                  expect(llmResponse).to.deep.equal(attachmentMessage + llmMessage);
+                  expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
+                    id: '123-chatId',
+                    configurationId: 'uneConfigQuiExist',
+                    hasAttachmentContextBeenAdded: true,
+                    messages: [
+                      { content: 'coucou user1', isFromUser: true },
+                      { content: 'coucou LLM1', isFromUser: false },
+                      {
+                        content:
+                          'Ajoute le fichier fictif "expected_file.txt" à ton contexte. Voici le contenu du fichier :\nadd me in the chat !',
+                        isFromUser: true,
+                      },
+                      {
+                        content: 'Le contenu du fichier fictif a été ajouté au contexte.',
+                        isFromUser: false,
+                      },
+                      { content: 'coucou user2', isFromUser: true },
+                      { content: 'coucou LLM2', isFromUser: false },
+                      { content: 'un message', isFromUser: true },
+                      {
+                        content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+                        isFromUser: false,
+                      },
+                    ],
+                  });
+                  expect(llmConfigurationScope.isDone()).to.be.true;
+                  expect(llmPostPromptScope.isDone()).to.be.true;
+                },
+              );
+            });
+            context('when the context for this attachmentName has not been added yet', function () {
+              it(
+                'should return a stream which will contain the attachment event and the llm response while ' +
+                  'adding the attachment context in the conversation',
+                async function () {
+                  // given
+                  const chat = new Chat({
+                    id: '123-chatId',
+                    configurationId: 'uneConfigQuiExist',
+                    hasAttachmentContextBeenAdded: false,
+                    messages: [
+                      new Message({ content: 'coucou user1', isFromUser: true }),
+                      new Message({ content: 'coucou LLM1', isFromUser: false }),
+                    ],
+                  });
+                  await chatTemporaryStorage.save({
+                    key: chat.id,
+                    value: chat.toDTO(),
+                    expirationDelaySeconds: ms('24h'),
+                  });
+                  const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
+                    .get('/configurations/uneConfigQuiExist')
+                    .reply(200, {
+                      llm: {
+                        historySize: 123,
+                      },
+                      challenge: {
+                        inputMaxChars: 255,
+                        inputMaxPrompts: 100,
+                      },
+                      attachment: {
+                        name: 'expected_file.txt',
+                        context: 'add me in the chat !',
+                      },
+                    });
+                  const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
+                    .post('/chat', {
+                      configurationId: 'uneConfigQuiExist',
+                      history: [
+                        { content: 'coucou user1', role: 'user' },
+                        { content: 'coucou LLM1', role: 'assistant' },
+                        {
+                          content:
+                            "\n<system_notification>\n  L'utilisateur a téléversé une pièce jointe :\n  <attachment_name>\n    expected_file.txt\n  </attachment_name>\n</system_notification>",
+                          role: 'user',
+                        },
+                        {
+                          content:
+                            '\n<read_attachment_tool>\n  Lecture de la pièce jointe, expected_file.txt :\n  <attachment_content>\n    add me in the chat !\n  </attachment_content>\n</read_attachment_tool>',
+                          role: 'assistant',
+                        },
+                      ],
+                      prompt: 'un message',
+                    })
+                    .reply(
+                      201,
+                      Readable.from([
+                        '60:{"ceci":"nest pas important","message":"coucou c\'est super"}',
+                        '40:{"message":"\\nle couscous c plutot bon"}47:{"message":" mais la paella c pas mal aussi\\n"}',
+                        '29:{"jecrois":{"que":"jaifini"}}',
+                      ]),
+                    );
+
+                  // when
+                  const stream = await prompt({
+                    chatId: '123-chatId',
+                    userId: 123,
+                    message: 'un message',
+                    attachmentName: 'expected_file.txt',
+                  });
+
+                  // then
+                  const parts = [];
+                  const decoder = new TextDecoder();
+                  for await (const chunk of stream) {
+                    parts.push(decoder.decode(chunk));
+                  }
+                  const llmResponse = parts.join('');
+                  const attachmentMessage = 'event: attachment\ndata: \n\n';
+                  const llmMessage =
+                    "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n";
+                  expect(llmResponse).to.deep.equal(attachmentMessage + llmMessage);
+                  expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
+                    id: '123-chatId',
+                    configurationId: 'uneConfigQuiExist',
+                    hasAttachmentContextBeenAdded: true,
+                    messages: [
+                      { content: 'coucou user1', isFromUser: true },
+                      { content: 'coucou LLM1', isFromUser: false },
+                      {
+                        content:
+                          "\n<system_notification>\n  L'utilisateur a téléversé une pièce jointe :\n  <attachment_name>\n    expected_file.txt\n  </attachment_name>\n</system_notification>",
+                        isFromUser: true,
+                      },
+                      {
+                        content:
+                          '\n<read_attachment_tool>\n  Lecture de la pièce jointe, expected_file.txt :\n  <attachment_content>\n    add me in the chat !\n  </attachment_content>\n</read_attachment_tool>',
+                        isFromUser: false,
+                      },
+                      { content: 'un message', isFromUser: true },
+                      {
+                        content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+                        isFromUser: false,
+                      },
+                    ],
+                  });
+                  expect(llmConfigurationScope.isDone()).to.be.true;
+                  expect(llmPostPromptScope.isDone()).to.be.true;
+                },
+              );
+            });
+          });
+        });
+      });
+      context('when no prompt is provided', function () {
+        context('when no attachmentName is provided', function () {
+          it('should throw a NoAttachmentNorMessageProvidedError', async function () {
+            // given
+            const chat = new Chat({
+              id: '123-chatId',
+              configurationId: 'uneConfigQuiExist',
+              hasAttachmentContextBeenAdded: false,
+              messages: [
+                new Message({ content: 'coucou user1', isFromUser: true }),
+                new Message({ content: 'coucou LLM2', isFromUser: false }),
+              ],
+            });
+            await chatTemporaryStorage.save({
+              key: chat.id,
+              value: chat.toDTO(),
+              expirationDelaySeconds: ms('24h'),
+            });
+
+            // when
+            const err = await catchErr(prompt)({
+              chatId: '123-chatId',
+              userId: 123,
+              message: null,
+              attachmentName: null,
+            });
+
+            // then
+            expect(err).to.be.instanceOf(NoAttachmentNorMessageProvidedError);
+            expect(err.message).to.equal('At least a message or an attachment, if applicable, must be provided');
+          });
+        });
+        context('when attachmentName is provided', function () {
+          context('when no attachmentName is expected for the given configuration', function () {
+            it('should throw a NoAttachmentNeededError', async function () {
+              // given
+              const chat = new Chat({
+                id: '123-chatId',
+                configurationId: 'uneConfigQuiExist',
+                hasAttachmentContextBeenAdded: false,
+                messages: [
+                  new Message({ content: 'coucou user1', isFromUser: true }),
+                  new Message({ content: 'coucou LLM2', isFromUser: false }),
+                  new Message({ content: 'coucou user2', isFromUser: true }),
+                ],
+              });
+              await chatTemporaryStorage.save({
+                key: chat.id,
+                value: chat.toDTO(),
+                expirationDelaySeconds: ms('24h'),
+              });
+              const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
+                .get('/configurations/uneConfigQuiExist')
+                .reply(200, {
+                  llm: {
+                    historySize: 123,
+                  },
+                  challenge: {
+                    inputMaxChars: 255,
+                    inputMaxPrompts: 2,
+                  },
+                });
+
+              // when
+              const err = await catchErr(prompt)({
+                chatId: '123-chatId',
+                userId: 123,
+                message: null,
+                attachmentName: 'un_attachment.pdf',
+              });
+
+              // then
+              expect(err).to.be.instanceOf(NoAttachmentNeededError);
+              expect(err.message).to.equal(
+                'Attachment has been provided but is not expected for the given configuration',
+              );
+              expect(llmConfigurationScope.isDone()).to.be.true;
+            });
+          });
+          context('when attachmentName is not the expected one for the given configuration', function () {
+            it(
+              'should return a stream which will contain the attachment event while ' +
+                'ignoring the invalid attachmentName by not adding anything to the context',
+              async function () {
+                // given
+                const chat = new Chat({
+                  id: '123-chatId',
+                  configurationId: 'uneConfigQuiExist',
+                  hasAttachmentContextBeenAdded: false,
+                  messages: [
+                    new Message({ content: 'coucou user1', isFromUser: true }),
+                    new Message({ content: 'coucou LLM1', isFromUser: false }),
+                  ],
+                });
+                await chatTemporaryStorage.save({
+                  key: chat.id,
+                  value: chat.toDTO(),
+                  expirationDelaySeconds: ms('24h'),
+                });
+                const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
+                  .get('/configurations/uneConfigQuiExist')
+                  .reply(200, {
+                    llm: {
+                      historySize: 123,
+                    },
+                    challenge: {
+                      inputMaxChars: 255,
+                      inputMaxPrompts: 100,
+                    },
+                    attachment: {
+                      name: 'expected_file.txt',
+                      context: 'add me in the chat !',
+                    },
+                  });
+
+                // when
+                const stream = await prompt({
+                  chatId: '123-chatId',
+                  userId: 123,
+                  message: null,
+                  attachmentName: 'invalid_file.txt',
+                });
+
+                // then
+                const parts = [];
+                const decoder = new TextDecoder();
+                for await (const chunk of stream) {
+                  parts.push(decoder.decode(chunk));
+                }
+                const llmResponse = parts.join('');
+                expect(llmResponse).to.deep.equal('event: attachment\ndata: \n\n');
+                expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
+                  id: '123-chatId',
+                  configurationId: 'uneConfigQuiExist',
+                  hasAttachmentContextBeenAdded: false,
+                  messages: [
+                    { content: 'coucou user1', isFromUser: true },
+                    { content: 'coucou LLM1', isFromUser: false },
+                  ],
+                });
+                expect(llmConfigurationScope.isDone()).to.be.true;
+              },
+            );
+          });
+          context('when attachmentName is the expected one for the given configuration', function () {
+            context('when the context for this attachmentName has already been added', function () {
+              it(
+                'should return a stream which will contain the attachment event while ' +
+                  'not adding the attachment context in the conversation a second time',
+                async function () {
+                  // given
+                  const chat = new Chat({
+                    id: '123-chatId',
+                    configurationId: 'uneConfigQuiExist',
+                    hasAttachmentContextBeenAdded: true,
+                    messages: [
+                      new Message({ content: 'coucou user1', isFromUser: true }),
+                      new Message({ content: 'coucou LLM1', isFromUser: false }),
+                      new Message({
+                        content:
+                          'Ajoute le fichier fictif "expected_file.txt" à ton contexte. Voici le contenu du fichier :\nadd me in the chat !',
+                        isFromUser: true,
+                      }),
+                      new Message({
+                        content: 'Le contenu du fichier fictif a été ajouté au contexte.',
+                        isFromUser: false,
+                      }),
+                      new Message({ content: 'coucou user2', isFromUser: true }),
+                      new Message({ content: 'coucou LLM2', isFromUser: false }),
+                    ],
+                  });
+                  await chatTemporaryStorage.save({
+                    key: chat.id,
+                    value: chat.toDTO(),
+                    expirationDelaySeconds: ms('24h'),
+                  });
+                  const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
+                    .get('/configurations/uneConfigQuiExist')
+                    .reply(200, {
+                      llm: {
+                        historySize: 123,
+                      },
+                      challenge: {
+                        inputMaxChars: 255,
+                        inputMaxPrompts: 100,
+                      },
+                      attachment: {
+                        name: 'expected_file.txt',
+                        context: 'add me in the chat !',
+                      },
+                    });
+
+                  // when
+                  const stream = await prompt({
+                    chatId: '123-chatId',
+                    userId: 123,
+                    message: null,
+                    attachmentName: 'expected_file.txt',
+                  });
+
+                  // then
+                  const parts = [];
+                  const decoder = new TextDecoder();
+                  for await (const chunk of stream) {
+                    parts.push(decoder.decode(chunk));
+                  }
+                  const llmResponse = parts.join('');
+                  expect(llmResponse).to.deep.equal('event: attachment\ndata: \n\n');
+                  expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
+                    id: '123-chatId',
+                    configurationId: 'uneConfigQuiExist',
+                    hasAttachmentContextBeenAdded: true,
+                    messages: [
+                      { content: 'coucou user1', isFromUser: true },
+                      { content: 'coucou LLM1', isFromUser: false },
+                      {
+                        content:
+                          'Ajoute le fichier fictif "expected_file.txt" à ton contexte. Voici le contenu du fichier :\nadd me in the chat !',
+                        isFromUser: true,
+                      },
+                      {
+                        content: 'Le contenu du fichier fictif a été ajouté au contexte.',
+                        isFromUser: false,
+                      },
+                      { content: 'coucou user2', isFromUser: true },
+                      { content: 'coucou LLM2', isFromUser: false },
+                    ],
+                  });
+                  expect(llmConfigurationScope.isDone()).to.be.true;
+                },
+              );
+            });
+            context('when the context for this attachmentName has not been added yet', function () {
+              it(
+                'should return a stream which will contain the attachment event while ' +
+                  'adding the attachment context in the conversation',
+                async function () {
+                  // given
+                  const chat = new Chat({
+                    id: '123-chatId',
+                    configurationId: 'uneConfigQuiExist',
+                    hasAttachmentContextBeenAdded: false,
+                    messages: [
+                      new Message({ content: 'coucou user1', isFromUser: true }),
+                      new Message({ content: 'coucou LLM1', isFromUser: false }),
+                    ],
+                  });
+                  await chatTemporaryStorage.save({
+                    key: chat.id,
+                    value: chat.toDTO(),
+                    expirationDelaySeconds: ms('24h'),
+                  });
+                  const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
+                    .get('/configurations/uneConfigQuiExist')
+                    .reply(200, {
+                      llm: {
+                        historySize: 123,
+                      },
+                      challenge: {
+                        inputMaxChars: 255,
+                        inputMaxPrompts: 100,
+                      },
+                      attachment: {
+                        name: 'expected_file.txt',
+                        context: 'add me in the chat !',
+                      },
+                    });
+
+                  // when
+                  const stream = await prompt({
+                    chatId: '123-chatId',
+                    userId: 123,
+                    message: null,
+                    attachmentName: 'expected_file.txt',
+                  });
+
+                  // then
+                  const parts = [];
+                  const decoder = new TextDecoder();
+                  for await (const chunk of stream) {
+                    parts.push(decoder.decode(chunk));
+                  }
+                  const llmResponse = parts.join('');
+                  expect(llmResponse).to.deep.equal('event: attachment\ndata: \n\n');
+                  expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
+                    id: '123-chatId',
+                    configurationId: 'uneConfigQuiExist',
+                    hasAttachmentContextBeenAdded: true,
+                    messages: [
+                      { content: 'coucou user1', isFromUser: true },
+                      { content: 'coucou LLM1', isFromUser: false },
+                      {
+                        content:
+                          "\n<system_notification>\n  L'utilisateur a téléversé une pièce jointe :\n  <attachment_name>\n    expected_file.txt\n  </attachment_name>\n</system_notification>",
+                        isFromUser: true,
+                      },
+                      {
+                        content:
+                          '\n<read_attachment_tool>\n  Lecture de la pièce jointe, expected_file.txt :\n  <attachment_content>\n    add me in the chat !\n  </attachment_content>\n</read_attachment_tool>',
+                        isFromUser: false,
+                      },
+                    ],
+                  });
+                  expect(llmConfigurationScope.isDone()).to.be.true;
+                },
+              );
+            });
+          });
+        });
       });
     });
   });

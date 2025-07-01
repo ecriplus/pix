@@ -1,4 +1,5 @@
 import { ConfigurationNotFoundError, LLMApiError } from '../../../../../src/llm/domain/errors.js';
+import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import {
   CONFIGURATION_STORAGE_PREFIX,
   get,
@@ -58,14 +59,25 @@ describe('LLM | Integration | Infrastructure | Repositories | configuration', fu
           // given
           const llmApiScope = nock('https://llm-test.pix.fr/api')
             .get('/configurations/unIdDeConfiguration')
-            .reply(200, { some: 'config', with: { many: 'fields' } });
+            .reply(200, {
+              llm: { historySize: 1 },
+              challenge: { inputMaxChars: 2, inputMaxPrompts: 3 },
+              attachment: { name: 'some_attachment_name', context: 'some attachment context' },
+            });
 
           // when
           const configuration = await get('unIdDeConfiguration');
 
           // then
-          expect(configuration).to.deep.equal({ some: 'config', with: { many: 'fields' } });
-          expect(await configurationTemporaryStorage.get('unIdDeConfiguration')).to.deep.equal(configuration);
+          const expectedConfiguration = new Configuration({
+            historySize: 1,
+            inputMaxChars: 2,
+            inputMaxPrompts: 3,
+            attachmentName: 'some_attachment_name',
+            attachmentContext: 'some attachment context',
+          });
+          expect(configuration).to.deepEqualInstance(expectedConfiguration);
+          expect(await configurationTemporaryStorage.get('unIdDeConfiguration')).to.deep.equal(configuration.toDTO());
           expect(llmApiScope.isDone()).to.be.true;
         });
       });
@@ -76,7 +88,11 @@ describe('LLM | Integration | Infrastructure | Repositories | configuration', fu
           const llmApiScopeShouldBeCalled = nock('https://llm-test.pix.fr/api')
             .get('/configurations/unIdDeConfiguration')
             .once()
-            .reply(200, { some: 'config', with: { many: 'fields' } });
+            .reply(200, {
+              llm: { historySize: 1 },
+              challenge: { inputMaxChars: 2, inputMaxPrompts: 3 },
+              attachment: { name: 'some_attachment_name', context: 'some attachment context' },
+            });
           const llmApiScopeShouldNOTBeCalled = nock('https://llm-test.pix.fr/api')
             .get('/configurations/unIdDeConfiguration')
             .twice()
@@ -87,10 +103,52 @@ describe('LLM | Integration | Infrastructure | Repositories | configuration', fu
           const configurationCached = await get('unIdDeConfiguration');
 
           // then
-          expect(configurationNotCached).to.deep.equal({ some: 'config', with: { many: 'fields' } });
+          const expectedConfiguration = new Configuration({
+            historySize: 1,
+            inputMaxChars: 2,
+            inputMaxPrompts: 3,
+            attachmentName: 'some_attachment_name',
+            attachmentContext: 'some attachment context',
+          });
+          expect(configurationNotCached).to.deepEqualInstance(expectedConfiguration);
           expect(configurationNotCached).to.deep.equal(configurationCached);
           expect(llmApiScopeShouldBeCalled.isDone()).to.be.true;
           expect(llmApiScopeShouldNOTBeCalled.isDone()).to.be.false;
+        });
+        context('when cached configuration is not versioned', function () {
+          it('should return the configuration from the cache in new version format', async function () {
+            // given
+            await configurationTemporaryStorage.save({
+              key: 'unIdDeConfiguration',
+              value: {
+                llm: { historySize: 1 },
+                challenge: { inputMaxChars: 2, inputMaxPrompts: 3 },
+                attachment: { name: 'some_attachment_name', context: 'some attachment context' },
+              },
+            });
+
+            const llmApiScopeShouldNOTBeCalled = nock('https://llm-test.pix.fr/api')
+              .get('/configurations/unIdDeConfiguration')
+              .twice()
+              .reply(500, { err: 'I SHOULD NOT BE CALLED' });
+
+            // when
+            const configurationCached = await get('unIdDeConfiguration');
+
+            // then
+            const expectedConfiguration = new Configuration({
+              id: 'unIdDeConfiguration',
+              historySize: 1,
+              inputMaxChars: 2,
+              inputMaxPrompts: 3,
+              attachmentName: 'some_attachment_name',
+              attachmentContext: 'some attachment context',
+            });
+
+            expect(configurationCached).to.deepEqualInstance(expectedConfiguration);
+            expect(configurationCached.toDTO()).to.deep.equal(expectedConfiguration.toDTO());
+            expect(llmApiScopeShouldNOTBeCalled.isDone()).to.be.false;
+          });
         });
       });
     });

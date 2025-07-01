@@ -124,6 +124,24 @@ describe('Integration | API | Controller Error', function () {
       expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
       expect(responseDetail(response)).to.equal('Must provide a user ID to use LLM API');
     });
+
+    it('responds Bad Request when a LLMDomainErrors.NoAttachmentNeededError error occurs', async function () {
+      routeHandler.throws(new LLMDomainErrors.NoAttachmentNeededError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
+      expect(responseDetail(response)).to.equal(
+        'Attachment has been provided but is not expected for the given configuration',
+      );
+    });
+
+    it('responds Bad Request when a LLMDomainErrors.NoAttachmentNorMessageProvidedError error occurs', async function () {
+      routeHandler.throws(new LLMDomainErrors.NoAttachmentNorMessageProvidedError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
+      expect(responseDetail(response)).to.equal('At least a message or an attachment, if applicable, must be provided');
+    });
   });
 
   context('403 Forbidden', function () {

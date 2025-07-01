@@ -9,6 +9,7 @@ describe('Unit | Devcomp | Domain | UseCases | prompt-to-llm-chat', function () 
   const passageId = 123456;
   const userId = 456789;
   const prompt = 'message entrée';
+  const attachmentName = 'attachment.pdf';
 
   beforeEach(function () {
     llmApi = {
@@ -50,13 +51,109 @@ describe('Unit | Devcomp | Domain | UseCases | prompt-to-llm-chat', function () 
         }),
       );
       const stream = Symbol('le stream de réponse du LLM');
-      llmApi.prompt.withArgs({ chatId, userId, message: prompt }).resolves(stream);
+      llmApi.prompt.withArgs({ chatId, userId, message: prompt, attachmentName }).resolves(stream);
 
       // when
-      const actualStream = await promptToLLMChat({ chatId, passageId, userId, prompt, llmApi, passageRepository });
+      const actualStream = await promptToLLMChat({
+        chatId,
+        passageId,
+        userId,
+        prompt,
+        attachmentName,
+        llmApi,
+        passageRepository,
+      });
 
       // then
       expect(actualStream).to.deep.equal(stream);
+    });
+    it('should coerce falsy values of attachmentName', async function () {
+      // given
+      passageRepository.get.withArgs({ passageId }).resolves(
+        new Passage({
+          id: passageId,
+          userId,
+        }),
+      );
+      const stream = Symbol('le stream de réponse du LLM');
+      llmApi.prompt.withArgs({ chatId, userId, message: prompt, attachmentName: null }).resolves(stream);
+
+      // when
+      const actualStream_null = await promptToLLMChat({
+        chatId,
+        passageId,
+        userId,
+        prompt,
+        attachmentName: null,
+        llmApi,
+        passageRepository,
+      });
+      const actualStream_undefined = await promptToLLMChat({
+        chatId,
+        passageId,
+        userId,
+        prompt,
+        llmApi,
+        passageRepository: passageRepository,
+      });
+      const actualStream_empty = await promptToLLMChat({
+        chatId,
+        passageId,
+        userId,
+        prompt,
+        attachmentName: '',
+        llmApi,
+        passageRepository: passageRepository,
+      });
+
+      // then
+      expect(actualStream_null).to.deep.equal(stream);
+      expect(actualStream_undefined).to.deep.equal(stream);
+      expect(actualStream_empty).to.deep.equal(stream);
+    });
+    it('should coerce falsy values of prompt', async function () {
+      // given
+      passageRepository.get.withArgs({ passageId }).resolves(
+        new Passage({
+          id: passageId,
+          userId,
+        }),
+      );
+      const stream = Symbol('le stream de réponse du LLM');
+      llmApi.prompt.withArgs({ chatId, userId, message: null, attachmentName }).resolves(stream);
+
+      // when
+      const actualStream_null = await promptToLLMChat({
+        chatId,
+        passageId,
+        userId,
+        prompt: null,
+        attachmentName,
+        llmApi,
+        passageRepository: passageRepository,
+      });
+      const actualStream_undefined = await promptToLLMChat({
+        chatId,
+        passageId,
+        userId,
+        attachmentName,
+        llmApi,
+        passageRepository: passageRepository,
+      });
+      const actualStream_empty = await promptToLLMChat({
+        chatId,
+        passageId,
+        userId,
+        prompt: '',
+        attachmentName,
+        llmApi,
+        passageRepository: passageRepository,
+      });
+
+      // then
+      expect(actualStream_null).to.deep.equal(stream);
+      expect(actualStream_undefined).to.deep.equal(stream);
+      expect(actualStream_empty).to.deep.equal(stream);
     });
   });
 });

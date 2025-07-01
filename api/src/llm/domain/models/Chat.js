@@ -1,41 +1,101 @@
 export class Chat {
-  constructor({ id, configurationId, attachmentName, attachmentContext, messages = [] }) {
+  /**
+   * @constructor
+   * @param {Object} params
+   * @param {string} params.id
+   * @param {string} params.configurationId
+   * @param {Boolean} params.hasAttachmentContextBeenAdded
+   * @param {Array<Message>} params.messages
+   */
+  constructor({ id, configurationId, hasAttachmentContextBeenAdded, messages = [] }) {
     this.id = id;
     this.configurationId = configurationId;
+    this.hasAttachmentContextBeenAdded = hasAttachmentContextBeenAdded;
     this.messages = messages;
-    this.attachmentName = attachmentName;
-    this.attachmentContext = attachmentContext;
   }
 
+  /**
+   * @param {string|null} message
+   * @returns {void}
+   */
   addUserMessage(message) {
-    this.messages.push(new Message({ content: message, isFromUser: true }));
+    if (message) {
+      this.messages.push(new Message({ content: message, isFromUser: true }));
+    }
   }
 
+  /**
+   * @param {string} attachmentName
+   * @param {string} attachmentContext
+   * @returns {void}
+   */
+  addAttachmentContextMessages(attachmentName, attachmentContext) {
+    if (!this.hasAttachmentContextBeenAdded) {
+      const userContent = `
+<system_notification>
+  L'utilisateur a téléversé une pièce jointe :
+  <attachment_name>
+    ${attachmentName}
+  </attachment_name>
+</system_notification>`;
+      this.messages.push(new Message({ content: userContent, isFromUser: true }));
+      const llmContent = `
+<read_attachment_tool>
+  Lecture de la pièce jointe, ${attachmentName} :
+  <attachment_content>
+    ${attachmentContext}
+  </attachment_content>
+</read_attachment_tool>`;
+      this.messages.push(new Message({ content: llmContent, isFromUser: false }));
+      this.hasAttachmentContextBeenAdded = true;
+    }
+  }
+
+  /**
+   * @param {string|null} message
+   * @returns {void}
+   */
   addLLMMessage(message) {
-    this.messages.push(new Message({ content: message, isFromUser: false }));
+    if (message) {
+      this.messages.push(new Message({ content: message, isFromUser: false }));
+    }
   }
 
+  /**
+   * @returns {number}
+   */
   get currentPromptsCount() {
     return this.messages.filter((message) => message.isFromUser).length;
   }
 
+  /**
+   * @returns {Object}
+   */
   toDTO() {
     return {
       id: this.id,
       configurationId: this.configurationId,
-      attachmentName: this.attachmentName,
-      attachmentContext: this.attachmentContext,
+      hasAttachmentContextBeenAdded: this.hasAttachmentContextBeenAdded,
       messages: this.messages.map((message) => message.toDTO()),
     };
   }
 }
 
 export class Message {
+  /**
+   * @constructor
+   * @param {Object} params
+   * @param {string} params.content
+   * @param {Boolean} params.isFromUser
+   */
   constructor({ content, isFromUser }) {
     this.content = content;
     this.isFromUser = isFromUser;
   }
 
+  /**
+   * @returns {Object}
+   */
   toDTO() {
     return {
       content: this.content,

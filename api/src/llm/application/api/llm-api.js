@@ -3,6 +3,8 @@ import {
   ChatNotFoundError,
   ConfigurationNotFoundError,
   MaxPromptsReachedError,
+  NoAttachmentNeededError,
+  NoAttachmentNorMessageProvidedError,
   NoUserIdProvidedError,
   TooLargeMessageInputError,
 } from '../../domain/errors.js';
@@ -10,6 +12,7 @@ import { Chat } from '../../domain/models/Chat.js';
 import * as chatRepository from '../../infrastructure/repositories/chat-repository.js';
 import * as configurationRepository from '../../infrastructure/repositories/configuration-repository.js';
 import * as promptRepository from '../../infrastructure/repositories/prompt-repository.js';
+import * as toEventStream from '../../infrastructure/streaming/to-event-stream.js';
 import { LLMChatDTO } from './models/LLMChatDTO.js';
 
 /**
@@ -38,20 +41,18 @@ export async function startChat({ configId, userId }) {
   }
   const configuration = await configurationRepository.get(configId);
   const chatId = generateId(userId);
-  const { name: attachmentName, context: attachmentContext } = getAttachmentContextAndName(configuration);
   const newChat = new Chat({
     id: chatId,
-    configurationId: configId,
-    attachmentName,
-    attachmentContext,
+    configurationId: configuration.id,
+    hasAttachmentContextBeenAdded: false,
     messages: [],
   });
   await chatRepository.save(newChat);
   return new LLMChatDTO({
     id: newChat.id,
-    attachmentName,
-    inputMaxChars: getInputMaxCharsFromConfiguration(configuration),
-    inputMaxPrompts: getInputMaxPromptsFromConfiguration(configuration),
+    attachmentName: configuration.attachmentName,
+    inputMaxChars: configuration.inputMaxChars,
+    inputMaxPrompts: configuration.inputMaxPrompts,
   });
 }
 
@@ -68,10 +69,11 @@ export async function startChat({ configId, userId }) {
  * @param {Object} params
  * @param {string} params.chatId
  * @param {string} params.userId
- * @param {string} params.message
+ * @param {string|null|undefined} params.message
+ * @param {string|null|undefined} params.attachmentName
  * @returns {Promise<module:stream.internal.PassThrough>}
  */
-export async function prompt({ chatId, userId, message }) {
+export async function prompt({ chatId, userId, message, attachmentName }) {
   if (!chatId) {
     throw new ChatNotFoundError('null id provided');
   }
@@ -79,38 +81,43 @@ export async function prompt({ chatId, userId, message }) {
   if (!userId || !chat.id.startsWith(userId)) {
     throw new ChatForbiddenError();
   }
-  const configuration = await configurationRepository.get(chat.configurationId);
-  if (message.length > getInputMaxCharsFromConfiguration(configuration)) {
-    throw new TooLargeMessageInputError();
+  if (!attachmentName && !message) {
+    throw new NoAttachmentNorMessageProvidedError();
   }
-  if (chat.currentPromptsCount >= getInputMaxPromptsFromConfiguration(configuration)) {
-    throw new MaxPromptsReachedError();
+  const configuration = await configurationRepository.get(chat.configurationId);
+  if (attachmentName && !configuration.hasAttachment) {
+    throw new NoAttachmentNeededError();
+  }
+  if (attachmentName && attachmentName === configuration.attachmentName) {
+    chat.addAttachmentContextMessages(configuration.attachmentName, configuration.attachmentContext);
+  }
+  let readableStream = null;
+  if (message) {
+    if (message.length > configuration.inputMaxChars) {
+      throw new TooLargeMessageInputError();
+    }
+    // TODO quelque chose cloche avec cette histoire de -1 sur les prompts
+    if (chat.currentPromptsCount >= configuration.inputMaxPrompts) {
+      throw new MaxPromptsReachedError();
+    }
+
+    readableStream = await promptRepository.prompt({
+      message,
+      configuration,
+      chat,
+    });
   }
 
-  return promptRepository.prompt({
-    message,
-    configuration,
-    chat,
+  return toEventStream.fromLLMResponse({
+    llmResponse: readableStream,
     onLLMResponseReceived: addMessagesToChat(chat, message, chatRepository),
+    shouldSendAttachmentEventMessage: Boolean(attachmentName),
   });
 }
 
 function generateId(userId) {
   const nowMs = new Date().getMilliseconds();
   return `${userId}-${nowMs}`;
-}
-
-function getInputMaxCharsFromConfiguration(configuration) {
-  return configuration.challenge.inputMaxChars;
-}
-
-function getInputMaxPromptsFromConfiguration(configuration) {
-  const inputMaxPrompts = configuration.challenge.inputMaxPrompts;
-  return configuration.attachment?.name ? inputMaxPrompts - 1 : inputMaxPrompts;
-}
-
-function getAttachmentContextAndName(configuration) {
-  return configuration.attachment ?? { name: null, context: null };
 }
 
 function addMessagesToChat(chat, prompt, chatRepository) {

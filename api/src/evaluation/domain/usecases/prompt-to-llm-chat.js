@@ -1,8 +1,21 @@
 import { DomainError } from '../../../shared/domain/errors.js';
 
-export async function promptToLLMChat({ userId, assessmentId, chatId, prompt, llmApi, assessmentRepository }) {
+export async function promptToLLMChat({
+  userId,
+  assessmentId,
+  chatId,
+  prompt,
+  attachmentName,
+  llmApi,
+  assessmentRepository,
+}) {
   await checkIfAssessmentBelongsToUser(assessmentId, userId, assessmentRepository);
-  return llmApi.prompt({ chatId, userId, message: prompt });
+  return llmApi.prompt({
+    chatId,
+    userId,
+    message: prompt || null,
+    attachmentName: attachmentName || null,
+  });
 }
 
 async function checkIfAssessmentBelongsToUser(assessmentId, userId, assessmentRepository) {

@@ -34,9 +34,9 @@ const startEmbedLlmChat = async function (request, h, { usecases } = { usecases:
 
 const promptToLLMChat = async function (request, h, { usecases } = { usecases: evaluationUsecases }) {
   const { assessmentId, chatId } = request.params;
-  const { prompt } = request.payload;
+  const { prompt, attachmentName } = request.payload;
   const userId = request.auth.credentials.userId;
-  const llmResponse = await usecases.promptToLLMChat({ assessmentId, chatId, userId, prompt });
+  const llmResponse = await usecases.promptToLLMChat({ assessmentId, chatId, userId, prompt, attachmentName });
   return h.response(llmResponse).type('text/event-stream').code(201);
 };
 
