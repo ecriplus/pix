@@ -1,5 +1,27 @@
 # Pix Changelog
 
+# [5.147.0](https://github.com/1024pix/pix/compare/v5.146.0...v5.147.0) (2025-07-01)
+
+### :rocket: Amélioration
+
+- [#12699](https://github.com/1024pix/pix/pull/12699) : modif url vidéo Einstein dans module ia-deepfakes 
+- [#12630](https://github.com/1024pix/pix/pull/12630) Ajouter le contexte de la pièce jointe correspondante lors d'une conversation avec LLM si l'utilisateur transmet la bonne pièce jointe (PIX-18334) 
+- [#12690](https://github.com/1024pix/pix/pull/12690) Migration BDD ajouter une colonne "code" et une colonne "organizationId" à la table "quests" (PIX-18466) 
+
+### :bug: Correction
+
+- [#12703](https://github.com/1024pix/pix/pull/12703) Corriger le numéro de version dans le workflow de release 
+
+### :building_construction: Tech
+
+- [#12678](https://github.com/1024pix/pix/pull/12678) Ajoute la notion de "VerifiedCode" pour pouvoir distinguer les campagnes des parcours combinés. 
+- [#12701](https://github.com/1024pix/pix/pull/12701) Permettre de spécifier quelle release récupérer côté PixApi lorsqu'un ID de release est renseigné dans une variable d'env 
+- [#12705](https://github.com/1024pix/pix/pull/12705) Récupérer la réponse à une épreuve uniquement lorsqu'on affiche une épreuve déjà répondue 
+
+### :arrow_up: Montée de version
+
+- [#12714](https://github.com/1024pix/pix/pull/12714) MàJ de @1024pix/epreuves-components
+
 # [5.146.0](https://github.com/1024pix/pix/compare/v5.145.0...v5.146.0) (2025-06-30)
 
 ### :rocket: Amélioration
