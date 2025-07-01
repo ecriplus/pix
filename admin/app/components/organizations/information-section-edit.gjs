@@ -9,7 +9,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
-import { notEq, or } from 'ember-truth-helpers';
+import { and, eq, notEq, or } from 'ember-truth-helpers';
 import lodashGet from 'lodash/get';
 import lodashSet from 'lodash/set';
 import Organization from 'pix-admin/models/organization';
@@ -21,6 +21,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
 
   @tracked isEditMode = false;
   @tracked showArchivingConfirmationModal = false;
+  @tracked toggleLockPlaces = false;
 
   noIdentityProviderOption = { label: 'Aucun', value: 'None' };
   garIdentityProviderOption = { label: 'GAR', value: 'GAR' };
@@ -28,6 +29,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
   constructor() {
     super(...arguments);
     this._initForm();
+
+    this.toggleLockPlaces = this.form.features['PLACES_MANAGEMENT']?.active ?? false;
   }
 
   get isManagingStudentAvailable() {
@@ -58,6 +61,10 @@ export default class OrganizationInformationSectionEditionMode extends Component
 
   @action
   updateFormCheckBoxValue(key) {
+    if (key === 'features.PLACES_MANAGEMENT.active') {
+      this.toggleLockPlaces = !lodashGet(this.form, key);
+    }
+
     lodashSet(this.form, key, !lodashGet(this.form, key));
   }
 
@@ -221,6 +228,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
           @features={{this.form.features}}
           @updateFormCheckBoxValue={{this.updateFormCheckBoxValue}}
           @isManagingStudentAvailable={{this.isManagingStudentAvailable}}
+          @toggleLockPlaces={{this.toggleLockPlaces}}
         />
 
         <div class="form-actions">
@@ -252,6 +260,19 @@ const FeaturesForm = <template>
             @checked={{organizationFeature.active}}
             {{on "change" (fn @updateFormCheckBoxValue (concat "features." feature ".active"))}}
           ><:label>{{t featureLabel}}</:label></PixCheckbox>
+        </div>
+      {{/if}}
+      {{#if (and (eq feature "PLACES_MANAGEMENT") @toggleLockPlaces)}}
+        <div class="form-field">
+          <PixCheckbox
+            @checked={{organizationFeature.params.enablePlacesThresholdLock}}
+            {{on
+              "change"
+              (fn @updateFormCheckBoxValue (concat "features." feature ".params.enablePlacesThresholdLock"))
+            }}
+          ><:label>{{t
+                "components.organizations.information-section-view.features.ORGANIZATION_PLACES_LOCK"
+              }}</:label></PixCheckbox>
         </div>
       {{/if}}
     {{/let}}
