@@ -5,6 +5,7 @@
  *
  * @typedef {import('../../../session-management/domain/usecases/index.js').CertificationReportRepository} CertificationReportRepository
  */
+import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import {
   SessionAlreadyFinalizedError,
   SessionWithAbortReasonOnCompletedCertificationCourseError,
@@ -13,80 +14,82 @@ import {
 } from '../errors.js';
 import { SessionFinalized } from '../read-models/SessionFinalized.js';
 
-/**
- * @param {Object} params
- * @param {SessionRepository} params.sessionRepository
- * @param {CertificationCourseRepository} params.certificationCourseRepository
- * @param {CertificationReportRepository} params.certificationReportRepository
- * @return {Promise<SessionFinalized>}
- */
-const finalizeSession = async function ({
-  sessionId,
-  examinerGlobalComment,
-  certificationReports,
-  sessionRepository,
-  certificationCourseRepository,
-  certificationReportRepository,
-  hasIncident,
-  hasJoiningIssue,
-}) {
-  const isSessionAlreadyFinalized = await sessionRepository.isFinalized({ id: sessionId });
-
-  const hasNoStartedCertification = await sessionRepository.hasNoStartedCertification({ id: sessionId });
-
-  const uncompletedCertificationCount = await sessionRepository.countUncompletedCertificationsAssessment({
-    id: sessionId,
-  });
-
-  const abortReasonCount = _countAbortReasons(certificationReports);
-
-  if (isSessionAlreadyFinalized) {
-    throw new SessionAlreadyFinalizedError();
-  }
-
-  if (hasNoStartedCertification) {
-    throw new SessionWithoutStartedCertificationError();
-  }
-
-  if (_hasMissingAbortReasonForUncompletedCertificationCourse({ abortReasonCount, uncompletedCertificationCount })) {
-    throw new SessionWithMissingAbortReasonError();
-  }
-
-  if (
-    _hasAbortReasonForCompletedCertificationCourse({
-      abortReasonCount,
-      uncompletedCertificationCount,
-    })
-  ) {
-    await _removeAbortReasonFromCompletedCertificationCourses({
-      certificationCourseRepository,
-      certificationReports,
-      sessionId,
-    });
-
-    throw new SessionWithAbortReasonOnCompletedCertificationCourseError();
-  }
-
-  certificationReports.forEach((certifReport) => certifReport.validateForFinalization());
-
-  await certificationReportRepository.finalizeAll({ certificationReports });
-
-  const finalizedSession = await sessionRepository.finalize({
-    id: sessionId,
+const finalizeSession = withTransaction(
+  /**
+   * @param {Object} params
+   * @param {SessionRepository} params.sessionRepository
+   * @param {CertificationCourseRepository} params.certificationCourseRepository
+   * @param {CertificationReportRepository} params.certificationReportRepository
+   * @return {Promise<SessionFinalized>}
+   */
+  async function ({
+    sessionId,
     examinerGlobalComment,
+    certificationReports,
+    sessionRepository,
+    certificationCourseRepository,
+    certificationReportRepository,
     hasIncident,
     hasJoiningIssue,
-  });
+  }) {
+    const isSessionAlreadyFinalized = await sessionRepository.isFinalized({ id: sessionId });
 
-  return new SessionFinalized({
-    sessionId,
-    finalizedAt: finalizedSession.finalizedAt,
-    hasExaminerGlobalComment: Boolean(examinerGlobalComment),
-    certificationCenterName: finalizedSession.certificationCenter,
-    sessionDate: finalizedSession.date,
-    sessionTime: finalizedSession.time,
-  });
-};
+    const hasNoStartedCertification = await sessionRepository.hasNoStartedCertification({ id: sessionId });
+
+    const uncompletedCertificationCount = await sessionRepository.countUncompletedCertificationsAssessment({
+      id: sessionId,
+    });
+
+    const abortReasonCount = _countAbortReasons(certificationReports);
+
+    if (isSessionAlreadyFinalized) {
+      throw new SessionAlreadyFinalizedError();
+    }
+
+    if (hasNoStartedCertification) {
+      throw new SessionWithoutStartedCertificationError();
+    }
+
+    if (_hasMissingAbortReasonForUncompletedCertificationCourse({ abortReasonCount, uncompletedCertificationCount })) {
+      throw new SessionWithMissingAbortReasonError();
+    }
+
+    if (
+      _hasAbortReasonForCompletedCertificationCourse({
+        abortReasonCount,
+        uncompletedCertificationCount,
+      })
+    ) {
+      await _removeAbortReasonFromCompletedCertificationCourses({
+        certificationCourseRepository,
+        certificationReports,
+        sessionId,
+      });
+
+      throw new SessionWithAbortReasonOnCompletedCertificationCourseError();
+    }
+
+    certificationReports.forEach((certifReport) => certifReport.validateForFinalization());
+
+    await certificationReportRepository.finalizeAll({ certificationReports });
+
+    const finalizedSession = await sessionRepository.finalize({
+      id: sessionId,
+      examinerGlobalComment,
+      hasIncident,
+      hasJoiningIssue,
+    });
+
+    return new SessionFinalized({
+      sessionId,
+      finalizedAt: finalizedSession.finalizedAt,
+      hasExaminerGlobalComment: Boolean(examinerGlobalComment),
+      certificationCenterName: finalizedSession.certificationCenter,
+      sessionDate: finalizedSession.date,
+      sessionTime: finalizedSession.time,
+    });
+  },
+);
 
 export { finalizeSession };
 
