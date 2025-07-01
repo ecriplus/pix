@@ -31,7 +31,8 @@ export async function getNextChallenge({
   if (waitingForLatestChallengeAnswer) {
     nextChallenge = await challengeRepository.get(assessment.lastChallengeId);
     if (nextChallenge.isOperative) {
-      return nextChallenge;
+      assessment.nextChallenge = nextChallenge;
+      return assessment;
     } else {
       nextChallenge = null;
     }
@@ -65,8 +66,9 @@ export async function getNextChallenge({
       lastChallengeId: nextChallenge.id,
     });
   }
+  assessment.nextChallenge = nextChallenge;
 
-  return nextChallenge;
+  return assessment;
 }
 
 function checkIfLatestChallengeOfAssessmentIsAwaitingToBeAnswered({ answers, lastChallengeId }) {

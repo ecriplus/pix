@@ -112,7 +112,25 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
       });
     });
 
-    context('latest challenge asked', function () {
+    context('when assessment is started', function () {
+      it('should return an Assessment', async function () {
+        const assessment = domainBuilder.buildAssessment({
+          state: Assessment.states.STARTED,
+          type: Assessment.types.PREVIEW,
+          lastChallengeId: null,
+        });
+        assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
+        assessmentRepository_updateLastQuestionDateStub.resolves();
+        assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
+        const challenge = domainBuilder.buildChallenge({ id: 'challengeForPreview' });
+        evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves(challenge);
+        answerRepository_findByAssessmentStub.withArgs(assessment.id).resolves([domainBuilder.buildAnswer()]);
+
+        const assessmentWithNextChallenge = await getNextChallenge(dependencies);
+
+        expect(assessmentWithNextChallenge).to.deepEqualInstance(assessment);
+      });
+
       context('when there are no challenge saved as latest challenge asked in assessment', function () {
         it('should compute next challenge', async function () {
           const assessment = domainBuilder.buildAssessment({
@@ -127,9 +145,9 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves(challenge);
           answerRepository_findByAssessmentStub.withArgs(assessment.id).resolves([domainBuilder.buildAnswer()]);
 
-          const actualNextChallenge = await getNextChallenge(dependencies);
+          const assessmentWithNextChallenge = await getNextChallenge(dependencies);
 
-          expect(actualNextChallenge).to.deepEqualInstance(challenge);
+          expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
         });
       });
 
@@ -149,9 +167,9 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             .withArgs(assessment.id)
             .resolves([domainBuilder.buildAnswer({ challengeId: 'previousChallengeId' })]);
 
-          const actualNextChallenge = await getNextChallenge(dependencies);
+          const assessmentWithNextChallenge = await getNextChallenge(dependencies);
 
-          expect(actualNextChallenge).to.deepEqualInstance(challenge);
+          expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
         });
       });
 
@@ -178,9 +196,9 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
               ]);
             challengeRepository_getStub.withArgs('previousChallengeId').resolves(previousChallenge);
 
-            const actualNextChallenge = await getNextChallenge(dependencies);
+            const assessmentWithNextChallenge = await getNextChallenge(dependencies);
 
-            expect(actualNextChallenge).to.deepEqualInstance(previousChallenge);
+            expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(previousChallenge);
           });
         });
 
@@ -203,9 +221,9 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             answerRepository_findByAssessmentStub.withArgs(assessment.id).resolves([]);
             challengeRepository_getStub.withArgs('previousChallengeId').resolves(previousChallenge);
 
-            const actualNextChallenge = await getNextChallenge(dependencies);
+            const assessmentWithNextChallenge = await getNextChallenge(dependencies);
 
-            expect(actualNextChallenge).to.deepEqualInstance(challenge);
+            expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
           });
         });
       });
@@ -229,9 +247,9 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         it('should call usecase and return value from preview usecase', async function () {
           const challenge = domainBuilder.buildChallenge({ id: 'challengeForPreview' });
           evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves(challenge);
-          const actualNextChallenge = await getNextChallenge(dependencies);
+          const assessmentWithNextChallenge = await getNextChallenge(dependencies);
 
-          expect(actualNextChallenge).to.deepEqualInstance(challenge);
+          expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
         });
       });
 
@@ -252,9 +270,9 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         it('should call usecase and return value from demo usecase', async function () {
           const challenge = domainBuilder.buildChallenge({ id: 'challengeForDemo' });
           evaluationUsecases_getNextChallengeForDemoStub.withArgs({ assessment }).resolves(challenge);
-          const actualNextChallenge = await getNextChallenge(dependencies);
+          const assessmentWithNextChallenge = await getNextChallenge(dependencies);
 
-          expect(actualNextChallenge).to.deepEqualInstance(challenge);
+          expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
         });
       });
 
@@ -277,9 +295,9 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           evaluationUsecases_getNextChallengeForCampaignAssessmentStub
             .withArgs({ assessment, locale })
             .resolves(challenge);
-          const actualNextChallenge = await getNextChallenge(dependencies);
+          const assessmentWithNextChallenge = await getNextChallenge(dependencies);
 
-          expect(actualNextChallenge).to.deepEqualInstance(challenge);
+          expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
         });
       });
 
@@ -302,9 +320,9 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           evaluationUsecases_getNextChallengeForCompetenceEvaluationStub
             .withArgs({ assessment, userId, locale })
             .resolves(challenge);
-          const actualNextChallenge = await getNextChallenge(dependencies);
+          const assessmentWithNextChallenge = await getNextChallenge(dependencies);
 
-          expect(actualNextChallenge).to.deepEqualInstance(challenge);
+          expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
         });
       });
 
@@ -328,9 +346,9 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           certificationEvaluationRepository_selectNextCertificationChallengeStub
             .withArgs({ assessmentId: assessment.id, locale })
             .resolves(challenge);
-          const actualNextChallenge = await getNextChallenge(dependencies);
+          const assessmentWithNextChallenge = await getNextChallenge(dependencies);
 
-          expect(actualNextChallenge).to.deepEqualInstance(challenge);
+          expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
         });
       });
 
@@ -350,9 +368,9 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         });
 
         it('should return null', async function () {
-          const actualNextChallenge = await getNextChallenge(dependencies);
+          const assessmentWithNextChallenge = await getNextChallenge(dependencies);
 
-          expect(actualNextChallenge).to.be.null;
+          expect(assessmentWithNextChallenge.nextChallenge).to.be.null;
         });
       });
     });
