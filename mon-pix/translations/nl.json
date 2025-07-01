@@ -574,6 +574,7 @@
           "title": "Meet je digitale vaardigheden met leuke leeruitdagingen die zich aanpassen aan je vaardigheidsniveau (met behulp van een adaptief algoritme)."
         },
         "legal": "Door op \"Ik begin\" te klikken, wordt informatie over je voortgang tijdens de cursus naar de cursusorganisator gestuurd zodat zij je kunnen ondersteunen. Als je aan het einde van de cursus op de knop \"Stuur mijn resultaten\" klikt, worden je resultaten naar de organisator gestuurd.",
+        "legal-with-auto-share": "Door op \"Ik begin\" te klikken, wordt informatie over je voortgang tijdens de cursus naar de cursusorganisator gestuurd zodat zij je kunnen ondersteunen. Aan het einde van je test worden je resultaten automatisch gedeeld met je organisatie.",
         "title": "Begin je Pix-reis",
         "title-with-username": "<span>{userFirstName},</span><br> ben je klaar om je vaardigheden te testen?"
       },

@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
@@ -10,6 +11,15 @@ import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
 module('Integration | Component | campaign-start-block', function (hooks) {
   setupIntlRenderingTest(hooks);
+
+  hooks.beforeEach(function () {
+    class FeatureTogglesStub extends Service {
+      featureToggles = {
+        isAutoShareEnabled: false,
+      };
+    }
+    this.owner.register('service:featureToggles', FeatureTogglesStub);
+  });
 
   module('When the organization has a logo and landing page text', function () {
     test('should display organization logo and landing page text', async function (assert) {
@@ -150,6 +160,24 @@ module('Integration | Component | campaign-start-block', function (hooks) {
           )
           .exists();
         assert.dom(screen.getByText(t('pages.campaign-landing.assessment.legal'))).exists();
+      });
+
+      test('should display legal with auto share', async function (assert) {
+        // given
+        class FeatureTogglesStub extends Service {
+          featureToggles = {
+            isAutoShareEnabled: true,
+          };
+        }
+        this.owner.register('service:featureToggles', FeatureTogglesStub);
+
+        // when
+        const screen = await render(
+          hbs`<CampaignStartBlock @campaign={{this.campaign}} @startCampaignParticipation={{this.startCampaignParticipation}} />`,
+        );
+
+        // then
+        assert.ok(screen.getByText(t('pages.campaign-landing.assessment.legal-with-auto-share')));
       });
 
       test('should display the userName', async function (assert) {

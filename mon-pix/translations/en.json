@@ -583,6 +583,7 @@
           "title": "Measure your digital skills with fun and educational challenges that adapt to your level of proficiency  (through an adaptive algorithm)."
         },
         "legal": "By clicking on “Begin“, information about your progress will be shared with the organiser so they can assist you if necessary. At the end of your customised test, your results will be shared with your organisation when clicking on “Submit my results“.",
+        "legal-with-auto-share": "By clicking on “Begin your test“, information about your progress will be shared with the organiser so they can assist you if necessary. At the end of your test, your results will be automatically shared with your organisation.",
         "title": "Begin your customised test",
         "title-with-username": "'<span>'{userFirstName}'</span>','<br>' ready to assess your digital skills?"
       },
