@@ -68,9 +68,7 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
 
       hooks.beforeEach(async function () {
         // given
-        assessment.update({
-          nextChallenge: this.server.create('challenge', 'forCompetenceEvaluation', 'QROC', 'withEmbed'),
-        });
+        this.server.create('challenge', 'forCompetenceEvaluation', 'QROC', 'withEmbed');
 
         // when
         screen = await visit(`/assessments/${assessment.id}/challenges/0`);
@@ -236,7 +234,7 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
       hooks.beforeEach(async function () {
         qrocWithFile1Challenge = this.server.create('challenge', 'forDemo', 'QROCwithFile1');
         qrocWithFile2Challenge = this.server.create('challenge', 'forDemo', 'QROCwithFile2');
-        assessment = this.server.create('assessment', 'ofDemoType');
+        assessment = this.server.create('assessment', 'ofDemoType', { nextChallenge: qrocWithFile1Challenge });
 
         await visit(`/assessments/${assessment.id}/challenges/0`);
       });
@@ -270,8 +268,8 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
 
   module('with text-area format', function (hooks) {
     hooks.beforeEach(async function () {
-      assessment = this.server.create('assessment', 'ofCompetenceEvaluationType');
       qrocChallenge = this.server.create('challenge', 'forCompetenceEvaluation', 'QROC', 'withTextArea');
+      assessment = this.server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: qrocChallenge });
     });
 
     module('When challenge is not already answered', function (hooks) {
@@ -387,8 +385,8 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
 
   module('with select format', function (hooks) {
     hooks.beforeEach(async function () {
-      assessment = this.server.create('assessment', 'ofCompetenceEvaluationType');
       qrocChallenge = this.server.create('challenge', 'forCompetenceEvaluation', 'QROCWithSelect');
+      assessment = this.server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: qrocChallenge });
     });
 
     module('When challenge is not already answered', function () {
