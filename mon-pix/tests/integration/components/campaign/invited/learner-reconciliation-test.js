@@ -140,7 +140,7 @@ module('Integration | Component | Campaign | Invited | learner-reconciliation', 
         );
         // when
         const button = screen.getByRole('button', { name: t('common.actions.lets-go') });
-        assert.false(button.hasAttribute('disabled'));
+        assert.false(button.hasAttribute('aria-disabled'));
       });
 
       test('should disable button', async function (assert) {
@@ -157,7 +157,7 @@ module('Integration | Component | Campaign | Invited | learner-reconciliation', 
         // when
         const form = screen.getByRole('form');
         const button = within(form).getByRole('button');
-        assert.true(button.hasAttribute('disabled'));
+        assert.true(button.hasAttribute('aria-disabled'));
       });
     });
 

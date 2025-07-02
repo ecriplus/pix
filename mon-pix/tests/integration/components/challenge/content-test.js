@@ -65,7 +65,7 @@ module('Integration | Component | Challenge | Content', function (hooks) {
       await click(screen.getByRole('button', { name: /Je passe/ }));
       assert
         .dom(screen.getByRole('button', { name: /Signaler un problème avec la question/ }))
-        .hasAttribute('disabled');
+        .hasAttribute('aria-disabled');
       assert.dom(screen.queryByRole('button', { name: /Oui, je suis/ })).doesNotExist();
     });
   });
@@ -81,7 +81,7 @@ module('Integration | Component | Challenge | Content', function (hooks) {
 
       assert
         .dom(screen.getByRole('button', { name: /Signaler un problème avec la question/ }))
-        .hasAttribute('disabled');
+        .hasAttribute('aria-disabled');
       assert.dom(screen.queryByRole('button', { name: /Oui, je suis/ })).doesNotExist();
     });
   });
