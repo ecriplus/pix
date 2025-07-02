@@ -160,6 +160,17 @@ const get = async function ({ organizationId }) {
         },
       };
     }
+
+    if (key === ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key) {
+      return {
+        ...features,
+        [key]: {
+          active: enabled,
+          params,
+        },
+      };
+    }
+
     return { ...features, [key]: { active: enabled, params: null } };
   }, {});
 
@@ -330,8 +341,8 @@ async function _enableFeatures(knexConn, featuresToEnable, organizationId) {
           params: _paramsForFeature(importFormats, key, featuresToEnable[key]),
         })),
     )
-    .onConflict()
-    .ignore();
+    .onConflict(['organizationId', 'featureId'])
+    .merge(['params']);
 }
 
 function _setSearchFiltersForQueryBuilder(qb, filter) {
@@ -357,6 +368,10 @@ function _paramsForFeature(importFormats, key, value) {
   if (key === ORGANIZATION_FEATURE.LEARNER_IMPORT.key) {
     const learnerImportFormat = importFormats.find(({ name }) => name === value.params.name);
     return { organizationLearnerImportFormatId: learnerImportFormat.id };
+  }
+
+  if (key === ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key) {
+    return { enablePlacesThresholdLock: value.params?.enablePlacesThresholdLock || false };
   }
 }
 

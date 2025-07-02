@@ -1170,6 +1170,96 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         const enabledFeatures = await knex('organization-features');
         expect(enabledFeatures).to.have.lengthOf(0);
       });
+
+      describe('PLACES_MANAGEMENT', function () {
+        let organization, placeManagementFeature;
+
+        beforeEach(async function () {
+          placeManagementFeature = databaseBuilder.factory.buildFeature({
+            key: ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key,
+          });
+          const userId = databaseBuilder.factory.buildUser({ firstName: 'Anne', lastName: 'Héantie' }).id;
+          organization = databaseBuilder.factory.buildOrganization({
+            name: 'super orga',
+            createdBy: userId,
+          });
+
+          await databaseBuilder.commit();
+        });
+
+        it('should insert new feature with given params', async function () {
+          // given && when
+          const organizationToUpdate = new OrganizationForAdmin({
+            id: organization.id,
+            documentationUrl: 'https://pix.fr/',
+            features: {
+              [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
+              [ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key]: {
+                active: true,
+                params: { enablePlacesThresholdLock: true },
+              },
+            },
+          });
+          await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
+
+          //then
+          const enabledFeatures = await knex('organization-features');
+          expect(enabledFeatures).lengthOf(1);
+          expect(enabledFeatures[0].params).deep.equal({ enablePlacesThresholdLock: true });
+        });
+
+        it('by default, should insert new feature with falsy enablePlacesThresholdLock param', async function () {
+          // given && when
+          const organizationToUpdate = new OrganizationForAdmin({
+            id: organization.id,
+            documentationUrl: 'https://pix.fr/',
+            features: {
+              [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
+              [ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key]: {
+                active: true,
+                params: null,
+              },
+            },
+          });
+
+          await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
+
+          //then
+          const enabledFeatures = await knex('organization-features');
+          expect(enabledFeatures).lengthOf(1);
+          expect(enabledFeatures[0].params).deep.equal({ enablePlacesThresholdLock: false });
+        });
+
+        it('should be possible to update enablePlacesThresholdLock param value', async function () {
+          // given && when
+          databaseBuilder.factory.buildOrganizationFeature({
+            featureId: placeManagementFeature.id,
+            organizationId: organization.id,
+            params: { enablePlacesThresholdLock: false },
+          });
+
+          await databaseBuilder.commit();
+
+          const organizationToUpdate = new OrganizationForAdmin({
+            id: organization.id,
+            documentationUrl: 'https://pix.fr/',
+            features: {
+              [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
+              [ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key]: {
+                active: true,
+                params: { enablePlacesThresholdLock: true },
+              },
+            },
+          });
+
+          await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
+
+          //then
+          const enabledFeatures = await knex('organization-features');
+          expect(enabledFeatures).lengthOf(1);
+          expect(enabledFeatures[0].params).deep.equal({ enablePlacesThresholdLock: true });
+        });
+      });
     });
 
     it('should create data protection officer', async function () {
