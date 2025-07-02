@@ -1,5 +1,38 @@
 # Pix Changelog
 
+# [5.148.0](https://github.com/1024pix/pix/compare/v5.147.0...v5.148.0) (2025-07-02)
+
+### :rocket: Amélioration
+
+- [#12717](https://github.com/1024pix/pix/pull/12717) : Ajout images sur asset Module IA vous avez dit IA ? 
+- [#12720](https://github.com/1024pix/pix/pull/12720) Déplacer le curseur sur l'étape en cours dans le didacticiel et rendre la navigation dans les étapes plus agréable au lecteur d'écran (PIX-18545) 
+- [#12712](https://github.com/1024pix/pix/pull/12712) Indiquer à l'utilisateur que ses résultats seront transmis automatiquement à la fin de son parcours (PIX-18482) 
+- [#12702](https://github.com/1024pix/pix/pull/12702) Ne pas afficher les méthodes de connexion SSO si l'utilisateur est anonyme (PIX-18505) 
+
+### :bug: Correction
+
+- [#12694](https://github.com/1024pix/pix/pull/12694) Corriger la largeur des colonnes en cas de mots longs sur Pix Certif (PIX-18501). 
+
+### :building_construction: Tech
+
+- [#12718](https://github.com/1024pix/pix/pull/12718) Réparer l'accès aux fichiers par Ember Inspector sur mon-pix 
+- [#12606](https://github.com/1024pix/pix/pull/12606) Supprimer la propriété "isComplementaryAlone" (PIX-18103). 
+- [#12518](https://github.com/1024pix/pix/pull/12518) Supprimer le feature toggle setupEchoSystemBeforeStart 
+
+### :arrow_up: Montée de version
+
+- [#12723](https://github.com/1024pix/pix/pull/12723) Update dependency @1024pix/eslint-plugin to ^2.1.6 (api) 
+- [#12724](https://github.com/1024pix/pix/pull/12724) Update dependency @1024pix/eslint-plugin to ^2.1.6 (audit-logger) 
+- [#12725](https://github.com/1024pix/pix/pull/12725) Update dependency @1024pix/eslint-plugin to ^2.1.6 (certif) 
+- [#12726](https://github.com/1024pix/pix/pull/12726) Update dependency @1024pix/eslint-plugin to ^2.1.6 (dossier racine) 
+- [#12727](https://github.com/1024pix/pix/pull/12727) Update dependency @1024pix/eslint-plugin to ^2.1.6 (e2e-playwright) 
+- [#12728](https://github.com/1024pix/pix/pull/12728) Update dependency @1024pix/eslint-plugin to ^2.1.6 (junior) 
+- [#12729](https://github.com/1024pix/pix/pull/12729) Update dependency @1024pix/eslint-plugin to ^2.1.6 (mon-pix) 
+- [#12730](https://github.com/1024pix/pix/pull/12730) Update dependency @1024pix/eslint-plugin to ^2.1.6 (orga) 
+- [#12687](https://github.com/1024pix/pix/pull/12687) Update dependency @1024pix/pix-ui to ^55.23.1 (admin) 
+- [#12688](https://github.com/1024pix/pix/pull/12688) Update dependency @1024pix/pix-ui to ^55.23.1 (certif) 
+- [#12698](https://github.com/1024pix/pix/pull/12698) Update dependency @1024pix/pix-ui to ^55.23.1 (junior)
+
 # [5.147.0](https://github.com/1024pix/pix/compare/v5.146.0...v5.147.0) (2025-07-01)
 
 ### :rocket: Amélioration
