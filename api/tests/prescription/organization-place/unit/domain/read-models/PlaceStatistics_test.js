@@ -1,5 +1,6 @@
 import { PlacesLot } from '../../../../../../src/prescription/organization-place/domain/read-models/PlacesLot.js';
 import { PlaceStatistics } from '../../../../../../src/prescription/organization-place/domain/read-models/PlaceStatistics.js';
+import { config } from '../../../../../../src/shared/config.js';
 import { expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | ReadModels | PlaceStatistics', function () {
@@ -220,6 +221,51 @@ describe('Unit | Domain | ReadModels | PlaceStatistics', function () {
       });
 
       expect(statistics.placesLotsTotal).to.equal(2);
+    });
+  });
+
+  describe('#hasReachMaximumPlacesWithThreshold', function () {
+    describe('when there is no occupied places', function () {
+      it('should return false', function () {
+        // when
+        const statistics = new PlaceStatistics({
+          placesLots: [{ count: 0, isActive: true }],
+          placeRepartition: { totalUnRegisteredParticipant: 0, totalRegisteredParticipant: 0 },
+        });
+
+        // then
+        expect(statistics.hasReachMaximumPlacesWithThreshold).to.be.false;
+      });
+    });
+
+    describe('when there are participant', function () {
+      it('should return true when maximum places count is reached', function () {
+        // given
+        sinon.stub(config.features, 'organizationPlacesManagementThreshold').value(0.1);
+
+        // when
+        const statistics = new PlaceStatistics({
+          placesLots: [{ count: 100, isActive: true }],
+          placeRepartition: { totalUnRegisteredParticipant: 10, totalRegisteredParticipant: 100 },
+        });
+
+        // then
+        expect(statistics.hasReachMaximumPlacesWithThreshold).to.be.true;
+      });
+
+      it('should return false when maximum places count is not reached', function () {
+        // given
+        sinon.stub(config.features, 'organizationPlacesManagementThreshold').value(0.1);
+
+        // when
+        const statistics = new PlaceStatistics({
+          placesLots: [{ count: 100, isActive: true }],
+          placeRepartition: { totalUnRegisteredParticipant: 10, totalRegisteredParticipant: 99 },
+        });
+
+        // then
+        expect(statistics.hasReachMaximumPlacesWithThreshold).to.be.false;
+      });
     });
   });
 });
