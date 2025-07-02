@@ -1,5 +1,15 @@
 # Pix Changelog
 
+## [5.148.1](https://github.com/1024pix/pix/compare/v5.148.0...v5.148.1) (2025-07-02)
+
+### :bug: Correction
+
+- [#12735](https://github.com/1024pix/pix/pull/12735) Corriger l'inscription au CLEA sur Pix Certif (PIX-18560). 
+
+### :building_construction: Tech
+
+- [#12643](https://github.com/1024pix/pix/pull/12643) PixAdmin - migrer les tests de composants de unitaire à integration (P2)
+
 # [5.148.0](https://github.com/1024pix/pix/compare/v5.147.0...v5.148.0) (2025-07-02)
 
 ### :rocket: Amélioration
