@@ -47,7 +47,7 @@ module('Acceptance | Challenge', function (hooks) {
     assert.dom(screen.getByText(challenge.instructions[1])).exists();
     assert.dom(screen.getByRole('button', { name: t('pages.challenge.actions.skip') })).exists();
     assert.dom(validateButton).exists();
-    assert.ok(validateButton.disabled);
+    assert.ok(validateButton.hasAttribute('aria-disabled'));
   });
 
   test('Should display the oralization button if learner has feature enabled', async function (assert) {

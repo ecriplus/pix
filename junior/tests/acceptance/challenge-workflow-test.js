@@ -28,7 +28,9 @@ module('Acceptance | Challenge workflow', function (hooks) {
       const screen = await visit(`/assessments/${assessment.id}/challenges`);
 
       // then
-      assert.dom(screen.getByRole('button', { name: t('pages.challenge.actions.check') })).isDisabled();
+      assert
+        .dom(screen.getByRole('button', { name: t('pages.challenge.actions.check') }))
+        .hasAttribute('aria-disabled');
     });
   });
 

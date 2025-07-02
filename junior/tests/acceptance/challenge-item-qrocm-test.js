@@ -48,7 +48,9 @@ module('Acceptance | Displaying a QROCM challenge', function (hooks) {
       await click(screen.getByRole('option', { name: 'a' }));
 
       // then
-      assert.dom(screen.getByRole('button', { name: t('pages.challenge.actions.check') })).isDisabled();
+      assert
+        .dom(screen.getByRole('button', { name: t('pages.challenge.actions.check') }))
+        .hasAttribute('aria-disabled');
     });
   });
 
@@ -60,7 +62,9 @@ module('Acceptance | Displaying a QROCM challenge', function (hooks) {
       await fillIn(screen.getByLabelText('prenom'), 'bob');
 
       // then
-      assert.dom(screen.getByRole('button', { name: t('pages.challenge.actions.check') })).isDisabled();
+      assert
+        .dom(screen.getByRole('button', { name: t('pages.challenge.actions.check') }))
+        .hasAttribute('aria-disabled');
     });
   });
 
@@ -76,7 +80,9 @@ module('Acceptance | Displaying a QROCM challenge', function (hooks) {
       await fillIn(screen.getByLabelText('prenom'), '');
 
       // then
-      assert.dom(screen.getByRole('button', { name: t('pages.challenge.actions.check') })).isDisabled();
+      assert
+        .dom(screen.getByRole('button', { name: t('pages.challenge.actions.check') }))
+        .hasAttribute('aria-disabled');
     });
   });
 });

@@ -13,7 +13,9 @@ module('Acceptance | Lesson workflow', function (hooks) {
       const screen = await visit(`/assessments/${assessment.id}/challenges`);
 
       // then
-      assert.dom(screen.getByRole('button', { name: t('pages.challenge.actions.continue') })).isDisabled();
+      assert
+        .dom(screen.getByRole('button', { name: t('pages.challenge.actions.continue') }))
+        .hasAttribute('aria-disabled');
     });
   });
 });

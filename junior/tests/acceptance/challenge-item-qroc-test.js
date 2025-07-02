@@ -42,7 +42,9 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
         await fillIn(screen.getByLabelText('Rue de :'), '');
 
         // then
-        assert.dom(screen.getByRole('button', { name: t('pages.challenge.actions.check') })).isDisabled();
+        assert
+          .dom(screen.getByRole('button', { name: t('pages.challenge.actions.check') }))
+          .hasAttribute('aria-disabled');
       });
     });
 
@@ -141,7 +143,9 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
         await fillIn(textArea, '');
 
         // then
-        assert.dom(screen.getByRole('button', { name: t('pages.challenge.actions.check') })).isDisabled();
+        assert
+          .dom(screen.getByRole('button', { name: t('pages.challenge.actions.check') }))
+          .hasAttribute('aria-disabled');
       });
     });
   });

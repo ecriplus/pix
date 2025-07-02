@@ -46,7 +46,9 @@ module('Acceptance | Displaying a QCM challenge', function (hooks) {
       await click(screen.getByRole('checkbox', { name: 'Profil 1' }));
 
       // then
-      assert.dom(screen.getByRole('button', { name: t('pages.challenge.actions.check') })).isDisabled();
+      assert
+        .dom(screen.getByRole('button', { name: t('pages.challenge.actions.check') }))
+        .hasAttribute('aria-disabled');
     });
   });
 
