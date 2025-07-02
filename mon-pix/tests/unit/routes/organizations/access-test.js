@@ -12,8 +12,10 @@ module('Unit | Route | Access', function (hooks) {
 
   hooks.beforeEach(function () {
     organization = {
-      campaign: {
-        organizationId: 1,
+      verifiedCode: {
+        id: 'CAMPAIGN_CODE',
+        type: 'campaign',
+        campaign: { isSimplifiedAccess: false },
       },
       organizationToJoin: {
         id: 1,
@@ -193,7 +195,7 @@ module('Unit | Route | Access', function (hooks) {
         // given
         const sessionStub = stubSessionService(this.owner, { isAuthenticated: false });
         route.session = sessionStub;
-        organization.campaign.isSimplifiedAccess = true;
+        organization.verifiedCode.campaign.isSimplifiedAccess = true;
         route.session.isAuthenticated = false;
 
         // when

@@ -15,13 +15,13 @@ export default class AccessRoute extends Route {
     return { doNotTrackPage: true };
   }
 
-  beforeModel(transition) {
+  async beforeModel(transition) {
     if (!transition.from) {
       return this.router.replaceWith('campaigns.entry-point');
     }
 
     this.authenticationRoute = 'inscription';
-    const { organizationToJoin, campaign } = this.modelFor('organizations');
+    const { organizationToJoin, verifiedCode } = this.modelFor('organizations');
     const identityProviderToVisit = this.oidcIdentityProviders.list.find((identityProvider) => {
       const isUserLoggedInToIdentityProvider =
         get(this.session, 'data.authenticated.identityProviderCode') === identityProvider.code;
@@ -37,7 +37,7 @@ export default class AccessRoute extends Route {
       this.authenticationRoute = 'organizations.join.student-sco';
     } else if (this._shouldJoinFromMediacentre(organizationToJoin)) {
       this.authenticationRoute = 'organizations.join.sco-mediacentre';
-    } else if (this._shouldJoinSimplifiedCampaignAsAnonymous(campaign)) {
+    } else if (await this._shouldJoinSimplifiedCampaignAsAnonymous(verifiedCode)) {
       this.authenticationRoute = 'organizations.join.anonymous';
     }
     this.session.requireAuthenticationAndApprovedTermsOfService(transition, this.authenticationRoute);
@@ -47,18 +47,23 @@ export default class AccessRoute extends Route {
     return this.modelFor('organizations');
   }
 
-  async afterModel({ campaign }) {
-    const ongoingCampaignParticipation = await this.store.queryRecord('campaign-participation', {
-      campaignId: campaign.id,
-      userId: this.currentUser.user.id,
-    });
-    const hasParticipated = Boolean(ongoingCampaignParticipation);
-    this.campaignStorage.set(campaign.code, 'hasParticipated', hasParticipated);
+  async afterModel({ verifiedCode }) {
+    if (verifiedCode.type === 'campaign') {
+      const campaign = await verifiedCode.campaign;
+      const ongoingCampaignParticipation = await this.store.queryRecord('campaign-participation', {
+        campaignId: campaign.id,
+        userId: this.currentUser.user.id,
+      });
+      const hasParticipated = Boolean(ongoingCampaignParticipation);
+      this.campaignStorage.set(campaign.code, 'hasParticipated', hasParticipated);
 
-    if (hasParticipated) {
-      this.router.replaceWith('campaigns.entrance', campaign.code);
+      if (hasParticipated) {
+        this.router.replaceWith('campaigns.entrance', campaign.code);
+      } else {
+        this.router.replaceWith('organizations.invited', campaign.code);
+      }
     } else {
-      this.router.replaceWith('organizations.invited', campaign.code);
+      this.router.replaceWith('organizations.invited', verifiedCode.id);
     }
   }
 
@@ -82,7 +87,9 @@ export default class AccessRoute extends Route {
     return organizationToJoin.isRestricted && isAuthenticatedByGar;
   }
 
-  _shouldJoinSimplifiedCampaignAsAnonymous(campaign) {
+  async _shouldJoinSimplifiedCampaignAsAnonymous(verifiedCode) {
+    if (verifiedCode.type !== 'campaign') return false;
+    const campaign = await verifiedCode.campaign;
     return campaign.isSimplifiedAccess && !this.session.isAuthenticated;
   }
 }

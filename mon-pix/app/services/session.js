@@ -53,6 +53,7 @@ export default class CurrentSessionService extends SessionService {
       delete this.skipRedirectAfterSessionInvalidation;
       return;
     }
+    this.code = null;
 
     const routeAfterInvalidation = this._getRouteAfterInvalidation();
     super.handleInvalidation(routeAfterInvalidation);
@@ -64,6 +65,10 @@ export default class CurrentSessionService extends SessionService {
   }
 
   get redirectionUrl() {
+    if (this.code) {
+      const baseUrl = window.location.protocol + '//' + window.location.host;
+      return baseUrl + this.router.urlFor('combined-courses', { code: this.code });
+    }
     const campaignCode = get(this.session, 'attemptedTransition.from.parent.params.code');
     if (campaignCode) {
       const baseUrl = window.location.protocol + '//' + window.location.host;
@@ -83,6 +88,10 @@ export default class CurrentSessionService extends SessionService {
 
   setAttemptedTransition(transition) {
     this.attemptedTransition = transition;
+  }
+
+  setCode(code) {
+    this.code = code;
   }
 
   get isAuthenticatedByGar() {

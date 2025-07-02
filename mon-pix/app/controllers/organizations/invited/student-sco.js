@@ -6,6 +6,7 @@ export default class StudentScoController extends Controller {
   @service router;
   @service accessStorage;
   @service session;
+  @service store;
 
   @action
   async reconcile(scoOrganizationLearner, adapterOptions) {
@@ -17,6 +18,14 @@ export default class StudentScoController extends Controller {
     }
 
     this.accessStorage.setAssociationDone(this.model.organizationToJoin.id);
+    const verifiedCode = await this.store.findRecord('verified-code', this.args.model.campaign.code);
+
+    if (verifiedCode.type === 'campaign') {
+      this.router.replaceWith('campaigns.fill-in-participant-external-id', verifiedCode.id);
+    } else {
+      this.router.replaceWith('combined-courses', verifiedCode.id);
+    }
+
     this.router.transitionTo('campaigns.fill-in-participant-external-id', this.model.campaign.code);
     return;
   }

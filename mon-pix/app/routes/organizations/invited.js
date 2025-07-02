@@ -23,17 +23,19 @@ export default class InvitedRoute extends Route {
     return this.modelFor('organizations');
   }
 
-  afterModel({ campaign, organizationToJoin }) {
+  afterModel({ verifiedCode, organizationToJoin }) {
     const associationDone = this.accessStorage.isAssociationDone(organizationToJoin.id);
 
     if (this.shouldAssociateInformation(organizationToJoin, associationDone)) {
-      this.router.replaceWith('organizations.invited.reconciliation', campaign.code);
+      this.router.replaceWith('organizations.invited.reconciliation', verifiedCode.id);
     } else if (this.shouldAssociateWithScoInformation(organizationToJoin, associationDone)) {
-      this.router.replaceWith('organizations.invited.student-sco', campaign.code);
+      this.router.replaceWith('organizations.invited.student-sco', verifiedCode.id);
     } else if (this.shouldAssociateWithSupInformation(organizationToJoin, associationDone)) {
-      this.router.replaceWith('organizations.invited.student-sup', campaign.code);
+      this.router.replaceWith('organizations.invited.student-sup', verifiedCode.id);
+    } else if (verifiedCode.type === 'campaign') {
+      this.router.replaceWith('campaigns.fill-in-participant-external-id', verifiedCode.id);
     } else {
-      this.router.replaceWith('campaigns.fill-in-participant-external-id', campaign.code);
+      this.router.replaceWith('combined-courses', verifiedCode.id);
     }
   }
 

@@ -14,8 +14,8 @@ export default class AnonymousRoute extends Route {
     return this.modelFor('organizations');
   }
 
-  async afterModel({ campaign }) {
-    await this.session.authenticate('authenticator:anonymous', { campaignCode: campaign.code });
+  async afterModel({ verifiedCode }) {
+    await this.session.authenticate('authenticator:anonymous', { campaignCode: verifiedCode.id });
     await this.currentUser.load();
   }
 }

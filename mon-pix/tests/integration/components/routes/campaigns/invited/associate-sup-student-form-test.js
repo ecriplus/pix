@@ -12,7 +12,7 @@ module('Integration | Component | routes/organizations/invited/associate-sup-stu
   setupIntlRenderingTest(hooks);
 
   const organizationId = 1;
-  let storeStub;
+  let store;
   let saveStub;
   let routerObserver;
   let setAssociationDoneStub;
@@ -21,21 +21,20 @@ module('Integration | Component | routes/organizations/invited/associate-sup-stu
     stubSessionService(this.owner, { isAuthenticated: false });
     routerObserver = this.owner.lookup('service:router');
     routerObserver.transitionTo = sinon.stub();
-    saveStub = sinon.stub();
     setAssociationDoneStub = sinon.stub();
 
-    storeStub = class StoreStub extends Service {
-      createRecord = () => ({
-        save: saveStub,
-        unloadRecord: () => sinon.stub(),
-      });
-    };
+    store = this.owner.lookup('service:store');
+    saveStub = sinon.stub();
+    const createRecordMock = sinon.mock();
+    createRecordMock.returns({ save: saveStub, unloadRecord: function () {} });
+    store.createRecord = createRecordMock;
+    const findRecordMock = sinon.mock().returns({ id: 'CAMPAIGN1', type: 'campaign' });
+    store.findRecord = findRecordMock;
 
     class AccessStorageStub extends Service {
       setAssociationDone = setAssociationDoneStub;
     }
 
-    this.owner.register('service:store', storeStub);
     this.owner.register('service:access-storage', AccessStorageStub);
   });
 
@@ -45,7 +44,7 @@ module('Integration | Component | routes/organizations/invited/associate-sup-stu
       this.set('organizationId', organizationId);
       const screen = await render(
         hbs`<Routes::Organizations::Invited::AssociateSupStudentForm
-  @campaignCode={{123}}
+  @campaignCode='CAMPAIGN1'
   @organizationId={{this.organizationId}}
 />`,
       );
@@ -64,7 +63,7 @@ module('Integration | Component | routes/organizations/invited/associate-sup-stu
       this.set('organizationId', organizationId);
       const screen = await render(
         hbs`<Routes::Organizations::Invited::AssociateSupStudentForm
-  @campaignCode={{123}}
+  @campaignCode='CAMPAIGN1'
   @organizationId={{this.organizationId}}
 />`,
       );
@@ -73,7 +72,11 @@ module('Integration | Component | routes/organizations/invited/associate-sup-stu
       await _fillInputsAndValidate({ screen });
 
       // then
-      sinon.assert.calledWithExactly(routerObserver.transitionTo, 'campaigns.fill-in-participant-external-id', 123);
+      sinon.assert.calledWithExactly(
+        routerObserver.transitionTo,
+        'campaigns.fill-in-participant-external-id',
+        'CAMPAIGN1',
+      );
       assert.ok(true);
     });
   });
@@ -85,7 +88,7 @@ module('Integration | Component | routes/organizations/invited/associate-sup-stu
       this.set('organizationId', organizationId);
       const screen = await render(
         hbs`<Routes::Organizations::Invited::AssociateSupStudentForm
-  @campaignCode={{123}}
+  @campaignCode='CAMPAIGN1'
   @organizationId={{this.organizationId}}
 />`,
       );

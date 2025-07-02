@@ -21,10 +21,13 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
     user = server.create('user', 'withEmail');
   });
 
-  module('When connected', function () {
+  module('When connected', function (hooks) {
+    hooks.beforeEach(async function () {
+      await authenticate(user);
+    });
+
     test('should disconnect when clicking on the link', async function (assert) {
       // given
-      await authenticate(user);
       await visit('/campagnes');
 
       // when
@@ -33,21 +36,21 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
       // then
       assert.strictEqual(currentURL(), '/deconnexion');
     });
-  });
 
-  module('when code is linked to a combined course', function () {
-    test('it redirects to combined course page', async function (assert) {
-      // given
-      const verifiedCode = server.create('verified-code', { id: 'something', type: 'combined-course' });
-      server.create('organization-to-join', { id: 1, code: verifiedCode.id, identityProvider: null });
+    module('when code is linked to a combined course', function () {
+      test('it redirects to combined course page', async function (assert) {
+        // given
+        const verifiedCode = server.create('verified-code', { id: 'something', type: 'combined-course' });
+        server.create('organization-to-join', { id: 1, code: verifiedCode.id, identityProvider: null });
 
-      // when
-      const screen = await visit(`/campagnes`);
-      await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), verifiedCode.id);
-      await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+        // when
+        const screen = await visit(`/campagnes`);
+        await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), verifiedCode.id);
+        await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
 
-      // then
-      assert.strictEqual(currentURL(), `/parcours/${verifiedCode.id}`);
+        // then
+        assert.strictEqual(currentURL(), `/parcours/${verifiedCode.id}`);
+      });
     });
   });
 

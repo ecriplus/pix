@@ -6,8 +6,8 @@ export default class OrganizationsRoute extends Route {
 
   async model(params) {
     const organizationToJoin = await this.store.queryRecord('organization-to-join', { code: params.code });
-    const campaign = await this.store.queryRecord('campaign', { filter: { code: params.code } });
+    const verifiedCode = await this.store.findRecord('verified-code', params.code);
 
-    return { organizationToJoin, campaign };
+    return { organizationToJoin, verifiedCode };
   }
 }
