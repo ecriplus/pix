@@ -233,7 +233,7 @@
                 "text": "",
                 "image": {
                   "url": "https://assets.pix.org/draft/modules/ia-int-mgo/forum.png",
-                  "altText": ""
+                  "altText": "Page web de forum de discussion"
                 },
                 "proposalA": "Utiliser",
                 "proposalB": "Ne pas utiliser",
@@ -244,7 +244,7 @@
                 "text": "",
                 "image": {
                   "url": "https://assets.pix.org/draft/modules/ia-int-mgo/contact.png",
-                  "altText": ""
+                  "altText": "Page web de contact : téléphone, site web, email, adresse postale"
                 },
                 "proposalA": "Utiliser",
                 "proposalB": "Ne pas utiliser",
@@ -255,7 +255,7 @@
                 "text": "",
                 "image": {
                   "url": "https://assets.pix.org/draft/modules/ia-int-mgo/faq.png",
-                  "altText": ""
+                  "altText": "Page web de questions fréquentes (FAQ)"
                 },
                 "proposalA": "Utiliser",
                 "proposalB": "Ne pas utiliser",
@@ -266,7 +266,7 @@
                 "text": "",
                 "image": {
                   "url": "https://assets.pix.org/draft/modules/ia-int-mgo/article.png",
-                  "altText": ""
+                  "altText": "Page web contenant un article de presse"
                 },
                 "proposalA": "Utiliser",
                 "proposalB": "Ne pas utiliser",
