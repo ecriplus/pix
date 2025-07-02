@@ -10,6 +10,7 @@ import { ForbiddenAccess, NotFoundError } from '../domain/errors.js';
 import { Organization } from '../domain/models/index.js';
 import * as organizationRepository from '../infrastructure/repositories/organization-repository.js';
 import { PromiseUtils } from '../infrastructure/utils/promise-utils.js';
+import * as checkOrganizationAccessUseCase from './usecases/check-organization-access.js';
 import * as checkUserIsAdminOfCertificationCenterWithCertificationCenterInvitationIdUseCase from './usecases/check-user-is-admin-of-certification-center-with-certification-center-invitation-id.js';
 import * as checkUserIsAdminOfCertificationCenterWithCertificationCenterMembershipIdUseCase from './usecases/check-user-is-admin-of-certification-center-with-certification-center-membership-id.js';
 import * as checkAdminMemberHasRoleCertifUseCase from './usecases/checkAdminMemberHasRoleCertif.js';
@@ -775,6 +776,22 @@ async function checkOrganizationHasFeature(request, h, dependencies = { checkOrg
   }
 }
 
+async function checkOrganizationAccess(request, h, dependencies = { checkOrganizationAccessUseCase }) {
+  try {
+    // yeah this is ugly. should rework that later.
+    const organizationId =
+      request.params.organizationId || parseInt(request.payload.data?.relationships?.organization?.data?.id);
+
+    await dependencies.checkOrganizationAccessUseCase.execute({
+      organizationId,
+    });
+
+    return h.response(true);
+  } catch {
+    return _replyForbiddenError(h);
+  }
+}
+
 function _noOrganizationFound(error) {
   return error instanceof NotFoundError;
 }
@@ -814,6 +831,7 @@ const securityPreHandlers = {
   checkUserIsMemberOfCertificationCenterSessionFromCertificationIssueReportId,
   checkUserOwnsCertificationCourse,
   makeCheckOrganizationHasFeature,
+  checkOrganizationAccess,
 };
 
 export { securityPreHandlers };

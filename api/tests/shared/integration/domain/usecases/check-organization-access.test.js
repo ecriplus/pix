@@ -1,0 +1,123 @@
+import dayjs from 'dayjs';
+
+import { execute } from '../../../../../src/shared/application/usecases/check-organization-access.js';
+import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
+import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
+import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
+
+describe('Integration | Shared | Domain | UseCase | check-organization-access', function () {
+  context('when the PLACE_MANAGEMENT organization feature is not enabled', function () {
+    it('should not throw', async function () {
+      // given
+      const organization = databaseBuilder.factory.buildOrganization();
+      await databaseBuilder.commit();
+
+      // when
+      const result = await execute({ organizationId: organization.id });
+
+      // then
+      expect(result).to.be.true;
+    });
+  });
+
+  context('when the PLACE_MANAGEMENT organization feature is enabled', function () {
+    context('when threshold lock is disabled', function () {
+      it('should not throw', async function () {
+        // given
+        const placeManagementFeature = databaseBuilder.factory.buildFeature({
+          key: ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key,
+        });
+        const organization = databaseBuilder.factory.buildOrganization();
+        databaseBuilder.factory.buildOrganizationFeature({
+          organizationId: organization.id,
+          featureId: placeManagementFeature.id,
+          params: {
+            enablePlacesThresholdLock: false,
+          },
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const result = await execute({ organizationId: organization.id });
+
+        // then
+        expect(result).to.be.true;
+      });
+    });
+
+    context('when threshold lock is enabled', function () {
+      context('when the amount of maximum places if not reached', function () {
+        it('should not throw', async function () {
+          // given
+          const placeManagementFeature = databaseBuilder.factory.buildFeature({
+            key: ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key,
+          });
+          const organization = databaseBuilder.factory.buildOrganization();
+          databaseBuilder.factory.buildOrganizationFeature({
+            organizationId: organization.id,
+            featureId: placeManagementFeature.id,
+            params: {
+              enablePlacesThresholdLock: true,
+            },
+          });
+          await databaseBuilder.commit();
+
+          // when
+          const result = await execute({ organizationId: organization.id });
+
+          // then
+          expect(result).to.be.true;
+        });
+      });
+
+      context('when the amount of maximum places if reached', function () {
+        it('should throw a forbidden access error', async function () {
+          // given
+          const placeManagementFeature = databaseBuilder.factory.buildFeature({
+            key: ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key,
+          });
+
+          const organization = databaseBuilder.factory.buildOrganization();
+
+          databaseBuilder.factory.buildOrganizationFeature({
+            organizationId: organization.id,
+            featureId: placeManagementFeature.id,
+            params: {
+              enablePlacesThresholdLock: true,
+            },
+          });
+
+          databaseBuilder.factory.buildOrganizationPlace({
+            organizationId: organization.id,
+            createdAt: dayjs().subtract(1, 'year').toDate(),
+            activationDate: dayjs().subtract(6, 'months').toDate(),
+            expirationDate: dayjs().subtract(1, 'months').toDate(),
+            count: 1,
+          });
+
+          const campaign = databaseBuilder.factory.buildCampaign({
+            organizationId: organization.id,
+          });
+          const learner1 = databaseBuilder.factory.buildOrganizationLearner({ organizationId: organization.id });
+          const learner2 = databaseBuilder.factory.buildOrganizationLearner({ organizationId: organization.id });
+          databaseBuilder.factory.buildCampaignParticipation({
+            campaignId: campaign.id,
+            organizationLearnerId: learner1.id,
+          });
+          databaseBuilder.factory.buildCampaignParticipation({
+            campaignId: campaign.id,
+            organizationLearnerId: learner2.id,
+          });
+
+          await databaseBuilder.commit();
+
+          // when
+          const error = await catchErr(execute)({ organizationId: organization.id });
+
+          // then
+          expect(error).to.be.instanceOf(ForbiddenAccess);
+        });
+      });
+    });
+  });
+});
