@@ -1,36 +1,11 @@
 import _ from 'lodash';
 
 import { CenterTypes } from '../../../../../../src/certification/enrolment/domain/models/CenterTypes.js';
-import { CERTIFICATION_FEATURES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { types } from '../../../../../../src/organizational-entities/domain/models/Organization.js';
 import { CERTIFICATION_CENTER_TYPES } from '../../../../../../src/shared/domain/constants.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Certification | Enrolment | Domain | Models | Center', function () {
-  context('#isComplementaryAlonePilot', function () {
-    it('should return false when center is not complementary alone pilot', function () {
-      // given
-      const center = domainBuilder.certification.enrolment.buildCenter({
-        type: CenterTypes.SUP,
-        features: [],
-      });
-
-      // when / then
-      expect(center.isComplementaryAlonePilot).is.false;
-    });
-
-    it('should return true when center is complementary alone pilot', function () {
-      // given
-      const center = domainBuilder.certification.enrolment.buildCenter({
-        type: CenterTypes.SUP,
-        features: [CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE.key],
-      });
-
-      // when / then
-      expect(center.isComplementaryAlonePilot).is.true;
-    });
-  });
-
   context('#hasBillingMode', function () {
     it('should return false when center is of type SCO', function () {
       // given
@@ -232,34 +207,6 @@ describe('Unit | Certification | Enrolment | Domain | Models | Center', function
 
       // then
       expect(isMatchingOrganizationScoAndManagingStudents).to.be.false;
-    });
-  });
-
-  context('#get isCoreComplementaryCompatibilityEnabled', function () {
-    it('should return true when center is isComplementaryAlonePilot', function () {
-      // given
-      const center = domainBuilder.certification.enrolment.buildCenter({
-        features: [CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE.key],
-      });
-
-      // when
-      const isCoreComplementaryCompatibilityEnabled = center.isCoreComplementaryCompatibilityEnabled;
-
-      // then
-      expect(isCoreComplementaryCompatibilityEnabled).to.be.true;
-    });
-
-    it('should return false when center is not complementary alone pilot', function () {
-      // given
-      const center = domainBuilder.certification.enrolment.buildCenter({
-        features: [],
-      });
-
-      // when
-      const isCoreComplementaryCompatibilityEnabled = center.isCoreComplementaryCompatibilityEnabled;
-
-      // then
-      expect(isCoreComplementaryCompatibilityEnabled).to.be.false;
     });
   });
 });

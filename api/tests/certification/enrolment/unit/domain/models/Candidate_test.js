@@ -102,6 +102,8 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
       });
     });
 
+    // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
+
     [
       { name: 'firstName', code: 'CANDIDATE_FIRST_NAME_MUST_BE_A_STRING' },
       { name: 'lastName', code: 'CANDIDATE_LAST_NAME_MUST_BE_A_STRING' },
@@ -386,90 +388,6 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
       expect(error).to.deepEqualInstanceOmitting(certificationCandidatesError, ['message', 'stack']);
     });
 
-    context('compatibility core/complementary disabled, should use old schema', function () {
-      it('should throw an error when the subscriptions format is not valid', async function () {
-        // given
-        const candidate = domainBuilder.certification.enrolment.buildCandidate({
-          ...candidateData,
-          subscriptions: {},
-        });
-        const certificationCandidatesError = new CertificationCandidatesError({
-          code: '"subscriptions" must be an array',
-          meta: {},
-        });
-
-        // when
-        const error = await catchErr(candidate.validate, candidate)();
-
-        // then
-        expect(error).to.deepEqualInstanceOmitting(certificationCandidatesError, ['message', 'stack']);
-      });
-
-      it('should throw an error when there are no subscription', async function () {
-        // given
-        const candidate = domainBuilder.certification.enrolment.buildCandidate({
-          ...candidateData,
-          subscriptions: [],
-        });
-        const certificationCandidatesError = new CertificationCandidatesError({
-          code: '"subscriptions" must contain at least 1 items',
-          meta: [],
-        });
-
-        // when
-        const error = await catchErr(candidate.validate, candidate)();
-
-        // then
-        expect(error).to.deepEqualInstanceOmitting(certificationCandidatesError, ['message', 'stack']);
-      });
-
-      it('should throw an error when there subscription has not a valid type', async function () {
-        // given
-        const candidate = domainBuilder.certification.enrolment.buildCandidate({
-          ...candidateData,
-          subscriptions: [
-            {
-              type: 'Coucou Maman',
-              complementaryCertificationId: null,
-            },
-          ],
-        });
-        const certificationCandidatesError = new CertificationCandidatesError({
-          code: '"subscriptions[0].type" must be one of [CORE, COMPLEMENTARY]',
-          meta: 'Coucou Maman',
-        });
-
-        // when
-        const error = await catchErr(candidate.validate, candidate)();
-
-        // then
-        expect(error).to.deepEqualInstanceOmitting(certificationCandidatesError, ['message', 'stack']);
-      });
-
-      it('should throw an error when subscription complementaryCertificationId is not defined when type is COMPLEMENTARY', async function () {
-        // given
-        const candidate = domainBuilder.certification.enrolment.buildCandidate({
-          ...candidateData,
-          subscriptions: [
-            {
-              type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-              complementaryCertificationId: null,
-            },
-          ],
-        });
-        const certificationCandidatesError = new CertificationCandidatesError({
-          code: '"subscriptions[0].complementaryCertificationId" must be a number',
-          meta: null,
-        });
-
-        // when
-        const error = await catchErr(candidate.validate, candidate)();
-
-        // then
-        expect(error).to.deepEqualInstanceOmitting(certificationCandidatesError, ['message', 'stack']);
-      });
-    });
-
     context('compatibility core/complementary enable, should use new schema', function () {
       const cleaCertificationId = 123;
       const isCoreComplementaryCompatibilityEnabled = true;
@@ -480,22 +398,6 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           const candidate = domainBuilder.certification.enrolment.buildCandidate({
             ...candidateData,
             subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
-          });
-
-          // when, then
-          candidate.validate({ isCoreComplementaryCompatibilityEnabled, cleaCertificationId });
-        });
-
-        it('should validate when there is only one complementary that is not clea', function () {
-          // given
-          const candidate = domainBuilder.certification.enrolment.buildCandidate({
-            ...candidateData,
-            subscriptions: [
-              domainBuilder.buildComplementarySubscription({
-                certificationCandidateId: null,
-                complementaryCertificationId: cleaCertificationId + 20,
-              }),
-            ],
           });
 
           // when, then

@@ -1,11 +1,9 @@
 import dayjs from 'dayjs';
-import _ from 'lodash';
 
 import * as mailCheck from '../../../../shared/mail/infrastructure/services/mail-check.js';
 import { SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../../../shared/domain/constants/certification-candidates-errors.js';
 import { CERTIFICATION_SESSIONS_ERRORS } from '../../../shared/domain/constants/sessions-errors.js';
-import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 //  should be injected
 import * as certificationCpfService from '../../../shared/domain/services/certification-cpf-service.js';
 import * as sessionValidator from '../../../shared/domain/validators/session-validator.js';
@@ -125,60 +123,12 @@ const getValidatedSubscriptionsForMassImport = async function ({
   subscriptionLabels,
   line,
   complementaryCertificationRepository,
-  isCoreComplementaryCompatibilityEnabled,
 }) {
-  if (!isCoreComplementaryCompatibilityEnabled) {
-    return _getValidatedSubscriptionsForMassImport_old({
-      subscriptionLabels,
-      line,
-      complementaryCertificationRepository,
-    });
-  }
-  const subscriptions = [];
-  const certificationCandidateComplementaryErrors = [];
-
-  if (subscriptionLabels.length === 0) {
-    _addToErrorList({
-      errorList: certificationCandidateComplementaryErrors,
-      line,
-      codes: [CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_NO_SUBSCRIPTION.code],
-    });
-
-    return { certificationCandidateComplementaryErrors, subscriptions };
-  }
-
-  if (subscriptionLabels.length > 1) {
-    _addToErrorList({
-      errorList: certificationCandidateComplementaryErrors,
-      line,
-      codes: [CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_MAX_ONE_COMPLEMENTARY_CERTIFICATION.code],
-    });
-
-    return { certificationCandidateComplementaryErrors, subscriptions };
-  }
-
-  const allComplementaryCertifications = await complementaryCertificationRepository.findAll();
-  const complementaryCertificationsByLabel = _.keyBy(allComplementaryCertifications, 'label');
-  const cleaComplementaryCertification = allComplementaryCertifications.find(
-    (complementaryCertification) => complementaryCertification.key === ComplementaryCertificationKeys.CLEA,
-  );
-  const subscriptionLabel = subscriptionLabels[0];
-  if (subscriptionLabel === SUBSCRIPTION_TYPES.CORE) {
-    subscriptions.push(Subscription.buildCore({ certificationCandidateId: null }));
-  } else {
-    const complementaryCertification = complementaryCertificationsByLabel[subscriptionLabel];
-    if (complementaryCertification.id === cleaComplementaryCertification.id) {
-      subscriptions.push(Subscription.buildCore({ certificationCandidateId: null }));
-    }
-    subscriptions.push(
-      Subscription.buildComplementary({
-        certificationCandidateId: null,
-        complementaryCertificationId: complementaryCertification.id,
-      }),
-    );
-  }
-
-  return { certificationCandidateComplementaryErrors, subscriptions };
+  return _getValidatedSubscriptionsForMassImport_old({
+    subscriptionLabels,
+    line,
+    complementaryCertificationRepository,
+  });
 };
 
 const getValidatedCandidateInformation = async function ({

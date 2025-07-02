@@ -26,7 +26,6 @@ async function createCertificationCenter({
   updatedAt,
   members = [],
   complementaryCertificationIds = [],
-  featureIds = [],
 }) {
   certificationCenterId = _buildCertificationCenter({
     databaseBuilder,
@@ -37,12 +36,6 @@ async function createCertificationCenter({
     createdAt,
     updatedAt,
   }).id;
-  _buildCertificationCenterFeatures({
-    databaseBuilder,
-    certificationCenterId,
-    featureIds,
-  });
-
   _buildCertificationCenterMemberships({
     databaseBuilder,
     certificationCenterId,
@@ -101,13 +94,4 @@ function _buildCertificationCenter({
     createdAt,
     updatedAt,
   });
-}
-
-function _buildCertificationCenterFeatures({ databaseBuilder, certificationCenterId, featureIds }) {
-  featureIds.forEach((featureId) =>
-    databaseBuilder.factory.buildCertificationCenterFeature({
-      certificationCenterId,
-      featureId,
-    }),
-  );
 }

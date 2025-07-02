@@ -1,7 +1,4 @@
-import {
-  CERTIFICATION_FEATURES,
-  SUBSCRIPTION_TYPES,
-} from '../../../../../src/certification/shared/domain/constants.js';
+import { SUBSCRIPTION_TYPES } from '../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { CertificationCandidate } from '../../../../../src/shared/domain/models/index.js';
 import { clearResolveMx, setResolveMx } from '../../../../../src/shared/mail/infrastructure/services/mail-check.js';
@@ -49,7 +46,6 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
       let sessionId;
       let userId;
       let candidate;
-      let complementaryCertificationId;
 
       beforeEach(function () {
         candidate = domainBuilder.certification.enrolment.buildCandidate({
@@ -86,9 +82,6 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
           name: 'PARIS 15',
           INSEECode: '75115',
         });
-        complementaryCertificationId = databaseBuilder.factory.buildComplementaryCertification({
-          label: 'Certif complémentaire 1',
-        }).id;
 
         payload = {
           data: {
@@ -110,7 +103,7 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
               subscriptions: [
                 {
                   type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-                  complementaryCertificationId,
+                  complementaryCertificationId: cleaCertificationId,
                 },
                 {
                   type: SUBSCRIPTION_TYPES.CORE,
@@ -153,7 +146,7 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
         expect(subscriptions).to.have.lengthOf(2);
         expect(subscriptions[0]).to.deep.equal({
           type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-          complementaryCertificationId,
+          complementaryCertificationId: cleaCertificationId,
         });
         expect(subscriptions[1]).to.deep.equal({
           type: SUBSCRIPTION_TYPES.CORE,
@@ -192,13 +185,6 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
             type: 'PRO',
             externalId: 'EXTERNAL_ID',
           });
-        const complementaryAlonePilotFeatureId = databaseBuilder.factory.buildFeature(
-          CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE,
-        ).id;
-        databaseBuilder.factory.buildCertificationCenterFeature({
-          certificationCenterId,
-          featureId: complementaryAlonePilotFeatureId,
-        });
 
         sessionId = databaseBuilder.factory.buildSession({ certificationCenterId, certificationCenter }).id;
         databaseBuilder.factory.buildCertificationCenterMembership({ userId, certificationCenterId });

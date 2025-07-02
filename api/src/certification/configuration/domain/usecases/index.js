@@ -9,7 +9,6 @@ import { importNamedExportsFromDirectory } from '../../../../shared/infrastructu
 import * as complementaryCertificationRepository from '../../../complementary-certification/infrastructure/repositories/complementary-certification-repository.js';
 import * as attachableTargetProfileRepository from '../../infrastructure/repositories/attachable-target-profiles-repository.js';
 import * as candidateRepository from '../../infrastructure/repositories/candidate-repository.js';
-import * as centerPilotFeaturesRepository from '../../infrastructure/repositories/center-pilot-features-repository.js';
 import * as centerRepository from '../../infrastructure/repositories/center-repository.js';
 import * as consolidatedFrameworkRepository from '../../infrastructure/repositories/consolidated-framework-repository.js';
 
@@ -19,7 +18,6 @@ import * as consolidatedFrameworkRepository from '../../infrastructure/repositor
  *
  * @typedef {attachableTargetProfileRepository} AttachableTargetProfileRepository
  * @typedef {candidateRepository} CandidateRepository
- * @typedef {centerPilotFeaturesRepository} CenterPilotFeaturesRepository
  * @typedef {centerRepository} CenterRepository
  * @typedef {challengeRepository} ChallengeRepository
  * @typedef {complementaryCertificationRepository} ComplementaryCertificationRepository
@@ -30,7 +28,6 @@ import * as consolidatedFrameworkRepository from '../../infrastructure/repositor
 const dependencies = {
   attachableTargetProfileRepository,
   candidateRepository,
-  centerPilotFeaturesRepository,
   centerRepository,
   challengeRepository,
   complementaryCertificationRepository,

@@ -748,17 +748,7 @@
           },
           "title": "Habilitated to the following complementary certifications"
         },
-        "is-archived-warning": "Archived at {archivedAt} by {archivedBy}.",
-        "pilot-features": {
-          "is-complementary-alone-pilot": {
-            "aria-label": {
-              "active": "is pilot Pix/Pix+ compatibility test phase",
-              "inactive": "not Pix/Pix+ compatibility test phase"
-            },
-            "label": "Pix/Pix+ compatibility test phase"
-          },
-          "title": "Pilot features"
-        }
+        "is-archived-warning": "Archived at {archivedAt} by {archivedBy}."
       },
       "notifications": {
         "failure": {

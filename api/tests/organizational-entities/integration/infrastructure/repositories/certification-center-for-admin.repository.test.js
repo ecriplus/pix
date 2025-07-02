@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { CenterForAdmin } from '../../../../../src/organizational-entities/domain/models/CenterForAdmin.js';
 import * as certificationCenterForAdminRepository from '../../../../../src/organizational-entities/infrastructure/repositories/certification-center-for-admin.repository.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
@@ -60,7 +58,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
       // then
       const updatedCertificationCenter = await knex('certification-centers').select().where({ id: center.id }).first();
-      expect(_.omit(updatedCertificationCenter, 'isV3Pilot')).to.deep.equal({
+      expect(updatedCertificationCenter).to.deep.equal({
         ...center,
         name: 'Great Oak Certification Center',
         updatedAt: updatedCertificationCenter.updatedAt,
@@ -101,9 +99,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       const nonArchivedCertificationCenter = await knex('certification-centers')
         .where({ id: otherCertificationCenter.id })
         .first();
-      expect(_.omit(nonArchivedCertificationCenter, 'isV3Pilot')).to.deep.equal(
-        _.omit(otherCertificationCenter, 'isV3Pilot'),
-      );
+      expect(nonArchivedCertificationCenter).to.deep.equal(otherCertificationCenter);
     });
 
     describe('when certification center does not exist', function () {

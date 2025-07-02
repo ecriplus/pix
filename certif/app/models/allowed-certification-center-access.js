@@ -19,7 +19,6 @@ export default class AllowedCertificationCenterAccess extends Model {
   @attr() habilitations;
   @attr() pixCertifScoBlockedAccessDateLycee;
   @attr() pixCertifScoBlockedAccessDateCollege;
-  @attr() isComplementaryAlonePilot;
 
   get isSco() {
     return this.type === CERTIFICATION_CENTER_TYPES.SCO;
@@ -45,9 +44,5 @@ export default class AllowedCertificationCenterAccess extends Model {
 
   get hasHabilitations() {
     return this.habilitations.length > 0;
-  }
-
-  get isCoreComplementaryCompatibilityEnabled() {
-    return this.isComplementaryAlonePilot;
   }
 }

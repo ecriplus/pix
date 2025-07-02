@@ -1,4 +1,3 @@
-import { usecases as certificationConfigurationUsecases } from '../../../certification/configuration/domain/usecases/index.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { extractUserIdFromRequest } from '../../../shared/infrastructure/monitoring-tools.js';
 import * as csvSerializer from '../../../shared/infrastructure/serializers/csv/csv-serializer.js';
@@ -71,7 +70,7 @@ const update = async function (request) {
       (complementaryCertification) => complementaryCertification.id,
     ) || [];
 
-  const { updatedCertificationCenter, certificationCenterPilotFeatures } = await DomainTransaction.execute(
+  const { updatedCertificationCenter } = await DomainTransaction.execute(
     async () => {
       const updatedCertificationCenter = await usecases.updateCertificationCenter({
         certificationCenterId,
@@ -79,16 +78,12 @@ const update = async function (request) {
         complementaryCertificationIds,
       });
 
-      const certificationCenterPilotFeatures = await certificationConfigurationUsecases.getCenterPilotFeatures({
-        centerId: updatedCertificationCenter.id,
-      });
-
-      return { updatedCertificationCenter, certificationCenterPilotFeatures };
+      return { updatedCertificationCenter };
     },
     { isolationLevel: 'repeatable read' },
   );
 
-  return certificationCenterForAdminSerializer.serialize(updatedCertificationCenter, certificationCenterPilotFeatures);
+  return certificationCenterForAdminSerializer.serialize(updatedCertificationCenter);
 };
 
 const certificationCenterAdminController = {

@@ -139,10 +139,9 @@ export default class CertificationStarter extends Component {
   }
 
   get subscriptionTitle() {
-    const { isSessionVersion3, isV3CoreAndComplementary } = this.args.certificationCandidateSubscription;
+    const { isV3CoreAndComplementary } = this.args.certificationCandidateSubscription;
 
-    const complementaryAlone = isSessionVersion3 && !isV3CoreAndComplementary;
-    const intlSuffix = complementaryAlone ? 'complementary-subscription' : 'core-and-complementary-subscriptions';
+    const intlSuffix = isV3CoreAndComplementary ? 'core-and-complementary-subscriptions' : 'complementary-subscription';
 
     return this.intl.t(`pages.certification-start.${intlSuffix}`);
   }

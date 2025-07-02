@@ -278,7 +278,6 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
               'data-protection-officer-first-name': undefined,
               'data-protection-officer-last-name': undefined,
               'data-protection-officer-email': undefined,
-              'is-complementary-alone-pilot': false,
             },
             relationships: {
               'certification-center-memberships': {

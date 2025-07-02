@@ -81,6 +81,10 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | certif
               'organization-learner-id': null,
               subscriptions: [
                 {
+                  type: SUBSCRIPTION_TYPES.CORE,
+                  complementaryCertificationId: null,
+                },
+                {
                   type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
                   complementaryCertificationId: cleaComplementaryCertification.id,
                 },

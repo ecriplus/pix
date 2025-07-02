@@ -40,26 +40,6 @@ export default class InformationView extends Component {
     });
   }
 
-  get availablePilotFeatures() {
-    const isComplementaryAlonePilot = this.args.certificationCenter.isComplementaryAlonePilot;
-    const isComplementaryAlonePilotLabel = this.intl.t(
-      'pages.certification-centers.information-view.pilot-features.is-complementary-alone-pilot.label',
-    );
-    const isComplementaryAlonePilotAriaLabel = this.intl.t(
-      `pages.certification-centers.information-view.pilot-features.is-complementary-alone-pilot.aria-label.${
-        isComplementaryAlonePilot ? 'active' : 'inactive'
-      }`,
-    );
-
-    return [
-      {
-        isPilot: isComplementaryAlonePilot,
-        label: isComplementaryAlonePilotLabel,
-        ariaLabel: isComplementaryAlonePilotAriaLabel,
-      },
-    ];
-  }
-
   get externalURL() {
     const urlDashboardPrefix = ENV.APP.CERTIFICATION_CENTER_DASHBOARD_URL;
     return urlDashboardPrefix && urlDashboardPrefix + this.args.certificationCenter.id;
@@ -115,13 +95,6 @@ export default class InformationView extends Component {
       </dt>
       <dd>{{@certificationCenter.dataProtectionOfficerEmail}}</dd>
     </dl>
-
-    <span class="label">{{t "pages.certification-centers.information-view.pilot-features.title"}}</span>
-    <ul class="certification-center-information-display__habilitations-list">
-      {{#each this.availablePilotFeatures as |feature|}}
-        <HabilitationTag @label={{feature.label}} @active={{feature.isPilot}} @arialabel={{feature.ariaLabel}} />
-      {{/each}}
-    </ul>
 
     <div class="certification-center-information-display__divider"></div>
 

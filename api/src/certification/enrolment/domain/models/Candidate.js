@@ -80,13 +80,12 @@ export class Candidate {
     this.hasSeenCertificationInstructions = true;
   }
 
-  validate({ isSco = false, cleaCertificationId = null, isCoreComplementaryCompatibilityEnabled = false } = {}) {
+  validate({ isSco = false, cleaCertificationId = null } = {}) {
     const { error } = validate(this, {
       allowUnknown: true,
       context: {
         isSco,
         cleaCertificationId,
-        isCoreComplementaryCompatibilityEnabled,
         isSessionsMassImport: false,
       },
     });

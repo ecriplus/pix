@@ -24,7 +24,6 @@ describe('Unit | Organizational Entities | Application | Controller | Admin | ce
                 'data-protection-officer-first-name': 'Firstname',
                 'data-protection-officer-last-name': 'Lastname',
                 'external-id': '12345',
-                'is-complementary-alone-pilot': true,
               },
               id: '1',
               relationships: {
@@ -59,7 +58,6 @@ describe('Unit | Organizational Entities | Application | Controller | Admin | ce
           createdAt: null,
           externalId: '12345',
           habilitations: [],
-          isComplementaryAlonePilot: true,
           name: 'name',
           createdBy: 123,
           type: 'PRO',

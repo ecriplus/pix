@@ -26,7 +26,6 @@ const validateSessions = async function (request, h, dependencies = { csvHelpers
     parsedCsvData,
     hasBillingMode: center.hasBillingMode,
     certificationCenterHabilitations: center.habilitations,
-    isCoreComplementaryCompatibilityEnabled: center.isCoreComplementaryCompatibilityEnabled,
   });
 
   const sessionMassImportReport = await usecases.validateSessions({

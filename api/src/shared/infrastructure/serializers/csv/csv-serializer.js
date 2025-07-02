@@ -36,12 +36,7 @@ function _csvSerializeValue(data) {
   }
 }
 
-function deserializeForSessionsImport({
-  parsedCsvData,
-  hasBillingMode,
-  certificationCenterHabilitations,
-  isCoreComplementaryCompatibilityEnabled,
-}) {
+function deserializeForSessionsImport({ parsedCsvData, hasBillingMode, certificationCenterHabilitations }) {
   const sessions = [];
   const expectedHeadersKeys = Object.keys(headers);
 
@@ -96,7 +91,7 @@ function deserializeForSessionsImport({
     }
 
     if (_hasCandidateInformation(data)) {
-      currentParsedSession.candidates.push(_createCandidate(data, isCoreComplementaryCompatibilityEnabled));
+      currentParsedSession.candidates.push(_createCandidate(data));
     }
   });
 
@@ -476,37 +471,27 @@ function _createSession({ sessionId, address, room, date, time, examiner, descri
   };
 }
 
-function _createCandidate(
-  {
-    lastName,
-    firstName,
-    birthdate,
-    birthINSEECode,
-    birthPostalCode,
-    birthCity,
-    birthCountry,
-    resultRecipientEmail,
-    email,
-    externalId,
-    extraTimePercentage,
-    billingMode,
-    prepaymentCode,
-    sex,
-    complementarySubscriptionLabels,
-    line,
-  },
-  isCoreComplementaryCompatibilityEnabled,
-) {
+function _createCandidate({
+  lastName,
+  firstName,
+  birthdate,
+  birthINSEECode,
+  birthPostalCode,
+  birthCity,
+  birthCountry,
+  resultRecipientEmail,
+  email,
+  externalId,
+  extraTimePercentage,
+  billingMode,
+  prepaymentCode,
+  sex,
+  complementarySubscriptionLabels,
+  line,
+}) {
   const subscriptionLabels = [];
-  if (!isCoreComplementaryCompatibilityEnabled) {
-    subscriptionLabels.push(...[SUBSCRIPTION_TYPES.CORE, ...complementarySubscriptionLabels]);
-  } else {
-    if (complementarySubscriptionLabels.length > 0) {
-      subscriptionLabels.push(...complementarySubscriptionLabels);
-    } else {
-      subscriptionLabels.push(SUBSCRIPTION_TYPES.CORE);
-    }
-  }
+  subscriptionLabels.push(...[SUBSCRIPTION_TYPES.CORE, ...complementarySubscriptionLabels]);
+
   return {
     lastName,
     firstName,

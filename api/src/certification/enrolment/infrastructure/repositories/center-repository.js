@@ -3,7 +3,6 @@ import { Organization } from '../../../../organizational-entities/domain/models/
 import { CERTIFICATION_CENTER_TYPES } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
-import { CERTIFICATION_FEATURES } from '../../../shared/domain/constants.js';
 import { Center, MatchingOrganization } from '../../domain/models/Center.js';
 import { Habilitation } from '../../domain/models/Habilitation.js';
 
@@ -22,7 +21,6 @@ export async function getById({ id }) {
         'label', "complementary-certifications"."label"
         ) order by "complementary-certification-habilitations"."complementaryCertificationId")`,
       ),
-      features: knexConn.raw('array_remove(array_agg(DISTINCT "certificationCenterFeatures"."key"), NULL)'),
       createdAt: 'certification-centers.createdAt',
       updatedAt: 'certification-centers.updatedAt',
     })
@@ -36,26 +34,6 @@ export async function getById({ id }) {
       'complementary-certifications',
       'complementary-certification-habilitations.complementaryCertificationId',
       'complementary-certifications.id',
-    )
-    .leftJoin(
-      _getCertificationCenterFeatures({ id }),
-      'certification-centers.id',
-      'certificationCenterFeatures.certificationCenterId',
-    )
-    .leftJoin(
-      function () {
-        this.select('certificationCenterId')
-          .from('certification-center-features')
-          .innerJoin('features', function () {
-            this.on('certification-center-features.featureId', 'features.id').andOnVal(
-              'features.key',
-              CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE.key,
-            );
-          })
-          .as('complementaryCertificationAloneFeature');
-      },
-      'complementaryCertificationAloneFeature.certificationCenterId',
-      'certification-centers.id',
     )
     .where('certification-centers.id', '=', id)
     .groupBy('certification-centers.id')
@@ -83,7 +61,6 @@ function toDomain(row, matchingOrganization) {
     externalId: row.externalId,
     type: row.type,
     habilitations: _toDomainHabilitation(row.habilitations),
-    features: row.features,
     matchingOrganization,
   });
 }
@@ -94,15 +71,4 @@ function _toDomainHabilitation(complementaryCertificationHabilitations = []) {
     .map(
       ({ complementaryCertificationId, key, label }) => new Habilitation({ complementaryCertificationId, key, label }),
     );
-}
-
-function _getCertificationCenterFeatures({ id }) {
-  return (builder) => {
-    return builder
-      .select('certification-center-features.certificationCenterId', 'features.key')
-      .from('certification-center-features')
-      .innerJoin('features', 'features.id', 'certification-center-features.featureId')
-      .where('certification-center-features.certificationCenterId', '=', id)
-      .as('certificationCenterFeatures');
-  };
 }

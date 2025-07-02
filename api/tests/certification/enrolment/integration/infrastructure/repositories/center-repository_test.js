@@ -1,5 +1,4 @@
 import * as centerRepository from '../../../../../../src/certification/enrolment/infrastructure/repositories/center-repository.js';
-import { CERTIFICATION_FEATURES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { types } from '../../../../../../src/organizational-entities/domain/models/Organization.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { CertificationCenter } from '../../../../../../src/shared/domain/models/index.js';
@@ -41,42 +40,6 @@ describe('Integration | Certification |  Center | Repository | center-repository
           type: 'PRO',
           externalId: 'EX123',
           habilitations: [],
-          features: [],
-        });
-        expect(result).to.deepEqualInstance(expectedCenter);
-      });
-    });
-
-    context('when the certification center is a feature pilot', function () {
-      it('should return the information', async function () {
-        // given
-        const centerId = 1;
-        databaseBuilder.factory.buildCertificationCenter({
-          id: centerId,
-          type: CertificationCenter.types.PRO,
-        });
-        const feature = databaseBuilder.factory.buildFeature({
-          key: CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE.key,
-        });
-        databaseBuilder.factory.buildCertificationCenterFeature({
-          certificationCenterId: centerId,
-          featureId: feature.id,
-        });
-        await databaseBuilder.commit();
-
-        // when
-        const result = await centerRepository.getById({
-          id: centerId,
-        });
-
-        // then
-        const expectedCenter = domainBuilder.certification.enrolment.buildCenter({
-          id: centerId,
-          name: 'some name',
-          type: 'PRO',
-          externalId: 'EX123',
-          habilitations: [],
-          features: [CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE.key],
         });
         expect(result).to.deepEqualInstance(expectedCenter);
       });
@@ -123,7 +86,6 @@ describe('Integration | Certification |  Center | Repository | center-repository
           externalId: 'EXTERNALABC',
           type: CertificationCenter.types.SCO,
           habilitations: [],
-          features: [],
           matchingOrganization: domainBuilder.certification.enrolment.buildMatchingOrganization({
             id: matchingOrganizationId,
             externalId: 'EXTERNALABC',
@@ -177,7 +139,6 @@ describe('Integration | Certification |  Center | Repository | center-repository
             label: droit.label,
           }),
         ],
-        features: [],
       });
       expect(result).to.deepEqualInstance(expectedCenter);
     });

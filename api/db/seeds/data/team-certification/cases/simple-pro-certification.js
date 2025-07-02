@@ -85,7 +85,6 @@ export class ProSeed {
         externalId: PRO_CERTIFICATION_CENTER_EXTERNAL_ID,
         createdAt: new Date('2022-01-30'),
         habilitations: [],
-        isV3Pilot: true,
       }),
       complementaryCertificationIds: [],
     });

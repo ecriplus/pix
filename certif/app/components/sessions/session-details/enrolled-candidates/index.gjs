@@ -1,6 +1,5 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
-import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
@@ -211,15 +210,14 @@ export default class EnrolledCandidates extends Component {
   _createCertificationCandidateRecord(certificationCandidateData) {
     const subscriptions = certificationCandidateData.subscriptions;
     delete certificationCandidateData.subscriptions;
-    if (
-      !this.currentUser.currentAllowedCertificationCenterAccess.isCoreComplementaryCompatibilityEnabled ||
-      subscriptions.length === 0
-    ) {
+
+    if (subscriptions.length === 0) {
       subscriptions.push({
         type: SUBSCRIPTION_TYPES.CORE,
         complementaryCertificationId: null,
       });
     }
+
     return {
       subscriptions,
       certificationCandidate: this.store.createRecord('certification-candidate', certificationCandidateData),
@@ -294,10 +292,6 @@ export default class EnrolledCandidates extends Component {
           birthdate === currentBirthdate,
       ) !== undefined
     );
-  }
-
-  get showCompatibilityTooltip() {
-    return this.currentUser.currentAllowedCertificationCenterAccess.isCoreComplementaryCompatibilityEnabled;
   }
 
   computeSubscriptionsText = (candidate) => {
@@ -411,21 +405,6 @@ export default class EnrolledCandidates extends Component {
             <:header>
               <span class='certification-candidates-table__selected-subscriptions'>
                 {{t 'common.forms.certification-labels.selected-subscriptions'}}
-                {{#if this.showCompatibilityTooltip}}
-                  <PixTooltip @id='tooltip-compatibility-subscription' @position='bottom' @isWide={{true}}>
-                    <:triggerElement>
-                      <PixIcon
-                        @plainIcon={{true}}
-                        @name='info'
-                        tabindex='0'
-                        aria-describedby='tooltip-compatibility-subscription'
-                      />
-                    </:triggerElement>
-                    <:tooltip>
-                      {{t 'pages.sessions.detail.candidates.list.compatibility-tooltip'}}
-                    </:tooltip>
-                  </PixTooltip>
-                {{/if}}
               </span>
             </:header>
             <:cell>

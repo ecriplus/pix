@@ -1,4 +1,3 @@
-import { CERTIFICATION_FEATURES } from '../../../../../src/certification/shared/domain/constants.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { CERTIFICATION_CENTER_MEMBERSHIP_ROLES } from '../../../../../src/shared/domain/models/CertificationCenterMembership.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
@@ -10,13 +9,6 @@ describe('Integration | Identity Access Management | Domain | UseCase | get-cert
     // given
     const user = databaseBuilder.factory.buildUser();
     const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
-    const complementaryAlonePilotFeatureId = databaseBuilder.factory.buildFeature(
-      CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE,
-    ).id;
-    databaseBuilder.factory.buildCertificationCenterFeature({
-      certificationCenterId: certificationCenter.id,
-      featureId: complementaryAlonePilotFeatureId,
-    });
     const membership = databaseBuilder.factory.buildCertificationCenterMembership({
       userId: user.id,
       certificationCenterId: certificationCenter.id,
@@ -42,7 +34,6 @@ describe('Integration | Identity Access Management | Domain | UseCase | get-cert
           type: certificationCenter.type,
           name: certificationCenter.name,
           externalId: certificationCenter.externalId,
-          features: [CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE.key],
         }),
       ],
       certificationCenterMemberships: [

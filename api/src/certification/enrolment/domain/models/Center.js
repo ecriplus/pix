@@ -4,7 +4,6 @@
 
 import { types } from '../../../../organizational-entities/domain/models/Organization.js';
 import { CERTIFICATION_CENTER_TYPES } from '../../../../shared/domain/constants.js';
-import { CERTIFICATION_FEATURES } from '../../../shared/domain/constants.js';
 import { CenterTypes } from './CenterTypes.js';
 
 export class Center {
@@ -13,16 +12,14 @@ export class Center {
    * @param {number} props.id
    * @param {CenterTypes} props.type
    * @param {Array<Habilitation>} props.habilitations center habilitations
-   * @param {Array<string>} props.features activated center features
    * @param externalId
    */
-  constructor({ id, name, externalId, type, habilitations, features, matchingOrganization }) {
+  constructor({ id, name, externalId, type, habilitations, matchingOrganization }) {
     this.id = id;
     this.name = name;
     this.type = type;
     this.externalId = externalId;
     this.habilitations = habilitations ?? [];
-    this.features = features ?? [];
     this.matchingOrganization = matchingOrganization;
   }
 
@@ -32,14 +29,6 @@ export class Center {
 
   get hasBillingMode() {
     return this.type !== CenterTypes.SCO;
-  }
-
-  get isComplementaryAlonePilot() {
-    return this.features.includes(CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE.key);
-  }
-
-  get isCoreComplementaryCompatibilityEnabled() {
-    return this.isComplementaryAlonePilot;
   }
 
   isHabilitated(key) {
