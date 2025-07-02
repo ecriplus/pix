@@ -150,7 +150,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
         return databaseBuilder.commit();
       });
 
-      it('should finish the test', async function () {
+      it('should return the assessment with no next challenge', async function () {
         // given
         const options = {
           method: 'GET',
@@ -162,9 +162,8 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
 
         // then
         expect(response.statusCode).to.equal(200);
-        expect(response.result).to.deep.equal({
-          data: null,
-        });
+        expect(response.result.data.id).to.equal(assessmentId.toString());
+        expect(response.result.data.relationships['next-challenge'].data).to.be.null;
       });
     });
   });

@@ -13,7 +13,6 @@ import { AssessmentEndedError } from '../../domain/errors.js';
 import { sharedUsecases } from '../../domain/usecases/index.js';
 import * as assessmentRepository from '../../infrastructure/repositories/assessment-repository.js';
 import * as assessmentSerializer from '../../infrastructure/serializers/jsonapi/assessment-serializer.js';
-import * as challengeSerializer from '../../infrastructure/serializers/jsonapi/challenge-serializer.js';
 import {
   extractLocaleFromRequest,
   extractUserIdFromRequest,

@@ -2,15 +2,14 @@ import { AssessmentEndedError } from '../../../../../src/shared/domain/errors.js
 import { Statuses } from '../../../../../src/shared/domain/models/Challenge.js';
 import { Assessment } from '../../../../../src/shared/domain/models/index.js';
 import { getNextChallenge } from '../../../../../src/shared/domain/usecases/get-next-challenge.js';
-import { catchErr, domainBuilder, expect, preventStubsToBeCalledUnexpectedly, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, preventStubsToBeCalledUnexpectedly, sinon } from '../../../../test-helper.js';
 
 describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () {
   describe('#getNextChallenge', function () {
     let userId, assessmentId, locale, dependencies;
-    let assessmentRepository_getStub;
+    let assessmentRepository_getWithAnswersStub;
     let assessmentRepository_updateLastQuestionDateStub;
     let assessmentRepository_updateWhenNewChallengeIsAskedStub;
-    let answerRepository_findByAssessmentStub;
     let challengeRepository_getStub;
     let evaluationUsecases_getNextChallengeForPreviewStub;
     let evaluationUsecases_getNextChallengeForDemoStub;
@@ -22,10 +21,9 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
       userId = 'someUserId';
       assessmentId = 'someAssessmentId';
       locale = 'someLocale';
-      assessmentRepository_getStub = sinon.stub().named('get');
+      assessmentRepository_getWithAnswersStub = sinon.stub().named('getWithAnswersStub');
       assessmentRepository_updateLastQuestionDateStub = sinon.stub().named('updateLastQuestionDate');
       assessmentRepository_updateWhenNewChallengeIsAskedStub = sinon.stub().named('updateWhenNewChallengeIsAsked');
-      answerRepository_findByAssessmentStub = sinon.stub().named('findByAssessment');
       challengeRepository_getStub = sinon.stub().named('get');
       evaluationUsecases_getNextChallengeForPreviewStub = sinon.stub().named('getNextChallengeForPreview');
       evaluationUsecases_getNextChallengeForDemoStub = sinon.stub().named('getNextChallengeForDemo');
@@ -39,10 +37,9 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         .stub()
         .named('selectNextCertificationChallenge');
       preventStubsToBeCalledUnexpectedly([
-        assessmentRepository_getStub,
+        assessmentRepository_getWithAnswersStub,
         assessmentRepository_updateLastQuestionDateStub,
         assessmentRepository_updateWhenNewChallengeIsAskedStub,
-        answerRepository_findByAssessmentStub,
         challengeRepository_getStub,
         evaluationUsecases_getNextChallengeForPreviewStub,
         evaluationUsecases_getNextChallengeForDemoStub,
@@ -52,13 +49,9 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
       ]);
 
       const assessmentRepository = {
-        get: assessmentRepository_getStub,
+        getWithAnswers: assessmentRepository_getWithAnswersStub,
         updateLastQuestionDate: assessmentRepository_updateLastQuestionDateStub,
         updateWhenNewChallengeIsAsked: assessmentRepository_updateWhenNewChallengeIsAskedStub,
-      };
-
-      const answerRepository = {
-        findByAssessment: answerRepository_findByAssessmentStub,
       };
 
       const challengeRepository = {
@@ -81,7 +74,6 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         userId,
         locale,
         assessmentRepository,
-        answerRepository,
         challengeRepository,
         evaluationUsecases,
         certificationEvaluationRepository,
@@ -101,13 +93,14 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         Assessment.states.ENDED_BY_SUPERVISOR,
         Assessment.states.ENDED_DUE_TO_FINALIZATION,
       ].forEach((assessmentState) => {
-        it(`should throw a AssessmentEndedError when assessment is ${assessmentState}`, async function () {
+        it(`should return an assessment with its answers`, async function () {
           assessment.state = assessmentState;
-          assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
+          assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
 
-          const err = await catchErr(getNextChallenge)(dependencies);
+          const assessmentWithNextChallenge = await getNextChallenge(dependencies);
 
-          expect(err).to.be.instanceOf(AssessmentEndedError);
+          expect(assessmentWithNextChallenge).to.deepEqualInstance(assessment);
+          expect(assessmentWithNextChallenge.nextChallenge).to.be.null;
         });
       });
     });
@@ -119,12 +112,11 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           type: Assessment.types.PREVIEW,
           lastChallengeId: null,
         });
-        assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
+        assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
         assessmentRepository_updateLastQuestionDateStub.resolves();
         assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
         const challenge = domainBuilder.buildChallenge({ id: 'challengeForPreview' });
         evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves(challenge);
-        answerRepository_findByAssessmentStub.withArgs(assessment.id).resolves([domainBuilder.buildAnswer()]);
 
         const assessmentWithNextChallenge = await getNextChallenge(dependencies);
 
@@ -138,12 +130,11 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             type: Assessment.types.PREVIEW,
             lastChallengeId: null,
           });
-          assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
+          assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
           assessmentRepository_updateLastQuestionDateStub.resolves();
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
           const challenge = domainBuilder.buildChallenge({ id: 'challengeForPreview' });
           evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves(challenge);
-          answerRepository_findByAssessmentStub.withArgs(assessment.id).resolves([domainBuilder.buildAnswer()]);
 
           const assessmentWithNextChallenge = await getNextChallenge(dependencies);
 
@@ -157,15 +148,13 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             state: Assessment.states.STARTED,
             type: Assessment.types.PREVIEW,
             lastChallengeId: 'previousChallengeId',
+            answers: [domainBuilder.buildAnswer({ challengeId: 'previousChallengeId' })],
           });
-          assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
+          assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
           assessmentRepository_updateLastQuestionDateStub.resolves();
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
           const challenge = domainBuilder.buildChallenge({ id: 'challengeForPreview' });
           evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves(challenge);
-          answerRepository_findByAssessmentStub
-            .withArgs(assessment.id)
-            .resolves([domainBuilder.buildAnswer({ challengeId: 'previousChallengeId' })]);
 
           const assessmentWithNextChallenge = await getNextChallenge(dependencies);
 
@@ -181,19 +170,13 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
               type: Assessment.types.PREVIEW,
               lastChallengeId: 'previousChallengeId',
             });
-            assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
+            assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
             assessmentRepository_updateLastQuestionDateStub.resolves();
             assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
             const previousChallenge = domainBuilder.buildChallenge({
               id: 'previousChallengeId',
               status: Statuses.VALIDATED,
             });
-            answerRepository_findByAssessmentStub
-              .withArgs(assessment.id)
-              .resolves([
-                domainBuilder.buildAnswer({ challengeId: 'someChallengeId' }),
-                domainBuilder.buildAnswer({ challengeId: 'someOtherChallengeId' }),
-              ]);
             challengeRepository_getStub.withArgs('previousChallengeId').resolves(previousChallenge);
 
             const assessmentWithNextChallenge = await getNextChallenge(dependencies);
@@ -209,7 +192,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
               type: Assessment.types.PREVIEW,
               lastChallengeId: 'previousChallengeId',
             });
-            assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
+            assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
             assessmentRepository_updateLastQuestionDateStub.resolves();
             assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
             const challenge = domainBuilder.buildChallenge({ id: 'nextChallengeForPreview' });
@@ -218,7 +201,6 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
               status: Statuses.OBSOLETE,
             });
             evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves(challenge);
-            answerRepository_findByAssessmentStub.withArgs(assessment.id).resolves([]);
             challengeRepository_getStub.withArgs('previousChallengeId').resolves(previousChallenge);
 
             const assessmentWithNextChallenge = await getNextChallenge(dependencies);
@@ -237,19 +219,18 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           assessment = domainBuilder.buildAssessment({
             state: Assessment.states.STARTED,
             type: Assessment.types.PREVIEW,
+            answers: [],
           });
-          assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
+          assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
           assessmentRepository_updateLastQuestionDateStub.resolves();
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
-          answerRepository_findByAssessmentStub.resolves([]);
         });
 
         it('should call usecase and return value from preview usecase', async function () {
-          const challenge = domainBuilder.buildChallenge({ id: 'challengeForPreview' });
-          evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves(challenge);
-          const assessmentWithNextChallenge = await getNextChallenge(dependencies);
+          evaluationUsecases_getNextChallengeForPreviewStub.rejects(new AssessmentEndedError());
+          const assessmentWithoutChallenge = await getNextChallenge(dependencies);
 
-          expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
+          expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
         });
       });
 
@@ -260,11 +241,11 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           assessment = domainBuilder.buildAssessment({
             state: Assessment.states.STARTED,
             type: Assessment.types.DEMO,
+            answers: [],
           });
-          assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
+          assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
           assessmentRepository_updateLastQuestionDateStub.resolves();
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
-          answerRepository_findByAssessmentStub.resolves([]);
         });
 
         it('should call usecase and return value from demo usecase', async function () {
@@ -273,6 +254,17 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           const assessmentWithNextChallenge = await getNextChallenge(dependencies);
 
           expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
+        });
+        context('when there is no more challenge', function () {
+          it('should return an assessment with no nextChallenge', async function () {
+            // given
+            evaluationUsecases_getNextChallengeForDemoStub.rejects(new AssessmentEndedError());
+
+            // when
+            const assessmentWithoutChallenge = await getNextChallenge(dependencies);
+            // then
+            expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
+          });
         });
       });
 
@@ -283,11 +275,11 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           assessment = domainBuilder.buildAssessment({
             state: Assessment.states.STARTED,
             type: Assessment.types.CAMPAIGN,
+            answers: [],
           });
-          assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
+          assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
           assessmentRepository_updateLastQuestionDateStub.resolves();
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
-          answerRepository_findByAssessmentStub.resolves([]);
         });
 
         it('should call usecase and return value from campaign usecase', async function () {
@@ -299,6 +291,18 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
 
           expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
         });
+
+        context('when there is no more challenge', function () {
+          it('should return an assessment with no nextChallenge', async function () {
+            // given
+            evaluationUsecases_getNextChallengeForCampaignAssessmentStub.rejects(new AssessmentEndedError());
+
+            // when
+            const assessmentWithoutChallenge = await getNextChallenge(dependencies);
+            // then
+            expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
+          });
+        });
       });
 
       context('for assessment of type COMPETENCE_EVALUATION', function () {
@@ -308,11 +312,11 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           assessment = domainBuilder.buildAssessment({
             state: Assessment.states.STARTED,
             type: Assessment.types.COMPETENCE_EVALUATION,
+            answers: [],
           });
-          assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
+          assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
           assessmentRepository_updateLastQuestionDateStub.resolves();
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
-          answerRepository_findByAssessmentStub.resolves([]);
         });
 
         it('should call usecase and return value from competence evaluation usecase', async function () {
@@ -324,6 +328,18 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
 
           expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
         });
+
+        context('when there is no more challenge', function () {
+          it('should return an assessment with no nextChallenge', async function () {
+            // given
+            evaluationUsecases_getNextChallengeForCompetenceEvaluationStub.rejects(new AssessmentEndedError());
+
+            // when
+            const assessmentWithoutChallenge = await getNextChallenge(dependencies);
+            // then
+            expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
+          });
+        });
       });
 
       context('for assessment of type CERTIFICATION', function () {
@@ -334,11 +350,11 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             state: Assessment.states.STARTED,
             id: assessmentId,
             type: Assessment.types.CERTIFICATION,
+            answers: [],
           });
-          assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
+          assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
           assessmentRepository_updateLastQuestionDateStub.resolves();
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
-          answerRepository_findByAssessmentStub.resolves([]);
         });
 
         it('should call usecase and return value from certification usecase', async function () {
@@ -350,6 +366,18 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
 
           expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
         });
+
+        context('when there is no more challenge', function () {
+          it('should return an assessment with no nextChallenge', async function () {
+            // given
+            certificationEvaluationRepository_selectNextCertificationChallengeStub.rejects(new AssessmentEndedError());
+
+            // when
+            const assessmentWithoutChallenge = await getNextChallenge(dependencies);
+            // then
+            expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
+          });
+        });
       });
 
       context('for assessment of type unknown', function () {
@@ -360,11 +388,11 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             state: Assessment.states.STARTED,
             id: assessmentId,
             type: 'coucou les zamis',
+            answers: [],
           });
-          assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
+          assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
           assessmentRepository_updateLastQuestionDateStub.resolves();
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
-          answerRepository_findByAssessmentStub.resolves([]);
         });
 
         it('should return null', async function () {
@@ -386,10 +414,10 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             state: Assessment.states.STARTED,
             id: assessmentId,
             type: Assessment.types.PREVIEW,
+            answers: [],
           });
           evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves({ id: 'someChallengeId' });
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
-          answerRepository_findByAssessmentStub.resolves([]);
         });
 
         afterEach(async function () {
@@ -397,7 +425,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         });
 
         it(`should update the last question date`, async function () {
-          assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
+          assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
           assessmentRepository_updateLastQuestionDateStub.resolves();
 
           await getNextChallenge(dependencies);
@@ -412,7 +440,6 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
       context('updating last challenge asked', function () {
         beforeEach(function () {
           assessmentRepository_updateLastQuestionDateStub.resolves();
-          answerRepository_findByAssessmentStub.resolves([]);
         });
 
         context('when no next challenge has been found', function () {
@@ -422,7 +449,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
               state: Assessment.states.STARTED,
               type: Assessment.types.PREVIEW,
             });
-            assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
+            assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
             evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves(null);
 
             await getNextChallenge(dependencies);
@@ -438,11 +465,10 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
               state: Assessment.states.STARTED,
               type: Assessment.types.PREVIEW,
               lastChallengeId: 'currentChallengeId',
+              answers: [domainBuilder.buildAnswer({ challengeId: 'currentChallengeId' })],
             });
-            answerRepository_findByAssessmentStub.resolves([
-              domainBuilder.buildAnswer({ challengeId: 'currentChallengeId' }),
-            ]);
-            assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
+
+            assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
             evaluationUsecases_getNextChallengeForPreviewStub
               .withArgs({})
               .resolves(domainBuilder.buildChallenge({ id: 'currentChallengeId' }));
@@ -460,11 +486,10 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
               state: Assessment.states.STARTED,
               type: Assessment.types.PREVIEW,
               lastChallengeId: 'previousChallengeId',
+              answers: [domainBuilder.buildAnswer({ challengeId: 'previousChallengeId' })],
             });
-            answerRepository_findByAssessmentStub.resolves([
-              domainBuilder.buildAnswer({ challengeId: 'previousChallengeId' }),
-            ]);
-            assessmentRepository_getStub.withArgs(assessmentId).resolves(assessment);
+
+            assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
             evaluationUsecases_getNextChallengeForPreviewStub
               .withArgs({})
               .resolves(domainBuilder.buildChallenge({ id: 'nextChallengeId' }));
