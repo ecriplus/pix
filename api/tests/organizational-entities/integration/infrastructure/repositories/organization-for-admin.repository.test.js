@@ -1049,125 +1049,127 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       expect(updatedOrganization.updatedAt).to.deep.equal(new Date('2022-02-02'));
     });
 
-    it('should enable feature', async function () {
-      // given
-      const userId = databaseBuilder.factory.buildUser({ firstName: 'Anne', lastName: 'Héantie' }).id;
-      const organization = databaseBuilder.factory.buildOrganization({
-        name: 'super orga',
-        createdBy: userId,
-      });
-      const featureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT).id;
-      await databaseBuilder.commit();
+    describe('#features', function () {
+      it('should enable feature', async function () {
+        // given
+        const userId = databaseBuilder.factory.buildUser({ firstName: 'Anne', lastName: 'Héantie' }).id;
+        const organization = databaseBuilder.factory.buildOrganization({
+          name: 'super orga',
+          createdBy: userId,
+        });
+        const featureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT).id;
+        await databaseBuilder.commit();
 
-      // when
-      const organizationToUpdate = new OrganizationForAdmin({
-        id: organization.id,
-        documentationUrl: 'https://pix.fr/',
-        features: {
-          [ORGANIZATION_FEATURE.LEARNER_IMPORT.key]: { active: false },
-          [ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT.key]: { active: true },
-        },
-      });
-      await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
+        // when
+        const organizationToUpdate = new OrganizationForAdmin({
+          id: organization.id,
+          documentationUrl: 'https://pix.fr/',
+          features: {
+            [ORGANIZATION_FEATURE.LEARNER_IMPORT.key]: { active: false },
+            [ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT.key]: { active: true },
+          },
+        });
+        await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
 
-      // then
-      const enabledFeatures = await knex('organization-features')
-        .where({ organizationId: organization.id, featureId })
-        .whereNot({ featureId: byDefaultFeatureId });
-      expect(enabledFeatures).to.have.lengthOf(1);
-      expect(enabledFeatures[0].featureId).to.equal(featureId);
-    });
-
-    it('should not enable feature twice', async function () {
-      // given
-      const userId = databaseBuilder.factory.buildUser({ firstName: 'Anne', lastName: 'Héantie' }).id;
-      const organization = databaseBuilder.factory.buildOrganization({
-        name: 'super orga',
-        createdBy: userId,
+        // then
+        const enabledFeatures = await knex('organization-features')
+          .where({ organizationId: organization.id, featureId })
+          .whereNot({ featureId: byDefaultFeatureId });
+        expect(enabledFeatures).to.have.lengthOf(1);
+        expect(enabledFeatures[0].featureId).to.equal(featureId);
       });
 
-      const featureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT).id;
+      it('should not enable feature twice', async function () {
+        // given
+        const userId = databaseBuilder.factory.buildUser({ firstName: 'Anne', lastName: 'Héantie' }).id;
+        const organization = databaseBuilder.factory.buildOrganization({
+          name: 'super orga',
+          createdBy: userId,
+        });
 
-      databaseBuilder.factory.buildOrganizationFeature({ organizationId: organization.id, featureId });
-      await databaseBuilder.commit();
+        const featureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT).id;
 
-      // when
-      const organizationToUpdate = new OrganizationForAdmin({
-        id: organization.id,
-        documentationUrl: 'https://pix.fr/',
-        features: {
-          [ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT.key]: { active: true },
-        },
+        databaseBuilder.factory.buildOrganizationFeature({ organizationId: organization.id, featureId });
+        await databaseBuilder.commit();
+
+        // when
+        const organizationToUpdate = new OrganizationForAdmin({
+          id: organization.id,
+          documentationUrl: 'https://pix.fr/',
+          features: {
+            [ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT.key]: { active: true },
+          },
+        });
+
+        await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
+
+        // then
+        const enabledFeatures = await knex('organization-features')
+          .where({ organizationId: organization.id })
+          .whereNot({ featureId: byDefaultFeatureId });
+        expect(enabledFeatures).to.have.lengthOf(1);
+        expect(enabledFeatures[0].featureId).to.equal(featureId);
       });
 
-      await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
+      it('should disable feature for a given organization', async function () {
+        // given
+        const userId = databaseBuilder.factory.buildUser({ firstName: 'Anne', lastName: 'Héantie' }).id;
+        const organization = databaseBuilder.factory.buildOrganization({
+          name: 'super orga',
+          createdBy: userId,
+        });
 
-      // then
-      const enabledFeatures = await knex('organization-features')
-        .where({ organizationId: organization.id })
-        .whereNot({ featureId: byDefaultFeatureId });
-      expect(enabledFeatures).to.have.lengthOf(1);
-      expect(enabledFeatures[0].featureId).to.equal(featureId);
-    });
+        const otherOrganization = databaseBuilder.factory.buildOrganization({
+          name: 'other orga',
+          createdBy: userId,
+        });
 
-    it('should disable feature for a given organization', async function () {
-      // given
-      const userId = databaseBuilder.factory.buildUser({ firstName: 'Anne', lastName: 'Héantie' }).id;
-      const organization = databaseBuilder.factory.buildOrganization({
-        name: 'super orga',
-        createdBy: userId,
+        const featureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT).id;
+        databaseBuilder.factory.buildOrganizationFeature({ organizationId: organization.id, featureId });
+        databaseBuilder.factory.buildOrganizationFeature({ organizationId: otherOrganization.id, featureId });
+
+        await databaseBuilder.commit();
+
+        // when
+        const organizationToUpdate = new OrganizationForAdmin({
+          id: organization.id,
+          documentationUrl: 'https://pix.fr/',
+          features: {
+            [ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT.key]: { active: false },
+          },
+        });
+        await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
+
+        //then
+        const enabledFeatures = await knex('organization-features').whereNot({ featureId: byDefaultFeatureId });
+        expect(enabledFeatures).to.have.lengthOf(1);
+        expect(enabledFeatures[0].organizationId).to.equal(otherOrganization.id);
       });
 
-      const otherOrganization = databaseBuilder.factory.buildOrganization({
-        name: 'other orga',
-        createdBy: userId,
+      it('should disable the "by default" feature for a given organization', async function () {
+        // given
+        const userId = databaseBuilder.factory.buildUser({ firstName: 'Anne', lastName: 'Héantie' }).id;
+        const organization = databaseBuilder.factory.buildOrganization({
+          name: 'super orga',
+          createdBy: userId,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const organizationToUpdate = new OrganizationForAdmin({
+          id: organization.id,
+          documentationUrl: 'https://pix.fr/',
+          features: {
+            [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
+          },
+        });
+        await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
+
+        //then
+        const enabledFeatures = await knex('organization-features');
+        expect(enabledFeatures).to.have.lengthOf(0);
       });
-
-      const featureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT).id;
-      databaseBuilder.factory.buildOrganizationFeature({ organizationId: organization.id, featureId });
-      databaseBuilder.factory.buildOrganizationFeature({ organizationId: otherOrganization.id, featureId });
-
-      await databaseBuilder.commit();
-
-      // when
-      const organizationToUpdate = new OrganizationForAdmin({
-        id: organization.id,
-        documentationUrl: 'https://pix.fr/',
-        features: {
-          [ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT.key]: { active: false },
-        },
-      });
-      await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
-
-      //then
-      const enabledFeatures = await knex('organization-features').whereNot({ featureId: byDefaultFeatureId });
-      expect(enabledFeatures).to.have.lengthOf(1);
-      expect(enabledFeatures[0].organizationId).to.equal(otherOrganization.id);
-    });
-
-    it('should disable the "by default" feature for a given organization', async function () {
-      // given
-      const userId = databaseBuilder.factory.buildUser({ firstName: 'Anne', lastName: 'Héantie' }).id;
-      const organization = databaseBuilder.factory.buildOrganization({
-        name: 'super orga',
-        createdBy: userId,
-      });
-
-      await databaseBuilder.commit();
-
-      // when
-      const organizationToUpdate = new OrganizationForAdmin({
-        id: organization.id,
-        documentationUrl: 'https://pix.fr/',
-        features: {
-          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
-        },
-      });
-      await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
-
-      //then
-      const enabledFeatures = await knex('organization-features');
-      expect(enabledFeatures).to.have.lengthOf(0);
     });
 
     it('should create data protection officer', async function () {
