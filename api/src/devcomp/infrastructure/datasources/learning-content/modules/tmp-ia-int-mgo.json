@@ -1,7 +1,7 @@
 {
   "id": "d03cef94-74af-463d-8901-c886b48d6e0b",
   "slug": "tmp-ia-int-mgo",
-  "title": "Comment chatGPT a-t-il appris à discuter ?",
+  "title": "Comment l'IA générative apprend-elle à discuter avec vous ?",
   "isBeta": false,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
@@ -13,7 +13,7 @@
       "<p>TODO</p>",
       "<p>Garder un esprit critique</p>"
     ],
-    "tabletSupport": "comfortable"
+    "tabletSupport": "inconvenient"
   },
   "grains": [
     {
@@ -121,7 +121,7 @@
           "element": {
             "id": "87e8de3c-dfa9-4a5d-91d8-ae8a703d7772",
             "type": "qcu",
-            "instruction": "<p>À votre avis, quel mot cette IA générative va-t-elle choisir pour compléter cette phrase ?</p><p>En Océanie, l'animal le plus courant est le&nbsp;:</p>",
+            "instruction": "<p>À votre avis, quel mot ce logiciel d'IA générative va-t-il choisir pour compléter cette phrase ?</p><p>En Océanie, l'animal le plus courant est le&nbsp;:</p>",
             "proposals": [
               {
                 "id": "1",
@@ -308,7 +308,7 @@
                 {
                   "id": "466b79fe-f4f0-4dde-824f-33c17e4420b1",
                   "type": "text",
-                  "content": "<p>On applique le même principe pour qu’elle apprenne à faire d’autres choses comme&nbsp;: résumer un texte, écrire une lettre de motivation.</p>"
+                  "content": "<p>On applique le même principe pour qu’elle apprenne à faire d’autres choses comme&nbsp;: résumer un texte, écrire une lettre de motivation, etc.</p>"
                 }
               ]
             }
@@ -326,7 +326,7 @@
           "element": {
             "id": "bfc2e80e-497e-4101-9f14-f353641e22d2",
             "type": "text",
-            "content": "<p>Ce n’est pas tout ! Une troisième étape consiste à entraîner l’IA générative à produire des réponses satisfaisantes pour les utilisateurs.</p>"
+            "content": "<p>Ce n’est pas tout ! Une troisième étape consiste à entraîner l’IA générative à produire des réponses satisfaisantes pour les utilisateurs. 🤩</p>"
           }
         }
       ]
@@ -401,7 +401,7 @@
                 {
                   "id": "d55d9fe9-b12a-4351-97ab-704341f4265d",
                   "type": "text",
-                  "content": "<p>Pour apprendre à l’IA générative à faire des réponses satisfaisantes, on utilise un système de <strong>récompense</strong>. Chacune des réponses de l’IA Gen est notée : 👍 ou 👎 . Le logiciel essaye d’obtenir le plus de 👍 . C’est de l’apprentissage par <strong>renforcement</strong>.</p>"
+                  "content": "<p>Pour apprendre à l’IA générative à faire des réponses satisfaisantes, on utilise un système de <strong>récompense</strong>.<br>Chacune des réponses de l’IA Gen est notée : 👍 ou 👎 . Le logiciel essaye d’obtenir le plus de 👍 .<br>C’est de l’apprentissage par <strong>renforcement</strong>.</p>"
                 }
               ]
             },
@@ -410,7 +410,7 @@
                 {
                   "id": "40570e09-028c-40e3-bc93-47d81f572c33",
                   "type": "text",
-                  "content": "<p>Des personnes sont rémunérées pour produire cette note. C’est un travail mal payé et pas très valorisant.<br>Vous le faites aussi parfois gratuitement en <strong>cliquant</strong> sur le pouce en dessous de la réponse. </p>"
+                  "content": "<p>Des personnes sont rémunérées pour produire cette note. C’est un travail mal payé et pas très valorisant. 😔<br>Vous le faites aussi parfois gratuitement en <strong>cliquant</strong> sur le pouce en dessous de la réponse.</p>"
                 }
               ]
             },
@@ -419,7 +419,7 @@
                 {
                   "id": "33ca3432-2322-4553-844c-91afafbe2f32",
                   "type": "text",
-                  "content": "<p>On observe que les humains ont <strong>tendance</strong> à choisir des réponses polies et agréables, mais aussi des réponses qui ne les contredisent pas, voire qui les flattent ...</p>"
+                  "content": "<p>On observe que les humains ont <strong>tendance</strong> à choisir des réponses polies et agréables, mais aussi des réponses qui ne les contredisent pas, voire qui les flattent ... 🥰</p>"
                 }
               ]
             },
@@ -428,7 +428,7 @@
                 {
                   "id": "e3e9640d-33de-4076-ac26-2525371095bd",
                   "type": "text",
-                  "content": "<p>Bon à savoir 💡: Ce principe d'<strong>alignement aux attentes des humains</strong>, a tendance à rendre les IA génératives <strong>complaisantes</strong>. Pour aller dans le sens de l’utilisateur, elles peuvent <strong>inventer</strong> des faits et halluciner.</p>"
+                  "content": "<p>Bon à savoir 💡: Ce principe d'<strong>alignement aux attentes des humains</strong>, a tendance à rendre les IA génératives <strong>complaisantes</strong>. Pour aller dans le sens de l’utilisateur, elles peuvent <strong>inventer</strong> des faits et halluciner. 🤥</p>"
                 }
               ]
             }
@@ -446,7 +446,7 @@
           "element": {
             "id": "e439337d-8f77-4ad6-b925-14cf68679a2d",
             "type": "text",
-            "content": "<p>📍 <strong>Résumons avant de passer à la suite :</strong><br></p>"
+            "content": "<p>📌 <strong>Résumons avant de passer à la suite :</strong><br></p>"
           }
         },
         {
