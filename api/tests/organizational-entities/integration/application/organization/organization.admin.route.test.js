@@ -249,7 +249,7 @@ describe('Integration | Organizational Entities | Application | Route | Admin | 
     });
   });
 
-  describe('PATCH /api/admin/organizations/{id}', function () {
+  describe('PATCH /api/admin/organizations/{organizationId}', function () {
     it('returns forbidden access if admin member has CERTIF role', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleCertif').callsFake((request, h) => h.response(true));

@@ -577,7 +577,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
     });
   });
 
-  describe('PATCH /api/admin/organizations/{id}', function () {
+  describe('PATCH /api/admin/organizations/{organizationId}', function () {
     it('should return the updated organization and status code 200', async function () {
       // given
       const organizationAttributes = {
