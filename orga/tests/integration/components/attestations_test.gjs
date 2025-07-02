@@ -74,7 +74,7 @@ module('Integration | Component | Attestations', function (hooks) {
       const downloadButton = await screen.getByRole('button', {
         name: t('pages.attestations.download-attestations-button'),
       });
-      assert.dom(downloadButton).isDisabled();
+      assert.dom(downloadButton).hasAttribute('aria-disabled');
     });
 
     test('it should call onSubmit action with selected divisions', async function (assert) {

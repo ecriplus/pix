@@ -21,7 +21,7 @@ module('Integration | Component | Import::ReplaceSup', function (hooks) {
       const button = screen.getByRole('button', {
         name: t('pages.organization-participants-import.actions.replace.label'),
       });
-      assert.ok(button.hasAttribute('disabled'));
+      assert.ok(button.hasAttribute('aria-disabled'));
     });
 
     test('should be enable', async function (assert) {
@@ -37,7 +37,7 @@ module('Integration | Component | Import::ReplaceSup', function (hooks) {
       const button = screen.getByRole('button', {
         name: t('pages.organization-participants-import.actions.replace.label'),
       });
-      assert.notOk(button.hasAttribute('disabled'));
+      assert.notOk(button.hasAttribute('aria-disabled'));
     });
   });
 });

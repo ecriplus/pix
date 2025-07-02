@@ -733,13 +733,13 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
 />`);
 
       //then
-      assert.ok(
-        screen
-          .getByRole('checkbox', {
+      assert
+        .dom(
+          screen.getByRole('checkbox', {
             name: t('pages.organization-participants.table.column.mainCheckbox'),
-          })
-          .hasAttribute('disabled'),
-      );
+          }),
+        )
+        .isDisabled();
     });
 
     test('it should reset selected participants when using pagination', async function (assert) {

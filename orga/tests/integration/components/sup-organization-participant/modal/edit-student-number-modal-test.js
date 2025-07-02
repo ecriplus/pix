@@ -111,7 +111,7 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
         );
 
         // then
-        assert.dom(submitButton).doesNotHaveAttribute('disabled');
+        assert.dom(submitButton).doesNotHaveAttribute('aria-disabled');
       });
     });
 
@@ -138,7 +138,7 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
           t('pages.sup-organization-participants.edit-student-number-modal.actions.update'),
         );
 
-        assert.ok(submitButton.hasAttribute('disabled'));
+        assert.ok(submitButton.hasAttribute('aria-disabled'));
       });
     });
 

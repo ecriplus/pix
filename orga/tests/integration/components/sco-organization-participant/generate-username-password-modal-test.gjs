@@ -57,7 +57,7 @@ module('Integration | Component | ScoOrganizationParticipant::GenerateUsernamePa
     const button = screen.getByRole('button', { name: t('common.actions.confirm') });
 
     assert.ok(heading);
-    assert.dom(button).hasAttribute('disabled');
+    assert.dom(button).hasAttribute('aria-disabled');
   });
 
   test('close the modal', async function (assert) {

@@ -1142,7 +1142,7 @@ module('Integration | Component | ScoOrganizationParticipant::List', function (h
 
           // then
           assert.ok(modalTitle);
-          assert.true(confirmationButton.disabled);
+          assert.dom(confirmationButton).hasAttribute('aria-disabled');
         });
       });
 
@@ -1193,7 +1193,7 @@ module('Integration | Component | ScoOrganizationParticipant::List', function (h
 
           // then
           assert.ok(modalTitle);
-          assert.false(confirmationButton.disabled);
+          assert.dom(confirmationButton).doesNotHaveAttribute('aria-disabled');
         });
 
         test('closes dialog', async function (assert) {
