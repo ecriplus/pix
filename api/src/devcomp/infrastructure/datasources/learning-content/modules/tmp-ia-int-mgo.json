@@ -5,12 +5,12 @@
   "isBeta": false,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Les systèmes d'IA génératives&nbsp;sont capables de tenir des conversations étonnamment naturelles. Mais comment en sont-ils arrivées là ? Ce module vous emmène dans les coulisses de leur apprentissage&nbsp;: des montagnes de textes analysés aux techniques d’entraînement sophistiquées qui leur ont permis de comprendre, prédire et générer le langage humain.</p>",
+    "description": "<p>Les logiciels d'IA génératives&nbsp;sont capables de tenir des conversations étonnamment naturelles. Mais comment en sont-ils arrivés là ? Ce module vous emmène dans les coulisses de leur apprentissage&nbsp;: des montagnes de textes analysés aux techniques d’entraînement sophistiquées qui leur ont permis de comprendre, prédire et générer le langage humain.</p>",
     "duration": 10,
     "level": "Intermédiaire",
     "objectives": [
       "<p>Comprendre les étapes de l'entraînement des LLM</p>",
-      "<p>Comprendre l’étape de raffinement avec des humains</p>",
+      "<p>TODO</p>",
       "<p>Garder un esprit critique</p>"
     ],
     "tabletSupport": "comfortable"
@@ -26,7 +26,7 @@
           "element":{
             "id": "2FFCCAB8-92ED-44D2-BF57-5551840265F0",
             "type": "text",
-            "content": "<p>Voici un logiciel d’IA générative. Testez sa réponse avec différents prompts.</p>"
+            "content": "<p>Voici un logiciel d’IA générative. Observez ses réponses à différents prompts.</p>"
           }
         },
         {
@@ -83,7 +83,7 @@
           "element": {
             "id": "4d4f3ac6-99e0-417c-9a5c-38fc11487264",
             "type": "text",
-            "content": "<p>Une IA générative parvient à simuler une discussion  comme un humain qui aurait réponse à tout. Comment a-t-elle appris à faire cela ? C’est ce que nous allons découvrir ensemble.</p>"
+            "content": "<p>Une IA générative parvient à simuler une discussion  comme un humain qui aurait réponse à tout. Comment a-t-elle appris à faire cela ? C’est ce que nous allons découvrir ensemble.</p>"
           }
         }
       ]
@@ -91,14 +91,14 @@
     {
       "id": "5166145e-6e9c-4fb5-b781-a08749f576c8",
       "type": "activity",
-      "title": "Dec 1",
+      "title": "Decouverte 1",
       "components": [
         {
           "type": "element",
           "element": {
             "id": "2d943050-b29c-4398-a336-143f3173c51a",
             "type": "text",
-            "content": "<p>L’IA générative doit d’abord s’entraîner à <strong>produire du texte</strong> compréhensible par un humain.&nbsp;</p><p>Pour commencer, cliquez sur \"Entraîner l'IA avec ces données\"</p>"
+            "content": "<p>Avant de savoir simuler une discussion, l’IA générative doit d’abord s’entraîner à <strong>produire du texte</strong> compréhensible par un humain.&nbsp;</p><p>Pour cela l'IA générative doit ingurgiter des <strong>quantités gigantesques de données</strong>. Elle utilisera ensuite une représentation de ces données pour produire de nouveaux textes</p><p>Voyons comment cela fonctionne. 🤔<br>Pour commencer, cliquez sur \"Entraîner l'IA avec ces données\"</p>"
           }
         }
       ]
@@ -121,7 +121,7 @@
           "element": {
             "id": "87e8de3c-dfa9-4a5d-91d8-ae8a703d7772",
             "type": "qcu",
-            "instruction": "<p>À votre avis, quel mot cette IA générative va-t-elle choisir pour compléter cette phrase ?</p><p>En Océanie, l'animal le plus courant est le&nbsp;:</p>",
+            "instruction": "<p>À votre avis, quel mot cette IA générative va-t-elle choisir pour compléter cette phrase ?</p><p>En Océanie, l'animal le plus courant est le&nbsp;:</p>",
             "proposals": [
               {
                 "id": "1",
@@ -166,7 +166,7 @@
                 {
                   "id": "4386b458-46cb-45e9-8d1b-1e840cb2f7c3",
                   "type": "text",
-                  "content": "<p>Pour apprendre à une IA générative à produire du langage, on lui donne des <strong>milliards de textes</strong>.</p>"
+                  "content": "<p>Pour apprendre à une IA générative à produire du texte, on lui donne des <strong>milliards de textes</strong>.</p>"
                 }
               ]
             },
@@ -175,7 +175,7 @@
                 {
                   "id": "93d127a7-e179-40cd-9273-ce7a23007a39",
                   "type": "text",
-                  "content": "<p>Des mots sont cachés et l’IA s’entraîne à les <strong>deviner</strong>.</p>"
+                  "content": "<p>L’IA s’entraîne à <strong>deviner</strong> des mots au hasard dans ces textes. 🙈</p>"
                 }
               ]
             },
@@ -184,7 +184,7 @@
                 {
                   "id": "3cdf627f-2ad0-42e8-a529-696936905830",
                   "type": "text",
-                  "content": "<p>Elle mémorise quels mots apparaissent souvent ensemble.</p>"
+                  "content": "<p>Petit à petit elle s'améliore, elle mémorise quels mots apparaissent <strong>souvent</strong> ensemble.</p>"
                 }
               ]
             },
@@ -226,50 +226,50 @@
           "element": {
             "id": "6b03cc70-6198-4e2c-a994-f51ef3fcede4",
             "type": "qab",
-            "instruction": "<p>À votre avis, de quel genre de données a-t-on besoin pour entraîner une IA à simuler une conversation ? 🤔 </p><p>Sélectionnez les exemples appropriés 👇<br><br></p>",
+            "instruction": "<p>À votre avis, de quel genre de données a-t-on besoin pour entraîner une IA à <strong>simuler une conversation </strong>? 🤔 </p><p>Sélectionnez les exemples appropriés 👇<br><br></p>",
             "cards": [
               {
                 "id": "cea6f6c8-afd6-4e6b-8821-17558822a5ea",
-                "text": "Utiliser pour l'entraînement ?",
+                "text": "",
                 "image": {
                   "url": "https://assets.pix.org/draft/modules/ia-int-mgo/forum.png",
                   "altText": ""
                 },
-                "proposalA": "Oui",
-                "proposalB": "Non",
+                "proposalA": "Utiliser",
+                "proposalB": "Ne pas utiliser",
                 "solution": "A"
               },
               {
                 "id": "667724f0-baa9-4eb5-85b1-626bd91b376d",
-                "text": "Utiliser pour l'entraînement ?",
+                "text": "",
                 "image": {
                   "url": "https://assets.pix.org/draft/modules/ia-int-mgo/contact.png",
                   "altText": ""
                 },
-                "proposalA": "Oui",
-                "proposalB": "Non",
+                "proposalA": "Utiliser",
+                "proposalB": "Ne pas utiliser",
                 "solution": "B"
               },
               {
                 "id": "ba011fbb-8f9b-4755-868f-f79aff3e3022",
-                "text": "Utiliser pour l'entraînement ?",
+                "text": "",
                 "image": {
                   "url": "https://assets.pix.org/draft/modules/ia-int-mgo/faq.png",
                   "altText": ""
                 },
-                "proposalA": "Oui",
-                "proposalB": "Non",
+                "proposalA": "Utiliser",
+                "proposalB": "Ne pas utiliser",
                 "solution": "A"
               },
               {
                 "id": "438be278-98a6-47ee-a04b-cab2e2fbd3b6",
-                "text": "Utiliser pour l'entraînement ?",
+                "text": "",
                 "image": {
                   "url": "https://assets.pix.org/draft/modules/ia-int-mgo/article.png",
                   "altText": ""
                 },
-                "proposalA": "Oui",
-                "proposalB": "Non",
+                "proposalA": "Utiliser",
+                "proposalB": "Ne pas utiliser",
                 "solution": "B"
               }
             ]
