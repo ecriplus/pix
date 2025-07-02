@@ -49,20 +49,12 @@ export default class CertificationStarter extends Component {
               </div>
             </div>
             {{#if @certificationCandidateSubscription.nonEligibleSubscription}}
-              <div class="certification-starter-subscriptions-container__non-eligible">
-                <PixIcon
-                  @name="error"
-                  @plainIcon={{true}}
-                  @ariaHidden={{true}}
-                  class="certification-starter-subscriptions-container__info-icon"
-                />
-                <span>
-                  {{t
-                    "pages.certification-start.non-eligible-subscription"
-                    nonEligibleSubscriptionLabel=@certificationCandidateSubscription.nonEligibleSubscription.label
-                  }}
-                </span>
-              </div>
+              <PixNotificationAlert @type="warning" @withIcon={{true}}>
+                {{t
+                  "pages.certification-start.non-eligible-subscription"
+                  nonEligibleSubscriptionLabel=@certificationCandidateSubscription.nonEligibleSubscription.label
+                }}
+              </PixNotificationAlert>
             {{/if}}
           </div>
         {{/unless}}

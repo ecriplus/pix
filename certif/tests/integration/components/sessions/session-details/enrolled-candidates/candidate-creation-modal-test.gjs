@@ -185,7 +185,7 @@ module(
           candidateData.resultRecipientEmail,
         );
         await fillIn(screen.getByLabelText('E-mail de convocation'), candidateData.email);
-        await click(screen.getByRole('radio', { name: 'Aucune' }));
+        await click(screen.getByRole('radio', { name: 'Certification Pix' }));
 
         await click(screen.getByRole('button', { name: 'Inscrire le candidat' }));
 
@@ -513,7 +513,7 @@ module(
         );
 
         // then
-        assert.dom(screen.getByRole('group', { name: 'Certification complémentaire *' })).exists();
+        assert.dom(screen.getByRole('group', { name: 'Choix de la certification *' })).exists();
         assert.dom(screen.getByRole('radio', { name: 'Certif complémentaire 1' })).exists();
         assert.dom(screen.getByRole('radio', { name: 'Certif complémentaire 2' })).exists();
       });

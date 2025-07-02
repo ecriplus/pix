@@ -57,8 +57,7 @@ async function extractCertificationCandidatesFromCandidatesImportSheet({
   return PromiseUtils.mapSeries(Object.entries(candidatesDataByLine), async ([line, candidateData]) => {
     let { sex, birthCountry, birthINSEECode, birthPostalCode, birthCity, billingMode } = candidateData;
     const { email, resultRecipientEmail } = candidateData;
-    const { hasCleaNumerique, hasPixPlusDroit, hasPixPlusEdu1erDegre, hasPixPlusEdu2ndDegre, hasPixPlusProSante } =
-      candidateData;
+    const { hasCleaNumerique } = candidateData;
 
     if (birthINSEECode && birthINSEECode !== '99' && birthINSEECode.length < 5)
       candidateData.birthINSEECode = `0${birthINSEECode}`;
@@ -76,10 +75,6 @@ async function extractCertificationCandidatesFromCandidatesImportSheet({
     const complementaryCertificationsInDB = await complementaryCertificationRepository.findAll();
     const subscriptions = _buildSubscriptions({
       hasCleaNumerique,
-      hasPixPlusDroit,
-      hasPixPlusEdu1erDegre,
-      hasPixPlusEdu2ndDegre,
-      hasPixPlusProSante,
       complementaryCertificationsInDB,
     });
 

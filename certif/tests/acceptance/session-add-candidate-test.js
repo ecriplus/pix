@@ -54,7 +54,7 @@ module('Acceptance | Session Add Candidate', function (hooks) {
     await click(screen.getByText('Portugal'));
     await fillIn(screen.getByLabelText('Commune de naissance *'), 'Paris');
     await click(screen.getByLabelText('Certif complémentaire 2'));
-    await click(screen.getByLabelText('Aucune'));
+    await click(screen.getByLabelText('Certification Pix'));
     await click(screen.getByRole('button', { name: 'Inscrire le candidat' }));
 
     // then

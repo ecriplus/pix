@@ -96,8 +96,6 @@ export default class InformationView extends Component {
       <dd>{{@certificationCenter.dataProtectionOfficerEmail}}</dd>
     </dl>
 
-    <div class="certification-center-information-display__divider"></div>
-
     <span class="label">{{t "pages.certification-centers.information-view.habilitations.title"}}</span>
     <ul class="certification-center-information-display__habilitations-list">
       {{#each this.availableHabilitations as |habilitation|}}
