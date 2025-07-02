@@ -85,11 +85,11 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
                 // then
                 assert
                   .dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')))
-                  .hasAttribute('aria-disabled', 'false');
+                  .doesNotHaveAttribute('aria-disabled');
                 assert
                   .dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')))
-                  .hasAttribute('aria-disabled', 'false');
-                assert.notOk(find('[data-test="challenge-response-proposal-selector"]').getAttribute('disabled'));
+                  .doesNotHaveAttribute('aria-disabled');
+                assert.dom(find('[data-test="challenge-response-proposal-selector"]')).doesNotHaveAttribute('disabled');
               });
 
               test('should display a warning alert', async function (assert) {
@@ -156,11 +156,13 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
               // then
               assert
                 .dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')))
-                .hasAttribute('aria-disabled', 'false');
+                .doesNotHaveAttribute('aria-disabled');
               assert
                 .dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')))
-                .hasAttribute('aria-disabled', 'false');
-              assert.notOk(find('[data-test="challenge-response-proposal-selector"]').getAttribute('disabled'));
+                .doesNotHaveAttribute('aria-disabled');
+              assert
+                .dom(find('[data-test="challenge-response-proposal-selector"]'))
+                .doesNotHaveAttribute('aria-disabled');
             });
           });
         });
@@ -292,10 +294,10 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
             // then
             assert
               .dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')))
-              .hasAttribute('aria-disabled', 'false');
+              .doesNotHaveAttribute('aria-disabled');
             assert
               .dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')))
-              .hasAttribute('aria-disabled', 'false');
+              .doesNotHaveAttribute('aria-disabled');
             assert.notOk(find('[data-test="challenge-response-proposal-selector"]').getAttribute('disabled'));
           });
 
@@ -404,10 +406,10 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
                   // then
                   assert
                     .dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')))
-                    .hasAttribute('aria-disabled', 'false');
+                    .doesNotHaveAttribute('aria-disabled');
                   assert
                     .dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')))
-                    .hasAttribute('aria-disabled', 'false');
+                    .doesNotHaveAttribute('aria-disabled');
 
                   assert.notOk(find('[data-test="challenge-response-proposal-selector"]').getAttribute('disabled'));
                 });
@@ -438,10 +440,10 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
                 // then
                 assert
                   .dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')))
-                  .hasAttribute('aria-disabled', 'false');
+                  .doesNotHaveAttribute('aria-disabled');
                 assert
                   .dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')))
-                  .hasAttribute('aria-disabled', 'false');
+                  .doesNotHaveAttribute('aria-disabled');
 
                 assert.notOk(find('[data-test="challenge-response-proposal-selector"]').getAttribute('disabled'));
               });
@@ -730,10 +732,10 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
                   // then
                   assert
                     .dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')))
-                    .hasAttribute('aria-disabled', 'false');
+                    .doesNotHaveAttribute('aria-disabled');
                   assert
                     .dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')))
-                    .hasAttribute('aria-disabled', 'false');
+                    .doesNotHaveAttribute('aria-disabled');
 
                   assert.notOk(find('[data-test="challenge-response-proposal-selector"]').getAttribute('disabled'));
                 });

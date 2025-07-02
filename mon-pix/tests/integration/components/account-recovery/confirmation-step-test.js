@@ -135,7 +135,7 @@ module('Integration | Component | confirmation-step', function (hooks) {
       name: t('pages.account-recovery.find-sco-record.confirmation-step.buttons.confirm'),
     });
     assert.ok(confirmButton);
-    assert.true(confirmButton.disabled);
+    assert.dom(confirmButton).hasAttribute('aria-disabled');
   });
 
   test('should be possible to continue the account recovery process', async function (assert) {
