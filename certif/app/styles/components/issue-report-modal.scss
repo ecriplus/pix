@@ -1,13 +1,10 @@
 /* stylelint-disable no-descending-specificity */
 
 .issue-report-modal {
-  min-width: 650px;
-  max-width: 650px;
-  margin: 100px auto;
+  min-width: 800px;
 
-  /* to fix in pix UI */
-  h2 {
-    font-size: 0.875rem;
+  h1 {
+    word-break: break-all;
   }
 
   &__frame {

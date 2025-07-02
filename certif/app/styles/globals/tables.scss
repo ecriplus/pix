@@ -21,4 +21,14 @@
   }
 }
 
+// temporary fix: to do on Pix UI
+table {
+  tbody {
+    tr {
+      td {
+        word-break: break-word;
+      }
+    }
+  }
+}
 
