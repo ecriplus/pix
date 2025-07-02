@@ -144,7 +144,6 @@ module('Integration | Component | team | list', function (hooks) {
             message: "L'agent Marie Tim n'a plus accès à Pix Admin.",
           });
           assert.dom(await screen.queryByRole('dialog')).doesNotExist();
-          assert.ok(true);
         });
 
         test('should display an error message and close the modal when an error occurs while disabling', async function (assert) {
@@ -180,7 +179,6 @@ module('Integration | Component | team | list', function (hooks) {
           await waitForDialogClose();
 
           sinon.assert.calledWith(notificationErrorStub, { message: 'Impossible de désactiver cet agent.' });
-          assert.ok(true);
           assert.dom(screen.queryByRole('button', { name: 'Confirmer' })).doesNotExist();
         });
       });
@@ -196,5 +194,129 @@ module('Integration | Component | team | list', function (hooks) {
 
     // then
     assert.dom(screen.getByText('Aucun résultat')).exists();
+  });
+
+  module('when updating member role', function () {
+    test('should save new role when valid role is selected', async function (assert) {
+      // given
+      const save = sinon.stub().resolves();
+      const notificationSuccessStub = sinon.stub();
+
+      class NotificationsStub extends Service {
+        sendSuccessNotification = notificationSuccessStub;
+      }
+
+      class ErrorResponseHandlerStub extends Service {
+        notify = sinon.stub();
+      }
+
+      this.owner.register('service:pixToast', NotificationsStub);
+      this.owner.register('service:errorResponseHandler', ErrorResponseHandlerStub);
+
+      const store = this.owner.lookup('service:store');
+      const members = [
+        store.createRecord('admin-member', {
+          firstName: 'Marie',
+          lastName: 'Tim',
+          email: 'marie.tim@example.net',
+          role: 'SUPER_ADMIN',
+          updatedRole: 'CERTIF',
+          isSuperAdmin: true,
+          save,
+        }),
+      ];
+
+      const roles = [
+        { value: 'SUPER_ADMIN', label: 'Super Admin' },
+        { value: 'CERTIF', label: 'Certif' },
+      ];
+
+      await render(<template><List @members={{members}} @roles={{roles}} /></template>);
+
+      // when
+      await clickByName("Modifier le rôle de l'agent Marie Tim");
+      await clickByName('Valider la modification de rôle');
+
+      // then
+      sinon.assert.calledOnce(save);
+      sinon.assert.calledWith(notificationSuccessStub, { message: "L'agent Marie Tim a désormais le rôle CERTIF" });
+      assert.ok(true);
+    });
+
+    test('should not save when no roles are selected', async function (assert) {
+      // given
+      const save = sinon.stub();
+
+      class ErrorResponseHandlerStub extends Service {
+        notify = sinon.stub();
+      }
+
+      this.owner.register('service:errorResponseHandler', ErrorResponseHandlerStub);
+
+      const store = this.owner.lookup('service:store');
+      const members = [
+        store.createRecord('admin-member', {
+          firstName: 'Marie',
+          lastName: 'Tim',
+          email: 'marie.tim@example.net',
+          role: 'SUPER_ADMIN',
+          updatedRole: null,
+          isSuperAdmin: true,
+          save,
+        }),
+      ];
+
+      const roles = [
+        { value: 'SUPER_ADMIN', label: 'Super Admin' },
+        { value: 'CERTIF', label: 'Certif' },
+      ];
+
+      await render(<template><List @members={{members}} @roles={{roles}} /></template>);
+
+      // when
+      await clickByName("Modifier le rôle de l'agent Marie Tim");
+      await clickByName('Valider la modification de rôle');
+
+      // then
+      assert.notOk(save.called);
+    });
+
+    test('should not save when same role is selected', async function (assert) {
+      // given
+      const save = sinon.stub();
+
+      class ErrorResponseHandlerStub extends Service {
+        notify = sinon.stub();
+      }
+
+      this.owner.register('service:errorResponseHandler', ErrorResponseHandlerStub);
+
+      const store = this.owner.lookup('service:store');
+      const members = [
+        store.createRecord('admin-member', {
+          firstName: 'Marie',
+          lastName: 'Tim',
+          email: 'marie.tim@example.net',
+          role: 'SUPER_ADMIN',
+          updatedRole: 'SUPER_ADMIN',
+          isSuperAdmin: true,
+          save,
+        }),
+      ];
+
+      const roles = [
+        { value: 'SUPER_ADMIN', label: 'Super Admin' },
+        { value: 'CERTIF', label: 'Certif' },
+      ];
+
+      await render(<template><List @members={{members}} @roles={{roles}} /></template>);
+
+      // when
+      await clickByName("Modifier le rôle de l'agent Marie Tim");
+      await clickByName('Valider la modification de rôle');
+
+      // then
+      assert.notOk(save.called);
+    });
   });
 });

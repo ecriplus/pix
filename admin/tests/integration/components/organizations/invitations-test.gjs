@@ -117,6 +117,36 @@ module('Integration | Component | organization-invitations', function (hooks) {
           assert.ok(true);
         });
       });
+
+      test('it should display invitations sorted by updated date (most recent first)', async function (assert) {
+        // given
+        const oldInvitation = {
+          email: 'old@example.net',
+          role: 'MEMBER',
+          roleInFrench: 'Membre',
+          updatedAt: dayjs('2018-10-08T10:50:00Z').utcOffset(2),
+        };
+        const newInvitation = {
+          email: 'new@example.net',
+          role: 'ADMIN',
+          roleInFrench: 'Administrateur',
+          updatedAt: dayjs('2021-10-08T10:50:00Z').utcOffset(2),
+        };
+
+        const invitations = [oldInvitation, newInvitation];
+
+        // when
+        const screen = await render(<template><Invitations @invitations={{invitations}} /></template>);
+
+        // then
+        const invitationsTable = screen.getByRole('table');
+        assert.dom(invitationsTable).exists();
+
+        const invitationRows = screen.getAllByRole('row');
+        assert.strictEqual(invitationRows.length, 3); // header + 2 invitations
+        assert.dom(invitationRows[1]).includesText('new@example.net');
+        assert.dom(invitationRows[2]).includesText('old@example.net');
+      });
     });
   });
 

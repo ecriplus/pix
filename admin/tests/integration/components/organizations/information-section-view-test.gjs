@@ -3,6 +3,7 @@ import EmberObject from '@ember/object';
 import Service from '@ember/service';
 import { t } from 'ember-intl/test-support';
 import InformationSectionView from 'pix-admin/components/organizations/information-section-view';
+import ENV from 'pix-admin/config/environment';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
@@ -12,6 +13,8 @@ module('Integration | Component | organizations/information-section-view', funct
 
   module('when user has access', function (hooks) {
     let features;
+    let originalDashboardUrl;
+
     hooks.beforeEach(function () {
       class AccessControlStub extends Service {
         hasAccessToOrganizationActionsScope = true;
@@ -27,6 +30,11 @@ module('Integration | Component | organizations/information-section-view', funct
         COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY: { active: false },
         ATTESTATIONS_MANAGEMENT: { active: false },
       };
+      originalDashboardUrl = ENV.APP.ORGANIZATION_DASHBOARD_URL;
+    });
+
+    hooks.afterEach(function () {
+      ENV.APP.ORGANIZATION_DASHBOARD_URL = originalDashboardUrl;
     });
 
     test('it renders general information about organization', async function (assert) {
@@ -72,6 +80,53 @@ module('Integration | Component | organizations/information-section-view', funct
       assert.dom(screen.getByText('Crédits : 350')).exists();
       assert.dom(screen.getByText('https://pix.fr')).exists();
       assert.dom(screen.getByText('SSO : super-sso')).exists();
+    });
+
+    test('it renders GAR identity provider correctly', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const oidcPartner = store.createRecord('oidc-identity-provider', {
+        code: 'OIDC',
+        organizationName: 'a super orga',
+        shouldCloseSession: false,
+        source: 'idp',
+      });
+      class OidcIdentityProvidersStub extends Service {
+        list = [oidcPartner];
+      }
+      this.owner.register('service:oidc-identity-providers', OidcIdentityProvidersStub);
+
+      const organization = {
+        type: 'SUP',
+        name: 'SUPer Orga',
+        identityProviderForCampaigns: 'GAR',
+        tags: [],
+        children: [],
+      };
+
+      // when
+      const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+
+      // then
+      assert.dom(screen.getByText('SSO : GAR')).exists();
+    });
+
+    test('it generates correct external dashboard URL', async function (assert) {
+      // given
+      ENV.APP.ORGANIZATION_DASHBOARD_URL = 'https://metabase.pix.fr/dashboard/137/?id=';
+      const organization = {
+        id: 1,
+        name: 'Test Organization',
+        tags: [],
+        children: [],
+      };
+
+      // when
+      const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+
+      // then
+      const dashboardLink = screen.getByRole('link', { name: 'Tableau de bord' });
+      assert.dom(dashboardLink).hasAttribute('href', 'https://metabase.pix.fr/dashboard/137/?id=1');
     });
 
     module('data protection officer information', function () {
@@ -146,9 +201,7 @@ module('Integration | Component | organizations/information-section-view', funct
           name: 'SUPer Orga',
           credit: 350,
           documentationUrl: 'https://pix.fr',
-          features: {
-            SHOW_SKILLS: { active: true },
-          },
+          features: { SHOW_SKILLS: { active: true } },
           createdBy: 1,
           createdAtFormattedDate: '02/09/2022',
           creatorFullName: 'Gilles Parbal',
