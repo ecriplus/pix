@@ -21,7 +21,7 @@
     "tsc": "tsc -b"
   },
   "devDependencies": {
-    "@1024pix/eslint-plugin": "^2.1.5",
+    "@1024pix/eslint-plugin": "^2.1.6",
     "@axe-core/playwright": "^4.10.1",
     "@playwright/test": "^1.50.1",
     "@types/jsonwebtoken": "^9.0.9",
