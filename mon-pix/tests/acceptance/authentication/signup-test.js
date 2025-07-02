@@ -45,6 +45,10 @@ module('Acceptance | authentication | Signup', function (hooks) {
     assert.dom(signupHeading).exists();
     const loginButton = screen.queryByRole('link', { name: t('pages.sign-up.actions.login') });
     assert.dom(loginButton).exists();
+    const otherAuthenticationProvidersTitle = screen.queryByText(
+      t('components.authentication.other-authentication-providers.signup.heading'),
+    );
+    assert.dom(otherAuthenticationProvidersTitle).exists();
 
     // when
     await fillByLabel(t(I18N_KEYS.firstNameInput), firstName);
@@ -101,6 +105,10 @@ module('Acceptance | authentication | Signup', function (hooks) {
         assert.dom(signupHeading).exists();
         const loginButton = screen.queryByRole('link', { name: t('pages.sign-up.actions.login') });
         assert.dom(loginButton).doesNotExist();
+        const otherAuthenticationProvidersTitle = screen.queryByText(
+          t('components.authentication.other-authentication-providers.signup.heading'),
+        );
+        assert.dom(otherAuthenticationProvidersTitle).doesNotExist();
       });
 
       test('then he signs up and is redirected to dashboard', async function (assert) {
