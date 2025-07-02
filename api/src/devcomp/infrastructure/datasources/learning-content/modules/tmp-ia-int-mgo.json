@@ -26,7 +26,7 @@
           "element": {
             "id": "2FFCCAB8-92ED-44D2-BF57-5551840265F0",
             "type": "text",
-            "content": "<p>Voici un logiciel d’IA générative. Observez ses réponses à différents prompts.</p>"
+            "content": "<p>Voici un logiciel d’IA générative. ✨<br>Observez ses réponses à différents prompts. 🔍</p>"
           }
         },
         {
@@ -83,7 +83,7 @@
           "element": {
             "id": "4d4f3ac6-99e0-417c-9a5c-38fc11487264",
             "type": "text",
-            "content": "<p>Une IA générative parvient à simuler une discussion  comme un humain qui aurait réponse à tout. Comment a-t-elle appris à faire cela ? C’est ce que nous allons découvrir ensemble.</p>"
+            "content": "<p>Une IA générative parvient à <strong>simuler une discussion</strong> comme un humain qui aurait réponse à tout. 🤓<br>Comment a-t-elle appris à faire cela ? C’est ce que nous allons découvrir ensemble.</p>"
           }
         }
       ]
