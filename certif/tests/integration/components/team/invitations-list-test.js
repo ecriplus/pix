@@ -156,7 +156,7 @@ module('Integration | Component |  team/invitation-list', function (hooks) {
       );
 
       // then
-      assert.dom(screen.getByRole('button', { name: "Renvoyer l'invitation" })).isDisabled();
+      assert.dom(screen.getByRole('button', { name: "Renvoyer l'invitation" })).hasAttribute('aria-disabled');
     });
   });
 

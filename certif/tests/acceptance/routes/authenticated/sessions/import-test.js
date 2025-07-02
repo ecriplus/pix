@@ -120,14 +120,14 @@ module('Acceptance | Routes | Authenticated | Sessions | import', function (hook
             // when
             const screen = await visit('/sessions/import');
             const importButton = screen.getByRole('button', { name: 'Continuer' });
-            assert.dom(importButton).hasAttribute('disabled');
+            assert.dom(importButton).hasAttribute('aria-disabled');
             const input = await screen.findByLabelText('Importer le modèle complété');
             await triggerEvent(input, 'change', { files: [file] });
             assert.dom(importButton).doesNotHaveAttribute('disabled');
             await click(importButton);
 
             // then
-            assert.dom(importButton).hasAttribute('disabled');
+            assert.dom(importButton).hasAttribute('aria-disabled');
           });
 
           test("it should display the file's name once pre-imported", async function (assert) {
