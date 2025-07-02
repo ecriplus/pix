@@ -3,8 +3,17 @@ import jsonapiSerializer from 'jsonapi-serializer';
 import { Progression } from '../../../../evaluation/domain/models/Progression.js';
 import { DomainError } from '../../../domain/errors.js';
 import { Assessment } from '../../../domain/models/Assessment.js';
+import { config as challengeSerializerConfig } from './challenge-serializer.js';
 
 const { Serializer } = jsonapiSerializer;
+
+const typesMapping = {
+  answers: 'answers',
+  nextChallenge: 'challenges',
+  course: 'courses',
+  certificationCourse: 'certification-courses',
+  progression: 'progressions',
+};
 
 const serialize = function (assessments) {
   return new Serializer('assessment', {
@@ -58,7 +67,9 @@ const serialize = function (assessments) {
       'showLevelup',
       'showQuestionCounter',
       'orderedChallengeIdsAnswered',
+      'nextChallenge',
     ],
+    typeForAttribute: (attribute) => typesMapping[attribute],
     answers: {
       ref: 'id',
       relationshipLinks: {
@@ -66,6 +77,10 @@ const serialize = function (assessments) {
           return `/api/answers?assessmentId=${record.id}`;
         },
       },
+    },
+    nextChallenge: {
+      ref: 'id',
+      ...challengeSerializerConfig,
     },
     course: {
       ref: 'id',

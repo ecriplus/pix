@@ -118,7 +118,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           clock.restore();
         });
 
-        it('should save and return a challenge', async function () {
+        it('should save and return an assessment', async function () {
           // given
           const options = {
             method: 'GET',
@@ -137,7 +137,8 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
 
           expect(assessmentsInDb.lastQuestionDate).to.deep.equal(lastQuestionDate);
           expect(countSavedChallenge).to.equal(1);
-          expect(response.result.data.id).to.be.oneOf([
+          expect(response.result.data.id).to.equal(assessmentId.toString());
+          expect(response.result.data.relationships['next-challenge'].data.id).to.be.oneOf([
             firstChallengeId,
             secondChallengeId,
             thirdChallengeId,
@@ -248,7 +249,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           const response = await server.inject(options);
 
           // then
-          expect(response.result.data.id).to.equal(secondChallengeId);
+          expect(response.result.data.relationships['next-challenge'].data.id).to.equal(secondChallengeId);
         });
       });
     });
@@ -301,7 +302,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           const response = await server.inject(options);
 
           // then
-          expect(response.result.data.id).to.equal(firstChallengeId);
+          expect(response.result.data.relationships['next-challenge'].data.id).to.equal(firstChallengeId);
         });
       });
     });

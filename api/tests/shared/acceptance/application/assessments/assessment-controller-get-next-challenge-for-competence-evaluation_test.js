@@ -134,7 +134,8 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-compet
         // then
         const assessmentsInDb = await knex('assessments').where('id', assessmentId).first('lastQuestionDate');
         expect(assessmentsInDb.lastQuestionDate).to.deep.equal(lastQuestionDate);
-        expect(response.result.data.id).to.equal(secondChallengeId);
+        expect(response.result.data.id).to.equal(assessmentId.toString());
+        expect(response.result.data.relationships['next-challenge'].data.id).to.equal(secondChallengeId);
       });
 
       it('should save the asked challenge', async function () {
@@ -151,7 +152,8 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-compet
         // then
         const assessmentsInDb = await knex('assessments').where('id', assessmentId).first('lastChallengeId');
         expect(assessmentsInDb.lastChallengeId).to.deep.equal(secondChallengeId);
-        expect(response.result.data.id).to.equal(secondChallengeId);
+        expect(response.result.data.id).to.equal(assessmentId.toString());
+        expect(response.result.data.relationships['next-challenge'].data.id).to.equal(secondChallengeId);
       });
     });
 

@@ -33,7 +33,7 @@ describe('Integration | Application | Assessments | assessment-controller', func
         expect(response.statusCode).to.equal(200);
       });
 
-      it('should return a JSON API organization', async function () {
+      it('should return a JSON API assessment', async function () {
         // given
         sharedUsecases.getAssessment.resolves(assessment);
 

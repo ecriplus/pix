@@ -42,10 +42,10 @@ const getNextChallenge = async function (request) {
   const userId = extractUserIdFromRequest(request);
 
   try {
-    const challenge = await DomainTransaction.execute(() => {
+    const assessment = await DomainTransaction.execute(() => {
       return sharedUsecases.getNextChallenge({ assessmentId, userId, locale });
     });
-    return challengeSerializer.serialize(challenge);
+    return assessmentSerializer.serialize(assessment);
   } catch (error) {
     if (error instanceof AssessmentEndedError) {
       const object = new JSONAPISerializer('', {});
