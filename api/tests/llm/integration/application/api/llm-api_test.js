@@ -796,7 +796,7 @@ describe('LLM | Integration | Application | API | llm', function () {
                         content:
                           "\n<system_notification>\n  L'utilisateur a téléversé une pièce jointe :\n  <attachment_name>\n    expected_file.txt\n  </attachment_name>\n</system_notification>",
                         isFromUser: true,
-                        notCounted: false,
+                        notCounted: true,
                       },
                       {
                         content:
@@ -820,6 +820,7 @@ describe('LLM | Integration | Application | API | llm', function () {
           });
         });
       });
+
       context('when no prompt is provided', function () {
         context('when no attachmentName is provided', function () {
           it('should throw a NoAttachmentNorMessageProvidedError', async function () {

@@ -27,9 +27,10 @@ export class Chat {
   /**
    * @param {string} attachmentName
    * @param {string} attachmentContext
+   * @param {boolean} notCounted
    * @returns {void}
    */
-  addAttachmentContextMessages(attachmentName, attachmentContext) {
+  addAttachmentContextMessages(attachmentName, attachmentContext, notCounted) {
     if (!this.hasAttachmentContextBeenAdded) {
       const userContent = `
 <system_notification>
@@ -38,7 +39,7 @@ export class Chat {
     ${attachmentName}
   </attachment_name>
 </system_notification>`;
-      this.messages.push(new Message({ content: userContent, isFromUser: true }));
+      this.messages.push(new Message({ content: userContent, isFromUser: true, notCounted }));
       const llmContent = `
 <read_attachment_tool>
   Lecture de la pièce jointe, ${attachmentName} :
