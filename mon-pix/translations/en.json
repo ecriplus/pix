@@ -2081,7 +2081,8 @@
       }
     },
     "tutorial": {
-      "dot-action-title": "Display tutorial step {stepNumber}/{stepsCount}",
+      "dot-action-description": "Access step {stepNumber} on {stepsCount}",
+      "dot-action-title": "Tutorial step {stepNumber} of {stepsCount}",
       "dots-nav-label": "Tutorial steps",
       "next": "Next",
       "next-title": "Show tutorial next step",
