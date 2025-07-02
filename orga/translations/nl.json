@@ -484,14 +484,43 @@
     },
     "attestations": {
       "title": "Certificaten",
-      "basic-description": "Alle attesten exporteren in PDF-formaat",
-      "divisions-description": "Selecteer de klas waarvoor je de attesten in PDF-formaat wilt exporteren.",
-      "download-attestations-button": "Downloaden",
+      "basic-description": "Alle attesten exporteren",
+      "download-attestations-button": "Downloaden (.pdf)",
       "no-attestations": "Er zijn geen certificaten beschikbaar voor jouw selectie",
-      "select-divisions-label": "Selecteer een of meer klassen",
+      "select-divisions-label": "Selecteer de certificaten voor een of meer klassen",
       "select-label": "Certificat",
       "SIXTH_GRADE": "Attestation de sensibilisation au numérique",
-      "PARENTHOOD": "Attestation de sensibilisation au numérique"
+      "PARENTHOOD": "Attestation de sensibilisation au numérique",
+      "section": {
+        "download": "Downloaden",
+        "list": "Follow-up"
+      },
+      "table": {
+        "column": {
+          "first-name": "Voornaam",
+          "last-name": "Naam",
+          "division": "Klasse",
+          "status": "Verkrijgen"
+        },
+        "filter": {
+          "status": {
+            "label": "Verkrijgen",
+            "empty-option": "Verkrijgen / Niet verkregen",
+            "obtained": "Verkrijgen",
+            "not-obtained": "Niet verkregen"
+          },
+          "divisions": {
+            "label": "Klasse",
+            "empty-option": "Klasse"
+          },
+          "results": "{total, plural, =0 {0 resultaat} =1 {1 resultaat} other {{total, number} resultaten}}",
+          "legend": "Filters voor de tabel met certificaten: invoervelden kunnen worden gebruikt om de tabel te filteren op de voor- of achternaam van een leerling en op klas. Met knoppen kun je de behaalde certificaten filteren of niet."
+        },
+        "status": {
+          "obtained": "Verkregen op {date}",
+          "not-obtained": "Niet verkregen"
+        }
+      }
     },
     "campaign-activity": {
       "actions": {

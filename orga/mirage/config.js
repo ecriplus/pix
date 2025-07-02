@@ -584,4 +584,37 @@ function routes() {
     const { target } = request.params;
     return schema.informationBanners.find(target);
   });
+
+  this.get('/organizations/:organizationId/attestations/:attestationKey/statuses', (schema, request) => {
+    const {
+      'filter[statuses]': statuses,
+      'filter[divisions]': divisions,
+      'filter[search]': search,
+    } = request.queryParams;
+
+    if (!statuses && !divisions && !search) {
+      return schema.attestationParticipantStatuses.all();
+    }
+
+    return schema.attestationParticipantStatuses.where((learner) => {
+      let match = true;
+
+      if (statuses?.length > 0) {
+        const hasObtained = Boolean(learner.obtainedAt);
+        match =
+          match &&
+          ((statuses.includes('OBTAINED') && hasObtained) || (statuses.includes('NOT_OBTAINED') && !hasObtained));
+      }
+
+      if (divisions?.length > 0) {
+        match = match && divisions.includes(learner.division);
+      }
+
+      if (search) {
+        match = match && (learner.firstName.includes(search) || learner.lastName.includes(search));
+      }
+
+      return match;
+    });
+  });
 }

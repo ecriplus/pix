@@ -25,36 +25,35 @@ module('Integration | Component | Attestations', function (hooks) {
   module('when organization has divisions, SIXTH_GRADE attestation and another attestation', function () {
     test('it displays both way to download attestations', async function (assert) {
       // given
+      const noop = sinon.stub();
       const currentUser = this.owner.lookup('service:current-user');
       currentUser.prescriber.availableAttestations = [SIXTH_GRADE_ATTESTATION_KEY, PARENTHOOD_ATTESTATION_KEY];
-      const onSubmit = sinon.stub();
       const divisions = [];
 
       // when
       const screen = await render(
-        <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>,
+        <template><Attestations @divisions={{divisions}} @onSubmit={{noop}} @onFilter={{noop}} /></template>,
       );
 
       // then
-      assert.ok(screen.getByText(t('pages.attestations.divisions-description')));
       assert.ok(screen.getByText(t('pages.attestations.basic-description')));
     });
   });
 
   module('when organization has divisions and SIXTH_GRADE attestation', function () {
-    test('it should display all specifics informations for divisions', async function (assert) {
+    test('it should display all specifics information for divisions', async function (assert) {
       // given
+      const noop = sinon.stub();
       const onSubmit = sinon.stub();
       const divisions = [];
 
       // when
       const screen = await render(
-        <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>,
+        <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} @onFilter={{noop}} /></template>,
       );
 
       // then
       assert.ok(screen.getByRole('heading', { name: t('pages.attestations.title') }));
-      assert.ok(screen.getByText(t('pages.attestations.divisions-description')));
       assert.ok(screen.getByRole('textbox', { name: t('pages.attestations.select-divisions-label') }));
       assert.ok(screen.getByPlaceholderText(t('common.filters.placeholder')));
       assert.ok(screen.getByRole('button', { name: t('pages.attestations.download-attestations-button') }));
@@ -62,12 +61,12 @@ module('Integration | Component | Attestations', function (hooks) {
 
     test('download button is disabled if there is no selected divisions', async function (assert) {
       // given
-      const onSubmit = sinon.stub();
+      const noop = sinon.stub();
       const divisions = [];
 
       // when
       const screen = await render(
-        <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>,
+        <template><Attestations @divisions={{divisions}} @onSubmit={{noop}} @onFilter={{noop}} /></template>,
       );
 
       // then
@@ -79,13 +78,14 @@ module('Integration | Component | Attestations', function (hooks) {
 
     test('it should call onSubmit action with selected divisions', async function (assert) {
       // given
+      const noop = sinon.stub();
       const onSubmit = sinon.stub();
 
       const divisions = [{ label: 'division1', value: 'division1' }];
 
       // when
       const screen = await render(
-        <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>,
+        <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} @onFilter={{noop}} /></template>,
       );
 
       const multiSelect = await screen.getByRole('textbox', { name: t('pages.attestations.select-divisions-label') });
@@ -107,14 +107,14 @@ module('Integration | Component | Attestations', function (hooks) {
   });
 
   module('when organization does not have divisions and SIXTH_GRADE attestation', function () {
-    test('it should display all basics informations', async function (assert) {
+    test('it should display all basics information', async function (assert) {
       // given
-      const onSubmit = sinon.stub();
+      const noop = sinon.stub();
       const divisions = undefined;
 
       // when
       const screen = await render(
-        <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>,
+        <template><Attestations @divisions={{divisions}} @onSubmit={{noop}} @onFilter={{noop}} /></template>,
       );
       // then
       assert.notOk(screen.queryByRole('textbox', { name: t('pages.attestations.select-label') }));
@@ -125,13 +125,14 @@ module('Integration | Component | Attestations', function (hooks) {
 
     test('it should call onSubmit action with empty divisions', async function (assert) {
       // given
+      const noop = sinon.stub();
       const onSubmit = sinon.stub();
 
       const divisions = undefined;
 
       // when
       const screen = await render(
-        <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>,
+        <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} @onFilter={{noop}} /></template>,
       );
 
       const downloadButton = await screen.getByRole('button', {

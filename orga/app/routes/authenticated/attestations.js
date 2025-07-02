@@ -1,9 +1,23 @@
+import { action } from '@ember/object';
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 
 export default class AuthenticatedAttestationsRoute extends Route {
+  queryParams = {
+    statuses: {
+      refreshModel: true,
+    },
+    divisions: {
+      refreshModel: true,
+    },
+    search: {
+      refreshModel: true,
+    },
+  };
+
   @service currentUser;
   @service router;
+  @service store;
 
   beforeModel() {
     if (!this.currentUser.canAccessAttestationsPage) {
@@ -11,11 +25,42 @@ export default class AuthenticatedAttestationsRoute extends Route {
     }
   }
 
-  async model() {
+  async model(params) {
+    const attestationKey = this.currentUser.prescriber.availableAttestations[0];
+    const organizationId = this.currentUser.organization.id;
+    const attestationParticipantStatuses = await this.store.query(
+      'attestation-participant-status',
+      {
+        organizationId,
+        attestationKey,
+        filter: {
+          statuses: params.statuses,
+          divisions: params.divisions,
+          search: params.search,
+        },
+      },
+      { reload: true },
+    );
+
     if (this.currentUser.organization.isManagingStudents) {
       const divisions = await this.currentUser.organization.divisions;
       const options = divisions.map(({ name }) => ({ label: name, value: name }));
-      return { options };
+      return { options, attestationParticipantStatuses };
     }
+
+    return { attestationParticipantStatuses };
+  }
+
+  resetController(controller, isExiting) {
+    if (isExiting) {
+      controller.statuses = [];
+      controller.divisions = [];
+      controller.search = null;
+    }
+  }
+
+  @action
+  refreshModel() {
+    this.refresh();
   }
 }

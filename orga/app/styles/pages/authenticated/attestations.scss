@@ -3,25 +3,33 @@
 .attestations-page {
   display: flex;
   flex-direction: column;
+  padding: var(--pix-spacing-8x) 0;
 
   &__title {
     @extend %pix-title-m;
+  }
 
-    margin: var(--pix-spacing-8x) 0;
+  &__section-title {
+    @extend %pix-title-s;
+
+    margin-bottom: var(--pix-spacing-4x);
+
+    &--list {
+      margin-top: var(--pix-spacing-12x);
+    }
   }
 
   &__text {
     @extend %pix-body-m;
 
     margin-bottom: var(--pix-spacing-8x);
-
   }
 
   &__action {
     display: flex;
     flex-wrap: wrap;
     gap: var(--pix-spacing-4x);
-    align-items: end
+    align-items: end;
   }
 
   &__select-form {
@@ -34,5 +42,9 @@
     margin-top: var(--pix-spacing-8x);
     margin-bottom: var(--pix-spacing-8x);
     border-bottom: 1px solid var(--pix-neutral-100);
+  }
+
+  &__list {
+    margin-bottom: var(--pix-spacing-8x);
   }
 }

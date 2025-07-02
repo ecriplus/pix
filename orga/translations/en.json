@@ -485,12 +485,41 @@
     "attestations": {
       "PARENTHOOD": "Attestation de sensibilisation au numérique",
       "SIXTH_GRADE": "Attestation de sensibilisation au numérique",
-      "basic-description": "Export all attestations in PDF format",
-      "divisions-description": "Select the class for which you wish to export attestations in PDF format.",
-      "download-attestations-button": "Download",
+      "basic-description": "Export all attestations",
+      "download-attestations-button": "Download (.pdf)",
       "no-attestations": "No attestation available",
-      "select-divisions-label": "Select one or more classes",
+      "section": {
+        "download": "Download",
+        "list": "Follow-up"
+      },
+      "select-divisions-label": "Select attestations for one or more classes",
       "select-label": "Attestation",
+      "table": {
+        "column": {
+          "division": "Class",
+          "first-name": "First name",
+          "last-name": "Last name",
+          "status": "Obtained"
+        },
+        "filter": {
+          "divisions": {
+            "empty-option": "Class",
+            "label": "Class"
+          },
+          "legend": "Filters for the attestations table, input fields allow you to filter the table by a student's first or last name and by classes. Buttons can be used to filter attestations obtained or not.",
+          "results": "{total, plural, =0 {0 result} =1 {1 result} other {{total, number} results}}",
+          "status": {
+            "empty-option": "Obtained / Not obtained",
+            "label": "Obtained",
+            "not-obtained": "Not obtained",
+            "obtained": "Obtained"
+          }
+        },
+        "status": {
+          "not-obtained": "Not obtained",
+          "obtained": "Obtained on {date}"
+        }
+      },
       "title": "Attestations"
     },
     "campaign": {

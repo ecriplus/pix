@@ -30,6 +30,9 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
       // given
       class CurrentUserStub extends Service {
         canAccessAttestationsPage = true;
+        prescriber = {
+          availableAttestations: [],
+        };
       }
 
       this.owner.register('service:current-user', CurrentUserStub);
@@ -50,6 +53,7 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
     test('it should return a list of options based on organization divisions', async function (assert) {
       // given
       const divisions = [{ name: '3èmeA' }, { name: '2ndE' }];
+      const attestationParticipantStatuses = Symbol('expected-attestations');
       class CurrentUserStub extends Service {
         canAccessAttestationsPage = true;
         organization = {
@@ -57,12 +61,19 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
           divisions,
           isManagingStudents: true,
         };
+        prescriber = {
+          availableAttestations: [],
+        };
       }
 
       const findRecordStub = sinon.stub();
+      const queryStub = sinon.stub();
       class StoreStub extends Service {
         findRecord = findRecordStub;
+        query = queryStub;
       }
+
+      queryStub.resolves(attestationParticipantStatuses);
 
       this.owner.register('service:current-user', CurrentUserStub);
       this.owner.register('service:store', StoreStub);
@@ -70,10 +81,11 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
       const route = this.owner.lookup('route:authenticated/attestations');
 
       // when
-      const actualOptions = await route.model();
+      const actualOptions = await route.model({ statuses: [] });
 
       // then
       assert.deepEqual(actualOptions, {
+        attestationParticipantStatuses,
         options: [
           {
             label: '3èmeA',
@@ -90,6 +102,7 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
     test('it should return undefined if current organization is not managing students', async function (assert) {
       // given
       const divisions = [{ name: '3èmeA' }, { name: '2ndE' }];
+      const attestationParticipantStatuses = Symbol('expected-attestations');
       class CurrentUserStub extends Service {
         canAccessAttestationsPage = true;
         organization = {
@@ -97,12 +110,19 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
           divisions,
           isManagingStudents: false,
         };
+        prescriber = {
+          availableAttestations: [],
+        };
       }
 
       const findRecordStub = sinon.stub();
+      const queryRecord = sinon.stub();
       class StoreStub extends Service {
         findRecord = findRecordStub;
+        query = queryRecord;
       }
+
+      queryRecord.resolves(attestationParticipantStatuses);
 
       this.owner.register('service:current-user', CurrentUserStub);
       this.owner.register('service:store', StoreStub);
@@ -110,10 +130,10 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
       const route = this.owner.lookup('route:authenticated/attestations');
 
       // when
-      const actualOptions = await route.model();
+      const actualOptions = await route.model({ statuses: [] });
 
       // then
-      assert.deepEqual(actualOptions, undefined);
+      assert.deepEqual(actualOptions, { attestationParticipantStatuses });
     });
   });
 });
