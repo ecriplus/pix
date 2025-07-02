@@ -3,38 +3,40 @@ import _ from 'lodash';
 
 const { Serializer } = jsonapiSerializer;
 
-const serialize = function (challenges) {
-  return new Serializer('challenge', {
-    attributes: [
-      'type',
-      'instruction',
-      'competence',
-      'proposals',
-      'timer',
-      'illustrationUrl',
-      'attachments',
-      'competence',
-      'embedUrl',
-      'embedTitle',
-      'embedHeight',
-      'webComponentTagName',
-      'webComponentProps',
-      'illustrationAlt',
-      'format',
-      'autoReply',
-      'alternativeInstruction',
-      'focused',
-      'shuffled',
-      'locales',
-    ],
-    transform: (record) => {
-      const challenge = _.pickBy(record, (value) => !_.isUndefined(value));
+const config = {
+  attributes: [
+    'type',
+    'instruction',
+    'competence',
+    'proposals',
+    'timer',
+    'illustrationUrl',
+    'attachments',
+    'competence',
+    'embedUrl',
+    'embedTitle',
+    'embedHeight',
+    'webComponentTagName',
+    'webComponentProps',
+    'illustrationAlt',
+    'format',
+    'autoReply',
+    'alternativeInstruction',
+    'focused',
+    'shuffled',
+    'locales',
+  ],
+  transform: (record) => {
+    const challenge = _.pickBy(record, (value) => !_.isUndefined(value));
 
-      challenge.competence = challenge.competenceId || 'N/A';
+    challenge.competence = challenge.competenceId || 'N/A';
 
-      return challenge;
-    },
-  }).serialize(challenges);
+    return challenge;
+  },
 };
 
-export { serialize };
+const serialize = function (challenges) {
+  return new Serializer('challenge', config).serialize(challenges);
+};
+
+export { config, serialize };
