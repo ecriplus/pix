@@ -65,7 +65,7 @@ export class Chat {
    * @returns {number}
    */
   get currentPromptsCount() {
-    return this.messages.filter((message) => message.isFromUser).length;
+    return this.messages.filter((message) => message.isFromUser && !message.notCounted).length;
   }
 
   /**
@@ -88,9 +88,10 @@ export class Message {
    * @param {string} params.content
    * @param {Boolean} params.isFromUser
    */
-  constructor({ content, isFromUser }) {
+  constructor({ content, isFromUser, notCounted }) {
     this.content = content;
     this.isFromUser = isFromUser;
+    this.notCounted = !!notCounted;
   }
 
   /**
@@ -100,6 +101,7 @@ export class Message {
     return {
       content: this.content,
       isFromUser: this.isFromUser,
+      notCounted: this.notCounted,
     };
   }
 }

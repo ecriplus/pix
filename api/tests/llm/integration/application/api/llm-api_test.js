@@ -410,12 +410,25 @@ describe('LLM | Integration | Application | API | llm', function () {
               configurationId: 'uneConfigQuiExist',
               hasAttachmentContextBeenAdded: false,
               messages: [
-                { content: 'coucou user1', isFromUser: true },
-                { content: 'coucou LLM1', isFromUser: false },
-                { content: 'un message', isFromUser: true },
+                {
+                  content: 'coucou user1',
+                  isFromUser: true,
+                  notCounted: false,
+                },
+                {
+                  content: 'coucou LLM1',
+                  isFromUser: false,
+                  notCounted: false,
+                },
+                {
+                  content: 'un message',
+                  isFromUser: true,
+                  notCounted: false,
+                },
                 {
                   content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
                   isFromUser: false,
+                  notCounted: false,
                 },
               ],
             });
@@ -547,12 +560,13 @@ describe('LLM | Integration | Application | API | llm', function () {
                   configurationId: 'uneConfigQuiExist',
                   hasAttachmentContextBeenAdded: false,
                   messages: [
-                    { content: 'coucou user1', isFromUser: true },
-                    { content: 'coucou LLM1', isFromUser: false },
-                    { content: 'un message', isFromUser: true },
+                    { content: 'coucou user1', isFromUser: true, notCounted: false },
+                    { content: 'coucou LLM1', isFromUser: false, notCounted: false },
+                    { content: 'un message', isFromUser: true, notCounted: false },
                     {
                       content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
                       isFromUser: false,
+                      notCounted: false,
                     },
                   ],
                 });
@@ -661,23 +675,26 @@ describe('LLM | Integration | Application | API | llm', function () {
                     configurationId: 'uneConfigQuiExist',
                     hasAttachmentContextBeenAdded: true,
                     messages: [
-                      { content: 'coucou user1', isFromUser: true },
-                      { content: 'coucou LLM1', isFromUser: false },
+                      { content: 'coucou user1', isFromUser: true, notCounted: false },
+                      { content: 'coucou LLM1', isFromUser: false, notCounted: false },
                       {
                         content:
                           'Ajoute le fichier fictif "expected_file.txt" à ton contexte. Voici le contenu du fichier :\nadd me in the chat !',
                         isFromUser: true,
+                        notCounted: false,
                       },
                       {
                         content: 'Le contenu du fichier fictif a été ajouté au contexte.',
                         isFromUser: false,
+                        notCounted: false,
                       },
-                      { content: 'coucou user2', isFromUser: true },
-                      { content: 'coucou LLM2', isFromUser: false },
-                      { content: 'un message', isFromUser: true },
+                      { content: 'coucou user2', isFromUser: true, notCounted: false },
+                      { content: 'coucou LLM2', isFromUser: false, notCounted: false },
+                      { content: 'un message', isFromUser: true, notCounted: false },
                       {
                         content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
                         isFromUser: false,
+                        notCounted: false,
                       },
                     ],
                   });
@@ -773,22 +790,25 @@ describe('LLM | Integration | Application | API | llm', function () {
                     configurationId: 'uneConfigQuiExist',
                     hasAttachmentContextBeenAdded: true,
                     messages: [
-                      { content: 'coucou user1', isFromUser: true },
-                      { content: 'coucou LLM1', isFromUser: false },
+                      { content: 'coucou user1', isFromUser: true, notCounted: false },
+                      { content: 'coucou LLM1', isFromUser: false, notCounted: false },
                       {
                         content:
                           "\n<system_notification>\n  L'utilisateur a téléversé une pièce jointe :\n  <attachment_name>\n    expected_file.txt\n  </attachment_name>\n</system_notification>",
                         isFromUser: true,
+                        notCounted: false,
                       },
                       {
                         content:
                           '\n<read_attachment_tool>\n  Lecture de la pièce jointe, expected_file.txt :\n  <attachment_content>\n    add me in the chat !\n  </attachment_content>\n</read_attachment_tool>',
                         isFromUser: false,
+                        notCounted: false,
                       },
-                      { content: 'un message', isFromUser: true },
+                      { content: 'un message', isFromUser: true, notCounted: false },
                       {
                         content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
                         isFromUser: false,
+                        notCounted: false,
                       },
                     ],
                   });
@@ -936,8 +956,8 @@ describe('LLM | Integration | Application | API | llm', function () {
                   configurationId: 'uneConfigQuiExist',
                   hasAttachmentContextBeenAdded: false,
                   messages: [
-                    { content: 'coucou user1', isFromUser: true },
-                    { content: 'coucou LLM1', isFromUser: false },
+                    { content: 'coucou user1', isFromUser: true, notCounted: false },
+                    { content: 'coucou LLM1', isFromUser: false, notCounted: false },
                   ],
                 });
                 expect(llmConfigurationScope.isDone()).to.be.true;
@@ -1013,19 +1033,21 @@ describe('LLM | Integration | Application | API | llm', function () {
                     configurationId: 'uneConfigQuiExist',
                     hasAttachmentContextBeenAdded: true,
                     messages: [
-                      { content: 'coucou user1', isFromUser: true },
-                      { content: 'coucou LLM1', isFromUser: false },
+                      { content: 'coucou user1', isFromUser: true, notCounted: false },
+                      { content: 'coucou LLM1', isFromUser: false, notCounted: false },
                       {
                         content:
                           'Ajoute le fichier fictif "expected_file.txt" à ton contexte. Voici le contenu du fichier :\nadd me in the chat !',
                         isFromUser: true,
+                        notCounted: false,
                       },
                       {
                         content: 'Le contenu du fichier fictif a été ajouté au contexte.',
                         isFromUser: false,
+                        notCounted: false,
                       },
-                      { content: 'coucou user2', isFromUser: true },
-                      { content: 'coucou LLM2', isFromUser: false },
+                      { content: 'coucou user2', isFromUser: true, notCounted: false },
+                      { content: 'coucou LLM2', isFromUser: false, notCounted: false },
                     ],
                   });
                   expect(llmConfigurationScope.isDone()).to.be.true;
@@ -1089,17 +1111,19 @@ describe('LLM | Integration | Application | API | llm', function () {
                     configurationId: 'uneConfigQuiExist',
                     hasAttachmentContextBeenAdded: true,
                     messages: [
-                      { content: 'coucou user1', isFromUser: true },
-                      { content: 'coucou LLM1', isFromUser: false },
+                      { content: 'coucou user1', isFromUser: true, notCounted: false },
+                      { content: 'coucou LLM1', isFromUser: false, notCounted: false },
                       {
                         content:
                           "\n<system_notification>\n  L'utilisateur a téléversé une pièce jointe :\n  <attachment_name>\n    expected_file.txt\n  </attachment_name>\n</system_notification>",
                         isFromUser: true,
+                        notCounted: false,
                       },
                       {
                         content:
                           '\n<read_attachment_tool>\n  Lecture de la pièce jointe, expected_file.txt :\n  <attachment_content>\n    add me in the chat !\n  </attachment_content>\n</read_attachment_tool>',
                         isFromUser: false,
+                        notCounted: false,
                       },
                     ],
                   });
