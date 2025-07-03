@@ -46,7 +46,7 @@
           "element": {
             "id": "a27b96cf-a0a7-45df-866a-313a1bd6caaf",
             "type": "text",
-            "content": "<p> Derrière ces deux lettres se cache l'<strong>Intelligence Artificielle</strong>.<br><strong>À votre avis, de quand date l’intelligence artificielle ?</strong>&nbsp;⌛</p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-frise.html\" height=\"300\"></iframe>"
+            "content": "<p> Derrière ces deux lettres se cache l'<strong>Intelligence Artificielle</strong>.<br><strong>À votre avis, de quand date l'expression «intelligence artificielle» ?</strong>&nbsp;⌛</p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-frise.html\" height=\"325\"></iframe>"
           }
         }
       ]
@@ -186,7 +186,7 @@
           "element": {
             "id": "bfe6d7e1-8282-4a34-a659-c189ea396feb",
             "type": "text",
-            "content": "<p>De nombreux <strong>appareils et services numériques du quotidien</strong> utilisent des logiciels d’intelligence artificielle.</p><p><br>Certains logiciels sont <strong>spécialisés </strong>dans <strong>un type de tâche</strong>&nbsp;: reconnaître des images, reconnaître des sons, recommander des contenus adaptés à des besoins, prédire des tendances dans des données, etc.&nbsp;🔮</p><p><br>Les logiciels à base d’<strong>IA générative</strong>, comme Le chat, Gemini ou chatGPT, sont capables de réaliser des tâches différentes : traduire des textes, tenir une conversation, résumer des articles, créer une image, programmer, résoudre des problèmes de maths, etc.&nbsp;🦾<br></p>"
+            "content": "<p>De nombreux <strong>appareils et services numériques du quotidien</strong> utilisent des logiciels d’intelligence artificielle.</p><p><br>Certains logiciels sont <strong>spécialisés </strong>dans <strong>un type de tâche</strong>&nbsp;: reconnaître des images, reconnaître des sons, recommander des contenus adaptés à des besoins, prédire des tendances dans des données, etc.&nbsp;🔮</p><p><br>Les logiciels à base d’<strong>IA générative</strong>, comme Le chat, Gemini ou chatGPT, sont capables de réaliser des tâches diverses : traduire des textes, tenir une conversation, résumer des articles, créer une image, programmer, résoudre des problèmes de maths, etc.&nbsp;🦾<br></p>"
           }
         }
       ]
@@ -209,7 +209,7 @@
           "element": {
             "id": "c4a0562d-60f8-48b3-8489-2c8c195597b8",
             "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-cartes.html\" height=\"600\"></iframe>"
+            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-cartes.html\" height=\"590\"></iframe>"
           }
         }
       ]
@@ -334,7 +334,7 @@
                 {
                   "id": "05a30b10-ac62-40a5-961b-9f3f3e831da0",
                   "type": "qcu",
-                  "instruction": "<h4>🎤 Une application retrouve le titre d'une musique que vous lui chantez.</h4><p><br>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
+                  "instruction": "<h4>🗣️ 🎤 Une application retrouve le titre d'une musique que vous lui chantez.</h4><p><br>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
                   "proposals": [
                     {
                       "id": "1",
@@ -376,53 +376,9 @@
             {
               "elements": [
                 {
-                  "id": "f2e08b74-e487-40cc-935b-87ad6a2f4b54",
-                  "type": "qcu",
-                  "instruction": "<h4>❓ Une IA conversationnelle répond à vos questions sur n'importe quel sujet.</h4><p><br>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
-                  "proposals": [
-                    {
-                      "id": "1",
-                      "content": "<p>la reconnaissance du son</p>",
-                      "feedback": {
-                        "state": "<p>Mauvaise réponse</p>",
-                        "diagnosis": "<p>Ici, il ne s’agit pas d’identifier quelque chose, mais de savoir produire des réponses aux demandes variées d’un utilisateur.</p>"
-                      }
-                    },
-                    {
-                      "id": "2",
-                      "content": "<p>la reconnaissance d’image</p>",
-                      "feedback": {
-                        "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": "<p>Ici, il ne s’agit pas d’identifier quelque chose, mais de savoir produire des réponses.</p>"
-                      }
-                    },
-                    {
-                      "id": "3",
-                      "content": "<p>la recommandation de contenu</p>",
-                      "feedback": {
-                        "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": "<p>Ici, il ne s’agit pas de recommander des nouveaux contenus à un utilisateur mais de savoir produire des réponses.</p>"
-                      }
-                    },
-                    {
-                      "id": "4",
-                      "content": "<p>la génération de contenu</p>",
-                      "feedback": {
-                        "state": "<p>Bonne réponse ! 🎉</p>",
-                        "diagnosis": "<p>Une IA conversationnelle est conçue pour répondre à toutes les demandes des utilisateurs. Quel que soit le sujet, elle génère une réponse.</p>"
-                      }
-                    }
-                  ],
-                  "solution": "4"
-                }
-              ]
-            },
-            {
-              "elements": [
-                {
                   "id": "d6644a42-0b76-4e9c-8595-43c2da89cb9b",
                   "type": "qcu",
-                  "instruction": "<h4>▶️ Un site vous propose de nouveaux contenus suite au visionnage d’une vidéo.</h4><p><br>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
+                  "instruction": "<h4>🎬 ▶️ Un site vous propose de nouveaux contenus suite au visionnage d’une vidéo.</h4><p><br>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
                   "proposals": [
                     {
                       "id": "1",
@@ -466,7 +422,7 @@
                 {
                   "id": "e67d64c3-9912-4046-9f03-46059c51247c",
                   "type": "qcu",
-                  "instruction": "<h4>🏷️ Un logiciel ajoute automatiquement des mots clés à des photographies.</h4><p><br>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
+                  "instruction": "<h4>📷 🏷️ Un logiciel ajoute automatiquement des mots clés à des photographies.</h4><p><br>Dans quel type de tâches est spécialisée l'IA utilisée ?</p>",
                   "proposals": [
                     {
                       "id": "1",
