@@ -1,7 +1,11 @@
-
-
-
 .element-text {
+  iframe {
+    width: 100%;
+    padding: var(--pix-spacing-2x);
+    border: 2px dashed rgb(var(--pix-tertiary-500-inline), 0.6);
+    border-radius: var(--pix-spacing-2x);
+  }
+
   table {
     width: 100%;
     background: var(--pix-neutral-0);
