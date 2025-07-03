@@ -11,7 +11,7 @@ export function getQabSample() {
         id: randomUUID(),
         image: {
           url: 'https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg',
-          altText: 'https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg',
+          altText: 'Plusieurs boules de pétanques',
         },
         text: 'Les boules de pétanques sont creuses ?',
         proposalA: 'Vrai',
