@@ -288,14 +288,14 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       expect(response.result.data.id).to.exist;
 
       const consolidatedFramework = await knex('certification-frameworks-challenges')
-        .select('alpha', 'delta', 'challengeId', 'complementaryCertificationKey')
+        .select('discriminant', 'difficulty', 'challengeId', 'complementaryCertificationKey')
         .where({
           complementaryCertificationKey: complementaryCertification.key,
         });
       expect(consolidatedFramework).to.deep.equal([
         {
-          alpha: null,
-          delta: null,
+          discriminant: null,
+          difficulty: null,
           challengeId: challenge.id,
           complementaryCertificationKey: complementaryCertification.key,
         },
