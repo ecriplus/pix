@@ -187,6 +187,21 @@ export default class ModuleGrain extends Component {
     return `grain_${this.args.grain.id}`;
   }
 
+  get isGrainTypeWithTitle() {
+    return this.args.grain.type === 'lesson' || this.args.grain.type === 'summary';
+  }
+
+  get grainTitle() {
+    switch (this.args.grain.type) {
+      case 'lesson':
+        return 'A retenir';
+      case 'summary':
+        return 'Fiche récap';
+      default:
+        return '';
+    }
+  }
+
   <template>
     <article
       id={{this.elementId}}
@@ -200,6 +215,9 @@ export default class ModuleGrain extends Component {
           total=@totalSteps
         }}</h2>
       <div class="grain__card grain-card--{{this.grainType}}">
+        {{#if this.isGrainTypeWithTitle}}
+          <h2 class="grain-card-title">{{this.grainTitle}}</h2>
+        {{/if}}
         <div class="grain-card__content">
           <!-- eslint-disable-next-line no-unused-vars -->
           {{#each this.displayableComponents as |component|}}

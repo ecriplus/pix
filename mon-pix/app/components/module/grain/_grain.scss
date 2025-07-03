@@ -1,4 +1,6 @@
 @use '../passage';
+@use 'pix-design-tokens/typography';
+
 
 $grain-card-border-radius: var(--pix-spacing-4x);
 
@@ -78,6 +80,18 @@ $grain-card-border-radius: var(--pix-spacing-4x);
     padding: var(--pix-spacing-6x);
     background: var(--modulix-challenge-card-background);
   }
+
+  &--lesson {
+    padding: var(--pix-spacing-6x);
+    background: var(--pix-primary-10);
+    border-radius: var(--pix-spacing-4x);
+  }
+}
+
+.grain-card-title {
+  @extend %pix-title-s;
+
+  margin-bottom: var(--pix-spacing-4x);
 }
 
 .grain-card-content {
