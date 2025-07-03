@@ -31,7 +31,7 @@ module('Integration | Component | UploadButton', function (hooks) {
 
     // then
     const button = screen.getByRole('button', { name: 'label' });
-    assert.ok(button.hasAttribute('disabled'));
+    assert.ok(button.hasAttribute('aria-disabled'));
   });
   test('it should call onChange spy when file selected', async function (assert) {
     // given

@@ -197,7 +197,7 @@ module('Integration | Component | Ui::DeletionModal', function (hooks) {
       });
 
       // then
-      assert.dom(confirmButton).isDisabled();
+      assert.dom(confirmButton).hasAttribute('aria-disabled');
     });
   });
 });

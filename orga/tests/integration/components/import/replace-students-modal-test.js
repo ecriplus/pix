@@ -93,7 +93,7 @@ module('Integration | Component | Import::ReplaceStudentsModal', function (hooks
         .getByRole('button', {
           name: t('pages.sup-organization-participants.replace-students-modal.confirm'),
         })
-        .hasAttribute('disabled'),
+        .hasAttribute('aria-disabled'),
     );
   });
 

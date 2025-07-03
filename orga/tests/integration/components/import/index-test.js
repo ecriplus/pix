@@ -130,7 +130,7 @@ module('Integration | Component | Import', function (hooks) {
       const addButton = screen.getByRole('button', {
         name: t('pages.organization-participants-import.actions.participants.label'),
       });
-      assert.ok(addButton.hasAttribute('disabled'));
+      assert.ok(addButton.hasAttribute('aria-disabled'));
     });
     test('sup uploads buttons are disabled', async function (assert) {
       // given
@@ -157,11 +157,11 @@ module('Integration | Component | Import', function (hooks) {
       const addButton = screen.getByRole('button', {
         name: t('pages.organization-participants-import.actions.add-sup.label'),
       });
-      assert.ok(addButton.hasAttribute('disabled'));
+      assert.ok(addButton.hasAttribute('aria-disabled'));
       const replaceButton = screen.getByRole('button', {
         name: t('pages.organization-participants-import.actions.replace.label'),
       });
-      assert.ok(replaceButton.hasAttribute('disabled'));
+      assert.ok(replaceButton.hasAttribute('aria-disabled'));
     });
   });
 
