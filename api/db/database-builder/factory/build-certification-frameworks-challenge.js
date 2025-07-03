@@ -6,8 +6,8 @@ import { buildChallenge } from './learning-content/build-challenge.js';
 
 const buildCertificationFrameworksChallenge = function ({
   id = databaseBuffer.getNextId(),
-  alpha = 2.2,
-  delta = 3.5,
+  discriminant = 2.2,
+  difficulty = 3.5,
   complementaryCertificationKey,
   challengeId,
   createdAt,
@@ -20,8 +20,8 @@ const buildCertificationFrameworksChallenge = function ({
 
   const values = {
     id,
-    alpha,
-    delta,
+    discriminant,
+    difficulty,
     complementaryCertificationKey,
     challengeId,
     createdAt,

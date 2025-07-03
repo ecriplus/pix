@@ -31,8 +31,8 @@ describe('Certification | Configuration | Integration | Repository | consolidate
       const consolidatedFrameworkInDB = await knex('certification-frameworks-challenges').select(
         'complementaryCertificationKey',
         'challengeId',
-        'alpha',
-        'delta',
+        'discriminant',
+        'difficulty',
         'createdAt',
       );
 
@@ -40,14 +40,14 @@ describe('Certification | Configuration | Integration | Repository | consolidate
       expect(_.omit(consolidatedFrameworkInDB[0], 'createdAt')).to.deep.equal({
         complementaryCertificationKey: complementaryCertification.key,
         challengeId: challenge1.id,
-        alpha: null,
-        delta: null,
+        discriminant: null,
+        difficulty: null,
       });
       expect(_.omit(consolidatedFrameworkInDB[1], 'createdAt')).to.deep.equal({
         complementaryCertificationKey: complementaryCertification.key,
         challengeId: challenge2.id,
-        alpha: null,
-        delta: null,
+        discriminant: null,
+        difficulty: null,
       });
       expect(consolidatedFrameworkInDB[0].createdAt).to.deep.equal(consolidatedFrameworkInDB[1].createdAt);
     });

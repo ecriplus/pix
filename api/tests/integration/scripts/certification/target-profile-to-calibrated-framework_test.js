@@ -36,8 +36,8 @@ describe('Integration | Scripts | Certification | target-profile-to-calibrated-f
     expect(frameworksChallenges[0].challengeId).to.equal(learningContent.challenges[0].id);
     expect(frameworksChallenges[0].complementaryCertificationKey).to.equal(complementaryCertification.key);
     expect(frameworksChallenges[0].createdAt).to.be.instanceOf(Date);
-    expect(frameworksChallenges[0].alpha).to.be.null;
-    expect(frameworksChallenges[0].delta).to.be.null;
+    expect(frameworksChallenges[0].discriminant).to.be.null;
+    expect(frameworksChallenges[0].difficulty).to.be.null;
   });
 
   context('when the certification key option does not exist in the domain', function () {
