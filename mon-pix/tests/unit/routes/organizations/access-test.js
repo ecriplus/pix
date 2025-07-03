@@ -200,7 +200,7 @@ module('Unit | Route | Access', function (hooks) {
         await route.beforeModel({ from: 'campaigns.campaign-landing-page' });
 
         // then
-        assert.strictEqual(route.authenticationRoute, 'campaigns.join.anonymous');
+        assert.strictEqual(route.authenticationRoute, 'organizations.join.anonymous');
       });
     });
   });

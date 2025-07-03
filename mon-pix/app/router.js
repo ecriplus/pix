@@ -78,6 +78,7 @@ Router.map(function () {
       this.route('student-sup', { path: '/etudiant' });
     });
     this.route('join', { path: '/rejoindre' }, function () {
+      this.route('anonymous', { path: '/anonyme' });
       this.route('student-sco', { path: '/identification' });
       this.route('sco-mediacentre', { path: '/mediacentre' });
     });
@@ -85,9 +86,6 @@ Router.map(function () {
   this.route('campaigns', { path: '/campagnes/:code' }, function () {
     this.route('entry-point', { path: '/' });
     this.route('archived-error', { path: '/oups' });
-    this.route('join', { path: '/rejoindre' }, function () {
-      this.route('anonymous', { path: '/anonyme' });
-    });
     this.route('campaign-landing-page', { path: '/presentation' });
     this.route('fill-in-participant-external-id', { path: '/identifiant' });
     this.route('entrance', { path: '/entree' });
