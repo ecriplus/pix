@@ -81,6 +81,7 @@ class AssessmentResult {
       isShared: this.isShared,
       campaignType,
     });
+    this.sharedAt = sharedAt;
   }
 
   _computeMasteryRate(masteryRate, isShared, totalSkillsCount, validatedSkillsCount) {

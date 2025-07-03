@@ -1963,7 +1963,7 @@
           "title": "Mejore sus resultados"
         },
         "see-trainings": "Ver los cursos",
-        "shared-message": "Gracias por enviarnos sus resultados."
+        "shared-message": "Tus resultados se enviaron el {date} a las {time}."
       },
       "improve": {
         "description": "Puedes volver a intentar algunas de las preguntas",

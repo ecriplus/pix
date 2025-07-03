@@ -465,11 +465,12 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
         const { id: userId } = databaseBuilder.factory.buildUser();
         const { id: campaignId } = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id });
         _buildCampaignSkills(campaignId);
+        const sharedAt = new Date('2020-01-02');
         const { id: campaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation({
           userId,
           campaignId,
           status: CampaignParticipationStatuses.SHARED,
-          sharedAt: new Date('2020-01-02'),
+          sharedAt,
           masteryRate: 0.6,
         });
 
@@ -484,6 +485,7 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
           locale: 'FR',
         });
         expect(participantResult.masteryRate).to.equal(0.6);
+        expect(participantResult.sharedAt).to.deep.equal(sharedAt);
       });
     });
 

@@ -13,6 +13,7 @@ describe('Unit | Serializer | JSON API | participant-result-serializer', functio
     const isTargetProfileResetAllowed = true;
     const isOrganizationLearnerActive = true;
     const isCampaignArchived = false;
+    const sharedAt = new Date('2020-01-01');
     let participationResults, competences, stages, badgeResultsDTO, reachedStage;
 
     beforeEach(function () {
@@ -32,7 +33,7 @@ describe('Unit | Serializer | JSON API | participant-result-serializer', functio
       participationResults = {
         campaignParticipationId: 1,
         isCompleted: true,
-        sharedAt: new Date('2020-01-01'),
+        sharedAt,
         status: CampaignParticipationStatuses.SHARED,
         knowledgeElements: knowledgeElements,
         acquiredBadgeIds: [3],
@@ -117,6 +118,7 @@ describe('Unit | Serializer | JSON API | participant-result-serializer', functio
             'tested-skills-count': 2,
             'total-skills-count': 2,
             'validated-skills-count': 1,
+            'shared-at': sharedAt,
           },
           id: '1',
           relationships: {

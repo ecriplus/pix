@@ -1,6 +1,9 @@
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
+import dayjs from 'dayjs';
+import CustomParseFormat from 'dayjs/plugin/customParseFormat';
+import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
@@ -8,6 +11,17 @@ import sinon from 'sinon';
 
 import { stubCurrentUserService } from '../../../../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../../../../helpers/setup-intl-rendering';
+
+dayjs.extend(LocalizedFormat);
+dayjs.extend(CustomParseFormat);
+
+function sharedAtDate(date) {
+  return dayjs(date).format('LL');
+}
+
+function sharedAtTime(date) {
+  return dayjs(date).format('LT');
+}
 
 module('Integration | Components | Campaigns | Assessment | Results | Evaluation Results Hero', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -20,7 +34,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
       stubCurrentUserService(this.owner, { firstName: 'Hermione' });
 
       this.set('campaign', { organizationId: 1 });
-      this.set('campaignParticipationResult', { masteryRate: 0.755 });
+      this.set('campaignParticipationResult', { masteryRate: 0.755, sharedAt: new Date('2024-01-01T14:03:00Z') });
 
       // when
       screen = await render(
@@ -199,7 +213,18 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
     });
   });
 
-  module('results sharing', function () {
+  module('results sharing', function (hooks) {
+    let clock, now;
+
+    hooks.beforeEach(function () {
+      now = new Date('2024-01-01T14:03:00Z');
+      clock = sinon.useFakeTimers(now, { toFake: ['Date'] });
+    });
+
+    hooks.afterEach(function () {
+      clock.restore();
+    });
+
     module('when results are not shared', function () {
       test('it should display specific explanation and button', async function (assert) {
         // given
@@ -332,7 +357,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           campaignParticipationResult.id = 'campaignParticipationResultId';
           this.set('campaignParticipationResult', campaignParticipationResult);
 
-          onResultsSharedStub = sinon.stub();
+          onResultsSharedStub = sinon.stub().resolves();
           this.set('onResultsShared', onResultsSharedStub);
 
           // when
@@ -357,7 +382,11 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           assert.ok(shareStub.calledOnce);
           sinon.assert.calledWithExactly(shareStub, campaignParticipationResult.id);
 
-          assert.dom(screen.queryByText(t('pages.skill-review.hero.shared-message'))).exists();
+          assert.ok(
+            screen.queryByText(
+              t('pages.skill-review.hero.shared-message', { date: sharedAtDate(now), time: sharedAtTime(now) }),
+            ),
+          );
           assert.dom(screen.queryByText(t('pages.skill-review.error'))).doesNotExist();
 
           assert.dom(screen.queryByText(t('pages.skill-review.hero.explanations.improve'))).doesNotExist();
@@ -421,6 +450,35 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         assert.notOk(screen.queryByText(t('pages.skill-review.disabled-share')));
       });
 
+      test('it should display the shared date', async function (assert) {
+        // given
+        this.set('campaign', {
+          customResultPageText: 'My custom result page text',
+          organizationId: 1,
+        });
+
+        this.set('campaignParticipationResult', {
+          campaignParticipationBadges: [],
+          isShared: true,
+          sharedAt: now,
+        });
+
+        const screen = await render(
+          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
+  @campaign={{this.campaign}}
+  @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{true}}
+/>`,
+        );
+
+        // then
+        assert.ok(
+          screen.queryByText(
+            t('pages.skill-review.hero.shared-message', { date: sharedAtDate(now), time: sharedAtTime(now) }),
+          ),
+        );
+      });
+
       module('when there are no trainings and no custom link', function () {
         test('it should display a message and a homepage link', async function (assert) {
           // given
@@ -436,8 +494,12 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 />`,
           );
 
-          // then
-          assert.dom(screen.getByText(t('pages.skill-review.hero.shared-message'))).exists();
+          // the
+          assert.ok(
+            screen.queryByText(
+              t('pages.skill-review.hero.shared-message', { date: sharedAtDate(now), time: sharedAtTime(now) }),
+            ),
+          );
           assert.dom(screen.getByRole('link', { name: t('navigation.back-to-homepage') })).exists();
         });
       });
@@ -461,7 +523,11 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           );
 
           // then
-          assert.dom(screen.getByText(t('pages.skill-review.hero.shared-message'))).exists();
+          assert.ok(
+            screen.queryByText(
+              t('pages.skill-review.hero.shared-message', { date: sharedAtDate(now), time: sharedAtTime(now) }),
+            ),
+          );
           assert.dom(screen.queryByRole('link', { name: t('navigation.back-to-homepage') })).doesNotExist();
         });
       });
@@ -544,7 +610,11 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
             );
 
             // then
-            assert.ok(screen.queryByText(t('pages.skill-review.hero.shared-message')));
+            assert.ok(
+              screen.queryByText(
+                t('pages.skill-review.hero.shared-message', { date: sharedAtDate(now), time: sharedAtTime(now) }),
+              ),
+            );
             assert.ok(screen.getByRole('link', { name: t('navigation.back-to-homepage') }));
             assert.notOk(screen.queryByText(t('pages.sign-up.save-progress-message')));
             assert.notOk(screen.queryByText(t('pages.sign-up.actions.sign-up-on-pix')));
