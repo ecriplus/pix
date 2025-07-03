@@ -36,4 +36,12 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
     }
     return currentLocale;
   }
+
+  handleResponse(status, headers, errors) {
+    if (errors?.errors?.[0]?.id) {
+      console.table(errors.errors[0]);
+    }
+
+    return super.handleResponse(...arguments);
+  }
 }
