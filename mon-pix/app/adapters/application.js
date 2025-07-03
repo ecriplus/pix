@@ -37,10 +37,15 @@ export default class Application extends JSONAPIAdapter {
     return currentLocale;
   }
 
-  handleResponse(status) {
+  handleResponse(status, headers, errors) {
     if (status === 401 && this.session.isAuthenticated) {
       // no-await-on-purpose -- We want the session invalidation to happen in the background
       this.session.invalidate();
+    }
+
+    if (errors?.errors?.[0]?.id) {
+      // eslint-disable-next-line no-console
+      console.table(errors.errors[0]);
     }
 
     return super.handleResponse(...arguments);
