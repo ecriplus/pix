@@ -1,19 +1,19 @@
 {
   "id": "d03cef94-74af-463d-8901-c886b48d6e0b",
   "slug": "tmp-ia-int-mgo",
-  "title": "Comment chatGPT a-t-il appris à discuter ?",
+  "title": "Comment l'IA générative apprend-elle à discuter avec vous ?",
   "isBeta": false,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Les systèmes d'IA génératives&nbsp;sont capables de tenir des conversations étonnamment naturelles. Mais comment en sont-ils arrivées là ? Ce module vous emmène dans les coulisses de leur apprentissage&nbsp;: des montagnes de textes analysés aux techniques d’entraînement sophistiquées qui leur ont permis de comprendre, prédire et générer le langage humain.</p>",
+    "description": "<p>Les logiciels d'IA génératives&nbsp;sont capables de tenir des conversations étonnamment naturelles. Mais comment en sont-ils arrivés là ? Ce module vous emmène dans les coulisses de leur apprentissage&nbsp;: des montagnes de textes analysés aux techniques d’entraînement sophistiquées qui leur ont permis de comprendre, prédire et générer le langage humain.</p>",
     "duration": 10,
     "level": "Intermédiaire",
     "objectives": [
       "<p>Comprendre les étapes de l'entraînement des LLM</p>",
-      "<p>Comprendre l’étape de raffinement avec des humains</p>",
+      "<p>TODO</p>",
       "<p>Garder un esprit critique</p>"
     ],
-    "tabletSupport": "comfortable"
+    "tabletSupport": "inconvenient"
   },
   "grains": [
     {
@@ -24,18 +24,19 @@
         {
           "type": "element",
           "element": {
+            "id": "2FFCCAB8-92ED-44D2-BF57-5551840265F0",
+            "type": "text",
+            "content": "<p>Voici un logiciel d’IA générative. ✨<br>Observez ses réponses à différents prompts. 🔍</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
             "id": "028bb087-c3b6-43a6-93b7-e6a36d332a78",
             "type": "text",
-            "content": "<iframe title=\"llm\" src=\"https://1024pix.github.io/atelier-contenus/MGO/ia-int-accroche.html\" height=\"800\"></iframe>"
+            "content": "<iframe title=\"llm\" src=\"https://1024pix.github.io/atelier-contenus/MGO/ia-int-accroche-lat.html\" height=\"800\"></iframe>"
           }
-        }
-      ]
-    },
-    {
-      "id": "375bab8e-3de8-4121-b29f-3e35039e2cec",
-      "type": "discovery",
-      "title": "Que peut-on dire",
-      "components": [
+        },
         {
           "type": "element",
           "element": {
@@ -82,7 +83,7 @@
           "element": {
             "id": "4d4f3ac6-99e0-417c-9a5c-38fc11487264",
             "type": "text",
-            "content": "<p>Une IA générative parvient à simuler une discussion  comme un humain qui aurait réponse à tout. Comment a-t-elle appris à faire cela ? C’est ce que nous allons découvrir ensemble.</p>"
+            "content": "<p>Une IA générative parvient à <strong>simuler une discussion</strong> comme un humain qui aurait réponse à tout. 🤓<br>Comment a-t-elle appris à faire cela ? C’est ce que nous allons découvrir ensemble.</p>"
           }
         }
       ]
@@ -90,14 +91,14 @@
     {
       "id": "5166145e-6e9c-4fb5-b781-a08749f576c8",
       "type": "activity",
-      "title": "Dec 1",
+      "title": "Decouverte 1",
       "components": [
         {
           "type": "element",
           "element": {
             "id": "2d943050-b29c-4398-a336-143f3173c51a",
             "type": "text",
-            "content": "<p>L’IA générative doit d’abord s’entraîner à <strong>produire du texte</strong> compréhensible par un humain.&nbsp;</p><p>Pour commencer, cliquez sur \"Entraîner l'IA avec ces données\"</p>"
+            "content": "<p>Avant de savoir simuler une discussion, l’IA générative doit d’abord s’entraîner à <strong>produire du texte</strong> compréhensible par un humain.&nbsp;</p><p>Pour cela l'IA générative doit ingurgiter des <strong>quantités gigantesques de données</strong>. Elle utilisera ensuite une représentation de ces données pour produire de nouveaux textes</p><p>Voyons comment cela fonctionne. 🤔<br>Pour commencer, cliquez sur \"Entraîner l'IA avec ces données\"</p>"
           }
         }
       ]
@@ -120,7 +121,7 @@
           "element": {
             "id": "87e8de3c-dfa9-4a5d-91d8-ae8a703d7772",
             "type": "qcu",
-            "instruction": "<p>À votre avis, quel mot cette IA générative va-t-elle choisir pour compléter cette phrase ?</p><p>En Océanie, l'animal le plus courant est le&nbsp;:</p>",
+            "instruction": "<p>À votre avis, quel mot ce logiciel d'IA générative va-t-il choisir pour compléter cette phrase ?</p><p>En Océanie, l'animal le plus courant est le&nbsp;:</p>",
             "proposals": [
               {
                 "id": "1",
@@ -165,7 +166,7 @@
                 {
                   "id": "4386b458-46cb-45e9-8d1b-1e840cb2f7c3",
                   "type": "text",
-                  "content": "<p>Pour apprendre à une IA générative à produire du langage, on lui donne des <strong>milliards de textes</strong>.</p>"
+                  "content": "<p>Pour apprendre à une IA générative à produire du texte, on lui donne des <strong>milliards de textes</strong>.</p>"
                 }
               ]
             },
@@ -174,7 +175,7 @@
                 {
                   "id": "93d127a7-e179-40cd-9273-ce7a23007a39",
                   "type": "text",
-                  "content": "<p>Des mots sont cachés et l’IA s’entraîne à les <strong>deviner</strong>.</p>"
+                  "content": "<p>L’IA s’entraîne à <strong>deviner</strong> des mots au hasard dans ces textes. 🙈</p>"
                 }
               ]
             },
@@ -183,7 +184,7 @@
                 {
                   "id": "3cdf627f-2ad0-42e8-a529-696936905830",
                   "type": "text",
-                  "content": "<p>Elle mémorise quels mots apparaissent souvent ensemble.</p>"
+                  "content": "<p>Petit à petit elle s'améliore, elle mémorise quels mots apparaissent <strong>souvent</strong> ensemble.</p>"
                 }
               ]
             },
@@ -225,50 +226,50 @@
           "element": {
             "id": "6b03cc70-6198-4e2c-a994-f51ef3fcede4",
             "type": "qab",
-            "instruction": "<p>À votre avis, de quel genre de données a-t-on besoin pour entraîner une IA à simuler une conversation ? 🤔 </p><p>Sélectionnez les exemples appropriés 👇<br><br></p>",
+            "instruction": "<p>À votre avis, de quel genre de données a-t-on besoin pour entraîner une IA à <strong>simuler une conversation </strong>? 🤔 </p><p>Sélectionnez les exemples appropriés 👇<br><br></p>",
             "cards": [
               {
                 "id": "cea6f6c8-afd6-4e6b-8821-17558822a5ea",
-                "text": "Utiliser pour l'entraînement ?",
+                "text": "",
                 "image": {
                   "url": "https://assets.pix.org/draft/modules/ia-int-mgo/forum.png",
                   "altText": ""
                 },
-                "proposalA": "Oui",
-                "proposalB": "Non",
+                "proposalA": "Utiliser",
+                "proposalB": "Ne pas utiliser",
                 "solution": "A"
               },
               {
                 "id": "667724f0-baa9-4eb5-85b1-626bd91b376d",
-                "text": "Utiliser pour l'entraînement ?",
+                "text": "",
                 "image": {
                   "url": "https://assets.pix.org/draft/modules/ia-int-mgo/contact.png",
                   "altText": ""
                 },
-                "proposalA": "Oui",
-                "proposalB": "Non",
+                "proposalA": "Utiliser",
+                "proposalB": "Ne pas utiliser",
                 "solution": "B"
               },
               {
                 "id": "ba011fbb-8f9b-4755-868f-f79aff3e3022",
-                "text": "Utiliser pour l'entraînement ?",
+                "text": "",
                 "image": {
                   "url": "https://assets.pix.org/draft/modules/ia-int-mgo/faq.png",
                   "altText": ""
                 },
-                "proposalA": "Oui",
-                "proposalB": "Non",
+                "proposalA": "Utiliser",
+                "proposalB": "Ne pas utiliser",
                 "solution": "A"
               },
               {
                 "id": "438be278-98a6-47ee-a04b-cab2e2fbd3b6",
-                "text": "Utiliser pour l'entraînement ?",
+                "text": "",
                 "image": {
                   "url": "https://assets.pix.org/draft/modules/ia-int-mgo/article.png",
                   "altText": ""
                 },
-                "proposalA": "Oui",
-                "proposalB": "Non",
+                "proposalA": "Utiliser",
+                "proposalB": "Ne pas utiliser",
                 "solution": "B"
               }
             ]
@@ -289,7 +290,7 @@
                 {
                   "id": "9e50b0f7-2936-46af-8171-4793c5cc65a1",
                   "type": "text",
-                  "content": "<p>Pour qu’elle apprenne à simuler une discussion, on donne à l’IA générative beaucoup de <strong>lots de questions et réponses</strong> d'excellente qualité, choisies par les ingénieurs qui l’entraînent. C’est de l’apprentissage <strong>supervisé</strong>.</p>"
+                  "content": "<p>Les ingénieurs qui entraînent les IA génératives sélectionnent des <strong>lots de questions et réponses</strong> d'excellente qualité.<br> Ils les donnent ensuite à l'IA générative pour qu'elle apprenne à simuler une conversation.<br>C’est de l’apprentissage <strong>supervisé</strong>.</p>"
                 }
               ]
             },
@@ -298,7 +299,7 @@
                 {
                   "id": "7da341f7-c582-4a8a-9ea1-091fbe87ed64",
                   "type": "text",
-                  "content": "<p>Le saviez-vous ? Wikipédia a été entièrement réécrit sous la forme de questions et de réponses pour entraîner les IA génératives !</p>"
+                  "content": "<p>Le saviez-vous ? Wikipédia a été réécrit sous la forme de questions et de réponses pour entraîner les IA génératives !</p>"
                 }
               ]
             },
@@ -307,7 +308,7 @@
                 {
                   "id": "466b79fe-f4f0-4dde-824f-33c17e4420b1",
                   "type": "text",
-                  "content": "<p>On applique le même principe pour qu’elle apprenne à faire d’autres choses comme&nbsp;: résumer un texte, écrire une lettre de motivation.</p>"
+                  "content": "<p>On applique le même principe pour qu’elle apprenne à faire d’autres choses comme&nbsp;: résumer un texte, écrire une lettre de motivation, etc.</p>"
                 }
               ]
             }
@@ -325,7 +326,7 @@
           "element": {
             "id": "bfc2e80e-497e-4101-9f14-f353641e22d2",
             "type": "text",
-            "content": "<p>Ce n’est pas tout ! Une troisième étape consiste à entraîner l’IA générative à produire des réponses satisfaisantes pour les utilisateurs.</p>"
+            "content": "<p>Ce n’est pas tout ! Une troisième étape consiste à entraîner l’IA générative à produire des réponses satisfaisantes pour les utilisateurs. 🤩</p>"
           }
         }
       ]
@@ -400,7 +401,7 @@
                 {
                   "id": "d55d9fe9-b12a-4351-97ab-704341f4265d",
                   "type": "text",
-                  "content": "<p>Pour apprendre à l’IA générative à faire des réponses satisfaisantes, on utilise un système de <strong>récompense</strong>. Chacune des réponses de l’IA Gen est notée, “bien” ou “pas bien”. Elle essaye d’obtenir le plus de “bien” possible. C’est de l’apprentissage par <strong>renforcement</strong>.</p>"
+                  "content": "<p>Pour apprendre à l’IA générative à faire des réponses satisfaisantes, on utilise un système de <strong>récompense</strong>.<br>Chacune des réponses de l’IA Gen est notée : 👍 ou 👎 . Le logiciel essaye d’obtenir le plus de 👍 .<br>C’est de l’apprentissage par <strong>renforcement</strong>.</p>"
                 }
               ]
             },
@@ -409,7 +410,7 @@
                 {
                   "id": "40570e09-028c-40e3-bc93-47d81f572c33",
                   "type": "text",
-                  "content": "<p>Ce score est produit par des <strong>humains</strong> ! Des personnes sont rémunérées pour le faire. C’est un travail mal payé et pas très valorisant. Vous le faites aussi parfois gratuitement en cliquant sur le pouce en dessous de la réponse. </p>"
+                  "content": "<p>Des personnes sont rémunérées pour produire cette note. C’est un travail mal payé et pas très valorisant. 😔<br>Vous le faites aussi parfois gratuitement en <strong>cliquant</strong> sur le pouce en dessous de la réponse.</p>"
                 }
               ]
             },
@@ -418,7 +419,7 @@
                 {
                   "id": "33ca3432-2322-4553-844c-91afafbe2f32",
                   "type": "text",
-                  "content": "<p>On observe que les humains ont <strong>tendance</strong> à choisir des réponses polies et agréables, mais aussi des réponses qui ne les contredisent pas, voire qui les flattent ...</p>"
+                  "content": "<p>On observe que les humains ont <strong>tendance</strong> à choisir des réponses polies et agréables, mais aussi des réponses qui ne les contredisent pas, voire qui les flattent ... 🥰</p>"
                 }
               ]
             },
@@ -427,7 +428,7 @@
                 {
                   "id": "e3e9640d-33de-4076-ac26-2525371095bd",
                   "type": "text",
-                  "content": "<p>Bon à savoir 💡: Ce principe d'alignement aux attentes des humains, a tendance à rendre les IA génératives <strong>complaisantes</strong>. Pour aller dans le sens de l’utilisateur, elles peuvent inventer des faits et halluciner.</p>"
+                  "content": "<p>Bon à savoir 💡: Ce principe d'<strong>alignement aux attentes des humains</strong>, a tendance à rendre les IA génératives <strong>complaisantes</strong>. Pour aller dans le sens de l’utilisateur, elles peuvent <strong>inventer</strong> des faits et halluciner. 🤥</p>"
                 }
               ]
             }
@@ -443,9 +444,21 @@
         {
           "type": "element",
           "element": {
-            "id": "00bcbb9f-04ad-4748-9267-5e59b1c53dfa",
+            "id": "e439337d-8f77-4ad6-b925-14cf68679a2d",
             "type": "text",
-            "content": "<p>📍<strong>Mémo</strong></p><br>    <table>     <tbody>       <tr>         <th scope=\"row\">Pré-entraînement</th>         <td>Milliards de textes</td>         <td>Analyse des textes\t</td>         <td>Produire du texte, prédire suite d’un texte\t</td>       </tr>       <tr>         <th scope=\"row\">Ajustement</th>         <td>Textes spécifiques (conversations …) sélectionnés par des humains</td>         <td>Apprentissage d’une tâche spécifique</td>         <td>Savoir créer du texte avec des contraintes de style, forme, etc (conversation, …)</td>       </tr>       <tr>         <th scope=\"row\">Alignement</th>         <td>Préférences des utilisateurs</td>         <td>Optimisation selon les préférences des utilisateurs</td>         <td>Produire du texte qui plait aux utilisateurs</td>       </tr>     </tbody>   </table> "
+            "content": "<p>📌 <strong>Résumons avant de passer à la suite :</strong><br></p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "621ace0a-3948-420f-a72e-0e99be588629",
+            "type": "image",
+            "url": "https://assets.pix.org/draft/modules/ia-int-mgo/recap.png",
+            "alt": "Infographie récapitulative",
+            "alternativeText": "<p></p><table>     <tbody>       <tr>         <th scope=\"row\">Pré-entraînement</th>         <td>Milliards de textes</td>         <td>Analyse des textes\t</td>         <td>Produire du texte, prédire suite d’un texte\t</td>       </tr>       <tr>         <th scope=\"row\">Ajustement</th>         <td>Textes spécifiques (conversations …) sélectionnés par des humains</td>         <td>Apprentissage d’une tâche spécifique</td>         <td>Savoir créer du texte avec des contraintes de style, forme, etc (conversation, …)</td>       </tr>       <tr>         <th scope=\"row\">Alignement</th>         <td>Préférences des utilisateurs</td>         <td>Optimisation selon les préférences des utilisateurs</td>         <td>Produire du texte qui plait aux utilisateurs</td>       </tr>     </tbody>   </table><p></p>",
+            "legend": "",
+            "licence": ""
           }
         }
       ]
