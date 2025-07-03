@@ -56,7 +56,7 @@ export default class ReplaceStudentsModal extends Component {
         {{else}}
           <PixButton
             @id="students-file-upload-replace"
-            @triggerAction={{(@onReplaceStudents)}}
+            @triggerAction={{@onReplaceStudents}}
             @isDisabled={{true}}
             @variant="error"
           >
