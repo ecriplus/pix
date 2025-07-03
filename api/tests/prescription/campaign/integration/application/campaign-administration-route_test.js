@@ -18,6 +18,7 @@ describe('Integration | Application | Route | campaign administration router', f
   describe('POST /api/campaigns', function () {
     it('should call campaign administration save controller', async function () {
       // given
+      sinon.stub(securityPreHandlers, 'checkOrganizationAccess').returns(true);
       sinon.stub(campaignAdministrationController, 'save').callsFake((request, h) => h.response('ok').code(201));
       httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);

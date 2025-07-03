@@ -16,6 +16,12 @@ const register = async function (server) {
       method: 'POST',
       path: '/api/campaigns',
       config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkOrganizationAccess,
+            assign: 'checkOrganizationAccess',
+          },
+        ],
         handler: campaignAdministrationController.save,
         notes: [
           '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
