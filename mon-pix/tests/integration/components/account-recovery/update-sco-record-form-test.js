@@ -56,7 +56,7 @@ module('Integration | Component | account-recovery | update-sco-record', functio
         name: t('pages.account-recovery.update-sco-record.form.login-button'),
       });
       assert.ok(submitButton);
-      assert.true(submitButton.disabled);
+      assert.dom(submitButton).hasAttribute('aria-disabled');
       assert.ok(screen.getByText(t('common.actions.quit')));
       assert.dom(screen.getByRole('checkbox', { name: t('common.cgu.label') })).exists();
       assert.ok(screen.getByRole('link', { name: t('common.cgu.cgu') }));
@@ -187,7 +187,7 @@ module('Integration | Component | account-recovery | update-sco-record', functio
       const submitButton = screen.getByRole('button', {
         name: t('pages.account-recovery.update-sco-record.form.login-button'),
       });
-      assert.true(submitButton.disabled);
+      assert.dom(submitButton).hasAttribute('aria-disabled');
     });
 
     test('disables submission if password is valid and cgu and data protection policy are not accepted', async function (assert) {
@@ -204,7 +204,7 @@ module('Integration | Component | account-recovery | update-sco-record', functio
       const submitButton = screen.getByRole('button', {
         name: t('pages.account-recovery.update-sco-record.form.login-button'),
       });
-      assert.true(submitButton.disabled);
+      assert.dom(submitButton).hasAttribute('aria-disabled');
     });
 
     test('disables submission on form when is loading', async function (assert) {
@@ -222,7 +222,7 @@ module('Integration | Component | account-recovery | update-sco-record', functio
       const submitButton = screen.getByRole('button', {
         name: t('pages.account-recovery.update-sco-record.form.login-button'),
       });
-      assert.true(submitButton.disabled);
+      assert.dom(submitButton).hasAttribute('aria-disabled');
     });
 
     test('enables submission if password is valid and cgu and data protection policy are accepted', async function (assert) {
@@ -240,7 +240,7 @@ module('Integration | Component | account-recovery | update-sco-record', functio
       const submitButton = screen.getByRole('button', {
         name: t('pages.account-recovery.update-sco-record.form.login-button'),
       });
-      assert.false(submitButton.disabled);
+      assert.dom(submitButton).doesNotHaveAttribute('aria-disabled');
     });
   });
 

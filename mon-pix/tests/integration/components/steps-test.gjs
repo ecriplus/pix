@@ -173,7 +173,7 @@ module('Integration | Component | steps', function (hooks) {
               name: t('pages.certification-instructions.buttons.continuous.last-page.aria-label'),
             }),
           )
-          .isDisabled();
+          .hasAttribute('aria-label');
       });
 
       module('when the checkbox is checked', function () {

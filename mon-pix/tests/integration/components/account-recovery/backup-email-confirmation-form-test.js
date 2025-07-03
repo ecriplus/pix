@@ -64,7 +64,7 @@ module('Integration | Component | account-recovery::backup-email-confirmation-fo
       });
 
       assert.ok(submitButton);
-      assert.true(submitButton.disabled);
+      assert.dom(submitButton).hasAttribute('aria-disabled');
     });
   });
 
@@ -163,7 +163,7 @@ module('Integration | Component | account-recovery::backup-email-confirmation-fo
         name: t('pages.account-recovery.find-sco-record.backup-email-confirmation.form.actions.submit'),
         hidden: true,
       });
-      assert.true(submitButton.disabled);
+      assert.dom(submitButton).hasAttribute('aria-disabled');
     });
   });
 

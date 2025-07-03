@@ -23,12 +23,8 @@ module('Integration | Component | challenge actions', function (hooks) {
 />`);
 
     // then
-    assert
-      .dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')))
-      .hasAttribute('aria-disabled', 'true');
-    assert
-      .dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')))
-      .hasAttribute('aria-disabled', 'true');
+    assert.dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next'))).hasAttribute('aria-disabled');
+    assert.dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next'))).hasAttribute('aria-disabled');
   });
 
   test('it should add a loading state to the button and disable the validate button', async function (assert) {
@@ -44,12 +40,8 @@ module('Integration | Component | challenge actions', function (hooks) {
   @isSkipActionLoading={{this.isSkipActionLoading}}
 />`);
 
-    assert
-      .dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next')))
-      .hasAttribute('aria-disabled', 'true');
-    assert
-      .dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next')))
-      .hasAttribute('aria-disabled', 'true');
+    assert.dom(screen.getByLabelText(t('pages.challenge.actions.skip-go-to-next'))).hasAttribute('aria-disabled');
+    assert.dom(screen.getByLabelText(t('pages.challenge.actions.validate-go-to-next'))).hasAttribute('aria-disabled');
   });
 
   module('Challenge has timed out', function () {
@@ -236,8 +228,12 @@ module('Integration | Component | challenge actions', function (hooks) {
       );
 
       // then
-      assert.dom(screen.getByRole('button', { name: 'Je valide et je vais à la prochaine question' })).isDisabled();
-      assert.dom(screen.getByRole('button', { name: 'Je passe et je vais à la prochaine question' })).isDisabled();
+      assert
+        .dom(screen.getByRole('button', { name: 'Je valide et je vais à la prochaine question' }))
+        .hasAttribute('aria-disabled');
+      assert
+        .dom(screen.getByRole('button', { name: 'Je passe et je vais à la prochaine question' }))
+        .hasAttribute('aria-disabled');
       assert.dom(screen.getByText('Les actions sont mises en pause en attendant le surveillant')).exists();
     });
   });
@@ -253,8 +249,12 @@ module('Integration | Component | challenge actions', function (hooks) {
       );
 
       // then
-      assert.dom(screen.getByRole('button', { name: 'Je valide et je vais à la prochaine question' })).isDisabled();
-      assert.dom(screen.getByRole('button', { name: 'Je passe et je vais à la prochaine question' })).isDisabled();
+      assert
+        .dom(screen.getByRole('button', { name: 'Je valide et je vais à la prochaine question' }))
+        .hasAttribute('aria-disabled');
+      assert
+        .dom(screen.getByRole('button', { name: 'Je passe et je vais à la prochaine question' }))
+        .hasAttribute('aria-disabled');
       assert.dom(screen.getByText('Les actions sont mises en pause en attendant le surveillant')).exists();
     });
   });

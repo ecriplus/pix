@@ -37,7 +37,7 @@ module('Integration | Component | Authentication | SsoSelectionForm', function (
     const buttonLink = await screen.findByRole('button', {
       name: t('pages.authentication.sso-selection.signin.button'),
     });
-    assert.dom(buttonLink).hasAttribute('disabled');
+    assert.dom(buttonLink).hasAttribute('aria-disabled');
   });
 
   test('it selects a provider', async function (assert) {
