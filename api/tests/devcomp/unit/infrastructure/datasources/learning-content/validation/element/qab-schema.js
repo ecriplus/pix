@@ -12,7 +12,7 @@ const qabElementSchema = Joi.object({
       text: htmlNotAllowedSchema.allow('').required(),
       image: {
         url: htmlNotAllowedSchema.uri().allow('').required(),
-        altText: htmlNotAllowedSchema.uri().allow('').required(),
+        altText: htmlNotAllowedSchema.allow('').required(),
       },
       proposalA: htmlNotAllowedSchema.required(),
       proposalB: htmlNotAllowedSchema.required(),

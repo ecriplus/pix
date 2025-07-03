@@ -3,6 +3,7 @@ import { getDownloadSample } from '../../../../../../../src/devcomp/infrastructu
 import { getEmbedSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/embed.sample.js';
 import { getFlashcardsSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/flashcards.sample.js';
 import { getImageSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/image.sample.js';
+import { getQabSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/qab.sample.js';
 import { getQcmSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/qcm.sample.js';
 import { getQcuSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/qcu.sample.js';
 import { getQrocmSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/qrocm.sample.js';
@@ -15,6 +16,7 @@ import { downloadElementSchema } from './element/download-schema.js';
 import { embedElementSchema } from './element/embed-schema.js';
 import { flashcardsElementSchema } from './element/flashcards-schema.js';
 import { imageElementSchema } from './element/image-schema.js';
+import { qabElementSchema } from './element/qab-schema.js';
 import { qcmElementSchema } from './element/qcm-schema.js';
 import { qcuElementSchema } from './element/qcu-schema.js';
 import { blockInputSchema, blockSelectSchema, qrocmElementSchema } from './element/qrocm-schema.js';
@@ -67,6 +69,15 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
     it('should validate sample image structure', async function () {
       try {
         await imageElementSchema.validateAsync(getImageSample(), { abortEarly: false });
+      } catch (joiError) {
+        const formattedError = joiErrorParser.format(joiError);
+        expect(joiError).to.equal(undefined, formattedError);
+      }
+    });
+
+    it('should validate sample qab structure', async function () {
+      try {
+        await qabElementSchema.validateAsync(getQabSample(), { abortEarly: false });
       } catch (joiError) {
         const formattedError = joiErrorParser.format(joiError);
         expect(joiError).to.equal(undefined, formattedError);
