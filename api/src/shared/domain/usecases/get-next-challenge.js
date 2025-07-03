@@ -1,5 +1,5 @@
 export async function getNextChallenge({
-  assessmentId,
+  assessment,
   userId,
   locale,
   assessmentRepository,
@@ -7,7 +7,6 @@ export async function getNextChallenge({
   evaluationUsecases,
   certificationEvaluationRepository,
 }) {
-  const assessment = await assessmentRepository.getWithAnswers(assessmentId);
   if (!assessment.isStarted()) {
     assessment.nextChallenge = null;
     return assessment;
