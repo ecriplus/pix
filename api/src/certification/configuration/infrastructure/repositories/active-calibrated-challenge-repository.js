@@ -10,9 +10,10 @@ import { ActiveCalibratedChallenge } from '../../domain/read-models/ActiveCalibr
 export async function findByComplementaryKeyAndCalibrationId({ complementaryCertificationKey, calibrationId }) {
   const activeCalibratedChallengesDTO = await datamartKnex('active_calibrated_challenges')
     .select('scope', 'alpha as discriminant', 'delta as difficulty', 'challenge_id as challengeId')
+    .innerJoin('calibrations', 'active_calibrated_challenges.calibration_id', 'calibrations.id')
     .where({
-      scope: complementaryCertificationKey,
       calibration_id: calibrationId,
+      scope: complementaryCertificationKey,
     })
     .orderBy('challengeId');
 

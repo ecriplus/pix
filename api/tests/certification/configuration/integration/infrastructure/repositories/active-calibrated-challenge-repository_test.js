@@ -17,30 +17,46 @@ describe('Certification | Configuration | Integration | Repository | active-cali
 
     it('should return active calibrated challenges sorted by challengeId', async function () {
       //given
-      const complementaryCertificationKey = ComplementaryCertificationKeys.PIX_PLUS_DROIT;
-      const calibrationId = 'calibration1234';
+
+      const calibration = datamartBuilder.factory.buildCalibration({
+        scope: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+        status: 'VALIDATED',
+      });
+      const cleaCalibration = datamartBuilder.factory.buildCalibration({
+        scope: ComplementaryCertificationKeys.PIX_CLEA,
+        status: 'VALIDATED',
+      });
+      const otherCalibration = datamartBuilder.factory.buildCalibration({
+        scope: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+        status: 'VALIDATED',
+      });
+      const toValidateCalibration = datamartBuilder.factory.buildCalibration({
+        scope: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+        status: 'TO_VALIDATE',
+      });
 
       const secondActiveCalibratedChallenge = datamartBuilder.factory.buildActiveCalibratedChallenge({
         challengeId: 'rec4567',
-        calibrationId,
-        scope: complementaryCertificationKey,
+        calibrationId: calibration.id,
       });
       const firstActiveCalibratedChallenge = datamartBuilder.factory.buildActiveCalibratedChallenge({
         challengeId: 'rec1234',
-        calibrationId,
-        scope: complementaryCertificationKey,
+        calibrationId: calibration.id,
       });
       // from CLEA scope
       datamartBuilder.factory.buildActiveCalibratedChallenge({
         challengeId: 'rec1234',
-        calibrationId: 'cleaCalibrationId1234',
-        scope: ComplementaryCertificationKeys.CLEA,
+        calibrationId: cleaCalibration.id,
       });
       // with other calibrationId
       datamartBuilder.factory.buildActiveCalibratedChallenge({
         challengeId: 'rec4567',
-        otherCalibrationId: 'otherCalibrationId1234',
-        scope: complementaryCertificationKey,
+        calibrationId: otherCalibration.id,
+      });
+      // with calibration to validate
+      datamartBuilder.factory.buildActiveCalibratedChallenge({
+        challengeId: 'rec6789',
+        calibrationId: toValidateCalibration.id,
       });
 
       const expectedActiveCalibratedChallenges = [
@@ -62,12 +78,57 @@ describe('Certification | Configuration | Integration | Repository | active-cali
 
       //when
       const calibratedChallenges = await activeCalibratedChallengeRepository.findByComplementaryKeyAndCalibrationId({
-        complementaryCertificationKey,
-        calibrationId,
+        complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+        calibrationId: calibration.id,
       });
 
       //then
       expect(calibratedChallenges).to.deep.equal(expectedActiveCalibratedChallenges);
+    });
+
+    it("should return empty array when calibration id given doesn't match the given scope", async function () {
+      const calibration = datamartBuilder.factory.buildCalibration({
+        scope: ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE,
+        status: 'VALIDATED',
+      });
+
+      datamartBuilder.factory.buildActiveCalibratedChallenge({
+        challengeId: 'rec1234',
+        calibrationId: calibration.id,
+      });
+
+      await datamartBuilder.commit();
+
+      //when
+      const calibratedChallenges = await activeCalibratedChallengeRepository.findByComplementaryKeyAndCalibrationId({
+        complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+        calibrationId: calibration.id,
+      });
+
+      //then
+      expect(calibratedChallenges).to.deep.equal([]);
+    });
+
+    it('should return empty array when calibration is to validate', async function () {
+      //given
+      const toValidateCalibration = datamartBuilder.factory.buildCalibration({
+        scope: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+        status: 'TO_VALIDATE',
+      });
+
+      datamartBuilder.factory.buildActiveCalibratedChallenge({
+        challengeId: 'rec6789',
+        calibrationId: toValidateCalibration.id,
+      });
+
+      //when
+      const calibratedChallenges = await activeCalibratedChallengeRepository.findByComplementaryKeyAndCalibrationId({
+        complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+        calibrationId: toValidateCalibration.id,
+      });
+
+      //then
+      expect(calibratedChallenges).to.deep.equal([]);
     });
   });
 });
