@@ -62,7 +62,7 @@ const register = async function (server) {
             assign: 'authorizationCheck',
           },
         ],
-        handler: assessmentController.get,
+        handler: assessmentController.getNextChallenge,
         tags: ['api'],
       },
     },

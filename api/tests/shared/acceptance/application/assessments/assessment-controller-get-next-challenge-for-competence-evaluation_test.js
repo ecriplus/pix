@@ -118,6 +118,22 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-compet
         clock.restore();
       });
 
+      it('should return assessment with title', async function () {
+        // given
+        const options = {
+          method: 'GET',
+          url: `/api/assessments/${assessmentId}/next`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.result.data.id).to.equal(assessmentId.toString());
+        expect(response.result.data.attributes.title).to.equal('Mener une recherche et une veille d’information');
+      });
+
       it('should return the second challenge if the first answer is correct', async function () {
         // given
         const options = {

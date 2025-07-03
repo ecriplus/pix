@@ -184,6 +184,9 @@ describe('Acceptance | API | assessment-controller-get', function () {
               related: `/api/answers?assessmentId=${assessmentId}`,
             },
           },
+          'next-challenge': {
+            data: null,
+          },
         },
       };
       const assessment = response.result.data;
@@ -321,11 +324,18 @@ describe('Acceptance | API | assessment-controller-get', function () {
               },
             ],
           },
+          'next-challenge': {
+            data: null,
+          },
         },
       };
       const assessment = response.result.data;
       expect(assessment.attributes).to.deep.equal(expectedAssessment.attributes);
       expect(assessment.relationships.answers.data).to.have.deep.members(expectedAssessment.relationships.answers.data);
+      expect(assessment.relationships.course).to.deep.equal(expectedAssessment.relationships.course);
+      expect(assessment.relationships['next-challenge']).to.deep.equal(
+        expectedAssessment.relationships['next-challenge'],
+      );
     });
   });
 });

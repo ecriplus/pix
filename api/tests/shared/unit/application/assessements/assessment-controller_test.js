@@ -1,46 +1,9 @@
 import { usecases as certificationUsecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
 import { assessmentController } from '../../../../../src/shared/application/assessments/assessment-controller.js';
-import { sharedUsecases } from '../../../../../src/shared/domain/usecases/index.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Controller | assessment-controller', function () {
-  describe('#get', function () {
-    const authenticatedUserId = '12';
-    const locale = 'fr';
-    const assessmentId = 104974;
-
-    const assessment = { id: assessmentId, title: 'Ordinary Wizarding Level assessment' };
-    let assessmentSerializerStub;
-
-    beforeEach(function () {
-      sinon.stub(sharedUsecases, 'getAssessment').withArgs({ assessmentId, locale }).resolves(assessment);
-      assessmentSerializerStub = { serialize: sinon.stub() };
-      assessmentSerializerStub.serialize.resolvesArg(0);
-    });
-
-    it('should call the expected usecase', async function () {
-      // given
-      const request = {
-        auth: {
-          credentials: {
-            userId: authenticatedUserId,
-          },
-        },
-        params: {
-          id: assessmentId,
-        },
-        headers: { 'accept-language': locale },
-      };
-
-      // when
-      const result = await assessmentController.get(request, hFake, { assessmentSerializer: assessmentSerializerStub });
-
-      // then
-      expect(result).to.be.equal(assessment);
-    });
-  });
-
   describe('#findCompetenceEvaluations', function () {
     it('should return the competence evaluations', async function () {
       // given
