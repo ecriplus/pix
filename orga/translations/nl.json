@@ -597,7 +597,7 @@
       },
       "purpose": {
         "exam": "Vraagmodus [beta]",
-        "exam-info": "Met een campagne in de “quizmodus” kunnen deelnemers worden getest op specifieke onderwerpen, zonder rekening te houden met hun gebruikersprofiel of er invloed op te hebben.",
+        "exam-info": "Met een campagne in de “quizmodus” kunnen deelnemers worden getest op specifieke onderwerpen, zonder rekening te houden met hun gebruikersprofiel of er invloed op te hebben. De aangeboden tests zijn gepersonaliseerd voor elke deelnemer, afhankelijk van hoe ver ze gevorderd zijn in het traject.",
         "assessment": "Deelnemers evalueren",
         "assessment-info": "Een beoordelingscampagne stelt deelnemers in staat om getest te worden op specifieke onderwerpen.",
         "label": "Wat is het doel van je campagne?",
