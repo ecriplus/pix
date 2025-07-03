@@ -1,5 +1,28 @@
 # Pix Changelog
 
+# [5.149.0](https://github.com/1024pix/pix/compare/v5.148.1...v5.149.0) (2025-07-03)
+
+### :rocket: Amélioration
+
+- [#12716](https://github.com/1024pix/pix/pull/12716) Afficher la date et l'heure de l'envoie des résultats de campagne (PIX-18081) 
+- [#12710](https://github.com/1024pix/pix/pull/12710) Créer un seed de quête avec un code et un organizationId (PIX-18474) 
+
+### :bug: Correction
+
+- [#12746](https://github.com/1024pix/pix/pull/12746) Corriger le type du champ alt des images dans le schéma du QAB (PIX-18592) 
+
+### :building_construction: Tech
+
+- [#12715](https://github.com/1024pix/pix/pull/12715) :card_file_box: Modification du type du champ `calibration_id` pour qu'il corresponde à celui de la table `calibrations` (PIX-18533) 
+
+### :arrow_up: Montée de version
+
+- [#12731](https://github.com/1024pix/pix/pull/12731) Update dependency @1024pix/pix-ui to ^55.23.1 (mon-pix) 
+- [#12744](https://github.com/1024pix/pix/pull/12744) Update dependency @1024pix/stylelint-config to ^5.1.33 (certif) 
+- [#12745](https://github.com/1024pix/pix/pull/12745) Update dependency @1024pix/stylelint-config to ^5.1.33 (junior) 
+- [#12747](https://github.com/1024pix/pix/pull/12747) Update dependency @1024pix/stylelint-config to ^5.1.33 (mon-pix) 
+- [#12749](https://github.com/1024pix/pix/pull/12749) Update dependency @1024pix/stylelint-config to ^5.1.33 (orga)
+
 ## [5.148.1](https://github.com/1024pix/pix/compare/v5.148.0...v5.148.1) (2025-07-02)
 
 ### :bug: Correction
