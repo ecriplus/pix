@@ -10,6 +10,7 @@ import { buildAnswer } from './build-answer.js';
 import { buildArea } from './build-area.js';
 import { buildAssessment } from './build-assessment.js';
 import { buildAssessmentResult } from './build-assessment-result.js';
+import { buildAttestationUserDetail } from './build-attestation-user-detail.js';
 import { buildAuthenticationMethod } from './build-authentication-method.js';
 import { buildBadge } from './build-badge.js';
 import { buildBadgeCriterion } from './build-badge-criterion.js';
@@ -340,6 +341,7 @@ export {
   buildArea,
   buildAssessment,
   buildAssessmentResult,
+  buildAttestationUserDetail,
   buildAuthenticationMethod,
   buildBadge,
   buildBadgeCriterion,
