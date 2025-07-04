@@ -262,8 +262,8 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       const tube1 = databaseBuilder.factory.learningContent.buildTube({ id: tubeId, skillIds: [skill.id] });
       const challenge = databaseBuilder.factory.learningContent.buildChallenge({
         skillId: skill.id,
-        alpha: 2.1,
-        delta: 3.4,
+        discriminant: 2.1,
+        difficulty: 3.4,
         status: 'validé',
       });
 
@@ -310,7 +310,6 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
     it('should return 200 HTTP status code and update framework with calibration', async function () {
       // given
       const superAdmin = await insertUserWithRoleSuperAdmin();
-      const calibrationId = '1234';
 
       const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
       const createdAt = new Date('2023-06-18');
@@ -322,19 +321,25 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
 
       await databaseBuilder.commit();
 
+      const calibration = datamartBuilder.factory.buildCalibration({
+        scope: 'DROIT',
+        status: 'VALIDATED',
+      });
+      const otherCalibration = datamartBuilder.factory.buildCalibration({
+        scope: 'DROIT',
+        status: 'VALIDATED',
+      });
       const activeCalibratedChallenge = datamartBuilder.factory.buildActiveCalibratedChallenge({
-        calibrationId,
+        calibrationId: calibration.id,
         challengeId: 'recChallengeId',
         alpha: 3.3,
         delta: 4.4,
-        scope: 'DROIT',
       });
       datamartBuilder.factory.buildActiveCalibratedChallenge({
-        calibrationId: 'otherCalibrationId',
+        calibrationId: otherCalibration.id,
         challengeId: 'recChallengeId',
         alpha: 3.1,
         delta: 6.4,
-        scope: 'DROIT',
       });
       await datamartBuilder.commit();
 
@@ -346,7 +351,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
           data: {
             attributes: {
               createdAt,
-              calibrationId,
+              calibrationId: calibration.id,
             },
           },
         },
@@ -358,14 +363,15 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       // then
       expect(response.statusCode).to.equal(200);
 
-      const consolidatedFramework = await knex('certification-frameworks-challenges').where({
+      const certificationFrameworksChallenges = await knex('certification-frameworks-challenges').where({
         complementaryCertificationKey: complementaryCertification.key,
         createdAt,
       });
-      expect(consolidatedFramework).to.have.length(1);
-      expect(_.omit(consolidatedFramework[0], 'id')).to.deep.equal({
-        alpha: activeCalibratedChallenge.alpha,
-        delta: activeCalibratedChallenge.delta,
+      expect(certificationFrameworksChallenges).to.have.length(1);
+      expect(_.omit(certificationFrameworksChallenges[0], 'id')).to.deep.equal({
+        calibrationId: calibration.id,
+        discriminant: activeCalibratedChallenge.alpha,
+        difficulty: activeCalibratedChallenge.delta,
         challengeId: certificationFrameworkChallenge.challengeId,
         complementaryCertificationKey: complementaryCertification.key,
         createdAt: certificationFrameworkChallenge.createdAt,
@@ -379,21 +385,11 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       const superAdmin = await insertUserWithRoleSuperAdmin();
 
       const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
-      const tubeId = 'myTubeId';
-      const skill = databaseBuilder.factory.learningContent.buildSkill({
-        tubeId,
-        status: 'actif',
-      });
-      const tube = databaseBuilder.factory.learningContent.buildTube({ id: tubeId, skillIds: [skill.id] });
-      const challenge = databaseBuilder.factory.learningContent.buildChallenge({
-        skillId: skill.id,
-        alpha: 2.1,
-        delta: 3.4,
-        status: 'validé',
-      });
       const certificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
         complementaryCertificationKey: complementaryCertification.key,
-        challengeId: challenge.id,
+        challengeId: 'rec1234',
+        discriminant: 2.1,
+        difficulty: 3.4,
         createdAt: new Date('2023-01-11'),
       });
 
@@ -415,7 +411,13 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
         attributes: {
           'complementary-certification-key': complementaryCertification.key,
           'created-at': certificationFrameworksChallenge.createdAt,
-          'tube-ids': [tube.id],
+          challenges: [
+            {
+              challengeId: 'rec1234',
+              discriminant: 2.1,
+              difficulty: 3.4,
+            },
+          ],
         },
       });
     });

@@ -1,8 +1,7 @@
 import { calibrateConsolidatedFramework } from '../../../../../../src/certification/configuration/domain/usecases/calibrate-consolidated-framework.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Unit | UseCase | calibrate-consolidated-framework', function () {
   let complementaryCertification, consolidatedFrameworkRepository, activeCalibratedChallengeRepository;
@@ -21,7 +20,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
     };
 
     activeCalibratedChallengeRepository = {
-      findByComplementaryKeyAndCalibrationId: sinon.stub(),
+      getByComplementaryKeyAndCalibrationId: sinon.stub(),
     };
   });
 
@@ -71,7 +70,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
         })
         .resolves(certificationFramework);
 
-      activeCalibratedChallengeRepository.findByComplementaryKeyAndCalibrationId
+      activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId
         .withArgs({
           complementaryCertificationKey: complementaryCertification.key,
           calibrationId,
@@ -144,7 +143,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
         })
         .resolves(certificationFramework);
 
-      activeCalibratedChallengeRepository.findByComplementaryKeyAndCalibrationId
+      activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId
         .withArgs({
           complementaryCertificationKey: complementaryCertification.key,
           calibrationId,
@@ -162,45 +161,6 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
 
       // then
       expect(consolidatedFrameworkRepository.save).to.have.been.calledOnceWithExactly(expectedFramework);
-    });
-  });
-
-  describe('when there is no active calibrated challenges, given our scope and creation date', function () {
-    it('should throw a not found error', async function () {
-      // given
-      const calibrationId = 1;
-
-      const certificationFramework = domainBuilder.certification.configuration.buildConsolidatedFramework();
-
-      consolidatedFrameworkRepository.getByCreationDateAndComplementaryKey
-        .withArgs({
-          complementaryCertificationKey: complementaryCertification.key,
-          createdAt: certificationFramework.createdAt,
-        })
-        .resolves(certificationFramework);
-
-      activeCalibratedChallengeRepository.findByComplementaryKeyAndCalibrationId
-        .withArgs({
-          complementaryCertificationKey: complementaryCertification.key,
-          calibrationId,
-        })
-        .resolves([]);
-
-      // when
-      const error = await catchErr(calibrateConsolidatedFramework)({
-        complementaryCertificationKey: certificationFramework.complementaryCertificationKey,
-        createdAt: certificationFramework.createdAt,
-        calibrationId,
-        consolidatedFrameworkRepository,
-        activeCalibratedChallengeRepository,
-      });
-
-      // then
-      expect(error).to.instanceOf(NotFoundError);
-      expect(error.message).to.equal(
-        `Not found calibration (id: ${calibrationId}) for ${certificationFramework.complementaryCertificationKey}`,
-      );
-      expect(consolidatedFrameworkRepository.save).to.not.have.been.called;
     });
   });
 });

@@ -139,13 +139,13 @@ describe('Certification | Configuration | Integration | Repository | consolidate
         challenges: [
           domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
             challengeId: firstChallengeSelected.challengeId,
-            discriminant: firstChallengeSelected.alpha,
-            difficulty: firstChallengeSelected.delta,
+            discriminant: firstChallengeSelected.discriminant,
+            difficulty: firstChallengeSelected.difficulty,
           }),
           domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
             challengeId: secondChallengeSelected.challengeId,
-            discriminant: secondChallengeSelected.alpha,
-            difficulty: secondChallengeSelected.delta,
+            discriminant: secondChallengeSelected.discriminant,
+            difficulty: secondChallengeSelected.difficulty,
           }),
         ],
       });
@@ -163,7 +163,7 @@ describe('Certification | Configuration | Integration | Repository | consolidate
   });
 
   describe('#save', function () {
-    it('should update framework challenges with alpha, delta and calibrationId properties', async function () {
+    it('should update framework challenges with discriminant, difficulty and calibrationId properties', async function () {
       // given
       const complementaryCertificationKey = ComplementaryCertificationKeys.PIX_PLUS_DROIT;
       const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
@@ -174,16 +174,16 @@ describe('Certification | Configuration | Integration | Repository | consolidate
         complementaryCertificationKey: complementaryCertification.key,
         createdAt: new Date('2022-01-01T08:00:00Z'),
         challengeId: 'rec123',
-        alpha: null,
-        delta: null,
+        discriminant: null,
+        difficulty: null,
       });
 
       const secondCertificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
         complementaryCertificationKey: complementaryCertification.key,
         createdAt: firstCertificationFrameworksChallenge.createdAt,
         challengeId: 'rec456',
-        alpha: null,
-        delta: null,
+        discriminant: null,
+        difficulty: null,
       });
 
       await databaseBuilder.commit();
@@ -211,14 +211,14 @@ describe('Certification | Configuration | Integration | Repository | consolidate
       const expectedCalibratedFrameworkChallenges = [
         {
           ...firstCertificationFrameworksChallenge,
-          alpha: firstCalibratedCertificationFrameworksChallenge.discriminant,
-          delta: firstCalibratedCertificationFrameworksChallenge.difficulty,
+          discriminant: firstCalibratedCertificationFrameworksChallenge.discriminant,
+          difficulty: firstCalibratedCertificationFrameworksChallenge.difficulty,
           calibrationId: consolidatedFramework.calibrationId,
         },
         {
           ...secondCertificationFrameworksChallenge,
-          alpha: secondCalibratedCertificationFrameworksChallenge.discriminant,
-          delta: secondCalibratedCertificationFrameworksChallenge.difficulty,
+          discriminant: secondCalibratedCertificationFrameworksChallenge.discriminant,
+          difficulty: secondCalibratedCertificationFrameworksChallenge.difficulty,
           calibrationId: consolidatedFramework.calibrationId,
         },
       ];

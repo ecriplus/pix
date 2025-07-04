@@ -1,14 +1,15 @@
 import * as activeCalibratedChallengeRepository from '../../../../../../src/certification/configuration/infrastructure/repositories/active-calibrated-challenge-repository.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { datamartBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
+import { catchErr, datamartBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Integration | Repository | active-calibrated-challenge', function () {
-  describe('#findByComplementaryKeyAndCalibrationId', function () {
+  describe('#getByComplementaryKeyAndCalibrationId', function () {
     it('should return empty array when empty challenges given', async function () {
       const calibrationId = '1234';
       const complementaryCertificationKey = ComplementaryCertificationKeys.PIX_PLUS_DROIT;
 
-      const calibratedChallenges = activeCalibratedChallengeRepository.findByComplementaryKeyAndCalibrationId({
+      const calibratedChallenges = activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId({
         complementaryCertificationKey,
         calibrationId,
       });
@@ -77,7 +78,7 @@ describe('Certification | Configuration | Integration | Repository | active-cali
       await datamartBuilder.commit();
 
       //when
-      const calibratedChallenges = await activeCalibratedChallengeRepository.findByComplementaryKeyAndCalibrationId({
+      const calibratedChallenges = await activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId({
         complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
         calibrationId: calibration.id,
       });
@@ -100,13 +101,13 @@ describe('Certification | Configuration | Integration | Repository | active-cali
       await datamartBuilder.commit();
 
       //when
-      const calibratedChallenges = await activeCalibratedChallengeRepository.findByComplementaryKeyAndCalibrationId({
+      const error = await catchErr(activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId)({
         complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
         calibrationId: calibration.id,
       });
 
-      //then
-      expect(calibratedChallenges).to.deep.equal([]);
+      // then
+      expect(error).to.deepEqualInstance(new NotFoundError(`Calibration does not exist`));
     });
 
     it('should return empty array when calibration is to validate', async function () {
@@ -122,13 +123,13 @@ describe('Certification | Configuration | Integration | Repository | active-cali
       });
 
       //when
-      const calibratedChallenges = await activeCalibratedChallengeRepository.findByComplementaryKeyAndCalibrationId({
+      const error = await catchErr(activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId)({
         complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
         calibrationId: toValidateCalibration.id,
       });
 
-      //then
-      expect(calibratedChallenges).to.deep.equal([]);
+      // then
+      expect(error).to.deepEqualInstance(new NotFoundError(`Calibration does not exist`));
     });
   });
 });

@@ -8,12 +8,11 @@
  */
 
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { NotFoundError } from '../../../../shared/domain/errors.js';
 
 export const calibrateConsolidatedFramework = withTransaction(
   /**
    * @param {Object} params
-   * @param {Date} params.createdAt
+   * @param {String} params.version
    * @param {number} params.calibrationId
    * @param {ComplementaryCertificationKeys} params.complementaryCertificationKey
    * @param {ConsolidatedFrameworkRepository} params.consolidatedFrameworkRepository
@@ -21,7 +20,7 @@ export const calibrateConsolidatedFramework = withTransaction(
    * @returns {Promise<void>}
    */
   async ({
-    createdAt,
+    version,
     calibrationId,
     complementaryCertificationKey,
     consolidatedFrameworkRepository,
@@ -29,19 +28,13 @@ export const calibrateConsolidatedFramework = withTransaction(
   }) => {
     const consolidatedFramework = await consolidatedFrameworkRepository.getByCreationDateAndComplementaryKey({
       complementaryCertificationKey,
-      createdAt,
+      version,
     });
 
-    const activeCalibratedChallenges = await activeCalibratedChallengeRepository.findByComplementaryKeyAndCalibrationId(
-      {
-        complementaryCertificationKey,
-        calibrationId,
-      },
-    );
-
-    if (activeCalibratedChallenges.length === 0) {
-      throw new NotFoundError(`Not found calibration (id: ${calibrationId}) for ${complementaryCertificationKey}`);
-    }
+    const activeCalibratedChallenges = await activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId({
+      complementaryCertificationKey,
+      calibrationId,
+    });
 
     consolidatedFramework.calibrationId = calibrationId;
     _calibrateChallenges(activeCalibratedChallenges, consolidatedFramework.challenges);

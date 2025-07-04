@@ -2,6 +2,7 @@
  * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
  */
 import { knex as datamartKnex } from '../../../../../datamart/knex-database-connection.js';
+import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { ActiveCalibratedChallenge } from '../../domain/read-models/ActiveCalibratedChallenge.js';
 
 /**
@@ -9,8 +10,9 @@ import { ActiveCalibratedChallenge } from '../../domain/read-models/ActiveCalibr
  * @param {ComplementaryCertificationKeys} params.complementaryCertificationKey
  * @param {number} params.calibrationId
  * @returns {Promise<Array<ActiveCalibratedChallenge>>}
+ * @throws {NotFoundError}
  */
-export async function findByComplementaryKeyAndCalibrationId({ complementaryCertificationKey, calibrationId }) {
+export async function getByComplementaryKeyAndCalibrationId({ complementaryCertificationKey, calibrationId }) {
   const activeCalibratedChallengesDTO = await datamartKnex('data_active_calibrated_challenges')
     .select('scope', 'alpha as discriminant', 'delta as difficulty', 'challenge_id as challengeId')
     .innerJoin('data_calibrations', 'data_active_calibrated_challenges.calibration_id', 'data_calibrations.id')
@@ -19,6 +21,10 @@ export async function findByComplementaryKeyAndCalibrationId({ complementaryCert
       scope: complementaryCertificationKey,
     })
     .orderBy('challengeId');
+
+  if (activeCalibratedChallengesDTO.length === 0) {
+    throw new NotFoundError(`Calibration does not exist`);
+  }
 
   return activeCalibratedChallengesDTO.map((activeCalibratedChallenge) => toDomain({ activeCalibratedChallenge }));
 }
