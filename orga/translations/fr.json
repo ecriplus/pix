@@ -635,7 +635,7 @@
         "assessment": "Évaluer les participants",
         "assessment-info": "Une campagne d’évaluation permet de tester les participants sur des sujets précis.",
         "exam": "Mode interro [bêta]",
-        "exam-info": "Une campagne de type “mode interro” permet de tester les participants sur des sujets précis, sans prendre en compte le profil utilisateur, et sans impacter celui-ci.",
+        "exam-info": "Une campagne de type “mode interro” permet de tester les participants sur des sujets précis, sans prendre en compte le profil utilisateur, et sans impacter celui-ci. Les épreuves proposées sont personnalisées pour chaque participant selon son avancement dans le parcours.",
         "label": "Quel est l'objectif de votre campagne ?",
         "profiles-collection": "Collecter les profils Pix des participants",
         "profiles-collection-info": "Une campagne de collecte de profils permet de récupérer le profil des participants : niveaux par compétence et score pix.",

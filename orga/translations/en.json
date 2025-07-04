@@ -635,7 +635,7 @@
         "assessment": "Assess participants",
         "assessment-info": "An assessment campaign tests participants on specific topics.",
         "exam": "Interrogation mode [beta]",
-        "exam-info": "A ‘interrogation mode’ campaign enables participants to be tested on specific subjects, without taking their user profile into account or having any impact on it.",
+        "exam-info": "A ‘interrogation mode’ campaign enables participants to be tested on specific subjects, without taking their user profile into account or having any impact on it. The campaign's questions are personalised for each participant, depending on how far they have progressed along the route.",
         "label": "What is the purpose of your campaign?",
         "profiles-collection": "Collect the participants' Pix profiles",
         "profiles-collection-info": "A profile collection campaign retrieves the participants’ Pix profile: their level for each competence and their pix score.",
