@@ -1,5 +1,29 @@
 # Pix Changelog
 
+# [5.150.0](https://github.com/1024pix/pix/compare/v5.149.0...v5.150.0) (2025-07-04)
+
+### :rocket: Amélioration
+
+- [#12751](https://github.com/1024pix/pix/pull/12751) : Modifs Module IA, vous avez dit IA ? suite retours PYO 
+- [#12700](https://github.com/1024pix/pix/pull/12700) Ajouter dans les erreurs du domain et http un id technique pour tracer les erreurs plus facilement (PIX-18521). 
+
+### :bug: Correction
+
+- [#12752](https://github.com/1024pix/pix/pull/12752) Répare l'accès aux campagnes qui ont isSimplifiedAccess et isForAbsoluteNovice à true 
+
+### :building_construction: Tech
+
+- [#12736](https://github.com/1024pix/pix/pull/12736) Mise à jour des dépendances PixAdmin 
+- [#12737](https://github.com/1024pix/pix/pull/12737) Récupérer Ember Inspector sur Pix Admin (PIX-18558). 
+- [#12740](https://github.com/1024pix/pix/pull/12740) Renommer les colonnes alpha et delta dans la table certification-frameworks-challenges (PIX-18509). 
+
+### :arrow_up: Montée de version
+
+- [#12750](https://github.com/1024pix/pix/pull/12750) Update adobe/s3mock Docker tag to v4.5.0 (.circleci) 
+- [#12753](https://github.com/1024pix/pix/pull/12753) Update adobe/s3mock Docker tag to v4.5.0 (docker) 
+- [#12757](https://github.com/1024pix/pix/pull/12757) Update adobe/s3mock Docker tag to v4.5.0 (dossier racine) 
+- [#12732](https://github.com/1024pix/pix/pull/12732) Update dependency @1024pix/pix-ui to ^55.23.1 (orga)
+
 # [5.149.0](https://github.com/1024pix/pix/compare/v5.148.1...v5.149.0) (2025-07-03)
 
 ### :rocket: Amélioration
