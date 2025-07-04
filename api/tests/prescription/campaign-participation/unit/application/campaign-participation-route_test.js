@@ -95,6 +95,25 @@ describe('Unit | Application | Router | campaign-participation-router ', functio
     });
   });
 
+  describe('GET /api/campaigns/{campaignId}/profiles-collection-participations/{campaignParticipationId}', function () {
+    describe('when pre handler throws', function () {
+      it('should not call controller', async function () {
+        // given
+        const getCampaignProfileStub = sinon.stub(campaignParticipationController, 'getCampaignProfile');
+        const organizationAccessStub = sinon.stub(securityPreHandlers, 'checkOrganizationAccess').throws();
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        await httpTestServer.request('GET', '/api/campaign-participations/1/analyses');
+
+        // then
+        expect(organizationAccessStub.called).to.be.true;
+        expect(getCampaignProfileStub.called).to.be.false;
+      });
+    });
+  });
+
   describe('PATCH /api/admin/campaign-participations/{id}', function () {
     it('returns 200 when admin member has rights', async function () {
       // given
