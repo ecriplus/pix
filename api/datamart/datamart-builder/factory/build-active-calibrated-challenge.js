@@ -9,7 +9,7 @@ const buildActiveCalibratedChallenge = function ({ calibrationId, challengeId, a
   };
 
   return datamartBuffer.pushInsertable({
-    tableName: 'active_calibrated_challenges',
+    tableName: 'data_active_calibrated_challenges',
     values,
   });
 };

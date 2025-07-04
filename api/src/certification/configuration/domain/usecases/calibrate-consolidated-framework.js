@@ -1,5 +1,5 @@
 /**
- * @typedef {import ('./index.js').CertificationFrameworksChallengeRepository} CertificationFrameworksChallengeRepository
+ * @typedef {import ('./index.js').ConsolidatedFrameworkRepository} ConsolidatedFrameworkRepository
  * @typedef {import ('./index.js').ActiveCalibratedChallengeRepository} ActiveCalibratedChallengeRepository
  * @typedef {import ('../models/ConsolidatedFramework.js').ConsolidatedFramework} ConsolidatedFramework
  * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys

@@ -14,7 +14,7 @@ const buildCalibration = function ({
   };
 
   return datamartBuffer.pushInsertable({
-    tableName: 'calibrations',
+    tableName: 'data_calibrations',
     values,
   });
 };

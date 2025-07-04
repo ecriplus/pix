@@ -1,16 +1,19 @@
+/**
+ * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
+ */
 import { knex as datamartKnex } from '../../../../../datamart/knex-database-connection.js';
 import { ActiveCalibratedChallenge } from '../../domain/read-models/ActiveCalibratedChallenge.js';
 
 /**
  * @param {Object} params
- * @param {ComplementaryCertificationKey} params.complementaryCertificationKey
+ * @param {ComplementaryCertificationKeys} params.complementaryCertificationKey
  * @param {number} params.calibrationId
  * @returns {Promise<Array<ActiveCalibratedChallenge>>}
  */
 export async function findByComplementaryKeyAndCalibrationId({ complementaryCertificationKey, calibrationId }) {
-  const activeCalibratedChallengesDTO = await datamartKnex('active_calibrated_challenges')
+  const activeCalibratedChallengesDTO = await datamartKnex('data_active_calibrated_challenges')
     .select('scope', 'alpha as discriminant', 'delta as difficulty', 'challenge_id as challengeId')
-    .innerJoin('calibrations', 'active_calibrated_challenges.calibration_id', 'calibrations.id')
+    .innerJoin('data_calibrations', 'data_active_calibrated_challenges.calibration_id', 'data_calibrations.id')
     .where({
       calibration_id: calibrationId,
       scope: complementaryCertificationKey,

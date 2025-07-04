@@ -63,7 +63,7 @@ export async function findByCreationDateAndComplementaryKey({ createdAt, complem
 }
 
 /**
- * @param {Array<ConsolidatedFramework>} consolidatedFramework
+ * @param {ConsolidatedFramework} consolidatedFramework
  * @returns {Promise<void>}
  */
 export async function save(consolidatedFramework) {

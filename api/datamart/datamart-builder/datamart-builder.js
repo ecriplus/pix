@@ -47,8 +47,8 @@ class DatamartBuilder {
       'certification_results',
       'sco_certification_results',
       'organizations_cover_rates',
-      'active_calibrated_challenges',
-      'calibrations',
+      'data_active_calibrated_challenges',
+      'data_calibrations',
     ].forEach((tableName) => {
       rawQuery += `DELETE FROM ${tableName};`;
     });
