@@ -5,8 +5,12 @@ import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Application | campaign-results-router ', function () {
   describe('GET /api/campaigns/{campaignId}/profiles-collection-participations', function () {
+    let checkAuthorizationToAccessCampaignStub;
+
     beforeEach(function () {
-      sinon.stub(securityPreHandlers, 'checkAuthorizationToAccessCampaign').returns((_, h) => h.response(true));
+      checkAuthorizationToAccessCampaignStub = sinon
+        .stub(securityPreHandlers, 'checkAuthorizationToAccessCampaign')
+        .returns((_, h) => h.response(true));
       sinon
         .stub(campaignResultsController, 'findProfilesCollectionParticipations')
         .callsFake((request, h) => h.response('ok').code(200));
@@ -199,6 +203,30 @@ describe('Unit | Application | campaign-results-router ', function () {
 
       // then
       expect(result.statusCode).to.equal(400);
+    });
+
+    describe('when pre handler throws', function () {
+      it('should not call controller', async function () {
+        // given
+        const organizationAccessStub = sinon.stub(securityPreHandlers, 'checkOrganizationAccess');
+        const validateAllAccessStub = sinon.stub(securityPreHandlers, 'validateAllAccess').returns((request, h) =>
+          h
+            .response({ errors: new Error('') })
+            .code(403)
+            .takeover(),
+        );
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        await httpTestServer.request('GET', '/api/campaigns/1/profiles-collection-participations');
+
+        // then
+        expect(
+          validateAllAccessStub.calledOnceWithExactly([checkAuthorizationToAccessCampaignStub, organizationAccessStub]),
+        ).to.be.true;
+        expect(campaignResultsController.findProfilesCollectionParticipations.called).to.be.false;
+      });
     });
   });
 
