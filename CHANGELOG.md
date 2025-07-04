@@ -1,5 +1,15 @@
 # Pix Changelog
 
+# [5.151.0](https://github.com/1024pix/pix/compare/v5.150.0...v5.151.0) (2025-07-04)
+
+### :rocket: Amélioration
+
+- [#12721](https://github.com/1024pix/pix/pull/12721) Ajouter la possibilité de bloquer une organisation qui n'a plus de place dispo (PIX-18548). 
+
+### :building_construction: Tech
+
+- [#12755](https://github.com/1024pix/pix/pull/12755) Afficher en console les erreurs d'API identifiées par leur request-id (PIX-18618).
+
 # [5.150.0](https://github.com/1024pix/pix/compare/v5.149.0...v5.150.0) (2025-07-04)
 
 ### :rocket: Amélioration
