@@ -114,7 +114,7 @@ describe('Unit | Application | Router | campaign-participation-router ', functio
     });
   });
 
-  describe('PATCH /api/admin/campaign-participations/{id}', function () {
+  describe('PATCH /api/admin/campaign-participations/{campaignParticipationId}', function () {
     it('returns 200 when admin member has rights', async function () {
       // given
       sinon

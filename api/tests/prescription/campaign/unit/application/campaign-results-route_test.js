@@ -5,9 +5,10 @@ import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Application | campaign-results-router ', function () {
   describe('GET /api/campaigns/{campaignId}/profiles-collection-participations', function () {
-    let checkAuthorizationToAccessCampaignStub;
+    let checkAuthorizationToAccessCampaignStub, checkOrganizationAccessStub;
 
     beforeEach(function () {
+      checkOrganizationAccessStub = sinon.stub(securityPreHandlers, 'checkOrganizationAccess').returns(true);
       checkAuthorizationToAccessCampaignStub = sinon
         .stub(securityPreHandlers, 'checkAuthorizationToAccessCampaign')
         .returns((_, h) => h.response(true));
@@ -208,7 +209,6 @@ describe('Unit | Application | campaign-results-router ', function () {
     describe('when pre handler throws', function () {
       it('should not call controller', async function () {
         // given
-        const organizationAccessStub = sinon.stub(securityPreHandlers, 'checkOrganizationAccess');
         const validateAllAccessStub = sinon.stub(securityPreHandlers, 'validateAllAccess').returns((request, h) =>
           h
             .response({ errors: new Error('') })
@@ -223,7 +223,10 @@ describe('Unit | Application | campaign-results-router ', function () {
 
         // then
         expect(
-          validateAllAccessStub.calledOnceWithExactly([checkAuthorizationToAccessCampaignStub, organizationAccessStub]),
+          validateAllAccessStub.calledOnceWithExactly([
+            checkAuthorizationToAccessCampaignStub,
+            checkOrganizationAccessStub,
+          ]),
         ).to.be.true;
         expect(campaignResultsController.findProfilesCollectionParticipations.called).to.be.false;
       });
@@ -233,6 +236,7 @@ describe('Unit | Application | campaign-results-router ', function () {
   describe('GET /api/campaigns/{campaignId}/collective-results', function () {
     it('should return 200', async function () {
       // given
+      sinon.stub(securityPreHandlers, 'checkOrganizationAccess').returns(true);
       sinon
         .stub(campaignResultsController, 'getCollectiveResult')
         .callsFake((request, h) => h.response('ok').code(200));
