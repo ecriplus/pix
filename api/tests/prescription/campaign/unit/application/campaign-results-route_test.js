@@ -229,5 +229,22 @@ describe('Unit | Application | campaign-results-router ', function () {
       // then
       expect(response.statusCode).to.equal(400);
     });
+
+    describe('when pre handler throws', function () {
+      it('should not call controller', async function () {
+        // given
+        const getCollectiveResultStub = sinon.stub(campaignResultsController, 'getCollectiveResult');
+        const organizationAccessStub = sinon.stub(securityPreHandlers, 'checkOrganizationAccess').throws();
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        await httpTestServer.request('GET', '/api/campaigns/1/collective-results');
+
+        // then
+        expect(organizationAccessStub.called).to.be.true;
+        expect(getCollectiveResultStub.called).to.be.false;
+      });
+    });
   });
 });
