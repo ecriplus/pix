@@ -1610,7 +1610,7 @@
         "description": "An account will be created based on the information sent by the organisation",
         "information": {
           "FrEduFonctAdm": "Administrative function:",
-          "FrEduNumenHash": "Numen (encrypted):",
+          "FrEduNumenHash": "Technical identifier",
           "discipline": "School subject:",
           "employeeNumber": "Employee number:",
           "error": "We were unable to retrieve your identity information from the service used. We invite you to contact this organisation's IT support.",
