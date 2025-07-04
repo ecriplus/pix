@@ -89,11 +89,12 @@ class Assessment {
     this.method = method || Assessment.computeMethodFromType(this.type);
     this.challengeLiveAlerts = challengeLiveAlerts;
     this.companionLiveAlerts = companionLiveAlerts;
+    this.campaign = campaign;
 
     this.#setSomeFlags(campaign);
   }
 
-  #setSomeFlags(campaign) {
+  #setSomeFlags() {
     switch (this.type) {
       case Assessment.types.CERTIFICATION: {
         this.showProgressBar = false;
@@ -129,19 +130,19 @@ class Assessment {
       }
       case Assessment.types.CAMPAIGN: {
         // if campaign participation is anonymized, assessment of type campaign do not have related campaign
-        if (!campaign) {
+        if (!this.campaign) {
           this.showProgressBar = false;
           this.hasCheckpoints = false;
           this.showLevelup = false;
           this.showQuestionCounter = false;
           this.title = '';
         } else {
-          this.campaignCode = campaign.code;
-          this.showProgressBar = campaign.isAssessment;
-          this.hasCheckpoints = campaign.isAssessment;
-          this.showLevelup = campaign.isAssessment;
-          this.showQuestionCounter = campaign.isAssessment;
-          this.title = campaign.title;
+          this.campaignCode = this.campaign.code;
+          this.showProgressBar = this.campaign.isAssessment;
+          this.hasCheckpoints = this.campaign.isAssessment;
+          this.showLevelup = this.campaign.isAssessment;
+          this.showQuestionCounter = this.campaign.isAssessment;
+          this.title = this.campaign.title;
         }
         break;
       }
