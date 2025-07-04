@@ -37,7 +37,7 @@ const findPaginatedParticipationsForCampaignManagement = async function (request
 
 const getAnalysis = async function (request, h, dependencies = { campaignAnalysisSerializer }) {
   const { userId } = request.auth.credentials;
-  const campaignParticipationId = request.params.id;
+  const { campaignParticipationId } = request.params;
   const locale = extractLocaleFromRequest(request);
 
   const campaignAnalysis = await usecases.computeCampaignParticipationAnalysis({
