@@ -2,6 +2,7 @@ import { fillByLabel, render } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
 import Service from '@ember/service';
 import { fillIn } from '@ember/test-helpers';
+import { t } from 'ember-intl/test-support';
 import InformationSectionEdit from 'pix-admin/components/organizations/information-section-edit';
 import { module, test } from 'qunit';
 
@@ -138,6 +139,71 @@ module('Integration | Component | organizations/information-section-edit', funct
 
       // then
       assert.dom(screen.getByText("Le lien n'est pas valide.")).exists();
+    });
+
+    module('#features', function () {
+      test('should display place management features as deactivated', async function (assert) {
+        organization.features = {
+          PLACES_MANAGEMENT: {
+            active: false,
+            params: null,
+          },
+        };
+
+        const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+
+        assert.false(
+          screen.getByLabelText(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT'))
+            .checked,
+        );
+        assert.notOk(
+          screen.queryByLabelText(
+            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LOCK'),
+          ),
+        );
+      });
+
+      test('should display place management features as activated and lockThreshold deactivated', async function (assert) {
+        organization.features = {
+          PLACES_MANAGEMENT: {
+            active: true,
+            params: { enablePlacesThresholdLock: false },
+          },
+        };
+
+        const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+
+        assert.true(
+          screen.getByLabelText(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT'))
+            .checked,
+        );
+        assert.false(
+          screen.getByLabelText(
+            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LOCK'),
+          ).checked,
+        );
+      });
+
+      test('should display place management features as activated  and lockThreshold activated', async function (assert) {
+        organization.features = {
+          PLACES_MANAGEMENT: {
+            active: true,
+            params: { enablePlacesThresholdLock: true },
+          },
+        };
+
+        const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+
+        assert.true(
+          screen.getByLabelText(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT'))
+            .checked,
+        );
+        assert.true(
+          screen.getByLabelText(
+            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LOCK'),
+          ).checked,
+        );
+      });
     });
   });
 });

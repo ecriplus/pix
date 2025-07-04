@@ -1,5 +1,7 @@
 import _ from 'lodash';
 
+import { config } from '../../../../shared/config.js';
+
 export class PlaceStatistics {
   #placesLots;
   #placeRepartition;
@@ -40,5 +42,13 @@ export class PlaceStatistics {
 
   get placesLotsTotal() {
     return this.#activePlacesLots.length;
+  }
+
+  get hasReachMaximumPlacesWithThreshold() {
+    if (this.occupied === 0) return false;
+
+    const thresholdLock = config.features.organizationPlacesManagementThreshold;
+    const maximumPlaces = this.total + this.total * thresholdLock;
+    return this.occupied >= maximumPlaces;
   }
 }

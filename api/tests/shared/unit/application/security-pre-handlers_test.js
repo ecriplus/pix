@@ -2006,4 +2006,87 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
       });
     });
   });
+
+  describe('#checkOrganizationAccess', function () {
+    let request, checkOrganizationAccessUseCaseStub;
+
+    beforeEach(function () {
+      checkOrganizationAccessUseCaseStub = {
+        execute: sinon.stub(),
+      };
+
+      request = {
+        params: { organizationId: 1234 },
+      };
+    });
+
+    context('Successful case', function () {
+      context('when organizationId given by params', function () {
+        it('should check organization access', async function () {
+          // given
+          checkOrganizationAccessUseCaseStub.execute.resolves();
+
+          // when
+          const response = await securityPreHandlers.checkOrganizationAccess(request, hFake, {
+            checkOrganizationAccessUseCase: checkOrganizationAccessUseCaseStub,
+          });
+
+          // then
+          expect(
+            checkOrganizationAccessUseCaseStub.execute.calledOnceWithExactly({
+              organizationId: request.params.organizationId,
+            }),
+          ).to.be.true;
+          expect(response.source).to.be.true;
+        });
+      });
+
+      context('when organizationId given by payload attributes relationships', function () {
+        it('should authorize access to resource when the organization has access given organizationId on payload', async function () {
+          // given
+          checkOrganizationAccessUseCaseStub.execute.resolves();
+          const request = {
+            params: {},
+            payload: {
+              data: {
+                relationships: {
+                  organization: {
+                    data: {
+                      id: '4567',
+                    },
+                  },
+                },
+              },
+            },
+          };
+
+          // when
+          const response = await securityPreHandlers.checkOrganizationAccess(request, hFake, {
+            checkOrganizationAccessUseCase: checkOrganizationAccessUseCaseStub,
+          });
+
+          // then
+          expect(
+            checkOrganizationAccessUseCaseStub.execute.calledOnceWithExactly({
+              organizationId: 4567,
+            }),
+          ).to.be.true;
+          expect(response.source).to.be.true;
+        });
+      });
+    });
+
+    context('Error cases', function () {
+      it('should forbid resource access when organization do not have feature enabled', async function () {
+        checkOrganizationAccessUseCaseStub.execute.rejects();
+
+        const response = await securityPreHandlers.checkOrganizationAccess(request, hFake, {
+          checkOrganizationAccessUseCase: checkOrganizationAccessUseCaseStub,
+        });
+
+        expect(response.statusCode).to.equal(403);
+        expect(response.isTakeOver).to.be.true;
+      });
+    });
+  });
 });
