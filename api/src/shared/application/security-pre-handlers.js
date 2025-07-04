@@ -780,10 +780,17 @@ async function checkOrganizationAccess(request, h, dependencies = { checkOrganiz
   try {
     // yeah this is ugly. should rework that later.
     const organizationId =
-      request.params.organizationId || parseInt(request.payload.data?.relationships?.organization?.data?.id);
+      request.params.organizationId ||
+      parseInt(request.payload?.data?.relationships?.organization?.data?.id) ||
+      undefined;
+
+    // TODO: temporary solution before add organizationId on route
+    const { campaignId, campaignParticipationId } = request.params;
 
     await dependencies.checkOrganizationAccessUseCase.execute({
       organizationId,
+      campaignId,
+      campaignParticipationId,
     });
 
     return h.response(true);

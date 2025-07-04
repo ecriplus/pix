@@ -2020,7 +2020,7 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
       };
     });
 
-    context('Successful case', function () {
+    context('Successful cases', function () {
       context('when organizationId given by params', function () {
         it('should check organization access', async function () {
           // given
@@ -2035,6 +2035,8 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
           expect(
             checkOrganizationAccessUseCaseStub.execute.calledOnceWithExactly({
               organizationId: request.params.organizationId,
+              campaignId: undefined,
+              campaignParticipationId: undefined,
             }),
           ).to.be.true;
           expect(response.source).to.be.true;
@@ -2069,6 +2071,58 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
           expect(
             checkOrganizationAccessUseCaseStub.execute.calledOnceWithExactly({
               organizationId: 4567,
+              campaignId: undefined,
+              campaignParticipationId: undefined,
+            }),
+          ).to.be.true;
+          expect(response.source).to.be.true;
+        });
+      });
+
+      context('when campaignId is given by params', function () {
+        it('should authorize access to resource', async function () {
+          // given
+          checkOrganizationAccessUseCaseStub.execute.resolves();
+          const request = {
+            params: { campaignId: 1234 },
+          };
+
+          // when
+          const response = await securityPreHandlers.checkOrganizationAccess(request, hFake, {
+            checkOrganizationAccessUseCase: checkOrganizationAccessUseCaseStub,
+          });
+
+          // then
+          expect(
+            checkOrganizationAccessUseCaseStub.execute.calledOnceWithExactly({
+              campaignId: 1234,
+              organizationId: undefined,
+              campaignParticipationId: undefined,
+            }),
+          ).to.be.true;
+          expect(response.source).to.be.true;
+        });
+      });
+
+      context('when campaignParticipationId is given by params', function () {
+        it('should authorize access to resource', async function () {
+          // given
+          checkOrganizationAccessUseCaseStub.execute.resolves();
+          const request = {
+            params: { campaignParticipationId: 1234 },
+          };
+
+          // when
+          const response = await securityPreHandlers.checkOrganizationAccess(request, hFake, {
+            checkOrganizationAccessUseCase: checkOrganizationAccessUseCaseStub,
+          });
+
+          // then
+          expect(
+            checkOrganizationAccessUseCaseStub.execute.calledOnceWithExactly({
+              campaignParticipationId: 1234,
+              organizationId: undefined,
+              campaignId: undefined,
             }),
           ).to.be.true;
           expect(response.source).to.be.true;

@@ -1,10 +1,30 @@
 import { getAllFeaturesFromOrganization } from '../../../organizational-entities/application/api/organization-features-api.js';
+import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import { usecases as prescriptionUsecases } from '../../../prescription/organization-place/domain/usecases/index.js';
 import { ORGANIZATION_FEATURE } from '../../domain/constants.js';
 import { ForbiddenAccess } from '../../domain/errors.js';
 
-const execute = async function ({ organizationId, dependencies = { getAllFeaturesFromOrganization } }) {
-  const { features } = await dependencies.getAllFeaturesFromOrganization(organizationId);
+const execute = async function ({
+  organizationId,
+  campaignId,
+  campaignParticipationId,
+  dependencies = { campaignRepository, getAllFeaturesFromOrganization },
+}) {
+  let organizationIdToUse = organizationId;
+
+  if (!organizationIdToUse && campaignId) {
+    const campaign = await dependencies.campaignRepository.get(campaignId);
+    organizationIdToUse = campaign.organizationId;
+  } else if (!campaignId && campaignParticipationId) {
+    const campaign = await dependencies.campaignRepository.getByCampaignParticipationId(campaignParticipationId);
+    organizationIdToUse = campaign.organizationId;
+  }
+
+  if (!organizationIdToUse) {
+    throw new Error('No organization to check');
+  }
+
+  const { features } = await dependencies.getAllFeaturesFromOrganization(organizationIdToUse);
 
   const placesManagementFeature = features.find(
     (feature) => feature.name === ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key,
@@ -13,7 +33,9 @@ const execute = async function ({ organizationId, dependencies = { getAllFeature
 
   if (!hasLockEnabled) return true;
 
-  const placesStatistics = await prescriptionUsecases.getOrganizationPlacesStatistics({ organizationId });
+  const placesStatistics = await prescriptionUsecases.getOrganizationPlacesStatistics({
+    organizationId: organizationIdToUse,
+  });
 
   if (placesStatistics.hasReachMaximumPlacesWithThreshold) {
     throw new ForbiddenAccess('Maximum places reached', 'MAXIMUM_PLACES_REACHED');
