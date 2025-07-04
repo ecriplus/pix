@@ -15,7 +15,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
     });
 
     consolidatedFrameworkRepository = {
-      findByCreationDateAndComplementaryKey: sinon.stub(),
+      getByCreationDateAndComplementaryKey: sinon.stub(),
       calibrate: sinon.stub(),
       save: sinon.stub(),
     };
@@ -64,7 +64,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
         ],
       });
 
-      consolidatedFrameworkRepository.findByCreationDateAndComplementaryKey
+      consolidatedFrameworkRepository.getByCreationDateAndComplementaryKey
         .withArgs({
           complementaryCertificationKey: complementaryCertification.key,
           createdAt: certificationFramework.createdAt,
@@ -137,7 +137,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
         ],
       });
 
-      consolidatedFrameworkRepository.findByCreationDateAndComplementaryKey
+      consolidatedFrameworkRepository.getByCreationDateAndComplementaryKey
         .withArgs({
           complementaryCertificationKey: complementaryCertification.key,
           createdAt: certificationFramework.createdAt,
@@ -172,7 +172,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
 
       const certificationFramework = domainBuilder.certification.configuration.buildConsolidatedFramework();
 
-      consolidatedFrameworkRepository.findByCreationDateAndComplementaryKey
+      consolidatedFrameworkRepository.getByCreationDateAndComplementaryKey
         .withArgs({
           complementaryCertificationKey: complementaryCertification.key,
           createdAt: certificationFramework.createdAt,

@@ -27,7 +27,7 @@ export const calibrateConsolidatedFramework = withTransaction(
     consolidatedFrameworkRepository,
     activeCalibratedChallengeRepository,
   }) => {
-    const consolidatedFramework = await consolidatedFrameworkRepository.findByCreationDateAndComplementaryKey({
+    const consolidatedFramework = await consolidatedFrameworkRepository.getByCreationDateAndComplementaryKey({
       complementaryCertificationKey,
       createdAt,
     });

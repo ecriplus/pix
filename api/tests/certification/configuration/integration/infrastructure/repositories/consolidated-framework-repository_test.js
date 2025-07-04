@@ -1,6 +1,7 @@
 import * as consolidatedFrameworkRepository from '../../../../../../src/certification/configuration/infrastructure/repositories/consolidated-framework-repository.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
+import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Integration | Repository | consolidated-framework', function () {
   describe('#create', function () {
@@ -93,21 +94,21 @@ describe('Certification | Configuration | Integration | Repository | consolidate
     });
   });
 
-  describe('#findByCreationDateAndComplementaryKey', function () {
-    it('should return null when the framework does not exist', async function () {
+  describe('#getByCreationDateAndComplementaryKey', function () {
+    it('should return an error when it does not exist', async function () {
       // given
       const createdAt = new Date();
       const complementaryCertificationKey = ComplementaryCertificationKeys.PIX_PLUS_DROIT;
 
       // when
-      const certificationFrameworksChallenges =
-        await consolidatedFrameworkRepository.findByCreationDateAndComplementaryKey({
-          complementaryCertificationKey,
-          createdAt,
-        });
+      const error = await catchErr(consolidatedFrameworkRepository.getByCreationDateAndComplementaryKey)({
+        complementaryCertificationKey,
+        createdAt,
+      });
 
       // then
-      expect(certificationFrameworksChallenges).to.deep.equal([]);
+      // then
+      expect(error).to.deepEqualInstance(new NotFoundError('Consolidated framework does not exist'));
     });
 
     it('should return a consolidated framework sorted by challengeId', async function () {
@@ -151,7 +152,7 @@ describe('Certification | Configuration | Integration | Repository | consolidate
 
       // when
       const certificationFrameworksChallenges =
-        await consolidatedFrameworkRepository.findByCreationDateAndComplementaryKey({
+        await consolidatedFrameworkRepository.getByCreationDateAndComplementaryKey({
           complementaryCertificationKey: complementaryCertification.key,
           createdAt,
         });

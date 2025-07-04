@@ -1,4 +1,9 @@
+// @ts-check
+/**
+ * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
+ */
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationFrameworksChallenge } from '../../domain/models/CertificationFrameworksChallenge.js';
 import { ConsolidatedFramework } from '../../domain/models/ConsolidatedFramework.js';
 
@@ -18,14 +23,7 @@ export async function getCurrentFrameworkByComplementaryCertificationKey({ compl
   const knexConn = DomainTransaction.getConnection();
 
   const currentFrameworkChallengesDTO = await knexConn('certification-frameworks-challenges')
-    .select(
-      'alpha as discriminant',
-      'delta as difficulty',
-      'challengeId',
-      'createdAt',
-      'calibrationId',
-      'complementaryCertificationKey',
-    )
+    .select('discriminant', 'difficulty', 'challengeId', 'createdAt', 'calibrationId', 'complementaryCertificationKey')
     .where({
       createdAt: knexConn('certification-frameworks-challenges')
         .select('createdAt')
@@ -40,23 +38,24 @@ export async function getCurrentFrameworkByComplementaryCertificationKey({ compl
 
 /**
  * @param {Object} params
- * @param {Date} params.createdAt
+ * @param {String} params.version
  * @param {ComplementaryCertificationKeys} params.complementaryCertificationKey
  * @returns {Promise<ConsolidatedFramework>}
+ * @throws {NotFoundError}
  */
-export async function findByCreationDateAndComplementaryKey({ createdAt, complementaryCertificationKey }) {
+export async function getByCreationDateAndComplementaryKey({ version, complementaryCertificationKey }) {
   const knexConn = DomainTransaction.getConnection();
 
   const certificationFrameworksChallengesDTO = await knexConn('certification-frameworks-challenges')
-    .select('alpha as discriminant', 'delta as difficulty', 'challengeId', 'createdAt', 'complementaryCertificationKey')
+    .select('discriminant', 'difficulty', 'challengeId', 'version', 'complementaryCertificationKey')
     .where({
       complementaryCertificationKey,
-      createdAt,
+      version,
     })
     .orderBy('challengeId');
 
   if (certificationFrameworksChallengesDTO.length == 0) {
-    return [];
+    throw new NotFoundError('Consolidated framework does not exist');
   }
 
   return _toDomain({ certificationFrameworksChallengesDTO });
@@ -69,17 +68,17 @@ export async function findByCreationDateAndComplementaryKey({ createdAt, complem
 export async function save(consolidatedFramework) {
   const knexConn = DomainTransaction.getConnection();
 
-  for (const calibratedChallenge of consolidatedFramework.challenges) {
+  for (const { discriminant, difficulty, challengeId } of consolidatedFramework.challenges) {
     await knexConn('certification-frameworks-challenges')
       .update({
-        alpha: calibratedChallenge.discriminant,
-        delta: calibratedChallenge.difficulty,
+        discriminant,
+        difficulty,
         calibrationId: consolidatedFramework.calibrationId,
       })
       .where({
         complementaryCertificationKey: consolidatedFramework.complementaryCertificationKey,
         createdAt: consolidatedFramework.createdAt,
-        challengeId: calibratedChallenge.challengeId,
+        challengeId,
       });
   }
 }
