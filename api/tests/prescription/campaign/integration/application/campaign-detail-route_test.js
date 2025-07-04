@@ -9,7 +9,8 @@ describe('Integration | Application | Route | campaign detail router', function 
   describe('GET /api/campaigns/{campaignId}/csv-profiles-collection-results', function () {
     it('should exist', async function () {
       // given
-      sinon.stub(securityPreHandlers, 'checkAuthorizationToAccessCampaign').callsFake((request, h) => h.response(true));
+      sinon.stub(securityPreHandlers, 'checkOrganizationAccess').returns(true);
+      sinon.stub(securityPreHandlers, 'checkAuthorizationToAccessCampaign').returns(true);
       sinon
         .stub(campaignDetailController, 'getCsvProfilesCollectionResults')
         .callsFake((_, h) => h.response('ok').code(200));

@@ -121,7 +121,14 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/campaigns/{campaignId}/csv-profiles-collection-results',
       config: {
-        pre: [{ method: securityPreHandlers.checkAuthorizationToAccessCampaign }],
+        pre: [
+          {
+            method: securityPreHandlers.validateAllAccess([
+              securityPreHandlers.checkAuthorizationToAccessCampaign,
+              securityPreHandlers.checkOrganizationAccess,
+            ]),
+          },
+        ],
         validate: {
           params: Joi.object({
             campaignId: identifiersType.campaignId,
