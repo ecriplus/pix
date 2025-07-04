@@ -176,7 +176,6 @@ const enableOpsMetrics = async function (server, metrics) {
 
   server.events.on('response', (request) => {
     const info = request.info;
-
     const statusCode = request.raw.res.statusCode;
     const responseTime = (info.completed !== undefined ? info.completed : info.responded) - info.received;
 

@@ -1,8 +1,31 @@
 import { VALIDATION_ERRORS } from '../../../../src/shared/domain/constants.js';
 import * as errors from '../../../../src/shared/domain/errors.js';
-import { expect } from '../../../test-helper.js';
+import { expect, sinon } from '../../../test-helper.js';
 
 describe('Unit | Shared | Domain | Errors', function () {
+  describe('#DomainError', function () {
+    it('should instantiate id when monitoring enabled', function () {
+      //given
+      const requestId = Symbol('requestId');
+      const dependencies = { getRequestId: sinon.stub() };
+      dependencies.getRequestId.returns(requestId);
+
+      //when
+      const error = new errors.DomainError('message', 'code', 'meta', dependencies);
+
+      //then
+      expect(error.id).equal(requestId);
+    });
+
+    it('should not instantiate id when monitoring is disabled', function () {
+      //when
+      const error = new errors.DomainError('message', 'code', 'meta');
+
+      //then
+      expect(error.id).equal(null);
+    });
+  });
+
   it('should export NotFoundError', function () {
     expect(errors.NotFoundError).to.exist;
   });

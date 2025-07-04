@@ -7,6 +7,16 @@ import { asyncLocalStorage, getContext, getInContext, setInContext } from './asy
 import { logger } from './utils/logger.js';
 import * as requestResponseUtils from './utils/request-response-utils.js';
 
+function getRequestId() {
+  if (!config.hapi.enableRequestMonitoring) {
+    return null;
+  }
+
+  const context = getContext();
+
+  return get(context, 'request.headers.x-request-id', null);
+}
+
 function getCorrelationContext() {
   if (!config.hapi.enableRequestMonitoring) {
     return {};
@@ -100,6 +110,7 @@ export {
   extractUserIdFromRequest,
   getContext,
   getInContext,
+  getRequestId,
   incrementInContext,
   logErrorWithCorrelationIds,
   logInfoWithCorrelationIds,
