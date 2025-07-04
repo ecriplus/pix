@@ -38,7 +38,7 @@ export default class AccessRoute extends Route {
     } else if (this._shouldJoinFromMediacentre(organizationToJoin)) {
       this.authenticationRoute = 'organizations.join.sco-mediacentre';
     } else if (this._shouldJoinSimplifiedCampaignAsAnonymous(campaign)) {
-      this.authenticationRoute = 'campaigns.join.anonymous';
+      this.authenticationRoute = 'organizations.join.anonymous';
     }
     this.session.requireAuthenticationAndApprovedTermsOfService(transition, this.authenticationRoute);
   }

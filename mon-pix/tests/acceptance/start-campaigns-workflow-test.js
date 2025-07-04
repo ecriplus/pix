@@ -754,9 +754,11 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
       module('When is a simplified access campaign', function (hooks) {
         hooks.beforeEach(function () {
           campaign = server.create('campaign', 'withVerifiedCode', {
+            organizationId: 1,
             isSimplifiedAccess: true,
             externalIdLabel: 'Les anonymes',
           });
+          server.create('organization-to-join', { id: campaign.organizationId, code: campaign.code });
         });
 
         test('should redirect to landing page', async function (assert) {
@@ -784,9 +786,12 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
       test('should replace previous connected anonymous user', async function (assert) {
         // given
         campaign = server.create('campaign', 'withVerifiedCode', {
+          organizationId: 1,
           isSimplifiedAccess: true,
           externalIdLabel: 'Les anonymes',
         });
+        server.create('organization-to-join', { id: campaign.organizationId, code: campaign.code });
+
         await currentSession().authenticate('authenticator:anonymous', { campaignCode: campaign.code });
         const session = currentSession();
         const previousUserId = session.data.authenticated['user_id'];
