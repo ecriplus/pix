@@ -54,6 +54,26 @@ describe('Unit | Application | Router | campaign-participation-router ', functio
       // then
       expect(result.statusCode).to.equal(400);
     });
+
+    describe('when pre handler throws', function () {
+      it('should not call controller', async function () {
+        // given
+        const getCampaignAssessmentParticipationResultStub = sinon.stub(
+          campaignParticipationController,
+          'getCampaignAssessmentParticipationResult',
+        );
+        const organizationAccessStub = sinon.stub(securityPreHandlers, 'checkOrganizationAccess').throws();
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        await httpTestServer.request('GET', '/api/campaigns/1/assessment-participations/1/results');
+
+        // then
+        expect(organizationAccessStub.called).to.be.true;
+        expect(getCampaignAssessmentParticipationResultStub.called).to.be.false;
+      });
+    });
   });
 
   describe('PATCH /api/admin/campaign-participations/{id}', function () {

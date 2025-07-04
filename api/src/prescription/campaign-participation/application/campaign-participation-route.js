@@ -120,6 +120,7 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/campaigns/{campaignId}/assessment-participations/{campaignParticipationId}/results',
       config: {
+        pre: [{ method: securityPreHandlers.checkOrganizationAccess }],
         validate: {
           params: Joi.object({
             campaignId: identifiersType.campaignId,
