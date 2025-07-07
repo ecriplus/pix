@@ -23,7 +23,7 @@ const save = async function (request, h, dependencies = { assessmentRepository }
   return h.response(assessmentSerializer.serialize(createdAssessment)).created();
 };
 
-const getNextChallenge = async function (request) {
+const getAssessmentWithNextChallenge = async function (request) {
   const assessmentId = request.params.id;
   const locale = extractLocaleFromRequest(request);
   const userId = extractUserIdFromRequest(request);
@@ -31,7 +31,7 @@ const getNextChallenge = async function (request) {
   const assessment = await DomainTransaction.execute(async () => {
     const assessmentWithoutChallenge = await sharedUsecases.getAssessment({ assessmentId, locale });
 
-    return sharedUsecases.getNextChallenge({ assessment: assessmentWithoutChallenge, userId, locale });
+    return sharedUsecases.updateAssessmentWithNextChallenge({ assessment: assessmentWithoutChallenge, userId, locale });
   });
   return assessmentSerializer.serialize(assessment);
 };
@@ -116,7 +116,7 @@ const createCertificationChallengeLiveAlert = async function (request, h) {
 
 const assessmentController = {
   save,
-  getNextChallenge,
+  getAssessmentWithNextChallenge,
   updateLastChallengeState,
   findCompetenceEvaluations,
   autoValidateNextChallenge,

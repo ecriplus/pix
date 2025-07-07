@@ -1,4 +1,4 @@
-export async function getNextChallenge({
+export async function updateAssessmentWithNextChallenge({
   assessment,
   userId,
   locale,
