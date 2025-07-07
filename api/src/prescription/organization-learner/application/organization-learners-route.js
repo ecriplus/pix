@@ -70,6 +70,48 @@ const register = async function (server) {
         tags: ['api', 'organization', 'attestations'],
       },
     },
+    {
+      method: 'GET',
+      path: '/api/organizations/{organizationId}/attestations/{attestationKey}/statuses',
+      config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkUserIsAdminInOrganization,
+            assign: 'checkUserIsAdminInOrganization',
+          },
+          {
+            method: securityPreHandlers.makeCheckOrganizationHasFeature(
+              ORGANIZATION_FEATURE.ATTESTATIONS_MANAGEMENT.key,
+            ),
+            assign: 'makeCheckOrganizationHasFeature',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            organizationId: identifiersType.organizationId,
+            attestationKey: Joi.string(),
+          }),
+          query: Joi.object({
+            filter: Joi.object({
+              divisions: Joi.array().items(Joi.string()).optional(),
+              statuses: Joi.array().items(Joi.string().valid('OBTAINED', 'NOT_OBTAINED')).optional(),
+              search: Joi.string().allow(null).empty('').optional(),
+            }).default({}),
+            page: {
+              number: Joi.number().integer(),
+              size: Joi.number().integer(),
+            },
+          }),
+        },
+        handler: organizationLearnersController.getAttestationParticipantsStatus,
+        notes: [
+          '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
+            "- Retourne le status d'obtention des participants pour une attestation donnée" +
+            "- L'utilisateur doit être administrateur de l'organisation'",
+        ],
+        tags: ['api', 'organization', 'attestations'],
+      },
+    },
   ]);
 };
 

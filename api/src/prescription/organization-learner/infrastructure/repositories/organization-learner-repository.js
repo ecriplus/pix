@@ -86,7 +86,7 @@ async function get({ organizationLearnerId }) {
 
 async function findPaginatedLearners({ organizationId, page, filter }) {
   const query = knex
-    .select('id', 'userId', 'firstName', 'lastName', 'organizationId', 'attributes')
+    .select('id', 'userId', 'firstName', 'lastName', 'organizationId', 'division', 'attributes')
     .from('view-active-organization-learners')
     .where({ isDisabled: false, organizationId })
     .orderByRaw('LOWER("firstName") ASC')

@@ -55,12 +55,83 @@ describe('Prescription | Organization Learner | Acceptance | Application | Organ
       };
 
       // when
-
       const response = await server.inject(request);
 
       // then
       expect(response.statusCode).to.equal(200);
       expect(response.headers['content-type']).to.equal('application/zip');
+    });
+  });
+
+  describe('GET /api/organizations/{organizationId}/attestations/{attestationKey}/statuses', function () {
+    it('should return 200 status code and data', async function () {
+      // given
+      const attestationFeatureId = databaseBuilder.factory.buildFeature(
+        ORGANIZATION_FEATURE.ATTESTATIONS_MANAGEMENT,
+      ).id;
+      const userId = databaseBuilder.factory.buildUser().id;
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      databaseBuilder.factory.buildOrganizationFeature({ organizationId, featureId: attestationFeatureId });
+      databaseBuilder.factory.buildMembership({
+        userId,
+        organizationId,
+        organizationRole: Membership.roles.ADMIN,
+      });
+      const attestation = databaseBuilder.factory.buildAttestation({
+        templateName: 'sixth-grade-attestation-template',
+      });
+      const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId,
+        division: '6emeA',
+      });
+      const profileRewardId = databaseBuilder.factory.buildProfileReward({
+        userId: organizationLearner.userId,
+        rewardId: attestation.id,
+        rewardType: REWARD_TYPES.ATTESTATION,
+        createdAt: new Date('2024-07-08'),
+      }).id;
+      databaseBuilder.factory.buildOrganizationsProfileRewards({
+        organizationId,
+        profileRewardId,
+      });
+
+      await databaseBuilder.commit();
+
+      const request = {
+        method: 'GET',
+        url: `/api/organizations/${organizationId}/attestations/${attestation.key}/statuses?filter[statuses][]=OBTAINED`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
+      };
+
+      // when
+
+      const response = await server.inject(request);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      const expectedResult = {
+        data: [
+          {
+            type: 'attestation-participant-statuses',
+            id: `SIXTH_GRADE_${organizationLearner.id}`,
+            attributes: {
+              'attestation-key': 'SIXTH_GRADE',
+              'first-name': organizationLearner.firstName,
+              'last-name': organizationLearner.lastName,
+              'obtained-at': new Date('2024-07-08'),
+              'organization-learner-id': organizationLearner.id,
+              division: organizationLearner.division,
+            },
+          },
+        ],
+        meta: {
+          page: 1,
+          pageCount: 1,
+          pageSize: 10,
+          rowCount: 1,
+        },
+      };
+      expect(response.result).to.deep.equal(expectedResult);
     });
   });
 
