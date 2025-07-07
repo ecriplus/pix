@@ -34,9 +34,9 @@ import DataProtectionPolicyInformationBanner from 'mon-pix/components/data-prote
       <p>
         {{t "pages.fill-in-campaign-code.mediacentre-start-campaign-modal.message"}}
         <p class="pix-body-s">
-          <div><b>{{@controller.campaign.targetProfileName}}</b></div>
+          <div><b>{{@controller.name}}</b></div>
           {{t "pages.fill-in-campaign-code.mediacentre-start-campaign-modal.organised-by"}}
-          <b>{{@controller.campaign.organizationName}}</b>
+          <b>{{@controller.organizationName}}</b>
         </p>
         <p class="pix-body-s">
           <b>{{t "pages.fill-in-campaign-code.mediacentre-start-campaign-modal.message-footer"}}</b>
@@ -49,7 +49,7 @@ import DataProtectionPolicyInformationBanner from 'mon-pix/components/data-prote
         <LinkTo
           class="mediacentre-start-campaign-modal-action-buttons__continue-action"
           @route="campaigns.entry-point"
-          @model={{@controller.campaign.code}}
+          @model={{@controller.code}}
         >
           {{t "pages.fill-in-campaign-code.mediacentre-start-campaign-modal.actions.continue"}}
         </LinkTo>
