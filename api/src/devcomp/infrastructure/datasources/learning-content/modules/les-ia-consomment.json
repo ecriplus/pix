@@ -25,7 +25,7 @@
           "element": {
             "id": "35a9be34-9b63-4cf5-b984-432010aff74e",
             "type": "text",
-            "content": "<p>Enzo a produit un texte à l’aide d’un logiciel d'IA générative sur son ordinateur. </p><p>Il ne pensait pas son ordinateur si puissant. <br></p>"
+            "content": "<p>Enzo a produit un texte à l’aide d’un logiciel d'intelligence artificielle générative sur son ordinateur. </p><p>Il ne pensait pas son ordinateur si puissant. <br></p>"
           }
         }
       ]
@@ -47,22 +47,22 @@
                 {
                   "userName": "Enzo",
                   "direction": "incoming",
-                  "content": "c’est impressionnant comme l’IA a boosté mon ordinateur ! 🤯"
+                  "content": "C’est impressionnant comme l’IA a boosté mon ordinateur ! 🤯"
                 },
                 {
                   "userName": "Alice",
                   "direction": "outgoing",
-                  "content": "tu l’as fait réparer ?"
+                  "content": "Tu l’as fait réparer ?"
                 },
                 {
                   "userName": "Enzo",
                   "direction": "incoming",
-                  "content": "non je n’ai rien fait, mais il arrive à répondre à toutes mes demandes !"
+                  "content": "Non je n’ai rien fait, mais il arrive à répondre à toutes mes demandes !"
                 },
                 {
                   "userName": "Alice",
                   "direction": "outgoing",
-                  "content": "Incroyable !"
+                  "content": "Incroyable ! "
                 }
               ]
             }
@@ -80,7 +80,7 @@
           "element": {
             "id": "fdf4e875-c31c-4637-b9e1-62a9b77046e7",
             "type": "text",
-            "content": "<p>Même avec un ordinateur peu puissant, ou un smartphone basique, on peut obtenir des réponses à toutes nos demandes grâce à l’IA. </p><p>Voyons où sont produites les réponses.</p>"
+            "content": "<p>Même avec un ordinateur peu puissant, ou un smartphone basique, on peut obtenir des réponses à toutes nos demandes grâce à l’IA. </p><p><strong>Mais comment est-ce possible ?</strong></p><p>Voyons où sont produites les réponses à nos demandes.</p>"
           }
         }
       ]
@@ -123,7 +123,7 @@
                 "content": "<p>Dans notre appareil personnel</p>",
                 "feedback": {
                   "state": "<p>Mauvaise réponse.</p>",
-                  "diagnosis": "<p>Votre demande voyage jusqu’à un supercalculateur, peut-être situé à l’autre bout du monde. C’est là-bas que la réponse est calculée.<br></p>"
+                  "diagnosis": "<p>Votre demande voyage depuis votre ordinateur via internet jusqu’à un supercalculateur, peut-être situé à l’autre bout du monde. C’est là-bas que la réponse est calculée.<br></p>"
                 }
               },
               {
@@ -131,7 +131,7 @@
                 "content": "<p>Dans un supercalculateur</p>",
                 "feedback": {
                   "state": "<p>Bonne réponse !&nbsp;🎉</p>",
-                  "diagnosis": "<p>Ce supercalculateur est peut-être situé à l’autre bout du mond</p><br>"
+                  "diagnosis": "<p>Ce supercalculateur est peut-être situé à l’autre bout du monde !</p><br>"
                 }
               },
               {
@@ -139,7 +139,7 @@
                 "content": "<p>Sur internet</p>",
                 "feedback": {
                   "state": "<p>Mauvaise réponse.</p>",
-                  "diagnosis": "<p>Votre demande voyage jusqu’à un supercalculateur, peut-être situé à l’autre bout du monde. C’est là-bas que la réponse est calculée.</p><br>"
+                  "diagnosis": "<p>Votre demande voyage depuis votre ordinateur via internet jusqu’à un supercalculateur, peut-être situé à l’autre bout du monde. C’est là-bas que la réponse est calculée.</p><br>"
                 }
               }
             ],
@@ -180,17 +180,17 @@
                 {
                   "userName": "Enzo",
                   "direction": "incoming",
-                  "content": "alors c’est pas mon ordinateur qui est devenu puissant 😞"
+                  "content": "Alors c’est pas mon ordinateur qui est devenu puissant 😞"
                 },
                 {
                   "userName": "Alice",
                   "direction": "outgoing",
-                  "content": "bah tant qu’il te permet d’utiliser l’IA, ça suffit"
+                  "content": "Bah tant qu’il te permet d’utiliser l’IA, ça suffit"
                 },
                 {
                   "userName": "Enzo",
                   "direction": "incoming",
-                  "content": "c’est vrai ! Mais j’aimerais bien savoir comment fait le supercalculateur"
+                  "content": "C’est vrai ! Mais j’aimerais bien savoir comment fait le supercalculateur"
                 }
               ]
             }
@@ -228,7 +228,7 @@
           "element": {
             "id": "40de84e9-fc48-40c3-9d3f-499f6454d46a",
             "type": "text",
-            "content": "<p><strong>L’IA, ça calcule, ça chauffe, ça consomme</strong></p><p>Le traitement d’une requête nécessite de <strong>nombreux calculs</strong>. Pour effectuer ces calculs, il faut du <strong>matériel très complexe</strong>, qui <strong>consomme de l’électricité</strong> et qui a <strong>besoin d’être refroidi</strong> en permanence</p>"
+            "content": "<p><strong>⚡L’IA, ça calcule, ça chauffe, ça consomme</strong></p><p>Le traitement d’une requête nécessite de <strong>nombreux calculs</strong>. Pour effectuer ces calculs, il faut du <strong>matériel très complexe</strong>, qui <strong>consomme de l’électricité</strong> et qui a <strong>besoin d’être refroidi</strong> en permanence</p>"
           }
         }
       ]
@@ -250,7 +250,7 @@
                 {
                   "userName": "Enzo",
                   "direction": "incoming",
-                  "content": "alors quand j’utilise un logiciel d’IA générative, je consomme de l’énergie à l’autre bout du monde !"
+                  "content": "Alors quand j’utilise un logiciel d’IA générative, je consomme de l’énergie à l’autre bout du monde !"
                 },
                 {
                   "userName": "Alice",
@@ -260,7 +260,7 @@
                 {
                   "userName": "Enzo",
                   "direction": "incoming",
-                  "content": "et les milliers d’autres utilisateurs avec nous ! "
+                  "content": "Et les milliers d’autres utilisateurs avec nous ! "
                 }
               ]
             }
@@ -276,12 +276,20 @@
         {
           "type": "element",
           "element": {
+            "id": "8286afa8-20b5-4e86-99bc-7daf29f91363",
+            "type": "text",
+            "content": "<p>Imaginons que <strong>plusieurs personnes demandent la même chose en même temps</strong> à un logiciel d’IA générative. </p><p> Testez la <strong>capacité de calcul</strong> et la <strong>consommation électrique</strong> d’un supercalculateur en choisissant la demande et le nombre de requêtes. Puis répondez aux questions suivantes</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
             "id": "a44b87c8-ecf4-45dd-9cf7-1dc90492ef91",
             "type": "embed",
             "isCompletionRequired": false,
             "title": "Charge supercalculateur",
             "url": "https://1024pix.github.io/atelier-contenus/FRI/IAEnvironnementInferenceSpinner02.html",
-            "instruction": "<p>Imaginons que <strong>plusieurs personnes demandent la même chose en même temps</strong> à un logiciel d’IA générative. </p><p>Testez la <strong>capacité de calcul </strong>et la <strong>consommation électrique</strong> d’un supercalculateur en choisissant la demande et le nombre de requêtes. Puis répondez aux questions suivantes</p>",
+            "instruction": "<p><br></p>",
             "solution": "-",
             "height": 470
           }
@@ -298,7 +306,7 @@
                 "content": "<p>Vrai</p>",
                 "feedback": {
                   "state": "<p>En effet ! </p>",
-                  "diagnosis": "<p>Les requêtes de type texte demandent  des calculs, mais les supercalculateurs peuvent en traiter beaucoup.</p>"
+                  "diagnosis": "<p>Les requêtes de type texte demandent  des calculs, mais <strong>moins que d'autres types de requêtes</strong>.</p><p>Les supercalculateurs peuvent en traiter beaucoup.</p>"
                 }
               },
               {
@@ -382,27 +390,27 @@
                 {
                   "userName": "Enzo",
                   "direction": "incoming",
-                  "content": "l’IA c’est génial, mais j’ai pas envie de détruire la planète"
+                  "content": "L’IA c’est génial, mais j’ai pas envie de détruire la planète"
                 },
                 {
                   "userName": "Alice",
                   "direction": "outgoing",
-                  "content": "moi non plus, je vais arrêter de l’utiliser"
+                  "content": "Moi non plus, je vais arrêter de l’utiliser"
                 },
                 {
                   "userName": "Enzo",
                   "direction": "incoming",
-                  "content": "c’est quand même utile parfois"
+                  "content": "C’est quand même utile parfois"
                 },
                 {
                   "userName": "Alice",
                   "direction": "outgoing",
-                  "content": "peut-être…"
+                  "content": "Peut-être…"
                 },
                 {
                   "userName": "Alice",
                   "direction": "outgoing",
-                  "content": "tu penses à quoi par exemple ?"
+                  "content": "Tu penses à quoi par exemple ?"
                 }
               ]
             }
@@ -435,7 +443,7 @@
                 "content": "<p>Utile</p>",
                 "feedback": {
                   "state": "<p>Mauvais choix !</p>",
-                  "diagnosis": "<p>Cette image peut facilement être trouvée sur internet</p>"
+                  "diagnosis": "<p>Cette image <strong>peut facilement être trouvée sur internet</strong>.</p>"
                 }
               },
               {
@@ -443,7 +451,7 @@
                 "content": "<p>Pas utile</p>",
                 "feedback": {
                   "state": "<p>En effet !</p>",
-                  "diagnosis": "<p>Cette image peut facilement être trouvée sur internet</p>"
+                  "diagnosis": "<p>Cette image <strong>peut facilement être trouvée sur internet</strong>.</p>"
                 }
               }
             ],
@@ -453,7 +461,7 @@
         {
           "type": "element",
           "element": {
-            "id": "0952189d-e93f-4678-aa3c-ceb33d08c67a",
+            "id": "0952189d-e93f-4678-aa3c-ceb33d08c67b",
             "type": "qcu",
             "instruction": "<p>Résume en français un document en finlandais de 25 pages</p>",
             "proposals": [
@@ -462,7 +470,7 @@
                 "content": "<p>Utile</p>",
                 "feedback": {
                   "state": "<p>En effet !</p>",
-                  "diagnosis": "<p>L’IA peut vous faire gagner du temps, et vous permettre d’évaluer si l’article est intéressant pour vous</p>"
+                  "diagnosis": "<p>L’IA peut <strong>vous faire gagner du temps</strong>, et vous permettre d’évaluer si l’article est intéressant pour vous.</p>"
                 }
               },
               {
@@ -470,7 +478,7 @@
                 "content": "<p>Pas utile</p>",
                 "feedback": {
                   "state": "<p>Pourquoi pas ?</p>",
-                  "diagnosis": "<p>L’IA peut vous faire gagner du temps, et vous permettre d’évaluer si l’article est intéressant pour vous</p>"
+                  "diagnosis": "<p>L’IA peut <strong>vous faire gagner du temps</strong>, et vous permettre d’évaluer si l’article est intéressant pour vous.</p>"
                 }
               }
             ],
@@ -489,7 +497,7 @@
                 "content": "<p>Utile</p>",
                 "feedback": {
                   "state": "<p>Ça se défend</p>",
-                  "diagnosis": "<p>L’IA peut être une bonne source d’inspiration pour commencer ce projet</p>"
+                  "diagnosis": "<p>L’IA peut être une <strong>bonne source d’inspiration</strong> pour commencer ce projet.</p>"
                 }
               },
               {
@@ -497,7 +505,7 @@
                 "content": "<p>Pas utile</p>",
                 "feedback": {
                   "state": "<p>Ça se discute</p>",
-                  "diagnosis": "<p>L'IA peut être une bonne source d’inspiration pour commencer ce projet</p>"
+                  "diagnosis": "<p>L'IA peut être une <strong>bonne source d’inspiration</strong> pour commencer ce projet.</p>"
                 }
               }
             ],
@@ -516,7 +524,7 @@
                 "content": "<p>Utile</p>",
                 "feedback": {
                   "state": "<p>Mauvais choix</p>",
-                  "diagnosis": "<p>Il existe des solutions bien plus efficaces pour obtenir cette information</p>"
+                  "diagnosis": "<p>Il existe <strong>des solutions bien plus efficaces</strong> pour obtenir cette information.</p>"
                 }
               },
               {
@@ -524,7 +532,7 @@
                 "content": "<p>Pas utile</p>",
                 "feedback": {
                   "state": "<p>En effet !</p>",
-                  "diagnosis": "<p>Il existe des solutions bien plus efficaces pour obtenir cette information</p><p><br></p>"
+                  "diagnosis": "<p>Il existe <strong>des solutions bien plus efficaces</strong> pour obtenir cette information.</p><p><br></p>"
                 }
               }
             ],
@@ -543,7 +551,7 @@
           "element": {
             "id": "65f0620b-6632-480d-ad77-f4a2e7e59289",
             "type": "text",
-            "content": "<p><strong>Agir pour réduire la consommation d’énergie</strong></p><p> Pour réduire les coûts énergétiques des supercalculateurs, on peut essayer collectivement d’utiliser les IA génératives à un juste besoin.&nbsp;</p><ul><li>Éviter les requêtes inutiles ou répétées</li><li>Privilégier des solutions plus efficaces quand elles existent</li><li>Éviter les demandes d'images ou de vidéos</li></ul><p><strong>Bon à savoir</strong> : on peut désactiver les options d’IA par défaut dans les logiciels</p>"
+            "content": "<p><strong>🌱Agir pour réduire la consommation d’énergie</strong></p><p> Pour réduire les coûts énergétiques des supercalculateurs, on peut essayer collectivement d’utiliser les IA génératives à un juste besoin.&nbsp;</p><ul><li>Éviter les requêtes inutiles ou répétées</li><li>Privilégier des solutions plus efficaces quand elles existent</li><li>Éviter les demandes d'images ou de vidéos</li></ul><p><strong>🤔Bon à savoir</strong>&nbsp; </p><p>On peut désactiver les options d’IA par défaut dans les logiciels</p>"
           }
         }
       ]
