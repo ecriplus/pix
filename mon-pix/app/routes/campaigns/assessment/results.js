@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
+import ENV from 'mon-pix/config/environment';
 
 export default class ResultsRoute extends Route {
   @service currentUser;
@@ -36,7 +37,14 @@ export default class ResultsRoute extends Route {
         await this.currentUser.load();
       }
 
-      return { campaign, campaignParticipationResult, showTrainings: false, trainings, questResults };
+      return {
+        campaign,
+        campaignParticipationResult,
+        campaignParticipation,
+        showTrainings: false,
+        trainings,
+        questResults,
+      };
     } catch (error) {
       if (error.errors?.[0]?.status === '412') {
         this.router.transitionTo('campaigns.entry-point', campaign.code);
@@ -48,9 +56,13 @@ export default class ResultsRoute extends Route {
     if (!this.featureToggles.featureToggles?.isAutoShareEnabled) {
       return;
     }
-    if (model.campaignParticipationResult.isShared) {
+    if (
+      model.campaignParticipationResult.isShared ||
+      model.campaignParticipation.createdAt <= new Date(ENV.APP.AUTO_SHARE_AFTER_DATE)
+    ) {
       return;
     }
+
     await this.store.adapterFor('campaign-participation-result').share(model.campaignParticipationResult.id);
     model.campaignParticipationResult.isShared = true;
     model.campaignParticipationResult.canImprove = false;

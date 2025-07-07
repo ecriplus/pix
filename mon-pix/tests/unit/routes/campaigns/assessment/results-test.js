@@ -126,7 +126,10 @@ module('Unit | Route | Campaign | Assessment | Results', function (hooks) {
         const shareSpy = sinon.spy();
         sinon.stub(store, 'adapterFor').withArgs('campaign-participation-result').returns({ share: shareSpy });
         // when
-        await route.afterModel({ campaignParticipationResult: { id: 123, isShared: false } });
+        await route.afterModel({
+          campaignParticipation: { createdAt: '2024-01-01' },
+          campaignParticipationResult: { id: 123, isShared: false },
+        });
 
         // then
         assert.ok(shareSpy.calledOnce);
