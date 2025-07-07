@@ -9,8 +9,8 @@
     "duration": 10,
     "level": "Débutant",
     "objectives": [
-      "<p>Identifier les ressources naturelles nécessaires au fonctionnement de l’IA générative.</p>",
-      "<p>Évaluer la consommation énergétique de l’IA générative.</p><p><br></p>"
+      "<p>Identifier le rôle des supercalculateurs dans le traitement des requêtes d’IA générative.</p>",
+      "<p>Expliquer la consommation énergétique des supercalculateurs de l’IA générative.</p>"
     ],
     "tabletSupport": "inconvenient"
   },
@@ -25,7 +25,7 @@
           "element": {
             "id": "35a9be34-9b63-4cf5-b984-432010aff74e",
             "type": "text",
-            "content": "<p>Bob a produit un texte à l’aide d’une IA générative. Il se demande comment l’IA peut écrire un paragraphe si vite.<br></p>"
+            "content": "<p>Enzo a produit un texte à l’aide d’un logiciel d'IA générative sur son ordinateur. </p><p>Il ne pensait pas son ordinateur si puissant. <br></p>"
           }
         }
       ]
@@ -45,34 +45,24 @@
               "title": "Discussion intro",
               "messages": [
                 {
-                  "userName": "Bob",
+                  "userName": "Enzo",
                   "direction": "incoming",
-                  "content": "Un poême à la manière de Victor Hugo en moins d‘une minute, vraiment impressionnant ! 🤯"
+                  "content": "c’est impressionnant comme l’IA a boosté mon ordinateur ! 🤯"
                 },
                 {
                   "userName": "Alice",
                   "direction": "outgoing",
-                  "content": "C‘est parce que l‘IA calcule très vite !"
+                  "content": "tu l’as fait réparer ?"
                 },
                 {
-                  "userName": "Bob",
+                  "userName": "Enzo",
                   "direction": "incoming",
-                  "content": "Mais c‘est pas des maths, c‘est du français ! 😫"
+                  "content": "non je n’ai rien fait, mais il arrive à répondre à toutes mes demandes !"
                 },
                 {
                   "userName": "Alice",
                   "direction": "outgoing",
-                  "content": "Ah, mais pour l‘IA, tout n‘est que calcul ! 🚀"
-                },
-                {
-                  "userName": "Bob",
-                  "direction": "incoming",
-                  "content": "J‘aurais pu le faire avec ma calculatrice alors ?"
-                },
-                {
-                  "userName": "Alice",
-                  "direction": "outgoing",
-                  "content": "Ha Ha ! Avec des millions de calculatrices alors ! Et des millions de piles pour les alimenter !"
+                  "content": "Incroyable !"
                 }
               ]
             }
@@ -82,15 +72,15 @@
     },
     {
       "id": "bcfc5017-0b98-4603-9ed3-31506ec52d15",
-      "type": "lesson",
-      "title": "L'IA, c'est du calcul",
+      "type": "transition",
+      "title": "L'IA ne booste pas",
       "components": [
         {
           "type": "element",
           "element": {
             "id": "fdf4e875-c31c-4637-b9e1-62a9b77046e7",
             "type": "text",
-            "content": "<p><strong>📈L’IA, c’est du calcul !</strong> <br>Comme le dit Alice, ce sont bien <strong>des machines qui font fonctionner l’intelligence artificielle</strong>. Elles utilisent des composants d’une <strong>très grande puissance de calcul</strong>. Bien plus grande que nos appareils personnels.</p>"
+            "content": "<p>Même avec un ordinateur peu puissant, ou un smartphone basique, on peut obtenir des réponses à toutes nos demandes grâce à l’IA. </p><p>Voyons où sont produites les réponses.</p>"
           }
         }
       ]
@@ -98,14 +88,14 @@
     {
       "id": "45117f02-c379-4ed0-9691-52c7fc31555b",
       "type": "discovery",
-      "title": "Puissances de calculs comparées",
+      "title": "Trajet requête & réponse",
       "components": [
         {
           "type": "element",
           "element": {
             "id": "bbc2cbde-08d2-4869-a6d3-61ac27865f5a",
             "type": "text",
-            "content": "<p>Mais ça veut dire quoi «&nbsp;très puissantes&nbsp;» par rapport à nos appareils électroniques courants ?</p>"
+            "content": "<p>Que se passe-t-il quand on fait une demande à un logiciel d’IA générative ?</p>"
           }
         },
         {
@@ -114,10 +104,11 @@
             "id": "9cb3a20f-cedf-45c9-8910-1e8086fdd728",
             "type": "embed",
             "isCompletionRequired": false,
-            "title": "embed puissance de calcul",
-            "url": "https://1024pix.github.io/atelier-contenus/FRI/comparaison_puissance_calcul_puces_jauges.html",
-            "instruction": "<p>Cliquez sur \"Commencer\" pour voir la puissance de calculs des appareils courants</p>",
-            "height": 800
+            "title": "",
+            "url": "https://1024pix.github.io/atelier-contenus/FRI/protoAffichageProcessus02.html",
+            "instruction": "<p>Cliquez sur \"Commencer\" pour voir le trajet d'une demande à un logiciel d'IA générative</p>",
+            "solution": "-",
+            "height": 400
           }
         },
         {
@@ -125,30 +116,30 @@
           "element": {
             "id": "6a585a2a-9d17-4307-befd-906559ec80b1",
             "type": "qcu",
-            "instruction": "<p>Une puce spécialisée pour l’IA est :</p>",
+            "instruction": "<p>Lorsqu’on fait une demande à un logiciel d’IA générative, la réponse est calculée :</p>",
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>Moins puissante qu’une puce pour console de jeu</p>",
+                "content": "<p>Dans notre appareil personnel</p>",
                 "feedback": {
                   "state": "<p>Mauvaise réponse.</p>",
-                  "diagnosis": "<p>Même si elles ne sont pas conçues pour le même usage, on peut estimer qu’une puce IA est 30 fois plus puissante qu’une puce pour console de jeu.</p>"
+                  "diagnosis": "<p>Votre demande voyage jusqu’à un supercalculateur, peut-être situé à l’autre bout du monde. C’est là-bas que la réponse est calculée.<br></p>"
                 }
               },
               {
                 "id": "2",
-                "content": "<p>Aussi puissante qu’une puce pour console de jeu</p>",
+                "content": "<p>Dans un supercalculateur</p>",
                 "feedback": {
-                  "state": "<p>Mauvaise réponse.</p>",
-                  "diagnosis": "<p>Même si elles ne sont pas conçues pour le même usage, on peut estimer qu’une puce IA est 30 fois plus puissante qu’une puce pour console de jeu.</p>"
+                  "state": "<p>Bonne réponse !&nbsp;🎉</p>",
+                  "diagnosis": "<p>Ce supercalculateur est peut-être situé à l’autre bout du mond</p><br>"
                 }
               },
               {
                 "id": "3",
-                "content": "<p>Plus puissante qu’une puce pour console de jeu</p>",
+                "content": "<p>Sur internet</p>",
                 "feedback": {
-                  "state": "<p>Bonne réponse ! 🎉</p>",
-                  "diagnosis": "<p>Même si elles ne sont pas conçues pour le même usage, on peut estimer qu’une puce IA est 30 fois plus puissante qu’une puce pour console de jeu.</p>"
+                  "state": "<p>Mauvaise réponse.</p>",
+                  "diagnosis": "<p>Votre demande voyage jusqu’à un supercalculateur, peut-être situé à l’autre bout du monde. C’est là-bas que la réponse est calculée.</p><br>"
                 }
               }
             ],
@@ -160,14 +151,14 @@
     {
       "id": "24f08127-eeea-44a5-a5b3-21c7f333b760",
       "type": "lesson",
-      "title": "Puissance de calcul IA",
+      "title": "Un long voyage",
       "components": [
         {
           "type": "element",
           "element": {
             "id": "140817f0-531a-44a6-83bb-2a7b094848c8",
             "type": "text",
-            "content": "<p><strong>🤔 Pourquoi l’IA a-t-elle besoin d’une puce aussi puissante ?</strong></p><p> <br>Les IA génératives ont besoin d‘être entraînées sur des milliards de données. <strong>Plus la puissance de calcul est forte, plus le temps d’entraînement sera court.</strong></p>"
+            "content": "<p>🚀<strong> Un long voyage</strong></p><p>Quand on interroge un logiciel d’IA générative, la requête est <strong>envoyée par le réseau internet dans un immense centre informatique, un supercalculateur</strong>, quelque part dans le monde.&nbsp; </p><p>La réponse nous est ensuite renvoyée.</p><br>"
           }
         }
       ]
@@ -175,7 +166,7 @@
     {
       "id": "fff6aed9-7c64-4f1a-933f-0640c9ff6c1b",
       "type": "transition",
-      "title": "Discussion ressources",
+      "title": "Discussion fonctionnement supercalculateur",
       "components": [
         {
           "type": "element",
@@ -187,14 +178,19 @@
               "title": "Discussion ressources",
               "messages": [
                 {
-                  "userName": "Bob",
+                  "userName": "Enzo",
                   "direction": "incoming",
-                  "content": "Ça doit être compliqué à fabriquer, ces puces"
+                  "content": "alors c’est pas mon ordinateur qui est devenu puissant 😞"
                 },
                 {
                   "userName": "Alice",
                   "direction": "outgoing",
-                  "content": "Oui c’est très complexe. Et ça demande beaucoup de ressources naturelles !"
+                  "content": "bah tant qu’il te permet d’utiliser l’IA, ça suffit"
+                },
+                {
+                  "userName": "Enzo",
+                  "direction": "incoming",
+                  "content": "c’est vrai ! Mais j’aimerais bien savoir comment fait le supercalculateur"
                 }
               ]
             }
@@ -205,71 +201,19 @@
     {
       "id": "c568c13b-5f8e-40a2-a934-bcf5e30e73ae",
       "type": "discovery",
-      "title": "Découverte ressources naturelles",
+      "title": "Découverte traitement supercalculateur",
       "components": [
         {
           "type": "element",
           "element": {
             "id": "9cb5f3ca-3b22-44f0-ad92-f7ccb778d0cf",
-            "type": "qab",
-            "instruction": "<p>À votre avis, les <strong>ressources naturelles</strong> suivantes sont-elles <strong>nécessaires à la production des puces IA</strong> ?</p>",
-            "cards": [
-              {
-                "id": "c6bff27e-d35e-437d-809e-a85d842c2899",
-                "text": "Des métaux",
-                "image": {
-                  "url": "https://img.freepik.com/vecteurs-premium/ensemble-materiaux-construction-tas-briques-sable-gravier-etc-concept-construction-illustrations-peuvent-etre-utilisees-pour-chantiers-construction-travaux-gravier-industriel_93083-457.jpg?ga=GA1.1.1172701714.1718010665&semt=ais_hybrid&w=740",
-                  "altText": ""
-                },
-                "proposalA": "Oui",
-                "proposalB": "Non",
-                "solution": "A"
-              },
-              {
-                "id": "38f4d3bd-4e6f-4698-8303-c0a3d88af29d",
-                "text": "Des terres rares",
-                "image": {
-                  "url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Rareearthoxides.jpg",
-                  "altText": ""
-                },
-                "proposalA": "Oui",
-                "proposalB": "Non",
-                "solution": "A"
-              },
-              {
-                "id": "aba37440-d1ea-4ac3-8c06-e8d95917adad",
-                "text": "Des céréales",
-                "image": {
-                  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Les_Plantes_Cultivades._Cereals._Imatge_119.jpg/640px-Les_Plantes_Cultivades._Cereals._Imatge_119.jpg",
-                  "altText": ""
-                },
-                "proposalA": "Oui",
-                "proposalB": "Non",
-                "solution": "B"
-              },
-              {
-                "id": "81e9c8de-5329-40b8-b5ea-344ae8072849",
-                "text": "De l'énergie électrique",
-                "image": {
-                  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Raitersaich_SK_DSC_0028.jpg/640px-Raitersaich_SK_DSC_0028.jpg",
-                  "altText": ""
-                },
-                "proposalA": "Oui",
-                "proposalB": "Non",
-                "solution": "A"
-              },
-              {
-                "id": "534076f5-18d8-4772-9719-d840859dab76",
-                "text": "De l'eau",
-                "image": {
-                  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Chute-eau-1.jpg/640px-Chute-eau-1.jpg",
-                  "altText": ""
-                },
-                "proposalA": "Oui",
-                "proposalB": "Non",
-                "solution": "A"
-              }
-            ]
+            "type": "embed",
+            "isCompletionRequired": false,
+            "title": "",
+            "url": "",
+            "instruction": "<p>Découvrons <strong>comment le supercalculateur répond</strong> à la demande d’Enzo</p>",
+            "solution": "",
+            "height": 0
           }
         }
       ]
@@ -277,14 +221,14 @@
     {
       "id": "67ffb9ff-0a27-4ef4-aefe-ea406e053988",
       "type": "lesson",
-      "title": "Ça consomme déjà ! ",
+      "title": "L’IA, ça calcule, ça chauffe, ça consomme",
       "components": [
         {
           "type": "element",
           "element": {
             "id": "40de84e9-fc48-40c3-9d3f-499f6454d46a",
             "type": "text",
-            "content": "<p><strong>⚠️🌎 Ça consomme déjà !&nbsp;</strong></p><p><br>La <strong>fabrication</strong> des puces spécialisées en IA utilise des <strong>ressources naturelles</strong> : terres et métaux rares, grandes quantités d’eau et d’énergie.</p><p><br></p>"
+            "content": "<p><strong>L’IA, ça calcule, ça chauffe, ça consomme</strong></p><p>Le traitement d’une requête nécessite de <strong>nombreux calculs</strong>. Pour effectuer ces calculs, il faut du <strong>matériel très complexe</strong>, qui <strong>consomme de l’électricité</strong> et qui a <strong>besoin d’être refroidi</strong> en permanence</p>"
           }
         }
       ]
@@ -292,7 +236,7 @@
     {
       "id": "01360a56-4628-41bf-9d07-0052f0383413",
       "type": "transition",
-      "title": "Discussion supercalculateurs",
+      "title": "Discussion je consomme",
       "components": [
         {
           "type": "element",
@@ -304,167 +248,19 @@
               "title": "Discussion supercalculateurs",
               "messages": [
                 {
-                  "userName": "Bob",
+                  "userName": "Enzo",
                   "direction": "incoming",
-                  "content": "Donc derrière une IA, il y a une super puce ! 🏋️"
+                  "content": "alors quand j’utilise un logiciel d’IA générative, je consomme de l’énergie à l’autre bout du monde !"
                 },
                 {
                   "userName": "Alice",
                   "direction": "outgoing",
-                  "content": "Il y en a même plusieurs ! 🦾🦾🦾🦾  On les regroupe dans des immenses ordinateurs : des supercalculateurs"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "id": "a5953142-cd81-4a71-8041-793647693864",
-      "type": "discovery",
-      "title": "Découverte nombre puces",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "d248d655-4d41-4a63-8517-5d48cb13c43e",
-            "type": "qcu-declarative",
-            "instruction": "<p>À votre avis, pour entraîner une IA, combien faut-il de puces spécialisées ?</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "<p>Des dizaines</p>",
-                "feedback": {
-                  "state": "<p>Et non, beaucoup plus !</p>",
-                  "diagnosis": "<p>L’entraînement d’une IA nécessite plusieurs milliers de puces spécialisées. Mais à l’échelle mondiale, ce sont plusieurs millions de puces qui sont produites chaque année.</p>"
-                }
-              },
-              {
-                "id": "2",
-                "content": "<p>Des centaines</p>",
-                "feedback": {
-                  "state": "<p>Et non, beaucoup plus !</p>",
-                  "diagnosis": "<p>L’entraînement d’une IA nécessite plusieurs milliers de puces spécialisées. Mais à l’échelle mondiale, ce sont plusieurs millions de puces qui sont produites chaque année.</p>"
-                }
-              },
-              {
-                "id": "3",
-                "content": "<p>Des milliers</p>",
-                "feedback": {
-                  "state": "<p>Oui en effet !</p>",
-                  "diagnosis": "<p>L’entraînement d’une IA nécessite plusieurs milliers de puces spécialisées. Mais à l’échelle mondiale, ce sont plusieurs millions de puces qui sont produites chaque année.</p>"
-                }
-              },
-              {
-                "id": "4",
-                "content": "<p>Des millions</p>",
-                "feedback": {
-                  "state": "<p>Pas vraiment</p>",
-                  "diagnosis": "<p>L’entraînement d’une IA nécessite plusieurs milliers de puces spécialisées. Mais à l’échelle mondiale, ce sont plusieurs millions de puces qui sont produites chaque année.</p>"
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "a17d541a-c8dd-427a-a685-4842f7e8f164",
-      "type": "lesson",
-      "title": "Beaucoup de calcul, beaucoup de matériel, beaucoup de ressources !",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "65f0620b-6632-480d-ad77-f4a2e7e59289",
-            "type": "text",
-            "content": "<p><strong>🌎 🌎 🌎 Beaucoup de calcul, beaucoup de matériel, beaucoup de ressources !</strong></p><p> <br>Pour les calculs nécessaires à leur entraînement, les IA nécessitent <strong>un grand nombre de puces spécialisées</strong>. Cela multiplie l’impact lié à leur fabrication.</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "56047656-1937-499e-a0a9-798d7880ea8d",
-      "type": "transition",
-      "title": "Transition ça chauffe",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "efc55471-86a8-4e27-bace-05b0ccd18958",
-            "type": "text",
-            "content": "<p>Plusieurs milliers de puces dans un supercalculateur, ça consomme, et ça chauffe !</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "e6c0aaa5-c873-41e4-b998-37388f8ab546",
-      "type": "discovery",
-      "title": "Simulation alimentation supercalculateur",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "7a3564b7-3d66-4877-9a0c-d93776b9f37e",
-            "type": "embed",
-            "isCompletionRequired": false,
-            "title": "Simulation alimentation supercalculateur",
-            "url": "https://1024pix.github.io/atelier-contenus/FRI/IAEnvironnementAlimentation11.html",
-            "instruction": "<p>Cliquez sur \"Commencer\" pour visualiser les besoins en énergie pour l'entraînement d'une IA.</p>",
-            "height": 600
-          }
-        }
-      ]
-    },
-    {
-      "id": "c388aeb1-74d6-49cf-924c-87fa8a015bb7",
-      "type": "lesson",
-      "title": "Leçon conso énergie",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "74be751a-51ef-4ed3-a8d4-a2e7e7b464a8",
-            "type": "text",
-            "content": "<p>Les IA consomment <strong>beaucoup d’énergie</strong>, afin d’alimenter les puces et de refroidir les supercalculateurs.</p><p><strong>🌱 Ça consomme combien ?&nbsp;</strong></p><p> L’entraînement de Chat GPT-4 a demandé l’équivalent de l’énergie consommée annuellement par 5000 foyers américains.<br><br></p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "c3504f09-f774-4145-9b8b-2d9d0f114c85",
-      "type": "transition",
-      "title": "Transition inférence",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "9cddd982-33fa-4b0f-8283-16daf5666a7b",
-            "type": "custom",
-            "tagName": "message-conversation",
-            "props": {
-              "title": "transition inférence",
-              "messages": [
+                  "content": "Oui et moi aussi !"
+                },
                 {
-                  "userName": "Bob",
+                  "userName": "Enzo",
                   "direction": "incoming",
-                  "content": "Ah oui c’est chaud ! Mais une fois l’entraînement passé, ça ne coûte rien de l’utiliser ?"
-                },
-                {
-                  "userName": "Alice",
-                  "direction": "outgoing",
-                  "content": "C’est ce que beaucoup de gens croient. Mais l’utilisation de l’IA consomme aussi beaucoup d’énergie"
-                },
-                {
-                  "userName": "Bob",
-                  "direction": "incoming",
-                  "content": "Mon petit poème, c’est quand même pas grand chose pour une IA."
-                },
-                {
-                  "userName": "Alice",
-                  "direction": "outgoing",
-                  "content": "C’est beaucoup de calcul, donc beaucoup d’énergie. Et en plus, tu n’es pas seul à l’utiliser."
+                  "content": "et les milliers d’autres utilisateurs avec nous ! "
                 }
               ]
             }
@@ -475,7 +271,7 @@
     {
       "id": "e3806d90-2517-49c0-9514-047a21915ea8",
       "type": "discovery",
-      "title": "découverte conso prompts",
+      "title": "découverte conso prompts multiples",
       "components": [
         {
           "type": "element",
@@ -484,9 +280,10 @@
             "type": "embed",
             "isCompletionRequired": false,
             "title": "Charge supercalculateur",
-            "url": "https://1024pix.github.io/atelier-contenus/FRI/IAEnvironnementInference.html",
-            "instruction": "<p>Un supercalculateur traite les demandes des utilisateurs. <strong>Plus les demandes sont complexes et nombreuses, plus il doit être puissant</strong>. Il ne peut pas tout traiter !</p><p>Comparez la charge de calcul supportée par le supercalculateur <strong>en faisant varier les prompts et le nombre de requêtes</strong>. Puis répondez aux questions suivantes.<br><br></p>",
-            "height": 550
+            "url": "https://1024pix.github.io/atelier-contenus/FRI/IAEnvironnementInferenceSpinner02.html",
+            "instruction": "<p>Imaginons que <strong>plusieurs personnes demandent la même chose en même temps</strong> à un logiciel d’IA générative. </p><p>Testez la <strong>capacité de calcul </strong>et la <strong>consommation électrique</strong> d’un supercalculateur en choisissant la demande et le nombre de requêtes. Puis répondez aux questions suivantes</p>",
+            "solution": "",
+            "height": 470
           }
         },
         {
@@ -554,16 +351,199 @@
       ]
     },
     {
-      "id": "f9f6ee57-e262-4cfc-9261-947a3be89959",
+      "id": "c388aeb1-74d6-49cf-924c-87fa8a015bb7",
       "type": "lesson",
-      "title": "leçon Beaucoup d’utilisateurs, beaucoup de calculs… beaucoup d’énergie !",
+      "title": "Leçon conso énergie supercalculateur",
       "components": [
         {
           "type": "element",
           "element": {
-            "id": "8d34b40b-9548-4cf1-985f-a6136546001e",
+            "id": "74be751a-51ef-4ed3-a8d4-a2e7e7b464a8",
             "type": "text",
-            "content": "<p><strong>💻 ⚡Beaucoup d’utilisateurs, beaucoup de calculs… beaucoup d’énergie !</strong></p><p> Pour répondre aux <strong>très nombreuses requêtes, parfois complexes</strong>, des utilisateurs, il faut aussi beaucoup de calculs, donc <strong>beaucoup d’énergie</strong>.</p>"
+            "content": "<p>💻 <strong>⚡ Beaucoup d’utilisateurs, beaucoup d’énergie !</strong> </p><p>Un supercalculateur reçoit <strong>des milliers de requêtes en même temps</strong>.&nbsp; Pour la fabrication d’images haute définition ou de vidéos, les calculs sont beaucoup plus importants que pour produire du texte.&nbsp; </p><p>Le supercalculateur effectue en parallèle l’ensemble des calculs pour répondre aux demandes qu’il reçoit. Cela consomme <strong>une énorme quantité d’énergie. </strong></p><br>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c3504f09-f774-4145-9b8b-2d9d0f114c85",
+      "type": "transition",
+      "title": "Discussion détruire la planète",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "9cddd982-33fa-4b0f-8283-16daf5666a7b",
+            "type": "custom",
+            "tagName": "message-conversation",
+            "props": {
+              "title": "transition bons usages",
+              "messages": [
+                {
+                  "userName": "Enzo",
+                  "direction": "incoming",
+                  "content": "l’IA c’est génial, mais j’ai pas envie de détruire la planète"
+                },
+                {
+                  "userName": "Alice",
+                  "direction": "outgoing",
+                  "content": "moi non plus, je vais arrêter de l’utiliser"
+                },
+                {
+                  "userName": "Enzo",
+                  "direction": "incoming",
+                  "content": "c’est quand même utile parfois"
+                },
+                {
+                  "userName": "Alice",
+                  "direction": "outgoing",
+                  "content": "peut-être…"
+                },
+                {
+                  "userName": "Alice",
+                  "direction": "outgoing",
+                  "content": "tu penses à quoi par exemple ?"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "2176284b-cdbc-4991-81d6-81613ac980e4",
+      "type": "activity",
+      "title": "Découverte QCU bons usages",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "9fec3348-3d45-4836-9d66-c4e2ac0ffe12",
+            "type": "text",
+            "content": "<p>Pour limiter la consommation des logiciels d’IA générative, on peut agir à notre niveau en adaptant nos usages. </p><p>À votre avis, <strong>l'IA est-elle utile</strong> pour répondre aux demandes suivantes  ?</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "267d8b3c-d5dd-4dfc-b872-a6c0095eeb9b",
+            "type": "qcu",
+            "instruction": "<p>Dessine-moi la terre vue depuis l’espace</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>Utile</p>",
+                "feedback": {
+                  "state": "<p>Mauvais choix !</p>",
+                  "diagnosis": "<p>Cette image peut facilement être trouvée sur internet</p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "<p>Pas utile</p>",
+                "feedback": {
+                  "state": "<p>En effet !</p>",
+                  "diagnosis": "<p>Cette image peut facilement être trouvée sur internet</p>"
+                }
+              }
+            ],
+            "solution": "2"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "0952189d-e93f-4678-aa3c-ceb33d08c67a",
+            "type": "qcu",
+            "instruction": "<p>Résume en français un document en finlandais de 25 pages</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>Utile</p>",
+                "feedback": {
+                  "state": "<p>En effet !</p>",
+                  "diagnosis": "<p>L’IA peut vous faire gagner du temps, et vous permettre d’évaluer si l’article est intéressant pour vous</p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "<p>Pas utile</p>",
+                "feedback": {
+                  "state": "<p>Pourquoi pas ?</p>",
+                  "diagnosis": "<p>L’IA peut vous faire gagner du temps, et vous permettre d’évaluer si l’article est intéressant pour vous</p>"
+                }
+              }
+            ],
+            "solution": "3"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "4aaba8b7-82fa-4d37-9445-9735c2ca36ac",
+            "type": "qcu",
+            "instruction": "<p>Écris une courte scène de théâtre pour 5 acteurs sur le thème de la révolution française</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>Utile</p>",
+                "feedback": {
+                  "state": "<p>Ça se défend</p>",
+                  "diagnosis": "<p>L’IA peut être une bonne source d’inspiration pour commencer ce projet</p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "<p>Pas utile</p>",
+                "feedback": {
+                  "state": "<p>Ça se discute</p>",
+                  "diagnosis": "<p>L'IA peut être une bonne source d’inspiration pour commencer ce projet</p>"
+                }
+              }
+            ],
+            "solution": "1"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "28b5b1ea-6f02-4dee-b1cd-91915008d55f",
+            "type": "qcu",
+            "instruction": "<p>Quelle est la météo à Paris aujourd’hui ?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>Utile</p>",
+                "feedback": {
+                  "state": "<p>Mauvais choix</p>",
+                  "diagnosis": "<p>Il existe des solutions bien plus efficaces pour obtenir cette information</p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "<p>Pas utile</p>",
+                "feedback": {
+                  "state": "<p>En effet !</p>",
+                  "diagnosis": "<p>Il existe des solutions bien plus efficaces pour obtenir cette information</p><p><br></p>"
+                }
+              }
+            ],
+            "solution": "1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a17d541a-c8dd-427a-a685-4842f7e8f164",
+      "type": "lesson",
+      "title": "Leçon - Agir pour réduire la consommation d’énergie",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "65f0620b-6632-480d-ad77-f4a2e7e59289",
+            "type": "text",
+            "content": "<p><strong>Agir pour réduire la consommation d’énergie</strong></p><p> Pour réduire les coûts énergétiques des supercalculateurs, on peut essayer collectivement d’utiliser les IA génératives à un juste besoin.&nbsp;</p><ul><li>Éviter les requêtes inutiles ou répétées</li><li>Privilégier des solutions plus efficaces quand elles existent</li><li>Éviter les demandes d'images ou de vidéos</li></ul><p><strong>Bon à savoir</strong> : on peut désactiver les options d’IA par défaut dans les logiciels</p>"
           }
         }
       ]
@@ -578,19 +558,7 @@
           "element": {
             "id": "d705c485-ea6d-4109-a7c7-b236684b8330",
             "type": "text",
-            "content": "<p><strong>&nbsp;💡Résumons avant de passer à la suite :</strong></p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "686f7ba6-3262-4f11-9908-ad00744ab553",
-            "type": "image",
-            "url": "https://i.imgur.com/zFhlWYZ.jpeg",
-            "alt": "",
-            "alternativeText": "<ul><li>L’entraînement et le fonctionnement des IA nécessitent <strong>beaucoup de calcul</strong>. Ces calculs demandent <strong>beaucoup de matériel et d’énergie</strong> pour faire fonctionner et refroidir les supercalculateur</li><li>Les IA utilisent des milliers de puces très puissantes. La fabrication des puces exploite <strong>beaucoup de ressources naturelles</strong>.</li><li>L’IA reçoit des milliers de demandes par seconde. Plus il y a de <strong>requêtes simultanées</strong>, et plus les requêtes sont compliquées, plus l’IA <strong>consomme de l’énergie</strong>.</li></ul>",
-            "legend": "",
-            "licence": ""
+            "content": "<p><strong>&nbsp;💡Résumons avant de passer à la suite :</strong></p><p>Pour répondre à nos <strong>millions de demandes</strong>, les logiciels d’IA génératives doivent faire de <strong>nombreux calculs</strong>. </p><p>C’est le rôle des <strong>supercalculateurs</strong>, parfois situés à l’autre bout du monde. </p><p>Pour <strong>faire ces calculs</strong>, et <strong>refroidir</strong> les supercalculateurs, il faut <strong>beaucoup d’énergie</strong>. </p><p><strong>Certaines requêtes</strong>, comme la fabrication d’images HD ou de vidéos, demandent plus de calculs, et <strong>nécessitent plus d’énergie.</strong><br><br></p>"
           }
         }
       ]
@@ -605,7 +573,7 @@
           "element": {
             "id": "5d68cc81-8755-4887-9c28-30dfbe4286da",
             "type": "image",
-            "url": "https://images.pix.fr/modulix/placeholder-details.svg",
+            "url": "",
             "alt": "-",
             "alternativeText": "<p>Évaluation</p>",
             "legend": "",
@@ -623,20 +591,81 @@
       ]
     },
     {
-      "id": "2176284b-cdbc-4991-81d6-81613ac980e4",
+      "id": "9b4eca67-e1d7-4a2e-a1c2-9318b2f97130",
       "type": "activity",
-      "title": "Première activité QCU",
+      "title": "QAB évaluation",
       "components": [
         {
           "type": "element",
           "element": {
-            "id": "267d8b3c-d5dd-4dfc-b872-a6c0095eeb9b",
+            "id": "1854f199-bd3e-4b9a-a329-d402b2f0ada8",
+            "type": "qab",
+            "instruction": "<p>Pour chaque affirmation ci-dessous, dites si elle est vraie ou fausse :</p>",
+            "cards": [
+              {
+                "id": "1a02f8fe-1336-4f68-9e60-0318ebdf2ba0",
+                "text": "Quand je fais une requête à l’IA sur mon smartphone, c’est mon smartphone qui calcule la réponse.",
+                "image": {
+                  "url": "",
+                  "altText": ""
+                },
+                "proposalA": "Vrai",
+                "proposalB": "Faux",
+                "solution": "B"
+              },
+              {
+                "id": "c8852e30-63fc-4562-8553-2f0cfbb5de4a",
+                "text": "Les requêtes sont envoyées à l’IA via le réseau internet.",
+                "image": {
+                  "url": "",
+                  "altText": ""
+                },
+                "proposalA": "Vrai",
+                "proposalB": "Faux",
+                "solution": "A"
+              },
+              {
+                "id": "152a201c-0001-4031-ba82-96df74ea19cc",
+                "text": "Pour répondre à une demande, l’IA effectue un grand nombre de calculs. ",
+                "image": {
+                  "url": "",
+                  "altText": ""
+                },
+                "proposalA": "Vrai",
+                "proposalB": "Faux",
+                "solution": "A"
+              },
+              {
+                "id": "4b9632f6-7db7-4fb6-8d6d-12727ea15c49",
+                "text": "Un supercalculateur traite une seule requête à la fois.",
+                "image": {
+                  "url": "",
+                  "altText": ""
+                },
+                "proposalA": "Vrai",
+                "proposalB": "Faux",
+                "solution": "B"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "82b4ad43-6e5a-45f7-9b31-c2c0e4004f04",
+      "type": "activity",
+      "title": "QCU évaluation 1",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "542558c9-7795-4928-b45a-02aa19d7993e",
             "type": "qcu",
-            "instruction": "<p>Les IA consomment beaucoup d’énergie…</p>",
+            "instruction": "<p>Qu’est-ce qui consomme de grandes quantités d’énergie dans un supercalculateur ?</p>",
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>Lors de la fabrication des supercalculateurs.</p>",
+                "content": "<p>La connexion internet et le chauffage du bâtiment</p>",
                 "feedback": {
                   "state": "<p>Mauvaise réponse.</p>",
                   "diagnosis": "<p>N'hésitez pas à consulter le récapitulatif ou les parties précédentes du module pour vous aider☝️</p>"
@@ -644,241 +673,22 @@
               },
               {
                 "id": "2",
-                "content": "<p>Lors de la phase d’entraînement de l’IA.</p>",
+                "content": "<p>Les calculs et le refroidissement des machines</p>",
                 "feedback": {
-                  "state": "<p>Mauvaise réponse.</p>",
-                  "diagnosis": "<p>N'hésitez pas à consulter le récapitulatif ou les parties précédentes du module pour vous aider☝️</p>"
+                  "state": "<p>Bonne réponse !&nbsp; 🎉</p>",
+                  "diagnosis": "<p>Ce sont bien les calculs effectués par le supercalculateur et le refroidissement des machines qui consomment beaucoup d’énergie.</p>"
                 }
               },
               {
                 "id": "3",
-                "content": "<p>Lors du fonctionnement de l’IA pour répondre aux utilisateurs.</p>",
+                "content": "<p>L’éclairage et la vidéo-surveillance</p>",
                 "feedback": {
                   "state": "<p>Mauvaise réponse.</p>",
                   "diagnosis": "<p>N'hésitez pas à consulter le récapitulatif ou les parties précédentes du module pour vous aider☝️</p>"
                 }
-              },
-              {
-                "id": "4",
-                "content": "<p>Toutes les réponses ci-dessus.</p>",
-                "feedback": {
-                  "state": "<p>Bonne réponse ! 🎉<br></p>",
-                  "diagnosis": "<p>C’est bien de sa fabrication à son fonctionnement quotidien que l’IA consomme de l’énergie.</p>"
-                }
               }
             ],
-            "solution": "4"
-          }
-        }
-      ]
-    },
-    {
-      "id": "1cfe9ae6-5689-48d6-b19f-18663e6d40f3",
-      "type": "activity",
-      "title": "Deuxième activité texte à trous",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "a13aff9b-96c9-4dbb-b90a-757b31f391a0",
-            "type": "qrocm",
-            "instruction": "<p>Complétez les textes suivants :</p>",
-            "proposals": [
-              {
-                "type": "text",
-                "content": "<span>Ce qui permet à l’IA de réaliser des calculs, ce sont ses</span>"
-              },
-              {
-                "input": "trou1",
-                "type": "select",
-                "display": "inline",
-                "placeholder": "-Sélectionner-",
-                "ariaLabel": "sélectionner",
-                "defaultValue": "",
-                "tolerances": [],
-                "options": [
-                  {
-                    "id": "1",
-                    "content": "puces"
-                  },
-                  {
-                    "id": "2",
-                    "content": "requêtes"
-                  },
-                  {
-                    "id": "3",
-                    "content": "calculatrices"
-                  }
-                ],
-                "solutions": [
-                  "1"
-                ]
-              },
-              {
-                "type": "text",
-                "content": "<span>.&nbsp; <br><br><br>Elles ont besoin de beaucoup&nbsp;</span>"
-              },
-              {
-                "input": "trou 2",
-                "type": "select",
-                "display": "inline",
-                "placeholder": "-Sélectionner-",
-                "ariaLabel": "sélectionner",
-                "defaultValue": "",
-                "tolerances": [],
-                "options": [
-                  {
-                    "id": "1",
-                    "content": "d’utilisateurs"
-                  },
-                  {
-                    "id": "2",
-                    "content": "de ressources naturelles"
-                  },
-                  {
-                    "id": "3",
-                    "content": "de puissance de calcul"
-                  }
-                ],
-                "solutions": [
-                  "2"
-                ]
-              },
-              {
-                "type": "text",
-                "content": "<span>pour être fabriquées.<br><br><br>Les&nbsp;</span>"
-              },
-              {
-                "input": "trou 3",
-                "type": "select",
-                "display": "inline",
-                "placeholder": "-Sélectionner-",
-                "ariaLabel": "sélectionner",
-                "defaultValue": "",
-                "tolerances": [],
-                "options": [
-                  {
-                    "id": "1",
-                    "content": "prompts "
-                  },
-                  {
-                    "id": "2",
-                    "content": "métaux "
-                  },
-                  {
-                    "id": "3",
-                    "content": "supercalculateurs "
-                  }
-                ],
-                "solutions": [
-                  "3"
-                ]
-              },
-              {
-                "type": "text",
-                "content": "<span>&nbsp;sont composés de milliers de puces.<br><br><br>Un supercalculateur est est immense ordinateur qui regroupe des&nbsp;</span>"
-              },
-              {
-                "input": "trou 4",
-                "type": "select",
-                "display": "inline",
-                "placeholder": "-Sélectionner-",
-                "ariaLabel": "sélectionner",
-                "defaultValue": "",
-                "tolerances": [],
-                "options": [
-                  {
-                    "id": "1",
-                    "content": "centaines"
-                  },
-                  {
-                    "id": "2",
-                    "content": "milliers "
-                  },
-                  {
-                    "id": "3",
-                    "content": "millions "
-                  }
-                ],
-                "solutions": [
-                  "2"
-                ]
-              },
-              {
-                "type": "text",
-                "content": "<span>&nbsp;de puces spécialisées IA.<br><br><br>Leur fonctionnement demande beaucoup&nbsp;</span>"
-              },
-              {
-                "input": "trou 5",
-                "type": "select",
-                "display": "inline",
-                "placeholder": "-Sélectionner-",
-                "ariaLabel": "sélectionner",
-                "defaultValue": "",
-                "tolerances": [],
-                "options": [
-                  {
-                    "id": "1",
-                    "content": "de ressources naturelles"
-                  },
-                  {
-                    "id": "2",
-                    "content": "d'énergie"
-                  },
-                  {
-                    "id": "3",
-                    "content": "de place"
-                  }
-                ],
-                "solutions": [
-                  "1"
-                ]
-              },
-              {
-                "type": "text",
-                "content": "<span>&nbsp;.<br><br><br>Pour fonctionner, ils ont aussi besoin d’être&nbsp;</span>"
-              },
-              {
-                "input": "trou 6",
-                "type": "select",
-                "display": "inline",
-                "placeholder": "-Sélectionner-",
-                "ariaLabel": "sélectionner",
-                "defaultValue": "",
-                "tolerances": [],
-                "options": [
-                  {
-                    "id": "1",
-                    "content": "rassurés "
-                  },
-                  {
-                    "id": "2",
-                    "content": "refroidis "
-                  },
-                  {
-                    "id": "3",
-                    "content": "réchauffés "
-                  }
-                ],
-                "solutions": [
-                  "2"
-                ]
-              },
-              {
-                "type": "text",
-                "content": "<span>&nbsp;, et cela consomme encore davantage.</span>"
-              }
-            ],
-            "feedbacks": {
-              "valid": {
-                "state": "Bonnes réponses ! 🎉",
-                "diagnosis": ""
-              },
-              "invalid": {
-                "state": "Mauvaise réponse.",
-                "diagnosis": "N'hésitez pas à consulter le récapitulatif pour vous aider à remplir le texte ☝️"
-              }
-            }
+            "solution": "2"
           }
         }
       ]
@@ -886,49 +696,49 @@
     {
       "id": "afc05027-935b-4624-9212-b653781b1795",
       "type": "activity",
-      "title": "Troisième activité QCU",
+      "title": "QCU évaluation 2",
       "components": [
         {
           "type": "element",
           "element": {
             "id": "b7b1b0e7-ae82-415b-9241-11cdff8bbdfd",
             "type": "qcu",
-            "instruction": "<p>Parmi les propositions suivantes, quelle requête demandera le plus de puissance de calcul à l’IA ?</p>",
+            "instruction": "<p>Quelle requête à un logiciel d'IA générative consomme le plus d’énergie ?</p>",
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>Peux-tu rédiger <strong>le</strong> <strong>rapport de stage</strong> d’un étudiant sur la Station Spatiale Internationale en environ <strong>70 pages</strong> A4</p>",
+                "content": "<p>Rédiger un rapport de stage de <strong>70 pages</strong>.</p>",
                 "feedback": {
                   "state": "<p>Mauvaise réponse.</p>",
-                  "diagnosis": "<p>Même si ce rapport de stage fait 70 pages, ce n’est pas ce qui demandera le plus de puissance de calcul.</p><p><br></p>"
+                  "diagnosis": "<p>Même si ce rapport de stage fait 70 pages, ce n’est pas ce qui consommera le plus d'énergie.</p>"
                 }
               },
               {
                 "id": "2",
-                "content": "<p>Crée <strong>une</strong> <strong>vidéo de 15 secondes</strong> d’un chaton cosmonaute flottant dans l’espace dans un style photoréaliste.</p>",
+                "content": "<p>Crée <strong>une</strong> <strong>vidéo de 15 secondes</strong>.</p>",
                 "feedback": {
                   "state": "<p>Bonne réponse !&nbsp; 🎉</p>",
-                  "diagnosis": "<p>Tout à fait, c’est bien la création vidéo qui demande le plus de puissance de calcul.</p>"
+                  "diagnosis": "<p>Tout à fait, c’est bien la création vidéo qui demande le plus de <strong>puissance de calcul</strong>,&nbsp;et donc qui consommera le <strong>plus d’énergie</strong>.<br></p>"
                 }
               },
               {
                 "id": "3",
-                "content": "<p>Crée <strong>un</strong> <strong>poster</strong> publicitaire futuriste qui propose d’habiter sur la lune</p>",
+                "content": "<p>Créer&nbsp;<strong>un</strong> <strong>poster</strong> publicitaire </p>",
                 "feedback": {
                   "state": "<p>Mauvaise réponse.</p>",
-                  "diagnosis": "<p><br></p><p>Les images demandent souvent plus de calcul aux IA. Mais ce n’est pas la requête qui demande le plus de puissance dans la liste ci-dessus.</p>"
+                  "diagnosis": "<p>Les images demandent souvent plus de calcul aux logiciels d'IA générative. Mais ce n’est pas la requête qui consomme le plus d'énergie dans la liste ci-dessus.</p>"
                 }
               },
               {
                 "id": "4",
-                "content": "<p>Écris <strong>un mail</strong> de réclamation sérieux aux aliens qui ont enlevé une vache dans un champ sans autorisation</p>",
+                "content": "<p>Écris <strong>un mail</strong> de réclamation</p>",
                 "feedback": {
                   "state": "<p>Mauvaise réponse.</p>",
-                  "diagnosis": "<p>Un texte court ne demande pas beaucoup de puissance de calcul par rapport aux autres exemples ci-dessus.</p>"
+                  "diagnosis": "<p>Un texte court ne demande pas beaucoup d'énegie par rapport aux autres exemples ci-dessus.</p>"
                 }
               }
             ],
-            "solution": "3"
+            "solution": "2"
           }
         }
       ]
@@ -947,6 +757,7 @@
             "title": "Transfert",
             "url": "https://1024pix.github.io/atelier-contenus/FRI/IAEnvironnementTransfert04.html",
             "instruction": "<p>Maintenant, essayons de voir à quoi correspond la consommation d’énergie de <strong>votre utilisation de l’IA</strong>.</p>",
+            "solution": "-",
             "height": 800
           }
         }
