@@ -1,5 +1,5 @@
-import { UserOrganizationForAdmin } from '../../../../../src/shared/domain/read-models/UserOrganizationForAdmin.js';
 import { membershipAdminController } from '../../../../../src/team/application/membership/membership.admin.controller.js';
+import { UserOrganizationForAdmin } from '../../../../../src/team/domain/read-models/UserOrganizationForAdmin.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
 
