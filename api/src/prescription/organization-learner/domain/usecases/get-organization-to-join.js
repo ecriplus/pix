@@ -1,11 +1,18 @@
-import { NotFoundError } from '../../../../shared/domain/errors.js';
-
-export const getOrganizationToJoin = async function ({ code, organizationToJoinRepository, campaignRepository }) {
+export const getOrganizationToJoin = async function ({
+  code,
+  organizationToJoinRepository,
+  campaignRepository,
+  questRepository,
+}) {
   const campaign = await campaignRepository.getByCode(code);
-  if (!campaign) {
-    throw new NotFoundError('Aucun parcours trouvé pour le code ' + code);
+
+  if (campaign) {
+    return organizationToJoinRepository.get({ id: campaign.organizationId });
   }
+
+  const quest = await questRepository.getByCode({ code });
+
   return organizationToJoinRepository.get({
-    id: campaign.organizationId,
+    id: quest.organizationId,
   });
 };
