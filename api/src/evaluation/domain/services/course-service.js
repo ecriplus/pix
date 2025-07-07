@@ -1,5 +1,5 @@
-import * as courseRepository from '../../infrastructure/repositories/course-repository.js';
-import { NotFoundError } from '../errors.js';
+import { NotFoundError } from '../../../shared/domain/errors.js';
+import * as courseRepository from '../../../shared/infrastructure/repositories/course-repository.js';
 
 const getCourse = async function ({ courseId, dependencies = { courseRepository } }) {
   const course = await dependencies.courseRepository.get(courseId);

@@ -4,6 +4,7 @@ import * as autonomousCoursesRoutes from './application/autonomous-courses/index
 import * as badgeCriteriaRoutes from './application/badge-criteria/index.js';
 import * as badgesRoutes from './application/badges/index.js';
 import * as competenceEvaluationsRoutes from './application/competence-evaluations/index.js';
+import * as courses from './application/courses/course-route.js';
 import * as feedbacksRoutes from './application/feedbacks/index.js';
 import * as progressionsRoutes from './application/progressions/index.js';
 import * as scorecardsRoutes from './application/scorecards/index.js';
@@ -19,6 +20,7 @@ const evaluationRoutes = [
   badgeCriteriaRoutes,
   badgesRoutes,
   competenceEvaluationsRoutes,
+  courses,
   stageCollectionRoutes,
   feedbacksRoutes,
   progressionsRoutes,
