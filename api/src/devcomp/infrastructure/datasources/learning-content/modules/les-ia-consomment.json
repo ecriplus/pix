@@ -104,7 +104,7 @@
             "id": "9cb3a20f-cedf-45c9-8910-1e8086fdd728",
             "type": "embed",
             "isCompletionRequired": false,
-            "title": "",
+            "title": "POI",
             "url": "https://1024pix.github.io/atelier-contenus/FRI/protoAffichageProcessus02.html",
             "instruction": "<p>Cliquez sur \"Commencer\" pour voir le trajet d'une demande à un logiciel d'IA générative</p>",
             "solution": "-",
@@ -209,10 +209,10 @@
             "id": "9cb5f3ca-3b22-44f0-ad92-f7ccb778d0cf",
             "type": "embed",
             "isCompletionRequired": false,
-            "title": "",
+            "title": "POI",
             "url": "",
             "instruction": "<p>Découvrons <strong>comment le supercalculateur répond</strong> à la demande d’Enzo</p>",
-            "solution": "",
+            "solution": "-",
             "height": 0
           }
         }
@@ -282,7 +282,7 @@
             "title": "Charge supercalculateur",
             "url": "https://1024pix.github.io/atelier-contenus/FRI/IAEnvironnementInferenceSpinner02.html",
             "instruction": "<p>Imaginons que <strong>plusieurs personnes demandent la même chose en même temps</strong> à un logiciel d’IA générative. </p><p>Testez la <strong>capacité de calcul </strong>et la <strong>consommation électrique</strong> d’un supercalculateur en choisissant la demande et le nombre de requêtes. Puis répondez aux questions suivantes</p>",
-            "solution": "",
+            "solution": "-",
             "height": 470
           }
         },
@@ -573,7 +573,7 @@
           "element": {
             "id": "5d68cc81-8755-4887-9c28-30dfbe4286da",
             "type": "image",
-            "url": "",
+            "url": "https://assets.pix.org/modules/placeholder-details.svg",
             "alt": "-",
             "alternativeText": "<p>Évaluation</p>",
             "legend": "",
