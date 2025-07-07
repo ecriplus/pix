@@ -77,6 +77,23 @@ export const replications = [
       return datamartKnex('organizations_cover_rates').insert(chunk);
     },
   },
+  {
+    name: 'target_profiles_course_duration',
+    before: async ({ datamartKnex }) => {
+      await datamartKnex('target_profiles_course_duration').truncate();
+    },
+    from: ({ datawarehouseKnex }) => {
+      return datawarehouseKnex('data_target_profiles_course_duration').select(
+        'targetProfileId',
+        'median',
+        'quantile_75',
+        'quantile_95',
+      );
+    },
+    to: ({ datamartKnex }, chunk) => {
+      return datamartKnex('target_profiles_course_duration').insert(chunk);
+    },
+  },
 ];
 
 export function getByName(name, dependencies = { replications }) {
