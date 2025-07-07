@@ -49,7 +49,7 @@ describe('Unit | Application | Router | assessment-router', function () {
   describe('GET /api/assessments/{id}/next', function () {
     it('should return 200', async function () {
       // given
-      sinon.stub(assessmentController, 'getNextChallenge').returns('ok');
+      sinon.stub(assessmentController, 'getAssessmentWithNextChallenge').returns('ok');
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
 
@@ -68,7 +68,9 @@ describe('Unit | Application | Router | assessment-router', function () {
     it('should return 200', async function () {
       // given
       sinon.stub(assessmentAuthorization, 'verify').callsFake((request, h) => h.response(null));
-      sinon.stub(assessmentController, 'getNextChallenge').callsFake((request, h) => h.response('ok').code(200));
+      sinon
+        .stub(assessmentController, 'getAssessmentWithNextChallenge')
+        .callsFake((request, h) => h.response('ok').code(200));
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
 
@@ -82,7 +84,9 @@ describe('Unit | Application | Router | assessment-router', function () {
     it('should call pre-handler', async function () {
       // given
       sinon.stub(assessmentAuthorization, 'verify').callsFake((request, h) => h.response(null));
-      sinon.stub(assessmentController, 'getNextChallenge').callsFake((request, h) => h.response('ok').code(200));
+      sinon
+        .stub(assessmentController, 'getAssessmentWithNextChallenge')
+        .callsFake((request, h) => h.response('ok').code(200));
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
 
