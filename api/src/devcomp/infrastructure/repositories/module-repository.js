@@ -32,7 +32,11 @@ async function list({ moduleDatasource }) {
   return modulesData.map((moduleData) => ModuleFactory.build(moduleData));
 }
 
-export { getAllByIds, getById, getBySlug, list };
+function resetMemoizedModuleVersions() {
+  memoizedModuleVersions.clear();
+}
+
+export { getAllByIds, getById, getBySlug, list, resetMemoizedModuleVersions };
 
 function _computeModuleVersion(moduleData) {
   if (!memoizedModuleVersions.has(moduleData.slug)) {
