@@ -135,15 +135,7 @@ module('Integration | Component | Layout | Banners', function (hooks) {
       const screen = await render(<template><Banners /></template>);
 
       // then
-      assert
-        .dom(
-          screen.getByText(
-            (content) =>
-              content.startsWith('La Certification Pix se déroulera du 7 novembre 2024 au 7 mars 2025 ') &&
-              content.endsWith('Collèges : du 17 mars au 13 juin 2025.'),
-          ),
-        )
-        .exists();
+      assert.dom(screen.queryByText('La Certification Pix se déroulera ')).doesNotExist();
     });
   });
 

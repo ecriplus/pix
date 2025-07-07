@@ -7,7 +7,7 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
 export default class Banners extends Component {
-  @tracked isBannerVisible = true;
+  @tracked isBannerVisible = false;
   @service session;
   @service router;
   @service currentUser;

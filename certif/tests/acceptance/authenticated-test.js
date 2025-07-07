@@ -263,7 +263,7 @@ module('Acceptance | authenticated', function (hooks) {
   module('Banners', function () {
     module('certification opening dates banner', function () {
       module('when certification center is SCO isManagingStudent', function () {
-        test('it should display the banner', async function (assert) {
+        test('it should not display the banner', async function (assert) {
           // given
           const certificationPointOfContact =
             createScoIsManagingStudentsCertificationPointOfContactWithTermsOfServiceAccepted();
@@ -273,15 +273,7 @@ module('Acceptance | authenticated', function (hooks) {
           const screen = await visit('/sessions');
 
           // then
-          assert
-            .dom(
-              screen.getByText(
-                (content) =>
-                  content.startsWith('La Certification Pix se déroulera du 7 novembre 2024 au 7 mars 2025 ') &&
-                  content.endsWith('Collèges : du 17 mars au 13 juin 2025.'),
-              ),
-            )
-            .exists();
+          assert.dom(screen.queryByText('La Certification Pix se déroulera du', { exact: false })).doesNotExist();
         });
       });
 
