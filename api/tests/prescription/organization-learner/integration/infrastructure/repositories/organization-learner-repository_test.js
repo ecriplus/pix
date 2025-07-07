@@ -1,8 +1,12 @@
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../../src/identity-access-management/domain/constants/identity-providers.js';
+import { AttestationParticipantStatus } from '../../../../../../src/prescription/organization-learner/domain/read-models/AttestationParticipantStatus.js';
 import { OrganizationLearner } from '../../../../../../src/prescription/organization-learner/domain/read-models/OrganizationLearner.js';
-import * as organizationLearnerRepository from '../../../../../../src/prescription/organization-learner/infrastructure/repositories/organization-learner-repository.js';
+import { repositories } from '../../../../../../src/prescription/organization-learner/infrastructure/repositories/index.js';
+import { User } from '../../../../../../src/profile/domain/models/User.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
+
+const { organizationLearnerRepository } = repositories;
 
 describe('Integration | Infrastructure | Repository | Organization Learner', function () {
   describe('#get', function () {
@@ -765,6 +769,139 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
 
         // then
         expect(result).to.have.lengthOf(2);
+      });
+    });
+  });
+
+  describe('#getAttestationStatusForOrganizationLearnersAndKey', function () {
+    context('when no organization learner has obtained his attestation', function () {
+      it('should return attestation participants status with obtainedAt at null', async function () {
+        // given
+        const attestation = databaseBuilder.factory.buildAttestation();
+        const firstUser = new User(databaseBuilder.factory.buildUser({ firstName: 'alex', lastName: 'Terieur' }));
+        const secondUser = new User(databaseBuilder.factory.buildUser({ firstName: 'theo', lastName: 'Courant' }));
+        const organizationId = databaseBuilder.factory.buildOrganization().id;
+        const organizationLearner1 = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId,
+          firstName: 'firstName1',
+          lastName: 'lastName1',
+          division: '6eme A',
+          userId: firstUser.id,
+        });
+        const organizationLearner2 = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId,
+          firstName: 'firstName2',
+          lastName: 'lastName2',
+          division: '6eme B',
+          userId: secondUser.id,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const result = await organizationLearnerRepository.getAttestationStatusForOrganizationLearnersAndKey({
+          organizationId,
+          organizationLearners: [organizationLearner1, organizationLearner2],
+          attestationKey: attestation.key,
+        });
+
+        // then
+        expect(result).to.have.lengthOf(2);
+        expect(result[0]).to.be.instanceOf(AttestationParticipantStatus);
+        expect(result).to.have.deep.members([
+          {
+            id: `SIXTH_GRADE_${organizationLearner1.id}`,
+            attestationKey: 'SIXTH_GRADE',
+            division: organizationLearner1.division,
+            firstName: organizationLearner1.firstName,
+            lastName: organizationLearner1.lastName,
+            obtainedAt: null,
+            organizationLearnerId: organizationLearner1.id,
+          },
+          {
+            id: `SIXTH_GRADE_${organizationLearner2.id}`,
+            attestationKey: 'SIXTH_GRADE',
+            division: organizationLearner2.division,
+            firstName: organizationLearner2.firstName,
+            lastName: organizationLearner2.lastName,
+            obtainedAt: null,
+            organizationLearnerId: organizationLearner2.id,
+          },
+        ]);
+      });
+    });
+
+    context('when organization learner has obtained his attestation', function () {
+      it('should return attestation participants status with obtainedAt filled', async function () {
+        // given
+        const attestation = databaseBuilder.factory.buildAttestation();
+        const firstUser = new User(databaseBuilder.factory.buildUser({ firstName: 'alex', lastName: 'Terieur' }));
+        const secondUser = new User(databaseBuilder.factory.buildUser({ firstName: 'theo', lastName: 'Courant' }));
+        const organizationId = databaseBuilder.factory.buildOrganization().id;
+        const organizationLearner1 = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId,
+          firstName: 'firstName1',
+          lastName: 'lastName1',
+          division: '6eme A',
+          userId: firstUser.id,
+        });
+        const organizationLearner2 = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId,
+          firstName: 'firstName2',
+          lastName: 'lastName2',
+          division: '6eme B',
+          userId: secondUser.id,
+        });
+
+        const firstProfileReward = databaseBuilder.factory.buildProfileReward({
+          rewardId: attestation.id,
+          userId: firstUser.id,
+        });
+        databaseBuilder.factory.buildOrganizationsProfileRewards({
+          organizationId,
+          profileRewardId: firstProfileReward.id,
+        });
+        const secondProfileReward = databaseBuilder.factory.buildProfileReward({
+          rewardId: attestation.id,
+          userId: secondUser.id,
+        });
+        databaseBuilder.factory.buildOrganizationsProfileRewards({
+          organizationId,
+          profileRewardId: secondProfileReward.id,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const result = await organizationLearnerRepository.getAttestationStatusForOrganizationLearnersAndKey({
+          organizationId,
+          organizationLearners: [organizationLearner1, organizationLearner2],
+          attestationKey: attestation.key,
+        });
+
+        // then
+        expect(result).to.have.lengthOf(2);
+        expect(result[0]).to.be.instanceOf(AttestationParticipantStatus);
+        expect(result).to.have.deep.members([
+          {
+            id: `SIXTH_GRADE_${organizationLearner1.id}`,
+            attestationKey: 'SIXTH_GRADE',
+            division: organizationLearner1.division,
+            firstName: organizationLearner1.firstName,
+            lastName: organizationLearner1.lastName,
+            obtainedAt: firstProfileReward.createdAt,
+            organizationLearnerId: organizationLearner1.id,
+          },
+          {
+            id: `SIXTH_GRADE_${organizationLearner2.id}`,
+            attestationKey: 'SIXTH_GRADE',
+            division: organizationLearner2.division,
+            firstName: organizationLearner2.firstName,
+            lastName: organizationLearner2.lastName,
+            obtainedAt: secondProfileReward.createdAt,
+            organizationLearnerId: organizationLearner2.id,
+          },
+        ]);
       });
     });
   });

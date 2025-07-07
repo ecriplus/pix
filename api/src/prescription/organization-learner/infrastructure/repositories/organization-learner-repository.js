@@ -4,6 +4,7 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
 import { filterByFullName } from '../../../../shared/infrastructure/utils/filter-utils.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { CampaignParticipationStatuses, CampaignTypes } from '../../../shared/domain/constants.js';
+import { AttestationParticipantStatus } from '../../domain/read-models/AttestationParticipantStatus.js';
 import { OrganizationLearner } from '../../domain/read-models/OrganizationLearner.js';
 
 function _buildIsCertifiable(queryBuilder, organizationLearnerId) {
@@ -146,9 +147,34 @@ async function getAttestationsForOrganizationLearnersAndKey({
   });
 }
 
+async function getAttestationStatusForOrganizationLearnersAndKey({
+  attestationKey,
+  organizationLearners,
+  organizationId,
+  attestationsApi,
+}) {
+  const userIds = organizationLearners.map((learner) => learner.userId);
+  const attestations = await attestationsApi.getAttestationsUserDetail({
+    attestationKey,
+    userIds,
+    organizationId,
+  });
+  return organizationLearners.map((organizationLearner) => {
+    const attestation = attestations.find(({ userId }) => userId === organizationLearner.userId);
+    return new AttestationParticipantStatus({
+      attestationKey,
+      organizationLearnerId: organizationLearner.id,
+      obtainedAt: attestation?.createdAt,
+      ...attestation,
+      ...organizationLearner,
+    });
+  });
+}
+
 export {
   findOrganizationLearnersByDivisions,
   findPaginatedLearners,
   get,
   getAttestationsForOrganizationLearnersAndKey,
+  getAttestationStatusForOrganizationLearnersAndKey,
 };
