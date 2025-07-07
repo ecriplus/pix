@@ -633,6 +633,7 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
             organizationId,
             firstName: 'Zoé',
             attributes: { 'Libellé classe': 'Rogue' },
+            division: '6ème',
           });
 
           await databaseBuilder.commit();
@@ -643,7 +644,7 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
               size: 1,
               number: 1,
             },
-            filter: { 'Libellé classe': ['Witch', 'Rogue'], name: 'Zoé' },
+            filter: { 'Libellé classe': ['Witch', 'Rogue'], name: 'Zoé', divisions: ['6ème'] },
           });
 
           expect(result.pagination).to.deep.equal({

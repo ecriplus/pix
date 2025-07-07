@@ -1339,6 +1339,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
               ...firstOrganizationLearnerInDB,
               organizationName: firstOrganizationInDB.name,
               canBeDissociated: firstOrganizationInDB.isManagingStudents,
+              division: null,
             },
             {
               ...secondOrganizationLearnerInDB,

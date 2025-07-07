@@ -85,14 +85,14 @@ async function get({ organizationLearnerId }) {
 
 async function findPaginatedLearners({ organizationId, page, filter }) {
   const query = knex
-    .select('id', 'firstName', 'lastName', 'organizationId', 'attributes')
+    .select('id', 'userId', 'firstName', 'lastName', 'organizationId', 'attributes')
     .from('view-active-organization-learners')
     .where({ isDisabled: false, organizationId })
     .orderByRaw('LOWER("firstName") ASC')
     .orderByRaw('LOWER("lastName") ASC');
 
   if (filter) {
-    const { name, ...attributesToFilter } = filter;
+    const { name, divisions, ...attributesToFilter } = filter;
     Object.entries(attributesToFilter)
       .filter(([_, values]) => values !== undefined)
       .forEach(([name, values]) => {
@@ -103,6 +103,9 @@ async function findPaginatedLearners({ organizationId, page, filter }) {
       });
     if (name) {
       filterByFullName(query, name, 'firstName', 'lastName');
+    }
+    if (divisions?.length > 0) {
+      query.whereIn('division', divisions);
     }
   }
 
