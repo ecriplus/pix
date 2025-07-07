@@ -25,7 +25,7 @@ export default class ChallengeRoute extends Route {
       if (assessment.isPreview && params.challengeId) {
         challenge = await this.store.findRecord('challenge', params.challengeId);
       } else if (!assessment.isPreview) {
-        challenge = await this.store.queryRecord('challenge', { assessmentId: assessment.id });
+        challenge = assessment.nextChallenge;
       }
     }
 

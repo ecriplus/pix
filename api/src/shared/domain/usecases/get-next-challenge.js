@@ -1,18 +1,15 @@
-import { AssessmentEndedError } from '../errors.js';
-
 export async function getNextChallenge({
-  assessmentId,
+  assessment,
   userId,
   locale,
   assessmentRepository,
-  answerRepository,
   challengeRepository,
   evaluationUsecases,
   certificationEvaluationRepository,
 }) {
-  const assessment = await assessmentRepository.get(assessmentId);
   if (!assessment.isStarted()) {
-    throw new AssessmentEndedError();
+    assessment.nextChallenge = null;
+    return assessment;
   }
   await assessmentRepository.updateLastQuestionDate({ id: assessment.id, lastQuestionDate: new Date() });
 
@@ -22,41 +19,45 @@ export async function getNextChallenge({
     // Force executing the usecase because of the live alert system
     waitingForLatestChallengeAnswer = false;
   } else {
-    const answers = await answerRepository.findByAssessment(assessment.id);
     waitingForLatestChallengeAnswer = checkIfLatestChallengeOfAssessmentIsAwaitingToBeAnswered({
-      answers,
+      answers: assessment.answers,
       lastChallengeId: assessment.lastChallengeId,
     });
   }
   if (waitingForLatestChallengeAnswer) {
     nextChallenge = await challengeRepository.get(assessment.lastChallengeId);
     if (nextChallenge.isOperative) {
-      return nextChallenge;
+      assessment.nextChallenge = nextChallenge;
+      return assessment;
     } else {
       nextChallenge = null;
     }
   }
-  if (assessment.isCertification()) {
-    nextChallenge = await certificationEvaluationRepository.selectNextCertificationChallenge({
-      assessmentId: assessment.id,
-      locale,
-    });
-  }
 
-  if (assessment.isPreview()) {
-    nextChallenge = await evaluationUsecases.getNextChallengeForPreview({});
-  }
+  try {
+    if (assessment.isCertification()) {
+      nextChallenge = await certificationEvaluationRepository.selectNextCertificationChallenge({
+        assessmentId: assessment.id,
+        locale,
+      });
+    }
 
-  if (assessment.isDemo()) {
-    nextChallenge = await evaluationUsecases.getNextChallengeForDemo({ assessment });
-  }
+    if (assessment.isPreview()) {
+      nextChallenge = await evaluationUsecases.getNextChallengeForPreview({});
+    }
 
-  if (assessment.isForCampaign()) {
-    nextChallenge = await evaluationUsecases.getNextChallengeForCampaignAssessment({ assessment, locale });
-  }
+    if (assessment.isDemo()) {
+      nextChallenge = await evaluationUsecases.getNextChallengeForDemo({ assessment });
+    }
 
-  if (assessment.isCompetenceEvaluation()) {
-    nextChallenge = await evaluationUsecases.getNextChallengeForCompetenceEvaluation({ assessment, userId, locale });
+    if (assessment.isForCampaign()) {
+      nextChallenge = await evaluationUsecases.getNextChallengeForCampaignAssessment({ assessment, locale });
+    }
+    if (assessment.isCompetenceEvaluation()) {
+      nextChallenge = await evaluationUsecases.getNextChallengeForCompetenceEvaluation({ assessment, userId, locale });
+    }
+  } catch {
+    nextChallenge = null;
   }
 
   if (nextChallenge && nextChallenge.id !== assessment.lastChallengeId) {
@@ -65,8 +66,9 @@ export async function getNextChallenge({
       lastChallengeId: nextChallenge.id,
     });
   }
+  assessment.nextChallenge = nextChallenge;
 
-  return nextChallenge;
+  return assessment;
 }
 
 function checkIfLatestChallengeOfAssessmentIsAwaitingToBeAnswered({ answers, lastChallengeId }) {

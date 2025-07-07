@@ -26,10 +26,10 @@ export default class ResumeRoute extends Route {
     if (!transition.to.parent.params.assessment_id) {
       this.assessmentHasNoMoreQuestions = false;
     } else {
-      const nextChallenge = await this.store.queryRecord('challenge', {
+      const assessment = await this.store.queryRecord('challenge', {
         assessmentId: transition.to.parent.params.assessment_id,
       });
-      this.assessmentHasNoMoreQuestions = !nextChallenge;
+      this.assessmentHasNoMoreQuestions = !assessment.nextChallenge;
     }
   }
 

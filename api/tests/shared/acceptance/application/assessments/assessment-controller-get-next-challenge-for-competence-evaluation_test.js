@@ -118,6 +118,22 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-compet
         clock.restore();
       });
 
+      it('should return assessment with title', async function () {
+        // given
+        const options = {
+          method: 'GET',
+          url: `/api/assessments/${assessmentId}/next`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.result.data.id).to.equal(assessmentId.toString());
+        expect(response.result.data.attributes.title).to.equal('Mener une recherche et une veille d’information');
+      });
+
       it('should return the second challenge if the first answer is correct', async function () {
         // given
         const options = {
@@ -134,7 +150,8 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-compet
         // then
         const assessmentsInDb = await knex('assessments').where('id', assessmentId).first('lastQuestionDate');
         expect(assessmentsInDb.lastQuestionDate).to.deep.equal(lastQuestionDate);
-        expect(response.result.data.id).to.equal(secondChallengeId);
+        expect(response.result.data.id).to.equal(assessmentId.toString());
+        expect(response.result.data.relationships['next-challenge'].data.id).to.equal(secondChallengeId);
       });
 
       it('should save the asked challenge', async function () {
@@ -151,7 +168,8 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-compet
         // then
         const assessmentsInDb = await knex('assessments').where('id', assessmentId).first('lastChallengeId');
         expect(assessmentsInDb.lastChallengeId).to.deep.equal(secondChallengeId);
-        expect(response.result.data.id).to.equal(secondChallengeId);
+        expect(response.result.data.id).to.equal(assessmentId.toString());
+        expect(response.result.data.relationships['next-challenge'].data.id).to.equal(secondChallengeId);
       });
     });
 
@@ -221,9 +239,8 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-compet
 
         // then
         expect(response.statusCode).to.equal(200);
-        expect(response.result).to.deep.equal({
-          data: null,
-        });
+        expect(response.result.data.id).to.equal(assessmentId.toString());
+        expect(response.result.data.relationships['next-challenge'].data).to.be.null;
       });
 
       it('should not save a null challenge for the lastChallengeId', async function () {

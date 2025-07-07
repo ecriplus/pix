@@ -18,6 +18,8 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
         certificationCourseId,
         answers,
       });
+      const challenge = domainBuilder.buildChallenge({ id: 'challenge0' });
+      assessment.nextChallenge = challenge;
       assessment.hasCheckpoints = false;
       assessment.showProgressBar = false;
       assessment.showLevelup = false;
@@ -74,6 +76,12 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
                 related: `/api/certification-courses/${certificationCourseId}`,
               },
             },
+            'next-challenge': {
+              data: {
+                id: 'challenge0',
+                type: 'challenges',
+              },
+            },
           },
         },
         included: [
@@ -85,6 +93,30 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
               name: assessment.course.name,
               'nb-challenges': assessment.course.nbChallenges,
             },
+          },
+          {
+            attributes: {
+              'alternative-instruction': 'Des instructions alternatives',
+              attachments: ['URL pièce jointe'],
+              'auto-reply': false,
+              'embed-height': undefined,
+              'embed-title': undefined,
+              'embed-url': undefined,
+              focused: false,
+              format: 'petit',
+              'illustration-alt': "Le texte de l'illustration",
+              'illustration-url': "Une URL vers l'illustration",
+              instruction: 'Des instructions',
+              locales: ['fr'],
+              proposals: 'Une proposition',
+              shuffled: false,
+              timer: undefined,
+              type: 'QCM',
+              'web-component-props': undefined,
+              'web-component-tag-name': undefined,
+            },
+            id: 'challenge0',
+            type: 'challenges',
           },
         ],
       };

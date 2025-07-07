@@ -61,10 +61,11 @@ module('Acceptance | Application', function (hooks) {
 
     test('should rewrite id in URL', async function (assert) {
       // given
+      const challenge = server.create('challenge', 'forCompetenceEvaluation', 'QROCM', {});
       server.create('assessment', 'ofCompetenceEvaluationType', {
+        nextChallenge: challenge,
         id: 1,
       });
-      server.create('challenge', 'forCompetenceEvaluation', 'QROCM', {});
 
       const metricService = this.owner.lookup('service:metrics');
       await visit('/assessments/1/challenges/0');
@@ -91,10 +92,11 @@ module('Acceptance | Application', function (hooks) {
     test('should forward query params', async function (assert) {
       // given
       const metricService = this.owner.lookup('service:metrics');
+      const challenge = server.create('challenge', 'forCompetenceEvaluation', 'QROCM', {});
       server.create('assessment', 'ofCompetenceEvaluationType', {
         id: 1,
+        nextChallenge: challenge,
       });
-      server.create('challenge', 'forCompetenceEvaluation', 'QROCM', {});
 
       // when
       await visit('/assessments/1/challenges/0?id=1');

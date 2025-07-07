@@ -13,8 +13,8 @@ module('Acceptance | Download an attachment from a challenge', function (hooks) 
   let assessment;
 
   hooks.beforeEach(function () {
-    assessment = server.create('assessment', 'ofCompetenceEvaluationType');
     challengeWithAttachment = server.create('challenge', 'forCompetenceEvaluation', 'withAttachment');
+    assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: challengeWithAttachment });
     server.create('challenge', 'forCompetenceEvaluation');
   });
 

@@ -67,11 +67,12 @@ module('Acceptance | Challenge page banner', function (hooks) {
 
       hooks.beforeEach(function () {
         server.create('feature-toggle', { id: '0', isTextToSpeechButtonEnabled: true });
-        assessment = server.create('assessment', 'ofCompetenceEvaluationType', {
-          title: 'Assessment title',
-        });
         challenge = server.create('challenge', 'forCompetenceEvaluation', 'QROCM', {
           instruction: 'Instruction à lire',
+        });
+        assessment = server.create('assessment', 'ofCompetenceEvaluationType', {
+          title: 'Assessment title',
+          nextChallenge: challenge,
         });
       });
 

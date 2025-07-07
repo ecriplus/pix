@@ -113,7 +113,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-campai
         clock.restore();
       });
 
-      it('should return a challenge', async function () {
+      it('should return an assessment', async function () {
         // given
         const options = {
           method: 'GET',
@@ -129,7 +129,8 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-campai
         // then
         const assessmentsInDb = await knex('assessments').where('id', assessmentId).first('lastQuestionDate');
         expect(assessmentsInDb.lastQuestionDate).to.deep.equal(lastQuestionDate);
-        expect(response.result.data.id).to.be.oneOf([
+        expect(response.result.data.id).to.equal(assessmentId.toString());
+        expect(response.result.data.relationships['next-challenge'].data.id).to.be.oneOf([
           firstChallengeId,
           secondChallengeId,
           thirdChallengeId,

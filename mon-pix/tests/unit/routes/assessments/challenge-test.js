@@ -73,20 +73,19 @@ module('Unit | Route | Assessments | Challenge', function (hooks) {
     });
 
     module('when accessing next challenge', function () {
-      test('should correctly call the store to find assessment and challenge', async function (assert) {
+      test('should correctly call the store to find assessment', async function (assert) {
         // given
         model.assessment.orderedChallengeIdsAnswered = [];
         const challenge = Symbol('challenge');
-        queryRecordStub.withArgs('challenge', { assessmentId: model.assessment.id }).resolves(challenge);
+        model.assessment.nextChallenge = challenge;
 
         // when
         const returnedModel = await route.model(params);
 
         // then
         sinon.assert.calledWith(route.modelFor, 'assessments');
-        sinon.assert.calledOnceWithExactly(queryRecordStub, 'challenge', { assessmentId: assessment.id });
         assert.strictEqual(returnedModel.answer, null);
-        assert.strictEqual(returnedModel.challenge, challenge);
+        assert.strictEqual(returnedModel.assessment.nextChallenge, challenge);
       });
     });
 

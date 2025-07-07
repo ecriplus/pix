@@ -1,19 +1,15 @@
 /**
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationEvaluationRepository} CertificationEvaluationRepository
  */
-import { Serializer as JSONAPISerializer } from 'jsonapi-serializer';
-
 import { usecases as certificationUsecases } from '../../../certification/session-management/domain/usecases/index.js';
 import { Answer } from '../../../evaluation/domain/models/Answer.js';
 import { evaluationUsecases } from '../../../evaluation/domain/usecases/index.js';
 import * as competenceEvaluationSerializer from '../../../evaluation/infrastructure/serializers/jsonapi/competence-evaluation-serializer.js';
 import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
-import { AssessmentEndedError } from '../../domain/errors.js';
 import { sharedUsecases } from '../../domain/usecases/index.js';
 import * as assessmentRepository from '../../infrastructure/repositories/assessment-repository.js';
 import * as assessmentSerializer from '../../infrastructure/serializers/jsonapi/assessment-serializer.js';
-import * as challengeSerializer from '../../infrastructure/serializers/jsonapi/challenge-serializer.js';
 import {
   extractLocaleFromRequest,
   extractUserIdFromRequest,
@@ -27,32 +23,17 @@ const save = async function (request, h, dependencies = { assessmentRepository }
   return h.response(assessmentSerializer.serialize(createdAssessment)).created();
 };
 
-const get = async function (request, _, dependencies = { assessmentSerializer }) {
-  const assessmentId = request.params.id;
-  const locale = extractLocaleFromRequest(request);
-
-  const assessment = await sharedUsecases.getAssessment({ assessmentId, locale });
-
-  return dependencies.assessmentSerializer.serialize(assessment);
-};
-
 const getNextChallenge = async function (request) {
   const assessmentId = request.params.id;
   const locale = extractLocaleFromRequest(request);
   const userId = extractUserIdFromRequest(request);
 
-  try {
-    const challenge = await DomainTransaction.execute(() => {
-      return sharedUsecases.getNextChallenge({ assessmentId, userId, locale });
-    });
-    return challengeSerializer.serialize(challenge);
-  } catch (error) {
-    if (error instanceof AssessmentEndedError) {
-      const object = new JSONAPISerializer('', {});
-      return object.serialize(null);
-    }
-    throw error;
-  }
+  const assessment = await DomainTransaction.execute(async () => {
+    const assessmentWithoutChallenge = await sharedUsecases.getAssessment({ assessmentId, locale });
+
+    return sharedUsecases.getNextChallenge({ assessment: assessmentWithoutChallenge, userId, locale });
+  });
+  return assessmentSerializer.serialize(assessment);
 };
 
 const updateLastChallengeState = async function (request) {
@@ -135,7 +116,6 @@ const createCertificationChallengeLiveAlert = async function (request, h) {
 
 const assessmentController = {
   save,
-  get,
   getNextChallenge,
   updateLastChallengeState,
   findCompetenceEvaluations,

@@ -49,11 +49,12 @@ module('Acceptance | Competence Evaluations | Resume Competence Evaluations', f
       module('When competence evaluation exists', function () {
         test('should redirect to assessment', async function (assert) {
           // given & when
+          server.create('challenge', { id: 'recCOMPEVAL0', instruction: 'consigne de test' });
           const screen = await visit('/competences/1/evaluer');
 
           // then
-          assert.ok(currentURL().includes('/assessments/'));
-          assert.dom(screen.getByRole('banner')).exists();
+          assert.strictEqual(currentURL(), '/assessments/1/challenges/0');
+          assert.dom(screen.getByText('consigne de test')).exists();
         });
       });
 

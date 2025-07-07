@@ -18,8 +18,8 @@ module('Acceptance | Tutorial | Actions', function (hooks) {
     user = server.create('user', 'withEmail');
     firstScorecard = user.scorecards.models[0];
     competenceId = firstScorecard.competenceId;
-    const assessment = server.create('assessment', 'ofCompetenceEvaluationType');
-    server.create('challenge', 'forCompetenceEvaluation', 'QCM');
+    const challenge = server.create('challenge', 'forCompetenceEvaluation', 'QCM');
+    const assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: challenge });
     server.create('competence-evaluation', { user, competenceId, assessment });
 
     // when

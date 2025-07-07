@@ -15,17 +15,15 @@ module('Acceptance | Displaying a QROCM challenge', function (hooks) {
   let assessment;
   let qrocmDepChallenge;
 
-  hooks.beforeEach(async function () {
-    assessment = server.create('assessment', 'ofCompetenceEvaluationType');
-  });
-
   module('When challenge is not already answered', function () {
     module('and challenge only has input fields', function (hooks) {
       let screen;
 
       hooks.beforeEach(async function () {
-        // when
+        // given
         qrocmDepChallenge = server.create('challenge', 'forCompetenceEvaluation', 'QROCMDep');
+        assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: qrocmDepChallenge });
+        // when
         screen = await visit(`/assessments/${assessment.id}/challenges/0`);
       });
 
@@ -82,10 +80,15 @@ module('Acceptance | Displaying a QROCM challenge', function (hooks) {
       });
     });
 
-    module('and challenge contains select field', function () {
+    module('and challenge contains select field', function (hooks) {
+      hooks.beforeEach(async function () {
+        // given
+        qrocmDepChallenge = server.create('challenge', 'forCompetenceEvaluation', 'QROCMWithSelect');
+        assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: qrocmDepChallenge });
+      });
+
       test('should not be able to validate with the initial option', async function (assert) {
         // given
-        server.create('challenge', 'forCompetenceEvaluation', 'QROCMWithSelect');
         const screen = await visit(`/assessments/${assessment.id}/challenges/0`);
 
         // when
@@ -98,7 +101,6 @@ module('Acceptance | Displaying a QROCM challenge', function (hooks) {
 
       test('should not be able to validate the empty option', async function (assert) {
         // given
-        server.create('challenge', 'forCompetenceEvaluation', 'QROCMWithSelect');
         const screen = await visit(`/assessments/${assessment.id}/challenges/0`);
 
         // when
@@ -113,7 +115,6 @@ module('Acceptance | Displaying a QROCM challenge', function (hooks) {
 
       test('should validate an option and redirect to next page', async function (assert) {
         // given
-        server.create('challenge', 'forCompetenceEvaluation', 'QROCMWithSelect');
         const screen = await visit(`/assessments/${assessment.id}/challenges/0`);
 
         // when
@@ -134,12 +135,14 @@ module('Acceptance | Displaying a QROCM challenge', function (hooks) {
 
       hooks.beforeEach(async function () {
         // given
+        const alreadyAnsweredChallenge = server.create('challenge', 'forCompetenceEvaluation', 'QROCMDep');
         qrocmDepChallenge = server.create('challenge', 'forCompetenceEvaluation', 'QROCMDep');
+        assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: qrocmDepChallenge });
         server.create('answer', {
           value: "station1: 'Republique'\nstation2: 'Chatelet'\n",
           result: 'ko',
           assessment,
-          challenge: qrocmDepChallenge,
+          challenge: alreadyAnsweredChallenge,
         });
 
         // when
@@ -164,12 +167,14 @@ module('Acceptance | Displaying a QROCM challenge', function (hooks) {
     module('and challenge contains select field', function () {
       test('should set the select with previous answer and propose to continue', async function (assert) {
         // given
-        const qrocmWithSelectChallenge = server.create('challenge', 'forCompetenceEvaluation', 'QROCMWithSelect');
+        const alreadyAnsweredChallenge = server.create('challenge', 'forCompetenceEvaluation', 'QROCMWithSelect');
+        qrocmDepChallenge = server.create('challenge', 'forCompetenceEvaluation', 'QROCMDep');
+        assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: qrocmDepChallenge });
         server.create('answer', {
           value: "banana: 'mango'\n",
           result: 'ko',
           assessment,
-          challenge: qrocmWithSelectChallenge,
+          challenge: alreadyAnsweredChallenge,
         });
 
         // when
@@ -196,6 +201,8 @@ module('Acceptance | Displaying a QROCM challenge', function (hooks) {
 
     hooks.beforeEach(async function () {
       // given
+      assessment = server.create('assessment', 'ofCompetenceEvaluationType');
+
       qrocmDepChallenge = server.create('challenge', 'forCompetenceEvaluation', 'QROCMDep');
       qrocmIndChallenge = server.create('challenge', 'forCompetenceEvaluation', 'QROCMind');
       qrocmIndSelectChallenge = server.create('challenge', 'forCompetenceEvaluation', 'QROCMWithSelect');

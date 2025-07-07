@@ -41,6 +41,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
             id: 'course_id',
             competenceId: 'competence_id',
             challengeIds: ['first_challenge', 'second_challenge'],
+            name: 'Test statique de démo',
           },
         ],
       },
@@ -75,7 +76,10 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
         const response = await server.inject(options);
         expect(response.statusCode).to.equal(200);
         expect(response.headers['content-type']).to.contain('application/json');
-        expect(response.result.data.id).to.equal('first_challenge');
+        expect(response.result.data.id).to.equal(assessmentId.toString());
+        expect(response.result.data.attributes.title).to.equal('Test statique de démo');
+        expect(response.result.data.relationships['next-challenge'].data.id).to.equal('first_challenge');
+        expect(response.result.included.find(({ id }) => id === 'first_challenge')).to.exist;
       });
     });
 
@@ -102,7 +106,8 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
         const response = await server.inject(options);
 
         // then
-        expect(response.result.data.id).to.equal('second_challenge');
+        expect(response.result.data.id).to.equal(assessmentId.toString());
+        expect(response.result.data.relationships['next-challenge'].data.id).to.equal('second_challenge');
       });
     });
 
@@ -130,7 +135,8 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
         const response = await server.inject(options);
 
         // then
-        expect(response.result.data.id).to.equal('first_challenge');
+        expect(response.result.data.id).to.equal(assessmentId.toString());
+        expect(response.result.data.relationships['next-challenge'].data.id).to.equal('first_challenge');
       });
     });
 
@@ -146,7 +152,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
         return databaseBuilder.commit();
       });
 
-      it('should finish the test', async function () {
+      it('should return the assessment with no next challenge', async function () {
         // given
         const options = {
           method: 'GET',
@@ -158,9 +164,8 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
 
         // then
         expect(response.statusCode).to.equal(200);
-        expect(response.result).to.deep.equal({
-          data: null,
-        });
+        expect(response.result.data.id).to.equal(assessmentId.toString());
+        expect(response.result.data.relationships['next-challenge'].data).to.be.null;
       });
     });
   });

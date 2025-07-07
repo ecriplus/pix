@@ -16,8 +16,10 @@ module('Acceptance | Displaying a QCU challenge', function (hooks) {
   let qcuChallenge;
 
   hooks.beforeEach(async function () {
-    assessment = server.create('assessment', 'ofCompetenceEvaluationType');
     qcuChallenge = server.create('challenge', 'forCompetenceEvaluation', 'QCU');
+    assessment = server.create('assessment', 'ofCompetenceEvaluationType', {
+      nextChallenge: qcuChallenge,
+    });
   });
 
   module('When challenge is not already answered', function (hooks) {
@@ -28,7 +30,7 @@ module('Acceptance | Displaying a QCU challenge', function (hooks) {
       screen = await visit(`/assessments/${assessment.id}/challenges/0`);
     });
 
-    test('should render challenge information and question', function (assert) {
+    test('should render challenge information and question', async function (assert) {
       // then
       assert.ok(screen.getByText(qcuChallenge.instruction));
       assert.strictEqual(screen.getAllByRole('radio', { name: /possibilite/ }).length, 4);

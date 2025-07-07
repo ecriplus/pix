@@ -1,5 +1,4 @@
 import EmberObject from '@ember/object';
-import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -8,20 +7,9 @@ module('Unit | Route | Assessments | Resume', function (hooks) {
   setupTest(hooks);
 
   let route;
-  let storeStub;
-  let findRecordStub;
-  let queryRecordStub;
 
   hooks.beforeEach(function () {
-    findRecordStub = sinon.stub();
-    queryRecordStub = sinon.stub();
-    storeStub = Service.create({
-      findRecord: findRecordStub,
-      queryRecord: queryRecordStub,
-    });
-
     route = this.owner.lookup('route:assessments.resume');
-    this.owner.register('service:store', storeStub);
     route.router = { replaceWith: sinon.stub() };
   });
 
@@ -42,11 +30,7 @@ module('Unit | Route | Assessments | Resume', function (hooks) {
     });
 
     module('when the next challenge exists', function (hooks) {
-      let nextChallenge;
-
       hooks.beforeEach(function () {
-        nextChallenge = EmberObject.create({ id: '456' });
-        queryRecordStub.resolves(nextChallenge);
         route.assessmentHasNoMoreQuestions = false;
       });
 
@@ -136,7 +120,6 @@ module('Unit | Route | Assessments | Resume', function (hooks) {
 
     module('when the next challenge does not exist (is null)', function (hooks) {
       hooks.beforeEach(function () {
-        queryRecordStub.resolves(null);
         route.assessmentHasNoMoreQuestions = true;
       });
 

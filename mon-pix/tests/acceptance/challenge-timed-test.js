@@ -16,8 +16,8 @@ module('Acceptance | Timed challenge', function (hooks) {
     module('when asking for confirmation', function (hooks) {
       hooks.beforeEach(async function () {
         // given
-        assessment = server.create('assessment', 'ofCompetenceEvaluationType');
         timedChallenge = server.create('challenge', 'forCompetenceEvaluation', 'timed');
+        assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: timedChallenge });
 
         // when
         await visit(`/assessments/${assessment.id}/challenges/0`);
@@ -36,8 +36,8 @@ module('Acceptance | Timed challenge', function (hooks) {
       module('and the challenge has not been already answered', function (hooks) {
         hooks.beforeEach(async function () {
           // given
-          assessment = server.create('assessment', 'ofCompetenceEvaluationType');
           timedChallenge = server.create('challenge', 'forCompetenceEvaluation', 'timed');
+          assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: timedChallenge });
 
           // when
           await visit(`/assessments/${assessment.id}/challenges/0`);
@@ -91,8 +91,10 @@ module('Acceptance | Timed challenge', function (hooks) {
       let screen;
       hooks.beforeEach(async function () {
         // given
-        assessment = server.create('assessment', 'ofCompetenceEvaluationType', 'withCurrentChallengeTimeout');
         timedChallenge = server.create('challenge', 'forCompetenceEvaluation', 'timed');
+        assessment = server.create('assessment', 'ofCompetenceEvaluationType', 'withCurrentChallengeTimeout', {
+          nextChallenge: timedChallenge,
+        });
 
         // when
         screen = await visit(`/assessments/${assessment.id}/challenges/0`);
@@ -121,8 +123,8 @@ module('Acceptance | Timed challenge', function (hooks) {
   module('when user seen two timed challenge', function (hooks) {
     hooks.beforeEach(async function () {
       // given
-      assessment = server.create('assessment', 'ofCompetenceEvaluationType');
       timedChallenge = server.create('challenge', 'forCompetenceEvaluation', 'timed');
+      assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge: timedChallenge });
       server.create('challenge', 'forCompetenceEvaluation', 'timed');
 
       // when
@@ -142,8 +144,8 @@ module('Acceptance | Timed challenge', function (hooks) {
 
   module('Not Timed Challenge', function (hooks) {
     hooks.beforeEach(function () {
-      assessment = server.create('assessment', 'ofCompetenceEvaluationType');
-      server.create('challenge', 'forCompetenceEvaluation');
+      const nextChallenge = server.create('challenge', 'forCompetenceEvaluation');
+      assessment = server.create('assessment', 'ofCompetenceEvaluationType', { nextChallenge });
     });
 
     test('should display the challenge statement', async function (assert) {

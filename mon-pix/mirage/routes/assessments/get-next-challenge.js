@@ -1,7 +1,6 @@
 import difference from 'lodash/difference';
 import first from 'lodash/first';
 import map from 'lodash/map';
-import { Response } from 'miragejs';
 
 export default function (schema, request) {
   const assessmentId = request.params.id;
@@ -29,5 +28,10 @@ export default function (schema, request) {
   const allChallengeIds = map(allChallenges.models, 'id');
 
   const nextChallengeId = first(difference(allChallengeIds, answeredChallengeIds));
-  return nextChallengeId ? schema.challenges.find(nextChallengeId) : new Response(200, {}, { data: null });
+  const nextChallenge = nextChallengeId ? schema.challenges.find(nextChallengeId) : null;
+  assessment.nextChallenge = nextChallenge;
+
+  assessment.orderedChallengeIdsAnswered = answeredChallengeIds;
+
+  return assessment;
 }
