@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.152.0](https://github.com/1024pix/pix/compare/v5.151.0...v5.152.0) (2025-07-07)
+
+### :rocket: Amélioration
+
+- [#12756](https://github.com/1024pix/pix/pull/12756) Modification du texte de presentation du mode interro (PIX-18621) 
+
+### :building_construction: Tech
+
+- [#12763](https://github.com/1024pix/pix/pull/12763) Corriger les tests flaky du LSU/LSL (PIX-18508). 
+- [#12711](https://github.com/1024pix/pix/pull/12711) Eviter le double appel à /api/assessments/:id/next 
+
+### :arrow_up: Montée de version
+
+- [#12768](https://github.com/1024pix/pix/pull/12768) Update dependency dotenv to v17 (api) 
+- [#12769](https://github.com/1024pix/pix/pull/12769) Update dependency dotenv to v17 (audit-logger) 
+- [#12770](https://github.com/1024pix/pix/pull/12770) Update dependency dotenv to v17 (e2e-playwright) 
+- [#12771](https://github.com/1024pix/pix/pull/12771) Update dependency dotenv to v17 (junior) 
+- [#12772](https://github.com/1024pix/pix/pull/12772) Update dependency dotenv to v17 (mon-pix)
+
 # [5.151.0](https://github.com/1024pix/pix/compare/v5.150.0...v5.151.0) (2025-07-04)
 
 ### :rocket: Amélioration
