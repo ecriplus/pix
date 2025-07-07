@@ -85,13 +85,11 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
       return this.intl.t('pages.skill-review.reset.notification');
     }
 
-    if (campaignParticipationResult.canRetry) {
-      if (isAutoShareEnabled) {
-        return this.intl.t('pages.skill-review.retry.notification-with-auto-share');
-        }
-        return this.intl.t('pages.skill-review.retry.notification');
+    if (isAutoShareEnabled) {
+      return this.intl.t('pages.skill-review.retry.notification-with-auto-share');
     }
-    }
+    return this.intl.t('pages.skill-review.retry.notification');
+  }
 
   <template>
     <div class="evaluation-results-hero__retry">

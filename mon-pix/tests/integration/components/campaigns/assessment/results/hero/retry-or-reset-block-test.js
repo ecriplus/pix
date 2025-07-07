@@ -1,8 +1,9 @@
 import { render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
-import Service from '@ember/service';
+
 import { clickByLabel } from '../../../../../../helpers/click-by-label';
 import setupIntlRenderingTest from '../../../../../../helpers/setup-intl-rendering';
 
@@ -61,50 +62,49 @@ module(
         assert.dom(screen.getByText(t('pages.skill-review.retry.notification'))).exists();
       });
 
-      module('with auto share enabled', function (hooks){
+      module('with auto share enabled', function (hooks) {
         hooks.beforeEach(function () {
-    class FeatureTogglesStub extends Service {
-      featureToggles = {
-        isAutoShareEnabled: true,
-      };
-    }
-    this.owner.register('service:featureToggles', FeatureTogglesStub);
-  });
+          class FeatureTogglesStub extends Service {
+            featureToggles = {
+              isAutoShareEnabled: true,
+            };
+          }
+          this.owner.register('service:featureToggles', FeatureTogglesStub);
+        });
 
-         test('should display retry message with auto share', async function (assert) {
-        //given
-        this.set('campaign', { code: 'CODECAMPAIGN' });
-        this.set('campaignParticipationResult', { canRetry: true, canReset: false });
+        test('should display retry message with auto share', async function (assert) {
+          //given
+          this.set('campaign', { code: 'CODECAMPAIGN' });
+          this.set('campaignParticipationResult', { canRetry: true, canReset: false });
 
-        //when
-        const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::RetryOrResetBlock
+          //when
+          const screen = await render(
+            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::RetryOrResetBlock
   @campaign={{this.campaign}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
 />`,
-        );
-  
-        //then
-        assert.dom(screen.getByText(t('pages.skill-review.retry.notification-with-auto-share'))).exists();
-      })
+          );
 
+          //then
+          assert.dom(screen.getByText(t('pages.skill-review.retry.notification-with-auto-share'))).exists();
+        });
 
-         test('should display reset message with auto share', async function (assert) {
-        //given
-        this.set('campaign', { code: 'CODECAMPAIGN' });
-        this.set('campaignParticipationResult', { canRetry: true, canReset: true });
+        test('should display reset message with auto share', async function (assert) {
+          //given
+          this.set('campaign', { code: 'CODECAMPAIGN' });
+          this.set('campaignParticipationResult', { canRetry: true, canReset: true });
 
-        //when
-        const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::RetryOrResetBlock
+          //when
+          const screen = await render(
+            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::RetryOrResetBlock
   @campaign={{this.campaign}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
 />`,
-        );
-  
-        //then
-        assert.dom(screen.getByText(t('pages.skill-review.reset.notification-with-auto-share'))).exists();
-      })
+          );
+
+          //then
+          assert.dom(screen.getByText(t('pages.skill-review.reset.notification-with-auto-share'))).exists();
+        });
       });
     });
 
