@@ -18,8 +18,8 @@ export const REQUIREMENT_TYPES = _REQUIREMENT_TYPES;
 const schema = Joi.object({
   eligibilityRequirements: Joi.array().items(Joi.object()).required(),
   successRequirements: Joi.array().items(Joi.object()).required(),
-  rewardType: Joi.string().valid('attestations').required(),
-  rewardId: Joi.number().required(),
+  rewardType: Joi.string().valid('attestations').allow(null),
+  rewardId: Joi.number().allow(null),
 });
 
 class Quest {
