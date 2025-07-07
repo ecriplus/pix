@@ -12,6 +12,7 @@ import { t } from 'ember-intl';
 export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
   @service metrics;
   @service intl;
+  @service featureToggles;
   @tracked isResetModalVisible = false;
 
   retryQueryParams = { retry: true };
@@ -75,12 +76,22 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
 
   get retryOrResetExplanation() {
     const { campaignParticipationResult } = this.args;
+    const isAutoShareEnabled = this.featureToggles?.featureToggles?.isAutoShareEnabled || false;
 
     if (campaignParticipationResult.canReset && campaignParticipationResult.canRetry) {
+      if (isAutoShareEnabled) {
+        return this.intl.t('pages.skill-review.reset.notification-with-auto-share');
+      }
       return this.intl.t('pages.skill-review.reset.notification');
     }
-    return this.intl.t('pages.skill-review.retry.notification');
-  }
+
+    if (campaignParticipationResult.canRetry) {
+      if (isAutoShareEnabled) {
+        return this.intl.t('pages.skill-review.retry.notification-with-auto-share');
+        }
+        return this.intl.t('pages.skill-review.retry.notification');
+    }
+    }
 
   <template>
     <div class="evaluation-results-hero__retry">
