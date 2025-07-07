@@ -5,7 +5,7 @@ import { expect } from '../../../../test-helper.js';
 describe('Quest | Unit | Infrastructure | Serializers | verified-code', function () {
   it('#serialize', function () {
     // given
-    const verifiedCode = new VerifiedCode({ code: 'ABCDEFGH' });
+    const verifiedCode = new VerifiedCode({ code: 'ABCDEFGH', type: 'campaign' });
 
     // when
     const serializedVerifiedCode = verifiedCodeSerializer.serialize(verifiedCode);
@@ -13,13 +13,20 @@ describe('Quest | Unit | Infrastructure | Serializers | verified-code', function
     // then
     expect(serializedVerifiedCode).to.deep.equal({
       data: {
-        attributes: {},
+        attributes: {
+          type: 'campaign',
+        },
         type: 'verified-codes',
         id: 'ABCDEFGH',
         relationships: {
           campaign: {
             links: {
               related: '/api/campaigns?filter[code]=ABCDEFGH',
+            },
+          },
+          'combined-course': {
+            links: {
+              related: '/api/combined-course?filter[code]=ABCDEFGH',
             },
           },
         },

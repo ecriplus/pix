@@ -1,5 +1,6 @@
 export class VerifiedCode {
-  constructor({ code }) {
+  constructor({ code, type }) {
     this.id = code;
+    this.type = type;
   }
 }
