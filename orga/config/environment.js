@@ -118,7 +118,7 @@ module.exports = function (environment) {
     },
 
     'ember-cli-mirage': {
-      usingProxy: true,
+      enabled: false,
     },
 
     metrics: {
@@ -173,6 +173,11 @@ module.exports = function (environment) {
     };
     ENV.metrics.enabled = false;
     ENV.pagination.debounce = 0;
+
+    ENV['ember-cli-mirage'] = {
+      enabled: true,
+      usingProxy: false,
+    };
   }
 
   if (environment === 'production') {

@@ -1038,17 +1038,17 @@ jobs:
       - run:
           name: Start Pix Orga
           working_directory: ~/pix/orga
-          command: DEFAULT_LOCALE=fr npx ember serve --path=./dist --proxy=http://localhost:3000
+          command: npx ember serve --path=./dist --proxy=http://localhost:3000
           background: true
       - run:
           name: Start Pix App
           working_directory: ~/pix/mon-pix
-          command: DEFAULT_LOCALE=fr npx ember serve --path=./dist --proxy=http://localhost:3000
+          command: npx ember serve --path=./dist --proxy=http://localhost:3000
           background: true
       - run:
           name: Start Pix Certif
           working_directory: ~/pix/certif
-          command: DEFAULT_LOCALE=fr npx ember serve --path=./dist --proxy=http://localhost:3000
+          command: npx ember serve --path=./dist --proxy=http://localhost:3000
           background: true
       - run:
           name: Prepare database

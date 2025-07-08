@@ -38,7 +38,7 @@ module.exports = function (environment) {
       CHALLENGE_DISPLAY_DELAY: process.env.CHALLENGE_DISPLAY_DELAY || 1500,
     },
     'ember-cli-mirage': {
-      usingProxy: true,
+      enabled: false,
     },
   };
 
@@ -62,6 +62,11 @@ module.exports = function (environment) {
     ENV.APP.autoboot = false;
     ENV.APP.CHALLENGE_DISPLAY_DELAY = 0;
     ENV.metrics.enabled = false;
+
+    ENV['ember-cli-mirage'] = {
+      enabled: true,
+      usingProxy: false,
+    };
   }
   return ENV;
 };
