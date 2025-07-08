@@ -95,20 +95,15 @@
           "element": {
             "id": "bbc2cbde-08d2-4869-a6d3-61ac27865f5a",
             "type": "text",
-            "content": "<p>Que se passe-t-il quand on fait une demande à un logiciel d’IA générative ?</p>"
+            "content": "<p>Que se passe-t-il quand on fait une demande à un logiciel d’IA générative ?</p><p>Cliquez sur \"Commencer\" pour voir le trajet d'une demande à un logiciel d'IA générative</p>"
           }
         },
         {
           "type": "element",
           "element": {
             "id": "9cb3a20f-cedf-45c9-8910-1e8086fdd728",
-            "type": "embed",
-            "isCompletionRequired": false,
-            "title": "POI",
-            "url": "https://1024pix.github.io/atelier-contenus/FRI/protoAffichageProcessus02.html",
-            "instruction": "<p>Cliquez sur \"Commencer\" pour voir le trajet d'une demande à un logiciel d'IA générative</p>",
-            "solution": "-",
-            "height": 400
+            "type": "text",
+            "content": "<iframe title=\"Trajet de la requête\" src=\"https://1024pix.github.io/atelier-contenus/FRI/protoAffichageProcessus02.html\" height=\"400\"></iframe>"
           }
         },
         {
@@ -206,14 +201,17 @@
         {
           "type": "element",
           "element": {
-            "id": "9cb5f3ca-3b22-44f0-ad92-f7ccb778d0cf",
-            "type": "embed",
-            "isCompletionRequired": false,
-            "title": "POI",
-            "url": "",
-            "instruction": "<p>Découvrons <strong>comment le supercalculateur répond</strong> à la demande d’Enzo</p>",
-            "solution": "-",
-            "height": 0
+            "id": "0de0174c-fe9f-42fb-b5f8-a127359f19ec",
+            "type": "text",
+            "content": "<p>Découvrons <strong>comment le supercalculateur répond</strong> à la demande d’Enzo</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "6f6f9dd0-6252-44ee-b4b3-3ff40e8d1151",
+            "type": "text",
+            "content": "<iframe title=\"Traitement de la requête\" src=\"https://1024pix.github.io/atelier-contenus/FRI/affichageProcessusTraitementRequete.html\" height=\"500\"></iframe>"
           }
         }
       ]
@@ -285,13 +283,8 @@
           "type": "element",
           "element": {
             "id": "a44b87c8-ecf4-45dd-9cf7-1dc90492ef91",
-            "type": "embed",
-            "isCompletionRequired": false,
-            "title": "Charge supercalculateur",
-            "url": "https://1024pix.github.io/atelier-contenus/FRI/IAEnvironnementInferenceSpinner02.html",
-            "instruction": "<p><br></p>",
-            "solution": "-",
-            "height": 470
+            "type": "text",
+            "content": "<iframe title=\"Requêtes multiples\" src=\"https://1024pix.github.io/atelier-contenus/FRI/IAEnvironnementInferenceSpinner02.html\" height=\"500\"></iframe>"
           }
         },
         {
@@ -461,7 +454,7 @@
         {
           "type": "element",
           "element": {
-            "id": "0952189d-e93f-4678-aa3c-ceb33d08c67b",
+            "id": "0952189d-e93f-4678-aa3c-ceb33d08c67a",
             "type": "qcu",
             "instruction": "<p>Résume en français un document en finlandais de 25 pages</p>",
             "proposals": [
@@ -759,14 +752,17 @@
         {
           "type": "element",
           "element": {
-            "id": "3009b8dc-4b9c-4679-9fde-709daaf8a499",
-            "type": "embed",
-            "isCompletionRequired": false,
-            "title": "Transfert",
-            "url": "https://1024pix.github.io/atelier-contenus/FRI/IAEnvironnementTransfert04.html",
-            "instruction": "<p>Maintenant, essayons de voir à quoi correspond la consommation d’énergie de <strong>votre utilisation de l’IA</strong>.</p>",
-            "solution": "-",
-            "height": 800
+            "id": "114d683e-5f2f-45c0-9646-b6627df046c9",
+            "type": "text",
+            "content": "<p>Maintenant, essayons de voir à quoi correspond la consommation d’énergie de <strong>votre utilisation de l’IA</strong>.</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "98bf1662-2985-452d-ba51-1d625f43bebb",
+            "type": "text",
+            "content": "<iframe title=\"Transfert impact\" src=\"https://1024pix.github.io/atelier-contenus/FRI/IAEnvironnementTransfert04.html\" height=\"800\"></iframe>"
           }
         }
       ]
