@@ -30,7 +30,7 @@ describe('Unit | UseCase | get-assessment', function () {
 
     assessmentRepository = { getWithAnswers: sinon.stub() };
     competenceRepository = { getCompetenceName: sinon.stub() };
-    courseRepository = { getCourseName: sinon.stub(), get: sinon.stub() };
+    courseRepository = { get: sinon.stub() };
     certificationChallengeLiveAlertRepository = { getByAssessmentId: sinon.stub() };
     certificationCompanionAlertRepository = { getAllByAssessmentId: sinon.stub() };
   });
@@ -80,7 +80,6 @@ describe('Unit | UseCase | get-assessment', function () {
       const playableCourse = domainBuilder.buildCourse({ name: 'Course Àpieds', isActive: true });
       assessment.type = Assessment.types.DEMO;
       assessmentRepository.getWithAnswers.withArgs(assessment.id).resolves(assessment);
-      courseRepository.getCourseName.withArgs(assessment.courseId).resolves(playableCourse.name);
       courseRepository.get.withArgs(assessment.courseId).resolves(playableCourse);
 
       // when
@@ -102,7 +101,6 @@ describe('Unit | UseCase | get-assessment', function () {
       const unplayableCourse = domainBuilder.buildCourse({ name: 'Course Àpieds', isActive: false });
       assessment.type = Assessment.types.DEMO;
       assessmentRepository.getWithAnswers.withArgs(assessment.id).resolves(assessment);
-      courseRepository.getCourseName.withArgs(assessment.courseId).resolves(unplayableCourse.name);
       courseRepository.get.withArgs(assessment.courseId).resolves(unplayableCourse);
 
       // when

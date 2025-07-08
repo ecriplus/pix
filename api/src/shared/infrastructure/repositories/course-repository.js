@@ -12,15 +12,6 @@ export async function get(id) {
   return toDomain(courseDto);
 }
 
-export async function getCourseName(id) {
-  try {
-    const course = await get(id);
-    return course.name;
-  } catch {
-    throw new NotFoundError("Le test demandé n'existe pas");
-  }
-}
-
 export function clearCache(id) {
   return getInstance().clearCache(id);
 }
