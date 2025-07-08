@@ -31,7 +31,11 @@ describe('Unit | Controller | assessment-controller-save', function () {
 
       beforeEach(function () {
         assessmentRepositoryStub = { save: sinon.stub() };
-        assessmentRepositoryStub.save.resolves({});
+        assessmentRepositoryStub.save.resolves({
+          toDto: () => {
+            return {};
+          },
+        });
       });
 
       it('should save an assessment with type PREVIEW', async function () {
