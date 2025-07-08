@@ -49,8 +49,18 @@ export default defineConfig({
   webServer: isCI
     ? [
         {
-          command: 'while true; do echo "Wait for App to start"; sleep 300; done',
-          url: process.env.PIX_APP_URL || process.env.PIX_ORGA_URL || process.env.PIX_CERTIF_URL,
+          command: 'while true; do echo "Wait for PixApp to start"; sleep 300; done',
+          url: process.env.PIX_APP_URL,
+          reuseExistingServer: true,
+        },
+        {
+          command: 'while true; do echo "Wait for PixOrga to start"; sleep 300; done',
+          url: process.env.PIX_ORGA_URL,
+          reuseExistingServer: true,
+        },
+        {
+          command: 'while true; do echo "Wait for PixCertif to start"; sleep 300; done',
+          url: process.env.PIX_CERTIF_URL,
           reuseExistingServer: true,
         },
       ]
