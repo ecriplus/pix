@@ -1,7 +1,9 @@
 import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
+import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
 import { Quest } from '../../../../../src/quest/domain/models/Quest.js';
 import * as questRepository from '../../../../../src/quest/infrastructure/repositories/quest-repository.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Quest | Integration | Repository | quest', function () {
   describe('#saveInBatch', function () {
@@ -45,6 +47,8 @@ describe('Quest | Integration | Repository | quest', function () {
             ...expectedNewQuest,
             eligibilityRequirements: expectedNewQuest.eligibilityRequirements,
             successRequirements: expectedNewQuest.successRequirements,
+            organizationId: null,
+            code: null,
             id: sinon.match.number,
             createdAt: sinon.match.date,
             updatedAt: sinon.match.date,
@@ -113,6 +117,33 @@ describe('Quest | Integration | Repository | quest', function () {
 
       // then
       expect(quest).to.be.null;
+    });
+  });
+
+  describe('#getByCode', function () {
+    it('should return a quest if quest exist', async function () {
+      // given
+      const code = 'SOMETHING';
+      const questId = databaseBuilder.factory.buildQuest({ code }).id;
+      await databaseBuilder.commit();
+
+      // when
+      const quest = await questRepository.getByCode({ code });
+
+      // then
+      expect(quest).to.be.an.instanceof(CombinedCourse);
+      expect(quest.id).to.equal(questId);
+    });
+
+    it('should throw NotFoundError if quest does not exist', async function () {
+      // given
+      const code = 'NOTHINGTT';
+
+      // when
+      const error = await catchErr(questRepository.getByCode)({ code });
+
+      // then
+      expect(error).to.be.instanceOf(NotFoundError);
     });
   });
 

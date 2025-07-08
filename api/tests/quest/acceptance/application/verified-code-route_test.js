@@ -28,11 +28,18 @@ describe('Quest | Acceptance | Application | Verified Code Route ', function () 
         data: {
           type: 'verified-codes',
           id: campaign.code,
-          attributes: {},
+          attributes: {
+            type: 'campaign',
+          },
           relationships: {
             campaign: {
               links: {
                 related: `/api/campaigns?filter[code]=${campaign.code}`,
+              },
+            },
+            'combined-course': {
+              links: {
+                related: `/api/combined-course?filter[code]=${campaign.code}`,
               },
             },
           },

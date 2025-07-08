@@ -95,6 +95,7 @@ export default Factory.extend({
     afterCreate(campaign, server) {
       server.create('verified-code', {
         id: campaign.code,
+        type: 'campaign',
         campaign,
       });
     },

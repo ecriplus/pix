@@ -6,6 +6,9 @@ export default ApplicationSerializer.extend({
       campaign: {
         related: `/api/campaigns?filter[code]=${verifiedCode.id}`,
       },
+      'combined-course': {
+        related: `/api/combined-courses?filter[code]=${verifiedCode.id}`,
+      },
     };
   },
 });

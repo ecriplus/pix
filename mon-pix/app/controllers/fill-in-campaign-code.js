@@ -16,6 +16,9 @@ export default class FillInCampaignCodeController extends Controller {
   @tracked showGARModal = false;
   @tracked campaign = null;
   @tracked selectedLanguage = this.intl.primaryLocale;
+  @tracked name = null;
+  @tracked organizationName = null;
+  @tracked code = null;
 
   get isUserAuthenticatedByPix() {
     return this.session.isAuthenticated;
@@ -33,16 +36,31 @@ export default class FillInCampaignCodeController extends Controller {
   @action
   async startCampaign(campaignCode) {
     try {
-      this.verifiedCode = await this.store.findRecord('verified-code', campaignCode);
-      this.campaign = await this.verifiedCode.campaign;
-      const organizationToJoin = await this.store.queryRecord('organization-to-join', { code: this.verifiedCode.id });
+      const verifiedCode = await this.store.findRecord('verified-code', campaignCode);
+      const organizationToJoin = await this.store.queryRecord('organization-to-join', { code: verifiedCode.id });
+      this.organizationName = organizationToJoin.name;
+      this.code = verifiedCode.id;
       const isGARCampaign = organizationToJoin.identityProvider === IDENTITY_PROVIDER_ID_GAR;
+
       if (_shouldShowGARModal(isGARCampaign, this.isUserAuthenticatedByGAR, this.isUserAuthenticatedByPix)) {
+        if (verifiedCode.type === 'campaign') {
+          const campaign = await verifiedCode.campaign;
+          this.name = campaign.targetProfileName;
+        } else {
+          const combinedCourse = await verifiedCode.combinedCourse;
+          this.name = combinedCourse.name;
+        }
+
         this.showGARModal = true;
         return;
       }
 
-      this.router.transitionTo('campaigns.entry-point', this.campaign.code);
+      if (verifiedCode.type === 'campaign') {
+        this.campaign = await verifiedCode.campaign;
+        this.router.transitionTo('campaigns.entry-point', verifiedCode.id);
+      } else {
+        this.router.transitionTo('combined-courses', verifiedCode.id);
+      }
     } catch (error) {
       this.onStartCampaignError(error);
     }

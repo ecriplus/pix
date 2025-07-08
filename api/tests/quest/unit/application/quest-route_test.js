@@ -1,5 +1,5 @@
-import * as moduleUnderTest from '../../../../src/quest/application/index.js';
 import { questController } from '../../../../src/quest/application/quest-controller.js';
+import * as moduleUnderTest from '../../../../src/quest/application/quest-route.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
 import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
 

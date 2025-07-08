@@ -46,7 +46,7 @@ describe('Unit | Repository | organization-to-join-repository', function () {
         name: 'My orga',
         type: 'PRO',
         logoUrl: 'http://pix.fr/logo.png',
-        identityProviderForCampaigns: null,
+        identityProviderForCampaigns: 'GAR',
         isManagingStudents: false,
       }),
     );
@@ -68,10 +68,12 @@ describe('Unit | Repository | organization-to-join-repository', function () {
         name: 'My orga',
         type: 'PRO',
         logoUrl: 'http://pix.fr/logo.png',
-        identityProvider: null,
+        identityProvider: 'GAR',
         organizationLearnerImportFormat,
         isManagingStudents: false,
       }),
     );
+    expect(organizationToJoin.hasReconciliationFields).to.be.true;
+    expect(organizationToJoin.isReconciliationRequired).to.be.true;
   });
 });

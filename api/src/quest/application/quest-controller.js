@@ -2,6 +2,7 @@ import { generateCSVTemplate } from '../../shared/infrastructure/serializers/csv
 import * as requestResponseUtils from '../../shared/infrastructure/utils/request-response-utils.js';
 import { QUEST_HEADER } from '../domain/constants.js';
 import { usecases } from '../domain/usecases/index.js';
+import * as combinedCourseSerializer from '../infrastructure/serializers/combined-course-serializer.js';
 import * as questResultSerializer from '../infrastructure/serializers/quest-result-serializer.js';
 
 const getQuestResults = async function (request, h, dependencies = { questResultSerializer, requestResponseUtils }) {
@@ -13,6 +14,13 @@ const getQuestResults = async function (request, h, dependencies = { questResult
   const serializedQuestResults = dependencies.questResultSerializer.serialize(questResults);
 
   return h.response(serializedQuestResults);
+};
+
+const getByCode = async function (request, _) {
+  const { code } = request.query.filter;
+
+  const combinedCourse = await usecases.getCombinedCourseByCode({ code });
+  return combinedCourseSerializer.serialize(combinedCourse);
 };
 
 const getTemplateForCreateOrUpdateQuestsInBatch = async function (request, h) {
@@ -43,6 +51,7 @@ const checkUserQuest = async function (request, h) {
 };
 
 const questController = {
+  getByCode,
   checkUserQuest,
   getQuestResults,
   createOrUpdateQuestsInBatch,

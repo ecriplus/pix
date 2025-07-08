@@ -19,6 +19,8 @@ module('Unit | Controller | Fill in Campaign Code', function (hooks) {
     controller.set('router', routerStub);
     controller.set('apiErrorMessage', null);
     controller.set('campaignCode', null);
+    controller.set('name', null);
+    controller.set('organizationName', null);
   });
 
   module('#startCampaign', function () {
@@ -62,6 +64,7 @@ module('Unit | Controller | Fill in Campaign Code', function (hooks) {
               .withArgs('verified-code', campaignCode)
               .resolves({
                 id: campaignCode,
+                type: 'campaign',
                 campaign: { id: 1, code: campaignCode },
               }),
             queryRecord: sinon
@@ -92,6 +95,7 @@ module('Unit | Controller | Fill in Campaign Code', function (hooks) {
                 .withArgs('verified-code', campaignCode)
                 .resolves({
                   id: campaignCode,
+                  type: 'campaign',
                   campaign: { id: 1, code: campaignCode },
                 }),
               queryRecord: sinon
@@ -121,6 +125,7 @@ module('Unit | Controller | Fill in Campaign Code', function (hooks) {
                 .withArgs('verified-code', campaignCode)
                 .resolves({
                   id: campaignCode,
+                  type: 'campaign',
                   campaign: { id: 1, code: campaignCode },
                 }),
               queryRecord: sinon
@@ -131,6 +136,8 @@ module('Unit | Controller | Fill in Campaign Code', function (hooks) {
             stubSessionService(this.owner, { isAuthenticated: false });
             controller.set('store', storeStub);
             controller.set('campaignCode', campaignCode);
+            controller.set('organizationName', 'GAR organization');
+            controller.set('name', 'GAR campaign');
 
             // when
             await controller.actions.startCampaign.call(controller, eventStub);

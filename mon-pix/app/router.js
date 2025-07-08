@@ -101,6 +101,7 @@ Router.map(function () {
     });
     this.route('existing-participation', { path: '/participation-existante' });
   });
+  this.route('combined-courses', { path: '/parcours/:code' });
 
   this.route('module-preview', { path: '/modules/preview' });
   this.route('module', { path: '/modules/:slug' }, function () {

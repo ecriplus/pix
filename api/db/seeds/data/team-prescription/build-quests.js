@@ -20,6 +20,7 @@ const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewar
 
 function buildCombinedCourseQuest(databaseBuilder, organizationId) {
   databaseBuilder.factory.buildQuest({
+    name: 'Combinix',
     rewardType: null,
     rewardId: null,
     code: 'COMBINIX1',

@@ -1,6 +1,8 @@
 import chunk from 'lodash/chunk.js';
 
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { NotFoundError } from '../../../shared/domain/errors.js';
+import { CombinedCourse } from '../../domain/models/CombinedCourse.js';
 import { Quest } from '../../domain/models/Quest.js';
 
 const toDomain = (quests) => quests.map((quest) => new Quest(quest));
@@ -21,6 +23,17 @@ const findById = async ({ questId }) => {
   if (!quest) return null;
 
   return new Quest(quest);
+};
+
+const getByCode = async ({ code }) => {
+  const knexConn = DomainTransaction.getConnection();
+
+  const quest = await knexConn('quests').where('code', code).first();
+  if (!quest) {
+    throw new NotFoundError(`La quête portant le code ${code} n'existe pas`);
+  }
+
+  return new CombinedCourse({ id: quest.id, code: quest.code, organizationId: quest.organizationId, name: quest.name });
 };
 
 // envisager de mettre tableau vide en valeur par défaut des requirements si pas renseigné pour pas péter le code
@@ -49,4 +62,4 @@ const deleteByIds = async ({ questIds }) => {
   return knexConn('quests').whereIn('id', questIds).delete();
 };
 
-export { deleteByIds, findAll, findById, saveInBatch };
+export { deleteByIds, findAll, findById, getByCode, saveInBatch };

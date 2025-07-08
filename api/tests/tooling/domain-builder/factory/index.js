@@ -218,6 +218,8 @@ import { buildOrganizationDto } from './organizational-entities/build-organizati
 import { buildCampaign as boundedContextCampaignBuildCampaign } from './prescription/campaign/build-campaign.js';
 import { buildCampaignResultLevelsPerTubesAndCompetences as boundedContextCampaignBuildCampaignResultLevelsPerTubesAndCompetences } from './prescription/campaign/build-campaign-result-levels-per-tubes-and-competences.js';
 import { buildCampaignParticipation as boundedContextCampaignParticipationBuildCampaignParticipation } from './prescription/campaign-participation/build-campaign-participation.js';
+import { buildOrganizationLearnerImportFormat } from './prescription/learner-management/build-organization-learner-import-format.js';
+import { buildOrganizationToJoin } from './prescription/organization-learner/build-organization-to-join.js';
 import { buildStageCollection as buildStageCollectionForTargetProfileManagement } from './target-profile-management/build-stage-collection.js';
 import { buildStageCollection as buildStageCollectionForUserCampaignResults } from './user-campaign-results/build-stage-collection.js';
 
@@ -292,6 +294,12 @@ const certification = {
 };
 
 const prescription = {
+  organizationLearner: {
+    buildOrganizationToJoin,
+  },
+  learnerManagement: {
+    buildOrganizationLearnerImportFormat,
+  },
   campaign: {
     buildCampaign: boundedContextCampaignBuildCampaign,
     buildCampaignResultLevelsPerTubesAndCompetences:

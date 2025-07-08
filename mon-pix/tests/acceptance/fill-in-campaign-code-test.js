@@ -35,13 +35,28 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
     });
   });
 
+  module('when code is linked to a combined course', function () {
+    test('it redirects to combined course page', async function (assert) {
+      // given
+      const verifiedCode = server.create('verified-code', { id: 'something', type: 'combined-course' });
+      server.create('organization-to-join', { id: 1, code: verifiedCode.id, identityProvider: null });
+
+      // when
+      const screen = await visit(`/campagnes`);
+      await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), verifiedCode.id);
+      await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+
+      // then
+      assert.strictEqual(currentURL(), `/parcours/${verifiedCode.id}`);
+    });
+  });
+
   module('when user is not connected to his Mediacentre', function () {
     module('and starts a campaign with GAR as identity provider', function () {
       test('should not redirect the user and display a modal', async function (assert) {
         // given
         const campaign = server.create('campaign', 'withVerifiedCode', {
           organizationId: 1,
-          identityProvider: 'GAR',
           targetProfileName: 'My Profile',
           organizationName: 'AWS',
         });
@@ -66,6 +81,7 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
             targetProfileName: 'My Profile',
             organizationName: 'AWS',
           });
+
           server.create('organization-to-join', { id: 1, code: campaign.code, identityProvider: 'GAR' });
 
           // when
