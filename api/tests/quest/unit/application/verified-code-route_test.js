@@ -1,4 +1,4 @@
-import * as moduleUnderTest from '../../../../src/quest/application/verified-codes-route.js';
+import * as moduleUnderTest from '../../../../src/quest/application/verified-code-route.js';
 import { usecases } from '../../../../src/quest/domain/usecases/index.js';
 import { NotFoundError } from '../../../../src/shared/domain/errors.js';
 import { expect, HttpTestServer, sinon } from '../../../test-helper.js';

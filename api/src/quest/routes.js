@@ -1,5 +1,5 @@
 import * as questRoute from './application/quest-route.js';
-import * as verifiedCodeRoute from './application/verified-codes-route.js';
+import * as verifiedCodeRoute from './application/verified-code-route.js';
 
 const questRoutes = [questRoute, verifiedCodeRoute];
 
