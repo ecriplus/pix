@@ -1,5 +1,23 @@
 # Pix Changelog
 
+# [5.153.0](https://github.com/1024pix/pix/compare/v5.152.0...v5.153.0) (2025-07-08)
+
+### :rocket: Amélioration
+
+- [#12778](https://github.com/1024pix/pix/pull/12778) Ajout d'une colonnne "name" sur la table quests 
+- [#12754](https://github.com/1024pix/pix/pull/12754) Mob design quickwin sur les modules (PIX-18619) 
+- [#12722](https://github.com/1024pix/pix/pull/12722) Redirige l'utilisateur sur la page de parcours combiné lorsqu'il saisi un code (PIX-18472) 
+
+### :bug: Correction
+
+- [#12739](https://github.com/1024pix/pix/pull/12739) Ne pas prendre en compte l'envoie de la PJ dans le compte du pormpt limite lorsqu'il est accompagné d'un message (PIX-18500) 
+- [#12780](https://github.com/1024pix/pix/pull/12780) Rediriger vers la prochaine épreuve quand on essaie d'accéder à une épreuve loin dans le futur. 
+
+### :building_construction: Tech
+
+- [#12766](https://github.com/1024pix/pix/pull/12766) :truck: Déplace le modèle `UserOrganizationForAdmin` vers `src/team/` 
+- [#12774](https://github.com/1024pix/pix/pull/12774) Renomme le usecase `getNextChallenge` en `updateAssessmentWithNextChallenge` pour refléter son nouveau comportement.
+
 # [5.152.0](https://github.com/1024pix/pix/compare/v5.151.0...v5.152.0) (2025-07-07)
 
 ### :rocket: Amélioration
