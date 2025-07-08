@@ -45,7 +45,7 @@ module('Unit | Route | Assessments | Challenge', function (hooks) {
     currentUserStub = { user: { firstName: 'John', lastname: 'Doe' } };
     route.currentUser = currentUserStub;
     route.store = storeStub;
-    route.router = { transitionTo: sinon.stub() };
+    route.router = { transitionTo: sinon.stub(), replaceWith: sinon.stub() };
     route.modelFor = sinon.stub().returns(assessment);
   });
 
@@ -69,6 +69,19 @@ module('Unit | Route | Assessments | Challenge', function (hooks) {
         sinon.assert.calledWith(route.modelFor, 'assessments');
         sinon.assert.calledOnce(findRecordStub);
         assert.strictEqual(returnedModel.answer, answer);
+      });
+    });
+
+    module('when fast-forwarding to a future challenge', function () {
+      test('should redirect to resume route', async function (assert) {
+        // given
+        model.assessment.orderedChallengeIdsAnswered = [];
+
+        // when
+        await route.model({ challenge_number: 1 });
+
+        // then
+        assert.ok(route.router.replaceWith.calledWith(`/assessments/${model.assessment.id}/resume`));
       });
     });
 

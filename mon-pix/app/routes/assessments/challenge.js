@@ -16,6 +16,11 @@ export default class ChallengeRoute extends Route {
     let challenge;
     const currentChallengeNumber = parseInt(params.challenge_number);
     const isBackToPreviousChallenge = currentChallengeNumber < assessment.orderedChallengeIdsAnswered.length;
+    const hasFastFowarded = currentChallengeNumber > assessment.orderedChallengeIdsAnswered.length;
+    if (hasFastFowarded) {
+      this.router.replaceWith(`/assessments/${assessment.id}/resume`);
+      return;
+    }
     let answer = null;
     if (isBackToPreviousChallenge) {
       const challengeId = assessment.orderedChallengeIdsAnswered.at(currentChallengeNumber);
