@@ -1,0 +1,29 @@
+import { Assessment, Progression } from '../models/index.js';
+
+class PreviewAssessment {
+  constructor(assessment) {
+    this.id = assessment.id;
+    this.state = assessment.state;
+    this.type = Assessment.types.PREVIEW;
+    this.title = 'Preview';
+    this.answers = [];
+    this.lastQuestionState = assessment.lastQuestionState;
+    this.method = Assessment.methods.CHOSEN;
+    this.hasOngoingChallengeLiveAlert = false;
+    this.hasOngoingCompanionLiveAlert = false;
+    this.hasCheckpoints = false;
+    this.showProgressBar = false;
+    this.showLevelup = false;
+    this.showQuestionCounter = true;
+    this.answers = assessment.answers;
+    this.orderedChallengeIdsAnswered = assessment.answers?.map((answer) => answer.challengeId) ?? [];
+    this.competenceId = assessment.competenceId;
+    this.nextChallenge = assessment.nextChallenge;
+  }
+
+  get progression() {
+    return { id: Progression.generateIdFromAssessmentId(this.id) };
+  }
+}
+
+export { PreviewAssessment };
