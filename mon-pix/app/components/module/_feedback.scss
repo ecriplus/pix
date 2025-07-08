@@ -1,25 +1,19 @@
 .feedback {
   position: relative;
-  padding-left: var(--pix-spacing-4x);
+  padding: var(--pix-spacing-4x) var(--pix-spacing-6x);
+  border-radius: var(--pix-spacing-4x);
+
 
   &--success {
     --modulix-feedback-state-color: var(--pix-success-700);
+
+    background-color: var(--pix-success-50);
   }
 
   &--error {
     --modulix-feedback-state-color: var(--pix-error-700);
-  }
 
-  &::before {
-    $correctness-indicator-bar: 6px;
-
-    position: absolute;
-    left: 0;
-    width: $correctness-indicator-bar;
-    height: 100%;
-    background-color: var(--modulix-feedback-state-color);
-    border-radius: $correctness-indicator-bar;
-    content: '';
+    background-color: var(--pix-error-50);
   }
 
   &__state {
