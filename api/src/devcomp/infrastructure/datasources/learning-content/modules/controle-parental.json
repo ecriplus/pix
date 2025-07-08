@@ -496,7 +496,7 @@
         }
       ]
     },
-    {
+        {
       "id": "dde349da-a5fc-41b5-8c47-9ec5a2780165",
       "type": "activity",
       "title": "Le controle parental de vos appareils connectés",
@@ -505,15 +505,15 @@
           "type": "element",
           "element": {
             "id": "6ce0eec7-8b4e-4b28-8805-ed83a2b8db68",
-            "type": "qcu",
-            "instruction": "<p>Cherchez sur vos appareils connectés les options de contrôle parental.<br>Avez-vous réussi à les trouver ?</p>",
+            "type": "qcu-declarative",
+            "instruction": "<p>Avez-vous réussi à trouver les options de contrôle parental de vos appreils ?</p>",
             "proposals": [
               {
                 "id": "1",
                 "content": "<p>oui</p>",
                 "feedback": {
-                  "state": "Bravo ! ✨",
-                  "diagnosis": "<p>Vous pouvez aussi regarder sur les sites et plateformes en ligne s'ils proposent des options de contrôle parental.</p>"
+                  "state": "",
+                  "diagnosis": "<p>Bravo ! ✨ Vous pouvez aussi regarder sur les sites et plateformes en ligne s'ils proposent des options de contrôle parental.</p>"
                 }
               },
               {
@@ -524,8 +524,7 @@
                   "diagnosis": "<p>Avez-vous regardé dans les paramètres de vos appareils ? Il y a souvent un symbole de roue crantée.&nbsp;⚙️</p>"
                 }
               }
-            ],
-            "solution": "1"
+            ]
           }
         }
       ]
