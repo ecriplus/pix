@@ -92,7 +92,7 @@ export default class RegisterForm extends Component {
         @validationStatus={{this.validation.firstName.status}}
         @errorMessage={{this.validation.firstName.message}}
         @disabled={{this.matchingStudentFound}}
-        autocomplete="firstname"
+        autocomplete="given-name"
         type="text"
       >
         <:label>{{t "pages.login-or-register.register-form.fields.firstname.label"}}</:label>
@@ -107,7 +107,7 @@ export default class RegisterForm extends Component {
         @validationStatus={{this.validation.lastName.status}}
         @errorMessage={{this.validation.lastName.message}}
         @disabled={{this.matchingStudentFound}}
-        autocomplete="lastName"
+        autocomplete="family-name"
         type="text"
       >
         <:label>{{t "pages.login-or-register.register-form.fields.lastname.label"}}</:label>
@@ -182,7 +182,7 @@ export default class RegisterForm extends Component {
             @errorMessage={{this.validation.email.message}}
             @disabled={{this.matchingStudentFound}}
             @subLabel={{t "pages.login-or-register.register-form.fields.email.help"}}
-            autocomplete="firstname"
+            autocomplete="email"
             type="email"
           >
             <:label>{{t "pages.login-or-register.register-form.fields.email.label"}}</:label>
