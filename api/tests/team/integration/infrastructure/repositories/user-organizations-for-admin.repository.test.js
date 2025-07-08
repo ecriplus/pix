@@ -1,4 +1,4 @@
-import { UserOrganizationForAdmin } from '../../../../../src/shared/domain/read-models/UserOrganizationForAdmin.js';
+import { UserOrganizationForAdmin } from '../../../../../src/team/domain/read-models/UserOrganizationForAdmin.js';
 import { userOrganizationsForAdminRepository } from '../../../../../src/team/infrastructure/repositories/user-organizations-for-admin.repository.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 

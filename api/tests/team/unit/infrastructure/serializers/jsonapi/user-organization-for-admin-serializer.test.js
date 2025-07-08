@@ -1,4 +1,4 @@
-import { UserOrganizationForAdmin } from '../../../../../../src/shared/domain/read-models/UserOrganizationForAdmin.js';
+import { UserOrganizationForAdmin } from '../../../../../../src/team/domain/read-models/UserOrganizationForAdmin.js';
 import * as serializer from '../../../../../../src/team/infrastructure/serializers/jsonapi/user-organization-for-admin-serializer.js';
 import { expect } from '../../../../../test-helper.js';
 
