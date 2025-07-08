@@ -1,5 +1,10 @@
 import { Answer } from '../../../evaluation/domain/models/Answer.js';
 import { ObjectValidationError } from '../errors.js';
+import { CampaignAssessment } from '../read-models/CampaignAssessment.js';
+import { CertificationAssessment } from '../read-models/CertificationAssessment.js';
+import { CompetenceEvaluationAssessment } from '../read-models/CompetenceEvaluationAssessment.js';
+import { DemoAssessment } from '../read-models/DemoAssessment.js';
+import { PreviewAssessment } from '../read-models/PreviewAssessment.js';
 
 const courseIdMessage = {
   COMPETENCE_EVALUATION: '[NOT USED] CompetenceId is in Competence Evaluation.',
@@ -225,6 +230,25 @@ class Assessment {
 
   get hasLastQuestionBeenFocusedOut() {
     return this.lastQuestionState === Assessment.statesOfLastQuestion.FOCUSEDOUT;
+  }
+
+  toDto() {
+    switch (this.type) {
+      case Assessment.types.CAMPAIGN:
+        return new CampaignAssessment(this);
+      case Assessment.types.CERTIFICATION:
+        return new CertificationAssessment(this);
+      case Assessment.types.DEMO:
+        return new DemoAssessment(this);
+      case Assessment.types.COMPETENCE_EVALUATION:
+        return new CompetenceEvaluationAssessment(this);
+      case Assessment.types.PREVIEW:
+        return new PreviewAssessment(this);
+      case Assessment.types.PIX1D_MISSION:
+        return this;
+      default:
+        throw new Error('Unknown assessment type.');
+    }
   }
 
   static computeMethodFromType(type) {
