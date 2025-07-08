@@ -1,12 +1,14 @@
 import dayjs from 'dayjs';
 
 import { usecases } from '../../../../../../src/prescription/organization-place/domain/usecases/index.js';
+import { ORGANIZATION_FEATURE } from '../../../../../../src/shared/domain/constants.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Domain | Use Cases | get-organization-places-statistics', function () {
-  it('should get the organization places statistics', async function () {
-    // given
-    const organizationId = databaseBuilder.factory.buildOrganization().id;
+  let organizationId;
+
+  beforeEach(async function () {
+    organizationId = databaseBuilder.factory.buildOrganization().id;
 
     const anonymousUserId = databaseBuilder.factory.buildUser({ isAnonymous: true }).id;
     const realUserId = databaseBuilder.factory.buildUser({ isAnonymous: false }).id;
@@ -32,24 +34,64 @@ describe('Integration | Domain | Use Cases | get-organization-places-statistics'
       userId: realUserId,
     });
 
-    databaseBuilder.factory.buildOrganizationPlace({
-      organizationId,
-      activationDate: dayjs().subtract(1, 'months').toDate(),
-      count: 100,
-    });
-
     await databaseBuilder.commit();
+  });
 
-    // when
-    const organizationPlacesStatistics = await usecases.getOrganizationPlacesStatistics({
-      organizationId,
+  describe('When organization has the blocking place feature', function () {
+    it('should get the organization places statistics', async function () {
+      // given
+      const placesManagementFeatureId = databaseBuilder.factory.buildFeature({
+        key: ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key,
+      }).id;
+
+      databaseBuilder.factory.buildOrganizationFeature({
+        organizationId,
+        featureId: placesManagementFeatureId,
+        params: {
+          enablePlacesThresholdLock: true,
+        },
+      });
+
+      databaseBuilder.factory.buildOrganizationPlace({
+        organizationId,
+        activationDate: dayjs().subtract(1, 'months').toDate(),
+        count: 1,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const organizationPlacesStatistics = await usecases.getOrganizationPlacesStatistics({
+        organizationId,
+      });
+
+      // then
+      expect(organizationPlacesStatistics.total).to.equal(1);
+      expect(organizationPlacesStatistics.occupied).to.equal(2);
+      expect(organizationPlacesStatistics.anonymousSeat).to.equal(1);
+      expect(organizationPlacesStatistics.available).to.equal(0);
+      expect(organizationPlacesStatistics.hasReachMaximumPlacesWithThreshold).to.equal(true);
     });
+  });
 
-    // then
-    expect(organizationPlacesStatistics.total).to.equal(100);
-    expect(organizationPlacesStatistics.occupied).to.equal(2);
-    expect(organizationPlacesStatistics.anonymousSeat).to.equal(1);
-    expect(organizationPlacesStatistics.available).to.equal(98);
-    expect(organizationPlacesStatistics.hasReachMaximumPlacesWithThreshold).to.equal(false);
+  describe('When organization does not have the blocking place feature', function () {
+    it('should return false on hasReachMaximumPlacesWithThreshold', async function () {
+      // given
+      databaseBuilder.factory.buildOrganizationPlace({
+        organizationId,
+        activationDate: dayjs().subtract(1, 'months').toDate(),
+        count: 1,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const organizationPlacesStatistics = await usecases.getOrganizationPlacesStatistics({
+        organizationId,
+      });
+
+      // then
+      expect(organizationPlacesStatistics.hasReachMaximumPlacesWithThreshold).to.equal(false);
+    });
   });
 });

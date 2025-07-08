@@ -14,8 +14,8 @@ export class PlaceStatistics {
     this.#isPlacesLockEnabled = enablePlacesThresholdLock;
   }
 
-  static buildFrom({ placesLots, placeRepartition, organizationId } = {}) {
-    return new PlaceStatistics({ placesLots, placeRepartition, organizationId });
+  static buildFrom({ placesLots, placeRepartition, organizationId, enablePlacesThresholdLock } = {}) {
+    return new PlaceStatistics({ placesLots, placeRepartition, organizationId, enablePlacesThresholdLock });
   }
 
   get #activePlacesLots() {
