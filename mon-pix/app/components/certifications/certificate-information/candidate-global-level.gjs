@@ -41,6 +41,7 @@ export default class candidateGlobalLevel extends Component {
         @reachedLevel={{@certificate.level}}
         @maxLevel="7"
         @stepLabels={{this.stepLabels}}
+        @hideValues="true"
       />
     </div>
 
