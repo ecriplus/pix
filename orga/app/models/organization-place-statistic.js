@@ -5,6 +5,7 @@ export default class PlaceStatistics extends Model {
   @attr('number') total;
   @attr('number') occupied;
   @attr('number') anonymousSeat;
+  @attr('boolean') hasReachMaximumPlacesWithThreshold;
 
   get hasAnonymousSeat() {
     return this.anonymousSeat > 0;

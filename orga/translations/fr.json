@@ -80,6 +80,9 @@
     "last-places-lot-available": {
       "message": "Attention, vos places arrivent à échéance dans {days, number} jours."
     },
+    "maximum-places-exceeded": {
+      "message": "Plus de places disponibles pour l'organisation."
+    },
     "over-capacity": {
       "message": "Attention, vous consommez plus de places que votre capacité totale."
     },

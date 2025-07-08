@@ -4,6 +4,7 @@ import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import Communication from 'pix-orga/components/banner/communication';
 import InformationBanners from 'pix-orga/components/banner/information-banners';
+import MaximumPlacesExceeded from 'pix-orga/components/banner/maximum-places-exceeded';
 import Footer from 'pix-orga/components/layout/footer';
 import Sidebar from 'pix-orga/components/layout/sidebar';
 
@@ -18,6 +19,7 @@ import Sidebar from 'pix-orga/components/layout/sidebar';
     <:banner>
       <Communication />
       <InformationBanners @banners={{@model.informationBanner.banners}} />
+      <MaximumPlacesExceeded />
     </:banner>
     <:navigation>
       {{#if @controller.isAuthenticatedRoute}}
