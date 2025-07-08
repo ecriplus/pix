@@ -116,7 +116,6 @@ export default class CurrentSessionService extends SessionService {
 
   async _loadCurrentUserAndSetLocale(locale = null) {
     await this.currentUser.load();
-    await this.currentUser.loadAttestationDetails();
     await this._handleLocale(locale);
   }
 
