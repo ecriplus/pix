@@ -1,4 +1,3 @@
-import { CertificationChallengeLiveAlertStatus } from '../../../../../src/certification/shared/domain/models/CertificationChallengeLiveAlert.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../src/shared/domain/models/index.js';
 import { getAssessment } from '../../../../../src/shared/domain/usecases/get-assessment.js';
@@ -125,7 +124,18 @@ describe('Unit | UseCase | get-assessment', function () {
     it('should resolve the corresponding Assessment matching the given assessment ID', async function () {
       // given
       assessmentRepository.getWithAnswers.resolves(assessment);
-      certificationChallengeLiveAlertRepository.getByAssessmentId.withArgs(assessment.id).resolves([]);
+      const certificationChallengeLiveAlert = domainBuilder.buildCertificationChallengeLiveAlert({
+        assessmentId: assessment.id,
+      });
+      const certificationCompanionLiveAlert = domainBuilder.buildCertificationCompanionLiveAlert({
+        assessmentId: assessment.id,
+      });
+      certificationChallengeLiveAlertRepository.getByAssessmentId
+        .withArgs({ assessmentId: assessment.id })
+        .resolves([certificationChallengeLiveAlert]);
+      certificationCompanionAlertRepository.getAllByAssessmentId
+        .withArgs({ assessmentId: assessment.id })
+        .resolves([certificationCompanionLiveAlert]);
 
       // when
       const result = await getAssessment({
@@ -140,102 +150,8 @@ describe('Unit | UseCase | get-assessment', function () {
       // then
       expect(result).to.be.an.instanceOf(Assessment);
       expect(result.id).to.equal(assessment.id);
-    });
-
-    context('when no liveAlert is attached to the assessment', function () {
-      it('should set hasOngoingChallengeLiveAlert to false', async function () {
-        // given
-        assessment.type = Assessment.types.CERTIFICATION;
-        assessmentRepository.getWithAnswers.withArgs(assessment.id).resolves(assessment);
-        certificationChallengeLiveAlertRepository.getByAssessmentId.withArgs(assessment.id).resolves([]);
-        // when
-        const result = await getAssessment({
-          assessmentId: assessment.id,
-          assessmentRepository,
-          certificationChallengeLiveAlertRepository,
-          certificationCompanionAlertRepository,
-        });
-
-        // then
-        expect(result.hasOngoingChallengeLiveAlert).to.equal(false);
-      });
-    });
-
-    context('when a liveAlert is attached to the assessment', function () {
-      context('when a live alert is ongoing', function () {
-        it('should set hasOngoingChallengeLiveAlert to true', async function () {
-          // given
-          assessment.type = Assessment.types.CERTIFICATION;
-          assessmentRepository.getWithAnswers.withArgs(assessment.id).resolves(assessment);
-          const ongoingLiveAlert = domainBuilder.buildCertificationChallengeLiveAlert({
-            assessmentId: assessment.id,
-          });
-          certificationChallengeLiveAlertRepository.getByAssessmentId
-            .withArgs({ assessmentId: assessment.id })
-            .resolves([ongoingLiveAlert]);
-
-          // when
-          const result = await getAssessment({
-            assessmentId: assessment.id,
-            assessmentRepository,
-            certificationChallengeLiveAlertRepository,
-            certificationCompanionAlertRepository,
-          });
-
-          // then
-          expect(result.hasOngoingChallengeLiveAlert).to.equal(true);
-        });
-      });
-
-      context('when live alerts have been dismissed', function () {
-        it('should set hasOngoingChallengeLiveAlert to false', async function () {
-          // given
-          assessment.type = Assessment.types.CERTIFICATION;
-          assessmentRepository.getWithAnswers.withArgs(assessment.id).resolves(assessment);
-          const dismissedLiveAlert = domainBuilder.buildCertificationChallengeLiveAlert({
-            assessmentId: assessment.id,
-            status: CertificationChallengeLiveAlertStatus.DISMISSED,
-          });
-          certificationChallengeLiveAlertRepository.getByAssessmentId
-            .withArgs(assessment.id)
-            .resolves([dismissedLiveAlert]);
-          // when
-          const result = await getAssessment({
-            assessmentId: assessment.id,
-            assessmentRepository,
-            certificationChallengeLiveAlertRepository,
-            certificationCompanionAlertRepository,
-          });
-
-          // then
-          expect(result.hasOngoingChallengeLiveAlert).to.equal(false);
-        });
-      });
-
-      context('when live alerts have been accepted', function () {
-        it('should set hasOngoingChallengeLiveAlert to false', async function () {
-          // given
-          assessment.type = Assessment.types.CERTIFICATION;
-          assessmentRepository.getWithAnswers.withArgs(assessment.id).resolves(assessment);
-          const dismissedLiveAlert = domainBuilder.buildCertificationChallengeLiveAlert({
-            assessmentId: assessment.id,
-            status: CertificationChallengeLiveAlertStatus.VALIDATED,
-          });
-          certificationChallengeLiveAlertRepository.getByAssessmentId
-            .withArgs(assessment.id)
-            .resolves([dismissedLiveAlert]);
-          // when
-          const result = await getAssessment({
-            assessmentId: assessment.id,
-            assessmentRepository,
-            certificationChallengeLiveAlertRepository,
-            certificationCompanionAlertRepository,
-          });
-
-          // then
-          expect(result.hasOngoingChallengeLiveAlert).to.equal(false);
-        });
-      });
+      expect(result.challengeLiveAlerts).to.deep.equal([certificationChallengeLiveAlert]);
+      expect(result.companionLiveAlerts).to.deep.equal([certificationCompanionLiveAlert]);
     });
   });
 });
