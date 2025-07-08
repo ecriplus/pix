@@ -5,11 +5,13 @@ import { config } from '../../../../shared/config.js';
 export class PlaceStatistics {
   #placesLots;
   #placeRepartition;
+  #isPlacesLockEnabled;
 
-  constructor({ placesLots = [], placeRepartition, organizationId } = {}) {
+  constructor({ placesLots = [], placeRepartition, organizationId, enablePlacesThresholdLock } = {}) {
     this.id = `${organizationId}_place_statistics`;
     this.#placesLots = placesLots;
     this.#placeRepartition = placeRepartition;
+    this.#isPlacesLockEnabled = enablePlacesThresholdLock;
   }
 
   static buildFrom({ placesLots, placeRepartition, organizationId } = {}) {
@@ -45,7 +47,7 @@ export class PlaceStatistics {
   }
 
   get hasReachMaximumPlacesWithThreshold() {
-    if (this.occupied === 0) return false;
+    if (!this.#isPlacesLockEnabled || this.occupied === 0) return false;
 
     const thresholdLock = config.features.organizationPlacesManagementThreshold;
     const maximumPlaces = this.total + this.total * thresholdLock;
