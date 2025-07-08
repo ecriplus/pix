@@ -21,7 +21,7 @@ const register = async function (server) {
           query: Joi.object({
             filter: Joi.object({
               code: Joi.string()
-                .regex(/[^a-zA-Z0-9]/, { invert: true })
+                .regex(/^[a-zA-Z0-9]*$/)
                 .required(),
             }).required(),
           }),

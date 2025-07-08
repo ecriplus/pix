@@ -12,7 +12,7 @@ const register = async function (server) {
         validate: {
           params: Joi.object({
             code: Joi.string()
-              .regex(/[^a-zA-Z0-9]/, { invert: true })
+              .regex(/^[a-zA-Z0-9]*$/)
               .required(),
           }),
         },
