@@ -458,14 +458,49 @@
     {
       "id": "d7fb96f2-960f-4618-9f4e-3eb089b9de7a",
       "type": "activity",
-      "title": "Application 1",
+      "title": "Application 1 : vrai ou faux ?",
       "components": [
         {
           "type": "element",
           "element": {
             "id": "733A8211-3F79-47F8-8944-ED971EA7C8B1",
-            "type": "text",
-            "content": "<p>blah</p>"
+            "type": "qab",
+            "instruction": "<p>Voyons si vous avez retenu l'essentiel.<br>Répondez aux affirmations suivantes.</p>",
+            "cards": [
+              {
+                "id": "fb147c0c-bf20-40ce-8b22-acb536a6db2c",
+                "text": "Si l’IA générative produit des réponses flatteuses c’est à cause des humains.",
+                "image": {
+                  "url": "",
+                  "altText": ""
+                },
+                "proposalA": "Vrai",
+                "proposalB": "Faux",
+                "solution": "A"
+              },
+              {
+                "id": "6c4381c3-48ea-4a43-806d-95a2acf8dab0",
+                "text": "L’IA générative apprend en lisant des milliards de textes et en devinant des mots manquants.",
+                "image": {
+                  "url": "",
+                  "altText": ""
+                },
+                "proposalA": "Vrai",
+                "proposalB": "Faux",
+                "solution": "A"
+              },
+              {
+                "id": "31f1cbf8-24f7-4852-b22e-6f81885dce43",
+                "text": "Pour apprendre à simuler des conversations, on a expliqué à l'IA générative les règles à respecter dans les discussions.",
+                "image": {
+                  "url": "",
+                  "altText": ""
+                },
+                "proposalA": "Vrai",
+                "proposalB": "Faux",
+                "solution": "B"
+              }
+            ]
           }
         }
       ]
@@ -480,7 +515,7 @@
           "element": {
             "id": "cf0523d9-b4f8-4e94-abd5-0bc9e40145e4",
             "type": "text",
-            "content": "<p>blah blah</p>"
+            "content": "<p>hello</p>"
           }
         }
       ]
