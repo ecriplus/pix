@@ -89,14 +89,14 @@ export async function prompt({ chatId, userId, message, attachmentName }) {
     throw new NoAttachmentNeededError();
   }
   if (attachmentName && attachmentName === configuration.attachmentName) {
-    chat.addAttachmentContextMessages(configuration.attachmentName, configuration.attachmentContext);
+    chat.addAttachmentContextMessages(configuration.attachmentName, configuration.attachmentContext, !!message);
   }
   let readableStream = null;
   if (message) {
     if (message.length > configuration.inputMaxChars) {
       throw new TooLargeMessageInputError();
     }
-    // TODO quelque chose cloche avec cette histoire de -1 sur les prompts
+
     if (chat.currentPromptsCount >= configuration.inputMaxPrompts) {
       throw new MaxPromptsReachedError();
     }

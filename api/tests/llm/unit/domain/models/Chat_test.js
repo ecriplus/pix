@@ -25,10 +25,12 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           {
             content: 'some message',
             isFromUser: false,
+            notCounted: false,
           },
           {
             content: 'un message pas vide',
             isFromUser: true,
+            notCounted: false,
           },
         ],
       });
@@ -57,6 +59,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           {
             content: 'some message',
             isFromUser: false,
+            notCounted: false,
           },
         ],
       });
@@ -86,10 +89,12 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           {
             content: 'some message',
             isFromUser: false,
+            notCounted: false,
           },
           {
             content: 'un message pas vide',
             isFromUser: false,
+            notCounted: false,
           },
         ],
       });
@@ -118,6 +123,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           {
             content: 'some message',
             isFromUser: false,
+            notCounted: false,
           },
         ],
       });
@@ -153,20 +159,24 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             {
               content: 'some message',
               isFromUser: true,
+              notCounted: false,
             },
             {
               content: 'some answer',
               isFromUser: false,
+              notCounted: false,
             },
             {
               content:
                 "\n<system_notification>\n  L'utilisateur a téléversé une pièce jointe :\n  <attachment_name>\n    winter_lyrics.txt\n  </attachment_name>\n</system_notification>",
               isFromUser: true,
+              notCounted: false,
             },
             {
               content:
                 "\n<read_attachment_tool>\n  Lecture de la pièce jointe, winter_lyrics.txt :\n  <attachment_content>\n    J'étais assise sur une pierre\nDes larmes coulaient sur mon visage\n  </attachment_content>\n</read_attachment_tool>",
               isFromUser: false,
+              notCounted: false,
             },
           ],
         });
@@ -201,10 +211,12 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             {
               content: 'some message',
               isFromUser: true,
+              notCounted: false,
             },
             {
               content: 'some answer',
               isFromUser: false,
+              notCounted: false,
             },
           ],
         });
@@ -250,7 +262,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
     });
 
     context('when chat has user messages', function () {
-      it('should return the number of user messages', function () {
+      it('should return the number of counted user messages', function () {
         // given
         const chat = new Chat({
           id: 'some-chat-id',
@@ -271,6 +283,29 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         expect(currentPromptsCount).to.equal(2);
       });
     });
+
+    context('when chat has user uncounted messages ', function () {
+      it('should return the number of counted user messages', function () {
+        // given
+        const chat = new Chat({
+          id: 'some-chat-id',
+          configurationId: 'some-config-id',
+          hasAttachmentContextBeenAdded: false,
+          messages: [
+            new Message({ content: 'message llm 1', isFromUser: false }),
+            new Message({ content: 'message user 1', isFromUser: true }),
+            new Message({ content: 'message llm 2', isFromUser: false }),
+            new Message({ content: 'message user 2', isFromUser: true, notCounted: true }),
+          ],
+        });
+
+        // when
+        const currentPromptsCount = chat.currentPromptsCount;
+
+        // then
+        expect(currentPromptsCount).to.equal(1);
+      });
+    });
   });
 
   describe('#toDTO', function () {
@@ -282,7 +317,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         hasAttachmentContextBeenAdded: false,
         messages: [
           new Message({ content: 'message llm 1', isFromUser: false }),
-          new Message({ content: 'message user 1', isFromUser: true }),
+          new Message({ content: 'message user 1', isFromUser: true, notCounted: true }),
         ],
       });
 
@@ -298,10 +333,12 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           {
             content: 'message llm 1',
             isFromUser: false,
+            notCounted: false,
           },
           {
             content: 'message user 1',
             isFromUser: true,
+            notCounted: true,
           },
         ],
       });

@@ -33,8 +33,8 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         configurationId: 'someConfigurationId',
         hasAttachmentContextBeenAdded: false,
         messages: [
-          { content: 'je suis user', isFromUser: true },
-          { content: 'je suis LLM', isFromUser: false },
+          { content: 'je suis user', isFromUser: true, notCounted: false },
+          { content: 'je suis LLM', isFromUser: false, notCounted: false },
         ],
       });
     });
@@ -54,8 +54,8 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
             configurationId: 'someConfigurationId',
             hasAttachmentContextBeenAdded: false,
             messages: [
-              new Message({ content: 'je suis user', isFromUser: true }),
-              new Message({ content: 'je suis LLM', isFromUser: false }),
+              new Message({ content: 'je suis user', isFromUser: true, notCounted: false }),
+              new Message({ content: 'je suis LLM', isFromUser: false, notCounted: false }),
             ],
           });
           await save(chat);
@@ -78,8 +78,8 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           configurationId: 'someConfigurationId',
           hasAttachmentContextBeenAdded: false,
           messages: [
-            new Message({ content: 'je suis user', isFromUser: true }),
-            new Message({ content: 'je suis LLM', isFromUser: false }),
+            new Message({ content: 'je suis user', isFromUser: true, notCounted: false }),
+            new Message({ content: 'je suis LLM', isFromUser: false, notCounted: false }),
           ],
         });
         await save(chat);

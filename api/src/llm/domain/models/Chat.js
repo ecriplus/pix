@@ -27,9 +27,10 @@ export class Chat {
   /**
    * @param {string} attachmentName
    * @param {string} attachmentContext
+   * @param {boolean} notCounted
    * @returns {void}
    */
-  addAttachmentContextMessages(attachmentName, attachmentContext) {
+  addAttachmentContextMessages(attachmentName, attachmentContext, notCounted) {
     if (!this.hasAttachmentContextBeenAdded) {
       const userContent = `
 <system_notification>
@@ -38,7 +39,7 @@ export class Chat {
     ${attachmentName}
   </attachment_name>
 </system_notification>`;
-      this.messages.push(new Message({ content: userContent, isFromUser: true }));
+      this.messages.push(new Message({ content: userContent, isFromUser: true, notCounted }));
       const llmContent = `
 <read_attachment_tool>
   Lecture de la pièce jointe, ${attachmentName} :
@@ -65,7 +66,7 @@ export class Chat {
    * @returns {number}
    */
   get currentPromptsCount() {
-    return this.messages.filter((message) => message.isFromUser).length;
+    return this.messages.filter((message) => message.isFromUser && !message.notCounted).length;
   }
 
   /**
@@ -88,9 +89,10 @@ export class Message {
    * @param {string} params.content
    * @param {Boolean} params.isFromUser
    */
-  constructor({ content, isFromUser }) {
+  constructor({ content, isFromUser, notCounted }) {
     this.content = content;
     this.isFromUser = isFromUser;
+    this.notCounted = !!notCounted;
   }
 
   /**
@@ -100,6 +102,7 @@ export class Message {
     return {
       content: this.content,
       isFromUser: this.isFromUser,
+      notCounted: this.notCounted,
     };
   }
 }
