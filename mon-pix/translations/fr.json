@@ -1610,7 +1610,7 @@
         "description": "Un compte va être créé à partir des éléments transmis par l'organisme",
         "information": {
           "FrEduFonctAdm": "Fonction Administrative :",
-          "FrEduNumenHash": "Numen (chiffré) :",
+          "FrEduNumenHash": "Identifiant technique",
           "discipline": "Discipline :",
           "employeeNumber": "Numéro d'employé :",
           "error": "Nous n’avons pas pu récupérer vos informations d’identité auprès du service utilisé. Nous vous invitons à contacter le support informatique de cette organisation.",
