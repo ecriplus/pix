@@ -1,5 +1,28 @@
 # Pix Changelog
 
+# [5.154.0](https://github.com/1024pix/pix/compare/v5.153.0...v5.154.0) (2025-07-09)
+
+### :rocket: Amélioration
+
+- [#12776](https://github.com/1024pix/pix/pull/12776) :lipstick: Masque la bannière annonçant les périodes de certifiation pour les centres de certification scolaires (PIX-18639) 
+- [#12782](https://github.com/1024pix/pix/pull/12782) Afficher une bannière sur Pix Orga lorsque le nombre de places limite est atteint (PIX-18633). 
+- [#12773](https://github.com/1024pix/pix/pull/12773) Créer une table 'target_profiles_course_duration' et lui ajouter sa réplication maddo (PIX-18632). 
+- [#12777](https://github.com/1024pix/pix/pull/12777) Déclencher l'envoi automatique lorsque la participation a été créé après une date (PIX-18631). 
+- [#12764](https://github.com/1024pix/pix/pull/12764) Modification du nom de la claim Numen (chiffré) (PIX-18557) 
+- [#12779](https://github.com/1024pix/pix/pull/12779) N'avoir qu'un seul logger afin d'être sur d'avoir les correlationId lorsque nécessaire (PIX-18554). 
+- [#12791](https://github.com/1024pix/pix/pull/12791) Ne pas bloquer les places d'une orga si la feature n'est pas active (PIX-18656). 
+
+### :bug: Correction
+
+- [#12783](https://github.com/1024pix/pix/pull/12783) :lipstick: Masquer les chiffres dans le Pix Gauge sur la page certificat sur Pix App (PIX-18626) 
+- [#12707](https://github.com/1024pix/pix/pull/12707) Rendre l'identifiant plus visible dans la double mire d'authentification SCO (PIX-18455) 
+- [#12706](https://github.com/1024pix/pix/pull/12706) Rendre transactionnel le scoring V3 (PIX-18354). 
+
+### :building_construction: Tech
+
+- [#12742](https://github.com/1024pix/pix/pull/12742) Activation de Playwright dans le flux de CI + ajout de test pour la non régression sur tous les types d'évaluation 
+- [#12788](https://github.com/1024pix/pix/pull/12788) N'appelle pas GET /attestation-details en double.
+
 # [5.153.0](https://github.com/1024pix/pix/compare/v5.152.0...v5.153.0) (2025-07-08)
 
 ### :rocket: Amélioration
