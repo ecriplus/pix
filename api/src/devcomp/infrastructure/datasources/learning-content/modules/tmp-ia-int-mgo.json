@@ -515,7 +515,7 @@
           "element": {
             "id": "cf7769e2-c924-43f7-9577-85d544a79bcb",
             "type": "text",
-            "content": "<p>introduire le QCU</p>"
+            "content": "<p>Chacune des étapes de l'entraînement des IA génératives nécessite un type de données spécifique. </p><p>À vous de retrouver de quelles données on a besoin lors de chaque étape&nbsp;🔍</p>"
           }
         },
         {
@@ -523,7 +523,7 @@
           "element": {
             "id": "cf0523d9-b4f8-4e94-abd5-0bc9e40145e4",
             "type": "qcu",
-            "instruction": "<p>Pendant l'étape de pré-entraînement, les IA génératives apprennent à produire du texte et à prédire la suite d'un texte.&nbsp;</p><p>De quoi a-t-on besoin pour cette étape ?</p>",
+            "instruction": "<p>Pendant l'étape de <strong>pré-entraînement</strong>, les IA génératives apprennent à produire du texte et à créer la suite d'un texte.&nbsp;</p><p>De quoi a-t-on besoin pour cette étape ?</p>",
             "proposals": [
               {
                 "id": "1",
@@ -552,6 +552,76 @@
             ],
             "solution": "1"
           }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "4b58e6a5-d565-4677-a9ab-4b4ac8d6a009",
+            "type": "qcu",
+            "instruction": "<p>Pendant l'étape&nbsp;d'<strong>ajustement</strong>, les IA génératives apprennent à produire du texte avec un certain&nbsp;style ou format, comme  une&nbsp;conversation ou une lettre de motivation.</p><p>De quoi a-t-on besoin pour cette étape ?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>Des milliards de conversations tirées des réseaux sociaux.</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Lors de la phase d'ajustement, l'IA générative a déjà ingéré des milliards de textes pendant le pré-entraînement.  Pour lui apprendre à discuter avec les utilisateurs, on doit montrer à l'IA générative des exemples de cette tâche spécifique.</p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "<p>Une liste de règles de grammaire.</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Ce n'est pas un programme qui suit des règles. Pour lui apprendre à discuter avec les utilisateurs, on doit montrer à l'IA générative des exemples.</p>"
+                }
+              },
+              {
+                "id": "3",
+                "content": "<p>Des textes spécifiques sélectionnés par des humains.</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Effectivement, pour lui apprendre à discuter avec les utilisateurs, on doit fournir à l'IA générative des exemples de ce qu'elle va reproduire, donc des exemples de conversations que l'on aura sélectionnés.</p>"
+                }
+              }
+            ],
+            "solution": "3"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "bd4eace5-94a6-403b-8de0-a0066d55306f",
+            "type": "qcu",
+            "instruction": "<p>Pendant l'étape&nbsp;d'<strong>alignement</strong>, les IA génératives apprennent à produire du texte qui plaît aux utilisateurs. </p><p>De quoi a-t-on besoin pour cette étape ?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>Une liste de mots vulgaires à ne pas dire.</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>On peut donner des listes de mots interdits aux IA génératives, pour se conformer aux réglementations des différents pays par exemple. Mais ce n'est pas de cette façon qu'elles apprennent à produire des textes qui plaisent aux utilisateurs.</p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "<p>Des données sur les préférences des utilisateurs.</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Effectivement, les retours des utilisateurs sur les réponses des IA génératives leur permettent de s'aligner avec les attentes des utilisateurs.</p>"
+                }
+              },
+              {
+                "id": "3",
+                "content": "<p>Une liste des règles générales de la politesse.</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>On ne donne pas de règles de politesse à respecter aux IA génératives. Si elles les respectent dans la pratiques, c'est qu'elles les ont apprises autrement, à partir de données produites par les utilisateurs.</p>"
+                }
+              }
+            ],
+            "solution": "2"
+          }
         }
       ]
     },
@@ -559,7 +629,51 @@
       "id": "fd0e6e1e-d347-45c6-8cc7-fc7ee8c6d63a",
       "type": "challenge",
       "title": "Défi",
-      "components": []
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "cf0523d9-b4f8-4e94-abd5-0bc9e40145e4",
+            "type": "text",
+            "content": "<p>À vous de jouer&nbsp;🕹️&nbsp;</p>\n<p>Expliquer le défi<br></p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "6d10d86a-1d5e-4b52-9cc9-2c62d48d94c5",
+            "type": "expand",
+            "title": "Indice",
+            "content": "<p>Mon indice avec mon image</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "17ea1fb5-62b4-430e-85a6-7289ef1cf396",
+            "type": "qcu-declarative",
+            "instruction": "<p>Avez vous réussi ?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>Oui</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>todo</p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "<p>Non</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>todo</p>"
+                }
+              }
+            ]
+          }
+        }
+      ]
     }
   ]
 }
