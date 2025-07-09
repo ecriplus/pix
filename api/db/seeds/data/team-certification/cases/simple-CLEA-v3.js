@@ -14,7 +14,10 @@ import {
 } from '../../../../../src/shared/domain/models/CertificationCenter.js';
 import { normalize } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
 import { usecases as teamUsecases } from '../../../../../src/team/domain/usecases/index.js';
-import { CLEA_COMPLEMENTARY_CERTIFICATION_ID } from '../../common/complementary-certification-builder.js';
+import {
+  CLEA_COMPLEMENTARY_CERTIFICATION_ID,
+  CLEA_V2_TARGET_PROFILE_ID,
+} from '../../common/complementary-certification-builder.js';
 import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
 import { CommonPixCertifOrganization } from '../shared/common-organisation.js';
 import {
@@ -86,10 +89,13 @@ export class CleaV3Seed {
       databaseBuilder: this.databaseBuilder,
     });
 
-    // Attach CLEA target profile
+    const cleaTargetProfile = await prescriptionTargetProfilesUsecases.getTargetProfile({
+      targetProfileId: CLEA_V2_TARGET_PROFILE_ID,
+    });
+
     prescriptionTargetProfilesUsecases.attachTargetProfilesToOrganization({
       organizationId: organization.id,
-      targetProfileIds: [78], // TODO : replace by getTargetProfile
+      targetProfileIds: [cleaTargetProfile.id], // TODO : replace by getTargetProfile
     });
 
     return { organization, organizationMember };
