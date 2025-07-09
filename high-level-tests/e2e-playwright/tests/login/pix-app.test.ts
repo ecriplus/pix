@@ -10,27 +10,27 @@ test.beforeEach(async () => {
   await buildAuthenticatedUsers({ withCguAccepted: false });
 });
 
-test('login, cgu and logout', async ({ page }: { page: Page }) => {
+test('Signup, logout and login', async ({ page }: { page: Page }) => {
   await page.goto(process.env.PIX_APP_URL as string);
 
-  await test.step('Login to PixApp', async () => {
-    await expect(page).toHaveTitle('Connexion | Pix');
-
+  await test.step('Signup', async () => {
     const loginPage = new LoginPage(page);
-    await loginPage.login(PIX_APP_USER_DATA.email, PIX_APP_USER_DATA.rawPassword);
+    await loginPage.signup('Buffy', 'Summers', 'buffy.summers@example.net', 'Coucoulesdevs66');
 
+    await expect(page.locator('#main')).toContainText('Bonjour Buffy');
     await expect(page).toHaveTitle('Accueil | Pix');
   });
 
   await test.step('Logout and login', async function () {
-    await page.getByRole('button', { name: PIX_APP_USER_DATA.firstName }).click();
+    await page.getByRole('button', { name: 'Buffy' }).click();
     await page.getByRole('link', { name: 'Se déconnecter' }).click();
 
     await expect(page).toHaveTitle('Connexion | Pix');
 
     const loginPage = new LoginPage(page);
-    await loginPage.login(PIX_APP_USER_DATA.email, PIX_APP_USER_DATA.rawPassword);
+    await loginPage.login('buffy.summers.pixapp@example.net', 'Coucoulesdevs66');
 
+    await expect(page.locator('#main')).toContainText('Bonjour Buffy');
     await expect(page).toHaveTitle('Accueil | Pix');
   });
 });

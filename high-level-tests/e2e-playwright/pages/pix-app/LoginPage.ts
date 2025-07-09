@@ -8,4 +8,14 @@ export class LoginPage {
     await this.page.getByLabel('Mot de passe').fill(rawPassword);
     await this.page.getByRole('button', { name: 'Je me connecte' }).click();
   }
+
+  async signup(firstName: string, lastName: string, email: string, rawPassword: string) {
+    await this.page.getByRole('link', { name: "S'inscrire" }).click();
+    await this.page.getByRole('textbox', { name: 'Prénom' }).fill(firstName);
+    await this.page.getByRole('textbox', { name: 'Nom', exact: true }).fill(lastName);
+    await this.page.getByRole('textbox', { name: 'Adresse e-mail' }).fill(email);
+    await this.page.getByRole('textbox', { name: 'Mot de passe' }).fill(rawPassword);
+    await this.page.getByRole('checkbox', { name: "J'accepte les conditions" }).check();
+    await this.page.getByRole('button', { name: "Je m'inscris" }).click();
+  }
 }

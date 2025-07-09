@@ -25,6 +25,39 @@ export async function cleanDB() {
   await databaseBuilder.knex.raw(`SELECT setval(?, 1, false)`, [sequenceName]);
 }
 
+export async function buildFreshPixCertifUser(firstName: string, lastName: string, email: string, rawPassword: string) {
+  const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+  const userId = databaseBuilder.factory.buildUser.withRawPassword({
+    firstName,
+    lastName,
+    email,
+    rawPassword,
+    pixCertifTermsOfServiceAccepted: false,
+  }).id;
+  databaseBuilder.factory.buildCertificationCenterMembership({
+    certificationCenterId,
+    userId,
+  });
+
+  await databaseBuilder.commit();
+}
+
+export async function buildFreshPixOrgaUser(firstName: string, lastName: string, email: string, rawPassword: string) {
+  const organizationId = databaseBuilder.factory.buildOrganization().id;
+  const userId = databaseBuilder.factory.buildUser.withRawPassword({
+    firstName,
+    lastName,
+    email,
+    rawPassword,
+  }).id;
+  databaseBuilder.factory.buildMembership({
+    userId,
+    organizationId,
+  });
+
+  await databaseBuilder.commit();
+}
+
 export async function buildAuthenticatedUsers({ withCguAccepted }: { withCguAccepted: boolean }) {
   // PIX-APP
   databaseBuilder.factory.buildUser.withRawPassword({

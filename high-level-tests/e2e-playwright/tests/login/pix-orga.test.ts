@@ -1,12 +1,11 @@
 import { Page } from '@playwright/test';
 
-import { buildAuthenticatedUsers } from '../../helpers/db.ts';
-import { PIX_ORGA_PRO_DATA } from '../../helpers/db-data.ts';
+import { buildFreshPixOrgaUser } from '../../helpers/db.ts';
 import { expect, test } from '../../helpers/fixtures.ts';
 import { LoginPage } from '../../pages/pix-orga/index.js';
 
 test.beforeEach(async () => {
-  await buildAuthenticatedUsers({ withCguAccepted: false });
+  await buildFreshPixOrgaUser('Buffy', 'Summers', 'buffy.summers.pixorga@example.net', 'Coucoulesdevs66');
 });
 
 test('login, cgu and logout', async ({ page }: { page: Page }) => {
@@ -16,7 +15,7 @@ test('login, cgu and logout', async ({ page }: { page: Page }) => {
     await expect(page).toHaveTitle('Connectez-vous | Pix Orga (hors France)');
 
     const loginPage = new LoginPage(page);
-    await loginPage.login(PIX_ORGA_PRO_DATA.email, PIX_ORGA_PRO_DATA.rawPassword);
+    await loginPage.login('buffy.summers.pixorga@example.net', 'Coucoulesdevs66');
     const cgu = page.getByRole('heading', {
       name: "Veuillez accepter nos Conditions Générales d'Utilisation (CGU)",
     });
@@ -32,7 +31,7 @@ test('login, cgu and logout', async ({ page }: { page: Page }) => {
     await expect(page).toHaveTitle('Connectez-vous | Pix Orga (hors France)');
 
     const loginPage = new LoginPage(page);
-    await loginPage.login(PIX_ORGA_PRO_DATA.email, PIX_ORGA_PRO_DATA.rawPassword);
+    await loginPage.login('buffy.summers.pixorga@example.net', 'Coucoulesdevs66');
 
     await expect(page).toHaveURL(/campagnes\/les-miennes$/);
   });

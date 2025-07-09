@@ -1,12 +1,11 @@
 import { Page } from '@playwright/test';
 
-import { buildAuthenticatedUsers } from '../../helpers/db.ts';
-import { PIX_CERTIF_PRO_DATA } from '../../helpers/db-data.ts';
+import { buildFreshPixCertifUser } from '../../helpers/db.ts';
 import { expect, test } from '../../helpers/fixtures.ts';
 import { LoginPage } from '../../pages/pix-certif/index.js';
 
 test.beforeEach(async () => {
-  await buildAuthenticatedUsers({ withCguAccepted: false });
+  await buildFreshPixCertifUser('Buffy', 'Summers', 'buffy.summers.pixcertif@example.net', 'Coucoulesdevs66');
 });
 
 test('login, cgu and logout', async ({ page }: { page: Page }) => {
@@ -19,7 +18,7 @@ test('login, cgu and logout', async ({ page }: { page: Page }) => {
     );
 
     const loginPage = new LoginPage(page);
-    await loginPage.login(PIX_CERTIF_PRO_DATA.email, PIX_CERTIF_PRO_DATA.rawPassword);
+    await loginPage.login('buffy.summers.pixcertif@example.net', 'Coucoulesdevs66');
     const cgu = page.getByRole('heading', {
       name: "Conditions générales d'utilisation de la plateforme Pix Certif",
     });
@@ -38,7 +37,7 @@ test('login, cgu and logout', async ({ page }: { page: Page }) => {
     );
 
     const loginPage = new LoginPage(page);
-    await loginPage.login(PIX_CERTIF_PRO_DATA.email, PIX_CERTIF_PRO_DATA.rawPassword);
+    await loginPage.login('buffy.summers.pixcertif@example.net', 'Coucoulesdevs66');
 
     await expect(page).toHaveURL(/sessions$/);
   });
