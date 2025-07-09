@@ -4,26 +4,45 @@ import { getGarTokenForExistingUser } from '../../helpers/auth.ts';
 import { buildAuthenticatedUsers } from '../../helpers/db.ts';
 import { PIX_APP_USER_DATA } from '../../helpers/db-data.ts';
 import { expect, test } from '../../helpers/fixtures.ts';
+import { LoginPage } from '../../pages/pix-app/index.js';
 
 test.beforeEach(async () => {
   await buildAuthenticatedUsers({ withCguAccepted: false });
 });
 
-test('authenticates user to pix app', async ({ page }: { page: Page }) => {
+test('login, cgu and logout', async ({ page }: { page: Page }) => {
   await page.goto(process.env.PIX_APP_URL as string);
-  await expect(page).toHaveTitle('Connexion | Pix');
 
-  await page.getByLabel('Adresse e-mail ou identifiant').fill(PIX_APP_USER_DATA.email);
-  await page.getByLabel('Mot de passe').fill(PIX_APP_USER_DATA.rawPassword);
+  await test.step('Login to PixApp', async () => {
+    await expect(page).toHaveTitle('Connexion | Pix');
 
-  await page.getByRole('button', { name: 'Je me connecte' }).click();
+    const loginPage = new LoginPage(page);
+    await loginPage.login(PIX_APP_USER_DATA.email, PIX_APP_USER_DATA.rawPassword);
 
-  await expect(page).toHaveTitle('Accueil | Pix');
+    await expect(page).toHaveTitle('Accueil | Pix');
+  });
+
+  await test.step('Logout and login', async function () {
+    await page.getByRole('button', { name: PIX_APP_USER_DATA.firstName }).click();
+    await page.getByRole('link', { name: 'Se déconnecter' }).click();
+
+    await expect(page).toHaveTitle('Connexion | Pix');
+
+    const loginPage = new LoginPage(page);
+    await loginPage.login(PIX_APP_USER_DATA.email, PIX_APP_USER_DATA.rawPassword);
+
+    await expect(page).toHaveTitle('Accueil | Pix');
+  });
 });
 
-test('authenticates GAR user to pix app', async ({ page }) => {
+test('Login as GAR user and logout', async ({ page }) => {
   const token = getGarTokenForExistingUser(PIX_APP_USER_DATA.id);
   await page.goto(process.env.PIX_APP_URL + `/connexion/gar#${token}`);
 
   await expect(page).toHaveTitle('Accueil | Pix');
+
+  await page.getByRole('button', { name: PIX_APP_USER_DATA.firstName }).click();
+  await page.getByRole('link', { name: 'Se déconnecter' }).click();
+
+  await expect(page.locator('main')).toContainText('Vous êtes bien déconnecté(e).');
 });
