@@ -92,7 +92,7 @@ export default class RegisterForm extends Component {
         @validationStatus={{this.validation.firstName.status}}
         @errorMessage={{this.validation.firstName.message}}
         @disabled={{this.matchingStudentFound}}
-        autocomplete="firstname"
+        autocomplete="given-name"
         type="text"
       >
         <:label>{{t "pages.login-or-register.register-form.fields.firstname.label"}}</:label>
@@ -107,7 +107,7 @@ export default class RegisterForm extends Component {
         @validationStatus={{this.validation.lastName.status}}
         @errorMessage={{this.validation.lastName.message}}
         @disabled={{this.matchingStudentFound}}
-        autocomplete="lastName"
+        autocomplete="family-name"
         type="text"
       >
         <:label>{{t "pages.login-or-register.register-form.fields.lastname.label"}}</:label>
@@ -166,12 +166,10 @@ export default class RegisterForm extends Component {
 
       <form {{on "submit" this.register}} autocomplete="off" class="register-form">
         {{#if this.loginWithUsername}}
-          <div id="register-username-container" class="register-form-username-container">
-            <label class="register-form-username-container__label">
-              {{t "pages.login-or-register.register-form.fields.username.label"}}
-              <abbr title="{{t 'common.form.mandatory'}}" class="mandatory-mark">*</abbr>
-            </label>
-            <span class="register-form-username-container__span" data-test-username>{{this.username}}</span>
+          <div class="register-form-username-container">
+            <PixInput @id="username" @value={{this.username}} @requiredLabel={{true}} disabled={{true}} type="text">
+              <:label>{{t "pages.login-or-register.register-form.fields.username.label"}}</:label>
+            </PixInput>
           </div>
         {{else}}
           <PixInput
@@ -184,7 +182,7 @@ export default class RegisterForm extends Component {
             @errorMessage={{this.validation.email.message}}
             @disabled={{this.matchingStudentFound}}
             @subLabel={{t "pages.login-or-register.register-form.fields.email.help"}}
-            autocomplete="firstname"
+            autocomplete="email"
             type="email"
           >
             <:label>{{t "pages.login-or-register.register-form.fields.email.label"}}</:label>
