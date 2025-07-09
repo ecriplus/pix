@@ -104,6 +104,10 @@ $grain-card-border-radius: var(--pix-spacing-4x);
   }
 }
 
+.grain-card-tag {
+  margin-bottom: var(--pix-spacing-1x);
+}
+
 // stylelint-disable-next-line no-duplicate-selectors
 .grain--active:focus-visible {
   .grain__card {

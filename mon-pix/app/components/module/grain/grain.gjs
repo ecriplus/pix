@@ -1,4 +1,5 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -12,6 +13,7 @@ import { TrackedSet } from 'tracked-built-ins';
 
 export default class ModuleGrain extends Component {
   @service modulixAutoScroll;
+  @service intl;
   @tracked answeredElements = new TrackedSet();
 
   grain = this.args.grain;
@@ -191,8 +193,16 @@ export default class ModuleGrain extends Component {
     return this.args.grain.type === 'summary';
   }
 
+  get isGrainTypeWithTag() {
+    return this.args.grain.type === 'activity' || this.args.grain.type === 'discovery';
+  }
+
   get emojiGrain() {
     return '📌';
+  }
+
+  get tagText() {
+    return this.intl.t(`pages.modulix.grain.tag.${this.args.grain.type}`);
   }
 
   <template>
@@ -208,6 +218,11 @@ export default class ModuleGrain extends Component {
           total=@totalSteps
         }}</h2>
       <div class="grain__card grain-card--{{this.grainType}}">
+        {{#if this.isGrainTypeWithTag}}
+          <PixTag class="grain-card-tag" @color="grey">
+            {{this.tagText}}
+          </PixTag>
+        {{/if}}
         {{#if this.isGrainTypeSummary}}
           <p class="grain-card-icon">{{this.emojiGrain}}</p>
         {{/if}}

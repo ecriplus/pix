@@ -627,8 +627,8 @@ module('Integration | Component | Module | Grain', function (hooks) {
       await render(
         hbs`
           <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}}
-                         @onGrainContinue={{this.onGrainContinue}} @onGrainSkip={{this.onGrainSkip}}
-                         @passage={{this.passage}} />`,
+                                @onGrainContinue={{this.onGrainContinue}} @onGrainSkip={{this.onGrainSkip}}
+                                @passage={{this.passage}} />`,
       );
       await clickByName(t('pages.modulix.buttons.grain.skip'));
 
@@ -1595,6 +1595,55 @@ module('Integration | Component | Module | Grain', function (hooks) {
           assert.dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.grain.continue') })).doesNotExist();
         });
       });
+    });
+  });
+
+  module('when grain has type ‘Discovery‘', function () {
+    test('should display the corresponding tag', async function (assert) {
+      // given
+      const textElement = {
+        content: 'element content',
+        type: 'text',
+        isAnswerable: false,
+      };
+      const grain = {
+        id: '12345-abcdef',
+        type: 'discovery',
+        components: [{ type: 'element', element: textElement }],
+      };
+
+      this.set('grain', grain);
+
+      // when
+      const screen = await render(hbs`
+          <Module::Grain::Grain @grain={{this.grain}} />`);
+
+      // then
+      assert.dom(screen.getByText('Découverte')).exists();
+    });
+  });
+
+  module('when grain has type ‘Activity‘', function () {
+    test('should display the corresponding tag', async function (assert) {
+      // given
+      const textElement = {
+        content: 'element content',
+        type: 'text',
+        isAnswerable: false,
+      };
+      const grain = {
+        id: '12345-abcdef',
+        type: 'activity',
+        components: [{ type: 'element', element: textElement }],
+      };
+      this.set('grain', grain);
+
+      // when
+      const screen = await render(hbs`
+          <Module::Grain::Grain @grain={{this.grain}} />`);
+
+      // then
+      assert.dom(screen.getByText('Activité')).exists();
     });
   });
 });
