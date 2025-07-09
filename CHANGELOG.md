@@ -1,5 +1,21 @@
 # Pix Changelog
 
+# [5.155.0](https://github.com/1024pix/pix/compare/v5.154.0...v5.155.0) (2025-07-09)
+
+### :rocket: Amélioration
+
+- [#12748](https://github.com/1024pix/pix/pull/12748) Ajouter les pre handler sur les routes nécessaire dans PixOrga (PIX-18602). 
+
+### :bug: Correction
+
+- [#12787](https://github.com/1024pix/pix/pull/12787) Modulix - QAB affichage KO (PIX-18510) 
+
+### :building_construction: Tech
+
+- [#12797](https://github.com/1024pix/pix/pull/12797) :hammer: Ajoute une colonne version au `certification-frameworks-challenge` (pix-18665) 
+- [#12794](https://github.com/1024pix/pix/pull/12794) désactivation du proxy buffering 
+- [#12793](https://github.com/1024pix/pix/pull/12793) Supprime l'appel à GET /assessments/:id/next après le checkpoint.
+
 # [5.154.0](https://github.com/1024pix/pix/compare/v5.153.0...v5.154.0) (2025-07-09)
 
 ### :rocket: Amélioration
