@@ -602,10 +602,11 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
         );
         focusedCertificationChallengeWarningManager.reset();
 
+        const firstChallenge = server.create('challenge', 'forCertification', 'QCM', 'withFocused');
         server.create('challenge', 'forCertification', 'QCM');
         server.create('challenge', 'forCertification', 'QCM', 'withFocused');
         assessment = server.create('assessment', 'ofCertificationType', {
-          nextChallenge: server.create('challenge', 'forCertification', 'QCM', 'withFocused'),
+          nextChallenge: firstChallenge,
         });
 
         const certificationCourse = server.create('certification-course', {

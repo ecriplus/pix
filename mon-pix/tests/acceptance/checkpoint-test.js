@@ -1,6 +1,6 @@
 import { visit } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
-import { find } from '@ember/test-helpers';
+import { click, find } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
@@ -41,6 +41,24 @@ module('Acceptance | Checkpoint', function (hooks) {
       assert.dom('.result-item').exists({ count: NB_ANSWERS });
       assert.strictEqual(find('.checkpoint__continue').textContent.trim(), 'Continuer');
       assert.dom('.checkpoint-no-answer').doesNotExist();
+    });
+
+    test('should not call /assessments/:id/next when leaving checkpoint', async function (assert) {
+      // given
+      const screen = await visit(`/assessments/${assessment.id}/checkpoint`);
+
+      // when
+      const continueButtons = screen.getAllByRole('link', { name: 'Continuer' });
+      await click(continueButtons[0]);
+
+      // then
+      const requests = server.pretender.handledRequests;
+      const requestsToGetNextChallenge = requests.filter(({ url }) => url.includes('/next'));
+      assert.strictEqual(
+        requestsToGetNextChallenge.length,
+        0,
+        'Request to GET /assessments/:id/next should not be done',
+      );
     });
   });
 

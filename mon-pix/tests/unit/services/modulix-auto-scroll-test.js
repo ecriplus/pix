@@ -1,22 +1,30 @@
-import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 module('Unit | Services | Module | ModulixAutoScroll', function (hooks) {
   setupTest(hooks);
+  let htmlElement;
+
+  hooks.beforeEach(function () {
+    htmlElement = {
+      focus: sinon.stub(),
+      getBoundingClientRect: sinon.stub().returns({ top: 0 }),
+      style: { setProperty: sinon.stub() },
+    };
+  });
 
   module('#setHTMLElementScrollOffsetCssProperty', function () {
     test('should set --scroll-offset to the given html element', function (assert) {
       // given
       const modulixAutoScrollService = this.owner.lookup('service:modulix-auto-scroll');
-      const htmlElement = document.createElement('div');
 
       // when
       modulixAutoScrollService.setHTMLElementScrollOffsetCssProperty(htmlElement);
 
       // then
-      assert.strictEqual(htmlElement.style.getPropertyValue('--scroll-offset'), '70px');
+      sinon.assert.calledWithExactly(htmlElement.style.setProperty, '--scroll-offset', '70px');
+      assert.ok(true);
     });
   });
 
@@ -25,8 +33,6 @@ module('Unit | Services | Module | ModulixAutoScroll', function (hooks) {
       test('should call focus on given html element', function (assert) {
         // given
         const modulixAutoScrollService = this.owner.lookup('service:modulix-auto-scroll');
-        const htmlElement = document.createElement('div');
-        htmlElement.focus = sinon.stub();
 
         // when
         modulixAutoScrollService.focusAndScroll(htmlElement);
@@ -44,7 +50,6 @@ module('Unit | Services | Module | ModulixAutoScroll', function (hooks) {
         const windowScrollY = 12;
 
         const modulixAutoScrollService = this.owner.lookup('service:modulix-auto-scroll');
-        const htmlElement = document.createElement('div');
         htmlElement.getBoundingClientRect = sinon.stub().returns({ top: topOfGivenElement });
         const navbarElement = document.createElement('nav');
         navbarElement.getBoundingClientRect = sinon.stub().returns({ height: navbarHeight });
@@ -71,7 +76,6 @@ module('Unit | Services | Module | ModulixAutoScroll', function (hooks) {
 
       module('according to user preferences', function (hooks) {
         let modulixAutoScrollService;
-        let htmlElement;
         let scrollStub;
         let getWindowScrollYStub;
 
@@ -79,7 +83,6 @@ module('Unit | Services | Module | ModulixAutoScroll', function (hooks) {
           modulixAutoScrollService = this.owner.lookup('service:modulix-auto-scroll');
 
           const givenHtmlElementBoundingClientRectTop = 20;
-          htmlElement = document.createElement('div');
           htmlElement.getBoundingClientRect = sinon.stub().returns({
             top: givenHtmlElementBoundingClientRectTop,
           });
@@ -142,14 +145,9 @@ module('Unit | Services | Module | ModulixAutoScroll', function (hooks) {
       test('should not call call focus on given html element', function (assert) {
         // given
         const modulixAutoScrollService = this.owner.lookup('service:modulix-auto-scroll');
-        const htmlElement = document.createElement('div');
-        htmlElement.focus = sinon.stub();
 
-        class PreviewModeServiceStub extends Service {
-          isEnabled = true;
-        }
-
-        this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+        const modulixPreviewModeService = this.owner.lookup('service:modulixPreviewMode');
+        sinon.stub(modulixPreviewModeService, 'isEnabled').value(true);
 
         // when
         modulixAutoScrollService.focusAndScroll(htmlElement);
