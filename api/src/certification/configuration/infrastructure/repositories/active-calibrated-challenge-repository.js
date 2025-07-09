@@ -19,6 +19,7 @@ export async function getByComplementaryKeyAndCalibrationId({ complementaryCerti
     .where({
       calibration_id: calibrationId,
       scope: complementaryCertificationKey,
+      status: 'VALIDATED',
     })
     .orderBy('challengeId');
 

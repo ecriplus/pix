@@ -121,6 +121,7 @@ describe('Certification | Configuration | Integration | Repository | active-cali
         challengeId: 'rec6789',
         calibrationId: toValidateCalibration.id,
       });
+      await datamartBuilder.commit();
 
       //when
       const error = await catchErr(activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId)({
