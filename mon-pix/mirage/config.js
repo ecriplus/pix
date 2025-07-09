@@ -51,6 +51,7 @@ export default function makeServer(config) {
     routes,
     logging: true,
     urlPrefix: 'http://localhost:3000',
+    trackRequests: true,
   };
 
   const server = createServer(finalConfig);
