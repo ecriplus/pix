@@ -23,7 +23,7 @@ export default class CurrentUserService extends Service {
     if (this.session.isAuthenticated) {
       try {
         this.#user = await this.store.queryRecord('user', { me: true });
-        this.#attestationsDetails = await this.store.findAll('attestation-detail');
+        await this.loadAttestationDetails();
       } catch {
         this.#user = null;
         return this.session.invalidate();
