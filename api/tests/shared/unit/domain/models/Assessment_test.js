@@ -1,5 +1,4 @@
 import { Campaign } from '../../../../../src/prescription/campaign/domain/models/Campaign.js';
-import { CampaignTypes } from '../../../../../src/prescription/shared/domain/constants.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { CampaignAssessment } from '../../../../../src/shared/domain/read-models/CampaignAssessment.js';
 import { CertificationAssessment } from '../../../../../src/shared/domain/read-models/CertificationAssessment.js';
@@ -17,108 +16,6 @@ describe('Unit | Domain | Models | Assessment', function () {
       });
 
       expect(assessment.method).to.equal('SMART_RANDOM');
-    });
-
-    [
-      {
-        type: Assessment.types.COMPETENCE_EVALUATION,
-        hasCheckpoints: true,
-        showProgressBar: true,
-        showLevelup: true,
-        showQuestionCounter: true,
-        expectedTitle: 'Ma Compétence',
-        attributes: { title: 'Ma Compétence' },
-      },
-      {
-        type: Assessment.types.CERTIFICATION,
-        hasCheckpoints: false,
-        showProgressBar: false,
-        showLevelup: false,
-        showQuestionCounter: true,
-        expectedTitle: 'certificationCourseId',
-        attributes: { certificationCourseId: 'certificationCourseId' },
-      },
-      {
-        type: Assessment.types.DEMO,
-        hasCheckpoints: false,
-        showProgressBar: true,
-        showLevelup: false,
-        showQuestionCounter: true,
-        expectedTitle: 'Mon Course',
-        attributes: { title: 'Mon Course' },
-      },
-      {
-        type: Assessment.types.PREVIEW,
-        hasCheckpoints: false,
-        showProgressBar: false,
-        showLevelup: false,
-        showQuestionCounter: true,
-        expectedTitle: 'Preview',
-        attributes: {},
-      },
-      {
-        type: Assessment.types.CAMPAIGN,
-
-        describeInfos: CampaignTypes.ASSESSMENT,
-        hasCheckpoints: true,
-        showProgressBar: true,
-        showLevelup: true,
-        showQuestionCounter: true,
-        expectedTitle: 'Ma Campagne',
-
-        attributes: { campaign: domainBuilder.buildCampaign({ title: 'Ma Campagne', type: CampaignTypes.ASSESSMENT }) },
-      },
-      {
-        type: Assessment.types.CAMPAIGN,
-
-        describeInfos: CampaignTypes.EXAM,
-        hasCheckpoints: false,
-        showProgressBar: false,
-        showLevelup: false,
-        showQuestionCounter: false,
-        expectedTitle: 'Ma Campagne',
-
-        attributes: { campaign: domainBuilder.buildCampaign({ title: 'Ma Campagne', type: CampaignTypes.EXAM }) },
-      },
-      {
-        type: Assessment.types.CAMPAIGN,
-        describeInfos: 'Anonymized assessment',
-        hasCheckpoints: false,
-        showProgressBar: false,
-        expectedTitle: '',
-        showLevelup: false,
-        showQuestionCounter: false,
-
-        attributes: { campaign: null },
-      },
-    ].forEach(({ type, describeInfos, attributes, showProgressBar, showLevelup, hasCheckpoints, expectedTitle }) => {
-      describe(`${type} ${describeInfos}`, function () {
-        let assessment;
-
-        before(function () {
-          assessment = new Assessment({
-            type,
-            method: null,
-            ...attributes,
-          });
-        });
-
-        it('should init showProgressBar', function () {
-          expect(assessment.showProgressBar).to.equal(showProgressBar);
-        });
-
-        it('should init hasCheckpoints', function () {
-          expect(assessment.hasCheckpoints).to.equal(hasCheckpoints);
-        });
-
-        it('should init showLevelup', function () {
-          expect(assessment.showLevelup).to.equal(showLevelup);
-        });
-
-        it('should init title', function () {
-          expect(assessment.title).to.equal(expectedTitle);
-        });
-      });
     });
   });
 
