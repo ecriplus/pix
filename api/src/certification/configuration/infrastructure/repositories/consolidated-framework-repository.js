@@ -4,12 +4,13 @@ import * as challengeRepository from '../../../../shared/infrastructure/reposito
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 import { ConsolidatedFramework } from '../../domain/models/ConsolidatedFramework.js';
 
-export async function create({ complementaryCertificationKey, challenges }) {
+export async function create({ complementaryCertificationKey, challenges, version }) {
   const knexConn = DomainTransaction.getConnection();
 
   const challengesDTO = challenges.map((challenge) => ({
     complementaryCertificationKey,
     challengeId: challenge.id,
+    version,
   }));
 
   await knexConn('certification-frameworks-challenges').insert(challengesDTO);
