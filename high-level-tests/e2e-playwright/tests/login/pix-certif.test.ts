@@ -4,11 +4,9 @@ import { buildFreshPixCertifUser } from '../../helpers/db.ts';
 import { expect, test } from '../../helpers/fixtures.ts';
 import { LoginPage } from '../../pages/pix-certif/index.js';
 
-test.beforeEach(async () => {
-  await buildFreshPixCertifUser('Buffy', 'Summers', 'buffy.summers.pixcertif@example.net', 'Coucoulesdevs66');
-});
-
-test('login, cgu and logout', async ({ page }: { page: Page }) => {
+test('login, cgu and logout', async ({ page }: { page: Page }, testInfo) => {
+  const email = `buffy.summers.${testInfo.testId}@example.net`;
+  await buildFreshPixCertifUser('Buffy', 'Summers', email, 'Coucoulesdevs66');
   await page.goto(process.env.PIX_CERTIF_URL as string);
 
   await test.step('Login for the first time to PixCertif and accept CGUs', async () => {
@@ -18,7 +16,7 @@ test('login, cgu and logout', async ({ page }: { page: Page }) => {
     );
 
     const loginPage = new LoginPage(page);
-    await loginPage.login('buffy.summers.pixcertif@example.net', 'Coucoulesdevs66');
+    await loginPage.login(email, 'Coucoulesdevs66');
     const cgu = page.getByRole('heading', {
       name: "Conditions générales d'utilisation de la plateforme Pix Certif",
     });
@@ -37,7 +35,7 @@ test('login, cgu and logout', async ({ page }: { page: Page }) => {
     );
 
     const loginPage = new LoginPage(page);
-    await loginPage.login('buffy.summers.pixcertif@example.net', 'Coucoulesdevs66');
+    await loginPage.login(email, 'Coucoulesdevs66');
 
     await expect(page).toHaveURL(/sessions$/);
   });

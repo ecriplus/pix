@@ -19,9 +19,19 @@ export async function buildStaticData() {
   }
 }
 
+export async function buildFreshPixAppUser(
+  firstName: string,
+  lastName: string,
+  email: string,
+  rawPassword: string,
+  mustRevalidateCgu: boolean,
+) {
+  await createUserInDB(firstName, lastName, email, rawPassword, true, false, mustRevalidateCgu, undefined);
+}
+
 export async function buildFreshPixCertifUser(firstName: string, lastName: string, email: string, rawPassword: string) {
   const certificationCenterId = await createCertificationCenterInDB('PRO', 'Certification center for ' + email);
-  const userId = await createUserInDB(firstName, lastName, email, rawPassword, false, false, undefined);
+  const userId = await createUserInDB(firstName, lastName, email, rawPassword, false, false, false, undefined);
   await createCertificationCenterMembershipInDB(userId, certificationCenterId);
 }
 
@@ -33,7 +43,7 @@ export async function buildFreshPixOrgaUser(
   role: string,
 ) {
   const organizationId = await createOrganizationInDB('PRO', 'Organization for ' + email, false);
-  const userId = await createUserInDB(firstName, lastName, email, rawPassword, false, false, undefined);
+  const userId = await createUserInDB(firstName, lastName, email, rawPassword, false, false, false, undefined);
   await createOrganizationMembershipInDB(userId, organizationId, role);
 }
 
@@ -52,6 +62,7 @@ async function buildAuthenticatedUsers() {
     PIX_APP_USER_DATA.rawPassword,
     true,
     true,
+    false,
     PIX_APP_USER_DATA.id,
   );
 
@@ -66,6 +77,7 @@ async function buildAuthenticatedUsers() {
       data.rawPassword,
       true,
       true,
+      false,
       data.id,
     );
     await createLegalDocumentVersionAcceptanceInDB(legalDocumentVersionId, userId);
@@ -95,6 +107,7 @@ async function buildAuthenticatedUsers() {
     PIX_CERTIF_PRO_DATA.rawPassword,
     true,
     true,
+    false,
     PIX_CERTIF_PRO_DATA.id,
   );
   await createCertificationCenterMembershipInDB(certificationUserId, certificationCenterId);
@@ -165,6 +178,7 @@ async function createUserInDB(
   rawPassword: string,
   cgu: boolean,
   pixCertifTermsOfServiceAccepted: boolean,
+  mustValidateTermsOfService: boolean,
   id: number | undefined,
 ) {
   const someDate = new Date('2025-07-09');
@@ -179,7 +193,7 @@ async function createUserInDB(
       lang: 'fr',
       lastTermsOfServiceValidatedAt: cgu ? someDate : null,
       lastPixCertifTermsOfServiceValidatedAt: pixCertifTermsOfServiceAccepted ? someDate : null,
-      mustValidateTermsOfService: !cgu,
+      mustValidateTermsOfService,
       hasSeenAssessmentInstructions: false,
       createdAt: someDate,
       updatedAt: someDate,
