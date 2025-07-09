@@ -36,11 +36,11 @@ export default defineConfig({
       testMatch: '**/*.ts',
       fullyParallel: true,
     },
-    // {
-    //   name: 'pix-orga',
-    //   testDir: 'tests/pix-orga',
-    //  testMatch: '**/*.ts',
-    //  },
+    {
+      name: 'pix-orga',
+      testDir: 'tests/pix-orga',
+      testMatch: '**/*.ts',
+    },
     {
       name: 'evaluations',
       testDir: 'tests/evaluations',
@@ -80,7 +80,7 @@ export default defineConfig({
             DATAMART_DATABASE_URL: process.env.DATAMART_DATABASE_URL ?? '',
             DATAWAREHOUSE_DATABASE_URL: process.env.DATAWAREHOUSE_DATABASE_URL ?? '',
             REDIS_URL: process.env.REDIS_URL ?? '',
-            START_JOB_IN_WEB_PROCESS: 'false',
+            START_JOB_IN_WEB_PROCESS: 'true',
             PIX_AUDIT_LOGGER_ENABLED: 'false',
             MAILING_ENABLED: 'false',
             LCMS_API_URL: process.env.LCMS_API_URL ?? '',
