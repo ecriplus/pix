@@ -9,6 +9,7 @@ describe('Integration | Application | Route | campaignParticipationRouter', func
   beforeEach(async function () {
     sandbox = sinon.createSandbox();
     sandbox.stub(securityPreHandlers, 'checkRequestedUserIsAuthenticatedUser');
+    sandbox.stub(securityPreHandlers, 'checkOrganizationAccess').returns(true);
 
     sinon.stub(campaignParticipationController, 'getAnalysis').callsFake((request, h) => h.response('ok').code(200));
     sinon

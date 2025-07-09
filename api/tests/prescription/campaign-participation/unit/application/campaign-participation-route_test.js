@@ -54,9 +54,67 @@ describe('Unit | Application | Router | campaign-participation-router ', functio
       // then
       expect(result.statusCode).to.equal(400);
     });
+
+    describe('when pre handler throws', function () {
+      it('should not call controller', async function () {
+        // given
+        const getCampaignAssessmentParticipationResultStub = sinon.stub(
+          campaignParticipationController,
+          'getCampaignAssessmentParticipationResult',
+        );
+        const organizationAccessStub = sinon.stub(securityPreHandlers, 'checkOrganizationAccess').throws();
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        await httpTestServer.request('GET', '/api/campaigns/1/assessment-participations/1/results');
+
+        // then
+        expect(organizationAccessStub.called).to.be.true;
+        expect(getCampaignAssessmentParticipationResultStub.called).to.be.false;
+      });
+    });
   });
 
-  describe('PATCH /api/admin/campaign-participations/{id}', function () {
+  describe('GET /api/campaign-participations/{id}/analyses', function () {
+    describe('when pre handler throws', function () {
+      it('should not call controller', async function () {
+        // given
+        const getAnalysisStub = sinon.stub(campaignParticipationController, 'getAnalysis');
+        const organizationAccessStub = sinon.stub(securityPreHandlers, 'checkOrganizationAccess').throws();
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        await httpTestServer.request('GET', '/api/campaign-participations/1/analyses');
+
+        // then
+        expect(organizationAccessStub.called).to.be.true;
+        expect(getAnalysisStub.called).to.be.false;
+      });
+    });
+  });
+
+  describe('GET /api/campaigns/{campaignId}/profiles-collection-participations/{campaignParticipationId}', function () {
+    describe('when pre handler throws', function () {
+      it('should not call controller', async function () {
+        // given
+        const getCampaignProfileStub = sinon.stub(campaignParticipationController, 'getCampaignProfile');
+        const organizationAccessStub = sinon.stub(securityPreHandlers, 'checkOrganizationAccess').throws();
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        await httpTestServer.request('GET', '/api/campaigns/1/profiles-collection-participations/2');
+
+        // then
+        expect(organizationAccessStub.called).to.be.true;
+        expect(getCampaignProfileStub.called).to.be.false;
+      });
+    });
+  });
+
+  describe('PATCH /api/admin/campaign-participations/{campaignParticipationId}', function () {
     it('returns 200 when admin member has rights', async function () {
       // given
       sinon

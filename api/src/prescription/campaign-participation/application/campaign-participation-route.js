@@ -43,11 +43,12 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/campaign-participations/{id}/analyses',
+      path: '/api/campaign-participations/{campaignParticipationId}/analyses',
       config: {
+        pre: [{ method: securityPreHandlers.checkOrganizationAccess }],
         validate: {
           params: Joi.object({
-            id: identifiersType.campaignParticipationId,
+            campaignParticipationId: identifiersType.campaignParticipationId,
           }),
         },
         handler: campaignParticipationController.getAnalysis,
@@ -82,6 +83,7 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/campaigns/{campaignId}/profiles-collection-participations/{campaignParticipationId}',
       config: {
+        pre: [{ method: securityPreHandlers.checkOrganizationAccess }],
         validate: {
           params: Joi.object({
             campaignId: identifiersType.campaignId,
@@ -120,6 +122,7 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/campaigns/{campaignId}/assessment-participations/{campaignParticipationId}/results',
       config: {
+        pre: [{ method: securityPreHandlers.checkOrganizationAccess }],
         validate: {
           params: Joi.object({
             campaignId: identifiersType.campaignId,

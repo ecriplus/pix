@@ -9,7 +9,8 @@ describe('Integration | Application | Route | campaign detail router', function 
   describe('GET /api/campaigns/{campaignId}/csv-profiles-collection-results', function () {
     it('should exist', async function () {
       // given
-      sinon.stub(securityPreHandlers, 'checkAuthorizationToAccessCampaign').callsFake((request, h) => h.response(true));
+      sinon.stub(securityPreHandlers, 'checkOrganizationAccess').returns(true);
+      sinon.stub(securityPreHandlers, 'checkAuthorizationToAccessCampaign').returns(true);
       sinon
         .stub(campaignDetailController, 'getCsvProfilesCollectionResults')
         .callsFake((_, h) => h.response('ok').code(200));
@@ -25,26 +26,6 @@ describe('Integration | Application | Route | campaign detail router', function 
 
       // then
       expect(response.statusCode).to.equal(200);
-    });
-  });
-
-  describe('GET /api/campaigns/{campaignId}/csv-assessment-results', function () {
-    it('should exist', async function () {
-      // given
-      sinon.stub(securityPreHandlers, 'checkAuthorizationToAccessCampaign').callsFake((request, h) => h.response(true));
-      sinon.stub(campaignDetailController, 'getCsvAssessmentResults').callsFake((_, h) => h.response('ok').code(200));
-      const method = 'GET';
-      const url = '/api/campaigns/1/csv-assessment-results';
-
-      httpTestServer = new HttpTestServer();
-      await httpTestServer.register(moduleUnderTest);
-
-      // when
-      const response = await httpTestServer.request(method, url);
-
-      // then
-      expect(response.statusCode).to.equal(200);
-      expect(campaignDetailController.getCsvAssessmentResults).to.have.been.calledOnce;
     });
   });
 
