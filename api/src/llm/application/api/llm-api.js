@@ -43,7 +43,7 @@ export async function startChat({ configId, userId }) {
   const chatId = generateId(userId);
   const newChat = new Chat({
     id: chatId,
-    configurationId: configuration.id,
+    configuration: configuration,
     hasAttachmentContextBeenAdded: false,
     messages: [],
   });
@@ -77,14 +77,16 @@ export async function prompt({ chatId, userId, message, attachmentName }) {
   if (!chatId) {
     throw new ChatNotFoundError('null id provided');
   }
+  if (!attachmentName && !message) {
+    throw new NoAttachmentNorMessageProvidedError();
+  }
+
   const chat = await chatRepository.get(chatId);
   if (!userId || !chat.id.startsWith(userId)) {
     throw new ChatForbiddenError();
   }
-  if (!attachmentName && !message) {
-    throw new NoAttachmentNorMessageProvidedError();
-  }
-  const configuration = await configurationRepository.get(chat.configurationId);
+
+  const { configuration } = chat;
   if (attachmentName && !configuration.hasAttachment) {
     throw new NoAttachmentNeededError();
   }

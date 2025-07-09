@@ -3,6 +3,7 @@ import { Readable } from 'node:stream';
 import ms from 'ms';
 
 import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
+import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { CHAT_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
 import { CONFIGURATION_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/configuration-repository.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
@@ -374,7 +375,14 @@ describe('Acceptance | Controller | passage-controller', function () {
           // given
           const chat = new Chat({
             id: `${user.id}-someChatId123456789`,
-            configurationId: 'uneConfigQuiExist',
+            configuration: new Configuration({
+              id: 'uneConfigQuiExist',
+              historySize: 123,
+              inputMaxChars: 999,
+              inputMaxPrompts: 999,
+              attachmentName: 'expected_file.pdf',
+              attachmentContext: 'some context',
+            }),
             hasAttachmentContextBeenAdded: false,
             messages: [],
           });
@@ -383,21 +391,6 @@ describe('Acceptance | Controller | passage-controller', function () {
             value: chat.toDTO(),
             expirationDelaySeconds: ms('24h'),
           });
-          const getConfigScope = nock('https://llm-test.pix.fr/api')
-            .get('/configurations/uneConfigQuiExist')
-            .reply(200, {
-              llm: {
-                historySize: 123,
-              },
-              challenge: {
-                inputMaxChars: 999,
-                inputMaxPrompts: 999,
-              },
-              attachment: {
-                name: 'expected_file.pdf',
-                context: 'some context',
-              },
-            });
           const promptLlmScope = nock('https://llm-test.pix.fr/api')
             .post('/chat', {
               configurationId: 'uneConfigQuiExist',
@@ -438,7 +431,6 @@ describe('Acceptance | Controller | passage-controller', function () {
           // then
           expect(response.statusCode).to.equal(201);
           expect(response.result).to.deep.equal("event: attachment\ndata: \n\ndata: coucou c'est super\n\n");
-          expect(getConfigScope.isDone()).to.be.true;
           expect(promptLlmScope.isDone()).to.be.true;
         });
       });

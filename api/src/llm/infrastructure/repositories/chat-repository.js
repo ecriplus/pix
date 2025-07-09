@@ -1,7 +1,8 @@
 import { config } from '../../../shared/config.js';
 import { temporaryStorage } from '../../../shared/infrastructure/key-value-storages/index.js';
 import { ChatNotFoundError } from '../../domain/errors.js';
-import { Chat, Message } from '../../domain/models/Chat.js';
+import { Chat } from '../../domain/models/Chat.js';
+import * as configurationRepository from './configuration-repository.js';
 
 export const CHAT_STORAGE_PREFIX = 'llm-chats';
 const chatsTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
@@ -37,9 +38,9 @@ export async function get(id) {
   if (!chatDTO) {
     throw new ChatNotFoundError(id);
   }
-  const messages = chatDTO.messages.map((messageDTO) => new Message(messageDTO));
-  return new Chat({
-    ...chatDTO,
-    messages,
-  });
+  // backward compatibility, may be removed after some time
+  if (!chatDTO.configuration) {
+    chatDTO.configuration = await configurationRepository.get(chatDTO.configurationId);
+  }
+  return Chat.fromDTO(chatDTO);
 }

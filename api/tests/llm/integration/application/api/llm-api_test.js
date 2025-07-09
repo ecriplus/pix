@@ -14,18 +14,16 @@ import {
   TooLargeMessageInputError,
 } from '../../../../../src/llm/domain/errors.js';
 import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
+import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { CHAT_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
-import { CONFIGURATION_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/configuration-repository.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import { catchErr, expect, nock, sinon } from '../../../../test-helper.js';
 
 const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
-const configurationTemporaryStorage = temporaryStorage.withPrefix(CONFIGURATION_STORAGE_PREFIX);
 
 describe('LLM | Integration | Application | API | llm', function () {
   afterEach(async function () {
     await chatTemporaryStorage.flushAll();
-    await configurationTemporaryStorage.flushAll();
   });
 
   describe('#startChat', function () {
@@ -99,7 +97,14 @@ describe('LLM | Integration | Application | API | llm', function () {
           expect(llmApiScope.isDone()).to.be.true;
           expect(await chatTemporaryStorage.get(`123456-${now.getMilliseconds()}`)).to.deep.equal({
             id: `123456-${now.getMilliseconds()}`,
-            configurationId: 'uneConfigQuiExist',
+            configuration: {
+              id: 'uneConfigQuiExist',
+              historySize: 123,
+              inputMaxChars: 456,
+              inputMaxPrompts: 789,
+              attachmentName: 'file.txt',
+              attachmentContext: '**coucou**',
+            },
             hasAttachmentContextBeenAdded: false,
             messages: [],
           });
@@ -136,7 +141,14 @@ describe('LLM | Integration | Application | API | llm', function () {
           expect(llmApiScope.isDone()).to.be.true;
           expect(await chatTemporaryStorage.get(`123456-${now.getMilliseconds()}`)).to.deep.equal({
             id: `123456-${now.getMilliseconds()}`,
-            configurationId: 'uneConfigQuiExist',
+            configuration: {
+              id: 'uneConfigQuiExist',
+              historySize: 123,
+              inputMaxChars: 456,
+              inputMaxPrompts: 789,
+              attachmentName: null,
+              attachmentContext: null,
+            },
             hasAttachmentContextBeenAdded: false,
             messages: [],
           });
@@ -165,7 +177,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         // given
         const chat = new Chat({
           id: 'chatId',
-          configurationId: 'uneConfigQuiExist',
+          configuration: new Configuration({ id: 'uneConfigQuiExist' }),
           hasAttachmentContextBeenAdded: false,
           messages: [],
         });
@@ -189,7 +201,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         // given
         const chat = new Chat({
           id: '123456-chatId',
-          configurationId: 'uneConfigQuiExist',
+          configuration: new Configuration({ id: 'uneConfigQuiExist' }),
           hasAttachmentContextBeenAdded: false,
           messages: [],
         });
@@ -213,7 +225,10 @@ describe('LLM | Integration | Application | API | llm', function () {
         // given
         const chat = new Chat({
           id: '123-chatId',
-          configurationId: 'uneConfigQuiExist',
+          configuration: new Configuration({
+            id: 'uneConfigQuiExist',
+            inputMaxChars: 5,
+          }),
           hasAttachmentContextBeenAdded: false,
           messages: [],
         });
@@ -222,17 +237,6 @@ describe('LLM | Integration | Application | API | llm', function () {
           value: chat.toDTO(),
           expirationDelaySeconds: ms('24h'),
         });
-        const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
-          .get('/configurations/uneConfigQuiExist')
-          .reply(200, {
-            llm: {
-              historySize: 123,
-            },
-            challenge: {
-              inputMaxChars: 5,
-              inputMaxPrompts: 789,
-            },
-          });
 
         // when
         const err = await catchErr(prompt)({ chatId: '123-chatId', userId: 123, message: 'un message' });
@@ -240,7 +244,6 @@ describe('LLM | Integration | Application | API | llm', function () {
         // then
         expect(err).to.be.instanceOf(TooLargeMessageInputError);
         expect(err.message).to.equal("You've reached the max characters input");
-        expect(llmConfigurationScope.isDone()).to.be.true;
       });
     });
 
@@ -249,7 +252,10 @@ describe('LLM | Integration | Application | API | llm', function () {
         // given
         const chat = new Chat({
           id: '123-chatId',
-          configurationId: 'uneConfigQuiExist',
+          configuration: new Configuration({
+            id: 'uneConfigQuiExist',
+            inputMaxPrompts: 2,
+          }),
           hasAttachmentContextBeenAdded: false,
           messages: [
             new Message({ content: 'coucou LLM1', isFromUser: false }),
@@ -262,17 +268,6 @@ describe('LLM | Integration | Application | API | llm', function () {
           value: chat.toDTO(),
           expirationDelaySeconds: ms('24h'),
         });
-        const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
-          .get('/configurations/uneConfigQuiExist')
-          .reply(200, {
-            llm: {
-              historySize: 123,
-            },
-            challenge: {
-              inputMaxChars: 255,
-              inputMaxPrompts: 2,
-            },
-          });
         const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
           .post('/chat', {
             configurationId: 'uneConfigQuiExist',
@@ -296,7 +291,6 @@ describe('LLM | Integration | Application | API | llm', function () {
         }
         const llmResponse = parts.join('');
         expect(llmResponse).to.deep.equal('data: salut\n\n');
-        expect(llmConfigurationScope.isDone()).to.be.true;
         expect(llmPostPromptScope.isDone()).to.be.true;
       });
 
@@ -304,7 +298,10 @@ describe('LLM | Integration | Application | API | llm', function () {
         // given
         const chat = new Chat({
           id: '123-chatId',
-          configurationId: 'uneConfigQuiExist',
+          configuration: new Configuration({
+            id: 'uneConfigQuiExist',
+            inputMaxPrompts: 2,
+          }),
           hasAttachmentContextBeenAdded: false,
           messages: [
             new Message({ content: 'coucou user1', isFromUser: true }),
@@ -317,17 +314,6 @@ describe('LLM | Integration | Application | API | llm', function () {
           value: chat.toDTO(),
           expirationDelaySeconds: ms('24h'),
         });
-        const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
-          .get('/configurations/uneConfigQuiExist')
-          .reply(200, {
-            llm: {
-              historySize: 123,
-            },
-            challenge: {
-              inputMaxChars: 255,
-              inputMaxPrompts: 2,
-            },
-          });
 
         // when
         const err = await catchErr(prompt)({ chatId: '123-chatId', userId: 123, message: 'un message' });
@@ -335,7 +321,6 @@ describe('LLM | Integration | Application | API | llm', function () {
         // then
         expect(err).to.be.instanceOf(MaxPromptsReachedError);
         expect(err.message).to.equal("You've reached the max prompts authorized");
-        expect(llmConfigurationScope.isDone()).to.be.true;
       });
     });
 
@@ -346,7 +331,12 @@ describe('LLM | Integration | Application | API | llm', function () {
             // given
             const chat = new Chat({
               id: '123-chatId',
-              configurationId: 'uneConfigQuiExist',
+              configuration: new Configuration({
+                id: 'uneConfigQuiExist',
+                inputMaxPrompts: 100,
+                inputMaxChars: 255,
+                historySize: 123,
+              }),
               hasAttachmentContextBeenAdded: false,
               messages: [
                 new Message({ content: 'coucou user1', isFromUser: true }),
@@ -358,17 +348,6 @@ describe('LLM | Integration | Application | API | llm', function () {
               value: chat.toDTO(),
               expirationDelaySeconds: ms('24h'),
             });
-            const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
-              .get('/configurations/uneConfigQuiExist')
-              .reply(200, {
-                llm: {
-                  historySize: 123,
-                },
-                challenge: {
-                  inputMaxChars: 255,
-                  inputMaxPrompts: 100,
-                },
-              });
             const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
               .post('/chat', {
                 configurationId: 'uneConfigQuiExist',
@@ -407,7 +386,12 @@ describe('LLM | Integration | Application | API | llm', function () {
             );
             expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
               id: '123-chatId',
-              configurationId: 'uneConfigQuiExist',
+              configuration: {
+                id: 'uneConfigQuiExist',
+                inputMaxPrompts: 100,
+                inputMaxChars: 255,
+                historySize: 123,
+              },
               hasAttachmentContextBeenAdded: false,
               messages: [
                 {
@@ -432,7 +416,6 @@ describe('LLM | Integration | Application | API | llm', function () {
                 },
               ],
             });
-            expect(llmConfigurationScope.isDone()).to.be.true;
             expect(llmPostPromptScope.isDone()).to.be.true;
           });
         });
@@ -442,7 +425,12 @@ describe('LLM | Integration | Application | API | llm', function () {
               // given
               const chat = new Chat({
                 id: '123-chatId',
-                configurationId: 'uneConfigQuiExist',
+                configuration: new Configuration({
+                  id: 'uneConfigQuiExist',
+                  inputMaxPrompts: 100,
+                  inputMaxChars: 255,
+                  historySize: 123,
+                }),
                 hasAttachmentContextBeenAdded: false,
                 messages: [
                   new Message({ content: 'coucou user1', isFromUser: true }),
@@ -455,17 +443,6 @@ describe('LLM | Integration | Application | API | llm', function () {
                 value: chat.toDTO(),
                 expirationDelaySeconds: ms('24h'),
               });
-              const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
-                .get('/configurations/uneConfigQuiExist')
-                .reply(200, {
-                  llm: {
-                    historySize: 123,
-                  },
-                  challenge: {
-                    inputMaxChars: 255,
-                    inputMaxPrompts: 2,
-                  },
-                });
 
               // when
               const err = await catchErr(prompt)({
@@ -480,7 +457,6 @@ describe('LLM | Integration | Application | API | llm', function () {
               expect(err.message).to.equal(
                 'Attachment has been provided but is not expected for the given configuration',
               );
-              expect(llmConfigurationScope.isDone()).to.be.true;
             });
           });
           context('when attachmentName is not the expected one for the given configuration', function () {
@@ -491,7 +467,14 @@ describe('LLM | Integration | Application | API | llm', function () {
                 // given
                 const chat = new Chat({
                   id: '123-chatId',
-                  configurationId: 'uneConfigQuiExist',
+                  configuration: new Configuration({
+                    id: 'uneConfigQuiExist',
+                    inputMaxPrompts: 100,
+                    inputMaxChars: 255,
+                    historySize: 123,
+                    attachmentName: 'expected_file.txt',
+                    attachmentContext: 'add me in the chat !',
+                  }),
                   hasAttachmentContextBeenAdded: false,
                   messages: [
                     new Message({ content: 'coucou user1', isFromUser: true }),
@@ -503,21 +486,6 @@ describe('LLM | Integration | Application | API | llm', function () {
                   value: chat.toDTO(),
                   expirationDelaySeconds: ms('24h'),
                 });
-                const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
-                  .get('/configurations/uneConfigQuiExist')
-                  .reply(200, {
-                    llm: {
-                      historySize: 123,
-                    },
-                    challenge: {
-                      inputMaxChars: 255,
-                      inputMaxPrompts: 100,
-                    },
-                    attachment: {
-                      name: 'expected_file.txt',
-                      context: 'add me in the chat !',
-                    },
-                  });
                 const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
                   .post('/chat', {
                     configurationId: 'uneConfigQuiExist',
@@ -557,7 +525,14 @@ describe('LLM | Integration | Application | API | llm', function () {
                 expect(llmResponse).to.deep.equal(attachmentMessage + llmMessage);
                 expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
                   id: '123-chatId',
-                  configurationId: 'uneConfigQuiExist',
+                  configuration: {
+                    id: 'uneConfigQuiExist',
+                    inputMaxPrompts: 100,
+                    inputMaxChars: 255,
+                    historySize: 123,
+                    attachmentName: 'expected_file.txt',
+                    attachmentContext: 'add me in the chat !',
+                  },
                   hasAttachmentContextBeenAdded: false,
                   messages: [
                     { content: 'coucou user1', isFromUser: true, notCounted: false },
@@ -570,7 +545,6 @@ describe('LLM | Integration | Application | API | llm', function () {
                     },
                   ],
                 });
-                expect(llmConfigurationScope.isDone()).to.be.true;
                 expect(llmPostPromptScope.isDone()).to.be.true;
               },
             );
@@ -584,7 +558,14 @@ describe('LLM | Integration | Application | API | llm', function () {
                   // given
                   const chat = new Chat({
                     id: '123-chatId',
-                    configurationId: 'uneConfigQuiExist',
+                    configuration: new Configuration({
+                      id: 'uneConfigQuiExist',
+                      inputMaxPrompts: 100,
+                      inputMaxChars: 255,
+                      historySize: 123,
+                      attachmentName: 'expected_file.txt',
+                      attachmentContext: 'add me in the chat !',
+                    }),
                     hasAttachmentContextBeenAdded: true,
                     messages: [
                       new Message({ content: 'coucou user1', isFromUser: true }),
@@ -607,21 +588,6 @@ describe('LLM | Integration | Application | API | llm', function () {
                     value: chat.toDTO(),
                     expirationDelaySeconds: ms('24h'),
                   });
-                  const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
-                    .get('/configurations/uneConfigQuiExist')
-                    .reply(200, {
-                      llm: {
-                        historySize: 123,
-                      },
-                      challenge: {
-                        inputMaxChars: 255,
-                        inputMaxPrompts: 100,
-                      },
-                      attachment: {
-                        name: 'expected_file.txt',
-                        context: 'add me in the chat !',
-                      },
-                    });
                   const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
                     .post('/chat', {
                       configurationId: 'uneConfigQuiExist',
@@ -672,7 +638,14 @@ describe('LLM | Integration | Application | API | llm', function () {
                   expect(llmResponse).to.deep.equal(attachmentMessage + llmMessage);
                   expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
                     id: '123-chatId',
-                    configurationId: 'uneConfigQuiExist',
+                    configuration: {
+                      id: 'uneConfigQuiExist',
+                      inputMaxPrompts: 100,
+                      inputMaxChars: 255,
+                      historySize: 123,
+                      attachmentName: 'expected_file.txt',
+                      attachmentContext: 'add me in the chat !',
+                    },
                     hasAttachmentContextBeenAdded: true,
                     messages: [
                       { content: 'coucou user1', isFromUser: true, notCounted: false },
@@ -698,7 +671,6 @@ describe('LLM | Integration | Application | API | llm', function () {
                       },
                     ],
                   });
-                  expect(llmConfigurationScope.isDone()).to.be.true;
                   expect(llmPostPromptScope.isDone()).to.be.true;
                 },
               );
@@ -711,7 +683,14 @@ describe('LLM | Integration | Application | API | llm', function () {
                   // given
                   const chat = new Chat({
                     id: '123-chatId',
-                    configurationId: 'uneConfigQuiExist',
+                    configuration: new Configuration({
+                      id: 'uneConfigQuiExist',
+                      inputMaxPrompts: 100,
+                      inputMaxChars: 255,
+                      historySize: 123,
+                      attachmentName: 'expected_file.txt',
+                      attachmentContext: 'add me in the chat !',
+                    }),
                     hasAttachmentContextBeenAdded: false,
                     messages: [
                       new Message({ content: 'coucou user1', isFromUser: true }),
@@ -723,21 +702,6 @@ describe('LLM | Integration | Application | API | llm', function () {
                     value: chat.toDTO(),
                     expirationDelaySeconds: ms('24h'),
                   });
-                  const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
-                    .get('/configurations/uneConfigQuiExist')
-                    .reply(200, {
-                      llm: {
-                        historySize: 123,
-                      },
-                      challenge: {
-                        inputMaxChars: 255,
-                        inputMaxPrompts: 100,
-                      },
-                      attachment: {
-                        name: 'expected_file.txt',
-                        context: 'add me in the chat !',
-                      },
-                    });
                   const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
                     .post('/chat', {
                       configurationId: 'uneConfigQuiExist',
@@ -787,7 +751,14 @@ describe('LLM | Integration | Application | API | llm', function () {
                   expect(llmResponse).to.deep.equal(attachmentMessage + llmMessage);
                   expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
                     id: '123-chatId',
-                    configurationId: 'uneConfigQuiExist',
+                    configuration: {
+                      id: 'uneConfigQuiExist',
+                      inputMaxPrompts: 100,
+                      inputMaxChars: 255,
+                      historySize: 123,
+                      attachmentName: 'expected_file.txt',
+                      attachmentContext: 'add me in the chat !',
+                    },
                     hasAttachmentContextBeenAdded: true,
                     messages: [
                       { content: 'coucou user1', isFromUser: true, notCounted: false },
@@ -812,7 +783,6 @@ describe('LLM | Integration | Application | API | llm', function () {
                       },
                     ],
                   });
-                  expect(llmConfigurationScope.isDone()).to.be.true;
                   expect(llmPostPromptScope.isDone()).to.be.true;
                 },
               );
@@ -827,7 +797,7 @@ describe('LLM | Integration | Application | API | llm', function () {
             // given
             const chat = new Chat({
               id: '123-chatId',
-              configurationId: 'uneConfigQuiExist',
+              configuration: new Configuration({ id: 'uneConfigQuiExist' }),
               hasAttachmentContextBeenAdded: false,
               messages: [
                 new Message({ content: 'coucou user1', isFromUser: true }),
@@ -859,7 +829,12 @@ describe('LLM | Integration | Application | API | llm', function () {
               // given
               const chat = new Chat({
                 id: '123-chatId',
-                configurationId: 'uneConfigQuiExist',
+                configuration: new Configuration({
+                  id: 'uneConfigQuiExist',
+                  inputMaxPrompts: 2,
+                  inputMaxChars: 255,
+                  historySize: 123,
+                }),
                 hasAttachmentContextBeenAdded: false,
                 messages: [
                   new Message({ content: 'coucou user1', isFromUser: true }),
@@ -872,17 +847,6 @@ describe('LLM | Integration | Application | API | llm', function () {
                 value: chat.toDTO(),
                 expirationDelaySeconds: ms('24h'),
               });
-              const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
-                .get('/configurations/uneConfigQuiExist')
-                .reply(200, {
-                  llm: {
-                    historySize: 123,
-                  },
-                  challenge: {
-                    inputMaxChars: 255,
-                    inputMaxPrompts: 2,
-                  },
-                });
 
               // when
               const err = await catchErr(prompt)({
@@ -897,7 +861,6 @@ describe('LLM | Integration | Application | API | llm', function () {
               expect(err.message).to.equal(
                 'Attachment has been provided but is not expected for the given configuration',
               );
-              expect(llmConfigurationScope.isDone()).to.be.true;
             });
           });
           context('when attachmentName is not the expected one for the given configuration', function () {
@@ -908,7 +871,14 @@ describe('LLM | Integration | Application | API | llm', function () {
                 // given
                 const chat = new Chat({
                   id: '123-chatId',
-                  configurationId: 'uneConfigQuiExist',
+                  configuration: new Configuration({
+                    id: 'uneConfigQuiExist',
+                    inputMaxPrompts: 100,
+                    inputMaxChars: 255,
+                    historySize: 123,
+                    attachmentName: 'expected_file.txt',
+                    attachmentContext: 'add me in the chat !',
+                  }),
                   hasAttachmentContextBeenAdded: false,
                   messages: [
                     new Message({ content: 'coucou user1', isFromUser: true }),
@@ -920,21 +890,6 @@ describe('LLM | Integration | Application | API | llm', function () {
                   value: chat.toDTO(),
                   expirationDelaySeconds: ms('24h'),
                 });
-                const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
-                  .get('/configurations/uneConfigQuiExist')
-                  .reply(200, {
-                    llm: {
-                      historySize: 123,
-                    },
-                    challenge: {
-                      inputMaxChars: 255,
-                      inputMaxPrompts: 100,
-                    },
-                    attachment: {
-                      name: 'expected_file.txt',
-                      context: 'add me in the chat !',
-                    },
-                  });
 
                 // when
                 const stream = await prompt({
@@ -954,14 +909,20 @@ describe('LLM | Integration | Application | API | llm', function () {
                 expect(llmResponse).to.deep.equal('event: attachment\ndata: \n\n');
                 expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
                   id: '123-chatId',
-                  configurationId: 'uneConfigQuiExist',
+                  configuration: {
+                    id: 'uneConfigQuiExist',
+                    inputMaxPrompts: 100,
+                    inputMaxChars: 255,
+                    historySize: 123,
+                    attachmentName: 'expected_file.txt',
+                    attachmentContext: 'add me in the chat !',
+                  },
                   hasAttachmentContextBeenAdded: false,
                   messages: [
                     { content: 'coucou user1', isFromUser: true, notCounted: false },
                     { content: 'coucou LLM1', isFromUser: false, notCounted: false },
                   ],
                 });
-                expect(llmConfigurationScope.isDone()).to.be.true;
               },
             );
           });
@@ -974,7 +935,14 @@ describe('LLM | Integration | Application | API | llm', function () {
                   // given
                   const chat = new Chat({
                     id: '123-chatId',
-                    configurationId: 'uneConfigQuiExist',
+                    configuration: new Configuration({
+                      id: 'uneConfigQuiExist',
+                      inputMaxPrompts: 100,
+                      inputMaxChars: 255,
+                      historySize: 123,
+                      attachmentName: 'expected_file.txt',
+                      attachmentContext: 'add me in the chat !',
+                    }),
                     hasAttachmentContextBeenAdded: true,
                     messages: [
                       new Message({ content: 'coucou user1', isFromUser: true }),
@@ -997,21 +965,6 @@ describe('LLM | Integration | Application | API | llm', function () {
                     value: chat.toDTO(),
                     expirationDelaySeconds: ms('24h'),
                   });
-                  const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
-                    .get('/configurations/uneConfigQuiExist')
-                    .reply(200, {
-                      llm: {
-                        historySize: 123,
-                      },
-                      challenge: {
-                        inputMaxChars: 255,
-                        inputMaxPrompts: 100,
-                      },
-                      attachment: {
-                        name: 'expected_file.txt',
-                        context: 'add me in the chat !',
-                      },
-                    });
 
                   // when
                   const stream = await prompt({
@@ -1031,7 +984,14 @@ describe('LLM | Integration | Application | API | llm', function () {
                   expect(llmResponse).to.deep.equal('event: attachment\ndata: \n\n');
                   expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
                     id: '123-chatId',
-                    configurationId: 'uneConfigQuiExist',
+                    configuration: {
+                      id: 'uneConfigQuiExist',
+                      inputMaxPrompts: 100,
+                      inputMaxChars: 255,
+                      historySize: 123,
+                      attachmentName: 'expected_file.txt',
+                      attachmentContext: 'add me in the chat !',
+                    },
                     hasAttachmentContextBeenAdded: true,
                     messages: [
                       { content: 'coucou user1', isFromUser: true, notCounted: false },
@@ -1051,7 +1011,6 @@ describe('LLM | Integration | Application | API | llm', function () {
                       { content: 'coucou LLM2', isFromUser: false, notCounted: false },
                     ],
                   });
-                  expect(llmConfigurationScope.isDone()).to.be.true;
                 },
               );
             });
@@ -1063,7 +1022,14 @@ describe('LLM | Integration | Application | API | llm', function () {
                   // given
                   const chat = new Chat({
                     id: '123-chatId',
-                    configurationId: 'uneConfigQuiExist',
+                    configuration: new Configuration({
+                      id: 'uneConfigQuiExist',
+                      inputMaxPrompts: 100,
+                      inputMaxChars: 255,
+                      historySize: 123,
+                      attachmentName: 'expected_file.txt',
+                      attachmentContext: 'add me in the chat !',
+                    }),
                     hasAttachmentContextBeenAdded: false,
                     messages: [
                       new Message({ content: 'coucou user1', isFromUser: true }),
@@ -1075,21 +1041,6 @@ describe('LLM | Integration | Application | API | llm', function () {
                     value: chat.toDTO(),
                     expirationDelaySeconds: ms('24h'),
                   });
-                  const llmConfigurationScope = nock('https://llm-test.pix.fr/api')
-                    .get('/configurations/uneConfigQuiExist')
-                    .reply(200, {
-                      llm: {
-                        historySize: 123,
-                      },
-                      challenge: {
-                        inputMaxChars: 255,
-                        inputMaxPrompts: 100,
-                      },
-                      attachment: {
-                        name: 'expected_file.txt',
-                        context: 'add me in the chat !',
-                      },
-                    });
 
                   // when
                   const stream = await prompt({
@@ -1109,7 +1060,14 @@ describe('LLM | Integration | Application | API | llm', function () {
                   expect(llmResponse).to.deep.equal('event: attachment\ndata: \n\n');
                   expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
                     id: '123-chatId',
-                    configurationId: 'uneConfigQuiExist',
+                    configuration: {
+                      id: 'uneConfigQuiExist',
+                      inputMaxPrompts: 100,
+                      inputMaxChars: 255,
+                      historySize: 123,
+                      attachmentName: 'expected_file.txt',
+                      attachmentContext: 'add me in the chat !',
+                    },
                     hasAttachmentContextBeenAdded: true,
                     messages: [
                       { content: 'coucou user1', isFromUser: true, notCounted: false },
@@ -1128,7 +1086,6 @@ describe('LLM | Integration | Application | API | llm', function () {
                       },
                     ],
                   });
-                  expect(llmConfigurationScope.isDone()).to.be.true;
                 },
               );
             });

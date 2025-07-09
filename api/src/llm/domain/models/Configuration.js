@@ -87,4 +87,8 @@ export class Configuration {
       attachmentContext: this.#attachmentContext,
     };
   }
+
+  static fromDTO(configurationDTO) {
+    return new Configuration(configurationDTO);
+  }
 }

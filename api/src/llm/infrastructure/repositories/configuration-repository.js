@@ -26,7 +26,7 @@ const logger = child('llm:api', { event: SCOPES.LLM });
 export async function get(id) {
   const cachedConfiguration = await configurationTemporaryStorage.get(id);
   if (cachedConfiguration) {
-    return toDomainFromCache(cachedConfiguration);
+    return Configuration.fromDTO(cachedConfiguration);
   }
   const url = config.llm.getConfigurationUrl + '/' + id;
   let response;
@@ -88,8 +88,4 @@ function toDomainFromLLMApi(id, configurationDTO) {
     attachmentName: configurationDTO?.attachment?.name ?? null,
     attachmentContext: configurationDTO?.attachment?.context ?? null,
   });
-}
-
-function toDomainFromCache(configurationDTO) {
-  return new Configuration(configurationDTO);
 }
