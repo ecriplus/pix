@@ -33,7 +33,15 @@ test('[@snapshot] user takes a certification test', async ({
   pixCertifProContext: BrowserContext;
   testMode: string;
 }, testInfo) => {
+  testInfo.annotations.push({
+    type: 'tag',
+    description: `@snapshot - this test runs against a reference snapshot. Snapshot can be generated with TEST_MODE=record env.
+         Reasons why a snapshot can be re-generated :
+         - Reference Release has changed
+         - Next challenge algorithm for certification V3 has changed`,
+  });
   test.setTimeout(60_000);
+
   let results;
   const resultFilePath = path.join(RESULT_DIR, 'certification.json');
   if (testMode === 'record') {

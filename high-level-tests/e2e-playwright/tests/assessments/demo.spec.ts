@@ -37,8 +37,16 @@ test.beforeEach(async () => {
   }
 });
 
-test('[@snapshot] user assesses on course demo', async ({ page, testMode }) => {
+test('[@snapshot] user assesses on course demo', async ({ page, testMode }, testInfo) => {
+  testInfo.annotations.push({
+    type: 'tag',
+    description: `@snapshot - this test runs against a reference snapshot. Snapshot can be generated with TEST_MODE=record env.
+         Reasons why a snapshot can be re-generated :
+         - Reference Release has changed
+         - Next challenge algorithm for demo has changed`,
+  });
   test.setTimeout(60_000);
+
   let results;
   const resultFilePath = path.join(RESULT_DIR, 'demo.json');
   if (testMode === 'record') {

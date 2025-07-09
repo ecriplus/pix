@@ -33,7 +33,23 @@ test('[@snapshot][@runSerially] user assessing on 5 Pix Competences', async ({
   page: Page;
   testMode: string;
 }, testInfo) => {
+  testInfo.annotations.push(
+    {
+      type: 'tag',
+      description: `@snapshot - this test runs against a reference snapshot. Snapshot can be generated with TEST_MODE=record env.
+         Reasons why a snapshot can be re-generated :
+         - AssessmentIdSequence has changed
+         - Reference Release has changed
+         - Next challenge algorithm for competence evaluation has changed`,
+    },
+    {
+      type: 'tag',
+      description:
+        '@runSerially - must run serially because this test fixes the assessment ID sequence to make sure to play on specific assessment ID',
+    },
+  );
   test.setTimeout(120_000);
+
   let results;
   const resultFilePath = path.join(RESULT_DIR, 'competence-evaluation.json');
   if (testMode === 'record') {
