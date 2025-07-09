@@ -13,6 +13,14 @@ export default class NewRoute extends Route {
     source: { refreshModel: true },
   };
 
+  beforeModel() {
+    const places = this.modelFor('authenticated');
+
+    if (places?.hasReachMaximumPlacesWithThreshold) {
+      this.router.replaceWith('authenticated.campaigns');
+    }
+  }
+
   async model(params) {
     const organization = this.currentUser.organization;
     await organization.targetProfiles;

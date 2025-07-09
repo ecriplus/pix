@@ -272,4 +272,48 @@ module('Unit | Route | authenticated/campaigns/new', function (hooks) {
       assert.true(controller.set.calledWithExactly('source', null));
     });
   });
+
+  module('beforeModel', function (hooks) {
+    let route;
+
+    hooks.beforeEach(function () {
+      route = this.owner.lookup('route:authenticated/campaigns/new');
+    });
+
+    hooks.afterEach(function () {
+      sinon.restore();
+    });
+
+    module('When places limit is reached', function () {
+      test('should redirect to main campaign page', function (assert) {
+        //given
+        const modelForStub = sinon.stub(route, 'modelFor');
+        const replaceWithStub = sinon.stub(route.router, 'replaceWith');
+
+        modelForStub.withArgs('authenticated').returns({ hasReachMaximumPlacesWithThreshold: true });
+
+        //when
+        route.beforeModel();
+
+        //then
+        assert.ok(replaceWithStub.calledWithExactly('authenticated.campaigns'));
+      });
+    });
+
+    module('When places limit is not reached', function () {
+      test('should not redirect to main campaign page', function (assert) {
+        //given
+        const modelForStub = sinon.stub(route, 'modelFor');
+        const replaceWithStub = sinon.stub(route.router, 'replaceWith');
+
+        modelForStub.withArgs('authenticated').returns({ hasReachMaximumPlacesWithThreshold: false });
+
+        //when
+        route.beforeModel();
+
+        //then
+        assert.notOk(replaceWithStub.called);
+      });
+    });
+  });
 });
