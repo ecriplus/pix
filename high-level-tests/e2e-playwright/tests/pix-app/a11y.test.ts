@@ -1,7 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { BrowserContext } from '@playwright/test';
 
-import { buildAuthenticatedUsers } from '../../helpers/db.ts';
 import { expect, test } from '../../helpers/fixtures.ts';
 
 const routes = [
@@ -12,10 +11,6 @@ const routes = [
   { path: '/mes-certifications', title: 'Mes certifications | Pix' },
   { path: '/mes-formations', title: 'Mes formations | Pix' },
 ];
-
-test.beforeEach(async () => {
-  await buildAuthenticatedUsers({ withCguAccepted: true });
-});
 
 routes.forEach(({ path, title }) => {
   test(`check a11y for route ${path}`, async ({ pixAppUserContext }: { pixAppUserContext: BrowserContext }) => {

@@ -3,18 +3,14 @@ import path from 'node:path';
 import { Page } from '@playwright/test';
 import * as fs from 'fs/promises';
 
-import { databaseBuilder } from '../../helpers/db.ts';
+import { knex } from '../../helpers/db.ts';
 import { expect, test } from '../../helpers/fixtures.ts';
 import { ChallengePage } from '../../pages/pix-app/index.ts';
 
 const RESULT_DIR = path.resolve(import.meta.dirname, './data');
 let PREVIEW_CHALLENGE_ID: string;
 test.beforeEach(async () => {
-  const { id } = await databaseBuilder
-    .knex('learningcontent.challenges')
-    .select('id')
-    .where('status', 'validé')
-    .first();
+  const { id } = await knex('learningcontent.challenges').select('id').where('status', 'validé').first();
   PREVIEW_CHALLENGE_ID = id;
 });
 

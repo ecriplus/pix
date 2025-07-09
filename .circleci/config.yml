@@ -986,7 +986,7 @@ jobs:
     executor:
       name: node-redis-postgres-s3-docker-medium
     working_directory: ~/pix/high-level-tests/e2e-playwright
-    parallelism: 1
+    parallelism: 4
     steps:
       - attach_workspace:
           at: ~/pix
@@ -1073,8 +1073,19 @@ jobs:
           working_directory: ~/pix/api
           command: npm run cache:refresh
       - run:
-          name: Run Next Challenge App e2e tests (with sharding)
-          command: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
+          name: Run E2E tests (with sharding)
+          command: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test --project=login --project=pix-app --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
+          environment:
+            PIX_API_PORT: 3000
+            PIX_APP_URL: http://localhost:4200
+            PIX_ORGA_URL: http://localhost:4201
+            PIX_CERTIF_URL: http://localhost:4203
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            AUTH_SECRET: 'secret'
+            TEST_MODE: 'check'
+      - run:
+          name: Run E2E tests (sequentially)
+          command: npx playwright test --project=evaluations
           environment:
             PIX_API_PORT: 3000
             PIX_APP_URL: http://localhost:4200
@@ -1088,72 +1099,3 @@ jobs:
       - store_artifacts:
           path: ./node_modules/.playwright/output
           destination: screenshots
-  # Temporary disabled until e2e tests are migrated to Playwright
-  #
-  # orga_e2e_playwright_test:
-  #   executor:
-  #     name: node-redis-postgres-s3-docker-medium
-  #   working_directory: ~/pix/high-level-tests/e2e-playwright
-  #   parallelism: 1
-  #   steps:
-  #     - attach_workspace:
-  #         at: ~/pix
-  #     - run: cat package*.json > cachekey
-  #     - restore_cache:
-  #         keys:
-  #           - v7-playwright-npm-{{ checksum "cachekey" }}
-  #     - run: npm ci
-  #     - save_cache:
-  #         key: v7-playwright-npm-{{ checksum "cachekey" }}
-  #         paths:
-  #           - ~/.npm
-  #     - run:
-  #         name: Lint
-  #         command: npm run lint
-  #     - run:
-  #         name: Typescript
-  #         command: npm run tsc
-  #     - run:
-  #         working_directory: ~/pix/api
-  #         command: cat package*.json > cachekey
-  #     - restore_cache:
-  #         keys:
-  #           - v7-api-npm-{{ checksum "~/pix/api/cachekey" }}
-  #     - run:
-  #         name: Install Playwright Browser
-  #         command: npx playwright install --with-deps chromium
-  #     - run:
-  #         name: Install Pix API
-  #         working_directory: ~/pix/api
-  #         command: npm ci
-  #     - run:
-  #         name: Start Pix API
-  #         working_directory: ~/pix/api
-  #         command: npm run db:prepare && npm start
-  #         background: true
-  #         environment:
-  #           DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
-  #           DATAMART_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datamart'
-  #           DATAWAREHOUSE_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datawarehouse'
-  #           REDIS_URL: 'redis://localhost:6379'
-  #           PIX_AUDIT_LOGGER_ENABLED: 'false'
-  #           MAILING_ENABLED: 'false'
-  #           AUTH_SECRET: 'secret'
-  #     - run:
-  #         name: Start Pix Orga
-  #         working_directory: ~/pix/orga
-  #         command: npx ember serve --path=./dist --proxy=http://localhost:3000
-  #         background: true
-  #     - run:
-  #         name: Run Pix App e2e tests (with sharding)
-  #         command: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test --project=pix-orga --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
-  #         environment:
-  #           PIX_API_PORT: 3000
-  #           PIX_ORGA_URL: http://localhost:4201
-  #           DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
-  #           AUTH_SECRET: 'secret'
-  #     - store_test_results:
-  #         path: ./node_modules/.playwright/junit
-  #     - store_artifacts:
-  #         path: ./node_modules/.playwright/output
-  #         destination: screenshots

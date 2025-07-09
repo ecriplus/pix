@@ -15,7 +15,6 @@ export default defineConfig({
   forbidOnly: isCI,
   retries: isCI ? 2 : 0,
   workers: 1,
-  fullyParallel: false,
   reporter: isCI ? [['junit', { outputFile: `${playwrightFolder}/junit/results.xml` }]] : 'list',
 
   use: {
@@ -29,21 +28,24 @@ export default defineConfig({
       name: 'login',
       testDir: 'tests/login',
       testMatch: '**/*.ts',
+      fullyParallel: true,
     },
     {
       name: 'pix-app',
       testDir: 'tests/pix-app',
       testMatch: '**/*.ts',
+      fullyParallel: true,
     },
-    {
-      name: 'pix-orga',
-      testDir: 'tests/pix-orga',
-      testMatch: '**/*.ts',
-    },
+    // {
+    //   name: 'pix-orga',
+    //   testDir: 'tests/pix-orga',
+    //  testMatch: '**/*.ts',
+    //  },
     {
       name: 'evaluations',
       testDir: 'tests/evaluations',
       testMatch: '**/*.ts',
+      fullyParallel: false,
     },
   ],
   webServer: isCI

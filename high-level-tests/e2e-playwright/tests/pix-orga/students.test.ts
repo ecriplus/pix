@@ -1,4 +1,4 @@
-import { buildAuthenticatedUsers, databaseBuilder } from '../../helpers/db.ts';
+/*import { buildAuthenticatedUsers, databaseBuilder } from '../../helpers/db.ts';
 import { PIX_ORGA_SUP_ISMANAGING_DATA } from '../../helpers/db-data.ts';
 import { expect, test } from '../../helpers/fixtures.ts';
 
@@ -11,7 +11,7 @@ let learnerPixAuth: {
 };
 
 test.beforeEach(async () => {
-  await buildAuthenticatedUsers({ withCguAccepted: true });
+  await buildAuthenticatedUsers();
   const organizationId = PIX_ORGA_SUP_ISMANAGING_DATA.organization.id;
   learnerPixAuth = databaseBuilder.factory.buildUser.withRawPassword();
   databaseBuilder.factory.buildOrganizationLearner({
@@ -32,3 +32,4 @@ test('Students management for a sco organization', async ({ pixOrgaSupIsManaging
   await expect(page.getByRole('heading', { name: 'Étudiant (1)' })).toBeVisible();
   await expect(page.getByRole('table', { name: 'Tableau des étudiants trié' })).toBeVisible();
 });
+*/

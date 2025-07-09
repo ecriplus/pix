@@ -1,20 +1,31 @@
 import { getGarTokenForNewUser } from '../../helpers/auth.js';
-import { databaseBuilder } from '../../helpers/db.js';
 import { expect, test } from '../../helpers/fixtures.js';
+import { CreateCampaignPage } from '../../pages/pix-orga/index.js';
 
-let campaignCode: string;
+test('creates an account from GAR', async ({ page, pixOrgaProContext }) => {
+  let campaignCode: string | null;
 
-test.beforeEach(async () => {
-  campaignCode = databaseBuilder.factory.buildCampaign().code;
-  await databaseBuilder.commit();
-});
+  await test.step('create a campaign', async () => {
+    const pixOrgaPage = await pixOrgaProContext.newPage();
+    await pixOrgaPage.goto(process.env.PIX_ORGA_URL as string);
+    await test.step('creates the campaign', async () => {
+      await pixOrgaPage.getByRole('link', { name: 'Créer une campagne' }).click();
+      const createCampaignPage = new CreateCampaignPage(pixOrgaPage);
+      await createCampaignPage.createEvaluationCampaign({
+        campaignName: 'Test GAR account creation',
+        targetProfileName: 'PC pour Playwright',
+      });
+      campaignCode = await pixOrgaPage.locator('dd.campaign-header-title__campaign-code > span').textContent();
+    });
+  });
 
-test('creates an account from GAR', async ({ page }) => {
-  const garUserToken = getGarTokenForNewUser('marie', 'toupie');
-  await page.goto(process.env.PIX_APP_URL + `/campagnes/?externalUser=${garUserToken}`);
-  await expect(page.getByRole('heading', { name: 'Saisissez votre code' })).toBeVisible();
+  await test.step('Log with GAR as new user using the campaign code', async function () {
+    const garUserToken = getGarTokenForNewUser('marie', 'toupie');
+    await page.goto(process.env.PIX_APP_URL + `/campagnes/?externalUser=${garUserToken}`);
+    await expect(page.getByRole('heading', { name: 'Saisissez votre code' })).toBeVisible();
 
-  await page.getByLabel('Saisir votre code pour').fill(campaignCode);
-  await page.getByRole('button', { name: 'Accéder au parcours' }).click();
-  await expect(page.getByRole('heading', { name: 'Commencez votre parcours Pix' })).toBeVisible();
+    await page.getByLabel('Saisir votre code pour').fill(campaignCode as string);
+    await page.getByRole('button', { name: 'Accéder au parcours' }).click();
+    await expect(page.getByRole('heading', { name: 'Commencez votre parcours Pix' })).toBeVisible();
+  });
 });

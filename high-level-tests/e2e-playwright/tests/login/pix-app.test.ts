@@ -1,21 +1,16 @@
 import { Page } from '@playwright/test';
 
 import { getGarTokenForExistingUser } from '../../helpers/auth.ts';
-import { buildAuthenticatedUsers } from '../../helpers/db.ts';
 import { PIX_APP_USER_DATA } from '../../helpers/db-data.ts';
 import { expect, test } from '../../helpers/fixtures.ts';
 import { LoginPage } from '../../pages/pix-app/index.js';
-
-test.beforeEach(async () => {
-  await buildAuthenticatedUsers({ withCguAccepted: false });
-});
 
 test('Signup, logout and login', async ({ page }: { page: Page }) => {
   await page.goto(process.env.PIX_APP_URL as string);
 
   await test.step('Signup', async () => {
     const loginPage = new LoginPage(page);
-    await loginPage.signup('Buffy', 'Summers', 'buffy.summers@example.net', 'Coucoulesdevs66');
+    await loginPage.signup('Buffy', 'Summers', 'buffy.summers.pixapp@example.net', 'Coucoulesdevs66');
 
     await expect(page.locator('#main')).toContainText('Bonjour Buffy');
     await expect(page).toHaveTitle('Accueil | Pix');
@@ -35,7 +30,7 @@ test('Signup, logout and login', async ({ page }: { page: Page }) => {
   });
 });
 
-test('Login as GAR user and logout', async ({ page }) => {
+test('Login as existing GAR user and logout', async ({ page }) => {
   const token = getGarTokenForExistingUser(PIX_APP_USER_DATA.id);
   await page.goto(process.env.PIX_APP_URL + `/connexion/gar#${token}`);
 

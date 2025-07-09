@@ -2,7 +2,7 @@ import path from 'node:path';
 
 import * as fs from 'fs/promises';
 
-import { databaseBuilder } from '../../helpers/db.ts';
+import { knex } from '../../helpers/db.ts';
 import { expect, test } from '../../helpers/fixtures.ts';
 import { rightWrongAnswerCycle } from '../../helpers/utils.ts';
 import { ChallengePage } from '../../pages/pix-app/index.ts';
@@ -12,14 +12,9 @@ let DEMO_COURSE_ID: string | null = null;
 
 const RESULT_DIR = path.resolve(import.meta.dirname, './data');
 test.beforeEach(async () => {
-  const courseDTOs = await databaseBuilder
-    .knex('learningcontent.courses')
-    .select('*')
-    .where({ isActive: true })
-    .orderBy('id', 'asc');
+  const courseDTOs = await knex('learningcontent.courses').select('*').where({ isActive: true }).orderBy('id', 'asc');
   for (const courseDTO of courseDTOs) {
-    const challengeDTOs = await databaseBuilder
-      .knex('learningcontent.challenges')
+    const challengeDTOs = await knex('learningcontent.challenges')
       .select('*')
       .whereIn('id', courseDTO.challenges)
       .where(

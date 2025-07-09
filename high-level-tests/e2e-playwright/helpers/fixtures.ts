@@ -10,12 +10,10 @@ import {
   PIX_ORGA_SCO_ISMANAGING_CREDENTIALS,
   PIX_ORGA_SUP_ISMANAGING_CREDENTIALS,
 } from './auth.js';
-import { cleanDB } from './db.js';
 const shouldRecordHAR = process.env.RECORD_HAR === 'true';
 const HAR_DIR = path.resolve(import.meta.dirname, '../.har-record');
 
 export const test = base.extend<{
-  forEachTest: void;
   testMode: string;
   pixAppUserContext: BrowserContext;
   pixOrgaProContext: BrowserContext;
@@ -23,14 +21,6 @@ export const test = base.extend<{
   pixOrgaSupIsManagingContext: BrowserContext;
   pixCertifProContext: BrowserContext;
 }>({
-  forEachTest: [
-    // eslint-disable-next-line no-empty-pattern
-    async ({}, use) => {
-      await cleanDB();
-      await use();
-    },
-    { auto: true },
-  ],
   // eslint-disable-next-line no-empty-pattern
   testMode: async ({}, use) => {
     await use(process.env.TEST_MODE || 'check');

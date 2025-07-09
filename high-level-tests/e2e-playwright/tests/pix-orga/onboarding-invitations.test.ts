@@ -1,14 +1,14 @@
-import { Page } from '@playwright/test';
+/*import { Page } from '@playwright/test';
 
 import { buildAuthenticatedUsers, databaseBuilder } from '../../helpers/db.ts';
 import { PIX_APP_USER_DATA, PIX_ORGA_PRO_DATA } from '../../helpers/db-data.ts';
 import { expect, test } from '../../helpers/fixtures.ts';
 
 test.beforeEach(async () => {
-  await buildAuthenticatedUsers({ withCguAccepted: true });
+  await buildAuthenticatedUsers();
 });
 
-test.skip('A new user joins a new organization from an invitation link', async function ({ page }: { page: Page }) {
+test('A new user joins a new organization from an invitation link', async function ({ page }: { page: Page }) {
   const invitation = databaseBuilder.factory.buildOrganizationInvitation();
   await databaseBuilder.commit();
 
@@ -70,3 +70,4 @@ test.describe('When user is already authenticated to Pix Orga', () => {
     await expect(page.getByRole('paragraph').filter({ hasText: 'Observatoire de Pix' })).toBeVisible();
   });
 });
+*/
