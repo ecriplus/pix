@@ -5,6 +5,7 @@ import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
+import ENV from '../../../config/environment';
 import { authenticate } from '../../helpers/authentication';
 import setupIntl from '../../helpers/setup-intl';
 
@@ -16,6 +17,12 @@ module('Acceptance | Campaigns | Results', function (hooks) {
   let user;
   let campaign;
   let campaignParticipation;
+
+  const originalAutoShareDate = ENV.APP.AUTO_SHARE_AFTER_DATE;
+
+  hooks.afterEach(function () {
+    ENV.APP.AUTO_SHARE_AFTER_DATE = originalAutoShareDate;
+  });
 
   hooks.beforeEach(function () {
     user = server.create('user', 'withEmail');
@@ -130,21 +137,46 @@ module('Acceptance | Campaigns | Results', function (hooks) {
       });
 
       module('when isAutoShareEnabled', function () {
-        test('should shared result automatically', async function (assert) {
-          // when
-          server.create('feature-toggle', {
-            id: 0,
-            isAutoShareEnabled: true,
-          });
-          server.create('campaign-participation-result', {
-            id: campaignParticipation.id,
-            isShared: false,
-          });
-          const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
-          assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/evaluation/resultats`);
+        module('when campaignParticipation was created before AUTO_SHARE_AFTER_DATE', function () {
+          test('should not shared result automatically', async function (assert) {
+            // when
+            ENV.APP.AUTO_SHARE_AFTER_DATE = '2024-01-01';
+            server.db.campaignParticipations.update(campaignParticipation.id, { createdAt: '2023-12-12' });
+            server.create('feature-toggle', {
+              id: 0,
+              isAutoShareEnabled: true,
+            });
+            server.create('campaign-participation-result', {
+              id: campaignParticipation.id,
+              isShared: false,
+            });
+            const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
+            assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/evaluation/resultats`);
 
-          // then
-          assert.ok(await screen.findByRole('link', { name: t('navigation.back-to-homepage') }));
+            // then
+            assert.ok(await screen.findByRole('button', { name: t('pages.skill-review.actions.send') }));
+          });
+        });
+
+        module('when campaignParticipation was created after AUTO_SHARE_AFTER_DATE', function () {
+          test('should shared result automatically', async function (assert) {
+            // when
+            ENV.APP.AUTO_SHARE_AFTER_DATE = '2024-01-01';
+            server.db.campaignParticipations.update(campaignParticipation.id, { createdAt: '2025-01-01' });
+            server.create('feature-toggle', {
+              id: 0,
+              isAutoShareEnabled: true,
+            });
+            server.create('campaign-participation-result', {
+              id: campaignParticipation.id,
+              isShared: false,
+            });
+            const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
+            assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/evaluation/resultats`);
+
+            // then
+            assert.ok(await screen.findByRole('link', { name: t('navigation.back-to-homepage') }));
+          });
         });
       });
 
