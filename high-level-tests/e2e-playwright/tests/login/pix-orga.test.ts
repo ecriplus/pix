@@ -5,7 +5,7 @@ import { expect, test } from '../../helpers/fixtures.ts';
 import { LoginPage } from '../../pages/pix-orga/index.js';
 
 test.beforeEach(async () => {
-  await buildFreshPixOrgaUser('Buffy', 'Summers', 'buffy.summers.pixorga@example.net', 'Coucoulesdevs66');
+  await buildFreshPixOrgaUser('Buffy', 'Summers', 'buffy.summers.pixorga@example.net', 'Coucoulesdevs66', 'MEMBER');
 });
 
 test('login, cgu and logout', async ({ page }: { page: Page }) => {

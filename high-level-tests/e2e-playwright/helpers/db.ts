@@ -6,13 +6,7 @@ import { getUserHashedPassword } from '../../../api/db/database-builder/factory/
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../api/src/identity-access-management/domain/constants/identity-providers.js';
 // @ts-expect-error AuthenticationMethod from API project
 import { AuthenticationMethod } from '../../../api/src/identity-access-management/domain/models/AuthenticationMethod.js';
-import {
-  PIX_APP_USER_DATA,
-  PIX_CERTIF_PRO_DATA,
-  PIX_ORGA_PRO_DATA,
-  PIX_ORGA_SCO_ISMANAGING_DATA,
-  PIX_ORGA_SUP_ISMANAGING_DATA,
-} from './db-data.js';
+import { PIX_APP_USER_DATA, PIX_CERTIF_PRO_DATA, PIX_ORGA_ADMIN_DATA, PIX_ORGA_MEMBER_DATA } from './db-data.js';
 
 export const knex = Knex({ client: 'postgresql', connection: process.env.DATABASE_URL });
 
@@ -31,10 +25,16 @@ export async function buildFreshPixCertifUser(firstName: string, lastName: strin
   await createCertificationCenterMembershipInDB(userId, certificationCenterId);
 }
 
-export async function buildFreshPixOrgaUser(firstName: string, lastName: string, email: string, rawPassword: string) {
+export async function buildFreshPixOrgaUser(
+  firstName: string,
+  lastName: string,
+  email: string,
+  rawPassword: string,
+  role: string,
+) {
   const organizationId = await createOrganizationInDB('PRO', 'Organization for ' + email, false);
   const userId = await createUserInDB(firstName, lastName, email, rawPassword, false, false, undefined);
-  await createOrganizationMembershipInDB(userId, organizationId);
+  await createOrganizationMembershipInDB(userId, organizationId, role);
 }
 
 export async function setAssessmentIdSequence(id: number) {
@@ -57,12 +57,8 @@ async function buildAuthenticatedUsers() {
 
   // PIX-ORGA
   const legalDocumentVersionId = await createLegalDocumentVersionInDB();
-  for (const data of [PIX_ORGA_PRO_DATA, PIX_ORGA_SCO_ISMANAGING_DATA, PIX_ORGA_SUP_ISMANAGING_DATA]) {
-    const organizationId = await createOrganizationInDB(
-      data.organization.type,
-      data.organization.externalId,
-      data.organization.isManagingStudents,
-    );
+  const createdOrganizations: Record<string, number> = {};
+  for (const data of [PIX_ORGA_ADMIN_DATA, PIX_ORGA_MEMBER_DATA]) {
     const userId = await createUserInDB(
       data.firstName,
       data.lastName,
@@ -72,8 +68,19 @@ async function buildAuthenticatedUsers() {
       true,
       data.id,
     );
-    await createOrganizationMembershipInDB(userId, organizationId);
     await createLegalDocumentVersionAcceptanceInDB(legalDocumentVersionId, userId);
+
+    for (const organization of data.organizations) {
+      if (!createdOrganizations[organization.externalId]) {
+        const organizationId = await createOrganizationInDB(
+          organization.type,
+          organization.externalId,
+          organization.isManagingStudents,
+        );
+        createdOrganizations[organization.externalId] = organizationId;
+      }
+      await createOrganizationMembershipInDB(userId, createdOrganizations[organization.externalId], data.role);
+    }
   }
 
   // PIX-CERTIF
@@ -212,7 +219,7 @@ async function createOrganizationInDB(type: string, externalId: string, isManagi
   const [{ id }] = await knex('organizations')
     .insert({
       type,
-      name: externalId + type,
+      name: `Orga ${type.toLowerCase()}`,
       logoUrl: null,
       externalId,
       provinceCode: '66',
@@ -235,11 +242,11 @@ async function createOrganizationInDB(type: string, externalId: string, isManagi
   return id;
 }
 
-async function createOrganizationMembershipInDB(userId: number, organizationId: number) {
+async function createOrganizationMembershipInDB(userId: number, organizationId: number, role: string) {
   const someDate = new Date('2025-07-09');
   await knex('memberships').insert({
     organizationId,
-    organizationRole: 'MEMBER',
+    organizationRole: role,
     userId,
     createdAt: someDate,
     updatedAt: someDate,

@@ -51,11 +51,11 @@ test('An existing user joins a new organization from an invitation link', async 
 });
 
 test.describe('When user is already authenticated to Pix Orga', () => {
-  test('Joins a new organization from an invitation link', async function ({ pixOrgaProContext }) {
+  test('Joins a new organization from an invitation link', async function ({ pixOrgaMemberContext }) {
     const invitation = databaseBuilder.factory.buildOrganizationInvitation();
     await databaseBuilder.commit();
 
-    const page = await pixOrgaProContext.newPage();
+    const page = await pixOrgaMemberContext.newPage();
     await page.goto(process.env.PIX_ORGA_URL + `/rejoindre?invitationId=${invitation.id}&code=${invitation.code}`);
     await expect(page.getByText('Vous êtes invité(e) à')).toBeVisible();
 

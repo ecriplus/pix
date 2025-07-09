@@ -2,11 +2,11 @@ import { getGarTokenForNewUser } from '../../helpers/auth.js';
 import { expect, test } from '../../helpers/fixtures.js';
 import { CreateCampaignPage } from '../../pages/pix-orga/index.js';
 
-test('creates an account from GAR', async ({ page, pixOrgaProContext }) => {
+test('creates an account from GAR', async ({ page, pixOrgaMemberContext }) => {
   let campaignCode: string | null;
 
   await test.step('create a campaign', async () => {
-    const pixOrgaPage = await pixOrgaProContext.newPage();
+    const pixOrgaPage = await pixOrgaMemberContext.newPage();
     await pixOrgaPage.goto(process.env.PIX_ORGA_URL as string);
     await test.step('creates the campaign', async () => {
       await pixOrgaPage.getByRole('link', { name: 'Créer une campagne' }).click();

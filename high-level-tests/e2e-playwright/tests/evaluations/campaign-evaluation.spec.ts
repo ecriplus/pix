@@ -30,11 +30,11 @@ test.beforeEach(async () => {
 
 test('user plays a campaign', async ({
   page: pixAppPage,
-  pixOrgaProContext,
+  pixOrgaMemberContext,
   testMode,
 }: {
   page: Page;
-  pixOrgaProContext: BrowserContext;
+  pixOrgaMemberContext: BrowserContext;
   testMode: string;
 }, testInfo) => {
   test.setTimeout(180_000);
@@ -49,7 +49,7 @@ test('user plays a campaign', async ({
     results = await fs.readFile(resultFilePath, 'utf-8');
     results = JSON.parse(results);
   }
-  const pixOrgaPage = await pixOrgaProContext.newPage();
+  const pixOrgaPage = await pixOrgaMemberContext.newPage();
   await pixOrgaPage.goto(process.env.PIX_ORGA_URL as string);
   let campaignCode: string | null;
   await test.step('creates the campaign', async () => {
