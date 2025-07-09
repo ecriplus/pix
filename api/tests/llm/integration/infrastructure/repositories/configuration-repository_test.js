@@ -115,41 +115,6 @@ describe('LLM | Integration | Infrastructure | Repositories | configuration', fu
           expect(llmApiScopeShouldBeCalled.isDone()).to.be.true;
           expect(llmApiScopeShouldNOTBeCalled.isDone()).to.be.false;
         });
-        context('when cached configuration is not versioned', function () {
-          it('should return the configuration from the cache in new version format', async function () {
-            // given
-            await configurationTemporaryStorage.save({
-              key: 'unIdDeConfiguration',
-              value: {
-                llm: { historySize: 1 },
-                challenge: { inputMaxChars: 2, inputMaxPrompts: 3 },
-                attachment: { name: 'some_attachment_name', context: 'some attachment context' },
-              },
-            });
-
-            const llmApiScopeShouldNOTBeCalled = nock('https://llm-test.pix.fr/api')
-              .get('/configurations/unIdDeConfiguration')
-              .twice()
-              .reply(500, { err: 'I SHOULD NOT BE CALLED' });
-
-            // when
-            const configurationCached = await get('unIdDeConfiguration');
-
-            // then
-            const expectedConfiguration = new Configuration({
-              id: 'unIdDeConfiguration',
-              historySize: 1,
-              inputMaxChars: 2,
-              inputMaxPrompts: 3,
-              attachmentName: 'some_attachment_name',
-              attachmentContext: 'some attachment context',
-            });
-
-            expect(configurationCached).to.deepEqualInstance(expectedConfiguration);
-            expect(configurationCached.toDTO()).to.deep.equal(expectedConfiguration.toDTO());
-            expect(llmApiScopeShouldNOTBeCalled.isDone()).to.be.false;
-          });
-        });
       });
     });
   });

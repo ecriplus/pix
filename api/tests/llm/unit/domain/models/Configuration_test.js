@@ -195,7 +195,6 @@ describe('LLM | Unit | Domain | Models | Configuration', function () {
 
       // then
       expect(dto).to.deep.equal({
-        version: 1,
         id: 'some-config-id',
         historySize: 123,
         inputMaxChars: 456,
