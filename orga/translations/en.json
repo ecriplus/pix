@@ -80,6 +80,9 @@
     "last-places-lot-available": {
       "message": "Please note that your seats will expire in {days, number} days."
     },
+    "maximum-places-exceeded": {
+      "message": "No more available places for the organization."
+    },
     "over-capacity": {
       "message": "Please note that you are using more seats than your total capacity."
     },

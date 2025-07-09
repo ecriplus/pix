@@ -80,6 +80,9 @@
     "last-places-lot-available": {
       "message": "{days, number} Houd er rekening mee dat je tickets over enkele dagen verlopen."
     },
+    "maximum-places-exceeded": {
+      "message": "Er zijn geen plaatsen meer beschikbaar voor de organisatie."
+    },
     "over-capacity": {
       "message": "Houd er rekening mee dat je meer plaats inneemt dan je totale capaciteit."
     },
