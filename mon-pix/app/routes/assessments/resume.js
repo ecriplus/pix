@@ -26,9 +26,13 @@ export default class ResumeRoute extends Route {
     if (!transition.to.parent.params.assessment_id) {
       this.assessmentHasNoMoreQuestions = false;
     } else {
-      const assessment = await this.store.queryRecord('challenge', {
-        assessmentId: transition.to.parent.params.assessment_id,
-      });
+      const assessment = this.hasSeenCheckpoint
+        ? await this.store.findRecord('assessment', transition.to.parent.params.assessment_id, {
+            backgroundReload: false,
+          })
+        : await this.store.queryRecord('challenge', {
+            assessmentId: transition.to.parent.params.assessment_id,
+          });
       this.assessmentHasNoMoreQuestions = !assessment.nextChallenge;
     }
   }
