@@ -96,4 +96,46 @@ module('Unit | Route | authenticated/campaigns/campaign/profile-results', functi
       assert.ok(controller.set.calledWith('search', null));
     });
   });
+
+  module('beforeModel', function (hooks) {
+    hooks.afterEach(function () {
+      sinon.restore();
+    });
+
+    module('When places limit is reached', function () {
+      test('should redirect on main campaign page', function (assert) {
+        //given
+        const campaignId = Symbol('CampaignId');
+
+        const modelForStub = sinon.stub(route, 'modelFor');
+        const replaceWithStub = sinon.stub(route.router, 'replaceWith');
+
+        modelForStub.withArgs('authenticated').returns({ hasReachMaximumPlacesWithThreshold: true });
+
+        //when
+        route.beforeModel({ to: { params: { campaign_id: campaignId } } });
+
+        //then
+        assert.ok(replaceWithStub.calledWithExactly('authenticated.campaigns.campaign', campaignId));
+      });
+    });
+
+    module('When places limit is not reached', function () {
+      test('should not redirect on main campaign page', function (assert) {
+        //given
+        const campaignId = Symbol('CampaignId');
+
+        const modelForStub = sinon.stub(route, 'modelFor');
+        const replaceWithStub = sinon.stub(route.router, 'replaceWith');
+
+        modelForStub.withArgs('authenticated').returns({ hasReachMaximumPlacesWithThreshold: false });
+
+        //when
+        route.beforeModel({ to: { params: { campaign_id: campaignId } } });
+
+        //then
+        assert.notOk(replaceWithStub.called);
+      });
+    });
+  });
 });

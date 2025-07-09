@@ -84,23 +84,24 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
         sharedParticipationsCount: 10,
         type: 'ASSESSMENT',
       });
-
-      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
     });
 
     test('it should display evaluation results item', async function (assert) {
+      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
       const resultsLink = screen.getByRole('link', { name: t('pages.campaign.tab.results', { count: 10 }) });
 
       assert.dom(resultsLink).hasAttribute('href', '/campagnes/13/resultats-evaluation');
     });
 
     test('it should display campaign analyse item', async function (assert) {
+      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
       const resultsLink = screen.getByRole('link', { name: t('pages.campaign.tab.review') });
 
       assert.dom(resultsLink).hasAttribute('href', '/campagnes/13/analyse');
     });
 
     test('it should call export result with right context', async function (assert) {
+      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
       await click(screen.getByRole('button', { name: t('pages.campaign.actions.export-results') }));
 
       assert.ok(notifications.sendError.notCalled);
@@ -110,6 +111,37 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
           token: access_token,
         }),
       );
+    });
+
+    module('when has reach maximum places threshold is true', function (hooks) {
+      hooks.beforeEach(function () {
+        const storeService = this.owner.lookup('service:store');
+        sinon.stub(storeService, 'peekAll');
+        storeService.peekAll.returns([{ hasReachMaximumPlacesWithThreshold: true }]);
+      });
+
+      test('it should display disabled evaluation results item', async function (assert) {
+        screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+        const resultsLink = screen.getByRole('link', { name: t('pages.campaign.tab.results', { count: 10 }) });
+
+        assert.dom(resultsLink).hasAttribute('href', '/campagnes/13/resultats-evaluation');
+        assert.dom(resultsLink).hasClass('disabled');
+      });
+
+      test('it should display disabled campaign analyse item', async function (assert) {
+        screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+        const resultsLink = screen.getByRole('link', { name: t('pages.campaign.tab.review') });
+
+        assert.dom(resultsLink).hasAttribute('href', '/campagnes/13/analyse');
+        assert.dom(resultsLink).hasClass('disabled');
+      });
+
+      test('it should disabled download campaign result', async function (assert) {
+        screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+        const downloadResultButton = screen.getByRole('button', { name: t('pages.campaign.actions.export-results') });
+
+        assert.dom(downloadResultButton).hasAttribute('aria-disabled', 'true');
+      });
     });
   });
 
@@ -121,21 +153,22 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
         type: 'PROFILES_COLLECTION',
         sharedParticipationsCount: 6,
       });
-
-      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
     });
 
     test('it should display  profile results item', async function (assert) {
+      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
       const resultsLink = screen.getByRole('link', { name: t('pages.campaign.tab.results', { count: 6 }) });
 
       assert.dom(resultsLink).hasAttribute('href', '/campagnes/13/profils');
     });
 
     test('it should not display analyse item', async function (assert) {
+      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
       assert.notOk(screen.queryByRole('link', { name: t('pages.campaign.tab.review') }));
     });
 
     test('it should call export result with right context', async function (assert) {
+      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
       await click(screen.getByRole('button', { name: t('pages.campaign.actions.export-results') }));
 
       assert.ok(notifications.sendError.notCalled);
@@ -162,6 +195,29 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
         'pix-event-name': "Clic sur le bouton d'export",
       });
       assert.ok(true);
+    });
+
+    module('when has reach maximum places is true', function (hooks) {
+      hooks.beforeEach(function () {
+        const storeService = this.owner.lookup('service:store');
+        sinon.stub(storeService, 'peekAll');
+        storeService.peekAll.returns([{ hasReachMaximumPlacesWithThreshold: true }]);
+      });
+
+      test('it should display disabled profile results item', async function (assert) {
+        screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+        const resultsLink = screen.getByRole('link', { name: t('pages.campaign.tab.results', { count: 6 }) });
+
+        assert.dom(resultsLink).hasAttribute('href', '/campagnes/13/profils');
+        assert.dom(resultsLink).hasClass('disabled');
+      });
+
+      test('it should display a disabled download campaign result button', async function (assert) {
+        screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+        const downloadResultButton = screen.getByRole('button', { name: t('pages.campaign.actions.export-results') });
+
+        assert.dom(downloadResultButton).hasAttribute('aria-disabled', 'true');
+      });
     });
   });
 });
