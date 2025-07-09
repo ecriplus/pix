@@ -1074,7 +1074,7 @@ jobs:
           command: npm run cache:refresh
       - run:
           name: Run E2E tests (with sharding)
-          command: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test --project=login --project=pix-app --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
+          command: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test --grep-invert @runSerially --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
           environment:
             PIX_API_PORT: 3000
             PIX_APP_URL: http://localhost:4200
@@ -1084,8 +1084,8 @@ jobs:
             AUTH_SECRET: 'secret'
             TEST_MODE: 'check'
       - run:
-          name: Run E2E tests (sequentially)
-          command: npx playwright test --project=evaluations
+          name: Run E2E tests (serially)
+          command: npx playwright test --grep @runSerially --workers=1
           environment:
             PIX_API_PORT: 3000
             PIX_APP_URL: http://localhost:4200

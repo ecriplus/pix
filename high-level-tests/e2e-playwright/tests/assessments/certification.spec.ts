@@ -3,7 +3,7 @@ import path from 'node:path';
 import { BrowserContext, Page } from '@playwright/test';
 import * as fs from 'fs/promises';
 
-import { knex, setAssessmentIdSequence } from '../../helpers/db.js';
+import { knex } from '../../helpers/db.js';
 import { expect, test } from '../../helpers/fixtures.ts';
 import { rightWrongAnswerCycle } from '../../helpers/utils.ts';
 import {
@@ -14,11 +14,9 @@ import {
 } from '../../pages/pix-app/index.ts';
 import { SessionCreationPage, SessionManagementPage } from '../../pages/pix-certif/index.ts';
 
-const RESULT_DIR = path.resolve(import.meta.dirname, './data');
+const RESULT_DIR = path.resolve(import.meta.dirname, '../../snapshots');
 let COMPETENCE_TITLES: string[];
 test.beforeEach(async () => {
-  // Reset assessment id sequence for challenge selection to be predictable
-  await setAssessmentIdSequence(2000);
   const competenceDTOs = await knex('learningcontent.competences')
     .jsonExtract('name_i18n', '$.fr', 'competenceTitle')
     .where('origin', 'Pix')
@@ -26,7 +24,7 @@ test.beforeEach(async () => {
   COMPETENCE_TITLES = competenceDTOs.map(({ competenceTitle }: { competenceTitle: string }) => competenceTitle);
 });
 
-test('user takes a certification test', async ({
+test('[@snapshot] user takes a certification test', async ({
   page: pixAppPage,
   pixCertifProContext,
   testMode,

@@ -14,7 +14,7 @@ import {
   LoginPage,
 } from '../../pages/pix-app/index.ts';
 
-const RESULT_DIR = path.resolve(import.meta.dirname, './data');
+const RESULT_DIR = path.resolve(import.meta.dirname, '../../snapshots');
 let COMPETENCE_TITLES: string[];
 test.beforeEach(async () => {
   const competenceDTOs = await knex('learningcontent.competences')
@@ -26,7 +26,7 @@ test.beforeEach(async () => {
   await setAssessmentIdSequence(3000);
 });
 
-test('user assessing on 5 Pix Competences', async ({
+test('[@snapshot][@runSerially] user assessing on 5 Pix Competences', async ({
   page,
   testMode,
 }: {

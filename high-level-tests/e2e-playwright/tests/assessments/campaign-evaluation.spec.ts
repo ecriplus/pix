@@ -16,7 +16,7 @@ import {
 } from '../../pages/pix-app/index.ts';
 import { CreateCampaignPage } from '../../pages/pix-orga/index.ts';
 
-const RESULT_DIR = path.resolve(import.meta.dirname, './data');
+const RESULT_DIR = path.resolve(import.meta.dirname, '../../snapshots');
 let COMPETENCE_TITLES: string[];
 test.beforeEach(async () => {
   // Reset assessment id sequence for smart random to be predictable
@@ -28,7 +28,7 @@ test.beforeEach(async () => {
   COMPETENCE_TITLES = competenceDTOs.map(({ competenceTitle }: { competenceTitle: string }) => competenceTitle);
 });
 
-test('user plays a campaign', async ({
+test('[@snapshot][@runSerially] user plays a campaign', async ({
   page: pixAppPage,
   pixOrgaMemberContext,
   testMode,
