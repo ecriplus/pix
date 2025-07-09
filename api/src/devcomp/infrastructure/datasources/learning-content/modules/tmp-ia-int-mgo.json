@@ -91,7 +91,7 @@
     {
       "id": "5166145e-6e9c-4fb5-b781-a08749f576c8",
       "type": "activity",
-      "title": "Decouverte 1",
+      "title": "Découverte 1",
       "components": [
         {
           "type": "element",
@@ -129,7 +129,7 @@
                 "content": "<p>koala</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Pendant cette étape de l’entraînement, elle a bien remarqué que le mot “koala” apparaît souvent en même temps que “animaux”, “océanie”, etc.</p>"
+                  "diagnosis": "<p>Pendant cette étape de l’entraînement, elle a bien remarqué que le mot “koala” apparaît souvent en même temps que “animaux”, “Océanie”, etc.</p>"
                 }
               },
               {
@@ -513,9 +513,44 @@
         {
           "type": "element",
           "element": {
-            "id": "cf0523d9-b4f8-4e94-abd5-0bc9e40145e4",
+            "id": "cf7769e2-c924-43f7-9577-85d544a79bcb",
             "type": "text",
-            "content": "<p>hello</p>"
+            "content": "<p>introduire le QCU</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "cf0523d9-b4f8-4e94-abd5-0bc9e40145e4",
+            "type": "qcu",
+            "instruction": "<p>Pendant l'étape de pré-entraînement, les IA génératives apprennent à produire du texte et à prédire la suite d'un texte.&nbsp;</p><p>De quoi a-t-on besoin pour cette étape ?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>Des milliards de textes très variés.</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Effectivement, le pré-entraînement nécessite des quantités astronomiques de textes très variés.</p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "<p>Une liste des phrases les plus appréciées par les utilisateurs</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Lors du pré-entraînement, on ne cherche pas encore à satisfaire les utilisateurs, on ne cherche qu'à produire du texte cohérent.</p>"
+                }
+              },
+              {
+                "id": "3",
+                "content": "<p>Un dictionnaire et une encyclopédie.</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Lors du pré-entraînement, veut juste produire du texte, et si le texte énonce des absurdités ce n'est pas vraiment un problème à ce stade.</p>"
+                }
+              }
+            ],
+            "solution": "1"
           }
         }
       ]
