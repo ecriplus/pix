@@ -1,4 +1,4 @@
-import { fillByLabel, visit } from '@1024pix/ember-testing-library';
+import { clickByName, fillByLabel, visit } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { t } from 'ember-intl/test-support';
@@ -163,6 +163,24 @@ module('Acceptance | Attestations', function (hooks) {
           assert.strictEqual(screen.getByLabelText(t('pages.attestations.table.filter.status.label')).value, '');
           assert.strictEqual(screen.getByLabelText(t('pages.attestations.table.filter.divisions.label')).value, '');
         });
+      });
+    });
+
+    module('when using attestation pagination', function () {
+      test('should be possible to change page', async function (assert) {
+        // given
+        const screen = await visit('/attestations?pageSize=1');
+
+        assert.ok(screen.getByRole('cell', { name: 'Jean' }));
+        assert.notOk(screen.queryByText('Eude'));
+
+        // when
+        await clickByName('Aller à la page suivante');
+
+        // then
+        assert.strictEqual(currentURL(), '/attestations?pageNumber=2&pageSize=1');
+        assert.ok(screen.getByRole('cell', { name: 'Eude' }));
+        assert.notOk(screen.queryByText('Jean'));
       });
     });
   });

@@ -4,6 +4,12 @@ import { service } from '@ember/service';
 
 export default class AuthenticatedAttestationsRoute extends Route {
   queryParams = {
+    pageNumber: {
+      refreshModel: true,
+    },
+    pageSize: {
+      refreshModel: true,
+    },
     statuses: {
       refreshModel: true,
     },
@@ -38,6 +44,10 @@ export default class AuthenticatedAttestationsRoute extends Route {
           divisions: params.divisions,
           search: params.search,
         },
+        page: {
+          number: params.pageNumber,
+          size: params.pageSize,
+        },
       },
       { reload: true },
     );
@@ -56,6 +66,8 @@ export default class AuthenticatedAttestationsRoute extends Route {
       controller.statuses = [];
       controller.divisions = [];
       controller.search = null;
+      controller.pageSize = 50;
+      controller.pageNumber = 1;
     }
   }
 

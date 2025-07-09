@@ -8,6 +8,7 @@ import { findPaginatedAssessmentResults } from './handlers/find-paginated-assess
 import { findPaginatedCampaignProfilesCollectionParticipationSummaries } from './handlers/find-paginated-campaign-participation-summaries';
 import { findPaginatedMissionLearners } from './handlers/find-paginated-mission-learners';
 import { findPaginatedOrganizationMemberships } from './handlers/find-paginated-organization-memberships';
+import { applyPagination, getPaginationFromQueryParams } from './handlers/pagination-utils.js';
 
 const emptyData = {
   data: {
@@ -585,18 +586,14 @@ function routes() {
     return schema.informationBanners.find(target);
   });
 
-  this.get('/organizations/:organizationId/attestations/:attestationKey/statuses', (schema, request) => {
+  this.get('/organizations/:organizationId/attestations/:attestationKey/statuses', function (schema, request) {
     const {
       'filter[statuses]': statuses,
       'filter[divisions]': divisions,
       'filter[search]': search,
     } = request.queryParams;
 
-    if (!statuses && !divisions && !search) {
-      return schema.attestationParticipantStatuses.all();
-    }
-
-    return schema.attestationParticipantStatuses.where((learner) => {
+    const filteredAttestations = schema.attestationParticipantStatuses.where((learner) => {
       let match = true;
 
       if (statuses?.length > 0) {
@@ -615,6 +612,21 @@ function routes() {
       }
 
       return match;
-    });
+    }).models;
+
+    const pagination = getPaginationFromQueryParams(request.queryParams);
+    const paginatedAttestations = applyPagination(filteredAttestations, pagination);
+
+    const json = this.serialize(
+      { modelName: 'attestation-participant-status', models: paginatedAttestations },
+      'attestation-participant-status',
+    );
+    json.meta = {
+      page: pagination.page,
+      pageSize: pagination.pageSize,
+      rowCount: filteredAttestations.length,
+      pageCount: Math.ceil(filteredAttestations.length / pagination.pageSize),
+    };
+    return json;
   });
 }
