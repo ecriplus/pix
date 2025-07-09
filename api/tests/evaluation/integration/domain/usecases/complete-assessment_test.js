@@ -1,5 +1,5 @@
-import { certificationCompletedJobRepository } from '../../../../../lib/infrastructure/repositories/jobs/certification-completed-job-repository.js';
 import { CertificationCompletedJob } from '../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
+import { certificationCompletedJobRepository } from '../../../../../src/certification/evaluation/infrastructure/repositories/jobs/certification-completed-job-repository.js';
 import { completeAssessment } from '../../../../../src/evaluation/domain/usecases/complete-assessment.js';
 import { ParticipationCompletedJob } from '../../../../../src/prescription/campaign-participation/domain/models/ParticipationCompletedJob.js';
 import * as campaignParticipationRepository from '../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';

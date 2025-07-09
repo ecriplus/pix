@@ -1,9 +1,9 @@
-import { CertificationCompletedJob } from '../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import {
   JobPriority,
   JobRepository,
   JobRetry,
-} from '../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
+} from '../../../../../shared/infrastructure/repositories/jobs/job-repository.js';
+import { CertificationCompletedJob } from '../../../domain/events/CertificationCompleted.js';
 class CertificationCompletedJobRepository extends JobRepository {
   constructor() {
     super({
