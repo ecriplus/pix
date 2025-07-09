@@ -4,6 +4,41 @@ import { securityPreHandlers } from '../../../../../src/shared/application/secur
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Application | campaign-results-router ', function () {
+  describe('GET /api/campaigns/{campaignId}/assessment-results', function () {
+    describe('when pre handler throws', function () {
+      it('should not call controller', async function () {
+        // given
+        const checkOrganizationAccessStub = sinon.stub(securityPreHandlers, 'checkOrganizationAccess');
+        const checkAuthorizationToAccessCampaignStub = sinon.stub(
+          securityPreHandlers,
+          'checkAuthorizationToAccessCampaign',
+        );
+        sinon.stub(campaignResultsController, 'findAssessmentParticipationResults');
+
+        const validateAllAccessStub = sinon.stub(securityPreHandlers, 'validateAllAccess').returns((request, h) =>
+          h
+            .response({ errors: new Error('') })
+            .code(403)
+            .takeover(),
+        );
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        await httpTestServer.request('GET', '/api/campaigns/1/assessment-results');
+
+        // then
+        expect(
+          validateAllAccessStub.calledWithExactly([
+            checkAuthorizationToAccessCampaignStub,
+            checkOrganizationAccessStub,
+          ]),
+        ).to.be.true;
+        expect(campaignResultsController.findAssessmentParticipationResults.called).to.be.false;
+      });
+    });
+  });
+
   describe('GET /api/campaigns/{campaignId}/profiles-collection-participations', function () {
     let checkAuthorizationToAccessCampaignStub, checkOrganizationAccessStub;
 
@@ -223,7 +258,7 @@ describe('Unit | Application | campaign-results-router ', function () {
 
         // then
         expect(
-          validateAllAccessStub.calledOnceWithExactly([
+          validateAllAccessStub.calledWithExactly([
             checkAuthorizationToAccessCampaignStub,
             checkOrganizationAccessStub,
           ]),
