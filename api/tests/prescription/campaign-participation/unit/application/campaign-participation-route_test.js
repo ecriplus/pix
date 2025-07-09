@@ -105,7 +105,7 @@ describe('Unit | Application | Router | campaign-participation-router ', functio
         await httpTestServer.register(moduleUnderTest);
 
         // when
-        await httpTestServer.request('GET', '/api/campaign-participations/1/analyses');
+        await httpTestServer.request('GET', '/api/campaigns/1/profiles-collection-participations/2');
 
         // then
         expect(organizationAccessStub.called).to.be.true;
