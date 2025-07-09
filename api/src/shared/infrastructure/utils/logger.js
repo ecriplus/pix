@@ -5,6 +5,7 @@ import pino from 'pino';
 import pretty from 'pino-pretty';
 
 import { config } from '../../config.js';
+import { getCorrelationContext } from '../monitoring-tools.js';
 
 const { logging } = config;
 
@@ -21,7 +22,7 @@ if (logging.logForHumans) {
   });
 }
 
-export const logger = pino(
+export const loggerPino = pino(
   {
     level: logging.logLevel,
     redact: ['req.headers.authorization'],
@@ -29,6 +30,35 @@ export const logger = pino(
   },
   prettyPrint,
 );
+
+function buildLogWrapper(context, mergingObject, message) {
+  const loggerChild = loggerPino.child(getCorrelationContext());
+  loggerChild[context](mergingObject, message);
+}
+
+export const logger = {
+  trace: (mergingObject, message) => {
+    buildLogWrapper('trace', mergingObject, message);
+  },
+  debug: (mergingObject, message) => {
+    buildLogWrapper('debug', mergingObject, message);
+  },
+  info: (mergingObject, message) => {
+    buildLogWrapper('info', mergingObject, message);
+  },
+  warn: (mergingObject, message) => {
+    buildLogWrapper('warn', mergingObject, message);
+  },
+  error: (mergingObject, message) => {
+    buildLogWrapper('error', mergingObject, message);
+  },
+  fatal: (mergingObject, message) => {
+    buildLogWrapper('fatal', mergingObject, message);
+  },
+  silent: (mergingObject, message) => {
+    buildLogWrapper('silent', mergingObject, message);
+  },
+};
 
 /**
  * Creates a child logger for a section.
@@ -43,7 +73,7 @@ export function child(section, bindings, options) {
   if (micromatch.isMatch(section, logging.debugSections)) {
     optionsOverride.level = 'debug';
   }
-  return logger.child(bindings, { ...options, ...optionsOverride });
+  return loggerPino.child(bindings, { ...options, ...optionsOverride });
 }
 
 export const SCOPES = {
