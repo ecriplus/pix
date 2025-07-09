@@ -138,7 +138,7 @@ const schema = Joi.object({
   KNEX_ASYNC_STACKTRACE_ENABLED: Joi.string().optional().valid('true', 'false'),
   LCMS_API_KEY: Joi.string().requiredForApi(),
   LCMS_API_URL: Joi.string().uri().requiredForApi(),
-  LCMS_API_RELEASE_ID: Joi.number().integer().min(1).optional(),
+  LCMS_API_RELEASE_ID: Joi.any(),
   LLM_API_GET_CONFIGURATIONS_URL: Joi.string().optional(),
   LLM_CHAT_TEMPORARY_STORAGE_EXP_DELAY_SECONDS: Joi.string().optional(),
   LOG_ENABLED: Joi.string().required().valid('true', 'false'),
@@ -159,6 +159,7 @@ const schema = Joi.object({
   TLD_FR: Joi.string().optional(),
   TLD_ORG: Joi.string().optional(),
   APIM_URL: Joi.string().optional(),
+  V3_CERTIFICATION_PROBABILITY_TO_PICK_CHALLENGE: Joi.number().optional(),
 }).options({ allowUnknown: true });
 
 const configuration = (function () {
@@ -323,9 +324,17 @@ const configuration = (function () {
       },
     },
     lcms: {
-      url: _removeTrailingSlashFromUrl(process.env.CYPRESS_LCMS_API_URL || process.env.LCMS_API_URL || ''),
-      apiKey: process.env.CYPRESS_LCMS_API_KEY || process.env.LCMS_API_KEY,
-      releaseId: _getNumber(process.env.LCMS_API_RELEASE_ID, null),
+      url: _removeTrailingSlashFromUrl(
+        (process.env.IS_RUNNING_PLAYWRIGHT === 'true' && process.env.PLAYWRIGHT_LCMS_API_URL) ||
+          process.env.CYPRESS_LCMS_API_URL ||
+          process.env.LCMS_API_URL ||
+          '',
+      ),
+      apiKey:
+        (process.env.IS_RUNNING_PLAYWRIGHT === 'true' && process.env.PLAYWRIGHT_LCMS_API_KEY) ||
+        process.env.CYPRESS_LCMS_API_KEY ||
+        process.env.LCMS_API_KEY,
+      releaseId: process.env.LCMS_API_RELEASE_ID || null,
     },
     llm: {
       temporaryStorage: {
@@ -452,7 +461,7 @@ const configuration = (function () {
     },
     v3Certification: {
       numberOfChallengesPerCourse: 32,
-      defaultProbabilityToPickChallenge: 51,
+      defaultProbabilityToPickChallenge: parseInt(process.env.V3_CERTIFICATION_PROBABILITY_TO_PICK_CHALLENGE, 10) || 51,
       defaultCandidateCapacity: -3,
       challengesBetweenSameCompetence: 2,
       scoring: {

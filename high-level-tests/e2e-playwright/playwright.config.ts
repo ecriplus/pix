@@ -10,6 +10,7 @@ if (!isCI) dotenv.config({ path: path.resolve(import.meta.dirname, '.env.e2e') }
 
 // See https://playwright.dev/docs/test-configuration
 export default defineConfig({
+  globalSetup: './global-setup',
   outputDir: `${playwrightFolder}/output`,
   forbidOnly: isCI,
   retries: isCI ? 2 : 0,
@@ -25,57 +26,65 @@ export default defineConfig({
 
   projects: [
     {
-      name: 'pix-app-setup',
-      testDir: 'pix-app',
-      use: { baseURL: process.env.PIX_APP_URL },
-      testMatch: /.*\.setup\.ts/,
+      name: 'login',
+      testDir: 'tests/login',
+      testMatch: '**/*.ts',
     },
     {
       name: 'pix-app',
-      testDir: 'pix-app',
-      use: { baseURL: process.env.PIX_APP_URL },
-      dependencies: ['pix-app-setup'],
-    },
-    {
-      name: 'pix-orga-setup',
-      testDir: 'pix-orga',
-      use: { baseURL: process.env.PIX_ORGA_URL },
-      testMatch: /.*\.setup\.ts/,
+      testDir: 'tests/pix-app',
+      testMatch: '**/*.ts',
     },
     {
       name: 'pix-orga',
-      testDir: 'pix-orga',
-      use: { baseURL: process.env.PIX_ORGA_URL },
-      dependencies: ['pix-orga-setup'],
+      testDir: 'tests/pix-orga',
+      testMatch: '**/*.ts',
+    },
+    {
+      name: 'evaluations',
+      testDir: 'tests/evaluations',
+      testMatch: '**/*.ts',
     },
   ],
-
   webServer: isCI
     ? [
         {
-          command: 'while true; do echo "Wait for App to start"; sleep 300; done',
-          url: process.env.PIX_APP_URL || process.env.PIX_ORGA_URL,
+          command: 'while true; do echo "Wait for PixApp to start"; sleep 300; done',
+          url: process.env.PIX_APP_URL,
+          reuseExistingServer: true,
+        },
+        {
+          command: 'while true; do echo "Wait for PixOrga to start"; sleep 300; done',
+          url: process.env.PIX_ORGA_URL,
+          reuseExistingServer: true,
+        },
+        {
+          command: 'while true; do echo "Wait for PixCertif to start"; sleep 300; done',
+          url: process.env.PIX_CERTIF_URL,
           reuseExistingServer: true,
         },
       ]
     : [
         {
           cwd: '../../api',
-          command: 'npm run db:prepare && npm run start',
+          command: 'npm run db:prepare && npm run cache:refresh && npm run start',
           url: `http://localhost:${process.env.PIX_API_PORT}`,
           reuseExistingServer: false,
           stdout: 'ignore',
           stderr: 'pipe',
           env: {
-            PORT: process.env.PIX_API_PORT || '',
-            DATABASE_URL: process.env.DATABASE_URL || '',
-            DATAMART_DATABASE_URL: process.env.DATAMART_DATABASE_URL || '',
-            DATAWAREHOUSE_DATABASE_URL: process.env.DATAWAREHOUSE_DATABASE_URL || '',
-            REDIS_URL: process.env.REDIS_URL || '',
+            PORT: process.env.PIX_API_PORT ?? '',
+            DATABASE_URL: process.env.DATABASE_URL ?? '',
+            DATAMART_DATABASE_URL: process.env.DATAMART_DATABASE_URL ?? '',
+            DATAWAREHOUSE_DATABASE_URL: process.env.DATAWAREHOUSE_DATABASE_URL ?? '',
+            REDIS_URL: process.env.REDIS_URL ?? '',
             START_JOB_IN_WEB_PROCESS: 'false',
             PIX_AUDIT_LOGGER_ENABLED: 'false',
             MAILING_ENABLED: 'false',
-            FT_PIXAPP_NEW_LAYOUT_ENABLED: 'false',
+            LCMS_API_URL: process.env.LCMS_API_URL ?? '',
+            LCMS_API_KEY: process.env.LCMS_API_KEY ?? '',
+            LCMS_API_RELEASE_ID: process.env.LCMS_API_RELEASE_ID ?? '',
+            V3_CERTIFICATION_PROBABILITY_TO_PICK_CHALLENGE: '100',
           },
         },
         {
@@ -85,6 +94,9 @@ export default defineConfig({
           reuseExistingServer: false,
           stdout: 'ignore',
           stderr: 'pipe',
+          env: {
+            DEFAULT_LOCALE: 'fr',
+          },
         },
         {
           cwd: '../../orga',
@@ -93,6 +105,20 @@ export default defineConfig({
           reuseExistingServer: false,
           stdout: 'ignore',
           stderr: 'pipe',
+          env: {
+            DEFAULT_LOCALE: 'fr',
+          },
+        },
+        {
+          cwd: '../../certif',
+          command: `npx ember serve --proxy http://localhost:${process.env.PIX_API_PORT}`,
+          url: process.env.PIX_CERTIF_URL,
+          reuseExistingServer: false,
+          stdout: 'ignore',
+          stderr: 'pipe',
+          env: {
+            DEFAULT_LOCALE: 'fr',
+          },
         },
       ],
 });

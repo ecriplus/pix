@@ -101,6 +101,10 @@ module.exports = function (environment) {
       APP_VERSION: process.env.SOURCE_VERSION || 'development',
     },
 
+    'ember-cli-mirage': {
+      enabled: false,
+    },
+
     matomo: {},
 
     'ember-inputmask5': {
@@ -129,6 +133,11 @@ module.exports = function (environment) {
 
     ENV.APP.autoboot = false;
     ENV.APP.rootElement = '#ember-testing';
+
+    ENV['ember-cli-mirage'] = {
+      enabled: true,
+      usingProxy: false,
+    };
   }
 
   if (environment === 'production') {
