@@ -281,6 +281,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       // given
       const chat = new Chat({
         id: 'some-chat-id',
+        userId: 123,
         configuration: new Configuration({
           id: 'some-config-id',
           historySize: 10,
@@ -302,6 +303,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       // then
       expect(dto).to.deep.equal({
         id: 'some-chat-id',
+        userId: 123,
         configuration: {
           id: 'some-config-id',
           historySize: 10,
@@ -332,6 +334,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       // given
       const dto = {
         id: 'some-chat-id',
+        userId: 123,
         configuration: {
           id: 'some-config-id',
           historySize: 10,
@@ -362,6 +365,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       expect(chat).to.deepEqualInstance(
         new Chat({
           id: 'some-chat-id',
+          userId: 123,
           configuration: new Configuration({
             id: 'some-config-id',
             historySize: 10,
@@ -377,6 +381,32 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           ],
         }),
       );
+    });
+
+    context('when DTO does not contain userId', function () {
+      it('should extract userId from chatId', function () {
+        // given
+        const dto = {
+          id: '123-456',
+          configuration: {},
+          hasAttachmentContextBeenAdded: false,
+          messages: [],
+        };
+
+        // when
+        const chat = Chat.fromDTO(dto);
+
+        // then
+        expect(chat).to.deepEqualInstance(
+          new Chat({
+            id: '123-456',
+            userId: 123,
+            configuration: new Configuration({}),
+            hasAttachmentContextBeenAdded: false,
+            messages: [],
+          }),
+        );
+      });
     });
   });
 });

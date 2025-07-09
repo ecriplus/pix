@@ -5,12 +5,14 @@ export class Chat {
    * @constructor
    * @param {Object} params
    * @param {string} params.id
+   * @param {number} params.userId
    * @param {import('./Configuration').Configuration} params.configuration
    * @param {Boolean} params.hasAttachmentContextBeenAdded
    * @param {Array<Message>} params.messages
    */
-  constructor({ id, configuration, hasAttachmentContextBeenAdded, messages = [] }) {
+  constructor({ id, userId, configuration, hasAttachmentContextBeenAdded, messages = [] }) {
     this.id = id;
+    this.userId = userId;
     this.configuration = configuration;
     this.hasAttachmentContextBeenAdded = hasAttachmentContextBeenAdded;
     this.messages = messages;
@@ -77,6 +79,7 @@ export class Chat {
   toDTO() {
     return {
       id: this.id,
+      userId: this.userId,
       configuration: this.configuration.toDTO(),
       hasAttachmentContextBeenAdded: this.hasAttachmentContextBeenAdded,
       messages: this.messages.map((message) => message.toDTO()),
@@ -86,6 +89,7 @@ export class Chat {
   static fromDTO(chatDTO) {
     return new Chat({
       ...chatDTO,
+      userId: chatDTO.userId ?? parseInt(chatDTO.id.split('-')[0]),
       configuration: Configuration.fromDTO(chatDTO.configuration),
       messages: chatDTO.messages.map((messageDTO) => new Message(messageDTO)),
     });

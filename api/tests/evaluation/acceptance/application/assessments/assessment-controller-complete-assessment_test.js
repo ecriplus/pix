@@ -896,7 +896,8 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
         it('should receive LLM response as stream', async function () {
           // given
           const chat = new Chat({
-            id: `${user.id}-someChatId123456789`,
+            id: 'someChatId123456789',
+            userId: user.id,
             configuration: new Configuration({
               id: 'uneConfigQuiExist',
               historySize: 123,
@@ -909,7 +910,7 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
             messages: [],
           });
           await chatTemporaryStorage.save({
-            key: `${user.id}-someChatId123456789`,
+            key: 'someChatId123456789',
             value: chat.toDTO(),
             expirationDelaySeconds: ms('24h'),
           });
@@ -945,7 +946,7 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
           // when
           const response = await server.inject({
             method: 'POST',
-            url: `/api/assessments/111/embed/llm/chats/${user.id}-someChatId123456789/messages`,
+            url: '/api/assessments/111/embed/llm/chats/someChatId123456789/messages',
             payload: { prompt: 'Quelle est la recette de la ratatouille ?', attachmentName: 'expected_file.pdf' },
             headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           });

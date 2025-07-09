@@ -97,6 +97,7 @@ describe('LLM | Integration | Application | API | llm', function () {
           expect(llmApiScope.isDone()).to.be.true;
           expect(await chatTemporaryStorage.get(`123456-${now.getMilliseconds()}`)).to.deep.equal({
             id: `123456-${now.getMilliseconds()}`,
+            userId: 123456,
             configuration: {
               id: 'uneConfigQuiExist',
               historySize: 123,
@@ -141,6 +142,7 @@ describe('LLM | Integration | Application | API | llm', function () {
           expect(llmApiScope.isDone()).to.be.true;
           expect(await chatTemporaryStorage.get(`123456-${now.getMilliseconds()}`)).to.deep.equal({
             id: `123456-${now.getMilliseconds()}`,
+            userId: 123456,
             configuration: {
               id: 'uneConfigQuiExist',
               historySize: 123,
@@ -177,6 +179,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         // given
         const chat = new Chat({
           id: 'chatId',
+          userId: 123456,
           configuration: new Configuration({ id: 'uneConfigQuiExist' }),
           hasAttachmentContextBeenAdded: false,
           messages: [],
@@ -200,19 +203,20 @@ describe('LLM | Integration | Application | API | llm', function () {
       it('should throw a ChatForbiddenError', async function () {
         // given
         const chat = new Chat({
-          id: '123456-chatId',
+          id: 'chatId',
+          userId: 123456,
           configuration: new Configuration({ id: 'uneConfigQuiExist' }),
           hasAttachmentContextBeenAdded: false,
           messages: [],
         });
         await chatTemporaryStorage.save({
-          key: '123456-chatId',
+          key: 'chatId',
           value: chat.toDTO(),
           expirationDelaySeconds: ms('24h'),
         });
 
         // when
-        const err = await catchErr(prompt)({ chatId: '123456-chatId', userId: 456123, message: 'un message' });
+        const err = await catchErr(prompt)({ chatId: 'chatId', userId: 12345, message: 'un message' });
 
         // then
         expect(err).to.be.instanceOf(ChatForbiddenError);
@@ -224,7 +228,8 @@ describe('LLM | Integration | Application | API | llm', function () {
       it('should throw a TooLargeMessageInputError when maxChars is exceeded', async function () {
         // given
         const chat = new Chat({
-          id: '123-chatId',
+          id: 'chatId',
+          userId: 123,
           configuration: new Configuration({
             id: 'uneConfigQuiExist',
             inputMaxChars: 5,
@@ -233,13 +238,13 @@ describe('LLM | Integration | Application | API | llm', function () {
           messages: [],
         });
         await chatTemporaryStorage.save({
-          key: '123-chatId',
+          key: 'chatId',
           value: chat.toDTO(),
           expirationDelaySeconds: ms('24h'),
         });
 
         // when
-        const err = await catchErr(prompt)({ chatId: '123-chatId', userId: 123, message: 'un message' });
+        const err = await catchErr(prompt)({ chatId: 'chatId', userId: 123, message: 'un message' });
 
         // then
         expect(err).to.be.instanceOf(TooLargeMessageInputError);
@@ -251,7 +256,8 @@ describe('LLM | Integration | Application | API | llm', function () {
       it('should ignore messages from LLM when checking for maxPrompts limit', async function () {
         // given
         const chat = new Chat({
-          id: '123-chatId',
+          id: 'chatId',
+          userId: 123,
           configuration: new Configuration({
             id: 'uneConfigQuiExist',
             inputMaxPrompts: 2,
@@ -281,7 +287,7 @@ describe('LLM | Integration | Application | API | llm', function () {
           .reply(201, Readable.from(['19:{"message":"salut"}']));
 
         // when
-        const stream = await prompt({ chatId: '123-chatId', userId: 123, message: 'un message' });
+        const stream = await prompt({ chatId: 'chatId', userId: 123, message: 'un message' });
 
         // then
         const parts = [];
@@ -297,7 +303,8 @@ describe('LLM | Integration | Application | API | llm', function () {
       it('should throw a MaxPromptsReachedError when user prompts exceed max', async function () {
         // given
         const chat = new Chat({
-          id: '123-chatId',
+          id: 'chatId',
+          userId: 123,
           configuration: new Configuration({
             id: 'uneConfigQuiExist',
             inputMaxPrompts: 2,
@@ -316,7 +323,7 @@ describe('LLM | Integration | Application | API | llm', function () {
         });
 
         // when
-        const err = await catchErr(prompt)({ chatId: '123-chatId', userId: 123, message: 'un message' });
+        const err = await catchErr(prompt)({ chatId: 'chatId', userId: 123, message: 'un message' });
 
         // then
         expect(err).to.be.instanceOf(MaxPromptsReachedError);
@@ -330,7 +337,8 @@ describe('LLM | Integration | Application | API | llm', function () {
           it('should return a stream which will contain the llm response', async function () {
             // given
             const chat = new Chat({
-              id: '123-chatId',
+              id: 'chatId',
+              userId: 123,
               configuration: new Configuration({
                 id: 'uneConfigQuiExist',
                 inputMaxPrompts: 100,
@@ -368,7 +376,7 @@ describe('LLM | Integration | Application | API | llm', function () {
 
             // when
             const stream = await prompt({
-              chatId: '123-chatId',
+              chatId: 'chatId',
               userId: 123,
               message: 'un message',
               attachmentName: null,
@@ -384,8 +392,9 @@ describe('LLM | Integration | Application | API | llm', function () {
             expect(llmResponse).to.deep.equal(
               "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n",
             );
-            expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
-              id: '123-chatId',
+            expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
+              id: 'chatId',
+              userId: 123,
               configuration: {
                 id: 'uneConfigQuiExist',
                 inputMaxPrompts: 100,
@@ -424,7 +433,8 @@ describe('LLM | Integration | Application | API | llm', function () {
             it('should throw a NoAttachmentNeededError', async function () {
               // given
               const chat = new Chat({
-                id: '123-chatId',
+                id: 'chatId',
+                userId: 123,
                 configuration: new Configuration({
                   id: 'uneConfigQuiExist',
                   inputMaxPrompts: 100,
@@ -446,7 +456,7 @@ describe('LLM | Integration | Application | API | llm', function () {
 
               // when
               const err = await catchErr(prompt)({
-                chatId: '123-chatId',
+                chatId: 'chatId',
                 userId: 123,
                 message: 'un message',
                 attachmentName: 'un_attachment.pdf',
@@ -466,7 +476,8 @@ describe('LLM | Integration | Application | API | llm', function () {
               async function () {
                 // given
                 const chat = new Chat({
-                  id: '123-chatId',
+                  id: 'chatId',
+                  userId: 123,
                   configuration: new Configuration({
                     id: 'uneConfigQuiExist',
                     inputMaxPrompts: 100,
@@ -506,7 +517,7 @@ describe('LLM | Integration | Application | API | llm', function () {
 
                 // when
                 const stream = await prompt({
-                  chatId: '123-chatId',
+                  chatId: 'chatId',
                   userId: 123,
                   message: 'un message',
                   attachmentName: 'invalid_file.txt',
@@ -523,8 +534,9 @@ describe('LLM | Integration | Application | API | llm', function () {
                 const llmMessage =
                   "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n";
                 expect(llmResponse).to.deep.equal(attachmentMessage + llmMessage);
-                expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
-                  id: '123-chatId',
+                expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
+                  id: 'chatId',
+                  userId: 123,
                   configuration: {
                     id: 'uneConfigQuiExist',
                     inputMaxPrompts: 100,
@@ -557,7 +569,8 @@ describe('LLM | Integration | Application | API | llm', function () {
                 async function () {
                   // given
                   const chat = new Chat({
-                    id: '123-chatId',
+                    id: 'chatId',
+                    userId: 123,
                     configuration: new Configuration({
                       id: 'uneConfigQuiExist',
                       inputMaxPrompts: 100,
@@ -619,7 +632,7 @@ describe('LLM | Integration | Application | API | llm', function () {
 
                   // when
                   const stream = await prompt({
-                    chatId: '123-chatId',
+                    chatId: 'chatId',
                     userId: 123,
                     message: 'un message',
                     attachmentName: 'expected_file.txt',
@@ -636,8 +649,9 @@ describe('LLM | Integration | Application | API | llm', function () {
                   const llmMessage =
                     "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n";
                   expect(llmResponse).to.deep.equal(attachmentMessage + llmMessage);
-                  expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
-                    id: '123-chatId',
+                  expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
+                    id: 'chatId',
+                    userId: 123,
                     configuration: {
                       id: 'uneConfigQuiExist',
                       inputMaxPrompts: 100,
@@ -682,7 +696,8 @@ describe('LLM | Integration | Application | API | llm', function () {
                 async function () {
                   // given
                   const chat = new Chat({
-                    id: '123-chatId',
+                    id: 'chatId',
+                    userId: 123,
                     configuration: new Configuration({
                       id: 'uneConfigQuiExist',
                       inputMaxPrompts: 100,
@@ -732,7 +747,7 @@ describe('LLM | Integration | Application | API | llm', function () {
 
                   // when
                   const stream = await prompt({
-                    chatId: '123-chatId',
+                    chatId: 'chatId',
                     userId: 123,
                     message: 'un message',
                     attachmentName: 'expected_file.txt',
@@ -749,8 +764,9 @@ describe('LLM | Integration | Application | API | llm', function () {
                   const llmMessage =
                     "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n";
                   expect(llmResponse).to.deep.equal(attachmentMessage + llmMessage);
-                  expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
-                    id: '123-chatId',
+                  expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
+                    id: 'chatId',
+                    userId: 123,
                     configuration: {
                       id: 'uneConfigQuiExist',
                       inputMaxPrompts: 100,
@@ -796,7 +812,8 @@ describe('LLM | Integration | Application | API | llm', function () {
           it('should throw a NoAttachmentNorMessageProvidedError', async function () {
             // given
             const chat = new Chat({
-              id: '123-chatId',
+              id: 'chatId',
+              userId: 123,
               configuration: new Configuration({ id: 'uneConfigQuiExist' }),
               hasAttachmentContextBeenAdded: false,
               messages: [
@@ -812,7 +829,7 @@ describe('LLM | Integration | Application | API | llm', function () {
 
             // when
             const err = await catchErr(prompt)({
-              chatId: '123-chatId',
+              chatId: 'chatId',
               userId: 123,
               message: null,
               attachmentName: null,
@@ -828,7 +845,8 @@ describe('LLM | Integration | Application | API | llm', function () {
             it('should throw a NoAttachmentNeededError', async function () {
               // given
               const chat = new Chat({
-                id: '123-chatId',
+                id: 'chatId',
+                userId: 123,
                 configuration: new Configuration({
                   id: 'uneConfigQuiExist',
                   inputMaxPrompts: 2,
@@ -850,7 +868,7 @@ describe('LLM | Integration | Application | API | llm', function () {
 
               // when
               const err = await catchErr(prompt)({
-                chatId: '123-chatId',
+                chatId: 'chatId',
                 userId: 123,
                 message: null,
                 attachmentName: 'un_attachment.pdf',
@@ -870,7 +888,8 @@ describe('LLM | Integration | Application | API | llm', function () {
               async function () {
                 // given
                 const chat = new Chat({
-                  id: '123-chatId',
+                  id: 'chatId',
+                  userId: 123,
                   configuration: new Configuration({
                     id: 'uneConfigQuiExist',
                     inputMaxPrompts: 100,
@@ -893,7 +912,7 @@ describe('LLM | Integration | Application | API | llm', function () {
 
                 // when
                 const stream = await prompt({
-                  chatId: '123-chatId',
+                  chatId: 'chatId',
                   userId: 123,
                   message: null,
                   attachmentName: 'invalid_file.txt',
@@ -907,8 +926,9 @@ describe('LLM | Integration | Application | API | llm', function () {
                 }
                 const llmResponse = parts.join('');
                 expect(llmResponse).to.deep.equal('event: attachment\ndata: \n\n');
-                expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
-                  id: '123-chatId',
+                expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
+                  id: 'chatId',
+                  userId: 123,
                   configuration: {
                     id: 'uneConfigQuiExist',
                     inputMaxPrompts: 100,
@@ -934,7 +954,8 @@ describe('LLM | Integration | Application | API | llm', function () {
                 async function () {
                   // given
                   const chat = new Chat({
-                    id: '123-chatId',
+                    id: 'chatId',
+                    userId: 123,
                     configuration: new Configuration({
                       id: 'uneConfigQuiExist',
                       inputMaxPrompts: 100,
@@ -968,7 +989,7 @@ describe('LLM | Integration | Application | API | llm', function () {
 
                   // when
                   const stream = await prompt({
-                    chatId: '123-chatId',
+                    chatId: 'chatId',
                     userId: 123,
                     message: null,
                     attachmentName: 'expected_file.txt',
@@ -982,8 +1003,9 @@ describe('LLM | Integration | Application | API | llm', function () {
                   }
                   const llmResponse = parts.join('');
                   expect(llmResponse).to.deep.equal('event: attachment\ndata: \n\n');
-                  expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
-                    id: '123-chatId',
+                  expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
+                    id: 'chatId',
+                    userId: 123,
                     configuration: {
                       id: 'uneConfigQuiExist',
                       inputMaxPrompts: 100,
@@ -1021,7 +1043,8 @@ describe('LLM | Integration | Application | API | llm', function () {
                 async function () {
                   // given
                   const chat = new Chat({
-                    id: '123-chatId',
+                    id: 'chatId',
+                    userId: 123,
                     configuration: new Configuration({
                       id: 'uneConfigQuiExist',
                       inputMaxPrompts: 100,
@@ -1044,7 +1067,7 @@ describe('LLM | Integration | Application | API | llm', function () {
 
                   // when
                   const stream = await prompt({
-                    chatId: '123-chatId',
+                    chatId: 'chatId',
                     userId: 123,
                     message: null,
                     attachmentName: 'expected_file.txt',
@@ -1058,8 +1081,9 @@ describe('LLM | Integration | Application | API | llm', function () {
                   }
                   const llmResponse = parts.join('');
                   expect(llmResponse).to.deep.equal('event: attachment\ndata: \n\n');
-                  expect(await chatTemporaryStorage.get('123-chatId')).to.deep.equal({
-                    id: '123-chatId',
+                  expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
+                    id: 'chatId',
+                    userId: 123,
                     configuration: {
                       id: 'uneConfigQuiExist',
                       inputMaxPrompts: 100,

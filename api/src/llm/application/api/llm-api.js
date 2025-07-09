@@ -43,6 +43,7 @@ export async function startChat({ configId, userId }) {
   const chatId = generateId(userId);
   const newChat = new Chat({
     id: chatId,
+    userId,
     configuration: configuration,
     hasAttachmentContextBeenAdded: false,
     messages: [],
@@ -82,7 +83,7 @@ export async function prompt({ chatId, userId, message, attachmentName }) {
   }
 
   const chat = await chatRepository.get(chatId);
-  if (!userId || !chat.id.startsWith(userId)) {
+  if (!userId || userId !== chat.userId) {
     throw new ChatForbiddenError();
   }
 

@@ -17,6 +17,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
       // given
       const chat = new Chat({
         id: 'someChatId',
+        userId: 123,
         configuration: new Configuration({
           id: 'some-config-id',
           historySize: 10,
@@ -38,6 +39,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
       // then
       expect(await chatTemporaryStorage.get('someChatId')).to.deep.equal({
         id: 'someChatId',
+        userId: 123,
         configuration: {
           id: 'some-config-id',
           historySize: 10,
@@ -64,6 +66,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
             key: 'someChatId',
             value: {
               id: 'someChatId',
+              userId: 123,
               configuration: {
                 id: 'some-config-id',
                 historySize: 10,
@@ -97,6 +100,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           key: 'someChatId',
           value: {
             id: 'someChatId',
+            userId: 123,
             configuration: {
               id: 'some-config-id',
               historySize: 10,
@@ -120,6 +124,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         expect(actualChat).to.deepEqualInstance(
           new Chat({
             id: 'someChatId',
+            userId: 123,
             configuration: new Configuration({
               id: 'some-config-id',
               historySize: 10,
@@ -144,6 +149,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
             key: 'someChatId',
             value: {
               id: 'someChatId',
+              userId: 123,
               configurationId: 'some-config-id',
               hasAttachmentContextBeenAdded: false,
               messages: [
@@ -167,6 +173,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           expect(actualChat).to.deepEqualInstance(
             new Chat({
               id: 'someChatId',
+              userId: 123,
               configuration: new Configuration({
                 id: 'some-config-id',
                 historySize: 1,
