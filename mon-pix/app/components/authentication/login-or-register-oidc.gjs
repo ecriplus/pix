@@ -164,7 +164,7 @@ export default class LoginOrRegisterOidcComponent extends Component {
     const { userClaims } = this.args;
 
     if (!userClaims) {
-      return this.intl.t(`pages.login-or-register-oidc.register-form.information.error`);
+      return this.intl.t(`pages.login-or-register-oidc.register-form.error`);
     } else {
       return null;
     }
@@ -177,11 +177,11 @@ export default class LoginOrRegisterOidcComponent extends Component {
 
     if (userClaims) {
       const { firstName, lastName, ...rest } = userClaims;
-      result.push(`${this.intl.t(`pages.login-or-register-oidc.register-form.information.firstName`)} ${firstName}`);
-      result.push(`${this.intl.t(`pages.login-or-register-oidc.register-form.information.lastName`)} ${lastName}`);
+      result.push(`${this.intl.t(`pages.login-or-register-oidc.register-form.claims.firstName`)} ${firstName}`);
+      result.push(`${this.intl.t(`pages.login-or-register-oidc.register-form.claims.lastName`)} ${lastName}`);
 
       Object.entries(rest).map(([key, value]) => {
-        let label = `${this.intl.t(`pages.login-or-register-oidc.register-form.information.${key}`)}`;
+        let label = `${this.intl.t(`pages.login-or-register-oidc.register-form.claims.${key}`)}`;
 
         if (label.includes('Missing translation')) {
           label = `${key} :`;

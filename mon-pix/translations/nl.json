@@ -1526,7 +1526,8 @@
       "register-form": {
         "button": "Ik maak mijn account aan",
         "description": "Er wordt een account aangemaakt met de informatie die door de organisatie is verstrekt.",
-        "information": {
+        "error": "We were unable to retrieve your identity information from the service used. We invite you to contact this organisation's IT support.",
+        "claims": {
           "family-name": "Naam: {familyName}",
           "given-name": "Voornaam : {givenName}"
         },
