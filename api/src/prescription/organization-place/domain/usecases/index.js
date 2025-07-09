@@ -1,6 +1,7 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import * as organizationFeatureApi from '../../../../organizational-entities/application/api/organization-features-api.js';
 import * as organizationLearnerRepository from '../../../../shared/infrastructure/repositories/organization-learner-repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
@@ -13,6 +14,7 @@ const dependencies = {
   organizationPlacesLotRepository,
   organizationRepository,
   organizationPlacesCapacityRepository,
+  organizationFeatureApi,
 };
 
 const path = dirname(fileURLToPath(import.meta.url));

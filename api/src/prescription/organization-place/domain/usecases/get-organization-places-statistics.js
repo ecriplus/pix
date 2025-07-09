@@ -1,3 +1,4 @@
+import { ORGANIZATION_FEATURE } from '../../../../shared/domain/constants.js';
 import { PlaceStatistics } from '../read-models/PlaceStatistics.js';
 
 /**
@@ -24,6 +25,7 @@ const getOrganizationPlacesStatistics = async function ({
   organizationId,
   organizationPlacesLotRepository,
   organizationLearnerRepository,
+  organizationFeatureApi,
 }) {
   if (!organizationId) {
     throw new Error('You must provide at least one organizationId.');
@@ -36,10 +38,18 @@ const getOrganizationPlacesStatistics = async function ({
   const placeRepartition =
     await organizationLearnerRepository.findAllLearnerWithAtLeastOneParticipationByOrganizationId(organizationId);
 
+  const { features } = await organizationFeatureApi.getAllFeaturesFromOrganization(organizationId);
+
+  const placesManagementFeature = features.find(
+    (feature) => feature.name === ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key,
+  );
+  const isPlacesThresholdLockEnabled = placesManagementFeature?.params?.enablePlacesThresholdLock;
+
   return PlaceStatistics.buildFrom({
     placesLots,
     placeRepartition,
     organizationId,
+    enablePlacesThresholdLock: isPlacesThresholdLockEnabled,
   });
 };
 

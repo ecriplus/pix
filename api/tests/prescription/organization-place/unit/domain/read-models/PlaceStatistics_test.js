@@ -225,21 +225,58 @@ describe('Unit | Domain | ReadModels | PlaceStatistics', function () {
   });
 
   describe('#hasReachMaximumPlacesWithThreshold', function () {
-    describe('when there is no occupied places', function () {
-      it('should return false', function () {
-        // when
-        const statistics = new PlaceStatistics({
-          placesLots: [{ count: 0, isActive: true }],
-          placeRepartition: { totalUnRegisteredParticipant: 0, totalRegisteredParticipant: 0 },
-        });
+    describe('When enablePlacesThresholdLock is activated', function () {
+      describe('when there is no occupied places', function () {
+        it('should return false', function () {
+          // when
+          const statistics = new PlaceStatistics({
+            placesLots: [{ count: 0, isActive: true }],
+            placeRepartition: { totalUnRegisteredParticipant: 0, totalRegisteredParticipant: 0 },
+            enablePlacesThresholdLock: true,
+          });
 
-        // then
-        expect(statistics.hasReachMaximumPlacesWithThreshold).to.be.false;
+          // then
+          expect(statistics.hasReachMaximumPlacesWithThreshold).to.be.false;
+        });
+      });
+
+      describe('when maximum places count is reached', function () {
+        it('should return true', function () {
+          // given
+          sinon.stub(config.features, 'organizationPlacesManagementThreshold').value(0.1);
+
+          // when
+          const statistics = new PlaceStatistics({
+            placesLots: [{ count: 100, isActive: true }],
+            placeRepartition: { totalUnRegisteredParticipant: 10, totalRegisteredParticipant: 100 },
+            enablePlacesThresholdLock: true,
+          });
+
+          // then
+          expect(statistics.hasReachMaximumPlacesWithThreshold).to.be.true;
+        });
+      });
+
+      describe('when maximum places count is not reached', function () {
+        it('should return false', function () {
+          // given
+          sinon.stub(config.features, 'organizationPlacesManagementThreshold').value(0.1);
+
+          // when
+          const statistics = new PlaceStatistics({
+            placesLots: [{ count: 100, isActive: true }],
+            placeRepartition: { totalUnRegisteredParticipant: 10, totalRegisteredParticipant: 99 },
+            enablePlacesThresholdLock: true,
+          });
+
+          // then
+          expect(statistics.hasReachMaximumPlacesWithThreshold).to.be.false;
+        });
       });
     });
 
-    describe('when there are participant', function () {
-      it('should return true when maximum places count is reached', function () {
+    describe('When enablePlacesThresholdLock is deactivated and maximum places count is reached', function () {
+      it('should return false', function () {
         // given
         sinon.stub(config.features, 'organizationPlacesManagementThreshold').value(0.1);
 
@@ -247,20 +284,7 @@ describe('Unit | Domain | ReadModels | PlaceStatistics', function () {
         const statistics = new PlaceStatistics({
           placesLots: [{ count: 100, isActive: true }],
           placeRepartition: { totalUnRegisteredParticipant: 10, totalRegisteredParticipant: 100 },
-        });
-
-        // then
-        expect(statistics.hasReachMaximumPlacesWithThreshold).to.be.true;
-      });
-
-      it('should return false when maximum places count is not reached', function () {
-        // given
-        sinon.stub(config.features, 'organizationPlacesManagementThreshold').value(0.1);
-
-        // when
-        const statistics = new PlaceStatistics({
-          placesLots: [{ count: 100, isActive: true }],
-          placeRepartition: { totalUnRegisteredParticipant: 10, totalRegisteredParticipant: 99 },
+          enablePlacesThresholdLock: false,
         });
 
         // then
