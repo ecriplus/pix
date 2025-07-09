@@ -5,7 +5,6 @@ import ms from 'ms';
 import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { CHAT_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
-import { CONFIGURATION_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/configuration-repository.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import {
@@ -19,7 +18,6 @@ import {
 } from '../../../../test-helper.js';
 
 const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
-const configurationTemporaryStorage = temporaryStorage.withPrefix(CONFIGURATION_STORAGE_PREFIX);
 
 describe('Acceptance | Controller | passage-controller', function () {
   let server;
@@ -239,7 +237,6 @@ describe('Acceptance | Controller | passage-controller', function () {
     afterEach(async function () {
       clock.restore();
       await chatTemporaryStorage.flushAll();
-      await configurationTemporaryStorage.flushAll();
     });
 
     context('when user is not authenticated', function () {
@@ -331,7 +328,6 @@ describe('Acceptance | Controller | passage-controller', function () {
 
     afterEach(async function () {
       await chatTemporaryStorage.flushAll();
-      await configurationTemporaryStorage.flushAll();
     });
 
     context('when user is not authenticated', function () {

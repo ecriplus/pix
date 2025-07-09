@@ -9,7 +9,6 @@ import * as badgeAcquisitionRepository from '../../../../../src/evaluation/infra
 import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { CHAT_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
-import { CONFIGURATION_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/configuration-repository.js';
 import {
   CRITERION_COMPARISONS,
   REQUIREMENT_COMPARISONS,
@@ -32,7 +31,6 @@ import {
 } from '../../../../test-helper.js';
 
 const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
-const configurationTemporaryStorage = temporaryStorage.withPrefix(CONFIGURATION_STORAGE_PREFIX);
 
 describe('Acceptance | Controller | assessment-controller-complete-assessment', function () {
   let options;
@@ -765,7 +763,6 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
     afterEach(async function () {
       clock.restore();
       await chatTemporaryStorage.flushAll();
-      await configurationTemporaryStorage.flushAll();
     });
 
     context('when user is not authenticated', function () {
@@ -857,7 +854,6 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
 
     afterEach(async function () {
       await chatTemporaryStorage.flushAll();
-      await configurationTemporaryStorage.flushAll();
     });
 
     context('when user is not authenticated', function () {
