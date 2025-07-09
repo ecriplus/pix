@@ -29,9 +29,11 @@ test.beforeEach(async () => {
 test('[@snapshot][@runSerially] user assessing on 5 Pix Competences', async ({
   page,
   testMode,
+  globalTestId,
 }: {
   page: Page;
   testMode: string;
+  globalTestId: string;
 }, testInfo) => {
   testInfo.annotations.push(
     {
@@ -66,7 +68,7 @@ test('[@snapshot][@runSerially] user assessing on 5 Pix Competences', async ({
   const rightWrongAnswerCycleIter = rightWrongAnswerCycle({ numRight: 1, numWrong: 2 });
   await page.goto(process.env.PIX_APP_URL as string);
   const loginPage = new LoginPage(page);
-  await loginPage.signup('Buffy', 'Summers', `buffy.summers.${testInfo.testId}@example.net`, 'Coucoulesdevs66');
+  await loginPage.signup('Buffy', 'Summers', `buffy.summers.${globalTestId}@example.net`, 'Coucoulesdevs66');
   await page.getByRole('link', { name: 'Compétences', exact: true }).click();
   let globalChallengeIndex = 0;
   let competenceIndex = 0;

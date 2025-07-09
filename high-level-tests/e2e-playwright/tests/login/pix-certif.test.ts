@@ -4,8 +4,8 @@ import { buildFreshPixCertifUser } from '../../helpers/db.ts';
 import { expect, test } from '../../helpers/fixtures.ts';
 import { LoginPage } from '../../pages/pix-certif/index.js';
 
-test('login, cgu and logout', async ({ page }: { page: Page }, testInfo) => {
-  const email = `buffy.summers.${testInfo.testId}@example.net`;
+test('login, cgu and logout', async ({ page, globalTestId }: { page: Page; globalTestId: string }) => {
+  const email = `buffy.summers.${globalTestId}@example.net`;
   await buildFreshPixCertifUser('Buffy', 'Summers', email, 'Coucoulesdevs66');
   await page.goto(process.env.PIX_CERTIF_URL as string);
 

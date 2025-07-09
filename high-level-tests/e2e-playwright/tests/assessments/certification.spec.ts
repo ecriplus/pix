@@ -28,10 +28,12 @@ test('[@snapshot] user takes a certification test', async ({
   page: pixAppPage,
   pixCertifProContext,
   testMode,
+  globalTestId,
 }: {
   page: Page;
   pixCertifProContext: BrowserContext;
   testMode: string;
+  globalTestId: string;
 }, testInfo) => {
   testInfo.annotations.push({
     type: 'tag',
@@ -83,7 +85,7 @@ test('[@snapshot] user takes a certification test', async ({
 
   await pixAppPage.goto(process.env.PIX_APP_URL as string);
   const loginPage = new LoginPage(pixAppPage);
-  await loginPage.signup('Buffy', 'Summers', `buffy.summers.${testInfo.testId}@example.net`, 'Coucoulesdevs66');
+  await loginPage.signup('Buffy', 'Summers', `buffy.summers.${globalTestId}@example.net`, 'Coucoulesdevs66');
   await test.step('make candidate certifiable', async () => {
     for (const competenceTitle of [
       COMPETENCE_TITLES[14],

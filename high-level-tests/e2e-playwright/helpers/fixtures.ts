@@ -1,6 +1,7 @@
 import path from 'node:path';
 
 import { BrowserContext, test as base } from '@playwright/test';
+import crypto from 'crypto';
 
 import {
   AUTH_DIR,
@@ -14,6 +15,7 @@ const HAR_DIR = path.resolve(import.meta.dirname, '../.har-record');
 
 export const test = base.extend<{
   testMode: string;
+  globalTestId: string;
   pixAppUserContext: BrowserContext;
   pixOrgaAdminContext: BrowserContext;
   pixOrgaMemberContext: BrowserContext;
@@ -22,6 +24,12 @@ export const test = base.extend<{
   // eslint-disable-next-line no-empty-pattern
   testMode: async ({}, use) => {
     await use(process.env.TEST_MODE || 'check');
+  },
+  // eslint-disable-next-line no-empty-pattern
+  globalTestId: async ({}, use, testInfo) => {
+    const raw = `${testInfo.file}::${testInfo.title}`;
+    const hash = crypto.createHash('sha1').update(raw).digest('hex');
+    await use(hash);
   },
   page: async ({ context }, use) => {
     const page = await context.newPage();

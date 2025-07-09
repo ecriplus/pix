@@ -32,10 +32,12 @@ test('[@snapshot][@runSerially] user plays a campaign', async ({
   page: pixAppPage,
   pixOrgaMemberContext,
   testMode,
+  globalTestId,
 }: {
   page: Page;
   pixOrgaMemberContext: BrowserContext;
   testMode: string;
+  globalTestId: string;
 }, testInfo) => {
   testInfo.annotations.push(
     {
@@ -80,7 +82,7 @@ test('[@snapshot][@runSerially] user plays a campaign', async ({
 
   await pixAppPage.goto(process.env.PIX_APP_URL as string);
   const loginPage = new LoginPage(pixAppPage);
-  await loginPage.signup('Buffy', 'Summers', `buffy.summers.${testInfo.testId}@example.net`, 'Coucoulesdevs66');
+  await loginPage.signup('Buffy', 'Summers', `buffy.summers.${globalTestId}@example.net`, 'Coucoulesdevs66');
   const rightWrongAnswerCycleIter = rightWrongAnswerCycle({ numRight: 1, numWrong: 1 });
   await test.step('plays the campaign', async () => {
     await pixAppPage.getByRole('link', { name: "J'ai un code" }).click();

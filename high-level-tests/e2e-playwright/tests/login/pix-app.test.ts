@@ -6,9 +6,9 @@ import { PIX_APP_USER_DATA } from '../../helpers/db-data.ts';
 import { expect, test } from '../../helpers/fixtures.ts';
 import { LoginPage } from '../../pages/pix-app/index.js';
 
-test('Signup, logout and login', async ({ page }: { page: Page }, testInfo) => {
+test('Signup, logout and login', async ({ page, globalTestId }: { page: Page; globalTestId: string }) => {
   await page.goto(process.env.PIX_APP_URL as string);
-  const email = `buffy.summers.${testInfo.testId}@example.net`;
+  const email = `buffy.summers.${globalTestId}@example.net`;
 
   await test.step('Signup', async () => {
     const loginPage = new LoginPage(page);
@@ -44,8 +44,8 @@ test('Login as existing GAR user and logout', async ({ page }) => {
   await expect(page.locator('main')).toContainText('Vous êtes bien déconnecté(e).');
 });
 
-test('Accept the new terms of service', async ({ page }: { page: Page }, testInfo) => {
-  const email = `buffy.summers.${testInfo.testId}@example.net`;
+test('Accept the new terms of service', async ({ page, globalTestId }: { page: Page; globalTestId: string }) => {
+  const email = `buffy.summers.${globalTestId}@example.net`;
   await buildFreshPixAppUser('Buffy', 'Summers', email, 'Coucoulesdevs66', true);
 
   await page.goto(process.env.PIX_APP_URL as string);
@@ -54,7 +54,7 @@ test('Accept the new terms of service', async ({ page }: { page: Page }, testInf
     await expect(page).toHaveTitle('Connexion | Pix');
 
     const loginPage = new LoginPage(page);
-    await loginPage.signup('Buffy', 'Summers', email, 'Coucoulesdevs66');
+    await loginPage.login(email, 'Coucoulesdevs66');
   });
 
   await test.step('Revalidate terms of service', async function () {

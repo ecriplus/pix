@@ -4,8 +4,8 @@ import { buildFreshPixOrgaUser } from '../../helpers/db.ts';
 import { expect, test } from '../../helpers/fixtures.ts';
 import { LoginPage } from '../../pages/pix-orga/index.js';
 
-test('login, cgu and logout', async ({ page }: { page: Page }, testInfo) => {
-  const email = `buffy.summers.${testInfo.testId}@example.net`;
+test('login, cgu and logout', async ({ page, globalTestId }: { page: Page; globalTestId: string }) => {
+  const email = `buffy.summers.${globalTestId}@example.net`;
   await buildFreshPixOrgaUser('Buffy', 'Summers', email, 'Coucoulesdevs66', 'MEMBER');
   await page.goto(process.env.PIX_ORGA_URL as string);
 
