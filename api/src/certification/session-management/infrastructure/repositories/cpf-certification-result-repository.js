@@ -1,7 +1,7 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { AssessmentResult } from '../../../../shared/domain/models/AssessmentResult.js';
-import { CpfCertificationResult } from '../../../../shared/domain/read-models/CpfCertificationResult.js';
 import { CpfImportStatus } from '../../domain/models/CpfImportStatus.js';
+import { CpfCertificationResult } from '../../domain/read-models/CpfCertificationResult.js';
 
 const findByBatchId = async function (batchId) {
   const cpfCertificationResults = await _selectCpfCertificationResults()
