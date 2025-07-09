@@ -1518,7 +1518,7 @@
       },
       "login-form": {
         "button": "Inloggen",
-        "description": "Log in om je bestaande account te koppelen en je eerder beoordeelde vaardigheden op te halen",
+        "description": "Log in om je bestaande account te koppelen en je eerder beoordeelde vaardigheden op te halen.",
         "email": "E-mailadres",
         "password": "Wachtwoord",
         "title": "Ik heb al een Pix-account"

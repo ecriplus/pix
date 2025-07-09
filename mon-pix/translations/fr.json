@@ -1600,7 +1600,7 @@
       },
       "login-form": {
         "button": "Je me connecte",
-        "description": "Connectez-vous pour lier votre compte existant et récupérer vos compétences déjà évaluées",
+        "description": "Connectez-vous pour lier votre compte existant et récupérer vos compétences déjà évaluées.",
         "email": "Adresse e-mail",
         "password": "Mot de passe",
         "title": "J’ai déjà un compte Pix"
