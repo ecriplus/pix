@@ -18,6 +18,9 @@ const logger = child('llm:api', { event: SCOPES.LLM });
  * @returns {Promise<Configuration>}
  */
 export async function get(id) {
+  if (!id) {
+    throw new ConfigurationNotFoundError(id);
+  }
   const url = config.llm.getConfigurationUrl + '/' + id;
   let response;
   try {

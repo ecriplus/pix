@@ -1,11 +1,16 @@
-import { ConfigurationNotFoundError } from '../errors.js';
 import { Chat } from '../models/Chat.js';
 
-export async function startChat({ configId, userId, chatRepository, configurationRepository, randomUUID }) {
-  if (!configId) {
-    throw new ConfigurationNotFoundError('null id provided');
+export async function startChat({
+  configuration,
+  configId,
+  userId,
+  chatRepository,
+  configurationRepository,
+  randomUUID,
+}) {
+  if (!configuration) {
+    configuration = await configurationRepository.get(configId);
   }
-  const configuration = await configurationRepository.get(configId);
   const chatId = randomUUID();
   const newChat = new Chat({
     id: chatId,

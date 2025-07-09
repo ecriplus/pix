@@ -6,6 +6,17 @@ import { catchErr, expect, nock } from '../../../../test-helper.js';
 describe('LLM | Integration | Infrastructure | Repositories | configuration', function () {
   describe('#get', function () {
     context('error cases', function () {
+      context('when no config id provided', function () {
+        it('should throw a ConfigurationNotFoundError', async function () {
+          // when
+          const err = await catchErr(get)(null);
+
+          // then
+          expect(err).to.be.instanceOf(ConfigurationNotFoundError);
+          expect(err.message).to.equal('The configuration of id "null" does not exist');
+        });
+      });
+
       context('when configuration does not exist', function () {
         it('should throw a ConfigurationNotFoundError', async function () {
           // given
