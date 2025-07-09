@@ -5,6 +5,7 @@
  * @typedef {import('./index.js').EvaluationSessionRepository} EvaluationSessionRepository
  * @typedef {import('./index.js').Services} Services
  */
+import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFinalizedSessionError } from '../../../../shared/domain/errors.js';
 import CertificationCancelled from '../../../../shared/domain/events/CertificationCancelled.js';
 import { CertificationCourseUnrejected } from '../../../../shared/domain/events/CertificationCourseUnrejected.js';
@@ -24,48 +25,49 @@ const eventTypes = [
   CertificationUncancelled,
 ];
 
-/**
- * @param {Object} params
- * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
- * @param {CertificationCourseRepository} params.certificationCourseRepository
- * @param {CertificationCourseRepository} params.certificationCourseRepository
- * @param {EvaluationSessionRepository} params.evaluationSessionRepository
- * @param {Services} services
- *
- * @returns {Promise<void>}
- * @throws {Error} unrecognized event
- * @throws {NotFinalizedSessionError}
- * @throws {SessionAlreadyPublishedError}
- */
-export const rescoreV3Certification = async ({
-  event,
-  certificationAssessmentRepository,
-  certificationCourseRepository,
-  evaluationSessionRepository,
-  services,
-}) => {
-  checkEventTypes(event, eventTypes);
-
-  const certificationCourseId = event.certificationCourseId;
-
-  await _verifySessionIsPublishable({ certificationCourseId, evaluationSessionRepository });
-
-  const certificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
-    certificationCourseId,
-  });
-
-  if (certificationAssessment.isScoringBlockedDueToComplementaryOnlyChallenges) {
-    return;
-  }
-
-  return _handleV3CertificationScoring({
-    certificationAssessment,
+export const rescoreV3Certification = withTransaction(
+  /**
+   * @param {Object} params
+   * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
+   * @param {CertificationCourseRepository} params.certificationCourseRepository
+   * @param {EvaluationSessionRepository} params.evaluationSessionRepository
+   * @param {Services} services
+   *
+   * @returns {Promise<void>}
+   * @throws {Error} unrecognized event
+   * @throws {NotFinalizedSessionError}
+   * @throws {SessionAlreadyPublishedError}
+   */
+  async ({
     event,
-    locale: event.locale,
+    certificationAssessmentRepository,
     certificationCourseRepository,
+    evaluationSessionRepository,
     services,
-  });
-};
+  }) => {
+    checkEventTypes(event, eventTypes);
+
+    const certificationCourseId = event.certificationCourseId;
+
+    await _verifySessionIsPublishable({ certificationCourseId, evaluationSessionRepository });
+
+    const certificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
+      certificationCourseId,
+    });
+
+    if (certificationAssessment.isScoringBlockedDueToComplementaryOnlyChallenges) {
+      return;
+    }
+
+    return _handleV3CertificationScoring({
+      certificationAssessment,
+      event,
+      locale: event.locale,
+      certificationCourseRepository,
+      services,
+    });
+  },
+);
 
 /**
  * @param {Object} params
@@ -88,6 +90,10 @@ const _verifySessionIsPublishable = async ({ certificationCourseId, evaluationSe
   }
 };
 
+/**
+ * @param {Object} params
+ * @param {CertificationCourseRepository} params.certificationCourseRepository
+ */
 async function _handleV3CertificationScoring({
   certificationAssessment,
   event,
@@ -106,4 +112,6 @@ async function _handleV3CertificationScoring({
   if (certificationCourse.isCancelled()) {
     await certificationCourseRepository.update({ certificationCourse });
   }
+
+  return services.scoreDoubleCertificationV3({ certificationCourseId: certificationCourse.getId() });
 }

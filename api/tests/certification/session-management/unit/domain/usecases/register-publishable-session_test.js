@@ -3,6 +3,7 @@ import { JuryCertificationSummary } from '../../../../../../src/certification/se
 import { SessionFinalized } from '../../../../../../src/certification/session-management/domain/read-models/SessionFinalized.js';
 import { registerPublishableSession } from '../../../../../../src/certification/session-management/domain/usecases/register-publishable-session.js';
 import { CertificationIssueReportSubcategories } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { status as assessmentResultStatuses } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { CertificationIssueReportCategory } from '../../../../../../src/shared/domain/models/index.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
@@ -17,6 +18,9 @@ const dependencies = {
 describe('Unit | UseCase |  register-publishable-session', function () {
   it('saves a finalized session', async function () {
     // given
+    sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
+      return callback();
+    });
     const sessionFinalized = new SessionFinalized({
       sessionId: 1234,
       finalizedAt: new Date(),

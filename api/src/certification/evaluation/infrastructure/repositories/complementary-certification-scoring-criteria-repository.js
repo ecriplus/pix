@@ -1,8 +1,9 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { ComplementaryCertificationScoringCriteria } from '../../domain/models/ComplementaryCertificationScoringCriteria.js';
 
-const findByCertificationCourseId = async function ({ certificationCourseId }) {
-  const results = await knex('complementary-certification-courses')
+export const findByCertificationCourseId = async function ({ certificationCourseId }) {
+  const knexConn = DomainTransaction.getConnection();
+  const results = await knexConn('complementary-certification-courses')
     .select({
       complementaryCertificationCourseId: 'complementary-certification-courses.id',
       complementaryCertificationBadgeId: 'complementary-certification-courses.complementaryCertificationBadgeId',
@@ -46,5 +47,3 @@ const findByCertificationCourseId = async function ({ certificationCourseId }) {
       }),
   );
 };
-
-export { findByCertificationCourseId };

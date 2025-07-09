@@ -1,7 +1,8 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 
 export const save = (certificationChallengeHistory) => {
-  return knex('certification-challenge-capacities')
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn('certification-challenge-capacities')
     .insert(certificationChallengeHistory.capacityHistory)
     .onConflict('certificationChallengeId')
     .merge();

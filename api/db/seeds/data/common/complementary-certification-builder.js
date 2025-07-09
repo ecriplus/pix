@@ -241,13 +241,13 @@ function _createComplementaryWithoutReferential(databaseBuilder) {
     complementaryCertificationId: CLEA_COMPLEMENTARY_CERTIFICATION_ID,
     level: 1,
     imageUrl: 'https://images.pix.fr/badges/CleA_Num_certif.svg',
-    label: 'CléA Numérique V2',
+    label: 'CléA Numérique',
     certificateMessage: null,
     temporaryCertificateMessage: null,
     stickerUrl: 'https://images.pix.fr/stickers/macaron_clea.pdf',
     createdAt: new Date('2021-01-01'),
     createdBy: REAL_PIX_SUPER_ADMIN_ID,
-    minimumEarnedPix: 70,
+    minimumEarnedPix: 256,
   });
 }
 

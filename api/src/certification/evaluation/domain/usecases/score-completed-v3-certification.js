@@ -5,6 +5,8 @@
  * @typedef {import('./index.js').CertificationCourseRepository} CertificationCourseRepository
  */
 
+import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
+
 /**
  * @param {Object} params
  * @param {CertificationAssessment} params.certificationAssessment
@@ -12,24 +14,21 @@
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {Services} params.services
  */
-export const scoreCompletedV3Certification = async ({
-  certificationAssessment,
-  locale,
-  certificationCourseRepository,
-  services,
-}) => {
-  if (certificationAssessment.isScoringBlockedDueToComplementaryOnlyChallenges) {
-    return;
-  }
+export const scoreCompletedV3Certification = withTransaction(
+  async ({ certificationAssessment, locale, certificationCourseRepository, services }) => {
+    if (certificationAssessment.isScoringBlockedDueToComplementaryOnlyChallenges) {
+      return;
+    }
 
-  const certificationCourse = await services.handleV3CertificationScoring({
-    certificationAssessment,
-    locale,
-    dependencies: { findByCertificationCourseIdAndAssessmentId: services.findByCertificationCourseIdAndAssessmentId },
-  });
+    const certificationCourse = await services.handleV3CertificationScoring({
+      certificationAssessment,
+      locale,
+      dependencies: { findByCertificationCourseIdAndAssessmentId: services.findByCertificationCourseIdAndAssessmentId },
+    });
 
-  certificationCourse.complete({ now: new Date() });
-  await certificationCourseRepository.update({ certificationCourse });
+    certificationCourse.complete({ now: new Date() });
+    await certificationCourseRepository.update({ certificationCourse });
 
-  return services.scoreDoubleCertificationV3({ certificationCourseId: certificationCourse.getId() });
-};
+    return services.scoreDoubleCertificationV3({ certificationCourseId: certificationCourse.getId() });
+  },
+);

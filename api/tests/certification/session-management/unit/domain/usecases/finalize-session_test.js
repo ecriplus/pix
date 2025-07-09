@@ -6,6 +6,7 @@ import {
 import { SessionFinalized } from '../../../../../../src/certification/session-management/domain/read-models/SessionFinalized.js';
 import { finalizeSession } from '../../../../../../src/certification/session-management/domain/usecases/finalize-session.js';
 import { InvalidCertificationReportForFinalization } from '../../../../../../src/certification/shared/domain/errors.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | finalize-session', function () {
@@ -19,6 +20,9 @@ describe('Unit | UseCase | finalize-session', function () {
   let hasJoiningIssue;
 
   beforeEach(async function () {
+    sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
+      return callback();
+    });
     sessionId = 'dummy session id';
     updatedSession = domainBuilder.certification.sessionManagement.buildSession({
       id: sessionId,

@@ -6,6 +6,7 @@ import { AlgorithmEngineVersion } from '../../../../../../../src/certification/s
 import { ABORT_REASONS } from '../../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { AutoJuryCommentKeys } from '../../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { config } from '../../../../../../../src/shared/config.js';
+import { DomainTransaction } from '../../../../../../../src/shared/domain/DomainTransaction.js';
 import { AssessmentResult, status } from '../../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
 import { generateAnswersForChallenges, generateChallengeList } from '../../../../../shared/fixtures/challenges.js';
@@ -32,6 +33,9 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
     let allChallenges;
 
     beforeEach(function () {
+      sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
+        return callback();
+      });
       clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
       allChallenges = generateChallengeList({ length: minimumAnswersRequiredToValidateACertification + 1 });
 
