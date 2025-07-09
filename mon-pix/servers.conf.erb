@@ -149,6 +149,8 @@ server {
     proxy_set_header X-Forwarded-Host $http_host;
     proxy_set_header X-Forwarded-Proto $scheme;
 
+    proxy_buffering off;
+
     # Set X-Forwarded-For header to be able to know the remote client IP
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
   }
