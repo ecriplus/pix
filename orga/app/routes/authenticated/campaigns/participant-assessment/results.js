@@ -1,6 +1,18 @@
 import Route from '@ember/routing/route';
+import { service } from '@ember/service';
 
 export default class ResultsRoute extends Route {
+  @service router;
+
+  beforeModel(transition) {
+    const campaignId = transition.to.params.campaign_id;
+    const places = this.modelFor('authenticated');
+
+    if (places?.hasReachMaximumPlacesWithThreshold) {
+      this.router.replaceWith('authenticated.campaigns.campaign', campaignId);
+    }
+  }
+
   async model() {
     const { campaignAssessmentParticipation } = this.modelFor('authenticated.campaigns.participant-assessment');
     const campaignAssessmentParticipationResult =
