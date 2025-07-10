@@ -109,7 +109,7 @@ export default class ModuleQcu extends ModuleElement {
 
       {{#unless this.correction}}
         <PixButton
-          @variant="success"
+          @variant="primary"
           @type="submit"
           class="element-qcu__verify-button"
           @triggerAction={{this.onAnswer}}

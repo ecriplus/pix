@@ -105,7 +105,7 @@ export default class ModuleQcm extends ModuleElement {
 
       {{#unless this.correction}}
         <PixButton
-          @variant="success"
+          @variant="primary"
           @type="submit"
           class="element-qcm__verify-button"
           @triggerAction={{this.onAnswer}}
