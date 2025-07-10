@@ -44,12 +44,6 @@ export async function startChat({ configId, userId }) {
 }
 
 /**
- * @typedef LLMChatResponseDTO
- * @type {object}
- * @property {string} message
- */
-
-/**
  * @function
  * @name prompt
  *
