@@ -1659,7 +1659,7 @@
         },
         "grain": {
           "continue": "Continue",
-          "skip": "Skip",
+          "skip": "Skip activity",
           "terminate": "Terminate"
         },
         "stepper": {

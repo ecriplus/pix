@@ -1645,7 +1645,7 @@
         },
         "grain": {
           "continue": "Continuar",
-          "skip": "Ir a",
+          "skip": "Ir a la actividad",
           "terminate": "Finalizar"
         },
         "stepper": {
