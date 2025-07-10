@@ -1992,7 +1992,6 @@
         "title": "Votre avis compte !"
       },
       "not-finished": "Vous ne pouvez pas encore envoyer vos résultats, nous avons encore quelques questions à vous poser.",
-      "organization-message": "Message de votre organisation",
       "reset": {
         "button": "Remettre à zéro et tout retenter",
         "modal": {
@@ -2001,7 +2000,6 @@
         },
         "notification": "Si vous repassez les questions échouées ou remettez à zéro pour tout retenter, vous devrez à nouveau envoyer vos résultats afin qu’ils soient comptabilisés par l’organisateur. Il continuera d’avoir accès à vos résultats précédemment envoyés.",
         "notification-with-auto-share": "Repassez les questions échouées ou remettez à zéro pour tout retenter. L'organisateur continuera d’avoir accès à vos résultats précédemment envoyés."
-      
       },
       "retry": {
         "button": "Repasser mon parcours",

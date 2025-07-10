@@ -1,6 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
 import { hbs } from 'ember-cli-htmlbars';
-import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../../../../helpers/setup-intl-rendering';
@@ -9,19 +8,6 @@ module(
   'Integration | Components | Campaigns | Assessment | Results | Evaluation Results Hero | Custom Organization Block',
   function (hooks) {
     setupIntlRenderingTest(hooks);
-
-    test('displays the block title', async function (assert) {
-      // given
-      this.set('campaign', {});
-
-      // when
-      const screen = await render(
-        hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::CustomOrganizationBlock @campaign={{this.campaign}} />`,
-      );
-
-      // then
-      assert.dom(screen.getByText(t('pages.skill-review.organization-message'))).exists();
-    });
 
     module('custom text', function () {
       module('when organization custom text is defined', function () {

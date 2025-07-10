@@ -2,7 +2,6 @@ import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { t } from 'ember-intl';
 
 import MarkdownToHtml from '../../../../markdown-to-html';
 
@@ -47,9 +46,6 @@ export default class EvaluationResultsCustomOrganizationBlock extends Component 
 
   <template>
     <div class="evaluation-results-hero__organization-block">
-      <h3 class="evaluation-results-hero-organization-block__title">
-        {{t "pages.skill-review.organization-message"}}
-      </h3>
       {{#if @campaign.customResultPageText}}
         <MarkdownToHtml
           class="evaluation-results-hero-organization-block__message"
