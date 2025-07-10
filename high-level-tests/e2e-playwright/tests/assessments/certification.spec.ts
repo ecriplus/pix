@@ -1,10 +1,7 @@
-import path from 'node:path';
-
 import { BrowserContext, Page } from '@playwright/test';
-import * as fs from 'fs/promises';
 
 import { knex } from '../../helpers/db.js';
-import { expect, test } from '../../helpers/fixtures.ts';
+import { expect, expectOrRecordResults, test, TEST_MODE } from '../../helpers/fixtures.ts';
 import { rightWrongAnswerCycle } from '../../helpers/utils.ts';
 import {
   CertificationStartPage,
@@ -14,7 +11,6 @@ import {
 } from '../../pages/pix-app/index.ts';
 import { SessionCreationPage, SessionManagementPage } from '../../pages/pix-certif/index.ts';
 
-const RESULT_DIR = path.resolve(import.meta.dirname, '../../snapshots');
 let COMPETENCE_TITLES: string[];
 test.beforeEach(async () => {
   const competenceDTOs = await knex('learningcontent.competences')
@@ -32,7 +28,7 @@ test('[@snapshot] user takes a certification test', async ({
 }: {
   page: Page;
   pixCertifProContext: BrowserContext;
-  testMode: string;
+  testMode: TEST_MODE;
   globalTestId: string;
 }, testInfo) => {
   testInfo.annotations.push({
@@ -44,16 +40,9 @@ test('[@snapshot] user takes a certification test', async ({
   });
   test.setTimeout(60_000);
 
-  let results;
-  const resultFilePath = path.join(RESULT_DIR, 'certification.json');
-  if (testMode === 'record') {
-    results = {
-      challengeImprints: [],
-    };
-  } else {
-    results = await fs.readFile(resultFilePath, 'utf-8');
-    results = JSON.parse(results);
-  }
+  const results = {
+    challengeImprints: [] as string[],
+  };
 
   const pixCertifPage = await pixCertifProContext.newPage();
   await test.step('creates a certification session', async () => {
@@ -164,8 +153,6 @@ test('[@snapshot] user takes a certification test', async ({
         );
       });
     }
+    expectOrRecordResults({ results, resultFileName: 'certification.json', testMode });
   });
-  if (testMode === 'record') {
-    await fs.writeFile(resultFilePath, JSON.stringify(results));
-  }
 });
