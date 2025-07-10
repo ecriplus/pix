@@ -1,5 +1,5 @@
+import * as courseService from '../../../../../src/evaluation/domain/services/course-service.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import * as courseService from '../../../../../src/shared/domain/services/course-service.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 

@@ -5,7 +5,7 @@ import {
   learningContentBuilder,
   mockLearningContent,
   nock,
-} from '../../../test-helper.js';
+} from '../../../../test-helper.js';
 
 describe('Acceptance | API | Courses', function () {
   let server;

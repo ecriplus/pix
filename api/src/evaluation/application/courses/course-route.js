@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-import { identifiersType } from '../../domain/types/identifiers-type.js';
+import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { courseController } from './course-controller.js';
 
 const register = async function (server) {
