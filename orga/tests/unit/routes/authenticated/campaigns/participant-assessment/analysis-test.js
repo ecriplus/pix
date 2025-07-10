@@ -25,14 +25,14 @@ module(
 
           //when
           route.beforeModel({
-          to: {
-            parent: {
-              params: {
-                campaign_id: campaignId,
+            to: {
+              parent: {
+                params: {
+                  campaign_id: campaignId,
+                },
               },
             },
-          },
-        });
+          });
 
           //then
           assert.ok(replaceWithStub.calledWithExactly('authenticated.campaigns.campaign', campaignId));
@@ -52,14 +52,14 @@ module(
 
           //when
           route.beforeModel({
-          to: {
-            parent: {
-              params: {
-                campaign_id: campaignId,
+            to: {
+              parent: {
+                params: {
+                  campaign_id: campaignId,
+                },
               },
             },
-          },
-        });
+          });
 
           //then
           assert.notOk(replaceWithStub.called);
