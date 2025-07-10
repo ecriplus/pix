@@ -20,7 +20,7 @@ const save = async function (request, h, dependencies = { assessmentRepository }
   assessment.userId = extractUserIdFromRequest(request);
   assessment.state = 'started';
   const createdAssessment = await dependencies.assessmentRepository.save({ assessment });
-  return h.response(assessmentSerializer.serialize(createdAssessment)).created();
+  return h.response(assessmentSerializer.serialize(createdAssessment.toDto())).created();
 };
 
 const getAssessmentWithNextChallenge = async function (request) {
@@ -33,7 +33,7 @@ const getAssessmentWithNextChallenge = async function (request) {
 
     return sharedUsecases.updateAssessmentWithNextChallenge({ assessment: assessmentWithoutChallenge, userId, locale });
   });
-  return assessmentSerializer.serialize(assessment);
+  return assessmentSerializer.serialize(assessment.toDto());
 };
 
 const updateLastChallengeState = async function (request) {

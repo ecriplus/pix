@@ -48,27 +48,4 @@ describe('Integration | Repository | course-repository', function () {
       });
     });
   });
-
-  describe('#getCourseName', function () {
-    context('when course found for given id', function () {
-      it('should return the course name', async function () {
-        // when
-        const courseName = await courseRepository.getCourseName('courseId0');
-
-        // then
-        expect(courseName).to.deep.equal(courseData0.name);
-      });
-    });
-
-    context('when no course found', function () {
-      it('should throw a NotFound error', async function () {
-        // when
-        const err = await catchErr(courseRepository.getCourseName, courseRepository)('coucouLoulou');
-
-        // then
-        expect(err).to.be.instanceOf(NotFoundError);
-        expect(err.message).to.equal("Le test demandé n'existe pas");
-      });
-    });
-  });
 });

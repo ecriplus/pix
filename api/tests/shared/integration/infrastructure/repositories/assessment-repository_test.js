@@ -101,7 +101,7 @@ describe('Integration | Infrastructure | Repositories | assessment-repository', 
         // then
         expect(assessment).to.be.an.instanceOf(Assessment);
         expect(assessment.id).to.equal(assessmentId);
-        expect(assessment.campaignCode).to.equal('COUCOUYVO');
+        expect(assessment.campaign.code).to.equal('COUCOUYVO');
       });
     });
 

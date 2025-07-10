@@ -33,7 +33,7 @@ export async function getAssessment({
       if (!course.canBePlayed) {
         throw new NotFoundError("Le test demandé n'existe pas");
       }
-      assessment.title = await courseRepository.getCourseName(assessment.courseId);
+      assessment.title = course.name;
       break;
     }
   }

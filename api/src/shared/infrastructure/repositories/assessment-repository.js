@@ -92,7 +92,7 @@ const findNotAbortedCampaignAssessmentsByUserId = async function (userId) {
 };
 
 async function _getAssociatedCampaign(campaignParticipationId) {
-  let campaign = null;
+  let campaign;
   if (campaignParticipationId) {
     const campaignId = await campaignRepository.getCampaignIdByCampaignParticipationId(campaignParticipationId);
     campaign = await campaignRepository.get(campaignId);

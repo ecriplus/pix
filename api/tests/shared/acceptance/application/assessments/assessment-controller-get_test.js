@@ -18,55 +18,236 @@ describe('Acceptance | API | assessment-controller-get', function () {
   describe('(no provided answer) GET /api/assessments/:id', function () {
     let options;
 
-    [
-      Assessment.types.CERTIFICATION,
-      Assessment.types.PREVIEW,
-      Assessment.types.CAMPAIGN,
-      Assessment.types.PIX1D_MISSION,
-    ].forEach(function (type) {
-      context(`when the assessment is of type ${type}`, function () {
-        it('should return 200 HTTP status code', async function () {
-          // given
-          server = await createServer();
-          const userId = databaseBuilder.factory.buildUser({}).id;
-          const campaignId = databaseBuilder.factory.buildCampaign().id;
-          const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
-            campaignId,
-          }).id;
-          const assessmentId = databaseBuilder.factory.buildAssessment({
-            userId,
-            courseId,
+    context(`when the assessment is of type CERTIFICATION`, function () {
+      it('should return the expected assessment', async function () {
+        // given
+        server = await createServer();
+        const userId = databaseBuilder.factory.buildUser().id;
+        const sessionId = databaseBuilder.factory.buildSession().id;
+        const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({ userId, sessionId }).id;
+        const assessmentId = databaseBuilder.factory.buildAssessment({
+          userId,
+          courseId,
+          state: Assessment.states.STARTED,
+          type: Assessment.types.CERTIFICATION,
+          certificationCourseId,
+        }).id;
+        await databaseBuilder.commit();
+
+        options = {
+          method: 'GET',
+          url: `/api/assessments/${assessmentId}`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_SPOKEN }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        const expectedAssessment = {
+          type: 'assessments',
+          id: assessmentId.toString(),
+          attributes: {
             state: Assessment.states.STARTED,
-            type,
-            campaignParticipationId,
-          }).id;
-          await databaseBuilder.commit();
+            title: certificationCourseId,
+            type: Assessment.types.CERTIFICATION,
+            'certification-number': certificationCourseId,
+            'has-ongoing-challenge-live-alert': false,
+            'has-ongoing-companion-live-alert': false,
+            'last-question-state': Assessment.statesOfLastQuestion.ASKED,
+            'competence-id': 'recCompetenceId',
+            method: Assessment.methods.CERTIFICATION_DETERMINED,
+            'has-checkpoints': false,
+            'show-levelup': false,
+            'show-progress-bar': false,
+            'show-question-counter': true,
+            'ordered-challenge-ids-answered': [],
+          },
+          relationships: {
+            answers: {
+              data: [],
+              links: {
+                related: `/api/answers?assessmentId=${assessmentId}`,
+              },
+            },
+            'certification-course': {
+              links: {
+                related: `/api/certification-courses/${certificationCourseId}`,
+              },
+            },
+            'next-challenge': {
+              data: null,
+            },
+          },
+        };
 
-          options = {
-            method: 'GET',
-            url: `/api/assessments/${assessmentId}`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_SPOKEN }),
-          };
+        expect(response.statusCode).to.equal(200);
+        const contentType = response.headers['content-type'];
+        expect(contentType).to.contain('application/json');
+        const assessment = response.result.data;
+        expect(assessment).to.deep.equal(expectedAssessment);
+      });
+    });
 
-          // when
-          const response = await server.inject(options);
+    context(`when the assessment is of type PREVIEW`, function () {
+      it('should return the expected assessment', async function () {
+        // given
+        server = await createServer();
+        const assessmentId = databaseBuilder.factory.buildAssessment({
+          userId: null,
+          courseId,
+          state: Assessment.states.STARTED,
+          type: Assessment.types.PREVIEW,
+        }).id;
+        await databaseBuilder.commit();
 
-          // then
-          expect(response.statusCode).to.equal(200);
-        });
+        options = {
+          method: 'GET',
+          url: `/api/assessments/${assessmentId}`,
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        const expectedAssessment = {
+          type: 'assessments',
+          id: assessmentId.toString(),
+          attributes: {
+            state: Assessment.states.STARTED,
+            title: 'Preview',
+            type: Assessment.types.PREVIEW,
+            'has-ongoing-challenge-live-alert': false,
+            'has-ongoing-companion-live-alert': false,
+            'last-question-state': Assessment.statesOfLastQuestion.ASKED,
+            'competence-id': 'recCompetenceId',
+            method: Assessment.methods.CHOSEN,
+            'has-checkpoints': false,
+            'show-levelup': false,
+            'show-progress-bar': false,
+            'show-question-counter': true,
+            'ordered-challenge-ids-answered': [],
+          },
+          relationships: {
+            answers: {
+              data: [],
+              links: {
+                related: `/api/answers?assessmentId=${assessmentId}`,
+              },
+            },
+            progression: {
+              data: {
+                id: `progression-${assessmentId}`,
+                type: 'progressions',
+              },
+              links: {
+                related: `/api/progressions/progression-${assessmentId}`,
+              },
+            },
+            'next-challenge': {
+              data: null,
+            },
+          },
+        };
+
+        expect(response.statusCode).to.equal(200);
+        const contentType = response.headers['content-type'];
+        expect(contentType).to.contain('application/json');
+        const assessment = response.result.data;
+        expect(assessment).to.deep.equal(expectedAssessment);
+      });
+    });
+
+    context(`when the assessment is of type CAMPAIGN`, function () {
+      it('should return the expected assessment', async function () {
+        // given
+        server = await createServer();
+        const userId = databaseBuilder.factory.buildUser().id;
+        const campaign = databaseBuilder.factory.buildCampaign();
+        const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign.id,
+        }).id;
+        const assessmentId = databaseBuilder.factory.buildAssessment({
+          userId,
+          courseId,
+          state: Assessment.states.STARTED,
+          type: Assessment.types.CAMPAIGN,
+          campaignParticipationId,
+        }).id;
+        await databaseBuilder.commit();
+
+        options = {
+          method: 'GET',
+          url: `/api/assessments/${assessmentId}`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_SPOKEN }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        const expectedAssessment = {
+          type: 'assessments',
+          id: assessmentId.toString(),
+          attributes: {
+            state: Assessment.states.STARTED,
+            'code-campaign': campaign.code,
+            title: campaign.title,
+            type: Assessment.types.CAMPAIGN,
+            'has-ongoing-challenge-live-alert': false,
+            'has-ongoing-companion-live-alert': false,
+            'last-question-state': Assessment.statesOfLastQuestion.ASKED,
+            'competence-id': 'recCompetenceId',
+            method: Assessment.methods.SMART_RANDOM,
+            'has-checkpoints': true,
+            'show-levelup': true,
+            'show-progress-bar': true,
+            'show-question-counter': true,
+            'ordered-challenge-ids-answered': [],
+          },
+          relationships: {
+            answers: {
+              data: [],
+              links: {
+                related: `/api/answers?assessmentId=${assessmentId}`,
+              },
+            },
+            progression: {
+              data: {
+                id: `progression-${assessmentId}`,
+                type: 'progressions',
+              },
+              links: {
+                related: `/api/progressions/progression-${assessmentId}`,
+              },
+            },
+            'next-challenge': {
+              data: null,
+            },
+          },
+        };
+
+        expect(response.statusCode).to.equal(200);
+        const contentType = response.headers['content-type'];
+        expect(contentType).to.contain('application/json');
+        const assessment = response.result.data;
+        expect(assessment).to.deep.equal(expectedAssessment);
       });
     });
 
     context(`when the assessment is of type DEMO`, function () {
-      it('should return 200 HTTP status code', async function () {
+      it('should return the expected assessment', async function () {
         // given
+        server = await createServer();
+        const courseName = 'Course name';
         const learningContent = [
           {
             id: '1. Information et données',
             competences: [],
             courses: [
               {
-                id: 'course_id',
+                id: courseId,
+                name: courseName,
                 isActive: true,
                 competenceId: 'competence_id',
                 challengeIds: ['first_challenge', 'second_challenge'],
@@ -83,114 +264,152 @@ describe('Acceptance | API | assessment-controller-get', function () {
           state: Assessment.states.STARTED,
           type: Assessment.types.DEMO,
         }).id;
-        server = await createServer();
-
         await databaseBuilder.commit();
 
         options = {
           method: 'GET',
           url: `/api/assessments/${assessmentId}`,
-          headers: {
-            'accept-language': FRENCH_SPOKEN,
-          },
         };
 
         // when
         const response = await server.inject(options);
 
         // then
+        const expectedAssessment = {
+          type: 'assessments',
+          id: assessmentId.toString(),
+          attributes: {
+            state: Assessment.states.STARTED,
+            title: courseName,
+            type: Assessment.types.DEMO,
+            'has-ongoing-challenge-live-alert': false,
+            'has-ongoing-companion-live-alert': false,
+            'last-question-state': Assessment.statesOfLastQuestion.ASKED,
+            'competence-id': 'recCompetenceId',
+            method: Assessment.methods.COURSE_DETERMINED,
+            'has-checkpoints': false,
+            'show-levelup': false,
+            'show-progress-bar': true,
+            'show-question-counter': true,
+            'ordered-challenge-ids-answered': [],
+          },
+          relationships: {
+            answers: {
+              data: [],
+              links: {
+                related: `/api/answers?assessmentId=${assessmentId}`,
+              },
+            },
+            course: {
+              data: {
+                id: courseId,
+                type: 'courses',
+              },
+            },
+            'next-challenge': {
+              data: null,
+            },
+          },
+        };
+
         expect(response.statusCode).to.equal(200);
+        const contentType = response.headers['content-type'];
+        expect(contentType).to.contain('application/json');
+        const assessment = response.result.data;
+        expect(assessment).to.deep.equal(expectedAssessment);
       });
     });
 
-    it('should return application/json', async function () {
-      // given
-      server = await createServer();
-      const userId = databaseBuilder.factory.buildUser({}).id;
-      const assessmentId = databaseBuilder.factory.buildAssessment({
-        userId,
-        courseId,
-        state: Assessment.states.STARTED,
-        type: Assessment.types.PREVIEW,
-      }).id;
-      await databaseBuilder.commit();
+    context(`when the assessment is of type COMPETENCE_EVALUATION`, function () {
+      it('should return the expected assessment', async function () {
+        // given
+        server = await createServer();
+        const competenceId = 'competence_id';
+        const learningContent = [
+          {
+            id: '1. Information et données',
+            areas: [
+              {
+                competences: [
+                  {
+                    id: competenceId,
+                    name_i18n: {
+                      fr: 'Mener une recherche et une veille d’information',
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        ];
+        const learningContentObjects = learningContentBuilder(learningContent);
+        await mockLearningContent(learningContentObjects);
 
-      options = {
-        method: 'GET',
-        url: `/api/assessments/${assessmentId}`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_SPOKEN }),
-      };
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      const contentType = response.headers['content-type'];
-      expect(contentType).to.contain('application/json');
-    });
-
-    it('should return the expected assessment', async function () {
-      // given
-      server = await createServer();
-      const userId = databaseBuilder.factory.buildUser({}).id;
-      const assessmentId = databaseBuilder.factory.buildAssessment({
-        userId,
-        courseId,
-        state: Assessment.states.STARTED,
-        type: Assessment.types.PREVIEW,
-      }).id;
-      await databaseBuilder.commit();
-
-      options = {
-        method: 'GET',
-        url: `/api/assessments/${assessmentId}`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_SPOKEN }),
-      };
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      const expectedAssessment = {
-        type: 'assessments',
-        id: assessmentId.toString(),
-        attributes: {
+        const userId = databaseBuilder.factory.buildUser().id;
+        const assessmentId = databaseBuilder.factory.buildAssessment({
+          userId,
           state: Assessment.states.STARTED,
-          title: 'Preview',
-          type: Assessment.types.PREVIEW,
-          'certification-number': null,
-          'has-ongoing-challenge-live-alert': false,
-          'has-ongoing-companion-live-alert': false,
-          'last-question-state': Assessment.statesOfLastQuestion.ASKED,
-          'competence-id': 'recCompetenceId',
-          method: Assessment.methods.CHOSEN,
-          'code-campaign': undefined,
-          'has-checkpoints': false,
-          'show-levelup': false,
-          'show-progress-bar': false,
-          'show-question-counter': true,
-          'ordered-challenge-ids-answered': [],
-        },
-        relationships: {
-          course: {
-            data: {
-              id: 'course_id',
-              type: 'courses',
+          type: Assessment.types.COMPETENCE_EVALUATION,
+          competenceId,
+        }).id;
+        await databaseBuilder.commit();
+
+        options = {
+          method: 'GET',
+          url: `/api/assessments/${assessmentId}`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_SPOKEN }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        const expectedAssessment = {
+          type: 'assessments',
+          id: assessmentId.toString(),
+          attributes: {
+            state: Assessment.states.STARTED,
+            title: 'Mener une recherche et une veille d’information',
+            type: Assessment.types.COMPETENCE_EVALUATION,
+            'has-ongoing-challenge-live-alert': false,
+            'has-ongoing-companion-live-alert': false,
+            'last-question-state': Assessment.statesOfLastQuestion.ASKED,
+            'competence-id': competenceId,
+            method: Assessment.methods.SMART_RANDOM,
+            'has-checkpoints': true,
+            'show-levelup': true,
+            'show-progress-bar': true,
+            'show-question-counter': true,
+            'ordered-challenge-ids-answered': [],
+          },
+          relationships: {
+            answers: {
+              data: [],
+              links: {
+                related: `/api/answers?assessmentId=${assessmentId}`,
+              },
+            },
+            progression: {
+              data: {
+                id: `progression-${assessmentId}`,
+                type: 'progressions',
+              },
+              links: {
+                related: `/api/progressions/progression-${assessmentId}`,
+              },
+            },
+            'next-challenge': {
+              data: null,
             },
           },
-          answers: {
-            data: [],
-            links: {
-              related: `/api/answers?assessmentId=${assessmentId}`,
-            },
-          },
-          'next-challenge': {
-            data: null,
-          },
-        },
-      };
-      const assessment = response.result.data;
-      expect(assessment).to.deep.equal(expectedAssessment);
+        };
+
+        expect(response.statusCode).to.equal(200);
+        const contentType = response.headers['content-type'];
+        expect(contentType).to.contain('application/json');
+        const assessment = response.result.data;
+        expect(assessment).to.deep.equal(expectedAssessment);
+      });
     });
   });
 
@@ -297,13 +516,11 @@ describe('Acceptance | API | assessment-controller-get', function () {
           state: 'completed',
           title: 'Preview',
           type: Assessment.types.PREVIEW,
-          'certification-number': null,
           'has-ongoing-challenge-live-alert': false,
           'has-ongoing-companion-live-alert': false,
           'competence-id': 'recCompetenceId',
           'last-question-state': Assessment.statesOfLastQuestion.ASKED,
           method: Assessment.methods.CHOSEN,
-          'code-campaign': undefined,
           'has-checkpoints': false,
           'show-levelup': false,
           'show-progress-bar': false,
@@ -311,7 +528,6 @@ describe('Acceptance | API | assessment-controller-get', function () {
           'ordered-challenge-ids-answered': ['rec1', 'rec2'],
         },
         relationships: {
-          course: { data: { type: 'courses', id: courseId } },
           answers: {
             data: [
               {

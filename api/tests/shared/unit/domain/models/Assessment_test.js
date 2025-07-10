@@ -1,9 +1,11 @@
-import { CertificationChallengeLiveAlertStatus } from '../../../../../src/certification/shared/domain/models/CertificationChallengeLiveAlert.js';
-import { CertificationCompanionLiveAlertStatus } from '../../../../../src/certification/shared/domain/models/CertificationCompanionLiveAlert.js';
 import { Campaign } from '../../../../../src/prescription/campaign/domain/models/Campaign.js';
-import { CampaignTypes } from '../../../../../src/prescription/shared/domain/constants.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { CampaignAssessment } from '../../../../../src/shared/domain/read-models/CampaignAssessment.js';
+import { CertificationAssessment } from '../../../../../src/shared/domain/read-models/CertificationAssessment.js';
+import { CompetenceEvaluationAssessment } from '../../../../../src/shared/domain/read-models/CompetenceEvaluationAssessment.js';
+import { DemoAssessment } from '../../../../../src/shared/domain/read-models/DemoAssessment.js';
+import { PreviewAssessment } from '../../../../../src/shared/domain/read-models/PreviewAssessment.js';
+import { catchErrSync, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Domain | Models | Assessment', function () {
   describe('#constructor', function () {
@@ -14,108 +16,6 @@ describe('Unit | Domain | Models | Assessment', function () {
       });
 
       expect(assessment.method).to.equal('SMART_RANDOM');
-    });
-
-    [
-      {
-        type: Assessment.types.COMPETENCE_EVALUATION,
-        hasCheckpoints: true,
-        showProgressBar: true,
-        showLevelup: true,
-        showQuestionCounter: true,
-        expectedTitle: 'Ma Compétence',
-        attributes: { title: 'Ma Compétence' },
-      },
-      {
-        type: Assessment.types.CERTIFICATION,
-        hasCheckpoints: false,
-        showProgressBar: false,
-        showLevelup: false,
-        showQuestionCounter: true,
-        expectedTitle: 'certificationCourseId',
-        attributes: { certificationCourseId: 'certificationCourseId' },
-      },
-      {
-        type: Assessment.types.DEMO,
-        hasCheckpoints: false,
-        showProgressBar: true,
-        showLevelup: false,
-        showQuestionCounter: true,
-        expectedTitle: 'Mon Course',
-        attributes: { title: 'Mon Course' },
-      },
-      {
-        type: Assessment.types.PREVIEW,
-        hasCheckpoints: false,
-        showProgressBar: false,
-        showLevelup: false,
-        showQuestionCounter: true,
-        expectedTitle: 'Preview',
-        attributes: {},
-      },
-      {
-        type: Assessment.types.CAMPAIGN,
-
-        describeInfos: CampaignTypes.ASSESSMENT,
-        hasCheckpoints: true,
-        showProgressBar: true,
-        showLevelup: true,
-        showQuestionCounter: true,
-        expectedTitle: 'Ma Campagne',
-
-        attributes: { campaign: domainBuilder.buildCampaign({ title: 'Ma Campagne', type: CampaignTypes.ASSESSMENT }) },
-      },
-      {
-        type: Assessment.types.CAMPAIGN,
-
-        describeInfos: CampaignTypes.EXAM,
-        hasCheckpoints: false,
-        showProgressBar: false,
-        showLevelup: false,
-        showQuestionCounter: false,
-        expectedTitle: 'Ma Campagne',
-
-        attributes: { campaign: domainBuilder.buildCampaign({ title: 'Ma Campagne', type: CampaignTypes.EXAM }) },
-      },
-      {
-        type: Assessment.types.CAMPAIGN,
-        describeInfos: 'Anonymized assessment',
-        hasCheckpoints: false,
-        showProgressBar: false,
-        expectedTitle: '',
-        showLevelup: false,
-        showQuestionCounter: false,
-
-        attributes: { campaign: null },
-      },
-    ].forEach(({ type, describeInfos, attributes, showProgressBar, showLevelup, hasCheckpoints, expectedTitle }) => {
-      describe(`${type} ${describeInfos}`, function () {
-        let assessment;
-
-        before(function () {
-          assessment = new Assessment({
-            type,
-            method: null,
-            ...attributes,
-          });
-        });
-
-        it('should init showProgressBar', function () {
-          expect(assessment.showProgressBar).to.equal(showProgressBar);
-        });
-
-        it('should init hasCheckpoints', function () {
-          expect(assessment.hasCheckpoints).to.equal(hasCheckpoints);
-        });
-
-        it('should init showLevelup', function () {
-          expect(assessment.showLevelup).to.equal(showLevelup);
-        });
-
-        it('should init title', function () {
-          expect(assessment.title).to.equal(expectedTitle);
-        });
-      });
     });
   });
 
@@ -606,90 +506,51 @@ describe('Unit | Domain | Models | Assessment', function () {
     });
   });
 
-  describe('#hasOngoingChallengeLiveAlert', function () {
-    describe('when assessment has no live alerts attached', function () {
-      it('should return false', function () {
-        const assessmentWithoutLiveAlert = domainBuilder.buildAssessment();
+  describe('#toDto', function () {
+    describe('when assessment is type CERTIFICATION', function () {
+      it('should return a CertificationAssessment', function () {
+        const assessment = domainBuilder.buildAssessment({ type: Assessment.types.CERTIFICATION });
 
-        expect(assessmentWithoutLiveAlert.hasOngoingChallengeLiveAlert).to.be.false;
+        expect(assessment.toDto()).to.be.instanceOf(CertificationAssessment);
+      });
+    });
+    describe('when assessment is type CAMPAIGN', function () {
+      it('should return a CampaignAssessment', function () {
+        const assessment = domainBuilder.buildAssessment({ type: Assessment.types.CAMPAIGN });
+
+        expect(assessment.toDto()).to.be.instanceOf(CampaignAssessment);
+      });
+    });
+    describe('when assessment is type DEMO', function () {
+      it('should return a DemoAssessment', function () {
+        const assessment = domainBuilder.buildAssessment({ type: Assessment.types.DEMO });
+
+        expect(assessment.toDto()).to.be.instanceOf(DemoAssessment);
       });
     });
 
-    describe('when assessment has live alerts attached but no ongoing', function () {
-      it('should return false', function () {
-        const assessmentWithoutLiveAlert = domainBuilder.buildAssessment({
-          challengeLiveAlerts: [
-            domainBuilder.buildCertificationChallengeLiveAlert({
-              status: CertificationChallengeLiveAlertStatus.DISMISSED,
-            }),
-            domainBuilder.buildCertificationChallengeLiveAlert({
-              status: CertificationChallengeLiveAlertStatus.VALIDATED,
-            }),
-          ],
-        });
+    describe('when assessment is type COMPETENCE_EVALUATION', function () {
+      it('should return a CompetenceEvaluationAssessment', function () {
+        const assessment = domainBuilder.buildAssessment({ type: Assessment.types.COMPETENCE_EVALUATION });
 
-        expect(assessmentWithoutLiveAlert.hasOngoingChallengeLiveAlert).to.be.false;
+        expect(assessment.toDto()).to.be.instanceOf(CompetenceEvaluationAssessment);
       });
     });
 
-    describe('when assessment has an ongoing live alert ', function () {
-      it('should return true', function () {
-        const assessmentWithLiveAlert = domainBuilder.buildAssessment({
-          challengeLiveAlerts: [
-            domainBuilder.buildCertificationChallengeLiveAlert({
-              status: CertificationChallengeLiveAlertStatus.DISMISSED,
-            }),
-            domainBuilder.buildCertificationChallengeLiveAlert({
-              status: CertificationChallengeLiveAlertStatus.ONGOING,
-            }),
-          ],
-        });
+    describe('when assessment is type PREVIEW', function () {
+      it('should return a PreviewAssessment', function () {
+        const assessment = domainBuilder.buildAssessment({ type: Assessment.types.PREVIEW });
 
-        expect(assessmentWithLiveAlert.hasOngoingChallengeLiveAlert).to.be.true;
-      });
-    });
-  });
-
-  describe('#hasOngoingCompanionLiveAlert', function () {
-    describe('when assessment has no live alerts attached', function () {
-      it('should return false', function () {
-        const assessmentWithoutLiveAlert = domainBuilder.buildAssessment();
-
-        expect(assessmentWithoutLiveAlert.hasOngoingCompanionLiveAlert).to.be.false;
+        expect(assessment.toDto()).to.be.instanceOf(PreviewAssessment);
       });
     });
 
-    describe('when assessment has live alerts attached but no ongoing', function () {
-      it('should return false', function () {
-        const assessmentWithoutLiveAlert = domainBuilder.buildAssessment({
-          companionLiveAlerts: [
-            domainBuilder.buildCertificationCompanionLiveAlert({
-              status: CertificationCompanionLiveAlertStatus.CLEARED,
-            }),
-            domainBuilder.buildCertificationCompanionLiveAlert({
-              status: CertificationCompanionLiveAlertStatus.CLEARED,
-            }),
-          ],
-        });
+    describe('when assessment is type unknown', function () {
+      it('should throw an error', function () {
+        const assessment = domainBuilder.buildAssessment({ type: 'unknown' });
 
-        expect(assessmentWithoutLiveAlert.hasOngoingCompanionLiveAlert).to.be.false;
-      });
-    });
-
-    describe('when assessment has an ongoing live alert ', function () {
-      it('should return true', function () {
-        const assessmentWithLiveAlert = domainBuilder.buildAssessment({
-          companionLiveAlerts: [
-            domainBuilder.buildCertificationCompanionLiveAlert({
-              status: CertificationCompanionLiveAlertStatus.CLEARED,
-            }),
-            domainBuilder.buildCertificationCompanionLiveAlert({
-              status: CertificationCompanionLiveAlertStatus.ONGOING,
-            }),
-          ],
-        });
-
-        expect(assessmentWithLiveAlert.hasOngoingCompanionLiveAlert).to.be.true;
+        const error = catchErrSync(assessment.toDto)();
+        expect(error).to.be.instanceOf(Error);
       });
     });
   });

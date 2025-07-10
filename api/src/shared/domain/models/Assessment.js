@@ -1,7 +1,10 @@
-import { CertificationChallengeLiveAlertStatus } from '../../../certification/shared/domain/models/CertificationChallengeLiveAlert.js';
-import { CertificationCompanionLiveAlertStatus } from '../../../certification/shared/domain/models/CertificationCompanionLiveAlert.js';
 import { Answer } from '../../../evaluation/domain/models/Answer.js';
 import { ObjectValidationError } from '../errors.js';
+import { CampaignAssessment } from '../read-models/CampaignAssessment.js';
+import { CertificationAssessment } from '../read-models/CertificationAssessment.js';
+import { CompetenceEvaluationAssessment } from '../read-models/CompetenceEvaluationAssessment.js';
+import { DemoAssessment } from '../read-models/DemoAssessment.js';
+import { PreviewAssessment } from '../read-models/PreviewAssessment.js';
 
 const courseIdMessage = {
   COMPETENCE_EVALUATION: '[NOT USED] CompetenceId is in Competence Evaluation.',
@@ -89,71 +92,7 @@ class Assessment {
     this.method = method || Assessment.computeMethodFromType(this.type);
     this.challengeLiveAlerts = challengeLiveAlerts;
     this.companionLiveAlerts = companionLiveAlerts;
-
-    this.#setSomeFlags(campaign);
-  }
-
-  #setSomeFlags(campaign) {
-    switch (this.type) {
-      case Assessment.types.CERTIFICATION: {
-        this.showProgressBar = false;
-        this.hasCheckpoints = false;
-        this.showLevelup = false;
-        this.showQuestionCounter = true;
-        this.title = this.certificationCourseId;
-        break;
-      }
-
-      case Assessment.types.COMPETENCE_EVALUATION: {
-        this.showProgressBar = true;
-        this.hasCheckpoints = true;
-        this.showLevelup = true;
-        this.showQuestionCounter = true;
-        break;
-      }
-
-      case Assessment.types.DEMO: {
-        this.showProgressBar = true;
-        this.hasCheckpoints = false;
-        this.showLevelup = false;
-        this.showQuestionCounter = true;
-        break;
-      }
-      case Assessment.types.PREVIEW: {
-        this.showProgressBar = false;
-        this.hasCheckpoints = false;
-        this.showLevelup = false;
-        this.showQuestionCounter = true;
-        this.title = 'Preview';
-        break;
-      }
-      case Assessment.types.CAMPAIGN: {
-        // if campaign participation is anonymized, assessment of type campaign do not have related campaign
-        if (!campaign) {
-          this.showProgressBar = false;
-          this.hasCheckpoints = false;
-          this.showLevelup = false;
-          this.showQuestionCounter = false;
-          this.title = '';
-        } else {
-          this.campaignCode = campaign.code;
-          this.showProgressBar = campaign.isAssessment;
-          this.hasCheckpoints = campaign.isAssessment;
-          this.showLevelup = campaign.isAssessment;
-          this.showQuestionCounter = campaign.isAssessment;
-          this.title = campaign.title;
-        }
-        break;
-      }
-
-      default: {
-        this.showProgressBar = false;
-        this.hasCheckpoints = false;
-        this.showLevelup = false;
-        this.showQuestionCounter = false;
-        this.title = '';
-      }
-    }
+    this.campaign = campaign;
   }
 
   isCompleted() {
@@ -228,24 +167,23 @@ class Assessment {
     return this.lastQuestionState === Assessment.statesOfLastQuestion.FOCUSEDOUT;
   }
 
-  get hasOngoingChallengeLiveAlert() {
-    if (!this.challengeLiveAlerts) {
-      return false;
+  toDto() {
+    switch (this.type) {
+      case Assessment.types.CAMPAIGN:
+        return new CampaignAssessment(this);
+      case Assessment.types.CERTIFICATION:
+        return new CertificationAssessment(this);
+      case Assessment.types.DEMO:
+        return new DemoAssessment(this);
+      case Assessment.types.COMPETENCE_EVALUATION:
+        return new CompetenceEvaluationAssessment(this);
+      case Assessment.types.PREVIEW:
+        return new PreviewAssessment(this);
+      case Assessment.types.PIX1D_MISSION:
+        return this;
+      default:
+        throw new Error('Unknown assessment type.');
     }
-
-    return this.challengeLiveAlerts.some(
-      (challengeLiveAlert) => challengeLiveAlert.status === CertificationChallengeLiveAlertStatus.ONGOING,
-    );
-  }
-
-  get hasOngoingCompanionLiveAlert() {
-    if (!this.companionLiveAlerts) {
-      return false;
-    }
-
-    return this.companionLiveAlerts.some(
-      (companionLiveAlert) => companionLiveAlert.status === CertificationCompanionLiveAlertStatus.ONGOING,
-    );
   }
 
   static computeMethodFromType(type) {

@@ -1,6 +1,5 @@
 import jsonapiSerializer from 'jsonapi-serializer';
 
-import { Progression } from '../../../../evaluation/domain/models/Progression.js';
 import { DomainError } from '../../../domain/errors.js';
 import { Assessment } from '../../../domain/models/Assessment.js';
 import { config as challengeSerializerConfig } from './challenge-serializer.js';
@@ -17,36 +16,6 @@ const typesMapping = {
 
 const serialize = function (assessments) {
   return new Serializer('assessment', {
-    transform(currentAssessment) {
-      const assessment = Object.assign({}, currentAssessment);
-
-      // TODO: We can't use currentAssessment.isCertification() because
-      // this serializer is also used by model CampaignAssessment
-      assessment.certificationNumber = null;
-      assessment.hasOngoingChallengeLiveAlert = currentAssessment.hasOngoingChallengeLiveAlert;
-      assessment.hasOngoingCompanionLiveAlert = currentAssessment.hasOngoingCompanionLiveAlert;
-      if (currentAssessment.type === Assessment.types.CERTIFICATION) {
-        assessment.certificationNumber = currentAssessment.certificationCourseId;
-        assessment.certificationCourse = { id: currentAssessment.certificationCourseId };
-      }
-
-      // Same here for isForCampaign() and isCompetenceEvaluation()
-      if (currentAssessment.hasCheckpoints) {
-        assessment.progression = {
-          id: Progression.generateIdFromAssessmentId(currentAssessment.id),
-        };
-      }
-
-      assessment.codeCampaign = currentAssessment.campaignCode;
-
-      if (!currentAssessment.course) {
-        assessment.course = { id: currentAssessment.courseId };
-      }
-
-      // ordered in the repository call
-      assessment.orderedChallengeIdsAnswered = assessment.answers?.map((answer) => answer.challengeId) ?? [];
-      return assessment;
-    },
     attributes: [
       'title',
       'type',

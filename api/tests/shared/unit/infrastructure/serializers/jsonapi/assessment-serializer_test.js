@@ -1,11 +1,14 @@
 import { DomainError } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/index.js';
+import { CampaignAssessment } from '../../../../../../src/shared/domain/read-models/CampaignAssessment.js';
+import { CertificationAssessment } from '../../../../../../src/shared/domain/read-models/CertificationAssessment.js';
+import { CompetenceEvaluationAssessment } from '../../../../../../src/shared/domain/read-models/CompetenceEvaluationAssessment.js';
 import * as serializer from '../../../../../../src/shared/infrastructure/serializers/jsonapi/assessment-serializer.js';
 import { catchErrSync, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
   describe('#serialize', function () {
-    it('should convert an Assessment model object (of type CERTIFICATION) into JSON API data', function () {
+    it('should convert a CertificationAssessment into JSON API data', function () {
       //given
       const certificationCourseId = 1;
       const answers = [
@@ -19,11 +22,10 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
         answers,
       });
       const challenge = domainBuilder.buildChallenge({ id: 'challenge0' });
-      assessment.nextChallenge = challenge;
-      assessment.hasCheckpoints = false;
-      assessment.showProgressBar = false;
-      assessment.showLevelup = false;
-      assessment.showQuestionCounter = true;
+
+      const certificationAssessment = new CertificationAssessment(assessment);
+      certificationAssessment.nextChallenge = challenge;
+
       const expectedJson = {
         data: {
           id: assessment.id.toString(),
@@ -42,7 +44,6 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
             'show-levelup': false,
             'has-checkpoints': false,
             'show-question-counter': true,
-            'code-campaign': undefined,
             'ordered-challenge-ids-answered': ['challenge0', 'challenge1', 'challenge2'],
           },
           relationships: {
@@ -65,12 +66,6 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
                 related: '/api/answers?assessmentId=' + assessment.id.toString(),
               },
             },
-            course: {
-              data: {
-                id: assessment.courseId.toString(),
-                type: 'courses',
-              },
-            },
             'certification-course': {
               links: {
                 related: `/api/certification-courses/${certificationCourseId}`,
@@ -86,15 +81,8 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
         },
         included: [
           {
-            id: assessment.course.id.toString(),
-            type: 'courses',
-            attributes: {
-              description: assessment.course.description,
-              name: assessment.course.name,
-              'nb-challenges': assessment.course.nbChallenges,
-            },
-          },
-          {
+            id: 'challenge0',
+            type: 'challenges',
             attributes: {
               'alternative-instruction': 'Des instructions alternatives',
               attachments: ['URL pièce jointe'],
@@ -115,27 +103,24 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
               'web-component-props': undefined,
               'web-component-tag-name': undefined,
             },
-            id: 'challenge0',
-            type: 'challenges',
           },
         ],
       };
 
       // when
-      const json = serializer.serialize(assessment);
+      const json = serializer.serialize(certificationAssessment);
 
       // then
       expect(json).to.deep.equal(expectedJson);
     });
 
-    it('should convert an Assessment model object with type COMPETENCE_EVALUATION into JSON API data', function () {
+    it('should convert a CompetenceEvaluationAssessment into JSON API data', function () {
       //given
       const assessment = domainBuilder.buildAssessment({
         type: Assessment.types.COMPETENCE_EVALUATION,
         title: 'Traiter des données',
       });
-      assessment.hasCheckpoints = true;
-      assessment.showProgressBar = true;
+      const competenceEvaluationAssessment = new CompetenceEvaluationAssessment(assessment);
 
       const expectedProgressionJson = {
         data: {
@@ -148,22 +133,21 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
       };
 
       // when
-      const json = serializer.serialize(assessment);
+      const json = serializer.serialize(competenceEvaluationAssessment);
 
       // then
       expect(json.data.relationships['progression']).to.deep.equal(expectedProgressionJson);
-      expect(json.data.attributes['certification-number']).to.be.null;
       expect(json.data.attributes['title']).to.equal('Traiter des données');
     });
 
-    it('should convert an Assessment model object with type CAMPAIGN into JSON API data', function () {
+    it('should convert a CampaignAssessment into JSON API data', function () {
       //given
       const assessment = domainBuilder.buildAssessment.ofTypeCampaign({
         title: 'Parcours',
         campaign: domainBuilder.buildCampaign({ title: 'Parcours', code: 'CAMPAGNE1' }),
       });
-      assessment.hasCheckpoints = true;
-      assessment.showProgressBar = true;
+      const campaignAssessment = new CampaignAssessment(assessment);
+
       const expectedProgressionJson = {
         data: {
           id: `progression-${assessment.id}`,
@@ -175,33 +159,12 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
       };
 
       // when
-      const json = serializer.serialize(assessment);
+      const json = serializer.serialize(campaignAssessment);
 
       // then
       expect(json.data.relationships['progression']).to.deep.equal(expectedProgressionJson);
-      expect(json.data.attributes['certification-number']).to.be.null;
       expect(json.data.attributes['code-campaign']).to.equal('CAMPAGNE1');
       expect(json.data.attributes['title']).to.equal('Parcours');
-    });
-
-    it('should convert an Assessment model object without course into JSON API data', function () {
-      //given
-      const assessment = domainBuilder.buildAssessment({
-        course: null,
-      });
-      const expectedCourseJson = {
-        data: {
-          id: assessment.courseId.toString(),
-          type: 'courses',
-        },
-      };
-
-      // when
-      const json = serializer.serialize(assessment);
-
-      // then
-      expect(json.data.relationships['course']).to.deep.equal(expectedCourseJson);
-      expect(json.included).to.be.undefined;
     });
   });
 
