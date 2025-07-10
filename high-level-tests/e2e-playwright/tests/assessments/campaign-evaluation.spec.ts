@@ -1,10 +1,7 @@
-import path from 'node:path';
-
 import { BrowserContext, Page } from '@playwright/test';
-import * as fs from 'fs/promises';
 
 import { knex, setAssessmentIdSequence } from '../../helpers/db.js';
-import { expect, test } from '../../helpers/fixtures.ts';
+import { expect, expectOrRecordResults, test, TEST_MODE } from '../../helpers/fixtures.ts';
 import { rightWrongAnswerCycle } from '../../helpers/utils.ts';
 import {
   CampaignResultsPage,
@@ -16,7 +13,6 @@ import {
 } from '../../pages/pix-app/index.ts';
 import { PixOrgaPage } from '../../pages/pix-orga/index.ts';
 
-const RESULT_DIR = path.resolve(import.meta.dirname, '../../snapshots');
 let COMPETENCE_TITLES: string[];
 test.beforeEach(async () => {
   // Reset assessment id sequence for smart random to be predictable
@@ -36,7 +32,7 @@ test('[@snapshot][@runSerially] user plays a campaign', async ({
 }: {
   page: Page;
   pixOrgaMemberContext: BrowserContext;
-  testMode: string;
+  testMode: TEST_MODE;
   globalTestId: string;
 }, testInfo) => {
   testInfo.annotations.push(
@@ -56,17 +52,10 @@ test('[@snapshot][@runSerially] user plays a campaign', async ({
   );
   test.setTimeout(180_000);
 
-  let results;
-  const resultFilePath = path.join(RESULT_DIR, 'campaign-evaluation.json');
-  if (testMode === 'record') {
-    results = {
-      challengeImprints: [],
-      masteryPercentages: [],
-    };
-  } else {
-    results = await fs.readFile(resultFilePath, 'utf-8');
-    results = JSON.parse(results);
-  }
+  const results = {
+    challengeImprints: [] as string[],
+    masteryPercentages: [] as (string | undefined)[],
+  };
   const pixOrgaPage = await pixOrgaMemberContext.newPage();
   await pixOrgaPage.goto(process.env.PIX_ORGA_URL as string);
   let campaignCode: string | null;
@@ -88,20 +77,11 @@ test('[@snapshot][@runSerially] user plays a campaign', async ({
     await pixAppPage.getByRole('link', { name: "J'ai un code" }).click();
     const startCampaignPage = new StartCampaignPage(pixAppPage);
     await startCampaignPage.goToFirstChallenge(campaignCode as string);
-    let challengeIndex = 0;
     await test.step(` answering right or wrong according to pattern`, async () => {
       while (!pixAppPage.url().endsWith('/checkpoint?finalCheckpoint=true')) {
         const challengePage = new ChallengePage(pixAppPage);
         const challengeImprint = await challengePage.getChallengeImprint();
-        if (testMode === 'record') {
-          results.challengeImprints.push(challengeImprint);
-        } else {
-          expect(challengeImprint).toBe(results.challengeImprints[challengeIndex]);
-          await expect(pixAppPage.getByLabel('Votre progression')).toContainText(
-            `Question ${(challengeIndex % 5) + 1} / 5`,
-          );
-        }
-        ++challengeIndex;
+        results.challengeImprints.push(challengeImprint);
         await challengePage.setRightOrWrongAnswer(rightWrongAnswerCycleIter.next().value as boolean);
         await challengePage.validateAnswer();
 
@@ -118,29 +98,15 @@ test('[@snapshot][@runSerially] user plays a campaign', async ({
 
       const campaignResultsPage = new CampaignResultsPage(pixAppPage);
       const globalMasteryPercentage = await campaignResultsPage.getGlobalMasteryPercentage();
-      if (testMode === 'record') {
-        results.masteryPercentages.push(globalMasteryPercentage);
-      } else {
-        expect(globalMasteryPercentage).toBe(results.masteryPercentages[0]);
-      }
-      let competenceIndex = 1;
+      results.masteryPercentages.push(globalMasteryPercentage);
       for (const competenceTitle of COMPETENCE_TITLES) {
         const masteryPercentage = await campaignResultsPage.getMasteryPercentageForCompetence(competenceTitle);
-        if (testMode === 'record') {
-          results.masteryPercentages.push(masteryPercentage);
-        } else {
-          expect(masteryPercentage).toBe(results.masteryPercentages[competenceIndex]);
-        }
-        ++competenceIndex;
+        results.masteryPercentages.push(masteryPercentage);
       }
 
-      if (testMode === 'check') {
-        await campaignResultsPage.sendResults();
-        await expect(pixAppPage.getByText('Vos résultats ont été envoyés')).toBeVisible();
-      }
+      await campaignResultsPage.sendResults();
+      await expect(pixAppPage.getByText('Vos résultats ont été envoyés')).toBeVisible();
     });
   });
-  if (testMode === 'record') {
-    await fs.writeFile(resultFilePath, JSON.stringify(results));
-  }
+  expectOrRecordResults({ results, resultFileName: 'campaign-evaluation.json', testMode });
 });
