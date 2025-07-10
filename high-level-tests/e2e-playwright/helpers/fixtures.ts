@@ -2,6 +2,7 @@ import path from 'node:path';
 
 import { BrowserContext, test as base } from '@playwright/test';
 import crypto from 'crypto';
+import * as fs from 'fs/promises';
 
 import {
   AUTH_DIR,
@@ -10,12 +11,15 @@ import {
   PIX_ORGA_ADMIN_CREDENTIALS,
   PIX_ORGA_MEMBER_CREDENTIALS,
 } from './auth.js';
+
+export type TEST_MODE = 'check' | 'record';
 const shouldRecordHAR = process.env.RECORD_HAR === 'true';
 const HAR_DIR = path.resolve(import.meta.dirname, '../.har-record');
 
 export const test = base.extend<{
-  testMode: string;
   globalTestId: string;
+  forEachTest: void;
+  testMode: TEST_MODE;
   pixAppUserContext: BrowserContext;
   pixOrgaAdminContext: BrowserContext;
   pixOrgaMemberContext: BrowserContext;
@@ -23,7 +27,7 @@ export const test = base.extend<{
 }>({
   // eslint-disable-next-line no-empty-pattern
   testMode: async ({}, use) => {
-    await use(process.env.TEST_MODE || 'check');
+    await use((process.env.TEST_MODE as TEST_MODE) || 'check');
   },
   // eslint-disable-next-line no-empty-pattern
   globalTestId: async ({}, use, testInfo) => {
@@ -119,3 +123,22 @@ function sanitizeFilename(name: string) {
 }
 
 export const expect = test.expect;
+
+export async function expectOrRecordResults({
+  results,
+  resultFileName,
+  testMode,
+}: {
+  results: object;
+  resultFileName: string;
+  testMode: TEST_MODE;
+}) {
+  const resultDir = path.resolve(import.meta.dirname, '../snapshots');
+  const resultFilePath = path.join(resultDir, resultFileName);
+  if (testMode === 'record') {
+    await fs.writeFile(resultFilePath, JSON.stringify(results));
+  } else {
+    const expectedResults = await fs.readFile(resultFilePath, { encoding: 'utf-8' });
+    expect(JSON.stringify(results)).toStrictEqual(expectedResults);
+  }
+}
