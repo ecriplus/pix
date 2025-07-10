@@ -4,7 +4,9 @@ import { ChatNotFoundError } from '../../domain/errors.js';
 import { Chat } from '../../domain/models/Chat.js';
 import * as configurationRepository from './configuration-repository.js';
 
-export const CHAT_STORAGE_PREFIX = 'llm-chats';
+export const OLD_CHAT_STORAGE_PREFIX = 'llm-chats';
+const oldChatsTemporaryStorage = temporaryStorage.withPrefix(OLD_CHAT_STORAGE_PREFIX);
+export const CHAT_STORAGE_PREFIX = 'llm-chats:';
 const chatsTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
 
 /**
@@ -34,7 +36,11 @@ export async function save(chat) {
  * @returns {Promise<Chat>}
  */
 export async function get(id) {
-  const chatDTO = await chatsTemporaryStorage.get(id);
+  let chatDTO = await chatsTemporaryStorage.get(id);
+  // backward compatibility, may be removed after some time
+  if (!chatDTO) {
+    chatDTO = await oldChatsTemporaryStorage.get(id);
+  }
   if (!chatDTO) {
     throw new ChatNotFoundError(id);
   }

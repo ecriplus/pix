@@ -1,10 +1,16 @@
 import { ChatNotFoundError } from '../../../../../src/llm/domain/errors.js';
 import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
-import { CHAT_STORAGE_PREFIX, get, save } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
+import {
+  CHAT_STORAGE_PREFIX,
+  get,
+  OLD_CHAT_STORAGE_PREFIX,
+  save,
+} from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import { catchErr, expect, nock } from '../../../../test-helper.js';
 
+const oldChatTemporaryStorage = temporaryStorage.withPrefix(OLD_CHAT_STORAGE_PREFIX);
 const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
 
 describe('LLM | Integration | Infrastructure | Repositories | chat', function () {
@@ -94,7 +100,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
     });
 
     context('success cases', function () {
-      it('should return the chat', async function () {
+      it('returns the chat', async function () {
         // given
         await chatTemporaryStorage.save({
           key: 'someChatId',
@@ -143,7 +149,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
       });
 
       context('when chat does not contain configuration', function () {
-        it('should load configuration and return chat with configuration', async function () {
+        it('loads configuration and returns chat with configuration', async function () {
           // given
           await chatTemporaryStorage.save({
             key: 'someChatId',
@@ -190,6 +196,123 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
             }),
           );
           expect(llmApiScope.isDone()).to.be.true;
+        });
+      });
+
+      context('when chat is in old temporary storage', function () {
+        it('returns the chat from old temporary storage', async function () {
+          // given
+          await oldChatTemporaryStorage.save({
+            key: 'someChatId',
+            value: {
+              id: 'someChatId',
+              userId: 123,
+              configuration: {
+                id: 'some-config-id',
+                historySize: 10,
+                inputMaxChars: 500,
+                inputMaxPrompts: 4,
+                attachmentName: 'test.csv',
+                attachmentContext: 'le contexte',
+              },
+              hasAttachmentContextBeenAdded: false,
+              messages: [
+                { content: 'je suis user', isFromUser: true, notCounted: false },
+                { content: 'je suis LLM', isFromUser: false, notCounted: false },
+              ],
+            },
+          });
+
+          // when
+          const actualChat = await get('someChatId');
+
+          // then
+          expect(actualChat).to.deepEqualInstance(
+            new Chat({
+              id: 'someChatId',
+              userId: 123,
+              configuration: new Configuration({
+                id: 'some-config-id',
+                historySize: 10,
+                inputMaxChars: 500,
+                inputMaxPrompts: 4,
+                attachmentName: 'test.csv',
+                attachmentContext: 'le contexte',
+              }),
+              hasAttachmentContextBeenAdded: false,
+              messages: [
+                new Message({ content: 'je suis user', isFromUser: true }),
+                new Message({ content: 'je suis LLM', isFromUser: false }),
+              ],
+            }),
+          );
+        });
+      });
+
+      context('when chat is both in old and new temporary storage', function () {
+        it('returns the chat from new temporary storage', async function () {
+          // given
+          await oldChatTemporaryStorage.save({
+            key: 'someChatId',
+            value: {
+              id: 'someChatId',
+              userId: 123,
+              configuration: {
+                id: 'some-config-id',
+                historySize: 10,
+                inputMaxChars: 500,
+                inputMaxPrompts: 4,
+                attachmentName: 'test.csv',
+                attachmentContext: 'le contexte',
+              },
+              hasAttachmentContextBeenAdded: false,
+              messages: [],
+            },
+          });
+          await chatTemporaryStorage.save({
+            key: 'someChatId',
+            value: {
+              id: 'someChatId',
+              userId: 123,
+              configuration: {
+                id: 'some-config-id',
+                historySize: 10,
+                inputMaxChars: 500,
+                inputMaxPrompts: 4,
+                attachmentName: 'test.csv',
+                attachmentContext: 'le contexte',
+              },
+              hasAttachmentContextBeenAdded: false,
+              messages: [
+                { content: 'je suis user', isFromUser: true, notCounted: false },
+                { content: 'je suis LLM', isFromUser: false, notCounted: false },
+              ],
+            },
+          });
+
+          // when
+          const actualChat = await get('someChatId');
+
+          // then
+          expect(actualChat).to.deepEqualInstance(
+            new Chat({
+              id: 'someChatId',
+              userId: 123,
+              configuration: new Configuration({
+                id: 'some-config-id',
+                historySize: 10,
+                inputMaxChars: 500,
+                inputMaxPrompts: 4,
+                attachmentName: 'test.csv',
+                attachmentContext: 'le contexte',
+              }),
+              hasAttachmentContextBeenAdded: false,
+              messages: [
+                new Message({ content: 'je suis user', isFromUser: true }),
+                new Message({ content: 'je suis LLM', isFromUser: false }),
+              ],
+            }),
+          );
         });
       });
     });
