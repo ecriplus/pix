@@ -2,156 +2,26 @@ import { Readable } from 'node:stream';
 
 import ms from 'ms';
 
-import { prompt, startChat } from '../../../../../src/llm/application/api/llm-api.js';
+import { prompt } from '../../../../../src/llm/application/api/llm-api.js';
 import {
   ChatForbiddenError,
   ChatNotFoundError,
-  ConfigurationNotFoundError,
   MaxPromptsReachedError,
   NoAttachmentNeededError,
   NoAttachmentNorMessageProvidedError,
-  NoUserIdProvidedError,
   TooLargeMessageInputError,
 } from '../../../../../src/llm/domain/errors.js';
 import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { CHAT_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
-import { catchErr, expect, nock, sinon } from '../../../../test-helper.js';
+import { catchErr, expect, nock } from '../../../../test-helper.js';
 
 const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
 
 describe('LLM | Integration | Application | API | llm', function () {
   afterEach(async function () {
     await chatTemporaryStorage.flushAll();
-  });
-
-  describe('#startChat', function () {
-    let generateId;
-
-    beforeEach(async function () {
-      generateId = sinon.stub().returns('123e4567-e89b-12d3-a456-426614174000');
-    });
-
-    context('when no config id provided', function () {
-      it('should throw a ConfigurationNotFoundError', async function () {
-        // when
-        const err = await catchErr(startChat)({ configId: null, userId: 12345 });
-
-        // then
-        expect(err).to.be.instanceOf(ConfigurationNotFoundError);
-        expect(err.message).to.equal('The configuration of id "null id provided" does not exist');
-      });
-    });
-
-    context('when no user id provided', function () {
-      it('should throw a NoUserIdProvidedError', async function () {
-        // when
-        const err = await catchErr(startChat)({ configId: 'someConfig', userId: null });
-
-        // then
-        expect(err).to.be.instanceOf(NoUserIdProvidedError);
-        expect(err.message).to.equal('Must provide a user ID to use LLM API');
-      });
-    });
-
-    context('when config id and user id provided', function () {
-      let configId, userId, llmApiScope, config;
-
-      context('when config has an attachment', function () {
-        beforeEach(function () {
-          configId = 'uneConfigQuiExist';
-          userId = 123456;
-          config = {
-            llm: {
-              historySize: 123,
-            },
-            challenge: {
-              inputMaxChars: 456,
-              inputMaxPrompts: 789,
-            },
-            attachment: {
-              name: 'file.txt',
-              context: '**coucou**',
-            },
-          };
-          llmApiScope = nock('https://llm-test.pix.fr/api').get('/configurations/uneConfigQuiExist').reply(200, config);
-        });
-
-        it('should return the newly created chat with attachment info, diminushing inputMaxPrompts by one', async function () {
-          // when
-          const chat = await startChat({ configId, userId }, { generateId });
-
-          // then
-          expect(chat).to.deep.equal({
-            id: '123e4567-e89b-12d3-a456-426614174000',
-            attachmentName: 'file.txt',
-            inputMaxChars: 456,
-            inputMaxPrompts: 788,
-          });
-          expect(llmApiScope.isDone()).to.be.true;
-          expect(await chatTemporaryStorage.get('123e4567-e89b-12d3-a456-426614174000')).to.deep.equal({
-            id: '123e4567-e89b-12d3-a456-426614174000',
-            userId: 123456,
-            configuration: {
-              id: 'uneConfigQuiExist',
-              historySize: 123,
-              inputMaxChars: 456,
-              inputMaxPrompts: 789,
-              attachmentName: 'file.txt',
-              attachmentContext: '**coucou**',
-            },
-            hasAttachmentContextBeenAdded: false,
-            messages: [],
-          });
-        });
-      });
-
-      context('when config has no attachment', function () {
-        beforeEach(function () {
-          configId = 'uneConfigQuiExist';
-          userId = 123456;
-          config = {
-            llm: {
-              historySize: 123,
-            },
-            challenge: {
-              inputMaxChars: 456,
-              inputMaxPrompts: 789,
-            },
-          };
-          llmApiScope = nock('https://llm-test.pix.fr/api').get('/configurations/uneConfigQuiExist').reply(200, config);
-        });
-
-        it('should return the newly created chat with attachment info', async function () {
-          // when
-          const chat = await startChat({ configId, userId }, { generateId });
-
-          // then
-          expect(chat).to.deep.equal({
-            id: '123e4567-e89b-12d3-a456-426614174000',
-            attachmentName: null,
-            inputMaxChars: 456,
-            inputMaxPrompts: 789,
-          });
-          expect(llmApiScope.isDone()).to.be.true;
-          expect(await chatTemporaryStorage.get('123e4567-e89b-12d3-a456-426614174000')).to.deep.equal({
-            id: '123e4567-e89b-12d3-a456-426614174000',
-            userId: 123456,
-            configuration: {
-              id: 'uneConfigQuiExist',
-              historySize: 123,
-              inputMaxChars: 456,
-              inputMaxPrompts: 789,
-              attachmentName: null,
-              attachmentContext: null,
-            },
-            hasAttachmentContextBeenAdded: false,
-            messages: [],
-          });
-        });
-      });
-    });
   });
 
   describe('#prompt', function () {

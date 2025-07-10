@@ -1,18 +1,14 @@
-import { randomUUID } from 'node:crypto';
-
 import {
   ChatForbiddenError,
   ChatNotFoundError,
-  ConfigurationNotFoundError,
   MaxPromptsReachedError,
   NoAttachmentNeededError,
   NoAttachmentNorMessageProvidedError,
   NoUserIdProvidedError,
   TooLargeMessageInputError,
 } from '../../domain/errors.js';
-import { Chat } from '../../domain/models/Chat.js';
+import { usecases } from '../../domain/usecases/index.js';
 import * as chatRepository from '../../infrastructure/repositories/chat-repository.js';
-import * as configurationRepository from '../../infrastructure/repositories/configuration-repository.js';
 import * as promptRepository from '../../infrastructure/repositories/prompt-repository.js';
 import * as toEventStream from '../../infrastructure/streaming/to-event-stream.js';
 import { LLMChatDTO } from './models/LLMChatDTO.js';
@@ -34,25 +30,13 @@ import { LLMChatDTO } from './models/LLMChatDTO.js';
  * @param {string} params.userId
  * @returns {Promise<LLMChatDTO>}
  */
-export async function startChat({ configId, userId }, { generateId = randomUUID } = {}) {
-  if (!configId) {
-    throw new ConfigurationNotFoundError('null id provided');
-  }
+export async function startChat({ configId, userId }) {
   if (!userId) {
     throw new NoUserIdProvidedError();
   }
-  const configuration = await configurationRepository.get(configId);
-  const chatId = generateId();
-  const newChat = new Chat({
-    id: chatId,
-    userId,
-    configuration: configuration,
-    hasAttachmentContextBeenAdded: false,
-    messages: [],
-  });
-  await chatRepository.save(newChat);
+  const { id, configuration } = await usecases.startChat({ configId, userId });
   return new LLMChatDTO({
-    id: newChat.id,
+    id,
     attachmentName: configuration.attachmentName,
     inputMaxChars: configuration.inputMaxChars,
     inputMaxPrompts: configuration.inputMaxPrompts,
