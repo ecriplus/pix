@@ -6,7 +6,6 @@ class PreviewAssessment {
     this.state = assessment.state;
     this.type = Assessment.types.PREVIEW;
     this.title = 'Preview';
-    this.answers = [];
     this.lastQuestionState = assessment.lastQuestionState;
     this.method = Assessment.methods.CHOSEN;
     this.hasOngoingChallengeLiveAlert = false;

@@ -8,7 +8,6 @@ class CertificationAssessment {
     this.certificationCourseId = assessment.certificationCourseId;
     this.state = assessment.state;
     this.type = Assessment.types.CERTIFICATION;
-    this.answers = [];
     this.lastQuestionState = assessment.lastQuestionState;
     this.method = Assessment.methods.CERTIFICATION_DETERMINED;
     this.challengeLiveAlerts = assessment.challengeLiveAlerts;

@@ -7,7 +7,6 @@ class CampaignAssessment {
     this.state = assessment.state;
     this.title = assessment.campaign?.title ?? '';
     this.type = Assessment.types.CAMPAIGN;
-    this.answers = [];
     this.lastQuestionState = assessment.lastQuestionState;
     this.method = Assessment.methods.SMART_RANDOM;
     this.hasOngoingChallengeLiveAlert = false;

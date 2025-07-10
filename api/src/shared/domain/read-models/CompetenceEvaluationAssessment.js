@@ -6,7 +6,6 @@ class CompetenceEvaluationAssessment {
     this.state = assessment.state;
     this.type = Assessment.types.COMPETENCE_EVALUATION;
     this.title = assessment.title;
-    this.answers = [];
     this.lastQuestionState = assessment.lastQuestionState;
     this.method = Assessment.methods.SMART_RANDOM;
     this.hasOngoingChallengeLiveAlert = false;
