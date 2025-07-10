@@ -6,7 +6,7 @@ export default class AnalysisRoute extends Route {
   @service router;
 
   beforeModel(transition) {
-    const campaignId = transition.to.params.campaign_id;
+    const campaignId = transition.to.parent.params.campaign_id;
     const places = this.modelFor('authenticated');
 
     if (places?.hasReachMaximumPlacesWithThreshold) {
