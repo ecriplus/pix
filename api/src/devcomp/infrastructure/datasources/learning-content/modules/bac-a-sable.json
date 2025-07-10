@@ -14,7 +14,7 @@
   "grains": [
     {
       "id": "f1738f85-e272-43d3-aee2-f4190be54c34",
-      "type": "lesson",
+      "type": "summary",
       "title": "test table",
       "components": [
         {

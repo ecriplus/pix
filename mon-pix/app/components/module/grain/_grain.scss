@@ -88,8 +88,8 @@ $grain-card-border-radius: var(--pix-spacing-4x);
   }
 }
 
-.grain-card-title {
-  @extend %pix-title-s;
+.grain-card-icon {
+  @extend %pix-title-m;
 
   margin-bottom: var(--pix-spacing-4x);
 }
