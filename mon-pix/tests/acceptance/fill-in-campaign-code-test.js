@@ -40,7 +40,7 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
     module('when code is linked to a combined course', function () {
       test('it redirects to combined course page', async function (assert) {
         // given
-        const verifiedCode = server.create('verified-code', { id: 'something', type: 'combined-course' });
+        const verifiedCode = server.create('verified-code', { id: 'SOMETHING', type: 'combined-course' });
         server.create('organization-to-join', { id: 1, code: verifiedCode.id, identityProvider: null });
 
         // when

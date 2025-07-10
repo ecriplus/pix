@@ -14,6 +14,7 @@ module('Acceptance | CombinedCourse', function (hooks) {
   let screen, user;
 
   async function _loginUser(screen, user) {
+    await click(screen.getByRole('link', { name: 'Se connecter' }));
     await fillIn(screen.getByLabelText('Adresse e-mail ou identifiant', { exact: false }), user.email);
     await fillIn(screen.getByLabelText('Mot de passe', { exact: false }), user.password);
     await click(screen.getByRole('button', { name: 'Je me connecte' }));
@@ -24,11 +25,10 @@ module('Acceptance | CombinedCourse', function (hooks) {
       test('should redirect to login page before accessing combined course page', async function (assert) {
         //given
         user = server.create('user', 'withEmail', { hasSeenAssessmentInstructions: false });
-        server.create('verified-code', { id: 'combinix1', type: 'combined-course' });
+        server.create('verified-code', { id: 'COMBINIX1', type: 'combined-course' });
         // when
         await unabortedVisit('/parcours/COMBINIX1');
         screen = getScreen();
-
         await _loginUser(screen, user);
 
         assert.strictEqual(currentURL(), '/parcours/COMBINIX1');
