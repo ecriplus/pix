@@ -180,14 +180,14 @@ export default class LoginOrRegisterOidcComponent extends Component {
       result.push(`${this.intl.t(`pages.login-or-register-oidc.register-form.claims.firstName`)} ${firstName}`);
       result.push(`${this.intl.t(`pages.login-or-register-oidc.register-form.claims.lastName`)} ${lastName}`);
 
-      Object.entries(rest).map(([key, value]) => {
+      Object.entries(rest).map(([key, _value]) => {
         let label = `${this.intl.t(`pages.login-or-register-oidc.register-form.claims.${key}`)}`;
 
         if (label.includes('Missing translation')) {
-          label = `${key} :`;
+          label = key;
         }
 
-        return result.push(`${label} ${value}`);
+        return result.push(label);
       });
     }
 

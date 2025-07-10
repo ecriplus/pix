@@ -70,12 +70,8 @@ module('Integration | Component | authentication | login-or-register-oidc', func
         );
         assert.ok(screen.getByRole('button', { name: t('pages.login-or-register-oidc.register-form.button') }));
         assert.ok(screen.getByText('Partenaire OIDC'));
-        assert.ok(
-          screen.getByText(`${t('pages.login-or-register-oidc.register-form.claims.firstName')} Mélusine`),
-        );
-        assert.ok(
-          screen.getByText(`${t('pages.login-or-register-oidc.register-form.claims.lastName')} TITEGOUTTE`),
-        );
+        assert.ok(screen.getByText(`${t('pages.login-or-register-oidc.register-form.claims.firstName')} Mélusine`));
+        assert.ok(screen.getByText(`${t('pages.login-or-register-oidc.register-form.claims.lastName')} TITEGOUTTE`));
         assert.ok(screen.getByRole('checkbox', { name: t('common.cgu.label') }));
         assert.ok(screen.getByRole('link', { name: t('common.cgu.cgu') }));
         assert.ok(screen.getByRole('link', { name: t('common.cgu.data-protection-policy') }));
