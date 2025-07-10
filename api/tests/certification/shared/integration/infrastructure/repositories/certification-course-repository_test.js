@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import _ from 'lodash';
 
 import { CertificationCourse } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
@@ -530,6 +531,55 @@ describe('Integration | Repository | Certification Course', function () {
 
       // then
       expect(result).to.be.empty;
+    });
+  });
+
+  describe('#findAllByUserId', function () {
+    context('when user has no certification', function () {
+      it('should return empty array when no certification course found', async function () {
+        // given
+        const { id: userId } = databaseBuilder.factory.buildUser();
+
+        databaseBuilder.factory.buildCertificationCourse();
+        await databaseBuilder.commit();
+
+        // when
+        const result = await certificationCourseRepository.findAllByUserId({ userId });
+
+        // then
+        expect(result).to.be.empty;
+      });
+    });
+
+    context('when user has at least one certification', function () {
+      it('should return an array of user certification-courses', async function () {
+        // given
+        const { id: userId } = databaseBuilder.factory.buildUser();
+
+        databaseBuilder.factory.buildCertificationCourse({
+          id: 1,
+          userId,
+          createdAt: dayjs().subtract(1, 'months').toDate(),
+        });
+        databaseBuilder.factory.buildCertificationCourse({ id: 2, userId, createdAt: new Date() });
+        databaseBuilder.factory.buildCertificationCourse();
+
+        await databaseBuilder.commit();
+
+        // when
+        const result = await certificationCourseRepository.findAllByUserId({ userId });
+
+        // then
+        expect(result).to.have.lengthOf(2);
+
+        expect(result[0]).to.be.instanceOf(CertificationCourse);
+        expect(result[0]._id).to.equal(2);
+        expect(result[0]._userId).to.equal(userId);
+
+        expect(result[1]).to.be.instanceOf(CertificationCourse);
+        expect(result[1]._id).to.equal(1);
+        expect(result[1]._userId).to.equal(userId);
+      });
     });
   });
 });
