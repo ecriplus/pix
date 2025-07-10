@@ -1612,14 +1612,14 @@
           "FrEduNumenHash": "Technical identifier",
           "discipline": "School subject",
           "employeeNumber": "Employee number",
-          "firstName": "First name:",
-          "lastName": "Last name:",
           "population": "Population",
           "rne": "Establishment of assignment",
           "title": "Title"
         },
         "description": "An account will be created based on the information sent by the organisation",
         "error": "We were unable to retrieve your identity information from the service used. We invite you to contact this organisation's IT support.",
+        "first-name-label-and-value": "First name: {firstName}",
+        "last-name-label-and-value": "Last name: {lastName}",
         "title": "Sign up"
       },
       "title": "Create your Account"

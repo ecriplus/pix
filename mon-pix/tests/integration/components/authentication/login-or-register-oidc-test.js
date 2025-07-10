@@ -70,8 +70,16 @@ module('Integration | Component | authentication | login-or-register-oidc', func
         );
         assert.ok(screen.getByRole('button', { name: t('pages.login-or-register-oidc.register-form.button') }));
         assert.ok(screen.getByText('Partenaire OIDC'));
-        assert.ok(screen.getByText(`${t('pages.login-or-register-oidc.register-form.claims.firstName')} Mélusine`));
-        assert.ok(screen.getByText(`${t('pages.login-or-register-oidc.register-form.claims.lastName')} TITEGOUTTE`));
+        assert.ok(
+          screen.getByText(
+            t('pages.login-or-register-oidc.register-form.first-name-label-and-value', { firstName: 'Mélusine' }),
+          ),
+        );
+        assert.ok(
+          screen.getByText(
+            t('pages.login-or-register-oidc.register-form.last-name-label-and-value', { lastName: 'TITEGOUTTE' }),
+          ),
+        );
         assert.ok(screen.getByRole('checkbox', { name: t('common.cgu.label') }));
         assert.ok(screen.getByRole('link', { name: t('common.cgu.cgu') }));
         assert.ok(screen.getByRole('link', { name: t('common.cgu.data-protection-policy') }));
@@ -96,10 +104,14 @@ module('Integration | Component | authentication | login-or-register-oidc', func
         assert.notOk(screen.queryByRole('button', { name: t('pages.login-or-register-oidc.register-form.button') }));
         assert.notOk(screen.queryByText('Partenaire OIDC'));
         assert.notOk(
-          screen.queryByText(`${t('pages.login-or-register-oidc.register-form.claims.firstName')} Mélusine`),
+          screen.queryByText(t('pages.login-or-register-oidc.register-form.first-name-label-and-value'), {
+            firstName: 'Mélusine',
+          }),
         );
         assert.notOk(
-          screen.queryByText(`${t('pages.login-or-register-oidc.register-form.claims.lastName')} TITEGOUTTE`),
+          screen.queryByText(t('pages.login-or-register-oidc.register-form.last-name-label-and-value'), {
+            lastName: 'TITEGOUTTE',
+          }),
         );
         assert.notOk(screen.queryByRole('checkbox', { name: t('common.cgu.label') }));
         assert.notOk(screen.queryByRole('link', { name: t('common.cgu.cgu') }));
@@ -126,8 +138,20 @@ module('Integration | Component | authentication | login-or-register-oidc', func
       assert.ok(screen.getByRole('textbox', { name: t('pages.login-or-register-oidc.login-form.email') }));
       assert.ok(screen.getByRole('link', { name: t('pages.sign-in.forgotten-password') }));
       assert.ok(screen.getByRole('button', { name: t('pages.login-or-register-oidc.login-form.button') }));
-      assert.ok(screen.getByText(`${t('pages.login-or-register-oidc.register-form.claims.firstName')} Mélusine`));
-      assert.ok(screen.getByText(`${t('pages.login-or-register-oidc.register-form.claims.lastName')} TITEGOUTTE`));
+      assert.ok(
+        screen.getByText(
+          t('pages.login-or-register-oidc.register-form.first-name-label-and-value', {
+            firstName: 'Mélusine',
+          }),
+        ),
+      );
+      assert.ok(
+        screen.getByText(
+          t('pages.login-or-register-oidc.register-form.last-name-label-and-value', {
+            lastName: 'TITEGOUTTE',
+          }),
+        ),
+      );
     });
   });
 });

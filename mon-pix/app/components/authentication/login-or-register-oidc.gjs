@@ -177,8 +177,8 @@ export default class LoginOrRegisterOidcComponent extends Component {
 
     if (userClaims) {
       const { firstName, lastName, ...rest } = userClaims;
-      result.push(`${this.intl.t(`pages.login-or-register-oidc.register-form.claims.firstName`)} ${firstName}`);
-      result.push(`${this.intl.t(`pages.login-or-register-oidc.register-form.claims.lastName`)} ${lastName}`);
+      result.push(this.intl.t('pages.login-or-register-oidc.register-form.first-name-label-and-value', { firstName }));
+      result.push(this.intl.t('pages.login-or-register-oidc.register-form.last-name-label-and-value', { lastName }));
 
       Object.entries(rest).map(([key, _value]) => {
         let label = `${this.intl.t(`pages.login-or-register-oidc.register-form.claims.${key}`)}`;

@@ -1527,10 +1527,8 @@
         "button": "Ik maak mijn account aan",
         "description": "Er wordt een account aangemaakt met de informatie die door de organisatie is verstrekt",
         "error": "We were unable to retrieve your identity information from the service used. We invite you to contact this organisation's IT support.",
-        "claims": {
-          "family-name": "Naam: {familyName}",
-          "given-name": "Voornaam : {givenName}"
-        },
+        "last-name-label-and-value": "Naam: {lastName}",
+        "first-name-label-and-value": "Voornaam: {firstName}",
         "title": "Ik heb geen Pix-account"
       },
       "title": "Maak je Pix-account aan"
