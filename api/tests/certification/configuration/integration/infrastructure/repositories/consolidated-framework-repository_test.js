@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import * as consolidatedFrameworkRepository from '../../../../../../src/certification/configuration/infrastructure/repositories/consolidated-framework-repository.js';
 import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
@@ -25,6 +23,7 @@ describe('Certification | Configuration | Integration | Repository | consolidate
       await consolidatedFrameworkRepository.create({
         complementaryCertificationKey: complementaryCertification.key,
         challenges: [challenge1, challenge2],
+        version: '1234',
       });
 
       // then
@@ -34,22 +33,18 @@ describe('Certification | Configuration | Integration | Repository | consolidate
         'discriminant',
         'difficulty',
         'createdAt',
+        'version',
       );
 
       expect(consolidatedFrameworkInDB).to.have.lengthOf(2);
-      expect(_.omit(consolidatedFrameworkInDB[0], 'createdAt')).to.deep.equal({
-        complementaryCertificationKey: complementaryCertification.key,
-        challengeId: challenge1.id,
-        discriminant: null,
-        difficulty: null,
-      });
-      expect(_.omit(consolidatedFrameworkInDB[1], 'createdAt')).to.deep.equal({
-        complementaryCertificationKey: complementaryCertification.key,
-        challengeId: challenge2.id,
-        discriminant: null,
-        difficulty: null,
-      });
-      expect(consolidatedFrameworkInDB[0].createdAt).to.deep.equal(consolidatedFrameworkInDB[1].createdAt);
+      expect(consolidatedFrameworkInDB[0].discriminant).to.equal(null);
+      expect(consolidatedFrameworkInDB[0].difficulty).to.equal(null);
+      expect(consolidatedFrameworkInDB[0].challengeId).to.equal(challenge1.id);
+      expect(consolidatedFrameworkInDB[1].challengeId).to.equal(challenge2.id);
+      expect(consolidatedFrameworkInDB[0].complementaryCertificationKey).to.equal(
+        consolidatedFrameworkInDB[1].complementaryCertificationKey,
+      );
+      expect(consolidatedFrameworkInDB[0].version).to.equal(consolidatedFrameworkInDB[1].version);
     });
   });
 

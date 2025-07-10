@@ -32,5 +32,23 @@ export const createConsolidatedFramework = async ({
 
   const challenges = await challengeRepository.findOperativeBySkills(skills, LOCALE.FRENCH_SPOKEN);
 
-  return consolidatedFrameworkRepository.create({ complementaryCertificationKey, challenges });
+  return consolidatedFrameworkRepository.create({
+    complementaryCertificationKey,
+    challenges,
+    version: getVersionNumber(),
+  });
 };
+
+function getVersionNumber() {
+  const date = new Date();
+
+  const pad = (n) => String(n).padStart(2, '0');
+  return (
+    date.getUTCFullYear().toString() +
+    pad(date.getUTCMonth() + 1) +
+    pad(date.getUTCDate()) +
+    pad(date.getUTCHours()) +
+    pad(date.getUTCMinutes()) +
+    pad(date.getSeconds())
+  );
+}

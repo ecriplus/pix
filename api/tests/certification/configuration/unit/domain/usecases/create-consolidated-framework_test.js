@@ -42,6 +42,8 @@ describe('Certification | Configuration | Unit | UseCase | create-consolidated-f
     skillRepository.findActiveByRecordIds.resolves([...tube1.skills, ...tube2.skills]);
     challengeRepository.findOperativeBySkills.resolves(challenges);
     consolidatedFrameworkRepository.create.resolves();
+    sinon.useFakeTimers({ now: new Date('2019-01-01T05:06:07Z'), toFake: ['Date'] });
+    const version = '20190101050607';
 
     // when
     await createConsolidatedFramework({
@@ -66,6 +68,7 @@ describe('Certification | Configuration | Unit | UseCase | create-consolidated-f
     expect(consolidatedFrameworkRepository.create).to.have.been.calledOnceWithExactly({
       complementaryCertificationKey,
       challenges,
+      version,
     });
   });
 });
