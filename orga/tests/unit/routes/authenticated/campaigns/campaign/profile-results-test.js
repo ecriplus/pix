@@ -113,7 +113,15 @@ module('Unit | Route | authenticated/campaigns/campaign/profile-results', functi
         modelForStub.withArgs('authenticated').returns({ hasReachMaximumPlacesWithThreshold: true });
 
         //when
-        route.beforeModel({ to: { params: { campaign_id: campaignId } } });
+        route.beforeModel({
+          to: {
+            parent: {
+              params: {
+                campaign_id: campaignId,
+              },
+            },
+          },
+        });
 
         //then
         assert.ok(replaceWithStub.calledWithExactly('authenticated.campaigns.campaign', campaignId));
@@ -131,7 +139,15 @@ module('Unit | Route | authenticated/campaigns/campaign/profile-results', functi
         modelForStub.withArgs('authenticated').returns({ hasReachMaximumPlacesWithThreshold: false });
 
         //when
-        route.beforeModel({ to: { params: { campaign_id: campaignId } } });
+        route.beforeModel({
+          to: {
+            parent: {
+              params: {
+                campaign_id: campaignId,
+              },
+            },
+          },
+        });
 
         //then
         assert.notOk(replaceWithStub.called);

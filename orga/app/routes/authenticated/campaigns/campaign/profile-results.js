@@ -36,7 +36,7 @@ export default class ProfilesRoute extends Route {
   }
 
   beforeModel(transition) {
-    const campaignId = transition.to.params.campaign_id;
+    const campaignId = transition.to.parent.params.campaign_id;
     const places = this.modelFor('authenticated');
 
     if (places?.hasReachMaximumPlacesWithThreshold) {
