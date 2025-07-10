@@ -1,58 +1,49 @@
 import path from 'node:path';
 
-import { BrowserContext } from '@playwright/test';
+import { BrowserContext, Page } from '@playwright/test';
 import * as fs from 'fs/promises';
 
-import { buildAuthenticatedUsers, databaseBuilder } from '../../helpers/db.js';
+import { knex } from '../../helpers/db.js';
 import { expect, test } from '../../helpers/fixtures.ts';
 import { rightWrongAnswerCycle } from '../../helpers/utils.ts';
-import { CertificationStartPage, ChallengePage, IntermediateCheckpointPage } from '../../pages/pix-app/index.ts';
+import {
+  CertificationStartPage,
+  ChallengePage,
+  IntermediateCheckpointPage,
+  LoginPage,
+} from '../../pages/pix-app/index.ts';
 import { SessionCreationPage, SessionManagementPage } from '../../pages/pix-certif/index.ts';
 
-const RESULT_DIR = path.resolve(import.meta.dirname, './data');
+const RESULT_DIR = path.resolve(import.meta.dirname, '../../snapshots');
 let COMPETENCE_TITLES: string[];
 test.beforeEach(async () => {
-  await buildAuthenticatedUsers({ withCguAccepted: true });
-  const competenceDTOs = await databaseBuilder
-    .knex('learningcontent.competences')
+  const competenceDTOs = await knex('learningcontent.competences')
     .jsonExtract('name_i18n', '$.fr', 'competenceTitle')
     .where('origin', 'Pix')
     .orderBy('index');
   COMPETENCE_TITLES = competenceDTOs.map(({ competenceTitle }: { competenceTitle: string }) => competenceTitle);
-  databaseBuilder.factory.buildCertificationCpfCountry({
-    commonName: 'FRANCE',
-    originalName: 'FRANCE',
-    code: '99100',
-    matcher: 'ACEFNR',
-  });
-  databaseBuilder.factory.buildCertificationCpfCity({
-    name: 'PERPIGNAN',
-    postalCode: '66000',
-    INSEECode: '66136',
-    isActualName: true,
-  });
-  databaseBuilder.factory.buildComplementaryCertification.clea({});
-  databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-    maximumAssessmentLength: 32,
-    challengesBetweenSameCompetence: null,
-    limitToOneQuestionPerTube: true,
-    enablePassageByAllCompetences: true,
-    variationPercent: 0.5,
-    createdAt: new Date('1977-10-19'),
-  });
-  await databaseBuilder.commit();
 });
 
-test('user takes a certification test', async ({
-  pixAppUserContext,
+test('[@snapshot] user takes a certification test', async ({
+  page: pixAppPage,
   pixCertifProContext,
   testMode,
+  globalTestId,
 }: {
-  pixAppUserContext: BrowserContext;
+  page: Page;
   pixCertifProContext: BrowserContext;
   testMode: string;
-}) => {
+  globalTestId: string;
+}, testInfo) => {
+  testInfo.annotations.push({
+    type: 'tag',
+    description: `@snapshot - this test runs against a reference snapshot. Snapshot can be generated with TEST_MODE=record env.
+         Reasons why a snapshot can be re-generated :
+         - Reference Release has changed
+         - Next challenge algorithm for certification V3 has changed`,
+  });
   test.setTimeout(60_000);
+
   let results;
   const resultFilePath = path.join(RESULT_DIR, 'certification.json');
   if (testMode === 'record') {
@@ -92,9 +83,10 @@ test('user takes a certification test', async ({
     });
   });
 
-  const pixAppPage = await pixAppUserContext.newPage();
+  await pixAppPage.goto(process.env.PIX_APP_URL as string);
+  const loginPage = new LoginPage(pixAppPage);
+  await loginPage.signup('Buffy', 'Summers', `buffy.summers.${globalTestId}@example.net`, 'Coucoulesdevs66');
   await test.step('make candidate certifiable', async () => {
-    await pixAppPage.goto(process.env.PIX_APP_URL as string);
     for (const competenceTitle of [
       COMPETENCE_TITLES[14],
       COMPETENCE_TITLES[3],
@@ -102,7 +94,7 @@ test('user takes a certification test', async ({
       COMPETENCE_TITLES[1],
       COMPETENCE_TITLES[10],
     ]) {
-      await pixAppPage.getByRole('link', { name: 'Toutes les compétences' }).click();
+      await pixAppPage.getByRole('link', { name: 'Compétences', exact: true }).click();
       await test.step(`"${competenceTitle}" reaching level 1`, async () => {
         await pixAppPage.getByRole('link', { name: competenceTitle }).first().click();
         await pixAppPage.getByRole('link', { name: 'Commencer' }).click();

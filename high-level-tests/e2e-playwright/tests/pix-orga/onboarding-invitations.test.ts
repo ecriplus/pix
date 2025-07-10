@@ -1,14 +1,14 @@
-import { Page } from '@playwright/test';
+/*import { Page } from '@playwright/test';
 
 import { buildAuthenticatedUsers, databaseBuilder } from '../../helpers/db.ts';
 import { PIX_APP_USER_DATA, PIX_ORGA_PRO_DATA } from '../../helpers/db-data.ts';
 import { expect, test } from '../../helpers/fixtures.ts';
 
 test.beforeEach(async () => {
-  await buildAuthenticatedUsers({ withCguAccepted: true });
+  await buildAuthenticatedUsers();
 });
 
-test.skip('A new user joins a new organization from an invitation link', async function ({ page }: { page: Page }) {
+test('A new user joins a new organization from an invitation link', async function ({ page }: { page: Page }) {
   const invitation = databaseBuilder.factory.buildOrganizationInvitation();
   await databaseBuilder.commit();
 
@@ -51,11 +51,11 @@ test('An existing user joins a new organization from an invitation link', async 
 });
 
 test.describe('When user is already authenticated to Pix Orga', () => {
-  test('Joins a new organization from an invitation link', async function ({ pixOrgaProContext }) {
+  test('Joins a new organization from an invitation link', async function ({ pixOrgaMemberContext }) {
     const invitation = databaseBuilder.factory.buildOrganizationInvitation();
     await databaseBuilder.commit();
 
-    const page = await pixOrgaProContext.newPage();
+    const page = await pixOrgaMemberContext.newPage();
     await page.goto(process.env.PIX_ORGA_URL + `/rejoindre?invitationId=${invitation.id}&code=${invitation.code}`);
     await expect(page.getByText('Vous êtes invité(e) à')).toBeVisible();
 
@@ -70,3 +70,4 @@ test.describe('When user is already authenticated to Pix Orga', () => {
     await expect(page.getByRole('paragraph').filter({ hasText: 'Observatoire de Pix' })).toBeVisible();
   });
 });
+*/

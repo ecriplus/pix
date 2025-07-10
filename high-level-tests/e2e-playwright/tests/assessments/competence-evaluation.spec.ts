@@ -1,9 +1,9 @@
 import path from 'node:path';
 
-import { BrowserContext } from '@playwright/test';
+import { Page } from '@playwright/test';
 import * as fs from 'fs/promises';
 
-import { buildAuthenticatedUsers, databaseBuilder } from '../../helpers/db.js';
+import { knex, setAssessmentIdSequence } from '../../helpers/db.js';
 import { expect, test } from '../../helpers/fixtures.ts';
 import { rightWrongAnswerCycle } from '../../helpers/utils.ts';
 import {
@@ -11,29 +11,47 @@ import {
   CompetenceResultPage,
   FinalCheckpointPage,
   IntermediateCheckpointPage,
+  LoginPage,
 } from '../../pages/pix-app/index.ts';
 
-const RESULT_DIR = path.resolve(import.meta.dirname, './data');
+const RESULT_DIR = path.resolve(import.meta.dirname, '../../snapshots');
 let COMPETENCE_TITLES: string[];
 test.beforeEach(async () => {
-  await buildAuthenticatedUsers({ withCguAccepted: true });
-  const competenceDTOs = await databaseBuilder
-    .knex('learningcontent.competences')
+  const competenceDTOs = await knex('learningcontent.competences')
     .jsonExtract('name_i18n', '$.fr', 'competenceTitle')
     .where('origin', 'Pix')
     .orderBy('index');
   COMPETENCE_TITLES = competenceDTOs.map(({ competenceTitle }: { competenceTitle: string }) => competenceTitle);
+  // Reset assessment id sequence for smart random to be predictable
+  await setAssessmentIdSequence(3000);
 });
 
-test('user assessing on 5 Pix Competences', async ({
-  pixAppUserContext,
+test('[@snapshot][@runSerially] user assessing on 5 Pix Competences', async ({
+  page,
   testMode,
+  globalTestId,
 }: {
-  pixAppUserContext: BrowserContext;
+  page: Page;
   testMode: string;
-}) => {
+  globalTestId: string;
+}, testInfo) => {
+  testInfo.annotations.push(
+    {
+      type: 'tag',
+      description: `@snapshot - this test runs against a reference snapshot. Snapshot can be generated with TEST_MODE=record env.
+         Reasons why a snapshot can be re-generated :
+         - AssessmentIdSequence has changed
+         - Reference Release has changed
+         - Next challenge algorithm for competence evaluation has changed`,
+    },
+    {
+      type: 'tag',
+      description:
+        '@runSerially - must run serially because this test fixes the assessment ID sequence to make sure to play on specific assessment ID',
+    },
+  );
   test.setTimeout(120_000);
-  const page = await pixAppUserContext.newPage();
+
   let results;
   const resultFilePath = path.join(RESULT_DIR, 'competence-evaluation.json');
   if (testMode === 'record') {
@@ -49,7 +67,9 @@ test('user assessing on 5 Pix Competences', async ({
 
   const rightWrongAnswerCycleIter = rightWrongAnswerCycle({ numRight: 1, numWrong: 2 });
   await page.goto(process.env.PIX_APP_URL as string);
-  await page.getByRole('link', { name: 'Toutes les compétences' }).click();
+  const loginPage = new LoginPage(page);
+  await loginPage.signup('Buffy', 'Summers', `buffy.summers.${globalTestId}@example.net`, 'Coucoulesdevs66');
+  await page.getByRole('link', { name: 'Compétences', exact: true }).click();
   let globalChallengeIndex = 0;
   let competenceIndex = 0;
   for (const competenceTitle of [

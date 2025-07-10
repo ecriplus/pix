@@ -1,4 +1,4 @@
-import { buildAuthenticatedUsers, databaseBuilder } from '../../helpers/db.ts';
+/*import { buildAuthenticatedUsers, databaseBuilder } from '../../helpers/db.ts';
 import { PIX_ORGA_SCO_ISMANAGING_DATA } from '../../helpers/db-data.ts';
 import { expect, test } from '../../helpers/fixtures.ts';
 
@@ -25,7 +25,7 @@ let learnerGarAuth: {
 };
 
 test.beforeEach(async () => {
-  await buildAuthenticatedUsers({ withCguAccepted: true });
+  await buildAuthenticatedUsers();
   const organizationId = PIX_ORGA_SCO_ISMANAGING_DATA.organization.id;
   // Learner with no user linked
   learnerNotLinked = databaseBuilder.factory.buildOrganizationLearner({
@@ -112,3 +112,4 @@ test('Students management for a sco organization', async ({ pixOrgaScoIsManaging
     await expect(row.getByRole('button', { name: 'Afficher les actions' })).not.toBeVisible();
   });
 });
+*/

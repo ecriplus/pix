@@ -1,72 +1,62 @@
-function* incrementId(start: number) {
-  let current = start;
-  while (true) {
-    yield current;
-    current += 1;
-  }
-}
-
-export const iterDBId = incrementId(200_000);
-
 export const PIX_APP_USER_DATA = {
-  id: iterDBId.next().value as number,
+  id: 1_000_001,
   firstName: 'PixApp',
   lastName: 'User',
   email: 'pix-app_user@example.net',
   rawPassword: 'pix123',
 };
 
-export const PIX_ORGA_PRO_DATA = {
-  id: iterDBId.next().value as number,
-  firstName: 'PixOrga',
-  lastName: 'ProPrescripteur',
-  email: 'pix-orga_pro-prescripteur@example.net',
+export const PIX_ORGA_ADMIN_DATA = {
+  id: 1_000_002,
+  firstName: 'Adi',
+  lastName: 'Minh',
+  email: 'admin-orga@example.net',
   rawPassword: 'pix123',
-  organization: {
-    id: iterDBId.next().value as number,
-    type: 'PRO',
-    isManagingStudents: false,
-    externalId: 'ORGAPRO',
-  },
+  role: 'ADMIN',
+  organizations: [
+    {
+      type: 'PRO',
+      isManagingStudents: false,
+      externalId: 'PRO',
+    },
+    { type: 'SCO', isManagingStudents: true, identityProviderForCampaigns: 'GAR', externalId: 'SCO_MANAGING' },
+    {
+      type: 'SUP',
+      isManagingStudents: true,
+      externalId: 'SUP_MANAGING',
+    },
+  ],
 };
 
-export const PIX_ORGA_SCO_ISMANAGING_DATA = {
-  id: iterDBId.next().value as number,
-  firstName: 'PixOrga',
-  lastName: 'ScoIsManagingPrescripteur',
-  email: 'pix-orga_sco-is-managing-prescripteur@example.net',
+export const PIX_ORGA_MEMBER_DATA = {
+  id: 1_000_003,
+  firstName: 'Justin',
+  lastName: 'Memberr',
+  email: 'pix-orga_member@example.net',
+  role: 'MEMBER',
   rawPassword: 'pix123',
-  organization: {
-    id: iterDBId.next().value as number,
-    type: 'SCO',
-    isManagingStudents: true,
-    identityProviderForCampaigns: 'GAR',
-    externalId: 'ORGASCOISMANAGING',
-  },
-};
-
-export const PIX_ORGA_SUP_ISMANAGING_DATA = {
-  id: iterDBId.next().value as number,
-  firstName: 'PixOrga',
-  lastName: 'SupIsManagingPrescripteur',
-  email: 'pix-orga_sup-is-managing-prescripteur@example.net',
-  rawPassword: 'pix123',
-  organization: {
-    id: iterDBId.next().value as number,
-    type: 'SUP',
-    isManagingStudents: true,
-    externalId: 'ORGASUPISMANAGING',
-  },
+  organizations: [
+    {
+      type: 'PRO',
+      isManagingStudents: false,
+      externalId: 'PRO',
+    },
+    { type: 'SCO', isManagingStudents: true, identityProviderForCampaigns: 'GAR', externalId: 'SCO_MANAGING' },
+    {
+      type: 'SUP',
+      isManagingStudents: true,
+      externalId: 'SUP_MANAGING',
+    },
+  ],
 };
 
 export const PIX_CERTIF_PRO_DATA = {
-  id: iterDBId.next().value as number,
+  id: 1_000_005,
   firstName: 'PixOrga',
   lastName: 'SupIsManagingPrescripteur',
   email: 'pix-certif_pro@example.net',
   rawPassword: 'pix123',
   certificationCenter: {
-    id: iterDBId.next().value as number,
     type: 'PRO',
     externalId: 'CERTIFPRO',
   },

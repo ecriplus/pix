@@ -2,7 +2,7 @@ import path from 'node:path';
 
 import * as fs from 'fs/promises';
 
-import { databaseBuilder } from '../../helpers/db.ts';
+import { knex } from '../../helpers/db.ts';
 import { expect, test } from '../../helpers/fixtures.ts';
 import { rightWrongAnswerCycle } from '../../helpers/utils.ts';
 import { ChallengePage } from '../../pages/pix-app/index.ts';
@@ -10,16 +10,11 @@ import { ChallengePage } from '../../pages/pix-app/index.ts';
 let NB_CHALLENGES_IN_DEMO_COURSE: number;
 let DEMO_COURSE_ID: string | null = null;
 
-const RESULT_DIR = path.resolve(import.meta.dirname, './data');
+const RESULT_DIR = path.resolve(import.meta.dirname, '../../snapshots');
 test.beforeEach(async () => {
-  const courseDTOs = await databaseBuilder
-    .knex('learningcontent.courses')
-    .select('*')
-    .where({ isActive: true })
-    .orderBy('id', 'asc');
+  const courseDTOs = await knex('learningcontent.courses').select('*').where({ isActive: true }).orderBy('id', 'asc');
   for (const courseDTO of courseDTOs) {
-    const challengeDTOs = await databaseBuilder
-      .knex('learningcontent.challenges')
+    const challengeDTOs = await knex('learningcontent.challenges')
       .select('*')
       .whereIn('id', courseDTO.challenges)
       .where(
@@ -42,8 +37,16 @@ test.beforeEach(async () => {
   }
 });
 
-test('user assesses on course demo', async ({ page, testMode }) => {
+test('[@snapshot] user assesses on course demo', async ({ page, testMode }, testInfo) => {
+  testInfo.annotations.push({
+    type: 'tag',
+    description: `@snapshot - this test runs against a reference snapshot. Snapshot can be generated with TEST_MODE=record env.
+         Reasons why a snapshot can be re-generated :
+         - Reference Release has changed
+         - Next challenge algorithm for demo has changed`,
+  });
   test.setTimeout(60_000);
+
   let results;
   const resultFilePath = path.join(RESULT_DIR, 'demo.json');
   if (testMode === 'record') {

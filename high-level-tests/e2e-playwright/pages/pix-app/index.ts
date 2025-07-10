@@ -4,4 +4,5 @@ export * from './ChallengePage.ts';
 export * from './CompetenceResultPage.ts';
 export * from './FinalCheckpointPage.ts';
 export * from './IntermediateCheckpointPage.ts';
+export * from './LoginPage.ts';
 export * from './StartCampaignPage.ts';

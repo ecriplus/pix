@@ -1,10 +1,9 @@
 import path from 'node:path';
 
-import { BrowserContext } from '@playwright/test';
+import { BrowserContext, Page } from '@playwright/test';
 import * as fs from 'fs/promises';
 
-import { buildAuthenticatedUsers, databaseBuilder } from '../../helpers/db.js';
-import { PIX_ORGA_PRO_DATA } from '../../helpers/db-data.ts';
+import { knex, setAssessmentIdSequence } from '../../helpers/db.js';
 import { expect, test } from '../../helpers/fixtures.ts';
 import { rightWrongAnswerCycle } from '../../helpers/utils.ts';
 import {
@@ -12,81 +11,51 @@ import {
   ChallengePage,
   FinalCheckpointPage,
   IntermediateCheckpointPage,
+  LoginPage,
   StartCampaignPage,
 } from '../../pages/pix-app/index.ts';
 import { CreateCampaignPage } from '../../pages/pix-orga/index.ts';
 
-const RESULT_DIR = path.resolve(import.meta.dirname, './data');
+const RESULT_DIR = path.resolve(import.meta.dirname, '../../snapshots');
 let COMPETENCE_TITLES: string[];
 test.beforeEach(async () => {
-  await buildAuthenticatedUsers({ withCguAccepted: true });
-  const competenceDTOs = await databaseBuilder
-    .knex('learningcontent.competences')
+  // Reset assessment id sequence for smart random to be predictable
+  await setAssessmentIdSequence(1000);
+  const competenceDTOs = await knex('learningcontent.competences')
     .jsonExtract('name_i18n', '$.fr', 'competenceTitle')
     .where('origin', 'Pix')
     .orderBy('index');
   COMPETENCE_TITLES = competenceDTOs.map(({ competenceTitle }: { competenceTitle: string }) => competenceTitle);
-  const targetProfileId = databaseBuilder.factory.buildTargetProfile({
-    name: 'PC PLAYWRIGHT',
-    ownerOrganizationId: PIX_ORGA_PRO_DATA.organization.id,
-    isSimplifiedAccess: false,
-    description: 'PC pour Playwright',
-    comment: null,
-    imageUrl: null,
-    outdated: false,
-    areKnowledgeElementsResettable: false,
-  }).id;
-  const tubeDTOs: { competenceId: string; tubeId: string }[] = await databaseBuilder
-    .knex('learningcontent.tubes')
-    .distinct()
-    .select({
-      competenceId: 'learningcontent.competences.id',
-      tubeId: 'learningcontent.tubes.id',
-    })
-    .join('learningcontent.competences', 'learningcontent.tubes.competenceId', 'learningcontent.competences.id')
-    .join('learningcontent.skills', 'learningcontent.skills.tubeId', 'learningcontent.tubes.id')
-    .join('learningcontent.challenges', 'learningcontent.challenges.skillId', 'learningcontent.skills.id')
-    .where('learningcontent.competences.origin', '=', 'Pix')
-    .where('learningcontent.skills.status', 'actif')
-    .where(
-      (queryBuilder: {
-        whereRaw: (arg0: string, arg1: string[]) => void;
-        orWhereRaw: (arg0: string, arg1: string[]) => void;
-      }) => {
-        queryBuilder.whereRaw('? = ANY(learningcontent.challenges.locales)', ['fr']);
-        queryBuilder.orWhereRaw('? = ANY(learningcontent.challenges.locales)', ['fr-fr']);
-      },
-    )
-    .orderBy('learningcontent.tubes.id');
-  const tubesByCompetenceId: Record<string, { competenceId: string; tubeId: string }[]> = Object.groupBy(
-    tubeDTOs,
-    (tubeDTO: { competenceId: string }) => tubeDTO.competenceId,
-  ) as Record<string, { competenceId: string; tubeId: string }[]>;
-  const tubeIds = [];
-  for (const tubesForCompetence of Object.values(tubesByCompetenceId)) {
-    if (!tubesForCompetence) continue;
-    tubeIds.push(...tubesForCompetence.slice(0, 2).map((tubeDTO) => tubeDTO.tubeId));
-  }
-  for (const tubeId of tubeIds) {
-    databaseBuilder.factory.buildTargetProfileTube({
-      targetProfileId,
-      tubeId,
-      level: 3,
-    });
-  }
-  await databaseBuilder.commit();
 });
 
-test('user plays a campaign', async ({
-  pixAppUserContext,
-  pixOrgaProContext,
+test('[@snapshot][@runSerially] user plays a campaign', async ({
+  page: pixAppPage,
+  pixOrgaMemberContext,
   testMode,
+  globalTestId,
 }: {
-  pixAppUserContext: BrowserContext;
-  pixOrgaProContext: BrowserContext;
+  page: Page;
+  pixOrgaMemberContext: BrowserContext;
   testMode: string;
-}) => {
+  globalTestId: string;
+}, testInfo) => {
+  testInfo.annotations.push(
+    {
+      type: 'tag',
+      description: `@snapshot - this test runs against a reference snapshot. Snapshot can be generated with TEST_MODE=record env.
+         Reasons why a snapshot can be re-generated :
+         - AssessmentIdSequence has changed
+         - Reference Release has changed
+         - Next challenge algorithm for campaign evaluation has changed`,
+    },
+    {
+      type: 'tag',
+      description:
+        '@runSerially - must run serially because this test fixes the assessment ID sequence to make sure to play on specific assessment ID',
+    },
+  );
   test.setTimeout(180_000);
+
   let results;
   const resultFilePath = path.join(RESULT_DIR, 'campaign-evaluation.json');
   if (testMode === 'record') {
@@ -98,7 +67,7 @@ test('user plays a campaign', async ({
     results = await fs.readFile(resultFilePath, 'utf-8');
     results = JSON.parse(results);
   }
-  const pixOrgaPage = await pixOrgaProContext.newPage();
+  const pixOrgaPage = await pixOrgaMemberContext.newPage();
   await pixOrgaPage.goto(process.env.PIX_ORGA_URL as string);
   let campaignCode: string | null;
   await test.step('creates the campaign', async () => {
@@ -106,13 +75,14 @@ test('user plays a campaign', async ({
     const createCampaignPage = new CreateCampaignPage(pixOrgaPage);
     await createCampaignPage.createEvaluationCampaign({
       campaignName: 'test playwright',
-      targetProfileName: 'PC PLAYWRIGHT',
+      targetProfileName: 'PC pour Playwright',
     });
     campaignCode = await pixOrgaPage.locator('dd.campaign-header-title__campaign-code > span').textContent();
   });
 
-  const pixAppPage = await pixAppUserContext.newPage();
   await pixAppPage.goto(process.env.PIX_APP_URL as string);
+  const loginPage = new LoginPage(pixAppPage);
+  await loginPage.signup('Buffy', 'Summers', `buffy.summers.${globalTestId}@example.net`, 'Coucoulesdevs66');
   const rightWrongAnswerCycleIter = rightWrongAnswerCycle({ numRight: 1, numWrong: 1 });
   await test.step('plays the campaign', async () => {
     await pixAppPage.getByRole('link', { name: "J'ai un code" }).click();

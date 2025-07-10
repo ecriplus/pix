@@ -16,6 +16,7 @@
   },
   "scripts": {
     "test": "playwright test",
+    "test:snapshot": "TEST_MODE=record playwright test --grep @snapshot",
     "test:ui": "playwright test --ui",
     "lint": "eslint .",
     "tsc": "tsc -b"
