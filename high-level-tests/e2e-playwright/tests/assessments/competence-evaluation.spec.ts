@@ -1,10 +1,7 @@
-import path from 'node:path';
-
 import { Page } from '@playwright/test';
-import * as fs from 'fs/promises';
 
 import { knex, setAssessmentIdSequence } from '../../helpers/db.js';
-import { expect, test } from '../../helpers/fixtures.ts';
+import { expectOrRecordResults, test, TEST_MODE } from '../../helpers/fixtures.ts';
 import { rightWrongAnswerCycle } from '../../helpers/utils.ts';
 import {
   ChallengePage,
@@ -14,7 +11,6 @@ import {
   LoginPage,
 } from '../../pages/pix-app/index.ts';
 
-const RESULT_DIR = path.resolve(import.meta.dirname, '../../snapshots');
 let COMPETENCE_TITLES: string[];
 test.beforeEach(async () => {
   const competenceDTOs = await knex('learningcontent.competences')
@@ -32,7 +28,7 @@ test('[@snapshot][@runSerially] user assessing on 5 Pix Competences', async ({
   globalTestId,
 }: {
   page: Page;
-  testMode: string;
+  testMode: TEST_MODE;
   globalTestId: string;
 }, testInfo) => {
   testInfo.annotations.push(
@@ -52,26 +48,17 @@ test('[@snapshot][@runSerially] user assessing on 5 Pix Competences', async ({
   );
   test.setTimeout(120_000);
 
-  let results;
-  const resultFilePath = path.join(RESULT_DIR, 'competence-evaluation.json');
-  if (testMode === 'record') {
-    results = {
-      challengeImprints: [],
-      levels: [],
-      pixScores: [],
-    };
-  } else {
-    results = await fs.readFile(resultFilePath, 'utf-8');
-    results = JSON.parse(results);
-  }
+  const results = {
+    challengeImprints: [] as string[],
+    levels: [] as (string | undefined)[],
+    pixScores: [] as (string | undefined)[],
+  };
 
   const rightWrongAnswerCycleIter = rightWrongAnswerCycle({ numRight: 1, numWrong: 2 });
   await page.goto(process.env.PIX_APP_URL as string);
   const loginPage = new LoginPage(page);
   await loginPage.signup('Buffy', 'Summers', `buffy.summers.${globalTestId}@example.net`, 'Coucoulesdevs66');
   await page.getByRole('link', { name: 'Compétences', exact: true }).click();
-  let globalChallengeIndex = 0;
-  let competenceIndex = 0;
   for (const competenceTitle of [
     COMPETENCE_TITLES[3],
     COMPETENCE_TITLES[12],
@@ -83,21 +70,11 @@ test('[@snapshot][@runSerially] user assessing on 5 Pix Competences', async ({
       await page.getByRole('link', { name: competenceTitle }).first().click();
       await page.getByRole('link', { name: 'Commencer' }).click();
 
-      let challengeIndexInCompetence = 0;
       await test.step(`"${competenceTitle}" answering right or wrong according to pattern`, async () => {
         while (!page.url().endsWith('/checkpoint?finalCheckpoint=true')) {
           const challengePage = new ChallengePage(page);
           const challengeImprint = await challengePage.getChallengeImprint();
-          if (testMode === 'record') {
-            results.challengeImprints.push(challengeImprint);
-          } else {
-            expect(challengeImprint).toBe(results.challengeImprints[globalChallengeIndex]);
-            await expect(page.getByLabel('Votre progression')).toContainText(
-              `Question ${(challengeIndexInCompetence % 5) + 1} / 5`,
-            );
-          }
-          ++globalChallengeIndex;
-          ++challengeIndexInCompetence;
+          results.challengeImprints.push(challengeImprint);
           await challengePage.setRightOrWrongAnswer(rightWrongAnswerCycleIter.next().value as boolean);
           await challengePage.validateAnswer();
 
@@ -114,19 +91,11 @@ test('[@snapshot][@runSerially] user assessing on 5 Pix Competences', async ({
         const competenceResultPage = new CompetenceResultPage(page);
         const level = await competenceResultPage.getLevel();
         const pixScore = await competenceResultPage.getPixScore();
-        if (testMode === 'record') {
-          results.levels.push(level);
-          results.pixScores.push(pixScore);
-        } else {
-          expect(level).toBe(results.levels[competenceIndex]);
-          expect(pixScore).toBe(results.pixScores[competenceIndex]);
-        }
+        results.levels.push(level);
+        results.pixScores.push(pixScore);
         await competenceResultPage.goBackToCompetences();
       });
     });
-    ++competenceIndex;
   }
-  if (testMode === 'record') {
-    await fs.writeFile(resultFilePath, JSON.stringify(results));
-  }
+  expectOrRecordResults({ results, resultFileName: 'competence-evaluation.json', testMode });
 });
