@@ -18,16 +18,13 @@ export default class StudentScoController extends Controller {
     }
 
     this.accessStorage.setAssociationDone(this.model.organizationToJoin.id);
-    const verifiedCode = await this.store.findRecord('verified-code', this.args.model.campaign.code);
+    const verifiedCode = this.model.verifiedCode;
 
     if (verifiedCode.type === 'campaign') {
-      this.router.replaceWith('campaigns.fill-in-participant-external-id', verifiedCode.id);
+      this.router.transitionTo('campaigns.fill-in-participant-external-id', verifiedCode.id);
     } else {
-      this.router.replaceWith('combined-courses', verifiedCode.id);
+      this.router.transitionTo('combined-courses', verifiedCode.id);
     }
-
-    this.router.transitionTo('campaigns.fill-in-participant-external-id', this.model.campaign.code);
-    return;
   }
 
   @action
@@ -35,6 +32,6 @@ export default class StudentScoController extends Controller {
     this.session.set('skipRedirectAfterSessionInvalidation', true);
     await this.session.invalidate();
     this.accessStorage.setHasUserSeenJoinPage(this.model.organizationToJoin.id);
-    this.router.transitionTo('organizations.access', this.model.campaign.code);
+    this.router.transitionTo('organizations.access', this.model.verifiedCode.id);
   }
 }

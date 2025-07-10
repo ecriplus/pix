@@ -42,6 +42,14 @@ export default Factory.extend({
     return 'Target Profile';
   },
 
+  afterCreate(campaign, server) {
+    server.create('verified-code', {
+      id: campaign.code,
+      type: 'campaign',
+      campaign,
+    });
+  },
+
   withOneChallenge: trait({
     afterCreate(campaign, server) {
       server.create('challenge', 'forCampaign');
@@ -87,16 +95,6 @@ export default Factory.extend({
         organizationId: ENV.APP.AUTONOMOUS_COURSES_ORGANIZATION_ID,
         title: 'Dummy title',
         customLandingPageText: 'Dummy landing page text',
-      });
-    },
-  }),
-
-  withVerifiedCode: trait({
-    afterCreate(campaign, server) {
-      server.create('verified-code', {
-        id: campaign.code,
-        type: 'campaign',
-        campaign,
       });
     },
   }),

@@ -4,7 +4,7 @@ import sinon from 'sinon';
 
 import createGlimmerComponent from '../../../../../helpers/create-glimmer-component';
 
-module('Unit | Component | Pages | Organizations | Invited | Reconciliation', function (hooks) {
+module('Unit | Component | Pages | Organizations | Invited | Reconciliation', function (hooks) {
   setupTest(hooks);
   let createRecordStub, component, model, campaignCode, organizationId;
   hooks.beforeEach(function () {
@@ -27,6 +27,7 @@ module('Unit | Component | Pages | Organizations | Invited | Reconciliation', f
     component.router = { transitionTo: sinon.stub().returns() };
     component.store = {
       createRecord: sinon.stub(),
+      findRecord: sinon.stub(),
     };
     component.accessStorage = {
       setAssociationDone: sinon.stub(),
@@ -47,9 +48,13 @@ module('Unit | Component | Pages | Organizations | Invited | Reconciliation', f
         reconciliationInfos,
       })
       .returns(createRecordStub);
+
+    component.store.findRecord.withArgs('verified-code', campaignCode).returns({ id: campaignCode, type: 'campaign' });
+
     // when
     await component.registerLearner(reconciliationInfos);
 
+    // then
     assert.true(createRecordStub.save.called, 'called save');
     assert.true(createRecordStub.unloadRecord.called, 'called unloadRecord');
     assert.true(component.accessStorage.setAssociationDone.calledWithExactly(organizationId), 'called accessStorage');

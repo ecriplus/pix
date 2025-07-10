@@ -10,7 +10,7 @@ export default class AnonymousRoute extends Route {
     this.session.prohibitAuthentication('authenticated.user-dashboard');
   }
 
-  async model() {
+  model() {
     return this.modelFor('organizations');
   }
 

@@ -8,7 +8,7 @@ module('Unit | Route | Join | Anonymous', function (hooks) {
   let route, verifiedCode;
 
   hooks.beforeEach(function () {
-    route = this.owner.lookup('route:campaigns.join.anonymous');
+    route = this.owner.lookup('route:organizations.join.anonymous');
     route.modelFor = sinon.stub();
     route.session = { authenticate: sinon.stub() };
     route.currentUser = { load: sinon.stub() };
@@ -22,7 +22,7 @@ module('Unit | Route | Join | Anonymous', function (hooks) {
       await route.model();
 
       //then
-      sinon.assert.calledWith(route.modelFor, 'campaigns');
+      sinon.assert.calledWith(route.modelFor, 'organizations');
       assert.ok(true);
     });
   });

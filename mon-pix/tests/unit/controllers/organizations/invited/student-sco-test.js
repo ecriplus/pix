@@ -1,3 +1,4 @@
+import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -8,12 +9,13 @@ module('Unit | Controller | organizations/invited/student-sco', function (hooks)
   let controller;
   const organizationId = 1;
 
+  const CAMPAIGN_CODE = 'AZERTY999';
   hooks.beforeEach(function () {
     controller = this.owner.lookup('controller:organizations.invited.student-sco');
     controller.accessStorage = { setAssociationDone: sinon.stub() };
     controller.router = { transitionTo: sinon.stub() };
     controller.set('model', {
-      campaign: { code: 'AZERTY999', organizationId },
+      verifiedCode: { id: CAMPAIGN_CODE, type: 'campaign' },
       organizationToJoin: { id: organizationId },
     });
   });
@@ -47,6 +49,15 @@ module('Unit | Controller | organizations/invited/student-sco', function (hooks)
         scoOrganizationLearner.save.resolves();
         const adapterOptions = { withReconciliation: true };
 
+        class StoreStub extends Service {
+          findRecord = sinon
+            .stub()
+            .withArgs('verified-code', CAMPAIGN_CODE)
+            .returns({ id: CAMPAIGN_CODE, type: 'campaign' });
+        }
+
+        this.owner.register('service:store', StoreStub);
+
         // when
         await controller.actions.reconcile.call(controller, scoOrganizationLearner, adapterOptions);
 
@@ -56,7 +67,7 @@ module('Unit | Controller | organizations/invited/student-sco', function (hooks)
         sinon.assert.calledWith(
           controller.router.transitionTo,
           'campaigns.fill-in-participant-external-id',
-          'AZERTY999',
+          CAMPAIGN_CODE,
         );
         assert.ok(true);
       });

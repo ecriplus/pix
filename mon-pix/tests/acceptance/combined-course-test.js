@@ -24,7 +24,7 @@ module('Acceptance | CombinedCourse', function (hooks) {
       test('should redirect to login page before accessing combined course page', async function (assert) {
         //given
         user = server.create('user', 'withEmail', { hasSeenAssessmentInstructions: false });
-        server.create('verified-code', { id: 'combinix1', isCampaign: false });
+        server.create('verified-code', { id: 'combinix1', type: 'combined-course' });
         // when
         await unabortedVisit('/parcours/COMBINIX1');
         screen = getScreen();

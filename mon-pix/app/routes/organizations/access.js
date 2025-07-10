@@ -88,8 +88,12 @@ export default class AccessRoute extends Route {
   }
 
   async _shouldJoinSimplifiedCampaignAsAnonymous(verifiedCode) {
+    console.log(verifiedCode.id, verifiedCode.type);
+
     if (verifiedCode.type !== 'campaign') return false;
+    console.log('coucou');
     const campaign = await verifiedCode.campaign;
+
     return campaign.isSimplifiedAccess && !this.session.isAuthenticated;
   }
 }

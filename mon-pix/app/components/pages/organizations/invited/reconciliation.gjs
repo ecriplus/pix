@@ -36,11 +36,10 @@ export default class InvitedWrapper extends Component {
       const verifiedCode = await this.store.findRecord('verified-code', this.args.model.campaign.code);
 
       if (verifiedCode.type === 'campaign') {
-        this.router.replaceWith('campaigns.fill-in-participant-external-id', verifiedCode.id);
+        this.router.transitionTo('campaigns.fill-in-participant-external-id', verifiedCode.id);
       } else {
-        this.router.replaceWith('combined-courses', verifiedCode.id);
+        this.router.transitionTo('combined-courses', verifiedCode.id);
       }
-      this.router.transitionTo('campaigns.fill-in-participant-external-id', this.args.model.campaign.code);
     } catch (errorResponse) {
       this.handleError(errorResponse);
     } finally {

@@ -28,7 +28,7 @@ module('Unit | Route | campaigns/invited/student-sup', function (hooks) {
           user,
         }),
       );
-      route.router = { replaceWith: sinon.stub() };
+      route.router = { transitionTo: sinon.stub() };
 
       // when
       await route.afterModel({ verifiedCode, organizationToJoin });
@@ -39,7 +39,7 @@ module('Unit | Route | campaigns/invited/student-sup', function (hooks) {
         userId: user.id,
       });
 
-      sinon.assert.calledWith(route.router.replaceWith, 'campaigns.fill-in-participant-external-id', campaign.code);
+      sinon.assert.calledWith(route.router.transitionTo, 'campaigns.fill-in-participant-external-id', campaign.code);
       assert.ok(true);
     });
     test('for combined courses, should redirect to campaigns.fill-in-participant-external-id when an association already exists', async function (assert) {
@@ -63,7 +63,7 @@ module('Unit | Route | campaigns/invited/student-sup', function (hooks) {
           user,
         }),
       );
-      route.router = { replaceWith: sinon.stub() };
+      route.router = { transitionTo: sinon.stub() };
 
       // when
       await route.afterModel({ verifiedCode, organizationToJoin });
@@ -74,7 +74,7 @@ module('Unit | Route | campaigns/invited/student-sup', function (hooks) {
         userId: user.id,
       });
 
-      sinon.assert.calledWith(route.router.replaceWith, 'combined-courses', verifiedCode.id);
+      sinon.assert.calledWith(route.router.transitionTo, 'combined-courses', verifiedCode.id);
       assert.ok(true);
     });
   });
