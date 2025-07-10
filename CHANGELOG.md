@@ -1,5 +1,34 @@
 # Pix Changelog
 
+# [5.156.0](https://github.com/1024pix/pix/compare/v5.155.0...v5.156.0) (2025-07-10)
+
+### :rocket: Amélioration
+
+- [#12814](https://github.com/1024pix/pix/pull/12814) Enlever titres Fiche Recap et A Retenir (PIX-18679) 
+
+### :bug: Correction
+
+- [#12796](https://github.com/1024pix/pix/pull/12796) Supprimer la redirection infini lors d'une fin de campagne (PIX-18666). 
+
+### :building_construction: Tech
+
+- [#12803](https://github.com/1024pix/pix/pull/12803) :art: Ajoute une fonction `getNextId()`  au `datamartBuffer` 
+- [#12804](https://github.com/1024pix/pix/pull/12804) :card_file_box: Ajout le préfixe `data_` oublié à deux tables du `datamart` 
+- [#12765](https://github.com/1024pix/pix/pull/12765) :truck: Déplace la route `get course` vers `src/evaluation/` 
+- [#12806](https://github.com/1024pix/pix/pull/12806) :truck: Déplace le modèle en lecture seul `CleaCertifiedCandidate` vers le context `src/certification/results/` 
+- [#12805](https://github.com/1024pix/pix/pull/12805) :truck: Déplace le modèle en lecture seul `CpfCertificationResult` vers le contexte `/src/certification/session-management` 
+- [#12795](https://github.com/1024pix/pix/pull/12795) Dernier fichier certif de lib a src 
+
+### :arrow_up: Montée de version
+
+- [#12786](https://github.com/1024pix/pix/pull/12786) Update adobe/s3mock Docker tag to v4.5.1 (.circleci) 
+- [#12808](https://github.com/1024pix/pix/pull/12808) Update adobe/s3mock Docker tag to v4.5.1 (docker) 
+- [#12809](https://github.com/1024pix/pix/pull/12809) Update adobe/s3mock Docker tag to v4.5.1 (dossier racine) 
+- [#12811](https://github.com/1024pix/pix/pull/12811) Update dependency @1024pix/epreuves-components to ^0.6.0 (junior) 
+- [#12812](https://github.com/1024pix/pix/pull/12812) Update dependency @1024pix/epreuves-components to ^0.6.0 (mon-pix) 
+- [#12781](https://github.com/1024pix/pix/pull/12781) Update nginx Docker tag to v1.29.0 
+- [#12758](https://github.com/1024pix/pix/pull/12758) Update Node.js to v22.17.0
+
 # [5.155.0](https://github.com/1024pix/pix/compare/v5.154.0...v5.155.0) (2025-07-09)
 
 ### :rocket: Amélioration
