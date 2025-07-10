@@ -14,7 +14,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   nock,
-  sinon,
 } from '../../../../test-helper.js';
 
 const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
@@ -224,18 +223,15 @@ describe('Acceptance | Controller | passage-controller', function () {
   });
 
   describe('POST /api/passages/{passageId}/embed/llm/chats', function () {
-    let clock, now, user;
+    let user;
 
     beforeEach(async function () {
       user = databaseBuilder.factory.buildUser();
       databaseBuilder.factory.buildPassage({ id: 111, userId: user.id }).id;
-      now = new Date('2023-10-05T18:02:00Z');
-      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
       await databaseBuilder.commit();
     });
 
     afterEach(async function () {
-      clock.restore();
       await chatTemporaryStorage.flushAll();
     });
 
@@ -287,12 +283,12 @@ describe('Acceptance | Controller | passage-controller', function () {
 
           // then
           expect(response.statusCode).to.equal(201);
-          expect(response.result).to.deep.equal({
-            chatId: `${user.id}-${now.getMilliseconds()}`,
+          expect(response.result).to.contain({
             inputMaxChars: 456,
             inputMaxPrompts: 788,
             attachmentName: 'file.txt',
           });
+          expect(response.result).to.have.property('chatId').that.is.a('string').and.not.empty;
           expect(llmApiScope.isDone()).to.be.true;
         });
       });

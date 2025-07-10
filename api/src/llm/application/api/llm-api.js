@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+
 import {
   ChatForbiddenError,
   ChatNotFoundError,
@@ -32,7 +34,7 @@ import { LLMChatDTO } from './models/LLMChatDTO.js';
  * @param {string} params.userId
  * @returns {Promise<LLMChatDTO>}
  */
-export async function startChat({ configId, userId }) {
+export async function startChat({ configId, userId }, { generateId = randomUUID } = {}) {
   if (!configId) {
     throw new ConfigurationNotFoundError('null id provided');
   }
@@ -40,7 +42,7 @@ export async function startChat({ configId, userId }) {
     throw new NoUserIdProvidedError();
   }
   const configuration = await configurationRepository.get(configId);
-  const chatId = generateId(userId);
+  const chatId = generateId();
   const newChat = new Chat({
     id: chatId,
     userId,
@@ -116,11 +118,6 @@ export async function prompt({ chatId, userId, message, attachmentName }) {
     onLLMResponseReceived: addMessagesToChat(chat, message, chatRepository),
     shouldSendAttachmentEventMessage: Boolean(attachmentName),
   });
-}
-
-function generateId(userId) {
-  const nowMs = new Date().getMilliseconds();
-  return `${userId}-${nowMs}`;
 }
 
 function addMessagesToChat(chat, prompt, chatRepository) {

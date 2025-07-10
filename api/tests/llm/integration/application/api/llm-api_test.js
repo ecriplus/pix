@@ -27,15 +27,10 @@ describe('LLM | Integration | Application | API | llm', function () {
   });
 
   describe('#startChat', function () {
-    let clock, now;
+    let generateId;
 
     beforeEach(async function () {
-      now = new Date('2023-10-05T18:02:00Z');
-      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
-    });
-
-    afterEach(async function () {
-      clock.restore();
+      generateId = sinon.stub().returns('123e4567-e89b-12d3-a456-426614174000');
     });
 
     context('when no config id provided', function () {
@@ -85,18 +80,18 @@ describe('LLM | Integration | Application | API | llm', function () {
 
         it('should return the newly created chat with attachment info, diminushing inputMaxPrompts by one', async function () {
           // when
-          const chat = await startChat({ configId, userId });
+          const chat = await startChat({ configId, userId }, { generateId });
 
           // then
           expect(chat).to.deep.equal({
-            id: `123456-${now.getMilliseconds()}`,
+            id: '123e4567-e89b-12d3-a456-426614174000',
             attachmentName: 'file.txt',
             inputMaxChars: 456,
             inputMaxPrompts: 788,
           });
           expect(llmApiScope.isDone()).to.be.true;
-          expect(await chatTemporaryStorage.get(`123456-${now.getMilliseconds()}`)).to.deep.equal({
-            id: `123456-${now.getMilliseconds()}`,
+          expect(await chatTemporaryStorage.get('123e4567-e89b-12d3-a456-426614174000')).to.deep.equal({
+            id: '123e4567-e89b-12d3-a456-426614174000',
             userId: 123456,
             configuration: {
               id: 'uneConfigQuiExist',
@@ -130,18 +125,18 @@ describe('LLM | Integration | Application | API | llm', function () {
 
         it('should return the newly created chat with attachment info', async function () {
           // when
-          const chat = await startChat({ configId, userId });
+          const chat = await startChat({ configId, userId }, { generateId });
 
           // then
           expect(chat).to.deep.equal({
-            id: `123456-${now.getMilliseconds()}`,
+            id: '123e4567-e89b-12d3-a456-426614174000',
             attachmentName: null,
             inputMaxChars: 456,
             inputMaxPrompts: 789,
           });
           expect(llmApiScope.isDone()).to.be.true;
-          expect(await chatTemporaryStorage.get(`123456-${now.getMilliseconds()}`)).to.deep.equal({
-            id: `123456-${now.getMilliseconds()}`,
+          expect(await chatTemporaryStorage.get('123e4567-e89b-12d3-a456-426614174000')).to.deep.equal({
+            id: '123e4567-e89b-12d3-a456-426614174000',
             userId: 123456,
             configuration: {
               id: 'uneConfigQuiExist',
