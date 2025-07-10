@@ -389,23 +389,13 @@ describe('Acceptance | Controller | passage-controller', function () {
               configurationId: 'uneConfigQuiExist',
               history: [
                 {
-                  content: `
-<system_notification>
-  L'utilisateur a téléversé une pièce jointe :
-  <attachment_name>
-    expected_file.pdf
-  </attachment_name>
-</system_notification>`,
+                  content:
+                    "<system_notification>L'utilisateur a téléversé une pièce jointe : <attachment_name>expected_file.pdf</attachment_name></system_notification>",
                   role: 'user',
                 },
                 {
-                  content: `
-<read_attachment_tool>
-  Lecture de la pièce jointe, expected_file.pdf :
-  <attachment_content>
-    some context
-  </attachment_content>
-</read_attachment_tool>`,
+                  content:
+                    '<read_attachment_tool>Lecture de la pièce jointe, expected_file.pdf : <attachment_content>some context</attachment_content></read_attachment_tool>',
                   role: 'assistant',
                 },
               ],

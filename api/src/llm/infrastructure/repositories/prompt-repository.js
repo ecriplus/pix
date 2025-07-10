@@ -3,11 +3,12 @@ import jwt from 'jsonwebtoken';
 import { config } from '../../../shared/config.js';
 import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
 import { LLMApiError } from '../../domain/errors.js';
+
 const logger = child('llm:api', { event: SCOPES.LLM });
 
 /**
- * @typedef {import('../../domain/Configuration').Configuration} Configuration
- * @typedef {import('../../domain/Chat').Chat} Chat
+ * @typedef {import('../../domain/models/Configuration').Configuration} Configuration
+ * @typedef {import('../../domain/models/Chat').Chat} Chat
  */
 
 /**
@@ -21,7 +22,7 @@ const logger = child('llm:api', { event: SCOPES.LLM });
  * @returns {Promise<ReadableStream>}
  */
 export async function prompt({ message, configuration, chat }) {
-  const messagesToForward = chat.messages.slice(-configuration.historySize).map(toHistoryMessage);
+  const messagesToForward = chat.messages.slice(-configuration.historySize).map((message) => message.toLLMHistory());
   const payload = JSON.stringify({
     prompt: message,
     configurationId: configuration.id,
@@ -64,12 +65,5 @@ async function handleFetchErrors(response) {
   return {
     status: response.status,
     err,
-  };
-}
-
-function toHistoryMessage(message) {
-  return {
-    content: message.content,
-    role: message.isFromUser ? 'user' : 'assistant',
   };
 }

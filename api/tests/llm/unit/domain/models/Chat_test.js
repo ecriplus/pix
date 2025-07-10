@@ -21,11 +21,15 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       expect(chat.toDTO()).to.have.deep.property('messages', [
         {
           content: 'some message',
+          attachmentName: undefined,
+          attachmentContext: undefined,
           isFromUser: false,
           notCounted: false,
         },
         {
           content: 'un message pas vide',
+          attachmentName: undefined,
+          attachmentContext: undefined,
           isFromUser: true,
           notCounted: false,
         },
@@ -50,6 +54,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       expect(chat.toDTO()).to.have.deep.property('messages', [
         {
           content: 'some message',
+          attachmentName: undefined,
+          attachmentContext: undefined,
           isFromUser: false,
           notCounted: false,
         },
@@ -75,11 +81,15 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       expect(chat.toDTO()).to.have.deep.property('messages', [
         {
           content: 'some message',
+          attachmentName: undefined,
+          attachmentContext: undefined,
           isFromUser: false,
           notCounted: false,
         },
         {
           content: 'un message pas vide',
+          attachmentName: undefined,
+          attachmentContext: undefined,
           isFromUser: false,
           notCounted: false,
         },
@@ -104,6 +114,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       expect(chat.toDTO()).to.have.deep.property('messages', [
         {
           content: 'some message',
+          attachmentName: undefined,
+          attachmentContext: undefined,
           isFromUser: false,
           notCounted: false,
         },
@@ -137,23 +149,29 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         expect(chatDTO).to.have.deep.property('messages', [
           {
             content: 'some message',
+            attachmentName: undefined,
+            attachmentContext: undefined,
             isFromUser: true,
             notCounted: false,
           },
           {
             content: 'some answer',
+            attachmentName: undefined,
+            attachmentContext: undefined,
             isFromUser: false,
             notCounted: false,
           },
           {
-            content:
-              "\n<system_notification>\n  L'utilisateur a téléversé une pièce jointe :\n  <attachment_name>\n    winter_lyrics.txt\n  </attachment_name>\n</system_notification>",
+            content: undefined,
+            attachmentName: 'winter_lyrics.txt',
+            attachmentContext: undefined,
             isFromUser: true,
             notCounted: false,
           },
           {
-            content:
-              "\n<read_attachment_tool>\n  Lecture de la pièce jointe, winter_lyrics.txt :\n  <attachment_content>\n    J'étais assise sur une pierre\nDes larmes coulaient sur mon visage\n  </attachment_content>\n</read_attachment_tool>",
+            content: undefined,
+            attachmentName: 'winter_lyrics.txt',
+            attachmentContext: "J'étais assise sur une pierre\nDes larmes coulaient sur mon visage",
             isFromUser: false,
             notCounted: false,
           },
@@ -184,11 +202,15 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         expect(chat.toDTO()).to.have.deep.property('messages', [
           {
             content: 'some message',
+            attachmentName: undefined,
+            attachmentContext: undefined,
             isFromUser: true,
             notCounted: false,
           },
           {
             content: 'some answer',
+            attachmentName: undefined,
+            attachmentContext: undefined,
             isFromUser: false,
             notCounted: false,
           },
@@ -316,11 +338,15 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         messages: [
           {
             content: 'message llm 1',
+            attachmentName: undefined,
+            attachmentContext: undefined,
             isFromUser: false,
             notCounted: false,
           },
           {
             content: 'message user 1',
+            attachmentName: undefined,
+            attachmentContext: undefined,
             isFromUser: true,
             notCounted: true,
           },
@@ -347,11 +373,15 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         messages: [
           {
             content: 'message llm 1',
+            attachmentName: undefined,
+            attachmentContext: undefined,
             isFromUser: false,
             notCounted: false,
           },
           {
             content: 'message user 1',
+            attachmentName: undefined,
+            attachmentContext: undefined,
             isFromUser: true,
             notCounted: true,
           },
