@@ -1,16 +1,14 @@
 import {
   ChatForbiddenError,
   ChatNotFoundError,
-  ConfigurationNotFoundError,
   MaxPromptsReachedError,
   NoAttachmentNeededError,
   NoAttachmentNorMessageProvidedError,
   NoUserIdProvidedError,
   TooLargeMessageInputError,
 } from '../../domain/errors.js';
-import { Chat } from '../../domain/models/Chat.js';
+import { usecases } from '../../domain/usecases/index.js';
 import * as chatRepository from '../../infrastructure/repositories/chat-repository.js';
-import * as configurationRepository from '../../infrastructure/repositories/configuration-repository.js';
 import * as promptRepository from '../../infrastructure/repositories/prompt-repository.js';
 import * as toEventStream from '../../infrastructure/streaming/to-event-stream.js';
 import { LLMChatDTO } from './models/LLMChatDTO.js';
@@ -33,34 +31,17 @@ import { LLMChatDTO } from './models/LLMChatDTO.js';
  * @returns {Promise<LLMChatDTO>}
  */
 export async function startChat({ configId, userId }) {
-  if (!configId) {
-    throw new ConfigurationNotFoundError('null id provided');
-  }
   if (!userId) {
     throw new NoUserIdProvidedError();
   }
-  const configuration = await configurationRepository.get(configId);
-  const chatId = generateId(userId);
-  const newChat = new Chat({
-    id: chatId,
-    configurationId: configuration.id,
-    hasAttachmentContextBeenAdded: false,
-    messages: [],
-  });
-  await chatRepository.save(newChat);
+  const { id, configuration } = await usecases.startChat({ configId, userId });
   return new LLMChatDTO({
-    id: newChat.id,
+    id,
     attachmentName: configuration.attachmentName,
     inputMaxChars: configuration.inputMaxChars,
     inputMaxPrompts: configuration.inputMaxPrompts,
   });
 }
-
-/**
- * @typedef LLMChatResponseDTO
- * @type {object}
- * @property {string} message
- */
 
 /**
  * @function
@@ -77,14 +58,16 @@ export async function prompt({ chatId, userId, message, attachmentName }) {
   if (!chatId) {
     throw new ChatNotFoundError('null id provided');
   }
-  const chat = await chatRepository.get(chatId);
-  if (!userId || !chat.id.startsWith(userId)) {
-    throw new ChatForbiddenError();
-  }
   if (!attachmentName && !message) {
     throw new NoAttachmentNorMessageProvidedError();
   }
-  const configuration = await configurationRepository.get(chat.configurationId);
+
+  const chat = await chatRepository.get(chatId);
+  if (!userId || userId !== chat.userId) {
+    throw new ChatForbiddenError();
+  }
+
+  const { configuration } = chat;
   if (attachmentName && !configuration.hasAttachment) {
     throw new NoAttachmentNeededError();
   }
@@ -113,11 +96,6 @@ export async function prompt({ chatId, userId, message, attachmentName }) {
     onLLMResponseReceived: addMessagesToChat(chat, message, chatRepository),
     shouldSendAttachmentEventMessage: Boolean(attachmentName),
   });
-}
-
-function generateId(userId) {
-  const nowMs = new Date().getMilliseconds();
-  return `${userId}-${nowMs}`;
 }
 
 function addMessagesToChat(chat, prompt, chatRepository) {

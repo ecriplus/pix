@@ -79,7 +79,6 @@ export class Configuration {
    */
   toDTO() {
     return {
-      version: 1,
       id: this.id,
       historySize: this.#historySize,
       inputMaxChars: this.#inputMaxChars,
@@ -87,5 +86,9 @@ export class Configuration {
       attachmentName: this.#attachmentName,
       attachmentContext: this.#attachmentContext,
     };
+  }
+
+  static fromDTO(configurationDTO) {
+    return new Configuration(configurationDTO);
   }
 }

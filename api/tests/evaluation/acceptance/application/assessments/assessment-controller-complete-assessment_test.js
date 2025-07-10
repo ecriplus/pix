@@ -7,8 +7,8 @@ import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../db/migrati
 import { CertificationCompletedJob } from '../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import * as badgeAcquisitionRepository from '../../../../../src/evaluation/infrastructure/repositories/badge-acquisition-repository.js';
 import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
+import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { CHAT_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
-import { CONFIGURATION_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/configuration-repository.js';
 import {
   CRITERION_COMPARISONS,
   REQUIREMENT_COMPARISONS,
@@ -27,11 +27,9 @@ import {
   learningContentBuilder,
   mockLearningContent,
   nock,
-  sinon,
 } from '../../../../test-helper.js';
 
 const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
-const configurationTemporaryStorage = temporaryStorage.withPrefix(CONFIGURATION_STORAGE_PREFIX);
 
 describe('Acceptance | Controller | assessment-controller-complete-assessment', function () {
   let options;
@@ -751,20 +749,16 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
   });
 
   describe('POST /api/assessments/{assessmentId}/embed/llm/chats', function () {
-    let clock, now, user;
+    let user;
 
     beforeEach(async function () {
       user = databaseBuilder.factory.buildUser();
       databaseBuilder.factory.buildAssessment({ id: 111, userId: user.id });
-      now = new Date('2023-10-05T18:02:00Z');
-      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
       await databaseBuilder.commit();
     });
 
     afterEach(async function () {
-      clock.restore();
       await chatTemporaryStorage.flushAll();
-      await configurationTemporaryStorage.flushAll();
     });
 
     context('when user is not authenticated', function () {
@@ -815,12 +809,12 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
 
           // then
           expect(response.statusCode).to.equal(201);
-          expect(response.result).to.deep.equal({
-            chatId: `${user.id}-${now.getMilliseconds()}`,
+          expect(response.result).to.contain({
             inputMaxChars: 456,
             inputMaxPrompts: 788,
             attachmentName: 'file.txt',
           });
+          expect(response.result).to.have.property('chatId').that.is.a('string').and.not.empty;
           expect(llmApiScope.isDone()).to.be.true;
         });
       });
@@ -856,7 +850,6 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
 
     afterEach(async function () {
       await chatTemporaryStorage.flushAll();
-      await configurationTemporaryStorage.flushAll();
     });
 
     context('when user is not authenticated', function () {
@@ -899,31 +892,24 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
         it('should receive LLM response as stream', async function () {
           // given
           const chat = new Chat({
-            id: `${user.id}-someChatId123456789`,
-            configurationId: 'uneConfigQuiExist',
+            id: 'someChatId123456789',
+            userId: user.id,
+            configuration: new Configuration({
+              id: 'uneConfigQuiExist',
+              historySize: 123,
+              inputMaxChars: 999,
+              inputMaxPrompts: 999,
+              attachmentName: 'expected_file.pdf',
+              attachmentContext: 'some context',
+            }),
             hasAttachmentContextBeenAdded: false,
             messages: [],
           });
           await chatTemporaryStorage.save({
-            key: `${user.id}-someChatId123456789`,
+            key: 'someChatId123456789',
             value: chat.toDTO(),
             expirationDelaySeconds: ms('24h'),
           });
-          const getConfigScope = nock('https://llm-test.pix.fr/api')
-            .get('/configurations/uneConfigQuiExist')
-            .reply(200, {
-              llm: {
-                historySize: 123,
-              },
-              challenge: {
-                inputMaxChars: 999,
-                inputMaxPrompts: 999,
-              },
-              attachment: {
-                name: 'expected_file.pdf',
-                context: 'some context',
-              },
-            });
           const promptLlmScope = nock('https://llm-test.pix.fr/api')
             .post('/chat', {
               configurationId: 'uneConfigQuiExist',
@@ -956,7 +942,7 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
           // when
           const response = await server.inject({
             method: 'POST',
-            url: `/api/assessments/111/embed/llm/chats/${user.id}-someChatId123456789/messages`,
+            url: '/api/assessments/111/embed/llm/chats/someChatId123456789/messages',
             payload: { prompt: 'Quelle est la recette de la ratatouille ?', attachmentName: 'expected_file.pdf' },
             headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           });
@@ -964,7 +950,6 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
           // then
           expect(response.statusCode).to.equal(201);
           expect(response.result).to.deep.equal("event: attachment\ndata: \n\ndata: coucou c'est super\n\n");
-          expect(getConfigScope.isDone()).to.be.true;
           expect(promptLlmScope.isDone()).to.be.true;
         });
       });

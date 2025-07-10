@@ -1,15 +1,9 @@
 import jwt from 'jsonwebtoken';
-import ms from 'ms';
 
 import { config } from '../../../shared/config.js';
-import { temporaryStorage } from '../../../shared/infrastructure/key-value-storages/index.js';
 import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
 import { ConfigurationNotFoundError, LLMApiError } from '../../domain/errors.js';
 import { Configuration } from '../../domain/models/Configuration.js';
-
-export const CONFIGURATION_STORAGE_PREFIX = 'llm-configurations';
-const configurationTemporaryStorage = temporaryStorage.withPrefix(CONFIGURATION_STORAGE_PREFIX);
-const CONFIGURATION_EXPIRATION_DELAY_SECONDS = ms('1h');
 
 const logger = child('llm:api', { event: SCOPES.LLM });
 /**
@@ -24,9 +18,8 @@ const logger = child('llm:api', { event: SCOPES.LLM });
  * @returns {Promise<Configuration>}
  */
 export async function get(id) {
-  const cachedConfiguration = await configurationTemporaryStorage.get(id);
-  if (cachedConfiguration) {
-    return toDomainFromCache(id, cachedConfiguration);
+  if (!id) {
+    throw new ConfigurationNotFoundError(id);
   }
   const url = config.llm.getConfigurationUrl + '/' + id;
   let response;
@@ -44,13 +37,7 @@ export async function get(id) {
   if (response.ok) {
     if (contentType === 'application/json') {
       const jsonResponse = await response.json();
-      const configuration = toDomainFromLLMApi(id, jsonResponse);
-      await configurationTemporaryStorage.save({
-        key: id,
-        value: configuration.toDTO(),
-        expirationDelaySeconds: CONFIGURATION_EXPIRATION_DELAY_SECONDS,
-      });
-      return configuration;
+      return toDomainFromLLMApi(id, jsonResponse);
     }
     throw new LLMApiError('unexpected content-type response');
   }
@@ -88,9 +75,4 @@ function toDomainFromLLMApi(id, configurationDTO) {
     attachmentName: configurationDTO?.attachment?.name ?? null,
     attachmentContext: configurationDTO?.attachment?.context ?? null,
   });
-}
-
-function toDomainFromCache(id, configurationDTO) {
-  if (configurationDTO.version === 1) return new Configuration(configurationDTO);
-  return toDomainFromLLMApi(id, configurationDTO);
 }

@@ -23,6 +23,7 @@ import { evaluationRoutes } from './src/evaluation/routes.js';
 import { identityAccessManagementRoutes } from './src/identity-access-management/application/routes.js';
 import * as serverAuthentication from './src/identity-access-management/infrastructure/server-authentication.js';
 import { learningContentRoutes } from './src/learning-content/routes.js';
+import { llmRoutes } from './src/llm/routes.js';
 import { Metrics } from './src/monitoring/infrastructure/metrics.js';
 import { organizationalEntitiesRoutes } from './src/organizational-entities/application/routes.js';
 import { campaignRoutes } from './src/prescription/campaign/routes.js';
@@ -237,6 +238,7 @@ const setupRoutesAndPlugins = async function (server) {
     ...certificationRoutes,
     ...prescriptionRoutes,
     bannerRoutes,
+    llmRoutes,
     {
       name: 'root',
       register: async function (server) {

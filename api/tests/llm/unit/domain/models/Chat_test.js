@@ -1,4 +1,5 @@
 import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
+import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('LLM | Unit | Domain | Models | Chat', function () {
@@ -8,7 +9,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       const message = 'un message pas vide';
       const chat = new Chat({
         id: 'some-chat-id',
-        configurationId: 'some-config-id',
+        configuration: new Configuration({ id: 'some-config-id' }),
         hasAttachmentContextBeenAdded: false,
         messages: [new Message({ content: 'some message', isFromUser: false })],
       });
@@ -17,30 +18,25 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       chat.addUserMessage(message);
 
       // then
-      expect(chat.toDTO()).to.deep.equal({
-        id: 'some-chat-id',
-        configurationId: 'some-config-id',
-        hasAttachmentContextBeenAdded: false,
-        messages: [
-          {
-            content: 'some message',
-            isFromUser: false,
-            notCounted: false,
-          },
-          {
-            content: 'un message pas vide',
-            isFromUser: true,
-            notCounted: false,
-          },
-        ],
-      });
+      expect(chat.toDTO()).to.have.deep.property('messages', [
+        {
+          content: 'some message',
+          isFromUser: false,
+          notCounted: false,
+        },
+        {
+          content: 'un message pas vide',
+          isFromUser: true,
+          notCounted: false,
+        },
+      ]);
     });
 
     it('should not append anything when message has no content', function () {
       // given
       const chat = new Chat({
         id: 'some-chat-id',
-        configurationId: 'some-config-id',
+        configuration: new Configuration({ id: 'some-config-id' }),
         hasAttachmentContextBeenAdded: false,
         messages: [new Message({ content: 'some message', isFromUser: false })],
       });
@@ -51,18 +47,13 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       chat.addUserMessage();
 
       // then
-      expect(chat.toDTO()).to.deep.equal({
-        id: 'some-chat-id',
-        configurationId: 'some-config-id',
-        hasAttachmentContextBeenAdded: false,
-        messages: [
-          {
-            content: 'some message',
-            isFromUser: false,
-            notCounted: false,
-          },
-        ],
-      });
+      expect(chat.toDTO()).to.have.deep.property('messages', [
+        {
+          content: 'some message',
+          isFromUser: false,
+          notCounted: false,
+        },
+      ]);
     });
   });
 
@@ -72,7 +63,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       const message = 'un message pas vide';
       const chat = new Chat({
         id: 'some-chat-id',
-        configurationId: 'some-config-id',
+        configuration: new Configuration({ id: 'some-config-id' }),
         hasAttachmentContextBeenAdded: false,
         messages: [new Message({ content: 'some message', isFromUser: false })],
       });
@@ -81,30 +72,25 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       chat.addLLMMessage(message);
 
       // then
-      expect(chat.toDTO()).to.deep.equal({
-        id: 'some-chat-id',
-        configurationId: 'some-config-id',
-        hasAttachmentContextBeenAdded: false,
-        messages: [
-          {
-            content: 'some message',
-            isFromUser: false,
-            notCounted: false,
-          },
-          {
-            content: 'un message pas vide',
-            isFromUser: false,
-            notCounted: false,
-          },
-        ],
-      });
+      expect(chat.toDTO()).to.have.deep.property('messages', [
+        {
+          content: 'some message',
+          isFromUser: false,
+          notCounted: false,
+        },
+        {
+          content: 'un message pas vide',
+          isFromUser: false,
+          notCounted: false,
+        },
+      ]);
     });
 
     it('should not append anything when message has no content', function () {
       // given
       const chat = new Chat({
         id: 'some-chat-id',
-        configurationId: 'some-config-id',
+        configuration: new Configuration({ id: 'some-config-id' }),
         hasAttachmentContextBeenAdded: false,
         messages: [new Message({ content: 'some message', isFromUser: false })],
       });
@@ -115,18 +101,13 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       chat.addLLMMessage();
 
       // then
-      expect(chat.toDTO()).to.deep.equal({
-        id: 'some-chat-id',
-        configurationId: 'some-config-id',
-        hasAttachmentContextBeenAdded: false,
-        messages: [
-          {
-            content: 'some message',
-            isFromUser: false,
-            notCounted: false,
-          },
-        ],
-      });
+      expect(chat.toDTO()).to.have.deep.property('messages', [
+        {
+          content: 'some message',
+          isFromUser: false,
+          notCounted: false,
+        },
+      ]);
     });
   });
 
@@ -136,7 +117,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         // given
         const chat = new Chat({
           id: 'some-chat-id',
-          configurationId: 'some-config-id',
+          configuration: new Configuration({ id: 'some-config-id' }),
           hasAttachmentContextBeenAdded: false,
           messages: [
             new Message({ content: 'some message', isFromUser: true }),
@@ -151,44 +132,41 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         );
 
         // then
-        expect(chat.toDTO()).to.deep.equal({
-          id: 'some-chat-id',
-          configurationId: 'some-config-id',
-          hasAttachmentContextBeenAdded: true,
-          messages: [
-            {
-              content: 'some message',
-              isFromUser: true,
-              notCounted: false,
-            },
-            {
-              content: 'some answer',
-              isFromUser: false,
-              notCounted: false,
-            },
-            {
-              content:
-                "\n<system_notification>\n  L'utilisateur a téléversé une pièce jointe :\n  <attachment_name>\n    winter_lyrics.txt\n  </attachment_name>\n</system_notification>",
-              isFromUser: true,
-              notCounted: false,
-            },
-            {
-              content:
-                "\n<read_attachment_tool>\n  Lecture de la pièce jointe, winter_lyrics.txt :\n  <attachment_content>\n    J'étais assise sur une pierre\nDes larmes coulaient sur mon visage\n  </attachment_content>\n</read_attachment_tool>",
-              isFromUser: false,
-              notCounted: false,
-            },
-          ],
-        });
+        const chatDTO = chat.toDTO();
+        expect(chatDTO).to.have.property('hasAttachmentContextBeenAdded', true);
+        expect(chatDTO).to.have.deep.property('messages', [
+          {
+            content: 'some message',
+            isFromUser: true,
+            notCounted: false,
+          },
+          {
+            content: 'some answer',
+            isFromUser: false,
+            notCounted: false,
+          },
+          {
+            content:
+              "\n<system_notification>\n  L'utilisateur a téléversé une pièce jointe :\n  <attachment_name>\n    winter_lyrics.txt\n  </attachment_name>\n</system_notification>",
+            isFromUser: true,
+            notCounted: false,
+          },
+          {
+            content:
+              "\n<read_attachment_tool>\n  Lecture de la pièce jointe, winter_lyrics.txt :\n  <attachment_content>\n    J'étais assise sur une pierre\nDes larmes coulaient sur mon visage\n  </attachment_content>\n</read_attachment_tool>",
+            isFromUser: false,
+            notCounted: false,
+          },
+        ]);
       });
     });
 
-    context('when attachment context has not already been added', function () {
+    context('when attachment context has already been added', function () {
       it('should do nothing', function () {
         // given
         const chat = new Chat({
           id: 'some-chat-id',
-          configurationId: 'some-config-id',
+          configuration: new Configuration({ id: 'some-config-id' }),
           hasAttachmentContextBeenAdded: true,
           messages: [
             new Message({ content: 'some message', isFromUser: true }),
@@ -203,23 +181,18 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         );
 
         // then
-        expect(chat.toDTO()).to.deep.equal({
-          id: 'some-chat-id',
-          configurationId: 'some-config-id',
-          hasAttachmentContextBeenAdded: true,
-          messages: [
-            {
-              content: 'some message',
-              isFromUser: true,
-              notCounted: false,
-            },
-            {
-              content: 'some answer',
-              isFromUser: false,
-              notCounted: false,
-            },
-          ],
-        });
+        expect(chat.toDTO()).to.have.deep.property('messages', [
+          {
+            content: 'some message',
+            isFromUser: true,
+            notCounted: false,
+          },
+          {
+            content: 'some answer',
+            isFromUser: false,
+            notCounted: false,
+          },
+        ]);
       });
     });
   });
@@ -230,16 +203,13 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         // given
         const chat = new Chat({
           id: 'some-chat-id',
-          configurationId: 'some-config-id',
+          configuration: new Configuration({ id: 'some-config-id' }),
           hasAttachmentContextBeenAdded: false,
           messages: [],
         });
 
-        // when
-        const currentPromptsCount = chat.currentPromptsCount;
-
         // then
-        expect(currentPromptsCount).to.equal(0);
+        expect(chat).to.have.property('currentPromptsCount', 0);
       });
     });
 
@@ -253,11 +223,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           messages: [new Message({ content: 'some message', isFromUser: false })],
         });
 
-        // when
-        const currentPromptsCount = chat.currentPromptsCount;
-
         // then
-        expect(currentPromptsCount).to.equal(0);
+        expect(chat).to.have.property('currentPromptsCount', 0);
       });
     });
 
@@ -266,7 +233,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         // given
         const chat = new Chat({
           id: 'some-chat-id',
-          configurationId: 'some-config-id',
+          configuration: new Configuration({ id: 'some-config-id' }),
           hasAttachmentContextBeenAdded: false,
           messages: [
             new Message({ content: 'message llm 1', isFromUser: false }),
@@ -276,11 +243,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           ],
         });
 
-        // when
-        const currentPromptsCount = chat.currentPromptsCount;
-
         // then
-        expect(currentPromptsCount).to.equal(2);
+        expect(chat).to.have.property('currentPromptsCount', 2);
       });
     });
 
@@ -289,7 +253,14 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         // given
         const chat = new Chat({
           id: 'some-chat-id',
-          configurationId: 'some-config-id',
+          configuration: new Configuration({
+            id: 'some-config-id',
+            historySize: 10,
+            inputMaxChars: 500,
+            inputMaxPrompts: 4,
+            attachmentName: 'test.csv',
+            attachmentContext: 'le contexte',
+          }),
           hasAttachmentContextBeenAdded: false,
           messages: [
             new Message({ content: 'message llm 1', isFromUser: false }),
@@ -299,11 +270,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           ],
         });
 
-        // when
-        const currentPromptsCount = chat.currentPromptsCount;
-
         // then
-        expect(currentPromptsCount).to.equal(1);
+        expect(chat).to.have.property('currentPromptsCount', 1);
       });
     });
   });
@@ -313,7 +281,15 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       // given
       const chat = new Chat({
         id: 'some-chat-id',
-        configurationId: 'some-config-id',
+        userId: 123,
+        configuration: new Configuration({
+          id: 'some-config-id',
+          historySize: 10,
+          inputMaxChars: 500,
+          inputMaxPrompts: 4,
+          attachmentName: 'test.csv',
+          attachmentContext: 'le contexte',
+        }),
         hasAttachmentContextBeenAdded: false,
         messages: [
           new Message({ content: 'message llm 1', isFromUser: false }),
@@ -327,7 +303,15 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       // then
       expect(dto).to.deep.equal({
         id: 'some-chat-id',
-        configurationId: 'some-config-id',
+        userId: 123,
+        configuration: {
+          id: 'some-config-id',
+          historySize: 10,
+          inputMaxChars: 500,
+          inputMaxPrompts: 4,
+          attachmentName: 'test.csv',
+          attachmentContext: 'le contexte',
+        },
         hasAttachmentContextBeenAdded: false,
         messages: [
           {
@@ -341,6 +325,87 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             notCounted: true,
           },
         ],
+      });
+    });
+  });
+
+  describe('#fromDTO', function () {
+    it('should return the DTO version of the Chat model', function () {
+      // given
+      const dto = {
+        id: 'some-chat-id',
+        userId: 123,
+        configuration: {
+          id: 'some-config-id',
+          historySize: 10,
+          inputMaxChars: 500,
+          inputMaxPrompts: 4,
+          attachmentName: 'test.csv',
+          attachmentContext: 'le contexte',
+        },
+        hasAttachmentContextBeenAdded: false,
+        messages: [
+          {
+            content: 'message llm 1',
+            isFromUser: false,
+            notCounted: false,
+          },
+          {
+            content: 'message user 1',
+            isFromUser: true,
+            notCounted: true,
+          },
+        ],
+      };
+
+      // when
+      const chat = Chat.fromDTO(dto);
+
+      // then
+      expect(chat).to.deepEqualInstance(
+        new Chat({
+          id: 'some-chat-id',
+          userId: 123,
+          configuration: new Configuration({
+            id: 'some-config-id',
+            historySize: 10,
+            inputMaxChars: 500,
+            inputMaxPrompts: 4,
+            attachmentName: 'test.csv',
+            attachmentContext: 'le contexte',
+          }),
+          hasAttachmentContextBeenAdded: false,
+          messages: [
+            new Message({ content: 'message llm 1', isFromUser: false }),
+            new Message({ content: 'message user 1', isFromUser: true, notCounted: true }),
+          ],
+        }),
+      );
+    });
+
+    context('when DTO does not contain userId', function () {
+      it('should extract userId from chatId', function () {
+        // given
+        const dto = {
+          id: '123-456',
+          configuration: {},
+          hasAttachmentContextBeenAdded: false,
+          messages: [],
+        };
+
+        // when
+        const chat = Chat.fromDTO(dto);
+
+        // then
+        expect(chat).to.deepEqualInstance(
+          new Chat({
+            id: '123-456',
+            userId: 123,
+            configuration: new Configuration({}),
+            hasAttachmentContextBeenAdded: false,
+            messages: [],
+          }),
+        );
       });
     });
   });
