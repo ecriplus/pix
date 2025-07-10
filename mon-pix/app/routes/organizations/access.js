@@ -16,11 +16,6 @@ export default class AccessRoute extends Route {
   }
 
   async beforeModel(transition) {
-    if (!transition.from) {
-      return this.router.replaceWith('campaigns.entry-point');
-    }
-
-    this.authenticationRoute = 'inscription';
     const { organizationToJoin, verifiedCode } = this.modelFor('organizations');
     const identityProviderToVisit = this.oidcIdentityProviders.list.find((identityProvider) => {
       const isUserLoggedInToIdentityProvider =
@@ -29,6 +24,8 @@ export default class AccessRoute extends Route {
         organizationToJoin.isRestrictedByIdentityProvider(identityProvider.code) && !isUserLoggedInToIdentityProvider
       );
     });
+
+    this.authenticationRoute = 'inscription';
 
     if (identityProviderToVisit) {
       this.session.setAttemptedTransition(transition);
@@ -88,10 +85,7 @@ export default class AccessRoute extends Route {
   }
 
   async _shouldJoinSimplifiedCampaignAsAnonymous(verifiedCode) {
-    console.log(verifiedCode.id, verifiedCode.type);
-
     if (verifiedCode.type !== 'campaign') return false;
-    console.log('coucou');
     const campaign = await verifiedCode.campaign;
 
     return campaign.isSimplifiedAccess && !this.session.isAuthenticated;

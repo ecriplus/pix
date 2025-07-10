@@ -43,27 +43,9 @@ module('Unit | Route | Access', function (hooks) {
         route.session = sessionStub;
       });
 
-      test('should redirect to entry point when /access is directly set in the url', async function (assert) {
-        //when
-        await route.beforeModel({ from: null });
-
-        //then
-        sinon.assert.calledWith(route.router.replaceWith, 'campaigns.entry-point');
-        assert.ok(true);
-      });
-
-      test('should continue on access route when from is set', async function (assert) {
-        //when
-        await route.beforeModel({ from: 'campaigns.campaign-landing-page' });
-
-        //then
-        sinon.assert.notCalled(route.router.replaceWith);
-        assert.ok(true);
-      });
-
       test('should override authentication route', async function (assert) {
         // when
-        await route.beforeModel({ from: 'campaigns.campaign-landing-page' });
+        await route.beforeModel();
 
         // then
 
@@ -72,14 +54,11 @@ module('Unit | Route | Access', function (hooks) {
 
       test("should call parent's beforeModel and transition to authenticationRoute", async function (assert) {
         // when
-        await route.beforeModel({ from: 'campaigns.campaign-landing-page' });
+        const transition = { from: null };
+        await route.beforeModel(transition);
 
         // then
-        sinon.assert.calledWith(
-          sessionStub.requireAuthenticationAndApprovedTermsOfService,
-          { from: 'campaigns.campaign-landing-page' },
-          'inscription',
-        );
+        sinon.assert.calledWith(sessionStub.requireAuthenticationAndApprovedTermsOfService, transition, 'inscription');
         assert.ok(true);
       });
 
@@ -97,7 +76,7 @@ module('Unit | Route | Access', function (hooks) {
             organization.organizationToJoin.isRestrictedByIdentityProvider.withArgs('OIDC_PARTNER').returns(true);
 
             // when
-            await route.beforeModel({ from: 'campaigns.campaign-landing-page' });
+            await route.beforeModel();
 
             // then
             sinon.assert.calledWith(route.router.replaceWith, 'authentication.login-oidc', 'oidc-partner');
@@ -113,7 +92,7 @@ module('Unit | Route | Access', function (hooks) {
             organization.organizationToJoin.isRestrictedByIdentityProvider.withArgs(OIDC_PARTNER).returns(true);
 
             // when
-            await route.beforeModel({ from: 'campaigns.campaign-landing-page' });
+            await route.beforeModel();
 
             // then
             sinon.assert.neverCalledWith(route.router.replaceWith, 'authentication.login-oidc', 'oidc-partner');
@@ -140,7 +119,7 @@ module('Unit | Route | Access', function (hooks) {
           organization.organizationToJoin.hasReconciliationFields = false;
 
           // when
-          await route.beforeModel({ from: 'campaigns.campaign-landing-page' });
+          await route.beforeModel();
           // then
           assert.strictEqual(route.authenticationRoute, 'organizations.join.student-sco');
         });
@@ -150,7 +129,7 @@ module('Unit | Route | Access', function (hooks) {
           organization.organizationToJoin.hasReconciliationFields = true;
 
           // when
-          await route.beforeModel({ from: 'campaigns.campaign-landing-page' });
+          await route.beforeModel();
 
           // then
           assert.strictEqual(route.authenticationRoute, 'inscription');
@@ -168,7 +147,7 @@ module('Unit | Route | Access', function (hooks) {
         route.accessStorage.hasUserSeenJoinPage.withArgs(organization.organizationToJoin.id).returns(true);
 
         // when
-        await route.beforeModel({ from: 'campaigns.campaign-landing-page' });
+        await route.beforeModel();
 
         // then
         assert.strictEqual(route.authenticationRoute, 'organizations.join.student-sco');
@@ -183,7 +162,7 @@ module('Unit | Route | Access', function (hooks) {
         organization.organizationToJoin.isRestricted = true;
 
         // when
-        await route.beforeModel({ from: 'campaigns.campaign-landing-page' });
+        await route.beforeModel();
 
         // then
         assert.strictEqual(route.authenticationRoute, 'organizations.join.sco-mediacentre');
@@ -199,7 +178,7 @@ module('Unit | Route | Access', function (hooks) {
         route.session.isAuthenticated = false;
 
         // when
-        await route.beforeModel({ from: 'campaigns.campaign-landing-page' });
+        await route.beforeModel();
 
         // then
         assert.strictEqual(route.authenticationRoute, 'organizations.join.anonymous');

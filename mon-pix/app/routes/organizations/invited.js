@@ -12,10 +12,6 @@ export default class InvitedRoute extends Route {
   }
 
   beforeModel(transition) {
-    if (!transition.from) {
-      return this.router.replaceWith('campaigns.entry-point');
-    }
-
     this.session.requireAuthenticationAndApprovedTermsOfService(transition);
   }
 

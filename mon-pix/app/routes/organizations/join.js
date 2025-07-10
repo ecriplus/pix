@@ -5,10 +5,7 @@ export default class JoinRoute extends Route {
   @service session;
   @service router;
 
-  beforeModel(transition) {
-    if (!transition.from) {
-      return this.router.replaceWith('campaigns.entry-point');
-    }
+  beforeModel() {
     this.session.prohibitAuthentication('authenticated.user-dashboard');
     this.routeIfAlreadyAuthenticated = 'organizations.access';
 

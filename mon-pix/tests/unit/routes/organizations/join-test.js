@@ -22,29 +22,11 @@ module('Unit | Route | Join', function (hooks) {
       route.router = { replaceWith: sinon.stub() };
     });
 
-    test('should redirect to entry point when /rejoindre is directly set in the url', async function (assert) {
-      //when
-      await route.beforeModel({ from: null });
-
-      //then
-      sinon.assert.calledWith(route.router.replaceWith, 'campaigns.entry-point');
-      assert.ok(true);
-    });
-
-    test('should continue en entrance route when from is set', async function (assert) {
-      //when
-      await route.beforeModel({ from: 'campaigns.entry-point' });
-
-      //then
-      sinon.assert.notCalled(route.router.replaceWith);
-      assert.ok(true);
-    });
-
     test('should redefine routeIfAlreadyAuthenticated', async function (assert) {
       // given
 
       //when
-      await route.beforeModel({ from: 'campaigns.entry-point' });
+      await route.beforeModel();
 
       //then
       assert.strictEqual(route.routeIfAlreadyAuthenticated, 'organizations.access');

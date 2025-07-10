@@ -16,26 +16,6 @@ module('Unit | Route | Invited', function (hooks) {
     route.session.requireAuthenticationAndApprovedTermsOfService = sinon.stub();
   });
 
-  module('#beforeModel', function () {
-    test('should redirect to entry point when /prescrit is directly set in the url', async function (assert) {
-      //when
-      await route.beforeModel({ from: null });
-
-      //then
-      sinon.assert.calledWith(route.router.replaceWith, 'campaigns.entry-point');
-      assert.ok(true);
-    });
-
-    test('should continue en entrance route when from is set', async function (assert) {
-      //when
-      await route.beforeModel({ from: 'campaigns.entry-point' });
-
-      //then
-      sinon.assert.notCalled(route.router.replaceWith);
-      assert.ok(true);
-    });
-  });
-
   module('#model', function () {
     test('should load model', async function (assert) {
       //when
