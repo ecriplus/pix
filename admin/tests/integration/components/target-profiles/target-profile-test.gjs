@@ -25,6 +25,7 @@ module('Integration | Component | TargetProfile', function (hooks) {
     hasLinkedAutonomousCourse: false,
     id: 666,
     isSimplifiedAccess: false,
+    estimatedTime: 1800,
     maxLevel: 7,
     name: 'Dummy target-profile',
     outdated: false,
@@ -44,6 +45,14 @@ module('Integration | Component | TargetProfile', function (hooks) {
         // then
         assert.ok(_findByListItemText(screen, `ID : ${model.id}`));
         assert.ok(_findByListItemText(screen, `Organisation de référence : ${model.ownerOrganizationId}`));
+        assert.ok(
+          _findByListItemText(
+            screen,
+            `${t('pages.target-profiles.label.estimated-time')}${t('pages.target-profiles.estimated-range.thirty')} ${t(
+              'pages.target-profiles.label.estimated-time-experimental',
+            )}`,
+          ),
+        );
         assert.ok(_findByListItemText(screen, 'Date de création : 01/03/2024'));
         assert.ok(_findByListItemText(screen, 'Obsolète : Non'));
         assert.ok(_findByListItemText(screen, 'Parcours Accès Simplifié : Non'));
@@ -120,7 +129,12 @@ module('Integration | Component | TargetProfile', function (hooks) {
 function _findByListItemText(screen, text) {
   return (
     screen.getAllByRole('listitem').find((listitem) => {
-      const cleanListItemText = listitem.textContent.replace(/(\r\n|\n|\r)/gm, '').trim();
+      const cleanListItemText = listitem.textContent
+        .replace(/(\r\n|\n|\r)/gm, '')
+        .trim()
+        .replace(/  +/g, ' ');
+      console.log(text);
+      console.log(cleanListItemText);
       return cleanListItemText === text;
     }) || null
   );
