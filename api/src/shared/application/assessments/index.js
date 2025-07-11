@@ -33,21 +33,6 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/assessments/{id}/next',
-      config: {
-        auth: false,
-        validate: {
-          params: Joi.object({
-            id: identifiersType.assessmentId,
-          }),
-        },
-        handler: assessmentController.getAssessmentWithNextChallenge,
-        notes: ["- Récupération de la question suivante pour l'évaluation donnée"],
-        tags: ['api'],
-      },
-    },
-    {
-      method: 'GET',
       path: '/api/assessments/{id}',
       config: {
         auth: false,

@@ -46,21 +46,6 @@ describe('Unit | Application | Router | assessment-router', function () {
     });
   });
 
-  describe('GET /api/assessments/{id}/next', function () {
-    it('should return 200', async function () {
-      // given
-      sinon.stub(assessmentController, 'getAssessmentWithNextChallenge').returns('ok');
-      const httpTestServer = new HttpTestServer();
-      await httpTestServer.register(moduleUnderTest);
-
-      // when
-      const response = await httpTestServer.request('GET', '/api/assessments/1/next');
-
-      // then
-      expect(response.statusCode).to.equal(200);
-    });
-  });
-
   describe('GET /api/assessments/{id}', function () {
     const method = 'GET';
     const url = '/api/assessments/1';
