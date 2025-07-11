@@ -16,7 +16,7 @@ export default class NewRoute extends Route {
   beforeModel() {
     const places = this.modelFor('authenticated');
 
-    if (places?.hasReachMaximumPlacesWithThreshold) {
+    if (places?.hasReachedMaximumPlacesLimit) {
       this.router.replaceWith('authenticated.campaigns');
     }
   }

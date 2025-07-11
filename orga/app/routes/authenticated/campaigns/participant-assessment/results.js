@@ -8,7 +8,7 @@ export default class ResultsRoute extends Route {
     const campaignId = transition.to.params.campaign_id;
     const places = this.modelFor('authenticated');
 
-    if (places?.hasReachMaximumPlacesWithThreshold) {
+    if (places?.hasReachedMaximumPlacesLimit) {
       this.router.replaceWith('authenticated.campaigns.campaign', campaignId);
     }
   }

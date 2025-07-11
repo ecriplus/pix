@@ -28,7 +28,7 @@ module('Integration | Component | Banner | Maximum places exceeded', function (h
     module('when maximum places is not reached', function () {
       test('it should not display a banner', async function (assert) {
         // given
-        store.createRecord('organization-place-statistic', { hasReachMaximumPlacesWithThreshold: false });
+        store.createRecord('organization-place-statistic', { hasReachedMaximumPlacesLimit: false });
 
         // when
         const screen = await render(<template><MaximumPlacesExceeded /></template>);
@@ -41,7 +41,7 @@ module('Integration | Component | Banner | Maximum places exceeded', function (h
     module('when maximum places is reached', function () {
       test('it should display a banner', async function (assert) {
         // given
-        store.createRecord('organization-place-statistic', { hasReachMaximumPlacesWithThreshold: true });
+        store.createRecord('organization-place-statistic', { hasReachedMaximumPlacesLimit: true });
 
         // when
         const screen = await render(<template><MaximumPlacesExceeded /></template>);

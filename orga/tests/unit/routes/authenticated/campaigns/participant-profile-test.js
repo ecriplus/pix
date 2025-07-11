@@ -19,7 +19,7 @@ module('Unit | Route | authenticated/campaigns/{campaignId}/profils/{campaignPar
         const modelForStub = sinon.stub(route, 'modelFor');
         const replaceWithStub = sinon.stub(route.router, 'replaceWith');
 
-        modelForStub.withArgs('authenticated').returns({ hasReachMaximumPlacesWithThreshold: true });
+        modelForStub.withArgs('authenticated').returns({ hasReachedMaximumPlacesLimit: true });
 
         //when
         route.beforeModel({ to: { params: { campaign_id: campaignId } } });
@@ -38,7 +38,7 @@ module('Unit | Route | authenticated/campaigns/{campaignId}/profils/{campaignPar
         const modelForStub = sinon.stub(route, 'modelFor');
         const replaceWithStub = sinon.stub(route.router, 'replaceWith');
 
-        modelForStub.withArgs('authenticated').returns({ hasReachMaximumPlacesWithThreshold: false });
+        modelForStub.withArgs('authenticated').returns({ hasReachedMaximumPlacesLimit: false });
 
         //when
         route.beforeModel({ to: { params: { campaign_id: campaignId } } });

@@ -156,14 +156,14 @@ module('Unit | Route | authenticated/campaigns/campaign/assessment-results', fun
     });
 
     module('When places limit is reached', function () {
-      test('should redirect on main campaign page', function (assert) {
+      test('should redirect to main campaign page', function (assert) {
         //given
         const campaignId = Symbol('CampaignId');
 
         const modelForStub = sinon.stub(route, 'modelFor');
         const replaceWithStub = sinon.stub(route.router, 'replaceWith');
 
-        modelForStub.withArgs('authenticated').returns({ hasReachMaximumPlacesWithThreshold: true });
+        modelForStub.withArgs('authenticated').returns({ hasReachedMaximumPlacesLimit: true });
 
         //when
         route.beforeModel({
@@ -189,7 +189,7 @@ module('Unit | Route | authenticated/campaigns/campaign/assessment-results', fun
         const modelForStub = sinon.stub(route, 'modelFor');
         const replaceWithStub = sinon.stub(route.router, 'replaceWith');
 
-        modelForStub.withArgs('authenticated').returns({ hasReachMaximumPlacesWithThreshold: false });
+        modelForStub.withArgs('authenticated').returns({ hasReachedMaximumPlacesLimit: false });
 
         //when
         route.beforeModel({

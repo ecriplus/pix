@@ -158,7 +158,7 @@ module('Integration | Component | organizations/information-section-edit', funct
         );
         assert.notOk(
           screen.queryByLabelText(
-            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LOCK'),
+            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT'),
           ),
         );
       });
@@ -167,7 +167,7 @@ module('Integration | Component | organizations/information-section-edit', funct
         organization.features = {
           PLACES_MANAGEMENT: {
             active: true,
-            params: { enablePlacesThresholdLock: false },
+            params: { enableMaximumPlacesLimit: false },
           },
         };
 
@@ -179,7 +179,7 @@ module('Integration | Component | organizations/information-section-edit', funct
         );
         assert.false(
           screen.getByLabelText(
-            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LOCK'),
+            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT'),
           ).checked,
         );
       });
@@ -188,7 +188,7 @@ module('Integration | Component | organizations/information-section-edit', funct
         organization.features = {
           PLACES_MANAGEMENT: {
             active: true,
-            params: { enablePlacesThresholdLock: true },
+            params: { enableMaximumPlacesLimit: true },
           },
         };
 
@@ -200,7 +200,7 @@ module('Integration | Component | organizations/information-section-edit', funct
         );
         assert.true(
           screen.getByLabelText(
-            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LOCK'),
+            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT'),
           ).checked,
         );
       });

@@ -43,13 +43,13 @@ const getOrganizationPlacesStatistics = async function ({
   const placesManagementFeature = features.find(
     (feature) => feature.name === ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key,
   );
-  const isPlacesThresholdLockEnabled = placesManagementFeature?.params?.enablePlacesThresholdLock;
+  const isMaximumPlacesLimitEnabled = placesManagementFeature?.params?.enableMaximumPlacesLimit;
 
   return PlaceStatistics.buildFrom({
     placesLots,
     placeRepartition,
     organizationId,
-    enablePlacesThresholdLock: isPlacesThresholdLockEnabled,
+    enableMaximumPlacesLimit: isMaximumPlacesLimitEnabled,
   });
 };
 

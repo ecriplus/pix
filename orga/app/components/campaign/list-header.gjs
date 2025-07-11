@@ -12,7 +12,7 @@ export default class List extends Component {
 
   get hasReachedPlacesLimit() {
     const statistics = this.store.peekAll('organization-place-statistic')?.[0];
-    return statistics?.hasReachMaximumPlacesWithThreshold;
+    return statistics?.hasReachedMaximumPlacesLimit;
   }
 
   get campaignCreationRoute() {

@@ -17,7 +17,7 @@ export default class CampaignTabs extends Component {
 
   get hasReachedPlacesLimit() {
     const statistics = this.store.peekAll('organization-place-statistic')?.[0];
-    return statistics?.hasReachMaximumPlacesWithThreshold;
+    return statistics?.hasReachedMaximumPlacesLimit;
   }
 
   @action

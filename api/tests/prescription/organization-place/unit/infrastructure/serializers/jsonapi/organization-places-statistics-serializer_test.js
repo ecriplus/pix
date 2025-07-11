@@ -32,7 +32,7 @@ describe('Unit | Serializer | JSONAPI | organization-places-statistics-serialize
             occupied: 5,
             available: 5,
             'anonymous-seat': 3,
-            'has-reach-maximum-places-with-threshold': false,
+            'has-reached-maximum-places-limit': false,
           },
         },
       };

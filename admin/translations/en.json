@@ -509,7 +509,7 @@
           "IS_MANAGING_STUDENTS": "Managing students",
           "LEARNER_IMPORT": "Import",
           "MULTIPLE_SENDING_ASSESSMENT": "Multiple sending on assessment campaigns",
-          "ORGANIZATION_PLACES_LOCK": "Block organization in case of places threshold exceeded",
+          "ORGANIZATION_PLACES_LIMIT": "Block organization in case of places limit exceeded",
           "PLACES_MANAGEMENT": "Display the Places page on PixOrga",
           "SHOW_NPS": "Net Promoter Score display",
           "SHOW_SKILLS": "Displaying skills in the results export",

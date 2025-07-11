@@ -371,7 +371,7 @@ function _paramsForFeature(importFormats, key, value) {
   }
 
   if (key === ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key) {
-    return { enablePlacesThresholdLock: value.params?.enablePlacesThresholdLock || false };
+    return { enableMaximumPlacesLimit: value.params?.enableMaximumPlacesLimit || false };
   }
 }
 

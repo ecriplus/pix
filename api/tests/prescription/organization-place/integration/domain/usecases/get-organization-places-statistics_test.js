@@ -48,7 +48,7 @@ describe('Integration | Domain | Use Cases | get-organization-places-statistics'
         organizationId,
         featureId: placesManagementFeatureId,
         params: {
-          enablePlacesThresholdLock: true,
+          enableMaximumPlacesLimit: true,
         },
       });
 
@@ -70,12 +70,12 @@ describe('Integration | Domain | Use Cases | get-organization-places-statistics'
       expect(organizationPlacesStatistics.occupied).to.equal(2);
       expect(organizationPlacesStatistics.anonymousSeat).to.equal(1);
       expect(organizationPlacesStatistics.available).to.equal(0);
-      expect(organizationPlacesStatistics.hasReachMaximumPlacesWithThreshold).to.equal(true);
+      expect(organizationPlacesStatistics.hasReachedMaximumPlacesLimit).to.equal(true);
     });
   });
 
   describe('When organization does not have the blocking place feature', function () {
-    it('should return false on hasReachMaximumPlacesWithThreshold', async function () {
+    it('should return false on hasReachedMaximumPlacesLimit', async function () {
       // given
       databaseBuilder.factory.buildOrganizationPlace({
         organizationId,
@@ -91,7 +91,7 @@ describe('Integration | Domain | Use Cases | get-organization-places-statistics'
       });
 
       // then
-      expect(organizationPlacesStatistics.hasReachMaximumPlacesWithThreshold).to.equal(false);
+      expect(organizationPlacesStatistics.hasReachedMaximumPlacesLimit).to.equal(false);
     });
   });
 });
