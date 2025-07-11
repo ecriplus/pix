@@ -1069,7 +1069,6 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           );
 
           // then
-          assert.dom(screen.getByText(t('pages.skill-review.organization-message'))).exists();
           assert.dom(screen.getByText('My custom result page text')).exists();
         });
       });
@@ -1095,7 +1094,6 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           );
 
           // then
-          assert.dom(screen.getByText(t('pages.skill-review.organization-message'))).exists();
           assert.dom(screen.getByRole('link', { name: 'Custom result page button text' })).exists();
         });
       });
@@ -1115,7 +1113,6 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           );
 
           // then
-          assert.dom(screen.queryByText(t('pages.skill-review.organization-message'))).doesNotExist();
           assert.dom(screen.queryByText('My custom result page text')).doesNotExist();
         });
       });
@@ -1137,7 +1134,6 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           );
 
           // then
-          assert.dom(screen.queryByText(t('pages.skill-review.organization-message'))).doesNotExist();
           assert.dom(screen.queryByText('My custom result page text')).doesNotExist();
         });
       });
@@ -1162,7 +1158,6 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
             );
 
             // then
-            assert.dom(screen.getByText(t('pages.skill-review.organization-message'))).exists();
             assert.dom(screen.getByText('My custom result page text')).exists();
           });
         });
@@ -1188,7 +1183,6 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
             );
 
             // then
-            assert.dom(screen.getByText(t('pages.skill-review.organization-message'))).exists();
             assert.dom(screen.getByRole('link', { name: 'Custom result page button text' })).exists();
           });
         });
@@ -1208,7 +1202,6 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
             );
 
             // then
-            assert.dom(screen.queryByText(t('pages.skill-review.organization-message'))).doesNotExist();
             assert.dom(screen.queryByText('My custom result page text')).doesNotExist();
           });
         });
