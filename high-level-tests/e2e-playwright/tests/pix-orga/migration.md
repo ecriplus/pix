@@ -5,7 +5,7 @@
 **Homepage**
 
 - [ ] (NEW) Changer d'organisation
-- [ ] Logout
+- [x] Logout
 
 **Onboarding**
 
@@ -24,9 +24,9 @@
 
 **campaign-evaluation**
 
-- [ ] Création d'une campagne d'évaluation
-- [ ] Modification d'une campagne d'évaluation
-- [ ] Je consulte le détail d'une campagne d'évaluation
+- [x] Création d'une campagne d'évaluation
+- [x] Modification d'une campagne d'évaluation
+- [x] Je consulte le détail d'une campagne d'évaluation
 
 **campaign-profile**
 
@@ -36,8 +36,8 @@
 
 **campaign-management**
 
-- [ ] Duplication
-- [ ] Archivage / désarchivage
+- [x] Duplication
+- [x] Archivage / désarchivage
 
 **member-management**
 
