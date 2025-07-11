@@ -41,10 +41,18 @@ export async function buildFreshPixOrgaUser(
   email: string,
   rawPassword: string,
   role: string,
+  organization: { type: string; externalId: string; isManagingStudents: boolean },
 ) {
-  const organizationId = await createOrganizationInDB('PRO', 'Organization for ' + email, false);
+  const organizationId = await createOrganizationInDB(organization);
   const userId = await createUserInDB(firstName, lastName, email, rawPassword, false, false, false, undefined);
   await createOrganizationMembershipInDB(userId, organizationId, role);
+
+  const targetProfileIds = await knex('target-profiles').pluck('id');
+  const targetProfileSharesToInsert = targetProfileIds.map((targetProfileId) => ({
+    targetProfileId,
+    organizationId,
+  }));
+  await knex('target-profile-shares').insert(targetProfileSharesToInsert);
 }
 
 export async function setAssessmentIdSequence(id: number) {
@@ -84,11 +92,7 @@ async function buildAuthenticatedUsers() {
 
     for (const organization of data.organizations) {
       if (!createdOrganizations[organization.externalId]) {
-        const organizationId = await createOrganizationInDB(
-          organization.type,
-          organization.externalId,
-          organization.isManagingStudents,
-        );
+        const organizationId = await createOrganizationInDB(organization);
         createdOrganizations[organization.externalId] = organizationId;
       }
       await createOrganizationMembershipInDB(userId, createdOrganizations[organization.externalId], data.role);
@@ -181,7 +185,7 @@ async function createUserInDB(
   mustValidateTermsOfService: boolean,
   id: number | undefined,
 ) {
-  const someDate = new Date('2025-07-09');
+  const someDate = new Date();
   const [{ id: userId }] = await knex('users')
     .insert({
       id,
@@ -228,8 +232,16 @@ async function createLegalDocumentVersionInDB() {
   return id;
 }
 
-async function createOrganizationInDB(type: string, externalId: string, isManagingStudents: boolean) {
-  const someDate = new Date('2025-07-09');
+async function createOrganizationInDB({
+  type,
+  externalId,
+  isManagingStudents,
+}: {
+  type: string;
+  externalId: string;
+  isManagingStudents: boolean;
+}) {
+  const someDate = new Date();
   const [{ id }] = await knex('organizations')
     .insert({
       type,
@@ -257,7 +269,7 @@ async function createOrganizationInDB(type: string, externalId: string, isManagi
 }
 
 async function createOrganizationMembershipInDB(userId: number, organizationId: number, role: string) {
-  const someDate = new Date('2025-07-09');
+  const someDate = new Date();
   await knex('memberships').insert({
     organizationId,
     organizationRole: role,
@@ -313,7 +325,7 @@ async function createCertificationCenterMembershipInDB(userId: number, certifica
 }
 
 async function createTargetProfileInDB(name: string) {
-  const someDate = new Date('2025-07-09');
+  const someDate = new Date();
   const [{ id }] = await knex('target-profiles')
     .insert({
       name,
@@ -347,4 +359,38 @@ async function createTargetProfileTubesInDB(targetProfileId: number, level: numb
     level,
   }));
   await knex('target-profile_tubes').insert(dataToInsert);
+}
+
+export async function createGARUser(id: string, firstName: string, lastName: string, cgu: boolean) {
+  const someDate = new Date();
+  const [{ id: userId }] = await knex('users')
+    .insert({
+      firstName,
+      lastName,
+      cgu,
+      pixCertifTermsOfServiceAccepted: false,
+      lang: 'fr',
+      lastTermsOfServiceValidatedAt: cgu ? someDate : null,
+      lastPixCertifTermsOfServiceValidatedAt: null,
+      mustValidateTermsOfService: false,
+      hasSeenAssessmentInstructions: false,
+      createdAt: someDate,
+      updatedAt: someDate,
+      emailConfirmedAt: null,
+    })
+    .returning('id');
+
+  await knex('authentication-methods').insert({
+    userId: userId,
+    identityProvider: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
+    authenticationComplement: new AuthenticationMethod.GARAuthenticationComplement({
+      firstName,
+      lastName,
+    }),
+    externalIdentifier: `externalGAR-${id}`,
+    createdAt: someDate,
+    updatedAt: someDate,
+  });
+
+  return userId;
 }

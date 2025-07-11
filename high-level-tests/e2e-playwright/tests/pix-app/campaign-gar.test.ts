@@ -1,6 +1,6 @@
 import { getGarTokenForNewUser } from '../../helpers/auth.js';
 import { expect, test } from '../../helpers/fixtures.js';
-import { CreateCampaignPage } from '../../pages/pix-orga/index.js';
+import { PixOrgaPage } from '../../pages/pix-orga/index.js';
 
 test('creates an account from GAR', async ({ page, pixOrgaMemberContext }) => {
   let campaignCode: string | null;
@@ -10,7 +10,7 @@ test('creates an account from GAR', async ({ page, pixOrgaMemberContext }) => {
     await pixOrgaPage.goto(process.env.PIX_ORGA_URL as string);
     await test.step('creates the campaign', async () => {
       await pixOrgaPage.getByRole('link', { name: 'Créer une campagne' }).click();
-      const createCampaignPage = new CreateCampaignPage(pixOrgaPage);
+      const createCampaignPage = new PixOrgaPage(pixOrgaPage);
       await createCampaignPage.createEvaluationCampaign({
         campaignName: 'Test GAR account creation',
         targetProfileName: 'PC pour Playwright',
