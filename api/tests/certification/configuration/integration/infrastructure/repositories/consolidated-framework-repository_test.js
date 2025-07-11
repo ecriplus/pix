@@ -80,9 +80,10 @@ describe('Certification | Configuration | Integration | Repository | consolidate
         });
 
       // then
-      expect(_.omit(currentConsolidatedFramework, 'createdAt')).to.deep.equal({
+      expect(currentConsolidatedFramework).to.deep.equal({
         calibrationId: 123,
         complementaryCertificationKey: complementaryCertification.key,
+        version: '20250621000000',
         challenges: [
           {
             challengeId: 'challengeId1234',
@@ -94,35 +95,33 @@ describe('Certification | Configuration | Integration | Repository | consolidate
     });
   });
 
-  describe('#getByCreationDateAndComplementaryKey', function () {
+  describe('#getByVersionAndComplementaryKey', function () {
     it('should return an error when it does not exist', async function () {
       // given
-      const createdAt = new Date();
       const complementaryCertificationKey = ComplementaryCertificationKeys.PIX_PLUS_DROIT;
 
       // when
-      const error = await catchErr(consolidatedFrameworkRepository.getByCreationDateAndComplementaryKey)({
+      const error = await catchErr(consolidatedFrameworkRepository.getByVersionAndComplementaryKey)({
         complementaryCertificationKey,
-        createdAt,
+        version: '20250621000000',
       });
 
-      // then
       // then
       expect(error).to.deepEqualInstance(new NotFoundError('Consolidated framework does not exist'));
     });
 
     it('should return a consolidated framework sorted by challengeId', async function () {
       // given
-      const createdAt = new Date();
+      const version = '20250621000000';
       const otherCreatedAt = new Date('2023-06-23');
       const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
       const secondChallengeSelected = databaseBuilder.factory.buildCertificationFrameworksChallenge({
-        createdAt,
+        version,
         challengeId: 'rec234',
         complementaryCertificationKey: complementaryCertification.key,
       });
       const firstChallengeSelected = databaseBuilder.factory.buildCertificationFrameworksChallenge({
-        createdAt,
+        version,
         challengeId: 'rec123',
         complementaryCertificationKey: complementaryCertification.key,
       });
@@ -135,7 +134,7 @@ describe('Certification | Configuration | Integration | Repository | consolidate
 
       const expectedFrameworkChallenges = domainBuilder.certification.configuration.buildConsolidatedFramework({
         complementaryCertificationKey: complementaryCertification.key,
-        createdAt,
+        version,
         challenges: [
           domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
             challengeId: firstChallengeSelected.challengeId,
@@ -151,11 +150,10 @@ describe('Certification | Configuration | Integration | Repository | consolidate
       });
 
       // when
-      const certificationFrameworksChallenges =
-        await consolidatedFrameworkRepository.getByCreationDateAndComplementaryKey({
-          complementaryCertificationKey: complementaryCertification.key,
-          createdAt,
-        });
+      const certificationFrameworksChallenges = await consolidatedFrameworkRepository.getByVersionAndComplementaryKey({
+        complementaryCertificationKey: complementaryCertification.key,
+        version,
+      });
 
       // then
       expect(certificationFrameworksChallenges).to.deep.equal(expectedFrameworkChallenges);
@@ -205,7 +203,7 @@ describe('Certification | Configuration | Integration | Repository | consolidate
         calibrationId: 1,
         challenges: [firstCalibratedCertificationFrameworksChallenge, secondCalibratedCertificationFrameworksChallenge],
         complementaryCertificationKey: complementaryCertification.key,
-        createdAt: firstCertificationFrameworksChallenge.createdAt,
+        version: firstCertificationFrameworksChallenge.version,
       });
 
       const expectedCalibratedFrameworkChallenges = [

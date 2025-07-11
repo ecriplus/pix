@@ -1,9 +1,5 @@
-import ComplementaryCertificationTubes from '../../db/seeds/data/team-certification/cases/complementary-certification-challenges.js';
+import { complementaryCertifications } from '../../db/seeds/data/team-certification/cases/complementary-certifications.js';
 import { ComplementaryCertificationKeys } from '../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { LOCALE } from '../../src/shared/domain/constants.js';
-import * as challengeRepository from '../../src/shared/infrastructure/repositories/challenge-repository.js';
-import * as skillRepository from '../../src/shared/infrastructure/repositories/skill-repository.js';
-import * as tubeRepository from '../../src/shared/infrastructure/repositories/tube-repository.js';
 
 async function insertCalibrations({ knex }) {
   const id = nextCalibrationId();
@@ -19,20 +15,12 @@ async function insertCalibrations({ knex }) {
 }
 
 async function insertActiveCalibratedChallenges({ knex, calibrationId }) {
-  const tubes = await tubeRepository.findActiveByRecordIds(
-    ComplementaryCertificationTubes[0].tubeIds,
-    LOCALE.FRENCH_SPOKEN,
-  );
+  const challengeIds = complementaryCertifications[0].challengeIds;
 
-  const skillIds = tubes.flatMap((tube) => tube.skillIds);
-  const skills = await skillRepository.findActiveByRecordIds(skillIds);
-
-  const challenges = await challengeRepository.findOperativeBySkills(skills, LOCALE.FRENCH_SPOKEN);
-
-  const activeCalibratedChallenges = challenges.map((challenge) => {
+  const activeCalibratedChallenges = challengeIds.map((challengeId) => {
     return {
       calibration_id: calibrationId,
-      challenge_id: challenge.id,
+      challenge_id: challengeId,
       alpha: 2.3,
       delta: 5.1,
     };

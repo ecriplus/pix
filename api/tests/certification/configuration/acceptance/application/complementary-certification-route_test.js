@@ -312,11 +312,11 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       const superAdmin = await insertUserWithRoleSuperAdmin();
 
       const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
-      const createdAt = new Date('2023-06-18');
+      const version = '20230618000000';
       const certificationFrameworkChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
         challengeId: 'recChallengeId',
         complementaryCertificationKey: complementaryCertification.key,
-        createdAt,
+        version,
       });
 
       await databaseBuilder.commit();
@@ -350,7 +350,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
         payload: {
           data: {
             attributes: {
-              createdAt,
+              version,
               calibrationId: calibration.id,
             },
           },
@@ -365,16 +365,16 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
 
       const certificationFrameworksChallenges = await knex('certification-frameworks-challenges').where({
         complementaryCertificationKey: complementaryCertification.key,
-        createdAt,
+        version,
       });
       expect(certificationFrameworksChallenges).to.have.length(1);
-      expect(_.omit(certificationFrameworksChallenges[0], 'id')).to.deep.equal({
+      expect(_.omit(certificationFrameworksChallenges[0], 'id', 'createdAt')).to.deep.equal({
         calibrationId: calibration.id,
         discriminant: activeCalibratedChallenge.alpha,
         difficulty: activeCalibratedChallenge.delta,
         challengeId: certificationFrameworkChallenge.challengeId,
         complementaryCertificationKey: complementaryCertification.key,
-        createdAt: certificationFrameworkChallenge.createdAt,
+        version,
       });
     });
   });
@@ -385,7 +385,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       const superAdmin = await insertUserWithRoleSuperAdmin();
 
       const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
-      const certificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+      databaseBuilder.factory.buildCertificationFrameworksChallenge({
         complementaryCertificationKey: complementaryCertification.key,
         challengeId: 'rec1234',
         discriminant: 2.1,
@@ -410,7 +410,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
         type: 'certification-consolidated-frameworks',
         attributes: {
           'complementary-certification-key': complementaryCertification.key,
-          'created-at': certificationFrameworksChallenge.createdAt,
+          version: '20230111000000',
           challenges: [
             {
               challengeId: 'rec1234',

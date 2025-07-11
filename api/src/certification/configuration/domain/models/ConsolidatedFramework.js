@@ -7,13 +7,13 @@ export class ConsolidatedFramework {
   /**
    * @param {Object} params
    * @param {ComplementaryCertificationKeys} params.complementaryCertificationKey
-   * @param {Date} params.createdAt
+   * @param {String} params.version
    * @param {number} [params.calibrationId]
    * @param {Array<CertificationFrameworksChallenge>} [params.challenges]
    */
-  constructor({ complementaryCertificationKey, createdAt, calibrationId, challenges = [] }) {
+  constructor({ complementaryCertificationKey, version, calibrationId, challenges = [] }) {
     this.complementaryCertificationKey = complementaryCertificationKey;
-    this.createdAt = createdAt;
+    this.version = version;
     this.calibrationId = calibrationId;
     this.challenges = challenges;
   }

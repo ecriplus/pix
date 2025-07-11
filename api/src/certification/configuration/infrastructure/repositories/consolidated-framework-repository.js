@@ -1,4 +1,3 @@
-// @ts-check
 /**
  * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
  */
@@ -23,12 +22,9 @@ export async function getCurrentFrameworkByComplementaryCertificationKey({ compl
   const knexConn = DomainTransaction.getConnection();
 
   const currentFrameworkChallengesDTO = await knexConn('certification-frameworks-challenges')
-    .select('discriminant', 'difficulty', 'challengeId', 'createdAt', 'calibrationId', 'complementaryCertificationKey')
+    .select('discriminant', 'difficulty', 'challengeId', 'version', 'calibrationId', 'complementaryCertificationKey')
     .where({
-      createdAt: knexConn('certification-frameworks-challenges')
-        .select('createdAt')
-        .orderBy('createdAt', 'desc')
-        .first(),
+      version: knexConn('certification-frameworks-challenges').select('version').orderBy('version', 'desc').first(),
       complementaryCertificationKey,
     })
     .select('*');
@@ -43,7 +39,7 @@ export async function getCurrentFrameworkByComplementaryCertificationKey({ compl
  * @returns {Promise<ConsolidatedFramework>}
  * @throws {NotFoundError}
  */
-export async function getByCreationDateAndComplementaryKey({ version, complementaryCertificationKey }) {
+export async function getByVersionAndComplementaryKey({ version, complementaryCertificationKey }) {
   const knexConn = DomainTransaction.getConnection();
 
   const certificationFrameworksChallengesDTO = await knexConn('certification-frameworks-challenges')
@@ -54,7 +50,7 @@ export async function getByCreationDateAndComplementaryKey({ version, complement
     })
     .orderBy('challengeId');
 
-  if (certificationFrameworksChallengesDTO.length == 0) {
+  if (certificationFrameworksChallengesDTO.length === 0) {
     throw new NotFoundError('Consolidated framework does not exist');
   }
 
@@ -77,18 +73,18 @@ export async function save(consolidatedFramework) {
       })
       .where({
         complementaryCertificationKey: consolidatedFramework.complementaryCertificationKey,
-        createdAt: consolidatedFramework.createdAt,
+        version: consolidatedFramework.version,
         challengeId,
       });
   }
 }
 
 function _toDomain({ certificationFrameworksChallengesDTO }) {
-  const { complementaryCertificationKey, createdAt, calibrationId } = certificationFrameworksChallengesDTO[0];
+  const { complementaryCertificationKey, version, calibrationId } = certificationFrameworksChallengesDTO[0];
 
   return new ConsolidatedFramework({
     complementaryCertificationKey,
-    createdAt,
+    version,
     calibrationId,
     challenges: certificationFrameworksChallengesDTO.map(
       (challenge) => new CertificationFrameworksChallenge(challenge),

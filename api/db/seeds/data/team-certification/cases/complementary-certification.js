@@ -1,5 +1,5 @@
 import { usecases as certificationConfigurationUsecases } from '../../../../../src/certification/configuration/domain/usecases/index.js';
-import ComplementaryCertificationTubes from './complementary-certification-challenges.js';
+import { complementaryCertifications } from './complementary-certifications.js';
 
 export class ComplementaryCertificationSeed {
   constructor({ databaseBuilder }) {
@@ -7,8 +7,8 @@ export class ComplementaryCertificationSeed {
   }
 
   async create() {
-    const tubeIds = ComplementaryCertificationTubes[0].tubeIds;
-    const complementaryCertificationKey = ComplementaryCertificationTubes[0].complementaryCertificationKey;
+    const tubeIds = complementaryCertifications[0].tubeIds;
+    const complementaryCertificationKey = complementaryCertifications[0].complementaryCertificationKey;
     certificationConfigurationUsecases.createConsolidatedFramework({ complementaryCertificationKey, tubeIds });
   }
 }

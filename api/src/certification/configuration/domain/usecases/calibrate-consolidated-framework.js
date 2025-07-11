@@ -8,6 +8,7 @@
  */
 
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { NotFoundError } from '../../../../shared/domain/errors.js';
 
 export const calibrateConsolidatedFramework = withTransaction(
   /**
@@ -26,7 +27,7 @@ export const calibrateConsolidatedFramework = withTransaction(
     consolidatedFrameworkRepository,
     activeCalibratedChallengeRepository,
   }) => {
-    const consolidatedFramework = await consolidatedFrameworkRepository.getByCreationDateAndComplementaryKey({
+    const consolidatedFramework = await consolidatedFrameworkRepository.getByVersionAndComplementaryKey({
       complementaryCertificationKey,
       version,
     });
@@ -36,8 +37,11 @@ export const calibrateConsolidatedFramework = withTransaction(
       calibrationId,
     });
 
-    consolidatedFramework.calibrationId = calibrationId;
-    _calibrateChallenges(activeCalibratedChallenges, consolidatedFramework.challenges);
+    _calibrateConsolidatedFramework({
+      consolidatedFramework,
+      calibrationId,
+      activeCalibratedChallenges,
+    });
 
     return consolidatedFrameworkRepository.save(consolidatedFramework);
   },
@@ -47,13 +51,19 @@ export const calibrateConsolidatedFramework = withTransaction(
  * @param {Array<ActiveCalibratedChallenge>} activeCalibratedChallenges
  * @param {Array<CertificationFrameworksChallenge>} challengesToCalibrate
  */
-const _calibrateChallenges = (activeCalibratedChallenges, challengesToCalibrate) => {
+const _calibrateConsolidatedFramework = ({ consolidatedFramework, calibrationId, activeCalibratedChallenges }) => {
+  consolidatedFramework.calibrationId = calibrationId;
   for (let source = 0, target = 0; source < activeCalibratedChallenges.length; source++, target++) {
-    while (activeCalibratedChallenges[source].challengeId !== challengesToCalibrate[target].challengeId) {
+    while (activeCalibratedChallenges[source].challengeId !== consolidatedFramework.challenges[target]?.challengeId) {
+      if (!consolidatedFramework.challenges[target]) {
+        throw new NotFoundError(
+          `The challenge ${activeCalibratedChallenges[source].challengeId} does not exist in the consolidatedFramework challenges`,
+        );
+      }
       target++;
     }
 
-    const frameworkChallenge = challengesToCalibrate[target];
+    const frameworkChallenge = consolidatedFramework.challenges[target];
     frameworkChallenge.calibrate(activeCalibratedChallenges[source]);
   }
 };

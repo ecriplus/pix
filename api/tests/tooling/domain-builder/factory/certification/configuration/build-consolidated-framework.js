@@ -3,13 +3,13 @@ import { ComplementaryCertificationKeys } from '../../../../../../src/certificat
 
 export const buildConsolidatedFramework = function ({
   complementaryCertificationKey = ComplementaryCertificationKeys.PIX_PLUS_DROIT,
-  createdAt = new Date(),
+  version = '20240607080000',
   calibrationId = undefined,
   challenges = [],
 } = {}) {
   return new ConsolidatedFramework({
     complementaryCertificationKey,
-    createdAt,
+    version,
     calibrationId,
     challenges,
   });

@@ -1,7 +1,8 @@
 import { calibrateConsolidatedFramework } from '../../../../../../src/certification/configuration/domain/usecases/calibrate-consolidated-framework.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Unit | UseCase | calibrate-consolidated-framework', function () {
   let complementaryCertification, consolidatedFrameworkRepository, activeCalibratedChallengeRepository;
@@ -14,7 +15,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
     });
 
     consolidatedFrameworkRepository = {
-      getByCreationDateAndComplementaryKey: sinon.stub(),
+      getByVersionAndComplementaryKey: sinon.stub(),
       calibrate: sinon.stub(),
       save: sinon.stub(),
     };
@@ -29,8 +30,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
       // given
       const calibrationId = 1;
 
-      const certificationFramework = domainBuilder.certification.configuration.buildConsolidatedFramework({
-        createdAt: new Date(),
+      const consolidatedFramework = domainBuilder.certification.configuration.buildConsolidatedFramework({
         complementaryCertificationKey: complementaryCertification.key,
         challenges: [
           domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
@@ -44,7 +44,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
       const activeCalibratedChallenges = [
         domainBuilder.certification.configuration.buildActiveCalibratedChallenge({
           scope: complementaryCertification.key,
-          challengeId: certificationFramework.challenges[0].challengeId,
+          challengeId: consolidatedFramework.challenges[0].challengeId,
           discriminant: 1.4,
           difficulty: 2.2,
         }),
@@ -52,23 +52,23 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
 
       const expectedFramework = domainBuilder.certification.configuration.buildConsolidatedFramework({
         calibrationId,
-        createdAt: certificationFramework.createdAt,
+        version: consolidatedFramework.version,
         complementaryCertificationKey: complementaryCertification.key,
         challenges: [
           domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
-            challengeId: certificationFramework.challenges[0].challengeId,
+            challengeId: consolidatedFramework.challenges[0].challengeId,
             discriminant: activeCalibratedChallenges[0].discriminant,
             difficulty: activeCalibratedChallenges[0].difficulty,
           }),
         ],
       });
 
-      consolidatedFrameworkRepository.getByCreationDateAndComplementaryKey
+      consolidatedFrameworkRepository.getByVersionAndComplementaryKey
         .withArgs({
           complementaryCertificationKey: complementaryCertification.key,
-          createdAt: certificationFramework.createdAt,
+          version: consolidatedFramework.version,
         })
-        .resolves(certificationFramework);
+        .resolves(consolidatedFramework);
 
       activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId
         .withArgs({
@@ -79,8 +79,8 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
 
       // when
       await calibrateConsolidatedFramework({
-        complementaryCertificationKey: certificationFramework.complementaryCertificationKey,
-        createdAt: certificationFramework.createdAt,
+        complementaryCertificationKey: consolidatedFramework.complementaryCertificationKey,
+        version: consolidatedFramework.version,
         calibrationId,
         consolidatedFrameworkRepository,
         activeCalibratedChallengeRepository,
@@ -96,7 +96,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
       // given
       const calibrationId = 1;
 
-      const certificationFramework = domainBuilder.certification.configuration.buildConsolidatedFramework({
+      const consolidatedFramework = domainBuilder.certification.configuration.buildConsolidatedFramework({
         createdAt: new Date(),
         complementaryCertificationKey: complementaryCertification.key,
         challenges: [
@@ -116,7 +116,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
       const activeCalibratedChallenges = [
         domainBuilder.certification.configuration.buildActiveCalibratedChallenge({
           scope: complementaryCertification.key,
-          challengeId: certificationFramework.challenges[1].challengeId,
+          challengeId: consolidatedFramework.challenges[1].challengeId,
           discriminant: 1.4,
           difficulty: 2.2,
         }),
@@ -124,24 +124,24 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
 
       const expectedFramework = domainBuilder.certification.configuration.buildConsolidatedFramework({
         calibrationId,
-        createdAt: certificationFramework.createdAt,
+        version: consolidatedFramework.version,
         complementaryCertificationKey: complementaryCertification.key,
         challenges: [
-          certificationFramework.challenges[0],
+          consolidatedFramework.challenges[0],
           domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
-            challengeId: certificationFramework.challenges[1].challengeId,
+            challengeId: consolidatedFramework.challenges[1].challengeId,
             discriminant: activeCalibratedChallenges[0].discriminant,
             difficulty: activeCalibratedChallenges[0].difficulty,
           }),
         ],
       });
 
-      consolidatedFrameworkRepository.getByCreationDateAndComplementaryKey
+      consolidatedFrameworkRepository.getByVersionAndComplementaryKey
         .withArgs({
           complementaryCertificationKey: complementaryCertification.key,
-          createdAt: certificationFramework.createdAt,
+          version: consolidatedFramework.version,
         })
-        .resolves(certificationFramework);
+        .resolves(consolidatedFramework);
 
       activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId
         .withArgs({
@@ -152,8 +152,8 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
 
       // when
       await calibrateConsolidatedFramework({
-        complementaryCertificationKey: certificationFramework.complementaryCertificationKey,
-        createdAt: certificationFramework.createdAt,
+        complementaryCertificationKey: consolidatedFramework.complementaryCertificationKey,
+        version: consolidatedFramework.version,
         calibrationId,
         consolidatedFrameworkRepository,
         activeCalibratedChallengeRepository,
@@ -161,6 +161,64 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
 
       // then
       expect(consolidatedFrameworkRepository.save).to.have.been.calledOnceWithExactly(expectedFramework);
+    });
+  });
+
+  describe('when active calibrated has more challenges than consolidated framework ones', function () {
+    it('should return an error', async function () {
+      // given
+      const calibrationId = 1;
+
+      const consolidatedFramework = domainBuilder.certification.configuration.buildConsolidatedFramework({
+        createdAt: new Date(),
+        complementaryCertificationKey: complementaryCertification.key,
+        challenges: [
+          domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
+            challengeId: 'rec1234',
+            discriminant: null,
+            difficulty: null,
+          }),
+        ],
+      });
+
+      const activeCalibratedChallenges = [
+        domainBuilder.certification.configuration.buildActiveCalibratedChallenge({
+          scope: complementaryCertification.key,
+          challengeId: consolidatedFramework.challenges[0].challengeId,
+          discriminant: 1.4,
+          difficulty: 2.2,
+        }),
+        domainBuilder.certification.configuration.buildActiveCalibratedChallenge({
+          scope: complementaryCertification.key,
+        }),
+      ];
+
+      consolidatedFrameworkRepository.getByVersionAndComplementaryKey
+        .withArgs({
+          complementaryCertificationKey: complementaryCertification.key,
+          version: consolidatedFramework.version,
+        })
+        .resolves(consolidatedFramework);
+
+      activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId
+        .withArgs({
+          complementaryCertificationKey: complementaryCertification.key,
+          calibrationId,
+        })
+        .resolves(activeCalibratedChallenges);
+
+      // when
+      const error = await catchErr(calibrateConsolidatedFramework)({
+        complementaryCertificationKey: consolidatedFramework.complementaryCertificationKey,
+        version: consolidatedFramework.version,
+        calibrationId,
+        consolidatedFrameworkRepository,
+        activeCalibratedChallengeRepository,
+      });
+
+      // then
+      expect(error).to.be.an.instanceof(NotFoundError);
+      expect(error.message).to.equal('The challenge rec123 does not exist in the consolidatedFramework challenges');
     });
   });
 });

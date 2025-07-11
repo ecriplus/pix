@@ -27,9 +27,9 @@ export async function getByComplementaryKeyAndCalibrationId({ complementaryCerti
     throw new NotFoundError(`Calibration does not exist`);
   }
 
-  return activeCalibratedChallengesDTO.map((activeCalibratedChallenge) => toDomain({ activeCalibratedChallenge }));
+  return activeCalibratedChallengesDTO.map((activeCalibratedChallenge) => _toDomain({ activeCalibratedChallenge }));
 }
 
-function toDomain({ activeCalibratedChallenge }) {
+function _toDomain({ activeCalibratedChallenge }) {
   return new ActiveCalibratedChallenge(activeCalibratedChallenge);
 }

@@ -6,18 +6,18 @@ import { ComplementaryCertificationKeys } from '../../../../../../src/certificat
 describe('Certification | Configuration | Unit | Domain | Models | ConsolidatedFramework', function () {
   it('should create a consolidated framework', function () {
     // given
-    const createdAt = new Date();
+    const version = '20210204090000';
 
     // when
     const consolidatedFramework = new ConsolidatedFramework({
       complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE,
-      createdAt,
+      version,
     });
 
     // then
     expect(consolidatedFramework).to.deep.equal({
       complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE,
-      createdAt,
+      version,
       calibrationId: undefined,
       challenges: [],
     });
