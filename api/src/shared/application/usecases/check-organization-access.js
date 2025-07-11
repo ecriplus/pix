@@ -37,7 +37,7 @@ const execute = async function ({
     organizationId: organizationIdToUse,
   });
 
-  if (placesStatistics.hasReachMaximumPlacesWithThreshold) {
+  if (placesStatistics.hasReachedMaximumPlacesLimit) {
     throw new ForbiddenAccess('Maximum places reached', 'MAXIMUM_PLACES_REACHED');
   }
 

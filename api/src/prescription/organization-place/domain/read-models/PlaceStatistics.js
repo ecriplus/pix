@@ -46,7 +46,7 @@ export class PlaceStatistics {
     return this.#activePlacesLots.length;
   }
 
-  get hasReachMaximumPlacesWithThreshold() {
+  get hasReachedMaximumPlacesLimit() {
     if (!this.#isPlacesLockEnabled || this.occupied === 0) return false;
 
     const thresholdLock = config.features.organizationPlacesManagementThreshold;

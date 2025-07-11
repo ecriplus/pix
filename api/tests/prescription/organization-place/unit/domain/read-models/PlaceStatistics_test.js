@@ -224,7 +224,7 @@ describe('Unit | Domain | ReadModels | PlaceStatistics', function () {
     });
   });
 
-  describe('#hasReachMaximumPlacesWithThreshold', function () {
+  describe('#hasReachedMaximumPlacesLimit', function () {
     describe('When enablePlacesThresholdLock is activated', function () {
       describe('when there is no occupied places', function () {
         it('should return false', function () {
@@ -236,7 +236,7 @@ describe('Unit | Domain | ReadModels | PlaceStatistics', function () {
           });
 
           // then
-          expect(statistics.hasReachMaximumPlacesWithThreshold).to.be.false;
+          expect(statistics.hasReachedMaximumPlacesLimit).to.be.false;
         });
       });
 
@@ -253,7 +253,7 @@ describe('Unit | Domain | ReadModels | PlaceStatistics', function () {
           });
 
           // then
-          expect(statistics.hasReachMaximumPlacesWithThreshold).to.be.true;
+          expect(statistics.hasReachedMaximumPlacesLimit).to.be.true;
         });
       });
 
@@ -270,7 +270,7 @@ describe('Unit | Domain | ReadModels | PlaceStatistics', function () {
           });
 
           // then
-          expect(statistics.hasReachMaximumPlacesWithThreshold).to.be.false;
+          expect(statistics.hasReachedMaximumPlacesLimit).to.be.false;
         });
       });
     });
@@ -288,7 +288,7 @@ describe('Unit | Domain | ReadModels | PlaceStatistics', function () {
         });
 
         // then
-        expect(statistics.hasReachMaximumPlacesWithThreshold).to.be.false;
+        expect(statistics.hasReachedMaximumPlacesLimit).to.be.false;
       });
     });
   });
