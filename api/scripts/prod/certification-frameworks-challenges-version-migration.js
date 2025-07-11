@@ -17,12 +17,24 @@ class CertificationFrameworksChallengesVersionMigration extends Script {
     for (let i = 0; i < certificationFrameworksChallengesToUpdate.length; i++) {
       const certificationFrameworksChallenge = certificationFrameworksChallengesToUpdate[i];
       const createdAt = certificationFrameworksChallenge.createdAt;
-      const version = createdAt.toISOString().slice(0, 16).replace(/-|T|:/g, '');
+      const version = this.getVersionNumber(createdAt);
       await knex('certification-frameworks-challenges')
         .where({ id: certificationFrameworksChallenge.id })
         .update({ version });
     }
     logger.info(`${certificationFrameworksChallengesToUpdate.length} certification-frameworks-challenges rows updated`);
+  }
+
+  getVersionNumber(date) {
+    const pad = (n) => String(n).padStart(2, '0');
+    return (
+      date.getUTCFullYear().toString() +
+      pad(date.getUTCMonth() + 1) +
+      pad(date.getUTCDate()) +
+      pad(date.getUTCHours()) +
+      pad(date.getUTCMinutes()) +
+      pad(date.getSeconds())
+    );
   }
 }
 await ScriptRunner.execute(import.meta.url, CertificationFrameworksChallengesVersionMigration);
