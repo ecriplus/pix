@@ -5,6 +5,7 @@ import RSVP from 'rsvp';
 
 export default class AssessmentResultsRoute extends Route {
   @service store;
+  @service router;
 
   queryParams = {
     pageNumber: {
@@ -32,6 +33,15 @@ export default class AssessmentResultsRoute extends Route {
       refreshModel: true,
     },
   };
+
+  beforeModel(transition) {
+    const campaignId = transition.to.parent.params.campaign_id;
+    const places = this.modelFor('authenticated');
+
+    if (places?.hasReachMaximumPlacesWithThreshold) {
+      this.router.replaceWith('authenticated.campaigns.campaign', campaignId);
+    }
+  }
 
   async model(params) {
     const campaign = this.modelFor('authenticated.campaigns.campaign');

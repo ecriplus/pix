@@ -5,6 +5,7 @@ import RSVP from 'rsvp';
 
 export default class ProfilesRoute extends Route {
   @service store;
+  @service router;
 
   queryParams = {
     pageNumber: {
@@ -31,6 +32,15 @@ export default class ProfilesRoute extends Route {
   loading(transition) {
     if (transition.from && transition.from.name === 'authenticated.campaigns.campaign.profile-results') {
       return false;
+    }
+  }
+
+  beforeModel(transition) {
+    const campaignId = transition.to.parent.params.campaign_id;
+    const places = this.modelFor('authenticated');
+
+    if (places?.hasReachMaximumPlacesWithThreshold) {
+      this.router.replaceWith('authenticated.campaigns.campaign', campaignId);
     }
   }
 

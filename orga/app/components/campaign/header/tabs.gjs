@@ -13,6 +13,12 @@ export default class CampaignTabs extends Component {
   @service fileSaver;
   @service session;
   @service pixMetrics;
+  @service store;
+
+  get hasReachedPlacesLimit() {
+    const statistics = this.store.peekAll('organization-place-statistic')?.[0];
+    return statistics?.hasReachMaximumPlacesWithThreshold;
+  }
 
   @action
   async exportData() {
@@ -38,6 +44,7 @@ export default class CampaignTabs extends Component {
         </LinkTo>
 
         <LinkTo
+          @disabled={{this.hasReachedPlacesLimit}}
           @route={{if
             (or @campaign.isTypeAssessment @campaign.isTypeExam)
             "authenticated.campaigns.campaign.assessment-results"
@@ -49,7 +56,11 @@ export default class CampaignTabs extends Component {
         </LinkTo>
 
         {{#if (or @campaign.isTypeAssessment @campaign.isTypeExam)}}
-          <LinkTo @route="authenticated.campaigns.campaign.analysis" @model={{@campaign}}>
+          <LinkTo
+            @disabled={{this.hasReachedPlacesLimit}}
+            @route="authenticated.campaigns.campaign.analysis"
+            @model={{@campaign}}
+          >
             {{t "pages.campaign.tab.review"}}
           </LinkTo>
         {{/if}}
@@ -60,7 +71,7 @@ export default class CampaignTabs extends Component {
       </PixTabs>
 
       <div class="campaign-header-tabs__export-button hide-on-mobile">
-        <PixButton @variant="primary" @triggerAction={{this.exportData}}>
+        <PixButton @isDisabled={{this.hasReachedPlacesLimit}} @variant="primary" @triggerAction={{this.exportData}}>
           {{t "pages.campaign.actions.export-results"}}
         </PixButton>
       </div>

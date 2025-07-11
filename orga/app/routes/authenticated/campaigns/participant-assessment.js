@@ -6,6 +6,15 @@ export default class AssessmentRoute extends Route {
   @service router;
   @service store;
 
+  beforeModel(transition) {
+    const campaignId = transition.to.parent.params.campaign_id;
+    const places = this.modelFor('authenticated');
+
+    if (places?.hasReachMaximumPlacesWithThreshold) {
+      this.router.replaceWith('authenticated.campaigns.campaign', campaignId);
+    }
+  }
+
   async model(params) {
     try {
       const { campaign_id: campaignId, campaign_participation_id: campaignParticipationId } = params;
