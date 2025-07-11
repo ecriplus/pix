@@ -265,13 +265,13 @@ const FeaturesForm = <template>
       {{#if (and (eq feature "PLACES_MANAGEMENT") @toggleLockPlaces)}}
         <div class="form-field">
           <PixCheckbox
-            @checked={{organizationFeature.params.enablePlacesThresholdLock}}
+            @checked={{organizationFeature.params.enableMaximumPlacesLimit}}
             {{on
               "change"
-              (fn @updateFormCheckBoxValue (concat "features." feature ".params.enablePlacesThresholdLock"))
+              (fn @updateFormCheckBoxValue (concat "features." feature ".params.enableMaximumPlacesLimit"))
             }}
           ><:label>{{t
-                "components.organizations.information-section-view.features.ORGANIZATION_PLACES_LOCK"
+                "components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT"
               }}</:label></PixCheckbox>
         </div>
       {{/if}}
