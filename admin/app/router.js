@@ -68,6 +68,7 @@ Router.map(function () {
         this.route('campaign-participations', { path: '/participations' });
         this.route('organizations');
         this.route('certification-center-memberships');
+        this.route('certification-courses', { path: '/certifications' });
         this.route('cgu');
       });
     });

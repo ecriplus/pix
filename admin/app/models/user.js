@@ -54,12 +54,11 @@ export default class User extends Model {
   get organizationMembershipCount() {
     return this.organizationMemberships.length;
   }
-  get certificationCenterMembershipCount() {
-    return this.certificationCenterMemberships.length;
-  }
+
   get participationCount() {
     return this.participations.length;
   }
+
   get authenticationMethodCount() {
     return this.username && this.email ? this.authenticationMethods.length + 1 : this.authenticationMethods.length;
   }

@@ -567,6 +567,17 @@
         }
       },
       "certification-centers": {
+        "certification-courses": {
+          "empty-table": "Cet utilisateur n'a passé aucune certification",
+          "section-title": "Certifications passées par l'utilisateur",
+          "table-caption": "Liste des certifications passées par l'utilisateur. Contient l'ID, la date de création, l'ID ainsi que le statut de la session.",
+          "table-headers": {
+            "created-at": "Date de création",
+            "id": "ID",
+            "session-id": "Session ID",
+            "session-status": "Statut de la session"
+          }
+        },
         "memberships": {
           "caption": "Liste des centres de certification dont l'utilisateur est membre. Contient l'identifiant en tant que membre, l'identifiant, le nom, l'identifiant externe et le type du centre, et enfin le rôle du membre. Plusieurs actions permettent de changer le rôle du membre et de le désactiver du centre.",
           "empty-table": "Aucun centre de certification",
@@ -583,7 +594,7 @@
             }
           },
           "no-last-connection-date-info": "Non connecté depuis 03/2025",
-          "section-title": "Centres de certification de l’utilisateur",
+          "section-title": "Accès aux centres de certification",
           "table-headers": {
             "actions-label": "Actions",
             "center-external-id": "Identifiant externe",
@@ -1144,7 +1155,9 @@
     },
     "user-details": {
       "navbar": {
-        "certification-centers-list": "Pix Certif",
+        "certification-centers-list": "Centres de certif",
+        "certification-centers-list-aria-label": "Listes des certifications passées par l'utilisateur et des centres de certifs auxquels il/elle appartient",
+        "certification-courses": "Certifications",
         "cgu": "CGU",
         "cgu-aria-label": "Conditions générales d'utilisation",
         "connections": "Connexions",

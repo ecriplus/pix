@@ -332,6 +332,10 @@ function routes() {
     return certificationCenterMembership;
   });
 
+  this.get('/admin/users/:id/certification-courses', () => {
+    return { data: [] };
+  });
+
   this.post('/admin/memberships', createOrganizationMembership);
   this.patch('/admin/memberships/:id', (schema, request) => {
     const organizationMembershipId = request.params.id;

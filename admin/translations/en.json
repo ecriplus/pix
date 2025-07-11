@@ -567,6 +567,17 @@
         }
       },
       "certification-centers": {
+        "certification-courses": {
+          "empty-table": "This user has no certification course.",
+          "section-title": "Certification courses",
+          "table-caption": "List of certifications passed by the user. Contains ID, creation date, session ID and status.",
+          "table-headers": {
+            "created-at": "Creation date",
+            "id": "ID",
+            "session-id": "Session ID",
+            "session-status": "Session status"
+          }
+        },
         "memberships": {
           "caption": "Liste des centres de certification dont l'utilisateur est membre. Contient l'identifiant en tant que membre, l'identifiant, le nom, l'identifiant externe et le type du centre, et enfin le rôle du membre. Plusieurs actions permettent de changer le rôle du membre et de le désactiver du centre.",
           "empty-table": "There is no certification center",
@@ -583,7 +594,7 @@
             }
           },
           "no-last-connection-date-info": "Has not been connected since 03/2025",
-          "section-title": "User Certification Centres",
+          "section-title": "Certification centers memberships",
           "table-headers": {
             "actions-label": "Actions",
             "center-external-id": "External ID",
@@ -1144,7 +1155,9 @@
     },
     "user-details": {
       "navbar": {
-        "certification-centers-list": "Pix Certif",
+        "certification-centers-list": "Certification centers",
+        "certification-centers-list-aria-label": "Lists of certifications held by the user and the certification centres to which he/she belongs",
+        "certification-courses": "Certifications",
         "cgu": "Terms of service",
         "cgu-aria-label": "Terms of service",
         "connections": "Connections",
