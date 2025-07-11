@@ -29,9 +29,9 @@ const execute = async function ({
   const placesManagementFeature = features.find(
     (feature) => feature.name === ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key,
   );
-  const hasLockEnabled = placesManagementFeature?.params?.enablePlacesThresholdLock;
+  const hasMaximumPlacesLimitEnabled = placesManagementFeature?.params?.enableMaximumPlacesLimit;
 
-  if (!hasLockEnabled) return true;
+  if (!hasMaximumPlacesLimitEnabled) return true;
 
   const placesStatistics = await prescriptionUsecases.getOrganizationPlacesStatistics({
     organizationId: organizationIdToUse,

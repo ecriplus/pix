@@ -1196,7 +1196,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
               [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
               [ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key]: {
                 active: true,
-                params: { enablePlacesThresholdLock: true },
+                params: { enableMaximumPlacesLimit: true },
               },
             },
           });
@@ -1205,10 +1205,10 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           //then
           const enabledFeatures = await knex('organization-features');
           expect(enabledFeatures).lengthOf(1);
-          expect(enabledFeatures[0].params).deep.equal({ enablePlacesThresholdLock: true });
+          expect(enabledFeatures[0].params).deep.equal({ enableMaximumPlacesLimit: true });
         });
 
-        it('by default, should insert new feature with falsy enablePlacesThresholdLock param', async function () {
+        it('by default, should insert new feature with falsy enableMaximumPlacesLimit param', async function () {
           // given && when
           const organizationToUpdate = new OrganizationForAdmin({
             id: organization.id,
@@ -1227,15 +1227,15 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           //then
           const enabledFeatures = await knex('organization-features');
           expect(enabledFeatures).lengthOf(1);
-          expect(enabledFeatures[0].params).deep.equal({ enablePlacesThresholdLock: false });
+          expect(enabledFeatures[0].params).deep.equal({ enableMaximumPlacesLimit: false });
         });
 
-        it('should be possible to update enablePlacesThresholdLock param value', async function () {
+        it('should be possible to update enableMaximumPlacesLimit param value', async function () {
           // given && when
           databaseBuilder.factory.buildOrganizationFeature({
             featureId: placeManagementFeature.id,
             organizationId: organization.id,
-            params: { enablePlacesThresholdLock: false },
+            params: { enableMaximumPlacesLimit: false },
           });
 
           await databaseBuilder.commit();
@@ -1247,7 +1247,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
               [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
               [ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key]: {
                 active: true,
-                params: { enablePlacesThresholdLock: true },
+                params: { enableMaximumPlacesLimit: true },
               },
             },
           });
@@ -1257,7 +1257,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           //then
           const enabledFeatures = await knex('organization-features');
           expect(enabledFeatures).lengthOf(1);
-          expect(enabledFeatures[0].params).deep.equal({ enablePlacesThresholdLock: true });
+          expect(enabledFeatures[0].params).deep.equal({ enableMaximumPlacesLimit: true });
         });
       });
     });

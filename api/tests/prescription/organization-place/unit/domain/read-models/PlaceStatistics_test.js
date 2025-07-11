@@ -225,14 +225,14 @@ describe('Unit | Domain | ReadModels | PlaceStatistics', function () {
   });
 
   describe('#hasReachedMaximumPlacesLimit', function () {
-    describe('When enablePlacesThresholdLock is activated', function () {
+    describe('When enableMaximumPlacesLimit is activated', function () {
       describe('when there is no occupied places', function () {
         it('should return false', function () {
           // when
           const statistics = new PlaceStatistics({
             placesLots: [{ count: 0, isActive: true }],
             placeRepartition: { totalUnRegisteredParticipant: 0, totalRegisteredParticipant: 0 },
-            enablePlacesThresholdLock: true,
+            enableMaximumPlacesLimit: true,
           });
 
           // then
@@ -249,7 +249,7 @@ describe('Unit | Domain | ReadModels | PlaceStatistics', function () {
           const statistics = new PlaceStatistics({
             placesLots: [{ count: 100, isActive: true }],
             placeRepartition: { totalUnRegisteredParticipant: 10, totalRegisteredParticipant: 100 },
-            enablePlacesThresholdLock: true,
+            enableMaximumPlacesLimit: true,
           });
 
           // then
@@ -266,7 +266,7 @@ describe('Unit | Domain | ReadModels | PlaceStatistics', function () {
           const statistics = new PlaceStatistics({
             placesLots: [{ count: 100, isActive: true }],
             placeRepartition: { totalUnRegisteredParticipant: 10, totalRegisteredParticipant: 99 },
-            enablePlacesThresholdLock: true,
+            enableMaximumPlacesLimit: true,
           });
 
           // then
@@ -275,7 +275,7 @@ describe('Unit | Domain | ReadModels | PlaceStatistics', function () {
       });
     });
 
-    describe('When enablePlacesThresholdLock is deactivated and maximum places count is reached', function () {
+    describe('When enableMaximumPlacesLimit is deactivated and maximum places count is reached', function () {
       it('should return false', function () {
         // given
         sinon.stub(config.features, 'organizationPlacesManagementThreshold').value(0.1);
@@ -284,7 +284,7 @@ describe('Unit | Domain | ReadModels | PlaceStatistics', function () {
         const statistics = new PlaceStatistics({
           placesLots: [{ count: 100, isActive: true }],
           placeRepartition: { totalUnRegisteredParticipant: 10, totalRegisteredParticipant: 100 },
-          enablePlacesThresholdLock: false,
+          enableMaximumPlacesLimit: false,
         });
 
         // then

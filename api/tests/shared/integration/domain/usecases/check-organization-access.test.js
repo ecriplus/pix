@@ -36,7 +36,7 @@ describe('Integration | Shared | Domain | UseCase | check-organization-access', 
     });
 
     context('when the PLACE_MANAGEMENT organization feature is enabled', function () {
-      context('when threshold lock is disabled', function () {
+      context('when maximum places limit is disabled', function () {
         it('should not throw', async function () {
           // given
           const placeManagementFeature = databaseBuilder.factory.buildFeature({
@@ -47,7 +47,7 @@ describe('Integration | Shared | Domain | UseCase | check-organization-access', 
             organizationId: organization.id,
             featureId: placeManagementFeature.id,
             params: {
-              enablePlacesThresholdLock: false,
+              enableMaximumPlacesLimit: false,
             },
           });
           await databaseBuilder.commit();
@@ -60,8 +60,8 @@ describe('Integration | Shared | Domain | UseCase | check-organization-access', 
         });
       });
 
-      context('when threshold lock is enabled', function () {
-        context('when the amount of maximum places if not reached', function () {
+      context('when maximum places limit is enabled', function () {
+        context('when the amount of maximum places is not reached', function () {
           it('should not throw', async function () {
             // given
             const placeManagementFeature = databaseBuilder.factory.buildFeature({
@@ -72,7 +72,7 @@ describe('Integration | Shared | Domain | UseCase | check-organization-access', 
               organizationId: organization.id,
               featureId: placeManagementFeature.id,
               params: {
-                enablePlacesThresholdLock: true,
+                enableMaximumPlacesLimit: true,
               },
             });
             await databaseBuilder.commit();
@@ -85,7 +85,7 @@ describe('Integration | Shared | Domain | UseCase | check-organization-access', 
           });
         });
 
-        context('when the amount of maximum places if reached', function () {
+        context('when the amount of maximum places is reached', function () {
           it('should throw a forbidden access error', async function () {
             // given
             const placeManagementFeature = databaseBuilder.factory.buildFeature({
@@ -98,7 +98,7 @@ describe('Integration | Shared | Domain | UseCase | check-organization-access', 
               organizationId: organization.id,
               featureId: placeManagementFeature.id,
               params: {
-                enablePlacesThresholdLock: true,
+                enableMaximumPlacesLimit: true,
               },
             });
 
@@ -153,7 +153,7 @@ describe('Integration | Shared | Domain | UseCase | check-organization-access', 
     });
 
     context('when the PLACE_MANAGEMENT organization feature is enabled', function () {
-      context('when threshold lock is disabled', function () {
+      context('when maximum places limit is disabled', function () {
         it('should not throw', async function () {
           // given
           const placeManagementFeature = databaseBuilder.factory.buildFeature({
@@ -163,7 +163,7 @@ describe('Integration | Shared | Domain | UseCase | check-organization-access', 
             organizationId: organizationId,
             featureId: placeManagementFeature.id,
             params: {
-              enablePlacesThresholdLock: false,
+              enableMaximumPlacesLimit: false,
             },
           });
           await databaseBuilder.commit();
@@ -176,8 +176,8 @@ describe('Integration | Shared | Domain | UseCase | check-organization-access', 
         });
       });
 
-      context('when threshold lock is enabled', function () {
-        context('when the amount of maximum places if not reached', function () {
+      context('when maximum places limit is enabled', function () {
+        context('when the amount of maximum places is not reached', function () {
           it('should not throw', async function () {
             // given
             const placeManagementFeature = databaseBuilder.factory.buildFeature({
@@ -187,7 +187,7 @@ describe('Integration | Shared | Domain | UseCase | check-organization-access', 
               organizationId,
               featureId: placeManagementFeature.id,
               params: {
-                enablePlacesThresholdLock: true,
+                enableMaximumPlacesLimit: true,
               },
             });
             await databaseBuilder.commit();
@@ -200,7 +200,7 @@ describe('Integration | Shared | Domain | UseCase | check-organization-access', 
           });
         });
 
-        context('when the amount of maximum places if reached', function () {
+        context('when the amount of maximum places is reached', function () {
           it('should throw a forbidden access error', async function () {
             // given
             const placeManagementFeature = databaseBuilder.factory.buildFeature({
@@ -211,7 +211,7 @@ describe('Integration | Shared | Domain | UseCase | check-organization-access', 
               organizationId: organizationId,
               featureId: placeManagementFeature.id,
               params: {
-                enablePlacesThresholdLock: true,
+                enableMaximumPlacesLimit: true,
               },
             });
 
@@ -264,7 +264,7 @@ describe('Integration | Shared | Domain | UseCase | check-organization-access', 
     });
 
     context('when the PLACE_MANAGEMENT organization feature is enabled', function () {
-      context('when threshold lock is disabled', function () {
+      context('when maximum places limit is disabled', function () {
         it('should not throw', async function () {
           // given
           const placeManagementFeature = databaseBuilder.factory.buildFeature({
@@ -274,7 +274,7 @@ describe('Integration | Shared | Domain | UseCase | check-organization-access', 
             organizationId: organizationId,
             featureId: placeManagementFeature.id,
             params: {
-              enablePlacesThresholdLock: false,
+              enableMaximumPlacesLimit: false,
             },
           });
           await databaseBuilder.commit();
@@ -287,8 +287,8 @@ describe('Integration | Shared | Domain | UseCase | check-organization-access', 
         });
       });
 
-      context('when threshold lock is enabled', function () {
-        context('when the amount of maximum places if not reached', function () {
+      context('when maximum places limit is enabled', function () {
+        context('when the amount of maximum places is not reached', function () {
           it('should not throw', async function () {
             // given
             const placeManagementFeature = databaseBuilder.factory.buildFeature({
@@ -298,7 +298,7 @@ describe('Integration | Shared | Domain | UseCase | check-organization-access', 
               organizationId,
               featureId: placeManagementFeature.id,
               params: {
-                enablePlacesThresholdLock: true,
+                enableMaximumPlacesLimit: true,
               },
             });
             await databaseBuilder.commit();
@@ -311,7 +311,7 @@ describe('Integration | Shared | Domain | UseCase | check-organization-access', 
           });
         });
 
-        context('when the amount of maximum places if reached', function () {
+        context('when the amount of maximum places is reached', function () {
           it('should throw a forbidden access error', async function () {
             // given
             const placeManagementFeature = databaseBuilder.factory.buildFeature({
@@ -322,7 +322,7 @@ describe('Integration | Shared | Domain | UseCase | check-organization-access', 
               organizationId: organizationId,
               featureId: placeManagementFeature.id,
               params: {
-                enablePlacesThresholdLock: true,
+                enableMaximumPlacesLimit: true,
               },
             });
 

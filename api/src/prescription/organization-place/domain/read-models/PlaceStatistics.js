@@ -5,17 +5,17 @@ import { config } from '../../../../shared/config.js';
 export class PlaceStatistics {
   #placesLots;
   #placeRepartition;
-  #isPlacesLockEnabled;
+  #isMaximumPlacesLimitEnabled;
 
-  constructor({ placesLots = [], placeRepartition, organizationId, enablePlacesThresholdLock } = {}) {
+  constructor({ placesLots = [], placeRepartition, organizationId, enableMaximumPlacesLimit } = {}) {
     this.id = `${organizationId}_place_statistics`;
     this.#placesLots = placesLots;
     this.#placeRepartition = placeRepartition;
-    this.#isPlacesLockEnabled = enablePlacesThresholdLock;
+    this.#isMaximumPlacesLimitEnabled = enableMaximumPlacesLimit;
   }
 
-  static buildFrom({ placesLots, placeRepartition, organizationId, enablePlacesThresholdLock } = {}) {
-    return new PlaceStatistics({ placesLots, placeRepartition, organizationId, enablePlacesThresholdLock });
+  static buildFrom({ placesLots, placeRepartition, organizationId, enableMaximumPlacesLimit } = {}) {
+    return new PlaceStatistics({ placesLots, placeRepartition, organizationId, enableMaximumPlacesLimit });
   }
 
   get #activePlacesLots() {
@@ -47,7 +47,7 @@ export class PlaceStatistics {
   }
 
   get hasReachedMaximumPlacesLimit() {
-    if (!this.#isPlacesLockEnabled || this.occupied === 0) return false;
+    if (!this.#isMaximumPlacesLimitEnabled || this.occupied === 0) return false;
 
     const thresholdLock = config.features.organizationPlacesManagementThreshold;
     const maximumPlaces = this.total + this.total * thresholdLock;

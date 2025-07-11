@@ -48,7 +48,7 @@ describe('Integration | Domain | Use Cases | get-organization-places-statistics'
         organizationId,
         featureId: placesManagementFeatureId,
         params: {
-          enablePlacesThresholdLock: true,
+          enableMaximumPlacesLimit: true,
         },
       });
 
