@@ -76,7 +76,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
     await mockLearningContent(learningContentObjects);
   });
 
-  describe('GET /api/assessments/:assessment_id/next', function () {
+  describe('GET /api/assessments/:assessment_id', function () {
     const assessmentId = 1;
     const userId = 1234;
 
@@ -124,7 +124,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           // given
           const options = {
             method: 'GET',
-            url: `/api/assessments/${assessmentId}/next`,
+            url: `/api/assessments/${assessmentId}`,
             headers: generateAuthenticatedUserRequestHeaders({ userId }),
           };
 
@@ -191,7 +191,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           // given
           const options = {
             method: 'GET',
-            url: `/api/assessments/${assessmentId}/next`,
+            url: `/api/assessments/${assessmentId}`,
             headers: generateAuthenticatedUserRequestHeaders({ userId }),
           };
 
@@ -242,7 +242,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           // given
           const options = {
             method: 'GET',
-            url: `/api/assessments/${assessmentId}/next`,
+            url: `/api/assessments/${assessmentId}`,
             headers: generateAuthenticatedUserRequestHeaders({ userId }),
           };
 
@@ -298,7 +298,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           // given
           const options = {
             method: 'GET',
-            url: `/api/assessments/${assessmentId}/next`,
+            url: `/api/assessments/${assessmentId}`,
             headers: generateAuthenticatedUserRequestHeaders({ userId }),
           };
 
@@ -351,7 +351,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           // given
           const options = {
             method: 'GET',
-            url: `/api/assessments/${assessmentId}/next`,
+            url: `/api/assessments/${assessmentId}`,
             headers: generateAuthenticatedUserRequestHeaders({ userId }),
           };
 

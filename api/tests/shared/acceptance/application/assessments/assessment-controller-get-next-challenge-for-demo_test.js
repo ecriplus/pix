@@ -51,7 +51,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
     await mockLearningContent(learningContentObjects);
   });
 
-  describe('(demo) GET /api/assessments/:assessment_id/next', function () {
+  describe('(demo) GET /api/assessments/:assessment_id', function () {
     const assessmentId = 1;
 
     context('when next challenge found', function () {
@@ -69,7 +69,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
         // given
         const options = {
           method: 'GET',
-          url: '/api/assessments/' + assessmentId + '/next',
+          url: `/api/assessments/${assessmentId}`,
         };
 
         // when
@@ -99,7 +99,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
         // given
         const options = {
           method: 'GET',
-          url: '/api/assessments/' + assessmentId + '/next',
+          url: `/api/assessments/${assessmentId}`,
         };
 
         // when
@@ -128,7 +128,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
         // given
         const options = {
           method: 'GET',
-          url: '/api/assessments/' + assessmentId + '/next',
+          url: `/api/assessments/${assessmentId}`,
         };
 
         // when
@@ -156,7 +156,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
         // given
         const options = {
           method: 'GET',
-          url: '/api/assessments/' + assessmentId + '/next',
+          url: `/api/assessments/${assessmentId}`,
         };
 
         // when
