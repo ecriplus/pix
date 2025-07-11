@@ -44,7 +44,7 @@ export async function register(server) {
         tags: ['api', 'llm', 'preview'],
         notes: [
           'Cette route est restreinte aux applications avec le scope llm-preview',
-          'Elle permet de créer une discussion LLM avec la configuration en payload',
+          'Elle permet de créer une discussion LLM de preview avec la configuration en payload',
         ],
       },
     },
@@ -61,7 +61,27 @@ export async function register(server) {
         },
         handler: llmPreviewController.getChat,
         tags: ['api', 'llm', 'preview'],
-        notes: ['Cette route est publique', 'Elle permet de récupérer l’état d’une discussion LLM'],
+        notes: ['Cette route est publique', 'Elle permet de récupérer l’état d’une discussion LLM de preview'],
+      },
+    },
+    {
+      method: 'POST',
+      path: '/api/llm/preview/chats/{chatId}/messages',
+      config: {
+        auth: false,
+        pre: [{ method: checkLLMChatIsEnabled }],
+        validate: {
+          params: Joi.object({
+            chatId: Joi.string().required(),
+          }).required(),
+          payload: Joi.object({
+            prompt: Joi.string().optional().allow('', null),
+            attachmentName: Joi.string().optional().allow('', null),
+          }).required(),
+        },
+        handler: llmPreviewController.promptChat,
+        tags: ['api', 'llm', 'preview', 'prompt'],
+        notes: ['Cette route est publique', 'Elle permet de prompt le LLM dans une discussion de preview'],
       },
     },
   ]);

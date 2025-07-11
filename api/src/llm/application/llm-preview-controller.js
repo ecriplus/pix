@@ -13,8 +13,16 @@ export const llmPreviewController = {
       .header('Location', new URL(`/llm/preview/${chat.id}`, config.domain.pixApp).href)
       .code(201);
   },
+
   async getChat(request) {
     const chat = await chatRepository.get(request.params.chatId);
     return chatSerializer.serialize(chat);
+  },
+
+  async promptChat(request, h) {
+    const { chatId } = request.params;
+    const { prompt, attachmentName } = request.payload;
+    const response = await usecases.promptChat({ chatId, message: prompt, attachmentName });
+    return h.response(response).type('text/event-stream').code(201);
   },
 };

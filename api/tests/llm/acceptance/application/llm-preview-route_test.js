@@ -1,7 +1,16 @@
+import { Readable } from 'node:stream';
+
+import { Chat } from '../../../../src/llm/domain/models/Chat.js';
+import { Configuration } from '../../../../src/llm/domain/models/Configuration.js';
 import { CHAT_STORAGE_PREFIX } from '../../../../src/llm/infrastructure/repositories/chat-repository.js';
 import { featureToggles } from '../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { temporaryStorage } from '../../../../src/shared/infrastructure/key-value-storages/index.js';
-import { createServer, expect, generateValidRequestAuthorizationHeaderForApplication } from '../../../test-helper.js';
+import {
+  createServer,
+  expect,
+  generateValidRequestAuthorizationHeaderForApplication,
+  nock,
+} from '../../../test-helper.js';
 
 const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
 
@@ -262,6 +271,97 @@ describe('Acceptance | Route | llm-preview', function () {
           },
         ],
       });
+    });
+  });
+
+  describe('POST /api/llm/preview/chats/{chatId}/messages', function () {
+    afterEach(async function () {
+      await chatTemporaryStorage.flushAll();
+    });
+
+    context('when feature toggle is disabled', function () {
+      beforeEach(function () {
+        return featureToggles.set('isEmbedLLMEnabled', false);
+      });
+
+      it('should throw a 503 status code', async function () {
+        // when
+        const response = await server.inject({
+          method: 'POST',
+          url: '/api/llm/preview/chats/123e4567-e89b-12d3-a456-426614174000/messages',
+          payload: { prompt: 'Quelle est la recette de la ratatouille ?' },
+        });
+
+        expect(response.statusCode).to.equal(503);
+      });
+    });
+
+    it('should receive LLM response as stream', async function () {
+      // given
+      const chat = new Chat({
+        id: '123e4567-e89b-12d3-a456-426614174000',
+        configuration: new Configuration({
+          llm: {
+            historySize: 123,
+          },
+          challenge: {
+            inputMaxChars: 999,
+            inputMaxPrompts: 999,
+          },
+          attachment: {
+            name: 'expected_file.pdf',
+            context: 'some context',
+          },
+        }),
+        hasAttachmentContextBeenAdded: false,
+        messages: [],
+      });
+      await chatTemporaryStorage.save({
+        key: '123e4567-e89b-12d3-a456-426614174000',
+        value: chat.toDTO(),
+      });
+      const promptLlmScope = nock('https://llm-test.pix.fr/api')
+        .post('/chat', {
+          configuration: {
+            llm: {
+              historySize: 123,
+            },
+            challenge: {
+              inputMaxChars: 999,
+              inputMaxPrompts: 999,
+            },
+            attachment: {
+              name: 'expected_file.pdf',
+              context: 'some context',
+            },
+          },
+          history: [
+            {
+              content:
+                "<system_notification>L'utilisateur a téléversé une pièce jointe : <attachment_name>expected_file.pdf</attachment_name></system_notification>",
+              role: 'user',
+            },
+            {
+              content:
+                '<read_attachment_tool>Lecture de la pièce jointe, expected_file.pdf : <attachment_content>some context</attachment_content></read_attachment_tool>',
+              role: 'assistant',
+            },
+          ],
+          prompt: 'Quelle est la recette de la ratatouille ?',
+        })
+        .reply(201, Readable.from(['32:{"message":"coucou c\'est super"}']));
+
+      // when
+      const response = await server.inject({
+        method: 'POST',
+        url: '/api/llm/preview/chats/123e4567-e89b-12d3-a456-426614174000/messages',
+        payload: { prompt: 'Quelle est la recette de la ratatouille ?', attachmentName: 'expected_file.pdf' },
+      });
+
+      // then
+      expect(response.statusCode).to.equal(201);
+      expect(promptLlmScope.isDone()).to.be.true;
+      expect(response.result).to.deep.equal("event: attachment\ndata: \n\ndata: coucou c'est super\n\n");
     });
   });
 });
