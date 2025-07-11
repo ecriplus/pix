@@ -205,6 +205,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
         category: 'TEST',
         'tubes-count': 1,
         comment: 'Un beau profil cible',
+        'estimated-time': null,
         description: 'Une description',
         'created-at': new Date('2020-01-01'),
         'has-linked-campaign': true,

@@ -47,6 +47,7 @@ const serialize = function ({ targetProfile, filter }) {
       'maxLevel',
       'tubesCount',
       'cappedTubes',
+      'estimatedTime',
     ],
     badges: {
       ref: 'id',

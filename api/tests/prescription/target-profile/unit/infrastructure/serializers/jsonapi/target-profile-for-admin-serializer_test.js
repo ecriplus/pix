@@ -93,6 +93,7 @@ describe('Unit | Serializer | JSONAPI | target-profile-for-admin-serializer', fu
       });
       const targetProfile = new TargetProfileForAdmin({
         id: 132,
+        estimatedTime: 150,
         name: 'Mon Super profil cible',
         internalName: 'Mon Super profil cible interne',
         outdated: true,
@@ -191,6 +192,7 @@ describe('Unit | Serializer | JSONAPI | target-profile-for-admin-serializer', fu
           attributes: {
             category: 'OTHER',
             comment: 'commentaire',
+            'estimated-time': 150,
             'created-at': new Date('2021-03-02'),
             description: 'Un super profil cible',
             'image-url': 'some/image/url',
