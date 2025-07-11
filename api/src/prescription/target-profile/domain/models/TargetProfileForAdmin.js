@@ -25,6 +25,7 @@ class TargetProfileForAdmin {
     thematics = [],
     tubes = [],
     skills = [],
+    estimatedTime = null,
   } = {}) {
     this.id = id;
     this.name = name;
@@ -57,6 +58,7 @@ class TargetProfileForAdmin {
         }),
     );
     this.tubesCount = tubes.length;
+    this.estimatedTime = estimatedTime;
   }
 
   get cappedTubes() {

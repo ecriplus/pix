@@ -49,6 +49,7 @@ class DatamartBuilder {
       'organizations_cover_rates',
       'data_active_calibrated_challenges',
       'data_calibrations',
+      'target_profiles_course_duration',
     ].forEach((tableName) => {
       rawQuery += `DELETE FROM ${tableName};`;
     });
