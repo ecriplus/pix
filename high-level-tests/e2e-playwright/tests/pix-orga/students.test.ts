@@ -1,14 +1,31 @@
+import { randomUUID } from 'node:crypto';
 import path from 'node:path';
 
+import { buildFreshPixOrgaUser } from '../../helpers/db.ts';
 import { expect, test } from '../../helpers/fixtures.ts';
 import { PixOrgaPage } from '../../pages/pix-orga/PixOrgaPage.ts';
 
-test('should display students', async ({ pixOrgaAdminContext }) => {
-  const page = await pixOrgaAdminContext.newPage();
-  await page.goto(process.env.PIX_ORGA_URL as string);
-  await test.step('Import students', async () => {
-    const orgaPage = new PixOrgaPage(page);
-    await orgaPage.selectOrganization('Orga sup');
+let uid: string;
+test.beforeEach(async () => {
+  uid = randomUUID().slice(-8);
+  await buildFreshPixOrgaUser('Adi', 'Minh', `admin-${uid}@example.net`, 'pix123', 'ADMIN', {
+    type: 'SUP',
+    externalId: `SUP_MANAGING-${uid}`,
+    isManagingStudents: true,
+  });
+});
+
+test('Managing sup students', async ({ page }) => {
+  const orgaPage = new PixOrgaPage(page);
+
+  await test.step('Login to pixOrga', async () => {
+    await page.goto(process.env.PIX_ORGA_URL as string);
+    await orgaPage.login(`admin-${uid}@example.net`, 'pix123');
+    await page.getByRole('button').filter({ hasText: 'Je me connecte' }).waitFor({ state: 'detached' });
+    await orgaPage.acceptCGU();
+  });
+
+  await test.step('Import learners', async () => {
     await page.getByRole('link', { name: 'Étudiants' }).click();
     await page.getByRole('link', { name: 'Importer' }).click();
     await page.getByRole('button', { name: 'Importer une nouvelle liste' }).click();
@@ -25,7 +42,8 @@ test('should display students', async ({ pixOrgaAdminContext }) => {
 
     await page.getByRole('link', { name: 'Étudiants' }).click();
     await orgaPage.waitForUploadSuccess(page);
-
+  });
+  await test.step('show learners', async () => {
     await expect(
       page.getByRole('paragraph').filter({ hasText: 'Les participants ont bien été importés' }),
     ).toBeVisible();
