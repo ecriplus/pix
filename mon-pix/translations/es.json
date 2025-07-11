@@ -1523,10 +1523,9 @@
       "register-form": {
         "button": "Creo una cuenta",
         "description": "Se va a crear una cuenta utilizando la información facilitada por la organización",
-        "information": {
-          "family-name": "Apellidos: {familyName}",
-          "given-name": "Nombre: {givenName}"
-        },
+        "error": "We were unable to retrieve your identity information from the service used. We invite you to contact this organisation's IT support.",
+        "last-name-label-and-value": "Apellidos: {lastName}",
+        "first-name-label-and-value": "Nombre: {firstName}",
         "title": "No tengo una cuenta Pix"
       },
       "title": "Crea una cuenta Pix"
