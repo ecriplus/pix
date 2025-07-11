@@ -8,7 +8,7 @@ export default class MaximumPlacesExceeded extends Component {
 
   get displayMaximumPlacesExceededBanner() {
     const statistics = this.store.peekAll('organization-place-statistic')?.[0];
-    return statistics?.hasReachMaximumPlacesWithThreshold;
+    return statistics?.hasReachedMaximumPlacesLimit;
   }
 
   <template>

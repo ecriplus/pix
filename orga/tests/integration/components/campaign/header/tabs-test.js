@@ -113,11 +113,11 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
       );
     });
 
-    module('when has reach maximum places threshold is true', function (hooks) {
+    module('when has reached maximum places limit is true', function (hooks) {
       hooks.beforeEach(function () {
         const storeService = this.owner.lookup('service:store');
         sinon.stub(storeService, 'peekAll');
-        storeService.peekAll.returns([{ hasReachMaximumPlacesWithThreshold: true }]);
+        storeService.peekAll.returns([{ hasReachedMaximumPlacesLimit: true }]);
       });
 
       test('it should display disabled evaluation results item', async function (assert) {
@@ -136,7 +136,7 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
         assert.dom(resultsLink).hasClass('disabled');
       });
 
-      test('it should disabled download campaign result', async function (assert) {
+      test('it should disable download campaign result button', async function (assert) {
         screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
         const downloadResultButton = screen.getByRole('button', { name: t('pages.campaign.actions.export-results') });
 
@@ -201,7 +201,7 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
       hooks.beforeEach(function () {
         const storeService = this.owner.lookup('service:store');
         sinon.stub(storeService, 'peekAll');
-        storeService.peekAll.returns([{ hasReachMaximumPlacesWithThreshold: true }]);
+        storeService.peekAll.returns([{ hasReachedMaximumPlacesLimit: true }]);
       });
 
       test('it should display disabled profile results item', async function (assert) {

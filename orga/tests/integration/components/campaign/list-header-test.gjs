@@ -30,7 +30,7 @@ module('Integration | Component | Campaign | ListHeader', function (hooks) {
         // given
         const storeService = this.owner.lookup('service:store');
         sinon.stub(storeService, 'peekAll');
-        storeService.peekAll.returns([{ hasReachMaximumPlacesWithThreshold: false }]);
+        storeService.peekAll.returns([{ hasReachedMaximumPlacesLimit: false }]);
 
         // when
         const screen = await render(<template><ListHeader /></template>);
@@ -45,7 +45,7 @@ module('Integration | Component | Campaign | ListHeader', function (hooks) {
         // given
         const storeService = this.owner.lookup('service:store');
         sinon.stub(storeService, 'peekAll');
-        storeService.peekAll.returns([{ hasReachMaximumPlacesWithThreshold: true }]);
+        storeService.peekAll.returns([{ hasReachedMaximumPlacesLimit: true }]);
 
         // when
         const screen = await render(<template><ListHeader /></template>);
