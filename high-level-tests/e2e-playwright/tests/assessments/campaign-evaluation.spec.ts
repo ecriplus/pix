@@ -14,7 +14,7 @@ import {
   LoginPage,
   StartCampaignPage,
 } from '../../pages/pix-app/index.ts';
-import { CreateCampaignPage } from '../../pages/pix-orga/index.ts';
+import { PixOrgaPage } from '../../pages/pix-orga/index.ts';
 
 const RESULT_DIR = path.resolve(import.meta.dirname, '../../snapshots');
 let COMPETENCE_TITLES: string[];
@@ -72,7 +72,7 @@ test('[@snapshot][@runSerially] user plays a campaign', async ({
   let campaignCode: string | null;
   await test.step('creates the campaign', async () => {
     await pixOrgaPage.getByRole('link', { name: 'Créer une campagne' }).click();
-    const createCampaignPage = new CreateCampaignPage(pixOrgaPage);
+    const createCampaignPage = new PixOrgaPage(pixOrgaPage);
     await createCampaignPage.createEvaluationCampaign({
       campaignName: 'test playwright',
       targetProfileName: 'PC pour Playwright',

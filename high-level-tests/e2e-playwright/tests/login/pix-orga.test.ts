@@ -2,17 +2,21 @@ import { Page } from '@playwright/test';
 
 import { buildFreshPixOrgaUser } from '../../helpers/db.ts';
 import { expect, test } from '../../helpers/fixtures.ts';
-import { LoginPage } from '../../pages/pix-orga/index.js';
+import { PixOrgaPage } from '../../pages/pix-orga/index.js';
 
 test('login, cgu and logout', async ({ page, globalTestId }: { page: Page; globalTestId: string }) => {
   const email = `buffy.summers.${globalTestId}@example.net`;
-  await buildFreshPixOrgaUser('Buffy', 'Summers', email, 'Coucoulesdevs66', 'MEMBER');
+  await buildFreshPixOrgaUser('Buffy', 'Summers', email, 'Coucoulesdevs66', 'MEMBER', {
+    type: 'PRO',
+    externalId: 'PROPRO',
+    isManagingStudents: false,
+  });
   await page.goto(process.env.PIX_ORGA_URL as string);
 
   await test.step('Login for the first time to PixOrga and accept CGUs', async () => {
     await expect(page).toHaveTitle('Connectez-vous | Pix Orga (hors France)');
 
-    const loginPage = new LoginPage(page);
+    const loginPage = new PixOrgaPage(page);
     await loginPage.login(email, 'Coucoulesdevs66');
     const cgu = page.getByRole('heading', {
       name: "Veuillez accepter nos Conditions Générales d'Utilisation (CGU)",
@@ -28,7 +32,7 @@ test('login, cgu and logout', async ({ page, globalTestId }: { page: Page; globa
 
     await expect(page).toHaveTitle('Connectez-vous | Pix Orga (hors France)');
 
-    const loginPage = new LoginPage(page);
+    const loginPage = new PixOrgaPage(page);
     await loginPage.login(email, 'Coucoulesdevs66');
 
     await expect(page).toHaveURL(/campagnes\/les-miennes$/);
