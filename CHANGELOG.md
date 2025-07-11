@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.157.0](https://github.com/1024pix/pix/compare/v5.156.0...v5.157.0) (2025-07-11)
+
+### :rocket: Amélioration
+
+- [#12792](https://github.com/1024pix/pix/pull/12792) Ajout de nouveaux custom elements dans le schéma des modules (PIX-18530) 
+- [#12801](https://github.com/1024pix/pix/pull/12801) Bloquer les actions d'orga si la limite des places est atteinte (PIX-18669). 
+- [#12798](https://github.com/1024pix/pix/pull/12798) Construit une version à partir de la date a la création du référentiel cadre  (pix-18668) 
+- [#12584](https://github.com/1024pix/pix/pull/12584) Création module les-ia-consomment 
+- [#12810](https://github.com/1024pix/pix/pull/12810) Route de création de conversation LLM de preview (PIX-18670) 
+- [#12816](https://github.com/1024pix/pix/pull/12816) Supprimer le message 'message de votre organisation' sur la page de fin de parcours  (PIX-18676). 
+- [#12719](https://github.com/1024pix/pix/pull/12719) WIP mon-premier-prompt-V3 
+
+### :building_construction: Tech
+
+- [#12819](https://github.com/1024pix/pix/pull/12819) Migrer des tests d'import sup et sco vers playwright 
+- [#12800](https://github.com/1024pix/pix/pull/12800) Parallelisation dans playwright 
+- [#12789](https://github.com/1024pix/pix/pull/12789) Renvoyer au front des read models par type d'assessment 
+- [#12820](https://github.com/1024pix/pix/pull/12820) Supprimer le endpoint GET /api/assessments/{id}/next
+
 # [5.156.0](https://github.com/1024pix/pix/compare/v5.155.0...v5.156.0) (2025-07-10)
 
 ### :rocket: Amélioration
