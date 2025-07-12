@@ -1,12 +1,12 @@
 import { config } from '../../shared/config.js';
+import { Configuration } from '../domain/models/Configuration.js';
 import { usecases } from '../domain/usecases/index.js';
 import { chatRepository } from '../infrastructure/repositories/index.js';
 import * as chatSerializer from '../infrastructure/serializers/json/chat-serializer.js';
-import * as configurationSerializer from '../infrastructure/serializers/json/configuration-serializer.js';
 
 export const llmPreviewController = {
   async startChat(request, h) {
-    const configuration = configurationSerializer.deserialize(request.payload.configuration);
+    const configuration = new Configuration(request.payload.configuration);
     const chat = await usecases.startChat({ configuration });
     return h
       .response()

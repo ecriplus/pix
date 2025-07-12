@@ -45,7 +45,8 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       const chat = new Chat({
         id: 'chatId',
         userId: 123456,
-        configuration: new Configuration({ id: 'uneConfigQuiExist' }),
+        configurationId: 'uneConfigQuiExist',
+        configuration: new Configuration({ llm: {} }),
         hasAttachmentContextBeenAdded: false,
         messages: [],
       });
@@ -75,9 +76,12 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       const chat = new Chat({
         id: 'chatId',
         userId: 123,
+        configurationId: 'uneConfigQuiExist',
         configuration: new Configuration({
-          id: 'uneConfigQuiExist',
-          inputMaxChars: 5,
+          llm: {},
+          challenge: {
+            inputMaxChars: 5,
+          },
         }),
         hasAttachmentContextBeenAdded: false,
         messages: [],
@@ -103,9 +107,12 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       const chat = new Chat({
         id: 'chatId',
         userId: 123,
+        configurationId: 'uneConfigQuiExist',
         configuration: new Configuration({
-          id: 'uneConfigQuiExist',
-          inputMaxPrompts: 2,
+          llm: {},
+          challenge: {
+            inputMaxPrompts: 2,
+          },
         }),
         hasAttachmentContextBeenAdded: false,
         messages: [
@@ -157,9 +164,11 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       const chat = new Chat({
         id: 'chatId',
         userId: 123,
+        configurationId: 'uneConfigQuiExist',
         configuration: new Configuration({
-          id: 'uneConfigQuiExist',
-          inputMaxPrompts: 2,
+          challenge: {
+            inputMaxPrompts: 2,
+          },
         }),
         hasAttachmentContextBeenAdded: false,
         messages: [
@@ -191,11 +200,15 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           const chat = new Chat({
             id: 'chatId',
             userId: 123,
+            configurationId: 'uneConfigQuiExist',
             configuration: new Configuration({
-              id: 'uneConfigQuiExist',
-              inputMaxPrompts: 100,
-              inputMaxChars: 255,
-              historySize: 123,
+              llm: {
+                historySize: 123,
+              },
+              challenge: {
+                inputMaxPrompts: 100,
+                inputMaxChars: 255,
+              },
             }),
             hasAttachmentContextBeenAdded: false,
             messages: [
@@ -250,11 +263,15 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
             id: 'chatId',
             userId: 123,
+            configurationId: 'uneConfigQuiExist',
             configuration: {
-              id: 'uneConfigQuiExist',
-              inputMaxPrompts: 100,
-              inputMaxChars: 255,
-              historySize: 123,
+              llm: {
+                historySize: 123,
+              },
+              challenge: {
+                inputMaxPrompts: 100,
+                inputMaxChars: 255,
+              },
             },
             hasAttachmentContextBeenAdded: false,
             messages: [
@@ -282,7 +299,125 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           });
           expect(llmPostPromptScope.isDone()).to.be.true;
         });
+
+        context('when configuration is stored in old format', function () {
+          it('refetches configuration and stores it back in new format', async function () {
+            // given
+            const chat = new Chat({
+              id: 'chatId',
+              userId: 123,
+              configuration: new Configuration({
+                id: 'uneConfigQuiExist',
+                historySize: 123,
+                inputMaxPrompts: 100,
+                inputMaxChars: 255,
+              }),
+              hasAttachmentContextBeenAdded: false,
+              messages: [
+                new Message({ content: 'coucou user1', isFromUser: true }),
+                new Message({ content: 'coucou LLM1', isFromUser: false }),
+              ],
+            });
+            await chatTemporaryStorage.save({
+              key: chat.id,
+              value: chat.toDTO(),
+              expirationDelaySeconds: ms('24h'),
+            });
+            const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
+              .post('/chat', {
+                configurationId: 'uneConfigQuiExist',
+                history: [
+                  { content: 'coucou user1', role: 'user' },
+                  { content: 'coucou LLM1', role: 'assistant' },
+                ],
+                prompt: 'un message',
+              })
+              .reply(
+                201,
+                Readable.from([
+                  '60:{"ceci":"nest pas important","message":"coucou c\'est super"}',
+                  '40:{"message":"\\nle couscous c plutot bon"}47:{"message":" mais la paella c pas mal aussi\\n"}',
+                  '29:{"jecrois":{"que":"jaifini"}}',
+                ]),
+              );
+            const llmGetConfigScope = nock('https://llm-test.pix.fr/api')
+              .get('/configurations/uneConfigQuiExist')
+              .reply(200, {
+                name: 'Ma config',
+                llm: {
+                  historySize: 123,
+                },
+                challenge: {
+                  inputMaxPrompts: 100,
+                  inputMaxChars: 255,
+                },
+              });
+
+            // when
+            const stream = await promptChat({
+              chatId: 'chatId',
+              userId: 123,
+              message: 'un message',
+              attachmentName: null,
+              chatRepository,
+              promptRepository,
+              toEventStream,
+            });
+
+            // then
+            const parts = [];
+            const decoder = new TextDecoder();
+            for await (const chunk of stream) {
+              parts.push(decoder.decode(chunk));
+            }
+            const llmResponse = parts.join('');
+            expect(llmResponse).to.deep.equal(
+              "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n",
+            );
+            expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
+              id: 'chatId',
+              userId: 123,
+              configurationId: 'uneConfigQuiExist',
+              configuration: {
+                name: 'Ma config',
+                llm: {
+                  historySize: 123,
+                },
+                challenge: {
+                  inputMaxPrompts: 100,
+                  inputMaxChars: 255,
+                },
+              },
+              hasAttachmentContextBeenAdded: false,
+              messages: [
+                {
+                  content: 'coucou user1',
+                  isFromUser: true,
+                  notCounted: false,
+                },
+                {
+                  content: 'coucou LLM1',
+                  isFromUser: false,
+                  notCounted: false,
+                },
+                {
+                  content: 'un message',
+                  isFromUser: true,
+                  notCounted: false,
+                },
+                {
+                  content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+                  isFromUser: false,
+                  notCounted: false,
+                },
+              ],
+            });
+            expect(llmGetConfigScope.isDone()).to.be.true;
+            expect(llmPostPromptScope.isDone()).to.be.true;
+          });
+        });
       });
+
       context('when attachmentName is provided', function () {
         context('when no attachmentName is expected for the given configuration', function () {
           it('should throw a NoAttachmentNeededError', async function () {
@@ -290,11 +425,15 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             const chat = new Chat({
               id: 'chatId',
               userId: 123,
+              configurationId: 'uneConfigQuiExist',
               configuration: new Configuration({
-                id: 'uneConfigQuiExist',
-                inputMaxPrompts: 100,
-                inputMaxChars: 255,
-                historySize: 123,
+                llm: {
+                  historySize: 123,
+                },
+                challenge: {
+                  inputMaxPrompts: 100,
+                  inputMaxChars: 255,
+                },
               }),
               hasAttachmentContextBeenAdded: false,
               messages: [
@@ -325,6 +464,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             );
           });
         });
+
         context('when attachmentName is not the expected one for the given configuration', function () {
           it(
             'should return a stream which will contain the attachment event and the llm response while ' +
@@ -334,13 +474,19 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               const chat = new Chat({
                 id: 'chatId',
                 userId: 123,
+                configurationId: 'uneConfigQuiExist',
                 configuration: new Configuration({
-                  id: 'uneConfigQuiExist',
-                  inputMaxPrompts: 100,
-                  inputMaxChars: 255,
-                  historySize: 123,
-                  attachmentName: 'expected_file.txt',
-                  attachmentContext: 'add me in the chat !',
+                  llm: {
+                    historySize: 123,
+                  },
+                  challenge: {
+                    inputMaxPrompts: 100,
+                    inputMaxChars: 255,
+                  },
+                  attachment: {
+                    name: 'expected_file.txt',
+                    context: 'add me in the chat !',
+                  },
                 }),
                 hasAttachmentContextBeenAdded: false,
                 messages: [
@@ -396,13 +542,19 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
                 id: 'chatId',
                 userId: 123,
+                configurationId: 'uneConfigQuiExist',
                 configuration: {
-                  id: 'uneConfigQuiExist',
-                  inputMaxPrompts: 100,
-                  inputMaxChars: 255,
-                  historySize: 123,
-                  attachmentName: 'expected_file.txt',
-                  attachmentContext: 'add me in the chat !',
+                  llm: {
+                    historySize: 123,
+                  },
+                  challenge: {
+                    inputMaxPrompts: 100,
+                    inputMaxChars: 255,
+                  },
+                  attachment: {
+                    name: 'expected_file.txt',
+                    context: 'add me in the chat !',
+                  },
                 },
                 hasAttachmentContextBeenAdded: false,
                 messages: [
@@ -420,6 +572,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             },
           );
         });
+
         context('when attachmentName is the expected one for the given configuration', function () {
           context('when the context for this attachmentName has already been added', function () {
             it(
@@ -430,13 +583,19 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 const chat = new Chat({
                   id: 'chatId',
                   userId: 123,
+                  configurationId: 'uneConfigQuiExist',
                   configuration: new Configuration({
-                    id: 'uneConfigQuiExist',
-                    inputMaxPrompts: 100,
-                    inputMaxChars: 255,
-                    historySize: 123,
-                    attachmentName: 'expected_file.txt',
-                    attachmentContext: 'add me in the chat !',
+                    llm: {
+                      historySize: 123,
+                    },
+                    challenge: {
+                      inputMaxPrompts: 100,
+                      inputMaxChars: 255,
+                    },
+                    attachment: {
+                      name: 'expected_file.txt',
+                      context: 'add me in the chat !',
+                    },
                   }),
                   hasAttachmentContextBeenAdded: true,
                   messages: [
@@ -514,13 +673,19 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
                   id: 'chatId',
                   userId: 123,
+                  configurationId: 'uneConfigQuiExist',
                   configuration: {
-                    id: 'uneConfigQuiExist',
-                    inputMaxPrompts: 100,
-                    inputMaxChars: 255,
-                    historySize: 123,
-                    attachmentName: 'expected_file.txt',
-                    attachmentContext: 'add me in the chat !',
+                    llm: {
+                      historySize: 123,
+                    },
+                    challenge: {
+                      inputMaxPrompts: 100,
+                      inputMaxChars: 255,
+                    },
+                    attachment: {
+                      name: 'expected_file.txt',
+                      context: 'add me in the chat !',
+                    },
                   },
                   hasAttachmentContextBeenAdded: true,
                   messages: [
@@ -551,6 +716,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               },
             );
           });
+
           context('when the context for this attachmentName has not been added yet', function () {
             it(
               'should return a stream which will contain the attachment event and the llm response while ' +
@@ -560,13 +726,19 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 const chat = new Chat({
                   id: 'chatId',
                   userId: 123,
+                  configurationId: 'uneConfigQuiExist',
                   configuration: new Configuration({
-                    id: 'uneConfigQuiExist',
-                    inputMaxPrompts: 100,
-                    inputMaxChars: 255,
-                    historySize: 123,
-                    attachmentName: 'expected_file.txt',
-                    attachmentContext: 'add me in the chat !',
+                    llm: {
+                      historySize: 123,
+                    },
+                    challenge: {
+                      inputMaxPrompts: 100,
+                      inputMaxChars: 255,
+                    },
+                    attachment: {
+                      name: 'expected_file.txt',
+                      context: 'add me in the chat !',
+                    },
                   }),
                   hasAttachmentContextBeenAdded: false,
                   messages: [
@@ -632,13 +804,19 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
                   id: 'chatId',
                   userId: 123,
+                  configurationId: 'uneConfigQuiExist',
                   configuration: {
-                    id: 'uneConfigQuiExist',
-                    inputMaxPrompts: 100,
-                    inputMaxChars: 255,
-                    historySize: 123,
-                    attachmentName: 'expected_file.txt',
-                    attachmentContext: 'add me in the chat !',
+                    llm: {
+                      historySize: 123,
+                    },
+                    challenge: {
+                      inputMaxPrompts: 100,
+                      inputMaxChars: 255,
+                    },
+                    attachment: {
+                      name: 'expected_file.txt',
+                      context: 'add me in the chat !',
+                    },
                   },
                   hasAttachmentContextBeenAdded: true,
                   messages: [
@@ -678,7 +856,8 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           const chat = new Chat({
             id: 'chatId',
             userId: 123,
-            configuration: new Configuration({ id: 'uneConfigQuiExist' }),
+            configurationId: 'uneConfigQuiExist',
+            configuration: new Configuration({}),
             hasAttachmentContextBeenAdded: false,
             messages: [
               new Message({ content: 'coucou user1', isFromUser: true }),
@@ -704,6 +883,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           expect(err.message).to.equal('At least a message or an attachment, if applicable, must be provided');
         });
       });
+
       context('when attachmentName is provided', function () {
         context('when no attachmentName is expected for the given configuration', function () {
           it('should throw a NoAttachmentNeededError', async function () {
@@ -711,11 +891,15 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             const chat = new Chat({
               id: 'chatId',
               userId: 123,
+              configurationId: 'uneConfigQuiExist',
               configuration: new Configuration({
-                id: 'uneConfigQuiExist',
-                inputMaxPrompts: 2,
-                inputMaxChars: 255,
-                historySize: 123,
+                llm: {
+                  historySize: 123,
+                },
+                challenge: {
+                  inputMaxPrompts: 2,
+                  inputMaxChars: 255,
+                },
               }),
               hasAttachmentContextBeenAdded: false,
               messages: [
@@ -746,6 +930,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             );
           });
         });
+
         context('when attachmentName is not the expected one for the given configuration', function () {
           it(
             'should return a stream which will contain the attachment event while ' +
@@ -755,13 +940,19 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               const chat = new Chat({
                 id: 'chatId',
                 userId: 123,
+                configurationId: 'uneConfigQuiExist',
                 configuration: new Configuration({
-                  id: 'uneConfigQuiExist',
-                  inputMaxPrompts: 100,
-                  inputMaxChars: 255,
-                  historySize: 123,
-                  attachmentName: 'expected_file.txt',
-                  attachmentContext: 'add me in the chat !',
+                  llm: {
+                    historySize: 123,
+                  },
+                  challenge: {
+                    inputMaxPrompts: 100,
+                    inputMaxChars: 255,
+                  },
+                  attachment: {
+                    name: 'expected_file.txt',
+                    context: 'add me in the chat !',
+                  },
                 }),
                 hasAttachmentContextBeenAdded: false,
                 messages: [
@@ -797,13 +988,19 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
                 id: 'chatId',
                 userId: 123,
+                configurationId: 'uneConfigQuiExist',
                 configuration: {
-                  id: 'uneConfigQuiExist',
-                  inputMaxPrompts: 100,
-                  inputMaxChars: 255,
-                  historySize: 123,
-                  attachmentName: 'expected_file.txt',
-                  attachmentContext: 'add me in the chat !',
+                  llm: {
+                    historySize: 123,
+                  },
+                  challenge: {
+                    inputMaxPrompts: 100,
+                    inputMaxChars: 255,
+                  },
+                  attachment: {
+                    name: 'expected_file.txt',
+                    context: 'add me in the chat !',
+                  },
                 },
                 hasAttachmentContextBeenAdded: false,
                 messages: [
@@ -814,6 +1011,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             },
           );
         });
+
         context('when attachmentName is the expected one for the given configuration', function () {
           context('when the context for this attachmentName has already been added', function () {
             it(
@@ -824,13 +1022,19 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 const chat = new Chat({
                   id: 'chatId',
                   userId: 123,
+                  configurationId: 'uneConfigQuiExist',
                   configuration: new Configuration({
-                    id: 'uneConfigQuiExist',
-                    inputMaxPrompts: 100,
-                    inputMaxChars: 255,
-                    historySize: 123,
-                    attachmentName: 'expected_file.txt',
-                    attachmentContext: 'add me in the chat !',
+                    llm: {
+                      historySize: 123,
+                    },
+                    challenge: {
+                      inputMaxPrompts: 100,
+                      inputMaxChars: 255,
+                    },
+                    attachment: {
+                      name: 'expected_file.txt',
+                      context: 'add me in the chat !',
+                    },
                   }),
                   hasAttachmentContextBeenAdded: true,
                   messages: [
@@ -877,13 +1081,19 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
                   id: 'chatId',
                   userId: 123,
+                  configurationId: 'uneConfigQuiExist',
                   configuration: {
-                    id: 'uneConfigQuiExist',
-                    inputMaxPrompts: 100,
-                    inputMaxChars: 255,
-                    historySize: 123,
-                    attachmentName: 'expected_file.txt',
-                    attachmentContext: 'add me in the chat !',
+                    llm: {
+                      historySize: 123,
+                    },
+                    challenge: {
+                      inputMaxPrompts: 100,
+                      inputMaxChars: 255,
+                    },
+                    attachment: {
+                      name: 'expected_file.txt',
+                      context: 'add me in the chat !',
+                    },
                   },
                   hasAttachmentContextBeenAdded: true,
                   messages: [
@@ -907,6 +1117,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               },
             );
           });
+
           context('when the context for this attachmentName has not been added yet', function () {
             it(
               'should return a stream which will contain the attachment event while ' +
@@ -916,13 +1127,19 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 const chat = new Chat({
                   id: 'chatId',
                   userId: 123,
+                  configurationId: 'uneConfigQuiExist',
                   configuration: new Configuration({
-                    id: 'uneConfigQuiExist',
-                    inputMaxPrompts: 100,
-                    inputMaxChars: 255,
-                    historySize: 123,
-                    attachmentName: 'expected_file.txt',
-                    attachmentContext: 'add me in the chat !',
+                    llm: {
+                      historySize: 123,
+                    },
+                    challenge: {
+                      inputMaxPrompts: 100,
+                      inputMaxChars: 255,
+                    },
+                    attachment: {
+                      name: 'expected_file.txt',
+                      context: 'add me in the chat !',
+                    },
                   }),
                   hasAttachmentContextBeenAdded: false,
                   messages: [
@@ -958,13 +1175,19 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
                   id: 'chatId',
                   userId: 123,
+                  configurationId: 'uneConfigQuiExist',
                   configuration: {
-                    id: 'uneConfigQuiExist',
-                    inputMaxPrompts: 100,
-                    inputMaxChars: 255,
-                    historySize: 123,
-                    attachmentName: 'expected_file.txt',
-                    attachmentContext: 'add me in the chat !',
+                    llm: {
+                      historySize: 123,
+                    },
+                    challenge: {
+                      inputMaxPrompts: 100,
+                      inputMaxChars: 255,
+                    },
+                    attachment: {
+                      name: 'expected_file.txt',
+                      context: 'add me in the chat !',
+                    },
                   },
                   hasAttachmentContextBeenAdded: true,
                   messages: [

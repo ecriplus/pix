@@ -148,9 +148,14 @@ describe('Acceptance | Route | llm-preview', function () {
 
       expect(await chatTemporaryStorage.get(response.headers.location.split('/').at(-1))).to.deep.contain({
         configuration: {
-          historySize: 10,
-          inputMaxChars: 1024,
-          inputMaxPrompts: 5,
+          name: 'Config de test',
+          llm: {
+            historySize: 10,
+          },
+          challenge: {
+            inputMaxChars: 1024,
+            inputMaxPrompts: 5,
+          },
         },
         hasAttachmentContextBeenAdded: false,
         messages: [],
@@ -159,6 +164,23 @@ describe('Acceptance | Route | llm-preview', function () {
   });
 
   describe('GET /api/llm/preview/chats/{chatId}', function () {
+    context('when isEmbedLLMEnabled feature toggle is false', function () {
+      beforeEach(async function () {
+        await featureToggles.set('isEmbedLLMEnabled', false);
+      });
+
+      it('should throw a 503', async function () {
+        // when
+        const response = await server.inject({
+          method: 'GET',
+          url: '/api/llm/preview/chats/123e4567-e89b-12d3-a456-426614174000',
+        });
+
+        // then
+        expect(response.statusCode).to.equal(503);
+      });
+    });
+
     context('when chatId is unknown', function () {
       it('returns status code 404', async function () {
         // when
@@ -179,11 +201,17 @@ describe('Acceptance | Route | llm-preview', function () {
         value: {
           id: '123e4567-e89b-12d3-a456-426614174000',
           configuration: {
-            historySize: 10,
-            inputMaxChars: 500,
-            inputMaxPrompts: 4,
-            attachmentName: 'expected_file.txt',
-            attachmentContext: 'add me in the chat !',
+            llm: {
+              historySize: 10,
+            },
+            challenge: {
+              inputMaxChars: 500,
+              inputMaxPrompts: 4,
+            },
+            attachment: {
+              name: 'expected_file.txt',
+              context: 'add me in the chat !',
+            },
           },
           hasAttachmentContextBeenAdded: true,
           messages: [

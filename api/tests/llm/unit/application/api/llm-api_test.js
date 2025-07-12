@@ -26,9 +26,14 @@ describe('LLM | Unit | Application | API | llm', function () {
         newChat = new Chat({
           id: '123e4567-e89b-12d3-a456-426614174000',
           configuration: new Configuration({
-            attachmentName: 'file.txt',
-            inputMaxChars: 456,
-            inputMaxPrompts: 789,
+            llm: {},
+            challenge: {
+              inputMaxChars: 456,
+              inputMaxPrompts: 789,
+            },
+            attachment: {
+              name: 'file.txt',
+            },
           }),
         });
         startChat = sinon.stub(usecases, 'startChat').resolves(newChat);
@@ -50,7 +55,7 @@ describe('LLM | Unit | Application | API | llm', function () {
             inputMaxPrompts: newChat.configuration.inputMaxPrompts,
           }),
         );
-        expect(startChat).to.have.been.calledOnceWithExactly({ configId, userId });
+        expect(startChat).to.have.been.calledOnceWithExactly({ configurationId: configId, userId });
       });
     });
   });

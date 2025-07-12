@@ -25,7 +25,7 @@ export async function prompt({ message, configuration, chat }) {
   const messagesToForward = chat.messages.slice(-configuration.historySize).map((message) => message.toLLMHistory());
   const payload = JSON.stringify({
     prompt: message,
-    configurationId: configuration.id,
+    configurationId: chat.configurationId,
     history: messagesToForward,
   });
   let response;

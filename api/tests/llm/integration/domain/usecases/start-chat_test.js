@@ -24,11 +24,17 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
 
       beforeEach(function () {
         configuration = new Configuration({
-          historySize: 123,
-          inputMaxChars: 456,
-          inputMaxPrompts: 789,
-          attachmentName: 'file.txt',
-          attachmentContext: '**coucou**',
+          llm: {
+            historySize: 123,
+          },
+          challenge: {
+            inputMaxChars: 456,
+            inputMaxPrompts: 789,
+          },
+          attachment: {
+            name: 'file.txt',
+            context: '**coucou**',
+          },
         });
       });
 
@@ -47,11 +53,17 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
         expect(await chatTemporaryStorage.get('123e4567-e89b-12d3-a456-426614174000')).to.deep.equal({
           id: '123e4567-e89b-12d3-a456-426614174000',
           configuration: {
-            historySize: 123,
-            inputMaxChars: 456,
-            inputMaxPrompts: 789,
-            attachmentName: 'file.txt',
-            attachmentContext: '**coucou**',
+            llm: {
+              historySize: 123,
+            },
+            challenge: {
+              inputMaxChars: 456,
+              inputMaxPrompts: 789,
+            },
+            attachment: {
+              name: 'file.txt',
+              context: '**coucou**',
+            },
           },
           hasAttachmentContextBeenAdded: false,
           messages: [],
@@ -60,10 +72,10 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
     });
 
     context('when config object not provided', function () {
-      let configId, userId, llmApiScope, config;
+      let configurationId, userId, llmApiScope, config;
 
       beforeEach(function () {
-        configId = 'uneConfigQuiExist';
+        configurationId = 'uneConfigQuiExist';
         userId = 123456;
         config = {
           llm: {
@@ -83,13 +95,14 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
 
       it('should return the newly created chat', async function () {
         // when
-        const chat = await startChat({ configId, userId, randomUUID, chatRepository, configurationRepository });
+        const chat = await startChat({ configurationId, userId, randomUUID, chatRepository, configurationRepository });
 
         // then
         expect(chat).to.deepEqualInstance(
           new Chat({
             id: '123e4567-e89b-12d3-a456-426614174000',
             userId: 123456,
+            configurationId: 'uneConfigQuiExist',
             configuration: new Configuration({}), // Configuration’s properties are not enumerable
             hasAttachmentContextBeenAdded: false,
           }),
@@ -98,13 +111,19 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
         expect(await chatTemporaryStorage.get('123e4567-e89b-12d3-a456-426614174000')).to.deep.equal({
           id: '123e4567-e89b-12d3-a456-426614174000',
           userId: 123456,
+          configurationId: 'uneConfigQuiExist',
           configuration: {
-            id: 'uneConfigQuiExist',
-            historySize: 123,
-            inputMaxChars: 456,
-            inputMaxPrompts: 789,
-            attachmentName: 'file.txt',
-            attachmentContext: '**coucou**',
+            llm: {
+              historySize: 123,
+            },
+            challenge: {
+              inputMaxChars: 456,
+              inputMaxPrompts: 789,
+            },
+            attachment: {
+              name: 'file.txt',
+              context: '**coucou**',
+            },
           },
           hasAttachmentContextBeenAdded: false,
           messages: [],

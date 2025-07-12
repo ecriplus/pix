@@ -6,9 +6,6 @@ import { ConfigurationNotFoundError, LLMApiError } from '../../domain/errors.js'
 import { Configuration } from '../../domain/models/Configuration.js';
 
 const logger = child('llm:api', { event: SCOPES.LLM });
-/**
- * @typedef {import('../../domain/Configuration').Configuration} Configuration
- */
 
 /**
  * @function
@@ -36,8 +33,8 @@ export async function get(id) {
   const contentType = response.headers.get('Content-Type');
   if (response.ok) {
     if (contentType === 'application/json') {
-      const jsonResponse = await response.json();
-      return toDomainFromLLMApi(id, jsonResponse);
+      const configurationDTO = await response.json();
+      return Configuration.fromDTO(configurationDTO);
     }
     throw new LLMApiError('unexpected content-type response');
   }
@@ -64,15 +61,4 @@ async function handleFetchErrors(response) {
     status: response.status,
     err,
   };
-}
-
-function toDomainFromLLMApi(id, configurationDTO) {
-  return new Configuration({
-    id,
-    historySize: configurationDTO?.llm?.historySize ?? null,
-    inputMaxChars: configurationDTO?.challenge?.inputMaxChars ?? null,
-    inputMaxPrompts: configurationDTO?.challenge?.inputMaxPrompts ?? null,
-    attachmentName: configurationDTO?.attachment?.name ?? null,
-    attachmentContext: configurationDTO?.attachment?.context ?? null,
-  });
 }

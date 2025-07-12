@@ -1,16 +1,10 @@
 import { ChatNotFoundError } from '../../../../../src/llm/domain/errors.js';
 import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
-import {
-  CHAT_STORAGE_PREFIX,
-  get,
-  OLD_CHAT_STORAGE_PREFIX,
-  save,
-} from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
+import { CHAT_STORAGE_PREFIX, get, save } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import { catchErr, expect, nock } from '../../../../test-helper.js';
 
-const oldChatTemporaryStorage = temporaryStorage.withPrefix(OLD_CHAT_STORAGE_PREFIX);
 const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
 
 describe('LLM | Integration | Infrastructure | Repositories | chat', function () {
@@ -24,13 +18,19 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
       const chat = new Chat({
         id: 'someChatId',
         userId: 123,
+        configurationId: 'some-config-id',
         configuration: new Configuration({
-          id: 'some-config-id',
-          historySize: 10,
-          inputMaxChars: 500,
-          inputMaxPrompts: 4,
-          attachmentName: 'test.csv',
-          attachmentContext: 'le contexte',
+          llm: {
+            historySize: 10,
+          },
+          challenge: {
+            inputMaxChars: 500,
+            inputMaxPrompts: 4,
+          },
+          attachment: {
+            name: 'test.csv',
+            context: 'le contexte',
+          },
         }),
         hasAttachmentContextBeenAdded: false,
         messages: [
@@ -46,13 +46,19 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
       expect(await chatTemporaryStorage.get('someChatId')).to.deep.equal({
         id: 'someChatId',
         userId: 123,
+        configurationId: 'some-config-id',
         configuration: {
-          id: 'some-config-id',
-          historySize: 10,
-          inputMaxChars: 500,
-          inputMaxPrompts: 4,
-          attachmentName: 'test.csv',
-          attachmentContext: 'le contexte',
+          llm: {
+            historySize: 10,
+          },
+          challenge: {
+            inputMaxChars: 500,
+            inputMaxPrompts: 4,
+          },
+          attachment: {
+            name: 'test.csv',
+            context: 'le contexte',
+          },
         },
         hasAttachmentContextBeenAdded: false,
         messages: [
@@ -73,14 +79,8 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
             value: {
               id: 'someChatId',
               userId: 123,
-              configuration: {
-                id: 'some-config-id',
-                historySize: 10,
-                inputMaxChars: 500,
-                inputMaxPrompts: 4,
-                attachmentName: 'test.csv',
-                attachmentContext: 'le contexte',
-              },
+              configurationId: 'some-config-id',
+              configuration: {},
               hasAttachmentContextBeenAdded: false,
               messages: [
                 { content: 'je suis user', isFromUser: true, notCounted: false },
@@ -107,13 +107,19 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           value: {
             id: 'someChatId',
             userId: 123,
+            configurationId: 'some-config-id',
             configuration: {
-              id: 'some-config-id',
-              historySize: 10,
-              inputMaxChars: 500,
-              inputMaxPrompts: 4,
-              attachmentName: 'test.csv',
-              attachmentContext: 'le contexte',
+              llm: {
+                historySize: 10,
+              },
+              challenge: {
+                inputMaxChars: 500,
+                inputMaxPrompts: 4,
+              },
+              attachment: {
+                name: 'test.csv',
+                context: 'le contexte',
+              },
             },
             hasAttachmentContextBeenAdded: false,
             messages: [
@@ -131,14 +137,8 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           new Chat({
             id: 'someChatId',
             userId: 123,
-            configuration: new Configuration({
-              id: 'some-config-id',
-              historySize: 10,
-              inputMaxChars: 500,
-              inputMaxPrompts: 4,
-              attachmentName: 'test.csv',
-              attachmentContext: 'le contexte',
-            }),
+            configurationId: 'some-config-id',
+            configuration: new Configuration({}), // configuration properties are not enumerable
             hasAttachmentContextBeenAdded: false,
             messages: [
               new Message({ content: 'je suis user', isFromUser: true }),
@@ -146,17 +146,37 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
             ],
           }),
         );
+        expect(actualChat.configuration.toDTO()).to.deep.equal({
+          llm: {
+            historySize: 10,
+          },
+          challenge: {
+            inputMaxChars: 500,
+            inputMaxPrompts: 4,
+          },
+          attachment: {
+            name: 'test.csv',
+            context: 'le contexte',
+          },
+        });
       });
 
-      context('when chat does not contain configuration', function () {
-        it('loads configuration and returns chat with configuration', async function () {
+      context('when chat contains a stale configuration', function () {
+        it('loads configuration and returns chat with fresh configuration', async function () {
           // given
           await chatTemporaryStorage.save({
             key: 'someChatId',
             value: {
               id: 'someChatId',
               userId: 123,
-              configurationId: 'some-config-id',
+              configuration: {
+                id: 'some-config-id',
+                historySize: 1,
+                inputMaxChars: 2,
+                inputMaxPrompts: 3,
+                attachmentName: 'some_attachment_name',
+                attachmentContext: 'some attachment context',
+              },
               hasAttachmentContextBeenAdded: false,
               messages: [
                 { content: 'je suis user', isFromUser: true, notCounted: false },
@@ -180,14 +200,8 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
             new Chat({
               id: 'someChatId',
               userId: 123,
-              configuration: new Configuration({
-                id: 'some-config-id',
-                historySize: 1,
-                inputMaxChars: 2,
-                inputMaxPrompts: 3,
-                attachmentName: 'some_attachment_name',
-                attachmentContext: 'some attachment context',
-              }),
+              configurationId: 'some-config-id',
+              configuration: new Configuration({}), // configuration properties are not enumerable
               hasAttachmentContextBeenAdded: false,
               messages: [
                 new Message({ content: 'je suis user', isFromUser: true }),
@@ -195,124 +209,12 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               ],
             }),
           );
+          expect(actualChat.configuration.toDTO()).to.deep.equal({
+            llm: { historySize: 1 },
+            challenge: { inputMaxChars: 2, inputMaxPrompts: 3 },
+            attachment: { name: 'some_attachment_name', context: 'some attachment context' },
+          });
           expect(llmApiScope.isDone()).to.be.true;
-        });
-      });
-
-      context('when chat is in old temporary storage', function () {
-        it('returns the chat from old temporary storage', async function () {
-          // given
-          await oldChatTemporaryStorage.save({
-            key: 'someChatId',
-            value: {
-              id: 'someChatId',
-              userId: 123,
-              configuration: {
-                id: 'some-config-id',
-                historySize: 10,
-                inputMaxChars: 500,
-                inputMaxPrompts: 4,
-                attachmentName: 'test.csv',
-                attachmentContext: 'le contexte',
-              },
-              hasAttachmentContextBeenAdded: false,
-              messages: [
-                { content: 'je suis user', isFromUser: true, notCounted: false },
-                { content: 'je suis LLM', isFromUser: false, notCounted: false },
-              ],
-            },
-          });
-
-          // when
-          const actualChat = await get('someChatId');
-
-          // then
-          expect(actualChat).to.deepEqualInstance(
-            new Chat({
-              id: 'someChatId',
-              userId: 123,
-              configuration: new Configuration({
-                id: 'some-config-id',
-                historySize: 10,
-                inputMaxChars: 500,
-                inputMaxPrompts: 4,
-                attachmentName: 'test.csv',
-                attachmentContext: 'le contexte',
-              }),
-              hasAttachmentContextBeenAdded: false,
-              messages: [
-                new Message({ content: 'je suis user', isFromUser: true }),
-                new Message({ content: 'je suis LLM', isFromUser: false }),
-              ],
-            }),
-          );
-        });
-      });
-
-      context('when chat is both in old and new temporary storage', function () {
-        it('returns the chat from new temporary storage', async function () {
-          // given
-          await oldChatTemporaryStorage.save({
-            key: 'someChatId',
-            value: {
-              id: 'someChatId',
-              userId: 123,
-              configuration: {
-                id: 'some-config-id',
-                historySize: 10,
-                inputMaxChars: 500,
-                inputMaxPrompts: 4,
-                attachmentName: 'test.csv',
-                attachmentContext: 'le contexte',
-              },
-              hasAttachmentContextBeenAdded: false,
-              messages: [],
-            },
-          });
-          await chatTemporaryStorage.save({
-            key: 'someChatId',
-            value: {
-              id: 'someChatId',
-              userId: 123,
-              configuration: {
-                id: 'some-config-id',
-                historySize: 10,
-                inputMaxChars: 500,
-                inputMaxPrompts: 4,
-                attachmentName: 'test.csv',
-                attachmentContext: 'le contexte',
-              },
-              hasAttachmentContextBeenAdded: false,
-              messages: [
-                { content: 'je suis user', isFromUser: true, notCounted: false },
-                { content: 'je suis LLM', isFromUser: false, notCounted: false },
-              ],
-            },
-          });
-
-          // when
-          const actualChat = await get('someChatId');
-
-          // then
-          expect(actualChat).to.deepEqualInstance(
-            new Chat({
-              id: 'someChatId',
-              userId: 123,
-              configuration: new Configuration({
-                id: 'some-config-id',
-                historySize: 10,
-                inputMaxChars: 500,
-                inputMaxPrompts: 4,
-                attachmentName: 'test.csv',
-                attachmentContext: 'le contexte',
-              }),
-              hasAttachmentContextBeenAdded: false,
-              messages: [
-                new Message({ content: 'je suis user', isFromUser: true }),
-                new Message({ content: 'je suis LLM', isFromUser: false }),
-              ],
-            }),
-          );
         });
       });
     });

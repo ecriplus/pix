@@ -301,17 +301,12 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
   describe('#toDTO', function () {
     it('should return the DTO version of the Chat model', function () {
       // given
+      const configurationDTO = Symbol('configurationDTO');
       const chat = new Chat({
         id: 'some-chat-id',
         userId: 123,
-        configuration: new Configuration({
-          id: 'some-config-id',
-          historySize: 10,
-          inputMaxChars: 500,
-          inputMaxPrompts: 4,
-          attachmentName: 'test.csv',
-          attachmentContext: 'le contexte',
-        }),
+        configurationId: 'abc123',
+        configuration: new Configuration(configurationDTO),
         hasAttachmentContextBeenAdded: false,
         messages: [
           new Message({ content: 'message llm 1', isFromUser: false }),
@@ -326,14 +321,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       expect(dto).to.deep.equal({
         id: 'some-chat-id',
         userId: 123,
-        configuration: {
-          id: 'some-config-id',
-          historySize: 10,
-          inputMaxChars: 500,
-          inputMaxPrompts: 4,
-          attachmentName: 'test.csv',
-          attachmentContext: 'le contexte',
-        },
+        configurationId: 'abc123',
+        configuration: configurationDTO,
         hasAttachmentContextBeenAdded: false,
         messages: [
           {
@@ -356,19 +345,13 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
   });
 
   describe('#fromDTO', function () {
-    it('should return the DTO version of the Chat model', function () {
+    it('should return a Chat model', function () {
       // given
       const dto = {
         id: 'some-chat-id',
         userId: 123,
-        configuration: {
-          id: 'some-config-id',
-          historySize: 10,
-          inputMaxChars: 500,
-          inputMaxPrompts: 4,
-          attachmentName: 'test.csv',
-          attachmentContext: 'le contexte',
-        },
+        configurationId: 'abc123',
+        configuration: {},
         hasAttachmentContextBeenAdded: false,
         messages: [
           {
@@ -396,14 +379,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         new Chat({
           id: 'some-chat-id',
           userId: 123,
-          configuration: new Configuration({
-            id: 'some-config-id',
-            historySize: 10,
-            inputMaxChars: 500,
-            inputMaxPrompts: 4,
-            attachmentName: 'test.csv',
-            attachmentContext: 'le contexte',
-          }),
+          configurationId: 'abc123',
+          configuration: new Configuration({}), // Configuration model has no enumerable properties
           hasAttachmentContextBeenAdded: false,
           messages: [
             new Message({ content: 'message llm 1', isFromUser: false }),
@@ -411,32 +388,6 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           ],
         }),
       );
-    });
-
-    context('when DTO does not contain userId', function () {
-      it('should extract userId from chatId', function () {
-        // given
-        const dto = {
-          id: '123-456',
-          configuration: {},
-          hasAttachmentContextBeenAdded: false,
-          messages: [],
-        };
-
-        // when
-        const chat = Chat.fromDTO(dto);
-
-        // then
-        expect(chat).to.deepEqualInstance(
-          new Chat({
-            id: '123-456',
-            userId: 123,
-            configuration: new Configuration({}),
-            hasAttachmentContextBeenAdded: false,
-            messages: [],
-          }),
-        );
-      });
     });
   });
 });

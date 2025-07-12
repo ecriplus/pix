@@ -894,13 +894,19 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
           const chat = new Chat({
             id: 'someChatId123456789',
             userId: user.id,
+            configurationId: 'uneConfigQuiExist',
             configuration: new Configuration({
-              id: 'uneConfigQuiExist',
-              historySize: 123,
-              inputMaxChars: 999,
-              inputMaxPrompts: 999,
-              attachmentName: 'expected_file.pdf',
-              attachmentContext: 'some context',
+              llm: {
+                historySize: 123,
+              },
+              challenge: {
+                inputMaxChars: 999,
+                inputMaxPrompts: 999,
+              },
+              attachment: {
+                name: 'expected_file.pdf',
+                context: 'some context',
+              },
             }),
             hasAttachmentContextBeenAdded: false,
             messages: [],

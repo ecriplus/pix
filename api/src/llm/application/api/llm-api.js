@@ -12,7 +12,7 @@ export async function startChat({ configId, userId }) {
   if (!userId) {
     throw new NoUserIdProvidedError();
   }
-  const { id, configuration } = await usecases.startChat({ configId, userId });
+  const { id, configuration } = await usecases.startChat({ configurationId: configId, userId });
   return new LLMChatDTO({
     id,
     attachmentName: configuration.attachmentName,

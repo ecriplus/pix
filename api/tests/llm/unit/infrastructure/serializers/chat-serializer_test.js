@@ -10,9 +10,13 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
       const chat = new Chat({
         id: '123e4567-e89b-12d3-a456-426614174000',
         configuration: new Configuration({
-          attachmentName: 'filename.txt',
-          inputMaxChars: 500,
-          inputMaxPrompts: 5,
+          challenge: {
+            inputMaxChars: 500,
+            inputMaxPrompts: 5,
+          },
+          attachment: {
+            name: 'filename.txt',
+          },
         }),
         hasAttachmentContextBeenAdded: false,
         messages: [
@@ -43,9 +47,13 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
         const chat = new Chat({
           id: '123e4567-e89b-12d3-a456-426614174000',
           configuration: new Configuration({
-            attachmentName: 'filename.txt',
-            inputMaxChars: 500,
-            inputMaxPrompts: 5,
+            challenge: {
+              inputMaxChars: 500,
+              inputMaxPrompts: 5,
+            },
+            attachment: {
+              name: 'filename.txt',
+            },
           }),
           hasAttachmentContextBeenAdded: false,
           messages: [
@@ -87,9 +95,13 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
         const chat = new Chat({
           id: '123e4567-e89b-12d3-a456-426614174000',
           configuration: new Configuration({
-            attachmentName: 'filename.txt',
-            inputMaxChars: 500,
-            inputMaxPrompts: 5,
+            challenge: {
+              inputMaxChars: 500,
+              inputMaxPrompts: 5,
+            },
+            attachment: {
+              name: 'filename.txt',
+            },
           }),
           hasAttachmentContextBeenAdded: false,
           messages: [
