@@ -12,23 +12,18 @@ import {
   PIX_ORGA_MEMBER_CREDENTIALS,
 } from './auth.js';
 
-export type TEST_MODE = 'check' | 'record';
 const shouldRecordHAR = process.env.RECORD_HAR === 'true';
 const HAR_DIR = path.resolve(import.meta.dirname, '../.har-record');
 
 export const test = base.extend<{
   globalTestId: string;
   forEachTest: void;
-  testMode: TEST_MODE;
   pixAppUserContext: BrowserContext;
   pixOrgaAdminContext: BrowserContext;
   pixOrgaMemberContext: BrowserContext;
   pixCertifProContext: BrowserContext;
+  snapshotHandler: SnapshotHandler;
 }>({
-  // eslint-disable-next-line no-empty-pattern
-  testMode: async ({}, use) => {
-    await use((process.env.TEST_MODE as TEST_MODE) || 'check');
-  },
   // eslint-disable-next-line no-empty-pattern
   globalTestId: async ({}, use, testInfo) => {
     const raw = `${testInfo.file}::${testInfo.title}`;
@@ -116,6 +111,10 @@ export const test = base.extend<{
     await use(context);
     await context.close();
   },
+  // eslint-disable-next-line no-empty-pattern
+  snapshotHandler: async ({}, use) => {
+    await use(new SnapshotHandler({ shouldUpdateSnapshots: process.env.UPDATE_SNAPSHOTS === 'true' }));
+  },
 });
 
 function sanitizeFilename(name: string) {
@@ -124,21 +123,30 @@ function sanitizeFilename(name: string) {
 
 export const expect = test.expect;
 
-export async function expectOrRecordResults({
-  results,
-  resultFileName,
-  testMode,
-}: {
-  results: object;
-  resultFileName: string;
-  testMode: TEST_MODE;
-}) {
-  const resultDir = path.resolve(import.meta.dirname, '../snapshots');
-  const resultFilePath = path.join(resultDir, resultFileName);
-  if (testMode === 'record') {
-    await fs.writeFile(resultFilePath, JSON.stringify(results));
-  } else {
-    const expectedResults = await fs.readFile(resultFilePath, { encoding: 'utf-8' });
-    expect(JSON.stringify(results)).toStrictEqual(expectedResults);
+class SnapshotHandler {
+  private readonly results: { label: string; value: number | string }[];
+  private readonly shouldUpdateSnapshots: boolean;
+  constructor({ shouldUpdateSnapshots }: { shouldUpdateSnapshots: boolean }) {
+    this.results = [];
+    this.shouldUpdateSnapshots = shouldUpdateSnapshots;
+  }
+
+  push(label: string, value: number | string) {
+    this.results.push({ label, value });
+  }
+
+  async expectOrRecord(fileName: string) {
+    const resultDir = path.resolve(import.meta.dirname, '../snapshots');
+    const resultFilePath = path.join(resultDir, fileName as string);
+    if (this.shouldUpdateSnapshots) {
+      await fs.writeFile(resultFilePath, JSON.stringify(this.results));
+    } else {
+      const data = await fs.readFile(resultFilePath, { encoding: 'utf-8' });
+      const expectedResults = JSON.parse(data);
+      test.expect(this.results.length).toBe(expectedResults.length);
+      for (let i = 0; i < this.results.length; ++i) {
+        test.expect(this.results[i]).toStrictEqual(expectedResults[i]);
+      }
+    }
   }
 }
