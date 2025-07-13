@@ -1082,7 +1082,6 @@ jobs:
             PIX_CERTIF_URL: http://localhost:4203
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
             AUTH_SECRET: 'secret'
-            TEST_MODE: 'check'
       - run:
           name: Run E2E tests (serially)
           command: npx playwright test --grep @runSerially --workers=1
@@ -1093,7 +1092,6 @@ jobs:
             PIX_CERTIF_URL: http://localhost:4203
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
             AUTH_SECRET: 'secret'
-            TEST_MODE: 'check'
       - store_test_results:
           path: ./node_modules/.playwright/junit
       - store_artifacts:
