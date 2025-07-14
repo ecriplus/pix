@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.158.0](https://github.com/1024pix/pix/compare/v5.157.0...v5.158.0) (2025-07-14)
+
+### :rocket: Amélioration
+
+- [#12821](https://github.com/1024pix/pix/pull/12821) Création de la table quest_participations 
+- [#12802](https://github.com/1024pix/pix/pull/12802) Masquer la valeur des « claims to store » dans la double mire SSO (PIX-18536) 
+
+### :building_construction: Tech
+
+- [#12822](https://github.com/1024pix/pix/pull/12822) :recycle: ajoute les secondes dans la version générée par le script de migration des challenges de référentiel de certification complémentaire (PIX-18694) 
+- [#12826](https://github.com/1024pix/pix/pull/12826) Migrer les tests e2E de campagnes vers playwright 
+- [#12817](https://github.com/1024pix/pix/pull/12817) Refactor des tests e2e playwright pour centraliser la lecture / écriture du fichier de référence. 
+- [#12823](https://github.com/1024pix/pix/pull/12823) Uniformiser les noms des méthodes et variables liées à la limite de places des orgas (PIX-18698). 
+
+### :arrow_up: Montée de version
+
+- [#12827](https://github.com/1024pix/pix/pull/12827) Lock file maintenance (api) 
+- [#12828](https://github.com/1024pix/pix/pull/12828) Lock file maintenance (audit-logger)
+
 # [5.157.0](https://github.com/1024pix/pix/compare/v5.156.0...v5.157.0) (2025-07-11)
 
 ### :rocket: Amélioration
