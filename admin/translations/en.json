@@ -382,6 +382,13 @@
       "external-jury-select-options": {
         "REJECTED": "Rejected",
         "UNSET": "Waiting"
+      },
+      "global-actions": {
+        "rescoring": {
+          "button": "Rescore certification",
+          "error-message": "An error occurred during certification rescoring.",
+          "success-message": "Certification has successfully been rescored."
+        }
       }
     },
     "complementary-certifications": {

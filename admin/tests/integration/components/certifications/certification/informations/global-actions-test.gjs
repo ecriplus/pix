@@ -1,5 +1,6 @@
 import { fireEvent, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
+import { t } from 'ember-intl/test-support';
 import CertificationInformationGlobalActions from 'pix-admin/components/certifications/certification/informations/global-actions';
 import { assessmentResultStatus } from 'pix-admin/models/certification';
 import { module, test } from 'qunit';
@@ -526,6 +527,77 @@ module('Integration | Component | Certifications | Certification | Information |
         assert.ok(currentCertification.save.notCalled);
         assert.ok(currentCertification.reload.notCalled);
         assert.dom(screen.queryByRole('button', { name: 'Annuler' })).doesNotExist();
+      });
+    });
+  });
+
+  module('rescore button', function () {
+    module('when the certification is already published', function () {
+      test('should not display a rescoring button', async function (assert) {
+        // given
+        const certification = store.createRecord('certification', {
+          userId: 1,
+          isPublished: true,
+        });
+        const session = store.createRecord('session', {});
+
+        // when
+        const screen = await render(
+          <template>
+            <CertificationInformationGlobalActions @certification={{certification}} @session={{session}} />
+          </template>,
+        );
+
+        // then
+        assert
+          .dom(screen.queryByRole('button', { name: t('components.certifications.global-actions.rescoring.button') }))
+          .doesNotExist();
+      });
+    });
+
+    module('when the certification is not finalized', function () {
+      test('should not display a rescoring button', async function (assert) {
+        // given
+        const certification = store.createRecord('certification', {
+          userId: 1,
+          isPublished: false,
+        });
+        const session = store.createRecord('session', { finalizedAt: null });
+
+        // when
+        const screen = await render(
+          <template>
+            <CertificationInformationGlobalActions @certification={{certification}} @session={{session}} />
+          </template>,
+        );
+
+        // then
+        assert
+          .dom(screen.queryByRole('button', { name: t('components.certifications.global-actions.rescoring.button') }))
+          .doesNotExist();
+      });
+    });
+
+    module('when the certification is finalized but not published yet', function () {
+      test('should display a rescoring button', async function (assert) {
+        // given
+        const certification = store.createRecord('certification', {
+          userId: 1,
+          isPublished: false,
+        });
+        const session = store.createRecord('session', { finalizedAt: new Date('2020-01-01') });
+
+        // when
+        const screen = await render(
+          <template>
+            <CertificationInformationGlobalActions @certification={{certification}} @session={{session}} />
+          </template>,
+        );
+
+        // then
+        assert
+          .dom(screen.getByRole('button', { name: t('components.certifications.global-actions.rescoring.button') }))
+          .exists();
       });
     });
   });

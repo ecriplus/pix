@@ -698,6 +698,40 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
         });
       });
     });
+
+    module('Certification rescoring', function () {
+      module('when rescoring button is clicked', function () {
+        test('it displays a success notification', async function (assert) {
+          // given
+          await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+
+          // when
+          const screen = await visit(`/certifications/${certification.id}`);
+          await click(screen.getByRole('button', { name: 'Re-scorer la certification' }));
+
+          // then
+          assert.dom(await screen.findByText('La certification a bien été rescorée.')).exists();
+        });
+
+        module('when an error occurred', function () {
+          test('it displays an error notification', async function (assert) {
+            // given
+            await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+
+            // when
+            const screen = await visit(`/certifications/${certification.id}`);
+            this.server.post(`/admin/certifications/${certification.id}/rescore`, () => ({}), 400);
+
+            await click(screen.getByRole('button', { name: 'Re-scorer la certification' }));
+
+            // then
+            assert
+              .dom(await screen.findByText('Une erreur est survenue lors du rescoring de la certification.'))
+              .exists();
+          });
+        });
+      });
+    });
   });
 });
 
