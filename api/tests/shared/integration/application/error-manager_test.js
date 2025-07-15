@@ -109,14 +109,6 @@ describe('Integration | API | Controller Error', function () {
       expect(responseDetail(response)).to.equal('The configuration of id "someConfigId" does not exist');
     });
 
-    it('responds Bad Request when a LLMDomainErrors.ChatNotFoundError error occurs', async function () {
-      routeHandler.throws(new LLMDomainErrors.ChatNotFoundError('someChatId'));
-      const response = await server.requestObject(request);
-
-      expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
-      expect(responseDetail(response)).to.equal('The chat of id "someChatId" does not exist');
-    });
-
     it('responds Bad Request when a LLMDomainErrors.NoUserIdProvidedError error occurs', async function () {
       routeHandler.throws(new LLMDomainErrors.NoUserIdProvidedError());
       const response = await server.requestObject(request);
@@ -183,6 +175,18 @@ describe('Integration | API | Controller Error', function () {
 
       expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
       expect(responseDetail(response)).to.equal('User has not the right to use this chat');
+    });
+  });
+
+  context('404 Not found', function () {
+    const NOT_FOUND_ERROR = 404;
+
+    it('responds Not Found when a LLMDomainErrors.ChatNotFoundError error occurs', async function () {
+      routeHandler.throws(new LLMDomainErrors.ChatNotFoundError('someChatId'));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(NOT_FOUND_ERROR);
+      expect(responseDetail(response)).to.equal('The chat of id "someChatId" does not exist');
     });
   });
 

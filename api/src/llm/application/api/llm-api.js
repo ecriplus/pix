@@ -14,14 +14,6 @@ import * as toEventStream from '../../infrastructure/streaming/to-event-stream.j
 import { LLMChatDTO } from './models/LLMChatDTO.js';
 
 /**
- * @typedef LLMChatDTO
- * @type {object}
- * @property {string} id
- * @property {number} inputMaxPrompts
- * @property {number} inputMaxChars
- */
-
-/**
  * @function
  * @name startChat
  *

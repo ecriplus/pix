@@ -2,7 +2,6 @@ import { Configuration } from './Configuration.js';
 
 export class Chat {
   /**
-   * @constructor
    * @param {Object} params
    * @param {string} params.id
    * @param {number} params.userId
@@ -19,63 +18,37 @@ export class Chat {
   }
 
   /**
-   * @param {string|null} message
-   * @returns {void}
+   * @param {string=} message
    */
   addUserMessage(message) {
-    if (message) {
-      this.messages.push(new Message({ content: message, isFromUser: true }));
-    }
+    if (!message) return;
+    this.messages.push(new Message({ content: message, isFromUser: true }));
   }
 
   /**
    * @param {string} attachmentName
    * @param {string} attachmentContext
    * @param {boolean} notCounted
-   * @returns {void}
    */
   addAttachmentContextMessages(attachmentName, attachmentContext, notCounted) {
-    if (!this.hasAttachmentContextBeenAdded) {
-      const userContent = `
-<system_notification>
-  L'utilisateur a téléversé une pièce jointe :
-  <attachment_name>
-    ${attachmentName}
-  </attachment_name>
-</system_notification>`;
-      this.messages.push(new Message({ content: userContent, isFromUser: true, notCounted }));
-      const llmContent = `
-<read_attachment_tool>
-  Lecture de la pièce jointe, ${attachmentName} :
-  <attachment_content>
-    ${attachmentContext}
-  </attachment_content>
-</read_attachment_tool>`;
-      this.messages.push(new Message({ content: llmContent, isFromUser: false }));
-      this.hasAttachmentContextBeenAdded = true;
-    }
+    if (this.hasAttachmentContextBeenAdded) return;
+    this.messages.push(new Message({ attachmentName, isFromUser: true, notCounted }));
+    this.messages.push(new Message({ attachmentName, attachmentContext, isFromUser: false }));
+    this.hasAttachmentContextBeenAdded = true;
   }
 
   /**
-   * @param {string|null} message
-   * @returns {void}
+   * @param {string=} message
    */
   addLLMMessage(message) {
-    if (message) {
-      this.messages.push(new Message({ content: message, isFromUser: false }));
-    }
+    if (!message) return;
+    this.messages.push(new Message({ content: message, isFromUser: false }));
   }
 
-  /**
-   * @returns {number}
-   */
   get currentPromptsCount() {
     return this.messages.filter((message) => message.isFromUser && !message.notCounted).length;
   }
 
-  /**
-   * @returns {Object}
-   */
   toDTO() {
     return {
       id: this.id,
@@ -100,23 +73,53 @@ export class Message {
   /**
    * @constructor
    * @param {Object} params
-   * @param {string} params.content
-   * @param {Boolean} params.isFromUser
+   * @param {string=} params.content
+   * @param {string=} params.attachmentName
+   * @param {string=} params.attachmentContext
+   * @param {boolean} params.isFromUser
+   * @param {boolean=} params.notCounted
    */
-  constructor({ content, isFromUser, notCounted }) {
+  constructor({ content, attachmentName, attachmentContext, isFromUser, notCounted }) {
     this.content = content;
     this.isFromUser = isFromUser;
     this.notCounted = !!notCounted;
+    this.attachmentName = attachmentName;
+    this.attachmentContext = attachmentContext;
   }
 
-  /**
-   * @returns {Object}
-   */
+  get isAttachment() {
+    return !!this.attachmentName && this.isFromUser;
+  }
+
+  get isAttachmentContent() {
+    return !!this.attachmentName && !this.isFromUser;
+  }
+
+  get #contentForLLMHistory() {
+    if (this.content) return this.content;
+    if (this.isAttachment) {
+      return `<system_notification>L'utilisateur a téléversé une pièce jointe : <attachment_name>${this.attachmentName}</attachment_name></system_notification>`;
+    }
+    if (this.isAttachmentContent) {
+      return `<read_attachment_tool>Lecture de la pièce jointe, ${this.attachmentName} : <attachment_content>${this.attachmentContext}</attachment_content></read_attachment_tool>`;
+    }
+    throw new Error('chat message should have content or attachment');
+  }
+
   toDTO() {
     return {
       content: this.content,
+      attachmentName: this.attachmentName,
+      attachmentContext: this.attachmentContext,
       isFromUser: this.isFromUser,
       notCounted: this.notCounted,
+    };
+  }
+
+  toLLMHistory() {
+    return {
+      content: this.#contentForLLMHistory,
+      role: this.isFromUser ? 'user' : 'assistant',
     };
   }
 }

@@ -498,7 +498,7 @@ function _mapToHttpError(error) {
   }
 
   if (error instanceof LLMDomainErrors.ChatNotFoundError) {
-    return new HttpErrors.BadRequestError(error.message, error.code);
+    return new HttpErrors.NotFoundError(error.message, error.code);
   }
 
   if (error instanceof LLMDomainErrors.NoUserIdProvidedError) {

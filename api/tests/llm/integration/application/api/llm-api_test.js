@@ -590,12 +590,12 @@ describe('LLM | Integration | Application | API | llm', function () {
                         { content: 'coucou LLM1', role: 'assistant' },
                         {
                           content:
-                            "\n<system_notification>\n  L'utilisateur a téléversé une pièce jointe :\n  <attachment_name>\n    expected_file.txt\n  </attachment_name>\n</system_notification>",
+                            "<system_notification>L'utilisateur a téléversé une pièce jointe : <attachment_name>expected_file.txt</attachment_name></system_notification>",
                           role: 'user',
                         },
                         {
                           content:
-                            '\n<read_attachment_tool>\n  Lecture de la pièce jointe, expected_file.txt :\n  <attachment_content>\n    add me in the chat !\n  </attachment_content>\n</read_attachment_tool>',
+                            '<read_attachment_tool>Lecture de la pièce jointe, expected_file.txt : <attachment_content>add me in the chat !</attachment_content></read_attachment_tool>',
                           role: 'assistant',
                         },
                       ],
@@ -645,14 +645,13 @@ describe('LLM | Integration | Application | API | llm', function () {
                       { content: 'coucou user1', isFromUser: true, notCounted: false },
                       { content: 'coucou LLM1', isFromUser: false, notCounted: false },
                       {
-                        content:
-                          "\n<system_notification>\n  L'utilisateur a téléversé une pièce jointe :\n  <attachment_name>\n    expected_file.txt\n  </attachment_name>\n</system_notification>",
+                        attachmentName: 'expected_file.txt',
                         isFromUser: true,
                         notCounted: true,
                       },
                       {
-                        content:
-                          '\n<read_attachment_tool>\n  Lecture de la pièce jointe, expected_file.txt :\n  <attachment_content>\n    add me in the chat !\n  </attachment_content>\n</read_attachment_tool>',
+                        attachmentName: 'expected_file.txt',
+                        attachmentContext: 'add me in the chat !',
                         isFromUser: false,
                         notCounted: false,
                       },
@@ -962,14 +961,13 @@ describe('LLM | Integration | Application | API | llm', function () {
                       { content: 'coucou user1', isFromUser: true, notCounted: false },
                       { content: 'coucou LLM1', isFromUser: false, notCounted: false },
                       {
-                        content:
-                          "\n<system_notification>\n  L'utilisateur a téléversé une pièce jointe :\n  <attachment_name>\n    expected_file.txt\n  </attachment_name>\n</system_notification>",
+                        attachmentName: 'expected_file.txt',
                         isFromUser: true,
                         notCounted: false,
                       },
                       {
-                        content:
-                          '\n<read_attachment_tool>\n  Lecture de la pièce jointe, expected_file.txt :\n  <attachment_content>\n    add me in the chat !\n  </attachment_content>\n</read_attachment_tool>',
+                        attachmentName: 'expected_file.txt',
+                        attachmentContext: 'add me in the chat !',
                         isFromUser: false,
                         notCounted: false,
                       },
