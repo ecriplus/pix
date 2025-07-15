@@ -1379,12 +1379,12 @@
       "quit-results": {
         "send-result-modal": {
           "actions": {
-            "cancel-to-share": "Rester pour envoyer",
-            "quit-without-sharing": "Quitter sans envoyer"
+            "cancel-to-share": "Stay to send",
+            "quit-without-sharing": "Quit without sending"
           },
-          "content-information": "Envoyer vos résultats à l’organisateur du parcours est essentiel pour votre accompagnement. Restez sur cette page et cliquez sur ‘Envoyer mes résultats’ pour les transmettre.",
-          "content-instruction": "Voulez-vous vraiment quitter sans les envoyer ?",
-          "title": "Oups, vous n’avez pas encore envoyé vos résultats !"
+          "content-information": "Sending your results to the course organiser is essential for your support. Stay on this page and click on “Send my results” to send them.",
+          "content-instruction": "Do you really want to leave without sending them?",
+          "title": "Oops, you haven't sent your results yet!"
         }
       }
     },
