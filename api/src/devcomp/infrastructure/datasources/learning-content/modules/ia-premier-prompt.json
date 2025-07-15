@@ -185,7 +185,7 @@
           "element": {
             "id": "d7c97543-452a-4777-9f6e-7d33e3d0d077",
             "type": "qcu",
-            "instruction": "<p>D’après ce que vous venez de voir, laquelle de ses affirmations est vraie ?</p>",
+            "instruction": "<p>D’après ce que vous venez de voir, laquelle de ces affirmations est vraie ?</p>",
             "proposals": [
               {
                 "id": "1",
