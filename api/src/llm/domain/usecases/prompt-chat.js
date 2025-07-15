@@ -24,7 +24,7 @@ export async function promptChat({
   }
 
   const chat = await chatRepository.get(chatId);
-  if (userId != undefined && userId !== chat.userId) {
+  if (chat.userId != undefined && userId !== chat.userId) {
     throw new ChatForbiddenError();
   }
 

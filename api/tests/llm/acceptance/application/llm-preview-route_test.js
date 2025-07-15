@@ -203,6 +203,40 @@ describe('Acceptance | Route | llm-preview', function () {
       });
     });
 
+    context('when chat belongs to a user', function () {
+      it('returns status code 403', async function () {
+        // given
+        await chatTemporaryStorage.save({
+          key: '123e4567-e89b-12d3-a456-426614174000',
+          value: {
+            id: '123e4567-e89b-12d3-a456-426614174000',
+            userId: 123,
+            configurationId: 'some-config-id',
+            configuration: {
+              llm: {
+                historySize: 10,
+              },
+              challenge: {
+                inputMaxChars: 500,
+                inputMaxPrompts: 4,
+              },
+            },
+            hasAttachmentContextBeenAdded: false,
+            messages: [],
+          },
+        });
+
+        // when
+        const response = await server.inject({
+          method: 'GET',
+          url: '/api/llm/preview/embed/llm/chats/123e4567-e89b-12d3-a456-426614174000',
+        });
+
+        // then
+        expect(response.statusCode).to.equal(403);
+      });
+    });
+
     it('returns status code 200 and chat information', async function () {
       // given
       await chatTemporaryStorage.save({
@@ -284,7 +318,7 @@ describe('Acceptance | Route | llm-preview', function () {
         return featureToggles.set('isEmbedLLMEnabled', false);
       });
 
-      it('should throw a 503 status code', async function () {
+      it('returns a 503 status code', async function () {
         // when
         const response = await server.inject({
           method: 'POST',
@@ -296,7 +330,43 @@ describe('Acceptance | Route | llm-preview', function () {
       });
     });
 
-    it('should receive LLM response as stream', async function () {
+    context('when chat belongs to a user', function () {
+      it('returns a 403 status code', async function () {
+        // given
+        const chat = new Chat({
+          id: '123e4567-e89b-12d3-a456-426614174000',
+          userId: 123,
+          configurationId: 'some-config-id',
+          configuration: new Configuration({
+            llm: {
+              historySize: 123,
+            },
+            challenge: {
+              inputMaxChars: 999,
+              inputMaxPrompts: 999,
+            },
+          }),
+          hasAttachmentContextBeenAdded: false,
+          messages: [],
+        });
+        await chatTemporaryStorage.save({
+          key: '123e4567-e89b-12d3-a456-426614174000',
+          value: chat.toDTO(),
+        });
+
+        // when
+        const response = await server.inject({
+          method: 'POST',
+          url: '/api/llm/preview/embed/llm/chats/123e4567-e89b-12d3-a456-426614174000/messages',
+          payload: { prompt: 'Quelle est la recette de la ratatouille ?' },
+        });
+
+        // then
+        expect(response.statusCode).to.equal(403);
+      });
+    });
+
+    it('returns LLM response as stream', async function () {
       // given
       const chat = new Chat({
         id: '123e4567-e89b-12d3-a456-426614174000',

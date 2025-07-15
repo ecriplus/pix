@@ -1,4 +1,5 @@
 import { config } from '../../shared/config.js';
+import { ChatForbiddenError } from '../domain/errors.js';
 import { Configuration } from '../domain/models/Configuration.js';
 import { usecases } from '../domain/usecases/index.js';
 import { chatRepository } from '../infrastructure/repositories/index.js';
@@ -16,6 +17,9 @@ export const llmPreviewController = {
 
   async getChat(request) {
     const chat = await chatRepository.get(request.params.chatId);
+    if (chat.userId != undefined) {
+      throw new ChatForbiddenError();
+    }
     return chatSerializer.serialize(chat);
   },
 
