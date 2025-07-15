@@ -182,7 +182,7 @@ describe('Acceptance | Route | llm-preview', function () {
         // when
         const response = await server.inject({
           method: 'GET',
-          url: '/api/llm/preview/chats/123e4567-e89b-12d3-a456-426614174000',
+          url: '/api/llm/preview/embed/llm/chats/123e4567-e89b-12d3-a456-426614174000',
         });
 
         // then
@@ -195,7 +195,7 @@ describe('Acceptance | Route | llm-preview', function () {
         // when
         const response = await server.inject({
           method: 'GET',
-          url: '/api/llm/preview/chats/00000000-0000-0000-0000-000000000000',
+          url: '/api/llm/preview/embed/llm/chats/00000000-0000-0000-0000-000000000000',
         });
 
         // then
@@ -250,7 +250,7 @@ describe('Acceptance | Route | llm-preview', function () {
       // when
       const response = await server.inject({
         method: 'GET',
-        url: '/api/llm/preview/chats/123e4567-e89b-12d3-a456-426614174000',
+        url: '/api/llm/preview/embed/llm/chats/123e4567-e89b-12d3-a456-426614174000',
       });
 
       // then
@@ -288,7 +288,7 @@ describe('Acceptance | Route | llm-preview', function () {
         // when
         const response = await server.inject({
           method: 'POST',
-          url: '/api/llm/preview/chats/123e4567-e89b-12d3-a456-426614174000/messages',
+          url: '/api/llm/preview/embed/llm/chats/123e4567-e89b-12d3-a456-426614174000/messages',
           payload: { prompt: 'Quelle est la recette de la ratatouille ?' },
         });
 
@@ -354,7 +354,7 @@ describe('Acceptance | Route | llm-preview', function () {
       // when
       const response = await server.inject({
         method: 'POST',
-        url: '/api/llm/preview/chats/123e4567-e89b-12d3-a456-426614174000/messages',
+        url: '/api/llm/preview/embed/llm/chats/123e4567-e89b-12d3-a456-426614174000/messages',
         payload: { prompt: 'Quelle est la recette de la ratatouille ?', attachmentName: 'expected_file.pdf' },
       });
 

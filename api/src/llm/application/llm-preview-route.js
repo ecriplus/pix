@@ -50,7 +50,7 @@ export async function register(server) {
     },
     {
       method: 'GET',
-      path: '/api/llm/preview/chats/{chatId}',
+      path: '/api/llm/preview/embed/llm/chats/{chatId}',
       config: {
         auth: false,
         pre: [{ method: checkLLMChatIsEnabled }],
@@ -66,7 +66,7 @@ export async function register(server) {
     },
     {
       method: 'POST',
-      path: '/api/llm/preview/chats/{chatId}/messages',
+      path: '/api/llm/preview/embed/llm/chats/{chatId}/messages',
       config: {
         auth: false,
         pre: [{ method: checkLLMChatIsEnabled }],
