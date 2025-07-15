@@ -69,6 +69,9 @@ const serialize = function (assessments) {
       ref: 'id',
       relationshipLinks: {
         related(record, current) {
+          if (!current) {
+            return null;
+          }
           return `/api/progressions/${current.id}`;
         },
       },

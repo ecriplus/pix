@@ -1,5 +1,5 @@
 import { DomainError } from '../../../../../../src/shared/domain/errors.js';
-import { Assessment } from '../../../../../../src/shared/domain/models/index.js';
+import { Assessment, CampaignTypes } from '../../../../../../src/shared/domain/models/index.js';
 import { CampaignAssessment } from '../../../../../../src/shared/domain/read-models/CampaignAssessment.js';
 import { CertificationAssessment } from '../../../../../../src/shared/domain/read-models/CertificationAssessment.js';
 import { CompetenceEvaluationAssessment } from '../../../../../../src/shared/domain/read-models/CompetenceEvaluationAssessment.js';
@@ -163,6 +163,26 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
 
       // then
       expect(json.data.relationships['progression']).to.deep.equal(expectedProgressionJson);
+      expect(json.data.attributes['code-campaign']).to.equal('CAMPAGNE1');
+      expect(json.data.attributes['title']).to.equal('Parcours');
+    });
+
+    it('should convert an exam CampaignAssessment into JSON API data', function () {
+      //given
+      const assessment = domainBuilder.buildAssessment.ofTypeCampaign({
+        title: 'Parcours',
+        campaign: domainBuilder.buildCampaign({ title: 'Parcours', code: 'CAMPAGNE1', type: CampaignTypes.EXAM }),
+      });
+      const campaignAssessment = new CampaignAssessment(assessment);
+
+      const expectedProgressionJson = { data: null };
+
+      // when
+      const json = serializer.serialize(campaignAssessment);
+
+      // then
+      expect(json.data.relationships['progression']).to.deep.equal(expectedProgressionJson);
+      expect(json.data.attributes['has-checkpoints']).to.be.false;
       expect(json.data.attributes['code-campaign']).to.equal('CAMPAGNE1');
       expect(json.data.attributes['title']).to.equal('Parcours');
     });
