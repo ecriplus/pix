@@ -46,6 +46,6 @@ export default class CampaignLandingPageController extends Controller {
 
   @action
   startCampaignParticipation() {
-    this.router.transitionTo('organizations.access', this.model.code);
+    return this.router.transitionTo('organizations.access', this.model.code);
   }
 }
