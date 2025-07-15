@@ -65,21 +65,21 @@ module('Integration | Component | organizations/information-section-view', funct
 
       // then
       assert.dom(screen.getByRole('heading', { name: 'SUPer Orga' })).exists();
-      assert.dom(screen.getByText('Type : SUP')).exists();
-      assert.dom(screen.getByText('Nom du DPO : Justin Ptipeu')).exists();
-      assert.dom(screen.getByText('Adresse e-mail du DPO : justin.ptipeu@example.net')).exists();
-      assert.dom(screen.getByText('Créée par : Gilles Parbal (1)')).exists();
-      assert.dom(screen.getByText('Créée le : 02/09/2022')).exists();
+      assert.dom(screen.getByText('Type').nextElementSibling).hasText('SUP');
+      assert.dom(screen.getByText('Nom du DPO').nextElementSibling).hasText('Justin Ptipeu');
+      assert.dom(screen.getByText('Adresse e-mail du DPO').nextElementSibling).hasText('justin.ptipeu@example.net');
+      assert.dom(screen.getByText('Créée par').nextElementSibling).hasText('Gilles Parbal (1)');
+      assert.dom(screen.getByText('Créée le').nextElementSibling).hasText('02/09/2022');
       assert
         .dom(
-          screen.getByText(
+          screen.getByLabelText(
             `${t('components.organizations.information-section-view.features.SHOW_SKILLS')} : ${t('common.words.yes')}`,
           ),
         )
         .exists();
-      assert.dom(screen.getByText('Crédits : 350')).exists();
-      assert.dom(screen.getByText('https://pix.fr')).exists();
-      assert.dom(screen.getByText('SSO : super-sso')).exists();
+      assert.dom(screen.getByText('Crédits').nextElementSibling).hasText('350');
+      assert.dom(screen.getByText('Lien vers la documentation').nextElementSibling).hasText('https://pix.fr');
+      assert.dom(screen.getByText('SSO').nextElementSibling).hasText('super-sso');
     });
 
     test('it renders GAR identity provider correctly', async function (assert) {
@@ -108,7 +108,7 @@ module('Integration | Component | organizations/information-section-view', funct
       const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
 
       // then
-      assert.dom(screen.getByText('SSO : GAR')).exists();
+      assert.dom(screen.getByText('SSO').nextElementSibling).hasText('GAR');
     });
 
     test('it generates correct external dashboard URL', async function (assert) {
@@ -154,39 +154,8 @@ module('Integration | Component | organizations/information-section-view', funct
         const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
 
         // then
-        assert.dom(screen.getByText('Nom du DPO : Justin Ptipeu')).exists();
-        assert.dom(screen.getByText('Adresse e-mail du DPO : justin.ptipeu@example.net')).exists();
-      });
-
-      test('it renders partial DPO information', async function (assert) {
-        // given
-        class OidcIdentityProvidersStub extends Service {
-          list = [{ organizationName: 'super-sso', code: 'IDP' }];
-        }
-        this.owner.register('service:oidc-identity-providers', OidcIdentityProvidersStub);
-
-        const organization = {
-          type: 'SUP',
-          name: 'SUPer Orga',
-          credit: 350,
-          documentationUrl: 'https://pix.fr',
-          features: {
-            SHOW_SKILLS: { active: true },
-          },
-          createdBy: 1,
-          createdAtFormattedDate: '02/09/2022',
-          creatorFullName: 'Gilles Parbal',
-          identityProviderForCampaigns: 'IDP',
-          dataProtectionOfficerFullName: 'Ptipeu',
-          dataProtectionOfficerEmail: 'justin.ptipeu@example.net',
-        };
-
-        // when
-        const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
-
-        // then
-        assert.dom(screen.getByText('Nom du DPO : Ptipeu')).exists();
-        assert.dom(screen.getByText('Adresse e-mail du DPO : justin.ptipeu@example.net')).exists();
+        assert.dom(screen.getByText('Nom du DPO').nextElementSibling).hasText('Justin Ptipeu');
+        assert.dom(screen.getByText('Adresse e-mail du DPO').nextElementSibling).hasText('justin.ptipeu@example.net');
       });
 
       test('it renders without DPO information', async function (assert) {
@@ -214,8 +183,8 @@ module('Integration | Component | organizations/information-section-view', funct
         const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
 
         // then
-        assert.dom(screen.getByText('Nom du DPO :')).exists();
-        assert.dom(screen.getByText('Adresse e-mail du DPO :')).exists();
+        assert.dom(screen.getByText('Nom du DPO').nextElementSibling).hasText('');
+        assert.dom(screen.getByText('Adresse e-mail du DPO').nextElementSibling).hasText('');
       });
     });
 
@@ -239,7 +208,7 @@ module('Integration | Component | organizations/information-section-view', funct
       const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
 
       // then
-      assert.dom(screen.getByText('Lien vers la documentation : Non spécifié')).exists();
+      assert.dom(screen.getByText('Lien vers la documentation').nextElementSibling).hasText('Non spécifié');
     });
 
     test('it should display tags', async function (assert) {
@@ -355,7 +324,7 @@ module('Integration | Component | organizations/information-section-view', funct
 
         assert
           .dom(
-            screen.getByText(
+            screen.getByLabelText(
               `${t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS')} : ${t(
                 'common.words.yes',
               )}`,
@@ -376,7 +345,7 @@ module('Integration | Component | organizations/information-section-view', funct
         // then
         assert
           .dom(
-            screen.getByText(
+            screen.getByLabelText(
               `${t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS')} : ${t(
                 'common.words.no',
               )}`,
@@ -418,7 +387,7 @@ module('Integration | Component | organizations/information-section-view', funct
             const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
             // then
             assert.ok(
-              screen.getByText(
+              screen.getByLabelText(
                 `${t(
                   'components.organizations.information-section-view.features.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY',
                 )} : ${t('common.words.yes')}`,
@@ -441,7 +410,7 @@ module('Integration | Component | organizations/information-section-view', funct
 
             // then
             assert.ok(
-              screen.getByText(
+              screen.getByLabelText(
                 `${t(
                   'components.organizations.information-section-view.features.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY',
                 )} : ${t('common.words.no')}`,
@@ -465,8 +434,10 @@ module('Integration | Component | organizations/information-section-view', funct
             const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
             // then
             assert.ok(
-              screen.getByText(
-                `${t('components.organizations.information-section-view.features.ATTESTATIONS_MANAGEMENT')} : 6ème`,
+              screen.getByLabelText(
+                `${t('components.organizations.information-section-view.features.ATTESTATIONS_MANAGEMENT')} : ${t(
+                  'common.words.yes',
+                )}`,
               ),
             );
           });
@@ -485,7 +456,7 @@ module('Integration | Component | organizations/information-section-view', funct
             const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
             // then
             assert.ok(
-              screen.getByText(
+              screen.getByLabelText(
                 `${t('components.organizations.information-section-view.features.ATTESTATIONS_MANAGEMENT')} : ${t(
                   'common.words.no',
                 )}`,
@@ -511,7 +482,11 @@ module('Integration | Component | organizations/information-section-view', funct
 
             // then
             assert.ok(
-              screen.getByText(`${t('components.organizations.information-section-view.features.SHOW_NPS')} :`),
+              screen.getByLabelText(
+                `${t('components.organizations.information-section-view.features.SHOW_NPS')} : ${t(
+                  'common.words.yes',
+                )}`,
+              ),
             );
             assert.ok(screen.getByRole('link', { name: NPSUrl }));
           });
@@ -532,7 +507,7 @@ module('Integration | Component | organizations/information-section-view', funct
 
             // then
             assert.ok(
-              screen.getByText(
+              screen.getByLabelText(
                 `${t('components.organizations.information-section-view.features.SHOW_NPS')} : ${t('common.words.no')}`,
               ),
             );

@@ -45,8 +45,8 @@ module('Acceptance | Organizations | Information management', function (hooks) {
 
       // then
       assert.dom(screen.getByRole('heading', { name: 'newOrganizationName', level: 2 })).exists();
-      assert.dom(screen.getByText('Nom du DPO : Bru No')).exists();
-      assert.dom(screen.getByText('Adresse e-mail du DPO : bru.no@example.net')).exists();
+      assert.dom(screen.getByText('Nom du DPO').nextElementSibling).hasText('Bru No');
+      assert.dom(screen.getByText('Adresse e-mail du DPO').nextElementSibling).hasText('bru.no@example.net');
     });
   });
 

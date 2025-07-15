@@ -255,7 +255,7 @@ const Feature = <template>
   {{#if @value}}
     <PixIcon
       @name="checkCircle"
-      aria-label={{t "common.words.yes"}}
+      aria-label={{concat @label " : " (t "common.words.yes")}}
       class="organization-information-section__details__features--enabled"
     />
     {{@label}}
@@ -266,7 +266,7 @@ const Feature = <template>
   {{else}}
     <PixIcon
       @name="cancel"
-      aria-label={{t "common.words.no"}}
+      aria-label={{concat @label " : " (t "common.words.no")}}
       class="organization-information-section__details__features--disabled"
     />
     <span class="organization-information-section__details__features--disabled">

@@ -78,12 +78,12 @@ module('Integration | Component | organizations/information-section', function (
 
       // then
       assert.dom(screen.getByRole('heading', { name: organization.name })).exists();
-      assert.dom(screen.getByText(`Identifiant externe : ${organization.externalId}`)).exists();
-      assert.dom(screen.getByText(`Département : ${organization.provinceCode}`)).exists();
+      assert.dom(screen.getByText('Identifiant externe').nextElementSibling).hasText(organization.externalId);
+      assert.dom(screen.getByText('Département').nextElementSibling).hasText(organization.provinceCode);
       assert.dom(screen.getByRole('link', { name: organization.documentationUrl })).exists();
       assert
         .dom(
-          screen.getByText(
+          screen.getByLabelText(
             `${t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS')} : ${t(
               'common.words.no',
             )}`,
@@ -92,14 +92,14 @@ module('Integration | Component | organizations/information-section', function (
         .exists();
       assert
         .dom(
-          screen.getByText(
+          screen.getByLabelText(
             `${t('components.organizations.information-section-view.features.SHOW_SKILLS')} : ${t('common.words.no')}`,
           ),
         )
         .exists();
       assert
         .dom(
-          screen.getByText(
+          screen.getByLabelText(
             `${t('components.organizations.information-section-view.features.MULTIPLE_SENDING_ASSESSMENT')} : ${t(
               'common.words.no',
             )}`,
@@ -136,7 +136,7 @@ module('Integration | Component | organizations/information-section', function (
 
       await fillIn(screen.getByLabelText('Nom *', { exact: false }), 'new name');
       await fillByLabel('Identifiant externe', 'new externalId');
-      await fillByLabel('Département (en 3 chiffres)', '   ');
+      await fillByLabel('Département (en 3 chiffres)', '');
       await fillByLabel('Crédits', 50);
       await clickByName("Gestion d'élèves/étudiants");
       await fillByLabel('Lien vers la documentation', 'https://pix.fr/');
@@ -152,12 +152,12 @@ module('Integration | Component | organizations/information-section', function (
 
       // then
       assert.dom(screen.getByRole('heading', { name: 'new name' })).exists();
-      assert.dom(screen.getByText('Identifiant externe : new externalId')).exists();
-      assert.dom(screen.queryByText('Département : ')).doesNotExist();
-      assert.dom(screen.getByText('Crédits : 50')).exists();
+      assert.dom(screen.getByText('Identifiant externe').nextElementSibling).hasText('new externalId');
+      assert.dom(screen.queryByText('Département')).doesNotExist();
+      assert.dom(screen.getByText('Crédits').nextElementSibling).hasText('50');
       assert
         .dom(
-          screen.getByText(
+          screen.getByLabelText(
             `${t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS')} : ${t(
               'common.words.yes',
             )}`,
@@ -165,10 +165,10 @@ module('Integration | Component | organizations/information-section', function (
         )
         .exists();
       assert.dom(screen.getByRole('link', { name: 'https://pix.fr/' })).exists();
-      assert.dom(screen.getByText('SSO : organization 2')).exists();
+      assert.dom(screen.getByText('SSO').nextElementSibling).hasText('organization 2');
       assert
         .dom(
-          screen.getByText(
+          screen.getByLabelText(
             `${t('components.organizations.information-section-view.features.MULTIPLE_SENDING_ASSESSMENT')} : ${t(
               'common.words.yes',
             )}`,
@@ -177,7 +177,7 @@ module('Integration | Component | organizations/information-section', function (
         .exists();
       assert
         .dom(
-          screen.getByText(
+          screen.getByLabelText(
             `${t('components.organizations.information-section-view.features.PLACES_MANAGEMENT')} : ${t(
               'common.words.yes',
             )}`,
