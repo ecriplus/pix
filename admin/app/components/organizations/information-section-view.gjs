@@ -92,44 +92,7 @@ export default class OrganizationInformationSection extends Component {
 
       <div class="organization-information-section__content">
         <div class="organization-information-section__details">
-          <ul class="organization-information-section__details__list">
-            <li>Type : {{@organization.type}}</li>
-            <li>Créée par : {{@organization.creatorFullName}} ({{@organization.createdBy}})</li>
-            <li>Créée le : {{@organization.createdAtFormattedDate}}</li>
-            {{#if @organization.externalId}}
-              <li>Identifiant externe : {{@organization.externalId}}</li>
-            {{/if}}
-            {{#if @organization.provinceCode}}
-              <li>Département : {{@organization.provinceCode}}</li>
-            {{/if}}
-
-            <br />
-
-            <li>Nom du DPO : {{@organization.dataProtectionOfficerFullName}}</li>
-            <li>Adresse e-mail du DPO : {{@organization.dataProtectionOfficerEmail}}</li>
-            <br />
-            <li>Crédits : {{@organization.credit}}</li>
-            <li>Lien vers la documentation :
-              {{#if @organization.documentationUrl}}
-                <a
-                  href="{{@organization.documentationUrl}}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >{{@organization.documentationUrl}}</a>
-              {{else}}
-                Non spécifié
-              {{/if}}
-            </li>
-            <li>SSO : {{this.identityProviderName}}</li>
-
-            <br />
-
-            <li>Adresse e-mail d'activation SCO : {{@organization.email}}</li>
-            {{#if @organization.code}}
-              <br />
-              <li>Code : {{@organization.code}}</li>
-            {{/if}}
-          </ul>
+          <OrganizationDescription @organization={{@organization}} />
           <FeaturesSection @features={{@organization.features}} />
           {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
             <div class="form-actions">
@@ -158,6 +121,47 @@ export default class OrganizationInformationSection extends Component {
     </div>
   </template>
 }
+
+const OrganizationDescription = <template>
+  <ul class="organization-information-section__details__list">
+    <li>Type : {{@organization.type}}</li>
+    <li>Créée par : {{@organization.creatorFullName}} ({{@organization.createdBy}})</li>
+    <li>Créée le : {{@organization.createdAtFormattedDate}}</li>
+    {{#if @organization.externalId}}
+      <li>Identifiant externe : {{@organization.externalId}}</li>
+    {{/if}}
+    {{#if @organization.provinceCode}}
+      <li>Département : {{@organization.provinceCode}}</li>
+    {{/if}}
+
+    <br />
+
+    <li>Nom du DPO : {{@organization.dataProtectionOfficerFullName}}</li>
+    <li>Adresse e-mail du DPO : {{@organization.dataProtectionOfficerEmail}}</li>
+    <br />
+    <li>Crédits : {{@organization.credit}}</li>
+    <li>Lien vers la documentation :
+      {{#if @organization.documentationUrl}}
+        <a
+          href="{{@organization.documentationUrl}}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >{{@organization.documentationUrl}}</a>
+      {{else}}
+        Non spécifié
+      {{/if}}
+    </li>
+    <li>SSO : {{this.identityProviderName}}</li>
+
+    <br />
+
+    <li>Adresse e-mail d'activation SCO : {{@organization.email}}</li>
+    {{#if @organization.code}}
+      <br />
+      <li>Code : {{@organization.code}}</li>
+    {{/if}}
+  </ul>
+</template>;
 
 function keys(obj) {
   return Object.keys(obj);
