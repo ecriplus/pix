@@ -128,7 +128,12 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       });
       const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
         .post('/chat', {
-          configurationId: 'uneConfigQuiExist',
+          configuration: {
+            llm: {},
+            challenge: {
+              inputMaxPrompts: 2,
+            },
+          },
           history: [
             { content: 'coucou LLM1', role: 'assistant' },
             { content: 'coucou LLM2', role: 'assistant' },
@@ -223,7 +228,15 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           });
           const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
             .post('/chat', {
-              configurationId: 'uneConfigQuiExist',
+              configuration: {
+                llm: {
+                  historySize: 123,
+                },
+                challenge: {
+                  inputMaxPrompts: 100,
+                  inputMaxChars: 255,
+                },
+              },
               history: [
                 { content: 'coucou user1', role: 'user' },
                 { content: 'coucou LLM1', role: 'assistant' },
@@ -325,7 +338,16 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             });
             const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
               .post('/chat', {
-                configurationId: 'uneConfigQuiExist',
+                configuration: {
+                  name: 'Ma config',
+                  llm: {
+                    historySize: 123,
+                  },
+                  challenge: {
+                    inputMaxPrompts: 100,
+                    inputMaxChars: 255,
+                  },
+                },
                 history: [
                   { content: 'coucou user1', role: 'user' },
                   { content: 'coucou LLM1', role: 'assistant' },
@@ -501,7 +523,19 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               });
               const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
                 .post('/chat', {
-                  configurationId: 'uneConfigQuiExist',
+                  configuration: {
+                    llm: {
+                      historySize: 123,
+                    },
+                    challenge: {
+                      inputMaxPrompts: 100,
+                      inputMaxChars: 255,
+                    },
+                    attachment: {
+                      name: 'expected_file.txt',
+                      context: 'add me in the chat !',
+                    },
+                  },
                   history: [
                     { content: 'coucou user1', role: 'user' },
                     { content: 'coucou LLM1', role: 'assistant' },
@@ -621,7 +655,19 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 });
                 const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
                   .post('/chat', {
-                    configurationId: 'uneConfigQuiExist',
+                    configuration: {
+                      llm: {
+                        historySize: 123,
+                      },
+                      challenge: {
+                        inputMaxPrompts: 100,
+                        inputMaxChars: 255,
+                      },
+                      attachment: {
+                        name: 'expected_file.txt',
+                        context: 'add me in the chat !',
+                      },
+                    },
                     history: [
                       { content: 'coucou user1', role: 'user' },
                       { content: 'coucou LLM1', role: 'assistant' },
@@ -753,7 +799,19 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 });
                 const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
                   .post('/chat', {
-                    configurationId: 'uneConfigQuiExist',
+                    configuration: {
+                      llm: {
+                        historySize: 123,
+                      },
+                      challenge: {
+                        inputMaxPrompts: 100,
+                        inputMaxChars: 255,
+                      },
+                      attachment: {
+                        name: 'expected_file.txt',
+                        context: 'add me in the chat !',
+                      },
+                    },
                     history: [
                       { content: 'coucou user1', role: 'user' },
                       { content: 'coucou LLM1', role: 'assistant' },

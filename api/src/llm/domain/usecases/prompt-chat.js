@@ -47,7 +47,6 @@ export async function promptChat({
 
     readableStream = await promptRepository.prompt({
       message,
-      configuration,
       chat,
     });
   }

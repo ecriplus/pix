@@ -918,7 +918,19 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
           });
           const promptLlmScope = nock('https://llm-test.pix.fr/api')
             .post('/chat', {
-              configurationId: 'uneConfigQuiExist',
+              configuration: {
+                llm: {
+                  historySize: 123,
+                },
+                challenge: {
+                  inputMaxChars: 999,
+                  inputMaxPrompts: 999,
+                },
+                attachment: {
+                  name: 'expected_file.pdf',
+                  context: 'some context',
+                },
+              },
               history: [
                 {
                   content:
