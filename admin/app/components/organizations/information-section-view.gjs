@@ -12,7 +12,6 @@ import ENV from 'pix-admin/config/environment';
 import Organization from 'pix-admin/models/organization';
 
 export default class OrganizationInformationSection extends Component {
-  @service oidcIdentityProviders;
   @service accessControl;
   @service intl;
 
@@ -21,16 +20,6 @@ export default class OrganizationInformationSection extends Component {
       !this.args.organization.isLearnerImportEnabled &&
       (this.args.organization.isOrganizationSCO || this.args.organization.isOrganizationSUP)
     );
-  }
-
-  get identityProviderName() {
-    const GARIdentityProvider = { code: 'GAR', organizationName: 'GAR' };
-    const allIdentityProviderList = [...this.oidcIdentityProviders.list, GARIdentityProvider];
-    const identityProvider = allIdentityProviderList.find(
-      (identityProvider) => identityProvider.code === this.args.organization.identityProviderForCampaigns,
-    );
-    const identityProviderName = identityProvider?.organizationName;
-    return identityProviderName ?? 'Aucun';
   }
 
   get externalURL() {
@@ -122,78 +111,96 @@ export default class OrganizationInformationSection extends Component {
   </template>
 }
 
-const OrganizationDescription = <template>
-  <dl>
-    <div>
-      <dt>Type</dt>
-      <dd>{{@organization.type}}</dd>
-    </div>
-    <div>
-      <dt>Créée par</dt>
-      <dd>{{@organization.creatorFullName}} ({{@organization.createdBy}})</dd>
-    </div>
-    <div>
-      <dt>Créée le</dt>
-      <dd>{{@organization.createdAtFormattedDate}}</dd>
-    </div>
-    {{#if @organization.externalId}}
+class OrganizationDescription extends Component {
+  @service oidcIdentityProviders;
+
+  get identityProviderName() {
+    const GARIdentityProvider = { code: 'GAR', organizationName: 'GAR' };
+    const allIdentityProviderList = [...this.oidcIdentityProviders.list, GARIdentityProvider];
+    const identityProvider = allIdentityProviderList.find(
+      (identityProvider) => identityProvider.code === this.args.organization.identityProviderForCampaigns,
+    );
+    const identityProviderName = identityProvider?.organizationName;
+    return identityProviderName || 'Aucun';
+  }
+
+  <template>
+    <dl>
       <div>
-        <dt>Identifiant externe</dt>
-        <dd>{{@organization.externalId}}</dd>
+        <dt>Type</dt>
+        <dd>{{@organization.type}}</dd>
       </div>
-    {{/if}}
-    {{#if @organization.provinceCode}}
       <div>
-        <dt>Département</dt>
-        <dd>{{@organization.provinceCode}}</dd>
+        <dt>Créée par</dt>
+        <dd>{{@organization.creatorFullName}} ({{@organization.createdBy}})</dd>
       </div>
-    {{/if}}
-
-    <div>
-      <dt>Nom du DPO</dt>
-      <dd>{{@organization.dataProtectionOfficerFullName}}</dd>
-    </div>
-    <div>
-      <dt>Adresse e-mail du DPO</dt>
-      <dd>{{@organization.dataProtectionOfficerEmail}}</dd>
-    </div>
-
-    <div>
-      <dt>Crédits</dt>
-      <dd>{{@organization.credit}}</dd>
-    </div>
-    <div>
-      <dt>Lien vers la documentation</dt>
-      <dd>
-        {{#if @organization.documentationUrl}}
-          <a
-            href="{{@organization.documentationUrl}}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >{{@organization.documentationUrl}}</a>
-        {{else}}
-          Non spécifié
-        {{/if}}
-      </dd>
-    </div>
-    <div>
-      <dt>SSO</dt>
-      <dd>{{this.identityProviderName}}</dd>
-    </div>
-
-    <div>
-      <dt>Adresse e-mail d'activation SCO</dt>
-      <dd>{{@organization.email}}</dd>
-    </div>
-
-    {{#if @organization.code}}
       <div>
-        <dt>Code</dt>
-        <dd>{{@organization.code}}</dd>
+        <dt>Créée le</dt>
+        <dd>{{@organization.createdAtFormattedDate}}</dd>
       </div>
-    {{/if}}
-  </dl>
-</template>;
+      {{#if @organization.externalId}}
+        <div>
+          <dt>Identifiant externe</dt>
+          <dd>{{@organization.externalId}}</dd>
+        </div>
+      {{/if}}
+      {{#if @organization.provinceCode}}
+        <div>
+          <dt>Département</dt>
+          <dd>{{@organization.provinceCode}}</dd>
+        </div>
+      {{/if}}
+
+      <div class="divider" />
+      <div>
+        <dt>Nom du DPO</dt>
+        <dd>{{@organization.dataProtectionOfficerFullName}}</dd>
+      </div>
+      <div>
+        <dt>Adresse e-mail du DPO</dt>
+        <dd>{{@organization.dataProtectionOfficerEmail}}</dd>
+      </div>
+      <div class="divider" />
+
+      <div>
+        <dt>Crédits</dt>
+        <dd>{{@organization.credit}}</dd>
+      </div>
+      <div>
+        <dt>Lien vers la documentation</dt>
+        <dd>
+          {{#if @organization.documentationUrl}}
+            <a
+              href="{{@organization.documentationUrl}}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >{{@organization.documentationUrl}}</a>
+          {{else}}
+            Non spécifié
+          {{/if}}
+        </dd>
+      </div>
+      <div>
+        <dt>SSO</dt>
+        <dd>{{this.identityProviderName}}</dd>
+      </div>
+      <div class="divider" />
+
+      <div>
+        <dt>Adresse e-mail d'activation SCO</dt>
+        <dd>{{@organization.email}}</dd>
+      </div>
+
+      {{#if @organization.code}}
+        <div class="divider" />
+        <div>
+          <dt>Code</dt>
+          <dd>{{@organization.code}}</dd>
+        </div>
+      {{/if}}
+    </dl>
+  </template>
+}
 
 function keys(obj) {
   return Object.keys(obj);

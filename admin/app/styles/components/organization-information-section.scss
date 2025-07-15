@@ -1,21 +1,36 @@
+@use 'pix-design-tokens/typography';
+
 .organization-information-section {
   &__content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
   }
 
   &__archived-message {
-    margin-bottom: 16px;
   }
 
   &__details {
-    &__list {
-      margin-bottom: var(--pix-spacing-6x);
-    }
+    dl {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pix-spacing-1x);
 
-    .form-actions {
-      padding-bottom: 2px;
+      .divider {
+        border-top: 1px solid var(--pix-primary-100);
+        margin: var(--pix-spacing-3x) 0;
+      }
+
+      div {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--pix-spacing-3x);
+
+        dt {
+          @extend %pix-title-xxs;
+        }
+
+        dd {
+          grid-column: span 2 / span 2;
+        }
+      }
     }
   }
 }
