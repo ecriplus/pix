@@ -7,6 +7,19 @@ import t from 'ember-intl/helpers/t';
 import MarkdownToHtml from 'mon-pix/components/markdown-to-html';
 
 export default class LandingPageStartBlock extends Component {
+  @service session;
+  @service router;
+
+  get isUserConnected() {
+    return this.session.isAuthenticated;
+  }
+
+  @action
+  async redirectToSignin() {
+    const transition = this.args.startCampaignParticipation();
+    this.session.requireAuthenticationAndApprovedTermsOfService(transition);
+  }
+
   <template>
     <section class="autonomous-course-landing-page-start-block rounded-panel">
       <div class="autonomous-course-landing-page-start-block__logos">
@@ -16,9 +29,11 @@ export default class LandingPageStartBlock extends Component {
         {{t "pages.autonomous-course.landing-page.texts.title"}}<br />
         {{@campaign.title}}
       </h1>
+
       <div class="autonomous-course-landing-page-start-block__description">
         <MarkdownToHtml @markdown={{@campaign.customLandingPageText}} @isInline={{true}} />
       </div>
+
       {{#if this.isUserConnected}}
         <PixButton
           id="autonomous-course-connected-start-button"
@@ -42,33 +57,16 @@ export default class LandingPageStartBlock extends Component {
             id="autonomous-course-sign-in-button"
             class="sign-in-button"
             type="button"
-            {{on "click" this.redirectToSigninIfUserIsAnonymous}}
+            {{on "click" this.redirectToSignin}}
           >
             {{t "pages.autonomous-course.landing-page.actions.sign-in"}}
           </button>
         </div>
       {{/if}}
+
       <p class="autonomous-course-landing-page-start-block__informations">
         {{t "pages.autonomous-course.landing-page.texts.legal-informations" htmlSafe=true}}
       </p>
     </section>
   </template>
-  @service session;
-  @service router;
-
-  get isUserConnected() {
-    return this.session.isAuthenticated;
-  }
-
-  @action
-  async redirectToSigninIfUserIsAnonymous(event) {
-    event.preventDefault();
-
-    if (this.isUserConnected) {
-      this.router.transitionTo('authenticated');
-    } else {
-      const transition = this.args.startCampaignParticipation();
-      this.session.requireAuthenticationAndApprovedTermsOfService(transition);
-    }
-  }
 }
