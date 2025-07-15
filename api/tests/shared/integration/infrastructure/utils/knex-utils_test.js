@@ -270,5 +270,89 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
         expect(pagination.pageCount).to.equal(2);
       });
     });
+
+    context('transaction compliant', function () {
+      it('should use the transaction given in parameters', async function () {
+        // given
+        const total = 10;
+        _.times(total, (index) => databaseBuilder.factory.buildFeature({ key: `c-${index}` }));
+        await databaseBuilder.commit();
+        let hasRollbackProperly = false;
+        try {
+          await knex.transaction(async (trx) => {
+            await trx('features').insert([
+              {
+                key: 'autreFeature1',
+              },
+              {
+                key: 'autreFeature2',
+              },
+              {
+                key: 'autreFeature3',
+              },
+            ]);
+            const query = knex.select('key').from('features');
+            const { results, pagination } = await fetchPage(query, { number: 3, size: 5 }, trx);
+            expect(results, 'results within the transaction, before rollback').to.have.length(3);
+            expect(pagination).to.deep.equal({
+              page: 3,
+              pageSize: 5,
+              rowCount: 10 + 3,
+              pageCount: 3,
+            });
+            hasRollbackProperly = true;
+            throw new Error('rollback');
+          });
+        } catch (err) {
+          if (!hasRollbackProperly) {
+            throw err;
+          }
+        }
+
+        // when
+        const query = knex.select('key').from('features');
+        const { results, pagination } = await fetchPage(query, { number: 3, size: 5 });
+
+        // then
+        expect(results, 'results outside the transaction').to.be.empty;
+        expect(pagination).to.deep.equal({
+          page: 3,
+          pageSize: 5,
+          rowCount: 10,
+          pageCount: 2,
+        });
+      });
+    });
+
+    context('custom count query builder', function () {
+      it('should use the custom query builder to count rows', async function () {
+        // Deliberately dumb request
+        // Asking for features, but returning the count of organizations
+        // given
+        _.times(10, (index) => databaseBuilder.factory.buildFeature({ key: `feature-${index}` }));
+        _.times(20, (index) => databaseBuilder.factory.buildOrganization({ name: `orga-${index}` }));
+        await databaseBuilder.commit();
+
+        // when
+        const query = knex.select('key').from('features').orderBy('key');
+        const countQuery = knex('organizations').count('*', { as: 'rowCount' });
+        const { results, pagination } = await fetchPage(query, { number: 1, size: 5 }, null, countQuery);
+
+        // then
+        expect(results).to.deep.equal([
+          { key: 'feature-0' },
+          { key: 'feature-1' },
+          { key: 'feature-2' },
+          { key: 'feature-3' },
+          { key: 'feature-4' },
+        ]);
+        expect(pagination).to.deep.equal({
+          page: 1,
+          pageSize: 5,
+          rowCount: 20,
+          pageCount: 4,
+        });
+      });
+    });
   });
 });
