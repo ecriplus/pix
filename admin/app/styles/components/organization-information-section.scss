@@ -9,11 +9,10 @@
     dl {
       display: flex;
       flex-direction: column;
-      gap: var(--pix-spacing-1x);
 
       .divider {
-        border-top: 1px solid var(--pix-primary-100);
         margin: var(--pix-spacing-3x) 0;
+        border-top: 1px solid var(--pix-primary-100);
       }
 
       div {
@@ -30,6 +29,34 @@
         dd {
           grid-column: span 2 / span 2;
         }
+      }
+    }
+
+    &__features {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pix-spacing-1x);
+      padding: var(--pix-spacing-2x);
+      border: 1px solid var(--pix-primary-100);
+      border-radius: var(--pix-spacing-2x);
+
+      li {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--pix-spacing-2x);
+        align-items: center;
+      }
+
+      &--enabled {
+        color: var(--pix-success-300);
+      }
+
+      &--disabled {
+        /* stylelint-disable color-no-hex */
+
+        /* missing color tone in design system */
+        color: #abadb2;
+        /* stylelint-enable color-no-hex */
       }
     }
   }

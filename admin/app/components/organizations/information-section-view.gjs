@@ -1,5 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { concat, get } from '@ember/helper';
@@ -218,7 +219,7 @@ function keys(obj) {
 }
 
 const FeaturesSection = <template>
-  <ul class="organization-information-section__details__list">
+  <ul class="organization-information-section__details__features">
     {{#each (keys Organization.featureList) as |feature|}}
       {{#let
         (get @features feature) (concat "components.organizations.information-section-view.features." feature)
@@ -250,20 +251,26 @@ const FeaturesSection = <template>
   </ul>
 </template>;
 
-function displayBooleanState(bool) {
-  return bool ? 'common.words.yes' : 'common.words.no';
-}
-
 const Feature = <template>
-  {{@label}}
-  :
-  {{#if (has-block)}}
-    {{#if @value}}
+  {{#if @value}}
+    <PixIcon
+      @name="checkCircle"
+      aria-label={{t "common.words.yes"}}
+      class="organization-information-section__details__features--enabled"
+    />
+    {{@label}}
+    {{#if (has-block)}}
+      :
       {{yield}}
-    {{else}}
-      {{t "common.words.no"}}
     {{/if}}
   {{else}}
-    {{t (displayBooleanState @value)}}
+    <PixIcon
+      @name="cancel"
+      aria-label={{t "common.words.no"}}
+      class="organization-information-section__details__features--disabled"
+    />
+    <span class="organization-information-section__details__features--disabled">
+      {{@label}}
+    </span>
   {{/if}}
 </template>;
