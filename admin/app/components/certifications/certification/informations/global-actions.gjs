@@ -147,6 +147,7 @@ export default class CertificationInformationGlobalActions extends Component {
       this.pixToast.sendSuccessNotification({
         message: this.intl.t('components.certifications.global-actions.rescoring.success-message'),
       });
+      await this.args.certification.reload();
     } catch {
       this.pixToast.sendErrorNotification({
         message: this.intl.t('components.certifications.global-actions.rescoring.error-message'),

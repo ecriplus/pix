@@ -13,10 +13,10 @@ const register = async function (server) {
         pre: [
           {
             method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([securityPreHandlers.checkAdminMemberHasRoleSuperAdmin])(
-                request,
-                h,
-              ),
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+              ])(request, h),
             assign: 'hasAuthorizationToAccessAdminScope',
           },
         ],
@@ -26,7 +26,7 @@ const register = async function (server) {
         handler: certificationRescoringController.rescoreCertification,
         tags: ['api', 'sessions', 'scoring'],
         notes: [
-          '- **Cette route est restreinte aux utilisateurs authentifiés ayant un rôle Super Admin**\n' +
+          '- **Cette route est restreinte aux utilisateurs authentifiés ayant un rôle Super Admin ou Certif**\n' +
             '- Elle permet de rescorer une certification',
         ],
       },
