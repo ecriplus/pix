@@ -502,7 +502,7 @@
         "table-name": "Liste des organisations filles"
       },
       "information-section-view": {
-        "child-organization": "Organisation fille",
+        "child-organization": "Organisation fille de",
         "features": {
           "ATTESTATIONS_MANAGEMENT": "Attestations",
           "COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY": "Certificabilité automatique",

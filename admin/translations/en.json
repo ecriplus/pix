@@ -502,7 +502,7 @@
         "table-name": "List of children organisations"
       },
       "information-section-view": {
-        "child-organization": "Child organization",
+        "child-organization": "Child organization of",
         "features": {
           "ATTESTATIONS_MANAGEMENT": "Attestations",
           "COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY": "Automatic certificability",

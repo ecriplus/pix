@@ -335,8 +335,8 @@ module('Integration | Component | organizations/information-section-view', funct
         const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
 
         // then
-        assert.dom(screen.getByText('Organisation fille')).exists();
-        assert.dom(screen.getByText('Shibusen')).exists();
+        assert.dom(screen.getByText('Organisation fille de')).exists();
+        assert.dom(screen.getByRole('link', { name: 'Shibusen' })).exists();
       });
     });
 
