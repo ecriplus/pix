@@ -152,7 +152,7 @@ describe('Acceptance | Route | llm-preview', function () {
       expect(response.headers)
         .to.have.property('location')
         .that.matches(
-          /^https:\/\/test\.app\.pix\/llm\/preview\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/,
+          /^https:\/\/test\.app\.pix\.fr\/llm\/preview\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/,
         );
 
       expect(await chatTemporaryStorage.get(response.headers.location.split('/').at(-1))).to.deep.contain({

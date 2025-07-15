@@ -10,7 +10,7 @@ export const llmPreviewController = {
     const chat = await usecases.startChat({ configuration });
     return h
       .response()
-      .header('Location', new URL(`/llm/preview/${chat.id}`, config.domain.pixApp).href)
+      .header('Location', new URL(`/llm/preview/${chat.id}`, `${config.domain.pixApp}${config.domain.tldFr}`).href)
       .code(201);
   },
 
