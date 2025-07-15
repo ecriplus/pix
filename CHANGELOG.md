@@ -1,5 +1,17 @@
 # Pix Changelog
 
+## [5.158.1](https://github.com/1024pix/pix/compare/v5.158.0...v5.158.1) (2025-07-15)
+
+### :building_construction: Tech
+
+- [#12835](https://github.com/1024pix/pix/pull/12835) Corriger le test e2e flaky sur les résultats de campagne 
+
+### :arrow_up: Montée de version
+
+- [#12829](https://github.com/1024pix/pix/pull/12829) Update adobe/s3mock Docker tag to v4.6.0 (.circleci) 
+- [#12830](https://github.com/1024pix/pix/pull/12830) Update adobe/s3mock Docker tag to v4.6.0 (docker) 
+- [#12831](https://github.com/1024pix/pix/pull/12831) Update adobe/s3mock Docker tag to v4.6.0 (dossier racine)
+
 # [5.158.0](https://github.com/1024pix/pix/compare/v5.157.0...v5.158.0) (2025-07-14)
 
 ### :rocket: Amélioration
