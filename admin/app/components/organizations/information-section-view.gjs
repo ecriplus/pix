@@ -60,10 +60,6 @@ export default class OrganizationInformationSection extends Component {
             </li>
           {{/each}}
         </ul>
-      {{else}}
-        <PixNotificationAlert class="organization-information-section__missing-tags-message" @type="information">Cette
-          organisation n'a pas de tags.
-        </PixNotificationAlert>
       {{/if}}
 
       {{#if this.hasChildren}}
