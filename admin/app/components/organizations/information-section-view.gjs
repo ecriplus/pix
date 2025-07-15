@@ -39,36 +39,50 @@ export default class OrganizationInformationSection extends Component {
 
   <template>
     <div class="organization__data">
-      <h2 class="organization__name">{{@organization.name}}</h2>
+      <div class="organization__header">
+        <div class="organization__title">
+          <h2 class="organization__name">{{@organization.name}}</h2>
 
-      {{#if this.hasTags}}
-        <ul class="organization-tags-list">
-          {{#each @organization.tags as |tag|}}
-            <li class="organization-tags-list__tag">
-              <PixTag @color="purple-light">{{tag.name}}</PixTag>
-            </li>
-          {{/each}}
-        </ul>
-      {{/if}}
+          {{#if this.hasTags}}
+            <ul class="organization-tags-list">
+              {{#each @organization.tags as |tag|}}
+                <li class="organization-tags-list__tag">
+                  <PixTag @color="purple-light">{{tag.name}}</PixTag>
+                </li>
+              {{/each}}
+            </ul>
+          {{/if}}
 
-      {{#if this.hasChildren}}
-        <div class="organization__network-label">
-          <PixTag @color="success">
-            {{t "components.organizations.information-section-view.parent-organization"}}
-          </PixTag>
+          {{#if this.hasChildren}}
+            <div>
+              <PixTag @color="success">
+                {{t "components.organizations.information-section-view.parent-organization"}}
+              </PixTag>
+            </div>
+          {{/if}}
+
+          {{#if @organization.parentOrganizationId}}
+            <div>
+              <PixTag class="organization__child-tag" @color="success">
+                {{t "components.organizations.information-section-view.child-organization"}}
+                <LinkTo @route="authenticated.organizations.get" @model={{@organization.parentOrganizationId}}>
+                  {{@organization.parentOrganizationName}}
+                </LinkTo>
+              </PixTag>
+            </div>
+          {{/if}}
         </div>
-      {{/if}}
 
-      {{#if @organization.parentOrganizationId}}
-        <div class="organization__network-label">
-          <PixTag class="organization__child-tag" @color="success">
-            {{t "components.organizations.information-section-view.child-organization"}}
-            <LinkTo @route="authenticated.organizations.get" @model={{@organization.parentOrganizationId}}>
-              {{@organization.parentOrganizationName}}
-            </LinkTo>
-          </PixTag>
-        </div>
-      {{/if}}
+        <PixButtonLink
+          @variant="secondary"
+          @href={{this.externalURL}}
+          @size="small"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Tableau de bord
+        </PixButtonLink>
+      </div>
 
       {{#if @organization.isArchived}}
         <PixNotificationAlert class="organization-information-section__archived-message" @type="warning">
@@ -79,33 +93,21 @@ export default class OrganizationInformationSection extends Component {
         </PixNotificationAlert>
       {{/if}}
 
-      <div class="organization-information-section__content">
-        <div class="organization-information-section__details">
-          <OrganizationDescription @organization={{@organization}} />
-          <FeaturesSection @features={{@organization.features}} />
-          {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
-            <div class="form-actions">
-              <PixButton @variant="secondary" @size="small" @triggerAction={{@toggleEditMode}}>
-                {{t "common.actions.edit"}}
+      <div class="organization-information-section__details">
+        <OrganizationDescription @organization={{@organization}} />
+
+        {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
+          <div class="form-actions">
+            <PixButton @variant="secondary" @size="small" @triggerAction={{@toggleEditMode}}>
+              {{t "common.actions.edit"}}
+            </PixButton>
+            {{#unless @organization.isArchived}}
+              <PixButton @variant="error" @size="small" @triggerAction={{@toggleArchivingConfirmationModal}}>
+                Archiver l'organisation
               </PixButton>
-              {{#unless @organization.isArchived}}
-                <PixButton @variant="error" @size="small" @triggerAction={{@toggleArchivingConfirmationModal}}>
-                  Archiver l'organisation
-                </PixButton>
-              {{/unless}}
-            </div>
-          {{/if}}
-        </div>
-        <div>
-          <PixButtonLink
-            @variant="secondary"
-            @href={{this.externalURL}}
-            @size="small"
-            target="_blank"
-            rel="noopener noreferrer"
-          >Tableau de bord
-          </PixButtonLink>
-        </div>
+            {{/unless}}
+          </div>
+        {{/if}}
       </div>
     </div>
   </template>
@@ -126,6 +128,7 @@ class OrganizationDescription extends Component {
 
   <template>
     <dl>
+      <div class="divider" />
       <div>
         <dt>Type</dt>
         <dd>{{@organization.type}}</dd>
@@ -160,8 +163,8 @@ class OrganizationDescription extends Component {
         <dt>Adresse e-mail du DPO</dt>
         <dd>{{@organization.dataProtectionOfficerEmail}}</dd>
       </div>
-      <div class="divider" />
 
+      <div class="divider" />
       <div>
         <dt>Crédits</dt>
         <dd>{{@organization.credit}}</dd>
@@ -184,8 +187,8 @@ class OrganizationDescription extends Component {
         <dt>SSO</dt>
         <dd>{{this.identityProviderName}}</dd>
       </div>
-      <div class="divider" />
 
+      <div class="divider" />
       <div>
         <dt>Adresse e-mail d'activation SCO</dt>
         <dd>{{@organization.email}}</dd>
@@ -198,6 +201,14 @@ class OrganizationDescription extends Component {
           <dd>{{@organization.code}}</dd>
         </div>
       {{/if}}
+
+      <div class="divider" />
+      <div>
+        <dt>{{t "components.organizations.information-section-view.features.title"}}</dt>
+        <dd><FeaturesSection @features={{@organization.features}} /></dd>
+      </div>
+
+      <div class="divider" />
     </dl>
   </template>
 }
@@ -207,11 +218,6 @@ function keys(obj) {
 }
 
 const FeaturesSection = <template>
-  <h3 class="page-section__title page-section__title--sub">{{t
-      "components.organizations.information-section-view.features.title"
-    }}
-    :
-  </h3>
   <ul class="organization-information-section__details__list">
     {{#each (keys Organization.featureList) as |feature|}}
       {{#let

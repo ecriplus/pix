@@ -1,10 +1,8 @@
 @use 'pix-design-tokens/typography';
 
 .organization-information-section {
-  &__content {
-  }
-
   &__archived-message {
+    margin-top: var(--pix-spacing-3x);
   }
 
   &__details {
@@ -19,12 +17,14 @@
       }
 
       div {
+        @extend %pix-body-m;
+
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: var(--pix-spacing-3x);
 
         dt {
-          @extend %pix-title-xxs;
+          font-weight: var(--pix-font-bold);
         }
 
         dd {

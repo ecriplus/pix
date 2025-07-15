@@ -37,10 +37,6 @@
       }
     }
 
-    .organization__network-label{
-      margin-bottom: var(--pix-spacing-6x);
-    }
-
     .organization__child-tag{
       a {
         color: var(--pix-success-700);
@@ -49,11 +45,22 @@
     }
 
     .organization__data {
-      max-width: 100%;
+      flex-grow: 1;
       overflow: hidden;
 
+      .organization__header {
+        display: flex;
+        align-items: flex-start;
+      }
+
+      .organization__title {
+        display: flex;
+        flex-direction: column;
+        gap: var(--pix-spacing-2x);
+        flex-grow: 1;
+      }
+
       .organization__name {
-        margin-bottom: 20px;
         font-weight: 600;
         font-size: 1.5rem;
       }
@@ -61,7 +68,6 @@
       .organization-tags-list {
         display: flex;
         flex-wrap: wrap;
-        margin-bottom: var(--pix-spacing-6x);
         padding: 0;
         list-style: none;
 
