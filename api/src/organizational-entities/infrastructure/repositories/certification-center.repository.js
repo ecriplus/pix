@@ -62,7 +62,10 @@ export const findPaginatedFiltered = async ({ filter, page }) => {
     })
     .orderBy('id');
 
-  const { results: certificationCenters, pagination } = await fetchPage(query, page);
+  const { results: certificationCenters, pagination } = await fetchPage({
+    queryBuilder: query,
+    paginationParams: page,
+  });
 
   return { models: certificationCenters.map((certificationCenter) => _toDomain({ certificationCenter })), pagination };
 };

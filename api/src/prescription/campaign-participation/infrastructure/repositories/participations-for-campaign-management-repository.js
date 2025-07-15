@@ -41,7 +41,7 @@ const findPaginatedParticipationsForCampaignManagement = async function ({ campa
     .where('campaignId', campaignId)
     .orderBy(['lastName', 'firstName'], ['asc', 'asc']);
 
-  const { results, pagination } = await fetchPage(query, page);
+  const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
 
   const participationsForCampaignManagement = results.map(
     (attributes) => new ParticipationForCampaignManagement(attributes),

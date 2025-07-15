@@ -34,7 +34,11 @@ const findPaginatedByCertificationCenterId = async function ({ certificationCent
 
   const countQuery = knex('sessions').count('*', { as: 'rowCount' }).where({ certificationCenterId });
 
-  const { results, pagination } = await fetchPage(query, page, null, countQuery);
+  const { results, pagination } = await fetchPage({
+    queryBuilder: query,
+    paginationParams: page,
+    countQueryBuilder: countQuery,
+  });
   const hasSessions = Boolean(pagination.rowCount);
 
   const sessionSummaries = results.map((result) => SessionSummary.from(result));

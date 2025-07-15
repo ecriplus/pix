@@ -40,7 +40,7 @@ const findByOrganizationIdAndUpdatedAtOrderByDivision = async function ({ organi
     query.whereIn('division', filter.divisions);
   }
 
-  const { results, pagination } = await fetchPage(query, page);
+  const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
 
   return {
     data: results.map((result) => new OrganizationLearner(result)),

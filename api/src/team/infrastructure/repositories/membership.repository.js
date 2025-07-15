@@ -116,7 +116,10 @@ export const findPaginatedFiltered = async function ({ organizationId, filter, p
   queryBuilder.innerJoin('users', 'memberships.userId', 'users.id');
   queryBuilder.orderByRaw('"organizationRole" ASC, LOWER(users."lastName") ASC, LOWER(users."firstName") ASC');
 
-  const result = await fetchPage(queryBuilder, { number: pageNumber, size: pageSize });
+  const result = await fetchPage({
+    queryBuilder,
+    paginationParams: { number: pageNumber, size: pageSize },
+  });
   const memberships = result.results.map(
     (membership) =>
       new Membership({

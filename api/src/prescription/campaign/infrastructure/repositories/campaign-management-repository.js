@@ -86,7 +86,7 @@ const findPaginatedCampaignManagements = async function ({ organizationId, page 
     .where('organizationId', organizationId)
     .orderBy('campaigns.createdAt', 'DESC');
 
-  const { results, pagination } = await fetchPage(query, page);
+  const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
 
   const campaignManagement = results.map((attributes) => new CampaignManagement(attributes));
   return { models: campaignManagement, meta: { ...pagination } };

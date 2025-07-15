@@ -34,7 +34,7 @@ async function findPaginatedByCampaignId(campaignId, page = {}, filters = {}) {
 
 function _getResultListPaginated(campaignId, filters, page) {
   const query = _getParticipantsResultList(campaignId, filters);
-  return fetchPage(query, page);
+  return fetchPage({ queryBuilder: query, paginationParams: page });
 }
 
 function _getParticipantsResultList(campaignId, filters) {

@@ -17,7 +17,7 @@ async function findPaginatedFilteredParticipants({ organizationId, page, filters
     sort,
     withImport: false,
   });
-  const { results, pagination } = await fetchPage(organizationLearnerQuery, page);
+  const { results, pagination } = await fetchPage({ queryBuilder: organizationLearnerQuery, paginationParams: page });
   const organizationParticipants = results.map((rawParticipant) => new OrganizationParticipant(rawParticipant));
   return { organizationParticipants, meta: { ...pagination, participantCount: totalParticipants } };
 }
@@ -40,7 +40,7 @@ async function findPaginatedFilteredImportedParticipants({
     sort,
     withImport: true,
   });
-  const { results, pagination } = await fetchPage(organizationLearnerQuery, page);
+  const { results, pagination } = await fetchPage({ queryBuilder: organizationLearnerQuery, paginationParams: page });
   const organizationParticipants = results.map((rawParticipant) => new OrganizationParticipant(rawParticipant));
   return { organizationParticipants, meta: { ...pagination, participantCount: totalParticipants } };
 }

@@ -13,7 +13,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
       // when
       const query = knex.select('name').from('campaigns').orderBy('name', 'ASC');
-      const { results, pagination } = await fetchPage(query, { number: 2, size: 2 });
+      const { results, pagination } = await fetchPage({
+        queryBuilder: query,
+        paginationParams: { number: 2, size: 2 },
+      });
 
       // then
       expect(results).to.have.lengthOf(2);
@@ -36,7 +39,9 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
       // when
       const query = knex.distinct('name').from('campaigns');
-      const { results, pagination } = await fetchPage(query);
+      const { results, pagination } = await fetchPage({
+        queryBuilder: query,
+      });
 
       // then
       expect(results).to.have.lengthOf(2);
@@ -55,7 +60,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.not.be.empty;
@@ -72,7 +80,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.be.empty;
@@ -89,7 +100,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.not.be.empty;
@@ -105,7 +119,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { size: pageSize },
+        });
 
         // then
         expect(results).to.not.be.empty;
@@ -124,7 +141,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.have.lengthOf(pageSize);
@@ -141,7 +161,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.have.lengthOf(total);
@@ -158,7 +181,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.be.empty;
@@ -174,7 +200,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber },
+        });
 
         // then
         expect(results).to.have.lengthOf(pagination.pageSize);
@@ -193,7 +222,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.not.be.empty;
@@ -210,7 +242,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.be.empty;
@@ -229,7 +264,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.not.be.empty;
@@ -246,7 +284,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.not.be.empty;
@@ -263,7 +304,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.be.empty;
@@ -292,7 +336,11 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
               },
             ]);
             const query = knex.select('key').from('features');
-            const { results, pagination } = await fetchPage(query, { number: 3, size: 5 }, trx);
+            const { results, pagination } = await fetchPage({
+              queryBuilder: query,
+              paginationParams: { number: 3, size: 5 },
+              trx,
+            });
             expect(results, 'results within the transaction, before rollback').to.have.length(3);
             expect(pagination).to.deep.equal({
               page: 3,
@@ -311,7 +359,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('key').from('features');
-        const { results, pagination } = await fetchPage(query, { number: 3, size: 5 });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: 3, size: 5 },
+        });
 
         // then
         expect(results, 'results outside the transaction').to.be.empty;
@@ -336,7 +387,11 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
         // when
         const query = knex.select('key').from('features').orderBy('key');
         const countQuery = knex('organizations').count('*', { as: 'rowCount' });
-        const { results, pagination } = await fetchPage(query, { number: 1, size: 5 }, null, countQuery);
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: 1, size: 5 },
+          countQueryBuilder: countQuery,
+        });
 
         // then
         expect(results).to.deep.equal([

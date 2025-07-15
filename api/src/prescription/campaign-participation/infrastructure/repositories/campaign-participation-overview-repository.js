@@ -14,7 +14,10 @@ const findByUserIdWithFilters = async function ({ userId, states, page }) {
     _filterByStates(queryBuilder, states);
   }
 
-  const { results, pagination } = await fetchPage(queryBuilder, page);
+  const { results, pagination } = await fetchPage({
+    queryBuilder,
+    paginationParams: page,
+  });
   return {
     campaignParticipationOverviews: results.map(
       (campaignParticipationOverview) => new CampaignParticipationOverview(campaignParticipationOverview),

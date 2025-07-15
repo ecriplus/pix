@@ -7,24 +7,25 @@ const DEFAULT_PAGINATION = {
 
 /**
  * Paginate a knex query with given page parameters
- * @param {*} queryBuilder - a knex query builder
- * @param {Object} page - page parameters
- * @param {Number} page.number - the page number to retrieve
- * @param {Number} page.size - the size of the page
- * @param {object|null|undefined} queryBuilder - a knex query builder that counts the total number of rows, when one do not want to use the default one
- * @param {object|null|undefined} trx - transaction to use, possibly null
+ * @param {object} params
+ * @param {object} params.queryBuilder - a knex query builder
+ * @param {object} params.paginationParams
+ * @param {Number} params.paginationParams.number - the page number to retrieve
+ * @param {Number} params.paginationParams.size - the size of the page
+ * @param {object|null} params.trx - transaction to use
+ * @param {object|null} params.countQueryBuilder - a knex query builder that counts the total number of rows, bypassing the default one
  */
-const fetchPage = async (
+const fetchPage = async ({
   queryBuilder,
-  { number = DEFAULT_PAGINATION.PAGE, size = DEFAULT_PAGINATION.PAGE_SIZE } = {},
-  trx,
-  countRequestBuilder = undefined,
-) => {
+  paginationParams: { number = DEFAULT_PAGINATION.PAGE, size = DEFAULT_PAGINATION.PAGE_SIZE } = {},
+  trx = null,
+  countQueryBuilder = null,
+}) => {
   const page = number < 1 ? 1 : number;
   const offset = (page - 1) * size;
 
-  const countExecutor = countRequestBuilder
-    ? countRequestBuilder
+  const countExecutor = countQueryBuilder
+    ? countQueryBuilder
     : trx
       ? trx.count('*', { as: 'rowCount' }).from(queryBuilder.clone().as('query_all_results'))
       : knex.count('*', { as: 'rowCount' }).from(queryBuilder.clone().as('query_all_results'));

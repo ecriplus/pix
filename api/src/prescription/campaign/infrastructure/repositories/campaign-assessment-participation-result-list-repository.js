@@ -16,7 +16,10 @@ export const findPaginatedByCampaignId = async ({
   dependencies = { stageCollectionRepository },
 }) => {
   const stageCollection = await dependencies.stageCollectionRepository.findStageCollection({ campaignId });
-  const { results, pagination } = await fetchPage(getParticipantsResultList(campaignId, filters), page);
+  const { results, pagination } = await fetchPage({
+    queryBuilder: getParticipantsResultList(campaignId, filters),
+    paginationParams: page,
+  });
   const participations = await buildCampaignAssessmentParticipationResultList(results, stageCollection);
 
   return {

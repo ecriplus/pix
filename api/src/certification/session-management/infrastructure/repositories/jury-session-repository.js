@@ -54,7 +54,7 @@ const findPaginatedFiltered = async function ({ filters, page }) {
     .orderByRaw('?? ASC', 'finalizedAt')
     .orderBy('id');
 
-  const { results, pagination } = await fetchPage(query, page);
+  const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
   const jurySessions = results.map(_toDomain);
 
   return {

@@ -103,7 +103,7 @@ const findPaginatedFilteredByTargetProfile = async function ({ targetProfileId, 
     .where({ 'target-profile-shares.targetProfileId': targetProfileId })
     .modify(_setSearchFiltersForQueryBuilder, filter);
 
-  const { results, pagination } = await fetchPage(query, page);
+  const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
   const organizations = results.map((model) => _toDomain(model));
   return { models: organizations, pagination };
 };

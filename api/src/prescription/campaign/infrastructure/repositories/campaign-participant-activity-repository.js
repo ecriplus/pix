@@ -12,7 +12,7 @@ const campaignParticipantActivityRepository = {
       .from('campaign_participants_activities_ordered')
       .orderByRaw('LOWER(??) ASC, LOWER(??) ASC', ['lastName', 'firstName']);
 
-    const { results, pagination } = await fetchPage(query, page);
+    const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
 
     const campaignParticipantsActivities = results.map((result) => {
       return new CampaignParticipantActivity(result);
