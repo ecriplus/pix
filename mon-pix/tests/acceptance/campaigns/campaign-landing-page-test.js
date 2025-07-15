@@ -6,6 +6,8 @@ import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
 import { authenticate } from '../../helpers/authentication';
+import { clickByLabel } from '../../helpers/click-by-label.js';
+import { fillInByLabel } from '../../helpers/fill-in-by-label.js';
 import setupIntl from '../../helpers/setup-intl';
 
 module('Acceptance | Campaigns | campaign-landing-page', function (hooks) {
@@ -94,19 +96,38 @@ module('Acceptance | Campaigns | campaign-landing-page', function (hooks) {
   });
 
   module('for autonomous course', function () {
-    test('should display the autonomous course start block component', async function (assert) {
-      // given
-      const autonomousCourse = server.create('campaign', 'forAutonomousCourse');
+    module('when user is not connected', function () {
+      test('should display the autonomous course start block component', async function (assert) {
+        // given
+        const autonomousCourse = server.create('campaign', 'forAutonomousCourse');
 
-      // when
-      const screen = await visit(`/campagnes/${autonomousCourse.code}`);
+        // when
+        const screen = await visit(`/campagnes/${autonomousCourse.code}`);
 
-      // then
-      assert.strictEqual(currentURL(), `/campagnes/${autonomousCourse.code}/presentation`);
-      assert
-        .dom(screen.getByText(`${t('pages.autonomous-course.landing-page.texts.title')} ${autonomousCourse.title}`))
-        .exists();
-      assert.dom(screen.getByText('Dummy landing page text')).exists();
+        // then
+        assert.strictEqual(currentURL(), `/campagnes/${autonomousCourse.code}/presentation`);
+        assert
+          .dom(screen.getByText(`${t('pages.autonomous-course.landing-page.texts.title')} ${autonomousCourse.title}`))
+          .exists();
+        assert.dom(screen.getByText('Dummy landing page text')).exists();
+      });
+
+      test('should redirect to the autonomous course after login', async function (assert) {
+        // given
+        const user = server.create('user', 'withEmail');
+        const autonomousCourse = server.create('campaign', 'forAutonomousCourse');
+
+        // when
+        const screen = await visit(`/campagnes/${autonomousCourse.code}`);
+        await click(screen.getByRole('button', { name: t('pages.autonomous-course.landing-page.actions.sign-in') }));
+        await fillInByLabel(t('pages.sign-in.fields.login.label'), user.email);
+        await fillInByLabel(t('pages.sign-in.fields.password.label'), user.password);
+        await clickByLabel(t('pages.sign-in.actions.submit'));
+
+        // then
+        assert.strictEqual(currentURL(), `/campagnes/${autonomousCourse.code}/evaluation/didacticiel`);
+        assert.dom(screen.getByRole('main', { heading: t('pages.tutorial.title') })).exists();
+      });
     });
   });
 });
