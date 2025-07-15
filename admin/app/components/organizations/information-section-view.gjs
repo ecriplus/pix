@@ -123,44 +123,76 @@ export default class OrganizationInformationSection extends Component {
 }
 
 const OrganizationDescription = <template>
-  <ul class="organization-information-section__details__list">
-    <li>Type : {{@organization.type}}</li>
-    <li>Créée par : {{@organization.creatorFullName}} ({{@organization.createdBy}})</li>
-    <li>Créée le : {{@organization.createdAtFormattedDate}}</li>
+  <dl>
+    <div>
+      <dt>Type</dt>
+      <dd>{{@organization.type}}</dd>
+    </div>
+    <div>
+      <dt>Créée par</dt>
+      <dd>{{@organization.creatorFullName}} ({{@organization.createdBy}})</dd>
+    </div>
+    <div>
+      <dt>Créée le</dt>
+      <dd>{{@organization.createdAtFormattedDate}}</dd>
+    </div>
     {{#if @organization.externalId}}
-      <li>Identifiant externe : {{@organization.externalId}}</li>
+      <div>
+        <dt>Identifiant externe</dt>
+        <dd>{{@organization.externalId}}</dd>
+      </div>
     {{/if}}
     {{#if @organization.provinceCode}}
-      <li>Département : {{@organization.provinceCode}}</li>
+      <div>
+        <dt>Département</dt>
+        <dd>{{@organization.provinceCode}}</dd>
+      </div>
     {{/if}}
 
-    <br />
+    <div>
+      <dt>Nom du DPO</dt>
+      <dd>{{@organization.dataProtectionOfficerFullName}}</dd>
+    </div>
+    <div>
+      <dt>Adresse e-mail du DPO</dt>
+      <dd>{{@organization.dataProtectionOfficerEmail}}</dd>
+    </div>
 
-    <li>Nom du DPO : {{@organization.dataProtectionOfficerFullName}}</li>
-    <li>Adresse e-mail du DPO : {{@organization.dataProtectionOfficerEmail}}</li>
-    <br />
-    <li>Crédits : {{@organization.credit}}</li>
-    <li>Lien vers la documentation :
-      {{#if @organization.documentationUrl}}
-        <a
-          href="{{@organization.documentationUrl}}"
-          target="_blank"
-          rel="noopener noreferrer"
-        >{{@organization.documentationUrl}}</a>
-      {{else}}
-        Non spécifié
-      {{/if}}
-    </li>
-    <li>SSO : {{this.identityProviderName}}</li>
+    <div>
+      <dt>Crédits</dt>
+      <dd>{{@organization.credit}}</dd>
+    </div>
+    <div>
+      <dt>Lien vers la documentation</dt>
+      <dd>
+        {{#if @organization.documentationUrl}}
+          <a
+            href="{{@organization.documentationUrl}}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >{{@organization.documentationUrl}}</a>
+        {{else}}
+          Non spécifié
+        {{/if}}
+      </dd>
+    </div>
+    <div>
+      <dt>SSO</dt>
+      <dd>{{this.identityProviderName}}</dd>
+    </div>
 
-    <br />
+    <div>
+      <dt>Adresse e-mail d'activation SCO</dt>
+      <dd>{{@organization.email}}</dd>
+    </div>
 
-    <li>Adresse e-mail d'activation SCO : {{@organization.email}}</li>
     {{#if @organization.code}}
-      <br />
-      <li>Code : {{@organization.code}}</li>
+      <div>
+        <dt>Code</dt>
+        <dd>{{@organization.code}}</dd>
+      </div>
     {{/if}}
-  </ul>
+  </dl>
 </template>;
 
 function keys(obj) {
