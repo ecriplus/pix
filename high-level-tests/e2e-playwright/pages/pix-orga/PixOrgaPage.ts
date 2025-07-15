@@ -29,6 +29,21 @@ export class PixOrgaPage {
     } while (inProgress);
   }
 
+  async waitForParticipationScoreComputed(score: string, page: Page) {
+    let masteryPercentageVisible = await page
+      .getByRole('definition')
+      .filter({ hasText: `${score} %` })
+      .isVisible();
+    while (!masteryPercentageVisible) {
+      await page.reload({ waitUntil: 'load' });
+      await page.getByRole('definition').filter({ hasText: `%` }).waitFor();
+      masteryPercentageVisible = await page
+        .getByRole('definition')
+        .filter({ hasText: `${score} %` })
+        .isVisible();
+    }
+  }
+
   async createEvaluationCampaign({
     campaignName,
     targetProfileName,

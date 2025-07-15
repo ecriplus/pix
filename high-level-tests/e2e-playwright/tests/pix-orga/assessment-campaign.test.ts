@@ -90,11 +90,14 @@ test('Assessment campaign', async ({ page }) => {
       page.getByRole('region').filter({ hasText: 'Total de participants' }).getByRole('definition'),
     ).toBeVisible();
 
-    await page.getByRole('cell', { name: 'Voir les résultats de Buffy' }).click();
-    await expect(page.getByLabel('Résultat', { exact: true }).getByText(`${globalMasteryPercentage} %`)).toBeVisible();
-
-    await page.getByRole('link', { name: 'campagne pro', exact: true }).click();
     await page.getByRole('link', { name: 'Résultats (1)' }).click();
+    await expect(page.getByRole('definition').filter({ hasText: `%` })).toBeVisible();
+
+    await orgaPage.waitForParticipationScoreComputed(globalMasteryPercentage, page);
+
     await expect(page.getByRole('definition').filter({ hasText: `${globalMasteryPercentage} %` })).toBeVisible();
+
+    await page.getByRole('cell', { name: 'Buffy' }).click();
+    await expect(page.getByLabel('Résultat', { exact: true }).getByText(`${globalMasteryPercentage} %`)).toBeVisible();
   });
 });
