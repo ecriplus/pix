@@ -57,6 +57,7 @@ Router.map(function () {
   });
 
   this.route('challenge-preview', { path: '/challenges/:challenge_id/preview' });
+  this.route('llm.preview', { path: '/llm/preview/:chat_id' });
   this.route('courses.start', { path: '/courses/:course_id' });
 
   this.route('assessments', { path: '/assessments/:assessment_id' }, function () {

@@ -1,6 +1,7 @@
 import { destroy, registerDestructor } from '@ember/destroyable';
 import EmberObject from '@ember/object';
 import { setupTest } from 'ember-qunit';
+import ApplicationAdapter from 'mon-pix/adapters/application';
 import PassageAdapter from 'mon-pix/adapters/passage';
 import EmbedApiProxyService from 'mon-pix/services/embed-api-proxy';
 import { module, test } from 'qunit';
@@ -10,7 +11,8 @@ module('Unit | Services | embed api proxy', function (hooks) {
   setupTest(hooks);
 
   let embedApiProxy;
-  let urlForFindRecordStub = sinon.stub();
+  let urlForFindRecordStub;
+  let urlForFindAllStub;
 
   hooks.beforeEach(function () {
     urlForFindRecordStub = sinon.stub().returns('/api/passages/123');
@@ -23,6 +25,19 @@ module('Unit | Services | embed api proxy', function (hooks) {
           };
         }
         urlForFindRecord = urlForFindRecordStub;
+      },
+    );
+
+    urlForFindAllStub = sinon.stub().returns('/api');
+    this.owner.register(
+      'adapter:application',
+      class extends ApplicationAdapter {
+        get headers() {
+          return {
+            Authorization: 'Bearer cpasgrave',
+          };
+        }
+        urlForFindAll = urlForFindAllStub;
       },
     );
 
@@ -61,6 +76,47 @@ module('Unit | Services | embed api proxy', function (hooks) {
 
       // when
       embedApiProxy.forward(context, requestsPort, '123', 'passage');
+      destroy(context);
+      await contextDestroyed;
+
+      // then
+      sinon.assert.calledOnceWithExactly(requestsPort.close);
+      assert.ok(true);
+    });
+  });
+
+  module('#forwardForPreview', function () {
+    test('it should add event listener and start port', function (assert) {
+      // given
+      const requestsPort = {
+        start: sinon.stub(),
+        close: sinon.stub(),
+        addEventListener: sinon.stub(),
+      };
+
+      // when
+      embedApiProxy.forwardForPreview({}, requestsPort, '123', 'passage');
+
+      // then
+      sinon.assert.calledWith(requestsPort.addEventListener, 'message', sinon.match.func);
+      sinon.assert.calledOnce(requestsPort.start);
+      assert.ok(true);
+    });
+
+    test('it closes the port when the context is destroyed', async function (assert) {
+      // given
+      const requestsPort = {
+        addEventListener: sinon.stub(),
+        start: sinon.stub(),
+        close: sinon.stub(),
+      };
+      const context = EmberObject.create();
+      const contextDestroyed = new Promise((resolve) => {
+        registerDestructor(context, () => resolve());
+      });
+
+      // when
+      embedApiProxy.forwardForPreview(context, requestsPort, '123', 'passage');
       destroy(context);
       await contextDestroyed;
 
@@ -126,6 +182,64 @@ module('Unit | Services | embed api proxy', function (hooks) {
         [response.body],
       );
       assert.ok(true);
+    });
+
+    module('when in preview', function () {
+      test('it should proxy request and postMessage the response', async function (assert) {
+        // given
+        const postMessageStub = sinon.stub();
+        const request = {
+          url: '/test',
+          init: {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: '{ "prompt": "salut!" }',
+          },
+        };
+        const event = {
+          data: request,
+          ports: [{ postMessage: postMessageStub }],
+        };
+        const headers = {
+          'content-type': 'text/event-stream',
+        };
+        const response = new Response('mon body', {
+          headers: new Headers(headers),
+          status: 200,
+        });
+        const fetchStub = sinon.stub().resolves(response);
+
+        // when
+        await embedApiProxy.handleMessageEvent(event, {
+          fetch: fetchStub,
+          preview: true,
+        });
+
+        // then
+        sinon.assert.calledOnceWithExactly(urlForFindAllStub);
+
+        sinon.assert.calledWith(fetchStub, '/api/llm/preview/embed/test', {
+          method: 'POST',
+          headers: {
+            Authorization: 'Bearer cpasgrave',
+            'content-type': 'application/json',
+          },
+          body: '{ "prompt": "salut!" }',
+        });
+
+        sinon.assert.calledWith(
+          postMessageStub,
+          {
+            body: response.body,
+            init: {
+              headers,
+              status: response.status,
+            },
+          },
+          [response.body],
+        );
+        assert.ok(true);
+      });
     });
 
     module('when fetch throws an error', function () {

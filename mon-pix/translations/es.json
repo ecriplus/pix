@@ -1504,6 +1504,10 @@
     "levelup-notif": {
       "obtained-level": "¡Nivel { level } conseguido!"
     },
+    "llm-preview": {
+      "iframe-title": "ChatPix",
+      "title": "Previsualización ChatPix"
+    },
     "login-or-register-oidc": {
       "error": {
         "account-conflict": "Esta cuenta ya está asociada a esta organización. Conéctate con otra cuenta o ponte en contacto con el servicio de asistencia.",

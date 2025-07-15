@@ -1509,6 +1509,10 @@
     "levelup-notif": {
       "obtained-level": "Level { level } reached!"
     },
+    "llm-preview": {
+      "iframe-title": "ChatPix",
+      "title": "ChatPix preview"
+    },
     "login-or-register": {
       "invitation": "{ organizationName }",
       "login-form": {
