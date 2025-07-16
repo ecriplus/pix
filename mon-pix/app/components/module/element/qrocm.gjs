@@ -179,7 +179,7 @@ export default class ModuleQrocm extends ModuleElement {
 
       {{#unless this.correction}}
         <PixButton
-          @variant="success"
+          @variant="primary"
           @type="submit"
           class="element-qrocm__verify-button"
           @triggerAction={{this.onAnswer}}
