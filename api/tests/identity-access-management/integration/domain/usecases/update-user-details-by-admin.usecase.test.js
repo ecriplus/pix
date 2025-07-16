@@ -59,7 +59,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | updateUs
       action: 'EMAIL_CHANGED',
       role: 'SUPPORT',
       userId: updatedByAdminId,
-      targetUserId: userId,
+      targetUserIds: [userId],
       data: { oldEmail: 'email@example.net', newEmail: userDetailsToUpdate.email },
       occurredAt: '2024-12-25T00:00:00.000Z',
     });

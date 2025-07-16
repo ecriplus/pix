@@ -344,7 +344,7 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
           role: 'ORGA_ADMIN',
           userId: adminUserId,
           occurredAt: now.toISOString(),
-          targetUserId: organizationLearner1.id,
+          targetUserIds: [organizationLearner1.id],
           data: {},
         },
         {
@@ -353,7 +353,7 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
           role: 'ORGA_ADMIN',
           userId: adminUserId,
           occurredAt: now.toISOString(),
-          targetUserId: campaignParticipation1.id,
+          targetUserIds: [campaignParticipation1.id],
           data: {},
         },
       ]);

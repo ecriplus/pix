@@ -27,18 +27,18 @@ const EventLogSchema = Joi.object({
     .valid(...ROLES)
     .required(),
   userId: Joi.number().required(),
-  targetUserId: Joi.number().required(),
+  targetUserIds: Joi.array().items(Joi.number()).min(1).required(),
   data: Joi.object().optional(),
   occurredAt: Joi.date().optional(),
 });
 
 export class EventLoggingJob {
-  constructor({ client, action, role, userId, targetUserId, data, occurredAt }) {
+  constructor({ client, action, role, userId, targetUserId, targetUserIds, data, occurredAt }) {
     this.client = client;
     this.action = action;
     this.role = role;
     this.userId = userId;
-    this.targetUserId = targetUserId;
+    this.targetUserIds = targetUserId ? [targetUserId] : targetUserIds;
     this.data = data;
     this.occurredAt = occurredAt || new Date();
 

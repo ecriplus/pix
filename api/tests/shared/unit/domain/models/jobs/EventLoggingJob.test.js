@@ -34,9 +34,25 @@ describe('Unit | Shared | Domain | Model | Jobs | EventLoggingJob', function () 
       expect(eventLoggingJob.action).to.equal('EMAIL_CHANGED');
       expect(eventLoggingJob.role).to.equal('USER');
       expect(eventLoggingJob.userId).to.equal(123);
-      expect(eventLoggingJob.targetUserId).to.equal(456);
+      expect(eventLoggingJob.targetUserIds).to.deep.equal([456]);
       expect(eventLoggingJob.data).to.deep.equal({ foo: 'bar' });
       expect(eventLoggingJob.occurredAt).to.deep.equal(now);
+    });
+
+    it('creates an EventLoggingJob with multiple targetUserIds', async function () {
+      // when
+      const eventLoggingJob = new EventLoggingJob({
+        client: 'PIX_APP',
+        action: 'EMAIL_CHANGED',
+        role: 'USER',
+        userId: 123,
+        targetUserIds: [456, 789],
+        data: { foo: 'bar' },
+        occurredAt: new Date(),
+      });
+
+      // then
+      expect(eventLoggingJob.targetUserIds).to.deep.equal([456, 789]);
     });
 
     context('when occurredAt is not defined', function () {
@@ -51,7 +67,7 @@ describe('Unit | Shared | Domain | Model | Jobs | EventLoggingJob', function () 
         });
 
         // then
-        expect(eventLoggingJob.targetUserId).to.equal(456);
+        expect(eventLoggingJob.targetUserIds).to.deep.equal([456]);
         expect(eventLoggingJob.occurredAt).to.deep.equal(now);
       });
     });
@@ -70,7 +86,7 @@ describe('Unit | Shared | Domain | Model | Jobs | EventLoggingJob', function () 
             { attribute: 'action', message: '"action" is required' },
             { attribute: 'role', message: '"role" is required' },
             { attribute: 'userId', message: '"userId" is required' },
-            { attribute: 'targetUserId', message: '"targetUserId" is required' },
+            { attribute: 'targetUserIds', message: '"targetUserIds" is required' },
           ]);
         }
       });

@@ -264,7 +264,7 @@ describe('Integration | UseCases | delete-campaign-participation', function () {
         role: 'ORGA_ADMIN',
         userId: adminUserId,
         occurredAt: now.toISOString(),
-        targetUserId: campaignParticipationId,
+        targetUserIds: [campaignParticipationId],
         data: {},
       });
     });

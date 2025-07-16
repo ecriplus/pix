@@ -3,6 +3,17 @@ import { EventLoggingJob } from '../../../../../src/shared/domain/models/jobs/Ev
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Shared | Application | Jobs | EventLoggingJobController', function () {
+  const now = new Date(2024, 1, 1);
+  let clock;
+
+  beforeEach(function () {
+    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+  });
+
+  afterEach(function () {
+    clock.restore();
+  });
+
   it('sets up the job controller configuration', async function () {
     const jobController = new EventLoggingJobController();
     expect(jobController.jobName).to.equal(EventLoggingJob.name);
@@ -10,16 +21,16 @@ describe('Unit | Shared | Application | Jobs | EventLoggingJobController', funct
 
   it('logs the event', async function () {
     // given
-    const auditLoggerRepository = { logEvent: sinon.stub() };
+    const auditLoggerRepository = { logEvents: sinon.stub() };
     const options = { dependencies: { auditLoggerRepository } };
     const data = {
       client: 'PIX_APP',
       action: 'EMAIL_CHANGED',
       role: 'USER',
       userId: 123,
-      targetUserId: 456,
+      targetUserIds: [456, 789],
       data: { foo: 'bar' },
-      occurredAt: new Date(),
+      occurredAt: now,
     };
 
     // when
@@ -27,14 +38,25 @@ describe('Unit | Shared | Application | Jobs | EventLoggingJobController', funct
     await jobController.handle({ data, ...options });
 
     // then
-    expect(auditLoggerRepository.logEvent).to.have.been.calledWith({
-      client: data.client,
-      action: data.action,
-      role: data.role,
-      userId: data.userId.toString(),
-      targetUserId: data.targetUserId.toString(),
-      data: data.data,
-      occurredAt: data.occurredAt,
-    });
+    expect(auditLoggerRepository.logEvents).to.have.been.calledWith([
+      {
+        client: data.client,
+        action: data.action,
+        role: data.role,
+        userId: '123',
+        targetUserId: '456',
+        data: data.data,
+        occurredAt: data.occurredAt,
+      },
+      {
+        client: data.client,
+        action: data.action,
+        role: data.role,
+        userId: '123',
+        targetUserId: '789',
+        data: data.data,
+        occurredAt: data.occurredAt,
+      },
+    ]);
   });
 });

@@ -8,16 +8,20 @@ export class EventLoggingJobController extends JobController {
   }
 
   async handle({ data: jobData, dependencies = { auditLoggerRepository } }) {
-    const { client, action, role, userId, targetUserId, data, occurredAt } = jobData;
+    const { client, action, role, userId, targetUserIds, data, occurredAt } = jobData;
 
-    return dependencies.auditLoggerRepository.logEvent({
-      client,
-      action,
-      role,
-      userId: userId.toString(),
-      targetUserId: targetUserId.toString(),
-      data,
-      occurredAt,
+    const auditLoggerEvents = targetUserIds.map((targetUserId) => {
+      return {
+        client,
+        action,
+        role,
+        userId: userId.toString(),
+        targetUserId: targetUserId.toString(),
+        data,
+        occurredAt,
+      };
     });
+
+    return dependencies.auditLoggerRepository.logEvents(auditLoggerEvents);
   }
 }

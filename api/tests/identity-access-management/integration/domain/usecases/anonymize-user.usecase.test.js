@@ -69,8 +69,8 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
       action: 'ANONYMIZATION',
       role: PIX_ADMIN.ROLES.SUPER_ADMIN,
       occurredAt: now.toISOString(),
-      updatedByUserId: anonymizedByUserId,
-      userId,
+      userId: anonymizedByUserId,
+      targetUserIds: [userId],
     });
 
     const authenticationMethods = await knex('authentication-methods').where({ userId });
