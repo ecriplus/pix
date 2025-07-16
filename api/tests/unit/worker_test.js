@@ -1,11 +1,11 @@
-import { UserAnonymizedEventLoggingJob } from '../../src/identity-access-management/domain/models/UserAnonymizedEventLoggingJob.js';
 import { Metrics } from '../../src/monitoring/infrastructure/metrics.js';
 import { ScheduleComputeOrganizationLearnersCertificabilityJobController } from '../../src/prescription/learner-management/application/jobs/schedule-compute-organization-learners-certificability-job-controller.js';
 import { ValidateOrganizationLearnersImportFileJobController } from '../../src/prescription/learner-management/application/jobs/validate-organization-learners-import-file-job-controller.js';
 import { ValidateOrganizationImportFileJob } from '../../src/prescription/learner-management/domain/models/ValidateOrganizationImportFileJob.js';
-import { UserAnonymizedEventLoggingJobController } from '../../src/shared/application/jobs/audit-log/user-anonymized-event-logging-job-controller.js';
+import { EventLoggingJobController } from '../../src/shared/application/jobs/event-logging.job-controller.js';
 import { JobGroup } from '../../src/shared/application/jobs/job-controller.js';
 import { config } from '../../src/shared/config.js';
+import { EventLoggingJob } from '../../src/shared/domain/models/jobs/EventLoggingJob.js';
 import { JobExpireIn } from '../../src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { registerJobs, startPgBoss } from '../../worker.js';
 import { catchErr, expect, sinon } from '../test-helper.js';
@@ -27,7 +27,7 @@ describe('Unit | Worker', function () {
       sinon.restore();
     });
 
-    it('should register UserAnonymizedEventLoggingJob', async function () {
+    it('should register EventLoggingJob', async function () {
       // when
       await registerJobs({
         jobGroups: [JobGroup.DEFAULT],
@@ -40,16 +40,14 @@ describe('Unit | Worker', function () {
       // then
       expect(jobQueueStub.register).to.have.been.calledWithExactly(
         new Metrics({ config: { metrics: { isDirectMetricsEnabled: false } } }),
-        UserAnonymizedEventLoggingJob.name,
-        UserAnonymizedEventLoggingJobController,
+        EventLoggingJob.name,
+        EventLoggingJobController,
       );
     });
 
-    it('should register legacyName from UserAnonymizedEventLoggingJob', async function () {
+    it('should register legacyName from EventLoggingJob', async function () {
       // when
-      sinon
-        .stub(UserAnonymizedEventLoggingJobController.prototype, 'legacyName')
-        .get(() => 'legyNameForUserAnonymizedEventLoggingJobController');
+      sinon.stub(EventLoggingJobController.prototype, 'legacyName').get(() => 'legacyNameForEventLoggingJobController');
       await registerJobs({
         jobGroups: [JobGroup.DEFAULT],
         dependencies: {
@@ -61,8 +59,8 @@ describe('Unit | Worker', function () {
       // then
       expect(jobQueueStub.register).to.have.been.calledWithExactly(
         new Metrics({ config: { metrics: { isDirectMetricsEnabled: false } } }),
-        'legyNameForUserAnonymizedEventLoggingJobController',
-        UserAnonymizedEventLoggingJobController,
+        'legacyNameForEventLoggingJobController',
+        EventLoggingJobController,
       );
     });
 
