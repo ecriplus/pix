@@ -47,7 +47,7 @@ module('Unit | Model | organization', function (hooks) {
   });
 
   module('#dataProtectionOfficerFullName', function () {
-    test('it return the data protection officer full name', function (assert) {
+    test('it returns the data protection officer full name', function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('organization', {
@@ -58,6 +58,18 @@ module('Unit | Model | organization', function (hooks) {
 
       // when & then
       assert.strictEqual(model.dataProtectionOfficerFullName, 'Justin Ptipeu');
+    });
+
+    test('it returns the data protection officer full name with partial information', function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const model = store.createRecord('organization', {
+        dataProtectionOfficerLastName: 'Ptipeu',
+        dataProtectionOfficerEmail: 'justin.ptipeu@example.net',
+      });
+
+      // when & then
+      assert.strictEqual(model.dataProtectionOfficerFullName, 'Ptipeu');
     });
   });
 });
