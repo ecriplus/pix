@@ -89,12 +89,16 @@ export default Factory.extend({
   }),
 
   forAutonomousCourse: trait({
-    afterCreate(campaign) {
+    afterCreate(campaign, server) {
+      const verifiedCode = server.schema.verifiedCodes.find(campaign.code);
       campaign.update({
         code: 'AUTOCOUR1',
         organizationId: ENV.APP.AUTONOMOUS_COURSES_ORGANIZATION_ID,
         title: 'Dummy title',
         customLandingPageText: 'Dummy landing page text',
+      });
+      verifiedCode.update({
+        id: campaign.code,
       });
     },
   }),
