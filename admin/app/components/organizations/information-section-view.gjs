@@ -6,7 +6,6 @@ import { concat, get } from '@ember/helper';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { eq } from 'ember-truth-helpers';
 import ENV from 'pix-admin/config/environment';
@@ -16,22 +15,6 @@ export default class OrganizationInformationSection extends Component {
   @service oidcIdentityProviders;
   @service accessControl;
   @service intl;
-  @tracked tags;
-  @tracked hasOrganizationChildren;
-
-  constructor() {
-    super(...arguments);
-    if (this.args.organization.tags) {
-      Promise.resolve(this.args.organization.tags).then((tags) => {
-        this.tags = tags;
-      });
-    }
-    if (this.args.organization.children) {
-      Promise.resolve(this.args.organization.children).then((children) => {
-        this.hasOrganizationChildren = children.length > 0;
-      });
-    }
-  }
 
   get isManagingStudentAvailable() {
     return (
@@ -55,11 +38,21 @@ export default class OrganizationInformationSection extends Component {
     return urlDashboardPrefix && urlDashboardPrefix + this.args.organization.id;
   }
 
+  get hasTags() {
+    const tags = this.args.organization.tags;
+    return tags?.length > 0;
+  }
+
+  get hasChildren() {
+    const children = this.args.organization.children;
+    return children?.length > 0;
+  }
+
   <template>
     <div class="organization__data">
       <h2 class="organization__name">{{@organization.name}}</h2>
 
-      {{#if this.tags}}
+      {{#if this.hasTags}}
         <ul class="organization-tags-list">
           {{#each @organization.tags as |tag|}}
             <li class="organization-tags-list__tag">
@@ -67,34 +60,27 @@ export default class OrganizationInformationSection extends Component {
             </li>
           {{/each}}
         </ul>
-      {{else}}
-        <PixNotificationAlert class="organization-information-section__missing-tags-message" @type="information">Cette
-          organisation n'a pas de tags.
-        </PixNotificationAlert>
       {{/if}}
-      <div class="organization__network-label">
-        {{#if this.hasOrganizationChildren}}
-          <PixTag @color="success">{{t
-              "components.organizations.information-section-view.parent-organization"
-            }}</PixTag>
-        {{/if}}
-        {{#if @organization.parentOrganizationId}}
-          <ul>
-            <li>
-              <PixTag class="organization__child-tag" @color="success">{{t
-                  "components.organizations.information-section-view.child-organization"
-                }}</PixTag>
-            </li>
-            <li>
-              {{t "components.organizations.information-section-view.parent-organization"}}
-              :
-              <LinkTo @route="authenticated.organizations.get" @model={{@organization.parentOrganizationId}}>
-                {{@organization.parentOrganizationName}}
-              </LinkTo>
-            </li>
-          </ul>
-        {{/if}}
-      </div>
+
+      {{#if this.hasChildren}}
+        <div class="organization__network-label">
+          <PixTag @color="success">
+            {{t "components.organizations.information-section-view.parent-organization"}}
+          </PixTag>
+        </div>
+      {{/if}}
+
+      {{#if @organization.parentOrganizationId}}
+        <div class="organization__network-label">
+          <PixTag class="organization__child-tag" @color="success">
+            {{t "components.organizations.information-section-view.child-organization"}}
+            <LinkTo @route="authenticated.organizations.get" @model={{@organization.parentOrganizationId}}>
+              {{@organization.parentOrganizationName}}
+            </LinkTo>
+          </PixTag>
+        </div>
+      {{/if}}
+
       {{#if @organization.isArchived}}
         <PixNotificationAlert class="organization-information-section__archived-message" @type="warning">
           Archivée le

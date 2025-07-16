@@ -261,23 +261,6 @@ module('Integration | Component | organizations/information-section-view', funct
       assert.dom(screen.getByText('AGRICULTURE')).exists();
     });
 
-    module('when organization has no tags', function () {
-      test('it should display an informative message', async function (assert) {
-        // given
-        const store = this.owner.lookup('service:store');
-        const organization = store.createRecord('organization', {
-          archivedAt: null,
-          tags: [],
-        });
-
-        // when
-        const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
-
-        // then
-        assert.dom(screen.getByText("Cette organisation n'a pas de tags.")).exists();
-      });
-    });
-
     module('when organization is archived', function () {
       test('it should display who archived it', async function (assert) {
         // given
@@ -335,8 +318,8 @@ module('Integration | Component | organizations/information-section-view', funct
         const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
 
         // then
-        assert.dom(screen.getByText('Organisation fille')).exists();
-        assert.dom(screen.getByText('Shibusen')).exists();
+        assert.dom(screen.getByText('Organisation fille de')).exists();
+        assert.dom(screen.getByRole('link', { name: 'Shibusen' })).exists();
       });
     });
 

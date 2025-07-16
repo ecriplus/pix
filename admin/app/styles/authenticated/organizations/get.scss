@@ -42,7 +42,10 @@
     }
 
     .organization__child-tag{
-      margin-bottom: var(--pix-spacing-2x);
+      a {
+        color: var(--pix-success-700);
+        text-decoration: underline;
+      }
     }
 
     .organization__data {
