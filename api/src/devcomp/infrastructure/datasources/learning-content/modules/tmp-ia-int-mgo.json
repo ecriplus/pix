@@ -25,7 +25,7 @@
           "element": {
             "id": "2FFCCAB8-92ED-44D2-BF57-5551840265F0",
             "type": "text",
-            "content": "<p>Voici un logiciel d’IA générative de texte. ✨<br>Observez ses réponses à différents prompts. 🔍</p>"
+            "content": "<p>Voici Pix IA, un logiciel d’IA générative de texte. ✨<br>Testez et observez ses réponses à différents prompts. 🔍</p>"
           }
         },
         {
@@ -41,30 +41,30 @@
           "element": {
             "id": "cc7708a8-c68a-44a9-ac54-6f1d5b1b6f4e",
             "type": "qcu-declarative",
-            "instruction": "<p>Qu’est ce qui vous paraît le plus remarquable à propos de ce logiciel ?</p>",
+            "instruction": "<p>Qu’est-ce qui vous paraît le plus remarquable à propos de ce logiciel d'IA générative de texte ?</p>",
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>il a l’air incollable</p>",
+                "content": "<p>Il a l’air incollable.</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Effectivement, il est capable de répondre de façon pertinente sur des sujets très divers ! On peut aussi remarquer qu'il est possible de poser des questions et d'obtenir des réponses comme si on discutait avec un humain. 💬 </p>"
+                  "diagnosis": "<p>Effectivement, ce logiciel d'IA générative est capable de répondre de façon pertinente sur des sujets très divers ! On peut aussi remarquer qu'il est possible de lui poser des questions et d'obtenir des réponses comme si on discutait avec un humain. 💬 </p>"
                 }
               },
               {
                 "id": "2",
-                "content": "<p>il s’exprime comme un humain</p>",
+                "content": "<p>Il s’exprime comme un humain.</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Effectivement, on pourrait penser qu'on discute avec un humain ! On peut aussi remarquer que les réponses sont pertinentes sur des sujets très divers. 🏊‍♀️ </p>"
+                  "diagnosis": "<p>Effectivement, on pourrait penser qu'on discute avec un humain ! On peut aussi remarquer que ses réponses sont pertinentes sur des sujets très divers. 🏊‍♀️ </p>"
                 }
               },
               {
                 "id": "3",
-                "content": "<p>je n’en pense rien de particulier</p>",
+                "content": "<p>Je ne sais pas.</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Le logiciel permet de discuter comme on le ferait avec un humain. On remarque aussi que les réponses sont pertinentes sur des sujets très variés.</p>"
+                  "diagnosis": "<p>Ce logiciel d'IA générative permet de discuter comme on le ferait avec un humain. On remarque aussi que les réponses sont pertinentes sur des sujets très variés.</p>"
                 }
               }
             ]
@@ -82,7 +82,7 @@
           "element": {
             "id": "4d4f3ac6-99e0-417c-9a5c-38fc11487264",
             "type": "text",
-            "content": "<p>Une IA générative parvient à <strong>simuler une discussion</strong> comme un humain qui aurait réponse à tout. 🤓<br>Comment a-t-elle appris à faire cela ? C’est ce que nous allons découvrir ensemble.</p>"
+            "content": "<p>Une IA générative parvient à <strong>simuler une discussion</strong> comme un humain qui aurait réponse à tout. 🤓<br>Comment a-t-elle appris à le faire ? C’est ce que nous allons découvrir ensemble.</p>"
           }
         }
       ]
