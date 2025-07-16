@@ -1,7 +1,8 @@
 import _ from 'lodash';
 
+import { PIX_ADMIN } from '../../../authorization/domain/constants.js';
 import { config } from '../../../shared/config.js';
-import { GarAuthenticationMethodAnonymized } from '../models/GarAuthenticationMethodAnonymized.js';
+import { EventLoggingJob } from '../../../shared/domain/models/jobs/EventLoggingJob.js';
 
 const USER_IDS_BATCH_SIZE = 1000;
 
@@ -10,7 +11,7 @@ const USER_IDS_BATCH_SIZE = 1000;
  * @param {Object} params
  * @param {Array<string>} params.userIds
  * @param {AuthenticationMethodRepository} params.authenticationMethodRepository
- * @param {garAnonymizedBatchEventsLoggingJobRepository} params.garAnonymizedBatchEventsLoggingJobRepository
+ * @param {EventLoggingJobRepository} params.eventLoggingJobRepository
  * @return {Promise<{garAnonymizedUserCount: number, total: number}>}
  */
 export const anonymizeGarAuthenticationMethods = async function ({
@@ -18,7 +19,7 @@ export const anonymizeGarAuthenticationMethods = async function ({
   userIdsBatchSize = USER_IDS_BATCH_SIZE,
   adminMemberId,
   authenticationMethodRepository,
-  garAnonymizedBatchEventsLoggingJobRepository,
+  eventLoggingJobRepository,
 }) {
   const userIdBatches = _.chunk(userIds, userIdsBatchSize);
 
@@ -28,13 +29,16 @@ export const anonymizeGarAuthenticationMethods = async function ({
     const { garAnonymizedUserIds } = await authenticationMethodRepository.anonymizeByUserIds({ userIds: userIdsBatch });
     garAnonymizedUserCount += garAnonymizedUserIds.length;
 
-    if (config.auditLogger.isEnabled) {
-      const payload = new GarAuthenticationMethodAnonymized({
-        userIds: garAnonymizedUserIds,
-        updatedByUserId: adminMemberId,
-      });
-
-      await garAnonymizedBatchEventsLoggingJobRepository.performAsync(payload);
+    if (config.auditLogger.isEnabled && garAnonymizedUserIds?.length > 0) {
+      await eventLoggingJobRepository.performAsync(
+        new EventLoggingJob({
+          client: 'PIX_ADMIN',
+          action: 'ANONYMIZATION_GAR',
+          targetUserIds: garAnonymizedUserIds,
+          userId: adminMemberId,
+          role: PIX_ADMIN.ROLES.SUPER_ADMIN,
+        }),
+      );
     }
   }
 
