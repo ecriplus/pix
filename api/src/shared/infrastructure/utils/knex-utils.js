@@ -65,19 +65,4 @@ function foreignKeyConstraintViolated(err) {
   return err.code === PGSQL_FK_CONSTRAINT;
 }
 
-function getChunkSizeForParameterBinding(objectAboutToBeBinded) {
-  // PostgreSQL allows a maximum of 65536 binded parameters in prepared statements
-  const MAX_BINDED_PARAMS_PG = 65536;
-  if (objectAboutToBeBinded) {
-    return Math.floor(MAX_BINDED_PARAMS_PG / Object.keys(objectAboutToBeBinded).length);
-  }
-  return MAX_BINDED_PARAMS_PG;
-}
-
-export {
-  DEFAULT_PAGINATION,
-  fetchPage,
-  foreignKeyConstraintViolated,
-  getChunkSizeForParameterBinding,
-  isUniqConstraintViolated,
-};
+export { DEFAULT_PAGINATION, fetchPage, foreignKeyConstraintViolated, isUniqConstraintViolated };
