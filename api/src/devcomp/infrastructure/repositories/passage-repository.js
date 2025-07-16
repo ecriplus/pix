@@ -16,6 +16,13 @@ const save = async ({ moduleId, userId }) => {
   return _toDomain(passage);
 };
 
+const findAllByUserIdAndModuleIds = async ({ moduleIds, userId }) => {
+  const knexConn = DomainTransaction.getConnection();
+  const passages = await knexConn('passages').where({ userId }).whereIn('moduleId', moduleIds);
+
+  return passages.map(_toDomain);
+};
+
 const get = async ({ passageId }) => {
   const knexConn = DomainTransaction.getConnection();
   const passage = await knexConn('passages').where({ id: passageId }).first();
@@ -43,4 +50,4 @@ function _toDomain({ id, moduleId, userId, createdAt, updatedAt, terminatedAt })
   return new Passage({ id, moduleId, userId, createdAt, updatedAt, terminatedAt });
 }
 
-export { get, save, update };
+export { findAllByUserIdAndModuleIds, get, save, update };

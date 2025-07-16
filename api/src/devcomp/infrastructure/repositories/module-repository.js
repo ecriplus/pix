@@ -6,6 +6,19 @@ import { ModuleFactory } from '../factories/module-factory.js';
 
 const memoizedModuleVersions = new Map();
 
+async function getAllByIds({ ids, moduleDatasource }) {
+  try {
+    const modules = await moduleDatasource.getAllByIds(ids);
+
+    return modules.map((moduleData) => {
+      const version = _computeModuleVersion(moduleData);
+      return ModuleFactory.build({ ...moduleData, version });
+    });
+  } catch (error) {
+    throw new NotFoundError(error.message);
+  }
+}
+
 async function getById({ id, moduleDatasource }) {
   return await _getModule({ ref: 'id', moduleDatasource, query: id });
 }
@@ -19,7 +32,11 @@ async function list({ moduleDatasource }) {
   return modulesData.map((moduleData) => ModuleFactory.build(moduleData));
 }
 
-export { getById, getBySlug, list };
+function resetMemoizedModuleVersions() {
+  memoizedModuleVersions.clear();
+}
+
+export { getAllByIds, getById, getBySlug, list, resetMemoizedModuleVersions };
 
 function _computeModuleVersion(moduleData) {
   if (!memoizedModuleVersions.has(moduleData.slug)) {

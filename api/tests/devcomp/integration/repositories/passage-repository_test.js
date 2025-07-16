@@ -148,4 +148,30 @@ describe('Integration | DevComp | Repositories | PassageRepository', function ()
       });
     });
   });
+
+  describe('#findAllByUserIdAndModuleIds', function () {
+    it('should return passage matching userId and ids of modules', async function () {
+      // given
+      const moduleIds = ['moduleId1', 'moduleId2'];
+      const otherModuleId = 'moduleId3';
+      const { id: userId } = databaseBuilder.factory.buildUser();
+      databaseBuilder.factory.buildPassage({ moduleId: moduleIds[0], userId });
+      databaseBuilder.factory.buildPassage({ moduleId: moduleIds[1], userId });
+      databaseBuilder.factory.buildPassage({ moduleId: otherModuleId, userId });
+
+      await databaseBuilder.commit();
+
+      // when
+      const passages = await passageRepository.findAllByUserIdAndModuleIds({ userId, moduleIds });
+
+      // then
+      const passageModuleIds = passages.map((passage) => passage.moduleId);
+
+      expect(passages).to.have.lengthOf(2);
+      passages.forEach((passage) => {
+        expect(passage.userId).to.equal(userId);
+      });
+      expect(passageModuleIds).to.deep.contains.members(moduleIds);
+    });
+  });
 });

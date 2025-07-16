@@ -3,10 +3,23 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { LearningContentResourceNotFound } from '../../../../shared/domain/errors.js';
+import { ModuleDoesNotExistError } from '../../../domain/errors.js';
 
 const referential = await importModules();
 
 const moduleDatasource = {
+  getAllByIds: async (ids) => {
+    const modules = referential.modules.filter((module) => ids.includes(module.id));
+
+    const foundModulesIds = modules.map((module) => module.id);
+    const notFoundModulesIds = ids.filter((id) => !foundModulesIds.includes(id));
+
+    if (notFoundModulesIds.length > 0) {
+      throw new ModuleDoesNotExistError(`Ids with no module: ${notFoundModulesIds}`);
+    }
+
+    return modules;
+  },
   getById: async (id) => {
     const foundModule = referential.modules.find((module) => module.id === id);
 
