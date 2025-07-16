@@ -10,7 +10,7 @@ const findPaginatedFiltered = async function ({ filter, page }) {
     .orderBy('internalName', 'ASC')
     .modify(_applyFilters, filter);
 
-  const { results, pagination } = await fetchPage(query, page);
+  const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
 
   const targetProfileSummaries = results.map((attributes) => new TargetProfileSummaryForAdmin(attributes));
   return { models: targetProfileSummaries, meta: { ...pagination } };

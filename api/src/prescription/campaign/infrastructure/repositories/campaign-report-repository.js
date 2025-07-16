@@ -126,7 +126,7 @@ const findPaginatedFilteredByOrganizationId = async function ({ organizationId, 
     .modify(_setSearchFiltersForQueryBuilder, filter, userId)
     .orderBy('campaigns.createdAt', 'DESC');
 
-  const { results, pagination } = await fetchPage(query, page);
+  const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
   const atLeastOneCampaign = await knex('campaigns')
     .select('id')
     .where({ organizationId })

@@ -160,7 +160,7 @@ const findPaginatedFilteredSupParticipants = async function ({ organizationId, f
     .orderBy(orderByClause)
     .modify(_setFilters, filter);
 
-  const { results, pagination } = await fetchPage(query, page);
+  const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
   const supOrganizationParticipants = results.map((result) => {
     return new SupOrganizationParticipant({ ...result });
   });

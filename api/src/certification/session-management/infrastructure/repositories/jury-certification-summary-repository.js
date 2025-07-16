@@ -21,7 +21,10 @@ const findBySessionId = async function ({ sessionId }) {
 const findBySessionIdPaginated = async function ({ page, sessionId }) {
   const query = _getCertificationCoursesIdBySessionIdQuery(sessionId);
 
-  const { results: orderedCertificationCourseIdsInObjects, pagination } = await fetchPage(query, page);
+  const { results: orderedCertificationCourseIdsInObjects, pagination } = await fetchPage({
+    queryBuilder: query,
+    paginationParams: page,
+  });
 
   const orderedCertificationCourseIds = orderedCertificationCourseIdsInObjects.map((obj) => obj.id);
   const orderedResults = await _getByCertificationCourseIds(orderedCertificationCourseIds);

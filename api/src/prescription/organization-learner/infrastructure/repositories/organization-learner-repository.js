@@ -110,7 +110,7 @@ async function findPaginatedLearners({ organizationId, page, filter }) {
     }
   }
 
-  const { results, pagination } = await fetchPage(query, page);
+  const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
 
   const learners = results.map((learner) => new OrganizationLearner(learner));
 

@@ -206,7 +206,7 @@ const findPaginatedFilteredScoParticipants = async function ({ organizationId, f
     .modify(_setFilters, filter)
     .orderBy(orderByClause);
 
-  const { results, pagination } = await fetchPage(query, page);
+  const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
 
   const scoOrganizationParticipants = results.map((result) => {
     return new ScoOrganizationParticipant({

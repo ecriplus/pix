@@ -13,7 +13,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
       // when
       const query = knex.select('name').from('campaigns').orderBy('name', 'ASC');
-      const { results, pagination } = await fetchPage(query, { number: 2, size: 2 });
+      const { results, pagination } = await fetchPage({
+        queryBuilder: query,
+        paginationParams: { number: 2, size: 2 },
+      });
 
       // then
       expect(results).to.have.lengthOf(2);
@@ -36,7 +39,9 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
       // when
       const query = knex.distinct('name').from('campaigns');
-      const { results, pagination } = await fetchPage(query);
+      const { results, pagination } = await fetchPage({
+        queryBuilder: query,
+      });
 
       // then
       expect(results).to.have.lengthOf(2);
@@ -55,7 +60,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.not.be.empty;
@@ -72,7 +80,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.be.empty;
@@ -89,7 +100,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.not.be.empty;
@@ -105,7 +119,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { size: pageSize },
+        });
 
         // then
         expect(results).to.not.be.empty;
@@ -124,7 +141,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.have.lengthOf(pageSize);
@@ -141,7 +161,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.have.lengthOf(total);
@@ -158,7 +181,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.be.empty;
@@ -174,7 +200,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber },
+        });
 
         // then
         expect(results).to.have.lengthOf(pagination.pageSize);
@@ -193,7 +222,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.not.be.empty;
@@ -210,7 +242,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.be.empty;
@@ -229,7 +264,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.not.be.empty;
@@ -246,7 +284,10 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.not.be.empty;
@@ -263,11 +304,185 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('name').from('campaigns');
-        const { results, pagination } = await fetchPage(query, { number: pageNumber, size: pageSize });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: pageNumber, size: pageSize },
+        });
 
         // then
         expect(results).to.be.empty;
         expect(pagination.pageCount).to.equal(2);
+      });
+    });
+
+    context('transaction compliant', function () {
+      it('should use the transaction given in parameters', async function () {
+        // given
+        _.times(10, (index) => databaseBuilder.factory.buildFeature({ key: `feature-${index}` }));
+        await databaseBuilder.commit();
+        let hasReachedEndOfTest = false;
+        try {
+          await knex.transaction(async (trx) => {
+            await trx('features').insert([
+              {
+                key: 'z_autreFeature1',
+              },
+              {
+                key: 'z_autreFeature2',
+              },
+              {
+                key: 'z_autreFeature3',
+              },
+            ]);
+
+            // when
+            const queryForTrx = knex.select('key').from('features').orderBy('key');
+            const { results: resultsInTrx, pagination: paginationInTrx } = await fetchPage({
+              queryBuilder: queryForTrx,
+              paginationParams: { number: 3, size: 5 },
+              trx,
+            });
+            const queryOutsideTrx = knex.select('key').from('features').orderBy('key');
+            const { results: resultsOutsideTrx, pagination: paginationOutsideTrx } = await fetchPage({
+              queryBuilder: queryOutsideTrx,
+              paginationParams: { number: 3, size: 5 },
+            });
+            expect(resultsInTrx, 'results within the transaction').to.deep.equal([
+              { key: 'z_autreFeature1' },
+              { key: 'z_autreFeature2' },
+              { key: 'z_autreFeature3' },
+            ]);
+            expect(paginationInTrx).to.deep.equal({
+              page: 3,
+              pageSize: 5,
+              rowCount: 10 + 3,
+              pageCount: 3,
+            });
+            expect(resultsOutsideTrx, 'results outside the transaction').to.be.empty;
+            expect(paginationOutsideTrx).to.deep.equal({
+              page: 3,
+              pageSize: 5,
+              rowCount: 10,
+              pageCount: 2,
+            });
+            hasReachedEndOfTest = true;
+          });
+        } catch (err) {
+          if (!hasReachedEndOfTest) {
+            throw err;
+          }
+        }
+      });
+    });
+
+    context('custom count query builder', function () {
+      it('should use the custom query builder to count rows', async function () {
+        // Deliberately dumb request
+        // Asking for features, but returning the count of organizations
+        // given
+        _.times(10, (index) => databaseBuilder.factory.buildFeature({ key: `feature-${index}` }));
+        _.times(20, (index) => databaseBuilder.factory.buildOrganization({ name: `orga-${index}` }));
+        await databaseBuilder.commit();
+
+        // when
+        const query = knex.select('key').from('features').orderBy('key');
+        const countQuery = knex('organizations').count('*', { as: 'row_count' });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: 1, size: 5 },
+          countQueryBuilder: countQuery,
+        });
+
+        // then
+        expect(results).to.deep.equal([
+          { key: 'feature-0' },
+          { key: 'feature-1' },
+          { key: 'feature-2' },
+          { key: 'feature-3' },
+          { key: 'feature-4' },
+        ]);
+        expect(pagination).to.deep.equal({
+          page: 1,
+          pageSize: 5,
+          rowCount: 20,
+          pageCount: 4,
+        });
+      });
+    });
+
+    context('transaction + custom count query builder', function () {
+      it('should use the transaction given in parameters also for the custom count query builder', async function () {
+        // Deliberately dumb request
+        // Asking for features, but returning the count of attestations
+        // given
+        _.times(5, (index) => databaseBuilder.factory.buildFeature({ key: `feature-${index}` }));
+        _.times(10, (index) => databaseBuilder.factory.buildAttestation({ key: `attestation-${index}` }));
+        await databaseBuilder.commit();
+        let hasReachedEndOfTest = false;
+        try {
+          await knex.transaction(async (trx) => {
+            await trx('features').insert([
+              {
+                key: 'z_autreFeature1',
+              },
+              {
+                key: 'z_autreFeature2',
+              },
+              {
+                key: 'z_autreFeature3',
+              },
+            ]);
+            await trx('attestations').insert([
+              {
+                key: 'autreAttestation1',
+              },
+              {
+                key: 'autreAttestation2',
+              },
+              {
+                key: 'autreAttestation3',
+              },
+            ]);
+            const queryInTrx = knex.select('key').from('features').orderBy('key');
+            const countQueryBuilderInTrx = knex('attestations').count('*', { as: 'row_count' });
+            const { results: resultsInTrx, pagination: paginationInTrx } = await fetchPage({
+              queryBuilder: queryInTrx,
+              paginationParams: { number: 2, size: 5 },
+              trx,
+              countQueryBuilder: countQueryBuilderInTrx,
+            });
+            const queryOutsideTrx = knex.select('key').from('features').orderBy('key');
+            const countQueryBuilderOutsideTrx = knex('attestations').count('*', { as: 'row_count' });
+            const { results: resultsOutsideTrx, pagination: paginationOutsideTrx } = await fetchPage({
+              queryBuilder: queryOutsideTrx,
+              paginationParams: { number: 2, size: 5 },
+              countQueryBuilder: countQueryBuilderOutsideTrx,
+            });
+            expect(resultsInTrx, 'results within the transaction for page 2').to.deep.equal([
+              { key: 'z_autreFeature1' },
+              { key: 'z_autreFeature2' },
+              { key: 'z_autreFeature3' },
+            ]);
+            expect(paginationInTrx).to.deep.equal({
+              page: 2,
+              pageSize: 5,
+              rowCount: 10 + 3, // attestations count in trx
+              pageCount: 3,
+            });
+            expect(resultsOutsideTrx, 'results outside the transaction').to.be.empty;
+            expect(paginationOutsideTrx).to.deep.equal({
+              page: 2,
+              pageSize: 5,
+              rowCount: 10, // attestations count really in DB now
+              pageCount: 2,
+            });
+            hasReachedEndOfTest = true;
+          });
+        } catch (err) {
+          if (!hasReachedEndOfTest) {
+            throw err;
+          }
+        }
       });
     });
   });

@@ -61,7 +61,10 @@ async function findPaginatedSummaries({ filter, page }) {
     )
     .orderBy('trainings.id', 'asc')
     .modify(_applyFilters, filter);
-  const { results, pagination } = await fetchPage(query, page);
+  const { results, pagination } = await fetchPage({
+    queryBuilder: query,
+    paginationParams: page,
+  });
 
   const trainingTriggers = await knexConn('training-triggers').whereIn(
     'trainingId',
@@ -94,7 +97,7 @@ async function findPaginatedSummariesByTargetProfileId({ targetProfileId, page }
     .where({ 'target-profile-trainings.targetProfileId': targetProfileId })
     .orderBy('id', 'asc');
 
-  const { results, pagination } = await fetchPage(query, page);
+  const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
 
   const trainingTriggers = await knexConn('training-triggers').whereIn(
     'trainingId',
@@ -182,7 +185,7 @@ async function findPaginatedByUserId({ userId, locale, page }) {
     .join(USER_RECOMMENDED_TRAININGS_TABLE_NAME, 'trainings.id', 'trainingId')
     .where({ userId, locale, isDisabled: false })
     .orderBy('id', 'asc');
-  const { results, pagination } = await fetchPage(query, page);
+  const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
 
   const userRecommendedTrainings = results.map(
     (userRecommendedTraining) => new UserRecommendedTraining(userRecommendedTraining),

@@ -180,7 +180,10 @@ const findInfoByCampaignId = async function ({ campaignId, page, since }) {
     });
   }
 
-  const { results, pagination } = await fetchPage(query, page);
+  const { results, pagination } = await fetchPage({
+    queryBuilder: query,
+    paginationParams: page,
+  });
 
   return { models: results.map(_rowToResult), meta: pagination };
 };

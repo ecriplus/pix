@@ -256,7 +256,10 @@ const findPaginatedFiltered = async function ({ filter, page }) {
     .modify(_setSearchFiltersForQueryBuilder, filter)
     .orderBy('name', 'ASC');
 
-  const { results, pagination } = await fetchPage(query, page);
+  const { results, pagination } = await fetchPage({
+    queryBuilder: query,
+    paginationParams: page,
+  });
   const organizations = results.map((model) => _toDomain(model));
   return { models: organizations, pagination };
 };

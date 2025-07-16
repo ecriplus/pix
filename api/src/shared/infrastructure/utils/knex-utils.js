@@ -7,27 +7,40 @@ const DEFAULT_PAGINATION = {
 
 /**
  * Paginate a knex query with given page parameters
- * @param {*} queryBuilder - a knex query builder
- * @param {Object} page - page parameters
- * @param {Number} page.number - the page number to retrieve
- * @param {Number} page.size - the size of the page
+ * @param {object} params
+ * @param {object} params.queryBuilder - a knex query builder
+ * @param {object} params.paginationParams
+ * @param {Number} params.paginationParams.number - the page number to retrieve
+ * @param {Number} params.paginationParams.size - the size of the page
+ * @param {object|null} params.trx - transaction to use
+ * @param {object|null} params.countQueryBuilder - a knex query builder that counts the total number of rows, bypassing the default one
  */
-const fetchPage = async (
+const fetchPage = async ({
   queryBuilder,
-  { number = DEFAULT_PAGINATION.PAGE, size = DEFAULT_PAGINATION.PAGE_SIZE } = {},
-  countRequestBuilder = undefined,
-) => {
+  paginationParams: { number = DEFAULT_PAGINATION.PAGE, size = DEFAULT_PAGINATION.PAGE_SIZE } = {},
+  trx = null,
+  countQueryBuilder = null,
+}) => {
   const page = number < 1 ? 1 : number;
   const offset = (page - 1) * size;
 
-  const countExecutor = countRequestBuilder
-    ? countRequestBuilder
-    : knex.count('*', { as: 'rowCount' }).from(queryBuilder.clone().as('query_all_results'));
+  const defaultCountQueryBuilder = knex
+    .count('*', { as: 'row_count' })
+    .from(queryBuilder.clone().as('query_all_results'));
+  const finalCountQueryBuilder = countQueryBuilder || defaultCountQueryBuilder;
 
   // we cannot execute the query and count the total rows at the same time
   // because it would not work when there are DISTINCT selection in the SELECT clause
-  const { rowCount } = await countExecutor.first();
-  const results = await queryBuilder.limit(size).offset(offset);
+  let results, rowCount;
+  if (trx) {
+    results = await queryBuilder.limit(size).offset(offset).transacting(trx);
+    const { row_count } = await finalCountQueryBuilder.transacting(trx).first();
+    rowCount = row_count;
+  } else {
+    results = await queryBuilder.limit(size).offset(offset);
+    const { row_count } = await finalCountQueryBuilder.first();
+    rowCount = row_count;
+  }
 
   return {
     results,
@@ -52,19 +65,4 @@ function foreignKeyConstraintViolated(err) {
   return err.code === PGSQL_FK_CONSTRAINT;
 }
 
-function getChunkSizeForParameterBinding(objectAboutToBeBinded) {
-  // PostgreSQL allows a maximum of 65536 binded parameters in prepared statements
-  const MAX_BINDED_PARAMS_PG = 65536;
-  if (objectAboutToBeBinded) {
-    return Math.floor(MAX_BINDED_PARAMS_PG / Object.keys(objectAboutToBeBinded).length);
-  }
-  return MAX_BINDED_PARAMS_PG;
-}
-
-export {
-  DEFAULT_PAGINATION,
-  fetchPage,
-  foreignKeyConstraintViolated,
-  getChunkSizeForParameterBinding,
-  isUniqConstraintViolated,
-};
+export { DEFAULT_PAGINATION, fetchPage, foreignKeyConstraintViolated, isUniqConstraintViolated };
