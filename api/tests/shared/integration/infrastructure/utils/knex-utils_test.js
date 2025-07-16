@@ -318,60 +318,60 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
     context('transaction compliant', function () {
       it('should use the transaction given in parameters', async function () {
         // given
-        const total = 10;
-        _.times(total, (index) => databaseBuilder.factory.buildFeature({ key: `c-${index}` }));
+        _.times(10, (index) => databaseBuilder.factory.buildFeature({ key: `feature-${index}` }));
         await databaseBuilder.commit();
-        let hasRollbackProperly = false;
+        let hasReachedEndOfTest = false;
         try {
           await knex.transaction(async (trx) => {
             await trx('features').insert([
               {
-                key: 'autreFeature1',
+                key: 'z_autreFeature1',
               },
               {
-                key: 'autreFeature2',
+                key: 'z_autreFeature2',
               },
               {
-                key: 'autreFeature3',
+                key: 'z_autreFeature3',
               },
             ]);
-            const query = knex.select('key').from('features');
-            const { results, pagination } = await fetchPage({
-              queryBuilder: query,
+
+            // when
+            const queryForTrx = knex.select('key').from('features').orderBy('key');
+            const { results: resultsInTrx, pagination: paginationInTrx } = await fetchPage({
+              queryBuilder: queryForTrx,
               paginationParams: { number: 3, size: 5 },
               trx,
             });
-            expect(results, 'results within the transaction, before rollback').to.have.length(3);
-            expect(pagination).to.deep.equal({
+            const queryOutsideTrx = knex.select('key').from('features').orderBy('key');
+            const { results: resultsOutsideTrx, pagination: paginationOutsideTrx } = await fetchPage({
+              queryBuilder: queryOutsideTrx,
+              paginationParams: { number: 3, size: 5 },
+            });
+            expect(resultsInTrx, 'results within the transaction').to.deep.equal([
+              { key: 'z_autreFeature1' },
+              { key: 'z_autreFeature2' },
+              { key: 'z_autreFeature3' },
+            ]);
+            expect(paginationInTrx).to.deep.equal({
               page: 3,
               pageSize: 5,
               rowCount: 10 + 3,
               pageCount: 3,
             });
-            hasRollbackProperly = true;
-            throw new Error('rollback');
+            expect(resultsOutsideTrx, 'results outside the transaction').to.be.empty;
+            expect(paginationOutsideTrx).to.deep.equal({
+              page: 3,
+              pageSize: 5,
+              rowCount: 10,
+              pageCount: 2,
+            });
+            hasReachedEndOfTest = true;
           });
         } catch (err) {
-          if (!hasRollbackProperly) {
+          if (!hasReachedEndOfTest) {
             throw err;
           }
         }
-
-        // when
-        const query = knex.select('key').from('features');
-        const { results, pagination } = await fetchPage({
-          queryBuilder: query,
-          paginationParams: { number: 3, size: 5 },
-        });
-
-        // then
-        expect(results, 'results outside the transaction').to.be.empty;
-        expect(pagination).to.deep.equal({
-          page: 3,
-          pageSize: 5,
-          rowCount: 10,
-          pageCount: 2,
-        });
       });
     });
 
@@ -418,7 +418,7 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
         _.times(5, (index) => databaseBuilder.factory.buildFeature({ key: `feature-${index}` }));
         _.times(10, (index) => databaseBuilder.factory.buildAttestation({ key: `attestation-${index}` }));
         await databaseBuilder.commit();
-        let hasRollbackProperly = false;
+        let hasReachedEndOfTest = false;
         try {
           await knex.transaction(async (trx) => {
             await trx('features').insert([
@@ -443,52 +443,46 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
                 key: 'autreAttestation3',
               },
             ]);
-            const query = knex.select('key').from('features').orderBy('key');
-            const countQueryBuilder = knex('attestations').count('*', { as: 'row_count' });
-            const { results, pagination } = await fetchPage({
-              queryBuilder: query,
+            const queryInTrx = knex.select('key').from('features').orderBy('key');
+            const countQueryBuilderInTrx = knex('attestations').count('*', { as: 'row_count' });
+            const { results: resultsInTrx, pagination: paginationInTrx } = await fetchPage({
+              queryBuilder: queryInTrx,
               paginationParams: { number: 2, size: 5 },
               trx,
-              countQueryBuilder,
+              countQueryBuilder: countQueryBuilderInTrx,
             });
-            expect(results, 'results within the transaction for page 2, before rollback').to.deep.equal([
+            const queryOutsideTrx = knex.select('key').from('features').orderBy('key');
+            const countQueryBuilderOutsideTrx = knex('attestations').count('*', { as: 'row_count' });
+            const { results: resultsOutsideTrx, pagination: paginationOutsideTrx } = await fetchPage({
+              queryBuilder: queryOutsideTrx,
+              paginationParams: { number: 2, size: 5 },
+              countQueryBuilder: countQueryBuilderOutsideTrx,
+            });
+            expect(resultsInTrx, 'results within the transaction for page 2').to.deep.equal([
               { key: 'z_autreFeature1' },
               { key: 'z_autreFeature2' },
               { key: 'z_autreFeature3' },
             ]);
-            expect(results, 'results within the transaction, before rollback').to.have.length(3);
-            expect(pagination).to.deep.equal({
+            expect(paginationInTrx).to.deep.equal({
               page: 2,
               pageSize: 5,
               rowCount: 10 + 3, // attestations count in trx
               pageCount: 3,
             });
-            hasRollbackProperly = true;
-            throw new Error('rollback');
+            expect(resultsOutsideTrx, 'results outside the transaction').to.be.empty;
+            expect(paginationOutsideTrx).to.deep.equal({
+              page: 2,
+              pageSize: 5,
+              rowCount: 10, // attestations count really in DB now
+              pageCount: 2,
+            });
+            hasReachedEndOfTest = true;
           });
         } catch (err) {
-          if (!hasRollbackProperly) {
+          if (!hasReachedEndOfTest) {
             throw err;
           }
         }
-
-        // when
-        const query = knex.select('key').from('features').orderBy('key');
-        const countQueryBuilder = knex('attestations').count('*', { as: 'row_count' });
-        const { results, pagination } = await fetchPage({
-          queryBuilder: query,
-          paginationParams: { number: 2, size: 5 },
-          countQueryBuilder,
-        });
-
-        // then
-        expect(results, 'results outside the transaction').to.be.empty;
-        expect(pagination).to.deep.equal({
-          page: 2,
-          pageSize: 5,
-          rowCount: 10, // attestations count really in DB now
-          pageCount: 2,
-        });
       });
     });
   });

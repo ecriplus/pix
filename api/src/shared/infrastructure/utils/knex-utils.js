@@ -47,7 +47,7 @@ const fetchPage = async ({
     pagination: {
       page,
       pageSize: size,
-      rowCount: rowCount,
+      rowCount,
       pageCount: Math.ceil(rowCount / size),
     },
   };
