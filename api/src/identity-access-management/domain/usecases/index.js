@@ -35,7 +35,6 @@ import * as authenticationMethodRepository from '../../infrastructure/repositori
 import * as certificationPointOfContactRepository from '../../infrastructure/repositories/certification-point-of-contact.repository.js';
 import { clientApplicationRepository } from '../../infrastructure/repositories/client-application.repository.js';
 import { emailValidationDemandRepository } from '../../infrastructure/repositories/email-validation-demand.repository.js';
-import { garAnonymizedBatchEventsLoggingJobRepository } from '../../infrastructure/repositories/jobs/gar-anonymized-batch-events-logging-job-repository.js';
 import { lastUserApplicationConnectionsRepository } from '../../infrastructure/repositories/last-user-application-connections.repository.js';
 import { legalDocumentApiRepository } from '../../infrastructure/repositories/legal-document-api.repository.js';
 import { ltiPlatformRegistrationRepository } from '../../infrastructure/repositories/lti-platform-registration.repository.js';
@@ -88,7 +87,6 @@ const repositories = {
   userRecommendedTrainingRepository,
   userRepository,
   userToCreateRepository,
-  garAnonymizedBatchEventsLoggingJobRepository,
 };
 const services = {
   authenticationSessionService,
