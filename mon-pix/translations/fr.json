@@ -1722,6 +1722,9 @@
           "summary": "Récap'"
         }
       },
+      "interactiveElement": {
+        "label": "Élément interactif"
+      },
       "modals": {
         "alternativeText": {
           "title": "Alternative textuelle"

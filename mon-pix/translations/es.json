@@ -1708,6 +1708,9 @@
           "summary": "Recapitular"
         }
       },
+      "interactiveElement": {
+        "label": "Elemento interactivo"
+      },
       "modals": {
         "alternativeText": {
           "title": "Texto alternativo"

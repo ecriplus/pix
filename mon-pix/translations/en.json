@@ -1722,6 +1722,9 @@
           "summary": "Summary"
         }
       },
+      "interactiveElement": {
+        "label": "Interactive element"
+      },
       "modals": {
         "alternativeText": {
           "title": "Alternative text"
