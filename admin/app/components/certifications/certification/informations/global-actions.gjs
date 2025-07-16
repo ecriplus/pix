@@ -5,11 +5,14 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { t } from 'ember-intl';
 
 import ConfirmPopup from '../../../confirm-popup';
 
 export default class CertificationInformationGlobalActions extends Component {
   @service pixToast;
+  @service store;
+  @service intl;
 
   @tracked confirmAction = this.onCancelCertificationConfirmation;
   @tracked confirmErrorMessage = '';
@@ -39,6 +42,10 @@ export default class CertificationInformationGlobalActions extends Component {
 
   get displayUnrejectCertificationButton() {
     return this.args.certification.status === 'rejected' && this.args.certification.isRejectedForFraud;
+  }
+
+  get displayRescoringCertificationButton() {
+    return Boolean(!this.args.certification.isPublished && this.args.session.finalizedAt);
   }
 
   @action
@@ -130,6 +137,24 @@ export default class CertificationInformationGlobalActions extends Component {
     this.displayConfirm = true;
   }
 
+  @action
+  async rescoreCertification() {
+    try {
+      const adapter = this.store.adapterFor('certification');
+      await adapter.rescoreCertification({
+        certificationCourseId: this.args.certification.id,
+      });
+      this.pixToast.sendSuccessNotification({
+        message: this.intl.t('components.certifications.global-actions.rescoring.success-message'),
+      });
+      await this.args.certification.reload();
+    } catch {
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t('components.certifications.global-actions.rescoring.error-message'),
+      });
+    }
+  }
+
   <template>
     <PixButtonLink @route="authenticated.users.get" @size="small" @model={{@certification.userId}}>
       Voir les détails de l'utilisateur
@@ -175,6 +200,11 @@ export default class CertificationInformationGlobalActions extends Component {
             Rejeter la certification
           </PixButton>
         {{/if}}
+      {{/if}}
+      {{#if this.displayRescoringCertificationButton}}
+        <PixButton @size="small" @triggerAction={{this.rescoreCertification}}>
+          {{t "components.certifications.global-actions.rescoring.button"}}
+        </PixButton>
       {{/if}}
     </div>
 

@@ -409,6 +409,10 @@ function routes() {
   this.post('/admin/trainings/:id/duplicate', duplicateTraining);
 
   this.get('/admin/certifications/:id');
+  this.post('/admin/certifications/:id/rescore', () => {
+    return new Response(201);
+  });
+
   this.get('/admin/certifications/:id/certified-profile', (schema, request) => {
     const id = request.params.id;
     return schema.certifiedProfiles.find(id);

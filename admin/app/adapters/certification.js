@@ -33,6 +33,11 @@ export default class Certification extends ApplicationAdapter {
     return `${this.host}/${this.namespace}/admin/complementary-certification-course-results`;
   }
 
+  rescoreCertification({ certificationCourseId }) {
+    const path = `${this.host}/${this.namespace}/admin/certifications/${certificationCourseId}/rescore`;
+    return this.ajax(path, 'POST');
+  }
+
   updateRecord(store, type, snapshot) {
     if (snapshot.adapterOptions.updateJuryComment) {
       const {
