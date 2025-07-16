@@ -4,7 +4,7 @@ import {
   CampaignParticipationLoggerContext,
   OrganizationLearnerLoggerContext,
 } from '../../../../prescription/shared/domain/constants.js';
-import { EntityValidationError } from '../../../../shared/domain/errors.js';
+import { EntityValidationError } from '../../errors.js';
 
 const CLIENTS = ['PIX_ADMIN', 'PIX_APP', 'PIX_ORGA', 'SCRIPT'];
 const ACTIONS = [

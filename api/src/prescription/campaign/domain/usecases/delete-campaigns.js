@@ -1,4 +1,4 @@
-import { EventLoggingJob } from '../../../../identity-access-management/domain/models/jobs/EventLoggingJob.js';
+import { EventLoggingJob } from '../../../../shared/domain/models/jobs/EventLoggingJob.js';
 import { MembershipNotFound } from '../../../../team/application/api/errors/MembershipNotFound.js';
 import { CampaignsDestructor } from '../models/CampaignsDestructor.js';
 

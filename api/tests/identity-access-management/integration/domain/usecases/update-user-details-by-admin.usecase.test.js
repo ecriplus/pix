@@ -1,4 +1,3 @@
-import { EventLoggingJob } from '../../../../../src/identity-access-management/domain/models/jobs/EventLoggingJob.js';
 import { UserDetailsForAdmin } from '../../../../../src/identity-access-management/domain/models/UserDetailsForAdmin.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
@@ -7,6 +6,7 @@ import {
   AlreadyRegisteredEmailError,
   AlreadyRegisteredUsernameError,
 } from '../../../../../src/shared/domain/errors.js';
+import { EventLoggingJob } from '../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
 import { roles } from '../../../../../src/shared/domain/models/Membership.js';
 import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
 

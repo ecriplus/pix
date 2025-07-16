@@ -1,10 +1,10 @@
 import { assert } from 'chai';
 
-import { EventLoggingJob } from '../../../../../../src/identity-access-management/domain/models/jobs/EventLoggingJob.js';
 import { EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
+import { EventLoggingJob } from '../../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
 import { expect, sinon } from '../../../../../test-helper.js';
 
-describe('Unit | Identity Access Management | Domain | Model | Jobs | EventLoggingJob', function () {
+describe('Unit | Shared | Domain | Model | Jobs | EventLoggingJob', function () {
   const now = new Date(2024, 1, 1);
   let clock;
 

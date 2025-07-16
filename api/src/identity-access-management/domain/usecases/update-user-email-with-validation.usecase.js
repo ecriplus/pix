@@ -3,7 +3,7 @@ import {
   InvalidVerificationCodeError,
   UserNotAuthorizedToUpdateEmailError,
 } from '../../../shared/domain/errors.js';
-import { EventLoggingJob } from '../models/jobs/EventLoggingJob.js';
+import { EventLoggingJob } from '../../../shared/domain/models/jobs/EventLoggingJob.js';
 
 const updateUserEmailWithValidation = async function ({
   code,

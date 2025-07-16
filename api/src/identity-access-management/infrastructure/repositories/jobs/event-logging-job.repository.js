@@ -1,5 +1,5 @@
+import { EventLoggingJob } from '../../../../shared/domain/models/jobs/EventLoggingJob.js';
 import { JobRepository, JobRetry } from '../../../../shared/infrastructure/repositories/jobs/job-repository.js';
-import { EventLoggingJob } from '../../../domain/models/jobs/EventLoggingJob.js';
 
 class EventLoggingJobRepository extends JobRepository {
   constructor() {

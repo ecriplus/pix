@@ -7,7 +7,7 @@ import {
   AlreadyRegisteredEmailAndUsernameError,
   AlreadyRegisteredUsernameError,
 } from '../../../../src/shared/domain/errors.js';
-import { EventLoggingJob } from '../models/jobs/EventLoggingJob.js';
+import { EventLoggingJob } from '../../../shared/domain/models/jobs/EventLoggingJob.js';
 
 const updateUserDetailsByAdmin = async function ({
   userId,

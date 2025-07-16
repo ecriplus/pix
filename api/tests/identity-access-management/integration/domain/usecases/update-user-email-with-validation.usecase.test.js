@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 
 import { InvalidOrAlreadyUsedEmailError } from '../../../../../src/identity-access-management/domain/errors.js';
-import { EventLoggingJob } from '../../../../../src/identity-access-management/domain/models/jobs/EventLoggingJob.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { userEmailRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/user-email.repository.js';
 import {
@@ -9,6 +8,7 @@ import {
   InvalidVerificationCodeError,
   UserNotAuthorizedToUpdateEmailError,
 } from '../../../../../src/shared/domain/errors.js';
+import { EventLoggingJob } from '../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import { catchErr, databaseBuilder, knex, sinon } from '../../../../test-helper.js';
 

@@ -1,5 +1,5 @@
 import { EventLoggingJobController } from '../../../../../src/identity-access-management/application/jobs/event-logging.job-controller.js';
-import { EventLoggingJob } from '../../../../../src/identity-access-management/domain/models/jobs/EventLoggingJob.js';
+import { EventLoggingJob } from '../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Application | Jobs | EventLoggingJobController', function () {

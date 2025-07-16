@@ -1,5 +1,5 @@
-import { EventLoggingJob } from '../../../../../../src/identity-access-management/domain/models/jobs/EventLoggingJob.js';
 import { eventLoggingJobRepository } from '../../../../../../src/identity-access-management/infrastructure/repositories/jobs/event-logging-job.repository.js';
+import { EventLoggingJob } from '../../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
 import { JobRetry } from '../../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { expect } from '../../../../../test-helper.js';
 

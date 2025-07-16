@@ -1,5 +1,5 @@
-import { EventLoggingJob } from '../../../../identity-access-management/domain/models/jobs/EventLoggingJob.js';
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { EventLoggingJob } from '../../../../shared/domain/models/jobs/EventLoggingJob.js';
 
 const deleteCampaignParticipation = withTransaction(async function ({
   userId,
