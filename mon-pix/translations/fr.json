@@ -1373,7 +1373,7 @@
             "cancel": "Annuler",
             "leave": "Oui, quitter le parcours"
           },
-          "content-information": "En quittant ce parcours sans vous inscrire, vous ne pourrez pas valider votre progression.",
+          "content-information": "En quittant ce parcours sans vous inscrire, vous ne pourrez pas conserver votre progression.",
           "content-instruction": "Voulez-vous continuer ?",
           "title": "Quitter et revenir sur pix.fr ?"
         },

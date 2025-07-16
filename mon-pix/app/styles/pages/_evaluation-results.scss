@@ -144,9 +144,10 @@
 
 .evaluation-results-hero-details__actions {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: var(--pix-spacing-6x);
-  align-items: center;
+  align-items: flex-start;
   margin-top: var(--pix-spacing-6x);
 }
 
