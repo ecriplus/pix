@@ -1,8 +1,8 @@
-import { EventLoggingJobController } from '../../../../../src/identity-access-management/application/jobs/event-logging.job-controller.js';
+import { EventLoggingJobController } from '../../../../../src/shared/application/jobs/event-logging.job-controller.js';
 import { EventLoggingJob } from '../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Identity Access Management | Application | Jobs | EventLoggingJobController', function () {
+describe('Unit | Shared | Application | Jobs | EventLoggingJobController', function () {
   it('sets up the job controller configuration', async function () {
     const jobController = new EventLoggingJobController();
     expect(jobController.jobName).to.equal(EventLoggingJob.name);

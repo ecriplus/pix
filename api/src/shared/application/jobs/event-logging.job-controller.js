@@ -1,6 +1,6 @@
-import { JobController } from '../../../shared/application/jobs/job-controller.js';
-import { EventLoggingJob } from '../../../shared/domain/models/jobs/EventLoggingJob.js';
-import { auditLoggerRepository } from '../../infrastructure/repositories/audit-logger-repository.js';
+import { auditLoggerRepository } from '../../../identity-access-management/infrastructure/repositories/audit-logger-repository.js';
+import { EventLoggingJob } from '../../domain/models/jobs/EventLoggingJob.js';
+import { JobController } from './job-controller.js';
 
 export class EventLoggingJobController extends JobController {
   constructor() {
