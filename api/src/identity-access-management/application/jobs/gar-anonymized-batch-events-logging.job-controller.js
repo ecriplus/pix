@@ -1,6 +1,6 @@
 import { JobController } from '../../../shared/application/jobs/job-controller.js';
+import { auditLoggerRepository } from '../../../shared/infrastructure/repositories/audit-logger-repository.js';
 import { GarAnonymizedBatchEventsLoggingJob } from '../../domain/models/GarAnonymizedBatchEventsLoggingJob.js';
-import { auditLoggerRepository } from '../../infrastructure/repositories/audit-logger-repository.js';
 
 const AUDIT_LOGGER_ANONYMIZATION_GAR_ACTION = 'ANONYMIZATION_GAR';
 

@@ -1,5 +1,5 @@
 import { UserAnonymizedEventLoggingJob } from '../../../../identity-access-management/domain/models/UserAnonymizedEventLoggingJob.js';
-import { auditLoggerRepository } from '../../../../identity-access-management/infrastructure/repositories/audit-logger-repository.js';
+import { auditLoggerRepository } from '../../../infrastructure/repositories/audit-logger-repository.js';
 import { JobController } from '../job-controller.js';
 
 export class UserAnonymizedEventLoggingJobController extends JobController {

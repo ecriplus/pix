@@ -1,5 +1,5 @@
-import { auditLoggerRepository } from '../../../identity-access-management/infrastructure/repositories/audit-logger-repository.js';
 import { EventLoggingJob } from '../../domain/models/jobs/EventLoggingJob.js';
+import { auditLoggerRepository } from '../../infrastructure/repositories/audit-logger-repository.js';
 import { JobController } from './job-controller.js';
 
 export class EventLoggingJobController extends JobController {
