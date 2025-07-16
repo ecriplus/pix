@@ -1,30 +1,23 @@
 @use 'pix-design-tokens/typography';
 
 .module-objectives {
-  --modulix-objectives-counter: item;
+  @extend %pix-body-m;
 
   padding: 0;
   list-style: none;
 
   &__item {
     display: flex;
+    gap: var(--pix-spacing-4x);
     align-items: center;
     margin-bottom: var(--pix-spacing-4x);
-    counter-increment: var(--modulix-objectives-counter);
+    font-weight: var(--pix-font-bold);
+  }
+}
 
-    &::before {
-      @extend %pix-title-xs;
-
-      display: inline-block;
-      min-width: 2rem;
-      height: 2rem;
-      margin-right: var(--pix-spacing-3x);
-      color: var(--pix-primary-700);
-      line-height: var(--pix-spacing-8x);
-      text-align: center;
-      background: var(--pix-primary-100);
-      border-radius: 100%;
-      content: counter(var(--modulix-objectives-counter));
-    }
+.module-objectives-item {
+  &__icon {
+    flex-shrink: 0;
+    color: var(--pix-primary-300);
   }
 }

@@ -1754,11 +1754,11 @@
         "direction": "Remplissez {count, plural, =1 {le champ vide} other {les champs vides}}."
       },
       "recap": {
-        "backToModuleDetails": "Revenir aux détails du module",
+        "backToModuleDetails": "Quitter",
         "goToForm": "Répondre au questionnaire",
-        "goToHomepage": "Continuer mon expérience sur Pix",
-        "subtitle": "Vous avez atteint les objectifs suivants :",
-        "title": "Bravo ! Module terminé"
+        "goToHomepage": "Continuer",
+        "subtitle": "Vous avez travaillé les objectifs suivants :",
+        "title": "Module terminé !"
       },
       "sidebar": {
         "button": "Afficher les étapes du module"

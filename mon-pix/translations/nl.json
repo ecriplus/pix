@@ -1743,11 +1743,11 @@
         "direction": "Vul de lege velden in."
       },
       "recap": {
-        "backToModuleDetails": "Terug naar moduledetails",
-        "goToHomepage": "Mijn Pix-ervaring voortzetten",
+        "backToModuleDetails": "Stoppen met",
+        "goToHomepage": "Voortzetten",
         "goToForm": "Beantwoord de vragenlijst",
-        "subtitle": "Je hebt de volgende doelen bereikt:",
-        "title": "Gefeliciteerd! Module voltooid"
+        "subtitle": "Je hebt aan de volgende doelstellingen gewerkt:",
+        "title": "Module voltooid!"
       },
       "sidebar": {
         "button": "De modulestappen weergeven"
@@ -1993,7 +1993,6 @@
         },
         "notification": "Als je de mislukte vragen opnieuw probeert of alles op nul zet om alles opnieuw te proberen, kan je organisatie je laatste resultaat niet meer zien. Om je resultaat mee te laten tellen door de organisator van de test, moet je het opnieuw insturen.",
         "notification-with-auto-share": "Herhaal mislukte vragen of stel in op nul om het opnieuw te proberen. De organisator blijft toegang houden tot je eerder ingediende resultaten."
-
       },
       "retry": {
         "button": "Mijn reis naspelen",
