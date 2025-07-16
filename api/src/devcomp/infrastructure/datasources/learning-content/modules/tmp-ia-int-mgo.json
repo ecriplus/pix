@@ -9,9 +9,8 @@
     "duration": 10,
     "level": "Intermédiaire",
     "objectives": [
-      "<p>Comprendre les étapes de l'entraînement des LLM</p>",
-      "<p>TODO</p>",
-      "<p>Garder un esprit critique</p>"
+      "<p>Comprendre les 3 étapes de l'entraînement des IA génératives de texte</p>",
+      "<p>Comprendre le rôle des humains dans cet entraînement</p>"
     ],
     "tabletSupport": "inconvenient"
   },
