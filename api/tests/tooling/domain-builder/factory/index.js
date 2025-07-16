@@ -168,7 +168,9 @@ import { buildV3CertificationChallengeLiveAlertForAdministration } from './build
 import { buildV3CertificationCourseDetailsForAdministration } from './build-v3-certification-course-details-for-administration.js';
 import { buildValidation } from './build-validation.js';
 import { buildValidator } from './build-validator.js';
+import { buildActiveCalibratedChallenge } from './certification/configuration/build-active-calibrated-challenge.js';
 import { buildCenter as buildConfigurationCenter } from './certification/configuration/build-center.js';
+import { buildCertificationFrameworksChallenge } from './certification/configuration/build-certification-frameworks-challenge.js';
 import { buildConsolidatedFramework } from './certification/configuration/build-consolidated-framework.js';
 import { buildCandidate } from './certification/enrolment/build-candidate.js';
 import { buildCertificationEligibilityEnrolment } from './certification/enrolment/build-certification-eligibility.js';
@@ -233,6 +235,8 @@ const certification = {
   configuration: {
     buildCenter: buildConfigurationCenter,
     buildConsolidatedFramework,
+    buildCertificationFrameworksChallenge,
+    buildActiveCalibratedChallenge,
   },
   complementary: {
     buildComplementaryCertificationBadge: buildComplementaryCertificationBadge,

@@ -1,7 +1,10 @@
+import _ from 'lodash';
+
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import {
   createServer,
   databaseBuilder,
+  datamartBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
@@ -259,8 +262,8 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       const tube1 = databaseBuilder.factory.learningContent.buildTube({ id: tubeId, skillIds: [skill.id] });
       const challenge = databaseBuilder.factory.learningContent.buildChallenge({
         skillId: skill.id,
-        alpha: 2.1,
-        delta: 3.4,
+        discriminant: 2.1,
+        difficulty: 3.4,
         status: 'validé',
       });
 
@@ -303,27 +306,90 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
     });
   });
 
+  describe('PATCH /api/admin/complementary-certifications/{complementaryCertificationKey}/consolidated-framework', function () {
+    it('should return 200 HTTP status code and update framework with calibration', async function () {
+      // given
+      const superAdmin = await insertUserWithRoleSuperAdmin();
+
+      const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
+      const version = '20230618000000';
+      const certificationFrameworkChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+        challengeId: 'recChallengeId',
+        complementaryCertificationKey: complementaryCertification.key,
+        version,
+      });
+
+      await databaseBuilder.commit();
+
+      const calibration = datamartBuilder.factory.buildCalibration({
+        scope: 'DROIT',
+        status: 'VALIDATED',
+      });
+      const otherCalibration = datamartBuilder.factory.buildCalibration({
+        scope: 'DROIT',
+        status: 'VALIDATED',
+      });
+      const activeCalibratedChallenge = datamartBuilder.factory.buildActiveCalibratedChallenge({
+        calibrationId: calibration.id,
+        challengeId: 'recChallengeId',
+        alpha: 3.3,
+        delta: 4.4,
+      });
+      datamartBuilder.factory.buildActiveCalibratedChallenge({
+        calibrationId: otherCalibration.id,
+        challengeId: 'recChallengeId',
+        alpha: 3.1,
+        delta: 6.4,
+      });
+      await datamartBuilder.commit();
+
+      const options = {
+        method: 'PATCH',
+        url: `/api/admin/complementary-certifications/${complementaryCertification.key}/consolidated-framework`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        payload: {
+          data: {
+            attributes: {
+              version,
+              calibrationId: calibration.id,
+            },
+          },
+        },
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+
+      const certificationFrameworksChallenges = await knex('certification-frameworks-challenges').where({
+        complementaryCertificationKey: complementaryCertification.key,
+        version,
+      });
+      expect(certificationFrameworksChallenges).to.have.length(1);
+      expect(_.omit(certificationFrameworksChallenges[0], 'id', 'createdAt')).to.deep.equal({
+        calibrationId: calibration.id,
+        discriminant: activeCalibratedChallenge.alpha,
+        difficulty: activeCalibratedChallenge.delta,
+        challengeId: certificationFrameworkChallenge.challengeId,
+        complementaryCertificationKey: complementaryCertification.key,
+        version,
+      });
+    });
+  });
+
   describe('GET /api/admin/complementary-certifications/{complementaryCertificationKey}/current-consolidated-framework', function () {
     it('should return the current consolidated framework for given complementaryCertificationKey', async function () {
       // given
       const superAdmin = await insertUserWithRoleSuperAdmin();
 
       const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
-      const tubeId = 'myTubeId';
-      const skill = databaseBuilder.factory.learningContent.buildSkill({
-        tubeId,
-        status: 'actif',
-      });
-      const tube = databaseBuilder.factory.learningContent.buildTube({ id: tubeId, skillIds: [skill.id] });
-      const challenge = databaseBuilder.factory.learningContent.buildChallenge({
-        skillId: skill.id,
-        alpha: 2.1,
-        delta: 3.4,
-        status: 'validé',
-      });
-      const certificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+      databaseBuilder.factory.buildCertificationFrameworksChallenge({
         complementaryCertificationKey: complementaryCertification.key,
-        challengeId: challenge.id,
+        challengeId: 'rec1234',
+        discriminant: 2.1,
+        difficulty: 3.4,
         createdAt: new Date('2023-01-11'),
       });
 
@@ -344,8 +410,14 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
         type: 'certification-consolidated-frameworks',
         attributes: {
           'complementary-certification-key': complementaryCertification.key,
-          'created-at': certificationFrameworksChallenge.createdAt,
-          'tube-ids': [tube.id],
+          version: '20230111000000',
+          challenges: [
+            {
+              challengeId: 'rec1234',
+              discriminant: 2.1,
+              difficulty: 3.4,
+            },
+          ],
         },
       });
     });

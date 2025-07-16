@@ -7,6 +7,7 @@ import * as tubeRepository from '../../../../shared/infrastructure/repositories/
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as complementaryCertificationRepository from '../../../complementary-certification/infrastructure/repositories/complementary-certification-repository.js';
+import * as activeCalibratedChallengeRepository from '../../infrastructure/repositories/active-calibrated-challenge-repository.js';
 import * as attachableTargetProfileRepository from '../../infrastructure/repositories/attachable-target-profiles-repository.js';
 import * as candidateRepository from '../../infrastructure/repositories/candidate-repository.js';
 import * as centerRepository from '../../infrastructure/repositories/center-repository.js';
@@ -16,6 +17,7 @@ import * as consolidatedFrameworkRepository from '../../infrastructure/repositor
  *
  * Using {@link https://jsdoc.app/tags-type "Closure Compiler's syntax"} to document injected dependencies
  *
+ * @typedef {activeCalibratedChallengeRepository} ActiveCalibratedChallengeRepository
  * @typedef {attachableTargetProfileRepository} AttachableTargetProfileRepository
  * @typedef {candidateRepository} CandidateRepository
  * @typedef {centerRepository} CenterRepository
@@ -26,6 +28,7 @@ import * as consolidatedFrameworkRepository from '../../infrastructure/repositor
  * @typedef {tubeRepository} TubeRepository
  **/
 const dependencies = {
+  activeCalibratedChallengeRepository,
   attachableTargetProfileRepository,
   candidateRepository,
   centerRepository,

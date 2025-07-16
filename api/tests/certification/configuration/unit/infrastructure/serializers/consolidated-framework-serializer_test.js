@@ -18,8 +18,8 @@ describe('Certification | Configuration | Unit | Serializer | consolidated-frame
             type: 'certification-consolidated-frameworks',
             attributes: {
               'complementary-certification-key': consolidatedFramework.complementaryCertificationKey,
-              'created-at': consolidatedFramework.createdAt,
-              'tube-ids': consolidatedFramework.tubeIds,
+              version: consolidatedFramework.version,
+              challenges: consolidatedFramework.challenges,
             },
           },
         ],

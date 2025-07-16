@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 import { databaseBuffer } from '../database-buffer.js';
 import { buildComplementaryCertification } from './build-complementary-certification.js';
-import { buildChallenge } from './learning-content/build-challenge.js';
+import { buildChallenge } from './learning-content/index.js';
 
 const buildCertificationFrameworksChallenge = function ({
   id = databaseBuffer.getNextId(),
@@ -10,7 +10,9 @@ const buildCertificationFrameworksChallenge = function ({
   difficulty = 3.5,
   complementaryCertificationKey,
   challengeId,
-  createdAt,
+  calibrationId,
+  createdAt = new Date('2020-01-01'),
+  version = getVersionNumber(createdAt),
 } = {}) {
   complementaryCertificationKey = _.isUndefined(complementaryCertificationKey)
     ? buildComplementaryCertification().key
@@ -24,7 +26,9 @@ const buildCertificationFrameworksChallenge = function ({
     difficulty,
     complementaryCertificationKey,
     challengeId,
+    calibrationId,
     createdAt,
+    version,
   };
 
   return databaseBuffer.pushInsertable({
@@ -32,5 +36,17 @@ const buildCertificationFrameworksChallenge = function ({
     values,
   });
 };
+
+function getVersionNumber(date) {
+  const pad = (n) => String(n).padStart(2, '0');
+  return (
+    date.getUTCFullYear().toString() +
+    pad(date.getUTCMonth() + 1) +
+    pad(date.getUTCDate()) +
+    pad(date.getUTCHours()) +
+    pad(date.getUTCMinutes()) +
+    pad(date.getSeconds())
+  );
+}
 
 export { buildCertificationFrameworksChallenge };
