@@ -2,19 +2,20 @@ import { Chat } from '../models/Chat.js';
 
 export async function startChat({
   configuration,
-  configId,
+  configurationId,
   userId,
   chatRepository,
   configurationRepository,
   randomUUID,
 }) {
   if (!configuration) {
-    configuration = await configurationRepository.get(configId);
+    configuration = await configurationRepository.get(configurationId);
   }
   const chatId = randomUUID();
   const newChat = new Chat({
     id: chatId,
     userId,
+    configurationId,
     configuration,
     hasAttachmentContextBeenAdded: false,
     messages: [],

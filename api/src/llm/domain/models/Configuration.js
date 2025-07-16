@@ -1,94 +1,72 @@
 export class Configuration {
-  #id;
-  #historySize;
-  #inputMaxChars;
-  #inputMaxPrompts;
-  #attachmentName;
-  #attachmentContext;
+  /** @type {ConfigurationDTO} */
+  #dto;
 
   /**
-   * @constructor
-   * @param {Object} params
-   * @param {string} params.id
-   * @param {number} params.historySize
-   * @param {number} params.inputMaxChars
-   * @param {number} params.inputMaxPrompts
-   * @param {string|null} params.attachmentName
-   * @param {string|null} params.attachmentContext
+   * @param {ConfigurationDTO} configurationDTO
    */
-  constructor({ id, historySize, inputMaxChars, inputMaxPrompts, attachmentName, attachmentContext }) {
-    this.#id = id;
-    this.#historySize = historySize;
-    this.#inputMaxChars = inputMaxChars;
-    this.#inputMaxPrompts = inputMaxPrompts;
-    this.#attachmentName = attachmentName;
-    this.#attachmentContext = attachmentContext;
+  constructor(configurationDTO) {
+    this.#dto = configurationDTO;
   }
 
-  /**
-   * @returns {string}
-   */
-  get id() {
-    return this.#id;
-  }
-
-  /**
-   * @returns {number}
-   */
   get historySize() {
-    return this.#historySize;
+    return this.#dto.llm.historySize;
   }
 
-  /**
-   * @returns {number}
-   */
   get inputMaxChars() {
-    return this.#inputMaxChars;
+    return this.#dto.challenge.inputMaxChars;
   }
 
-  /**
-   * @returns {number}
-   */
   get inputMaxPrompts() {
-    return this.hasAttachment ? this.#inputMaxPrompts - 1 : this.#inputMaxPrompts;
+    return this.hasAttachment ? this.#dto.challenge.inputMaxPrompts - 1 : this.#dto.challenge.inputMaxPrompts;
   }
 
-  /**
-   * @returns {Boolean}
-   */
   get hasAttachment() {
-    return Boolean(this.#attachmentName);
+    return this.#dto.attachment != undefined;
   }
 
-  /**
-   * @returns {string|null}
-   */
   get attachmentName() {
-    return this.#attachmentName;
+    return this.#dto.attachment?.name;
   }
 
-  /**
-   * @returns {string|null}
-   */
   get attachmentContext() {
-    return this.#attachmentContext;
+    return this.#dto.attachment?.context;
+  }
+
+  toDTO() {
+    return this.#dto;
   }
 
   /**
-   * @returns {Object}
+   * @param {ConfigurationDTO} configurationDTO
    */
-  toDTO() {
-    return {
-      id: this.id,
-      historySize: this.#historySize,
-      inputMaxChars: this.#inputMaxChars,
-      inputMaxPrompts: this.#inputMaxPrompts,
-      attachmentName: this.#attachmentName,
-      attachmentContext: this.#attachmentContext,
-    };
-  }
-
   static fromDTO(configurationDTO) {
     return new Configuration(configurationDTO);
   }
 }
+
+/**
+ * @typedef {object} ConfigurationDTO
+ * @property {object} llm
+ * @property {string} llm.model
+ * @property {string} llm.environment
+ * @property {number} llm.historySize
+ * @property {number} llm.temperature
+ * @property {number} llm.outputMaxToken
+ * @property {string} llm.moderationModel
+ * @property {string} name
+ * @property {object} challenge
+ * @property {string[]} challenge.tools
+ * @property {string} challenge.description
+ * @property {string} challenge.systemPrompt
+ * @property {number} challenge.inputMaxChars
+ * @property {number} challenge.inputMaxPrompts
+ * @property {object} challenge.victoryConditions FIXME add victoryConditions properties
+ * @property {Attachment=} attachment
+ */
+
+/**
+ * @typedef {object} Attachment
+ * @property {string} name
+ * @property {string} context
+ */

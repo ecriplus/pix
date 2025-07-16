@@ -1,5 +1,4 @@
 import { ConfigurationNotFoundError, LLMApiError } from '../../../../../src/llm/domain/errors.js';
-import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { get } from '../../../../../src/llm/infrastructure/repositories/configuration-repository.js';
 import { catchErr, expect, nock } from '../../../../test-helper.js';
 
@@ -55,13 +54,13 @@ describe('LLM | Integration | Infrastructure | Repositories | configuration', fu
     });
 
     context('success cases', function () {
-      it('should return the configuration from the LLM Api and save it in cache', async function () {
+      it('returns the configuration from the LLM Api', async function () {
         // given
         const llmApiScope = nock('https://llm-test.pix.fr/api')
           .get('/configurations/unIdDeConfiguration')
           .reply(200, {
             llm: { historySize: 1 },
-            challenge: { inputMaxChars: 2, inputMaxPrompts: 3 },
+            challenge: { inputMaxChars: 2, inputMaxPrompts: 4 },
             attachment: { name: 'some_attachment_name', context: 'some attachment context' },
           });
 
@@ -69,14 +68,13 @@ describe('LLM | Integration | Infrastructure | Repositories | configuration', fu
         const configuration = await get('unIdDeConfiguration');
 
         // then
-        const expectedConfiguration = new Configuration({
+        expect(configuration).to.contain({
           historySize: 1,
           inputMaxChars: 2,
           inputMaxPrompts: 3,
           attachmentName: 'some_attachment_name',
           attachmentContext: 'some attachment context',
         });
-        expect(configuration).to.deepEqualInstance(expectedConfiguration);
         expect(llmApiScope.isDone()).to.be.true;
       });
     });

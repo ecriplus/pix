@@ -2,152 +2,106 @@ import { Configuration } from '../../../../../src/llm/domain/models/Configuratio
 import { expect } from '../../../../test-helper.js';
 
 describe('LLM | Unit | Domain | Models | Configuration', function () {
-  describe('simple property getters', function () {
-    it('should return property values', function () {
-      // given
-      const configuration = new Configuration({
-        id: 'some-config-id',
-        historySize: 123,
-        inputMaxChars: 456,
-        inputMaxPrompts: 789,
-        attachmentName: 'some-attachment-name',
-        attachmentContext: 'some-attachment-context',
-      });
-
-      // then
-      expect(configuration).to.have.property('id', 'some-config-id');
-      expect(configuration).to.have.property('historySize', 123);
-      expect(configuration).to.have.property('inputMaxChars', 456);
-      expect(configuration).to.have.property('attachmentName', 'some-attachment-name');
-      expect(configuration).to.have.property('attachmentContext', 'some-attachment-context');
-    });
-  });
-
-  describe('#get inputMaxPrompts', function () {
-    context('when configuration has no attachment', function () {
-      it('should return the inputMaxPrompts of the Configuration', function () {
+  describe('property getters', function () {
+    context('when dto has attachment', function () {
+      it('return property values', function () {
         // given
         const configuration = new Configuration({
-          id: 'some-config-id',
-          historySize: 123,
-          inputMaxChars: 456,
-          inputMaxPrompts: 789,
-          attachmentName: null,
-          attachmentContext: null,
+          llm: {
+            historySize: 123,
+          },
+          challenge: {
+            inputMaxChars: 456,
+            inputMaxPrompts: 789,
+          },
+          attachment: {
+            name: 'some-attachment-name',
+            context: 'some-attachment-context',
+          },
         });
 
         // then
-        expect(configuration).to.have.property('inputMaxPrompts', 789);
-      });
-    });
-
-    context('when configuration has an attachment', function () {
-      it('should return the inputMaxPrompts of the Configuration minus one', function () {
-        // given
-        const configuration = new Configuration({
-          id: 'some-config-id',
+        expect(configuration).to.contain({
           historySize: 123,
           inputMaxChars: 456,
-          inputMaxPrompts: 789,
+          inputMaxPrompts: 788,
+          hasAttachment: true,
           attachmentName: 'some-attachment-name',
           attachmentContext: 'some-attachment-context',
         });
-
-        // then
-        expect(configuration).to.have.property('inputMaxPrompts', 788);
-      });
-    });
-  });
-
-  describe('#get hasAttachment', function () {
-    context('when attachmentName is not empty', function () {
-      it('should return true', function () {
-        // given
-        const configuration = new Configuration({
-          id: 'some-config-id',
-          historySize: 123,
-          inputMaxChars: 456,
-          inputMaxPrompts: 789,
-          attachmentName: 'some-attachment-name',
-          attachmentContext: 'some-attachment-context',
-        });
-
-        // then
-        expect(configuration).to.have.property('hasAttachment', true);
       });
     });
 
-    context('when attachmentName is empty', function () {
-      it('should return false', function () {
+    context('when dto has no attachment', function () {
+      it('returns undefined for attachment properties', function () {
         // given
         const configuration = new Configuration({
-          id: 'some-config-id',
-          historySize: 123,
-          inputMaxChars: 456,
-          inputMaxPrompts: 789,
-          attachmentName: null,
-          attachmentContext: null,
+          llm: {
+            historySize: 123,
+          },
+          challenge: {
+            inputMaxChars: 456,
+            inputMaxPrompts: 789,
+          },
         });
 
         // then
-        expect(configuration).to.have.property('hasAttachment', false);
+        expect(configuration).to.contain({
+          historySize: 123,
+          inputMaxChars: 456,
+          inputMaxPrompts: 789,
+          hasAttachment: false,
+          attachmentName: undefined,
+          attachmentContext: undefined,
+        });
       });
     });
   });
 
   describe('#toDTO', function () {
-    it('should return the DTO version of the Configuration model', function () {
+    it('returns the dto', function () {
       // given
-      const configuration = new Configuration({
-        id: 'some-config-id',
-        historySize: 123,
-        inputMaxChars: 456,
-        inputMaxPrompts: 789,
-        attachmentName: 'some-attachment-name',
-        attachmentContext: 'some-attachment-context',
-      });
+      const dto = Symbol('dto');
+      const configuration = new Configuration(dto);
 
       // when
-      const dto = configuration.toDTO();
+      const actualDto = configuration.toDTO();
 
       // then
-      expect(dto).to.deep.equal({
-        id: 'some-config-id',
-        historySize: 123,
-        inputMaxChars: 456,
-        inputMaxPrompts: 789,
-        attachmentName: 'some-attachment-name',
-        attachmentContext: 'some-attachment-context',
-      });
+      expect(actualDto).to.equal(dto);
     });
   });
 
   describe('#fromDTO', function () {
-    it('should return the DTO version of the Configuration model', function () {
+    it('returns Configuration model', function () {
       // given
       const dto = {
-        id: 'some-config-id',
-        historySize: 123,
-        inputMaxChars: 456,
-        inputMaxPrompts: 789,
-        attachmentName: 'some-attachment-name',
-        attachmentContext: 'some-attachment-context',
+        llm: {
+          historySize: 123,
+        },
+        challenge: {
+          inputMaxChars: 456,
+          inputMaxPrompts: 789,
+        },
+        attachment: {
+          name: 'some-attachment-name',
+          context: 'some-attachment-context',
+        },
       };
 
       // when
       const configuration = Configuration.fromDTO(dto);
 
       // then
-      expect(configuration).to.deepEqualInstance(
-        new Configuration({
-          id: 'some-config-id',
-          historySize: 123,
-          inputMaxChars: 456,
-          inputMaxPrompts: 789,
-          attachmentName: 'some-attachment-name',
-          attachmentContext: 'some-attachment-context',
-        }),
-      );
+      expect(configuration).to.be.instanceOf(Configuration);
+      expect(configuration).to.contain({
+        historySize: 123,
+        inputMaxChars: 456,
+        inputMaxPrompts: 788,
+        hasAttachment: true,
+        attachmentName: 'some-attachment-name',
+        attachmentContext: 'some-attachment-context',
+      });
     });
   });
 });

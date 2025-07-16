@@ -17,15 +17,16 @@ const logger = child('llm:api', { event: SCOPES.LLM });
  *
  * @param {Object} params
  * @param {string} params.message
- * @param {Configuration} params.configuration
  * @param {Chat} params.chat
  * @returns {Promise<ReadableStream>}
  */
-export async function prompt({ message, configuration, chat }) {
-  const messagesToForward = chat.messages.slice(-configuration.historySize).map((message) => message.toLLMHistory());
+export async function prompt({ message, chat }) {
+  const messagesToForward = chat.messages
+    .slice(-chat.configuration.historySize)
+    .map((message) => message.toLLMHistory());
   const payload = JSON.stringify({
     prompt: message,
-    configurationId: configuration.id,
+    configuration: chat.configuration.toDTO(),
     history: messagesToForward,
   });
   let response;
