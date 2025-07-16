@@ -1,5 +1,5 @@
+import { CertifiedLevel } from '../../../../src/certification/evaluation/domain/models/CertifiedLevel.js';
 import { PIX_COUNT_BY_LEVEL } from '../../../../src/shared/domain/constants.js';
-import { CertifiedLevel } from '../../../../src/shared/domain/models/CertifiedLevel.js';
 import { CertifiedScore } from '../../../../src/shared/domain/models/CertifiedScore.js';
 import { expect } from '../../../test-helper.js';
 

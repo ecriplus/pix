@@ -1,5 +1,5 @@
-import { UNCERTIFIED_LEVEL } from '../constants.js';
-import { DomainError } from '../errors.js';
+import { DomainError } from '../../../../shared/domain/errors.js';
+import { UNCERTIFIED_LEVEL } from '../../../shared/domain/constants.js';
 
 class CertifiedLevel {
   constructor({ value, status }) {
