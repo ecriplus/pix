@@ -1,4 +1,4 @@
-import { config } from '../../config.js';
+import { config } from '../../../shared/config.js';
 
 const { features } = config;
 class AllowedCertificationCenterAccess {
