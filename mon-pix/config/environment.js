@@ -120,6 +120,7 @@ module.exports = function (environment) {
       AUTONOMOUS_COURSES_ORGANIZATION_ID: parseInt(process.env.AUTONOMOUS_COURSES_ORGANIZATION_ID, 10),
       APP_VERSION: process.env.SOURCE_VERSION || 'development',
       AUTO_SHARE_AFTER_DATE: process.env.AUTO_SHARE_AFTER_DATE || '2025-07-18',
+      AUTO_SHARE_DISABLED_ORGANIZATION_IDS: JSON.parse(process.env.AUTO_SHARE_DISABLED_ORGANIZATION_IDS || '[]'),
     },
 
     fontawesome: {

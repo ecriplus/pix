@@ -26,7 +26,7 @@ module('Acceptance | Campaigns | Results', function (hooks) {
 
   hooks.beforeEach(function () {
     user = server.create('user', 'withEmail');
-    campaign = server.create('campaign', { isArchived: false });
+    campaign = server.create('campaign', { isArchived: false, organizationId: 123 });
     campaignParticipation = server.create('campaign-participation', { campaign });
   });
 
@@ -176,6 +176,29 @@ module('Acceptance | Campaigns | Results', function (hooks) {
 
             // then
             assert.ok(await screen.findByRole('link', { name: t('navigation.back-to-homepage') }));
+          });
+        });
+
+        module('when organization is disabled', function () {
+          test('should not shared result automatically', async function (assert) {
+            // when
+            ENV.APP.AUTO_SHARE_AFTER_DATE = '2024-01-01';
+
+            ENV.APP.AUTO_SHARE_DISABLED_ORGANIZATION_IDS = [`${campaign.organizationId}`];
+            server.db.campaignParticipations.update(campaignParticipation.id, { createdAt: '2025-07-12' });
+            server.create('feature-toggle', {
+              id: 0,
+              isAutoShareEnabled: true,
+            });
+            server.create('campaign-participation-result', {
+              id: campaignParticipation.id,
+              isShared: false,
+            });
+            const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
+            assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/evaluation/resultats`);
+
+            // then
+            assert.ok(await screen.findByRole('button', { name: t('pages.skill-review.actions.send') }));
           });
         });
       });
