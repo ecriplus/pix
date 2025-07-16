@@ -1,5 +1,31 @@
 # Pix Changelog
 
+# [5.159.0](https://github.com/1024pix/pix/compare/v5.158.1...v5.159.0) (2025-07-16)
+
+### :rocket: Amélioration
+
+- [#12842](https://github.com/1024pix/pix/pull/12842) Ajustements sur la page de fin de parcours autonome (PIX-18613). 
+- [#12837](https://github.com/1024pix/pix/pull/12837) ia-mon-premier-promptV5.json 
+- [#12799](https://github.com/1024pix/pix/pull/12799) Lister les participants avec leur status d'obtention d'une attestation sur Pix Orga (PIX-18562). 
+- [#12815](https://github.com/1024pix/pix/pull/12815) Modifier les CTA Passer et Vérifier (PIX-18683) 
+- [#12784](https://github.com/1024pix/pix/pull/12784) Module apprentissage IA intermediaire s28 
+- [#12818](https://github.com/1024pix/pix/pull/12818) Route de lecture de conversation de LLM de preview (PIX-18693) 
+
+### :bug: Correction
+
+- [#12836](https://github.com/1024pix/pix/pull/12836) Correction de l'affichage des badges d'orga "parent" /"enfant" (PIX-17879) 
+- [#12841](https://github.com/1024pix/pix/pull/12841) Corriger la sérialisation d'un assessment issu d'une campagne qui n'est pas de type assessment  
+- [#12834](https://github.com/1024pix/pix/pull/12834) Rediriger vers la campagne autonome apres login (PIX-18614) 
+
+### :building_construction: Tech
+
+- [#12839](https://github.com/1024pix/pix/pull/12839) :truck: Déplace un modèle en lecture seul vers son contexte métier 
+- [#12838](https://github.com/1024pix/pix/pull/12838) Un peu de style dans la page organization de PixAdmin 
+
+### :arrow_up: Montée de version
+
+- [#12833](https://github.com/1024pix/pix/pull/12833) Update Node.js to v22.17.0
+
 ## [5.158.1](https://github.com/1024pix/pix/compare/v5.158.0...v5.158.1) (2025-07-15)
 
 ### :building_construction: Tech
