@@ -5,6 +5,15 @@ import Attestations from 'pix-orga/components/attestations';
   {{pageTitle (t "pages.attestations.title")}}
 
   <div class="attestations-page">
-    <Attestations @divisions={{@model.options}} @onSubmit={{@controller.downloadAttestations}} />
+    <Attestations
+      @participantStatuses={{@model.attestationParticipantStatuses}}
+      @divisions={{@model.options}}
+      @onSubmit={{@controller.downloadAttestations}}
+      @clearFilters={{@controller.clearFilters}}
+      @onFilter={{@controller.triggerFiltering}}
+      @searchFilter={{@controller.search}}
+      @statusesFilter={{@controller.statuses}}
+      @divisionsFilter={{@controller.divisions}}
+    />
   </div>
 </template>

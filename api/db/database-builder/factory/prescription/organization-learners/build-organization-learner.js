@@ -13,6 +13,7 @@ const buildOrganizationLearner = function ({
   updatedAt = new Date('2021-02-01'), // for BEGINNING_OF_THE_2020_SCHOOL_YEAR, can outdate very fast! ;)
   organizationId,
   userId,
+  division,
   deletedBy = null,
   deletedAt = null,
   attributes = null,
@@ -31,6 +32,7 @@ const buildOrganizationLearner = function ({
     updatedAt,
     organizationId,
     userId,
+    division,
     deletedBy,
     deletedAt,
     attributes,

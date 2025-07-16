@@ -8,6 +8,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { and, eq } from 'ember-truth-helpers';
+import List from 'pix-orga/components/attestations/list';
 
 import PageTitle from './ui/page-title';
 
@@ -43,17 +44,38 @@ export default class Attestations extends Component {
       <:title>{{t "pages.attestations.title"}}</:title>
     </PageTitle>
 
-    {{#if this.displaySixthGrade}}
-      <SixthGrade @divisions={{@divisions}} @onSubmit={{@onSubmit}} />
-    {{/if}}
+    <section>
+      <h2 class="attestations-page__section-title attestations-page__section-title--download">{{t
+          "pages.attestations.section.download"
+        }}</h2>
 
-    {{#if (and this.displaySixthGrade this.displayAttestations)}}
-      <div class="attestations-page__separator" />
-    {{/if}}
+      {{#if this.displaySixthGrade}}
+        <SixthGrade @divisions={{@divisions}} @onSubmit={{@onSubmit}} />
+      {{/if}}
 
-    {{#if this.displayAttestations}}
-      <OtherAttestations @attestations={{this.availableAttestations}} @onSubmit={{@onSubmit}} />
-    {{/if}}
+      {{#if (and this.displaySixthGrade this.displayAttestations)}}
+        <div class="attestations-page__separator" />
+      {{/if}}
+
+      {{#if this.displayAttestations}}
+        <OtherAttestations @attestations={{this.availableAttestations}} @onSubmit={{@onSubmit}} />
+      {{/if}}
+    </section>
+
+    <section class="attestation-page__list">
+      <h2 class="attestations-page__section-title attestations-page__section-title--list">
+        {{t "pages.attestations.section.list"}}
+      </h2>
+      <List
+        @participantStatuses={{@participantStatuses}}
+        @clearFilters={{@clearFilters}}
+        @onFilter={{@onFilter}}
+        @searchFilter={{@searchFilter}}
+        @statusesFilter={{@statusesFilter}}
+        @divisionsFilter={{@divisionsFilter}}
+        @divisionsOptions={{@divisions}}
+      />
+    </section>
   </template>
 }
 
@@ -133,9 +155,6 @@ class SixthGrade extends Component {
   }
 
   <template>
-    <p class="attestations-page__text">
-      {{t "pages.attestations.divisions-description"}}
-    </p>
     <div class="attestations-page__action">
       <PixMultiSelect
         @isSearchable={{true}}

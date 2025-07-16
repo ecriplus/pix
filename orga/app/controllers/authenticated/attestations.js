@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 
 export const SIXTH_GRADE_ATTESTATION_KEY = 'SIXTH_GRADE';
 export const FILE_NAME = 'attestations';
@@ -12,6 +13,12 @@ export default class AuthenticatedAttestationsController extends Controller {
   @service pixMetrics;
   @service notifications;
   @service intl;
+
+  @tracked pageNumber = 1;
+  @tracked pageSize = 50;
+  @tracked statuses = [];
+  @tracked divisions = [];
+  @tracked search = null;
 
   @action
   async downloadAttestations(attestationKey, selectedDivisions) {
@@ -43,6 +50,20 @@ export default class AuthenticatedAttestationsController extends Controller {
     } catch (error) {
       this.notifications.sendError(error.message, { autoClear: false });
     }
+  }
+
+  @action
+  clearFilters() {
+    this.statuses = [];
+    this.divisions = [];
+    this.search = null;
+    this.pageNumber = 1;
+  }
+
+  @action
+  triggerFiltering(fieldName, value) {
+    this[fieldName] = value || undefined;
+    this.pageNumber = 1;
   }
 
   sendMetrics() {
