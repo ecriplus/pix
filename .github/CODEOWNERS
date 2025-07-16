@@ -44,6 +44,10 @@
 
 # Directories maintained by team Accès
 /audit-logger/ @1024pix/team-acces
+/api/src/shared/domain/models/jobs/EventLoggingJob.js @1024pix/team-acces
+/api/src/shared/application/jobs/event-logging.job-controller.js @1024pix/team-acces
+/api/src/shared/infrastructure/repositories/jobs/event-logging-job.repository.js @1024pix/team-acces
+/api/src/shared/infrastructure/repositories/audit-logger-repository.js @1024pix/team-acces
 
 /api/src/authorization/ @1024pix/team-acces
 /api/src/identity-access-management/ @1024pix/team-acces
