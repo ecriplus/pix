@@ -24,20 +24,22 @@ const fetchPage = async ({
   const page = number < 1 ? 1 : number;
   const offset = (page - 1) * size;
 
-  const countExecutor = countQueryBuilder
-    ? countQueryBuilder
-    : trx
-      ? trx.count('*', { as: 'rowCount' }).from(queryBuilder.clone().as('query_all_results'))
-      : knex.count('*', { as: 'rowCount' }).from(queryBuilder.clone().as('query_all_results'));
+  const defaultCountQueryBuilder = knex
+    .count('*', { as: 'row_count' })
+    .from(queryBuilder.clone().as('query_all_results'));
+  const finalCountQueryBuilder = countQueryBuilder || defaultCountQueryBuilder;
 
   // we cannot execute the query and count the total rows at the same time
   // because it would not work when there are DISTINCT selection in the SELECT clause
-  const { rowCount } = await countExecutor.first();
-  let results;
+  let results, rowCount;
   if (trx) {
     results = await queryBuilder.limit(size).offset(offset).transacting(trx);
+    const { row_count } = await finalCountQueryBuilder.transacting(trx).first();
+    rowCount = row_count;
   } else {
     results = await queryBuilder.limit(size).offset(offset);
+    const { row_count } = await finalCountQueryBuilder.first();
+    rowCount = row_count;
   }
 
   return {
@@ -45,7 +47,7 @@ const fetchPage = async ({
     pagination: {
       page,
       pageSize: size,
-      rowCount,
+      rowCount: rowCount,
       pageCount: Math.ceil(rowCount / size),
     },
   };

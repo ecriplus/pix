@@ -386,7 +386,7 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
 
         // when
         const query = knex.select('key').from('features').orderBy('key');
-        const countQuery = knex('organizations').count('*', { as: 'rowCount' });
+        const countQuery = knex('organizations').count('*', { as: 'row_count' });
         const { results, pagination } = await fetchPage({
           queryBuilder: query,
           paginationParams: { number: 1, size: 5 },
@@ -406,6 +406,88 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
           pageSize: 5,
           rowCount: 20,
           pageCount: 4,
+        });
+      });
+    });
+
+    context('transaction + custom count query builder', function () {
+      it('should use the transaction given in parameters also for the custom count query builder', async function () {
+        // Deliberately dumb request
+        // Asking for features, but returning the count of attestations
+        // given
+        _.times(5, (index) => databaseBuilder.factory.buildFeature({ key: `feature-${index}` }));
+        _.times(10, (index) => databaseBuilder.factory.buildAttestation({ key: `attestation-${index}` }));
+        await databaseBuilder.commit();
+        let hasRollbackProperly = false;
+        try {
+          await knex.transaction(async (trx) => {
+            await trx('features').insert([
+              {
+                key: 'z_autreFeature1',
+              },
+              {
+                key: 'z_autreFeature2',
+              },
+              {
+                key: 'z_autreFeature3',
+              },
+            ]);
+            await trx('attestations').insert([
+              {
+                key: 'autreAttestation1',
+              },
+              {
+                key: 'autreAttestation2',
+              },
+              {
+                key: 'autreAttestation3',
+              },
+            ]);
+            const query = knex.select('key').from('features').orderBy('key');
+            const countQueryBuilder = knex('attestations').count('*', { as: 'row_count' });
+            const { results, pagination } = await fetchPage({
+              queryBuilder: query,
+              paginationParams: { number: 2, size: 5 },
+              trx,
+              countQueryBuilder,
+            });
+            expect(results, 'results within the transaction for page 2, before rollback').to.deep.equal([
+              { key: 'z_autreFeature1' },
+              { key: 'z_autreFeature2' },
+              { key: 'z_autreFeature3' },
+            ]);
+            expect(results, 'results within the transaction, before rollback').to.have.length(3);
+            expect(pagination).to.deep.equal({
+              page: 2,
+              pageSize: 5,
+              rowCount: 10 + 3, // attestations count in trx
+              pageCount: 3,
+            });
+            hasRollbackProperly = true;
+            throw new Error('rollback');
+          });
+        } catch (err) {
+          if (!hasRollbackProperly) {
+            throw err;
+          }
+        }
+
+        // when
+        const query = knex.select('key').from('features').orderBy('key');
+        const countQueryBuilder = knex('attestations').count('*', { as: 'row_count' });
+        const { results, pagination } = await fetchPage({
+          queryBuilder: query,
+          paginationParams: { number: 2, size: 5 },
+          countQueryBuilder,
+        });
+
+        // then
+        expect(results, 'results outside the transaction').to.be.empty;
+        expect(pagination).to.deep.equal({
+          page: 2,
+          pageSize: 5,
+          rowCount: 10, // attestations count really in DB now
+          pageCount: 2,
         });
       });
     });

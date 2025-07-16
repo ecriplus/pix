@@ -32,7 +32,7 @@ const findPaginatedByCertificationCenterId = async function ({ certificationCent
     .orderBy('sessions.time', 'DESC')
     .orderBy('sessions.id', 'ASC');
 
-  const countQuery = knex('sessions').count('*', { as: 'rowCount' }).where({ certificationCenterId });
+  const countQuery = knex('sessions').count('*', { as: 'row_count' }).where({ certificationCenterId });
 
   const { results, pagination } = await fetchPage({
     queryBuilder: query,
