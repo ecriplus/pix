@@ -1,4 +1,4 @@
-import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
+import { CampaignParticipationStatuses, CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
 import { CampaignParticipationOverview } from '../../../../src/shared/domain/read-models/CampaignParticipationOverview.js';
 const { SHARED } = CampaignParticipationStatuses;
 
@@ -18,6 +18,11 @@ const buildCampaignParticipationOverview = function ({
   validatedStagesCount = 1,
   validatedSkillsCount = 1,
   disabledAt = null,
+  campaignArchivedAt = null,
+  deletedAt = null,
+  isCampaignMultipleSendings = false,
+  isOrganizationLearnerDisabled = false,
+  campaignType = CampaignTypes.ASSESSMENT,
 } = {}) {
   const isShared = status === SHARED;
   return new CampaignParticipationOverview({
@@ -37,6 +42,11 @@ const buildCampaignParticipationOverview = function ({
     totalStagesCount,
     validatedStagesCount,
     disabledAt,
+    campaignArchivedAt,
+    deletedAt,
+    isCampaignMultipleSendings,
+    isOrganizationLearnerDisabled,
+    campaignType,
   });
 };
 

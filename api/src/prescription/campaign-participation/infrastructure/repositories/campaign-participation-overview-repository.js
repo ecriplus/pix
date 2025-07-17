@@ -56,10 +56,18 @@ function _getQueryBuilder(callback) {
         deletedAt: 'campaign-participations.deletedAt',
         participationState: _computeCampaignParticipationState(),
         campaignId: 'campaigns.id',
+        isCampaignMultipleSendings: 'campaigns.multipleSendings',
+        isOrganizationLearnerDisabled: 'view-active-organization-learners.isDisabled',
+        campaignType: 'campaigns.type',
       })
         .from('campaign-participations')
         .join('campaigns', 'campaign-participations.campaignId', 'campaigns.id')
         .join('organizations', 'organizations.id', 'campaigns.organizationId')
+        .leftJoin(
+          'view-active-organization-learners',
+          'view-active-organization-learners.id',
+          'campaign-participations.organizationLearnerId',
+        )
         .whereIn('campaigns.type', [CampaignTypes.ASSESSMENT, CampaignTypes.EXAM])
         .where('campaigns.isForAbsoluteNovice', false)
         .whereNot('organizations.id', constants.AUTONOMOUS_COURSES_ORGANIZATION_ID)

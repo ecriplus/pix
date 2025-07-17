@@ -1,8 +1,10 @@
-import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
-import { CampaignParticipationOverview } from '../../../../src/shared/domain/read-models/CampaignParticipationOverview.js';
-import { domainBuilder, expect } from '../../../test-helper.js';
+import dayjs from 'dayjs';
 
-const { SHARED } = CampaignParticipationStatuses;
+import { CampaignParticipationStatuses, CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
+import { CampaignParticipationOverview } from '../../../../src/shared/domain/read-models/CampaignParticipationOverview.js';
+import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+
+const { SHARED, STARTED } = CampaignParticipationStatuses;
 
 describe('Unit | Domain | Read-Models | CampaignParticipationOverview', function () {
   describe('constructor', function () {
@@ -103,6 +105,267 @@ describe('Unit | Domain | Read-Models | CampaignParticipationOverview', function
           expect(campaignParticipationOverview.masteryRate).to.equal(0.75);
         });
       });
+    });
+  });
+
+  describe('#computeCanRetry', function () {
+    let clock;
+    const now = new Date('2023-01-15');
+
+    beforeEach(function () {
+      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    });
+
+    afterEach(function () {
+      clock.restore();
+    });
+
+    it('should return true when all conditions are met', function () {
+      // given
+      const campaignParticipationOverview = domainBuilder.buildCampaignParticipationOverview({
+        status: SHARED,
+        sharedAt: dayjs(now).subtract(5, 'days').toDate(),
+        masteryRate: 0.8,
+        isCampaignMultipleSendings: true,
+        isOrganizationLearnerActive: true,
+        campaignType: CampaignTypes.ASSESSMENT,
+        campaignArchivedAt: null,
+        deletedAt: null,
+      });
+
+      // when
+      const result = campaignParticipationOverview.computeCanRetry();
+
+      // then
+      expect(result).to.be.true;
+    });
+
+    it('should return false when organization learner is not active', function () {
+      // given
+      const campaignParticipationOverview = domainBuilder.buildCampaignParticipationOverview({
+        status: SHARED,
+        sharedAt: dayjs(now).subtract(5, 'days').toDate(),
+        masteryRate: 0.8,
+        isCampaignMultipleSendings: true,
+        isOrganizationLearnerDisabled: true,
+        campaignType: CampaignTypes.ASSESSMENT,
+        campaignArchivedAt: null,
+        deletedAt: null,
+      });
+
+      // when
+      const result = campaignParticipationOverview.computeCanRetry();
+
+      // then
+      expect(result).to.be.false;
+    });
+
+    it('should return false when campaign participation is disabled (archived)', function () {
+      // given
+      const campaignParticipationOverview = domainBuilder.buildCampaignParticipationOverview({
+        status: SHARED,
+        sharedAt: dayjs(now).subtract(5, 'days').toDate(),
+        masteryRate: 0.8,
+        isCampaignMultipleSendings: true,
+        isOrganizationLearnerActive: true,
+        campaignType: CampaignTypes.ASSESSMENT,
+        campaignArchivedAt: dayjs(now).subtract(1, 'day').toDate(),
+        deletedAt: null,
+      });
+
+      // when
+      const result = campaignParticipationOverview.computeCanRetry();
+
+      // then
+      expect(result).to.be.false;
+    });
+
+    it('should return false when campaign participation is disabled (deleted)', function () {
+      // given
+      const campaignParticipationOverview = domainBuilder.buildCampaignParticipationOverview({
+        status: SHARED,
+        sharedAt: dayjs(now).subtract(5, 'days').toDate(),
+        masteryRate: 0.8,
+        isCampaignMultipleSendings: true,
+        isOrganizationLearnerActive: true,
+        campaignType: CampaignTypes.ASSESSMENT,
+        campaignArchivedAt: null,
+        deletedAt: dayjs(now).subtract(1, 'day').toDate(),
+      });
+
+      // when
+      const result = campaignParticipationOverview.computeCanRetry();
+
+      // then
+      expect(result).to.be.false;
+    });
+
+    it('should return false when campaign does not allow multiple sendings', function () {
+      // given
+      const campaignParticipationOverview = domainBuilder.buildCampaignParticipationOverview({
+        status: SHARED,
+        sharedAt: dayjs(now).subtract(5, 'days').toDate(),
+        masteryRate: 0.8,
+        isCampaignMultipleSendings: false,
+        isOrganizationLearnerActive: true,
+        campaignType: CampaignTypes.ASSESSMENT,
+        campaignArchivedAt: null,
+        deletedAt: null,
+      });
+
+      // when
+      const result = campaignParticipationOverview.computeCanRetry();
+
+      // then
+      expect(result).to.be.false;
+    });
+
+    it('should return false when participation is not shared', function () {
+      // given
+      const campaignParticipationOverview = domainBuilder.buildCampaignParticipationOverview({
+        status: STARTED,
+        sharedAt: null,
+        masteryRate: 0.8,
+        isCampaignMultipleSendings: true,
+        isOrganizationLearnerActive: true,
+        campaignType: CampaignTypes.ASSESSMENT,
+        campaignArchivedAt: null,
+        deletedAt: null,
+      });
+
+      // when
+      const result = campaignParticipationOverview.computeCanRetry();
+
+      // then
+      expect(result).to.be.false;
+    });
+
+    it('should return false when minimum delay before retrying has not passed', function () {
+      // given
+      const campaignParticipationOverview = domainBuilder.buildCampaignParticipationOverview({
+        status: SHARED,
+        sharedAt: dayjs(now).subtract(3, 'days').toDate(), // Less than 4 days
+        masteryRate: 0.8,
+        isCampaignMultipleSendings: true,
+        isOrganizationLearnerActive: true,
+        campaignType: CampaignTypes.ASSESSMENT,
+        campaignArchivedAt: null,
+        deletedAt: null,
+      });
+
+      // when
+      const result = campaignParticipationOverview.computeCanRetry();
+
+      // then
+      expect(result).to.be.false;
+    });
+
+    it('should return false when mastery rate is 100% and campaign type is ASSESSMENT', function () {
+      // given
+      const campaignParticipationOverview = domainBuilder.buildCampaignParticipationOverview({
+        status: SHARED,
+        sharedAt: dayjs(now).subtract(5, 'days').toDate(),
+        masteryRate: 1.0, // 100%
+        isCampaignMultipleSendings: true,
+        isOrganizationLearnerActive: true,
+        campaignType: CampaignTypes.ASSESSMENT,
+        campaignArchivedAt: null,
+        deletedAt: null,
+      });
+
+      // when
+      const result = campaignParticipationOverview.computeCanRetry();
+
+      // then
+      expect(result).to.be.false;
+    });
+
+    it('should return true when mastery rate is 100% but campaign type is EXAM', function () {
+      // given
+      const campaignParticipationOverview = domainBuilder.buildCampaignParticipationOverview({
+        status: SHARED,
+        sharedAt: dayjs(now).subtract(5, 'days').toDate(),
+        masteryRate: 1.0, // 100%
+        isCampaignMultipleSendings: true,
+        isOrganizationLearnerActive: true,
+        campaignType: CampaignTypes.EXAM,
+        campaignArchivedAt: null,
+        deletedAt: null,
+      });
+
+      // when
+      const result = campaignParticipationOverview.computeCanRetry();
+
+      // then
+      expect(result).to.be.true;
+    });
+
+    it('should return false when sharedAt is null', function () {
+      // given
+      const campaignParticipationOverview = domainBuilder.buildCampaignParticipationOverview({
+        status: SHARED,
+        sharedAt: null,
+        masteryRate: 0.8,
+        isCampaignMultipleSendings: true,
+        isOrganizationLearnerActive: true,
+        campaignType: CampaignTypes.ASSESSMENT,
+        campaignArchivedAt: null,
+        deletedAt: null,
+      });
+
+      // when
+      const result = campaignParticipationOverview.computeCanRetry();
+
+      // then
+      expect(result).to.be.false;
+    });
+  });
+
+  describe('#_timeBeforeRetryingPassed', function () {
+    let clock;
+    const now = new Date('2023-01-15');
+
+    beforeEach(function () {
+      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    });
+
+    afterEach(function () {
+      clock.restore();
+    });
+
+    it('should return true when delay has passed', function () {
+      // given
+      const campaignParticipationOverview = domainBuilder.buildCampaignParticipationOverview();
+      const sharedAt = dayjs(now).subtract(5, 'days').toDate();
+
+      // when
+      const result = campaignParticipationOverview._timeBeforeRetryingPassed(sharedAt);
+
+      // then
+      expect(result).to.be.true;
+    });
+
+    it('should return false when delay has not passed', function () {
+      // given
+      const campaignParticipationOverview = domainBuilder.buildCampaignParticipationOverview();
+      const sharedAt = dayjs(now).subtract(3, 'days').toDate(); // Less than 4 days
+
+      // when
+      const result = campaignParticipationOverview._timeBeforeRetryingPassed(sharedAt);
+
+      // then
+      expect(result).to.be.false;
+    });
+
+    it('should return false when sharedAt is null', function () {
+      // given
+      const campaignParticipationOverview = domainBuilder.buildCampaignParticipationOverview();
+
+      // when
+      const result = campaignParticipationOverview._timeBeforeRetryingPassed(null);
+
+      // then
+      expect(result).to.be.false;
     });
   });
 });
