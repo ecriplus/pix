@@ -4,10 +4,7 @@
 </header>
 
 <main class="page-body">
-  <section class="page-section">
-    <h1 class="page-section__title">Informations de l'utilisateur</h1>
-    <Users::UserOverview @user={{@model}} />
-  </section>
+  <Users::UserOverview @user={{@model}} />
 
   <PixTabs @variant="primary" @ariaLabel="Navigation de la section détails d'un utilisateur" class="navigation">
     <LinkTo @route="authenticated.users.get.information" @model={{@model}}>
