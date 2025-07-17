@@ -1,5 +1,33 @@
 # Pix Changelog
 
+# [5.160.0](https://github.com/1024pix/pix/compare/v5.159.0...v5.160.0) (2025-07-17)
+
+### :rocket: Amélioration
+
+- [#12785](https://github.com/1024pix/pix/pull/12785) : Module controle parental QCU final --> QCU déclaratif 
+- [#12824](https://github.com/1024pix/pix/pull/12824) Afficher les certifications passées par un utilisateur sur PixAdmin (PIX-18691). 
+- [#12759](https://github.com/1024pix/pix/pull/12759) Créer une API interne permettant de récupérer le statut des modules pour un utlisateur (PIX-18342) 
+- [#12848](https://github.com/1024pix/pix/pull/12848) Désactiver l'envoi automatique pour certaines organizations (PIX-18714). 
+- [#12533](https://github.com/1024pix/pix/pull/12533) Injection d'une calibration dans le référentiel cadre (PIX-18032). 
+- [#12850](https://github.com/1024pix/pix/pull/12850) Module apprentissage IA intermediaire s29 
+- [#12843](https://github.com/1024pix/pix/pull/12843) Permettre de re-scorer une certification dans Pix Admin (PIX-18192). 
+- [#12840](https://github.com/1024pix/pix/pull/12840) Route de prompt de conversation LLM de preview (PIX-18699) 
+
+### :building_construction: Tech
+
+- [#12849](https://github.com/1024pix/pix/pull/12849) :broom: Nettoyage d'un modèle dupliqué 
+- [#12854](https://github.com/1024pix/pix/pull/12854) :sparkles: Ajout de la clef de complémentaire `EDU_CPE` (PIX-18722) 
+- [#12844](https://github.com/1024pix/pix/pull/12844) Rendre l'utilitaire "fetchPage" du knex-utils "transaction compliant" 
+
+### :arrow_up: Montée de version
+
+- [#12845](https://github.com/1024pix/pix/pull/12845) Lock file maintenance (api) 
+- [#12864](https://github.com/1024pix/pix/pull/12864) Update dependency @1024pix/pix-ui to ^55.24.0 (admin) 
+- [#12865](https://github.com/1024pix/pix/pull/12865) Update dependency @1024pix/pix-ui to ^55.24.0 (certif) 
+- [#12867](https://github.com/1024pix/pix/pull/12867) Update dependency @1024pix/pix-ui to ^55.24.0 (junior) 
+- [#12870](https://github.com/1024pix/pix/pull/12870) Update dependency @1024pix/pix-ui to ^55.24.0 (mon-pix) 
+- [#12851](https://github.com/1024pix/pix/pull/12851) Update dependency webpack to v5.100.0 (junior)
+
 # [5.159.0](https://github.com/1024pix/pix/compare/v5.158.1...v5.159.0) (2025-07-16)
 
 ### :rocket: Amélioration
