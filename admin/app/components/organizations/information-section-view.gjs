@@ -9,6 +9,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 import { eq } from 'ember-truth-helpers';
+import { DescriptionList } from 'pix-admin/components/ui/description-list';
 import ENV from 'pix-admin/config/environment';
 import Organization from 'pix-admin/models/organization';
 
@@ -94,7 +95,7 @@ export default class OrganizationInformationSection extends Component {
         </PixNotificationAlert>
       {{/if}}
 
-      <div class="organization-information-section__details">
+      <div>
         <OrganizationDescription @organization={{@organization}} />
 
         {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
@@ -128,89 +129,79 @@ class OrganizationDescription extends Component {
   }
 
   <template>
-    <dl>
-      <div class="divider" />
-      <div>
-        <dt>Type</dt>
-        <dd>{{@organization.type}}</dd>
-      </div>
-      <div>
-        <dt>Créée par</dt>
-        <dd>{{@organization.creatorFullName}} ({{@organization.createdBy}})</dd>
-      </div>
-      <div>
-        <dt>Créée le</dt>
-        <dd>{{@organization.createdAtFormattedDate}}</dd>
-      </div>
+    <DescriptionList>
+      <DescriptionList.Divider />
+
+      <DescriptionList.Item @label="Type">
+        {{@organization.type}}
+      </DescriptionList.Item>
+      <DescriptionList.Item @label="Créée par">
+        {{@organization.creatorFullName}}
+        ({{@organization.createdBy}})
+      </DescriptionList.Item>
+      <DescriptionList.Item @label="Créée le">
+        {{@organization.createdAtFormattedDate}}
+      </DescriptionList.Item>
       {{#if @organization.externalId}}
-        <div>
-          <dt>Identifiant externe</dt>
-          <dd>{{@organization.externalId}}</dd>
-        </div>
+        <DescriptionList.Item @label="Identifiant externe">
+          {{@organization.externalId}}
+        </DescriptionList.Item>
       {{/if}}
       {{#if @organization.provinceCode}}
-        <div>
-          <dt>Département</dt>
-          <dd>{{@organization.provinceCode}}</dd>
-        </div>
+        <DescriptionList.Item @label="Département">
+          {{@organization.provinceCode}}
+        </DescriptionList.Item>
       {{/if}}
 
-      <div class="divider" />
-      <div>
-        <dt>Nom du DPO</dt>
-        <dd>{{@organization.dataProtectionOfficerFullName}}</dd>
-      </div>
-      <div>
-        <dt>Adresse e-mail du DPO</dt>
-        <dd>{{@organization.dataProtectionOfficerEmail}}</dd>
-      </div>
+      <DescriptionList.Divider />
 
-      <div class="divider" />
-      <div>
-        <dt>Crédits</dt>
-        <dd>{{@organization.credit}}</dd>
-      </div>
-      <div>
-        <dt>Lien vers la documentation</dt>
-        <dd>
-          {{#if @organization.documentationUrl}}
-            <a
-              href="{{@organization.documentationUrl}}"
-              target="_blank"
-              rel="noopener noreferrer"
-            >{{@organization.documentationUrl}}</a>
-          {{else}}
-            Non spécifié
-          {{/if}}
-        </dd>
-      </div>
-      <div>
-        <dt>SSO</dt>
-        <dd>{{this.identityProviderName}}</dd>
-      </div>
+      <DescriptionList.Item @label="Nom du DPO">
+        {{@organization.dataProtectionOfficerFullName}}
+      </DescriptionList.Item>
+      <DescriptionList.Item @label="Adresse e-mail du DPO">
+        {{@organization.dataProtectionOfficerEmail}}
+      </DescriptionList.Item>
 
-      <div class="divider" />
-      <div>
-        <dt>Adresse e-mail d'activation SCO</dt>
-        <dd>{{@organization.email}}</dd>
-      </div>
+      <DescriptionList.Divider />
+
+      <DescriptionList.Item @label="Crédits">
+        {{@organization.credit}}
+      </DescriptionList.Item>
+      <DescriptionList.Item @label="Lien vers la documentation">
+        {{#if @organization.documentationUrl}}
+          <a href="{{@organization.documentationUrl}}" target="_blank" rel="noopener noreferrer">
+            {{@organization.documentationUrl}}
+          </a>
+        {{else}}
+          Non spécifié
+        {{/if}}
+      </DescriptionList.Item>
+      <DescriptionList.Item @label="SSO">
+        {{this.identityProviderName}}
+      </DescriptionList.Item>
+
+      <DescriptionList.Divider />
+
+      <DescriptionList.Item @label="Adresse e-mail d'activation SCO">
+        {{@organization.email}}
+      </DescriptionList.Item>
 
       {{#if @organization.code}}
-        <div class="divider" />
-        <div>
-          <dt>Code</dt>
-          <dd>{{@organization.code}}</dd>
-        </div>
+        <DescriptionList.Divider />
+
+        <DescriptionList.Item @label="Code">
+          {{@organization.code}}
+        </DescriptionList.Item>
       {{/if}}
 
-      <div class="divider" />
-      <div>
-        <dt>{{t "components.organizations.information-section-view.features.title"}}</dt>
-        <dd><FeaturesSection @features={{@organization.features}} /></dd>
-      </div>
+      <DescriptionList.Divider />
 
-      <div class="divider" />
-    </dl>
+      <DescriptionList.Item @label={{t "components.organizations.information-section-view.features.title"}}>
+        <FeaturesSection @features={{@organization.features}} />
+      </DescriptionList.Item>
+
+      <DescriptionList.Divider />
+    </DescriptionList>
   </template>
 }
 
@@ -219,7 +210,7 @@ function keys(obj) {
 }
 
 const FeaturesSection = <template>
-  <ul class="organization-information-section__details__features">
+  <ul class="organization-information-section__features">
     {{#each (keys Organization.featureList) as |feature|}}
       {{#let
         (get @features feature) (concat "components.organizations.information-section-view.features." feature)
@@ -256,7 +247,7 @@ const Feature = <template>
     <PixIcon
       @name="checkCircle"
       aria-label={{concat @label " : " (t "common.words.yes")}}
-      class="organization-information-section__details__features--enabled"
+      class="organization-information-section__features--enabled"
     />
     {{@label}}
     {{#if (has-block)}}
@@ -267,9 +258,9 @@ const Feature = <template>
     <PixIcon
       @name="cancel"
       aria-label={{concat @label " : " (t "common.words.no")}}
-      class="organization-information-section__details__features--disabled"
+      class="organization-information-section__features--disabled"
     />
-    <span class="organization-information-section__details__features--disabled">
+    <span class="organization-information-section__features--disabled">
       {{@label}}
     </span>
   {{/if}}
