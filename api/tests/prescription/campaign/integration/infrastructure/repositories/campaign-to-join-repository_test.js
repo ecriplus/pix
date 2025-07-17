@@ -96,5 +96,28 @@ describe('Integration | Repository | CampaignToJoin', function () {
       // then
       expect(error).to.be.instanceOf(NotFoundError);
     });
+
+    it('should be insensitive to case', async function () {
+      const code = 'LAURA123';
+      const targetProfile = databaseBuilder.factory.buildTargetProfile();
+      const organization = databaseBuilder.factory.buildOrganization({});
+      const expectedCampaign = databaseBuilder.factory.buildCampaign({
+        code,
+        organizationId: organization.id,
+        targetProfileId: targetProfile.id,
+      });
+      databaseBuilder.factory.buildCampaign();
+      await databaseBuilder.commit();
+
+      // when
+      const actualCampaign = await campaignToJoinRepository.getByCode({
+        code: code.toLowerCase(),
+        organizationFeatureAPI,
+      });
+
+      // then
+      expect(actualCampaign).to.be.instanceOf(CampaignToJoin);
+      expect(actualCampaign.id).to.equal(expectedCampaign.id);
+    });
   });
 });
