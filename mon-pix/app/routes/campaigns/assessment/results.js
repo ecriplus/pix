@@ -56,9 +56,13 @@ export default class ResultsRoute extends Route {
     if (!this.featureToggles.featureToggles?.isAutoShareEnabled) {
       return;
     }
+    if (model.campaignParticipationResult.isShared) {
+      return;
+    }
+    const disabledOrganizationIds = ENV.APP.AUTO_SHARE_DISABLED_ORGANIZATION_IDS.map(Number);
     if (
-      model.campaignParticipationResult.isShared ||
-      model.campaignParticipation.createdAt <= new Date(ENV.APP.AUTO_SHARE_AFTER_DATE)
+      model.campaignParticipation.createdAt <= new Date(ENV.APP.AUTO_SHARE_AFTER_DATE) ||
+      disabledOrganizationIds.includes(model.campaign.organizationId)
     ) {
       return;
     }

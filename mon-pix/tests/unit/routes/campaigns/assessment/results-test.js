@@ -7,7 +7,7 @@ module('Unit | Route | Campaign | Assessment | Results', function (hooks) {
   setupTest(hooks);
 
   let route, modelForStub, transitionToStub, queryRecordStub, queryStub;
-  const campaign = { id: '123456', code: 'NEW_CODE' };
+  const campaign = { id: '123456', code: 'NEW_CODE', organizationId: '123456' };
   const questResults = [{ obtained: true, reward: { key: 'reward-key' } }];
   const campaignParticipation = { id: '1212', isShared: true, hasMany: sinon.stub() };
   const campaignParticipationResult = { id: campaignParticipation.id, campaignId: campaign.id };
@@ -127,6 +127,7 @@ module('Unit | Route | Campaign | Assessment | Results', function (hooks) {
         sinon.stub(store, 'adapterFor').withArgs('campaign-participation-result').returns({ share: shareSpy });
         // when
         await route.afterModel({
+          campaign,
           campaignParticipation: { createdAt: '2024-01-01' },
           campaignParticipationResult: { id: 123, isShared: false },
         });
