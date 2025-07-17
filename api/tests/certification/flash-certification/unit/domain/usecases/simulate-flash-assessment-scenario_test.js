@@ -1,6 +1,7 @@
 import { simulateFlashAssessmentScenario } from '../../../../../../src/certification/flash-certification/domain/usecases/simulate-flash-assessment-scenario.js';
+import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { LOCALE } from '../../../../../../src/shared/domain/constants.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr, expect, sinon } from '../../../../../test-helper.js';
 
 describe('#simulateFlashAssessmentScenario', function () {
   describe('when a complementary certification scenario is required', function () {
@@ -8,28 +9,20 @@ describe('#simulateFlashAssessmentScenario', function () {
       // given
       const locale = LOCALE.FRENCH_FRANCE;
       const accessibilityAdjustmentNeeded = false;
-      const complementaryCertification = domainBuilder.buildComplementaryCertification();
+      const complementaryCertificationKey = ComplementaryCertificationKeys.PIX_PLUS_DROIT;
       const challengeRepositoryStub = { findActiveFlashCompatible: sinon.stub() };
-      const complementaryCertificationRepositoryStub = {
-        getByKey: sinon.stub().resolves(complementaryCertification),
-      };
 
       // when
       await catchErr(simulateFlashAssessmentScenario)({
         locale,
         accessibilityAdjustmentNeeded,
-        complementaryCertificationKey: complementaryCertification.key,
+        complementaryCertificationKey,
         challengeRepository: challengeRepositoryStub,
-        complementaryCertificationRepository: complementaryCertificationRepositoryStub,
       });
 
       // then
-      expect(complementaryCertificationRepositoryStub.getByKey).to.have.been.calledOnceWithExactly(
-        complementaryCertification.key,
-      );
-
       expect(challengeRepositoryStub.findActiveFlashCompatible).to.have.been.calledOnceWithExactly({
-        complementaryCertificationId: complementaryCertification.id,
+        complementaryCertificationKey,
         locale,
         accessibilityAdjustmentNeeded: undefined,
       });
@@ -42,9 +35,6 @@ describe('#simulateFlashAssessmentScenario', function () {
       const locale = LOCALE.FRENCH_FRANCE;
       const accessibilityAdjustmentNeeded = false;
       const challengeRepositoryStub = { findActiveFlashCompatible: sinon.stub() };
-      const complementaryCertificationRepositoryStub = {
-        getByKey: sinon.stub(),
-      };
 
       // when
       await catchErr(simulateFlashAssessmentScenario)({
@@ -55,12 +45,10 @@ describe('#simulateFlashAssessmentScenario', function () {
       });
 
       // then
-      expect(complementaryCertificationRepositoryStub.getByKey).not.to.have.been.called;
-
       expect(challengeRepositoryStub.findActiveFlashCompatible).to.have.been.calledOnceWithExactly({
         locale,
         accessibilityAdjustmentNeeded,
-        complementaryCertificationId: undefined,
+        complementaryCertificationKey: undefined,
       });
     });
   });

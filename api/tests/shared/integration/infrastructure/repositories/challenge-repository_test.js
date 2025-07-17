@@ -1869,8 +1869,8 @@ describe('Integration | Repository | challenge-repository', function () {
 
         expect(flashCompatibleChallenges).to.have.lengthOf(1);
         expect(flashCompatibleChallenges[0].id).to.equal(challengesLC[0].id);
-        expect(flashCompatibleChallenges[0].discriminant).to.equal(certificationFrameworksChallenge.alpha);
-        expect(flashCompatibleChallenges[0].difficulty).to.equal(certificationFrameworksChallenge.delta);
+        expect(flashCompatibleChallenges[0].difficulty).to.equal(certificationFrameworksChallenge.difficulty);
+        expect(flashCompatibleChallenges[0].discriminant).to.equal(certificationFrameworksChallenge.discriminant);
       });
     });
 

@@ -65,16 +65,13 @@ async function _simulateComplementaryCertificationScenario({
   variationPercent,
   challengeRepository,
   flashAlgorithmService,
-  complementaryCertificationRepository,
   sharedFlashAlgorithmConfigurationRepository,
   stopAtChallenge,
 }) {
-  const complementaryCertification = await complementaryCertificationRepository.getByKey(complementaryCertificationKey);
-
   const challenges = await _getChallenges({
     locale,
     challengeRepository,
-    complementaryCertification,
+    complementaryCertificationKey,
   });
 
   const mostRecentAlgorithmConfiguration = await sharedFlashAlgorithmConfigurationRepository.getMostRecent();
@@ -123,11 +120,11 @@ async function _simulateCoreCertificationScenario({
   });
 }
 
-function _getChallenges({ challengeRepository, locale, accessibilityAdjustmentNeeded, complementaryCertification }) {
+function _getChallenges({ challengeRepository, locale, accessibilityAdjustmentNeeded, complementaryCertificationKey }) {
   return challengeRepository.findActiveFlashCompatible({
     locale,
     accessibilityAdjustmentNeeded,
-    complementaryCertificationId: complementaryCertification?.id,
+    complementaryCertificationKey,
   });
 }
 
