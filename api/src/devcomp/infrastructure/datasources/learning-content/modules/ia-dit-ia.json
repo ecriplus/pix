@@ -36,7 +36,7 @@
             "type": "image",
             "url": "https://assets.pix.org/draft/modules/ia-dit-ia/couvia.png",
             "alt": "4 unes de la presse francophone décrites dans l'alternative textuelle",
-            "alternativeText": "<p>Image montrant quatre couvertures de magazines français consacrées à l’intelligence artificielle (IA)&nbsp;:</p><ul><li>Le Nouvel Obs – Titre&nbsp;: «Nos vies sous IA\" avec une main robotique tenant une figurine humaine.</li><li>Philosophie Magazine (Hors-série) – Titre&nbsp;: «IA, le mythe du XXIe siècle», avec un visage humain partiellement robotisé.</li><li>Courrier International – Titre&nbsp;: «L’IA en roue libre», illustré d’un cerveau humanoïde aux commandes d’un corps.</li><li>Sciences et Avenir – Titre&nbsp;: «IA, ce qu’elle change», avec une couverture bleue illustrant un réseau neuronal.</li></ul>",
+            "alternativeText": "<p>Image montrant quatre couvertures de magazines français consacrées à l’intelligence artificielle (IA)&nbsp;:</p><ul>    <li>        Le Nouvel Obs – Titre&nbsp;: «&nbsp;Nos vies sous IA&nbsp;» avec une main robotique tenant une figurine humaine.    </li>    <li> Philosophie Magazine (Hors-série) – Titre&nbsp;: «&nbsp;IA, le mythe du XXIe siècle&nbsp;», avec un visage humain partiellement robotisé.    </li>    <li> Courrier International – Titre&nbsp;: «&nbsp;L’IA en roue libre&nbsp;», illustré d’un cerveau humanoïde aux commandes d’un corps.    </li>    <li> Sciences et Avenir – Titre&nbsp;: «&nbsp;IA, ce qu’elle change&nbsp;», avec une couverture bleue illustrant un réseau neuronal.</li></ul>",
             "legend": "",
             "licence": ""
           }
