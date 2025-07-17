@@ -20,7 +20,7 @@ export default class Header extends Component {
 
   <template>
     <header>
-      <PixBreadcrumb @links={{this.links}} />
+      <PixBreadcrumb @links={{this.links}} class="breadcrumb" />
     </header>
 
     <div class="complementary-certification-header">

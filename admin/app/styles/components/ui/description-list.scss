@@ -1,3 +1,4 @@
+@use 'pix-design-tokens/breakpoints';
 @use 'pix-design-tokens/typography';
 
 /* stylelint-disable custom-property-pattern */
@@ -6,10 +7,10 @@
   flex-direction: column;
 
   > div {
-    @extend %pix-body-m;
+    @extend %pix-body-s;
 
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: var(--pix-spacing-3x);
 
     dt {
@@ -18,11 +19,25 @@
     }
 
     dd {
-      grid-column: span 2 / span 2;
+      grid-column: span 3 / span 3;
 
       a {
         color: var(--pix-primary-500);
         text-decoration: underline;
+      }
+    }
+  }
+
+  @include breakpoints.device-is('mobile'){
+    gap: var(--pix-spacing-1x);
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+
+      dd {
+        grid-column: auto;
       }
     }
   }

@@ -36,5 +36,5 @@ export default class Breadcrumb extends Component {
     return links;
   }
 
-  <template><PixBreadcrumb @links={{this.links}} /></template>
+  <template><PixBreadcrumb @links={{this.links}} class="breadcrumb" /></template>
 }

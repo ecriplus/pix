@@ -1,35 +1,42 @@
+@use 'pix-design-tokens/breakpoints';
 @use 'pix-design-tokens/typography';
 
+/* stylelint-disable color-no-hex */
 .organization-information-section {
   &__archived-message {
     margin-top: var(--pix-spacing-3x);
   }
 
   &__features {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--pix-spacing-1x);
-    padding: var(--pix-spacing-2x);
-    border: 1px solid var(--pix-primary-100);
-    border-radius: var(--pix-spacing-2x);
 
-    li {
+    @include breakpoints.device-is('mobile'){
       display: flex;
-      flex-wrap: wrap;
-      gap: var(--pix-spacing-2x);
-      align-items: center;
+      flex-direction: column;
+      gap: 0;
     }
 
     &--enabled {
-      color: var(--pix-success-300);
+      svg {
+        color: var(--pix-success-300);
+      }
     }
 
     &--disabled {
-      /* stylelint-disable color-no-hex */
-
-      /* missing color tone in design system */
       color: #abadb2;
-      /* stylelint-enable color-no-hex */
+    }
+
+    li {
+      display: inline-flex;
+      flex-wrap: flex-start;
+      gap: var(--pix-spacing-2x);
+      align-items: center;
+
+      > svg {
+        flex-shrink: 0;
+      }
     }
   }
 }
