@@ -2,6 +2,7 @@ import { oidcProviderController } from '../../../../src/identity-access-manageme
 import { usecases } from '../../../../src/identity-access-management/domain/usecases/index.js';
 import { RequestedApplication } from '../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { BadRequestError, UnauthorizedError } from '../../../../src/shared/application/http-errors.js';
+import { logger } from '../../../../src/shared/infrastructure/utils/logger.js';
 import { catchErr, domainBuilder, expect, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Application | Controller | oidc-provider', function () {
@@ -241,6 +242,33 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
       expect(response.statusCode).to.equal(200);
       expect(response.source).to.deep.equal({
         redirectTarget: 'https://idp.net/oidc/authorization',
+      });
+    });
+  });
+
+  describe('#getIdentityProviders', function () {
+    describe('when an unexpected error occurs', function () {
+      it('returns an empty array', async function () {
+        // given
+        const request = {
+          headers: {
+            'accept-language': 'fr',
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host': 'app.pix.fr',
+          },
+        };
+
+        const error = new Error('BOOM!');
+        sinon.stub(usecases, 'getReadyIdentityProviders').rejects(error);
+        sinon.stub(logger, 'error');
+
+        // when
+        const response = await oidcProviderController.getIdentityProviders(request, hFake);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.source).to.deep.equal({ data: [] });
+        expect(logger.error).to.have.been.calledWith(error, 'Error getting identity providers.');
       });
     });
   });

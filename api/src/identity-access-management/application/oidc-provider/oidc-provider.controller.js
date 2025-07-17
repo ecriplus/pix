@@ -1,4 +1,5 @@
 import { BadRequestError, UnauthorizedError } from '../../../shared/application/http-errors.js';
+import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as oidcProviderSerializer from '../../infrastructure/serializers/jsonapi/oidc-identity-providers.serializer.js';
@@ -117,12 +118,17 @@ async function getAuthorizationUrl(request, h) {
  * @return {Promise<*>}
  */
 async function getIdentityProviders(request, h) {
-  const origin = getForwardedOrigin(request.headers);
-  const requestedApplication = RequestedApplication.fromOrigin(origin);
+  try {
+    const origin = getForwardedOrigin(request.headers);
+    const requestedApplication = RequestedApplication.fromOrigin(origin);
 
-  const identityProviders = await usecases.getReadyIdentityProviders({ requestedApplication });
+    const identityProviders = await usecases.getReadyIdentityProviders({ requestedApplication });
 
-  return h.response(oidcProviderSerializer.serialize(identityProviders)).code(200);
+    return h.response(oidcProviderSerializer.serialize(identityProviders)).code(200);
+  } catch (error) {
+    logger.error(error, `Error getting identity providers.`);
+    return h.response(oidcProviderSerializer.serialize([])).code(200);
+  }
 }
 
 /**
