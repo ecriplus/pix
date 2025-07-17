@@ -6,7 +6,7 @@ import { buildPostgresEnvironment } from '../db/utils/build-postgres-environment
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
-dotenv.config({ path: `${__dirname}/../.env` });
+dotenv.config({ path: `${__dirname}/../.env`, quiet: true });
 
 const baseConfiguration = {
   name: 'datamart',
