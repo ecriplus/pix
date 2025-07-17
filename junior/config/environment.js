@@ -1,6 +1,6 @@
 'use strict';
 
-require('dotenv').config();
+require('dotenv').config({ quiet: true });
 
 function _isFeatureEnabled(environmentVariable) {
   return environmentVariable === 'true';

@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ quiet: true });
 const parsePostgresqlConnectionString = require('pg-connection-string').parse;
 
 const databaseToLint = {

@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 import { type LevelWithSilent } from 'pino';
 
-dotenv.config();
+dotenv.config({ quiet: true });
 
 type BooleanType = 'false' | 'true';
 type Environment = 'development' | 'test' | 'production';
