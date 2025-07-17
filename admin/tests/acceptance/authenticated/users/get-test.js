@@ -30,7 +30,6 @@ module('Acceptance | authenticated/users/get', function (hooks) {
     });
     const expectedOrganizationMembershipsCount = 2;
     const expectedParticipationCount = 1;
-    const expectedCertificationCenterCount = 3;
     const expectedAuthenticationMethodCount = 3;
     const connectionTabLabel = this.intl.t('pages.user-details.navbar.connections');
 
@@ -48,11 +47,16 @@ module('Acceptance | authenticated/users/get', function (hooks) {
     assert.dom(userNavigation.getByRole('link', { name: 'Profil' })).exists();
     assert.dom(userNavigation.getByRole('link', { name: `Participations (${expectedParticipationCount})` })).exists();
     assert
-      .dom(userNavigation.getByLabelText('Centres de certification auxquels appartient l´utilisateur'))
-      .hasText(`Pix Certif (${expectedCertificationCenterCount})`);
-    assert
       .dom(userNavigation.getByLabelText('Organisations de l’utilisateur'))
       .hasText(`Pix Orga (${expectedOrganizationMembershipsCount})`);
+    assert
+      .dom(
+        userNavigation.getByLabelText(this.intl.t('pages.user-details.navbar.certification-centers-list-aria-label')),
+      )
+      .hasText(this.intl.t('pages.user-details.navbar.certification-centers-list'));
+    assert
+      .dom(userNavigation.getByRole('link', { name: this.intl.t('pages.user-details.navbar.certification-courses') }))
+      .exists();
     assert
       .dom(userNavigation.getByRole('link', { name: this.intl.t('pages.user-details.navbar.cgu-aria-label') }))
       .exists();
@@ -174,7 +178,9 @@ module('Acceptance | authenticated/users/get', function (hooks) {
       assert.dom(screen.queryByText('Organization #1')).doesNotExist();
 
       // when & then #4
-      await click(screen.getByLabelText('Centres de certification auxquels appartient l´utilisateur'));
+      await click(
+        screen.getByLabelText(this.intl.t('pages.user-details.navbar.certification-centers-list-aria-label')),
+      );
       assert.deepEqual(currentURL(), `/users/${userToAnonymise.id}/certification-center-memberships`);
       assert.dom(screen.queryByText('Certification Center #1')).doesNotExist();
     });
@@ -331,6 +337,8 @@ module('Acceptance | authenticated/users/get', function (hooks) {
   module('when administrator clicks on certification centers tab', function () {
     test('displays user’s certification centers', async function (assert) {
       // given
+      this.intl = this.owner.lookup('service:intl');
+
       const certificationCenter = this.server.create('certification-center', {
         name: 'Centre Kaede',
         externalId: 'ABCDEF12345',
@@ -355,11 +363,45 @@ module('Acceptance | authenticated/users/get', function (hooks) {
       const screen = await visit(`/users/${user.id}`);
 
       // when
-      await click(screen.getByLabelText('Centres de certification auxquels appartient l´utilisateur'));
+      await click(
+        screen.getByLabelText(this.intl.t('pages.user-details.navbar.certification-centers-list-aria-label')),
+      );
 
       // then
       assert.deepEqual(currentURL(), `/users/${user.id}/certification-center-memberships`);
       assert.dom(screen.getByText('Centre Kaede')).exists();
+    });
+  });
+
+  module('when administrator clicks on certification courses tab', function () {
+    test('displays user’s certification courses', async function (assert) {
+      // given
+      this.intl = this.owner.lookup('service:intl');
+
+      const user = this.server.create('user', { email: 'john.harry@example.net' });
+
+      const adminUser = this.server.create('user');
+      this.server.create('admin-member', {
+        userId: adminUser.id,
+        isSuperAdmin: true,
+      });
+      await createAuthenticateSession({ userId: adminUser.id });
+
+      const screen = await visit(`/users/${user.id}`);
+
+      // when
+      const userNavigation = within(screen.getByLabelText("Navigation de la section détails d'un utilisateur"));
+      await click(
+        userNavigation.getByRole('link', { name: this.intl.t('pages.user-details.navbar.certification-courses') }),
+      );
+
+      // then
+      assert.deepEqual(currentURL(), `/users/${user.id}/certifications`);
+      assert
+        .dom(
+          screen.getByText(this.intl.t('components.users.certification-centers.certification-courses.section-title')),
+        )
+        .exists();
     });
   });
 

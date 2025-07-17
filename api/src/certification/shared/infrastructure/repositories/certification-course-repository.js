@@ -182,6 +182,24 @@ async function findOneCertificationCourseByUserIdAndSessionId({ userId, sessionI
   });
 }
 
+/**
+ * @param {Object} params
+ * @param {number} params.userId
+ * @returns {Promise<Array<CertificationCourse>>}
+ */
+async function findAllByUserId({ userId }) {
+  const knexConn = DomainTransaction.getConnection();
+
+  const certificationCourses = await knexConn('certification-courses')
+    .select('*')
+    .where({ userId })
+    .orderBy('createdAt', 'desc');
+
+  return certificationCourses.map((certificationCourseDTO) => {
+    return _toDomain({ certificationCourseDTO });
+  });
+}
+
 async function update({ certificationCourse, noTransaction = false }) {
   const knexConn = noTransaction ? knex : DomainTransaction.getConnection();
 
@@ -221,6 +239,7 @@ async function findCertificationCoursesBySessionId({ sessionId }) {
 }
 
 export {
+  findAllByUserId,
   findCertificationCoursesBySessionId,
   findOneCertificationCourseByUserIdAndSessionId,
   get,

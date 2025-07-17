@@ -39,10 +39,13 @@
 
     <LinkTo
       @route="authenticated.users.get.certification-center-memberships"
-      aria-label="Centres de certification auxquels appartient l´utilisateur"
+      aria-label={{t "pages.user-details.navbar.certification-centers-list-aria-label"}}
     >
       {{t "pages.user-details.navbar.certification-centers-list"}}
-      ({{@model.certificationCenterMembershipCount}})
+    </LinkTo>
+
+    <LinkTo @route="authenticated.users.get.certification-courses">
+      {{t "pages.user-details.navbar.certification-courses"}}
     </LinkTo>
 
     <LinkTo

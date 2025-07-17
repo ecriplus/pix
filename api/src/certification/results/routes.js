@@ -3,6 +3,7 @@ import * as certificationReports from './application/certification-reports-route
 import * as certificationResults from './application/certification-results-route.js';
 import * as livretScolaire from './application/livret-scolaire-route.js';
 import * as organization from './application/organization-route.js';
+import * as user from './application/user-route.js';
 
 const certificationResultRoutes = [
   certificationReports,
@@ -10,6 +11,7 @@ const certificationResultRoutes = [
   certificate,
   livretScolaire,
   organization,
+  user,
 ];
 
 export { certificationResultRoutes };
