@@ -197,6 +197,7 @@ async function _startNewCertification({
       campaignId,
       badgeKey,
     } = highestCertifiableBadgeAcquisition;
+
     if (
       certificationCenter.isHabilitated(complementaryCertificationKey) &&
       certificationCandidate.isGranted(complementaryCertificationKey)
@@ -273,6 +274,7 @@ async function _createCertificationCourse({
     ({ complementaryCertificationBadgeId, complementaryCertificationId }) =>
       new ComplementaryCertificationCourse({ complementaryCertificationBadgeId, complementaryCertificationId }),
   );
+
   const newCertificationCourse = CertificationCourse.from({
     certificationCandidate,
     challenges: certificationChallenges,
