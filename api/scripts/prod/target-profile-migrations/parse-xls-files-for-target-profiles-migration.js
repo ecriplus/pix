@@ -5,6 +5,7 @@ import * as dotenv from 'dotenv';
 
 dotenv.config({
   path: `${__dirname}/../../../.env`,
+  quiet: true,
 });
 import perf_hooks from 'node:perf_hooks';
 

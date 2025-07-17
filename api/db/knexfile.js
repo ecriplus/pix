@@ -3,7 +3,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 import * as dotenv from 'dotenv';
 
 import { buildPostgresEnvironment } from './utils/build-postgres-environment.js';
-dotenv.config({ path: `${__dirname}/../.env` });
+dotenv.config({ path: `${__dirname}/../.env`, quiet: true });
 
 const baseConfiguration = {
   name: 'live',

@@ -4,7 +4,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 import * as dotenv from 'dotenv';
 
-dotenv.config({ path: `${__dirname}/../../.env` });
+dotenv.config({ path: `${__dirname}/../../.env`, quiet: true });
 import lodash from 'lodash';
 
 import { disconnect, knex } from '../../db/knex-database-connection.js';
