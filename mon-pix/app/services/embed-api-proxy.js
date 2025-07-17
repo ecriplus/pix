@@ -13,12 +13,24 @@ export default class EmbedApiProxyService extends Service {
     });
   }
 
-  async handleMessageEvent(event, { fetch = window.fetch, modelName, id }) {
-    const adapter = getOwner(this).lookup(`adapter:${modelName}`);
+  forwardForPreview(context, requestsPort) {
+    requestsPort.addEventListener('message', (event) => this.handleMessageEvent(event, { preview: true }));
+
+    requestsPort.start();
+
+    registerDestructor(context, () => {
+      requestsPort.close();
+    });
+  }
+
+  async handleMessageEvent(event, { fetch = window.fetch, preview, modelName, id }) {
+    const adapter = getOwner(this).lookup(preview ? 'adapter:application' : `adapter:${modelName}`);
 
     let { url } = event.data;
 
-    const urlPrefix = `${adapter.urlForFindRecord(id, modelName)}/embed/`;
+    const urlPrefix = preview
+      ? `${adapter.urlForFindAll()}/llm/preview/embed/`
+      : `${adapter.urlForFindRecord(id, modelName)}/embed/`;
     url = EmbedApiProxyService.buildURL(url, urlPrefix);
 
     const { init } = event.data;
@@ -29,7 +41,7 @@ export default class EmbedApiProxyService extends Service {
       const response = await fetch(url, {
         ...init,
         headers: {
-          ...init.headers,
+          ...init?.headers,
           ...adapter.headers,
         },
       });
