@@ -42,6 +42,7 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
         // given
         const verifiedCode = server.create('verified-code', { id: 'SOMETHING', type: 'combined-course' });
         server.create('organization-to-join', { id: 1, code: verifiedCode.id, identityProvider: null });
+        server.create('combined-course', { code: verifiedCode.id });
 
         // when
         const screen = await visit(`/campagnes`);

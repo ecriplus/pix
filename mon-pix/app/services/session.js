@@ -65,16 +65,15 @@ export default class CurrentSessionService extends SessionService {
   }
 
   get redirectionUrl() {
-    if (this.code) {
-      const baseUrl = window.location.protocol + '//' + window.location.host;
-      return baseUrl + this.router.urlFor('combined-courses', { code: this.code });
+    const baseUrl = window.location.protocol + '//' + window.location.host;
+
+    if (this.verifiedCode?.type === 'combined-course') {
+      return baseUrl + this.router.urlFor('combined-courses', { code: this.verifiedCode.id });
+    } else if (this.verifiedCode?.type === 'campaign') {
+      return baseUrl + this.router.urlFor('campaigns', { code: this.verifiedCode.id });
+    } else {
+      return null;
     }
-    const campaignCode = get(this.session, 'attemptedTransition.from.parent.params.code');
-    if (campaignCode) {
-      const baseUrl = window.location.protocol + '//' + window.location.host;
-      return baseUrl + this.router.urlFor('campaigns', { code: campaignCode });
-    }
-    return null;
   }
 
   requireAuthenticationAndApprovedTermsOfService(transition, authenticationRoute) {
@@ -90,8 +89,8 @@ export default class CurrentSessionService extends SessionService {
     this.attemptedTransition = transition;
   }
 
-  setCode(code) {
-    this.code = code;
+  setVerifiedCode(verifiedCode) {
+    this.verifiedCode = verifiedCode;
   }
 
   get isAuthenticatedByGar() {

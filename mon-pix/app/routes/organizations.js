@@ -4,6 +4,7 @@ import { service } from '@ember/service';
 export default class OrganizationsRoute extends Route {
   @service store;
   @service router;
+  @service session;
 
   beforeModel(transition) {
     if (!transition.from && !transition.to.queryParams.from) {
@@ -14,7 +15,7 @@ export default class OrganizationsRoute extends Route {
   async model(params) {
     const organizationToJoin = await this.store.queryRecord('organization-to-join', { code: params.code });
     const verifiedCode = await this.store.findRecord('verified-code', params.code);
-
+    this.session.setVerifiedCode(verifiedCode);
     return { organizationToJoin, verifiedCode };
   }
 }

@@ -5,9 +5,11 @@ export default class CombinedCourseRoute extends Route {
   @service session;
   @service store;
   @service router;
+  @service accessStorage;
 
   async beforeModel(transition) {
     const { code } = transition.to.params;
+
     if (!transition.from) {
       return this.router.replaceWith('organizations.access', code, { queryParams: { from: 'parcours' } });
     }
@@ -18,8 +20,15 @@ export default class CombinedCourseRoute extends Route {
     }
 
     this.session.requireAuthenticationAndApprovedTermsOfService(transition, () => {
-      this.session.setCode(code);
       this.router.transitionTo('organizations.access', code);
     });
+  }
+
+  model(params) {
+    return this.store.queryRecord('combined-course', { filter: { code: params.code } });
+  }
+
+  afterModel(combinedCourse) {
+    this.accessStorage.clear(combinedCourse.organizationId);
   }
 }

@@ -24,7 +24,7 @@ module('Acceptance | Combined course | Start Combined course workflow', function
     let combinedCourse;
 
     hooks.beforeEach(function () {
-      combinedCourse = server.create('combined-course', { id: 'COMBINIX1', organizationId: 1 });
+      combinedCourse = server.create('combined-course', { code: 'COMBINIX1', organizationId: 1 });
       server.create('verified-code', { id: 'COMBINIX1', type: 'combined-course', combinedCourse });
       server.create('organization-to-join', { id: 1, isRestricted: false, code: combinedCourse.code });
     });
