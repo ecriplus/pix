@@ -81,7 +81,7 @@ module('Acceptance | Module | Routes | retakeCompletedModule', function (hooks) 
     await click(terminateButton);
 
     await waitUntil(() => {
-      return screen.queryByRole('heading', { name: 'Bravo ! Module terminé', level: 1 });
+      return screen.queryByRole('heading', { name: 'Module terminé !', level: 1 });
     });
 
     screen = await visit('/modules/bien-ecrire-son-adresse-mail/');

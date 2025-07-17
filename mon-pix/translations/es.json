@@ -1740,11 +1740,11 @@
         "direction": "Rellena {count, plural, =1 {le champ vide} other {les champs vides}}."
       },
       "recap": {
-        "backToModuleDetails": "Volver a los detalles del módulo",
-        "goToHomepage": "Continuar mi experiencia Pix",
+        "backToModuleDetails": "Deje de",
+        "goToHomepage": "Continuar",
         "goToForm": "Responder al cuestionario",
-        "subtitle": "Has alcanzado los siguientes objetivos:",
-        "title": "¡Enhorabuena! Módulo completado"
+        "subtitle": "Has trabajado en los siguientes objetivos:",
+        "title": "¡Módulo completado!"
       },
       "sidebar": {
         "button": "Visualizar los pasos del módulo"
@@ -1990,14 +1990,12 @@
         },
         "notification": "Si vuelves a intentar las preguntas fallidas o pones a cero para volver a intentarlo todo, tu organización ya no podrá ver tu último resultado. Para que el organizador de la prueba contabilice tu resultado, tendrás que volver a enviarlo.",
         "notification-with-auto-share": "Repita las preguntas fallidas o vuelva a cero para intentarlo de nuevo. El organizador seguirá teniendo acceso a sus resultados anteriores."
-
       },
       "retry": {
         "button": "Repetir el test",
         "message": "{organizationName} te invita a repetir este test para mejorar tus resultados y seguir progresando.",
         "notification": "Vuelva a realizar las preguntas fallidas para mejorar su resultado y seguir progresando. Deberá enviar de nuevo sus resultados para que el organizador pueda contabilizarlos. El organizador seguirá teniendo acceso a tus resultados enviados anteriormente.",
         "notification-with-auto-share": "Repita las preguntas fallidas para mejorar su resultado y seguir progresando. El organizador seguirá teniendo acceso a tus resultados anteriores."
-
       },
       "send-results": "No olvides enviar tus resultados al organizador del test.",
       "send-status": {

@@ -110,7 +110,7 @@ module('Integration | Component | Module | Recap', function (hooks) {
         return element.innerHTML.trim() === t('pages.modulix.recap.subtitle');
       }),
     );
-    assert.ok(screen.getByText('Objectif 1'));
+    assert.ok(screen.getByRole('listitem').textContent.includes('Objectif 1'));
   });
 
   test('should display link to go to homepage', async function (assert) {
@@ -121,6 +121,6 @@ module('Integration | Component | Module | Recap', function (hooks) {
     const screen = await render(<template><ModuleRecap @module={{module}} /></template>);
 
     // then
-    assert.dom(screen.getByRole('link', { name: 'Continuer mon expérience sur Pix' })).exists();
+    assert.dom(screen.getByRole('link', { name: 'Continuer' })).exists();
   });
 });

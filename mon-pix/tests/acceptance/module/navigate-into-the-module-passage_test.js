@@ -127,7 +127,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
 
       // then
       await waitUntil(() => {
-        return screen.queryByRole('heading', { name: 'Bravo ! Module terminé', level: 1 });
+        return screen.queryByRole('heading', { name: 'Module terminé !', level: 1 });
       });
 
       assert.strictEqual(currentURL(), '/modules/bien-ecrire-son-adresse-mail/recap');
