@@ -8,16 +8,18 @@ export default class CombinedCourseRoute extends Route {
 
   async beforeModel(transition) {
     const { code } = transition.to.params;
-    this.code = code;
-    this.transition = transition;
-    const verifiedCode = await this.store.findRecord('verified-code', this.code);
+    if (!transition.from) {
+      return this.router.replaceWith('organizations.access', code, { queryParams: { from: 'parcours' } });
+    }
+
+    const verifiedCode = await this.store.findRecord('verified-code', code);
     if (verifiedCode.type === 'campaign') {
       throw new Error();
     }
 
-    this.session.requireAuthenticationAndApprovedTermsOfService(this.transition, () => {
+    this.session.requireAuthenticationAndApprovedTermsOfService(transition, () => {
       this.session.setCode(code);
-      this.router.transitionTo('organizations.access', this.code);
+      this.router.transitionTo('organizations.access', code);
     });
   }
 }

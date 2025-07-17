@@ -3,9 +3,10 @@ import { service } from '@ember/service';
 
 export default class OrganizationsRoute extends Route {
   @service store;
+  @service router;
 
   beforeModel(transition) {
-    if (!transition.from) {
+    if (!transition.from && !transition.to.queryParams.from) {
       return this.router.replaceWith('campaigns.entry-point');
     }
   }
