@@ -1,4 +1,4 @@
-import { render } from '@1024pix/ember-testing-library';
+import { render, within } from '@1024pix/ember-testing-library';
 import { setupRenderingTest } from 'ember-qunit';
 import Cgu from 'pix-admin/components/users/cgu';
 import { module, test } from 'qunit';
@@ -22,6 +22,8 @@ module('Integration | Component | cgu', function (hooks) {
     const lastPixOrgaTermsOfServiceValidatedAt = null;
     const pixCertifTermsOfServiceAccepted = false;
     const lastPixCertifTermsOfServiceValidatedAt = null;
+
+    const cguTitle = this.intl.t('components.users.user-detail-personal-information.cgu.title');
 
     const appDomain = this.intl.t('components.users.user-detail-personal-information.cgu.validation.domain.pix-app');
     const validatedWithDate = this.intl.t(
@@ -54,8 +56,9 @@ module('Integration | Component | cgu', function (hooks) {
     );
 
     //Then
-    assert.dom(screen.queryByText(`${appDomain} ${validatedWithDate}`)).exists();
-    assert.dom(screen.queryByText(`${orgaDomain} ${validated}`)).exists();
-    assert.dom(screen.queryByText(`${certifDomain} ${nonValidated}`)).exists();
+    const attributesList = within(screen.getByLabelText(cguTitle));
+    assert.dom(attributesList.getByText(appDomain).nextElementSibling).hasText(validatedWithDate);
+    assert.dom(attributesList.getByText(orgaDomain).nextElementSibling).hasText(validated);
+    assert.dom(attributesList.getByText(certifDomain).nextElementSibling).hasText(nonValidated);
   });
 });

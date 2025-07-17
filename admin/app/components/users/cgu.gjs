@@ -2,6 +2,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import dayjs from 'dayjs';
 import { t } from 'ember-intl';
+import { DescriptionList } from 'pix-admin/components/ui/description-list';
 
 export default class Cgu extends Component {
   @service accessControl;
@@ -37,22 +38,24 @@ export default class Cgu extends Component {
   }
 
   <template>
-    <header class="page-section__header">
-      <h2 class="page-section__title">{{t "components.users.user-detail-personal-information.cgu.title"}}</h2>
-    </header>
+    <DescriptionList aria-label={{t "components.users.user-detail-personal-information.cgu.title"}}>
+      <DescriptionList.Item
+        @label={{t "components.users.user-detail-personal-information.cgu.validation.domain.pix-app"}}
+      >
+        {{this.userHasValidatePixAppTermsOfService}}
+      </DescriptionList.Item>
 
-    <ul class="cgu__cgu-list">
-      <li class="cgu__cgu-information">
-        {{t "components.users.user-detail-personal-information.cgu.validation.domain.pix-app"}}
-        {{this.userHasValidatePixAppTermsOfService}}</li>
+      <DescriptionList.Item
+        @label={{t "components.users.user-detail-personal-information.cgu.validation.domain.pix-orga"}}
+      >
+        {{this.userHasValidatePixOrgaTermsOfService}}
+      </DescriptionList.Item>
 
-      <li class="cgu__cgu-information">
-        {{t "components.users.user-detail-personal-information.cgu.validation.domain.pix-orga"}}
-        {{this.userHasValidatePixOrgaTermsOfService}}</li>
-
-      <li class="cgu__cgu-information">
-        {{t "components.users.user-detail-personal-information.cgu.validation.domain.pix-certif"}}
-        {{this.userHasValidatePixCertifTermsOfService}}</li>
-    </ul>
+      <DescriptionList.Item
+        @label={{t "components.users.user-detail-personal-information.cgu.validation.domain.pix-certif"}}
+      >
+        {{this.userHasValidatePixCertifTermsOfService}}
+      </DescriptionList.Item>
+    </DescriptionList>
   </template>
 }
