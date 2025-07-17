@@ -13,6 +13,7 @@ export default class CampaignParticipationOverviews extends Model {
   @attr('number') masteryRate;
   @attr('number') totalStagesCount;
   @attr('number') validatedStagesCount;
+  @attr('boolean') canRetry;
 
   get cardStatus() {
     if (this.isShared) return 'ENDED';

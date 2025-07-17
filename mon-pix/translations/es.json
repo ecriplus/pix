@@ -597,6 +597,7 @@
           "extra-information": "Retomar el test {campaignTitle}",
           "information": "Retomar"
         },
+        "retry": "Mejorarme a mí mismo",
         "see-more": "Ver el detalle",
         "send": "Enviar mis resultados",
         "stages": "{count} { count, plural, =0 {estrellas} =1 {estrella} other {estrellas} } de {total}",

@@ -609,6 +609,7 @@
           "extra-information": "Reprendre le parcours {campaignTitle}",
           "information": "Reprendre"
         },
+        "retry": "M'améliorer",
         "see-more": "Voir le détail",
         "send": "Envoyer mes résultats",
         "stages": "{count} { count, plural, =0 {étoile} =1 {étoile} other {étoiles} } sur {total}",

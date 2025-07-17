@@ -89,6 +89,54 @@ module('Integration | Component | CampaignParticipationOverview | Card | Ended',
       });
     });
 
+    module('when canRetry is true', function () {
+      test('should display retry button text', async function (assert) {
+        // given
+        const campaignParticipationOverview = store.createRecord('campaign-participation-overview', {
+          isShared: true,
+          createdAt: '2020-12-10T15:16:20.109Z',
+          sharedAt: '2020-12-18T15:16:20.109Z',
+          status: 'SHARED',
+          campaignTitle: 'My campaign',
+          organizationName: 'My organization',
+          canRetry: true,
+        });
+        this.set('campaignParticipationOverview', campaignParticipationOverview);
+
+        // when
+        const screen = await render(
+          hbs`<CampaignParticipationOverview::Card::Ended @model={{this.campaignParticipationOverview}} />`,
+        );
+
+        // then
+        assert.ok(screen.getByText(t('pages.campaign-participation-overview.card.retry')));
+      });
+    });
+
+    module('when canRetry is false', function () {
+      test('should display see-more button text', async function (assert) {
+        // given
+        const campaignParticipationOverview = store.createRecord('campaign-participation-overview', {
+          isShared: true,
+          createdAt: '2020-12-10T15:16:20.109Z',
+          sharedAt: '2020-12-18T15:16:20.109Z',
+          status: 'SHARED',
+          campaignTitle: 'My campaign',
+          organizationName: 'My organization',
+          canRetry: false,
+        });
+        this.set('campaignParticipationOverview', campaignParticipationOverview);
+
+        // when
+        const screen = await render(
+          hbs`<CampaignParticipationOverview::Card::Ended @model={{this.campaignParticipationOverview}} />`,
+        );
+
+        // then
+        assert.ok(screen.getByText(t('pages.campaign-participation-overview.card.see-more')));
+      });
+    });
+
     module('#onClick', function () {
       test('should push event on click', async function (assert) {
         // given

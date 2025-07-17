@@ -38,10 +38,14 @@ export default class Ended extends Component {
         </div>
         <PixButton
           class="campaign-participation-overview-card-content__action"
-          @variant="secondary"
+          @variant={{if @model.canRetry "primary" "secondary"}}
           @triggerAction={{this.onClick}}
         >
-          {{t "pages.campaign-participation-overview.card.see-more"}}
+          {{#if @model.canRetry}}
+            {{t "pages.campaign-participation-overview.card.retry"}}
+          {{else}}
+            {{t "pages.campaign-participation-overview.card.see-more"}}
+          {{/if}}
         </PixButton>
       </section>
     </PixBlock>

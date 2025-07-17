@@ -609,6 +609,7 @@
           "extra-information": "Resume the customised test {campaignTitle}",
           "information": "Resume"
         },
+        "retry": "Improve myself",
         "see-more": "See more",
         "send": "Submit my results",
         "stages": "{count} { count, plural, =0 {star} =1 {star} other {stars} } out of {total}",

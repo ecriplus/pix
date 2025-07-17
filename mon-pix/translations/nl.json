@@ -597,6 +597,7 @@
           "extra-information": "Hervat de {campaignTitle} route",
           "information": "Overnemen"
         },
+        "retry": "Verbeter mezelf",
         "see-more": "Zie details",
         "send": "Stuur mijn resultaten",
         "stages": "{count} {count, plural, =0 {star} =1 {star} other {stars} } on {total}",
