@@ -30,12 +30,6 @@ import publishSessionWithValidatedCertification from '../tools/publish-session-w
  *   - I'm a SCO orga learner with a certifiable account
  *   - I'm able to start a certification course
  *   - I have previously obtained a certif SCO with ~550 pix
- *
- *  Quick start :
- *    - Pix App user    : certif-success@example.net
- *    - Pix Certif user : certif-prescriptor@example.net
- *    - Pix Orga user   : certif-prescriptor@example.net
- *    - Pix Admin user  : superadmin@example.net
  */
 export class ScoManagingStudent {
   static USER_BIRTHDATE = '2000-01-01';

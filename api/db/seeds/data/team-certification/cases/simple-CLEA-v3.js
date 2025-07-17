@@ -37,12 +37,6 @@ import publishSessionWithValidatedCertification from '../tools/publish-session-w
  *   - I'm a pix app user with a certifiable account and the certifiable badge required for CLEA double-certification
  *   - I'm able to start a certification course
  *   - I have previously obtained a certif CLEA with ~350 pix
- *
- *  Quick start :
- *    - Pix App user    : certif-success@example.net
- *    - Pix Certif user : certif-prescriptor@example.net
- *    - Pix Orga user   : certif-prescriptor@example.net
- *    - Pix Admin user  : superadmin@example.net
  */
 export class CleaV3Seed {
   constructor({ databaseBuilder }) {
@@ -95,7 +89,7 @@ export class CleaV3Seed {
 
     prescriptionTargetProfilesUsecases.attachTargetProfilesToOrganization({
       organizationId: organization.id,
-      targetProfileIds: [cleaTargetProfile.id], // TODO : replace by getTargetProfile
+      targetProfileIds: [cleaTargetProfile.id],
     });
 
     return { organization, organizationMember };
@@ -110,7 +104,6 @@ export class CleaV3Seed {
         externalId: DOUBLE_CERTIFICATION_CLEA_CERTIFICATION_CENTER_EXTERNAL_ID,
         createdAt: new Date('2024-01-30'),
         habilitations: [ComplementaryCertificationKeys.CLEA],
-        isV3Pilot: true,
       }),
       complementaryCertificationIds: [CLEA_COMPLEMENTARY_CERTIFICATION_ID],
     });

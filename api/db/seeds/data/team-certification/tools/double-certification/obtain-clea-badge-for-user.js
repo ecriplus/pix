@@ -49,8 +49,6 @@ export default async function obtainCleaBadgeForUser({
     campaignParticipationId,
   });
 
-  await databaseBuilder.commit();
-
   const keDataForSnapshot = [];
   const answersAndKnowledgeElements = await profileTooling.getAnswersAndKnowledgeElementsForPerfectProfile();
 
