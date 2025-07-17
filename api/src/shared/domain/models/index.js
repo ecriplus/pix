@@ -98,7 +98,6 @@ import { Thematic } from './Thematic.js';
 import { Tube } from './Tube.js';
 import { UserCompetence } from './UserCompetence.js';
 import { UserOrgaSettings } from './UserOrgaSettings.js';
-import { UserSavedTutorialWithTutorial } from './UserSavedTutorialWithTutorial.js';
 import { Validation } from './Validation.js';
 
 export {
@@ -205,7 +204,6 @@ export {
   UserLogin,
   UserOrgaSettings,
   UserSavedTutorial,
-  UserSavedTutorialWithTutorial,
   UserToCreate,
   Validation,
 };

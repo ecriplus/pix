@@ -36,7 +36,7 @@ describe('Unit | Serializer | JSONAPI | user-saved-tutorial-serializer', functio
       it('should serialize', function () {
         // given
         const tutorial = domainBuilder.buildTutorial({ id: 'tutorialId' });
-        const userSavedTutorialWithTutorial = domainBuilder.buildUserSavedTutorialWithTutorial({
+        const userSavedTutorial = domainBuilder.buildUserSavedTutorial({
           id: 123,
           userId: 456,
           tutorial,
@@ -49,33 +49,12 @@ describe('Unit | Serializer | JSONAPI | user-saved-tutorial-serializer', functio
             attributes: {
               'user-id': 456,
               'skill-id': 'skillId',
-            },
-            relationships: {
-              tutorial: {
-                data: {
-                  id: 'tutorialId',
-                  type: 'tutorials',
-                },
-              },
+              'tutorial-id': 'recTuto1',
             },
           },
-          included: [
-            {
-              attributes: {
-                duration: '00:01:30',
-                format: 'video',
-                id: 'tutorialId',
-                link: 'https://youtube.fr',
-                source: 'Youtube',
-                title: 'Savoir regarder des vidéos youtube.',
-              },
-              id: 'tutorialId',
-              type: 'tutorials',
-            },
-          ],
         };
         // when
-        const json = serializer.serialize(userSavedTutorialWithTutorial);
+        const json = serializer.serialize(userSavedTutorial);
 
         // then
         expect(json).to.be.deep.equal(expectedJsonUserSavedTutorial);

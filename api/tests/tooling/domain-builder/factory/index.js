@@ -161,7 +161,6 @@ import { buildUserCompetence } from './build-user-competence.js';
 import { buildUserDetailsForAdmin } from './build-user-details-for-admin.js';
 import { buildUserOrgaSettings } from './build-user-orga-settings.js';
 import { buildUserSavedTutorial } from './build-user-saved-tutorial.js';
-import { buildUserSavedTutorialWithTutorial } from './build-user-saved-tutorial-with-tutorial.js';
 import { buildUserScorecard } from './build-user-scorecard.js';
 import { buildV3CertificationChallengeForAdministration } from './build-v3-certification-challenge-for-administration.js';
 import { buildV3CertificationChallengeLiveAlertForAdministration } from './build-v3-certification-challenge-live-alert-for-administration.js';
@@ -498,7 +497,6 @@ export {
   buildUserDetailsForAdmin,
   buildUserOrgaSettings,
   buildUserSavedTutorial,
-  buildUserSavedTutorialWithTutorial,
   buildUserScorecard,
   buildV3CertificationChallengeForAdministration,
   buildV3CertificationChallengeLiveAlertForAdministration,
