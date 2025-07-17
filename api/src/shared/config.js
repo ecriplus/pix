@@ -469,6 +469,7 @@ const configuration = (function () {
         maximumReachableScore: 895,
       },
       maxReachableLevel: 7,
+      activeCoreCalibrationId: parseInt(process.env.ACTIVE_CORE_CALIBRATION_ID, 10) || 3,
     },
     version: process.env.CONTAINER_VERSION || 'development',
     autonomousCourse: {

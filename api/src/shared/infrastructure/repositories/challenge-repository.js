@@ -1,3 +1,4 @@
+import { knex as datamartKnex } from '../../../../datamart/knex-database-connection.js';
 import { knex } from '../../../../db/knex-database-connection.js';
 import { httpAgent } from '../../../../src/shared/infrastructure/http-agent.js';
 import * as skillRepository from '../../../shared/infrastructure/repositories/skill-repository.js';
@@ -17,6 +18,9 @@ const ARCHIVED_STATUS = 'archivé';
 const OBSOLETE_STATUS = 'périmé';
 const OPERATIVE_STATUSES = [VALIDATED_STATUS, ARCHIVED_STATUS];
 const ACCESSIBLE_STATUSES = [Accessibility.RAS, Accessibility.OK];
+
+const PIX_CORE_DATAMART_SCOPE = 'COEUR';
+const PIX_CORE_CHALLENGES_DATAMART_STATUS = 'VALIDATED';
 
 export async function get(id, { forCorrection = false } = {}) {
   const challengeDto = await getInstance().load(id);
@@ -184,13 +188,47 @@ function decorateWithCertificationCalibration({ challengeDtos, complementaryCert
   });
 }
 
-export async function findFlashCompatibleWithoutLocale({ useObsoleteChallenges } = {}) {
+export async function findFlashCompatibleWithoutLocale({
+  useObsoleteChallenges,
+  fromArchivedCalibration = false,
+} = {}) {
+  if (fromArchivedCalibration) {
+    return _findFlashCompatibleWithoutLocaleFromDatamart({ useObsoleteChallenges });
+  }
+  return _findFlashCompatibleWithoutLocaleFromLCMS({ useObsoleteChallenges });
+}
+
+async function _findFlashCompatibleWithoutLocaleFromLCMS({ useObsoleteChallenges } = {}) {
   const acceptedStatuses = useObsoleteChallenges ? [OBSOLETE_STATUS, ...OPERATIVE_STATUSES] : OPERATIVE_STATUSES;
   const cacheKey = `findFlashCompatibleByStatuses({ useObsoleteChallenges: ${Boolean(useObsoleteChallenges)} })`;
   const findFlashCompatibleByStatusesCallback = (knex) =>
     knex.whereIn('status', acceptedStatuses).whereNotNull('alpha').whereNotNull('delta').orderBy('id');
   const challengeDtos = await getInstance().find(cacheKey, findFlashCompatibleByStatusesCallback);
   const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
+  return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
+}
+
+async function _findFlashCompatibleWithoutLocaleFromDatamart() {
+  const activeCoreCalibrationId = config.v3Certification.activeCoreCalibrationId;
+  const datamartChallenges = await datamartKnex('data_active_calibrated_challenges')
+    .join('data_calibrations', 'data_calibrations.id', activeCoreCalibrationId)
+    .where({ scope: PIX_CORE_DATAMART_SCOPE, status: PIX_CORE_CHALLENGES_DATAMART_STATUS });
+
+  const challengesIds = datamartChallenges.map(({ challenge_id }) => challenge_id);
+  const challengeDtos = await getInstance().getMany(challengesIds);
+
+  const calibratedChallenges = datamartChallenges.map((datamartChallenge) => {
+    const correspondingChallenge = challengeDtos.find(
+      (challengeDto) => datamartChallenge.challenge_id === challengeDto.id,
+    );
+
+    correspondingChallenge.alpha = datamartChallenge.alpha;
+    correspondingChallenge.delta = datamartChallenge.delta;
+
+    return correspondingChallenge;
+  });
+
+  const challengesDtosWithSkills = await loadChallengeDtosSkills(calibratedChallenges);
   return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
 }
 

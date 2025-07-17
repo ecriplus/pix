@@ -3,7 +3,15 @@ import { ValidatorQCU } from '../../../../../src/evaluation/domain/models/Valida
 import { config } from '../../../../../src/shared/config.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import * as challengeRepository from '../../../../../src/shared/infrastructure/repositories/challenge-repository.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex, nock } from '../../../../test-helper.js';
+import {
+  catchErr,
+  databaseBuilder,
+  datamartBuilder,
+  domainBuilder,
+  expect,
+  knex,
+  nock,
+} from '../../../../test-helper.js';
 
 describe('Integration | Repository | challenge-repository', function () {
   const challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson = {
@@ -1627,7 +1635,7 @@ describe('Integration | Repository | challenge-repository', function () {
       challengesLC.push(challengeData08_skill03_qcu_archive_notFlashCompatible_fr_noEmbedJson);
     });
 
-    context('when including obsolete challenges', function () {
+    context('when retrieving challenges from archive', function () {
       context('when no flash compatible challenges found', function () {
         it('should return an empty array', async function () {
           // given
@@ -1637,6 +1645,7 @@ describe('Integration | Repository | challenge-repository', function () {
           // when
           const challenges = await challengeRepository.findFlashCompatibleWithoutLocale({
             useObsoleteChallenges: true,
+            fromArchivedCalibration: true,
           });
 
           // then
@@ -1647,15 +1656,30 @@ describe('Integration | Repository | challenge-repository', function () {
       context('when flash compatible challenges found', function () {
         it('should return the challenges', async function () {
           // given
+          const activeCoreCalibrationId = config.v3Certification.activeCoreCalibrationId;
+          datamartBuilder.factory.buildCalibration({
+            id: activeCoreCalibrationId,
+            calibration_date: new Date('2024-10-23'),
+            scope: 'COEUR',
+            status: 'VALIDATED',
+          });
+          const datamartChallenge = datamartBuilder.factory.buildActiveCalibratedChallenge({
+            calibrationId: activeCoreCalibrationId,
+            challengeId: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
+            alpha: 456,
+            delta: 567,
+          });
           challengesLC.push(challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson);
           challengesLC.push(challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson);
           challengesLC.push(challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson);
           databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
           await databaseBuilder.commit();
+          await datamartBuilder.commit();
 
           // when
           const challenges = await challengeRepository.findFlashCompatibleWithoutLocale({
             useObsoleteChallenges: true,
+            fromArchivedCalibration: true,
           });
 
           // then
@@ -1666,8 +1690,8 @@ describe('Integration | Repository | challenge-repository', function () {
               colorBlindnessCompatibility:
                 challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility2,
               focused: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.focusable,
-              discriminant: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.alpha,
-              difficulty: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.delta,
+              discriminant: datamartChallenge.alpha,
+              difficulty: datamartChallenge.delta,
               validator: new ValidatorQCM({
                 solution: domainBuilder.buildSolution({
                   id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
@@ -1676,145 +1700,6 @@ describe('Integration | Repository | challenge-repository', function () {
                   isT1Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t1Status,
                   isT2Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t2Status,
                   isT3Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t3Status,
-                  qrocBlocksTypes: {},
-                }),
-              }),
-              skill: domainBuilder.buildSkill({
-                ...skillData00_tube00competence00_actif,
-                difficulty: skillData00_tube00competence00_actif.level,
-                hint: skillData00_tube00competence00_actif.hint_i18n.fr,
-              }),
-            }),
-            domainBuilder.buildChallenge({
-              ...challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson,
-              blindnessCompatibility: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.accessibility1,
-              colorBlindnessCompatibility:
-                challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.accessibility2,
-              focused: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.focusable,
-              discriminant: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.alpha,
-              difficulty: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.delta,
-              validator: new ValidatorQCM({
-                solution: domainBuilder.buildSolution({
-                  id: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.id,
-                  type: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.type,
-                  value: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.solution,
-                  isT1Enabled: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.t3Status,
-                  qrocBlocksTypes: {},
-                }),
-              }),
-              skill: domainBuilder.buildSkill({
-                ...skillData00_tube00competence00_actif,
-                difficulty: skillData00_tube00competence00_actif.level,
-                hint: skillData00_tube00competence00_actif.hint_i18n.fr,
-              }),
-            }),
-            domainBuilder.buildChallenge({
-              ...challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson,
-              blindnessCompatibility:
-                challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.accessibility1,
-              colorBlindnessCompatibility:
-                challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.accessibility2,
-              focused: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.focusable,
-              discriminant: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.alpha,
-              difficulty: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.delta,
-              validator: new ValidatorQCM({
-                solution: domainBuilder.buildSolution({
-                  id: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.id,
-                  type: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.type,
-                  value: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.solution,
-                  isT1Enabled: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.t3Status,
-                  qrocBlocksTypes: {},
-                }),
-              }),
-              skill: domainBuilder.buildSkill({
-                ...skillData02_tube02competence01_perime,
-                difficulty: skillData02_tube02competence01_perime.level,
-                hint: skillData02_tube02competence01_perime.hint_i18n.fr,
-              }),
-            }),
-          ]);
-        });
-      });
-    });
-
-    context('when excluding obsolete challenges', function () {
-      context('when no flash compatible challenges found', function () {
-        it('should return an empty array', async function () {
-          // given
-          databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
-          await databaseBuilder.commit();
-
-          // when
-          const challenges = await challengeRepository.findFlashCompatibleWithoutLocale({
-            useObsoleteChallenges: false,
-          });
-
-          // then
-          expect(challenges).to.deep.equal([]);
-        });
-      });
-
-      context('when flash compatible challenges found', function () {
-        it('should return the challenges', async function () {
-          // given
-          challengesLC.push(challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson);
-          challengesLC.push(challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson);
-          challengesLC.push(challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson);
-          databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
-          await databaseBuilder.commit();
-
-          // when
-          const challenges = await challengeRepository.findFlashCompatibleWithoutLocale({
-            useObsoleteChallenges: false,
-          });
-
-          // then
-          expect(challenges).to.deep.equal([
-            domainBuilder.buildChallenge({
-              ...challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson,
-              blindnessCompatibility: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility1,
-              colorBlindnessCompatibility:
-                challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility2,
-              focused: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.focusable,
-              discriminant: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.alpha,
-              difficulty: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.delta,
-              validator: new ValidatorQCM({
-                solution: domainBuilder.buildSolution({
-                  id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
-                  type: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.type,
-                  value: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.solution,
-                  isT1Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t3Status,
-                  qrocBlocksTypes: {},
-                }),
-              }),
-              skill: domainBuilder.buildSkill({
-                ...skillData00_tube00competence00_actif,
-                difficulty: skillData00_tube00competence00_actif.level,
-                hint: skillData00_tube00competence00_actif.hint_i18n.fr,
-              }),
-            }),
-            domainBuilder.buildChallenge({
-              ...challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson,
-              blindnessCompatibility: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.accessibility1,
-              colorBlindnessCompatibility:
-                challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.accessibility2,
-              focused: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.focusable,
-              discriminant: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.alpha,
-              difficulty: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.delta,
-              validator: new ValidatorQCM({
-                solution: domainBuilder.buildSolution({
-                  id: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.id,
-                  type: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.type,
-                  value: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.solution,
-                  isT1Enabled: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.t3Status,
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1825,6 +1710,214 @@ describe('Integration | Repository | challenge-repository', function () {
               }),
             }),
           ]);
+        });
+      });
+    });
+
+    context('when retrieving current framework', function () {
+      context('when including obsolete challenges', function () {
+        context('when no flash compatible challenges found', function () {
+          it('should return an empty array', async function () {
+            // given
+            databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+            await databaseBuilder.commit();
+
+            // when
+            const challenges = await challengeRepository.findFlashCompatibleWithoutLocale({
+              useObsoleteChallenges: true,
+            });
+
+            // then
+            expect(challenges).to.deep.equal([]);
+          });
+        });
+
+        context('when flash compatible challenges found', function () {
+          it('should return the challenges', async function () {
+            // given
+            challengesLC.push(challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson);
+            challengesLC.push(challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson);
+            challengesLC.push(challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson);
+            databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+            await databaseBuilder.commit();
+
+            // when
+            const challenges = await challengeRepository.findFlashCompatibleWithoutLocale({
+              useObsoleteChallenges: true,
+            });
+
+            // then
+            expect(challenges).to.deep.equal([
+              domainBuilder.buildChallenge({
+                ...challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson,
+                blindnessCompatibility:
+                  challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility1,
+                colorBlindnessCompatibility:
+                  challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility2,
+                focused: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.focusable,
+                discriminant: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.alpha,
+                difficulty: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.delta,
+                validator: new ValidatorQCM({
+                  solution: domainBuilder.buildSolution({
+                    id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
+                    type: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.type,
+                    value: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.solution,
+                    isT1Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t1Status,
+                    isT2Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t2Status,
+                    isT3Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t3Status,
+                    qrocBlocksTypes: {},
+                  }),
+                }),
+                skill: domainBuilder.buildSkill({
+                  ...skillData00_tube00competence00_actif,
+                  difficulty: skillData00_tube00competence00_actif.level,
+                  hint: skillData00_tube00competence00_actif.hint_i18n.fr,
+                }),
+              }),
+              domainBuilder.buildChallenge({
+                ...challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson,
+                blindnessCompatibility:
+                  challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.accessibility1,
+                colorBlindnessCompatibility:
+                  challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.accessibility2,
+                focused: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.focusable,
+                discriminant: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.alpha,
+                difficulty: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.delta,
+                validator: new ValidatorQCM({
+                  solution: domainBuilder.buildSolution({
+                    id: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.id,
+                    type: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.type,
+                    value: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.solution,
+                    isT1Enabled: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.t1Status,
+                    isT2Enabled: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.t2Status,
+                    isT3Enabled: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.t3Status,
+                    qrocBlocksTypes: {},
+                  }),
+                }),
+                skill: domainBuilder.buildSkill({
+                  ...skillData00_tube00competence00_actif,
+                  difficulty: skillData00_tube00competence00_actif.level,
+                  hint: skillData00_tube00competence00_actif.hint_i18n.fr,
+                }),
+              }),
+              domainBuilder.buildChallenge({
+                ...challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson,
+                blindnessCompatibility:
+                  challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.accessibility1,
+                colorBlindnessCompatibility:
+                  challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.accessibility2,
+                focused: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.focusable,
+                discriminant: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.alpha,
+                difficulty: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.delta,
+                validator: new ValidatorQCM({
+                  solution: domainBuilder.buildSolution({
+                    id: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.id,
+                    type: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.type,
+                    value: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.solution,
+                    isT1Enabled: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.t1Status,
+                    isT2Enabled: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.t2Status,
+                    isT3Enabled: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.t3Status,
+                    qrocBlocksTypes: {},
+                  }),
+                }),
+                skill: domainBuilder.buildSkill({
+                  ...skillData02_tube02competence01_perime,
+                  difficulty: skillData02_tube02competence01_perime.level,
+                  hint: skillData02_tube02competence01_perime.hint_i18n.fr,
+                }),
+              }),
+            ]);
+          });
+        });
+      });
+
+      context('when excluding obsolete challenges', function () {
+        context('when no flash compatible challenges found', function () {
+          it('should return an empty array', async function () {
+            // given
+            databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+            await databaseBuilder.commit();
+
+            // when
+            const challenges = await challengeRepository.findFlashCompatibleWithoutLocale({
+              useObsoleteChallenges: false,
+            });
+
+            // then
+            expect(challenges).to.deep.equal([]);
+          });
+        });
+
+        context('when flash compatible challenges found', function () {
+          it('should return the challenges', async function () {
+            // given
+            challengesLC.push(challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson);
+            challengesLC.push(challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson);
+            challengesLC.push(challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson);
+            databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+            await databaseBuilder.commit();
+
+            // when
+            const challenges = await challengeRepository.findFlashCompatibleWithoutLocale({
+              useObsoleteChallenges: false,
+            });
+
+            // then
+            expect(challenges).to.deep.equal([
+              domainBuilder.buildChallenge({
+                ...challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson,
+                blindnessCompatibility:
+                  challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility1,
+                colorBlindnessCompatibility:
+                  challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility2,
+                focused: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.focusable,
+                discriminant: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.alpha,
+                difficulty: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.delta,
+                validator: new ValidatorQCM({
+                  solution: domainBuilder.buildSolution({
+                    id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
+                    type: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.type,
+                    value: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.solution,
+                    isT1Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t1Status,
+                    isT2Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t2Status,
+                    isT3Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t3Status,
+                    qrocBlocksTypes: {},
+                  }),
+                }),
+                skill: domainBuilder.buildSkill({
+                  ...skillData00_tube00competence00_actif,
+                  difficulty: skillData00_tube00competence00_actif.level,
+                  hint: skillData00_tube00competence00_actif.hint_i18n.fr,
+                }),
+              }),
+              domainBuilder.buildChallenge({
+                ...challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson,
+                blindnessCompatibility:
+                  challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.accessibility1,
+                colorBlindnessCompatibility:
+                  challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.accessibility2,
+                focused: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.focusable,
+                discriminant: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.alpha,
+                difficulty: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.delta,
+                validator: new ValidatorQCM({
+                  solution: domainBuilder.buildSolution({
+                    id: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.id,
+                    type: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.type,
+                    value: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.solution,
+                    isT1Enabled: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.t1Status,
+                    isT2Enabled: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.t2Status,
+                    isT3Enabled: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.t3Status,
+                    qrocBlocksTypes: {},
+                  }),
+                }),
+                skill: domainBuilder.buildSkill({
+                  ...skillData00_tube00competence00_actif,
+                  difficulty: skillData00_tube00competence00_actif.level,
+                  hint: skillData00_tube00competence00_actif.hint_i18n.fr,
+                }),
+              }),
+            ]);
+          });
         });
       });
     });
