@@ -654,7 +654,7 @@
         "copied": "Copié !"
       },
       "user-overview": {
-        "global-last-login": "Date de dernière connexion globale :",
+        "global-last-login": "Date de dernière connexion globale",
         "no-last-connection-date-info": "Non connecté depuis 10/2021",
         "sso": "SSO"
       }

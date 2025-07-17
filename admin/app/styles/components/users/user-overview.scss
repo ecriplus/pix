@@ -1,37 +1,44 @@
-.user-detail-personal-information-section {
-  &__content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    max-width: fit-content;
-  }
+.user-overview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  &__infogroup {
-    margin-bottom: 1rem;
-  }
-
-  &__user-informations {
-    margin-bottom: 5px;
-  }
+.user-overview-section {
+  display: flex;
+  flex-direction: column;
+  gap:  var(--pix-spacing-1x);;
+  margin-bottom: var(--pix-spacing-6x);
 
   &__anonymisation-message {
-    max-width: 600px;
-    margin-bottom: 16px;
+    width: 100%;
+    margin-top: var(--pix-spacing-3x);
+  }
+
+  &__copy-item {
+    display: flex;
+    gap:  var(--pix-spacing-2x);
+    align-items: center;
+
+    button {
+      &:hover {
+        color: var(--pix-primary-700);
+      }
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: var(--pix-spacing-3x);
+    align-items: center;
   }
 
   & .pix-input {
     width: 100%;
-  }
-
-  .pix-select {
-    &__label {
-      margin: 0;
-      font-weight: 600;
-      font-size: 1rem;
-    }
-  }
-
-  .form-actions {
-    margin-top: 20px;
   }
 }

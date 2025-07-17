@@ -16,7 +16,8 @@ import CopyButton from 'ember-cli-clipboard/components/copy-button';
 import isClipboardSupported from 'ember-cli-clipboard/helpers/is-clipboard-supported';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
-import { not } from 'ember-truth-helpers';
+import { and, not } from 'ember-truth-helpers';
+import { DescriptionList } from 'pix-admin/components/ui/description-list';
 import ENV from 'pix-admin/config/environment';
 
 import ConfirmPopup from '../confirm-popup';
@@ -187,7 +188,20 @@ export default class UserOverview extends Component {
 
   <template>
     <section class="page-section">
-      <div class="user-detail-personal-information-section">
+      <div class="user-overview-header">
+        <h1 class="page-section__title">Informations de l'utilisateur</h1>
+        <PixButtonLink
+          @variant="secondary"
+          @href={{this.externalURL}}
+          @size="small"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Tableau de bord
+        </PixButtonLink>
+      </div>
+
+      <div class="user-overview-section">
         {{#if this.isEditionMode}}
           <form class="form" {{on "submit" this.updateUserDetails}}>
             <span class="form__instructions">
@@ -273,123 +287,77 @@ export default class UserOverview extends Component {
             </div>
           </form>
         {{else}}
-          <div>
-            {{#if @user.hasBeenAnonymised}}
-              <PixNotificationAlert
-                @type="warning"
-                class="user-detail-personal-information-section__anonymisation-message"
-              >
-                {{this.anonymisationMessage}}
-              </PixNotificationAlert>
-            {{/if}}
-          </div>
-          <div class="user-detail-personal-information-section__content">
-            <div>
-              <ul class="user-detail-personal-information-section__infogroup">
-                <li class="user-detail-personal-information-section__user-informations">Prénom :
-                  {{@user.firstName}}</li>
-                <li class="user-detail-personal-information-section__user-informations">Nom : {{@user.lastName}}</li>
-                <li class="user-detail-personal-information-section__user-informations">Langue : {{@user.lang}}</li>
-                <li class="user-detail-personal-information-section__user-informations">Locale : {{@user.locale}}</li>
-                <li class="user-detail-personal-information-section__user-informations">
-                  Date de création :
-                  {{#if @user.createdAt}}
-                    {{dayjsFormat @user.createdAt "DD/MM/YYYY"}}
-                  {{/if}}
-                </li>
-              </ul>
-              <ul class="user-detail-personal-information-section__infogroup">
-                <li class="user-detail-personal-information-section__user-informations flex space-between gap-4x">
-                  <span>Adresse e-mail : {{@user.email}}</span>
-                  <span>
-                    {{#if @user.email}}
-                      {{#if (isClipboardSupported)}}
-                        <PixTooltip @id="copy-email-tooltip" @position="top" @isInline={{true}}>
-                          <:triggerElement>
-                            <CopyButton
-                              @text={{@user.email}}
-                              aria-label="{{t 'components.users.user-detail-personal-information.actions.copy-email'}}"
-                              aria-describedby="copy-user-email"
-                              class="pix-icon-button pix-icon-button--small pix-icon-button--dark-grey"
-                            >
-                              <PixIcon @name="copy" @ariaHidden={{true}} />
-                            </CopyButton>
-                          </:triggerElement>
-                          <:tooltip>{{this.tooltipTextEmail}}</:tooltip>
-                        </PixTooltip>
-                      {{/if}}
-                    {{/if}}
-                  </span>
-                </li>
-                <li class="user-detail-personal-information-section__user-informations flex space-between gap-4x">
-                  <span>Identifiant : {{@user.username}}</span>
-                  <span>
-                    {{#if @user.username}}
-                      {{#if (isClipboardSupported)}}
-                        <PixTooltip @id="copy-username-tooltip" @position="top" @isInline={{true}}>
-                          <:triggerElement>
-                            <CopyButton
-                              @text={{@user.username}}
-                              aria-label="{{t
-                                'components.users.user-detail-personal-information.actions.copy-username'
-                              }}"
-                              aria-describedby="copy-user-id"
-                              class="pix-icon-button pix-icon-button--small pix-icon-button--dark-grey"
-                            >
-                              <PixIcon @name="copy" @ariaHidden={{true}} />
-                            </CopyButton>
-                          </:triggerElement>
-                          <:tooltip>{{this.tooltipTextUsername}}</:tooltip>
-                        </PixTooltip>
-                      {{/if}}
-                    {{/if}}
-                  </span>
-                </li>
-                <li class="user-detail-personal-information-section__user-informations flex space-between gap-4x">
-                  <span>
-                    {{t "components.users.user-overview.sso"}}
-                    :
-                    {{#if this.hasSsoAuthentication}}{{t "common.words.yes"}}{{else}}{{t "common.words.no"}}{{/if}}
-                  </span>
-                </li>
-              </ul>
+          {{#if @user.hasBeenAnonymised}}
+            <PixNotificationAlert @type="warning" class="user-overview-section__anonymisation-message">
+              {{this.anonymisationMessage}}
+            </PixNotificationAlert>
+          {{/if}}
 
-              <ul class="user-detail-personal-information-section__infogroup">
-                <li class="user-detail-personal-information-section__user-informations">Nombre de tentatives de
-                  connexion en erreur :
-                  {{@user.userLogin.failureCount}}</li>
-                {{#if @user.userLogin.blockedAt}}
-                  <li class="user-detail-personal-information-section__user-informations">Utilisateur totalement bloqué
-                    le :
-                    {{dayjsFormat @user.userLogin.blockedAt "DD/MM/YYYY HH:mm"}}</li>
-                {{/if}}
-                {{#if this.shouldDisplayTemporaryBlockedDate}}
-                  <li class="user-detail-personal-information-section__user-informations">Utilisateur temporairement
-                    bloqué jusqu'au :
-                    {{dayjsFormat @user.userLogin.temporaryBlockedUntil "DD/MM/YYYY HH:mm"}}</li>
-                {{/if}}
-                <li>
-                  {{t "components.users.user-overview.global-last-login"}}
-                  {{#if @user.lastLoggedAt}}
-                    {{dayjsFormat @user.lastLoggedAt "DD/MM/YYYY"}}
-                  {{else}}
-                    {{t "components.users.user-overview.no-last-connection-date-info"}}
-                  {{/if}}
-                </li>
-              </ul>
-            </div>
-            <div>
-              <PixButtonLink
-                @variant="secondary"
-                @href={{this.externalURL}}
-                @size="small"
-                target="_blank"
-                rel="noopener noreferrer"
-              >Tableau de bord</PixButtonLink>
-            </div>
-          </div>
-          <div class="form-actions">
-            {{#if this.accessControl.hasAccessToUsersActionsScope}}
+          <DescriptionList aria-label="Informations utilisateur">
+            <DescriptionList.Divider />
+
+            <DescriptionList.Item @label="Prénom">{{@user.firstName}}</DescriptionList.Item>
+            <DescriptionList.Item @label="Nom">{{@user.lastName}}</DescriptionList.Item>
+            <DescriptionList.Item @label="Langue">{{@user.lang}}</DescriptionList.Item>
+            <DescriptionList.Item @label="Locale">{{@user.locale}}</DescriptionList.Item>
+            <DescriptionList.Item @label="Date de création">
+              {{#if @user.createdAt}}
+                {{dayjsFormat @user.createdAt "DD/MM/YYYY"}}
+              {{/if}}
+            </DescriptionList.Item>
+
+            <DescriptionList.Divider />
+
+            <DescriptionList.Item @label="Adresse e-mail" @valueClass="user-overview-section__copy-item">
+              {{@user.email}}
+              <CopyItemButton
+                @id="copy-email"
+                @value={{@user.email}}
+                @tooltip={{this.tooltipTextEmail}}
+                @buttonLabel={{t "components.users.user-detail-personal-information.actions.copy-email"}}
+              />
+            </DescriptionList.Item>
+            <DescriptionList.Item @label="Identifiant" @valueClass="user-overview-section__copy-item">
+              {{@user.username}}
+              <CopyItemButton
+                @id="copy-username"
+                @value={{@user.username}}
+                @tooltip={{this.tooltipTextUsername}}
+                @buttonLabel={{t "components.users.user-detail-personal-information.actions.copy-username"}}
+              />
+            </DescriptionList.Item>
+            <DescriptionList.Item @label={{t "components.users.user-overview.sso"}}>
+              {{#if this.hasSsoAuthentication}}{{t "common.words.yes"}}{{else}}{{t "common.words.no"}}{{/if}}
+            </DescriptionList.Item>
+
+            <DescriptionList.Divider />
+
+            <DescriptionList.Item @label="Tentatives de connexion en erreur">
+              {{if @user.userLogin.failureCount @user.userLogin.failureCount 0}}
+            </DescriptionList.Item>
+            {{#if @user.userLogin.blockedAt}}
+              <DescriptionList.Item @label="Utilisateur totalement bloqué le">
+                {{dayjsFormat @user.userLogin.blockedAt "DD/MM/YYYY HH:mm"}}
+              </DescriptionList.Item>
+            {{/if}}
+            {{#if this.shouldDisplayTemporaryBlockedDate}}
+              <DescriptionList.Item @label="Utilisateur temporairement bloqué jusqu'au">
+                {{dayjsFormat @user.userLogin.temporaryBlockedUntil "DD/MM/YYYY HH:mm"}}
+              </DescriptionList.Item>
+            {{/if}}
+            <DescriptionList.Item @label={{t "components.users.user-overview.global-last-login"}}>
+              {{#if @user.lastLoggedAt}}
+                {{dayjsFormat @user.lastLoggedAt "DD/MM/YYYY"}}
+              {{else}}
+                {{t "components.users.user-overview.no-last-connection-date-info"}}
+              {{/if}}
+            </DescriptionList.Item>
+
+            <DescriptionList.Divider />
+          </DescriptionList>
+
+          {{#if this.accessControl.hasAccessToUsersActionsScope}}
+            <div class="user-overview-section__actions">
               <PixButton
                 @size="small"
                 @variant="secondary"
@@ -418,8 +386,8 @@ export default class UserOverview extends Component {
                   Débloquer l'utilisateur
                 </PixButton>
               {{/if}}
-            {{/if}}
-          </div>
+            </div>
+          {{/if}}
         {{/if}}
       </div>
     </section>
@@ -433,3 +401,16 @@ export default class UserOverview extends Component {
     />
   </template>
 }
+
+const CopyItemButton = <template>
+  {{#if (and @value (isClipboardSupported))}}
+    <PixTooltip @id={{@id}} @position="top" @isInline={{true}}>
+      <:triggerElement>
+        <CopyButton @text={{@value}} aria-describedby={{@id}} aria-label={{@buttonLabel}}>
+          <PixIcon @name="copy" @ariaHidden={{true}} />
+        </CopyButton>
+      </:triggerElement>
+      <:tooltip>{{@tooltip}}</:tooltip>
+    </PixTooltip>
+  {{/if}}
+</template>;

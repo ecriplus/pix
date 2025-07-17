@@ -1,0 +1,34 @@
+@use 'pix-design-tokens/typography';
+
+/* stylelint-disable custom-property-pattern */
+.description-list {
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    @extend %pix-body-m;
+
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--pix-spacing-3x);
+
+    dt {
+      font-weight: var(--pix-font-bold);
+      font-family: var(--_pix-font-family-title);
+    }
+
+    dd {
+      grid-column: span 2 / span 2;
+
+      a {
+        color: var(--pix-primary-500);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__divider {
+    margin: var(--pix-spacing-3x) 0;
+    border-top: 1px solid var(--pix-primary-100);
+  }
+}
