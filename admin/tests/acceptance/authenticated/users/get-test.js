@@ -98,11 +98,12 @@ module('Acceptance | authenticated/users/get', function (hooks) {
       await clickByName('Modifier');
 
       // then
-      assert.dom(screen.getByText('Prénom : john')).exists();
-      assert.dom(screen.getByText('Nom : doe')).exists();
-      assert.dom(screen.getByText('Adresse e-mail : john.doe@example.net')).exists();
-      assert.dom(screen.getByText('Identifiant : john.doe0101')).exists();
-      assert.dom(screen.getByText('Langue : en')).exists();
+      const attributesList = within(screen.getByLabelText('Informations utilisateur'));
+      assert.dom(attributesList.getByText('Prénom').nextElementSibling).hasText('john');
+      assert.dom(attributesList.getByText('Nom').nextElementSibling).hasText('doe');
+      assert.dom(attributesList.getByText('Adresse e-mail').nextElementSibling).containsText('john.doe@example.net');
+      assert.dom(attributesList.getByText('Identifiant').nextElementSibling).containsText('john.doe0101');
+      assert.dom(attributesList.getByText('Langue').nextElementSibling).hasText('en');
     });
   });
 
@@ -158,8 +159,10 @@ module('Acceptance | authenticated/users/get', function (hooks) {
 
       // when & then #1
       await click(screen.getByRole('button', { name: 'Confirmer' }));
-      assert.dom(screen.getByText('Prénom : (anonymised)')).exists();
-      assert.dom(screen.getByText('Nom : (anonymised)')).exists();
+
+      const attributesList = within(screen.getByLabelText('Informations utilisateur'));
+      assert.dom(attributesList.getByText('Prénom').nextElementSibling).hasText('(anonymised)');
+      assert.dom(attributesList.getByText('Nom').nextElementSibling).hasText('(anonymised)');
 
       // when & then #2
       await click(

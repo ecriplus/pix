@@ -1,4 +1,4 @@
-import { clickByName, render, waitFor } from '@1024pix/ember-testing-library';
+import { clickByName, render, waitFor, within } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
 import Service from '@ember/service';
 import { triggerEvent } from '@ember/test-helpers';
@@ -115,14 +115,16 @@ module('Integration | Component | users | user-overview', function (hooks) {
 
         // when
         const screen = await render(<template><UserOverview @user={{user}} /></template>);
+
         // then
-        assert.dom(screen.getByText(`Prénom : ${user.firstName}`)).exists();
-        assert.dom(screen.getByText(`Nom : ${user.lastName}`)).exists();
-        assert.dom(screen.getByText(`Adresse e-mail : ${user.email}`)).exists();
-        assert.dom(screen.getByText(`Identifiant : ${user.username}`)).exists();
-        assert.dom(screen.getByText('Langue : fr')).exists();
-        assert.dom(screen.getByText('Locale : fr-FR')).exists();
-        assert.dom(screen.getByText('Date de création : 10/12/2021')).exists();
+        const attributesList = within(screen.getByLabelText('Informations utilisateur'));
+        assert.dom(attributesList.getByText('Prénom').nextElementSibling).hasText(user.firstName);
+        assert.dom(attributesList.getByText('Nom').nextElementSibling).hasText(user.lastName);
+        assert.dom(attributesList.getByText('Adresse e-mail').nextElementSibling).containsText(user.email);
+        assert.dom(attributesList.getByText('Identifiant').nextElementSibling).containsText(user.username);
+        assert.dom(attributesList.getByText('Langue').nextElementSibling).hasText('fr');
+        assert.dom(attributesList.getByText('Locale').nextElementSibling).hasText('fr-FR');
+        assert.dom(attributesList.getByText('Date de création').nextElementSibling).hasText('10/12/2021');
       });
 
       [
@@ -132,7 +134,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
         { locale: 'fr-FR', lang: 'fr' },
         { locale: 'nl-BE', lang: 'nl' },
       ].forEach((expected) => {
-        test("displays user's information without creation date", async function (assert) {
+        test("displays user's information for lang, locales and without creation date", async function (assert) {
           // given
           const store = this.owner.lookup('service:store');
           const user = store.createRecord('user', {
@@ -148,13 +150,10 @@ module('Integration | Component | users | user-overview', function (hooks) {
           const screen = await render(<template><UserOverview @user={{user}} /></template>);
 
           // then
-          assert.dom(screen.getByText(`Prénom : ${user.firstName}`)).exists();
-          assert.dom(screen.getByText(`Nom : ${user.lastName}`)).exists();
-          assert.dom(screen.getByText(`Adresse e-mail : ${user.email}`)).exists();
-          assert.dom(screen.getByText(`Identifiant : ${user.username}`)).exists();
-          assert.dom(screen.getByText(`Langue : ${expected.lang}`)).exists();
-          assert.dom(screen.getByText(`Locale : ${expected.locale}`)).exists();
-          assert.dom(screen.getByText('Date de création :')).exists();
+          const attributesList = within(screen.getByLabelText('Informations utilisateur'));
+          assert.dom(attributesList.getByText('Langue').nextElementSibling).hasText(expected.lang);
+          assert.dom(attributesList.getByText('Locale').nextElementSibling).hasText(expected.locale);
+          assert.dom(attributesList.getByText('Date de création').nextElementSibling).hasText('');
         });
       });
 
@@ -344,9 +343,10 @@ module('Integration | Component | users | user-overview', function (hooks) {
           const screen = await render(<template><UserOverview @user={{user}} /></template>);
 
           // then
-          assert.dom(screen.queryByText('Utilisateur totalement bloqué le :')).doesNotExist();
-          assert.dom(screen.queryByText("Utilisateur temporairement bloqué jusqu'au :")).doesNotExist();
-          assert.dom(screen.getByText('Nombre de tentatives de connexion en erreur : 0')).exists();
+          const attributesList = within(screen.getByLabelText('Informations utilisateur'));
+          assert.dom(attributesList.queryByText('Utilisateur totalement bloqué le')).doesNotExist();
+          assert.dom(attributesList.queryByText("Utilisateur temporairement bloqué jusqu'au")).doesNotExist();
+          assert.dom(attributesList.getByText('Tentatives de connexion en erreur').nextElementSibling).hasText('0');
         });
 
         test('displays dates when user is temporarily blocked', async function (assert) {
@@ -363,11 +363,12 @@ module('Integration | Component | users | user-overview', function (hooks) {
           const screen = await render(<template><UserOverview @user={{user}} /></template>);
 
           // then
-          assert.dom(screen.getByText('Nombre de tentatives de connexion en erreur : 50')).exists();
+          const attributesList = within(screen.getByLabelText('Informations utilisateur'));
+          assert.dom(attributesList.queryByText('Utilisateur totalement bloqué le')).doesNotExist();
+          assert.dom(attributesList.getByText('Tentatives de connexion en erreur').nextElementSibling).hasText('50');
           assert
-            .dom(screen.getByText("Utilisateur temporairement bloqué jusqu'au : 10/12/2022", { exact: false }))
-            .exists();
-          assert.dom(screen.queryByText('Utilisateur totalement bloqué le :')).doesNotExist();
+            .dom(attributesList.getByText("Utilisateur temporairement bloqué jusqu'au").nextElementSibling)
+            .containsText('10/12/2022');
         });
 
         test('displays dates when user is blocked', async function (assert) {
@@ -384,9 +385,12 @@ module('Integration | Component | users | user-overview', function (hooks) {
           const screen = await render(<template><UserOverview @user={{user}} /></template>);
 
           // then
-          assert.dom(screen.getByText('Nombre de tentatives de connexion en erreur : 50')).exists();
-          assert.dom(screen.getByText('Utilisateur totalement bloqué le : 01/02/2021', { exact: false })).exists();
-          assert.dom(screen.queryByText("Utilisateur temporairement bloqué jusqu'au :")).doesNotExist();
+          const attributesList = within(screen.getByLabelText('Informations utilisateur'));
+          assert
+            .dom(attributesList.getByText('Utilisateur totalement bloqué le').nextElementSibling)
+            .containsText('01/02/2021');
+          assert.dom(attributesList.getByText('Tentatives de connexion en erreur').nextElementSibling).hasText('50');
+          assert.dom(attributesList.queryByText("Utilisateur temporairement bloqué jusqu'au")).doesNotExist();
         });
 
         module('displays last global connection', function () {
@@ -400,9 +404,9 @@ module('Integration | Component | users | user-overview', function (hooks) {
             const screen = await render(<template><UserOverview @user={{user}} /></template>);
 
             // then
+            const attributesList = within(screen.getByLabelText('Informations utilisateur'));
             const globalLastLogin = t('components.users.user-overview.global-last-login');
-
-            assert.dom(screen.getByText(`${globalLastLogin} 28/11/2022`)).exists();
+            assert.dom(attributesList.getByText(globalLastLogin).nextElementSibling).containsText('28/11/2022');
           });
 
           test('displays default last login date when user has no last login date', async function (assert) {
@@ -423,17 +427,10 @@ module('Integration | Component | users | user-overview', function (hooks) {
             const screen = await render(<template><UserOverview @user={{user}} /></template>);
 
             // then
+            const attributesList = within(screen.getByLabelText('Informations utilisateur'));
             const globalLastLogin = t('components.users.user-overview.global-last-login');
             const lastLoginDefaultDate = t('components.users.user-overview.no-last-connection-date-info');
-
-            assert.dom(screen.getByText(`Prénom : ${user.firstName}`)).exists();
-            assert.dom(screen.getByText(`Nom : ${user.lastName}`)).exists();
-            assert.dom(screen.getByText(`Adresse e-mail : ${user.email}`)).exists();
-            assert.dom(screen.getByText(`Identifiant : ${user.username}`)).exists();
-            assert.dom(screen.getByText('Langue : fr')).exists();
-            assert.dom(screen.getByText('Locale : fr-FR')).exists();
-            assert.dom(screen.getByText('Date de création : 10/12/2021')).exists();
-            assert.dom(screen.queryByText(`${globalLastLogin} ${lastLoginDefaultDate}`)).exists();
+            assert.dom(attributesList.getByText(globalLastLogin).nextElementSibling).containsText(lastLoginDefaultDate);
           });
         });
       });
@@ -640,30 +637,6 @@ module('Integration | Component | users | user-overview', function (hooks) {
           .exists();
       });
 
-      // TODO Fix aria-hidden PixUI Modal before this test pass
-      test.skip('closes the modal to cancel action', async function (assert) {
-        // given
-        const user = EmberObject.create({
-          lastName: 'Harry',
-          firstName: 'John',
-          email: 'john.harry@gmail.com',
-          username: null,
-          authenticationMethods: [],
-        });
-
-        const screen = await render(<template><UserOverview @user={{user}} /></template>);
-        await clickByName('Anonymiser cet utilisateur');
-
-        await screen.findByRole('dialog');
-        // when
-        await clickByName('Annuler');
-
-        // then
-        assert.dom(screen.queryByRole('heading', { name: 'Merci de confirmer' })).doesNotExist();
-        assert.dom(screen.queryByRole('button', { name: 'Confirmer' })).doesNotExist();
-        assert.dom(screen.queryByRole('button', { name: 'Annuler' })).doesNotExist();
-      });
-
       test('displays an anonymisation message with the full name of the admin member', async function (assert) {
         // given
         const store = this.owner.lookup('service:store');
@@ -741,12 +714,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
     module('Displays SSO information', function (hooks) {
       class OidcIdentityProvidersStub extends Service {
         get list() {
-          return [
-            {
-              code: 'SUNLIGHT_NAVIGATIONS',
-              organizationName: 'Sunlight Navigations',
-            },
-          ];
+          return [{ code: 'SUNLIGHT_NAVIGATIONS', organizationName: 'Sunlight Navigations' }];
         }
       }
 
@@ -769,7 +737,8 @@ module('Integration | Component | users | user-overview', function (hooks) {
         const screen = await render(<template><UserOverview @user={{user}} /></template>);
 
         // then
-        assert.dom(screen.getByText('SSO : Non')).exists();
+        const attributesList = within(screen.getByLabelText('Informations utilisateur'));
+        assert.dom(attributesList.getByText('SSO').nextElementSibling).hasText('Non');
       });
 
       test('When user has OIDC authentication method', async function (assert) {
@@ -789,7 +758,8 @@ module('Integration | Component | users | user-overview', function (hooks) {
         const screen = await render(<template><UserOverview @user={{user}} /></template>);
 
         // then
-        assert.dom(screen.getByText('SSO : Oui')).exists();
+        const attributesList = within(screen.getByLabelText('Informations utilisateur'));
+        assert.dom(attributesList.getByText('SSO').nextElementSibling).hasText('Oui');
       });
 
       test('When user has GAR authentication method', async function (assert) {
@@ -807,7 +777,8 @@ module('Integration | Component | users | user-overview', function (hooks) {
         const screen = await render(<template><UserOverview @user={{user}} /></template>);
 
         // then
-        assert.dom(screen.getByText('SSO : Oui')).exists();
+        const attributesList = within(screen.getByLabelText('Informations utilisateur'));
+        assert.dom(attributesList.getByText('SSO').nextElementSibling).hasText('Oui');
       });
     });
   });
