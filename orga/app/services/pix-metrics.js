@@ -24,7 +24,9 @@ export default class PixMetricsService extends Service {
         return params.includes(token) ? '_ID_' : token;
       })
       .join('/');
-    return queryParams ? `${redactedUrl}?${queryParams}` : redactedUrl;
+
+    const baseUrl = new URL(window.location).origin;
+    return queryParams ? `${baseUrl}${redactedUrl}?${queryParams}` : `${baseUrl}${redactedUrl}`;
   }
 }
 

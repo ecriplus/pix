@@ -39,7 +39,7 @@ module('Acceptance | Application', function (hooks) {
       // then
       assert.ok(
         metricService.trackPage.calledOnceWithExactly({
-          plausibleAttributes: { u: '/accueil' },
+          plausibleAttributes: { u: `${new URL(window.location).origin}/accueil` },
         }),
       );
     });
@@ -70,7 +70,7 @@ module('Acceptance | Application', function (hooks) {
       const metricService = this.owner.lookup('service:metrics');
       await visit('/assessments/1/challenges/0');
       sinon.assert.calledOnceWithExactly(metricService.trackPage, {
-        plausibleAttributes: { u: '/assessments/_ID_/challenges/_ID_' },
+        plausibleAttributes: { u: `${new URL(window.location).origin}/assessments/_ID_/challenges/_ID_` },
       });
       assert.ok(true);
     });
@@ -83,7 +83,7 @@ module('Acceptance | Application', function (hooks) {
 
       // then
       sinon.assert.calledOnceWithExactly(metricService.trackPage, {
-        plausibleAttributes: { u: '/connexion' },
+        plausibleAttributes: { u: `${new URL(window.location).origin}/connexion` },
       });
 
       assert.ok(true);
@@ -103,7 +103,7 @@ module('Acceptance | Application', function (hooks) {
 
       // then
       sinon.assert.calledOnceWithExactly(metricService.trackPage, {
-        plausibleAttributes: { u: '/assessments/_ID_/challenges/_ID_?id=1' },
+        plausibleAttributes: { u: `${new URL(window.location).origin}/assessments/_ID_/challenges/_ID_?id=1` },
       });
 
       assert.ok(true);

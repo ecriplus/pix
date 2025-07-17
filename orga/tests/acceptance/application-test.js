@@ -38,7 +38,7 @@ module('Application', function (hooks) {
       // then
       assert.ok(
         metricService.trackPage.calledOnceWithExactly({
-          plausibleAttributes: { u: '/campagnes/les-miennes' },
+          plausibleAttributes: { u: `${new URL(window.location).origin}/campagnes/les-miennes` },
         }),
       );
     });
@@ -75,7 +75,7 @@ module('Application', function (hooks) {
 
       await visit('/campagnes/1/parametres');
       sinon.assert.calledOnceWithExactly(metricService.trackPage, {
-        plausibleAttributes: { u: '/campagnes/_ID_/parametres' },
+        plausibleAttributes: { u: `${new URL(window.location).origin}/campagnes/_ID_/parametres` },
       });
       assert.ok(true);
     });
@@ -88,7 +88,7 @@ module('Application', function (hooks) {
 
       // then
       sinon.assert.calledOnceWithExactly(metricService.trackPage, {
-        plausibleAttributes: { u: '/connexion' },
+        plausibleAttributes: { u: `${new URL(window.location).origin}/connexion` },
       });
 
       assert.ok(true);
@@ -115,7 +115,9 @@ module('Application', function (hooks) {
 
       // then
       sinon.assert.calledOnceWithExactly(metricService.trackPage, {
-        plausibleAttributes: { u: '/campagnes/_ID_/resultats-evaluation?groups=["1ere A"]' },
+        plausibleAttributes: {
+          u: `${new URL(window.location).origin}/campagnes/_ID_/resultats-evaluation?groups=["1ere A"]`,
+        },
       });
 
       assert.ok(true);
