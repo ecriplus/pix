@@ -124,8 +124,12 @@
           "type": "element",
           "element": {
             "id": "fd39cc63-32f7-46eb-9f8a-55623878e0d1",
-            "type": "text",
-            "content": "<iframe title=\"Comment envoyer un mail ?\" width=\"560\" height=\"315\" src=\"https://tube-numerique-educatif.apps.education.fr/videos/embed/7d256f26-7777-4277-aa64-ca0084e1363b?title=0&amp;warningTitle=0&amp;peertubeLink=0&amp;p2p=0\" allowfullscreen=\"\" sandbox=\"allow-same-origin allow-scripts allow-popups allow-forms\"></iframe>"
+            "type": "video",
+            "title": "Comment envoyer un mail ?",
+            "url": "https://assets.pix.org/draft/modules/comment-envoyer-un-mail/comment-envoyer-un-mail.mp4",
+            "poster": "https://assets.pix.org/draft/modules/comment-envoyer-un-mail/comment-envoyer-un-mail.jpg",
+            "subtitles": "",
+            "transcription": ""
           }
         }
       ]

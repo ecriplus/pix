@@ -552,7 +552,21 @@
                 {
                   "id": "734ef21d-3850-40db-840e-e16253d8817b",
                   "type": "text",
-                  "content": "<h3>Faites un clic gauche sur «&nbsp;Play&nbsp;» <span aria-hidden=\"true\">▶️</span> au centre de l'image ci-dessous.</h3>\n<p> Ce clic gauche va faire démarrer la vidéo.</p><br><br><iframe height=\"410\" src=\"https://www.youtube.com/embed/czfvEpLfCV0?si=2Q1MBBnh2-c-0CmD\" title=\"Bravo\"></iframe>\n<p><br>Pour accéder à la suite, faites un clic gauche sur le bouton «&nbsp;Suivant&nbsp;».</p>"
+                  "content": "<h3>Faites un clic gauche sur «&nbsp;Play&nbsp;» <span aria-hidden=\"true\">▶️</span> au centre de l'image ci-dessous.</h3><br><p> Ce clic gauche va faire démarrer la vidéo.</p>"
+                },
+                {
+                  "id": "b0f296c2-a295-4424-8eb1-76e3fbcc1ebb",
+                  "type": "video",
+                  "title": "Bravo, vous êtes sur internet",
+                  "url": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/bravo-vous-etes-sur-internet.mp4",
+                  "poster": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/bravo-vous-etes-sur-internet.jpg",
+                  "subtitles": "",
+                  "transcription": "<p>Bravo, vous êtes sur internet.</p><p>Vous allez voir c'est facile.</p>"
+                },
+                {
+                  "id": "06cd1e83-06ce-4ca2-a648-1184ca6700f3",
+                  "type": "text",
+                  "content": "<p>Pour accéder à la suite, faites un clic gauche sur le bouton «&nbsp;Suivant&nbsp;».</p>"
                 }
               ]
             },
