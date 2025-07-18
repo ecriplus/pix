@@ -17,6 +17,10 @@ module('Unit | Service | PixMetrics', function (hooks) {
     sinon.stub(metricsService, 'trackEvent');
   });
 
+  hooks.afterEach(function () {
+    sinon.restore();
+  });
+
   module('trackPage', function () {
     test('it should redact id from url', function (assert) {
       // given
@@ -44,7 +48,7 @@ module('Unit | Service | PixMetrics', function (hooks) {
 
       // then
       sinon.assert.calledOnceWithExactly(metricsService.trackPage, {
-        plausibleAttributes: { u: '/campagnes/_ID_/presentation' },
+        plausibleAttributes: { u: `${new URL(window.location).origin}/campagnes/_ID_/presentation` },
         params: 1,
       });
       assert.ok(true);
@@ -76,7 +80,9 @@ module('Unit | Service | PixMetrics', function (hooks) {
 
       // then
       sinon.assert.calledOnceWithExactly(metricsService.trackPage, {
-        plausibleAttributes: { u: '/assessments/_ID_/checkpoint?finalCheckpoint=true' },
+        plausibleAttributes: {
+          u: `${new URL(window.location).origin}/assessments/_ID_/checkpoint?finalCheckpoint=true`,
+        },
         params: 1,
       });
       assert.ok(true);
@@ -110,7 +116,7 @@ module('Unit | Service | PixMetrics', function (hooks) {
       // then
       sinon.assert.calledOnceWithExactly(metricsService.trackEvent, {
         eventName: 'mon-event',
-        plausibleAttributes: { u: '/campagnes/_ID_/presentation' },
+        plausibleAttributes: { u: `${new URL(window.location).origin}/campagnes/_ID_/presentation` },
         params: 1,
       });
       assert.ok(true);
@@ -144,7 +150,9 @@ module('Unit | Service | PixMetrics', function (hooks) {
       // then
       sinon.assert.calledOnceWithExactly(metricsService.trackEvent, {
         eventName: 'mon-event',
-        plausibleAttributes: { u: '/assessments/_ID_/checkpoint?finalCheckpoint=true' },
+        plausibleAttributes: {
+          u: `${new URL(window.location).origin}/assessments/_ID_/checkpoint?finalCheckpoint=true`,
+        },
         params: 1,
       });
       assert.ok(true);
