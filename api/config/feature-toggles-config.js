@@ -71,4 +71,16 @@ export default {
     defaultValue: false,
     tags: ['frontend', 'team-prescription', 'pix-app'],
   },
+  useLocale: {
+    type: 'boolean',
+    description: 'Enable new locale management in apps.',
+    defaultValue: false,
+    tags: ['frontend', 'team-acces'],
+  },
+  useOnlyHapiI18n: {
+    type: 'boolean',
+    description: 'Enable exclusive usage of hapi i18n plugin for locale management in the API.',
+    defaultValue: false,
+    tags: ['team-acces'],
+  },
 };
