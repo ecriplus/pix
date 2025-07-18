@@ -1,3 +1,5 @@
+export const UNCERTIFIED_LEVEL = -1;
+
 export const SESSION_STATUSES = Object.freeze({
   CREATED: 'created',
   FINALIZED: 'finalized',

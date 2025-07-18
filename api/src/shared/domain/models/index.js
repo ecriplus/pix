@@ -67,7 +67,6 @@ import { CertificationChallenge } from './CertificationChallenge.js';
 import { CertificationChallengeWithType } from './CertificationChallengeWithType.js';
 import { CertificationContract } from './CertificationContract.js';
 import { CertificationResult } from './CertificationResult.js';
-import { CertifiedLevel } from './CertifiedLevel.js';
 import { CertifiedScore } from './CertifiedScore.js';
 import { Challenge } from './Challenge.js';
 import { Competence } from './Competence.js';
@@ -144,7 +143,6 @@ export {
   CertificationOfficer,
   CertificationReport,
   CertificationResult,
-  CertifiedLevel,
   CertifiedScore,
   Challenge,
   Competence,
