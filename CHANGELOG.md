@@ -1,5 +1,16 @@
 # Pix Changelog
 
+# [5.162.0](https://github.com/1024pix/pix/compare/v5.161.0...v5.162.0) (2025-07-18)
+
+### :rocket: Amélioration
+
+- [#12882](https://github.com/1024pix/pix/pull/12882) Ajout d’un module de demo des composants Pix Épreuves (PIX-18777) 
+- [#12891](https://github.com/1024pix/pix/pull/12891) Ajout des feature flags useLocale et useOnlyHapiI18n (PIX-18779) 
+
+### :bug: Correction
+
+- [#12895](https://github.com/1024pix/pix/pull/12895) Enlever le whereILike du getByCode de campaign
+
 # [5.161.0](https://github.com/1024pix/pix/compare/v5.160.0...v5.161.0) (2025-07-18)
 
 ### :rocket: Amélioration
