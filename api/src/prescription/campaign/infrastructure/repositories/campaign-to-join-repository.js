@@ -21,7 +21,7 @@ const getByCode = async function ({ code, organizationFeatureAPI }) {
     })
     .join('organizations', 'organizations.id', 'campaigns.organizationId')
     .leftJoin('target-profiles', 'target-profiles.id', 'campaigns.targetProfileId')
-    .whereILike('campaigns.code', code)
+    .where('campaigns.code', code.toUpperCase())
     .first();
 
   if (!result) {
