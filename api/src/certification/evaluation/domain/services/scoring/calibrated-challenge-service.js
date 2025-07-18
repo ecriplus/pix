@@ -5,6 +5,7 @@
  */
 import differenceBy from 'lodash/differenceBy.js';
 
+import { config } from '../../../../../shared/config.js';
 import { withTransaction } from '../../../../../shared/domain/DomainTransaction.js';
 
 export const findByCertificationCourseIdAndAssessmentId = withTransaction(
@@ -20,10 +21,15 @@ export const findByCertificationCourseIdAndAssessmentId = withTransaction(
     challengeCalibrationRepository,
     certificationChallengeLiveAlertRepository,
     sharedChallengeRepository,
+    certificationCourseRepository,
     challengeRepository,
   }) => {
+    const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
+    const latestCalibrationDate = config.v3Certification.latestCalibrationDate;
+    const fromArchivedCalibration = certificationCourse.getStartDate() < latestCalibrationDate;
     const flashCompatibleChallenges = await challengeRepository.findFlashCompatibleWithoutLocale({
       useObsoleteChallenges: true,
+      fromArchivedCalibration,
     });
 
     const { allChallenges, askedChallenges, challengeCalibrations } = await _findByCertificationCourseId({

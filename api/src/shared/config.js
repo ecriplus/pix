@@ -470,6 +470,7 @@ const configuration = (function () {
       },
       maxReachableLevel: 7,
       activeCoreCalibrationId: parseInt(process.env.ACTIVE_CORE_CALIBRATION_ID, 10) || 3,
+      latestCalibrationDate: new Date(process.env.LATEST_CERTIFICATION_CALIBRATION_DATE || '2021-12-31'),
     },
     version: process.env.CONTAINER_VERSION || 'development',
     autonomousCourse: {

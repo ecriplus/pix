@@ -7,11 +7,13 @@ import { generateChallengeList } from '../../../../../shared/fixtures/challenges
 const { minimumAnswersRequiredToValidateACertification } = config.v3Certification.scoring;
 
 describe('Certification | Evaluation | Unit | Domain | Services | calibrated challenge service', function () {
-  context('#findByCertificationCourseId', function () {
+  context('#findByCertificationCourseIdAndAssessmentId', function () {
     let challengeCalibrationRepository,
       challengeRepository,
       certificationChallengeLiveAlertRepository,
-      sharedChallengeRepository;
+      certificationCourseRepository,
+      sharedChallengeRepository,
+      originalLatestCalibrationDate;
 
     let challengeList;
 
@@ -26,6 +28,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
         getByCertificationCourseId: sinon.stub().rejects(new Error('Args mismatch')),
       };
 
+      certificationCourseRepository = { get: sinon.stub() };
+
       certificationChallengeLiveAlertRepository = {
         getLiveAlertValidatedChallengeIdsByAssessmentId: sinon.stub(),
       };
@@ -35,13 +39,19 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
           .stub()
           .withArgs({
             useObsoleteChallenges: true,
+            fromArchivedCalibration: false,
           })
-          .returns(challengeList),
+          .resolves(challengeList),
       };
 
       sharedChallengeRepository = {
         getMany: sinon.stub(),
       };
+      originalLatestCalibrationDate = config.v3Certification.latestCalibrationDate;
+    });
+
+    afterEach(function () {
+      config.v3Certification.latestCalibrationDate = originalLatestCalibrationDate;
     });
 
     context('when there are no validated live alerts', function () {
@@ -77,8 +87,15 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
         challengeRepository.findFlashCompatibleWithoutLocale
           .withArgs({
             useObsoleteChallenges: true,
+            fromArchivedCalibration: false,
           })
-          .returns(challengesAfterCalibration);
+          .resolves(challengesAfterCalibration);
+
+        certificationCourseRepository.get
+          .withArgs({ id: certificationCourseId })
+          .resolves(
+            domainBuilder.buildCertificationCourse({ id: certificationCourseId, createdAt: new Date('2025-06-23') }),
+          );
 
         // when
         const {
@@ -91,6 +108,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
           challengeCalibrationRepository,
           certificationChallengeLiveAlertRepository,
           sharedChallengeRepository,
+          certificationCourseRepository,
           challengeRepository,
         });
 
@@ -135,10 +153,17 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
         challengeRepository.findFlashCompatibleWithoutLocale
           .withArgs({
             useObsoleteChallenges: true,
+            fromArchivedCalibration: false,
           })
-          .returns(challengesAfterCalibration);
+          .resolves(challengesAfterCalibration);
 
         const expectedAskedChallengesWithoutLiveAlerts = askedChallenges.slice(0, -1);
+        certificationCourseRepository.get
+          .withArgs({ id: certificationCourseId })
+          .resolves(
+            domainBuilder.buildCertificationCourse({ id: certificationCourseId, createdAt: new Date('2025-06-23') }),
+          );
+
         const expectedChallengeCalibrations = challengeCalibrations.slice(0, -1);
 
         // when
@@ -149,6 +174,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
             challengeCalibrationRepository,
             certificationChallengeLiveAlertRepository,
             sharedChallengeRepository,
+            certificationCourseRepository,
             challengeRepository,
           });
 
@@ -156,6 +182,131 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
         expect(challengeCalibrationsWithoutLiveAlerts).to.deep.equal(expectedChallengeCalibrations);
         expect(askedChallengesWithoutLiveAlerts).to.deep.equal(expectedAskedChallengesWithoutLiveAlerts);
         expect(allChallenges).to.deep.equal(challengeList);
+      });
+    });
+
+    context('when certification course is prior to latest calibration', function () {
+      it('should return askedChallenges, allChallenges and challengeCalibrations', async function () {
+        // given
+        const certificationCourseId = 1234;
+        const assessmentId = 5678;
+        const challengesAfterCalibration = challengeList.slice(1);
+
+        const challengeExcludedFromCalibration = domainBuilder.buildChallenge({
+          ...challengeList[0],
+          discriminant: null,
+          difficulty: null,
+        });
+
+        const expectedChallengeCalibrations = _buildDataFromAnsweredChallenges(
+          challengeList,
+          sharedChallengeRepository,
+        );
+
+        const expectedAskedChallenges = [challengeExcludedFromCalibration, ...challengesAfterCalibration];
+
+        certificationCourseRepository.get
+          .withArgs({ id: certificationCourseId })
+          .resolves(
+            domainBuilder.buildCertificationCourse({ id: certificationCourseId, createdAt: new Date('2025-06-23') }),
+          );
+        certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
+          .withArgs({ assessmentId })
+          .resolves([]);
+
+        sharedChallengeRepository.getMany.withArgs(challengeList.map((e) => e.id)).returns(expectedAskedChallenges);
+
+        challengeCalibrationRepository.getByCertificationCourseId
+          .withArgs({ certificationCourseId })
+          .resolves(expectedChallengeCalibrations);
+
+        challengeRepository.findFlashCompatibleWithoutLocale.resolves(challengesAfterCalibration);
+
+        certificationCourseRepository.get
+          .withArgs({ id: certificationCourseId })
+          .resolves(
+            domainBuilder.buildCertificationCourse({ id: certificationCourseId, createdAt: new Date('2025-06-20') }),
+          );
+        config.v3Certification.latestCalibrationDate = new Date('2025-06-23');
+
+        // when
+        await calibratedChallengeService.findByCertificationCourseIdAndAssessmentId({
+          certificationCourseId,
+          assessmentId,
+          challengeCalibrationRepository,
+          certificationChallengeLiveAlertRepository,
+          sharedChallengeRepository,
+          certificationCourseRepository,
+          challengeRepository,
+        });
+
+        // then
+        expect(challengeRepository.findFlashCompatibleWithoutLocale).to.have.been.calledOnceWithExactly({
+          useObsoleteChallenges: true,
+          fromArchivedCalibration: true,
+        });
+      });
+    });
+
+    context('when certification course is posterior to latest calibration', function () {
+      it('should return askedChallenges, allChallenges and challengeCalibrations', async function () {
+        // given
+        const certificationCourseId = 1234;
+        const assessmentId = 5678;
+        const challengesAfterCalibration = challengeList.slice(1);
+
+        const challengeExcludedFromCalibration = domainBuilder.buildChallenge({
+          ...challengeList[0],
+          discriminant: null,
+          difficulty: null,
+        });
+
+        const expectedChallengeCalibrations = _buildDataFromAnsweredChallenges(
+          challengeList,
+          sharedChallengeRepository,
+        );
+
+        const expectedAskedChallenges = [challengeExcludedFromCalibration, ...challengesAfterCalibration];
+
+        certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
+          .withArgs({ assessmentId })
+          .resolves([]);
+
+        sharedChallengeRepository.getMany.withArgs(challengeList.map((e) => e.id)).returns(expectedAskedChallenges);
+
+        challengeCalibrationRepository.getByCertificationCourseId
+          .withArgs({ certificationCourseId })
+          .resolves(expectedChallengeCalibrations);
+
+        challengeRepository.findFlashCompatibleWithoutLocale
+          .withArgs({
+            useObsoleteChallenges: true,
+            fromArchivedCalibration: false,
+          })
+          .resolves(challengesAfterCalibration);
+
+        certificationCourseRepository.get
+          .withArgs({ id: certificationCourseId })
+          .resolves(
+            domainBuilder.buildCertificationCourse({ id: certificationCourseId, createdAt: new Date('2025-06-25') }),
+          );
+        config.v3Certification.latestCalibrationDate = new Date('2025-06-23');
+        // when
+        await calibratedChallengeService.findByCertificationCourseIdAndAssessmentId({
+          certificationCourseId,
+          assessmentId,
+          challengeCalibrationRepository,
+          certificationChallengeLiveAlertRepository,
+          sharedChallengeRepository,
+          certificationCourseRepository,
+          challengeRepository,
+        });
+
+        // then
+        expect(challengeRepository.findFlashCompatibleWithoutLocale).to.have.been.calledOnceWithExactly({
+          useObsoleteChallenges: true,
+          fromArchivedCalibration: false,
+        });
       });
     });
   });
