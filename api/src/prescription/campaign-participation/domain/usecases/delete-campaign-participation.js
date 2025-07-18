@@ -28,12 +28,12 @@ const deleteCampaignParticipation = withTransaction(async function ({
 
     if (isAnonymizationWithDeletionEnabled) {
       await eventLoggingJobRepository.performAsync(
-        new EventLoggingJob({
+        EventLoggingJob.forUser({
           client,
           action: campaignParticipation.loggerContext,
           role: userRole,
-          userId: userId,
-          targetUserId: campaignParticipation.id,
+          userId: campaignParticipation.id,
+          updatedByUserId: userId,
           data: {},
         }),
       );

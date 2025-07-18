@@ -71,11 +71,11 @@ describe('Unit | Identity Access Management | Domain | UseCase | anonymize-gar-a
     });
 
     // then
-    const payload = new EventLoggingJob({
+    const payload = EventLoggingJob.forUsers({
       client: 'PIX_ADMIN',
       action: 'ANONYMIZATION_GAR',
-      targetUserIds: [1002, 1003],
-      userId: 1,
+      userIds: [1002, 1003],
+      updatedByUserId: 1,
       role: PIX_ADMIN.ROLES.SUPER_ADMIN,
     });
     expect(eventLoggingJobRepository.performAsync).to.have.been.calledWith(payload);

@@ -49,12 +49,12 @@ const deleteOrganizationLearners = withTransaction(async function ({
       }
 
       await eventLoggingJobRepository.performAsync(
-        new EventLoggingJob({
+        EventLoggingJob.forUser({
           client,
           action: organizationLearner.loggerContext,
           role: userRole,
-          userId,
-          targetUserId: organizationLearner.id,
+          userId: organizationLearner.id,
+          updatedByUserId: userId,
           data: {},
         }),
       );
@@ -71,12 +71,12 @@ const deleteOrganizationLearners = withTransaction(async function ({
 
       if (isAnonymizationWithDeletionEnabled) {
         await eventLoggingJobRepository.performAsync(
-          new EventLoggingJob({
+          EventLoggingJob.forUser({
             client,
             action: campaignParticipation.loggerContext,
             role: userRole,
-            userId: userId,
-            targetUserId: campaignParticipation.id,
+            userId: campaignParticipation.id,
+            updatedByUserId: userId,
             data: {},
           }),
         );

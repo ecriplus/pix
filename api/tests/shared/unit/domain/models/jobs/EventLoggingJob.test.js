@@ -16,15 +16,15 @@ describe('Unit | Shared | Domain | Model | Jobs | EventLoggingJob', function () 
     clock.restore();
   });
 
-  describe('#constructor', function () {
-    it('creates an EventLoggingJob', async function () {
+  describe('EventLoggingJob.forUser', function () {
+    it('creates an EventLoggingJob instance for a user', async function () {
       // when
-      const eventLoggingJob = new EventLoggingJob({
+      const eventLoggingJob = EventLoggingJob.forUser({
         client: 'PIX_APP',
         action: 'EMAIL_CHANGED',
         role: 'USER',
-        userId: 123,
-        targetUserId: 456,
+        userId: 456,
+        updatedByUserId: 123,
         data: { foo: 'bar' },
         occurredAt: new Date(),
       });
@@ -38,36 +38,45 @@ describe('Unit | Shared | Domain | Model | Jobs | EventLoggingJob', function () 
       expect(eventLoggingJob.data).to.deep.equal({ foo: 'bar' });
       expect(eventLoggingJob.occurredAt).to.deep.equal(now);
     });
+  });
 
-    it('creates an EventLoggingJob with multiple targetUserIds', async function () {
+  describe('EventLoggingJob.forUsers', function () {
+    it('creates an EventLoggingJob instance for multiple users', async function () {
       // when
-      const eventLoggingJob = new EventLoggingJob({
+      const eventLoggingJob = EventLoggingJob.forUsers({
         client: 'PIX_APP',
         action: 'EMAIL_CHANGED',
         role: 'USER',
-        userId: 123,
-        targetUserIds: [456, 789],
+        userIds: [456, 789],
+        updatedByUserId: 123,
         data: { foo: 'bar' },
         occurredAt: new Date(),
       });
 
       // then
+      expect(eventLoggingJob.client).to.equal('PIX_APP');
+      expect(eventLoggingJob.action).to.equal('EMAIL_CHANGED');
+      expect(eventLoggingJob.role).to.equal('USER');
+      expect(eventLoggingJob.userId).to.equal(123);
       expect(eventLoggingJob.targetUserIds).to.deep.equal([456, 789]);
+      expect(eventLoggingJob.data).to.deep.equal({ foo: 'bar' });
+      expect(eventLoggingJob.occurredAt).to.deep.equal(now);
     });
+  });
 
+  describe('default values and errors', function () {
     context('when occurredAt is not defined', function () {
       it('set a default date for occurredAt', function () {
         // when
-        const eventLoggingJob = new EventLoggingJob({
+        const eventLoggingJob = EventLoggingJob.forUser({
           client: 'PIX_APP',
           action: 'EMAIL_CHANGED',
           role: 'USER',
-          userId: 123,
-          targetUserId: 456,
+          userId: 456,
+          updatedByUserId: 123,
         });
 
         // then
-        expect(eventLoggingJob.targetUserIds).to.deep.equal([456]);
         expect(eventLoggingJob.occurredAt).to.deep.equal(now);
       });
     });
@@ -76,7 +85,7 @@ describe('Unit | Shared | Domain | Model | Jobs | EventLoggingJob', function () 
       it('throws an entity validation error', function () {
         try {
           // when
-          new EventLoggingJob({});
+          EventLoggingJob.forUser({});
           assert.fail();
         } catch (error) {
           // then
@@ -86,7 +95,7 @@ describe('Unit | Shared | Domain | Model | Jobs | EventLoggingJob', function () 
             { attribute: 'action', message: '"action" is required' },
             { attribute: 'role', message: '"role" is required' },
             { attribute: 'userId', message: '"userId" is required' },
-            { attribute: 'targetUserIds', message: '"targetUserIds" is required' },
+            { attribute: 'targetUserIds', message: '"targetUserIds" must contain at least 1 items' },
           ]);
         }
       });

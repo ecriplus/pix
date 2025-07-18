@@ -31,11 +31,11 @@ export const anonymizeGarAuthenticationMethods = async function ({
 
     if (config.auditLogger.isEnabled && garAnonymizedUserIds?.length > 0) {
       await eventLoggingJobRepository.performAsync(
-        new EventLoggingJob({
+        EventLoggingJob.forUsers({
           client: 'PIX_ADMIN',
           action: 'ANONYMIZATION_GAR',
-          targetUserIds: garAnonymizedUserIds,
-          userId: adminMemberId,
+          userIds: garAnonymizedUserIds,
+          updatedByUserId: adminMemberId,
           role: PIX_ADMIN.ROLES.SUPER_ADMIN,
         }),
       );

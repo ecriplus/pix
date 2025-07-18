@@ -63,12 +63,12 @@ async function _auditLogForEmailChanged({ currentUser, newEmail, updatedByAdminI
 
   // Currently only used in Pix Admin, which is why app name is hard-coded for the audit log
   await eventLoggingJobRepository.performAsync(
-    new EventLoggingJob({
+    EventLoggingJob.forUser({
       client: 'PIX_ADMIN',
       action: 'EMAIL_CHANGED',
       role: 'SUPPORT',
-      userId: updatedByAdminId,
-      targetUserId: currentUser.id,
+      userId: currentUser.id,
+      updatedByUserId: updatedByAdminId,
       data: { oldEmail: currentUser.email, newEmail },
     }),
   );

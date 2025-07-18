@@ -80,11 +80,11 @@ const anonymizeUser = withTransaction(async function ({
 
   if (config.auditLogger.isEnabled) {
     await eventLoggingJobRepository.performAsync(
-      new EventLoggingJob({
+      EventLoggingJob.forUser({
         client,
         action: 'ANONYMIZATION',
-        targetUserId: userId,
-        userId: anonymizedByUserId,
+        userId,
+        updatedByUserId: anonymizedByUserId,
         role: anonymizedByUserRole,
       }),
     );
