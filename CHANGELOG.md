@@ -1,5 +1,38 @@
 # Pix Changelog
 
+# [5.161.0](https://github.com/1024pix/pix/compare/v5.160.0...v5.161.0) (2025-07-18)
+
+### :rocket: Amélioration
+
+- [#12868](https://github.com/1024pix/pix/pull/12868) Corrections Module IA dit IA suite relecture harmonisation 
+- [#12847](https://github.com/1024pix/pix/pull/12847) Écran de preview du LLM (PIX-18711) 
+- [#12856](https://github.com/1024pix/pix/pull/12856) Redesign de la page de fin de passage de modulix (PIX-18634) 
+
+### :bug: Correction
+
+- [#12869](https://github.com/1024pix/pix/pull/12869) Autoriser le lowercase sur le code des campagnes  
+- [#12872](https://github.com/1024pix/pix/pull/12872) Retrouver les challenges d'une certification complémentaire pour une simulation dédiée (PIX-18776). 
+- [#12883](https://github.com/1024pix/pix/pull/12883) Utiliser les url complètes pour le suivi plausible (PIX-18165) 
+
+### :building_construction: Tech
+
+- [#12855](https://github.com/1024pix/pix/pull/12855) :card_file_box: Modifie des colonnes de `complementary-certifications` pour les rendre `nullable` 
+- [#12767](https://github.com/1024pix/pix/pull/12767) :truck: Déplace le modèle `UserIdentity` vers `src/prescription/campaign-participation/` 
+- [#12876](https://github.com/1024pix/pix/pull/12876) Désactiver le message de promo de dotenv 
+- [#12884](https://github.com/1024pix/pix/pull/12884) Désactiver le message de promo de dotenv part 2 
+- [#12862](https://github.com/1024pix/pix/pull/12862) Gérer les erreurs sur la route /api/oidc/identity-providers (PIX-18280) 
+- [#12877](https://github.com/1024pix/pix/pull/12877) Mettre à jour des dépendances Audit Logger. 
+- [#12878](https://github.com/1024pix/pix/pull/12878) Mettre à jour des dépendances Pix Admin 
+- [#12874](https://github.com/1024pix/pix/pull/12874) PixAdmin - DescriptionList pour les attributs d'un user 
+- [#12880](https://github.com/1024pix/pix/pull/12880) Recalculer quelle va être la prochaine épreuve à chaque appel, permet de changer d'épreuve en cas de changement de langue de l'utilisateur par exemple (PIX-18416) 
+- [#12657](https://github.com/1024pix/pix/pull/12657) Seeds double certification CLEA V3 (PIX-18352). 
+
+### :arrow_up: Montée de version
+
+- [#12875](https://github.com/1024pix/pix/pull/12875) MàJ des composants pix-epreuves 
+- [#12890](https://github.com/1024pix/pix/pull/12890) Update dependency @1024pix/epreuves-components to ^0.7.0 (junior) 
+- [#12892](https://github.com/1024pix/pix/pull/12892) Update dependency @1024pix/pix-ui to ^55.25.0 (admin)
+
 # [5.160.0](https://github.com/1024pix/pix/compare/v5.159.0...v5.160.0) (2025-07-17)
 
 ### :rocket: Amélioration
