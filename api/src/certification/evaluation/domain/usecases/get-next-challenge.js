@@ -35,7 +35,7 @@ const getNextChallenge = async function ({
   sessionManagementCertificationChallengeRepository,
   certificationChallengeLiveAlertRepository,
   certificationCourseRepository,
-  challengeRepository,
+  sharedChallengeRepository,
   flashAlgorithmConfigurationRepository,
   flashAlgorithmService,
   locale,
@@ -65,12 +65,12 @@ const getNextChallenge = async function ({
     );
 
   if (lastNonAnsweredCertificationChallenge) {
-    return challengeRepository.get(lastNonAnsweredCertificationChallenge.challengeId);
+    return sharedChallengeRepository.get(lastNonAnsweredCertificationChallenge.challengeId);
   }
 
-  const activeFlashCompatibleChallenges = await challengeRepository.findActiveFlashCompatible({ locale });
+  const activeFlashCompatibleChallenges = await sharedChallengeRepository.findActiveFlashCompatible({ locale });
 
-  const alreadyAnsweredChallenges = await challengeRepository.getMany(alreadyAnsweredChallengeIds);
+  const alreadyAnsweredChallenges = await sharedChallengeRepository.getMany(alreadyAnsweredChallengeIds);
 
   const challenges = [...new Set([...alreadyAnsweredChallenges, ...activeFlashCompatibleChallenges])];
 

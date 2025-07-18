@@ -39,9 +39,9 @@ async function _findFlashCompatibleWithoutLocaleFromLCMS({ useObsoleteChallenges
 }
 
 async function _findFlashCompatibleWithoutLocaleFromDatamart() {
-  const certificationCoreCalibration2024Id = config.v3Certification.certificationCoreCalibration2024Id;
+  const activeCoreCalibrationId = config.v3Certification.activeCoreCalibrationId;
   const datamartChallenges = await datamartKnex('data_active_calibrated_challenges')
-    .join('data_calibrations', 'data_calibrations.id', certificationCoreCalibration2024Id)
+    .join('data_calibrations', 'data_calibrations.id', activeCoreCalibrationId)
     .where({ scope: PIX_CORE_DATAMART_SCOPE, status: PIX_CORE_CHALLENGES_DATAMART_STATUS });
 
   const challengesIds = datamartChallenges.map(({ challenge_id }) => challenge_id);

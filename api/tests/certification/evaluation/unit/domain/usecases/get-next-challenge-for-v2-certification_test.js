@@ -5,7 +5,7 @@ import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 describe('Unit | Domain | Use Cases | get-next-challenge-for-v2-certification', function () {
   describe('#getNextChallengeForV2Certification', function () {
     let sessionManagementCertificationChallengeRepository;
-    let challengeRepository;
+    let sharedChallengeRepository;
     let certificationCourseRepository;
 
     beforeEach(function () {
@@ -13,7 +13,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge-for-v2-certification', 
       sessionManagementCertificationChallengeRepository = {
         getNextNonAnsweredChallengeByCourseId: sinon.stub().resolves(),
       };
-      challengeRepository = { get: sinon.stub().resolves() };
+      sharedChallengeRepository = { get: sinon.stub().resolves() };
     });
 
     it('should use the assessmentService to select the next CertificationChallenge', async function () {
@@ -29,7 +29,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge-for-v2-certification', 
       await getNextChallengeForV2Certification({
         assessment,
         sessionManagementCertificationChallengeRepository,
-        challengeRepository,
+        sharedChallengeRepository,
       });
 
       // then
@@ -49,19 +49,19 @@ describe('Unit | Domain | Use Cases | get-next-challenge-for-v2-certification', 
       sessionManagementCertificationChallengeRepository.getNextNonAnsweredChallengeByCourseId.resolves(
         nextCertificationChallenge,
       );
-      challengeRepository.get.resolves(nextChallengeToAnswer);
+      sharedChallengeRepository.get.resolves(nextChallengeToAnswer);
       certificationCourseRepository.get.withArgs(assessment.certificationCourseId).resolves(certificationCourse);
 
       // when
       const challenge = await getNextChallengeForV2Certification({
         assessment,
         sessionManagementCertificationChallengeRepository,
-        challengeRepository,
+        sharedChallengeRepository,
       });
 
       // then
       expect(challenge).to.equal(nextChallengeToAnswer);
-      expect(challengeRepository.get).to.have.been.calledWithExactly(challengeId);
+      expect(sharedChallengeRepository.get).to.have.been.calledWithExactly(challengeId);
     });
   });
 });

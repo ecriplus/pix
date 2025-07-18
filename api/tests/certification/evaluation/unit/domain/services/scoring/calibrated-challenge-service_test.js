@@ -8,7 +8,10 @@ const { minimumAnswersRequiredToValidateACertification } = config.v3Certificatio
 
 describe('Certification | Evaluation | Unit | Domain | Services | calibrated challenge service', function () {
   context('#findByCertificationCourseId', function () {
-    let challengeCalibrationRepository, challengeRepository, certificationChallengeLiveAlertRepository;
+    let challengeCalibrationRepository,
+      challengeRepository,
+      certificationChallengeLiveAlertRepository,
+      sharedChallengeRepository;
 
     let challengeList;
 
@@ -34,6 +37,9 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
             useObsoleteChallenges: true,
           })
           .returns(challengeList),
+      };
+
+      sharedChallengeRepository = {
         getMany: sinon.stub(),
       };
     });
@@ -51,7 +57,10 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
           difficulty: null,
         });
 
-        const expectedChallengeCalibrations = _buildDataFromAnsweredChallenges(challengeList, challengeRepository);
+        const expectedChallengeCalibrations = _buildDataFromAnsweredChallenges(
+          challengeList,
+          sharedChallengeRepository,
+        );
 
         const expectedAskedChallenges = [challengeExcludedFromCalibration, ...challengesAfterCalibration];
 
@@ -59,7 +68,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
           .withArgs({ assessmentId })
           .resolves([]);
 
-        challengeRepository.getMany.withArgs(challengeList.map((e) => e.id)).returns(expectedAskedChallenges);
+        sharedChallengeRepository.getMany.withArgs(challengeList.map((e) => e.id)).returns(expectedAskedChallenges);
 
         challengeCalibrationRepository.getByCertificationCourseId
           .withArgs({ certificationCourseId })
@@ -81,6 +90,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
           assessmentId,
           challengeCalibrationRepository,
           certificationChallengeLiveAlertRepository,
+          sharedChallengeRepository,
           challengeRepository,
         });
 
@@ -108,7 +118,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
           ...challengeList.at(-1),
         });
 
-        const challengeCalibrations = _buildDataFromAnsweredChallenges(challengeList, challengeRepository);
+        const challengeCalibrations = _buildDataFromAnsweredChallenges(challengeList, sharedChallengeRepository);
 
         const askedChallenges = [challengeExcludedFromCalibration, ...challengesAfterCalibration];
 
@@ -116,7 +126,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
           .withArgs({ assessmentId })
           .resolves([challengeWithValidatedLiveAlert.id]);
 
-        challengeRepository.getMany.withArgs(challengeList.map((e) => e.id)).returns(askedChallenges);
+        sharedChallengeRepository.getMany.withArgs(challengeList.map((e) => e.id)).returns(askedChallenges);
 
         challengeCalibrationRepository.getByCertificationCourseId
           .withArgs({ certificationCourseId })
@@ -138,6 +148,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
             assessmentId,
             challengeCalibrationRepository,
             certificationChallengeLiveAlertRepository,
+            sharedChallengeRepository,
             challengeRepository,
           });
 
@@ -159,8 +170,8 @@ const _generateChallengeCalibrations = ({ discriminant, difficulty, id }) => {
   });
 };
 
-const _buildDataFromAnsweredChallenges = (challengeList, challengeRepository) => {
+const _buildDataFromAnsweredChallenges = (challengeList, sharedChallengeRepository) => {
   const challengeCalibrations = challengeList.map(_generateChallengeCalibrations);
-  challengeRepository.getMany.withArgs(challengeList.map((e) => e.id)).returns(challengeList);
+  sharedChallengeRepository.getMany.withArgs(challengeList.map((e) => e.id)).returns(challengeList);
   return challengeCalibrations;
 };

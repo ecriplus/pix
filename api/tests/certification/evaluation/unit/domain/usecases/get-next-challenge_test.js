@@ -7,7 +7,7 @@ import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-help
 describe('Unit | Domain | Use Cases | get-next-challenge', function () {
   describe('#getNextChallenge', function () {
     let answerRepository,
-      challengeRepository,
+      sharedChallengeRepository,
       certificationCourseRepository,
       certificationChallengeLiveAlertRepository,
       sessionManagementCertificationChallengeRepository,
@@ -27,7 +27,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
       answerRepository = {
         findByAssessmentExcludingChallengeIds: sinon.stub(),
       };
-      challengeRepository = {
+      sharedChallengeRepository = {
         get: sinon.stub(),
         getMany: sinon.stub(),
         findActiveFlashCompatible: sinon.stub(),
@@ -91,10 +91,10 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         sessionManagementCertificationChallengeRepository.getNextChallengeByCourseIdForV3
           .withArgs(assessment.certificationCourseId, [])
           .resolves(null);
-        challengeRepository.get.resolves();
+        sharedChallengeRepository.get.resolves();
 
-        challengeRepository.findActiveFlashCompatible.withArgs({ locale }).resolves([nextChallengeToAnswer]);
-        challengeRepository.getMany.withArgs([]).resolves([]);
+        sharedChallengeRepository.findActiveFlashCompatible.withArgs({ locale }).resolves([nextChallengeToAnswer]);
+        sharedChallengeRepository.getMany.withArgs([]).resolves([]);
 
         flashAlgorithmService.getCapacityAndErrorRate
           .withArgs({
@@ -127,7 +127,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
-          challengeRepository,
+          sharedChallengeRepository,
           flashAlgorithmConfigurationRepository,
           flashAlgorithmService,
           locale,
@@ -182,8 +182,8 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             .withArgs(assessment.certificationCourseId, [])
             .resolves(null);
 
-          challengeRepository.findActiveFlashCompatible.withArgs({ locale }).resolves(allChallenges);
-          challengeRepository.getMany.withArgs([]).resolves([]);
+          sharedChallengeRepository.findActiveFlashCompatible.withArgs({ locale }).resolves(allChallenges);
+          sharedChallengeRepository.getMany.withArgs([]).resolves([]);
 
           flashAlgorithmService.getCapacityAndErrorRate
             .withArgs({
@@ -225,7 +225,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             sessionManagementCertificationChallengeRepository,
             certificationChallengeLiveAlertRepository,
             certificationCourseRepository,
-            challengeRepository,
+            sharedChallengeRepository,
             flashAlgorithmConfigurationRepository,
             flashAlgorithmService,
             locale,
@@ -269,7 +269,9 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           sessionManagementCertificationChallengeRepository.getNextChallengeByCourseIdForV3
             .withArgs(assessment.certificationCourseId, [])
             .resolves(nonAnsweredCertificationChallenge);
-          challengeRepository.get.withArgs(nonAnsweredCertificationChallenge.challengeId).resolves(lastSeenChallenge);
+          sharedChallengeRepository.get
+            .withArgs(nonAnsweredCertificationChallenge.challengeId)
+            .resolves(lastSeenChallenge);
 
           // when
           const challenge = await getNextChallenge({
@@ -278,7 +280,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             sessionManagementCertificationChallengeRepository,
             certificationChallengeLiveAlertRepository,
             certificationCourseRepository,
-            challengeRepository,
+            sharedChallengeRepository,
             flashAlgorithmConfigurationRepository,
             flashAlgorithmService,
             locale,
@@ -332,13 +334,13 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         sessionManagementCertificationChallengeRepository.getNextChallengeByCourseIdForV3
           .withArgs(assessment.certificationCourseId, [])
           .resolves(null);
-        challengeRepository.get.resolves();
+        sharedChallengeRepository.get.resolves();
 
-        challengeRepository.findActiveFlashCompatible
+        sharedChallengeRepository.findActiveFlashCompatible
           .withArgs({ locale })
           .resolves([alreadyAnsweredChallenge, nextChallengeToAnswer]);
 
-        challengeRepository.getMany
+        sharedChallengeRepository.getMany
           .withArgs([alreadyAnsweredChallenge.id, outdatedChallenge.id])
           .resolves([alreadyAnsweredChallenge, outdatedChallenge]);
 
@@ -373,7 +375,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
-          challengeRepository,
+          sharedChallengeRepository,
           flashAlgorithmConfigurationRepository,
           flashAlgorithmService,
           locale,
@@ -420,8 +422,10 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             excludedChallengeIds: [nonAnsweredCertificationChallenge.challengeId],
           })
           .resolves([]);
-        challengeRepository.findActiveFlashCompatible.withArgs({ locale }).resolves([nextChallenge, lastSeenChallenge]);
-        challengeRepository.getMany.withArgs([]).resolves([]);
+        sharedChallengeRepository.findActiveFlashCompatible
+          .withArgs({ locale })
+          .resolves([nextChallenge, lastSeenChallenge]);
+        sharedChallengeRepository.getMany.withArgs([]).resolves([]);
 
         flashAlgorithmService.getCapacityAndErrorRate
           .withArgs({
@@ -465,7 +469,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
-          challengeRepository,
+          sharedChallengeRepository,
           flashAlgorithmConfigurationRepository,
           flashAlgorithmService,
           locale,
@@ -518,10 +522,10 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             excludedChallengeIds: [nonAnsweredCertificationChallenge.challengeId],
           })
           .resolves([]);
-        challengeRepository.findActiveFlashCompatible
+        sharedChallengeRepository.findActiveFlashCompatible
           .withArgs()
           .resolves([challengeWithLiveAlert, challengeWithOtherSkill, challengeWithLiveAlertedSkill]);
-        challengeRepository.getMany.withArgs([]).resolves([]);
+        sharedChallengeRepository.getMany.withArgs([]).resolves([]);
 
         flashAlgorithmService.getCapacityAndErrorRate
           .withArgs({
@@ -565,7 +569,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
-          challengeRepository,
+          sharedChallengeRepository,
           flashAlgorithmConfigurationRepository,
           flashAlgorithmService,
           locale,
@@ -613,10 +617,10 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         sessionManagementCertificationChallengeRepository.getNextChallengeByCourseIdForV3
           .withArgs(assessment.certificationCourseId, [answeredChallenge.id])
           .resolves(null);
-        challengeRepository.get.resolves();
+        sharedChallengeRepository.get.resolves();
 
-        challengeRepository.findActiveFlashCompatible.withArgs({ locale }).resolves([answeredChallenge]);
-        challengeRepository.getMany.withArgs([answeredChallenge.id]).resolves([answeredChallenge]);
+        sharedChallengeRepository.findActiveFlashCompatible.withArgs({ locale }).resolves([answeredChallenge]);
+        sharedChallengeRepository.getMany.withArgs([answeredChallenge.id]).resolves([answeredChallenge]);
 
         // when
         const error = await catchErr(getNextChallenge)({
@@ -625,7 +629,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
-          challengeRepository,
+          sharedChallengeRepository,
           flashAlgorithmConfigurationRepository,
           flashAlgorithmService,
           locale,
@@ -685,10 +689,10 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             sessionManagementCertificationChallengeRepository.getNextChallengeByCourseIdForV3
               .withArgs(assessment.certificationCourseId, [])
               .resolves(null);
-            challengeRepository.get.resolves();
+            sharedChallengeRepository.get.resolves();
 
-            challengeRepository.findActiveFlashCompatible.withArgs({ locale }).resolves([nextChallengeToAnswer]);
-            challengeRepository.getMany.withArgs([]).resolves([]);
+            sharedChallengeRepository.findActiveFlashCompatible.withArgs({ locale }).resolves([nextChallengeToAnswer]);
+            sharedChallengeRepository.getMany.withArgs([]).resolves([]);
 
             flashAlgorithmService.getCapacityAndErrorRate
               .withArgs({
@@ -721,7 +725,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               sessionManagementCertificationChallengeRepository,
               certificationChallengeLiveAlertRepository,
               certificationCourseRepository,
-              challengeRepository,
+              sharedChallengeRepository,
               flashAlgorithmConfigurationRepository,
               flashAlgorithmService,
               locale,

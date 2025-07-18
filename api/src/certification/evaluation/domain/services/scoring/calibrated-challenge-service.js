@@ -19,6 +19,7 @@ export const findByCertificationCourseIdAndAssessmentId = withTransaction(
     assessmentId,
     challengeCalibrationRepository,
     certificationChallengeLiveAlertRepository,
+    sharedChallengeRepository,
     challengeRepository,
   }) => {
     const flashCompatibleChallenges = await challengeRepository.findFlashCompatibleWithoutLocale({
@@ -29,7 +30,7 @@ export const findByCertificationCourseIdAndAssessmentId = withTransaction(
       compatibleChallenges: flashCompatibleChallenges,
       certificationCourseId,
       challengeCalibrationRepository,
-      challengeRepository,
+      sharedChallengeRepository,
     });
 
     const { challengeCalibrationsWithoutLiveAlerts, askedChallengesWithoutLiveAlerts } =
@@ -52,13 +53,15 @@ const _findByCertificationCourseId = async ({
   compatibleChallenges,
   certificationCourseId,
   challengeCalibrationRepository,
-  challengeRepository,
+  sharedChallengeRepository,
 }) => {
   const challengeCalibrations = await challengeCalibrationRepository.getByCertificationCourseId({
     certificationCourseId,
   });
 
-  const askedChallenges = await challengeRepository.getMany(challengeCalibrations.map((challenge) => challenge.id));
+  const askedChallenges = await sharedChallengeRepository.getMany(
+    challengeCalibrations.map((challenge) => challenge.id),
+  );
 
   _restoreCalibrationValues(challengeCalibrations, askedChallenges);
 
