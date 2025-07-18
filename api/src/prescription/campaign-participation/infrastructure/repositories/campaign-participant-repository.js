@@ -10,11 +10,11 @@ import {
 } from '../../../../shared/domain/errors.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { OrganizationLearnerForStartingParticipation } from '../../../../shared/domain/read-models/OrganizationLearnerForStartingParticipation.js';
-import { UserIdentity } from '../../../../shared/domain/read-models/UserIdentity.js';
 import * as knexUtils from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { CampaignParticipant } from '../../domain/models/CampaignParticipant.js';
 import { CampaignToStartParticipation } from '../../domain/models/CampaignToStartParticipation.js';
 import { PreviousCampaignParticipation } from '../../domain/models/PreviousCampaignParticipation.js';
+import { UserIdentity } from '../../domain/read-models/UserIdentity.js';
 
 async function save({ campaignParticipant }) {
   const newlyCreatedOrganizationLearnerId = await _createNewOrganizationLearner(
