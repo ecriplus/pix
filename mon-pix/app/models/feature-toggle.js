@@ -6,4 +6,5 @@ export default class FeatureToggle extends Model {
   @attr('boolean') isV3CertificationPageEnabled;
   @attr('boolean') upgradeToRealUserEnabled;
   @attr('boolean') isAutoShareEnabled;
+  @attr('boolean') useLocale;
 }
