@@ -172,14 +172,14 @@ function _findChallengesForCoreCertification({ locale, accessibilityAdjustmentNe
 
 function decorateWithCertificationCalibration({ challengeDtos, complementaryCertificationChallenges }) {
   return challengeDtos.map((challenge) => {
-    const { alpha, delta } = complementaryCertificationChallenges.find(
+    const { discriminant, difficulty } = complementaryCertificationChallenges.find(
       ({ challengeId }) => challengeId === challenge.id,
     );
 
     return {
       ...challenge,
-      alpha,
-      delta,
+      alpha: discriminant,
+      delta: difficulty,
     };
   });
 }

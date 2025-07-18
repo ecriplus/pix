@@ -232,5 +232,44 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
         expect(response).to.have.property('statusCode', 400);
       });
     });
+
+    describe('when simulating a complementary certification scenario', function () {
+      it('should return a report with the same number of simulation scenario reports as the number of challenges in the configuration', async function () {
+        // given
+        databaseBuilder.factory.buildComplementaryCertification({ key: 'DROIT' });
+        databaseBuilder.factory.buildComplementaryCertification({ key: 'EDU' });
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: 'DROIT',
+          challengeId: 'challenge1',
+        });
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: 'DROIT',
+          challengeId: 'challenge3',
+        });
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: 'EDU',
+          challengeId: 'challenge2',
+        });
+        await databaseBuilder.commit();
+        options.headers = adminAuthorizationHeaders;
+        options.payload = { ...validPayload, complementaryCertificationKey: 'DROIT' };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response).to.have.property('statusCode', 200);
+        const parsedResponse = parseJsonStream(response);
+        expect(parsedResponse[0].simulationReport).to.have.lengthOf(2);
+        expect(parsedResponse[0].simulationReport[0].challengeId).to.exist;
+        expect(parsedResponse[0].simulationReport[0].capacity).to.exist;
+        expect(parsedResponse[0].simulationReport[0].difficulty).to.exist;
+        expect(parsedResponse[0].simulationReport[0].discriminant).to.exist;
+        expect(parsedResponse[0].simulationReport[0].reward).to.exist;
+        expect(parsedResponse[0].simulationReport[0].errorRate).to.exist;
+        expect(parsedResponse[0].simulationReport[0].answerStatus).to.exist;
+        expect(parsedResponse[0].simulationReport[0].numberOfAvailableChallenges).to.exist;
+      });
+    });
   });
 });
