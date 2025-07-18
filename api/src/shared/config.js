@@ -469,7 +469,7 @@ const configuration = (function () {
         maximumReachableScore: 895,
       },
       maxReachableLevel: 7,
-      activeCoreCalibrationId: parseInt(process.env.ACTIVE_CORE_CALIBRATION_ID, 10) || 3,
+      certificationCoreCalibration2024Id: parseInt(process.env.CERTIFICATION_CORE_CALIBRATION_2024_ID, 10) || 3,
       latestCalibrationDate: new Date(process.env.LATEST_CERTIFICATION_CALIBRATION_DATE || '2021-12-31'),
     },
     version: process.env.CONTAINER_VERSION || 'development',

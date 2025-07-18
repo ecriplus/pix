@@ -517,15 +517,15 @@ describe('Integration | Repository | challenge-repository', function () {
       context('when flash compatible challenges found', function () {
         it('should return the challenges', async function () {
           // given
-          const activeCoreCalibrationId = config.v3Certification.activeCoreCalibrationId;
+          const certificationCoreCalibration2024Id = config.v3Certification.certificationCoreCalibration2024Id;
           datamartBuilder.factory.buildCalibration({
-            id: activeCoreCalibrationId,
+            id: certificationCoreCalibration2024Id,
             calibration_date: new Date('2024-10-23'),
             scope: 'COEUR',
             status: 'VALIDATED',
           });
           const datamartChallenge = datamartBuilder.factory.buildActiveCalibratedChallenge({
-            calibrationId: activeCoreCalibrationId,
+            calibrationId: certificationCoreCalibration2024Id,
             challengeId: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
             alpha: 456,
             delta: 567,
