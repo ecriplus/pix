@@ -59,7 +59,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
         module('When campaign is not restricted', function () {
           test('should display landing page', async function (assert) {
             // given
-            const campaign = server.create('campaign', 'withVerifiedCode', {
+            const campaign = server.create('campaign', {
               isRestricted: false,
               externalIdLabel: null,
             });
@@ -97,7 +97,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               );
 
               // given
-              const campaign = server.create('campaign', 'withVerifiedCode', { organizationId: 1 });
+              const campaign = server.create('campaign', { organizationId: 1 });
               server.create('organization-to-join', { id: 1, isRestricted: false, code: campaign.code });
               const screen = await visit('/campagnes');
               await fillIn(
@@ -139,7 +139,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
         module('When campaign is restricted and SCO', function (hooks) {
           hooks.beforeEach(function () {
-            campaign = server.create('campaign', 'withVerifiedCode', { organizationId: 1 });
+            campaign = server.create('campaign', { organizationId: 1 });
             server.create('organization-to-join', {
               id: campaign.organizationId,
               isRestricted: true,
@@ -351,7 +351,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
         module('When campaign is restricted and SUP', function (hooks) {
           hooks.beforeEach(function () {
-            campaign = server.create('campaign', 'withVerifiedCode', { organizationId: 1 });
+            campaign = server.create('campaign', { organizationId: 1 });
             server.create('organization-to-join', { id: 1, isRestricted: true, type: 'SUP', code: campaign.code });
           });
 
@@ -399,7 +399,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
         module('When is a simplified access campaign', function (hooks) {
           hooks.beforeEach(function () {
-            campaign = server.create('campaign', 'withVerifiedCode', {
+            campaign = server.create('campaign', {
               isSimplifiedAccess: true,
               externalIdLabel: 'Les anonymes',
               organizationId: 1,
@@ -450,7 +450,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
       module('When the user has already seen the landing page', function () {
         test('should redirect to signin page', async function (assert) {
           // given & when
-          const campaign = server.create('campaign', 'withVerifiedCode');
+          const campaign = server.create('campaign');
           await startCampaignByCode(campaign.code);
 
           // then
@@ -471,7 +471,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
         module('When campaign has custom text for the landing page', function () {
           test('should show the custom text on the landing page', async function (assert) {
             // given
-            const campaign = server.create('campaign', 'withVerifiedCode', { customLandingPageText: 'SomeText' });
+            const campaign = server.create('campaign', { customLandingPageText: 'SomeText' });
 
             // when
             const screen = await visit(`/campagnes/${campaign.code}`);
@@ -503,7 +503,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
       module('When campaign is restricted and SCO', function (hooks) {
         hooks.beforeEach(function () {
-          campaign = server.create('campaign', 'withVerifiedCode', { organizationId: 1 });
+          campaign = server.create('campaign', { organizationId: 1 });
           server.create('organization-to-join', {
             id: 1,
             isRestricted: true,
@@ -614,10 +614,8 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
       module('When campaign is restricted and SUP', function (hooks) {
         hooks.beforeEach(function () {
-          campaign = server.create('campaign', 'withVerifiedCode', {
+          campaign = server.create('campaign', {
             organizationId: 1,
-            isRestricted: true,
-            organizationType: 'SUP',
           });
           server.create('organization-to-join', {
             id: 1,
@@ -676,7 +674,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
         module('When participant external id is not set in the url', function () {
           test('should show the identifiant page after clicking on start button in landing page', async function (assert) {
             // given & when
-            campaign = server.create('campaign', 'withVerifiedCode', { externalIdLabel: 'nom de naissance de maman' });
+            campaign = server.create('campaign', { externalIdLabel: 'nom de naissance de maman' });
             await startCampaignByCode(campaign.code);
 
             // then
@@ -687,7 +685,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
         module('When participant external id is set in the url', function () {
           test('should begin campaign participation', async function (assert) {
             // given & when
-            campaign = server.create('campaign', 'withVerifiedCode', { externalIdLabel: 'nom de naissance de maman' });
+            campaign = server.create('campaign', { externalIdLabel: 'nom de naissance de maman' });
             await startCampaignByCodeAndExternalId(campaign.code);
 
             // then
@@ -699,7 +697,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
       module('When campaign does not have external id', function () {
         test('should begin campaign participation', async function (assert) {
           // given & when
-          campaign = server.create('campaign', 'withVerifiedCode', { externalIdLabel: null });
+          campaign = server.create('campaign', { externalIdLabel: null });
           await startCampaignByCode(campaign.code);
 
           // then
@@ -710,7 +708,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
       module('When campaign does not have external id but a participant external id is set in the url', function () {
         test('should begin campaign participation', async function (assert) {
           // given & when
-          campaign = server.create('campaign', 'withVerifiedCode', { externalIdLabel: null });
+          campaign = server.create('campaign', { externalIdLabel: null });
           await startCampaignByCodeAndExternalId(campaign.code);
 
           // then
@@ -735,7 +733,6 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
           // when
           const screen = await visit(`/campagnes/${campaign.code}`);
           await click(screen.getByRole('button', { name: 'Je commence' }));
-
           // then
           assert.ok(screen.getByText('Oups, la page demandée n’est pas accessible.'));
         });
@@ -754,7 +751,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
       module('When is a simplified access campaign', function (hooks) {
         hooks.beforeEach(function () {
-          campaign = server.create('campaign', 'withVerifiedCode', {
+          campaign = server.create('campaign', {
             organizationId: 1,
             isSimplifiedAccess: true,
             externalIdLabel: 'Les anonymes',
@@ -786,11 +783,12 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
     module('When user is logged as anonymous and campaign is simplified access', function () {
       test('should replace previous connected anonymous user', async function (assert) {
         // given
-        campaign = server.create('campaign', 'withVerifiedCode', {
+        campaign = server.create('campaign', {
           organizationId: 1,
           isSimplifiedAccess: true,
           externalIdLabel: 'Les anonymes',
         });
+        server.create('verified-code', { id: campaign.code, type: 'campaign', campaign });
         server.create('organization-to-join', { id: campaign.organizationId, code: campaign.code });
 
         await currentSession().authenticate('authenticator:anonymous', { campaignCode: campaign.code });
@@ -807,7 +805,6 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
         await click(screen.getByRole('button', { name: 'Je commence' }));
 
         const currentUserId = session.data.authenticated['user_id'];
-
         // then
         assert.true(Number.isFinite(currentUserId));
         assert.notEqual(previousUserId, currentUserId);
@@ -817,7 +814,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
     module('When user is logged in an external platform', function () {
       module('When campaign is restricted and SCO', function (hooks) {
         hooks.beforeEach(function () {
-          campaign = server.create('campaign', 'withVerifiedCode', { organizationId: 1 });
+          campaign = server.create('campaign', { organizationId: 1 });
           server.create('organization-to-join', { id: 1, isRestricted: true, type: 'SCO', code: campaign.code });
         });
 

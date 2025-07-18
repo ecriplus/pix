@@ -16,26 +16,6 @@ module('Unit | Route | Invited', function (hooks) {
     route.session.requireAuthenticationAndApprovedTermsOfService = sinon.stub();
   });
 
-  module('#beforeModel', function () {
-    test('should redirect to entry point when /prescrit is directly set in the url', async function (assert) {
-      //when
-      await route.beforeModel({ from: null });
-
-      //then
-      sinon.assert.calledWith(route.router.replaceWith, 'campaigns.entry-point');
-      assert.ok(true);
-    });
-
-    test('should continue en entrance route when from is set', async function (assert) {
-      //when
-      await route.beforeModel({ from: 'campaigns.entry-point' });
-
-      //then
-      sinon.assert.notCalled(route.router.replaceWith);
-      assert.ok(true);
-    });
-  });
-
   module('#model', function () {
     test('should load model', async function (assert) {
       //when
@@ -48,54 +28,96 @@ module('Unit | Route | Invited', function (hooks) {
   });
 
   module('#afterModel', function () {
-    module('reconciliation', function () {
-      test('should redirect to reconciliation invited page when association is needed', async function (assert) {
-        //given
-        campaign = EmberObject.create({ organizationId: 1 });
+    module('when reconciliation is required by organization', function (hooks) {
+      hooks.beforeEach(function () {
         organizationToJoin = EmberObject.create({ id: 1, isReconciliationRequired: true });
-
-        route.accessStorage.isAssociationDone.withArgs(organizationToJoin.id).returns(false);
-
-        //when
-        await route.afterModel({ campaign, organizationToJoin });
-
-        //then
-        const expectedResult = route.router.replaceWith.calledWithExactly(
-          'organizations.invited.reconciliation',
-          campaign.code,
-        );
-        assert.true(expectedResult);
       });
 
-      test('should redirect to fill in participant external page when association is already done', async function (assert) {
-        //given
-        campaign = EmberObject.create({ organizationId: 1 });
-        organizationToJoin = EmberObject.create({ id: 1, isReconciliationRequired: true });
+      module('when trying to access a campaign', function () {
+        test('should redirect to reconciliation invited page when association is needed', async function (assert) {
+          //given
+          campaign = EmberObject.create({ organizationId: 1 });
+          const verifiedCode = EmberObject.create({ id: campaign.code, type: 'campaign', campaign });
 
-        route.accessStorage.isAssociationDone.withArgs(campaign.organizationId).returns(true);
+          route.accessStorage.isAssociationDone.withArgs(organizationToJoin.id).returns(false);
 
-        //when
-        await route.afterModel({ campaign, organizationToJoin });
+          //when
+          await route.afterModel({ verifiedCode, organizationToJoin });
 
-        //then
-        const expectedResult = route.router.replaceWith.calledWithExactly(
-          'campaigns.fill-in-participant-external-id',
-          campaign.code,
-        );
-        assert.true(expectedResult);
+          //then
+          const expectedResult = route.router.replaceWith.calledWithExactly(
+            'organizations.invited.reconciliation',
+            campaign.code,
+          );
+          assert.true(expectedResult);
+        });
+        test('should redirect to fill in participant external page when association is already done', async function (assert) {
+          //given
+          campaign = EmberObject.create({ organizationId: 1 });
+          organizationToJoin = EmberObject.create({ id: 1, isReconciliationRequired: true });
+          const verifiedCode = EmberObject.create({ id: campaign.code, type: 'campaign', campaign });
+
+          route.accessStorage.isAssociationDone.withArgs(campaign.organizationId).returns(true);
+
+          //when
+          await route.afterModel({ verifiedCode, organizationToJoin });
+
+          //then
+          const expectedResult = route.router.replaceWith.calledWithExactly(
+            'campaigns.fill-in-participant-external-id',
+            verifiedCode.id,
+          );
+          assert.true(expectedResult);
+        });
+      });
+
+      module('when trying to access a combined course', function () {
+        test('should redirect to reconciliation invited page when association is needed', async function (assert) {
+          //given
+          const combinedCourse = EmberObject.create({ organizationId: 1, code: 'COMBINIX1' });
+          const verifiedCode = EmberObject.create({ id: combinedCourse.code, type: 'combined-course', combinedCourse });
+
+          route.accessStorage.isAssociationDone.withArgs(organizationToJoin.id).returns(false);
+
+          //when
+          await route.afterModel({ verifiedCode, organizationToJoin });
+
+          //then
+          const expectedResult = route.router.replaceWith.calledWithExactly(
+            'organizations.invited.reconciliation',
+            combinedCourse.code,
+          );
+          assert.true(expectedResult);
+        });
+
+        test('for combined courses, it should redirect to combined course page when association is already done', async function (assert) {
+          //given
+          const combinedCourse = EmberObject.create({ organizationId: 1, code: 'COMBINIX1' });
+          organizationToJoin = EmberObject.create({ id: 1, isReconciliationRequired: true });
+          const verifiedCode = EmberObject.create({ id: combinedCourse.code, type: 'combined-course' });
+
+          route.accessStorage.isAssociationDone.withArgs(combinedCourse.organizationId).returns(true);
+
+          //when
+          await route.afterModel({ verifiedCode, organizationToJoin });
+
+          //then
+          const expectedResult = route.router.replaceWith.calledWithExactly('combined-courses', verifiedCode.id);
+          assert.true(expectedResult);
+        });
       });
     });
-
     module('student sco', function () {
       test('should redirect student sco invited page when association is needed', async function (assert) {
         //given
         campaign = EmberObject.create({ organizationId: 1 });
         organizationToJoin = EmberObject.create({ id: 1, isRestricted: true, type: 'SCO' });
+        const verifiedCode = EmberObject.create({ id: campaign.code, type: 'campaign', campaign });
 
         route.accessStorage.isAssociationDone.withArgs(organizationToJoin.id).returns(false);
 
         //when
-        await route.afterModel({ campaign, organizationToJoin });
+        await route.afterModel({ verifiedCode, organizationToJoin });
 
         //then
         const expectedResult = route.router.replaceWith.calledWithExactly(
@@ -109,11 +131,12 @@ module('Unit | Route | Invited', function (hooks) {
         //given
         campaign = EmberObject.create({ organizationId: 1 });
         organizationToJoin = EmberObject.create({ id: 1, isRestricted: true, type: 'SCO' });
+        const verifiedCode = EmberObject.create({ id: campaign.code, type: 'campaign', campaign });
 
         route.accessStorage.isAssociationDone.withArgs(organizationToJoin.id).returns(true);
 
         //when
-        await route.afterModel({ campaign, organizationToJoin });
+        await route.afterModel({ verifiedCode, organizationToJoin });
 
         //then
         const expectedResult = route.router.replaceWith.calledWithExactly(
@@ -129,10 +152,11 @@ module('Unit | Route | Invited', function (hooks) {
         //given
         campaign = EmberObject.create({ organizationId: 1 });
         organizationToJoin = EmberObject.create({ id: 1, isRestricted: true, type: 'SUP' });
+        const verifiedCode = EmberObject.create({ id: campaign.code, type: 'campaign', campaign });
         route.accessStorage.isAssociationDone.withArgs(organizationToJoin.id).returns(false);
 
         //when
-        await route.afterModel({ campaign, organizationToJoin });
+        await route.afterModel({ verifiedCode, organizationToJoin });
 
         //then
         const expectedResult = route.router.replaceWith.calledWithExactly(
@@ -142,32 +166,49 @@ module('Unit | Route | Invited', function (hooks) {
         assert.true(expectedResult);
       });
 
-      test('should redirect to fill in participant external page when association is already done', async function (assert) {
+      test('for campaigns, should redirect to fill in participant external page when association is already done', async function (assert) {
         //given
-        campaign = EmberObject.create({ organizationId: 1 });
+        campaign = EmberObject.create({ organizationId: 1, code: 'CAMPAIGN1' });
         organizationToJoin = EmberObject.create({ id: 1, isRestricted: true, type: 'SUP' });
+        const verifiedCode = EmberObject.create({ id: campaign.code, type: 'campaign', campaign });
         route.accessStorage.isAssociationDone.withArgs(campaign.organizationId).returns(true);
 
         //when
-        await route.afterModel({ campaign, organizationToJoin });
+        await route.afterModel({ verifiedCode, organizationToJoin });
 
         //then
         const expectedResult = route.router.replaceWith.calledWithExactly(
           'campaigns.fill-in-participant-external-id',
-          campaign.code,
+          verifiedCode.id,
         );
+        assert.true(expectedResult);
+      });
+      test('for combined courses, should redirect to fill in participant external page when association is already done', async function (assert) {
+        //given
+        EmberObject.create({ organizationId: 1, code: 'COMBINIX1' });
+        organizationToJoin = EmberObject.create({ id: 1, isRestricted: true, type: 'SUP' });
+        const combinedCourse = EmberObject.create({ organizationId: 1, code: 'COMBINIX1' });
+        route.accessStorage.isAssociationDone.withArgs(combinedCourse.organizationId).returns(true);
+        const verifiedCode = EmberObject.create({ id: combinedCourse.code, type: 'combined-course' });
+
+        //when
+        await route.afterModel({ verifiedCode, organizationToJoin });
+
+        //then
+        const expectedResult = route.router.replaceWith.calledWithExactly('combined-courses', verifiedCode.id);
         assert.true(expectedResult);
       });
     });
 
     test('should redirect to fill in participant external otherwise', async function (assert) {
       //given
-      route.accessStorage.isAssociationDone.withArgs(campaign.organizationId).returns(false);
       campaign = EmberObject.create({ organizationId: 1 });
+      route.accessStorage.isAssociationDone.withArgs(campaign.organizationId).returns(false);
+      const verifiedCode = EmberObject.create({ id: campaign.code, type: 'campaign', campaign });
       organizationToJoin = EmberObject.create({ id: 1, isRestricted: false });
 
       //when
-      await route.afterModel({ campaign, organizationToJoin });
+      await route.afterModel({ verifiedCode, organizationToJoin });
 
       //then
       sinon.assert.calledWith(route.router.replaceWith, 'campaigns.fill-in-participant-external-id', campaign.code);

@@ -11,11 +11,10 @@ export default class StudentScoRoute extends Route {
   }
 
   async model() {
-    const { organizationToJoin, campaign } = this.modelFor('organizations');
+    const { organizationToJoin } = this.modelFor('organizations');
     const redirectionUrl = this.session.redirectionUrl;
     return {
       organizationToJoin,
-      campaign,
       redirectionUrl,
     };
   }

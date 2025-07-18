@@ -11,7 +11,7 @@ export default Factory.extend({
   },
 
   code() {
-    return Math.random().toString(36).slice(2, 8);
+    return Math.random().toString(36).slice(2, 8).toUpperCase();
   },
 
   externalIdLabel() {
@@ -40,6 +40,14 @@ export default Factory.extend({
 
   targetProfileName() {
     return 'Target Profile';
+  },
+
+  afterCreate(campaign, server) {
+    server.create('verified-code', {
+      id: campaign.code,
+      type: 'campaign',
+      campaign,
+    });
   },
 
   withOneChallenge: trait({
@@ -81,22 +89,16 @@ export default Factory.extend({
   }),
 
   forAutonomousCourse: trait({
-    afterCreate(campaign) {
+    afterCreate(campaign, server) {
+      const verifiedCode = server.schema.verifiedCodes.find(campaign.code);
       campaign.update({
         code: 'AUTOCOUR1',
         organizationId: ENV.APP.AUTONOMOUS_COURSES_ORGANIZATION_ID,
         title: 'Dummy title',
         customLandingPageText: 'Dummy landing page text',
       });
-    },
-  }),
-
-  withVerifiedCode: trait({
-    afterCreate(campaign, server) {
-      server.create('verified-code', {
+      verifiedCode.update({
         id: campaign.code,
-        type: 'campaign',
-        campaign,
       });
     },
   }),

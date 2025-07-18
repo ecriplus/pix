@@ -13,7 +13,7 @@ import AssociateSupStudentForm from 'mon-pix/components/routes/organizations/inv
       <div class="join-restricted-campaign">
         <AssociateSupStudentForm
           @organizationName={{@model.organizationToJoin.name}}
-          @campaignCode={{@model.campaign.code}}
+          @campaignCode={{@model.verifiedCode.id}}
         />
       </div>
     </main>

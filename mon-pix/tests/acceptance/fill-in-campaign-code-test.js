@@ -21,10 +21,13 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
     user = server.create('user', 'withEmail');
   });
 
-  module('When connected', function () {
+  module('When connected', function (hooks) {
+    hooks.beforeEach(async function () {
+      await authenticate(user);
+    });
+
     test('should disconnect when clicking on the link', async function (assert) {
       // given
-      await authenticate(user);
       await visit('/campagnes');
 
       // when
@@ -33,21 +36,22 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
       // then
       assert.strictEqual(currentURL(), '/deconnexion');
     });
-  });
 
-  module('when code is linked to a combined course', function () {
-    test('it redirects to combined course page', async function (assert) {
-      // given
-      const verifiedCode = server.create('verified-code', { id: 'something', type: 'combined-course' });
-      server.create('organization-to-join', { id: 1, code: verifiedCode.id, identityProvider: null });
+    module('when code is linked to a combined course', function () {
+      test('it redirects to combined course page', async function (assert) {
+        // given
+        const verifiedCode = server.create('verified-code', { id: 'SOMETHING', type: 'combined-course' });
+        server.create('organization-to-join', { id: 1, code: verifiedCode.id, identityProvider: null });
+        server.create('combined-course', { code: verifiedCode.id });
 
-      // when
-      const screen = await visit(`/campagnes`);
-      await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), verifiedCode.id);
-      await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+        // when
+        const screen = await visit(`/campagnes`);
+        await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), verifiedCode.id);
+        await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
 
-      // then
-      assert.strictEqual(currentURL(), `/parcours/${verifiedCode.id}`);
+        // then
+        assert.strictEqual(currentURL(), `/parcours/${verifiedCode.id}`);
+      });
     });
   });
 
@@ -55,7 +59,7 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
     module('and starts a campaign with GAR as identity provider', function () {
       test('should not redirect the user and display a modal', async function (assert) {
         // given
-        const campaign = server.create('campaign', 'withVerifiedCode', {
+        const campaign = server.create('campaign', {
           organizationId: 1,
           targetProfileName: 'My Profile',
           organizationName: 'AWS',
@@ -75,7 +79,7 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
       module('and wants to continue', function () {
         test('should be redirected to the campaign entry page', async function (assert) {
           // given
-          const campaign = server.create('campaign', 'withVerifiedCode', {
+          const campaign = server.create('campaign', {
             organizationId: 1,
             identityProvider: 'GAR',
             targetProfileName: 'My Profile',
@@ -99,7 +103,7 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
       module('and wants to connect to his Mediacentre', function () {
         test('should stay on the same page after closing the modal', async function (assert) {
           // given
-          const campaign = server.create('campaign', 'withVerifiedCode', {
+          const campaign = server.create('campaign', {
             organizationId: 1,
             identityProvider: 'GAR',
             targetProfileName: 'My Profile',
@@ -124,7 +128,7 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
     module('and starts a campaign without GAR as identity provider', function () {
       test('should redirect the user to the campaign entry page', async function (assert) {
         // given
-        const campaign = server.create('campaign', 'withVerifiedCode');
+        const campaign = server.create('campaign');
         server.create('organization-to-join', { id: 1, code: campaign.code, identityProvider: null });
 
         // when

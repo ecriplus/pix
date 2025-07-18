@@ -25,6 +25,6 @@ export default class ScoMediacentreController extends Controller {
     this.session.set('skipRedirectAfterSessionInvalidation', true);
     await this.session.invalidate();
     this.accessStorage.setHasUserSeenJoinPage(this.model.organizationToJoin.id);
-    this.router.replaceWith('organizations.access', this.model.campaign.code);
+    this.router.replaceWith('organizations.access', this.model.verifiedCode.id);
   }
 }

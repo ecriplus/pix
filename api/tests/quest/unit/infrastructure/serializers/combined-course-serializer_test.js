@@ -5,7 +5,7 @@ import { expect } from '../../../../test-helper.js';
 describe('Quest | Unit | Infrastructure | Serializers | combined-course', function () {
   it('#serialize', function () {
     // given
-    const combinedCourse = new CombinedCourse({ id: 1, name: 'Mon parcours' });
+    const combinedCourse = new CombinedCourse({ id: 1, name: 'Mon parcours', code: 'COMBINIX1', organizationId: 1 });
 
     // when
     const serializedCombinedCourse = combinedCourseSerializer.serialize(combinedCourse);
@@ -15,6 +15,8 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
       data: {
         attributes: {
           name: 'Mon parcours',
+          code: 'COMBINIX1',
+          'organization-id': 1,
         },
         type: 'combined-courses',
         id: '1',

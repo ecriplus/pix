@@ -8,6 +8,7 @@ import { module, test } from 'qunit';
 import { authenticate } from '../helpers/authentication';
 import { startCampaignByCode, startCampaignByCodeAndExternalId } from '../helpers/campaign';
 import setupIntl from '../helpers/setup-intl';
+import { unabortedVisit } from '../helpers/unaborted-visit';
 
 const ASSESSMENT = 'ASSESSMENT';
 
@@ -88,10 +89,9 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
           module('When campaign is restricted', function () {
             test('should redirect to assessment', async function (assert) {
               // given
-              campaign = server.create('campaign', 'restricted', {
+              campaign = server.create('campaign', {
                 organizationId: 1,
                 externalIdLabel: 'toto',
-                organizationType: 'SCO',
                 type: ASSESSMENT,
               });
               server.create('organization-to-join', {
@@ -106,7 +106,6 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
               assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
 
               await click(screen.getByRole('button', { name: 'Je commence' }));
-
               // when
               await click(screen.getByRole('button', { name: 'Se connecter' }));
 
@@ -116,7 +115,6 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
               );
               await fillIn(screen.getByLabelText('Mot de passe', { exact: false }), prescritUser.password);
               await click(screen.getByRole('button', { name: 'Se connecter' }));
-
               await fillIn(screen.getByLabelText('Prénom'), prescritUser.firstName);
               await fillIn(screen.getByLabelText('Nom'), prescritUser.lastName);
               await fillIn(screen.getByLabelText('jour de naissance'), '10');
@@ -166,7 +164,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
             isForAbsoluteNovice: true,
             organizationId: 1,
           });
-          await visit(`/campagnes/${campaign.code}`);
+          await unabortedVisit(`/campagnes/${campaign.code}`);
 
           // then
           assert.ok(currentURL().includes('/inscription'));

@@ -259,7 +259,13 @@ export default class AssociateSupStudentForm extends Component {
     try {
       await supOrganizationLearner.save();
       this.accessStorage.setAssociationDone(this.args.organizationId);
-      this.router.transitionTo('campaigns.fill-in-participant-external-id', this.args.campaignCode);
+      const verifiedCode = await this.store.findRecord('verified-code', this.args.campaignCode);
+
+      if (verifiedCode.type === 'campaign') {
+        this.router.transitionTo('campaigns.fill-in-participant-external-id', verifiedCode.id);
+      } else {
+        this.router.transitionTo('combined-courses', verifiedCode.id);
+      }
       return;
     } catch (errorResponse) {
       supOrganizationLearner.unloadRecord();

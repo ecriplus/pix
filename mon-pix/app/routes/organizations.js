@@ -3,11 +3,19 @@ import { service } from '@ember/service';
 
 export default class OrganizationsRoute extends Route {
   @service store;
+  @service router;
+  @service session;
+
+  beforeModel(transition) {
+    if (!transition.from && !transition.to.queryParams.from) {
+      return this.router.replaceWith('campaigns.entry-point');
+    }
+  }
 
   async model(params) {
     const organizationToJoin = await this.store.queryRecord('organization-to-join', { code: params.code });
-    const campaign = await this.store.queryRecord('campaign', { filter: { code: params.code } });
-
-    return { organizationToJoin, campaign };
+    const verifiedCode = await this.store.findRecord('verified-code', params.code);
+    this.session.setVerifiedCode(verifiedCode);
+    return { organizationToJoin, verifiedCode };
   }
 }

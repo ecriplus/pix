@@ -33,7 +33,13 @@ export default class InvitedWrapper extends Component {
       await organizationLearner.save();
 
       this.accessStorage.setAssociationDone(this.args.model.organizationToJoin.id);
-      this.router.transitionTo('campaigns.fill-in-participant-external-id', this.args.model.campaign.code);
+      const verifiedCode = await this.store.findRecord('verified-code', this.args.model.campaign.code);
+
+      if (verifiedCode.type === 'campaign') {
+        this.router.transitionTo('campaigns.fill-in-participant-external-id', verifiedCode.id);
+      } else {
+        this.router.transitionTo('combined-courses', verifiedCode.id);
+      }
     } catch (errorResponse) {
       this.handleError(errorResponse);
     } finally {

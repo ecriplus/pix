@@ -6,6 +6,7 @@ export default class StudentScoController extends Controller {
   @service router;
   @service accessStorage;
   @service session;
+  @service store;
 
   @action
   async reconcile(scoOrganizationLearner, adapterOptions) {
@@ -17,8 +18,13 @@ export default class StudentScoController extends Controller {
     }
 
     this.accessStorage.setAssociationDone(this.model.organizationToJoin.id);
-    this.router.transitionTo('campaigns.fill-in-participant-external-id', this.model.campaign.code);
-    return;
+    const verifiedCode = this.model.verifiedCode;
+
+    if (verifiedCode.type === 'campaign') {
+      this.router.transitionTo('campaigns.fill-in-participant-external-id', verifiedCode.id);
+    } else {
+      this.router.transitionTo('combined-courses', verifiedCode.id);
+    }
   }
 
   @action
@@ -26,6 +32,6 @@ export default class StudentScoController extends Controller {
     this.session.set('skipRedirectAfterSessionInvalidation', true);
     await this.session.invalidate();
     this.accessStorage.setHasUserSeenJoinPage(this.model.organizationToJoin.id);
-    this.router.transitionTo('organizations.access', this.model.campaign.code);
+    this.router.transitionTo('organizations.access', this.model.verifiedCode.id);
   }
 }

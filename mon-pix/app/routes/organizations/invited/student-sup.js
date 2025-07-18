@@ -16,7 +16,7 @@ export default class StudentSupRoute extends Route {
     return this.modelFor('organizations');
   }
 
-  async afterModel({ campaign, organizationToJoin }) {
+  async afterModel({ verifiedCode, organizationToJoin }) {
     const organizationLearner = await this.store.queryRecord('organization-learner-identity', {
       userId: this.currentUser.user.id,
       organizationId: organizationToJoin.id,
@@ -24,7 +24,11 @@ export default class StudentSupRoute extends Route {
 
     if (organizationLearner) {
       this.accessStorage.setAssociationDone(organizationToJoin.id);
-      this.router.replaceWith('campaigns.fill-in-participant-external-id', campaign.code);
+      if (verifiedCode.type === 'campaign') {
+        this.router.transitionTo('campaigns.fill-in-participant-external-id', verifiedCode.id);
+      } else {
+        this.router.transitionTo('combined-courses', verifiedCode.id);
+      }
     }
   }
 }

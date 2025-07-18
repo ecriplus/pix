@@ -53,6 +53,7 @@ export default class CurrentSessionService extends SessionService {
       delete this.skipRedirectAfterSessionInvalidation;
       return;
     }
+    this.code = null;
 
     const routeAfterInvalidation = this._getRouteAfterInvalidation();
     super.handleInvalidation(routeAfterInvalidation);
@@ -64,12 +65,15 @@ export default class CurrentSessionService extends SessionService {
   }
 
   get redirectionUrl() {
-    const campaignCode = get(this.session, 'attemptedTransition.from.parent.params.code');
-    if (campaignCode) {
-      const baseUrl = window.location.protocol + '//' + window.location.host;
-      return baseUrl + this.router.urlFor('campaigns', { code: campaignCode });
+    const baseUrl = window.location.protocol + '//' + window.location.host;
+
+    if (this.verifiedCode?.type === 'combined-course') {
+      return baseUrl + this.router.urlFor('combined-courses', { code: this.verifiedCode.id });
+    } else if (this.verifiedCode?.type === 'campaign') {
+      return baseUrl + this.router.urlFor('campaigns', { code: this.verifiedCode.id });
+    } else {
+      return null;
     }
-    return null;
   }
 
   requireAuthenticationAndApprovedTermsOfService(transition, authenticationRoute) {
@@ -83,6 +87,10 @@ export default class CurrentSessionService extends SessionService {
 
   setAttemptedTransition(transition) {
     this.attemptedTransition = transition;
+  }
+
+  setVerifiedCode(verifiedCode) {
+    this.verifiedCode = verifiedCode;
   }
 
   get isAuthenticatedByGar() {

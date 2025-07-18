@@ -18,6 +18,7 @@ import getCertificationCandidatesSubscriptions from './routes/get-certification-
 import getCertifications from './routes/get-certifications';
 import getChallenge from './routes/get-challenge';
 import getChallenges from './routes/get-challenges';
+import getCombinedCourses from './routes/get-combined-courses';
 import getCompetenceEvaluationsByAssessment from './routes/get-competence-evaluations-by-assessment';
 import getFeatureToggles from './routes/get-feature-toggles';
 import getInformationBanners from './routes/get-information-banners';
@@ -132,4 +133,5 @@ function routes() {
   this.get('/organizations-to-join/:code', getOrganizationsToJoin);
 
   this.get('/verified-codes/:code', getVerifiedCodes);
+  this.get('/combined-courses', getCombinedCourses);
 }

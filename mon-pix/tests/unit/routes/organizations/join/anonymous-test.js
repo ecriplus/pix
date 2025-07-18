@@ -1,4 +1,3 @@
-import EmberObject from '@ember/object';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -6,13 +5,15 @@ import sinon from 'sinon';
 module('Unit | Route | Join | Anonymous', function (hooks) {
   setupTest(hooks);
 
-  let route, campaign;
+  let route, verifiedCode;
 
   hooks.beforeEach(function () {
-    route = this.owner.lookup('route:campaigns.join.anonymous');
+    route = this.owner.lookup('route:organizations.join.anonymous');
     route.modelFor = sinon.stub();
     route.session = { authenticate: sinon.stub() };
     route.currentUser = { load: sinon.stub() };
+    const campaign = { code: 'YOLOCODE', organizationId: 1 };
+    verifiedCode = { id: campaign.code, type: 'campaign', campaign };
   });
 
   module('#model', function () {
@@ -21,20 +22,15 @@ module('Unit | Route | Join | Anonymous', function (hooks) {
       await route.model();
 
       //then
-      sinon.assert.calledWith(route.modelFor, 'campaigns');
+      sinon.assert.calledWith(route.modelFor, 'organizations');
       assert.ok(true);
     });
   });
 
   module('#afterModel', function () {
     test('should authenticate as anonymous', async function (assert) {
-      //given
-      campaign = EmberObject.create({
-        code: 'YOLOCODE',
-      });
-
-      //when
-      await route.afterModel(campaign);
+      //given & when
+      await route.afterModel({ verifiedCode });
 
       //then
       sinon.assert.calledWith(route.session.authenticate, 'authenticator:anonymous', { campaignCode: 'YOLOCODE' });
@@ -42,11 +38,8 @@ module('Unit | Route | Join | Anonymous', function (hooks) {
     });
 
     test('should load user', async function (assert) {
-      //given
-      campaign = EmberObject.create();
-
-      //when
-      await route.afterModel(campaign);
+      //given & when
+      await route.afterModel({ verifiedCode });
 
       //then
       sinon.assert.called(route.currentUser.load);
