@@ -27,7 +27,7 @@ export const findByCertificationCourseIdAndAssessmentId = withTransaction(
       fromArchivedCalibration: false,
     });
 
-    const { allChallenges, askedChallenges, challengeCalibrations } = await _findByCertificationCourseId({
+    const { allChallenges, askedChallenges, challengesCalibrations } = await _findByCertificationCourseId({
       compatibleChallenges: flashCompatibleChallenges,
       certificationCourseId,
       challengeCalibrationRepository,
@@ -36,7 +36,7 @@ export const findByCertificationCourseIdAndAssessmentId = withTransaction(
 
     const { challengeCalibrationsWithoutLiveAlerts, askedChallengesWithoutLiveAlerts } =
       await _removeChallengesWithValidatedLiveAlerts(
-        challengeCalibrations,
+        challengesCalibrations,
         assessmentId,
         askedChallenges,
         certificationChallengeLiveAlertRepository,
@@ -56,28 +56,28 @@ const _findByCertificationCourseId = async ({
   challengeCalibrationRepository,
   sharedChallengeRepository,
 }) => {
-  const challengeCalibrations = await challengeCalibrationRepository.getByCertificationCourseId({
+  const challengesCalibrations = await challengeCalibrationRepository.getByCertificationCourseId({
     certificationCourseId,
   });
 
   const askedChallenges = await sharedChallengeRepository.getMany(
-    challengeCalibrations.map((challenge) => challenge.id),
+    challengesCalibrations.map((challenge) => challenge.id),
   );
 
-  _restoreCalibrationValues(challengeCalibrations, askedChallenges);
+  _restoreCalibrationValues(challengesCalibrations, askedChallenges);
 
   const flashCompatibleChallengesNotAskedInCertification = differenceBy(compatibleChallenges, askedChallenges, 'id');
 
   const allChallenges = [...askedChallenges, ...flashCompatibleChallengesNotAskedInCertification];
 
-  return { allChallenges, askedChallenges, challengeCalibrations };
+  return { allChallenges, askedChallenges, challengesCalibrations };
 };
 
 /**
  * @param {CertificationChallengeLiveAlertRepository} certificationChallengeLiveAlertRepository
  */
 async function _removeChallengesWithValidatedLiveAlerts(
-  challengeCalibrations,
+  challengesCalibrations,
   assessmentId,
   askedChallenges,
   certificationChallengeLiveAlertRepository,
@@ -86,7 +86,7 @@ async function _removeChallengesWithValidatedLiveAlerts(
     await certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId({
       assessmentId,
     });
-  const challengeCalibrationsWithoutLiveAlerts = challengeCalibrations.filter(
+  const challengeCalibrationsWithoutLiveAlerts = challengesCalibrations.filter(
     (challengeCalibration) => !validatedLiveAlertChallengeIds.includes(challengeCalibration.id),
   );
   const askedChallengesWithoutLiveAlerts = askedChallenges.filter(
@@ -95,8 +95,8 @@ async function _removeChallengesWithValidatedLiveAlerts(
   return { challengeCalibrationsWithoutLiveAlerts, askedChallengesWithoutLiveAlerts };
 }
 
-function _restoreCalibrationValues(challengeCalibrations, askedChallenges) {
-  challengeCalibrations.forEach((certificationChallenge) => {
+function _restoreCalibrationValues(challengesCalibrations, askedChallenges) {
+  challengesCalibrations.forEach((certificationChallenge) => {
     const askedChallenge = askedChallenges.find(({ id }) => id === certificationChallenge.id);
     askedChallenge.discriminant = certificationChallenge.discriminant;
     askedChallenge.difficulty = certificationChallenge.difficulty;
