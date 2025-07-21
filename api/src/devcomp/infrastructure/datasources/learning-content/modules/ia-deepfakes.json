@@ -102,7 +102,7 @@
           "element": {
             "id": "0d9bafd7-0845-484f-9fd4-c4123c30377b",
             "type": "text",
-            "content": "<p>Voici les photos de 3 personnes&nbsp;: sont-elles vraies ou fausses ?<br></p>"
+            "content": "<p><strong>Voici les photos de 3 personnes&nbsp;: sont-elles vraies ou fausses ?</strong></p>"
           }
         },
         {
@@ -265,7 +265,7 @@
           "element": {
             "id": "7004de22-c4af-4e4e-ac47-1e08122e6de2",
             "type": "text",
-            "content": "<p>Pour chaque exemple de deepfake, choisissez la bonne réponse.</p>"
+            "content": "<p><strong>Pour chaque exemple de deepfake, choisissez la bonne réponse.</strong></p>"
           }
         },
         {
@@ -551,7 +551,7 @@
           "element": {
             "id": "634ce6a5-46c4-4027-ac3b-9cc3fd36a13f",
             "type": "text",
-            "content": "<p>Lisez l’article ci-dessous, puis répondez aux questions.</p>"
+            "content": "<p><strong>Lisez l’article ci-dessous, puis répondez aux questions.</strong></p>"
           }
         },
         {
@@ -566,7 +566,7 @@
     },
     {
       "id": "4a311602-d54d-47c9-810f-2ce52bd6b526",
-      "type": "challenge",
+      "type": "activity",
       "title": "Et vous ? ",
       "components": [
         {
