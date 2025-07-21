@@ -27,6 +27,7 @@ import {
   learningContentBuilder,
   mockLearningContent,
   nock,
+  sinon,
 } from '../../../../test-helper.js';
 
 const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
@@ -476,6 +477,7 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
       context('when there are quests', function () {
         it('should complete the assessment', async function () {
           // given
+          sinon.stub(featureToggles, 'get').withArgs('isQuestEnabled').resolves(true);
           const organizationId = databaseBuilder.factory.buildOrganization({ type: 'SCO' }).id;
           const { id: organizationLearnerId, userId } = databaseBuilder.factory.buildOrganizationLearner({
             organizationId,
@@ -484,26 +486,21 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
           const campaignId = databaseBuilder.factory.buildCampaign({
             targetProfileId,
           }).id;
-          databaseBuilder.factory.buildCampaignParticipation({
+          const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
             organizationLearnerId,
             userId,
             campaignId,
+          }).id;
+          const assessment = databaseBuilder.factory.buildAssessment({
+            userId,
+            state: Assessment.states.STARTED,
+            campaignParticipationId,
           });
           const rewardId = databaseBuilder.factory.buildAttestation().id;
           databaseBuilder.factory.buildQuest({
             rewardType: 'attestations',
             rewardId,
             eligibilityRequirements: [
-              {
-                requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
-                data: {
-                  type: {
-                    data: 'SCO',
-                    comparison: CRITERION_COMPARISONS.EQUAL,
-                  },
-                },
-                comparison: REQUIREMENT_COMPARISONS.ALL,
-              },
               {
                 requirement_type: REQUIREMENT_TYPES.COMPOSE,
                 data: [
@@ -517,16 +514,6 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
                     },
                     comparison: REQUIREMENT_COMPARISONS.ALL,
                   },
-                  {
-                    requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-                    data: {
-                      targetProfileId: {
-                        data: targetProfileId + 8,
-                        comparison: CRITERION_COMPARISONS.EQUAL,
-                      },
-                    },
-                    comparison: REQUIREMENT_COMPARISONS.ALL,
-                  },
                 ],
                 comparison: REQUIREMENT_COMPARISONS.ONE_OF,
               },
@@ -535,12 +522,16 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
           });
 
           await databaseBuilder.commit();
+          options.headers = generateAuthenticatedUserRequestHeaders({ userId });
+          options.url = `/api/assessments/${assessment.id}/complete-assessment`;
 
           // when
           const response = await server.inject(options);
 
           // then
           expect(response.statusCode).to.equal(204);
+          const reward = await knex('profile-rewards').where({ userId, rewardId }).first();
+          expect(reward).to.exist;
         });
       });
     });

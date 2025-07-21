@@ -2,8 +2,8 @@ import { usecases as devcompUsecases } from '../../../../../src/devcomp/domain/u
 import { assessmentController } from '../../../../../src/evaluation/application/assessments/assessment-controller.js';
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
 import { usecases as questUsecases } from '../../../../../src/quest/domain/usecases/index.js';
-import { config } from '../../../../../src/shared/config.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
+import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Controller | assessment-controller', function () {
@@ -59,7 +59,7 @@ describe('Unit | Controller | assessment-controller', function () {
 
     it('should not call the rewardUser usecase if the questEnabled flag is false', async function () {
       // given
-      config.featureToggles.isQuestEnabled = false;
+      sinon.stub(featureToggles, 'get').resolves(false);
       evaluationUsecases.completeAssessment.resolves({ userId: 12 });
 
       // when
@@ -71,7 +71,7 @@ describe('Unit | Controller | assessment-controller', function () {
 
     it('should call the rewardUser use case if there is a userId', async function () {
       // given
-      config.featureToggles.isQuestEnabled = true;
+      sinon.stub(featureToggles, 'get').resolves(true);
       evaluationUsecases.completeAssessment.resolves({ userId: 12 });
 
       // when

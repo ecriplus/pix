@@ -1,7 +1,7 @@
 import { usecases as devcompUsecases } from '../../../devcomp/domain/usecases/index.js';
 import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
-import { config } from '../../../shared/config.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { featureToggles } from '../../../shared/infrastructure/feature-toggles/index.js';
 import * as llmChatSerializer from '../../../shared/infrastructure/serializers/llm-chat-serializer.js';
 import { extractLocaleFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { evaluationUsecases } from '../../domain/usecases/index.js';
@@ -14,7 +14,7 @@ const completeAssessment = async function (request) {
     const assessment = await evaluationUsecases.completeAssessment({ assessmentId, locale });
     await evaluationUsecases.handleBadgeAcquisition({ assessment });
     await evaluationUsecases.handleStageAcquisition({ assessment });
-    if (assessment.userId && config.featureToggles.isQuestEnabled) {
+    if (assessment.userId && (await featureToggles.get('isQuestEnabled'))) {
       await questUsecases.rewardUser({ userId: assessment.userId });
     }
 
