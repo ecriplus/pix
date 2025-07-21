@@ -21,6 +21,7 @@ const serialize = function (campaignParticipationOverview, meta) {
       'masteryRate',
       'validatedStagesCount',
       'totalStagesCount',
+      'canRetry',
     ],
     meta,
   }).serialize(campaignParticipationOverview);

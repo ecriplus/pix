@@ -1,5 +1,8 @@
 import * as serializer from '../../../../../../../src/prescription/campaign-participation/infrastructure/serializers/jsonapi/campaign-participation-overview-serializer.js';
-import { CampaignParticipationStatuses } from '../../../../../../../src/prescription/shared/domain/constants.js';
+import {
+  CampaignParticipationStatuses,
+  CampaignTypes,
+} from '../../../../../../../src/prescription/shared/domain/constants.js';
 import { CampaignParticipationOverview } from '../../../../../../../src/shared/domain/read-models/CampaignParticipationOverview.js';
 import { expect } from '../../../../../../test-helper.js';
 
@@ -22,6 +25,9 @@ describe('Unit | Serializer | JSONAPI | campaign-participation-overview-serializ
         masteryRate: 0.5,
         totalStagesCount: 3,
         validatedStagesCount: 2,
+        isCampaignMultipleSendings: true,
+        isOrganizationLearnerActive: true,
+        campaignType: CampaignTypes.ASSESSMENT,
       });
 
       expectedSerializedCampaignParticipationOverview = {
@@ -40,6 +46,7 @@ describe('Unit | Serializer | JSONAPI | campaign-participation-overview-serializ
             'mastery-rate': 0.5,
             'validated-stages-count': 2,
             'total-stages-count': 3,
+            'can-retry': false,
           },
         },
       };
@@ -51,6 +58,48 @@ describe('Unit | Serializer | JSONAPI | campaign-participation-overview-serializ
 
       // then
       expect(json).to.deep.equal(expectedSerializedCampaignParticipationOverview);
+    });
+
+    it('should serialize canRetry as true when retry is possible', function () {
+      // given
+      const campaignParticipationOverview = new CampaignParticipationOverview({
+        id: 6,
+        status: SHARED,
+        sharedAt: new Date('2018-01-01T14:12:44Z'), // Old enough
+        masteryRate: 0.7, // Less than 100%
+        isCampaignMultipleSendings: true,
+        isOrganizationLearnerActive: true,
+        campaignType: CampaignTypes.ASSESSMENT,
+        campaignArchivedAt: null,
+        deletedAt: null,
+      });
+
+      // when
+      const json = serializer.serialize(campaignParticipationOverview);
+
+      // then
+      expect(json.data.attributes['can-retry']).to.be.true;
+    });
+
+    it('should serialize canRetry as false when retry is not possible', function () {
+      // given
+      const campaignParticipationOverview = new CampaignParticipationOverview({
+        id: 7,
+        status: SHARED,
+        sharedAt: new Date('2018-01-01T14:12:44Z'),
+        masteryRate: 0.7,
+        isCampaignMultipleSendings: false, // Multiple sendings not allowed
+        isOrganizationLearnerActive: true,
+        campaignType: CampaignTypes.ASSESSMENT,
+        campaignArchivedAt: null,
+        deletedAt: null,
+      });
+
+      // when
+      const json = serializer.serialize(campaignParticipationOverview);
+
+      // then
+      expect(json.data.attributes['can-retry']).to.be.false;
     });
   });
 
@@ -70,6 +119,9 @@ describe('Unit | Serializer | JSONAPI | campaign-participation-overview-serializ
           masteryRate: null,
           totalStagesCount: 0,
           validatedStagesCount: null,
+          isCampaignMultipleSendings: false,
+          isOrganizationLearnerActive: true,
+          campaignType: CampaignTypes.ASSESSMENT,
         }),
 
         new CampaignParticipationOverview({
@@ -84,6 +136,9 @@ describe('Unit | Serializer | JSONAPI | campaign-participation-overview-serializ
           masteryRate: null,
           totalStagesCount: 0,
           validatedStagesCount: null,
+          isCampaignMultipleSendings: false,
+          isOrganizationLearnerActive: true,
+          campaignType: CampaignTypes.ASSESSMENT,
         }),
       ];
       const pagination = {
@@ -113,6 +168,7 @@ describe('Unit | Serializer | JSONAPI | campaign-participation-overview-serializ
               'disabled-at': null,
               'validated-stages-count': null,
               'total-stages-count': 0,
+              'can-retry': false,
             },
             id: '6',
             type: 'campaign-participation-overviews',
@@ -130,6 +186,7 @@ describe('Unit | Serializer | JSONAPI | campaign-participation-overview-serializ
               'disabled-at': null,
               'validated-stages-count': null,
               'total-stages-count': 0,
+              'can-retry': false,
             },
             id: '7',
             type: 'campaign-participation-overviews',

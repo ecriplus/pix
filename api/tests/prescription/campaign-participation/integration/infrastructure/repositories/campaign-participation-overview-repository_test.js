@@ -912,5 +912,262 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         expect(campaignParticipationOverviews).to.have.lengthOf(1);
       });
     });
+
+    context('canRetry computation', function () {
+      it('should compute canRetry as true when all conditions are met', async function () {
+        // given
+        const { id: organizationId } = databaseBuilder.factory.buildOrganization({ name: 'Organization ABCD' });
+        const { id: campaignId } = databaseBuilder.factory.buildCampaign({
+          organizationId,
+          targetProfileId: targetProfile.id,
+          multipleSendings: true,
+          type: CampaignTypes.ASSESSMENT,
+        });
+
+        const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId,
+          userId,
+        });
+        databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'recSkillId1' });
+        const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
+          organizationLearnerId,
+          userId,
+          campaignId,
+          status: CampaignParticipationStatuses.SHARED,
+          sharedAt: new Date('2020-01-01'), // Old enough
+          masteryRate: 0.7, // Less than 100%
+        });
+        databaseBuilder.factory.buildAssessment({
+          campaignParticipationId: participationId,
+          state: Assessment.states.COMPLETED,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const { campaignParticipationOverviews } =
+          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+
+        // then
+        expect(campaignParticipationOverviews[0].canRetry).to.be.true;
+      });
+
+      it('should compute canRetry as false when campaign does not allow multiple sendings', async function () {
+        // given
+        const { id: organizationId } = databaseBuilder.factory.buildOrganization({ name: 'Organization ABCD' });
+        const { id: campaignId } = databaseBuilder.factory.buildCampaign({
+          organizationId,
+          targetProfileId: targetProfile.id,
+          multipleSendings: false, // Multiple sendings disabled
+          type: CampaignTypes.ASSESSMENT,
+        });
+        const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId,
+          userId,
+        });
+        databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'recSkillId1' });
+        const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
+          organizationLearnerId,
+          userId,
+          campaignId,
+          status: CampaignParticipationStatuses.SHARED,
+          sharedAt: new Date('2020-01-01'),
+          masteryRate: 0.7,
+        });
+        databaseBuilder.factory.buildAssessment({
+          campaignParticipationId: participationId,
+          state: Assessment.states.COMPLETED,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const { campaignParticipationOverviews } =
+          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+
+        // then
+        expect(campaignParticipationOverviews[0].canRetry).to.be.false;
+      });
+
+      it('should compute canRetry as false when organization learner is not active', async function () {
+        // given
+        const { id: organizationId } = databaseBuilder.factory.buildOrganization({ name: 'Organization ABCD' });
+        const { id: campaignId } = databaseBuilder.factory.buildCampaign({
+          organizationId,
+          targetProfileId: targetProfile.id,
+          multipleSendings: true,
+          type: CampaignTypes.ASSESSMENT,
+        });
+        const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId,
+          userId,
+          isDisabled: true,
+        });
+        databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'recSkillId1' });
+        const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
+          organizationLearnerId,
+          userId,
+          campaignId,
+          status: CampaignParticipationStatuses.SHARED,
+          sharedAt: new Date('2020-01-01'),
+          masteryRate: 0.7,
+        });
+        databaseBuilder.factory.buildAssessment({
+          campaignParticipationId: participationId,
+          state: Assessment.states.COMPLETED,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const { campaignParticipationOverviews } =
+          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+
+        // then
+        expect(campaignParticipationOverviews[0].canRetry).to.be.false;
+      });
+
+      it('should compute canRetry as false when campaign is archived', async function () {
+        // given
+        const { id: organizationId } = databaseBuilder.factory.buildOrganization({ name: 'Organization ABCD' });
+        const { id: campaignId } = databaseBuilder.factory.buildCampaign({
+          organizationId,
+          targetProfileId: targetProfile.id,
+          multipleSendings: true,
+          type: CampaignTypes.ASSESSMENT,
+          archivedAt: new Date('2020-01-05'), // Campaign archived
+        });
+        const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId,
+          userId,
+        });
+        databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'recSkillId1' });
+        const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
+          organizationLearnerId,
+          userId,
+          campaignId,
+          status: CampaignParticipationStatuses.SHARED,
+          sharedAt: new Date('2020-01-01'),
+          masteryRate: 0.7,
+        });
+        databaseBuilder.factory.buildAssessment({
+          campaignParticipationId: participationId,
+          state: Assessment.states.COMPLETED,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const { campaignParticipationOverviews } =
+          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+
+        // then
+        expect(campaignParticipationOverviews[0].canRetry).to.be.false;
+      });
+
+      it('should compute canRetry as true for EXAM campaign type even with 100% mastery rate', async function () {
+        // given
+        const { id: organizationId } = databaseBuilder.factory.buildOrganization({ name: 'Organization ABCD' });
+        const { id: campaignId } = databaseBuilder.factory.buildCampaign({
+          organizationId,
+          targetProfileId: targetProfile.id,
+          multipleSendings: true,
+          type: CampaignTypes.EXAM,
+        });
+        const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId,
+          userId,
+        });
+        databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'recSkillId1' });
+        const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
+          organizationLearnerId,
+          userId,
+          campaignId,
+          status: CampaignParticipationStatuses.SHARED,
+          sharedAt: new Date('2020-01-01'),
+          masteryRate: 1.0, // 100% mastery rate
+        });
+        databaseBuilder.factory.buildAssessment({
+          campaignParticipationId: participationId,
+          state: Assessment.states.COMPLETED,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const { campaignParticipationOverviews } =
+          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+
+        // then
+        expect(campaignParticipationOverviews[0].canRetry).to.be.true;
+      });
+
+      it('should compute canRetry as false for ASSESSMENT campaign type with 100% mastery rate', async function () {
+        // given
+        const { id: organizationId } = databaseBuilder.factory.buildOrganization({ name: 'Organization ABCD' });
+        const { id: campaignId } = databaseBuilder.factory.buildCampaign({
+          organizationId,
+          targetProfileId: targetProfile.id,
+          multipleSendings: true,
+          type: CampaignTypes.ASSESSMENT,
+        });
+        const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId,
+          userId,
+        });
+        databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'recSkillId1' });
+        const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
+          organizationLearnerId,
+          userId,
+          campaignId,
+          status: CampaignParticipationStatuses.SHARED,
+          sharedAt: new Date('2020-01-01'),
+          masteryRate: 1.0, // 100% mastery rate
+        });
+        databaseBuilder.factory.buildAssessment({
+          campaignParticipationId: participationId,
+          state: Assessment.states.COMPLETED,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const { campaignParticipationOverviews } =
+          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+
+        // then
+        expect(campaignParticipationOverviews[0].canRetry).to.be.false;
+      });
+
+      it('should compute canRetry as false when participation is not shared', async function () {
+        // given
+        const { id: organizationId } = databaseBuilder.factory.buildOrganization({ name: 'Organization ABCD' });
+        const { id: campaignId } = databaseBuilder.factory.buildCampaign({
+          organizationId,
+          targetProfileId: targetProfile.id,
+          multipleSendings: true,
+          type: CampaignTypes.ASSESSMENT,
+        });
+        const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId,
+          userId,
+        });
+        databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'recSkillId1' });
+        const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
+          organizationLearnerId,
+          userId,
+          campaignId,
+          status: CampaignParticipationStatuses.STARTED, // Not shared
+          sharedAt: null,
+          masteryRate: 0.7,
+        });
+        databaseBuilder.factory.buildAssessment({
+          campaignParticipationId: participationId,
+          state: Assessment.states.STARTED,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const { campaignParticipationOverviews } =
+          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+
+        // then
+        expect(campaignParticipationOverviews[0].canRetry).to.be.false;
+      });
+    });
   });
 });

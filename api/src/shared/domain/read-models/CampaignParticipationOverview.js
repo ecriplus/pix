@@ -1,6 +1,8 @@
+import dayjs from 'dayjs';
 import _ from 'lodash';
 
-import { CampaignParticipationStatuses } from '../../../prescription/shared/domain/constants.js';
+import { CampaignParticipationStatuses, CampaignTypes } from '../../../prescription/shared/domain/constants.js';
+import { MAX_MASTERY_RATE, MINIMUM_DELAY_IN_DAYS_BEFORE_RETRYING } from '../constants.js';
 
 const { SHARED } = CampaignParticipationStatuses;
 
@@ -22,6 +24,9 @@ class CampaignParticipationOverview {
     totalStagesCount,
     validatedStagesCount,
     validatedSkillsCount,
+    isCampaignMultipleSendings,
+    isOrganizationLearnerDisabled,
+    campaignType,
   } = {}) {
     this.id = id;
     this.createdAt = createdAt;
@@ -40,6 +45,26 @@ class CampaignParticipationOverview {
     this.totalStagesCount = totalStagesCount;
     this.validatedStagesCount = validatedStagesCount;
     this.disabledAt = _.min(dates) || null;
+    this.isDisabled = this.disabledAt !== null;
+    this.isCampaignMultipleSendings = isCampaignMultipleSendings;
+    this.isOrganizationLearnerDisabled = isOrganizationLearnerDisabled;
+    this.campaignType = campaignType;
+    this.canRetry = this.computeCanRetry();
+  }
+
+  computeCanRetry() {
+    return (
+      !this.isOrganizationLearnerDisabled &&
+      !this.isDisabled &&
+      this.isCampaignMultipleSendings &&
+      this.isShared &&
+      this._timeBeforeRetryingPassed(this.sharedAt) &&
+      (this.masteryRate < MAX_MASTERY_RATE || this.campaignType === CampaignTypes.EXAM)
+    );
+  }
+
+  _timeBeforeRetryingPassed(sharedAt) {
+    return sharedAt ? dayjs().diff(sharedAt, 'days', true) >= MINIMUM_DELAY_IN_DAYS_BEFORE_RETRYING : false;
   }
 }
 
