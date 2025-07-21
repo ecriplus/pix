@@ -1,16 +1,12 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
-import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
-import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { concat, get } from '@ember/helper';
-import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
-import { eq } from 'ember-truth-helpers';
+import { and, eq } from 'ember-truth-helpers';
 import { DescriptionList } from 'pix-admin/components/ui/description-list';
-import ENV from 'pix-admin/config/environment';
 import Organization from 'pix-admin/models/organization';
 
 export default class OrganizationInformationSection extends Component {
@@ -24,68 +20,8 @@ export default class OrganizationInformationSection extends Component {
     );
   }
 
-  get externalURL() {
-    const urlDashboardPrefix = ENV.APP.ORGANIZATION_DASHBOARD_URL;
-    return urlDashboardPrefix && urlDashboardPrefix + this.args.organization.id;
-  }
-
-  get hasTags() {
-    const tags = this.args.organization.tags;
-    return tags?.length > 0;
-  }
-
-  get hasChildren() {
-    const children = this.args.organization.children;
-    return children?.length > 0;
-  }
-
   <template>
     <div class="organization__data">
-      <div class="organization__header">
-        <div class="organization__title">
-          <h2 class="organization__name">{{@organization.name}}</h2>
-
-          {{#if this.hasTags}}
-            <ul class="organization-tags-list">
-              {{#each @organization.tags as |tag|}}
-                <li class="organization-tags-list__tag">
-                  <PixTag @color="purple-light">{{tag.name}}</PixTag>
-                </li>
-              {{/each}}
-            </ul>
-          {{/if}}
-
-          {{#if this.hasChildren}}
-            <div>
-              <PixTag @color="success">
-                {{t "components.organizations.information-section-view.parent-organization"}}
-              </PixTag>
-            </div>
-          {{/if}}
-
-          {{#if @organization.parentOrganizationId}}
-            <div>
-              <PixTag class="organization__child-tag" @color="success">
-                {{t "components.organizations.information-section-view.child-organization"}}
-                <LinkTo @route="authenticated.organizations.get" @model={{@organization.parentOrganizationId}}>
-                  {{@organization.parentOrganizationName}}
-                </LinkTo>
-              </PixTag>
-            </div>
-          {{/if}}
-        </div>
-
-        <PixButtonLink
-          @variant="secondary"
-          @href={{this.externalURL}}
-          @size="small"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Tableau de bord
-        </PixButtonLink>
-      </div>
-
       {{#if @organization.isArchived}}
         <PixNotificationAlert class="organization-information-section__archived-message" @type="warning">
           Archivée le
@@ -216,52 +152,47 @@ const FeaturesSection = <template>
         (get @features feature) (concat "components.organizations.information-section-view.features." feature)
         as |organizationFeature featureLabel|
       }}
-        <li>
-          {{#if (eq feature "SHOW_NPS")}}
-            <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
-              <a
-                rel="noopener noreferrer"
-                href={{organizationFeature.params.formNPSUrl}}
-                target="_blank"
-              >{{organizationFeature.params.formNPSUrl}}</a>
-            </Feature>
-          {{else if (eq feature "LEARNER_IMPORT")}}
-            <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
-              {{organizationFeature.params.name}}
-            </Feature>
-          {{else if (eq feature "ATTESTATIONS_MANAGEMENT")}}
-            <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
-              6ème
-            </Feature>
-          {{else}}
-            <Feature @label={{t featureLabel}} @value={{organizationFeature.active}} />
-          {{/if}}
-        </li>
+        {{#if (eq feature "SHOW_NPS")}}
+          <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
+            <a
+              rel="noopener noreferrer"
+              href={{organizationFeature.params.formNPSUrl}}
+              target="_blank"
+            >{{organizationFeature.params.formNPSUrl}}</a>
+          </Feature>
+        {{else if (eq feature "LEARNER_IMPORT")}}
+          <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
+            {{organizationFeature.params.name}}
+          </Feature>
+        {{else if (eq feature "ATTESTATIONS_MANAGEMENT")}}
+          <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
+            6ème
+          </Feature>
+        {{else}}
+          <Feature @label={{t featureLabel}} @value={{organizationFeature.active}} />
+        {{/if}}
       {{/let}}
     {{/each}}
   </ul>
 </template>;
 
 const Feature = <template>
-  {{#if @value}}
-    <PixIcon
-      @name="checkCircle"
-      aria-label={{concat @label " : " (t "common.words.yes")}}
-      class="organization-information-section__features--enabled"
-    />
+  <li
+    class={{if
+      @value
+      "organization-information-section__features--enabled"
+      "organization-information-section__features--disabled"
+    }}
+  >
+    {{#if @value}}
+      <PixIcon @name="checkCircle" aria-label={{concat @label " : " (t "common.words.yes")}} />
+    {{else}}
+      <PixIcon @name="cancel" aria-label={{concat @label " : " (t "common.words.no")}} />
+    {{/if}}
     {{@label}}
-    {{#if (has-block)}}
+    {{#if (and @value (has-block))}}
       :
       {{yield}}
     {{/if}}
-  {{else}}
-    <PixIcon
-      @name="cancel"
-      aria-label={{concat @label " : " (t "common.words.no")}}
-      class="organization-information-section__features--disabled"
-    />
-    <span class="organization-information-section__features--disabled">
-      {{@label}}
-    </span>
-  {{/if}}
+  </li>
 </template>;
