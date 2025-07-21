@@ -14,7 +14,6 @@ const logger = child('learningcontent:repository', { event: SCOPES.LEARNING_CONT
 const TABLE_NAME = 'learningcontent.challenges';
 const VALIDATED_STATUS = 'validé';
 const ARCHIVED_STATUS = 'archivé';
-const OBSOLETE_STATUS = 'périmé';
 const OPERATIVE_STATUSES = [VALIDATED_STATUS, ARCHIVED_STATUS];
 const ACCESSIBLE_STATUSES = [Accessibility.RAS, Accessibility.OK];
 
@@ -182,16 +181,6 @@ function decorateWithCertificationCalibration({ challengeDtos, complementaryCert
       delta: difficulty,
     };
   });
-}
-
-export async function findFlashCompatibleWithoutLocale({ useObsoleteChallenges } = {}) {
-  const acceptedStatuses = useObsoleteChallenges ? [OBSOLETE_STATUS, ...OPERATIVE_STATUSES] : OPERATIVE_STATUSES;
-  const cacheKey = `findFlashCompatibleByStatuses({ useObsoleteChallenges: ${Boolean(useObsoleteChallenges)} })`;
-  const findFlashCompatibleByStatusesCallback = (knex) =>
-    knex.whereIn('status', acceptedStatuses).whereNotNull('alpha').whereNotNull('delta').orderBy('id');
-  const challengeDtos = await getInstance().find(cacheKey, findFlashCompatibleByStatusesCallback);
-  const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
-  return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
 }
 
 export async function findValidatedBySkillId(skillId, locale) {

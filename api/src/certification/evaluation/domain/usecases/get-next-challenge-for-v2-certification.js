@@ -12,14 +12,14 @@
 const getNextChallengeForV2Certification = async function ({
   assessment,
   sessionManagementCertificationChallengeRepository,
-  challengeRepository,
+  sharedChallengeRepository,
 }) {
   const certificationChallenge =
     await sessionManagementCertificationChallengeRepository.getNextNonAnsweredChallengeByCourseId(
       assessment.id,
       assessment.certificationCourseId,
     );
-  return challengeRepository.get(certificationChallenge.challengeId);
+  return sharedChallengeRepository.get(certificationChallenge.challengeId);
 };
 
 export { getNextChallengeForV2Certification };
