@@ -1711,6 +1711,9 @@
           "summary": "Recap"
         }
       },
+      "interactiveElement": {
+        "label": "Interactief element"
+      },
       "modals": {
         "alternativeText": {
           "title": "Tekst alternatief"

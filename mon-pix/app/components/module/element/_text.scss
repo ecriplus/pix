@@ -1,11 +1,6 @@
-.element-text {
-  iframe {
-    width: 100%;
-    padding: var(--pix-spacing-2x);
-    border: 2px dashed rgb(var(--pix-tertiary-500-inline), 0.6);
-    border-radius: var(--pix-spacing-2x);
-  }
+@use 'pix-design-tokens/typography';
 
+.element-text {
   table {
     width: 100%;
     background: var(--pix-neutral-0);
@@ -39,5 +34,21 @@
     th, td {
       padding: 0.75rem;
     }
+  }
+
+  fieldset {
+    padding: var(--pix-spacing-2x);
+    border: 2px dashed rgb(var(--pix-tertiary-900-inline), 0.6);
+    border-radius: var(--pix-spacing-2x);
+  }
+
+  legend {
+    @extend %pix-body-s;
+
+    display: inline-flex;
+    gap: var(--pix-spacing-2x);
+    align-items: center;
+    padding: 0 var(--pix-spacing-2x);
+    color: var(--pix-tertiary-900);
   }
 }
