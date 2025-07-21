@@ -243,7 +243,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
         // then
         expect(challengeRepository.findFlashCompatibleWithoutLocale).to.have.been.calledOnceWithExactly({
           useObsoleteChallenges: true,
-          fromArchivedCalibration: true,
+          fromArchivedCalibration: false,
         });
       });
     });
