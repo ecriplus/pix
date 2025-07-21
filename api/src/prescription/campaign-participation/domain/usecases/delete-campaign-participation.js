@@ -1,5 +1,5 @@
-import { EventLoggingJob } from '../../../../identity-access-management/domain/models/jobs/EventLoggingJob.js';
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { EventLoggingJob } from '../../../../shared/domain/models/jobs/EventLoggingJob.js';
 
 const deleteCampaignParticipation = withTransaction(async function ({
   userId,
@@ -28,12 +28,12 @@ const deleteCampaignParticipation = withTransaction(async function ({
 
     if (isAnonymizationWithDeletionEnabled) {
       await eventLoggingJobRepository.performAsync(
-        new EventLoggingJob({
+        EventLoggingJob.forUser({
           client,
           action: campaignParticipation.loggerContext,
           role: userRole,
-          userId: userId,
-          targetUserId: campaignParticipation.id,
+          userId: campaignParticipation.id,
+          updatedByUserId: userId,
           data: {},
         }),
       );

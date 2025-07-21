@@ -7,7 +7,7 @@ import {
   AlreadyRegisteredEmailAndUsernameError,
   AlreadyRegisteredUsernameError,
 } from '../../../../src/shared/domain/errors.js';
-import { EventLoggingJob } from '../models/jobs/EventLoggingJob.js';
+import { EventLoggingJob } from '../../../shared/domain/models/jobs/EventLoggingJob.js';
 
 const updateUserDetailsByAdmin = async function ({
   userId,
@@ -63,12 +63,12 @@ async function _auditLogForEmailChanged({ currentUser, newEmail, updatedByAdminI
 
   // Currently only used in Pix Admin, which is why app name is hard-coded for the audit log
   await eventLoggingJobRepository.performAsync(
-    new EventLoggingJob({
+    EventLoggingJob.forUser({
       client: 'PIX_ADMIN',
       action: 'EMAIL_CHANGED',
       role: 'SUPPORT',
-      userId: updatedByAdminId,
-      targetUserId: currentUser.id,
+      userId: currentUser.id,
+      updatedByUserId: updatedByAdminId,
       data: { oldEmail: currentUser.email, newEmail },
     }),
   );

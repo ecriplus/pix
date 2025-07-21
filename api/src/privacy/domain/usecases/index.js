@@ -2,13 +2,13 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import * as authenticationMethodRepository from '../../../identity-access-management/infrastructure/repositories/authentication-method.repository.js';
-import { userAnonymizedEventLoggingJobRepository } from '../../../identity-access-management/infrastructure/repositories/jobs/user-anonymized-event-logging-job-repository.js';
 import { lastUserApplicationConnectionsRepository } from '../../../identity-access-management/infrastructure/repositories/last-user-application-connections.repository.js';
 import { refreshTokenRepository } from '../../../identity-access-management/infrastructure/repositories/refresh-token.repository.js';
 import { resetPasswordDemandRepository } from '../../../identity-access-management/infrastructure/repositories/reset-password-demand.repository.js';
 import * as userRepository from '../../../identity-access-management/infrastructure/repositories/user.repository.js';
 import * as userAcceptanceRepository from '../../../legal-documents/infrastructure/repositories/user-acceptance.repository.js';
 import { featureToggles as featureTogglesService } from '../../../shared/infrastructure/feature-toggles/index.js';
+import { eventLoggingJobRepository } from '../../../shared/infrastructure/repositories/jobs/event-logging-job.repository.js';
 import * as organizationLearnerRepository from '../../../shared/infrastructure/repositories/organization-learner-repository.js';
 import * as userLoginRepository from '../../../shared/infrastructure/repositories/user-login-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
@@ -27,6 +27,7 @@ const repositories = {
   campaignParticipationsApiRepository,
   candidatesApiRepository,
   certificationCenterMembershipRepository,
+  eventLoggingJobRepository,
   learnersApiRepository,
   membershipRepository,
   lastUserApplicationConnectionsRepository,
@@ -34,7 +35,6 @@ const repositories = {
   refreshTokenRepository,
   resetPasswordDemandRepository,
   userAcceptanceRepository,
-  userAnonymizedEventLoggingJobRepository,
   userLoginRepository,
   userRepository,
   userTeamsApiRepository,

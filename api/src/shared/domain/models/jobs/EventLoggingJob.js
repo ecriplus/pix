@@ -4,7 +4,7 @@ import {
   CampaignParticipationLoggerContext,
   OrganizationLearnerLoggerContext,
 } from '../../../../prescription/shared/domain/constants.js';
-import { EntityValidationError } from '../../../../shared/domain/errors.js';
+import { EntityValidationError } from '../../errors.js';
 
 const CLIENTS = ['PIX_ADMIN', 'PIX_APP', 'PIX_ORGA', 'SCRIPT'];
 const ACTIONS = [
@@ -27,22 +27,46 @@ const EventLogSchema = Joi.object({
     .valid(...ROLES)
     .required(),
   userId: Joi.number().required(),
-  targetUserId: Joi.number().required(),
+  targetUserIds: Joi.array().items(Joi.number()).min(1).required(),
   data: Joi.object().optional(),
   occurredAt: Joi.date().optional(),
 });
 
 export class EventLoggingJob {
-  constructor({ client, action, role, userId, targetUserId, data, occurredAt }) {
+  constructor({ client, action, role, userId, targetUserIds, data, occurredAt }) {
     this.client = client;
     this.action = action;
     this.role = role;
     this.userId = userId;
-    this.targetUserId = targetUserId;
+    this.targetUserIds = targetUserIds;
     this.data = data;
     this.occurredAt = occurredAt || new Date();
 
     this.#validate();
+  }
+
+  static forUser({ client, action, role, userId, updatedByUserId, data, occurredAt }) {
+    return new EventLoggingJob({
+      client,
+      action,
+      role,
+      targetUserIds: userId ? [userId] : [],
+      userId: updatedByUserId,
+      data,
+      occurredAt,
+    });
+  }
+
+  static forUsers({ client, action, role, userIds, updatedByUserId, data, occurredAt }) {
+    return new EventLoggingJob({
+      client,
+      action,
+      role,
+      targetUserIds: userIds ? userIds : [],
+      userId: updatedByUserId,
+      data,
+      occurredAt,
+    });
   }
 
   #validate() {

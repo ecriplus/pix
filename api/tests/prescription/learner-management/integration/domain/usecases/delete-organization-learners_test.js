@@ -1,5 +1,4 @@
 import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
-import { EventLoggingJob } from '../../../../../../src/identity-access-management/domain/models/jobs/EventLoggingJob.js';
 import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import {
   CampaignParticipationLoggerContext,
@@ -7,6 +6,7 @@ import {
   OrganizationLearnerLoggerContext,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
+import { EventLoggingJob } from '../../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
 import { featureToggles } from '../../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
@@ -344,7 +344,7 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
           role: 'ORGA_ADMIN',
           userId: adminUserId,
           occurredAt: now.toISOString(),
-          targetUserId: organizationLearner1.id,
+          targetUserIds: [organizationLearner1.id],
           data: {},
         },
         {
@@ -353,7 +353,7 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
           role: 'ORGA_ADMIN',
           userId: adminUserId,
           occurredAt: now.toISOString(),
-          targetUserId: campaignParticipation1.id,
+          targetUserIds: [campaignParticipation1.id],
           data: {},
         },
       ]);

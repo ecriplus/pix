@@ -1,4 +1,4 @@
-import { EventLoggingJob } from '../../../../identity-access-management/domain/models/jobs/EventLoggingJob.js';
+import { EventLoggingJob } from '../../../../shared/domain/models/jobs/EventLoggingJob.js';
 import { MembershipNotFound } from '../../../../team/application/api/errors/MembershipNotFound.js';
 import { CampaignsDestructor } from '../models/CampaignsDestructor.js';
 
@@ -47,12 +47,12 @@ const deleteCampaigns = async ({
 
     if (isAnonymizationWithDeletionEnabled) {
       await eventLoggingJobRepository.performAsync(
-        new EventLoggingJob({
+        EventLoggingJob.forUser({
           client: 'PIX_ORGA',
           action: campaignParticipation.loggerContext,
           role: 'ORGA_ADMIN',
-          userId: userId,
-          targetUserId: campaignParticipation.id,
+          userId: campaignParticipation.id,
+          updatedByUserId: userId,
           data: {},
         }),
       );

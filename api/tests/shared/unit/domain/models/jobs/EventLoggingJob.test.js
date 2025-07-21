@@ -1,10 +1,10 @@
 import { assert } from 'chai';
 
-import { EventLoggingJob } from '../../../../../../src/identity-access-management/domain/models/jobs/EventLoggingJob.js';
 import { EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
+import { EventLoggingJob } from '../../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
 import { expect, sinon } from '../../../../../test-helper.js';
 
-describe('Unit | Identity Access Management | Domain | Model | Jobs | EventLoggingJob', function () {
+describe('Unit | Shared | Domain | Model | Jobs | EventLoggingJob', function () {
   const now = new Date(2024, 1, 1);
   let clock;
 
@@ -16,15 +16,15 @@ describe('Unit | Identity Access Management | Domain | Model | Jobs | EventLoggi
     clock.restore();
   });
 
-  describe('#constructor', function () {
-    it('creates an EventLoggingJob', async function () {
+  describe('EventLoggingJob.forUser', function () {
+    it('creates an EventLoggingJob instance for a user', async function () {
       // when
-      const eventLoggingJob = new EventLoggingJob({
+      const eventLoggingJob = EventLoggingJob.forUser({
         client: 'PIX_APP',
         action: 'EMAIL_CHANGED',
         role: 'USER',
-        userId: 123,
-        targetUserId: 456,
+        userId: 456,
+        updatedByUserId: 123,
         data: { foo: 'bar' },
         occurredAt: new Date(),
       });
@@ -34,24 +34,49 @@ describe('Unit | Identity Access Management | Domain | Model | Jobs | EventLoggi
       expect(eventLoggingJob.action).to.equal('EMAIL_CHANGED');
       expect(eventLoggingJob.role).to.equal('USER');
       expect(eventLoggingJob.userId).to.equal(123);
-      expect(eventLoggingJob.targetUserId).to.equal(456);
+      expect(eventLoggingJob.targetUserIds).to.deep.equal([456]);
       expect(eventLoggingJob.data).to.deep.equal({ foo: 'bar' });
       expect(eventLoggingJob.occurredAt).to.deep.equal(now);
     });
+  });
 
+  describe('EventLoggingJob.forUsers', function () {
+    it('creates an EventLoggingJob instance for multiple users', async function () {
+      // when
+      const eventLoggingJob = EventLoggingJob.forUsers({
+        client: 'PIX_APP',
+        action: 'EMAIL_CHANGED',
+        role: 'USER',
+        userIds: [456, 789],
+        updatedByUserId: 123,
+        data: { foo: 'bar' },
+        occurredAt: new Date(),
+      });
+
+      // then
+      expect(eventLoggingJob.client).to.equal('PIX_APP');
+      expect(eventLoggingJob.action).to.equal('EMAIL_CHANGED');
+      expect(eventLoggingJob.role).to.equal('USER');
+      expect(eventLoggingJob.userId).to.equal(123);
+      expect(eventLoggingJob.targetUserIds).to.deep.equal([456, 789]);
+      expect(eventLoggingJob.data).to.deep.equal({ foo: 'bar' });
+      expect(eventLoggingJob.occurredAt).to.deep.equal(now);
+    });
+  });
+
+  describe('default values and errors', function () {
     context('when occurredAt is not defined', function () {
       it('set a default date for occurredAt', function () {
         // when
-        const eventLoggingJob = new EventLoggingJob({
+        const eventLoggingJob = EventLoggingJob.forUser({
           client: 'PIX_APP',
           action: 'EMAIL_CHANGED',
           role: 'USER',
-          userId: 123,
-          targetUserId: 456,
+          userId: 456,
+          updatedByUserId: 123,
         });
 
         // then
-        expect(eventLoggingJob.targetUserId).to.equal(456);
         expect(eventLoggingJob.occurredAt).to.deep.equal(now);
       });
     });
@@ -60,7 +85,7 @@ describe('Unit | Identity Access Management | Domain | Model | Jobs | EventLoggi
       it('throws an entity validation error', function () {
         try {
           // when
-          new EventLoggingJob({});
+          EventLoggingJob.forUser({});
           assert.fail();
         } catch (error) {
           // then
@@ -70,7 +95,7 @@ describe('Unit | Identity Access Management | Domain | Model | Jobs | EventLoggi
             { attribute: 'action', message: '"action" is required' },
             { attribute: 'role', message: '"role" is required' },
             { attribute: 'userId', message: '"userId" is required' },
-            { attribute: 'targetUserId', message: '"targetUserId" is required' },
+            { attribute: 'targetUserIds', message: '"targetUserIds" must contain at least 1 items' },
           ]);
         }
       });

@@ -1,12 +1,12 @@
 import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import { RefreshToken } from '../../../../../src/identity-access-management/domain/models/RefreshToken.js';
-import { UserAnonymizedEventLoggingJob } from '../../../../../src/identity-access-management/domain/models/UserAnonymizedEventLoggingJob.js';
 import { refreshTokenRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/refresh-token.repository.js';
 import { LegalDocumentService } from '../../../../../src/legal-documents/domain/models/LegalDocumentService.js';
 import { LegalDocumentType } from '../../../../../src/legal-documents/domain/models/LegalDocumentType.js';
 import { usecases } from '../../../../../src/privacy/domain/usecases/index.js';
 import { config } from '../../../../../src/shared/config.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { EventLoggingJob } from '../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
@@ -99,12 +99,13 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
     });
 
     // then
-    await expect(UserAnonymizedEventLoggingJob.name).to.have.been.performed.withJobPayload({
+    await expect(EventLoggingJob.name).to.have.been.performed.withJobPayload({
       client: 'PIX_ADMIN',
+      action: 'ANONYMIZATION',
       role: PIX_ADMIN.ROLES.SUPER_ADMIN,
       occurredAt: now.toISOString(),
-      updatedByUserId: anonymizedByUserId,
-      userId,
+      userId: anonymizedByUserId,
+      targetUserIds: [userId],
     });
 
     const authenticationMethods = await knex('authentication-methods').where({ userId });
@@ -308,7 +309,7 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
       const anonymizedUser = await knex('users').where({ id: user.id }).first();
       expect(anonymizedUser.hasBeenAnonymised).to.be.true;
 
-      await expect(UserAnonymizedEventLoggingJob.name).to.have.been.performed.withJobsCount(0);
+      await expect(EventLoggingJob.name).to.have.been.performed.withJobsCount(0);
     });
   });
 });

@@ -7,7 +7,6 @@ import * as badgeAcquisitionRepository from '../../../../evaluation/infrastructu
 import * as badgeRepository from '../../../../evaluation/infrastructure/repositories/badge-repository.js';
 import * as stageAcquisitionRepository from '../../../../evaluation/infrastructure/repositories/stage-acquisition-repository.js';
 import * as stageRepository from '../../../../evaluation/infrastructure/repositories/stage-repository.js';
-import { eventLoggingJobRepository } from '../../../../identity-access-management/infrastructure/repositories/jobs/event-logging-job.repository.js';
 import * as userRepository from '../../../../identity-access-management/infrastructure/repositories/user.repository.js';
 import * as organizationFeatureApi from '../../../../organizational-entities/application/api/organization-features-api.js';
 import * as codeGenerator from '../../../../shared/domain/services/code-generator.js';
@@ -16,6 +15,7 @@ import { featureToggles } from '../../../../shared/infrastructure/feature-toggle
 import { adminMemberRepository } from '../../../../shared/infrastructure/repositories/admin-member.repository.js';
 import * as assessmentRepository from '../../../../shared/infrastructure/repositories/assessment-repository.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
+import { eventLoggingJobRepository } from '../../../../shared/infrastructure/repositories/jobs/event-logging-job.repository.js';
 import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';

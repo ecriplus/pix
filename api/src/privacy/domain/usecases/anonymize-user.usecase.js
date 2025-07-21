@@ -1,6 +1,6 @@
-import { UserAnonymizedEventLoggingJob } from '../../../identity-access-management/domain/models/UserAnonymizedEventLoggingJob.js';
 import { config } from '../../../shared/config.js';
 import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { EventLoggingJob } from '../../../shared/domain/models/jobs/EventLoggingJob.js';
 import { anonymizeGeneralizeDate } from '../../../shared/infrastructure/utils/date-utils.js';
 
 /**
@@ -18,7 +18,7 @@ import { anonymizeGeneralizeDate } from '../../../shared/infrastructure/utils/da
  * @param{RefreshTokenRepository} params.refreshTokenRepository
  * @param{ResetPasswordDemandRepository} params.resetPasswordDemandRepository
  * @param{UserLoginRepository} params.userLoginRepository
- * @param{UserAnonymizedEventLoggingJobRepository} params.userAnonymizedEventLoggingJobRepository
+ * @param{EventLoggingJobRepository} params.eventLoggingJobRepository
  * @returns {Promise<void>}
  */
 const anonymizeUser = withTransaction(async function ({
@@ -35,7 +35,7 @@ const anonymizeUser = withTransaction(async function ({
   refreshTokenRepository,
   resetPasswordDemandRepository,
   userLoginRepository,
-  userAnonymizedEventLoggingJobRepository,
+  eventLoggingJobRepository,
   userAcceptanceRepository,
   learnersApiRepository,
   featureTogglesService,
@@ -79,11 +79,12 @@ const anonymizeUser = withTransaction(async function ({
   await _anonymizeUser({ user, anonymizedByUserId, userRepository });
 
   if (config.auditLogger.isEnabled) {
-    await userAnonymizedEventLoggingJobRepository.performAsync(
-      new UserAnonymizedEventLoggingJob({
+    await eventLoggingJobRepository.performAsync(
+      EventLoggingJob.forUser({
+        client,
+        action: 'ANONYMIZATION',
         userId,
         updatedByUserId: anonymizedByUserId,
-        client,
         role: anonymizedByUserRole,
       }),
     );

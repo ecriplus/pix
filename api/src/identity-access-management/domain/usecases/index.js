@@ -19,6 +19,7 @@ import * as passwordValidator from '../../../shared/domain/validators/password-v
 import * as userValidator from '../../../shared/domain/validators/user-validator.js';
 import { httpAgent } from '../../../shared/infrastructure/http-agent.js';
 import { adminMemberRepository } from '../../../shared/infrastructure/repositories/admin-member.repository.js';
+import { eventLoggingJobRepository } from '../../../shared/infrastructure/repositories/jobs/event-logging-job.repository.js';
 import * as organizationLearnerRepository from '../../../shared/infrastructure/repositories/organization-learner-repository.js';
 import * as organizationRepository from '../../../shared/infrastructure/repositories/organization-repository.js';
 import * as userLoginRepository from '../../../shared/infrastructure/repositories/user-login-repository.js';
@@ -34,9 +35,6 @@ import * as authenticationMethodRepository from '../../infrastructure/repositori
 import * as certificationPointOfContactRepository from '../../infrastructure/repositories/certification-point-of-contact.repository.js';
 import { clientApplicationRepository } from '../../infrastructure/repositories/client-application.repository.js';
 import { emailValidationDemandRepository } from '../../infrastructure/repositories/email-validation-demand.repository.js';
-import { eventLoggingJobRepository } from '../../infrastructure/repositories/jobs/event-logging-job.repository.js';
-import { garAnonymizedBatchEventsLoggingJobRepository } from '../../infrastructure/repositories/jobs/gar-anonymized-batch-events-logging-job-repository.js';
-import { userAnonymizedEventLoggingJobRepository } from '../../infrastructure/repositories/jobs/user-anonymized-event-logging-job-repository.js';
 import { lastUserApplicationConnectionsRepository } from '../../infrastructure/repositories/last-user-application-connections.repository.js';
 import { legalDocumentApiRepository } from '../../infrastructure/repositories/legal-document-api.repository.js';
 import { ltiPlatformRegistrationRepository } from '../../infrastructure/repositories/lti-platform-registration.repository.js';
@@ -84,13 +82,11 @@ const repositories = {
   refreshTokenRepository,
   resetPasswordDemandRepository,
   revokedUserAccessRepository,
-  userAnonymizedEventLoggingJobRepository,
   userEmailRepository,
   userLoginRepository,
   userRecommendedTrainingRepository,
   userRepository,
   userToCreateRepository,
-  garAnonymizedBatchEventsLoggingJobRepository,
 };
 const services = {
   authenticationSessionService,
