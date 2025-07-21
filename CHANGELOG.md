@@ -1,5 +1,25 @@
 # Pix Changelog
 
+# [5.163.0](https://github.com/1024pix/pix/compare/v5.162.0...v5.163.0) (2025-07-21)
+
+### :rocket: Amélioration
+
+- [#12741](https://github.com/1024pix/pix/pull/12741) Vérifier que l'utilisateur a le droit d'accéder au parcours combiné (PIX-18514) 
+
+### :building_construction: Tech
+
+- [#12861](https://github.com/1024pix/pix/pull/12861) :truck: Déplace `CertifiedLevel.js` vers le contexte `src/certification/evaluation/` 
+- [#12886](https://github.com/1024pix/pix/pull/12886) Déplacer les vidéos de modules vers des domaines Pix (PIX-18778) 
+- [#12888](https://github.com/1024pix/pix/pull/12888) PixAdmin - retour design du styles des attributs de la page orga 
+- [#12853](https://github.com/1024pix/pix/pull/12853) Utilisation de EventLoggingJob pour toutes les logs d'audit (PIX-15684) 
+
+### :arrow_up: Montée de version
+
+- [#12893](https://github.com/1024pix/pix/pull/12893) Update dependency @1024pix/pix-ui to ^55.25.0 (certif) 
+- [#12899](https://github.com/1024pix/pix/pull/12899) Update dependency @1024pix/pix-ui to ^55.25.0 (mon-pix) 
+- [#12898](https://github.com/1024pix/pix/pull/12898) Update dependency webpack to v5.100.1 (junior) 
+- [#12863](https://github.com/1024pix/pix/pull/12863) Update slackapi/slack-github-action action to v2.1.1 (workflows)
+
 # [5.162.0](https://github.com/1024pix/pix/compare/v5.161.0...v5.162.0) (2025-07-18)
 
 ### :rocket: Amélioration
