@@ -3,6 +3,7 @@ import isUndefined from 'lodash/isUndefined.js';
 import { REWARD_TYPES } from '../../../src/quest/domain/constants.js';
 import { databaseBuffer } from '../database-buffer.js';
 import { buildAttestation } from './build-attestation.js';
+import { buildOrganization } from './build-organization.js';
 
 const buildQuest = function ({
   id = databaseBuffer.getNextId(),
@@ -44,4 +45,15 @@ const buildQuest = function ({
   };
 };
 
-export { buildQuest };
+const buildQuestForCombinedCourse = function ({
+  code = 'COMBINIX1',
+  name = 'Mon parcours combiné',
+  organizationId,
+  ...args
+} = {}) {
+  organizationId = isUndefined(organizationId) ? buildOrganization().id : organizationId;
+
+  return buildQuest({ ...args, code, name, organizationId });
+};
+
+export { buildQuest, buildQuestForCombinedCourse };

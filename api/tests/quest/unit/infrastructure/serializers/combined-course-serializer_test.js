@@ -1,3 +1,4 @@
+import { CombinedCourseStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
 import * as combinedCourseSerializer from '../../../../../src/quest/infrastructure/serializers/combined-course-serializer.js';
 import { expect } from '../../../../test-helper.js';
@@ -17,6 +18,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
           name: 'Mon parcours',
           code: 'COMBINIX1',
           'organization-id': 1,
+          status: CombinedCourseStatuses.NOT_STARTED,
         },
         type: 'combined-courses',
         id: '1',
