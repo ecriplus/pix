@@ -1066,6 +1066,17 @@
           "success": "The target profile has been duplicated."
         }
       },
+      "estimated-range": {
+        "fifteen": "0 - 15mn",
+        "fortyfive": "31 - 45mn",
+        "ninety": "1H01 - 1H30",
+        "one-hundred-eighty": "2H01 - 3H",
+        "one-hundred-eighty-one": "3H+",
+        "one-hundred-twenty": "1H31 - 2H",
+        "sixty": "46mn - 1H",
+        "thirty": "16 - 30mn",
+        "unavailable": "Not available"
+      },
       "filters": {
         "aria-label": "Target profile filters",
         "count": "{count, plural, =0 {0 target profile} =1 {1 target profile} other {{count} target profiles}}",
@@ -1077,6 +1088,10 @@
           "aria-label": "Filter target profiles by internal name",
           "label": "Internal name"
         }
+      },
+      "label": {
+        "estimated-time": "Estimated time: ",
+        "estimated-time-experimental": "(experimental data based on the relativity of time)"
       },
       "resettable-checkbox": {
         "label": "Allow resetting for evaluation-type campaigns when multiple submissions are enabled for the organisation"

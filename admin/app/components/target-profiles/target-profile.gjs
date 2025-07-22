@@ -59,6 +59,23 @@ export default class TargetProfile extends Component {
     return urlDashboardPrefix && `${urlDashboardPrefix}?id=${this.args.model.id}`;
   }
 
+  get estimatedTimeLabel() {
+    const estimatedTime = this.args.model.estimatedTime;
+
+    if (!estimatedTime) return this.intl.t('pages.target-profiles.estimated-range.unavailable');
+    const ranges = [
+      { max: 900, key: 'fifteen' },
+      { max: 1800, key: 'thirty' },
+      { max: 2700, key: 'fortyfive' },
+      { max: 3600, key: 'sixty' },
+      { max: 5400, key: 'ninety' },
+      { max: 7200, key: 'one-hundred-twenty' },
+      { max: 10800, key: 'one-hundred-eighty' },
+    ];
+    const found = ranges.find((range) => estimatedTime <= range.max);
+    return this.intl.t(`pages.target-profiles.estimated-range.${found?.key ?? 'one-hundred-eighty-one'}`);
+  }
+
   displayBooleanState = (bool) => {
     const yes = this.intl.t('common.words.yes');
     const no = this.intl.t('common.words.no');
@@ -191,6 +208,8 @@ export default class TargetProfile extends Component {
             <li><span class="bold">ID&#x20;:&#x20;</span>{{@model.id}}</li>
             <li><span class="bold">Nom interne&#x20;:&#x20;</span>{{@model.internalName}}</li>
             <li><span class="bold">Nom externe&#x20;:&#x20;</span>{{@model.name}}</li>
+            <li><span class="bold">{{t "pages.target-profiles.label.estimated-time"}}</span>{{this.estimatedTimeLabel}}
+              {{t "pages.target-profiles.label.estimated-time-experimental"}}</li>
             <li><span class="bold">Organisation de référence&#x20;:&#x20;</span><LinkTo
                 @route="authenticated.organizations.get"
                 @model={{@model.ownerOrganizationId}}

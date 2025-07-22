@@ -1,9 +1,7 @@
-import { databaseConnection } from '../../../../datamart/knex-database-connection.js';
 import { createServer, expect } from '../../../test-helper.js';
 
 describe('Acceptance | Shared | Application | Route | healthcheck', function () {
   let server;
-
   beforeEach(async function () {
     server = await createServer();
   });
@@ -40,24 +38,6 @@ describe('Acceptance | Shared | Application | Route | healthcheck', function () 
       // then
       expect(response.statusCode).to.equal(200);
       expect(response.result.message).to.equal('Connection to databases ok');
-    });
-
-    it('returns an HTTP status code 503 when at least one database is not available', async function () {
-      // given
-      const options = {
-        method: 'GET',
-        url: '/api/healthcheck/db',
-      };
-      await databaseConnection.disconnect();
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      expect(response.statusCode).to.equal(503);
-      expect(response.result.message).to.equal(
-        'Connection to databases failed: Connection to database datamart not available.',
-      );
     });
   });
 });

@@ -1066,6 +1066,17 @@
           "success": "Le profil cible a bien été copié."
         }
       },
+      "estimated-range": {
+        "fifteen": "0 - 15min",
+        "fortyfive": "31 - 45min",
+        "ninety": "1h01 - 1h30",
+        "one-hundred-eighty": "2h01 - 3h",
+        "one-hundred-eighty-one": "3h+",
+        "one-hundred-twenty": "1h31 - 2h",
+        "sixty": "46min - 1h",
+        "thirty": "16 - 30min",
+        "unavailable": "Non disponible"
+      },
       "filters": {
         "aria-label": "Filtres sur les profils cibles",
         "count": "{count, plural, =0 {0 profil cible} =1 {1 profil cible} other {{count} profils cibles}}",
@@ -1077,6 +1088,10 @@
           "aria-label": "Filtrer les profils cible par le nom interne",
           "label": "Nom interne"
         }
+      },
+      "label": {
+        "estimated-time": "Temps estimé : ",
+        "estimated-time-experimental": "(données expérimentales basées sur la relativité du temps)"
       },
       "resettable-checkbox": {
         "label": "Permettre la remise à zéro des acquis du profil cible"

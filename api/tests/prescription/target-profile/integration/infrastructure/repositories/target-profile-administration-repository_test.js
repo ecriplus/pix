@@ -7,6 +7,7 @@ import { TargetProfile } from '../../../../../../src/shared/domain/models/index.
 import {
   catchErr,
   databaseBuilder,
+  datamartBuilder,
   domainBuilder,
   expect,
   knex,
@@ -125,7 +126,6 @@ describe('Integration | Repository | Target-profile', function () {
         // given
         databaseBuilder.factory.buildOrganization({ id: 66 });
         const targetProfileDB = databaseBuilder.factory.buildTargetProfile({
-          id: 1,
           name: 'Mon Super Profil Cible qui déchire',
           internalName: 'Mon Super Profil Cible qui déchire en interne',
           outdated: false,
@@ -138,6 +138,7 @@ describe('Integration | Repository | Target-profile', function () {
           isSimplifiedAccess: true,
           areKnowledgeElementsResettable: true,
         });
+
         databaseBuilder.factory.buildTargetProfileTube({
           targetProfileId: targetProfileDB.id,
           tubeId: 'recTube1',
@@ -203,6 +204,16 @@ describe('Integration | Repository | Target-profile', function () {
           ]),
         });
         await databaseBuilder.commit();
+
+        datamartBuilder.factory.buildTargetProfileCourseDuration({
+          targetProfileId: targetProfileDB.id,
+          median: 125,
+          quantile_75: 150,
+          quantile_95: 190,
+        });
+
+        await datamartBuilder.commit();
+
         const learningContent = {
           areas: [
             {
@@ -356,7 +367,7 @@ describe('Integration | Repository | Target-profile', function () {
         await mockLearningContent(learningContent);
 
         // when
-        const actualTargetProfile = await targetProfileAdministrationRepository.get({ id: 1 });
+        const actualTargetProfile = await targetProfileAdministrationRepository.get({ id: targetProfileDB.id });
 
         // then
         const skill1_tube1_themA_compA_areaA = {
@@ -477,6 +488,7 @@ describe('Integration | Repository | Target-profile', function () {
           thematics: [themA_compA_areaA, themB_compA_areaA, themC_compB_areaA],
           tubes: [tube1_themA_compA_areaA, tube2_themB_compA_areaA, tube3_themC_compB_areaA],
           skills: [skill1_tube1_themA_compA_areaA, skill2_tube2_themB_compA_areaA],
+          estimatedTime: 150,
         });
         expect(actualTargetProfile).to.deepEqualInstance(expectedTargetProfile);
       });

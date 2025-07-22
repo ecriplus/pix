@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import { knex as datamartKnex } from '../../../../../datamart/knex-database-connection.js';
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { TargetProfileForAdmin } from '../../../../prescription/target-profile/domain/models/TargetProfileForAdmin.js';
 import { LOCALE } from '../../../../shared/domain/constants.js';
@@ -46,7 +47,13 @@ const get = async function ({ id, locale = FRENCH_FRANCE }) {
   const tubesData = await knexConn('target-profile_tubes')
     .select('tubeId', 'level')
     .where('targetProfileId', targetProfileDTO.id);
-  return _toDomain(targetProfileDTO, tubesData, locale);
+
+  const targetProfileEstimatedTimes = await datamartKnex('target_profiles_course_duration')
+    .select('quantile_75')
+    .where({ targetProfileId: id })
+    .first();
+
+  return _toDomain(targetProfileDTO, tubesData, targetProfileEstimatedTimes?.quantile_75, locale);
 };
 
 const update = async function (targetProfile) {
@@ -132,7 +139,7 @@ const findByOrganization = async function ({ organizationId }) {
   return results.map((attributes) => new TargetProfileSummaryForAdmin(attributes));
 };
 
-async function _toDomain(targetProfileDTO, tubesData, locale) {
+async function _toDomain(targetProfileDTO, tubesData, targetProfileEstimatedTimes, locale) {
   const { areas, competences, thematics, tubes, skills } = await _getLearningContent(
     targetProfileDTO.id,
     tubesData,
@@ -154,6 +161,7 @@ async function _toDomain(targetProfileDTO, tubesData, locale) {
     skills,
     hasLinkedCampaign,
     hasLinkedAutonomousCourse,
+    estimatedTime: targetProfileEstimatedTimes,
   });
 }
 
