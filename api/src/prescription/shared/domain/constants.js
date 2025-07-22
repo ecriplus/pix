@@ -31,11 +31,18 @@ const CombinedCourseParticipationStatuses = {
   COMPLETED: 'completed',
 };
 
+const CombinedCourseStatuses = {
+  NOT_STARTED: 'NOT_STARTED',
+  STARTED: 'STARTED',
+  COMPLETED: 'COMPLETED',
+};
+
 export {
   CampaignExternalIdTypes,
   CampaignParticipationLoggerContext,
   CampaignParticipationStatuses,
   CampaignTypes,
   CombinedCourseParticipationStatuses,
+  CombinedCourseStatuses,
   OrganizationLearnerLoggerContext,
 };

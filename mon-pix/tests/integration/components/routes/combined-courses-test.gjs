@@ -14,7 +14,7 @@ module('Integration | Component | combined course', function (hooks) {
     test('should display start button', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const combinedCourse = store.createRecord('combined-course', { id: 1, status: 'not-started', code: 'COMBINIX9' });
+      const combinedCourse = store.createRecord('combined-course', { id: 1, status: 'NOT_STARTED', code: 'COMBINIX9' });
       this.setProperties({ combinedCourse });
 
       // when
@@ -27,9 +27,9 @@ module('Integration | Component | combined course', function (hooks) {
     test('when clicking start button, should create quest participation', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const combinedCourse = store.createRecord('combined-course', { id: 1, status: 'not-started', code: 'COMBINIX9' });
+      const combinedCourse = store.createRecord('combined-course', { id: 1, status: 'NOT_STARTED', code: 'COMBINIX9' });
       sinon.stub(combinedCourse, 'reload').callsFake(() => {
-        combinedCourse.status = 'started';
+        combinedCourse.status = 'STARTED';
       });
       this.setProperties({ combinedCourse });
       sinon.stub(store, 'adapterFor');

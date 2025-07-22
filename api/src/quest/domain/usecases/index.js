@@ -17,6 +17,7 @@ const dependencies = {
   rewardRepository: repositories.rewardRepository,
   successRepository: repositories.successRepository,
   questRepository: repositories.questRepository,
+  combinedCourseParticipationRepository: repositories.combinedCourseParticipationRepository,
   combinedCourseParticipantRepository: repositories.combinedCourseParticipantRepository,
   combinedCourseRepository: repositories.combinedCourseRepository,
   campaignRepository: repositories.campaignRepository,

@@ -13,18 +13,24 @@ export const save = async function ({ organizationLearnerId, questId }) {
     .ignore();
 };
 
-export const get = async function ({ organizationLearnerId, questId }) {
+export const getByUserId = async function ({ userId, questId }) {
   const knexConnection = DomainTransaction.getConnection();
 
   const questParticipations = await knexConnection('quest_participations')
-    .select('id', 'questId', 'organizationLearnerId', 'status')
+    .select('quest_participations.id', 'questId', 'organizationLearnerId', 'quest_participations.status')
+    .join(
+      'view-active-organization-learners',
+      'view-active-organization-learners.id',
+      '=',
+      'quest_participations.organizationLearnerId',
+    )
     .where({
-      organizationLearnerId,
+      'view-active-organization-learners.userId': userId,
       questId,
     });
   if (questParticipations.length === 0) {
     throw new NotFoundError(
-      `CombinedCourseParticipation introuvable pour le couple organizationLearnerId=${organizationLearnerId}, questId=${questId}`,
+      `CombinedCourseParticipation introuvable pour l'utilisateur d'id ${userId} et la quête d'id ${questId}`,
     );
   }
 

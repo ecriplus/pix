@@ -7,7 +7,7 @@ import eq from 'ember-truth-helpers/helpers/eq';
 
 export default class CombinedCourses extends Component {
   <template>
-    {{#if (eq @combinedCourse.status "not-started")}}
+    {{#if (eq @combinedCourse.status "NOT_STARTED")}}
       <PixButton @type="submit" @triggerAction={{this.startQuestParticipation}} @loading-color="white" @size="large">{{t
           "pages.combined-courses.content.start-button"
         }}
