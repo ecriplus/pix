@@ -13,7 +13,6 @@ export default class LoginOrRegisterOidcController extends Controller {
   @service url;
   @service oidcIdentityProviders;
   @service store;
-  @service intl;
   @service locale;
   @service router;
   @service currentDomain;
@@ -43,7 +42,7 @@ export default class LoginOrRegisterOidcController extends Controller {
   }
 
   get selectedLanguage() {
-    return this.intl.primaryLocale;
+    return this.locale.currentLocale;
   }
 
   get authenticationKey() {
@@ -52,7 +51,7 @@ export default class LoginOrRegisterOidcController extends Controller {
 
   @action
   onLanguageChange(language) {
-    this.locale.setLocale(language);
+    this.locale.setCurrentLocale(language);
     this.router.replaceWith('authentication.login-or-register-oidc', { queryParams: { lang: null } });
   }
 

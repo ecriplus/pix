@@ -15,7 +15,7 @@ export default class FillInCampaignCodeController extends Controller {
   @tracked apiErrorMessage = null;
   @tracked showGARModal = false;
   @tracked campaign = null;
-  @tracked selectedLanguage = this.intl.primaryLocale;
+  @tracked selectedLanguage = this.locale.currentLocale;
   @tracked name = null;
   @tracked organizationName = null;
   @tracked code = null;
@@ -85,7 +85,7 @@ export default class FillInCampaignCodeController extends Controller {
   @action
   onLanguageChange(language) {
     this.selectedLanguage = language;
-    this.locale.setLocale(this.selectedLanguage);
+    this.locale.setCurrentLocale(this.selectedLanguage);
     this.router.replaceWith('fill-in-campaign-code', { queryParams: { lang: null } });
   }
 }

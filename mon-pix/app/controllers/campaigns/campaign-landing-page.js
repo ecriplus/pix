@@ -6,12 +6,11 @@ import ENV from 'mon-pix/config/environment';
 
 export default class CampaignLandingPageController extends Controller {
   @service currentDomain;
-  @service intl;
   @service locale;
   @service router;
   @service session;
 
-  @tracked selectedLanguage = this.intl.primaryLocale;
+  @tracked selectedLanguage = this.locale.currentLocale;
 
   get shouldDisplayLanguageSwitcher() {
     return this.isInternationalDomain && this.isUserNotAuthenticated;
@@ -40,7 +39,7 @@ export default class CampaignLandingPageController extends Controller {
   @action
   onLanguageChange(language) {
     this.selectedLanguage = language;
-    this.locale.setLocale(this.selectedLanguage);
+    this.locale.setCurrentLocale(this.selectedLanguage);
     this.router.replaceWith('campaigns.campaign-landing-page', { queryParams: { lang: null } });
   }
 

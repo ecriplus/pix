@@ -7,7 +7,6 @@ import LanguageSwitcher from '../language-switcher';
 
 export default class Footer extends Component {
   @service currentDomain;
-  @service intl;
   @service locale;
   @service router;
 
@@ -16,12 +15,12 @@ export default class Footer extends Component {
   }
 
   get selectedLanguage() {
-    return this.intl.primaryLocale;
+    return this.locale.currentLocale;
   }
 
   @action
   onLanguageChange(language) {
-    this.locale.setLocale(language);
+    this.locale.setCurrentLocale(language);
     this.router.replaceWith({ queryParams: { lang: null } });
   }
 

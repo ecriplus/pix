@@ -1,7 +1,9 @@
 import { setupTest } from 'ember-qunit';
-import { DEFAULT_LOCALE, ENGLISH_INTERNATIONAL_LOCALE, FRENCH_INTERNATIONAL_LOCALE } from 'mon-pix/services/locale';
+import ENV from 'mon-pix/config/environment';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
+
+const { DEFAULT_LOCALE } = ENV.APP;
 
 module('Unit | Services | locale', function (hooks) {
   setupTest(hooks);
@@ -15,10 +17,11 @@ module('Unit | Services | locale', function (hooks) {
 
   hooks.beforeEach(function () {
     localeService = this.owner.lookup('service:locale');
-    cookiesService = this.owner.lookup('service:cookies');
 
+    cookiesService = this.owner.lookup('service:cookies');
     sinon.stub(cookiesService, 'write');
     sinon.stub(cookiesService, 'exists');
+
     currentDomainService = this.owner.lookup('service:currentDomain');
     sinon.stub(currentDomainService, 'getExtension');
 
@@ -26,13 +29,44 @@ module('Unit | Services | locale', function (hooks) {
     sinon.stub(dayjsService, 'setLocale');
 
     intlService = this.owner.lookup('service:intl');
+    sinon.stub(intlService, 'primaryLocale');
     sinon.stub(intlService, 'setLocale');
 
     metricsService = this.owner.lookup('service:metrics');
     sinon.stub(metricsService, 'context').value({});
   });
 
-  module('#isSupportedLocale', function () {
+  module('acceptLanguageHeader', function () {
+    module('when the domain is pix.fr', function () {
+      test('always returns fr-FR', function (assert) {
+        // given
+        currentDomainService.getExtension.returns('fr');
+        sinon.stub(intlService, 'primaryLocale').value('en');
+
+        // when
+        const acceptLanguageHeader = localeService.acceptLanguageHeader;
+
+        // then
+        assert.strictEqual(acceptLanguageHeader, 'fr-FR');
+      });
+    });
+
+    module('when the domain is pix.org', function () {
+      test('always returns the current locale', function (assert) {
+        // given
+        currentDomainService.getExtension.returns('org');
+        sinon.stub(intlService, 'primaryLocale').value('nl-BE');
+
+        // when
+        const acceptLanguageHeader = localeService.acceptLanguageHeader;
+
+        // then
+        assert.strictEqual(acceptLanguageHeader, 'nl-BE');
+      });
+    });
+  });
+
+  module('isSupportedLocale', function () {
     module('when locale is supported', function () {
       test('returns true', function (assert) {
         // given
@@ -86,116 +120,156 @@ module('Unit | Services | locale', function (hooks) {
     });
   });
 
-  module('#handleUnsupportedLanguage', function () {
-    module('when language is not supported', function () {
-      test('returns default language', function (assert) {
-        // given
-        const language = 'de';
-
-        // when
-        const result = localeService.handleUnsupportedLanguage(language);
-
-        // then
-        assert.strictEqual(result, DEFAULT_LOCALE);
-      });
-    });
-
-    module('when language is supported', function () {
-      test('returns same language when language is fr', function (assert) {
-        // given
-        const language = FRENCH_INTERNATIONAL_LOCALE;
-
-        // when
-        const result = localeService.handleUnsupportedLanguage(language);
-
-        // then
-        assert.strictEqual(result, language);
-      });
-
-      test('returns same language when language is en', function (assert) {
-        // given
-        const language = ENGLISH_INTERNATIONAL_LOCALE;
-
-        // when
-        const result = localeService.handleUnsupportedLanguage(language);
-
-        // then
-        assert.strictEqual(result, language);
-      });
-    });
-
-    module('when no language is provided', function () {
-      test('returns "undefined"', function (assert) {
-        // given & when
-        const result = localeService.handleUnsupportedLanguage();
-
-        // then
-        assert.strictEqual(result, undefined);
-      });
-    });
-  });
-
-  module('#setLocaleCookie', function () {
-    test('saves the locale in cookie locale', function (assert) {
-      // given
-      currentDomainService.getExtension.returns('fr');
-
-      // when
-      localeService.setLocaleCookie('fr-CA');
-
-      // then
-      sinon.assert.calledWith(cookiesService.write, 'locale', 'fr-CA', {
-        domain: 'pix.fr',
-        maxAge: 31536000,
-        path: '/',
-        sameSite: 'Strict',
-      });
-      assert.ok(true);
-    });
-  });
-
-  module('#hasLocaleCookie', function () {
-    module('when there is no cookie locale', function () {
-      test('returns "false"', function (assert) {
-        // given
-        cookiesService.exists.returns(false);
-
-        // when
-        const hasNoCookieLocale = localeService.hasLocaleCookie();
-
-        // then
-        sinon.assert.calledWith(cookiesService.exists, 'locale');
-        assert.notOk(hasNoCookieLocale);
-      });
-    });
-
-    module('when there is a cookie locale', function () {
-      test('returns "true"', function (assert) {
-        // given
-        cookiesService.exists.returns(true);
-
-        // when
-        const hasCookieLocale = localeService.hasLocaleCookie();
-
-        // then
-        sinon.assert.calledWith(cookiesService.exists, 'locale');
-        assert.ok(hasCookieLocale);
-      });
-    });
-  });
-
-  module('#setLocale', function () {
+  module('setCurrentLocale', function () {
     test('set app locale', function (assert) {
       // given
       const locale = DEFAULT_LOCALE;
 
       // when
-      localeService.setLocale(locale);
+      localeService.setCurrentLocale(locale);
 
       // then
       sinon.assert.calledWith(intlService.setLocale, locale);
       sinon.assert.calledWith(dayjsService.setLocale, locale);
       assert.strictEqual(metricsService.context.locale, locale);
+    });
+  });
+
+  module('detectBestLocale', function () {
+    module('when the current domain is "fr"', function () {
+      module('when there is no cookie locale', function () {
+        test('sets the locale with "fr" and adds a cookie locale with "fr-FR"', function (assert) {
+          // given
+          cookiesService.exists.returns(false);
+          currentDomainService.getExtension.returns('fr');
+
+          // when
+          localeService.detectBestLocale({ language: null, user: null });
+
+          // then
+          sinon.assert.calledWith(cookiesService.write, 'locale', 'fr-FR');
+          sinon.assert.calledWith(intlService.setLocale, 'fr');
+          sinon.assert.calledWith(dayjsService.setLocale, 'fr');
+          assert.strictEqual(metricsService.context.locale, 'fr');
+        });
+      });
+
+      module('when there is already a cookie locale', function () {
+        test('sets the locale with "fr" and does not update cookie locale', function (assert) {
+          // given
+          cookiesService.exists.returns(true);
+          currentDomainService.getExtension.returns('fr');
+
+          // when
+          localeService.detectBestLocale({ language: null, user: null });
+
+          // then
+          sinon.assert.notCalled(cookiesService.write);
+          sinon.assert.calledWith(intlService.setLocale, 'fr');
+          sinon.assert.calledWith(dayjsService.setLocale, 'fr');
+          assert.strictEqual(metricsService.context.locale, 'fr');
+        });
+      });
+    });
+
+    module('when the current domain extension is "org"', function () {
+      module('when no current user', function () {
+        module('when there is no overriding language', function () {
+          test('sets the the default locale', async function (assert) {
+            // given
+            currentDomainService.getExtension.returns('org');
+
+            // when
+            localeService.detectBestLocale({ language: null, user: null });
+
+            // then
+            sinon.assert.calledWith(intlService.setLocale, DEFAULT_LOCALE);
+            sinon.assert.calledWith(dayjsService.setLocale, DEFAULT_LOCALE);
+            assert.strictEqual(metricsService.context.locale, DEFAULT_LOCALE);
+          });
+        });
+
+        module('when the overriding language is supported', function () {
+          test('sets the locale with the overriding language', function (assert) {
+            // given
+            currentDomainService.getExtension.returns('org');
+            const language = 'es';
+
+            // when
+            localeService.detectBestLocale({ language, user: null });
+
+            // then
+            sinon.assert.calledWith(intlService.setLocale, 'es');
+            sinon.assert.calledWith(dayjsService.setLocale, 'es');
+            assert.strictEqual(metricsService.context.locale, 'es');
+          });
+        });
+
+        module('when the overriding language is not supported', function () {
+          test('sets the default locale', function (assert) {
+            // given
+            currentDomainService.getExtension.returns('org');
+            const badLanguage = 'xxx';
+
+            // when
+            localeService.detectBestLocale({ language: badLanguage, user: null });
+
+            // then
+            sinon.assert.calledWith(intlService.setLocale, DEFAULT_LOCALE);
+            sinon.assert.calledWith(dayjsService.setLocale, DEFAULT_LOCALE);
+            assert.strictEqual(metricsService.context.locale, DEFAULT_LOCALE);
+          });
+        });
+      });
+
+      module('when user is loaded', function () {
+        module('when there is no overriding language', function () {
+          test('sets the locale with the user language', async function (assert) {
+            // given
+            currentDomainService.getExtension.returns('org');
+            const user = { lang: 'nl' };
+
+            // when
+            localeService.detectBestLocale({ language: null, user });
+
+            // then
+            sinon.assert.calledWith(intlService.setLocale, 'nl');
+            sinon.assert.calledWith(dayjsService.setLocale, 'nl');
+            assert.strictEqual(metricsService.context.locale, 'nl');
+          });
+        });
+
+        module('when the overriding language is given', function () {
+          test('sets the locale with the overriding language', function (assert) {
+            // given
+            currentDomainService.getExtension.returns('org');
+            const user = { lang: 'nl' };
+            const language = 'es';
+
+            // when
+            localeService.detectBestLocale({ language, user });
+
+            // then
+            sinon.assert.calledWith(intlService.setLocale, 'es');
+            sinon.assert.calledWith(dayjsService.setLocale, 'es');
+            assert.strictEqual(metricsService.context.locale, 'es');
+          });
+        });
+      });
+    });
+  });
+
+  module('availableLanguagesForSwitcher', function () {
+    test('returns available languages for switcher with french first', function (assert) {
+      // when
+      const availableLanguagesForSwitcher = localeService.availableLanguagesForSwitcher;
+
+      // then
+      assert.deepEqual(availableLanguagesForSwitcher, [
+        { label: 'Français', value: 'fr' },
+        { label: 'English', value: 'en' },
+        { label: 'Nederlands', value: 'nl' },
+      ]);
     });
   });
 });
