@@ -239,7 +239,7 @@
           "element": {
             "id": "6b03cc70-6198-4e2c-a994-f51ef3fcede4",
             "type": "text",
-            "content": "<p>À votre avis, de quel genre de données a-t-on besoin pour entraîner une IA à&nbsp;simuler une conversation ? 🤔 </p>"
+            "content": "<p>À votre avis, de quel genre de données a-t-on besoin pour entraîner une IA à&nbsp;<strong>simuler</strong> une conversation ? 🤔 </p>"
           }
         },
         {
@@ -265,16 +265,16 @@
                       "id": "1",
                       "content": "<p>Utile</p>",
                       "feedback": {
-                        "state": "<p>&nbsp;<br></p>",
-                        "diagnosis": "<p>&nbsp;<br></p>"
+                        "state": "<p><br></p>",
+                        "diagnosis": "<p>&nbsp;Effectivement, un forum en ligne est très utile ! Ce type de données contient des questions, des réponses, des vraies conversations à analyser et à reproduire.<br></p>"
                       }
                     },
                     {
                       "id": "2",
                       "content": "<p>Pas utile</p>",
                       "feedback": {
-                        "state": "<p>&nbsp;<br></p>",
-                        "diagnosis": "<p>&nbsp;<br></p>"
+                        "state": "<p><br></p>",
+                        "diagnosis": "<p>Et non, un forum en ligne est très utile ! Ce type de données contient des questions, des réponses, des vraies conversations à analyser et à reproduire.</p>"
                       }
                     }
                   ],
@@ -303,15 +303,15 @@
                       "content": "<p>Utile</p>",
                       "feedback": {
                         "state": "<p>&nbsp;<br></p>",
-                        "diagnosis": "<p>&nbsp;</p>"
+                        "diagnosis": "<p>Et non une page de contact d'une entreprise n'est pas vraiment utile ! Ce type de données contient des adresses, des numéros de téléphone, rien de bien utile pour simuler une conversation.</p>"
                       }
                     },
                     {
                       "id": "2",
                       "content": "<p>Pas utile</p>",
                       "feedback": {
-                        "state": "<p>&nbsp;<br></p>",
-                        "diagnosis": "<p>&nbsp;<br></p>"
+                        "state": "<p><br></p>",
+                        "diagnosis": "<p>Effectivement, une page de contact d'une entreprise n'est pas vraiment utile ! Ce type de données contient des adresses, des numéros de téléphone, rien de bien utile pour simuler une conversation.</p>"
                       }
                     }
                   ],
@@ -339,16 +339,16 @@
                       "id": "1",
                       "content": "<p>Utile</p>",
                       "feedback": {
-                        "state": "<p>&nbsp;<br></p>",
-                        "diagnosis": "<p>&nbsp;<br></p>"
+                        "state": "<p><br></p>",
+                        "diagnosis": "<p>Effectivement, une page de questions fréquentes contient principalement des questions et des réponses ! Ce type de données est particulièrement utile pour simuler une conversation de qualité.</p>"
                       }
                     },
                     {
                       "id": "2",
                       "content": "<p>Pas utile</p>",
                       "feedback": {
-                        "state": "<p>&nbsp;<br></p>",
-                        "diagnosis": "<p>&nbsp;</p>"
+                        "state": "<p><br></p>",
+                        "diagnosis": "<p>Et non, une page de questions fréquentes contient en général des questions et des réponses ! Ce type de données est particulièrement utile pour simuler une conversation de qualité.</p>"
                       }
                     }
                   ],
@@ -376,16 +376,16 @@
                       "id": "1",
                       "content": "<p>Utile</p>",
                       "feedback": {
-                        "state": "<p>&nbsp;<br></p>",
-                        "diagnosis": "<p>&nbsp;</p>"
+                        "state": "<p><br></p>",
+                        "diagnosis": "<p>Et non, les articles de presse en ligne contiennent principalement du texte et des images, et ne comportent généralement que très peu de conversations ! Ce type de données n'est donc pas très utile pour simuler une conversation.</p>"
                       }
                     },
                     {
                       "id": "2",
                       "content": "<p>Pas utile</p>",
                       "feedback": {
-                        "state": "<p>&nbsp;<br></p>",
-                        "diagnosis": "<p>&nbsp;</p>"
+                        "state": "<p><br></p>",
+                        "diagnosis": "<p>Effectivement, les articles de presse en ligne contiennent principalement du texte et des images, et ne comportent généralement que très peu de conversations ! Ce type de données n'est donc pas très utile pour simuler une conversation.</p>"
                       }
                     }
                   ],
