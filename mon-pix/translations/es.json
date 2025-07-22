@@ -1712,6 +1712,10 @@
           "discovery": "Descubrimiento",
           "lesson": "Lección",
           "summary": "Recapitular"
+        },
+        "title": {
+          "lesson": "Lección",
+          "summary":  "Recapitular"
         }
       },
       "interactiveElement": {
