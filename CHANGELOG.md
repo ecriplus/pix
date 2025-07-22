@@ -1,5 +1,37 @@
 # Pix Changelog
 
+# [5.164.0](https://github.com/1024pix/pix/compare/v5.163.0...v5.164.0) (2025-07-22)
+
+### :rocket: Amélioration
+
+- [#12902](https://github.com/1024pix/pix/pull/12902) : Modifs mineures sur module IA Deepfakes 
+- [#12807](https://github.com/1024pix/pix/pull/12807) Afficher les tags Découverte et Activité (PIX-18657) 
+- [#12897](https://github.com/1024pix/pix/pull/12897) Choix de la bonne calibration en fonction de la date du certification-course (PIX-18770) 
+- [#12881](https://github.com/1024pix/pix/pull/12881) Indiquer à l'utilisateur qu'il peut retenter une campagne (PIX-18519) 
+- [#12858](https://github.com/1024pix/pix/pull/12858) Modifier affichage des éléments interactifs (PIX-18690)(PIX-18652) 
+
+### :bug: Correction
+
+- [#12900](https://github.com/1024pix/pix/pull/12900) Réparer les attestations qui nécessitent que la participation soit terminée (PIX-18803). 
+
+### :building_construction: Tech
+
+- [#12857](https://github.com/1024pix/pix/pull/12857) :truck: Déplace le `OrganizationLearnerPasswordResetDTO` vers son contexte (`src/prescription/organization-learner/`) 
+- [#12889](https://github.com/1024pix/pix/pull/12889) :truck: Déplace le modèle `CertifiedScore` vers le contexte `src/certification/evaluation/` 
+
+### :arrow_up: Montée de version
+
+- [#12913](https://github.com/1024pix/pix/pull/12913) Update dependency @1024pix/eslint-plugin to ^2.1.7 (api) 
+- [#12914](https://github.com/1024pix/pix/pull/12914) Update dependency @1024pix/eslint-plugin to ^2.1.7 (audit-logger) 
+- [#12894](https://github.com/1024pix/pix/pull/12894) Update dependency @1024pix/pix-ui to ^55.25.0 (junior) 
+- [#12871](https://github.com/1024pix/pix/pull/12871) Update dependency @1024pix/pix-ui to ^55.25.0 (orga) 
+- [#12909](https://github.com/1024pix/pix/pull/12909) Update dependency @1024pix/stylelint-config to ^5.1.34 (admin) 
+- [#12910](https://github.com/1024pix/pix/pull/12910) Update dependency @1024pix/stylelint-config to ^5.1.34 (certif) 
+
+### :coffee: Autre
+
+- [#12574](https://github.com/1024pix/pix/pull/12574) Consolidation de la documentation concernant l’architecture, notamment sur les nommage des tables en BDD
+
 # [5.163.0](https://github.com/1024pix/pix/compare/v5.162.0...v5.163.0) (2025-07-21)
 
 ### :rocket: Amélioration
