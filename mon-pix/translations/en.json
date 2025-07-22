@@ -1639,7 +1639,7 @@
       "buttons": {
         "activity": {
           "retry": "Retry",
-          "verify": "Verify"
+          "verify": "Verify my answer"
         },
         "element": {
           "alternativeText": "Show alternative text",
