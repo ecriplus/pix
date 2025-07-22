@@ -3,7 +3,7 @@ import ENV from 'pix-admin/config/environment';
 
 export default class Url extends Service {
   @service currentDomain;
-  @service intl;
+  @service locale;
 
   definedHomeUrl = ENV.rootURL;
   pixAppUrlWithoutExtension = ENV.APP.PIX_APP_URL_WITHOUT_EXTENSION;
@@ -13,7 +13,7 @@ export default class Url extends Service {
   }
 
   get forgottenPasswordUrl() {
-    const currentLanguage = this.intl.primaryLocale;
+    const currentLanguage = this.locale.currentLocale;
     let url = `${this.pixAppUrlWithoutExtension}${this.currentDomain.getExtension()}/mot-de-passe-oublie`;
     if (currentLanguage === 'en') {
       url += '?lang=en';
