@@ -318,6 +318,80 @@
                   "solution": "2"
                 }
               ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "7fdc0205-db66-4003-b8e4-df3bb53cd3b4",
+                  "type": "image",
+                  "url": "https://assets.pix.org/draft/modules/ia-int-mgo/faq.png",
+                  "alt": "Capture d'écran d'une page \"Questions fréquentes\" (FAQ avec questions et réponses).",
+                  "alternativeText": "",
+                  "legend": "",
+                  "licence": ""
+                },
+                {
+                  "id": "77c7655b-d9e2-478d-af60-fd877d23d5d9",
+                  "type": "qcu",
+                  "instruction": "<p>Observez l'image et déterminez si ce type de données est utile ou non pour apprendre aux IA à simuler des conversations.</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>Utile</p>",
+                      "feedback": {
+                        "state": "<p>&nbsp;<br></p>",
+                        "diagnosis": "<p>&nbsp;<br></p>"
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>Pas utile</p>",
+                      "feedback": {
+                        "state": "<p>&nbsp;<br></p>",
+                        "diagnosis": "<p>&nbsp;</p>"
+                      }
+                    }
+                  ],
+                  "solution": "1"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "1c85c83e-ab95-40de-8067-409fc62d6efc",
+                  "type": "image",
+                  "url": "https://assets.pix.org/draft/modules/ia-int-mgo/article.png",
+                  "alt": "Capture d'écran d'un article de presse illustré.",
+                  "alternativeText": "",
+                  "legend": "",
+                  "licence": ""
+                },
+                {
+                  "id": "5b4086cb-0a9a-4d69-8abd-e97e8c0b1f6e",
+                  "type": "qcu",
+                  "instruction": "<p>Observez l'image et déterminez si ce type de données est utile ou non pour apprendre aux IA à simuler des conversations.</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>Utile</p>",
+                      "feedback": {
+                        "state": "<p>&nbsp;<br></p>",
+                        "diagnosis": "<p>&nbsp;</p>"
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>Pas utile</p>",
+                      "feedback": {
+                        "state": "<p>&nbsp;<br></p>",
+                        "diagnosis": "<p>&nbsp;</p>"
+                      }
+                    }
+                  ],
+                  "solution": "2"
+                }
+              ]
             }
           ]
         }
