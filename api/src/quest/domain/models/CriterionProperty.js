@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { InvalidComparisonError } from '../errors.js';
 
 export const COMPARISONS = {
@@ -9,11 +10,32 @@ export const COMPARISONS = {
   LIKE: 'like',
 };
 
+const allowedArrayComparaison = Joi.alternatives().try(Joi.number(), Joi.string(), Joi.boolean());
+
 const schema = Joi.object({
   key: Joi.string().required(),
-  data: Joi.any().required(),
   comparison: Joi.string()
     .valid(...Object.values(COMPARISONS))
+    .required(),
+  data: Joi.alternatives()
+    .conditional('comparison', [
+      {
+        is: COMPARISONS.EQUAL,
+        then: allowedArrayComparaison,
+      },
+      {
+        is: COMPARISONS.ONE_OF,
+        then: Joi.array().min(1).items(allowedArrayComparaison),
+      },
+      {
+        is: COMPARISONS.LIKE,
+        then: Joi.string(),
+      },
+      {
+        is: COMPARISONS.ALL,
+        then: Joi.array().min(1).items(allowedArrayComparaison),
+      },
+    ])
     .required(),
 });
 
@@ -59,6 +81,7 @@ export class CriterionProperty {
   }
 
   check(item) {
+    let error = null;
     const criterionAttr = this.#data;
     const dataAttr = item[this.#key];
     if (Array.isArray(criterionAttr)) {
@@ -68,7 +91,8 @@ export class CriterionProperty {
         } else if (this.#comparison === COMPARISONS.ONE_OF) {
           return criterionAttr.some((valueToTest) => dataAttr.includes(valueToTest));
         }
-        throw new InvalidComparisonError({
+
+        error = new InvalidComparisonError({
           comparisonOperator: this.#comparison,
           typeofCriterion: 'array',
           typeofData: 'array',
@@ -77,7 +101,7 @@ export class CriterionProperty {
         if (this.#comparison === COMPARISONS.ONE_OF) {
           return criterionAttr.some((valueToTest) => valueToTest === dataAttr);
         }
-        throw new InvalidComparisonError({
+        error = new InvalidComparisonError({
           comparisonOperator: this.#comparison,
           typeofCriterion: 'array',
           typeofData: typeof dataAttr,
@@ -93,11 +117,16 @@ export class CriterionProperty {
           return coercedDataAttr.toLowerCase().includes(criterionAttr.toLowerCase());
         }
       }
-      throw new InvalidComparisonError({
+      error = new InvalidComparisonError({
         comparisonOperator: this.#comparison,
         typeofCriterion: typeof criterionAttr,
         typeofData: typeof dataAttr,
       });
     }
+
+    if (error) {
+      logger.error({ event: 'quest-reward', err: error }, 'Error on quests criterion property');
+    }
+    return false;
   }
 }

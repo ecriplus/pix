@@ -28,20 +28,20 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
               data: {
                 status: {
                   data: ['SHARED', 'TO_SHARE'],
-                  comparison: 'one-of',
+                  comparison: CRITERION_COMPARISONS.ONE_OF,
                 },
                 targetProfileId: {
                   data: 2,
-                  comparison: 'equal',
+                  comparison: CRITERION_COMPARISONS.EQUAL,
                 },
               },
-              comparison: 'all',
-              requirement_type: 'campaignParticipations',
+              comparison: REQUIREMENT_COMPARISONS.ALL,
+              requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
             },
           ],
           successRequirements: [
             {
-              requirement_type: 'cappedTubes',
+              requirement_type: REQUIREMENT_TYPES.CAPPED_TUBES,
               data: {
                 cappedTubes: [
                   {
@@ -359,7 +359,7 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
           data: {
             targetProfileId: {
               data: [1, 2],
-              comparison: CRITERION_COMPARISONS.EQUAL,
+              comparison: CRITERION_COMPARISONS.ONE_OF,
             },
           },
           comparison: REQUIREMENT_COMPARISONS.ALL,
@@ -399,7 +399,7 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
           data: {
             targetProfileId: {
               data: [123, 456],
-              comparison: CRITERION_COMPARISONS.EQUAL,
+              comparison: CRITERION_COMPARISONS.ONE_OF,
             },
           },
           comparison: REQUIREMENT_COMPARISONS.ALL,
