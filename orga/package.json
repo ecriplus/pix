@@ -56,7 +56,7 @@
   "devDependencies": {
     "@1024pix/ember-cli-notifications": "^8.0.2",
     "@1024pix/ember-testing-library": "^3.0.6",
-    "@1024pix/eslint-plugin": "^2.1.6",
+    "@1024pix/eslint-plugin": "^2.1.7",
     "@1024pix/pix-ui": "^55.25.0",
     "@1024pix/stylelint-config": "^5.1.33",
     "@babel/eslint-parser": "^7.27.0",
