@@ -239,7 +239,7 @@
           "element": {
             "id": "6b03cc70-6198-4e2c-a994-f51ef3fcede4",
             "type": "text",
-            "content": "<p>À votre avis, de quel genre de données a-t-on besoin pour entraîner une IA à&nbsp;<strong>simuler</strong> une conversation ? 🤔 </p>"
+            "content": "<p>Pour que l'IA générative puisse apprendre à <strong>simuler</strong> une conversation, il faut lui montrer des exemples de très bonne discussions avec des questions et des réponses.</p>\n<p>À votre avis, quel genre de données disponibles sur le web va-t-on choisir pour cette nouvelle étape de l'entraînement ? 🤔 </p>"
           }
         },
         {
