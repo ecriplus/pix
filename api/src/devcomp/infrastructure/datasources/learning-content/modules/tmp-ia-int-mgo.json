@@ -428,7 +428,7 @@
                 {
                   "id": "466b79fe-f4f0-4dde-824f-33c17e4420b1",
                   "type": "text",
-                  "content": "<p>On applique le même principe pour qu’elle apprenne à faire d’autres choses comme&nbsp;: résumer un texte, écrire une lettre de motivation, etc.</p>"
+                  "content": "<p>On applique le même principe pour qu’elle apprenne à faire d’autres types de tâches comme&nbsp;: résumer un texte, écrire une lettre de motivation, etc.</p>"
                 }
               ]
             }
@@ -476,7 +476,7 @@
                 "content": "<p>la réponse 1</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Les gens ont tendance à préférer les réponses agréables, positives et qui ne contredisent pas la demande formulée.</p>"
+                  "diagnosis": "<p>Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
                 }
               },
               {
@@ -484,7 +484,7 @@
                 "content": "<p>la réponse 2</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Les gens ont tendance à préférer les réponses agréables, positives et qui ne contredisent pas la demande formulée.</p>"
+                  "diagnosis": "<p>Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
                 }
               },
               {
@@ -492,7 +492,7 @@
                 "content": "<p>la réponse 3</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Les gens ont tendance à préférer les réponses agréables, positives et qui ne contredisent pas la demande formulée.</p>"
+                  "diagnosis": "<p>Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
                 }
               },
               {
@@ -500,7 +500,7 @@
                 "content": "<p>je ne sais pas</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Les gens ont tendance à préférer les réponses agréables, positives et qui ne contredisent pas la demande formulée.</p>"
+                  "diagnosis": "<p>Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
                 }
               }
             ]
@@ -521,7 +521,7 @@
                 {
                   "id": "d55d9fe9-b12a-4351-97ab-704341f4265d",
                   "type": "text",
-                  "content": "<p>Pour apprendre à l’IA générative à faire des réponses satisfaisantes, on utilise un système de <strong>récompense</strong>.<br>Chacune des réponses de l’IA Gen est notée&nbsp;: 👍 ou 👎 . Le logiciel essaye d’obtenir le plus de 👍 .<br>C’est de l’apprentissage par <strong>renforcement</strong>.</p>"
+                  "content": "<p>Pour apprendre à l’IA générative à faire des réponses satisfaisantes, on utilise un système de <strong>récompense</strong>.<br>Chacune des réponses de l’IA Gen est évaluée&nbsp;: 👍 ou 👎 . Le logiciel essaye d’obtenir le plus de 👍 .<br>C’est de l’apprentissage par <strong>renforcement</strong>.</p>"
                 }
               ]
             },
@@ -530,7 +530,7 @@
                 {
                   "id": "40570e09-028c-40e3-bc93-47d81f572c33",
                   "type": "text",
-                  "content": "<p>Des personnes sont rémunérées pour produire cette note. C’est un travail mal payé et pas très valorisant. 😔<br>Vous le faites aussi parfois gratuitement en <strong>cliquant</strong> sur le pouce en dessous de la réponse.</p>"
+                  "content": "<p>Des personnes sont rémunérées pour produire cette évaluation. C’est un travail mal payé et pas très valorisant. 😔<br>Vous le faites aussi parfois gratuitement en <strong>cliquant</strong> sur le pouce en dessous de la réponse.</p>"
                 }
               ]
             },
@@ -539,7 +539,7 @@
                 {
                   "id": "33ca3432-2322-4553-844c-91afafbe2f32",
                   "type": "text",
-                  "content": "<p>On observe que les humains ont <strong>tendance</strong> à choisir des réponses polies et agréables, mais aussi des réponses qui ne les contredisent pas, voire qui les flattent ... 🥰</p>"
+                  "content": "<p>On observe que les humains ont <strong>tendance</strong> à préférer des réponses utiles, polies et agréables, mais aussi des réponses qui ne les contredisent pas, voire qui les flattent ... 🥰</p>"
                 }
               ]
             },
