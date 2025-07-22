@@ -188,7 +188,7 @@
                 {
                   "id": "93d127a7-e179-40cd-9273-ce7a23007a39",
                   "type": "text",
-                  "content": "<p>L’IA s’entraîne à supprimer puis <strong>deviner</strong> des mots au hasard parmi tous ces textes. 🙈</p><p>Petit à petit elle s'améliore : elle apprend quels mots apparaissent <strong>souvent</strong> ensemble. 🐈 🐁</p>"
+                  "content": "<p>L’IA générative s’entraîne à supprimer puis <strong>deviner</strong> des mots au hasard parmi tous ces textes. 🙈</p><p>Petit à petit elle s'améliore : elle apprend quels mots apparaissent <strong>souvent</strong> ensemble. 🐈 🐁</p>"
                 }
               ]
             },
@@ -197,7 +197,7 @@
                 {
                   "id": "3cdf627f-2ad0-42e8-a529-696936905830",
                   "type": "text",
-                  "content": "<p>Ainsi à partir d'un début de phrase, elle <strong>prédit le mot suivant</strong> 📝.</p><p>Puis elle recommence depuis le début de la phrase pour trouver le mot qui suit. </p><p>Et ... elle recommence encore et encore ! 🔁</p><p></p>"
+                  "content": "<p>Ainsi à partir d'un début de phrase, l'IA générative <strong>prédit le mot suivant</strong> 📝.</p><p>Puis elle recommence depuis le début de la phrase pour trouver le mot qui suit. </p><p>Et ... elle recommence encore et encore ! 🔁</p><p></p>"
                 }
               ]
             },
@@ -206,7 +206,7 @@
                 {
                   "id": "94b60d31-b5dc-4621-a38f-de8eb5553813",
                   "type": "text",
-                  "content": "<p>À la fin de cette étape, l'IA est capable de <strong>prolonger</strong> ou compléter des débuts de texte. 😮</p>"
+                  "content": "<p>À la fin de cette étape, l'IA générative est capable de <strong>prolonger</strong> ou compléter des débuts de texte. 😮</p>"
                 }
               ]
             }
@@ -419,7 +419,7 @@
                 {
                   "id": "7da341f7-c582-4a8a-9ea1-091fbe87ed64",
                   "type": "text",
-                  "content": "<p>Le saviez-vous ? Wikipédia a été réécrit sous la forme de questions et de réponses pour entraîner les IA génératives !</p>"
+                  "content": "<p>💡 Le saviez-vous ? Wikipédia a été réécrit sous la forme de questions et de réponses pour entraîner les IA génératives !</p>"
                 }
               ]
             },
@@ -428,7 +428,7 @@
                 {
                   "id": "466b79fe-f4f0-4dde-824f-33c17e4420b1",
                   "type": "text",
-                  "content": "<p>On applique le même principe pour qu’elle apprenne à faire d’autres types de tâches comme&nbsp;: résumer un texte, écrire une lettre de motivation, etc.</p>"
+                  "content": "<p>On applique le même principe pour que l'IA générative apprenne à faire d’autres types de tâches comme&nbsp;: résumer un texte, écrire une lettre de motivation, etc.</p>"
                 }
               ]
             }
@@ -446,7 +446,7 @@
           "element": {
             "id": "bfc2e80e-497e-4101-9f14-f353641e22d2",
             "type": "text",
-            "content": "<p>Ce n’est pas tout ! Une troisième étape consiste à entraîner l’IA générative à produire des réponses satisfaisantes pour les utilisateurs. 🤩</p>"
+            "content": "<p>Ce n’est pas tout ! Après l’entraînement et l’apprentissage supervisé, une troisième étape consiste à entraîner l’IA générative à produire des réponses satisfaisantes pour les utilisateurs. 🤩</p>"
           }
         }
       ]
