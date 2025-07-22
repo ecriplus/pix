@@ -1,7 +1,8 @@
-import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
+
+import { stubCurrentUserService } from '../../../../helpers/service-stubs.js';
 
 module('Unit | Route | Campaign | Assessment | Results', function (hooks) {
   setupTest(hooks);
@@ -28,12 +29,7 @@ module('Unit | Route | Campaign | Assessment | Results', function (hooks) {
   module('#model', function () {
     module('when no participation', function () {
       test('should redirect to start or resume', async function (assert) {
-        class CurrentUserStub extends Service {
-          user = {
-            id: '1234',
-          };
-        }
-        this.owner.register('service:current-user', CurrentUserStub);
+        stubCurrentUserService(this.owner, { id: '1234' });
 
         queryRecordStub
           .withArgs('campaign-participation-result', { campaignId: campaign.id, userId: '1234' })
@@ -47,13 +43,7 @@ module('Unit | Route | Campaign | Assessment | Results', function (hooks) {
 
     module('when participation exists', function () {
       test('should call quest result on connected user', async function (assert) {
-        class CurrentUserStub extends Service {
-          user = {
-            id: '1234',
-            isAnonymous: false,
-          };
-        }
-        this.owner.register('service:current-user', CurrentUserStub);
+        stubCurrentUserService(this.owner, { id: '1234', isAnonymous: false });
 
         queryRecordStub
           .withArgs('campaign-participation-result', { campaignId: campaign.id, userId: '1234' })
@@ -70,13 +60,7 @@ module('Unit | Route | Campaign | Assessment | Results', function (hooks) {
       });
 
       test('should not call quest result on anonymous user', async function (assert) {
-        class CurrentUserStub extends Service {
-          user = {
-            id: '1234',
-            isAnonymous: true,
-          };
-        }
-        this.owner.register('service:current-user', CurrentUserStub);
+        stubCurrentUserService(this.owner, { id: '1234', isAnonymous: true });
 
         queryRecordStub
           .withArgs('campaign-participation-result', { campaignId: campaign.id, userId: '1234' })
@@ -93,13 +77,7 @@ module('Unit | Route | Campaign | Assessment | Results', function (hooks) {
       });
 
       test('should not redirect', async function (assert) {
-        class CurrentUserStub extends Service {
-          user = {
-            id: '1234',
-            isAnonymous: false,
-          };
-        }
-        this.owner.register('service:current-user', CurrentUserStub);
+        stubCurrentUserService(this.owner, { id: 1234, isAnonymous: false });
 
         queryRecordStub
           .withArgs('campaign-participation-result', { campaignId: campaign.id, userId: '1234' })
@@ -120,20 +98,24 @@ module('Unit | Route | Campaign | Assessment | Results', function (hooks) {
     module('when isAutoshareEnable', function () {
       test('should call share if campaign participation is not shared', async function (assert) {
         // given
+        stubCurrentUserService(this.owner, { id: '1234' });
         const featureToggleService = this.owner.lookup('service:feature-toggles');
         sinon.stub(featureToggleService, 'featureToggles').value({ isAutoShareEnabled: true });
         const store = this.owner.lookup('service:store');
         const shareSpy = sinon.spy();
         sinon.stub(store, 'adapterFor').withArgs('campaign-participation-result').returns({ share: shareSpy });
+        const reloadStub = sinon.stub();
+
         // when
         await route.afterModel({
           campaign,
           campaignParticipation: { createdAt: '2024-01-01' },
-          campaignParticipationResult: { id: 123, isShared: false },
+          campaignParticipationResult: { id: 123, isShared: false, reload: reloadStub },
         });
 
         // then
         assert.ok(shareSpy.calledOnce);
+        assert.ok(reloadStub.calledOnce);
       });
       test('should not call share if campaign participation is shared', async function (assert) {
         // given

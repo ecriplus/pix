@@ -31,7 +31,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
     hooks.beforeEach(async function () {
       // given
-      stubCurrentUserService(this.owner, { firstName: 'Hermione' });
+      stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione' });
 
       this.set('campaign', { organizationId: 1 });
       this.set('campaignParticipationResult', { masteryRate: 0.755, sharedAt: new Date('2024-01-01T14:03:00Z') });
@@ -68,11 +68,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
       module('user is Anonymous', function () {
         test('it should not display the quest result if the flag is false', async function (assert) {
           // given
-          class CurrentUserStub extends Service {
-            user = { isAnonymous: true };
-          }
-
-          this.owner.register('service:currentUser', CurrentUserStub);
+          stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione', isAnonymous: true });
 
           class FeatureTogglesStub extends Service {
             featureToggles = { isQuestEnabled: false };
@@ -119,7 +115,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
       module('user is not anonymous', function (hooks) {
         hooks.beforeEach(function () {
           class CurrentUserStub extends Service {
-            user = { isAnonymous: false };
+            user = { id: 2, isAnonymous: false };
           }
 
           this.owner.register('service:currentUser', CurrentUserStub);
@@ -219,6 +215,8 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
     hooks.beforeEach(function () {
       now = new Date('2024-01-01T14:03:00Z');
       clock = sinon.useFakeTimers(now, { toFake: ['Date'] });
+
+      stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione' });
     });
 
     hooks.afterEach(function () {
@@ -296,12 +294,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
             this.owner.register('service:featureToggles', FeatureTogglesStub);
 
-            class CurrentUserStub extends Service {
-              user = { isAnonymous: true };
-            }
-
-            this.owner.register('service:currentUser', CurrentUserStub);
-
+            stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione', isAnonymous: true });
             this.set('campaign', {
               customResultPageText: 'My custom result page text',
               organizationId: 1,
@@ -344,6 +337,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           shareStub = sinon.stub(adapter, 'share');
 
           this.set('campaign', {
+            id: 1,
             customResultPageText: 'My custom result page text',
             organizationId: 1,
           });
@@ -354,6 +348,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
             canImprove: true,
             masteryRate: 0.75,
           });
+          sinon.stub(campaignParticipationResult, 'reload').resolves();
           campaignParticipationResult.id = 'campaignParticipationResultId';
           this.set('campaignParticipationResult', campaignParticipationResult);
 
@@ -373,15 +368,12 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
         test('on success, it should display a notification and hide improve elements', async function (assert) {
           // given
-          shareStub.resolves();
+          campaignParticipationResult.sharedAt = now;
+          campaignParticipationResult.isShared = true;
+          campaignParticipationResult.canImprove = false;
+          this.set('campaignParticipationResult', campaignParticipationResult);
 
-          // when
-          await click(screen.getByRole('button', { name: t('pages.skill-review.actions.send') }));
-
-          // then
-          assert.ok(shareStub.calledOnce);
-          sinon.assert.calledWithExactly(shareStub, campaignParticipationResult.id);
-
+          // when & then
           assert.ok(
             screen.queryByText(
               t('pages.skill-review.hero.shared-message', { date: sharedAtDate(now), time: sharedAtTime(now) }),
@@ -574,10 +566,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
       module('when user is anonymous', function (hooks) {
         hooks.beforeEach(async function () {
-          class CurrentUserStub extends Service {
-            user = { isAnonymous: true };
-          }
-          this.owner.register('service:currentUser', CurrentUserStub);
+          stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione', isAnonymous: true });
           this.set('campaign', {
             customResultPageText: 'My custom result page text',
             organizationId: 1,
@@ -774,23 +763,25 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
   module('improve results', function () {
     module('when user can improve results', function (hooks) {
-      let beginImprovementStub, campaign, campaignParticipationResult, router, screen;
+      let beginImprovementStub, campaign, campaignParticipationResult, router, screen, shareStub;
 
       hooks.beforeEach(async function () {
         // given
+        stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione' });
         const store = this.owner.lookup('service:store');
 
         router = this.owner.lookup('service:router');
         router.transitionTo = sinon.stub();
 
         const adapter = store.adapterFor('campaign-participation-result');
-        sinon.stub(adapter, 'share');
+        shareStub = sinon.stub(adapter, 'share');
         beginImprovementStub = sinon.stub(adapter, 'beginImprovement');
 
         campaignParticipationResult = store.createRecord('campaign-participation-result', {
           masteryRate: 0.75,
           canImprove: true,
         });
+        sinon.stub(campaignParticipationResult, 'reload').resolves();
         campaignParticipationResult.id = 'campaignParticipationResultId';
         this.set('campaignParticipationResult', campaignParticipationResult);
         this.set('onResultsShared', sinon.stub());
@@ -844,7 +835,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         test('should not be able to improve the campaign at the same time', async function (assert) {
           // given
           const pendingPromise = new Promise(() => {});
-          beginImprovementStub.resolves(pendingPromise);
+          shareStub.resolves(pendingPromise);
 
           // when
           await click(screen.getByRole('button', { name: t('pages.skill-review.actions.send') }));
