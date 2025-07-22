@@ -635,6 +635,8 @@ const configuration = (function () {
     config.apiManager.url = 'http://external-partners-access/';
 
     config.infra.engineeringUserId = 800;
+
+    config.v3Certification.latestCalibrationDate = '2020-01-01';
   }
 
   return config;
