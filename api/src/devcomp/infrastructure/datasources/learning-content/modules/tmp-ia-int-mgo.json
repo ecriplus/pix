@@ -476,7 +476,7 @@
                 "content": "<p>la réponse 1</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
+                  "diagnosis": "<p>Et oui ! Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
                 }
               },
               {
@@ -484,7 +484,7 @@
                 "content": "<p>la réponse 2</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
+                  "diagnosis": "<p>Et non ! Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
                 }
               },
               {
@@ -492,15 +492,15 @@
                 "content": "<p>la réponse 3</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
+                  "diagnosis": "<p>Et non ! Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
                 }
               },
               {
                 "id": "4",
-                "content": "<p>je ne sais pas</p>",
+                "content": "<p>Je ne sais pas.</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
+                  "diagnosis": "<p>En fait, les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
                 }
               }
             ]
@@ -521,7 +521,7 @@
                 {
                   "id": "d55d9fe9-b12a-4351-97ab-704341f4265d",
                   "type": "text",
-                  "content": "<p>Pour apprendre à l’IA générative à faire des réponses satisfaisantes, on utilise un système de <strong>récompense</strong>.<br>Chacune des réponses de l’IA Gen est évaluée&nbsp;: 👍 ou 👎 . Le logiciel essaye d’obtenir le plus de 👍 .<br>C’est de l’apprentissage par <strong>renforcement</strong>.</p>"
+                  "content": "<p>Pour apprendre à l’IA générative à faire des réponses satisfaisantes, on utilise un système de <strong>récompense</strong>.<br>Chacune des réponses de l’IA Gen est évaluée&nbsp;: 👍 ou 👎 . Le logiciel essaie d’obtenir le plus de 👍 .<br>C’est de l’apprentissage par <strong>renforcement</strong>.</p>"
                 }
               ]
             },
@@ -530,7 +530,7 @@
                 {
                   "id": "40570e09-028c-40e3-bc93-47d81f572c33",
                   "type": "text",
-                  "content": "<p>Des personnes sont rémunérées pour produire cette évaluation. C’est un travail mal payé et pas très valorisant. 😔<br>Vous le faites aussi parfois gratuitement en <strong>cliquant</strong> sur le pouce en dessous de la réponse.</p>"
+                  "content": "<p>Le métier de certaines personnes est de noter les réponses de l’IA générative. Ce travail est peu rémunéré et n’est pas valorisé. 😔<br>Vous le faites aussi parfois gratuitement en <strong>cliquant</strong> sur le pouce en dessous de la réponse.</p>"
                 }
               ]
             },
@@ -539,7 +539,7 @@
                 {
                   "id": "33ca3432-2322-4553-844c-91afafbe2f32",
                   "type": "text",
-                  "content": "<p>On observe que les humains ont <strong>tendance</strong> à préférer des réponses utiles, polies et agréables, mais aussi des réponses qui ne les contredisent pas, voire qui les flattent ... 🥰</p>"
+                  "content": "<p>On observe que la plupart des personnes ont <strong>tendance</strong> à préférer des réponses utiles, polies et agréables, mais aussi des réponses qui ne les contredisent pas, voire qui les flattent... 🥰</p>"
                 }
               ]
             },
@@ -548,7 +548,7 @@
                 {
                   "id": "e3e9640d-33de-4076-ac26-2525371095bd",
                   "type": "text",
-                  "content": "<p>Bon à savoir 💡: Ce principe d'<strong>alignement aux attentes des humains</strong>, a tendance à rendre les IA génératives <strong>complaisantes</strong>. Pour aller dans le sens de l’utilisateur, elles peuvent <strong>inventer</strong> des faits et halluciner. 🤥</p>"
+                  "content": "<p>🤔 <strong>Bon à savoir</strong><br> Ce principe d'<strong>alignement aux attentes des humains</strong>, a tendance à rendre les IA génératives <strong>complaisantes</strong>. Pour aller dans le sens de l’utilisateur, elles peuvent <strong>inventer</strong> des faits et halluciner. 🤥</p>"
                 }
               ]
             }
@@ -597,13 +597,13 @@
             "cards": [
               {
                 "id": "fb147c0c-bf20-40ce-8b22-acb536a6db2c",
-                "text": "Si l’IA générative produit des réponses flatteuses c’est à cause des humains.",
+                "text": "Si l’IA générative produit des réponses flatteuses, c’est à cause des humains.",
                 "image": {
                   "url": "",
                   "altText": ""
                 },
-                "proposalA": "Vrai",
-                "proposalB": "Faux",
+                "proposalA": "vrai",
+                "proposalB": "faux",
                 "solution": "A"
               },
               {
@@ -613,8 +613,8 @@
                   "url": "",
                   "altText": ""
                 },
-                "proposalA": "Vrai",
-                "proposalB": "Faux",
+                "proposalA": "vrai",
+                "proposalB": "faux",
                 "solution": "A"
               },
               {
@@ -624,8 +624,8 @@
                   "url": "",
                   "altText": ""
                 },
-                "proposalA": "Vrai",
-                "proposalB": "Faux",
+                "proposalA": "vrai",
+                "proposalB": "Ffaux",
                 "solution": "B"
               }
             ]
@@ -643,7 +643,7 @@
           "element": {
             "id": "cf7769e2-c924-43f7-9577-85d544a79bcb",
             "type": "text",
-            "content": "<p>Chacune des étapes de l'entraînement des IA génératives nécessite un type de données spécifique. </p><p>À vous de retrouver de quelles données on a besoin lors de chaque étape&nbsp;🔍</p>"
+            "content": "<p>Chacune des étapes de l'entraînement des IA génératives nécessite un type de données spécifique. </p><p>À vous de retrouver de quelles données on a besoin lors de chaque étape.&nbsp;🔍</p>"
           }
         },
         {
@@ -655,26 +655,26 @@
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>Des milliards de textes très variés.</p>",
+                "content": "<p>des milliards de textes très variés</p>",
                 "feedback": {
-                  "state": "",
+                  "state": "Bonne réponse ! 🎉",
                   "diagnosis": "<p>Effectivement, le pré-entraînement nécessite des quantités astronomiques de textes très variés.</p>"
                 }
               },
               {
                 "id": "2",
-                "content": "<p>Une liste des phrases les plus appréciées par les utilisateurs</p>",
+                "content": "<p>une liste des phrases les plus appréciées par les utilisateurs</p>",
                 "feedback": {
-                  "state": "",
+                  "state": "Mauvaise réponse.",
                   "diagnosis": "<p>Lors du pré-entraînement, on ne cherche pas encore à satisfaire les utilisateurs, on ne cherche qu'à produire du texte cohérent.</p>"
                 }
               },
               {
                 "id": "3",
-                "content": "<p>Un dictionnaire et une encyclopédie.</p>",
+                "content": "<p>un dictionnaire et une encyclopédie</p>",
                 "feedback": {
-                  "state": "",
-                  "diagnosis": "<p>Lors du pré-entraînement, veut juste produire du texte, et si le texte énonce des absurdités ce n'est pas vraiment un problème à ce stade.</p>"
+                  "state": "Mauvaise réponse.",
+                  "diagnosis": "<p>Lors du pré-entraînement, on veut juste produire du texte, et si le texte énonce des absurdités ce n'est pas vraiment un problème à ce stade.</p>"
                 }
               }
             ],
@@ -690,25 +690,25 @@
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>Des milliards de conversations tirées des réseaux sociaux.</p>",
+                "content": "<p>des milliards de conversations tirées des réseaux sociaux</p>",
                 "feedback": {
-                  "state": "",
+                  "state": "Mauvaise réponse",
                   "diagnosis": "<p>Lors de la phase d'ajustement, l'IA générative a déjà ingéré des milliards de textes pendant le pré-entraînement.  Pour lui apprendre à discuter avec les utilisateurs, on doit montrer à l'IA générative des exemples de cette tâche spécifique.</p>"
                 }
               },
               {
                 "id": "2",
-                "content": "<p>Une liste de règles de grammaire.</p>",
+                "content": "<p>une liste de règles de grammaire</p>",
                 "feedback": {
-                  "state": "",
+                  "state": "Mauvaise réponse.",
                   "diagnosis": "<p>Ce n'est pas un programme qui suit des règles. Pour lui apprendre à discuter avec les utilisateurs, on doit montrer à l'IA générative des exemples.</p>"
                 }
               },
               {
                 "id": "3",
-                "content": "<p>Des textes spécifiques sélectionnés par des humains.</p>",
+                "content": "<p>des textes spécifiques sélectionnés par des humains</p>",
                 "feedback": {
-                  "state": "",
+                  "state": "Bonne réponse ! 🎉",
                   "diagnosis": "<p>Effectivement, pour lui apprendre à discuter avec les utilisateurs, on doit fournir à l'IA générative des exemples de ce qu'elle va reproduire, donc des exemples de conversations que l'on aura sélectionnés.</p>"
                 }
               }
@@ -725,25 +725,25 @@
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>Une liste de mots vulgaires à ne pas dire.</p>",
+                "content": "<p>une liste de mots vulgaires à ne pas dire</p>",
                 "feedback": {
-                  "state": "",
+                  "state": "Mauvaise réponse.",
                   "diagnosis": "<p>On peut donner des listes de mots interdits aux IA génératives, pour se conformer aux réglementations des différents pays par exemple. Mais ce n'est pas de cette façon qu'elles apprennent à produire des textes qui plaisent aux utilisateurs.</p>"
                 }
               },
               {
                 "id": "2",
-                "content": "<p>Des données sur les préférences des utilisateurs.</p>",
+                "content": "<p>des données sur les préférences des utilisateurs</p>",
                 "feedback": {
-                  "state": "",
+                  "state": "Bonne réponse ! 🎉",
                   "diagnosis": "<p>Effectivement, les retours des utilisateurs sur les réponses des IA génératives leur permettent de s'aligner avec les attentes des utilisateurs.</p>"
                 }
               },
               {
                 "id": "3",
-                "content": "<p>La liste des règles universelles de la politesse.</p>",
+                "content": "<p>la liste des règles universelles de la politesse</p>",
                 "feedback": {
-                  "state": "",
+                  "state": "Mauvaise réponse",
                   "diagnosis": "<p>Cette liste n'existe pas, la politesse varie selon les contextes d'utilisation. Chaque logiciel d'IA générative va respecter des règles de politesse apprises à partir de données produites par les utilisateurs, ou via des réglages spécifiques sur chaque outil.</p>"
                 }
               }
@@ -763,7 +763,7 @@
           "element": {
             "id": "2c94ef9f-88b0-49ed-b5d6-37e4c634c45b",
             "type": "text",
-            "content": "<p>&nbsp;🕹️&nbsp; <strong>À vous de jouer</strong><br></p><p>Il existe plusieurs logiciels d'IA générative. Ils ont été entraînés de différentes manières, avec différents types de données.</p><p>Nous allons essayer d'observer la tendance des IA génératives à la complaisance, à la flagornerie : c'est-à-dire à ne pas remettre en question ce que vous leur dites, même si vous écrivez des choses très discutables ...</p><p><strong>Pour cela :</strong></p><ol><li>Rendez-vous sur <a href=\"https://www.comparia.beta.gouv.fr/\" target=\"_blank\">Compar:IA</a></li><li>Posez une question de votre choix</li><li>Observez les réponses des 2 logiciels d'IA générative</li><li>Essayez de voir les différences, quelle réponse est la plus complaisante avec vous !</li></ol><p>Vous pouvez ensuite donner votre avis si vous le souhaitez !</p>"
+            "content": "<p>&nbsp;🕹️&nbsp; <strong>À vous de jouer !</strong><br></p><p>Il existe plusieurs logiciels d'IA générative. Ils ont été entraînés de différentes manières, avec différents types de données.</p><p>Nous allons essayer d'observer la tendance des IA génératives à la complaisance, à la flagornerie : c'est-à-dire à ne pas remettre en question ce que vous leur dites, même si vous écrivez des choses très discutables...</p><p><strong>Pour cela :</strong></p><ol><li>Rendez-vous sur <a href=\"https://www.comparia.beta.gouv.fr/\" target=\"_blank\">Compar:IA</a></li><li>Posez une question de votre choix</li><li>Observez les réponses des 2 logiciels d'IA générative</li><li>Essayez de voir les différences, quelle réponse est la plus complaisante avec vous.</li></ol><p>Vous pouvez ensuite donner votre avis si vous le souhaitez !</p>"
           }
         },
         {
@@ -772,7 +772,7 @@
             "id": "6d10d86a-1d5e-4b52-9cc9-2c62d48d94c5",
             "type": "expand",
             "title": "Indice",
-            "content": "<p>Pour amener un logiciel d'IA générative à la flagornerie, vous pouvez lui demander de vous aider à trouver des arguments pour convaincre d'autres personnes d'une opinion très discutable. Par exemple, nous avons proposé de défendre un menu de petit déjeuner un peu spécial 🍭 </p><p>Trouvez une idée similaire et lancez-vous !</p><p><img src=\"https://assets.pix.org/draft/modules/ia-int-mgo/comparia.png\"></p>"
+            "content": "<p>Pour amener un logiciel d'IA générative à la flagornerie, vous pouvez lui demander de vous aider à trouver des arguments pour convaincre d'autres personnes d'une opinion très discutable. Par exemple, nous avons proposé de défendre un menu de petit-déjeuner un peu spécial. 🍭 </p><p>Trouvez une idée similaire et lancez-vous !</p><p><img src=\"https://assets.pix.org/draft/modules/ia-int-mgo/comparia.png\"></p>"
           }
         },
         {
@@ -784,7 +784,7 @@
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>Oui</p>",
+                "content": "<p>oui</p>",
                 "feedback": {
                   "state": "",
                   "diagnosis": "<p>todo</p>"
@@ -792,7 +792,7 @@
               },
               {
                 "id": "2",
-                "content": "<p>Non</p>",
+                "content": "<p>non</p>",
                 "feedback": {
                   "state": "",
                   "diagnosis": "<p>todo</p>"
