@@ -8,7 +8,7 @@ message-conversation::part(conversation) {
 .element-custom {
   fieldset {
     padding: var(--pix-spacing-2x);
-    border: 2px dashed rgb(var(--pix-tertiary-900-inline), 0.6);
+    border: 2px dashed var(--pix-primary-700);
     border-radius: var(--pix-spacing-2x);
   }
 
@@ -19,6 +19,6 @@ message-conversation::part(conversation) {
     gap: var(--pix-spacing-2x);
     align-items: center;
     padding: 0 var(--pix-spacing-2x);
-    color: var(--pix-tertiary-900);
+    color: var(--pix-primary-700);
   }
 }
