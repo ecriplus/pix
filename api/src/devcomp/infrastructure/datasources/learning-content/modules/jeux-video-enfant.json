@@ -149,7 +149,7 @@
                       "content": "<p>Le jeu ne peut pas être vendu à un enfant de moins de 12 ans.</p>",
                       "feedback": {
                         "state": "",
-                        "diagnosis": "<p>Et non ! Le pictogramme âge PEGI est indicatif, il 'n’empêche pas la vente en fonction de l’âge. Le pictogramme âge PEGI indique la présence de contenus inadaptés aux enfants en dessous de l’âge indiqué.</p>"
+                        "diagnosis": "<p>Et non ! Le pictogramme âge PEGI est indicatif, il n’empêche pas la vente en fonction de l’âge. Le pictogramme âge PEGI indique la présence de contenus inadaptés aux enfants en dessous de l’âge indiqué.</p>"
                       }
                     }
                   ],
