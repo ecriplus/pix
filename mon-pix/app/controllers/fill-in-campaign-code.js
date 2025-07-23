@@ -59,7 +59,7 @@ export default class FillInCampaignCodeController extends Controller {
         this.campaign = await verifiedCode.campaign;
         this.router.transitionTo('campaigns.entry-point', verifiedCode.id);
       } else {
-        this.router.transitionTo('combined-courses', verifiedCode.id);
+        this.router.transitionTo('organizations.access', verifiedCode.id);
       }
     } catch (error) {
       this.onStartCampaignError(error);
