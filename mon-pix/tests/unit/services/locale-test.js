@@ -265,6 +265,16 @@ module('Unit | Services | locale', function (hooks) {
     });
   });
 
+  module('pixChallengeLocales', function () {
+    test('returns the locales as present in the challenges of the Pix platform', function (assert) {
+      // when
+      const pixChallengeLocales = localeService.pixChallengeLocales;
+
+      // then
+      assert.deepEqual(pixChallengeLocales, ['en', 'fr', 'fr-fr', 'nl', 'es', 'it', 'de']);
+    });
+  });
+
   module('availableLanguagesForSwitcher', function () {
     test('returns available languages for switcher with french first', function (assert) {
       // when

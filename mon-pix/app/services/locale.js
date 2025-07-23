@@ -10,6 +10,10 @@ export const FRENCH_FRANCE_LOCALE = 'fr-FR';
 export const FRENCH_INTERNATIONAL_LOCALE = 'fr';
 export const ENGLISH_INTERNATIONAL_LOCALE = 'en';
 
+// Currently the challenge locales are not in canonical locales, thus the "fr-fr" value.
+// This cannot be changed without migrating the challenges content.
+const PIX_CHALLENGE_LOCALES = ['en', 'fr', 'fr-fr', 'nl', 'es', 'it', 'de'];
+
 const VISIBLE_LANGUAGES = {
   en: { value: 'English', languageSwitcherDisplayed: true },
   es: { value: 'Español', languageSwitcherDisplayed: false },
@@ -34,6 +38,13 @@ export default class LocaleService extends Service {
   get acceptLanguageHeader() {
     if (this.currentDomain.isFranceDomain) return FRENCH_FRANCE_LOCALE;
     return this.currentLocale;
+  }
+
+  /**
+   * Returns all locales available in challenges of the Pix platform
+   */
+  get pixChallengeLocales() {
+    return PIX_CHALLENGE_LOCALES;
   }
 
   get availableLanguagesForSwitcher() {
