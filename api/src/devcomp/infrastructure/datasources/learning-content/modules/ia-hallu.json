@@ -709,148 +709,165 @@
         {
           "type": "element",
           "element": {
-            "id": "f10ff5f0-75ab-46dd-8eb5-37b415c9f168",
-            "type": "image",
-            "url": "https://assets.pix.org/draft/modules/hallucinations/erreursia5-Djoko.jpg",
-            "alt": "",
-            "alternativeText": "",
-            "legend": "Exemple 1",
-            "licence": ""
+            "id": "ac09a36f-6446-4ced-9c4b-8ab544e113d9",
+            "type": "text",
+            "content": "<p>Pour chacun des exemples d’erreurs de logiciels d’IA génératives, ci-dessous, indiquez la source d'erreur correspondante.</p>"
           }
         },
         {
-          "type": "element",
-          "element": {
-            "id": "b176294f-54c2-4e64-ad9c-f1437fce835b",
-            "type": "image",
-            "url": "https://assets.pix.org/draft/modules/hallucinations/erreursia6-emoji.jpg",
-            "alt": "",
-            "alternativeText": "",
-            "legend": "Exemple 2",
-            "licence": ""
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "d2f7b4bd-1b67-4c3c-a8b8-0adae9bb3308",
-            "type": "image",
-            "url": "https://assets.pix.org/draft/modules/hallucinations/erreursia6-emoji.jpg",
-            "alt": "",
-            "alternativeText": "",
-            "legend": "Exemple 3",
-            "licence": ""
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "d1367255-d97d-44b8-9a07-b0694cdca074",
-            "type": "qrocm",
-            "instruction": "<p>Associez chaque réponse du logiciel d'IA générative à source d'erreur.</p>",
-            "proposals": [
-              {
-                "type": "text",
-                "content": "<span>Exemple 1</span>"
-              },
-              {
-                "input": "1",
-                "type": "select",
-                "display": "inline",
-                "placeholder": "source d'erreur",
-                "ariaLabel": "source d'erreur à sélectionner",
-                "defaultValue": "source d'erreur",
-                "tolerances": [],
-                "options": [
-                  {
-                    "id": "1",
-                    "content": "Hallucination du logiciel d'IA générative"
-                  },
-                  {
-                    "id": "2",
-                    "content": "Les données d'entrainement sont fausses ou obsolètes "
-                  },
-                  {
-                    "id": "3",
-                    "content": "La demande de l'utilisateur comporte une erreur que l'IA n'a pas corrigé"
-                  }
-                ],
-                "solutions": [
-                  "2"
-                ]
-              },
-              {
-                "type": "text",
-                "content": "<br><span>Exemple 2</span>"
-              },
-              {
-                "input": "2",
-                "type": "select",
-                "display": "inline",
-                "placeholder": "source d'erreur",
-                "ariaLabel": "source d'erreur à sélectionner",
-                "defaultValue": "source d'erreur",
-                "tolerances": [],
-                "options": [
-                  {
-                    "id": "1",
-                    "content": "Hallucination du logiciel d'IA générative"
-                  },
-                  {
-                    "id": "2",
-                    "content": "Les données d'entrainement sont fausses ou obsolètes "
-                  },
-                  {
-                    "id": "3",
-                    "content": "La demande de l'utilisateur comporte une erreur que l'IA n'a pas corrigé"
-                  }
-                ],
-                "solutions": [
-                  "3"
-                ]
-              },
-              {
-                "type": "text",
-                "content": "<br><span>Exemple 3</span>"
-              },
-              {
-                "input": "3",
-                "type": "select",
-                "display": "inline",
-                "placeholder": "source d'erreur",
-                "ariaLabel": "source d'erreur à sélectionner",
-                "defaultValue": "source d'erreur",
-                "tolerances": [],
-                "options": [
-                  {
-                    "id": "1",
-                    "content": "Hallucination du logiciel d'IA générative"
-                  },
-                  {
-                    "id": "2",
-                    "content": "Les données d'entrainement sont fausses ou obsolètes "
-                  },
-                  {
-                    "id": "3",
-                    "content": "La demande de l'utilisateur comporte une erreur que l'IA n'a pas corrigé"
-                  }
-                ],
-                "solutions": [
-                  "1"
-                ]
-              }
-            ],
-            "feedbacks": {
-              "valid": {
-                "state": "<p>Bonnes réponses.<br></p>",
-                "diagnosis": "<p>Vous avez correctement identifié les sources des erreurs du logiciel d'IA générative.</p><ul><li>Le logiciel d'IA générative peut ne pas être au courant d'évènements récents</li><li>Le logiciel d'IA générative peut chercher à répondre à une demande même si elle comporte uen erreur ou si elle est impossible.</li><li>Le logiciel d'IA générative peut  répondre en inventant des personnages, des évènements, des faits ou comme ici en créant une source scientifique.</li><br></ul>"
-              },
-              "invalid": {
-                "state": "<p>Mauvaise réponse</p>",
-                "diagnosis": "<p>Pour vous aider à identifier les causes des erreurs de l'IA, vous pouvez relire plus haut.&nbsp;👆<br>N'hésitez pas à réessayer.<br><br></p>"
-              }
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "95d84a4d-2ee5-4e6a-96b6-de148a586781",
+                  "type": "image",
+                  "url": "Pour chacun des exemples d’erreurs de logiciels d’IA génératives, ci-dessous, indiquez la source d'erreur correspondante.",
+                  "alt": "Extrait d'un échange sur un logiciel d'IA générative, contenu détaillé dans l'alternative textuelle.",
+                  "alternativeText": "<p>Question utilisateur&nbsp;: Comment va le tennisman Djokovic ?</p><p>Réponse du logiciel d'IA générative&nbsp;: Novak Djokovic va bien, il continue de performer à un niveau très élevé sur le circuit ATP. Ses récents résultats montrent qu'il reste l'un des meilleurs joueurs du monde. Il a eu quelques problèmes de santé et des blessures par le passé, mais il semble s'être bien rétabli.</p>",
+                  "legend": "",
+                  "licence": ""
+                },
+                {
+                  "id": "4973d664-0caf-4e10-9ea9-7fae95bf0164",
+                  "type": "text",
+                  "content": "<p>Léonie a vérifié, à la date où elle a posé la question, le sportif s’était gravement blessé la veille.</p>"
+                },
+                {
+                  "id": "113b842e-f66b-43cf-a82a-d5484b37fe22",
+                  "type": "qcu",
+                  "instruction": "<p>Quelle est la source de cette erreur ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>L’IA générative répond par prédiction et génère une hallucination.</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Pour vous aider à identifier les causes de&nbsp;l'erreur, vous pouvez relire plus haut.&nbsp;👆<br>N'hésitez pas à réessayer.</p>"
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>La demande utilisateur comporte une erreur que l’IA n’a pas corrigée.</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Pour vous aider à identifier les causes de&nbsp;l'erreur, vous pouvez relire plus haut.&nbsp;👆</p><br><p>N'hésitez pas à réessayer.</p>"
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>Les données d’entraînement de l’IA sont fausses ou obsolètes.</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse !&nbsp;🎉</p>",
+                        "diagnosis": "<p>Ici ce sont des données trop récentes pour l'IA.</p>"
+                      }
+                    }
+                  ],
+                  "solution": "3"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "29f0994f-8dfb-41c8-b4a4-45fa0e289814",
+                  "type": "image",
+                  "url": "Léonie a vérifié, à la date où elle a posé la question, le sportif s’était gravement blessé la veille.",
+                  "alt": "Extrait d'un échange sur un logiciel d'IA générative, contenu détaillé dans l'alternative textuelle.",
+                  "alternativeText": "<p>Question utilisateur&nbsp;:&nbsp;Peux-tu me montrer l'émoji hippocampe ?</p><p>Réponse de l'IA&nbsp;: 🦞</p><p>Deuxième question utilisateur&nbsp;:&nbsp;Tu es sûr ?</p><p>Réponse de l'IA&nbsp;:&nbsp;Oups c'est un homard. Voici l'émoji hippocampe 🦑</p>",
+                  "legend": "",
+                  "licence": ""
+                },
+                {
+                  "id": "9c2ddfdc-0dc9-435c-b3be-1ea4bf999895",
+                  "type": "text",
+                  "content": "<p>Darius n’a pas obtenu de réponse satisfaisante de l’IA, il a vérifié et l’émoji hippocampe n'existe pas.</p>"
+                },
+                {
+                  "id": "9d16a295-07ca-493c-a8a3-c0265390b17a",
+                  "type": "qcu",
+                  "instruction": "<p>Quelle est la source de cette erreur ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>L’IA générative répond par prédiction et génère une hallucination.</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire plus haut. 👆 <br>N'hésitez pas à réessayer.<br></p>"
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>La demande utilisateur comporte une erreur que l’IA n’a pas corrigée.</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse ! 🎉</p>",
+                        "diagnosis": "<p>La demande est impossible, il n’existe pas d’émoji hippocampe.</p>"
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>Les données d’entraînement de l’IA sont fausses ou obsolètes.</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse</p>",
+                        "diagnosis": "<p>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire plus haut. 👆 <br>N'hésitez pas à réessayer.<br></p>"
+                      }
+                    }
+                  ],
+                  "solution": "2"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "5944e2ca-cb95-4cdc-9d7c-74741421dd43",
+                  "type": "image",
+                  "url": "Pour vous aider à identifier la cause de l'erreur, vous pouvez relire plus haut. 👆 N'hésitez pas à réessayer.",
+                  "alt": "Extrait d'un échange sur un logiciel d'IA générative, contenu détaillé dans l'alternative textuelle.",
+                  "alternativeText": "<p>Question utilisateur&nbsp;: Donne moi un article en français sur le traitement des eaux pluviales, d’une revue scientifique, rédigée au format APA 7e édition.</p><p>Réponse de l'IA&nbsp;:&nbsp;Voici un article traitant du traitement des eaux pluviales, formaté selon APA 7e.<br><strong>Barra, M., Houeix, K., Hemminki, J., &amp; Grandin, G. </strong>(2019).&nbsp;<em>Gestion des eaux pluviales et biodiversité urbaine&nbsp;: état de la contamination et préconisations</em>.&nbsp;<strong>Annales de la Floristique Régionale Île‑de‑France</strong>, 10–33.</p>",
+                  "legend": "",
+                  "licence": ""
+                },
+                {
+                  "id": "53332773-3d53-4d86-8ab3-7af01a291d1d",
+                  "type": "text",
+                  "content": "<p>Amalia a vérifié, ces auteurs n’ont rien écrit ensemble et l'article est introuvable.</p>"
+                },
+                {
+                  "id": "a8a788a2-f80a-4a3e-bd05-88fc46a64469",
+                  "type": "qcu",
+                  "instruction": "<p>Quelle est la source de cette erreur ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>L’IA générative répond par prédiction et génère une hallucination.</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse ! 🎉</p>",
+                        "diagnosis": "<p>L’IA générative a aggloméré des auteurs, un titre et une revue scientifique pour créer une source d’apparence crédible. C’est une hallucination, l’article n’existe pas.</p>"
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>La demande utilisateur comporte une erreur que l’IA n’a pas corrigée.</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire plus haut. 👆 <br>N'hésitez pas à réessayer.<br><br></p>"
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>Les données d’entraînement de l’IA sont fausses ou obsolètes.</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire plus haut. 👆 N'hésitez pas à réessayer.<br><br></p>"
+                      }
+                    }
+                  ],
+                  "solution": "1"
+                }
+              ]
             }
-          }
+          ]
         }
       ]
     },
