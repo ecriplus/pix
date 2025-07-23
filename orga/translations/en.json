@@ -81,7 +81,7 @@
       "message": "Please note that your seats will expire in {days, number} days."
     },
     "maximum-places-exceeded": {
-      "message": "No more available places for the organization."
+      "message": "<b>Your organisation no longer has any seats available !</b><br />To take advantage of all the features, please free up some seats, get in touch with your Pix representative or '<'a href='https://pix.org/en/support-contact-form' title='contact us' class=\"{linkClasses}\" '>contact us using this form</a>'."
     },
     "over-capacity": {
       "message": "Please note that you are using more seats than your total capacity."

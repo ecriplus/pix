@@ -13,8 +13,12 @@ export default class MaximumPlacesExceeded extends Component {
 
   <template>
     {{#if this.displayMaximumPlacesExceededBanner}}
-      <PixBannerAlert @type="warning">
-        {{t "banners.maximum-places-exceeded.message"}}
+      <PixBannerAlert @type="error">
+        {{t
+          "banners.maximum-places-exceeded.message"
+          htmlSafe=true
+          linkClasses="link link--banner link--bold link--underlined"
+        }}
       </PixBannerAlert>
     {{/if}}
   </template>
