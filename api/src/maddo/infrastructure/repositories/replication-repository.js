@@ -109,10 +109,10 @@ export const replications = [
   {
     name: 'data-active-calibrated-challenges',
     before: async ({ datamartKnex }) => {
-      await datamartKnex('').truncate();
+      await datamartKnex('data_active_calibrated_challenges').truncate();
     },
     from: ({ datawarehouseKnex }) => {
-      return datawarehouseKnex('data-active-calibrated-challenges').select(
+      return datawarehouseKnex('data_active_calibrated_challenges').select(
         'challenge_id',
         'alpha',
         'delta',
@@ -120,7 +120,7 @@ export const replications = [
       );
     },
     to: ({ datamartKnex }, chunk) => {
-      return datamartKnex('data-active-calibrated-challenges').insert(chunk);
+      return datamartKnex('data_active_calibrated_challenges').insert(chunk);
     },
   },
 ];
