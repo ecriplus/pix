@@ -1,6 +1,7 @@
-import { getScreen, visit } from '@1024pix/ember-testing-library';
+import { fillByLabel, visit } from '@1024pix/ember-testing-library';
 import { click, currentURL, fillIn } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
@@ -78,8 +79,7 @@ module('Acceptance | Combined course | Start Combined course workflow', function
         //given
         const user = server.create('user', 'withEmail', { hasSeenAssessmentInstructions: false });
         // when
-        await unabortedVisit('/parcours/COMBINIX1');
-        const screen = getScreen();
+        const screen = await unabortedVisit('/parcours/COMBINIX1');
         await _loginUser(screen, user);
 
         assert.strictEqual(currentURL(), '/parcours/COMBINIX1');
@@ -88,7 +88,6 @@ module('Acceptance | Combined course | Start Combined course workflow', function
   });
   module('when user is logged in', function () {
     let combinedCourse;
-
     module('when organization is restricted', function (hooks) {
       hooks.beforeEach(async function () {
         const prescritUser = server.create('user', 'withEmail', {
@@ -109,6 +108,20 @@ module('Acceptance | Combined course | Start Combined course workflow', function
 
           //then
           assert.strictEqual(currentURL(), '/organisations/COMBINIX1/prescrit/eleve');
+        });
+
+        module('when using fill in code page', function () {
+          test('should redirect to sco reconciliation page', async function (assert) {
+            //given
+            const screen = await unabortedVisit('/campagnes');
+
+            //when
+            await fillByLabel(`${t('pages.fill-in-campaign-code.label')} *`, 'COMBINIX1');
+            await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
+
+            //then
+            assert.strictEqual(currentURL(), '/organisations/COMBINIX1/prescrit/eleve');
+          });
         });
       });
     });

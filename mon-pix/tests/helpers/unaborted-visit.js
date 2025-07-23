@@ -1,4 +1,4 @@
-import { visit } from '@1024pix/ember-testing-library';
+import { getScreen, visit } from '@1024pix/ember-testing-library';
 import { settled } from '@ember/test-helpers';
 
 // Lorsqu'on souhaite tester un transitionTo, on doit utiliser un try/catch en attendant l'évolution attendue dans Ember :
@@ -13,6 +13,7 @@ export async function unabortedVisit(url) {
 
     await settled();
   }
+  return getScreen();
 }
 
 function _isEmberTransitionAborted(error) {
