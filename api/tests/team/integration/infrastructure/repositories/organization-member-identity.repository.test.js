@@ -1,4 +1,4 @@
-import { OrganizationMemberIdentity } from '../../../../../src/shared/domain/models/index.js';
+import { OrganizationMemberIdentity } from '../../../../../src/team/domain/models/OrganizationMemberIdentity.js';
 import * as organizationMemberIdentityRepository from '../../../../../src/team/infrastructure/repositories/organization-member-identity.repository.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 
