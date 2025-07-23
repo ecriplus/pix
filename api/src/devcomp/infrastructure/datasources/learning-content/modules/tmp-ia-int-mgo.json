@@ -410,16 +410,7 @@
                 {
                   "id": "9e50b0f7-2936-46af-8171-4793c5cc65a1",
                   "type": "text",
-                  "content": "<p>Les ingénieurs qui entraînent les IA génératives sélectionnent des <strong>lots de questions et réponses</strong> d'excellente qualité.<br> Ils les donnent ensuite à l'IA générative pour qu'elle apprenne à simuler une conversation.<br>C’est de l’apprentissage <strong>supervisé</strong>.</p>"
-                }
-              ]
-            },
-            {
-              "elements": [
-                {
-                  "id": "7da341f7-c582-4a8a-9ea1-091fbe87ed64",
-                  "type": "text",
-                  "content": "<p>💡 Le saviez-vous ? Wikipédia a été réécrit sous la forme de questions et de réponses pour entraîner les IA génératives !</p>"
+                  "content": "<p>Les ingénieurs qui entraînent les IA génératives sélectionnent des <strong>lots de questions et réponses</strong> d'excellente qualité.<br> Ils les donnent ensuite à l'IA générative pour qu'elle apprenne à simuler une conversation.<br>C’est de l’apprentissage <strong>supervisé</strong>.</p><p>\uD83D\uDCA1 Le saviez-vous ? Wikipédia a été réécrit sous la forme de questions et de réponses pour entraîner les IA génératives !</p>"
                 }
               ]
             },
