@@ -20,7 +20,7 @@ module('Integration | Component | Banner | Maximum places exceeded', function (h
       const screen = await render(<template><MaximumPlacesExceeded /></template>);
 
       // then
-      assert.notOk(screen.queryByText(this.intl.t('banners.maximum-places-exceeded.message')));
+      assert.notOk(screen.queryByText("Votre organisation n'a plus de places disponibles !"));
     });
   });
 
@@ -34,7 +34,7 @@ module('Integration | Component | Banner | Maximum places exceeded', function (h
         const screen = await render(<template><MaximumPlacesExceeded /></template>);
 
         // then
-        assert.notOk(screen.queryByText(this.intl.t('banners.maximum-places-exceeded.message')));
+        assert.notOk(screen.queryByText("Votre organisation n'a plus de places disponibles !"));
       });
     });
 
@@ -47,7 +47,7 @@ module('Integration | Component | Banner | Maximum places exceeded', function (h
         const screen = await render(<template><MaximumPlacesExceeded /></template>);
 
         // then
-        assert.ok(screen.getByText(this.intl.t('banners.maximum-places-exceeded.message')));
+        assert.ok(screen.getByText("Votre organisation n'a plus de places disponibles !"));
       });
     });
   });

@@ -81,7 +81,7 @@
       "message": "Attention, vos places arrivent à échéance dans {days, number} jours."
     },
     "maximum-places-exceeded": {
-      "message": "Plus de places disponibles pour l'organisation."
+      "message": "<b>Votre organisation n'a plus de places disponibles !</b><br />Pour bénéficier de toutes les fonctionnalités, merci de libérer des places, vous rapprocher de votre représentant Pix ou '<'a href='https://pix.fr/support/form/professionnel-le' title='contactez-nous(France)' class=\"{linkClasses}\" '>contactez-nous via ce formulaire</a>'. <br />Si vous êtes une organisation hors France '<'a href='https://pix.org/fr/support/form/contactez-le-support-pix' title='contactez-nous (hors France)' class=\"{linkClasses}\" '>contactez-nous via ce formulaire</a>'."
     },
     "over-capacity": {
       "message": "Attention, vous consommez plus de places que votre capacité totale."

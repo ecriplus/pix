@@ -81,7 +81,7 @@
       "message": "{days, number} Houd er rekening mee dat je tickets over enkele dagen verlopen."
     },
     "maximum-places-exceeded": {
-      "message": "Er zijn geen plaatsen meer beschikbaar voor de organisatie."
+      "message": "<b>Uw organisatie heeft geen plaatsen meer beschikbaar !</b><br />Om gebruik te kunnen maken van alle mogelijkheden, kunt u een aantal plaatsen vrijmaken. Neem contact op met uw Pix-vertegenwoordiger of '<'a href='https://pix.org/en/support-contact-form' title='contact met ons' class=\"{linkClasses}\" '>contact met ons op via dit formulier</a>'."
     },
     "over-capacity": {
       "message": "Houd er rekening mee dat je meer plaats inneemt dan je totale capaciteit."
