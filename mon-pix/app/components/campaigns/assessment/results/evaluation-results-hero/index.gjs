@@ -132,12 +132,10 @@ export default class EvaluationResultsHero extends Component {
       const campaignParticipationResult = this.args.campaignParticipationResult;
 
       await this.store.adapterFor('campaign-participation-result').share(campaignParticipationResult.id);
-
+      await campaignParticipationResult.reload({
+        adapterOptions: { userId: this.currentUser.user.id, campaignId: this.args.campaign.id },
+      });
       this.args.onResultsShared();
-
-      campaignParticipationResult.isShared = true;
-      campaignParticipationResult.canImprove = false;
-      campaignParticipationResult.sharedAt = new Date();
 
       this.metrics.trackEvent({
         event: 'custom-event',

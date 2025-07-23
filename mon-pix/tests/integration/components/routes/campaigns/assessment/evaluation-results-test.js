@@ -5,6 +5,7 @@ import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubCurrentUserService } from '../../../../../helpers/service-stubs.js';
 import setupIntlRenderingTest from '../../../../../helpers/setup-intl-rendering';
 import { waitForDialog, waitForDialogClose } from '../../../../../helpers/wait-for';
 
@@ -23,7 +24,7 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
 
     this.set('model', {
       campaign,
-      campaignParticipationResult: { campaignParticipationBadges: [], competenceResults: [] },
+      campaignParticipationResult: { campaignParticipationBadges: [], competenceResults: [], reload: () => {} },
       trainings: [],
     });
   });
@@ -142,6 +143,7 @@ module('Integration | Components | Routes | Campaigns | Assessment | Evaluation 
     module('when clicking on the share results button in hero', function () {
       test('it should display the evaluation-sent-results modal with first 3 trainings', async function (assert) {
         // given
+        stubCurrentUserService(this.owner, { id: '1234' });
         this.model.trainings = generateTrainings(4);
         this.model.campaignParticipationResult.isShared = false;
         this.model.campaignParticipationResult.competenceResults = [Symbol('competences')];

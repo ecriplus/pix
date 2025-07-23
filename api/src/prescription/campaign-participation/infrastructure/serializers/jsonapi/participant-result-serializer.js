@@ -21,6 +21,7 @@ const serialize = function (results) {
       'canImprove',
       'isDisabled',
       'sharedAt',
+      'remainingSecondsBeforeRetrying',
     ],
     campaignParticipationBadges: {
       ref: 'id',

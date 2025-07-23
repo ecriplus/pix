@@ -15,6 +15,12 @@ export default class CampaignParticipationResult extends ApplicationAdapter {
     return super.urlForQueryRecord(...arguments);
   }
 
+  urlForFindRecord(id, modelName, { adapterOptions }) {
+    const { userId, campaignId } = adapterOptions;
+    const url = `${this.host}/${this.namespace}/users/${userId}/campaigns/${campaignId}/assessment-result`;
+    return url;
+  }
+
   share(id) {
     const url = `${this.host}/${this.namespace}/campaign-participations/${id}`;
     return this.ajax(url, 'PATCH');
