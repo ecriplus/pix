@@ -4,7 +4,7 @@ import { CombinedCourseParticipation } from '../../domain/models/CombinedCourseP
 
 export const save = async function ({ organizationLearnerId, questId }) {
   const knexConnection = DomainTransaction.getConnection();
-  await knexConnection('quest_participations')
+  await knexConnection('combined_course_participations')
     .insert({
       questId,
       organizationLearnerId,
@@ -16,13 +16,18 @@ export const save = async function ({ organizationLearnerId, questId }) {
 export const getByUserId = async function ({ userId, questId }) {
   const knexConnection = DomainTransaction.getConnection();
 
-  const questParticipations = await knexConnection('quest_participations')
-    .select('quest_participations.id', 'questId', 'organizationLearnerId', 'quest_participations.status')
+  const questParticipations = await knexConnection('combined_course_participations')
+    .select(
+      'combined_course_participations.id',
+      'questId',
+      'organizationLearnerId',
+      'combined_course_participations.status',
+    )
     .join(
       'view-active-organization-learners',
       'view-active-organization-learners.id',
       '=',
-      'quest_participations.organizationLearnerId',
+      'combined_course_participations.organizationLearnerId',
     )
     .where({
       'view-active-organization-learners.userId': userId,

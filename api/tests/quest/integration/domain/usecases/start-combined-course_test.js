@@ -18,7 +18,7 @@ describe('Integration | Combined course | Domain | UseCases | start-combined-cou
       });
 
       //then
-      const [participation] = await knex('quest_participations').where({
+      const [participation] = await knex('combined_course_participations').where({
         questId,
         organizationLearnerId: organizationLearner.id,
       });
@@ -52,7 +52,7 @@ describe('Integration | Combined course | Domain | UseCases | start-combined-cou
           .first();
         expect(createdOrganizationLearner).not.to.be.undefined;
 
-        const [participation] = await knex('quest_participations').where({
+        const [participation] = await knex('combined_course_participations').where({
           questId,
           organizationLearnerId: createdOrganizationLearner.id,
         });
