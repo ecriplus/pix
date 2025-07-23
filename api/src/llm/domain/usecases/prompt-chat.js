@@ -33,17 +33,17 @@ export async function promptChat({
     throw new NoAttachmentNeededError();
   }
   let attachmentMessageType;
+  let isAttachmentValid;
   if (attachmentName) {
-    if (chat.isAttachmentValid(attachmentName)) {
-      chat.addAttachmentContextMessages(configuration.attachmentName, configuration.attachmentContext, !!message);
-      attachmentMessageType = toEventStream.ATTACHMENT_MESSAGE_TYPES.IS_VALID;
-    } else {
-      attachmentMessageType = toEventStream.ATTACHMENT_MESSAGE_TYPES.IS_INVALID;
-    }
+    isAttachmentValid = chat.addAttachmentContextMessages(attachmentName, message);
+    attachmentMessageType = isAttachmentValid
+      ? toEventStream.ATTACHMENT_MESSAGE_TYPES.IS_VALID
+      : toEventStream.ATTACHMENT_MESSAGE_TYPES.IS_INVALID;
   } else {
     attachmentMessageType = toEventStream.ATTACHMENT_MESSAGE_TYPES.NONE;
   }
   let readableStream = null;
+  const shouldBeForwardedToLLM = !attachmentName || (attachmentName && chat.hasAttachmentContextBeenAdded);
   if (message) {
     if (message.length > configuration.inputMaxChars) {
       throw new TooLargeMessageInputError();
@@ -53,22 +53,24 @@ export async function promptChat({
       throw new MaxPromptsReachedError();
     }
 
-    readableStream = await promptRepository.prompt({
-      message,
-      chat,
-    });
+    if (shouldBeForwardedToLLM) {
+      readableStream = await promptRepository.prompt({
+        message,
+        chat,
+      });
+    }
   }
 
   return toEventStream.fromLLMResponse({
     llmResponse: readableStream,
-    onLLMResponseReceived: addMessagesToChat(chat, message, chatRepository),
+    onStreamDone: addMessagesToChat(chat, message, shouldBeForwardedToLLM, chatRepository),
     attachmentMessageType,
   });
 }
 
-function addMessagesToChat(chat, prompt, chatRepository) {
+function addMessagesToChat(chat, prompt, shouldBeForwardedToLLM, chatRepository) {
   return async (llmMessage) => {
-    chat.addUserMessage(prompt);
+    chat.addUserMessage(prompt, shouldBeForwardedToLLM);
     chat.addLLMMessage(llmMessage);
     await chatRepository.save(chat);
   };

@@ -17,11 +17,11 @@ export const ATTACHMENT_MESSAGE_TYPES = {
  *
  * @param {Object} params
  * @param {ReadableStream|null} params.llmResponse
- * @param {Function} params.onLLMResponseReceived Callback called when LLM response has been completely retrieved. Will be called asynchronously with one parameter: the complete LLM message
+ * @param {Function} params.onStreamDone Callback called when stream is done streaming. Will be called asynchronously with one parameter: the complete LLM message
  * @param {string} params.attachmentMessageType
  * @returns {Promise<module:stream.internal.PassThrough>}
  */
-export async function fromLLMResponse({ llmResponse, onLLMResponseReceived, attachmentMessageType }) {
+export async function fromLLMResponse({ llmResponse, onStreamDone, attachmentMessageType }) {
   const writableStream = new PassThrough();
   writableStream.on('error', (err) => {
     logger.error(`error while streaming response: ${err}`);
@@ -43,7 +43,7 @@ export async function fromLLMResponse({ llmResponse, onLLMResponseReceived, atta
           writableStream.end('Error while streaming response from LLM');
         }
       } else {
-        await onLLMResponseReceived(completeLLMMessage.join(''));
+        await onStreamDone(completeLLMMessage.join(''));
       }
     },
   );

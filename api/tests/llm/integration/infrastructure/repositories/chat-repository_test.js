@@ -34,8 +34,20 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         }),
         hasAttachmentContextBeenAdded: false,
         messages: [
-          new Message({ content: 'je suis user', isFromUser: true }),
-          new Message({ content: 'je suis LLM', isFromUser: false }),
+          new Message({
+            content: 'je suis user',
+            isFromUser: true,
+            shouldBeRenderedInPreview: true,
+            shouldBeForwardedToLLM: true,
+            shouldBeCountedAsAPrompt: true,
+          }),
+          new Message({
+            content: 'je suis LLM',
+            isFromUser: false,
+            shouldBeRenderedInPreview: true,
+            shouldBeForwardedToLLM: true,
+            shouldBeCountedAsAPrompt: false,
+          }),
         ],
       });
 
@@ -62,8 +74,20 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         },
         hasAttachmentContextBeenAdded: false,
         messages: [
-          { content: 'je suis user', isFromUser: true, notCounted: false },
-          { content: 'je suis LLM', isFromUser: false, notCounted: false },
+          {
+            content: 'je suis user',
+            isFromUser: true,
+            shouldBeRenderedInPreview: true,
+            shouldBeForwardedToLLM: true,
+            shouldBeCountedAsAPrompt: true,
+          },
+          {
+            content: 'je suis LLM',
+            isFromUser: false,
+            shouldBeRenderedInPreview: true,
+            shouldBeForwardedToLLM: true,
+            shouldBeCountedAsAPrompt: false,
+          },
         ],
       });
     });
