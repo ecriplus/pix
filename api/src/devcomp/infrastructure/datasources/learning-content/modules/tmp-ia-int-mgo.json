@@ -5,7 +5,7 @@
   "isBeta": false,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Les logiciels d'IA génératives&nbsp;sont capables de tenir des conversations étonnamment naturelles. Mais comment en sont-ils arrivés là ? Ce module vous emmène dans les coulisses de leur apprentissage&nbsp;: des montagnes de textes analysés aux techniques d’entraînement sophistiquées qui leur ont permis de comprendre, prédire et générer le langage humain.</p>",
+    "description": "<p>Les logiciels d'IA génératives&nbsp;de texte sont capables de tenir des conversations étonnamment naturelles. Mais comment en sont-ils arrivés là ? Ce module vous emmène dans les coulisses de leur apprentissage&nbsp;: des montagnes de textes analysés aux techniques d’entraînement sophistiquées qui leur ont permis de comprendre, prédire et générer le langage humain.</p>",
     "duration": 10,
     "level": "Intermédiaire",
     "objectives": [
@@ -188,7 +188,7 @@
                 {
                   "id": "93d127a7-e179-40cd-9273-ce7a23007a39",
                   "type": "text",
-                  "content": "<p>L’IA générative s’entraîne à supprimer puis <strong>deviner</strong> des mots au hasard parmi tous ces textes. 🙈</p><p>Petit à petit elle s'améliore : elle apprend quels mots apparaissent <strong>souvent</strong> ensemble. 🐈 🐁</p>"
+                  "content": "<p>L’IA générative s’entraîne à masquer puis <strong>deviner</strong> des mots au hasard parmi tous ces textes. 🙈</p><p>Petit à petit elle s'améliore : elle apprend quels mots apparaissent <strong>souvent</strong> ensemble. 🐈 🐁</p>"
                 }
               ]
             },
@@ -556,7 +556,7 @@
                 {
                   "id": "e3e9640d-33de-4076-ac26-2525371095bd",
                   "type": "text",
-                  "content": "<p>🤔 <strong>Bon à savoir</strong><br> Ce principe d'<strong>alignement aux attentes des humains</strong>, a tendance à rendre les IA génératives <strong>complaisantes</strong>. Pour aller dans le sens de l’utilisateur, elles peuvent <strong>inventer</strong> des faits et halluciner. 🤥</p>"
+                  "content": "<p>🤔 <strong>Bon à savoir</strong><br> Ce principe d'<strong>alignement aux attentes des humains</strong>, a tendance à rendre les IA génératives <strong>complaisantes</strong>. Pour ne pas contrarier, elles peuvent <strong>inventer</strong> des faits et halluciner. 🤥</p>"
                 }
               ]
             }
