@@ -95,7 +95,7 @@ export const replications = [
     },
   },
   {
-    name: 'data-calibration',
+    name: 'data-calibrations',
     before: async ({ datamartKnex }) => {
       await datamartKnex('data_calibrations').truncate();
     },
