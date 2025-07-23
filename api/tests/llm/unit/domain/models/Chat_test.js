@@ -480,4 +480,102 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       });
     });
   });
+
+  describe('#get messagesToForwardToLLM', function () {
+    context('when chat has no messages at all', function () {
+      it('should return an empty array', function () {
+        // given
+        const chat = new Chat({
+          id: 'some-chat-id',
+          configuration: new Configuration({ id: 'some-config-id', llm: { historySize: 45 } }),
+          hasAttachmentContextBeenAdded: false,
+          messages: [],
+        });
+
+        // then
+        expect(chat.messagesToForwardToLLM).to.deep.equal([]);
+      });
+    });
+    context('history size', function () {
+      it('returns the N latest messages according to configuration history size', function () {
+        // given
+        const chat = new Chat({
+          id: 'some-chat-id',
+          configuration: new Configuration({ id: 'some-config-id', llm: { historySize: 4 } }),
+          hasAttachmentContextBeenAdded: false,
+          messages: [
+            new Message({ content: 'first message', isFromUser: true }),
+            new Message({ content: 'second message', isFromUser: false }),
+            new Message({ content: 'third message', isFromUser: true }),
+            new Message({ content: 'fourth message', isFromUser: false }),
+            new Message({ content: 'fifth message', isFromUser: true }),
+            new Message({ content: 'sixth message', isFromUser: false }),
+          ],
+        });
+
+        // then
+        expect(chat.messagesToForwardToLLM).to.deep.equal([
+          {
+            content: 'third message',
+            role: 'user',
+          },
+          {
+            content: 'fourth message',
+            role: 'assistant',
+          },
+          {
+            content: 'fifth message',
+            role: 'user',
+          },
+          {
+            content: 'sixth message',
+            role: 'assistant',
+          },
+        ]);
+      });
+    });
+    context('attachments', function () {
+      context('when there are attachment messages', function () {
+        it('returns well formatted attachment messages', function () {
+          // given
+          const chat = new Chat({
+            id: 'some-chat-id',
+            configuration: new Configuration({
+              id: 'some-config-id',
+              llm: { historySize: 4 },
+              attachment: { name: 'file.txt', context: "Ceci n'est pas une pipe." },
+            }),
+            hasAttachmentContextBeenAdded: true,
+            messages: [
+              new Message({ attachmentName: 'file.txt', isFromUser: true }),
+              new Message({
+                attachmentName: 'file.txt',
+                attachmentContext: "Ceci n'est pas une pipe.",
+                isFromUser: false,
+              }),
+              new Message({ content: 'Quel instrument pour fumer est mentionné dans mon fichier ?', isFromUser: true }),
+            ],
+          });
+
+          // then
+          expect(chat.messagesToForwardToLLM).to.deep.equal([
+            {
+              content:
+                "<system_notification>L'utilisateur a téléversé une pièce jointe : <attachment_name>file.txt</attachment_name></system_notification>",
+              role: 'user',
+            },
+            {
+              content:
+                "<read_attachment_tool>Lecture de la pièce jointe, file.txt : <attachment_content>Ceci n'est pas une pipe.</attachment_content></read_attachment_tool>",
+              role: 'assistant',
+            },
+            {
+              content: 'Quel instrument pour fumer est mentionné dans mon fichier ?',
+              role: 'user',
+            },
+          ]);
+        });
+      });
+    });
+  });
 });

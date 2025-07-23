@@ -76,6 +76,10 @@ export class Chat {
     return attachmentFilename.includes(attachmentFilenameFromConfig);
   }
 
+  get messagesToForwardToLLM() {
+    return this.messages.slice(-this.configuration.historySize).map((message) => message.toLLMHistory());
+  }
+
   static fromDTO(chatDTO) {
     return new Chat({
       ...chatDTO,
