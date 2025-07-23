@@ -100,17 +100,50 @@
         {
           "type": "element",
           "element": {
-            "id": "19304202-614f-494c-8312-69b04cb9589f",
-            "type": "text",
-            "content": "<p>Pour préparer ses vacances, Bob veut connaître&nbsp;:&nbsp; </p>\n<ul>\n    <li>les horaires de train de demain pour aller de Rennes à Brest</li>\n    <li>des endroits à visiter à Brest</li>\n</ul>\n<p>Il utilise deux chatbots différents pour avoir de l’aide.</p><p><strong>👉 Lancez les conversations et observez les réponses des deux chatbots.</strong><br></p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "e3e75867-70a2-469b-9911-c998b438d68c",
-            "type": "text",
-            "content": "<iframe title=\"conversation 1\" src=\"https://1024pix.github.io/atelier-contenus/RPE/ia-fonctionnement-debutant-poi1.html\" height=\"600\"></iframe>"
+            "id": "de11d987-0276-4a1c-9266-cc28961283d5",
+            "type": "custom",
+            "tagName": "llm-compare-messages",
+            "props":{
+              "conversation1": {
+                "title": "Conversation 1",
+                "llmName": "Chatbot #1"
+              },
+              "conversation2": {
+                "title": "Conversation 2",
+                "llmName": "Chatbot #2"
+              },
+              "userName": "Bob",
+              "messages": [
+                {
+                  "direction": "outbound",
+                  "content": "Comment aller facilement de Rennes à Brest en train demain ?"
+                },
+                [
+                  {
+                    "direction": "inbound",
+                    "content": "Voici les itinéraires de demain :<br>Train OUIGO, durée 2h15 08h22 --> 10h37<br>TGV INOUI, durée 2h13 09h33 --> 11h46"
+                  },
+                  {
+                    "direction": "inbound",
+                    "content": "Pour aller facilement de Rennes à Brest en train demain, plusieurs options directes sont disponibles :<br>08h22 - 10h37 : OUIGO, direct, environ 2h15 ;<br>09h33 - 11h46 : TGV INOUI, direct, environ 2h13."
+                  }
+                ],
+                {
+                  "direction": "outbound",
+                  "content": "Et qu'est-ce que je peux visiter à Brest ?"
+                },
+                [
+                  {
+                    "direction": "inbound",
+                    "content": "Je ne peux pas vous aider désolé. Votre demande ne correspond pas aux services que je propose. Est-ce que vous voulez de l’aide pour réserver un billet de train ?"
+                  },
+                  {
+                    "direction": "inbound",
+                    "content": "Voici 3 endroits incontournables à Brest :<br>Océanopolis : grand aquarium dédié aux écosystèmes marins.<br>Château de Brest : forteresse avec musée maritime.<br>Ateliers des Capucins : espace culturel moderne accessible en téléphérique."
+                  }
+                ]
+              ]
+            }
           }
         },
         {
