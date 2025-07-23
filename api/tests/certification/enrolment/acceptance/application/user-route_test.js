@@ -1,3 +1,4 @@
+import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { AssessmentResult } from '../../../../../src/shared/domain/models/index.js';
 import {
   createServer,
@@ -183,7 +184,7 @@ describe('Certification | Enrolment | Acceptance | Routes | User', function () {
 
     const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
     const cleaBadgeId = databaseBuilder.factory.buildBadge({
-      key: 'PARTNER_KEY',
+      key: ComplementaryCertificationKeys.CLEA,
       isCertifiable: true,
       targetProfileId,
       imageUrl: 'http://my-badge-image-url.com',
@@ -216,6 +217,7 @@ describe('Certification | Enrolment | Acceptance | Routes | User', function () {
 
     const complementaryCertificationId = databaseBuilder.factory.buildComplementaryCertification({
       name: 'PARTNER_CERTIFICATION',
+      key: ComplementaryCertificationKeys.CLEA,
     }).id;
 
     databaseBuilder.factory.buildComplementaryCertificationBadge({
