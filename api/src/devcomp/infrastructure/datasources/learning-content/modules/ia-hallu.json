@@ -253,7 +253,7 @@
                 {
                   "id": "52714cef-23e1-49d0-99ed-19880ba569ca",
                   "type": "text",
-                  "content": "<p>Certaines erreurs dans les réponses des IA génératives viennent des données qu’on leur a transmises pour s’entraîner&nbsp;:</p><ul><li>Les <strong>données d'entraînement </strong>peuvent contenir <strong>des erreurs</strong>. L’IA générative peut reproduire ces erreurs.</li><li>Les données d’entraînement peuvent être <strong>anciennes </strong>et ne <strong>plus être d’actualité</strong>.</li></ul>"
+                  "content": "<p>Certaines erreurs dans les réponses des IA génératives viennent des données qu’on leur a transmises pour s’entraîner. Les <strong>données d'entraînement </strong>peuvent contenir <strong>des erreurs ou ne&nbsp;</strong><strong>plus être d’actualité</strong>.</p>"
                 }
               ]
             },
@@ -262,7 +262,7 @@
                 {
                   "id": "a2f3a3ca-b439-472e-86bb-69af0c01f178",
                   "type": "text",
-                  "content": "<p>D’autres erreurs sont inventées par l’IA. L’IA générative répond souvent “sans savoir”, <strong>par prédiction</strong>. Elle génère la réponse qui lui paraît la plus probable. On appelle ces erreurs <strong>des hallucinations</strong>.</p><p><br>Par exemple, quand on demande à un logiciel d’IA générative de nous donner l’auteur d’une citation, il peut l’attribuer à quelqu’un d’autre. 🤷</p>"
+                  "content": "<p>D’autres erreurs sont inventées par l’IA. L’IA générative répond souvent “sans savoir”, <strong>par prédiction</strong>. Elle génère la réponse qui lui paraît la plus probable. On appelle ces erreurs <strong>des hallucinations</strong>.<br>Par exemple, quand on demande à un logiciel d’IA générative de nous donner l’auteur d’une citation, il peut l’attribuer à quelqu’un d’autre. 🤷</p>"
                 }
               ]
             },
@@ -271,7 +271,7 @@
                 {
                   "id": "7c22a815-14fb-4bba-aa7f-d292f9708aaf",
                   "type": "text",
-                  "content": "<p>Certaines <strong>demandes d’utilisateurs</strong> peuvent <strong>contenir des erreurs ou être farfelues</strong>.</p><p><br>Par exemple, en 2024 ChatGPT a répondu à la question «&nbsp;Quel est le record du monde de traversée de la Manche à pied ?&nbsp;» en citant un nageur allemand et en inventant un temps de 14 heures et 51 minutes.</p>"
+                  "content": "<p>Certaines <strong>demandes d’utilisateurs</strong> peuvent <strong>contenir des erreurs ou être farfelues</strong>.<br>Par exemple, en 2024 ChatGPT a répondu à la question «&nbsp;Quel est le record du monde de traversée de la Manche à pied ?&nbsp;» en citant un nageur allemand et en inventant un temps de 14 heures et 51 minutes.</p>"
                 },
                 {
                   "id": "dfbbd712-d034-4c91-819a-4431aec8beb2",
