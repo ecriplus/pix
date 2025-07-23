@@ -1,5 +1,43 @@
 # Pix Changelog
 
+# [5.165.0](https://github.com/1024pix/pix/compare/v5.164.0...v5.165.0) (2025-07-23)
+
+### :rocket: Amélioration
+
+- [#12873](https://github.com/1024pix/pix/pull/12873) afficher quand l'utilisateur pourra repasser la campagne (PIX-18513) 
+- [#12825](https://github.com/1024pix/pix/pull/12825) Afficher une catégorie de temps estimé de passage d'un profil cible dans PixAdmin (Pix-18697). 
+- [#12915](https://github.com/1024pix/pix/pull/12915) Corriger couleur légende et pointillés autour des POI (PIX-18818) 
+- [#12860](https://github.com/1024pix/pix/pull/12860) Démarrer un parcours combiné (PIX-18121). 
+- [#12921](https://github.com/1024pix/pix/pull/12921) Enlever le cache de la version des modules   (PIX-18716) 
+- [#12879](https://github.com/1024pix/pix/pull/12879) Journal d'évènements d'un candidat en certification (PIX-18826). 
+- [#12918](https://github.com/1024pix/pix/pull/12918) Mettre à jour le label du bouton Vérifier sur les modules (PIX-18814) 
+
+### :bug: Correction
+
+- [#12912](https://github.com/1024pix/pix/pull/12912) afficher la pagination avec la bonne locale dans orga (Pix-18678) 
+
+### :building_construction: Tech
+
+- [#12944](https://github.com/1024pix/pix/pull/12944) Ajout de données nécessaires dans les seeds pour pouvoir prévisualiser en local/RA le LLM 
+- [#12940](https://github.com/1024pix/pix/pull/12940) Rendre silencieux les avertissements de deprecation de Pix App. 
+
+### :arrow_up: Montée de version
+
+- [#12916](https://github.com/1024pix/pix/pull/12916) Update dependency @1024pix/eslint-plugin to ^2.1.7 (certif) 
+- [#12917](https://github.com/1024pix/pix/pull/12917) Update dependency @1024pix/eslint-plugin to ^2.1.7 (dossier racine) 
+- [#12919](https://github.com/1024pix/pix/pull/12919) Update dependency @1024pix/eslint-plugin to ^2.1.7 (e2e-playwright) 
+- [#12920](https://github.com/1024pix/pix/pull/12920) Update dependency @1024pix/eslint-plugin to ^2.1.7 (junior) 
+- [#12923](https://github.com/1024pix/pix/pull/12923) Update dependency @1024pix/eslint-plugin to ^2.1.7 (mon-pix) 
+- [#12924](https://github.com/1024pix/pix/pull/12924) Update dependency @1024pix/eslint-plugin to ^2.1.7 (orga) 
+- [#12928](https://github.com/1024pix/pix/pull/12928) Update dependency @1024pix/stylelint-config to ^5.1.34 (junior) 
+- [#12929](https://github.com/1024pix/pix/pull/12929) Update dependency @1024pix/stylelint-config to ^5.1.34 (mon-pix) 
+- [#12931](https://github.com/1024pix/pix/pull/12931) Update dependency @1024pix/stylelint-config to ^5.1.34 (orga) 
+- [#12932](https://github.com/1024pix/pix/pull/12932) Update dependency webpack to v5.100.2 (junior) 
+
+### :coffee: Autre
+
+- [#12896](https://github.com/1024pix/pix/pull/12896) Isoler la logique des locales des fronts dans le service "locale" (PIX-18785)
+
 # [5.164.0](https://github.com/1024pix/pix/compare/v5.163.0...v5.164.0) (2025-07-22)
 
 ### :rocket: Amélioration
