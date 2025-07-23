@@ -425,8 +425,8 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
     });
 
     test('it should display pagination in correct language', async function (assert) {
-      const intl = this.owner.lookup('service:intl');
-      intl.setLocale(['en', 'en']);
+      const locale = this.owner.lookup('service:locale');
+      locale.setCurrentLocale('en');
 
       this.owner.setupRouter();
       this.campaign = store.createRecord('campaign', {

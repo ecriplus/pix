@@ -100,8 +100,9 @@ module('Integration | Component | SupOrganizationParticipant::List', function (h
 
   test('it should display pagination in correct language', async function (assert) {
     // given
-    const intl = this.owner.lookup('service:intl');
-    intl.setLocale(['en', 'en']);
+    const locale = this.owner.lookup('service:locale');
+    locale.setCurrentLocale('en');
+
     const students = [
       { lastName: 'La Terreur', firstName: 'Gigi', birthdate: new Date('2010-02-01') },
       { lastName: "L'asticot", firstName: 'Gogo', birthdate: new Date('2010-05-10') },

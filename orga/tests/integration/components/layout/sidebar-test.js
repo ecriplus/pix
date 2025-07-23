@@ -42,8 +42,6 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
         canAccessCampaignsPage = true;
       }
       this.owner.register('service:current-user', CurrentUserStub);
-      const intl = this.owner.lookup('service:intl');
-      intl.setLocale(['fr', 'fr']);
 
       const screen = await render(hbs`<Layout::Sidebar />`);
 
@@ -58,9 +56,6 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
         canAccessCampaignsPage = true;
       }
       this.owner.register('service:current-user', CurrentUserStub);
-      const intl = this.owner.lookup('service:intl');
-      intl.setLocale(['fr', 'fr']);
-
       const screen = await render(hbs`<Layout::Sidebar />`);
 
       assert.dom(screen.getByText('Campagnes')).exists();
@@ -73,9 +68,6 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
         organization = Object.create({ id: '1', documentationUrl: 'www.amazing-doc.fr' });
       }
       this.owner.register('service:current-user', CurrentUserStub);
-      const intl = this.owner.lookup('service:intl');
-      intl.setLocale(['fr', 'fr']);
-
       const screen = await render(hbs`<Layout::Sidebar />`);
 
       assert.dom(screen.getByText('Documentation')).exists();
@@ -111,9 +103,6 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
         canAccessMissionsPage = false;
       }
       this.owner.register('service:current-user', CurrentUserStub);
-      const intl = this.owner.lookup('service:intl');
-      intl.setLocale(['fr', 'fr']);
-
       const screen = await render(hbs`<Layout::Sidebar />`);
 
       assert.dom(screen.queryByRole('link', { name: t('navigation.main.support') })).doesNotExist();
@@ -128,8 +117,6 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       }
 
       this.owner.register('service:current-user', CurrentUserStub);
-      const intl = this.owner.lookup('service:intl');
-      intl.setLocale(['fr', 'fr']);
 
       // when
       const screen = await render(hbs`<Layout::Sidebar />`);
@@ -148,8 +135,6 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       }
 
       this.owner.register('service:current-user', CurrentUserStub);
-      const intl = this.owner.lookup('service:intl');
-      intl.setLocale(['fr', 'fr']);
 
       // when
       const screen = await render(hbs`<Layout::Sidebar />`);
@@ -166,8 +151,6 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       }
 
       this.owner.register('service:current-user', CurrentUserStub);
-      const intl = this.owner.lookup('service:intl');
-      intl.setLocale(['fr', 'fr']);
 
       // when
       const screen = await render(hbs`<Layout::Sidebar />`);
@@ -187,8 +170,6 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       }
 
       this.owner.register('service:current-user', CurrentUserStub);
-      const intl = this.owner.lookup('service:intl');
-      intl.setLocale(['fr', 'fr']);
 
       // when
       const screen = await render(hbs`<Layout::Sidebar />`);
@@ -205,8 +186,6 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       }
 
       this.owner.register('service:current-user', CurrentUserStub);
-      const intl = this.owner.lookup('service:intl');
-      intl.setLocale(['fr', 'fr']);
 
       // when
       const screen = await render(hbs`<Layout::Sidebar />`);
@@ -224,8 +203,6 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       }
 
       this.owner.register('service:current-user', CurrentUserStub);
-      const intl = this.owner.lookup('service:intl');
-      intl.setLocale(['fr', 'fr']);
 
       // when
       const screen = await render(hbs`<Layout::Sidebar />`);
@@ -243,8 +220,6 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       }
 
       this.owner.register('service:current-user', CurrentUserStub);
-      const intl = this.owner.lookup('service:intl');
-      intl.setLocale(['fr', 'fr']);
 
       // when
       const screen = await render(hbs`<Layout::Sidebar />`);
@@ -261,8 +236,6 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
         canAccessMissionsPage = true;
       }
       this.owner.register('service:current-user', CurrentUserStub);
-      const intl = this.owner.lookup('service:intl');
-      intl.setLocale(['fr', 'fr']);
 
       const screen = await render(hbs`<Layout::Sidebar />`);
 
@@ -276,8 +249,6 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
         canAccessMissionsPage = true;
       }
       this.owner.register('service:current-user', CurrentUserStub);
-      const intl = this.owner.lookup('service:intl');
-      intl.setLocale(['fr', 'fr']);
 
       const screen = await render(hbs`<Layout::Sidebar />`);
 
@@ -290,8 +261,6 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
         canAccessMissionsPage = true;
       }
       this.owner.register('service:current-user', CurrentUserStub);
-      const intl = this.owner.lookup('service:intl');
-      intl.setLocale(['fr', 'fr']);
 
       const screen = await render(hbs`<Layout::Sidebar />`);
 
@@ -307,9 +276,6 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
         canAccessMissionsPage = true;
       }
       this.owner.register('service:current-user', CurrentUserStub);
-      const intl = this.owner.lookup('service:intl');
-      intl.setLocale(['fr', 'fr']);
-
       const screen = await render(hbs`<Layout::Sidebar />`);
 
       assert.dom(screen.queryByText('Campagnes')).doesNotExist();
@@ -353,8 +319,6 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       organization = Object.create({ id: '1', isPro: true });
     }
     this.owner.register('service:current-user', CurrentUserStub);
-    const intl = this.owner.lookup('service:intl');
-    intl.setLocale(['fr', 'fr']);
 
     // when
     const screen = await render(hbs`<Layout::Sidebar />`);

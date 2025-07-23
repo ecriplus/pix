@@ -149,8 +149,8 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
   module('pagination', function () {
     test('it should display pagination in correct language', async function (assert) {
       // given
-      const intl = this.owner.lookup('service:intl');
-      intl.setLocale(['en', 'en']);
+      const locale = this.owner.lookup('service:locale');
+      locale.setCurrentLocale('en');
       const participants = [
         {
           lastName: 'La Terreur',

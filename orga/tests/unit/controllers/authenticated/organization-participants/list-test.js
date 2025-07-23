@@ -12,8 +12,6 @@ module('Unit | Controller | authenticated/organization-participants', function (
 
   let controller;
   hooks.beforeEach(function () {
-    this.intl = this.owner.lookup('service:intl');
-    this.intl.setLocale('fr');
     controller = this.owner.lookup('controller:authenticated/organization-participants/list');
   });
 
