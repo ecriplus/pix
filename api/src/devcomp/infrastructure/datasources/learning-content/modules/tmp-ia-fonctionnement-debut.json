@@ -198,7 +198,7 @@
           "element": {
             "id": "9a7f547c-7d63-4ece-b93e-96c92e48ae5a",
             "type": "text",
-            "content": "<p>Mais comment un logiciel d'IA générative fait-elle pour construire sa réponse quand un utilisateur lui écrit ?&nbsp; Voyons ça ensemble avec un jeu ! 🕹️<br></p>"
+            "content": "<p>Mais comment un logiciel d'IA générative fait-il pour construire sa réponse quand un utilisateur lui écrit ?&nbsp; Voyons ça ensemble avec un jeu ! 🕹️<br></p>"
           }
         }
       ]
@@ -266,7 +266,7 @@
                 {
                   "id": "4c59286a-4fe4-4991-a8a7-023fd736c3a5",
                   "type": "text",
-                  "content": "<p>Pour un logiciel d'IA générative, c’est un peu le même principe&nbsp;: elle construit une réponse en complétant le texte mot après mot. <br>Voyons cela en détail, en reprenant l’exemple de la crêpe.👇<br></p>"
+                  "content": "<p>Pour un logiciel d'IA générative, c’est un peu le même principe&nbsp;: il construit une réponse en complétant le texte mot après mot. <br>Voyons cela en détail, en reprenant l’exemple de la crêpe.👇<br></p>"
                 },
                 {
                   "id": "cccad926-00ec-456b-be8d-d864ad4b1ba8",
@@ -466,7 +466,7 @@
           "element": {
             "id": "3263a709-65bf-4a6e-8ab7-4e1ef5b4c4a2",
             "type": "text",
-            "content": "<p><strong>⚠️ Attention&nbsp;: les textes sur internet ont parfois des erreurs.</strong> Et un logiciel d'IA générative ne repère&nbsp;pas ces erreurs pendant l’entraînement. Elle peut donc <strong>reproduire ces erreurs dans ses réponses.</strong></p><br>\n<p>🔍 C’est important de le répéter&nbsp;: vérifiez toujours ce qu’un logiciel d'IA générative écrit. <br></p>"
+            "content": "<p><strong>⚠️ Attention&nbsp;: les textes sur internet ont parfois des erreurs.</strong> Et un logiciel d'IA générative ne repère&nbsp;pas ces erreurs pendant l’entraînement. Il peut donc <strong>reproduire ces erreurs dans ses réponses.</strong></p><br>\n<p>🔍 C’est important de le répéter&nbsp;: vérifiez toujours ce qu’un logiciel d'IA générative écrit. <br></p>"
           }
         }
       ]
@@ -661,7 +661,7 @@
                 "content": "<p>Je vérifierai les réponses avec d’autres outils (internet, livres…).</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p><strong>Oui, c'est important !</strong> </p><p>un logiciel d'IA générative permet de trouver très rapidement des informations. </p><p>Mais il est nécessaire de vérifier ces informations ailleurs, avec d'autres sources.</p>"
+                  "diagnosis": "<p><strong>Oui, c'est important !</strong> </p><p>Un logiciel d'IA générative permet de trouver très rapidement des informations. </p><p>Mais il est nécessaire de vérifier ces informations ailleurs, avec d'autres sources.</p>"
                 }
               },
               {
