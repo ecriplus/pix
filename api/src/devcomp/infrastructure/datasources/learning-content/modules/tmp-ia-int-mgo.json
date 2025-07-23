@@ -119,7 +119,7 @@
           "element": {
             "id": "2d943050-b29c-4398-a336-143f3173c51a",
             "type": "text",
-            "content": "<p>Avant de savoir simuler une discussion, l’IA générative doit d’abord s’entraîner à <strong>produire du texte</strong> qui ressemble à ce que des humains auraient pu écrire.&nbsp;</p><p>Pour cela l'IA générative doit ingurgiter des <strong>quantités gigantesques de données</strong>. Elle utilisera ensuite une représentation de ces données pour produire de nouveaux textes</p><p>Voyons comment fonctionne cette première étape. 🤔<br>Pour commencer, cliquez sur \"Entraîner l'IA avec ces données\"</p>"
+            "content": "<p>Avant de savoir simuler une discussion, l’IA générative doit d’abord s’entraîner à <strong>produire du texte</strong> qui ressemble à ce que des humains auraient pu écrire.&nbsp;</p><p>Pour cela l'IA générative doit ingurgiter des <strong>quantités gigantesques de données</strong>. Elle utilisera ensuite une représentation de ces données pour produire de nouveaux textes</p><p>Voyons comment fonctionne cette première étape : le « pré-entraînement ». 🤔<br>Pour commencer, cliquez sur \"Entraîner l'IA avec ces données\"</p>"
           }
         },
         {
@@ -179,7 +179,7 @@
                 {
                   "id": "4386b458-46cb-45e9-8d1b-1e840cb2f7c3",
                   "type": "text",
-                  "content": "<p>Pour apprendre à une IA générative à produire du texte, on lui fait étudier des <strong>milliards de textes</strong> variés. 📚 </p>"
+                  "content": "<p>Pour apprendre à une IA générative à produire du texte, on lui fait analyser des <strong>milliards de textes</strong> variés. 📚 </p>"
                 }
               ]
             },
@@ -224,7 +224,7 @@
           "element": {
             "id": "3e76071c-b053-42a3-8145-c7defd93f748",
             "type": "text",
-            "content": "<p>À ce stade, l’IA générative est capable de <strong>prédire</strong> la suite d’un texte. 🔮<br>Mais ce n’est pas la même chose que discuter ou rédiger une lettre de motivation, par exemple.</p><p>Comment apprend-elle à faire tout ça ?🤔</p><p>C'est ce que nous allons découvrir dans cette deuxième étape.</p>"
+            "content": "<p>À ce stade, l’IA générative est capable de <strong>prédire</strong> la suite d’un texte. 🔮<br>Mais ce n’est pas la même chose que discuter ou rédiger une lettre de motivation, par exemple.</p><p>Comment apprend-elle à faire tout ça ?🤔</p><p>C'est ce que nous allons découvrir dans cette deuxième étape : l' « ajustement ».</p>"
           }
         }
       ]
@@ -529,7 +529,7 @@
                 {
                   "id": "d55d9fe9-b12a-4351-97ab-704341f4265d",
                   "type": "text",
-                  "content": "<p>Pour apprendre à l’IA générative à faire des réponses satisfaisantes, on utilise un système de <strong>récompense</strong>.<br>Chacune des réponses de l’IA Gen est évaluée&nbsp;: 👍 ou 👎 . Le logiciel essaie d’obtenir le plus de 👍 .<br>C’est de l’apprentissage par <strong>renforcement</strong>.</p>"
+                  "content": "<p>Pour apprendre à l’IA générative à faire des réponses satisfaisantes, on utilise un système de <strong>récompense</strong>.<br>Chacune des réponses de l’IA Gen est évaluée&nbsp;: 👍 ou 👎. Le logiciel essaie d’obtenir le plus de 👍 .<br>C’est de l’apprentissage par <strong>renforcement</strong>.</p>"
                 }
               ]
             },
@@ -538,7 +538,7 @@
                 {
                   "id": "40570e09-028c-40e3-bc93-47d81f572c33",
                   "type": "text",
-                  "content": "<p>Le métier de certaines personnes est de noter les réponses de l’IA générative. Ce travail est peu rémunéré et n’est pas valorisé. 😔<br>Vous le faites aussi parfois gratuitement en <strong>cliquant</strong> sur le pouce en dessous de la réponse.</p>"
+                  "content": "<p>Le métier de certaines personnes est d'évaluer les réponses de l’IA générative. Ce travail est peu rémunéré et n’est pas valorisé. 😔<br>Vous le faites aussi parfois gratuitement en <strong>cliquant</strong> sur le pouce en dessous de la réponse.</p>"
                 }
               ]
             },
