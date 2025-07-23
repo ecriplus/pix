@@ -9,24 +9,36 @@ describe('Certification | Configuration | Unit | UseCase | get-current-consolida
     const consolidatedFrameworkRepository = {
       getCurrentFrameworkByComplementaryCertificationKey: sinon.stub(),
     };
-
-    const currentConsolidatedFramework = domainBuilder.certification.configuration.buildConsolidatedFramework();
+    const currentConsolidatedFramework = domainBuilder.certification.configuration.buildConsolidatedFramework({
+      challenges: [{ challengeId: 'rec1' }],
+    });
     consolidatedFrameworkRepository.getCurrentFrameworkByComplementaryCertificationKey.resolves(
       currentConsolidatedFramework,
     );
+
+    const learningContentRepository = {
+      getFrameworkReferential: sinon.stub(),
+    };
+    const area = domainBuilder.buildArea();
+    learningContentRepository.getFrameworkReferential.resolves([area]);
 
     // when
     const results = await getCurrentConsolidatedFramework({
       complementaryCertificationKey,
       consolidatedFrameworkRepository,
+      learningContentRepository,
     });
 
     // then
     expect(
       consolidatedFrameworkRepository.getCurrentFrameworkByComplementaryCertificationKey,
-    ).to.have.been.calledOnceWith({
+    ).to.have.been.calledOnceWithExactly({
       complementaryCertificationKey,
     });
-    expect(results).to.deep.equal(currentConsolidatedFramework);
+
+    expect(learningContentRepository.getFrameworkReferential).to.have.been.calledOnceWithExactly({
+      challengeIds: currentConsolidatedFramework.challenges.map(({ challengeId }) => challengeId),
+    });
+    expect(results).to.deep.equal({ ...currentConsolidatedFramework, areas: [area] });
   });
 });

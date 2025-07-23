@@ -9,7 +9,9 @@ import {
   generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   knex,
+  mockLearningContent,
 } from '../../../../test-helper.js';
+import { buildLearningContent as learningContentBuilder } from '../../../../tooling/learning-content-builder/index.js';
 
 describe('Certification | Configuration | Acceptance | API | complementary-certification-route', function () {
   let server;
@@ -384,10 +386,32 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       // given
       const superAdmin = await insertUserWithRoleSuperAdmin();
 
+      const minimalLearningContent = [
+        {
+          id: 'recArea0',
+          competences: [
+            {
+              id: 'recNv8qhaY887jQb2',
+              thematics: [
+                {
+                  id: 'recThemCompetence1',
+                  tubes: [
+                    { id: 'recTubeCompetence1', skills: [{ id: 'skillId@web3', challenges: [{ id: 'rec123' }] }] },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ];
+
+      const learningContentObjects = learningContentBuilder.fromAreas(minimalLearningContent);
+      await mockLearningContent(learningContentObjects);
+
       const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
       databaseBuilder.factory.buildCertificationFrameworksChallenge({
         complementaryCertificationKey: complementaryCertification.key,
-        challengeId: 'rec1234',
+        challengeId: 'rec123',
         discriminant: 2.1,
         difficulty: 3.4,
         createdAt: new Date('2023-01-11'),
@@ -407,19 +431,106 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       // then
       expect(response.statusCode).to.equal(200);
       expect(response.result.data).to.deep.equal({
+        id: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
         type: 'certification-consolidated-frameworks',
         attributes: {
           'complementary-certification-key': complementaryCertification.key,
           version: '20230111000000',
-          challenges: [
-            {
-              challengeId: 'rec1234',
-              discriminant: 2.1,
-              difficulty: 3.4,
-            },
-          ],
+        },
+        relationships: {
+          areas: {
+            data: [
+              {
+                id: 'recArea0',
+                type: 'areas',
+              },
+            ],
+          },
         },
       });
+      expect(response.result.included).to.deep.equal([
+        {
+          attributes: {
+            difficulty: 2,
+          },
+          id: 'skillId@web3',
+          type: 'skills',
+        },
+        {
+          attributes: {
+            name: 'name Tube A',
+            'practical-title': 'practicalTitle FR Tube A',
+          },
+          id: 'recTubeCompetence1',
+          relationships: {
+            skills: {
+              data: [
+                {
+                  id: 'skillId@web3',
+                  type: 'skills',
+                },
+              ],
+            },
+          },
+          type: 'tubes',
+        },
+        {
+          attributes: {
+            index: 8,
+            name: 'name FR Thématique A',
+          },
+          id: 'recThemCompetence1',
+          relationships: {
+            tubes: {
+              data: [
+                {
+                  id: 'recTubeCompetence1',
+                  type: 'tubes',
+                },
+              ],
+            },
+          },
+          type: 'thematics',
+        },
+        {
+          attributes: {
+            index: 'index Compétence A',
+            name: 'name FR Compétence A',
+          },
+          id: 'recNv8qhaY887jQb2',
+          relationships: {
+            thematics: {
+              data: [
+                {
+                  id: 'recThemCompetence1',
+                  type: 'thematics',
+                },
+              ],
+            },
+          },
+          type: 'competences',
+        },
+        {
+          attributes: {
+            code: 'code Domaine A',
+            color: 'color Domaine A',
+            'framework-id': 'undefined',
+            title: 'title FR Domaine A',
+          },
+          id: 'recArea0',
+          relationships: {
+            competences: {
+              data: [
+                {
+                  id: 'recNv8qhaY887jQb2',
+                  type: 'competences',
+                },
+              ],
+            },
+          },
+          type: 'areas',
+        },
+      ]);
     });
   });
 });
