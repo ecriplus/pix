@@ -11,6 +11,10 @@
     width: 100%;
   }
 
+  &__instruction {
+    font-weight: var(--pix-font-medium);
+  }
+
   &__cards {
     display: grid;
     grid-template-areas: 'center';
