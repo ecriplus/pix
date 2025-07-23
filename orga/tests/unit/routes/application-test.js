@@ -16,48 +16,52 @@ module('Unit | Route | application', function (hooks) {
 
     class CurrentUserStub extends Service {
       load = sinon.stub();
+      prescriber = {
+        id: '123',
+        language: 'fr',
+      };
     }
     this.owner.register('service:currentUser', CurrentUserStub);
+    this.currentUser = this.owner.lookup('service:currentUser');
+
+    class SessionStub extends Service {
+      setup = sinon.stub().resolves();
+      loadCurrentUserAndSetLocale = sinon.stub().resolves();
+    }
+    this.owner.register('service:session', SessionStub);
+    this.session = this.owner.lookup('service:session');
+
+    class FeatureTogglesStub extends Service {
+      load = sinon.stub().resolves();
+    }
+    this.owner.register('service:featureToggles', FeatureTogglesStub);
+    this.featureToggles = this.owner.lookup('service:featureToggles');
+
+    this.route = this.owner.lookup('route:application');
   });
 
   module('beforeModel', function () {
     test('loads feature toggles', async function (assert) {
       // given
       const transition = { to: { queryParams: {} } };
-      const route = this.owner.lookup('route:application');
-
-      sinon.stub(route.featureToggles, 'load');
-      route.featureToggles.load.resolves();
-
-      sinon.stub(route.session, 'handleLocale');
 
       // when
-      await route.beforeModel(transition);
+      await this.route.beforeModel(transition);
 
       // then
-      assert.ok(route.featureToggles.load.called);
+      assert.ok(this.featureToggles.load.called);
     });
 
-    test('calls handleLocale', async function (assert) {
+    test('calls loadCurrentUserAndSetLocale', async function (assert) {
       // given
       const transition = { to: { queryParams: { lang: 'fr' } } };
       const route = this.owner.lookup('route:application');
 
-      sinon.stub(route.featureToggles, 'load');
-      route.featureToggles.load.resolves();
-
-      sinon.stub(route.session, 'handleLocale');
-      route.session.handleLocale.resolves();
-
       // when
       await route.beforeModel(transition);
 
       // then
-      sinon.assert.calledWith(route.session.handleLocale, {
-        isFranceDomain: true,
-        localeFromQueryParam: 'fr',
-        userLocale: undefined,
-      });
+      sinon.assert.calledOnceWithExactly(route.session.loadCurrentUserAndSetLocale, transition);
       assert.ok(true);
     });
   });
