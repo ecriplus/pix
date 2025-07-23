@@ -214,7 +214,7 @@
                 {
                   "id": "70c20e08-e620-43b1-9012-582be199dfd8",
                   "type": "text",
-                  "content": "<p>Pour créer un deepfake, un logiciel d’intelligence artificielle n’a pas besoin de beaucoup d’informations en entrée (une photo, un son, une courte vidéo…).</p>"
+                  "content": "<p>Pour créer un deepfake, un logiciel d’intelligence artificielle n’a <strong>pas besoin de beaucoup d’informations</strong> en entrée (une photo, un son, une courte vidéo…).</p>"
                 }
               ]
             },
@@ -257,7 +257,7 @@
     },
     {
       "id": "fb72268d-e7c4-4d58-9ee8-9ac5dcd86218",
-      "type": "activity",
+      "type": "discovery",
       "title": "Pourquoi créer un deepfake",
       "components": [
         {
@@ -460,7 +460,7 @@
           "element": {
             "id": "de260e53-8fc3-482c-94ba-7c43560306d9",
             "type": "text",
-            "content": "<p>Récapitulons ensemble. 🎯</p><ul> <li>Un deepfake est un <strong>média hyper réaliste mais faux&nbsp;: il est créé grâce à l’intelligence artificielle</strong>. Un deepfake est difficile à détecter. 🔎</li><li>Un deepfake demande peu de matériel et de compétence pour être créé. Il y en a donc<strong> beaucoup qui circulent</strong> en ligne. ⚠️</li><li>Un deepfake est <strong>souvent créé avec une intention malveillante</strong>&nbsp;: pour faire circuler de fausses informations, cyberharceler, arnaquer ou manipuler. 🧠</li><li>Au moindre doute face à média, il ne faut pas le partager immédiatement. <strong>Vérifiez d'abord sa source et s'il est vrai</strong>. ℹ️</li>   </ul><p>🤔 <strong>Bon à savoir&nbsp;:</strong><br>Pour limiter le risque de vous retrouver dans un deepfake, évitez de partager des vidéos, des images de vous ou des enregistrements de votre voix.</p>"
+            "content": "<p>Récapitulons ensemble. 🎯</p><ul> <li>Un deepfake est un <strong>média hyper réaliste mais faux&nbsp;: il est créé grâce à l’intelligence artificielle</strong>. Un deepfake est difficile à détecter. 🔎</li><li>Un deepfake demande peu de matériel et de compétence pour être créé. Il y en a donc<strong> beaucoup qui circulent</strong> en ligne. ⚠️</li><li>Un deepfake est <strong>souvent créé avec une intention malveillante</strong>&nbsp;: pour faire circuler de fausses informations, cyberharceler, arnaquer ou manipuler. 🧠</li><li>Au moindre doute face à média, il ne faut pas le partager immédiatement. <strong>Vérifiez d'abord sa source et s'il est vrai</strong>. ℹ️</li>   </ul><p><br>🤔 <strong>Bon à savoir&nbsp;:</strong><br>Pour limiter le risque de vous retrouver dans un deepfake, évitez de partager des vidéos, des images de vous ou des enregistrements de votre voix.</p>"
           }
         }
       ]
