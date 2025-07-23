@@ -633,7 +633,7 @@
                   "altText": ""
                 },
                 "proposalA": "vrai",
-                "proposalB": "Ffaux",
+                "proposalB": "faux",
                 "solution": "B"
               }
             ]
