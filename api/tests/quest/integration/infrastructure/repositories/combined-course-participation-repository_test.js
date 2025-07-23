@@ -18,7 +18,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       });
 
       //then
-      const [participation] = await knex('quest_participations').where({
+      const [participation] = await knex('combined_course_participations').where({
         organizationLearnerId,
         questId,
       });
@@ -43,7 +43,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       await combinedCourseParticipationRepository.save({ organizationLearnerId, questId });
 
       // then
-      const [participation] = await knex('quest_participations').where({
+      const [participation] = await knex('combined_course_participations').where({
         organizationLearnerId,
         questId,
       });

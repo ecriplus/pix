@@ -26,15 +26,13 @@ const OrganizationLearnerLoggerContext = {
 };
 
 const CombinedCourseParticipationStatuses = {
-  NOT_STARTED: 'not-started',
-  STARTED: 'started',
-  COMPLETED: 'completed',
+  STARTED: 'STARTED',
+  COMPLETED: 'COMPLETED',
 };
 
 const CombinedCourseStatuses = {
+  ...CombinedCourseParticipationStatuses,
   NOT_STARTED: 'NOT_STARTED',
-  STARTED: 'STARTED',
-  COMPLETED: 'COMPLETED',
 };
 
 export {

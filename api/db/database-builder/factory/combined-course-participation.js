@@ -24,7 +24,7 @@ const buildCombinedCourseParticipation = function ({
   };
 
   databaseBuffer.pushInsertable({
-    tableName: 'quest_participations',
+    tableName: 'combined_course_participations',
     values,
   });
 
