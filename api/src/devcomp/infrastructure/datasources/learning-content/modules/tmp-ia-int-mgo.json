@@ -655,109 +655,117 @@
           }
         },
         {
-          "type": "element",
-          "element": {
-            "id": "cf0523d9-b4f8-4e94-abd5-0bc9e40145e4",
-            "type": "qcu",
-            "instruction": "<p>Pendant l'étape de <strong>pré-entraînement</strong>, les IA génératives apprennent à produire du texte et à créer la suite d'un texte.&nbsp;</p><p>De quoi a-t-on besoin pour cette étape ?</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "<p>des milliards de textes très variés</p>",
-                "feedback": {
-                  "state": "Bonne réponse ! 🎉",
-                  "diagnosis": "<p>Effectivement, le pré-entraînement nécessite des quantités astronomiques de textes très variés.</p>"
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "7f96ac82-49dc-4f78-9b07-a573201f251c",
+                  "type": "qcu",
+                  "instruction": "<p>Pendant l'étape de <strong>pré-entraînement</strong>, les IA génératives apprennent à produire du texte et à créer la suite d'un texte.&nbsp;</p>\n<p>De quoi a-t-on besoin pour cette étape ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>Des milliards de textes très variés.</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse ! 🎉</p>",
+                        "diagnosis": "<p>Effectivement, le pré-entraînement nécessite des quantités astronomiques de textes très variés.</p>"
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>Une liste des phrases les plus appréciées par les utilisateurs.</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Lors du pré-entraînement, on ne cherche pas encore à satisfaire les utilisateurs, on ne cherche qu'à produire du texte cohérent.</p>"
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>Un dictionnaire et une encyclopédie.</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Lors du pré-entraînement, on veut juste produire du texte, et si le texte contient des absurdités ce n'est pas vraiment un problème à ce stade.</p>"
+                      }
+                    }
+                  ],
+                  "solution": "1"
                 }
-              },
-              {
-                "id": "2",
-                "content": "<p>une liste des phrases les plus appréciées par les utilisateurs</p>",
-                "feedback": {
-                  "state": "Mauvaise réponse.",
-                  "diagnosis": "<p>Lors du pré-entraînement, on ne cherche pas encore à satisfaire les utilisateurs, on ne cherche qu'à produire du texte cohérent.</p>"
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "f8e1674d-4d8e-45d5-9436-227ae64021a7",
+                  "type": "qcu",
+                  "instruction": "<p>Pendant l'étape de <strong>pré-entraînement</strong>, les IA génératives apprennent à produire du texte et à créer la suite d'un texte.&nbsp;</p>\n<p>De quoi a-t-on besoin pour cette étape ?</p>",
+                  "proposals": [
+                    {
+                      "id": "",
+                      "content": "<p>Des milliards de conversations tirées des réseaux sociaux.</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Lors de la phase d'ajustement, l'IA générative a déjà ingéré des milliards de textes pendant le pré-entraînement.  Pour lui apprendre à discuter avec les utilisateurs, on doit montrer à l'IA générative des exemples de cette tâche sélectionnés pour leur qualité.</p>"
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>Une liste de règles de grammaire.</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Ce n'est pas un programme qui suit des règles. Pour lui apprendre à discuter avec les utilisateurs, on doit montrer à l'IA générative des exemples.</p>"
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>Des textes spécifiques sélectionnés par des humains.</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse ! 🎉</p>",
+                        "diagnosis": "<p>Effectivement, pour lui apprendre à discuter avec les utilisateurs, on doit fournir à l'IA générative des exemples de ce qu'elle va reproduire, donc des exemples de conversations que l'on aura sélectionnés pour leur qualité.</p>"
+                      }
+                    }
+                  ],
+                  "solution": "3"
                 }
-              },
-              {
-                "id": "3",
-                "content": "<p>un dictionnaire et une encyclopédie</p>",
-                "feedback": {
-                  "state": "Mauvaise réponse.",
-                  "diagnosis": "<p>Lors du pré-entraînement, on veut juste produire du texte, et si le texte énonce des absurdités ce n'est pas vraiment un problème à ce stade.</p>"
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "dbf20a47-869f-4580-ac66-60b640f40f21",
+                  "type": "qcu",
+                  "instruction": "<p>Pendant l'étape de <strong>pré-entraînement</strong>, les IA génératives apprennent à produire du texte et à créer la suite d'un texte.&nbsp;</p>\n<p>De quoi a-t-on besoin pour cette étape ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>Une liste de mots vulgaires à ne pas dire.</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>On peut donner des listes de mots interdits aux IA génératives, pour se conformer aux réglementations des différents pays par exemple. Mais ce n'est pas de cette façon qu'elles apprennent à produire des textes qui plaisent aux utilisateurs.</p>"
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>Des données sur les préférences des utilisateurs.</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse ! 🎉</p>",
+                        "diagnosis": "<p>Effectivement, les retours des utilisateurs sur les réponses des IA génératives leur permettent de s'aligner avec les attentes des utilisateurs.</p>"
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>La liste des règles universelles de la politesse.</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Cette liste n'existe pas, la politesse varie selon les contextes d'utilisation. Chaque logiciel d'IA générative va respecter des règles de politesse apprises à partir de données produites par les utilisateurs, ou via des réglages spécifiques sur chaque outil.</p>"
+                      }
+                    }
+                  ],
+                  "solution": "2"
                 }
-              }
-            ],
-            "solution": "1"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "4b58e6a5-d565-4677-a9ab-4b4ac8d6a009",
-            "type": "qcu",
-            "instruction": "<p>Pendant l'étape&nbsp;d'<strong>ajustement</strong>, les IA génératives apprennent à produire du texte avec un certain&nbsp;style ou format, comme  une&nbsp;conversation ou une lettre de motivation.</p><p>De quoi a-t-on besoin pour cette étape ?</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "<p>des milliards de conversations tirées des réseaux sociaux</p>",
-                "feedback": {
-                  "state": "Mauvaise réponse",
-                  "diagnosis": "<p>Lors de la phase d'ajustement, l'IA générative a déjà ingéré des milliards de textes pendant le pré-entraînement.  Pour lui apprendre à discuter avec les utilisateurs, on doit montrer à l'IA générative des exemples de cette tâche spécifique.</p>"
-                }
-              },
-              {
-                "id": "2",
-                "content": "<p>une liste de règles de grammaire</p>",
-                "feedback": {
-                  "state": "Mauvaise réponse.",
-                  "diagnosis": "<p>Ce n'est pas un programme qui suit des règles. Pour lui apprendre à discuter avec les utilisateurs, on doit montrer à l'IA générative des exemples.</p>"
-                }
-              },
-              {
-                "id": "3",
-                "content": "<p>des textes spécifiques sélectionnés par des humains</p>",
-                "feedback": {
-                  "state": "Bonne réponse ! 🎉",
-                  "diagnosis": "<p>Effectivement, pour lui apprendre à discuter avec les utilisateurs, on doit fournir à l'IA générative des exemples de ce qu'elle va reproduire, donc des exemples de conversations que l'on aura sélectionnés.</p>"
-                }
-              }
-            ],
-            "solution": "3"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "bd4eace5-94a6-403b-8de0-a0066d55306f",
-            "type": "qcu",
-            "instruction": "<p>Pendant l'étape&nbsp;d'<strong>alignement</strong>, les IA génératives apprennent à produire du texte qui plaît aux utilisateurs. </p><p>De quoi a-t-on besoin pour cette étape ?</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "<p>une liste de mots vulgaires à ne pas dire</p>",
-                "feedback": {
-                  "state": "Mauvaise réponse.",
-                  "diagnosis": "<p>On peut donner des listes de mots interdits aux IA génératives, pour se conformer aux réglementations des différents pays par exemple. Mais ce n'est pas de cette façon qu'elles apprennent à produire des textes qui plaisent aux utilisateurs.</p>"
-                }
-              },
-              {
-                "id": "2",
-                "content": "<p>des données sur les préférences des utilisateurs</p>",
-                "feedback": {
-                  "state": "Bonne réponse ! 🎉",
-                  "diagnosis": "<p>Effectivement, les retours des utilisateurs sur les réponses des IA génératives leur permettent de s'aligner avec les attentes des utilisateurs.</p>"
-                }
-              },
-              {
-                "id": "3",
-                "content": "<p>la liste des règles universelles de la politesse</p>",
-                "feedback": {
-                  "state": "Mauvaise réponse",
-                  "diagnosis": "<p>Cette liste n'existe pas, la politesse varie selon les contextes d'utilisation. Chaque logiciel d'IA générative va respecter des règles de politesse apprises à partir de données produites par les utilisateurs, ou via des réglages spécifiques sur chaque outil.</p>"
-                }
-              }
-            ],
-            "solution": "2"
-          }
+              ]
+            }
+          ]
         }
       ]
     },
