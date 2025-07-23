@@ -5,6 +5,7 @@ import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { modifier } from 'ember-modifier';
@@ -13,15 +14,12 @@ import Joi from 'joi';
 import Card from '../card';
 
 export default class SmartRandomParams extends Component {
+  @service locale;
+
   @tracked errors = {};
   @tracked campaignId = 1;
 
-  acceptedLocales = [
-    { value: 'en', label: 'en' },
-    { value: 'fr', label: 'fr' },
-    { value: 'fr-fr', label: 'fr-fr' },
-    { value: 'nl', label: 'nl' },
-  ];
+  challengeLocaleOptions = this.locale.pixChallengeLocales.map((locale) => ({ value: locale, label: locale }));
   skillsExample = [{ id: 'skillId', name: '@requete2', difficulty: 3 }];
   challengesExample = [
     {
@@ -61,7 +59,7 @@ export default class SmartRandomParams extends Component {
           name: Joi.string().required(),
         },
         locales: Joi.array()
-          .items(Joi.string().valid(...this.acceptedLocales.map((locale) => locale.value)))
+          .items(Joi.string().valid(...this.locale.pixChallengeLocales))
           .required(),
       })
       .min(1)
@@ -220,7 +218,7 @@ export default class SmartRandomParams extends Component {
       >
         <:label>ID de l'assessment</:label>
       </PixInput>
-      <PixSelect @options={{this.acceptedLocales}} @onChange={{this.updateLocaleValue}} @value={{@locale}}>
+      <PixSelect @options={{this.challengeLocaleOptions}} @onChange={{this.updateLocaleValue}} @value={{@locale}}>
         <:label>Langue de l'utilisateur</:label>
       </PixSelect>
     </Card>
