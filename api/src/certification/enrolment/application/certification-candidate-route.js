@@ -95,6 +95,35 @@ const register = async function (server) {
     },
     {
       method: 'GET',
+      path: '/api/admin/sessions/{sessionId}/certification-candidates',
+      config: {
+        validate: {
+          params: Joi.object({
+            sessionId: identifiersType.sessionId,
+          }),
+        },
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        handler: certificationCandidateController.getSessionCandidates,
+        tags: ['api', 'sessions', 'certification-candidates'],
+        notes: [
+          'Cette route est restreinte aux utilisateurs authentifiés',
+          'Elle retourne les candidats de certification inscrits à la session.',
+        ],
+      },
+    },
+    {
+      method: 'GET',
       path: '/api/certification-candidates/{certificationCandidateId}',
       config: {
         validate: {
@@ -191,6 +220,35 @@ const register = async function (server) {
         notes: [
           'Cette route est restreinte aux utilisateurs authentifiés',
           "Elle permet de modifier les informations d'un candidat",
+        ],
+      },
+    },
+    {
+      method: 'GET',
+      path: '/api/admin/certification-candidates/{certificationCandidateId}/timeline',
+      config: {
+        validate: {
+          params: Joi.object({
+            certificationCandidateId: identifiersType.certificationCandidateId,
+          }),
+        },
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        handler: certificationCandidateController.getTimeline,
+        tags: ['api', 'certification-candidates'],
+        notes: [
+          'Cette route est restreinte aux utilisateurs authentifiés',
+          "Elle permet de voir la liste des évènement durant la certification d'un candidat",
         ],
       },
     },

@@ -750,6 +750,23 @@
         }
       }
     },
+    "candidate": {
+      "code": "Event",
+      "events": {
+        "CandidateCertifiableEvent": "Candidate is certifiable",
+        "CandidateCreatedEvent": "Candidate added to the session",
+        "CandidateEndScreenEvent": "Certification completed (end screen viewed)",
+        "CandidateNotCertifiableEvent": "Candidate not certifiable (Pix Core)",
+        "CandidateReconciledEvent": "Candidate reconciled to a user",
+        "CertificationEndedEvent": "Certification ended",
+        "CertificationStartedEvent": "Certification started",
+        "ComplementaryCertifiableEvent": "Candidate eligible to complementary",
+        "ComplementaryNotCertifiableEvent": "Candidate not eligible to complementary"
+      },
+      "metadata": "Metadata",
+      "title": "Candidate's timeline",
+      "when": "Date"
+    },
     "certification-centers": {
       "archive-confirmation-modal": {
         "attachment": "Le rattachement et l'invitation de nouvelles personnes seront bloqués",
@@ -965,6 +982,23 @@
       }
     },
     "sessions": {
+      "candidates": {
+        "candidate": {
+          "birth-date": "Date of birth",
+          "birth-date-example": "dd/mm/yyyy",
+          "firstname": "First name",
+          "id": "ID candidat",
+          "lastname": "Last name",
+          "selected-subscriptions": "Subscriptions"
+        },
+        "caption": "Candidats",
+        "empty-result": "No result",
+        "subscriptions": {
+          "complementary": "{complementaryCertificationId} complementary",
+          "core": "Pix Certification",
+          "dual-core-clea": "Double Certification CléA Numérique"
+        }
+      },
       "informations": {
         "actions": {
           "download-certificates": "Download certificates"

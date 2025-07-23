@@ -1,5 +1,6 @@
 import { certificationCandidateController } from '../../../../../src/certification/enrolment/application/certification-candidate-controller.js';
 import { EditedCandidate } from '../../../../../src/certification/enrolment/domain/models/EditedCandidate.js';
+import { CandidateTimeline } from '../../../../../src/certification/enrolment/domain/models/timeline/CandidateTimeline.js';
 import { usecases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
 import { normalize } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
@@ -102,6 +103,36 @@ describe('Unit | Controller | certification-candidate-controller', function () {
     });
   });
 
+  describe('#getSessionCandidates', function () {
+    it('should return session candidates', async function () {
+      // given
+      const sessionId = 1;
+      const sessionCandidates = ['sessionCandidates'];
+      const sessionCandidatesJsonAPI = ['sessionCandidatesJsonAPI'];
+      const request = {
+        params: { sessionId },
+      };
+      sinon.stub(usecases, 'getEnrolledCandidatesInSession');
+      usecases.getEnrolledCandidatesInSession
+        .withArgs({
+          sessionId,
+        })
+        .resolves(sessionCandidates);
+      const enrolledCandidateSerializer = {
+        serialize: sinon.stub(),
+      };
+      enrolledCandidateSerializer.serialize.resolves(sessionCandidatesJsonAPI);
+
+      // when
+      const response = await certificationCandidateController.getEnrolledCandidates(request, hFake, {
+        enrolledCandidateSerializer,
+      });
+
+      // then
+      expect(response).to.deep.equal(sessionCandidatesJsonAPI);
+    });
+  });
+
   describe('#updateEnrolledCandidate', function () {
     it('should call the usecase with correct data and return 204 NoContent', async function () {
       // given
@@ -131,6 +162,37 @@ describe('Unit | Controller | certification-candidate-controller', function () {
           accessibilityAdjustmentNeeded: request.payload.data.attributes['accessibility-adjustment-needed'],
         }),
       });
+    });
+  });
+
+  describe('#getTimeline', function () {
+    it('should return timeline', async function () {
+      // given
+      const certificationCandidateId = 12;
+      const request = {
+        params: { certificationCandidateId: 12 },
+      };
+      sinon.stub(usecases, 'getCandidateTimeline');
+      usecases.getCandidateTimeline.resolves(
+        new CandidateTimeline({
+          sessionId: 1,
+          certificationCandidateId: 2,
+        }),
+      );
+      const timelineSerializer = {
+        serialize: sinon.stub(),
+      };
+      const jsonApi = Symbol('timeline');
+      timelineSerializer.serialize.resolves(jsonApi);
+
+      // when
+      const response = await certificationCandidateController.getTimeline(request, hFake, {
+        timelineSerializer,
+      });
+
+      // then
+      expect(usecases.getCandidateTimeline).to.have.been.calledOnceWithExactly({ certificationCandidateId });
+      expect(response).to.deep.equal(jsonApi);
     });
   });
 });

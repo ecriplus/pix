@@ -750,6 +750,23 @@
         }
       }
     },
+    "candidate": {
+      "code": "Évènement",
+      "events": {
+        "CandidateCertifiableEvent": "Candidat certifiable",
+        "CandidateCreatedEvent": "Candidat inscrit en session",
+        "CandidateEndScreenEvent": "Certification complétée (Écran de fin vu)",
+        "CandidateNotCertifiableEvent": "Candidat non certifiable (Pix Coeur)",
+        "CandidateReconciledEvent": "Candidat réconcilié à un compte utilisateur",
+        "CertificationEndedEvent": "Fin de la certification",
+        "CertificationStartedEvent": "Entrée en certification",
+        "ComplementaryCertifiableEvent": "Candidat éligible a sa complémentaire",
+        "ComplementaryNotCertifiableEvent": "Candidat non éligible à sa complémentaire"
+      },
+      "metadata": "Metadata",
+      "title": "Journal d'évènements",
+      "when": "Date"
+    },
     "certification-centers": {
       "archive-confirmation-modal": {
         "attachment": "Le rattachement et l'invitation de nouvelles personnes seront bloqués",
@@ -965,6 +982,23 @@
       }
     },
     "sessions": {
+      "candidates": {
+        "candidate": {
+          "birth-date": "Date de naissance",
+          "birth-date-example": "jj/mm/aaaa",
+          "firstname": "Prénom",
+          "id": "ID candidat",
+          "lastname": "Nom",
+          "selected-subscriptions": "Inscrit à"
+        },
+        "caption": "Candidats",
+        "empty-result": "Aucun résultat",
+        "subscriptions": {
+          "complementary": "Complémentaire {complementaryCertificationId}",
+          "core": "Certification Pix",
+          "dual-core-clea": "Double Certification CléA Numérique"
+        }
+      },
       "informations": {
         "actions": {
           "download-certificates": "Télécharger les certificats"
