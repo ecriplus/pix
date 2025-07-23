@@ -467,42 +467,34 @@
           "type": "element",
           "element": {
             "id": "cdcfa627-0948-463f-b658-c6fa5a8164fa",
-            "type": "qcu-declarative",
+            "type": "qcu",
             "instruction": "<p>À votre avis, quelle réponse choisiraient la plupart des utilisateurs ?</p>",
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>la réponse 1</p>",
+                "content": "<p>La réponse 1.</p>",
                 "feedback": {
-                  "state": "",
+                  "state": "<p>Bonne réponse ! \uD83C\uDF89</p>",
                   "diagnosis": "<p>Et oui ! Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
                 }
               },
               {
                 "id": "2",
-                "content": "<p>la réponse 2</p>",
+                "content": "<p>La réponse 2.</p>",
                 "feedback": {
-                  "state": "",
-                  "diagnosis": "<p>Et non ! Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
+                  "state": "Mauvaise réponse.",
+                  "diagnosis": "<p>Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
                 }
               },
               {
                 "id": "3",
-                "content": "<p>la réponse 3</p>",
+                "content": "<p>La réponse 3.</p>",
                 "feedback": {
-                  "state": "",
-                  "diagnosis": "<p>Et non ! Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
-                }
-              },
-              {
-                "id": "4",
-                "content": "<p>Je ne sais pas.</p>",
-                "feedback": {
-                  "state": "",
-                  "diagnosis": "<p>En fait, les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
+                  "state": "Mauvaise réponse.",
+                  "diagnosis": "<p>Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
                 }
               }
-            ]
+            ],"solution": "3"
           }
         }
       ]
