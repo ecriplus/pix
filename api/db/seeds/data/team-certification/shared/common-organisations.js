@@ -6,11 +6,7 @@ import { Membership } from '../../../../../src/shared/domain/models/Membership.j
 import { LANGUAGES_CODE } from '../../../../../src/shared/domain/services/language-service.js';
 import { usecases as teamUsecases } from '../../../../../src/team/domain/usecases/index.js';
 import { acceptPixOrgaTermsOfService } from '../../common/tooling/legal-documents.js';
-import {
-  SHARED_ORGANIZATION_USER_ID,
-  SHARED_PRO_ORGANIZATION_EXTERNAL_ID,
-  SHARED_SCO_ORGANIZATION_EXTERNAL_ID,
-} from './constants.js';
+import { SHARED_ORGANIZATION_USER_ID } from './constants.js';
 
 /**
  * Default Certification organizations
@@ -27,12 +23,11 @@ export class CommonOrganizations {
       this.sco = {};
       const organizationMember = await new CommonOrganizations({ databaseBuilder }).#initOrgaMember();
 
-      // Organization
       const organization = new OrganizationForAdmin({
-        name: 'Certification PRO organization',
+        name: 'Certification SCO Managing students organization',
         type: CenterTypes.SCO,
         isManagingStudents: true,
-        externalId: SHARED_SCO_ORGANIZATION_EXTERNAL_ID,
+        externalId: 'SCO_MANAGING_STUDENTS_EXTERNAL_ID',
       });
 
       const scoOrganization = await organizationalEntitiesUsecases.createOrganization({
@@ -61,12 +56,11 @@ export class CommonOrganizations {
       this.pro = {};
       const organizationMember = await new CommonOrganizations({ databaseBuilder }).#initOrgaMember();
 
-      // Organization
       const organization = new OrganizationForAdmin({
         name: 'Certification PRO organization',
         type: CenterTypes.PRO,
         isManagingStudents: false,
-        externalId: SHARED_PRO_ORGANIZATION_EXTERNAL_ID,
+        externalId: 'PRO_EXTERNAL_ID',
       });
 
       const proOrganization = await organizationalEntitiesUsecases.createOrganization({

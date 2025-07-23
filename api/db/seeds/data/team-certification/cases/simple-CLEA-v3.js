@@ -22,7 +22,7 @@ import {
 import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
 import { CommonOrganizations } from '../shared/common-organisations.js';
 import {
-  DOUBLE_CERTIFICATION_CLEA_CERTIFICATION_CENTER_EXTERNAL_ID,
+  CLEA_CERTIFICATION_CENTER_ID,
   PUBLISHED_DOUBLE_CERTIFICATION_CLEA_SESSION,
   STARTED_DOUBLE_CERTIFICATION_CLEA_SESSION,
 } from '../shared/constants.js';
@@ -99,10 +99,10 @@ export class CleaV3Seed {
   async #addCertifCenter({ organizationMember }) {
     const certificationCenter = await organizationalEntitiesUsecases.createCertificationCenter({
       certificationCenter: new CertificationCenter({
-        id: DOUBLE_CERTIFICATION_CLEA_CERTIFICATION_CENTER_EXTERNAL_ID,
+        id: CLEA_CERTIFICATION_CENTER_ID,
         name: 'CLEA V3 Certification Center',
         type: certificationCenterTypes.PRO,
-        externalId: DOUBLE_CERTIFICATION_CLEA_CERTIFICATION_CENTER_EXTERNAL_ID,
+        externalId: 'CLEA_V3_EXTERNAL_ID',
         createdAt: new Date('2024-01-30'),
         habilitations: [ComplementaryCertificationKeys.CLEA],
       }),

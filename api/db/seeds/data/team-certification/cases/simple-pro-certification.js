@@ -15,12 +15,7 @@ import { normalize } from '../../../../../src/shared/infrastructure/utils/string
 import { usecases as teamUsecases } from '../../../../../src/team/domain/usecases/index.js';
 import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
 import { CommonOrganizations } from '../shared/common-organisations.js';
-import {
-  PRO_CERTIFICATION_CENTER_EXTERNAL_ID,
-  PRO_CERTIFICATION_CENTER_ID,
-  PUBLISHED_PRO_SESSION,
-  STARTED_PRO_SESSION,
-} from '../shared/constants.js';
+import { PRO_CERTIFICATION_CENTER_ID, PUBLISHED_PRO_SESSION, STARTED_PRO_SESSION } from '../shared/constants.js';
 import addSession from '../tools/add-session.js';
 import publishSessionWithValidatedCertification from '../tools/publish-session-with-validated-certification.js';
 
@@ -39,8 +34,11 @@ export class ProSeed {
   }
 
   async create() {
-    const organizationMember = await this.#addOrganization();
-    const { certificationCenter, certificationCenterMember } = await this.#addCertifCenter({ organizationMember });
+    const { organization, organizationMember } = await this.#addOrganization();
+    const { certificationCenter, certificationCenterMember } = await this.#addCertifCenter({
+      organization,
+      organizationMember,
+    });
     const certifiableUser = await this.#addCertifiableUser();
 
     /**
@@ -67,17 +65,19 @@ export class ProSeed {
   }
 
   async #addOrganization() {
-    const { organizationMember } = await CommonOrganizations.getPro({ databaseBuilder: this.databaseBuilder });
-    return organizationMember;
+    const { organization, organizationMember } = await CommonOrganizations.getPro({
+      databaseBuilder: this.databaseBuilder,
+    });
+    return { organization, organizationMember };
   }
 
-  async #addCertifCenter({ organizationMember }) {
+  async #addCertifCenter({ organization, organizationMember }) {
     const certificationCenter = await organizationalEntitiesUsecases.createCertificationCenter({
       certificationCenter: new CertificationCenter({
         id: PRO_CERTIFICATION_CENTER_ID,
         name: 'PRO Certification Center',
         type: certificationCenterTypes.PRO,
-        externalId: PRO_CERTIFICATION_CENTER_EXTERNAL_ID,
+        externalId: organization.externalId,
         createdAt: new Date('2022-01-30'),
         habilitations: [],
       }),

@@ -14,12 +14,7 @@ import { normalize } from '../../../../../src/shared/infrastructure/utils/string
 import { usecases as teamUsecases } from '../../../../../src/team/domain/usecases/index.js';
 import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
 import { CommonOrganizations } from '../shared/common-organisations.js';
-import {
-  PUBLISHED_SCO_SESSION,
-  SCO_CERTIFICATION_CENTER_EXTERNAL_ID,
-  SCO_CERTIFICATION_CENTER_ID,
-  STARTED_SCO_SESSION,
-} from '../shared/constants.js';
+import { PUBLISHED_SCO_SESSION, SCO_CERTIFICATION_CENTER_ID, STARTED_SCO_SESSION } from '../shared/constants.js';
 import addSession from '../tools/add-session.js';
 import publishSessionWithValidatedCertification from '../tools/publish-session-with-validated-certification.js';
 
@@ -41,7 +36,7 @@ export class ScoManagingStudent {
 
   async create() {
     const { organization, organizationMember } = await this.#addOrganization();
-    const { certificationCenter } = await this.#addCertifCenter({ organizationMember });
+    const { certificationCenter } = await this.#addCertifCenter({ organization, organizationMember });
     const { certifiableUser } = await this.#addCertifiableUser({ organization });
 
     /**
@@ -80,13 +75,13 @@ export class ScoManagingStudent {
     return { organization, organizationMember };
   }
 
-  async #addCertifCenter({ organizationMember }) {
+  async #addCertifCenter({ organization, organizationMember }) {
     const certificationCenter = await organizationalEntitiesUsecases.createCertificationCenter({
       certificationCenter: new CertificationCenter({
         id: SCO_CERTIFICATION_CENTER_ID,
         name: 'SCO Certification Center',
         type: certificationCenterTypes.SCO,
-        externalId: SCO_CERTIFICATION_CENTER_EXTERNAL_ID,
+        externalId: organization.externalId,
         createdAt: new Date('2022-01-30'),
         habilitations: [],
       }),
@@ -110,7 +105,7 @@ export class ScoManagingStudent {
       firstName: certifiableUser.firstName,
       lastName: certifiableUser.lastName,
       email: certifiableUser.email,
-      division: 'Terminal',
+      division: 'Terminale',
       sex: 'F',
       birthdate: ScoManagingStudent.USER_BIRTHDATE,
       isCertifiable: true,
