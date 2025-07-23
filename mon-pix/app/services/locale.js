@@ -1,3 +1,6 @@
+// This file is used for different front apps and is thus designed to be as generic as possible.
+
+import { getOwner } from '@ember/application';
 import Service, { service } from '@ember/service';
 import ENV from 'mon-pix/config/environment';
 
@@ -19,7 +22,6 @@ export default class LocaleService extends Service {
   @service currentDomain;
   @service intl;
   @service dayjs;
-  @service metrics;
 
   get supportedLocales() {
     return SUPPORTED_LOCALES;
@@ -53,9 +55,14 @@ export default class LocaleService extends Service {
   }
 
   setCurrentLocale(locale) {
-    this.metrics.context.locale = locale;
     this.intl.setLocale(locale);
     this.dayjs.setLocale(locale);
+
+    // metricsService may not be available for the different front apps
+    const metricsService = getOwner(this).lookup('service:metrics');
+    if (metricsService) {
+      metricsService.context.locale = locale;
+    }
   }
 
   detectBestLocale({ language, user }) {

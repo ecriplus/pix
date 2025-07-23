@@ -1,3 +1,6 @@
+// This file is used for different front apps and is thus designed to be as generic as possible.
+
+import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import ENV from 'mon-pix/config/environment';
 import { module, test } from 'qunit';
@@ -32,8 +35,11 @@ module('Unit | Services | locale', function (hooks) {
     sinon.stub(intlService, 'primaryLocale');
     sinon.stub(intlService, 'setLocale');
 
+    class metricsServiceStub extends Service {
+      context = {};
+    }
+    this.owner.register('service:metrics', metricsServiceStub);
     metricsService = this.owner.lookup('service:metrics');
-    sinon.stub(metricsService, 'context').value({});
   });
 
   module('acceptLanguageHeader', function () {
