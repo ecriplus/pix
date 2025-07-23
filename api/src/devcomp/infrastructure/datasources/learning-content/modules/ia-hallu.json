@@ -722,7 +722,7 @@
                 {
                   "id": "95d84a4d-2ee5-4e6a-96b6-de148a586781",
                   "type": "image",
-                  "url": "Pour chacun des exemples d’erreurs de logiciels d’IA génératives, ci-dessous, indiquez la source d'erreur correspondante.",
+                  "url": "https://assets.pix.org/draft/modules/hallucinations/erreursia5-Djoko.jpg",
                   "alt": "Extrait d'un échange sur un logiciel d'IA générative, contenu détaillé dans l'alternative textuelle.",
                   "alternativeText": "<p>Question utilisateur&nbsp;: Comment va le tennisman Djokovic ?</p><p>Réponse du logiciel d'IA générative&nbsp;: Novak Djokovic va bien, il continue de performer à un niveau très élevé sur le circuit ATP. Ses récents résultats montrent qu'il reste l'un des meilleurs joueurs du monde. Il a eu quelques problèmes de santé et des blessures par le passé, mais il semble s'être bien rétabli.</p>",
                   "legend": "",
@@ -772,7 +772,7 @@
                 {
                   "id": "29f0994f-8dfb-41c8-b4a4-45fa0e289814",
                   "type": "image",
-                  "url": "Léonie a vérifié, à la date où elle a posé la question, le sportif s’était gravement blessé la veille.",
+                  "url": "https://assets.pix.org/draft/modules/hallucinations/erreursia6-emoji.jpg",
                   "alt": "Extrait d'un échange sur un logiciel d'IA générative, contenu détaillé dans l'alternative textuelle.",
                   "alternativeText": "<p>Question utilisateur&nbsp;:&nbsp;Peux-tu me montrer l'émoji hippocampe ?</p><p>Réponse de l'IA&nbsp;: 🦞</p><p>Deuxième question utilisateur&nbsp;:&nbsp;Tu es sûr ?</p><p>Réponse de l'IA&nbsp;:&nbsp;Oups c'est un homard. Voici l'émoji hippocampe 🦑</p>",
                   "legend": "",
@@ -822,7 +822,7 @@
                 {
                   "id": "5944e2ca-cb95-4cdc-9d7c-74741421dd43",
                   "type": "image",
-                  "url": "Pour vous aider à identifier la cause de l'erreur, vous pouvez relire plus haut. 👆 N'hésitez pas à réessayer.",
+                  "url": "https://assets.pix.org/draft/modules/hallucinations/erreursia7-source.jpg",
                   "alt": "Extrait d'un échange sur un logiciel d'IA générative, contenu détaillé dans l'alternative textuelle.",
                   "alternativeText": "<p>Question utilisateur&nbsp;: Donne moi un article en français sur le traitement des eaux pluviales, d’une revue scientifique, rédigée au format APA 7e édition.</p><p>Réponse de l'IA&nbsp;:&nbsp;Voici un article traitant du traitement des eaux pluviales, formaté selon APA 7e.<br><strong>Barra, M., Houeix, K., Hemminki, J., &amp; Grandin, G. </strong>(2019).&nbsp;<em>Gestion des eaux pluviales et biodiversité urbaine&nbsp;: état de la contamination et préconisations</em>.&nbsp;<strong>Annales de la Floristique Régionale Île‑de‑France</strong>, 10–33.</p>",
                   "legend": "",
