@@ -701,7 +701,7 @@
                   "instruction": "<p>Pendant l'étape de <strong>pré-entraînement</strong>, les IA génératives apprennent à produire du texte et à créer la suite d'un texte.&nbsp;</p>\n<p>De quoi a-t-on besoin pour cette étape ?</p>",
                   "proposals": [
                     {
-                      "id": "",
+                      "id": "1",
                       "content": "<p>Des milliards de conversations tirées des réseaux sociaux.</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
