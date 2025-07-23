@@ -32,6 +32,7 @@ function stopPropagation(event) {
 
 export default class List extends Component {
   @service intl;
+  @service locale;
   @service store;
   @service notifications;
   @tracked showDeletionModal = false;
@@ -47,10 +48,6 @@ export default class List extends Component {
   @action
   toggleDeletionModal() {
     this.showDeletionModal = !this.showDeletionModal;
-  }
-
-  get currentLocale() {
-    return this.intl.primaryLocale;
   }
 
   @action
@@ -200,7 +197,7 @@ export default class List extends Component {
           @destinationId={{paginationId}}
           @onChange={{reset}}
           @pagination={{@campaigns.meta}}
-          @locale={{this.currentLocale}}
+          @locale={{this.locale.currentLocale}}
         />
         <Filters
           @destinationId={{filtersId}}

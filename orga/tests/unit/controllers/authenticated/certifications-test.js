@@ -181,8 +181,8 @@ module('Unit | Controller | authenticated/certifications', function (hooks) {
           isFranceDomain: true,
         };
 
-        controller.intl = {
-          primaryLocale: 'fr',
+        controller.locale = {
+          currentLocale: 'fr',
         };
 
         controller.model = {
@@ -244,8 +244,8 @@ module('Unit | Controller | authenticated/certifications', function (hooks) {
             isFranceDomain: false,
           };
 
-          controller.intl = {
-            primaryLocale: 'en',
+          controller.locale = {
+            currentLocale: 'en',
           };
 
           controller.model = {

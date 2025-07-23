@@ -19,13 +19,13 @@ export default class ParticipantsList extends Component {
   @service notifications;
   @service currentUser;
   @service store;
-  @service intl;
+  @service locale;
 
   @tracked isModalOpen = false;
   @tracked participationToDelete;
 
   get currentLocale() {
-    return this.intl.primaryLocale;
+    return this.locale.currentLocale;
   }
 
   get canDeleteParticipation() {

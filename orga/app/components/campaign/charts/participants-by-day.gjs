@@ -16,6 +16,7 @@ export default class ParticipantsByDay extends Component {
   @service store;
   @service intl;
   @service dayjs;
+  @service locale;
 
   @tracked days = 0;
   @tracked startedDatasets = [];
@@ -94,7 +95,7 @@ export default class ParticipantsByDay extends Component {
       animation: false,
       responsive: true,
       maintainAspectRatio: false,
-      locale: this.intl.primaryLocale,
+      locale: this.locale.currentLocale,
       scales: {
         x: {
           grid: {

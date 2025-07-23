@@ -8,11 +8,11 @@ const ENGLISH_LOCALE = 'en';
 
 export default class TermOfServiceController extends Controller {
   @service currentUser;
-  @service intl;
+  @service locale;
   @service router;
 
-  @tracked isDutchLocale = this.intl.primaryLocale === DUTCH_LOCALE;
-  @tracked isEnglishLocale = this.intl.primaryLocale === ENGLISH_LOCALE;
+  @tracked isDutchLocale = this.locale.currentLocale === DUTCH_LOCALE;
+  @tracked isEnglishLocale = this.locale.currentLocale === ENGLISH_LOCALE;
 
   @action
   async submit() {

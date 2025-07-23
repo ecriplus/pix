@@ -62,7 +62,7 @@ module('Unit | Service | url', function (hooks) {
         const service = this.owner.lookup('service:url');
         const expectedUrl = 'https://pix.fr/mentions-legales';
         service.currentDomain = { isFranceDomain: true };
-        service.intl = { primaryLocale: 'fr' };
+        service.locale = { currentLocale: 'fr' };
 
         // when
         const url = service.legalNoticeUrl;
@@ -75,23 +75,24 @@ module('Unit | Service | url', function (hooks) {
     module('when domain is pix.org', function () {
       [
         {
-          primaryLocale: 'en',
+          currentLocale: 'en',
           expectedUrl: 'https://pix.org/en/legal-notice',
         },
         {
-          primaryLocale: 'fr',
+          currentLocale: 'fr',
           expectedUrl: 'https://pix.org/fr/mentions-legales',
         },
         {
-          primaryLocale: 'nl',
+          currentLocale: 'nl',
           expectedUrl: 'https://pix.org/nl-BE/wettelijke-vermeldingen',
         },
-      ].forEach(({ primaryLocale, expectedUrl }) => {
-        test(`returns "pix.org" ${primaryLocale} url when locale is ${primaryLocale}`, function (assert) {
+      ].forEach(({ currentLocale, expectedUrl }) => {
+        test(`returns "pix.org" ${currentLocale} url when locale is ${currentLocale}`, function (assert) {
           // given
           const service = this.owner.lookup('service:url');
+          sinon.stub(service.locale, 'currentLocale').value(currentLocale);
+
           service.currentDomain = { isFranceDomain: false };
-          service.intl = { primaryLocale };
 
           // when
           const url = service.legalNoticeUrl;
@@ -126,7 +127,7 @@ module('Unit | Service | url', function (hooks) {
         expectedUrl: 'https://app.pix.org/mot-de-passe-oublie?lang=nl',
       },
     ].forEach(({ locale, expectedUrl, currentDomain }) => {
-      test(`returns forgotten password url url when locale is ${locale} and domain is ${currentDomain}`, function (assert) {
+      test(`returns forgotten password url when locale is ${locale} and domain is ${currentDomain}`, function (assert) {
         // given
         const urlService = this.owner.lookup('service:url');
         class CurrentDomainServiceStub extends Service {
@@ -136,9 +137,7 @@ module('Unit | Service | url', function (hooks) {
         }
         this.owner.register('service:currentDomain', CurrentDomainServiceStub);
 
-        urlService.intl = {
-          primaryLocale: locale,
-        };
+        sinon.stub(urlService.locale, 'currentLocale').value(locale);
 
         // when
         const url = urlService.forgottenPasswordUrl;
@@ -156,7 +155,8 @@ module('Unit | Service | url', function (hooks) {
         const service = this.owner.lookup('service:url');
         const expectedUrl = 'https://pix.fr/politique-protection-donnees-personnelles-app';
         service.currentDomain = { isFranceDomain: true };
-        service.intl = { primaryLocale: 'fr' };
+
+        sinon.stub(service.locale, 'currentLocale').value('fr');
 
         // when
         const cguUrl = service.dataProtectionPolicyUrl;
@@ -169,23 +169,23 @@ module('Unit | Service | url', function (hooks) {
     module('when domain is pix.org', function () {
       [
         {
-          primaryLocale: 'en',
+          currentLocale: 'en',
           expectedUrl: 'https://pix.org/en/personal-data-protection-policy',
         },
         {
-          primaryLocale: 'fr',
+          currentLocale: 'fr',
           expectedUrl: 'https://pix.org/fr/politique-protection-donnees-personnelles-app',
         },
         {
-          primaryLocale: 'nl',
+          currentLocale: 'nl',
           expectedUrl: 'https://pix.org/nl-BE/beleid-inzake-de-bescherming-van-persoonsgegevens',
         },
-      ].forEach(({ primaryLocale, expectedUrl }) => {
-        test(`returns "pix.org" ${primaryLocale} url when locale is ${primaryLocale}`, function (assert) {
+      ].forEach(({ currentLocale, expectedUrl }) => {
+        test(`returns "pix.org" ${currentLocale} url when locale is ${currentLocale}`, function (assert) {
           // given
           const service = this.owner.lookup('service:url');
           service.currentDomain = { isFranceDomain: false };
-          service.intl = { primaryLocale };
+          sinon.stub(service.locale, 'currentLocale').value(currentLocale);
 
           // when
           const url = service.dataProtectionPolicyUrl;
@@ -204,7 +204,7 @@ module('Unit | Service | url', function (hooks) {
         const service = this.owner.lookup('service:url');
         const expectedUrl = 'https://pix.fr/conditions-generales-d-utilisation';
         service.currentDomain = { isFranceDomain: true };
-        service.intl = { primaryLocale: 'fr' };
+        sinon.stub(service.locale, 'currentLocale').value('fr');
 
         // when
         const url = service.cguUrl;
@@ -217,23 +217,23 @@ module('Unit | Service | url', function (hooks) {
     module('when domain is pix.org', function () {
       [
         {
-          primaryLocale: 'en',
+          currentLocale: 'en',
           expectedUrl: 'https://pix.org/en/terms-and-conditions',
         },
         {
-          primaryLocale: 'fr',
+          currentLocale: 'fr',
           expectedUrl: 'https://pix.org/fr/conditions-generales-d-utilisation',
         },
         {
-          primaryLocale: 'nl',
+          currentLocale: 'nl',
           expectedUrl: 'https://pix.org/nl-BE/algemene-gebruiksvoorwaarden',
         },
-      ].forEach(({ primaryLocale, expectedUrl }) => {
-        test(`returns "pix.org" ${primaryLocale} url when locale is ${primaryLocale}`, function (assert) {
+      ].forEach(({ currentLocale, expectedUrl }) => {
+        test(`returns "pix.org" ${currentLocale} url when locale is ${currentLocale}`, function (assert) {
           // given
           const service = this.owner.lookup('service:url');
           service.currentDomain = { isFranceDomain: false };
-          service.intl = { primaryLocale };
+          sinon.stub(service.locale, 'currentLocale').value(currentLocale);
 
           // when
           const url = service.cguUrl;
@@ -252,7 +252,7 @@ module('Unit | Service | url', function (hooks) {
         const service = this.owner.lookup('service:url');
         const expectedUrl = 'https://pix.fr/accessibilite-pix-orga';
         service.currentDomain = { isFranceDomain: true };
-        service.intl = { primaryLocale: 'fr' };
+        sinon.stub(service.locale, 'currentLocale').value('fr');
 
         // when
         const url = service.accessibilityUrl;
@@ -265,23 +265,23 @@ module('Unit | Service | url', function (hooks) {
     module('when domain is pix.org', function () {
       [
         {
-          primaryLocale: 'en',
+          currentLocale: 'en',
           expectedUrl: 'https://pix.org/en/accessibility-pix-orga',
         },
         {
-          primaryLocale: 'fr',
+          currentLocale: 'fr',
           expectedUrl: 'https://pix.org/fr/accessibilite-pix-orga',
         },
         {
-          primaryLocale: 'nl',
+          currentLocale: 'nl',
           expectedUrl: 'https://pix.org/nl-BE/toegankelijkheid-pix-orga',
         },
-      ].forEach(({ primaryLocale, expectedUrl }) => {
-        test(`returns "pix.org" ${primaryLocale} url when locale is ${primaryLocale}`, function (assert) {
+      ].forEach(({ currentLocale, expectedUrl }) => {
+        test(`returns "pix.org" ${currentLocale} url when locale is ${currentLocale}`, function (assert) {
           // given
           const service = this.owner.lookup('service:url');
           service.currentDomain = { isFranceDomain: false };
-          service.intl = { primaryLocale };
+          sinon.stub(service.locale, 'currentLocale').value(currentLocale);
 
           // when
           const url = service.accessibilityUrl;
@@ -298,7 +298,7 @@ module('Unit | Service | url', function (hooks) {
       // given
       const expectedUrl = 'https://status.pix.org?locale=en';
       const service = this.owner.lookup('service:url');
-      service.intl = { primaryLocale: 'en' };
+      sinon.stub(service.locale, 'currentLocale').value('en');
 
       // when
       const serverStatusUrl = service.serverStatusUrl;
@@ -311,7 +311,7 @@ module('Unit | Service | url', function (hooks) {
       // given
       const expectedUrl = 'https://status.pix.org?locale=fr';
       const service = this.owner.lookup('service:url');
-      service.intl = { primaryLocale: 'fr' };
+      sinon.stub(service.locale, 'currentLocale').value('fr');
 
       // when
       const serverStatusUrl = service.serverStatusUrl;
@@ -324,7 +324,7 @@ module('Unit | Service | url', function (hooks) {
       // given
       const expectedUrl = 'https://status.pix.org?locale=nl';
       const service = this.owner.lookup('service:url');
-      service.intl = { primaryLocale: 'nl' };
+      sinon.stub(service.locale, 'currentLocale').value('nl');
 
       // when
       const serverStatusUrl = service.serverStatusUrl;
@@ -382,7 +382,8 @@ module('Unit | Service | url', function (hooks) {
       test(`returns legal document URL when locale is ${locale} and domain is ${currentDomain}`, function (assert) {
         // given
         const urlService = this.owner.lookup('service:url');
-        urlService.intl = { primaryLocale: locale };
+        sinon.stub(urlService.locale, 'currentLocale').value(locale);
+
         class CurrentDomainServiceStub extends Service {
           isFranceDomain = currentDomain === 'fr';
         }

@@ -10,7 +10,6 @@ const PIX_STATUS_DOMAIN = 'https://status.pix.org';
 export default class Url extends Service {
   @service currentDomain;
   @service currentUser;
-  @service intl;
   @service locale;
 
   SHOWCASE_WEBSITE_LOCALE_PATH = {
@@ -89,7 +88,7 @@ export default class Url extends Service {
   }
 
   _getCurrentLanguage() {
-    return this.intl.primaryLocale;
+    return this.locale.currentLocale;
   }
 
   get pixJuniorSchoolUrl() {
@@ -105,7 +104,7 @@ export default class Url extends Service {
     if (this.currentDomain.isFranceDomain) {
       return PIX_FR_DOMAIN;
     }
-    const currentLocale = this.intl.primaryLocale;
+    const currentLocale = this.locale.currentLocale;
     let locale;
     if (currentLocale == 'nl') {
       locale = 'nl-BE';

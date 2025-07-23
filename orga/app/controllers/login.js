@@ -4,13 +4,12 @@ import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
 export default class LoginController extends Controller {
-  @service intl;
+  @service locale;
   @service dayjs;
   @service currentDomain;
   @service router;
-  @service locale;
 
-  @tracked selectedLanguage = this.intl.primaryLocale;
+  @tracked selectedLanguage = this.locale.currentLocale;
 
   get isInternationalDomain() {
     return !this.currentDomain.isFranceDomain;

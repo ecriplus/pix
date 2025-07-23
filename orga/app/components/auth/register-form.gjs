@@ -55,6 +55,7 @@ export default class RegisterForm extends Component {
   @service session;
   @service store;
   @service intl;
+  @service locale;
   @service url;
 
   @tracked isLoading = false;
@@ -65,7 +66,7 @@ export default class RegisterForm extends Component {
   @tracked cguValidationMessage = null;
   @tracked errorMessage = null;
   @tracked validation = new SignupFormValidation();
-  @tracked selectedLanguage = this.intl.primaryLocale;
+  @tracked selectedLanguage = this.locale.currentLocale;
   @tracked apiErrors = API_ERRORS;
 
   get cguUrl() {

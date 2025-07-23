@@ -19,8 +19,8 @@ import SupLearnerFilters from './sup-learner-filters';
 import TableRow from './table-row';
 
 export default class ListItems extends Component {
-  @service intl;
   @service currentUser;
+  @service locale;
   @tracked selectedStudent = null;
   @tracked showDeletionModal = false;
   @tracked isShowingEditStudentNumberModal = false;
@@ -39,10 +39,6 @@ export default class ListItems extends Component {
         };
       });
     });
-  }
-
-  get currentLocale() {
-    return this.intl.primaryLocale;
   }
 
   get showCheckbox() {
@@ -173,7 +169,7 @@ export default class ListItems extends Component {
           @destinationId={{paginationId}}
           @onChange={{reset}}
           @pagination={{@students.meta}}
-          @locale={{this.currentLocale}}
+          @locale={{this.locale.currentLocale}}
         />
 
         <Filters
