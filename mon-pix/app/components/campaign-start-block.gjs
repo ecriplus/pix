@@ -64,6 +64,7 @@ export default class CampaignStartBlock extends Component {
   @service session;
   @service featureToggles;
   @service intl;
+  @service pixMetrics;
 
   get showWarningMessage() {
     return this.session.isAuthenticated && !this.currentUser.user.isAnonymous;
@@ -109,6 +110,13 @@ export default class CampaignStartBlock extends Component {
   }
 
   @action
+  trackAccessForUser() {
+    if (this.args.campaign.isSimplifiedAccess && !this.session.isAuthenticated) {
+      this.pixMetrics.trackEvent({ 'pix-event-name': 'StartSimplifiedAccessCampaignAsAnonymousClick' });
+    }
+  }
+
+  @action
   disconnect() {
     this.session.invalidate();
   }
@@ -116,6 +124,7 @@ export default class CampaignStartBlock extends Component {
   @action
   start(event) {
     event.preventDefault();
+    this.trackAccessForUser();
     this.args.startCampaignParticipation();
   }
 }
