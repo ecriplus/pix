@@ -51,7 +51,7 @@
                 {
                   "userName": "Nathan",
                   "direction": "outgoing",
-                  "content": "Je me suis servi de ChatGPT pour préparer la soirée d'anniversaire de ma sœur, mais ça a été la catastrophe... Elle veut plus me parler !"
+                  "content": "Je me suis servi de ChatGPT pour préparer la soirée d'anniversaire de ma sœur, mais ça a été la catastrophe... Elle veut plus me parler !"
                 },
                 {
                   "userName": "Asma",
@@ -262,7 +262,7 @@
                 {
                   "id": "a2f3a3ca-b439-472e-86bb-69af0c01f178",
                   "type": "text",
-                  "content": "<p>D’autres erreurs sont inventées par l’IA. L’IA générative répond souvent “sans savoir”, par prédiction. Elle génère la réponse qui lui paraît la plus probable. On les appelle ces erreurs des hallucinations.</p>"
+                  "content": "<p>D’autres erreurs sont inventées par l’IA. L’IA générative répond souvent “sans savoir”, <strong>par prédiction</strong>. Elle génère la réponse qui lui paraît la plus probable. On appelle ces erreurs <strong>des hallucinations</strong>.</p><p><br>Par exemple, quand on demande à un logiciel d’IA générative de nous donner l’auteur d’une citation, il peut l’attribuer à quelqu’un d’autre. 🤷</p>"
                 }
               ]
             },
@@ -271,7 +271,7 @@
                 {
                   "id": "7c22a815-14fb-4bba-aa7f-d292f9708aaf",
                   "type": "text",
-                  "content": "<p>Certaines demandes d’utilisateurs peuvent contenir des erreurs ou être farfelues.</p>"
+                  "content": "<p>Certaines <strong>demandes d’utilisateurs</strong> peuvent <strong>contenir des erreurs ou être farfelues</strong>.</p><p><br>Par exemple, en 2024 ChatGPT a répondu à la question «&nbsp;Quel est le record du monde de traversée de la Manche à pied ?&nbsp;» en citant un nageur allemand et en inventant un temps de 14 heures et 51 minutes.</p>"
                 },
                 {
                   "id": "dfbbd712-d034-4c91-819a-4431aec8beb2",
@@ -325,13 +325,13 @@
               },
               "conversation2": {
                 "title": "ChatGPT 4o - Juillet 2025",
-                "llmName": "Chat GPT"
+                "llmName": "ChatGPT"
               },
               "userName": "Utilisateur",
               "messages": [
                 {
                   "direction": "outbound",
-                  "content": "Combien il y a de pays qui commencent par la lettre \"V\" ?"
+                  "content": "Combien il y a de pays qui commencent par la lettre \"V\" ?"
                 },
                 [
                   {
@@ -340,7 +340,7 @@
                   },
                   {
                     "direction": "inbound",
-                    "content": "Il y a 4 pays dont le nom commence par la lettre \"V\" : <ul><li>Vanuatu</li><li>Vatican</li><li>Venezuela</li><li>Vietnam</li></ul> "
+                    "content": "Il y a 4 pays dont le nom commence par la lettre \"V\" : <ul><li>Vanuatu</li><li>Vatican</li><li>Venezuela</li><li>Vietnam</li></ul> "
                   }
                 ]
               ]
@@ -352,29 +352,29 @@
           "element": {
             "id": "c28617dd-2134-4551-8157-b7beef89ab35",
             "type": "qcu",
-            "instruction": "<p>À votre avis, pourquoi Chat GPT 4 ne fait plus d'erreur ?</p>",
+            "instruction": "<p>À votre avis, pourquoi y a-t-il une différence entre les réponses de ChatPT 3 et de ChatGPT 4 ?</p>",
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>Chat GPT 3 n’était pas encore disponible dans ces 4 pays</p>",
+                "content": "<p>ChatGPT 3 n’était pas encore disponible dans ces 4 pays, il ne les a pas compté.</p>",
                 "feedback": {
-                  "state": "<p>Mauvaise réponse</p>",
+                  "state": "<p>Pas exactement.</p>",
                   "diagnosis": "<p>Les logiciels d’IA générative sont fréquemment mis à jour par les ingénieurs. Ces mises à jour permettent de corriger des erreurs.</p>"
                 }
               },
               {
                 "id": "2",
-                "content": "<p>Ces pays n’existaient pas entre 2023 et 2024</p>",
+                "content": "<p>En 2023 il n’y avait aucun pays commençant par la lettre V.</p>",
                 "feedback": {
-                  "state": "<p>Mauvaise réponse</p>",
+                  "state": "<p>Pas exactement.</p>",
                   "diagnosis": "<p>Les logiciels d’IA générative sont fréquemment mis à jour par les ingénieurs. Ces mises à jour permettent de corriger des erreurs.</p>"
                 }
               },
               {
                 "id": "3",
-                "content": "<p>L’erreur a été corrigée avec la mise à jour de Chat GPT 4</p>",
+                "content": "<p>L’erreur a été corrigée avec la mise à jour de ChatGPT 4.</p>",
                 "feedback": {
-                  "state": "<p>Bonne réponse</p>",
+                  "state": "<p>Tout à fait !</p>",
                   "diagnosis": "<p>Les logiciels d’IA générative sont fréquemment mis à jour par les ingénieurs. Ces mises à jour permettent de corriger des erreurs.</p>"
                 }
               }
