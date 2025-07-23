@@ -168,7 +168,7 @@
           "element": {
             "id": "898ab86a-15d3-468f-a0fd-eb1644e7aef6",
             "type": "text",
-            "content": "<p>Un chatbot est capable de répondre à des demandes écrites, comme si on écrivait à quelqu'un.<br>Certains chatbots, comme chatGPT ou Le Chat, peuvent <strong>répondre de façon pertinente sur des sujets très variés</strong> (transports, visites, cuisine …). Ils sont basés sur de l'<strong>intelligence artificielle générative</strong>.</p>"
+            "content": "<p>Un chatbot est capable de répondre à des demandes écrites, comme si on écrivait à quelqu'un.<br>Certains chatbots, comme chatGPT ou Le Chat, peuvent <strong>répondre de façon pertinente sur des sujets très variés</strong> (transports, visites, cuisine…). Ils sont basés sur de l'<strong>intelligence artificielle générative</strong>.</p>"
           }
         },
         {
@@ -183,7 +183,7 @@
           "element": {
             "id": "984bbfce-c558-432a-9746-22fee645e643",
             "type": "text",
-            "content": "<p><strong>💡 Bon à savoir</strong><br>L'« Intelligence artificielle » (IA) générative désigne les techniques utilisées par les logiciels capables de générer du texte, des images, des vidéos ou des sons, en réponse à des demandes (appelées « requêtes » , ou « prompt » en anglais).</p>"
+            "content": "<p><strong>💡 Bon à savoir</strong><br>L'« Intelligence artificielle » (IA) générative désigne les techniques utilisées par les logiciels capables de générer du texte, des images, des vidéos ou des sons, en réponse à des demandes (appelées « requêtes », ou « prompt » en anglais).</p>"
           }
         }
       ]
@@ -225,7 +225,7 @@
                 {
                   "id": "1f0f74ed-dc6b-45fb-ae7e-df796992b80e",
                   "type": "text",
-                  "content": "<p>Votre crêpe est peut-être au « chocolat », « sucre », « fromage » ou autre !<br></p>"
+                  "content": "<p>Votre crêpe est peut-être au « chocolat », « sucre », « fromage » ou autre !<br></p>"
                 },
                 {
                   "id": "18df7355-9087-46a8-9e83-5669206e67c2",
