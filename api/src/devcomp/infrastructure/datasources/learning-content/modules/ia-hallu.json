@@ -881,38 +881,38 @@
           "element": {
             "id": "ffd4ab68-15fb-497d-bf67-9820d17feee3",
             "type": "qcu-declarative",
-            "instruction": "<p>Et vous, avez-vous déjà rencontré une erreur ou une hallucination de l’IA ?</p>",
+            "instruction": "<p>Maintenant que vous avez joué ce module, que feriez vous si un logiciel d'IA générative vous disait que la Statue de la liberté se trouve à Tokyo ?&nbsp;🗽</p>",
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>oui</p>",
+                "content": "<p>Vous réservez vos billets d’avion immédiatement. ✈️</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>à rédiger</p>"
+                  "diagnosis": "<p>Attention ! Vous pourriez être déçu par votre voyage si vous partez pour voir la Statue de la liberté à Tokyo.&nbsp;Vérifier l'information serait une bonne idée !</p>"
                 }
               },
               {
                 "id": "2",
-                "content": "<p>non</p>",
+                "content": "<p>Vous vérifiez dans une encyclopédie. 📖</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>à rédiger</p>"
+                  "diagnosis": "<p>Effectivement, c'est un bon réflexe en cas de doute !&nbsp;</p>"
                 }
               },
               {
                 "id": "3",
-                "content": "<p>Je ne sais pas.</p>",
+                "content": "<p>Vous supposez que la Statue de la liberté a été déplacée. 🧳</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>à rédiger</p>"
+                  "diagnosis": "<p>Si un monument aussi connu était déplacé, il y aurait de nombreuses informatiosn à ce sujet. Vérifier l'information serait une bonne idée !&nbsp;</p>"
                 }
               },
               {
                 "id": "4",
-                "content": "<p>Pas concerné.</p>",
+                "content": "<p>Vous cherchez sur internet une confirmation. 🔎</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>à rédiger</p>"
+                  "diagnosis": "<p>Effectivement, c'est un bon réflexe en cas de doute !</p>"
                 }
               }
             ]
