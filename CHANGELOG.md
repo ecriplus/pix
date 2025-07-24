@@ -1,5 +1,29 @@
 # Pix Changelog
 
+# [5.166.0](https://github.com/1024pix/pix/compare/v5.165.0...v5.166.0) (2025-07-24)
+
+### :rocket: Amélioration
+
+- [#12939](https://github.com/1024pix/pix/pull/12939) : revue classification des grains Module deepfakes 
+- [#12859](https://github.com/1024pix/pix/pull/12859) : WIP Créa du module IA : Elles hallucinent, ces IA ! 
+- [#12887](https://github.com/1024pix/pix/pull/12887) Afficher le référentiel cadre actuel d'une complémentaire (PIX-18346). 
+- [#12790](https://github.com/1024pix/pix/pull/12790) Amélioration module tmp-ia-fonctionnement-debut (édito + ajout conv en web component) 
+- [#12946](https://github.com/1024pix/pix/pull/12946) Améliorer le contenu des bandeaux lorsque l'organisation n'a plus de places (PIX-18837) 
+- [#12943](https://github.com/1024pix/pix/pull/12943) Automatiquement fermer les PRs en draft sans activité depuis +30 jours 
+- [#12941](https://github.com/1024pix/pix/pull/12941) Corriger les styles du QAB 
+- [#12907](https://github.com/1024pix/pix/pull/12907) Modifs mineures sur le module IA vous avez dit IA 
+- [#12906](https://github.com/1024pix/pix/pull/12906) Module apprentissage IA intermediaire s30 
+- [#12955](https://github.com/1024pix/pix/pull/12955) V2 module Jeux vidéo pour coller au nouveau pattern 
+
+### :bug: Correction
+
+- [#12953](https://github.com/1024pix/pix/pull/12953) Redirige l'utilisateur connecté sur la page de réconciliation lorsqu'il accède à un parcours combiné (PIX-18835). 
+
+### :building_construction: Tech
+
+- [#12942](https://github.com/1024pix/pix/pull/12942) :sparkles: Réplication des données de calibrations du `datawharehouse` vers le `datamart` (PIX-18842) 
+- [#12945](https://github.com/1024pix/pix/pull/12945) Renommer la table quest_participations et ajouter les contraintes nécessaires (PIX-18841)
+
 # [5.165.0](https://github.com/1024pix/pix/compare/v5.164.0...v5.165.0) (2025-07-23)
 
 ### :rocket: Amélioration
