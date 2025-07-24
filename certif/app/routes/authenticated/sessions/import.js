@@ -5,16 +5,16 @@ export default class ImportRoute extends Route {
   @service router;
   @service currentUser;
   @service currentDomain;
-  @service intl;
+  @service locale;
 
   beforeModel() {
     const topLevelDomain = this.currentDomain.getExtension();
-    const currentLanguage = this.intl.primaryLocale;
-    const isOrgTldAndEnglishCurrentLanguage = topLevelDomain === 'org' && currentLanguage === 'en';
+    const currentLocale = this.locale.currentLocale;
+    const isOrgTldAndEnglishCurrentLocale = topLevelDomain === 'org' && currentLocale === 'en';
 
     if (
       this.currentUser.currentAllowedCertificationCenterAccess.isScoManagingStudents ||
-      isOrgTldAndEnglishCurrentLanguage
+      isOrgTldAndEnglishCurrentLocale
     ) {
       return this.router.replaceWith('authenticated.sessions');
     }

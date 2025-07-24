@@ -31,13 +31,13 @@ module('Unit | Component | no-session-panel', function (hooks) {
           class CurrentDomainStub extends Service {
             getExtension = sinon.stub().returns('org');
           }
-          class IntlStub extends Service {
-            primaryLocale = 'fr';
+          class LocaleStub extends Service {
+            currentLocale = 'fr';
           }
 
           this.owner.register('service:current-domain', CurrentDomainStub);
           this.owner.register('service:current-user', CurrentUserStub);
-          this.owner.register('service:intl', IntlStub);
+          this.owner.register('service:locale', LocaleStub);
 
           // when
           const isRenderImportTemplateButton = component.shouldRenderImportTemplateButton;
@@ -61,13 +61,13 @@ module('Unit | Component | no-session-panel', function (hooks) {
           class CurrentDomainStub extends Service {
             getExtension = sinon.stub().returns('org');
           }
-          class IntlStub extends Service {
-            primaryLocale = 'en';
+          class LocaleStub extends Service {
+            currentLocale = 'en';
           }
 
           this.owner.register('service:current-domain', CurrentDomainStub);
           this.owner.register('service:current-user', CurrentUserStub);
-          this.owner.register('service:intl', IntlStub);
+          this.owner.register('service:locale', LocaleStub);
 
           // when
           const isRenderImportTemplateButton = component.shouldRenderImportTemplateButton;
@@ -93,13 +93,13 @@ module('Unit | Component | no-session-panel', function (hooks) {
         class CurrentDomainStub extends Service {
           getExtension = sinon.stub().returns('fr');
         }
-        class IntlStub extends Service {
-          primaryLocale = 'fr';
+        class LocaleStub extends Service {
+          currentLocale = 'fr';
         }
 
         this.owner.register('service:current-domain', CurrentDomainStub);
         this.owner.register('service:current-user', CurrentUserStub);
-        this.owner.register('service:intl', IntlStub);
+        this.owner.register('service:locale', LocaleStub);
 
         // when
         const isRenderImportTemplateButton = component.shouldRenderImportTemplateButton;

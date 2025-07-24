@@ -6,16 +6,16 @@ import { t } from 'ember-intl';
 export default class SessionListHeader extends Component {
   @service currentUser;
   @service currentDomain;
-  @service intl;
+  @service locale;
 
   get shouldRenderImportTemplateButton() {
     const topLevelDomain = this.currentDomain.getExtension();
-    const currentLanguage = this.intl.primaryLocale;
-    const isOrgTldAndEnglishCurrentLanguage = topLevelDomain === 'org' && currentLanguage === 'en';
+    const currentLocale = this.locale.currentLocale;
+    const isOrgTldAndEnglishCurrentLocale = topLevelDomain === 'org' && currentLocale === 'en';
 
     return (
       !this.currentUser.currentAllowedCertificationCenterAccess.isScoManagingStudents &&
-      !isOrgTldAndEnglishCurrentLanguage
+      !isOrgTldAndEnglishCurrentLocale
     );
   }
 

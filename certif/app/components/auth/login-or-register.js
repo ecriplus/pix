@@ -6,11 +6,10 @@ import { tracked } from '@glimmer/tracking';
 export default class LoginOrRegister extends Component {
   @service currentDomain;
   @service locale;
-  @service intl;
   @service router;
 
   @tracked displayRegisterForm = true;
-  @tracked selectedLanguage = this.intl.primaryLocale;
+  @tracked selectedLanguage = this.locale.currentLocale;
 
   get isInternationalDomain() {
     return !this.currentDomain.isFranceDomain;

@@ -16,10 +16,10 @@ module('Unit | Component | session-list', function (hooks) {
   module('#currentLocale', function () {
     test('should set currentLocale to primaryLocale', async function (assert) {
       // given
-      class IntlStub extends Service {
-        primaryLocale = 'fr';
+      class LocaleStub extends Service {
+        currentLocale = 'fr';
       }
-      this.owner.register('service:intl', IntlStub);
+      this.owner.register('service:locale', LocaleStub);
 
       // when
       const locale = await component.currentLocale;

@@ -6,7 +6,7 @@ import { t } from 'ember-intl';
 export default class NoSessionPanel extends Component {
   @service currentUser;
   @service currentDomain;
-  @service intl;
+  @service locale;
 
   get isScoManagingStudents() {
     return this.currentUser.currentAllowedCertificationCenterAccess.isScoManagingStudents;
@@ -14,10 +14,10 @@ export default class NoSessionPanel extends Component {
 
   get shouldRenderImportTemplateButton() {
     const topLevelDomain = this.currentDomain.getExtension();
-    const currentLanguage = this.intl.primaryLocale;
-    const isOrgTldAndEnglishCurrentLanguage = topLevelDomain === 'org' && currentLanguage === 'en';
+    const currentLocale = this.locale.currentLocale;
+    const isOrgTldAndEnglishCurrentLocale = topLevelDomain === 'org' && currentLocale === 'en';
 
-    return !this.isScoManagingStudents && !isOrgTldAndEnglishCurrentLanguage;
+    return !this.isScoManagingStudents && !isOrgTldAndEnglishCurrentLocale;
   }
 
   <template>

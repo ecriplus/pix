@@ -3,7 +3,6 @@ import { service } from '@ember/service';
 import { htmlSafe, isHTMLSafe } from '@ember/template';
 
 export default class textWithMultipleLang extends Helper {
-  @service intl;
   @service locale;
 
   compute(params) {
@@ -11,7 +10,7 @@ export default class textWithMultipleLang extends Helper {
     if (isHTMLSafe(text)) {
       text = text.toString();
     }
-    const lang = this.intl.primaryLocale;
+    const lang = this.locale.currentLocale;
     const listOfLocales = this.locale.supportedLocales;
     let outputText = _clean(text, listOfLocales);
 
