@@ -2,7 +2,7 @@ export const getOrganizationToJoin = async function ({
   code,
   organizationToJoinRepository,
   campaignRepository,
-  questRepository,
+  combinedCourseRepository,
 }) {
   const campaign = await campaignRepository.getByCode(code);
 
@@ -10,9 +10,9 @@ export const getOrganizationToJoin = async function ({
     return organizationToJoinRepository.get({ id: campaign.organizationId });
   }
 
-  const quest = await questRepository.getByCode({ code });
+  const combinedCourse = await combinedCourseRepository.getByCode({ code });
 
   return organizationToJoinRepository.get({
-    id: quest.organizationId,
+    id: combinedCourse.organizationId,
   });
 };

@@ -3,17 +3,17 @@ export async function startCombinedCourse({
   code,
   combinedCourseParticipantRepository,
   combinedCourseRepository,
-  questRepository,
+  combinedCourseParticipationRepository,
   userRepository,
 }) {
-  const quest = await questRepository.getByCode({ code });
+  const combinedCourse = await combinedCourseRepository.getByCode({ code });
   const user = await userRepository.findById({ userId });
 
   const organizationLearnerId = await combinedCourseParticipantRepository.getOrCreateNewOrganizationLearner({
     userId,
-    organizationId: quest.organizationId,
+    organizationId: combinedCourse.organizationId,
     organizationLearner: { firstName: user.firstName, lastName: user.lastName },
   });
 
-  await combinedCourseRepository.save({ organizationLearnerId, questId: quest.id });
+  await combinedCourseParticipationRepository.save({ organizationLearnerId, questId: combinedCourse.id });
 }

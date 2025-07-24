@@ -1,5 +1,4 @@
 import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
-import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
 import { Quest } from '../../../../../src/quest/domain/models/Quest.js';
 import * as questRepository from '../../../../../src/quest/infrastructure/repositories/quest-repository.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
@@ -121,19 +120,19 @@ describe('Quest | Integration | Repository | quest', function () {
   });
 
   describe('#getByCode', function () {
-    it('should return a combined course if code exists', async function () {
+    it('should return a quest if code exists', async function () {
       // given
       const code = 'SOMETHING';
       const { id: organizationId } = databaseBuilder.factory.buildOrganization();
-      const questId = databaseBuilder.factory.buildQuest({ code, organizationId }).id;
+      const quest = databaseBuilder.factory.buildQuest({ code, organizationId });
       await databaseBuilder.commit();
 
       // when
-      const quest = await questRepository.getByCode({ code });
+      const questResult = await questRepository.getByCode({ code });
 
       // then
-      expect(quest).to.be.an.instanceof(CombinedCourse);
-      expect(quest).to.deep.equal(new CombinedCourse({ ...quest, id: questId }));
+      expect(questResult).to.be.an.instanceof(Quest);
+      expect(questResult).to.deep.equal(new Quest(quest));
     });
 
     it('should throw NotFoundError if quest does not exist', async function () {
