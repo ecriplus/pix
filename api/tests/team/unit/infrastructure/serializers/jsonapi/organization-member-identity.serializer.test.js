@@ -1,4 +1,4 @@
-import { OrganizationMemberIdentity } from '../../../../../../src/shared/domain/models/index.js';
+import { OrganizationMemberIdentity } from '../../../../../../src/team/domain/models/OrganizationMemberIdentity.js';
 import * as serializer from '../../../../../../src/team/infrastructure/serializers/jsonapi/organization-member-identity.serializer.js';
 import { expect } from '../../../../../test-helper.js';
 
