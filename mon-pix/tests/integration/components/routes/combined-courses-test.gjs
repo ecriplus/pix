@@ -45,5 +45,37 @@ module('Integration | Component | combined course', function (hooks) {
       // then
       assert.notOk(screen.queryByRole('button', { name: t('pages.combined-courses.content.start-button') }));
     });
+
+    test('should display diagnostic campaign', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const router = this.owner.lookup('service:router');
+      const combinedCourseItem = store.createRecord('combined-course-item', {
+        id: 1,
+        title: 'ma campagne',
+        reference: 'ABCDIAG1',
+      });
+
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: 'NOT_STARTED',
+        code: 'COMBINIX9',
+      });
+
+      combinedCourse.items.push(combinedCourseItem);
+
+      this.setProperties({ combinedCourse });
+
+      // when
+      const screen = await render(hbs`
+        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+
+      // then
+      assert.ok(screen.getByText('ma campagne'));
+      assert.strictEqual(
+        screen.getByRole('link', { name: 'ma campagne' }).getAttribute('href'),
+        router.urlFor('campaigns', { code: combinedCourseItem.reference }),
+      );
+    });
   });
 });

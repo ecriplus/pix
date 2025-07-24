@@ -87,7 +87,10 @@ module('Acceptance | Combined course | Start Combined course workflow', function
     });
   });
   module('when user is logged in', function () {
+    let campaign;
     let combinedCourse;
+    let combinedCourseItem;
+
     module('when organization is restricted', function (hooks) {
       hooks.beforeEach(async function () {
         const prescritUser = server.create('user', 'withEmail', {
@@ -96,7 +99,13 @@ module('Acceptance | Combined course | Start Combined course workflow', function
         });
 
         await authenticate(prescritUser);
-        combinedCourse = server.create('combined-course', { code: 'COMBINIX1', organizationId: 1 });
+        campaign = server.create('campaign', { code: 'ABCDIAG', organizationId: 1 });
+        combinedCourseItem = server.create('combined-course-item', { title: 'Diagnostique', reference: campaign.code });
+        combinedCourse = server.create('combined-course', {
+          code: 'COMBINIX1',
+          organizationId: 1,
+          items: [combinedCourseItem],
+        });
         server.create('verified-code', { id: 'COMBINIX1', type: 'combined-course', combinedCourse });
         server.create('organization-to-join', { id: 1, isRestricted: true, type: 'SCO', code: combinedCourse.code });
       });
@@ -121,6 +130,25 @@ module('Acceptance | Combined course | Start Combined course workflow', function
 
             //then
             assert.strictEqual(currentURL(), '/organisations/COMBINIX1/prescrit/eleve');
+          });
+        });
+      });
+      module('when user is reconciled', function () {
+        module('when user clicks on campaign item', function () {
+          test('it redirects to campaign landing page', async function (assert) {
+            //given
+            server.create('sco-organization-learner', {
+              campaignCode: campaign.code,
+              organizationId: 1,
+            });
+
+            const screen = await unabortedVisit('/parcours/COMBINIX1');
+
+            //when
+            await click(screen.getByText(combinedCourseItem.title));
+
+            //then
+            assert.strictEqual(currentURL(), '/campagnes/ABCDIAG/presentation');
           });
         });
       });
