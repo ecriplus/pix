@@ -1,4 +1,4 @@
-import { EuropeanNumericLevelFactory } from '../../../../shared/domain/read-models/EuropeanNumericLevelFactory.js';
+import { EuropeanNumericLevelFactory } from './EuropeanNumericLevelFactory.js';
 
 class CpfCertificationResult {
   constructor({
