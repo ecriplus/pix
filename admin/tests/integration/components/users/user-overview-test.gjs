@@ -472,9 +472,9 @@ module('Integration | Component | users | user-overview', function (hooks) {
 
         await clickByName('Langue');
         await screen.findByRole('listbox');
-        assert.dom(screen.getByRole('option', { name: 'Français' })).exists();
-        assert.dom(screen.getByRole('option', { name: 'Anglais' })).exists();
-        assert.dom(screen.getByRole('option', { name: 'Néerlandais' })).exists();
+        assert.dom(screen.getByRole('option', { name: 'fr' })).exists();
+        assert.dom(screen.getByRole('option', { name: 'en' })).exists();
+        assert.dom(screen.getByRole('option', { name: 'nl' })).exists();
 
         await clickByName('Locale');
         await waitFor(async () => {

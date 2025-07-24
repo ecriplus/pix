@@ -35,7 +35,6 @@ export default class UserOverview extends Component {
   @tracked isEditionMode = false;
   @tracked authenticationMethods = [];
 
-  languages = this.references.availableLanguages;
   tooltipTextEmail = this.intl.t('components.users.user-detail-personal-information.actions.copy-email');
   tooltipTextUsername = this.intl.t('components.users.user-detail-personal-information.actions.copy-username');
 
@@ -76,7 +75,7 @@ export default class UserOverview extends Component {
   }
 
   get languageOptions() {
-    return this.languages;
+    return this.locale.pixLanguages.map((language) => ({ value: language, label: language }));
   }
 
   get localeOptions() {
