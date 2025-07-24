@@ -1,4 +1,8 @@
 .sco-whitelist-configuration {
+  .block-layout__actions{
+    display: block;
+  }
+
   &__actions {
     display: flex;
     flex-direction: row;

@@ -39,10 +39,12 @@ export default class ScoWhitelistConfiguration extends Component {
         });
       } else {
         const responseJson = await response.json();
-        const errorKey = responseJson?.errors[0]?.code || 'error';
+        const errorLines = responseJson?.errors[0]?.meta.lineNumbersWithError;
 
         this.pixToast.sendErrorNotification({
-          message: this.intl.t(`pages.administration.certification.sco-whitelist.import.${errorKey}`),
+          message: `${this.intl.t(`pages.administration.certification.sco-whitelist.import.error-csv`, {
+            errorLines: errorLines.join(', '),
+          })}`,
         });
       }
     } catch {
