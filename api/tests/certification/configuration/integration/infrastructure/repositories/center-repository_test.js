@@ -10,25 +10,24 @@ describe('Certification | Configuration | Integration | Repository | center-repo
       const center1BeforeUpdate = databaseBuilder.factory.buildCertificationCenter({
         type: CenterTypes.SCO,
         externalId: whitelistedExternalId1,
-        isScoBlockedAccessWhitelist: false,
         updatedAt: new Date('2024-09-24'),
       });
       const whitelistedExternalId2 = 'SCOUAI';
       const center2BeforeUpdate = databaseBuilder.factory.buildCertificationCenter({
         type: CenterTypes.SCO,
         externalId: whitelistedExternalId2,
-        isScoBlockedAccessWhitelist: false,
         updatedAt: new Date('2024-09-24'),
       });
+      const externalIds = [whitelistedExternalId1, whitelistedExternalId2];
       await databaseBuilder.commit();
 
       // when
-      const numberOfUpdatedLines = await centerRepository.addToWhitelistByExternalIds({
-        externalIds: [whitelistedExternalId1, whitelistedExternalId2],
+      const updatedExternalIds = await centerRepository.addToWhitelistByExternalIds({
+        externalIds: externalIds,
       });
 
       // then
-      expect(numberOfUpdatedLines).to.equal(2);
+      expect(updatedExternalIds).to.deep.equal(externalIds);
       const updatedCenter1 = await knex('certification-centers').where({ id: center1BeforeUpdate.id }).first();
       expect(updatedCenter1.isScoBlockedAccessWhitelist).to.be.true;
       expect(updatedCenter1.updatedAt).to.be.above(center1BeforeUpdate.updatedAt);
@@ -38,25 +37,86 @@ describe('Certification | Configuration | Integration | Repository | center-repo
       expect(updatedCenter2.updatedAt).to.be.above(center2BeforeUpdate.updatedAt);
     });
 
-    it('should not whitelist centers other than SCO', async function () {
+    it('should not update unexisting externalIds', async function () {
       // given
       const whitelistedExternalId1 = '1234ABC';
-      const nonSCOCenterBeforeUpdate = databaseBuilder.factory.buildCertificationCenter({
-        type: CenterTypes.PRO,
+      databaseBuilder.factory.buildCertificationCenter({
+        type: CenterTypes.SCO,
         externalId: whitelistedExternalId1,
-        isScoBlockedAccessWhitelist: false,
-        updatedAt: new Date('2024-09-24'),
       });
+      const whitelistedExternalId2 = 'SCOUAI';
+
+      const externalIds = [whitelistedExternalId1, whitelistedExternalId2];
       await databaseBuilder.commit();
 
       // when
-      await centerRepository.addToWhitelistByExternalIds({
-        externalIds: [whitelistedExternalId1],
+      const updatedExternalIds = await centerRepository.addToWhitelistByExternalIds({
+        externalIds: externalIds,
       });
 
       // then
-      const updatedCenter1 = await knex('certification-centers').where({ id: nonSCOCenterBeforeUpdate.id }).first();
-      expect(updatedCenter1.isScoBlockedAccessWhitelist).to.be.false;
+      expect(updatedExternalIds).to.deep.equal([whitelistedExternalId1]);
+    });
+
+    describe('when center is not SCO', function () {
+      it('should not whitelist this center', async function () {
+        // given
+        const whitelistedExternalId1 = '1234ABC';
+        const nonSCOCenterBeforeUpdate = databaseBuilder.factory.buildCertificationCenter({
+          type: CenterTypes.PRO,
+          externalId: whitelistedExternalId1,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        await centerRepository.addToWhitelistByExternalIds({ externalIds: [whitelistedExternalId1] });
+
+        // then
+        const notScoCenterInDB = await knex('certification-centers').where({ id: nonSCOCenterBeforeUpdate.id }).first();
+        expect(notScoCenterInDB.isScoBlockedAccessWhitelist).to.be.false;
+      });
+    });
+
+    describe('when a center is archived', function () {
+      it('should not whitelist this center', async function () {
+        // given
+        const archivedCenter = databaseBuilder.factory.buildCertificationCenter({
+          type: CenterTypes.SCO,
+          archivedAt: new Date('2024-09-24'),
+        });
+        await databaseBuilder.commit();
+
+        // when
+        await centerRepository.addToWhitelistByExternalIds({ externalIds: [archivedCenter.externalId] });
+
+        // then
+        const archivedCenterInDB = await knex('certification-centers').where({ id: archivedCenter.id }).first();
+        expect(archivedCenterInDB.isScoBlockedAccessWhitelist).to.be.false;
+      });
+    });
+
+    describe('when there are multiple centers with the same external ID in DB', function () {
+      it('should set the centers as whitelisted', async function () {
+        // given
+        const duplicatedExternalId = '1234ABC';
+        databaseBuilder.factory.buildCertificationCenter({
+          type: CenterTypes.SCO,
+          externalId: duplicatedExternalId,
+        });
+        databaseBuilder.factory.buildCertificationCenter({
+          type: CenterTypes.SCO,
+          externalId: duplicatedExternalId,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const updatedExternalIds = await centerRepository.addToWhitelistByExternalIds({
+          externalIds: [duplicatedExternalId],
+        });
+
+        // then
+        expect(updatedExternalIds).to.deep.equal([duplicatedExternalId, duplicatedExternalId]);
+      });
     });
   });
 
