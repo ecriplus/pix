@@ -295,13 +295,13 @@ module('Unit | Services | locale', function (hooks) {
     });
   });
 
-  module('availableLanguagesForSwitcher', function () {
+  module('switcherDisplayedLanguages', function () {
     test('returns available languages for switcher with french first', function (assert) {
       // when
-      const availableLanguagesForSwitcher = localeService.availableLanguagesForSwitcher;
+      const switcherDisplayedLanguages = localeService.switcherDisplayedLanguages;
 
       // then
-      assert.deepEqual(availableLanguagesForSwitcher, [
+      assert.deepEqual(switcherDisplayedLanguages, [
         { label: 'Français', value: 'fr' },
         { label: 'English', value: 'en' },
         { label: 'Nederlands', value: 'nl' },

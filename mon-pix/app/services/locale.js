@@ -64,7 +64,7 @@ export default class LocaleService extends Service {
     return PIX_CHALLENGE_LOCALES;
   }
 
-  get availableLanguagesForSwitcher() {
+  get switcherDisplayedLanguages() {
     const FRENCH_LANGUAGE = 'fr';
     const options = Object.entries(PIX_LANGUAGES)
       .filter(([_, config]) => config.languageSwitcherDisplayed)
