@@ -107,6 +107,7 @@ async function _createProOrganization(databaseBuilder) {
     memberIds: [USER_ID_MEMBER_ORGANIZATION],
     features: [
       { id: FEATURE_MULTIPLE_SENDING_ASSESSMENT_ID },
+      { id: FEATURE_ATTESTATIONS_MANAGEMENT_ID, params: JSON.stringify([ATTESTATIONS.PARENTHOOD]) },
       { id: FEATURE_PLACES_MANAGEMENT_ID },
       { id: FEATURE_COVER_RATE_ID },
       { id: FEATURE_CAMPAIGN_WITHOUT_USER_PROFILE_ID },
