@@ -1,4 +1,6 @@
-// This file is used for different front apps and is thus designed to be as generic as possible.
+// This file is the ORIGINAL file. Copies of it are used in all the fronts.
+// If you need a change, modify the original file and
+// propagate the changes in the copies in all the fronts.
 
 import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
