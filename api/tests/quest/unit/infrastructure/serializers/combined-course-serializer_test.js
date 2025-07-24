@@ -1,12 +1,11 @@
 import { CombinedCourseStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
-import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
 import * as combinedCourseSerializer from '../../../../../src/quest/infrastructure/serializers/combined-course-serializer.js';
-import { expect } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Infrastructure | Serializers | combined-course', function () {
   it('#serialize', function () {
     // given
-    const combinedCourse = new CombinedCourse({ id: 1, name: 'Mon parcours', code: 'COMBINIX1', organizationId: 1 });
+    const combinedCourse = domainBuilder.buildCombinedCourseDetails();
 
     // when
     const serializedCombinedCourse = combinedCourseSerializer.serialize(combinedCourse);
@@ -22,7 +21,22 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
         },
         type: 'combined-courses',
         id: '1',
+        relationships: {
+          items: {
+            data: [{ id: '1', type: 'combined-course-items' }],
+          },
+        },
       },
+      included: [
+        {
+          type: 'combined-course-items',
+          id: '1',
+          attributes: {
+            title: 'diagnostique',
+            reference: 'ABCDIAG1',
+          },
+        },
+      ],
     });
   });
 });
