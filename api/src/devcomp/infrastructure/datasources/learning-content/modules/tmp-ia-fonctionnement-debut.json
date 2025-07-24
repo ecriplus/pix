@@ -5,7 +5,7 @@
   "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
-    "description": "<p>ChatGPT, Gemini ou encore Le Chat sont des logiciels d'Intelligences Artificielles (IA)&nbsp;: un utilisateur peut discuter avec ces IA et avoir des réponses à ses demandes.&nbsp; <br>Ces IA peuvent résumer un texte, inventer des histoires, etc. Et ça, sur presque tous les sujets ! <br>Dans ce module, vous allez découvrir comment un logiciel d'IA générative réussit toujours à donner une réponse à un utilisateur… mais pas forcément la bonne.<br></p>",
+    "description": "<p>ChatGPT, Gemini ou encore Le Chat sont des logiciels d'Intelligences Artificielles (IA) génératives&nbsp;: un utilisateur peut discuter avec ces IA et avoir des réponses à ses demandes.&nbsp; <br>Ces IA peuvent résumer un texte, inventer des histoires, etc. Et ça, sur presque tous les sujets ! <br>Dans ce module, vous allez découvrir comment un logiciel d'IA générative réussit toujours à donner une réponse à un utilisateur… mais pas forcément la bonne.<br></p>",
     "duration": 10,
     "level": "Débutant",
     "objectives": [
@@ -25,7 +25,7 @@
           "element": {
             "id": "bf7e524d-cef5-4cbf-b15d-7a03cfb4195d",
             "type": "text",
-            "content": "<p>Bob utilise chatGPT pour organiser ses prochaines vacances.&nbsp;C’est un logiciel d'IA générative.<br>Voici sa demande&nbsp;:</p>"
+            "content": "<p>Bob utilise ChatGPT pour organiser ses prochaines vacances.&nbsp;C’est un logiciel d'IA générative.<br>Voici sa demande&nbsp;:</p>"
           }
         },
         {
@@ -35,7 +35,7 @@
             "type": "image",
             "url": "https://assets.pix.org/draft/modules/mZ5u4CJ.png",
             "alt": "conversation décrite dans l'alternative textuelle",
-            "alternativeText": "<p>👱 Bob&nbsp;: Je veux organiser des vacances à la mer pour 10 jours. J'habite à Rennes. Donne-moi un coup de main ! </p><p>🤖 chatGPT&nbsp;: ...<br></p>",
+            "alternativeText": "<p>👱 Bob&nbsp;: Je veux organiser des vacances à la mer pour 10 jours. J'habite à Rennes. Donne-moi un coup de main ! </p><p>🤖 ChatGPT&nbsp;: ...<br></p>",
             "legend": "",
             "licence": ""
           }
@@ -60,7 +60,7 @@
                 "content": "<p>« Oui ! à partir de quand veux-tu partir ? ⛵ »</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p><strong>C’est une réponse que pourrait donner chatGPT.</strong> En effet, il faut savoir quand commencent les vacances de Bob pour mieux l’aider !</p>"
+                  "diagnosis": "<p><strong>C’est une réponse que pourrait donner ChatGPT.</strong> En effet, il faut savoir quand commencent les vacances de Bob pour mieux l’aider !</p>"
                 }
               },
               {
@@ -68,7 +68,7 @@
                 "content": "<p>Je ne sais pas.</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Vous avez eu du mal à vous décider ? En tout cas, chatGPT répondrait sûrement quelque chose pour aider Bob à s’organiser.</p>"
+                  "diagnosis": "<p>Vous avez eu du mal à vous décider ? En tout cas, ChatGPT répondrait sûrement quelque chose pour aider Bob à s’organiser.</p>"
                 }
               }
             ],
@@ -87,7 +87,7 @@
           "element": {
             "id": "6b3b7a1f-1245-43fe-bb96-2d5c01a4a30e",
             "type": "text",
-            "content": "<p>Un logiciel d'IA générative comme chatGPT répond souvent de manière pertinente aux demandes des utilisateurs, sur des sujets très variés.&nbsp; <br></p><p>Mais comment ces logiciels fontionnent-ils ? Et comment arrivent-ils à faire cela ? C’est ce que nous allons découvrir ensemble.<br></p>"
+            "content": "<p>Un logiciel d'IA générative comme ChatGPT répond souvent de manière pertinente aux demandes des utilisateurs, sur des sujets très variés.&nbsp; <br></p><p>Mais comment ces logiciels fontionnent-ils ? Et comment arrivent-ils à faire cela ? C’est ce que nous allons découvrir ensemble.<br></p>"
           }
         }
       ]
@@ -201,7 +201,7 @@
           "element": {
             "id": "898ab86a-15d3-468f-a0fd-eb1644e7aef6",
             "type": "text",
-            "content": "<p>Un chatbot est capable de répondre à des demandes écrites, comme si on écrivait à quelqu'un.<br>Certains chatbots, comme chatGPT ou Le Chat, peuvent <strong>répondre de façon pertinente sur des sujets très variés</strong> (transports, visites, cuisine…). Ils sont basés sur de l'<strong>intelligence artificielle générative</strong>.</p>"
+            "content": "<p>Un chatbot est capable de répondre à des demandes écrites, comme si on écrivait à quelqu'un.<br>Certains chatbots, comme ChatGPT ou Le Chat, peuvent <strong>répondre de façon pertinente sur des sujets très variés</strong> (transports, visites, cuisine…). Ils sont basés sur de l'<strong>intelligence artificielle générative</strong>.</p>"
           }
         },
         {
@@ -309,7 +309,7 @@
                 {
                   "id": "fe0257bb-baa6-4c93-8341-4ee38a6a1a25",
                   "type": "qcu",
-                  "instruction": "<p>Pour répondre à un utilisateur, l’IA conversationnelle complète le texte mot après mot. </p><p>Comment sont choisis ces mots  ?</p>",
+                  "instruction": "<p>Pour répondre à un utilisateur, le logiciel d’IA générative complète le texte mot après mot. </p><p>Comment sont choisis ces mots  ?</p>",
                   "proposals": [
                     {
                       "id": "1",
@@ -362,7 +362,7 @@
           "element": {
             "id": "30de711c-6587-4889-98ff-153941624049",
             "type": "text",
-            "content": "<p>Pour répondre, une <strong>IA conversationnelle</strong>, comme chatGPT, <strong>construit sa réponse comme si elle complétait le texte</strong>  de l’utilisateur.&nbsp; </p><p>Pour compléter ce texte, elle choisit le prochain mot selon sa probabilité d'apparaître : plus le mot est probable, plus il y a de chance que l'IA choississe ce mot.</p><p>Elle répète cette méthode <strong>mot après mot</strong>.</p>"
+            "content": "<p>Pour répondre, un logiciel d'<strong>IA générative</strong>, comme ChatGPT, <strong>construit sa réponse comme si il complétait le texte</strong> de l’utilisateur.&nbsp; </p><p>Pour compléter ce texte, il choisit le prochain mot selon sa probabilité d'apparaître : plus le mot est probable, plus il y a de chance que le logiciel choississe ce mot.</p><p>Il répète cette méthode <strong>mot après mot</strong>.</p>"
           }
         },
         {
@@ -484,7 +484,7 @@
           "element": {
             "id": "68e15092-f116-4829-b56a-cbc2501bb272",
             "type": "text",
-            "content": "<p>Si on donne à un logiciel d'IA générative des <strong>milliards de textes variés pour s’entraîner</strong>, il pourra apporter des <strong>réponses pertinentes à presque toutes les demandes</strong> des utilisateurs.&nbsp; </p>\n<p>✔️ Par exemple, chatGPT ou Mistral sont entraînées sur des textes disponibles sur internet&nbsp;: articles Wikipédia, forums, blogs, revues scientifiques…</p><br>"
+            "content": "<p>Si on donne à un logiciel d'IA générative des <strong>milliards de textes variés pour s’entraîner</strong>, il pourra apporter des <strong>réponses pertinentes à presque toutes les demandes</strong> des utilisateurs.&nbsp; </p>\n<p>✔️ Par exemple, ChatGPT ou Mistral sont entraînées sur des textes disponibles sur internet&nbsp;: articles Wikipédia, forums, blogs, revues scientifiques…</p><br>"
           }
         }
       ]
@@ -548,7 +548,7 @@
             "cards": [
               {
                 "id": "4959c494-cf94-4d05-b69c-4735e6b2c5eb",
-                "text": "Les IA conversationnelles sont entraînées uniquement sur les articles de Wikipédia.",
+                "text": "Les logiciels d'IA générative sont entraînées uniquement sur les articles de Wikipédia.",
                 "image": {
                   "url": "",
                   "altText": ""
@@ -604,7 +604,7 @@
             "type": "image",
             "url": "https://assets.pix.org/draft/modules/qQxRoVU.png",
             "alt": "conversation décrite dans l'alternative textuelle",
-            "alternativeText": "<p>🧑 Alba&nbsp;: Je veux créer un logo pour une crêperie. Je cherche la couleur idéale. Aide-moi ! </p><p>🤖 IA conversationnelle&nbsp;: Bien sûr ! Je pense que ton logo devrait être <strong>bleu</strong> !</p>",
+            "alternativeText": "<p>🧑 Alba&nbsp;: Je veux créer un logo pour une crêperie. Je cherche la couleur idéale. Aide-moi ! </p><p>🤖 IA générative&nbsp;: Bien sûr ! Je pense que ton logo devrait être <strong>bleu</strong> !</p>",
             "legend": "",
             "licence": ""
           }
@@ -614,29 +614,29 @@
           "element": {
             "id": "d286eb64-c00f-4dad-bcde-523abd62b31a",
             "type": "qcu",
-            "instruction": "<p>Pourquoi l’IA conversationnelle a-t-elle choisi la couleur bleue&nbsp;?<br></p>",
+            "instruction": "<p>Pourquoi le logiciel d’IA générative a-t-il choisi la couleur bleue&nbsp;?<br></p>",
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>Elle a choisi le mot au hasard.</p>",
+                "content": "<p>Il a choisi le mot au hasard.</p>",
                 "feedback": {
-                  "state": "<p>Mauvaise réponse</p>",
+                  "state": "<p>Mauvaise réponse.</p>",
                   "diagnosis": ""
                 }
               },
               {
                 "id": "2",
-                "content": "<p>Elle a choisi sa couleur préférée.</p>",
+                "content": "<p>Il a choisi sa couleur préférée.</p>",
                 "feedback": {
-                  "state": "<p>Mauvaise réponse</p>",
+                  "state": "<p>Mauvaise réponse.</p>",
                   "diagnosis": ""
                 }
               },
               {
                 "id": "3",
-                "content": "<p>Elle a choisit un mot très probable.</p>",
+                "content": "<p>Il a choisit un mot très probable.</p>",
                 "feedback": {
-                  "state": "<p>Bonne réponse&nbsp;🎉</p>",
+                  "state": "<p>Bonne réponse&nbsp;! 🎉</p>",
                   "diagnosis": ""
                 }
               }
@@ -656,7 +656,7 @@
           "element": {
             "id": "de48659c-5799-4a9f-9d74-3676e78c094b",
             "type": "text",
-            "content": "<p>Pour finir ce module, voyons quelle sera votre bonne résolution pour votre prochaine utilisation de chatGPT, Gemini, Le Chat ou d’une autre IA conversationnelle ! 💫</p>"
+            "content": "<p>Pour finir ce module, voyons quelle sera votre bonne résolution pour votre prochaine utilisation de ChatGPT, Gemini, Le Chat ou d’un autre logiciel d'IA générative&nbsp;! 💫</p>"
           }
         }
       ]
@@ -678,7 +678,7 @@
                 "content": "<p>J’utiliserai les réponses qu’elle me donne, sans les vérifier.</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p><strong>C’est risqué ! </strong></p><p>Les IA conversationnelles répondent de manière souvent intéressante. </p><p>Mais elles ne connaissent pas la signification des mots et il peut y avoir des erreurs dans leurs réponses.</p>"
+                  "diagnosis": "<p><strong>C’est risqué ! </strong></p><p>Les logiciels d'IA générative répondent de manière souvent intéressante. </p><p>Mais ils ne connaissent pas la signification des mots et il peut y avoir des erreurs dans leurs réponses.</p>"
                 }
               },
               {
@@ -686,7 +686,7 @@
                 "content": "<p>Je poserai plusieurs questions pendant la discussion.</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p><strong>C’est un bon réflexe !</strong> </p><p> En demandant des précisions par exemple, vous pourrez avoir une réponse plus précise. </p><p> Vous pouvez aussi demander : «Est-ce que cela est vraiment exact ?».</p>"
+                  "diagnosis": "<p><strong>C’est un bon réflexe !</strong> </p><p> En demandant des précisions par exemple, vous pourrez avoir une réponse plus précise. </p><p> Vous pouvez aussi demander : « Est-ce que cela est vraiment exact ? ».</p>"
                 }
               },
               {
