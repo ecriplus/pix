@@ -58,7 +58,7 @@ module('Unit | Services | locale', function (hooks) {
       const pixLanguages = localeService.pixLanguages;
 
       // then
-      assert.deepEqual(pixLanguages, ['en', 'es', 'fr', 'nl']);
+      assert.deepEqual(pixLanguages, ['fr', 'en', 'nl', 'es']);
     });
   });
 
@@ -302,9 +302,9 @@ module('Unit | Services | locale', function (hooks) {
 
       // then
       assert.deepEqual(switcherDisplayedLanguages, [
-        { label: 'Français', value: 'fr' },
-        { label: 'English', value: 'en' },
-        { label: 'Nederlands', value: 'nl' },
+        { value: 'fr', label: 'Français' },
+        { value: 'en', label: 'English' },
+        { value: 'nl', label: 'Nederlands' },
       ]);
     });
   });

@@ -16,12 +16,12 @@ const PIX_LOCALES = ['en', 'es', 'fr', 'fr-BE', 'fr-FR', 'nl-BE', 'nl'];
 // This cannot be changed without migrating the challenges content.
 const PIX_CHALLENGE_LOCALES = ['en', 'fr', 'fr-fr', 'nl', 'es', 'it', 'de'];
 
-const PIX_LANGUAGES = {
-  en: { value: 'English', languageSwitcherDisplayed: true },
-  es: { value: 'Español', languageSwitcherDisplayed: false },
-  fr: { value: 'Français', languageSwitcherDisplayed: true },
-  nl: { value: 'Nederlands', languageSwitcherDisplayed: true },
-};
+const PIX_LANGUAGES = [
+  { value: 'fr', originalName: 'Français', shouldBeDisplayedInLanguageSwitcher: true },
+  { value: 'en', originalName: 'English', shouldBeDisplayedInLanguageSwitcher: true },
+  { value: 'nl', originalName: 'Nederlands', shouldBeDisplayedInLanguageSwitcher: true },
+  { value: 'es', originalName: 'Español', shouldBeDisplayedInLanguageSwitcher: false },
+];
 
 export default class LocaleService extends Service {
   @service cookies;
@@ -49,7 +49,7 @@ export default class LocaleService extends Service {
    * @deprecated use pixLocales instead whenever possible.
    */
   get pixLanguages() {
-    return Object.keys(PIX_LANGUAGES);
+    return PIX_LANGUAGES.map((elem) => elem.value);
   }
 
   get acceptLanguageHeader() {
@@ -65,12 +65,10 @@ export default class LocaleService extends Service {
   }
 
   get switcherDisplayedLanguages() {
-    const FRENCH_LANGUAGE = 'fr';
-    const options = Object.entries(PIX_LANGUAGES)
-      .filter(([_, config]) => config.languageSwitcherDisplayed)
-      .map(([key, config]) => ({ label: config.value, value: key }));
-
-    return options.sort((option) => (option.value === FRENCH_LANGUAGE ? -1 : 1));
+    return PIX_LANGUAGES.filter((elem) => elem.shouldBeDisplayedInLanguageSwitcher).map((elem) => ({
+      value: elem.value,
+      label: elem.originalName,
+    }));
   }
 
   isSupportedLocale(locale) {
@@ -116,8 +114,7 @@ export default class LocaleService extends Service {
 
   #findSupportedLanguage(language) {
     if (!language) return;
-    const supportedLanguages = Object.keys(PIX_LANGUAGES);
-    return supportedLanguages.includes(language) ? language : DEFAULT_LOCALE;
+    return this.pixLanguages.includes(language) ? language : DEFAULT_LOCALE;
   }
 
   #setLocaleCookie(locale) {
