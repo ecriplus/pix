@@ -1,6 +1,6 @@
-import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { repositories } from '../../../../../src/shared/infrastructure/repositories/index.js';
-import { catchErr, expect } from '../../../../test-helper.js';
+import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
+import { repositories } from '../../../../../../src/shared/infrastructure/repositories/index.js';
+import { catchErr, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | certification-challenge-repository', function () {
   describe('#selectNextCertificationChallenge', function () {
