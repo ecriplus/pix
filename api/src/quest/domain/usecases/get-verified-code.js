@@ -6,7 +6,7 @@ export const getVerifiedCode = async ({ code, campaignRepository, combinedCourse
     const campaign = await campaignRepository.getByCode({ code });
     return new VerifiedCode({ code: campaign.code, type: 'campaign' });
   } catch (error) {
-    if ((!error) instanceof NotFoundError) {
+    if (!(error instanceof NotFoundError)) {
       throw error;
     }
   }
