@@ -5,6 +5,7 @@ import { Candidate } from '../../../../../src/certification/enrolment/domain/mod
 import { SessionEnrolment } from '../../../../../src/certification/enrolment/domain/models/SessionEnrolment.js';
 import { Subscription } from '../../../../../src/certification/enrolment/domain/models/Subscription.js';
 import { usecases as enrolmentUseCases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
+import { usecases as sessionManagementUseCases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
 import { usecases as organizationalEntitiesUsecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { usecases as prescriptionLearnerManagementUsecases } from '../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import {
@@ -142,7 +143,6 @@ export class ScoManagingStudent {
 
   async #addCandidateToSession({ organizationLearner, session }) {
     const candidate = new Candidate({
-      authorizedToStart: true,
       firstName: organizationLearner.firstName,
       lastName: organizationLearner.lastName,
       sex: 'F',
@@ -158,13 +158,12 @@ export class ScoManagingStudent {
       organizationLearnerId: organizationLearner.id,
     });
 
-    const candidateId = await enrolmentUseCases.addCandidateToSession({
+    await enrolmentUseCases.enrolStudentsToSession({
       sessionId: session.id,
-      candidate: new Candidate(candidate), // Warning: usecase modifies the entry model...
-      normalizeStringFnc: normalize,
+      studentIds: [organizationLearner.id],
     });
 
-    await enrolmentServices.registerCandidateParticipation({
+    const registeredCandidate = await enrolmentServices.registerCandidateParticipation({
       userId: organizationLearner.userId,
       sessionId: session.id,
       firstName: candidate.firstName,
@@ -173,7 +172,12 @@ export class ScoManagingStudent {
       normalizeStringFnc: normalize,
     });
 
-    return enrolmentUseCases.getCandidate({ certificationCandidateId: candidateId });
+    await sessionManagementUseCases.authorizeCertificationCandidateToStart({
+      certificationCandidateForSupervisingId: registeredCandidate.id,
+      authorizedToStart: true,
+    });
+
+    return registeredCandidate;
   }
 
   async #addSessionToPublish({ certificationCenterMember, certificationCenter }) {
