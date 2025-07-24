@@ -696,9 +696,9 @@
             "error": "Échec de la récupération de la liste blanche."
           },
           "import": {
-            "CERTIFICATION_INVALID_SCO_WHITELIST_ERROR": "Une erreur est survenue. Veuillez vérifier les externalId renseignés.",
             "button": "Importer une nouvelle liste blanche (format CSV)",
             "error": "Échec de l'enregistrement de la liste blanche",
+            "error-csv": "Une erreur est survenue. Veuillez vérifier les externalId renseignés aux lignes suivantes du CSV : {errorLines}",
             "success": "Liste blanche enregistrée."
           },
           "instructions": "Recommandation: exporter la liste, modifier l'export, et envoyer la version modifiée.",

@@ -94,8 +94,7 @@ describe('Certification | Configuration | Acceptance | API | sco-whitelist-route
         title: 'Unprocessable entity',
         detail: 'La liste blanche contient des données invalides.',
         meta: {
-          numberOfExternalIdsInInput: 2,
-          numberOfValidExternalIds: 1,
+          lineNumbersWithError: [3],
         },
       });
       const whitelist = await knex('certification-centers')

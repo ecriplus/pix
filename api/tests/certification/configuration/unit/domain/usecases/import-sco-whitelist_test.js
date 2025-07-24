@@ -20,7 +20,7 @@ describe('Certification | Configuration | Unit | UseCase | import-sco-whitelist'
   it('should whitelist a center', async function () {
     // given
     centerRepository.resetWhitelist.resolves();
-    centerRepository.addToWhitelistByExternalIds.resolves(1);
+    centerRepository.addToWhitelistByExternalIds.resolves([12]);
 
     // when
     await importScoWhitelist({
@@ -33,21 +33,48 @@ describe('Certification | Configuration | Unit | UseCase | import-sco-whitelist'
     expect(centerRepository.addToWhitelistByExternalIds).to.have.been.calledOnceWithExactly({ externalIds: [12] });
   });
 
-  it('should reject new whitelist when not valid', async function () {
-    // given
-    centerRepository.resetWhitelist.resolves();
-    centerRepository.addToWhitelistByExternalIds.resolves(1);
+  describe('when there is at least one external ID not found in input data', function () {
+    it('should throw an error', async function () {
+      // given
+      const externalIds = [11, 12];
+      centerRepository.resetWhitelist.resolves();
+      centerRepository.addToWhitelistByExternalIds.resolves([11]);
+      const csvLineNumbersWithError = [3];
 
-    // when
-    const error = await catchErr((externalIds) =>
-      importScoWhitelist({
-        externalIds,
-        centerRepository,
-      }),
-    )([11, 12]);
+      // when
+      const error = await catchErr((externalIds) =>
+        importScoWhitelist({
+          externalIds,
+          centerRepository,
+        }),
+      )(externalIds);
 
-    // then
-    expect(error).to.be.instanceOf(InvalidScoWhitelistError);
-    expect(error.message).to.equal('La liste blanche contient des données invalides.');
+      // then
+      expect(error).to.be.instanceOf(InvalidScoWhitelistError);
+      expect(error.message).to.equal('La liste blanche contient des données invalides.');
+      expect(error.meta.lineNumbersWithError).to.deep.equal(csvLineNumbersWithError);
+    });
+  });
+
+  describe('when there are duplicated external id on error', function () {
+    it('should return specific lines on error', async function () {
+      // given
+      const externalIds = [11, 77, 12, 11, 78, 12];
+      centerRepository.resetWhitelist.resolves();
+      centerRepository.addToWhitelistByExternalIds.resolves([77]);
+
+      const csvLineNumbersWithError = [2, 4, 5, 6, 7];
+
+      // when
+      const error = await catchErr((externalIds) =>
+        importScoWhitelist({
+          externalIds,
+          centerRepository,
+        }),
+      )(externalIds);
+
+      // then
+      expect(error.meta.lineNumbersWithError).to.deep.equal(csvLineNumbersWithError);
+    });
   });
 });

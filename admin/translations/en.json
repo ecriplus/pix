@@ -695,9 +695,9 @@
             "error": "Could not download SCO whitelist."
           },
           "import": {
-            "CERTIFICATION_INVALID_SCO_WHITELIST_ERROR": "An error has occurred. Please verify externalIds in csv.",
             "button": "Import file as whitelist (CSV)",
             "error": "Could not save SCO whitelist",
+            "error-csv": "Une erreur est survenue. Veuillez vérifier les externalId renseignés aux lignes suivantes du CSV : {errorLines}",
             "success": "SCO whitelist saved."
           },
           "instructions": "Recommended: make an export, modify the export, and import the modified version.",
