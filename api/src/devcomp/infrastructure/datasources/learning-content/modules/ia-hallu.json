@@ -5,7 +5,7 @@
   "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
-    "description": "<p>Les logiciels d'IA génératives sont de plus en plus utilisées au quotidien. Mais leurs réponses sont-elles toujours justes ? Et si il y a des erreurs, à quoi sont-elles dues ?&nbsp;<br>C'est ce que vous allez découvrir dans ce module. <br><br></p>",
+    "description": "<p>Les logiciels d'IA générative sont de plus en plus utilisés au quotidien. Mais leurs réponses sont-elles toujours correctes ? Et s'il y a des erreurs, d'où viennent-elles ?&nbsp;<br>C'est ce que vous allez découvrir dans ce module.</p>",
     "duration": 10,
     "level": "Débutant",
     "objectives": [
@@ -41,12 +41,12 @@
                 {
                   "userName": "Nathan",
                   "direction": "outgoing",
-                  "content": "Olala je suis dégoûté… 😩"
+                  "content": "Oh la la ! Je suis dégoûté… 😩"
                 },
                 {
                   "userName": "Asma",
                   "direction": "incoming",
-                  "content": "Bah pourquoi ? Qu’est ce qui t’arrive ? 😟"
+                  "content": "Bah pourquoi ? Qu’est-ce qui t’arrive ? 😟"
                 },
                 {
                   "userName": "Nathan",
@@ -61,7 +61,7 @@
                 {
                   "userName": "Nathan",
                   "direction": "outgoing",
-                  "content": " Oui ! J’ai demandé à ChatGPT de trouver une salle d'arcades pour se retrouver là-bas samedi soir... mais une fois arrivés à l'adresse donnée par ChatGPT, c'était une agence immobilière. 😤"
+                  "content": " Oui ! J’ai demandé à ChatGPT de trouver une salle d'arcades pour se retrouver là-bas samedi soir... Mais une fois arrivés à l'adresse donnée par ChatGPT, c'était une agence immobilière. 😤"
                 }
               ]
             }
@@ -94,7 +94,7 @@
           "element": {
             "id": "3147aedb-8fc2-4510-aad8-fa7f35e77dd7",
             "type": "text",
-            "content": "<p>Ci-dessous, découvrez plusieurs exemples de réponses données par des logiciels d'IA génératives. Ces exemples sont inspirés de réponses réelles.<br>Pour chacun des exemples ci-dessous, indiquez votre niveau de confiance en la réponse donnée par un logiciel d'IA générative.</p>"
+            "content": "<p>Découvrez ci-dessous plusieurs exemples de réponses données par des logiciels d'IA générative. Ces exemples sont inspirés de réponses réelles.<br>Pour chacun des exemples, indiquez votre niveau de confiance en la réponse donnée par un logiciel d'IA générative.</p>"
           }
         },
         {
@@ -120,7 +120,7 @@
                 {
                   "id": "0e9f94cd-7236-4f68-a50e-b079cc0f9c9d",
                   "type": "text",
-                  "content": "<p>L'IA générative peut faire des erreurs. Elle peut <strong>générer des affirmations fausses ou erronées et les présenter comme des faits</strong>.</p>"
+                  "content": "<p>L'IA générative peut faire des erreurs. Elle peut <strong>générer des affirmations fausses ou erronées et les présenter comme des faits, de vraies informations</strong>.</p>"
                 }
               ]
             },
@@ -138,7 +138,7 @@
                 {
                   "id": "03c80544-03eb-4d77-a592-f91c68ecb91a",
                   "type": "text",
-                  "content": "<p><strong>Les réponses des IA génératives</strong> sont souvent bien écrites et vraisemblables, présentées avec assurance&nbsp;: elles<strong> inspirent confiance</strong>.&nbsp; C’est pourquoi il n'est<strong> pas facile de repérer les erreurs</strong> des IA génératives. 🔎</p>"
+                  "content": "<p><strong>Les réponses des IA génératives</strong> sont souvent bien écrites et vraisemblables, présentées avec assurance&nbsp;: elles<strong> inspirent confiance</strong>.&nbsp;C’est pourquoi il n'est<strong> pas facile de repérer les erreurs</strong> des IA génératives. 🔎</p>"
                 }
               ]
             }
@@ -156,7 +156,7 @@
           "element": {
             "id": "dfbdf13e-7d02-464b-a8b7-29fa03a35c51",
             "type": "text",
-            "content": "<p>Vous savez à présent que les IA génératives peuvent faire des erreurs. Mais pourquoi ces erreurs existent ?</p>"
+            "content": "<p>Vous savez à présent que les IA génératives peuvent faire des erreurs. Mais pourquoi ces erreurs existent-elles ?</p>"
           }
         }
       ]
@@ -192,19 +192,19 @@
                 {
                   "id": "21e1f6a8-8ea2-4b0c-8a6c-e68a1f875920",
                   "type": "text",
-                  "content": "<p>Ici le logiciel d’IA générative a fait une erreur. Carlos Alcatraz a bien remporté le tournoi de Roland-Garros deux fois. Une fois en 2024 et une fois en 2025.</p>"
+                  "content": "<p>Ici le logiciel d’IA générative a fait une erreur. Carlos Alcatraz a bien remporté le tournoi de Roland-Garros deux fois : une fois en 2024 et une fois en 2025.</p>"
                 },
                 {
                   "id": "ceed2a7c-76f9-44f1-be34-a2285cd1aa4d",
                   "type": "qcu",
-                  "instruction": "<p>A votre avis, qu’est ce qui peut expliquer l’erreur du logiciel d’IA générative ?</p>",
+                  "instruction": "<p>À votre avis, qu’est ce qui peut expliquer l’erreur du logiciel d’IA générative ?</p>",
                   "proposals": [
                     {
                       "id": "1",
                       "content": "<p>L'ordinateur d’Irène n'est pas assez puissant, il a provoqué un bug.</p>",
                       "feedback": {
                         "state": "",
-                        "diagnosis": "<p>Et non, la réponse donnée par le logiciel d'IA générative ne dépend pas de la puissance de l'ordinateur d'Irène. <br>Par contre l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcatraz à Roland-Garros.</p>"
+                        "diagnosis": "<p>Et non, la réponse donnée par le logiciel d'IA générative ne dépend pas de la puissance de l'ordinateur d'Irène. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcatraz à Roland-Garros.</p>"
                       }
                     },
                     {
@@ -212,7 +212,7 @@
                       "content": "<p>Les données avec lesquelles le logiciel a été entraîné datent d’avant 2018.</p>",
                       "feedback": {
                         "state": "",
-                        "diagnosis": "<p>Effectivement, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcatraz à Roland-Garros</p>"
+                        "diagnosis": "<p>Effectivement, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcatraz à Roland-Garros.</p>"
                       }
                     },
                     {
@@ -220,7 +220,7 @@
                       "content": "<p>Le logiciel ne compte pas la victoire de 2025 car il était pour l’autre finaliste, Jannik Sinner.</p>",
                       "feedback": {
                         "state": "",
-                        "diagnosis": "<p>Et non, le logiciel d'IA générative n'a pas de préférence pour un joueur plutôt qu'un autre. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcatraz à Roland-Garros</p>"
+                        "diagnosis": "<p>Et non, le logiciel d'IA générative n'a pas de préférence pour un joueur plutôt qu'un autre. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcatraz à Roland-Garros.</p>"
                       }
                     }
                   ],
@@ -262,7 +262,7 @@
                 {
                   "id": "a2f3a3ca-b439-472e-86bb-69af0c01f178",
                   "type": "text",
-                  "content": "<p>D’autres erreurs sont inventées par l’IA. L’IA générative répond souvent “sans savoir”, <strong>par prédiction</strong>. Elle génère la réponse qui lui paraît la plus probable. On appelle ces erreurs <strong>des hallucinations</strong>.<br>Par exemple, quand on demande à un logiciel d’IA générative de nous donner l’auteur d’une citation, il peut l’attribuer à quelqu’un d’autre. 🤷</p>"
+                  "content": "<p>D’autres erreurs sont inventées par l’IA. L’IA générative répond souvent  « sans savoir » mais <strong>par prédiction</strong> : elle génère la réponse qui lui paraît la plus probable. On appelle ces erreurs <strong>des hallucinations</strong>.<br>Par exemple, quand on demande à un logiciel d’IA générative de nous donner l’auteur d’une citation, il peut l’attribuer à quelqu’un d’autre. 🤷</p>"
                 }
               ]
             },
@@ -276,7 +276,7 @@
                 {
                   "id": "dfbbd712-d034-4c91-819a-4431aec8beb2",
                   "type": "text",
-                  "content": "<p>🤔<strong> Bon à savoir</strong> <br>Les IA génératives sont capables d’inventer des choses, à la demande des utilisateurs (écrire un poème, dessiner une vache rose). Dans ce cas, ce ne sont pas des erreurs !</p>"
+                  "content": "<p>🤔<strong> Bon à savoir</strong> <br>Les IA génératives sont aussi capables d’inventer des choses, à la demande des utilisateurs (écrire un poème, dessiner une vache rose). Dans ce cas, ce ne sont pas des erreurs !</p>"
                 }
               ]
             }
@@ -294,7 +294,7 @@
           "element": {
             "id": "8456e440-7043-4a73-aac3-bd7de3f44dcc",
             "type": "text",
-            "content": "<p>Les IA génératives peuvent faire des erreurs.<br>Que font les développeurs d’IA génératives pour empêcher ça ? 😱</p>"
+            "content": "<p>Les IA génératives peuvent faire des erreurs.<br>Mais que font les développeurs d’IA génératives pour empêcher ça ? 😱</p>"
           }
         }
       ]
@@ -331,16 +331,16 @@
               "messages": [
                 {
                   "direction": "outbound",
-                  "content": "Combien il y a de pays qui commencent par la lettre \"V\" ?"
+                  "content": "Combien il y a de pays qui commencent par la lettre « V » ?"
                 },
                 [
                   {
                     "direction": "inbound",
-                    "content": "Il n'y a aucun pays qui commence par la lettre \"V\". "
+                    "content": "Il n'y a aucun pays qui commence par la lettre « V ». "
                   },
                   {
                     "direction": "inbound",
-                    "content": "Il y a 4 pays dont le nom commence par la lettre \"V\" : <ul><li>Vanuatu</li><li>Vatican</li><li>Venezuela</li><li>Vietnam</li></ul> "
+                    "content": "Il y a 4 pays dont le nom commence par la lettre « V » : <ul><li>Vanuatu</li><li>Vatican</li><li>Venezuela</li><li>Vietnam</li></ul> "
                   }
                 ]
               ]
@@ -352,22 +352,22 @@
           "element": {
             "id": "c28617dd-2134-4551-8157-b7beef89ab35",
             "type": "qcu",
-            "instruction": "<p>À votre avis, pourquoi y a-t-il une différence entre les réponses de ChatPT 3 et de ChatGPT 4 ?</p>",
+            "instruction": "<p>À votre avis, pourquoi y a-t-il une différence entre les réponses de ChatPT 3 et de ChatGPT 4o ?</p>",
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>ChatGPT 3 n’était pas encore disponible dans ces 4 pays, il ne les a pas compté.</p>",
+                "content": "<p>ChatGPT 3 n’était pas encore disponible dans ces 4 pays, il ne les a pas comptés.</p>",
                 "feedback": {
                   "state": "<p>Pas exactement.</p>",
-                  "diagnosis": "<p>Les logiciels d’IA générative sont fréquemment mis à jour par les ingénieurs. Ces mises à jour permettent de corriger des erreurs.</p>"
+                  "diagnosis": "<p>Les logiciels d’IA générative sont fréquemment mis à jour par les développeurs. Ces mises à jour permettent de corriger des erreurs.</p>"
                 }
               },
               {
                 "id": "2",
-                "content": "<p>En 2023 il n’y avait aucun pays commençant par la lettre V.</p>",
+                "content": "<p>En 2023, il n’y avait aucun pays commençant par la lettre V.</p>",
                 "feedback": {
                   "state": "<p>Pas exactement.</p>",
-                  "diagnosis": "<p>Les logiciels d’IA générative sont fréquemment mis à jour par les ingénieurs. Ces mises à jour permettent de corriger des erreurs.</p>"
+                  "diagnosis": "<p>Les logiciels d’IA générative sont fréquemment mis à jour par les développeurs. Ces mises à jour permettent de corriger des erreurs.</p>"
                 }
               },
               {
@@ -375,7 +375,7 @@
                 "content": "<p>L’erreur a été corrigée avec la mise à jour de ChatGPT 4.</p>",
                 "feedback": {
                   "state": "<p>Tout à fait !</p>",
-                  "diagnosis": "<p>Les logiciels d’IA générative sont fréquemment mis à jour par les ingénieurs. Ces mises à jour permettent de corriger des erreurs.</p>"
+                  "diagnosis": "<p>Les logiciels d’IA générative sont fréquemment mis à jour par les développeurs. Ces mises à jour permettent de corriger des erreurs.</p>"
                 }
               }
             ],
@@ -397,7 +397,7 @@
                 {
                   "id": "36e95488-a2db-4463-9b0f-5d5252cb38b2",
                   "type": "text",
-                  "content": "<p>Les ingénieurs d’IA génératives essayent en continu de <strong>réduire les erreurs</strong> qu’elles produisent grâce à des mises à jour. Ainsi, les IA génératives <strong>s’améliorent d’années en années</strong> !</p>"
+                  "content": "<p>Grâce à des mises à jour régulières, les ingénieurs essaient en continu de <strong>réduire les erreurs</strong> que les IA génératives produisent. Ainsi, les IA génératives <strong>s’améliorent d’années en années</strong> !</p>"
                 }
               ]
             },
@@ -406,7 +406,7 @@
                 {
                   "id": "5360a6aa-999e-4d02-b3cb-20421fae3ab2",
                   "type": "text",
-                  "content": "<p>Mais, c’est une <strong>tâche difficile</strong>&nbsp;:&nbsp; il n'y a pas de différence de forme entre une réponse contenant une erreur et une qui n'en contient pas. <br>Il n’existe donc <strong>pas de méthode technique pour les détecter</strong> et les éviter complètement.</p>"
+                  "content": "<p>Mais, c’est une <strong>tâche difficile</strong>&nbsp;:&nbsp;il n'y a pas de différence de forme entre une réponse contenant une erreur et une qui n'en contient pas. <br>Il n’existe donc <strong>pas de méthode technique pour détecter les erreurs </strong>et les éviter complètement.</p>"
                 }
               ]
             }
@@ -465,7 +465,7 @@
                       "content": "<p>bon réflexe</p>",
                       "feedback": {
                         "state": "",
-                        "diagnosis": "<p>Et non c'est un mauvais réflexe ! Il faut toujours lire l’ensemble des réponses données par un logiciel d’IA générative.</p>"
+                        "diagnosis": "<p>Et non, c'est un mauvais réflexe ! Il faut toujours lire l’ensemble des réponses données par un logiciel d’IA générative.</p>"
                       }
                     },
                     {
@@ -486,7 +486,7 @@
                 {
                   "id": "079936fa-826a-46da-903c-32dfd0089327",
                   "type": "qcu",
-                  "instruction": "<p>Réflexe 2&nbsp;:&nbsp;Asma lit toute la réponse, et s’interroge sur un point précis. Elle demande au logiciel d'IA générative de préciser sa réponse en donnant sa source.</p>",
+                  "instruction": "<p>Réflexe 2&nbsp;:&nbsp;Asma lit toute la réponse et s’interroge sur une partie de la réponse de l'IA. Elle demande au logiciel d'IA générative de préciser sa réponse en donnant sa source.</p>",
                   "proposals": [
                     {
                       "id": "1",
@@ -579,7 +579,7 @@
           "element": {
             "id": "3a72064b-2d02-47ef-b524-18d51dcc6be8",
             "type": "text",
-            "content": "<p>Face aux réponses d’une IA générative, il faut toujours garder en tête qu’elle peut faire une erreur ou halluciner. Mais vous pouvez apprendre à les repérer… à condition d’adopter les bons réflexes&nbsp;:</p>"
+            "content": "<p>Il faut toujours garder en tête qu’une IA générative peut faire une erreur ou halluciner dans ses réponses. Mais vous pouvez apprendre à repérer ces erreurs… à condition d’adopter les bons réflexes&nbsp;:</p>"
           }
         },
         {
@@ -608,7 +608,7 @@
                 {
                   "id": "495a2819-756c-415c-993d-ad37eaa4fecf",
                   "type": "text",
-                  "content": "<p>🧭&nbsp;<strong>Vérifier les informations </strong>avec d’autres sources.</p>"
+                  "content": "<p>🧭&nbsp;<strong>Vérifier les informations </strong> en les comparant avec d’autres sources.</p>"
                 }
               ]
             },
@@ -635,7 +635,7 @@
           "element": {
             "id": "d889292f-a892-4ad8-b7e8-0ef529fe13cf",
             "type": "text",
-            "content": "<ul><li>L'objectif d’une <strong>IA générative</strong> est de répondre aux demandes d’un utilisateur. <strong>Son objectif n’est pas de dire la vérité</strong>. 🤥</li><br><li>Une <strong>IA générative peut faire des erreurs</strong>, par exemple présenter des affirmations fausses comme des faits. ❌</li><br><li>Les développeurs d’IA génératives essayent de réduire les erreurs. Mais il n’existe <strong>pas de moyen technique pour empêcher complètement ces erreurs.</strong> 🔧</li><br><li>Face à ces erreurs, difficiles à détecter, c’est à l’utilisateur de <strong>faire preuve d’esprit critique</strong> et de <strong>croiser les sources</strong> d’informations. 🔎</li><br></ul>"
+            "content": "<p>On peut retenir que : </p><ul><li>L'objectif d’une <strong>IA générative</strong> est de répondre aux demandes d’un utilisateur. <strong>Son objectif n’est pas de dire la vérité</strong>. 🤥</li><br><li>Une <strong>IA générative peut faire des erreurs</strong>, par exemple présenter des affirmations fausses comme vraies. ❌</li><br><li>Les développeurs d’IA génératives essaient de réduire les erreurs. Mais il n’existe <strong>pas de moyen technique pour empêcher complètement ces erreurs.</strong> 🔧</li><br><li>Face à ces erreurs, difficiles à détecter, c’est à l’utilisateur de <strong>faire preuve d’esprit critique</strong> et de <strong>croiser les sources</strong> d’informations pour les vérifier. 🔎</li><br></ul>"
           }
         }
       ]
@@ -650,7 +650,7 @@
           "element": {
             "id": "1700c207-060a-416d-9f0d-033518299509",
             "type": "qab",
-            "instruction": "<p>Pour chacune des affirmations suivantes, indiquez si elles sont vraies ou fausses.</p>",
+            "instruction": "<p>Pour chacune des affirmations suivantes, indiquez si elle est vraie ou fausse.</p>",
             "cards": [
               {
                 "id": "59dcf865-08c0-4110-90bf-99c3acff78b7",
@@ -676,7 +676,7 @@
               },
               {
                 "id": "eeea3baf-f5fb-4ed1-8831-52a2f1f0323f",
-                "text": "Quand un logiciel d’IA générative de texte est sûr de sa réponse, il le précise dans sa réponse.",
+                "text": "Quand un logiciel d’IA générative est sûr de sa réponse, il le précise dans sa réponse.",
                 "image": {
                   "url": "",
                   "altText": ""
@@ -711,7 +711,7 @@
           "element": {
             "id": "ac09a36f-6446-4ced-9c4b-8ab544e113d9",
             "type": "text",
-            "content": "<p>Pour chacun des exemples d’erreurs de logiciels d’IA génératives, ci-dessous, indiquez la source d'erreur correspondante.</p>"
+            "content": "<p>Voici ci-dessous des exemples d’erreurs dans des réponses données par des logiciels d’IA génératives. Pour chaque exemple, indiquez quelle est la source d'erreur correspondante.</p>"
           }
         },
         {
@@ -731,7 +731,7 @@
                 {
                   "id": "4973d664-0caf-4e10-9ea9-7fae95bf0164",
                   "type": "text",
-                  "content": "<p>Léonie a vérifié, à la date où elle a posé la question, le sportif s’était gravement blessé la veille.</p>"
+                  "content": "<p>Léonie a vérifié : le jour où elle a posé sa question au logiciel d'IA générative, le sportif s’était gravement blessé la veille.</p>"
                 },
                 {
                   "id": "113b842e-f66b-43cf-a82a-d5484b37fe22",
@@ -743,7 +743,7 @@
                       "content": "<p>L’IA générative répond par prédiction et génère une hallucination.</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": "<p>Pour vous aider à identifier les causes de&nbsp;l'erreur, vous pouvez relire plus haut.&nbsp;👆<br>N'hésitez pas à réessayer.</p>"
+                        "diagnosis": "<p>N'hésitez pas à réessayer. <br>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire les informations plus haut. 👆</p>"
                       }
                     },
                     {
@@ -751,15 +751,15 @@
                       "content": "<p>La demande utilisateur comporte une erreur que l’IA n’a pas corrigée.</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": "<p>Pour vous aider à identifier les causes de&nbsp;l'erreur, vous pouvez relire plus haut.&nbsp;👆</p><br><p>N'hésitez pas à réessayer.</p>"
+                        "diagnosis": "<p><p>N'hésitez pas à réessayer. <br>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire les informations plus haut. 👆</p>"
                       }
                     },
                     {
                       "id": "3",
-                      "content": "<p>Les données d’entraînement de l’IA sont fausses ou obsolètes.</p>",
+                      "content": "<p>Les données d’entraînement de l’IA sont fausses ou trop anciennes.</p>",
                       "feedback": {
                         "state": "<p>Bonne réponse !&nbsp;🎉</p>",
-                        "diagnosis": "<p>Ici ce sont des données trop récentes pour l'IA.</p>"
+                        "diagnosis": "<p>Ici la blessure du sportif est une donnée trop récente pour l'IA.</p>"
                       }
                     }
                   ],
@@ -781,7 +781,7 @@
                 {
                   "id": "9c2ddfdc-0dc9-435c-b3be-1ea4bf999895",
                   "type": "text",
-                  "content": "<p>Darius n’a pas obtenu de réponse satisfaisante de l’IA, il a vérifié et l’émoji hippocampe n'existe pas.</p>"
+                  "content": "<p>Darius n’a pas obtenu de réponse satisfaisante de l’IA. Il a vérifié et l’émoji hippocampe n'existe pas.</p>"
                 },
                 {
                   "id": "9d16a295-07ca-493c-a8a3-c0265390b17a",
@@ -793,7 +793,7 @@
                       "content": "<p>L’IA générative répond par prédiction et génère une hallucination.</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": "<p>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire plus haut. 👆 <br>N'hésitez pas à réessayer.<br></p>"
+                        "diagnosis": "<p><p>N'hésitez pas à réessayer. <br>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire les informations plus haut. 👆</p>"
                       }
                     },
                     {
@@ -809,7 +809,7 @@
                       "content": "<p>Les données d’entraînement de l’IA sont fausses ou obsolètes.</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse</p>",
-                        "diagnosis": "<p>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire plus haut. 👆 <br>N'hésitez pas à réessayer.<br></p>"
+                        "diagnosis": "<p>N'hésitez pas à réessayer. <br>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire les informations plus haut. 👆</p>"
                       }
                     }
                   ],
@@ -831,7 +831,7 @@
                 {
                   "id": "53332773-3d53-4d86-8ab3-7af01a291d1d",
                   "type": "text",
-                  "content": "<p>Amalia a vérifié, ces auteurs n’ont rien écrit ensemble et l'article est introuvable.</p>"
+                  "content": "<p>Amalia a vérifié la réponse de l'IA : ces auteurs n’ont rien écrit ensemble et l'article est introuvable.</p>"
                 },
                 {
                   "id": "a8a788a2-f80a-4a3e-bd05-88fc46a64469",
@@ -843,7 +843,7 @@
                       "content": "<p>L’IA générative répond par prédiction et génère une hallucination.</p>",
                       "feedback": {
                         "state": "<p>Bonne réponse ! 🎉</p>",
-                        "diagnosis": "<p>L’IA générative a aggloméré des auteurs, un titre et une revue scientifique pour créer une source d’apparence crédible. C’est une hallucination, l’article n’existe pas.</p>"
+                        "diagnosis": "<p>L’IA générative a rassemblé des auteurs, un titre et une revue scientifique pour créer une source d’apparence crédible. C’est une hallucination, l’article n’existe pas.</p>"
                       }
                     },
                     {
@@ -851,7 +851,7 @@
                       "content": "<p>La demande utilisateur comporte une erreur que l’IA n’a pas corrigée.</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": "<p>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire plus haut. 👆 <br>N'hésitez pas à réessayer.<br><br></p>"
+                        "diagnosis": "<p><p>N'hésitez pas à réessayer. <br>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire les informations plus haut. 👆</p>"
                       }
                     },
                     {
@@ -859,7 +859,7 @@
                       "content": "<p>Les données d’entraînement de l’IA sont fausses ou obsolètes.</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": "<p>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire plus haut. 👆 N'hésitez pas à réessayer.<br><br></p>"
+                        "diagnosis": "<p>N'hésitez pas à réessayer. <br>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire les informations plus haut. 👆</p>"
                       }
                     }
                   ],
@@ -881,7 +881,7 @@
           "element": {
             "id": "ffd4ab68-15fb-497d-bf67-9820d17feee3",
             "type": "qcu-declarative",
-            "instruction": "<p>Maintenant que vous avez joué ce module, que feriez vous si un logiciel d'IA générative vous disait que la Statue de la liberté se trouve à Tokyo ?&nbsp;🗽</p>",
+            "instruction": "<p>Maintenant que vous avez joué ce module, que ferez-vous si un logiciel d'IA générative vous dit que la Statue de la liberté se trouve à Tokyo ?&nbsp;🗽</p>",
             "proposals": [
               {
                 "id": "1",
@@ -893,7 +893,7 @@
               },
               {
                 "id": "2",
-                "content": "<p>Vous vérifiez dans une encyclopédie. 📖</p>",
+                "content": "<p>Vous vérifiez cette information dans une encyclopédie. 📖</p>",
                 "feedback": {
                   "state": "",
                   "diagnosis": "<p>Effectivement, c'est un bon réflexe en cas de doute !&nbsp;</p>"
@@ -904,7 +904,7 @@
                 "content": "<p>Vous supposez que la Statue de la liberté a été déplacée. 🧳</p>",
                 "feedback": {
                   "state": "",
-                  "diagnosis": "<p>Si un monument aussi connu était déplacé, il y aurait de nombreuses informatiosn à ce sujet. Vérifier l'information serait une bonne idée !&nbsp;</p>"
+                  "diagnosis": "<p>Si un monument aussi connu était déplacé, il y aurait de nombreuses informations à ce sujet. Vérifier l'information serait une bonne idée !&nbsp;</p>"
                 }
               },
               {
