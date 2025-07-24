@@ -42,6 +42,16 @@ module('Unit | Services | locale', function (hooks) {
     metricsService = this.owner.lookup('service:metrics');
   });
 
+  module('pixLocales', function () {
+    test('returns the locales available in the Pix Platform', function (assert) {
+      // when
+      const pixLocales = localeService.pixLocales;
+
+      // then
+      assert.deepEqual(pixLocales, ['en', 'es', 'fr', 'fr-BE', 'fr-FR', 'nl-BE', 'nl']);
+    });
+  });
+
   module('acceptLanguageHeader', function () {
     module('when the domain is pix.fr', function () {
       test('always returns fr-FR', function (assert) {
