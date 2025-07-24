@@ -17,7 +17,7 @@
   "grains": [
     {
       "id": "031b056a-0e5f-48f3-9a49-45688a354dea",
-      "type": "activity",
+      "type": "transition",
       "title": "-",
       "components": [
         {
@@ -514,7 +514,7 @@
           "element": {
             "id": "ed8509d2-d62f-49a8-baa6-acc699562193",
             "type": "text",
-            "content": "<p>📌 Résumons avant de passer à la suite&nbsp;:&nbsp; </p><ul><li>Un logiciel d'IA générative est un outil qui permet de discuter facilement avec un utilisateur, sur des sujets très variés. 💬</li><li>Il utilise un programme qui est entraîné avec énormément de textes disponibles sur internet. Cela va lui permettre de répondre précisément aux demandes, sans que ses réponses ne soient préparées à l’avance. 📚</li><li>Il ne répond pas comme le ferait un humain&nbsp;: il écrit en construisant mot par mot, avec des mots très probables. 🧩</li><li>Il faut toujours vérifier les réponses qui sont données. Pour vérifier, on peut poursuivre la conversation ou aller chercher soi-même sur internet. 🔍</li></ul>"
+            "content": "<p>Résumons avant de passer à la suite&nbsp;:&nbsp; </p><ul><li>Un logiciel d'IA générative est un outil qui permet de discuter facilement avec un utilisateur, sur des sujets très variés. 💬</li><li>Il utilise un programme qui est entraîné avec énormément de textes disponibles sur internet. Cela va lui permettre de répondre précisément aux demandes, sans que ses réponses ne soient préparées à l’avance. 📚</li><li>Il ne répond pas comme le ferait un humain&nbsp;: il écrit en construisant mot par mot, avec des mots très probables. 🧩</li><li>Il faut toujours vérifier les réponses qui sont données. Pour vérifier, on peut poursuivre la conversation ou aller chercher soi-même sur internet. 🔍</li></ul>"
           }
         }
       ]
@@ -663,7 +663,7 @@
     },
     {
       "id": "bbd7f431-1475-4f7a-8d53-99771395bb44",
-      "type": "activity",
+      "type": "challenge",
       "title": "-",
       "components": [
         {
