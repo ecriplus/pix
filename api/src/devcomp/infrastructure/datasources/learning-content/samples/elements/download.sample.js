@@ -6,7 +6,7 @@ export function getDownloadSample() {
     type: 'download',
     files: [
       {
-        url: 'https://assets.pix.org/modulix/placeholder-image.svg',
+        url: 'https://assets.pix.org/modules/placeholder-image.svg',
         format: '.svg',
       },
     ],
