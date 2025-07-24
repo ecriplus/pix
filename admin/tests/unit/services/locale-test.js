@@ -1,4 +1,4 @@
-// This file is a copy of an original file from mon-pix.
+// This file is a COPY of an original file from mon-pix.
 // If you need a change, as much as possible modify the original file
 // and propagate the changes in the copies in all the fronts
 
