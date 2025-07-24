@@ -67,10 +67,9 @@ export default class LocaleService extends Service {
   }
 
   get switcherDisplayedLanguages() {
-    return PIX_LANGUAGES.filter((elem) => elem.shouldBeDisplayedInLanguageSwitcher).map((elem) => ({
-      value: elem.value,
-      label: elem.originalName,
-    }));
+    return PIX_LANGUAGES.filter(
+      (elem) => this.supportedLocales.includes(elem.value) && elem.shouldBeDisplayedInLanguageSwitcher,
+    ).map((elem) => ({ value: elem.value, label: elem.originalName }));
   }
 
   isSupportedLocale(locale) {
