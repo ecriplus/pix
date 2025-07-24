@@ -75,7 +75,7 @@ describe('Unit | Organizational Entities | Application | Controller | Admin | or
     it('should call the usecase and serialize the response', async function () {
       // given
       const organizationId = 1234;
-      const request = { params: { id: organizationId } };
+      const request = { params: { organizationId } };
 
       const organizationDetails = Symbol('organizationDetails');
       const organizationDetailsSerialized = Symbol('organizationDetailsSerialized');

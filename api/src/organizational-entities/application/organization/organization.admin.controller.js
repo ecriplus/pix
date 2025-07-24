@@ -80,7 +80,7 @@ const archiveInBatch = async function (request, h) {
 };
 
 const getOrganizationDetails = async function (request, h, dependencies = { organizationForAdminSerializer }) {
-  const organizationId = request.params.id;
+  const organizationId = request.params.organizationId;
 
   const organizationDetails = await usecases.getOrganizationDetails({ organizationId });
   return dependencies.organizationForAdminSerializer.serialize(organizationDetails);

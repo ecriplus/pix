@@ -144,7 +144,7 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/admin/organizations/{id}',
+      path: '/api/admin/organizations/{organizationId}',
       config: {
         pre: [
           {
@@ -160,7 +160,7 @@ const register = async function (server) {
         ],
         validate: {
           params: Joi.object({
-            id: identifiersType.organizationId,
+            organizationId: identifiersType.organizationId,
           }),
         },
         handler: (request, h) => organizationAdminController.getOrganizationDetails(request, h),
