@@ -71,24 +71,6 @@ module('Integration | Component | Sitemap::Content', function (hooks) {
       .hasAttribute('href', 'https://pix.fr/politique-protection-donnees-personnelles-app');
   });
 
-  test('should contain an external link to help accessibility page', async function (assert) {
-    // given
-    const service = this.owner.lookup('service:url');
-    service.currentDomain = { getExtension: sinon.stub().returns(FRANCE_TLD), isFranceDomain: true };
-
-    // when
-    const screen = await render(hbs`<Sitemap::Content />`);
-
-    // then
-    assert
-      .dom(
-        screen.getByRole('link', {
-          name: `${t('pages.sitemap.accessibility.help')} ${t('navigation.external-link-title')}`,
-        }),
-      )
-      .hasAttribute('href', 'https://pix.fr/aide-accessibilite');
-  });
-
   test('should contain an external link to pix support home page', async function (assert) {
     // given & when
     const screen = await render(hbs`<Sitemap::Content />`);

@@ -111,13 +111,6 @@ export default class Content extends Component {
                 </a>
               </li>
               <li class="sitemap-content-items-link-resources__resource">
-                <a href={{this.accessibilityHelpUrl}} target="_blank" rel="noopener noreferrer">
-                  {{t "pages.sitemap.accessibility.help"}}
-                  <PixIcon @name="openNew" @ariaHidden={{true}} />
-                  <span class="sr-only">{{t "navigation.external-link-title"}}</span>
-                </a>
-              </li>
-              <li class="sitemap-content-items-link-resources__resource">
                 <a href={{this.cguUrl}} target="_blank" rel="noopener noreferrer">
                   {{t "navigation.footer.eula"}}
                   <PixIcon @name="openNew" @ariaHidden={{true}} />
