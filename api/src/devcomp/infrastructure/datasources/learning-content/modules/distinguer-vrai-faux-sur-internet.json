@@ -4,7 +4,7 @@
   "title": "Les informations sur internet : distinguer le vrai du faux",
   "isBeta": true,
   "details": {
-    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "De nombreuses informations circulent sur internet et les réseaux sociaux. Ces informations sont parfois exagérées, trompeuses ou fausses. Dans ce module, vous allez découvrir une méthode pour analyser l'information et aiguiser votre esprit critique pour mieux distinguer le vrai du faux !",
     "duration": 10,
     "level": "Intermédiaire",
@@ -630,7 +630,7 @@
                 {
                   "id": "ecc3dbf9-f9a7-45f6-b961-0f548f066010",
                   "type": "image",
-                  "url": "https://images.pix.fr/modulix/distinguer-vrai-faux-sur-internet/tweet7.jpg",
+                  "url": "https://assets.pix.org/modules/distinguer-vrai-faux-sur-internet/tweet7.jpg",
                   "alt": "Publication de Stéphanie Attelage (@StephAtell) sur X (Twitter) détaillée dans l'alternative textuelle",
                   "alternativeText": "Publication de Stéphanie Attelage (@StephAtell) sur X (Twitter) à 19h34 le 12 janvier 2023&nbsp;: &laquo;&nbsp;Allez vite au supermarché, il n'y aura bientôt plus de pâtes&nbsp;! Pour plus d'infos&nbsp;: <a href=\"https://www.zayactu.org/2021/08/la-france-bientot-confrontee-a-une-penurie-de-pates-alimentaires\" target=\"_blank\">https://www.zayactu.org/2021/08/la-france-bientot-confrontee-a-une-penurie-de-pates-alimentaires</a>&nbsp;&raquo;"
                 },
@@ -815,7 +815,7 @@
             "instruction": "<p></p>",
             "title": "Distinguer le vrai du faux",
             "introImage": {
-              "url": "https://images.pix.fr/modulix/didacticiel/intro-flashcards.png"
+              "url": "https://assets.pix.org/modules/didacticiel/intro-flashcards.png"
             },
             "cards": [
               {

@@ -4,7 +4,7 @@
   "title": "Le contrôle parental",
   "isBeta": true,
   "details": {
-    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Les enfants et les adolescents utilisent le numérique au quotidien. Pour les protéger sur internet, le contrôle parental fait partie des solutions à la disposition des parents.&nbsp;🧑‍🧒<br>Dans ce module, découvrez le contrôle parental et ses fonctionnalités.</p>",
     "duration": 10,
     "level": "Débutant",
@@ -406,7 +406,7 @@
           "element": {
             "id": "9bc8b95e-c9ca-4836-9f59-2624aa4c37f8",
             "type": "image",
-            "url": "https://images.pix.fr/modulix/ppn2_infographie.png",
+            "url": "https://assets.pix.org/modules/ppn2_infographie.png",
             "alt": "Infographie décrite dans l'alternative textuelle",
             "alternativeText": "<p>Infographie<strong> Où trouver des options contrôle parental ?</strong> </p><ul><li>Sur les appareils&nbsp;:<ul><li>les appareils personnels (smarthpones, tablettes, ordinateurs, montres connectées, télévisions connectées)</li><li>les consoles de jeux (nintendo switch, xbox, playstation et d’autres)</li><li>les box internet</li></ul></li><li>En ligne&nbsp;:&nbsp;<ul><li>les réseaux sociaux (instagram, facebook, snapchat, tiktok, discord et d’autres)</li><li>les plateformes de jeux vidéo (electronic art, steam, roblox et d’autres)</li><li>les plateformes de vidéo à la demande (netflix, amazon prime, disney+ et d’autres)</li></ul></li><li>Pour l’activer, rendez-vous sur <strong>paramètres </strong>ou <strong>compte</strong>, puis cherchez, selon les appareils et les plateformes&nbsp;: supervision parentale, contrôle parental, temps d’écran, bien être numérique, connexion famille, famille et contrôle parental, centre familial ou d’autres</li></ul>"
           }

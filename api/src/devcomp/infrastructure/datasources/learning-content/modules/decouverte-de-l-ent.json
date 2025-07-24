@@ -4,7 +4,7 @@
   "title": "À la découverte de l’ENT",
   "isBeta": true,
   "details": {
-    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Aujourd’hui, le numérique fait partie du quotidien des familles, à la maison comme à l’école ! <span aria-hidden=\"true\">🎒</span></p><p>Dans ce module, partez à la découverte de l’espace numérique de travail (ENT), l’outil numérique utilisé dans les établissements scolaires.</p>",
     "duration": 10,
     "level": "Débutant",
@@ -118,7 +118,7 @@
           "element": {
             "id": "ec3e85be-af00-45e4-b5e4-f7453d617457",
             "type": "image",
-            "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_schema.png",
+            "url": "https://assets.pix.org/modules/decouverte-de-l-ent/ent_schema.png",
             "alt": "",
             "alternativeText": "<p>Image avec&nbsp;: </p><ul><li>au centre, un ordinateur et un smartphone qui affichent l'écran d'accueil d'un ENT</li><li>autour de l'ordinateur et du smartphone, avec des flèches dans leur direction, un groupe de parents, un groupe d'élèves, un groupe de professeurs, un groupe de personnels d'éducation.</li></ul>"
           }
@@ -143,7 +143,7 @@
           "element": {
             "id": "ac8b3ad5-dade-42be-9991-c4a7cd8d2827",
             "type": "image",
-            "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_accueil.jpg",
+            "url": "https://assets.pix.org/modules/decouverte-de-l-ent/ent_accueil.jpg",
             "alt": "",
             "alternativeText": "<p>Page d'accueil d'un ENT&nbsp;:</p><ul>    <li>à gauche, un menu latéral avec les applications&nbsp;&nbsp;: <ul>            <li>Accueil, Messagerie, Cahier de texte, Emploi du temps, Documents, Actualités</li>        </ul>    </li>    <li>au centre, un accès rapide&nbsp;: <ul>            <li>à l'emploi du temps, au travail à faire et au suivi des notes</li>        </ul>    </li>    <li>en haut à droite, l'accès au compte personnel de Martin Pommard<br></li></ul>"
           }
@@ -343,7 +343,7 @@
                 {
                   "id": "2780195f-aa4b-48e9-8aed-6a516281d590",
                   "type": "image",
-                  "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_applis.jpg",
+                  "url": "https://assets.pix.org/modules/decouverte-de-l-ent/ent_applis.jpg",
                   "alt": "",
                   "alternativeText": "<p>Page «&nbsp;Mes applis&nbsp;» d'un ENT avec la liste des applications disponibles&nbsp;:&nbsp;</p><ul>    <li>Messagerie</li>    <li>Cahier de textes</li>    <li>Emploi du temps</li>    <li>Documents</li>    <li>Blog</li></ul>"
                 },
@@ -402,7 +402,7 @@
                 {
                   "id": "5bed69d3-bc84-45ea-b378-ad040f77868f",
                   "type": "image",
-                  "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_message.jpg",
+                  "url": "https://assets.pix.org/modules/decouverte-de-l-ent/ent_message.jpg",
                   "alt": "",
                   "alternativeText": "<p>Page «&nbsp;Actualités&nbsp;» d'un ENT&nbsp;:</p><ul>    <li>à gauche, un menu latéral avec les applications&nbsp;&nbsp;:        <ul>            <li> Accueil, </li>            <li>Messagerie (2), </li>            <li>Cahier de texte, </li>            <li>Emploi du temps, </li>            <li>Documents, </li>            <li>Actualités            </li>        </ul>    </li>    <li>        au centre, un accès rapide à 3 actualités concernant le collège</li>    <li>        à droite, l'accès au compte personnel de Martin Pommard et un menu mes applis avec&nbsp;: <ul>            <li>Messagerie (2), </li>            <li>Cahier de textes, </li>            <li>Emploi du temps<br><br></li>        </ul>    </li></ul>"
                 },
@@ -445,7 +445,7 @@
                 {
                   "id": "339f5cb0-bcb1-4725-9ddd-9088cb9a6c74",
                   "type": "image",
-                  "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_devoirs.jpg",
+                  "url": "https://assets.pix.org/modules/decouverte-de-l-ent/ent_devoirs.jpg",
                   "alt": "",
                   "alternativeText": "<p>Page «&nbsp;Cahier de texte&nbsp;» d'un ENT&nbsp;:</p><ul>    <li>&nbsp;un menu latéral avec les applications&nbsp;&nbsp;:        <ul>            <li> Accueil, </li>            <li>Messagerie (2), </li>            <li>Cahier de texte, </li>            <li>Emploi du temps, </li>            <li>Documents, </li>            <li>Actualités            </li>        </ul>    </li>    <li>au centre, cahier de texte de l'élève avec les cours et devoirs à venir&nbsp;: <ul>            <li>Vendredi 6 septembre&nbsp;:&nbsp;<ul><li>Histoire-géographie - 6ème B - L'empire romain</li><li>Mathématiques - 6ème B - Les ensembles de nombres</li></ul></li><li>Lundi 9 septembre&nbsp;:&nbsp;<ul><li>Mathématiques - 6ème B - Exercice donné le 06/09/2024 - à faire</li><li>Français - 6ème B - Les compléments circonstanciels</li></ul></li><li>Mardi 10 septembre&nbsp;:&nbsp;<ul><li>Mathématiques - 6ème B - Les ensembles de nombres</li><li>Français - 6ème B - Devoir à la maison donné le 05/09/2024 - à faire</li></ul></li>        </ul>    </li>    <li>en haut à droite, l'accès au compte personnel de Martin Pommard<br></li></ul>"
                 },
@@ -684,20 +684,20 @@
             "instruction": "<p></p>",
             "title": "L'espace numérique de travail",
             "introImage": {
-              "url": "https://images.pix.fr/modulix/didactitiel/intro-flashcards.png"
+              "url": "https://assets.pix.org/modules/didacticiel/intro-flashcards.png"
             },
             "cards": [
               {
                 "id": "14dceb64-64ef-4591-8a96-bdad5f154be4",
                 "recto": {
                   "image": {
-                    "url": "https://images.pix.fr/modulix/recto-flashcards.png"
+                    "url": "https://assets.pix.org/modules/recto-flashcards.png"
                   },
                   "text": "Qu'est ce qu'un ENT ?"
                 },
                 "verso": {
                   "image": {
-                    "url": "https://images.pix.fr/modulix/ent-pere-prof-ecole.png"
+                    "url": "https://assets.pix.org/modules/ent-pere-prof-ecole.png"
                   },
                   "text": "<p><strong>Un espace numérique de travail (ENT)</strong> est un service en ligne proposé par l'établissement scolaire pour le suivi de la scolarité des élèves.</p>"
                 }
@@ -706,13 +706,13 @@
                 "id": "c9ca2e9d-86f1-4ef1-a809-8afb55667869",
                 "recto": {
                   "image": {
-                    "url": "https://images.pix.fr/modulix/recto-flashcards.png"
+                    "url": "https://assets.pix.org/modules/recto-flashcards.png"
                   },
                   "text": "Quelles personnes peuvent utiliser l'ENT d'un établissement scolaire ?"
                 },
                 "verso": {
                   "image": {
-                    "url": "https://images.pix.fr/modulix/ent-parent-prof.png"
+                    "url": "https://assets.pix.org/modules/ent-parent-prof.png"
                   },
                   "text": "<p><strong>Les élèves, les parents, les enseignants et les personnels d'éducation</strong> ont accès à l'ENT. Ils accèdent à cet espace grâce à un identifiant et un mot de passe personnel.</p>"
                 }
@@ -721,13 +721,13 @@
                 "id": "95ee9711-0957-48d1-abfc-a147a5cfbcd4",
                 "recto": {
                   "image": {
-                    "url": "https://images.pix.fr/modulix/recto-flashcards.png"
+                    "url": "https://assets.pix.org/modules/recto-flashcards.png"
                   },
                   "text": "Quel compte un parent doit-il utiliser pour envoyer un message à un enseignant sur l'ENT ?"
                 },
                 "verso": {
                   "image": {
-                    "url": "https://images.pix.fr/modulix/ent-homme-fauteuil.png"
+                    "url": "https://assets.pix.org/modules/ent-homme-fauteuil.png"
                   },
                   "text": "<p><strong>Un parent doit utiliser son compte parent</strong> pour envoyer des messages avec l'ENT. L'utilisation du compte élève est réservé à l'élève.</p>"
                 }
@@ -736,13 +736,13 @@
                 "id": "b0ddc0e4-3c79-48fa-b18c-277853b347a7",
                 "recto": {
                   "image": {
-                    "url": "https://images.pix.fr/modulix/recto-flashcards.png"
+                    "url": "https://assets.pix.org/modules/recto-flashcards.png"
                   },
                   "text": "Quelle fonctionnalité de l'ENT permet de consulter les devoirs de son enfant ?"
                 },
                 "verso": {
                   "image": {
-                    "url": "https://images.pix.fr/modulix/ent-pere-fille-devoirs.png"
+                    "url": "https://assets.pix.org/modules/ent-pere-fille-devoirs.png"
                   },
                   "text": "<p>Grâce au <strong>cahier de texte numérique</strong>, parents et élèves ont accès aux devoirs à faire à la maison et aux contenus des cours déposés par les professeurs.</p>"
                 }

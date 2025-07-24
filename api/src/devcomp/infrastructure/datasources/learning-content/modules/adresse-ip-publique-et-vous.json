@@ -4,7 +4,7 @@
   "title": "L'adresse IP publique : ce qu'elle révèle sur vous !",
   "isBeta": true,
   "details": {
-    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Quand vous naviguez sur internet, vous partagez des informations et laissez ainsi de nombreuses traces : adresse IP, cookies, historique, etc. Dans ce module, découvrez ce qu'est une adresse IP publique et ce qu’elle dévoile sur vous.</p>",
     "duration": 10,
     "level": "Intermédiaire",
@@ -49,7 +49,7 @@
           "element": {
             "id": "2098be0b-e994-4bcd-8e52-5a6559963f8c",
             "type": "image",
-            "url": "https://images.pix.fr/modulix/adresse-ip-publique-et-vous/intro.jpg",
+            "url": "https://assets.pix.org/modules/adresse-ip-publique-et-vous/intro.jpg",
             "alt": "Capture d’écran d’une page de résultats d’une recherche en ligne décrite dans l’alternative textuelle",
             "alternativeText": "<ul><li>Champ de recherche : «&nbsp;recettes de cuisine végétariennes&nbsp;»</li><li>Liste de résultats de recherche<ul><li>Lien vers SOSCuisine</li><li>Lien vers CuisinePop.com</li></ul></li><li>Bouton «&nbsp;Plus de résultats&nbsp;»</li><li>Pied de page : «&nbsp;France. Toulouse. D’après votre adresse IP. Mettre à jour ma position.&nbsp;»</li></ul>"
           }
