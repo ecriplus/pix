@@ -26,7 +26,7 @@ dayjs.extend(CustomParseFormat);
 export default class EvaluationResultsHero extends Component {
   @service currentUser;
 
-  @service metrics;
+  @service pixMetrics;
   @service router;
   @service store;
   @service tabManager;
@@ -70,12 +70,6 @@ export default class EvaluationResultsHero extends Component {
     return this.featureToggles.featureToggles?.upgradeToRealUserEnabled && this.currentUser.user.isAnonymous;
   }
 
-  get dynamicRoute() {
-    return this.featureToggles.featureToggles?.upgradeToRealUserEnabled && this.currentUser.user.isAnonymous
-      ? 'inscription'
-      : 'authentication.login';
-  }
-
   get hasQuestResults() {
     return this.args.questResults && this.args.questResults.length > 0;
   }
@@ -106,7 +100,7 @@ export default class EvaluationResultsHero extends Component {
       const adapter = this.store.adapterFor('campaign-participation-result');
       await adapter.beginImprovement(campaignParticipationResult.id);
 
-      this.metrics.trackEvent({
+      this.pixMetrics.trackEvent({
         event: 'custom-event',
         'pix-event-category': 'Fin de parcours',
         'pix-event-action': 'Amélioration des résultats',
@@ -137,7 +131,7 @@ export default class EvaluationResultsHero extends Component {
       });
       this.args.onResultsShared();
 
-      this.metrics.trackEvent({
+      this.pixMetrics.trackEvent({
         event: 'custom-event',
         'pix-event-category': 'Fin de parcours',
         'pix-event-action': 'Envoi des résultats',
@@ -157,7 +151,7 @@ export default class EvaluationResultsHero extends Component {
 
   @action
   handleBackToHomepageDisplay() {
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Fin de parcours',
       'pix-event-action': 'Sortie de parcours',
@@ -167,12 +161,17 @@ export default class EvaluationResultsHero extends Component {
 
   @action
   handleBackToHomepageClick() {
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Fin de parcours',
       'pix-event-action': 'Sortie de parcours',
       'pix-event-name': "Clic sur le bouton 'Revenir à la page d'accueil'",
     });
+  }
+
+  @action
+  handleSignUpClick() {
+    this.pixMetrics.trackEvent({ 'pix-event-name': 'CampaignResultSignUpFromAnonymousUserClick' });
   }
 
   <template>
@@ -252,7 +251,7 @@ export default class EvaluationResultsHero extends Component {
             {{#if @campaignParticipationResult.isShared}}
               {{#if this.isUserAnonymousAndUpgradeToRealUserEnabled}}
                 <p>{{t "pages.sign-up.save-progress-message"}}</p>
-                <PixButtonLink @route="inscription" @size="large">
+                <PixButtonLink @route="inscription" @size="large" onclick={{this.handleSignUpClick}}>
                   {{t "pages.sign-up.actions.sign-up-on-pix"}}
                 </PixButtonLink>
               {{/if}}
@@ -295,13 +294,13 @@ export default class EvaluationResultsHero extends Component {
             {{/if}}
           {{else}}
             {{#unless @campaign.hasCustomResultPageButton}}
-              {{this.handleBackToHomepageDisplay}}
               {{#if this.isUserAnonymousAndUpgradeToRealUserEnabled}}
                 <p>{{t "pages.sign-up.save-progress-message"}}</p>
-                <PixButtonLink @route={{this.dynamicRoute}} @size="large" onclick={{this.handleBackToHomepageClick}}>
+                <PixButtonLink @route="inscription" @size="large" onclick={{this.handleSignUpClick}}>
                   {{t "pages.sign-up.actions.sign-up-on-pix"}}
                 </PixButtonLink>
               {{else}}
+                {{this.handleBackToHomepageDisplay}}
                 <PixButtonLink @route="authentication.login" @size="large" onclick={{this.handleBackToHomepageClick}}>
                   {{t "navigation.back-to-homepage"}}
                 </PixButtonLink>
