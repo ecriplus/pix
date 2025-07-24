@@ -16,7 +16,7 @@ const PIX_LOCALES = ['en', 'es', 'fr', 'fr-BE', 'fr-FR', 'nl-BE', 'nl'];
 // This cannot be changed without migrating the challenges content.
 const PIX_CHALLENGE_LOCALES = ['en', 'fr', 'fr-fr', 'nl', 'es', 'it', 'de'];
 
-const VISIBLE_LANGUAGES = {
+const PIX_LANGUAGES = {
   en: { value: 'English', languageSwitcherDisplayed: true },
   es: { value: 'Español', languageSwitcherDisplayed: false },
   fr: { value: 'Français', languageSwitcherDisplayed: true },
@@ -44,6 +44,14 @@ export default class LocaleService extends Service {
     return PIX_LOCALES;
   }
 
+  /**
+   * Returns all languages available in the Pix platform
+   * @deprecated use pixLocales instead whenever possible.
+   */
+  get pixLanguages() {
+    return Object.keys(PIX_LANGUAGES);
+  }
+
   get acceptLanguageHeader() {
     if (this.currentDomain.isFranceDomain) return FRENCH_FRANCE_LOCALE;
     return this.currentLocale;
@@ -58,7 +66,7 @@ export default class LocaleService extends Service {
 
   get availableLanguagesForSwitcher() {
     const FRENCH_LANGUAGE = 'fr';
-    const options = Object.entries(VISIBLE_LANGUAGES)
+    const options = Object.entries(PIX_LANGUAGES)
       .filter(([_, config]) => config.languageSwitcherDisplayed)
       .map(([key, config]) => ({ label: config.value, value: key }));
 
@@ -108,7 +116,7 @@ export default class LocaleService extends Service {
 
   #findSupportedLanguage(language) {
     if (!language) return;
-    const supportedLanguages = Object.keys(VISIBLE_LANGUAGES);
+    const supportedLanguages = Object.keys(PIX_LANGUAGES);
     return supportedLanguages.includes(language) ? language : DEFAULT_LOCALE;
   }
 

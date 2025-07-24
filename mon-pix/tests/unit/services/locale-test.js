@@ -52,6 +52,16 @@ module('Unit | Services | locale', function (hooks) {
     });
   });
 
+  module('pixLanguages', function () {
+    test('returns the languages available in the Pix Platform', function (assert) {
+      // when
+      const pixLanguages = localeService.pixLanguages;
+
+      // then
+      assert.deepEqual(pixLanguages, ['en', 'es', 'fr', 'nl']);
+    });
+  });
+
   module('acceptLanguageHeader', function () {
     module('when the domain is pix.fr', function () {
       test('always returns fr-FR', function (assert) {
