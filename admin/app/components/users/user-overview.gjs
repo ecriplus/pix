@@ -25,6 +25,7 @@ import ConfirmPopup from '../confirm-popup';
 export default class UserOverview extends Component {
   @service accessControl;
   @service intl;
+  @service locale;
   @service pixToast;
   @service references;
   @service store;
@@ -35,7 +36,6 @@ export default class UserOverview extends Component {
   @tracked authenticationMethods = [];
 
   languages = this.references.availableLanguages;
-  locales = this.references.availableLocales;
   tooltipTextEmail = this.intl.t('components.users.user-detail-personal-information.actions.copy-email');
   tooltipTextUsername = this.intl.t('components.users.user-detail-personal-information.actions.copy-username');
 
@@ -80,7 +80,7 @@ export default class UserOverview extends Component {
   }
 
   get localeOptions() {
-    return this.locales;
+    return this.locale.pixLocales.map((locale) => ({ value: locale, label: locale }));
   }
 
   get isAnonymizationDisabled() {
