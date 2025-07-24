@@ -4,11 +4,11 @@ import { knex } from '../../../../../db/knex-database-connection.js';
 import { CAMPAIGN_FEATURES } from '../../../../shared/domain/constants.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CampaignParticipationStatuses } from '../../../../shared/domain/models/index.js';
-import { CampaignReport } from '../../../../shared/domain/read-models/CampaignReport.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 import { filterByFullName } from '../../../../shared/infrastructure/utils/filter-utils.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { TargetProfileForSpecifier } from '../../../target-profile/domain/read-models/TargetProfileForSpecifier.js';
+import { CampaignReport } from '../../domain/read-models/CampaignReport.js';
 import { getLatestParticipationSharedForOneLearner } from './helpers/get-latest-participation-shared-for-one-learner.js';
 
 const { SHARED } = CampaignParticipationStatuses;

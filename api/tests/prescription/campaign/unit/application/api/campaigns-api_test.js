@@ -1,8 +1,8 @@
 import * as campaignApi from '../../../../../../src/prescription/campaign/application/api/campaigns-api.js';
 import { UserNotAuthorizedToCreateCampaignError } from '../../../../../../src/prescription/campaign/domain/errors.js';
 import { Campaign } from '../../../../../../src/prescription/campaign/domain/models/Campaign.js';
+import { CampaignReport } from '../../../../../../src/prescription/campaign/domain/read-models/CampaignReport.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
-import { CampaignReport } from '../../../../../../src/shared/domain/read-models/CampaignReport.js';
 import { catchErr, expect, preventStubsToBeCalledUnexpectedly, sinon } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 

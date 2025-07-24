@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import { TubeCoverage } from '../../../prescription/campaign/domain/read-models/CampaignParticipation.js';
-import { CampaignTypes } from '../../../prescription/shared/domain/constants.js';
+import { CampaignTypes } from '../../../shared/domain/constants.js';
+import { TubeCoverage } from './CampaignParticipation.js';
 
 class CampaignReport {
   constructor({
