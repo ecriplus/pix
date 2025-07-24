@@ -11,7 +11,7 @@ import dayjsDurationHumanize from 'ember-dayjs/helpers/dayjs-duration-humanize';
 import { t } from 'ember-intl';
 
 export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
-  @service metrics;
+  @service pixMetrics;
   @service intl;
   @service featureToggles;
   @service dayjs;
@@ -23,7 +23,7 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
   constructor() {
     super(...arguments);
     if (this.args.campaignParticipationResult.canRetry) {
-      this.metrics.trackEvent({
+      this.pixMetrics.trackEvent({
         event: 'custom-event',
         'pix-event-category': 'Fin de parcours',
         'pix-event-action': 'Affichage du bloc RAZ/Repasser un parcours',
@@ -32,7 +32,7 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
     }
 
     if (this.args.campaignParticipationResult.canReset) {
-      this.metrics.trackEvent({
+      this.pixMetrics.trackEvent({
         event: 'custom-event',
         'pix-event-category': 'Fin de parcours',
         'pix-event-action': 'Affichage du bloc RAZ/Repasser un parcours',
@@ -43,7 +43,7 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
 
   @action
   handleRetryClick() {
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Fin de parcours',
       'pix-event-action': 'Affichage du bloc RAZ/Repasser un parcours',
@@ -54,7 +54,7 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
   @action
   toggleResetModalVisibility() {
     if (!this.isResetModalVisible) {
-      this.metrics.trackEvent({
+      this.pixMetrics.trackEvent({
         event: 'custom-event',
         'pix-event-category': 'Fin de parcours',
         'pix-event-action': 'Affichage du bloc RAZ/Repasser un parcours',
@@ -67,7 +67,7 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
 
   @action
   handleResetClick() {
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Fin de parcours',
       'pix-event-action': 'Affichage du bloc RAZ/Repasser un parcours',

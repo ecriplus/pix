@@ -13,7 +13,7 @@ import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 
 export default class ModulixDetails extends Component {
   @service router;
-  @service metrics;
+  @service pixMetrics;
   @service media;
 
   @tracked isSmallScreenModalOpen = false;
@@ -24,7 +24,7 @@ export default class ModulixDetails extends Component {
 
   @action
   onModuleStart() {
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Détails du module : ${this.args.module.slug}`,
@@ -35,7 +35,7 @@ export default class ModulixDetails extends Component {
 
   @action
   onModuleStartUsingSmallScreen() {
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Détails du module : ${this.args.module.slug}`,
@@ -46,7 +46,7 @@ export default class ModulixDetails extends Component {
 
   @action
   onSmallScreenModalOpen() {
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Détails du module : ${this.args.module.slug}`,
@@ -57,7 +57,7 @@ export default class ModulixDetails extends Component {
 
   @action
   onSmallScreenModalClose() {
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Détails du module : ${this.args.module.slug}`,

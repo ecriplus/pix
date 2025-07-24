@@ -12,7 +12,7 @@ export default class AttestationContent extends Component {
   @service session;
   @service currentUser;
   @service fileSaver;
-  @service metrics;
+  @service pixMetrics;
   @service intl;
 
   get resultTitle() {
@@ -30,7 +30,7 @@ export default class AttestationContent extends Component {
   }
 
   sendMetrics() {
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Page Mes Attestations',
       'pix-event-action': 'Cliquer sur le bouton Télécharger (attestation)',

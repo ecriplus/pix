@@ -10,7 +10,7 @@ import TrainingCard from '../../../../training/card';
 
 export default class EvaluationResultsTabsTrainings extends Component {
   @service currentUser;
-  @service metrics;
+  @service pixMetrics;
   @service campaignParticipationResult;
   @service store;
 
@@ -20,7 +20,7 @@ export default class EvaluationResultsTabsTrainings extends Component {
   constructor() {
     super(...arguments);
 
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Fin de parcours',
       'pix-event-action': 'Affichage onglet',
@@ -49,7 +49,7 @@ export default class EvaluationResultsTabsTrainings extends Component {
       campaignParticipationResultToShare.isShared = true;
       campaignParticipationResultToShare.canImprove = false;
 
-      this.metrics.trackEvent({
+      this.pixMetrics.trackEvent({
         event: 'custom-event',
         'pix-event-category': 'Fin de parcours',
         'pix-event-action': 'Envoi des résultats',

@@ -5,11 +5,11 @@ import { t } from 'ember-intl';
 import CompetenceRow from './competence-row';
 
 export default class EvaluationResultsDetailsTab extends Component {
-  @service metrics;
+  @service pixMetrics;
 
   constructor() {
     super(...arguments);
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Fin de parcours',
       'pix-event-action': 'Affichage onglet',

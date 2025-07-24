@@ -51,7 +51,7 @@ export default class Ended extends Component {
     </PixBlock>
   </template>
   @service router;
-  @service metrics;
+  @service pixMetrics;
 
   get hasStages() {
     return this.args.model.totalStagesCount > 0;
@@ -67,7 +67,7 @@ export default class Ended extends Component {
 
   @action
   onClick() {
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Campaign participation',
       'pix-event-action': `Voir le détail d'une participation partagée`,

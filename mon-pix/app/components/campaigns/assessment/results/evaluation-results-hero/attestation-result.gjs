@@ -11,7 +11,7 @@ import kebabCase from 'lodash/kebabCase';
 export default class AttestationResult extends Component {
   @service session;
   @service fileSaver;
-  @service metrics;
+  @service pixMetrics;
   @service intl;
 
   get result() {
@@ -36,7 +36,7 @@ export default class AttestationResult extends Component {
   }
 
   sendMetrics() {
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Fin de parcours',
       'pix-event-action': 'Cliquer sur le bouton Télécharger (attestation)',

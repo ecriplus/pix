@@ -12,7 +12,7 @@ import ModuleNavbar from './layout/navbar';
 
 export default class ModulePassage extends Component {
   @service router;
-  @service metrics;
+  @service pixMetrics;
   @service store;
   @service modulixAutoScroll;
   @service passageEvents;
@@ -73,7 +73,7 @@ export default class ModulePassage extends Component {
   onStepperNextStep(currentStepPosition) {
     const currentGrain = this.displayableGrains[this.currentGrainIndex];
 
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -104,7 +104,7 @@ export default class ModulePassage extends Component {
   async onModuleTerminate({ grainId }) {
     const adapter = this.store.adapterFor('passage');
     await adapter.terminate({ passageId: this.args.passage.id });
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -131,7 +131,7 @@ export default class ModulePassage extends Component {
 
   @action
   async onElementRetry(answerData) {
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -141,7 +141,7 @@ export default class ModulePassage extends Component {
 
   @action
   async onImageAlternativeTextOpen(imageElementId) {
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -151,7 +151,7 @@ export default class ModulePassage extends Component {
 
   @action
   async onVideoTranscriptionOpen(videoElementId) {
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -161,7 +161,7 @@ export default class ModulePassage extends Component {
 
   @action
   async onVideoPlay({ elementId }) {
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -171,7 +171,7 @@ export default class ModulePassage extends Component {
 
   @action
   async onFileDownload({ elementId, downloadedFormat }) {
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -184,7 +184,7 @@ export default class ModulePassage extends Component {
     const element = document.getElementById(`grain_${grainId}`);
     this.modulixAutoScroll.focusAndScroll(element);
 
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,
@@ -195,7 +195,7 @@ export default class ModulePassage extends Component {
   @action
   async onExpandToggle({ elementId, isOpen }) {
     const eventToggle = isOpen ? 'Ouverture' : 'Fermeture';
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Modulix',
       'pix-event-action': `Passage du module : ${this.args.module.slug}`,

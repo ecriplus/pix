@@ -6,7 +6,7 @@ import Component from '@glimmer/component';
 import MarkdownToHtml from '../../../../markdown-to-html';
 
 export default class EvaluationResultsCustomOrganizationBlock extends Component {
-  @service metrics;
+  @service pixMetrics;
 
   get customButtonUrl() {
     if (this.args.campaign.customResultPageButtonUrl && this.args.campaign.customResultPageButtonText) {
@@ -26,7 +26,7 @@ export default class EvaluationResultsCustomOrganizationBlock extends Component 
 
   @action
   handleCustomButtonDisplay() {
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Fin de parcours',
       'pix-event-action': "Affichage du bloc de l'organisation",
@@ -36,7 +36,7 @@ export default class EvaluationResultsCustomOrganizationBlock extends Component 
 
   @action
   handleCustomButtonClick() {
-    this.metrics.trackEvent({
+    this.pixMetrics.trackEvent({
       event: 'custom-event',
       'pix-event-category': 'Fin de parcours',
       'pix-event-action': "Affichage du bloc de l'organisation",
