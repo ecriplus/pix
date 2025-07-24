@@ -6,6 +6,7 @@ import { SessionEnrolment } from '../../../../../src/certification/enrolment/dom
 import { Subscription } from '../../../../../src/certification/enrolment/domain/models/Subscription.js';
 import { usecases as enrolmentUseCases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
 import { usecases as organizationalEntitiesUsecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
+import { usecases as prescriptionLearnerManagementUsecases } from '../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import {
   CertificationCenter,
   types as certificationCenterTypes,
@@ -28,8 +29,6 @@ import publishSessionWithValidatedCertification from '../tools/publish-session-w
  *   - I have previously obtained a certif SCO with ~550 pix
  */
 export class ScoManagingStudent {
-  static USER_BIRTHDATE = '2000-01-01';
-
   constructor({ databaseBuilder }) {
     this.databaseBuilder = databaseBuilder;
   }
@@ -37,7 +36,7 @@ export class ScoManagingStudent {
   async create() {
     const { organization, organizationMember } = await this.#addOrganization();
     const { certificationCenter } = await this.#addCertifCenter({ organization, organizationMember });
-    const { certifiableUser } = await this.#addCertifiableUser({ organization });
+    const organizationLearner = await this.#addCertifiableUser({ organization });
 
     /**
      * Session with candidat ready to start his certification
@@ -46,7 +45,7 @@ export class ScoManagingStudent {
       certificationCenterMember: organizationMember,
       certificationCenter,
     });
-    await this.#addCandidateToSession({ pixAppUser: certifiableUser, session: sessionReadyToStart });
+    await this.#addCandidateToSession({ organizationLearner, session: sessionReadyToStart });
 
     /**
      * Session with a published certification
@@ -56,7 +55,7 @@ export class ScoManagingStudent {
       certificationCenter,
     });
     const candidateToPublish = await this.#addCandidateToSession({
-      pixAppUser: certifiableUser,
+      organizationLearner,
       session: sessionToPublish,
     });
 
@@ -99,23 +98,29 @@ export class ScoManagingStudent {
   async #addCertifiableUser({ organization }) {
     const { certifiableUser } = await CommonCertifiableUser.getInstance({ databaseBuilder: this.databaseBuilder });
 
-    const organizationLearner = await this.databaseBuilder.factory.buildOrganizationLearner({
+    await this.databaseBuilder.factory.buildOrganizationLearner({
       userId: certifiableUser.id,
       organizationId: organization.id,
+      nationalStudentId: 'INE1234',
       firstName: certifiableUser.firstName,
       lastName: certifiableUser.lastName,
       email: certifiableUser.email,
       division: 'Terminale',
       sex: 'F',
-      birthdate: ScoManagingStudent.USER_BIRTHDATE,
+      birthdate: '2000-01-01',
       isCertifiable: true,
       isDisabled: false,
       certifiableAt: new Date('2022-01-30'),
-      user: certifiableUser,
     });
     await this.databaseBuilder.commit();
 
-    return { certifiableUser, organizationLearner };
+    const organizationLearner =
+      await prescriptionLearnerManagementUsecases.reconcileScoOrganizationLearnerAutomatically({
+        organizationId: organization.id,
+        userId: certifiableUser.id,
+      });
+
+    return organizationLearner;
   }
 
   async #addReadyToStartSession({ certificationCenterMember, certificationCenter }) {
@@ -135,22 +140,22 @@ export class ScoManagingStudent {
     });
   }
 
-  async #addCandidateToSession({ pixAppUser, session }) {
-    const candidateBirthdate = ScoManagingStudent.USER_BIRTHDATE;
+  async #addCandidateToSession({ organizationLearner, session }) {
     const candidate = new Candidate({
       authorizedToStart: true,
-      firstName: pixAppUser.firstName,
-      lastName: pixAppUser.lastName,
+      firstName: organizationLearner.firstName,
+      lastName: organizationLearner.lastName,
       sex: 'F',
-      birthdate: new Date(candidateBirthdate),
+      birthdate: new Date(organizationLearner.birthdate),
       birthCountry: 'France',
       birthINSEECode: '75115',
-      email: pixAppUser.email,
+      email: organizationLearner.email,
       isLinked: true,
       hasSeenCertificationInstructions: false,
       accessibilityAdjustmentNeeded: false,
       subscriptions: [Subscription.buildCore({ certificationCandidateId: null })],
-      userId: pixAppUser.id,
+      userId: organizationLearner.userId,
+      organizationLearnerId: organizationLearner.id,
     });
 
     const candidateId = await enrolmentUseCases.addCandidateToSession({
@@ -160,11 +165,11 @@ export class ScoManagingStudent {
     });
 
     await enrolmentServices.registerCandidateParticipation({
-      userId: pixAppUser.id,
+      userId: organizationLearner.userId,
       sessionId: session.id,
       firstName: candidate.firstName,
       lastName: candidate.lastName,
-      birthdate: candidateBirthdate,
+      birthdate: organizationLearner.birthdate,
       normalizeStringFnc: normalize,
     });
 
