@@ -190,7 +190,7 @@ module('Unit | Component | Training | card', function (hooks) {
   module('#trackAccess', function () {
     test('should push event on click', function (assert) {
       // given
-      const metrics = this.owner.lookup('service:metrics');
+      const metrics = this.owner.lookup('service:pix-metrics');
       metrics.trackEvent = sinon.stub();
       const trainingTitle = 'Mon super CF';
       const component = createGlimmerComponent('training/card', {
@@ -203,11 +203,9 @@ module('Unit | Component | Training | card', function (hooks) {
       component.trackAccess();
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, {
-        event: 'custom-event',
-        'pix-event-category': 'Accès Contenu Formatif',
-        'pix-event-action': `Click depuis : ${currentRouteName}`,
-        'pix-event-name': `Ouvre le cf : ${trainingTitle}`,
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Ouvre le cf : ${trainingTitle}`, {
+        category: 'Accès Contenu Formatif',
+        action: `Click depuis : ${currentRouteName}`,
       });
       assert.ok(true);
     });

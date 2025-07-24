@@ -23,42 +23,34 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
   constructor() {
     super(...arguments);
     if (this.args.campaignParticipationResult.canRetry) {
-      this.pixMetrics.trackEvent({
-        event: 'custom-event',
-        'pix-event-category': 'Fin de parcours',
-        'pix-event-action': 'Affichage du bloc RAZ/Repasser un parcours',
-        'pix-event-name': "Présence du bouton 'Repasser un parcours'",
+      this.pixMetrics.trackEvent("Présence du bouton 'Repasser un parcours'", {
+        category: 'Fin de parcours',
+        action: 'Affichage du bloc RAZ/Repasser un parcours',
       });
     }
 
     if (this.args.campaignParticipationResult.canReset) {
-      this.pixMetrics.trackEvent({
-        event: 'custom-event',
-        'pix-event-category': 'Fin de parcours',
-        'pix-event-action': 'Affichage du bloc RAZ/Repasser un parcours',
-        'pix-event-name': "Présence du bouton 'Remettre à zéro et tout retenter'",
+      this.pixMetrics.trackEvent("Présence du bouton 'Remettre à zéro et tout retenter'", {
+        category: 'Fin de parcours',
+        action: 'Affichage du bloc RAZ/Repasser un parcours',
       });
     }
   }
 
   @action
   handleRetryClick() {
-    this.pixMetrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Fin de parcours',
-      'pix-event-action': 'Affichage du bloc RAZ/Repasser un parcours',
-      'pix-event-name': "Clic sur le bouton 'Repasser mon parcours'",
+    this.pixMetrics.trackEvent("Clic sur le bouton 'Repasser mon parcours'", {
+      category: 'Fin de parcours',
+      action: 'Affichage du bloc RAZ/Repasser un parcours',
     });
   }
 
   @action
   toggleResetModalVisibility() {
     if (!this.isResetModalVisible) {
-      this.pixMetrics.trackEvent({
-        event: 'custom-event',
-        'pix-event-category': 'Fin de parcours',
-        'pix-event-action': 'Affichage du bloc RAZ/Repasser un parcours',
-        'pix-event-name': "Ouverture de la modale 'Remettre à zéro et tout retenter'",
+      this.pixMetrics.trackEvent("Ouverture de la modale 'Remettre à zéro et tout retenter'", {
+        category: 'Fin de parcours',
+        action: 'Affichage du bloc RAZ/Repasser un parcours',
       });
     }
 
@@ -67,11 +59,9 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
 
   @action
   handleResetClick() {
-    this.pixMetrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Fin de parcours',
-      'pix-event-action': 'Affichage du bloc RAZ/Repasser un parcours',
-      'pix-event-name': "Confirmation de la modale 'Remettre à zéro et tout retenter'",
+    this.pixMetrics.trackEvent("Confirmation de la modale 'Remettre à zéro et tout retenter'", {
+      category: 'Fin de parcours',
+      action: 'Affichage du bloc RAZ/Repasser un parcours',
     });
   }
 

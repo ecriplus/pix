@@ -20,11 +20,9 @@ export default class EvaluationResultsTabsTrainings extends Component {
   constructor() {
     super(...arguments);
 
-    this.pixMetrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Fin de parcours',
-      'pix-event-action': 'Affichage onglet',
-      'pix-event-name': "Affichage de l'onglet Formations",
+    this.pixMetrics.trackEvent("Affichage de l'onglet Formations", {
+      category: 'Fin de parcours',
+      action: 'Affichage onglet',
     });
   }
 
@@ -49,11 +47,9 @@ export default class EvaluationResultsTabsTrainings extends Component {
       campaignParticipationResultToShare.isShared = true;
       campaignParticipationResultToShare.canImprove = false;
 
-      this.pixMetrics.trackEvent({
-        event: 'custom-event',
-        'pix-event-category': 'Fin de parcours',
-        'pix-event-action': 'Envoi des résultats',
-        'pix-event-name': "Envoi des résultats depuis l'onglet Formations",
+      this.pixMetrics.trackEvent("Envoi des résultats depuis l'onglet Formations", {
+        category: 'Fin de parcours',
+        action: 'Envoi des résultats',
       });
     } catch {
       this.isShareResultsError = true;

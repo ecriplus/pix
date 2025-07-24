@@ -24,44 +24,36 @@ export default class ModulixDetails extends Component {
 
   @action
   onModuleStart() {
-    this.pixMetrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Détails du module : ${this.args.module.slug}`,
-      'pix-event-name': `Click sur le bouton Commencer un passage`,
+    this.pixMetrics.trackEvent(`Click sur le bouton Commencer un passage`, {
+      category: 'Modulix',
+      action: `Détails du module : ${this.args.module.slug}`,
     });
     this.router.transitionTo('module.passage', this.args.module.slug);
   }
 
   @action
   onModuleStartUsingSmallScreen() {
-    this.pixMetrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Détails du module : ${this.args.module.slug}`,
-      'pix-event-name': `Click sur le bouton Commencer un passage en petit écran`,
+    this.pixMetrics.trackEvent(`Click sur le bouton Commencer un passage en petit écran`, {
+      category: 'Modulix',
+      action: `Détails du module : ${this.args.module.slug}`,
     });
     this.router.transitionTo('module.passage', this.args.module.slug);
   }
 
   @action
   onSmallScreenModalOpen() {
-    this.pixMetrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Détails du module : ${this.args.module.slug}`,
-      'pix-event-name': `Ouvre la modale d'alerte de largeur d'écran`,
+    this.pixMetrics.trackEvent(`Ouvre la modale d'alerte de largeur d'écran`, {
+      category: 'Modulix',
+      action: `Détails du module : ${this.args.module.slug}`,
     });
     this.isSmallScreenModalOpen = true;
   }
 
   @action
   onSmallScreenModalClose() {
-    this.pixMetrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Détails du module : ${this.args.module.slug}`,
-      'pix-event-name': `Ferme la modale d'alerte de largeur d'écran`,
+    this.pixMetrics.trackEvent(`Ferme la modale d'alerte de largeur d'écran`, {
+      category: 'Modulix',
+      action: `Détails du module : ${this.args.module.slug}`,
     });
     this.isSmallScreenModalOpen = false;
   }

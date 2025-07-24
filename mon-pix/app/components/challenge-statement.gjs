@@ -261,11 +261,9 @@ export default class ChallengeStatement extends Component {
   }
 
   addMetrics() {
-    this.pixMetrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Vocalisation',
-      'pix-event-action': "Lecture d'une épreuve",
-      'pix-event-name': `Clic sur le bouton de lecture d'épreuve : ${this.isSpeaking ? 'play' : 'stop'}`,
+    this.pixMetrics.trackEvent(`Clic sur le bouton de lecture d'épreuve : ${this.isSpeaking ? 'play' : 'stop'}`, {
+      category: 'Vocalisation',
+      action: "Lecture d'une épreuve",
     });
   }
 

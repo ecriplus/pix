@@ -279,7 +279,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
                 class MetricsStubService extends Service {
                   trackEvent = trackEvent;
                 }
-                this.owner.register('service:metrics', MetricsStubService);
+                this.owner.register('service:pix-metrics', MetricsStubService);
 
                 const screen = await render(
                   hbs`<ChallengeStatement @challenge={{this.challenge}} @assessment={{this.assessment}} @isTextToSpeechActivated={{true}} />`,
@@ -289,11 +289,9 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
                 await click(screen.getByRole('button', { name: t('pages.challenge.statement.text-to-speech.play') }));
 
                 // then
-                sinon.assert.calledWithExactly(trackEvent, {
-                  event: 'custom-event',
-                  'pix-event-category': 'Vocalisation',
-                  'pix-event-action': "Lecture d'une épreuve",
-                  'pix-event-name': "Clic sur le bouton de lecture d'épreuve : play",
+                sinon.assert.calledWithExactly(trackEvent, "Clic sur le bouton de lecture d'épreuve : play", {
+                  category: 'Vocalisation',
+                  action: "Lecture d'une épreuve",
                 });
                 assert.ok(true);
               });

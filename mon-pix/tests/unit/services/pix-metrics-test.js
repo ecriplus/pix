@@ -107,7 +107,7 @@ module('Unit | Service | PixMetrics', function (hooks) {
       sinon.stub(routerService, 'currentURL').value(currentURL);
 
       // when
-      pixMetricsService.trackEvent({ 'pix-event-name': 'mon-event', params: 1 });
+      pixMetricsService.trackEvent('mon-event', { params: 1 });
 
       // then
       sinon.assert.calledOnceWithExactly(metricsService.trackEvent, {
@@ -141,7 +141,7 @@ module('Unit | Service | PixMetrics', function (hooks) {
       sinon.stub(routerService, 'currentURL').value(currentURL);
 
       // when
-      pixMetricsService.trackEvent({ 'pix-event-name': 'mon-event', params: 1 });
+      pixMetricsService.trackEvent('mon-event', { params: 1 });
 
       // then
       sinon.assert.calledOnceWithExactly(metricsService.trackEvent, {

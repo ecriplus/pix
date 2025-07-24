@@ -9,11 +9,9 @@ export default class EvaluationResultsDetailsTab extends Component {
 
   constructor() {
     super(...arguments);
-    this.pixMetrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Fin de parcours',
-      'pix-event-action': 'Affichage onglet',
-      'pix-event-name': "Affichage de l'onglet Détails",
+    this.pixMetrics.trackEvent("Affichage de l'onglet Détails", {
+      category: 'Fin de parcours',
+      action: 'Affichage onglet',
     });
   }
 

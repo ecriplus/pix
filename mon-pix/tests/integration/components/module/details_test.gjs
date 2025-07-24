@@ -49,11 +49,9 @@ module('Integration | Component | Module | Details', function (hooks) {
         await click(screen.getByRole('button', { name: t('pages.modulix.details.startModule') }));
 
         // then
-        sinon.assert.calledWithExactly(metrics.trackEvent, {
-          event: 'custom-event',
-          'pix-event-category': 'Modulix',
-          'pix-event-action': `Détails du module : ${module.slug}`,
-          'pix-event-name': `Click sur le bouton Commencer un passage`,
+        sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton Commencer un passage`, {
+          category: 'Modulix',
+          action: `Détails du module : ${module.slug}`,
         });
         assert.ok(true);
       });
@@ -85,11 +83,9 @@ module('Integration | Component | Module | Details', function (hooks) {
           await click(screen.getByRole('button', { name: t('pages.modulix.details.startModule') }));
 
           // then
-          sinon.assert.calledWithExactly(metrics.trackEvent, {
-            event: 'custom-event',
-            'pix-event-category': 'Modulix',
-            'pix-event-action': `Détails du module : ${module.slug}`,
-            'pix-event-name': `Click sur le bouton Commencer un passage`,
+          sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton Commencer un passage`, {
+            category: 'Modulix',
+            action: `Détails du module : ${module.slug}`,
           });
           assert.ok(true);
         });
@@ -120,11 +116,9 @@ module('Integration | Component | Module | Details', function (hooks) {
           await click(screen.getByRole('button', { name: t('pages.modulix.details.startModule') }));
 
           // then
-          sinon.assert.calledWithExactly(metrics.trackEvent, {
-            event: 'custom-event',
-            'pix-event-category': 'Modulix',
-            'pix-event-action': `Détails du module : ${module.slug}`,
-            'pix-event-name': `Ouvre la modale d'alerte de largeur d'écran`,
+          sinon.assert.calledWithExactly(metrics.trackEvent, `Ouvre la modale d'alerte de largeur d'écran`, {
+            category: 'Modulix',
+            action: `Détails du module : ${module.slug}`,
           });
           assert.ok(true);
         });
@@ -167,12 +161,14 @@ module('Integration | Component | Module | Details', function (hooks) {
             );
 
             // then
-            sinon.assert.calledWithExactly(metrics.trackEvent, {
-              event: 'custom-event',
-              'pix-event-category': 'Modulix',
-              'pix-event-action': `Détails du module : ${module.slug}`,
-              'pix-event-name': `Click sur le bouton Commencer un passage en petit écran`,
-            });
+            sinon.assert.calledWithExactly(
+              metrics.trackEvent,
+              `Click sur le bouton Commencer un passage en petit écran`,
+              {
+                category: 'Modulix',
+                action: `Détails du module : ${module.slug}`,
+              },
+            );
             assert.ok(true);
           });
 
@@ -214,11 +210,9 @@ module('Integration | Component | Module | Details', function (hooks) {
             );
 
             // then
-            sinon.assert.calledWithExactly(metrics.trackEvent, {
-              event: 'custom-event',
-              'pix-event-category': 'Modulix',
-              'pix-event-action': `Détails du module : ${module.slug}`,
-              'pix-event-name': `Ferme la modale d'alerte de largeur d'écran`,
+            sinon.assert.calledWithExactly(metrics.trackEvent, `Ferme la modale d'alerte de largeur d'écran`, {
+              category: 'Modulix',
+              action: `Détails du module : ${module.slug}`,
             });
             assert.ok(true);
           });
@@ -251,7 +245,7 @@ module('Integration | Component | Module | Details', function (hooks) {
 function prepareDetailsComponentContext(tabletSupport, breakpoint = 'desktop') {
   const router = this.owner.lookup('service:router');
   router.transitionTo = sinon.stub();
-  const metrics = this.owner.lookup('service:metrics');
+  const metrics = this.owner.lookup('service:pix-metrics');
   metrics.trackEvent = sinon.stub();
   const store = this.owner.lookup('service:store');
 

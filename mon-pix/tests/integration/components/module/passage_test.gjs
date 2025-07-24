@@ -303,7 +303,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
 
       await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
 
-      const metrics = this.owner.lookup('service:metrics');
+      const metrics = this.owner.lookup('service:pix-metrics');
       metrics.trackEvent = sinon.stub();
 
       // when
@@ -453,7 +453,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
   module('when user clicks on an answerable element verify button', function () {
     test('should save the element answer', async function (assert) {
       // given
-      const metrics = this.owner.lookup('service:metrics');
+      const metrics = this.owner.lookup('service:pix-metrics');
       metrics.trackEvent = sinon.stub();
 
       const store = this.owner.lookup('service:store');
@@ -497,7 +497,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
   module('when user clicks on an answerable element retry button', function () {
     test('should push metrics event', async function (assert) {
       // given
-      const metrics = this.owner.lookup('service:metrics');
+      const metrics = this.owner.lookup('service:pix-metrics');
       metrics.trackEvent = sinon.stub();
 
       // given
@@ -520,11 +520,9 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await clickByName(t('pages.modulix.buttons.activity.retry'));
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, {
-        event: 'custom-event',
-        'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.slug}`,
-        'pix-event-name': `Click sur le bouton réessayer de l'élément : ${element.id}`,
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton réessayer de l'élément : ${element.id}`, {
+        category: 'Modulix',
+        action: `Passage du module : ${module.slug}`,
       });
       assert.ok(true);
     });
@@ -533,7 +531,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
   module('when user opens an image alternative text modal', function () {
     test('should push metrics event', async function (assert) {
       // given
-      const metrics = this.owner.lookup('service:metrics');
+      const metrics = this.owner.lookup('service:pix-metrics');
       metrics.trackEvent = sinon.stub();
 
       // given
@@ -559,11 +557,9 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await clickByName("Afficher l'alternative textuelle");
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, {
-        event: 'custom-event',
-        'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.slug}`,
-        'pix-event-name': `Click sur le bouton alternative textuelle : ${element.id}`,
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton alternative textuelle : ${element.id}`, {
+        category: 'Modulix',
+        action: `Passage du module : ${module.slug}`,
       });
       assert.ok(true);
     });
@@ -571,7 +567,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
     module('when image is in a stepper', function () {
       test('should push metrics event', async function (assert) {
         // given
-        const metrics = this.owner.lookup('service:metrics');
+        const metrics = this.owner.lookup('service:pix-metrics');
         metrics.trackEvent = sinon.stub();
 
         // given
@@ -601,12 +597,14 @@ module('Integration | Component | Module | Passage', function (hooks) {
         await clickByName("Afficher l'alternative textuelle");
 
         // then
-        sinon.assert.calledWithExactly(metrics.trackEvent, {
-          event: 'custom-event',
-          'pix-event-category': 'Modulix',
-          'pix-event-action': `Passage du module : ${module.slug}`,
-          'pix-event-name': `Click sur le bouton alternative textuelle : ${imageElement.id}`,
-        });
+        sinon.assert.calledWithExactly(
+          metrics.trackEvent,
+          `Click sur le bouton alternative textuelle : ${imageElement.id}`,
+          {
+            category: 'Modulix',
+            action: `Passage du module : ${module.slug}`,
+          },
+        );
         assert.ok(true);
       });
     });
@@ -615,7 +613,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
   module('when user opens a video transcription modal', function () {
     test('should push metrics event', async function (assert) {
       // given
-      const metrics = this.owner.lookup('service:metrics');
+      const metrics = this.owner.lookup('service:pix-metrics');
       metrics.trackEvent = sinon.stub();
 
       // given
@@ -642,11 +640,9 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await clickByName('Afficher la transcription');
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, {
-        event: 'custom-event',
-        'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.slug}`,
-        'pix-event-name': `Click sur le bouton transcription : ${element.id}`,
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton transcription : ${element.id}`, {
+        category: 'Modulix',
+        action: `Passage du module : ${module.slug}`,
       });
       assert.ok(true);
     });
@@ -654,7 +650,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
     module('when video is in a stepper', function () {
       test('should push metrics event', async function (assert) {
         // given
-        const metrics = this.owner.lookup('service:metrics');
+        const metrics = this.owner.lookup('service:pix-metrics');
         metrics.trackEvent = sinon.stub();
 
         // given
@@ -685,11 +681,9 @@ module('Integration | Component | Module | Passage', function (hooks) {
         await clickByName('Afficher la transcription');
 
         // then
-        sinon.assert.calledWithExactly(metrics.trackEvent, {
-          event: 'custom-event',
-          'pix-event-category': 'Modulix',
-          'pix-event-action': `Passage du module : ${module.slug}`,
-          'pix-event-name': `Click sur le bouton transcription : ${videoElement.id}`,
+        sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton transcription : ${videoElement.id}`, {
+          category: 'Modulix',
+          action: `Passage du module : ${module.slug}`,
         });
         assert.ok(true);
       });
@@ -720,19 +714,21 @@ module('Integration | Component | Module | Passage', function (hooks) {
 
       await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
 
-      const metrics = this.owner.lookup('service:metrics');
+      const metrics = this.owner.lookup('service:pix-metrics');
       metrics.trackEvent = sinon.stub();
 
       // when
       await clickByName(onStepperNextStepButtonName);
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, {
-        event: 'custom-event',
-        'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.slug}`,
-        'pix-event-name': `Click sur le bouton suivant de l'étape 1 du stepper dans le grain : ${grain.id}`,
-      });
+      sinon.assert.calledWithExactly(
+        metrics.trackEvent,
+        `Click sur le bouton suivant de l'étape 1 du stepper dans le grain : ${grain.id}`,
+        {
+          category: 'Modulix',
+          action: `Passage du module : ${module.slug}`,
+        },
+      );
       assert.ok(true);
     });
   });
@@ -862,7 +858,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
     test('should push an event', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const metrics = this.owner.lookup('service:metrics');
+      const metrics = this.owner.lookup('service:pix-metrics');
       metrics.trackEvent = sinon.stub();
 
       const videoElement = {
@@ -895,11 +891,9 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await new Promise((resolve) => setTimeout(resolve, 0));
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, {
-        event: 'custom-event',
-        'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.slug}`,
-        'pix-event-name': `Click sur le bouton Play : ${videoElement.id}`,
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton Play : ${videoElement.id}`, {
+        category: 'Modulix',
+        action: `Passage du module : ${module.slug}`,
       });
       assert.ok(true);
     });
@@ -907,7 +901,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
     module('when video is in a stepper', function () {
       test('should push metrics event', async function (assert) {
         // given
-        const metrics = this.owner.lookup('service:metrics');
+        const metrics = this.owner.lookup('service:pix-metrics');
         metrics.trackEvent = sinon.stub();
 
         // given
@@ -940,11 +934,9 @@ module('Integration | Component | Module | Passage', function (hooks) {
         await new Promise((resolve) => setTimeout(resolve, 0));
 
         // then
-        sinon.assert.calledWithExactly(metrics.trackEvent, {
-          event: 'custom-event',
-          'pix-event-category': 'Modulix',
-          'pix-event-action': `Passage du module : ${module.slug}`,
-          'pix-event-name': `Click sur le bouton Play : ${videoElement.id}`,
+        sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton Play : ${videoElement.id}`, {
+          category: 'Modulix',
+          action: `Passage du module : ${module.slug}`,
         });
         assert.ok(true);
       });
@@ -955,7 +947,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
     test('should push an event', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const metrics = this.owner.lookup('service:metrics');
+      const metrics = this.owner.lookup('service:pix-metrics');
       metrics.trackEvent = sinon.stub();
 
       const downloadedFormat = '.pdf';
@@ -989,19 +981,21 @@ module('Integration | Component | Module | Passage', function (hooks) {
       downloadLink.click();
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, {
-        event: 'custom-event',
-        'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.slug}`,
-        'pix-event-name': `Click sur le bouton Télécharger au format ${downloadedFormat} de ${downloadElement.id}`,
-      });
+      sinon.assert.calledWithExactly(
+        metrics.trackEvent,
+        `Click sur le bouton Télécharger au format ${downloadedFormat} de ${downloadElement.id}`,
+        {
+          category: 'Modulix',
+          action: `Passage du module : ${module.slug}`,
+        },
+      );
       assert.ok(true);
     });
 
     module('when download is in a stepper', function () {
       test('should push metrics event', async function (assert) {
         // given
-        const metrics = this.owner.lookup('service:metrics');
+        const metrics = this.owner.lookup('service:pix-metrics');
         metrics.trackEvent = sinon.stub();
 
         // given
@@ -1035,12 +1029,14 @@ module('Integration | Component | Module | Passage', function (hooks) {
         link.click();
 
         // then
-        sinon.assert.calledWithExactly(metrics.trackEvent, {
-          event: 'custom-event',
-          'pix-event-category': 'Modulix',
-          'pix-event-action': `Passage du module : ${module.slug}`,
-          'pix-event-name': `Click sur le bouton Télécharger au format ${downloadedFormat} de ${downloadElement.id}`,
-        });
+        sinon.assert.calledWithExactly(
+          metrics.trackEvent,
+          `Click sur le bouton Télécharger au format ${downloadedFormat} de ${downloadElement.id}`,
+          {
+            category: 'Modulix',
+            action: `Passage du module : ${module.slug}`,
+          },
+        );
         assert.ok(true);
       });
     });
@@ -1055,7 +1051,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       this.owner.register('adapter:passage', PassageAdapterStub);
       const router = this.owner.lookup('service:router');
       router.transitionTo = sinon.stub();
-      const metrics = this.owner.lookup('service:metrics');
+      const metrics = this.owner.lookup('service:pix-metrics');
       metrics.trackEvent = sinon.stub();
       const store = this.owner.lookup('service:store');
       const passageEventsService = this.owner.lookup('service:passage-events');
@@ -1086,11 +1082,9 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await clickByName(t('pages.modulix.buttons.grain.terminate'));
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, {
-        event: 'custom-event',
-        'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.slug}`,
-        'pix-event-name': `Click sur le bouton Terminer du grain : ${grain.id}`,
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton Terminer du grain : ${grain.id}`, {
+        category: 'Modulix',
+        action: `Passage du module : ${module.slug}`,
       });
       sinon.assert.calledWithExactly(passageEventsService.record, {
         type: 'PASSAGE_TERMINATED',
@@ -1123,7 +1117,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
         grains: [grain],
       });
       const passage = store.createRecord('passage');
-      const metrics = this.owner.lookup('service:metrics');
+      const metrics = this.owner.lookup('service:pix-metrics');
       metrics.trackEvent = sinon.stub();
 
       //  when
@@ -1133,11 +1127,9 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await click(expandSummarySelector);
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, {
-        event: 'custom-event',
-        'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.slug}`,
-        'pix-event-name': `Ouverture de l'élément Expand : ${expandElement.id}`,
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Ouverture de l'élément Expand : ${expandElement.id}`, {
+        category: 'Modulix',
+        action: `Passage du module : ${module.slug}`,
       });
       assert.ok(true);
     });
@@ -1168,7 +1160,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
           grains: [grain],
         });
         const passage = store.createRecord('passage');
-        const metrics = this.owner.lookup('service:metrics');
+        const metrics = this.owner.lookup('service:pix-metrics');
         metrics.trackEvent = sinon.stub();
 
         //  when
@@ -1178,11 +1170,9 @@ module('Integration | Component | Module | Passage', function (hooks) {
         await click(expandSummarySelector);
 
         // then
-        sinon.assert.calledWithExactly(metrics.trackEvent, {
-          event: 'custom-event',
-          'pix-event-category': 'Modulix',
-          'pix-event-action': `Passage du module : ${module.slug}`,
-          'pix-event-name': `Ouverture de l'élément Expand : ${expandElement.id}`,
+        sinon.assert.calledWithExactly(metrics.trackEvent, `Ouverture de l'élément Expand : ${expandElement.id}`, {
+          category: 'Modulix',
+          action: `Passage du module : ${module.slug}`,
         });
         assert.ok(true);
       });
@@ -1213,7 +1203,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
         grains: [grain],
       });
       const passage = store.createRecord('passage');
-      const metrics = this.owner.lookup('service:metrics');
+      const metrics = this.owner.lookup('service:pix-metrics');
       metrics.trackEvent = sinon.stub();
 
       //  when
@@ -1226,11 +1216,9 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await click(expandSummarySelector);
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, {
-        event: 'custom-event',
-        'pix-event-category': 'Modulix',
-        'pix-event-action': `Passage du module : ${module.slug}`,
-        'pix-event-name': `Fermeture de l'élément Expand : ${expandElement.id}`,
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Fermeture de l'élément Expand : ${expandElement.id}`, {
+        category: 'Modulix',
+        action: `Passage du module : ${module.slug}`,
       });
       assert.ok(true);
     });

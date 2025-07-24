@@ -26,21 +26,17 @@ export default class EvaluationResultsCustomOrganizationBlock extends Component 
 
   @action
   handleCustomButtonDisplay() {
-    this.pixMetrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Fin de parcours',
-      'pix-event-action': "Affichage du bloc de l'organisation",
-      'pix-event-name': 'Présence d’un bouton comportant un lien externe',
+    this.pixMetrics.trackEvent('Présence d’un bouton comportant un lien externe', {
+      category: 'Fin de parcours',
+      action: "Affichage du bloc de l'organisation",
     });
   }
 
   @action
   handleCustomButtonClick() {
-    this.pixMetrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Fin de parcours',
-      'pix-event-action': "Affichage du bloc de l'organisation",
-      'pix-event-name': 'Clic sur le lien externe',
+    this.pixMetrics.trackEvent('Clic sur le lien externe', {
+      category: 'Fin de parcours',
+      action: "Affichage du bloc de l'organisation",
     });
   }
 

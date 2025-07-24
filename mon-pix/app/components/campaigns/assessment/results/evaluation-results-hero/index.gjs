@@ -100,11 +100,9 @@ export default class EvaluationResultsHero extends Component {
       const adapter = this.store.adapterFor('campaign-participation-result');
       await adapter.beginImprovement(campaignParticipationResult.id);
 
-      this.pixMetrics.trackEvent({
-        event: 'custom-event',
-        'pix-event-category': 'Fin de parcours',
-        'pix-event-action': 'Amélioration des résultats',
-        'pix-event-name': "Clic sur le bouton 'Je retente'",
+      this.pixMetrics.trackEvent("Clic sur le bouton 'Je retente'", {
+        category: 'Fin de parcours',
+        action: 'Amélioration des résultats',
       });
 
       this.router.transitionTo('campaigns.entry-point', this.args.campaign.code);
@@ -131,11 +129,9 @@ export default class EvaluationResultsHero extends Component {
       });
       this.args.onResultsShared();
 
-      this.pixMetrics.trackEvent({
-        event: 'custom-event',
-        'pix-event-category': 'Fin de parcours',
-        'pix-event-action': 'Envoi des résultats',
-        'pix-event-name': "Envoi des résultats depuis l'en-tête",
+      this.pixMetrics.trackEvent("Envoi des résultats depuis l'en-tête", {
+        category: 'Fin de parcours',
+        action: 'Envoi des résultats',
       });
     } catch {
       this.hasGlobalError = true;
@@ -151,27 +147,23 @@ export default class EvaluationResultsHero extends Component {
 
   @action
   handleBackToHomepageDisplay() {
-    this.pixMetrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Fin de parcours',
-      'pix-event-action': 'Sortie de parcours',
-      'pix-event-name': "Affichage du bouton 'Revenir à la page d'accueil'",
+    this.pixMetrics.trackEvent("Affichage du bouton 'Revenir à la page d'accueil'", {
+      category: 'Fin de parcours',
+      action: 'Sortie de parcours',
     });
   }
 
   @action
   handleBackToHomepageClick() {
-    this.pixMetrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Fin de parcours',
-      'pix-event-action': 'Sortie de parcours',
-      'pix-event-name': "Clic sur le bouton 'Revenir à la page d'accueil'",
+    this.pixMetrics.trackEvent("Clic sur le bouton 'Revenir à la page d'accueil'", {
+      category: 'Fin de parcours',
+      action: 'Sortie de parcours',
     });
   }
 
   @action
   handleSignUpClick() {
-    this.pixMetrics.trackEvent({ 'pix-event-name': 'CampaignResultSignUpFromAnonymousUserClick' });
+    this.pixMetrics.trackEvent('CampaignResultSignUpFromAnonymousUserClick');
   }
 
   <template>

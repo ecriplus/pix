@@ -11,11 +11,9 @@ export default class Rewards extends Component {
   constructor() {
     super(...arguments);
 
-    this.pixMetrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Fin de parcours',
-      'pix-event-action': 'Affichage onglet',
-      'pix-event-name': "Affichage de l'onglet Récompenses",
+    this.pixMetrics.trackEvent("Affichage de l'onglet Récompenses", {
+      category: 'Fin de parcours',
+      action: 'Affichage onglet',
     });
   }
 

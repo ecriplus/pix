@@ -83,7 +83,7 @@ module('Acceptance | Challenge page banner', function (hooks) {
           trackEvent = sinon.stub();
           context = {};
         }
-        this.owner.register('service:metrics', MetricsStubService);
+        this.owner.register('service:pix-metrics', MetricsStubService);
 
         const screen = await visit(`/assessments/${assessment.id}/challenges/${challenge.id}`);
         await click(screen.getByRole('button', { name: 'Désactiver la vocalisation' }));

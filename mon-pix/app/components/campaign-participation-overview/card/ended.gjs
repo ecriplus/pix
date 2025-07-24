@@ -67,11 +67,9 @@ export default class Ended extends Component {
 
   @action
   onClick() {
-    this.pixMetrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Campaign participation',
-      'pix-event-action': `Voir le détail d'une participation partagée`,
-      'pix-event-name': `Voir le détail d'une participation partagée`,
+    this.pixMetrics.trackEvent(`Voir le détail d'une participation partagée`, {
+      category: 'Campaign participation',
+      action: `Voir le détail d'une participation partagée`,
     });
     this.router.transitionTo('campaigns.entry-point', this.args.model.campaignCode);
   }
