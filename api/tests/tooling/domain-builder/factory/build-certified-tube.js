@@ -1,4 +1,4 @@
-import { CertifiedTube } from '../../../../src/shared/domain/read-models/CertifiedProfile.js';
+import { CertifiedTube } from '../../../../src/certification/results/domain/read-models/CertifiedProfile.js';
 
 const buildCertifiedTube = function buildCertifiedTube({
   id = 'someTubeId',
