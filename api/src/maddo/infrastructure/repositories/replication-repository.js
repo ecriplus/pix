@@ -94,6 +94,35 @@ export const replications = [
       return datamartKnex('target_profiles_course_duration').insert(chunk);
     },
   },
+  {
+    name: 'data-calibrations',
+    before: async ({ datamartKnex }) => {
+      await datamartKnex('data_calibrations').truncate();
+    },
+    from: ({ datawarehouseKnex }) => {
+      return datawarehouseKnex('data_calibrations').select('id', 'calibration_date', 'status', 'scope');
+    },
+    to: ({ datamartKnex }, chunk) => {
+      return datamartKnex('data_calibrations').insert(chunk);
+    },
+  },
+  {
+    name: 'data-active-calibrated-challenges',
+    before: async ({ datamartKnex }) => {
+      await datamartKnex('data_active_calibrated_challenges').truncate();
+    },
+    from: ({ datawarehouseKnex }) => {
+      return datawarehouseKnex('data_active_calibrated_challenges').select(
+        'challenge_id',
+        'alpha',
+        'delta',
+        'calibration_id',
+      );
+    },
+    to: ({ datamartKnex }, chunk) => {
+      return datamartKnex('data_active_calibrated_challenges').insert(chunk);
+    },
+  },
 ];
 
 export function getByName(name, dependencies = { replications }) {
