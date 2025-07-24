@@ -93,7 +93,7 @@ module('Acceptance | authenticated/users/get', function (hooks) {
       await click(screen.getByRole('button', { name: 'Langue' }));
 
       await screen.findByRole('listbox');
-      await click(screen.getByRole('option', { name: 'Anglais' }));
+      await click(screen.getByRole('option', { name: 'en' }));
 
       await clickByName('Modifier');
 

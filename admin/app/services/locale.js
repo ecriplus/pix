@@ -1,10 +1,10 @@
-// This file is the ORIGINAL file. Copies of it are used in all the fronts.
-// If you need a change, modify the original file and
-// propagate the changes in the copies in all the fronts.
+// This file is a COPY of an original file from mon-pix.
+// If you need a change, as much as possible modify the original file
+// and propagate the changes in the copies in all the fronts
 
 import { getOwner } from '@ember/application';
 import Service, { service } from '@ember/service';
-import ENV from 'mon-pix/config/environment';
+import ENV from 'pix-admin/config/environment';
 
 const { DEFAULT_LOCALE, SUPPORTED_LOCALES, COOKIE_LOCALE_LIFESPAN_IN_SECONDS } = ENV.APP;
 

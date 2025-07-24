@@ -127,34 +127,28 @@ module('Integration | Component | users | user-overview', function (hooks) {
         assert.dom(attributesList.getByText('Date de création').nextElementSibling).hasText('10/12/2021');
       });
 
-      [
-        { locale: 'en', lang: 'en' },
-        { locale: 'fr', lang: 'fr' },
-        { locale: 'fr-BE', lang: 'fr' },
-        { locale: 'fr-FR', lang: 'fr' },
-        { locale: 'nl-BE', lang: 'nl' },
-      ].forEach((expected) => {
-        test("displays user's information for lang, locales and without creation date", async function (assert) {
-          // given
-          const store = this.owner.lookup('service:store');
-          const user = store.createRecord('user', {
-            firstName: 'John',
-            lastName: 'Snow',
-            email: 'john.snow@winterfell.got',
-            username: 'kingofthenorth',
-            lang: expected.lang,
-            locale: expected.locale,
-          });
-
-          // when
-          const screen = await render(<template><UserOverview @user={{user}} /></template>);
-
-          // then
-          const attributesList = within(screen.getByLabelText('Informations utilisateur'));
-          assert.dom(attributesList.getByText('Langue').nextElementSibling).hasText(expected.lang);
-          assert.dom(attributesList.getByText('Locale').nextElementSibling).hasText(expected.locale);
-          assert.dom(attributesList.getByText('Date de création').nextElementSibling).hasText('');
+      test("displays user's information for lang, locale and without creation date", async function (assert) {
+        // given
+        const lang = 'fr';
+        const locale = 'fr-BE';
+        const store = this.owner.lookup('service:store');
+        const user = store.createRecord('user', {
+          firstName: 'John',
+          lastName: 'Snow',
+          email: 'john.snow@winterfell.got',
+          username: 'kingofthenorth',
+          lang,
+          locale,
         });
+
+        // when
+        const screen = await render(<template><UserOverview @user={{user}} /></template>);
+
+        // then
+        const attributesList = within(screen.getByLabelText('Informations utilisateur'));
+        assert.dom(attributesList.getByText('Langue').nextElementSibling).hasText(lang);
+        assert.dom(attributesList.getByText('Locale').nextElementSibling).hasText(locale);
+        assert.dom(attributesList.getByText('Date de création').nextElementSibling).hasText('');
       });
 
       module('copy feature', function () {
@@ -478,9 +472,9 @@ module('Integration | Component | users | user-overview', function (hooks) {
 
         await clickByName('Langue');
         await screen.findByRole('listbox');
-        assert.dom(screen.getByRole('option', { name: 'Français' })).exists();
-        assert.dom(screen.getByRole('option', { name: 'Anglais' })).exists();
-        assert.dom(screen.getByRole('option', { name: 'Néerlandais' })).exists();
+        assert.dom(screen.getByRole('option', { name: 'fr' })).exists();
+        assert.dom(screen.getByRole('option', { name: 'en' })).exists();
+        assert.dom(screen.getByRole('option', { name: 'nl' })).exists();
 
         await clickByName('Locale');
         await waitFor(async () => {

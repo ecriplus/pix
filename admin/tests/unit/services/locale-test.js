@@ -1,10 +1,10 @@
-// This file is the ORIGINAL file. Copies of it are used in all the fronts.
-// If you need a change, modify the original file and
-// propagate the changes in the copies in all the fronts.
+// This file is a COPY of an original file from mon-pix.
+// If you need a change, as much as possible modify the original file
+// and propagate the changes in the copies in all the fronts
 
 import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
-import ENV from 'mon-pix/config/environment';
+import ENV from 'pix-admin/config/environment';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -22,6 +22,7 @@ module('Unit | Services | locale', function (hooks) {
 
   hooks.beforeEach(function () {
     localeService = this.owner.lookup('service:locale');
+    sinon.stub(localeService, 'supportedLocales').value(['en', 'es', 'fr', 'fr-BE', 'fr-FR', 'nl-BE', 'nl']);
 
     cookiesService = this.owner.lookup('service:cookies');
     sinon.stub(cookiesService, 'write');

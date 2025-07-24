@@ -17,7 +17,7 @@ export default class LanguageSwitcher extends Component {
   }
 
   get availableLanguages() {
-    return this.locale.availableLanguagesForSwitcher;
+    return this.locale.switcherDisplayedLanguages;
   }
 
   <template>
