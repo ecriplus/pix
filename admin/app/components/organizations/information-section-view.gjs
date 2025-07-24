@@ -4,7 +4,7 @@ import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-al
 import { concat, get } from '@ember/helper';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { t } from 'ember-intl';
+import { formatList, t } from 'ember-intl';
 import { and, eq } from 'ember-truth-helpers';
 import { DescriptionList } from 'pix-admin/components/ui/description-list';
 import Organization from 'pix-admin/models/organization';
@@ -145,36 +145,46 @@ function keys(obj) {
   return Object.keys(obj);
 }
 
-const FeaturesSection = <template>
-  <ul class="organization-information-section__features">
-    {{#each (keys Organization.featureList) as |feature|}}
-      {{#let
-        (get @features feature) (concat "components.organizations.information-section-view.features." feature)
-        as |organizationFeature featureLabel|
-      }}
-        {{#if (eq feature "SHOW_NPS")}}
-          <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
-            <a
-              rel="noopener noreferrer"
-              href={{organizationFeature.params.formNPSUrl}}
-              target="_blank"
-            >{{organizationFeature.params.formNPSUrl}}</a>
-          </Feature>
-        {{else if (eq feature "LEARNER_IMPORT")}}
-          <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
-            {{organizationFeature.params.name}}
-          </Feature>
-        {{else if (eq feature "ATTESTATIONS_MANAGEMENT")}}
-          <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
-            6ème
-          </Feature>
-        {{else}}
-          <Feature @label={{t featureLabel}} @value={{organizationFeature.active}} />
-        {{/if}}
-      {{/let}}
-    {{/each}}
-  </ul>
-</template>;
+class FeaturesSection extends Component {
+  @service intl;
+
+  attestationLabels = (attestations) => {
+    return attestations.map((name) =>
+      this.intl.t(`components.organizations.information-section-view.features.attestation-list.${name}`),
+    );
+  };
+
+  <template>
+    <ul class="organization-information-section__features">
+      {{#each (keys Organization.featureList) as |feature|}}
+        {{#let
+          (get @features feature) (concat "components.organizations.information-section-view.features." feature)
+          as |organizationFeature featureLabel|
+        }}
+          {{#if (eq feature "SHOW_NPS")}}
+            <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
+              <a
+                rel="noopener noreferrer"
+                href={{organizationFeature.params.formNPSUrl}}
+                target="_blank"
+              >{{organizationFeature.params.formNPSUrl}}</a>
+            </Feature>
+          {{else if (eq feature "LEARNER_IMPORT")}}
+            <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
+              {{organizationFeature.params.name}}
+            </Feature>
+          {{else if (eq feature "ATTESTATIONS_MANAGEMENT")}}
+            <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
+              {{formatList (this.attestationLabels organizationFeature.params)}}
+            </Feature>
+          {{else}}
+            <Feature @label={{t featureLabel}} @value={{organizationFeature.active}} />
+          {{/if}}
+        {{/let}}
+      {{/each}}
+    </ul>
+  </template>
+}
 
 const Feature = <template>
   <li

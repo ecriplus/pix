@@ -312,7 +312,7 @@ module('Integration | Component | organizations/information-section-view', funct
             // given
             const organization = EmberObject.create({
               features: {
-                ATTESTATIONS_MANAGEMENT: { active: true },
+                ATTESTATIONS_MANAGEMENT: { active: true, params: ['PARENTHOOD'] },
               },
             });
 
@@ -323,6 +323,14 @@ module('Integration | Component | organizations/information-section-view', funct
               screen.getByLabelText(
                 `${t('components.organizations.information-section-view.features.ATTESTATIONS_MANAGEMENT')} : ${t(
                   'common.words.yes',
+                )}`,
+              ),
+            );
+
+            assert.ok(
+              screen.getByText(
+                `${t('components.organizations.information-section-view.features.ATTESTATIONS_MANAGEMENT')} : ${t(
+                  'components.organizations.information-section-view.features.attestation-list.PARENTHOOD',
                 )}`,
               ),
             );

@@ -525,6 +525,10 @@
           "PLACES_MANAGEMENT": "Affichage de la page Places sur PixOrga",
           "SHOW_NPS": "Affichage du Net Promoter Score",
           "SHOW_SKILLS": "Affichage des acquis dans l'export de résultats",
+          "attestation-list": {
+            "PARENTHOOD": "Parentalité",
+            "SIXTH_GRADE": "6ème"
+          },
           "title": "Fonctionnalités"
         },
         "parent-organization": "Organisation mère"
