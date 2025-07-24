@@ -1,5 +1,5 @@
+import { StudentInformationForAccountRecovery } from '../../../../../src/identity-access-management/domain/read-models/StudentInformationForAccountRecovery.js';
 import { checkScoAccountRecovery } from '../../../../../src/identity-access-management/domain/usecases/check-sco-account-recovery.usecase.js';
-import { StudentInformationForAccountRecovery } from '../../../../../src/shared/domain/read-models/StudentInformationForAccountRecovery.js';
 import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | check-sco-account-recovery', function () {
