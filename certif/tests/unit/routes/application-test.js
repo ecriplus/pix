@@ -29,7 +29,7 @@ module('Unit | Route | application', function (hooks) {
       sinon.stub(route.featureToggles, 'load');
       route.featureToggles.load.resolves();
 
-      sinon.stub(route.session, 'handleLocale');
+      sinon.stub(route.session, 'loadCurrentUserAndSetLocale');
 
       // when
       await route.beforeModel(transition);
@@ -38,7 +38,7 @@ module('Unit | Route | application', function (hooks) {
       assert.ok(route.featureToggles.load.called);
     });
 
-    test('calls handleLocale', async function (assert) {
+    test('calls loadCurrentUserAndSetLocale', async function (assert) {
       // given
       const transition = { to: { queryParams: { lang: 'fr' } } };
       const route = this.owner.lookup('route:application');
@@ -46,18 +46,14 @@ module('Unit | Route | application', function (hooks) {
       sinon.stub(route.featureToggles, 'load');
       route.featureToggles.load.resolves();
 
-      sinon.stub(route.session, 'handleLocale');
-      route.session.handleLocale.resolves();
+      sinon.stub(route.session, 'loadCurrentUserAndSetLocale');
+      route.session.loadCurrentUserAndSetLocale.resolves();
 
       // when
       await route.beforeModel(transition);
 
       // then
-      sinon.assert.calledWith(route.session.handleLocale, {
-        isFranceDomain: true,
-        localeFromQueryParam: 'fr',
-        userLocale: undefined,
-      });
+      sinon.assert.calledOnceWithExactly(route.session.loadCurrentUserAndSetLocale, transition);
       assert.ok(true);
     });
   });
