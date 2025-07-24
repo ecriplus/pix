@@ -1715,6 +1715,10 @@
           "discovery": "Ontdekking",
           "lesson": "Les",
           "summary": "Recap"
+        },
+        "title": {
+          "lesson": "Les",
+          "summary":  "Recap"
         }
       },
       "interactiveElement": {

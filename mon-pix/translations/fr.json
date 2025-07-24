@@ -1726,6 +1726,10 @@
           "discovery": "Découverte",
           "lesson": "Leçon",
           "summary": "Récap'"
+        },
+        "title": {
+          "lesson": "Leçon",
+          "summary":  "Récapitulatif"
         }
       },
       "interactiveElement": {
