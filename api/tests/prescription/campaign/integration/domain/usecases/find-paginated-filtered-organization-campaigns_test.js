@@ -1,8 +1,8 @@
+import { CampaignReport } from '../../../../../../src/prescription/campaign/domain/read-models/CampaignReport.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
 import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
-import { CampaignReport } from '../../../../../../src/shared/domain/read-models/CampaignReport.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | UseCase | find-paginated-filtered-organization-campaigns', function () {
