@@ -17,7 +17,11 @@ export default class PixMetricsService extends Service {
   getRedactedPageUrl() {
     const params = extractParamsFromRouteInfo(this.router.currentRoute);
     const currentUrl = this.router.currentURL;
+    if (!currentUrl) return null;
+
     const [base, queryParams] = currentUrl.split('?');
+    if (!base) return null;
+
     const redactedUrl = base
       .split('/')
       .map((token) => {
