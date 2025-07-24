@@ -298,16 +298,32 @@ module('Unit | Services | locale', function (hooks) {
   });
 
   module('switcherDisplayedLanguages', function () {
-    test('returns available languages for switcher with french first', function (assert) {
-      // when
-      const switcherDisplayedLanguages = localeService.switcherDisplayedLanguages;
+    module('when supportedLocales contains all the pixLanguages', function () {
+      test('returns all the pixLanguages that should be displayed in the switcher with french first', function (assert) {
+        // when
+        const switcherDisplayedLanguages = localeService.switcherDisplayedLanguages;
 
-      // then
-      assert.deepEqual(switcherDisplayedLanguages, [
-        { value: 'fr', label: 'Français' },
-        { value: 'en', label: 'English' },
-        { value: 'nl', label: 'Nederlands' },
-      ]);
+        // then
+        assert.deepEqual(switcherDisplayedLanguages, [
+          { value: 'fr', label: 'Français' },
+          { value: 'en', label: 'English' },
+          { value: 'nl', label: 'Nederlands' },
+        ]);
+      });
+    });
+
+    module('when supportedLocales does not contain all the pixLanguages', function () {
+      test('returns the pixLanguages part of the supportedLocales that should be displayed in the switcher with french first', function (assert) {
+        // when
+        sinon.stub(localeService, 'supportedLocales').value(['en', 'fr']);
+        const switcherDisplayedLanguages = localeService.switcherDisplayedLanguages;
+
+        // then
+        assert.deepEqual(switcherDisplayedLanguages, [
+          { value: 'fr', label: 'Français' },
+          { value: 'en', label: 'English' },
+        ]);
+      });
     });
   });
 });
