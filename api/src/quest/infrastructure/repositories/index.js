@@ -1,3 +1,4 @@
+import * as modulesApi from '../../../devcomp/application/api/modules-api.js';
 import * as knowledgeElementsApi from '../../../evaluation/application/api/knowledge-elements-api.js';
 import * as userApi from '../../../identity-access-management/application/api/users-api.js';
 import * as skillsApi from '../../../learning-content/application/api/skills-api.js';
@@ -13,6 +14,7 @@ import * as combinedCourseParticipantRepository from './combined-course-particip
 import * as combinedCourseParticipationRepository from './combined-course-participation-repository.js';
 import * as combinedCourseRepository from './combined-course-repository.js';
 import * as eligibilityRepository from './eligibility-repository.js';
+import * as moduleRepository from './module-repository.js';
 import * as questRepository from './quest-repository.js';
 import * as rewardRepository from './reward-repository.js';
 import * as successRepository from './success-repository.js';
@@ -22,6 +24,7 @@ const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewar
 
 const repositoriesWithoutInjectedDependencies = {
   eligibilityRepository,
+  moduleRepository,
   successRepository,
   rewardRepository,
   questRepository,
@@ -38,6 +41,7 @@ const dependencies = {
   campaignsApi,
   skillsApi,
   profileRewardApi,
+  modulesApi,
   targetProfilesApi,
   profileRewardTemporaryStorage,
   rewardApi,
