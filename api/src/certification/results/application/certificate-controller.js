@@ -42,7 +42,6 @@ const getCertificate = async function (
   h,
   dependencies = { requestResponseUtils, certificateSerializer, privateCertificateSerializer },
 ) {
-  const userId = request.auth.credentials.userId;
   const certificationCourseId = request.params.certificationCourseId;
   const translate = request.i18n.__;
   const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
@@ -58,7 +57,6 @@ const getCertificate = async function (
     return dependencies.certificateSerializer.serialize({ certificate, translate });
   } else {
     certificate = await usecases.getPrivateCertificate({
-      userId,
       certificationCourseId: certificationCourse.getId(),
       locale,
     });

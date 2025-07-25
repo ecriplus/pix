@@ -113,7 +113,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           .withArgs({ certificationCourseId })
           .resolves(certificationCourse);
         sinon.stub(usecases, 'getPrivateCertificate');
-        usecases.getPrivateCertificate.withArgs({ userId, certificationCourseId, locale }).resolves(certificate);
+        usecases.getPrivateCertificate.withArgs({ certificationCourseId, locale }).resolves(certificate);
 
         const privateCertificateSerializerStub = {
           serialize: sinon.stub(),
