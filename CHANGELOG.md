@@ -1,5 +1,36 @@
 # Pix Changelog
 
+# [5.167.0](https://github.com/1024pix/pix/compare/v5.166.0...v5.167.0) (2025-07-25)
+
+### :rocket: Amélioration
+
+- [#12967](https://github.com/1024pix/pix/pull/12967) : WIP module IA hallucinations avant validation 
+- [#12866](https://github.com/1024pix/pix/pull/12866) Ajouter des événements Plausible lors de l'enrichissement d'un utilisateur anonyme (PIX-18522). 
+- [#12911](https://github.com/1024pix/pix/pull/12911) Ajouter des titres aux grains Leçon et Récap (PIX-18813) 
+- [#12936](https://github.com/1024pix/pix/pull/12936) Enrichir la validation des critères des quêtes pour ne plus insérer de mauvaise configuration en BDD (PIX-18836) 
+- [#12905](https://github.com/1024pix/pix/pull/12905) Lors d'une conversation avec LLM, ajouter à l'événement de réception de pièce jointe une information pour indiquer si la pièce jointe est celle attendue ou pas (PIX-18806) 
+- [#12962](https://github.com/1024pix/pix/pull/12962) Migrer tous les assets des modules vers assets.pix.org (PIX-18845) 
+
+### :bug: Correction
+
+- [#12960](https://github.com/1024pix/pix/pull/12960) Amélioration du rapport d'erreur de l'import des whitelist (PIX-18827) 
+
+### :building_construction: Tech
+
+- [#12963](https://github.com/1024pix/pix/pull/12963) :truck: Déplace `certificationChallengeRepository` vers un contexte de certification 
+- [#12979](https://github.com/1024pix/pix/pull/12979) :truck: Déplace `CertificationPointOfContact` vers `/src/identity-access-management/` 
+- [#12925](https://github.com/1024pix/pix/pull/12925) :truck: Déplace le modèle `OrganizationMemberIdentity` vers le contexte `src/team/` 
+- [#12976](https://github.com/1024pix/pix/pull/12976) :truck: Déplace le modèle en lecture seul `StudentInformationForAccountRecovery` vers `src/identity-access-management/` 
+- [#12969](https://github.com/1024pix/pix/pull/12969) :truck: Déplace le modèle en lecture seule `CampaignReport` vers le contexte `/src/prescription/campaign/` 
+- [#12981](https://github.com/1024pix/pix/pull/12981) Créer les sample.env manquants pour les fronts 
+- [#12954](https://github.com/1024pix/pix/pull/12954) Isoler la logique des URL des fronts (PIX-18811) 
+- [#12980](https://github.com/1024pix/pix/pull/12980) Nettoyage variables d’env matomo 
+- [#12970](https://github.com/1024pix/pix/pull/12970) Réorganiser le post-deployment de MaDDo 
+
+### :coffee: Autre
+
+- [#12933](https://github.com/1024pix/pix/pull/12933) Isoler la logique des locales des fronts dans le service "locale" (PIX-18810)
+
 # [5.166.0](https://github.com/1024pix/pix/compare/v5.165.0...v5.166.0) (2025-07-24)
 
 ### :rocket: Amélioration
