@@ -11,12 +11,7 @@ function _getEnvironmentVariableAsNumber({ environmentVariableName, defaultValue
   );
 }
 
-function _isFeatureEnabled(environmentVariable) {
-  return environmentVariable === 'true';
-}
-
 module.exports = function (environment) {
-  const analyticsEnabled = _isFeatureEnabled(process.env.WEB_ANALYTICS_ENABLED);
   const ENV = {
     modulePrefix: 'pix-admin',
     environment,
@@ -93,8 +88,6 @@ module.exports = function (environment) {
       includeFontAwesome: true,
     },
 
-    matomo: {},
-
     fontawesome: {
       warnIfNoIconsIncluded: true,
     },
@@ -126,10 +119,6 @@ module.exports = function (environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     ENV.APP.TARGET_PROFILE_DASHBOARD_URL = 'https://exemple.net';
-    if (analyticsEnabled) {
-      ENV.matomo.url = process.env.WEB_ANALYTICS_URL;
-      ENV.matomo.debug = true;
-    }
   }
 
   if (environment === 'test') {
@@ -158,13 +147,6 @@ module.exports = function (environment) {
       enabled: true,
       usingProxy: false,
     };
-  }
-
-  if (environment === 'production') {
-    // here you can enable a production-specific feature
-    if (analyticsEnabled) {
-      ENV.matomo.url = process.env.WEB_ANALYTICS_URL;
-    }
   }
 
   return ENV;

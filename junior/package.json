@@ -45,7 +45,6 @@
     }
   },
   "devDependencies": {
-    "@1024pix/ember-matomo-tag-manager": "^2.4.3",
     "@1024pix/ember-testing-library": "^3.0.6",
     "@1024pix/epreuves-components": "^0.7.0",
     "@1024pix/eslint-plugin": "^2.1.7",
