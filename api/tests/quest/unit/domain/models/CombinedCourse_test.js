@@ -4,14 +4,15 @@ import {
 } from '../../../../../src/prescription/shared/domain/constants.js';
 import { Campaign } from '../../../../../src/quest/domain/models/Campaign.js';
 import { CombinedCourse, CombinedCourseDetails } from '../../../../../src/quest/domain/models/CombinedCourse.js';
-import { CombinedCourseItem } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
+import { CombinedCourseItem, ITEM_TYPE } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
+import { Module } from '../../../../../src/quest/domain/models/Module.js';
 import { Quest } from '../../../../../src/quest/domain/models/Quest.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
   describe('CombinedCourseDetails', function () {
     describe('#campaignIds', function () {
-      it('should return ids of all campaigns included in the given combined course', function () {
+      it('should only return ids of all campaigns included in the given combined course', function () {
         // given
         const campaignId = 2;
         const quest = new Quest({
@@ -30,6 +31,16 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
                 },
               },
             },
+            {
+              requirement_type: 'passages',
+              comparison: 'all',
+              data: {
+                moduleId: {
+                  data: 7,
+                  comparison: 'equal',
+                },
+              },
+            },
           ],
         });
         const combinedCourse = new CombinedCourseDetails(new CombinedCourse(), quest);
@@ -39,6 +50,48 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
 
         // then
         expect(campaignIds).to.deep.equal([campaignId]);
+      });
+    });
+
+    describe('#moduleIds', function () {
+      it('should only return ids of all modules included in the given combined course', function () {
+        // given
+        const moduleId = 7;
+        const quest = new Quest({
+          id: 1,
+          rewardId: null,
+          rewardType: null,
+          eligibilityRequirements: [],
+          successRequirements: [
+            {
+              requirement_type: 'campaignParticipations',
+              comparison: 'all',
+              data: {
+                campaignId: {
+                  data: 2,
+                  comparison: 'equal',
+                },
+              },
+            },
+            {
+              requirement_type: 'passages',
+              comparison: 'all',
+              data: {
+                moduleId: {
+                  data: moduleId,
+                  comparison: 'equal',
+                },
+              },
+            },
+          ],
+        });
+        const combinedCourse = new CombinedCourseDetails(new CombinedCourse(), quest);
+
+        // when
+        const moduleIds = combinedCourse.moduleIds;
+
+        // then
+        expect(moduleIds).to.deep.equal([moduleId]);
       });
     });
 
@@ -72,7 +125,49 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
 
         // then
         expect(combinedCourse.items).to.deep.equal([
-          new CombinedCourseItem({ id: campaign.id, reference: campaign.code, title: campaign.name }),
+          new CombinedCourseItem({
+            id: campaign.id,
+            reference: campaign.code,
+            title: campaign.name,
+            type: ITEM_TYPE.CAMPAIGN,
+          }),
+        ]);
+      });
+
+      it('returns a combined course item for provided module', function () {
+        // given
+        const quest = new Quest({
+          id: 1,
+          rewardId: null,
+          rewardType: null,
+          eligibilityRequirements: [],
+          successRequirements: [
+            {
+              requirement_type: 'passages',
+              comparison: 'all',
+              data: {
+                moduleId: {
+                  data: 7,
+                  comparison: 'equal',
+                },
+              },
+            },
+          ],
+        });
+        const combinedCourse = new CombinedCourseDetails(new CombinedCourse(), quest);
+        const module = new Module({ id: 7, title: 'module' });
+
+        // when
+        combinedCourse.generateItems([module]);
+
+        // then
+        expect(combinedCourse.items).to.deep.equal([
+          new CombinedCourseItem({
+            id: module.id,
+            reference: module.slug,
+            title: module.title,
+            type: ITEM_TYPE.MODULE,
+          }),
         ]);
       });
 
@@ -106,7 +201,12 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
 
         // then
         expect(combinedCourse.items).to.deep.equal([
-          new CombinedCourseItem({ id: campaign1.id, reference: campaign1.code, title: campaign1.name }),
+          new CombinedCourseItem({
+            id: campaign1.id,
+            reference: campaign1.code,
+            title: campaign1.name,
+            type: ITEM_TYPE.CAMPAIGN,
+          }),
         ]);
       });
 
@@ -114,6 +214,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
         // given
         const campaign1 = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique' });
         const campaign2 = new Campaign({ id: 3, code: 'ABCDIAG2', name: 'diagnostique2' });
+        const module = new Module({ id: 7, title: 'title', slug: 'abcdef' });
 
         const quest = new Quest({
           id: 1,
@@ -141,17 +242,43 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
                 },
               },
             },
+            {
+              requirement_type: 'passages',
+              comparison: 'all',
+              data: {
+                moduleId: {
+                  data: 7,
+                  comparison: 'equal',
+                },
+              },
+            },
           ],
         });
         const combinedCourse = new CombinedCourseDetails(new CombinedCourse(), quest);
 
         // when
-        combinedCourse.generateItems([campaign1, campaign2]);
+        combinedCourse.generateItems([campaign1, campaign2, module]);
 
         // then
         expect(combinedCourse.items).to.deep.equal([
-          new CombinedCourseItem({ id: campaign2.id, reference: campaign2.code, title: campaign2.name }),
-          new CombinedCourseItem({ id: campaign1.id, reference: campaign1.code, title: campaign1.name }),
+          new CombinedCourseItem({
+            id: campaign2.id,
+            reference: campaign2.code,
+            title: campaign2.name,
+            type: ITEM_TYPE.CAMPAIGN,
+          }),
+          new CombinedCourseItem({
+            id: campaign1.id,
+            reference: campaign1.code,
+            title: campaign1.name,
+            type: ITEM_TYPE.CAMPAIGN,
+          }),
+          new CombinedCourseItem({
+            id: module.id,
+            reference: module.slug,
+            title: module.title,
+            type: ITEM_TYPE.MODULE,
+          }),
         ]);
       });
     });
