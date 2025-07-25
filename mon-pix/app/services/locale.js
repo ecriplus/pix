@@ -99,14 +99,15 @@ export default class LocaleService extends Service {
       return;
     }
 
-    const supportedLanguage = this.#findSupportedLanguage(language);
-    if (supportedLanguage) {
+    if (language) {
+      const supportedLanguage = this.#findSupportedLanguage(language);
       this.setCurrentLocale(supportedLanguage);
       return;
     }
 
-    if (user) {
-      this.setCurrentLocale(user.lang);
+    if (user?.lang) {
+      const supportedLanguage = this.#findSupportedLanguage(user.lang);
+      this.setCurrentLocale(supportedLanguage);
       return;
     }
 
@@ -114,8 +115,9 @@ export default class LocaleService extends Service {
   }
 
   #findSupportedLanguage(language) {
-    if (!language) return;
-    return this.pixLanguages.includes(language) ? language : DEFAULT_LOCALE;
+    return this.pixLanguages.filter((pixLanguage) => this.supportedLocales.includes(pixLanguage)).includes(language)
+      ? language
+      : DEFAULT_LOCALE;
   }
 
   #setLocaleCookie(locale) {
