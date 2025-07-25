@@ -6,7 +6,6 @@ import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/
 import { usecases as certificationSharedUsecases } from '../../../../../src/certification/shared/domain/usecases/index.js';
 import { UnauthorizedError } from '../../../../../src/shared/application/http-errors.js';
 import { LANGUAGES_CODE } from '../../../../../src/shared/domain/services/language-service.js';
-import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { catchErr, domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
