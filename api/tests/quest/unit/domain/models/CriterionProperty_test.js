@@ -1,33 +1,194 @@
-import { InvalidComparisonError } from '../../../../../src/quest/domain/errors.js';
 import { COMPARISONS, CriterionProperty } from '../../../../../src/quest/domain/models/CriterionProperty.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Models | CriterionProperty', function () {
   describe('#validate', function () {
-    it('should not throw with valid args', function () {
-      expect(() => {
-        new CriterionProperty({
-          key: 'something',
-          data: 1,
-          comparison: 'equal',
-        });
-      }).not.to.throw();
+    describe(COMPARISONS.EQUAL, function () {
+      it('should throw with object data', function () {
+        expect(function () {
+          new CriterionProperty({
+            key: 'valid_key',
+            data: { object: 'invalid_data' },
+            comparison: COMPARISONS.EQUAL,
+          });
+        }).to.throw();
+      });
+
+      it('should throw with array data', function () {
+        expect(function () {
+          new CriterionProperty({
+            key: 'valid_key',
+            data: [18, false, 'toto'],
+            comparison: COMPARISONS.EQUAL,
+          });
+        }).to.throw();
+      });
+
+      it('should not throw with string data', function () {
+        expect(function () {
+          new CriterionProperty({
+            key: 'valid_key',
+            data: 'valid',
+            comparison: COMPARISONS.EQUAL,
+          });
+        }).to.not.throw();
+      });
+
+      it('should not throw with number data', function () {
+        expect(function () {
+          new CriterionProperty({
+            key: 'valid_key',
+            data: 18,
+            comparison: COMPARISONS.EQUAL,
+          });
+        }).to.not.throw();
+      });
     });
 
-    it('should throw without args', function () {
-      expect(function () {
-        new CriterionProperty();
-      }).to.throw();
+    describe(COMPARISONS.ONE_OF, function () {
+      it('should throw with string data', function () {
+        expect(function () {
+          new CriterionProperty({
+            key: 'valid_key',
+            data: 'invalid',
+            comparison: COMPARISONS.ONE_OF,
+          });
+        }).to.throw();
+      });
+
+      it('should throw with object data', function () {
+        expect(function () {
+          new CriterionProperty({
+            key: 'valid_key',
+            data: { object: 'invalid_data' },
+            comparison: COMPARISONS.ONE_OF,
+          });
+        }).to.throw();
+      });
+
+      it('should throw with number data', function () {
+        expect(function () {
+          new CriterionProperty({
+            key: 'valid_key',
+            data: 18,
+            comparison: COMPARISONS.ONE_OF,
+          });
+        }).to.throw();
+      });
+
+      it('should not throw with array data', function () {
+        expect(() => {
+          new CriterionProperty({
+            key: 'valid_key',
+            data: [12, 'toto', false],
+            comparison: COMPARISONS.ONE_OF,
+          });
+        }).not.to.throw();
+      });
+
+      it('should throw with empty array data', function () {
+        expect(function () {
+          new CriterionProperty({
+            key: 'valid_key',
+            data: [],
+            comparison: COMPARISONS.ONE_OF,
+          });
+        }).to.throw();
+      });
     });
 
-    it('should throw with invalid args', function () {
-      expect(function () {
-        new CriterionProperty({
-          key: 1,
-          data: {},
-          comparison: 'wrong',
-        });
-      }).to.throw();
+    describe(COMPARISONS.LIKE, function () {
+      it('should not throw with string data', function () {
+        expect(function () {
+          new CriterionProperty({
+            key: 'valid_key',
+            data: 'invalid',
+            comparison: COMPARISONS.LIKE,
+          });
+        }).to.not.throw();
+      });
+
+      it('should throw with object data', function () {
+        expect(function () {
+          new CriterionProperty({
+            key: 'valid_key',
+            data: { object: 'invalid_data' },
+            comparison: COMPARISONS.LIKE,
+          });
+        }).to.throw();
+      });
+
+      it('should throw with array data', function () {
+        expect(function () {
+          new CriterionProperty({
+            key: 'valid_key',
+            data: [18, 'toto', false],
+            comparison: COMPARISONS.LIKE,
+          });
+        }).to.throw();
+      });
+
+      it('should throw with number data', function () {
+        expect(function () {
+          new CriterionProperty({
+            key: 'valid_key',
+            data: 18,
+            comparison: COMPARISONS.LIKE,
+          });
+        }).to.throw();
+      });
+    });
+
+    describe(COMPARISONS.ALL, function () {
+      it('should throw with string data', function () {
+        expect(function () {
+          new CriterionProperty({
+            key: 'valid_key',
+            data: 'invalid',
+            comparison: COMPARISONS.ALL,
+          });
+        }).to.throw();
+      });
+
+      it('should throw with object data', function () {
+        expect(function () {
+          new CriterionProperty({
+            key: 'valid_key',
+            data: { object: 'invalid_data' },
+            comparison: COMPARISONS.ALL,
+          });
+        }).to.throw();
+      });
+
+      it('should not throw with array data', function () {
+        expect(function () {
+          new CriterionProperty({
+            key: 'valid_key',
+            data: [18, 'toto', false],
+            comparison: COMPARISONS.ALL,
+          });
+        }).to.not.throw();
+      });
+
+      it('should throw with empty array data', function () {
+        expect(function () {
+          new CriterionProperty({
+            key: 'valid_key',
+            data: [],
+            comparison: COMPARISONS.ALL,
+          });
+        }).to.throw();
+      });
+
+      it('should throw with number data', function () {
+        expect(function () {
+          new CriterionProperty({
+            key: 'valid_key',
+            data: 18,
+            comparison: COMPARISONS.ALL,
+          });
+        }).to.throw();
+      });
     });
   });
 
@@ -117,28 +278,16 @@ describe('Quest | Unit | Domain | Models | CriterionProperty', function () {
           expect(result2).to.be.false;
         });
 
-        it('should throw when data attribute type is not suited for LIKE comparison', function () {
+        it('should return false if data attribute type is not suited for LIKE comparison', function () {
           const criterionProperty = new CriterionProperty({
             key: 'something',
             data: 'ar',
             comparison: COMPARISONS.LIKE,
           });
 
-          expect(() => {
-            criterionProperty.check({ something: false });
-          }).to.throw(InvalidComparisonError);
-        });
+          const result = criterionProperty.check({ something: false });
 
-        it('should throw when criterion attribute type is not suited for LIKE comparison', function () {
-          const criterionProperty = new CriterionProperty({
-            key: 'something',
-            data: 456,
-            comparison: COMPARISONS.LIKE,
-          });
-
-          expect(() => {
-            criterionProperty.check({ something: 'coucou' });
-          }).to.throw(InvalidComparisonError);
+          expect(result).to.be.false;
         });
       });
     });
