@@ -58,7 +58,7 @@ export default class Card extends Component {
   @service intl;
   @service store;
   @service currentUser;
-  @service metrics;
+  @service pixMetrics;
   @service router;
 
   @tracked savingStatus;
@@ -153,11 +153,10 @@ export default class Card extends Component {
 
   @action
   trackAccess() {
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Accès tuto',
-      'pix-event-action': `Click depuis : ${this.router.currentRouteName}`,
-      'pix-event-name': `Ouvre le tutoriel : ${this.args.tutorial.title}`,
+    this.pixMetrics.trackEvent(`Ouvre le tutoriel : ${this.args.tutorial.title}`, {
+      disabled: true,
+      category: 'Accès tuto',
+      action: `Click depuis : ${this.router.currentRouteName}`,
     });
   }
 }

@@ -112,7 +112,7 @@ export default class CampaignStartBlock extends Component {
   @action
   trackAccessForUser() {
     if (this.args.campaign.isSimplifiedAccess && !this.session.isAuthenticated) {
-      this.pixMetrics.trackEvent({ 'pix-event-name': 'StartSimplifiedAccessCampaignAsAnonymousClick' });
+      this.pixMetrics.trackEvent('StartSimplifiedAccessCampaignAsAnonymousClick');
     }
   }
 

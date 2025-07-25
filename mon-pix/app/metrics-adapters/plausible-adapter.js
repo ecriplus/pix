@@ -29,9 +29,10 @@ export default class PlausibleAdapter extends BaseAdapter {
   /**
    * Custom events allow you to measure button clicks, form completions...
    *
+   * @param {string} eventName - must not contain spaces, examples: verify-this or That+Completion
    * @param {Object} params
-   * @param {string} params.eventName - must not contain spaces, examples: verify-this or That+Completion
    * @param {Objects} params.props - event metadatas, must not contain any personally identifiable information
+   * @param {Objects} params.plausibleAttributes - pros that will override plausible event data
    */
   trackEvent({ eventName, plausibleAttributes = {}, ...props }) {
     window.plausible(eventName, { ...plausibleAttributes, props });

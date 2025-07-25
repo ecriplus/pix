@@ -75,7 +75,7 @@ module('Unit | Component | Module | Video', function (hooks) {
       // given
       const video = { id: 'video-id' };
 
-      const metrics = this.owner.lookup('service:metrics');
+      const metrics = this.owner.lookup('service:pix-metrics');
       metrics.trackEvent = () => {};
 
       const component = createGlimmerComponent('module/element/video', {

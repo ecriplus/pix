@@ -4,7 +4,8 @@ export default class PixMetricsService extends Service {
   @service metrics;
   @service router;
 
-  trackEvent({ event: _, 'pix-event-name': eventName, ...props }) {
+  trackEvent(eventName, { disabled, ...props } = {}) {
+    if (disabled) return;
     const url = this.getRedactedPageUrl();
     this.metrics.trackEvent({ eventName, plausibleAttributes: { u: url }, ...props });
   }

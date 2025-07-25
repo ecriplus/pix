@@ -85,6 +85,34 @@ module('Unit | Service | PixMetrics', function (hooks) {
     });
   });
   module('trackEvent', function () {
+    test('it should not called mertricsService if disabled props to true', function (assert) {
+      // given
+      const currentURL = '/campagnes/SCOASSMUL/presentation';
+      const currentRoute = {
+        name: 'campaigns.campaign-landing-page',
+        params: {},
+        parent: {
+          name: 'campaigns',
+          params: {
+            id: 'SCOASSMUL',
+          },
+          parent: {
+            name: 'application',
+            params: {},
+            parent: null,
+          },
+        },
+      };
+      sinon.stub(routerService, 'currentRoute').value(currentRoute);
+      sinon.stub(routerService, 'currentURL').value(currentURL);
+
+      // when
+      pixMetricsService.trackEvent('mon-event', { params: 1, disabled: true });
+
+      // then
+      assert.ok(metricsService.trackEvent.notCalled);
+    });
+
     test('it should redact id from url', function (assert) {
       // given
       const currentURL = '/campagnes/SCOASSMUL/presentation';
@@ -107,7 +135,7 @@ module('Unit | Service | PixMetrics', function (hooks) {
       sinon.stub(routerService, 'currentURL').value(currentURL);
 
       // when
-      pixMetricsService.trackEvent({ 'pix-event-name': 'mon-event', params: 1 });
+      pixMetricsService.trackEvent('mon-event', { params: 1 });
 
       // then
       sinon.assert.calledOnceWithExactly(metricsService.trackEvent, {
@@ -141,7 +169,7 @@ module('Unit | Service | PixMetrics', function (hooks) {
       sinon.stub(routerService, 'currentURL').value(currentURL);
 
       // when
-      pixMetricsService.trackEvent({ 'pix-event-name': 'mon-event', params: 1 });
+      pixMetricsService.trackEvent('mon-event', { params: 1 });
 
       // then
       sinon.assert.calledOnceWithExactly(metricsService.trackEvent, {

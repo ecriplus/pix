@@ -10,7 +10,7 @@ import TrainingCard from '../../../../training/card';
 
 export default class EvaluationResultsTabsTrainings extends Component {
   @service currentUser;
-  @service metrics;
+  @service pixMetrics;
   @service campaignParticipationResult;
   @service store;
 
@@ -20,11 +20,10 @@ export default class EvaluationResultsTabsTrainings extends Component {
   constructor() {
     super(...arguments);
 
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Fin de parcours',
-      'pix-event-action': 'Affichage onglet',
-      'pix-event-name': "Affichage de l'onglet Formations",
+    this.pixMetrics.trackEvent("Affichage de l'onglet Formations", {
+      disabled: true,
+      category: 'Fin de parcours',
+      action: 'Affichage onglet',
     });
   }
 
@@ -49,11 +48,10 @@ export default class EvaluationResultsTabsTrainings extends Component {
       campaignParticipationResultToShare.isShared = true;
       campaignParticipationResultToShare.canImprove = false;
 
-      this.metrics.trackEvent({
-        event: 'custom-event',
-        'pix-event-category': 'Fin de parcours',
-        'pix-event-action': 'Envoi des résultats',
-        'pix-event-name': "Envoi des résultats depuis l'onglet Formations",
+      this.pixMetrics.trackEvent("Envoi des résultats depuis l'onglet Formations", {
+        disabled: true,
+        category: 'Fin de parcours',
+        action: 'Envoi des résultats',
       });
     } catch {
       this.isShareResultsError = true;

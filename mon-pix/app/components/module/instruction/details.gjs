@@ -13,7 +13,7 @@ import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 
 export default class ModulixDetails extends Component {
   @service router;
-  @service metrics;
+  @service pixMetrics;
   @service media;
 
   @tracked isSmallScreenModalOpen = false;
@@ -24,44 +24,40 @@ export default class ModulixDetails extends Component {
 
   @action
   onModuleStart() {
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Détails du module : ${this.args.module.slug}`,
-      'pix-event-name': `Click sur le bouton Commencer un passage`,
+    this.pixMetrics.trackEvent(`Click sur le bouton Commencer un passage`, {
+      disabled: true,
+      category: 'Modulix',
+      action: `Détails du module : ${this.args.module.slug}`,
     });
     this.router.transitionTo('module.passage', this.args.module.slug);
   }
 
   @action
   onModuleStartUsingSmallScreen() {
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Détails du module : ${this.args.module.slug}`,
-      'pix-event-name': `Click sur le bouton Commencer un passage en petit écran`,
+    this.pixMetrics.trackEvent(`Click sur le bouton Commencer un passage en petit écran`, {
+      disabled: true,
+      category: 'Modulix',
+      action: `Détails du module : ${this.args.module.slug}`,
     });
     this.router.transitionTo('module.passage', this.args.module.slug);
   }
 
   @action
   onSmallScreenModalOpen() {
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Détails du module : ${this.args.module.slug}`,
-      'pix-event-name': `Ouvre la modale d'alerte de largeur d'écran`,
+    this.pixMetrics.trackEvent(`Ouvre la modale d'alerte de largeur d'écran`, {
+      disabled: true,
+      category: 'Modulix',
+      action: `Détails du module : ${this.args.module.slug}`,
     });
     this.isSmallScreenModalOpen = true;
   }
 
   @action
   onSmallScreenModalClose() {
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Détails du module : ${this.args.module.slug}`,
-      'pix-event-name': `Ferme la modale d'alerte de largeur d'écran`,
+    this.pixMetrics.trackEvent(`Ferme la modale d'alerte de largeur d'écran`, {
+      disabled: true,
+      category: 'Modulix',
+      action: `Détails du module : ${this.args.module.slug}`,
     });
     this.isSmallScreenModalOpen = false;
   }

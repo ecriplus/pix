@@ -167,7 +167,7 @@ export default class ChallengeStatement extends Component {
   @service currentUser;
   @service featureToggles;
   @service router;
-  @service metrics;
+  @service pixMetrics;
 
   @tracked selectedAttachmentUrl;
   @tracked displayAlternativeInstruction = false;
@@ -261,11 +261,10 @@ export default class ChallengeStatement extends Component {
   }
 
   addMetrics() {
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Vocalisation',
-      'pix-event-action': "Lecture d'une épreuve",
-      'pix-event-name': `Clic sur le bouton de lecture d'épreuve : ${this.isSpeaking ? 'play' : 'stop'}`,
+    this.pixMetrics.trackEvent(`Clic sur le bouton de lecture d'épreuve : ${this.isSpeaking ? 'play' : 'stop'}`, {
+      disabled: true,
+      category: 'Vocalisation',
+      action: "Lecture d'une épreuve",
     });
   }
 

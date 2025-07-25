@@ -11,7 +11,7 @@ export default class EntryPoint extends Route {
   @service session;
   @service router;
   @service store;
-  @service metrics;
+  @service pixMetrics;
 
   buildRouteInfoMetadata() {
     return { doNotTrackPage: true };
@@ -42,20 +42,18 @@ export default class EntryPoint extends Route {
       this.campaignStorage.set(campaign.code, 'participantExternalId', participantExternalId);
     }
     if (queryParams.retry) {
-      this.metrics.trackEvent({
-        event: 'custom-event',
-        'pix-event-category': 'Campagnes',
-        'pix-event-action': 'Retenter la campagne',
-        'pix-event-name': 'Clic sur Retenter la campagne',
+      this.pixMetrics.trackEvent('Clic sur Retenter la campagne', {
+        disabled: true,
+        category: 'Campagnes',
+        action: 'Retenter la campagne',
       });
       this.campaignStorage.set(campaign.code, 'retry', transition.to.queryParams.retry);
     }
     if (queryParams.reset) {
-      this.metrics.trackEvent({
-        event: 'custom-event',
-        'pix-event-category': 'Campagnes',
-        'pix-event-action': 'Remise à zéro de la campagne',
-        'pix-event-name': 'Clic sur Remise à zéro de la campagne',
+      this.pixMetrics.trackEvent('Clic sur Remise à zéro de la campagne', {
+        disabled: true,
+        category: 'Campagnes',
+        action: 'Remise à zéro de la campagne',
       });
       this.campaignStorage.set(campaign.code, 'reset', transition.to.queryParams.reset);
     }

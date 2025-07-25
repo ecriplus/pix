@@ -74,7 +74,7 @@ module('Integration | Component | Campaign | Skill Review | attestation-result',
       }
       const metricsAddStub = sinon.stub().resolves();
 
-      this.owner.register('service:metrics', MetricsStub);
+      this.owner.register('service:pix-metrics', MetricsStub);
 
       // when
       const screen = await render(<template><AttestationResult @results={{result}} /></template>);
@@ -90,11 +90,10 @@ module('Integration | Component | Campaign | Skill Review | attestation-result',
       );
 
       assert.ok(
-        metricsAddStub.calledWithExactly({
-          event: 'custom-event',
-          'pix-event-category': 'Fin de parcours',
-          'pix-event-action': 'Cliquer sur le bouton Télécharger (attestation)',
-          'pix-event-name': 'Clic sur le bouton Télécharger (attestation)',
+        metricsAddStub.calledWithExactly('Clic sur le bouton Télécharger (attestation)', {
+          category: 'Fin de parcours',
+          disabled: true,
+          action: 'Cliquer sur le bouton Télécharger (attestation)',
         }),
       );
     });

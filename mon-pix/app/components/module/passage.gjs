@@ -12,7 +12,7 @@ import ModuleNavbar from './layout/navbar';
 
 export default class ModulePassage extends Component {
   @service router;
-  @service metrics;
+  @service pixMetrics;
   @service store;
   @service modulixAutoScroll;
   @service passageEvents;
@@ -73,12 +73,14 @@ export default class ModulePassage extends Component {
   onStepperNextStep(currentStepPosition) {
     const currentGrain = this.displayableGrains[this.currentGrainIndex];
 
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
-      'pix-event-name': `Click sur le bouton suivant de l'étape ${currentStepPosition} du stepper dans le grain : ${currentGrain.id}`,
-    });
+    this.pixMetrics.trackEvent(
+      `Click sur le bouton suivant de l'étape ${currentStepPosition} du stepper dans le grain : ${currentGrain.id}`,
+      {
+        disabled: true,
+        category: 'Modulix',
+        action: `Passage du module : ${this.args.module.slug}`,
+      },
+    );
   }
 
   addNextGrainToDisplay() {
@@ -104,11 +106,10 @@ export default class ModulePassage extends Component {
   async onModuleTerminate({ grainId }) {
     const adapter = this.store.adapterFor('passage');
     await adapter.terminate({ passageId: this.args.passage.id });
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
-      'pix-event-name': `Click sur le bouton Terminer du grain : ${grainId}`,
+    this.pixMetrics.trackEvent(`Click sur le bouton Terminer du grain : ${grainId}`, {
+      disabled: true,
+      category: 'Modulix',
+      action: `Passage du module : ${this.args.module.slug}`,
     });
     this.passageEvents.record({
       type: 'PASSAGE_TERMINATED',
@@ -131,51 +132,46 @@ export default class ModulePassage extends Component {
 
   @action
   async onElementRetry(answerData) {
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
-      'pix-event-name': `Click sur le bouton réessayer de l'élément : ${answerData.element.id}`,
+    this.pixMetrics.trackEvent(`Click sur le bouton réessayer de l'élément : ${answerData.element.id}`, {
+      disabled: true,
+      category: 'Modulix',
+      action: `Passage du module : ${this.args.module.slug}`,
     });
   }
 
   @action
   async onImageAlternativeTextOpen(imageElementId) {
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
-      'pix-event-name': `Click sur le bouton alternative textuelle : ${imageElementId}`,
+    this.pixMetrics.trackEvent(`Click sur le bouton alternative textuelle : ${imageElementId}`, {
+      disabled: true,
+      category: 'Modulix',
+      action: `Passage du module : ${this.args.module.slug}`,
     });
   }
 
   @action
   async onVideoTranscriptionOpen(videoElementId) {
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
-      'pix-event-name': `Click sur le bouton transcription : ${videoElementId}`,
+    this.pixMetrics.trackEvent(`Click sur le bouton transcription : ${videoElementId}`, {
+      disabled: true,
+      category: 'Modulix',
+      action: `Passage du module : ${this.args.module.slug}`,
     });
   }
 
   @action
   async onVideoPlay({ elementId }) {
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
-      'pix-event-name': `Click sur le bouton Play : ${elementId}`,
+    this.pixMetrics.trackEvent(`Click sur le bouton Play : ${elementId}`, {
+      disabled: true,
+      category: 'Modulix',
+      action: `Passage du module : ${this.args.module.slug}`,
     });
   }
 
   @action
   async onFileDownload({ elementId, downloadedFormat }) {
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
-      'pix-event-name': `Click sur le bouton Télécharger au format ${downloadedFormat} de ${elementId}`,
+    this.pixMetrics.trackEvent(`Click sur le bouton Télécharger au format ${downloadedFormat} de ${elementId}`, {
+      disabled: true,
+      category: 'Modulix',
+      action: `Passage du module : ${this.args.module.slug}`,
     });
   }
 
@@ -184,22 +180,20 @@ export default class ModulePassage extends Component {
     const element = document.getElementById(`grain_${grainId}`);
     this.modulixAutoScroll.focusAndScroll(element);
 
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
-      'pix-event-name': `Click sur le grain ${grainId} de la barre de navigation`,
+    this.pixMetrics.trackEvent(`Click sur le grain ${grainId} de la barre de navigation`, {
+      disabled: true,
+      category: 'Modulix',
+      action: `Passage du module : ${this.args.module.slug}`,
     });
   }
 
   @action
   async onExpandToggle({ elementId, isOpen }) {
     const eventToggle = isOpen ? 'Ouverture' : 'Fermeture';
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Modulix',
-      'pix-event-action': `Passage du module : ${this.args.module.slug}`,
-      'pix-event-name': `${eventToggle} de l'élément Expand : ${elementId}`,
+    this.pixMetrics.trackEvent(`${eventToggle} de l'élément Expand : ${elementId}`, {
+      disabled: true,
+      category: 'Modulix',
+      action: `Passage du module : ${this.args.module.slug}`,
     });
   }
 

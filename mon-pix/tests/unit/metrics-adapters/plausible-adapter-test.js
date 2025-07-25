@@ -31,17 +31,17 @@ module('Unit | MetricsAdapter | plausible-adapter', function (hooks) {
     });
 
     this.adapter.trackEvent({
-      'pix-event-category': 'button',
-      'pix-event-action': 'click',
       eventName: 'nav buttons',
-      'pix-event-value': 4,
+      category: 'button',
+      action: 'click',
+      value: 4,
     });
     assert.ok(
       stub.calledWith('nav buttons', {
         props: {
-          'pix-event-category': 'button',
-          'pix-event-action': 'click',
-          'pix-event-value': 4,
+          category: 'button',
+          action: 'click',
+          value: 4,
         },
       }),
       'it sends the correct arguments',
@@ -54,19 +54,19 @@ module('Unit | MetricsAdapter | plausible-adapter', function (hooks) {
     });
 
     this.adapter.trackEvent({
-      'pix-event-category': 'button',
-      'pix-event-action': 'click',
       eventName: 'nav buttons',
-      'pix-event-value': 4,
+      category: 'button',
+      action: 'click',
+      value: 4,
       plausibleAttributes: { u: 'hello' },
     });
     assert.ok(
       stub.calledWith('nav buttons', {
         u: 'hello',
         props: {
-          'pix-event-category': 'button',
-          'pix-event-action': 'click',
-          'pix-event-value': 4,
+          category: 'button',
+          action: 'click',
+          value: 4,
         },
       }),
       'it sends the correct arguments',

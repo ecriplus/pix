@@ -17,7 +17,7 @@ export default class ChallengeController extends Controller {
   @service store;
   @service currentUser;
   @service focusedCertificationChallengeWarningManager;
-  @service metrics;
+  @service pixMetrics;
 
   @tracked newLevel = null;
   @tracked competenceLeveled = null;
@@ -249,11 +249,13 @@ export default class ChallengeController extends Controller {
   }
 
   addMetrics() {
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Vocalisation',
-      'pix-event-action': 'Activation globale de la vocalisation',
-      'pix-event-name': `Clic sur le bouton d'activation de la vocalisation : ${this.isTextToSpeechActivated ? 'activé' : 'désactivé'}`,
-    });
+    this.pixMetrics.trackEvent(
+      `Clic sur le bouton d'activation de la vocalisation : ${this.isTextToSpeechActivated ? 'activé' : 'désactivé'}`,
+      {
+        disabled: true,
+        category: 'Vocalisation',
+        action: 'Activation globale de la vocalisation',
+      },
+    );
   }
 }

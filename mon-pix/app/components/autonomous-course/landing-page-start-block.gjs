@@ -23,7 +23,7 @@ export default class LandingPageStartBlock extends Component {
 
   @action
   async startCampaignParticipationAsAnonymous() {
-    this.pixMetrics.trackEvent({ 'pix-event-name': 'StartAutonomousCourseAsAnonymousClick' });
+    this.pixMetrics.trackEvent('StartAutonomousCourseAsAnonymousClick');
     this.args.startCampaignParticipation();
   }
 

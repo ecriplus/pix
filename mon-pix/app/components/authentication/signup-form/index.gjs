@@ -92,7 +92,7 @@ export default class SignupForm extends Component {
       const wasAnonymousBeforeSaving = user.isAnonymous;
       await user.save({ adapterOptions: { redirectionUrl: this.session.redirectionUrl } });
       if (this.featureToggles.featureToggles?.upgradeToRealUserEnabled && wasAnonymousBeforeSaving) {
-        this.pixMetrics.trackEvent({ 'pix-event-name': 'SignUpFromAnonymousUserDone' });
+        this.pixMetrics.trackEvent('SignUpFromAnonymousUserDone');
         this.session.set('skipRedirectAfterSessionInvalidation', true);
         await this.session.invalidate();
       }

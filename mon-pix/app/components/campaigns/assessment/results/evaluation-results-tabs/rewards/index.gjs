@@ -6,16 +6,15 @@ import { t } from 'ember-intl';
 import RewardsBadge from './badge';
 
 export default class Rewards extends Component {
-  @service metrics;
+  @service pixMetrics;
 
   constructor() {
     super(...arguments);
 
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Fin de parcours',
-      'pix-event-action': 'Affichage onglet',
-      'pix-event-name': "Affichage de l'onglet Récompenses",
+    this.pixMetrics.trackEvent("Affichage de l'onglet Récompenses", {
+      disabled: true,
+      category: 'Fin de parcours',
+      action: 'Affichage onglet',
     });
   }
 

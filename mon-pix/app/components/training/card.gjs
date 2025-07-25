@@ -35,7 +35,7 @@ export default class Card extends Component {
     </PixBlock>
   </template>
   @service intl;
-  @service metrics;
+  @service pixMetrics;
   @service router;
 
   get durationFormatted() {
@@ -104,11 +104,10 @@ export default class Card extends Component {
 
   @action
   trackAccess() {
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Accès Contenu Formatif',
-      'pix-event-action': `Click depuis : ${this.router.currentRouteName}`,
-      'pix-event-name': `Ouvre le cf : ${this.args.training.title}`,
+    this.pixMetrics.trackEvent(`Ouvre le cf : ${this.args.training.title}`, {
+      disabled: true,
+      category: 'Accès Contenu Formatif',
+      action: `Click depuis : ${this.router.currentRouteName}`,
     });
   }
 }

@@ -6,7 +6,7 @@ import Component from '@glimmer/component';
 import MarkdownToHtml from '../../../../markdown-to-html';
 
 export default class EvaluationResultsCustomOrganizationBlock extends Component {
-  @service metrics;
+  @service pixMetrics;
 
   get customButtonUrl() {
     if (this.args.campaign.customResultPageButtonUrl && this.args.campaign.customResultPageButtonText) {
@@ -26,21 +26,19 @@ export default class EvaluationResultsCustomOrganizationBlock extends Component 
 
   @action
   handleCustomButtonDisplay() {
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Fin de parcours',
-      'pix-event-action': "Affichage du bloc de l'organisation",
-      'pix-event-name': 'Présence d’un bouton comportant un lien externe',
+    this.pixMetrics.trackEvent('Présence d’un bouton comportant un lien externe', {
+      disabled: true,
+      category: 'Fin de parcours',
+      action: "Affichage du bloc de l'organisation",
     });
   }
 
   @action
   handleCustomButtonClick() {
-    this.metrics.trackEvent({
-      event: 'custom-event',
-      'pix-event-category': 'Fin de parcours',
-      'pix-event-action': "Affichage du bloc de l'organisation",
-      'pix-event-name': 'Clic sur le lien externe',
+    this.pixMetrics.trackEvent('Clic sur le lien externe', {
+      disabled: true,
+      category: 'Fin de parcours',
+      action: "Affichage du bloc de l'organisation",
     });
   }
 
