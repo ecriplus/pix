@@ -8,6 +8,7 @@ export async function getCombinedCourseByCode({
   combinedCourseRepository,
   campaignRepository,
   questRepository,
+  moduleRepository,
 }) {
   const quest = await questRepository.getByCode({ code });
   const combinedCourse = await combinedCourseRepository.getByCode({ code });
@@ -24,15 +25,17 @@ export async function getCombinedCourseByCode({
   const combinedCourseDetails = new CombinedCourseDetails(combinedCourse, quest, participation);
 
   const campaignIds = combinedCourseDetails.campaignIds;
-
   const campaigns = [];
-
   for (const campaignId of campaignIds) {
     const campaign = await campaignRepository.get({ id: campaignId });
     campaigns.push(campaign);
   }
 
-  combinedCourseDetails.generateItems(campaigns);
+  const moduleIds = combinedCourseDetails.moduleIds;
+
+  const modules = await moduleRepository.getByUserIdAndModuleIds({ userId, moduleIds });
+
+  combinedCourseDetails.generateItems([...campaigns, ...modules]);
 
   return combinedCourseDetails;
 }
