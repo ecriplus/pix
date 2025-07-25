@@ -89,7 +89,8 @@ module('Acceptance | Combined course | Start Combined course workflow', function
   module('when user is logged in', function () {
     let campaign;
     let combinedCourse;
-    let combinedCourseItem;
+    let combinedCourseCampaignItem;
+    let combinedCourseModuleItem;
 
     module('when organization is restricted', function (hooks) {
       hooks.beforeEach(async function () {
@@ -100,11 +101,26 @@ module('Acceptance | Combined course | Start Combined course workflow', function
 
         await authenticate(prescritUser);
         campaign = server.create('campaign', { code: 'ABCDIAG', organizationId: 1 });
-        combinedCourseItem = server.create('combined-course-item', { title: 'Diagnostique', reference: campaign.code });
+        const module = server.create('module', {
+          id: 'combinix-slug',
+          slug: 'combinix-slug',
+          title: 'combinix-title',
+          details: { tabletSupport: 'comfortable' },
+        });
+        combinedCourseCampaignItem = server.create('combined-course-item', {
+          title: 'Diagnostique',
+          reference: campaign.code,
+          type: 'CAMPAIGN',
+        });
+        combinedCourseModuleItem = server.create('combined-course-item', {
+          title: module.title,
+          reference: module.slug,
+          type: 'MODULE',
+        });
         combinedCourse = server.create('combined-course', {
           code: 'COMBINIX1',
           organizationId: 1,
-          items: [combinedCourseItem],
+          items: [combinedCourseCampaignItem, combinedCourseModuleItem],
         });
         server.create('verified-code', { id: 'COMBINIX1', type: 'combined-course', combinedCourse });
         server.create('organization-to-join', { id: 1, isRestricted: true, type: 'SCO', code: combinedCourse.code });
@@ -145,10 +161,28 @@ module('Acceptance | Combined course | Start Combined course workflow', function
             const screen = await unabortedVisit('/parcours/COMBINIX1');
 
             //when
-            await click(screen.getByText(combinedCourseItem.title));
+            await click(screen.getByText(combinedCourseCampaignItem.title));
 
             //then
             assert.strictEqual(currentURL(), '/campagnes/ABCDIAG/presentation');
+          });
+        });
+
+        module('when user clicks on module item', function () {
+          test('it redirects to module landing page', async function (assert) {
+            //given
+            server.create('sco-organization-learner', {
+              campaignCode: campaign.code,
+              organizationId: 1,
+            });
+
+            const screen = await unabortedVisit('/parcours/COMBINIX1');
+
+            //when
+            await click(screen.getByText(combinedCourseModuleItem.title));
+
+            //then
+            assert.strictEqual(currentURL(), '/modules/combinix-slug/details');
           });
         });
       });
