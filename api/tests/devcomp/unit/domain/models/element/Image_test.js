@@ -13,7 +13,6 @@ describe('Unit | Devcomp | Domain | Models | Element | Image', function () {
         alternativeText: 'alternativeText',
         legend: 'legend',
         licence: 'licence',
-        isBeta: false,
       });
 
       // then
@@ -82,27 +81,24 @@ describe('Unit | Devcomp | Domain | Models | Element | Image', function () {
     });
   });
 
-  describe('When isBeta is false', function () {
-    describe('and image URL is not from assets.pix.org', function () {
-      it('should throw an error', function () {
-        // given & when
-        const error = catchErrSync(
-          () =>
-            new Image({
-              id: 'id',
-              url: 'https://images.pix.fr/coolcat.jpg',
-              alt: 'alt',
-              alternativeText: 'alternativeText',
-              legend: 'legend',
-              licence: 'licence',
-              isBeta: false,
-            }),
-        )();
+  describe('When image URL is not from assets.pix.org', function () {
+    it('should throw an error', function () {
+      // given & when
+      const error = catchErrSync(
+        () =>
+          new Image({
+            id: 'id',
+            url: 'https://images.pix.fr/coolcat.jpg',
+            alt: 'alt',
+            alternativeText: 'alternativeText',
+            legend: 'legend',
+            licence: 'licence',
+          }),
+      )();
 
-        // then
-        expect(error).to.be.instanceOf(DomainError);
-        expect(error.message).to.equal('The image URL must be from "assets.pix.org" when module is production ready');
-      });
+      // then
+      expect(error).to.be.instanceOf(DomainError);
+      expect(error.message).to.equal('The image URL must be from "assets.pix.org"');
     });
   });
 });
