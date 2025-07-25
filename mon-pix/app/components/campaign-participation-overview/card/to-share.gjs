@@ -9,8 +9,14 @@ import t from 'ember-intl/helpers/t';
       <PixTag class="campaign-participation-overview-card-header__tag" @color="yellow-light">
         {{t "pages.campaign-participation-overview.card.tag.completed"}}
       </PixTag>
-      <h2 class="campaign-participation-overview-card-header__title">{{@model.organizationName}}</h2>
-      <strong class="campaign-participation-overview-card-header__subtitle">{{@model.campaignTitle}}</strong>
+      <h2
+        class="campaign-participation-overview-card-header__title"
+        aria-label={{@model.organizationName}}
+      >{{@model.organizationName}}</h2>
+      <strong
+        class="campaign-participation-overview-card-header__subtitle"
+        aria-label={{@model.campaignTitle}}
+      >{{@model.campaignTitle}}</strong>
       <time class="campaign-participation-overview-card-header__date" datetime="{{@model.createdAt}}">
         {{t "pages.campaign-participation-overview.card.started-at" date=(dayjsFormat @model.createdAt "DD/MM/YYYY")}}
       </time>
