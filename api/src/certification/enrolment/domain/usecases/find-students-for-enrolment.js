@@ -1,5 +1,5 @@
 import { NotFoundError } from '../../../../shared/domain/errors.js';
-import { StudentForEnrolment } from '../../../../shared/domain/read-models/StudentForEnrolment.js';
+import { StudentForEnrolment } from '../read-models/StudentForEnrolment.js';
 
 const findStudentsForEnrolment = async function ({
   certificationCenterId,
