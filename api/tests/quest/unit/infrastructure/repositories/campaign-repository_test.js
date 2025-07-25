@@ -27,4 +27,14 @@ describe('Quest | Unit | Infrastructure | Repositories | campaign', function () 
       expect(result).to.be.an.instanceof(Campaign);
     });
   });
+
+  describe('#getByCode', function () {
+    it('should call getByCode method from campaignsApi', async function () {
+      // when
+      const result = await campaignRepository.getByCode({ code, campaignsApi: campaignsApiStub });
+
+      // then
+      expect(result).to.be.an.instanceof(Campaign);
+    });
+  });
 });
