@@ -1,5 +1,5 @@
 /**
- * @typedef {import('../../../flash-certification/domain/models/FlashAssessmentAlgorithm.js').FlashAssessmentAlgorithm} FlashAssessmentAlgorithm
+ * @typedef {import('../../../evaluation/domain/models/FlashAssessmentAlgorithm.js').FlashAssessmentAlgorithm} FlashAssessmentAlgorithm
  * @typedef {import('../read-models/ChallengeCalibration.js').ChallengeCalibration} ChallengeCalibration
  * @typedef {import('../../../../evaluation/domain/models/Answer.js').Answer} Answer
  */

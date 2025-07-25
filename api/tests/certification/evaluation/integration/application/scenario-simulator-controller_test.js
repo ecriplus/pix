@@ -1,6 +1,6 @@
+import * as moduleUnderTest from '../../../../../src/certification/evaluation/application/scenario-simulator-route.js';
 import pickChallengeService from '../../../../../src/certification/evaluation/domain/services/pick-challenge-service.js';
-import * as moduleUnderTest from '../../../../../src/certification/flash-certification/application/scenario-simulator-route.js';
-import { usecases } from '../../../../../src/certification/flash-certification/domain/usecases/index.js';
+import { usecases } from '../../../../../src/certification/evaluation/domain/usecases/index.js';
 import { pickAnswerStatusService } from '../../../../../src/certification/shared/domain/services/pick-answer-status-service.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { domainBuilder, expect, HttpTestServer, parseJsonStream, sinon } from '../../../../test-helper.js';

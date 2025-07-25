@@ -1,4 +1,4 @@
-import * as flashAlgorithmService from '../../../../../../src/certification/flash-certification/domain/services/algorithm-methods/flash.js';
+import * as flashAlgorithmService from '../../../../../../src/certification/evaluation/domain/services/algorithm-methods/flash.js';
 import { downgradeCapacity } from '../../../../../../src/certification/scoring/domain/services/scoring-degradation-service.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 

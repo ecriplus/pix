@@ -1,4 +1,4 @@
-import { AssessmentSimulatorSingleMeasureStrategy } from '../../../../../../src/certification/flash-certification/domain/models/AssessmentSimulatorSingleMeasureStrategy.js';
+import { AssessmentSimulatorSingleMeasureStrategy } from '../../../../../../src/certification/evaluation/domain/models/AssessmentSimulatorSingleMeasureStrategy.js';
 import { Answer, AnswerStatus } from '../../../../../../src/shared/domain/models/index.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 

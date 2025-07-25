@@ -1,6 +1,6 @@
 import { AnswerStatus, AssessmentSimulator } from '../../../../shared/domain/models/index.js';
+import { AssessmentSimulatorSingleMeasureStrategy } from '../../../evaluation/domain/models/AssessmentSimulatorSingleMeasureStrategy.js';
 import pickChallengeService from '../../../evaluation/domain/services/pick-challenge-service.js';
-import { AssessmentSimulatorSingleMeasureStrategy } from '../../../flash-certification/domain/models/AssessmentSimulatorSingleMeasureStrategy.js';
 import { pickAnswerStatusService } from '../../../shared/domain/services/pick-answer-status-service.js';
 
 const PROBABILITY_TO_PICK_THE_MOST_USEFUL_CHALLENGE_FOR_CANDIDATE_EVALUATION = 100;

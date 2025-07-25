@@ -3,8 +3,8 @@ import { Readable } from 'node:stream';
 import _ from 'lodash';
 
 import { random } from '../../../shared/infrastructure/utils/random.js';
-import pickChallengeService from '../../evaluation/domain/services/pick-challenge-service.js';
 import { pickAnswerStatusService } from '../../shared/domain/services/pick-answer-status-service.js';
+import pickChallengeService from '../domain/services/pick-challenge-service.js';
 import { usecases } from '../domain/usecases/index.js';
 import { scenarioSimulatorBatchSerializer } from '../infrastructure/serializers/scenario-simulator-batch-serializer.js';
 

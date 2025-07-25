@@ -1,4 +1,4 @@
-import { FlashAssessmentAlgorithm } from '../../../../../../src/certification/flash-certification/domain/models/FlashAssessmentAlgorithm.js';
+import { FlashAssessmentAlgorithm } from '../../../../../../src/certification/evaluation/domain/models/FlashAssessmentAlgorithm.js';
 import { FlashAssessmentAlgorithmConfiguration } from '../../../../../../src/certification/shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 import { config } from '../../../../../../src/shared/config.js';
 import { catchErrSync, domainBuilder, expect, sinon } from '../../../../../test-helper.js';

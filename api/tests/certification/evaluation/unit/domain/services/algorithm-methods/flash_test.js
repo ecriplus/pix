@@ -1,4 +1,4 @@
-import * as flash from '../../../../../../../src/certification/flash-certification/domain/services/algorithm-methods/flash.js';
+import * as flash from '../../../../../../../src/certification/evaluation/domain/services/algorithm-methods/flash.js';
 import { AnswerStatus } from '../../../../../../../src/shared/domain/models/index.js';
 import { domainBuilder, expect } from '../../../../../../test-helper.js';
 

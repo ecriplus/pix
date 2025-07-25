@@ -1,4 +1,4 @@
-import { FlashAssessmentAlgorithmRuleEngine } from '../../../../../../src/certification/flash-certification/domain/models/FlashAssessmentAlgorithmRuleEngine.js';
+import { FlashAssessmentAlgorithmRuleEngine } from '../../../../../../src/certification/evaluation/domain/models/FlashAssessmentAlgorithmRuleEngine.js';
 import { expect } from '../../../../../test-helper.js';
 
 const challenge1 = Symbol('challenge1');

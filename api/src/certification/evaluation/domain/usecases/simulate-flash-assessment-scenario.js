@@ -1,5 +1,6 @@
 /**
  * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
+ * @typedef {import('./index.js').SharedChallengeRepository} SharedChallengeRepository
  */
 
 import { FlashAssessmentAlgorithmConfiguration } from '../../../shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
@@ -11,6 +12,7 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
  * @param {Object} params
  * @param {ComplementaryCertificationKeys} params.complementaryCertificationKey
  * @param {number} params.stopAtChallenge - force scenario to stop at challenge before maximumAssessmentLength
+ * @param {SharedChallengeRepository} params.sharedChallengeRepository
  */
 export async function simulateFlashAssessmentScenario({
   locale,
@@ -18,10 +20,10 @@ export async function simulateFlashAssessmentScenario({
   pickAnswerStatus,
   initialCapacity,
   variationPercent,
-  challengeRepository,
   flashAlgorithmService,
   sharedFlashAlgorithmConfigurationRepository,
   complementaryCertificationRepository,
+  sharedChallengeRepository,
   accessibilityAdjustmentNeeded,
   complementaryCertificationKey,
   stopAtChallenge,
@@ -29,7 +31,7 @@ export async function simulateFlashAssessmentScenario({
   if (complementaryCertificationKey) {
     return _simulateComplementaryCertificationScenario({
       complementaryCertificationKey,
-      challengeRepository,
+      challengeRepository: sharedChallengeRepository,
       complementaryCertificationRepository,
       flashAlgorithmService,
       sharedFlashAlgorithmConfigurationRepository,
@@ -44,7 +46,7 @@ export async function simulateFlashAssessmentScenario({
     return _simulateCoreCertificationScenario({
       locale,
       accessibilityAdjustmentNeeded,
-      challengeRepository,
+      challengeRepository: sharedChallengeRepository,
       flashAlgorithmService,
       sharedFlashAlgorithmConfigurationRepository,
       pickChallenge,
@@ -56,6 +58,10 @@ export async function simulateFlashAssessmentScenario({
   }
 }
 
+/**
+ * @param {Object} params
+ * @param {SharedChallengeRepository} params.challengeRepository
+ */
 async function _simulateComplementaryCertificationScenario({
   locale,
   complementaryCertificationKey,
@@ -88,6 +94,10 @@ async function _simulateComplementaryCertificationScenario({
   });
 }
 
+/**
+ * @param {Object} params
+ * @param {SharedChallengeRepository} params.challengeRepository
+ */
 async function _simulateCoreCertificationScenario({
   pickChallenge,
   pickAnswerStatus,
@@ -120,6 +130,10 @@ async function _simulateCoreCertificationScenario({
   });
 }
 
+/**
+ * @param {Object} params
+ * @param {SharedChallengeRepository} params.challengeRepository
+ */
 function _getChallenges({ challengeRepository, locale, accessibilityAdjustmentNeeded, complementaryCertificationKey }) {
   return challengeRepository.findActiveFlashCompatible({
     locale,

@@ -1,4 +1,4 @@
-import { simulateFlashAssessmentScenario } from '../../../../../../src/certification/flash-certification/domain/usecases/simulate-flash-assessment-scenario.js';
+import { simulateFlashAssessmentScenario } from '../../../../../../src/certification/evaluation/domain/usecases/simulate-flash-assessment-scenario.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { LOCALE } from '../../../../../../src/shared/domain/constants.js';
 import { catchErr, expect, sinon } from '../../../../../test-helper.js';
@@ -17,7 +17,7 @@ describe('#simulateFlashAssessmentScenario', function () {
         locale,
         accessibilityAdjustmentNeeded,
         complementaryCertificationKey,
-        challengeRepository: challengeRepositoryStub,
+        sharedChallengeRepository: challengeRepositoryStub,
       });
 
       // then
@@ -41,7 +41,7 @@ describe('#simulateFlashAssessmentScenario', function () {
         locale,
         accessibilityAdjustmentNeeded,
         complementaryCertificationKey: undefined,
-        challengeRepository: challengeRepositoryStub,
+        sharedChallengeRepository: challengeRepositoryStub,
       });
 
       // then

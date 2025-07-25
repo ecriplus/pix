@@ -8,7 +8,6 @@ import { injectDependencies } from '../../../../shared/infrastructure/utils/depe
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as verifyCertificateCodeService from '../../../evaluation/domain/services/verify-certificate-code-service.js';
 import * as certifiableProfileForLearningContentRepository from '../../../evaluation/infrastructure/repositories/certifiable-profile-for-learning-content-repository.js';
-import * as flashAlgorithmService from '../../../flash-certification/domain/services/algorithm-methods/flash.js';
 import {
   answerRepository,
   assessmentRepository,
@@ -26,12 +25,14 @@ import * as certificationAssessmentRepository from '../../../shared/infrastructu
 import * as sharedCertificationCandidateRepository from '../../../shared/infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationCenterRepository from '../../../shared/infrastructure/repositories/certification-center-repository.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
+import * as sharedFlashAlgorithmConfigurationRepository from '../../../shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as userRepository from '../../../shared/infrastructure/repositories/user-repository.js';
 import * as certificationCandidateRepository from '../../infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationCompanionAlertRepository from '../../infrastructure/repositories/certification-companion-alert-repository.js';
 import * as challengeCalibrationRepository from '../../infrastructure/repositories/challenge-calibration-repository.js';
 import * as complementaryCertificationScoringCriteriaRepository from '../../infrastructure/repositories/complementary-certification-scoring-criteria-repository.js';
 import * as evaluationSessionRepository from '../../infrastructure/repositories/session-repository.js';
+import * as flashAlgorithmService from '../services/algorithm-methods/flash.js';
 import * as certificationChallengesService from '../services/certification-challenges-service.js';
 import { services } from '../services/index.js';
 import pickChallengeService from '../services/pick-challenge-service.js';
@@ -46,6 +47,8 @@ import pickChallengeService from '../services/pick-challenge-service.js';
  * @typedef {assessmentResultRepository} AssessmentResultRepository
  * @typedef {certificationCourseRepository} CertificationCourseRepository
  * @typedef {scoringCertificationService} ScoringCertificationService
+ * @typedef {sharedFlashAlgorithmConfigurationRepository} SharedFlashAlgorithmConfigurationRepository
+ * @typedef {sharedChallengeRepository} SharedChallengeRepository
  * @typedef {services} Services
  */
 const dependencies = {
@@ -78,6 +81,7 @@ const dependencies = {
   certificationAssessmentRepository,
   complementaryCertificationScoringCriteriaRepository,
   scoringCertificationService,
+  sharedFlashAlgorithmConfigurationRepository,
   services,
 };
 
