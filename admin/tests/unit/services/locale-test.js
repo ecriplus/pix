@@ -253,18 +253,36 @@ module('Unit | Services | locale', function (hooks) {
 
       module('when user is loaded', function () {
         module('when there is no overriding language', function () {
-          test('sets the locale with the user language', async function (assert) {
-            // given
-            currentDomainService.getExtension.returns('org');
-            const user = { lang: 'nl' };
+          module('when the user language is supported', function () {
+            test('sets the locale with the user language', async function (assert) {
+              // given
+              currentDomainService.getExtension.returns('org');
+              const user = { lang: 'nl' };
 
-            // when
-            localeService.detectBestLocale({ language: null, user });
+              // when
+              localeService.detectBestLocale({ language: null, user });
 
-            // then
-            sinon.assert.calledWith(intlService.setLocale, 'nl');
-            sinon.assert.calledWith(dayjsService.setLocale, 'nl');
-            assert.strictEqual(metricsService.context.locale, 'nl');
+              // then
+              sinon.assert.calledWith(intlService.setLocale, 'nl');
+              sinon.assert.calledWith(dayjsService.setLocale, 'nl');
+              assert.strictEqual(metricsService.context.locale, 'nl');
+            });
+          });
+
+          module('when the user language is not supported', function () {
+            test('sets the default locale', async function (assert) {
+              // given
+              currentDomainService.getExtension.returns('org');
+              const user = { lang: 'tlh' }; // tlh: Klingon locale
+
+              // when
+              localeService.detectBestLocale({ language: null, user });
+
+              // then
+              sinon.assert.calledWith(intlService.setLocale, DEFAULT_LOCALE);
+              sinon.assert.calledWith(dayjsService.setLocale, DEFAULT_LOCALE);
+              assert.strictEqual(metricsService.context.locale, DEFAULT_LOCALE);
+            });
           });
         });
 
