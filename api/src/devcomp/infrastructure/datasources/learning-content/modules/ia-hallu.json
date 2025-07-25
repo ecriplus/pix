@@ -1,7 +1,7 @@
 {
   "id": "c8607621-09ab-4601-be7d-68ed9c914c30",
   "slug": "tmp-ia-hallu",
-  "title": "Elle hallucinent, ces IA ! ",
+  "title": "Elle hallucinent, ces IA génératives ! ",
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
@@ -79,7 +79,7 @@
           "element": {
             "id": "659f8b1c-5e64-44f3-ae18-0fc89e093fa1",
             "type": "text",
-            "content": "<p>Nathan n’est pas le premier à recevoir une information fausse de la part d’une IA générative…<br> Les IA génératives font-elles vraiment des erreurs ? 🤨</p>"
+            "content": "<p>Nathan n’est pas le premier à recevoir une information fausse de la part d’un logiciel d'IA générative…<br> Les IA génératives font-elles vraiment des erreurs ? 🤨</p>"
           }
         }
       ]
@@ -174,7 +174,7 @@
                 {
                   "id": "8a46c2ba-91ac-4e36-9007-094a7ef6a871",
                   "type": "text",
-                  "content": "<p>Irène sait que le joueur de tennis Carlos Alcatraz a gagné deux fois le tournoi de Roland-Garros. Mais elle a un doute sur ses années de victoire.<br>Voici sa conversation avec un logiciel d’IA générative&nbsp;:</p>"
+                  "content": "<p>Irène sait que le joueur de tennis Carlos Alcaraz a gagné deux fois le tournoi de Roland-Garros. Mais elle a un doute sur ses années de victoire.<br>Voici sa conversation avec un logiciel d’IA générative&nbsp;:</p>"
                 },
                 {
                   "id": "f4df02e1-bebf-4557-9226-18e38cfbb6b2",
@@ -192,7 +192,7 @@
                 {
                   "id": "21e1f6a8-8ea2-4b0c-8a6c-e68a1f875920",
                   "type": "text",
-                  "content": "<p>Ici le logiciel d’IA générative a fait une erreur. Carlos Alcatraz a bien remporté le tournoi de Roland-Garros deux fois : une fois en 2024 et une fois en 2025.</p>"
+                  "content": "<p>Ici le logiciel d’IA générative a fait une erreur. Carlos Alcaraz a bien remporté le tournoi de Roland-Garros deux fois : une fois en 2024 et une fois en 2025.</p>"
                 },
                 {
                   "id": "ceed2a7c-76f9-44f1-be34-a2285cd1aa4d",
@@ -204,15 +204,15 @@
                       "content": "<p>L'ordinateur d’Irène n'est pas assez puissant, il a provoqué un bug.</p>",
                       "feedback": {
                         "state": "",
-                        "diagnosis": "<p>Et non, la réponse donnée par le logiciel d'IA générative ne dépend pas de la puissance de l'ordinateur d'Irène. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcatraz à Roland-Garros.</p>"
+                        "diagnosis": "<p>Et non, la réponse donnée par le logiciel d'IA générative ne dépend pas de la puissance de l'ordinateur d'Irène. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
                       }
                     },
                     {
                       "id": "2",
-                      "content": "<p>Les données avec lesquelles le logiciel a été entraîné datent d’avant 2018.</p>",
+                      "content": "<p>Les données avec lesquelles le logiciel a été entraîné datent d’avant 2025.</p>",
                       "feedback": {
                         "state": "",
-                        "diagnosis": "<p>Effectivement, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcatraz à Roland-Garros.</p>"
+                        "diagnosis": "<p>Effectivement, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
                       }
                     },
                     {
@@ -220,7 +220,7 @@
                       "content": "<p>Le logiciel ne compte pas la victoire de 2025 car il était pour l’autre finaliste, Jannik Sinner.</p>",
                       "feedback": {
                         "state": "",
-                        "diagnosis": "<p>Et non, le logiciel d'IA générative n'a pas de préférence pour un joueur plutôt qu'un autre. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcatraz à Roland-Garros.</p>"
+                        "diagnosis": "<p>Et non, le logiciel d'IA générative n'a pas de préférence pour un joueur plutôt qu'un autre. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
                       }
                     }
                   ],
@@ -262,7 +262,7 @@
                 {
                   "id": "a2f3a3ca-b439-472e-86bb-69af0c01f178",
                   "type": "text",
-                  "content": "<p>D’autres erreurs sont inventées par l’IA. L’IA générative répond souvent  « sans savoir » mais <strong>par prédiction</strong> : elle génère la réponse qui lui paraît la plus probable. On appelle ces erreurs <strong>des hallucinations</strong>.<br>Par exemple, quand on demande à un logiciel d’IA générative de nous donner l’auteur d’une citation, il peut l’attribuer à quelqu’un d’autre. 🤷</p>"
+                  "content": "<p>D’autres erreurs sont inventées par l’IA. L’IA générative répond souvent  « sans savoir » et <strong>par prédiction</strong> : elle génère la réponse qui lui paraît la plus probable. On appelle ces erreurs <strong>des hallucinations</strong>.<br>Par exemple, quand on demande à un logiciel d’IA générative de nous donner l’auteur d’une citation, il peut l’attribuer à quelqu’un d’autre. 🤷</p>"
                 }
               ]
             },
@@ -635,7 +635,7 @@
           "element": {
             "id": "d889292f-a892-4ad8-b7e8-0ef529fe13cf",
             "type": "text",
-            "content": "<p>On peut retenir que : </p><ul><li>L'objectif d’une <strong>IA générative</strong> est de répondre aux demandes d’un utilisateur. <strong>Son objectif n’est pas de dire la vérité</strong>. 🤥</li><br><li>Une <strong>IA générative peut faire des erreurs</strong>, par exemple présenter des affirmations fausses comme vraies. ❌</li><br><li>Les développeurs d’IA génératives essaient de réduire les erreurs. Mais il n’existe <strong>pas de moyen technique pour empêcher complètement ces erreurs.</strong> 🔧</li><br><li>Face à ces erreurs, difficiles à détecter, c’est à l’utilisateur de <strong>faire preuve d’esprit critique</strong> et de <strong>croiser les sources</strong> d’informations pour les vérifier. 🔎</li><br></ul>"
+            "content": "<ul><li>L'objectif d’une <strong>IA générative</strong> est de répondre aux demandes d’un utilisateur. <strong>Son objectif n’est pas de dire la vérité</strong>. 🤥</li><br><li>Une <strong>IA générative peut faire des erreurs</strong>, par exemple présenter des affirmations fausses comme vraies. ❌</li><br><li>Les développeurs d’IA génératives essaient de réduire les erreurs. Mais il n’existe <strong>pas de moyen technique pour empêcher complètement ces erreurs.</strong> 🔧</li><br><li>Face à ces erreurs, difficiles à détecter, c’est à l’utilisateur de <strong>faire preuve d’esprit critique</strong> et de <strong>croiser les sources</strong> d’informations pour les vérifier. 🔎</li><br></ul>"
           }
         }
       ]
@@ -881,18 +881,10 @@
           "element": {
             "id": "ffd4ab68-15fb-497d-bf67-9820d17feee3",
             "type": "qcu-declarative",
-            "instruction": "<p>Maintenant que vous avez joué ce module, que ferez-vous si un logiciel d'IA générative vous dit que la Statue de la liberté se trouve à Tokyo ?&nbsp;🗽</p>",
+            "instruction": "<p>Maintenant que vous avez joué ce module, que ferez-vous si un logiciel d'IA générative vous dit que la Statue de la Liberté se trouve à Tokyo ?&nbsp;🗽</p>",
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>Vous réservez vos billets d’avion immédiatement. ✈️</p>",
-                "feedback": {
-                  "state": "",
-                  "diagnosis": "<p>Attention ! Vous pourriez être déçu par votre voyage si vous partez pour voir la Statue de la liberté à Tokyo.&nbsp;Vérifier l'information serait une bonne idée !</p>"
-                }
-              },
-              {
-                "id": "2",
                 "content": "<p>Vous vérifiez cette information dans une encyclopédie. 📖</p>",
                 "feedback": {
                   "state": "",
@@ -900,7 +892,7 @@
                 }
               },
               {
-                "id": "3",
+                "id": "2",
                 "content": "<p>Vous supposez que la Statue de la liberté a été déplacée. 🧳</p>",
                 "feedback": {
                   "state": "",
@@ -908,11 +900,19 @@
                 }
               },
               {
-                "id": "4",
+                "id": "3",
                 "content": "<p>Vous cherchez sur internet une confirmation. 🔎</p>",
                 "feedback": {
                   "state": "",
                   "diagnosis": "<p>Effectivement, c'est un bon réflexe en cas de doute !</p>"
+                }
+              },
+              {
+                "id": "4",
+                "content": "<p>Vous réservez vos billets d’avion immédiatement. ✈️</p>",
+                "feedback": {
+                  "state": "",
+                  "diagnosis": "<p>Attention ! Vous pourriez être déçu par votre voyage si vous partez pour voir la Statue de la Liberté à Tokyo.&nbsp;Vérifier l'information serait une bonne idée !</p>"
                 }
               }
             ]
