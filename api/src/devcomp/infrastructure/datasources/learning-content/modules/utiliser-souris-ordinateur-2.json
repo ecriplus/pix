@@ -4,7 +4,7 @@
   "title": "Utiliser une souris d'ordinateur - 2",
   "isBeta": true,
   "details": {
-    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>La souris est composée de trois boutons : le bouton gauche, la molette et le bouton droit. Le bouton gauche permet de faire un clic gauche, c’est le plus utilisé. Mais il existe d’autres façons d’utiliser la souris.<br><br> Dans ce module, vous apprendrez à faire d’autres clics et à utiliser les deux autres boutons de la souris. 🖱️</p>",
     "duration": 10,
     "level": "Débutant",
@@ -295,7 +295,7 @@
             "id": "daced261-0ad6-43e1-b826-d43d89ca926b",
             "type": "video",
             "title": "Effectuer un double-clic avec la souris",
-            "url": "https://videos.pix.fr/modulix/utiliser-souris-ordinateur-1/souris_double_clic.mp4",
+            "url": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/souris_double_clic.mp4",
             "poster": "https://assets.pix.org/draft/modules/N51HDsO.jpeg",
             "subtitles": "",
             "transcription": ""
@@ -468,7 +468,7 @@
                   "id": "e1ba101d-f98c-4938-938f-31e1362a4db3",
                   "type": "video",
                   "title": "Utiliser le clic droit de la souris",
-                  "url": "https://videos.pix.fr/modulix/utiliser-souris-ordinateur-1/souris_clic_droit.mp4",
+                  "url": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/souris_clic_droit.mp4",
                   "poster": "https://assets.pix.org/draft/modules/Fxj4UcZ.jpeg",
                   "subtitles": "",
                   "transcription": ""

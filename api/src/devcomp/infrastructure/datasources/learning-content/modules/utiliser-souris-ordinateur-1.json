@@ -4,7 +4,7 @@
   "title": "Utiliser une souris d'ordinateur - 1",
   "isBeta": true,
   "details": {
-    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Dans ce module, vous découvrirez ce qu’est une souris et à quoi elle sert.&nbsp;</p><p>Vous apprendrez à la déplacer et à cliquer pour interagir avec votre ordinateur.</p><p>Si vous n'avez jamais utilisé de souris, nous vous conseillons d'être accompagné pour ce module.</p><br>",
     "duration": 10,
     "level": "Débutant",
@@ -98,7 +98,7 @@
             "id": "56541ee2-cf5f-4966-b17b-96a1b7266868",
             "type": "video",
             "title": "Prendre en main la souris",
-            "url": "https://videos.pix.fr/modulix/utiliser-souris-ordinateur-1/souris_prise_en_main.mp4",
+            "url": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/souris_prise_en_main.mp4",
             "poster": "https://assets.pix.org/draft/modules/lA2jUAY.jpeg",
             "subtitles": "",
             "transcription": ""
@@ -185,7 +185,7 @@
             "id": "abe223ab-ad36-4b14-b349-abc8590eb94e",
             "type": "video",
             "title": "Déplacer la souris",
-            "url": "https://videos.pix.fr/modulix/utiliser-souris-ordinateur-1/deplacer_la_souris.mp4",
+            "url": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/deplacer_la_souris.mp4",
             "poster": "https://assets.pix.org/draft/modules/jC8keAF.jpeg",
             "subtitles": "",
             "transcription": ""
