@@ -5,6 +5,7 @@ import { Candidate } from '../../../../../src/certification/enrolment/domain/mod
 import { SessionEnrolment } from '../../../../../src/certification/enrolment/domain/models/SessionEnrolment.js';
 import { Subscription } from '../../../../../src/certification/enrolment/domain/models/Subscription.js';
 import { usecases as enrolmentUseCases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
+import { usecases as sessionManagementUseCases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
 import { BILLING_MODES } from '../../../../../src/certification/shared/domain/constants.js';
 import { usecases as organizationalEntitiesUsecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import {
@@ -134,7 +135,6 @@ export class ProSeed {
   async #addCandidateToSession({ pixAppUser, session }) {
     const candidateBirthdate = '2000-10-30';
     const candidate = new Candidate({
-      authorizedToStart: true,
       firstName: pixAppUser.firstName,
       lastName: pixAppUser.lastName,
       sex: 'F',
@@ -163,6 +163,11 @@ export class ProSeed {
       lastName: candidate.lastName,
       birthdate: candidateBirthdate,
       normalizeStringFnc: normalize,
+    });
+
+    await sessionManagementUseCases.authorizeCertificationCandidateToStart({
+      certificationCandidateForSupervisingId: candidateId,
+      authorizedToStart: true,
     });
 
     return enrolmentUseCases.getCandidate({ certificationCandidateId: candidateId });

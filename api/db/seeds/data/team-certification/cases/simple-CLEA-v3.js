@@ -5,6 +5,7 @@ import { Candidate } from '../../../../../src/certification/enrolment/domain/mod
 import { SessionEnrolment } from '../../../../../src/certification/enrolment/domain/models/SessionEnrolment.js';
 import { Subscription } from '../../../../../src/certification/enrolment/domain/models/Subscription.js';
 import { usecases as enrolmentUseCases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
+import { usecases as sessionManagementUseCases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
 import { BILLING_MODES } from '../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { usecases as organizationalEntitiesUsecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
@@ -160,7 +161,6 @@ export class CleaV3Seed {
     const candidateBirthdate = '2000-10-30';
 
     const candidate = new Candidate({
-      authorizedToStart: true,
       firstName: pixAppUser.firstName,
       lastName: pixAppUser.lastName,
       sex: 'F',
@@ -186,6 +186,11 @@ export class CleaV3Seed {
       sessionId: session.id,
       candidate: new Candidate(candidate), // Warning: usecase modifies the entry model...
       normalizeStringFnc: normalize,
+    });
+
+    await sessionManagementUseCases.authorizeCertificationCandidateToStart({
+      certificationCandidateForSupervisingId: candidateId,
+      authorizedToStart: true,
     });
 
     await enrolmentServices.registerCandidateParticipation({
